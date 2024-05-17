@@ -1,0 +1,79 @@
+name = 'proto2openapi'
+proto_out_dir = './proto'
+
+[alerts-api-protobuf]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/alerts-api-protobuf'
+
+[cx-api-views]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-views'
+
+[cx-api-extensions]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-extensions'
+
+[rules-api-protobuf]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/rules-api-protobuf'
+
+[cx-api-quota]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-quota'
+
+[cx-api-dashboards]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-dashboards'
+
+[cx-api-dataprime]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-dataprime'
+content_roots = ["/service", "ast"]
+
+[cx-api-logs2metrics]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-logs2metrics'
+
+[cx-api-data-usage]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-data-usage'
+
+[cx-api-enrichment]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-enrichment'
+
+[cx-api-tags]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-tags'
+
+[cx-api-incidents]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-api-incidents'
+
+[cx-api-scopes-service]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/scopes-service'
+content_roots = ["/modules/service/proto"]
+
+[cx-openapi-annotations]
+protocol = 'ssh'
+branch = 'master'
+url = 'github.com/coralogix/cx-openapi-annotations'
+
+[google-api]
+url = "github.com/googleapis/googleapis"
+protocol = "ssh"
+content_roots = ["/src/"]
