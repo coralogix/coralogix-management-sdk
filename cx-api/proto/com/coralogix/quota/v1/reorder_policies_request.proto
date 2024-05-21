@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/enums.proto";
+import "com/coralogix/quota/v1/policy_order.proto";
+
+message ReorderPoliciesRequest {
+  repeated PolicyOrder orders = 1;
+  SourceType source_type = 2;
+}

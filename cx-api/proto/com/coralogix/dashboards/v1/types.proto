@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1;
+
+message Data {
+  oneof form {
+    Primitive primitive = 1;
+    Composite composite = 2;
+  }
+
+  enum Primitive {
+    PRIMITIVE_UNSPECIFIED = 0;
+    PRIMITIVE_BOOL = 1;
+    PRIMITIVE_NUMBER = 2;
+    PRIMITIVE_STRING = 3;
+  }
+
+  enum Composite {
+    COMPOSITE_UNSPECIFIED = 0;
+    COMPOSITE_ARRAY = 1;
+    COMPOSITE_OBJECT = 2;
+  }
+}

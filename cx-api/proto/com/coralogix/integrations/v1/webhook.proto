@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message TimestampSourceGenerate {}
+
+message TimestampFormatAutomatic {}
+message TimestampFormatCustom {
+  google.protobuf.StringValue format = 1;
+}
+
+message TimestampSourceJsonPath {
+  google.protobuf.StringValue json_path = 1;
+  oneof format {
+    TimestampFormatAutomatic automatic = 101;
+    TimestampFormatCustom custom = 102;
+  }
+}
+
+message TimestampSourceRegex {
+  google.protobuf.StringValue regex = 1;
+  oneof format {
+    TimestampFormatAutomatic automatic = 101;
+    TimestampFormatCustom custom = 102;
+  }
+}
+
+message JsonContentType {
+  oneof timestamp_source {
+    TimestampSourceGenerate generate = 1;
+    TimestampSourceJsonPath json_path = 2;
+  }
+}
+
+message TextContentType {
+  oneof timestamp_source {
+    TimestampSourceGenerate generate = 1;
+    TimestampSourceRegex regex = 2;
+  }
+}

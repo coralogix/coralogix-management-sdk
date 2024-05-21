@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+enum DatasetScope {
+  DATASET_SCOPE_UNSPECIFIED = 0;
+  DATASET_SCOPE_USER_DATA = 1;
+  DATASET_SCOPE_LABEL = 2;
+  DATASET_SCOPE_METADATA = 3;
+}
+
+message ObservationField {
+  repeated google.protobuf.StringValue keypath = 1;
+  DatasetScope scope = 2;
+}

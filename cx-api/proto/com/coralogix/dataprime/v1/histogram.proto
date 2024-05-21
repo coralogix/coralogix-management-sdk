@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/dataprime/v1/common.proto";
+import "com/coralogix/dataprime/v1/aggregation_operators.proto";
+
+message Aggregation {
+  UntypedKeypath field = 1;
+  Operator type = 2;
+}
+
+message Data {
+  google.protobuf.StringValue key = 1;
+  google.protobuf.Int64Value doc_count = 2;
+  google.protobuf.DoubleValue agg_val = 3;
+  optional ComparedData compared = 4;
+}
+
+message ComparedData {
+  google.protobuf.Int64Value historical_doc_count = 1;
+  google.protobuf.DoubleValue historical_agg_val = 2;
+}
+
+message HistogramSlice {
+  google.protobuf.Int64Value value = 1;
+  repeated Data data = 2;
+}
+

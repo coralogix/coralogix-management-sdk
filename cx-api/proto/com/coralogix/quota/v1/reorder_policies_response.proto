@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/policy_order.proto";
+
+message ReorderPoliciesResponse {
+  repeated PolicyOrder orders = 1;
+}

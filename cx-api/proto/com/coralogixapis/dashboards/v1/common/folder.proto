@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message DashboardFolder {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue parent_id = 3;
+}

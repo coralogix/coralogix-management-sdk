@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/integrations/v1/webhook.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service WebhookIntegrationService {
+  rpc CreateWebhookIntegration(CreateWebhookIntegrationRequest) returns (CreateWebhookIntegrationResponse) {
+    option (audit_log_description).description = "Create a webhook integration";
+    option (google.api.http) = {
+      post: "/webhook-integration/v1/create"
+      body: "*"
+    };
+  }
+
+  rpc ListWebhookIntegrations(ListWebhookIntegrationsRequest) returns (ListWebhookIntegrationsResponse) {
+    option (audit_log_description).description = "List webhook integrations";
+    option (google.api.http) = {
+      post: "/webhook-integration/v1/list"
+      body: "*"
+    };
+  }
+
+  rpc DeleteWebhookIntegration(DeleteWebhookIntegrationRequest) returns (DeleteWebhookIntegrationResponse) {
+    option (audit_log_description).description = "Delete webhook integration";
+    option (google.api.http) = {
+      post: "/webhook-integration/v1/delete"
+      body: "*"
+    };
+  }
+
+  rpc ToggleWebhookIntegrationActivation(ToggleWebhookIntegrationActivationRequest) returns (ToggleWebhookIntegrationActivationResponse) {
+    option (audit_log_description).description = "Toggle webhook integration activation status";
+    option (google.api.http) = {
+      post: "/webhook-integration/v1/toggle_activation"
+      body: "*"
+    };
+  }
+
+  rpc CountWebhookIntegrations(CountWebhookIntegrationsRequest) returns (CountWebhookIntegrationsResponse) {
+    option (audit_log_description).description = "Count webhook integrations";
+    option (google.api.http) = {
+      post: "/webhook-integration/v1/count"
+      body: "*"
+    };
+  }
+}
+
+message CreateWebhookIntegrationRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue api_key_value = 2;
+  google.protobuf.StringValue application = 3;
+  google.protobuf.StringValue subsystem = 4;
+  google.protobuf.BoolValue is_private = 5;
+  oneof content_type {
+    JsonContentType json = 10;
+    TextContentType text = 11;
+  }
+}
+
+message CreateWebhookIntegrationResponse {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue webhook_url = 2;
+}
+
+message ListWebhookIntegrationsRequest {
+}
+
+message ListWebhookIntegrationsResponse {
+  message WebhookIntegration  {
+    google.protobuf.StringValue webhook_id = 1;
+    google.protobuf.StringValue company_id = 2;
+    google.protobuf.StringValue name = 3;
+    google.protobuf.StringValue application = 4;
+    google.protobuf.StringValue subsystem = 5;
+    google.protobuf.BoolValue is_private = 6;
+    google.protobuf.StringValue url = 7;
+    google.protobuf.BoolValue is_active = 8;
+    google.protobuf.Timestamp created_at = 9;
+    google.protobuf.Timestamp updated_at = 10;
+  }
+
+  repeated WebhookIntegration webhooks = 1;
+}
+
+message DeleteWebhookIntegrationRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteWebhookIntegrationResponse {
+}
+
+message ToggleWebhookIntegrationActivationRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue is_active = 2;
+}
+
+message ToggleWebhookIntegrationActivationResponse {
+}
+
+message CountWebhookIntegrationsRequest {
+}
+
+message CountWebhookIntegrationsResponse {
+  google.protobuf.UInt32Value count = 1;
+}

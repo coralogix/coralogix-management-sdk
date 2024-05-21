@@ -1,0 +1,8 @@
+syntax = "proto3";
+import "com/coralogix/quota/v1/create_policy_response.proto";
+
+package com.coralogix.quota.v1;
+
+message AtomicBatchCreatePolicyResponse {
+  repeated CreatePolicyResponse create_responses = 1;
+}

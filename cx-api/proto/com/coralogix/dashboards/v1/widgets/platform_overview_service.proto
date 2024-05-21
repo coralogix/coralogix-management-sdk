@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1.widgets;
+
+import "com/coralogix/dashboards/v1/audit_log.proto";
+import "com/coralogix/dashboards/v1/common/search_filter.proto";
+import "com/coralogix/dashboards/v1/common/time_frame.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service PlatformOverviewService {
+  rpc CountLogs(CountLogsRequest) returns (CountLogsResponse) {
+    option (audit_log_description).description = "get count of logs with given severities in time series";
+  }
+  rpc GetMetricsStats(GetMetricsStatsRequest) returns (GetMetricsStatsResponse) {
+    option (audit_log_description).description = "get amount of sent metrics";
+  }
+  rpc CountSpans(CountSpansRequest) returns (CountSpansResponse) {
+    option (audit_log_description).description = "get count of spans records";
+  }
+  rpc CountFailedXDRTests(CountFailedXDRTestsRequest) returns (CountFailedXDRTestsResponse) {
+    option (audit_log_description).description = "get count of failed test executions";
+  }
+}
+
+message CountLogsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Duration interval = 3;
+  repeated google.protobuf.Int32Value severities = 4;
+}
+
+message CountLogsResponse {
+  HistogramTimeSeries time_series = 1;
+  google.protobuf.Int64Value total_count = 2;
+}
+
+message GetMetricsStatsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Duration interval = 3;
+}
+
+message GetMetricsStatsResponse {
+  HistogramTimeSeries time_series = 1;
+}
+
+message CountSpansRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Duration interval = 3;
+}
+
+message CountSpansResponse {
+  HistogramTimeSeries time_series = 1;
+  google.protobuf.Int64Value total_count = 2;
+}
+
+message CountFailedXDRTestsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Duration interval = 3;
+}
+
+message CountFailedXDRTestsResponse {
+  HistogramTimeSeries time_series = 1;
+  google.protobuf.Int64Value total_count = 2;
+}
+
+message HistogramTimeSeries {
+  repeated HistogramDataPoint values = 1;
+}
+
+message HistogramDataPoint {
+  google.protobuf.Timestamp timestamp = 1;
+  map<string, google.protobuf.DoubleValue> values = 2;
+}

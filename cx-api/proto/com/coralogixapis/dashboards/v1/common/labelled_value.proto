@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message LabelledValue {
+  google.protobuf.StringValue name = 1;
+  map<string, string> labels = 2;
+  google.protobuf.DoubleValue value = 3;
+}

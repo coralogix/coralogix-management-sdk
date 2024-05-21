@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message MetadataEnums {
+  enum Tier {
+    TIER_UNSPECIFIED = 0;
+    TIER_ARCHIVE = 1;
+    TIER_FREQUENT_SEARCH = 2;
+  }
+
+  enum QuerySyntax {
+    QUERY_SYNTAX_UNSPECIFIED = 0;
+    QUERY_SYNTAX_LUCENE = 1;
+    QUERY_SYNTAX_DATAPRIME = 2;
+  }
+}
+
+message QueryMetadata {
+  // beginning of the time range for the query
+  optional google.protobuf.Timestamp start_date = 1;
+  // end of the time range for the query
+  optional google.protobuf.Timestamp end_date = 2;
+  // tier on which query runs
+  optional MetadataEnums.Tier tier = 3;
+  // limit number of results
+  optional int32 limit = 4;
+  // dataprime strict fields validation in parser
+  optional bool strict_fields_validation = 5;
+  // skip application and subsystem filters based on user scopes from RBAC.
+  // WARNING: if you set this flag, you are responsible for managing access to the data.
+  optional bool skip_rbac_filters = 6;
+}
+
+// only text related metadata
+message TextQueryMetadata {
+  // text query syntax
+  optional MetadataEnums.QuerySyntax syntax = 1;
+  // default value for source to be used when source is omitted in a query
+  optional google.protobuf.StringValue default_source = 2;
+}

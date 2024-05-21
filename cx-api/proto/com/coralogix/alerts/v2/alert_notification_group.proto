@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.coralogix.alerts.v2;
+
+import "google/protobuf/wrappers.proto";
+
+message ShowInInsight {
+  optional google.protobuf.UInt32Value retriggering_period_seconds = 1;
+  optional NotifyOn notify_on = 2;
+}
+
+message AlertNotificationGroups {
+  repeated google.protobuf.StringValue group_by_fields = 1;
+  repeated AlertNotification notifications = 2;
+}
+
+message AlertNotification {
+   optional google.protobuf.UInt32Value retriggering_period_seconds = 1;
+   optional NotifyOn notify_on = 2;
+   oneof integration_type {
+     google.protobuf.UInt32Value integration_id = 3;
+     Recipients recipients = 5;
+   }
+}
+
+message Recipients {
+  repeated google.protobuf.StringValue emails = 1;
+}
+
+enum NotifyOn {
+  TRIGGERED_ONLY = 0;
+  TRIGGERED_AND_RESOLVED = 1;
+}

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets;
+
+import "google/protobuf/wrappers.proto";
+
+message Markdown {
+  google.protobuf.StringValue markdown_text = 1;
+  google.protobuf.StringValue tooltip_text = 2;
+}

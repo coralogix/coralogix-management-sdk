@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message SearchFilter {
+  google.protobuf.StringValue name = 1;
+  repeated google.protobuf.StringValue values = 2;
+}

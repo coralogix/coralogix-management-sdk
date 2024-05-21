@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message GroupLimit {
+  repeated google.protobuf.StringValue group_by_fields = 1;
+  google.protobuf.Int32Value limit = 2;
+  google.protobuf.Int32Value min_percentage = 3;
+}

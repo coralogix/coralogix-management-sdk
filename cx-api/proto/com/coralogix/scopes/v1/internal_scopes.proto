@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "com/coralogix/scopes/v1/named_filters.proto";
+import "com/coralogixapis/scopes/v1/entity_type.proto";
+
+package com.coralogix.scopes.v1;
+
+service InternalScopesService {
+  // This method is only a temporary solution and soon will be deprecated and replaced by a method that takes user_account_id instead of user_id.
+  rpc GetCrossTeamScopeExpressionsByUserId(GetCrossTeamScopeExpressionsByUserIdRequest) returns (GetCrossTeamScopeExpressionsByUserIdResponse) {}
+}
+
+message GetCrossTeamScopeExpressionsByUserIdRequest {
+  com.coralogixapis.scopes.v1.EntityType entity_type = 1;
+  string user_id = 2;
+  repeated uint32 team_ids = 3;
+}
+
+message GetCrossTeamScopeExpressionsByUserIdResponse {
+  repeated UserExpression user_expressions = 1;
+}
+
+message UserExpression {
+  string user_id = 1;
+  uint32 team_id = 2;
+  string formatted_dpxl_expression = 3;
+}

@@ -3,103 +3,88 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/alerts-api-protobuf"
-protocol = "ssh"
 branch = "master"
 commit_hash = "56b3aa283ceca1f0b11f90b16349fcaf6b51d9f5"
 
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-protocol = "ssh"
 branch = "master"
 commit_hash = "25e2d132ba87de72f7ae48f91e72146ff414f029"
 
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-protocol = "ssh"
 branch = "master"
 commit_hash = "f7ed669c8e780304d7493e5ce61398dc677a38c5"
 
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-protocol = "ssh"
 branch = "master"
-commit_hash = "aa11d37e44b1de09bf1f84f0c3001dac0bfe012b"
+commit_hash = "eeaf5905bb18bd4d84a2ab85dd72e708131f2297"
 
 [[dependencies]]
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
-protocol = "ssh"
 branch = "master"
 commit_hash = "5a870687c910b5515eea1eca7aacb836d4cf67d7"
 
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-protocol = "ssh"
 branch = "master"
 commit_hash = "07bb349329f7207248d48572d8cbb92e9db1159d"
 
 [[dependencies]]
 name = "cx-api-incidents"
 url = "github.com/coralogix/cx-api-incidents"
-protocol = "ssh"
 branch = "master"
 commit_hash = "06116a16a7903afb9910d0145547c4a31d922582"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
 url = "github.com/coralogix/cx-api-logs2metrics"
-protocol = "ssh"
 branch = "master"
 commit_hash = "ec44a77572bf77cf5c731107238bbda65e7c1089"
 
 [[dependencies]]
 name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
-protocol = "ssh"
 branch = "master"
 commit_hash = "80897a553f7b2e3e076b122db578844a22401624"
 
 [[dependencies]]
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/scopes-service"
-protocol = "ssh"
 branch = "master"
-commit_hash = "0ca05737f0bab46908b7e95692eaefef499b5124"
+commit_hash = "745892a36bcd4beb6d4de533e74eabfb6ba208b3"
 
 [[dependencies]]
 name = "cx-api-tags"
 url = "github.com/coralogix/cx-api-tags"
-protocol = "ssh"
 branch = "master"
 commit_hash = "3e3a33b9c1008978dd77798024022d9d557a0a46"
 
 [[dependencies]]
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
-protocol = "ssh"
 branch = "master"
 commit_hash = "dbcce655ef20280b0816bc9bc5315cd33244caac"
 
 [[dependencies]]
 name = "cx-openapi-annotations"
 url = "github.com/coralogix/cx-openapi-annotations"
-protocol = "ssh"
 branch = "master"
 commit_hash = "6c576d0996929a6cd32009b61db4c3caf420f869"
 
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-protocol = "ssh"
-commit_hash = "4fd0bc43dcdcffe128f3de105f3eeedadd1a921c"
+commit_hash = "a07bf82eb48d79bc113620b3fb517a3ebe92989c"
 
 [[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
-protocol = "ssh"
 branch = "master"
 commit_hash = "d1b33742b8465dfa1e101e4121bd0164873b166f"

@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+package com.coralogixapis.events2metrics.v2;
+
+import "com/coralogixapis/events2metrics/v2/events2metrics_definition.proto";
+import "com/coralogixapis/logs2metrics/v2/audit_log.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+
+service Events2MetricInternalService {
+  rpc ListE2MInternal(ListE2MRequestInternal) returns (ListE2MResponseInternal) {
+    option (com.coralogixapis.logs2metrics.v2.audit_log_description).description = "List all E2M internal";
+    option (google.api.http) = {get: "/api/v2/events2metrics"};
+  }
+
+  rpc ReplaceE2M(ReplaceE2MRequestInternal) returns (ReplaceE2MResponseInternal) {
+    option (com.coralogixapis.logs2metrics.v2.audit_log_description).description = "Replace E2M Internal";
+    option (google.api.http) = {
+      put: "/api/v2/events2metrics",
+      body: "e2m"
+    };
+  }
+
+  rpc CreateE2MInternal(CreateE2MRequestInternal) returns (CreateE2MResponseInternal) {
+    option (com.coralogixapis.logs2metrics.v2.audit_log_description).description = "Create E2M Internal";
+    option (google.api.http) = {
+      post: "/api/v2/events2metrics",
+      body: "e2m"
+    };
+  }
+
+  rpc DeleteE2MInternal(DeleteE2MRequestInternal) returns (DeleteE2MResponseInternal) {
+    option (com.coralogixapis.logs2metrics.v2.audit_log_description).description = "Delete E2M Internal";
+    option (google.api.http) = {delete: "/api/v2/events2metrics/{id}"};
+  }
+}
+
+message ListE2MRequestInternal {}
+
+message ListE2MResponseInternal {
+  repeated E2M e2m = 1;
+}
+
+message CreateE2MRequestInternal {
+  E2MCreateParams e2m = 1;
+  google.protobuf.BoolValue is_internal = 2;
+}
+
+message CreateE2MResponseInternal {
+  E2M e2m = 1;
+}
+
+message ReplaceE2MRequestInternal {
+  E2M e2m = 1;
+}
+
+message ReplaceE2MResponseInternal {
+  E2M e2m = 1;
+}
+
+message DeleteE2MRequestInternal {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteE2MResponseInternal {
+  google.protobuf.StringValue id = 1;
+}

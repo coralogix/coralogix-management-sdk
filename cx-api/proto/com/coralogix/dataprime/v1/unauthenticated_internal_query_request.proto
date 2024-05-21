@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/internal_metadata.proto";
+import "com/coralogix/dataprime/v1/internal_query_request.proto";
+import "google/protobuf/wrappers.proto";
+
+// internal dataprime query request
+message UnauthenticatedInternalDataprimeQueryServiceQueryRequest {
+  oneof query {
+    // AST query
+    InternalAstQueryRequest ast_query = 1;
+    // text query
+    InternalTextQueryRequest text_query = 2;
+  }
+  // readable string describing what feature it is used for
+  string internal_client_id = 3;
+  // query associated metadata
+  optional QueryMetadata metadata = 4;
+  // team id for which the query is run
+  google.protobuf.StringValue team_id = 5;
+  // user id for which the query is run
+  optional google.protobuf.StringValue user_id = 6;
+  // query id, identifies query in DQE, used in tracing (tags.query.id)
+  optional string query_id = 7;
+}

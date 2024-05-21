@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/ast/v1/ast.proto";
+import "com/coralogix/dataprime/ast/v1/query.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/dataprime/v1/schema.proto";
+import "com/coralogix/dataprime/v1/common.proto";
+
+enum QuerySyntax {
+  QUERY_SYNTAX_DATAPRIME_UNSPECIFIED = 0;
+  QUERY_SYNTAX_LUCENE = 1;
+}
+
+message CompileRequest {
+  google.protobuf.StringValue source_code = 1;
+  optional uint32 team_id = 2;
+  optional com.coralogix.dataprime.ast.v1.TimeRange time_range = 3;
+  // default value for source to be used when source is omitted in a query
+  optional google.protobuf.StringValue default_source = 4;
+  optional QuerySyntax syntax = 5;
+  repeated com.coralogix.dataprime.ast.v1.Source available_sources = 6;
+  optional SchemaLookup override_schema = 7;
+  optional Backend backend = 8;
+}
+
+message CompileResponse {
+  CompilationResponse response = 1;
+}
+
+message CheckRequest {
+  com.coralogix.dataprime.ast.v1.Ast ast = 1;
+}
+
+message CheckResponse {
+  CompilationResponse response = 1;
+}
+
+message CompilationResponse {
+  oneof compile_response {
+    CompilationSuccessful success = 1;
+    CompilationFailure failure = 2;
+  }
+
+  message CompilationSuccessful {
+    com.coralogix.dataprime.ast.v1.Ast ast = 1;
+    repeated Warning warnings = 2;
+  }
+
+  message CompilationFailure {
+    repeated Problem problems = 1;
+  }
+
+  message Problem {
+    oneof problem {
+      Error error = 1;
+      Warning warning = 2;
+    }
+  }
+
+  message Error {
+    google.protobuf.StringValue msg = 1;
+    Position position = 2;
+  }
+
+  message Warning {
+    google.protobuf.StringValue msg = 1;
+    Position position = 2;
+  }
+
+  message Position {
+    google.protobuf.UInt32Value line = 1;
+    google.protobuf.UInt32Value col = 2;
+  }
+}

@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package com.coralogix.extensions.v1;
+
+import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/extensions/v1/extension.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+service ExtensionTestingService {
+  rpc InitializeTestingRevision(InitializeTestingRevisionRequest) returns (InitializeTestingRevisionResponse) {
+    option (audit_log_description).description = "Initialize testing revision";
+    option (google.api.http) = {
+      post: "/extensions-testing/v1/initialize"
+      body: "*"
+    };
+  }
+
+  rpc CleanupTestingRevision(CleanupTestingRevisionRequest) returns (CleanupTestingRevisionResponse) {
+    option (audit_log_description).description = "Cleanup testing extension";
+    option (google.api.http) = {
+      post: "/extensions-testing/v1/cleanup"
+      body: "*"
+    };
+  }
+
+  rpc TestExtensionRevision(TestExtensionRevisionRequest) returns (TestExtensionRevisionResponse) {
+    option (audit_log_description).description = "Test extension";
+    option (google.api.http) = {
+      post: "/extensions-testing/v1/test"
+      body: "*"
+    };
+  }
+}
+
+message InitializeTestingRevisionRequest {
+  ExtensionData extension_data = 1;
+}
+
+message InitializeTestingRevisionResponse {}
+
+message CleanupTestingRevisionRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message CleanupTestingRevisionResponse {}
+
+message TestExtensionRevisionRequest {
+  ExtensionData extension_data = 1;
+  google.protobuf.BoolValue cleanup_after_test = 2;
+}
+
+message TestExtensionRevisionResponse {}

@@ -1,0 +1,101 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.ast.restricted.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/dataprime/ast/restricted/v1/types.proto";
+
+message Expression {
+  reserved 10; // formerly MatchSubtree
+
+  Datatype datatype = 1;
+
+  oneof expression {
+    Null null_e                           = 2;
+    Keypath keypath                       = 3;
+    google.protobuf.BoolValue boolean     = 4;
+    google.protobuf.Int32Value integer    = 5;
+    google.protobuf.StringValue str       = 6;
+    InfixOp infix_op                      = 7;
+    Not not                               = 8;
+    FunctionCall function_call            = 9;
+    google.protobuf.Int64Value long       = 11;
+    google.protobuf.DoubleValue double    = 12;
+    Timestamp timestamp                   = 13;
+  }
+
+  message Null {}
+
+  message Keypath {
+    Root root                                          = 1;
+    repeated google.protobuf.StringValue path_elements = 2;
+    Datatype datatype                                  = 3;
+
+    enum Root {
+      ROOT_UNSPECIFIED     = 0;
+      ROOT_EVENT_LABELS    = 1;
+      ROOT_EVENT_METADATA  = 2;
+      ROOT_USER_DATA       = 3;
+    }
+  }
+
+  message InfixOp {
+    Expression left  = 1;
+    Op op            = 2;
+    Expression right = 3;
+  
+    enum Op {
+      OP_UNSPECIFIED = 0;
+      OP_AND         = 1;
+      OP_OR          = 2;
+      OP_EQ          = 3;
+      OP_NEQ         = 4;
+      OP_LT          = 5;
+      OP_LTE         = 6;
+      OP_GT          = 7;
+      OP_GTE         = 8;
+    }
+  }
+
+  message Not {
+    Expression expression = 1;
+  }
+
+  message FunctionCall {
+    oneof function {
+      Contains contains      = 1;
+      StartsWith starts_with = 2;
+      EndsWith ends_with     = 3;
+      In in                  = 4;
+    }
+    
+    message In {
+      Expression comparand       = 1;
+      Expression value           = 2;
+      repeated Expression values = 3;
+    }
+
+    message Contains {
+      Expression string    = 1;
+      Expression substring = 2;
+    }
+
+    message StartsWith {
+      Expression string = 1;
+      Expression prefix = 2;
+    }
+
+    message EndsWith {
+      Expression string = 1;
+      Expression suffix = 2;
+    }
+  }
+
+  // A timestamp anchored at the Unix epoch (1970-01-01) with nanosecond resolution.
+  // Earlier timestamps are represented by negative `epoch_nanos`.
+  // The range of representable timestamps falls roughly within the years 1678 to 2262 (1970 +- 292 years).
+  message Timestamp {
+    int64 epoch_nanos = 1;
+  }
+
+}

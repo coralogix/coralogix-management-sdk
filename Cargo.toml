@@ -1,5 +1,6 @@
 [workspace]
 members = ["cx-api", "cx-sdk"]
+resolver = "2"
 
 [workspace.package]
 version = "0.1.0"
@@ -9,3 +10,6 @@ repository = "https://github.com/coralogix/rust-mgmt-sdk"
 keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]
 authors = []
+
+[workspace.dependencies]
+protofetch = "0.1.2"

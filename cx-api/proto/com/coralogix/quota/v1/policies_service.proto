@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/audit_log.proto";
+import "com/coralogix/quota/v1/get_policy_request.proto";
+import "com/coralogix/quota/v1/get_policy_response.proto";
+import "com/coralogix/quota/v1/create_policy_request.proto";
+import "com/coralogix/quota/v1/create_policy_response.proto";
+import "com/coralogix/quota/v1/update_policy_request.proto";
+import "com/coralogix/quota/v1/update_policy_response.proto";
+import "com/coralogix/quota/v1/get_company_policies_request.proto";
+import "com/coralogix/quota/v1/get_company_policies_response.proto";
+import "com/coralogix/quota/v1/delete_policy_request.proto";
+import "com/coralogix/quota/v1/delete_policy_response.proto";
+import "com/coralogix/quota/v1/reorder_policies_request.proto";
+import "com/coralogix/quota/v1/reorder_policies_response.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_request.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_response.proto";
+import "com/coralogix/quota/v1/toggle_policy_request.proto";
+import "com/coralogix/quota/v1/toggle_policy_response.proto";
+import "com/coralogix/quota/v1/bulk_create_policy_request.proto";
+import "com/coralogix/quota/v1/bulk_create_policy_response.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+
+service PoliciesService {
+  rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
+    option (audit_log_description).description = "Get Policy";
+  }
+
+  rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
+    option (audit_log_description).description = "Create Policy";
+  }
+
+  rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
+    option (audit_log_description).description = "Update Policy";
+  }
+
+  rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
+    option (audit_log_description).description = "Get Company Policies";
+  }
+
+  rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
+    option (audit_log_description).description = "Delete Policy";
+  }
+
+  rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
+    option (audit_log_description).description = "Reorder Policies";
+  }
+
+  rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
+    option (audit_log_description).description = "Bulk Test Log Policies";
+  }
+
+  rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
+    option (audit_log_description).description = "Toggle Policy";
+  }
+
+  rpc AtomicBatchCreatePolicy(AtomicBatchCreatePolicyRequest) returns (AtomicBatchCreatePolicyResponse) {
+    option (audit_log_description).description = "Bulk Create Policy";
+  }
+
+  rpc AtomicOverwriteLogPolicies(AtomicOverwriteLogPoliciesRequest) returns (AtomicOverwriteLogPoliciesResponse) {
+    option (audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
+  }
+
+  rpc AtomicOverwriteSpanPolicies(AtomicOverwriteSpanPoliciesRequest) returns (AtomicOverwriteSpanPoliciesResponse) {
+    option (audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
+  }
+}
