@@ -1,6 +1,7 @@
-# The Coralogix Management SDK for Rust
+# The Coralogix Management SDK
 
 Wrapper around Coralgix's GRPC API.
+
 
 # License
 
