@@ -74,11 +74,12 @@ message GetDataUsageMetricsExportStatusRequest {}
 
 message GetDataUsageMetricsExportStatusResponse {
   bool enabled = 1;
-  bool metrics_source_configured = 2;
 }
 
 message UpdateDataUsageMetricsExportStatusRequest {
-  bool enabled = 3;
+  bool enabled = 1;
 }
 
-message UpdateDataUsageMetricsExportStatusResponse {}
+message UpdateDataUsageMetricsExportStatusResponse {
+  bool enabled = 1;
+}

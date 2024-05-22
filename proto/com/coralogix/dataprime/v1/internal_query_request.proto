@@ -20,6 +20,19 @@ message QueryRequest {
   optional QueryMetadata metadata = 4;
   // query id, identifies query in DQE, used in tracing (tags.query.id)
   optional string query_id = 5;
+  DpxlScopesPlacement dpxl_scopes_placement = 6;
+}
+
+message DpxlScopesPlacement {
+  DpxlScopesPlacementType type = 1;
+  optional string placeholder = 2;
+}
+
+enum DpxlScopesPlacementType {
+  DPXL_SCOPES_PLACEMENT_TYPE_UNSPECIFIED = 0;
+  DPXL_SCOPES_PLACEMENT_TYPE_FIRST_FILTER = 1;
+  DPXL_SCOPES_PLACEMENT_TYPE_PLACEHOLDER = 2;
+  DPXL_SCOPES_PLACEMENT_TYPE_SKIP = 3;
 }
 
 message InternalAstQueryRequest {

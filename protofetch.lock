@@ -16,13 +16,13 @@ commit_hash = "25e2d132ba87de72f7ae48f91e72146ff414f029"
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
 branch = "master"
-commit_hash = "f7ed669c8e780304d7493e5ce61398dc677a38c5"
+commit_hash = "82364b992c7a5652bdecd77238fb29bb7b2a8319"
 
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
 branch = "master"
-commit_hash = "eeaf5905bb18bd4d84a2ab85dd72e708131f2297"
+commit_hash = "0d012bf7a39918db01e57b5e4c116ef19cb7650c"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -58,7 +58,7 @@ commit_hash = "80897a553f7b2e3e076b122db578844a22401624"
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/scopes-service"
 branch = "master"
-commit_hash = "745892a36bcd4beb6d4de533e74eabfb6ba208b3"
+commit_hash = "c07c24f50e7efb55680bccbe56d5c1865520e93c"
 
 [[dependencies]]
 name = "cx-api-tags"
