@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/unauthenticated_internal_query_request.proto";
+import "com/coralogix/dataprime/v1/unauthenticated_internal_query_response.proto";
+import "com/coralogix/dataprime/v1/audit_log.proto";
+
+import "google/protobuf/descriptor.proto";
+
+// internal service for running dataprime queries
+service UnauthenticatedInternalDataprimeQueryService {
+  // method to run dataprime queries
+  rpc Query(UnauthenticatedInternalDataprimeQueryServiceQueryRequest) returns (stream UnauthenticatedInternalDataprimeQueryServiceQueryResponse) {
+    option (audit_log_description).description = "Run Dataprime query";
+  }
+}

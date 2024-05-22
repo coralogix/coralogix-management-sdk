@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogix/dataprime/v1/common.proto";
+import "com/coralogix/dataprime/v1/histogram.proto";
+import "com/coralogix/dataprime/v1/query.proto";
+
+message RunDataprimeQueryRequest { 
+  google.protobuf.StringValue query_id = 1;
+  QueryPayload query = 2;
+  google.protobuf.Timestamp start_date = 3;
+  google.protobuf.Timestamp end_date = 4;
+  repeated Filter filters = 6;
+  repeated SortModelItem sort_model = 7;
+  Backend backend = 8;
+  repeated RequestComponent components = 9;
+  TracingMetadata tracing_metadata = 10;
+  optional bool use_text_index = 11;
+  // Team ids users wants us to query. May not contain caller team id
+  repeated uint32 requested_team_ids = 12;
+  optional Filter.Horizon default_filter_horizon = 13;
+  // readable string describing what feature it is used for
+  optional string internal_client_id = 14;
+}
+
+message RequestComponent {
+  // formerly `application_name_counts`, `subsystem_name_counts`, `severity_counts`
+  reserved 3, 4, 5;
+  oneof component {
+    Component.Logs logs = 1;
+    Component.SeverityHistogram severity_histogram = 2;
+    Component.SurroundingLogs surrounding_logs = 6;
+    Component.Count count = 7;
+    Component.KeyDistribution key_distribution = 8;
+    Component.Histogram histogram = 9;
+    Component.ComparedHistogram compared_histogram = 10;
+    Component.SidebarFiltersCounts sidebar_filters_count = 11;
+    Component.TeamIdCounts team_id_counts = 12;
+  }
+}
+
+// This message is just for scoping to avoid name clashes with response entities
+message Component {
+  message Logs {
+    google.protobuf.Int64Value skip = 1;
+    google.protobuf.Int64Value limit = 2;
+  }
+
+  message Count {}
+
+  message SeverityHistogram {}
+
+  message SidebarFiltersCounts {
+    // Zero counts for unselected filter values by default
+    optional bool count_unselected_values = 1;
+  }
+
+  message SurroundingLogs {
+    google.protobuf.StringValue log_id = 1;
+    google.protobuf.Timestamp log_timestamp = 2;
+    google.protobuf.Int32Value skip = 3;
+    google.protobuf.Int32Value limit = 4;   
+  }
+
+  message KeyDistribution {
+    UntypedKeypath key_distribution = 1;
+  }
+
+  message Histogram {
+    reserved 4; // formerly `filters`
+    Aggregation aggregation = 1;
+    UntypedKeypath group_by = 2;
+  }
+
+  message ComparedHistogram {
+    Aggregation aggregation = 1;
+    UntypedKeypath group_by = 2;
+    google.protobuf.Int64Value historical_shift_ms = 3;
+  }
+
+  message TeamIdCounts {}
+}
+
+message Filter {
+  // Horizon controls when filters are applied and therefore what data / schema they see.
+  enum Horizon {
+    // The default horizon over the original data / schema - i.e. before the query.
+    // Note that any fields created by the query are not visible at this point.
+    // On the other hand, fields removed by the query remain visible.
+    HORIZON_BEFORE_QUERY_UNSPECIFIED = 0;
+    // The horizon defined by the query result - i.e. after the query.
+    // Note that any fields removed by the query are no longer visible at this point.
+    // On the other hand, fields created or retained by the query are visible.
+    HORIZON_AFTER_QUERY = 1;
+  }
+
+  UntypedKeypath field = 1;
+  repeated string alternatives = 2;
+}
+
+// -----  Run Query Request entities -----
+
+message SortModelItem {
+  enum Ordering {
+    ORDERING_ASC_UNSPECIFIED = 0;
+    ORDERING_DESC = 1;
+  }
+  enum Missing {
+    MISSING_LAST_UNSPECIFIED = 0;
+    MISSING_FIRST = 1;
+  }
+  UntypedKeypath field = 1;
+  Ordering ordering = 2;
+  Missing missing = 3;
+}
+
+message TracingMetadata {
+  enum QuerySyntax {
+    QUERY_SYNTAX_LUCENE_UNSPECIFIED = 0;
+    QUERY_SYNTAX_DATAPRIME = 1;
+  }
+  QuerySyntax query_syntax = 1;
+  google.protobuf.StringValue query_text = 2;
+}

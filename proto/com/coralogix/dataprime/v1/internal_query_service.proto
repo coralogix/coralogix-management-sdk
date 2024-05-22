@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/internal_query_request.proto";
+import "com/coralogix/dataprime/v1/internal_query_response.proto";
+
+// internal service for running dataprime queries
+service InternalDataprimeQueryService {
+  // method to run dataprime queries
+  rpc Query(QueryRequest) returns (stream QueryResponse) {}
+}

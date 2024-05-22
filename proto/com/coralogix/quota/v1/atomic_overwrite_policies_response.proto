@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "com/coralogix/quota/v1/create_policy_response.proto";
+
+package com.coralogix.quota.v1;
+
+message AtomicOverwriteLogPoliciesResponse {
+  repeated CreatePolicyResponse create_responses = 1;
+}
+
+message AtomicOverwriteSpanPoliciesResponse {
+  repeated CreatePolicyResponse create_responses = 1;
+}

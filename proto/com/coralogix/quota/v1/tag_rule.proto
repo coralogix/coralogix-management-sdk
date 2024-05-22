@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+
+message TagRule {
+  RuleTypeId rule_type_id = 1;
+  google.protobuf.StringValue tag_name = 2;
+  google.protobuf.StringValue tag_value = 3;
+}

@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/integrations/v1/integration.proto";
+import "com/coralogix/integrations/v1/audit_log.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+
+service IntegrationExtensionsDeploymentService {
+
+  rpc DeployIntegrationExtensions(DeployIntegrationExtensionsRequest) returns (DeployIntegrationExtensionsResponse) {
+    option (audit_log_description).description = "Deploy integration extensions";
+  }
+}
+
+message DeployIntegrationExtensionsRequest {
+  google.protobuf.StringValue integration_key = 1;
+}
+
+message DeployIntegrationExtensionsResponse {
+}
+
+

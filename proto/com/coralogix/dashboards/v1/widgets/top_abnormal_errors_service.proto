@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1.widgets;
+
+import "com/coralogix/dashboards/v1/audit_log.proto";
+import "com/coralogix/dashboards/v1/common/log_severity_level.proto";
+import "com/coralogix/dashboards/v1/common/search_filter.proto";
+import "com/coralogix/dashboards/v1/common/time_frame.proto";
+import "com/coralogix/dashboards/v1/common/time_series.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service TopAbnormalErrorsService {
+  rpc SearchTopAbnormalErrors(SearchTopAbnormalErrorsRequest) returns (SearchTopAbnormalErrorsResponse) {
+    option (audit_log_description).description = "search top abnormal errors";
+  }
+
+  rpc SearchTopNewerErrors(SearchTopNewerErrorsRequest) returns (SearchTopNewerErrorsResponse) {
+    option (audit_log_description).description = "search top newer errors";
+  }
+}
+
+message SearchTopAbnormalErrorsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Int32Value limit = 3;
+  google.protobuf.Duration aggregation_interval = 4;
+}
+
+message SearchTopNewerErrorsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Int32Value limit = 3;
+  google.protobuf.Duration aggregation_interval = 4;
+}
+
+message SearchTopAbnormalErrorsResponse {
+  reserved 1;
+  repeated Template new_templates = 2;
+  repeated Template abnormal_templates = 3;
+
+  message Template {
+    google.protobuf.StringValue template_id = 1;
+    google.protobuf.Int32Value template_type = 2;
+    common.LogSeverityLevel log_severity_level = 3;
+    google.protobuf.Int64Value actual_count = 4;
+    google.protobuf.Int64Value normal_count = 5;
+    common.TimeSeries time_series = 6;
+    google.protobuf.StringValue application = 7;
+    google.protobuf.StringValue subsystem = 8;
+    google.protobuf.StringValue log_example = 9;
+    google.protobuf.Timestamp created_at = 10;
+  }
+}
+
+message SearchTopNewerErrorsResponse {
+  repeated Template templates = 1;
+
+  message Template {
+    google.protobuf.StringValue template_id = 1;
+    google.protobuf.Int32Value template_type = 2;
+    common.LogSeverityLevel log_severity_level = 3;
+    google.protobuf.Int64Value count = 4;
+    common.TimeSeries time_series = 6;
+    google.protobuf.StringValue application = 7;
+    google.protobuf.StringValue subsystem = 8;
+    google.protobuf.StringValue log_example = 9;
+    google.protobuf.Timestamp created_at = 10;
+  }
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.ast.restricted.v1;
+
+import "com/coralogix/dataprime/ast/restricted/v1/expression.proto";
+
+message Ast {
+  Expression expression = 1;
+}

@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/internal_metadata.proto";
+import "com/coralogix/dataprime/v1/query.proto";
+import "google/protobuf/wrappers.proto";
+
+// internal dataprime query request
+message QueryRequest {
+  oneof query {
+    // AST query
+    InternalAstQueryRequest ast_query = 1;
+    // text query
+    InternalTextQueryRequest text_query = 2;
+  }
+  // readable string describing what feature it is used for
+  string internal_client_id = 3;
+  // query associated metadata
+  optional QueryMetadata metadata = 4;
+  // query id, identifies query in DQE, used in tracing (tags.query.id)
+  optional string query_id = 5;
+  DpxlScopesPlacement dpxl_scopes_placement = 6;
+}
+
+message DpxlScopesPlacement {
+  DpxlScopesPlacementType type = 1;
+  optional string placeholder = 2;
+}
+
+enum DpxlScopesPlacementType {
+  DPXL_SCOPES_PLACEMENT_TYPE_UNSPECIFIED = 0;
+  DPXL_SCOPES_PLACEMENT_TYPE_FIRST_FILTER = 1;
+  DPXL_SCOPES_PLACEMENT_TYPE_PLACEHOLDER = 2;
+  DPXL_SCOPES_PLACEMENT_TYPE_SKIP = 3;
+}
+
+message InternalAstQueryRequest {
+  // byte representation of dataprime AST
+  SerializedDataprime ast = 1;
+}
+
+message InternalTextQueryRequest {
+  // dataprime query
+  google.protobuf.StringValue text = 1;
+  // text query associated metadata
+  optional TextQueryMetadata metadata = 2;
+}

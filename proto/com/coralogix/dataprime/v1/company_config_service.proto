@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/company_config.proto";
+
+service CompanyConfigService {
+  rpc GetCompanyConfig(GetCompanyConfigRequest) returns (GetCompanyConfigResponse) {}
+}

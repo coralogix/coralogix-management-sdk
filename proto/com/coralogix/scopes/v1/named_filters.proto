@@ -1,0 +1,75 @@
+syntax = "proto3";
+import "com/coralogixapis/scopes/v1/entity_type.proto";
+
+package com.coralogix.scopes.v1;
+
+service NamedFilterService {
+    rpc GetNamedFiltersByTeamId(GetNamedFiltersByTeamIdRequest) returns (GetNamedFiltersResponse) {}
+
+    rpc GetNamedFiltersByIds(GetNamedFiltersByIdsRequest) returns (GetNamedFiltersResponse) {}
+
+    rpc CreateNamedFilters(CreateNamedFiltersRequest) returns (CreateNamedFiltersResponse) {}
+
+    rpc UpdateNamedFilters(UpdateNamedFiltersRequest) returns (UpdateNamedFiltersResponse) {}
+
+    rpc DeleteNamedFilters(DeleteNamedFiltersRequest) returns (DeleteNamedFiltersResponse) {}
+
+}
+
+// Team Id is taken from Auth Context
+message NamedFilterCreateDefinition {
+    optional string id = 1;
+    optional com.coralogixapis.scopes.v1.EntityType entity_type = 2;
+    string serialized_expression = 3;
+    string display_name = 4;
+}
+
+// Team Id is taken from Auth Context
+message NamedFilterUpdateDefinition {
+    string id = 1;
+    optional com.coralogixapis.scopes.v1.EntityType entity_type = 2;
+    string serialized_expression = 3;
+    string display_name = 4;
+}
+
+message NamedFilter {
+    string id = 1;
+    int32 team_id = 2;
+    optional com.coralogixapis.scopes.v1.EntityType entity_type = 3;
+    string serialized_expression = 4;
+    string display_name = 5;
+}
+
+message GetNamedFiltersByTeamIdRequest {
+}
+
+message GetNamedFiltersByIdsRequest {
+    repeated string named_filter_ids = 2;
+}
+
+message GetNamedFiltersResponse {
+    repeated NamedFilter named_filters = 1;
+}
+
+message CreateNamedFiltersRequest {
+    repeated NamedFilterCreateDefinition named_filter_definitions = 1;
+}
+
+message CreateNamedFiltersResponse {
+    repeated NamedFilter named_filters = 1;
+}
+
+message UpdateNamedFiltersRequest {
+    repeated NamedFilterUpdateDefinition named_filter_definitions = 1;
+}
+
+message UpdateNamedFiltersResponse {
+    repeated NamedFilter named_filters = 1;
+}
+
+message DeleteNamedFiltersRequest {
+    repeated string named_filter_ids = 1;
+}
+
+message DeleteNamedFiltersResponse {
+}

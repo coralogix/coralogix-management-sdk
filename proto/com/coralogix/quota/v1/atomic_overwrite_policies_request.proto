@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+import "com/coralogix/quota/v1/rule.proto";
+import "com/coralogix/quota/v1/archive_retention.proto";
+import "com/coralogix/quota/v1/log_rules.proto";
+import "com/coralogix/quota/v1/span_rules.proto";
+
+
+// In an atomic operation delete all existing log policies and create the provided list by order
+message AtomicOverwriteLogPoliciesRequest {
+  repeated CreateLogPolicyRequest policies = 1;
+}
+
+// In an atomic operation delete all existing span policies and create the provided list by order
+message AtomicOverwriteSpanPoliciesRequest {
+  repeated CreateSpanPolicyRequest policies = 1;
+}
+
+message CreateSpanPolicyRequest {
+  CreateGenericPolicyRequest policy = 1;
+  SpanRules span_rules = 2;
+}
+
+message CreateLogPolicyRequest {
+  CreateGenericPolicyRequest policy = 1;
+  LogRules log_rules = 2;
+}
+
+message CreateGenericPolicyRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  Priority priority = 3;
+  optional Rule application_rule = 4;
+  optional Rule subsystem_rule = 5;
+  optional ArchiveRetention archive_retention = 6;
+}

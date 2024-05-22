@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+message GetQueryResultsRequest {
+  string query_id = 1;
+}
+
+message GetQueryResultsResponse {
+  message KeyValue {
+    string key = 1;
+    string value = 2;
+  }
+  
+  repeated KeyValue metadata = 1;
+  repeated KeyValue labels = 2;
+  string user_data = 3; 
+}

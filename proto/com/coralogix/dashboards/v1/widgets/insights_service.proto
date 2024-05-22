@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1.widgets;
+
+import "com/coralogix/dashboards/v1/audit_log.proto";
+import "com/coralogix/dashboards/v1/common/search_filter.proto";
+import "com/coralogix/dashboards/v1/common/time_frame.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service InsightsService {
+  rpc SearchInsights(SearchInsightsRequest) returns (SearchInsightsResponse) {
+    option (audit_log_description).description = "search insights";
+  }
+}
+
+message SearchInsightsRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+}
+
+message SearchInsightsResponse {
+  repeated Insight insights = 1;
+}
+message Insight {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue alert_id = 2;
+  google.protobuf.StringValue name = 3;
+  InsightSeverity severity = 4;
+  google.protobuf.StringValue application = 5;
+  google.protobuf.StringValue subsystem = 6;
+  google.protobuf.Int32Value repetitions = 7;
+  InsightType type = 8;
+  google.protobuf.Timestamp last_occurrence = 9;
+  AlertSnoozed alert_snoozed = 10;
+}
+
+enum InsightSeverity {
+  INSIGHT_SEVERITY_UNSPECIFIED = 0;
+  INSIGHT_SEVERITY_INFO = 1;
+  INSIGHT_SEVERITY_WARNING = 2;
+  INSIGHT_SEVERITY_CRITICAL = 3;
+  INSIGHT_SEVERITY_ERROR = 4;
+}
+
+enum InsightType {
+  INSIGHT_TYPE_UNSPECIFIED = 0;
+  INSIGHT_TYPE_USER_ALERT = 1;
+  INSIGHT_TYPE_ANOMALY = 2;
+  INSIGHT_TYPE_RATIO = 3;
+  INSIGHT_TYPE_NEW_VALUE = 4;
+  INSIGHT_TYPE_UNIQUE_COUNT = 5;
+  INSIGHT_TYPE_TIME_RELATIVE = 6;
+  INSIGHT_TYPE_METRIC = 7;
+  INSIGHT_TYPE_FLOW = 8;
+}
+
+message AlertSnoozed {
+  google.protobuf.StringValue user_id = 1;
+  google.protobuf.Timestamp until = 2;
+}

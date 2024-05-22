@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+message ObjectStoreWarning {
+  oneof warning_type {
+    MetastoreWarning metastore_warning = 1;
+    BlockWarning block_warning = 2;
+  }
+
+  message MetastoreWarning {
+    oneof warning_type {
+      NoFilesFound no_files_found_warning = 1;
+    }
+
+    message NoFilesFound {}
+  }
+
+  message BlockWarning {
+    oneof warning_type {
+      FileNotFound file_not_found_warning = 1;
+      AccessDenied access_denied_warning = 2;
+      ReadFailed read_failed_warning = 3;
+    }
+
+    message FileNotFound {}
+    message AccessDenied {}
+    message ReadFailed {}
+  }
+}

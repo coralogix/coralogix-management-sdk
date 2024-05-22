@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package com.coralogix.dashboards.v1.widgets;
+
+import "com/coralogix/dashboards/v1/audit_log.proto";
+import "com/coralogix/dashboards/v1/common/search_filter.proto";
+import "com/coralogix/dashboards/v1/common/time_frame.proto";
+import "com/coralogix/dashboards/v1/common/time_series.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
+
+service SystemHealthService {
+  rpc GetSystemHealth(GetSystemHealthRequest) returns (GetSystemHealthResponse) {
+    option (audit_log_description).description = "get system health";
+  }
+}
+
+message GetSystemHealthRequest {
+  repeated common.SearchFilter filters = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Int32Value graph_size = 3;
+}
+
+message GetSystemHealthResponse {
+  SystemHealthStatus status = 1;
+  common.TimeSeries time_series = 2;
+}
+
+enum SystemHealthStatus {
+  SYSTEM_HEALTH_STATUS_UNSPECIFIED = 0;
+  SYSTEM_HEALTH_STATUS_OK = 1;
+  SYSTEM_HEALTH_STATUS_NO_DATA = 2;
+  SYSTEM_HEALTH_STATUS_MISSING = 3;
+}

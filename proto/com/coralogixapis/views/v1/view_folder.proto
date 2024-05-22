@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message ViewFolder {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+}

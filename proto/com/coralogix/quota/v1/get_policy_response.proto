@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/policy.proto";
+
+message GetPolicyResponse {
+  Policy policy = 1;
+}

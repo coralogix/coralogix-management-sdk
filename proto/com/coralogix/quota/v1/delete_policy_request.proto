@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message DeletePolicyRequest {
+  google.protobuf.StringValue id = 1;
+}
