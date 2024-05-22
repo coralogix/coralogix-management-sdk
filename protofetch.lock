@@ -81,7 +81,7 @@ commit_hash = "6c576d0996929a6cd32009b61db4c3caf420f869"
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "a07bf82eb48d79bc113620b3fb517a3ebe92989c"
+commit_hash = "f84e781256b0657a0d67bc1818bbb7e9a3e86a85"
 
 [[dependencies]]
 name = "rules-api-protobuf"
