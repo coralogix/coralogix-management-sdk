@@ -1,0 +1,25 @@
+from com.coralogix.quota.v1 import audit_log_pb2 as _audit_log_pb2
+from com.coralogix.quota.v1 import get_policy_request_pb2 as _get_policy_request_pb2
+from com.coralogix.quota.v1 import get_policy_response_pb2 as _get_policy_response_pb2
+from com.coralogix.quota.v1 import create_policy_request_pb2 as _create_policy_request_pb2
+from com.coralogix.quota.v1 import create_policy_response_pb2 as _create_policy_response_pb2
+from com.coralogix.quota.v1 import update_policy_request_pb2 as _update_policy_request_pb2
+from com.coralogix.quota.v1 import update_policy_response_pb2 as _update_policy_response_pb2
+from com.coralogix.quota.v1 import get_company_policies_request_pb2 as _get_company_policies_request_pb2
+from com.coralogix.quota.v1 import get_company_policies_response_pb2 as _get_company_policies_response_pb2
+from com.coralogix.quota.v1 import delete_policy_request_pb2 as _delete_policy_request_pb2
+from com.coralogix.quota.v1 import delete_policy_response_pb2 as _delete_policy_response_pb2
+from com.coralogix.quota.v1 import reorder_policies_request_pb2 as _reorder_policies_request_pb2
+from com.coralogix.quota.v1 import reorder_policies_response_pb2 as _reorder_policies_response_pb2
+from com.coralogix.quota.v1 import bulk_test_log_policies_request_pb2 as _bulk_test_log_policies_request_pb2
+from com.coralogix.quota.v1 import bulk_test_log_policies_response_pb2 as _bulk_test_log_policies_response_pb2
+from com.coralogix.quota.v1 import toggle_policy_request_pb2 as _toggle_policy_request_pb2
+from com.coralogix.quota.v1 import toggle_policy_response_pb2 as _toggle_policy_response_pb2
+from com.coralogix.quota.v1 import bulk_create_policy_request_pb2 as _bulk_create_policy_request_pb2
+from com.coralogix.quota.v1 import bulk_create_policy_response_pb2 as _bulk_create_policy_response_pb2
+from com.coralogix.quota.v1 import atomic_overwrite_policies_response_pb2 as _atomic_overwrite_policies_response_pb2
+from com.coralogix.quota.v1 import atomic_overwrite_policies_request_pb2 as _atomic_overwrite_policies_request_pb2
+from google.protobuf import descriptor as _descriptor
+from typing import ClassVar as _ClassVar
+
+DESCRIPTOR: _descriptor.FileDescriptor
