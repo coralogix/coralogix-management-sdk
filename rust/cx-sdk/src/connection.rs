@@ -14,4 +14,3 @@ impl CoralogixConnection {
         Self { api_key, team }
     }
 }
-

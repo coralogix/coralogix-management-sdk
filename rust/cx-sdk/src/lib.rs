@@ -1,4 +1,3 @@
-
 pub mod connection;
 pub mod error;
 
@@ -9,11 +8,10 @@ pub enum CoralogixRegion {
     EU1,
     EU2,
     AP1,
-    AP2
+    AP2,
 }
 
 impl CoralogixRegion {
-
     /// Endpoint for the corresponding Coralogix region
     /// [https://coralogix.com/docs/coralogix-domain/]()
     pub fn endpoint(&self) -> String {
@@ -24,7 +22,8 @@ impl CoralogixRegion {
             CoralogixRegion::EU2 => "eu2.coralogix.com",
             CoralogixRegion::AP1 => "coralogix.in",
             CoralogixRegion::AP2 => "coralogixsg.com",
-        }.to_string()
+        }
+        .to_string()
     }
 }
 
