@@ -32,7 +32,7 @@ jobs:
                 <version>2.4.1</version>
               </provides>
               <configuration>
-                <protocExecutable>protoc</protocExecutable>
+                <protocExecutable>$(which protoc)</protocExecutable>
               </configuration>
             </toolchain>
           </toolchains>
