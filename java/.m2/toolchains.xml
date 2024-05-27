@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolchains>
+  <toolchain>
+    <type>protobuf</type>
+    <provides>
+      <version>26.1</version>
+    </provides>
+    <configuration>
+      <protocExecutable>protoc</protocExecutable>
+    </configuration>
+  </toolchain>
+</toolchains>
