@@ -1,5 +1,11 @@
-name: Rust
-on: [pull_request]
+name: Rust SDK
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
 env:
   CARGO_TERM_COLOR: always
 
@@ -9,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./rust
+        working-directory: rust
     steps:
       - name: Checkout sources
         uses: actions/checkout@v2
