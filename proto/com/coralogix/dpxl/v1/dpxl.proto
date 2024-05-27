@@ -47,13 +47,12 @@ message Source {
 }
 
 message EntityType {
+  reserved 3;
   oneof entity_type {
     Logs logs = 1;
     Spans spans = 2;
-    LogsTemplates logs_templates = 3;
   }
 
   message Logs {}
   message Spans {}
-  message LogsTemplates {}
 }
