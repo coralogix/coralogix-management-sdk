@@ -16,9 +16,10 @@ from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb
 from com.coralogix.enrichment.v1 import enrichment_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__pb2
 from com.coralogix.enrichment.v1 import enrichment_request_model_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__request__model__pb2
 from com.coralogix.enrichment.v1 import audit_log_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_audit__log__pb2
+from com.coralogix.enrichment.v1 import enrichment_type_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__type__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n4com/coralogix/enrichment/v1/enrichment_service.proto\x12\x1b\x63om.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a+com/coralogix/enrichment/v1/audit_log.proto\"\x1b\n\x19GetEnrichmentLimitRequest\"9\n\x1aGetEnrichmentLimitResponse\x12\r\n\x05limit\x18\x01 \x01(\r\x12\x0c\n\x04used\x18\x02 \x01(\r\"\x17\n\x15GetEnrichmentsRequest\"V\n\x16GetEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"i\n\x15\x41\x64\x64\x45nrichmentsRequest\x12P\n\x13request_enrichments\x18\x01 \x03(\x0b\x32\x33.com.coralogix.enrichment.v1.EnrichmentRequestModel\"V\n\x16\x41\x64\x64\x45nrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"P\n\x18RemoveEnrichmentsRequest\x12\x34\n\x0e\x65nrichment_ids\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.UInt32Value\"c\n\x19RemoveEnrichmentsResponse\x12\x46\n\x15remaining_enrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment2\xfd\x04\n\x11\x45nrichmentService\x12\x90\x01\n\x0eGetEnrichments\x12\x32.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a\x33.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"\x15\xc2\xb8\x02\x11\n\x0fGet enrichments\x12\x90\x01\n\x0e\x41\x64\x64\x45nrichments\x12\x32.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a\x33.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"\x15\xc2\xb8\x02\x11\n\x0f\x41\x64\x64 enrichments\x12\x9c\x01\n\x11RemoveEnrichments\x12\x35.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a\x36.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"\x18\xc2\xb8\x02\x14\n\x12\x44\x65lete enrichments\x12\xa2\x01\n\x12GetEnrichmentLimit\x12\x36.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a\x37.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"\x1b\xc2\xb8\x02\x17\n\x15Get enrichments limitb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n4com/coralogix/enrichment/v1/enrichment_service.proto\x12\x1b\x63om.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a+com/coralogix/enrichment/v1/audit_log.proto\x1a\x31\x63om/coralogix/enrichment/v1/enrichment_type.proto\"\x1b\n\x19GetEnrichmentLimitRequest\"9\n\x1aGetEnrichmentLimitResponse\x12\r\n\x05limit\x18\x01 \x01(\r\x12\x0c\n\x04used\x18\x02 \x01(\r\"\x17\n\x15GetEnrichmentsRequest\"V\n\x16GetEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"i\n\x15\x41\x64\x64\x45nrichmentsRequest\x12P\n\x13request_enrichments\x18\x01 \x03(\x0b\x32\x33.com.coralogix.enrichment.v1.EnrichmentRequestModel\"V\n\x16\x41\x64\x64\x45nrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"P\n\x18RemoveEnrichmentsRequest\x12\x34\n\x0e\x65nrichment_ids\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.UInt32Value\"c\n\x19RemoveEnrichmentsResponse\x12\x46\n\x15remaining_enrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"\xbc\x01\n!AtomicOverwriteEnrichmentsRequest\x12\x44\n\x0f\x65nrichment_type\x18\x01 \x01(\x0b\x32+.com.coralogix.enrichment.v1.EnrichmentType\x12Q\n\x11\x65nrichment_fields\x18\x02 \x03(\x0b\x32\x36.com.coralogix.enrichment.v1.EnrichmentFieldDefinition\"b\n\"AtomicOverwriteEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment2\xc1\x06\n\x11\x45nrichmentService\x12\x90\x01\n\x0eGetEnrichments\x12\x32.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a\x33.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"\x15\xc2\xb8\x02\x11\n\x0fGet enrichments\x12\x90\x01\n\x0e\x41\x64\x64\x45nrichments\x12\x32.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a\x33.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"\x15\xc2\xb8\x02\x11\n\x0f\x41\x64\x64 enrichments\x12\x9c\x01\n\x11RemoveEnrichments\x12\x35.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a\x36.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"\x18\xc2\xb8\x02\x14\n\x12\x44\x65lete enrichments\x12\xa2\x01\n\x12GetEnrichmentLimit\x12\x36.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a\x37.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"\x1b\xc2\xb8\x02\x17\n\x15Get enrichments limit\x12\xc1\x01\n\x1a\x41tomicOverwriteEnrichments\x12>.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest\x1a?.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse\"\"\xc2\xb8\x02\x1e\n\x1c\x41tomic overwrite enrichmentsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,22 +34,28 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ENRICHMENTSERVICE'].methods_by_name['RemoveEnrichments']._serialized_options = b'\302\270\002\024\n\022Delete enrichments'
   _globals['_ENRICHMENTSERVICE'].methods_by_name['GetEnrichmentLimit']._loaded_options = None
   _globals['_ENRICHMENTSERVICE'].methods_by_name['GetEnrichmentLimit']._serialized_options = b'\302\270\002\027\n\025Get enrichments limit'
-  _globals['_GETENRICHMENTLIMITREQUEST']._serialized_start=268
-  _globals['_GETENRICHMENTLIMITREQUEST']._serialized_end=295
-  _globals['_GETENRICHMENTLIMITRESPONSE']._serialized_start=297
-  _globals['_GETENRICHMENTLIMITRESPONSE']._serialized_end=354
-  _globals['_GETENRICHMENTSREQUEST']._serialized_start=356
-  _globals['_GETENRICHMENTSREQUEST']._serialized_end=379
-  _globals['_GETENRICHMENTSRESPONSE']._serialized_start=381
-  _globals['_GETENRICHMENTSRESPONSE']._serialized_end=467
-  _globals['_ADDENRICHMENTSREQUEST']._serialized_start=469
-  _globals['_ADDENRICHMENTSREQUEST']._serialized_end=574
-  _globals['_ADDENRICHMENTSRESPONSE']._serialized_start=576
-  _globals['_ADDENRICHMENTSRESPONSE']._serialized_end=662
-  _globals['_REMOVEENRICHMENTSREQUEST']._serialized_start=664
-  _globals['_REMOVEENRICHMENTSREQUEST']._serialized_end=744
-  _globals['_REMOVEENRICHMENTSRESPONSE']._serialized_start=746
-  _globals['_REMOVEENRICHMENTSRESPONSE']._serialized_end=845
-  _globals['_ENRICHMENTSERVICE']._serialized_start=848
-  _globals['_ENRICHMENTSERVICE']._serialized_end=1485
+  _globals['_ENRICHMENTSERVICE'].methods_by_name['AtomicOverwriteEnrichments']._loaded_options = None
+  _globals['_ENRICHMENTSERVICE'].methods_by_name['AtomicOverwriteEnrichments']._serialized_options = b'\302\270\002\036\n\034Atomic overwrite enrichments'
+  _globals['_GETENRICHMENTLIMITREQUEST']._serialized_start=319
+  _globals['_GETENRICHMENTLIMITREQUEST']._serialized_end=346
+  _globals['_GETENRICHMENTLIMITRESPONSE']._serialized_start=348
+  _globals['_GETENRICHMENTLIMITRESPONSE']._serialized_end=405
+  _globals['_GETENRICHMENTSREQUEST']._serialized_start=407
+  _globals['_GETENRICHMENTSREQUEST']._serialized_end=430
+  _globals['_GETENRICHMENTSRESPONSE']._serialized_start=432
+  _globals['_GETENRICHMENTSRESPONSE']._serialized_end=518
+  _globals['_ADDENRICHMENTSREQUEST']._serialized_start=520
+  _globals['_ADDENRICHMENTSREQUEST']._serialized_end=625
+  _globals['_ADDENRICHMENTSRESPONSE']._serialized_start=627
+  _globals['_ADDENRICHMENTSRESPONSE']._serialized_end=713
+  _globals['_REMOVEENRICHMENTSREQUEST']._serialized_start=715
+  _globals['_REMOVEENRICHMENTSREQUEST']._serialized_end=795
+  _globals['_REMOVEENRICHMENTSRESPONSE']._serialized_start=797
+  _globals['_REMOVEENRICHMENTSRESPONSE']._serialized_end=896
+  _globals['_ATOMICOVERWRITEENRICHMENTSREQUEST']._serialized_start=899
+  _globals['_ATOMICOVERWRITEENRICHMENTSREQUEST']._serialized_end=1087
+  _globals['_ATOMICOVERWRITEENRICHMENTSRESPONSE']._serialized_start=1089
+  _globals['_ATOMICOVERWRITEENRICHMENTSRESPONSE']._serialized_end=1187
+  _globals['_ENRICHMENTSERVICE']._serialized_start=1190
+  _globals['_ENRICHMENTSERVICE']._serialized_end=2023
 # @@protoc_insertion_point(module_scope)

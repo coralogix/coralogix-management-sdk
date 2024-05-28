@@ -55,10 +55,6 @@ branch = 'master'
 url = 'github.com/coralogix/scopes-service'
 content_roots = ["/modules/service/proto"]
 
-[cx-openapi-annotations]
-branch = 'master'
-url = 'github.com/coralogix/cx-openapi-annotations'
-
 [google-api]
 url = "github.com/googleapis/googleapis"
-content_roots = ["/src/"]
+allow_policies = ["/google/api/annotations.proto", "/google/api/http.proto", "/google/api/field_behavior.proto", "google/rpc/status.proto", "/google/api/client.proto", "/google/api/resource.proto", "/google/api/launch_stage.proto"]

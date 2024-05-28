@@ -4,6 +4,7 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogix/enrichment/v1/enrichment.proto";
 import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
 import "com/coralogix/enrichment/v1/audit_log.proto";
+import "com/coralogix/enrichment/v1/enrichment_type.proto";
 
 package com.coralogix.enrichment.v1;
 
@@ -36,6 +37,16 @@ message RemoveEnrichmentsResponse {
   repeated Enrichment remaining_enrichments = 1;
 }
 
+// Deletes all enrichments of the given type and replaces them with the new ones
+message AtomicOverwriteEnrichmentsRequest {
+  EnrichmentType enrichment_type = 1;
+  repeated EnrichmentFieldDefinition enrichment_fields = 2;
+}
+
+message AtomicOverwriteEnrichmentsResponse {
+  repeated Enrichment enrichments = 1;
+}
+
 service EnrichmentService {
   rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse) {
     option (audit_log_description).description = "Get enrichments";
@@ -48,5 +59,8 @@ service EnrichmentService {
   };
   rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse) {
     option (audit_log_description).description = "Get enrichments limit";
+  };
+  rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
+    option (audit_log_description).description = "Atomic overwrite enrichments";
   };
 }

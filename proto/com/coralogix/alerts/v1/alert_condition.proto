@@ -15,6 +15,9 @@ message AlertCondition {
     FlowCondition flow = 6;
     UniqueCountCondition unique_count = 7;
     LessThanUsualCondition less_than_usual = 8;
+    MoreThanOrEqualCondition more_than_or_equal = 9;
+    LessThanOrEqualCondition less_than_or_equal = 10;
+//    NotCondition not = 11;
   }
 }
 
@@ -25,7 +28,16 @@ message LessThanCondition {
   ConditionParameters parameters = 1;
 }
 
+message LessThanOrEqualCondition {
+  ConditionParameters parameters = 1;
+}
+
 message MoreThanCondition {
+  ConditionParameters parameters = 1;
+  optional EvaluationWindow evaluation_window = 2;
+}
+
+message MoreThanOrEqualCondition {
   ConditionParameters parameters = 1;
   optional EvaluationWindow evaluation_window = 2;
 }
@@ -51,6 +63,10 @@ message FlowCondition {
   optional ConditionParameters parameters = 2;
   google.protobuf.BoolValue enforce_suppression = 3;
 }
+
+//message NotCondition {
+//  ConditionParameters parameters = 1;
+//}
 
 message ConditionParameters {
   google.protobuf.DoubleValue threshold = 1;

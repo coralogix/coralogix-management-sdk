@@ -59,6 +59,11 @@ class EnrichmentServiceStub(object):
                 request_serializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitRequest.SerializeToString,
                 response_deserializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitResponse.FromString,
                 _registered_method=True)
+        self.AtomicOverwriteEnrichments = channel.unary_unary(
+                '/com.coralogix.enrichment.v1.EnrichmentService/AtomicOverwriteEnrichments',
+                request_serializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsRequest.SerializeToString,
+                response_deserializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsResponse.FromString,
+                _registered_method=True)
 
 
 class EnrichmentServiceServicer(object):
@@ -88,6 +93,12 @@ class EnrichmentServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def AtomicOverwriteEnrichments(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_EnrichmentServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -110,6 +121,11 @@ def add_EnrichmentServiceServicer_to_server(servicer, server):
                     servicer.GetEnrichmentLimit,
                     request_deserializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitRequest.FromString,
                     response_serializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitResponse.SerializeToString,
+            ),
+            'AtomicOverwriteEnrichments': grpc.unary_unary_rpc_method_handler(
+                    servicer.AtomicOverwriteEnrichments,
+                    request_deserializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsRequest.FromString,
+                    response_serializer=com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -220,6 +236,33 @@ class EnrichmentService(object):
             '/com.coralogix.enrichment.v1.EnrichmentService/GetEnrichmentLimit',
             com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitRequest.SerializeToString,
             com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.GetEnrichmentLimitResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def AtomicOverwriteEnrichments(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/com.coralogix.enrichment.v1.EnrichmentService/AtomicOverwriteEnrichments',
+            com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsRequest.SerializeToString,
+            com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2.AtomicOverwriteEnrichmentsResponse.FromString,
             options,
             channel_credentials,
             insecure,

@@ -53,7 +53,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     tonic_build::configure()
         .include_file("coralogix_management_api_grpc.rs")
-        .compile_well_known_types(true)
         .build_server(false)
         .build_client(true)
         .compile(building, &["../../proto/"])?;

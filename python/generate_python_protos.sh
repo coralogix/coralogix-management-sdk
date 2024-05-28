@@ -16,7 +16,7 @@ for subdir in "$proto_dir"/*; do
       filename=$(basename "$proto_file")
 
       # Run the protoc command
-      python -m grpc_tools.protoc -I../proto --python_out=grpc --pyi_out=grpc --grpc_python_out=grpc "$proto_file"
+      python3 -m grpc_tools.protoc -I../proto --python_out=grpc --pyi_out=grpc --grpc_python_out=grpc "$proto_file"
       echo "Generated python files for $filename"
     done
   fi
