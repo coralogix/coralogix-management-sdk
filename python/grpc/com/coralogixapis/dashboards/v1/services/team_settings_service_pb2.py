@@ -17,7 +17,7 @@ from google.protobuf import descriptor_pb2 as google_dot_protobuf_dot_descriptor
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nDcom/coralogixapis/dashboards/v1/services/team_settings_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a/com/coralogixapis/dashboards/v1/audit_log.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\"J\n\x16GetTeamSettingsRequest\x12\x30\n\nrequest_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8c\x01\n\x17GetTeamSettingsResponse\x12\x36\n\x11max_group_by_logs\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x39\n\x14max_group_by_metrics\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value2\xc7\x01\n\x13TeamSettingsService\x12\xaf\x01\n\x0fGetTeamSettings\x12@.com.coralogixapis.dashboards.v1.services.GetTeamSettingsRequest\x1a\x41.com.coralogixapis.dashboards.v1.services.GetTeamSettingsResponse\"\x17\xb2\xb8\x02\x13\n\x11get team settingsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\nDcom/coralogixapis/dashboards/v1/services/team_settings_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a/com/coralogixapis/dashboards/v1/audit_log.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\"J\n\x16GetTeamSettingsRequest\x12\x30\n\nrequest_id\x18\x01 \x01(\x0b\x32\x1c.google.protobuf.StringValue\"\x8c\x01\n\x17GetTeamSettingsResponse\x12\x36\n\x11max_group_by_logs\x18\x01 \x01(\x0b\x32\x1b.google.protobuf.Int32Value\x12\x39\n\x14max_group_by_metrics\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.Int32Value2\xc7\x01\n\x13TeamSettingsService\x12\xaf\x01\n\x0fGetTeamSettings\x12@.com.coralogixapis.dashboards.v1.services.GetTeamSettingsRequest\x1a\x41.com.coralogixapis.dashboards.v1.services.GetTeamSettingsResponse\"\x17\xba\xb8\x02\x13\n\x11get team settingsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -25,7 +25,7 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'com.coralogixapis.dashboard
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
   _globals['_TEAMSETTINGSSERVICE'].methods_by_name['GetTeamSettings']._loaded_options = None
-  _globals['_TEAMSETTINGSSERVICE'].methods_by_name['GetTeamSettings']._serialized_options = b'\262\270\002\023\n\021get team settings'
+  _globals['_TEAMSETTINGSSERVICE'].methods_by_name['GetTeamSettings']._serialized_options = b'\272\270\002\023\n\021get team settings'
   _globals['_GETTEAMSETTINGSREQUEST']._serialized_start=229
   _globals['_GETTEAMSETTINGSREQUEST']._serialized_end=303
   _globals['_GETTEAMSETTINGSRESPONSE']._serialized_start=306
