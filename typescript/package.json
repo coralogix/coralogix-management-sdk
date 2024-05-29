@@ -1,0 +1,20 @@
+{
+  "name": "coralogix-sdk",
+  "version": "1.0.0",
+  "description": "A typescript SDK for Coralogix APIs",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha 'test/**/*.spec.ts' --recursive --reporter mocha-junit-reporter --timeout 60000 --exit",
+    "build": "tsc"
+  },
+  "author": "Coralogix Ltd",
+  "license": "MIT",
+  "dependencies": {
+    "ts-proto": "^1.176.1",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "mocha": "^10.4.0",
+    "mocha-junit-reporter": "^2.2.1"
+  }
+}
