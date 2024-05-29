@@ -2,7 +2,6 @@ from google.protobuf import wrappers_pb2 as _wrappers_pb2
 from com.coralogix.enrichment.v1 import enrichment_pb2 as _enrichment_pb2
 from com.coralogix.enrichment.v1 import enrichment_request_model_pb2 as _enrichment_request_model_pb2
 from com.coralogix.enrichment.v1 import audit_log_pb2 as _audit_log_pb2
-from com.coralogix.enrichment.v1 import enrichment_service_pb2 as _enrichment_service_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message

@@ -16,10 +16,9 @@ from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb
 from com.coralogix.enrichment.v1 import enrichment_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__pb2
 from com.coralogix.enrichment.v1 import enrichment_request_model_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__request__model__pb2
 from com.coralogix.enrichment.v1 import audit_log_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_audit__log__pb2
-from com.coralogix.enrichment.v1 import enrichment_service_pb2 as com_dot_coralogix_dot_enrichment_dot_v1_dot_enrichment__service__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=com/coralogix/enrichment/v1/enrichment_internal_service.proto\x12\x1b\x63om.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a+com/coralogix/enrichment/v1/audit_log.proto\x1a\x34\x63om/coralogix/enrichment/v1/enrichment_service.proto\"\x1f\n\x1dGetInternalEnrichmentsRequest\"^\n\x1eGetInternalEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"q\n\x1d\x41\x64\x64InternalEnrichmentsRequest\x12P\n\x13request_enrichments\x18\x01 \x03(\x0b\x32\x33.com.coralogix.enrichment.v1.EnrichmentRequestModel\"^\n\x1e\x41\x64\x64InternalEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"X\n RemoveInternalEnrichmentsRequest\x12\x34\n\x0e\x65nrichment_ids\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.UInt32Value\"k\n!RemoveInternalEnrichmentsResponse\x12\x46\n\x15remaining_enrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment2\xc3\x04\n\x19\x45nrichmentInternalService\x12\xb1\x01\n\x16GetInternalEnrichments\x12:.com.coralogix.enrichment.v1.GetInternalEnrichmentsRequest\x1a;.com.coralogix.enrichment.v1.GetInternalEnrichmentsResponse\"\x1e\xc2\xb8\x02\x1a\n\x18Get Internal enrichments\x12\xb1\x01\n\x16\x41\x64\x64InternalEnrichments\x12:.com.coralogix.enrichment.v1.AddInternalEnrichmentsRequest\x1a;.com.coralogix.enrichment.v1.AddInternalEnrichmentsResponse\"\x1e\xc2\xb8\x02\x1a\n\x18\x41\x64\x64 Internal enrichments\x12\xbd\x01\n\x19RemoveInternalEnrichments\x12=.com.coralogix.enrichment.v1.RemoveInternalEnrichmentsRequest\x1a>.com.coralogix.enrichment.v1.RemoveInternalEnrichmentsResponse\"!\xc2\xb8\x02\x1d\n\x1bRemove Internal enrichmentsb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n=com/coralogix/enrichment/v1/enrichment_internal_service.proto\x12\x1b\x63om.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a+com/coralogix/enrichment/v1/audit_log.proto\"\x1f\n\x1dGetInternalEnrichmentsRequest\"^\n\x1eGetInternalEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"q\n\x1d\x41\x64\x64InternalEnrichmentsRequest\x12P\n\x13request_enrichments\x18\x01 \x03(\x0b\x32\x33.com.coralogix.enrichment.v1.EnrichmentRequestModel\"^\n\x1e\x41\x64\x64InternalEnrichmentsResponse\x12<\n\x0b\x65nrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment\"X\n RemoveInternalEnrichmentsRequest\x12\x34\n\x0e\x65nrichment_ids\x18\x01 \x03(\x0b\x32\x1c.google.protobuf.UInt32Value\"k\n!RemoveInternalEnrichmentsResponse\x12\x46\n\x15remaining_enrichments\x18\x01 \x03(\x0b\x32\'.com.coralogix.enrichment.v1.Enrichment2\xc3\x04\n\x19\x45nrichmentInternalService\x12\xb1\x01\n\x16GetInternalEnrichments\x12:.com.coralogix.enrichment.v1.GetInternalEnrichmentsRequest\x1a;.com.coralogix.enrichment.v1.GetInternalEnrichmentsResponse\"\x1e\xc2\xb8\x02\x1a\n\x18Get Internal enrichments\x12\xb1\x01\n\x16\x41\x64\x64InternalEnrichments\x12:.com.coralogix.enrichment.v1.AddInternalEnrichmentsRequest\x1a;.com.coralogix.enrichment.v1.AddInternalEnrichmentsResponse\"\x1e\xc2\xb8\x02\x1a\n\x18\x41\x64\x64 Internal enrichments\x12\xbd\x01\n\x19RemoveInternalEnrichments\x12=.com.coralogix.enrichment.v1.RemoveInternalEnrichmentsRequest\x1a>.com.coralogix.enrichment.v1.RemoveInternalEnrichmentsResponse\"!\xc2\xb8\x02\x1d\n\x1bRemove Internal enrichmentsb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,18 +31,18 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_ENRICHMENTINTERNALSERVICE'].methods_by_name['AddInternalEnrichments']._serialized_options = b'\302\270\002\032\n\030Add Internal enrichments'
   _globals['_ENRICHMENTINTERNALSERVICE'].methods_by_name['RemoveInternalEnrichments']._loaded_options = None
   _globals['_ENRICHMENTINTERNALSERVICE'].methods_by_name['RemoveInternalEnrichments']._serialized_options = b'\302\270\002\035\n\033Remove Internal enrichments'
-  _globals['_GETINTERNALENRICHMENTSREQUEST']._serialized_start=331
-  _globals['_GETINTERNALENRICHMENTSREQUEST']._serialized_end=362
-  _globals['_GETINTERNALENRICHMENTSRESPONSE']._serialized_start=364
-  _globals['_GETINTERNALENRICHMENTSRESPONSE']._serialized_end=458
-  _globals['_ADDINTERNALENRICHMENTSREQUEST']._serialized_start=460
-  _globals['_ADDINTERNALENRICHMENTSREQUEST']._serialized_end=573
-  _globals['_ADDINTERNALENRICHMENTSRESPONSE']._serialized_start=575
-  _globals['_ADDINTERNALENRICHMENTSRESPONSE']._serialized_end=669
-  _globals['_REMOVEINTERNALENRICHMENTSREQUEST']._serialized_start=671
-  _globals['_REMOVEINTERNALENRICHMENTSREQUEST']._serialized_end=759
-  _globals['_REMOVEINTERNALENRICHMENTSRESPONSE']._serialized_start=761
-  _globals['_REMOVEINTERNALENRICHMENTSRESPONSE']._serialized_end=868
-  _globals['_ENRICHMENTINTERNALSERVICE']._serialized_start=871
-  _globals['_ENRICHMENTINTERNALSERVICE']._serialized_end=1450
+  _globals['_GETINTERNALENRICHMENTSREQUEST']._serialized_start=277
+  _globals['_GETINTERNALENRICHMENTSREQUEST']._serialized_end=308
+  _globals['_GETINTERNALENRICHMENTSRESPONSE']._serialized_start=310
+  _globals['_GETINTERNALENRICHMENTSRESPONSE']._serialized_end=404
+  _globals['_ADDINTERNALENRICHMENTSREQUEST']._serialized_start=406
+  _globals['_ADDINTERNALENRICHMENTSREQUEST']._serialized_end=519
+  _globals['_ADDINTERNALENRICHMENTSRESPONSE']._serialized_start=521
+  _globals['_ADDINTERNALENRICHMENTSRESPONSE']._serialized_end=615
+  _globals['_REMOVEINTERNALENRICHMENTSREQUEST']._serialized_start=617
+  _globals['_REMOVEINTERNALENRICHMENTSREQUEST']._serialized_end=705
+  _globals['_REMOVEINTERNALENRICHMENTSRESPONSE']._serialized_start=707
+  _globals['_REMOVEINTERNALENRICHMENTSRESPONSE']._serialized_end=814
+  _globals['_ENRICHMENTINTERNALSERVICE']._serialized_start=817
+  _globals['_ENRICHMENTINTERNALSERVICE']._serialized_end=1396
 # @@protoc_insertion_point(module_scope)

@@ -21,4 +21,5 @@ message UpdatePolicyRequest {
     LogRules log_rules = 8;
     SpanRules span_rules = 9;
   };
+  google.protobuf.BoolValue enabled = 10;
 }

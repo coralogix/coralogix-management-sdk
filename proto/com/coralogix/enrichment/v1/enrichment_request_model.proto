@@ -10,3 +10,10 @@ message EnrichmentRequestModel {
   EnrichmentType enrichment_type = 2;
   optional google.protobuf.StringValue enriched_field_name = 3;
 }
+
+message EnrichmentFieldDefinition {
+  // the field name of the key targeted for enrichment
+  google.protobuf.StringValue field_name = 1;
+  // the field of the enriched key after enrichment
+  optional google.protobuf.StringValue enriched_field_name = 3;
+}

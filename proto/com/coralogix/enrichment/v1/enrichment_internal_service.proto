@@ -4,7 +4,6 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogix/enrichment/v1/enrichment.proto";
 import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
 import "com/coralogix/enrichment/v1/audit_log.proto";
-import "com/coralogix/enrichment/v1/enrichment_service.proto";
 
 package com.coralogix.enrichment.v1;
 
