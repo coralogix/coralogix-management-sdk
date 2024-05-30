@@ -8,6 +8,6 @@ proto_files=($(find "$proto_dir" -name "*.proto" -print))
 for proto_file in "${proto_files[@]}" 
 do
     filename=$(basename "$proto_file")
-    python3 -m grpc_tools.protoc -I../proto --python_out=grpc --pyi_out=grpc --grpc_python_out=grpc "$proto_file"
+    python3 -m grpc_tools.protoc -I../proto --python_out=proto --pyi_out=proto --grpc_python_out=proto "$proto_file"
     echo "Generated python files for $filename"
 done
