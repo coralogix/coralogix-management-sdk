@@ -10,6 +10,26 @@ repository = "https://github.com/coralogix/rust-mgmt-sdk"
 keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]
 authors = []
-
+ 
 [workspace.dependencies]
 protofetch = "0.1.2"
+backoff = { version = "0.4", features = ["tokio"] }
+thiserror = "1"
+serde = "1"
+tokio = { version = "1", default-features = false }
+tokio-stream = "0.1.14"
+tokio-util = "0.7"
+log = "*"
+http = "*"
+humantime-serde = "*"
+prost = "*"
+prost-types = "*"
+tonic = { version = "0.11", features = ["gzip", "prost", "tls", "tls-roots"] }
+url = { version = "2.3" }
+tracing = { version = "0.1", features = ["default", "log"] }
+time = { version = "0.3", features = [
+    "formatting",
+    "macros",
+    "parsing",
+    "serde",
+ ] }

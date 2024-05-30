@@ -8,6 +8,7 @@ setup(
     install_requires=[
         'grpcio',
         'grpcio-tools',
+        'protobuf',
     ],
     author='Coralogix Ltd',
 )
