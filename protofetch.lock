@@ -22,7 +22,7 @@ commit_hash = "6950f8f3df5cbbc2537df92b74f6d09ad1f1a965"
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
 branch = "master"
-commit_hash = "dc7b78f026db1a85c1175ccee6932bcedade67ac"
+commit_hash = "abbec65c096063f9130b101bcfa4a66ea5e81daf"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -34,7 +34,7 @@ commit_hash = "c73072cb13a9a0da5ec2871107bbe98c043b92cf"
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
 branch = "master"
-commit_hash = "07bb349329f7207248d48572d8cbb92e9db1159d"
+commit_hash = "b71526cbe6b1f0c700a4b2eac4638fc8023b0257"
 
 [[dependencies]]
 name = "cx-api-incidents"

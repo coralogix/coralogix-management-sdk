@@ -187,6 +187,10 @@ message ExecutionConfig {
 
   // Enable jsona parse optimization
   optional bool optimize_jsona_parsing = 17;
+
+  // Enable repartitioning of aggregation queries. If `true` this will partition the final aggregation
+  // stage
+  optional bool repartition_aggregations = 18;
 }
 
 enum Metastore {

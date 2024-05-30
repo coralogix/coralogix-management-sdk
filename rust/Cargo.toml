@@ -1,5 +1,6 @@
 [workspace]
 members = ["cx-api", "cx-sdk"]
+exclude = ["examples/custom-enrichments"]
 resolver = "2"
 
 [workspace.package]
@@ -13,6 +14,7 @@ authors = []
  
 [workspace.dependencies]
 protofetch = "0.1.2"
+<<<<<<< HEAD
 backoff = { version = "0.4", features = ["tokio"] }
 thiserror = "1"
 serde = "1"
@@ -33,3 +35,8 @@ time = { version = "0.3", features = [
     "parsing",
     "serde",
  ] }
+=======
+tonic = { version = "0.11", features = ["gzip", "prost", "tls", "tls-roots"] }
+http = "*"
+bytes = "*"
+>>>>>>> 18d3d53 (example)
