@@ -2,11 +2,14 @@ use anyhow::Result;
 use cx_sdk::com::coralogix::enrichment::v1::custom_enrichment_service_client::CustomEnrichmentServiceClient;
 use cx_sdk::com::coralogix::enrichment::v1::enrichment_service_client::EnrichmentServiceClient;
 use cx_sdk::com::coralogix::enrichment::v1::enrichment_type::Type;
-use cx_sdk::com::coralogix::enrichment::v1::{CreateCustomEnrichmentRequest, CustomEnrichment, DeleteCustomEnrichmentResponse, Enrichment, GetCustomEnrichmentRequest, GetCustomEnrichmentsRequest};
 use cx_sdk::com::coralogix::enrichment::v1::{file::Content as FileContent, File};
 use cx_sdk::com::coralogix::enrichment::v1::{
     AddEnrichmentsRequest, CustomEnrichmentType, EnrichmentRequestModel, EnrichmentType,
     GetEnrichmentsRequest, RemoveEnrichmentsRequest,
+};
+use cx_sdk::com::coralogix::enrichment::v1::{
+    CreateCustomEnrichmentRequest, CustomEnrichment, DeleteCustomEnrichmentResponse, Enrichment,
+    GetCustomEnrichmentRequest, GetCustomEnrichmentsRequest,
 };
 use cx_sdk::com::coralogix::enrichment::v1::{
     CreateCustomEnrichmentResponse, DeleteCustomEnrichmentRequest,
@@ -105,38 +108,29 @@ impl EnrichmentService {
         {
             let mut client = self.enrichment_key_client.lock().await.clone();
             let response = client.get_enrichments(request).await?;
-            Ok(response
-                .into_inner()
-                .enrichments
-                .into_iter()
-                .collect())
+            Ok(response.into_inner().enrichments.into_iter().collect())
         }
     }
 
     pub async fn get_enrichment(&self, id: u32) -> Result<Option<CustomEnrichment>> {
-        let get_enrichments_request = GetCustomEnrichmentRequest { id: Some(id)};
+        let get_enrichments_request = GetCustomEnrichmentRequest { id: Some(id) };
         let request = make_request_with_metadata(get_enrichments_request, &self.metadata_map);
         {
             let mut client = self.custom_enrichment_client.lock().await.clone();
             let response = client.get_custom_enrichment(request).await?;
-            Ok(response
-                .into_inner()
-                .custom_enrichment)
+            Ok(response.into_inner().custom_enrichment)
         }
     }
 
     pub async fn get_enrichments(&self) -> Result<Vec<CustomEnrichment>> {
-        let get_enrichments_request = GetCustomEnrichmentsRequest { };
+        let get_enrichments_request = GetCustomEnrichmentsRequest {};
         let request = make_request_with_metadata(get_enrichments_request, &self.metadata_map);
         {
             let mut client = self.custom_enrichment_client.lock().await.clone();
             let response = client.get_custom_enrichments(request).await?;
-            Ok(response
-                .into_inner()
-                .custom_enrichments)
+            Ok(response.into_inner().custom_enrichments)
         }
     }
-
 
     async fn add_enrichment_key_mapping(
         &self,
@@ -181,14 +175,21 @@ async fn main() {
         "https://ng-api-grpc.eu2.coralogix.com".into(),
         "my-api-key".into(),
     );
-    let enrichment = svc.create_enrichment("my-enrichment".into(), "a,b,c\n1,2,3".into())
+    let enrichment = svc
+        .create_enrichment("my-enrichment".into(), "a,b,c\n1,2,3".into())
         .await
-        .unwrap().custom_enrichment.unwrap();
+        .unwrap()
+        .custom_enrichment
+        .unwrap();
     let ids = svc.list_enrichment_keys().await.unwrap();
     let enrichment_id = enrichment.id;
-    assert!(ids.iter().find(|e|e.id == enrichment.id).is_some());
+    assert!(ids.iter().find(|e| e.id == enrichment.id).is_some());
 
-    svc.add_enrichment_key_mapping(enrichment_id, "from".into(), "to".into()).await.unwrap();
-    svc.delete_enrichment_keys(ids.iter().map(|e|e.id).collect()).await.unwrap();
+    svc.add_enrichment_key_mapping(enrichment_id, "from".into(), "to".into())
+        .await
+        .unwrap();
+    svc.delete_enrichment_keys(ids.iter().map(|e| e.id).collect())
+        .await
+        .unwrap();
     let _ = svc.delete_enrichment(enrichment_id).await.unwrap();
 }
