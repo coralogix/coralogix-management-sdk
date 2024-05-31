@@ -76,7 +76,8 @@ fn outgoing_webhooks_service() -> &'static [&'static str] {
 }
 
 fn enrichment_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogix/enrichment/v1/enrichment_service.proto"]
+    &["../../proto/com/coralogix/enrichment/v1/enrichment_service.proto",
+    "../../proto/com/coralogix/enrichment/v1/custom_enrichment_service.proto"]
 }
 
 fn data_usage_service() -> &'static [&'static str] {

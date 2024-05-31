@@ -28,5 +28,14 @@ jobs:
           override: true
           components: rustfmt
 
+      - name: Install nextest
+        uses: taiki-e/install-action@nextest
+
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
+
+      - name: Cargo check
+        run: cargo check --all
+
+      - name: Cargo test
+        run: cargo nextest run --all
