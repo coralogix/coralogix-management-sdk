@@ -1,4 +1,4 @@
-pub use cx_api::proto::*; 
+pub use cx_api::proto::*;
 
 use std::fmt::{Debug, Formatter};
 
