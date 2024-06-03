@@ -1,7 +1,5 @@
 use std::path::PathBuf;
 
-use protofetch::{LockMode, Protofetch};
-
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../Cargo.lock");
@@ -11,15 +9,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     project_root.pop();
     project_root.pop();
     println!("project_root: {:?}", project_root);
-    Protofetch::builder()
-        .root(project_root)
-        .try_build()
-        .unwrap()
-        .fetch(if is_ci::cached() {
-            LockMode::Locked
-        } else {
-            LockMode::Update
-        })?;
     let building = &[
         #[cfg(feature = "alerts")]
         alerts_service(),
