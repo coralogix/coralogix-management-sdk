@@ -79,6 +79,14 @@ message QueryResultResponse {
   ArchiveLog log = 1;
 }
 
+message GetQueryRequest {
+  string id = 1;
+}
+
+message GetQueryResponse {
+  optional ArchiveQuery archive_query = 1;
+}
+
 message ArchiveQuery {
   enum Status {
     STATUS_PENDING_UNSPECIFIED = 0;

@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package com.coralogix.xdr.ingestion.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+message SecurityReport{
+
+  message Context {
+    reserved 1;
+    reserved "private_key";
+
+    google.protobuf.StringValue application_name = 2;
+    google.protobuf.StringValue subsystem_name = 3;
+    google.protobuf.StringValue computer_name = 4;
+    
+    google.protobuf.StringValue provider = 5;
+    google.protobuf.StringValue service = 6;
+    google.protobuf.StringValue execution_id = 7;
+  }
+
+  message TestResult{
+    
+    reserved 1, 2, 10;
+    reserved "provider", "service", "execution_id";
+
+    enum Result {
+      TEST_PASSED = 0;
+      TEST_FAILED = 1;
+    }
+
+    google.protobuf.StringValue name = 3; // name of the test
+    google.protobuf.Timestamp start_time = 4;
+    google.protobuf.Timestamp end_time = 5; // when it was finished
+    google.protobuf.StringValue item = 6; // 
+    google.protobuf.StringValue item_type = 7; // can be moved to the backoffice later
+    Result result = 8;
+    optional google.protobuf.Struct additional_data = 9;
+  }
+
+  Context context = 1;
+  repeated TestResult test_results = 2;
+}

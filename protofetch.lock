@@ -22,7 +22,7 @@ commit_hash = "6950f8f3df5cbbc2537df92b74f6d09ad1f1a965"
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
 branch = "master"
-commit_hash = "dc7b78f026db1a85c1175ccee6932bcedade67ac"
+commit_hash = "abbec65c096063f9130b101bcfa4a66ea5e81daf"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -34,7 +34,7 @@ commit_hash = "c73072cb13a9a0da5ec2871107bbe98c043b92cf"
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
 branch = "master"
-commit_hash = "07bb349329f7207248d48572d8cbb92e9db1159d"
+commit_hash = "f1d23922782646f5622e8776afca20821b5ef1ab"
 
 [[dependencies]]
 name = "cx-api-incidents"
@@ -58,7 +58,7 @@ commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/scopes-service"
 branch = "master"
-commit_hash = "8705d25dab82874ae9e7996c7cd5a9e1a7ae74c3"
+commit_hash = "918db08c731e5ec6c895e9716a74f34b270f8166"
 
 [[dependencies]]
 name = "cx-api-tags"
@@ -75,7 +75,7 @@ commit_hash = "dbcce655ef20280b0816bc9bc5315cd33244caac"
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "f49123a39efc18f0a20a2183629c62830725343c"
+commit_hash = "2244fe42081794c9cc8c8b1a4519365116960620"
 
 [[dependencies]]
 name = "rules-api-protobuf"

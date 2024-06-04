@@ -10,6 +10,7 @@ authors = { workspace = true }
 
 [dependencies]
 backoff = { workspace = true }
+bytes = { workspace = true }
 cx-api = { path = "../cx-api" }
 http = { workspace = true }
 humantime-serde = { workspace = true }

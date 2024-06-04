@@ -20,6 +20,11 @@ jobs:
       - name: Checkout sources
         uses: actions/checkout@v2
 
+      - name: Install Protoc
+        uses: arduino/setup-protoc@v3
+        with:
+          version: "26.1"
+
       - name: Install nightly toolchain
         uses: actions-rs/toolchain@v1
         with:
@@ -28,5 +33,14 @@ jobs:
           override: true
           components: rustfmt
 
+      - name: Install nextest
+        uses: taiki-e/install-action@nextest
+
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
+
+      - name: Cargo check
+        run: cargo check --all
+
+      - name: Cargo test
+        run: cargo nextest run --all

@@ -97,6 +97,8 @@ message AwsEventBridgeConfig {
 message IbmEventNotificationsConfig {
   google.protobuf.StringValue event_notifications_instance_id = 1;
   google.protobuf.StringValue region_id = 2;
+  google.protobuf.StringValue source_id = 3;
+  google.protobuf.StringValue source_name = 4;
 }
 
 message OutgoingWebhook {

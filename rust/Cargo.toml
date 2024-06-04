@@ -1,5 +1,6 @@
 [workspace]
 members = ["cx-api", "cx-sdk"]
+exclude = ["examples/custom-enrichments"]
 resolver = "2"
 
 [workspace.package]
@@ -12,7 +13,7 @@ categories = ["asynchronous", "log"]
 authors = []
  
 [workspace.dependencies]
-protofetch = "0.1.2"
+protofetch = "0.1.4"
 backoff = { version = "0.4", features = ["tokio"] }
 thiserror = "1"
 serde = "1"
@@ -20,7 +21,7 @@ tokio = { version = "1", default-features = false }
 tokio-stream = "0.1.14"
 tokio-util = "0.7"
 log = "*"
-http = "*"
+http = "0.2"
 humantime-serde = "*"
 prost = "*"
 prost-types = "*"
@@ -33,3 +34,4 @@ time = { version = "0.3", features = [
     "parsing",
     "serde",
  ] }
+bytes = "*"
