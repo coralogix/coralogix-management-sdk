@@ -1,7 +1,9 @@
 use anyhow::Result;
+use cx_sdk::com::coralogixapis::dashboards::v1::ast::dashboard::{
+    AutoRefresh, AutoRefreshTwoMinutes,
+};
 use cx_sdk::com::coralogixapis::dashboards::v1::ast::{Dashboard, Layout, Section, Variable};
 use cx_sdk::com::coralogixapis::dashboards::v1::services::dashboards_service_client::DashboardsServiceClient;
-use cx_sdk::com::coralogixapis::dashboards::v1::ast::dashboard::{AutoRefresh, AutoRefreshTwoMinutes};
 use cx_sdk::com::coralogixapis::dashboards::v1::services::{
     AssignDashboardFolderRequest, AssignDashboardFolderResponse, CreateDashboardRequest,
     CreateDashboardResponse, DeleteDashboardRequest, DeleteDashboardResponse, GetDashboardRequest,
@@ -9,8 +11,8 @@ use cx_sdk::com::coralogixapis::dashboards::v1::services::{
     ReplaceDashboardResponse, UnpinDashboardRequest, UnpinDashboardResponse,
 };
 use cx_sdk::{ApiKey, AuthData};
-use tokio::fs;
 use std::str::FromStr;
+use tokio::fs;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
@@ -188,11 +190,10 @@ async fn main() {
         "https://ng-api-grpc.staging.coralogix.net".into(),
         "cxup_XcQRkzmdjNuWTAHu404QnKGfG0oetu".into(),
     );
-    let db_id = "thishastobe21charslon".to_string(); 
-   // let _ = svc.delete_dashboard(db_id.clone()).await.unwrap();
-    let f = fs::read_to_string("dashboard.json").await.unwrap(); 
-    let dashboard  = serde_json::from_str(f.as_str()).unwrap(); 
-
+    let db_id = "thishastobe21charslon".to_string();
+    // let _ = svc.delete_dashboard(db_id.clone()).await.unwrap();
+    let f = fs::read_to_string("dashboard.json").await.unwrap();
+    let dashboard = serde_json::from_str(f.as_str()).unwrap();
 
     /*
     Dashboard {
@@ -209,12 +210,9 @@ async fn main() {
             folder: None,
             auto_refresh: Some(AutoRefresh::TwoMinutes(AutoRefreshTwoMinutes {})),
         } */
-        
+
     println!("{:#?}", dashboard);
-    let response = svc
-        .create_dashboard(dashboard)
-        .await
-        .unwrap();
+    let response = svc.create_dashboard(dashboard).await.unwrap();
     let actual_dashboard = svc.get_dashboard(db_id.clone()).await.unwrap();
     assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(db_id));
 }

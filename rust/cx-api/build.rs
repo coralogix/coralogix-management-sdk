@@ -40,31 +40,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     ]
     .concat();
 
-    // Replacing the original prost types with the WKT crate ones will add the serde attributes without having 
+    // Replacing the original prost types with the WKT crate ones will add the serde attributes without having
     // to recompile those proto files which would lead to having to use the raw Google protobuf types.
     tonic_build::configure()
         .type_attribute(".", "#[derive(serde::Serialize, serde::Deserialize)]")
         .type_attribute(".", "#[serde(rename_all = \"snake_case\")]")
-        .extern_path(
-            ".google.protobuf.Any",
-            "::prost_wkt_types::Any"
-        )
-        .extern_path(
-            ".google.protobuf.Struct",
-            "::prost_wkt_types::Struct"
-        )
-        .extern_path(
-            ".google.protobuf.Timestamp",
-            "::prost_wkt_types::Timestamp"
-        )  
-        .extern_path(
-            ".google.protobuf.Duration",
-            "::prost_wkt_types::Duration"
-        )
-        .extern_path(
-            ".google.protobuf.Value",
-            "::prost_wkt_types::Value"
-        )
+        .extern_path(".google.protobuf.Any", "::prost_wkt_types::Any")
+        .extern_path(".google.protobuf.Struct", "::prost_wkt_types::Struct")
+        .extern_path(".google.protobuf.Timestamp", "::prost_wkt_types::Timestamp")
+        .extern_path(".google.protobuf.Duration", "::prost_wkt_types::Duration")
+        .extern_path(".google.protobuf.Value", "::prost_wkt_types::Value")
         .include_file("coralogix_management_api_grpc.rs")
         .build_server(false)
         .build_client(true)
