@@ -1,0 +1,19 @@
+[package]
+name = "dataprime-query"
+version = "0.1.0"
+license = "MIT"
+edition = "2021"
+repository = "https://github.com/coralogix/rust-mgmt-sdk"
+keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
+categories = ["asynchronous", "log"]
+authors = []
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+tokio = { version = "*", features = ["full"] }
+http = "*"
+cx-sdk = { path = "../../cx-sdk" }
+async-trait = "*"
+tonic = "*"
+anyhow = "*"
