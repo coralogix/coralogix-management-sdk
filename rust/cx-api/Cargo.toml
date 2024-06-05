@@ -42,6 +42,10 @@ scopes = []
 prost = { workspace = true }
 prost-types = { workspace = true }
 tonic = { workspace = true }
+serde = { workspace = true }
+prost-wkt = "0.5"
+prost-wkt-types = "0.5"
 
 [build-dependencies]
 tonic-build = { version = "0.11", features = ["prost"] }
+prost-wkt-build = "0.5"

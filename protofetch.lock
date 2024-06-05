@@ -10,7 +10,7 @@ commit_hash = "90135be3e265268b53fc43d9bb56bab86b0792f1"
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
 branch = "master"
-commit_hash = "25e2d132ba87de72f7ae48f91e72146ff414f029"
+commit_hash = "0d3a4b1f4f7a48da8f685ff260286c667458a0c3"
 
 [[dependencies]]
 name = "cx-api-data-usage"
