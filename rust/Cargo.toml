@@ -11,7 +11,7 @@ repository = "https://github.com/coralogix/rust-mgmt-sdk"
 keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]
 authors = []
- 
+
 [workspace.dependencies]
 protofetch = "0.1.4"
 backoff = { version = "0.4", features = ["tokio"] }
@@ -33,5 +33,5 @@ time = { version = "0.3", features = [
     "macros",
     "parsing",
     "serde",
- ] }
+] }
 bytes = "*"
