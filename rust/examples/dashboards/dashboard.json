@@ -28,22 +28,36 @@
                 },
                 "title": "status 4XX",
                 "definition": {
-                  "line_chart": {
-                    "query_definitions": [
-                      {
-                        "query": {
-                          "metrics": {
-                            "promql_query": "http_requests_total{status!~\"4..\"}"
-                          }
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "metrics": {
+                                "promql_query": {
+                                  "value": "http_requests_total{status!~\"4..\"}"
+                                },
+                                "filters": []
+                              }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
                         }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          1,
+                          5
+                        ]
                       }
-                    ],
-                    "legend": {
-                      "is_visible": true,
-                      "columns": [
-                        "max",
-                        "last"
-                      ]
                     }
                   }
                 },
@@ -57,29 +71,45 @@
                 },
                 "title": "count",
                 "definition": {
-                  "line_chart": {
-                    "query_definitions": [
-                      {
-                        "query": {
-                          "logs": {
-                            "aggregations": [
-                              {
-                                "type": "count"
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "logs": {
+                                "group_bys": [],
+                                "group_by": [],
+                                "filters": [],
+                                "aggregations": [
+                                  {
+                                    "value": {
+                                      "count": {}
+                                    }
+                                  }
+                                ]
                               }
-                            ]
-                          }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
                         }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5
+                        ]
                       }
-                    ],
-                    "legend": {
-                      "is_visible": true,
-                      "columns    ": [
-                        "min",
-                        "max",
-                        "sum",
-                        "avg",
-                        "last"
-                      ]
                     }
                   }
                 },
@@ -93,30 +123,47 @@
                 },
                 "title": "error throwing pods",
                 "definition": {
-                  "line_chart": {
-                    "query_definitions": [
-                      {
-                        "query": {
-                          "logs": {
-                            "lucene_query": "coralogix.metadata.severity=5 OR coralogix.metadata.severity=\"6\" OR coralogix.metadata.severity=\"4\"",
-                            "group_by": [
-                              "coralogix.metadata.subsystemName"
-                            ],
-                            "aggregations": [
-                              {
-                                "type": "count"
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "logs": {
+                                "lucene_query": {
+                                  "value": "coralogix.metadata.severity=5 OR coralogix.metadata.severity=\"6\" OR coralogix.metadata.severity=\"4\""
+                                },
+                                "group_bys": [],
+                                "filters": [],
+                                "group_by": [
+                                  "coralogix.metadata.subsystemName"
+                                ],
+                                "aggregations": [
+                                  {
+                                    "value": {
+                                      "count": {}
+                                    }
+                                  }
+                                ]
                               }
-                            ]
-                          }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
                         }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          2,
+                          5
+                        ]
                       }
-                    ],
-                    "legend": {
-                      "is_visible": true,
-                      "columns": [
-                        "max",
-                        "last"
-                      ]
                     }
                   }
                 },
@@ -138,50 +185,65 @@
                 "id": {
                   "value": "234B5859-01AB-4B0C-9047-7278C63A6A23"
                 },
-                "title      ": "dashboards-api logz",
+                "title": "dashboards-api logz",
                 "description": "warnings, errors, criticals",
-                "definition ": {
-                  "data_table": {
-                    "query": {
-                      "logs": {
-                        "filters": [
-                          {
-                            "field   ": "coralogix.metadata.applicationName",
-                            "operator": {
-                              "type": "equals",
-                              "selected_values": [
-                                "staging"
-                              ]
-                            }
+                "definition": {
+                  "value": {
+                    "data_table": {
+                      "query": {
+                        "value": {
+                          "logs": {
+                            "filters": [
+                              {
+                                "field": "coralogix.metadata.applicationName",
+                                "operator": {
+                                  "value": {
+                                    "equals": {
+                                      "selection": {
+                                        "value": {
+                                          "list": {
+                                            "values": [
+                                              "staging"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
                           }
-                        ]
-                      }
-                    },
-                    "results_per_page": 20,
-                    "row_style": "one_line",
-                    "columns": [
-                      {
-                        "field": "coralogix.timestamp"
+                        },
+                        "refresh_strategy": 1
                       },
-                      {
-                        "field": "textObject.textObject.textObject.kubernetes.pod_id"
-                      },
-                      {
-                        "field": "coralogix.text"
-                      },
-                      {
-                        "field": "coralogix.metadata.applicationName"
-                      },
-                      {
-                        "field": "coralogix.metadata.subsystemName"
-                      },
-                      {
-                        "field": "coralogix.metadata.sdkId"
-                      },
-                      {
-                        "field": "textObject.log_obj.e2e_test.config"
-                      }
-                    ]
+                      "results_per_page": 20,
+                      "row_style": 1,
+                      "columns": [
+                        {
+                          "field": "coralogix.timestamp"
+                        },
+                        {
+                          "field": "textObject.textObject.textObject.kubernetes.pod_id"
+                        },
+                        {
+                          "field": "coralogix.text"
+                        },
+                        {
+                          "field": "coralogix.metadata.applicationName"
+                        },
+                        {
+                          "field": "coralogix.metadata.subsystemName"
+                        },
+                        {
+                          "field": "coralogix.metadata.sdkId"
+                        },
+                        {
+                          "field": "textObject.log_obj.e2e_test.config"
+                        }
+                      ],
+                      "data_mode_type": 1
+                    }
                   }
                 },
                 "appearance": {
@@ -200,20 +262,26 @@
       "display_name": "Test Variable",
       "display_type": 0,
       "definition": {
-        "multi_select": {
-          "selected_values": [
-            "1",
-            "2",
-            "3"
-          ],
-          "source": {
-            "constant_list": [
+        "value": {
+          "multi_select": {
+            "selected": [
               "1",
               "2",
               "3"
-            ]
-          },
-          "values_order_direction": "asc"
+            ],
+            "source": {
+              "value": {
+                "constant_list": {
+                  "values": [
+                    "1",
+                    "2",
+                    "3"
+                  ]
+                }
+              }
+            },
+            "values_order_direction": 1
+          }
         }
       }
     }
