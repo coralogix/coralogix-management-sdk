@@ -1,6 +1,6 @@
 [workspace]
 members = ["cx-api", "cx-sdk"]
-exclude = ["examples/custom-enrichments"]
+exclude = ["examples/custom-enrichments", "examples/dashboards", "examples/dataprime"]
 resolver = "2"
 
 [workspace.package]
@@ -16,7 +16,6 @@ authors = []
 protofetch = "0.1.4"
 backoff = { version = "0.4", features = ["tokio"] }
 thiserror = "1"
-serde = "1"
 tokio = { version = "1", default-features = false }
 tokio-stream = "0.1.14"
 tokio-util = "0.7"
@@ -34,4 +33,5 @@ time = { version = "0.3", features = [
     "parsing",
     "serde",
 ] }
+serde = { version = "1", features = ["derive"] }
 bytes = "*"
