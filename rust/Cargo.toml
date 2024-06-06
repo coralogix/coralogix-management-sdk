@@ -1,6 +1,6 @@
 [workspace]
 members = ["cx-api", "cx-sdk"]
-exclude = ["examples/custom-enrichments", "examples/dashboards"]
+exclude = ["examples/custom-enrichments", "examples/dashboards", "examples/dataprime"]
 resolver = "2"
 
 [workspace.package]
