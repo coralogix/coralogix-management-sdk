@@ -187,32 +187,18 @@ impl DashboardService {
 #[tokio::main]
 async fn main() {
     let svc = DashboardService::new(
-        "https://ng-api-grpc.staging.coralogix.net".into(),
-        "cxup_XcQRkzmdjNuWTAHu404QnKGfG0oetu".into(),
+        "https://ng-api-grpc.coralogix.com".into(),
+        "my-api-key".into(),
     );
-    let db_id = "thishastobe21charslon".to_string();
-    // let _ = svc.delete_dashboard(db_id.clone()).await.unwrap();
-    let f = fs::read_to_string("dashboard.json").await.unwrap();
-    let dashboard = serde_json::from_str(f.as_str()).unwrap();
+    let id = "abcdefghijklmnopqrstx".to_string();
+    let raw_dashboard = fs::read_to_string("dashboard.json").await.unwrap();
+    let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
+    let _ = svc.create_dashboard(dashboard).await.unwrap();
 
-    /*
-    Dashboard {
-            id: Some(db_id.clone()),
-            name: Some("My pretty Dashboard".to_string()),
-            description: None,
-            layout: Some(Layout {
-                sections: vec![],
-            }),
-            variables: vec![],
-            filters: vec![],
-            annotations: vec![],
-            time_frame: None,
-            folder: None,
-            auto_refresh: Some(AutoRefresh::TwoMinutes(AutoRefreshTwoMinutes {})),
-        } */
+    let actual_dashboard = svc.get_dashboard(id.clone()).await.unwrap();
+    assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));
+    let _ = svc.pin_dashboard(id.clone()).await.unwrap();
+    let _ = svc.unpin_dashboard(id.clone()).await.unwrap();
 
-    println!("{:#?}", dashboard);
-    let response = svc.create_dashboard(dashboard).await.unwrap();
-    let actual_dashboard = svc.get_dashboard(db_id.clone()).await.unwrap();
-    assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(db_id));
+    let _ = svc.delete_dashboard(id.clone()).await.unwrap();
 }
