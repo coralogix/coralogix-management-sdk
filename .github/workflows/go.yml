@@ -16,11 +16,8 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5
-    - name: golangci-lint
-      uses: golangci/golangci-lint-action@v2
     - name: Formatting check
       run: gofmt -l .
-    - name: Linting
-      run: golangci-lint run
+    - uses: golangci/golangci-lint-action@v2
     - name: test
       run: go test -v -cover ./...
