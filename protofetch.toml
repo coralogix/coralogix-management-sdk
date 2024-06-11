@@ -9,6 +9,10 @@ url = 'github.com/coralogix/cx-api-alerts'
 branch = 'master'
 url = 'github.com/coralogix/cx-api-views'
 
+[cx-api-actions]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-actions'
+
 [cx-api-extensions]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-extensions'
