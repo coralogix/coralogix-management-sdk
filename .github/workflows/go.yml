@@ -9,7 +9,6 @@ on:
 
 jobs:
   lints:
-    name: Lints
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -17,6 +16,11 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-go@v5
-      with:
-        go-version: '^1.13.1' # The Go version to download (if necessary) and use.
-    - run: go build sdk.go
+    - name: golangci-lint
+      uses: golangci/golangci-lint-action@v2
+    - name: Formatting check
+      run: gofmt -l .
+    - name: Linting
+      run: golangci-lint run
+    - name: test
+      run: go test -v -cover ./...
