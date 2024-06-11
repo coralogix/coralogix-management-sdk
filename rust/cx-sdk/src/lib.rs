@@ -1,14 +1,23 @@
+use auth::{ApiKey, AuthData};
+use com::coralogix::enrichment::v1::{
+    AddEnrichmentsRequest, CreateCustomEnrichmentRequest, DeleteCustomEnrichmentRequest,
+    GetCustomEnrichmentRequest, GetEnrichmentsRequest, RemoveEnrichmentsRequest,
+    UpdateCustomEnrichmentRequest,
+};
 pub use cx_api::proto::*;
+use error::SdkError;
+use std::{fmt::Debug, str::FromStr};
+use tonic::{
+    transport::{Channel, Endpoint},
+    Request,
+};
 
-use std::fmt::{Debug, Formatter};
-
-use http::{HeaderMap, HeaderName, HeaderValue};
-use tonic::metadata::MetadataMap;
-
-pub mod connection;
+pub mod auth;
 pub mod error;
+mod util;
 
 /// From [https://coralogix.com/docs/coralogix-domain/]()
+#[derive(Debug, Clone)]
 pub enum CoralogixRegion {
     US1,
     US2,
@@ -16,6 +25,7 @@ pub enum CoralogixRegion {
     EU2,
     AP1,
     AP2,
+    Custom(String),
 }
 
 impl CoralogixRegion {
@@ -29,82 +39,61 @@ impl CoralogixRegion {
             CoralogixRegion::EU2 => "eu2.coralogix.com",
             CoralogixRegion::AP1 => "coralogix.in",
             CoralogixRegion::AP2 => "coralogixsg.com",
+            CoralogixRegion::Custom(custom) => custom,
         }
         .to_string()
     }
 }
 
-pub struct Team {
-    /// Team name as it appears in the Coralogix UI
-    pub name: String,
+pub struct CoralogixSdk {
+    /// Coralogix API key
+    auth: AuthData,
 
-    /// Coralogix region where the team is located
+    /// Coralogix team
     pub region: CoralogixRegion,
 }
 
-impl Team {
-    /// Create a new Coralogix team
-    pub fn new(name: String, region: CoralogixRegion) -> Self {
-        Self { name, region }
+impl CoralogixSdk {
+    /// Create a new Coralogix client
+    pub fn new(auth: ApiKey, region: CoralogixRegion) -> Self {
+        Self {
+            auth: (&auth).into(),
+            region,
+        }
+    }
+
+    pub fn connect<T: WrappedClient>(&self) -> Result<T, SdkError> {
+        let channel: Channel = Endpoint::from_str(&self.region.endpoint())?.connect_lazy();
+        Ok(T::connect(channel))
+    }
+
+    pub fn auth_data(&self) -> &AuthData {
+        &self.auth
     }
 }
 
-const AUTHORIZATION_HEADER_NAME: &str = "authorization";
+pub trait WrappedClient {
+    /// Create a new client
+    fn connect(channel: Channel) -> Self;
+}
 
-#[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord)]
-pub struct ApiKey(String);
-
-impl ApiKey {
-    pub fn token(&self) -> &str {
-        &self.0
+pub trait AuthenticatedRequest
+where
+    Self: Sized,
+{
+    fn authenticate(self, authentication: &AuthData) -> Request<Self> {
+        let auth_metadata = authentication.to_metadata_map();
+        let mut req = Request::new(self);
+        let metadata = req.metadata_mut();
+        *metadata = auth_metadata.clone();
+        req
     }
 }
 
-impl From<&str> for ApiKey {
-    fn from(s: &str) -> Self {
-        ApiKey(String::from(s))
-    }
-}
-
-impl From<String> for ApiKey {
-    fn from(s: String) -> Self {
-        ApiKey(s)
-    }
-}
-
-impl Debug for ApiKey {
-    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
-        f.write_str("ApiKey(***)")
-    }
-}
-
-#[derive(Default, Debug, Clone)]
-pub struct AuthData {
-    header_map: HeaderMap,
-}
-
-impl AuthData {
-    pub fn new(header_map: HeaderMap) -> Self {
-        AuthData { header_map }
-    }
-
-    pub fn to_header_map(&self) -> HeaderMap {
-        self.header_map.clone()
-    }
-
-    pub fn to_metadata_map(&self) -> MetadataMap {
-        MetadataMap::from_headers(self.header_map.clone())
-    }
-}
-
-impl From<&ApiKey> for AuthData {
-    fn from(value: &ApiKey) -> Self {
-        let value = bytes::Bytes::from(format!("Bearer {}", value.token()));
-        let mut value = HeaderValue::from_maybe_shared(value).unwrap();
-        value.set_sensitive(true);
-        AuthData::new(HeaderMap::from_iter([(
-            HeaderName::from_static(AUTHORIZATION_HEADER_NAME),
-            value,
-        )]))
-    }
-}
+impl AuthenticatedRequest for CreateCustomEnrichmentRequest {}
+impl AuthenticatedRequest for DeleteCustomEnrichmentRequest {}
+impl AuthenticatedRequest for UpdateCustomEnrichmentRequest {}
+impl AuthenticatedRequest for GetEnrichmentsRequest {}
+impl AuthenticatedRequest for AddEnrichmentsRequest {}
+impl AuthenticatedRequest for RemoveEnrichmentsRequest {}
+impl AuthenticatedRequest for GetCustomEnrichmentRequest {}

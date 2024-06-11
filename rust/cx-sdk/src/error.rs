@@ -1,6 +1,11 @@
+use http::uri::InvalidUri;
+use tonic::transport::Error as TonicError;
+
 #[derive(Debug, thiserror::Error)]
 pub enum SdkError {
-    #[from(InvalidUri)]
     #[error("Invalid endpoint URI")]
-    TeamNotFound,
+    TeamNotFound(#[from] InvalidUri),
+
+    #[error("Endpoint not found")]
+    EndpointNotFound(#[from] TonicError),
 }
