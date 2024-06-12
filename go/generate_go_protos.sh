@@ -11,7 +11,9 @@ do
     out_module=${out_module/coralogixapis/coralogix}
     if [[ $out_module == *"coralogix"* ]]; then
         mod_path="${out_module##*../proto/com/}"
-        args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_path} "
+        args+="--go_opt=M${proto_file##*$proto_dir/}=pb/${mod_path} "
+        args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=pb/${mod_path} "
+
     fi
 done
 
@@ -19,6 +21,6 @@ done
 for proto_file in "${proto_files[@]}" 
 do
     if [[ $proto_file == *"coralogix"* ]]; then
-        protoc --proto_path=$proto_dir --go_opt=paths=source_relative --go_out=pb  $args $proto_file
+        protoc --proto_path=$proto_dir --go_out=. --go-grpc_out=. $args $proto_file
     fi
 done
