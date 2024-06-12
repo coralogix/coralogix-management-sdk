@@ -1,6 +1,6 @@
 module coralogix-management-sdk/go
 
-go 1.22.3
+go 1.22.4
 
 require (
 	github.com/grafana/grafana-api-golang-client v0.27.0
@@ -18,5 +18,4 @@ require (
 	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/genproto v0.0.0-20231002182017-d307bd883b97 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231002182017-d307bd883b97 // indirect
-	google.golang.org/grpc/cmd/protoc-gen-go-grpc v1.4.0 // indirect
 )
