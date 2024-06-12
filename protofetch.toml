@@ -1,6 +1,10 @@
 name = 'cx-api'
 proto_out_dir = './proto'
 
+[rules-api-protobuf]
+branch = 'master'
+url = 'github.com/coralogix/rules-api-protobuf'
+
 [alerts-api-protobuf]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-alerts'
@@ -16,10 +20,6 @@ url = 'github.com/coralogix/cx-api-actions'
 [cx-api-extensions]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-extensions'
-
-[rules-api-protobuf]
-branch = 'master'
-url = 'github.com/coralogix/rules-api-protobuf'
 
 [cx-api-quota]
 branch = 'master'
@@ -50,9 +50,14 @@ url = 'github.com/coralogix/cx-api-enrichment'
 branch = 'master'
 url = 'github.com/coralogix/cx-api-tags'
 
-[cx-api-incidents]
+# [cx-api-incidents]
+# branch = 'master'
+# url = 'github.com/coralogix/cx-api-incidents'
+
+[cx-api-organisations]
 branch = 'master'
-url = 'github.com/coralogix/cx-api-incidents'
+url = 'github.com/coralogix/cx-api-organisations'
+
 
 [cx-api-scopes-service]
 branch = 'master'

@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.coralogix.organisations.v1;
+
+import "com/coralogix/organisations/v1/types.proto";
+
+service TeamService {
+  rpc CreateTeam(CreateTeamRequest) returns (CreateTeamResponse) {}
+  rpc CreateTeamInOrg(CreateTeamInOrgRequest) returns (CreateTeamInOrgResponse) {}
+  rpc AddUserToOrgTeam(AddUserToOrgTeamRequest) returns (AddUserToOrgTeamResponse) {}
+}
+
+message CreateTeamRequest {
+  string team_name = 1;
+}
+message CreateTeamResponse {
+  TeamId team_id = 1;
+  string name = 2;
+  bool is_active = 3;
+  string team_url = 4;
+  string created_at = 5;
+  string updated_at = 6;
+}
+message CreateTeamInOrgRequest {
+  string team_name = 1;
+  OrganisationId organisation_id = 2;
+  repeated string team_admins = 3;
+  TeamId move_units_from = 4;
+  int32 retention_from = 5;
+  float units_to_transfer = 6;
+}
+message CreateTeamInOrgResponse {
+  TeamId team_id = 1;
+}
+
+message AddUserToOrgTeamRequest {
+  TeamId team_id = 1;
+}
+
+message AddUserToOrgTeamResponse {}

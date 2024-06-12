@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package com.coralogix.organisations.v1;
+
+import "com/coralogix/organisations/v1/types.proto";
+
+
+service QuotaService {
+  rpc TransferQuota(TransferQuotaRequest) returns (TransferQuotaResponse){}
+  rpc CalculateUnitsToSendFromTeam(CalculateUnitsToSendFromTeamRequest) returns (CalculateUnitsToSendFromTeamResponse){}
+  rpc CalculateUnitsToReceiveFromTeam(CalculateUnitsToReceiveFromTeamRequest) returns (CalculateUnitsToReceiveFromTeamResponse){}
+}
+
+message TransferQuotaRequest {
+  TeamId team_id_from = 1;
+  TeamId team_id_to = 2;
+  float proposed_unit_amount_from_team = 3;
+  float proposed_unit_amount_to_team = 4;
+}
+
+message TransferQuotaResponse {
+  TeamId team_from = 1;
+  TeamId team_to = 2;
+  float new_unit_amount_from_team = 3;
+  float new_unit_amount_to_team = 4;
+}
+
+message CalculateUnitsToSendFromTeamRequest {
+  TeamId team_id_from = 1;
+  TeamId team_id_to = 2;
+  float unit_amount_send = 3;
+}
+
+message CalculateUnitsToSendFromTeamResponse {
+  CalculateUnitsResults results = 1;
+}
+
+message CalculateUnitsToReceiveFromTeamRequest {
+  TeamId team_id_from = 1;
+  TeamId team_id_to = 2;
+  float unit_amount_receive = 3;
+}
+
+message CalculateUnitsToReceiveFromTeamResponse {
+    CalculateUnitsResults results = 1;
+}
+
+message CalculateUnitsResults {
+  TeamId team_id_from = 1;
+  TeamId team_id_to = 2;
+  float new_team_from_unit_amount = 3;
+  float new_team_to_unit_amount = 4;
+}

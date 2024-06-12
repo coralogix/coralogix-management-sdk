@@ -1,4 +1,4 @@
-module cx-sdk
+module coralogix-management-sdk/go
 
 go 1.22.3
 

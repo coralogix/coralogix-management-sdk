@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package com.coralogixapis.actions.v2;
+
+import "google/protobuf/wrappers.proto";
+
+option go_package = "com/coralogixapis/actions/v2";
+
+enum SourceType {
+  SOURCE_TYPE_UNSPECIFIED = 0;
+  SOURCE_TYPE_LOG = 1;
+  SOURCE_TYPE_DATA_MAP = 2;
+}
+
+message Action {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue url = 3;
+  google.protobuf.BoolValue is_hidden = 4;
+  google.protobuf.BoolValue is_private = 5;
+  SourceType source_type = 6;
+  repeated google.protobuf.StringValue application_names = 7;
+  repeated google.protobuf.StringValue subsystem_names = 8;
+  google.protobuf.StringValue created_by = 9;
+}
+
+message CreateActionRequest {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue url = 2;
+  google.protobuf.BoolValue is_private = 3;
+  SourceType source_type = 4;
+  repeated google.protobuf.StringValue application_names = 5;
+  repeated google.protobuf.StringValue subsystem_names = 6;
+}
+
+message CreateActionResponse {
+  Action action = 1;
+}
+
+message ReplaceActionRequest {
+  Action action = 1;
+}
+
+message ReplaceActionResponse {
+  Action action = 1;
+}
+
+message DeleteActionRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteActionResponse {}
+
+message GetActionRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetActionResponse {
+  Action action = 1;
+}
+
+message ListActionsRequest {}
+
+message ListActionsResponse {
+  repeated Action actions = 1;
+}
+
+message OrderActionsRequest {
+  map<string, google.protobuf.UInt32Value> private_actions_order = 1;
+  map<string, google.protobuf.UInt32Value> shared_actions_order = 2;
+}
+
+message OrderActionsResponse {}
+
+message ActionExecutionRequest {
+  oneof request {
+    CreateActionRequest create = 1;
+    ReplaceActionRequest replace = 2;
+    DeleteActionRequest delete = 3;
+  }
+}
+
+message ActionExecutionResponse {
+  oneof response {
+    CreateActionResponse create = 1;
+    ReplaceActionResponse replace = 2;
+    DeleteActionResponse delete = 3;
+  }
+}
+
+message AtomicBatchExecuteActionsRequest {
+  repeated ActionExecutionRequest requests = 1;
+}
+
+message AtomicBatchExecuteActionsResponse {
+  repeated ActionExecutionResponse matching_responses = 1;
+}
+
+service ActionsService {
+  /* google.protobuf.http(
+       path: "v2/actions/actions"
+       method: "POST"
+       body: "action"
+     ) */
+  rpc CreateAction(CreateActionRequest) returns (CreateActionResponse);
+
+  /* google.protobuf.http(
+       path: "v2/actions/actions"
+       method: "PUT"
+       body: "action"
+     ) */
+  rpc ReplaceAction(ReplaceActionRequest) returns (ReplaceActionResponse);
+
+  /* google.protobuf.http(
+       path: "v2/actions/actions/<id>"
+       method: "DELETE"
+     ) */
+  rpc DeleteAction(DeleteActionRequest) returns (DeleteActionResponse);
+
+  /* google.protobuf.http(
+       path: "v2/actions/actions/<id>"
+       method: "GET"
+     ) */
+  rpc GetAction(GetActionRequest) returns (GetActionResponse);
+
+  /* google.protobuf.http(
+       path: "v2/actions/actions"
+       method: "GET"
+     ) */
+  rpc ListActions(ListActionsRequest) returns (ListActionsResponse);
+
+  /* google.protobuf.http(
+       path: "v2/actions/actions:order"
+       method: "Post"
+     ) */
+  rpc OrderActions(OrderActionsRequest) returns (OrderActionsResponse);
+
+  /* google.protobuf.http(
+     path: "v2/actions/actions:atomicBatchExecute"
+     method: "Post"
+   ) */
+  rpc AtomicBatchExecuteActions(AtomicBatchExecuteActionsRequest) returns (AtomicBatchExecuteActionsResponse);
+}
