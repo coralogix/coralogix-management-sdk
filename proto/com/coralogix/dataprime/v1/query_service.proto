@@ -39,6 +39,10 @@ service DataprimeService {
     option (audit_log_description).description = "query existing dataset";
     option (google.api.http) = {post: "/api/v1/dataprime/query/dataset"};
   }
+  rpc GetPresignedDownloadUrl(GetPresignedDownloadUrlRequest) returns (GetPresignedDownloadUrlResponse) {
+    option (audit_log_description).description = "obtain presigned donwload url";
+    option (google.api.http) = {post: "/api/v1/dataprime/query/presigned-download-url"};
+  }
   rpc DropDataset(DropDatasetRequest) returns (DropDatasetResponse) {
     option (audit_log_description).description = "drop dataset";
     option (google.api.http) = {post: "/api/v1/dataprime/ddl-query/submit"};

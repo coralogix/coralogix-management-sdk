@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message ActivitySchedule {
+  repeated DayOfWeek day_of_week = 1;
+  TimeOfDay start_time = 2;
+  TimeOfDay end_time = 3;
+}
+enum DayOfWeek {
+  DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED = 0;
+  DAY_OF_WEEK_TUESDAY = 1;
+  DAY_OF_WEEK_WEDNESDAY = 2;
+  DAY_OF_WEEK_THURSDAY = 3;
+  DAY_OF_WEEK_FRIDAY = 4;
+  DAY_OF_WEEK_SATURDAY = 5;
+  DAY_OF_WEEK_SUNDAY = 6;
+}
+message TimeOfDay {
+  // Hours of day in 24 hour format. Should be from 0 to 23.
+  int32 hours = 1;
+  // Minutes of hour of day. Must be from 0 to 59.
+  int32 minutes = 2;
+}

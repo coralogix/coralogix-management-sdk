@@ -60,7 +60,7 @@ message GetDeployedExtensionsResponse {
   repeated DeployedExtension deployed_extensions = 1;
 }
 
-message DeployExtensionRequest {
+message ExtensionDeployment {
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
   repeated google.protobuf.StringValue item_ids = 3;
@@ -68,7 +68,18 @@ message DeployExtensionRequest {
   repeated google.protobuf.StringValue subsystems = 5;
 }
 
-message DeployExtensionResponse {}
+message DeployExtensionRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue version = 2;
+  repeated google.protobuf.StringValue item_ids = 3;
+  repeated google.protobuf.StringValue applications = 4;
+  repeated google.protobuf.StringValue subsystems = 5;
+  optional ExtensionDeployment extension_deployment = 6;
+}
+
+message DeployExtensionResponse {
+  ExtensionDeployment extension_deployment = 1;
+}
 
 message UpdateExtensionRequest {
   google.protobuf.StringValue id = 1;
@@ -76,9 +87,12 @@ message UpdateExtensionRequest {
   repeated google.protobuf.StringValue item_ids = 3;
   repeated google.protobuf.StringValue applications = 4;
   repeated google.protobuf.StringValue subsystems = 5;
+  optional ExtensionDeployment extension_deployment = 6;
 }
 
-message UpdateExtensionResponse {}
+message UpdateExtensionResponse {
+  ExtensionDeployment extension_deployment = 1;
+}
 
 message UndeployExtensionRequest {
   google.protobuf.StringValue id = 1;
@@ -92,4 +106,5 @@ message UndeployExtensionResponse {
     google.protobuf.StringValue reason = 3;
   }
   repeated FailedItem failed_items = 1;
+  optional ExtensionDeployment extension_deployment = 2;
 }

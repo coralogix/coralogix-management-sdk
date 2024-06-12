@@ -26,9 +26,11 @@ enum ConnectionStatus {
 }
 
 message IntegrationStatus {
+  reserved 2;
+  reserved "message";
   ConnectionStatus connection_status = 1;
-  google.protobuf.StringValue message = 2;
   map<string, string> details = 3;
+  repeated google.protobuf.StringValue messages = 4;
 }
 
 message IntegrationDoc {

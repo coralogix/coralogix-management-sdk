@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+enum LogsRatioGroupByFor {
+  LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED = 0;
+  LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY=1;
+  LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY=2;
+}

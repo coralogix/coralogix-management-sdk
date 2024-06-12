@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message MetricFilter {
+  oneof type {
+    google.protobuf.StringValue promql = 1;
+  }
+}

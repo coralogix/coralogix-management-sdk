@@ -62,7 +62,7 @@ fn tags_service() -> &'static [&'static str] {
 }
 
 fn alerts_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogix/alerts/v2/alert_service.proto"]
+    &["../../proto/com/coralogixapis/alerts/v3/alerts_service.proto"]
 }
 
 fn rules_service() -> &'static [&'static str] {

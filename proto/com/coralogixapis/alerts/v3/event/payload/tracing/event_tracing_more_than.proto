@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/event/payload/tracing/span_time_range.proto";
+
+message EventTracingMoreThan {
+  map<uint32, uint32> counters_map = 1;
+  SpanTimeRange time_range = 2;
+}
+
+

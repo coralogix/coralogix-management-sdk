@@ -132,6 +132,41 @@ message GetDatasetResponse {
   string row = 1;
 }
 
+message GetPresignedDownloadUrlRequest {
+  message Csv {
+    message Column {
+      string name = 1;
+      string keypath = 2;
+    }
+
+    bool header = 1;
+    string delimiter = 2;
+
+    repeated Column columns = 3;
+  }
+
+  message StagingLocation {
+    string region = 1;
+    string object_store_url = 2;
+    string path = 3;
+    string filename = 4;
+  }
+
+  com.coralogix.dataprime.ast.v1.Ast query_ast = 1;
+  google.protobuf.StringValue query_id = 2;
+  NamedQuerySource named_query_source = 3;
+  StagingLocation staging_location = 4;
+  uint64 valid_for_seconds = 5;
+  ExecutionConfig execution_config = 6;
+  oneof format {
+    Csv csv = 7;
+  }
+}
+
+message GetPresignedDownloadUrlResponse {
+  string url = 1;
+}
+
 message DropDatasetRequest {
   DatasetLocation dataset_location = 1;
   string dataset_name = 2;
