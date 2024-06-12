@@ -10,7 +10,7 @@ do
     out_module=$(dirname $proto_file)
     out_module=${out_module/coralogixapis/coralogix}
     if [[ $out_module == *"coralogix"* ]]; then
-        mod_path="${out_module##*../proto/com}"
+        mod_path="${out_module##*../proto/com/}"
         args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_path} "
     fi
 done
@@ -18,5 +18,7 @@ done
 # Generate go files one by one. All together only works if there are no duplicates
 for proto_file in "${proto_files[@]}" 
 do
-    protoc --proto_path=$proto_dir --go_opt=paths=import --go_out=pb  $args $proto_file
+    if [[ $proto_file == *"coralogix"* ]]; then
+        protoc --proto_path=$proto_dir --go_opt=paths=import --go_out=pb  $args $proto_file
+    fi
 done

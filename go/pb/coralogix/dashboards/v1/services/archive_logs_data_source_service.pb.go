@@ -7,8 +7,8 @@
 package services
 
 import (
-	_ "/coralogix/dashboards/v1"
-	common "/coralogix/dashboards/v1/common"
+	_ "coralogix/dashboards/v1"
+	common "coralogix/dashboards/v1/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"

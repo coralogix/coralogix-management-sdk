@@ -7,7 +7,7 @@
 package v1
 
 import (
-	v1 "/coralogix/extensions/v1"
+	v1 "coralogix/extensions/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"

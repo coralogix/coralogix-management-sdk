@@ -7,7 +7,7 @@
 package ast
 
 import (
-	common "/coralogix/dashboards/v1/common"
+	common "coralogix/dashboards/v1/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"

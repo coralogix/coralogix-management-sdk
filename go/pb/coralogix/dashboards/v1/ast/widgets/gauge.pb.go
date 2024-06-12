@@ -7,9 +7,9 @@
 package widgets
 
 import (
-	ast "/coralogix/dashboards/v1/ast"
-	common "/coralogix/dashboards/v1/ast/widgets/common"
-	common1 "/coralogix/dashboards/v1/common"
+	ast "coralogix/dashboards/v1/ast"
+	common "coralogix/dashboards/v1/ast/widgets/common"
+	common1 "coralogix/dashboards/v1/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"

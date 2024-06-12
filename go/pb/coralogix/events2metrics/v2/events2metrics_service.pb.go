@@ -7,9 +7,9 @@
 package v2
 
 import (
-	v21 "/coralogix/logs2metrics/v2"
-	_ "/coralogix/openapi/v1"
-	v2 "/coralogix/spans2metrics/v2"
+	v21 "coralogix/logs2metrics/v2"
+	_ "coralogix/openapi/v1"
+	v2 "coralogix/spans2metrics/v2"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
