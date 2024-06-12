@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	actions "coralogix-management-sdk/go/sdk/grpc/actions/v2"
+	actions "coralogix-management-sdk/go/pb/coralogix/actions/v2"
 )
 
 type ActionsClient struct {

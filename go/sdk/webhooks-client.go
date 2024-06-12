@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	webhooks "coralogix-management-sdk/go/sdk/grpc/webhooks"
+	webhooks "coralogix-management-sdk/go/pb/coralogix/webhooks"
 )
 
 type WebhooksClient struct {

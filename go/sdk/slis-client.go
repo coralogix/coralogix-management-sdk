@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	slis "coralogix-management-sdk/go/sdk/grpc/sli"
+	slis "coralogix-management-sdk/go/pb/coralogix/sli"
 )
 
 type SLIClient struct {

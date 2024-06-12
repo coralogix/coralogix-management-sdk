@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	archiveMetrics "coralogix-management-sdk/go/sdk/grpc/archive-metrics"
+	archiveMetrics "coralogix-management-sdk/go/pb/coralogix/archive-metrics"
 
 	"google.golang.org/protobuf/types/known/emptypb"
 )

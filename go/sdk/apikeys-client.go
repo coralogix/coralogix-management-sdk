@@ -2,7 +2,7 @@ package sdk
 
 import (
 	"context"
-	apikeys "coralogix-management-sdk/go/sdk/grpc/apikeys"
+	apikeys "coralogix-management-sdk/go/pb/coralogix/apikeys"
 )
 
 type ApikeysClient struct {

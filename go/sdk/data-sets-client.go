@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	enrichment "coralogix-management-sdk/go/sdk/grpc/enrichment/v1"
+	enrichment "coralogix-management-sdk/go/pb/coralogix/enrichment/v1"
 )
 
 type DataSetClient struct {

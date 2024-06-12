@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	slos "coralogix-management-sdk/go/sdk/grpc/slo"
+	slos "coralogix-management-sdk/go/pb/coralogix/slo"
 )
 
 type SLOsClient struct {

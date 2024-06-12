@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	archiveRetention "coralogix-management-sdk/go/sdk/grpc/archive-retentions"
+	archiveRetention "coralogix-management-sdk/go/pb/coralogix/archive-retentions"
 )
 
 type ArchiveRetentionsClient struct {

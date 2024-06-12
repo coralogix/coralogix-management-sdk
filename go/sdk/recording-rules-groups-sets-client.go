@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	rrg "coralogix-management-sdk/go/sdk/grpc/recording-rules-groups-sets/v1"
+	rrg "coralogix-management-sdk/go/pb/coralogix/recording-rules-groups-sets/v1"
 
 	"google.golang.org/protobuf/types/known/emptypb"
 )

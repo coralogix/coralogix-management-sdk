@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	archiveLogs "coralogix-management-sdk/go/sdk/grpc/archive-logs"
+	archiveLogs "coralogix-management-sdk/go/pb/coralogix/archive-logs"
 )
 
 type ArchiveLogsClient struct {

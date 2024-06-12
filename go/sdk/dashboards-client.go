@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	dashboards "coralogix-management-sdk/go/sdk/grpc/dashboards"
+	dashboards "coralogix-management-sdk/go/pb/coralogix/dashboards"
 )
 
 type DashboardsClient struct {

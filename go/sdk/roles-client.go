@@ -2,7 +2,7 @@ package sdk
 
 import (
 	"context"
-	roles "coralogix-management-sdk/go/sdk/grpc/roles"
+	roles "coralogix-management-sdk/go/pb/coralogix/roles"
 )
 
 type RolesClient struct {

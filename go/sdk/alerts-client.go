@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	alerts "coralogix-management-sdk/go/sdk/grpc/alerts/v2"
+	alerts "coralogix-management-sdk/go/pb/coralogix/alerts/v2"
 )
 
 type AlertsClient struct {

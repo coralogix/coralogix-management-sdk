@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	e2m "coralogix-management-sdk/go/sdk/grpc/events2metrics/v2"
+	e2m "coralogix-management-sdk/go/pb/coralogix/events2metrics/v2"
 )
 
 type Events2MetricsClient struct {

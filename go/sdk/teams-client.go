@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	teams "coralogix-management-sdk/go/sdk/grpc/teams"
+	teams "coralogix-management-sdk/go/pb/coralogix/teams"
 )
 
 type TeamsClient struct {

@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	rulesgroups "coralogix-management-sdk/go/sdk/grpc/rules-groups/v1"
+	rulesgroups "coralogix-management-sdk/go/pb/coralogix/rules-groups/v1"
 )
 
 type RuleGroupsClient struct {

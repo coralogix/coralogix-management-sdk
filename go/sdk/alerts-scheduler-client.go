@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	alertsSchedulers "coralogix-management-sdk/go/sdk/grpc/alerts-scheduler"
+	alertsSchedulers "coralogix-management-sdk/go/pb/coralogix/alerts-scheduler"
 )
 
 type AlertsSchedulersClient struct {

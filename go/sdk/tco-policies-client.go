@@ -3,7 +3,7 @@ package sdk
 import (
 	"context"
 
-	tcopolicies "coralogix-management-sdk/go/sdk/grpc/tco-policies"
+	tcopolicies "coralogix-management-sdk/go/pb/coralogix/tco-policies"
 )
 
 type TCOPoliciesClient struct {
