@@ -7,7 +7,6 @@
 package v2
 
 import (
-	v1 "coralogix/alerts/v1"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -15,6 +14,7 @@ import (
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	v1 "pb/coralogix/alerts/v1"
 	reflect "reflect"
 	sync "sync"
 )

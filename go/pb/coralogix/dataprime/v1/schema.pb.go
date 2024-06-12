@@ -7,9 +7,9 @@
 package v1
 
 import (
-	v1 "coralogix/dataprime/ast/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	v1 "pb/coralogix/dataprime/ast/v1"
 	reflect "reflect"
 	sync "sync"
 )

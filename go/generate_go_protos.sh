@@ -19,6 +19,6 @@ done
 for proto_file in "${proto_files[@]}" 
 do
     if [[ $proto_file == *"coralogix"* ]]; then
-        protoc --proto_path=$proto_dir --go_opt=paths=import --go_out=pb  $args $proto_file
+        protoc --proto_path=$proto_dir --go_opt=paths=source_relative --go_out=pb  $args $proto_file
     fi
 done

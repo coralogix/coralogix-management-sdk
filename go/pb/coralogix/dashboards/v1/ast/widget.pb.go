@@ -7,12 +7,12 @@
 package ast
 
 import (
-	v1 "coralogix/dashboards/v1"
-	widgets "coralogix/dashboards/v1/ast/widgets"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	v1 "pb/coralogix/dashboards/v1"
+	widgets "pb/coralogix/dashboards/v1/ast/widgets"
 	reflect "reflect"
 	sync "sync"
 )

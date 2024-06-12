@@ -7,10 +7,10 @@
 package v1
 
 import (
-	_ "coralogix/dataprime/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/descriptorpb"
+	_ "pb/coralogix/dataprime/v1"
 	reflect "reflect"
 )
 

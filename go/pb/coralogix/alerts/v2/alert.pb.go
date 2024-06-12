@@ -7,10 +7,10 @@
 package v2
 
 import (
-	v1 "coralogix/alerts/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	v1 "pb/coralogix/alerts/v1"
 	reflect "reflect"
 	sync "sync"
 )

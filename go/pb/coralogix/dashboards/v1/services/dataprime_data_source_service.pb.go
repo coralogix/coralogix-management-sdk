@@ -7,11 +7,11 @@
 package services
 
 import (
-	_ "coralogix/dashboards/v1"
-	common "coralogix/dashboards/v1/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
+	_ "pb/coralogix/dashboards/v1"
+	common "pb/coralogix/dashboards/v1/common"
 	reflect "reflect"
 	sync "sync"
 )
