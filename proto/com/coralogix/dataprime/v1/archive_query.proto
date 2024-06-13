@@ -23,6 +23,16 @@ message RunQueryRequest {
   repeated google.protobuf.StringValue subsystem_filters = 10;
   optional google.protobuf.StringValue widget_id = 11;
   optional google.protobuf.StringValue request_params_hash = 12;
+  optional OutputSchema tsv_output_schema = 13;
+}
+
+message OutputSchema {
+  // empty means default fields
+  repeated OutputSchemaField fields = 1;
+}
+
+message OutputSchemaField {
+  repeated google.protobuf.StringValue path = 1;
 }
 
 message RunQueryResponse {
@@ -116,4 +126,5 @@ message ArchiveQuery {
   bool scan_limit_reached = 19;
   bool blocks_limit_reached = 20;
   ArchiveWarning archive_warning = 21;
+  optional OutputSchema tsv_output_schema = 22;
 }

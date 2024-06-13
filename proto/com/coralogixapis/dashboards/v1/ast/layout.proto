@@ -39,4 +39,22 @@ message CustomSectionOptions {
   google.protobuf.StringValue name = 1;
   google.protobuf.StringValue description = 2;
   google.protobuf.BoolValue collapsed = 3;
+  SectionColor color = 4;
+}
+
+message SectionColor {
+  oneof value {
+    SectionPredefinedColor predefined = 1;
+  }
+}
+
+enum SectionPredefinedColor {
+  SECTION_PREDEFINED_COLOR_UNSPECIFIED = 0;
+  SECTION_PREDEFINED_COLOR_CYAN = 1;
+  SECTION_PREDEFINED_COLOR_GREEN = 2;
+  SECTION_PREDEFINED_COLOR_BLUE = 3;
+  SECTION_PREDEFINED_COLOR_PURPLE = 4;
+  SECTION_PREDEFINED_COLOR_MAGENTA = 5;
+  SECTION_PREDEFINED_COLOR_PINK = 6;
+  SECTION_PREDEFINED_COLOR_ORANGE = 7;
 }
