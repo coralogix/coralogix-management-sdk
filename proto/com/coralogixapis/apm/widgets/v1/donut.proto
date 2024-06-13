@@ -1,0 +1,23 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogixapis/apm/widgets/v1/float_result.proto";
+import "com/coralogixapis/apm/widgets/v1/widget_group.proto";
+
+package com.coralogixapis.apm.widgets.v1;
+
+/*
+    This message is for a Donut chart widget
+    It has the following properties:
+    * display_name - The User Facing Name
+    * query - The promql/metricsql query ran
+    * results - A map of floating point resutls
+    * total - The total of the result group
+*/
+message Donut {
+    WidgetGroup group = 1;
+    google.protobuf.StringValue display_name = 2;
+    repeated FloatResult results = 3;
+    FloatResult total = 4;
+}

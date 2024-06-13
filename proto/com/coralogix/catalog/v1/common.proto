@@ -1,0 +1,9 @@
+syntax = "proto3";
+package com.coralogix.catalog.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message TimeRange {
+  google.protobuf.Int64Value start = 1;
+  google.protobuf.Int64Value end = 2;
+}

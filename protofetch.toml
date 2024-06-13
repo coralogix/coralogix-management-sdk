@@ -58,20 +58,38 @@ url = 'github.com/coralogix/cx-api-tags'
 branch = 'master'
 url = 'github.com/coralogix/cx-api-organisations'
 
+[cx-api-service-catalog]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-service-catalog'
 
 [cx-api-scopes-service]
 branch = 'master'
 url = 'github.com/coralogix/scopes-service'
-content_roots = ["/modules/service/proto"]
+
+[cx-api-schema-store]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-schema-store'
+
+[cx-api-apm]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-apm'
+
+[cx-api-alert-scheduler]
+branch = 'master'
+url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
 
 [google-api]
 url = "github.com/googleapis/googleapis"
 allow_policies = [
     "/google/api/annotations.proto",
-    "/google/api/http.proto",
-    "/google/api/field_behavior.proto",
-    "google/rpc/status.proto",
     "/google/api/client.proto",
-    "/google/api/resource.proto",
+    "/google/api/field_behavior.proto",
+    "/google/api/http.proto",
     "/google/api/launch_stage.proto",
+    "/google/api/resource.proto",
+    "google/rpc/status.proto",
 ]
+
+[global-mapping]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-global-mapping'

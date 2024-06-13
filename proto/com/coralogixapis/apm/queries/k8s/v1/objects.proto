@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.apm.queries.k8s.v1;
+
+enum K8sObject{
+  K8S_OBJECT_UNSPECIFIED = 0;
+  K8S_OBJECT_POD = 1;
+  K8S_OBJECT_NODE = 2;
+  K8S_OBJECT_APP = 3;
+}

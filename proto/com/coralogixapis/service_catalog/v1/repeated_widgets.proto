@@ -1,0 +1,8 @@
+syntax = "proto3";
+package com.coralogixapis.service_catalog.v1;
+
+import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
+
+message RepeatedLineChart {
+  repeated com.coralogixapis.apm.widgets.v1.LineChart line_charts = 1;
+}

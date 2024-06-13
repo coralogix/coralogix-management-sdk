@@ -30,10 +30,13 @@ message IntegrationStatus {
   reserved "message";
   ConnectionStatus connection_status = 1;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   // Deprecated in favor of messages
   google.protobuf.StringValue message = 2;
 >>>>>>> 187311b (protofetch changes for go)
+=======
+>>>>>>> 9db70e5 (more protos)
   map<string, string> details = 3;
   repeated google.protobuf.StringValue messages = 4;
 }

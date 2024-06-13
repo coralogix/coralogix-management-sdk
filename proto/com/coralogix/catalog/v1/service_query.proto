@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogix.catalog.v1;
+
+import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogix/catalog/v1/service.proto";
+
+message ServiceQuery {
+  TimeRange time_range = 1;
+  repeated ServiceCatalogFilter service_catalog_filters = 2;
+}

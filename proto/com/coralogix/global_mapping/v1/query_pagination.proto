@@ -1,0 +1,21 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/measurement_query.proto";
+
+package com.coralogix.global_mapping.v1;
+
+enum SortOrder {
+  SORT_ORDER_DESCENDING_OR_UNSPECIFIED = 0;
+  SORT_ORDER_ASCENDING = 1;
+}
+
+message PaginationData {
+  google.protobuf.Int32Value page_size = 1;
+  google.protobuf.Int32Value page_index = 2;
+  SortOrder order_by = 3;
+  google.protobuf.StringValue order_by_measurement = 4;
+}
+
+message TableRow {
+  repeated MeasurementQuery queries = 1;
+}
