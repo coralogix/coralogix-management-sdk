@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	rulesgroups "coralogix-management-sdk/go/internal/coralogix/rules-groups/v1"
+	rulesgroups "coralogix-management-sdk/go/internal/coralogix/rules/v1"
 )
 
 type RuleGroupsClient struct {
