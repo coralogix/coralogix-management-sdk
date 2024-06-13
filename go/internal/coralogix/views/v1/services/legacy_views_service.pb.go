@@ -7,11 +7,11 @@
 package services
 
 import (
+	v1 "coralogix-management-sdk/go/internal/coralogix/views/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-	v1 "internal/coralogix/views/v1"
 	reflect "reflect"
 	sync "sync"
 )

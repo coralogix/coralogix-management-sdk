@@ -7,13 +7,13 @@
 package widgets
 
 import (
+	_ "coralogix-management-sdk/go/internal/coralogix/dashboards/v1"
+	common "coralogix-management-sdk/go/internal/coralogix/dashboards/v1/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-	_ "internal/coralogix/dashboards/v1"
-	common "internal/coralogix/dashboards/v1/common"
 	reflect "reflect"
 	sync "sync"
 )

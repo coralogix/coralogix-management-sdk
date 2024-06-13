@@ -65,6 +65,7 @@ url = 'github.com/coralogix/cx-api-service-catalog'
 [cx-api-scopes-service]
 branch = 'master'
 url = 'github.com/coralogix/scopes-service'
+content_roots = ["modules/service/proto/"]
 
 [cx-api-schema-store]
 branch = 'master'

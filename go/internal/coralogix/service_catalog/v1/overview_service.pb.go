@@ -7,12 +7,12 @@
 package v1
 
 import (
+	v2 "coralogix-management-sdk/go/internal/coralogix/apm/common/v2"
+	v1 "coralogix-management-sdk/go/internal/coralogix/apm/widgets/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-	v2 "internal/coralogix/apm/common/v2"
-	v1 "internal/coralogix/apm/widgets/v1"
 	reflect "reflect"
 	sync "sync"
 )

@@ -7,11 +7,11 @@
 package v2
 
 import (
+	_ "coralogix-management-sdk/go/internal/coralogix/logs2metrics/v2"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
-	_ "internal/coralogix/logs2metrics/v2"
 	reflect "reflect"
 	sync "sync"
 )

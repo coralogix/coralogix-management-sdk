@@ -7,9 +7,9 @@
 package v1
 
 import (
+	v1 "coralogix-management-sdk/go/internal/coralogix/apm/widgets/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	v1 "internal/coralogix/apm/widgets/v1"
 	reflect "reflect"
 	sync "sync"
 )
