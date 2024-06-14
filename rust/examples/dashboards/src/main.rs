@@ -1,8 +1,6 @@
 use anyhow::Result;
-use cx_sdk::com::coralogixapis::dashboards::v1::ast::dashboard::{
-    AutoRefresh, AutoRefreshTwoMinutes,
-};
-use cx_sdk::com::coralogixapis::dashboards::v1::ast::{Dashboard, Layout, Section, Variable};
+use cx_sdk::auth::{ApiKey, AuthData};
+use cx_sdk::com::coralogixapis::dashboards::v1::ast::Dashboard;
 use cx_sdk::com::coralogixapis::dashboards::v1::services::dashboards_service_client::DashboardsServiceClient;
 use cx_sdk::com::coralogixapis::dashboards::v1::services::{
     AssignDashboardFolderRequest, AssignDashboardFolderResponse, CreateDashboardRequest,
@@ -10,7 +8,6 @@ use cx_sdk::com::coralogixapis::dashboards::v1::services::{
     GetDashboardResponse, PinDashboardRequest, PinDashboardResponse, ReplaceDashboardRequest,
     ReplaceDashboardResponse, UnpinDashboardRequest, UnpinDashboardResponse,
 };
-use cx_sdk::{ApiKey, AuthData};
 use std::str::FromStr;
 use tokio::fs;
 use tokio::sync::Mutex;
@@ -159,6 +156,7 @@ impl DashboardService {
         }
     }
 
+    #[allow(dead_code)]
     async fn assign_dashboard_to_folder(
         &self,
         dashboard_id: String,
@@ -186,10 +184,7 @@ impl DashboardService {
 
 #[tokio::main]
 async fn main() {
-    let svc = DashboardService::new(
-        "https://ng-api-grpc.coralogix.com".into(),
-        "my-api-key".into(),
-    );
+    let svc = DashboardService::new("https://ng-api-grpc.coralogix.com", "my-api-key".into());
     let id = "abcdefghijklmnopqrstx".to_string();
     let raw_dashboard = fs::read_to_string("dashboard.json").await.unwrap();
     let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
