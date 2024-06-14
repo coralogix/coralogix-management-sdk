@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	actions "coralogix-management-sdk/go/internal/coralogix/actions/v2"
+	actions "coralogix-management-sdk/go/internal/coralogixapis/actions/v2"
 )
 
 type ActionsClient struct {

@@ -65,7 +65,8 @@ url = 'github.com/coralogix/cx-api-service-catalog'
 [cx-api-scopes-service]
 branch = 'master'
 url = 'github.com/coralogix/scopes-service'
-content_roots = ["modules/service/proto/"]
+allow_policies = ["/modules/service/proto/*"]
+content_roots = ["/modules/service/proto/"]
 
 [cx-api-schema-store]
 branch = 'master'
@@ -78,6 +79,21 @@ url = 'github.com/coralogix/cx-api-apm'
 [cx-api-alert-scheduler]
 branch = 'master'
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
+
+[cx-api-permissions]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-permissions'
+allow_policies = ["/com/coralogixapis/aaa/apikeys/v2/*"]
+
+[cx-api-archive]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-archive'
+
+[cx-api-metrics-configurator]
+branch = 'master'
+url = 'github.com/coralogix/metrics-configurator'
+allow_policies = ["/proto/com/coralogix/*"]
+content_roots = ["/proto"]
 
 [google-api]
 url = "github.com/googleapis/googleapis"

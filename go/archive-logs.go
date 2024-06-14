@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	archiveLogs "coralogix-management-sdk/go/internal/coralogix/archive-logs"
+	archiveLogs "coralogix-management-sdk/go/internal/coralogix/archive/v2"
 )
 
 type ArchiveLogsClient struct {

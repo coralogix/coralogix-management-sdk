@@ -7,6 +7,7 @@
 package v1
 
 import (
+	v1 "coralogix-management-sdk/go/internal/coralogixapis/dataprime/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -74,28 +75,28 @@ func (m *QueryResponse) GetMessage() isQueryResponse_Message {
 	return nil
 }
 
-func (x *QueryResponse) GetError() *DataprimeError {
+func (x *QueryResponse) GetError() *v1.DataprimeError {
 	if x, ok := x.GetMessage().(*QueryResponse_Error); ok {
 		return x.Error
 	}
 	return nil
 }
 
-func (x *QueryResponse) GetResult() *DataprimeResult {
+func (x *QueryResponse) GetResult() *v1.DataprimeResult {
 	if x, ok := x.GetMessage().(*QueryResponse_Result); ok {
 		return x.Result
 	}
 	return nil
 }
 
-func (x *QueryResponse) GetWarning() *DataprimeWarning {
+func (x *QueryResponse) GetWarning() *v1.DataprimeWarning {
 	if x, ok := x.GetMessage().(*QueryResponse_Warning); ok {
 		return x.Warning
 	}
 	return nil
 }
 
-func (x *QueryResponse) GetQueryId() *QueryId {
+func (x *QueryResponse) GetQueryId() *v1.QueryId {
 	if x, ok := x.GetMessage().(*QueryResponse_QueryId); ok {
 		return x.QueryId
 	}
@@ -107,19 +108,19 @@ type isQueryResponse_Message interface {
 }
 
 type QueryResponse_Error struct {
-	Error *DataprimeError `protobuf:"bytes,1,opt,name=error,proto3,oneof"`
+	Error *v1.DataprimeError `protobuf:"bytes,1,opt,name=error,proto3,oneof"`
 }
 
 type QueryResponse_Result struct {
-	Result *DataprimeResult `protobuf:"bytes,2,opt,name=result,proto3,oneof"`
+	Result *v1.DataprimeResult `protobuf:"bytes,2,opt,name=result,proto3,oneof"`
 }
 
 type QueryResponse_Warning struct {
-	Warning *DataprimeWarning `protobuf:"bytes,3,opt,name=warning,proto3,oneof"`
+	Warning *v1.DataprimeWarning `protobuf:"bytes,3,opt,name=warning,proto3,oneof"`
 }
 
 type QueryResponse_QueryId struct {
-	QueryId *QueryId `protobuf:"bytes,4,opt,name=query_id,json=queryId,proto3,oneof"`
+	QueryId *v1.QueryId `protobuf:"bytes,4,opt,name=query_id,json=queryId,proto3,oneof"`
 }
 
 func (*QueryResponse_Error) isQueryResponse_Message() {}
@@ -179,11 +180,11 @@ func file_com_coralogix_dataprime_v1_internal_query_response_proto_rawDescGZIP()
 
 var file_com_coralogix_dataprime_v1_internal_query_response_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_com_coralogix_dataprime_v1_internal_query_response_proto_goTypes = []interface{}{
-	(*QueryResponse)(nil),    // 0: com.coralogix.dataprime.v1.QueryResponse
-	(*DataprimeError)(nil),   // 1: com.coralogixapis.dataprime.v1.DataprimeError
-	(*DataprimeResult)(nil),  // 2: com.coralogixapis.dataprime.v1.DataprimeResult
-	(*DataprimeWarning)(nil), // 3: com.coralogixapis.dataprime.v1.DataprimeWarning
-	(*QueryId)(nil),          // 4: com.coralogixapis.dataprime.v1.QueryId
+	(*QueryResponse)(nil),       // 0: com.coralogix.dataprime.v1.QueryResponse
+	(*v1.DataprimeError)(nil),   // 1: com.coralogixapis.dataprime.v1.DataprimeError
+	(*v1.DataprimeResult)(nil),  // 2: com.coralogixapis.dataprime.v1.DataprimeResult
+	(*v1.DataprimeWarning)(nil), // 3: com.coralogixapis.dataprime.v1.DataprimeWarning
+	(*v1.QueryId)(nil),          // 4: com.coralogixapis.dataprime.v1.QueryId
 }
 var file_com_coralogix_dataprime_v1_internal_query_response_proto_depIdxs = []int32{
 	1, // 0: com.coralogix.dataprime.v1.QueryResponse.error:type_name -> com.coralogixapis.dataprime.v1.DataprimeError
@@ -202,7 +203,6 @@ func file_com_coralogix_dataprime_v1_internal_query_response_proto_init() {
 	if File_com_coralogix_dataprime_v1_internal_query_response_proto != nil {
 		return
 	}
-	file_com_coralogixapis_dataprime_v1_response_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_com_coralogix_dataprime_v1_internal_query_response_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*QueryResponse); i {

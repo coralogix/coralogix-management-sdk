@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/archive/v1/target.proto";
+
+message IsArchiveConfiguredRequest {
+  repeated uint32 company_ids = 1;
+}
+
+message IsArchiveConfiguredResponse {
+  bool is_configured = 1;
+  repeated CompanyArchiveConfig company_archive_configs = 2;
+}
+
+message InternalTargetServiceIsArchiveConfiguredRequest {
+  repeated uint32 company_ids = 1;
+}
+
+message InternalTargetServiceIsArchiveConfiguredResponse {
+  repeated CompanyArchiveConfig company_archive_configs = 1;
+}
+
+message CompanyArchiveConfig {
+  uint32 company_id = 1;
+  bool archive_configured = 2;
+}
+
+message GetTargetRequest {
+}
+
+message GetTargetResponse {
+  Target target = 1;
+}
+
+message SetTargetRequest {
+  google.protobuf.StringValue bucket = 1;
+  google.protobuf.BoolValue is_active = 2;
+}
+
+message SetTargetResponse {
+  Target target = 1;
+}
+
+service TargetService {
+  rpc IsArchiveConfigured(IsArchiveConfiguredRequest) returns (IsArchiveConfiguredResponse) {
+    option (audit_log_description).description = "Is archive configured";
+  }
+
+  rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
+    option (audit_log_description).description = "Get target";
+  }
+  
+  rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
+    option (audit_log_description).description = "Set target";
+  }
+}
+
+service InternalTargetService {
+  rpc IsArchiveConfigured(InternalTargetServiceIsArchiveConfiguredRequest) returns (InternalTargetServiceIsArchiveConfiguredResponse) {
+    option (audit_log_description).description = "Is archive configured";
+  }
+}

@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	dashboards "coralogix-management-sdk/go/internal/coralogix/dashboards"
+	dashboards "coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/services"
 )
 
 type DashboardsFoldersClient struct {

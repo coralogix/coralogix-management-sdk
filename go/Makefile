@@ -6,6 +6,9 @@ OS_ARCH=darwin_arm64
 
 default: build
 
+# protos:
+#     $(shell scripts/generate_go_protos.sh)
+
 build:
 	go build -o ${BINARY}
 

@@ -25,6 +25,12 @@ branch = "master"
 commit_hash = "72e9f741c6dbdf3b1461b8de28f2bb8ed8202350"
 
 [[dependencies]]
+name = "cx-api-archive"
+url = "github.com/coralogix/cx-api-archive"
+branch = "master"
+commit_hash = "b2bfe1a6ea40b77c6574dee2c4eef16f65dab147"
+
+[[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
 branch = "master"
@@ -40,7 +46,7 @@ commit_hash = "6950f8f3df5cbbc2537df92b74f6d09ad1f1a965"
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
 branch = "master"
-commit_hash = "d124c7fc9d63af610cb530d2725f2886012478be"
+commit_hash = "f1c010d2d37e8f72503431b0d73d146bb8a34288"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -61,10 +67,22 @@ branch = "master"
 commit_hash = "ec44a77572bf77cf5c731107238bbda65e7c1089"
 
 [[dependencies]]
+name = "cx-api-metrics-configurator"
+url = "github.com/coralogix/metrics-configurator"
+branch = "master"
+commit_hash = "e27e4cbbc9aaa2c8c5f2739ceb1ab168284ede06"
+
+[[dependencies]]
 name = "cx-api-organisations"
 url = "github.com/coralogix/cx-api-organisations"
 branch = "master"
 commit_hash = "9864f17666e61fd9af6e125bbd301bebf628a35f"
+
+[[dependencies]]
+name = "cx-api-permissions"
+url = "github.com/coralogix/cx-api-permissions"
+branch = "master"
+commit_hash = "ce68b4a8dee77a77c092f3a7d47c6fe1a5060aca"
 
 [[dependencies]]
 name = "cx-api-quota"

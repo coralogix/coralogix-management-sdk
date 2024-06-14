@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	alertsSchedulers "coralogix-management-sdk/go/internal/coralogix/alerts-scheduler"
+	alertsSchedulers "coralogix-management-sdk/go/internal/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1"
 )
 
 type AlertsSchedulersClient struct {

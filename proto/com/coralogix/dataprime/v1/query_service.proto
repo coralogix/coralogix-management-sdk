@@ -40,7 +40,7 @@ service DataprimeService {
     option (google.api.http) = {post: "/api/v1/dataprime/query/dataset"};
   }
   rpc GetPresignedDownloadUrl(GetPresignedDownloadUrlRequest) returns (GetPresignedDownloadUrlResponse) {
-    option (audit_log_description).description = "obtain presigned donwload url";
+    option (audit_log_description).description = "obtain presigned download url";
     option (google.api.http) = {post: "/api/v1/dataprime/query/presigned-download-url"};
   }
   rpc DropDataset(DropDatasetRequest) returns (DropDatasetResponse) {

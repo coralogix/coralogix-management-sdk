@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/archive/v2/target.proto";
+import "com/coralogix/archive/v2/internal_get_targets.proto";
+
+message GetTargetRequest {}
+
+message GetTargetResponse {
+  Target target = 1;
+}
+
+message SetTargetRequest {
+  bool is_active = 1;
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+    IBMCosTargetSpec ibm_cos = 3;
+  }}
+
+message SetTargetResponse {
+  Target target = 1;
+}
+
+message CompanyArchiveConfig {
+  uint32 company_id = 1;
+  bool archive_configured = 2;
+}
+
+message ValidateTargetRequest {
+  bool is_active = 1;
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+    IBMCosTargetSpec ibm_cos = 3;
+  }}
+
+message ValidateTargetResponse {
+  bool is_valid = 1;
+}
+
+service TargetService {
+  rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get target";
+  }
+  
+  rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Set target";
+  }
+
+  rpc ValidateTarget(ValidateTargetRequest) returns (ValidateTargetResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Validate target";
+  }
+}
+
+service InternalTargetService {
+  rpc GetTargets(InternalTargetServiceGetTargetsRequest) returns (InternalTargetServiceGetTargetsResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get targets";
+  }
+}

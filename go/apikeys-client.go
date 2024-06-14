@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	apikeys "coralogix-management-sdk/go/internal/coralogix/apikeys"
+	apikeys "coralogix-management-sdk/go/internal/coralogixapis/aaa/apikeys/v2"
 )
 
 type ApikeysClient struct {

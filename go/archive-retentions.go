@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	archiveRetention "coralogix-management-sdk/go/internal/coralogix/archive-retentions"
+	archiveRetention "coralogix-management-sdk/go/internal/coralogix/archive/v1"
 )
 
 type ArchiveRetentionsClient struct {

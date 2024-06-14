@@ -8,9 +8,9 @@ args=""
 for proto_file in "${proto_files[@]}" 
 do
     out_module=$(dirname $proto_file)
-    out_module=${out_module/coralogixapis/coralogix}
+    # out_module=${out_module/coralogixapis/coralogix}
     if [[ $out_module == *"coralogix"* ]]; then
-        mod_path="${out_module##*../proto/com/}"
+        mod_path="${out_module##*/com/}"
         args+="--go_opt=M${proto_file##*$proto_dir/}=coralogix-management-sdk/go/internal/${mod_path} "
         args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=coralogix-management-sdk/go/internal/${mod_path} "
 

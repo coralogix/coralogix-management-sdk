@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	e2m "coralogix-management-sdk/go/internal/coralogix/events2metrics/v2"
+	e2m "coralogix-management-sdk/go/internal/coralogixapis/events2metrics/v2"
 )
 
 type Events2MetricsClient struct {

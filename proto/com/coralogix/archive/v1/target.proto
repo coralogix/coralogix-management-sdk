@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message Target {
+  google.protobuf.StringValue archiving_format_id = 1;
+  google.protobuf.BoolValue is_active = 2;
+  google.protobuf.StringValue region = 3;
+  google.protobuf.StringValue bucket = 4;
+  google.protobuf.BoolValue enable_tags = 5;
+}
