@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	slis "coralogix-management-sdk/go/internal/coralogix/sli"
+	slis "coralogix-management-sdk/go/internal/coralogix/catalog/v1"
 )
 
 type SLIClient struct {

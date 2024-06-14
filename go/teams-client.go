@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	teams "coralogix-management-sdk/go/internal/coralogix/teams"
+	teams "coralogix-management-sdk/go/internal/coralogix/organisations/v1"
 )
 
 type TeamsClient struct {

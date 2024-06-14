@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	slos "coralogix-management-sdk/go/internal/coralogix/slo"
+	slos "coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 )
 
 type SLOsClient struct {

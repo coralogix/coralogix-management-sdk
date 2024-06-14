@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	webhooks "coralogix-management-sdk/go/internal/coralogix/webhooks"
+	webhooks "coralogix-management-sdk/go/internal/coralogix/outgoing_webhooks/v1"
 )
 
 type WebhooksClient struct {

@@ -2,7 +2,7 @@ package cxsdk
 
 import (
 	"context"
-	tcopolicies "coralogix-management-sdk/go/internal/coralogix/tco-policies"
+	tcopolicies "coralogix-management-sdk/go/internal/coralogix/quota/v1"
 )
 
 type TCOPoliciesClient struct {
