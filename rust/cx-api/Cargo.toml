@@ -16,11 +16,9 @@ default = [
     "dataprime",
     "enrichment",
     "extensions",
-    "incidents",
     "outgoing_webhooks",
     "quota",
     "rules",
-    "scopes",
     "tags",
     "views",
 ]
@@ -34,9 +32,7 @@ dashboards = []
 tags = []
 extensions = []
 dataprime = []
-incidents = []
 views = []
-scopes = []
 
 [dependencies]
 prost = { workspace = true }

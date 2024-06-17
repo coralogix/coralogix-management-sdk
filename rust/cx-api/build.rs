@@ -31,12 +31,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         // "../../proto/com/coralogixapis/events2metrics/v2/events2metrics_service.proto",
         #[cfg(feature = "dataprime")]
         dataprime_service(),
-        #[cfg(feature = "incidents")]
-        incidents_service(),
         #[cfg(feature = "views")]
         views_service(),
-        #[cfg(feature = "scopes")]
-        scopes_service(),
     ]
     .concat();
 
@@ -114,9 +110,6 @@ fn dataprime_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/dataprime/v1/query_service.proto"]
 }
 
-fn incidents_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogixapis/incidents/v1/incidents_service.proto"]
-}
 
 fn views_service() -> &'static [&'static str] {
     &[
