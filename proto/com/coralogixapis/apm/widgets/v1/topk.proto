@@ -1,0 +1,19 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogixapis/apm/widgets/v1/float_result.proto";
+import "com/coralogixapis/apm/widgets/v1/widget_group.proto";
+import "com/coralogixapis/apm/widgets/v1/units.proto";
+
+package com.coralogixapis.apm.widgets.v1;
+
+
+message Topk {
+    WidgetGroup group = 1;
+    google.protobuf.StringValue display_name = 2;
+    repeated FloatResult results = 3;
+    google.protobuf.StringValue query = 4;
+    google.protobuf.StringValue tool_tip = 5;
+    Unit unit = 6;
+}

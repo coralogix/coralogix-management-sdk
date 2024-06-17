@@ -15,5 +15,4 @@ message MetricLessThanAlertTypeDefinition  {
     MetricTimeWindow of_the_last = 4;
     MetricMissingValues missing_values =5;
     optional UndetectedValuesManagement undetected_values_management = 6;
-;
 }

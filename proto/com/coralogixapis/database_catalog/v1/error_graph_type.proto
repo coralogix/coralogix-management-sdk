@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.database_catalog.v1;
+
+enum ErrorGraphType {
+    ERROR_GRAPH_TYPE_UNSPECIFIED = 0;
+    ERROR_GRAPH_TYPE_PERCENTAGE = 1;
+    ERROR_GRAPH_TYPE_COUNT = 2;
+  }
+  

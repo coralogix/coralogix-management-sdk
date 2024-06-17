@@ -1,0 +1,51 @@
+syntax = "proto3";
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_timeframe.proto";
+
+package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
+
+
+message Schedule {
+  ScheduleOperation schedule_operation = 1; // Rule schedule_operation: The rule operation mode (mute/active).
+  oneof scheduler {
+    OneTime one_time = 2; // Schedule one_time: The scheduling definition will activate the rule for a specific timeframe.
+    Recurring recurring = 3; // Schedule recurring: The scheduling definition will activate the rule for a recurring timeframe.
+  }
+}
+
+enum ScheduleOperation {
+  SCHEDULE_OPERATION_UNSPECIFIED = 0;
+  SCHEDULE_OPERATION_MUTE = 1;
+  SCHEDULE_OPERATION_ACTIVATE = 2;
+}
+
+message OneTime {
+  Timeframe timeframe = 1;
+}
+
+message Recurring {
+  message Always {} // Recurring Always: The rule will always be activated in any timeframe.
+  message Dynamic {
+    int32 repeat_every = 1; // Recurring Dynamic repeat_every: The rule will be activated in a recurring mode according to the interval.
+    oneof frequency {
+      Daily daily = 2;
+      Weekly weekly = 3;
+      Monthly monthly = 4;
+    } // Recurring Dynamic: The rule will be activated in a recurring mode (daily, weekly or monthly).
+    Timeframe timeframe = 5; // Recurring Dynamic timeframe: The rule will be activated in a recurring mode according to the specific timeframe.
+    optional string termination_date = 6; // Recurring Dynamic termination_date: The rule will be terminated according to termination_date.
+  }
+  oneof condition {
+    Always always = 1;
+    Dynamic dynamic = 2;
+  }
+}
+
+message Daily {}
+
+message Weekly {
+  repeated int32 days_of_week = 1; // Dynamic Weekly days_of_week: The rule will be activated at weekly intervals on specific days in a week.
+}
+
+message Monthly {
+  repeated int32 days_of_month = 1; // Dynamic Monthly days_of_month: The rule will be activated at monthly intervals on specific days in a month.
+}

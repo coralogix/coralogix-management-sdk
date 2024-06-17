@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package com.coralogixapis.aaa.apikeys.v2;
+
+message Owner{
+  oneof owner {
+    string user_id = 1;
+    uint32 team_id = 2;
+    string organisation_id = 3;
+  }
+}
+
+message KeyInfo {
+  string name = 1;
+  Owner owner = 2;
+  bool active = 3;
+  bool hashed = 4;
+  repeated string roles = 5;
+}
+
+service ApiKeysService {
+  rpc CreateApiKey(CreateApiKeyRequest) returns(CreateApiKeyResponse) {};
+  rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {};
+  rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {};
+  rpc UpdateApiKey(UpdateApiKeyRequest) returns (UpdateApiKeyResponse) {};
+
+}
+
+message UpdateApiKeyRequest{
+  message Roles{
+    repeated string roles = 5;
+  }
+  string key_id = 1;
+  optional string new_name = 2;
+  optional bool is_active = 3;
+  optional Roles roles = 4;
+}
+message UpdateApiKeyResponse{}
+
+message DeleteApiKeyRequest{
+  string key_id = 1;
+}
+
+message DeleteApiKeyResponse{}
+
+message CreateApiKeyRequest {
+  KeyInfo key_info = 1;
+}
+
+message CreateApiKeyResponse {
+  string key_id = 1;
+  string name = 2;
+  string value = 3;
+}
+
+message GetApiKeyRequest{
+    string key_id = 1;
+}
+
+message GetApiKeyResponse{
+  KeyInfo key_info = 1;
+  optional string value = 2;
+}

@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/common.proto";
+
+message ListEnrichmentsRequest {
+  repeated uint32 team_ids = 1;
+  repeated string enrichment_names = 2;
+  repeated EnrichmentType enrichment_types = 3;
+  uint32 result_limit = 4;
+}
+
+message ListEnrichmentsResponse {
+  repeated Enrichment enrichments = 1;
+}
+
+message ListDatasetsRequest {
+  repeated uint32 team_ids = 1;
+  repeated DatasetFilter filters = 2;
+  uint32 result_limit = 3;
+}
+
+message ListDatasetsResponse {
+  repeated Dataset datasets = 1;
+}

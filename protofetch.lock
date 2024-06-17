@@ -2,9 +2,39 @@ version = 2
 
 [[dependencies]]
 name = "alerts-api-protobuf"
+url = "github.com/coralogix/alerts-api-protobuf"
+branch = "master"
+commit_hash = "90135be3e265268b53fc43d9bb56bab86b0792f1"
+
+[[dependencies]]
+name = "alerts-api-protobuf-v3"
 url = "github.com/coralogix/cx-api-alerts"
 branch = "master"
-commit_hash = "6e7c7974ca8d379aea85a40d0f9c18cd019257f5"
+commit_hash = "703b63cb2aa590e83f199ea0c7963e60841bba5b"
+
+[[dependencies]]
+name = "cx-api-actions"
+url = "github.com/coralogix/cx-api-actions"
+branch = "master"
+commit_hash = "186f40419a993ce325c93846597ff75c9e2a88a5"
+
+[[dependencies]]
+name = "cx-api-alert-scheduler"
+url = "github.com/coralogix/alert-scheduler-rule-protobuf"
+branch = "master"
+commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
+
+[[dependencies]]
+name = "cx-api-apm"
+url = "github.com/coralogix/cx-api-apm"
+branch = "master"
+commit_hash = "72e9f741c6dbdf3b1461b8de28f2bb8ed8202350"
+
+[[dependencies]]
+name = "cx-api-archive"
+url = "github.com/coralogix/cx-api-archive"
+branch = "master"
+commit_hash = "b2bfe1a6ea40b77c6574dee2c4eef16f65dab147"
 
 [[dependencies]]
 name = "cx-api-dashboards"
@@ -22,7 +52,7 @@ commit_hash = "6950f8f3df5cbbc2537df92b74f6d09ad1f1a965"
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
 branch = "master"
-commit_hash = "d124c7fc9d63af610cb530d2725f2886012478be"
+commit_hash = "f1c010d2d37e8f72503431b0d73d146bb8a34288"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -37,16 +67,28 @@ branch = "master"
 commit_hash = "6f1d5beb37ad8676c709bba76ff91e189c9446e1"
 
 [[dependencies]]
-name = "cx-api-incidents"
-url = "github.com/coralogix/cx-api-incidents"
-branch = "master"
-commit_hash = "06116a16a7903afb9910d0145547c4a31d922582"
-
-[[dependencies]]
 name = "cx-api-logs2metrics"
 url = "github.com/coralogix/cx-api-logs2metrics"
 branch = "master"
 commit_hash = "ec44a77572bf77cf5c731107238bbda65e7c1089"
+
+[[dependencies]]
+name = "cx-api-metrics-configurator"
+url = "github.com/coralogix/metrics-configurator"
+branch = "master"
+commit_hash = "e27e4cbbc9aaa2c8c5f2739ceb1ab168284ede06"
+
+[[dependencies]]
+name = "cx-api-organisations"
+url = "github.com/coralogix/cx-api-organisations"
+branch = "master"
+commit_hash = "9864f17666e61fd9af6e125bbd301bebf628a35f"
+
+[[dependencies]]
+name = "cx-api-permissions"
+url = "github.com/coralogix/cx-api-permissions"
+branch = "master"
+commit_hash = "ce68b4a8dee77a77c092f3a7d47c6fe1a5060aca"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -55,10 +97,22 @@ branch = "master"
 commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
 
 [[dependencies]]
+name = "cx-api-schema-store"
+url = "github.com/coralogix/cx-api-schema-store"
+branch = "master"
+commit_hash = "a049340e6ad651e6dc32b93f5e43e4194f0fc091"
+
+[[dependencies]]
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/scopes-service"
 branch = "master"
 commit_hash = "34edd52ec800dc350888646ac6e14b1f73ebccb0"
+
+[[dependencies]]
+name = "cx-api-service-catalog"
+url = "github.com/coralogix/cx-api-service-catalog"
+branch = "master"
+commit_hash = "4d2f8af15832772bb031d62586c58c6ab1d3c06e"
 
 [[dependencies]]
 name = "cx-api-tags"
@@ -70,12 +124,18 @@ commit_hash = "3e3a33b9c1008978dd77798024022d9d557a0a46"
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
 branch = "master"
-commit_hash = "f6341cc7f392a084055fee4afdd3f7174a19bcf2"
+commit_hash = "a14c87f2e662c316eab97d701a3a9d267edf5d43"
+
+[[dependencies]]
+name = "global-mapping"
+url = "github.com/coralogix/cx-api-global-mapping"
+branch = "master"
+commit_hash = "02122a75f47cd01387f1b7bef5531e419a875f03"
 
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "573205a81b9b96ea6d4e0365373839b59f4b427e"
+commit_hash = "2244fe42081794c9cc8c8b1a4519365116960620"
 
 [[dependencies]]
 name = "rules-api-protobuf"

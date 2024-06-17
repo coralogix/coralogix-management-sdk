@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.coralogixapis.database_catalog.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message DatabaseOperationData {
+  reserved 1, 2;
+  google.protobuf.StringValue operation = 3;
+  google.protobuf.StringValue table = 10;
+  google.protobuf.StringValue service = 12;
+  oneof database_operation_data {
+    google.protobuf.Int64Value p95_latency = 4;
+    google.protobuf.Int64Value total_requests = 5;
+    google.protobuf.Int64Value total_errors = 6;
+    google.protobuf.FloatValue errors_percentage = 7;
+    google.protobuf.Int64Value time_consuming = 8;
+    google.protobuf.FloatValue time_consuming_percentage = 9;
+    google.protobuf.StringValue operation_source = 11;
+  }
+}
+
+message DatabaseOperation{
+  google.protobuf.StringValue operation = 1;
+  google.protobuf.StringValue table = 2;
+}

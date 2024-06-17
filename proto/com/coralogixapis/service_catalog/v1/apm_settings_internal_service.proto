@@ -1,0 +1,11 @@
+syntax = "proto3";
+package com.coralogixapis.service_catalog.v1;
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogixapis/service_catalog/v1/apm_settings_service.proto";
+
+
+service ApmSettingsInternalService {
+  rpc ValidateApmSource(ValidateApmSourceRequest) returns (ValidateApmSourceResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Validate Apm Source";
+  }
+}

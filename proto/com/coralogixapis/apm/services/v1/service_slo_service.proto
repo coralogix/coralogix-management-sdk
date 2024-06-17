@@ -1,0 +1,82 @@
+syntax = "proto3";
+package com.coralogixapis.apm.services.v1;
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/apm/services/v1/service_slo.proto";
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogixapis/apm/common/v2/order_by.proto";
+
+message GetServiceSloRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetServiceSloResponse {
+  ServiceSlo slo = 1;
+}
+
+message CreateServiceSloRequest {
+  ServiceSlo slo = 1;
+}
+
+message CreateServiceSloResponse {
+  ServiceSlo slo = 1;
+}
+
+message ReplaceServiceSloRequest {
+  ServiceSlo slo = 1;
+}
+
+message ReplaceServiceSloResponse {
+  ServiceSlo slo = 1;
+}
+
+message DeleteServiceSloRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeleteServiceSloResponse {}
+
+message ListServiceSlosRequest {
+  com.coralogixapis.apm.common.v2.OrderBy order_by = 1;
+  repeated google.protobuf.StringValue service_names = 2;
+}
+
+message ListServiceSlosResponse {
+  repeated ServiceSlo slos = 1;
+}
+
+message BatchGetServiceSlosRequest {
+  repeated google.protobuf.StringValue ids = 1;
+}
+
+message BatchGetServiceSlosResponse {
+  map<string, ServiceSlo> slos = 1;
+  repeated google.protobuf.StringValue not_found_ids = 2;
+}
+
+
+service ServiceSloService {
+  rpc GetServiceSlo(GetServiceSloRequest) returns (GetServiceSloResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Service SLO";
+  }
+
+  rpc CreateServiceSlo(CreateServiceSloRequest) returns (CreateServiceSloResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Create Service SLO";
+  }
+
+  rpc ReplaceServiceSlo(ReplaceServiceSloRequest) returns (ReplaceServiceSloResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Update Service SLO";
+  }
+
+  rpc DeleteServiceSlo(DeleteServiceSloRequest) returns (DeleteServiceSloResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Delete Service SLO";
+  }
+
+  rpc ListServiceSlos(ListServiceSlosRequest) returns (ListServiceSlosResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Service SLOs";
+  }
+
+  rpc BatchGetServiceSlos(BatchGetServiceSlosRequest) returns (BatchGetServiceSlosResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Batch get Service SLOs";
+  }
+
+}

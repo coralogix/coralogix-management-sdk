@@ -1,0 +1,10 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+package com.coralogix.global_mapping.v1;
+
+message DataSource {
+    google.protobuf.StringValue provider = 1;
+    google.protobuf.StringValue exporter = 2;
+    google.protobuf.StringValue labels_metric = 3;
+}

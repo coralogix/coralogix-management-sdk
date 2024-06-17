@@ -194,6 +194,7 @@ message Operator {
         AnyValue any_value                        = 13;
         ApproxCountDistinct approx_count_distinct = 14;
         Collect collect                           = 15;
+        MaxByInternal max_by_internal             = 16;
       }
 
       message Count {
@@ -270,6 +271,12 @@ message Operator {
         repeated Expression order_by = 2;
         Expression.Keypath alias     = 3;
         bool distinct                = 4;
+      }
+
+      message MaxByInternal {
+        Expression sort_key      = 1;
+        Expression expression    = 2;
+        Expression.Keypath alias = 3;
       }
     }
 
