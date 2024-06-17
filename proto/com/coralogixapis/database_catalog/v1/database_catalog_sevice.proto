@@ -122,6 +122,7 @@ message ListTablesRequest {
 
 message ListTablesResponse {
   repeated google.protobuf.StringValue tables = 1;
+  google.protobuf.StringValue table_label = 2;
 }
 
 

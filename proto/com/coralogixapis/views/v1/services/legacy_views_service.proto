@@ -22,8 +22,12 @@ service LegacyViewsService {
     option (audit_log_description).description = "delete legacy view";
   }
 
-  rpc ListLegacyViews(ListLegacyViewsRequest) returns (ListLegacyViewsResponse) {
-    option (audit_log_description).description = "list all company legacy views";
+  rpc ListTeamLegacyViews(ListTeamLegacyViewsRequest) returns (ListTeamLegacyViewsResponse) {
+    option (audit_log_description).description = "list team legacy views";
+  }
+
+  rpc ListUserLegacyViews(ListUserLegacyViewsRequest) returns (ListUserLegacyViewsResponse) {
+    option (audit_log_description).description = "list user legacy views";
   }
 }
 
@@ -53,9 +57,15 @@ message DeleteLegacyViewRequest {
 
 message DeleteLegacyViewResponse {}
 
-message ListLegacyViewsRequest {}
+message ListTeamLegacyViewsRequest {}
 
-message ListLegacyViewsResponse {
+message ListTeamLegacyViewsResponse {
+  repeated LegacyView legacy_views = 1;
+}
+
+message ListUserLegacyViewsRequest {}
+
+message ListUserLegacyViewsResponse {
   repeated LegacyView legacy_views = 1;
 }
 

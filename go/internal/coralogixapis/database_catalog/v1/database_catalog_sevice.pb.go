@@ -1149,7 +1149,8 @@ type ListTablesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Tables []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=tables,proto3" json:"tables,omitempty"`
+	Tables     []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=tables,proto3" json:"tables,omitempty"`
+	TableLabel *wrapperspb.StringValue   `protobuf:"bytes,2,opt,name=table_label,json=tableLabel,proto3" json:"table_label,omitempty"`
 }
 
 func (x *ListTablesResponse) Reset() {
@@ -1187,6 +1188,13 @@ func (*ListTablesResponse) Descriptor() ([]byte, []int) {
 func (x *ListTablesResponse) GetTables() []*wrapperspb.StringValue {
 	if x != nil {
 		return x.Tables
+	}
+	return nil
+}
+
+func (x *ListTablesResponse) GetTableLabel() *wrapperspb.StringValue {
+	if x != nil {
+		return x.TableLabel
 	}
 	return nil
 }
@@ -1562,12 +1570,16 @@ var file_com_coralogixapis_database_catalog_v1_database_catalog_sevice_proto_raw
 	0x65, 0x73, 0x18, 0x05, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e,
 	0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0f, 0x63, 0x61, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x53,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x22, 0x4a, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74, 0x54,
-	0x61, 0x62, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34, 0x0a,
-	0x06, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e,
-	0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x06, 0x74, 0x61, 0x62,
-	0x6c, 0x65, 0x73, 0x32, 0xe5, 0x0d, 0x0a, 0x16, 0x44, 0x61, 0x74, 0x61, 0x62, 0x61, 0x73, 0x65,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x73, 0x22, 0x89, 0x01, 0x0a, 0x12, 0x4c, 0x69, 0x73, 0x74,
+	0x54, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x34,
+	0x0a, 0x06, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c,
+	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x06, 0x74, 0x61,
+	0x62, 0x6c, 0x65, 0x73, 0x12, 0x3d, 0x0a, 0x0b, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x5f, 0x6c, 0x61,
+	0x62, 0x65, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67,
+	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x69,
+	0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0a, 0x74, 0x61, 0x62, 0x6c, 0x65, 0x4c, 0x61,
+	0x62, 0x65, 0x6c, 0x32, 0xe5, 0x0d, 0x0a, 0x16, 0x44, 0x61, 0x74, 0x61, 0x62, 0x61, 0x73, 0x65,
 	0x43, 0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0xd3,
 	0x01, 0x0a, 0x19, 0x47, 0x65, 0x74, 0x44, 0x61, 0x74, 0x61, 0x62, 0x61, 0x73, 0x65, 0x73, 0x43,
 	0x6f, 0x6c, 0x75, 0x6d, 0x6e, 0x73, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x47, 0x2e, 0x63,
@@ -1780,30 +1792,31 @@ var file_com_coralogixapis_database_catalog_v1_database_catalog_sevice_proto_dep
 	20, // 51: com.coralogixapis.database_catalog.v1.ListTablesRequest.database_system:type_name -> google.protobuf.StringValue
 	20, // 52: com.coralogixapis.database_catalog.v1.ListTablesRequest.calling_services:type_name -> google.protobuf.StringValue
 	20, // 53: com.coralogixapis.database_catalog.v1.ListTablesResponse.tables:type_name -> google.protobuf.StringValue
-	28, // 54: com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
-	28, // 55: com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
-	28, // 56: com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
-	10, // 57: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabasesColumnsStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabasesColumnsStreamRequest
-	4,  // 58: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseRequestLatencyGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamRequest
-	5,  // 59: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseErrorsGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamRequest
-	6,  // 60: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseStatementsGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamRequest
-	0,  // 61: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.UpdateDatabaseCatalogFilters:input_type -> com.coralogixapis.database_catalog.v1.UpdateDatabaseCatalogFiltersRequest
-	2,  // 62: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseCatalogFilters:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseCatalogFiltersRequest
-	12, // 63: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListCallingServices:input_type -> com.coralogixapis.database_catalog.v1.ListCallingServicesRequest
-	14, // 64: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListTables:input_type -> com.coralogixapis.database_catalog.v1.ListTablesRequest
-	11, // 65: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabasesColumnsStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabasesColumnsStreamResponse
-	7,  // 66: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseRequestLatencyGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamResponse
-	8,  // 67: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseErrorsGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamResponse
-	9,  // 68: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseStatementsGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamResponse
-	1,  // 69: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.UpdateDatabaseCatalogFilters:output_type -> com.coralogixapis.database_catalog.v1.UpdateDatabaseCatalogFiltersResponse
-	3,  // 70: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseCatalogFilters:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseCatalogFiltersResponse
-	13, // 71: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListCallingServices:output_type -> com.coralogixapis.database_catalog.v1.ListCallingServicesResponse
-	15, // 72: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListTables:output_type -> com.coralogixapis.database_catalog.v1.ListTablesResponse
-	65, // [65:73] is the sub-list for method output_type
-	57, // [57:65] is the sub-list for method input_type
-	57, // [57:57] is the sub-list for extension type_name
-	57, // [57:57] is the sub-list for extension extendee
-	0,  // [0:57] is the sub-list for field type_name
+	20, // 54: com.coralogixapis.database_catalog.v1.ListTablesResponse.table_label:type_name -> google.protobuf.StringValue
+	28, // 55: com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
+	28, // 56: com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
+	28, // 57: com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamRequest.FiltersEntry.value:type_name -> google.protobuf.ListValue
+	10, // 58: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabasesColumnsStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabasesColumnsStreamRequest
+	4,  // 59: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseRequestLatencyGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamRequest
+	5,  // 60: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseErrorsGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamRequest
+	6,  // 61: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseStatementsGraphStream:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamRequest
+	0,  // 62: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.UpdateDatabaseCatalogFilters:input_type -> com.coralogixapis.database_catalog.v1.UpdateDatabaseCatalogFiltersRequest
+	2,  // 63: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseCatalogFilters:input_type -> com.coralogixapis.database_catalog.v1.GetDatabaseCatalogFiltersRequest
+	12, // 64: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListCallingServices:input_type -> com.coralogixapis.database_catalog.v1.ListCallingServicesRequest
+	14, // 65: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListTables:input_type -> com.coralogixapis.database_catalog.v1.ListTablesRequest
+	11, // 66: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabasesColumnsStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabasesColumnsStreamResponse
+	7,  // 67: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseRequestLatencyGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseRequestLatencyGraphStreamResponse
+	8,  // 68: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseErrorsGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseErrorsGraphStreamResponse
+	9,  // 69: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseStatementsGraphStream:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseStatementsGraphStreamResponse
+	1,  // 70: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.UpdateDatabaseCatalogFilters:output_type -> com.coralogixapis.database_catalog.v1.UpdateDatabaseCatalogFiltersResponse
+	3,  // 71: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.GetDatabaseCatalogFilters:output_type -> com.coralogixapis.database_catalog.v1.GetDatabaseCatalogFiltersResponse
+	13, // 72: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListCallingServices:output_type -> com.coralogixapis.database_catalog.v1.ListCallingServicesResponse
+	15, // 73: com.coralogixapis.database_catalog.v1.DatabaseCatalogService.ListTables:output_type -> com.coralogixapis.database_catalog.v1.ListTablesResponse
+	66, // [66:74] is the sub-list for method output_type
+	58, // [58:66] is the sub-list for method input_type
+	58, // [58:58] is the sub-list for extension type_name
+	58, // [58:58] is the sub-list for extension extendee
+	0,  // [0:58] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_database_catalog_v1_database_catalog_sevice_proto_init() }

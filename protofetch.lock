@@ -106,7 +106,7 @@ commit_hash = "34edd52ec800dc350888646ac6e14b1f73ebccb0"
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
 branch = "master"
-commit_hash = "e74ec8d292e0bab3745c7e0c4964eeca1e92265e"
+commit_hash = "4d2f8af15832772bb031d62586c58c6ab1d3c06e"
 
 [[dependencies]]
 name = "cx-api-tags"
@@ -118,7 +118,7 @@ commit_hash = "3e3a33b9c1008978dd77798024022d9d557a0a46"
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
 branch = "master"
-commit_hash = "f6341cc7f392a084055fee4afdd3f7174a19bcf2"
+commit_hash = "a14c87f2e662c316eab97d701a3a9d267edf5d43"
 
 [[dependencies]]
 name = "global-mapping"

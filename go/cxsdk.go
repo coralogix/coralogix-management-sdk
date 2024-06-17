@@ -1,11 +1,11 @@
 package cxsdk
 
 type ClientSet struct {
-	ruleGroups        *RuleGroupsClient
-	alerts            *AlertsClient
-	enrichments       *EnrichmentsClient
-	dataSet           *DataSetClient
-	dashboards        *DashboardsClient
+	ruleGroups  *RuleGroupsClient
+	alerts      *AlertsClient
+	enrichments *EnrichmentsClient
+	dataSet     *DataSetClient
+	// dashboards        *DashboardsClient
 	actions           *ActionsClient
 	tcoPolicies       *TCOPoliciesClient
 	webhooks          *WebhooksClient
@@ -17,9 +17,9 @@ type ClientSet struct {
 	alertsSchedulers  *AlertsSchedulersClient
 	teams             *TeamsClient
 	slos              *SLOsClient
-	dahboardsFolders  *DashboardsFoldersClient
-	apiKeys           *ApikeysClient
-	users             *UsersClient
+	// dahboardsFolders  *DashboardsFoldersClient
+	apiKeys *ApikeysClient
+	// users             *UsersClient
 }
 
 func (c *ClientSet) RuleGroups() *RuleGroupsClient {
@@ -38,9 +38,9 @@ func (c *ClientSet) DataSet() *DataSetClient {
 	return c.dataSet
 }
 
-func (c *ClientSet) Dashboards() *DashboardsClient {
-	return c.dashboards
-}
+// func (c *ClientSet) Dashboards() *DashboardsClient {
+// 	return c.dashboards
+// }
 
 func (c *ClientSet) Actions() *ActionsClient {
 	return c.actions
@@ -90,24 +90,24 @@ func (c *ClientSet) SLOs() *SLOsClient {
 	return c.slos
 }
 
-func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
-	return c.dahboardsFolders
-}
+// func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
+// 	return c.dahboardsFolders
+// }
 
-func (c *ClientSet) Users() *UsersClient {
-	return c.users
-}
+// func (c *ClientSet) Users() *UsersClient {
+// 	return c.users
+// }
 
 func NewClientSet(targetUrl, apiKey string) *ClientSet {
 	apikeyCPC := NewCallPropertiesCreator(targetUrl, apiKey)
 
 	return &ClientSet{
-		ruleGroups:        NewRuleGroupsClient(apikeyCPC),
-		alerts:            NewAlertsClient(apikeyCPC),
-		events2Metrics:    NewEvents2MetricsClient(apikeyCPC),
-		enrichments:       NewEnrichmentClient(apikeyCPC),
-		dataSet:           NewDataSetClient(apikeyCPC),
-		dashboards:        NewDashboardsClient(apikeyCPC),
+		ruleGroups:     NewRuleGroupsClient(apikeyCPC),
+		alerts:         NewAlertsClient(apikeyCPC),
+		events2Metrics: NewEvents2MetricsClient(apikeyCPC),
+		enrichments:    NewEnrichmentClient(apikeyCPC),
+		dataSet:        NewDataSetClient(apikeyCPC),
+		// dashboards:        NewDashboardsClient(apikeyCPC),
 		actions:           NewActionsClient(apikeyCPC),
 		tcoPolicies:       NewTCOPoliciesClient(apikeyCPC),
 		webhooks:          NewWebhooksClient(apikeyCPC),
@@ -118,8 +118,8 @@ func NewClientSet(targetUrl, apiKey string) *ClientSet {
 		alertsSchedulers:  NewAlertsSchedulersClient(apikeyCPC),
 		teams:             NewTeamsClient(apikeyCPC),
 		slos:              NewSLOsClient(apikeyCPC),
-		dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
-		apiKeys:           NewApiKeysClient(apikeyCPC),
-		users:             NewUsersClient(apikeyCPC),
+		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
+		apiKeys: NewApiKeysClient(apikeyCPC),
+		// users:             NewUsersClient(apikeyCPC),
 	}
 }

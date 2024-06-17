@@ -6,7 +6,7 @@ require (
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20231002182017-d307bd883b97
 	google.golang.org/grpc v1.60.0
-	google.golang.org/protobuf v1.34.1
+	google.golang.org/protobuf v1.33.0
 )
 
 require (
