@@ -22,6 +22,7 @@ jobs:
       with:
         # Optional: golangci-lint command line arguments.
         #args: --out-format=colored-line-number
+        working-directory: go
 
         # Optional: show only new issues if it's a pull request. The default value is `false`.
         # only-new-issues: true
