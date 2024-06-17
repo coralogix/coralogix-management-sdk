@@ -110,7 +110,6 @@ fn dataprime_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/dataprime/v1/query_service.proto"]
 }
 
-
 fn views_service() -> &'static [&'static str] {
     &[
         "../../proto/com/coralogixapis/views/v1/services/views_service.proto",
