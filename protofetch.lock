@@ -2,9 +2,15 @@ version = 2
 
 [[dependencies]]
 name = "alerts-api-protobuf"
+url = "github.com/coralogix/alerts-api-protobuf"
+branch = "master"
+commit_hash = "90135be3e265268b53fc43d9bb56bab86b0792f1"
+
+[[dependencies]]
+name = "alerts-api-protobuf-v3"
 url = "github.com/coralogix/cx-api-alerts"
 branch = "master"
-commit_hash = "6e7c7974ca8d379aea85a40d0f9c18cd019257f5"
+commit_hash = "703b63cb2aa590e83f199ea0c7963e60841bba5b"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -129,7 +135,7 @@ commit_hash = "02122a75f47cd01387f1b7bef5531e419a875f03"
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "573205a81b9b96ea6d4e0365373839b59f4b427e"
+commit_hash = "2244fe42081794c9cc8c8b1a4519365116960620"
 
 [[dependencies]]
 name = "rules-api-protobuf"

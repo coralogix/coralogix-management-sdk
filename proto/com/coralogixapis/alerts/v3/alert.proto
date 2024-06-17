@@ -17,6 +17,8 @@ import "com/coralogixapis/alerts/v3/alert_type_definition/new_value/logs_new_val
 import "com/coralogixapis/alerts/v3/alert_type_definition/unique_count/unique_count_alert_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/time_relative/logs_time_relative_more_than_alert_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/time_relative/logs_time_relative_less_than_alert_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_more_than_eq_alert_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_less_than_eq_alert_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_less_than_alert_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_more_than_alert_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_more_than_usual_alert_type_definition.proto";
@@ -64,7 +66,10 @@ message AlertProperties {
     TracingMoreThanAlertTypeDefinition tracing_more_than = 116;
     FlowAlertTypeDefinition flow = 117;
     MetricLessThanUsualAlertTypeDefinition metric_less_than_usual = 118;
-//    LogsLessThanAlertTypeDefinitionUsual logs_less_than_usual = 119;
+    MetricMoreThanOrEqualsAlertTypeDefinition metric_more_than_or_equals = 119;
+    MetricLessThanOrEqualsAlertTypeDefinition metric_less_than_or_equals = 120;
+
+    //    LogsLessThanAlertTypeDefinitionUsual logs_less_than_usual = 119;
   };
   //When Promql with group by this field needs to be empty or equal to the by clause, otherwise we fail the validation
   repeated google.protobuf.StringValue alert_group_bys = 7;

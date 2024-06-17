@@ -8,7 +8,7 @@ import "com/coralogixapis/alerts/v3/alert_type_definition/undetected_values_mana
 import "com/coralogixapis/alerts/v3/alert_type_definition/metric/metric_missing_values.proto";
 import "com/coralogixapis/alerts/v3/alert_type_definition/metrics_filter.proto";
 
-message MetricLessThanAlertTypeDefinition  {
+message MetricLessThanOrEqualsAlertTypeDefinition  {
     MetricFilter metric_filter = 1;
     google.protobuf.FloatValue threshold = 2;
     google.protobuf.UInt32Value for_over_pct = 3;
