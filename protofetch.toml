@@ -32,6 +32,8 @@ url = 'github.com/coralogix/cx-api-quota'
 [cx-api-dashboards]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-dashboards'
+allow_policies = ["/com/coralogixapis/*"]
+
 
 [cx-api-dataprime]
 branch = 'master'
