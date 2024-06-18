@@ -33,8 +33,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         dataprime_service(),
         #[cfg(feature = "views")]
         views_service(),
-        #[cfg(feature = "scopes")]
-        scopes_service(),
         #[cfg(feature = "actions")]
         actions_service(),
     ]

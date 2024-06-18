@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "actions",
+    "alerts",
+    "custom-enrichments",
+    "dashboards",
+    "dataprime-query",
+]
