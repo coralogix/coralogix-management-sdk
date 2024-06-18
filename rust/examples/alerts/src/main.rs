@@ -1,4 +1,5 @@
 use anyhow::Result;
+use cx_sdk::auth::{ApiKey, AuthData};
 use cx_sdk::com::coralogixapis::alerts::v3::alert_notification::{
     IntegrationType, RetriggeringPeriod,
 };
@@ -16,7 +17,6 @@ use cx_sdk::com::coralogixapis::alerts::v3::{
     NotifyOn, OrderBy, Recipients, ReplaceAlertRequest, ReplaceAlertResponse, SetActiveRequest,
     TimeOfDay, ValidateAlertRequest,
 };
-use cx_sdk::{ApiKey, AuthData};
 use std::collections::HashMap;
 use std::str::FromStr;
 use tokio::sync::Mutex;

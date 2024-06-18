@@ -3,8 +3,9 @@ members = ["cx-api", "cx-sdk"]
 exclude = [
     "examples/custom-enrichments",
     "examples/dashboards",
-    "examples/dataprime",
+    "examples/dataprime-query",
     "examples/alerts",
+    "examples/actions",
 ]
 resolver = "2"
 

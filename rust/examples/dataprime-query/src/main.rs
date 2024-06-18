@@ -1,8 +1,8 @@
 use anyhow::Result;
+use cx_sdk::auth::{ApiKey, AuthData};
 use cx_sdk::com::coralogixapis::dataprime::v1::dataprime_query_service_client::DataprimeQueryServiceClient;
 use cx_sdk::com::coralogixapis::dataprime::v1::query_response::Message;
 use cx_sdk::com::coralogixapis::dataprime::v1::QueryResponse;
-use cx_sdk::{ApiKey, AuthData};
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::Streaming;

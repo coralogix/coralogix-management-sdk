@@ -102,6 +102,10 @@ url = 'github.com/coralogix/metrics-configurator'
 allow_policies = ["/com/coralogix/metrics/*"]
 content_roots = ["/proto/"]
 
+[cx-api-actions]
+branch = 'master'
+url = 'github.com/coralogix/cx-api-actions'
+
 [google-api]
 url = "github.com/googleapis/googleapis"
 allow_policies = [

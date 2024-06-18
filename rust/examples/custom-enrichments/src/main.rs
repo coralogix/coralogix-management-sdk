@@ -1,4 +1,5 @@
 use anyhow::Result;
+use cx_sdk::auth::{ApiKey, AuthData};
 use cx_sdk::com::coralogix::enrichment::v1::custom_enrichment_service_client::CustomEnrichmentServiceClient;
 use cx_sdk::com::coralogix::enrichment::v1::enrichment_service_client::EnrichmentServiceClient;
 use cx_sdk::com::coralogix::enrichment::v1::enrichment_type::Type;
@@ -14,7 +15,6 @@ use cx_sdk::com::coralogix::enrichment::v1::{
 use cx_sdk::com::coralogix::enrichment::v1::{
     CreateCustomEnrichmentResponse, DeleteCustomEnrichmentRequest,
 };
-use cx_sdk::{ApiKey, AuthData};
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::{
