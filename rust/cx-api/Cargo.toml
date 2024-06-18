@@ -21,6 +21,7 @@ default = [
     "rules",
     "tags",
     "views",
+    "actions",
 ]
 alerts = []
 rules = []
@@ -33,6 +34,7 @@ tags = []
 extensions = []
 dataprime = []
 views = []
+actions = []
 
 [dependencies]
 prost = { workspace = true }

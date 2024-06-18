@@ -33,6 +33,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         dataprime_service(),
         #[cfg(feature = "views")]
         views_service(),
+        #[cfg(feature = "scopes")]
+        scopes_service(),
+        #[cfg(feature = "actions")]
+        actions_service(),
     ]
     .concat();
 
@@ -156,4 +160,8 @@ fn views_service() -> &'static [&'static str] {
         "../../proto/com/coralogixapis/views/v1/services/views_service.proto",
         "../../proto/com/coralogixapis/views/v1/services/views_folders_service.proto",
     ]
+}
+
+fn actions_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/actions/v2/actions_service.proto"]
 }

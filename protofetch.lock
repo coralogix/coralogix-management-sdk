@@ -37,6 +37,12 @@ branch = "master"
 commit_hash = "b2bfe1a6ea40b77c6574dee2c4eef16f65dab147"
 
 [[dependencies]]
+name = "cx-api-actions"
+url = "github.com/coralogix/cx-api-actions"
+branch = "master"
+commit_hash = "186f40419a993ce325c93846597ff75c9e2a88a5"
+
+[[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
 branch = "master"
