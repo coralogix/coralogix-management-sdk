@@ -9,7 +9,6 @@ use cx_sdk::com::coralogixapis::dashboards::v1::services::{
     ReplaceDashboardResponse, UnpinDashboardRequest, UnpinDashboardResponse,
 };
 use std::str::FromStr;
-use tokio::fs;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
@@ -137,6 +136,7 @@ impl DashboardService {
         }
     }
 
+    #[allow(dead_code)]
     async fn unpin_dashboard(&self, dashboard_id: String) -> Result<UnpinDashboardResponse> {
         let request: Request<UnpinDashboardRequest> = make_request_with_metadata(
             UnpinDashboardRequest {
@@ -182,18 +182,22 @@ impl DashboardService {
     }
 }
 
-#[tokio::main]
-async fn main() {
-    let svc = DashboardService::new("https://ng-api-grpc.coralogix.com", "my-api-key".into());
-    let id = "abcdefghijklmnopqrstx".to_string();
-    let raw_dashboard = fs::read_to_string("dashboard.json").await.unwrap();
-    let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
-    let _ = svc.create_dashboard(dashboard).await.unwrap();
+#[cfg(test)]
+mod tests {
+    #[tokio::test]
+    async fn test_dashboard_service() {
+        let svc =
+            super::DashboardService::new("https://ng-api-grpc.coralogix.com", "my-api-key".into());
+        let id = "abcdefghijklmnopqrstx".to_string();
+        let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
+        let dashboard: super::Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
+        let _ = svc.create_dashboard(dashboard).await.unwrap();
 
-    let actual_dashboard = svc.get_dashboard(id.clone()).await.unwrap();
-    assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));
-    let _ = svc.pin_dashboard(id.clone()).await.unwrap();
-    let _ = svc.unpin_dashboard(id.clone()).await.unwrap();
+        let actual_dashboard = svc.get_dashboard(id.clone()).await.unwrap();
+        assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));
+        let _ = svc.pin_dashboard(id.clone()).await.unwrap();
+        let _ = svc.unpin_dashboard(id.clone()).await.unwrap();
 
-    let _ = svc.delete_dashboard(id.clone()).await.unwrap();
+        let _ = svc.delete_dashboard(id.clone()).await.unwrap();
+    }
 }

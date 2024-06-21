@@ -6,7 +6,7 @@ use cx_sdk::{
     com::coralogixapis::actions::v2::{
         actions_service_client::ActionsServiceClient, Action, CreateActionRequest,
         CreateActionResponse, DeleteActionRequest, GetActionRequest, ListActionsRequest,
-        OrderActionsRequest, ReplaceActionRequest, ReplaceActionResponse, SourceType,
+        OrderActionsRequest, ReplaceActionRequest, ReplaceActionResponse,
     },
 };
 use tokio::sync::Mutex;
@@ -144,55 +144,62 @@ impl ActionsService {
     }
 }
 
-#[tokio::main]
-async fn main() {
-    let service = ActionsService::new(
-        "https://ng-api-grpc.eu2.coralogix.com",
-        "api-key".to_string(),
-    );
-    let action = Action {
-        name: Some("action".to_string()),
-        url: Some("http://my.cool.website.com".to_string()),
-        is_private: Some(false),
-        source_type: SourceType::Log.into(),
-        application_names: vec!["app".to_string()],
-        subsystem_names: vec!["sub".to_string()],
-        id: None,
-        is_hidden: Some(false),
-        created_by: Some("luigi.taglialatela@coralogix.com".into()),
-    };
+#[cfg(test)]
+mod tests {
+    use cx_sdk::com::coralogixapis::actions::v2::{Action, SourceType};
 
-    let create_action_result = service.create_action(action).await;
-    if let Err(e) = &create_action_result {
-        println!("Error: {:?}", e);
+    use crate::ActionsService;
+
+    #[tokio::test]
+    async fn test_actions_service() {
+        let service = ActionsService::new(
+            "https://ng-api-grpc.eu2.coralogix.com",
+            "api-key".to_string(),
+        );
+        let action = Action {
+            name: Some("action".to_string()),
+            url: Some("http://my.cool.website.com".to_string()),
+            is_private: Some(false),
+            source_type: SourceType::Log.into(),
+            application_names: vec!["app".to_string()],
+            subsystem_names: vec!["sub".to_string()],
+            id: None,
+            is_hidden: Some(false),
+            created_by: Some("luigi.taglialatela@coralogix.com".into()),
+        };
+
+        let create_action_result = service.create_action(action).await;
+        if let Err(e) = &create_action_result {
+            println!("Error: {:?}", e);
+        }
+
+        assert!(create_action_result.is_ok());
+
+        let created_action = create_action_result.unwrap().action.unwrap();
+        let updated_action = Action {
+            name: Some("updated action".to_string()),
+            ..created_action
+        };
+
+        let replace_action_result = service.replace_action(updated_action).await;
+        assert!(replace_action_result.is_ok());
+
+        let replaced_action = replace_action_result.unwrap().action.unwrap();
+        assert!(replaced_action.name.unwrap() == "updated action");
+
+        let retrieved_action = service
+            .get_action(replaced_action.id.clone().unwrap())
+            .await;
+
+        assert!(retrieved_action.is_ok());
+        assert!(retrieved_action.unwrap().is_some());
+
+        let delete_action_result = service.delete_action(replaced_action.id.unwrap()).await;
+        assert!(delete_action_result.is_ok());
+
+        let retrieved_actions = service.list_actions().await;
+
+        assert!(retrieved_actions.is_ok());
+        assert!(!retrieved_actions.unwrap().is_empty());
     }
-
-    assert!(create_action_result.is_ok());
-
-    let created_action = create_action_result.unwrap().action.unwrap();
-    let updated_action = Action {
-        name: Some("updated action".to_string()),
-        ..created_action
-    };
-
-    let replace_action_result = service.replace_action(updated_action).await;
-    assert!(replace_action_result.is_ok());
-
-    let replaced_action = replace_action_result.unwrap().action.unwrap();
-    assert!(replaced_action.name.unwrap() == "updated action");
-
-    let retrieved_action = service
-        .get_action(replaced_action.id.clone().unwrap())
-        .await;
-
-    assert!(retrieved_action.is_ok());
-    assert!(retrieved_action.unwrap().is_some());
-
-    let delete_action_result = service.delete_action(replaced_action.id.unwrap()).await;
-    assert!(delete_action_result.is_ok());
-
-    let retrieved_actions = service.list_actions().await;
-
-    assert!(retrieved_actions.is_ok());
-    assert!(!retrieved_actions.unwrap().is_empty());
 }

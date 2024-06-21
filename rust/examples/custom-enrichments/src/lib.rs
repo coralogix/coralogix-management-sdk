@@ -53,6 +53,7 @@ impl EnrichmentService {
         }
     }
 
+    #[allow(dead_code)]
     async fn create_enrichment(
         &self,
         name: String,
@@ -81,6 +82,8 @@ impl EnrichmentService {
                 .map_err(From::from)
         }
     }
+
+    #[allow(dead_code)]
     async fn delete_enrichment(
         &self,
         custom_enrichment_id: u32,
@@ -132,6 +135,7 @@ impl EnrichmentService {
         }
     }
 
+    #[allow(dead_code)]
     async fn add_enrichment_key_mapping(
         &self,
         enrichment_id: u32,
@@ -158,6 +162,7 @@ impl EnrichmentService {
         Ok(())
     }
 
+    #[allow(dead_code)]
     async fn delete_enrichment_keys(&self, enrichment_ids: Vec<u32>) -> Result<()> {
         let remove_enrichments_request = RemoveEnrichmentsRequest { enrichment_ids };
         let request = make_request_with_metadata(remove_enrichments_request, &self.metadata_map);
@@ -169,27 +174,30 @@ impl EnrichmentService {
     }
 }
 
-#[tokio::main]
-async fn main() {
-    let svc = EnrichmentService::new(
-        "https://ng-api-grpc.eu2.coralogix.com".into(),
-        "my-api-key".into(),
-    );
-    let enrichment = svc
-        .create_enrichment("my-enrichment".into(), "a,b,c\n1,2,3".into())
-        .await
-        .unwrap()
-        .custom_enrichment
-        .unwrap();
-    let ids = svc.list_enrichment_keys().await.unwrap();
-    let enrichment_id = enrichment.id;
-    assert!(ids.iter().find(|e| e.id == enrichment.id).is_some());
+#[cfg(test)]
+mod tests {
+    use crate::EnrichmentService;
 
-    svc.add_enrichment_key_mapping(enrichment_id, "from".into(), "to".into())
-        .await
-        .unwrap();
-    svc.delete_enrichment_keys(ids.iter().map(|e| e.id).collect())
-        .await
-        .unwrap();
-    let _ = svc.delete_enrichment(enrichment_id).await.unwrap();
+    #[tokio::test]
+    async fn test_custom_enrichment_service() {
+        let svc =
+            EnrichmentService::new("https://ng-api-grpc.eu2.coralogix.com", "my-api-key".into());
+        let enrichment = svc
+            .create_enrichment("my-enrichment".into(), "a,b,c\n1,2,3".into())
+            .await
+            .unwrap()
+            .custom_enrichment
+            .unwrap();
+        let ids = svc.list_enrichment_keys().await.unwrap();
+        let enrichment_id = enrichment.id;
+        assert!(ids.iter().any(|e| e.id == enrichment.id));
+
+        svc.add_enrichment_key_mapping(enrichment_id, "from".into(), "to".into())
+            .await
+            .unwrap();
+        svc.delete_enrichment_keys(ids.iter().map(|e| e.id).collect())
+            .await
+            .unwrap();
+        let _ = svc.delete_enrichment(enrichment_id).await.unwrap();
+    }
 }

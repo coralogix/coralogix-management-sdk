@@ -12,6 +12,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let building = &[
         #[cfg(feature = "alerts")]
         alerts_service(),
+        #[cfg(feature = "alert_scheduler")]
+        alerts_scheduler_service(),
         #[cfg(feature = "rules")]
         rules_service(),
         #[cfg(feature = "outgoing_webhooks")]
@@ -35,6 +37,20 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         views_service(),
         #[cfg(feature = "actions")]
         actions_service(),
+        #[cfg(feature = "api_keys")]
+        api_keys_service(),
+        #[cfg(feature = "target")]
+        target_service(),
+        #[cfg(feature = "metrics_configurator")]
+        metrics_configurator_service(),
+        #[cfg(feature = "retentions")]
+        retention_service(),
+        #[cfg(feature = "team")]
+        team_service(),
+        #[cfg(feature = "sli")]
+        sli_service(),
+        #[cfg(feature = "slos")]
+        slos_service(),
     ]
     .concat();
 
@@ -63,6 +79,10 @@ fn alerts_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/alerts/v3/alerts_service.proto"]
 }
 
+fn alerts_scheduler_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto"]
+}
+
 fn rules_service() -> &'static [&'static str] {
     &["../../proto/com/coralogix/rules/v1/rule_groups_service.proto"]
 }
@@ -88,46 +108,6 @@ fn quota_service() -> &'static [&'static str] {
 
 fn dashboards_service() -> &'static [&'static str] {
     &[
-    "../../proto/com/coralogixapis/dashboards/v1/ast/annotation.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/filter.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/folder_path.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/layout.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/variable.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widget.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/audit_log.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/annotation_event.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/dataprime_result.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/folder.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/group.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/group_limit.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/grouped_series.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/labelled_value.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/log_severity_level.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/logs_aggregation.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/observation_field.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/order_direction.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/ordering_field.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/pagination.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/query.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/span_field.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/spans_aggregation.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/time_frame.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/common/time_series.proto",
     "../../proto/com/coralogixapis/dashboards/v1/services/archive_logs_data_source_service.proto",
     "../../proto/com/coralogixapis/dashboards/v1/services/archive_spans_data_source_service.proto",
     "../../proto/com/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto",
@@ -138,7 +118,6 @@ fn dashboards_service() -> &'static [&'static str] {
     "../../proto/com/coralogixapis/dashboards/v1/services/metrics_data_source_service.proto",
     "../../proto/com/coralogixapis/dashboards/v1/services/spans_data_source_service.proto",
     "../../proto/com/coralogixapis/dashboards/v1/services/team_settings_service.proto",
-    "../../proto/com/coralogixapis/dashboards/v1/types.proto",
     ]
 }
 
@@ -162,4 +141,32 @@ fn views_service() -> &'static [&'static str] {
 
 fn actions_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/actions/v2/actions_service.proto"]
+}
+
+fn api_keys_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/aaa/apikeys/v2/api_keys.proto"]
+}
+
+fn target_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/archive/v2/target_service.proto"]
+}
+
+fn metrics_configurator_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/metrics/metrics-configurator.proto"]
+}
+
+fn retention_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/archive/v1/retentions_service.proto"]
+}
+
+fn team_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/aaa/organisations/v2/team_service.proto"]
+}
+
+fn sli_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/catalog/v1/sli_service.proto"]
+}
+
+fn slos_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/apm/services/v1/service_slo_service.proto"]
 }
