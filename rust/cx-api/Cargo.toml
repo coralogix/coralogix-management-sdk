@@ -22,6 +22,14 @@ default = [
     "tags",
     "views",
     "actions",
+    "alert_scheduler",
+    "api_keys",
+    "target",
+    "metrics_configurator",
+    "retentions",
+    "team",
+    "sli",
+    "slos",
 ]
 alerts = []
 rules = []
@@ -35,6 +43,14 @@ extensions = []
 dataprime = []
 views = []
 actions = []
+alert_scheduler = []
+api_keys = []
+target = []
+metrics_configurator = []
+retentions = []
+team = []
+sli = []
+slos = []
 
 [dependencies]
 prost = { workspace = true }
