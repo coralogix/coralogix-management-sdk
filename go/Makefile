@@ -1,9 +1,9 @@
 TEST?=$$(go list ./... | grep -v 'vendor')
 NAME=cxsdk
-BINARY=${NAME}
+BINARY=${NAME}.so
 VERSION=0.1
 OS_ARCH=darwin_arm64
-
+BUILD_ARGS=-ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
 default: build
 
 .PHONY: proto-clean
@@ -15,25 +15,25 @@ proto-compile: ## Compile message protobuf and gRPC service files.
 	@./scripts/generate_go_protos.sh
 
 build:
-	go build -o ${BINARY} -ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
+	go build -o out/${BINARY} ${BUILD_ARGS}
 
 release:
-	GOOS=darwin GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_darwin_amd64
-	GOOS=freebsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_freebsd_386
-	GOOS=freebsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_freebsd_amd64
-	GOOS=freebsd GOARCH=arm go build -o ./bin/${BINARY}_${VERSION}_freebsd_arm
-	GOOS=linux GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_linux_386
-	GOOS=linux GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_linux_amd64
-	GOOS=linux GOARCH=arm go build -o ./bin/${BINARY}_${VERSION}_linux_arm
-	GOOS=openbsd GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_openbsd_386
-	GOOS=openbsd GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_openbsd_amd64
-	GOOS=solaris GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_solaris_amd64
-	GOOS=windows GOARCH=386 go build -o ./bin/${BINARY}_${VERSION}_windows_386
-	GOOS=windows GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_windows_amd64
+	GOOS=darwin GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_darwin_amd64.dylib
+	GOOS=freebsd GOARCH=386 go build -o out/${BINARY}_${VERSION}_freebsd_386.so
+	GOOS=freebsd GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_freebsd_amd64.so
+	GOOS=freebsd GOARCH=arm go build -o out/${BINARY}_${VERSION}_freebsd_arm.so
+	GOOS=linux GOARCH=386 go build -o out/${BINARY}_${VERSION}_linux_386.so
+	GOOS=linux GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_linux_amd64.so
+	GOOS=linux GOARCH=arm go build -o out/${BINARY}_${VERSION}_linux_arm.so
+	GOOS=openbsd GOARCH=386 go build -o out/${BINARY}_${VERSION}_openbsd_386.so
+	GOOS=openbsd GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_openbsd_amd64.so
+	GOOS=solaris GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_solaris_amd64.so
+	GOOS=windows GOARCH=386 go build -o out/${BINARY}_${VERSION}_windows_386.dll
+	GOOS=windows GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_windows_amd64.dll
 
 test:
-	go test -i $(TEST) || exit 1
-	echo $(TEST) | xargs -t -n4 go test $(TESTARGS) -timeout=30s -parallel=4
+	go test -c ${BUILD_ARGS} || exit 1
+	echo $(TEST) | xargs -t -n4 go test  -c ${BUILD_ARGS} $(TESTARGS) -timeout=30s -parallel=4
 
 generate:
 	go generate
