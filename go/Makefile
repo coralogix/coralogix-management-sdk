@@ -1,6 +1,6 @@
 TEST?=$$(go list ./... | grep -v 'vendor')
 NAME=cxsdk
-BINARY=${NAME}.so
+BINARY=${NAME}
 VERSION=0.1
 OS_ARCH=darwin_arm64
 BUILD_ARGS=-ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
@@ -15,7 +15,7 @@ proto-compile: ## Compile message protobuf and gRPC service files.
 	@./scripts/generate_go_protos.sh
 
 build:
-	go build -o out/${BINARY} ${BUILD_ARGS}
+	go build -o out/${BINARY}.so ${BUILD_ARGS}
 
 release:
 	GOOS=darwin GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_darwin_amd64.dylib
