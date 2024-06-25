@@ -1,12 +1,15 @@
-use std::{collections::HashMap, str::FromStr};
+use std::str::FromStr;
 
 use anyhow::Result;
 use cx_sdk::{
     auth::{ApiKey, AuthData},
     com::coralogixapis::aaa::apikeys::v3::{
-        ::ApiKeysServiceClient, Action, CreateActionRequest,
-        CreateActionResponse, DeleteActionRequest, GetActionRequest, ListApiKeysRequest,
-        OrderApiKeysRequest, ReplaceActionRequest, ReplaceActionResponse,
+        self,
+        api_keys_service_client::ApiKeysServiceClient,
+        create_api_key_request::KeyPermissions,
+        update_api_key_request::{Permissions, Presets},
+        CreateApiKeyRequest, CreateApiKeyResponse, DeleteApiKeyRequest, GetApiKeyRequest,
+        GetApiKeyResponse, KeyInfo, Owner, UpdateApiKeyRequest, UpdateApiKeyResponse,
     },
 };
 use tokio::sync::Mutex;
@@ -21,6 +24,19 @@ pub fn make_request_with_metadata<T>(request: T, new_metadata: &MetadataMap) -> 
     let metadata = req.metadata_mut();
     *metadata = new_metadata.clone();
     req
+}
+
+fn convert(
+    key_permissions: v3::key_info::KeyPermissions,
+) -> v3::create_api_key_request::KeyPermissions {
+    v3::create_api_key_request::KeyPermissions {
+        presets: key_permissions
+            .presets
+            .into_iter()
+            .map(|p| p.name)
+            .collect(),
+        permissions: key_permissions.permissions,
+    }
 }
 
 pub struct ApiKeysService {
@@ -39,64 +55,87 @@ impl ApiKeysService {
         }
     }
 
-    pub async fn create(&self, action: Action) -> Result<CreateActionResponse> {
+    pub async fn create(
+        &self,
+        name: String,
+        owner: Option<Owner>,
+        presets: Vec<String>,
+        permissions: Vec<String>,
+    ) -> Result<CreateApiKeyResponse> {
         let request = make_request_with_metadata(
-            CreateActionRequest {
-                name: action.name,
-                url: action.url,
-                is_private: action.is_private,
-                source_type: action.source_type,
-                application_names: action.application_names,
-                subsystem_names: action.subsystem_names,
+            CreateApiKeyRequest {
+                name,
+                owner,
+                key_permissions: Some(KeyPermissions {
+                    presets,
+                    permissions,
+                }),
             },
             &self.metadata_map,
         );
         self.service_client
             .lock()
             .await
-            .create_action(request)
+            .create_api_key(request)
             .await
             .map(|r| r.into_inner())
             .map_err(From::from)
     }
 
-    pub async fn update(&self, action: Action) -> Result<ReplaceActionResponse> {
+    pub async fn update(
+        &self,
+        key_id: String,
+        is_active: Option<bool>,
+        new_name: Option<String>,
+        presets: Option<Presets>,
+        permissions: Option<Permissions>,
+    ) -> Result<UpdateApiKeyResponse> {
         let request = make_request_with_metadata(
-            ReplaceActionRequest {
-                action: Some(action),
+            UpdateApiKeyRequest {
+                key_id,
+                new_name,
+                is_active,
+                presets,
+                permissions,
             },
             &self.metadata_map,
         );
         self.service_client
             .lock()
             .await
-            .replace_action(request)
+            .update_api_key(request)
             .await
             .map(|r| r.into_inner())
             .map_err(From::from)
     }
 
-    pub async fn delete(&self, action_id: String) -> Result<()> {
-        let request = make_request_with_metadata(
-            DeleteActionRequest {
-                id: Some(action_id),
-            },
-            &self.metadata_map,
-        );
+    pub async fn delete(&self, key_id: String) -> Result<()> {
+        let request =
+            make_request_with_metadata(DeleteApiKeyRequest { key_id: key_id }, &self.metadata_map);
         self.service_client
             .lock()
             .await
-            .delete_action(request)
+            .delete_api_key(request)
             .await
             .map(|_| ())
+            .map_err(From::from)
+    }
+
+    pub async fn get(&self, key_id: String) -> Result<GetApiKeyResponse> {
+        let request =
+            make_request_with_metadata(GetApiKeyRequest { key_id: key_id }, &self.metadata_map);
+        self.service_client
+            .lock()
+            .await
+            .get_api_key(request)
+            .await
+            .map(|r| r.into_inner())
             .map_err(From::from)
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use cx_sdk::com::coralogixapis::actions::v2::{Action, SourceType};
-
     use crate::ApiKeysService;
 
     #[tokio::test]
@@ -105,50 +144,44 @@ mod tests {
             "https://ng-api-grpc.eu2.coralogix.com",
             "api-key".to_string(),
         );
-        let action = Action {
-            name: Some("action".to_string()),
-            url: Some("http://my.cool.website.com".to_string()),
-            is_private: Some(false),
-            source_type: SourceType::Log.into(),
-            application_names: vec!["app".to_string()],
-            subsystem_names: vec!["sub".to_string()],
-            id: None,
-            is_hidden: Some(false),
-            created_by: Some("luigi.taglialatela@coralogix.com".into()),
-        };
 
-        let create_action_result = service.create_action(action).await;
-        if let Err(e) = &create_action_result {
+        let create_result = service
+            .create(
+                "test action".to_string(),
+                None,
+                vec!["APM".to_string()],
+                vec!["livetail:Read".to_string()],
+            )
+            .await;
+
+        if let Err(e) = &create_result {
             println!("Error: {:?}", e);
         }
 
-        assert!(create_action_result.is_ok());
+        assert!(create_result.is_ok());
 
-        let created_action = create_action_result.unwrap().action.unwrap();
-        let updated_action = Action {
-            name: Some("updated action".to_string()),
-            ..created_action
-        };
+        let key_id = create_result.unwrap().key_id;
 
-        let replace_action_result = service.replace_action(updated_action).await;
-        assert!(replace_action_result.is_ok());
-
-        let replaced_action = replace_action_result.unwrap().action.unwrap();
-        assert!(replaced_action.name.unwrap() == "updated action");
-
-        let retrieved_action = service
-            .get_action(replaced_action.id.clone().unwrap())
+        let update_result = service
+            .update(
+                key_id.clone(),
+                Some(true),
+                Some("updated action".to_string()),
+                None,
+                None,
+            )
             .await;
+        assert!(update_result.is_ok());
 
-        assert!(retrieved_action.is_ok());
-        assert!(retrieved_action.unwrap().is_some());
+        let new_api_key = service.get(key_id.clone()).await;
 
-        let delete_action_result = service.delete_action(replaced_action.id.unwrap()).await;
+        assert!(new_api_key.is_ok());
+        assert_eq!(
+            new_api_key.unwrap().key_info.map(|k| k.name),
+            Some("updated action".to_string())
+        );
+
+        let delete_action_result = service.delete(key_id).await;
         assert!(delete_action_result.is_ok());
-
-        let retrieved_actions = service.list_actions().await;
-
-        assert!(retrieved_actions.is_ok());
-        assert!(!retrieved_actions.unwrap().is_empty());
     }
 }
