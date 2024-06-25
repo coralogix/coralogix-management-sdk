@@ -154,10 +154,6 @@ mod tests {
             )
             .await;
 
-        if let Err(e) = &create_result {
-            println!("Error: {:?}", e);
-        }
-
         assert!(create_result.is_ok());
 
         let key_id = create_result.unwrap().key_id;
