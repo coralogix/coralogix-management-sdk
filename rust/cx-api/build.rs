@@ -144,7 +144,7 @@ fn actions_service() -> &'static [&'static str] {
 }
 
 fn api_keys_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogixapis/aaa/apikeys/v2/api_keys.proto"]
+    &["../../proto/com/coralogixapis/aaa/apikeys/v3/api_keys.proto"]
 }
 
 fn target_service() -> &'static [&'static str] {

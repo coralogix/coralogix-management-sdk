@@ -7,4 +7,5 @@ members = [
     "custom-enrichments",
     "dashboards",
     "dataprime-query",
+    "api_keys"
 ]

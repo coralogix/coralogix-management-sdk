@@ -15,7 +15,7 @@ proto-compile: ## Compile message protobuf and gRPC service files.
 	@./scripts/generate_go_protos.sh
 
 build:
-	go build -o ${BINARY}
+	go build -o ${BINARY} -ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
 
 release:
 	GOOS=darwin GOARCH=amd64 go build -o ./bin/${BINARY}_${VERSION}_darwin_amd64

@@ -19,6 +19,11 @@ service KafkaOutTargetService {
   }
 }
 
+enum CompressionType {
+  COMPRESSION_TYPE_UNSPECIFIED = 0;
+  COMPRESSION_TYPE_GZIP = 1;
+}
+
 message GetKafkaOutTargetsRequest {
 }
 
@@ -55,4 +60,5 @@ message Target {
     google.protobuf.Timestamp created_at = 8;
     google.protobuf.Timestamp updated_at = 9;
     string api_key = 10;
+    optional CompressionType compression_type = 11;
 }

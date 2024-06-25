@@ -29,15 +29,19 @@ import "com/coralogixapis/alerts/v3/alert_type_definition/flow/flow_alert_type_d
 import "com/coralogixapis/alerts/v3/alert_type.proto";
 import "com/coralogixapis/alerts/v3/alert_priority.proto";
 
-
+/**
+* Represents An Existing or Created Alert
+ */
 message Alert {
   AlertProperties properties = 1;
-  //This is the unique Identifier
-  google.protobuf.StringValue id = 2;
-  optional google.protobuf.Timestamp created_time = 3;
-  optional google.protobuf.Timestamp updated_time = 4;
+  google.protobuf.StringValue id = 2; // This is the Alert's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+  google.protobuf.Timestamp created_time = 3;
+  google.protobuf.Timestamp updated_time = 4;
 }
 
+/**
+* Represents The non generated alert properties (the ones that are set by the user)
+ */
 message AlertProperties {
   google.protobuf.StringValue name = 1;
   google.protobuf.StringValue description = 2;
@@ -68,10 +72,7 @@ message AlertProperties {
     MetricLessThanUsualAlertTypeDefinition metric_less_than_usual = 118;
     MetricMoreThanOrEqualsAlertTypeDefinition metric_more_than_or_equals = 119;
     MetricLessThanOrEqualsAlertTypeDefinition metric_less_than_or_equals = 120;
-
-    //    LogsLessThanAlertTypeDefinitionUsual logs_less_than_usual = 119;
   };
-  //When Promql with group by this field needs to be empty or equal to the by clause, otherwise we fail the validation
   repeated google.protobuf.StringValue alert_group_bys = 7;
   AlertIncidentSettings incidents_settings = 8;
   AlertNotificationGroup notification_group = 9;

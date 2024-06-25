@@ -13,6 +13,11 @@ enum ProviderType {
   PROVIDER_TYPE_IBM_COS = 2;
 }
 
+enum PartitioningScheme {
+  PARTITIONING_SCHEME_UNSPECIFIED = 0;
+  PARTITIONING_SCHEME_DT_HR = 1;
+}
+
 message ArchiveTarget {
   Format format = 1;
   oneof physical_target {
@@ -25,4 +30,5 @@ message ArchiveTarget {
   optional string filename_prefix = 7;
   repeated ObjectTag tags = 8;
   int32 max_compaction_level = 9;
+  optional PartitioningScheme partitioning_scheme = 10;
 }

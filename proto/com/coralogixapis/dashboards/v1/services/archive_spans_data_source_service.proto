@@ -138,6 +138,7 @@ message SearchArchiveGroupedSpansSeriesRequest {
 
 message SearchArchiveGroupedSpansSeriesResponse {
   repeated common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
 }
 
 // Assumes timestamp is aliased to `timestamp` in the results.
@@ -154,6 +155,7 @@ message SearchArchiveGroupedSpansTimeSeriesRequest {
 
 message SearchArchiveGroupedSpansTimeSeriesResponse {
   common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
 }
 
 message SearchArchiveSpansTimeValueRequest {
