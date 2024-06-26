@@ -2,6 +2,7 @@
 members = [
     "actions",
     "alerts",
+    "archive-logs",
     "archive-metrics",
     "custom-enrichments",
     "dashboards",
