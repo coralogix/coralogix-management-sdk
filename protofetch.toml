@@ -88,7 +88,7 @@ branch = 'master'
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
 
 [cx-api-permissions]
-revision = "v0.1.61"
+revision = "v0.1.62"
 url = 'github.com/coralogix/cx-api-permissions'
 allow_policies = ["/com/coralogixapis/aaa/apikeys/v3/*"]
 

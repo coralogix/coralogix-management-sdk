@@ -68,6 +68,7 @@ message CreateApiKeyRequest {
   string name = 1;
   Owner owner = 2;
   KeyPermissions key_permissions = 3;
+  bool hashed = 4;
 }
 
 message CreateApiKeyResponse {

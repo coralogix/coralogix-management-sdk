@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+enum AlertDefPriority {
+  ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED = 0;
+  ALERT_DEF_PRIORITY_P4 = 1;
+  ALERT_DEF_PRIORITY_P3 = 2;
+  ALERT_DEF_PRIORITY_P2 = 3;
+  ALERT_DEF_PRIORITY_P1 = 4;
+}

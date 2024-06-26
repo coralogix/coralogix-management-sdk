@@ -6,7 +6,7 @@ import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
-import "com/coralogixapis/alerts/v3/alerts_service.proto";
+import "com/coralogixapis/alerts/v3/alert_defs_service.proto";
 
 service AlertEventService {
   rpc GetAlertEvent(GetAlertEventRequest) returns (GetAlertEventResponse) {

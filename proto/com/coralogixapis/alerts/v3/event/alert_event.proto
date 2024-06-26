@@ -5,7 +5,7 @@ package com.coralogixapis.alerts.v3;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/struct.proto";
-import "com/coralogixapis/alerts/v3/alert_type_definition/activity_analysis/activity_analysis.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto";
 message AlertEvent {
   map<string, string> permutation_labels = 1;
   map<string, string> group_labels = 2;

@@ -76,7 +76,7 @@ fn tags_service() -> &'static [&'static str] {
 }
 
 fn alerts_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogixapis/alerts/v3/alerts_service.proto"]
+    &["../../proto/com/coralogixapis/alerts/v3/alert_defs_service.proto"]
 }
 
 fn alerts_scheduler_service() -> &'static [&'static str] {

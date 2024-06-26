@@ -4,12 +4,11 @@ use anyhow::Result;
 use cx_sdk::{
     auth::{ApiKey, AuthData},
     com::coralogixapis::aaa::apikeys::v3::{
-        self,
         api_keys_service_client::ApiKeysServiceClient,
         create_api_key_request::KeyPermissions,
         update_api_key_request::{Permissions, Presets},
         CreateApiKeyRequest, CreateApiKeyResponse, DeleteApiKeyRequest, GetApiKeyRequest,
-        GetApiKeyResponse, KeyInfo, Owner, UpdateApiKeyRequest, UpdateApiKeyResponse,
+        GetApiKeyResponse, Owner, UpdateApiKeyRequest, UpdateApiKeyResponse,
     },
 };
 use tokio::sync::Mutex;
@@ -24,19 +23,6 @@ pub fn make_request_with_metadata<T>(request: T, new_metadata: &MetadataMap) -> 
     let metadata = req.metadata_mut();
     *metadata = new_metadata.clone();
     req
-}
-
-fn convert(
-    key_permissions: v3::key_info::KeyPermissions,
-) -> v3::create_api_key_request::KeyPermissions {
-    v3::create_api_key_request::KeyPermissions {
-        presets: key_permissions
-            .presets
-            .into_iter()
-            .map(|p| p.name)
-            .collect(),
-        permissions: key_permissions.permissions,
-    }
 }
 
 pub struct ApiKeysService {
@@ -61,9 +47,11 @@ impl ApiKeysService {
         owner: Option<Owner>,
         presets: Vec<String>,
         permissions: Vec<String>,
+        hashed: bool,
     ) -> Result<CreateApiKeyResponse> {
         let request = make_request_with_metadata(
             CreateApiKeyRequest {
+                hashed,
                 name,
                 owner,
                 key_permissions: Some(KeyPermissions {
@@ -155,6 +143,7 @@ mod tests {
                 }),
                 vec!["APM".to_string()],
                 vec![],
+                false,
             )
             .await;
 

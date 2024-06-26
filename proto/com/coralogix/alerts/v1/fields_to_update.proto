@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.alerts.v1;
-
-enum FieldsToUpdate {
-  FIELDS_TO_UPDATE_UNSUPPORTED_OR_UNSPECIFIED = 0;
-  FIELDS_TO_UPDATE_GROUP_BY = 1;
-  FIELDS_TO_UPDATE_ACTIVE_WHEN = 2;
-}
