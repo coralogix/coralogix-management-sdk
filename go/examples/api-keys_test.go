@@ -13,14 +13,14 @@ func TestApiKeys(t *testing.T) {
 	k := cxsdk.NewApiKeysClient(creator)
 
 	key, _ := k.CreateApiKey(context.Background(), &cxsdk.CreateApiKeyRequest{
-		Name: "name",
+		Name: "My APM KEY",
 		Owner: &cxsdk.Owner{
 			Owner: &cxsdk.Owner_UserId{
-				UserId: "userId",
+				UserId: "4013254",
 			},
 		},
 		KeyPermissions: &cxsdk.ApiKeyPermissions{
-			Presets:     []string{},
+			Presets:     []string{"APM"},
 			Permissions: []string{},
 		},
 	})

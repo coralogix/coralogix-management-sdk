@@ -136,6 +136,8 @@ impl ApiKeysService {
 
 #[cfg(test)]
 mod tests {
+    use cx_sdk::com::coralogixapis::aaa::apikeys::v3::owner::Owner;
+
     use crate::ApiKeysService;
 
     #[tokio::test]
@@ -147,10 +149,12 @@ mod tests {
 
         let create_result = service
             .create(
-                "test action".to_string(),
-                None,
+                "My APM KEY".to_string(),
+                Some(cx_sdk::com::coralogixapis::aaa::apikeys::v3::Owner {
+                    owner: Some(Owner::UserId("4013254".to_string())),
+                }),
                 vec!["APM".to_string()],
-                vec!["livetail:Read".to_string()],
+                vec![],
             )
             .await;
 
@@ -161,8 +165,8 @@ mod tests {
         let update_result = service
             .update(
                 key_id.clone(),
-                Some(true),
-                Some("updated action".to_string()),
+                None,
+                Some("new-name".to_string()),
                 None,
                 None,
             )
@@ -174,7 +178,7 @@ mod tests {
         assert!(new_api_key.is_ok());
         assert_eq!(
             new_api_key.unwrap().key_info.map(|k| k.name),
-            Some("updated action".to_string())
+            Some("new-name".to_string())
         );
 
         let delete_action_result = service.delete(key_id).await;
