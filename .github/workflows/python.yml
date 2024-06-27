@@ -10,7 +10,7 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  FLT:
 
     runs-on: ubuntu-latest
     defaults:

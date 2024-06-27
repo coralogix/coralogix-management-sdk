@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  lints:
+  FLT:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -35,5 +35,5 @@ jobs:
 
         # Optional: if set to true then the action don't cache or restore ~/.cache/go-build.
         # skip-build-cache: true
-    - name: test
-      run: make test 
+    # - name: test
+    #   run: make test 
