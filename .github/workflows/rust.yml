@@ -11,7 +11,6 @@ env:
 
 jobs:
   FLT:
-    name: Lints
     runs-on: ubuntu-latest
     defaults:
       run:
