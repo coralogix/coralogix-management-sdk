@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 
 const (
 	DashboardFoldersService_ListDashboardFolders_FullMethodName   = "/com.coralogixapis.dashboards.v1.services.DashboardFoldersService/ListDashboardFolders"
+	DashboardFoldersService_GetDashboardFolder_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.DashboardFoldersService/GetDashboardFolder"
 	DashboardFoldersService_CreateDashboardFolder_FullMethodName  = "/com.coralogixapis.dashboards.v1.services.DashboardFoldersService/CreateDashboardFolder"
 	DashboardFoldersService_ReplaceDashboardFolder_FullMethodName = "/com.coralogixapis.dashboards.v1.services.DashboardFoldersService/ReplaceDashboardFolder"
 	DashboardFoldersService_DeleteDashboardFolder_FullMethodName  = "/com.coralogixapis.dashboards.v1.services.DashboardFoldersService/DeleteDashboardFolder"
@@ -30,6 +31,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DashboardFoldersServiceClient interface {
 	ListDashboardFolders(ctx context.Context, in *ListDashboardFoldersRequest, opts ...grpc.CallOption) (*ListDashboardFoldersResponse, error)
+	GetDashboardFolder(ctx context.Context, in *GetDashboardFolderRequest, opts ...grpc.CallOption) (*GetDashboardFolderResponse, error)
 	CreateDashboardFolder(ctx context.Context, in *CreateDashboardFolderRequest, opts ...grpc.CallOption) (*CreateDashboardFolderResponse, error)
 	ReplaceDashboardFolder(ctx context.Context, in *ReplaceDashboardFolderRequest, opts ...grpc.CallOption) (*ReplaceDashboardFolderResponse, error)
 	DeleteDashboardFolder(ctx context.Context, in *DeleteDashboardFolderRequest, opts ...grpc.CallOption) (*DeleteDashboardFolderResponse, error)
@@ -46,6 +48,15 @@ func NewDashboardFoldersServiceClient(cc grpc.ClientConnInterface) DashboardFold
 func (c *dashboardFoldersServiceClient) ListDashboardFolders(ctx context.Context, in *ListDashboardFoldersRequest, opts ...grpc.CallOption) (*ListDashboardFoldersResponse, error) {
 	out := new(ListDashboardFoldersResponse)
 	err := c.cc.Invoke(ctx, DashboardFoldersService_ListDashboardFolders_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dashboardFoldersServiceClient) GetDashboardFolder(ctx context.Context, in *GetDashboardFolderRequest, opts ...grpc.CallOption) (*GetDashboardFolderResponse, error) {
+	out := new(GetDashboardFolderResponse)
+	err := c.cc.Invoke(ctx, DashboardFoldersService_GetDashboardFolder_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +95,7 @@ func (c *dashboardFoldersServiceClient) DeleteDashboardFolder(ctx context.Contex
 // for forward compatibility
 type DashboardFoldersServiceServer interface {
 	ListDashboardFolders(context.Context, *ListDashboardFoldersRequest) (*ListDashboardFoldersResponse, error)
+	GetDashboardFolder(context.Context, *GetDashboardFolderRequest) (*GetDashboardFolderResponse, error)
 	CreateDashboardFolder(context.Context, *CreateDashboardFolderRequest) (*CreateDashboardFolderResponse, error)
 	ReplaceDashboardFolder(context.Context, *ReplaceDashboardFolderRequest) (*ReplaceDashboardFolderResponse, error)
 	DeleteDashboardFolder(context.Context, *DeleteDashboardFolderRequest) (*DeleteDashboardFolderResponse, error)
@@ -96,6 +108,9 @@ type UnimplementedDashboardFoldersServiceServer struct {
 
 func (UnimplementedDashboardFoldersServiceServer) ListDashboardFolders(context.Context, *ListDashboardFoldersRequest) (*ListDashboardFoldersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDashboardFolders not implemented")
+}
+func (UnimplementedDashboardFoldersServiceServer) GetDashboardFolder(context.Context, *GetDashboardFolderRequest) (*GetDashboardFolderResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDashboardFolder not implemented")
 }
 func (UnimplementedDashboardFoldersServiceServer) CreateDashboardFolder(context.Context, *CreateDashboardFolderRequest) (*CreateDashboardFolderResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDashboardFolder not implemented")
@@ -134,6 +149,24 @@ func _DashboardFoldersService_ListDashboardFolders_Handler(srv interface{}, ctx 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(DashboardFoldersServiceServer).ListDashboardFolders(ctx, req.(*ListDashboardFoldersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DashboardFoldersService_GetDashboardFolder_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDashboardFolderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DashboardFoldersServiceServer).GetDashboardFolder(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DashboardFoldersService_GetDashboardFolder_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DashboardFoldersServiceServer).GetDashboardFolder(ctx, req.(*GetDashboardFolderRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -202,6 +235,10 @@ var DashboardFoldersService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDashboardFolders",
 			Handler:    _DashboardFoldersService_ListDashboardFolders_Handler,
+		},
+		{
+			MethodName: "GetDashboardFolder",
+			Handler:    _DashboardFoldersService_GetDashboardFolder_Handler,
 		},
 		{
 			MethodName: "CreateDashboardFolder",

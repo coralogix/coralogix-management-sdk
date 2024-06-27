@@ -76,7 +76,7 @@ fn tags_service() -> &'static [&'static str] {
 }
 
 fn alerts_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogixapis/alerts/v3/alerts_service.proto"]
+    &["../../proto/com/coralogixapis/alerts/v3/alert_defs_service.proto"]
 }
 
 fn alerts_scheduler_service() -> &'static [&'static str] {
@@ -144,7 +144,7 @@ fn actions_service() -> &'static [&'static str] {
 }
 
 fn api_keys_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogixapis/aaa/apikeys/v2/api_keys.proto"]
+    &["../../proto/com/coralogixapis/aaa/apikeys/v3/api_keys.proto"]
 }
 
 fn target_service() -> &'static [&'static str] {

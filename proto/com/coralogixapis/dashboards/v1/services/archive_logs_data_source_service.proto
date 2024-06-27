@@ -118,6 +118,7 @@ message SearchArchiveGroupedLogsSeriesRequest {
 
 message SearchArchiveGroupedLogsSeriesResponse {
   repeated common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
 }
 
 // Assumes timestamp is aliased to `timestamp` in the results.
@@ -134,6 +135,7 @@ message SearchArchiveGroupedLogsTimeSeriesRequest {
 
 message SearchArchiveGroupedLogsTimeSeriesResponse {
   common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
 }
 
 message SearchArchiveLogsTimeValueRequest {

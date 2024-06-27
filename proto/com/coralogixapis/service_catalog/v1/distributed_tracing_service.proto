@@ -84,6 +84,7 @@ message ListOperationsRequest{
   map<string, google.protobuf.ListValue> filters = 3;
   repeated SpanKind span_kind = 4;
   ApmSource apm_source = 5;
+  google.protobuf.StringValue offset = 6;
 }
 
 message ListOperationsResponse{

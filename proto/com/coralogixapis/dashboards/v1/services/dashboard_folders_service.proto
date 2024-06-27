@@ -12,6 +12,10 @@ service DashboardFoldersService {
     option (audit_log_description).description = "list dashboard folders";
   }
 
+  rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
+    option (audit_log_description).description = "get dashboard folder";
+  }
+
   rpc CreateDashboardFolder(CreateDashboardFolderRequest) returns (CreateDashboardFolderResponse) {
     option (audit_log_description).description = "create dashboard folder";
   }
@@ -50,4 +54,13 @@ message ListDashboardFoldersRequest {}
 
 message ListDashboardFoldersResponse {
   repeated common.DashboardFolder folder = 1;
+}
+
+message GetDashboardFolderRequest {
+  google.protobuf.StringValue request_id = 1;
+  google.protobuf.StringValue folder_id = 2;
+}
+
+message GetDashboardFolderResponse {
+  common.DashboardFolder folder = 1;
 }

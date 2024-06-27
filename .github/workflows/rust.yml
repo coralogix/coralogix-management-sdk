@@ -10,8 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  lints:
-    name: Lints
+  FLT:
     runs-on: ubuntu-latest
     defaults:
       run:

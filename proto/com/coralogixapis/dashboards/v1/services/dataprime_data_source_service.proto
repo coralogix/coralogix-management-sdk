@@ -38,4 +38,5 @@ message SearchDataprimeArchiveRequest {
 
 message SearchDataprimeArchiveResponse {
   repeated common.DataprimeResult results = 1;
+  map<string, string> meta = 2;
 }

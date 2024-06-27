@@ -58,5 +58,17 @@ message ServiceData{
     google.protobuf.Int64Value incoming_requests = 11;
     google.protobuf.Int64Value internal_requests = 12;
     SliData sli_data = 13;
+    google.protobuf.FloatValue p95_latency_trend = 14;
+    google.protobuf.FloatValue max_latency_trend = 15;
+    google.protobuf.FloatValue errors_trend = 16;
+    google.protobuf.FloatValue outgoing_requests_trend = 17;
+    google.protobuf.FloatValue incoming_requests_trend = 18;
+    google.protobuf.FloatValue internal_requests_trend = 19;
+    google.protobuf.Int64Value p95_latency_with_offset = 20;
+    google.protobuf.Int64Value max_latency_with_offset = 21;
+    google.protobuf.Int64Value errors_with_offset = 22;
+    google.protobuf.Int64Value outgoing_requests_with_offset = 23;
+    google.protobuf.Int64Value incoming_requests_with_offset = 24;
+    google.protobuf.Int64Value internal_requests_with_offset = 25;
   }
 }

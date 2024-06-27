@@ -29,6 +29,7 @@ message BarChart {
   common.SortByType sort_by = 9;
   google.protobuf.StringValue color_scheme = 10;
   common.DataModeType data_mode_type = 11;
+  BarValueDisplay bar_value_display = 12;
 
   message Query {
     oneof value {
@@ -88,4 +89,11 @@ message BarChart {
     repeated google.protobuf.StringValue group_names = 3;
     google.protobuf.StringValue stacked_group_name = 4;
   }
+}
+
+enum BarValueDisplay {
+  BAR_VALUE_DISPLAY_UNSPECIFIED = 0;
+  BAR_VALUE_DISPLAY_TOP = 1;
+  BAR_VALUE_DISPLAY_INSIDE = 2;
+  BAR_VALUE_DISPLAY_BOTH = 3;
 }

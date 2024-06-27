@@ -33,6 +33,12 @@ message GetOverviewResponse {
   repeated com.coralogixapis.apm.widgets.v1.LineChart latency_percentiles = 10;
   com.coralogixapis.apm.widgets.v1.Topk time_consuming_dependencies = 11;
   ApmSource apm_source = 12;
+  com.coralogixapis.apm.widgets.v1.Stat avg_latency_trend = 13;
+  com.coralogixapis.apm.widgets.v1.Stat throughput_trend = 14;
+  com.coralogixapis.apm.widgets.v1.Stat error_percentage_trend = 15;
+  com.coralogixapis.apm.widgets.v1.Stat avg_latency_with_offset = 16;
+  com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
+  com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
 }
 
 message GetOverviewStreamRequest {
@@ -40,6 +46,7 @@ message GetOverviewStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
   ApmSource apm_source = 4;
+  google.protobuf.Int64Value trend_offset = 5;
 }
 
 message GetOverviewStreamResponse {
@@ -56,6 +63,12 @@ message GetOverviewStreamResponse {
     com.coralogixapis.apm.widgets.v1.Topk time_consuming_actions = 9;
     RepeatedLineChart latency_percentiles = 10;
     com.coralogixapis.apm.widgets.v1.Topk time_consuming_dependencies = 11;
+    com.coralogixapis.apm.widgets.v1.Stat avg_latency_trend = 13;
+    com.coralogixapis.apm.widgets.v1.Stat throughput_trend = 14;
+    com.coralogixapis.apm.widgets.v1.Stat error_percentage_trend = 15;
+    com.coralogixapis.apm.widgets.v1.Stat avg_latency_with_offset = 16;
+    com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
+    com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
   }
 }
 

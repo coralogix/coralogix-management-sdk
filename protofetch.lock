@@ -1,16 +1,10 @@
 version = 2
 
 [[dependencies]]
-name = "alerts-api-protobuf"
-url = "github.com/coralogix/alerts-api-protobuf"
-branch = "master"
-commit_hash = "90135be3e265268b53fc43d9bb56bab86b0792f1"
-
-[[dependencies]]
 name = "alerts-api-protobuf-v3"
 url = "github.com/coralogix/cx-api-alerts"
 branch = "master"
-commit_hash = "703b63cb2aa590e83f199ea0c7963e60841bba5b"
+commit_hash = "f18f7952098fb91f583ee75e0a9e3d5e255171c5"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -34,19 +28,13 @@ commit_hash = "72e9f741c6dbdf3b1461b8de28f2bb8ed8202350"
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
 branch = "master"
-commit_hash = "b2bfe1a6ea40b77c6574dee2c4eef16f65dab147"
-
-[[dependencies]]
-name = "cx-api-actions"
-url = "github.com/coralogix/cx-api-actions"
-branch = "master"
-commit_hash = "186f40419a993ce325c93846597ff75c9e2a88a5"
+commit_hash = "2b0f969273957981c0cd70dd1ff4310e150bf381"
 
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
 branch = "master"
-commit_hash = "0d3a4b1f4f7a48da8f685ff260286c667458a0c3"
+commit_hash = "ff5cc2d689fc6b5bfffde8640b3f85a6522f9346"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -93,8 +81,8 @@ commit_hash = "9864f17666e61fd9af6e125bbd301bebf628a35f"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-branch = "master"
-commit_hash = "ce68b4a8dee77a77c092f3a7d47c6fe1a5060aca"
+revision = "v0.1.62"
+commit_hash = "b2bf56a7c3582c9ea7ea14f99b806b0988276a1f"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -112,13 +100,13 @@ commit_hash = "a049340e6ad651e6dc32b93f5e43e4194f0fc091"
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/scopes-service"
 branch = "master"
-commit_hash = "34edd52ec800dc350888646ac6e14b1f73ebccb0"
+commit_hash = "694fe417fb041c2e66bcaea46fd0dd8d3b397566"
 
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
 branch = "master"
-commit_hash = "4d2f8af15832772bb031d62586c58c6ab1d3c06e"
+commit_hash = "ea57018903f2cad823248f4765a9bd3a4998b049"
 
 [[dependencies]]
 name = "cx-api-tags"
