@@ -12,7 +12,7 @@ func TestApiKeys(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
 	k := cxsdk.NewApiKeysClient(creator)
 
-	key, _ := k.CreateApiKey(context.Background(), &cxsdk.CreateApiKeyRequest{
+	key, e := k.CreateApiKey(context.Background(), &cxsdk.CreateApiKeyRequest{
 		Name: "My APM KEY",
 		Owner: &cxsdk.Owner{
 			Owner: &cxsdk.Owner_UserId{
@@ -24,6 +24,7 @@ func TestApiKeys(t *testing.T) {
 			Permissions: []string{},
 		},
 	})
+	assert.Nil(t, e)
 
 	newName := "new-name"
 	k.UpdateApiKey(context.Background(), &cxsdk.UpdateApiKeyRequest{

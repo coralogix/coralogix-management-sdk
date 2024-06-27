@@ -99,7 +99,7 @@ impl ApiKeysService {
 
     pub async fn delete(&self, key_id: String) -> Result<()> {
         let request =
-            make_request_with_metadata(DeleteApiKeyRequest { key_id: key_id }, &self.metadata_map);
+            make_request_with_metadata(DeleteApiKeyRequest { key_id }, &self.metadata_map);
         self.service_client
             .lock()
             .await
