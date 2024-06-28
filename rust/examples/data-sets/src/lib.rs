@@ -3,15 +3,14 @@ use cx_sdk::auth::{ApiKey, AuthData};
 use cx_sdk::com::coralogix::enrichment::v1::custom_enrichment_service_client::CustomEnrichmentServiceClient;
 use cx_sdk::com::coralogix::enrichment::v1::{file::Content as FileContent, File};
 use cx_sdk::com::coralogix::enrichment::v1::{
-     UpdateCustomEnrichmentRequest,
-    UpdateCustomEnrichmentResponse,
-};
-use cx_sdk::com::coralogix::enrichment::v1::{
     CreateCustomEnrichmentRequest, CustomEnrichment, DeleteCustomEnrichmentResponse,
     GetCustomEnrichmentRequest, GetCustomEnrichmentsRequest,
 };
 use cx_sdk::com::coralogix::enrichment::v1::{
     CreateCustomEnrichmentResponse, DeleteCustomEnrichmentRequest,
+};
+use cx_sdk::com::coralogix::enrichment::v1::{
+    UpdateCustomEnrichmentRequest, UpdateCustomEnrichmentResponse,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
