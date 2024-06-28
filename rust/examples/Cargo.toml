@@ -5,7 +5,7 @@ members = [
     "alerts",
     "archive-logs",
     "archive-metrics",
-    "custom-enrichments",
+    "data-sets",
     "dashboards",
     "dataprime-query",
     "api_keys"

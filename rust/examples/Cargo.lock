@@ -301,18 +301,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "custom-enrichments"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "cx-sdk",
- "http 1.1.0",
- "tokio",
- "tonic",
-]
-
-[[package]]
 name = "cx-api"
 version = "0.1.0"
 dependencies = [
@@ -358,6 +346,18 @@ dependencies = [
  "tokio",
  "tonic",
  "uuid",
+]
+
+[[package]]
+name = "data-sets"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http 0.2.12",
+ "tokio",
+ "tonic",
 ]
 
 [[package]]
