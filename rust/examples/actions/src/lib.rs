@@ -156,9 +156,10 @@ mod tests {
             "https://ng-api-grpc.eu2.coralogix.com",
             "api-key".to_string(),
         );
+
         let action = Action {
-            name: Some("action".to_string()),
-            url: Some("http://my.cool.website.com".to_string()),
+            name: Some("google search action".to_string()),
+            url: Some("https://www.google.com/search?q={{$p.selected_value}}".to_string()),
             is_private: Some(false),
             source_type: SourceType::Log.into(),
             application_names: vec!["app".to_string()],
