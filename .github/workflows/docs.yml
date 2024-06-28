@@ -1,14 +1,17 @@
 name: Docs
 on:
   push:
-    branches: [main]
+    branches: [master]
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: deploy
   cancel-in-progress: false
+  
 jobs:
   build:
     name: Build
