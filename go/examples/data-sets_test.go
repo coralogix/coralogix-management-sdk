@@ -10,7 +10,7 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
-func TestCustomEnrichments(t *testing.T) {
+func TestDataSets(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
 	c := cxsdk.NewDataSetClient(creator)
 
