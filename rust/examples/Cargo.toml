@@ -9,4 +9,4 @@ members = [
     "dashboards",
     "dataprime-query",
     "api_keys"
-]
+, "alert-scheduler"]

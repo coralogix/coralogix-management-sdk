@@ -39,6 +39,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "alert-scheduler"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "alerts"
 version = "0.1.0"
 dependencies = [
