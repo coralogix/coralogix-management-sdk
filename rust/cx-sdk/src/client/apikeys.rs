@@ -48,7 +48,7 @@ impl ApiKeysClient {
     ///
     /// # Arguments
     /// * `name` - The name of the API key.
-    /// * `owner` - The owner of the API key.
+    /// * `owner` - The [`Owner`] of the API key.
     /// * `presets` - The presets of the API key.
     /// * `permissions` - The permissions of the API key.
     /// * `hashed` - Whether the API key should be encrypted.
@@ -91,7 +91,6 @@ impl ApiKeysClient {
     /// * `new_name` - The new name of the API key.
     /// * `presets` - The new presets of the API key.
     /// * `permissions` - The new permissions of the API key.
-    ///
     pub async fn update(
         &self,
         key_id: String,

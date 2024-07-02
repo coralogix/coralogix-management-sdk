@@ -11,11 +11,11 @@ mod tests {
     use tokio::sync::Mutex;
     
     #[tokio::test]
-    async fn test_actions_service() {
-        let service = ActionsClient::new(
+    async fn test_actions_client() {
+        let client = ActionsClient::new(
             "api-key".to_string().into(),
-            CoralogixRegion::EU2,
-        );
+            CoralogixRegion::from_env().unwrap(),
+        ).unwrap();
 
         let action = Action {
             name: Some("google search action".to_string()),
@@ -29,7 +29,7 @@ mod tests {
             created_by: Some("luigi.taglialatela@coralogix.com".into()),
         };
 
-        let create_action_result = service.create(action).await;
+        let create_action_result = client.create(action).await;
         if let Err(e) = &create_action_result {
             println!("Error: {:?}", e);
         }
@@ -42,23 +42,23 @@ mod tests {
             ..created_action
         };
 
-        let replace_action_result = service.replace(updated_action).await;
+        let replace_action_result = client.replace(updated_action).await;
         assert!(replace_action_result.is_ok());
 
         let replaced_action = replace_action_result.unwrap().action.unwrap();
         assert!(replaced_action.name.unwrap() == "updated action");
 
-        let retrieved_action = service
+        let retrieved_action = client
             .get(replaced_action.id.clone().unwrap())
             .await;
 
         assert!(retrieved_action.is_ok());
         assert!(retrieved_action.unwrap().is_some());
 
-        let delete_action_result = service.delete(replaced_action.id.unwrap()).await;
+        let delete_action_result = client.delete(replaced_action.id.unwrap()).await;
         assert!(delete_action_result.is_ok());
 
-        let retrieved_actions = service.list().await;
+        let retrieved_actions = client.list().await;
 
         assert!(retrieved_actions.is_ok());
         assert!(!retrieved_actions.unwrap().is_empty());

@@ -2,13 +2,13 @@
 mod tests {
     use cx_sdk::{client::apikeys::{ApiKeysClient, Owner}, CoralogixRegion};
     #[tokio::test]
-    async fn test_actions_service() {
-        let service = ApiKeysClient::new(
+    async fn test_actions_client() {
+        let client = ApiKeysClient::new(
             "api-key".to_string().into(),
-            CoralogixRegion::EU2,
-        );
+            CoralogixRegion::from_env().unwrap(),
+        ).unwrap();
 
-        let create_result = service
+        let create_result = client
             .create(
                 "My APM KEY".to_string(),
                 Some(Owner::UserId("4013254".to_string())),
@@ -22,7 +22,7 @@ mod tests {
 
         let key_id = create_result.unwrap().key_id;
 
-        let update_result = service
+        let update_result = client
             .update(
                 key_id.clone(),
                 None,
@@ -33,7 +33,7 @@ mod tests {
             .await;
         assert!(update_result.is_ok());
 
-        let new_api_key = service.get(key_id.clone()).await;
+        let new_api_key = client.get(key_id.clone()).await;
 
         assert!(new_api_key.is_ok());
         assert_eq!(
@@ -41,7 +41,7 @@ mod tests {
             Some("new-name".to_string())
         );
 
-        let delete_action_result = service.delete(key_id).await;
+        let delete_action_result = client.delete(key_id).await;
         assert!(delete_action_result.is_ok());
     }
 }

@@ -46,7 +46,7 @@ impl ActionsClient {
     /// Creates a new Action
     ///
     /// # Arguments
-    /// * `action` - The action to create.
+    /// * `action` - The [`Action`] to create.
     pub async fn create(&self, action: Action) -> Result<CreateActionResponse> {
         let request = make_request_with_metadata(
             CreateActionRequest {
