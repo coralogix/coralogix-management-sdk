@@ -3,46 +3,34 @@ package examples
 import (
 	"context"
 	cxsdk "coralogix-management-sdk/go"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/protobuf/types/known/wrapperspb"
+	"google.golang.org/protobuf/encoding/protojson"
 )
 
 func TestDashboards(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
 	c := cxsdk.NewDashboardsClient(creator)
-
-	action, e := c.CreateDashboard(context.Background(), &cxsdk.CreateActionRequest{
-		Name:             wrapperspb.String("google search action"),
-		Url:              wrapperspb.String("https://www.google.com/search?q={{$p.selected_value}}"),
-		IsPrivate:        wrapperspb.Bool(false),
-		SourceType:       cxsdk.SourceType_SOURCE_TYPE_LOG,
-		ApplicationNames: []*wrapperspb.StringValue{},
-		SubsystemNames:   []*wrapperspb.StringValue{},
+	dat, err := os.ReadFile("dashboard.json")
+	assert.Nil(t, err)
+	var d cxsdk.Dashboard
+	assert.Nil(t, protojson.Unmarshal(dat, &d))
+	_, e := c.CreateDashboard(context.Background(), &cxsdk.CreateDashboardRequest{
+		Dashboard: &d,
 	})
 	assert.Nil(t, e)
-
-	_, e = c.UpdateAction(context.Background(), &cxsdk.ReplaceActionRequest{
-		Action: &cxsdk.Action{
-			Id:               action.Action.Id,
-			Name:             wrapperspb.String("bing search action"),
-			Url:              wrapperspb.String("https://www.bing.com/search?q={{$p.selected_value}}"),
-			IsPrivate:        wrapperspb.Bool(false),
-			SourceType:       cxsdk.SourceType_SOURCE_TYPE_LOG,
-			ApplicationNames: []*wrapperspb.StringValue{},
-			SubsystemNames:   []*wrapperspb.StringValue{},
-		},
+	_, e = c.PinDashboard(context.Background(), &cxsdk.PinDashboardRequest{
+		DashboardId: d.Id,
 	})
 	assert.Nil(t, e)
-
-	updated, _ := c.GetAction(context.Background(), &cxsdk.GetActionRequest{
-		Id: action.Action.Id,
+	_, e = c.UnpinDashboard(context.Background(), &cxsdk.UnpinDashboardRequest{
+		DashboardId: d.Id,
 	})
-
-	assert.Equal(t, updated.Action.Url, "https://www.bing.com/search?q={{$p.selected_value}}")
-
-	c.DeleteAction(context.Background(), &cxsdk.DeleteActionRequest{
-		Id: action.Action.Id,
+	assert.Nil(t, e)
+	_, e = c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
+		DashboardId: d.Id,
 	})
+	assert.Nil(t, e)
 }
