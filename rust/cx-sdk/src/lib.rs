@@ -4,7 +4,7 @@ use com::coralogix::enrichment::v1::{
     GetCustomEnrichmentRequest, GetEnrichmentsRequest, RemoveEnrichmentsRequest,
     UpdateCustomEnrichmentRequest,
 };
-pub use cx_api::proto::*;
+use cx_api::proto::*;
 use error::SdkError;
 use std::{fmt::Debug, str::FromStr};
 use tonic::{
@@ -13,6 +13,7 @@ use tonic::{
 };
 
 pub mod auth;
+pub mod client;
 pub mod error;
 mod util;
 
@@ -42,6 +43,27 @@ impl CoralogixRegion {
             CoralogixRegion::Custom(custom) => custom,
         }
         .to_string()
+    }
+
+    pub fn from_env() -> Result<Self, SdkError> {
+        let region = std::env::var("CORALOGIX_REGION")?;
+        Ok(Self::from_str(&region)?)
+    }
+}
+
+impl FromStr for CoralogixRegion {
+    type Err = SdkError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s.to_lowercase().as_str() {
+            "us1" => Ok(CoralogixRegion::US1),
+            "us2" => Ok(CoralogixRegion::US2),
+            "eu1" => Ok(CoralogixRegion::EU1),
+            "eu2" => Ok(CoralogixRegion::EU2),
+            "ap1" => Ok(CoralogixRegion::AP1),
+            "ap2" => Ok(CoralogixRegion::AP2),
+            custom => Ok(CoralogixRegion::Custom(custom.to_string())),
+        }
     }
 }
 
