@@ -1,16 +1,6 @@
-use auth::{ApiKey, AuthData};
-use com::coralogix::enrichment::v1::{
-    AddEnrichmentsRequest, CreateCustomEnrichmentRequest, DeleteCustomEnrichmentRequest,
-    GetCustomEnrichmentRequest, GetEnrichmentsRequest, RemoveEnrichmentsRequest,
-    UpdateCustomEnrichmentRequest,
-};
 use cx_api::proto::*;
 use error::SdkError;
 use std::{fmt::Debug, str::FromStr};
-use tonic::{
-    transport::{Channel, Endpoint},
-    Request,
-};
 
 pub mod auth;
 pub mod client;
@@ -66,56 +56,3 @@ impl FromStr for CoralogixRegion {
         }
     }
 }
-
-pub struct CoralogixSdk {
-    /// Coralogix API key
-    auth: AuthData,
-
-    /// Coralogix team
-    pub region: CoralogixRegion,
-}
-
-impl CoralogixSdk {
-    /// Create a new Coralogix client
-    pub fn new(auth: ApiKey, region: CoralogixRegion) -> Self {
-        Self {
-            auth: (&auth).into(),
-            region,
-        }
-    }
-
-    pub fn connect<T: WrappedClient>(&self) -> Result<T, SdkError> {
-        let channel: Channel = Endpoint::from_str(&self.region.endpoint())?.connect_lazy();
-        Ok(T::connect(channel))
-    }
-
-    pub fn auth_data(&self) -> &AuthData {
-        &self.auth
-    }
-}
-
-pub trait WrappedClient {
-    /// Create a new client
-    fn connect(channel: Channel) -> Self;
-}
-
-pub trait AuthenticatedRequest
-where
-    Self: Sized,
-{
-    fn authenticate(self, authentication: &AuthData) -> Request<Self> {
-        let auth_metadata = authentication.to_metadata_map();
-        let mut req = Request::new(self);
-        let metadata = req.metadata_mut();
-        *metadata = auth_metadata.clone();
-        req
-    }
-}
-
-impl AuthenticatedRequest for CreateCustomEnrichmentRequest {}
-impl AuthenticatedRequest for DeleteCustomEnrichmentRequest {}
-impl AuthenticatedRequest for UpdateCustomEnrichmentRequest {}
-impl AuthenticatedRequest for GetEnrichmentsRequest {}
-impl AuthenticatedRequest for AddEnrichmentsRequest {}
-impl AuthenticatedRequest for RemoveEnrichmentsRequest {}
-impl AuthenticatedRequest for GetCustomEnrichmentRequest {}
