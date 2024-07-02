@@ -9,7 +9,20 @@ type ActionsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-func (a ActionsClient) CreateAction(ctx context.Context, req *actions.CreateActionRequest) (*actions.CreateActionResponse, error) {
+type CreateActionRequest = actions.CreateActionRequest
+type ReplaceActionRequest = actions.ReplaceActionRequest
+type DeleteActionRequest = actions.DeleteActionRequest
+type GetActionRequest = actions.GetActionRequest
+
+type Action = actions.Action
+
+const (
+	SourceType_SOURCE_TYPE_UNSPECIFIED = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
+	SourceType_SOURCE_TYPE_LOG         = actions.SourceType_SOURCE_TYPE_LOG
+	SourceType_SOURCE_TYPE_DATA_MAP    = actions.SourceType_SOURCE_TYPE_DATA_MAP
+)
+
+func (a ActionsClient) CreateAction(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -22,7 +35,7 @@ func (a ActionsClient) CreateAction(ctx context.Context, req *actions.CreateActi
 	return client.CreateAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (a ActionsClient) GetAction(ctx context.Context, req *actions.GetActionRequest) (*actions.GetActionResponse, error) {
+func (a ActionsClient) GetAction(ctx context.Context, req *GetActionRequest) (*actions.GetActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -35,7 +48,7 @@ func (a ActionsClient) GetAction(ctx context.Context, req *actions.GetActionRequ
 	return client.GetAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (a ActionsClient) UpdateAction(ctx context.Context, req *actions.ReplaceActionRequest) (*actions.ReplaceActionResponse, error) {
+func (a ActionsClient) UpdateAction(ctx context.Context, req *ReplaceActionRequest) (*actions.ReplaceActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -48,7 +61,7 @@ func (a ActionsClient) UpdateAction(ctx context.Context, req *actions.ReplaceAct
 	return client.ReplaceAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (a ActionsClient) DeleteAction(ctx context.Context, req *actions.DeleteActionRequest) (*actions.DeleteActionResponse, error) {
+func (a ActionsClient) DeleteAction(ctx context.Context, req *DeleteActionRequest) (*actions.DeleteActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

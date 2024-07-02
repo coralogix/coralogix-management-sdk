@@ -2,7 +2,9 @@ use anyhow::Result;
 use cx_sdk::auth::{ApiKey, AuthData};
 use cx_sdk::com::coralogixapis::alerts::v3::alert_defs_service_client::AlertDefsServiceClient;
 use cx_sdk::com::coralogixapis::alerts::v3::{
-    AlertDef, CreateAlertDefRequest, CreateAlertDefResponse, DeleteAlertDefRequest, GetAlertDefRequest, GetAlertDefResponse, ListAlertDefsRequest, ListAlertDefsResponse, ReplaceAlertDefRequest, ReplaceAlertDefResponse, SetActiveRequest
+    AlertDef, CreateAlertDefRequest, CreateAlertDefResponse, DeleteAlertDefRequest,
+    GetAlertDefRequest, GetAlertDefResponse, ListAlertDefsRequest, ListAlertDefsResponse,
+    ReplaceAlertDefRequest, ReplaceAlertDefResponse, SetActiveRequest,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
@@ -36,8 +38,10 @@ impl AlertsService {
     }
 
     pub async fn get_alert(&self, alert_id: String) -> Result<GetAlertDefResponse> {
-        let request =
-            make_request_with_metadata(GetAlertDefRequest { id: Some(alert_id) }, &self.metadata_map);
+        let request = make_request_with_metadata(
+            GetAlertDefRequest { id: Some(alert_id) },
+            &self.metadata_map,
+        );
         {
             let mut client = self.service_client.lock().await.clone();
 
@@ -49,11 +53,8 @@ impl AlertsService {
         }
     }
 
-    pub async fn list_alerts(
-        &self
-    ) -> Result<ListAlertDefsResponse> {
-        let request =
-            make_request_with_metadata(ListAlertDefsRequest {}, &self.metadata_map);
+    pub async fn list_alerts(&self) -> Result<ListAlertDefsResponse> {
+        let request = make_request_with_metadata(ListAlertDefsRequest {}, &self.metadata_map);
         {
             let mut client = self.service_client.lock().await.clone();
 
@@ -68,7 +69,7 @@ impl AlertsService {
     pub async fn create_alert(&self, alert: AlertDef) -> Result<CreateAlertDefResponse> {
         let request = make_request_with_metadata(
             CreateAlertDefRequest {
-                alert_def_properties:alert.alert_def_properties,
+                alert_def_properties: alert.alert_def_properties,
             },
             &self.metadata_map,
         );
@@ -140,7 +141,13 @@ impl AlertsService {
 mod tests {
     use std::collections::HashMap;
 
-    use cx_sdk::com::coralogixapis::alerts::v3::{alert_def_notification::{IntegrationType, RetriggeringPeriod}, alert_def_properties::{Schedule, TypeDefinition}, ActivitySchedule, AlertDefNotification, AlertDefNotificationGroup, AlertDefPriority, AlertDefProperties, AlertDefType, LogsMoreThanTypeDefinition, NotifyOn, Recipients, TimeOfDay};
+    use cx_sdk::com::coralogixapis::alerts::v3::{
+        alert_def_notification::{IntegrationType, RetriggeringPeriod},
+        alert_def_properties::{Schedule, TypeDefinition},
+        ActivitySchedule, AlertDefNotification, AlertDefNotificationGroup, AlertDefPriority,
+        AlertDefProperties, AlertDefType, LogsMoreThanTypeDefinition, NotifyOn, Recipients,
+        TimeOfDay,
+    };
 
     use super::*;
 
@@ -182,15 +189,13 @@ mod tests {
                         minutes: 0,
                     }),
                 })),
-                type_definition: Some(TypeDefinition::LogsMoreThan(
-                    LogsMoreThanTypeDefinition {
-                        logs_filter: None,
-                        threshold: Some(100),
-                        time_window: None,
-                        evaluation_window: 120,
-                        notification_payload_filter: vec![],
-                    },
-                )),
+                type_definition: Some(TypeDefinition::LogsMoreThan(LogsMoreThanTypeDefinition {
+                    logs_filter: None,
+                    threshold: Some(100),
+                    time_window: None,
+                    evaluation_window: 120,
+                    notification_payload_filter: vec![],
+                })),
             }),
             id: None,
         };
@@ -224,7 +229,14 @@ mod tests {
             .alert_def
             .unwrap();
 
-        assert!(updated_alert.alert_def_properties.unwrap().description.unwrap() == "updated description");
+        assert!(
+            updated_alert
+                .alert_def_properties
+                .unwrap()
+                .description
+                .unwrap()
+                == "updated description"
+        );
 
         alerts_service
             .delete_alert(updated_alert.id.unwrap())
