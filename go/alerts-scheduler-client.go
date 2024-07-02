@@ -3,6 +3,26 @@ package cxsdk
 import (
 	"context"
 	alertsSchedulers "coralogix-management-sdk/go/internal/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1"
+
+	metaLabels "coralogix-management-sdk/go/internal/coralogixapis/alerting/meta_labels_protobuf/v1"
+)
+
+type AlertSchedulerRule = alertsSchedulers.AlertSchedulerRule
+type CreateAlertSchedulerRuleRequest = alertsSchedulers.CreateAlertSchedulerRuleRequest
+type UpdateAlertSchedulerRuleRequest = alertsSchedulers.UpdateAlertSchedulerRuleRequest
+type GetAlertSchedulerRuleRequest = alertsSchedulers.GetAlertSchedulerRuleRequest
+type DeleteAlertSchedulerRuleRequest = alertsSchedulers.DeleteAlertSchedulerRuleRequest
+type Schedule = alertsSchedulers.Schedule
+type Schedule_OneTime = alertsSchedulers.Schedule_OneTime
+type OneTime = alertsSchedulers.OneTime
+type Timeframe = alertsSchedulers.Timeframe
+type Timeframe_EndTime = alertsSchedulers.Timeframe_EndTime
+type MetaLabel = metaLabels.MetaLabel
+
+const (
+	ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE    = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE
+	ScheduleOperation_SCHEDULE_OPERATION_UNSPECIFIED = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_UNSPECIFIED
+	ScheduleOperation_SCHEDULE_OPERATION_MUTE        = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_MUTE
 )
 
 type AlertsSchedulersClient struct {
