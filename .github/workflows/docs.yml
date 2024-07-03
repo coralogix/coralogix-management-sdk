@@ -46,7 +46,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          path: $RUNNER_TEMP/doc.tgz
+          path: ${{ runner.temp }}/doc.tgz
   deploy:
     name: Deploy
     environment:
