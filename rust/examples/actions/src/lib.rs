@@ -5,7 +5,7 @@ mod tests {
 
     use anyhow::Result;
     use cx_sdk::{
-        auth::{ApiKey, AuthData},
+        auth::ApiKey,
         client::{actions::Action, ActionsClient}, CoralogixRegion
     };
     use tokio::sync::Mutex;
@@ -13,7 +13,7 @@ mod tests {
     #[tokio::test]
     async fn test_actions_client() {
         let client = ActionsClient::new(
-            "api-key".to_string().into(),
+            ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
         ).unwrap();
 

@@ -7,6 +7,8 @@ pub mod client;
 pub mod error;
 mod util;
 
+const ENV_CORALOGIX_REGION: &str = "CORALOGIX_REGION";
+
 /// From [https://coralogix.com/docs/coralogix-domain/]()
 #[derive(Debug, Clone)]
 pub enum CoralogixRegion {
@@ -36,7 +38,7 @@ impl CoralogixRegion {
     }
 
     pub fn from_env() -> Result<Self, SdkError> {
-        let region = std::env::var("CORALOGIX_REGION")?;
+        let region = std::env::var(ENV_CORALOGIX_REGION)?;
         Ok(Self::from_str(&region)?)
     }
 }

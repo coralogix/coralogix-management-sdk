@@ -4,7 +4,7 @@ mod tests {
     #[tokio::test]
     async fn test_actions_client() {
         let client = ApiKeysClient::new(
-            "api-key".to_string().into(),
+            ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
         ).unwrap();
 

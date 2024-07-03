@@ -56,7 +56,7 @@ impl DataprimeQueryService {
 #[tokio::main]
 async fn main() {
     let svc =
-        DataprimeQueryService::new("https://ng-api-grpc.eu2.coralogix.com", "my-api-key".into());
+        DataprimeQueryService::new("https://ng-api-grpc.eu2.coralogix.com", ApiKey::from_env().unwrap());
 
     let mut stream = svc
         .run_query("filter log_obj.message ~ 'Hello world'".to_string())

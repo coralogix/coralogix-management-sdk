@@ -1,13 +1,13 @@
 
 #[cfg(test)]
 mod tests {
-    use cx_sdk::{client::datasets::DatasetClient, CoralogixRegion};
+    use cx_sdk::{client::datasets::DatasetClient, auth::ApiKey, CoralogixRegion};
     use tokio::fs;
 
 
     #[tokio::test]
     async fn test_datasets() {
-        let client = DatasetClient::new("my-api-key".into(), CoralogixRegion::from_env().unwrap()).unwrap();
+        let client = DatasetClient::new(ApiKey::from_env().unwrap(), CoralogixRegion::from_env().unwrap()).unwrap();
         let dataset = client
             .create(
                 "my-enrichment".into(),

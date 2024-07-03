@@ -3,12 +3,13 @@ mod tests {
     use cx_sdk::{
         client::dashboards::{Dashboard, DashboardsClient},
         CoralogixRegion,
+        auth::ApiKey,
     };
 
     #[tokio::test]
     async fn test_dashboard_client() {
         let client =
-            DashboardsClient::new("my-api-key".into(), CoralogixRegion::from_env().unwrap())
+            DashboardsClient::new(ApiKey::from_env().unwrap(), CoralogixRegion::from_env().unwrap())
                 .unwrap();
         let id = "abcdefghijklmnopqrstx".to_string();
         let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
