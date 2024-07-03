@@ -44,7 +44,7 @@ jobs:
       - name: Tar docs
         run: tar cfz $RUNNER_TEMP/doc.tgz $RUNNER_TEMP/doc
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: $RUNNER_TEMP/doc.tgz
   deploy:
