@@ -42,7 +42,7 @@ jobs:
       - name: Remove lock file
         run: rm $RUNNER_TEMP/doc/.lock
       - name: Tar docs
-        run: tar cfz $RUNNER_TEMP/doc.tgz target/doc
+        run: tar cfz $RUNNER_TEMP/doc.tgz $RUNNER_TEMP/doc
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
