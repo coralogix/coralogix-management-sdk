@@ -140,8 +140,7 @@ impl ApiKeysClient {
     /// # Arguments
     /// * `key_id` - The ID of the API key to retrieve.
     pub async fn get(&self, key_id: String) -> Result<GetApiKeyResponse> {
-        let request =
-            make_request_with_metadata(GetApiKeyRequest { key_id: key_id }, &self.metadata_map);
+        let request = make_request_with_metadata(GetApiKeyRequest { key_id }, &self.metadata_map);
         self.service_client
             .lock()
             .await

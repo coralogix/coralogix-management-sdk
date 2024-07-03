@@ -8,13 +8,16 @@ const AUTHORIZATION_HEADER_NAME: &str = "authorization";
 const ENV_API_KEY: &str = "CORALOGIX_API_KEY";
 
 #[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord)]
+/// The API key used for authentication.
 pub struct ApiKey(String);
 
 impl ApiKey {
+    /// Returns the API key as a string.
     pub fn token(&self) -> &str {
         &self.0
     }
 
+    /// Creates a new API key from the ENV_API_KEY environment variable.
     pub fn from_env() -> Result<Self> {
         std::env::var(ENV_API_KEY).map(ApiKey).map_err(From::from)
     }
@@ -39,19 +42,26 @@ impl Debug for ApiKey {
 }
 
 #[derive(Default, Debug, Clone)]
+/// The authentication data.
 pub struct AuthData {
     header_map: HeaderMap,
 }
 
 impl AuthData {
+    /// Creates a new AuthData instance.
+    ///
+    /// # Arguments
+    /// * `header_map` - The header map to use for authentication.
     pub fn new(header_map: HeaderMap) -> Self {
         AuthData { header_map }
     }
 
+    /// Returns the underlying header map.
     pub fn to_header_map(&self) -> HeaderMap {
         self.header_map.clone()
     }
 
+    /// Returns the underlying header map as a MetadataMap.
     pub fn to_metadata_map(&self) -> MetadataMap {
         MetadataMap::from_headers(self.header_map.clone())
     }

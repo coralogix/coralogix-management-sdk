@@ -64,6 +64,7 @@ impl TcoPoliciesClient {
     /// * `subsystem_rule` - The subsystem [`Rule`] of the policy.
     /// * `archive_retention` - The [`ArchiveRetention`] of the policy.
     /// * `source_type_rules` - The [`SourceTypeRules`] of the policy.
+    #[allow(clippy::too_many_arguments)]
     pub async fn create(
         &self,
         name: Option<String>,
@@ -106,6 +107,7 @@ impl TcoPoliciesClient {
     /// * `subsystem_rule` - The subsystem [`Rule`] of the policy.
     /// * `archive_retention` - The [`ArchiveRetention`] of the policy.
     /// * `source_type_rules` - The [`SourceTypeRules`] of the policy.
+    #[allow(clippy::too_many_arguments)]
     pub async fn update(
         &self,
         id: String,

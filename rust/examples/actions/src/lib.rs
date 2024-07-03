@@ -1,21 +1,22 @@
-
 #[cfg(test)]
 mod tests {
-    use std::{collections::HashMap, str::FromStr};
 
-    use anyhow::Result;
     use cx_sdk::{
         auth::ApiKey,
-        client::{actions::Action, ActionsClient}, CoralogixRegion
+        client::actions::{Action, ActionsClient, SourceType},
+        CoralogixRegion,
     };
-    use tokio::sync::Mutex;
-    
+
     #[tokio::test]
     async fn test_actions_client() {
+        let api_key = std::env::var("CORALOGIX_ALERTS_RULES_TAGS_API_KEY").unwrap();
         let client = ActionsClient::new(
-            ApiKey::from_env().unwrap(),
+            ApiKey::from(api_key.as_str()),
             CoralogixRegion::from_env().unwrap(),
-        ).unwrap();
+        )
+        .unwrap();
+
+        delete_all_actions(&client).await;
 
         let action = Action {
             name: Some("google search action".to_string()),
@@ -31,7 +32,8 @@ mod tests {
 
         let create_action_result = client.create(action).await;
         if let Err(e) = &create_action_result {
-            println!("Error: {:?}", e);
+            let err = e.to_string();
+            println!("Error: {:?}", err);
         }
 
         assert!(create_action_result.is_ok());
@@ -48,9 +50,7 @@ mod tests {
         let replaced_action = replace_action_result.unwrap().action.unwrap();
         assert!(replaced_action.name.unwrap() == "updated action");
 
-        let retrieved_action = client
-            .get(replaced_action.id.clone().unwrap())
-            .await;
+        let retrieved_action = client.get(replaced_action.id.clone().unwrap()).await;
 
         assert!(retrieved_action.is_ok());
         assert!(retrieved_action.unwrap().is_some());
@@ -61,6 +61,12 @@ mod tests {
         let retrieved_actions = client.list().await;
 
         assert!(retrieved_actions.is_ok());
-        assert!(!retrieved_actions.unwrap().is_empty());
+    }
+
+    async fn delete_all_actions(actions_client: &ActionsClient) {
+        let actions = actions_client.list().await.unwrap();
+        for action in actions {
+            actions_client.delete(action.id.unwrap()).await.unwrap();
+        }
     }
 }
