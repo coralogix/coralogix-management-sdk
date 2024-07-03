@@ -2,8 +2,9 @@ use cx_api::proto::com::coralogixapis::aaa::apikeys::v3::{
     api_keys_service_client::ApiKeysServiceClient,
     create_api_key_request::KeyPermissions,
     update_api_key_request::{Permissions, Presets},
-    CreateApiKeyRequest, CreateApiKeyResponse, DeleteApiKeyRequest, GetApiKeyRequest,
-    GetApiKeyResponse, Owner as OwnerWrapper, UpdateApiKeyRequest, UpdateApiKeyResponse,
+    CreateApiKeyRequest, CreateApiKeyResponse, DeleteApiKeyRequest, DeleteApiKeyResponse,
+    GetApiKeyRequest, GetApiKeyResponse, Owner as OwnerWrapper, UpdateApiKeyRequest,
+    UpdateApiKeyResponse,
 };
 use std::str::FromStr;
 
@@ -122,7 +123,7 @@ impl ApiKeysClient {
     ///
     /// # Arguments
     /// * `key_id` - The ID of the API key to delete.
-    pub async fn delete(&self, key_id: String) -> Result<()> {
+    pub async fn delete(&self, key_id: String) -> Result<DeleteApiKeyResponse> {
         let request =
             make_request_with_metadata(DeleteApiKeyRequest { key_id }, &self.metadata_map);
         self.service_client
@@ -130,7 +131,7 @@ impl ApiKeysClient {
             .await
             .delete_api_key(request)
             .await
-            .map(|_| ())
+            .map(|r| r.into_inner())
             .map_err(From::from)
     }
 

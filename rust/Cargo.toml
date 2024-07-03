@@ -31,7 +31,7 @@ humantime-serde = "*"
 prost = "*"
 prost-types = "*"
 tonic = { version = "0.11", features = ["gzip", "prost", "tls", "tls-roots"] }
-url = { version = "2.3" }
+url = { version = "2.5" }
 tracing = { version = "0.1", features = ["default", "log"] }
 time = { version = "0.3", features = [
     "formatting",
@@ -40,4 +40,4 @@ time = { version = "0.3", features = [
     "serde",
 ] }
 serde = { version = "1", features = ["derive"] }
-bytes = "*"
+bytes = "1.6"

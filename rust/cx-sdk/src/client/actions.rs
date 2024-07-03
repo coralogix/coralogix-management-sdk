@@ -13,6 +13,7 @@ use crate::{
 
 pub use crate::com::coralogixapis::actions::v2::Action;
 
+use cx_api::proto::com::coralogixapis::actions::v2::DeleteActionResponse;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
@@ -92,7 +93,7 @@ impl ActionsClient {
     ///
     /// # Arguments
     /// * `action_id` - The id of the action to delete.
-    pub async fn delete(&self, action_id: String) -> Result<()> {
+    pub async fn delete(&self, action_id: String) -> Result<DeleteActionResponse> {
         let request = make_request_with_metadata(
             DeleteActionRequest {
                 id: Some(action_id),
@@ -104,7 +105,7 @@ impl ActionsClient {
             .await
             .delete_action(request)
             .await
-            .map(|_| ())
+            .map(|r| r.into_inner())
             .map_err(From::from)
     }
 
