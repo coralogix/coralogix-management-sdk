@@ -23,3 +23,4 @@ tokio-stream = { workspace = true }
 tokio-util = { workspace = true }
 tonic = { workspace = true, features = ["gzip", "prost", "tls", "tls-roots"] }
 tracing = { workspace = true }
+url ={ workspace = true }

@@ -1,9 +1,11 @@
+use crate::error::Result;
 use std::fmt::{Debug, Formatter};
 
 use http::{HeaderMap, HeaderName, HeaderValue};
 use tonic::metadata::MetadataMap;
 
 const AUTHORIZATION_HEADER_NAME: &str = "authorization";
+const ENV_API_KEY: &str = "CORALOGIX_API_KEY";
 
 #[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord)]
 pub struct ApiKey(String);
@@ -11,6 +13,10 @@ pub struct ApiKey(String);
 impl ApiKey {
     pub fn token(&self) -> &str {
         &self.0
+    }
+
+    pub fn from_env() -> Result<Self> {
+        std::env::var(ENV_API_KEY).map(ApiKey).map_err(From::from)
     }
 }
 
