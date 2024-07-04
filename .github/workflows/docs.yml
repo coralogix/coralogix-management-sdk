@@ -41,12 +41,10 @@ jobs:
         run: echo '<meta http-equiv="refresh" content="0;url=aoc/index.html">' > $RUNNER_TEMP/doc/index.html
       - name: Remove lock file
         run: rm $RUNNER_TEMP/doc/.lock
-      - name: Tar docs
-        run: tar cfzv $RUNNER_TEMP/doc.tgz -C $RUNNER_TEMP/doc .
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ runner.temp }}/doc.tgz
+          path: ${{ runner.temp }}/doc
   deploy:
     name: Deploy
     environment:
