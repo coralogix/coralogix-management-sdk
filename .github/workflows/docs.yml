@@ -1,7 +1,7 @@
 name: Docs
 on:
   push:
-    branches: [IAC-87-III]
+    branches: [master]
 
 permissions:
   contents: read
