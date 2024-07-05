@@ -33,8 +33,8 @@ impl ActionsClient {
     /// Creates a new client for the Actions API.
     ///
     /// # Arguments
-    /// * `api_key` - The API key to use for authentication.
-    /// * `region` - The region to connect to.
+    /// * `api_key` - The [`ApiKey`] to use for authentication.
+    /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
         let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();
