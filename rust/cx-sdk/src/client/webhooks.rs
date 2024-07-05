@@ -30,7 +30,7 @@ use url::Url;
 use crate::CoralogixRegion;
 
 /// The Webhooks API client.
-/// Read more at [https://coralogix.com/docs/webhooks-api/]()
+/// Read more at <https://coralogix.com/docs/webhooks-api/>
 pub struct WebhooksClient {
     metadata_map: MetadataMap,
     service_client: Mutex<OutgoingWebhooksServiceClient<Channel>>,

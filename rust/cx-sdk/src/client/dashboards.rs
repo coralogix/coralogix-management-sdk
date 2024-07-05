@@ -26,7 +26,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Dashboards API client.
-/// Read more at [https://coralogix.com/docs/custom-dashboards/]()
+/// Read more at <https://coralogix.com/docs/custom-dashboards/>
 pub struct DashboardsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<DashboardsServiceClient<Channel>>,

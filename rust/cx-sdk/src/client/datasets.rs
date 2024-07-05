@@ -26,7 +26,7 @@ use crate::CoralogixRegion;
 pub use crate::com::coralogix::enrichment::v1::CustomEnrichment;
 
 /// The Custom Enrichments API client.
-/// Read more at [https://coralogix.com/docs/custom-enrichment-api/]()
+/// Read more at <https://coralogix.com/docs/custom-enrichment-api/>
 pub struct DatasetClient {
     metadata_map: MetadataMap,
     service_client: Mutex<CustomEnrichmentServiceClient<Channel>>,

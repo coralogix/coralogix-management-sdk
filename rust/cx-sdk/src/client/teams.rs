@@ -22,7 +22,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Team API client.
-/// Read more at [https://coralogix.com/docs/user-team-management/]()
+/// Read more at <https://coralogix.com/docs/user-team-management/>
 pub struct TeamsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<TeamServiceClient<Channel>>,

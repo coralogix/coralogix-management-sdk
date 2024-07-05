@@ -24,7 +24,7 @@ use tonic::{
 pub use crate::com::coralogixapis::aaa::apikeys::v3::owner::Owner;
 
 /// The API Keys API client.
-/// Read more at [https://coralogix.com/docs/api-keys/]()
+/// Read more at <https://coralogix.com/docs/api-keys/>
 pub struct ApiKeysClient {
     metadata_map: MetadataMap,
     service_client: Mutex<ApiKeysServiceClient<Channel>>,

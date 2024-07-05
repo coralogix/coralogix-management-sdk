@@ -23,7 +23,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Actions API client.
-/// Read more at [https://coralogix.com/docs/coralogix-action-extension/]()
+/// Read more at <https://coralogix.com/docs/coralogix-action-extension/>
 pub struct ActionsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<ActionsServiceClient<Channel>>,

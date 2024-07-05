@@ -9,7 +9,7 @@ mod util;
 
 const ENV_CORALOGIX_REGION: &str = "CORALOGIX_REGION";
 
-/// From [https://coralogix.com/docs/coralogix-domain/]()
+/// From <https://coralogix.com/docs/coralogix-domain/>
 #[derive(Debug, Clone)]
 pub enum CoralogixRegion {
     US1,
@@ -23,7 +23,7 @@ pub enum CoralogixRegion {
 
 impl CoralogixRegion {
     /// Endpoint for the corresponding Coralogix region
-    /// [https://coralogix.com/docs/coralogix-domain/]()
+    /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn endpoint(&self) -> String {
         match self {
             CoralogixRegion::US1 => "coralogix.us",
