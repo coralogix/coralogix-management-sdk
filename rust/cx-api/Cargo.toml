@@ -30,6 +30,7 @@ default = [
     "team",
     "sli",
     "slos",
+    "e2m",
 ]
 alerts = []
 rules = []
@@ -51,6 +52,7 @@ retentions = []
 team = []
 sli = []
 slos = []
+e2m = []
 
 [dependencies]
 prost = { workspace = true }

@@ -3,6 +3,7 @@ pub mod apikeys;
 pub mod dashboards;
 pub mod datasets;
 pub mod enrichments;
+pub mod events2metrics;
 pub mod slis;
 pub mod slos;
 pub mod tco_policies;

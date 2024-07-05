@@ -30,7 +30,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         tags_service(),
         #[cfg(feature = "extensions")]
         extensions_service(),
-        // "../../proto/com/coralogixapis/events2metrics/v2/events2metrics_service.proto",
+        #[cfg(feature = "e2m")]
+        e2m_service(),
         #[cfg(feature = "dataprime")]
         dataprime_service(),
         #[cfg(feature = "views")]
@@ -104,6 +105,10 @@ fn data_usage_service() -> &'static [&'static str] {
 
 fn quota_service() -> &'static [&'static str] {
     &["../../proto/com/coralogix/quota/v1/policies_service.proto"]
+}
+
+fn e2m_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/events2metrics/v2/events2metrics_service.proto"]
 }
 
 fn dashboards_service() -> &'static [&'static str] {
