@@ -7,11 +7,10 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogixapis::events2metrics::v2::{
-    events2_metric_service_client::Events2MetricServiceClient, AtomicBatchExecuteE2mRequest,
-    CreateE2mRequest, CreateE2mResponse, DeleteE2mRequest, DeleteE2mResponse, GetE2mRequest,
-    GetE2mResponse, GetLimitsRequest, GetLimitsResponse, ListE2mRequest, ListE2mResponse,
-    ListLabelsCardinalityRequest, ListLabelsCardinalityResponse, ReplaceE2mRequest,
-    ReplaceE2mResponse,
+    events2_metric_service_client::Events2MetricServiceClient, CreateE2mRequest, CreateE2mResponse,
+    DeleteE2mRequest, DeleteE2mResponse, GetE2mRequest, GetE2mResponse, GetLimitsRequest,
+    GetLimitsResponse, ListE2mRequest, ListE2mResponse, ListLabelsCardinalityRequest,
+    ListLabelsCardinalityResponse, ReplaceE2mRequest, ReplaceE2mResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -47,6 +46,10 @@ impl Events2MetricsClient {
         })
     }
 
+    /// Creates a new E2M mapping.
+    ///
+    /// # Arguments
+    /// * `params` - The parameters for the E2M mapping.
     pub async fn create(&self, params: E2mCreateParams) -> Result<CreateE2mResponse> {
         let request =
             make_request_with_metadata(CreateE2mRequest { e2m: Some(params) }, &self.metadata_map);
@@ -59,6 +62,10 @@ impl Events2MetricsClient {
             .into_inner())
     }
 
+    /// Replaces an existing E2M mapping.
+    ///
+    /// # Arguments
+    /// * `e2m` - The E2M mapping to replace.
     pub async fn replace(&self, e2m: E2m) -> Result<ReplaceE2mResponse> {
         Ok(self
             .service_client
@@ -72,6 +79,10 @@ impl Events2MetricsClient {
             .into_inner())
     }
 
+    /// Deletes an E2M mapping.
+    ///
+    /// # Arguments
+    /// * `id` - The ID of the E2M mapping to delete.
     pub async fn delete(&self, id: String) -> Result<DeleteE2mResponse> {
         Ok(self
             .service_client
@@ -85,6 +96,10 @@ impl Events2MetricsClient {
             .into_inner())
     }
 
+    /// Retrieves an E2M mapping by its ID.
+    ///
+    /// # Arguments
+    /// * `id` - The ID of the E2M mapping to get.
     pub async fn get(&self, id: String) -> Result<GetE2mResponse> {
         Ok(self
             .service_client
@@ -99,6 +114,9 @@ impl Events2MetricsClient {
     }
 
     /// Retrieves the limits associated with this account.
+    ///
+    /// # Returns
+    /// The limits associated with this account.
     pub async fn get_limits(&self) -> Result<GetLimitsResponse> {
         Ok(self
             .service_client
@@ -112,6 +130,10 @@ impl Events2MetricsClient {
             .into_inner())
     }
 
+    /// Lists all E2M mappings.
+    ///
+    /// # Returns
+    /// A list of all E2M mappings.
     pub async fn list(&self) -> Result<ListE2mResponse> {
         Ok(self
             .service_client
@@ -125,6 +147,11 @@ impl Events2MetricsClient {
             .into_inner())
     }
 
+    /// Lists the cardinality of labels for a given metric.
+    ///
+    /// # Arguments
+    /// * `metric_labels` - The labels of the metric to list cardinality for.
+    /// * `query` - The query to filter the labels by.
     pub async fn list_labels_cardinality(
         &self,
         metric_labels: Vec<MetricLabel>,

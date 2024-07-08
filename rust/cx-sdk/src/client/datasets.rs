@@ -19,7 +19,6 @@ use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
     transport::{Channel, Endpoint},
-    Request,
 };
 
 use crate::CoralogixRegion;
