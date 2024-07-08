@@ -6,23 +6,34 @@ use crate::{
     util::make_request_with_metadata,
 };
 
+use cx_api::proto::com::coralogixapis::events2metrics::v2::{
+    events2_metric_service_client::Events2MetricServiceClient, AtomicBatchExecuteE2mRequest,
+    CreateE2mRequest, CreateE2mResponse, DeleteE2mRequest, DeleteE2mResponse, GetE2mRequest,
+    GetE2mResponse, GetLimitsRequest, GetLimitsResponse, ListE2mRequest, ListE2mResponse,
+    ListLabelsCardinalityRequest, ListLabelsCardinalityResponse, ReplaceE2mRequest,
+    ReplaceE2mResponse,
+};
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
     transport::{Channel, Endpoint},
 };
 
+pub use cx_api::proto::com::coralogixapis::events2metrics::v2::{
+    list_labels_cardinality_request::Query, E2m, E2mCreateParams, MetricField, MetricLabel,
+};
+
 use crate::CoralogixRegion;
 
-/// The Service Line Objectives (SLO) client.
-/// Read more at <https://coralogix.com/docs/sli/>
+/// The Events2Metrics API client.
+/// Read more at <https://coralogix.com/docs/events2metrics/>
 pub struct Events2MetricsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<Events2MetricServiceClient<Channel>>,
 }
 
 impl Events2MetricsClient {
-    /// Creates a new client for the SLO.
+    /// Creates a new client for the Events2Metrics API.
     ///
     /// # Arguments
     /// * `api_key` - The [`ApiKey`] to use for authentication.
@@ -36,118 +47,103 @@ impl Events2MetricsClient {
         })
     }
 
-    /// Creates a new Service SLO.
-    ///
-    /// # Arguments
-    /// * `slo` - The [`ServiceSlo`] to create.
-    pub async fn create(&self, slo: ServiceSlo) -> Result<CreateServiceSloResponse> {
-        let request = make_request_with_metadata(
-            CreateServiceSloRequest { slo: Some(slo) },
-            &self.metadata_map,
-        );
-        self.service_client
-            .lock()
-            .await
-            .create_service_slo(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
-    }
-
-    /// Updates an existing SLO.
-    ///
-    /// # Arguments
-    /// * `slo` - The [`ServiceSlo`] to update.    
-    pub async fn update(&self, slo: ServiceSlo) -> Result<ReplaceServiceSloResponse> {
-        let request = make_request_with_metadata(
-            ReplaceServiceSloRequest { slo: Some(slo) },
-            &self.metadata_map,
-        );
-        self.service_client
-            .lock()
-            .await
-            .replace_service_slo(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
-    }
-
-    /// Deletes an Service SLO.
-    ///
-    /// # Arguments
-    /// * `id` - The id of the Service SLO to delete.
-    pub async fn delete(&self, id: String) -> Result<DeleteServiceSloResponse> {
-        let request = make_request_with_metadata(
-            DeleteServiceSloRequest { id: Some(id) },
-            &self.metadata_map,
-        );
-        self.service_client
-            .lock()
-            .await
-            .delete_service_slo(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
-    }
-
-    /// Get the Service SLO.
-    ///
-    /// # Arguments
-    /// * `id` - The ID of the Service SLO
-    pub async fn get(&self, id: String) -> Result<GetServiceSloResponse> {
+    pub async fn create(&self, params: E2mCreateParams) -> Result<CreateE2mResponse> {
         let request =
-            make_request_with_metadata(GetServiceSloRequest { id: Some(id) }, &self.metadata_map);
-
-        self.service_client
+            make_request_with_metadata(CreateE2mRequest { e2m: Some(params) }, &self.metadata_map);
+        Ok(self
+            .service_client
             .lock()
             .await
-            .get_service_slo(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .create_e2m(request)
+            .await?
+            .into_inner())
     }
 
-    /// Get the Service SLO in bulk.
-    ///
-    /// # Arguments
-    /// * `ids` - The IDs of the Service SLO
-    pub async fn get_bulk(&self, ids: Vec<String>) -> Result<BatchGetServiceSlosResponse> {
-        let request =
-            make_request_with_metadata(BatchGetServiceSlosRequest { ids }, &self.metadata_map);
-
-        self.service_client
+    pub async fn replace(&self, e2m: E2m) -> Result<ReplaceE2mResponse> {
+        Ok(self
+            .service_client
             .lock()
             .await
-            .batch_get_service_slos(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .replace_e2m(make_request_with_metadata(
+                ReplaceE2mRequest { e2m: Some(e2m) },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
     }
 
-    /// List the Service SLOs.
-    ///
-    /// # Arguments
-    /// * `service_names` - The names of the services to list SLOs for.
-    /// * `order_by` - Ordering of the SLOs.
-    pub async fn list(
+    pub async fn delete(&self, id: String) -> Result<DeleteE2mResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .delete_e2m(make_request_with_metadata(
+                DeleteE2mRequest { id: Some(id) },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
+    }
+
+    pub async fn get(&self, id: String) -> Result<GetE2mResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .get_e2m(make_request_with_metadata(
+                GetE2mRequest { id: Some(id) },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
+    }
+
+    /// Retrieves the limits associated with this account.
+    pub async fn get_limits(&self) -> Result<GetLimitsResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .get_limits(make_request_with_metadata(
+                GetLimitsRequest {},
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
+    }
+
+    pub async fn list(&self) -> Result<ListE2mResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .list_e2m(make_request_with_metadata(
+                ListE2mRequest {},
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
+    }
+
+    pub async fn list_labels_cardinality(
         &self,
-        service_names: Vec<String>,
-        order_by: Option<OrderBy>,
-    ) -> Result<ListServiceSlosResponse> {
-        let request = make_request_with_metadata(
-            ListServiceSlosRequest {
-                order_by,
-                service_names,
-            },
-            &self.metadata_map,
-        );
-
-        self.service_client
+        metric_labels: Vec<MetricLabel>,
+        query: Query,
+    ) -> Result<ListLabelsCardinalityResponse> {
+        Ok(self
+            .service_client
             .lock()
             .await
-            .list_service_slos(request)
-            .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .list_labels_cardinality(make_request_with_metadata(
+                ListLabelsCardinalityRequest {
+                    metric_labels,
+                    query: Some(query),
+                },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
     }
+
+    // TODO: Expose the AtomicBatchExecuteE2m API where CRUD requests can be batched together.
 }

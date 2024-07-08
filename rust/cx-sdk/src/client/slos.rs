@@ -25,7 +25,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Service Line Objectives (SLO) client.
-/// Read more at <https://coralogix.com/docs/sli/>
+/// Read more at <https://coralogix.com/docs/slo-management-api/>
 pub struct SloClient {
     metadata_map: MetadataMap,
     service_client: Mutex<ServiceSloServiceClient<Channel>>,
