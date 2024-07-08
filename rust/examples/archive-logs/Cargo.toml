@@ -13,7 +13,7 @@ cx-sdk = { path = "../../cx-sdk" }
 async-trait = "*"
 tonic = "*"
 anyhow = "*"
-uuid = { version = "*", features = ["v4", "serde"] }
+uuid = { version = "*", features = ["serde", "v4"] }
 serde_json = "*"
 time = "0.3.36"
 prost = "0.12"

@@ -10,11 +10,11 @@ authors = []
 
 
 [dependencies]
-tokio = {version = "*", features = ["full"]}
+tokio = { version = "*", features = ["full"] }
 http = "*"
 cx-sdk = { path = "../../cx-sdk" }
 async-trait = "*"
 tonic = "*"
 anyhow = "*"
-uuid = {version = "*", features = ["v4", "serde"]}
+uuid = { version = "*", features = ["serde", "v4"] }
 serde_json = "*"
