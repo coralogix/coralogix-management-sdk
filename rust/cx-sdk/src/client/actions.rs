@@ -11,7 +11,7 @@ use crate::{
     util::make_request_with_metadata,
 };
 
-pub use crate::com::coralogixapis::actions::v2::Action;
+pub use crate::com::coralogixapis::actions::v2::{Action, SourceType};
 
 use cx_api::proto::com::coralogixapis::actions::v2::DeleteActionResponse;
 use tokio::sync::Mutex;

@@ -1,0 +1,30 @@
+#[cfg(test)]
+mod tests {
+    use cx_sdk::{
+        auth::ApiKey,
+        client::dataprime_query::{DataprimeQueryClient, Message},
+        CoralogixRegion,
+    };
+
+    #[tokio::test]
+    #[ignore]
+    async fn test_run() {
+        let api_key = std::env::var("CORALOGIX_ALERTS_RULES_TAGS_API_KEY").unwrap();
+        let svc = DataprimeQueryClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            ApiKey::from(api_key.as_str()),
+        );
+
+        let mut stream = svc
+            .run("filter log_obj.message ~ 'Hello world'".to_string(), None)
+            .await
+            .unwrap();
+        while let Some(response) = stream.message().await.unwrap() {
+            if let Some(Message::Result(result)) = response.message {
+                for r in result.results {
+                    println!("{:?}", r.user_data);
+                }
+            }
+        }
+    }
+}

@@ -1,22 +1,35 @@
 #[cfg(test)]
 mod tests {
-    use cx_sdk::{client::apikeys::{ApiKeysClient, Owner}, CoralogixRegion};
+    use cx_sdk::{
+        auth::ApiKey,
+        client::apikeys::{ApiKeysClient, Owner},
+        CoralogixRegion,
+    };
     #[tokio::test]
-    async fn test_actions_client() {
+    #[ignore]
+    async fn test_api_keys_client() {
+        let user_id = std::env::var("USER_ID").unwrap();
+        println!("USER_ID: {:?}", user_id);
         let client = ApiKeysClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
-        ).unwrap();
+        )
+        .unwrap();
 
         let create_result = client
             .create(
                 "My APM KEY".to_string(),
-                Some(Owner::UserId("4013254".to_string())),
+                Some(Owner::UserId(user_id)),
                 vec!["APM".to_string()],
                 vec![],
                 false,
             )
             .await;
+
+        if let Err(e) = &create_result {
+            let err = e.to_string();
+            println!("Error: {:?}", err);
+        }
 
         assert!(create_result.is_ok());
 
