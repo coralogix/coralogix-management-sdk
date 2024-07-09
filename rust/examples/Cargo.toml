@@ -2,11 +2,12 @@
 resolver = "2"
 members = [
     "actions",
+    "alert-scheduler",
     "alerts",
+    "api_keys",
     "archive-logs",
     "archive-metrics",
-    "data-sets",
     "dashboards",
+    "data-sets",
     "dataprime-query",
-    "api_keys"
-, "alert-scheduler"]
+]

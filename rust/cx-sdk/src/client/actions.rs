@@ -23,7 +23,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Actions API client.
-/// Read more at [https://coralogix.com/docs/coralogix-action-extension/]()
+/// Read more at <https://coralogix.com/docs/coralogix-action-extension/>
 pub struct ActionsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<ActionsServiceClient<Channel>>,
@@ -33,8 +33,8 @@ impl ActionsClient {
     /// Creates a new client for the Actions API.
     ///
     /// # Arguments
-    /// * `api_key` - The API key to use for authentication.
-    /// * `region` - The region to connect to.
+    /// * `api_key` - The [`ApiKey`] to use for authentication.
+    /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
         let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();

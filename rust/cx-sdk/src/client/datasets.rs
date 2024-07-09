@@ -11,14 +11,14 @@ pub use crate::com::coralogixapis::actions::v2::Action;
 use cx_api::proto::com::coralogix::enrichment::v1::{
     custom_enrichment_service_client::CustomEnrichmentServiceClient, file::Content,
     CreateCustomEnrichmentRequest, CreateCustomEnrichmentResponse, DeleteCustomEnrichmentRequest,
-    DeleteCustomEnrichmentResponse, File, GetCustomEnrichmentRequest, GetCustomEnrichmentsRequest,
-    UpdateCustomEnrichmentRequest, UpdateCustomEnrichmentResponse,
+    DeleteCustomEnrichmentResponse, File, GetCustomEnrichmentRequest, GetCustomEnrichmentResponse,
+    GetCustomEnrichmentsRequest, GetCustomEnrichmentsResponse, UpdateCustomEnrichmentRequest,
+    UpdateCustomEnrichmentResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
     transport::{Channel, Endpoint},
-    Request,
 };
 
 use crate::CoralogixRegion;
@@ -26,7 +26,7 @@ use crate::CoralogixRegion;
 pub use crate::com::coralogix::enrichment::v1::CustomEnrichment;
 
 /// The Custom Enrichments API client.
-/// Read more at [https://coralogix.com/docs/custom-enrichment-api/]()
+/// Read more at <https://coralogix.com/docs/custom-enrichment-api/>
 pub struct DatasetClient {
     metadata_map: MetadataMap,
     service_client: Mutex<CustomEnrichmentServiceClient<Channel>>,
@@ -36,8 +36,8 @@ impl DatasetClient {
     /// Creates a new client for the Custom Enrichments API.
     ///
     /// # Arguments
-    /// * `api_key` - The API key to use for authentication.
-    /// * `region` - The region to connect to.
+    /// * `api_key` - The [`ApiKey`] to use for authentication.
+    /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
         let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();
@@ -64,7 +64,7 @@ impl DatasetClient {
             content: Some(Content::Binary(data)),
             extension: Some("csv".into()),
         };
-        let request: Request<CreateCustomEnrichmentRequest> = make_request_with_metadata(
+        let request = make_request_with_metadata(
             CreateCustomEnrichmentRequest {
                 file: Some(file),
                 name: Some(name.clone()),
@@ -73,13 +73,13 @@ impl DatasetClient {
             &self.metadata_map,
         );
         {
-            let mut client = self.service_client.lock().await.clone();
-
-            client
-                .create_custom_enrichment(request)
+            Ok(self
+                .service_client
+                .lock()
                 .await
-                .map(|r| r.into_inner())
-                .map_err(From::from)
+                .create_custom_enrichment(request)
+                .await?
+                .into_inner())
         }
     }
 
@@ -104,7 +104,7 @@ impl DatasetClient {
             content: Some(Content::Binary(data)),
             extension: Some("csv".into()),
         };
-        let request: Request<UpdateCustomEnrichmentRequest> = make_request_with_metadata(
+        let request = make_request_with_metadata(
             UpdateCustomEnrichmentRequest {
                 custom_enrichment_id: Some(id),
                 file: Some(file),
@@ -114,13 +114,13 @@ impl DatasetClient {
             &self.metadata_map,
         );
         {
-            let mut client = self.service_client.lock().await.clone();
-
-            client
-                .update_custom_enrichment(request)
+            Ok(self
+                .service_client
+                .lock()
                 .await
-                .map(|r| r.into_inner())
-                .map_err(From::from)
+                .update_custom_enrichment(request)
+                .await?
+                .into_inner())
         }
     }
 
@@ -132,48 +132,51 @@ impl DatasetClient {
         &self,
         custom_enrichment_id: u32,
     ) -> Result<DeleteCustomEnrichmentResponse> {
-        let request: Request<DeleteCustomEnrichmentRequest> = make_request_with_metadata(
-            DeleteCustomEnrichmentRequest {
-                custom_enrichment_id: Some(custom_enrichment_id),
-            },
-            &self.metadata_map,
-        );
-        {
-            let mut client = self.service_client.lock().await.clone();
-
-            client
-                .delete_custom_enrichment(request)
-                .await
-                .map(|r| r.into_inner())
-                .map_err(From::from)
-        }
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .delete_custom_enrichment(make_request_with_metadata(
+                DeleteCustomEnrichmentRequest {
+                    custom_enrichment_id: Some(custom_enrichment_id),
+                },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
     }
 
     /// Retrieves the dataset by id.
     ///
     /// # Arguments
     /// * `id` - The id of the Custom Enrichment.
-    pub async fn get(&self, id: u32) -> Result<Option<CustomEnrichment>> {
-        let get_enrichments_request = GetCustomEnrichmentRequest { id: Some(id) };
-        let request = make_request_with_metadata(get_enrichments_request, &self.metadata_map);
-        {
-            let mut client = self.service_client.lock().await.clone();
-            let response = client.get_custom_enrichment(request).await?;
-            Ok(response.into_inner().custom_enrichment)
-        }
+    pub async fn get(&self, id: u32) -> Result<GetCustomEnrichmentResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .get_custom_enrichment(make_request_with_metadata(
+                GetCustomEnrichmentRequest { id: Some(id) },
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
     }
 
     /// Retrieves all datasets.
     ///
     /// # Returns
     /// A list of all Custom Enrichments.
-    pub async fn list(&self) -> Result<Vec<CustomEnrichment>> {
-        let get_enrichments_request = GetCustomEnrichmentsRequest {};
-        let request = make_request_with_metadata(get_enrichments_request, &self.metadata_map);
-        {
-            let mut client = self.service_client.lock().await.clone();
-            let response = client.get_custom_enrichments(request).await?;
-            Ok(response.into_inner().custom_enrichments)
-        }
+    pub async fn list(&self) -> Result<GetCustomEnrichmentsResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .get_custom_enrichments(make_request_with_metadata(
+                GetCustomEnrichmentsRequest {},
+                &self.metadata_map,
+            ))
+            .await?
+            .into_inner())
     }
 }

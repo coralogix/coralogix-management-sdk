@@ -22,7 +22,7 @@ use tonic::{
 use crate::CoralogixRegion;
 
 /// The Team API client.
-/// Read more at [https://coralogix.com/docs/user-team-management/]()
+/// Read more at <https://coralogix.com/docs/user-team-management/>
 pub struct TeamsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<TeamServiceClient<Channel>>,
@@ -32,8 +32,8 @@ impl TeamsClient {
     /// Creates a new client for the Teams API.
     ///
     /// # Arguments
-    /// * `api_key` - The API key to use for authentication.
-    /// * `region` - The region to connect to.
+    /// * `api_key` - The [`ApiKey`] to use for authentication.
+    /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
         let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();

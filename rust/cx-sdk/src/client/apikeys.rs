@@ -24,7 +24,7 @@ use tonic::{
 pub use crate::com::coralogixapis::aaa::apikeys::v3::owner::Owner;
 
 /// The API Keys API client.
-/// Read more at [https://coralogix.com/docs/api-keys/]()
+/// Read more at <https://coralogix.com/docs/api-keys/>
 pub struct ApiKeysClient {
     metadata_map: MetadataMap,
     service_client: Mutex<ApiKeysServiceClient<Channel>>,
@@ -34,8 +34,8 @@ impl ApiKeysClient {
     /// Creates a new client for the APIKeys API.
     ///
     /// # Arguments
-    /// * `api_key` - The API key to use for authentication.
-    /// * `region` - The region to connect to.
+    /// * `api_key` - The [`ApiKey`] to use for authentication.
+    /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
         let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();
