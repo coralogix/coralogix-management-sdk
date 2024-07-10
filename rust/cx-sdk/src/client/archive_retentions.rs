@@ -1,4 +1,8 @@
-use cx_api::proto::com::coralogix::archive::v1::{retentions_service_client::RetentionsServiceClient, ActivateRetentionsRequest, ActivateRetentionsResponse, GetRetentionsEnabledRequest, GetRetentionsEnabledResponse, GetRetentionsRequest, GetRetentionsResponse, UpdateRetentionsRequest, UpdateRetentionsResponse};
+use cx_api::proto::com::coralogix::archive::v1::{
+    retentions_service_client::RetentionsServiceClient, ActivateRetentionsRequest,
+    ActivateRetentionsResponse, GetRetentionsEnabledRequest, GetRetentionsEnabledResponse,
+    GetRetentionsRequest, GetRetentionsResponse, UpdateRetentionsRequest, UpdateRetentionsResponse,
+};
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::{
@@ -23,7 +27,7 @@ pub struct ArchiveRetentionClient {
 }
 
 impl ArchiveRetentionClient {
-     /// Creates a new client for the Archive Retention API.
+    /// Creates a new client for the Archive Retention API.
     ///
     /// # Arguments
     /// * `api_key` - The [`ApiKey`] to use for authentication.
@@ -43,7 +47,10 @@ impl ArchiveRetentionClient {
             .service_client
             .lock()
             .await
-            .get_retentions(make_request_with_metadata(GetRetentionsRequest {  }, &self.metadata_map))
+            .get_retentions(make_request_with_metadata(
+                GetRetentionsRequest {},
+                &self.metadata_map,
+            ))
             .await?
             .into_inner())
     }
@@ -54,19 +61,27 @@ impl ArchiveRetentionClient {
             .service_client
             .lock()
             .await
-            .get_retentions_enabled(make_request_with_metadata(GetRetentionsEnabledRequest {  }, &self.metadata_map))
+            .get_retentions_enabled(make_request_with_metadata(
+                GetRetentionsEnabledRequest {},
+                &self.metadata_map,
+            ))
             .await?
             .into_inner())
     }
 
     /// Updates the retention settings for a tenant.
-    pub async fn update(&self, etention_update_elements: Vec<RetentionUpdateElement>) -> Result<UpdateRetentionsResponse> {
+    pub async fn update(
+        &self,
+        retention_update_elements: Vec<RetentionUpdateElement>,
+    ) -> Result<UpdateRetentionsResponse> {
         Ok(self
             .service_client
             .lock()
             .await
             .update_retentions(make_request_with_metadata(
-                UpdateRetentionsRequest { retention_update_elements },
+                UpdateRetentionsRequest {
+                    retention_update_elements,
+                },
                 &self.metadata_map,
             ))
             .await?
@@ -80,7 +95,7 @@ impl ArchiveRetentionClient {
             .lock()
             .await
             .activate_retentions(make_request_with_metadata(
-                ActivateRetentionsRequest {  },
+                ActivateRetentionsRequest {},
                 &self.metadata_map,
             ))
             .await?
