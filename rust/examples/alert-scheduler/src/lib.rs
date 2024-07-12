@@ -11,7 +11,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_alert_scheduler_client() {
-        let api_key = std::env::var("CORALOGIX_ALERTS_RULES_TAGS_API_KEY").unwrap();
+        let api_key = std::env::var("CORALOGIX_API_KEY").unwrap();
         let alert_scheduler_client = AlertSchedulerClient::new(
             CoralogixRegion::from_env().unwrap(),
             ApiKey::from(api_key.as_str()),
