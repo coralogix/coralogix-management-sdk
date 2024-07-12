@@ -48,8 +48,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         retention_service(),
         #[cfg(feature = "team")]
         team_service(),
-        #[cfg(feature = "sli")]
-        sli_service(),
+        #[cfg(feature = "scopes")]
+        scopes_service(),
         #[cfg(feature = "slos")]
         slos_service(),
     ]
@@ -168,8 +168,8 @@ fn team_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/aaa/organisations/v2/team_service.proto"]
 }
 
-fn sli_service() -> &'static [&'static str] {
-    &["../../proto/com/coralogix/catalog/v1/sli_service.proto"]
+fn scopes_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogixapis/scopes/v1/scopes.proto"]
 }
 
 fn slos_service() -> &'static [&'static str] {

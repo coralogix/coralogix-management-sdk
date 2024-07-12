@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogix.alerts.v2;
+
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogix/alerts/v2/alert_notification_group.proto";
+
+message AlertIncidentSettings {
+  google.protobuf.UInt32Value retriggering_period_seconds = 1;
+  NotifyOn notify_on = 2;
+  google.protobuf.BoolValue use_as_notification_settings = 3;
+}

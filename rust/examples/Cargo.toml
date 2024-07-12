@@ -10,4 +10,5 @@ members = [
     "dashboards",
     "data-sets",
     "dataprime-query",
+    "scopes"
 ]

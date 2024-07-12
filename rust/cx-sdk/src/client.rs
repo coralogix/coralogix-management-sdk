@@ -42,3 +42,6 @@ pub mod teams;
 
 /// This module contains the client for the outgoing webhooks API.
 pub mod webhooks;
+
+/// This module contains the client for the Scopes API.
+pub mod scopes;

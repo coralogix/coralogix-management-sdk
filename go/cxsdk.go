@@ -16,8 +16,9 @@ type ClientSet struct {
 	alertsSchedulers  *AlertsSchedulersClient
 	teams             *TeamsClient
 	slos              *SLOsClient
+	scopes            *ScopesClient
+	apiKeys           *ApikeysClient
 	// dahboardsFolders  *DashboardsFoldersClient
-	apiKeys *ApikeysClient
 	// users             *UsersClient
 }
 
@@ -85,6 +86,10 @@ func (c *ClientSet) SLOs() *SLOsClient {
 	return c.slos
 }
 
+func (c *ClientSet) Scopes() *ScopesClient {
+	return c.scopes
+}
+
 // func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
 // 	return c.dahboardsFolders
 // }
@@ -112,6 +117,7 @@ func NewClientSet(targetUrl, apiKey string) *ClientSet {
 		alertsSchedulers:  NewAlertsSchedulersClient(apikeyCPC),
 		teams:             NewTeamsClient(apikeyCPC),
 		slos:              NewSLOsClient(apikeyCPC),
+		scopes:            NewScopesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewApiKeysClient(apikeyCPC),
 		// users:             NewUsersClient(apikeyCPC),
