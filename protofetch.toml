@@ -5,10 +5,6 @@ proto_out_dir = './proto'
 branch = 'master'
 url = 'github.com/coralogix/rules-api-protobuf'
 
-[alerts-api-protobuf]
-branch = 'master'
-url = 'github.com/coralogix/alerts-api-protobuf'
-
 [alerts-api-protobuf-v3]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-alerts'
