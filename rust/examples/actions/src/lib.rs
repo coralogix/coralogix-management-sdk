@@ -9,9 +9,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_actions_client() {
-        let api_key = std::env::var("CORALOGIX_LEGACY_KEY").unwrap();
         let client = ActionsClient::new(
-            ApiKey::from(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
