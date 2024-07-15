@@ -2,21 +2,21 @@ package cxsdk
 
 import (
 	"context"
-	slos "coralogix-management-sdk/go/internal/coralogixapis/scopes/v1"
+	scopes "coralogix-management-sdk/go/internal/coralogixapis/scopes/v1"
 )
 
-type CreateScopeRequest = slos.CreateScopeRequest
-type GetTeamScopesByIdsRequest = slos.GetTeamScopesByIdsRequest
-type GetTeamScopesRequest = slos.GetTeamScopesRequest
-type UpdateScopeRequest = slos.UpdateScopeRequest
-type DeleteScopeRequest = slos.DeleteScopeRequest
+type CreateScopeRequest = scopes.CreateScopeRequest
+type GetTeamScopesByIdsRequest = scopes.GetTeamScopesByIdsRequest
+type GetTeamScopesRequest = scopes.GetTeamScopesRequest
+type UpdateScopeRequest = scopes.UpdateScopeRequest
+type DeleteScopeRequest = scopes.DeleteScopeRequest
 
-type Filter = slos.Filter
+type Filter = scopes.Filter
 
 const (
-	EntityType_UNSPECIFIED = slos.EntityType_UNSPECIFIED
-	EntityType_LOGS        = slos.EntityType_LOGS
-	EntityType_SPANS       = slos.EntityType_SPANS
+	EntityType_UNSPECIFIED = scopes.EntityType_UNSPECIFIED
+	EntityType_LOGS        = scopes.EntityType_LOGS
+	EntityType_SPANS       = scopes.EntityType_SPANS
 )
 
 type ScopesClient struct {
@@ -24,7 +24,7 @@ type ScopesClient struct {
 }
 
 // Create a new scope
-func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*slos.CreateScopeResponse, error) {
+func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*scopes.CreateScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -32,13 +32,13 @@ func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*slo
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewScopesServiceClient(conn)
+	client := scopes.NewScopesServiceClient(conn)
 
 	return client.CreateScope(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Get a scope by its ID
-func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIdsRequest) (*slos.GetScopesResponse, error) {
+func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIdsRequest) (*scopes.GetScopesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -46,13 +46,13 @@ func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIdsRequest) (
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewScopesServiceClient(conn)
+	client := scopes.NewScopesServiceClient(conn)
 
 	return client.GetTeamScopesByIds(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // List all scopes for the current team
-func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*slos.GetScopesResponse, error) {
+func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*scopes.GetScopesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -60,13 +60,13 @@ func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*slo
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewScopesServiceClient(conn)
+	client := scopes.NewScopesServiceClient(conn)
 
 	return client.GetTeamScopes(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Update a scope
-func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*slos.UpdateScopeResponse, error) {
+func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*scopes.UpdateScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -74,13 +74,13 @@ func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*slo
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewScopesServiceClient(conn)
+	client := scopes.NewScopesServiceClient(conn)
 
 	return client.UpdateScope(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Delete a scope
-func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*slos.DeleteScopeResponse, error) {
+func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*scopes.DeleteScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -88,7 +88,7 @@ func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*slo
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewScopesServiceClient(conn)
+	client := scopes.NewScopesServiceClient(conn)
 
 	return client.DeleteScope(callProperties.Ctx, req, callProperties.CallOptions...)
 }
