@@ -11,10 +11,9 @@ mod tests {
 
     #[tokio::test]
     async fn test_alert_scheduler_client() {
-        let api_key = std::env::var("CORALOGIX_API_KEY").unwrap();
         let alert_scheduler_client = AlertSchedulerClient::new(
             CoralogixRegion::from_env().unwrap(),
-            ApiKey::from(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
         );
 
         let alert_schduler_rule = AlertSchedulerRule {
@@ -26,7 +25,7 @@ mod tests {
             filter: Some(AlertSchedulerFilter {
                 what_expression: "source logs | filter $d.cpodId:string == '122'".into(),
                 which_alerts: Some(WhichAlerts::AlertUniqueIds(AlertUniqueIds {
-                    value: vec!["07d5714a-c847-4afa-87db-5e5f6986688c".into()],
+                    value: vec!["476fb099-e13d-4b6d-bbd5-8815115daaf9".into()],
                 })),
             }),
             schedule: Some(Schedule {
