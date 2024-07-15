@@ -10,12 +10,10 @@ mod tests {
     };
 
     #[tokio::test]
-    #[ignore]
     async fn test_metrics_service_configurator() {
-        let api_key = std::env::var("CORALOGIX_API_KEY").unwrap();
         let metrics_service = MetricsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
-            ApiKey::from(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
         );
 
         let s3_config = S3Config {

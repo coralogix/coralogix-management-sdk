@@ -6,10 +6,8 @@ mod tests {
         CoralogixRegion,
     };
     #[tokio::test]
-    #[ignore]
     async fn test_api_keys_client() {
-        let user_id = std::env::var("USER_ID").unwrap();
-        println!("USER_ID: {:?}", user_id);
+        let team_id = std::env::var("TEAM_ID").unwrap().parse().unwrap();
         let client = ApiKeysClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
@@ -19,7 +17,7 @@ mod tests {
         let create_result = client
             .create(
                 "My APM KEY".to_string(),
-                Some(Owner::UserId(user_id)),
+                Some(Owner::TeamId(team_id)),
                 vec!["APM".to_string()],
                 vec![],
                 false,
