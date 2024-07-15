@@ -50,9 +50,10 @@ jobs:
 
       - name: Cargo run examples
         env:
+          CORALOGIX_ALERTS_RULES_TAGS_API_KEY: ${{ secrets.CORALOGIX_ALERTS_RULES_TAGS_API_KEY }}
           CCORALOGIX_LEGACY_KEY: ${{ secrets.CORALOGIX_LEGACY_KEY }}
           CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
-        run: cargo test
+        run: cargo nextest run --all
         working-directory: rust/examples
 
