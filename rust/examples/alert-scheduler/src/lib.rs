@@ -43,8 +43,11 @@ mod tests {
             updated_at: None,
         };
 
-        let created_alert_scheduler_rule = alert_scheduler_client.create(alert_schduler_rule).await.unwrap();
-        
+        let created_alert_scheduler_rule = alert_scheduler_client
+            .create(alert_schduler_rule)
+            .await
+            .unwrap();
+
         let new_alert_scheduler_rule = AlertSchedulerRule {
             name: String::from("MyAlertUpdated"),
             ..created_alert_scheduler_rule
@@ -52,22 +55,20 @@ mod tests {
 
         let updated_alert_scheduler_rule = alert_scheduler_client
             .update(new_alert_scheduler_rule)
-            .await.unwrap();
+            .await
+            .unwrap();
 
         let retrieved_alert_scheduler_rule = alert_scheduler_client
-            .get(
-                updated_alert_scheduler_rule
-                    .unique_identifier
-                    .unwrap(),
-            )
+            .get(updated_alert_scheduler_rule.unique_identifier.unwrap())
             .await;
 
         let retrieved_alert_scheduler_rule = retrieved_alert_scheduler_rule.unwrap();
 
         assert!(retrieved_alert_scheduler_rule.name == "MyAlertUpdated");
 
-        let _ = alert_scheduler_client
+        alert_scheduler_client
             .delete(retrieved_alert_scheduler_rule.unique_identifier.unwrap())
-            .await.unwrap()
+            .await
+            .unwrap();
     }
 }

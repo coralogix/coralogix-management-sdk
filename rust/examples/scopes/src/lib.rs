@@ -25,9 +25,10 @@ mod tests {
                 }],
                 "<v1> foo == 'bar'".into(),
             )
-            .await.unwrap();
-      
-        let scope = create.unwrap().scope.unwrap();
+            .await
+            .unwrap();
+
+        let scope = create.scope.unwrap();
 
         let update_result = client
             .update(
@@ -37,7 +38,8 @@ mod tests {
                 scope.filters,
                 scope.default_expression,
             )
-            .await.unwrap();
+            .await
+            .unwrap();
 
         let new_scope = update_result.scope.unwrap();
         assert!(new_scope.display_name == "Updated Test Data Access Rule");

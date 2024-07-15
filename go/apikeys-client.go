@@ -5,22 +5,40 @@ import (
 	apikeys "coralogix-management-sdk/go/internal/coralogixapis/aaa/apikeys/v3"
 )
 
+// ApikeysClient is a client for the Coralogix API keys API.
 type ApikeysClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-type CreateApiKeyRequest = apikeys.CreateApiKeyRequest
-type GetApiKeyRequest = apikeys.GetApiKeyRequest
-type UpdateApiKeyRequest = apikeys.UpdateApiKeyRequest
-type DeleteApiKeyRequest = apikeys.DeleteApiKeyRequest
-type ApiKeyPermissions = apikeys.CreateApiKeyRequest_KeyPermissions
+// CreateAPIKeyRequest is a request to create an API key.
+type CreateAPIKeyRequest = apikeys.CreateApiKeyRequest
 
+// GetAPIKeyRequest is a request to get an API key.
+type GetAPIKeyRequest = apikeys.GetApiKeyRequest
+
+// UpdateAPIKeyRequest is a request to update an API key.
+type UpdateAPIKeyRequest = apikeys.UpdateApiKeyRequest
+
+// DeleteAPIKeyRequest is a request to delete an API key.
+type DeleteAPIKeyRequest = apikeys.DeleteApiKeyRequest
+
+// APIKeyPermissions is a set of permissions for an API key.
+type APIKeyPermissions = apikeys.CreateApiKeyRequest_KeyPermissions
+
+// Owner is an owner of an API key.
 type Owner = apikeys.Owner
-type Owner_UserId = apikeys.Owner_UserId
-type Owner_TeamId = apikeys.Owner_TeamId
-type Owner_OrganisationId = apikeys.Owner_OrganisationId
 
-func (t ApikeysClient) CreateApiKey(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
+// OwnerUserID is an owner user ID.
+type OwnerUserID = apikeys.Owner_UserId
+
+// OwnerTeamID is an owner team ID.
+type OwnerTeamID = apikeys.Owner_TeamId
+
+// OwnerOrganisationID is an owner organisation ID.
+type OwnerOrganisationID = apikeys.Owner_OrganisationId
+
+// CreateAPIKey creates a new API key.
+func (t ApikeysClient) CreateAPIKey(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -33,7 +51,8 @@ func (t ApikeysClient) CreateApiKey(ctx context.Context, req *apikeys.CreateApiK
 	return client.CreateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (t ApikeysClient) GetApiKey(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, error) {
+// GetAPIKey gets an API key.
+func (t ApikeysClient) GetAPIKey(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -46,7 +65,8 @@ func (t ApikeysClient) GetApiKey(ctx context.Context, req *apikeys.GetApiKeyRequ
 	return client.GetApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (t ApikeysClient) UpdateApiKey(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, error) {
+// UpdateAPIKey updates an API key.
+func (t ApikeysClient) UpdateAPIKey(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -59,7 +79,8 @@ func (t ApikeysClient) UpdateApiKey(ctx context.Context, req *apikeys.UpdateApiK
 	return client.UpdateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func (t ApikeysClient) DeleteApiKey(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, error) {
+// DeleteAPIKey deletes an API key.
+func (t ApikeysClient) DeleteAPIKey(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -72,6 +93,7 @@ func (t ApikeysClient) DeleteApiKey(ctx context.Context, req *apikeys.DeleteApiK
 	return client.DeleteApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-func NewApiKeysClient(c *CallPropertiesCreator) *ApikeysClient {
+// NewAPIKeysClient creates a new API keys client.
+func NewAPIKeysClient(c *CallPropertiesCreator) *ApikeysClient {
 	return &ApikeysClient{callPropertiesCreator: c}
 }

@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
@@ -76,6 +77,7 @@ message PieChart {
     repeated Filter.MetricsFilter filters = 2;
     repeated google.protobuf.StringValue group_names = 3;
     google.protobuf.StringValue stacked_group_name = 4;
+    common.MetricsQueryEditorMode editor_mode = 5;
   }
 
   message DataprimeQuery {

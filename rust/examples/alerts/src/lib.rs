@@ -6,12 +6,12 @@ mod tests {
     use cx_sdk::{
         auth::ApiKey,
         client::alerts::{
-            ActivitySchedule, AlertDef, AlertDefNotification, AlertDefNotificationGroup,
-            AlertDefPriority, AlertDefProperties, AlertDefType, AlertsClient, DayOfWeek,
-            EvaluationWindow, FilterType, IntegrationType, LabelFilterType, LabelFilters,
-            LogFilterOperationType, LogSeverity, LogsFilter, LogsMoreThanTypeDefinition,
-            LogsTimeWindow, LogsTimeWindowType, LogsTimeWindowValue, LuceneFilter, NotifyOn,
-            Recipients, RetriggeringPeriod, Schedule, TimeOfDay, TypeDefinition,
+            integration_type, ActivitySchedule, AlertDef, AlertDefNotificationGroup,
+            AlertDefPriority, AlertDefProperties, AlertDefTargetSimple, AlertDefType, AlertsClient,
+            DayOfWeek, EvaluationWindow, FilterType, IntegrationType, LabelFilterType,
+            LabelFilters, LogFilterOperationType, LogSeverity, LogsFilter,
+            LogsMoreThanTypeDefinition, LogsTimeWindow, LogsTimeWindowType, LogsTimeWindowValue,
+            LuceneFilter, Recipients, Schedule, Targets, TimeOfDay, TypeDefinition,
         },
         CoralogixRegion,
     };
@@ -33,15 +33,18 @@ mod tests {
                 alert_def_type: AlertDefType::LogsMoreThan.into(),
                 group_by: vec!["coralogix.metadata.sdkId".into(), "EventType".into()],
                 incidents_settings: None,
+                phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
                     group_by_fields: vec!["coralogix.metadata.sdkId".into(), "EventType".into()],
-                    notifications: vec![AlertDefNotification {
-                        notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
-                        retriggering_period: Some(RetriggeringPeriod::Minutes(60)),
-                        integration_type: Some(IntegrationType::Recipients(Recipients {
-                            emails: vec![String::from("example@coralogix.com")],
-                        })),
-                    }],
+                    targets: Some(Targets::Simple(AlertDefTargetSimple {
+                        integrations: vec![IntegrationType {
+                            integration_type: Some(integration_type::IntegrationType::Recipients(
+                                Recipients {
+                                    emails: vec![String::from("example@coralogix.com")],
+                                },
+                            )),
+                        }],
+                    })),
                 }),
                 labels: [
                     ("alert_type".to_string(), "security".to_string()),

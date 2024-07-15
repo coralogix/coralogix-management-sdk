@@ -76,4 +76,5 @@ message AlertDefProperties {
   AlertDefIncidentSettings incidents_settings = 8;
   AlertDefNotificationGroup notification_group = 9;
   map<string,string> labels = 10;
+  google.protobuf.BoolValue phantom_mode = 11;
 }

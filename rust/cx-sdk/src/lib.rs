@@ -41,15 +41,14 @@ impl CoralogixRegion {
     /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn endpoint(&self) -> String {
         match self {
-            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.com",
-            CoralogixRegion::US2 => "https://ng-api-grpc.cx498.coralogix.com",
-            CoralogixRegion::EU1 => "https://ng-api-grpc.coralogix.com",
-            CoralogixRegion::EU2 => "https://ng-api-grpc.eu2.coralogix.com",
-            CoralogixRegion::AP1 => "https://ng-api-grpc.app.coralogix.in",
-            CoralogixRegion::AP2 => "https://ng-api-grpc.coralogixsg.com",
-            CoralogixRegion::Custom(custom) => custom,
+            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.com".into(),
+            CoralogixRegion::US2 => "https://ng-api-grpc.cx498.coralogix.com".into(),
+            CoralogixRegion::EU1 => "https://ng-api-grpc.coralogix.com".into(),
+            CoralogixRegion::EU2 => "https://ng-api-grpc.eu2.coralogix.com".into(),
+            CoralogixRegion::AP1 => "https://ng-api-grpc.app.coralogix.in".into(),
+            CoralogixRegion::AP2 => "https://ng-api-grpc.coralogixsg.com".into(),
+            CoralogixRegion::Custom(custom) => format!("https://{}", custom),
         }
-        .to_string()
     }
 
     /// Creates a CoralogixRegion from the environment variable `ENV_CORALOGIX_REGION`.

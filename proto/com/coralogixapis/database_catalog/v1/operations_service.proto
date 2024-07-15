@@ -19,6 +19,7 @@ message GetDatabaseOperationsColumnsStreamRequest {
   google.protobuf.StringValue database_system = 5;
   repeated google.protobuf.StringValue calling_services = 6;
   repeated google.protobuf.StringValue tables = 7;
+  google.protobuf.Int64Value trend_offset = 8;
 }
 
 message GetDatabaseOperationsColumnsStreamResponse {
@@ -56,6 +57,7 @@ message GetDatabaseOperationsErrorsStreamResponse {
   oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart errors = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart error_percentage = 2;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart errors_per_seconds = 4;
   }
   google.protobuf.UInt64Value total_amount = 3;
 }

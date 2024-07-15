@@ -11,7 +11,11 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewDashboardsClient(creator)
 	dat, err := os.ReadFile("dashboard.json")
 	assert.Nil(t, err)

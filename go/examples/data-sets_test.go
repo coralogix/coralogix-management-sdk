@@ -11,20 +11,24 @@ import (
 )
 
 func TestDataSets(t *testing.T) {
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewDataSetClient(creator)
 
-	raw, e := os.ReadFile("data-to-day-of-the-week.csv")
+	raw, e := os.ReadFile("date-to-day-of-the-week.csv")
 	assert.Nil(t, e)
 	textual := string(raw)
 
-	data, e := c.CreatDataSet(context.Background(), &cxsdk.CreateDataSetRequest{
+	data, e := c.CreateDataSet(context.Background(), &cxsdk.CreateDataSetRequest{
 		Name:        wrapperspb.String("My custom enrichment"),
 		Description: wrapperspb.String("My custom enrichment description"),
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),
 			Extension: wrapperspb.String("csv"),
-			Content: &cxsdk.File_Textual{
+			Content: &cxsdk.FileTextual{
 				Textual: wrapperspb.String(textual),
 			},
 		},
@@ -37,7 +41,7 @@ func TestDataSets(t *testing.T) {
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),
 			Extension: wrapperspb.String("csv"),
-			Content: &cxsdk.File_Textual{
+			Content: &cxsdk.FileTextual{
 				Textual: wrapperspb.String(textual),
 			},
 		},
@@ -49,7 +53,7 @@ func TestDataSets(t *testing.T) {
 	assert.Nil(t, e)
 
 	assert.Equal(t, updated.CustomEnrichment.Description, fetched.CustomEnrichment.Description)
-	assert.Equal(t, data.CustomEnrichment.Version, fetched.CustomEnrichment.Version+1)
+	assert.Equal(t, data.CustomEnrichment.Version+1, fetched.CustomEnrichment.Version)
 	c.DeleteDataSet(context.Background(), &cxsdk.DeleteDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(fetched.CustomEnrichment.Id),
 	})

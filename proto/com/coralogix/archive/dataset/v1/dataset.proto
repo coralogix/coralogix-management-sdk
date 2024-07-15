@@ -20,4 +20,5 @@ message Dataset {
   uint64 team_id = 4;
   PartitioningScheme partitioning_scheme = 5;
   repeated string split_by_event_labels = 6;
+  string dataspace_id = 7;
 }

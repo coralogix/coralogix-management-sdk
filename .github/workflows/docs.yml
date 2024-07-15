@@ -13,12 +13,12 @@ concurrency:
   cancel-in-progress: false
   
 jobs:
-  build:
-    name: Build
+  build_rust:
+    name: Build Rust
     runs-on: ubuntu-latest
     defaults:
-        run:
-          working-directory: rust
+      run:
+        working-directory: rust
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,23 +36,52 @@ jobs:
       - name: Clean docs folder
         run: cargo clean --doc
       - name: Build docs
-        run: cargo doc --no-deps --target-dir=$RUNNER_TEMP
-      - name: Add redirect
-        run: echo '<meta http-equiv="refresh" content="0;url=cx_sdk/index.html">' > $RUNNER_TEMP/doc/index.html
-      - name: Remove lock file
-        run: rm $RUNNER_TEMP/doc/.lock
+        run: 
+          cargo doc --no-deps --target-dir=$RUNNER_TEMP/rust
+          mkdir $RUNNER_TEMP/docs
+          mkdir $RUNNER_TEMP/docs/rust
+          cp -r $RUNNER_TEMP/rust/doc/** $RUNNER_TEMP/docs/rust
+
+  build_go:
+    name: Build Go Docs 
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.18'  # Update this with your desired Go version
+
+      - name: Install doc2go
+        run: go install github.com/abhinav/doc2go@latest
+
+      - name: Generate Go Docs
+        run: |
+          doc2go -o $RUNNER_TEMP/docs/go
+  upload_docs:
+    name: Upload Docs 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Copy index file
+        run: | 
+          cp docs/index.html $RUNNER_TEMP/docs
+    
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ${{ runner.temp }}/doc
+          path: ${{ runner.temp }}/docs
   deploy:
     name: Deploy
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: build
+    needs: [build_rust, build_go]
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        

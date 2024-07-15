@@ -13,7 +13,7 @@ mod tests {
             ApiKey::from_env().unwrap(),
         );
 
-        let _ = logs_archive_service
+        logs_archive_service
             .validate_target(
                 true,
                 TargetSpecValidation::S3(S3TargetSpec {
@@ -21,9 +21,10 @@ mod tests {
                     region: Some("eu-west-1".to_string()),
                 }),
             )
-            .await.unwrap();
+            .await
+            .unwrap();
 
-        let _ = logs_archive_service
+        logs_archive_service
             .set_target(
                 true,
                 TargetSpec::S3(S3TargetSpec {
@@ -31,7 +32,8 @@ mod tests {
                     region: Some("eu-west-1".to_string()),
                 }),
             )
-            .await.unwrap();
+            .await
+            .unwrap();
 
         let _ = logs_archive_service.get_target().await.unwrap();
     }

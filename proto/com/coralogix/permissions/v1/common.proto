@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.permissions.v1;
-
-message TeamId {
-  uint32 id = 1;
-}

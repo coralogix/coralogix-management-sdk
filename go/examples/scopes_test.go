@@ -17,7 +17,7 @@ func TestScopes(t *testing.T) {
 		DisplayName: "Test Data Access Rule",
 		Description: &description,
 		Filters: []*cxsdk.Filter{
-			{EntityType: cxsdk.EntityType_LOGS, Expression: "<v1> foo == 'bar'"},
+			{EntityType: cxsdk.EntityTypeLogs, Expression: "<v1> foo == 'bar'"},
 		},
 		DefaultExpression: "<v1> foo == 'bar'",
 	})
@@ -29,7 +29,7 @@ func TestScopes(t *testing.T) {
 	})
 	assert.Nil(t, e)
 
-	updated, _ := c.Get(context.Background(), &cxsdk.GetTeamScopesByIdsRequest{
+	updated, _ := c.Get(context.Background(), &cxsdk.GetTeamScopesByIDsRequest{
 		Ids: []string{result.Scope.Id},
 	})
 

@@ -201,6 +201,7 @@ message SyncRumDataResponse {
 
 message TestIntegrationRequest {
   IntegrationMetadata integration_data = 1;
+  google.protobuf.StringValue integration_id = 2;
 }
 
 message TestIntegrationResponse {

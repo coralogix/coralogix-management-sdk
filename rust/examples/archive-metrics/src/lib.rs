@@ -22,16 +22,20 @@ mod tests {
         };
 
         let storage_config = StorageConfig::S3(s3_config.clone());
-        let _ = metrics_service.configure_tenant(None, storage_config).await.unwrap();
+        metrics_service
+            .configure_tenant(None, storage_config)
+            .await
+            .unwrap();
 
-        let _ = metrics_service
+        metrics_service
             .update_tenant(2, StorageConfigUpdate::S3(s3_config.clone()))
-            .await.unwrap();
+            .await
+            .unwrap();
 
-
-        let _ = metrics_service
+        metrics_service
             .validate_bucket(StorageConfigValidation::S3(s3_config.clone()))
-            .await.unwrap();
+            .await
+            .unwrap();
 
         let get_tenant_config_result = metrics_service.get_tenant_config().await;
         assert!(
@@ -44,7 +48,7 @@ mod tests {
                 == StorageConfigView::S3(s3_config.clone())
         );
 
-        let _ = metrics_service.enable_archive().await.unwrap();
-        let _ = metrics_service.disable_archive().await.unwrap();
+        metrics_service.enable_archive().await.unwrap();
+        metrics_service.disable_archive().await.unwrap();
     }
 }

@@ -71,8 +71,10 @@ message SideBarFilters {
 }
 
 message SideBarFilter {
-  google.protobuf.StringValue filter_name = 1;
+  // Use 'field' instead
+  google.protobuf.StringValue filter_name = 1 [deprecated = true];
   DefaultTermCounts term = 2;
+  UntypedKeypath field = 3;
 }
 
 message Count {

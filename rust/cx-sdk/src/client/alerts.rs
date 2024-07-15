@@ -18,12 +18,15 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogixapis::alerts::v3::{
-    alert_def_notification::{IntegrationType, RetriggeringPeriod},
+    alert_def_advanced_target_settings::RetriggeringPeriod,
+    alert_def_notification_group::Targets,
     alert_def_properties::{Schedule, TypeDefinition},
+    integration_type,
     logs_filter::FilterType,
     logs_time_window::Type as LogsTimeWindowType,
-    ActivitySchedule, AlertDef, AlertDefNotification, AlertDefNotificationGroup, AlertDefPriority,
-    AlertDefProperties, AlertDefType, DayOfWeek, EvaluationWindow, LabelFilterType, LabelFilters,
+    ActivitySchedule, AlertDef, AlertDefAdvancedTargetSettings, AlertDefAdvancedTargets,
+    AlertDefNotificationGroup, AlertDefPriority, AlertDefProperties, AlertDefTargetSimple,
+    AlertDefType, DayOfWeek, EvaluationWindow, IntegrationType, LabelFilterType, LabelFilters,
     LogFilterOperationType, LogSeverity, LogsFilter, LogsMoreThanTypeDefinition, LogsTimeWindow,
     LogsTimeWindowValue, LuceneFilter, NotifyOn, Recipients, TimeOfDay,
 };

@@ -10,14 +10,18 @@ import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
+import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
 
 import "com/coralogixapis/database_catalog/v1/aggregation_type.proto";
 import "com/coralogixapis/database_catalog/v1/error_graph_type.proto";
 
 import "com/coralogixapis/database_catalog/v1/database.proto";
 
+import "com/coralogixapis/alerts/v3/alert_def.proto";
+
 message UpdateDatabaseCatalogFiltersRequest {
   repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
 }
 
 message UpdateDatabaseCatalogFiltersResponse {
@@ -96,6 +100,7 @@ message GetDatabasesColumnsStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   repeated DatabaseCatalogFilter database_catalog_filters = 2;
   repeated google.protobuf.StringValue calling_services = 3;
+  google.protobuf.Int64Value trend_offset = 4;
 }
 
 message GetDatabasesColumnsStreamResponse {
@@ -125,6 +130,14 @@ message ListTablesResponse {
   google.protobuf.StringValue table_tag = 2;
 }
 
+message GetAffectedAlertsRequest {
+  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
+}
+
+message GetAffectedAlertsResponse {
+  repeated com.coralogixapis.alerts.v3.AlertDef alerts = 1;
+}
 
 service DatabaseCatalogService {
   rpc GetDatabasesColumnsStream(GetDatabasesColumnsStreamRequest) returns (stream GetDatabasesColumnsStreamResponse) {
@@ -151,4 +164,7 @@ service DatabaseCatalogService {
   rpc ListTables (ListTablesRequest) returns (ListTablesResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list the tables in database";
   };
+  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
+  }
 }

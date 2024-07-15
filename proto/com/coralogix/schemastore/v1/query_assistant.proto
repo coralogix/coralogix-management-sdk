@@ -31,6 +31,8 @@ message QueryGenerationResult {
     SuccessfulQueryGeneration successful = 1;
     QueryRejected rejected = 2;
     NoValidQueriesGenerated no_valid_queries_generated = 3;
+    QueryGenerationFailure generation_failure = 4;
+    QuotaExceeded quota_exceeded = 5;
   }
 }
 
@@ -42,6 +44,12 @@ message QueryRejected {
 }
 
 message NoValidQueriesGenerated {
+}
+
+message QueryGenerationFailure {
+}
+
+message QuotaExceeded {
 }
 
 message CandidateQuery {

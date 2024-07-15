@@ -52,9 +52,17 @@ message GetApmSourceResponse {
 
 message GetSpanMetricDimensionsRequest {}
 
+message GetSpanMetricDimensionsByServiceNamesRequest {
+  repeated google.protobuf.StringValue service_names = 1;
+}
+
 message GetSpanMetricDimensionsResponse{
   repeated google.protobuf.StringValue dimensions = 1;
   map<string, google.protobuf.ListValue> dimensions_values = 2;
+}
+
+message GetSpanMetricDimensionsByServiceNamesResponse {
+  repeated google.protobuf.StringValue dimensions = 1;
 }
 
 service ApmSettingsService {
@@ -80,5 +88,9 @@ service ApmSettingsService {
 
   rpc GetSpanMetricDimensions(GetSpanMetricDimensionsRequest) returns (GetSpanMetricDimensionsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions";
+  }
+
+  rpc GetSpanMetricDimensionsByServiceNames(GetSpanMetricDimensionsByServiceNamesRequest) returns (GetSpanMetricDimensionsByServiceNamesResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions By Service Name";
   }
 }
