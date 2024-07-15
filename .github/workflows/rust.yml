@@ -50,6 +50,7 @@ jobs:
 
       - name: Cargo run examples
         env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
           CORALOGIX_ALERTS_RULES_TAGS_API_KEY: ${{ secrets.CORALOGIX_ALERTS_RULES_TAGS_API_KEY }}
           CCORALOGIX_LEGACY_KEY: ${{ secrets.CORALOGIX_LEGACY_KEY }}
           CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_API_KEY }} 
