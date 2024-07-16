@@ -17,7 +17,7 @@ mod tests {
             .validate_target(
                 true,
                 TargetSpecValidation::S3(S3TargetSpec {
-                    bucket: "yak-bucket-logs".to_string(),
+                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
                     region: Some("eu-west-1".to_string()),
                 }),
             )
@@ -34,7 +34,7 @@ mod tests {
             .set_target(
                 true,
                 TargetSpec::S3(S3TargetSpec {
-                    bucket: "yak-bucket-logs".to_string(),
+                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
                     region: Some("eu-west-1".to_string()),
                 }),
             )
