@@ -8,10 +8,9 @@ mod tests {
 
     #[tokio::test]
     async fn test_logs_archive() {
-        let api_key = std::env::var("CORALOGIX_API_KEY").unwrap();
         let logs_archive_service = LogsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
-            ApiKey::from(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
         );
 
         let validate_target_result = logs_archive_service
