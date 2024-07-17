@@ -43,29 +43,20 @@ mod tests {
             updated_at: None,
         };
 
-        let created_alert_scheduler_rule = alert_scheduler_client.create(alert_schduler_rule).await;
-        if let Err(e) = &created_alert_scheduler_rule {
-            let err = e.to_string();
-            println!("Error: {:?}", err);
-        }
-
-        assert!(created_alert_scheduler_rule.is_ok());
-
+        let created_alert_scheduler_rule = alert_scheduler_client.create(alert_schduler_rule).await.unwrap();
+        
         let new_alert_scheduler_rule = AlertSchedulerRule {
             name: String::from("MyAlertUpdated"),
-            ..created_alert_scheduler_rule.unwrap()
+            ..created_alert_scheduler_rule
         };
 
         let updated_alert_scheduler_rule = alert_scheduler_client
             .update(new_alert_scheduler_rule)
-            .await;
-
-        assert!(updated_alert_scheduler_rule.is_ok());
+            .await.unwrap();
 
         let retrieved_alert_scheduler_rule = alert_scheduler_client
             .get(
                 updated_alert_scheduler_rule
-                    .unwrap()
                     .unique_identifier
                     .unwrap(),
             )
@@ -75,10 +66,8 @@ mod tests {
 
         assert!(retrieved_alert_scheduler_rule.name == "MyAlertUpdated");
 
-        let deletion_result = alert_scheduler_client
+        let _ = alert_scheduler_client
             .delete(retrieved_alert_scheduler_rule.unique_identifier.unwrap())
-            .await;
-
-        assert!(deletion_result.is_ok());
+            .await.unwrap()
     }
 }

@@ -15,7 +15,7 @@ mod tests {
         )
         .unwrap();
 
-        let create_result = client
+        let create = client
             .create(
                 "Test Data Access Rule".into(),
                 Some("Data Access Rule intended for testing".into()),
@@ -25,15 +25,9 @@ mod tests {
                 }],
                 "<v1> foo == 'bar'".into(),
             )
-            .await;
-        if let Err(e) = &create_result {
-            let err = e.to_string();
-            println!("Error: {:?}", err);
-        }
-
-        assert!(create_result.is_ok());
-
-        let scope = create_result.unwrap().scope.unwrap();
+            .await.unwrap();
+      
+        let scope = create.unwrap().scope.unwrap();
 
         let update_result = client
             .update(
@@ -43,21 +37,13 @@ mod tests {
                 scope.filters,
                 scope.default_expression,
             )
-            .await;
-        assert!(update_result.is_ok());
+            .await.unwrap();
 
-        let new_scope = update_result.unwrap().scope.unwrap();
+        let new_scope = update_result.scope.unwrap();
         assert!(new_scope.display_name == "Updated Test Data Access Rule");
 
-        let retrieved = client.get(vec![new_scope.id.clone()]).await;
-
-        assert!(retrieved.is_ok());
-
-        let delete_result = client.delete(new_scope.id).await;
-        assert!(delete_result.is_ok());
-        let retrieved = client.list().await;
-
-        assert!(retrieved.is_ok());
-        assert!(retrieved.unwrap().scopes.is_empty());
+        let _ = client.get(vec![new_scope.id.clone()]).await.unwrap();
+        let _ = client.delete(new_scope.id).await.unwrap();
+        assert!(client.list().await.unwrap().scopes.is_empty());
     }
 }
