@@ -1,5 +1,5 @@
 {
-  "id": "abcdefghijklmnopqrstx",
+  "id": "ybcdefghijklmnopqrstx",
   "name": "test",
   "description": "dashboards team is messing with this 🗿",
   "time_frame": {
@@ -12,6 +12,14 @@
       {
         "id": {
           "value": "6BD2412D-E3F4-4EF2-8567-BBAB907E6062"
+        },
+        "options": {
+          "custom": {
+            "name": "Status",
+            "color": {
+              "predefined": "SECTION_PREDEFINED_COLOR_BLUE"
+            }
+          }
         },
         "rows": [
           {

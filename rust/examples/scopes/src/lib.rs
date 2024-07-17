@@ -1,0 +1,49 @@
+#[cfg(test)]
+mod tests {
+
+    use cx_sdk::{
+        auth::ApiKey,
+        client::scopes::{EntityType, Filter, ScopesClient},
+        CoralogixRegion,
+    };
+
+    #[tokio::test]
+    async fn test_scopes_client() {
+        let client = ScopesClient::new(
+            ApiKey::from_env().unwrap(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        let create = client
+            .create(
+                "Test Data Access Rule".into(),
+                Some("Data Access Rule intended for testing".into()),
+                vec![Filter {
+                    entity_type: EntityType::Logs.into(),
+                    expression: "<v1> foo == 'bar'".into(),
+                }],
+                "<v1> foo == 'bar'".into(),
+            )
+            .await.unwrap();
+      
+        let scope = create.unwrap().scope.unwrap();
+
+        let update_result = client
+            .update(
+                scope.id,
+                "Updated Test Data Access Rule".into(),
+                scope.description,
+                scope.filters,
+                scope.default_expression,
+            )
+            .await.unwrap();
+
+        let new_scope = update_result.scope.unwrap();
+        assert!(new_scope.display_name == "Updated Test Data Access Rule");
+
+        let _ = client.get(vec![new_scope.id.clone()]).await.unwrap();
+        let _ = client.delete(new_scope.id).await.unwrap();
+        assert!(client.list().await.unwrap().scopes.is_empty());
+    }
+}

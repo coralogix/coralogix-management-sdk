@@ -4,10 +4,11 @@ members = [
     "actions",
     "alert-scheduler",
     "alerts",
-    "api_keys",
+    "api-keys",
     "archive-logs",
     "archive-metrics",
     "dashboards",
     "data-sets",
     "dataprime-query",
+    "scopes"
 ]
