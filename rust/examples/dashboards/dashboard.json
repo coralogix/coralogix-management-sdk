@@ -50,7 +50,7 @@
                                   "value": "http_requests_total{status!~\"4..\"}"
                                 },
                                 "filters": [],
-                                "editor_mode": 0,
+                                "editor_mode": 0
                               }
                             },
                             "refresh_strategy": 1
