@@ -19,6 +19,11 @@ message Operation{
   UnitValue errors_trend = 13;
   UnitValue p95_response_time_trend = 14;
   UnitValue errors_percentage_trend = 15;
+  UnitValue p99_response_time_with_offset = 16;
+  UnitValue requests_with_offset = 17;
+  UnitValue errors_with_offset = 18;
+  UnitValue p95_response_time_with_offset = 19;
+  UnitValue errors_percentage_with_offset = 20;
 }
 
 

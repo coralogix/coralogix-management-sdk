@@ -8,31 +8,25 @@ mod tests {
 
     #[tokio::test]
     async fn test_logs_archive() {
-        let logs_archive_service = LogsArchiveClient::new(
+        let service = LogsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
             ApiKey::from_env().unwrap(),
         );
 
-        let _ = logs_archive_service
-            .validate_target(
-                true,
-                TargetSpecValidation::S3(S3TargetSpec {
-                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
-                    region: Some("eu-west-1".to_string()),
-                }),
-            )
-            .await.unwrap();
+        let target_spec = S3TargetSpec {
+            bucket: "yak-2-bucket".to_string(),
+            region: Some("eu-north-1".to_string()),
+        };
+        service
+            .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))
+            .await
+            .unwrap();
 
-        let _ = logs_archive_service
-            .set_target(
-                true,
-                TargetSpec::S3(S3TargetSpec {
-                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
-                    region: Some("eu-west-1".to_string()),
-                }),
-            )
-            .await.unwrap();
+        service
+            .set_target(true, TargetSpec::S3(target_spec))
+            .await
+            .unwrap();
 
-        let _ = logs_archive_service.get_target().await.unwrap();
+        let _ = service.get_target().await.unwrap();
     }
 }

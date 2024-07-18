@@ -7,7 +7,7 @@ import "com/coralogix/dataprime/ast/v1/query.proto";
 
 message Ast {
   Query query          = 1;
-  TimeRange time_range = 2;
+  TimeRange time_range = 2 [deprecated = true];
 }
 
 message DdlAst {
@@ -19,4 +19,3 @@ message TimeRange {
   google.protobuf.Timestamp from = 1;
   google.protobuf.Timestamp to   = 2;
 }
-

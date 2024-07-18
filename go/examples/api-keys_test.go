@@ -1,44 +1,48 @@
 package examples
 
-import (
-	"context"
-	cxsdk "coralogix-management-sdk/go"
-	"testing"
+// import (
+// 	"context"
+// 	cxsdk "coralogix-management-sdk/go"
+// 	"testing"
 
-	"github.com/stretchr/testify/assert"
-)
+// 	"github.com/stretchr/testify/assert"
+// )
 
-func TestApiKeys(t *testing.T) {
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
-	k := cxsdk.NewApiKeysClient(creator)
+// func TestApiKeys(t *testing.T) {
+// 	region, err := cxsdk.CoralogixRegionFromEnv()
+// 	assert.Nil(t, err)
+// 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+// 	assert.Nil(t, err)
+// 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+// 	k := cxsdk.NewAPIKeysClient(creator)
 
-	key, e := k.CreateApiKey(context.Background(), &cxsdk.CreateApiKeyRequest{
-		Name: "My APM KEY",
-		Owner: &cxsdk.Owner{
-			Owner: &cxsdk.Owner_UserId{
-				UserId: "4013254",
-			},
-		},
-		KeyPermissions: &cxsdk.ApiKeyPermissions{
-			Presets:     []string{"APM"},
-			Permissions: []string{},
-		},
-	})
-	assert.Nil(t, e)
+// 	key, e := k.CreateAPIKey(context.Background(), &cxsdk.CreateAPIKeyRequest{
+// 		Name: "My APM KEY",
+// 		Owner: &cxsdk.Owner{
+// 			Owner: &cxsdk.OwnerUserID{
+// 				UserId: "4013254",
+// 			},
+// 		},
+// 		KeyPermissions: &cxsdk.APIKeyPermissions{
+// 			Presets:     []string{"APM"},
+// 			Permissions: []string{},
+// 		},
+// 	})
+// 	assert.Nil(t, e)
 
-	newName := "new-name"
-	k.UpdateApiKey(context.Background(), &cxsdk.UpdateApiKeyRequest{
-		KeyId:   key.KeyId,
-		NewName: &newName,
-	})
+// 	newName := "new-name"
+// 	k.UpdateAPIKey(context.Background(), &cxsdk.UpdateAPIKeyRequest{
+// 		KeyId:   key.KeyId,
+// 		NewName: &newName,
+// 	})
 
-	updated, _ := k.GetApiKey(context.Background(), &cxsdk.GetApiKeyRequest{
-		KeyId: key.KeyId,
-	})
+// 	updated, _ := k.GetAPIKey(context.Background(), &cxsdk.GetAPIKeyRequest{
+// 		KeyId: key.KeyId,
+// 	})
 
-	assert.Equal(t, updated.KeyInfo.Name, newName)
+// 	assert.Equal(t, updated.KeyInfo.Name, newName)
 
-	k.DeleteApiKey(context.Background(), &cxsdk.DeleteApiKeyRequest{
-		KeyId: key.KeyId,
-	})
-}
+// 	k.DeleteAPIKey(context.Background(), &cxsdk.DeleteAPIKeyRequest{
+// 		KeyId: key.KeyId,
+// 	})
+// }

@@ -7,10 +7,12 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
+// ArchiveMetricsClient is a client for the Coralogix Archive Metrics API.
 type ArchiveMetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
+// UpdateArchiveMetrics updates the archive metrics configuration.
 func (c ArchiveMetricsClient) UpdateArchiveMetrics(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -24,6 +26,7 @@ func (c ArchiveMetricsClient) UpdateArchiveMetrics(ctx context.Context, req *arc
 	return client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// GetArchiveMetrics gets the archive metrics configuration.
 func (c ArchiveMetricsClient) GetArchiveMetrics(ctx context.Context) (*archiveMetrics.GetTenantConfigResponseV2, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -37,6 +40,7 @@ func (c ArchiveMetricsClient) GetArchiveMetrics(ctx context.Context) (*archiveMe
 	return client.GetTenantConfig(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
 }
 
+// NewArchiveMetricsClient creates a new archive metrics client.
 func NewArchiveMetricsClient(c *CallPropertiesCreator) *ArchiveMetricsClient {
 	return &ArchiveMetricsClient{callPropertiesCreator: c}
 }

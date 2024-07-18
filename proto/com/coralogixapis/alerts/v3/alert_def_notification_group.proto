@@ -4,28 +4,41 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 
-message AlertDefNotificationGroup {
-  repeated google.protobuf.StringValue group_by_fields = 1;
-  repeated AlertDefNotification notifications = 2;
-}
-
 message AlertDefIncidentSettings {
   oneof retriggering_period {
     google.protobuf.UInt32Value minutes = 100;
   }
   NotifyOn notify_on = 2;
-  google.protobuf.BoolValue use_as_notification_settings = 3;
 }
 
-message AlertDefNotification {
+message AlertDefNotificationGroup {
+  repeated google.protobuf.StringValue group_by_fields = 1;
+  oneof targets {
+     AlertDefAdvancedTargets advanced = 2;
+     AlertDefTargetSimple simple = 3;
+  }
+}
+
+message AlertDefTargetSimple{
+   repeated IntegrationType integrations = 1;
+}
+
+message AlertDefAdvancedTargets{
+    repeated AlertDefAdvancedTargetSettings advanced_targets_settings = 1;
+}
+message AlertDefAdvancedTargetSettings {
   oneof retriggering_period {
     google.protobuf.UInt32Value minutes = 100;
   }
    optional NotifyOn notify_on = 1;
-   oneof integration_type {
-     google.protobuf.UInt32Value integration_id = 2;
-     Recipients recipients = 3;
-   }
+   IntegrationType integration = 2;
+}
+
+message IntegrationType {
+  oneof integration_type {
+    google.protobuf.UInt32Value integration_id = 2;
+    Recipients recipients = 3;
+  }
 }
 
 message Recipients {

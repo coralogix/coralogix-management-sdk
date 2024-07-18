@@ -12,22 +12,25 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+// CallPropertiesCreator is a struct that creates CallProperties objects.
 type CallPropertiesCreator struct {
-	targetUrl string
+	targetURL string
 	apiKey    string
 	//allowRetry bool
 }
 
+// CallProperties is a struct that holds the context, connection, and call options for a gRPC call.
 type CallProperties struct {
 	Ctx         context.Context
 	Connection  *grpc.ClientConn
 	CallOptions []grpc.CallOption
 }
 
+// GetCallProperties returns a new CallProperties object. It essentially prepares the context, connection, and call options for a gRPC call.
 func (c CallPropertiesCreator) GetCallProperties(ctx context.Context) (*CallProperties, error) {
 	ctx = createAuthContext(ctx, c.apiKey)
 
-	conn, err := createSecureConnection(c.targetUrl)
+	conn, err := createSecureConnection(c.targetURL)
 	if err != nil {
 		return nil, err
 	}
@@ -44,8 +47,8 @@ func createCallOptions() []grpc.CallOption {
 	return callOptions
 }
 
-func createSecureConnection(targetUrl string) (*grpc.ClientConn, error) {
-	return grpc.Dial(targetUrl,
+func createSecureConnection(targetURL string) (*grpc.ClientConn, error) {
+	return grpc.NewClient(targetURL,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 }
 
@@ -55,9 +58,10 @@ func createAuthContext(ctx context.Context, apiKey string) context.Context {
 	return ctx
 }
 
-func NewCallPropertiesCreator(targetUrl, apiKey string) *CallPropertiesCreator {
+// NewCallPropertiesCreator creates a new CallPropertiesCreator object.
+func NewCallPropertiesCreator(targetURL, apiKey string) *CallPropertiesCreator {
 	return &CallPropertiesCreator{
-		targetUrl: targetUrl,
+		targetURL: targetURL,
 		apiKey:    apiKey,
 	}
 }

@@ -66,6 +66,8 @@ message QuerySource {
   message OpenSearchSource {
     reserved 1, 2;
     string index = 3;
+    reserved 4;
+    optional string host = 5;
   }
 
   message CustomEnrichmentCsv {
@@ -227,6 +229,17 @@ message ExecutionConfig {
   // Enable repartitioning of aggregation queries. If `true` this will partition the final aggregation
   // stage
   optional bool repartition_aggregations = 18;
+
+  // Enable usage of remote index store (when it is configured in the query engine)
+  optional bool use_index_store = 19;
+
+  optional SchedulingTier scheduling_tier = 20;
+}
+
+enum SchedulingTier {
+  SCHEDULING_TIER_UNSPECIFIED = 0;
+  SCHEDULING_TIER_NORMAL = 1;
+  SCHEDULING_TIER_FAST = 2;
 }
 
 enum Metastore {

@@ -5,6 +5,7 @@ package com.coralogix.dataprime.ast.v1;
 import "com/coralogix/dataprime/ast/v1/expression.proto";
 import "com/coralogix/dataprime/ast/v1/misc.proto";
 import "com/coralogix/dataprime/ast/v1/types.proto";
+import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 message Query {
@@ -12,7 +13,6 @@ message Query {
   repeated Operator operators = 2;
   reserved 3;
 }
-
 
 message Source {
   reserved 1;
@@ -28,20 +28,36 @@ message Source {
 
 message Logs {
   optional string team_id = 1;
+  optional TimeFrame time_frame = 2;
 }
 
 message Spans {
   optional string team_id = 1;
+  optional TimeFrame time_frame = 2;
 }
 
 message CustomDataset {
   google.protobuf.StringValue name = 1;
   optional string team_id = 2;
+  optional TimeFrame time_frame = 3;
 }
 
 message CustomEnrichment {
   google.protobuf.StringValue name = 1;
   optional string team_id = 2;
+  optional TimeFrame time_frame = 3;
+}
+
+message TimeFrame {
+  // Making this oneof because we might want to support relative time frame in the future
+  oneof time_frame {
+    Absolute absolute = 1;
+  }
+
+  message Absolute {
+    google.protobuf.Timestamp from = 1;
+    google.protobuf.Timestamp to   = 2;
+  }
 }
 
 message Schema {

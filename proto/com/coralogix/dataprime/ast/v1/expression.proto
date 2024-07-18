@@ -428,6 +428,12 @@ message Expression {
       Expression ip_prefix = 2; //string
     }
 
+    message IpInRange {
+      Expression ip       = 1;
+      Expression start_ip = 2;
+      Expression end_ip   = 3;
+    }
+
     // UUID //
     message RandomUuid{} //returns UUIDv4
 
@@ -465,7 +471,7 @@ message Expression {
       Expression array = 1;
       Expression delimiter = 2; // string
     }
-    
+
     message ArrayConcat {
       Expression array1 = 1;
       Expression array2 = 2;
@@ -622,6 +628,7 @@ message Expression {
       ArrayReplaceAll array_replace_all       = 82;
       ArrayRemoveAt array_remove_at           = 83;
       ArrayRemove array_remove                = 84;
+      IpInRange ip_in_range                   = 85;
     }
   }
 

@@ -139,6 +139,7 @@ message IntegrationRevision {
     SELECT = 5;
     JSON = 6;
     NUMBER = 7;
+    SENSITIVE_DATA = 8;
   }
 
   message ListTextValue {
@@ -269,6 +270,8 @@ message Parameter {
     optional google.protobuf.StringValue value = 2;
   }
 
+  message SensitiveDataPlaceholder {}
+
   string key = 1;
   oneof value {
     google.protobuf.StringValue string_value = 101;
@@ -276,6 +279,7 @@ message Parameter {
     StringList string_list = 103;
     ApiKeyData api_key = 104;
     google.protobuf.DoubleValue numeric_value = 105;
+    SensitiveDataPlaceholder sensitive_data = 106;
   }
 }
 

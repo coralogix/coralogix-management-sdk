@@ -39,6 +39,7 @@ message GetOverviewResponse {
   com.coralogixapis.apm.widgets.v1.Stat avg_latency_with_offset = 16;
   com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
   com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
+  repeated com.coralogixapis.apm.widgets.v1.LineChart errors_per_seconds = 19;
 }
 
 message GetOverviewStreamRequest {
@@ -69,6 +70,7 @@ message GetOverviewStreamResponse {
     com.coralogixapis.apm.widgets.v1.Stat avg_latency_with_offset = 16;
     com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
     com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
+    RepeatedLineChart errors_per_seconds = 19;
   }
 }
 

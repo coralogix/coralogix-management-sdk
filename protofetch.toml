@@ -39,6 +39,7 @@ content_roots = ["/service", "ast"]
 [cx-api-logs2metrics]
 branch = 'master'
 url = 'github.com/coralogix/cx-api-logs2metrics'
+deny_policies = ["/com/coralogixapis/logs2metrics/audit_log.proto"]
 
 [cx-api-data-usage]
 branch = 'master'

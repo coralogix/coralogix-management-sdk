@@ -17,6 +17,14 @@ message DatabaseOperationData {
     google.protobuf.Int64Value time_consuming = 8;
     google.protobuf.FloatValue time_consuming_percentage = 9;
     google.protobuf.StringValue operation_source = 11;
+    google.protobuf.FloatValue p95_latency_trend = 13;
+    google.protobuf.FloatValue total_requests_trend = 14;
+    google.protobuf.FloatValue total_errors_trend = 15;
+    google.protobuf.FloatValue errors_percentage_trend = 16;
+    google.protobuf.Int64Value p95_latency_with_offset = 17;
+    google.protobuf.Int64Value total_requests_with_offset = 18;
+    google.protobuf.Int64Value total_errors_with_offset = 19;
+    google.protobuf.Int64Value errors_percentage_with_offset = 20;
   }
 }
 

@@ -2,19 +2,15 @@ syntax = "proto3";
 
 package com.coralogix.archive.v2;
 
-import "com/coralogix/archive/v2/format.proto";
-import "com/coralogix/archive/v2/target.proto";
 import "com/coralogix/archive/dataset/v1/dataset.proto";
 import "com/coralogix/archive/v2/archive_target.proto";
-import "com/coralogix/archive/v2/object_tag.proto";
-import "com/coralogix/archive/v2/target_spec.proto";
 
 message Object {
-  Target target = 1;
+  reserved 1;
   string object_key = 2;
   uint64 object_size = 3;
-  repeated ObjectTag tags = 4;
-  Format format = 5;
+  reserved 4;
+  reserved 5;
   uint32 compaction_level = 6;
   com.coralogix.archive.dataset.v1.Dataset dataset = 7;
   uint64 row_count = 8;
@@ -22,7 +18,7 @@ message Object {
   Labels split_by_event_labels = 10;
   ArchiveTarget archive_target = 11;
   reserved 12;
-  repeated TargetSpec targets = 13;
+  reserved 13;
 }
 
 message ObjectCreated {

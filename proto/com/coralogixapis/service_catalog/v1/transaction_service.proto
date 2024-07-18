@@ -61,6 +61,26 @@ message GetTransactionsErrorsResponse {
   ApmSource apm_source = 3;
 }
 
+message GetTransactionsErrorsStreamRequest {
+  google.protobuf.StringValue service_name = 1;
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
+  Source source = 3;
+  map<string, google.protobuf.ListValue> filters = 4;
+  google.protobuf.UInt64Value topk = 5;
+  repeated google.protobuf.StringValue transactions = 6;
+  google.protobuf.BoolValue service_supports_transactions = 7;
+  ApmSource apm_source = 8;
+}
+
+message GetTransactionsErrorsStreamResponse {
+  oneof widget {
+    RepeatedLineChart errors = 1;
+    RepeatedLineChart errors_per_seconds = 2;
+  }
+  google.protobuf.UInt64Value total_amount = 3;
+  ApmSource apm_source = 4;
+}
+
 message GetTransactionsThroughputRequest {
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
@@ -157,6 +177,26 @@ message GetTransactionSegmentsErrorResponse {
   repeated com.coralogixapis.apm.widgets.v1.LineChart error = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
+}
+
+message GetTransactionSegmentsErrorStreamRequest {
+  google.protobuf.StringValue service_name = 1;
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
+  map<string, google.protobuf.ListValue> filters = 3;
+  google.protobuf.StringValue transaction = 4;
+  repeated google.protobuf.StringValue segments = 5;
+  google.protobuf.UInt64Value topk = 6;
+  ApmSource apm_source = 7;
+  google.protobuf.StringValue transactionMethod = 8;
+}
+
+message GetTransactionSegmentsErrorStreamResponse {
+  oneof widget{
+    RepeatedLineChart errors = 1;
+    RepeatedLineChart errors_per_seconds = 2;
+  }
+  google.protobuf.UInt64Value total_amount = 3;
+  ApmSource apm_source = 4;
 }
 
 message GetTransactionThroughputRequest {
@@ -333,5 +373,11 @@ service TransactionService {
   }
   rpc GetSegmentStats(GetSegmentStatsRequest) returns (GetSegmentStatsResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Segment Stats";
+  }
+  rpc GetTransactionsErrorsStream(GetTransactionsErrorsStreamRequest)returns(stream GetTransactionsErrorsStreamResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' Errors Stream";
+  }
+  rpc GetTransactionSegmentsErrorStream(GetTransactionSegmentsErrorStreamRequest)returns(stream GetTransactionSegmentsErrorStreamResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' segments Errors Stream";
   }
 }

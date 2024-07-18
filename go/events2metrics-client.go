@@ -5,10 +5,12 @@ import (
 	e2m "coralogix-management-sdk/go/internal/coralogixapis/events2metrics/v2"
 )
 
+// Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/
 type Events2MetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
+// CreateEvents2Metric Creates a new metric.
 func (e Events2MetricsClient) CreateEvents2Metric(ctx context.Context, req *e2m.CreateE2MRequest) (*e2m.CreateE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -22,6 +24,7 @@ func (e Events2MetricsClient) CreateEvents2Metric(ctx context.Context, req *e2m.
 	return client.CreateE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// GetEvents2Metric gets a metric.
 func (e Events2MetricsClient) GetEvents2Metric(ctx context.Context, req *e2m.GetE2MRequest) (*e2m.GetE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -35,6 +38,7 @@ func (e Events2MetricsClient) GetEvents2Metric(ctx context.Context, req *e2m.Get
 	return client.GetE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// UpdateEvents2Metric updates a metric.
 func (e Events2MetricsClient) UpdateEvents2Metric(ctx context.Context, req *e2m.ReplaceE2MRequest) (*e2m.ReplaceE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -48,6 +52,7 @@ func (e Events2MetricsClient) UpdateEvents2Metric(ctx context.Context, req *e2m.
 	return client.ReplaceE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// DeleteEvents2Metric deletes a metric.
 func (e Events2MetricsClient) DeleteEvents2Metric(ctx context.Context, req *e2m.DeleteE2MRequest) (*e2m.DeleteE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -61,6 +66,7 @@ func (e Events2MetricsClient) DeleteEvents2Metric(ctx context.Context, req *e2m.
 	return client.DeleteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// NewEvents2MetricsClient creates a new Events2MetricsClient.
 func NewEvents2MetricsClient(c *CallPropertiesCreator) *Events2MetricsClient {
 	return &Events2MetricsClient{callPropertiesCreator: c}
 }

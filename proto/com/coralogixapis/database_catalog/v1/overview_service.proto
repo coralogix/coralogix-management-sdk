@@ -21,6 +21,7 @@ message GetDatabaseOverviewStreamRequest {
   repeated google.protobuf.StringValue calling_services = 5;
   google.protobuf.StringValue database_system = 6;
   repeated google.protobuf.StringValue tables = 7;
+  google.protobuf.Int64Value trend_offset = 8;
 }
 
 message GetDatabaseOverviewStreamResponse {
@@ -41,6 +42,25 @@ message GetDatabaseOverviewStreamResponse {
     com.coralogixapis.apm.widgets.v1.Stat request_rate_per_minute = 13 [deprecated = true];
     com.coralogixapis.apm.widgets.v1.Topk time_consuming_queries = 14;
     com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 15;
+    com.coralogixapis.apm.widgets.v1.Stat avg_latency_trend = 16;
+    com.coralogixapis.apm.widgets.v1.Stat throughput_trend = 17;
+    com.coralogixapis.apm.widgets.v1.Stat error_rpm_trend = 18;
+    com.coralogixapis.apm.widgets.v1.Stat error_percentage_trend = 19;
+    com.coralogixapis.apm.widgets.v1.Stat p50_trend = 20;
+    com.coralogixapis.apm.widgets.v1.Stat p75_trend = 21;
+    com.coralogixapis.apm.widgets.v1.Stat p95_trend = 22;
+    com.coralogixapis.apm.widgets.v1.Stat p99_trend = 23;
+    com.coralogixapis.apm.widgets.v1.Stat request_rate_per_minute_trend = 24;
+    com.coralogixapis.apm.widgets.v1.Stat avg_latency_with_offset = 25;
+    com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 26;
+    com.coralogixapis.apm.widgets.v1.Stat error_rpm_with_offset = 27;
+    com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 28;
+    com.coralogixapis.apm.widgets.v1.Stat p50_with_offset = 29;
+    com.coralogixapis.apm.widgets.v1.Stat p75_with_offset = 30;
+    com.coralogixapis.apm.widgets.v1.Stat p95_with_offset = 31;
+    com.coralogixapis.apm.widgets.v1.Stat p99_with_offset = 32;
+    com.coralogixapis.apm.widgets.v1.Stat request_rate_per_minute_with_offset = 33;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart errors_per_seconds = 34;
   }
 }
 

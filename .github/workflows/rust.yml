@@ -38,16 +38,9 @@ jobs:
       - name: Run cargo fmt
         run: cargo fmt --all -- --check
 
-      - name: Cargo check
-        run: cargo check --all
-
       - name: Cargo test
         run: cargo nextest run --all
       
-      - name: Cargo check examples
-        run: cargo check --all
-        working-directory: rust/examples
-
       - name: Cargo run examples
         env:
           TEAM_ID: ${{ secrets.TEAM_ID }}

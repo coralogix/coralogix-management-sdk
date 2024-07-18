@@ -49,7 +49,8 @@
                                 "promql_query": {
                                   "value": "http_requests_total{status!~\"4..\"}"
                                 },
-                                "filters": []
+                                "filters": [],
+                                "editor_mode": 0
                               }
                             },
                             "refresh_strategy": 1
@@ -92,6 +93,7 @@
                                 "group_bys": [],
                                 "group_by": [],
                                 "filters": [],
+                                "editor_mode": 0,
                                 "aggregations": [
                                   {
                                     "value": {
@@ -146,6 +148,7 @@
                                 },
                                 "group_bys": [],
                                 "filters": [],
+                                "editor_mode": 0,
                                 "group_by": [
                                   "coralogix.metadata.subsystemName"
                                 ],
@@ -223,7 +226,8 @@
                             ]
                           }
                         },
-                        "refresh_strategy": 1
+                        "refresh_strategy": 1,
+                        "editor_mode": 0
                       },
                       "results_per_page": 20,
                       "row_style": 1,

@@ -9,17 +9,21 @@ import (
 )
 
 func TestAlertScheduler(t *testing.T) {
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	a := cxsdk.NewAlertsSchedulersClient(creator)
 	description := "example"
 	metaLabels := make([]*cxsdk.MetaLabel, 0)
 	schedule := cxsdk.Schedule{
-		ScheduleOperation: cxsdk.ScheduleOperation_SCHEDULE_OPERATION_MUTE,
-		Scheduler: &cxsdk.Schedule_OneTime{
+		ScheduleOperation: cxsdk.ScheduleOperationScheduleOperationMute,
+		Scheduler: &cxsdk.ScheduleOneTime{
 			OneTime: &cxsdk.OneTime{
 				Timeframe: &cxsdk.Timeframe{
 					StartTime: "2021-01-04T00:00:00.000",
-					Until: &cxsdk.Timeframe_EndTime{
+					Until: &cxsdk.TimeframeEndTime{
 						EndTime: "2025-01-01T00:00:50.000",
 					},
 					Timezone: "UTC+2",
@@ -33,13 +37,24 @@ func TestAlertScheduler(t *testing.T) {
 			Description: &description,
 			MetaLabels:  metaLabels,
 			Schedule:    &schedule,
+			Filter: &cxsdk.AlertSchedulerFilter{
+				WhatExpression: "source logs | filter $d.cpodId:string == '122'",
+				WhichAlerts: &cxsdk.AlertSchedulerFilterUniqueIDs{
+					AlertUniqueIds: &cxsdk.AlertUniqueIDs{
+						Value: []string{"07d5714a-c847-4afa-87db-5e5f6986688c"},
+					},
+				},
+			},
+			Enabled:   true,
+			CreatedAt: nil,
+			UpdatedAt: nil,
 		},
 	})
 
 	assert.Nil(t, e)
 
 	alertScheduler := createAlertSchedulerResponse.AlertSchedulerRule
-	alertScheduler.Name = "example_updated"
+	alertScheduler.Name = "MyAlertUpdated"
 
 	updateAlertSchedulerResponse, e := a.UpdateAlertScheduler(context.Background(), &cxsdk.UpdateAlertSchedulerRuleRequest{
 		AlertSchedulerRule: alertScheduler,
@@ -47,17 +62,19 @@ func TestAlertScheduler(t *testing.T) {
 
 	assert.Nil(t, e)
 
-	assert.Equal(t, updateAlertSchedulerResponse.AlertSchedulerRule.Name, "NewName")
+	assert.Equal(t, updateAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
 	getAlertSchedulerResponse, e := a.GetAlertScheduler(context.Background(), &cxsdk.GetAlertSchedulerRuleRequest{
-		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.Id,
+		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
 
 	assert.Nil(t, e)
 
-	assert.Equal(t, getAlertSchedulerResponse.AlertSchedulerRule.Name, "NewName")
+	assert.Equal(t, getAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
-	_, err := a.DeleteAlertScheduler(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{})
-	assert.Nil(t, err)
+	_, error := a.DeleteAlertScheduler(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
+		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
+	})
+	assert.Nil(t, error)
 
 }

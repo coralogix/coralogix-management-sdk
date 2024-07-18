@@ -82,6 +82,7 @@ message UpdateContextualDataIntegrationResponse {}
 
 message TestContextualDataIntegrationRequest {
   IntegrationMetadata integration_data = 1;
+  google.protobuf.StringValue integration_id = 2;
 }
 
 message TestContextualDataIntegrationResponse {

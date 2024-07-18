@@ -10,14 +10,19 @@ import (
 )
 
 func TestActions(t *testing.T) {
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	t.Log(region)
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewActionsClient(creator)
 
 	action, e := c.CreateAction(context.Background(), &cxsdk.CreateActionRequest{
 		Name:             wrapperspb.String("google search action"),
 		Url:              wrapperspb.String("https://www.google.com/search?q={{$p.selected_value}}"),
 		IsPrivate:        wrapperspb.Bool(false),
-		SourceType:       cxsdk.SourceType_SOURCE_TYPE_LOG,
+		SourceType:       cxsdk.SourceTypeSourceTypeLog,
 		ApplicationNames: []*wrapperspb.StringValue{},
 		SubsystemNames:   []*wrapperspb.StringValue{},
 	})
@@ -29,18 +34,20 @@ func TestActions(t *testing.T) {
 			Name:             wrapperspb.String("bing search action"),
 			Url:              wrapperspb.String("https://www.bing.com/search?q={{$p.selected_value}}"),
 			IsPrivate:        wrapperspb.Bool(false),
-			SourceType:       cxsdk.SourceType_SOURCE_TYPE_LOG,
+			IsHidden:         wrapperspb.Bool(false),
+			SourceType:       cxsdk.SourceTypeSourceTypeLog,
 			ApplicationNames: []*wrapperspb.StringValue{},
 			SubsystemNames:   []*wrapperspb.StringValue{},
 		},
 	})
+
 	assert.Nil(t, e)
 
 	updated, _ := c.GetAction(context.Background(), &cxsdk.GetActionRequest{
 		Id: action.Action.Id,
 	})
 
-	assert.Equal(t, updated.Action.Url, "https://www.bing.com/search?q={{$p.selected_value}}")
+	assert.Equal(t, updated.Action.Url.Value, "https://www.bing.com/search?q={{$p.selected_value}}")
 
 	c.DeleteAction(context.Background(), &cxsdk.DeleteActionRequest{
 		Id: action.Action.Id,

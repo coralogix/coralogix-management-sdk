@@ -29,5 +29,16 @@ message DatabaseData {
     google.protobuf.Int64Value total_requests = 6;
     google.protobuf.Int64Value total_errors = 7;
     google.protobuf.FloatValue errors_percentage = 8;
+    google.protobuf.FloatValue total_client_services_trend = 9;
+    google.protobuf.FloatValue p95_latency_trend = 10;
+    google.protobuf.FloatValue total_requests_trend = 11;
+    google.protobuf.FloatValue total_errors_trend = 12;
+    google.protobuf.FloatValue errors_percentage_trend = 13;
+    google.protobuf.Int64Value total_client_services_with_offset = 14;
+    google.protobuf.Int64Value p95_latency_with_offset = 15;
+    google.protobuf.Int64Value total_requests_with_offset = 16;
+    google.protobuf.Int64Value total_errors_with_offset = 17;
+    google.protobuf.Int64Value errors_percentage_with_offset = 18;
+    google.protobuf.FloatValue errors_per_second = 19;
   }
 }

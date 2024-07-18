@@ -8,6 +8,8 @@ import "com/coralogix/catalog/v1/service_query.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/schemastore/v1/tracing_fields.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/alerts/v3/alert_def.proto";
+import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
 
 message GetServicesRequest {
   ServiceQuery query = 1;
@@ -31,6 +33,7 @@ message GetServiceResponse {
 message UpdateServiceCatalogFiltersRequest {
   repeated ServiceCatalogFilter service_catalog_filters = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 3;
 }
 
 message UpdateServiceCatalogFiltersResponse {
@@ -64,6 +67,15 @@ message GetSpanMetricBucketsResponse {
   repeated google.protobuf.StringValue metricBuckets = 1;
 }
 
+message GetAffectedAlertsRequest {
+  repeated ServiceCatalogFilter service_catalog_filters = 1;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
+}
+
+message GetAffectedAlertsResponse {
+  repeated com.coralogixapis.alerts.v3.AlertDef alerts = 1;
+}
+
 service ServiceCatalogService {
   rpc GetServices(GetServicesRequest) returns (GetServicesResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get services";
@@ -89,5 +101,9 @@ service ServiceCatalogService {
 
   rpc GetSpanMetricBuckets(GetSpanMetricBucketsRequest) returns (GetSpanMetricBucketsResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Buckets";
+  }
+
+  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
   }
 }
