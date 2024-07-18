@@ -10,5 +10,7 @@ members = [
     "dashboards",
     "data-sets",
     "dataprime-query",
-    "scopes"
-, "teams"]
+    "outgoing-webhooks",
+    "scopes",
+    "teams",
+]
