@@ -13,25 +13,17 @@ mod tests {
             ApiKey::from_env().unwrap(),
         );
 
+        let target_spec = S3TargetSpec {
+            bucket: "yak-2-bucket".to_string(),
+            region: Some("eu-north-1".to_string()),
+        };
         logs_archive_service
-            .validate_target(
-                true,
-                TargetSpecValidation::S3(S3TargetSpec {
-                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
-                    region: Some("eu-west-1".to_string()),
-                }),
-            )
+            .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))
             .await
             .unwrap();
 
         logs_archive_service
-            .set_target(
-                true,
-                TargetSpec::S3(S3TargetSpec {
-                    bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
-                    region: Some("eu-west-1".to_string()),
-                }),
-            )
+            .set_target(true, TargetSpec::S3(target_spec))
             .await
             .unwrap();
 

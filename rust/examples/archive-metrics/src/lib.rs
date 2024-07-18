@@ -17,8 +17,8 @@ mod tests {
         );
 
         let s3_config = S3Config {
-            bucket: "coralogix-c4c-eu2-prometheus-data".to_string(),
-            region: "eu-west-1".to_string(),
+            bucket: "yak-2-bucket".to_string(),
+            region: "eu-north-1".to_string(),
         };
 
         let storage_config = StorageConfig::S3(s3_config.clone());
