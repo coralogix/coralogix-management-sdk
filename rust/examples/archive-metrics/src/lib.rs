@@ -28,12 +28,12 @@ mod tests {
             .unwrap();
 
         metrics_service
-            .update_tenant(2, StorageConfigUpdate::S3(s3_config.clone()))
+            .validate_bucket(StorageConfigValidation::S3(s3_config.clone()))
             .await
             .unwrap();
 
         metrics_service
-            .validate_bucket(StorageConfigValidation::S3(s3_config.clone()))
+            .update_tenant(2, StorageConfigUpdate::S3(s3_config.clone()))
             .await
             .unwrap();
 
