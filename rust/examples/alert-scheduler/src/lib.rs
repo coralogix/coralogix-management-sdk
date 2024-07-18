@@ -25,7 +25,7 @@ mod tests {
             filter: Some(AlertSchedulerFilter {
                 what_expression: "source logs | filter $d.cpodId:string == '122'".into(),
                 which_alerts: Some(WhichAlerts::AlertUniqueIds(AlertUniqueIds {
-                    value: vec!["53b3741b-3b65-46ed-9c9e-e0db7c42fcd8".into()],
+                    value: vec!["55a457ed-5f23-407a-a724-12d7fe533a4e".into()],
                 })),
             }),
             schedule: Some(Schedule {

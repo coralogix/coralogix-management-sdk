@@ -23,7 +23,7 @@ func TestDataSets(t *testing.T) {
 	textual := string(raw)
 
 	data, e := c.CreateDataSet(context.Background(), &cxsdk.CreateDataSetRequest{
-		Name:        wrapperspb.String("My custom enrichment"),
+		Name:        wrapperspb.String("my-enrichment"),
 		Description: wrapperspb.String("My custom enrichment description"),
 		File: &cxsdk.File{
 			Name:      wrapperspb.String("date-to-day-of-the-week"),
