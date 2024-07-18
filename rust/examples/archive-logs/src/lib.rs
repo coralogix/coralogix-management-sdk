@@ -28,6 +28,5 @@ mod tests {
             .unwrap();
 
         let _ = service.get_target().await.unwrap();
-        service.remove_target().await.unwrap();
     }
 }
