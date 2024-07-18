@@ -17,7 +17,7 @@ mod tests {
         );
 
         let s3_config = S3Config {
-            bucket: "yak-2-bucket".to_string(),
+            bucket: "yak-coralogix-bucket".to_string(),
             region: "eu-north-1".to_string(),
         };
 

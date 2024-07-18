@@ -8,7 +8,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_logs_archive() {
-        let logs_archive_service = LogsArchiveClient::new(
+        let service = LogsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
             ApiKey::from_env().unwrap(),
         );
@@ -17,16 +17,17 @@ mod tests {
             bucket: "yak-2-bucket".to_string(),
             region: Some("eu-north-1".to_string()),
         };
-        logs_archive_service
+        service
             .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))
             .await
             .unwrap();
 
-        logs_archive_service
+        service
             .set_target(true, TargetSpec::S3(target_spec))
             .await
             .unwrap();
 
-        let _ = logs_archive_service.get_target().await.unwrap();
+        let _ = service.get_target().await.unwrap();
+        service.remove_target().await.unwrap();
     }
 }
