@@ -13,7 +13,7 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-        let id = "abcdefghijklmnopqrstx".to_string();
+        let id = "ybcdefghijklmnopqrstx".to_string();
         let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
         let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
         let _ = client.create(dashboard).await.unwrap();
