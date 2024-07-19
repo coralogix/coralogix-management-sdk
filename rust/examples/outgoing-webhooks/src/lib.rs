@@ -11,6 +11,7 @@ mod tests {
         CoralogixRegion,
     };
     use url::Url;
+    use uuid::Uuid;
 
     #[tokio::test]
     async fn test_outgoing_webhooks_client() {
@@ -35,7 +36,7 @@ mod tests {
             WebhookType::Generic,
             "https://example-url.com/".parse().unwrap(),
             Config::GenericWebhook(GenericWebhookConfig {
-                uuid: None,
+                uuid: Some(Uuid::new_v4().to_string()),
                 method: generic_webhook_config::MethodType::Post.into(),
                 headers: Default::default(),
                 payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()), // https://coralogix.com/docs/alert-webhooks/#placeholders
@@ -96,7 +97,7 @@ mod tests {
             WebhookType::Demisto,
             "https://example.com/".parse().unwrap(),
             Config::Demisto(DemistoConfig {
-                uuid: None,
+                uuid: Some(Uuid::new_v4().to_string()),
                 payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()),
             }),
         )
@@ -107,7 +108,7 @@ mod tests {
             WebhookType::SendLog,
             "https://example.com/".parse().unwrap(),
             Config::SendLog(SendLogConfig {
-                uuid: None,
+                uuid: Some(Uuid::new_v4().to_string()),
                 payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()),
             }),
         )

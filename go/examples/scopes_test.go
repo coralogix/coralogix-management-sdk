@@ -9,8 +9,11 @@ import (
 )
 
 func TestScopes(t *testing.T) {
-	t.Skip("API is not stable")
-	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewScopesClient(creator)
 
 	description := "Data Access Rule intended for testing"
@@ -20,7 +23,7 @@ func TestScopes(t *testing.T) {
 		Filters: []*cxsdk.Filter{
 			{EntityType: cxsdk.EntityTypeLogs, Expression: "<v1> foo == 'bar'"},
 		},
-		DefaultExpression: "<v1> foo == 'bar'",
+		DefaultExpression: "<v1>true",
 	})
 	assert.Nil(t, e)
 
