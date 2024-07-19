@@ -18,3 +18,4 @@ tonic = "*"
 anyhow = "*"
 uuid = { version = "*", features = ["serde", "v4"] }
 serde_json = "*"
+url = "*"

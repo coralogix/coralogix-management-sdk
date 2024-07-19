@@ -3,151 +3,156 @@ mod tests {
     use cx_sdk::{
         auth::ApiKey,
         client::webhooks::{
-            generic_webhook_config::{self, *},
-            slack_config, Config, DigestType, GenericWebhookConfig, SlackConfig, WebhookType,
+            generic_webhook_config, slack_config, AwsEventBridgeConfig, Config, DemistoConfig,
+            EmailGroupConfig, GenericWebhookConfig, JiraConfig, MicrosoftTeamsConfig,
+            OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig, WebhookType,
             WebhooksClient,
         },
         CoralogixRegion,
     };
-    use uuid::Uuid;
+    use url::Url;
 
     #[tokio::test]
     async fn test_outgoing_webhooks_client() {
+        crud(
+            "slack-webhook".into(),
+            WebhookType::Slack,
+            "https://join.slack.com/example".parse().unwrap(),
+            Config::Slack(SlackConfig {
+                digests: vec![slack_config::Digest {
+                    r#type: slack_config::DigestType::FlowAnomalies.into(),
+                    is_active: Some(true),
+                }],
+                attachments: vec![slack_config::Attachment {
+                    r#type: slack_config::AttachmentType::MetricSnapshot.into(),
+                    is_active: Some(true),
+                }],
+            }),
+        )
+        .await;
+        crud(
+            "custom-webhook".into(),
+            WebhookType::Generic,
+            "https://example-url.com/".parse().unwrap(),
+            Config::GenericWebhook(GenericWebhookConfig {
+                uuid: None,
+                method: generic_webhook_config::MethodType::Post.into(),
+                headers: Default::default(),
+                payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()), // https://coralogix.com/docs/alert-webhooks/#placeholders
+            }),
+        )
+        .await;
+
+        crud(
+            "pager-duty-webhook".into(),
+            WebhookType::Pagerduty,
+            "https://example-url.com/".parse().unwrap(),
+            Config::PagerDuty(PagerDutyConfig {
+                service_key: Some("service-key".into()),
+            }),
+        )
+        .await;
+
+        crud(
+            "email-group-webhook".into(),
+            WebhookType::EmailGroup,
+            "https://example-url.com/".parse().unwrap(),
+            Config::EmailGroup(EmailGroupConfig {
+                email_addresses: vec!["user@example.com".into()],
+            }),
+        )
+        .await;
+
+        crud(
+            "microsoft-teams-webhook".into(),
+            WebhookType::MicrosoftTeams,
+            "https://teams.microsoft.com/".parse().unwrap(),
+            Config::MicrosoftTeams(MicrosoftTeamsConfig {}),
+        )
+        .await;
+
+        crud(
+            "jira-webhook".into(),
+            WebhookType::Jira,
+            "https://my-jira.atlassian.net/jira/".parse().unwrap(),
+            Config::Jira(JiraConfig {
+                api_token: Some("token-token".into()),
+                email: Some("email@coralogix.com".into()),
+                project_key: Some("project-key".into()),
+            }),
+        )
+        .await;
+
+        crud(
+            "opsgenie-webhook".into(),
+            WebhookType::Opsgenie,
+            "https://example.opsgenie.com/".parse().unwrap(),
+            Config::Opsgenie(OpsgenieConfig {}),
+        )
+        .await;
+
+        crud(
+            "demisto-webhook".into(),
+            WebhookType::Demisto,
+            "https://example.com/".parse().unwrap(),
+            Config::Demisto(DemistoConfig {
+                uuid: None,
+                payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()),
+            }),
+        )
+        .await;
+
+        crud(
+            "sendlog-webhook".into(),
+            WebhookType::SendLog,
+            "https://example.com/".parse().unwrap(),
+            Config::SendLog(SendLogConfig {
+                uuid: None,
+                payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()),
+            }),
+        )
+        .await;
+
+        crud(
+            "event-bridge-webhook".into(),
+            WebhookType::AwsEventBridge,
+            "https://example.com/".parse().unwrap(),
+            Config::AwsEventBridge(AwsEventBridgeConfig {
+                event_bus_arn: Some(
+                    "arn:aws:events:us-east-1:123456789012:event-bus/default".into(),
+                ),
+                detail: Some("example-detail".into()),
+                detail_type: Some("example-detail-type".into()),
+                source: Some("example-source".into()),
+                role_name: Some("example-role-name".into()),
+            }),
+        )
+        .await;
+    }
+
+    async fn crud(name: String, t: WebhookType, url: String, config: Config) {
         let client = WebhooksClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
+        let parsed_url: Url = url.parse().unwrap();
+
+        let hook = client
+            .create(t, Some(name.clone()), parsed_url.clone(), config.clone())
+            .await
+            .unwrap();
+        let _ = client.get(hook.id.clone().unwrap()).await.unwrap();
         let _ = client
-            .create(
-                WebhookType::Slack,
-                Some("slack-webhook".into()),
-                "https://join.slack.com/example".parse().unwrap(),
-                Config::Slack(SlackConfig {
-                    digests: vec![slack_config::Digest {
-                        r#type: slack_config::DigestType::FlowAnomalies.into(),
-                        is_active: Some(true),
-                    }],
-                    attachments: vec![slack_config::Attachment {
-                        r#type: slack_config::AttachmentType::MetricSnapshot.into(),
-                        is_active: Some(true),
-                    }],
-                }),
+            .replace(
+                hook.id.clone().unwrap(),
+                Some(format!("{}-2", name)),
+                t,
+                parsed_url,
+                config,
             )
             .await
             .unwrap();
-        let _ = client
-            .create(
-                WebhookType::Generic,
-                Some("custom-webhook".into()),
-                "https://example-url.com/".parse().unwrap(),
-                Config::GenericWebhook(GenericWebhookConfig {
-                    uuid: None,
-                    method: generic_webhook_config::MethodType::Post.into(),
-                    headers: Default::default(),
-                    payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()), // https://coralogix.com/docs/alert-webhooks/#placeholders
-                }),
-            )
-            .await
-            .unwrap();
-        let _ = client.delete(id.clone()).await.unwrap();
+        let _ = client.delete(hook.id.clone().unwrap()).await.unwrap();
     }
 }
-
-//   data "coralogix_webhook" "imported_webhook" {
-//     id = coralogix_webhook.slack_webhook.id
-//   }
-
-//   resource "coralogix_webhook" "custom_webhook" {
-//     name   = "custom-webhook"
-//     custom = {
-//       method  = "post"
-//       headers = { "Content-Type" : "application/json" }
-//       url     = "https://example-url.com/"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "pager_duty_webhook" {
-//     name       = "pagerduty-webhook"
-//     pager_duty = {
-//       service_key = "service-key"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "email_group_webhook" {
-//     name        = "email-group-webhook"
-//     email_group = {
-//       emails = ["user@example.com"]
-//     }
-//   }
-
-//   resource "coralogix_webhook" "microsoft_teams_webhook" {
-//     name            = "microsoft-teams-webhook"
-//     microsoft_teams = {
-//       url = "https://example-url.com/"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "jira_webhook" {
-//     name = "jira-webhook"
-//     jira = {
-//       api_token   = "api-token"
-//       email       = "example@coralogix.com"
-//       project_key = "project-key"
-//       url         = "https://coralogix.atlassian.net/jira/your-work"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "opsgenie_webhook" {
-//     name     = "opsgenie-webhook"
-//     opsgenie = {
-//       url = "https://example-url.com/"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "demisto_webhook" {
-//     name    = "demisto-webhook"
-//     demisto = {
-//       url = "https://example-url.com/"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "sendlog_webhook" {
-//     name    = "sendlog-webhook"
-//     sendlog = {
-//       url = "https://example-url.com/"
-//     }
-//   }
-
-//   resource "coralogix_webhook" "event_bridge_webhook" {
-//     name         = "event_bridge_webhook"
-//     event_bridge = {
-//       event_bus_arn = "arn:aws:events:us-east-1:123456789012:event-bus/default"
-//       detail        = "example_detail"
-//       detail_type   = "example_detail_type"
-//       source        = "example_source"
-//       role_name     = "example_role_name"
-//     }
-//   }
-
-//   //example of how to use webhooks that was created via terraform
-//   resource "coralogix_alert" "standard_alert" {
-//     name        = "Standard alert example"
-//     description = "Example of standard alert from terraform"
-//     severity    = "Critical"
-
-//     notifications_group {
-//       notification {
-//         integration_id              = coralogix_webhook.slack_webhook.external_id
-//         retriggering_period_minutes = 60
-//         notify_on = "Triggered_only"
-//       }
-//     }
-
-//     standard {
-//       search_query = "remote_addr_enriched:/.*/"
-//       condition {
-//         immediately = true
-//       }
-//     }
-//   }
