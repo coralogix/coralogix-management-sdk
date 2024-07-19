@@ -13,10 +13,10 @@ concurrency:
   cancel-in-progress: false
   
 jobs:
-      
   build_docs:
     name: Build Docs
     runs-on: ubuntu-latest
+
     steps:
       - name: Prepare environment
         run: |
@@ -44,6 +44,7 @@ jobs:
         run: |
           cargo doc --no-deps --target-dir=$RUNNER_TEMP/rust
           cp -r $RUNNER_TEMP/rust/doc/** $RUNNER_TEMP/docs/rust
+
 
       - name: Install Go
         uses: actions/setup-go@v3
@@ -91,6 +92,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: [build_docs]
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment

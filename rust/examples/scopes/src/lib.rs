@@ -16,6 +16,7 @@ mod tests {
         )
         .unwrap();
 
+        let before_count = client.list().await.unwrap().scopes.len();
         let create = client
             .create(
                 "Test Data Access Rule".into(),
@@ -24,7 +25,7 @@ mod tests {
                     entity_type: EntityType::Logs.into(),
                     expression: "<v1> foo == 'bar'".into(),
                 }],
-                "<v1> foo == 'bar'".into(),
+                "<v1>true".into(), // version -> <v1>true <- can only be true or false right now
             )
             .await
             .unwrap();
@@ -47,6 +48,6 @@ mod tests {
 
         let _ = client.get(vec![new_scope.id.clone()]).await.unwrap();
         let _ = client.delete(new_scope.id).await.unwrap();
-        assert!(client.list().await.unwrap().scopes.is_empty());
+        assert!(client.list().await.unwrap().scopes.len() - before_count == 0);
     }
 }
