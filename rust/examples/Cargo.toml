@@ -11,4 +11,4 @@ members = [
     "data-sets",
     "dataprime-query",
     "scopes"
-]
+, "teams"]

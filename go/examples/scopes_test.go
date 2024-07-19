@@ -9,6 +9,7 @@ import (
 )
 
 func TestScopes(t *testing.T) {
+	t.Skip("API is not stable")
 	creator := cxsdk.NewCallPropertiesCreator("https://ng-api-grpc.coralogix.com", "my-secret-token")
 	c := cxsdk.NewScopesClient(creator)
 

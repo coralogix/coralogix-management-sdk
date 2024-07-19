@@ -41,7 +41,8 @@ func TestAlertScheduler(t *testing.T) {
 				WhatExpression: "source logs | filter $d.cpodId:string == '122'",
 				WhichAlerts: &cxsdk.AlertSchedulerFilterUniqueIDs{
 					AlertUniqueIds: &cxsdk.AlertUniqueIDs{
-						Value: []string{"07d5714a-c847-4afa-87db-5e5f6986688c"},
+						Value: []string{"55a457ed-5f23-407a-a724-12d7fe533a4e"},
+
 					},
 				},
 			},

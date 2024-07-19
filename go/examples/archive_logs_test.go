@@ -17,11 +17,11 @@ func TestArchiveLogs(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewArchiveLogsClient(creator)
-	s3Region := "eu-west-1"
+	s3Region := "eu-north-1"
 	_, setTargetError := c.UpdateArchiveLogs(context.Background(), &v2.SetTargetRequest{
 		TargetSpec: &v2.SetTargetRequest_S3{
 			S3: &v2.S3TargetSpec{
-				Bucket: "coralogix-c4c-eu2-prometheus-data",
+				Bucket: "yak-2-bucket",
 				Region: &s3Region,
 			},
 		},
