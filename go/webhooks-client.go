@@ -96,10 +96,14 @@ type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
 type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
 const (
+	// GenericWebhookConfigUnknown is an unknown config
 	GenericWebhookConfigUnknown = webhooks.GenericWebhookConfig_UNKNOWN
-	GenericWebhookConfigGet     = webhooks.GenericWebhookConfig_GET
-	GenericWebhookConfigPost    = webhooks.GenericWebhookConfig_POST
-	GenericWebhookConfigPut     = webhooks.GenericWebhookConfig_PUT
+	// GenericWebhookConfigGet is a GET request
+	GenericWebhookConfigGet = webhooks.GenericWebhookConfig_GET
+	// GenericWebhookConfigPost is a POST request
+	GenericWebhookConfigPost = webhooks.GenericWebhookConfig_POST
+	// GenericWebhookConfigPut is a PUT request
+	GenericWebhookConfigPut = webhooks.GenericWebhookConfig_PUT
 )
 
 // GenericWebhookConfig is the configuration for a generic webhook.
@@ -118,7 +122,7 @@ const (
 	SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
 	// SlackConfigFlowAnomalies for flow anomalies
 	SlackConfigFlowAnomalies = webhooks.SlackConfig_FLOW_ANOMALIES
-	// SlackConfigFlowAnomalies for spike anomalies
+	// SlackConfigSpikeAnomalies for spike anomalies
 	SlackConfigSpikeAnomalies = webhooks.SlackConfig_SPIKE_ANOMALIES
 	// SlackConfigDataUsage for data usage
 	SlackConfigDataUsage = webhooks.SlackConfig_DATA_USAGE
