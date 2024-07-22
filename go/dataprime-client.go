@@ -5,13 +5,16 @@ import (
 	dataprime "coralogix-management-sdk/go/internal/coralogixapis/dataprime/v1"
 )
 
+type QueryRequest = dataprime.QueryRequest
+type DataprimeQueryMetadata = dataprime.Metadata
+
 // DataprimeClient is a client for the Coralogix Dataprime API.
 type DataprimeClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
 // Runs a query.
-func (c DataprimeClient) Query(ctx context.Context, req *dataprime.QueryRequest) (dataprime.DataprimeQueryService_QueryClient, error) {
+func (c DataprimeClient) Query(ctx context.Context, req *QueryRequest) (dataprime.DataprimeQueryService_QueryClient, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
