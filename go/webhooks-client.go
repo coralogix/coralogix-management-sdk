@@ -32,7 +32,7 @@ type TestOutgoingWebhookRequest = webhooks.TestOutgoingWebhookRequest
 // OutgoingWebhookInputData is the wrapped data for the webhooks.
 type OutgoingWebhookInputData = webhooks.OutgoingWebhookInputData
 
-// Webhook type
+// WebhookType ... is the type of webhook
 type WebhookType = webhooks.WebhookType
 
 const (
@@ -50,37 +50,37 @@ const (
 	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
-// GenericWebhook is a  Webhook Type
+// GenericWebhook is a Webhook Type
 type GenericWebhook = webhooks.OutgoingWebhookInputData_GenericWebhook
 
-// Slack is a  Webhook Type
+// Slack is a Webhook Type
 type Slack = webhooks.OutgoingWebhookInputData_Slack
 
-// PagerDuty is a  Webhook Type
+// PagerDuty is a Webhook Type
 type PagerDuty = webhooks.OutgoingWebhookInputData_PagerDuty
 
-// SendLog is a  Webhook Type
+// SendLog is a Webhook Type
 type SendLog = webhooks.OutgoingWebhookInputData_SendLog
 
-// EmailGroup is a  Webhook Type
+// EmailGroup is a Webhook Type
 type EmailGroup = webhooks.OutgoingWebhookInputData_EmailGroup
 
-// MicrosoftTeams is a  Webhook Type
+// MicrosoftTeams is a Webhook Type
 type MicrosoftTeams = webhooks.OutgoingWebhookInputData_MicrosoftTeams
 
-// Jira is a  Webhook Type
+// Jira is a Webhook Type
 type Jira = webhooks.OutgoingWebhookInputData_Jira
 
-// Opsgenie is a  Webhook Type
+// Opsgenie is a Webhook Type
 type Opsgenie = webhooks.OutgoingWebhookInputData_Opsgenie
 
-// Demisto is a  Webhook Type
+// Demisto is a Webhook Type
 type Demisto = webhooks.OutgoingWebhookInputData_Demisto
 
-// AwsEventBridge is a  Webhook Type
+// AwsEventBridge is a Webhook Type
 type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
 
-// IbmEventNotifications is a  Webhook Type
+// IbmEventNotifications is a Webhook Type
 type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
 const (
@@ -94,16 +94,22 @@ const (
 type GenericWebhookConfig = webhooks.GenericWebhookConfig
 
 const (
-	// Slack attachment
-	SlackConfigEmpty          = webhooks.SlackConfig_EMPTY
+	// SlackConfigEmpty is an empty attachment
+	SlackConfigEmpty = webhooks.SlackConfig_EMPTY
+	// SlackConfigMetricSnapshot for metrics
 	SlackConfigMetricSnapshot = webhooks.SlackConfig_METRIC_SNAPSHOT
-	SlackConfigLogs           = webhooks.SlackConfig_LOGS
-	// Slack digests
-	SlackConfigUnknown              = webhooks.SlackConfig_UNKNOWN
+	// SlackConfigLogs for logs
+	SlackConfigLogs = webhooks.SlackConfig_LOGS
+	// SlackConfigUnknown unknown digest
+	SlackConfigUnknown = webhooks.SlackConfig_UNKNOWN
+	// SlackConfigErrorAndCriticalLogs for error and critical logs
 	SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
-	SlackConfigFlowAnomalies        = webhooks.SlackConfig_FLOW_ANOMALIES
-	SlackConfigSpikeAnomalies       = webhooks.SlackConfig_SPIKE_ANOMALIES
-	SlackConfigDataUsage            = webhooks.SlackConfig_DATA_USAGE
+	// SlackConfigFlowAnomalies for flow anomalies
+	SlackConfigFlowAnomalies = webhooks.SlackConfig_FLOW_ANOMALIES
+	// SlackConfigFlowAnomalies for spike anomalies
+	SlackConfigSpikeAnomalies = webhooks.SlackConfig_SPIKE_ANOMALIES
+	// SlackConfigDataUsage for data usage
+	SlackConfigDataUsage = webhooks.SlackConfig_DATA_USAGE
 )
 
 // SlackConfigDigest is a config
@@ -181,7 +187,7 @@ func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest)
 	return client.GetOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Replaces the specified webhook.
+// Replace replaces the specified webhook.
 func (c WebhooksClient) Replace(ctx context.Context, req *UpdateOutgoingWebhookRequest) (*webhooks.UpdateOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
