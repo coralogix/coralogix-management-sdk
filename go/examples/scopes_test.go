@@ -37,7 +37,7 @@ func TestScopes(t *testing.T) {
 		Ids: []string{result.Scope.Id},
 	})
 
-	assert.Equal(t, updated.Scopes[0].DisplayName, "Updated Test Data Access Rule")
+	assert.Equal(t, "Updated Test Data Access Rule", updated.Scopes[0].DisplayName)
 
 	c.Delete(context.Background(), &cxsdk.DeleteScopeRequest{
 		Id: result.Scope.Id,

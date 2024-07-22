@@ -44,7 +44,7 @@ mod tests {
             .unwrap();
 
         let new_scope = update_result.scope.unwrap();
-        assert!(new_scope.display_name == "Updated Test Data Access Rule");
+        assert_eq!(new_scope.display_name, "Updated Test Data Access Rule");
 
         let _ = client.get(vec![new_scope.id.clone()]).await.unwrap();
         let _ = client.delete(new_scope.id).await.unwrap();
