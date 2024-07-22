@@ -7,9 +7,6 @@ on:
 jobs:
   build-example-image:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: rust/examples
     steps:
       - name: Checkout sources
         uses: actions/checkout@v4
@@ -25,9 +22,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Build and push
         uses: docker/build-push-action@v6
-        working-directory: rust/examples
         with:
           platforms: linux/amd64,linux/arm64
           context: .
+          file: rust/Dockerfile
           push: true
           tags: coralogixrepo/rust-api-examples:latest
