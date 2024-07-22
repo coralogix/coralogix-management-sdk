@@ -15,7 +15,9 @@ func TestScopes(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewScopesClient(creator)
-
+	all, e := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
+	assert.Nil(t, e)
+	beginngingCount := len(all.Scopes)
 	description := "Data Access Rule intended for testing"
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
 		DisplayName: "Test Data Access Rule",
@@ -45,7 +47,7 @@ func TestScopes(t *testing.T) {
 		Id: result.Scope.Id,
 	})
 
-	all, e := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
+	all, e = c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
 	assert.Nil(t, e)
-	assert.Empty(t, all.Scopes)
+	assert.Equal(t, beginngingCount, len(all.Scopes))
 }
