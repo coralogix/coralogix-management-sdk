@@ -36,17 +36,29 @@ type OutgoingWebhookInputData = webhooks.OutgoingWebhookInputData
 type WebhookType = webhooks.WebhookType
 
 const (
-	WebhookTypeUnknown               = webhooks.WebhookType_UNKNOWN
-	WebhookTypeGeneric               = webhooks.WebhookType_GENERIC
-	WebhookTypeSlack                 = webhooks.WebhookType_SLACK
-	WebhookTypePagerduty             = webhooks.WebhookType_PAGERDUTY
-	WebhookTypeSendLog               = webhooks.WebhookType_SEND_LOG
-	WebhookTypeEmailGroup            = webhooks.WebhookType_EMAIL_GROUP
-	WebhookTypeMicrosoftTeams        = webhooks.WebhookType_MICROSOFT_TEAMS
-	WebhookTypeJira                  = webhooks.WebhookType_JIRA
-	WebhookTypeOpsgenie              = webhooks.WebhookType_OPSGENIE
-	WebhookTypeDemisto               = webhooks.WebhookType_DEMISTO
-	WebhookTypeAwsEventBridge        = webhooks.WebhookType_AWS_EVENT_BRIDGE
+	// WebhookTypeUnknown is an unknown webhook type.
+	WebhookTypeUnknown = webhooks.WebhookType_UNKNOWN
+	// WebhookTypeGeneric is a generic webhook type.
+	WebhookTypeGeneric = webhooks.WebhookType_GENERIC
+	// WebhookTypeSlack is a Slack webhook type.
+	WebhookTypeSlack = webhooks.WebhookType_SLACK
+	// WebhookTypePagerduty is a PagerDuty webhook type.
+	WebhookTypePagerduty = webhooks.WebhookType_PAGERDUTY
+	// WebhookTypeSendLog is a SendLog webhook type.
+	WebhookTypeSendLog = webhooks.WebhookType_SEND_LOG
+	// WebhookTypeEmailGroup is an EmailGroup webhook type.
+	WebhookTypeEmailGroup = webhooks.WebhookType_EMAIL_GROUP
+	// WebhookTypeMicrosoftTeams is a MicrosoftTeams webhook type.
+	WebhookTypeMicrosoftTeams = webhooks.WebhookType_MICROSOFT_TEAMS
+	// WebhookTypeJira is a Jira webhook type.
+	WebhookTypeJira = webhooks.WebhookType_JIRA
+	// WebhookTypeOpsgenie is an Opsgenie webhook type.
+	WebhookTypeOpsgenie = webhooks.WebhookType_OPSGENIE
+	// WebhookTypeDemisto is a Demisto webhook type.
+	WebhookTypeDemisto = webhooks.WebhookType_DEMISTO
+	// WebhookTypeAwsEventBridge is an AWS EventBridge webhook type.
+	WebhookTypeAwsEventBridge = webhooks.WebhookType_AWS_EVENT_BRIDGE
+	// WebhookTypeIbmEventNotifications is an IBM Event Notifications webhook type.
 	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
