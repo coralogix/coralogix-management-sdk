@@ -5,83 +5,148 @@ import (
 	webhooks "coralogix-management-sdk/go/internal/coralogix/outgoing_webhooks/v1"
 )
 
+// CreateOutgoingWebhookRequest is a request to create a new webhook.
 type CreateOutgoingWebhookRequest = webhooks.CreateOutgoingWebhookRequest
+
+// GetOutgoingWebhookRequest is a request to get a webhook by its ID.
 type GetOutgoingWebhookRequest = webhooks.GetOutgoingWebhookRequest
+
+// UpdateOutgoingWebhookRequest is a request to update a webhook.
 type UpdateOutgoingWebhookRequest = webhooks.UpdateOutgoingWebhookRequest
+
+// DeleteOutgoingWebhookRequest is a request to delete a webhook.
 type DeleteOutgoingWebhookRequest = webhooks.DeleteOutgoingWebhookRequest
+
+// ListOutgoingWebhookTypesRequest is a request to list all webhook types.
 type ListOutgoingWebhookTypesRequest = webhooks.ListOutgoingWebhookTypesRequest
+
+// ListAllOutgoingWebhooksRequest is a request to list all webhooks.
 type ListAllOutgoingWebhooksRequest = webhooks.ListAllOutgoingWebhooksRequest
+
+// TestExistingOutgoingWebhookRequest is a request to test an existing webhook.
 type TestExistingOutgoingWebhookRequest = webhooks.TestExistingOutgoingWebhookRequest
+
+// TestOutgoingWebhookRequest is a request to test a webhook.
 type TestOutgoingWebhookRequest = webhooks.TestOutgoingWebhookRequest
 
+// OutgoingWebhookInputData is the wrapped data for the webhooks.
 type OutgoingWebhookInputData = webhooks.OutgoingWebhookInputData
+
+// Webhook type
 type WebhookType = webhooks.WebhookType
 
 const (
-	WebhookType_UNKNOWN                 = webhooks.WebhookType_UNKNOWN
-	WebhookType_GENERIC                 = webhooks.WebhookType_GENERIC
-	WebhookType_SLACK                   = webhooks.WebhookType_SLACK
-	WebhookType_PAGERDUTY               = webhooks.WebhookType_PAGERDUTY
-	WebhookType_SEND_LOG                = webhooks.WebhookType_SEND_LOG
-	WebhookType_EMAIL_GROUP             = webhooks.WebhookType_EMAIL_GROUP
-	WebhookType_MICROSOFT_TEAMS         = webhooks.WebhookType_MICROSOFT_TEAMS
-	WebhookType_JIRA                    = webhooks.WebhookType_JIRA
-	WebhookType_OPSGENIE                = webhooks.WebhookType_OPSGENIE
-	WebhookType_DEMISTO                 = webhooks.WebhookType_DEMISTO
-	WebhookType_AWS_EVENT_BRIDGE        = webhooks.WebhookType_AWS_EVENT_BRIDGE
-	WebhookType_IBM_EVENT_NOTIFICATIONS = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
+	WebhookTypeUnknown               = webhooks.WebhookType_UNKNOWN
+	WebhookTypeGeneric               = webhooks.WebhookType_GENERIC
+	WebhookTypeSlack                 = webhooks.WebhookType_SLACK
+	WebhookTypePagerduty             = webhooks.WebhookType_PAGERDUTY
+	WebhookTypeSendLog               = webhooks.WebhookType_SEND_LOG
+	WebhookTypeEmailGroup            = webhooks.WebhookType_EMAIL_GROUP
+	WebhookTypeMicrosoftTeams        = webhooks.WebhookType_MICROSOFT_TEAMS
+	WebhookTypeJira                  = webhooks.WebhookType_JIRA
+	WebhookTypeOpsgenie              = webhooks.WebhookType_OPSGENIE
+	WebhookTypeDemisto               = webhooks.WebhookType_DEMISTO
+	WebhookTypeAwsEventBridge        = webhooks.WebhookType_AWS_EVENT_BRIDGE
+	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
+// Webhook Type: Generic
 type GenericWebhook = webhooks.OutgoingWebhookInputData_GenericWebhook
+
+// Webhook Type: Slack
 type Slack = webhooks.OutgoingWebhookInputData_Slack
+
+// Webhook Type: PagerDuty
 type PagerDuty = webhooks.OutgoingWebhookInputData_PagerDuty
+
+// Webhook Type: SendLog
 type SendLog = webhooks.OutgoingWebhookInputData_SendLog
+
+// Webhook Type: EmailGroup
 type EmailGroup = webhooks.OutgoingWebhookInputData_EmailGroup
+
+// Webhook Type: MicrosoftTeams
 type MicrosoftTeams = webhooks.OutgoingWebhookInputData_MicrosoftTeams
+
+// Webhook Type: Jira
 type Jira = webhooks.OutgoingWebhookInputData_Jira
+
+// Webhook Type: Opsgenie
 type Opsgenie = webhooks.OutgoingWebhookInputData_Opsgenie
+
+// Webhook Type: Demisto
 type Demisto = webhooks.OutgoingWebhookInputData_Demisto
+
+// Webhook Type: AwsEventBridge
 type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
+
+// Webhook Type: IbmEventNotifications
 type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
 const (
-	GenericWebhookConfig_UNKNOWN = webhooks.GenericWebhookConfig_UNKNOWN
-	GenericWebhookConfig_GET     = webhooks.GenericWebhookConfig_GET
-	GenericWebhookConfig_POST    = webhooks.GenericWebhookConfig_POST
-	GenericWebhookConfig_PUT     = webhooks.GenericWebhookConfig_PUT
+	GenericWebhookConfigUnknown = webhooks.GenericWebhookConfig_UNKNOWN
+	GenericWebhookConfigGet     = webhooks.GenericWebhookConfig_GET
+	GenericWebhookConfigPost    = webhooks.GenericWebhookConfig_POST
+	GenericWebhookConfigPut     = webhooks.GenericWebhookConfig_PUT
 )
 
+// GenericWebhookConfig is the configuration for a generic webhook.
 type GenericWebhookConfig = webhooks.GenericWebhookConfig
 
 const (
-	// attachment
-	SlackConfig_EMPTY           = webhooks.SlackConfig_EMPTY
-	SlackConfig_METRIC_SNAPSHOT = webhooks.SlackConfig_METRIC_SNAPSHOT
-	SlackConfig_LOGS            = webhooks.SlackConfig_LOGS
-	// digests
-	SlackConfig_UNKNOWN                 = webhooks.SlackConfig_UNKNOWN
-	SlackConfig_ERROR_AND_CRITICAL_LOGS = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
-	SlackConfig_FLOW_ANOMALIES          = webhooks.SlackConfig_FLOW_ANOMALIES
-	SlackConfig_SPIKE_ANOMALIES         = webhooks.SlackConfig_SPIKE_ANOMALIES
-	SlackConfig_DATA_USAGE              = webhooks.SlackConfig_DATA_USAGE
+	// Slack attachment
+	SlackConfigEmpty          = webhooks.SlackConfig_EMPTY
+	SlackConfigMetricSnapshot = webhooks.SlackConfig_METRIC_SNAPSHOT
+	SlackConfigLogs           = webhooks.SlackConfig_LOGS
+	// Slack digests
+	SlackConfigUnknown              = webhooks.SlackConfig_UNKNOWN
+	SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
+	SlackConfigFlowAnomalies        = webhooks.SlackConfig_FLOW_ANOMALIES
+	SlackConfigSpikeAnomalies       = webhooks.SlackConfig_SPIKE_ANOMALIES
+	SlackConfigDataUsage            = webhooks.SlackConfig_DATA_USAGE
 )
 
-type SlackConfig_Digest = webhooks.SlackConfig_Digest
-type SlackConfig_Attachment = webhooks.SlackConfig_Attachment
+// Slack config of the summary/digest it contains
+type SlackConfigDigest = webhooks.SlackConfig_Digest
+
+// Slack config of the attachment
+type SlackConfigAttachment = webhooks.SlackConfig_Attachment
+
+// Slack config
 type SlackConfig = webhooks.SlackConfig
 
+// PagerDuty config
 type PagerDutyConfig = webhooks.PagerDutyConfig
+
+// SendLog config
 type SendLogConfig = webhooks.SendLogConfig
+
+// EmailGroup config
 type EmailGroupConfig = webhooks.EmailGroupConfig
+
+// MicrosoftTeams config
 type MicrosoftTeamsConfig = webhooks.MicrosoftTeamsConfig
+
+// Jira config
 type JiraConfig = webhooks.JiraConfig
+
+// Opsgenie config
 type OpsgenieConfig = webhooks.OpsgenieConfig
+
+// Demisto config
 type DemistoConfig = webhooks.DemistoConfig
+
+// AwsEventBridge config
 type AwsEventBridgeConfig = webhooks.AwsEventBridgeConfig
+
+// IbmEventNotifications config
 type IbmEventNotificationsConfig = webhooks.IbmEventNotificationsConfig
 
-type TestOutgoingWebhookResponse_Success = webhooks.TestOutgoingWebhookResponse_Success
-type TestOutgoingWebhookResponse_Failure = webhooks.TestOutgoingWebhookResponse_Failure
+// Success response for testing a webhook
+type TestOutgoingWebhookSuccess = webhooks.TestOutgoingWebhookResponse_Success
+
+// Fail response for testing a webhook
+type TestOutgoingWebhookFailure = webhooks.TestOutgoingWebhookResponse_Failure
 
 // WebhooksClient is a client for the Coralogix Webhooks API.
 type WebhooksClient struct {
