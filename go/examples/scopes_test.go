@@ -28,8 +28,10 @@ func TestScopes(t *testing.T) {
 	assert.Nil(t, e)
 
 	_, e = c.Update(context.Background(), &cxsdk.UpdateScopeRequest{
-		Id:          result.Scope.Id,
-		DisplayName: "Updated Test Data Access Rule",
+		Id:                result.Scope.Id,
+		DisplayName:       "Updated Test Data Access Rule",
+		Filters:           result.Scope.Filters,
+		DefaultExpression: result.Scope.DefaultExpression,
 	})
 	assert.Nil(t, e)
 
