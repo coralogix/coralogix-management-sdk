@@ -215,7 +215,7 @@ func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRe
 	return client.DeleteOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Lists all webhook types.
+// ListTypes lists all webhook types.
 func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookTypesRequest) (*webhooks.ListOutgoingWebhookTypesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
