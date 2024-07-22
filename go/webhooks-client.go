@@ -167,7 +167,7 @@ func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRe
 	return client.CreateOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Gets the specified webhook.
+// Get gets the specified webhook.
 func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest) (*webhooks.GetOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -195,7 +195,7 @@ func (c WebhooksClient) Replace(ctx context.Context, req *UpdateOutgoingWebhookR
 	return client.UpdateOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Deletes the specified webhook.
+// Delete deletes the specified webhook.
 func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRequest) (*webhooks.DeleteOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -223,7 +223,7 @@ func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookT
 	return client.ListOutgoingWebhookTypes(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Lists all webhooks.
+// List lists all webhooks.
 func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRequest) (*webhooks.ListAllOutgoingWebhooksResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -237,7 +237,7 @@ func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRe
 	return client.ListAllOutgoingWebhooks(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Tests an existing webhook.
+// TestByID tests an existing webhook.
 func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -251,7 +251,7 @@ func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingW
 	return client.TestExistingOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Tests the included webhook.
+// Test tests the included webhook.
 func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
