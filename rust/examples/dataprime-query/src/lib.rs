@@ -10,7 +10,7 @@ mod tests {
     async fn test_dataprime_query() {
         let svc = DataprimeQueryClient::new(
             CoralogixRegion::from_env().unwrap(),
-            ApiKey::from_env(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
         );
 
         let mut stream = svc
