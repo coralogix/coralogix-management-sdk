@@ -16,18 +16,18 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("slack-webhook"),
 			Url:  wrapperspb.String("https://join.slack.com/example"),
-			Type: cxsdk.WebhookType_SLACK,
+			Type: cxsdk.WebhookTypeSlack,
 			Config: &cxsdk.Slack{
 				Slack: &cxsdk.SlackConfig{
-					Attachments: []*cxsdk.SlackConfig_Attachment{
+					Attachments: []*cxsdk.SlackConfigAttachment{
 						{
-							Type:     cxsdk.SlackConfig_LOGS,
+							Type:     cxsdk.SlackConfigLogs,
 							IsActive: wrapperspb.Bool(true),
 						},
 					},
-					Digests: []*cxsdk.SlackConfig_Digest{
+					Digests: []*cxsdk.SlackConfigDigest{
 						{
-							Type:     cxsdk.SlackConfig_FLOW_ANOMALIES,
+							Type:     cxsdk.SlackConfigFlowAnomalies,
 							IsActive: wrapperspb.Bool(true),
 						},
 					},
@@ -40,11 +40,11 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
 			Url:  wrapperspb.String("https://example-url.com"),
-			Type: cxsdk.WebhookType_GENERIC,
+			Type: cxsdk.WebhookTypeGeneric,
 			Config: &cxsdk.GenericWebhook{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
-					Method:  cxsdk.GenericWebhookConfig_GET,
+					Method:  cxsdk.GenericWebhookConfigGet,
 					Payload: wrapperspb.String("Hello from $ALERT_NAME, a coralogix alert"),
 				},
 			},
@@ -55,7 +55,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("pager-duty-webhook"),
 			Url:  wrapperspb.String("https://example-url.com/"),
-			Type: cxsdk.WebhookType_PAGERDUTY,
+			Type: cxsdk.WebhookTypePagerduty,
 			Config: &cxsdk.PagerDuty{
 				PagerDuty: &cxsdk.PagerDutyConfig{
 					ServiceKey: wrapperspb.String("example-key"),
@@ -68,7 +68,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("email-group-webhook"),
 			Url:  wrapperspb.String("https://example-url.com/"),
-			Type: cxsdk.WebhookType_EMAIL_GROUP,
+			Type: cxsdk.WebhookTypeEmailGroup,
 			Config: &cxsdk.EmailGroup{
 				EmailGroup: &cxsdk.EmailGroupConfig{
 					EmailAddresses: []*wrapperspb.StringValue{wrapperspb.String("user@example.com")},
@@ -81,7 +81,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("microsoft-teams-webhook"),
 			Url:  wrapperspb.String("https://teams.microsoft.com/"),
-			Type: cxsdk.WebhookType_MICROSOFT_TEAMS,
+			Type: cxsdk.WebhookTypeMicrosoftTeams,
 			Config: &cxsdk.MicrosoftTeams{
 				MicrosoftTeams: &cxsdk.MicrosoftTeamsConfig{},
 			},
@@ -92,7 +92,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("jira-webhook"),
 			Url:  wrapperspb.String("https://my-jira.atlassian.net/jira/"),
-			Type: cxsdk.WebhookType_JIRA,
+			Type: cxsdk.WebhookTypeJira,
 			Config: &cxsdk.Jira{
 				Jira: &cxsdk.JiraConfig{
 					ProjectKey: wrapperspb.String("example-key"),
@@ -107,7 +107,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("opsgenie-webhook"),
 			Url:  wrapperspb.String("https://example.opsgenie.com"),
-			Type: cxsdk.WebhookType_OPSGENIE,
+			Type: cxsdk.WebhookTypeOpsgenie,
 			Config: &cxsdk.Opsgenie{
 				Opsgenie: &cxsdk.OpsgenieConfig{},
 			},
@@ -117,7 +117,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("demisto-webhook"),
 			Url:  wrapperspb.String("https://example.com"),
-			Type: cxsdk.WebhookType_DEMISTO,
+			Type: cxsdk.WebhookTypeDemisto,
 			Config: &cxsdk.Demisto{
 				Demisto: &cxsdk.DemistoConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
@@ -131,7 +131,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("sendlog-webhook"),
 			Url:  wrapperspb.String("https://example.com"),
-			Type: cxsdk.WebhookType_SEND_LOG,
+			Type: cxsdk.WebhookTypeSendLog,
 			Config: &cxsdk.SendLog{
 				SendLog: &cxsdk.SendLogConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
@@ -145,7 +145,7 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("event-bridge-webhook"),
 			Url:  wrapperspb.String("https://aws.amazon.com"),
-			Type: cxsdk.WebhookType_AWS_EVENT_BRIDGE,
+			Type: cxsdk.WebhookTypeAwsEventBridge,
 			Config: &cxsdk.AwsEventBridge{
 				AwsEventBridge: &cxsdk.AwsEventBridgeConfig{
 					EventBusArn: wrapperspb.String("arn:aws:events:us-east-1:123456789012:event-bus/default"),
@@ -168,11 +168,11 @@ func TestWebhooks(t *testing.T) {
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
 			Url:  wrapperspb.String("https://httpbin.org/status/200"),
-			Type: cxsdk.WebhookType_GENERIC,
+			Type: cxsdk.WebhookTypeGeneric,
 			Config: &cxsdk.GenericWebhook{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
-					Method:  cxsdk.GenericWebhookConfig_GET,
+					Method:  cxsdk.GenericWebhookConfigGet,
 					Payload: nil,
 				},
 			},
