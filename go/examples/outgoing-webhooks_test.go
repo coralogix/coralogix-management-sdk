@@ -164,7 +164,7 @@ func TestWebhooks(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewWebhooksClient(creator)
-	c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
+	testResult, err := c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
 			Url:  wrapperspb.String("https://httpbin.org/status/200"),
@@ -173,12 +173,14 @@ func TestWebhooks(t *testing.T) {
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
 					Method:  cxsdk.GenericWebhookConfig_GET,
-					Payload: wrapperspb.String("Hello from $ALERT_NAME, a coralogix alert"),
+					Payload: nil,
 				},
 			},
 		},
 	})
 	assert.Nil(t, err)
+	assert.NotNil(t, testResult.GetSuccess())
+	assert.Nil(t, testResult.GetFailure())
 }
 
 func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {

@@ -3,10 +3,10 @@ mod tests {
     use cx_sdk::{
         auth::ApiKey,
         client::webhooks::{
-            generic_webhook_config, slack_config, AwsEventBridgeConfig, Config, DemistoConfig,
-            EmailGroupConfig, GenericWebhookConfig, JiraConfig, MicrosoftTeamsConfig,
-            OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig, WebhookType,
-            WebhooksClient,
+            self, generic_webhook_config, slack_config, AwsEventBridgeConfig, Config,
+            DemistoConfig, EmailGroupConfig, GenericWebhookConfig, JiraConfig,
+            MicrosoftTeamsConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig,
+            WebhookType, WebhooksClient,
         },
         CoralogixRegion,
     };
@@ -37,7 +37,7 @@ mod tests {
             "https://example-url.com/".parse().unwrap(),
             Config::GenericWebhook(GenericWebhookConfig {
                 uuid: Some(Uuid::new_v4().to_string()),
-                method: generic_webhook_config::MethodType::Post.into(),
+                method: generic_webhook_config::MethodType::Get.into(),
                 headers: Default::default(),
                 payload: Some("Hello from $ALERT_NAME, a coralogix alert".into()), // https://coralogix.com/docs/alert-webhooks/#placeholders
             }),
@@ -129,6 +129,30 @@ mod tests {
             }),
         )
         .await;
+        let client = WebhooksClient::new(
+            ApiKey::from_env().unwrap(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        let result = client
+            .test_webhook(
+                WebhookType::Generic,
+                Some("custom-webhook".into()),
+                "https://httpbin.org/status/200".parse().unwrap(),
+                Config::GenericWebhook(GenericWebhookConfig {
+                    uuid: Some(Uuid::new_v4().to_string()),
+                    method: generic_webhook_config::MethodType::Get.into(),
+                    headers: Default::default(),
+                    payload: None,
+                }),
+            )
+            .await
+            .unwrap();
+        match result.result.clone().unwrap() {
+            webhooks::WebhookTestResult::Success(_) => {}
+            _ => panic!("Test webhook failed: {:?}", result.result.unwrap()),
+        }
     }
 
     async fn crud(name: String, t: WebhookType, url: String, config: Config) {

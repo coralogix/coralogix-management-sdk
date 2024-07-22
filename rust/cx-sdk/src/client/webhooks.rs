@@ -24,9 +24,9 @@ use tonic::{
 
 pub use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
     generic_webhook_config, outgoing_webhook_input_data::Config, slack_config,
-    AwsEventBridgeConfig, DemistoConfig, EmailGroupConfig, GenericWebhookConfig,
-    IbmEventNotificationsConfig, JiraConfig, MicrosoftTeamsConfig, OpsgenieConfig, PagerDutyConfig,
-    SendLogConfig, SlackConfig, WebhookType,
+    test_outgoing_webhook_response::Result as WebhookTestResult, AwsEventBridgeConfig,
+    DemistoConfig, EmailGroupConfig, GenericWebhookConfig, IbmEventNotificationsConfig, JiraConfig,
+    MicrosoftTeamsConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig, WebhookType,
 };
 use url::Url;
 

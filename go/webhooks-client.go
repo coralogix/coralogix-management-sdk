@@ -80,6 +80,9 @@ type DemistoConfig = webhooks.DemistoConfig
 type AwsEventBridgeConfig = webhooks.AwsEventBridgeConfig
 type IbmEventNotificationsConfig = webhooks.IbmEventNotificationsConfig
 
+type TestOutgoingWebhookResponse_Success = webhooks.TestOutgoingWebhookResponse_Success
+type TestOutgoingWebhookResponse_Failure = webhooks.TestOutgoingWebhookResponse_Failure
+
 // WebhooksClient is a client for the Coralogix Webhooks API.
 type WebhooksClient struct {
 	callPropertiesCreator *CallPropertiesCreator
