@@ -1,6 +1,8 @@
 package examples
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestDataprimeQuery(t *testing.T) {
 }

@@ -157,6 +157,28 @@ func TestWebhooks(t *testing.T) {
 			},
 		},
 	})
+
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+	c := cxsdk.NewWebhooksClient(creator)
+	c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
+		Data: &cxsdk.OutgoingWebhookInputData{
+			Name: wrapperspb.String("custom-webhook"),
+			Url:  wrapperspb.String("https://httpbin.org/status/200"),
+			Type: cxsdk.WebhookType_GENERIC,
+			Config: &cxsdk.GenericWebhook{
+				GenericWebhook: &cxsdk.GenericWebhookConfig{
+					Uuid:    wrapperspb.String(uuid.NewString()),
+					Method:  cxsdk.GenericWebhookConfig_GET,
+					Payload: wrapperspb.String("Hello from $ALERT_NAME, a coralogix alert"),
+				},
+			},
+		},
+	})
+	assert.Nil(t, err)
 }
 
 func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
@@ -182,6 +204,10 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 
 	assert.Nil(t, e)
 	_, e = c.Get(context.Background(), &cxsdk.GetOutgoingWebhookRequest{
+		Id: result.Id,
+	})
+	assert.Nil(t, e)
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteOutgoingWebhookRequest{
 		Id: result.Id,
 	})
 	assert.Nil(t, e)

@@ -143,7 +143,6 @@ mod tests {
             .create(t, Some(name.clone()), parsed_url.clone(), config.clone())
             .await
             .unwrap();
-        let _ = client.get(hook.id.clone().unwrap()).await.unwrap();
         let _ = client
             .replace(
                 hook.id.clone().unwrap(),
@@ -154,6 +153,7 @@ mod tests {
             )
             .await
             .unwrap();
+        let _ = client.get(hook.id.clone().unwrap()).await.unwrap();
         let _ = client.delete(hook.id.clone().unwrap()).await.unwrap();
     }
 }
