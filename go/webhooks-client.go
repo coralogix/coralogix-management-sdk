@@ -50,37 +50,37 @@ const (
 	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
-// Webhook Type: Generic
+// GenericWebhook is a  Webhook Type
 type GenericWebhook = webhooks.OutgoingWebhookInputData_GenericWebhook
 
-// Webhook Type: Slack
+// Slack is a  Webhook Type
 type Slack = webhooks.OutgoingWebhookInputData_Slack
 
-// Webhook Type: PagerDuty
+// PagerDuty is a  Webhook Type
 type PagerDuty = webhooks.OutgoingWebhookInputData_PagerDuty
 
-// Webhook Type: SendLog
+// SendLog is a  Webhook Type
 type SendLog = webhooks.OutgoingWebhookInputData_SendLog
 
-// Webhook Type: EmailGroup
+// EmailGroup is a  Webhook Type
 type EmailGroup = webhooks.OutgoingWebhookInputData_EmailGroup
 
-// Webhook Type: MicrosoftTeams
+// MicrosoftTeams is a  Webhook Type
 type MicrosoftTeams = webhooks.OutgoingWebhookInputData_MicrosoftTeams
 
-// Webhook Type: Jira
+// Jira is a  Webhook Type
 type Jira = webhooks.OutgoingWebhookInputData_Jira
 
-// Webhook Type: Opsgenie
+// Opsgenie is a  Webhook Type
 type Opsgenie = webhooks.OutgoingWebhookInputData_Opsgenie
 
-// Webhook Type: Demisto
+// Demisto is a  Webhook Type
 type Demisto = webhooks.OutgoingWebhookInputData_Demisto
 
-// Webhook Type: AwsEventBridge
+// AwsEventBridge is a  Webhook Type
 type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
 
-// Webhook Type: IbmEventNotifications
+// IbmEventNotifications is a  Webhook Type
 type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
 const (
@@ -106,46 +106,46 @@ const (
 	SlackConfigDataUsage            = webhooks.SlackConfig_DATA_USAGE
 )
 
-// Slack config of the summary/digest it contains
+// SlackConfigDigest is a config
 type SlackConfigDigest = webhooks.SlackConfig_Digest
 
-// Slack config of the attachment
+// SlackConfigAttachment is a config
 type SlackConfigAttachment = webhooks.SlackConfig_Attachment
 
-// Slack config
+// SlackConfig is a config
 type SlackConfig = webhooks.SlackConfig
 
-// PagerDuty config
+// PagerDutyConfig configures the service
 type PagerDutyConfig = webhooks.PagerDutyConfig
 
-// SendLog config
+// SendLogConfig configures the service
 type SendLogConfig = webhooks.SendLogConfig
 
-// EmailGroup config
+// EmailGroupConfig configures the service
 type EmailGroupConfig = webhooks.EmailGroupConfig
 
-// MicrosoftTeams config
+// MicrosoftTeamsConfig configures the service
 type MicrosoftTeamsConfig = webhooks.MicrosoftTeamsConfig
 
-// Jira config
+// JiraConfig configures the service
 type JiraConfig = webhooks.JiraConfig
 
-// Opsgenie config
+// OpsgenieConfig configures the service
 type OpsgenieConfig = webhooks.OpsgenieConfig
 
-// Demisto config
+// DemistoConfig configures the service
 type DemistoConfig = webhooks.DemistoConfig
 
-// AwsEventBridge config
+// AwsEventBridgeConfig configures the service
 type AwsEventBridgeConfig = webhooks.AwsEventBridgeConfig
 
-// IbmEventNotifications config
+// IbmEventNotificationsConfig configures the service
 type IbmEventNotificationsConfig = webhooks.IbmEventNotificationsConfig
 
-// Success response for testing a webhook
+// TestOutgoingWebhookSuccess response for testing a webhook
 type TestOutgoingWebhookSuccess = webhooks.TestOutgoingWebhookResponse_Success
 
-// Fail response for testing a webhook
+// TestOutgoingWebhookFailure response for testing a webhook
 type TestOutgoingWebhookFailure = webhooks.TestOutgoingWebhookResponse_Failure
 
 // WebhooksClient is a client for the Coralogix Webhooks API.
@@ -153,7 +153,7 @@ type WebhooksClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateWebhook creates a new webhook.
+// Create creates a new webhook.
 func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRequest) (*webhooks.CreateOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
@@ -238,7 +238,7 @@ func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRe
 }
 
 // Tests an existing webhook.
-func (c WebhooksClient) TestById(ctx context.Context, req *TestExistingOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
+func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
