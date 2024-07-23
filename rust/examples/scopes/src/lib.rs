@@ -8,7 +8,6 @@ mod tests {
     };
 
     #[tokio::test]
-    #[ignore = "api is not stable"]
     async fn test_scopes_client() {
         let client = ScopesClient::new(
             ApiKey::from_env().unwrap(),
