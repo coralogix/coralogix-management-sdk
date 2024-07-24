@@ -41,5 +41,6 @@ jobs:
         env:
           CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+          TEAM_ID: ${{ secrets.TEAM_ID }}
         run: make test
         working-directory: go

@@ -1,0 +1,244 @@
+syntax = "proto3";
+
+package com.coralogix.permissions.v1;
+
+import "com/coralogix/permissions/v1/common.proto";
+import "com/coralogix/permissions/v1/permissions_mgmt.proto";
+
+/// Service for creating and managing team groups, roles, users and scopes.
+service TeamPermissionsMgmtService {
+  /// Fetch team group for given team id
+  rpc GetTeamGroup(GetTeamGroupRequest) returns (GetTeamGroupResponse) {}
+  /// Fetch team group by name for authenticated team id
+  rpc GetTeamGroupByName(GetTeamGroupByNameRequest) returns (GetTeamGroupByNameResponse) {}
+  /// Fetches all team groups linked with team
+  rpc GetTeamGroups(GetTeamGroupsRequest) returns (GetTeamGroupsResponse) {}
+  /// Creates a new team group and optionally associates roles, users and a scope to it
+  rpc CreateTeamGroup(CreateTeamGroupRequest) returns (CreateTeamGroupResponse) {}
+  /// Updates an existing team group details
+  rpc UpdateTeamGroup(UpdateTeamGroupRequest) returns (UpdateTeamGroupResponse) {}
+  /// Deletes an existing team group
+  rpc DeleteTeamGroup(DeleteTeamGroupRequest) returns (DeleteTeamGroupResponse) {}
+  /// Fetches all users assigned to group
+  rpc GetGroupUsers(GetGroupUsersRequest) returns (GetGroupUsersResponse) {}
+  /// Add users to team groups
+  rpc AddUsersToTeamGroup(AddUsersToTeamGroupRequest) returns (AddUsersToTeamGroupResponse) {}
+  /// Bulk Add users to team groups
+  rpc AddUsersToTeamGroups(AddUsersToTeamGroupsRequest) returns (AddUsersToTeamGroupsResponse) {}
+  /// Remove user accounts to organisation group
+  rpc RemoveUsersFromTeamGroup(RemoveUsersFromTeamGroupRequest) returns (RemoveUsersFromTeamGroupResponse) {}
+  /// Bulk Remove user accounts to organisation group
+  rpc RemoveUsersFromTeamGroups(RemoveUsersFromTeamGroupsRequest) returns (RemoveUsersFromTeamGroupsResponse) {}
+  /// Sets team group scope. Replaces it if it already exists.
+  rpc SetTeamGroupScope(SetTeamGroupScopeRequest) returns (SetTeamGroupScopeResponse) {}
+  /// Fetches team group scope
+  rpc GetTeamGroupScope(GetTeamGroupScopeRequest) returns (GetTeamGroupScopeResponse) {}
+}
+
+/// Get team group request
+message GetTeamGroupRequest {
+  /// Team group id
+  TeamGroupId group_id = 1;
+}
+
+/// Get team group response
+message GetTeamGroupResponse {
+  /// Team group
+  TeamGroup group = 1;
+}
+
+message GetTeamGroupByNameRequest {
+  string name = 1;
+}
+
+message GetTeamGroupByNameResponse {
+  TeamGroup group = 1;
+}
+
+/// Get all team groups request
+message GetTeamGroupsRequest {
+  /// Team to fetch team groups for. If not set, fetches groups associated with logged in team
+  /// Bear in mind that an user can only fetch groups for logged in team. Unless you want to express this as a
+  /// validation of what the logged in team should be, this field can remain empty.
+  optional TeamId team_id = 1;
+}
+
+/// Get all team groups response
+message GetTeamGroupsResponse {
+  /// Groups associated with team
+  repeated TeamGroup groups = 1;
+}
+
+/// Create team group request
+message CreateTeamGroupRequest {
+  /// Team group name
+  string name = 1;
+  /// Team which the group will be associated with. If not set, creates group and associates it with logged in team
+  /// Bear in mind that an user can only create team for logged in team. Unless you want to express this as a
+  /// validation of what the logged in team should be, this field can remain empty.
+  optional TeamId team_id = 2;
+  /// Team group description
+  optional string description = 3;
+  /// Team group external_id. Applies if team is externally defined.
+  optional string external_id = 4;
+  /// Roles to associate with team group
+  repeated RoleId role_ids = 5;
+  /// Users to associate with team group
+  repeated UserId user_ids = 6;
+  /// Optionally set team group scope filters
+  optional ScopeFilters scope_filters = 7;
+  optional string next_gen_scope_id = 8;
+}
+
+/// Create team group response
+message CreateTeamGroupResponse {
+  /// Team group id
+  TeamGroupId group_id = 1;
+}
+
+/// Update team group request
+message UpdateTeamGroupRequest{
+  /// Specifies new roles to assign to a group removing previous ones
+  message RoleUpdates {
+    /// Roles to associate with a team group
+    repeated RoleId role_ids = 1;
+  }
+  /// Specifies new users to assign to a group removing previous ones
+  message UserUpdates {
+    /// Users to associate with a team group
+    repeated UserId user_ids = 1;
+  }
+  /// Team group to be updated
+  TeamGroupId group_id = 1;
+  /// Updated team group name
+  string name = 2;
+  /// Updated team group description
+  optional string description = 3;
+  /// Updated team group external_id
+  optional string external_id = 4;
+  /// If set, new roles to associate with team group
+  optional RoleUpdates role_updates = 5;
+  /// If set, new users to associate with team group
+  optional UserUpdates user_updates = 6;
+  /// If set, updates new team group scope filters
+  optional ScopeFilters scope_filters = 7;
+  /// If set, updates new team group next gen scope
+  optional string next_gen_scope_id = 8;
+}
+
+/// Update team group response
+message UpdateTeamGroupResponse{}
+
+/// Delete team group request
+message DeleteTeamGroupRequest {
+  /// Team group id
+  TeamGroupId group_id = 1;
+}
+
+/// Delete team group response
+message DeleteTeamGroupResponse {}
+
+/// Fetches all users linked with given team group
+message GetGroupUsersRequest {
+  /// Team group id
+  TeamGroupId group_id = 1;
+  /// Pagination size. Defaults to 100 if empty
+  optional uint32 page_size = 2;
+  /// Optional pagination continuation token
+  /// Contains an encoded cursor
+  optional string page_token = 3;
+}
+
+message GetGroupUsersResponse {
+  message NoMorePages{}
+  message NextPageToken {
+    string next_page_token = 1;
+  }
+  repeated User users = 1;
+  oneof next_page {
+    NoMorePages no_more_pages = 2;
+    NextPageToken token = 3;
+  }
+}
+
+/// Add users to an existing team group
+message AddUsersToTeamGroupRequest {
+  /// Team group id to add users to
+  TeamGroupId group_id = 1;
+  /// Users to add to group
+  repeated UserId user_ids = 2;
+}
+
+/// Add users to an existing team group response
+message AddUsersToTeamGroupResponse {
+  /// Team id to which given team group belongs
+  TeamId team_id = 1;
+}
+
+/// Associate new users with groups in a team
+/// Allows to associate any number of users with any number of groups belonging to a team
+message AddUsersToTeamGroupsRequest {
+  message AddUsersToTeamGroup {
+    /// Team group id to add users to
+    TeamGroupId group_id = 1;
+    /// Users to add to group
+    repeated UserId user_ids = 2;
+  }
+  TeamId team_id = 1;
+  repeated AddUsersToTeamGroup add_users_to_group = 2;
+}
+
+message AddUsersToTeamGroupsResponse {}
+
+/// Remove users from an existing team group
+message RemoveUsersFromTeamGroupRequest {
+  /// Team group id to remove users from
+  TeamGroupId group_id = 1;
+  /// Users to remove to group
+  repeated UserId user_ids = 2;
+}
+
+message RemoveUsersFromTeamGroupResponse {}
+
+/// Remove users from groups in a team
+/// Allows the removal of any number of users and any number of groups belonging to a team
+message RemoveUsersFromTeamGroupsRequest {
+  message RemoveUsersFromTeamGroup {
+    /// Team group id to remove users from
+    TeamGroupId group_id = 1;
+    /// Users to remove to group
+    repeated UserId user_ids = 2;
+  }
+  TeamId team_id = 1;
+  repeated RemoveUsersFromTeamGroup remove_users_from_group = 2;
+}
+
+/// Remove users from existing groups
+message RemoveUsersFromTeamGroupsResponse {}
+
+
+/// Set team group scope request
+message SetTeamGroupScopeRequest {
+  /// Team group to set scope to
+  TeamGroupId group_id = 1;
+  /// team group scope filters
+  ScopeFilters scope_filters = 2;
+}
+
+/// Set team group scope response
+message SetTeamGroupScopeResponse {
+  /// Created scope_id or 0 if already exists and was replaced.
+  ScopeId scope_id = 1;
+}
+
+/// Get team group scope request
+message GetTeamGroupScopeRequest {
+  /// Team group to set scope to
+  TeamGroupId group_id = 1;
+}
+
+/// Set team group scope response
+message GetTeamGroupScopeResponse {
+  /// Scope if group has one set
+  optional Scope scope = 1;
+}

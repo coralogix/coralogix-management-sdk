@@ -51,9 +51,9 @@ pub enum CoralogixRegion {
 }
 
 impl CoralogixRegion {
-    /// Endpoint for the corresponding Coralogix region
+    /// gRPC endpoint for the corresponding Coralogix region
     /// <https://coralogix.com/docs/coralogix-domain/>
-    pub fn endpoint(&self) -> String {
+    pub fn grpc_endpoint(&self) -> String {
         match self {
             CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.com".into(),
             CoralogixRegion::US2 => "https://ng-api-grpc.cx498.coralogix.com".into(),
@@ -62,6 +62,22 @@ impl CoralogixRegion {
             CoralogixRegion::AP1 => "https://ng-api-grpc.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-grpc.coralogixsg.com".into(),
             CoralogixRegion::Custom(custom) => format!("https://{}", custom),
+        }
+    }
+
+    /// REST endpoint for the corresponding Coralogix region
+    /// <https://coralogix.com/docs/coralogix-domain/>
+    pub fn rest_endpoint(&self) -> String {
+        match self {
+            CoralogixRegion::US1 => "https://ng-api-http.coralogix.com".into(),
+            CoralogixRegion::US2 => "https://ng-api-http.cx498.coralogix.com".into(),
+            CoralogixRegion::EU1 => "https://ng-api-http.coralogix.com".into(),
+            CoralogixRegion::EU2 => "https://ng-api-http.eu2.coralogix.com".into(),
+            CoralogixRegion::AP1 => "https://ng-api-http.app.coralogix.in".into(),
+            CoralogixRegion::AP2 => "https://ng-api-http.coralogixsg.com".into(),
+            CoralogixRegion::Custom(custom) => {
+                format!("https://{}", custom.replace("grpc", "http"))
+            }
         }
     }
 

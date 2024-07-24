@@ -11,8 +11,7 @@ import (
 func TestTeams(t *testing.T) {
 	t.Skip("Skipping integration test")
 
-	region, err := cxsdk.CoralogixRegionFromEnv()
-	t.Log(region)
+	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

@@ -28,13 +28,22 @@ do
     if [[ $out_module == *"coralogix"* ]]; then
         mod_path="${out_module##*/com/}"
         case "$mod_path" in
+            # We don't want to generate go files for this proto
             *dashboards/v1/ast/widgets/common/queries.proto ) 
             ;; 
+            # The dashboards proto contain circular dependencies, so we need to make sure that all dashboard files end up in the same package
             *dashboards* )
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogixapis/dashboards/v1 "
                 args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogixapis/dashboards/v1 "
                 ;;
+
+            # The permissions proto contain circular dependencies, so we need to make sure that all dashboard files end up in the same package
+            *permissions* )
+                args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/permissions/v1 "
+                args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/permissions/v1 "
+                ;;
             *)    
+            # For all other protos, the package path is the same as the directory path
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "
                 args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "
                 ;;

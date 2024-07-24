@@ -40,6 +40,8 @@ type ClientSet struct {
 	scopes            *ScopesClient
 	apiKeys           *ApikeysClient
 	slis              *SLIClient
+	users             *UsersClient
+	groups            *GroupsClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -131,13 +133,15 @@ func (c *ClientSet) Scopes() *ScopesClient {
 	return c.scopes
 }
 
-// func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
-// 	return c.dahboardsFolders
-// }
+// Users gets a UsersClient from the ClientSet.
+func (c *ClientSet) Users() *UsersClient {
+	return c.users
+}
 
-// func (c *ClientSet) Users() *UsersClient {
-// 	return c.users
-// }
+// Groups gets a GroupsClient from the ClientSet.
+func (c *ClientSet) Groups() *GroupsClient {
+	return c.groups
+}
 
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(targetURL, apiKey string) *ClientSet {
@@ -162,6 +166,7 @@ func NewClientSet(targetURL, apiKey string) *ClientSet {
 		scopes:            NewScopesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewAPIKeysClient(apikeyCPC),
+		groups:  NewGroupsClient(apikeyCPC),
 		// users:             NewUsersClient(apikeyCPC),
 	}
 }
@@ -172,8 +177,8 @@ const EnvCoralogxRegion = "CORALOGIX_REGION"
 // EnvCoralogixAPIKey is the name of the environment variable that contains the Coralogix API key.
 const EnvCoralogixAPIKey = "CORALOGIX_API_KEY"
 
-// CoralogixRegionFromEnv reads the Coralogix region from environment variables.
-func CoralogixRegionFromEnv() (string, error) {
+// CoralogixGrpcEndpointFromEnv reads the Coralogix region from environment variables.
+func CoralogixGrpcEndpointFromEnv() (string, error) {
 	regionIdentifier := strings.ToLower(os.Getenv(EnvCoralogxRegion))
 	if regionIdentifier == "" {
 		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogxRegion)
@@ -181,40 +186,85 @@ func CoralogixRegionFromEnv() (string, error) {
 
 	switch regionIdentifier {
 	case "us1":
-		return RegionUS1, nil
+		return GrpcUS1, nil
 	case "us2":
-		return RegionUS2, nil
+		return GrpcUS2, nil
 	case "eu1":
-		return RegionEU1, nil
+		return GrpcEU1, nil
 	case "eu2":
-		return RegionEU2, nil
+		return GrpcEU2, nil
 	case "ap1":
-		return RegionAP1, nil
+		return GrpcAP1, nil
 	case "ap2":
-		return RegionAP2, nil
+		return GrpcAP2, nil
+	default:
+		return regionIdentifier, nil
+	}
+}
+
+// CoralogixRestEndpointFromEnv reads the Coralogix REST endpoint from environment variables.
+func CoralogixRestEndpointFromEnv() (string, error) {
+	regionIdentifier := strings.ToLower(os.Getenv(EnvCoralogxRegion))
+	if regionIdentifier == "" {
+		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogxRegion)
+	}
+
+	switch regionIdentifier {
+	case "us1":
+		return RestUS1, nil
+	case "us2":
+		return RestUS2, nil
+	case "eu1":
+		return RestEU1, nil
+	case "eu2":
+		return RestEU2, nil
+	case "ap1":
+		return RestAP1, nil
+	case "ap2":
+		return RestAP2, nil
 	default:
 		return regionIdentifier, nil
 	}
 }
 
 const (
-	// RegionUS1 is the URL for the us1 region.
-	RegionUS1 = "ng-api-grpc.coralogix.com:443"
+	// GrpcUS1 is the URL for the us1 region.
+	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
 
-	// RegionUS2 is the URL for the us2 region.
-	RegionUS2 = "ng-api-grpc.cx498.coralogix.com:443"
+	// GrpcUS2 is the URL for the us2 region.
+	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
 
-	// RegionEU1 is the URL for the eu1 region.
-	RegionEU1 = "ng-api-grpc.coralogix.com:443"
+	// GrpcEU1 is the URL for the eu1 region.
+	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
 
-	// RegionEU2 is the URL for the eu2 region.
-	RegionEU2 = "ng-api-grpc.eu2.coralogix.com:443"
+	// GrpcEU2 is the URL for the eu2 region.
+	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
 
-	// RegionAP1 is the URL for the ap1 region.
-	RegionAP1 = "ng-api-grpc.app.coralogix.in:443"
+	// GrpcAP1 is the URL for the ap1 region.
+	GrpcAP1 = "ng-api-grpc.app.coralogix.in:443"
 
-	// RegionAP2 is the URL for the ap2 region.
-	RegionAP2 = "ng-api-grpc.coralogixsg.com:443"
+	// GrpcAP2 is the URL for the ap2 region.
+	GrpcAP2 = "ng-api-grpc.coralogixsg.com:443"
+)
+
+const (
+	// RestUS1 is the URL for the us1 region.
+	RestUS1 = "https://ng-api-http.coralogix.com"
+
+	// RestUS2 is the URL for the us2 region.
+	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
+
+	// RestEU1 is the URL for the eu1 region.
+	RestEU1 = "https://ng-api-http.coralogix.com"
+
+	// RestEU2 is the URL for the eu2 region.
+	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
+
+	// RestAP1 is the URL for the ap1 region.
+	RestAP1 = "https://ng-api-http.app.coralogix.in"
+
+	// RestAP2 is the URL for the ap2 region.
+	RestAP2 = "https://ng-api-http.coralogixsg.com"
 )
 
 // CoralogixAPIKeyFromEnv reads the Coralogix API key from environment variables.

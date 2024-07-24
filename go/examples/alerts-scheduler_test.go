@@ -23,7 +23,7 @@ import (
 )
 
 func TestAlertScheduler(t *testing.T) {
-	region, err := cxsdk.CoralogixRegionFromEnv()
+	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -56,7 +56,6 @@ func TestAlertScheduler(t *testing.T) {
 				WhichAlerts: &cxsdk.AlertSchedulerFilterUniqueIDs{
 					AlertUniqueIds: &cxsdk.AlertUniqueIDs{
 						Value: []string{"55a457ed-5f23-407a-a724-12d7fe533a4e"},
-
 					},
 				},
 			},
