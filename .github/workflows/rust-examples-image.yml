@@ -19,8 +19,8 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::529726762838:role/github-actions-ecr
-          aws-region: eu-west-1
+          role-to-assume: ${{ vars.ECR_ROLE }}
+          aws-region: ${{ vars.DEFAULT_ECR_REGISTRY_REGION }}
       - name: Login to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
       - name: Build and push
@@ -30,4 +30,4 @@ jobs:
           context: .
           file: rust/Dockerfile
           push: true
-          tags: 529726762838.dkr.ecr.eu-west-1.amazonaws.com/rust-api-examples:latest
+          tags: ${{ vars.DEFAULT_ECR_REGISTRY }}/rust-api-examples:latest
