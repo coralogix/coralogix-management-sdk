@@ -16,11 +16,9 @@ mod tests {
         let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
         let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
         let id = dashboard.id.as_ref().unwrap().clone();
-        let actual_dashboard = client.get(id.clone()).await.unwrap();
-        if actual_dashboard.dashboard.is_some() {
+        if let Ok(e) = client.get(id.clone()).await {
             let _ = client.delete(id.clone()).await.unwrap();
         }
-
         let _ = client.create(dashboard).await.unwrap();
 
         let actual_dashboard = client.get(id.clone()).await.unwrap();

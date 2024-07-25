@@ -22,16 +22,16 @@ func TestDashboards(t *testing.T) {
 	var d cxsdk.Dashboard
 	assert.Nil(t, protojson.Unmarshal(dat, &d))
 
-	db, _ := c.GetDashboard(context.Background(), &cxsdk.GetDashboardRequest{
+	_, e := c.GetDashboard(context.Background(), &cxsdk.GetDashboardRequest{
 		DashboardId: d.Id,
 	})
-	if db.Dashboard != nil {
+	if e != nil {
 		_, e := c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
 			DashboardId: d.Id,
 		})
 		assert.Nil(t, e)
 	}
-	_, e := c.CreateDashboard(context.Background(), &cxsdk.CreateDashboardRequest{
+	_, e = c.CreateDashboard(context.Background(), &cxsdk.CreateDashboardRequest{
 		Dashboard: &d,
 	})
 	assert.Nil(t, e)
