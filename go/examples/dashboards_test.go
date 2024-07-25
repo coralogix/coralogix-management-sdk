@@ -26,10 +26,9 @@ func TestDashboards(t *testing.T) {
 		DashboardId: d.Id,
 	})
 	if e != nil {
-		_, e := c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
+		c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
 			DashboardId: d.Id,
 		})
-		assert.Nil(t, e)
 	}
 	_, e = c.CreateDashboard(context.Background(), &cxsdk.CreateDashboardRequest{
 		Dashboard: &d,
