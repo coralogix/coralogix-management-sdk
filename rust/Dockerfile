@@ -4,6 +4,9 @@ ENV RUST_BACKTRACE=1
 
 WORKDIR /app
 ADD . /app
-WORKDIR /app/rust
+WORKDIR /app/rust/examples
 ADD $PB_REL/download/v25.1/protoc-25.1-linux-x86_64.zip /tmp
-RUN apt update && apt install unzip && unzip /tmp/protoc-25.1-linux-x86_64.zip -d /usr && cargo build
+RUN apt update && \
+    apt install unzip && \
+    unzip /tmp/protoc-25.1-linux-x86_64.zip -d /usr && \
+    cargo build --tests
