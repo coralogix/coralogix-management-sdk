@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.dpxl.v1;
 
 import "com/coralogix/dpxl/v1/dpxl.proto";
+import "com/coralogix/dpxl/v1/types.proto";
 
 message UnauthenticatedInternalDpxlServiceCompileResponse {
   oneof response {
@@ -13,6 +14,7 @@ message UnauthenticatedInternalDpxlServiceCompileResponse {
   message Success {
     SerializedExpression serialized = 1;
     repeated Diagnostic.Warning warnings = 2;
+    Datatype datatype = 3;
   }
 
   message Failure {
@@ -106,4 +108,21 @@ message UnauthenticatedInternalDpxlServiceCombineResponse {
 
 message UnauthenticatedInternalDpxlServiceToSerializedDataprimeCoreAstResponse {
   bytes serialized_dataprime_core_ast = 1;
+}
+
+message UnauthenticatedInternalDpxlServiceCheckTypeResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    Datatype datatype = 1;
+  }
+
+  message Failure {
+    oneof failure {
+      CompileError compile_error = 1;
+    }
+  }
 }

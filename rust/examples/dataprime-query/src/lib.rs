@@ -8,10 +8,9 @@ mod tests {
 
     #[tokio::test]
     async fn test_dataprime_query() {
-        let api_key = std::env::var("CORALOGIX_API_KEY").unwrap();
         let svc = DataprimeQueryClient::new(
             CoralogixRegion::from_env().unwrap(),
-            ApiKey::from(api_key.as_str()),
+            ApiKey::from_env().unwrap(),
         );
 
         let mut stream = svc

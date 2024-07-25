@@ -18,6 +18,7 @@ message ObservationsRequest {
   repeated DatasetScope dataset_scopes = 4;
   repeated MatchExpression keypath_filters = 5;
   repeated MatchExpression value_filters = 6;
+  VirtualFieldFilter virtual_field_filter = 16;
   repeated LabelFilterV2 label_filters = 7;
   repeated MetadataFilter metadata_filters = 8;
   TimeResolution time_resolution = 9;
@@ -37,6 +38,9 @@ enum ObservationsFeature {
   OBSERVATIONS_FEATURE_INCLUDE_EMPTY_KEYPATHS = 1;
   OBSERVATIONS_FEATURE_ADVANCED_ARRAY_TYPES = 2;
   OBSERVATIONS_FEATURE_INCLUDE_NULL_KEYPATHS = 3;
+  // Not every consumer supports virtual fields so they are not included by default.
+  // This setting is also "implied" by the virtual_field_filter field when filtering for only virtual fields.
+  OBSERVATIONS_FEATURE_INCLUDE_VIRTUAL_FIELDS = 4;
 }
 
 message ObservationsResponse {
@@ -62,6 +66,13 @@ message Observation {
   optional Cardinality cardinality = 5;
   // Read https://www.notion.so/coralogix/Cardinality-fields-in-observations-API-34328e4a20f04dc3b09de248f93f0ad7?pvs=4 for more info
   bool is_cardinality_protected = 6;
+  optional VirtualFieldDetail virtual_field_detail = 7;
+}
+
+message VirtualFieldDetail {
+  string id = 1;
+  string dpxl_expr = 2;
+  string dataset_regexp = 3;
 }
 
 message ExactCardinality {

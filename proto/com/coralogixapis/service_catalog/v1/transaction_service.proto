@@ -76,6 +76,7 @@ message GetTransactionsErrorsStreamResponse {
   oneof widget {
     RepeatedLineChart errors = 1;
     RepeatedLineChart errors_per_seconds = 2;
+    RepeatedLineChart error_percentage = 5;
   }
   google.protobuf.UInt64Value total_amount = 3;
   ApmSource apm_source = 4;
@@ -194,6 +195,7 @@ message GetTransactionSegmentsErrorStreamResponse {
   oneof widget{
     RepeatedLineChart errors = 1;
     RepeatedLineChart errors_per_seconds = 2;
+    RepeatedLineChart error_percentage = 5;
   }
   google.protobuf.UInt64Value total_amount = 3;
   ApmSource apm_source = 4;

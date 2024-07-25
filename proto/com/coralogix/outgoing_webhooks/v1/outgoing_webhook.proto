@@ -166,3 +166,12 @@ message OutgoingWebhookDetails {
   WebhookType type = 1;
   google.protobuf.StringValue label = 2;
 }
+
+message OutboundWebhookSummary{
+  google.protobuf.StringValue id = 1;
+  WebhookType type = 2;
+  google.protobuf.StringValue name = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  google.protobuf.UInt32Value external_id = 6;
+}

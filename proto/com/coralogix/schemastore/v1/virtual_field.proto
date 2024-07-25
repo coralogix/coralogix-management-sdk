@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+
+enum DpxlType {
+  DPXL_TYPE_UNSPECIFIED = 0;
+  DPXL_TYPE_BOOL = 1;
+  DPXL_TYPE_NUM = 2;
+  DPXL_TYPE_STRING = 3;
+  DPXL_TYPE_TIMESTAMP = 4;
+}
+
+message VirtualField {
+  optional string id = 1;
+  uint32 company_id = 2;
+  string dataset_regexp = 3;
+  repeated string path_array = 4;
+  DpxlType dpxl_type = 5;
+  string dpxl_expr = 6;
+}
+
+message ListVirtualFieldsRequest {
+  uint32 company_id = 1;
+}
+
+message ListVirtualFieldsResponse {
+  repeated VirtualField virtual_fields = 1;
+}
+
+message CreateVirtualFieldRequest {
+  uint32 company_id = 1;
+  string dataset_regexp = 2;
+  repeated string path_array = 3;
+  string dpxl_expr = 4;
+}
+
+message CreateVirtualFieldResponse {
+  VirtualField virtual_field = 1;
+}
+
+message DeleteVirtualFieldRequest {
+  uint32 company_id = 1;
+  string id = 2;
+}
+
+message DeleteVirtualFieldResponse {
+}

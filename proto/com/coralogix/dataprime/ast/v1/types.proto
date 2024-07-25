@@ -27,9 +27,9 @@ message Datatype {
   }
 
   enum CompositeType {
+    // Formerly COMPOSITE_TYPE_ARRAY
+    reserved 1;
     COMPOSITE_TYPE_UNSPECIFIED = 0;
-    // Use `ArrayType` instead.
-    COMPOSITE_TYPE_ARRAY = 1 [deprecated = true];
     COMPOSITE_TYPE_OBJECT = 2;
   }
 

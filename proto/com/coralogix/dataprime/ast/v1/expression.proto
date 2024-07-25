@@ -6,7 +6,7 @@ import "com/coralogix/dataprime/ast/v1/types.proto";
 import "google/protobuf/wrappers.proto";
 
 message Expression {
-  reserved 5, 11, 14, 18;
+  reserved 5, 11, 13, 14, 18;
   oneof expression {
     Null null_e                           = 1;
     Keypath keypath                       = 2;
@@ -18,8 +18,6 @@ message Expression {
     Not not                               = 9;
     FunctionCall function_call            = 10;
     Cast cast                             = 12;
-    // use InfixOp.ILike instead
-    MatchSubtree match                    = 13 [deprecated = true];
     google.protobuf.Int64Value long       = 15;
     google.protobuf.DoubleValue double    = 16;
     TimeUnit time_unit                    = 19;
@@ -68,6 +66,8 @@ message Expression {
     Expression right = 3;
 
     enum Op {
+      // Formerly OP_LIKE
+      reserved 13;
       OP_UNSPECIFIED   = 0;
       OP_ADD           = 1;
       OP_SUB           = 2;
@@ -81,8 +81,6 @@ message Expression {
       OP_LTE           = 10;
       OP_GT            = 11;
       OP_GTE           = 12;
-      // use OP_ILIKE instead
-      OP_LIKE          = 13 [deprecated = true];
       OP_MOD           = 14;
       OP_ILIKE         = 15;
     }

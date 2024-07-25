@@ -134,6 +134,8 @@ message GetOperationStatsResponse {
   google.protobuf.UInt64Value total_requests = 4;
   google.protobuf.UInt64Value total_errors = 5;
   google.protobuf.UInt64Value error_percentage = 6;
+  google.protobuf.UInt64Value p50_response_time = 7;
+  google.protobuf.UInt64Value p75_response_time = 8;
 }
 
 message GetDatabaseOperationGraphsStreamRequest{

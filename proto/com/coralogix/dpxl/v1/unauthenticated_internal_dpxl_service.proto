@@ -28,4 +28,8 @@ service UnauthenticatedInternalDpxlService {
   rpc Combine(UnauthenticatedInternalDpxlServiceCombineRequest) returns (UnauthenticatedInternalDpxlServiceCombineResponse) {
     option (com.coralogix.dataprime.v1.audit_log_description).description = "Combine two DPXL expressions into one";
   }
+
+  rpc CheckType(UnauthenticatedInternalDpxlServiceCheckTypeRequest) returns (UnauthenticatedInternalDpxlServiceCheckTypeResponse) {
+    option (com.coralogix.dataprime.v1.audit_log_description).description = "Check the type of a DPXL expression";
+  }
 }

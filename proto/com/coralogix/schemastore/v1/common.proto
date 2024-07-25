@@ -106,6 +106,10 @@ message MatchExpression {
   bool invert = 4;
 }
 
+message VirtualFieldFilter {
+  bool is_virtual = 1;
+}
+
 enum CustomDatasetTargetFormat {
   CUSTOM_DATASET_TARGET_FORMAT_UNSPECIFIED = 0;
   CUSTOM_DATASET_TARGET_FORMAT_WIDEPARQUET_V1 = 1;

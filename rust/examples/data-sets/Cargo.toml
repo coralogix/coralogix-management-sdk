@@ -8,11 +8,10 @@ keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]
 authors = []
 
-
 [dependencies]
-tokio = {version = "*", features = ["full"]}
-http = "*"
-cx-sdk = { path = "../../cx-sdk" }
-async-trait = "*"
-tonic = "*"
 anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"

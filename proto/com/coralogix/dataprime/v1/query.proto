@@ -5,7 +5,13 @@ package com.coralogix.dataprime.v1;
 import "com/coralogix/dataprime/ast/v1/ast.proto";
 import "com/coralogix/dataprime/ast/v1/query.proto";
 import "com/coralogix/dataprime/v1/object_store_warning.proto";
+import "com/coralogix/dataprime/v1/common.proto";
 import "google/protobuf/wrappers.proto";
+
+message FieldCardinality {
+  UntypedKeypath keypath = 1;
+  uint64 cardinality = 2;
+}
 
 // External API interface for executing a DataPrime query
 message SubmitQueryRequest {
@@ -15,6 +21,7 @@ message SubmitQueryRequest {
   google.protobuf.StringValue query_id = 9;
   reserved 10;
   repeated NamedQuerySource named_query_sources = 11;
+  repeated FieldCardinality keypath_cardinalities = 12;
 }
 
 // External API interface for executing a DataPrime DDL query / Creation of Dynamic Dataset
@@ -24,6 +31,7 @@ message SubmitDdlQueryRequest {
   google.protobuf.StringValue query_id = 3;
   DatasetLocation dataset_location = 4;
   repeated NamedQuerySource named_query_sources = 5;
+  repeated FieldCardinality keypath_cardinalities = 6;
 }
 
 message DatasetLocation {
@@ -39,6 +47,7 @@ message ExplainQueryRequest {
   google.protobuf.StringValue query_id = 9;
   reserved 10;
   repeated NamedQuerySource named_query_sources = 11;
+  repeated FieldCardinality keypath_cardinalities = 12;
 }
 
 message ExplainStage {
@@ -234,12 +243,23 @@ message ExecutionConfig {
   optional bool use_index_store = 19;
 
   optional SchedulingTier scheduling_tier = 20;
+
+  // Sets of executor resource groups the query can be scheduled on
+  repeated ResourceGroup resource_group = 21;
 }
 
 enum SchedulingTier {
   SCHEDULING_TIER_UNSPECIFIED = 0;
   SCHEDULING_TIER_NORMAL = 1;
   SCHEDULING_TIER_FAST = 2;
+}
+
+enum ResourceGroup {
+  RESOURCE_GROUP_UNSPECIFIED = 0;
+  RESOURCE_GROUP_HIGH_TIER = 1;
+  RESOURCE_GROUP_ARCHIVE = 2;
+  RESOURCE_GROUP_LAMBDA = 3;
+  RESOURCE_GROUP_DEV = 4;
 }
 
 enum Metastore {
@@ -260,6 +280,10 @@ message Failed {
     Cancelled cancelled = 3;
   }
 
+  uint64 queued_at = 4;
+  uint64 started_at = 5;
+  uint64 ended_at = 6;
+
   message Internal {
     string message = 1;
   }
@@ -274,6 +298,8 @@ message AwaitReadyResponse {
     Success success = 1;
     Failed failed = 2;
   }
+
+  QueryStatus status = 3;
 
   message Success {
     bool scan_limit_reached = 1;
@@ -293,6 +319,7 @@ message QueryStatus {
 
   message Running {
     uint64 queued_at = 1;
+    uint64 started_at = 2;
   }
 
   message Completed {
@@ -308,6 +335,8 @@ message QueryStatus {
     bool blocks_limit_reached = 5;
 
     ObjectStoreWarning object_store_warning = 6;
+
+    uint64 started_at = 7;
   }
 
   message Planning {

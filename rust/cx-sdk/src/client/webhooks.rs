@@ -23,7 +23,10 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
-    outgoing_webhook_input_data::Config, WebhookType,
+    generic_webhook_config, outgoing_webhook_input_data::Config, slack_config,
+    test_outgoing_webhook_response::Result as WebhookTestResult, AwsEventBridgeConfig,
+    DemistoConfig, EmailGroupConfig, GenericWebhookConfig, IbmEventNotificationsConfig, JiraConfig,
+    MicrosoftTeamsConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig, WebhookType,
 };
 use url::Url;
 
@@ -96,8 +99,8 @@ impl WebhooksClient {
     pub async fn replace(
         &self,
         webhook_id: String,
-        webhook_type: WebhookType,
         name: Option<String>,
+        webhook_type: WebhookType,
         url: Url,
         config: Config,
     ) -> Result<UpdateOutgoingWebhookResponse> {

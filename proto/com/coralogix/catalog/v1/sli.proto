@@ -10,7 +10,7 @@ message Sli {
   google.protobuf.StringValue metric_name = 4;
   google.protobuf.StringValue sli_description = 5;
   MetricType metric_type = 6;
-  google.protobuf.Int64Value slo_percentage = 7;
+  google.protobuf.Int64Value slo_percentage = 7 [deprecated=true];
   SloPeriodType slo_period_type = 8;
   ThresholdSymbolType threshold_symbol_type = 9;
   google.protobuf.Int64Value threshold_value = 10;
@@ -24,6 +24,7 @@ message Sli {
   TimeUnitType time_unit_type = 18;
   repeated google.protobuf.StringValue service_names_group = 19;
   google.protobuf.BoolValue has_buckets_error = 20;
+  google.protobuf.FloatValue float_slo_percentage = 21;
 }
 
 message SliFilter {

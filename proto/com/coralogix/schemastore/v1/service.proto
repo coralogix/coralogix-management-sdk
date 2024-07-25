@@ -17,6 +17,7 @@ import "com/coralogix/schemastore/v1/batch_cardinality.proto";
 import "com/coralogix/schemastore/v1/query_assistant.proto";
 import "com/coralogix/schemastore/v1/feedback.proto";
 import "com/coralogix/schemastore/v1/logs_explainer.proto";
+import "com/coralogix/schemastore/v1/virtual_field.proto";
 
 service SchemaStoreInternalService {
   rpc LogFields (LogFieldsRequest) returns (LogFieldsResponse) {
@@ -41,6 +42,9 @@ service SchemaStoreInternalService {
   rpc Observations (ObservationsRequest) returns (ObservationsResponse) {}
   rpc ListDatasets (ListDatasetsRequest) returns (ListDatasetsResponse) {}
   rpc BatchCardinality (BatchCardinalityRequest) returns (BatchCardinalityResponse) {}
+  rpc CreateVirtualField (CreateVirtualFieldRequest) returns (CreateVirtualFieldResponse) {}
+  rpc ListVirtualFields (ListVirtualFieldsRequest) returns (ListVirtualFieldsResponse) {}
+  rpc DeleteVirtualField (DeleteVirtualFieldRequest) returns (DeleteVirtualFieldResponse) {}
 }
 
 

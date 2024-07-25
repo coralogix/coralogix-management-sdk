@@ -8,6 +8,7 @@ message UnauthenticatedInternalDpxlServiceCompileRequest {
   Expression expression            = 1;
   repeated EntityType entity_types = 2 [deprecated = true];
   optional EntityType entity_type  = 3;
+  bool infer_any_type              = 4;
 }
 
 message UnauthenticatedInternalDpxlServiceToDpxlTextRequest {
@@ -40,4 +41,6 @@ message UnauthenticatedInternalDpxlServiceCombineRequest {
   }
 }
 
-
+message UnauthenticatedInternalDpxlServiceCheckTypeRequest {
+  SerializedExpression serialized = 1;
+}
