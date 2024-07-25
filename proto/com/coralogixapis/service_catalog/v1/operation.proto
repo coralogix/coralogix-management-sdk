@@ -8,8 +8,17 @@ message Operation{
   google.protobuf.StringValue operation = 1;
   google.protobuf.StringValue method = 2;
   UnitValue p99_response_time = 3;
+  UnitValue p90_response_time = 21;
+  UnitValue p75_response_time = 22;
+  UnitValue p50_response_time = 23;
+  UnitValue avg_response_time = 24;
   UnitValue requests = 4;
+  UnitValue throughput = 25;
+  UnitValue max_throughput = 26;
   UnitValue errors = 5;
+  UnitValue errors_per_minute = 27;
+  UnitValue max_errors_per_minute = 28;
+  UnitValue errors_per_second = 29;
   UnitValue time_consuming = 6;
   UnitValue time_consuming_percentage = 7;
   UnitValue p95_response_time = 8;

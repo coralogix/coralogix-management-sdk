@@ -32,6 +32,13 @@ service OutgoingWebhooksService {
     };
   }
 
+  rpc ListOutboundWebhooksSummary(ListOutboundWebhooksSummaryRequest) returns (ListOutboundWebhooksSummaryResponse) {
+    option (audit_log_description).description = "Get outgoing webhook summaries";
+    option (google.api.http) = {
+      get: "/v1/outgoing_webhooks/summaries"
+    };
+  }
+
   rpc ListAllOutgoingWebhooks(ListAllOutgoingWebhooksRequest) returns (ListAllOutgoingWebhooksResponse) {
     option (audit_log_description).description = "Get all outgoing webhooks";
     option (google.api.http) = {
@@ -120,6 +127,11 @@ message ListOutgoingWebhooksResponse {
 message ListAllOutgoingWebhooksRequest {}
 message ListAllOutgoingWebhooksResponse {
   repeated OutgoingWebhookExtendedSummary deployed = 1;
+}
+
+message ListOutboundWebhooksSummaryRequest {}
+message ListOutboundWebhooksSummaryResponse {
+  repeated OutboundWebhookSummary outbound_webhook_summaries = 1;
 }
 
 message GetOutgoingWebhookRequest {

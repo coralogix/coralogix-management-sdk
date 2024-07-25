@@ -16,12 +16,18 @@ mod tests {
         let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
         let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
         let id = dashboard.id.as_ref().unwrap().clone();
+        let actual_dashboard = client.get(id.clone()).await.unwrap();
+        if actual_dashboard.dashboard.is_some() {
+            let _ = client.delete(id.clone()).await.unwrap();
+        }
+
         let _ = client.create(dashboard).await.unwrap();
 
         let actual_dashboard = client.get(id.clone()).await.unwrap();
         assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));
-        let _ = client.pin_dashboard(id.clone()).await.unwrap();
-        let _ = client.unpin_dashboard(id.clone()).await.unwrap();
+        // PIN/UNPIN are user level operations that require a user level API key
+        // let _ = client.pin_dashboard(id.clone()).await.unwrap();
+        // let _ = client.unpin_dashboard(id.clone()).await.unwrap();
 
         let _ = client.delete(id.clone()).await.unwrap();
     }

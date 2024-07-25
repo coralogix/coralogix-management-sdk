@@ -5,6 +5,7 @@ package com.coralogix.dataprime.v1;
 message QueryMetrics {
   string query_id = 1;
   repeated StageMetrics stage_metrics = 2;
+  repeated Metric additional_metrics = 3;
 }
 
 message StageMetrics {
