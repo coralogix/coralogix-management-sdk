@@ -46,7 +46,7 @@ impl DataprimeQueryClient {
     /// * `api_key` - The  to use for authentication.
     /// * `region` - The region to connect to.
     pub fn new(region: CoralogixRegion, api_key: ApiKey) -> Self {
-        let enrichments_service_channel: Channel = Endpoint::from_str(&region.endpoint())
+        let enrichments_service_channel: Channel = Endpoint::from_str(&region.grpc_endpoint())
             .unwrap()
             .connect_lazy();
         let auth_data: AuthData = (&api_key).into();

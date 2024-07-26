@@ -1,0 +1,172 @@
+syntax = "proto3";
+
+package com.coralogix.permissions.v1;
+
+import "com/coralogix/permissions/v1/common.proto";
+import "com/coralogix/permissions/v1/actions_resources.proto";
+import "com/coralogix/permissions/models/v1/permission_definitions.proto";
+import "google/protobuf/timestamp.proto";
+
+/// A filter type describes how to match a filter against an input string
+enum FilterType{
+  FILTER_TYPE_UNSPECIFIED = 0;
+  /// Matches if string starts with filter
+  FILTER_TYPE_STARTS_WITH = 1;
+  /// Matches if string ends with filter
+  FILTER_TYPE_ENDS_WITH = 2;
+  /// Matches if string contains filter
+  FILTER_TYPE_CONTAINS = 3;
+  /// Matches if string exactly matches filter
+  FILTER_TYPE_EXACT = 4;
+}
+
+/// A scope filter, given a filter term and a filter type is used to configure filter capabilities
+message ScopeFilter {
+  /// The filter term to use as a matching reference.
+  string term = 1;
+  /// The filter type. i.e. given a term prod and filter type FilterType.STARTS_WITH the string production will pass the filter.
+  FilterType filter_type = 2;
+}
+
+/// Scope filters are currently possible to be defined for subsystems and applications
+message ScopeFilters {
+  /// List of subsystem scope filters
+  repeated ScopeFilter subsystems = 1;
+  /// List of applications scope filters
+  repeated ScopeFilter applications = 2;
+}
+
+/// A group scope has a list of filters for subsystems and applications. Used to filter traffic based on user defined rules.
+message Scope {
+  /// Unique scope identifier
+  ScopeId id = 1;
+  /// The filters definition
+  ScopeFilters filters = 2;
+}
+
+/// User status
+enum UserStatus {
+  USER_STATUS_UNSPECIFIED = 0;
+  /// User is active
+  USER_STATUS_ACTIVE = 1;
+  /// User is inactive
+  USER_STATUS_INACTIVE = 2;
+}
+
+/// An user is an entity that is always part of a team and has an account associated with it
+message User {
+  /// Unique user id
+  UserId user_id = 1;
+  /// Associated account id. An account can have many users.
+  UserAccountId user_account_id = 2;
+  /// Unique username
+  string username = 3;
+  /// User first name
+  string first_name = 4;
+  /// User last name
+  string last_name = 5;
+  /// User status: [Active, Inactive]
+  UserStatus status = 6;
+}
+
+/// A group role. Each role has a collection of permissions associated with it. A group can have many roles.
+message Role {
+  /// Unique role identifier
+  RoleId role_id = 1;
+  /// Unique role name
+  string name = 2;
+  string description = 3;
+}
+
+message TeamGroupSummary {
+  TeamGroupId id = 1;
+  string name = 2;
+  uint32 user_count = 3;
+}
+
+message SystemRole {
+  RoleId role_id = 1;
+  string name = 2;
+  string description = 3;
+}
+
+message CustomRole {
+  RoleId role_id = 1;
+  string name = 2;
+  string description = 3;
+  RoleId parent_role_id = 4;
+}
+
+message RoleSummary {
+  oneof role {
+    SystemRole system_role = 1;
+    CustomRole custom_role = 2;
+  }
+  uint32 user_count = 3;
+  repeated TeamGroupSummary groups = 4;
+  repeated PermissionMetadata permissions = 5;
+}
+
+/// Group origin defines in which circumstances the group was created.
+enum GroupOrigin {
+  GROUP_ORIGIN_UNSPECIFIED = 0;
+  /// A built in group is defined by the system and users are not able to alter them.
+  GROUP_ORIGIN_BUILT_IN = 1;
+  /// User defined or custom role.
+  GROUP_ORIGIN_USER_DEFINED = 2;
+}
+
+/// An organisation group
+message OrgGroup {
+  /// Unique organisation group identifier
+  OrgGroupId org_group_id = 1;
+  /// Unique name
+  string name = 2;
+  /// Organisation this group belongs to
+  OrganizationId org_id = 3;
+  /// Associated organisation roles
+  repeated Role roles = 4;
+}
+
+message TeamGroup {
+  /// Unique team group identifier
+  TeamGroupId group_id = 1;
+  /// Unique name
+  string name = 2;
+  /// Group description
+  optional string description = 3;
+  /// Group external identifier. Applies if team is externally defined.
+  optional string external_id = 4;
+  /// Built in groups are not user made. They were created by the system.
+  GroupOrigin group_origin = 5;
+  /// Team this group belongs to
+  TeamId team_id = 6;
+  /// Associated team roles
+  repeated Role roles = 7;
+  /// Associated scope
+  optional Scope scope = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+  optional string next_gen_scope_id = 11;
+}
+
+message PermissionGroupMetadata {
+  com.coralogix.permissions.models.v1.PermissionGroup permission_group = 1;
+  string name = 2;
+  string description = 3;
+  string display_name = 4;
+}
+
+message PermissionMetadata {
+  com.coralogix.permissions.models.v1.Permission permission = 1;
+  PermissionGroupMetadata permission_group = 2;
+  string expression = 3;
+  string description = 4;
+  Action action = 5;
+  Resource resource = 6;
+  string doc_link = 7;
+  string explanation = 8;
+  bool is_send_data = 9;
+}
+
+

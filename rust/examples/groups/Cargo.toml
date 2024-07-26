@@ -1,0 +1,14 @@
+[package]
+name = "groups"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"

@@ -59,3 +59,9 @@ pub mod webhooks;
 
 /// This module contains the client for the Scopes API.
 pub mod scopes;
+
+/// This module contains the client for the Groups API.
+pub mod groups;
+
+/// This module contains the client for the SCIM API.
+pub mod users;

@@ -1,0 +1,73 @@
+package examples
+
+import (
+	"context"
+	cxsdk "coralogix-management-sdk/go"
+	v1 "coralogix-management-sdk/go/internal/coralogix/permissions/v1"
+	"os"
+	"strconv"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
+)
+
+func TestGroups(t *testing.T) {
+	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
+	assert.Nil(t, err)
+	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+	c := cxsdk.NewGroupsClient(creator)
+
+	groups, err := c.List(context.Background(), &v1.GetTeamGroupsRequest{
+		TeamId: &v1.TeamId{
+			Id: uint32(teamId),
+		},
+	})
+	assert.Nil(t, err)
+	assert.Greater(t, len(groups.Groups), 0)
+
+	groupDesc := "A Test Group"
+
+	createdGroup, err := c.Create(context.Background(), &v1.CreateTeamGroupRequest{
+		Name: "Test Group",
+		TeamId: &v1.TeamId{
+			Id: uint32(teamId),
+		},
+		Description: &groupDesc,
+		ExternalId:  nil,
+		RoleIds: []*v1.RoleId{
+			{Id: 1},
+		},
+		UserIds: []*v1.UserId{},
+	})
+
+	assert.Nil(t, err)
+
+	retrievedGroup, err := c.Get(context.Background(), &v1.GetTeamGroupRequest{
+		GroupId: &v1.TeamGroupId{
+			Id: createdGroup.GroupId.Id,
+		},
+	})
+
+	assert.Nil(t, err)
+	assert.Equal(t, createdGroup.GroupId.Id, retrievedGroup.Group.GroupId.Id)
+
+	_, updateError := c.Update(context.Background(), &v1.UpdateTeamGroupRequest{
+		GroupId:     createdGroup.GroupId,
+		Name:        "Updated Test Group",
+		Description: &groupDesc,
+	})
+
+	assert.Nil(t, updateError)
+
+	_, deletionError := c.Delete(context.Background(), &v1.DeleteTeamGroupRequest{
+		GroupId: &v1.TeamGroupId{
+			Id: createdGroup.GroupId.Id,
+		},
+	})
+
+	assert.Nil(t, deletionError)
+}

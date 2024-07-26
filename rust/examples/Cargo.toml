@@ -9,8 +9,8 @@ members = [
     "archive-metrics",
     "dashboards",
     "data-sets",
-    "dataprime-query",
+    "dataprime-query", "groups",
     "outgoing-webhooks",
     "scopes",
-    "teams",
+    "teams", "users",
 ]

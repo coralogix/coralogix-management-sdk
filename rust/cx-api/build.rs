@@ -66,6 +66,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         scopes_service(),
         #[cfg(feature = "slos")]
         slos_service(),
+        #[cfg(feature = "groups")]
+        groups_service(),
     ]
     .concat();
 
@@ -188,4 +190,8 @@ fn scopes_service() -> &'static [&'static str] {
 
 fn slos_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/apm/services/v1/service_slo_service.proto"]
+}
+
+fn groups_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto"]
 }

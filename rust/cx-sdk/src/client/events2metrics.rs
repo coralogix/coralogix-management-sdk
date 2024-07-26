@@ -52,7 +52,7 @@ impl Events2MetricsClient {
     /// * `api_key` - The [`ApiKey`] to use for authentication.
     /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
-        let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
+        let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();
         Ok(Self {
             metadata_map: auth_data.to_metadata_map(),

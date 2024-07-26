@@ -25,7 +25,7 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	region, err := cxsdk.CoralogixRegionFromEnv()
+	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
