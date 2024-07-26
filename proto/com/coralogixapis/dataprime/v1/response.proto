@@ -27,6 +27,7 @@ message DataprimeWarning {
     BlocksLimitWarning blocks_limit_warning = 6;
     AggregationBucketsLimitWarning aggregation_buckets_limit_warning = 7;
     ArchiveWarning archive_warning = 8;
+    ScrollTimeoutWarning scroll_timeout_warning = 9;
   }
 }
 
@@ -124,3 +125,5 @@ message ArchiveWarning {
   message MissingData {
   }
 }
+
+message ScrollTimeoutWarning {}

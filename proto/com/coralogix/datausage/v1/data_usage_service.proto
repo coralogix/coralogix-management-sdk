@@ -65,6 +65,10 @@ service DataUsageService {
   rpc GetDetailedDataUsage(GetDetailedDataUsageRequest) returns (stream GetDetailedDataUsageResponse) {
     option (audit_log_description).description = "Get Team Data Usage broken down to dimensions";
   }
+
+  rpc GetDetailedDataUsageChunked(GetDetailedDataUsageChunkedRequest) returns (stream GetDetailedDataUsageChunkedResponse) {
+    option (audit_log_description).description = "Get Team Data Usage broken down to dimensions (chunked)";
+  }
 }
 
 message GetDataUsageRequest {
@@ -139,6 +143,27 @@ message GetDetailedDataUsageRequest {
   repeated Dimension dimensions = 5;
 }
 
+message GetDetailedDataUsageChunkedRequest {
+  Team team_id = 1;
+  // Date request interval
+  // It can be a flexible date_range or one of the available ranges, for convenience.
+  oneof request_interval {
+    Range range = 2;
+    DateRange date_range = 3;
+  }
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // i.e. 1 min resolution for an interval of 30 days would explode into too many data points.
+  Resolution resolution = 4;
+  // Dimensions to filter by
+  // i.e. if we filter by Dimension [ {"subsystem", "subsystem1"}]
+  //      we only return entries that at least have that dimension i.e. [{"subsystem", "subsystem1"}, {"application", "application1"}]
+  repeated Dimension dimensions = 5;
+}
+
+
 message GetDetailedDataUsageResponse {
   google.protobuf.Timestamp timestamp = 1;
   google.protobuf.FloatValue size = 2;
@@ -146,6 +171,9 @@ message GetDetailedDataUsageResponse {
   repeated Dimension dimensions = 4;
 }
 
+message GetDetailedDataUsageChunkedResponse {
+  repeated GetDetailedDataUsageResponse chunk = 1;
+}
 
 
 

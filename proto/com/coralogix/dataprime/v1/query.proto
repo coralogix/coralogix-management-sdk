@@ -294,18 +294,9 @@ message Failed {
 }
 
 message AwaitReadyResponse {
-  oneof response {
-    Success success = 1;
-    Failed failed = 2;
-  }
+  reserved 1, 2;
 
   QueryStatus status = 3;
-
-  message Success {
-    bool scan_limit_reached = 1;
-    bool blocks_limit_reached = 2;
-    ObjectStoreWarning object_store_warning = 3;
-  }
 }
 
 message GetQueryStatusRequest {
@@ -337,6 +328,8 @@ message QueryStatus {
     ObjectStoreWarning object_store_warning = 6;
 
     uint64 started_at = 7;
+
+    bool scroll_timeout_reached = 8;
   }
 
   message Planning {
