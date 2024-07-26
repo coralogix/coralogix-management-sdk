@@ -1,0 +1,12 @@
+{
+    "licenser.author": "Coralogix Ltd.",
+    "licenser.license": "AL2",
+    "licenser.projectName": "Coralogix Management SDK",
+    "licenser.excludeFileExtensions": [
+        "toml",
+        "proto",
+        "yml",
+        "md",
+        "lock",
+    ],
+}
