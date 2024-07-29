@@ -160,7 +160,7 @@ impl IntegrationsClient {
     }
 
     /// Retrieves the Integration identified by its id.
-    /// 
+    ///
     /// # Arguments
     /// * `id` - The id of the integration to retrieve.
     /// * `include_testing_revision` - Whether to include the testing revision.
@@ -187,7 +187,7 @@ impl IntegrationsClient {
     }
 
     /// Retrieves the Integration definition identified by its id.
-    /// 
+    ///
     /// # Arguments
     /// * `id` - The id of the integration to retrieve.
     /// * `include_testing_revision` - Whether to include the testing revision.
@@ -214,7 +214,7 @@ impl IntegrationsClient {
     }
 
     /// Retrieves the Integration status identified by its id.
-    /// 
+    ///
     /// # Arguments
     /// * `id` - The id of the integration to retrieve.
     pub async fn get_integration_status(
@@ -236,7 +236,7 @@ impl IntegrationsClient {
     }
 
     /// Retrieves the Integration template identified by its id.
-    /// 
+    ///
     /// # Arguments
     /// * `id` - The id of the integration to retrieve.
     pub async fn get_template(&self, id: String) -> Result<GetTemplateResponse> {
@@ -258,7 +258,7 @@ impl IntegrationsClient {
     }
 
     /// Retrieves the RUM application version data.
-    /// 
+    ///
     /// # Arguments
     /// * `application_name` - The name of the application.
     pub async fn get_rum_application_version_data(
@@ -282,7 +282,7 @@ impl IntegrationsClient {
     }
 
     /// Synchronizes the RUM data.
-    /// 
+    ///
     /// # Arguments
     /// * `force` - Whether to force the synchronization.
     pub async fn sync_rum_data(&self, force: bool) -> Result<SyncRumDataResponse> {
