@@ -177,7 +177,7 @@ impl TeamsClient {
             .map_err(From::from)
     }
 
-    /// Retrieves the Team quota.
+    /// Sets the daily Team quota.
     ///
     /// # Arguments
     /// * `team_id` - The id of the team to retrieve.
