@@ -1,4 +1,4 @@
-name: Rust SDK
+name: Rust Examples Docker Image
 
 on:
   push:
