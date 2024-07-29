@@ -25,8 +25,8 @@ type SLOsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateSLO creates a new SLO.
-func (c SLOsClient) CreateSLO(ctx context.Context, req *slos.CreateServiceSloRequest) (*slos.CreateServiceSloResponse, error) {
+// Create creates a new SLO.
+func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloRequest) (*slos.CreateServiceSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (c SLOsClient) CreateSLO(ctx context.Context, req *slos.CreateServiceSloReq
 	return client.CreateServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetSLO gets the specified SLO.
-func (c SLOsClient) GetSLO(ctx context.Context, req *slos.GetServiceSloRequest) (*slos.GetServiceSloResponse, error) {
+// Get gets the specified SLO.
+func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*slos.GetServiceSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (c SLOsClient) GetSLO(ctx context.Context, req *slos.GetServiceSloRequest) 
 	return client.GetServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateSLO updates the specified SLO.
-func (c SLOsClient) UpdateSLO(ctx context.Context, req *slos.ReplaceServiceSloRequest) (*slos.ReplaceServiceSloResponse, error) {
+// Update updates the specified SLO.
+func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloRequest) (*slos.ReplaceServiceSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -67,8 +67,8 @@ func (c SLOsClient) UpdateSLO(ctx context.Context, req *slos.ReplaceServiceSloRe
 	return client.ReplaceServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteSLO deletes the specified SLO.
-func (c SLOsClient) DeleteSLO(ctx context.Context, req *slos.DeleteServiceSloRequest) (*slos.DeleteServiceSloResponse, error) {
+// Delete deletes the specified SLO.
+func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloRequest) (*slos.DeleteServiceSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
