@@ -635,11 +635,6 @@ message Expression {
     Datatype datatype     = 2;
   }
 
-  message MatchSubtree {
-    Keypath path    = 1;
-    Expression term = 2;
-  }
-
   message EnumValue {
     // The name of the enum type, e.g. Severity
     string name  = 1;
