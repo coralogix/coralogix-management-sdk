@@ -188,4 +188,5 @@ enum Action {
   ACTION_GET_SPIKE_ANOMALIES = 49 [(name) = "GetSpikeAnomalies"];
   ACTION_READ_ALL = 50 [(name) = "ReadAll"];
   ACTION_UPDATE_ALL = 51 [(name) = "UpdateAll"];
+  ACTION_READ_SUMMARY = 52 [(name) = "ReadSummary"];
 }
