@@ -2,8 +2,8 @@ package examples
 
 // import (
 // 	"context"
-// 	cxsdk "coralogix-management-sdk/go"
-// 	"coralogix-management-sdk/go/internal/coralogix/metrics"
+// 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+// 	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/metrics"
 // 	"testing"
 
 // 	"github.com/stretchr/testify/assert"

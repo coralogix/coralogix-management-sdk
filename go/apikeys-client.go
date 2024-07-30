@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	apikeys "coralogix-management-sdk/go/internal/coralogixapis/aaa/apikeys/v3"
+
+	apikeys "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/aaa/apikeys/v3"
 )
 
 // ApikeysClient is a client for the Coralogix API keys API.

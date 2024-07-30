@@ -16,8 +16,9 @@ package examples
 
 import (
 	"context"
-	cxsdk "coralogix-management-sdk/go"
 	"testing"
+
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
 	"github.com/stretchr/testify/assert"
 )

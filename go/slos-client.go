@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	slos "coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
+
+	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 )
 
 // SLOsClient is a client for the Coralogix SLOs API.

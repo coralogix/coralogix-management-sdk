@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	scopes "coralogix-management-sdk/go/internal/coralogixapis/scopes/v1"
+
+	scopes "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/scopes/v1"
 )
 
 // CreateScopeRequest is a request to create a new scope

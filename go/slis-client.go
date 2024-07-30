@@ -2,7 +2,8 @@ package cxsdk
 
 import (
 	"context"
-	slis "coralogix-management-sdk/go/internal/coralogix/catalog/v1"
+
+	slis "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/catalog/v1"
 )
 
 // SLIClient is a client for the Coralogix SLI API.

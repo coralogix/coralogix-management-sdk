@@ -2,11 +2,12 @@ package examples
 
 import (
 	"context"
-	cxsdk "coralogix-management-sdk/go"
-	v3 "coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
-	"coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
-	"coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
 	"testing"
+
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	v3 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
+	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
+	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"

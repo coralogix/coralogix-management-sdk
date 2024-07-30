@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	enrichment "coralogix-management-sdk/go/internal/coralogix/enrichment/v1"
+
+	enrichment "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/enrichment/v1"
 )
 
 // EnrichmentsClient is a client for the Coralogix Enrichments API.
