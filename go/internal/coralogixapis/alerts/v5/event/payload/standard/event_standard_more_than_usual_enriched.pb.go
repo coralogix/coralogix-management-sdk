@@ -7,7 +7,7 @@
 package standard
 
 import (
-	metric "coralogix-management-sdk/go/internal/coralogixapis/alerts/v5/event/payload/metric"
+	metric "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v5/event/payload/metric"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

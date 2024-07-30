@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	dashboards "coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
+
+	dashboards "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
 )
 
 // DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.

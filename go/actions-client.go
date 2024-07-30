@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	actions "coralogix-management-sdk/go/internal/coralogixapis/actions/v2"
+
+	actions "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/actions/v2"
 )
 
 // ActionsClient is a client for the Coralogix Actions API.

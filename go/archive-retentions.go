@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	archiveRetention "coralogix-management-sdk/go/internal/coralogix/archive/v1"
+
+	archiveRetention "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v1"
 )
 
 // ArchiveRetentionsClient is a client for the Coralogix Archive Retentions API.

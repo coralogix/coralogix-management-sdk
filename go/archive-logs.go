@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	archiveLogs "coralogix-management-sdk/go/internal/coralogix/archive/v2"
+
+	archiveLogs "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v2"
 )
 
 // ArchiveLogsClient is a client for the Coralogix Archive Logs API.
