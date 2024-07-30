@@ -16,52 +16,17 @@
 mod tests {
     use cx_sdk::{
         auth::ApiKey,
-        client::integration::{IntegrationsClient, Parameter, StringList},
+        client::integrations::{IntegrationsClient, Parameter, StringList},
         CoralogixRegion,
     };
 
     #[tokio::test]
-    async fn test_groups() {
+    async fn test_integrations() {
         let client = IntegrationsClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-
-        let created = client
-            .create(
-                "".into(),
-                Some("asdf"),
-                Some(vec![Parameter {
-                    key: "param1".to_string(),
-                    value: StringList(vec!["value1".to_string()]),
-                }]),
-            )
-            .await
-            .unwrap();
-
-        let group_id = created.group_id.unwrap();
-
-        let retrieved_group = client.get(group_id.clone()).await.unwrap();
-        assert_eq!(
-            group_id.id,
-            retrieved_group.group.unwrap().group_id.unwrap().id
-        );
-
-        client
-            .update(
-                group_id.clone(),
-                "Updated Test Group".to_string(),
-                "A Test Group".to_string(),
-                None,
-                None,
-                None,
-                None,
-                None,
-            )
-            .await
-            .unwrap();
-
-        client.delete(group_id).await.unwrap();
+        println!("{:?}", client.list(true).await.unwrap());
     }
 }

@@ -70,4 +70,4 @@ pub mod groups;
 pub mod users;
 
 /// This module contains the client for the integrations API.
-pub mod integration;
+pub mod integrations;

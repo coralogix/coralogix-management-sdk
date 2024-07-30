@@ -20,7 +20,7 @@ revision = '186f40419a993ce325c93846597ff75c9e2a88a5'
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
 revision = '3b4311e5b4257d5b7fcec7d9799cd363b7249de9'
-allow_policies = ["/com/coralogix/integrations/v1/*"]
+allow_policies = ["/com/coralogix/integrations/v1/*", "/com/coralogix/extensions/v1/*"]
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
