@@ -38,6 +38,7 @@ jobs:
       # - name: test
       #   run: make test 
       - name: Run tests 
+        timeout-minutes: 10
         env:
           CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 

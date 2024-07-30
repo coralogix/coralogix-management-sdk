@@ -25,10 +25,14 @@ use cx_api::proto::com::coralogixapis::apm::services::v1::{
     BatchGetServiceSlosResponse, CreateServiceSloRequest, CreateServiceSloResponse,
     DeleteServiceSloRequest, DeleteServiceSloResponse, GetServiceSloRequest, GetServiceSloResponse,
     ListServiceSlosRequest, ListServiceSlosResponse, ReplaceServiceSloRequest,
-    ReplaceServiceSloResponse, ServiceSlo,
+    ReplaceServiceSloResponse,
 };
 
 pub use cx_api::proto::com::coralogixapis::apm::common::v2::OrderBy;
+pub use cx_api::proto::com::coralogixapis::apm::services::v1::{
+    service_slo::SliType, CompareType, ErrorSli, ServiceSlo, SliFilter, SliMetricType, SloPeriod,
+    SloStatus,
+};
 
 use tokio::sync::Mutex;
 use tonic::{
@@ -96,7 +100,7 @@ impl SloClient {
             .map_err(From::from)
     }
 
-    /// Deletes an Service SLO.
+    /// Deletes a Service SLO.
     ///
     /// # Arguments
     /// * `id` - The id of the Service SLO to delete.

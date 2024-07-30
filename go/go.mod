@@ -3,11 +3,11 @@ module github.com/coralogix/coralogix-management-sdk/go
 go 1.22.4
 
 require (
+	github.com/google/uuid v1.6.0
 	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
 	github.com/stretchr/testify v1.9.0
 	google.golang.org/genproto/googleapis/api v0.0.0-20240711142825-46eb208f015d
 	google.golang.org/grpc v1.65.0
-	github.com/google/uuid v1.6.0
 	google.golang.org/protobuf v1.34.2
 )
 

@@ -46,7 +46,7 @@ release:
 	GOOS=windows GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_windows_amd64.dll
 
 test:
-	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=30s -parallel=4 ./... 
+	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./... 
 
 generate:
 	go generate

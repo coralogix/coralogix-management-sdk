@@ -1641,6 +1641,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "slos"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "smallvec"
 version = "1.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
