@@ -37,6 +37,9 @@ type DeleteActionRequest = actions.DeleteActionRequest
 // GetActionRequest is a request to get an action.
 type GetActionRequest = actions.GetActionRequest
 
+// OrderActionsRequest is a request to order actions.
+type OrderActionsRequest = actions.OrderActionsRequest
+
 // Action is an action.
 type Action = actions.Action
 
@@ -51,8 +54,8 @@ const (
 	SourceTypeSourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
 )
 
-// CreateAction creates a new action.
-func (a ActionsClient) CreateAction(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {
+// Create creates a new action.
+func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -65,8 +68,8 @@ func (a ActionsClient) CreateAction(ctx context.Context, req *CreateActionReques
 	return client.CreateAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetAction gets an action.
-func (a ActionsClient) GetAction(ctx context.Context, req *GetActionRequest) (*actions.GetActionResponse, error) {
+// Get gets an action.
+func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions.GetActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -79,8 +82,8 @@ func (a ActionsClient) GetAction(ctx context.Context, req *GetActionRequest) (*a
 	return client.GetAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateAction updates an action.
-func (a ActionsClient) UpdateAction(ctx context.Context, req *ReplaceActionRequest) (*actions.ReplaceActionResponse, error) {
+// Replace replaces an action.
+func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (*actions.ReplaceActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -93,8 +96,8 @@ func (a ActionsClient) UpdateAction(ctx context.Context, req *ReplaceActionReque
 	return client.ReplaceAction(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteAction deletes an action.
-func (a ActionsClient) DeleteAction(ctx context.Context, req *DeleteActionRequest) (*actions.DeleteActionResponse, error) {
+// Delete deletes an action.
+func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*actions.DeleteActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -105,6 +108,20 @@ func (a ActionsClient) DeleteAction(ctx context.Context, req *DeleteActionReques
 	client := actions.NewActionsServiceClient(conn)
 
 	return client.DeleteAction(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// Order sets the order of actions.
+func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsRequest) (*actions.OrderActionsResponse, error) {
+	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := actions.NewActionsServiceClient(conn)
+
+	return client.OrderActions(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewActionsClient Creates a new actions client.

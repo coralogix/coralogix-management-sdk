@@ -30,6 +30,9 @@ pub mod archive_logs;
 /// This module contains the client for the Archive Metrics API.
 pub mod archive_metrics;
 
+/// This module contains the client for the Archive Retentions API.
+pub mod archive_retentions;
+
 /// This module contains the client for the Dashboards API.
 pub mod dashboards;
 

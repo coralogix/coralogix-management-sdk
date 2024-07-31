@@ -25,8 +25,8 @@ type DashboardsFoldersClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateDashboardsFolder creates a new dashboard folder.
-func (c DashboardsFoldersClient) CreateDashboardsFolder(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
+// Create creates a new dashboard folder.
+func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (c DashboardsFoldersClient) CreateDashboardsFolder(ctx context.Context, req
 	return client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetDashboardsFolders gets all dashboard folders.
-func (c DashboardsFoldersClient) GetDashboardsFolders(ctx context.Context, req *dashboards.ListDashboardFoldersRequest) (*dashboards.ListDashboardFoldersResponse, error) {
+// Get gets all dashboard folders.
+func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.ListDashboardFoldersRequest) (*dashboards.ListDashboardFoldersResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (c DashboardsFoldersClient) GetDashboardsFolders(ctx context.Context, req *
 	return client.ListDashboardFolders(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateDashboardsFolder updates a dashboard folder.
-func (c DashboardsFoldersClient) UpdateDashboardsFolder(ctx context.Context, req *dashboards.ReplaceDashboardFolderRequest) (*dashboards.ReplaceDashboardFolderResponse, error) {
+// Replace updates a dashboard folder.
+func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.ReplaceDashboardFolderRequest) (*dashboards.ReplaceDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -67,8 +67,8 @@ func (c DashboardsFoldersClient) UpdateDashboardsFolder(ctx context.Context, req
 	return client.ReplaceDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteDashboardsFolder deletes a dashboard folder.
-func (c DashboardsFoldersClient) DeleteDashboardsFolder(ctx context.Context, req *dashboards.DeleteDashboardFolderRequest) (*dashboards.DeleteDashboardFolderResponse, error) {
+// Delete deletes a dashboard folder.
+func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.DeleteDashboardFolderRequest) (*dashboards.DeleteDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

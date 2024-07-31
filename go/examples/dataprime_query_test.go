@@ -11,7 +11,7 @@ import (
 )
 
 func TestDataprimeQuery(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

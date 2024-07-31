@@ -13,7 +13,7 @@ import (
 )
 
 func TestSlos(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -63,7 +63,7 @@ func TestSlos(t *testing.T) {
 }
 
 func TestSlosWithFilters(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

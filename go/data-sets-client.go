@@ -46,8 +46,8 @@ type DataSetClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateDataSet creates a new data set.
-func (d DataSetClient) CreateDataSet(ctx context.Context, req *CreateDataSetRequest) (*enrichment.CreateCustomEnrichmentResponse, error) {
+// Create creates a new data set.
+func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*enrichment.CreateCustomEnrichmentResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -61,8 +61,8 @@ func (d DataSetClient) CreateDataSet(ctx context.Context, req *CreateDataSetRequ
 	return client.CreateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetDataSet gets a data set.
-func (d DataSetClient) GetDataSet(ctx context.Context, req *GetDataSetRequest) (*enrichment.GetCustomEnrichmentResponse, error) {
+// Get gets a data set.
+func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrichment.GetCustomEnrichmentResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -76,8 +76,8 @@ func (d DataSetClient) GetDataSet(ctx context.Context, req *GetDataSetRequest) (
 	return client.GetCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateDataSet updates a data set.
-func (d DataSetClient) UpdateDataSet(ctx context.Context, req *UpdateDataSetRequest) (*enrichment.UpdateCustomEnrichmentResponse, error) {
+// Update updates a data set.
+func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*enrichment.UpdateCustomEnrichmentResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -91,8 +91,8 @@ func (d DataSetClient) UpdateDataSet(ctx context.Context, req *UpdateDataSetRequ
 	return client.UpdateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteDataSet deletes a data set.
-func (d DataSetClient) DeleteDataSet(ctx context.Context, req *DeleteDataSetRequest) (*enrichment.DeleteCustomEnrichmentResponse, error) {
+// Delete deletes a data set.
+func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*enrichment.DeleteCustomEnrichmentResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -104,6 +104,21 @@ func (d DataSetClient) DeleteDataSet(ctx context.Context, req *DeleteDataSetRequ
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
 	return client.DeleteCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// List retrieves all data sets.
+func (d DataSetClient) List(ctx context.Context, req *enrichment.GetCustomEnrichmentsRequest) (*enrichment.GetCustomEnrichmentsResponse, error) {
+	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+
+	client := enrichment.NewCustomEnrichmentServiceClient(conn)
+
+	return client.GetCustomEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewDataSetClient creates a new data set client.

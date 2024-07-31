@@ -49,8 +49,8 @@ type TeamsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateTeam creates a new team.
-func (c TeamsClient) CreateTeam(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, error) {
+// Create creates a new team.
+func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -63,8 +63,8 @@ func (c TeamsClient) CreateTeam(ctx context.Context, req *CreateTeamInOrgRequest
 	return client.CreateTeamInOrg(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateTeam updates a team.
-func (c TeamsClient) UpdateTeam(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, error) {
+// Update updates a team.
+func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -77,8 +77,8 @@ func (c TeamsClient) UpdateTeam(ctx context.Context, req *UpdateTeamRequest) (*t
 	return client.UpdateTeam(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetTeam gets a team.
-func (c TeamsClient) GetTeam(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, error) {
+// Get gets a team.
+func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -91,8 +91,8 @@ func (c TeamsClient) GetTeam(ctx context.Context, req *GetTeamRequest) (*teams.G
 	return client.GetTeam(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteTeam deletes a team.
-func (c TeamsClient) DeleteTeam(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, error) {
+// Delete deletes a team.
+func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

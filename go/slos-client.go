@@ -81,6 +81,34 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloReques
 	return client.DeleteServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// GetBulk gets multiple SLOs in a single call.
+func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRequest) (*slos.BatchGetServiceSlosResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := slos.NewServiceSloServiceClient(conn)
+
+	return client.BatchGetServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// List lists all service SLOs.
+func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) (*slos.ListServiceSlosResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := slos.NewServiceSloServiceClient(conn)
+
+	return client.ListServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
 // NewSLOsClient creates a new SLOs client.
 func NewSLOsClient(c *CallPropertiesCreator) *SLOsClient {
 	return &SLOsClient{callPropertiesCreator: c}

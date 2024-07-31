@@ -15,7 +15,7 @@ import (
 func TestGroups(t *testing.T) {
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	assert.Nil(t, err)
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

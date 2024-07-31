@@ -52,8 +52,8 @@ type OwnerTeamID = apikeys.Owner_TeamId
 // OwnerOrganisationID is an owner organisation ID.
 type OwnerOrganisationID = apikeys.Owner_OrganisationId
 
-// CreateAPIKey creates a new API key.
-func (t ApikeysClient) CreateAPIKey(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
+// Create creates a new API key.
+func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -66,8 +66,8 @@ func (t ApikeysClient) CreateAPIKey(ctx context.Context, req *apikeys.CreateApiK
 	return client.CreateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetAPIKey gets an API key.
-func (t ApikeysClient) GetAPIKey(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, error) {
+// Get gets an API key.
+func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -80,8 +80,8 @@ func (t ApikeysClient) GetAPIKey(ctx context.Context, req *apikeys.GetApiKeyRequ
 	return client.GetApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateAPIKey updates an API key.
-func (t ApikeysClient) UpdateAPIKey(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, error) {
+// Update updates an API key.
+func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -94,8 +94,8 @@ func (t ApikeysClient) UpdateAPIKey(ctx context.Context, req *apikeys.UpdateApiK
 	return client.UpdateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteAPIKey deletes an API key.
-func (t ApikeysClient) DeleteAPIKey(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, error) {
+// Delete deletes an API key.
+func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

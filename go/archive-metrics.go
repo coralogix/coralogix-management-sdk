@@ -27,8 +27,8 @@ type ArchiveMetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// UpdateArchiveMetrics updates the archive metrics configuration.
-func (c ArchiveMetricsClient) UpdateArchiveMetrics(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
+// Update updates the archive metrics configuration.
+func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -41,8 +41,8 @@ func (c ArchiveMetricsClient) UpdateArchiveMetrics(ctx context.Context, req *arc
 	return client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetArchiveMetrics gets the archive metrics configuration.
-func (c ArchiveMetricsClient) GetArchiveMetrics(ctx context.Context) (*archiveMetrics.GetTenantConfigResponseV2, error) {
+// Get gets the archive metrics configuration.
+func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenantConfigResponseV2, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,6 +53,63 @@ func (c ArchiveMetricsClient) GetArchiveMetrics(ctx context.Context) (*archiveMe
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	return client.GetTenantConfig(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+}
+
+// ConfigureTenant configures the archive metrics bucket.
+func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
+
+	return client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// ValidateTarget validates the archive metrics bucket.
+func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMetrics.ValidateBucketRequest) error {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
+
+	_, validationErr := client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
+	return validationErr
+}
+
+// Enable enables the metrics archive.
+func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
+
+	return client.EnableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+}
+
+// Disable disables the metrics archive.
+func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
+
+	return client.DisableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
 }
 
 // NewArchiveMetricsClient creates a new archive metrics client.

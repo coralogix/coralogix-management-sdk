@@ -25,8 +25,8 @@ type ArchiveRetentionsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// GetRetentions gets the archive retentions.
-func (c ArchiveRetentionsClient) GetRetentions(ctx context.Context, req *archiveRetention.GetRetentionsRequest) (*archiveRetention.GetRetentionsResponse, error) {
+// Get gets the archive retentions.
+func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.GetRetentionsRequest) (*archiveRetention.GetRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (c ArchiveRetentionsClient) GetRetentions(ctx context.Context, req *archive
 	return client.GetRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateRetentions updates the archive retentions.
-func (c ArchiveRetentionsClient) UpdateRetentions(ctx context.Context, req *archiveRetention.UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, error) {
+// Update updates the archive retentions.
+func (c ArchiveRetentionsClient) Update(ctx context.Context, req *archiveRetention.UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (c ArchiveRetentionsClient) UpdateRetentions(ctx context.Context, req *arch
 	return client.UpdateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// ActivateRetentions activates the archive retentions.
-func (c ArchiveRetentionsClient) ActivateRetentions(ctx context.Context, req *archiveRetention.ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
+// Activate activates the archive retentions.
+func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *archiveRetention.ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -67,8 +67,8 @@ func (c ArchiveRetentionsClient) ActivateRetentions(ctx context.Context, req *ar
 	return client.ActivateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetRetentionsEnabled returns a boolean that signals whether archive retentions are enabled.
-func (c ArchiveRetentionsClient) GetRetentionsEnabled(ctx context.Context, req *archiveRetention.GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, error) {
+// GetEnabled returns a boolean that signals whether archive retentions are enabled.
+func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *archiveRetention.GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

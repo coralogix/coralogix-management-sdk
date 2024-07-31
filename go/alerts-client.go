@@ -128,13 +128,19 @@ type CreateAlertRequest = alerts.CreateAlertDefRequest
 // AlertDefProperties is the properties of an alert.
 type AlertDefProperties = alerts.AlertDefProperties
 
+// SetActiveRequest is a request to set the active status of an alert.
+type SetActiveRequest = alerts.SetActiveRequest
+
+// ListAlertDefsRequest is a request to list alerts.
+type ListAlertDefsRequest = alerts.ListAlertDefsRequest
+
 // AlertsClient is a client for the Coralogix Alerts API.
 type AlertsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateAlert creates an alert.
-func (a AlertsClient) CreateAlert(ctx context.Context, req *alerts.CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
+// Create creates an alert.
+func (a AlertsClient) Create(ctx context.Context, req *alerts.CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -147,8 +153,8 @@ func (a AlertsClient) CreateAlert(ctx context.Context, req *alerts.CreateAlertDe
 	return client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetAlert gets an alert.
-func (a AlertsClient) GetAlert(ctx context.Context, req *alerts.GetAlertDefRequest) (*alerts.GetAlertDefResponse, error) {
+// Get gets an alert.
+func (a AlertsClient) Get(ctx context.Context, req *alerts.GetAlertDefRequest) (*alerts.GetAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -161,8 +167,8 @@ func (a AlertsClient) GetAlert(ctx context.Context, req *alerts.GetAlertDefReque
 	return client.GetAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateAlert updates an alert.
-func (a AlertsClient) UpdateAlert(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
+// Replace replaces an alert.
+func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -175,8 +181,8 @@ func (a AlertsClient) UpdateAlert(ctx context.Context, req *alerts.ReplaceAlertD
 	return client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteAlert deletes an alert.
-func (a AlertsClient) DeleteAlert(ctx context.Context, req *alerts.DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, error) {
+// Delete deletes an alert.
+func (a AlertsClient) Delete(ctx context.Context, req *alerts.DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -187,6 +193,34 @@ func (a AlertsClient) DeleteAlert(ctx context.Context, req *alerts.DeleteAlertDe
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	return client.DeleteAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// Set sets the active status of an alert.
+func (a AlertsClient) Set(ctx context.Context, req *alerts.SetActiveRequest) (*alerts.SetActiveResponse, error) {
+	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := alerts.NewAlertDefsServiceClient(conn)
+
+	return client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// List lists the alerts.
+func (a AlertsClient) List(ctx context.Context, req *alerts.ListAlertDefsRequest) (*alerts.ListAlertDefsResponse, error) {
+	callProperties, err := a.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := alerts.NewAlertDefsServiceClient(conn)
+
+	return client.ListAlertDefs(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewAlertsClient creates a new alerts client.

@@ -26,7 +26,7 @@ import (
 )
 
 func TestDataSets(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -37,7 +37,7 @@ func TestDataSets(t *testing.T) {
 	assert.Nil(t, e)
 	textual := string(raw)
 
-	data, e := c.CreateDataSet(context.Background(), &cxsdk.CreateDataSetRequest{
+	data, e := c.Create(context.Background(), &cxsdk.CreateDataSetRequest{
 		Name:        wrapperspb.String("my-enrichment"),
 		Description: wrapperspb.String("My custom enrichment description"),
 		File: &cxsdk.File{
@@ -50,7 +50,7 @@ func TestDataSets(t *testing.T) {
 	})
 	assert.Nil(t, e)
 
-	updated, e := c.UpdateDataSet(context.Background(), &cxsdk.UpdateDataSetRequest{
+	updated, e := c.Update(context.Background(), &cxsdk.UpdateDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(data.CustomEnrichment.Id),
 		Description:        wrapperspb.String("My updated enrichment description"),
 		File: &cxsdk.File{
@@ -62,14 +62,14 @@ func TestDataSets(t *testing.T) {
 		},
 	})
 	assert.Nil(t, e)
-	fetched, e := c.GetDataSet(context.Background(), &cxsdk.GetDataSetRequest{
+	fetched, e := c.Get(context.Background(), &cxsdk.GetDataSetRequest{
 		Id: wrapperspb.UInt32(updated.CustomEnrichment.Id),
 	})
 	assert.Nil(t, e)
 
 	assert.Equal(t, updated.CustomEnrichment.Description, fetched.CustomEnrichment.Description)
 	assert.Equal(t, data.CustomEnrichment.Version+1, fetched.CustomEnrichment.Version)
-	c.DeleteDataSet(context.Background(), &cxsdk.DeleteDataSetRequest{
+	c.Delete(context.Background(), &cxsdk.DeleteDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(fetched.CustomEnrichment.Id),
 	})
 }
