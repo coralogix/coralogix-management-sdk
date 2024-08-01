@@ -22,6 +22,7 @@ ADD . /app
 WORKDIR /app/rust/examples
 ADD $PB_REL/download/v25.1/protoc-25.1-linux-x86_64.zip /tmp
 RUN apt update && \
-    apt install -y unzip pkg-config libssl-dev && \
+    apt install -y unzip pkg-config libssl-dev curl && \
     unzip /tmp/protoc-25.1-linux-x86_64.zip -d /usr && \
+    curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin && \
     cargo build --tests
