@@ -14,11 +14,36 @@
 
 #[cfg(test)]
 mod tests {
+    use std::env;
+
     use cx_sdk::{
         auth::ApiKey,
-        client::integrations::{IntegrationsClient, Parameter, StringList},
+        client::integrations::{IntegrationsClient, Parameter, StringList, Value},
         CoralogixRegion,
     };
+
+    fn bp<S: Into<String>>(k: S, v: bool) -> Parameter {
+        Parameter {
+            key: k.into(),
+            value: Some(Value::BooleanValue(v)),
+        }
+    }
+
+    fn sp<S: Into<String>>(k: S, v: S) -> Parameter {
+        Parameter {
+            key: k.into(),
+            value: Some(Value::StringValue(v.into())),
+        }
+    }
+
+    fn sl<S: Into<String>>(k: S, v: Vec<S>) -> Parameter {
+        Parameter {
+            key: k.into(),
+            value: Some(Value::StringList(StringList {
+                values: v.into_iter().map(Into::into).collect(),
+            })),
+        }
+    }
 
     #[tokio::test]
     async fn test_integrations() {
@@ -27,6 +52,27 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-        println!("{:?}", client.list(true).await.unwrap());
+
+        let role = env::var("AWS_TEST_ROLE").unwrap();
+        println!("{:?}", client.list(false).await.unwrap());
+        // AWS Metrics Collector Integration Setup
+        let create = client
+            .create(
+                "aws-metrics-collector".into(),
+                Some("0.1.0".into()),
+                Some(vec![
+                    sp("ApplicationName", "cxsdk"),
+                    sp("SubsystemName", "aws-metrics-collector"),
+                    sl("MetricNamespaces", vec!["AWS/S3"]),
+                    sp("AwsRoleArn", &role),
+                    sp("IntegrationName", "sdk-integration-setup"),
+                    sp("AwsRegion", "eu-north-1"),
+                    bp("WithAggregations", false),
+                    bp("EnrichWithTags", true),
+                ]),
+            )
+            .await
+            .unwrap();
+        client.delete(create.integration_id.unwrap()).await.unwrap();
     }
 }
