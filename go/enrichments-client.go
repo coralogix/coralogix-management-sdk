@@ -25,8 +25,8 @@ type EnrichmentsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateEnrichments creates a new enrichment.
-func (e EnrichmentsClient) CreateEnrichments(ctx context.Context, req *enrichment.AddEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+// Create creates a new enrichment.
+func (e EnrichmentsClient) Create(ctx context.Context, req *enrichment.AddEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -47,8 +47,8 @@ func (e EnrichmentsClient) CreateEnrichments(ctx context.Context, req *enrichmen
 	return enrichments[from:to], nil
 }
 
-// GetEnrichmentsByType gets all enrichments of a certain type.
-func (e EnrichmentsClient) GetEnrichmentsByType(ctx context.Context, enrichmentType string) ([]*enrichment.Enrichment, error) {
+// GetByType gets all enrichments of a certain type.
+func (e EnrichmentsClient) GetByType(ctx context.Context, enrichmentType string) ([]*enrichment.Enrichment, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -73,8 +73,8 @@ func (e EnrichmentsClient) GetEnrichmentsByType(ctx context.Context, enrichmentT
 	return result, nil
 }
 
-// GetCustomEnrichments gets all custom enrichments.
-func (e EnrichmentsClient) GetCustomEnrichments(ctx context.Context, customEnrichmentID uint32) ([]*enrichment.Enrichment, error) {
+// Get gets all custom enrichments.
+func (e EnrichmentsClient) Get(ctx context.Context, customEnrichmentID uint32) ([]*enrichment.Enrichment, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -99,8 +99,8 @@ func (e EnrichmentsClient) GetCustomEnrichments(ctx context.Context, customEnric
 	return result, nil
 }
 
-// DeleteEnrichments deletes the specified enrichments.
-func (e EnrichmentsClient) DeleteEnrichments(ctx context.Context, req *enrichment.RemoveEnrichmentsRequest) error {
+// Delete deletes the specified enrichments.
+func (e EnrichmentsClient) Delete(ctx context.Context, req *enrichment.RemoveEnrichmentsRequest) error {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return err
@@ -113,6 +113,41 @@ func (e EnrichmentsClient) DeleteEnrichments(ctx context.Context, req *enrichmen
 
 	_, err = client.RemoveEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 	return err
+}
+
+// List returns all enrichments.
+func (e EnrichmentsClient) List(ctx context.Context, req *enrichment.GetEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+
+	client := enrichment.NewEnrichmentServiceClient(conn)
+
+	resp, err := client.GetEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, err
+	}
+
+	return resp.GetEnrichments(), nil
+}
+
+// GetLimits returns the enrichment limits.
+func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrichmentLimitResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+
+	client := enrichment.NewEnrichmentServiceClient(conn)
+
+	return client.GetEnrichmentLimit(callProperties.Ctx, &enrichment.GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
 }
 
 // NewEnrichmentClient creates a new enrichments client.

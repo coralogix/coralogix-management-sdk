@@ -1,11 +1,11 @@
 // Copyright 2024 Coralogix Ltd.
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     https://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -47,7 +47,7 @@ impl ArchiveRetentionClient {
     /// * `api_key` - The [`ApiKey`] to use for authentication.
     /// * `region` - The [`CoralogixRegion`] to connect to.
     pub fn new(api_key: ApiKey, region: CoralogixRegion) -> Result<Self> {
-        let channel: Channel = Endpoint::from_str(region.endpoint().as_str())?.connect_lazy();
+        let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?.connect_lazy();
         let auth_data: AuthData = (&api_key).into();
         Ok(Self {
             metadata_map: auth_data.to_metadata_map(),
@@ -56,7 +56,7 @@ impl ArchiveRetentionClient {
     }
 
     /// Retrieves the retention settings for a tenant.
-    pub async fn get_retentions(&self) -> Result<GetRetentionsResponse> {
+    pub async fn get(&self) -> Result<GetRetentionsResponse> {
         Ok(self
             .service_client
             .lock()
@@ -70,7 +70,7 @@ impl ArchiveRetentionClient {
     }
 
     /// Retrieves the enabled retention settings for a tenant.
-    pub async fn get_enabled_retentions(&self) -> Result<GetRetentionsEnabledResponse> {
+    pub async fn get_enabled(&self) -> Result<GetRetentionsEnabledResponse> {
         Ok(self
             .service_client
             .lock()

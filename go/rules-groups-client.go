@@ -25,8 +25,8 @@ type RuleGroupsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateRuleGroup creates a new rule group.
-func (r RuleGroupsClient) CreateRuleGroup(ctx context.Context, req *rulesgroups.CreateRuleGroupRequest) (*rulesgroups.CreateRuleGroupResponse, error) {
+// Create creates a new rule group.
+func (r RuleGroupsClient) Create(ctx context.Context, req *rulesgroups.CreateRuleGroupRequest) (*rulesgroups.CreateRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (r RuleGroupsClient) CreateRuleGroup(ctx context.Context, req *rulesgroups.
 	return client.CreateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetRuleGroup gets a rule group.
-func (r RuleGroupsClient) GetRuleGroup(ctx context.Context, req *rulesgroups.GetRuleGroupRequest) (*rulesgroups.GetRuleGroupResponse, error) {
+// Get gets a rule group.
+func (r RuleGroupsClient) Get(ctx context.Context, req *rulesgroups.GetRuleGroupRequest) (*rulesgroups.GetRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (r RuleGroupsClient) GetRuleGroup(ctx context.Context, req *rulesgroups.Get
 	return client.GetRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateRuleGroup updates a rule group.
-func (r RuleGroupsClient) UpdateRuleGroup(ctx context.Context, req *rulesgroups.UpdateRuleGroupRequest) (*rulesgroups.UpdateRuleGroupResponse, error) {
+// Update updates a rule group.
+func (r RuleGroupsClient) Update(ctx context.Context, req *rulesgroups.UpdateRuleGroupRequest) (*rulesgroups.UpdateRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -68,8 +68,8 @@ func (r RuleGroupsClient) UpdateRuleGroup(ctx context.Context, req *rulesgroups.
 	return client.UpdateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteRuleGroup deletes a rule group.
-func (r RuleGroupsClient) DeleteRuleGroup(ctx context.Context, req *rulesgroups.DeleteRuleGroupRequest) (*rulesgroups.DeleteRuleGroupResponse, error) {
+// Delete deletes a rule group.
+func (r RuleGroupsClient) Delete(ctx context.Context, req *rulesgroups.DeleteRuleGroupRequest) (*rulesgroups.DeleteRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

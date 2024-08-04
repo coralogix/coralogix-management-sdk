@@ -10,7 +10,7 @@ import (
 )
 
 func TestUsers(t *testing.T) {
-	endpoint, err := cxsdk.CoralogixRestEndpointFromEnv()
+	endpoint, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

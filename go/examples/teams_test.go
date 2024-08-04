@@ -12,14 +12,14 @@ import (
 func TestTeams(t *testing.T) {
 	t.Skip("Skipping integration test")
 
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewTeamsClient(creator)
 
-	team1, e := c.CreateTeam(context.Background(), &cxsdk.CreateTeamInOrgRequest{
+	team1, e := c.Create(context.Background(), &cxsdk.CreateTeamInOrgRequest{
 		TeamName: "team_1",
 		TeamAdminsEmail: []string{
 			"admin@coralogix.com",
@@ -28,7 +28,7 @@ func TestTeams(t *testing.T) {
 	})
 	assert.Nil(t, e)
 
-	team2, e := c.CreateTeam(context.Background(), &cxsdk.CreateTeamInOrgRequest{
+	team2, e := c.Create(context.Background(), &cxsdk.CreateTeamInOrgRequest{
 		TeamName: "team_2",
 		TeamAdminsEmail: []string{
 			"admin@coralogix.com",
@@ -38,13 +38,13 @@ func TestTeams(t *testing.T) {
 	assert.Nil(t, e)
 
 	team_1_updated_name := "team_1_updated"
-	_, e = c.UpdateTeam(context.Background(), &cxsdk.UpdateTeamRequest{
+	_, e = c.Update(context.Background(), &cxsdk.UpdateTeamRequest{
 		TeamName: &team_1_updated_name,
 	})
 
 	assert.Nil(t, e)
 
-	updated, e := c.GetTeam(context.Background(), &cxsdk.GetTeamRequest{
+	updated, e := c.Get(context.Background(), &cxsdk.GetTeamRequest{
 		TeamId: team1.TeamId,
 	})
 
@@ -67,7 +67,7 @@ func TestTeams(t *testing.T) {
 
 	assert.Nil(t, moveQuotaError)
 
-	_, deletionError := c.DeleteTeam(context.Background(), &cxsdk.DeleteTeamRequest{
+	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteTeamRequest{
 		TeamId: team1.TeamId,
 	})
 

@@ -25,8 +25,8 @@ type Events2MetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateEvents2Metric Creates a new metric.
-func (e Events2MetricsClient) CreateEvents2Metric(ctx context.Context, req *e2m.CreateE2MRequest) (*e2m.CreateE2MResponse, error) {
+// Create Creates a new metric.
+func (e Events2MetricsClient) Create(ctx context.Context, req *e2m.CreateE2MRequest) (*e2m.CreateE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (e Events2MetricsClient) CreateEvents2Metric(ctx context.Context, req *e2m.
 	return client.CreateE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetEvents2Metric gets a metric.
-func (e Events2MetricsClient) GetEvents2Metric(ctx context.Context, req *e2m.GetE2MRequest) (*e2m.GetE2MResponse, error) {
+// Get gets a metric.
+func (e Events2MetricsClient) Get(ctx context.Context, req *e2m.GetE2MRequest) (*e2m.GetE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -53,8 +53,8 @@ func (e Events2MetricsClient) GetEvents2Metric(ctx context.Context, req *e2m.Get
 	return client.GetE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateEvents2Metric updates a metric.
-func (e Events2MetricsClient) UpdateEvents2Metric(ctx context.Context, req *e2m.ReplaceE2MRequest) (*e2m.ReplaceE2MResponse, error) {
+// Replace replaces a metric.
+func (e Events2MetricsClient) Replace(ctx context.Context, req *e2m.ReplaceE2MRequest) (*e2m.ReplaceE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -67,8 +67,8 @@ func (e Events2MetricsClient) UpdateEvents2Metric(ctx context.Context, req *e2m.
 	return client.ReplaceE2M(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteEvents2Metric deletes a metric.
-func (e Events2MetricsClient) DeleteEvents2Metric(ctx context.Context, req *e2m.DeleteE2MRequest) (*e2m.DeleteE2MResponse, error) {
+// Delete deletes a metric.
+func (e Events2MetricsClient) Delete(ctx context.Context, req *e2m.DeleteE2MRequest) (*e2m.DeleteE2MResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -79,6 +79,34 @@ func (e Events2MetricsClient) DeleteEvents2Metric(ctx context.Context, req *e2m.
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	return client.DeleteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// ListLabelsCardinality lists the cardinality of labels for a given metric.
+func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *e2m.ListLabelsCardinalityRequest) (*e2m.ListLabelsCardinalityResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := e2m.NewEvents2MetricServiceClient(conn)
+
+	return client.ListLabelsCardinality(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// List lists all metrics
+func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := e2m.NewEvents2MetricServiceClient(conn)
+
+	return client.ListE2M(callProperties.Ctx, &e2m.ListE2MRequest{}, callProperties.CallOptions...)
 }
 
 // NewEvents2MetricsClient creates a new Events2MetricsClient.

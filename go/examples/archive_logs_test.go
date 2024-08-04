@@ -12,14 +12,14 @@ import (
 
 func TestArchiveLogs(t *testing.T) {
 
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewArchiveLogsClient(creator)
 	s3Region := "eu-north-1"
-	_, setTargetError := c.UpdateArchiveLogs(context.Background(), &v2.SetTargetRequest{
+	_, setTargetError := c.Update(context.Background(), &v2.SetTargetRequest{
 		TargetSpec: &v2.SetTargetRequest_S3{
 			S3: &v2.S3TargetSpec{
 				Bucket: "yak-2-bucket",
@@ -29,7 +29,7 @@ func TestArchiveLogs(t *testing.T) {
 	})
 	assert.Nil(t, setTargetError)
 
-	_, getTargetError := c.GetArchiveLogs(context.Background())
+	_, getTargetError := c.Get(context.Background())
 
 	assert.Nil(t, getTargetError)
 }

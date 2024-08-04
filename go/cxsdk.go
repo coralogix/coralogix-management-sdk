@@ -39,7 +39,6 @@ type ClientSet struct {
 	slos              *SLOsClient
 	scopes            *ScopesClient
 	apiKeys           *ApikeysClient
-	slis              *SLIClient
 	users             *UsersClient
 	groups            *GroupsClient
 }
@@ -86,11 +85,6 @@ func (c *ClientSet) Webhooks() *WebhooksClient {
 // Events2Metrics gets an Events2MetricsClient from the ClientSet.
 func (c *ClientSet) Events2Metrics() *Events2MetricsClient {
 	return c.events2Metrics
-}
-
-// SLIs gets an SLIClient from the ClientSet.
-func (c *ClientSet) SLIs() *SLIClient {
-	return c.slis
 }
 
 // ArchiveRetentions gets an ArchiveRetentionsClient from the ClientSet.
@@ -177,53 +171,54 @@ const EnvCoralogxRegion = "CORALOGIX_REGION"
 // EnvCoralogixAPIKey is the name of the environment variable that contains the Coralogix API key.
 const EnvCoralogixAPIKey = "CORALOGIX_API_KEY"
 
-// CoralogixGrpcEndpointFromEnv reads the Coralogix region from environment variables.
-func CoralogixGrpcEndpointFromEnv() (string, error) {
+// CoralogixRegionFromEnv reads the Coralogix region from environment variables.
+func CoralogixRegionFromEnv() (string, error) {
 	regionIdentifier := strings.ToLower(os.Getenv(EnvCoralogxRegion))
+
 	if regionIdentifier == "" {
 		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogxRegion)
 	}
+	return regionIdentifier, nil
+}
 
+// CoralogixGrpcEndpointFromRegion reads the Coralogix region from environment variables.
+func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 	switch regionIdentifier {
 	case "us1":
-		return GrpcUS1, nil
+		return GrpcUS1
 	case "us2":
-		return GrpcUS2, nil
+		return GrpcUS2
 	case "eu1":
-		return GrpcEU1, nil
+		return GrpcEU1
 	case "eu2":
-		return GrpcEU2, nil
+		return GrpcEU2
 	case "ap1":
-		return GrpcAP1, nil
+		return GrpcAP1
 	case "ap2":
-		return GrpcAP2, nil
+		return GrpcAP2
 	default:
-		return regionIdentifier, nil
+		return regionIdentifier
 	}
 }
 
-// CoralogixRestEndpointFromEnv reads the Coralogix REST endpoint from environment variables.
-func CoralogixRestEndpointFromEnv() (string, error) {
-	regionIdentifier := strings.ToLower(os.Getenv(EnvCoralogxRegion))
-	if regionIdentifier == "" {
-		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogxRegion)
-	}
+// CoralogixRestEndpointFromRegion reads the Coralogix REST endpoint from environment variables.
+func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 
 	switch regionIdentifier {
 	case "us1":
-		return RestUS1, nil
+		return RestUS1
 	case "us2":
-		return RestUS2, nil
+		return RestUS2
 	case "eu1":
-		return RestEU1, nil
+		return RestEU1
 	case "eu2":
-		return RestEU2, nil
+		return RestEU2
 	case "ap1":
-		return RestAP1, nil
+		return RestAP1
 	case "ap2":
-		return RestAP2, nil
+		return RestAP2
 	default:
-		return regionIdentifier, nil
+		return regionIdentifier
 	}
 }
 

@@ -24,7 +24,7 @@ import (
 )
 
 func TestAlertScheduler(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -46,7 +46,7 @@ func TestAlertScheduler(t *testing.T) {
 			},
 		},
 	}
-	createAlertSchedulerResponse, e := a.CreateAlertScheduler(context.Background(), &cxsdk.CreateAlertSchedulerRuleRequest{
+	createAlertSchedulerResponse, e := a.Create(context.Background(), &cxsdk.CreateAlertSchedulerRuleRequest{
 		AlertSchedulerRule: &cxsdk.AlertSchedulerRule{
 			Name:        "example",
 			Description: &description,
@@ -71,7 +71,7 @@ func TestAlertScheduler(t *testing.T) {
 	alertScheduler := createAlertSchedulerResponse.AlertSchedulerRule
 	alertScheduler.Name = "MyAlertUpdated"
 
-	updateAlertSchedulerResponse, e := a.UpdateAlertScheduler(context.Background(), &cxsdk.UpdateAlertSchedulerRuleRequest{
+	updateAlertSchedulerResponse, e := a.Update(context.Background(), &cxsdk.UpdateAlertSchedulerRuleRequest{
 		AlertSchedulerRule: alertScheduler,
 	})
 
@@ -79,7 +79,7 @@ func TestAlertScheduler(t *testing.T) {
 
 	assert.Equal(t, updateAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
-	getAlertSchedulerResponse, e := a.GetAlertScheduler(context.Background(), &cxsdk.GetAlertSchedulerRuleRequest{
+	getAlertSchedulerResponse, e := a.Get(context.Background(), &cxsdk.GetAlertSchedulerRuleRequest{
 		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
 
@@ -87,7 +87,7 @@ func TestAlertScheduler(t *testing.T) {
 
 	assert.Equal(t, getAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
-	_, error := a.DeleteAlertScheduler(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
+	_, error := a.Delete(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
 		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
 	assert.Nil(t, error)

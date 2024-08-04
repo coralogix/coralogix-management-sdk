@@ -80,8 +80,8 @@ type AlertsSchedulersClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateAlertScheduler creates a new alert scheduler.
-func (c AlertsSchedulersClient) CreateAlertScheduler(ctx context.Context, req *alertsSchedulers.CreateAlertSchedulerRuleRequest) (*alertsSchedulers.CreateAlertSchedulerRuleResponse, error) {
+// Create creates a new alert scheduler.
+func (c AlertsSchedulersClient) Create(ctx context.Context, req *alertsSchedulers.CreateAlertSchedulerRuleRequest) (*alertsSchedulers.CreateAlertSchedulerRuleResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -94,8 +94,8 @@ func (c AlertsSchedulersClient) CreateAlertScheduler(ctx context.Context, req *a
 	return client.CreateAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetAlertScheduler gets an alert scheduler.
-func (c AlertsSchedulersClient) GetAlertScheduler(ctx context.Context, req *alertsSchedulers.GetAlertSchedulerRuleRequest) (*alertsSchedulers.GetAlertSchedulerRuleResponse, error) {
+// Get gets an alert scheduler.
+func (c AlertsSchedulersClient) Get(ctx context.Context, req *alertsSchedulers.GetAlertSchedulerRuleRequest) (*alertsSchedulers.GetAlertSchedulerRuleResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -108,8 +108,8 @@ func (c AlertsSchedulersClient) GetAlertScheduler(ctx context.Context, req *aler
 	return client.GetAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateAlertScheduler updates an alert scheduler.
-func (c AlertsSchedulersClient) UpdateAlertScheduler(ctx context.Context, req *alertsSchedulers.UpdateAlertSchedulerRuleRequest) (*alertsSchedulers.UpdateAlertSchedulerRuleResponse, error) {
+// Update updates an alert scheduler.
+func (c AlertsSchedulersClient) Update(ctx context.Context, req *alertsSchedulers.UpdateAlertSchedulerRuleRequest) (*alertsSchedulers.UpdateAlertSchedulerRuleResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -122,8 +122,8 @@ func (c AlertsSchedulersClient) UpdateAlertScheduler(ctx context.Context, req *a
 	return client.UpdateAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteAlertScheduler deletes an alert scheduler.
-func (c AlertsSchedulersClient) DeleteAlertScheduler(ctx context.Context, req *alertsSchedulers.DeleteAlertSchedulerRuleRequest) (*alertsSchedulers.DeleteAlertSchedulerRuleResponse, error) {
+// Delete deletes an alert scheduler.
+func (c AlertsSchedulersClient) Delete(ctx context.Context, req *alertsSchedulers.DeleteAlertSchedulerRuleRequest) (*alertsSchedulers.DeleteAlertSchedulerRuleResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -134,6 +134,48 @@ func (c AlertsSchedulersClient) DeleteAlertScheduler(ctx context.Context, req *a
 	client := alertsSchedulers.NewAlertSchedulerRuleServiceClient(conn)
 
 	return client.DeleteAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// CreateBulk creates multiple alert schedulers in bulk.
+func (c AlertsSchedulersClient) CreateBulk(ctx context.Context, req *alertsSchedulers.CreateBulkAlertSchedulerRuleRequest) (*alertsSchedulers.CreateBulkAlertSchedulerRuleResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := alertsSchedulers.NewAlertSchedulerRuleServiceClient(conn)
+
+	return client.CreateBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// UpdateBulk updates multiple alert schedulers in bulk.
+func (c AlertsSchedulersClient) UpdateBulk(ctx context.Context, req *alertsSchedulers.UpdateBulkAlertSchedulerRuleRequest) (*alertsSchedulers.UpdateBulkAlertSchedulerRuleResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := alertsSchedulers.NewAlertSchedulerRuleServiceClient(conn)
+
+	return client.UpdateBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// GetBulk gets multiple alert schedulers in bulk.
+func (c AlertsSchedulersClient) GetBulk(ctx context.Context, req *alertsSchedulers.GetBulkAlertSchedulerRuleRequest) (*alertsSchedulers.GetBulkAlertSchedulerRuleResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := alertsSchedulers.NewAlertSchedulerRuleServiceClient(conn)
+
+	return client.GetBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewAlertsSchedulersClient creates a new alerts scheduler client.

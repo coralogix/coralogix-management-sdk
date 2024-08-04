@@ -14,14 +14,14 @@ import (
 )
 
 func TestAlerts(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewAlertsClient(creator)
 
-	createdAlertDef, err := c.CreateAlert(context.Background(), &cxsdk.CreateAlertRequest{
+	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertRequest{
 		AlertDefProperties: &cxsdk.AlertDefProperties{
 			Name:         &wrapperspb.StringValue{Value: "Standard alert example"},
 			Description:  &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
@@ -107,7 +107,7 @@ func TestAlerts(t *testing.T) {
 	})
 	assert.Nil(t, err)
 
-	retrievedAlert, err := c.GetAlert(context.Background(), &v3.GetAlertDefRequest{
+	retrievedAlert, err := c.Get(context.Background(), &v3.GetAlertDefRequest{
 		Id: createdAlertDef.AlertDef.Id,
 	})
 
@@ -116,14 +116,14 @@ func TestAlerts(t *testing.T) {
 	updatedAlertDef := retrievedAlert.AlertDef
 	updatedAlertDef.AlertDefProperties.Description = &wrapperspb.StringValue{Value: "Updated description"}
 
-	updatedAlert, err := c.UpdateAlert(context.Background(), &v3.ReplaceAlertDefRequest{
+	updatedAlert, err := c.Replace(context.Background(), &v3.ReplaceAlertDefRequest{
 		AlertDefProperties: updatedAlertDef.AlertDefProperties,
 		Id:                 updatedAlertDef.Id,
 	})
 
 	assert.Nil(t, err)
 
-	_, e := c.DeleteAlert(context.Background(), &v3.DeleteAlertDefRequest{
+	_, e := c.Delete(context.Background(), &v3.DeleteAlertDefRequest{
 		Id: updatedAlert.AlertDef.Id,
 	})
 

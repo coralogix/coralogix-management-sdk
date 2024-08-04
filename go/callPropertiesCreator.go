@@ -28,8 +28,8 @@ import (
 
 // CallPropertiesCreator is a struct that creates CallProperties objects.
 type CallPropertiesCreator struct {
-	targetURL string
-	apiKey    string
+	coraglogixRegion string
+	apiKey           string
 	//allowRetry bool
 }
 
@@ -44,7 +44,8 @@ type CallProperties struct {
 func (c CallPropertiesCreator) GetCallProperties(ctx context.Context) (*CallProperties, error) {
 	ctx = createAuthContext(ctx, c.apiKey)
 
-	conn, err := createSecureConnection(c.targetURL)
+	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
+	conn, err := createSecureConnection(endpoint)
 	if err != nil {
 		return nil, err
 	}
@@ -73,9 +74,9 @@ func createAuthContext(ctx context.Context, apiKey string) context.Context {
 }
 
 // NewCallPropertiesCreator creates a new CallPropertiesCreator object.
-func NewCallPropertiesCreator(targetURL, apiKey string) *CallPropertiesCreator {
+func NewCallPropertiesCreator(region, apiKey string) *CallPropertiesCreator {
 	return &CallPropertiesCreator{
-		targetURL: targetURL,
-		apiKey:    apiKey,
+		coraglogixRegion: region,
+		apiKey:           apiKey,
 	}
 }

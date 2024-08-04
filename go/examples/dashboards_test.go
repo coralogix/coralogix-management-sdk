@@ -26,7 +26,7 @@ import (
 )
 
 func TestDashboards(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -37,15 +37,15 @@ func TestDashboards(t *testing.T) {
 	var d cxsdk.Dashboard
 	assert.Nil(t, protojson.Unmarshal(dat, &d))
 
-	_, e := c.GetDashboard(context.Background(), &cxsdk.GetDashboardRequest{
+	_, e := c.Get(context.Background(), &cxsdk.GetDashboardRequest{
 		DashboardId: d.Id,
 	})
 	if e != nil {
-		c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
+		c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
 			DashboardId: d.Id,
 		})
 	}
-	_, e = c.CreateDashboard(context.Background(), &cxsdk.CreateDashboardRequest{
+	_, e = c.Create(context.Background(), &cxsdk.CreateDashboardRequest{
 		Dashboard: &d,
 	})
 	assert.Nil(t, e)
@@ -57,7 +57,7 @@ func TestDashboards(t *testing.T) {
 	// 	DashboardId: d.Id,
 	// })
 	// assert.Nil(t, e)
-	_, e = c.DeleteDashboard(context.Background(), &cxsdk.DeleteDashboardRequest{
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
 		DashboardId: d.Id,
 	})
 	assert.Nil(t, e)

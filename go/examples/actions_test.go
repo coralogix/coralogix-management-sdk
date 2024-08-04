@@ -25,7 +25,7 @@ import (
 )
 
 func TestActions(t *testing.T) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	t.Log(region)
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
@@ -33,7 +33,7 @@ func TestActions(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewActionsClient(creator)
 
-	action, e := c.CreateAction(context.Background(), &cxsdk.CreateActionRequest{
+	action, e := c.Create(context.Background(), &cxsdk.CreateActionRequest{
 		Name:             wrapperspb.String("google search action"),
 		Url:              wrapperspb.String("https://www.google.com/search?q={{$p.selected_value}}"),
 		IsPrivate:        wrapperspb.Bool(false),
@@ -43,7 +43,7 @@ func TestActions(t *testing.T) {
 	})
 	assert.Nil(t, e)
 
-	_, e = c.UpdateAction(context.Background(), &cxsdk.ReplaceActionRequest{
+	_, e = c.Replace(context.Background(), &cxsdk.ReplaceActionRequest{
 		Action: &cxsdk.Action{
 			Id:               action.Action.Id,
 			Name:             wrapperspb.String("bing search action"),
@@ -58,13 +58,13 @@ func TestActions(t *testing.T) {
 
 	assert.Nil(t, e)
 
-	updated, _ := c.GetAction(context.Background(), &cxsdk.GetActionRequest{
+	updated, _ := c.Get(context.Background(), &cxsdk.GetActionRequest{
 		Id: action.Action.Id,
 	})
 
 	assert.Equal(t, updated.Action.Url.Value, "https://www.bing.com/search?q={{$p.selected_value}}")
 
-	c.DeleteAction(context.Background(), &cxsdk.DeleteActionRequest{
+	c.Delete(context.Background(), &cxsdk.DeleteActionRequest{
 		Id: action.Action.Id,
 	})
 }

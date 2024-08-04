@@ -156,7 +156,7 @@ impl DashboardsClient {
     ///
     /// # Arguments
     /// * `dashboard_id` - The ID of the dashboard to pin.
-    pub async fn pin_dashboard(&self, dashboard_id: String) -> Result<PinDashboardResponse> {
+    pub async fn pin(&self, dashboard_id: String) -> Result<PinDashboardResponse> {
         let request: Request<PinDashboardRequest> = make_request_with_metadata(
             PinDashboardRequest {
                 request_id: None,
@@ -179,7 +179,7 @@ impl DashboardsClient {
     ///
     /// # Arguments
     /// * `dashboard_id` - The ID of the dashboard to unpin.
-    pub async fn unpin_dashboard(&self, dashboard_id: String) -> Result<UnpinDashboardResponse> {
+    pub async fn unpin(&self, dashboard_id: String) -> Result<UnpinDashboardResponse> {
         let request: Request<UnpinDashboardRequest> = make_request_with_metadata(
             UnpinDashboardRequest {
                 request_id: None,
@@ -203,7 +203,7 @@ impl DashboardsClient {
     /// # Arguments
     /// * `dashboard_id` - The ID of the dashboard to assign.
     /// * `folder_id` - The ID of the folder to assign the dashboard to.
-    pub async fn assign_dashboard_to_folder(
+    pub async fn assign_to_folder(
         &self,
         dashboard_id: String,
         folder_id: String,

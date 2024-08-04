@@ -159,7 +159,7 @@ func TestWebhooks(t *testing.T) {
 		},
 	})
 
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)
@@ -185,7 +185,7 @@ func TestWebhooks(t *testing.T) {
 }
 
 func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
-	region, err := cxsdk.CoralogixGrpcEndpointFromEnv()
+	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

@@ -25,8 +25,8 @@ type ArchiveLogsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// UpdateArchiveLogs updates the archive logs target.
-func (c ArchiveLogsClient) UpdateArchiveLogs(ctx context.Context, req *archiveLogs.SetTargetRequest) (*archiveLogs.SetTargetResponse, error) {
+// Update updates the archive logs target.
+func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTargetRequest) (*archiveLogs.SetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -39,8 +39,8 @@ func (c ArchiveLogsClient) UpdateArchiveLogs(ctx context.Context, req *archiveLo
 	return client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetArchiveLogs gets the archive logs target.
-func (c ArchiveLogsClient) GetArchiveLogs(ctx context.Context) (*archiveLogs.GetTargetResponse, error) {
+// Get gets the archive logs target.
+func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -51,6 +51,20 @@ func (c ArchiveLogsClient) GetArchiveLogs(ctx context.Context) (*archiveLogs.Get
 	client := archiveLogs.NewTargetServiceClient(conn)
 
 	return client.GetTarget(callProperties.Ctx, &archiveLogs.GetTargetRequest{}, callProperties.CallOptions...)
+}
+
+// ValidateTarget validates the archive logs target.
+func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.ValidateTargetRequest) (*archiveLogs.ValidateTargetResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := archiveLogs.NewTargetServiceClient(conn)
+
+	return client.ValidateTarget(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewArchiveLogsClient creates a new archive logs client.

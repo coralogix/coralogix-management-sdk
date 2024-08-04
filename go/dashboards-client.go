@@ -46,8 +46,8 @@ type UnpinDashboardRequest = dashboards.UnpinDashboardRequest
 // Dashboard is a dashboard.
 type Dashboard = dashboards.Dashboard
 
-// CreateDashboard Creates a new dashboard.
-func (d DashboardsClient) CreateDashboard(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
+// Create Creates a new dashboard.
+func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -60,8 +60,8 @@ func (d DashboardsClient) CreateDashboard(ctx context.Context, req *CreateDashbo
 	return client.CreateDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetDashboard gets a dashboard.
-func (d DashboardsClient) GetDashboard(ctx context.Context, req *GetDashboardRequest) (*dashboards.GetDashboardResponse, error) {
+// Get gets a dashboard.
+func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*dashboards.GetDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -74,8 +74,8 @@ func (d DashboardsClient) GetDashboard(ctx context.Context, req *GetDashboardReq
 	return client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UpdateDashboard updates a dashboard.
-func (d DashboardsClient) UpdateDashboard(ctx context.Context, req *ReplaceDashboardRequest) (*dashboards.ReplaceDashboardResponse, error) {
+// Replace replaces a dashboard.
+func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*dashboards.ReplaceDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -88,8 +88,8 @@ func (d DashboardsClient) UpdateDashboard(ctx context.Context, req *ReplaceDashb
 	return client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// DeleteDashboard deletes a dashboard.
-func (d DashboardsClient) DeleteDashboard(ctx context.Context, req *DeleteDashboardRequest) (*dashboards.DeleteDashboardResponse, error) {
+// Delete deletes a dashboard.
+func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardRequest) (*dashboards.DeleteDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -102,8 +102,8 @@ func (d DashboardsClient) DeleteDashboard(ctx context.Context, req *DeleteDashbo
 	return client.DeleteDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// PinDashboard pins a dashboard.
-func (d DashboardsClient) PinDashboard(ctx context.Context, req *PinDashboardRequest) (*dashboards.PinDashboardResponse, error) {
+// Pin pins a dashboard.
+func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*dashboards.PinDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -116,8 +116,8 @@ func (d DashboardsClient) PinDashboard(ctx context.Context, req *PinDashboardReq
 	return client.PinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// UnpinDashboard unpins a dashboard.
-func (d DashboardsClient) UnpinDashboard(ctx context.Context, req *UnpinDashboardRequest) (*dashboards.UnpinDashboardResponse, error) {
+// Unpin unpins a dashboard.
+func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest) (*dashboards.UnpinDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -128,6 +128,20 @@ func (d DashboardsClient) UnpinDashboard(ctx context.Context, req *UnpinDashboar
 	client := dashboards.NewDashboardsServiceClient(conn)
 
 	return client.UnpinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// AssignToFolder assigns a dashboard to a folder.
+func (d DashboardsClient) AssignToFolder(ctx context.Context, req *dashboards.AssignDashboardFolderRequest) (*dashboards.AssignDashboardFolderResponse, error) {
+	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := dashboards.NewDashboardsServiceClient(conn)
+
+	return client.AssignDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // NewDashboardsClient creates a new DashboardsClient.
