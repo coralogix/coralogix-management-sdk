@@ -1,3 +1,18 @@
+// Copyright 2024 Coralogix Ltd.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
@@ -9,7 +24,7 @@ mod tests {
     };
 
     #[tokio::test]
-    async fn slos_test() {
+    async fn test_slos() {
         let slos_client = SloClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
@@ -53,7 +68,7 @@ mod tests {
     }
 
     #[tokio::test]
-    async fn slos_test_with_filters() {
+    async fn test_slos_with_filters() {
         let slos_client = SloClient::new(
             ApiKey::from_env().unwrap(),
             CoralogixRegion::from_env().unwrap(),
