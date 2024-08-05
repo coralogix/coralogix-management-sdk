@@ -18,7 +18,7 @@ mod tests {
 
     use cx_sdk::{
         auth::ApiKey,
-        client::integrations::{IntegrationsClient, Parameter, StringList, Value},
+        client::integrations::{IntegrationsClient, Parameter, StringList, TestResult, Value},
         CoralogixRegion,
     };
 
@@ -54,25 +54,65 @@ mod tests {
         .unwrap();
 
         let role = env::var("AWS_TEST_ROLE").unwrap();
-        println!("{:?}", client.list(false).await.unwrap());
-        // AWS Metrics Collector Integration Setup
-        let create = client
-            .create(
-                "aws-metrics-collector".into(),
-                Some("0.1.0".into()),
-                Some(vec![
-                    sp("ApplicationName", "cxsdk"),
-                    sp("SubsystemName", "aws-metrics-collector"),
-                    sl("MetricNamespaces", vec!["AWS/S3"]),
-                    sp("AwsRoleArn", &role),
-                    sp("IntegrationName", "sdk-integration-setup"),
-                    sp("AwsRegion", "eu-north-1"),
-                    bp("WithAggregations", false),
-                    bp("EnrichWithTags", true),
-                ]),
+        let _ = client.list(false).await.unwrap();
+        let name: String = "aws-metrics-collector".into();
+        let version: String = "0.1.0".into();
+        let params = vec![
+            sp("ApplicationName", "cxsdk"),
+            sp("SubsystemName", "aws-metrics-collector"),
+            sl("MetricNamespaces", vec!["AWS/S3"]),
+            sp("AwsRoleArn", &role),
+            sp("IntegrationName", "sdk-integration-setup"),
+            sp("AwsRegion", "eu-north-1"),
+            bp("WithAggregations", false),
+            bp("EnrichWithTags", true),
+        ];
+        // test before saving
+        let testing = client
+            .test_integration(
+                None,
+                name.clone(),
+                Some(version.clone()),
+                Some(params.clone()),
             )
             .await
+            .unwrap()
+            .result
+            .unwrap()
+            .result
             .unwrap();
+
+        match testing {
+            TestResult::Success(_) => {}
+            TestResult::Failure(f) => {
+                panic!(
+                    "Testing the integration didn't suceed test failed: {:?}",
+                    f.error_message
+                );
+            }
+        }
+
+        // AWS Metrics Collector Integration Setup
+        let create = client
+            .create(name.clone(), Some(version.clone()), Some(params.clone()))
+            .await
+            .unwrap();
+
+        let all_instances = client.get(name.clone(), true).await.unwrap();
+        match all_instances
+            .integration_detail
+            .unwrap()
+            .integration_type_details
+            .unwrap()
+        {
+            cx_sdk::client::integrations::IntegrationTypeDetails::Default(details) => {
+                assert!(details
+                    .registered
+                    .into_iter()
+                    .any(|i| i.id == create.integration_id))
+            }
+        }
+
         client.delete(create.integration_id.unwrap()).await.unwrap();
     }
 }

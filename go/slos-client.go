@@ -20,6 +20,24 @@ import (
 	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 )
 
+// ServiceSlo is an SLO.
+type ServiceSlo = slos.ServiceSlo
+
+// CreateServiceSloRequest is a request to create an SLO.
+type CreateServiceSloRequest = slos.CreateServiceSloRequest
+
+// ServiceSlo_ErrorSli is an SLO error SLI.
+type ServiceSlo_ErrorSli = slos.ServiceSlo_ErrorSli
+
+// GetServiceSloRequest is a request to get an SLO.
+type GetServiceSloRequest = slos.GetServiceSloRequest
+
+// ReplaceServiceSloRequest is a request to replace an SLO.
+type ReplaceServiceSloRequest = slos.ReplaceServiceSloRequest
+
+// DeleteServiceSloRequest is a request to delete an SLO.
+type DeleteServiceSloRequest = slos.DeleteServiceSloRequest
+
 // SLOsClient is a client for the Coralogix SLOs API.
 type SLOsClient struct {
 	callPropertiesCreator *CallPropertiesCreator

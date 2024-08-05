@@ -16,7 +16,8 @@ package cxsdk
 
 import (
 	"context"
-	ext "coralogix-management-sdk/go/internal/coralogix/integrations/v1"
+
+	ext "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/integrations/v1"
 )
 
 // UpdateIntegrationRequest is a request to update an integration.
@@ -48,6 +49,45 @@ type SyncRumDataRequest = ext.SyncRumDataRequest
 
 // TestIntegrationRequest is a request to test an integration.
 type TestIntegrationRequest = ext.TestIntegrationRequest
+
+// Integration is an integration.
+type IntegrationMetadata = ext.IntegrationMetadata
+
+// IntegrationParameters is integration parameters.
+type IntegrationMetadataIntegrationParameters = ext.IntegrationMetadata_IntegrationParameters
+
+// IntegrationParameter is a parameter for configuring an integration.
+type IntegrationParameter = ext.Parameter
+
+// GenericIntegrationParameters are the integration parameters.
+type GenericIntegrationParameters = ext.GenericIntegrationParameters
+
+// IntegrationParameterStringValue is a string value parameter.
+type IntegrationParameterStringValue = ext.Parameter_StringValue
+
+// IntegrationParameterBooleanValue is a boolean value parameter.
+type IntegrationParameterBooleanValue = ext.Parameter_BooleanValue
+
+// IntegrationParameterStringList is a string list parameter.
+type IntegrationParameterStringList = ext.Parameter_StringList_
+
+// IntegrationParameterStringListInner is the wrapped string list parameter.
+type IntegrationParameterStringListInner = ext.Parameter_StringList
+
+// IntegrationParameterApiKey is an API key parameter.
+type IntegrationParameterApiKey = ext.Parameter_ApiKey
+
+// IntegrationParameterNumericValue is a numeric value parameter.
+type IntegrationParameterNumericValue = ext.Parameter_NumericValue
+
+// IntegrationParameterSensitiveData is a sensitive data parameter.
+type IntegrationParameterSensitiveData = ext.Parameter_SensitiveData
+
+// IntegrationTestSuccess indicates whether a test was a success
+type IntegrationTestSuccess = ext.TestIntegrationResult_Success_
+
+// IntegrationTestFail indicates whether a test was a failure
+type IntegrationTestFail = ext.TestIntegrationResult_Failure_
 
 // IntegrationsClient is a client for the Coralogix Extensions API.
 type IntegrationsClient struct {
@@ -181,7 +221,7 @@ func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataReq
 }
 
 // TestIntegration tests an integration
-func (c IntegrationsClient) TestIntegration(ctx context.Context, req *TestIntegrationRequest) (*ext.TestIntegrationResponse, error) {
+func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationRequest) (*ext.TestIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err

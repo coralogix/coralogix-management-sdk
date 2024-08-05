@@ -33,7 +33,10 @@ use cx_api::proto::com::coralogix::integrations::v1::{
     UpdateIntegrationResponse,
 };
 
-pub use cx_api::proto::com::coralogix::integrations::v1::{parameter::*, Parameter};
+pub use cx_api::proto::com::coralogix::integrations::v1::{
+    integration_details::default_integration_details::*, integration_details::*, parameter::*,
+    test_integration_result::Result as TestResult, Parameter,
+};
 
 use tokio::sync::Mutex;
 use tonic::{
@@ -309,14 +312,14 @@ impl IntegrationsClient {
     /// * `parameters` - The parameters of the integration to test.
     pub async fn test_integration(
         &self,
-        id: String,
+        integration_id: Option<String>,
         integration_key: String,
         version: Option<String>,
         parameters: Option<Vec<Parameter>>,
     ) -> Result<TestIntegrationResponse> {
         let request = make_request_with_metadata(
             TestIntegrationRequest {
-                integration_id: Some(id),
+                integration_id,
                 integration_data: Some(IntegrationMetadata {
                     integration_key: Some(integration_key),
                     version,
