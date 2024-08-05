@@ -42,7 +42,7 @@ func (d DashboardsCatalogClient) Get(ctx context.Context, req *dashboards.GetDas
 	return client.GetDashboardCatalog(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// NewDashboardsClient creates a new DashboardsClient.
+// NewDashboardsCatalogClient creates a new NewDashboardsCatalogClient.
 func NewDashboardsCatalogClient(c *CallPropertiesCreator) *DashboardsCatalogClient {
 	return &DashboardsCatalogClient{callPropertiesCreator: c}
 }
