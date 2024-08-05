@@ -99,8 +99,8 @@ func TestIntegration(t *testing.T) {
 
 	createResponse, err := c.Create(context.Background(), &cxsdk.SaveIntegrationRequest{
 		Metadata: &cxsdk.IntegrationMetadata{
-			IntegrationKey: &wrapperspb.StringValue{Value: name},
-			Version:        &wrapperspb.StringValue{Value: version},
+			IntegrationKey: wrapperspb.String(name),
+			Version:        wrapperspb.String(version),
 			SpecificData: &cxsdk.IntegrationMetadataIntegrationParameters{
 				IntegrationParameters: &cxsdk.GenericIntegrationParameters{
 					Parameters: params,
@@ -112,13 +112,17 @@ func TestIntegration(t *testing.T) {
 	assert.Nil(t, err)
 
 	details, retrievalError := c.Get(context.Background(), &cxsdk.GetIntegrationDetailsRequest{
-		Id: createResponse.IntegrationId,
+		Id:                     wrapperspb.String(name),
+		IncludeTestingRevision: wrapperspb.Bool(true),
 	})
+	if retrievalError != nil {
+		log.Fatal(retrievalError.Error())
+	}
 	assert.Nil(t, retrievalError)
 	integrationDetail := details.IntegrationDetail.IntegrationTypeDetails.(*cxsdk.IntegrationDetailsDefault)
 	found := false
 	for _, d := range integrationDetail.Default.Registered {
-		if d.Id == createResponse.IntegrationId {
+		if d.Id.Value == createResponse.IntegrationId.Value {
 			found = true
 			break
 		}
