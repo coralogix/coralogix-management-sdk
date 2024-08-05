@@ -16,6 +16,7 @@ package examples
 
 import (
 	"context"
+	"log"
 	"os"
 	"reflect"
 	"testing"
@@ -92,8 +93,11 @@ func TestIntegration(t *testing.T) {
 			},
 		},
 	})
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 	assert.Nil(t, err)
-	assert.Equal(t, reflect.TypeOf(testingResponse.Result.Result), reflect.TypeOf(cxsdk.IntegrationTestSuccess{}))
+	assert.Equal(t, reflect.TypeOf(testingResponse.Result.Result).Name(), reflect.TypeOf(cxsdk.IntegrationTestSuccess{}).Name())
 
 	createResponse, err := c.Create(context.Background(), &cxsdk.SaveIntegrationRequest{
 		Metadata: &cxsdk.IntegrationMetadata{

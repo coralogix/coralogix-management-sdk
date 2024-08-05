@@ -61,7 +61,7 @@ func TestArchiveMetrics(t *testing.T) {
 	config, getTenantError := c.Get(context.Background())
 
 	assert.Nil(t, getTenantError)
-	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2S3).S3, s3Config)
+	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2S3).S3.Bucket, s3Config.Bucket)
 	_, e := c.Enable(context.Background())
 	assert.Nil(t, e)
 	_, e = c.Disable(context.Background())
