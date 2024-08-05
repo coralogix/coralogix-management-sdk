@@ -43,6 +43,7 @@ jobs:
       - name: Run tests 
         timeout-minutes: 10
         env:
+          AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
           CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
           TEAM_ID: ${{ secrets.TEAM_ID }}
