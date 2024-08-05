@@ -36,14 +36,14 @@ func TestArchiveMetrics(t *testing.T) {
 	}
 
 	_, configureErr := c.ConfigureTenant(context.Background(), &cxsdk.ConfigureTenantRequest{
-		StorageConfig: &cxsdk.ConfigureTenantRequest_S3{
+		StorageConfig: &cxsdk.ConfigureTenantRequestS3{
 			S3: s3Config,
 		},
 	})
 	assert.Nil(t, configureErr)
 
 	_, validateErr := c.ValidateTarget(context.Background(), &cxsdk.ValidateBucketRequest{
-		StorageConfig: &cxsdk.ValidateBucketRequest_S3{
+		StorageConfig: &cxsdk.ValidateBucketRequestS3{
 			S3: s3Config,
 		},
 	})
@@ -52,7 +52,7 @@ func TestArchiveMetrics(t *testing.T) {
 	days := uint32(2)
 	_, updateErr := c.Update(context.Background(), &cxsdk.UpdateTenantRequest{
 		RetentionDays: &days,
-		StorageConfig: &cxsdk.UpdateRequest_S3{
+		StorageConfig: &cxsdk.UpdateRequestS3{
 			S3: s3Config,
 		},
 	})
@@ -61,7 +61,7 @@ func TestArchiveMetrics(t *testing.T) {
 	config, getTenantError := c.Get(context.Background())
 
 	assert.Nil(t, getTenantError)
-	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2_S3).S3, s3Config)
+	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2S3).S3, s3Config)
 	_, e := c.Enable(context.Background())
 	assert.Nil(t, e)
 	_, e = c.Disable(context.Background())

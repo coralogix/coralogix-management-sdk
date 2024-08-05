@@ -34,29 +34,29 @@ type ValidateBucketRequest = archiveMetrics.ValidateBucketRequest
 // GetTenantConfigRequest is a request to get the tenant configuration.
 type GetTenantConfigRequest = archiveMetrics.GetTenantConfigRequest
 
-// ConfigureTenantRequest_S3 is a request to configure the tenant with S3.
-type ConfigureTenantRequest_S3 = archiveMetrics.ConfigureTenantRequest_S3
+// ConfigureTenantRequestS3 is a request to configure the tenant with S3.
+type ConfigureTenantRequestS3 = archiveMetrics.ConfigureTenantRequest_S3
 
 // ArchiveS3Config is an S3 configuration for the archive.
 type ArchiveS3Config = archiveMetrics.S3Config
 
-// ValidateBucketRequest_S3 is a request to validate the S3 bucket.
-type ValidateBucketRequest_S3 = archiveMetrics.ValidateBucketRequest_S3
+// ValidateBucketRequestS3 is a request to validate the S3 bucket.
+type ValidateBucketRequestS3 = archiveMetrics.ValidateBucketRequest_S3
 
 // ValidateBucketRequest_Ibm is a request to validate the IBM storage.
 type ValidateBucketRequest_Ibm = archiveMetrics.ValidateBucketRequest_Ibm
 
-// UpdateRequest_S3 is a type to update the S3 bucket.
-type UpdateRequest_S3 = archiveMetrics.UpdateRequest_S3
+// UpdateRequestS3 is a type to update the S3 bucket.
+type UpdateRequestS3 = archiveMetrics.UpdateRequest_S3
 
-// UpdateRequest_Ibm is a type to update the IBM storage.
-type UpdateRequest_Ibm = archiveMetrics.UpdateRequest_Ibm
+// UpdateRequestIbm is a type to update the IBM storage.
+type UpdateRequestIbm = archiveMetrics.UpdateRequest_Ibm
 
-// TenantConfigV2_S3 is a type to view the S3 bucket config.
-type TenantConfigV2_S3 = archiveMetrics.TenantConfigV2_S3
+// TenantConfigV2S3 is a type to view the S3 bucket config.
+type TenantConfigV2S3 = archiveMetrics.TenantConfigV2_S3
 
-// TenantConfigV2_Ibm is a type to view the IBM storage config.
-type TenantConfigV2_Ibm = archiveMetrics.TenantConfigV2_Ibm
+// TenantConfigV2Ibm is a type to view the IBM storage config.
+type TenantConfigV2Ibm = archiveMetrics.TenantConfigV2_Ibm
 
 // RetentionPolicyRequest is a request to set the retention policy.
 type RetentionPolicyRequest = archiveMetrics.RetentionPolicyRequest
