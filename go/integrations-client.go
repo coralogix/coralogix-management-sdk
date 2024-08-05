@@ -74,7 +74,7 @@ type IntegrationParameterStringList = ext.Parameter_StringList_
 // IntegrationParameterStringListInner is the wrapped string list parameter.
 type IntegrationParameterStringListInner = ext.Parameter_StringList
 
-// IntegrationParameterApiKey is an API key parameter.
+// IntegrationParameterAPIKey is an API key parameter.
 type IntegrationParameterAPIKey = ext.Parameter_ApiKey
 
 // IntegrationParameterNumericValue is a numeric value parameter.
@@ -223,7 +223,7 @@ func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataReq
 	return client.SyncRumData(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// TestIntegration tests an integration
+// Test tests an integration
 func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationRequest) (*ext.TestIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
