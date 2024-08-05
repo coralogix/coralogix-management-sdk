@@ -14,36 +14,57 @@
 
 package examples
 
-// import (
-// 	"context"
-// 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-// 	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/metrics"
-// 	"testing"
+import (
+	"context"
+	"testing"
 
-// 	"github.com/stretchr/testify/assert"
-// )
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
-// func TestArchiveMetrics(t *testing.T) {
+	"github.com/stretchr/testify/assert"
+)
 
-// 	region, err := cxsdk.CoralogixRegionFromEnv()
-// 	assert.Nil(t, err)
-// 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
-// 	assert.Nil(t, err)
-// 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
-// 	c := cxsdk.NewArchiveMetricsClient(creator)
+func TestArchiveMetrics(t *testing.T) {
 
-// 	_, configureTenantError := c.UpdateArchiveMetrics(context.Background(), &metrics.ConfigureTenantRequest{
-// 		RetentionPolicy: nil,
-// 		StorageConfig: &metrics.ConfigureTenantRequest_S3{
-// 			S3: &metrics.S3Config{
-// 				Bucket: "coralogix-c4c-eu2-prometheus-data",
-// 				Region: "eu-west-1",
-// 			},
-// 		},
-// 	})
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+	c := cxsdk.NewArchiveMetricsClient(creator)
+	s3Config := &cxsdk.ArchiveS3Config{
+		Bucket: "yak-coralogix-bucket",
+		Region: "eu-north-1",
+	}
 
-// 	assert.Nil(t, configureTenantError)
+	_, configureErr := c.ConfigureTenant(context.Background(), &cxsdk.ConfigureTenantRequest{
+		StorageConfig: &cxsdk.ConfigureTenantRequest_S3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, configureErr)
 
-// 	_, getTenantError := c.GetArchiveMetrics(context.Background())
-// 	assert.Nil(t, getTenantError)
-// }
+	_, validateErr := c.ValidateTarget(context.Background(), &cxsdk.ValidateBucketRequest{
+		StorageConfig: &cxsdk.ValidateBucketRequest_S3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, validateErr)
+
+	days := uint32(2)
+	_, updateErr := c.Update(context.Background(), &cxsdk.UpdateTenantRequest{
+		RetentionDays: &days,
+		StorageConfig: &cxsdk.UpdateRequest_S3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, updateErr)
+
+	config, getTenantError := c.Get(context.Background())
+
+	assert.Nil(t, getTenantError)
+	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2_S3).S3, s3Config)
+	_, e := c.Enable(context.Background())
+	assert.Nil(t, e)
+	_, e = c.Disable(context.Background())
+	assert.Nil(t, e)
+}

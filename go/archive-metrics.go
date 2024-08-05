@@ -22,13 +22,52 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
+// ConfigureTenantRequest is a request to configure the tenant.
+type ConfigureTenantRequest = archiveMetrics.ConfigureTenantRequest
+
+// UpdateTenantRequest is a request to update the tenant.
+type UpdateTenantRequest = archiveMetrics.UpdateRequest
+
+// ValidateBucketRequest is a request to validate the bucket.
+type ValidateBucketRequest = archiveMetrics.ValidateBucketRequest
+
+// GetTenantConfigRequest is a request to get the tenant configuration.
+type GetTenantConfigRequest = archiveMetrics.GetTenantConfigRequest
+
+// ConfigureTenantRequest_S3 is a request to configure the tenant with S3.
+type ConfigureTenantRequest_S3 = archiveMetrics.ConfigureTenantRequest_S3
+
+// ArchiveS3Config is an S3 configuration for the archive.
+type ArchiveS3Config = archiveMetrics.S3Config
+
+// ValidateBucketRequest_S3 is a request to validate the S3 bucket.
+type ValidateBucketRequest_S3 = archiveMetrics.ValidateBucketRequest_S3
+
+// ValidateBucketRequest_Ibm is a request to validate the IBM storage.
+type ValidateBucketRequest_Ibm = archiveMetrics.ValidateBucketRequest_Ibm
+
+// UpdateRequest_S3 is a type to update the S3 bucket.
+type UpdateRequest_S3 = archiveMetrics.UpdateRequest_S3
+
+// UpdateRequest_Ibm is a type to update the IBM storage.
+type UpdateRequest_Ibm = archiveMetrics.UpdateRequest_Ibm
+
+// TenantConfigV2_S3 is a type to view the S3 bucket config.
+type TenantConfigV2_S3 = archiveMetrics.TenantConfigV2_S3
+
+// TenantConfigV2_Ibm is a type to view the IBM storage config.
+type TenantConfigV2_Ibm = archiveMetrics.TenantConfigV2_Ibm
+
+// RetentionPolicyRequest is a request to set the retention policy.
+type RetentionPolicyRequest = archiveMetrics.RetentionPolicyRequest
+
 // ArchiveMetricsClient is a client for the Coralogix Archive Metrics API.
 type ArchiveMetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
 // Update updates the archive metrics configuration.
-func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.UpdateRequest) (*emptypb.Empty, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -38,7 +77,7 @@ func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.Co
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
+	return client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Get gets the archive metrics configuration.
@@ -70,18 +109,17 @@ func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveM
 }
 
 // ValidateTarget validates the archive metrics bucket.
-func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMetrics.ValidateBucketRequest) error {
+func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMetrics.ValidateBucketRequest) (*emptypb.Empty, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	_, validationErr := client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
-	return validationErr
+	return client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Enable enables the metrics archive.
