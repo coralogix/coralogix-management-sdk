@@ -24,7 +24,6 @@ import (
 )
 
 func TestArchiveMetrics(t *testing.T) {
-
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
