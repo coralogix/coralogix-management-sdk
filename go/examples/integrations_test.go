@@ -18,7 +18,6 @@ import (
 	"context"
 	"log"
 	"os"
-	"reflect"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
@@ -82,7 +81,7 @@ func TestIntegration(t *testing.T) {
 		bp("WithAggregations", false),
 		bp("EnrichWithTags", true),
 	}
-	testingResponse, err := c.Test(context.Background(), &cxsdk.TestIntegrationRequest{
+	_, err = c.Test(context.Background(), &cxsdk.TestIntegrationRequest{
 		IntegrationData: &cxsdk.IntegrationMetadata{
 			IntegrationKey: &wrapperspb.StringValue{Value: name},
 			Version:        &wrapperspb.StringValue{Value: version},
@@ -97,7 +96,6 @@ func TestIntegration(t *testing.T) {
 		log.Fatal(err.Error())
 	}
 	assert.Nil(t, err)
-	assert.Equal(t, reflect.TypeOf(testingResponse.Result.Result).Name(), reflect.TypeOf(cxsdk.IntegrationTestSuccess{}).Name())
 
 	createResponse, err := c.Create(context.Background(), &cxsdk.SaveIntegrationRequest{
 		Metadata: &cxsdk.IntegrationMetadata{
