@@ -112,10 +112,10 @@ func TestIntegration(t *testing.T) {
 		Id: createResponse.IntegrationId,
 	})
 	assert.Nil(t, retrievalError)
-	integrationDetail := details.IntegrationDetail.IntegrationTypeDetails
+	integrationDetail := details.IntegrationDetail.IntegrationTypeDetails.(*cxsdk.IntegrationDetailsDefault)
 	found := false
-	for d := range integrationDetail.Default.registered {
-		if d.Id == createResponse.IntegrationId.Value {
+	for _, d := range integrationDetail.Default.Registered {
+		if d.Id == createResponse.IntegrationId {
 			found = true
 			break
 		}

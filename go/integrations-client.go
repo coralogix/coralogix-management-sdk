@@ -89,6 +89,9 @@ type IntegrationTestSuccess = ext.TestIntegrationResult_Success_
 // IntegrationTestFail indicates whether a test was a failure
 type IntegrationTestFail = ext.TestIntegrationResult_Failure_
 
+// IntegrationDetailsDefault the type for all registered instances
+type IntegrationDetailsDefault = ext.IntegrationDetails_Default
+
 // IntegrationsClient is a client for the Coralogix Extensions API.
 type IntegrationsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
