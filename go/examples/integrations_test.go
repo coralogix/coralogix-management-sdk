@@ -58,6 +58,7 @@ func sl(k string, v []string) *cxsdk.IntegrationParameter {
 		},
 	}
 }
+
 func TestIntegration(t *testing.T) {
 
 	region, err := cxsdk.CoralogixRegionFromEnv()

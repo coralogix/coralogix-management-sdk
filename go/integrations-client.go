@@ -50,10 +50,10 @@ type SyncRumDataRequest = ext.SyncRumDataRequest
 // TestIntegrationRequest is a request to test an integration.
 type TestIntegrationRequest = ext.TestIntegrationRequest
 
-// Integration is an integration.
+// IntegrationMetadata is an integration.
 type IntegrationMetadata = ext.IntegrationMetadata
 
-// IntegrationParameters is integration parameters.
+// IntegrationMetadataIntegrationParameters is integration parameters.
 type IntegrationMetadataIntegrationParameters = ext.IntegrationMetadata_IntegrationParameters
 
 // IntegrationParameter is a parameter for configuring an integration.
@@ -75,7 +75,7 @@ type IntegrationParameterStringList = ext.Parameter_StringList_
 type IntegrationParameterStringListInner = ext.Parameter_StringList
 
 // IntegrationParameterApiKey is an API key parameter.
-type IntegrationParameterApiKey = ext.Parameter_ApiKey
+type IntegrationParameterAPIKey = ext.Parameter_ApiKey
 
 // IntegrationParameterNumericValue is a numeric value parameter.
 type IntegrationParameterNumericValue = ext.Parameter_NumericValue

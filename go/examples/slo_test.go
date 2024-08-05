@@ -40,7 +40,7 @@ func TestSlos(t *testing.T) {
 			ServiceName:      &wrapperspb.StringValue{Value: "service_name"},
 			Description:      &wrapperspb.StringValue{Value: "description"},
 			TargetPercentage: &wrapperspb.UInt32Value{Value: 30},
-			SliType:          &cxsdk.ServiceSlo_ErrorSli{},
+			SliType:          &cxsdk.ServiceSloErrorSli{},
 			Period:           v1.SloPeriod_SLO_PERIOD_7_DAYS,
 		},
 	})
@@ -60,7 +60,7 @@ func TestSlos(t *testing.T) {
 			ServiceName:      &wrapperspb.StringValue{Value: "service_name"},
 			Description:      &wrapperspb.StringValue{Value: "description"},
 			TargetPercentage: &wrapperspb.UInt32Value{Value: 30},
-			SliType:          &cxsdk.ServiceSlo_ErrorSli{},
+			SliType:          &cxsdk.ServiceSloErrorSli{},
 			Period:           v1.SloPeriod_SLO_PERIOD_7_DAYS,
 		},
 	})
@@ -90,7 +90,7 @@ func TestSlosWithFilters(t *testing.T) {
 			ServiceName:      &wrapperspb.StringValue{Value: "service_name"},
 			Description:      &wrapperspb.StringValue{Value: "description"},
 			TargetPercentage: &wrapperspb.UInt32Value{Value: 30},
-			SliType:          &cxsdk.ServiceSlo_ErrorSli{},
+			SliType:          &cxsdk.ServiceSloErrorSli{},
 			Period:           v1.SloPeriod_SLO_PERIOD_7_DAYS,
 			Filters: []*v1.SliFilter{
 				{Field: &wrapperspb.StringValue{Value: "severity"}, CompareType: v1.CompareType_COMPARE_TYPE_IS, FieldValues: []*wrapperspb.StringValue{{Value: "ERROR"}, {Value: "Warning"}}},
@@ -113,7 +113,7 @@ func TestSlosWithFilters(t *testing.T) {
 			ServiceName:      &wrapperspb.StringValue{Value: "service_name"},
 			Description:      &wrapperspb.StringValue{Value: "description"},
 			TargetPercentage: &wrapperspb.UInt32Value{Value: 30},
-			SliType:          &cxsdk.ServiceSlo_ErrorSli{},
+			SliType:          &cxsdk.ServiceSloErrorSli{},
 			Period:           v1.SloPeriod_SLO_PERIOD_7_DAYS,
 		},
 	})

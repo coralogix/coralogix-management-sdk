@@ -43,8 +43,8 @@ type ArchiveS3Config = archiveMetrics.S3Config
 // ValidateBucketRequestS3 is a request to validate the S3 bucket.
 type ValidateBucketRequestS3 = archiveMetrics.ValidateBucketRequest_S3
 
-// ValidateBucketRequest_Ibm is a request to validate the IBM storage.
-type ValidateBucketRequest_Ibm = archiveMetrics.ValidateBucketRequest_Ibm
+// ValidateBucketRequestIbm is a request to validate the IBM storage.
+type ValidateBucketRequestIbm = archiveMetrics.ValidateBucketRequest_Ibm
 
 // UpdateRequestS3 is a type to update the S3 bucket.
 type UpdateRequestS3 = archiveMetrics.UpdateRequest_S3

@@ -26,8 +26,8 @@ type ServiceSlo = slos.ServiceSlo
 // CreateServiceSloRequest is a request to create an SLO.
 type CreateServiceSloRequest = slos.CreateServiceSloRequest
 
-// ServiceSlo_ErrorSli is an SLO error SLI.
-type ServiceSlo_ErrorSli = slos.ServiceSlo_ErrorSli
+// ServiceSloErrorSli is an SLO error SLI.
+type ServiceSloErrorSli = slos.ServiceSlo_ErrorSli
 
 // GetServiceSloRequest is a request to get an SLO.
 type GetServiceSloRequest = slos.GetServiceSloRequest
