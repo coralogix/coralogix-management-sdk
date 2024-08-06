@@ -34,7 +34,7 @@ type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
 // DashboardFolder is a dashboard folder.
 type DashboardFolder = dashboards.DashboardFolder
 
-// ListDashboardFolderRequest is a request to get a dashboard folders.
+// GetDashboardFolderRequest is a request to get a dashboard folders.
 type GetDashboardFolderRequest = dashboards.GetDashboardFolderRequest
 
 // Create creates a new dashboard folder.
