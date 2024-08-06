@@ -74,7 +74,7 @@ func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*d
 	return client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Lists all dashboards.
+// List lists all dashboards.
 func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCatalogResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
