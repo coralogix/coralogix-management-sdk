@@ -4,12 +4,12 @@ on:
   push:
     branches: [ master ]
     paths:
-      - "./rust"
-      - "./proto"
+      - "rust/**"
+      - "proto/**"
   pull_request:
     branches: [ master ]
     paths:
-      - "./rust"
+      - "rust/**"
 
 env:
   CARGO_TERM_COLOR: always
