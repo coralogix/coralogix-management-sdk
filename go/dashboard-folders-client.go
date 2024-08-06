@@ -28,7 +28,7 @@ type DashboardsFoldersClient struct {
 // ListDashboardFolderRequest is a request to get a dashboard folders.
 type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
 
-// CreateDashboardFolderRequest is a request to get a dashboard folders.
+// CreateDashboardFolderRequest is a request to create a dashboards folder.
 type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
 
 // DashboardFolder is a dashboard folder.
