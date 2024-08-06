@@ -43,15 +43,8 @@ mod tests {
             created_by: Some("luigi.taglialatela@coralogix.com".into()),
         };
 
-        let create_action_result = client.create(action).await;
-        if let Err(e) = &create_action_result {
-            let err = e.to_string();
-            println!("Error: {:?}", err);
-        }
+        let created_action = client.create(action).await.unwrap().action.unwrap();
 
-        assert!(create_action_result.is_ok());
-
-        let created_action = create_action_result.unwrap().action.unwrap();
         let updated_action = Action {
             name: Some("updated action".to_string()),
             ..created_action
