@@ -24,11 +24,13 @@ pub use crate::com::coralogixapis::actions::v2::Action;
 
 pub use cx_api::proto::com::coralogixapis::dashboards::v1::ast::*;
 use cx_api::proto::com::coralogixapis::dashboards::v1::services::{
+    dashboard_catalog_service_client::DashboardCatalogServiceClient,
     dashboards_service_client::DashboardsServiceClient, AssignDashboardFolderRequest,
     AssignDashboardFolderResponse, CreateDashboardRequest, CreateDashboardResponse,
-    DeleteDashboardRequest, DeleteDashboardResponse, GetDashboardRequest, GetDashboardResponse,
-    PinDashboardRequest, PinDashboardResponse, ReplaceDashboardRequest, ReplaceDashboardResponse,
-    UnpinDashboardRequest, UnpinDashboardResponse,
+    DeleteDashboardRequest, DeleteDashboardResponse, GetDashboardCatalogRequest,
+    GetDashboardCatalogResponse, GetDashboardRequest, GetDashboardResponse, PinDashboardRequest,
+    PinDashboardResponse, ReplaceDashboardRequest, ReplaceDashboardResponse, UnpinDashboardRequest,
+    UnpinDashboardResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -44,6 +46,7 @@ use crate::CoralogixRegion;
 pub struct DashboardsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<DashboardsServiceClient<Channel>>,
+    catalog_client: Mutex<DashboardCatalogServiceClient<Channel>>,
 }
 
 impl DashboardsClient {
@@ -57,7 +60,8 @@ impl DashboardsClient {
         let auth_data: AuthData = (&api_key).into();
         Ok(Self {
             metadata_map: auth_data.to_metadata_map(),
-            service_client: Mutex::new(DashboardsServiceClient::new(channel)),
+            service_client: Mutex::new(DashboardsServiceClient::new(channel.clone())),
+            catalog_client: Mutex::new(DashboardCatalogServiceClient::new(channel)),
         })
     }
 
@@ -127,6 +131,20 @@ impl DashboardsClient {
                 .map(|r| r.into_inner())
                 .map_err(From::from)
         }
+    }
+
+    /// Lists all dashboards.
+    pub async fn list(&self) -> Result<GetDashboardCatalogResponse> {
+        let mut client = self.catalog_client.lock().await.clone();
+
+        client
+            .get_dashboard_catalog(make_request_with_metadata(
+                GetDashboardCatalogRequest {},
+                &self.metadata_map,
+            ))
+            .await
+            .map(|r| r.into_inner())
+            .map_err(From::from)
     }
 
     /// Deletes a dashboard by its ID.

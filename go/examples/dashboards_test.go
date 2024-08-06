@@ -57,6 +57,17 @@ func TestDashboards(t *testing.T) {
 	// 	DashboardId: d.Id,
 	// })
 	// assert.Nil(t, e)
+
+	all, e := c.List(context.Background())
+	assert.Nil(t, e)
+	found := false
+	for _, v := range all.Items {
+		if v.Id.Value == d.Id.Value {
+			found = true
+			break
+		}
+	}
+	assert.True(t, found)
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
 		DashboardId: d.Id,
 	})
