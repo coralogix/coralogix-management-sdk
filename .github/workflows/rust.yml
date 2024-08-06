@@ -5,6 +5,7 @@ on:
     branches: [ master ]
     paths:
       - "./rust"
+      - "./proto"
   pull_request:
     branches: [ master ]
     paths:
