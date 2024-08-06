@@ -66,7 +66,7 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDas
 }
 
 // List gets all dashboard folders.
-func (c DashboardsFoldersClient) List(ctx context.Context, req *dashboards.ListDashboardFoldersRequest) (*dashboards.ListDashboardFoldersResponse, error) {
+func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDashboardFoldersResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -76,7 +76,7 @@ func (c DashboardsFoldersClient) List(ctx context.Context, req *dashboards.ListD
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.ListDashboardFolders(callProperties.Ctx, req, callProperties.CallOptions...)
+	return client.ListDashboardFolders(callProperties.Ctx, &dashboards.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
 }
 
 // Replace updates a dashboard folder.
