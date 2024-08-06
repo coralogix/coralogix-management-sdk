@@ -28,7 +28,7 @@ mod tests {
         )
         .unwrap();
 
-        let create_result = client
+        let create_response = client
             .create(
                 "My APM KEY".to_string(),
                 Some(Owner::TeamId(team_id)),
@@ -36,16 +36,10 @@ mod tests {
                 vec![],
                 false,
             )
-            .await;
+            .await
+            .unwrap();
 
-        if let Err(e) = &create_result {
-            let err = e.to_string();
-            println!("Error: {:?}", err);
-        }
-
-        assert!(create_result.is_ok());
-
-        let key_id = create_result.unwrap().key_id;
+        let key_id = create_response.key_id;
 
         let update_result = client
             .update(

@@ -117,8 +117,6 @@ mod tests {
             .alert_def
             .unwrap();
 
-        println!("Created alert: {:?}", created_alert.id);
-
         let retrieved_alert = alerts_service
             .get(created_alert.id.clone().unwrap())
             .await

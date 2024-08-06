@@ -33,5 +33,8 @@ A pull request (PR) is a great way of fixing issues, small and large, as well as
 
 With these formal requirements fulfilled, a reviewer will have an easy time accepting the code and we can keep the quality of the repository at a reasonable level. For technical details on how to run the tests/create docs/... please refer to the [README.md]() of this repository.
 
+### Git pre-commit hook
+We provide a git pre-commit hook that you can use in order to verify whether your code satisfies some basic quality checks. You can install it by simply running the `install_hooks.sh` script in the root of the repository. You're not forced to install it, but we highly recommend you do.
+
 
 

@@ -26,17 +26,12 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
             ApiKey::from_env().unwrap(),
         );
-
         let mut stream = svc
             .run("filter log_obj.message ~ 'Hello world'".to_string(), None)
             .await
             .unwrap();
         while let Some(response) = stream.message().await.unwrap() {
-            if let Some(Message::Result(result)) = response.message {
-                for r in result.results {
-                    println!("{:?}", r.user_data);
-                }
-            }
+            if let Some(Message::Result(_)) = response.message {}
         }
     }
 }
