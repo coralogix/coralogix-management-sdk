@@ -9,8 +9,8 @@ on:
   pull_request:
     branches: [ master ]
     paths:
-      - "./rust"
-      - "./proto"
+      - "rust/**"
+      - "proto/**"
 
 env:
   CARGO_TERM_COLOR: always
