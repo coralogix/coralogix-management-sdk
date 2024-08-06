@@ -363,6 +363,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "dashboard-folders"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http 0.2.12",
+ "prost",
+ "prost-wkt",
+ "prost-wkt-types",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+ "uuid",
+]
+
+[[package]]
 name = "dashboards"
 version = "0.1.0"
 dependencies = [

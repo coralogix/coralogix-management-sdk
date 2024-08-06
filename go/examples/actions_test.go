@@ -26,7 +26,6 @@ import (
 
 func TestActions(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	t.Log(region)
 	assert.Nil(t, err)
 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
 	assert.Nil(t, err)

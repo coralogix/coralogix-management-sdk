@@ -71,3 +71,6 @@ pub mod users;
 
 /// This module contains the client for the integrations API.
 pub mod integrations;
+
+/// This module contains the client for the dashboard folders API.
+pub mod dashboard_folders;
