@@ -25,6 +25,15 @@ type DashboardsFoldersClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
+// ListDashboardFolderRequest is a request to get a dashboard folders.
+type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
+
+// CreateDashboardFolderRequest is a request to create a dashboards folder.
+type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
+
+// DashboardFolder is a dashboard folder.
+type DashboardFolder = dashboards.DashboardFolder
+
 // Create creates a new dashboard folder.
 func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)

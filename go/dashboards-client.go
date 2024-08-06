@@ -74,6 +74,20 @@ func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*d
 	return client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
+// List lists all dashboards.
+func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCatalogResponse, error) {
+	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := dashboards.NewDashboardCatalogServiceClient(conn)
+
+	return client.GetDashboardCatalog(callProperties.Ctx, &dashboards.GetDashboardCatalogRequest{}, callProperties.CallOptions...)
+}
+
 // Replace replaces a dashboard.
 func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*dashboards.ReplaceDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetCallProperties(ctx)
