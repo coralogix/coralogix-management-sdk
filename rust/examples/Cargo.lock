@@ -866,6 +866,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "integrations"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http 0.2.12",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "inventory"
 version = "0.3.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"

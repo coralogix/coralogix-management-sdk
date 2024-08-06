@@ -42,8 +42,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         dashboards_service(),
         #[cfg(feature = "tags")]
         tags_service(),
-        #[cfg(feature = "extensions")]
-        extensions_service(),
         #[cfg(feature = "e2m")]
         e2m_service(),
         #[cfg(feature = "dataprime")]
@@ -68,6 +66,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         slos_service(),
         #[cfg(feature = "groups")]
         groups_service(),
+        #[cfg(feature = "integrations")]
+        integrations_service(),
     ]
     .concat();
 
@@ -142,13 +142,6 @@ fn dashboards_service() -> &'static [&'static str] {
     ]
 }
 
-fn extensions_service() -> &'static [&'static str] {
-    &[
-        "../../proto/com/coralogix/extensions/v1/extension_service.proto",
-        "../../proto/com/coralogix/extensions/v1/extension_deployment_service.proto",
-    ]
-}
-
 fn dataprime_service() -> &'static [&'static str] {
     &["../../proto/com/coralogixapis/dataprime/v1/query_service.proto"]
 }
@@ -194,4 +187,8 @@ fn slos_service() -> &'static [&'static str] {
 
 fn groups_service() -> &'static [&'static str] {
     &["../../proto/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto"]
+}
+
+fn integrations_service() -> &'static [&'static str] {
+    &["../../proto/com/coralogix/integrations/v1/integration_service.proto"]
 }

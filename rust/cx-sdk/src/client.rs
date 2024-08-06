@@ -68,3 +68,6 @@ pub mod groups;
 
 /// This module contains the client for the SCIM API.
 pub mod users;
+
+/// This module contains the client for the integrations API.
+pub mod integrations;

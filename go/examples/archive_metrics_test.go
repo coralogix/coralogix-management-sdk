@@ -1,35 +1,69 @@
+// Copyright 2024 Coralogix Ltd.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package examples
 
-// import (
-// 	"context"
-// 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-// 	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/metrics"
-// 	"testing"
+import (
+	"context"
+	"testing"
 
-// 	"github.com/stretchr/testify/assert"
-// )
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
-// func TestArchiveMetrics(t *testing.T) {
+	"github.com/stretchr/testify/assert"
+)
 
-// 	region, err := cxsdk.CoralogixRegionFromEnv()
-// 	assert.Nil(t, err)
-// 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
-// 	assert.Nil(t, err)
-// 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
-// 	c := cxsdk.NewArchiveMetricsClient(creator)
+func TestArchiveMetrics(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+	c := cxsdk.NewArchiveMetricsClient(creator)
+	s3Config := &cxsdk.ArchiveS3Config{
+		Bucket: "yak-coralogix-bucket",
+		Region: "eu-north-1",
+	}
 
-// 	_, configureTenantError := c.UpdateArchiveMetrics(context.Background(), &metrics.ConfigureTenantRequest{
-// 		RetentionPolicy: nil,
-// 		StorageConfig: &metrics.ConfigureTenantRequest_S3{
-// 			S3: &metrics.S3Config{
-// 				Bucket: "coralogix-c4c-eu2-prometheus-data",
-// 				Region: "eu-west-1",
-// 			},
-// 		},
-// 	})
+	_, configureErr := c.ConfigureTenant(context.Background(), &cxsdk.ConfigureTenantRequest{
+		StorageConfig: &cxsdk.ConfigureTenantRequestS3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, configureErr)
 
-// 	assert.Nil(t, configureTenantError)
+	_, validateErr := c.ValidateTarget(context.Background(), &cxsdk.ValidateBucketRequest{
+		StorageConfig: &cxsdk.ValidateBucketRequestS3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, validateErr)
 
-// 	_, getTenantError := c.GetArchiveMetrics(context.Background())
-// 	assert.Nil(t, getTenantError)
-// }
+	days := uint32(2)
+	_, updateErr := c.Update(context.Background(), &cxsdk.UpdateTenantRequest{
+		RetentionDays: &days,
+		StorageConfig: &cxsdk.UpdateRequestS3{
+			S3: s3Config,
+		},
+	})
+	assert.Nil(t, updateErr)
+
+	config, getTenantError := c.Get(context.Background())
+
+	assert.Nil(t, getTenantError)
+	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2S3).S3.Bucket, s3Config.Bucket)
+	_, e := c.Enable(context.Background())
+	assert.Nil(t, e)
+	_, e = c.Disable(context.Background())
+	assert.Nil(t, e)
+}

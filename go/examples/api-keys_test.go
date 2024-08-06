@@ -14,49 +14,54 @@
 
 package examples
 
-// import (
-// 	"context"
-// 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-// 	"testing"
+import (
+	"context"
+	"os"
+	"strconv"
+	"testing"
 
-// 	"github.com/stretchr/testify/assert"
-// )
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
-// func TestApiKeys(t *testing.T) {
-// 	region, err := cxsdk.CoralogixRegionFromEnv()
-// 	assert.Nil(t, err)
-// 	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
-// 	assert.Nil(t, err)
-// 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
-// 	k := cxsdk.NewAPIKeysClient(creator)
+	"github.com/stretchr/testify/assert"
+)
 
-// 	key, e := k.CreateAPIKey(context.Background(), &cxsdk.CreateAPIKeyRequest{
-// 		Name: "My APM KEY",
-// 		Owner: &cxsdk.Owner{
-// 			Owner: &cxsdk.OwnerUserID{
-// 				UserId: "4013254",
-// 			},
-// 		},
-// 		KeyPermissions: &cxsdk.APIKeyPermissions{
-// 			Presets:     []string{"APM"},
-// 			Permissions: []string{},
-// 		},
-// 	})
-// 	assert.Nil(t, e)
+func TestApiKeys(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	apiKey, err := cxsdk.CoralogixAPIKeyFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
+	k := cxsdk.NewAPIKeysClient(creator)
+	teamId, e := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
+	assert.Nil(t, e)
 
-// 	newName := "new-name"
-// 	k.UpdateAPIKey(context.Background(), &cxsdk.UpdateAPIKeyRequest{
-// 		KeyId:   key.KeyId,
-// 		NewName: &newName,
-// 	})
+	key, e := k.Create(context.Background(), &cxsdk.CreateAPIKeyRequest{
+		Name: "My APM KEY",
+		Owner: &cxsdk.Owner{
+			Owner: &cxsdk.OwnerTeamID{
+				TeamId: uint32(teamId),
+			},
+		},
+		KeyPermissions: &cxsdk.APIKeyPermissions{
+			Presets:     []string{"APM"},
+			Permissions: []string{},
+		},
+	})
+	assert.Nil(t, e)
 
-// 	updated, _ := k.GetAPIKey(context.Background(), &cxsdk.GetAPIKeyRequest{
-// 		KeyId: key.KeyId,
-// 	})
+	newName := "new-name"
+	k.Update(context.Background(), &cxsdk.UpdateAPIKeyRequest{
+		KeyId:   key.KeyId,
+		NewName: &newName,
+	})
 
-// 	assert.Equal(t, updated.KeyInfo.Name, newName)
+	updated, _ := k.Get(context.Background(), &cxsdk.GetAPIKeyRequest{
+		KeyId: key.KeyId,
+	})
 
-// 	k.DeleteAPIKey(context.Background(), &cxsdk.DeleteAPIKeyRequest{
-// 		KeyId: key.KeyId,
-// 	})
-// }
+	assert.Equal(t, updated.KeyInfo.Name, newName)
+
+	k.Delete(context.Background(), &cxsdk.DeleteAPIKeyRequest{
+		KeyId: key.KeyId,
+	})
+}

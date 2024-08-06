@@ -76,7 +76,6 @@ impl UsersClient {
     /// Create a [`ScimUser`].
     pub async fn create(&self, user: ScimUser) -> Result<ScimUser, reqwest::Error> {
         let json_request = serde_json::to_string(&user).unwrap();
-        println!("{:?}", json_request);
         let response = self
             .http_client
             .post(&self.target_url)
