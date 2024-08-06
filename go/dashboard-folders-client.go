@@ -25,7 +25,7 @@ type DashboardsFoldersClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// GetDasListDashboardFolderRequesthboardRequest is a request to get a dashboard folders.
+// ListDashboardFolderRequest is a request to get a dashboard folders.
 type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
 
 // DashboardFolder is a dashboard folder.
