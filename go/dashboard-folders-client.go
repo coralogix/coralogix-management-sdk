@@ -34,6 +34,9 @@ type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
 // DashboardFolder is a dashboard folder.
 type DashboardFolder = dashboards.DashboardFolder
 
+// ListDashboardFolderRequest is a request to get a dashboard folders.
+type GetDashboardFolderRequest = dashboards.GetDashboardFolderRequest
+
 // Create creates a new dashboard folder.
 func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
@@ -48,8 +51,22 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.Cre
 	return client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Get gets all dashboard folders.
-func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.ListDashboardFoldersRequest) (*dashboards.ListDashboardFoldersResponse, error) {
+// Get dashboard folder details.
+func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDashboardFolderRequest) (*dashboards.GetDashboardFolderResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := dashboards.NewDashboardFoldersServiceClient(conn)
+
+	return client.GetDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// List gets all dashboard folders.
+func (c DashboardsFoldersClient) List(ctx context.Context, req *dashboards.ListDashboardFoldersRequest) (*dashboards.ListDashboardFoldersResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
