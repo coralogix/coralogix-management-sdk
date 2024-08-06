@@ -42,8 +42,8 @@ mod tests {
         // let _ = client.unpin_dashboard(id.clone()).await.unwrap();
 
         let dashboards = client.list().await.unwrap();
-        assert!(dashboards.dashboards.unwrap().len() > 0);
-        assert!(dashboards.dashboards.unwrap().iter().any(|d| d.id == Some(id.clone())));
+        assert!(dashboards.items.unwrap().len() > 0);
+        assert!(dashboards.items.unwrap().iter().any(|d| d.id == Some(id.clone())));
         let _ = client.delete(id.clone()).await.unwrap();
     }
 }
