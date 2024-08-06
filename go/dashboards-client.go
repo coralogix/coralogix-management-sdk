@@ -43,7 +43,7 @@ type PinDashboardRequest = dashboards.PinDashboardRequest
 // UnpinDashboardRequest is a request to unpin a dashboard.
 type UnpinDashboardRequest = dashboards.UnpinDashboardRequest
 
-// Dashboard_FolderPath is a dashboard folder path.
+// DashboardFolderPath is a dashboard folder path.
 type DashboardFolderPath = dashboards.Dashboard_FolderPath
 
 // FolderPath is a dashboard folder path.
