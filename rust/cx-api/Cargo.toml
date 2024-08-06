@@ -10,28 +10,29 @@ authors = { workspace = true }
 
 [features]
 default = [
+    "actions",
+    "alert_scheduler",
     "alerts",
+    "api_keys",
     "dashboards",
     "data_usage",
     "dataprime",
+    "e2m",
     "enrichment",
     "extensions",
+    "groups",
+    "integrations",
+    "metrics_configurator",
     "outgoing_webhooks",
     "quota",
-    "rules",
-    "tags",
-    "views",
-    "actions",
-    "alert_scheduler",
-    "api_keys",
-    "target",
-    "metrics_configurator",
     "retentions",
-    "team",
+    "rules",
     "scopes",
     "slos",
-    "e2m",
-    "groups",
+    "tags",
+    "target",
+    "team",
+    "views",
 ]
 alerts = []
 rules = []
@@ -55,6 +56,7 @@ scopes = []
 slos = []
 e2m = []
 groups = []
+integrations = []
 
 [dependencies]
 prost = { workspace = true }

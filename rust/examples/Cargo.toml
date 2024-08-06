@@ -11,6 +11,7 @@ members = [
     "data-sets",
     "dataprime-query",
     "groups",
+    "integrations",
     "outgoing-webhooks",
     "scopes",
     "slos",
