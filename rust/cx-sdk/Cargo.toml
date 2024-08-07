@@ -30,3 +30,7 @@ serde_json = { workspace = true }
 
 [lints.rust]
 missing_docs = "deny"
+
+[lints.clippy]
+all = "deny"
+print_stdout = "deny"

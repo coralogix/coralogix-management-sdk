@@ -6,7 +6,7 @@ members = [
     "alerts",
     "api-keys",
     "archive-logs",
-    "archive-metrics",
+    "archive-metrics", "dashboard-folders",
     "dashboards",
     "data-sets",
     "dataprime-query",
