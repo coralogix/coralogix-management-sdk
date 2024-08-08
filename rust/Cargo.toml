@@ -16,7 +16,7 @@ edition = "2021"
 repository = "https://github.com/coralogix/coralogix-management-sdk"
 keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]
-authors = []
+authors = ["The YAK team at Coralogix"]
 readme = "../README.md"
 homepage = "https://coralogix.com"
 
