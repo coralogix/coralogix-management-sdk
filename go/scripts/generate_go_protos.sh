@@ -59,7 +59,7 @@ do
             *dashboards/v1/ast/widgets/common/queries.proto ) 
             ;; 
         *) 
-            protoc --proto_path=$proto_dir --go_out=../.. --go-grpc_out=../.. $args $proto_file
+            protoc --proto_path=$proto_dir --go_out=../.. --go-grpc_out=../.. --go-grpc_opt=module=github.com/coralogix --go_opt=module=github.com/coralogix $args $proto_file
             ;;
         esac
     fi
@@ -68,3 +68,4 @@ done
 sed -i'.bak' -e 's/file_com_coralogixapis_dashboards_v1_ast_widgets_common_queries_proto_init()/\/\/file_com_coralogixapis_dashboards_v1_ast_widgets_common_queries_proto_init()/g' ${go_out_dir}/coralogixapis/dashboards/v1/*
 
 rm -rf ${go_out_dir}/coralogixapis/dashboards/v1/*.bak
+

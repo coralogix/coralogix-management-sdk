@@ -23,9 +23,9 @@ use crate::{
 use cx_api::proto::com::coralogix::integrations::v1::{
     integration_metadata::SpecificData, integration_service_client::IntegrationServiceClient,
     DeleteIntegrationRequest, DeleteIntegrationResponse, GenericIntegrationParameters,
-    GetIntegrationDefinitionRequest, GetIntegrationDefinitionResponse,
-    GetIntegrationDetailsRequest, GetIntegrationDetailsResponse, GetIntegrationsRequest,
-    GetIntegrationsResponse, GetManagedIntegrationStatusRequest,
+    GetDeployedIntegrationRequest, GetDeployedIntegrationResponse, GetIntegrationDefinitionRequest,
+    GetIntegrationDefinitionResponse, GetIntegrationDetailsRequest, GetIntegrationDetailsResponse,
+    GetIntegrationsRequest, GetIntegrationsResponse, GetManagedIntegrationStatusRequest,
     GetManagedIntegrationStatusResponse, GetRumApplicationVersionDataRequest,
     GetRumApplicationVersionDataResponse, GetTemplateRequest, GetTemplateResponse,
     IntegrationMetadata, SaveIntegrationRequest, SaveIntegrationResponse, SyncRumDataRequest,
@@ -167,7 +167,7 @@ impl IntegrationsClient {
     /// # Arguments
     /// * `id` - The id of the integration to retrieve.
     /// * `include_testing_revision` - Whether to include the testing revision.
-    pub async fn get(
+    pub async fn get_details(
         &self,
         id: String,
         include_testing_revision: bool,
@@ -184,6 +184,27 @@ impl IntegrationsClient {
             .lock()
             .await
             .get_integration_details(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(From::from)
+    }
+
+    /// Retrieves the Deployed Integration identified by its id.
+    ///
+    /// # Arguments
+    /// * `id` - The id of the deployed integration to retrieve.
+    pub async fn get(&self, id: String) -> Result<GetDeployedIntegrationResponse> {
+        let request = make_request_with_metadata(
+            GetDeployedIntegrationRequest {
+                integration_id: Some(id),
+            },
+            &self.metadata_map,
+        );
+
+        self.service_client
+            .lock()
+            .await
+            .get_deployed_integration(request)
             .await
             .map(|r| r.into_inner())
             .map_err(From::from)

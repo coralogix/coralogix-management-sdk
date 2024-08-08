@@ -21,6 +21,7 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/integrations/v1"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -111,23 +112,25 @@ func TestIntegration(t *testing.T) {
 
 	assert.Nil(t, err)
 
-	details, retrievalError := c.Get(context.Background(), &cxsdk.GetIntegrationDetailsRequest{
+	_, listError := c.List(context.Background(), &cxsdk.GetIntegrationDetailsRequest{
 		Id:                     wrapperspb.String(name),
 		IncludeTestingRevision: wrapperspb.Bool(true),
 	})
-	if retrievalError != nil {
-		log.Fatal(retrievalError.Error())
+	if listError != nil {
+		log.Fatal(listError.Error())
 	}
-	assert.Nil(t, retrievalError)
-	integrationDetail := details.IntegrationDetail.IntegrationTypeDetails.(*cxsdk.IntegrationDetailsDefault)
-	found := false
-	for _, d := range integrationDetail.Default.Registered {
-		if d.Id.Value == createResponse.IntegrationId.Value {
-			found = true
-			break
-		}
+	assert.Nil(t, listError)
+
+	deployedIntegration, getError := c.Get(context.Background(), &v1.GetDeployedIntegrationRequest{
+		IntegrationId: createResponse.IntegrationId,
+	})
+
+	if getError != nil {
+		log.Fatal(getError.Error())
 	}
-	assert.True(t, found)
+
+	assert.Nil(t, getError)
+	assert.NotNil(t, deployedIntegration)
 
 	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteIntegrationRequest{
 		IntegrationId: createResponse.IntegrationId,

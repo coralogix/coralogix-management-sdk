@@ -57,8 +57,8 @@ commit_hash = "19e36962f6fcced9bd167870b78c408ba4caafc6"
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-revision = "3b4311e5b4257d5b7fcec7d9799cd363b7249de9"
-commit_hash = "3b4311e5b4257d5b7fcec7d9799cd363b7249de9"
+revision = "0c93cdb178b9324c2e05c1260aba61f21d071428"
+commit_hash = "0c93cdb178b9324c2e05c1260aba61f21d071428"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -129,7 +129,7 @@ commit_hash = "02122a75f47cd01387f1b7bef5531e419a875f03"
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "2244fe42081794c9cc8c8b1a4519365116960620"
+commit_hash = "8652e28bd0156553465918b9b7564420da79456e"
 
 [[dependencies]]
 name = "rules-api-protobuf"

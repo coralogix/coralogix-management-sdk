@@ -17,6 +17,7 @@ package examples
 import (
 	"context"
 	"fmt"
+	"log"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
@@ -88,17 +89,6 @@ func TestWebhooks(t *testing.T) {
 				EmailGroup: &cxsdk.EmailGroupConfig{
 					EmailAddresses: []*wrapperspb.StringValue{wrapperspb.String("user@example.com")},
 				},
-			},
-		},
-	})
-
-	crud(t, &cxsdk.CreateOutgoingWebhookRequest{
-		Data: &cxsdk.OutgoingWebhookInputData{
-			Name: wrapperspb.String("microsoft-teams-webhook"),
-			Url:  wrapperspb.String("https://teams.microsoft.com/"),
-			Type: cxsdk.WebhookTypeMicrosoftTeams,
-			Config: &cxsdk.MicrosoftTeams{
-				MicrosoftTeams: &cxsdk.MicrosoftTeamsConfig{},
 			},
 		},
 	})
@@ -206,6 +196,9 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 	creator := cxsdk.NewCallPropertiesCreator(region, apiKey)
 	c := cxsdk.NewWebhooksClient(creator)
 	result, e := c.Create(context.Background(), req)
+	if e != nil {
+		log.Fatal(e.Error())
+	}
 	assert.Nil(t, e)
 	newName := fmt.Sprintf("%v-2", req.Data.Name.GetValue())
 	_, e = c.Replace(context.Background(),

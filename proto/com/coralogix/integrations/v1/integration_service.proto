@@ -12,6 +12,21 @@ import "google/protobuf/timestamp.proto";
 
 
 service IntegrationService {
+
+  rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse){
+    option (audit_log_description).description = "List managed integration names";
+    option (google.api.http) = {
+      get: "/v1/integrations/managed/list"
+    };
+  }
+
+  rpc GetDeployedIntegration(GetDeployedIntegrationRequest) returns (GetDeployedIntegrationResponse){
+    option (audit_log_description).description = "Get deployed integration";
+    option (google.api.http) = {
+      get: "/v1/integrations/deployed/{integration_id}"
+    };
+  }
+
   rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse){
     option (audit_log_description).description = "Get all integrations";
     option (google.api.http) = {
@@ -92,6 +107,20 @@ service IntegrationService {
       body: "*"
     };
   }
+}
+
+message ListManagedIntegrationKeysRequest{
+}
+
+message ListManagedIntegrationKeysResponse{
+ repeated google.protobuf.StringValue integration_keys = 1;
+}
+
+message GetDeployedIntegrationRequest {
+  google.protobuf.StringValue integration_id = 1;
+}
+message GetDeployedIntegrationResponse {
+  DeployedIntegrationInformation integration = 1;
 }
 
 message UpdateIntegrationRequest {
