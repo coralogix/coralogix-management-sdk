@@ -18,6 +18,7 @@ enum WebhookType {
   DEMISTO = 9;
   AWS_EVENT_BRIDGE = 10;
   IBM_EVENT_NOTIFICATIONS = 11;
+  MS_TEAMS_WORKFLOW = 12;
 }
 
 message GenericWebhookConfig {
@@ -73,6 +74,7 @@ message EmailGroupConfig {
   repeated google.protobuf.StringValue email_addresses = 1;
 }
 message MicrosoftTeamsConfig {}
+message MSTeamsWorkflowConfig {}
 message JiraConfig {
   google.protobuf.StringValue api_token = 1;
   google.protobuf.StringValue email = 2;
@@ -121,6 +123,7 @@ message OutgoingWebhook {
     DemistoConfig demisto = 108;
     AwsEventBridgeConfig aws_event_bridge = 109;
     IbmEventNotificationsConfig ibm_event_notifications = 110;
+    MSTeamsWorkflowConfig ms_teams_workflow = 111;
   }
 }
 
@@ -140,6 +143,7 @@ message OutgoingWebhookInputData {
     DemistoConfig demisto = 108;
     AwsEventBridgeConfig aws_event_bridge = 109;
     IbmEventNotificationsConfig ibm_event_notifications = 110;
+    MSTeamsWorkflowConfig ms_teams_workflow = 111;
   }
 }
 

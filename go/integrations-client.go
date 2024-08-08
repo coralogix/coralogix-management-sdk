@@ -125,8 +125,8 @@ func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRe
 	return client.UpdateIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Get gets integration details
-func (c IntegrationsClient) Get(ctx context.Context, req *GetIntegrationDetailsRequest) (*ext.GetIntegrationDetailsResponse, error) {
+// List gets all deployed integrations
+func (c IntegrationsClient) List(ctx context.Context, req *GetIntegrationDetailsRequest) (*ext.GetIntegrationDetailsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -137,6 +137,20 @@ func (c IntegrationsClient) Get(ctx context.Context, req *GetIntegrationDetailsR
 	client := ext.NewIntegrationServiceClient(conn)
 
 	return client.GetIntegrationDetails(callProperties.Ctx, req, callProperties.CallOptions...)
+}
+
+// Get gets a deployed integration
+func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegrationRequest) (*ext.GetDeployedIntegrationResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := ext.NewIntegrationServiceClient(conn)
+
+	return client.GetDeployedIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // GetDefinition gets an integration definition

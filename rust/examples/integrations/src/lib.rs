@@ -98,21 +98,14 @@ mod tests {
             .await
             .unwrap();
 
-        let all_instances = client.get(name.clone(), true).await.unwrap();
-        match all_instances
-            .integration_detail
-            .unwrap()
-            .integration_type_details
-            .unwrap()
-        {
-            cx_sdk::client::integrations::IntegrationTypeDetails::Default(details) => {
-                assert!(details
-                    .registered
-                    .into_iter()
-                    .any(|i| i.id == create.integration_id))
-            }
-        }
+        let _ = client.get_details(name.clone(), true).await.unwrap();
 
-        client.delete(create.integration_id.unwrap()).await.unwrap();
+        let id = create.integration_id.unwrap();
+
+        let deployed_integration = client.get(id.clone()).await.unwrap();
+
+        assert!(deployed_integration.integration.unwrap().id.unwrap() == id.clone());
+
+        client.delete(id).await.unwrap();
     }
 }

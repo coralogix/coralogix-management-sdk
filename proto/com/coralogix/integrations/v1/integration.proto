@@ -329,3 +329,11 @@ message RumVersionData {
   repeated Version versions = 1;
   google.protobuf.Timestamp synced_at = 2;
 }
+
+message DeployedIntegrationInformation {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue definition_key = 2;
+  google.protobuf.StringValue definition_version = 3;
+  repeated Parameter parameters = 4;
+  IntegrationStatus integration_status = 5;
+}
