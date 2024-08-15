@@ -17,7 +17,7 @@ concurrency:
   
 jobs:
   build_docs:
-    name: Generate Docs
+    name: "[Rust & Go SDK] Generate Docs"
     runs-on: ubuntu-latest
     steps:
       - name: Prepare environment
@@ -84,7 +84,7 @@ jobs:
           path: ${{ runner.temp }}/docs
 
   deploy:
-    name: Deploy Docs To GitHub Pages
+    name: "[Docs] Deploy Docs To GitHub Pages"
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
