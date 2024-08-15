@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/common.proto";
+
+message SubmitUsageStatsRequest {
+    repeated uint32 team_ids = 1;
+    DataSourceType source_type = 2;
+    repeated Path paths = 3;
+}
+
+message Path {
+    repeated string path_value = 1;
+    PathType path_type = 2;
+}
+
+enum PathType {
+    PATH_TYPE_UNSPECIFIED = 0;
+    PATH_TYPE_LABEL = 1;
+    PATH_TYPE_METADATA = 2;
+    PATH_TYPE_USER_DATA = 3;
+}
+
+message SubmitUsageStatsResponse {}

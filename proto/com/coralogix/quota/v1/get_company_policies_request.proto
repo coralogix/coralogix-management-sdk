@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+
+message GetCompanyPoliciesRequest {
+  google.protobuf.BoolValue enabled_only = 1;
+  optional SourceType source_type = 2;
+}

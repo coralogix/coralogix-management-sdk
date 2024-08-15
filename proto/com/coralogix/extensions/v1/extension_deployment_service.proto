@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package com.coralogix.extensions.v1;
+
+import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/extensions/v1/extension.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+service ExtensionDeploymentService {
+  rpc GetDeployedExtensions(GetDeployedExtensionsRequest) returns (GetDeployedExtensionsResponse) {
+    option (audit_log_description).description = "Get deployed extensions";
+    option (google.api.http) = {
+      get: "/extensions-deployment/v1/deployed"
+    };
+  }
+
+  rpc DeployExtension(DeployExtensionRequest) returns (DeployExtensionResponse) {
+    option (audit_log_description).description = "Deploy extension";
+    option (google.api.http) = {
+      post: "/extensions-deployment/v1/deploy"
+      body: "*"
+    };
+  }
+
+  rpc UpdateExtension(UpdateExtensionRequest) returns (UpdateExtensionResponse) {
+    option (audit_log_description).description = "Update extension";
+    option (google.api.http) = {
+      post: "/extensions-deployment/v1/update"
+      body: "*"
+    };
+  }
+
+  rpc UndeployExtension(UndeployExtensionRequest) returns (UndeployExtensionResponse) {
+    option (audit_log_description).description = "Undeploy extension";
+    option (google.api.http) = {
+      post: "/extensions-deployment/v1/undeploy"
+      body: "*"
+    };
+  }
+}
+
+message GetDeployedExtensionsRequest {}
+
+message GetDeployedExtensionsResponse {
+  message DeployedExtensionSummary {
+    ItemCounts deployed_item_counts = 1;
+  }
+  message DeployedExtension {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue version = 2;  
+    repeated google.protobuf.StringValue applications = 3;
+    repeated google.protobuf.StringValue subsystems = 4;
+    repeated google.protobuf.StringValue item_ids = 5;
+    DeployedExtensionSummary summary = 6;
+  }
+
+  repeated DeployedExtension deployed_extensions = 1;
+}
+
+message ExtensionDeployment {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue version = 2;
+  repeated google.protobuf.StringValue item_ids = 3;
+  repeated google.protobuf.StringValue applications = 4;
+  repeated google.protobuf.StringValue subsystems = 5;
+}
+
+message DeployExtensionRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue version = 2;
+  repeated google.protobuf.StringValue item_ids = 3;
+  repeated google.protobuf.StringValue applications = 4;
+  repeated google.protobuf.StringValue subsystems = 5;
+  optional ExtensionDeployment extension_deployment = 6;
+}
+
+message DeployExtensionResponse {
+  ExtensionDeployment extension_deployment = 1;
+}
+
+message UpdateExtensionRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue version = 2;
+  repeated google.protobuf.StringValue item_ids = 3;
+  repeated google.protobuf.StringValue applications = 4;
+  repeated google.protobuf.StringValue subsystems = 5;
+  optional ExtensionDeployment extension_deployment = 6;
+}
+
+message UpdateExtensionResponse {
+  ExtensionDeployment extension_deployment = 1;
+}
+
+message UndeployExtensionRequest {
+  google.protobuf.StringValue id = 1;
+  repeated google.protobuf.StringValue kept_extension_items = 2;
+}
+
+message UndeployExtensionResponse {
+  message FailedItem {
+    google.protobuf.StringValue item_id = 1;
+    google.protobuf.StringValue remote_id = 2;
+    google.protobuf.StringValue reason = 3;
+  }
+  repeated FailedItem failed_items = 1;
+  optional ExtensionDeployment extension_deployment = 2;
+}

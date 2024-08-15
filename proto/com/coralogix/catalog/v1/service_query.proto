@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogix.catalog.v1;
+
+import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogix/catalog/v1/service.proto";
+import "google/protobuf/wrappers.proto";
+
+message ServiceQuery {
+  TimeRange time_range = 1;
+  repeated ServiceCatalogFilter service_catalog_filters = 2;
+  google.protobuf.Int64Value trend_offset = 3;
+}

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "com/coralogixapis/apm/widgets/v1/donut.proto";
+import "com/coralogixapis/apm/widgets/v1/gauge.proto";
+import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
+import "com/coralogixapis/apm/widgets/v1/map_chart.proto";
+import "com/coralogixapis/apm/widgets/v1/topk.proto";
+import "com/coralogixapis/apm/widgets/v1/topk_multi_value.proto";
+
+package com.coralogixapis.apm.queries.k8s.v1;
+
+message ClusterWidgetWrapper {
+    oneof widget {
+        com.coralogixapis.apm.widgets.v1.Donut donut = 1;
+        com.coralogixapis.apm.widgets.v1.Gauge gauge = 2;
+        com.coralogixapis.apm.widgets.v1.LineChart line_chart = 3;
+        com.coralogixapis.apm.widgets.v1.MapChart map_chart = 4;
+        com.coralogixapis.apm.widgets.v1.Topk topk = 5;
+        com.coralogixapis.apm.widgets.v1.TopkMultiValue topk_multi_value = 6;
+    }
+}

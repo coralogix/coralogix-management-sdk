@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+message GenerateExplanationRequest {
+  repeated LogsExplainerMessage logs = 1;
+  repeated uint32 team_ids = 2;
+}
+
+message GenerateExplanationResponse {
+  string explanation = 1;
+}
+
+message LogsExplainerMessage {
+   string msg = 1;
+}

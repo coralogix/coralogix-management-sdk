@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+
+message AlertEventPayload {
+  google.protobuf.Struct payload = 1;
+  google.protobuf.StringValue payload_type = 2;
+}

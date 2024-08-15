@@ -1,0 +1,20 @@
+syntax = "proto3";
+package com.coralogix.catalog.v1;
+
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogix/catalog/v1/service_overview.proto";
+import "com/coralogix/catalog/v1/service_overviewe_query.proto";
+
+message GetServiceOverviewRequest {
+  ServiceOverviewQuery query = 1;
+}
+
+message GetServiceOverviewResponse {
+  ServiceOverview service_overview = 1;
+}
+
+service ServiceOverviewService {
+  rpc GetServiceOverview(GetServiceOverviewRequest) returns (GetServiceOverviewResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service overview";
+  }
+}

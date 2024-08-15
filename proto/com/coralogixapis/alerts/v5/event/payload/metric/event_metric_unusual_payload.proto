@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v5;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message EventMetricUnusualPayload {
+  google.protobuf.Timestamp   from_timestamp        = 1;
+  google.protobuf.Timestamp   to_timestamp          = 2;
+  google.protobuf.UInt64Value forecast_timestamp    = 3;
+  TimeRangeWithInterval       search_details        = 4;
+  google.protobuf.DoubleValue distance              = 5;
+  ExtremeSample               extreme_sample        = 6;
+  google.protobuf.DoubleValue ratio_unusual_samples = 7;
+}
+
+message TimeRangeWithInterval {
+  google.protobuf.Timestamp from_timestamp = 1;
+  google.protobuf.Timestamp to_timestamp   = 2;
+  NamedInterval             interval       = 3;
+}
+
+message NamedInterval {
+  google.protobuf.StringValue name        = 1;
+  google.protobuf.Int64Value  duration_ms = 2;
+}
+
+message ExtremeSample {
+  google.protobuf.Timestamp   timestamp   = 1;
+  google.protobuf.DoubleValue lower_limit = 2;
+  google.protobuf.DoubleValue upper_limit = 3;
+  google.protobuf.DoubleValue value       = 4;
+}

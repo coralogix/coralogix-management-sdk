@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/flat.proto";
+import "com/coralogix/schemastore/v1/labels.proto";
+import "com/coralogix/schemastore/v1/log_fields.proto";
+import "com/coralogix/schemastore/v1/tracing_fields.proto";
+import "com/coralogix/schemastore/v1/tracing_labels.proto";
+import "com/coralogix/schemastore/v1/metrics.proto";
+import "com/coralogix/schemastore/v1/tracing_samples.proto";
+import "com/coralogix/schemastore/v1/list_datasets.proto";
+import "com/coralogix/schemastore/v1/usage_stats.proto";
+import "com/coralogix/schemastore/v1/correlations.proto";
+import "com/coralogix/schemastore/v1/correlations_choice.proto";
+import "com/coralogix/schemastore/v1/batch_cardinality.proto";
+import "com/coralogix/schemastore/v1/query_assistant.proto";
+import "com/coralogix/schemastore/v1/feedback.proto";
+import "com/coralogix/schemastore/v1/logs_explainer.proto";
+import "com/coralogix/schemastore/v1/virtual_field.proto";
+
+service SchemaStoreInternalService {
+  rpc LogFields (LogFieldsRequest) returns (LogFieldsResponse) {
+    option deprecated = true;
+  }
+  rpc LogLabels (LogLabelsRequest) returns (LogLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc TracingFields (TracingFieldsRequest) returns (TracingFieldsResponse) {
+    option deprecated = true;
+  }
+  rpc TracingLabels (TracingLabelsRequest) returns (TracingLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc MetricNames (MetricNamesRequest) returns (MetricNamesResponse) {
+    option deprecated = true;
+  }
+  rpc MetricLabels (MetricLabelsRequest) returns (MetricLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc BatchTracingSamples (BatchTracingSamplesRequest) returns (BatchTracingSamplesResponse) {}
+  rpc Observations (ObservationsRequest) returns (ObservationsResponse) {}
+  rpc ListDatasets (ListDatasetsRequest) returns (ListDatasetsResponse) {}
+  rpc BatchCardinality (BatchCardinalityRequest) returns (BatchCardinalityResponse) {}
+  rpc CreateVirtualField (CreateVirtualFieldRequest) returns (CreateVirtualFieldResponse) {}
+  rpc ListVirtualFields (ListVirtualFieldsRequest) returns (ListVirtualFieldsResponse) {}
+  rpc DeleteVirtualField (DeleteVirtualFieldRequest) returns (DeleteVirtualFieldResponse) {}
+}
+
+
+service SchemaStoreService {
+  rpc LogFields (LogFieldsRequest) returns (LogFieldsResponse) {
+    option deprecated = true;
+  }
+  rpc TracingFields (TracingFieldsRequest) returns (TracingFieldsResponse) {
+    option deprecated = true;
+  }
+  rpc LogLabels (LogLabelsRequest) returns (LogLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc TracingLabels (TracingLabelsRequest) returns (TracingLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc TracingSamples (TracingSamplesRequest) returns (TracingSamplesResponse) {
+    option deprecated = true;
+  }
+  rpc ListEnrichments (ListEnrichmentsRequest) returns (ListEnrichmentsResponse) {
+    option deprecated = true;
+  }
+  rpc MetricNames (MetricNamesRequest) returns (MetricNamesResponse) {
+    option deprecated = true;
+  }
+  rpc MetricLabels (MetricLabelsRequest) returns (MetricLabelsResponse) {
+    option deprecated = true;
+  }
+  rpc BatchTracingSamples (BatchTracingSamplesRequest) returns (BatchTracingSamplesResponse) {}
+  rpc ListDatasets (ListDatasetsRequest) returns (ListDatasetsResponse) {}
+  rpc SubmitUsageStats (SubmitUsageStatsRequest) returns (SubmitUsageStatsResponse) {}
+  rpc Correlations (CorrelationsRequest) returns (CorrelationsResponse) {}
+  rpc CorrelationChoice (CorrelationChoiceRequest) returns (CorrelationChoiceResponse) {}
+  rpc BatchCardinality (BatchCardinalityRequest) returns (BatchCardinalityResponse) {}
+  rpc Observations (ObservationsRequest) returns (ObservationsResponse) {}
+}
+
+service QueryAssistantService {
+  rpc GenerateQuery (GenerateQueryRequest) returns (GenerateQueryResponse) {}
+  rpc Settings (QueryAssistantServiceSettingsRequest) returns (QueryAssistantServiceSettingsResponse) {}
+  rpc UpdateSettings (QueryAssistantServiceUpdateSettingsRequest) returns (QueryAssistantServiceUpdateSettingsResponse) {}
+  rpc AutoFeedback (AutoFeedbackRequest) returns (AutoFeedbackResponse) {}
+  rpc UserFeedback (UserFeedbackRequest) returns (UserFeedbackResponse) {
+    option deprecated = true;
+  }
+  rpc UserFeedbackV2 (UserFeedbackV2Request) returns (UserFeedbackV2Response) {}
+}
+
+service QueryAssistantInternalService {
+  rpc GenerateQuery (GenerateQueryRequest) returns (GenerateQueryResponse) {}
+  rpc Settings (SettingsRequest) returns (SettingsResponse) {}
+  rpc UpdateSettings (UpdateSettingsRequest) returns (UpdateSettingsResponse) {}
+  rpc AutoFeedback (AutoFeedbackRequest) returns (AutoFeedbackResponse) {}
+  rpc UserFeedback (UserFeedbackRequest) returns (UserFeedbackResponse) {
+    option deprecated = true;
+  }
+  rpc UserFeedbackV2 (UserFeedbackV2Request) returns (UserFeedbackV2Response) {}
+  rpc InternalEnableCompany (InternalEnableCompanyRequest) returns (InternalEnableCompanyResponse) {}
+}
+
+service LogsExplainerService {
+  rpc GenerateExplanation (GenerateExplanationRequest) returns (GenerateExplanationResponse) {}
+}
+
+service LogsExplainerInternalService {
+  rpc GenerateExplanation (GenerateExplanationRequest) returns (GenerateExplanationResponse) {}
+}

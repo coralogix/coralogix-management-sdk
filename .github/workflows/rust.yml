@@ -1,0 +1,98 @@
+name: Rust SDK
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - "**.rs"
+      - "**.proto"
+      - "**.toml"
+  pull_request:
+    branches: [ master ]
+    paths:
+      - "**.rs"
+      - "**.proto"
+      - "**.toml"
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: arduino/setup-protoc@v3
+        with:
+          version: "26.1"
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+          components: rustfmt
+
+      - name: Install nextest
+        uses: taiki-e/install-action@nextest
+
+      - name: Run cargo fmt
+        run: cargo fmt --all -- --check
+
+      - name: Cargo test
+        run: cargo nextest run --all
+      
+      - name: Cargo run examples
+        env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
+          CORALOGIX_ALERTS_RULES_TAGS_API_KEY: ${{ secrets.CORALOGIX_ALERTS_RULES_TAGS_API_KEY }}
+          CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
+          CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
+          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+        run: cargo nextest run --all
+        working-directory: rust/examples
+
+  clippy:
+    name: clippy
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust
+    permissions:
+      security-events: write # to upload sarif results
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Install Protoc
+      uses: arduino/setup-protoc@v3
+      with:
+        version: "26.1"
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable  # STABLE
+        components: clippy
+    - uses: Swatinem/rust-cache@v2
+    # - name: Install SARIF tools
+    #   run: cargo install clippy-sarif --locked
+    # - name: Install SARIF tools
+    #   run: cargo install sarif-fmt --locked
+    # - name: Check
+    #   run: >
+    #     cargo clippy --workspace --all-features --all-targets --message-format=json -- -D warnings --allow deprecated
+    #     | clippy-sarif
+    #     | tee clippy-results.sarif
+    #     | sarif-fmt
+    #   continue-on-error: true
+    # - name: Upload
+    #   uses: github/codeql-action/upload-sarif@v3
+    #   with:
+    #     sarif_file: clippy-results.sarif
+    #     wait-for-processing: true
+    - name: Report status
+      run: cargo clippy --workspace --all-features --all-targets -- -D warnings --allow deprecated

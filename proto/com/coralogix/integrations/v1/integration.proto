@@ -1,0 +1,339 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/extensions/v1/extension.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+message CloudFormationStack {
+  google.protobuf.StringValue arn = 1;
+  google.protobuf.StringValue region = 2;
+}
+
+message ARMStack {
+  google.protobuf.StringValue subscription_id = 1;
+  google.protobuf.StringValue resource_group_name = 2;
+}
+
+message NoDeployment {}
+
+enum ConnectionStatus {
+  PENDING = 0;
+  ACTIVE = 1;
+  FAILING = 2;
+  STATUS_UNKNOWN = 3;
+}
+
+message IntegrationStatus {
+  reserved 2;
+  reserved "message";
+  ConnectionStatus connection_status = 1;
+  map<string, string> details = 3;
+  repeated google.protobuf.StringValue messages = 4;
+}
+
+message IntegrationDoc {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue link = 2;
+}
+
+message Integration {
+  google.protobuf.StringValue id = 1; // short_name in the integrations.integration_definitions
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue description = 3;
+  google.protobuf.StringValue icon = 4;
+  google.protobuf.StringValue dark_icon = 5;
+  repeated google.protobuf.StringValue tags = 7;
+  repeated google.protobuf.StringValue versions = 8;
+}
+
+message RevisionRef {
+  string version = 1; //integration revision version
+  string description_md = 2;
+}
+message LocalChangelog {
+  repeated RevisionRef changes = 1;
+}
+
+message ExternalUrl {
+  string url = 1;
+}
+
+message IntegrationDetails {
+  reserved 2, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113;
+  reserved "registrations", "cloudtrail", "okta", "helm_chart", "gcp_metrics_collector", "cloudflare", "status_feed", "status_page_tracker", "gcp_traces_collector", "azure_metrics_collector", "rum", "azure_resource_manager", "gcp_logs_collector", "google_workspace_siem";
+
+  message DefaultIntegrationDetails {
+    message RegisteredInstance {
+      reserved 5, 6;
+      reserved "status", "status_message";
+
+      google.protobuf.StringValue id = 1;
+      google.protobuf.StringValue definition_version = 2;
+      google.protobuf.Timestamp last_updated = 3;
+      repeated Parameter parameters = 4;
+      IntegrationStatus integration_status = 7;
+      oneof deployment {
+        NoDeployment empty = 100;
+        CloudFormationStack cloudformation = 101;
+        ARMStack arm = 102;
+      }
+      google.protobuf.BoolValue is_testing = 8;
+    }
+    repeated RegisteredInstance registered = 1;
+  }
+
+  Integration integration = 1;
+  repeated com.coralogix.extensions.v1.Extension extensions = 3;
+  repeated IntegrationDoc docs = 4;
+  oneof integration_type_details {
+    DefaultIntegrationDetails default = 500;
+  }
+  oneof changelog {
+    LocalChangelog local = 201;
+    ExternalUrl external = 202;
+  }
+}
+
+message IntegrationDefinition {
+  google.protobuf.StringValue key = 1; // short_name in the integrations.integration_definitions
+  repeated IntegrationRevision revisions = 3;
+}
+
+message IntegrationRevision {
+  message CloudFormationTemplate {
+    google.protobuf.StringValue template_url = 1;
+    map<string, string> parameters = 2;
+    map<string, string> post_installation_steps = 3;
+  }
+
+  message ManagedService {
+  }
+
+  message HelmChart {
+    optional google.protobuf.StringValue template = 1;
+    repeated CommandInformation commands = 2;
+    optional IntegrationGuide guide = 3;
+  }
+
+  message Terraform {
+    repeated ConfigurationBlock configuration_blocks = 1;
+  }
+
+  message Rum {
+    repeated CommandInformation browser_sdk_commands = 1;
+    repeated CommandInformation source_map_commands = 2;
+  }
+
+  message AzureArmTemplate {
+    google.protobuf.StringValue template_url = 1;
+  }
+
+  enum InputType {
+    API_KEY = 0;
+    TEXT = 1;
+    LIST_TEXT = 2;
+    MULTIPLE_SELECTION = 3;
+    BOOLEAN = 4;
+    SELECT = 5;
+    JSON = 6;
+    NUMBER = 7;
+    SENSITIVE_DATA = 8;
+  }
+
+  message ListTextValue {
+    reserved 1, 3;
+    reserved "values", "preselected_key";
+    repeated google.protobuf.StringValue options = 2;
+    repeated google.protobuf.StringValue default_values = 4;
+  }
+
+  message SingleValue {
+    optional google.protobuf.StringValue default_value = 1;
+  }
+
+  message SingleBooleanValue {
+    optional google.protobuf.BoolValue default_value = 1;
+  }
+
+  message SingleNumericValue {
+    optional google.protobuf.DoubleValue default_value = 1;
+  }
+
+  message MultipleSelectionValue {
+    repeated google.protobuf.StringValue options = 1;
+  }
+
+  message SelectionValue {
+    repeated google.protobuf.StringValue options = 1;
+    optional google.protobuf.StringValue default_value = 2;
+  }
+
+  message FieldCondition {
+    enum ConditionType {
+      UNKNOWN = 0;
+      OR = 1;
+      AND = 2;
+    }
+    message FieldValue {
+      string field_name = 1;
+      string value_pattern = 2;
+    }
+
+    ConditionType type = 1;
+    repeated FieldValue values = 2;
+  }
+
+  message Group {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue name = 2;
+  }
+
+  message FieldInformation {
+    oneof value {
+      SingleValue single = 101;
+      ListTextValue multi_text = 102;
+      MultipleSelectionValue multiple_selection = 103;
+      SingleBooleanValue single_boolean = 104;
+      SelectionValue selection = 105;
+      SingleNumericValue single_number = 106;
+    }
+
+    InputType type = 1;
+    google.protobuf.StringValue name = 2;
+    optional google.protobuf.StringValue tooltip = 3;
+    google.protobuf.StringValue template_param_name = 4;
+    optional google.protobuf.StringValue placeholder = 5;
+    google.protobuf.BoolValue required = 6;
+    google.protobuf.BoolValue predefined = 7;
+    google.protobuf.BoolValue visible = 8;
+    google.protobuf.BoolValue readonly = 9;
+    optional FieldCondition applicable_if = 10;
+    optional google.protobuf.StringValue group_id = 11;
+    optional google.protobuf.StringValue upgrade_notice = 12;
+    optional google.protobuf.StringValue allowed_pattern = 13;
+  }
+
+  message CommandInformation {
+    enum Language {
+      UNKNOWN = 0;
+      BASH = 1;
+      JAVASCRIPT = 2;
+    }
+    message Link {
+      string key = 1;
+      string text = 2;
+      string url = 3;
+    }
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue command = 2;
+    google.protobuf.StringValue description = 3;
+    optional google.protobuf.StringValue tooltip_text = 4;
+    optional Language language = 5;
+    repeated Link links = 6;
+  }
+
+  message ConfigurationBlock {
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue value = 2;
+    google.protobuf.StringValue description = 3;
+  }
+
+  message IntegrationGuide  {
+    google.protobuf.StringValue introduction = 1;
+    optional google.protobuf.StringValue installation_requirements = 2;
+  }
+
+  google.protobuf.StringValue id = 1; //version from the integrations.integration_definitions_revision
+  repeated FieldInformation fields = 3;
+  repeated Group groups = 4;
+  oneof deployment_method {
+    CloudFormationTemplate cloud_formation = 101;
+    ManagedService managed_service = 102;
+    HelmChart helm_chart = 103;
+    AzureArmTemplate azure_arm_template = 104;
+    Rum rum = 105;
+    Terraform terraform = 106;
+  }
+  optional string upgrade_instructions_md = 5;
+  bool revision_deployment_supported = 6;
+}
+
+message Parameter {
+  message StringList {
+    repeated google.protobuf.StringValue values = 1;
+  }
+
+  message ApiKeyData {
+    google.protobuf.StringValue id = 1;
+    optional google.protobuf.StringValue value = 2;
+  }
+
+  message SensitiveDataPlaceholder {}
+
+  string key = 1;
+  oneof value {
+    google.protobuf.StringValue string_value = 101;
+    google.protobuf.BoolValue boolean_value = 102;
+    StringList string_list = 103;
+    ApiKeyData api_key = 104;
+    google.protobuf.DoubleValue numeric_value = 105;
+    SensitiveDataPlaceholder sensitive_data = 106;
+  }
+}
+
+message GenericIntegrationParameters {
+  repeated Parameter parameters = 1;
+}
+
+message IntegrationMetadata {
+  reserved 1, 2, 3, 5, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114;
+  reserved "api_key_id", "application", "deploy_name", "subsystem", "cloudtrail", "okta", "helm_chart", "gcp_metrics_collector", "cloudflare", "status_feed", "status_page_tracker", "gcp_traces_collector", "azure_metrics_collector", "rum", "azure_resource_manager", "gc_logs_collector", "google_workspace_siem";
+
+  google.protobuf.StringValue integration_key = 4;
+  google.protobuf.StringValue version = 6;
+
+  oneof specific_data {
+    GenericIntegrationParameters integration_parameters = 113;
+  }
+}
+
+message TestIntegrationResult {
+  message Success {}
+  message Failure {
+    google.protobuf.StringValue error_message = 1;
+  }
+
+  oneof result {
+    Success success = 1;
+    Failure failure = 2;
+  }
+}
+
+message RumVersionData {
+  message SourceMapMetadata {
+    google.protobuf.Timestamp created_at = 1;
+    google.protobuf.BoolValue is_uploaded_successful = 2;
+  }
+  message LogMetadata {
+    google.protobuf.Timestamp first_occurrence = 1;
+    google.protobuf.Timestamp last_occurrence = 2;
+  }
+  message Version {
+    google.protobuf.StringValue version = 1;
+    LogMetadata log_metadata = 2;
+    SourceMapMetadata source_map_metadata = 3;
+  }
+
+  repeated Version versions = 1;
+  google.protobuf.Timestamp synced_at = 2;
+}
+
+message DeployedIntegrationInformation {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue definition_key = 2;
+  google.protobuf.StringValue definition_version = 3;
+  repeated Parameter parameters = 4;
+  IntegrationStatus integration_status = 5;
+}

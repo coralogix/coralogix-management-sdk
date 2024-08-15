@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets;
+
+import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
+import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "google/protobuf/wrappers.proto";
+
+message Gauge {
+  Query query = 1;
+  google.protobuf.DoubleValue min = 2;
+  google.protobuf.DoubleValue max = 3;
+  google.protobuf.BoolValue show_inner_arc = 4;
+  google.protobuf.BoolValue show_outer_arc = 5;
+  Unit unit = 6;
+  repeated Threshold thresholds = 7;
+  common.DataModeType data_mode_type = 8;
+  ThresholdBy threshold_by = 9;
+  google.protobuf.StringValue custom_unit = 10;
+  google.protobuf.Int32Value decimal = 11;
+
+  message Query {
+    oneof value {
+      MetricsQuery metrics = 1;
+      LogsQuery logs = 2;
+      SpansQuery spans = 3;
+      DataprimeQuery dataprime = 4;
+    }
+  }
+
+  message MetricsQuery {
+    common.PromQlQuery promql_query = 1;
+    Aggregation aggregation = 2;
+    repeated Filter.MetricsFilter filters = 3;
+    common.MetricsQueryEditorMode editor_mode = 4;
+  }
+
+  message LogsQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.LogsAggregation logs_aggregation = 2;
+    Aggregation aggregation = 3 [deprecated = true];
+    repeated Filter.LogsFilter filters = 4;
+  }
+
+  message SpansQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.SpansAggregation spans_aggregation = 2;
+    Aggregation aggregation = 3 [deprecated = true];
+    repeated Filter.SpansFilter filters = 4;
+  }
+
+  message DataprimeQuery {
+    v1.common.DataprimeQuery dataprime_query = 1;
+    repeated Filter.Source filters = 2;
+  }
+
+  message Threshold {
+    google.protobuf.DoubleValue from = 1;
+    google.protobuf.StringValue color = 2;
+  }
+
+  enum Aggregation {
+    AGGREGATION_UNSPECIFIED = 0;
+    AGGREGATION_LAST = 1;
+    AGGREGATION_MIN = 2;
+    AGGREGATION_MAX = 3;
+    AGGREGATION_AVG = 4;
+    AGGREGATION_SUM = 5;
+  }
+
+  enum Unit {
+    UNIT_UNSPECIFIED = 0;
+    UNIT_NUMBER = 1;
+    UNIT_PERCENT = 2;
+    UNIT_MICROSECONDS = 3;
+    UNIT_MILLISECONDS = 4;
+    UNIT_SECONDS = 5;
+    UNIT_BYTES = 6;
+    UNIT_KBYTES = 7;
+    UNIT_MBYTES = 8;
+    UNIT_GBYTES = 9;
+    UNIT_BYTES_IEC = 10;
+    UNIT_KIBYTES = 11;
+    UNIT_MIBYTES = 12;
+    UNIT_GIBYTES = 13;
+    UNIT_EUR_CENTS = 14;
+    UNIT_EUR = 15;
+    UNIT_USD_CENTS = 16;
+    UNIT_USD = 17;
+    UNIT_CUSTOM = 18;
+    UNIT_PERCENT_ZERO_ONE = 19;
+    UNIT_PERCENT_ZERO_HUNDRED = 20;
+  }
+
+  enum ThresholdBy {
+    THRESHOLD_BY_UNSPECIFIED = 0;
+    THRESHOLD_BY_VALUE = 1;
+    THRESHOLD_BY_BACKGROUND = 2;
+  }
+}

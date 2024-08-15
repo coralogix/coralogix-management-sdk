@@ -1,0 +1,301 @@
+{
+  "id": "ybcdefghijklmnopqrstx",
+  "name": "test",
+  "description": "dashboards team is messing with this 🗿",
+  "time_frame": {
+    "relative_time_frame": "900s"
+  },
+  "filters": [],
+  "annotations": [],
+  "layout": {
+    "sections": [
+      {
+        "id": {
+          "value": "6BD2412D-E3F4-4EF2-8567-BBAB907E6062"
+        },
+        "options": {
+          "custom": {
+            "name": "Status",
+            "color": {
+              "predefined": "SECTION_PREDEFINED_COLOR_BLUE"
+            }
+          }
+        },
+        "rows": [
+          {
+            "id": {
+              "value": "3615FE6F-21D6-4EF2-B3BB-2F1C8F09B2A6"
+            },
+            "appearance": {
+              "height": 19
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "FA439AB8-C485-499A-A3AB-D66BEF6E952D"
+                },
+                "title": "status 4XX",
+                "definition": {
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "metrics": {
+                                "promql_query": {
+                                  "value": "http_requests_total{status!~\"4..\"}"
+                                },
+                                "filters": [],
+                                "editor_mode": 0
+                              }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
+                        }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          1,
+                          5
+                        ]
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              },
+              {
+                "id": {
+                  "value": "7301455C-B6E4-40AD-8140-1A8B1E3BFBED"
+                },
+                "title": "count",
+                "definition": {
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "logs": {
+                                "group_bys": [],
+                                "group_by": [],
+                                "filters": [],
+                                "editor_mode": 0,
+                                "aggregations": [
+                                  {
+                                    "value": {
+                                      "count": {}
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
+                        }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          1,
+                          2,
+                          3,
+                          4,
+                          5
+                        ]
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 10
+                }
+              },
+              {
+                "id": {
+                  "value": "CAF689A0-58E0-436B-BADF-3386AF2967F3"
+                },
+                "title": "error throwing pods",
+                "definition": {
+                  "value": {
+                    "line_chart": {
+                      "id": "asdf",
+                      "stacked_line": 0,
+                      "query_definitions": [
+                        {
+                          "id": "asdf",
+                          "query": {
+                            "value": {
+                              "logs": {
+                                "lucene_query": {
+                                  "value": "coralogix.metadata.severity=5 OR coralogix.metadata.severity=\"6\" OR coralogix.metadata.severity=\"4\""
+                                },
+                                "group_bys": [],
+                                "filters": [],
+                                "editor_mode": 0,
+                                "group_by": [
+                                  "coralogix.metadata.subsystemName"
+                                ],
+                                "aggregations": [
+                                  {
+                                    "value": {
+                                      "count": {}
+                                    }
+                                  }
+                                ]
+                              }
+                            },
+                            "refresh_strategy": 1
+                          },
+                          "unit": 1,
+                          "scale_type": 1,
+                          "data_mode_type": 1
+                        }
+                      ],
+                      "legend": {
+                        "is_visible": true,
+                        "columns": [
+                          2,
+                          5
+                        ]
+                      }
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          },
+          {
+            "id": {
+              "value": "C7F16112-E5D4-479D-A76A-8FCB878E01E8"
+            },
+            "appearance": {
+              "height": 28
+            },
+            "widgets": [
+              {
+                "id": {
+                  "value": "234B5859-01AB-4B0C-9047-7278C63A6A23"
+                },
+                "title": "dashboards-api logz",
+                "description": "warnings, errors, criticals",
+                "definition": {
+                  "value": {
+                    "data_table": {
+                      "query": {
+                        "value": {
+                          "logs": {
+                            "filters": [
+                              {
+                                "field": "coralogix.metadata.applicationName",
+                                "operator": {
+                                  "value": {
+                                    "equals": {
+                                      "selection": {
+                                        "value": {
+                                          "list": {
+                                            "values": [
+                                              "staging"
+                                            ]
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "refresh_strategy": 1,
+                        "editor_mode": 0
+                      },
+                      "results_per_page": 20,
+                      "row_style": 1,
+                      "columns": [
+                        {
+                          "field": "coralogix.timestamp"
+                        },
+                        {
+                          "field": "textObject.textObject.textObject.kubernetes.pod_id"
+                        },
+                        {
+                          "field": "coralogix.text"
+                        },
+                        {
+                          "field": "coralogix.metadata.applicationName"
+                        },
+                        {
+                          "field": "coralogix.metadata.subsystemName"
+                        },
+                        {
+                          "field": "coralogix.metadata.sdkId"
+                        },
+                        {
+                          "field": "textObject.log_obj.e2e_test.config"
+                        }
+                      ],
+                      "data_mode_type": 1
+                    }
+                  }
+                },
+                "appearance": {
+                  "width": 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "variables": [
+    {
+      "name": "test_variable",
+      "display_name": "Test Variable",
+      "display_type": 0,
+      "definition": {
+        "value": {
+          "multi_select": {
+            "selected": [
+              "1",
+              "2",
+              "3"
+            ],
+            "source": {
+              "value": {
+                "constant_list": {
+                  "values": [
+                    "1",
+                    "2",
+                    "3"
+                  ]
+                }
+              }
+            },
+            "values_order_direction": 1
+          }
+        }
+      }
+    }
+  ]
+}

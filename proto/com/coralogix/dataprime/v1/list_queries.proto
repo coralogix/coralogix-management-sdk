@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+message ListQueryRequest {}
+
+message RunningQuery {
+  string id = 1;
+  // how long the query has been running (in wall clock time)
+  uint64 durations_ms = 2;
+  // total aggregated duration of all completed tasks
+  uint64 total_task_duration_ms = 3;
+  // How many tasks total in the query
+  uint32 total_tasks = 4;
+  // How many tasks are completed
+  uint32 completed_tasks = 5;
+}
+
+message ListQueryResponse {
+  repeated RunningQuery running_queries = 1;
+}

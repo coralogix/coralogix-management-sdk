@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/test_policies_result.proto";
+
+message BulkTestLogPoliciesResponse {
+  repeated TestPoliciesResult test_policies_bulk_result = 1;
+}

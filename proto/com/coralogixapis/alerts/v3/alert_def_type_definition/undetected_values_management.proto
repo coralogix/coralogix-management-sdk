@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message UndetectedValuesManagement {
+    google.protobuf.BoolValue trigger_undetected_values = 1;
+    optional AutoRetireTimeframe auto_retire_timeframe = 2;
+}
+
+enum AutoRetireTimeframe  {
+  AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED = 0;
+  AUTO_RETIRE_TIMEFRAME_MINUTES_5 = 1;
+  AUTO_RETIRE_TIMEFRAME_MINUTES_10 = 2;
+  AUTO_RETIRE_TIMEFRAME_HOUR_1 = 3;
+  AUTO_RETIRE_TIMEFRAME_HOURS_2 = 4;
+  AUTO_RETIRE_TIMEFRAME_HOURS_6 = 5;
+  AUTO_RETIRE_TIMEFRAME_HOURS_12 =6;
+  AUTO_RETIRE_TIMEFRAME_HOURS_24 = 7;
+}
+

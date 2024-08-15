@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogixapis/apm/common/v2/data_source.proto";
+import "com/coralogixapis/apm/common/v2/order_by.proto";
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+
+import "com/coralogixapis/apm/queries/v1/event.proto";
+
+package com.coralogixapis.apm.queries.v1;
+
+
+message ListEventsRequest {
+    repeated com.coralogixapis.apm.common.v2.OrderBy order_bys = 1;
+    google.protobuf.StringValue start_time = 2;
+    google.protobuf.StringValue end_time = 3;
+    repeated com.coralogixapis.apm.common.v2.DataSource data_sources = 4;
+    google.protobuf.StringValue kind = 5;
+    repeated google.protobuf.StringValue names = 6;
+    repeated google.protobuf.StringValue clusters = 7;
+    repeated google.protobuf.StringValue namespaces = 8;
+    repeated google.protobuf.StringValue severity = 9;
+    google.protobuf.Int32Value page_size = 10;
+}
+
+message ListEventsResponse {
+    repeated Event events = 1;
+}
+
+service EventsService {
+    rpc ListEvents (ListEventsRequest) returns (ListEventsResponse){
+        option deprecated = true;
+        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List events";
+    }
+}

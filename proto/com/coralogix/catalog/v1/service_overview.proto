@@ -1,0 +1,32 @@
+syntax = "proto3";
+package com.coralogix.catalog.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message SeriesResult {
+  google.protobuf.Int64Value timestamp = 1;
+  google.protobuf.StringValue data_point = 2;
+}
+
+message OperationSeriesResult {
+  google.protobuf.StringValue operation_name = 1;
+  repeated SeriesResult values = 2;
+  google.protobuf.Int32Value steps = 3;
+}
+
+message ClientTimeConsumingSeriesResult {
+  google.protobuf.StringValue peer_service = 1;
+  repeated SeriesResult values = 2;
+  google.protobuf.Int32Value steps = 3;
+}
+
+message ServiceOverview {
+  google.protobuf.StringValue service_name = 1;
+  repeated OperationSeriesResult request_per_second = 2;
+  repeated OperationSeriesResult error_rate = 3;
+  repeated OperationSeriesResult p95_latency = 4;
+  repeated ClientTimeConsumingSeriesResult client_time_consuming = 5;
+  google.protobuf.Int32Value request_per_second_number_of_operations = 6;
+  google.protobuf.Int32Value error_rate_number_of_operations = 7;
+  google.protobuf.Int32Value client_time_consuming_number_of_operations = 8;
+}

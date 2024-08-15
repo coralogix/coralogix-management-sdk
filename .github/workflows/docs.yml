@@ -1,0 +1,100 @@
+name: Docs
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+  
+jobs:
+  build_docs:
+    name: Build Docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Prepare environment
+        run: |
+          mkdir $RUNNER_TEMP/docs
+          touch $RUNNER_TEMP/docs/index.html
+          mkdir $RUNNER_TEMP/docs/rust
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Install Protoc # This is required for build.rs
+        uses: arduino/setup-protoc@v3
+        with:
+          version: "26.1"
+      - name: Configure cache
+        uses: Swatinem/rust-cache@v2
+      - name: Setup pages
+        id: pages
+        uses: actions/configure-pages@v4
+      - name: Clean docs folder
+        working-directory: rust
+        run: cargo clean --doc
+      - name: Build docs
+        working-directory: rust
+        run: |
+          cargo doc --no-deps --target-dir=$RUNNER_TEMP/rust
+          cp -r $RUNNER_TEMP/rust/doc/** $RUNNER_TEMP/docs/rust
+
+
+      - name: Install Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '^1.18'  # Update this with your desired Go version
+      - name: Install doc2go
+        run: go install go.abhg.dev/doc2go@latest
+      - name: Generate Go Docs
+        working-directory: go
+        run: |
+          doc2go -out $RUNNER_TEMP/docs/go ./...
+      - name: Generate index.html
+        run: | 
+          cat <<EOT>> $RUNNER_TEMP/docs/index.html
+
+          <!DOCTYPE html>
+          <html lang="en">
+
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>My SDK Documentation</title>
+          </head>
+
+          <body>
+              <h1>SDK Documentation</h1>
+              <p>Welcome to the documentation for the Coralogix SDKs!</p>
+              <ul>
+                  <li><a href="rust/cx_sdk/index.html">Rust SDK Documentation</a></li>
+                  <li><a href="go/coralogix-management-sdk/go/index.html">Go SDK Documentation</a></li>
+              </ul>
+          </body>
+
+          </html>
+          EOT
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ runner.temp }}/docs
+
+  deploy:
+    name: Deploy Docs
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: [build_docs]
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        

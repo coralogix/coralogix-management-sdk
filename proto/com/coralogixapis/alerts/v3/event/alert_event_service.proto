@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/event/alert_event.proto";
+import "com/coralogixapis/alerts/v3/alert_defs_service.proto";
+
+service AlertEventService {
+  rpc GetAlertEvent(GetAlertEventRequest) returns (GetAlertEventResponse) {
+    option (audit_log_description).description = "get alert event";
+    option (google.api.http) = {
+      get: "/v3/alert_event/{id}"
+    };
+  }
+
+  rpc GetAlertEventsStats(GetAlertEventStatsRequest) returns (GetAlertEventStatsResponse) {
+    option (audit_log_description).description = "get alert events stats";
+    option (google.api.http) = {
+      get: "/v3/alert_event_stats"
+    };
+  }
+}
+
+message GetAlertEventStatsRequest {
+  repeated google.protobuf.StringValue ids = 1;
+  repeated AlertEventOrderBy order_bys = 2;
+}
+
+message GetAlertEventStatsResponse {
+  map<string, EventStats> events_stats = 1;
+}
+
+message Permutation {
+  map<string, string> permutation_labels = 1;
+}
+
+message EventStats {
+  google.protobuf.UInt32Value count = 1;
+  google.protobuf.UInt32Value resolved_count = 2;
+  google.protobuf.UInt32Value triggered_count = 3;
+  repeated Permutation triggered_permutations_samples = 4;
+  repeated Permutation resolved_permutations_samples = 5;
+  ActivityAnalysisStats activity_analysis_stats = 6;
+}
+
+message ActivityAnalysisStats {
+  google.protobuf.UInt32Value is_muted_count = 1;
+  repeated google.protobuf.StringValue rules = 2;
+}
+
+message GetAlertEventRequest {
+  google.protobuf.StringValue id = 1;
+  repeated AlertEventOrderBy order_bys = 2;
+  PaginationRequest pagination = 3;
+}
+
+message GetAlertEventResponse {
+  google.protobuf.StringValue id = 1;
+  oneof alert_event {
+    AlertEvent single_permutation = 2;
+    AlertEventMultiplePermutation multiple_permutation = 3;
+  }
+  PaginationResponse pagination = 4;
+}
+message PaginationRequest {
+  google.protobuf.UInt32Value page_size = 1;
+  google.protobuf.StringValue page_token = 2;
+}
+message PaginationResponse {
+  google.protobuf.UInt32Value total_size = 1;
+  google.protobuf.StringValue next_page_token = 2;
+}
+
+
+
+message AlertEventMultiplePermutation{
+  repeated AlertEvent alert_event_multiple_permutation = 1;
+}
+
+enum OrderByAlertEventFields {
+  ORDER_BY_ALERT_EVENT_FIELDS_UNSPECIFIED = 0;
+  ORDER_BY_ALERT_EVENT_FIELDS_TIMESTAMP = 1;
+}
+
+enum OrderByAlertEventDirection {
+  ORDER_BY_ALERT_EVENT_DIRECTION_UNSPECIFIED = 0;
+  ORDER_BY_ALERT_EVENT_DIRECTION_ASC = 1;
+  ORDER_BY_ALERT_EVENT_DIRECTION_DESC = 2;
+}
+
+message AlertEventOrderBy {
+  OrderByAlertEventFields field_name = 1;
+  OrderByAlertEventDirection direction = 2;
+}

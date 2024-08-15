@@ -1,0 +1,35 @@
+name: Something went wrong
+description: I hear you got a bug problem ma'am?
+title: "[Bug]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for taking the time. Please make sure for us to reproduce the issue, you provide as much information as possible.
+  
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Result
+      description: What did you expect to happen?
+      placeholder: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Result
+      description: Describe what actually happened (include logs in the field below)
+      placeholder: ... what actually happened
+    validations:
+      required: true
+
+  
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Please copy and paste any relevant log output. This will be automatically formatted into code, so no need for backticks.
+      render: shell

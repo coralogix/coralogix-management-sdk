@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.coralogixapis.logs2metrics.v2;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/openapi/v1/annotations.proto";
+
+message LogsQuery {
+  // lucene query
+  google.protobuf.StringValue lucene = 1  [ (com.coralogix.openapi.v1.field) = {
+    example: "\"log_obj.numeric_field: [50 TO 100]\""
+  } ];
+  // alias
+  google.protobuf.StringValue alias = 2 [ (com.coralogix.openapi.v1.field) = {
+    example: "\"new_query\""
+  } ];
+  // application name filters
+  repeated google.protobuf.StringValue applicationname_filters = 3 [ (com.coralogix.openapi.v1.field) = {
+    example: "\"app_name\""
+  } ];
+  // subsystem names filters
+  repeated google.protobuf.StringValue subsystemname_filters = 4 [ (com.coralogix.openapi.v1.field) = {
+    example: "\"sub_name\""
+  } ];
+  // severity type filters
+  repeated Severity severity_filters = 5;
+}
+
+// enum that represents severity types
+enum Severity {
+  SEVERITY_UNSPECIFIED = 0;
+  SEVERITY_DEBUG = 1;
+  SEVERITY_VERBOSE = 2;
+  SEVERITY_INFO = 3;
+  SEVERITY_WARNING = 4;
+  SEVERITY_ERROR = 5;
+  SEVERITY_CRITICAL = 6;
+}

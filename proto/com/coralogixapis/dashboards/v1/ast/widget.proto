@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast;
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto";
+import "com/coralogixapis/dashboards/v1/types.proto";
+import "google/protobuf/wrappers.proto";
+
+message Widget {
+  UUID id = 1;
+  google.protobuf.StringValue title = 2;
+  google.protobuf.StringValue description = 3;
+  Definition definition = 4;
+  Appearance appearance = 5 [deprecated = true];
+  google.protobuf.Timestamp created_at = 6;
+  google.protobuf.Timestamp updated_at = 7;
+
+  message Definition {
+    oneof value {
+      widgets.LineChart line_chart = 1;
+      widgets.DataTable data_table = 2;
+      widgets.Gauge gauge = 3;
+      widgets.PieChart pie_chart = 4;
+      widgets.BarChart bar_chart = 5;
+      widgets.HorizontalBarChart horizontal_bar_chart = 6;
+      widgets.Markdown markdown = 7;
+    }
+  }
+
+  message Appearance {
+    google.protobuf.Int32Value width = 1;
+  }
+}

@@ -1,0 +1,170 @@
+syntax = "proto3";
+
+package com.coralogixapis.database_catalog.v1;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogixapis/apm/common/v2/time_range.proto";
+import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
+
+import "com/coralogixapis/database_catalog/v1/aggregation_type.proto";
+import "com/coralogixapis/database_catalog/v1/error_graph_type.proto";
+
+import "com/coralogixapis/database_catalog/v1/database.proto";
+
+import "com/coralogixapis/alerts/v3/alert_def.proto";
+
+message UpdateDatabaseCatalogFiltersRequest {
+  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
+}
+
+message UpdateDatabaseCatalogFiltersResponse {
+  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+}
+
+message GetDatabaseCatalogFiltersRequest {
+  google.protobuf.StringValue database_name = 1;
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
+}
+
+message GetDatabaseCatalogFiltersResponse {
+  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+}
+
+message GetDatabaseRequestLatencyGraphStreamRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  google.protobuf.UInt64Value topk = 4;
+  repeated DatabaseCatalogFilter database_catalog_filters = 5;
+  repeated google.protobuf.StringValue calling_services = 6;
+}
+
+message GetDatabaseErrorsGraphStreamRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  google.protobuf.UInt64Value topk = 4;
+  repeated ErrorGraphType error_graph_types = 5;
+  repeated DatabaseCatalogFilter database_catalog_filters = 6;
+  repeated google.protobuf.StringValue calling_services = 7;
+}
+
+message GetDatabaseStatementsGraphStreamRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  google.protobuf.UInt64Value topk = 4;
+  repeated AggregationType aggregation_types = 5;
+  repeated DatabaseCatalogFilter database_catalog_filters = 6;
+  repeated google.protobuf.StringValue calling_services = 7;
+}
+
+message GetDatabaseRequestLatencyGraphStreamResponse {
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
+  oneof widget{
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart avg = 2;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart max = 3;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart p50 = 4;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart p75 = 5;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart p95 = 6;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart p99 = 7;
+  }
+  google.protobuf.UInt64Value total_amount = 8;
+}
+
+message GetDatabaseErrorsGraphStreamResponse {
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
+  oneof widget{
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart error_rate = 2;
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart error_percentage = 3;
+  }
+  google.protobuf.UInt64Value total_amount = 4;
+}
+
+message GetDatabaseStatementsGraphStreamResponse {
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
+  oneof widget{
+    com.coralogixapis.service_catalog.v1.RepeatedLineChart operations = 2;
+  }
+  google.protobuf.UInt64Value total_amount = 3;
+}
+
+message GetDatabasesColumnsStreamRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  repeated DatabaseCatalogFilter database_catalog_filters = 2;
+  repeated google.protobuf.StringValue calling_services = 3;
+  google.protobuf.Int64Value trend_offset = 4;
+}
+
+message GetDatabasesColumnsStreamResponse {
+  repeated DatabaseData databases = 1;
+}
+
+message ListCallingServicesRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue database_name = 2;
+  google.protobuf.StringValue database_name_source = 3;
+}
+
+message ListCallingServicesResponse {
+  repeated google.protobuf.StringValue calling_services = 1;
+}
+
+message ListTablesRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue database_name = 2;
+  google.protobuf.StringValue database_name_source = 3;
+  google.protobuf.StringValue database_system = 4;
+  repeated google.protobuf.StringValue calling_services = 5;
+}
+
+message ListTablesResponse {
+  repeated google.protobuf.StringValue tables = 1;
+  google.protobuf.StringValue table_tag = 2;
+}
+
+message GetAffectedAlertsRequest {
+  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
+}
+
+message GetAffectedAlertsResponse {
+  repeated com.coralogixapis.alerts.v3.AlertDef alerts = 1;
+}
+
+service DatabaseCatalogService {
+  rpc GetDatabasesColumnsStream(GetDatabasesColumnsStreamRequest) returns (stream GetDatabasesColumnsStreamResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases column stream";
+  }
+  rpc GetDatabaseRequestLatencyGraphStream (GetDatabaseRequestLatencyGraphStreamRequest) returns (stream GetDatabaseRequestLatencyGraphStreamResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog requests graph";
+  }
+  rpc GetDatabaseErrorsGraphStream (GetDatabaseErrorsGraphStreamRequest) returns (stream GetDatabaseErrorsGraphStreamResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog errors graph";
+  }
+  rpc GetDatabaseStatementsGraphStream (GetDatabaseStatementsGraphStreamRequest) returns (stream GetDatabaseStatementsGraphStreamResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog statements graph";
+  }
+  rpc UpdateDatabaseCatalogFilters(UpdateDatabaseCatalogFiltersRequest) returns (UpdateDatabaseCatalogFiltersResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Update DB Catalog Filters";
+  };
+  rpc GetDatabaseCatalogFilters(GetDatabaseCatalogFiltersRequest) returns (GetDatabaseCatalogFiltersResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get DB Catalog Filters";
+  };
+  rpc ListCallingServices (ListCallingServicesRequest) returns (ListCallingServicesResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list the services calling the database";
+  };
+  rpc ListTables (ListTablesRequest) returns (ListTablesResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list the tables in database";
+  };
+  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
+  }
+}

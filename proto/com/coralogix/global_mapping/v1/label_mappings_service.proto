@@ -1,0 +1,155 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogix/global_mapping/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/label_mapping.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/context_data.proto";
+import "com/coralogix/global_mapping/v1/extracted_label.proto";
+import "com/coralogix/global_mapping/v1/label_values.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+
+package com.coralogix.global_mapping.v1;
+
+message GetLabelMappingsRequest{
+  reserved "data_source_providers";
+  reserved 4;
+  repeated google.protobuf.StringValue labels = 1;
+  repeated DataSourceType data_source_types = 2;
+  repeated DataSource data_sources = 5;
+}
+
+message GetCustomLabelMappingsRequest{
+  repeated google.protobuf.StringValue labels = 1;
+  repeated DataSourceType data_source_types = 2;
+  repeated DataSource data_sources = 3;
+}
+
+message GetLabelMappingsResponse{
+  repeated LabelMapping mappings = 1;
+}
+
+message GetCustomLabelMappingsResponse{
+  repeated LabelMapping mappings = 1;
+}
+
+message UpsertLabelMappingsRequest {
+  repeated LabelMapping mappings = 1;
+}
+
+message UpsertCustomLabelMappingsRequest {
+  repeated LabelMapping mappings = 1;
+}
+
+message UpsertLabelMappingsResponse {
+  repeated LabelMapping mappings = 1;
+}
+
+message UpsertCustomLabelMappingsResponse {
+  repeated LabelMapping mappings = 1;
+}
+
+message RemoveLabelMappingsRequest {
+  repeated google.protobuf.StringValue ids = 1;
+}
+
+message RemoveLabelMappingsResponse {
+  google.protobuf.Int32Value number_of_deleted_mappings = 1;
+}
+
+message RemoveCustomLabelMappingsRequest {
+  repeated google.protobuf.StringValue ids = 1;
+}
+
+message RemoveCustomLabelMappingsResponse {
+  google.protobuf.Int32Value number_of_deleted_mappings = 1;
+}
+
+message GetLabelsRequest {}
+
+message GetLabelsResponse {
+  repeated google.protobuf.StringValue labels = 1;
+}
+
+message ExtractRequest {
+  reserved "data_source_providers";
+  reserved 6;
+  repeated google.protobuf.StringValue labels = 1;
+  DataSourceType ctx_data_source_type = 2;
+  oneof ctx {
+    Log log = 3;
+    Span span = 4;
+  }
+  repeated DataSourceType destination_data_source_types = 5 [packed=false];
+  repeated DataSource data_sources = 7;
+}
+
+message ExtractResponse {
+  repeated ExtractedLabel extracted_labels = 1;
+}
+
+message GetLabelValuesRequest {
+  repeated LabelValues current_label_values = 1;
+  google.protobuf.StringValue start_time_seconds = 2;
+  google.protobuf.StringValue end_time_seconds = 3;
+  repeated google.protobuf.StringValue requested_labels = 4;
+  reserved "data_source_providers";
+  reserved 5;
+  repeated DataSource data_sources = 6;
+}
+
+message GetLabelValuesResponse {
+  repeated LabelValues label_values = 1;
+  DataSource data_source = 2;
+}
+
+message GetLabelKeysRequest {
+  repeated DataSource data_sources = 1;
+}
+
+message GetLabelKeysResponse {
+  repeated string label_keys = 1;
+  DataSource data_source = 2;
+}
+
+service LabelMappingsService {
+  rpc GetLabelMappings(GetLabelMappingsRequest) returns (GetLabelMappingsResponse) {
+    option (audit_log_description).description = "Get Label Mappings";
+  }
+
+  rpc RemoveLabelMappings(RemoveLabelMappingsRequest) returns (RemoveLabelMappingsResponse) {
+    option (audit_log_description).description = "Remove Label Mappings";
+  }
+
+  rpc UpsertLabelMappings(UpsertLabelMappingsRequest) returns (UpsertLabelMappingsResponse) {
+    option (audit_log_description).description = "Upsert Label Mappings";
+  }
+
+  rpc GetLabels(GetLabelsRequest) returns (GetLabelsResponse) {
+    option (audit_log_description).description = "Get Labels";
+  }
+
+  rpc Extract(ExtractRequest) returns(ExtractResponse) {
+    option (audit_log_description).description = "Extract labels from context";
+  }
+
+  rpc GetLabelValues(GetLabelValuesRequest) returns (GetLabelValuesResponse) {
+    option (audit_log_description).description = "Returns possible label values from prometheus labels";
+  }
+
+  rpc GetCustomLabelMappings(GetCustomLabelMappingsRequest) returns (GetCustomLabelMappingsResponse) {
+    option (audit_log_description).description = "Get Custom Label Mappings";
+  }
+
+  rpc UpsertCustomLabelMappings(UpsertCustomLabelMappingsRequest) returns (UpsertCustomLabelMappingsResponse) {
+    option (audit_log_description).description = "Upsert Custom Label Mappings";
+  }
+
+  rpc RemoveCustomLabelMappings (RemoveCustomLabelMappingsRequest) returns (RemoveCustomLabelMappingsResponse) {
+    option (audit_log_description).description = "Remove Custom Label Mappings";
+  }
+
+  rpc GetLabelKeys(GetLabelKeysRequest) returns (GetLabelKeysResponse) {
+    option (audit_log_description).description = "Returns possible label keys from prometheus labels";
+  }
+}

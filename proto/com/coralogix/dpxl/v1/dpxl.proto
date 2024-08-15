@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package com.coralogix.dpxl.v1;
+
+message Expression {
+  string predicate = 1;
+}
+
+message SerializedExpression {
+  string content = 1;
+}
+
+message Diagnostic {
+
+  message Error {
+    string message = 1;
+    Range range = 2;
+  }
+
+  message Warning {
+    string message = 1;
+    Range range = 2;
+  }
+
+  message Range {
+    Position from = 1;
+    Position to = 2;
+  }
+
+  message Position {
+    uint32 line = 1;
+    uint32 col = 2;
+  }
+}
+
+message Source {
+  oneof source {
+    Logs logs = 1;
+    Spans spans = 2;
+  }
+
+  message Logs {
+  }
+
+  message Spans {
+  }
+}
+
+message EntityType {
+  reserved 3;
+  oneof entity_type {
+    Logs logs = 1;
+    Spans spans = 2;
+  }
+
+  message Logs {}
+  message Spans {}
+}

@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/integrations/v1/integration.proto";
+import "com/coralogix/integrations/v1/audit_log.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+service ContextualDataIntegrationService {
+  rpc GetContextualDataIntegrations(GetContextualDataIntegrationsRequest) returns (GetContextualDataIntegrationsResponse) {
+    option (audit_log_description).description = "Get all contextual data integrations";
+  }
+
+  rpc GetContextualDataIntegrationDefinition(GetContextualDataIntegrationDefinitionRequest) returns (GetContextualDataIntegrationDefinitionResponse) {
+    option (audit_log_description).description = "Get contextual data integration definition";
+  }
+
+  rpc GetContextualDataIntegrationDetails(GetContextualDataIntegrationDetailsRequest) returns (GetContextualDataIntegrationDetailsResponse) {
+    option (audit_log_description).description = "Get contextual data integration details";
+  }
+
+  rpc TestContextualDataIntegration(TestContextualDataIntegrationRequest) returns (TestContextualDataIntegrationResponse) {
+    option (audit_log_description).description = "Test contextual data integration";
+  }
+
+  rpc SaveContextualDataIntegration(SaveContextualDataIntegrationRequest) returns (SaveContextualDataIntegrationResponse) {
+    option (audit_log_description).description = "Save contextual data integration registration metadata";
+  }
+
+  rpc UpdateContextualDataIntegration(UpdateContextualDataIntegrationRequest) returns (UpdateContextualDataIntegrationResponse) {
+    option (audit_log_description).description = "Update contextual data integration";
+  }
+
+  rpc DeleteContextualDataIntegration(DeleteContextualDataIntegrationRequest) returns (DeleteContextualDataIntegrationResponse) {
+    option (audit_log_description).description = "Delete contextual data integration";
+  }
+}
+
+message GetContextualDataIntegrationsRequest {
+  google.protobuf.BoolValue include_testing_integrations = 1;
+}
+
+message GetContextualDataIntegrationsResponse {
+  message IntegrationWithCounts {
+    Integration integration = 1;
+    google.protobuf.UInt32Value amount_integrations = 2;
+    repeated google.protobuf.StringValue errors = 3;
+    google.protobuf.BoolValue upgrade_available = 4;
+    google.protobuf.BoolValue is_new = 5;
+  }
+
+  repeated IntegrationWithCounts integrations = 1;
+}
+
+message GetContextualDataIntegrationDefinitionRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue include_testing_integrations = 2;
+}
+
+message GetContextualDataIntegrationDefinitionResponse {
+  IntegrationDefinition integration_definition = 1;
+}
+
+message GetContextualDataIntegrationDetailsRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue include_testing_revisions = 2;
+}
+
+message GetContextualDataIntegrationDetailsResponse {
+  IntegrationDetails integration_detail = 1;
+}
+
+message UpdateContextualDataIntegrationRequest {
+  google.protobuf.StringValue integration_id = 1;
+  IntegrationMetadata metadata = 2;
+}
+
+message UpdateContextualDataIntegrationResponse {}
+
+message TestContextualDataIntegrationRequest {
+  IntegrationMetadata integration_data = 1;
+  google.protobuf.StringValue integration_id = 2;
+}
+
+message TestContextualDataIntegrationResponse {
+  TestIntegrationResult result = 1;
+}
+
+message SaveContextualDataIntegrationRequest {
+  IntegrationMetadata metadata = 1;
+}
+
+message SaveContextualDataIntegrationResponse {
+  google.protobuf.StringValue integration_id = 1;
+}
+
+message DeleteContextualDataIntegrationRequest {
+  google.protobuf.StringValue integration_id = 1;
+}
+
+message DeleteContextualDataIntegrationResponse {
+}
+

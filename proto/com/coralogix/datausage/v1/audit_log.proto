@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.coralogix.datausage.v1;
+
+import "google/protobuf/descriptor.proto";
+
+/// Message used for attaching descriptions metadata for audit logging
+message AuditLogDescription {
+  /// Simple textual description
+  optional string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  optional AuditLogDescription audit_log_description = 5000;
+}

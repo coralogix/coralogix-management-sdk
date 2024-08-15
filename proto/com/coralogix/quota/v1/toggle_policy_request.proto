@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message TogglePolicyRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue enabled = 2;
+}

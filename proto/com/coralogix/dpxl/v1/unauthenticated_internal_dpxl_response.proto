@@ -1,0 +1,128 @@
+syntax = "proto3";
+
+package com.coralogix.dpxl.v1;
+
+import "com/coralogix/dpxl/v1/dpxl.proto";
+import "com/coralogix/dpxl/v1/types.proto";
+
+message UnauthenticatedInternalDpxlServiceCompileResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    SerializedExpression serialized = 1;
+    repeated Diagnostic.Warning warnings = 2;
+    Datatype datatype = 3;
+  }
+
+  message Failure {
+    oneof failure {
+      CompileError compile_error = 1;
+    }
+  }
+}
+
+message UnauthenticatedInternalDpxlServiceToDpxlTextResponse {
+  oneof response {
+    Success success = 1;
+  }
+
+  message Success {
+    Expression expression = 1;
+  }
+}
+
+message UnauthenticatedInternalDpxlServiceToOpenSearchClauseResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    string clause = 1;
+  }
+
+  message Failure {
+    oneof failure {
+      CompileError compile_error = 1;
+      TranslateError translate_error = 2;
+    }
+
+    message TranslateError {
+      repeated Diagnostic.Error errors = 1;
+    }
+  }
+}
+
+message CompileError {
+  oneof error {
+    CompileExpressionError compile_expression_error = 1;
+    EntityTypeValidationError entity_type_validation_error = 2;
+  }
+}
+
+message CombineError {
+  reserved 1;
+  oneof error {
+    EntityTypeValidationError entity_type_validation_error = 2;
+    IncompatibleKeypathsError incompatible_keypaths_error = 3;
+  }
+}
+
+message CompileExpressionError {
+  repeated Diagnostic.Error errors = 1;
+}
+
+message IncompatibleKeypathsError {
+  repeated string keypaths = 1;
+}
+
+message EntityTypeValidationError {
+  message Error {
+    EntityType entity_type = 1;
+    string message = 2;
+    Diagnostic.Range location = 3;
+  }
+
+  repeated Error errors = 1;
+}
+
+message UnauthenticatedInternalDpxlServiceCombineResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    SerializedExpression serialized = 1;
+  }
+
+  message Failure {
+    oneof failure {
+      CombineError compile_error = 1;
+    }
+  }
+}
+
+message UnauthenticatedInternalDpxlServiceToSerializedDataprimeCoreAstResponse {
+  bytes serialized_dataprime_core_ast = 1;
+}
+
+message UnauthenticatedInternalDpxlServiceCheckTypeResponse {
+  oneof response {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    Datatype datatype = 1;
+  }
+
+  message Failure {
+    oneof failure {
+      CompileError compile_error = 1;
+    }
+  }
+}

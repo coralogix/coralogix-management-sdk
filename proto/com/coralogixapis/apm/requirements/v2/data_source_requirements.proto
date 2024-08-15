@@ -1,0 +1,40 @@
+syntax = "proto3";
+package com.coralogixapis.apm.requirements.v2;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/apm/common/v2/data_source.proto";
+
+
+message LabelExistence{
+  google.protobuf.StringValue label = 1;
+  google.protobuf.BoolValue exists = 2;
+}
+
+message MetricExistence{
+  google.protobuf.StringValue metric = 1;
+  google.protobuf.BoolValue exists = 2;
+}
+
+message MetricLabelsExistence{
+  google.protobuf.StringValue metric = 1;
+  repeated LabelExistence labels = 2;
+}
+
+message Requirements {
+  repeated MetricExistence metric_existence = 1;
+  repeated MetricLabelsExistence metric_label_existence = 2;
+}
+
+message MissingNothing {}
+
+message PageRequirement {
+  Requirements requirements = 1;
+  google.protobuf.BoolValue passed_requirements = 2;
+}
+
+message DataSourceRequirements {
+  com.coralogixapis.apm.common.v2.DataSource data_source = 1;
+  Requirements requirements = 2;
+  google.protobuf.BoolValue passed_requirements = 3;
+  map<string, PageRequirement> page_requirements = 4;
+}

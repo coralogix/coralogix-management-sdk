@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+import "com/coralogix/archive/dataset/v1/dataset.proto";
+import "com/coralogix/archive/v2/archive_target.proto";
+
+message Object {
+  reserved 1;
+  string object_key = 2;
+  uint64 object_size = 3;
+  reserved 4;
+  reserved 5;
+  uint32 compaction_level = 6;
+  com.coralogix.archive.dataset.v1.Dataset dataset = 7;
+  uint64 row_count = 8;
+  repeated Labels collected_event_labels = 9;
+  Labels split_by_event_labels = 10;
+  ArchiveTarget archive_target = 11;
+  reserved 12;
+  reserved 13;
+}
+
+message ObjectCreated {
+  Object object = 1;
+}
+
+message ObjectRemoved {
+  Object object = 1;
+}
+
+message ObjectsReplaced {
+  repeated ObjectCreated created = 1;
+  repeated ObjectRemoved removed = 2;
+}
+
+message CompactionEvent {
+  oneof event {
+    ObjectCreated created = 1;
+    ObjectsReplaced replaced = 2;
+  }
+  string archive_id = 3;
+}
+
+message Labels {
+  repeated KeyVal kvs = 1;
+}
+
+message KeyVal {
+  string key = 1;
+  string value = 2;
+}

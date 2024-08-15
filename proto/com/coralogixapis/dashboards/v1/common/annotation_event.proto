@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+message AnnotationEvent {
+  oneof value {
+    Instant instant = 1;
+    Range range = 2;
+  }
+
+  message Instant {
+    google.protobuf.Timestamp timestamp = 1;
+    map<string, string> labels = 2;
+    google.protobuf.Struct payload = 3;
+  }
+
+  message Range {
+    google.protobuf.Timestamp start = 1;
+    google.protobuf.Timestamp end = 2;
+    map<string, string> labels = 3;
+    google.protobuf.Struct payload = 4;
+  }
+}

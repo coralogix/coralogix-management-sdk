@@ -1,0 +1,60 @@
+name: Go SDK
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - "**.go"
+      - "**.mod"
+  pull_request:
+    branches: [ master ]
+    paths:
+      - "**.go"
+      - "**.mod"
+
+jobs:
+  FLT:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: go
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - uses: arduino/setup-protoc@v3
+      - name: Check formatting and build
+        run: | 
+          go mod tidy
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          gofmt -l .
+          make build
+      - uses: golangci/golangci-lint-action@v2
+        with:
+          # Optional: golangci-lint command line arguments.
+          #args: --out-format=colored-line-number
+          working-directory: go
+
+          # Optional: show only new issues if it's a pull request. The default value is `false`.
+          # only-new-issues: true
+
+          # Optional: if set to true then the action will use pre-installed Go.
+          skip-go-installation: true
+
+          # Optional: if set to true then the action don't cache or restore ~/go/pkg.
+          # skip-pkg-cache: true
+
+          # Optional: if set to true then the action don't cache or restore ~/.cache/go-build.
+          # skip-build-cache: true
+      # - name: test
+      #   run: make test 
+      - name: Run tests 
+        timeout-minutes: 10
+        env:
+          AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
+          CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
+          CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
+          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+        run: make test
+        working-directory: go

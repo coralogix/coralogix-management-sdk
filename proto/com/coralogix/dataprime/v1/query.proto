@@ -1,0 +1,380 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/ast/v1/ast.proto";
+import "com/coralogix/dataprime/ast/v1/query.proto";
+import "com/coralogix/dataprime/v1/object_store_warning.proto";
+import "com/coralogix/dataprime/v1/common.proto";
+import "google/protobuf/wrappers.proto";
+
+message FieldCardinality {
+  UntypedKeypath keypath = 1;
+  uint64 cardinality = 2;
+}
+
+// External API interface for executing a DataPrime query
+message SubmitQueryRequest {
+  reserved 1, 2, 3, 4, 5, 6;
+  com.coralogix.dataprime.ast.v1.Ast query_ast = 7;
+  ExecutionConfig execution_config = 8;
+  google.protobuf.StringValue query_id = 9;
+  reserved 10;
+  repeated NamedQuerySource named_query_sources = 11;
+  repeated FieldCardinality keypath_cardinalities = 12;
+}
+
+// External API interface for executing a DataPrime DDL query / Creation of Dynamic Dataset
+message SubmitDdlQueryRequest {
+  com.coralogix.dataprime.ast.v1.DdlAst ddl_ast = 1;
+  ExecutionConfig execution_config = 2;
+  google.protobuf.StringValue query_id = 3;
+  DatasetLocation dataset_location = 4;
+  repeated NamedQuerySource named_query_sources = 5;
+  repeated FieldCardinality keypath_cardinalities = 6;
+}
+
+message DatasetLocation {
+  string object_store_url = 1;
+  string path = 2;
+  string region = 3;
+}
+
+message ExplainQueryRequest {
+  reserved 1, 2, 3, 4, 5, 6;
+  com.coralogix.dataprime.ast.v1.Ast query_ast = 7;
+  ExecutionConfig execution_config = 8;
+  google.protobuf.StringValue query_id = 9;
+  reserved 10;
+  repeated NamedQuerySource named_query_sources = 11;
+  repeated FieldCardinality keypath_cardinalities = 12;
+}
+
+message ExplainStage {
+  uint32 stage = 1;
+  uint32 partitions = 2;
+  string plan = 3;
+}
+
+message ExplainQueryResponse {
+  string initial_logical_plan = 1;
+  string optimized_logical_plan = 2;
+  string physical_plan = 3;
+  repeated ExplainStage stages = 4;
+  string full_explanation = 5;
+}
+
+message QuerySource {
+  message ArchiveSource {
+    string bucket_name = 1;
+    string region_name = 2;
+    uint32 max_archive_version = 3;
+    google.protobuf.StringValue bucket_v2 = 4;
+  }
+
+  message OpenSearchSource {
+    reserved 1, 2;
+    string index = 3;
+    reserved 4;
+    optional string host = 5;
+  }
+
+  message CustomEnrichmentCsv {
+    google.protobuf.StringValue bucket_name = 1;
+    google.protobuf.StringValue region_name = 2;
+  }
+
+  message AsyncQuerySource {
+    ArchiveSource archive_source = 1;
+  }
+
+  message SchemaStoreSource {
+    repeated string team_ids = 1;
+  }
+
+  oneof source {
+    ArchiveSource archive_source = 1;
+    OpenSearchSource open_search_source = 2;
+    CustomEnrichmentCsv custom_enrichment_csv = 5;
+    AsyncQuerySource async_query_source = 6;
+    SchemaStoreSource schema_store_source = 7;
+  }
+
+  reserved 3, 4;
+}
+
+message NamedQuerySource {
+  reserved 1;
+  com.coralogix.dataprime.ast.v1.Source name = 3;
+  QuerySource source = 2;
+}
+
+message SubmitQueryResponse {
+  string query_id = 1;
+}
+
+message SubmitDdlQueryResponse {
+  string query_id = 1;
+}
+
+message GetDatasetRequest {
+  message Json {}
+  message Csv {}
+
+  // Query to run using dataset as an input
+  com.coralogix.dataprime.ast.v1.Ast query_ast = 1;
+  ExecutionConfig execution_config = 2;
+  google.protobuf.StringValue query_id = 3;
+  // Source pointing to the dataset
+  NamedQuerySource named_query_source = 4;
+  // If skip and limit are not provided the whole dataset will be returned
+  // Rows to skip
+  optional uint64 skip = 5;
+  // Number of rows to return
+  optional uint64 limit = 6;
+  // Response data format
+  oneof format {
+    Json json = 7;
+    Csv csv = 8;
+  }
+}
+
+message GetDatasetResponse {
+  string row = 1;
+}
+
+message GetPresignedDownloadUrlRequest {
+  message Csv {
+    message Column {
+      string name = 1;
+      string keypath = 2;
+    }
+
+    bool header = 1;
+    string delimiter = 2;
+
+    repeated Column columns = 3;
+  }
+
+  message StagingLocation {
+    string region = 1;
+    string object_store_url = 2;
+    string path = 3;
+    string filename = 4;
+  }
+
+  com.coralogix.dataprime.ast.v1.Ast query_ast = 1;
+  google.protobuf.StringValue query_id = 2;
+  NamedQuerySource named_query_source = 3;
+  StagingLocation staging_location = 4;
+  uint64 valid_for_seconds = 5;
+  ExecutionConfig execution_config = 6;
+  oneof format {
+    Csv csv = 7;
+  }
+}
+
+message GetPresignedDownloadUrlResponse {
+  // Absent when there are no results to be downloaded
+  optional string url = 1;
+}
+
+message DropDatasetRequest {
+  DatasetLocation dataset_location = 1;
+  string dataset_name = 2;
+}
+
+message DropDatasetResponse {}
+
+// Configurations for query execution
+message ExecutionConfig {
+  // Defines the desired maximum parallelism of the query
+  optional uint64 target_partitions = 1;
+  reserved 2;
+  // Defines the maximum amount of bytes to be processed by each query partition
+  optional uint64 max_bytes_per_partition = 3;
+
+  // Which metastore to use
+  Metastore metastore = 4;
+
+  reserved 5;
+
+  // defines if lambda execution is enabled or disabled for query
+  // unspecified means that dqe decides it by itself
+  reserved 6;
+
+  // Enable page level bloom filters
+  optional bool use_page_bloom_filter = 7;
+  optional string page_index_path = 8;
+
+  // Timeout for running a query
+  // unspecified means dqe uses its default timeout
+  optional uint64 timeout_sec = 9;
+
+  // Choose if we want to use column statistics for table scans
+  optional bool use_column_statistics = 10;
+
+  // Choose if we want to use full text index (if available)
+  optional bool use_text_index = 11;
+
+  // Defines the maximum amount of bytes read from S3
+  optional uint64 max_bytes_read_from_s3 = 12;
+
+  // Defines the maximum number of blocks to read from S3
+  optional uint64 blocks_limit = 13;
+
+  // Choose if we want to use correct sorting for order by expressions
+  optional bool use_correct_sorting = 14;
+
+  // Defines the maximum number of buckets to use for OpenSearch aggregation
+  optional uint64 open_search_agg_buckets_size = 15;
+
+  // Defines the maximum number of aggregation result pages to query from OpenSearch. One page is of size open_search_agg_buckets_size
+  optional uint64 open_search_agg_max_pages = 16;
+
+  // Enable jsona parse optimization
+  optional bool optimize_jsona_parsing = 17;
+
+  // Enable repartitioning of aggregation queries. If `true` this will partition the final aggregation
+  // stage
+  optional bool repartition_aggregations = 18;
+
+  // Enable usage of remote index store (when it is configured in the query engine)
+  optional bool use_index_store = 19;
+
+  optional SchedulingTier scheduling_tier = 20;
+
+  // Sets of executor resource groups the query can be scheduled on
+  repeated ResourceGroup resource_group = 21;
+}
+
+enum SchedulingTier {
+  SCHEDULING_TIER_UNSPECIFIED = 0;
+  SCHEDULING_TIER_NORMAL = 1;
+  SCHEDULING_TIER_FAST = 2;
+}
+
+enum ResourceGroup {
+  RESOURCE_GROUP_UNSPECIFIED = 0;
+  RESOURCE_GROUP_HIGH_TIER = 1;
+  RESOURCE_GROUP_ARCHIVE = 2;
+  RESOURCE_GROUP_LAMBDA = 3;
+  RESOURCE_GROUP_DEV = 4;
+}
+
+enum Metastore {
+  METASTORE_UNSPECIFIED = 0;
+  reserved 1;
+  METASTORE_SCYLLA = 2;
+  METASTORE_POSTGRES = 3;
+}
+
+message AwaitReadyRequest {
+  string query_id = 1;
+}
+
+message Failed {
+  oneof error {
+    Internal internal = 1;
+    External external = 2;
+    Cancelled cancelled = 3;
+  }
+
+  uint64 queued_at = 4;
+  uint64 started_at = 5;
+  uint64 ended_at = 6;
+
+  message Internal {
+    string message = 1;
+  }
+  message External {
+    string message = 1;
+  }
+  message Cancelled {}
+}
+
+message AwaitReadyResponse {
+  reserved 1, 2;
+
+  QueryStatus status = 3;
+}
+
+message GetQueryStatusRequest {
+  string query_id = 1;
+}
+
+message QueryStatus {
+  message Queued {
+    uint64 queued_at = 1;
+  }
+
+  message Running {
+    uint64 queued_at = 1;
+    uint64 started_at = 2;
+  }
+
+  message Completed {
+    uint64 queued_at = 1;
+    bool scan_limit_reached = 2;
+    uint64 ended_at = 3;
+
+    // The number of rows returned by the query.
+    // Note that for queries that write to a sink,
+    // this is not equivalent to the number of rows written.
+    uint64 num_rows = 4;
+
+    bool blocks_limit_reached = 5;
+
+    ObjectStoreWarning object_store_warning = 6;
+
+    uint64 started_at = 7;
+
+    bool scroll_timeout_reached = 8;
+  }
+
+  message Planning {
+    uint64 queued_at = 1;
+  }
+
+  message NotFound {}
+
+  message Cancelled {
+    uint64 queued_at = 1;
+    uint64 ended_at = 2;
+  }
+
+  oneof status {
+    Queued queued = 1;
+    Running running = 2;
+    Failed failed = 3;
+    Completed completed = 4;
+    Planning planning = 5;
+    NotFound not_found = 7;
+    Cancelled cancelled = 8;
+  }
+  string query_id = 6;
+}
+
+message GetQueryStatusResponse {
+  QueryStatus status = 1;
+}
+
+message CancelQueryRequest {
+  string query_id = 1;
+}
+
+message CancelQueryResponse {
+  bool cancelled = 1;
+}
+
+message QueryPayload {
+  oneof payload {
+    // We cannot inject the AST proto into the request proto on the frontend
+    // because the AST proto is generated by ScalaJS protobuf compiler instead of a JS protobuf library
+    SerializedDataprime dataprime = 1;
+  }
+}
+
+message SerializedDataprime {
+  bytes data = 1;
+}

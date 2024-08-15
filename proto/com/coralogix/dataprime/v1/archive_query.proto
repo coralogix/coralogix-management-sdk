@@ -1,0 +1,130 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/compile.proto";
+import "com/coralogix/dataprime/v1/query.proto";
+import "com/coralogix/dataprime/v1/warnings.proto";
+import "com/coralogix/dataprime/v1/archive_log.proto";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message RunQueryRequest { 
+  google.protobuf.StringValue name = 1;
+  optional google.protobuf.StringValue description = 2;
+  QuerySyntax syntax = 3;
+  QueryPayload query = 4;
+  google.protobuf.StringValue raw_query = 5;
+  google.protobuf.Timestamp from_date = 6;
+  google.protobuf.Timestamp to_date = 7;
+  repeated google.protobuf.StringValue application_filters = 8;
+  repeated google.protobuf.StringValue severity_filters = 9;
+  repeated google.protobuf.StringValue subsystem_filters = 10;
+  optional google.protobuf.StringValue widget_id = 11;
+  optional google.protobuf.StringValue request_params_hash = 12;
+  optional OutputSchema tsv_output_schema = 13;
+}
+
+message OutputSchema {
+  // empty means default fields
+  repeated OutputSchemaField fields = 1;
+}
+
+message OutputSchemaField {
+  repeated google.protobuf.StringValue path = 1;
+}
+
+message RunQueryResponse {
+  ArchiveQuery archive_query = 1;
+}
+
+message ListQueriesRequest {
+  int32 page = 1;
+  int32 size = 2;
+  google.protobuf.StringValue filter = 3;
+  optional google.protobuf.StringValue request_params_hash = 4;
+  Ordering ordering = 5;
+  google.protobuf.BoolValue only_dashboard_queries = 6;
+
+  enum Ordering {
+    ORDERING_DESC_UNSPECIFIED = 0;
+    ORDERING_ASC              = 1;
+  }
+}
+
+message ListQueriesResponse {
+  repeated ArchiveQuery archive_queries = 1;
+  int32 total_count = 2;
+  optional google.protobuf.StringValue request_params_hash = 3;
+}
+
+message ListQueryNamesRequest {
+  int32 limit = 1;
+  optional google.protobuf.StringValue contains_filter = 2;
+}
+
+message ListQueryNamesResponse {
+  repeated QueryName query_names = 1;
+}
+
+message QueryName {
+  google.protobuf.StringValue query_name = 1;
+}
+
+message QueryResultRequest {
+  google.protobuf.StringValue archive_query_id = 1;
+  optional QueryPayload query = 2; 
+  optional int32 page = 3;
+  optional int32 size = 4;
+  optional Format format = 5;
+
+  enum Format {
+    FORMAT_JSON_UNSPECIFIED = 0;
+    FORMAT_CSV = 1;
+  } 
+}
+
+message QueryResultResponse {
+  ArchiveLog log = 1;
+}
+
+message GetQueryRequest {
+  string id = 1;
+}
+
+message GetQueryResponse {
+  optional ArchiveQuery archive_query = 1;
+}
+
+message ArchiveQuery {
+  enum Status {
+    STATUS_PENDING_UNSPECIFIED = 0;
+    STATUS_IN_PROGRESS = 1;
+    STATUS_COMPLETED = 2;
+    STATUS_FAILED = 3;
+  }
+
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  optional google.protobuf.StringValue description = 3;
+  QuerySyntax syntax = 4;
+  google.protobuf.StringValue query = 5;
+  google.protobuf.Timestamp from_date = 6;
+  google.protobuf.Timestamp to_date = 7;
+  repeated google.protobuf.StringValue application_filters = 8;
+  repeated google.protobuf.StringValue severity_filters = 9;
+  repeated google.protobuf.StringValue subsystem_filters = 10;
+  Status status = 11;
+  google.protobuf.StringValue created_by = 12;
+  optional google.protobuf.Timestamp started_at = 13;
+  optional google.protobuf.Timestamp completed_at = 14;
+  optional google.protobuf.Timestamp expires_at = 15;
+  optional google.protobuf.StringValue status_failed_description = 16;
+  int64 rows_total_count = 17;
+  optional google.protobuf.StringValue widget_id = 18;
+  bool scan_limit_reached = 19;
+  bool blocks_limit_reached = 20;
+  ArchiveWarning archive_warning = 21;
+  optional OutputSchema tsv_output_schema = 22;
+}

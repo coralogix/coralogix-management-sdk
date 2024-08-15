@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message Pagination {
+  google.protobuf.Int32Value offset = 1;
+  google.protobuf.Int32Value limit = 2;
+}

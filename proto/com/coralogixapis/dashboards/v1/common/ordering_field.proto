@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
+import "google/protobuf/wrappers.proto";
+
+message OrderingField {
+  google.protobuf.StringValue field = 1;
+  v1.common.OrderDirection order_direction = 2;
+}

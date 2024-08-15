@@ -1,0 +1,20 @@
+[package]
+name = "outgoing-webhooks"
+version = "0.1.0"
+license = "MIT"
+edition = "2021"
+repository = "https://github.com/coralogix/coralogix-management-sdk"
+keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
+categories = ["asynchronous", "log"]
+authors = []
+
+[dependencies]
+anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+serde_json = "*"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"
+url = "*"
+uuid = { version = "*", features = ["serde", "v4"] }

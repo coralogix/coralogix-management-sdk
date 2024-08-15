@@ -1,0 +1,81 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1.services;
+
+import "com/coralogixapis/views/v1/audit_log.proto";
+import "com/coralogixapis/views/v1/filters.proto";
+import "com/coralogixapis/views/v1/search_query.proto";
+import "com/coralogixapis/views/v1/time_selection.proto";
+import "google/protobuf/wrappers.proto";
+
+service ViewsService {
+  rpc CreateView(CreateViewRequest) returns (CreateViewResponse) {
+    option (audit_log_description).description = "create view";
+  }
+
+  rpc ReplaceView(ReplaceViewRequest) returns (ReplaceViewResponse) {
+    option (audit_log_description).description = "replace view";
+  }
+
+  rpc GetView(GetViewRequest) returns (GetViewResponse) {
+    option (audit_log_description).description = "get view";
+  }
+
+  rpc DeleteView(DeleteViewRequest) returns (DeleteViewResponse) {
+    option (audit_log_description).description = "get view";
+  }
+
+  rpc ListViews(ListViewsRequest) returns (ListViewsResponse) {
+    option (audit_log_description).description = "list all company public views";
+  }
+}
+
+message CreateViewRequest {
+  google.protobuf.StringValue name = 1;
+  SearchQuery search_query = 2;
+  TimeSelection time_selection = 3;
+  SelectedFilters filters = 4;
+  google.protobuf.StringValue folder_id = 5;
+}
+
+message CreateViewResponse {
+  View view = 1;
+}
+
+message ReplaceViewRequest {
+ View view = 1;
+}
+
+message ReplaceViewResponse {
+  View view = 1;
+}
+
+message GetViewRequest {
+  google.protobuf.Int32Value id = 1;
+}
+
+message GetViewResponse {
+  View view = 1;
+}
+
+message DeleteViewRequest {
+ google.protobuf.Int32Value id = 1;
+}
+
+message DeleteViewResponse {
+}
+
+message ListViewsRequest {}
+
+message ListViewsResponse {
+  repeated View views = 1;
+}
+
+message View {
+  google.protobuf.Int32Value id = 1;
+  google.protobuf.StringValue name = 2;
+  SearchQuery search_query = 3;
+  TimeSelection time_selection = 4;
+  SelectedFilters filters = 5;
+  google.protobuf.StringValue folder_id = 6;
+}
