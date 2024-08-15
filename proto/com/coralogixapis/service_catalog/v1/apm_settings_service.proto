@@ -1,0 +1,96 @@
+syntax = "proto3";
+package com.coralogixapis.service_catalog.v1;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "com/coralogixapis/service_catalog/v1/apm_settings.proto";
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+
+message GetApmSettingsRequest {}
+
+message GetApmSettingsResponse{
+  ApmSettings apm_settings = 1;
+}
+
+message ReplaceApmSettingsRequest {
+  ApmSettings apm_settings = 1;
+}
+
+message ReplaceApmSettingsResponse {
+  ApmSettings apm_settings = 1;
+}
+
+message ValidateApmSourceRequest {
+  ApmSource source = 1;
+}
+
+message Metric {
+  string metric_name = 1;
+  bool exists = 2;
+  repeated string missing_labels = 3;
+  repeated string present_labels = 4;
+}
+
+message ValidateApmSourceResponse {
+  bool is_valid = 1;
+  repeated Metric metrics = 2;
+}
+
+message ReplaceRetentionPeriodRequest {
+  google.protobuf.Int32Value retention_period_in_days = 1;
+}
+
+message ReplaceRetentionPeriodResponse {
+  google.protobuf.Int32Value retention_period_in_days = 1;
+}
+
+message GetApmSourceRequest {}
+
+message GetApmSourceResponse {
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
+}
+
+message GetSpanMetricDimensionsRequest {}
+
+message GetSpanMetricDimensionsByServiceNamesRequest {
+  repeated google.protobuf.StringValue service_names = 1;
+}
+
+message GetSpanMetricDimensionsResponse{
+  repeated google.protobuf.StringValue dimensions = 1;
+  map<string, google.protobuf.ListValue> dimensions_values = 2;
+}
+
+message GetSpanMetricDimensionsByServiceNamesResponse {
+  repeated google.protobuf.StringValue dimensions = 1;
+}
+
+service ApmSettingsService {
+  rpc GetApmSettings(GetApmSettingsRequest) returns (GetApmSettingsResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apm Settings";
+  }
+
+  rpc ReplaceApmSettings(ReplaceApmSettingsRequest) returns (ReplaceApmSettingsResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Replace Apm Settings";
+  }
+
+  rpc ValidateApmSource(ValidateApmSourceRequest) returns (ValidateApmSourceResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Validate Apm Source";
+  }
+
+  rpc ReplaceRetentionPeriod(ReplaceRetentionPeriodRequest) returns (ReplaceRetentionPeriodResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Replace Retention Period";
+  }
+
+  rpc GetApmSource(GetApmSourceRequest) returns (GetApmSourceResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apm Source Request";
+  }
+
+  rpc GetSpanMetricDimensions(GetSpanMetricDimensionsRequest) returns (GetSpanMetricDimensionsResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions";
+  }
+
+  rpc GetSpanMetricDimensionsByServiceNames(GetSpanMetricDimensionsByServiceNamesRequest) returns (GetSpanMetricDimensionsByServiceNamesResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions By Service Name";
+  }
+}

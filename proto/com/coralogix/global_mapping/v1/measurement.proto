@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package com.coralogix.global_mapping.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+
+
+message Measurement {
+  reserved "data_source_provider";
+  reserved 5;
+  google.protobuf.StringValue measurement_name = 1;
+  DataSourceType data_source_type = 2;
+  google.protobuf.StringValue query = 3;
+  repeated google.protobuf.StringValue labels = 4[deprecated=true];
+  google.protobuf.StringValue id = 6;
+  google.protobuf.StringValue description = 7;
+  google.protobuf.StringValue display_name = 8;
+  google.protobuf.StringValue logical_group = 9;
+  google.protobuf.StringValue ordering_query = 10 [deprecated=true];
+  repeated google.protobuf.StringValue appendable_metrics = 11;
+  DataSource data_source = 12;
+  google.protobuf.StringValue group_left = 13;
+  google.protobuf.StringValue join_on = 14;
+  google.protobuf.StringValue subject_label = 15;
+}

@@ -1,0 +1,116 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/flat.proto";
+import "com/coralogix/schemastore/v1/common.proto";
+
+message GenerateQueryRequest {
+  string user_prompt = 1;
+  // Deprecated: use label_filters instead
+  string application = 2 [deprecated = true];
+  // Deprecated: use label_filters instead
+  string subsystem = 3 [deprecated = true];
+  uint32 retry_count = 4;
+  repeated LabelFilterV2 label_filters = 5;
+  QueryTarget query_target = 6;
+  string correlation_id = 7;
+  TimeRange time_range = 8;
+}
+
+
+message GenerateQueryResponse {
+  reserved 1;
+  uint32 retry_count = 2;
+  string query_id = 3;
+  QueryGenerationResult result = 4;
+}
+
+message QueryGenerationResult {
+  oneof result {
+    SuccessfulQueryGeneration successful = 1;
+    QueryRejected rejected = 2;
+    NoValidQueriesGenerated no_valid_queries_generated = 3;
+    QueryGenerationFailure generation_failure = 4;
+    QuotaExceeded quota_exceeded = 5;
+  }
+}
+
+message SuccessfulQueryGeneration {
+  repeated CandidateQuery candidate_queries = 1;
+}
+
+message QueryRejected {
+}
+
+message NoValidQueriesGenerated {
+}
+
+message QueryGenerationFailure {
+}
+
+message QuotaExceeded {
+}
+
+message CandidateQuery {
+  string query = 1;
+}
+
+enum QueryTarget {
+  QUERY_TARGET_UNSPECIFIED = 0;
+  QUERY_TARGET_ARCHIVE = 1;
+  QUERY_TARGET_LOGS = 2;
+}
+
+
+message QueryAssistantServiceSettingsRequest {
+}
+
+message QueryAssistantServiceSettingsResponse {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+  bool ready = 4;
+}
+
+message QueryAssistantServiceUpdateSettingsRequest {
+  optional bool company_enabled = 2;
+}
+
+message QueryAssistantServiceUpdateSettingsResponse {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+}
+
+message SettingsRequest {
+}
+
+message SettingsResponse {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+  bool ready = 4;
+}
+
+message UpdateSettingsRequest {
+  optional bool company_enabled = 2;
+}
+
+message UpdateSettingsResponse {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+}
+
+message InternalEnableCompanyRequest {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+}
+
+message InternalEnableCompanyResponse {
+  uint32 company_id = 1;
+  bool coralogix_enabled = 2;
+  bool company_enabled = 3;
+}

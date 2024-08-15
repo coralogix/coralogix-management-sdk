@@ -1,0 +1,10 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package com.coralogixapis.apm.widgets.v1;
+
+message WidgetGroup{
+    google.protobuf.StringValue name = 1;
+    google.protobuf.StringValue display_name = 2;
+}

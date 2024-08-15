@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+message ColorsBy {
+  oneof value {
+    ColorsByStack stack = 1;
+    ColorsByGroupBy group_by = 2;
+    ColorsByAggregation aggregation = 3;
+  }
+
+  message ColorsByStack {}
+  message ColorsByGroupBy {}
+  message ColorsByAggregation {}
+}

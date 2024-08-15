@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message LogMetaFieldsValues {
+  google.protobuf.StringValue application_name_values = 1;
+  google.protobuf.StringValue severity_values = 2;
+  google.protobuf.StringValue subsystem_name_values = 3;
+}

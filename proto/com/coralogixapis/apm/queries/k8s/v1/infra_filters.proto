@@ -1,0 +1,25 @@
+syntax="proto3";
+
+import "google/protobuf/wrappers.proto";
+
+package com.coralogixapis.apm.queries.k8s.v1;
+
+
+enum K8sFilter{
+    K8S_FILTER_UNSPECIFIED = 0;
+    K8S_FILTER_NAMESPACE = 1;
+    K8S_FILTER_NODE = 2;
+    K8S_FILTER_APP = 3;
+    K8S_FILTER_POD = 4;
+    K8S_FILTER_CLUSTER = 5;
+  }
+
+message Filter {
+    K8sFilter kind = 1;
+    map<string,bool> values = 2; // String represents the object's name, value represents if it is selected or not
+}
+
+message SelectedFilter {
+  K8sFilter kind = 1;
+  repeated google.protobuf.StringValue values = 2;
+}

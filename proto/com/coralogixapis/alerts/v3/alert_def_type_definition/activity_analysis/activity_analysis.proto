@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+message ActivityAnalysis {
+  repeated string rules = 1;
+  ActivityAnalysisStatus status = 2;
+}
+
+enum ActivityAnalysisStatus {
+  ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED = 0;
+  ACTIVITY_ANALYSIS_STATUS_MUTE = 1;
+}

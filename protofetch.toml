@@ -1,0 +1,121 @@
+name = 'cx-api'
+proto_out_dir = './proto'
+
+[rules-api-protobuf]
+url = 'github.com/coralogix/rules-api-protobuf'
+revision = 'v0.16.0'
+
+[alerts-api-protobuf-v3]
+url = 'github.com/coralogix/cx-api-alerts'
+revision = 'c0b8998a221ea143f21f3021f33274efa9312840'
+
+[cx-api-views]
+url = 'github.com/coralogix/cx-api-views'
+revision = 'a14c87f2e662c316eab97d701a3a9d267edf5d43'
+
+[cx-api-actions]
+url = 'github.com/coralogix/cx-api-actions'
+revision = '186f40419a993ce325c93846597ff75c9e2a88a5'
+
+[cx-api-extensions]
+url = 'github.com/coralogix/cx-api-extensions'
+revision = '0c93cdb178b9324c2e05c1260aba61f21d071428'
+allow_policies = ["/com/coralogix/integrations/v1/*", "/com/coralogix/extensions/v1/*", "/com/coralogix/outgoing_webhooks/v1/*"]
+
+[cx-api-quota]
+url = 'github.com/coralogix/cx-api-quota'
+revision = 'v0.0.8'
+
+[cx-api-dashboards]
+url = 'github.com/coralogix/cx-api-dashboards'
+allow_policies = ["/com/coralogixapis/*"]
+revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
+
+[cx-api-dataprime]
+url = 'github.com/coralogix/cx-api-dataprime'
+content_roots = ["/service", "ast"]
+revision = 'v0.283'
+
+[cx-api-logs2metrics]
+url = 'github.com/coralogix/cx-api-logs2metrics'
+deny_policies = ["/com/coralogixapis/logs2metrics/audit_log.proto"]
+revision = 'ec44a77572bf77cf5c731107238bbda65e7c1089'
+
+[cx-api-data-usage]
+url = 'github.com/coralogix/cx-api-data-usage'
+revision = 'v0.1.15'
+
+[cx-api-enrichment]
+url = 'github.com/coralogix/cx-api-enrichment'
+revision = 'v0.5.6'
+
+[cx-api-tags]
+url = 'github.com/coralogix/cx-api-tags'
+revision = '3e3a33b9c1008978dd77798024022d9d557a0a46'
+
+[cx-api-organisations]
+url = 'github.com/coralogix/cx-api-organisations'
+allow_policies = ["/com/coralogixapis/aaa/*"]
+revision = 'v0.1.28'
+
+[cx-api-service-catalog]
+url = 'github.com/coralogix/cx-api-service-catalog'
+revision = 'v0.3.81'
+
+
+[cx-api-scopes-service]
+url = 'github.com/coralogix/scopes-service'
+allow_policies = ["/com/coralogixapis/*"]
+content_roots = ["/modules/service/proto/"]
+revision = '45f5f10e7364b43ed736d76593c3ec0e73314cb2'
+
+[cx-api-schema-store]
+url = 'github.com/coralogix/cx-api-schema-store'
+revision = 'd4c50aaaf2367372aafaf97a4d1507f12712b982'
+
+[cx-api-apm]
+url = 'github.com/coralogix/cx-api-apm'
+revision = 'v2.0.4'
+
+[cx-api-alert-scheduler]
+url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
+revision = '85c62965137513ec113a421a7fb46648540cd4d6'
+
+[cx-api-permissions]
+url = 'github.com/coralogix/cx-api-permissions'
+allow_policies = [
+    "/com/coralogixapis/aaa/apikeys/v3/*",
+    "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
+    "/com/coralogix/permissions/v1/common.proto",
+    "/com/coralogix/permissions/v1/permissions_mgmt.proto",
+    "/com/coralogix/permissions/v1/actions_resources.proto",
+    "/com/coralogix/permissions/models/v1/*",
+]
+revision = "v0.1.66"
+
+[cx-api-archive]
+url = 'github.com/coralogix/cx-api-archive'
+revision = 'v0.0.42'
+
+[cx-api-metrics-configurator]
+url = 'github.com/coralogix/metrics-configurator'
+allow_policies = ["/com/coralogix/metrics/*"]
+content_roots = ["/proto/"]
+revision = '5aacd2545eb7ae5f76193fc872348c5756db2c8d'
+
+
+[google-api]
+url = "github.com/googleapis/googleapis"
+allow_policies = [
+    "/google/api/annotations.proto",
+    "/google/api/client.proto",
+    "/google/api/field_behavior.proto",
+    "/google/api/http.proto",
+    "/google/api/launch_stage.proto",
+    "/google/api/resource.proto",
+    "google/rpc/status.proto",
+]
+
+[global-mapping]
+url = 'github.com/coralogix/cx-api-global-mapping'
+revision = 'v1.26.0'

@@ -1,0 +1,47 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+message SpansAggregation {
+  oneof aggregation {
+    MetricAggregation metric_aggregation = 1;
+    DimensionAggregation dimension_aggregation = 2;
+  }
+
+  message MetricAggregation {
+    MetricField metric_field = 1;
+    MetricAggregationType aggregation_type = 2;
+
+    enum MetricField {
+      METRIC_FIELD_UNSPECIFIED = 0;
+      METRIC_FIELD_DURATION = 1;
+    }
+
+    enum MetricAggregationType {
+      METRIC_AGGREGATION_TYPE_UNSPECIFIED = 0;
+      METRIC_AGGREGATION_TYPE_MIN = 1;
+      METRIC_AGGREGATION_TYPE_MAX = 2;
+      METRIC_AGGREGATION_TYPE_AVERAGE = 3;
+      METRIC_AGGREGATION_TYPE_SUM = 4;
+      METRIC_AGGREGATION_TYPE_PERCENTILE_99 = 5;
+      METRIC_AGGREGATION_TYPE_PERCENTILE_95 = 6;
+      METRIC_AGGREGATION_TYPE_PERCENTILE_50 = 7;
+    }
+  }
+
+  message DimensionAggregation {
+    DimensionField dimension_field = 1;
+    DimensionAggregationType aggregation_type = 2;
+
+    enum DimensionField {
+      DIMENSION_FIELD_UNSPECIFIED = 0;
+      DIMENSION_FIELD_TRACE_ID = 1;
+    }
+
+    enum DimensionAggregationType {
+      DIMENSION_AGGREGATION_TYPE_UNSPECIFIED = 0;
+      DIMENSION_AGGREGATION_TYPE_UNIQUE_COUNT = 1;
+      DIMENSION_AGGREGATION_TYPE_ERROR_COUNT = 2;
+    }
+  }
+}

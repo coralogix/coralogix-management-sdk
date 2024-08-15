@@ -1,0 +1,326 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.ast.v1;
+
+import "com/coralogix/dataprime/ast/v1/expression.proto";
+import "com/coralogix/dataprime/ast/v1/misc.proto";
+import "com/coralogix/dataprime/ast/v1/types.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message Query {
+  Source source               = 1;
+  repeated Operator operators = 2;
+  reserved 3;
+}
+
+message Source {
+  reserved 1;
+
+  oneof source {
+    Logs logs = 2;
+    Spans spans = 3;
+    CustomDataset custom_dataset = 4;
+    CustomEnrichment custom_enrichment = 5;
+    Schema schema = 6;
+  }
+}
+
+message Logs {
+  optional string team_id = 1;
+  optional TimeFrame time_frame = 2;
+}
+
+message Spans {
+  optional string team_id = 1;
+  optional TimeFrame time_frame = 2;
+}
+
+message CustomDataset {
+  google.protobuf.StringValue name = 1;
+  optional string team_id = 2;
+  optional TimeFrame time_frame = 3;
+}
+
+message CustomEnrichment {
+  google.protobuf.StringValue name = 1;
+  optional string team_id = 2;
+  optional TimeFrame time_frame = 3;
+}
+
+message TimeFrame {
+  // Making this oneof because we might want to support relative time frame in the future
+  oneof time_frame {
+    Absolute absolute = 1;
+  }
+
+  message Absolute {
+    google.protobuf.Timestamp from = 1;
+    google.protobuf.Timestamp to   = 2;
+  }
+}
+
+message Schema {
+  string name = 1;
+}
+
+message Operator {
+  oneof operator {
+    Filter filter    = 1;
+    Create create    = 2;
+    Move move        = 3;
+    Remove remove    = 4;
+    Replace replace  = 5;
+    Redact redact    = 6;
+    Choose choose    = 7;
+    Convert convert  = 8;
+    Extract extract  = 9;
+    Limit limit      = 10;
+    OrderBy order_by = 11;
+    GroupBy group_by = 14;
+    Union union      = 15;
+    Enrich enrich    = 16;
+  }
+
+  reserved 12, 13;
+
+  message Filter {
+    Expression condition = 1;
+  }
+
+  message Create {
+    // Failure modes
+    reserved 3, 4, 5;
+
+    Expression.Keypath path                        = 1;
+    Expression expression                          = 2;
+  }
+
+  message Move {
+    // Failure modes
+    reserved 3, 4, 5;
+
+    Expression.Keypath from                        = 1;
+    Expression.Keypath to                          = 2;
+  }
+
+  message Remove {
+    reserved 2;
+    repeated Expression.Keypath targets = 1;
+  }
+
+  message Replace {
+    // Failure mode
+    reserved 3;
+
+    Expression.Keypath path                        = 1;
+    Expression expression                          = 2;
+  }
+
+  message Redact {
+    Expression.Keypath path = 1;
+    Expression.Match match  = 2;
+    Expression replacement  = 3;
+  }
+
+  message Choose {
+    repeated Chosen fields = 1;
+
+    message Chosen {
+      reserved 1;
+      Expression expression    = 3;
+      Expression.Keypath as    = 2;
+    }
+  }
+
+  message Convert {
+    repeated KeypathType conversions = 1;
+  }
+
+  message Extract {
+    Expression expression                   = 1;
+    Expression.Keypath into                 = 2;
+    repeated KeypathType datatypes          = 3;
+    oneof extractor {
+        ExtractRegex regex                  = 4;
+        ExtractKeyValue key_value           = 5;
+        ExtractDelimited delimited          = 6;
+        ExtractJson json                    = 7;
+        ExtractMultiRegex multi_regex       = 8;
+    }
+
+    message ExtractRegex {
+      Expression.Regex regex                = 1;
+    }
+    message ExtractMultiRegex {
+      Expression.Regex regex                = 1;
+    }
+    message ExtractKeyValue {
+      google.protobuf.StringValue pair_delimiter   = 1;
+      google.protobuf.StringValue key_delimiter    = 2;
+      google.protobuf.StringValue quote_char_value = 3;
+    }
+
+    message ExtractDelimited{
+      google.protobuf.StringValue delimiter = 1;
+      Datatype.PrimitiveType type = 2;
+    }
+    message ExtractJson {
+        google.protobuf.Int32Value max_unescape_count = 1;
+    }
+  }
+
+  message Limit {
+    google.protobuf.Int32Value event_count = 1;
+  }
+
+  message OrderBy {
+    reserved 1, 2;
+    repeated OrderByExpression expressions = 3;
+
+    message OrderByExpression {
+      Expression expression = 1;
+      Order order           = 2;
+
+      enum Order {
+        ORDER_UNSPECIFIED = 0;
+        ORDER_ASCENDING   = 1;
+        ORDER_DESCENDING  = 2;
+      }
+    }
+  }
+
+  message GroupBy {
+    repeated GroupByFunction functions = 1;
+    repeated GroupingSet groupings     = 2;
+
+    message GroupByFunction {
+      oneof function {
+        Count count                               = 1;
+        DistinctCount distinct_count              = 3;
+        Sum sum                                   = 2;
+        Min min                                   = 5;
+        Max max                                   = 6;
+        Avg avg                                   = 7;
+        StdDev stddev                             = 8;
+        SampleStdDev sample_stddev                = 9;
+        Variance variance                         = 10;
+        SampleVariance sample_variance            = 11;
+        Percentile percentile                     = 12;
+        AnyValue any_value                        = 13;
+        ApproxCountDistinct approx_count_distinct = 14;
+        Collect collect                           = 15;
+        MaxByInternal max_by_internal             = 16;
+      }
+
+      message Count {
+        reserved 1;
+        optional Expression expression   = 3;
+        Expression.Keypath alias         = 2;
+      }
+
+      message DistinctCount {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Sum {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Min {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Max {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Avg {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message StdDev {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message SampleStdDev {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Variance {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message SampleVariance {
+        Expression expression    = 1;
+        Expression.Keypath alias = 2;
+      }
+
+      message Percentile {
+        Expression percentile      = 1;
+        Expression expression      = 2;
+        Expression error_threshold = 3;
+        Expression.Keypath alias   = 4;
+      }
+
+      message AnyValue {
+        Expression expression     = 1;
+        Expression.Keypath alias  = 2;
+      }
+
+      message ApproxCountDistinct {
+        Expression value           = 1;
+        repeated Expression values = 2;
+        Expression.Keypath alias   = 3;
+      }
+
+      message Collect {
+        Expression expression        = 1;
+        repeated Expression order_by = 2;
+        Expression.Keypath alias     = 3;
+        bool distinct                = 4;
+        optional int64 limit         = 5;
+      }
+
+      message MaxByInternal {
+        Expression sort_key      = 1;
+        Expression expression    = 2;
+        Expression.Keypath alias = 3;
+      }
+    }
+
+    message GroupingSet {
+      reserved 1;
+      repeated GroupingSetField fields = 2;
+    }
+
+    message GroupingSetField {
+      Expression expression    = 1;
+      Expression.Keypath alias = 2;
+    }
+  }
+
+  message Union {
+    Query query = 1;
+  }
+
+  message EnrichmentSource {
+    oneof source {
+      CustomEnrichment custom_enrichment = 1;
+    }
+  }
+
+  message Enrich {
+    EnrichmentSource source  = 1;
+    Expression left          = 2;
+    Expression.Keypath into  = 3;
+  }
+}

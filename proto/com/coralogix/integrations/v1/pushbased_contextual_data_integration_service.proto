@@ -1,0 +1,148 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/integrations/v1/push_based_platform.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service PushBasedContextualDataIntegrationService {
+  rpc CreatePushBasedContextualDataIntegration(CreatePushBasedIntegrationRequest) returns (CreatePushBasedIntegrationResponse) {
+    option (audit_log_description).description = "Create a push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdatePushBasedContextualDataIntegration(UpdatePushBasedContextualDataIntegrationsRequest) returns (UpdatePushBasedContextualDataIntegrationsResponse) {
+    option (audit_log_description).description = "Update a push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/update"
+      body: "*"
+    };
+  }
+
+  rpc ListPushBasedContextualDataIntegrations(ListPushBasedContextualDataIntegrationsRequest) returns (ListPushBasedContextualDataIntegrationsResponse) {
+    option (audit_log_description).description = "List push-based contextual data integrations";
+    option (google.api.http) = {
+      post: "/push-based/v1/list"
+      body: "*"
+    };
+  }
+
+  rpc DeletePushBasedContextualDataIntegration(DeletePushBasedContextualDataIntegrationRequest) returns (DeletePushBasedContextualDataIntegrationResponse) {
+    option (audit_log_description).description = "Delete push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/delete"
+      body: "*"
+    };
+  }
+
+  rpc CountPushBasedContextualDataIntegrations(CountPushBasedContextualDataIntegrationsRequest) returns (CountPushBasedContextualDataIntegrationsResponse) {
+    option (audit_log_description).description = "Count push-based contextual data integrations";
+    option (google.api.http) = {
+      post: "/push-based/v1/count"
+      body: "*"
+    };
+  }
+}
+
+message CreatePushBasedIntegrationRequest {
+  message Bitbucket {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message AmazonSns {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message PagerDuty {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message Github {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message Gitlab {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message Opsgenie {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message Prometheus {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  message Intercom {
+    google.protobuf.StringValue token = 1;
+  }
+  message Slack {
+    google.protobuf.StringValue internal_token_id = 1;
+  }
+  oneof platform_data {
+    Bitbucket bitbucket = 101;
+    AmazonSns amazon_sns = 102;
+    PagerDuty pager_duty = 103;
+    Github github = 104;
+    Gitlab gitlab = 105;
+    Opsgenie opsgenie = 106;
+    Prometheus prometheus = 107;
+    Intercom intercom = 108;
+    Slack slack = 109;
+  }
+  google.protobuf.StringValue name = 3;
+  google.protobuf.StringValue application = 4;
+  google.protobuf.StringValue subsystem = 5;
+}
+
+message CreatePushBasedIntegrationResponse {
+  google.protobuf.StringValue id = 1;
+}
+
+message ListPushBasedContextualDataIntegrationsRequest {
+  PushBasedPlatform platform = 1;
+}
+
+message ListPushBasedContextualDataIntegrationsResponse {
+  message PushBasedContextualDataIntegration  {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue name = 2;
+    google.protobuf.StringValue application = 3;
+    google.protobuf.StringValue subsystem = 4;
+    PushBasedPlatform platform = 5;
+    google.protobuf.StringValue token = 6;
+    google.protobuf.Timestamp created_at = 8;
+    google.protobuf.Timestamp updated_at = 9;
+  }
+
+  repeated PushBasedContextualDataIntegration integrations = 1;
+}
+
+message DeletePushBasedContextualDataIntegrationRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message DeletePushBasedContextualDataIntegrationResponse {
+}
+
+message CountPushBasedContextualDataIntegrationsRequest {
+  PushBasedPlatform platform = 1;
+}
+
+message CountPushBasedContextualDataIntegrationsResponse {
+  message IntegrationCount {
+    PushBasedPlatform platform = 1;
+    google.protobuf.UInt32Value count = 2;
+  }
+
+  repeated IntegrationCount counts = 1;
+}
+
+message UpdatePushBasedContextualDataIntegrationsRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 3;
+  google.protobuf.StringValue application = 4;
+  google.protobuf.StringValue subsystem = 5;
+}
+
+message UpdatePushBasedContextualDataIntegrationsResponse {
+}

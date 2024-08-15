@@ -1,0 +1,72 @@
+syntax = "proto3";
+package com.coralogixapis.apm.services.v1;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+enum CompareType {
+  COMPARE_TYPE_UNSPECIFIED = 0;
+  COMPARE_TYPE_IS = 1;
+  COMPARE_TYPE_START_WITH = 2;
+  COMPARE_TYPE_ENDS_WITH = 3;
+  COMPARE_TYPE_INCLUDES = 4;
+}
+
+enum SloStatus {
+  SLO_STATUS_UNSPECIFIED = 0;
+  SLO_STATUS_OK = 1;
+  SLO_STATUS_BREACHED = 2;
+}
+
+enum SliMetricType {
+  SLI_METRIC_TYPE_UNSPECIFIED = 0;
+  SLI_METRIC_TYPE_ERROR = 1;
+  SLI_METRIC_TYPE_LATENCY = 2;
+  SLI_METRIC_TYPE_CUSTOM = 3;
+}
+
+message SliFilter {
+  google.protobuf.StringValue field = 1;
+  CompareType compare_type = 2;
+  repeated google.protobuf.StringValue field_values = 3;
+}
+
+enum ThresholdSymbol {
+  THRESHOLD_SYMBOL_UNSPECIFIED = 0;
+  THRESHOLD_SYMBOL_GREATER = 1;
+  THRESHOLD_SYMBOL_GREATER_OR_EQUAL = 2;
+  THRESHOLD_SYMBOL_LESS = 3;
+  THRESHOLD_SYMBOL_LESS_OR_EQUAL = 4;
+  THRESHOLD_SYMBOL_EQUAL = 5;
+  THRESHOLD_SYMBOL_NOT_EQUAL = 6;
+}
+
+message LatencySli {
+  google.protobuf.StringValue threshold_microseconds = 1;
+  ThresholdSymbol threshold_symbol = 2;
+}
+
+message ErrorSli {}
+
+enum SloPeriod {
+  SLO_PERIOD_UNSPECIFIED = 0;
+  SLO_PERIOD_7_DAYS = 1;
+  SLO_PERIOD_14_DAYS = 2;
+  SLO_PERIOD_30_DAYS = 3;
+}
+
+message ServiceSlo {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue service_name = 3;
+  SloStatus status = 4;
+  google.protobuf.StringValue description = 5;
+  google.protobuf.UInt32Value target_percentage = 6;
+  google.protobuf.Timestamp created_at = 7;
+  google.protobuf.UInt32Value remaining_error_budget_percentage = 8;
+  oneof sli_type {
+    LatencySli latency_sli = 9;
+    ErrorSli error_sli = 10;
+  }
+  repeated SliFilter filters = 11;
+  SloPeriod period = 12;
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/common.proto";
+
+message CorrelationsRequest {
+  repeated uint32 team_ids = 1;
+  Field field = 2;
+  uint32 result_limit = 3;
+}
+
+message Field {
+  DatasetType pillar = 1;
+  DatasetScope kind = 2;
+  repeated string key = 3;
+}
+
+message CorrelationResult {
+  Field field = 1;
+  repeated string samples = 2;
+  CorrelationScoring scoring = 3;
+}
+
+message CorrelationScoring {
+  uint32 original_sample_size = 1;
+  uint32 candidate_sample_size = 2;
+  uint32 intersection_size = 3;
+}
+
+message CorrelationsResponse {
+  repeated CorrelationResult results = 1;
+}

@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package com.coralogix.datausage.v2;
+
+import "com/coralogix/datausage/v2/data_usage.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service InternalDataUsageService {
+  /// Streams entries containing detailed data usage for all teams given a date range and resolution interval.
+  /// Results are aggregated by pillar and priority
+  /// Pillars i.e. [Logs, Metrics, Tracing, ... ]
+  /// Priority i.e. [High, Medium, Low, ... ]
+  rpc ExportTeamsDetailedUsage(ExportTeamsDetailedUsageRequest) returns (stream ExportTeamsDetailedUsageResponse);
+}
+
+message ExportTeamsDetailedUsageRequest {
+  // Date range must be between 1 hour and 24 hours.
+  DateRange date_range = 1;
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // The maximum is 24 data points for 24 hours date range and 1 hour resolution.
+  // Depending on how much data there is, exporting detailed data usage for 24 hours can take significant time (~2 minutes).
+  //
+  // Resolution must be between 1 hour and 24 hour. It also must not be bigger than the total DateRange.
+  google.protobuf.Duration resolution = 2;
+}
+
+message DataUsage {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.FloatValue size_gb = 2;
+  /// Describes this data usage
+  /// i.e. [Pillar.PILLAR_LOGS, Priority.PRIORITY_HIGH], [Pillar.PILLAR_METRICS, Priority.PRIORITY_MEDIUM]
+  repeated Dimension dimensions = 3;
+}
+
+message TeamDetailedUsage {
+  uint32 team_id = 1;
+  optional string external_id = 2;
+  uint32 retention = 3;
+  repeated DataUsage data_usage = 4;
+}
+
+message ExportTeamsDetailedUsageResponse {
+  /// It is possible that if a team has many records they will be split into multiple messages
+  /// Client is expected to read stream and combine all records for each team.
+  TeamDetailedUsage team_usage = 1;
+}

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/event/payload/flow/event_flow_match.proto";
+
+message EventFlow {
+  repeated EventFlowMatch flow_alerts_match = 1;
+}

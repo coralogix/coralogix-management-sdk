@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/common.proto";
+
+message TracingSamplesRequest {
+  repeated uint32 team_ids = 1;
+  string path = 2;
+  TimeRange time_range = 3;
+  repeated LabelFilter label_filters = 4;
+  uint32 result_limit = 5;
+  /* deprecated */
+  bool calculate_estimated_cardinality = 6;
+}
+
+message TracingSamplesResponse {
+  repeated string samples = 1;
+  reserved 2;
+}
+
+message BatchTracingSamplesRequest {
+  repeated uint32 team_ids = 1;
+  repeated string paths = 2;
+  TimeRange time_range = 3;
+  repeated LabelFilter label_filters = 4;
+  uint32 result_limit = 5;
+  string group_by_label = 6;
+}
+
+message BatchTracingSamplesResponse {
+  string grouped_by = 1;
+  repeated SamplesResult result = 2;
+}
+
+message SamplesResult {
+  string path = 1;
+  string additional_grouping = 2;
+  repeated string samples = 3;
+}
+

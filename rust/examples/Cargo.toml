@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = [
+    "actions",
+    "alert-scheduler",
+    "alerts",
+    "api-keys",
+    "archive-logs",
+    "archive-metrics", "dashboard-folders",
+    "dashboards",
+    "data-sets",
+    "dataprime-query",
+    "groups",
+    "integrations",
+    "outgoing-webhooks",
+    "scopes",
+    "slos",
+    "teams",
+    "users",
+]

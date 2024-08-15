@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/audit_log.proto";
+
+package com.coralogix.global_mapping.v1;
+
+message GetCompanyProvidersRequest{
+}
+
+message GetCompanyProvidersResponse {
+    repeated google.protobuf.StringValue company_providers = 1;
+}
+
+service CompanyProvidersService {
+    rpc GetCompanyProviders(GetCompanyProvidersRequest)returns(GetCompanyProvidersResponse){
+        option (audit_log_description).description = "Get Company Providers";
+    }
+}

@@ -1,0 +1,20 @@
+[package]
+name = "users"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+prost = "0.12"
+prost-wkt = "0.5"
+prost-wkt-types = "0.5"
+serde_json = "*"
+time = "0.3.36"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"
+uuid = { version = "*", features = ["serde", "v4"] }

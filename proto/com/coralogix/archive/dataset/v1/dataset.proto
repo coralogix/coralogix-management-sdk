@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.coralogix.archive.dataset.v1;
+
+enum DatasetClass {
+  DATASET_CLASS_UNSPECIFIED = 0;
+  DATASET_CLASS_ENV_LEVEL_DATASET = 1;
+  DATASET_CLASS_TEAM_LEVEL_DATASET = 2;
+}
+
+enum PartitioningScheme {
+  PARTITIONING_SCHEME_UNSPECIFIED = 0;
+  PARTITIONING_SCHEME_DT_HR = 1;
+}
+
+message Dataset {
+  string namespace_id = 1;
+  string id = 2;
+  DatasetClass class_id = 3;
+  uint64 team_id = 4;
+  PartitioningScheme partitioning_scheme = 5;
+  repeated string split_by_event_labels = 6;
+  string dataspace_id = 7;
+}

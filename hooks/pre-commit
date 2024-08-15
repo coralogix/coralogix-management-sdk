@@ -1,0 +1,40 @@
+#!/bin/sh
+license_header_start="Copyright 2024 Coralogix Ltd"
+
+check_license() {
+  local file="$1"
+  local first_line=$(head -n 1 "$file")
+  if [[ ! "$first_line" == *"$license_header_start"* ]]; then
+    echo "Error: Missing Apache license header in $file"
+    exit 1
+  fi
+}
+
+check_go_does_not_print_to_std_out() {
+  local file="$1"
+  if grep -q "fmt.Println" "$file"; then
+    echo "Error: you are printing to standard output in file $file"
+    exit 1
+  fi
+}
+
+check_rust_does_not_print_to_std_out() {
+  local file="$1"
+  filename=$(basename "$file")
+  if [[ "$filename" != "build.rs" ]]; then
+    if grep -q "println" "$file"; then
+      echo "Error: you are printing to standard output in file $file"
+      exit 1
+    fi
+  fi
+}
+
+for file in $(git ls-files | grep '\.rs$'); do
+  check_license "$file"
+  check_rust_does_not_print_to_std_out "$file"
+done
+
+for file in $(git ls-files | grep '\.go$' | grep -v '\.pb\.go$'); do
+  check_license "$file"
+  check_go_does_not_print_to_std_out "$file"
+done

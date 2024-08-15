@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package com.coralogix.extensions.v1;
+
+import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/extensions/v1/extension.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+service ExtensionService {
+  rpc GetAllExtensions(GetAllExtensionsRequest) returns (GetAllExtensionsResponse) {
+    option (audit_log_description).description = "Get all extensions";
+    option (google.api.http) = {
+      post: "/extensions/v1/all"
+      body: "*"
+    };
+  }
+
+  rpc GetExtension(GetExtensionRequest) returns (GetExtensionResponse) {
+    option (audit_log_description).description = "Get extension by id";
+    option (google.api.http) = {
+      get: "/extensions/v1/{id}"
+      response_body: "extension"
+    };
+  }
+
+}
+
+message GetAllExtensionsRequest {
+  message Filter {
+    repeated string integrations = 1;
+  }
+  google.protobuf.BoolValue include_hidden_extensions = 1;
+  Filter filter = 2;
+}
+
+message GetAllExtensionsResponse {
+  message RevisionSummary {
+    ItemCounts item_counts = 1;
+    google.protobuf.BoolValue is_new = 2;
+  }
+  message Revision {
+    google.protobuf.StringValue version = 1;
+    google.protobuf.StringValue description = 2;
+    google.protobuf.StringValue excerpt = 3;
+    repeated google.protobuf.StringValue labels = 4;
+    repeated IntegrationDetail integration_details = 5;
+    RevisionSummary summary = 6;
+  }
+  message Extension {
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue name = 2;
+    google.protobuf.StringValue image = 3;
+    google.protobuf.StringValue dark_mode_image = 4;
+    repeated Revision revisions = 5;
+    google.protobuf.BoolValue is_hidden = 6;
+    repeated string integrations = 7;
+    repeated string keywords = 8;
+    Deprecation deprecation = 9;
+  }
+
+  repeated Extension extensions = 1;
+}
+
+message GetExtensionRequest {
+  google.protobuf.StringValue id = 1;
+  // On the frontend, we don't need the dashboard binaries.
+  // But we need them for deployment in the extensions-service - so it's kind of temporary argument,
+  // so as soon all the deployment logic is moved to the extensions-api, it can be removed.
+  google.protobuf.BoolValue include_dashboard_binaries = 2;
+  google.protobuf.BoolValue include_testing_revision = 3;
+}
+
+message GetExtensionResponse {
+  Extension extension = 1;
+}

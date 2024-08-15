@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "google/protobuf/wrappers.proto";
+
+message FeatureControl {
+  Feature feature = 1;
+  optional google.protobuf.StringValue on_query_duration_gt = 2;
+  optional Control control = 3;
+
+  enum Feature {
+    FEATURE_UNSPECIFIED = 0;
+    FEATURE_UNKNOWN_FIELDS = 1;
+    FEATURE_OPTIONAL_SOURCE = 2;
+    FEATURE_INVALID_REGEX = 3;
+    FEATURE_WILDFIND = 4;
+  }
+
+  enum Control {
+    CONTROL_UNSPECIFIED = 0;
+    CONTROL_WARNING = 1;
+    CONTROL_ERROR = 2;
+  }
+}
+
+message ListFeatureControlRequest {
+  // This is needed to make the linter happy
+  // even we don't need to pass any value in the request
+}
+
+message ListFeatureControlResponse {
+    repeated FeatureControl feature_controls = 1;
+}

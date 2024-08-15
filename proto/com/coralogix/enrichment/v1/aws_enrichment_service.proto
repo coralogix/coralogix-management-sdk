@@ -1,0 +1,20 @@
+syntax = "proto3";
+import "com/coralogix/enrichment/v1/audit_log.proto";
+
+package com.coralogix.enrichment.v1;
+
+message GetSupportedAwsResourceTypesRequest {}
+message GetSupportedAwsResourceTypesResponse {
+  repeated SupportedAwsResourceType resource_types = 1;
+}
+
+message SupportedAwsResourceType {
+  string type = 1;
+  string display_name = 2;
+}
+
+service AwsEnrichmentService {
+  rpc GetSupportedAwsResourceTypes(GetSupportedAwsResourceTypesRequest) returns (GetSupportedAwsResourceTypesResponse) {
+    option (audit_log_description).description = "Get supported Aws resource types";
+  };
+}

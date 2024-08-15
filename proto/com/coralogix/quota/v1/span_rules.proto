@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "com/coralogix/quota/v1/rule.proto";
+import "com/coralogix/quota/v1/tag_rule.proto";
+
+message SpanRules {
+  optional Rule service_rule = 1;
+  optional Rule action_rule = 2;
+  repeated TagRule tag_rules = 3;
+}

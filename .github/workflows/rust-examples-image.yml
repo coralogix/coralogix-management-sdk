@@ -1,0 +1,37 @@
+name: Rust Examples Docker Image
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - "**.rs"
+      - "**.proto"
+      - "**.go"
+      - "**.toml"
+jobs:
+  build-example-image:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ vars.ECR_ROLE }}
+          aws-region: ${{ vars.DEFAULT_ECR_REGISTRY_REGION }}
+      - name: Login to Amazon ECR
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: linux/amd64
+          context: .
+          file: rust/Dockerfile
+          push: true
+          tags: ${{ vars.DEFAULT_ECR_REGISTRY }}/rust-api-examples:latest

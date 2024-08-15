@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "com/coralogix/dataprime/v1/audit_log.proto";
+import "com/coralogix/dataprime/v1/feature_control.proto";
+
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+
+service FeatureControlService {
+  rpc ListFeatureControl(ListFeatureControlRequest) returns (ListFeatureControlResponse) {
+    option (audit_log_description).description = "List feature controls";
+    option (google.api.http) = {get: "/api/v1/query/feature-control/list"};
+  }
+}

@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert_def_scheduling.proto";
+import "com/coralogixapis/alerts/v3/alert_def_notification_group.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/standard/logs_immediate_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/standard/logs_more_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/standard/logs_less_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/standard/logs_more_than_usual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/standard/logs_less_than_usual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/ratio/logs_ratio_more_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/ratio/logs_ratio_less_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/new_value/logs_new_value_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/unique_count/unique_count_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/time_relative/logs_time_relative_more_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/time_relative/logs_time_relative_less_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_more_than_eq_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_less_than_eq_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_less_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_more_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_more_than_usual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_less_than_usual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_more_than_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+
+/**
+* Represents An Existing or Created Alert Definition
+ */
+message AlertDef {
+  AlertDefProperties alert_def_properties = 1;
+  google.protobuf.StringValue id = 2; // This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+  google.protobuf.Timestamp created_time = 3;
+  google.protobuf.Timestamp updated_time = 4;
+}
+
+/**
+* Represents The non generated alert definition properties (the ones that are set by the user)
+ */
+message AlertDefProperties {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue description = 2;
+  google.protobuf.BoolValue enabled = 3;
+  AlertDefPriority priority = 4;
+  oneof schedule {
+    ActivitySchedule active_on = 5;
+  }
+  AlertDefType alert_def_type = 6;
+  oneof type_definition {
+    LogsImmediateTypeDefinition logs_immediate = 100;
+    LogsMoreThanTypeDefinition logs_more_than = 101;
+    LogsLessThanTypeDefinition logs_less_than = 102;
+    LogsMoreThanUsualTypeDefinition logs_more_than_usual = 103;
+    LogsRatioMoreThanTypeDefinition logs_ratio_more_than = 104;
+    LogsRatioLessThanTypeDefinition logs_ratio_less_than = 105;
+    LogsNewValueTypeDefinition logs_new_value = 106;
+    LogsUniqueCountTypeDefinition logs_unique_count = 107;
+    LogsTimeRelativeMoreThanTypeDefinition logs_time_relative_more_than = 108;
+    LogsTimeRelativeLessThanTypeDefinition logs_time_relative_less_than = 109;
+    MetricMoreThanTypeDefinition metric_more_than = 112;
+    MetricLessThanTypeDefinition metric_less_than = 113;
+    MetricMoreThanUsualTypeDefinition metric_more_than_usual = 114;
+    TracingImmediateTypeDefinition tracing_immediate = 115;
+    TracingMoreThanTypeDefinition tracing_more_than = 116;
+    FlowTypeDefinition flow = 117;
+    MetricLessThanUsualTypeDefinition metric_less_than_usual = 118;
+    MetricMoreThanOrEqualsTypeDefinition metric_more_than_or_equals = 119;
+    MetricLessThanOrEqualsTypeDefinition metric_less_than_or_equals = 120;
+  };
+  repeated google.protobuf.StringValue group_by = 7;
+  AlertDefIncidentSettings incidents_settings = 8;
+  AlertDefNotificationGroup notification_group = 9;
+  map<string,string> labels = 10;
+  google.protobuf.BoolValue phantom_mode = 11;
+}

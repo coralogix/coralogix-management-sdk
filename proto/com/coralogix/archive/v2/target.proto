@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+message IBMCosTargetSpec {
+  string bucket_crn = 1;
+  string endpoint = 2;
+  optional string service_crn = 3;
+  optional IbmBucketType bucket_type = 4;
+}
+
+enum IbmBucketType {
+  IBM_BUCKET_TYPE_UNSPECIFIED = 0;
+  IBM_BUCKET_TYPE_EXTERNAL = 1;
+  IBM_BUCKET_TYPE_INTERNAL = 2;
+}
+
+message S3TargetSpec {
+  string bucket = 1;
+  optional string region = 2;
+}
+
+message ArchiveSpec {
+  string archiving_format_id = 1;
+  bool is_active = 2;
+  bool enable_tags = 3;
+}
+
+message Target {
+  oneof target_spec {
+    S3TargetSpec s3 = 1;
+    IBMCosTargetSpec ibm_cos = 2;
+  }
+
+  ArchiveSpec archive_spec = 3;
+}

@@ -1,0 +1,182 @@
+syntax = "proto3";
+
+package com.coralogix.datausage.v1;
+
+import "com/coralogix/datausage/v1/common.proto";
+import "com/coralogix/datausage/v1/audit_log.proto";
+import "com/coralogix/datausage/v1/data_usage.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service DataUsageService {
+  /// Returns a list of quota (units) used per day for a list of teams in the requested days
+  rpc GetTeamsDailyUsage(GetTeamsDailyUsageRequest) returns (GetTeamsDailyUsageResponse) {
+    option (audit_log_description).description = "Get daily quota details for a given set of teams";
+    option (google.api.http) = {
+      post: "/api/v1/data_usage/teams/daily/usage"
+      body: "*"
+    };
+  }
+
+  /// Returns a list of block events (can be more than one per day) for a list of teams in the requested days
+  rpc GetTeamsBlocks(GetTeamsBlocksRequest) returns (GetTeamsBlocksResponse) {
+    option (audit_log_description).description = "Get all blocked events for a given set of teams";
+    option (google.api.http) = {
+      post: "/api/v1/data_usage/teams/blocks"
+      body: "*"
+    };
+  }
+
+  /// Returns a list of quota updates (can be more than one per day) for a list of teams in the requested days
+  rpc GetTeamsQuotaHistory(GetTeamsQuotaHistoryRequest) returns (GetTeamsQuotaHistoryResponse) {
+    option (audit_log_description).description = "Get quota history a given set of teams";
+    option (google.api.http) = {
+      post: "/api/v1/data_usage/teams/quota_history"
+      body: "*"
+    };
+  }
+
+  /// Returns the quota plan for a given set of teams at the requested timestamp
+  rpc GetTeamsQuota(GetTeamsQuotaRequest) returns (GetTeamsQuotaResponse) {
+    option (audit_log_description).description = "Get Teams Quota of a given set of teams";
+    option (google.api.http) = {
+      post: "/api/v1/data_usage/teams/quota"
+      body: "*"
+    };
+  }
+
+  rpc GetTeamsDetailedUsage(GetTeamsDetailedUsageRequest) returns (stream GetTeamsDetailedUsageResponse) {
+    option (audit_log_description).description = "Get Teams' logs Data Usage broken down per application/subsystem/severity/tco";
+    option deprecated = true;
+  };
+
+  /// Returns a list of data usage for a given set of teams, time_range and resolution
+  rpc GetDataUsage(GetDataUsageRequest) returns (GetDataUsageResponse) {
+    option (audit_log_description).description = "Get Teams data usage";
+    option (google.api.http) = {
+      post: "/api/v1/data_usage/teams"
+      body: "*"
+    };
+  }
+
+  rpc GetDetailedDataUsage(GetDetailedDataUsageRequest) returns (stream GetDetailedDataUsageResponse) {
+    option (audit_log_description).description = "Get Team Data Usage broken down to dimensions";
+  }
+
+  rpc GetDetailedDataUsageChunked(GetDetailedDataUsageChunkedRequest) returns (stream GetDetailedDataUsageChunkedResponse) {
+    option (audit_log_description).description = "Get Team Data Usage broken down to dimensions (chunked)";
+  }
+}
+
+message GetDataUsageRequest {
+  repeated Team team_ids = 1;
+  DateRange date_range = 2;
+  google.protobuf.Duration resolution = 3;
+  repeated Dimension dimensions = 4;
+}
+
+message GetDataUsageResponse {
+  // Map for TeamId -> DataUsage
+  map<uint64, DataUsage> data_usage = 1;
+}
+
+message GetTeamsBlocksRequest {
+  TeamsAndTimeRange param = 1;
+}
+
+message GetTeamsBlocksResponse {
+  repeated TeamBlockEvents events = 1;
+}
+
+message GetTeamsQuotaHistoryRequest {
+  TeamsAndTimeRange param = 1;
+}
+
+message GetTeamsQuotaHistoryResponse {
+  repeated TeamQuotaHistory history_entries = 1;
+}
+
+message GetTeamsDailyUsageRequest {
+  TeamsAndTimeRange param = 1;
+}
+
+message GetTeamsDailyUsageResponse {
+  repeated TeamsDailyDataUsage teams_usage = 1;
+}
+
+message GetTeamsQuotaRequest {
+  TeamsAndTime param = 1;
+}
+
+message GetTeamsQuotaResponse {
+ repeated TeamQuota teams_quota = 1 ;
+}
+
+message GetTeamsDetailedUsageRequest {
+  TeamsAndTimeRange param = 1;
+}
+
+message GetTeamsDetailedUsageResponse {
+  repeated DataUsageReport reports = 1;
+}
+
+message GetDetailedDataUsageRequest {
+  Team team_id = 1;
+  // Date request interval
+  // It can be a flexible date_range or one of the available ranges, for convenience.
+  oneof request_interval {
+    Range range = 2;
+    DateRange date_range = 3;
+  }
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // i.e. 1 min resolution for an interval of 30 days would explode into too many data points.
+  Resolution resolution = 4;
+  // Dimensions to filter by
+  // i.e. if we filter by Dimension [ {"subsystem", "subsystem1"}]
+  //      we only return entries that at least have that dimension i.e. [{"subsystem", "subsystem1"}, {"application", "application1"}]
+  repeated Dimension dimensions = 5;
+}
+
+message GetDetailedDataUsageChunkedRequest {
+  Team team_id = 1;
+  // Date request interval
+  // It can be a flexible date_range or one of the available ranges, for convenience.
+  oneof request_interval {
+    Range range = 2;
+    DateRange date_range = 3;
+  }
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // i.e. 1 min resolution for an interval of 30 days would explode into too many data points.
+  Resolution resolution = 4;
+  // Dimensions to filter by
+  // i.e. if we filter by Dimension [ {"subsystem", "subsystem1"}]
+  //      we only return entries that at least have that dimension i.e. [{"subsystem", "subsystem1"}, {"application", "application1"}]
+  repeated Dimension dimensions = 5;
+}
+
+
+message GetDetailedDataUsageResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.FloatValue size = 2;
+  google.protobuf.FloatValue quota = 3;
+  repeated Dimension dimensions = 4;
+}
+
+message GetDetailedDataUsageChunkedResponse {
+  repeated GetDetailedDataUsageResponse chunk = 1;
+}
+
+
+
+
+
+

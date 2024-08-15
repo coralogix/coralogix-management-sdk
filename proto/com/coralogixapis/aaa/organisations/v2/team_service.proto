@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package com.coralogixapis.aaa.organisations.v2;
+
+import "com/coralogixapis/aaa/organisations/v2/types.proto";
+
+service TeamService {
+  rpc CreateTeamInOrg(CreateTeamInOrgRequest)
+      returns (CreateTeamInOrgResponse) {}
+  rpc MoveQuota(MoveQuotaRequest) returns (MoveQuotaResponse) {}
+  rpc GetTeamQuota(GetTeamQuotaRequest) returns (GetTeamQuotaResponse) {}
+  rpc SetDailyQuota(SetDailyQuotaRequest) returns (SetDailyQuotaResponse) {}
+  rpc UpdateTeam(UpdateTeamRequest) returns (UpdateTeamResponse) {}
+  rpc GetTeam(GetTeamRequest) returns (GetTeamResponse) {}
+  rpc DeleteTeam(DeleteTeamRequest) returns (DeleteTeamResponse) {}
+  rpc ListTeams(ListTeamsRequest) returns (ListTeamsResponse) {}
+}
+
+message ListTeamsRequest {}
+message ListTeamsResponse {
+  message TeamInfo {
+    TeamId team_id = 1;
+    string team_name = 2;
+    double daily_quota = 3;
+    int32 retention = 4;
+  }
+  TeamInfo default_team = 1;
+  repeated TeamInfo teams = 2;
+}
+
+message GetTeamRequest { TeamId team_id = 1; }
+message GetTeamResponse {
+  TeamId team_id = 1;
+  string team_name = 2;
+  double daily_quota = 3;
+  int32 retention = 4;
+}
+message DeleteTeamRequest { TeamId team_id = 1; }
+message DeleteTeamResponse {}
+
+message UpdateTeamRequest {
+  TeamId team_id = 1;
+  optional string team_name = 2;
+  optional double daily_quota = 3;
+}
+
+message UpdateTeamResponse {}
+
+message CreateTeamInOrgRequest {
+  reserved 5;
+  string team_name = 1;
+  repeated string team_admins_email = 3;
+  // Default daily quota is 0.01 units/day
+  optional double daily_quota = 6;
+}
+
+message CreateTeamInOrgResponse {
+  reserved 2;
+  TeamId team_id = 1;
+}
+
+message MoveQuotaRequest {
+  TeamId source_team = 1;
+  TeamId destination_team = 2;
+  double units_to_move = 3;
+}
+
+message MoveQuotaResponse {
+  double source_team_quota = 1;
+  double destination_team_quota = 2;
+}
+
+message GetTeamQuotaRequest { TeamId team_id = 1; }
+
+message GetTeamQuotaResponse {
+  TeamId team_id = 1;
+  float quota = 2;
+  int32 retention = 3;
+}
+
+message SetDailyQuotaRequest {
+  TeamId team_id = 1;
+  float target_daily_quota = 2;
+}
+
+message SetDailyQuotaResponse {}

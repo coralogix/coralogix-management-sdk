@@ -1,0 +1,238 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/integrations/v1/integration.proto";
+import "com/coralogix/integrations/v1/audit_log.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+
+
+service IntegrationService {
+
+  rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse){
+    option (audit_log_description).description = "List managed integration names";
+    option (google.api.http) = {
+      get: "/v1/integrations/managed/list"
+    };
+  }
+
+  rpc GetDeployedIntegration(GetDeployedIntegrationRequest) returns (GetDeployedIntegrationResponse){
+    option (audit_log_description).description = "Get deployed integration";
+    option (google.api.http) = {
+      get: "/v1/integrations/deployed/{integration_id}"
+    };
+  }
+
+  rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse){
+    option (audit_log_description).description = "Get all integrations";
+    option (google.api.http) = {
+      get: "/v1/integrations"
+    };
+  }
+
+  rpc GetIntegrationDefinition(GetIntegrationDefinitionRequest) returns (GetIntegrationDefinitionResponse){
+    option (audit_log_description).description = "Get integration definition";
+    option (google.api.http) = {
+      get: "/v1/integrations/definition/{id}"
+    };
+  }
+
+  rpc GetIntegrationDetails(GetIntegrationDetailsRequest) returns (GetIntegrationDetailsResponse){
+    option (audit_log_description).description = "Get integration details";
+    option (google.api.http) = {
+      get: "/v1/integrations/{id}"
+    };
+  }
+
+  rpc GetManagedIntegrationStatus(GetManagedIntegrationStatusRequest) returns (GetManagedIntegrationStatusResponse) {
+    option (audit_log_description).description = "Get managed integration status";
+    option (google.api.http) = {
+      get: "/v1/integrations/managed/status/{integration_id}"
+    };
+  }
+
+  rpc SaveIntegration(SaveIntegrationRequest) returns (SaveIntegrationResponse){
+    option (audit_log_description).description = "Save integration registration metadata";
+    option (google.api.http) = {
+      post: "/v1/integrations/metadata"
+      body: "*"
+    };
+  }
+
+  rpc UpdateIntegration(UpdateIntegrationRequest) returns (UpdateIntegrationResponse){
+    option (audit_log_description).description = "Update integration";
+    option (google.api.http) = {
+      put: "/v1/integrations/metadata"
+      body: "*"
+    };
+  }
+
+  rpc DeleteIntegration(DeleteIntegrationRequest) returns (DeleteIntegrationResponse){
+    option (audit_log_description).description = "Delete integration";
+    option (google.api.http) = {
+      delete: "/v1/integrations/instance/{integration_id}"
+    };
+  }
+
+  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse){
+    option (audit_log_description).description = "Get integration template";
+    option (google.api.http) = {
+      get: "/v1/integrations/template/{template_id}"
+    };
+  }
+
+  rpc GetRumApplicationVersionData(GetRumApplicationVersionDataRequest) returns (GetRumApplicationVersionDataResponse){
+    option (audit_log_description).description = "Get RUM integration versions data";
+    option (google.api.http) = {
+      get: "/v1/integrations/rum/app-versions"
+    };
+  }
+
+  rpc SyncRumData(SyncRumDataRequest) returns (SyncRumDataResponse){
+    option (audit_log_description).description = "Trigger sync of RUM integration data";
+    option (google.api.http) = {
+      post: "/v1/integrations/rum/sync"
+      body: "*"
+    };
+  }
+
+  rpc TestIntegration(TestIntegrationRequest) returns (TestIntegrationResponse) {
+    option (audit_log_description).description = "Test integration";
+    option (google.api.http) = {
+      post: "/v1/integrations/metadata/test"
+      body: "*"
+    };
+  }
+}
+
+message ListManagedIntegrationKeysRequest{
+}
+
+message ListManagedIntegrationKeysResponse{
+ repeated google.protobuf.StringValue integration_keys = 1;
+}
+
+message GetDeployedIntegrationRequest {
+  google.protobuf.StringValue integration_id = 1;
+}
+message GetDeployedIntegrationResponse {
+  DeployedIntegrationInformation integration = 1;
+}
+
+message UpdateIntegrationRequest {
+  google.protobuf.StringValue id = 1; //This is the integration id generated at creation time
+  IntegrationMetadata metadata = 2;
+}
+
+message UpdateIntegrationResponse {}
+
+message GetIntegrationDefinitionRequest {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue include_testing_revision = 2;
+}
+
+message GetIntegrationDefinitionResponse {
+  IntegrationDefinition integration_definition = 1;
+}
+
+message GetIntegrationsRequest{
+  google.protobuf.BoolValue include_testing_revision = 1;
+}
+
+message GetIntegrationsResponse {
+  message IntegrationWithCounts {
+    Integration integration = 1;
+    google.protobuf.UInt32Value amount_integrations = 2;
+    repeated google.protobuf.StringValue errors = 3;
+    google.protobuf.BoolValue upgrade_available = 4;
+    google.protobuf.BoolValue is_new = 5;
+  }
+
+  repeated IntegrationWithCounts integrations = 1;
+}
+
+message GetIntegrationDetailsRequest{
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue include_testing_revision = 2;
+}
+message GetIntegrationDetailsResponse{
+  IntegrationDetails integration_detail = 1;
+}
+
+message GetManagedIntegrationStatusRequest {
+  string integration_id = 1;
+}
+
+message GetManagedIntegrationStatusResponse {
+  string integration_id = 1;
+  IntegrationStatus status = 3;
+}
+
+message SaveIntegrationRequest {
+  IntegrationMetadata metadata = 1;
+}
+message SaveIntegrationResponse {
+  google.protobuf.StringValue integration_id = 1;
+}
+
+message DeleteIntegrationRequest {
+  google.protobuf.StringValue integration_id = 1;
+}
+
+message DeleteIntegrationResponse {
+}
+
+message GetTemplateRequest {
+  message CommonARMParams{
+    google.protobuf.StringValue logs_url = 1;
+    google.protobuf.StringValue api_key = 2;
+    google.protobuf.StringValue cgx_domain = 3;
+  }
+
+  message Empty{}
+
+  google.protobuf.StringValue integration_id = 1;
+  oneof extra_params {
+    CommonARMParams common_arm_params = 101;
+    Empty empty = 102;
+  }
+}
+
+message GetTemplateResponse {
+  google.protobuf.StringValue template_url = 1;
+}
+
+message GetRumApplicationVersionDataRequest {
+  google.protobuf.StringValue application_name = 1;
+}
+
+message GetRumApplicationVersionDataResponse {
+  RumVersionData version_data = 1;
+}
+
+message SyncRumDataRequest {
+  // If set to false, it may not be triggered if it was synced just recently.
+  // The period amount when the sync is not triggered is determined by configuration.
+  google.protobuf.BoolValue force = 1;
+}
+
+message SyncRumDataResponse {
+  reserved 3;
+  reserved "deployed_instances";
+
+  google.protobuf.BoolValue sync_executed = 1;
+  google.protobuf.Timestamp synced_at = 2;
+}
+
+message TestIntegrationRequest {
+  IntegrationMetadata integration_data = 1;
+  google.protobuf.StringValue integration_id = 2;
+}
+
+message TestIntegrationResponse {
+  TestIntegrationResult result = 1;
+}

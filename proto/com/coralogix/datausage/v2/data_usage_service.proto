@@ -1,0 +1,88 @@
+syntax = "proto3";
+
+package com.coralogix.datausage.v2;
+
+import "com/coralogix/datausage/v2/data_usage.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service DataUsageService {
+  rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse);
+  rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse);
+  rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse);
+  rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse);
+}
+
+enum AggregateBy {
+  AGGREGATE_BY_UNSPECIFIED = 0;
+  AGGREGATE_BY_APPLICATION = 1;
+  AGGREGATE_BY_SUBSYSTEM = 2;
+  AGGREGATE_BY_PILLAR = 3;
+  AGGREGATE_BY_PRIORITY = 4;
+}
+
+message GetTeamDetailedDataUsageRequest {
+  reserved 1;
+  
+  // Date request interval
+  DateRange date_range = 2;
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // This means that, for instance, requests with 1 min resolution for an interval of 30 days will be rejected.
+  //
+  // Resolution must be between 1 min and date_range interval
+  google.protobuf.Duration resolution = 3;
+  // List of aggregate parameters.
+  // i.e. if AggregateBy is [AGGREGATE_BY_PILLAR, AGGREGATE_BY_PRIORITY], then the response will stream data aggregated by pillar and priority.
+  repeated AggregateBy aggregate = 4;
+}
+
+message GetTeamDetailedDataUsageResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.FloatValue size_gb = 2;
+  google.protobuf.FloatValue units = 3;
+  repeated Dimension dimensions = 4;
+}
+
+message GetSpansCountRequest {
+  DateRange date_range = 1;
+  // Aggregation resolution with second precision.
+  //
+  // Resolution must be between 1 second and date_range interval
+  google.protobuf.Duration resolution = 2;
+
+  // Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
+  // Match occurs on full match
+  optional ScopesFilter filters = 3;
+}
+
+message ScopesFilter {
+  repeated string application = 1;
+  repeated string subsystem = 2;
+}
+
+message GetSpansCountResponse {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.Int64Value success_span_count = 2;
+  google.protobuf.Int64Value error_span_count = 3;
+}
+
+message GetDataUsageMetricsExportStatusRequest {}
+
+message GetDataUsageMetricsExportStatusResponse {
+  reserved 2;
+  bool enabled = 1;
+}
+
+message UpdateDataUsageMetricsExportStatusRequest {
+  reserved 1;
+
+  bool enabled = 3;
+}
+
+message UpdateDataUsageMetricsExportStatusResponse {
+  bool enabled = 1;
+}

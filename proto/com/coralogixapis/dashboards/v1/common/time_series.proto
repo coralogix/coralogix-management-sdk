@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message TimeSeries {
+  google.protobuf.StringValue name = 1;
+  repeated DataPoint values = 2;
+  map<string, string> labels = 3;
+}
+
+message DataPoint {
+  google.protobuf.Timestamp timestamp = 1;
+  google.protobuf.DoubleValue value = 2;
+}

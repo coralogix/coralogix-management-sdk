@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.coralogix.dataprime.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message GetCompanyConfigRequest {}
+
+message GetCompanyConfigResponse {
+    CompanyConfig config = 1;
+}
+
+message CompanyConfig {
+    repeated MigratedCompany migrated_companies = 1;
+    int32 max_teams_per_query = 2;
+}
+
+message MigratedCompany {
+     int32 company_id = 1;
+     google.protobuf.Timestamp cutoff = 2;
+}

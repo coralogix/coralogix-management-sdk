@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+enum LogSeverityLevel {
+  LOG_SEVERITY_LEVEL_UNSPECIFIED = 0;
+  LOG_SEVERITY_LEVEL_DEBUG = 1;
+  LOG_SEVERITY_LEVEL_VERBOSE = 2;
+  LOG_SEVERITY_LEVEL_INFO = 3;
+  LOG_SEVERITY_LEVEL_WARNING = 4;
+  LOG_SEVERITY_LEVEL_ERROR = 5;
+  LOG_SEVERITY_LEVEL_CRITICAL = 6;
+}
