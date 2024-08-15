@@ -1,3 +1,5 @@
+name: "[Rust & Go SDK] Tag and Publish"
+
 permissions:
   pull-requests: write
   contents: write
@@ -15,7 +17,9 @@ on:
 #       - "**.toml"
 #       - "**.proto"
 
-name: Release
+env:
+  PROTOC_VERSION: "26.1"
+
   
 jobs:
   rust_build_and_test_linux:
@@ -24,15 +28,12 @@ jobs:
     defaults:
       run:
         working-directory: rust
-    timeout-minutes: 10
     steps:
-      - name: Checkout sources
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
+      - uses: arduino/setup-protoc@v3
         with:
-          version: "26.1"
+          version: ${{env.PROTOC_VERSION}}
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -45,15 +46,16 @@ jobs:
         run: cargo nextest run --workspace --all-features
 
   rust_build_and_test_windows:
-    name: Build and Test (Windows)
+    name: "[Rust SDK] Unit Tests (Windows)"
     runs-on: windows-latest
     defaults:
       run:
         working-directory: rust
-    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: arduino/setup-protoc@v3
+        with:
+          version: ${{env.PROTOC_VERSION}}
       - uses: actions-rs/toolchain@v1
         with:
             profile: minimal
@@ -65,7 +67,7 @@ jobs:
         run: cargo nextest run --workspace --all-features
 
   crates_io_publish:
-    name: Publish (crates.io)
+    name: "[Rust & Go SDK] Tag and Publish to crates.io"
     needs:
       - rust_build_and_test_linux
       - rust_build_and_test_windows
@@ -74,19 +76,16 @@ jobs:
     defaults:
       run:
         working-directory: rust
-    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
-      - name: Install Protoc
-        uses: arduino/setup-protoc@v3
+      - uses: arduino/setup-protoc@v3
         with:
-          version: "26.1"
+          version: ${{env.PROTOC_VERSION}}
 
-      - name: Run release-plz
-        uses: MarcoIeni/release-plz-action@v0.5
+      - uses: MarcoIeni/release-plz-action@v0.5
         with:
           manifest_path: rust/Cargo.toml
         env:
