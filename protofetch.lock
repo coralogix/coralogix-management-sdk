@@ -57,7 +57,7 @@ commit_hash = "19e36962f6fcced9bd167870b78c408ba4caafc6"
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-revision = "0c93cdb178b9324c2e05c1260aba61f21d071428"
+revision = "v1.0.0"
 commit_hash = "0c93cdb178b9324c2e05c1260aba61f21d071428"
 
 [[dependencies]]
@@ -89,12 +89,6 @@ name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
 revision = "v0.0.8"
 commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
-
-[[dependencies]]
-name = "cx-api-schema-store"
-url = "github.com/coralogix/cx-api-schema-store"
-revision = "d4c50aaaf2367372aafaf97a4d1507f12712b982"
-commit_hash = "d4c50aaaf2367372aafaf97a4d1507f12712b982"
 
 [[dependencies]]
 name = "cx-api-scopes-service"
@@ -129,7 +123,7 @@ commit_hash = "02122a75f47cd01387f1b7bef5531e419a875f03"
 [[dependencies]]
 name = "google-api"
 url = "github.com/googleapis/googleapis"
-commit_hash = "8652e28bd0156553465918b9b7564420da79456e"
+commit_hash = "2244fe42081794c9cc8c8b1a4519365116960620"
 
 [[dependencies]]
 name = "rules-api-protobuf"

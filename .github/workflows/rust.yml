@@ -1,34 +1,34 @@
-name: Rust SDK
+name: "[Rust SDK] Code Check"
 
 on:
   push:
     branches: [ master ]
     paths:
-      - "**.rs"
-      - "**.proto"
-      - "**.toml"
+      - 'rust/**'
+      - 'proto/**'
   pull_request:
     branches: [ master ]
     paths:
-      - "**.rs"
-      - "**.proto"
-      - "**.toml"
+      - 'rust/**'
+      - 'proto/**'
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: full
+  PROTOC_VERSION: "26.1"
 
 jobs:
   tests:
+    name: "[Rust SDK] Format, Lint, Test"
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: rust
     steps:
       - uses: actions/checkout@v2
-
       - uses: arduino/setup-protoc@v3
         with:
-          version: "26.1"
+          version: ${{env.PROTOC_VERSION}}
 
       - uses: actions-rs/toolchain@v1
         with:
@@ -37,20 +37,18 @@ jobs:
           override: true
           components: rustfmt
 
-      - name: Install nextest
-        uses: taiki-e/install-action@nextest
+      - uses: taiki-e/install-action@nextest
 
-      - name: Run cargo fmt
+      - name: Check formatting
         run: cargo fmt --all -- --check
 
-      - name: Cargo test
+      - name: SDK tests
         run: cargo nextest run --all
       
-      - name: Cargo run examples
+      - name: Run Examples
         env:
           TEAM_ID: ${{ secrets.TEAM_ID }}
           AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
-          CORALOGIX_ALERTS_RULES_TAGS_API_KEY: ${{ secrets.CORALOGIX_ALERTS_RULES_TAGS_API_KEY }}
           CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
           CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
@@ -58,24 +56,20 @@ jobs:
         working-directory: rust/examples
 
   clippy:
-    name: clippy
+    name: "[Rust SDK] Run Clippy"
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: rust
-    permissions:
-      security-events: write # to upload sarif results
+    # permissions:
+    #   security-events: write # to upload sarif results
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-    - name: Install Protoc
-      uses: arduino/setup-protoc@v3
+    - uses: actions/checkout@v4
+    - uses: arduino/setup-protoc@v3
       with:
-        version: "26.1"
-    - name: Install Rust
-      uses: dtolnay/rust-toolchain@stable
+        version: ${{env.PROTOC_VERSION}}
+    - uses: dtolnay/rust-toolchain@stable
       with:
-        toolchain: stable  # STABLE
         components: clippy
     - uses: Swatinem/rust-cache@v2
     # - name: Install SARIF tools
@@ -94,5 +88,5 @@ jobs:
     #   with:
     #     sarif_file: clippy-results.sarif
     #     wait-for-processing: true
-    - name: Report status
+    - name: Run Clippy
       run: cargo clippy --workspace --all-features --all-targets -- -D warnings --allow deprecated
