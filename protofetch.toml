@@ -19,8 +19,12 @@ revision = '186f40419a993ce325c93846597ff75c9e2a88a5'
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
-revision = '0c93cdb178b9324c2e05c1260aba61f21d071428'
-allow_policies = ["/com/coralogix/integrations/v1/*", "/com/coralogix/extensions/v1/*", "/com/coralogix/outgoing_webhooks/v1/*"]
+revision = 'v1.0.0'
+allow_policies = [
+    "/com/coralogix/extensions/v1/*",
+    "/com/coralogix/integrations/v1/*",
+    "/com/coralogix/outgoing_webhooks/v1/*",
+]
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
@@ -69,10 +73,6 @@ allow_policies = ["/com/coralogixapis/*"]
 content_roots = ["/modules/service/proto/"]
 revision = '45f5f10e7364b43ed736d76593c3ec0e73314cb2'
 
-[cx-api-schema-store]
-url = 'github.com/coralogix/cx-api-schema-store'
-revision = 'd4c50aaaf2367372aafaf97a4d1507f12712b982'
-
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
 revision = 'v2.0.4'
@@ -84,12 +84,12 @@ revision = '85c62965137513ec113a421a7fb46648540cd4d6'
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
 allow_policies = [
-    "/com/coralogixapis/aaa/apikeys/v3/*",
-    "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
+    "/com/coralogix/permissions/models/v1/*",
+    "/com/coralogix/permissions/v1/actions_resources.proto",
     "/com/coralogix/permissions/v1/common.proto",
     "/com/coralogix/permissions/v1/permissions_mgmt.proto",
-    "/com/coralogix/permissions/v1/actions_resources.proto",
-    "/com/coralogix/permissions/models/v1/*",
+    "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
+    "/com/coralogixapis/aaa/apikeys/v3/*",
 ]
 revision = "v0.1.66"
 
