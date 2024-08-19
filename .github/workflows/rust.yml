@@ -6,6 +6,7 @@ on:
     paths:
       - 'rust/**'
       - 'proto/**'
+      - '.github/workflows/**'
 
 env:
   CARGO_TERM_COLOR: always

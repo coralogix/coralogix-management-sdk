@@ -9,6 +9,7 @@ on:
     paths:
       - 'go/**'
       - 'proto/**'
+      - '.github/workflows/**'
 
 jobs:
   FLT:
