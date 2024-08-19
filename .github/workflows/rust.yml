@@ -1,11 +1,6 @@
 name: "[Rust SDK] Code Check"
 
 on:
-  push:
-    branches: [ master ]
-    paths:
-      - 'rust/**'
-      - 'proto/**'
   pull_request:
     branches: [ master ]
     paths:

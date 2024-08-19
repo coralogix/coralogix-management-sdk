@@ -1,11 +1,11 @@
 name: "[Rust & Go SDK] Documentation Generator"
 on:
-  workflow_run:
-    workflows: [rust, go]
+  push:
     branches: [master]
-    types: 
-      - completed
-
+    paths:
+      - 'rust/**'
+      - 'go/**'
+ 
 permissions:
   contents: read
   pages: write
