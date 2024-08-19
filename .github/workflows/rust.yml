@@ -1,16 +1,12 @@
 name: "[Rust SDK] Code Check"
 
 on:
-  push:
-    branches: [ master ]
-    paths:
-      - 'rust/**'
-      - 'proto/**'
   pull_request:
     branches: [ master ]
     paths:
       - 'rust/**'
       - 'proto/**'
+      - '.github/workflows/**'
 
 env:
   CARGO_TERM_COLOR: always
