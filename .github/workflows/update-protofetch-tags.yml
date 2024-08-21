@@ -1,0 +1,25 @@
+name: "[Protofetch] Check Tags"
+
+permissions:
+  pull-requests: write
+  contents: write
+
+on:
+    schedule:
+        - cron: "0 8 * * *"
+
+  
+jobs:
+  check_tags:
+    name: "[Protofetch] Update tags to latest"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Run tools/release-checker
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd tools/release-checker && cargo run 

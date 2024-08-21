@@ -1,0 +1,14 @@
+[package]
+name = "release-checker"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+octocrab = "0.39"
+serde = {version = "1", features = ["derive"]}
+toml_edit = "0.22"
+protofetch = "0" #{ git = "https://github.com/coralogix/protofetch", branch = "expose-protofetch-descriptor"}
+tokio = { version = "1", features = ["full"] }
+eyre = "0"
+git_cmd = "0.6"
+time = { version = "0.3.36", features = ["formatting"] }
