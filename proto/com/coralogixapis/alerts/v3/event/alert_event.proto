@@ -2,25 +2,40 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/struct.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto";
-message AlertEvent {
-  map<string, string> permutation_labels = 1;
-  map<string, string> group_labels = 2;
-  google.protobuf.Timestamp timestamp = 3;
-  google.protobuf.StringValue alert_id = 4;
-  AlertStatus status = 5;
-  google.protobuf.StringValue pre_grouping_event_id = 6;
-  google.protobuf.Struct payload = 7;
-  google.protobuf.StringValue payload_type = 8;
-  google.protobuf.StringValue permutation_id = 9;
-  google.protobuf.StringValue incident_correlation_key = 10;
-  optional ActivityAnalysis activity_analysis = 11;
-}
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/event/payload/flow/event_flow.proto";
+import "com/coralogixapis/alerts/v3/event/payload/metric/event_metric_more_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/metric/event_metric_less_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/metric/event_metric_more_than_usual.proto";
+import "com/coralogixapis/alerts/v3/event/payload/new_value/event_new_value.proto";
+import "com/coralogixapis/alerts/v3/event/payload/unique_count/event_unique_count.proto";
+import "com/coralogixapis/alerts/v3/event/payload/time_relative/event_time_relative_less_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/time_relative/event_time_relative_more_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/ratio/event_ratio_more_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/ratio/event_ratio_less_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/standard/event_standard_immediate.proto";
+import "com/coralogixapis/alerts/v3/event/payload/standard/event_standard_less_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/standard/event_standard_more_than.proto";
+import "com/coralogixapis/alerts/v3/event/payload/standard/event_standard_more_than_usual.proto";
 
-enum AlertStatus {
-  ALERT_STATUS_RESOLVED_OR_UNSPECIFIED = 0;
-  ALERT_STATUS_TRIGGERED = 1;
+message AlertEvent {
+  map<string,string> group_labels = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  google.protobuf.StringValue source_alert_event_id = 3;
+  oneof payload {
+    EventFlow event_flow = 100;
+    EventNewValue event_new_value = 102;
+    EventStandardImmediate event_unique_count = 103;
+    EventRatioMoreThan event_ratio_more_than = 104;
+    EventRatioLessThan event_ratio_less_than = 105;
+    EventTimeRelativeLessThan event_time_relative_less_than = 106;
+    EventTimeRelativeMoreThan event_time_relative_more_than = 107;
+    EventStandardImmediate event_standard_immediate = 108;
+    EventStandardLessThan event_standard_less_than = 109;
+    EventStandardMoreThan event_standard_more_than = 110;
+    EventStandardMoreThanUsual event_standard_more_than_usual = 111;
+    EventMetricMoreThan event_metric_more_than = 112;
+    EventMetricLessThan event_metric_less_than = 113;
+  }
 }

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_info/logs_query.proto";
+import "com/coralogixapis/alerts/v3/alert_info/standard/standard_timewindow.proto";
+
+message StandardMoreThanAlertInfo  {
+    LogsQuery query = 1;
+    google.protobuf.UInt32Value threshold = 2;
+    StandardTimeWindow time_window = 3;
+    optional EvaluationWindow evaluation_window = 4;
+}
+enum EvaluationWindow {
+    EVALUATION_WINDOW_ROLLING_OR_UNSPECIFIED = 0;
+    EVALUATION_WINDOW_DYNAMIC = 1;
+}

@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.alerts.v4;
-
-import "com/coralogixapis/alerts/v4/event/payload/metric/event_unusual_payload.proto";
-
-message EventMetricLessThanUsual {
-  EventUnusualPayload less_than_usual = 1;
-}

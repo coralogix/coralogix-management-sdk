@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_info/metric/metric_timewindow.proto";
+import "com/coralogixapis/alerts/v3/alert_info/undetected_values_management.proto";
+import "com/coralogixapis/alerts/v3/alert_info/metric/metric_lucene_query.proto";
+
+message MetricLessThanAlertInfo  {
+    oneof query {
+        google.protobuf.StringValue promql = 10;
+        MetricLuceneQuery lucene = 11;
+    }
+    google.protobuf.UInt32Value threshold = 2;
+    google.protobuf.UInt32Value for_over_pct = 3;
+    MetricTimeWindow of_the_last = 4;
+    google.protobuf.BoolValue replace_missing_value_with_0 = 5;
+    optional UndetectedValuesManagement undetected_values_management = 6;
+}

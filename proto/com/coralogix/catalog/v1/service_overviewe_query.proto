@@ -18,7 +18,7 @@ message GraphMetadata {
 message ServiceOverviewQuery {
   TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  repeated ServiceCatalogFilter service_catalog_filters = 3;
+  repeated ApmFilter service_catalog_filters = 3;
   repeated SpanKind span_kind = 4;
   repeated GraphMetadata graphs = 5;
   google.protobuf.StringValue subject_label = 6;

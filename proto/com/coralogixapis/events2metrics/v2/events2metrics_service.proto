@@ -13,7 +13,7 @@ import "com/coralogix/openapi/v1/annotations.proto";
 service Events2MetricService {
   option (com.coralogix.openapi.v1.service) = {
     description: "API to define, query, and manage your events to metrics definitions."
-    resource_name: "Event2Metric"
+    resource_name: "E2M"
   };
 
   rpc CreateE2M(CreateE2MRequest) returns (CreateE2MResponse) {
@@ -35,8 +35,6 @@ service Events2MetricService {
       extensions: [
         {key: "x-codegen-request-body-name" value: "\"Event2MetricPrototype\""}
       ]
-      request_body_example: "{\"description\":\"Test e2m\",\"logs_query\":{\"lucene\":\"logs\"},\"name\":\"test em2\",\"permutations_limit\":1,\"type\":\"logs2metrics\"}"
-      response_body_example: "{\"id\":\"93bde7ad-651f-48f5-96dd-e7d6b2c2a9de\",\"name\":\"test em2\",\"description\":\"Test e2m\",\"create_time\":\"2024-03-11T10:38:21.000Z\",\"update_time\":\"2024-03-11T10:38:21.000Z\",\"permutations\":{\"limit\":1},\"type\":\"logs2metrics\",\"is_internal\":true,\"logs_query\":{\"lucene\":\"logs\"}}"
     };
   }
 
@@ -53,7 +51,6 @@ service Events2MetricService {
       http_rule_index: 1
       datasource: true
       description: "Lists event to metrics definitions"
-      response_body_example: "{\"events2metrics\":[{\"id\":\"93bde7ad-651f-48f5-96dd-e7d6b2c2a9de\",\"name\":\"test em2\",\"description\":\"Test e2m updated\",\"create_time\":\"2024-03-11T10:38:21.000Z\",\"update_time\":\"2024-03-11T10:38:21.000Z\",\"permutations\":{\"limit\":1},\"type\":\"logs2metrics\",\"is_internal\":true,\"logs_query\":{\"lucene\":\"logs\"}}]}"
     };
   }
 
@@ -78,8 +75,6 @@ service Events2MetricService {
       extensions: [
         {key: "x-codegen-request-body-name" value: "\"Event2MetricPrototype\""}
       ]
-      request_body_example: "{\"description\":\"Test e2m updated\",\"logs_query\":{\"lucene\":\"logs\"},\"name\":\"test em2\",\"permutations_limit\":1,\"type\":\"logs2metrics\"}"
-      response_body_example: "{\"id\":\"93bde7ad-651f-48f5-96dd-e7d6b2c2a9de\",\"name\":\"test em2\",\"description\":\"Test e2m updated\",\"create_time\":\"2024-03-11T10:38:21.000Z\",\"update_time\":\"2024-03-11T10:38:21.000Z\",\"permutations\":{\"limit\":1},\"type\":\"logs2metrics\",\"is_internal\":true,\"logs_query\":{\"lucene\":\"logs\"}}"
     };
   }
 
@@ -96,7 +91,6 @@ service Events2MetricService {
       http_rule_index: 1
       resource: true
       description: "Gets event to metrics definitions by id"
-      response_body_example: "{\"id\":\"93bde7ad-651f-48f5-96dd-e7d6b2c2a9de\",\"name\":\"test em2\",\"description\":\"Test e2m updated\",\"create_time\":\"2024-03-11T10:38:21.000Z\",\"update_time\":\"2024-03-11T10:38:21.000Z\",\"permutations\":{\"limit\":1},\"type\":\"logs2metrics\",\"is_internal\":true,\"logs_query\":{\"lucene\":\"logs\"}}"
     };
   }
 
@@ -167,9 +161,7 @@ message ReplaceE2MResponse {
 }
  // represents get request for a single e2m by id
 message GetE2MRequest {
-  google.protobuf.StringValue id = 1 [ (com.coralogix.openapi.v1.field) = {
-    example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
-  } ];
+  google.protobuf.StringValue id = 1;
 }
  // represents response for a single e2m by id
 message GetE2MResponse {
@@ -178,9 +170,7 @@ message GetE2MResponse {
  // represents e2m delete request
 message DeleteE2MRequest {
   // id of e2m to be deleted
-  google.protobuf.StringValue id = 1 [ (com.coralogix.openapi.v1.field) = {
-    example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
-  } ];
+  google.protobuf.StringValue id = 1;
 }
 // represents e2m delete response
 message DeleteE2MResponse {
@@ -216,7 +206,7 @@ message AtomicBatchExecuteE2MResponse {
 // represents a request of list label cardinality
 message ListLabelsCardinalityRequest {
   oneof query {
-    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 1  [ (com.coralogix.openapi.v1.field) = {skip_in: [ CLOUD_IBM ]} ];
+    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 1;
     com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 2;
   }
   repeated MetricLabel metric_labels = 3;

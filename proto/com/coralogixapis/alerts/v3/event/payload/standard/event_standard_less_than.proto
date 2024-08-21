@@ -9,5 +9,4 @@ message EventStandardLessThan {
   google.protobuf.Int64Value hit_value = 1;
   google.protobuf.Timestamp from_timestamp = 2;
   google.protobuf.Timestamp to_timestamp = 3;
-  google.protobuf.BoolValue is_deadman = 4;
 }

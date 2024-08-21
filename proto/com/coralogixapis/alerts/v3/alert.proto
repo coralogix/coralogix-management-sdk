@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert_severity.proto";
+import "com/coralogixapis/alerts/v3/alert_scheduling.proto";
+import "com/coralogixapis/alerts/v3/alert_notification_group.proto";
+import "com/coralogixapis/alerts/v3/alert_info/standard/standard_immediate_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/standard/standard_more_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/standard/standard_less_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/standard/standard_more_than_usual_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/ratio/ratio_more_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/ratio/ratio_less_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/new_value/new_value_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/unique_count/unique_count_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/time_relative/time_relative_more_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/time_relative/time_relative_less_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/metric/metric_less_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/metric/metric_more_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/metric/metric_more_than_usual_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/tracing/tracing_immediate_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/tracing/tracing_more_than_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_info/flow/flow_alert_info.proto";
+import "com/coralogixapis/alerts/v3/alert_type.proto";
+
+message Alert {
+  //This is the unique Identifier
+  optional google.protobuf.UInt64Value id = 1;
+  google.protobuf.StringValue name = 2;
+  optional google.protobuf.StringValue description = 3;
+  optional google.protobuf.BoolValue enabled = 4;
+  AlertSeverity alert_severity = 5;
+  optional AlertSchedulingInfo scheduling = 6;
+  //TODO: DO We Really Need this?
+  AlertType alert_type = 7;
+  oneof alert_info {
+    StandardImmediateAlertInfo standard_immediate = 100;
+    StandardMoreThanAlertInfo standard_more_than = 101;
+    StandardLessThanAlertInfo standard_less_than = 102;
+    StandardMoreThanAlertInfoUsual standard_more_than_usual = 103;
+    RatioMoreThanAlertInfo ratio_more_than = 104;
+    RatioLessThanAlertInfo ratio_less_than = 105;
+    NewValueAlertInfo new_value = 106;
+    UniqueCountAlertInfo unique_count = 107;
+    TimeRelativeMoreThanAlertInfo time_relative_more_than = 108;
+    TimeRelativeLessThanAlertInfo time_relative_less_than = 109;
+    MetricMoreThanAlertInfo metric_more_than = 112;
+    MetricLessThanAlertInfo metric_less_than = 113;
+    MetricMoreThanUsualAlertInfo metric_more_than_usual = 114;
+    TracingImmediateAlertInfo tracing_immediate = 115;
+    TracingMoreThanAlertInfo tracing_more_than = 116;
+    FlowAlertInfo flow = 117;
+  };
+  //TODO: What to do for alert_group_bys when promql has groupby in the query level ?
+  repeated google.protobuf.StringValue alert_group_bys = 8;
+  repeated AlertNotificationGroup notification_groups = 9 ;
+  //TODO : this is relevant only for log alerts, should we move it to a different message?
+  repeated google.protobuf.StringValue notification_payload_filter = 13;
+  map<string,string> meta_labels = 10;
+  optional google.protobuf.Timestamp created_time = 11;
+  optional google.protobuf.Timestamp updated_time = 12;
+  optional ShowInInsight show_in_insight = 1000;
+}
+

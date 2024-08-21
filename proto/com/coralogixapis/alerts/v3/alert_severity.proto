@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+enum AlertSeverity {
+  ALERT_SEVERITY_INFO_OR_UNSPECIFIED = 0;
+  ALERT_SEVERITY_WARNING = 1;
+  ALERT_SEVERITY_CRITICAL = 2;
+  ALERT_SEVERITY_ERROR = 3;
+}

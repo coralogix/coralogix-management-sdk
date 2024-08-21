@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message LogsQuery{
+  //TODO: are we okay with this?
+  optional google.protobuf.StringValue alias = 1;
+  optional google.protobuf.StringValue lucene = 2;
+  optional google.protobuf.StringValue label_filters = 3 ;
+}

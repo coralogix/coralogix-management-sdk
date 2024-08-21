@@ -111,6 +111,26 @@ message ListOperationsResponse{
   ApmSource apm_source = 2;
 }
 
+message GetLatencyGraphRequest{
+  google.protobuf.StringValue service_name = 1;
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
+  map<string, google.protobuf.ListValue> filters = 3;
+  repeated SpanKind span_kind = 4;
+  google.protobuf.UInt64Value topk = 5;
+  ApmSource apm_source = 6;
+}
+
+message GetLatencyGraphResponse {
+  google.protobuf.UInt64Value total_amount = 1;
+  oneof widget {
+    RepeatedLineChart p50_latency = 2;
+    RepeatedLineChart p75_latency = 3;
+    RepeatedLineChart p95_latency = 4;
+    RepeatedLineChart p99_latency = 5;
+    RepeatedLineChart avg_latency = 6;
+  }
+}
+
 service DistributedTracingService{
   rpc GetTimeConsuming(GetTimeConsumingRequest) returns (GetTimeConsumingResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Time Consuming";
@@ -129,5 +149,8 @@ service DistributedTracingService{
   };
   rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Operations";
+  };
+  rpc GetLatencyGraph(GetLatencyGraphRequest) returns (stream GetLatencyGraphResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Percentiles Graph";
   };
 }

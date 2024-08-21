@@ -1,0 +1,11 @@
+syntax = "proto3";
+import "com/coralogixapis/alerts/v3/alert_info/arithmetic_operator.proto";
+import "google/protobuf/wrappers.proto";
+
+package com.coralogixapis.alerts.v3;
+
+message MetricLuceneQuery {
+  google.protobuf.StringValue query = 1;
+  google.protobuf.StringValue metric_field = 2;
+  ArithmeticOperator arithmetic_operator = 3;
+}

@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.alerts.v3;
-
-enum SpecialRatioValues {
-  SPECIAL_RATIO_VALUES_INFINITY_OR_UNSPECIFIED = 0;
-}

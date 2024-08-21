@@ -7,6 +7,21 @@ package com.coralogixapis.apm.widgets.v1;
 
 import "com/coralogixapis/apm/widgets/v1/units.proto";
 
+
+message InternalMetricSchema {
+    google.protobuf.StringValue service = 1;
+    google.protobuf.StringValue operation = 2;
+    google.protobuf.StringValue error = 3;
+    google.protobuf.StringValue method = 4;
+    google.protobuf.StringValue spanKind = 5;
+    google.protobuf.StringValue peerService = 6;
+    google.protobuf.StringValue transaction = 7;
+    google.protobuf.StringValue transactionRoot = 8;
+    google.protobuf.StringValue httpStatusCode = 9;
+    google.protobuf.StringValue grpcStatusCode = 10;
+    google.protobuf.StringValue dbOperation = 11;
+}
+
 message LineChart {
     google.protobuf.StringValue display_name = 1;
     google.protobuf.StringValue name = 2;
@@ -15,4 +30,5 @@ message LineChart {
     google.protobuf.StringValue tool_tip = 5;
     Unit unit = 6;
     map<string, google.protobuf.StringValue> metric = 7;
+    InternalMetricSchema internalMetricSchema = 8;
 }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/alert_info/logs_query.proto";
+
+message StandardMoreThanAlertInfoUsual  {
+    LogsQuery query = 1;
+}

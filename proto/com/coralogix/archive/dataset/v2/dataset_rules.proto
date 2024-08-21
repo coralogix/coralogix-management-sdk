@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.coralogix.archive.dataset.v2;
+
+import "com/coralogix/archive/dataset/v2/physical_location.proto";
+import "com/coralogix/archive/dataset/v2/dataset.proto";
+
+message DatasetRule {
+  Dataspace dataspace = 1;
+  Predicate predicate = 2;
+  repeated PhysicalLocation locations = 3;
+}
+
+message Predicate {
+  PredicateType type = 1;
+  string text = 2;
+}
+
+enum PredicateType {
+  PREDICATE_TYPE_UNSPECIFIED = 0;
+  PREDICATE_TYPE_REGEX = 1;
+  PREDICATE_TYPE_DPXL = 2;
+  PREDICATE_TYPE_EXACT = 3;
+}

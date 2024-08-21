@@ -41,6 +41,18 @@ message UnauthenticatedInternalDpxlServiceCombineRequest {
   }
 }
 
+message UnauthenticatedInternalDpxlServiceCombineManyRequest {
+  repeated SerializedExpression serialized = 1;
+  Operation operation                      = 2;
+  optional EntityType entity_type          = 3;
+
+  enum Operation {
+    OPERATION_UNSPECIFIED = 0;
+    OPERATION_AND         = 1;
+    OPERATION_OR          = 2;
+  }
+}
+
 message UnauthenticatedInternalDpxlServiceCheckTypeRequest {
   SerializedExpression serialized = 1;
 }

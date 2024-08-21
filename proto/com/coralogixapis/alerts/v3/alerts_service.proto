@@ -1,0 +1,214 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert.proto";
+import "com/coralogixapis/alerts/v3/alert_severity.proto";
+import "com/coralogixapis/alerts/v3/alert_type.proto";
+
+message AuditLogDescription {
+  optional string description = 1;
+      }
+
+extend google.protobuf.MethodOptions {
+  optional AuditLogDescription audit_log_description = 5000;
+  }
+
+service AlertsService {
+
+  rpc GetAlert(GetAlertRequest) returns (GetAlertResponse) {
+    option (audit_log_description).description = "get alert";
+    option (google.api.http) = {
+      get: "/v3/alerts/{id}"
+    };
+  }
+
+  rpc CreateAlert(CreateAlertRequest) returns (CreateAlertResponse){
+    option (audit_log_description).description = "create alert";
+    option (google.api.http) = {
+      post: "/v3/alerts"
+      body: "Alert"
+    };
+  }
+
+  rpc ReplaceAlert(ReplaceAlertRequest) returns (ReplaceAlertResponse){
+    option (audit_log_description).description = "replace alert";
+    option (google.api.http) = {
+      put: "/v3/alerts"
+      body: "Alert"
+    };
+  }
+
+  rpc BatchGetAlert(BatchGetAlertRequest) returns (BatchGetAlertResponse){
+    option (audit_log_description).description = "batch get alerts";
+    option (google.api.http) = {
+      get: "/v3/alerts:batchGet"
+    };
+  }
+
+  rpc ListAlerts(ListAlertsRequest) returns (ListAlertsResponse){
+    option (audit_log_description).description = "get alerts list";
+    option (google.api.http) = {
+      get: "/v3/alerts"
+      body: "*"
+    };
+  }
+
+  rpc DeleteAlert(DeleteAlertRequest) returns (DeleteAlertResponse){
+    option (audit_log_description).description = "delete alert";
+    option (google.api.http) = {
+      delete: "/v3/alerts/{id}"
+    };
+  }
+
+  rpc AtomicBatchExecuteAlert(AtomicBatchExecuteAlertRequest) returns (AtomicBatchExecuteAlertResponse) {
+    option (audit_log_description).description = "atomic batch execute alert";
+    option (google.api.http) = {
+      post: "/v3/alerts:atomicBatchExecute"
+      body: "*"
+    };
+  }
+
+
+  rpc GetLimits(GetLimitsRequest) returns (GetLimitsResponse) {
+    option (audit_log_description).description = "get limits";
+    option (google.api.http) = {
+      get: "/v3/alerts:getLimits"
+    };
+  }
+
+  rpc ValidateAlert(ValidateAlertRequest) returns (ValidateAlertResponse) {
+    option (audit_log_description).description = "validate alert";
+    option (google.api.http) = {
+      post: "/v3/alerts:validate"
+      body: "alert"
+    };
+  }
+
+  rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {
+    option (audit_log_description).description = "disable or enable the alert";
+    option (google.api.http) = {
+      post: "/v3/alerts/{id}:SetActive"
+      body: "alert"
+    };
+  }
+}
+
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED = 0;
+  ORDER_BY_DIRECTION_DESC = 1;
+}
+
+enum OrderByFields {
+  ORDER_BY_FIELDS_UNSPECIFIED = 0;
+  ORDER_BY_FIELDS_ID = 1;
+  ORDER_BY_FIELDS_SEVERITY = 2;
+  ORDER_BY_FIELDS_NAME = 3;
+  ORDER_BY_FIELDS_CREATED_TIME = 4;
+  ORDER_BY_FIELDS_UPDATED_TIME = 5;
+}
+
+message OrderBy {
+  OrderByFields field_name = 1;
+  OrderByDirection direction = 2;
+}
+
+message GetAlertRequest {
+  google.protobuf.StringValue id = 1;
+}
+
+message GetAlertResponse {
+  Alert alert = 1;
+}
+
+message ListAlertsResponse {
+  repeated Alert alerts = 1;
+}
+
+message ListAlertsRequest {
+  repeated AlertType alert_type = 1;
+  repeated AlertSeverity severity = 2;
+  optional google.protobuf.BoolValue enabled = 3;
+  map<string,string> meta_labels = 4;
+  optional google.protobuf.Timestamp created_time_start =6;
+  optional google.protobuf.Timestamp created_time_end = 7;
+
+  repeated OrderBy order_bys = 30;
+}
+
+message BatchGetAlertRequest {
+  repeated google.protobuf.StringValue ids = 1 ;
+}
+
+message BatchGetAlertResponse {
+  map<string,Alert> alerts = 1;
+  repeated google.protobuf.StringValue not_found_ids =2;
+}
+
+message DeleteAlertRequest {
+  google.protobuf.StringValue id = 1;
+}
+message DeleteAlertResponse {
+}
+message ReplaceAlertRequest {
+  Alert alert = 1;
+}
+message ReplaceAlertResponse {
+  Alert alert = 1;
+}
+message CreateAlertRequest{
+  Alert alert = 1;
+}
+message CreateAlertResponse {
+  Alert alert = 1;
+}
+message AtomicBatchExecuteAlertRequest {
+ repeated AlertExecutionRequest requests = 1;
+}
+message AtomicBatchExecuteAlertResponse {
+  repeated AlertExecutionResponse matching_responses = 1;
+  //TODO: Where should this object be placed
+//  com.coralogix.api.ResponseStatus status = 2;
+}
+
+message AlertExecutionRequest {
+  oneof request {
+    CreateAlertRequest create = 1;
+    ReplaceAlertRequest replace = 2;
+    DeleteAlertRequest delete = 3;
+  }
+}
+message AlertExecutionResponse {
+  oneof response {
+    CreateAlertResponse create = 1;
+    ReplaceAlertResponse replace = 2;
+    DeleteAlertResponse delete = 3;
+  }
+}
+message GetAlertEventsRequest {
+  google.protobuf.Timestamp from = 2;
+  google.protobuf.Timestamp to = 3;
+}
+message GetLimitsRequest {}
+
+message GetLimitsResponse {
+  google.protobuf.StringValue company_id = 1;
+  google.protobuf.Int32Value limit = 2;
+  google.protobuf.Int32Value used = 3;
+}
+message ValidateAlertRequest {
+  Alert alert = 1;
+}
+message ValidateAlertResponse {
+  google.protobuf.BoolValue valid = 1;
+}
+message SetActiveRequest{
+  google.protobuf.StringValue id = 1;
+  google.protobuf.BoolValue active = 2;
+}
+message SetActiveResponse {
+}

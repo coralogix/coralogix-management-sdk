@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message TracingImmediateAlertInfo  {
+    //TODO: How should we name this field? contains all filters (spans, subsystems, etc)
+    google.protobuf.StringValue label_filters = 1;
+    google.protobuf.UInt32Value latency_threshold_ms = 2;
+}
