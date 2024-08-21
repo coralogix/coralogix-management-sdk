@@ -3,9 +3,9 @@ use protofetch::Protofetch;
 use time::format_description;
 use toml_edit::{value, DocumentMut};
 
-const PROTOFETCH_PATH: &str = "../protofetch.toml";
-const PROTOFETCH_PATH_LOCK: &str = "../protofetch.lock";
-const PROTOS_DIR: &str = "../proto";
+const PROTOFETCH_PATH: &str = "../../protofetch.toml";
+const PROTOFETCH_PATH_LOCK: &str = "../../protofetch.lock";
+const PROTOS_DIR: &str = "../../proto";
 
 const PROTOFETCH_META_KEYS: [&str; 3] = ["name", "description", "proto_out_dir"];
 const ALLOWED_CHANGES: [&str; 3] = [PROTOFETCH_PATH, PROTOFETCH_PATH_LOCK, PROTOS_DIR];
