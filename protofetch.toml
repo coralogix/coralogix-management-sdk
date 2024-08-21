@@ -55,7 +55,7 @@ revision = 'v0.5.6'
 
 [cx-api-tags]
 url = 'github.com/coralogix/cx-api-tags'
-revision = '3e3a33b9c1008978dd77798024022d9d557a0a46'
+revision = 'v0.0.6'
 
 [cx-api-organisations]
 url = 'github.com/coralogix/cx-api-organisations'

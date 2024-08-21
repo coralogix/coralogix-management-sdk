@@ -99,8 +99,8 @@ commit_hash = "a1fcd8d7e42761fef2120c50cf6fbcab62a315f5"
 [[dependencies]]
 name = "cx-api-tags"
 url = "github.com/coralogix/cx-api-tags"
-revision = "3e3a33b9c1008978dd77798024022d9d557a0a46"
-commit_hash = "3e3a33b9c1008978dd77798024022d9d557a0a46"
+revision = "v0.0.6"
+commit_hash = "1d356955844434c9a50d9d95baeadf1d5997d395"
 
 [[dependencies]]
 name = "cx-api-views"
