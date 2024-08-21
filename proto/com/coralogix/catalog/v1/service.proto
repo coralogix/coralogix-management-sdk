@@ -14,15 +14,6 @@ message SliData {
   google.protobuf.BoolValue has_buckets_error = 2;
 }
 
-message ServiceCatalogFilter {
-  google.protobuf.StringValue label_name = 1;
-  google.protobuf.StringValue label_key = 2;
-  repeated google.protobuf.StringValue label_values = 3;
-  google.protobuf.Int64Value created_at = 4;
-  google.protobuf.Int64Value updated_at = 5;
-  google.protobuf.StringValue metric_label_name = 6;
-}
-
 message Service {
   google.protobuf.StringValue service_id = 1;
   google.protobuf.StringValue service_name = 2;

@@ -80,6 +80,7 @@ message Operator {
     GroupBy group_by = 14;
     Union union      = 15;
     Enrich enrich    = 16;
+    Join join        = 17;
   }
 
   reserved 12, 13;
@@ -322,5 +323,11 @@ message Operator {
     EnrichmentSource source  = 1;
     Expression left          = 2;
     Expression.Keypath into  = 3;
+  }
+
+  message Join {
+    Query query               = 1;
+    Expression join_condition = 2;
+    Expression.Keypath into   = 3;
   }
 }

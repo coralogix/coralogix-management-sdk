@@ -4,8 +4,6 @@ package com.coralogixapis.actions.v2;
 
 import "google/protobuf/wrappers.proto";
 
-option go_package = "com/coralogixapis/actions/v2";
-
 enum SourceType {
   SOURCE_TYPE_UNSPECIFIED = 0;
   SOURCE_TYPE_LOG = 1;

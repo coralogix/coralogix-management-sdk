@@ -4,15 +4,6 @@ package com.coralogixapis.database_catalog.v1;
 
 import "google/protobuf/wrappers.proto";
 
-message DatabaseCatalogFilter {
-  google.protobuf.StringValue label_name = 1;
-  google.protobuf.StringValue label_key = 2;
-  repeated google.protobuf.StringValue label_values = 3;
-  google.protobuf.Int64Value created_at = 4;
-  google.protobuf.Int64Value updated_at = 5;
-  google.protobuf.StringValue metric_label_name = 6;
-}
-
 message BaseDatabase {
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue db_name = 2;

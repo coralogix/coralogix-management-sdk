@@ -19,6 +19,7 @@ message Object {
   ArchiveTarget archive_target = 11;
   reserved 12;
   reserved 13;
+  bool columns_limit_reached = 14;
 }
 
 message ObjectCreated {

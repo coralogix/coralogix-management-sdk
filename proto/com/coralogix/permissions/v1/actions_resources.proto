@@ -132,6 +132,10 @@ enum Resource {
   RESOURCE_PERSONAL_CUSTOM_API_KEYS = 120 [(name) = "personal-custom-api-keys"];
   RESOURCE_TEAM_CUSTOM_API_KEYS = 121 [(name) = "team-custom-api-keys"];
   RESOURCE_LOGS_DATA_OUT_SETUP = 122 [(name) = "logs.data-out-setup"];
+  RESOURCE_DATAPRIME_AI_QUERY_ASSISTANT = 123 [(name) = "dataprime-ai-query-assistant"];
+  RESOURCE_TEAM_LANDING_PAGE = 124 [(name) = "team-landing-page"];
+  RESOURCE_RESOURCE_CATALOG = 125 [(name) = "resource-catalog"];
+  RESOURCE_TEAM_ALERTS_SETTINGS = 126 [(name) = "team-alerts-settings"];
 }
 
 

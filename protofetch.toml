@@ -15,7 +15,7 @@ revision = 'a14c87f2e662c316eab97d701a3a9d267edf5d43'
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
-revision = '186f40419a993ce325c93846597ff75c9e2a88a5'
+revision = 'v0.2.0'
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
@@ -38,7 +38,7 @@ revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = 'v0.283'
+revision = 'v0.289'
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -64,7 +64,7 @@ revision = 'v0.1.28'
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = 'v0.3.81'
+revision = 'v0.3.85'
 
 
 [cx-api-scopes-service]
@@ -75,7 +75,7 @@ revision = '45f5f10e7364b43ed736d76593c3ec0e73314cb2'
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
-revision = 'v2.0.4'
+revision = 'v2.0.5'
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
@@ -83,6 +83,7 @@ revision = '85c62965137513ec113a421a7fb46648540cd4d6'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
+revision = "v0.1.75"
 allow_policies = [
     "/com/coralogix/permissions/models/v1/*",
     "/com/coralogix/permissions/v1/actions_resources.proto",
@@ -91,11 +92,10 @@ allow_policies = [
     "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
     "/com/coralogixapis/aaa/apikeys/v3/*",
 ]
-revision = "v0.1.66"
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = 'v0.0.42'
+revision = 'v0.0.47'
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/metrics-configurator'

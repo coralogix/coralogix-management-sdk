@@ -18,7 +18,8 @@ jobs:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
       - name: Run tools/release-checker
-        run: cd tools/release-checker && cargo run 
+        run: cargo run -- -r ../.. -o ${{ github.repository }} -s true
+        working-directory: tools/release-checker
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}

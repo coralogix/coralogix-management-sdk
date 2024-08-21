@@ -12,3 +12,6 @@ tokio = { version = "1", features = ["full"] }
 eyre = "0"
 git_cmd = "0.6"
 time = { version = "0.3.36", features = ["formatting"] }
+clap = "4.5"
+tracing = "0.1"
+tracing-subscriber = "0.3"

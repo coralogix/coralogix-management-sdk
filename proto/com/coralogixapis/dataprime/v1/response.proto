@@ -28,6 +28,7 @@ message DataprimeWarning {
     AggregationBucketsLimitWarning aggregation_buckets_limit_warning = 7;
     ArchiveWarning archive_warning = 8;
     ScrollTimeoutWarning scroll_timeout_warning = 9;
+    FieldCountLimitWarning field_count_limit_warning = 10;
   }
 }
 
@@ -126,4 +127,8 @@ message ArchiveWarning {
   }
 }
 
+// warning for when OpenSearch scroll timeout is reached
 message ScrollTimeoutWarning {}
+
+// warning for when result contain entries where number of fields is truncated
+message FieldCountLimitWarning {}

@@ -11,7 +11,7 @@ import "com/coralogix/catalog/v1/span_kind.proto";
 message GetServiceActionsRequest {
   TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  repeated ServiceCatalogFilter service_catalog_filters = 3;
+  repeated ApmFilter service_catalog_filters = 3;
   repeated SpanKind span_kinds = 4;
 }
 

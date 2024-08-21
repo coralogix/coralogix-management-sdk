@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogix.archive.dataset.v2;
+
+message Dataspace {
+  string dataspace = 1;
+}
+
+message Dataset {
+  Dataspace dataspace = 1;
+  string dataset = 2;
+}
