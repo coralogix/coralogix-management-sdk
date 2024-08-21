@@ -10,9 +10,8 @@ on:
     # schedule:
     #     - cron: "0 8 * * *"
 
-  
 jobs:
-  check_tags:
+  checktags:
     name: "[Protofetch] Update tags to latest"
     runs-on: ubuntu-latest
     steps:
