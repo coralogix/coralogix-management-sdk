@@ -17,11 +17,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
       - name: Run tools/release-checker
+        run: cd tools/release-checker && cargo run 
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          cd tools/release-checker && cargo run 
