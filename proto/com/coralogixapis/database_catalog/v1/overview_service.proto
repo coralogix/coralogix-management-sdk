@@ -11,13 +11,13 @@ import "com/coralogixapis/apm/widgets/v1/topk.proto";
 import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/database_catalog/v1/database.proto";
-
+import "com/coralogix/catalog/v1/common.proto";
 
 message GetDatabaseOverviewStreamRequest {
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
-  repeated DatabaseCatalogFilter database_catalog_filters = 4;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 4;
   repeated google.protobuf.StringValue calling_services = 5;
   google.protobuf.StringValue database_system = 6;
   repeated google.protobuf.StringValue tables = 7;
@@ -68,7 +68,7 @@ message GetApdexRequest{
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
-  repeated DatabaseCatalogFilter database_catalog_filters = 4;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 4;
   repeated google.protobuf.StringValue calling_services = 5;
 }
 

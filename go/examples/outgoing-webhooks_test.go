@@ -185,8 +185,12 @@ func TestWebhooks(t *testing.T) {
 		},
 	})
 	assert.Nil(t, err)
+	if testResult.GetFailure() != nil {
+		log.Fatal(testResult.GetFailure().ErrorMessage.Value)
+	}
 	assert.NotNil(t, testResult.GetSuccess())
 	assert.Nil(t, testResult.GetFailure())
+
 }
 
 func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {

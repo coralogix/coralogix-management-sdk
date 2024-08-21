@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.coralogix.archive.kafka_out_targets.v2;
+
+import "google/protobuf/timestamp.proto";
+
+message Target {
+  oneof target_spec {
+    AwsMsk aws_msk = 1;
+    IbmEventStreams ibm_event_streams = 2;
+  }
+  KafkaOutSpec kafka_out_spec = 4;
+}
+
+message AwsMsk {
+  string public_endpoints = 1;
+  string topic = 2;
+}
+
+message IbmEventStreams {
+  string brokers = 1;
+  string topic = 2;
+}
+
+enum CompressionType {
+  COMPRESSION_TYPE_UNSPECIFIED = 0;
+  COMPRESSION_TYPE_GZIP = 1;
+}
+
+message KafkaOutSpec {
+  optional uint32 id = 1;
+  string name = 2;
+  bool is_active = 3;
+  string dpxl_expression = 4;
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  optional CompressionType compression_type = 7;
+}

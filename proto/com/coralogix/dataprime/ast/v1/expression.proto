@@ -45,6 +45,7 @@ message Expression {
     Root root                                          = 1;
     repeated google.protobuf.StringValue path_elements = 2;
     Datatype datatype                                  = 3;
+    optional JoinSide join_side                        = 4;
 
 
     enum Root {
@@ -52,6 +53,12 @@ message Expression {
       ROOT_EVENT_LABELS    = 1;
       ROOT_EVENT_METADATA  = 2;
       ROOT_USER_DATA       = 3;
+    }
+
+    enum JoinSide {
+      JOIN_SIDE_UNSPECIFIED = 0;
+      JOIN_SIDE_LEFT        = 1;
+      JOIN_SIDE_RIGHT       = 2;
     }
   }
 

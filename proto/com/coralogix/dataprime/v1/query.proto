@@ -330,6 +330,8 @@ message QueryStatus {
     uint64 started_at = 7;
 
     bool scroll_timeout_reached = 8;
+
+    bool column_limit_reached = 9;
   }
 
   message Planning {

@@ -1,7 +1,7 @@
 syntax = "proto3";
 
 package com.coralogixapis.database_catalog.v1;
-
+import "com/coralogix/catalog/v1/common.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/struct.proto";
 
@@ -19,13 +19,14 @@ import "com/coralogixapis/database_catalog/v1/database.proto";
 
 import "com/coralogixapis/alerts/v3/alert_def.proto";
 
+
 message UpdateDatabaseCatalogFiltersRequest {
-  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 1;
   repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
 }
 
 message UpdateDatabaseCatalogFiltersResponse {
-  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 1;
 }
 
 message GetDatabaseCatalogFiltersRequest {
@@ -34,7 +35,7 @@ message GetDatabaseCatalogFiltersRequest {
 }
 
 message GetDatabaseCatalogFiltersResponse {
-  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 1;
 }
 
 message GetDatabaseRequestLatencyGraphStreamRequest {
@@ -42,7 +43,7 @@ message GetDatabaseRequestLatencyGraphStreamRequest {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
   google.protobuf.UInt64Value topk = 4;
-  repeated DatabaseCatalogFilter database_catalog_filters = 5;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 5;
   repeated google.protobuf.StringValue calling_services = 6;
 }
 
@@ -52,7 +53,7 @@ message GetDatabaseErrorsGraphStreamRequest {
   map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
   google.protobuf.UInt64Value topk = 4;
   repeated ErrorGraphType error_graph_types = 5;
-  repeated DatabaseCatalogFilter database_catalog_filters = 6;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 6;
   repeated google.protobuf.StringValue calling_services = 7;
 }
 
@@ -62,7 +63,7 @@ message GetDatabaseStatementsGraphStreamRequest {
   map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
   google.protobuf.UInt64Value topk = 4;
   repeated AggregationType aggregation_types = 5;
-  repeated DatabaseCatalogFilter database_catalog_filters = 6;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 6;
   repeated google.protobuf.StringValue calling_services = 7;
 }
 
@@ -98,7 +99,7 @@ message GetDatabaseStatementsGraphStreamResponse {
 
 message GetDatabasesColumnsStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
-  repeated DatabaseCatalogFilter database_catalog_filters = 2;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 2;
   repeated google.protobuf.StringValue calling_services = 3;
   google.protobuf.Int64Value trend_offset = 4;
 }
@@ -131,7 +132,7 @@ message ListTablesResponse {
 }
 
 message GetAffectedAlertsRequest {
-  repeated DatabaseCatalogFilter database_catalog_filters = 1;
+  repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 1;
   repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
 }
 
