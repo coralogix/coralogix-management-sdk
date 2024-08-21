@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.alerts.v5;
-
-import "com/coralogixapis/alerts/v5/event/payload/standard/event_standard_unusual_payload.proto";
-
-message EventStandardMoreThanUsual {
-  EventStandardUnusualPayload more_than_usual = 1;
-}

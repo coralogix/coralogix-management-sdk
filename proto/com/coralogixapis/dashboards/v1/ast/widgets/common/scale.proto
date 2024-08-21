@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.dashboards.v1.ast.widgets.common;
-
-enum ScaleType {
-  SCALE_TYPE_UNSPECIFIED = 0;
-  SCALE_TYPE_LINEAR = 1;
-  SCALE_TYPE_LOGARITHMIC = 2;
-}

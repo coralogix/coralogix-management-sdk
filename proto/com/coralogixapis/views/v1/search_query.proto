@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.views.v1;
-
-import "google/protobuf/wrappers.proto";
-
-message SearchQuery {
-  google.protobuf.StringValue query = 1;
-}

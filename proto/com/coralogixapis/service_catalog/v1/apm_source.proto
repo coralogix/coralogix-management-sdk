@@ -1,8 +1,0 @@
-syntax = "proto3";
-package com.coralogixapis.service_catalog.v1;
-
-  enum ApmSource{
-  APM_SOURCE_UNSPECIFIED = 0;
-  APM_SOURCE_E2M = 1;
-  APM_SOURCE_SPAN_METRICS = 2;
-}

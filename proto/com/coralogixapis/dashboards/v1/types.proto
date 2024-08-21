@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.dashboards.v1;
-
-message UUID {
-  string value = 1;
-}

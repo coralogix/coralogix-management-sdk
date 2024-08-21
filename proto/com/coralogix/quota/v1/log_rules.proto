@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.quota.v1;
-
-import "com/coralogix/quota/v1/enums.proto";
-
-message LogRules {
-  repeated Severity severities = 1;
-}

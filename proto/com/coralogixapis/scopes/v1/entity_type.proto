@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.scopes.v1;
-
-enum EntityType {
-  UNSPECIFIED = 0;
-  LOGS = 1;
-  SPANS = 2;
-}
