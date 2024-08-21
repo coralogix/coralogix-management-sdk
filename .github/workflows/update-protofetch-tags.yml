@@ -21,3 +21,4 @@ jobs:
         run: cd tools/release-checker && cargo run 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}

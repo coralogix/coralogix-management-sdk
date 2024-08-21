@@ -17,10 +17,11 @@ async fn main() -> eyre::Result<()> {
         .parse::<DocumentMut>()
         .expect("Protofetch.toml not found");
     let github_token = std::env::var("GITHUB_TOKEN").expect("A GITHUB_TOKEN must be set");
-    let authed_github = octocrab::OctocrabBuilder::default()
-        .personal_token(github_token)
-        .build()?;
+    let reader_token = std::env::var("GH_READER_TOKEN").expect("A GITHUB_TOKEN must be set");
 
+    let authed_github = octocrab::OctocrabBuilder::default()
+        .personal_token(reader_token)
+        .build()?;
     let mut changes = false;
     for (k, val) in protofetch_descriptor.iter_mut() {
         let name = k.get();
@@ -81,6 +82,9 @@ async fn main() -> eyre::Result<()> {
             repo.commit("Update protofetch.toml")
                 .expect("Failed to commit");
             repo.push(&branch_name).expect("Failed to push");
+            let authed_github = octocrab::OctocrabBuilder::default()
+                .personal_token(github_token)
+                .build()?;
             authed_github
                 .pulls("coralogix", "coralogix-management-sdk")
                 .create("Updating API descriptions", branch_name, "master")
