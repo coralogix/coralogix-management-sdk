@@ -5,10 +5,9 @@ permissions:
   contents: write
 
 on:
-  push:
-    branches: [ IAC-152 ]
-    # schedule:
-    #     - cron: "0 8 * * *"
+  workflow_dispatch:
+  schedule:
+      - cron: "0 8 * * *"
 
 jobs:
   checktags:
