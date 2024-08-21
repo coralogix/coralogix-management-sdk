@@ -5,7 +5,7 @@ permissions:
   contents: write
 
 on:
-  pull_request:
+  push:
     branches: [ IAC-152 ]
     # schedule:
     #     - cron: "0 8 * * *"
