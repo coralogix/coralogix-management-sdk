@@ -97,6 +97,12 @@ revision = "v0.1.66"
 url = 'github.com/coralogix/cx-api-archive'
 revision = 'v0.0.42'
 
+[cx-api-metrics-configurator]
+url = 'github.com/coralogix/metrics-configurator'
+allow_policies = ["/com/coralogix/metrics/*"]
+content_roots = ["/proto/"]
+revision = '5aacd2545eb7ae5f76193fc872348c5756db2c8d'
+
 
 [google-api]
 url = "github.com/googleapis/googleapis"

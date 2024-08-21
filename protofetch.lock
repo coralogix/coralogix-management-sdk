@@ -67,6 +67,12 @@ revision = "ec44a77572bf77cf5c731107238bbda65e7c1089"
 commit_hash = "ec44a77572bf77cf5c731107238bbda65e7c1089"
 
 [[dependencies]]
+name = "cx-api-metrics-configurator"
+url = "github.com/coralogix/metrics-configurator"
+revision = "5aacd2545eb7ae5f76193fc872348c5756db2c8d"
+commit_hash = "5aacd2545eb7ae5f76193fc872348c5756db2c8d"
+
+[[dependencies]]
 name = "cx-api-organisations"
 url = "github.com/coralogix/cx-api-organisations"
 revision = "v0.1.28"
