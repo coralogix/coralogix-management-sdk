@@ -4,7 +4,7 @@
 
 # 🪵 The Coralogix Management SDK 
 
-🌟 [Docs](https://coralogix.github.io/coralogix-management-sdk)
+🌟 [Master Docs](https://coralogix.github.io/coralogix-management-sdk) 🌟
 
 # Building
 
