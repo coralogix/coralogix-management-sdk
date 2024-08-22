@@ -8,6 +8,7 @@ keywords = { workspace = true }
 categories = { workspace = true }
 authors = { workspace = true }
 description = "Coralogix Management SDK"
+readme = "../README.md"
 
 [dependencies]
 backoff = { workspace = true }
