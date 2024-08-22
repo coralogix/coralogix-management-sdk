@@ -1,4 +1,10 @@
-# The Coralogix Management SDK
+[![](https://img.shields.io/crates/v/cx-sdk)](https://crates.io/crates/cx-sdk)
+![](https://img.shields.io/crates/dv/cx-sdk)
+[![Go Reference](https://pkg.go.dev/badge/github.com/coralogix/coralogix-management-sdk/go.svg)](https://pkg.go.dev/github.com/coralogix/coralogix-management-sdk/go)
+
+# 🪵 The Coralogix Management SDK 
+
+🌟 [Docs](https://coralogix.github.io/coralogix-management-sdk)
 
 # Building
 
@@ -13,14 +19,11 @@ Please refer to the individual languages on how to build the SDKs
 
 The SDK can be configured using environment variables:
 
-- `CORALOGIX_API_KEY`: The API key that is used for all interactions. Note that it has to have appropriate permissions. Read the [docs](https://coralogix.com/docs/api-keys/) for more information
+- `CORALOGIX_TEAM_API_KEY`: The API key that is used for all team-level interactions. Note that it has to have appropriate permissions. Read the [docs](https://coralogix.com/docs/api-keys/) for more information.
+- `CORALOGIX_USER_API_KEY`: The API key that is used for all user-level interactions. Note that it has to have appropriate permissions. Read the [docs](https://coralogix.com/docs/api-keys/) for more information.
 - `CORALGOIX_REGION`: The region/cluster to connect to as a shorthand (EU2, AP1, etc. read more [here](https://coralogix.com/docs/coralogix-domain/)). 
 
 Please note that for all examples these variables have to be set to a valid cluster and API key.
-
-# Docs
-
-Check out the corresponding Github pages!
 
 # Protobuf
 
