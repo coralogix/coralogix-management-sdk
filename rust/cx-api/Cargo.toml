@@ -7,8 +7,8 @@ repository = { workspace = true }
 keywords = { workspace = true }
 categories = { workspace = true }
 authors = { workspace = true }
-description = "Coralogix Management API Proxies"
-
+description = "Coralogix Management API Proxies. Support package for cx-sdk"
+readme = "../README.md"
 
 [lib]
 doctest = false

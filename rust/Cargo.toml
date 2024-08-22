@@ -17,7 +17,7 @@ repository = "https://github.com/coralogix/coralogix-management-sdk"
 keywords = ["api-bindings", "coralogix", "log", "management", "sdk"]
 categories = ["api-bindings", "development-tools::debugging", "config"]
 authors = ["The YAK team at Coralogix"]
-readme = "../README.md"
+readme = "README.md"
 homepage = "https://coralogix.com"
 
 [workspace.dependencies]
