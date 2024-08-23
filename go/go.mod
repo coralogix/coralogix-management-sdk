@@ -1,4 +1,4 @@
-module github.com/coralogix/coralogix-management-sdk/go
+module github.com/coralogix/coralogix-management-sdk
 
 go 1.22.4
 

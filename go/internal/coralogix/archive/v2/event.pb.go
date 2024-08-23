@@ -7,7 +7,7 @@
 package v2
 
 import (
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/dataset/v1"
+	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogix/archive/dataset/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

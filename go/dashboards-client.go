@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	dashboards "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
+	dashboards "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/dashboards/v1"
 )
 
 // DashboardsClient is a client for the Coralogix Dashboards API.

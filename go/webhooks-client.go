@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	webhooks "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/outgoing_webhooks/v1"
+	webhooks "github.com/coralogix/coralogix-management-sdk/internal/coralogix/outgoing_webhooks/v1"
 )
 
 // CreateOutgoingWebhookRequest is a request to create a new webhook.

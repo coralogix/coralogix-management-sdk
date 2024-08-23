@@ -7,7 +7,7 @@
 package event
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
+	_ "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"

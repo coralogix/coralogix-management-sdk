@@ -16,7 +16,7 @@ package cxsdk
 import (
 	"context"
 
-	groups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
+	groups "github.com/coralogix/coralogix-management-sdk/internal/coralogix/permissions/v1"
 )
 
 // GroupsClient is a client for the Groups API

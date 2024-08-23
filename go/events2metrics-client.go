@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	e2m "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/events2metrics/v2"
+	e2m "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/events2metrics/v2"
 )
 
 // Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/

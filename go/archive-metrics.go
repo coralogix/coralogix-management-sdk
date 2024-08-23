@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	archiveMetrics "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/metrics"
+	archiveMetrics "github.com/coralogix/coralogix-management-sdk/internal/coralogix/metrics"
 
 	"google.golang.org/protobuf/types/known/emptypb"
 )

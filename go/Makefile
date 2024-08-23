@@ -17,7 +17,7 @@ NAME=cxsdk
 BINARY=${NAME}
 VERSION=0.1
 OS_ARCH=darwin_arm64
-BUILD_ARGS=-ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
+BUILD_ARGS=-ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn" -mod=readonly
 default: build
 
 .PHONY: proto-clean

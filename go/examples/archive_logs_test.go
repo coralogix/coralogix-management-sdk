@@ -18,8 +18,8 @@ import (
 	"context"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v2"
+	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	v2 "github.com/coralogix/coralogix-management-sdk/internal/coralogix/archive/v2"
 
 	"github.com/stretchr/testify/assert"
 )

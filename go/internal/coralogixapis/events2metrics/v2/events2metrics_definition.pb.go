@@ -7,9 +7,9 @@
 package v2
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/openapi/v1"
-	v21 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/logs2metrics/v2"
-	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/spans2metrics/v2"
+	_ "github.com/coralogix/coralogix-management-sdk/internal/coralogix/openapi/v1"
+	v21 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/logs2metrics/v2"
+	v2 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/spans2metrics/v2"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"

@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	ext "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/integrations/v1"
+	ext "github.com/coralogix/coralogix-management-sdk/internal/coralogix/integrations/v1"
 )
 
 // UpdateIntegrationRequest is a request to update an integration.

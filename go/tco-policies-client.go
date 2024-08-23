@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	tcopolicies "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/quota/v1"
+	tcopolicies "github.com/coralogix/coralogix-management-sdk/internal/coralogix/quota/v1"
 )
 
 // TCOPoliciesClient is a client for the Coralogix TCO Policies API.

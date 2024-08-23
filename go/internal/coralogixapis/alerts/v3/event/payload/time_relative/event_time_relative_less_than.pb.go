@@ -7,7 +7,7 @@
 package time_relative
 
 import (
-	payload "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/event/payload"
+	payload "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3/event/payload"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"

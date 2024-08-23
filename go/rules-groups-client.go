@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	rulesgroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/rules/v1"
+	rulesgroups "github.com/coralogix/coralogix-management-sdk/internal/coralogix/rules/v1"
 )
 
 // RuleGroupsClient is a client for the Coralogix Rules Groups API.

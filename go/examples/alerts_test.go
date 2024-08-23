@@ -18,10 +18,10 @@ import (
 	"context"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v3 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
+	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	v3 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3"
+	"github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3/alert_def_type_definition"
+	"github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"

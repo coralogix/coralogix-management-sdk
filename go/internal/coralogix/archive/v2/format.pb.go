@@ -7,8 +7,8 @@
 package v2
 
 import (
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/format/generic/v1"
-	v11 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/format/wide_parquet/v1"
+	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogix/archive/format/generic/v1"
+	v11 "github.com/coralogix/coralogix-management-sdk/internal/coralogix/archive/format/wide_parquet/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"

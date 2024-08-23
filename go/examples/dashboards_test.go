@@ -20,7 +20,7 @@ import (
 	"os"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	cxsdk "github.com/coralogix/coralogix-management-sdk"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/encoding/protojson"

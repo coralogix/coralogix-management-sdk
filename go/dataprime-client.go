@@ -16,7 +16,7 @@ package cxsdk
 import (
 	"context"
 
-	dataprime "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dataprime/v1"
+	dataprime "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/dataprime/v1"
 )
 
 // QueryRequest is for running the query

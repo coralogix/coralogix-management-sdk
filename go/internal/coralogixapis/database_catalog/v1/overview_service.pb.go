@@ -7,9 +7,9 @@
 package v1
 
 import (
-	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/common/v2"
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/widgets/v1"
-	v11 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/service_catalog/v1"
+	v2 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/apm/common/v2"
+	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/apm/widgets/v1"
+	v11 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/service_catalog/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"

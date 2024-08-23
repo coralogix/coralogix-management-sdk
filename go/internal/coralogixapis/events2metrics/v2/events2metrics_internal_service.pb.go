@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/logs2metrics/v2"
+	_ "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/logs2metrics/v2"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"

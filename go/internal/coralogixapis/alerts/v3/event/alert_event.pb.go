@@ -7,7 +7,7 @@
 package event
 
 import (
-	activity_analysis "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis"
+	activity_analysis "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"

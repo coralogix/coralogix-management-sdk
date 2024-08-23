@@ -17,8 +17,8 @@ import (
 	"context"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
+	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/dashboards/v1"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
