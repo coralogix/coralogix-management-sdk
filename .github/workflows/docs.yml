@@ -72,7 +72,7 @@ jobs:
               <p>Welcome to the documentation for the Coralogix SDKs!</p>
               <ul>
                   <li><a href="rust/cx_sdk/index.html">Rust SDK Documentation</a></li>
-                  <li><a href="go/github.com/coralogix/coralogix-management-sdk/go/index.html">Go SDK Documentation</a></li>
+                  <li><a href="go/github.com/coralogix/coralogix-management-sdk/index.html">Go SDK Documentation</a></li>
               </ul>
           </body>
 

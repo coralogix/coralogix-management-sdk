@@ -1,6 +1,6 @@
 [![](https://img.shields.io/crates/v/cx-sdk)](https://crates.io/crates/cx-sdk)
 ![](https://img.shields.io/crates/dv/cx-sdk)
-[![Go Reference](https://pkg.go.dev/badge/github.com/coralogix/coralogix-management-sdk/go.svg)](https://pkg.go.dev/github.com/coralogix/coralogix-management-sdk/go)
+[![Go Reference](https://pkg.go.dev/badge/github.com/coralogix/coralogix-management-sdk.svg)](https://pkg.go.dev/github.com/coralogix/coralogix-management-sdk)
 
 # 🪵 The Coralogix Management SDK 
 
