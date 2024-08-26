@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1](https://github.com/coralogix/coralogix-management-sdk/compare/cx-api-v0.2.0...cx-api-v0.2.1) - 2024-08-26
+
+### Other
+- README updates for go and globally ([#17](https://github.com/coralogix/coralogix-management-sdk/pull/17))
+
 ## [0.2.0](https://github.com/coralogix/coralogix-management-sdk/compare/cx-api-v0.1.0...cx-api-v0.2.0) - 2024-08-19
 
 ### Added
