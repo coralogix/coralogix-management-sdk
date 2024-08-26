@@ -38,7 +38,7 @@ revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = 'v0.289'
+revision = "v0.290"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -64,7 +64,7 @@ revision = 'v0.1.28'
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = 'v0.3.85'
+revision = "v0.3.86"
 
 
 [cx-api-scopes-service]
@@ -83,7 +83,7 @@ revision = '85c62965137513ec113a421a7fb46648540cd4d6'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.75"
+revision = "v0.1.77"
 allow_policies = [
     "/com/coralogix/permissions/models/v1/*",
     "/com/coralogix/permissions/v1/actions_resources.proto",
