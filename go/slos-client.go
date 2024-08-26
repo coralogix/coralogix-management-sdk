@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	slos "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/apm/services/v1"
+	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 )
 
 // ServiceSlo is an SLO.

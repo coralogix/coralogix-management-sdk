@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	alerts "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerts/v3"
+	alerts "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
 )
 
 // AlertDefPriorityP1 is the alert priority P1.

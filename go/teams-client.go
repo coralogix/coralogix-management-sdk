@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	teams "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/aaa/organisations/v2"
+	teams "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/aaa/organisations/v2"
 )
 
 // CreateTeamInOrgRequest is a request to create a team.

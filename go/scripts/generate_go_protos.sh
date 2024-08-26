@@ -18,7 +18,7 @@
 proto_dir="../proto"
 go_out_dir="internal"
 mod_prefix="github.com/coralogix"
-mod_name="$mod_prefix/coralogix-management-sdk"
+mod_name="$mod_prefix/coralogix-management-sdk/go"
 proto_files=($(find "$proto_dir" -name "*.proto" -print))
 args=""
 # Build arguments for import paths of all modules

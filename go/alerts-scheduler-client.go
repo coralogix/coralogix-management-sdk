@@ -17,9 +17,9 @@ package cxsdk
 import (
 	"context"
 
-	alertsSchedulers "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1"
+	alertsSchedulers "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1"
 
-	metaLabels "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/alerting/meta_labels_protobuf/v1"
+	metaLabels "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerting/meta_labels_protobuf/v1"
 )
 
 // AlertSchedulerRule is an alert scheduler rule.

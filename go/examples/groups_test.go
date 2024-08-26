@@ -21,7 +21,7 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk"
-	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogix/permissions/v1"
+	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
 
 	"github.com/stretchr/testify/assert"
 )

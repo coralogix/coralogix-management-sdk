@@ -22,11 +22,11 @@ default: build
 
 .PHONY: proto-clean
 proto-clean: ## Clean generated proto.
-	@rm -rf internal/*
+	@rm -rf go/internal/*
 
 .PHONY: proto-compile
 proto-compile: ## Compile message protobuf and gRPC service files.
-	@./scripts/generate_go_protos.sh
+	@cd ./go; scripts/generate_go_protos.sh
 
 build: proto-clean proto-compile build-source-files
 
@@ -47,7 +47,7 @@ release:
 	GOOS=windows GOARCH=386 go build -o out/${BINARY}_${VERSION}_windows_386.dll
 	GOOS=windows GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_windows_amd64.dll
 
-test: build
+test:
 	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./... 
 
 generate:

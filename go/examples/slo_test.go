@@ -18,7 +18,7 @@ import (
 	"context"
 	"testing"
 
-	v1 "github.com/coralogix/coralogix-management-sdk/internal/coralogixapis/apm/services/v1"
+	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk"
 
