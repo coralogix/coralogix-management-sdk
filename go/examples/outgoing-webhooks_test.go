@@ -20,7 +20,7 @@ import (
 	"log"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"

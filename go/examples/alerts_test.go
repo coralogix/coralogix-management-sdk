@@ -18,7 +18,7 @@ import (
 	"context"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	v3 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
 	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
 	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"

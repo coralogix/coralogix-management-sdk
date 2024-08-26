@@ -20,7 +20,7 @@ import (
 
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"

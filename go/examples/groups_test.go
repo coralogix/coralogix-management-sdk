@@ -20,7 +20,7 @@ import (
 	"strconv"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk"
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
 
 	"github.com/stretchr/testify/assert"
