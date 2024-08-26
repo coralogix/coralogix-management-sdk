@@ -20,7 +20,10 @@ jobs:
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
       - name: Run tools/release-checker
-        run: cargo run -- -r ../.. -o ${{ github.repository }} -s
+        run: |
+          git config --global user.email "github@coralogix.com"
+          git config --global user.name "Github Actions"
+          cargo run -- -r ../.. -o ${{ github.repository }} -s
         working-directory: tools/release-checker
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
