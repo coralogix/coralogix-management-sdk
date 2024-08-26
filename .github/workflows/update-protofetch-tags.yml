@@ -16,6 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: de-vri-es/setup-git-credentials@v2
+        with:
+          credentials: ${{secrets.GIT_CREDENTIALS}}
       - name: Run tools/release-checker
         run: cargo run -- -r ../.. -o ${{ github.repository }} -s
         working-directory: tools/release-checker
