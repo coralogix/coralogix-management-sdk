@@ -47,7 +47,7 @@ release:
 	GOOS=windows GOARCH=386 go build -o out/${BINARY}_${VERSION}_windows_386.dll
 	GOOS=windows GOARCH=amd64 go build -o out/${BINARY}_${VERSION}_windows_amd64.dll
 
-test:
+test: build
 	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./... 
 
 generate:

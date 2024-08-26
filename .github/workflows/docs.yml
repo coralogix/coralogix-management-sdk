@@ -50,7 +50,6 @@ jobs:
       - name: Install doc2go
         run: go install go.abhg.dev/doc2go@latest
       - name: Generate Go Docs
-        working-directory: go
         run: |
           doc2go -out $RUNNER_TEMP/docs/go ./...
       
