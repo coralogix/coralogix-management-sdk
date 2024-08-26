@@ -12,12 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-TEST?=$$(go list ./... | grep -v 'vendor')
-NAME=cxsdk
-BINARY=${NAME}
-VERSION=0.1
-OS_ARCH=darwin_arm64
-BUILD_ARGS=-ldflags "-X google.golang.org/protobuf/reflect/protoregistry.conflictPolicy=warn"
 default: build
 
 build: 
@@ -27,4 +21,4 @@ release:
 	cd ./go; make release
 
 test:
-	go test ${BUILD_ARGS} -v ${TESTARGS} -cover -timeout=120s -parallel=4 ./... 
+	cd ./go; make test TESTARGS=${TESTARGS}
