@@ -13,9 +13,7 @@
 // limitations under the License.
 
 use crate::{
-    auth::{AuthContext, AuthData},
-    error::Result,
-    util::make_request_with_metadata,
+    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
     CoralogixRegion,
 };
 use cx_api::proto::com::coralogixapis::dataprime::v1::{
@@ -49,9 +47,9 @@ impl DataprimeQueryClient {
         let enrichments_service_channel: Channel = Endpoint::from_str(&region.grpc_endpoint())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let auth_data: AuthData = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
-            metadata_map: auth_data.to_metadata_map(),
+            metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(DataprimeQueryServiceClient::new(
                 enrichments_service_channel.clone(),
             )),

@@ -15,7 +15,8 @@ use serde::{Deserialize, Serialize};
 
 use crate::{
     auth::{ApiKey, AuthContext},
-    CoralogixRegion,
+    CoralogixRegion, RUSTC_VERSION, SDK_CORRELATION_ID_HEADER_NAME, SDK_LANGUAGE_HEADER_NAME,
+    SDK_RUSTC_VERSION_HEADER_NAME, SDK_VERSION, SDK_VERSION_HEADER_NAME,
 };
 
 #[derive(Serialize, Deserialize)]
@@ -73,6 +74,7 @@ pub struct UsersClient {
     target_url: String,
     http_client: reqwest::Client,
     api_key: ApiKey,
+    correlation_id: String,
 }
 
 impl UsersClient {
@@ -86,6 +88,7 @@ impl UsersClient {
             http_client: reqwest::Client::new(),
             api_key: auth_context.team_level_api_key,
             target_url: region.rest_endpoint() + "/scim/Users",
+            correlation_id: uuid::Uuid::new_v4().to_string(),
         }
     }
 
@@ -95,6 +98,10 @@ impl UsersClient {
             .http_client
             .post(&self.target_url)
             .header("Authorization", format!("Bearer {}", self.api_key.token()))
+            .header(SDK_VERSION_HEADER_NAME, SDK_VERSION)
+            .header(SDK_LANGUAGE_HEADER_NAME, "rust")
+            .header(SDK_RUSTC_VERSION_HEADER_NAME, RUSTC_VERSION)
+            .header(SDK_CORRELATION_ID_HEADER_NAME, &self.correlation_id)
             .json(&user)
             .send()
             .await?;
@@ -111,6 +118,10 @@ impl UsersClient {
             .http_client
             .get(&url)
             .header("Authorization", format!("Bearer {}", self.api_key.token()))
+            .header(SDK_VERSION_HEADER_NAME, SDK_VERSION)
+            .header(SDK_LANGUAGE_HEADER_NAME, "rust")
+            .header(SDK_RUSTC_VERSION_HEADER_NAME, RUSTC_VERSION)
+            .header(SDK_CORRELATION_ID_HEADER_NAME, &self.correlation_id)
             .send()
             .await?;
         response.json().await
@@ -126,6 +137,10 @@ impl UsersClient {
             .http_client
             .put(&url)
             .header("Authorization", format!("Bearer {}", self.api_key.token()))
+            .header(SDK_VERSION_HEADER_NAME, SDK_VERSION)
+            .header(SDK_LANGUAGE_HEADER_NAME, "rust")
+            .header(SDK_RUSTC_VERSION_HEADER_NAME, RUSTC_VERSION)
+            .header(SDK_CORRELATION_ID_HEADER_NAME, &self.correlation_id)
             .json(&user)
             .send()
             .await?;
@@ -142,6 +157,10 @@ impl UsersClient {
             .http_client
             .delete(&url)
             .header("Authorization", format!("Bearer {}", self.api_key.token()))
+            .header(SDK_VERSION_HEADER_NAME, SDK_VERSION)
+            .header(SDK_LANGUAGE_HEADER_NAME, "rust")
+            .header(SDK_RUSTC_VERSION_HEADER_NAME, RUSTC_VERSION)
+            .header(SDK_CORRELATION_ID_HEADER_NAME, &self.correlation_id)
             .send()
             .await?;
         response.error_for_status()?;
