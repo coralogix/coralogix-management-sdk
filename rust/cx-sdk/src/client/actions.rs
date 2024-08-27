@@ -15,13 +15,14 @@
 use std::{collections::HashMap, str::FromStr};
 
 use crate::{
-    auth::{AuthContext, AuthData},
+    auth::AuthContext,
     com::coralogixapis::actions::v2::{
         actions_service_client::ActionsServiceClient, CreateActionRequest, CreateActionResponse,
         DeleteActionRequest, GetActionRequest, ListActionsRequest, OrderActionsRequest,
         ReplaceActionRequest, ReplaceActionResponse,
     },
     error::Result,
+    metadata::CallProperties,
     util::make_request_with_metadata,
 };
 
@@ -53,9 +54,9 @@ impl ActionsClient {
         let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let teams_level_auth_data: AuthData = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
-            teams_level_metadata_map: teams_level_auth_data.to_metadata_map(),
+            teams_level_metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(ActionsServiceClient::new(channel)),
         })
     }

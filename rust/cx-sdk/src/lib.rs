@@ -13,8 +13,10 @@
 // limitations under the License.
 
 //! The Rust SDK for Coralogix  APIs.
+use auth::ApiKey;
 use cx_api::proto::*;
 use error::SdkError;
+use http::{HeaderMap, HeaderName, HeaderValue};
 use std::{fmt::Debug, str::FromStr};
 
 /// This module contains the authentication primitives for the SDK.
@@ -29,7 +31,18 @@ pub mod error;
 /// This module contains the utility functions for the SDK.
 mod util;
 
+mod metadata;
+
 const ENV_CORALOGIX_REGION: &str = "CORALOGIX_REGION";
+const AUTHORIZATION_HEADER_NAME: &str = "authorization";
+const SDK_VERSION_HEADER_NAME: &str = "cx-sdk-version";
+const SDK_LANGUAGE_HEADER_NAME: &str = "cx-sdk-language";
+const SDK_RUSTC_VERSION_HEADER_NAME: &str = "cx-sdk-rustc-version";
+const SDK_CORRELATION_ID_HEADER_NAME: &str = "cx-sdk-correlation-id";
+const RUSTC_VERSION: &str = env!("RUSTC_VERSION");
+
+/// The SDK version.
+pub const SDK_VERSION: &str = env!("CARGO_PKG_VERSION");
 
 /// From <https://coralogix.com/docs/coralogix-domain/>
 #[derive(Debug, Clone)]
@@ -101,5 +114,36 @@ impl FromStr for CoralogixRegion {
             "ap2" => Ok(CoralogixRegion::AP2),
             custom => Ok(CoralogixRegion::Custom(custom.to_string())),
         }
+    }
+}
+
+impl From<&ApiKey> for metadata::CallProperties {
+    fn from(value: &ApiKey) -> Self {
+        let value = bytes::Bytes::from(format!("Bearer {}", value.token()));
+        let mut value = HeaderValue::from_maybe_shared(value).unwrap();
+        value.set_sensitive(true);
+        metadata::CallProperties::new(HeaderMap::from_iter(
+            [
+                (HeaderName::from_static(AUTHORIZATION_HEADER_NAME), value),
+                (
+                    HeaderName::from_static(SDK_RUSTC_VERSION_HEADER_NAME),
+                    HeaderValue::from_str(RUSTC_VERSION).unwrap(),
+                ),
+                (
+                    HeaderName::from_static(SDK_VERSION_HEADER_NAME),
+                    HeaderValue::from_str(SDK_VERSION).unwrap(),
+                ),
+                (
+                    HeaderName::from_static(SDK_LANGUAGE_HEADER_NAME),
+                    HeaderValue::from_static("rust"),
+                ),
+                (
+                    HeaderName::from_static(SDK_CORRELATION_ID_HEADER_NAME),
+                    HeaderValue::from_str(&uuid::Uuid::new_v4().to_string()).unwrap(),
+                ),
+            ]
+            .iter()
+            .cloned(),
+        ))
     }
 }
