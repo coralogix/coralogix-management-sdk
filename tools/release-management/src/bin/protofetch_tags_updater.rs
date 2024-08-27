@@ -152,7 +152,7 @@ async fn main() -> eyre::Result<()> {
 
     // Git operations
     let repo = Repo::new(&args.git_dir)
-        .expect(&format!("Couldn't find git repository at {}", args.git_dir));
+        .unwrap_or_else(|_| panic!("Couldn't find git repository at {}", args.git_dir));
     let format = format_description::parse("[year]-[month]-[day]").expect("Failed to parse format");
     let branch_name = format!(
         "update-{}",
@@ -163,7 +163,7 @@ async fn main() -> eyre::Result<()> {
         .expect("Failed to create branch");
     tracing::info!(%branch_name, ?changes);
 
-    repo.add(&vec![
+    repo.add(&[
         protofetch_path.into_os_string().to_str().unwrap(),
         protolock_path.into_os_string().to_str().unwrap(),
         proto_dir.into_os_string().to_str().unwrap(),

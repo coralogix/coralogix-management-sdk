@@ -1,17 +1,22 @@
-name: "[Protofetch] Check Tags"
+name: "[Rust & Go SDK] Tag and Publish"
 
-# permissions:
-#   pull-requests: write
-#   contents: write
+permissions:
+  pull-requests: write
+  contents: write
 
 on:
   workflow_dispatch:
-  schedule:
-      - cron: "0 8 * * *"
+    inputs:
+      sdk_version:
+        description: 'SDK version to tag and publish'
+        required: true
+env:
+  PROTOC_VERSION: "26.1"
 
+  
 jobs:
-  checktags:
-    name: "[Protofetch] Update tags to latest"
+  update_version:
+    name: "[Rust & Go SDK] Update SDK version"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,7 +28,7 @@ jobs:
         run: |
           git config --global user.email "github@coralogix.com"
           git config --global user.name "Github Actions"
-          cargo run --bin protofetch_tags_updater  -- -r ../.. -o ${{ github.repository }} -s
+          cargo run --bin version_updater  -- -r ../.. -o ${{ github.repository }} -v ${{ github.event.inputs.sdk_version }}
         working-directory: tools/release-management
         env:
           GITHUB_TOKEN: ${{ secrets.GH_READER_TOKEN }}
