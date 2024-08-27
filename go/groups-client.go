@@ -40,6 +40,9 @@ type GetTeamGroupsRequest = groups.GetTeamGroupsRequest
 // GetTeamGroupResponse is a response to getting a group by its ID
 type GetTeamGroupResponse = groups.GetTeamGroupResponse
 
+// GroupsTeam is a team
+type GroupsTeamGroup = groups.TeamGroup
+
 // GroupsTeamID is an ID for a group in a Team
 type GroupsTeamID = groups.TeamId
 
@@ -119,7 +122,7 @@ func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupReq
 }
 
 // Get retrieves a group by ID
-func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) (*groups.GetTeamGroupResponse, error) {
+func (c GroupsClient) Get(ctx context.Context, req *GetTeamGroupRequest) (*groups.GetTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
