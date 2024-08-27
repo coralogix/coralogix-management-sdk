@@ -25,6 +25,10 @@ message Sli {
   repeated google.protobuf.StringValue service_names_group = 19;
   google.protobuf.BoolValue has_buckets_error = 20;
   google.protobuf.FloatValue float_slo_percentage = 21;
+  google.protobuf.FloatValue slo_current_percentage = 22;
+  google.protobuf.FloatValue slo_violations = 23;
+  google.protobuf.FloatValue slo_allowed_violations = 24;
+  google.protobuf.FloatValue total = 25;
 }
 
 message SliFilter {
