@@ -26,7 +26,7 @@ type CreateAPIKeyRequest = apikeys.CreateApiKeyRequest
 // GetAPIKeyRequest is a request to get an API key.
 type GetAPIKeyRequest = apikeys.GetApiKeyRequest
 
-// GetAPIKeyResponse is a response to the API keys request.
+// GetAPIKeyResponse is a response to get an API key.
 type GetAPIKeyResponse = apikeys.GetApiKeyResponse
 
 // UpdateAPIKeyRequest is a request to update an API key.
@@ -35,8 +35,14 @@ type UpdateAPIKeyRequest = apikeys.UpdateApiKeyRequest
 // DeleteAPIKeyRequest is a request to delete an API key.
 type DeleteAPIKeyRequest = apikeys.DeleteApiKeyRequest
 
-// APIKeyPermissions is a set of permissions for an API key.
-type APIKeyPermissions = apikeys.CreateApiKeyRequest_KeyPermissions
+// APIKeyPermissionsCreate is a set of permissions for an API key on create.
+type APIKeyPermissionsCreate = apikeys.CreateApiKeyRequest_KeyPermissions
+
+// APIKeyPermissionsUpdate is a set of permissions for an API key on update.
+type APIKeyPermissionsUpdate = apikeys.UpdateApiKeyRequest_Permissions
+
+// APIKeyPresetsUpdate is a set of presets for an API key on update.
+type APIKeyPresetsUpdate = apikeys.UpdateApiKeyRequest_Presets
 
 // APIKeyPermissionsUpdate is a set of permissions for an API key on update.
 type APIKeyPermissionsUpdate = apikeys.UpdateApiKeyRequest_Permissions
@@ -56,18 +62,16 @@ type OwnerTeamID = apikeys.Owner_TeamId
 // OwnerOrganisationID is an owner organisation ID.
 type OwnerOrganisationID = apikeys.Owner_OrganisationId
 
-// RPC method names.
 const (
-	CreateAPIKeyRPC = apikeys.ApiKeysService_CreateApiKey_FullMethodName
-	GetAPIKeyRPC    = apikeys.ApiKeysService_GetApiKey_FullMethodName
-	UpdateAPIKeyRPC = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
-	DeleteAPIKeyRPC = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
+	// GetAPIKeyRpc is the method name for Get.
+	GetAPIKeyRpc = apikeys.ApiKeysService_GetApiKey_FullMethodName
+	// CreateAPIKeyRpc is the method name for Create.
+	CreateAPIKeyRpc = apikeys.ApiKeysService_CreateApiKey_FullMethodName
+	// DeleteAPIKeyRpc is the method name for Delete.
+	DeleteAPIKeyRpc = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
+	// UpdateAPIKeyRpc is the method name for Update.
+	UpdateAPIKeyRpc = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
 )
-
-// ApikeysClient is a client for the Coralogix API keys API.
-type ApikeysClient struct {
-	callPropertiesCreator *CallPropertiesCreator
-}
 
 // Create creates a new API key.
 func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
