@@ -20,103 +20,101 @@ import (
 	alerts "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
 )
 
-const (
-	// AlertDefPriorityP1 is the alert priority P1.
-	AlertDefPriorityP1 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P1
+// AlertDefPriorityP1 is the alert priority P1.
+const AlertDefPriorityP1 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P1
 
-	// AlertDefPriorityP2 is the alert priority P2.
-	AlertDefPriorityP2 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P2
+// AlertDefPriorityP2 is the alert priority P2.
+const AlertDefPriorityP2 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P2
 
-	// AlertDefPriorityP3 is the alert priority P3.
-	AlertDefPriorityP3 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P3
+// AlertDefPriorityP3 is the alert priority P3.
+const AlertDefPriorityP3 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P3
 
-	// AlertDefPriorityP4 is the alert priority P4.
-	AlertDefPriorityP4 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P4
+// AlertDefPriorityP4 is the alert priority P4.
+const AlertDefPriorityP4 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P4
 
-	// AlertDefPriorityP5OrUnspecified is the alert priority P5 or unspecified.
-	AlertDefPriorityP5OrUnspecified = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+// AlertDefPriorityP5OrUnspecified is the alert priority P5 or unspecified.
+const AlertDefPriorityP5OrUnspecified = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
 
-	// AlertDefTypeLogsMoreThan is the alert type "logs more than".
-	AlertDefTypeLogsMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN
+// AlertDefTypeLogsMoreThan is the alert type "logs more than".
+const AlertDefTypeLogsMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN
 
-	// AlertDefTypeLogsLessThan is the alert type "logs less than".
-	AlertDefTypeLogsLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_LESS_THAN
+// AlertDefTypeLogsLessThan is the alert type "logs less than".
+const AlertDefTypeLogsLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_LESS_THAN
 
-	// AlertDefTypeFlow is the alert type "flow".
-	AlertDefTypeFlow = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
+// AlertDefTypeFlow is the alert type "flow".
+const AlertDefTypeFlow = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
 
-	// AlertDefTypeLogsNewValue is the alert type "logs new value".
-	AlertDefTypeLogsNewValue = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
+// AlertDefTypeLogsNewValue is the alert type "logs new value".
+const AlertDefTypeLogsNewValue = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
 
-	// AlertDefTypeLogsMoreThanUsual is the alert type "logs more than usual".
-	AlertDefTypeLogsMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN_USUAL
+// AlertDefTypeLogsMoreThanUsual is the alert type "logs more than usual".
+const AlertDefTypeLogsMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN_USUAL
 
-	// AlertDefTypeLogsRatioMoreThan is the alert type "logs ratio more than".
-	AlertDefTypeLogsRatioMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_MORE_THAN
+// AlertDefTypeLogsRatioMoreThan is the alert type "logs ratio more than".
+const AlertDefTypeLogsRatioMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_MORE_THAN
 
-	// AlertDefTypeLogsRatioLessThan is the alert type "logs ratio less than".
-	AlertDefTypeLogsRatioLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_LESS_THAN
+// AlertDefTypeLogsRatioLessThan is the alert type "logs ratio less than".
+const AlertDefTypeLogsRatioLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_LESS_THAN
 
-	// AlertDefTypeLogsTimeRelativeLessThan is the alert type "logs time relative less than".
-	AlertDefTypeLogsTimeRelativeLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_LESS_THAN
+// AlertDefTypeLogsTimeRelativeLessThan is the alert type "logs time relative less than".
+const AlertDefTypeLogsTimeRelativeLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_LESS_THAN
 
-	// AlertDefTypeLogsTimeRelativeMoreThan is the alert type "logs time relative more than".
-	AlertDefTypeLogsTimeRelativeMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_MORE_THAN
+// AlertDefTypeLogsTimeRelativeMoreThan is the alert type "logs time relative more than".
+const AlertDefTypeLogsTimeRelativeMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_MORE_THAN
 
-	// AlertDefTypeLogsUniqueCount is the alert type "logs unique count".
-	AlertDefTypeLogsUniqueCount = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
+// AlertDefTypeLogsUniqueCount is the alert type "logs unique count".
+const AlertDefTypeLogsUniqueCount = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
 
-	// AlertDefTypeLogsImmediateOrUnspecified is the alert type "logs immediate or unspecified".
-	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+// AlertDefTypeLogsImmediateOrUnspecified is the alert type "logs immediate or unspecified".
+const AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
 
-	// AlertDefTypeMetricMoreThan is the alert type "metric less than".
-	AlertDefTypeMetricMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN
+// AlertDefTypeMetricMoreThan is the alert type "metric less than".
+const AlertDefTypeMetricMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN
 
-	// AlertDefTypeMetricLessThan is the alert type "metric less than".
-	AlertDefTypeMetricLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN
+// AlertDefTypeMetricLessThan is the alert type "metric less than".
+const AlertDefTypeMetricLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN
 
-	// AlertDefTypeMetricLessThanOrEquals is the alert type "metric less than or equals".
-	AlertDefTypeMetricLessThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_OR_EQUALS
+// AlertDefTypeMetricLessThanOrEquals is the alert type "metric less than or equals".
+const AlertDefTypeMetricLessThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_OR_EQUALS
 
-	// AlertDefTypeMetricMoreThanOrEquals is the alert type "metric more than or equals".
-	AlertDefTypeMetricMoreThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_OR_EQUALS
+// AlertDefTypeMetricMoreThanOrEquals is the alert type "metric more than or equals".
+const AlertDefTypeMetricMoreThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_OR_EQUALS
 
-	// AlertDefTypeMetricMoreThanUsual is the alert type "metric more than usual".
-	AlertDefTypeMetricMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_USUAL
+// AlertDefTypeMetricMoreThanUsual is the alert type "metric more than usual".
+const AlertDefTypeMetricMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_USUAL
 
-	// AlertDefTypeMetricLessThanUsual is the alert type "metric less than usual".
-	AlertDefTypeMetricLessThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_USUAL
+// AlertDefTypeMetricLessThanUsual is the alert type "metric less than usual".
+const AlertDefTypeMetricLessThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_USUAL
 
-	// AlertDefTypeTracingImmediate is the alert type "tracing immediate".
-	AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
+// AlertDefTypeTracingImmediate is the alert type "tracing immediate".
+const AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
 
-	// AlertDefTypeTracingMoreThan is the alert type "tracing more than".
-	AlertDefTypeTracingMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_MORE_THAN
+// AlertDefTypeTracingMoreThan is the alert type "tracing more than".
+const AlertDefTypeTracingMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_MORE_THAN
 
-	// AlertsDayOfWeekUnspecified is unspecified.
-	AlertsDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+// AlertsDayOfWeekUnspecified is unspecified.
+const AlertsDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
 
-	// AlertsDayOfWeekMonday is Monday.
-	AlertsDayOfWeekMonday = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+// AlertsDayOfWeekMonday is Monday.
+const AlertsDayOfWeekMonday = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
 
-	// AlertsDayOfWeekTuesday is Tuesday.
-	AlertsDayOfWeekTuesday = alerts.DayOfWeek_DAY_OF_WEEK_TUESDAY
+// AlertsDayOfWeekTuesday is Tuesday.
+const AlertsDayOfWeekTuesday = alerts.DayOfWeek_DAY_OF_WEEK_TUESDAY
 
-	// AlertsDayOfWeekWednesday is Wednesday.
-	AlertsDayOfWeekWednesday = alerts.DayOfWeek_DAY_OF_WEEK_WEDNESDAY
+// AlertsDayOfWeekWednesday is Wednesday.
+const AlertsDayOfWeekWednesday = alerts.DayOfWeek_DAY_OF_WEEK_WEDNESDAY
 
-	// AlertsDayOfWeekThursday is Thursday.
-	AlertsDayOfWeekThursday = alerts.DayOfWeek_DAY_OF_WEEK_THURSDAY
+// AlertsDayOfWeekThursday is Thursday.
+const AlertsDayOfWeekThursday = alerts.DayOfWeek_DAY_OF_WEEK_THURSDAY
 
-	// AlertsDayOfWeekFriday is Friday.
-	AlertsDayOfWeekFriday = alerts.DayOfWeek_DAY_OF_WEEK_FRIDAY
+// AlertsDayOfWeekFriday is Friday.
+const AlertsDayOfWeekFriday = alerts.DayOfWeek_DAY_OF_WEEK_FRIDAY
 
-	// AlertsDayOfWeekSaturday is Saturday.
-	AlertsDayOfWeekSaturday = alerts.DayOfWeek_DAY_OF_WEEK_SATURDAY
+// AlertsDayOfWeekSaturday is Saturday.
+const AlertsDayOfWeekSaturday = alerts.DayOfWeek_DAY_OF_WEEK_SATURDAY
 
-	// AlertsDayOfWeekSunday is Sunday.
-	AlertsDayOfWeekSunday = alerts.DayOfWeek_DAY_OF_WEEK_SUNDAY
-)
+// AlertsDayOfWeekSunday is Sunday.
+const AlertsDayOfWeekSunday = alerts.DayOfWeek_DAY_OF_WEEK_SUNDAY
 
 // AlertDefNotificationGroup represents a notification group.
 type AlertDefNotificationGroup = alerts.AlertDefNotificationGroup

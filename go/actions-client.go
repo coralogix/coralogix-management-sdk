@@ -46,34 +46,29 @@ type OrderActionsRequest = actions.OrderActionsRequest
 // Action is an action.
 type Action = actions.Action
 
-// SourceType is a type of source for an action.
-type SourceType = actions.SourceType
+// SourceTypeSourceTypeUnspecified is an unspecified source type.
+const SourceTypeSourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
 
-const (
-	// SourceTypeUnspecified is an unspecified source type.
-	SourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
+// SourceTypeSourceTypeLog is a webhook source type.
+const SourceTypeSourceTypeLog = actions.SourceType_SOURCE_TYPE_LOG
 
-	// SourceTypeLog is a webhook source type.
-	SourceTypeLog = actions.SourceType_SOURCE_TYPE_LOG
+// SourceTypeSourceTypeDataMap is a data map source type.
+const SourceTypeSourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
 
-	// SourceTypeSourceTypeDataMap is a data map source type.
-	SourceTypeSourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
+// CreateActionRpc is the method name for Create
+const CreateActionRpc = actions.ActionsService_CreateAction_FullMethodName
 
-	// CreateActionRpc is the method name for Create
-	CreateActionRpc = actions.ActionsService_CreateAction_FullMethodName
+// ReplaceActionRpc is the method name for Replace
+const ReplaceActionRpc = actions.ActionsService_ReplaceAction_FullMethodName
 
-	// ReplaceActionRpc is the method name for Replace
-	ReplaceActionRpc = actions.ActionsService_ReplaceAction_FullMethodName
+// GetActionRpc is the method name for Get
+const GetActionRpc = actions.ActionsService_GetAction_FullMethodName
 
-	// GetActionRpc is the method name for Get
-	GetActionRpc = actions.ActionsService_GetAction_FullMethodName
+// DeleteActionRpc is the method name for Delete
+const DeleteActionRpc = actions.ActionsService_DeleteAction_FullMethodName
 
-	// DeleteActionRpc is the method name for Delete
-	DeleteActionRpc = actions.ActionsService_DeleteAction_FullMethodName
-
-	// OrderActionRpc is the method name for Order
-	OrderActionRpc = actions.ActionsService_OrderActions_FullMethodName
-)
+// OrderActionRpc is the method name for Order
+const OrderActionRpc = actions.ActionsService_OrderActions_FullMethodName
 
 // Create creates a new action.
 func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {

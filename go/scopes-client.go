@@ -38,16 +38,14 @@ type DeleteScopeRequest = scopes.DeleteScopeRequest
 // Filter is a filter for a scope
 type Filter = scopes.Filter
 
-const (
-	// EntityTypeUnspecified is an unspecified entity type
-	EntityTypeUnspecified = scopes.EntityType_ENTITY_TYPE_UNSPECIFIED
+// EntityTypeUnspecified is an unspecified entity type
+const EntityTypeUnspecified = scopes.EntityType_UNSPECIFIED
 
-	// EntityTypeLogs is a logs entity type
-	EntityTypeLogs = scopes.EntityType_ENTITY_TYPE_LOGS
+// EntityTypeLogs is a logs entity type
+const EntityTypeLogs = scopes.EntityType_LOGS
 
-	// EntityTypeSpans is a metrics entity type
-	EntityTypeSpans = scopes.EntityType_ENTITY_TYPE_SPANS
-)
+// EntityTypeSpans is a metrics entity type
+const EntityTypeSpans = scopes.EntityType_SPANS
 
 // ScopesClient is a client for the scopes service
 type ScopesClient struct {

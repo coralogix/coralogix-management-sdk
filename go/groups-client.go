@@ -61,46 +61,44 @@ type AddUsersToGroup = groups.AddUsersToTeamGroupsRequest_AddUsersToTeamGroup
 // RemoveUsersFromGroup for bulk removing users from groups
 type RemoveUsersFromGroup = groups.RemoveUsersFromTeamGroupsRequest_RemoveUsersFromTeamGroup
 
-const (
-	// GetTeamGroupRpc is the name of the RPC to get a group by its ID
-	GetTeamGroupRpc = groups.TeamPermissionsMgmtService_GetTeamGroup_FullMethodName
+// GetTeamGroupRpc is the name of the RPC to get a group by its ID
+const GetTeamGroupRpc = groups.TeamPermissionsMgmtService_GetTeamGroup_FullMethodName
 
-	// GetTeamGroupsRpc is the name of the RPC to list all groups in the team
-	GetTeamGroupByNameRpc = groups.TeamPermissionsMgmtService_GetTeamGroupByName_FullMethodName
+// GetTeamGroupsRpc is the name of the RPC to list all groups in the team
+const GetTeamGroupByNameRpc = groups.TeamPermissionsMgmtService_GetTeamGroupByName_FullMethodName
 
-	// GetTeamGroupsRpc is the name of the RPC to list all groups in the team
-	GetTeamGroupsRpc = groups.TeamPermissionsMgmtService_GetTeamGroups_FullMethodName
+// GetTeamGroupsRpc is the name of the RPC to list all groups in the team
+const GetTeamGroupsRpc = groups.TeamPermissionsMgmtService_GetTeamGroups_FullMethodName
 
-	// CreateTeamGroupRpc is the name of the RPC to create a new group
-	CreateTeamGroupRpc = groups.TeamPermissionsMgmtService_CreateTeamGroup_FullMethodName
+// CreateTeamGroupRpc is the name of the RPC to create a new group
+const CreateTeamGroupRpc = groups.TeamPermissionsMgmtService_CreateTeamGroup_FullMethodName
 
-	// UpdateTeamGroupRpc is the name of the RPC to update a group
-	UpdateTeamGroupRpc = groups.TeamPermissionsMgmtService_UpdateTeamGroup_FullMethodName
+// UpdateTeamGroupRpc is the name of the RPC to update a group
+const UpdateTeamGroupRpc = groups.TeamPermissionsMgmtService_UpdateTeamGroup_FullMethodName
 
-	// DeleteTeamGroupRpc is the name of the RPC to delete a group by its ID
-	DeleteTeamGroupRpc = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
+// DeleteTeamGroupRpc is the name of the RPC to delete a group by its ID
+const DeleteTeamGroupRpc = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
 
-	// GetGroupUsersRpc is the name of the RPC to get all users in a group
-	GetGroupUsersRpc = groups.TeamPermissionsMgmtService_GetGroupUsers_FullMethodName
+// GetGroupUsersRpc is the name of the RPC to get all users in a group
+const GetGroupUsersRpc = groups.TeamPermissionsMgmtService_GetGroupUsers_FullMethodName
 
-	// AddUsersToTeamGroupRpc is the name of the RPC to add users to a group
-	AddUsersToTeamGroupRpc = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
+// AddUsersToTeamGroupRpc is the name of the RPC to add users to a group
+const AddUsersToTeamGroupRpc = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
 
-	// AddUsersToTeamGroupsRpc is the name of the RPC to remove users from a group
-	AddUsersToTeamGroupsRpc = groups.TeamPermissionsMgmtService_AddUsersToTeamGroups_FullMethodName
+// AddUsersToTeamGroupsRpc is the name of the RPC to remove users from a group
+const AddUsersToTeamGroupsRpc = groups.TeamPermissionsMgmtService_AddUsersToTeamGroups_FullMethodName
 
-	// RemoveUsersFromTeamGroupRpc is the name of the RPC to remove users from a group
-	RemoveUsersFromTeamGroupRpc = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
+// RemoveUsersFromTeamGroupRpc is the name of the RPC to remove users from a group
+const RemoveUsersFromTeamGroupRpc = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
 
-	// RemoveUsersFromTeamGroupsRpc is the name of the RPC to remove users from multiple groups
-	RemoveUsersFromTeamGroupsRpc = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroups_FullMethodName
+// RemoveUsersFromTeamGroupsRpc is the name of the RPC to remove users from multiple groups
+const RemoveUsersFromTeamGroupsRpc = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroups_FullMethodName
 
-	// SetTeamGroupScopeRpc is the name of the RPC to set the scope of a group
-	SetTeamGroupScopeRpc = groups.TeamPermissionsMgmtService_SetTeamGroupScope_FullMethodName
+// SetTeamGroupScopeRpc is the name of the RPC to set the scope of a group
+const SetTeamGroupScopeRpc = groups.TeamPermissionsMgmtService_SetTeamGroupScope_FullMethodName
 
-	// GetTeamGroupScopeRpc is the name of the RPC to get the scope of a group
-	GetTeamGroupScopeRpc = groups.TeamPermissionsMgmtService_GetTeamGroupScope_FullMethodName
-)
+// GetTeamGroupScopeRpc is the name of the RPC to get the scope of a group
+const GetTeamGroupScopeRpc = groups.TeamPermissionsMgmtService_GetTeamGroupScope_FullMethodName
 
 // GroupsClient is a client for the Groups API
 type GroupsClient struct {

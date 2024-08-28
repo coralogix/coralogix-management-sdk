@@ -64,16 +64,14 @@ type TimeframeEndTime = alertsSchedulers.Timeframe_EndTime
 // MetaLabel is a piece of metadata.
 type MetaLabel = metaLabels.MetaLabel
 
-const (
-	// ScheduleOperationScheduleOperationActivate is a ScheduleOperation that activates an alert scheduler.
-	ScheduleOperationScheduleOperationActivate = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE
+// ScheduleOperationScheduleOperationActivate is a ScheduleOperation that activates an alert scheduler.
+const ScheduleOperationScheduleOperationActivate = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE
 
-	// ScheduleOperationScheduleOperationUnspecified is an unspecified ScheduleOperation.
-	ScheduleOperationScheduleOperationUnspecified = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_UNSPECIFIED
+// ScheduleOperationScheduleOperationUnspecified is an unspecified ScheduleOperation.
+const ScheduleOperationScheduleOperationUnspecified = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_UNSPECIFIED
 
-	// ScheduleOperationScheduleOperationMute is a ScheduleOperation that mutes an alert scheduler.
-	ScheduleOperationScheduleOperationMute = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_MUTE
-)
+// ScheduleOperationScheduleOperationMute is a ScheduleOperation that mutes an alert scheduler.
+const ScheduleOperationScheduleOperationMute = alertsSchedulers.ScheduleOperation_SCHEDULE_OPERATION_MUTE
 
 // AlertsSchedulersClient is a client for the Coralogix Alerts API.
 type AlertsSchedulersClient struct {

@@ -62,16 +62,17 @@ type OwnerTeamID = apikeys.Owner_TeamId
 // OwnerOrganisationID is an owner organisation ID.
 type OwnerOrganisationID = apikeys.Owner_OrganisationId
 
-const (
-	// GetAPIKeyRpc is the method name for Get.
-	GetAPIKeyRpc = apikeys.ApiKeysService_GetApiKey_FullMethodName
-	// CreateAPIKeyRpc is the method name for Create.
-	CreateAPIKeyRpc = apikeys.ApiKeysService_CreateApiKey_FullMethodName
-	// DeleteAPIKeyRpc is the method name for Delete.
-	DeleteAPIKeyRpc = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
-	// UpdateAPIKeyRpc is the method name for Update.
-	UpdateAPIKeyRpc = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
-)
+// GetAPIKeyRpc is the method name for Get.
+const GetAPIKeyRpc = apikeys.ApiKeysService_GetApiKey_FullMethodName
+
+// CreateAPIKeyRpc is the method name for Create.
+const CreateAPIKeyRpc = apikeys.ApiKeysService_CreateApiKey_FullMethodName
+
+// DeleteAPIKeyRpc is the method name for Delete.
+const DeleteAPIKeyRpc = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
+
+// UpdateAPIKeyRpc is the method name for Update.
+const UpdateAPIKeyRpc = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
 
 // Create creates a new API key.
 func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
