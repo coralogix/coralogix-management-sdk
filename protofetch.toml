@@ -38,7 +38,7 @@ revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = "v0.290"
+revision = "v0.291"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -95,7 +95,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = 'v0.0.47'
+revision = "v0.0.48"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/metrics-configurator'
