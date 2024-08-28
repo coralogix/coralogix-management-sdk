@@ -27,8 +27,8 @@ commit_hash = "0d9733fd0052f743cdb14e62a6e4ae179676ea41"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.47"
-commit_hash = "cc77ca53fca1caa1adbad307ecea3451a83bd4ed"
+revision = "v0.0.48"
+commit_hash = "15a7c3601174d0a09e60ff0866a48e1358746154"
 
 [[dependencies]]
 name = "cx-api-dashboards"
@@ -45,8 +45,8 @@ commit_hash = "c069cec772ff75dd6c1583be9f95f40f8eb94d57"
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.290"
-commit_hash = "0f02b640911885f82e7e5e1741195ac1ffb49565"
+revision = "v0.291"
+commit_hash = "07df24dc6adabcb96453270ad51cac7644ca4e2f"
 
 [[dependencies]]
 name = "cx-api-enrichment"

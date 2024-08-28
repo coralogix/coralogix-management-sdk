@@ -20,6 +20,7 @@ message Object {
   reserved 12;
   reserved 13;
   bool columns_limit_reached = 14;
+  EventTimeRange event_time_range = 15;
 }
 
 message ObjectCreated {
@@ -50,4 +51,9 @@ message Labels {
 message KeyVal {
   string key = 1;
   string value = 2;
+}
+
+message EventTimeRange {
+  int64 max_timestamp = 1;
+  int64 min_timestamp = 2;
 }
