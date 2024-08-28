@@ -167,22 +167,55 @@ type DeleteAlertDefRequest = alerts.DeleteAlertDefRequest
 // AlertDefProperties is the properties of an alert.
 type AlertDefProperties = alerts.AlertDefProperties
 
+// AlertDefPropertiesLogsMoreThan is a property of an alert.
 type AlertDefPropertiesLogsMoreThan = alerts.AlertDefProperties_LogsMoreThan
+
+// AlertDefPropertiesLogsLessThan is a property of an alert.
 type AlertDefPropertiesLogsLessThan = alerts.AlertDefProperties_LogsLessThan
+
+// AlertDefPropertiesLogsMoreThanUsual is a property of an alert.
 type AlertDefPropertiesLogsMoreThanUsual = alerts.AlertDefProperties_LogsMoreThanUsual
+
+// AlertDefPropertiesLogsNewValue is a property of an alert.
 type AlertDefPropertiesLogsNewValue = alerts.AlertDefProperties_LogsNewValue
+
+// AlertDefPropertiesLogsRatioLessThan is a property of an alert.
 type AlertDefPropertiesLogsRatioLessThan = alerts.AlertDefProperties_LogsRatioLessThan
+
+// AlertDefPropertiesLogsRatioMoreThan is a property of an alert.
 type AlertDefPropertiesLogsRatioMoreThan = alerts.AlertDefProperties_LogsRatioMoreThan
+
+// AlertDefPropertiesLogsTimeRelativeLessThan is a property of an alert.
 type AlertDefPropertiesLogsTimeRelativeLessThan = alerts.AlertDefProperties_LogsTimeRelativeLessThan
+
+// AlertDefPropertiesLogsTimeRelativeMoreThan is a property of an alert.
 type AlertDefPropertiesLogsTimeRelativeMoreThan = alerts.AlertDefProperties_LogsTimeRelativeMoreThan
+
+// AlertDefPropertiesLogsUniqueCount is a property of an alert.
 type AlertDefPropertiesLogsUniqueCount = alerts.AlertDefProperties_LogsUniqueCount
+
+// AlertDefPropertiesMetricLessThan is a property of an alert.
 type AlertDefPropertiesMetricLessThan = alerts.AlertDefProperties_MetricLessThan
+
+// AlertDefPropertiesMetricLessThanOrEquals is a property of an alert.
 type AlertDefPropertiesMetricLessThanOrEquals = alerts.AlertDefProperties_MetricLessThanOrEquals
+
+// AlertDefPropertiesMetricMoreThan is a property of an alert.
 type AlertDefPropertiesMetricMoreThan = alerts.AlertDefProperties_MetricMoreThan
+
+// AlertDefPropertiesMetricMoreThanOrEquals is a property of an alert.
 type AlertDefPropertiesMetricMoreThanOrEquals = alerts.AlertDefProperties_MetricMoreThanOrEquals
+
+// AlertDefPropertiesMetricLessThanUsual is a property of an alert.
 type AlertDefPropertiesMetricLessThanUsual = alerts.AlertDefProperties_MetricLessThanUsual
+
+// AlertDefPropertiesMetricMoreThanUsual is a property of an alert.
 type AlertDefPropertiesMetricMoreThanUsual = alerts.AlertDefProperties_MetricMoreThanUsual
+
+// AlertDefPropertiesTracingImmediate is a property of an alert.
 type AlertDefPropertiesTracingImmediate = alerts.AlertDefProperties_TracingImmediate
+
+// AlertDefPropertiesTracingMoreThan is a property of an alert.
 type AlertDefPropertiesTracingMoreThan = alerts.AlertDefProperties_TracingMoreThan
 
 // AlertTimeOfDay is a clock setting for an alert.
