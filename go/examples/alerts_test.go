@@ -19,6 +19,8 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
+	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -65,9 +67,9 @@ func TestAlerts(t *testing.T) {
 			},
 			Schedule: &cxsdk.AlertDefScheduleActiveOn{
 				ActiveOn: &cxsdk.AlertsActivitySchedule{
-					DayOfWeek: []cxsdk.AlertDayOfWeek{
-						cxsdk.AlertDayOfWeekWednesday,
-						cxsdk.AlertDayOfWeekThursday,
+					DayOfWeek: []cxsdk.AlertsDayOfWeek{
+						cxsdk.AlertsDayOfWeekWednesday,
+						cxsdk.AlertsDayOfWeekThursday,
 					},
 					StartTime: &cxsdk.AlertTimeOfDay{
 						Hours:   8,
@@ -79,27 +81,15 @@ func TestAlerts(t *testing.T) {
 					},
 				},
 			},
-			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
-				LogsThreshold: &cxsdk.LogsThresholdType{
-					Rules: []*cxsdk.LogsThresholdRule{
-						{Condition: &cxsdk.LogsThresholdCondition{
-							Threshold: wrapperspb.Double(10.0),
-							TimeWindow: &cxsdk.LogsTimeWindow{
-								Type: &cxsdk.LogsTimeWindowSpecificValue{
-									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
-								},
-							},
-							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
-						},
-						},
-					},
-					LogsFilter: &cxsdk.LogsFilter{
-						FilterType: &cxsdk.LogsFilterSimpleFilter{
-							SimpleFilter: &cxsdk.SimpleFilter{
-								LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
-								LabelFilters: &cxsdk.LabelFilters{
-									ApplicationName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
+			TypeDefinition: &cxsdk.AlertDefPropertiesLogsMoreThan{
+				LogsMoreThan: &standard.LogsMoreThanTypeDefinition{
+					LogsFilter: &alert_def_type_definition.LogsFilter{
+						FilterType: &alert_def_type_definition.LogsFilter_LuceneFilter{
+							LuceneFilter: &alert_def_type_definition.LuceneFilter{
+								LuceneQuery: &wrapperspb.StringValue{Value: "remote_addr_enriched:/.*/"},
+								LabelFilters: &alert_def_type_definition.LabelFilters{
+									ApplicationName: []*alert_def_type_definition.LabelFilterType{
+										{Value: &wrapperspb.StringValue{Value: "nginx"}, Operation: *alert_def_type_definition.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_INCLUDES.Enum()},
 									},
 									SubsystemName: []*cxsdk.LabelFilterType{
 										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
