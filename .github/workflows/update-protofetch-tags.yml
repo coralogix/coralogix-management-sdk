@@ -1,8 +1,8 @@
 name: "[Protofetch] Check Tags"
 
-permissions:
-  pull-requests: write
-  contents: write
+# permissions:
+#   pull-requests: write
+#   contents: write
 
 on:
   workflow_dispatch:
@@ -26,6 +26,6 @@ jobs:
           cargo run -- -r ../.. -o ${{ github.repository }} -s
         working-directory: tools/release-checker
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           RUST_LOG: debug
