@@ -19,8 +19,6 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -46,7 +44,10 @@ func TestAlerts(t *testing.T) {
 			IncidentsSettings: nil,
 			PhantomMode:       &wrapperspb.BoolValue{Value: false},
 			NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-				GroupByFields: []*wrapperspb.StringValue{},
+				GroupByFields: []*wrapperspb.StringValue{
+					{Value: "coralogix.metadata.sdkId"},
+					{Value: "EventType"},
+				},
 				Targets: &cxsdk.AlertDefNotificationGroupSimple{
 					Simple: &cxsdk.AlertDefTargetSimple{
 						Integrations: []*cxsdk.AlertDefIntegrationType{
@@ -67,9 +68,9 @@ func TestAlerts(t *testing.T) {
 			},
 			Schedule: &cxsdk.AlertDefScheduleActiveOn{
 				ActiveOn: &cxsdk.AlertsActivitySchedule{
-					DayOfWeek: []cxsdk.AlertsDayOfWeek{
-						cxsdk.AlertsDayOfWeekWednesday,
-						cxsdk.AlertsDayOfWeekThursday,
+					DayOfWeek: []cxsdk.AlertDayOfWeek{
+						cxsdk.AlertDayOfWeekWednesday,
+						cxsdk.AlertDayOfWeekThursday,
 					},
 					StartTime: &cxsdk.AlertTimeOfDay{
 						Hours:   8,
@@ -82,17 +83,17 @@ func TestAlerts(t *testing.T) {
 				},
 			},
 			TypeDefinition: &cxsdk.AlertDefPropertiesLogsMoreThan{
-				LogsMoreThan: &standard.LogsMoreThanTypeDefinition{
-					LogsFilter: &alert_def_type_definition.LogsFilter{
-						FilterType: &alert_def_type_definition.LogsFilter_LuceneFilter{
-							LuceneFilter: &alert_def_type_definition.LuceneFilter{
+				LogsMoreThan: &cxsdk.LogsMoreThanTypeDefinition{
+					LogsFilter: &cxsdk.LogsFilter{
+						FilterType: &cxsdk.LogsFilterLuceneFilter{
+							LuceneFilter: &cxsdk.LuceneFilter{
 								LuceneQuery: &wrapperspb.StringValue{Value: "remote_addr_enriched:/.*/"},
-								LabelFilters: &alert_def_type_definition.LabelFilters{
-									ApplicationName: []*alert_def_type_definition.LabelFilterType{
-										{Value: &wrapperspb.StringValue{Value: "nginx"}, Operation: *alert_def_type_definition.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_INCLUDES.Enum()},
+								LabelFilters: &cxsdk.LabelFilters{
+									ApplicationName: []*cxsdk.LabelFilterType{
+										{Value: &wrapperspb.StringValue{Value: "nginx"}, Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
 									},
 									SubsystemName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
+										{Value: &wrapperspb.StringValue{Value: "subsystem-name"}, Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
 									},
 									Severities: []cxsdk.LogSeverity{
 										*cxsdk.LogSeverityWarning.Enum(),
@@ -102,6 +103,14 @@ func TestAlerts(t *testing.T) {
 							},
 						},
 					},
+					Threshold: &wrapperspb.UInt32Value{Value: 5},
+					TimeWindow: &cxsdk.LogsTimeWindow{
+						Type: &cxsdk.LogsTimeWindow_LogsTimeWindowSpecificValue{
+							LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30,
+						},
+					},
+					EvaluationWindow:          cxsdk.EvaluationWindow_EVALUATION_WINDOW_ROLLING_OR_UNSPECIFIED,
+					NotificationPayloadFilter: []*wrapperspb.StringValue{},
 				},
 			},
 			GroupBy: []*wrapperspb.StringValue{
