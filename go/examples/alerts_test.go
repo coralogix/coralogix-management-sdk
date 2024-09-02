@@ -35,11 +35,50 @@ func TestAlerts(t *testing.T) {
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: &cxsdk.AlertDefProperties{
-			Name:              &wrapperspb.StringValue{Value: "Standard alert example"},
-			Description:       &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
-			Enabled:           &wrapperspb.BoolValue{Value: true},
-			Priority:          cxsdk.AlertDefPriorityP1,
-			AlertDefType:      cxsdk.AlertDefTypeLogsMoreThan,
+			Name:        &wrapperspb.StringValue{Value: "Standard alert example"},
+			Description: &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
+			Enabled:     &wrapperspb.BoolValue{Value: true},
+			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
+				LogsThreshold: &cxsdk.LogsThresholdType{
+					Rules: []*cxsdk.LogsThresholdRule{
+						{Condition: &cxsdk.LogsThresholdCondition{
+							Threshold: wrapperspb.Double(10.0),
+							TimeWindow: &cxsdk.LogsTimeWindow{
+								Type: &cxsdk.LogsTimeWindowSpecificValue{
+									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
+								},
+							},
+							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
+						},
+						},
+					},
+
+					LogsFilter: &cxsdk.LogsFilter{
+						FilterType: &cxsdk.LogsFilterSimpleFilter{
+							SimpleFilter: &cxsdk.SimpleFilter{
+								LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
+								LabelFilters: &cxsdk.LabelFilters{
+									ApplicationName: []*cxsdk.LabelFilterType{
+										{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
+									},
+									SubsystemName: []*cxsdk.LabelFilterType{
+										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
+									},
+									Severities: []cxsdk.LogSeverity{
+										*cxsdk.LogSeverityWarning.Enum(),
+										*cxsdk.LogSeverityError.Enum(),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			Priority: cxsdk.AlertDefPriorityP1,
+			GroupBy: []*wrapperspb.StringValue{
+				{Value: "coralogix.metadata.sdkId"},
+				{Value: "EventType"},
+			},
 			IncidentsSettings: nil,
 			NotificationGroup: &cxsdk.AlertDefNotificationGroup{
 				GroupByFields: []*wrapperspb.StringValue{
@@ -80,39 +119,12 @@ func TestAlerts(t *testing.T) {
 					},
 				},
 			},
-			TypeDefinition: &cxsdk.AlertDefPropertiesLogsMoreThan{
-				LogsMoreThan: &cxsdk.LogsMoreThanTypeDefinition{
-					LogsFilter: &cxsdk.LogsFilter{
-						FilterType: &cxsdk.LogsFilterLuceneFilter{
-							LuceneFilter: &cxsdk.LuceneFilter{
-								LuceneQuery: &wrapperspb.StringValue{Value: "remote_addr_enriched:/.*/"},
-								LabelFilters: &cxsdk.LabelFilters{
-									ApplicationName: []*cxsdk.LabelFilterType{
-										{Value: &wrapperspb.StringValue{Value: "nginx"}, Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
-									},
-									SubsystemName: []*cxsdk.LabelFilterType{
-										{Value: &wrapperspb.StringValue{Value: "subsystem-name"}, Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
-									},
-									Severities: []cxsdk.LogSeverity{
-										*cxsdk.LogSeverityWarning.Enum(),
-										*cxsdk.LogSeverityError.Enum(),
-									},
-								},
-							},
-						},
-					},
-					Threshold: &wrapperspb.UInt32Value{Value: 5},
-					TimeWindow: &cxsdk.LogsTimeWindow{
-						Type: &cxsdk.LogsTimeWindowSpecificValue{
-							LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue30Minutes,
-						},
-					},
-					EvaluationWindow:          cxsdk.EvaluationWindowRollingOrUnspecified,
-					NotificationPayloadFilter: []*wrapperspb.StringValue{},
-				},
-			},
 		},
 	})
+
+	if err != nil {
+		t.Errorf("Error creating alert: %v", err)
+	}
 	assert.Nil(t, err)
 
 	retrievedAlert, err := c.Get(context.Background(), &cxsdk.GetAlertDefRequest{

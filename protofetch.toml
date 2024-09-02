@@ -7,7 +7,7 @@ revision = 'v0.16.0'
 
 [alerts-api-protobuf-v3]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = 'v0.4.0'
+revision = 'v0.4.1'
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
