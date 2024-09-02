@@ -18,7 +18,207 @@ import (
 	"context"
 
 	alerts "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
+	typedefs "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
+	ratio "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/ratio"
+
+	metric "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/metric"
+	newValue "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/new_value"
+	standard "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
+	timerelative "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/time_relative"
+	tracing "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/tracing"
 )
+
+// AlertDefNotificationGroup represents a notification group.
+type AlertDefNotificationGroup = alerts.AlertDefNotificationGroup
+
+// AlertDefNotificationGroupSimple represents a simple notification group.
+type AlertDefNotificationGroupSimple = alerts.AlertDefNotificationGroup_Simple
+
+// AlertDefNotificationGroupAdvanced represents an advanced notification group.
+type AlertDefNotificationGroupAdvanced = alerts.AlertDefNotificationGroup_Advanced
+
+// AlertDefTargetSimple represents a simple target.
+type AlertDefTargetSimple = alerts.AlertDefTargetSimple
+
+// AlertDefAdvancedTargetSettings represents a simple target.
+type AlertDefAdvancedTargetSettings = alerts.AlertDefAdvancedTargetSettings
+
+// AlertDefIntegrationType represents an integration type.
+type AlertDefIntegrationType = alerts.IntegrationType
+
+// AlertDefIntegrationTypeIntegrationID represents an integration of type integration ID.
+type AlertDefIntegrationTypeIntegrationID = alerts.IntegrationType_IntegrationId
+
+// AlertDefIntegrationTypeRecipients represents an integration of type recipients.
+type AlertDefIntegrationTypeRecipients = alerts.IntegrationType_Recipients
+
+// AlertDefRecipients represents the recipients of a notification.
+type AlertDefRecipients = alerts.Recipients
+
+// AlertDefAdvancedTargets represents a set of advanced targets.
+type AlertDefAdvancedTargets = alerts.AlertDefAdvancedTargets
+
+// AlertDefAdvancedTargetSettingsMinutes represents the minute settings of an advanced target.
+type AlertDefAdvancedTargetSettingsMinutes = alerts.AlertDefAdvancedTargetSettings_Minutes
+
+// AlertDefScheduleActiveOn represents the active on schedule of an alert.
+type AlertDefScheduleActiveOn = alerts.AlertDefProperties_ActiveOn
+
+// AlertDefActivitySchedule is a schedule for an alert.
+type AlertDefActivitySchedule = alerts.ActivitySchedule
+
+// CreateAlertDefRequest is a request to create an alert.
+type CreateAlertDefRequest = alerts.CreateAlertDefRequest
+
+// CreateAlertDefRequest is a request to create an alert.
+type GetAlertDefRequest = alerts.GetAlertDefRequest
+
+// CreateAlertDefRequest is a request to create an alert.
+type ReplaceAlertDefRequest = alerts.ReplaceAlertDefRequest
+
+// CreateAlertDefRequest is a request to create an alert.
+type DeleteAlertDefRequest = alerts.DeleteAlertDefRequest
+
+// AlertDefProperties is the properties of an alert.
+type AlertDefProperties = alerts.AlertDefProperties
+
+// AlertDefPropertiesLogsMoreThan is a property of an alert.
+type AlertDefPropertiesLogsMoreThan = alerts.AlertDefProperties_LogsMoreThan
+
+// AlertDefPropertiesLogsLessThan is a property of an alert.
+type AlertDefPropertiesLogsLessThan = alerts.AlertDefProperties_LogsLessThan
+
+// AlertDefPropertiesLogsMoreThanUsual is a property of an alert.
+type AlertDefPropertiesLogsMoreThanUsual = alerts.AlertDefProperties_LogsMoreThanUsual
+
+// AlertDefPropertiesLogsNewValue is a property of an alert.
+type AlertDefPropertiesLogsNewValue = alerts.AlertDefProperties_LogsNewValue
+
+// AlertDefPropertiesLogsRatioLessThan is a property of an alert.
+type AlertDefPropertiesLogsRatioLessThan = alerts.AlertDefProperties_LogsRatioLessThan
+
+// AlertDefPropertiesLogsRatioMoreThan is a property of an alert.
+type AlertDefPropertiesLogsRatioMoreThan = alerts.AlertDefProperties_LogsRatioMoreThan
+
+// AlertDefPropertiesLogsTimeRelativeLessThan is a property of an alert.
+type AlertDefPropertiesLogsTimeRelativeLessThan = alerts.AlertDefProperties_LogsTimeRelativeLessThan
+
+// AlertDefPropertiesLogsTimeRelativeMoreThan is a property of an alert.
+type AlertDefPropertiesLogsTimeRelativeMoreThan = alerts.AlertDefProperties_LogsTimeRelativeMoreThan
+
+// AlertDefPropertiesLogsUniqueCount is a property of an alert.
+type AlertDefPropertiesLogsUniqueCount = alerts.AlertDefProperties_LogsUniqueCount
+
+// AlertDefPropertiesMetricLessThan is a property of an alert.
+type AlertDefPropertiesMetricLessThan = alerts.AlertDefProperties_MetricLessThan
+
+// AlertDefPropertiesMetricLessThanOrEquals is a property of an alert.
+type AlertDefPropertiesMetricLessThanOrEquals = alerts.AlertDefProperties_MetricLessThanOrEquals
+
+// AlertDefPropertiesMetricMoreThan is a property of an alert.
+type AlertDefPropertiesMetricMoreThan = alerts.AlertDefProperties_MetricMoreThan
+
+// AlertDefPropertiesMetricMoreThanOrEquals is a property of an alert.
+type AlertDefPropertiesMetricMoreThanOrEquals = alerts.AlertDefProperties_MetricMoreThanOrEquals
+
+// AlertDefPropertiesMetricLessThanUsual is a property of an alert.
+type AlertDefPropertiesMetricLessThanUsual = alerts.AlertDefProperties_MetricLessThanUsual
+
+// AlertDefPropertiesMetricMoreThanUsual is a property of an alert.
+type AlertDefPropertiesMetricMoreThanUsual = alerts.AlertDefProperties_MetricMoreThanUsual
+
+// AlertDefPropertiesTracingImmediate is a property of an alert.
+type AlertDefPropertiesTracingImmediate = alerts.AlertDefProperties_TracingImmediate
+
+// AlertDefPropertiesTracingMoreThan is a property of an alert.
+type AlertDefPropertiesTracingMoreThan = alerts.AlertDefProperties_TracingMoreThan
+
+// AlertTimeOfDay is a clock setting for an alert.
+type AlertTimeOfDay = alerts.TimeOfDay
+
+// SetActiveRequest is a request to set the active status of an alert.
+type SetActiveRequest = alerts.SetActiveRequest
+
+// ListAlertDefsRequest is a request to list alerts.
+type ListAlertDefsRequest = alerts.ListAlertDefsRequest
+
+// AlertsActivitySchedule is an activity schedule for Alerts.
+type AlertsActivitySchedule = alerts.ActivitySchedule
+
+// AlertDayOfWeek is a day enum used in Alerts.
+type AlertDayOfWeek = alerts.DayOfWeek
+
+// LogsFilter is a filter
+type LogsFilter = typedefs.LogsFilter
+
+// LogsFilterLuceneFilter is a filter type
+type LogsFilterLuceneFilter = typedefs.LogsFilter_LuceneFilter
+
+// LabelFilterType is a filter type
+type LabelFilterType = typedefs.LabelFilterType
+
+// LuceneFilter is a filter
+type LuceneFilter = typedefs.LuceneFilter
+
+// LabelFilters is a filter
+type LabelFilters = typedefs.LabelFilters
+
+// LogSeverity is a filter
+type LogSeverity = typedefs.LogSeverity
+
+// AlertDefIncidentSettings is the incident settings of an alert.
+type AlertDefIncidentSettings = alerts.AlertDefIncidentSettings
+
+// LogsMoreThanType is a logs filter type
+type LogsMoreThanTypeDefinition = standard.LogsMoreThanTypeDefinition
+
+// AlertDefIncidentSettingsMinutes is the incident settings of an alert.
+type AlertDefIncidentSettingsMinutes = alerts.AlertDefIncidentSettings_Minutes
+
+// LogsTimeWindowValue is a time window setting for logs.
+type LogsTimeWindowValue = standard.LogsTimeWindowValue
+
+// AlertNotifyOn is a trigger type.
+type AlertNotifyOn = alerts.NotifyOn
+
+// AlertEvaluationWindow is an evaluation window type for alerts.
+type AlertEvaluationWindow = standard.EvaluationWindow
+
+// LogFilterOperationType is a filter operation for logs.
+type LogFilterOperationType = typedefs.LogFilterOperationType
+
+// AlertDefPropertiesLogsImmediate is a property of an alert.
+type AlertDefPropertiesLogsImmediate = alerts.AlertDefProperties_LogsImmediate
+
+// AlertDefPropertiesLogsImmediateTypeDefinition is a type definition for logs immediate.
+type AlertDefPropertiesLogsImmediateTypeDefinition = standard.LogsImmediateTypeDefinition
+
+// LogsTimeRelativeComparedTo is a relative time setting for logs.
+type LogsTimeRelativeComparedTo = timerelative.LogsTimeRelativeComparedTo
+
+// MetricTimeWindowValue is a time window setting for metrics.
+type MetricTimeWindowValue = metric.MetricTimeWindowValue
+
+// TracingTimeWindowValue is a time window setting for tracing.
+type TracingTimeWindowValue = tracing.TracingTimeWindowValue
+
+// TracingFilterOperationType is an operation type setting for tracing.
+type TracingFilterOperationType = tracing.TracingFilterOperationType
+
+// AutoRetireTimeframe is a type of timeframe.
+type AutoRetireTimeframe = typedefs.AutoRetireTimeframe
+
+// LogsRatioTimeWindowValue is a time window setting for logs.
+type LogsRatioTimeWindowValue = ratio.LogsRatioTimeWindowValue
+
+// AlertDefPriority is the alert priority.
+type AlertDefPriority = alerts.AlertDefPriority
+
+// LogsRatioGroupBy is a group by setting for logs.
+type LogsRatioGroupByFor = ratio.LogsRatioGroupByFor
+
+// LogsNewValueTimeWindowValue is a time window setting for logs.
+type LogsNewValueTimeWindowValue = newValue.LogsNewValueTimeWindowValue
 
 // AlertDefPriorityP1 is the alert priority P1.
 const AlertDefPriorityP1 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P1
@@ -92,9 +292,6 @@ const AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_
 // AlertDefTypeTracingMoreThan is the alert type "tracing more than".
 const AlertDefTypeTracingMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_MORE_THAN
 
-// AlertDefNotificationGroup represents a notification group.
-type AlertDefNotificationGroup = alerts.AlertDefNotificationGroup
-
 // AlertDefSimpleNotificationGroup represents a simple notification group.
 type AlertDefSimpleNotificationGroup = alerts.AlertDefNotificationGroup_Simple
 
@@ -104,35 +301,15 @@ type AlertDefAdvancedNotificationGroup = alerts.AlertDefNotificationGroup_Advanc
 // AlertDefSimpleTarget represents a simple target.
 type AlertDefSimpleTarget = alerts.AlertDefTargetSimple
 
-// AlertDefIntegrationType represents an integration type.
-type AlertDefIntegrationType = alerts.IntegrationType
-
-// AlertDefIntegrationTypeIntegrationID represents an integration of type integration ID.
-type AlertDefIntegrationTypeIntegrationID = alerts.IntegrationType_IntegrationId
-
-// AlertDefIntegrationTypeRecipients represents an integration of type recipients.
-type AlertDefIntegrationTypeRecipients = alerts.IntegrationType_Recipients
-
-// AlertDefRecipients represents the recipients of a notification.
-type AlertDefRecipients = alerts.Recipients
-
-// AlertDefAdvancedTargets represents a set of advanced targets.
-type AlertDefAdvancedTargets = alerts.AlertDefAdvancedTargets
-
-// AlertDefScheduleActiveOn represents the active on schedule of an alert.
-type AlertDefScheduleActiveOn = alerts.AlertDefProperties_ActiveOn
-
 // CreateAlertRequest is a request to create an alert.
 type CreateAlertRequest = alerts.CreateAlertDefRequest
 
-// AlertDefProperties is the properties of an alert.
-type AlertDefProperties = alerts.AlertDefProperties
-
-// SetActiveRequest is a request to set the active status of an alert.
-type SetActiveRequest = alerts.SetActiveRequest
-
-// ListAlertDefsRequest is a request to list alerts.
-type ListAlertDefsRequest = alerts.ListAlertDefsRequest
+// LogsRatioGroupByFor values.
+const (
+	LogsRatioGroupByForBothOrUnspecified = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
+	LogsRatioGroupByForNumeratorOnly     = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY
+	LogsRatioGroupByForDenumeratorOnly   = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY
+)
 
 // AlertsClient is a client for the Coralogix Alerts API.
 type AlertsClient struct {
@@ -140,7 +317,7 @@ type AlertsClient struct {
 }
 
 // Create creates an alert.
-func (a AlertsClient) Create(ctx context.Context, req *alerts.CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
+func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -154,7 +331,7 @@ func (a AlertsClient) Create(ctx context.Context, req *alerts.CreateAlertDefRequ
 }
 
 // Get gets an alert.
-func (a AlertsClient) Get(ctx context.Context, req *alerts.GetAlertDefRequest) (*alerts.GetAlertDefResponse, error) {
+func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts.GetAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -168,7 +345,7 @@ func (a AlertsClient) Get(ctx context.Context, req *alerts.GetAlertDefRequest) (
 }
 
 // Replace replaces an alert.
-func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
+func (a AlertsClient) Replace(ctx context.Context, req *ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -182,7 +359,7 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 }
 
 // Delete deletes an alert.
-func (a AlertsClient) Delete(ctx context.Context, req *alerts.DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, error) {
+func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
