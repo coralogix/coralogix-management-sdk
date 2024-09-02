@@ -14,9 +14,46 @@ env:
   PROTOC_VERSION: "26.1"
 
 jobs:
-  tests:
-    name: "[Rust SDK] Format, Lint, Test"
+  tests_linux:
+    name: "[Rust SDK - Linux] Format, Lint, Test"
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: rust
+    steps:
+      - uses: actions/checkout@v2
+      - uses: arduino/setup-protoc@v3
+        with:
+          version: ${{env.PROTOC_VERSION}}
+
+      - uses: actions-rs/toolchain@v1
+        with:
+          profile: minimal
+          toolchain: nightly
+          override: true
+          components: rustfmt
+
+      - uses: taiki-e/install-action@nextest
+
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      - name: SDK tests
+        run: cargo nextest run --all
+      
+      - name: Run Examples
+        env:
+          TEAM_ID: ${{ secrets.TEAM_ID }}
+          AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
+          CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
+          CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
+          CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+        run: cargo nextest run --all
+        working-directory: rust/examples
+
+  tests_windows:
+    name: "[Rust SDK - Windows] Format, Lint, Test"
+    runs-on: windows-latest
     defaults:
       run:
         working-directory: rust

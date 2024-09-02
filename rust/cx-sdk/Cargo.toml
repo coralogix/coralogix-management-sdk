@@ -9,6 +9,7 @@ categories = { workspace = true }
 authors = { workspace = true }
 description = "Coralogix Management SDK"
 readme = "../README.md"
+metadata = { workspace = true }
 
 [dependencies]
 backoff = { workspace = true }
@@ -29,6 +30,8 @@ tokio-util = { workspace = true }
 tonic = { workspace = true, features = ["gzip", "prost", "tls", "tls-roots"] }
 tracing = { workspace = true }
 url = { workspace = true }
+uuid = { workspace = true }
+
 
 [lints.rust]
 missing_docs = "deny"

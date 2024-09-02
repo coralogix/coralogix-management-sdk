@@ -29,8 +29,9 @@ use tonic::{
 };
 
 use crate::{
-    auth::{AuthContext, AuthData},
+    auth::AuthContext,
     error::{Result, SdkError},
+    metadata::CallProperties,
     util::make_request_with_metadata,
     CoralogixRegion,
 };
@@ -58,9 +59,9 @@ impl AlertSchedulerClient {
         let channel: Channel = Endpoint::from_str(&region.grpc_endpoint())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let auth_data: AuthData = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
-            metadata_map: auth_data.to_metadata_map(),
+            metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(AlertSchedulerRuleServiceClient::new(channel)),
         })
     }

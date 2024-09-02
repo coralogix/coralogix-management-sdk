@@ -30,7 +30,7 @@ pub use cx_api::proto::com::coralogix::archive::v2::S3TargetSpec;
 
 use crate::auth::AuthContext;
 use crate::CoralogixRegion;
-use crate::{auth::AuthData, error::Result, util::make_request_with_metadata};
+use crate::{error::Result, metadata::CallProperties, util::make_request_with_metadata};
 
 /// The logs archive API client.
 /// Read more at [https://coralogix.com/docs/archive-s3-bucket-forever/]()
@@ -49,9 +49,9 @@ impl LogsArchiveClient {
         let channel: Channel = Endpoint::from_str(&region.grpc_endpoint())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let auth_data: AuthData = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
-            metadata_map: auth_data.to_metadata_map(),
+            metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(TargetServiceClient::new(channel)),
         })
     }

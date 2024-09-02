@@ -20,20 +20,24 @@ import (
 	"io"
 	"net/http"
 	"net/http/httputil"
+	"runtime"
 
+	"github.com/google/uuid"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
 // restClient for Coralogix API
 type restClient struct {
-	url    string
-	apiKey string
-	client *http.Client
+	url           string
+	apiKey        string
+	client        *http.Client
+	correlationID string
 }
 
 func newRestClient(url string, apiKey string) *restClient {
-	return &restClient{url, apiKey, &http.Client{}}
+	correlationID := uuid.New().String()
+	return &restClient{url, apiKey, &http.Client{}, correlationID}
 }
 
 // Request executes request to Coralogix API
@@ -55,6 +59,10 @@ func (c *restClient) Request(ctx context.Context, method, path, contentType stri
 	request = request.WithContext(ctx)
 	request.Header.Set("Cache-Control", "no-cache")
 	request.Header.Set("Authorization", "Bearer "+c.apiKey)
+	request.Header.Set(sdkVersionHeaderName, sdkVersion)
+	request.Header.Set(sdkLanguageHeaderName, "go")
+	request.Header.Set(sdkGoVersionHeaderName, runtime.Version())
+	request.Header.Set(sdkCorrelationIDHeaderName, c.correlationID)
 	if len(headers)%2 != 0 {
 		return "", fmt.Errorf("invalid headers, must be key-value pairs")
 	}

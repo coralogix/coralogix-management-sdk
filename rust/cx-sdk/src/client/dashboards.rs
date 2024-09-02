@@ -15,9 +15,7 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::{AuthContext, AuthData},
-    error::Result,
-    util::make_request_with_metadata,
+    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
 };
 
 pub use crate::com::coralogixapis::actions::v2::Action;
@@ -60,8 +58,8 @@ impl DashboardsClient {
         let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let teams_level_auth_data: AuthData = (&auth_context.team_level_api_key).into();
-        let user_level_auth_data: AuthData = (&auth_context.user_level_api_key).into();
+        let teams_level_auth_data: CallProperties = (&auth_context.team_level_api_key).into();
+        let user_level_auth_data: CallProperties = (&auth_context.user_level_api_key).into();
         Ok(Self {
             teams_level_metadata_map: teams_level_auth_data.to_metadata_map(),
             user_level_metadata_map: user_level_auth_data.to_metadata_map(),

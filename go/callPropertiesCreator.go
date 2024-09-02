@@ -18,8 +18,10 @@ import (
 	"context"
 	"crypto/tls"
 	"fmt"
+	"runtime"
 	"time"
 
+	"github.com/google/uuid"
 	grpc_retry "github.com/grpc-ecosystem/go-grpc-middleware/retry"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -31,6 +33,7 @@ type CallPropertiesCreator struct {
 	coraglogixRegion string
 	teamsLevelAPIKey string
 	userLevelAPIKey  string
+	correlationID    string
 	//allowRetry bool
 }
 
@@ -43,7 +46,7 @@ type CallProperties struct {
 
 // GetTeamsLevelCallProperties returns a new CallProperties object built from a team-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
 func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createAuthContext(ctx, c.teamsLevelAPIKey)
+	ctx = createContext(ctx, c.teamsLevelAPIKey, c.correlationID)
 
 	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
 	conn, err := createSecureConnection(endpoint)
@@ -58,7 +61,7 @@ func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) 
 
 // GetUserLevelCallProperties returns a new CallProperties object built from a user-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
 func (c CallPropertiesCreator) GetUserLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createAuthContext(ctx, c.userLevelAPIKey)
+	ctx = createContext(ctx, c.userLevelAPIKey, c.correlationID)
 
 	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
 	conn, err := createSecureConnection(endpoint)
@@ -83,8 +86,8 @@ func createSecureConnection(targetURL string) (*grpc.ClientConn, error) {
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 }
 
-func createAuthContext(ctx context.Context, apiKey string) context.Context {
-	md := metadata.New(map[string]string{"Authorization": fmt.Sprintf("Bearer %s", apiKey)})
+func createContext(ctx context.Context, apiKey string, corrleationID string) context.Context {
+	md := metadata.New(map[string]string{"Authorization": fmt.Sprintf("Bearer %s", apiKey), sdkVersionHeaderName: sdkVersion, sdkLanguageHeaderName: "go", sdkGoVersionHeaderName: runtime.Version(), sdkCorrelationIDHeaderName: corrleationID})
 	ctx = metadata.NewOutgoingContext(ctx, md)
 	return ctx
 }
@@ -95,5 +98,6 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 		coraglogixRegion: region,
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
+		correlationID:    uuid.New().String(),
 	}
 }
