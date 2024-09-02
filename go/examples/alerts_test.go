@@ -35,8 +35,8 @@ func TestAlerts(t *testing.T) {
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: &cxsdk.AlertDefProperties{
-			Name:        &wrapperspb.StringValue{Value: "Standard alert example"},
-			Description: &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
+			Name:        wrapperspb.String("Standard alert example"),
+			Description: wrapperspb.String("Standard alert example from terraform"),
 			Enabled:     &wrapperspb.BoolValue{Value: true},
 			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
 				LogsThreshold: &cxsdk.LogsThresholdType{

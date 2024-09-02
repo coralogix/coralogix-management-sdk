@@ -324,44 +324,11 @@ const AlertDefTypeFlow = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
 // AlertDefTypeLogsNewValue is the alert type "logs new value".
 const AlertDefTypeLogsNewValue = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
 
-// // AlertDefTypeLogsMoreThanUsual is the alert type "logs more than usual".
-// const AlertDefTypeLogsMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN_USUAL
-
-// // AlertDefTypeLogsRatioMoreThan is the alert type "logs ratio more than".
-// const AlertDefTypeLogsRatioMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_MORE_THAN
-
-// // AlertDefTypeLogsRatioLessThan is the alert type "logs ratio less than".
-// const AlertDefTypeLogsRatioLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_LESS_THAN
-
-// // AlertDefTypeLogsTimeRelativeLessThan is the alert type "logs time relative less than".
-// const AlertDefTypeLogsTimeRelativeLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_LESS_THAN
-
-// // AlertDefTypeLogsTimeRelativeMoreThan is the alert type "logs time relative more than".
-// const AlertDefTypeLogsTimeRelativeMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_MORE_THAN
-
 // AlertDefTypeLogsUniqueCount is the alert type "logs unique count".
 const AlertDefTypeLogsUniqueCount = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
 
 // AlertDefTypeLogsImmediateOrUnspecified is the alert type "logs immediate or unspecified".
 const AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-
-// // AlertDefTypeMetricMoreThan is the alert type "metric less than".
-// const AlertDefTypeMetricMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN
-
-// // AlertDefTypeMetricLessThan is the alert type "metric less than".
-// const AlertDefTypeMetricLessThan = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN
-
-// // AlertDefTypeMetricLessThanOrEquals is the alert type "metric less than or equals".
-// const AlertDefTypeMetricLessThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_OR_EQUALS
-
-// // AlertDefTypeMetricMoreThanOrEquals is the alert type "metric more than or equals".
-// const AlertDefTypeMetricMoreThanOrEquals = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_OR_EQUALS
-
-// // AlertDefTypeMetricMoreThanUsual is the alert type "metric more than usual".
-// const AlertDefTypeMetricMoreThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_MORE_THAN_USUAL
-
-// // AlertDefTypeMetricLessThanUsual is the alert type "metric less than usual".
-// const AlertDefTypeMetricLessThanUsual = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_LESS_THAN_USUAL
 
 // AlertDefTypeTracingImmediate is the alert type "tracing immediate".
 const AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
@@ -429,56 +396,30 @@ const LogFilterOperationEndsWith = alerts.LogFilterOperationType_LOG_FILTER_OPER
 // LogFilterOperationStartsWith is a filter operation for an alert.
 const LogFilterOperationStartsWith = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_STARTS_WITH
 
-// LogSeverityVerboseUnspecified is a log level for the logs triggering the alert.
-const LogSeverityVerboseUnspecified = alerts.LogSeverity_LOG_SEVERITY_VERBOSE_UNSPECIFIED
+// LogsSeverity values.
+const (
+	LogSeverityVerboseUnspecified = alerts.LogSeverity_LOG_SEVERITY_VERBOSE_UNSPECIFIED
+	LogSeverityDebug              = alerts.LogSeverity_LOG_SEVERITY_DEBUG
+	LogSeverityInfo               = alerts.LogSeverity_LOG_SEVERITY_INFO
+	LogSeverityWarning            = alerts.LogSeverity_LOG_SEVERITY_WARNING
+	LogSeverityError              = alerts.LogSeverity_LOG_SEVERITY_ERROR
+	LogSeverityCritical           = alerts.LogSeverity_LOG_SEVERITY_CRITICAL
+)
 
-// LogSeverityDebug is a log level for the logs triggering the alert.
-const LogSeverityDebug = alerts.LogSeverity_LOG_SEVERITY_DEBUG
-
-// LogSeverityInfo is a log level for the logs triggering the alert.
-const LogSeverityInfo = alerts.LogSeverity_LOG_SEVERITY_INFO
-
-// LogSeverityWarning is a log level for the logs triggering the alert.
-const LogSeverityWarning = alerts.LogSeverity_LOG_SEVERITY_WARNING
-
-// LogSeverityError is a log level for the logs triggering the alert.
-const LogSeverityError = alerts.LogSeverity_LOG_SEVERITY_ERROR
-
-// LogSeverityCritical is a log level for the logs triggering the alert.
-const LogSeverityCritical = alerts.LogSeverity_LOG_SEVERITY_CRITICAL
-
-// LogsTimeWindow5MinutesOrUnspecified is a time window setting for logs.
-const LogsTimeWindow5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-
-// LogsTimeWindow10Minutes is a time window setting for logs.
-const LogsTimeWindow10Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
-
-// LogsTimeWindow15Minutes is a time window setting for logs.
-const LogsTimeWindow15Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
-
-// LogsTimeWindow30Minutes is a time window setting for logs.
-const LogsTimeWindow30Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
-
-// LogsTimeWindow1Hour is a time window setting for logs.
-const LogsTimeWindow1Hour = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
-
-// LogsTimeWindow2Hour is a time window setting for logs.
-const LogsTimeWindow2Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
-
-// LogsTimeWindow4Hour is a time window setting for logs.
-const LogsTimeWindow4Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_4
-
-// LogsTimeWindow6Hour is a time window setting for logs.
-const LogsTimeWindow6Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_6
-
-// LogsTimeWindow12Hours is a time window setting for logs.
-const LogsTimeWindow12Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_12
-
-// LogsTimeWindow24Hours is a time window setting for logs.
-const LogsTimeWindow24Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_24
-
-// LogsTimeWindow36Hours is a time window setting for logs.
-const LogsTimeWindow36Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_36
+// LogsTimeWindow values.
+const (
+	LogsTimeWindow5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+	LogsTimeWindow10Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
+	LogsTimeWindow15Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
+	LogsTimeWindow30Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
+	LogsTimeWindow1Hour                 = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
+	LogsTimeWindow2Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
+	LogsTimeWindow4Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_4
+	LogsTimeWindow6Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_6
+	LogsTimeWindow12Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_12
+	LogsTimeWindow24Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_24
+	LogsTimeWindow36Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_36
+)
 
 // LogsTimeRelativeComparedToPreviousHourOrUnspecified is a relative time setting for logs.
 const LogsTimeRelativeComparedToPreviousHourOrUnspecified = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
@@ -498,71 +439,35 @@ const LogsTimeRelativeComparedToSameDayLastWeek = alerts.LogsTimeRelativeCompare
 // LogsTimeRelativeComparedToSameDayLastMonth is a relative time setting for logs.
 const LogsTimeRelativeComparedToSameDayLastMonth = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH
 
-// MetricTimeWindowValue1MinuteOrUnspecified is a time window setting for metrics.
-const MetricTimeWindowValue1MinuteOrUnspecified = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+// MetricTimeWindowValue values.
+const (
+	MetricTimeWindowValue1MinuteOrUnspecified = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+	MetricTimeWindowValue5Minutes             = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_5
+	MetricTimeWindowValue10Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_10
+	MetricTimeWindowValue15Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_15
+	MetricTimeWindowValue30Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_30
+	MetricTimeWindowValue1Hour                = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOUR_1
+	MetricTimeWindowValue2Hours               = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_2
+	MetricTimeWindowValue4Hours               = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_4
+	MetricTimeWindowValue6Hours               = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_6
+	MetricTimeWindowValue12Hours              = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_12
+	MetricTimeWindowValue24Hours              = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_24
+)
 
-// MetricTimeWindowValue5Minutes is a time window setting for metrics.
-const MetricTimeWindowValue5Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_5
-
-// MetricTimeWindowValue10Minutes is a time window setting for metrics.
-const MetricTimeWindowValue10Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_10
-
-// MetricTimeWindowValue15Minutes is a time window setting for metrics.
-const MetricTimeWindowValue15Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_15
-
-// MetricTimeWindowValue30Minutes is a time window setting for metrics.
-const MetricTimeWindowValue30Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_30
-
-// MetricTimeWindowValue1Hour is a time window setting for metrics.
-const MetricTimeWindowValue1Hour = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOUR_1
-
-// MetricTimeWindowValue2Hours is a time window setting for metrics.
-const MetricTimeWindowValue2Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_2
-
-// MetricTimeWindowValue4Hours is a time window setting for metrics.
-const MetricTimeWindowValue4Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_4
-
-// MetricTimeWindowValue6Hours is a time window setting for metrics.
-const MetricTimeWindowValue6Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_6
-
-// MetricTimeWindowValue12Hours is a time window setting for metrics.
-const MetricTimeWindowValue12Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_12
-
-// MetricTimeWindowValue24Hours is a time window setting for metrics.
-const MetricTimeWindowValue24Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_24
-
-// TracingTimeWindowValue5MinutesOrUnspecified is a time window setting for tracing.
-const TracingTimeWindowValue5MinutesOrUnspecified = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
-
-// TracingTimeWindowValue10Minutes is a time window setting for tracing.
-const TracingTimeWindowValue10Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_10
-
-// TracingTimeWindowValue15Minutes is a time window setting for tracing.
-const TracingTimeWindowValue15Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_15
-
-// TracingTimeWindowValue30Minutes is a time window setting for tracing.
-const TracingTimeWindowValue30Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_30
-
-// TracingTimeWindowValue1Hour is a time window setting for tracing.
-const TracingTimeWindowValue1Hour = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOUR_1
-
-// TracingTimeWindowValue2Hours is a time window setting for tracing.
-const TracingTimeWindowValue2Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_2
-
-// TracingTimeWindowValue4Hours is a time window setting for tracing.
-const TracingTimeWindowValue4Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_4
-
-// TracingTimeWindowValue6Hours is a time window setting for tracing.
-const TracingTimeWindowValue6Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_6
-
-// TracingTimeWindowValue12Hours is a time window setting for tracing.
-const TracingTimeWindowValue12Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_12
-
-// TracingTimeWindowValue24Hours is a time window setting for tracing.
-const TracingTimeWindowValue24Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_24
-
-// TracingTimeWindowValue36Hours is a time window setting for tracing.
-const TracingTimeWindowValue36Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_36
+// TracingTimeWindowValue values.
+const (
+	TracingTimeWindowValue5MinutesOrUnspecified = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+	TracingTimeWindowValue10Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_10
+	TracingTimeWindowValue15Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_15
+	TracingTimeWindowValue30Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_30
+	TracingTimeWindowValue1Hour                 = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOUR_1
+	TracingTimeWindowValue2Hours                = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_2
+	TracingTimeWindowValue4Hours                = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_4
+	TracingTimeWindowValue6Hours                = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_6
+	TracingTimeWindowValue12Hours               = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_12
+	TracingTimeWindowValue24Hours               = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_24
+	TracingTimeWindowValue36Hours               = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_36
+)
 
 // TracingFilterOperationTypeIsOrUnspecified is a filter operation for tracing.
 const TracingFilterOperationTypeIsOrUnspecified = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
