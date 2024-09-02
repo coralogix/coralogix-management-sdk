@@ -38,7 +38,7 @@ revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = "v0.291"
+revision = "v0.292"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'

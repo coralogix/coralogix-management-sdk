@@ -45,8 +45,8 @@ commit_hash = "c069cec772ff75dd6c1583be9f95f40f8eb94d57"
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.291"
-commit_hash = "07df24dc6adabcb96453270ad51cac7644ca4e2f"
+revision = "v0.292"
+commit_hash = "834e28f9a1e1ae22b0ee2d9f316c38e0b084140c"
 
 [[dependencies]]
 name = "cx-api-enrichment"
