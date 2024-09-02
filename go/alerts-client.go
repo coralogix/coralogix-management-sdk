@@ -18,14 +18,13 @@ import (
 	"context"
 
 	alerts "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
-	typedefs "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
-	ratio "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/ratio"
-
-	metric "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/metric"
-	newValue "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/new_value"
-	standard "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
-	timerelative "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/time_relative"
-	tracing "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/tracing"
+	// typedefs "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition"
+	// ratio "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/ratio"
+	// flow "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/flow"
+	// metric "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/metric"
+	// standard "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/standard"
+	// timerelative "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/time_relative"
+	// tracing "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3/alert_def_type_definition/tracing"
 )
 
 // AlertDefNotificationGroup represents a notification group.
@@ -82,56 +81,56 @@ type DeleteAlertDefRequest = alerts.DeleteAlertDefRequest
 // AlertDefProperties is the properties of an alert.
 type AlertDefProperties = alerts.AlertDefProperties
 
-// AlertDefPropertiesLogsMoreThan is a property of an alert.
-type AlertDefPropertiesLogsMoreThan = alerts.AlertDefProperties_LogsMoreThan
+// // AlertDefPropertiesLogsMoreThan is a property of an alert.
+// type AlertDefPropertiesLogsMoreThan = alerts.AlertDefProperties_LogsMoreThan
 
-// AlertDefPropertiesLogsLessThan is a property of an alert.
-type AlertDefPropertiesLogsLessThan = alerts.AlertDefProperties_LogsLessThan
+// // AlertDefPropertiesLogsLessThan is a property of an alert.
+// type AlertDefPropertiesLogsLessThan = alerts.AlertDefProperties_LogsLessThan
 
-// AlertDefPropertiesLogsMoreThanUsual is a property of an alert.
-type AlertDefPropertiesLogsMoreThanUsual = alerts.AlertDefProperties_LogsMoreThanUsual
+// // AlertDefPropertiesLogsMoreThanUsual is a property of an alert.
+// type AlertDefPropertiesLogsMoreThanUsual = alerts.AlertDefProperties_LogsMoreThanUsual
+
+// // AlertDefPropertiesLogsRatioLessThan is a property of an alert.
+// type AlertDefPropertiesLogsRatioLessThan = alerts.AlertDefProperties_LogsRatioLessThan
+
+// // AlertDefPropertiesLogsRatioMoreThan is a property of an alert.
+// type AlertDefPropertiesLogsRatioMoreThan = alerts.AlertDefProperties_LogsRatioMoreThan
+
+// // AlertDefPropertiesLogsTimeRelativeLessThan is a property of an alert.
+// type AlertDefPropertiesLogsTimeRelativeLessThan = alerts.AlertDefProperties_LogsTimeRelativeLessThan
+
+// // AlertDefPropertiesLogsTimeRelativeMoreThan is a property of an alert.
+// type AlertDefPropertiesLogsTimeRelativeMoreThan = alerts.AlertDefProperties_LogsTimeRelativeMoreThan
+
+// // AlertDefPropertiesMetricLessThan is a property of an alert.
+// type AlertDefPropertiesMetricLessThan = alerts.AlertDefProperties_MetricLessThan
+
+// // AlertDefPropertiesMetricLessThanOrEquals is a property of an alert.
+// type AlertDefPropertiesMetricLessThanOrEquals = alerts.AlertDefProperties_MetricLessThanOrEquals
+
+// // AlertDefPropertiesMetricMoreThan is a property of an alert.
+// type AlertDefPropertiesMetricMoreThan = alerts.AlertDefProperties_MetricMoreThan
+
+// // AlertDefPropertiesMetricMoreThanOrEquals is a property of an alert.
+// type AlertDefPropertiesMetricMoreThanOrEquals = alerts.AlertDefProperties_MetricMoreThanOrEquals
+
+// // AlertDefPropertiesMetricLessThanUsual is a property of an alert.
+// type AlertDefPropertiesMetricLessThanUsual = alerts.AlertDefProperties_MetricLessThanUsual
+
+// // AlertDefPropertiesMetricMoreThanUsual is a property of an alert.
+// type AlertDefPropertiesMetricMoreThanUsual = alerts.AlertDefProperties_MetricMoreThanUsual
+
+// // AlertDefPropertiesTracingMoreThan is a property of an alert.
+// type AlertDefPropertiesTracingMoreThan = alerts.AlertDefProperties_TracingMoreThan
 
 // AlertDefPropertiesLogsNewValue is a property of an alert.
 type AlertDefPropertiesLogsNewValue = alerts.AlertDefProperties_LogsNewValue
 
-// AlertDefPropertiesLogsRatioLessThan is a property of an alert.
-type AlertDefPropertiesLogsRatioLessThan = alerts.AlertDefProperties_LogsRatioLessThan
-
-// AlertDefPropertiesLogsRatioMoreThan is a property of an alert.
-type AlertDefPropertiesLogsRatioMoreThan = alerts.AlertDefProperties_LogsRatioMoreThan
-
-// AlertDefPropertiesLogsTimeRelativeLessThan is a property of an alert.
-type AlertDefPropertiesLogsTimeRelativeLessThan = alerts.AlertDefProperties_LogsTimeRelativeLessThan
-
-// AlertDefPropertiesLogsTimeRelativeMoreThan is a property of an alert.
-type AlertDefPropertiesLogsTimeRelativeMoreThan = alerts.AlertDefProperties_LogsTimeRelativeMoreThan
-
 // AlertDefPropertiesLogsUniqueCount is a property of an alert.
 type AlertDefPropertiesLogsUniqueCount = alerts.AlertDefProperties_LogsUniqueCount
 
-// AlertDefPropertiesMetricLessThan is a property of an alert.
-type AlertDefPropertiesMetricLessThan = alerts.AlertDefProperties_MetricLessThan
-
-// AlertDefPropertiesMetricLessThanOrEquals is a property of an alert.
-type AlertDefPropertiesMetricLessThanOrEquals = alerts.AlertDefProperties_MetricLessThanOrEquals
-
-// AlertDefPropertiesMetricMoreThan is a property of an alert.
-type AlertDefPropertiesMetricMoreThan = alerts.AlertDefProperties_MetricMoreThan
-
-// AlertDefPropertiesMetricMoreThanOrEquals is a property of an alert.
-type AlertDefPropertiesMetricMoreThanOrEquals = alerts.AlertDefProperties_MetricMoreThanOrEquals
-
-// AlertDefPropertiesMetricLessThanUsual is a property of an alert.
-type AlertDefPropertiesMetricLessThanUsual = alerts.AlertDefProperties_MetricLessThanUsual
-
-// AlertDefPropertiesMetricMoreThanUsual is a property of an alert.
-type AlertDefPropertiesMetricMoreThanUsual = alerts.AlertDefProperties_MetricMoreThanUsual
-
 // AlertDefPropertiesTracingImmediate is a property of an alert.
 type AlertDefPropertiesTracingImmediate = alerts.AlertDefProperties_TracingImmediate
-
-// AlertDefPropertiesTracingMoreThan is a property of an alert.
-type AlertDefPropertiesTracingMoreThan = alerts.AlertDefProperties_TracingMoreThan
 
 // AlertTimeOfDay is a clock setting for an alert.
 type AlertTimeOfDay = alerts.TimeOfDay
@@ -149,76 +148,98 @@ type AlertsActivitySchedule = alerts.ActivitySchedule
 type AlertDayOfWeek = alerts.DayOfWeek
 
 // LogsFilter is a filter
-type LogsFilter = typedefs.LogsFilter
+type LogsFilter = alerts.LogsFilter
 
 // LogsFilterLuceneFilter is a filter type
-type LogsFilterLuceneFilter = typedefs.LogsFilter_LuceneFilter
+type LogsFilterLuceneFilter = alerts.LogsFilter_LuceneFilter
 
 // LabelFilterType is a filter type
-type LabelFilterType = typedefs.LabelFilterType
+type LabelFilterType = alerts.LabelFilterType
 
 // LuceneFilter is a filter
-type LuceneFilter = typedefs.LuceneFilter
+type LuceneFilter = alerts.LuceneFilter
 
 // LabelFilters is a filter
-type LabelFilters = typedefs.LabelFilters
+type LabelFilters = alerts.LabelFilters
 
 // LogSeverity is a filter
-type LogSeverity = typedefs.LogSeverity
+type LogSeverity = alerts.LogSeverity
 
 // AlertDefIncidentSettings is the incident settings of an alert.
 type AlertDefIncidentSettings = alerts.AlertDefIncidentSettings
 
 // LogsMoreThanType is a logs filter type
-type LogsMoreThanTypeDefinition = standard.LogsMoreThanTypeDefinition
+type LogsMoreThanTypeDefinition = alerts.LogsMoreThanTypeDefinition
 
 // AlertDefIncidentSettingsMinutes is the incident settings of an alert.
 type AlertDefIncidentSettingsMinutes = alerts.AlertDefIncidentSettings_Minutes
 
 // LogsTimeWindowValue is a time window setting for logs.
-type LogsTimeWindowValue = standard.LogsTimeWindowValue
+type LogsTimeWindowValue = alerts.LogsTimeWindowValue
 
 // AlertNotifyOn is a trigger type.
 type AlertNotifyOn = alerts.NotifyOn
 
 // AlertEvaluationWindow is an evaluation window type for alerts.
-type AlertEvaluationWindow = standard.EvaluationWindow
+type AlertEvaluationWindow = alerts.EvaluationWindow
 
 // LogFilterOperationType is a filter operation for logs.
-type LogFilterOperationType = typedefs.LogFilterOperationType
+type LogFilterOperationType = alerts.LogFilterOperationType
 
 // AlertDefPropertiesLogsImmediate is a property of an alert.
 type AlertDefPropertiesLogsImmediate = alerts.AlertDefProperties_LogsImmediate
 
-// AlertDefPropertiesLogsImmediateTypeDefinition is a type definition for logs immediate.
-type AlertDefPropertiesLogsImmediateTypeDefinition = standard.LogsImmediateTypeDefinition
-
 // LogsTimeRelativeComparedTo is a relative time setting for logs.
-type LogsTimeRelativeComparedTo = timerelative.LogsTimeRelativeComparedTo
+type LogsTimeRelativeComparedTo = alerts.LogsTimeRelativeComparedTo
 
 // MetricTimeWindowValue is a time window setting for metrics.
-type MetricTimeWindowValue = metric.MetricTimeWindowValue
+type MetricTimeWindowValue = alerts.MetricTimeWindowValue
 
 // TracingTimeWindowValue is a time window setting for tracing.
-type TracingTimeWindowValue = tracing.TracingTimeWindowValue
+type TracingTimeWindowValue = alerts.TracingTimeWindowValue
 
 // TracingFilterOperationType is an operation type setting for tracing.
-type TracingFilterOperationType = tracing.TracingFilterOperationType
+type TracingFilterOperationType = alerts.TracingFilterOperationType
 
 // AutoRetireTimeframe is a type of timeframe.
-type AutoRetireTimeframe = typedefs.AutoRetireTimeframe
+type AutoRetireTimeframe = alerts.AutoRetireTimeframe
 
 // LogsRatioTimeWindowValue is a time window setting for logs.
-type LogsRatioTimeWindowValue = ratio.LogsRatioTimeWindowValue
+type LogsRatioTimeWindowValue = alerts.LogsRatioTimeWindowValue
+
+// LogsTimeWindow is a time window setting for logs.
+type LogsTimeWindow = alerts.LogsTimeWindow
+
+// LogsTimeWindowSpecificValue is a specific value for the time window setting for logs.
+type LogsTimeWindowSpecificValue = alerts.LogsTimeWindow_LogsTimeWindowSpecificValue
+
+// LogsTimeWindowValue are values for the time window setting for logs.
+const (
+	LogsTimeWindowValue5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+	LogsTimeWindowValue10Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
+	LogsTimeWindowValue20Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_20
+	LogsTimeWindowValue15Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
+	LogsTimeWindowValue30Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
+	LogsTimeWindowValue1Hour                 = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
+	LogsTimeWindowValue2Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
+	LogsTimeWindowValue4Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_4
+	LogsTimeWindowValue6Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_6
+	LogsTimeWindowValue12Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_12
+	LogsTimeWindowValue24Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_24
+	LogsTimeWindowValue36Hours               = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_36
+)
+
+// EvaluationWindow is a type of evaluation window.
+type EvaluationWindow = alerts.EvaluationWindow
+
+// EvaluationWindow values.
+const (
+	EvaluationWindowRollingOrUnspecified = alerts.EvaluationWindow_EVALUATION_WINDOW_ROLLING_OR_UNSPECIFIED
+	EvaluationWindowDynamic              = alerts.EvaluationWindow_EVALUATION_WINDOW_DYNAMIC
+)
 
 // AlertDefPriority is the alert priority.
 type AlertDefPriority = alerts.AlertDefPriority
-
-// LogsRatioGroupBy is a group by setting for logs.
-type LogsRatioGroupByFor = ratio.LogsRatioGroupByFor
-
-// LogsNewValueTimeWindowValue is a time window setting for logs.
-type LogsNewValueTimeWindowValue = newValue.LogsNewValueTimeWindowValue
 
 // AlertDefPriorityP1 is the alert priority P1.
 const AlertDefPriorityP1 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P1
@@ -234,6 +255,12 @@ const AlertDefPriorityP4 = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P4
 
 // AlertDefPriorityP5OrUnspecified is the alert priority P5 or unspecified.
 const AlertDefPriorityP5OrUnspecified = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
+
+// AlertEvaluationWindowRollingOrUnspecified is a type of evaluation window.
+const AlertEvaluationWindowRollingOrUnspecified = alerts.EvaluationWindow_EVALUATION_WINDOW_ROLLING_OR_UNSPECIFIED
+
+// AlertEvaluationWindowDynamic is a type of evaluation window.
+const AlertEvaluationWindowDynamic = alerts.EvaluationWindow_EVALUATION_WINDOW_DYNAMIC
 
 // AlertDefTypeLogsMoreThan is the alert type "logs more than".
 const AlertDefTypeLogsMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_MORE_THAN
@@ -292,23 +319,260 @@ const AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_
 // AlertDefTypeTracingMoreThan is the alert type "tracing more than".
 const AlertDefTypeTracingMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_MORE_THAN
 
-// AlertDefSimpleNotificationGroup represents a simple notification group.
-type AlertDefSimpleNotificationGroup = alerts.AlertDefNotificationGroup_Simple
+// AlertDayOfWeekUnspecified is unspecified.
+const AlertDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
 
-// AlertDefAdvancedNotificationGroup represents an advanced notification group.
-type AlertDefAdvancedNotificationGroup = alerts.AlertDefNotificationGroup_Advanced
+// AlertDayOfWeekMonday is Monday.
+const AlertDayOfWeekMonday = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
 
-// AlertDefSimpleTarget represents a simple target.
-type AlertDefSimpleTarget = alerts.AlertDefTargetSimple
+// AlertDayOfWeekTuesday is Tuesday.
+const AlertDayOfWeekTuesday = alerts.DayOfWeek_DAY_OF_WEEK_TUESDAY
 
-// CreateAlertRequest is a request to create an alert.
-type CreateAlertRequest = alerts.CreateAlertDefRequest
+// AlertDayOfWeekWednesday is Wednesday.
+const AlertDayOfWeekWednesday = alerts.DayOfWeek_DAY_OF_WEEK_WEDNESDAY
+
+// AlertDayOfWeekThursday is Thursday.
+const AlertDayOfWeekThursday = alerts.DayOfWeek_DAY_OF_WEEK_THURSDAY
+
+// AlertDayOfWeekFriday is Friday.
+const AlertDayOfWeekFriday = alerts.DayOfWeek_DAY_OF_WEEK_FRIDAY
+
+// AlertDayOfWeekSaturday is Saturday.
+const AlertDayOfWeekSaturday = alerts.DayOfWeek_DAY_OF_WEEK_SATURDAY
+
+// AlertDayOfWeekSunday is Sunday.
+const AlertDayOfWeekSunday = alerts.DayOfWeek_DAY_OF_WEEK_SUNDAY
+
+// CreateAlertDefRpc is the name of the respective RPC.
+const CreateAlertDefRpc = alerts.AlertDefsService_CreateAlertDef_FullMethodName
+
+// DeleteAlertDefRpc is the name of the respective RPC.
+const DeleteAlertDefRpc = alerts.AlertDefsService_DeleteAlertDef_FullMethodName
+
+// GetAlertDefRpc is the name of the respective RPC.
+const GetAlertDefRpc = alerts.AlertDefsService_GetAlertDef_FullMethodName
+
+// ListAlertDefsRpc is the name of the respective RPC.
+const ListAlertDefsRpc = alerts.AlertDefsService_ListAlertDefs_FullMethodName
+
+// ReplaceAlertDefRpc is the name of the respective RPC.
+const ReplaceAlertDefRpc = alerts.AlertDefsService_ReplaceAlertDef_FullMethodName
+
+// SetAlertDefActiveRpc is the name of the respective RPC.
+const SetAlertDefActiveRpc = alerts.AlertDefsService_SetActive_FullMethodName
+
+// AlertNotifyOnTriggeredOnlyUnspecified is a notification setting for an alert.
+const AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+
+// AlertNotifyOnTriggeredAndResolved is a notification setting for an alert.
+const AlertNotifyOnTriggeredAndResolved = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
+
+// LogFilterOperationIsOrUnspecified is a filter operation for an alert.
+const LogFilterOperationIsOrUnspecified = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+
+// LogFilterOperationIncludes is a filter operation for an alert.
+const LogFilterOperationIncludes = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_INCLUDES
+
+// LogFilterOperationEndsWith is a filter operation for an alert.
+const LogFilterOperationEndsWith = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_ENDS_WITH
+
+// LogFilterOperationStartsWith is a filter operation for an alert.
+const LogFilterOperationStartsWith = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_STARTS_WITH
+
+// LogSeverityVerboseUnspecified is a log level for the logs triggering the alert.
+const LogSeverityVerboseUnspecified = alerts.LogSeverity_LOG_SEVERITY_VERBOSE_UNSPECIFIED
+
+// LogSeverityDebug is a log level for the logs triggering the alert.
+const LogSeverityDebug = alerts.LogSeverity_LOG_SEVERITY_DEBUG
+
+// LogSeverityInfo is a log level for the logs triggering the alert.
+const LogSeverityInfo = alerts.LogSeverity_LOG_SEVERITY_INFO
+
+// LogSeverityWarning is a log level for the logs triggering the alert.
+const LogSeverityWarning = alerts.LogSeverity_LOG_SEVERITY_WARNING
+
+// LogSeverityError is a log level for the logs triggering the alert.
+const LogSeverityError = alerts.LogSeverity_LOG_SEVERITY_ERROR
+
+// LogSeverityCritical is a log level for the logs triggering the alert.
+const LogSeverityCritical = alerts.LogSeverity_LOG_SEVERITY_CRITICAL
+
+// LogsTimeWindow5MinutesOrUnspecified is a time window setting for logs.
+const LogsTimeWindow5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+
+// LogsTimeWindow10Minutes is a time window setting for logs.
+const LogsTimeWindow10Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
+
+// LogsTimeWindow15Minutes is a time window setting for logs.
+const LogsTimeWindow15Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
+
+// LogsTimeWindow30Minutes is a time window setting for logs.
+const LogsTimeWindow30Minutes = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
+
+// LogsTimeWindow1Hour is a time window setting for logs.
+const LogsTimeWindow1Hour = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
+
+// LogsTimeWindow2Hour is a time window setting for logs.
+const LogsTimeWindow2Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
+
+// LogsTimeWindow4Hour is a time window setting for logs.
+const LogsTimeWindow4Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_4
+
+// LogsTimeWindow6Hour is a time window setting for logs.
+const LogsTimeWindow6Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_6
+
+// LogsTimeWindow12Hours is a time window setting for logs.
+const LogsTimeWindow12Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_12
+
+// LogsTimeWindow24Hours is a time window setting for logs.
+const LogsTimeWindow24Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_24
+
+// LogsTimeWindow36Hours is a time window setting for logs.
+const LogsTimeWindow36Hours = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_36
+
+// LogsTimeRelativeComparedToPreviousHourOrUnspecified is a relative time setting for logs.
+const LogsTimeRelativeComparedToPreviousHourOrUnspecified = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
+
+// LogsTimeRelativeComparedToSameHourYesterday is a relative time setting for logs.
+const LogsTimeRelativeComparedToSameHourYesterday = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY
+
+// LogsTimeRelativeComparedToSameHourLastWeek is a relative time setting for logs.
+const LogsTimeRelativeComparedToSameHourLastWeek = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK
+
+// LogsTimeRelativeComparedToYesterday is a relative time setting for logs.
+const LogsTimeRelativeComparedToYesterday = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY
+
+// LogsTimeRelativeComparedToSameDayLastWeek is a relative time setting for logs.
+const LogsTimeRelativeComparedToSameDayLastWeek = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK
+
+// LogsTimeRelativeComparedToSameDayLastMonth is a relative time setting for logs.
+const LogsTimeRelativeComparedToSameDayLastMonth = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH
+
+// MetricTimeWindowValue1MinuteOrUnspecified is a time window setting for metrics.
+const MetricTimeWindowValue1MinuteOrUnspecified = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+
+// MetricTimeWindowValue5Minutes is a time window setting for metrics.
+const MetricTimeWindowValue5Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_5
+
+// MetricTimeWindowValue10Minutes is a time window setting for metrics.
+const MetricTimeWindowValue10Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_10
+
+// MetricTimeWindowValue15Minutes is a time window setting for metrics.
+const MetricTimeWindowValue15Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_15
+
+// MetricTimeWindowValue30Minutes is a time window setting for metrics.
+const MetricTimeWindowValue30Minutes = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_30
+
+// MetricTimeWindowValue1Hour is a time window setting for metrics.
+const MetricTimeWindowValue1Hour = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOUR_1
+
+// MetricTimeWindowValue2Hours is a time window setting for metrics.
+const MetricTimeWindowValue2Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_2
+
+// MetricTimeWindowValue4Hours is a time window setting for metrics.
+const MetricTimeWindowValue4Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_4
+
+// MetricTimeWindowValue6Hours is a time window setting for metrics.
+const MetricTimeWindowValue6Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_6
+
+// MetricTimeWindowValue12Hours is a time window setting for metrics.
+const MetricTimeWindowValue12Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_12
+
+// MetricTimeWindowValue24Hours is a time window setting for metrics.
+const MetricTimeWindowValue24Hours = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_24
+
+// TracingTimeWindowValue5MinutesOrUnspecified is a time window setting for tracing.
+const TracingTimeWindowValue5MinutesOrUnspecified = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+
+// TracingTimeWindowValue10Minutes is a time window setting for tracing.
+const TracingTimeWindowValue10Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_10
+
+// TracingTimeWindowValue15Minutes is a time window setting for tracing.
+const TracingTimeWindowValue15Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_15
+
+// TracingTimeWindowValue30Minutes is a time window setting for tracing.
+const TracingTimeWindowValue30Minutes = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_30
+
+// TracingTimeWindowValue1Hour is a time window setting for tracing.
+const TracingTimeWindowValue1Hour = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOUR_1
+
+// TracingTimeWindowValue2Hours is a time window setting for tracing.
+const TracingTimeWindowValue2Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_2
+
+// TracingTimeWindowValue4Hours is a time window setting for tracing.
+const TracingTimeWindowValue4Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_4
+
+// TracingTimeWindowValue6Hours is a time window setting for tracing.
+const TracingTimeWindowValue6Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_6
+
+// TracingTimeWindowValue12Hours is a time window setting for tracing.
+const TracingTimeWindowValue12Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_12
+
+// TracingTimeWindowValue24Hours is a time window setting for tracing.
+const TracingTimeWindowValue24Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_24
+
+// TracingTimeWindowValue36Hours is a time window setting for tracing.
+const TracingTimeWindowValue36Hours = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_36
+
+// TracingFilterOperationTypeIsOrUnspecified is a filter operation for tracing.
+const TracingFilterOperationTypeIsOrUnspecified = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+
+// TracingFilterOperationTypeIncludes is a filter operation for tracing.
+const TracingFilterOperationTypeIncludes = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_INCLUDES
+
+// TracingFilterOperationTypeEndsWith is a filter operation for tracing.
+const TracingFilterOperationTypeEndsWith = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_ENDS_WITH
+
+// TracingFilterOperationTypeStartsWith is a filter operation for tracing.
+const TracingFilterOperationTypeStartsWith = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_STARTS_WITH
+
+// TimeframeTypeUnspecified is a type of timeframe.
+const TimeframeTypeUnspecified = alerts.TimeframeType_TIMEFRAME_TYPE_UNSPECIFIED
+
+// TimeframeTypeUpTo is a type of timeframe.
+const TimeframeTypeUpTo = alerts.TimeframeType_TIMEFRAME_TYPE_UP_TO
+
+// NextOpAndOrUnspecified is a declaration for the next operation (AND).
+const NextOpAndOrUnspecified = alerts.NextOp_NEXT_OP_AND_OR_UNSPECIFIED
+
+// NextOpOr is a declaration for the next operation (OR).
+const NextOpOr = alerts.NextOp_NEXT_OP_OR
+
+// AutoRetireTimeframe values.
+const (
+	AutoRetireTimeframeNeverOrUnspecified = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+	AutoRetireTimeframe5Minutes           = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_MINUTES_5
+	AutoRetireTimeframe10Minutes          = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_MINUTES_10
+	AutoRetireTimeframe1Hour              = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_HOUR_1
+	AutoRetireTimeframe2Hours             = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_HOURS_2
+	AutoRetireTimeframe6Hours             = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_HOURS_6
+	AutoRetireTimeframe12Hours            = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_HOURS_12
+	AutoRetireTimeframe24Hours            = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_HOURS_24
+)
+
+// LogsRatioTimeWindow values.
+const (
+	LogsRatioTimeWindowValue5MinutesOrUnspecified = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
+	LogsRatioTimeWindowValue10Minutes             = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_10
+	LogsRatioTimeWindowValue15Minutes             = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_15
+	LogsRatioTimeWindowValue30Minutes             = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_30
+	LogsRatioTimeWindowValue1Hour                 = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOUR_1
+	LogsRatioTimeWindowValue2Hours                = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_2
+	LogsRatioTimeWindowValue4Hours                = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_4
+	LogsRatioTimeWindowValue6Hours                = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_6
+	LogsRatioTimeWindowValue12Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12
+	LogsRatioTimeWindowValue24Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24
+	LogsRatioTimeWindowValue36Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36
+)
+
+// LogsRatioGroupByFor is a group by setting for logs.
+type LogsRatioGroupByFor = alerts.LogsRatioGroupByFor
 
 // LogsRatioGroupByFor values.
 const (
-	LogsRatioGroupByForBothOrUnspecified = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-	LogsRatioGroupByForNumeratorOnly     = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY
-	LogsRatioGroupByForDenumeratorOnly   = ratio.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY
+	LogsRatioGroupByForBothOrUnspecified = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
+	LogsRatioGroupByForNumeratorOnly     = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY
+	LogsRatioGroupByForDenumeratorOnly   = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY
 )
 
 // AlertsClient is a client for the Coralogix Alerts API.
@@ -345,7 +609,7 @@ func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts
 }
 
 // Replace replaces an alert.
-func (a AlertsClient) Replace(ctx context.Context, req *ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
+func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -373,7 +637,7 @@ func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*
 }
 
 // Set sets the active status of an alert.
-func (a AlertsClient) Set(ctx context.Context, req *alerts.SetActiveRequest) (*alerts.SetActiveResponse, error) {
+func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.SetActiveResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -387,7 +651,7 @@ func (a AlertsClient) Set(ctx context.Context, req *alerts.SetActiveRequest) (*a
 }
 
 // List lists the alerts.
-func (a AlertsClient) List(ctx context.Context, req *alerts.ListAlertDefsRequest) (*alerts.ListAlertDefsResponse, error) {
+func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*alerts.ListAlertDefsResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
