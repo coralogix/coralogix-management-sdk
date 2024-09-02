@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto";
+
+message LogsThresholdType  {
+    LogsFilter logs_filter = 1;
+    UndetectedValuesManagement undetected_values_management = 2;
+    repeated LogsThresholdRule rules = 3;
+    repeated google.protobuf.StringValue notification_payload_filter = 4;
+}
+message LogsThresholdRule {
+    LogsThresholdCondition condition = 1;
+}
+
+message LogsThresholdCondition {
+    google.protobuf.DoubleValue threshold = 1;
+    LogsTimeWindow time_window = 2;
+    LogsThresholdConditionType condition_type = 3;
+}

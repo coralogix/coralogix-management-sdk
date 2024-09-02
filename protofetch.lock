@@ -3,8 +3,8 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf-v3"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "c0b8998a221ea143f21f3021f33274efa9312840"
-commit_hash = "c0b8998a221ea143f21f3021f33274efa9312840"
+revision = "v0.4.0"
+commit_hash = "832258e5ac558bbff43525cc5b049cbc65e4ec5e"
 
 [[dependencies]]
 name = "cx-api-actions"

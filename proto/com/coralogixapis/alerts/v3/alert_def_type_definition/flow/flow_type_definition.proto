@@ -4,7 +4,7 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 
-message FlowTypeDefinition  {
+message FlowType  {
     repeated FlowStages stages = 1 ;
     google.protobuf.BoolValue enforce_suppression = 2;
 }
