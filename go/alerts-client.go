@@ -20,6 +20,9 @@ import (
 	alerts "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/alerts/v3"
 )
 
+// AlertDef is an alert definition.
+type AlertDef = alerts.AlertDef
+
 // AlertDefPropertiesActiveOn is a type to set when an alert is active.
 type AlertDefPropertiesActiveOn = alerts.AlertDefProperties_ActiveOn
 
@@ -176,11 +179,9 @@ type LogsTimeWindowValue = alerts.LogsTimeWindowValue
 // AlertNotifyOn is a trigger type.
 type AlertNotifyOn = alerts.NotifyOn
 
-// LogsRatioTimeWindow is a time window setting for logs in ratio alerts.
-type LogsRatioTimeWindow = alerts.LogsRatioTimeWindow
-
 // LogsRatioCondition is a condition type for logs in ratio alerts.
 type LogsRatioCondition = alerts.LogsRatioCondition
+
 // LogsRatioRules is a rule type for logs in ratio alerts.
 type LogsRatioRules = alerts.LogsRatioRules
 
@@ -198,7 +199,7 @@ type MetricTimeWindowValue = alerts.MetricTimeWindowValue
 
 // TracingTimeWindowValue is a time window setting for tracing.
 type TracingTimeWindowValue = alerts.TracingTimeWindowValue
-1
+
 // TracingFilterOperationType is an operation type setting for tracing.
 type TracingFilterOperationType = alerts.TracingFilterOperationType
 
@@ -232,6 +233,15 @@ type MetricThresholdType = alerts.MetricThresholdType
 // TracingThresholdType is a type of alert type
 type TracingThresholdType = alerts.TracingThresholdType
 
+// LogsUnusualRule is a rule for ususual alert types.
+type LogsUnusualRule = alerts.LogsUnusualRule
+
+// LogsUnusualCondition is a condition type for ususual alert types.
+type LogsUnusualCondition = alerts.LogsUnusualCondition
+
+// LogsUnusualConditionType is a value for unusual alert type conditions.
+const LogsUnusualConditionTypeMoreThanOrUnspecified = alerts.LogsUnusualConditionType_LOGS_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+
 // LogsUnusualType is a type of alert type
 type LogsUnusualType = alerts.LogsUnusualType
 
@@ -246,21 +256,19 @@ type LogsUniqueCountType = alerts.LogsUniqueCountType
 
 // AlertDefType is a type of alert trigger.
 const (
-	AlertDefTypeLogsImmediateOrUnspecified = AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-	AlertDefTypeLogsThreshold = AlertDefType_ALERT_DEF_TYPE_LOGS_THRESHOLD
-	AlertDefTypeLogsUnusual = AlertDefType_ALERT_DEF_TYPE_LOGS_UNUSUAL
-	AlertDefTypeLogsRatioThreshold = AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD
-	AlertDefTypeLogsNewValue = AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
-	AlertDefTypeLogsUniqueCount = AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
-	AlertDefTypeLogsTimeRelativeThreshold = AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD
-	AlertDefTypeMetricThreshold = AlertDefType_ALERT_DEF_TYPE_METRIC_THRESHOLD
-	AlertDefTypeMetricUnusual = AlertDefType_ALERT_DEF_TYPE_METRIC_UNUSUAL
-	AlertDefTypeTracingImmediate = AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
-	AlertDefTypeTracingThreshold = AlertDefType_ALERT_DEF_TYPE_TRACING_THRESHOLD
-	AlertDefTypeFlow = alertdeftype_alert_def_type_flow
+	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
+	AlertDefTypeLogsThreshold              = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_THRESHOLD
+	AlertDefTypeLogsUnusual                = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNUSUAL
+	AlertDefTypeLogsRatioThreshold         = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD
+	AlertDefTypeLogsNewValue               = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
+	AlertDefTypeLogsUniqueCount            = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
+	AlertDefTypeLogsTimeRelativeThreshold  = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD
+	AlertDefTypeMetricThreshold            = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_THRESHOLD
+	AlertDefTypeMetricUnusual              = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_UNUSUAL
+	AlertDefTypeTracingImmediate           = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
+	AlertDefTypeTracingThreshold           = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_THRESHOLD
+	AlertDefTypeFlow                       = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
 )
-
-
 
 // LogsTimeWindowValue are values for the time window setting for logs.
 const (
@@ -290,29 +298,14 @@ const (
 	AlertDefPriorityP5OrUnspecified = alerts.AlertDefPriority_ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED
 )
 
+// LogsRatioConditionType is a type of condition for logs in ratio alerts.
+type LogsRatioConditionType = alerts.LogsRatioConditionType
+
 // LogsRatioConditionType values.
 const (
 	LogsRatioConditionTypeMoreThanOrUnspecified = alerts.LogsRatioConditionType_LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-	LogsRatioConditionTypeLessThan = alerts.LogsRatioConditionType_LOGS_RATIO_CONDITION_TYPE_LESS_THAN
+	LogsRatioConditionTypeLessThan              = alerts.LogsRatioConditionType_LOGS_RATIO_CONDITION_TYPE_LESS_THAN
 )
-
-// AlertDefTypeFlow is the alert type "flow".
-const AlertDefTypeFlow = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
-
-// AlertDefTypeLogsNewValue is the alert type "logs new value".
-const AlertDefTypeLogsNewValue = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
-
-// AlertDefTypeLogsUniqueCount is the alert type "logs unique count".
-const AlertDefTypeLogsUniqueCount = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
-
-// AlertDefTypeLogsImmediateOrUnspecified is the alert type "logs immediate or unspecified".
-const AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
-
-// AlertDefTypeTracingImmediate is the alert type "tracing immediate".
-const AlertDefTypeTracingImmediate = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
-
-// // AlertDefTypeTracingMoreThan is the alert type "tracing more than".
-// const AlertDefTypeTracingMoreThan = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_MORE_THAN
 
 // AlertDayOfWeekUnspecified is unspecified.
 const AlertDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
@@ -384,6 +377,15 @@ const (
 	LogSeverityCritical           = alerts.LogSeverity_LOG_SEVERITY_CRITICAL
 )
 
+// MetricUnusualConditionType is a type of condition for unusual metrics.
+type MetricUnusualConditionType = alerts.MetricUnusualConditionType
+
+// MetricUnusualConditionType values.
+const (
+	MetricUnusualConditionTypeMoreThanOrUnspecified = alerts.MetricUnusualConditionType_METRIC_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+	MetricUnusualConditionTypeLessThan              = alerts.MetricUnusualConditionType_METRIC_UNUSUAL_CONDITION_TYPE_LESS_THAN_USUAL
+)
+
 // LogsNewValueTimeWindowValue is a time window setting for new logs.
 type LogsNewValueTimeWindowValue = alerts.LogsNewValueTimeWindowValue
 
@@ -447,23 +449,15 @@ const (
 	LogsUniqueValueTimeWindowValue24Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24
 )
 
-// LogsTimeRelativeComparedToPreviousHourOrUnspecified is a relative time setting for logs.
-const LogsTimeRelativeComparedToPreviousHourOrUnspecified = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
-
-// LogsTimeRelativeComparedToSameHourYesterday is a relative time setting for logs.
-const LogsTimeRelativeComparedToSameHourYesterday = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY
-
-// LogsTimeRelativeComparedToSameHourLastWeek is a relative time setting for logs.
-const LogsTimeRelativeComparedToSameHourLastWeek = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK
-
-// LogsTimeRelativeComparedToYesterday is a relative time setting for logs.
-const LogsTimeRelativeComparedToYesterday = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY
-
-// LogsTimeRelativeComparedToSameDayLastWeek is a relative time setting for logs.
-const LogsTimeRelativeComparedToSameDayLastWeek = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK
-
-// LogsTimeRelativeComparedToSameDayLastMonth is a relative time setting for logs.
-const LogsTimeRelativeComparedToSameDayLastMonth = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH
+// LogsTimeRelativeComparedTo is a time setting for time relative alerts.
+const (
+	LogsTimeRelativeComparedToPreviousHourOrUnspecified = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_PREVIOUS_HOUR_OR_UNSPECIFIED
+	LogsTimeRelativeComparedToSameHourYesterday         = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_YESTERDAY
+	LogsTimeRelativeComparedToSameHourLastWeek          = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_HOUR_LAST_WEEK
+	LogsTimeRelativeComparedToYesterday                 = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY
+	LogsTimeRelativeComparedToSameDayLastWeek           = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_WEEK
+	LogsTimeRelativeComparedToSameDayLastMonth          = alerts.LogsTimeRelativeComparedTo_LOGS_TIME_RELATIVE_COMPARED_TO_SAME_DAY_LAST_MONTH
+)
 
 // MetricTimeWindowValue values.
 const (
@@ -495,17 +489,13 @@ const (
 	TracingTimeWindowValue36Hours               = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_36
 )
 
-// TracingFilterOperationTypeIsOrUnspecified is a filter operation for tracing.
-const TracingFilterOperationTypeIsOrUnspecified = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-
-// TracingFilterOperationTypeIncludes is a filter operation for tracing.
-const TracingFilterOperationTypeIncludes = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_INCLUDES
-
-// TracingFilterOperationTypeEndsWith is a filter operation for tracing.
-const TracingFilterOperationTypeEndsWith = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_ENDS_WITH
-
-// TracingFilterOperationTypeStartsWith is a filter operation for tracing.
-const TracingFilterOperationTypeStartsWith = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_STARTS_WITH
+// TracingFilterOperationType values.
+const (
+	TracingFilterOperationTypeIsOrUnspecified = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+	TracingFilterOperationTypeIncludes        = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_INCLUDES
+	TracingFilterOperationTypeEndsWith        = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_ENDS_WITH
+	TracingFilterOperationTypeStartsWith      = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_STARTS_WITH
+)
 
 // TimeframeType is a type for timeframes.
 type TimeframeType = alerts.TimeframeType
@@ -541,6 +531,14 @@ const (
 	LogsRatioTimeWindowValue12Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_12
 	LogsRatioTimeWindowValue24Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24
 	LogsRatioTimeWindowValue36Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36
+)
+
+// MetricThresholdConditionType values.
+const (
+	MetricThresholdConditionTypeMoreThanOrUnspecified = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+	MetricThresholdConditionTypeLessThan              = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN
+	MetricThresholdConditionTypeMoreThanOrEquals      = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS
+	MetricThresholdConditionTypeLessThanOrEquals      = alerts.MetricThresholdConditionType_METRIC_THRESHOLD_CONDITION_TYPE_LESS_THAN_OR_EQUALS
 )
 
 // LogsRatioGroupByFor is a group by setting for logs.
