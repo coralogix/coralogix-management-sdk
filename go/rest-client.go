@@ -59,7 +59,7 @@ func (c *restClient) Request(ctx context.Context, method, path, contentType stri
 	request = request.WithContext(ctx)
 	request.Header.Set("Cache-Control", "no-cache")
 	request.Header.Set("Authorization", "Bearer "+c.apiKey)
-	request.Header.Set(sdkVersionHeaderName, sdkVersion)
+	request.Header.Set(sdkVersionHeaderName, vanillaSdkVersion)
 	request.Header.Set(sdkLanguageHeaderName, "go")
 	request.Header.Set(sdkGoVersionHeaderName, runtime.Version())
 	request.Header.Set(sdkCorrelationIDHeaderName, c.correlationID)
