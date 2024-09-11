@@ -46,7 +46,7 @@ mod tests {
                 enabled: Some(true),
                 priority: AlertDefPriority::P1.into(),
                 alert_def_type: AlertDefType::LogsMoreThan.into(),
-                group_by: vec!["coralogix.metadata.sdkId".into(), "EventType".into()],
+                group_by: vec![],
                 incidents_settings: None,
                 phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
