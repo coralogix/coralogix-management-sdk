@@ -25,6 +25,7 @@ message PieChart {
   common.Unit unit = 8;
   google.protobuf.StringValue color_scheme = 9;
   common.DataModeType data_mode_type = 10;
+  google.protobuf.StringValue custom_unit = 11;
 
   message Query {
     oneof value {

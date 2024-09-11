@@ -33,7 +33,7 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "c2262fd30e8ef677d4731a498ed29dd69af87494"
+revision = "4264186854ae73990848a4c973ea76953d619dc9"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
@@ -68,10 +68,9 @@ revision = "v0.3.86"
 
 
 [cx-api-scopes-service]
-url = 'github.com/coralogix/scopes-service'
+url = 'github.com/coralogix/cx-api-scopes'
 allow_policies = ["/com/coralogixapis/*"]
-content_roots = ["/modules/service/proto/"]
-revision = '45f5f10e7364b43ed736d76593c3ec0e73314cb2'
+revision = 'v0.0.1'
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'

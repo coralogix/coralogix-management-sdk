@@ -10,6 +10,7 @@ import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 
 message Gauge {
   Query query = 1;
@@ -23,6 +24,7 @@ message Gauge {
   ThresholdBy threshold_by = 9;
   google.protobuf.StringValue custom_unit = 10;
   google.protobuf.Int32Value decimal = 11;
+  ThresholdType threshold_type = 12;
 
   message Query {
     oneof value {
@@ -45,6 +47,7 @@ message Gauge {
     v1.common.LogsAggregation logs_aggregation = 2;
     Aggregation aggregation = 3 [deprecated = true];
     repeated Filter.LogsFilter filters = 4;
+    repeated v1.common.ObservationField group_by = 5;
   }
 
   message SpansQuery {
@@ -95,11 +98,18 @@ message Gauge {
     UNIT_CUSTOM = 18;
     UNIT_PERCENT_ZERO_ONE = 19;
     UNIT_PERCENT_ZERO_HUNDRED = 20;
+    UNIT_NANOSECONDS = 21;
   }
 
   enum ThresholdBy {
     THRESHOLD_BY_UNSPECIFIED = 0;
     THRESHOLD_BY_VALUE = 1;
     THRESHOLD_BY_BACKGROUND = 2;
+  }
+
+  enum ThresholdType {
+    THRESHOLD_TYPE_UNSPECIFIED = 0;
+    THRESHOLD_TYPE_RELATIVE = 1;
+    THRESHOLD_TYPE_ABSOLUTE = 2;
   }
 }

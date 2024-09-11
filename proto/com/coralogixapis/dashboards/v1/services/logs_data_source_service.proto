@@ -43,6 +43,9 @@ service LogsDataSourceService {
   rpc SearchLogsAnnotationEvents(SearchLogsAnnotationEventsRequest) returns (SearchLogsAnnotationEventsResponse) {
     option (audit_log_description).description = "search logs annotation events";
   }
+  rpc SearchLogsGroupedValues(SearchLogsGroupedValuesRequest) returns (SearchLogsGroupedValuesResponse) {
+    option (audit_log_description).description = "search logs grouped values";
+  }
 }
 
 message SearchLogsTimeSeriesRequest {
@@ -163,6 +166,21 @@ message SearchLogsTimeValueRequest {
 
 message SearchLogsTimeValueResponse {
   google.protobuf.DoubleValue value = 1;
+}
+
+message SearchLogsGroupedValuesRequest {
+  common.TimeFrame time_frame = 1;
+  repeated ast.Filter.LogsFilter filters = 2;
+  google.protobuf.StringValue lucene_query = 3;
+  repeated google.protobuf.StringValue group_by = 4;
+  common.LogsAggregation aggregation = 5;
+  google.protobuf.Int32Value limit = 6;
+}
+
+message SearchLogsGroupedValuesResponse {
+  repeated common.Group groups = 1;
+  bool is_limit_exceeded = 2;
+  google.protobuf.Int64Value total = 3;
 }
 
 message SearchLogsAnnotationEventsRequest {
