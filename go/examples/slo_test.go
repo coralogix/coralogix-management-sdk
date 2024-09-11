@@ -36,12 +36,12 @@ func TestSlos(t *testing.T) {
 
 	createSloResponse, err := c.Create(context.Background(), &cxsdk.CreateServiceSloRequest{
 		Slo: &cxsdk.ServiceSlo{
-			Name:             &wrapperspb.StringValue{Value: "coralogix_slo_example"},
-			ServiceName:      &wrapperspb.StringValue{Value: "service_name"},
-			Description:      &wrapperspb.StringValue{Value: "description"},
+			Name:             wrapperspb.String("coralogix_slo_example"),
+			ServiceName:      wrapperspb.String("service_name"),
+			Description:      wrapperspb.String("description"),
 			TargetPercentage: &wrapperspb.UInt32Value{Value: 30},
 			SliType:          &cxsdk.ServiceSloErrorSli{},
-			Period:           v1.SloPeriod_SLO_PERIOD_7_DAYS,
+			Period:           cxsdk.SloPeriod7Days,
 		},
 	})
 

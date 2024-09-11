@@ -20,6 +20,18 @@ import (
 	archiveLogs "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v2"
 )
 
+// SetTargetRequest is a request to set the archive logs target.
+type SetTargetRequest = archiveLogs.SetTargetRequest
+
+// SetTargetRequestS3 is a request to set the archive logs target to S3.
+type SetTargetRequestS3 = archiveLogs.SetTargetRequest_S3
+
+// S3TargetSpec is an S3 target spec.
+type S3TargetSpec = archiveLogs.S3TargetSpec
+
+// SetTargetRequestIbmCos is a request to set the archive logs target to IBM COS.
+type SetTargetRequestIbmCos = archiveLogs.SetTargetRequest_IbmCos
+
 // ArchiveLogsClient is a client for the Coralogix Archive Logs API.
 type ArchiveLogsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
