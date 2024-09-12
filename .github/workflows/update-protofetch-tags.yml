@@ -27,4 +27,5 @@ jobs:
         working-directory: tools/release-management
         env:
           GITHUB_TOKEN: ${{ secrets.GH_READER_TOKEN }}
+          GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           RUST_LOG: debug
