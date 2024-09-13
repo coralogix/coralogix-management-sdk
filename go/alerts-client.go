@@ -239,22 +239,43 @@ type LogsUnusualRule = alerts.LogsUnusualRule
 // LogsUnusualCondition is a condition type for ususual alert types.
 type LogsUnusualCondition = alerts.LogsUnusualCondition
 
+// UndetectedValuesManagement is a type for undetected values management.
+type UndetectedValuesManagement = alerts.UndetectedValuesManagement
+
+// LogsUnusualConditionType is the condition type for unusual alert types.
+type LogsUnusualConditionType = alerts.LogsUnusualConditionType
+
 // LogsUnusualConditionType is a value for unusual alert type conditions.
 const LogsUnusualConditionTypeMoreThanOrUnspecified = alerts.LogsUnusualConditionType_LOGS_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
 
-// LogsUnusualType is a type of alert type
+// LogsUnusualType is a type of alert.
 type LogsUnusualType = alerts.LogsUnusualType
 
-// FlowType is a type of alert type
+// FlowType is a type of alert.
 type FlowType = alerts.FlowType
 
-// LogsNewValueType is a type of alert type
+// LogsNewValueType is a type of alert.
 type LogsNewValueType = alerts.LogsNewValueType
+
+// LogsNewValueCondition is a condition for the type of alert.
+type LogsNewValueCondition = alerts.LogsNewValueCondition
+
+// LogsNewValueRule is a rule for new log alerts.
+type LogsNewValueRule = alerts.LogsNewValueRule
 
 // LogsUniqueCountType is a type of alert type
 type LogsUniqueCountType = alerts.LogsUniqueCountType
 
-// AlertDefType is a type of alert trigger.
+// LogsUniqueCountRule is a rule for a condition of the unique count alert type.
+type LogsUniqueCountRule = alerts.LogsUniqueCountRule
+
+// LogsUniqueCountCondition is a condition for the unique count alert type.
+type LogsUniqueCountCondition = alerts.LogsUniqueCountCondition
+
+// AlertDefType is a type of alert type
+type AlertDefType = alerts.AlertDefType
+
+// AlertDefType values.
 const (
 	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
 	AlertDefTypeLogsThreshold              = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_THRESHOLD
@@ -307,47 +328,27 @@ const (
 	LogsRatioConditionTypeLessThan              = alerts.LogsRatioConditionType_LOGS_RATIO_CONDITION_TYPE_LESS_THAN
 )
 
-// AlertDayOfWeekUnspecified is unspecified.
-const AlertDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+// AlertDayOfWeek values.
+const (
+	AlertDayOfWeekUnspecified = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+	AlertDayOfWeekMonday      = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
+	AlertDayOfWeekTuesday     = alerts.DayOfWeek_DAY_OF_WEEK_TUESDAY
+	AlertDayOfWeekWednesday   = alerts.DayOfWeek_DAY_OF_WEEK_WEDNESDAY
+	AlertDayOfWeekThursday    = alerts.DayOfWeek_DAY_OF_WEEK_THURSDAY
+	AlertDayOfWeekFriday      = alerts.DayOfWeek_DAY_OF_WEEK_FRIDAY
+	AlertDayOfWeekSaturday    = alerts.DayOfWeek_DAY_OF_WEEK_SATURDAY
+	AlertDayOfWeekSunday      = alerts.DayOfWeek_DAY_OF_WEEK_SUNDAY
+)
 
-// AlertDayOfWeekMonday is Monday.
-const AlertDayOfWeekMonday = alerts.DayOfWeek_DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED
-
-// AlertDayOfWeekTuesday is Tuesday.
-const AlertDayOfWeekTuesday = alerts.DayOfWeek_DAY_OF_WEEK_TUESDAY
-
-// AlertDayOfWeekWednesday is Wednesday.
-const AlertDayOfWeekWednesday = alerts.DayOfWeek_DAY_OF_WEEK_WEDNESDAY
-
-// AlertDayOfWeekThursday is Thursday.
-const AlertDayOfWeekThursday = alerts.DayOfWeek_DAY_OF_WEEK_THURSDAY
-
-// AlertDayOfWeekFriday is Friday.
-const AlertDayOfWeekFriday = alerts.DayOfWeek_DAY_OF_WEEK_FRIDAY
-
-// AlertDayOfWeekSaturday is Saturday.
-const AlertDayOfWeekSaturday = alerts.DayOfWeek_DAY_OF_WEEK_SATURDAY
-
-// AlertDayOfWeekSunday is Sunday.
-const AlertDayOfWeekSunday = alerts.DayOfWeek_DAY_OF_WEEK_SUNDAY
-
-// CreateAlertDefRpc is the name of the respective RPC.
-const CreateAlertDefRpc = alerts.AlertDefsService_CreateAlertDef_FullMethodName
-
-// DeleteAlertDefRpc is the name of the respective RPC.
-const DeleteAlertDefRpc = alerts.AlertDefsService_DeleteAlertDef_FullMethodName
-
-// GetAlertDefRpc is the name of the respective RPC.
-const GetAlertDefRpc = alerts.AlertDefsService_GetAlertDef_FullMethodName
-
-// ListAlertDefsRpc is the name of the respective RPC.
-const ListAlertDefsRpc = alerts.AlertDefsService_ListAlertDefs_FullMethodName
-
-// ReplaceAlertDefRpc is the name of the respective RPC.
-const ReplaceAlertDefRpc = alerts.AlertDefsService_ReplaceAlertDef_FullMethodName
-
-// SetAlertDefActiveRpc is the name of the respective RPC.
-const SetAlertDefActiveRpc = alerts.AlertDefsService_SetActive_FullMethodName
+// Alert API RPC names.
+const (
+	CreateAlertDefRpc    = alerts.AlertDefsService_CreateAlertDef_FullMethodName
+	DeleteAlertDefRpc    = alerts.AlertDefsService_DeleteAlertDef_FullMethodName
+	GetAlertDefRpc       = alerts.AlertDefsService_GetAlertDef_FullMethodName
+	ListAlertDefsRpc     = alerts.AlertDefsService_ListAlertDefs_FullMethodName
+	ReplaceAlertDefRpc   = alerts.AlertDefsService_ReplaceAlertDef_FullMethodName
+	SetAlertDefActiveRpc = alerts.AlertDefsService_SetActive_FullMethodName
+)
 
 // AlertNotifyOnTriggeredOnlyUnspecified is a notification setting for an alert.
 const AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
@@ -355,17 +356,13 @@ const AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERE
 // AlertNotifyOnTriggeredAndResolved is a notification setting for an alert.
 const AlertNotifyOnTriggeredAndResolved = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
 
-// LogFilterOperationIsOrUnspecified is a filter operation for an alert.
-const LogFilterOperationIsOrUnspecified = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
-
-// LogFilterOperationIncludes is a filter operation for an alert.
-const LogFilterOperationIncludes = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_INCLUDES
-
-// LogFilterOperationEndsWith is a filter operation for an alert.
-const LogFilterOperationEndsWith = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_ENDS_WITH
-
-// LogFilterOperationStartsWith is a filter operation for an alert.
-const LogFilterOperationStartsWith = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_STARTS_WITH
+// LogFilterOperation values.
+const (
+	LogFilterOperationIsOrUnspecified = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED
+	LogFilterOperationIncludes        = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_INCLUDES
+	LogFilterOperationEndsWith        = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_ENDS_WITH
+	LogFilterOperationStartsWith      = alerts.LogFilterOperationType_LOG_FILTER_OPERATION_TYPE_STARTS_WITH
+)
 
 // LogsSeverity values.
 const (
@@ -386,8 +383,14 @@ const (
 	MetricUnusualConditionTypeLessThan              = alerts.MetricUnusualConditionType_METRIC_UNUSUAL_CONDITION_TYPE_LESS_THAN_USUAL
 )
 
+// LogsNewValueTimeWindow is a time window setting for new log alerts.
+type LogsNewValueTimeWindow = alerts.LogsNewValueTimeWindow
+
 // LogsNewValueTimeWindowValue is a time window setting for new logs.
 type LogsNewValueTimeWindowValue = alerts.LogsNewValueTimeWindowValue
+
+// LogsNewValueTimeWindowSpecificValue is a specific time window setting for new log alerts.
+type LogsNewValueTimeWindowSpecificValue = alerts.LogsNewValueTimeWindow_LogsNewValueTimeWindowSpecificValue
 
 // LogsNewValueTimeWindow values.
 const (
@@ -432,6 +435,12 @@ const (
 	NextOpOr               = alerts.NextOp_NEXT_OP_OR
 )
 
+// LogsUniqueValueTimeWindow is a time window for logs unique count alerts.
+type LogsUniqueValueTimeWindow = alerts.LogsUniqueValueTimeWindow
+
+// LogsUniqueValueTimeWindowSpecificValue is a specific time window setting for unique logs alerts.
+type LogsUniqueValueTimeWindowSpecificValue = alerts.LogsUniqueValueTimeWindow_LogsUniqueValueTimeWindowSpecificValue
+
 // LogsUniqueValueTimeWindowValue is a time window setting for unique logs.
 type LogsUniqueValueTimeWindowValue = alerts.LogsUniqueValueTimeWindowValue
 
@@ -448,6 +457,24 @@ const (
 	LogsUniqueValueTimeWindowValue12Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12
 	LogsUniqueValueTimeWindowValue24Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24
 )
+
+// LogsTimeRelativeRule is a rule for the time relative alert type.
+type LogsTimeRelativeRule = alerts.LogsTimeRelativeRule
+
+// LogsTimeRelativeCondition is a condition for the time relative alert type.
+type LogsTimeRelativeCondition = alerts.LogsTimeRelativeCondition
+
+// LogsTimeRelativeConditionType is a condition for time relative alert type.
+type LogsTimeRelativeConditionType = alerts.LogsTimeRelativeConditionType
+
+// LogsTimeRelativeConditionType values.
+const (
+	LogsTimeRelativeConditionTypeMoreThanOrUnspecified = alerts.LogsTimeRelativeConditionType_LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
+	LogsTimeRelativeConditionTypeLessThan              = alerts.LogsTimeRelativeConditionType_LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN
+)
+
+// LogsTimeRelativeThresholdType is a time relative alert type.
+type LogsTimeRelativeThresholdType = alerts.LogsTimeRelativeThresholdType
 
 // LogsTimeRelativeComparedTo is a time setting for time relative alerts.
 const (
@@ -532,6 +559,9 @@ const (
 	LogsRatioTimeWindowValue24Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24
 	LogsRatioTimeWindowValue36Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36
 )
+
+// MetricThresholdConditionType is a type of condition for metrics.
+type MetricThresholdConditionType = alerts.MetricThresholdConditionType
 
 // MetricThresholdConditionType values.
 const (
