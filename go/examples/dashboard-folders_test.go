@@ -18,7 +18,6 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
@@ -45,7 +44,7 @@ func TestDashboardFolders(t *testing.T) {
 
 	assert.Nil(t, creationError)
 
-	_, updateError := c.Replace(context.Background(), &v1.ReplaceDashboardFolderRequest{
+	_, updateError := c.Replace(context.Background(), &cxsdk.ReplaceDashboardFolderRequest{
 		Folder: &cxsdk.DashboardFolder{
 			Id:   wrapperspb.String(id),
 			Name: wrapperspb.String("updated " + id),
@@ -54,7 +53,7 @@ func TestDashboardFolders(t *testing.T) {
 
 	assert.Nil(t, updateError)
 
-	getDashboardFolderResponse, retrievalError := c.Get(context.Background(), &v1.GetDashboardFolderRequest{
+	getDashboardFolderResponse, retrievalError := c.Get(context.Background(), &cxsdk.GetDashboardFolderRequest{
 		FolderId: wrapperspb.String(id),
 	})
 
@@ -65,7 +64,7 @@ func TestDashboardFolders(t *testing.T) {
 
 	assert.Nil(t, listError)
 
-	_, deletionError := c.Delete(context.Background(), &v1.DeleteDashboardFolderRequest{
+	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteDashboardFolderRequest{
 		FolderId: wrapperspb.String(id),
 	})
 

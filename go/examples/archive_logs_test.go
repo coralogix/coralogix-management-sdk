@@ -19,7 +19,6 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v2"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -33,9 +32,9 @@ func TestArchiveLogs(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveLogsClient(creator)
 	s3Region := "eu-north-1"
-	_, setTargetError := c.Update(context.Background(), &v2.SetTargetRequest{
-		TargetSpec: &v2.SetTargetRequest_S3{
-			S3: &v2.S3TargetSpec{
+	_, setTargetError := c.Update(context.Background(), &cxsdk.SetTargetRequest{
+		TargetSpec: &cxsdk.SetTargetRequestS3{
+			S3: &cxsdk.S3TargetSpec{
 				Bucket: "yak-2-bucket",
 				Region: &s3Region,
 			},
