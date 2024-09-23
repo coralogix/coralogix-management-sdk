@@ -37,6 +37,12 @@ type DashboardFolder = dashboards.DashboardFolder
 // GetDashboardFolderRequest is a request to get a dashboard folders.
 type GetDashboardFolderRequest = dashboards.GetDashboardFolderRequest
 
+// ReplaceDashboardFolderRequest is a request to replace a dashboard folder.
+type ReplaceDashboardFolderRequest = dashboards.ReplaceDashboardFolderRequest
+
+// DeleteDashboardFolderRequest is a request to delete a dashboard folder.
+type DeleteDashboardFolderRequest = dashboards.DeleteDashboardFolderRequest
+
 // Create creates a new dashboard folder.
 func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)

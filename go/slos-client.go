@@ -38,6 +38,14 @@ type ReplaceServiceSloRequest = slos.ReplaceServiceSloRequest
 // DeleteServiceSloRequest is a request to delete an SLO.
 type DeleteServiceSloRequest = slos.DeleteServiceSloRequest
 
+// SLO period values.
+const (
+	SloPeriod7Days       = slos.SloPeriod_SLO_PERIOD_7_DAYS
+	SloPeriodUnspecified = slos.SloPeriod_SLO_PERIOD_UNSPECIFIED
+	SloPeriod14Days      = slos.SloPeriod_SLO_PERIOD_14_DAYS
+	SloPeriod30Days      = slos.SloPeriod_SLO_PERIOD_30_DAYS
+)
+
 // SLOsClient is a client for the Coralogix SLOs API.
 type SLOsClient struct {
 	callPropertiesCreator *CallPropertiesCreator

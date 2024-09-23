@@ -38,15 +38,11 @@ func TestAlerts(t *testing.T) {
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertRequest{
 		AlertDefProperties: &cxsdk.AlertDefProperties{
-			Name:         &wrapperspb.StringValue{Value: "Standard alert example"},
-			Description:  &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
-			Enabled:      &wrapperspb.BoolValue{Value: true},
-			Priority:     cxsdk.AlertDefPriorityP1,
-			AlertDefType: cxsdk.AlertDefTypeLogsMoreThan,
-			GroupBy: []*wrapperspb.StringValue{
-				{Value: "coralogix.metadata.sdkId"},
-				{Value: "EventType"},
-			},
+			Name:              &wrapperspb.StringValue{Value: "Standard alert example"},
+			Description:       &wrapperspb.StringValue{Value: "Standard alert example from terraform"},
+			Enabled:           &wrapperspb.BoolValue{Value: true},
+			Priority:          cxsdk.AlertDefPriorityP1,
+			AlertDefType:      cxsdk.AlertDefTypeLogsMoreThan,
 			IncidentsSettings: nil,
 			NotificationGroup: &cxsdk.AlertDefNotificationGroup{
 				GroupByFields: []*wrapperspb.StringValue{
