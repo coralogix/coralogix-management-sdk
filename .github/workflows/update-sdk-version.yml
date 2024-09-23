@@ -1,4 +1,4 @@
-name: "[Rust & Go SDK] Tag and Publish"
+name: "[Rust & Go SDK] Update SDK version"
 
 permissions:
   pull-requests: write
