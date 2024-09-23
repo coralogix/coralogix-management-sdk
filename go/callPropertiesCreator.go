@@ -34,6 +34,7 @@ type CallPropertiesCreator struct {
 	teamsLevelAPIKey string
 	userLevelAPIKey  string
 	correlationID    string
+	sdkVersion       string
 	//allowRetry bool
 }
 
@@ -46,7 +47,7 @@ type CallProperties struct {
 
 // GetTeamsLevelCallProperties returns a new CallProperties object built from a team-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
 func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createContext(ctx, c.teamsLevelAPIKey, c.correlationID)
+	ctx = createContext(ctx, c.teamsLevelAPIKey, c.correlationID, c.sdkVersion)
 
 	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
 	conn, err := createSecureConnection(endpoint)
@@ -61,7 +62,7 @@ func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) 
 
 // GetUserLevelCallProperties returns a new CallProperties object built from a user-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
 func (c CallPropertiesCreator) GetUserLevelCallProperties(ctx context.Context) (*CallProperties, error) {
-	ctx = createContext(ctx, c.userLevelAPIKey, c.correlationID)
+	ctx = createContext(ctx, c.userLevelAPIKey, c.correlationID, c.sdkVersion)
 
 	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
 	conn, err := createSecureConnection(endpoint)
@@ -86,7 +87,7 @@ func createSecureConnection(targetURL string) (*grpc.ClientConn, error) {
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 }
 
-func createContext(ctx context.Context, apiKey string, corrleationID string) context.Context {
+func createContext(ctx context.Context, apiKey string, corrleationID string, sdkVersion string) context.Context {
 	md := metadata.New(map[string]string{"Authorization": fmt.Sprintf("Bearer %s", apiKey), sdkVersionHeaderName: sdkVersion, sdkLanguageHeaderName: "go", sdkGoVersionHeaderName: runtime.Version(), sdkCorrelationIDHeaderName: corrleationID})
 	ctx = metadata.NewOutgoingContext(ctx, md)
 	return ctx
@@ -99,5 +100,17 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
+		sdkVersion:       vanillaSdkVersion,
+	}
+}
+
+// NewCallPropertiesCreatorTerraformOperator creates a new CallPropertiesCreator object, specifying which version of the Terraform Operator is being used.
+func NewCallPropertiesCreatorTerraformOperator(region string, authContext AuthContext, terraformOperatorVersion string) *CallPropertiesCreator {
+	return &CallPropertiesCreator{
+		coraglogixRegion: region,
+		teamsLevelAPIKey: authContext.teamLevelAPIKey,
+		userLevelAPIKey:  authContext.userLevelAPIKey,
+		correlationID:    uuid.New().String(),
+		sdkVersion:       terraformOperatorVersion,
 	}
 }

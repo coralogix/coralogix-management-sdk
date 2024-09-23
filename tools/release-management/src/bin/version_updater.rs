@@ -107,9 +107,12 @@ async fn set_go_sdk_version(
     Ok(go_constants_source_code_string.replace(
         go_constants_source_code_string
             .lines()
-            .find(|line| line.contains("sdkVersion ="))
+            .find(|line| line.contains("vanillaSdkVersion ="))
             .unwrap(),
-        &format!("const sdkVersion = \"{}\"", &args.sdk_version),
+        &format!(
+            "const vanillaSdkVersion = \"coralogix-mgmt-sdk-{}\"",
+            &args.sdk_version
+        ),
     ))
 }
 
