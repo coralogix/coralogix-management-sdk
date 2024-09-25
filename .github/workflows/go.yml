@@ -54,6 +54,9 @@ jobs:
           CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
           TEAM_ID: ${{ secrets.TEAM_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
+          LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
         run: make test
 
   # FLT_windows:

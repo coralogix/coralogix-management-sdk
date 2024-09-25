@@ -16,6 +16,7 @@ package examples
 
 import (
 	"context"
+	"os"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
@@ -24,6 +25,8 @@ import (
 )
 
 func TestArchiveMetrics(t *testing.T) {
+	metricsBucket := os.Getenv("METRICS_BUCKET")
+	awsRegion := os.Getenv("AWS_REGION")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -31,8 +34,8 @@ func TestArchiveMetrics(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveMetricsClient(creator)
 	s3Config := &cxsdk.ArchiveS3Config{
-		Bucket: "yak-coralogix-bucket",
-		Region: "eu-north-1",
+		Bucket: metricsBucket,
+		Region: awsRegion,
 	}
 
 	_, configureErr := c.ConfigureTenant(context.Background(), &cxsdk.ConfigureTenantRequest{
