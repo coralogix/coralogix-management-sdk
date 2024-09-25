@@ -22,6 +22,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_logs_archive() {
+        let aws_region = std::env::var("AWS_REGION").unwrap();
+        let logs_bucket_name = std::env::var("LOGS_BUCKET").unwrap();
         let service = LogsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
@@ -29,8 +31,8 @@ mod tests {
         .unwrap();
 
         let target_spec = S3TargetSpec {
-            bucket: "yak-2-bucket".to_string(),
-            region: Some("eu-north-1".to_string()),
+            bucket: logs_bucket_name,
+            region: Some(aws_region),
         };
         service
             .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))

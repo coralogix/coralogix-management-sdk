@@ -47,6 +47,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_integrations() {
+        let aws_region = std::env::var("AWS_REGION").unwrap();
         let client = IntegrationsClient::new(
             AuthContext::from_env(),
             CoralogixRegion::from_env().unwrap(),
@@ -63,7 +64,7 @@ mod tests {
             sl("MetricNamespaces", vec!["AWS/S3"]),
             sp("AwsRoleArn", &role),
             sp("IntegrationName", "sdk-integration-setup"),
-            sp("AwsRegion", "eu-north-1"),
+            sp("AwsRegion", &aws_region),
             bp("WithAggregations", false),
             bp("EnrichWithTags", true),
         ];

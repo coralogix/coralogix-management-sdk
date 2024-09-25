@@ -60,6 +60,7 @@ func sl(k string, v []string) *cxsdk.IntegrationParameter {
 }
 
 func TestIntegration(t *testing.T) {
+	awsRegion := os.Getenv("AWS_REGION")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -77,7 +78,7 @@ func TestIntegration(t *testing.T) {
 		sl("MetricNamespaces", []string{"AWS/S3"}),
 		sp("AwsRoleArn", role),
 		sp("IntegrationName", "sdk-integration-setup"),
-		sp("AwsRegion", "eu-north-1"),
+		sp("AwsRegion", awsRegion),
 		bp("WithAggregations", false),
 		bp("EnrichWithTags", true),
 	}

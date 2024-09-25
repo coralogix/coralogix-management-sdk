@@ -25,6 +25,8 @@ mod tests {
 
     #[tokio::test]
     async fn test_metrics_service_configurator() {
+        let aws_region = std::env::var("AWS_REGION").unwrap();
+        let metrics_bucket_name = std::env::var("METRICS_BUCKET").unwrap();
         let metrics_service = MetricsArchiveClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
@@ -32,8 +34,8 @@ mod tests {
         .unwrap();
 
         let s3_config = S3Config {
-            bucket: "yak-coralogix-bucket".to_string(),
-            region: "eu-north-1".to_string(),
+            bucket: metrics_bucket_name,
+            region: aws_region,
         };
 
         let storage_config = StorageConfig::S3(s3_config.clone());
