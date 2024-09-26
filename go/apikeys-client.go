@@ -20,16 +20,14 @@ import (
 	apikeys "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/aaa/apikeys/v3"
 )
 
-// ApikeysClient is a client for the Coralogix API keys API.
-type ApikeysClient struct {
-	callPropertiesCreator *CallPropertiesCreator
-}
-
 // CreateAPIKeyRequest is a request to create an API key.
 type CreateAPIKeyRequest = apikeys.CreateApiKeyRequest
 
 // GetAPIKeyRequest is a request to get an API key.
 type GetAPIKeyRequest = apikeys.GetApiKeyRequest
+
+// GetAPIKeyResponse is a response to the API keys request.
+type GetAPIKeyResponse = apikeys.GetApiKeyResponse
 
 // UpdateAPIKeyRequest is a request to update an API key.
 type UpdateAPIKeyRequest = apikeys.UpdateApiKeyRequest
@@ -39,6 +37,12 @@ type DeleteAPIKeyRequest = apikeys.DeleteApiKeyRequest
 
 // APIKeyPermissions is a set of permissions for an API key.
 type APIKeyPermissions = apikeys.CreateApiKeyRequest_KeyPermissions
+
+// APIKeyPermissionsUpdate is a set of permissions for an API key on update.
+type APIKeyPermissionsUpdate = apikeys.UpdateApiKeyRequest_Permissions
+
+// APIKeyPresetsUpdate is a set of presets for an API key on update.
+type APIKeyPresetsUpdate = apikeys.UpdateApiKeyRequest_Presets
 
 // Owner is an owner of an API key.
 type Owner = apikeys.Owner
@@ -51,6 +55,19 @@ type OwnerTeamID = apikeys.Owner_TeamId
 
 // OwnerOrganisationID is an owner organisation ID.
 type OwnerOrganisationID = apikeys.Owner_OrganisationId
+
+// RPC method names.
+const (
+	CreateAPIKeyRpc = apikeys.ApiKeysService_CreateApiKey_FullMethodName
+	GetAPIKeyRpc    = apikeys.ApiKeysService_GetApiKey_FullMethodName
+	UpdateAPIKeyRpc = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
+	DeleteAPIKeyRpc = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
+)
+
+// ApikeysClient is a client for the Coralogix API keys API.
+type ApikeysClient struct {
+	callPropertiesCreator *CallPropertiesCreator
+}
 
 // Create creates a new API key.
 func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {

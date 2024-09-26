@@ -185,23 +185,62 @@ type LogsRatioCondition = alerts.LogsRatioCondition
 // LogsRatioRules is a rule type for logs in ratio alerts.
 type LogsRatioRules = alerts.LogsRatioRules
 
-// AlertEvaluationWindow is an evaluation window type for alerts.
-// type AlertEvaluationWindow = alerts.EvaluationWindow
-
 // LogFilterOperationType is a filter operation for logs.
 type LogFilterOperationType = alerts.LogFilterOperationType
 
 // LogsTimeRelativeComparedTo is a relative time setting for logs.
 type LogsTimeRelativeComparedTo = alerts.LogsTimeRelativeComparedTo
 
+// MetricTimeWindow is a time window setting for metrics.
+type MetricTimeWindow = alerts.MetricTimeWindow
+
+// MetricMissingValues is a type for missing values.
+type MetricMissingValues = alerts.MetricMissingValues
+
+// MetricMissingValuesReplaceWithZero is a strategy for missing values.
+type MetricMissingValuesReplaceWithZero = alerts.MetricMissingValues_ReplaceWithZero
+
+// MetricMissingValuesMinNonNullValuesPct is a strategy for missing values.
+type MetricMissingValuesMinNonNullValuesPct = alerts.MetricMissingValues_MinNonNullValuesPct
+
 // MetricTimeWindowValue is a time window setting for metrics.
 type MetricTimeWindowValue = alerts.MetricTimeWindowValue
+
+// MetricTimeWindowSpecificValue is a time window setting for metrics.
+type MetricTimeWindowSpecificValue = alerts.MetricTimeWindow_MetricTimeWindowSpecificValue
 
 // TracingTimeWindowValue is a time window setting for tracing.
 type TracingTimeWindowValue = alerts.TracingTimeWindowValue
 
+// TracingTimeWindowSpecificValue is a specific value for the time window setting for tracing.
+type TracingTimeWindowSpecificValue = alerts.TracingTimeWindow_TracingTimeWindowValue
+
 // TracingFilterOperationType is an operation type setting for tracing.
 type TracingFilterOperationType = alerts.TracingFilterOperationType
+
+// TracingLabelFilters is a label filter type for tracing.
+type TracingLabelFilters = alerts.TracingLabelFilters
+
+// TracingFilterType is a filter type for tracing.
+type TracingFilterType = alerts.TracingFilterType
+
+// TracingSpanFieldsFilterType is a span filter for tracing.
+type TracingSpanFieldsFilterType = alerts.TracingSpanFieldsFilterType
+
+// FlowStages is a type for flow stages for the Flow Alert.
+type FlowStages = alerts.FlowStages
+
+// FlowStagesGroup is a type for flow stages for the Flow Alert.
+type FlowStagesGroup = alerts.FlowStagesGroup
+
+// FlowStagesGroupValue is a type for flow stages for the Flow Alert.
+type FlowStagesGroupsValue = alerts.FlowStagesGroups
+
+// FlowStagesGroups is a type for flow stage groups for the Flow Alert.
+type FlowStagesGroups = alerts.FlowStages_FlowStagesGroups
+
+// FlowStagesGroupsAlertDefs is a type for definining Flow alerts.
+type FlowStagesGroupsAlertDefs = alerts.FlowStagesGroupsAlertDefs
 
 // AutoRetireTimeframe is a type of timeframe.
 type AutoRetireTimeframe = alerts.AutoRetireTimeframe
@@ -227,11 +266,20 @@ type LogsRatioThresholdType = alerts.LogsRatioThresholdType
 // MetricUnusualType is a type of alert type
 type MetricUnusualType = alerts.MetricUnusualType
 
+// MetricUnusualRule is a type of alert type
+type MetricUnusualRule = alerts.MetricUnusualRule
+
+// MetricUnusualCondition is a type of alert type
+type MetricUnusualCondition = alerts.MetricUnusualCondition
+
 // MetricThresholdType is a type of alert type
 type MetricThresholdType = alerts.MetricThresholdType
 
 // TracingThresholdType is a type of alert type
 type TracingThresholdType = alerts.TracingThresholdType
+
+// TracingTimeWindow is a time window setting for tracing alerts.
+type TracingTimeWindow = alerts.TracingTimeWindow
 
 // LogsUnusualRule is a rule for ususual alert types.
 type LogsUnusualRule = alerts.LogsUnusualRule
@@ -247,6 +295,24 @@ type LogsUnusualConditionType = alerts.LogsUnusualConditionType
 
 // LogsUnusualConditionType is a value for unusual alert type conditions.
 const LogsUnusualConditionTypeMoreThanOrUnspecified = alerts.LogsUnusualConditionType_LOGS_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+
+// TracingFilter is a filter type for tracing alerts.
+type TracingFilter = alerts.TracingFilter
+
+// TracingFilterSimpleFilter is a filter type for tracing alerts.
+type TracingFilterSimpleFilter = alerts.TracingFilter_SimpleFilter
+
+// TracingSimpleFilter is a filter type for tracing alerts.
+type TracingSimpleFilter = alerts.TracingSimpleFilter
+
+// TracingThresholdRule is a rule for the tracing threshold alert type.
+type TracingThresholdRule = alerts.TracingThresholdRule
+
+// TracingThresholdCondition is a condition for the tracing threshold alert type.
+type TracingThresholdCondition = alerts.TracingThresholdCondition
+
+// TracingThresholdConditionTypeMoreThanOrUnspecified is a value for the tracing threshold alert type.
+const TracingThresholdConditionTypeMoreThanOrUnspecified = alerts.TracingThresholdConditionType_TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
 
 // LogsUnusualType is a type of alert.
 type LogsUnusualType = alerts.LogsUnusualType
@@ -401,7 +467,7 @@ const (
 	LogsNewValueTimeWindowValue1Week                = alerts.LogsNewValueTimeWindowValue_LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1
 	LogsNewValueTimeWindowValue1Month               = alerts.LogsNewValueTimeWindowValue_LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1
 	LogsNewValueTimeWindowValue2Months              = alerts.LogsNewValueTimeWindowValue_LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2
-	LogsNewValueTimeWindowValue_3Months             = alerts.LogsNewValueTimeWindowValue_LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3
+	LogsNewValueTimeWindowValue3Months              = alerts.LogsNewValueTimeWindowValue_LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3
 )
 
 // LogsTimeWindow values.
@@ -559,6 +625,18 @@ const (
 	LogsRatioTimeWindowValue24Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_24
 	LogsRatioTimeWindowValue36Hours               = alerts.LogsRatioTimeWindowValue_LOGS_RATIO_TIME_WINDOW_VALUE_HOURS_36
 )
+
+// MetricFilter is a filter type for metrics.
+type MetricFilter = alerts.MetricFilter
+
+// MetricFilterPromql is a Prometheus filter type for metrics.
+type MetricFilterPromql = alerts.MetricFilter_Promql
+
+// MetricThresholdRule is a rule for the metric threshold alert type.
+type MetricThresholdRule = alerts.MetricThresholdRule
+
+// MetricThresholdCondition is a condition for the metric threshold alert type.
+type MetricThresholdCondition = alerts.MetricThresholdCondition
 
 // MetricThresholdConditionType is a type of condition for metrics.
 type MetricThresholdConditionType = alerts.MetricThresholdConditionType
