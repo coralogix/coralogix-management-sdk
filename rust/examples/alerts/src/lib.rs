@@ -30,7 +30,6 @@ mod tests {
             AlertDefType,
             AlertsClient,
             DayOfWeek,
-            EvaluationWindow,
             FilterType,
             IntegrationType,
             LabelFilterType,
@@ -38,11 +37,14 @@ mod tests {
             LogFilterOperationType,
             LogSeverity,
             LogsFilter,
-            LogsMoreThanTypeDefinition,
+            LogsSimpleFilter,
+            LogsThresholdCondition,
+            LogsThresholdConditionType,
+            LogsThresholdRule,
+            LogsThresholdType,
             LogsTimeWindow,
             LogsTimeWindowType,
             LogsTimeWindowValue,
-            LuceneFilter,
             Recipients,
             Schedule,
             Targets,
@@ -67,12 +69,13 @@ mod tests {
                 description: Some("Example of standard alert from terraform".to_string()),
                 enabled: Some(true),
                 priority: AlertDefPriority::P1.into(),
-                alert_def_type: AlertDefType::LogsMoreThan.into(),
+                deleted: None,
+                r#type: AlertDefType::LogsThreshold.into(),
                 group_by: vec![],
                 incidents_settings: None,
                 phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
-                    group_by_fields: vec!["coralogix.metadata.sdkId".into(), "EventType".into()],
+                    group_by_fields: vec![],
                     targets: Some(Targets::Simple(AlertDefTargetSimple {
                         integrations: vec![IntegrationType {
                             integration_type: Some(integration_type::IntegrationType::Recipients(
@@ -100,9 +103,9 @@ mod tests {
                         minutes: 30,
                     }),
                 })),
-                type_definition: Some(TypeDefinition::LogsMoreThan(LogsMoreThanTypeDefinition {
+                type_definition: Some(TypeDefinition::LogsThreshold(LogsThresholdType {
                     logs_filter: Some(LogsFilter {
-                        filter_type: Some(FilterType::LuceneFilter(LuceneFilter {
+                        filter_type: Some(FilterType::SimpleFilter(LogsSimpleFilter {
                             lucene_query: Some(String::from("remote_addr_enriched:/.*/")),
                             label_filters: Some(LabelFilters {
                                 application_name: vec![LabelFilterType {
@@ -120,17 +123,24 @@ mod tests {
                             }),
                         })),
                     }),
-                    threshold: Some(5),
-                    time_window: Some(LogsTimeWindow {
-                        r#type: Some(LogsTimeWindowType::LogsTimeWindowSpecificValue(
-                            LogsTimeWindowValue::Minutes30.into(),
-                        )),
-                    }),
-                    evaluation_window: EvaluationWindow::RollingOrUnspecified.into(),
                     notification_payload_filter: vec![],
+                    undetected_values_management: None,
+                    rules: vec![LogsThresholdRule {
+                        condition: Some(LogsThresholdCondition {
+                            threshold: Some(10.0),
+                            condition_type: LogsThresholdConditionType::MoreThanOrUnspecified
+                                .into(),
+                            time_window: Some(LogsTimeWindow {
+                                r#type: Some(LogsTimeWindowType::LogsTimeWindowSpecificValue(
+                                    LogsTimeWindowValue::Minutes5OrUnspecified.into(),
+                                )),
+                            }),
+                        }),
+                    }],
                 })),
             }),
             id: None,
+            alert_version_id: None,
         };
 
         let created_alert = alerts_service

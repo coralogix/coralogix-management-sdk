@@ -36,7 +36,7 @@ func TestActions(t *testing.T) {
 		Name:             wrapperspb.String("google search action"),
 		Url:              wrapperspb.String("https://www.google.com/search?q={{$p.selected_value}}"),
 		IsPrivate:        wrapperspb.Bool(false),
-		SourceType:       cxsdk.SourceTypeSourceTypeLog,
+		SourceType:       cxsdk.SourceTypeLog,
 		ApplicationNames: []*wrapperspb.StringValue{},
 		SubsystemNames:   []*wrapperspb.StringValue{},
 	})
@@ -49,7 +49,7 @@ func TestActions(t *testing.T) {
 			Url:              wrapperspb.String("https://www.bing.com/search?q={{$p.selected_value}}"),
 			IsPrivate:        wrapperspb.Bool(false),
 			IsHidden:         wrapperspb.Bool(false),
-			SourceType:       cxsdk.SourceTypeSourceTypeLog,
+			SourceType:       cxsdk.SourceTypeLog,
 			ApplicationNames: []*wrapperspb.StringValue{},
 			SubsystemNames:   []*wrapperspb.StringValue{},
 		},

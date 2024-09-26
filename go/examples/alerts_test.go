@@ -35,56 +35,16 @@ func TestAlerts(t *testing.T) {
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: &cxsdk.AlertDefProperties{
-			Name:        wrapperspb.String("Standard alert example"),
-			Description: wrapperspb.String("Standard alert example from terraform"),
-			Enabled:     &wrapperspb.BoolValue{Value: true},
-			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
-				LogsThreshold: &cxsdk.LogsThresholdType{
-					Rules: []*cxsdk.LogsThresholdRule{
-						{Condition: &cxsdk.LogsThresholdCondition{
-							Threshold: wrapperspb.Double(10.0),
-							TimeWindow: &cxsdk.LogsTimeWindow{
-								Type: &cxsdk.LogsTimeWindowSpecificValue{
-									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
-								},
-							},
-							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
-						},
-						},
-					},
-
-					LogsFilter: &cxsdk.LogsFilter{
-						FilterType: &cxsdk.LogsFilterSimpleFilter{
-							SimpleFilter: &cxsdk.SimpleFilter{
-								LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
-								LabelFilters: &cxsdk.LabelFilters{
-									ApplicationName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
-									},
-									SubsystemName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
-									},
-									Severities: []cxsdk.LogSeverity{
-										*cxsdk.LogSeverityWarning.Enum(),
-										*cxsdk.LogSeverityError.Enum(),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-			Priority: cxsdk.AlertDefPriorityP1,
-			GroupBy: []*wrapperspb.StringValue{
-				{Value: "coralogix.metadata.sdkId"},
-				{Value: "EventType"},
-			},
+			Name:              wrapperspb.String("Standard alert example"),
+			Description:       wrapperspb.String("Standard alert example from terraform"),
+			Enabled:           &wrapperspb.BoolValue{Value: true},
+			Priority:          cxsdk.AlertDefPriorityP1,
+			Deleted:           nil,
+			Type:              cxsdk.AlertDefTypeLogsThreshold,
 			IncidentsSettings: nil,
+			PhantomMode:       &wrapperspb.BoolValue{Value: false},
 			NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-				GroupByFields: []*wrapperspb.StringValue{
-					{Value: "coralogix.metadata.sdkId"},
-					{Value: "EventType"},
-				},
+				GroupByFields: []*wrapperspb.StringValue{},
 				Targets: &cxsdk.AlertDefNotificationGroupSimple{
 					Simple: &cxsdk.AlertDefTargetSimple{
 						Integrations: []*cxsdk.AlertDefIntegrationType{
@@ -118,6 +78,45 @@ func TestAlerts(t *testing.T) {
 						Minutes: 30,
 					},
 				},
+			},
+			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
+				LogsThreshold: &cxsdk.LogsThresholdType{
+					Rules: []*cxsdk.LogsThresholdRule{
+						{Condition: &cxsdk.LogsThresholdCondition{
+							Threshold: wrapperspb.Double(10.0),
+							TimeWindow: &cxsdk.LogsTimeWindow{
+								Type: &cxsdk.LogsTimeWindowSpecificValue{
+									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
+								},
+							},
+							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
+						},
+						},
+					},
+					LogsFilter: &cxsdk.LogsFilter{
+						FilterType: &cxsdk.LogsFilterSimpleFilter{
+							SimpleFilter: &cxsdk.SimpleFilter{
+								LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
+								LabelFilters: &cxsdk.LabelFilters{
+									ApplicationName: []*cxsdk.LabelFilterType{
+										{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
+									},
+									SubsystemName: []*cxsdk.LabelFilterType{
+										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
+									},
+									Severities: []cxsdk.LogSeverity{
+										*cxsdk.LogSeverityWarning.Enum(),
+										*cxsdk.LogSeverityError.Enum(),
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+			GroupBy: []*wrapperspb.StringValue{
+				{Value: "coralogix.metadata.sdkId"},
+				{Value: "EventType"},
 			},
 		},
 	})
