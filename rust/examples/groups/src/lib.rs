@@ -14,8 +14,15 @@
 #[cfg(test)]
 mod tests {
 
-    use cx_sdk::client::groups::{RoleId, TeamId};
-    use cx_sdk::{auth::AuthContext, client::groups::GroupsClient, CoralogixRegion};
+    use cx_sdk::client::groups::{
+        RoleId,
+        TeamId,
+    };
+    use cx_sdk::{
+        auth::AuthContext,
+        client::groups::GroupsClient,
+        CoralogixRegion,
+    };
 
     #[tokio::test]
     async fn test_groups() {

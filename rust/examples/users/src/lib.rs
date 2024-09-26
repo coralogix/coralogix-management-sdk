@@ -18,7 +18,13 @@ mod tests {
 
     use cx_sdk::{
         auth::AuthContext,
-        client::users::{ScimUser, ScimUserEmail, ScimUserGroup, ScimUserName, UsersClient},
+        client::users::{
+            ScimUser,
+            ScimUserEmail,
+            ScimUserGroup,
+            ScimUserName,
+            UsersClient,
+        },
         CoralogixRegion,
     };
 

@@ -17,7 +17,14 @@ mod tests {
     use cx_sdk::{
         auth::AuthContext,
         client::slos::{
-            CompareType, ErrorSli, ServiceSlo, SliFilter, SliType, SloClient, SloPeriod, SloStatus,
+            CompareType,
+            ErrorSli,
+            ServiceSlo,
+            SliFilter,
+            SliType,
+            SloClient,
+            SloPeriod,
+            SloStatus,
         },
         CoralogixRegion,
     };

@@ -16,7 +16,10 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::dataprime_query::{DataprimeQueryClient, Message},
+        client::dataprime_query::{
+            DataprimeQueryClient,
+            Message,
+        },
         CoralogixRegion,
     };
 

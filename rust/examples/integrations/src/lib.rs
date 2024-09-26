@@ -18,7 +18,13 @@ mod tests {
 
     use cx_sdk::{
         auth::AuthContext,
-        client::integrations::{IntegrationsClient, Parameter, StringList, TestResult, Value},
+        client::integrations::{
+            IntegrationsClient,
+            Parameter,
+            StringList,
+            TestResult,
+            Value,
+        },
         CoralogixRegion,
     };
 

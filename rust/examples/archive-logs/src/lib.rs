@@ -16,7 +16,12 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::archive_logs::{LogsArchiveClient, S3TargetSpec, TargetSpec, TargetSpecValidation},
+        client::archive_logs::{
+            LogsArchiveClient,
+            S3TargetSpec,
+            TargetSpec,
+            TargetSpecValidation,
+        },
         CoralogixRegion,
     };
 

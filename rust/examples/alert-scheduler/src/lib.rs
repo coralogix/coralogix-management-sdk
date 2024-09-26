@@ -17,8 +17,17 @@ mod tests {
     use cx_sdk::{
         auth::AuthContext,
         client::alerts_scheduler::{
-            AlertSchedulerClient, AlertSchedulerFilter, AlertSchedulerRule, AlertUniqueIds,
-            OneTime, Schedule, ScheduleOperation, Scheduler, Timeframe, Until, WhichAlerts,
+            AlertSchedulerClient,
+            AlertSchedulerFilter,
+            AlertSchedulerRule,
+            AlertUniqueIds,
+            OneTime,
+            Schedule,
+            ScheduleOperation,
+            Scheduler,
+            Timeframe,
+            Until,
+            WhichAlerts,
         },
         CoralogixRegion,
     };

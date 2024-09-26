@@ -16,7 +16,10 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::dashboards::{Dashboard, DashboardsClient},
+        client::dashboards::{
+            Dashboard,
+            DashboardsClient,
+        },
         CoralogixRegion,
     };
 

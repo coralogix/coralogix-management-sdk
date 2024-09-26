@@ -17,7 +17,11 @@ mod tests {
 
     use cx_sdk::{
         auth::AuthContext,
-        client::scopes::{EntityType, Filter, ScopesClient},
+        client::scopes::{
+            EntityType,
+            Filter,
+            ScopesClient,
+        },
         CoralogixRegion,
     };
 
