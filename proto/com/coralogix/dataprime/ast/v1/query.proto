@@ -66,21 +66,23 @@ message Schema {
 
 message Operator {
   oneof operator {
-    Filter filter    = 1;
-    Create create    = 2;
-    Move move        = 3;
-    Remove remove    = 4;
-    Replace replace  = 5;
-    Redact redact    = 6;
-    Choose choose    = 7;
-    Convert convert  = 8;
-    Extract extract  = 9;
-    Limit limit      = 10;
-    OrderBy order_by = 11;
-    GroupBy group_by = 14;
-    Union union      = 15;
-    Enrich enrich    = 16;
-    Join join        = 17;
+    Filter filter      = 1;
+    Create create      = 2;
+    Move move          = 3;
+    Remove remove      = 4;
+    Replace replace    = 5;
+    Redact redact      = 6;
+    Choose choose      = 7;
+    Convert convert    = 8;
+    Extract extract    = 9;
+    Limit limit        = 10;
+    OrderBy order_by   = 11;
+    GroupBy group_by   = 14;
+    Union union        = 15;
+    Enrich enrich      = 16;
+    Join join          = 17;
+    Explode explode    = 18;
+    DedupeBy dedupe_by = 19;
   }
 
   reserved 12, 13;
@@ -211,7 +213,8 @@ message Operator {
         AnyValue any_value                        = 13;
         ApproxCountDistinct approx_count_distinct = 14;
         Collect collect                           = 15;
-        MaxByInternal max_by_internal             = 16;
+        MaxBy max_by                              = 16;
+        MinBy min_by                              = 17;
       }
 
       message Count {
@@ -292,7 +295,13 @@ message Operator {
         bool ignore_nulls            = 6;
       }
 
-      message MaxByInternal {
+      message MaxBy {
+        Expression sort_key      = 1;
+        Expression expression    = 2;
+        Expression.Keypath alias = 3;
+      }
+
+      message MinBy {
         Expression sort_key      = 1;
         Expression expression    = 2;
         Expression.Keypath alias = 3;
@@ -330,5 +339,24 @@ message Operator {
     Query query               = 1;
     Expression join_condition = 2;
     Expression.Keypath into   = 3;
+  }
+
+  message Explode {
+    Expression.Keypath keypath = 1;
+  }
+
+  message DedupeBy {
+    repeated Expression expressions = 1;
+    Condition condition             = 2;
+
+    message Condition {
+      oneof condition {
+        Keep keep = 1;
+      }
+
+      message Keep {
+        google.protobuf.Int32Value n = 1;
+      }
+    }
   }
 }

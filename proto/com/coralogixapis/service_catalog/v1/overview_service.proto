@@ -48,6 +48,7 @@ message GetOverviewStreamRequest {
   map<string, google.protobuf.ListValue> filters = 3;
   ApmSource apm_source = 4;
   google.protobuf.Int64Value trend_offset = 5;
+  repeated google.protobuf.StringValue widgets = 6;
 }
 
 message GetOverviewStreamResponse {

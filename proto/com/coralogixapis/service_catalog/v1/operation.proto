@@ -4,7 +4,7 @@ package com.coralogixapis.service_catalog.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/service_catalog/v1/transaction.proto";
 
-message Operation{
+message Operation {
   google.protobuf.StringValue operation = 1;
   google.protobuf.StringValue method = 2;
   UnitValue p99_response_time = 3;
@@ -23,14 +23,22 @@ message Operation{
   UnitValue time_consuming_percentage = 7;
   UnitValue p95_response_time = 8;
   UnitValue errors_percentage = 9;
-  UnitValue p99_response_time_trend = 10;
-  UnitValue requests_trend = 12;
-  UnitValue errors_trend = 13;
-  UnitValue p95_response_time_trend = 14;
-  UnitValue errors_percentage_trend = 15;
+
+  // Fields with _with_offset
   UnitValue p99_response_time_with_offset = 16;
+  UnitValue p90_response_time_with_offset = 30;
+  UnitValue p75_response_time_with_offset = 31;
+  UnitValue p50_response_time_with_offset = 32;
+  UnitValue avg_response_time_with_offset = 33;
   UnitValue requests_with_offset = 17;
+  UnitValue throughput_with_offset = 34;
+  UnitValue max_throughput_with_offset = 35;
   UnitValue errors_with_offset = 18;
+  UnitValue errors_per_minute_with_offset = 36;
+  UnitValue max_errors_per_minute_with_offset = 37;
+  UnitValue errors_per_second_with_offset = 38;
+  UnitValue time_consuming_with_offset = 39;
+  UnitValue time_consuming_percentage_with_offset = 40;
   UnitValue p95_response_time_with_offset = 19;
   UnitValue errors_percentage_with_offset = 20;
 }

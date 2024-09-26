@@ -4,6 +4,7 @@ package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/dataset/v1/dataset.proto";
 import "com/coralogix/archive/v2/archive_target.proto";
+import "com/coralogix/archive/dataset/v2/physical_location.proto";
 
 message Object {
   reserved 1;
@@ -17,6 +18,7 @@ message Object {
   repeated Labels collected_event_labels = 9;
   Labels split_by_event_labels = 10;
   ArchiveTarget archive_target = 11;
+  com.coralogix.archive.dataset.v2.IngestionFinalLocation physical_location = 16;
   reserved 12;
   reserved 13;
   bool columns_limit_reached = 14;

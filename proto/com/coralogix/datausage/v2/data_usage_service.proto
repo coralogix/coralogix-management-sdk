@@ -10,6 +10,7 @@ import "google/protobuf/wrappers.proto";
 service DataUsageService {
   rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse);
   rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse);
+  rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse);
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse);
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse);
 }
@@ -64,10 +65,40 @@ message ScopesFilter {
   repeated string subsystem = 2;
 }
 
-message GetSpansCountResponse {
+message SpansCount {
   google.protobuf.Timestamp timestamp = 1;
   google.protobuf.Int64Value success_span_count = 2;
   google.protobuf.Int64Value error_span_count = 3;
+  google.protobuf.Int64Value low_success_span_count = 4;
+  google.protobuf.Int64Value low_error_span_count = 5;
+}
+
+
+message GetSpansCountResponse {
+  repeated SpansCount spans_count = 1;
+}
+
+message GetLogsCountRequest {
+  DateRange date_range = 1;
+  // Aggregation resolution with second precision.
+  //
+  // Resolution must be between 1 second and date_range interval
+  google.protobuf.Duration resolution = 2;
+
+  // Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
+  // Match occurs on full match
+  optional ScopesFilter filters = 3;
+}
+
+message LogsCount {
+  google.protobuf.Timestamp timestamp = 1;
+  uint64 logs_count = 2;
+  Severity severity = 3;
+  Priority priority = 4;
+}
+
+message GetLogsCountResponse {
+  repeated LogsCount logs_count = 1;
 }
 
 message GetDataUsageMetricsExportStatusRequest {}

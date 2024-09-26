@@ -40,12 +40,12 @@ message RunQueryResponse {
 }
 
 message ListQueriesRequest {
+  reserved 4; // formerly request_params_hash
   int32 page = 1;
   int32 size = 2;
   google.protobuf.StringValue filter = 3;
-  optional google.protobuf.StringValue request_params_hash = 4;
   Ordering ordering = 5;
-  google.protobuf.BoolValue only_dashboard_queries = 6;
+  reserved 6;
 
   enum Ordering {
     ORDERING_DESC_UNSPECIFIED = 0;
@@ -54,9 +54,9 @@ message ListQueriesRequest {
 }
 
 message ListQueriesResponse {
+  reserved 3; // formerly request_params_hash
   repeated ArchiveQuery archive_queries = 1;
   int32 total_count = 2;
-  optional google.protobuf.StringValue request_params_hash = 3;
 }
 
 message ListQueryNamesRequest {
@@ -127,4 +127,5 @@ message ArchiveQuery {
   bool blocks_limit_reached = 20;
   ArchiveWarning archive_warning = 21;
   optional OutputSchema tsv_output_schema = 22;
+  bool shuffle_file_size_limit_reached = 23;
 }

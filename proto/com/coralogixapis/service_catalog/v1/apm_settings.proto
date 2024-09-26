@@ -4,10 +4,15 @@ package com.coralogixapis.service_catalog.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/service_catalog/v1/catalog.proto";
 
-
-message ApmSettings{
-  ApmSource service_catalog_source = 1;
+message CatalogSettings {
+  ApmSource source = 1;
   google.protobuf.Timestamp migration_period_end_date = 2;
   google.protobuf.Int32Value retention_policy = 3;
+  Catalog catalog = 4;
+}
+
+message ApmSettings{
+  repeated CatalogSettings catalog_settings = 1;
 }
