@@ -19,37 +19,52 @@ mod tests {
 
     use cx_sdk::{
         auth::AuthContext,
-        client::alerts::{
-            integration_type,
-            ActivitySchedule,
-            AlertDef,
-            AlertDefNotificationGroup,
-            AlertDefPriority,
-            AlertDefProperties,
-            AlertDefTargetSimple,
-            AlertDefType,
-            AlertsClient,
-            DayOfWeek,
-            FilterType,
-            IntegrationType,
-            LabelFilterType,
-            LabelFilters,
-            LogFilterOperationType,
-            LogSeverity,
-            LogsFilter,
-            LogsSimpleFilter,
-            LogsThresholdCondition,
-            LogsThresholdConditionType,
-            LogsThresholdRule,
-            LogsThresholdType,
-            LogsTimeWindow,
-            LogsTimeWindowType,
-            LogsTimeWindowValue,
-            Recipients,
-            Schedule,
-            Targets,
-            TimeOfDay,
-            TypeDefinition,
+        client::{
+            alerts::{
+                self,
+                integration_type,
+                ActivitySchedule,
+                AlertDef,
+                AlertDefNotificationGroup,
+                AlertDefPriority,
+                AlertDefProperties,
+                AlertDefTargetSimple,
+                AlertDefType,
+                AlertsClient,
+                DayOfWeek,
+                FilterType,
+                IntegrationType,
+                LabelFilterType,
+                LabelFilters,
+                LogFilterOperationType,
+                LogSeverity,
+                LogsFilter,
+                LogsSimpleFilter,
+                LogsThresholdCondition,
+                LogsThresholdConditionType,
+                LogsThresholdRule,
+                LogsThresholdType,
+                LogsTimeWindow,
+                LogsTimeWindowType,
+                LogsTimeWindowValue,
+                Recipients,
+                Targets,
+                TimeOfDay,
+                TypeDefinition,
+            },
+            alerts_scheduler::{
+                AlertSchedulerClient,
+                AlertSchedulerFilter,
+                AlertSchedulerRule,
+                AlertUniqueIds,
+                OneTime,
+                Schedule,
+                ScheduleOperation,
+                Scheduler,
+                Timeframe,
+                Until,
+                WhichAlerts,
+            },
         },
         CoralogixRegion,
     };
@@ -92,7 +107,7 @@ mod tests {
                 ]
                 .into_iter()
                 .collect(),
-                schedule: Some(Schedule::ActiveOn(ActivitySchedule {
+                schedule: Some(alerts::Schedule::ActiveOn(ActivitySchedule {
                     day_of_week: vec![DayOfWeek::Wednesday.into(), DayOfWeek::Thursday.into()],
                     start_time: Some(TimeOfDay {
                         hours: 8,
@@ -184,6 +199,70 @@ mod tests {
 
         alerts_service
             .delete(updated_alert.id.unwrap())
+            .await
+            .unwrap();
+    }
+
+    #[tokio::test]
+    async fn test_alert_scheduler_client() {
+        let alert_scheduler_client = AlertSchedulerClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+
+        let alert_schduler_rule = AlertSchedulerRule {
+            unique_identifier: None,
+            id: None,
+            name: String::from("example"),
+            description: Some(String::from("example")),
+            meta_labels: vec![],
+            filter: Some(AlertSchedulerFilter {
+                what_expression: "source logs | filter $d.cpodId:string == '122'".into(),
+                which_alerts: Some(WhichAlerts::AlertUniqueIds(AlertUniqueIds {
+                    value: vec!["55a457ed-5f23-407a-a724-12d7fe533a4e".into()],
+                })),
+            }),
+            schedule: Some(Schedule {
+                schedule_operation: ScheduleOperation::Mute.into(),
+                scheduler: Some(Scheduler::OneTime(OneTime {
+                    timeframe: Some(Timeframe {
+                        start_time: String::from("2021-01-04T00:00:00.000"),
+                        timezone: "UTC+2".to_string(),
+                        until: Some(Until::EndTime(String::from("2025-01-01T00:00:50.000"))),
+                    }),
+                })),
+            }),
+            enabled: true,
+            created_at: None,
+            updated_at: None,
+        };
+
+        let created_alert_scheduler_rule = alert_scheduler_client
+            .create(alert_schduler_rule)
+            .await
+            .unwrap();
+
+        let new_alert_scheduler_rule = AlertSchedulerRule {
+            name: String::from("MyAlertUpdated"),
+            ..created_alert_scheduler_rule
+        };
+
+        let updated_alert_scheduler_rule = alert_scheduler_client
+            .update(new_alert_scheduler_rule)
+            .await
+            .unwrap();
+
+        let retrieved_alert_scheduler_rule = alert_scheduler_client
+            .get(updated_alert_scheduler_rule.unique_identifier.unwrap())
+            .await;
+
+        let retrieved_alert_scheduler_rule = retrieved_alert_scheduler_rule.unwrap();
+
+        assert!(retrieved_alert_scheduler_rule.name == "MyAlertUpdated");
+
+        alert_scheduler_client
+            .delete(retrieved_alert_scheduler_rule.unique_identifier.unwrap())
             .await
             .unwrap();
     }

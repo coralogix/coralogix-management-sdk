@@ -21,9 +21,11 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	"github.com/google/uuid"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
 func TestDashboards(t *testing.T) {
@@ -76,4 +78,53 @@ func TestDashboards(t *testing.T) {
 		DashboardId: d.Id,
 	})
 	assert.Nil(t, e)
+}
+
+func TestDashboardFolders(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewDashboardsFoldersClient(creator)
+
+	id := uuid.New().String()
+
+	dashboardFolder := cxsdk.DashboardFolder{
+		Id:   wrapperspb.String(id),
+		Name: wrapperspb.String(id),
+	}
+
+	_, creationError := c.Create(context.Background(), &cxsdk.CreateDashboardFolderRequest{
+		Folder: &dashboardFolder,
+	})
+
+	assert.Nil(t, creationError)
+
+	_, updateError := c.Replace(context.Background(), &cxsdk.ReplaceDashboardFolderRequest{
+		Folder: &cxsdk.DashboardFolder{
+			Id:   wrapperspb.String(id),
+			Name: wrapperspb.String("updated " + id),
+		},
+	})
+
+	assert.Nil(t, updateError)
+
+	getDashboardFolderResponse, retrievalError := c.Get(context.Background(), &cxsdk.GetDashboardFolderRequest{
+		FolderId: wrapperspb.String(id),
+	})
+
+	assert.Nil(t, retrievalError)
+	assert.Equal(t, "updated "+id, getDashboardFolderResponse.Folder.Name.Value)
+
+	_, listError := c.List(context.Background())
+
+	assert.Nil(t, listError)
+
+	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteDashboardFolderRequest{
+		FolderId: wrapperspb.String(id),
+	})
+
+	assert.Nil(t, deletionError)
+
 }

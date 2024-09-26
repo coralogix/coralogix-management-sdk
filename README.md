@@ -30,6 +30,9 @@ Furthermore, if you want to run the examples locally, you're going to to have se
 
 Please note that for all examples these variables have to be set to a valid cluster and API key.
 
+# Examples
+You'll find some example use-cases of the SDK in the `examples` folder under each programming language. Please, keep in mind that `aaa` stands for "authentication, authorization and accounting", so you should look there if you're looking for an example related to one of those areas.
+
 # Protobuf
 
 The `proto/` directory contains all protobuf files for generating your own SDK if necessary. They are also the basis for all SDKs in this repository. 

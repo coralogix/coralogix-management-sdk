@@ -46,21 +46,38 @@ type Action = actions.Action
 // SourceType is a type of source for an action.
 type SourceType = actions.SourceType
 
-// SourceType values.
 const (
+	// SourceTypeUnspecified is an unspecified source type.
 	SourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
-	SourceTypeLog         = actions.SourceType_SOURCE_TYPE_LOG
-	SourceTypeDataMap     = actions.SourceType_SOURCE_TYPE_DATA_MAP
+
+	// SourceTypeLog is a webhook source type.
+	SourceTypeLog = actions.SourceType_SOURCE_TYPE_LOG
+
+	// SourceTypeDataMap is a data map source type.
+	SourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
 )
 
 const (
-	GetActionRpc                 = actions.ActionsService_GetAction_FullMethodName
-	CreateActionRpc              = actions.ActionsService_CreateAction_FullMethodName
-	ReplaceActionRpc             = actions.ActionsService_ReplaceAction_FullMethodName
-	DeleteActionRpc              = actions.ActionsService_DeleteAction_FullMethodName
-	OrderActionsRpc              = actions.ActionsService_OrderActions_FullMethodName
-	ListActionsRpc               = actions.ActionsService_ListActions_FullMethodName
-	AtomicBatchExecuteActionsRpc = actions.ActionsService_AtomicBatchExecuteActions_FullMethodName
+	// GetActionRPC is the RPC for getting an action.
+	GetActionRPC = actions.ActionsService_GetAction_FullMethodName
+
+	// CreateActionRPC is the RPC for creating an action.
+	CreateActionRPC = actions.ActionsService_CreateAction_FullMethodName
+
+	// ReplaceActionRPC is the RPC for replacing an action.
+	ReplaceActionRPC = actions.ActionsService_ReplaceAction_FullMethodName
+
+	// RemoveActionRPC is the RPC for removing an action.
+	RemoveActionRPC = actions.ActionsService_DeleteAction_FullMethodName
+
+	// OrderActionsRPC is the RPC for ordering actions.
+	OrderActionsRPC = actions.ActionsService_OrderActions_FullMethodName
+
+	// ListActionsRPC is the RPC for listing actions.
+	ListActionsRPC = actions.ActionsService_ListActions_FullMethodName
+
+	// AtomicBatchExecuteActionsRPC is the RPC for executing actions atomically.
+	AtomicBatchExecuteActionsRPC = actions.ActionsService_AtomicBatchExecuteActions_FullMethodName
 )
 
 // Create creates a new action.

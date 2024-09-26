@@ -10,3 +10,5 @@ cx-sdk = { path = "../../cx-sdk" }
 http = "*"
 tokio = { version = "*", features = ["full"] }
 tonic = "*"
+url = "*"
+uuid = { version = "*", features = ["serde", "v4"] }

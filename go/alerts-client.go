@@ -68,13 +68,13 @@ type AlertDefActivitySchedule = alerts.ActivitySchedule
 // CreateAlertDefRequest is a request to create an alert.
 type CreateAlertDefRequest = alerts.CreateAlertDefRequest
 
-// CreateAlertDefRequest is a request to create an alert.
+// GetAlertDefRequest is a request to create an alert.
 type GetAlertDefRequest = alerts.GetAlertDefRequest
 
-// CreateAlertDefRequest is a request to create an alert.
+// ReplaceAlertDefRequest is a request to create an alert.
 type ReplaceAlertDefRequest = alerts.ReplaceAlertDefRequest
 
-// CreateAlertDefRequest is a request to create an alert.
+// DeleteAlertDefRequest is a request to create an alert.
 type DeleteAlertDefRequest = alerts.DeleteAlertDefRequest
 
 // AlertDefProperties is the properties of an alert.
@@ -92,7 +92,7 @@ type LogsThresholdConditionType = alerts.LogsThresholdConditionType
 // LogsRatioTimeWindow is a time window setting for logs.
 type LogsRatioTimeWindow = alerts.LogsRatioTimeWindow
 
-// LogsRatioTimeWindowValue is a specific time window setting for logs.
+// LogsRatioTimeWindowSpecificValue is a specific time window setting for logs.
 type LogsRatioTimeWindowSpecificValue = alerts.LogsRatioTimeWindow_LogsRatioTimeWindowSpecificValue
 
 // LogsThresholdRule is a rule for logs of the Threshold type.
@@ -233,7 +233,7 @@ type FlowStages = alerts.FlowStages
 // FlowStagesGroup is a type for flow stages for the Flow Alert.
 type FlowStagesGroup = alerts.FlowStagesGroup
 
-// FlowStagesGroupValue is a type for flow stages for the Flow Alert.
+// FlowStagesGroupsValue is a type for flow stages for the Flow Alert.
 type FlowStagesGroupsValue = alerts.FlowStagesGroups
 
 // FlowStagesGroups is a type for flow stage groups for the Flow Alert.
@@ -293,7 +293,7 @@ type UndetectedValuesManagement = alerts.UndetectedValuesManagement
 // LogsUnusualConditionType is the condition type for unusual alert types.
 type LogsUnusualConditionType = alerts.LogsUnusualConditionType
 
-// LogsUnusualConditionType is a value for unusual alert type conditions.
+// LogsUnusualConditionTypeMoreThanOrUnspecified is a value for unusual alert type conditions.
 const LogsUnusualConditionTypeMoreThanOrUnspecified = alerts.LogsUnusualConditionType_LOGS_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
 
 // TracingFilter is a filter type for tracing alerts.
@@ -408,12 +408,12 @@ const (
 
 // Alert API RPC names.
 const (
-	CreateAlertDefRpc    = alerts.AlertDefsService_CreateAlertDef_FullMethodName
-	DeleteAlertDefRpc    = alerts.AlertDefsService_DeleteAlertDef_FullMethodName
-	GetAlertDefRpc       = alerts.AlertDefsService_GetAlertDef_FullMethodName
-	ListAlertDefsRpc     = alerts.AlertDefsService_ListAlertDefs_FullMethodName
-	ReplaceAlertDefRpc   = alerts.AlertDefsService_ReplaceAlertDef_FullMethodName
-	SetAlertDefActiveRpc = alerts.AlertDefsService_SetActive_FullMethodName
+	CreateAlertDefRPC    = alerts.AlertDefsService_CreateAlertDef_FullMethodName
+	DeleteAlertDefRPC    = alerts.AlertDefsService_DeleteAlertDef_FullMethodName
+	GetAlertDefRPC       = alerts.AlertDefsService_GetAlertDef_FullMethodName
+	ListAlertDefsRPC     = alerts.AlertDefsService_ListAlertDefs_FullMethodName
+	ReplaceAlertDefRPC   = alerts.AlertDefsService_ReplaceAlertDef_FullMethodName
+	SetAlertDefActiveRPC = alerts.AlertDefsService_SetActive_FullMethodName
 )
 
 // AlertNotifyOnTriggeredOnlyUnspecified is a notification setting for an alert.
@@ -489,16 +489,22 @@ const (
 type AlertsOp = alerts.AlertsOp
 
 const (
+	// AlertsOpAndOrUnspecified is an and/or operation for alerts.
 	AlertsOpAndOrUnspecified = alerts.AlertsOp_ALERTS_OP_AND_OR_UNSPECIFIED
-	AlertsOpOr               = alerts.AlertsOp_ALERTS_OP_OR
+
+	// AlertsOpOr is an and operation for alerts.
+	AlertsOpOr = alerts.AlertsOp_ALERTS_OP_OR
 )
 
 // NextOp is a next operation setting for alerts.
 type NextOp = alerts.NextOp
 
 const (
+	// NextOpAndOrUnspecified is an and/or operation for alerts.
 	NextOpAndOrUnspecified = alerts.NextOp_NEXT_OP_AND_OR_UNSPECIFIED
-	NextOpOr               = alerts.NextOp_NEXT_OP_OR
+
+	// NextOpOr is an or operation for alerts.
+	NextOpOr = alerts.NextOp_NEXT_OP_OR
 )
 
 // LogsUniqueValueTimeWindow is a time window for logs unique count alerts.
@@ -652,16 +658,23 @@ const (
 // LogsRatioGroupByFor is a group by setting for logs.
 type LogsRatioGroupByFor = alerts.LogsRatioGroupByFor
 
-// LogsRatioGroupByFor values.
 const (
+	// LogsRatioGroupByForBothOrUnspecified is a group by setting for logs.
 	LogsRatioGroupByForBothOrUnspecified = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_BOTH_OR_UNSPECIFIED
-	LogsRatioGroupByForNumeratorOnly     = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY
-	LogsRatioGroupByForDenumeratorOnly   = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY
+
+	// LogsRatioGroupByForNumeratorOnly is a group by setting for logs.
+	LogsRatioGroupByForNumeratorOnly = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY
+
+	// LogsRatioGroupByForDenumeratorOnly is a group by setting for logs.
+	LogsRatioGroupByForDenumeratorOnly = alerts.LogsRatioGroupByFor_LOGS_RATIO_GROUP_BY_FOR_DENUMERATOR_ONLY
 )
 
 const (
+	// LogsThresholdConditionTypeMoreThanOrUnspecified is a type of alert type.
 	LogsThresholdConditionTypeMoreThanOrUnspecified = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
-	LogsThresholdConditionTypeLessThan              = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN
+
+	// LogsThresholdConditionTypeLessThan is a type of alert type.
+	LogsThresholdConditionTypeLessThan = alerts.LogsThresholdConditionType_LOGS_THRESHOLD_CONDITION_TYPE_LESS_THAN
 )
 
 // AlertsClient is a client for the Coralogix Alerts API.

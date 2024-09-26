@@ -16,9 +16,15 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::dashboards::{
-            Dashboard,
-            DashboardsClient,
+        client::{
+            dashboard_folders::{
+                DashboardFolder,
+                DashboardFoldersClient,
+            },
+            dashboards::{
+                Dashboard,
+                DashboardsClient,
+            },
         },
         CoralogixRegion,
     };
@@ -47,5 +53,41 @@ mod tests {
         assert!(!dashboards.items.is_empty());
         assert!(dashboards.items.iter().any(|d| d.id == Some(id.clone())));
         let _ = client.delete(id.clone()).await.unwrap();
+    }
+
+    #[tokio::test]
+    async fn test_dashboard_folders() {
+        let client = DashboardFoldersClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        let id = uuid::Uuid::new_v4().to_string();
+        let dashboard_folder = DashboardFolder {
+            id: Some(id.clone()),
+            name: Some(id.clone()),
+            parent_id: None,
+        };
+
+        let _ = client.create(dashboard_folder).await.unwrap();
+
+        let updated_dashboard_folder = DashboardFolder {
+            id: Some(id.clone()),
+            name: Some(format!("updated {}", id)),
+            parent_id: None,
+        };
+
+        let _ = client.replace(updated_dashboard_folder).await.unwrap();
+
+        let dashboard_folder = client.get(id.clone()).await.unwrap().folder.unwrap();
+
+        assert_eq!(dashboard_folder.name.unwrap(), format!("updated {}", id));
+
+        let dashboard_folders = client.list().await.unwrap();
+
+        assert_ne!(dashboard_folders.folder.len(), 0);
+
+        let _ = client.delete(id).await.unwrap();
     }
 }
