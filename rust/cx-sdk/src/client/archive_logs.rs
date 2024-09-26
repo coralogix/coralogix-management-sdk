@@ -15,14 +15,21 @@
 pub use cx_api::proto::com::coralogix::archive::v2::set_target_request::TargetSpec;
 use cx_api::proto::com::coralogix::archive::v2::target_service_client::TargetServiceClient;
 use cx_api::proto::com::coralogix::archive::v2::{
-    GetTargetRequest, GetTargetResponse, SetTargetRequest, SetTargetResponse, ValidateTargetRequest,
+    GetTargetRequest,
+    GetTargetResponse,
+    SetTargetRequest,
+    SetTargetResponse,
+    ValidateTargetRequest,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::transport::ClientTlsConfig;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, Endpoint},
+    transport::{
+        Channel,
+        Endpoint,
+    },
 };
 
 pub use cx_api::proto::com::coralogix::archive::v2::validate_target_request::TargetSpec as TargetSpecValidation;
@@ -30,7 +37,11 @@ pub use cx_api::proto::com::coralogix::archive::v2::S3TargetSpec;
 
 use crate::auth::AuthContext;
 use crate::CoralogixRegion;
-use crate::{error::Result, metadata::CallProperties, util::make_request_with_metadata};
+use crate::{
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
+};
 
 /// The logs archive API client.
 /// Read more at [https://coralogix.com/docs/archive-s3-bucket-forever/]()

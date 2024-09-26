@@ -15,20 +15,40 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogixapis::aaa::organisations::v2::{
-    team_service_client::TeamServiceClient, CreateTeamInOrgRequest, CreateTeamInOrgResponse,
-    DeleteTeamRequest, DeleteTeamResponse, GetTeamQuotaRequest, GetTeamQuotaResponse,
-    GetTeamRequest, GetTeamResponse, ListTeamsRequest, ListTeamsResponse, MoveQuotaRequest,
-    MoveQuotaResponse, SetDailyQuotaRequest, SetDailyQuotaResponse, TeamId, UpdateTeamRequest,
+    team_service_client::TeamServiceClient,
+    CreateTeamInOrgRequest,
+    CreateTeamInOrgResponse,
+    DeleteTeamRequest,
+    DeleteTeamResponse,
+    GetTeamQuotaRequest,
+    GetTeamQuotaResponse,
+    GetTeamRequest,
+    GetTeamResponse,
+    ListTeamsRequest,
+    ListTeamsResponse,
+    MoveQuotaRequest,
+    MoveQuotaResponse,
+    SetDailyQuotaRequest,
+    SetDailyQuotaResponse,
+    TeamId,
+    UpdateTeamRequest,
     UpdateTeamResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::CoralogixRegion;

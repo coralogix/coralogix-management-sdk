@@ -14,21 +14,36 @@
 
 use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
     metrics_configurator_public_service_client::MetricsConfiguratorPublicServiceClient,
-    metrics_configurator_service_client::MetricsConfiguratorServiceClient, ConfigureTenantRequest,
-    GetTenantConfigRequest, GetTenantConfigResponse, GetTenantConfigResponseV2,
-    InternalUpdateRequest, ListHotStoreConfigsRequest, ListHotStoreConfigsResponse,
-    ListTenantConfigsRequest, ListTenantConfigsResponse, MigrateTenantRequest, UpdateRequest,
+    metrics_configurator_service_client::MetricsConfiguratorServiceClient,
+    ConfigureTenantRequest,
+    GetTenantConfigRequest,
+    GetTenantConfigResponse,
+    GetTenantConfigResponseV2,
+    InternalUpdateRequest,
+    ListHotStoreConfigsRequest,
+    ListHotStoreConfigsResponse,
+    ListTenantConfigsRequest,
+    ListTenantConfigsResponse,
+    MigrateTenantRequest,
+    UpdateRequest,
     ValidateBucketRequest,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
     CoralogixRegion,
 };
 
@@ -38,7 +53,8 @@ pub use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
     tenant_config::StorageConfig as InternalStorageConfig,
     tenant_config_v2::StorageConfig as StorageConfigView,
     update_request::StorageConfig as StorageConfigUpdate,
-    validate_bucket_request::StorageConfig as StorageConfigValidation, RetentionPolicyRequest,
+    validate_bucket_request::StorageConfig as StorageConfigValidation,
+    RetentionPolicyRequest,
     S3Config,
 };
 

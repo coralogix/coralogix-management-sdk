@@ -31,6 +31,7 @@ message BarChart {
   google.protobuf.StringValue color_scheme = 10;
   common.DataModeType data_mode_type = 11;
   BarValueDisplay bar_value_display = 12;
+  google.protobuf.StringValue custom_unit = 13;
 
   message Query {
     oneof value {

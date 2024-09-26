@@ -6,6 +6,7 @@ import "com/coralogixapis/dashboards/v1/ast/dashboard.proto";
 import "com/coralogixapis/dashboards/v1/audit_log.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 service DashboardsService {
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
@@ -68,6 +69,8 @@ message GetDashboardRequest {
 
 message GetDashboardResponse {
   ast.Dashboard dashboard = 1;
+
+  google.protobuf.Timestamp updated_at = 2;
 }
 
 message PinDashboardRequest {

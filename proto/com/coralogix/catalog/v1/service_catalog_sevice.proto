@@ -10,6 +10,8 @@ import "com/coralogix/schemastore/v1/tracing_fields.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "com/coralogixapis/alerts/v3/alert_def.proto";
 import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "com/coralogixapis/apm/widgets/v1/stat.proto";
 
 message GetServicesRequest {
   ServiceQuery query = 1;
@@ -108,4 +110,5 @@ service ServiceCatalogService {
   rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
   }
+
 }

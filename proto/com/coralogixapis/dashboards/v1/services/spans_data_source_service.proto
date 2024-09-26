@@ -39,6 +39,9 @@ service SpansDataSourceService {
   rpc SearchSpansAnnotationEvents(SearchSpansAnnotationEventsRequest) returns (SearchSpansAnnotationEventsResponse) {
     option (audit_log_description).description = "search spans annotation events";
   }
+  rpc SearchSpansGroupedValues(SearchSpansGroupedValuesRequest) returns (SearchSpansGroupedValuesResponse) {
+    option (audit_log_description).description = "search spans grouped values";
+  }
 }
 
 message SearchSpansTimeSeriesRequest {
@@ -174,4 +177,19 @@ message SearchSpansAnnotationEventsRequest {
 
 message SearchSpansAnnotationEventsResponse {
   repeated common.AnnotationEvent annotation_events = 1;
+}
+
+message SearchSpansGroupedValuesRequest {
+  common.TimeFrame time_frame = 1;
+  repeated ast.Filter.SpansFilter filters = 2;
+  google.protobuf.StringValue lucene_query = 3;
+  repeated common.SpanField group_by = 4;
+  common.SpansAggregation aggregation = 5;
+  google.protobuf.Int32Value limit = 6;
+}
+
+message SearchSpansGroupedValuesResponse {
+  repeated common.Group groups = 1;
+  bool is_limit_exceeded = 2;
+  google.protobuf.Int64Value total = 3;
 }

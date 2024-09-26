@@ -14,8 +14,8 @@ message SpansAvro {
 
 message Format {
   oneof format {
-    LogsAvro logs_avro = 1;
-    SpansAvro spans_avro = 2;
+    LogsAvro logs_avro = 1 [deprecated = true];
+    SpansAvro spans_avro = 2 [deprecated = true];
     com.coralogix.archive.format.generic.v1.GenericEventAvro generic_event_avro = 3;
     com.coralogix.archive.format.wide_parquet.v1.WideParquet wide_parquet = 4;
   }

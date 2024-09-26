@@ -104,6 +104,7 @@ message ListOperationsRequest{
   repeated SpanKind span_kind = 4;
   ApmSource apm_source = 5;
   google.protobuf.Int64Value trend_offset = 6;
+  repeated google.protobuf.StringValue columns = 7;
 }
 
 message ListOperationsResponse{

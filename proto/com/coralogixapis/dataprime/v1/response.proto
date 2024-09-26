@@ -29,6 +29,7 @@ message DataprimeWarning {
     ArchiveWarning archive_warning = 8;
     ScrollTimeoutWarning scroll_timeout_warning = 9;
     FieldCountLimitWarning field_count_limit_warning = 10;
+    ShuffleFileSizeLimitReachedWarning shuffle_file_size_limit_reached_warning = 11;
   }
 }
 
@@ -132,3 +133,6 @@ message ScrollTimeoutWarning {}
 
 // warning for when result contain entries where number of fields is truncated
 message FieldCountLimitWarning {}
+
+// warning for when shuffle file size limit is reached - e.g. during a join with a large right side
+message ShuffleFileSizeLimitReachedWarning {}

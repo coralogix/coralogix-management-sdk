@@ -15,23 +15,45 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogixapis::events2metrics::v2::{
-    events2_metric_service_client::Events2MetricServiceClient, CreateE2mRequest, CreateE2mResponse,
-    DeleteE2mRequest, DeleteE2mResponse, GetE2mRequest, GetE2mResponse, GetLimitsRequest,
-    GetLimitsResponse, ListE2mRequest, ListE2mResponse, ListLabelsCardinalityRequest,
-    ListLabelsCardinalityResponse, ReplaceE2mRequest, ReplaceE2mResponse,
+    events2_metric_service_client::Events2MetricServiceClient,
+    CreateE2mRequest,
+    CreateE2mResponse,
+    DeleteE2mRequest,
+    DeleteE2mResponse,
+    GetE2mRequest,
+    GetE2mResponse,
+    GetLimitsRequest,
+    GetLimitsResponse,
+    ListE2mRequest,
+    ListE2mResponse,
+    ListLabelsCardinalityRequest,
+    ListLabelsCardinalityResponse,
+    ReplaceE2mRequest,
+    ReplaceE2mResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 pub use cx_api::proto::com::coralogixapis::events2metrics::v2::{
-    list_labels_cardinality_request::Query, E2m, E2mCreateParams, MetricField, MetricLabel,
+    list_labels_cardinality_request::Query,
+    E2m,
+    E2mCreateParams,
+    MetricField,
+    MetricLabel,
 };
 
 use crate::CoralogixRegion;

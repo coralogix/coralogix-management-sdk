@@ -550,6 +550,12 @@ message Expression {
       Expression array2 = 2;
     }
 
+    message ArraySort {
+      Expression array = 1;
+      optional Expression desc = 2;
+      optional Expression nulls_first = 3;
+    }
+
     oneof function {
       FirstNonNull first_non_null             = 1;
       If if                                   = 2;
@@ -634,6 +640,7 @@ message Expression {
       ArrayRemoveAt array_remove_at           = 83;
       ArrayRemove array_remove                = 84;
       IpInRange ip_in_range                   = 85;
+      ArraySort array_sort                    = 86;
     }
   }
 

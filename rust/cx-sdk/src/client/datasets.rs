@@ -15,22 +15,37 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 pub use crate::com::coralogixapis::actions::v2::Action;
 
 use cx_api::proto::com::coralogix::enrichment::v1::{
-    custom_enrichment_service_client::CustomEnrichmentServiceClient, file::Content,
-    CreateCustomEnrichmentRequest, CreateCustomEnrichmentResponse, DeleteCustomEnrichmentRequest,
-    DeleteCustomEnrichmentResponse, File, GetCustomEnrichmentRequest, GetCustomEnrichmentResponse,
-    GetCustomEnrichmentsRequest, GetCustomEnrichmentsResponse, UpdateCustomEnrichmentRequest,
+    custom_enrichment_service_client::CustomEnrichmentServiceClient,
+    file::Content,
+    CreateCustomEnrichmentRequest,
+    CreateCustomEnrichmentResponse,
+    DeleteCustomEnrichmentRequest,
+    DeleteCustomEnrichmentResponse,
+    File,
+    GetCustomEnrichmentRequest,
+    GetCustomEnrichmentResponse,
+    GetCustomEnrichmentsRequest,
+    GetCustomEnrichmentsResponse,
+    UpdateCustomEnrichmentRequest,
     UpdateCustomEnrichmentResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::CoralogixRegion;

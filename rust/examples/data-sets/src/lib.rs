@@ -14,7 +14,11 @@
 
 #[cfg(test)]
 mod tests {
-    use cx_sdk::{auth::AuthContext, client::datasets::DatasetClient, CoralogixRegion};
+    use cx_sdk::{
+        auth::AuthContext,
+        client::datasets::DatasetClient,
+        CoralogixRegion,
+    };
     use tokio::fs;
 
     #[tokio::test]

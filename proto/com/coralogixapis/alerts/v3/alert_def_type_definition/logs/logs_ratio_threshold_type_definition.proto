@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_group_by_for.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_condition_type.proto";
+
+message LogsRatioThresholdType  {
+    LogsFilter numerator = 1;
+    google.protobuf.StringValue numerator_alias =2;
+    LogsFilter denominator = 3;
+    google.protobuf.StringValue denominator_alias = 4;
+    repeated LogsRatioRules rules = 5;
+    repeated google.protobuf.StringValue notification_payload_filter = 6;
+    LogsRatioGroupByFor group_by_for = 7;
+    UndetectedValuesManagement undetected_values_management = 8;
+}
+message LogsRatioRules {
+    LogsRatioCondition condition = 1;
+}
+
+message LogsRatioCondition {
+    google.protobuf.DoubleValue threshold = 1;
+    LogsRatioTimeWindow time_window = 2;
+    google.protobuf.BoolValue ignore_infinity = 3;
+    LogsRatioConditionType condition_type  = 4;
+}

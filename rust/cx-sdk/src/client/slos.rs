@@ -15,27 +15,48 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    service_slo_service_client::ServiceSloServiceClient, BatchGetServiceSlosRequest,
-    BatchGetServiceSlosResponse, CreateServiceSloRequest, CreateServiceSloResponse,
-    DeleteServiceSloRequest, DeleteServiceSloResponse, GetServiceSloRequest, GetServiceSloResponse,
-    ListServiceSlosRequest, ListServiceSlosResponse, ReplaceServiceSloRequest,
+    service_slo_service_client::ServiceSloServiceClient,
+    BatchGetServiceSlosRequest,
+    BatchGetServiceSlosResponse,
+    CreateServiceSloRequest,
+    CreateServiceSloResponse,
+    DeleteServiceSloRequest,
+    DeleteServiceSloResponse,
+    GetServiceSloRequest,
+    GetServiceSloResponse,
+    ListServiceSlosRequest,
+    ListServiceSlosResponse,
+    ReplaceServiceSloRequest,
     ReplaceServiceSloResponse,
 };
 
 pub use cx_api::proto::com::coralogixapis::apm::common::v2::OrderBy;
 pub use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    service_slo::SliType, CompareType, ErrorSli, ServiceSlo, SliFilter, SliMetricType, SloPeriod,
+    service_slo::SliType,
+    CompareType,
+    ErrorSli,
+    ServiceSlo,
+    SliFilter,
+    SliMetricType,
+    SloPeriod,
     SloStatus,
 };
 
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::CoralogixRegion;

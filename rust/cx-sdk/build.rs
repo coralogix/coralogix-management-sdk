@@ -1,5 +1,8 @@
 //! Build script for the cx-sdk crate.
-use std::process::{Command, Stdio};
+use std::process::{
+    Command,
+    Stdio,
+};
 
 const DEFAULT_VERSION_STRING: &str = "unknown_version";
 

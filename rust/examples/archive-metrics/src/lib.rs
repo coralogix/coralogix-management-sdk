@@ -17,8 +17,12 @@ mod tests {
     use cx_sdk::{
         auth::AuthContext,
         client::archive_metrics::{
-            MetricsArchiveClient, S3Config, StorageConfig, StorageConfigUpdate,
-            StorageConfigValidation, StorageConfigView,
+            MetricsArchiveClient,
+            S3Config,
+            StorageConfig,
+            StorageConfigUpdate,
+            StorageConfigValidation,
+            StorageConfigView,
         },
         CoralogixRegion,
     };

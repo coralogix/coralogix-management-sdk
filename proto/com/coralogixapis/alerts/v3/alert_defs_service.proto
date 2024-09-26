@@ -57,6 +57,14 @@ service AlertDefsService {
     };
   }
 
+  rpc DownloadAlerts(DownloadAlertsRequest) returns (stream DownloadAlertsResponse){
+    option (audit_log_description).description = "Download alerts";
+    option (google.api.http) = {
+      get: "/v3/alerts/download"
+      body: "*"
+    };
+  }
+
   rpc DeleteAlertDef(DeleteAlertDefRequest) returns (DeleteAlertDefResponse){
     option (audit_log_description).description = "delete alert definitions";
     option (google.api.http) = {
@@ -128,6 +136,15 @@ message ListAlertDefsResponse {
 
 message ListAlertDefsRequest {
 }
+
+message DownloadAlertsRequest {
+}
+
+
+message DownloadAlertsResponse {
+  bytes content = 1;
+}
+
 
 message BatchGetAlertDefRequest {
   repeated google.protobuf.StringValue ids = 1 ;

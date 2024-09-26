@@ -5,8 +5,11 @@ import "google/protobuf/struct.proto";
 import "com/coralogixapis/service_catalog/v1/apm_settings.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/service_catalog/v1/catalog.proto";
 
-message GetApmSettingsRequest {}
+message GetApmSettingsRequest {
+  com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
+}
 
 message GetApmSettingsResponse{
   ApmSettings apm_settings = 1;
@@ -38,13 +41,16 @@ message ValidateApmSourceResponse {
 
 message ReplaceRetentionPeriodRequest {
   google.protobuf.Int32Value retention_period_in_days = 1;
+  com.coralogixapis.service_catalog.v1.Catalog catalog = 2;
 }
 
 message ReplaceRetentionPeriodResponse {
   google.protobuf.Int32Value retention_period_in_days = 1;
 }
 
-message GetApmSourceRequest {}
+message GetApmSourceRequest {
+  com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
+}
 
 message GetApmSourceResponse {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;

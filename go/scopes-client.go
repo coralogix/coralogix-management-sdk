@@ -40,13 +40,13 @@ type Filter = scopes.Filter
 
 const (
 	// EntityTypeUnspecified is an unspecified entity type
-	EntityTypeUnspecified = scopes.EntityType_UNSPECIFIED
+	EntityTypeUnspecified = scopes.EntityType_ENTITY_TYPE_UNSPECIFIED
 
 	// EntityTypeLogs is a logs entity type
-	EntityTypeLogs = scopes.EntityType_LOGS
+	EntityTypeLogs = scopes.EntityType_ENTITY_TYPE_LOGS
 
 	// EntityTypeSpans is a metrics entity type
-	EntityTypeSpans = scopes.EntityType_SPANS
+	EntityTypeSpans = scopes.EntityType_ENTITY_TYPE_SPANS
 )
 
 // ScopesClient is a client for the scopes service

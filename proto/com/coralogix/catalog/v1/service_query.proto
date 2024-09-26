@@ -10,4 +10,5 @@ message ServiceQuery {
   TimeRange time_range = 1;
   repeated ApmFilter service_catalog_filters = 2;
   google.protobuf.Int64Value trend_offset = 3;
+  repeated google.protobuf.StringValue columns = 4;
 }

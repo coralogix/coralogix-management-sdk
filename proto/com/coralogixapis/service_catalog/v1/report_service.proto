@@ -1,0 +1,42 @@
+syntax = "proto3";
+package com.coralogixapis.service_catalog.v1;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+import "com/coralogixapis/service_catalog/v1/operation.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+
+message GetReportRequest {
+  google.protobuf.StringValue company_id = 1;
+}
+
+message GetReportResponse {
+    repeated CompanyReport company_report = 1;
+}
+
+message CompanyReport {
+  google.protobuf.Int64Value company_id = 1;
+  google.protobuf.StringValue company_name = 2;
+  google.protobuf.StringValue environment = 3;
+  google.protobuf.Int64Value service_retention_period = 4;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 5;
+  google.protobuf.StringValue migration_period = 6;
+  google.protobuf.Int64Value service_count = 7;
+  google.protobuf.Int64Value active_service_count = 8;
+  google.protobuf.Int64Value database_count = 9;
+  google.protobuf.Int64Value active_database_count = 10;
+  google.protobuf.Int64Value serverless_count = 11;
+  google.protobuf.Int64Value service_flows_count = 12;
+  google.protobuf.Int64Value service_flows_instrumented_count = 13;
+  google.protobuf.Int64Value slo_count = 14;
+  google.protobuf.Int64Value alert_count = 15;
+  google.protobuf.Int64Value db_retention_period = 16;
+  com.coralogixapis.service_catalog.v1.ApmSource db_apm_source = 17;
+  google.protobuf.StringValue db_migration_period = 18;
+}
+
+service ReportService{
+  rpc GetReport(GetReportRequest) returns (GetReportResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Report of service catalog usage.";
+  }
+}

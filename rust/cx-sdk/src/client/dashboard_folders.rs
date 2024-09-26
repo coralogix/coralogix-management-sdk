@@ -15,22 +15,36 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 pub use crate::com::coralogixapis::actions::v2::Action;
 
 pub use cx_api::proto::com::coralogixapis::dashboards::v1::ast::*;
 use cx_api::proto::com::coralogixapis::dashboards::v1::services::{
-    dashboard_folders_service_client::DashboardFoldersServiceClient, CreateDashboardFolderRequest,
-    CreateDashboardFolderResponse, DeleteDashboardFolderRequest, DeleteDashboardFolderResponse,
-    GetDashboardFolderRequest, GetDashboardFolderResponse, ListDashboardFoldersRequest,
-    ListDashboardFoldersResponse, ReplaceDashboardFolderRequest, ReplaceDashboardFolderResponse,
+    dashboard_folders_service_client::DashboardFoldersServiceClient,
+    CreateDashboardFolderRequest,
+    CreateDashboardFolderResponse,
+    DeleteDashboardFolderRequest,
+    DeleteDashboardFolderResponse,
+    GetDashboardFolderRequest,
+    GetDashboardFolderResponse,
+    ListDashboardFoldersRequest,
+    ListDashboardFoldersResponse,
+    ReplaceDashboardFolderRequest,
+    ReplaceDashboardFolderResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
     Request,
 };
 

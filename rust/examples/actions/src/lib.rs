@@ -17,7 +17,11 @@ mod tests {
 
     use cx_sdk::{
         auth::AuthContext,
-        client::actions::{Action, ActionsClient, SourceType},
+        client::actions::{
+            Action,
+            ActionsClient,
+            SourceType,
+        },
         CoralogixRegion,
     };
 

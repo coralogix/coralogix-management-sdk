@@ -136,6 +136,7 @@ enum Resource {
   RESOURCE_TEAM_LANDING_PAGE = 124 [(name) = "team-landing-page"];
   RESOURCE_RESOURCE_CATALOG = 125 [(name) = "resource-catalog"];
   RESOURCE_TEAM_ALERTS_SETTINGS = 126 [(name) = "team-alerts-settings"];
+  RESOURCE_TEAM_AI_SETTINGS = 127 [(name) = "team-ai-settings"];
 }
 
 

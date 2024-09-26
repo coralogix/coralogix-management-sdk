@@ -15,22 +15,38 @@
 use cx_api::proto::com::coralogixapis::aaa::apikeys::v3::{
     api_keys_service_client::ApiKeysServiceClient,
     create_api_key_request::KeyPermissions,
-    update_api_key_request::{Permissions, Presets},
-    CreateApiKeyRequest, CreateApiKeyResponse, DeleteApiKeyRequest, DeleteApiKeyResponse,
-    GetApiKeyRequest, GetApiKeyResponse, Owner as OwnerWrapper, UpdateApiKeyRequest,
+    update_api_key_request::{
+        Permissions,
+        Presets,
+    },
+    CreateApiKeyRequest,
+    CreateApiKeyResponse,
+    DeleteApiKeyRequest,
+    DeleteApiKeyResponse,
+    GetApiKeyRequest,
+    GetApiKeyResponse,
+    Owner as OwnerWrapper,
+    UpdateApiKeyRequest,
     UpdateApiKeyResponse,
 };
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
     CoralogixRegion,
 };
 
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 pub use crate::com::coralogixapis::aaa::apikeys::v3::owner::Owner;

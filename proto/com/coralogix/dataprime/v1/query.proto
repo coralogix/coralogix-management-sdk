@@ -246,6 +246,14 @@ message ExecutionConfig {
 
   // Sets of executor resource groups the query can be scheduled on
   repeated ResourceGroup resource_group = 21;
+
+
+  // Sets the maximum size of output shuffle size during query execution. If set,
+  // shuffle files will be truncated after hitting this size limit, leading to possibly
+  // incomplete query results. 
+  // If the limit is hit during query execution, the `shuffle_limit_reached` flag should
+  // be set in the query status 
+  optional uint64 shuffle_size_limit = 22;
 }
 
 enum SchedulingTier {
@@ -332,6 +340,10 @@ message QueryStatus {
     bool scroll_timeout_reached = 8;
 
     bool column_limit_reached = 9;
+
+    // One or more shuffle partitions hit the max size and were
+    // truncated. This indicates that query results are possibly imcomplete
+    bool shuffle_limit_reached = 10;
   }
 
   message Planning {

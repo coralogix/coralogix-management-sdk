@@ -15,24 +15,44 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogix::quota::v1::{
-    policies_service_client::PoliciesServiceClient, update_policy_request, CreatePolicyRequest,
-    CreatePolicyResponse, DeletePolicyRequest, DeletePolicyResponse, GetCompanyPoliciesRequest,
-    GetCompanyPoliciesResponse, GetPolicyRequest, GetPolicyResponse, UpdatePolicyRequest,
+    policies_service_client::PoliciesServiceClient,
+    update_policy_request,
+    CreatePolicyRequest,
+    CreatePolicyResponse,
+    DeletePolicyRequest,
+    DeletePolicyResponse,
+    GetCompanyPoliciesRequest,
+    GetCompanyPoliciesResponse,
+    GetPolicyRequest,
+    GetPolicyResponse,
+    UpdatePolicyRequest,
     UpdatePolicyResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 pub use cx_api::proto::com::coralogix::quota::v1::{
-    create_policy_request::SourceTypeRules, ArchiveRetention, LogRules, Rule, RuleTypeId,
-    SourceType, SpanRules,
+    create_policy_request::SourceTypeRules,
+    ArchiveRetention,
+    LogRules,
+    Rule,
+    RuleTypeId,
+    SourceType,
+    SpanRules,
 };
 
 fn convert_source_types(a: SourceTypeRules) -> update_policy_request::SourceTypeRules {

@@ -11,12 +11,23 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-use serde::{Deserialize, Serialize};
+use serde::{
+    Deserialize,
+    Serialize,
+};
 
 use crate::{
-    auth::{ApiKey, AuthContext},
-    CoralogixRegion, RUSTC_VERSION, SDK_CORRELATION_ID_HEADER_NAME, SDK_LANGUAGE_HEADER_NAME,
-    SDK_RUSTC_VERSION_HEADER_NAME, SDK_VERSION, SDK_VERSION_HEADER_NAME,
+    auth::{
+        ApiKey,
+        AuthContext,
+    },
+    CoralogixRegion,
+    RUSTC_VERSION,
+    SDK_CORRELATION_ID_HEADER_NAME,
+    SDK_LANGUAGE_HEADER_NAME,
+    SDK_RUSTC_VERSION_HEADER_NAME,
+    SDK_VERSION,
+    SDK_VERSION_HEADER_NAME,
 };
 
 #[derive(Serialize, Deserialize)]

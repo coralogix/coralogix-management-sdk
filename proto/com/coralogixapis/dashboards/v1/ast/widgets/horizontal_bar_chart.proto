@@ -30,6 +30,7 @@ message HorizontalBarChart {
   common.SortByType sort_by = 11;
   google.protobuf.StringValue color_scheme = 12;
   common.DataModeType data_mode_type = 13;
+  google.protobuf.StringValue custom_unit = 14;
 
   message Query {
     oneof value {

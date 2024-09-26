@@ -37,6 +37,7 @@ message LineChart {
     google.protobuf.StringValue color_scheme = 9;
     Resolution resolution = 10;
     common.DataModeType data_mode_type = 11;
+    google.protobuf.StringValue custom_unit = 12;
   }
 
   message Query {

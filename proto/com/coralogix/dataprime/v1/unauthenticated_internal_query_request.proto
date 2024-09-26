@@ -20,8 +20,7 @@ message UnauthenticatedInternalDataprimeQueryServiceQueryRequest {
   optional QueryMetadata metadata = 4;
   // team id for which the query is run
   google.protobuf.StringValue team_id = 5;
-  // user id for which the query is run
-  optional google.protobuf.StringValue user_id = 6;
+  reserved 6; // formerly `user_id`
   // query id, identifies query in DQE, used in tracing (tags.query.id)
   optional string query_id = 7;
 }

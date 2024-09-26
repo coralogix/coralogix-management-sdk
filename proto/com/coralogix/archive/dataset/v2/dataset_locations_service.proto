@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+import "com/coralogix/archive/v1/audit_log.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogix/archive/dataset/v2/dataset.proto";
+import "com/coralogix/archive/dataset/v2/physical_location.proto";
+
+package com.coralogix.archive.dataset.v2;
+
+service DatasetLocationsService {
+  rpc GetDatasetLocations(GetDatasetLocationsRequest) returns (GetDatasetLocationsResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
+  }
+  rpc GetDatasetList(GetDatasetListRequest) returns (GetDatasetListResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset list according to company id";
+  }
+}
+
+message Timeframe {
+  google.protobuf.Timestamp start_time = 1;
+  google.protobuf.Timestamp end_time = 2;
+}
+
+message GetDatasetLocationsRequest {
+  repeated DatasetLocationRequest datasets_locations = 1;
+
+}
+
+message DatasetLocationRequest {
+  repeated uint32 company_ids = 1;
+  string dataspace_regex = 2;
+  string dataset_regex = 3;
+  optional Timeframe timeframe = 4;
+}
+
+message GetDatasetLocationsResponse {
+  repeated DatasetLocations dataset_locations = 1;
+}
+
+message DatasetLocations {
+  repeated DatasetLocation locations = 1;
+}
+
+message DatasetLocation {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
+  FinalLocation physical_location = 3;
+  google.protobuf.Timestamp first_event_time = 4;
+  google.protobuf.Timestamp last_event_time = 5;
+}
+
+message GetDatasetListRequest {
+  repeated uint32 company_ids = 1;
+}
+
+message DatasetsInfo {
+  uint32 company_id = 1;
+  repeated Dataset datasets = 2;
+}
+
+message GetDatasetListResponse {
+    repeated DatasetsInfo datasets_info = 1;
+}

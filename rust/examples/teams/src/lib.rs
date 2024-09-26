@@ -14,7 +14,11 @@
 
 #[cfg(test)]
 mod tests {
-    use cx_sdk::{auth::AuthContext, client::teams::TeamsClient, CoralogixRegion};
+    use cx_sdk::{
+        auth::AuthContext,
+        client::teams::TeamsClient,
+        CoralogixRegion,
+    };
 
     #[tokio::test]
     #[ignore = "organization key is not available"]

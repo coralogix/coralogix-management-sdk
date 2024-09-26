@@ -15,7 +15,10 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 pub use crate::com::coralogixapis::actions::v2::Action;
@@ -23,17 +26,32 @@ pub use crate::com::coralogixapis::actions::v2::Action;
 pub use cx_api::proto::com::coralogixapis::dashboards::v1::ast::*;
 use cx_api::proto::com::coralogixapis::dashboards::v1::services::{
     dashboard_catalog_service_client::DashboardCatalogServiceClient,
-    dashboards_service_client::DashboardsServiceClient, AssignDashboardFolderRequest,
-    AssignDashboardFolderResponse, CreateDashboardRequest, CreateDashboardResponse,
-    DeleteDashboardRequest, DeleteDashboardResponse, GetDashboardCatalogRequest,
-    GetDashboardCatalogResponse, GetDashboardRequest, GetDashboardResponse, PinDashboardRequest,
-    PinDashboardResponse, ReplaceDashboardRequest, ReplaceDashboardResponse, UnpinDashboardRequest,
+    dashboards_service_client::DashboardsServiceClient,
+    AssignDashboardFolderRequest,
+    AssignDashboardFolderResponse,
+    CreateDashboardRequest,
+    CreateDashboardResponse,
+    DeleteDashboardRequest,
+    DeleteDashboardResponse,
+    GetDashboardCatalogRequest,
+    GetDashboardCatalogResponse,
+    GetDashboardRequest,
+    GetDashboardResponse,
+    PinDashboardRequest,
+    PinDashboardResponse,
+    ReplaceDashboardRequest,
+    ReplaceDashboardResponse,
+    UnpinDashboardRequest,
     UnpinDashboardResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
     Request,
 };
 

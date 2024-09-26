@@ -1,0 +1,40 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+
+message TracingFilter {
+  oneof filter_type {
+    TracingSimpleFilter simple_filter = 1;
+  }
+}
+message TracingSimpleFilter {
+  TracingLabelFilters tracing_label_filters = 1;
+  google.protobuf.UInt32Value latency_threshold_ms = 2;
+}
+
+message TracingLabelFilters {
+  repeated TracingFilterType application_name = 1;
+  repeated TracingFilterType subsystem_name = 2;
+  repeated TracingFilterType service_name = 3;
+  repeated TracingFilterType operation_name = 4;
+  repeated TracingSpanFieldsFilterType span_fields = 5;
+}
+message TracingSpanFieldsFilterType {
+  google.protobuf.StringValue key = 1;
+  TracingFilterType filter_type = 2;
+}
+
+message TracingFilterType {
+  repeated google.protobuf.StringValue values = 1;
+  TracingFilterOperationType operation = 2;
+}
+
+enum TracingFilterOperationType {
+  TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED = 0;
+  TRACING_FILTER_OPERATION_TYPE_INCLUDES = 1;
+  TRACING_FILTER_OPERATION_TYPE_ENDS_WITH = 2;
+  TRACING_FILTER_OPERATION_TYPE_STARTS_WITH = 3;
+  TRACING_FILTER_OPERATION_TYPE_IS_NOT = 4;
+}

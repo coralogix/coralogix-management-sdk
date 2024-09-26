@@ -16,7 +16,10 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::apikeys::{ApiKeysClient, Owner},
+        client::apikeys::{
+            ApiKeysClient,
+            Owner,
+        },
         CoralogixRegion,
     };
     #[tokio::test]

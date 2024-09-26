@@ -12,7 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use tonic::{metadata::MetadataMap, Request};
+use tonic::{
+    metadata::MetadataMap,
+    Request,
+};
 
 #[allow(dead_code)]
 pub fn make_request_with_metadata<T>(request: T, new_metadata: &MetadataMap) -> Request<T> {
