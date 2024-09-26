@@ -13,34 +13,67 @@
 // limitations under the License.
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
     CoralogixRegion,
 };
 use cx_api::proto::com::coralogixapis::alerts::v3::alert_defs_service_client::AlertDefsServiceClient;
 use cx_api::proto::com::coralogixapis::alerts::v3::{
-    CreateAlertDefRequest, CreateAlertDefResponse, DeleteAlertDefRequest, GetAlertDefRequest,
-    GetAlertDefResponse, ListAlertDefsRequest, ListAlertDefsResponse, ReplaceAlertDefRequest,
-    ReplaceAlertDefResponse, SetActiveRequest,
+    CreateAlertDefRequest,
+    CreateAlertDefResponse,
+    DeleteAlertDefRequest,
+    GetAlertDefRequest,
+    GetAlertDefResponse,
+    ListAlertDefsRequest,
+    ListAlertDefsResponse,
+    ReplaceAlertDefRequest,
+    ReplaceAlertDefResponse,
+    SetActiveRequest,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     alert_def_advanced_target_settings::RetriggeringPeriod,
     alert_def_notification_group::Targets,
-    alert_def_properties::{Schedule, TypeDefinition},
+    alert_def_properties::{
+        Schedule,
+        TypeDefinition,
+    },
     integration_type,
     logs_filter::FilterType,
     logs_time_window::Type as LogsTimeWindowType,
-    ActivitySchedule, AlertDef, AlertDefAdvancedTargetSettings, AlertDefAdvancedTargets,
-    AlertDefNotificationGroup, AlertDefPriority, AlertDefProperties, AlertDefTargetSimple,
-    AlertDefType, DayOfWeek, EvaluationWindow, IntegrationType, LabelFilterType, LabelFilters,
-    LogFilterOperationType, LogSeverity, LogsFilter, LogsMoreThanTypeDefinition, LogsTimeWindow,
-    LogsTimeWindowValue, LuceneFilter, NotifyOn, Recipients, TimeOfDay,
+    ActivitySchedule,
+    AlertDef,
+    AlertDefAdvancedTargetSettings,
+    AlertDefAdvancedTargets,
+    AlertDefNotificationGroup,
+    AlertDefPriority,
+    AlertDefProperties,
+    AlertDefTargetSimple,
+    AlertDefType,
+    DayOfWeek,
+    IntegrationType,
+    LabelFilterType,
+    LabelFilters,
+    LogFilterOperationType,
+    LogSeverity,
+    LogsFilter,
+    LogsSimpleFilter,
+    LogsTimeWindowValue,
+    NotifyOn,
+    Recipients,
+    TimeOfDay,
 };
 
 /// The Alerts API client.

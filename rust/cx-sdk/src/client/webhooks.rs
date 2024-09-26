@@ -15,30 +15,62 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
-    outgoing_webhooks_service_client::OutgoingWebhooksServiceClient, CreateOutgoingWebhookRequest,
-    CreateOutgoingWebhookResponse, DeleteOutgoingWebhookRequest, DeleteOutgoingWebhookResponse,
-    GetOutgoingWebhookRequest, GetOutgoingWebhookResponse, GetOutgoingWebhookTypeDetailsRequest,
-    GetOutgoingWebhookTypeDetailsResponse, ListAllOutgoingWebhooksRequest,
-    ListAllOutgoingWebhooksResponse, ListOutgoingWebhookTypesRequest,
-    ListOutgoingWebhookTypesResponse, ListOutgoingWebhooksRequest, ListOutgoingWebhooksResponse,
-    OutgoingWebhookInputData, TestExistingOutgoingWebhookRequest, TestOutgoingWebhookRequest,
-    TestOutgoingWebhookResponse, UpdateOutgoingWebhookRequest, UpdateOutgoingWebhookResponse,
+    outgoing_webhooks_service_client::OutgoingWebhooksServiceClient,
+    CreateOutgoingWebhookRequest,
+    CreateOutgoingWebhookResponse,
+    DeleteOutgoingWebhookRequest,
+    DeleteOutgoingWebhookResponse,
+    GetOutgoingWebhookRequest,
+    GetOutgoingWebhookResponse,
+    GetOutgoingWebhookTypeDetailsRequest,
+    GetOutgoingWebhookTypeDetailsResponse,
+    ListAllOutgoingWebhooksRequest,
+    ListAllOutgoingWebhooksResponse,
+    ListOutgoingWebhookTypesRequest,
+    ListOutgoingWebhookTypesResponse,
+    ListOutgoingWebhooksRequest,
+    ListOutgoingWebhooksResponse,
+    OutgoingWebhookInputData,
+    TestExistingOutgoingWebhookRequest,
+    TestOutgoingWebhookRequest,
+    TestOutgoingWebhookResponse,
+    UpdateOutgoingWebhookRequest,
+    UpdateOutgoingWebhookResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 pub use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
-    generic_webhook_config, outgoing_webhook_input_data::Config, slack_config,
-    test_outgoing_webhook_response::Result as WebhookTestResult, AwsEventBridgeConfig,
-    DemistoConfig, EmailGroupConfig, GenericWebhookConfig, IbmEventNotificationsConfig, JiraConfig,
-    MicrosoftTeamsConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig, SlackConfig, WebhookType,
+    generic_webhook_config,
+    outgoing_webhook_input_data::Config,
+    slack_config,
+    test_outgoing_webhook_response::Result as WebhookTestResult,
+    AwsEventBridgeConfig,
+    DemistoConfig,
+    EmailGroupConfig,
+    GenericWebhookConfig,
+    IbmEventNotificationsConfig,
+    JiraConfig,
+    MicrosoftTeamsConfig,
+    OpsgenieConfig,
+    PagerDutyConfig,
+    SendLogConfig,
+    SlackConfig,
+    WebhookType,
 };
 use url::Url;
 

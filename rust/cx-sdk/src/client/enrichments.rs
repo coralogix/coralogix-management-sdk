@@ -15,27 +15,43 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 pub use crate::com::coralogixapis::actions::v2::Action;
 
 use cx_api::proto::com::coralogix::enrichment::v1::{
-    enrichment_service_client::EnrichmentServiceClient, AddEnrichmentsRequest,
-    AddEnrichmentsResponse, AtomicOverwriteEnrichmentsRequest, AtomicOverwriteEnrichmentsResponse,
-    GetEnrichmentLimitRequest, GetEnrichmentLimitResponse, GetEnrichmentsRequest,
-    GetEnrichmentsResponse, RemoveEnrichmentsRequest, RemoveEnrichmentsResponse,
+    enrichment_service_client::EnrichmentServiceClient,
+    AddEnrichmentsRequest,
+    AddEnrichmentsResponse,
+    AtomicOverwriteEnrichmentsRequest,
+    AtomicOverwriteEnrichmentsResponse,
+    GetEnrichmentLimitRequest,
+    GetEnrichmentLimitResponse,
+    GetEnrichmentsRequest,
+    GetEnrichmentsResponse,
+    RemoveEnrichmentsRequest,
+    RemoveEnrichmentsResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::CoralogixRegion;
 
 pub use crate::com::coralogix::enrichment::v1::{
-    enrichment_type::Type, EnrichmentFieldDefinition, EnrichmentRequestModel as EnrichmentMapping,
+    enrichment_type::Type,
+    EnrichmentFieldDefinition,
+    EnrichmentRequestModel as EnrichmentMapping,
     EnrichmentType,
 };
 

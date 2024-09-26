@@ -16,30 +16,51 @@ use std::str::FromStr;
 
 use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protobuf::v1::{
     alert_scheduler_rule_service_client::AlertSchedulerRuleServiceClient,
-    filter_by_alert_scheduler_rule_ids, AlertSchedulerRuleIds,
-    AlertSchedulerRuleWithActiveTimeframe, CreateAlertSchedulerRuleRequest,
-    CreateBulkAlertSchedulerRuleRequest, DeleteAlertSchedulerRuleRequest,
-    FilterByAlertSchedulerRuleIds, GetAlertSchedulerRuleRequest, GetBulkAlertSchedulerRuleRequest,
-    UpdateAlertSchedulerRuleRequest, UpdateBulkAlertSchedulerRuleRequest,
+    filter_by_alert_scheduler_rule_ids,
+    AlertSchedulerRuleIds,
+    AlertSchedulerRuleWithActiveTimeframe,
+    CreateAlertSchedulerRuleRequest,
+    CreateBulkAlertSchedulerRuleRequest,
+    DeleteAlertSchedulerRuleRequest,
+    FilterByAlertSchedulerRuleIds,
+    GetAlertSchedulerRuleRequest,
+    GetBulkAlertSchedulerRuleRequest,
+    UpdateAlertSchedulerRuleRequest,
+    UpdateBulkAlertSchedulerRuleRequest,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::{
     auth::AuthContext,
-    error::{Result, SdkError},
+    error::{
+        Result,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
     CoralogixRegion,
 };
 
 pub use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protobuf::v1::{
-    filter::WhichAlerts, schedule::Scheduler, timeframe::Until, ActiveTimeframe,
-    AlertSchedulerRule, AlertUniqueIds, Filter as AlertSchedulerFilter, OneTime, Schedule,
-    ScheduleOperation, Timeframe,
+    filter::WhichAlerts,
+    schedule::Scheduler,
+    timeframe::Until,
+    ActiveTimeframe,
+    AlertSchedulerRule,
+    AlertUniqueIds,
+    Filter as AlertSchedulerFilter,
+    OneTime,
+    Schedule,
+    ScheduleOperation,
+    Timeframe,
 };
 
 /// The Alert Scheduler API client.

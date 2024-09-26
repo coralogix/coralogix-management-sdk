@@ -15,24 +15,46 @@ use std::str::FromStr;
 
 use cx_api::proto::com::coralogix::permissions::v1::{
     team_permissions_mgmt_service_client::TeamPermissionsMgmtServiceClient,
-    AddUsersToTeamGroupRequest, CreateTeamGroupRequest, DeleteTeamGroupRequest,
-    GetTeamGroupRequest, GetTeamGroupResponse, GetTeamGroupsRequest, GetTeamGroupsResponse,
-    RemoveUsersFromTeamGroupRequest, ScopeFilters, UpdateTeamGroupRequest, UpdateTeamGroupResponse,
+    AddUsersToTeamGroupRequest,
+    CreateTeamGroupRequest,
+    DeleteTeamGroupRequest,
+    GetTeamGroupRequest,
+    GetTeamGroupResponse,
+    GetTeamGroupsRequest,
+    GetTeamGroupsResponse,
+    RemoveUsersFromTeamGroupRequest,
+    ScopeFilters,
+    UpdateTeamGroupRequest,
+    UpdateTeamGroupResponse,
 };
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
     CoralogixRegion,
 };
 
 pub use cx_api::proto::com::coralogix::permissions::v1::{
-    update_team_group_request::{RoleUpdates, UserUpdates},
-    CreateTeamGroupResponse, RoleId, TeamGroupId, TeamId, UserId,
+    update_team_group_request::{
+        RoleUpdates,
+        UserUpdates,
+    },
+    CreateTeamGroupResponse,
+    RoleId,
+    TeamGroupId,
+    TeamId,
+    UserId,
 };
 
 /// GroupsClient is a client for the groups service.

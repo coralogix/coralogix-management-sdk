@@ -114,7 +114,10 @@ fn alerts_service(root: &str) -> Vec<String> {
 }
 
 fn alerts_scheduler_service(root: &str) -> Vec<String> {
-    vec![format!("{}/proto/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto", root)]
+    vec![format!(
+        "{}/proto/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto",
+        root
+    )]
 }
 
 fn rules_service(root: &str) -> Vec<String> {
@@ -167,16 +170,46 @@ fn e2m_service(root: &str) -> Vec<String> {
 
 fn dashboards_service(root: &str) -> Vec<String> {
     vec![
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/archive_logs_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/archive_spans_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/dashboards_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/dataprime_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/logs_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/metrics_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/spans_data_source_service.proto", root),
-    format!("{}/proto/com/coralogixapis/dashboards/v1/services/team_settings_service.proto", root),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/archive_logs_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/archive_spans_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/dataprime_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/logs_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/metrics_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/spans_data_source_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/dashboards/v1/services/team_settings_service.proto",
+            root
+        ),
     ]
 }
 

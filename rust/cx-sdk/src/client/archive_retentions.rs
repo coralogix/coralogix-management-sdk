@@ -13,19 +13,32 @@
 // limitations under the License.
 
 use cx_api::proto::com::coralogix::archive::v1::{
-    retentions_service_client::RetentionsServiceClient, ActivateRetentionsRequest,
-    ActivateRetentionsResponse, GetRetentionsEnabledRequest, GetRetentionsEnabledResponse,
-    GetRetentionsRequest, GetRetentionsResponse, UpdateRetentionsRequest, UpdateRetentionsResponse,
+    retentions_service_client::RetentionsServiceClient,
+    ActivateRetentionsRequest,
+    ActivateRetentionsResponse,
+    GetRetentionsEnabledRequest,
+    GetRetentionsEnabledResponse,
+    GetRetentionsRequest,
+    GetRetentionsResponse,
+    UpdateRetentionsRequest,
+    UpdateRetentionsResponse,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
     CoralogixRegion,
 };
 

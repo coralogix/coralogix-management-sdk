@@ -13,7 +13,10 @@
 // limitations under the License.
 
 use crate::error::Result;
-use std::fmt::{Debug, Formatter};
+use std::fmt::{
+    Debug,
+    Formatter,
+};
 
 const ENV_TEAM_API_KEY: &str = "CORALOGIX_TEAM_API_KEY";
 const ENV_USER_API_KEY: &str = "CORALOGIX_USER_API_KEY";

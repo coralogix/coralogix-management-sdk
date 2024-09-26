@@ -15,31 +15,59 @@
 use std::str::FromStr;
 
 use crate::{
-    auth::AuthContext, error::Result, metadata::CallProperties, util::make_request_with_metadata,
+    auth::AuthContext,
+    error::Result,
+    metadata::CallProperties,
+    util::make_request_with_metadata,
 };
 
 use cx_api::proto::com::coralogix::integrations::v1::{
-    integration_metadata::SpecificData, integration_service_client::IntegrationServiceClient,
-    DeleteIntegrationRequest, DeleteIntegrationResponse, GenericIntegrationParameters,
-    GetDeployedIntegrationRequest, GetDeployedIntegrationResponse, GetIntegrationDefinitionRequest,
-    GetIntegrationDefinitionResponse, GetIntegrationDetailsRequest, GetIntegrationDetailsResponse,
-    GetIntegrationsRequest, GetIntegrationsResponse, GetManagedIntegrationStatusRequest,
-    GetManagedIntegrationStatusResponse, GetRumApplicationVersionDataRequest,
-    GetRumApplicationVersionDataResponse, GetTemplateRequest, GetTemplateResponse,
-    IntegrationMetadata, SaveIntegrationRequest, SaveIntegrationResponse, SyncRumDataRequest,
-    SyncRumDataResponse, TestIntegrationRequest, TestIntegrationResponse, UpdateIntegrationRequest,
+    integration_metadata::SpecificData,
+    integration_service_client::IntegrationServiceClient,
+    DeleteIntegrationRequest,
+    DeleteIntegrationResponse,
+    GenericIntegrationParameters,
+    GetDeployedIntegrationRequest,
+    GetDeployedIntegrationResponse,
+    GetIntegrationDefinitionRequest,
+    GetIntegrationDefinitionResponse,
+    GetIntegrationDetailsRequest,
+    GetIntegrationDetailsResponse,
+    GetIntegrationsRequest,
+    GetIntegrationsResponse,
+    GetManagedIntegrationStatusRequest,
+    GetManagedIntegrationStatusResponse,
+    GetRumApplicationVersionDataRequest,
+    GetRumApplicationVersionDataResponse,
+    GetTemplateRequest,
+    GetTemplateResponse,
+    IntegrationMetadata,
+    SaveIntegrationRequest,
+    SaveIntegrationResponse,
+    SyncRumDataRequest,
+    SyncRumDataResponse,
+    TestIntegrationRequest,
+    TestIntegrationResponse,
+    UpdateIntegrationRequest,
     UpdateIntegrationResponse,
 };
 
 pub use cx_api::proto::com::coralogix::integrations::v1::{
-    integration_details::default_integration_details::*, integration_details::*, parameter::*,
-    test_integration_result::Result as TestResult, Parameter,
+    integration_details::default_integration_details::*,
+    integration_details::*,
+    parameter::*,
+    test_integration_result::Result as TestResult,
+    Parameter,
 };
 
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{Channel, ClientTlsConfig, Endpoint},
+    transport::{
+        Channel,
+        ClientTlsConfig,
+        Endpoint,
+    },
 };
 
 use crate::CoralogixRegion;

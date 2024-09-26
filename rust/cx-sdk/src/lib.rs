@@ -16,8 +16,15 @@
 use auth::ApiKey;
 use cx_api::proto::*;
 use error::SdkError;
-use http::{HeaderMap, HeaderName, HeaderValue};
-use std::{fmt::Debug, str::FromStr};
+use http::{
+    HeaderMap,
+    HeaderName,
+    HeaderValue,
+};
+use std::{
+    fmt::Debug,
+    str::FromStr,
+};
 
 /// This module contains the authentication primitives for the SDK.
 pub mod auth;
