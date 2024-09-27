@@ -16,10 +16,45 @@
 mod tests {
     use cx_sdk::{
         auth::AuthContext,
-        client::datasets::DatasetClient,
+        client::{
+            archive_logs::{
+                LogsArchiveClient,
+                S3TargetSpec,
+                TargetSpec,
+                TargetSpecValidation,
+            },
+            datasets::DatasetClient,
+        },
         CoralogixRegion,
     };
     use tokio::fs;
+
+    #[tokio::test]
+    async fn test_logs_archive() {
+        let aws_region = std::env::var("AWS_REGION").unwrap();
+        let logs_bucket_name = std::env::var("LOGS_BUCKET").unwrap();
+        let service = LogsArchiveClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+
+        let target_spec = S3TargetSpec {
+            bucket: logs_bucket_name,
+            region: Some(aws_region),
+        };
+        service
+            .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))
+            .await
+            .unwrap();
+
+        service
+            .set_target(true, TargetSpec::S3(target_spec))
+            .await
+            .unwrap();
+
+        let _ = service.get_target().await.unwrap();
+    }
 
     #[tokio::test]
     async fn test_datasets() {

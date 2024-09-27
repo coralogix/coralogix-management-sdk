@@ -19,7 +19,8 @@ import (
 	groups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
 )
 
-type TeamGroupId = groups.TeamGroupId
+// TeamGroupID is the ID of a team group.
+type TeamGroupID = groups.TeamGroupId
 
 // GroupScope is a type for a group scope.
 type GroupScope = groups.Scope
@@ -30,7 +31,10 @@ type TeamGroup = groups.TeamGroup
 // GroupsUser is a type for a user in a Groups context.
 type GroupsUser = groups.User
 
+// UpdateTeamGroupRequestRoleUpdates is a type for a request.
 type UpdateTeamGroupRequestRoleUpdates = groups.UpdateTeamGroupRequest_RoleUpdates
+
+// UpdateTeamGroupRequestUserUpdates is a type for a request.
 type UpdateTeamGroupRequestUserUpdates = groups.UpdateTeamGroupRequest_UserUpdates
 
 // GetTeamGroupRequest is a type for a request.
@@ -74,13 +78,13 @@ type GetTeamGroupScopeRequest = groups.GetTeamGroupScopeRequest
 
 // RPC Values
 const (
-	CreateTeamGroupRpc          = groups.TeamPermissionsMgmtService_CreateTeamGroup_FullMethodName
-	GetTeamGroupRpc             = groups.TeamPermissionsMgmtService_GetTeamGroup_FullMethodName
-	GetTeamGroupsRpc            = groups.TeamPermissionsMgmtService_GetTeamGroups_FullMethodName
-	UpdateTeamGroupRpc          = groups.TeamPermissionsMgmtService_UpdateTeamGroup_FullMethodName
-	DeleteTeamGroupRpc          = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
-	AddUsersToTeamGroupRpc      = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
-	RemoveUsersFromTeamGroupRpc = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
+	CreateTeamGroupRPC          = groups.TeamPermissionsMgmtService_CreateTeamGroup_FullMethodName
+	GetTeamGroupRPC             = groups.TeamPermissionsMgmtService_GetTeamGroup_FullMethodName
+	GetTeamGroupsRPC            = groups.TeamPermissionsMgmtService_GetTeamGroups_FullMethodName
+	UpdateTeamGroupRPC          = groups.TeamPermissionsMgmtService_UpdateTeamGroup_FullMethodName
+	DeleteTeamGroupRPC          = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
+	AddUsersToTeamGroupRPC      = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
+	RemoveUsersFromTeamGroupRPC = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
 )
 
 // GroupsClient is a client for the Groups API

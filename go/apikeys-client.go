@@ -58,10 +58,10 @@ type OwnerOrganisationID = apikeys.Owner_OrganisationId
 
 // RPC method names.
 const (
-	CreateAPIKeyRpc = apikeys.ApiKeysService_CreateApiKey_FullMethodName
-	GetAPIKeyRpc    = apikeys.ApiKeysService_GetApiKey_FullMethodName
-	UpdateAPIKeyRpc = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
-	DeleteAPIKeyRpc = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
+	CreateAPIKeyRPC = apikeys.ApiKeysService_CreateApiKey_FullMethodName
+	GetAPIKeyRPC    = apikeys.ApiKeysService_GetApiKey_FullMethodName
+	UpdateAPIKeyRPC = apikeys.ApiKeysService_UpdateApiKey_FullMethodName
+	DeleteAPIKeyRPC = apikeys.ApiKeysService_DeleteApiKey_FullMethodName
 )
 
 // ApikeysClient is a client for the Coralogix API keys API.

@@ -20,10 +20,34 @@ import (
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	"google.golang.org/protobuf/types/known/wrapperspb"
 
 	"github.com/stretchr/testify/assert"
-	"google.golang.org/protobuf/types/known/wrapperspb"
 )
+
+func TestArchiveLogs(t *testing.T) {
+	logsBucket := os.Getenv("LOGS_BUCKET")
+	awsRegion := os.Getenv("AWS_REGION")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewArchiveLogsClient(creator)
+	_, setTargetError := c.Update(context.Background(), &cxsdk.SetTargetRequest{
+		TargetSpec: &cxsdk.SetTargetRequestS3{
+			S3: &cxsdk.S3TargetSpec{
+				Bucket: logsBucket,
+				Region: &awsRegion,
+			},
+		},
+	})
+	assert.Nil(t, setTargetError)
+
+	_, getTargetError := c.Get(context.Background())
+
+	assert.Nil(t, getTargetError)
+}
 
 func TestDataSets(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
