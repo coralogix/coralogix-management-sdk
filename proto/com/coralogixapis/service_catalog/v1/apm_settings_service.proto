@@ -56,7 +56,9 @@ message GetApmSourceResponse {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
 }
 
-message GetSpanMetricDimensionsRequest {}
+message GetSpanMetricDimensionsRequest {
+  com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
+}
 
 message GetSpanMetricDimensionsByServiceNamesRequest {
   repeated google.protobuf.StringValue service_names = 1;

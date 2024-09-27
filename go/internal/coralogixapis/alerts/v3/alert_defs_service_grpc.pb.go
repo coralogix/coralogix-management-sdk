@@ -23,6 +23,7 @@ const (
 	AlertDefsService_CreateAlertDef_FullMethodName  = "/com.coralogixapis.alerts.v3.AlertDefsService/CreateAlertDef"
 	AlertDefsService_ReplaceAlertDef_FullMethodName = "/com.coralogixapis.alerts.v3.AlertDefsService/ReplaceAlertDef"
 	AlertDefsService_ListAlertDefs_FullMethodName   = "/com.coralogixapis.alerts.v3.AlertDefsService/ListAlertDefs"
+	AlertDefsService_DownloadAlerts_FullMethodName  = "/com.coralogixapis.alerts.v3.AlertDefsService/DownloadAlerts"
 	AlertDefsService_DeleteAlertDef_FullMethodName  = "/com.coralogixapis.alerts.v3.AlertDefsService/DeleteAlertDef"
 	AlertDefsService_SetActive_FullMethodName       = "/com.coralogixapis.alerts.v3.AlertDefsService/SetActive"
 )
@@ -36,6 +37,7 @@ type AlertDefsServiceClient interface {
 	CreateAlertDef(ctx context.Context, in *CreateAlertDefRequest, opts ...grpc.CallOption) (*CreateAlertDefResponse, error)
 	ReplaceAlertDef(ctx context.Context, in *ReplaceAlertDefRequest, opts ...grpc.CallOption) (*ReplaceAlertDefResponse, error)
 	ListAlertDefs(ctx context.Context, in *ListAlertDefsRequest, opts ...grpc.CallOption) (*ListAlertDefsResponse, error)
+	DownloadAlerts(ctx context.Context, in *DownloadAlertsRequest, opts ...grpc.CallOption) (AlertDefsService_DownloadAlertsClient, error)
 	DeleteAlertDef(ctx context.Context, in *DeleteAlertDefRequest, opts ...grpc.CallOption) (*DeleteAlertDefResponse, error)
 	SetActive(ctx context.Context, in *SetActiveRequest, opts ...grpc.CallOption) (*SetActiveResponse, error)
 }
@@ -84,6 +86,38 @@ func (c *alertDefsServiceClient) ListAlertDefs(ctx context.Context, in *ListAler
 	return out, nil
 }
 
+func (c *alertDefsServiceClient) DownloadAlerts(ctx context.Context, in *DownloadAlertsRequest, opts ...grpc.CallOption) (AlertDefsService_DownloadAlertsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AlertDefsService_ServiceDesc.Streams[0], AlertDefsService_DownloadAlerts_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &alertDefsServiceDownloadAlertsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AlertDefsService_DownloadAlertsClient interface {
+	Recv() (*DownloadAlertsResponse, error)
+	grpc.ClientStream
+}
+
+type alertDefsServiceDownloadAlertsClient struct {
+	grpc.ClientStream
+}
+
+func (x *alertDefsServiceDownloadAlertsClient) Recv() (*DownloadAlertsResponse, error) {
+	m := new(DownloadAlertsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *alertDefsServiceClient) DeleteAlertDef(ctx context.Context, in *DeleteAlertDefRequest, opts ...grpc.CallOption) (*DeleteAlertDefResponse, error) {
 	out := new(DeleteAlertDefResponse)
 	err := c.cc.Invoke(ctx, AlertDefsService_DeleteAlertDef_FullMethodName, in, out, opts...)
@@ -111,6 +145,7 @@ type AlertDefsServiceServer interface {
 	CreateAlertDef(context.Context, *CreateAlertDefRequest) (*CreateAlertDefResponse, error)
 	ReplaceAlertDef(context.Context, *ReplaceAlertDefRequest) (*ReplaceAlertDefResponse, error)
 	ListAlertDefs(context.Context, *ListAlertDefsRequest) (*ListAlertDefsResponse, error)
+	DownloadAlerts(*DownloadAlertsRequest, AlertDefsService_DownloadAlertsServer) error
 	DeleteAlertDef(context.Context, *DeleteAlertDefRequest) (*DeleteAlertDefResponse, error)
 	SetActive(context.Context, *SetActiveRequest) (*SetActiveResponse, error)
 	mustEmbedUnimplementedAlertDefsServiceServer()
@@ -131,6 +166,9 @@ func (UnimplementedAlertDefsServiceServer) ReplaceAlertDef(context.Context, *Rep
 }
 func (UnimplementedAlertDefsServiceServer) ListAlertDefs(context.Context, *ListAlertDefsRequest) (*ListAlertDefsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAlertDefs not implemented")
+}
+func (UnimplementedAlertDefsServiceServer) DownloadAlerts(*DownloadAlertsRequest, AlertDefsService_DownloadAlertsServer) error {
+	return status.Errorf(codes.Unimplemented, "method DownloadAlerts not implemented")
 }
 func (UnimplementedAlertDefsServiceServer) DeleteAlertDef(context.Context, *DeleteAlertDefRequest) (*DeleteAlertDefResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlertDef not implemented")
@@ -223,6 +261,27 @@ func _AlertDefsService_ListAlertDefs_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AlertDefsService_DownloadAlerts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(DownloadAlertsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AlertDefsServiceServer).DownloadAlerts(m, &alertDefsServiceDownloadAlertsServer{stream})
+}
+
+type AlertDefsService_DownloadAlertsServer interface {
+	Send(*DownloadAlertsResponse) error
+	grpc.ServerStream
+}
+
+type alertDefsServiceDownloadAlertsServer struct {
+	grpc.ServerStream
+}
+
+func (x *alertDefsServiceDownloadAlertsServer) Send(m *DownloadAlertsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _AlertDefsService_DeleteAlertDef_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAlertDefRequest)
 	if err := dec(in); err != nil {
@@ -291,6 +350,12 @@ var AlertDefsService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _AlertDefsService_SetActive_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "DownloadAlerts",
+			Handler:       _AlertDefsService_DownloadAlerts_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "com/coralogixapis/alerts/v3/alert_defs_service.proto",
 }

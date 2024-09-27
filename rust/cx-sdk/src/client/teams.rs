@@ -22,7 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogixapis::aaa::organisations::v2::{
-    team_service_client::TeamServiceClient,
     CreateTeamInOrgRequest,
     CreateTeamInOrgResponse,
     DeleteTeamRequest,
@@ -40,6 +39,7 @@ use cx_api::proto::com::coralogixapis::aaa::organisations::v2::{
     TeamId,
     UpdateTeamRequest,
     UpdateTeamResponse,
+    team_service_client::TeamServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{

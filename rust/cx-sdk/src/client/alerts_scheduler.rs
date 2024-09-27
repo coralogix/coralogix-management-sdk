@@ -15,8 +15,6 @@
 use std::str::FromStr;
 
 use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protobuf::v1::{
-    alert_scheduler_rule_service_client::AlertSchedulerRuleServiceClient,
-    filter_by_alert_scheduler_rule_ids,
     AlertSchedulerRuleIds,
     AlertSchedulerRuleWithActiveTimeframe,
     CreateAlertSchedulerRuleRequest,
@@ -27,6 +25,8 @@ use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protobuf::
     GetBulkAlertSchedulerRuleRequest,
     UpdateAlertSchedulerRuleRequest,
     UpdateBulkAlertSchedulerRuleRequest,
+    alert_scheduler_rule_service_client::AlertSchedulerRuleServiceClient,
+    filter_by_alert_scheduler_rule_ids,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -39,6 +39,7 @@ use tonic::{
 };
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::{
         Result,
@@ -46,13 +47,9 @@ use crate::{
     },
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 
 pub use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protobuf::v1::{
-    filter::WhichAlerts,
-    schedule::Scheduler,
-    timeframe::Until,
     ActiveTimeframe,
     AlertSchedulerRule,
     AlertUniqueIds,
@@ -61,6 +58,9 @@ pub use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protob
     Schedule,
     ScheduleOperation,
     Timeframe,
+    filter::WhichAlerts,
+    schedule::Scheduler,
+    timeframe::Until,
 };
 
 /// The Alert Scheduler API client.

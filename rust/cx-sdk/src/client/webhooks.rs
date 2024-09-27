@@ -22,7 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
-    outgoing_webhooks_service_client::OutgoingWebhooksServiceClient,
     CreateOutgoingWebhookRequest,
     CreateOutgoingWebhookResponse,
     DeleteOutgoingWebhookRequest,
@@ -43,6 +42,7 @@ use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
     TestOutgoingWebhookResponse,
     UpdateOutgoingWebhookRequest,
     UpdateOutgoingWebhookResponse,
+    outgoing_webhooks_service_client::OutgoingWebhooksServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -55,10 +55,6 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
-    generic_webhook_config,
-    outgoing_webhook_input_data::Config,
-    slack_config,
-    test_outgoing_webhook_response::Result as WebhookTestResult,
     AwsEventBridgeConfig,
     DemistoConfig,
     EmailGroupConfig,
@@ -71,6 +67,10 @@ pub use cx_api::proto::com::coralogix::outgoing_webhooks::v1::{
     SendLogConfig,
     SlackConfig,
     WebhookType,
+    generic_webhook_config,
+    outgoing_webhook_input_data::Config,
+    slack_config,
+    test_outgoing_webhook_response::Result as WebhookTestResult,
 };
 use url::Url;
 

@@ -22,7 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    service_slo_service_client::ServiceSloServiceClient,
     BatchGetServiceSlosRequest,
     BatchGetServiceSlosResponse,
     CreateServiceSloRequest,
@@ -35,11 +34,11 @@ use cx_api::proto::com::coralogixapis::apm::services::v1::{
     ListServiceSlosResponse,
     ReplaceServiceSloRequest,
     ReplaceServiceSloResponse,
+    service_slo_service_client::ServiceSloServiceClient,
 };
 
 pub use cx_api::proto::com::coralogixapis::apm::common::v2::OrderBy;
 pub use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    service_slo::SliType,
     CompareType,
     ErrorSli,
     ServiceSlo,
@@ -47,6 +46,7 @@ pub use cx_api::proto::com::coralogixapis::apm::services::v1::{
     SliMetricType,
     SloPeriod,
     SloStatus,
+    service_slo::SliType,
 };
 
 use tokio::sync::Mutex;

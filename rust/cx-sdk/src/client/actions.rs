@@ -20,7 +20,6 @@ use std::{
 use crate::{
     auth::AuthContext,
     com::coralogixapis::actions::v2::{
-        actions_service_client::ActionsServiceClient,
         CreateActionRequest,
         CreateActionResponse,
         DeleteActionRequest,
@@ -29,6 +28,7 @@ use crate::{
         OrderActionsRequest,
         ReplaceActionRequest,
         ReplaceActionResponse,
+        actions_service_client::ActionsServiceClient,
     },
     error::Result,
     metadata::CallProperties,

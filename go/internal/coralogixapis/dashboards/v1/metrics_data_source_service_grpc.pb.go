@@ -25,6 +25,7 @@ const (
 	MetricsDataSourceService_SearchMetricsGroupedTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.MetricsDataSourceService/SearchMetricsGroupedTimeSeries"
 	MetricsDataSourceService_SearchMetricsEvents_FullMethodName            = "/com.coralogixapis.dashboards.v1.services.MetricsDataSourceService/SearchMetricsEvents"
 	MetricsDataSourceService_SearchMetricsAnnotationEvents_FullMethodName  = "/com.coralogixapis.dashboards.v1.services.MetricsDataSourceService/SearchMetricsAnnotationEvents"
+	MetricsDataSourceService_SearchMetricsGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.MetricsDataSourceService/SearchMetricsGroupedValues"
 )
 
 // MetricsDataSourceServiceClient is the client API for MetricsDataSourceService service.
@@ -37,6 +38,7 @@ type MetricsDataSourceServiceClient interface {
 	SearchMetricsGroupedTimeSeries(ctx context.Context, in *SearchMetricsGroupedTimeSeriesRequest, opts ...grpc.CallOption) (*SearchMetricsGroupedTimeSeriesResponse, error)
 	SearchMetricsEvents(ctx context.Context, in *SearchMetricsEventsRequest, opts ...grpc.CallOption) (*SearchMetricsEventsResponse, error)
 	SearchMetricsAnnotationEvents(ctx context.Context, in *SearchMetricsAnnotationEventsRequest, opts ...grpc.CallOption) (*SearchMetricsAnnotationEventsResponse, error)
+	SearchMetricsGroupedValues(ctx context.Context, in *SearchMetricsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchMetricsGroupedValuesResponse, error)
 }
 
 type metricsDataSourceServiceClient struct {
@@ -101,6 +103,15 @@ func (c *metricsDataSourceServiceClient) SearchMetricsAnnotationEvents(ctx conte
 	return out, nil
 }
 
+func (c *metricsDataSourceServiceClient) SearchMetricsGroupedValues(ctx context.Context, in *SearchMetricsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchMetricsGroupedValuesResponse, error) {
+	out := new(SearchMetricsGroupedValuesResponse)
+	err := c.cc.Invoke(ctx, MetricsDataSourceService_SearchMetricsGroupedValues_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MetricsDataSourceServiceServer is the server API for MetricsDataSourceService service.
 // All implementations must embed UnimplementedMetricsDataSourceServiceServer
 // for forward compatibility
@@ -111,6 +122,7 @@ type MetricsDataSourceServiceServer interface {
 	SearchMetricsGroupedTimeSeries(context.Context, *SearchMetricsGroupedTimeSeriesRequest) (*SearchMetricsGroupedTimeSeriesResponse, error)
 	SearchMetricsEvents(context.Context, *SearchMetricsEventsRequest) (*SearchMetricsEventsResponse, error)
 	SearchMetricsAnnotationEvents(context.Context, *SearchMetricsAnnotationEventsRequest) (*SearchMetricsAnnotationEventsResponse, error)
+	SearchMetricsGroupedValues(context.Context, *SearchMetricsGroupedValuesRequest) (*SearchMetricsGroupedValuesResponse, error)
 	mustEmbedUnimplementedMetricsDataSourceServiceServer()
 }
 
@@ -135,6 +147,9 @@ func (UnimplementedMetricsDataSourceServiceServer) SearchMetricsEvents(context.C
 }
 func (UnimplementedMetricsDataSourceServiceServer) SearchMetricsAnnotationEvents(context.Context, *SearchMetricsAnnotationEventsRequest) (*SearchMetricsAnnotationEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchMetricsAnnotationEvents not implemented")
+}
+func (UnimplementedMetricsDataSourceServiceServer) SearchMetricsGroupedValues(context.Context, *SearchMetricsGroupedValuesRequest) (*SearchMetricsGroupedValuesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchMetricsGroupedValues not implemented")
 }
 func (UnimplementedMetricsDataSourceServiceServer) mustEmbedUnimplementedMetricsDataSourceServiceServer() {
 }
@@ -258,6 +273,24 @@ func _MetricsDataSourceService_SearchMetricsAnnotationEvents_Handler(srv interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MetricsDataSourceService_SearchMetricsGroupedValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchMetricsGroupedValuesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MetricsDataSourceServiceServer).SearchMetricsGroupedValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: MetricsDataSourceService_SearchMetricsGroupedValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MetricsDataSourceServiceServer).SearchMetricsGroupedValues(ctx, req.(*SearchMetricsGroupedValuesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // MetricsDataSourceService_ServiceDesc is the grpc.ServiceDesc for MetricsDataSourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -288,6 +321,10 @@ var MetricsDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchMetricsAnnotationEvents",
 			Handler:    _MetricsDataSourceService_SearchMetricsAnnotationEvents_Handler,
+		},
+		{
+			MethodName: "SearchMetricsGroupedValues",
+			Handler:    _MetricsDataSourceService_SearchMetricsGroupedValues_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -22,7 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogixapis::events2metrics::v2::{
-    events2_metric_service_client::Events2MetricServiceClient,
     CreateE2mRequest,
     CreateE2mResponse,
     DeleteE2mRequest,
@@ -37,6 +36,7 @@ use cx_api::proto::com::coralogixapis::events2metrics::v2::{
     ListLabelsCardinalityResponse,
     ReplaceE2mRequest,
     ReplaceE2mResponse,
+    events2_metric_service_client::Events2MetricServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -49,11 +49,11 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogixapis::events2metrics::v2::{
-    list_labels_cardinality_request::Query,
     E2m,
     E2mCreateParams,
     MetricField,
     MetricLabel,
+    list_labels_cardinality_request::Query,
 };
 
 use crate::CoralogixRegion;

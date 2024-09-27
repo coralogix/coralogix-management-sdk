@@ -25,7 +25,6 @@ pub use crate::com::coralogixapis::actions::v2::Action;
 
 pub use cx_api::proto::com::coralogixapis::dashboards::v1::ast::*;
 use cx_api::proto::com::coralogixapis::dashboards::v1::services::{
-    dashboard_folders_service_client::DashboardFoldersServiceClient,
     CreateDashboardFolderRequest,
     CreateDashboardFolderResponse,
     DeleteDashboardFolderRequest,
@@ -36,16 +35,17 @@ use cx_api::proto::com::coralogixapis::dashboards::v1::services::{
     ListDashboardFoldersResponse,
     ReplaceDashboardFolderRequest,
     ReplaceDashboardFolderResponse,
+    dashboard_folders_service_client::DashboardFoldersServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
+    Request,
     metadata::MetadataMap,
     transport::{
         Channel,
         ClientTlsConfig,
         Endpoint,
     },
-    Request,
 };
 
 pub use cx_api::proto::com::coralogixapis::dashboards::v1::common::DashboardFolder;

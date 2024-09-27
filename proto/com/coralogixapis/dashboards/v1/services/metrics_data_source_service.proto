@@ -6,6 +6,7 @@ import "com/coralogixapis/dashboards/v1/ast/annotation.proto";
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/annotation_event.proto";
+import "com/coralogixapis/dashboards/v1/common/group.proto";
 import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
 import "com/coralogixapis/dashboards/v1/common/labelled_value.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
@@ -32,6 +33,9 @@ service MetricsDataSourceService {
   }
   rpc SearchMetricsAnnotationEvents(SearchMetricsAnnotationEventsRequest) returns (SearchMetricsAnnotationEventsResponse) {
     option (audit_log_description).description = "search metrics annotation events";
+  }
+  rpc SearchMetricsGroupedValues(SearchMetricsGroupedValuesRequest) returns (SearchMetricsGroupedValuesResponse) {
+    option (audit_log_description).description = "search spans grouped values";
   }
 }
 
@@ -157,4 +161,18 @@ message SearchMetricsAnnotationEventsRequest {
 
 message SearchMetricsAnnotationEventsResponse {
   repeated common.AnnotationEvent annotation_events = 1;
+}
+
+message SearchMetricsGroupedValuesRequest {
+  common.TimeFrame time_frame = 1;
+  google.protobuf.StringValue promql_query = 2;
+  repeated google.protobuf.StringValue group_by = 3;
+  repeated ast.Filter.MetricsFilter filters = 4;
+  google.protobuf.Int32Value limit = 5;
+}
+
+message SearchMetricsGroupedValuesResponse {
+  repeated common.Group groups = 1;
+  bool is_limit_exceeded = 2;
+  google.protobuf.Int64Value total = 3;
 }

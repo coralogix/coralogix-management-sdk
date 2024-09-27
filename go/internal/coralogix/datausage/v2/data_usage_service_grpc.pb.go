@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	DataUsageService_GetTeamDetailedDataUsage_FullMethodName           = "/com.coralogix.datausage.v2.DataUsageService/GetTeamDetailedDataUsage"
 	DataUsageService_GetSpansCount_FullMethodName                      = "/com.coralogix.datausage.v2.DataUsageService/GetSpansCount"
+	DataUsageService_GetLogsCount_FullMethodName                       = "/com.coralogix.datausage.v2.DataUsageService/GetLogsCount"
 	DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName    = "/com.coralogix.datausage.v2.DataUsageService/GetDataUsageMetricsExportStatus"
 	DataUsageService_UpdateDataUsageMetricsExportStatus_FullMethodName = "/com.coralogix.datausage.v2.DataUsageService/UpdateDataUsageMetricsExportStatus"
 )
@@ -31,6 +32,7 @@ const (
 type DataUsageServiceClient interface {
 	GetTeamDetailedDataUsage(ctx context.Context, in *GetTeamDetailedDataUsageRequest, opts ...grpc.CallOption) (DataUsageService_GetTeamDetailedDataUsageClient, error)
 	GetSpansCount(ctx context.Context, in *GetSpansCountRequest, opts ...grpc.CallOption) (DataUsageService_GetSpansCountClient, error)
+	GetLogsCount(ctx context.Context, in *GetLogsCountRequest, opts ...grpc.CallOption) (DataUsageService_GetLogsCountClient, error)
 	GetDataUsageMetricsExportStatus(ctx context.Context, in *GetDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(ctx context.Context, in *UpdateDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*UpdateDataUsageMetricsExportStatusResponse, error)
 }
@@ -107,6 +109,38 @@ func (x *dataUsageServiceGetSpansCountClient) Recv() (*GetSpansCountResponse, er
 	return m, nil
 }
 
+func (c *dataUsageServiceClient) GetLogsCount(ctx context.Context, in *GetLogsCountRequest, opts ...grpc.CallOption) (DataUsageService_GetLogsCountClient, error) {
+	stream, err := c.cc.NewStream(ctx, &DataUsageService_ServiceDesc.Streams[2], DataUsageService_GetLogsCount_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &dataUsageServiceGetLogsCountClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type DataUsageService_GetLogsCountClient interface {
+	Recv() (*GetLogsCountResponse, error)
+	grpc.ClientStream
+}
+
+type dataUsageServiceGetLogsCountClient struct {
+	grpc.ClientStream
+}
+
+func (x *dataUsageServiceGetLogsCountClient) Recv() (*GetLogsCountResponse, error) {
+	m := new(GetLogsCountResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *dataUsageServiceClient) GetDataUsageMetricsExportStatus(ctx context.Context, in *GetDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*GetDataUsageMetricsExportStatusResponse, error) {
 	out := new(GetDataUsageMetricsExportStatusResponse)
 	err := c.cc.Invoke(ctx, DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName, in, out, opts...)
@@ -131,6 +165,7 @@ func (c *dataUsageServiceClient) UpdateDataUsageMetricsExportStatus(ctx context.
 type DataUsageServiceServer interface {
 	GetTeamDetailedDataUsage(*GetTeamDetailedDataUsageRequest, DataUsageService_GetTeamDetailedDataUsageServer) error
 	GetSpansCount(*GetSpansCountRequest, DataUsageService_GetSpansCountServer) error
+	GetLogsCount(*GetLogsCountRequest, DataUsageService_GetLogsCountServer) error
 	GetDataUsageMetricsExportStatus(context.Context, *GetDataUsageMetricsExportStatusRequest) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(context.Context, *UpdateDataUsageMetricsExportStatusRequest) (*UpdateDataUsageMetricsExportStatusResponse, error)
 	mustEmbedUnimplementedDataUsageServiceServer()
@@ -145,6 +180,9 @@ func (UnimplementedDataUsageServiceServer) GetTeamDetailedDataUsage(*GetTeamDeta
 }
 func (UnimplementedDataUsageServiceServer) GetSpansCount(*GetSpansCountRequest, DataUsageService_GetSpansCountServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetSpansCount not implemented")
+}
+func (UnimplementedDataUsageServiceServer) GetLogsCount(*GetLogsCountRequest, DataUsageService_GetLogsCountServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetLogsCount not implemented")
 }
 func (UnimplementedDataUsageServiceServer) GetDataUsageMetricsExportStatus(context.Context, *GetDataUsageMetricsExportStatusRequest) (*GetDataUsageMetricsExportStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataUsageMetricsExportStatus not implemented")
@@ -204,6 +242,27 @@ type dataUsageServiceGetSpansCountServer struct {
 }
 
 func (x *dataUsageServiceGetSpansCountServer) Send(m *GetSpansCountResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _DataUsageService_GetLogsCount_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetLogsCountRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DataUsageServiceServer).GetLogsCount(m, &dataUsageServiceGetLogsCountServer{stream})
+}
+
+type DataUsageService_GetLogsCountServer interface {
+	Send(*GetLogsCountResponse) error
+	grpc.ServerStream
+}
+
+type dataUsageServiceGetLogsCountServer struct {
+	grpc.ServerStream
+}
+
+func (x *dataUsageServiceGetLogsCountServer) Send(m *GetLogsCountResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -268,6 +327,11 @@ var DataUsageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetSpansCount",
 			Handler:       _DataUsageService_GetSpansCount_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetLogsCount",
+			Handler:       _DataUsageService_GetLogsCount_Handler,
 			ServerStreams: true,
 		},
 	},

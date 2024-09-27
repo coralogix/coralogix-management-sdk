@@ -26,17 +26,8 @@ jobs:
         with:
           version: ${{env.PROTOC_VERSION}}
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: nightly
-          override: true
-          components: rustfmt
-
+      - uses: dtolnay/rust-toolchain@stable
       - uses: taiki-e/install-action@nextest
-
-      - name: Check formatting
-        run: cargo +nightly fmt --all -- --check
 
       - name: SDK tests
         run: cargo nextest run --all
@@ -66,17 +57,8 @@ jobs:
         with:
           version: ${{env.PROTOC_VERSION}}
 
-      - uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: nightly
-          override: true
-          components: rustfmt
-
+      - uses: dtolnay/rust-toolchain@stable
       - uses: taiki-e/install-action@nextest
-
-      - name: Check formatting
-        run: cargo +nightly fmt --all -- --check
 
       - name: SDK tests
         run: cargo nextest run --all
@@ -88,11 +70,14 @@ jobs:
           CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
           CORALOGIX_USER_API_KEY: ${{ secrets.CORALOGIX_USER_API_KEY }} 
           CORALOGIX_REGION: ${{ secrets.CORALOGIX_REGION }} 
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
+          LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
         run: cargo nextest run --all
         working-directory: rust/examples
 
   clippy:
-    name: "[Rust SDK] Run Clippy"
+    name: "[Rust SDK] Run Clippy & Formatting check"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -104,10 +89,12 @@ jobs:
     - uses: arduino/setup-protoc@v3
       with:
         version: ${{env.PROTOC_VERSION}}
-    - uses: dtolnay/rust-toolchain@stable
+    - uses: dtolnay/rust-toolchain@nightly
       with:
-        components: clippy
+        components: clippy, rustfmt
     - uses: Swatinem/rust-cache@v2
+    - name: Check formatting
+      run: cargo +nightly fmt --all -- --check
     # - name: Install SARIF tools
     #   run: cargo install clippy-sarif --locked
     # - name: Install SARIF tools

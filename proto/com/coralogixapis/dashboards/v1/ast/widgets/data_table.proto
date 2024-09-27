@@ -12,6 +12,7 @@ import "com/coralogixapis/dashboards/v1/common/ordering_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
 
 message DataTable {
@@ -35,6 +36,7 @@ message DataTable {
     common.LuceneQuery lucene_query = 1;
     repeated Filter.LogsFilter filters = 2;
     Grouping grouping = 3;
+    v1.common.TimeFrameSelect time_frame = 4;
 
     message Grouping {
       repeated google.protobuf.StringValue group_by = 1;
@@ -54,6 +56,7 @@ message DataTable {
     common.LuceneQuery lucene_query = 1;
     repeated Filter.SpansFilter filters = 2;
     Grouping grouping = 3;
+    v1.common.TimeFrameSelect time_frame = 4;
 
     message Grouping {
       repeated v1.common.SpanField group_by = 1;
@@ -72,11 +75,13 @@ message DataTable {
     common.PromQlQuery promql_query = 1;
     repeated Filter.MetricsFilter filters = 2;
     common.MetricsQueryEditorMode editor_mode = 3;
+    v1.common.TimeFrameSelect time_frame = 4;
   }
 
   message DataprimeQuery {
     v1.common.DataprimeQuery dataprime_query = 1;
     repeated Filter.Source filters = 2;
+    v1.common.TimeFrameSelect time_frame = 3;
   }
 
   message Column {

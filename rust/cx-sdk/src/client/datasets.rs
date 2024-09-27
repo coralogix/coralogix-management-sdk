@@ -24,8 +24,6 @@ use crate::{
 pub use crate::com::coralogixapis::actions::v2::Action;
 
 use cx_api::proto::com::coralogix::enrichment::v1::{
-    custom_enrichment_service_client::CustomEnrichmentServiceClient,
-    file::Content,
     CreateCustomEnrichmentRequest,
     CreateCustomEnrichmentResponse,
     DeleteCustomEnrichmentRequest,
@@ -37,6 +35,8 @@ use cx_api::proto::com::coralogix::enrichment::v1::{
     GetCustomEnrichmentsResponse,
     UpdateCustomEnrichmentRequest,
     UpdateCustomEnrichmentResponse,
+    custom_enrichment_service_client::CustomEnrichmentServiceClient,
+    file::Content,
 };
 use tokio::sync::Mutex;
 use tonic::{

@@ -14,7 +14,6 @@
 use std::str::FromStr;
 
 use cx_api::proto::com::coralogix::permissions::v1::{
-    team_permissions_mgmt_service_client::TeamPermissionsMgmtServiceClient,
     AddUsersToTeamGroupRequest,
     CreateTeamGroupRequest,
     DeleteTeamGroupRequest,
@@ -26,6 +25,7 @@ use cx_api::proto::com::coralogix::permissions::v1::{
     ScopeFilters,
     UpdateTeamGroupRequest,
     UpdateTeamGroupResponse,
+    team_permissions_mgmt_service_client::TeamPermissionsMgmtServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -38,23 +38,23 @@ use tonic::{
 };
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 
 pub use cx_api::proto::com::coralogix::permissions::v1::{
-    update_team_group_request::{
-        RoleUpdates,
-        UserUpdates,
-    },
     CreateTeamGroupResponse,
     RoleId,
     TeamGroupId,
     TeamId,
     UserId,
+    update_team_group_request::{
+        RoleUpdates,
+        UserUpdates,
+    },
 };
 
 /// GroupsClient is a client for the groups service.

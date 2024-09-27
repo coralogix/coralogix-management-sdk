@@ -13,12 +13,6 @@
 // limitations under the License.
 
 use cx_api::proto::com::coralogixapis::aaa::apikeys::v3::{
-    api_keys_service_client::ApiKeysServiceClient,
-    create_api_key_request::KeyPermissions,
-    update_api_key_request::{
-        Permissions,
-        Presets,
-    },
     CreateApiKeyRequest,
     CreateApiKeyResponse,
     DeleteApiKeyRequest,
@@ -28,15 +22,21 @@ use cx_api::proto::com::coralogixapis::aaa::apikeys::v3::{
     Owner as OwnerWrapper,
     UpdateApiKeyRequest,
     UpdateApiKeyResponse,
+    api_keys_service_client::ApiKeysServiceClient,
+    create_api_key_request::KeyPermissions,
+    update_api_key_request::{
+        Permissions,
+        Presets,
+    },
 };
 use std::str::FromStr;
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 
 use tokio::sync::Mutex;

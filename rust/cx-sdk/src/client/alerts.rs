@@ -13,11 +13,11 @@
 // limitations under the License.
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 use cx_api::proto::com::coralogixapis::alerts::v3::alert_defs_service_client::AlertDefsServiceClient;
 use cx_api::proto::com::coralogixapis::alerts::v3::{
@@ -45,16 +45,6 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogixapis::alerts::v3::{
-    alert_def_advanced_target_settings::RetriggeringPeriod,
-    alert_def_notification_group::Targets,
-    alert_def_properties::{
-        Schedule,
-        TypeDefinition,
-    },
-    integration_type,
-    logs_filter::FilterType,
-    logs_time_window::Type as LogsTimeWindowType,
-    metric_missing_values::MissingValues,
     ActivitySchedule,
     ActivitySchedule as AlertDefActivitySchedule,
     AlertDef,
@@ -132,6 +122,16 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     TracingTimeWindow,
     TracingTimeWindowValue,
     UndetectedValuesManagement,
+    alert_def_advanced_target_settings::RetriggeringPeriod,
+    alert_def_notification_group::Targets,
+    alert_def_properties::{
+        Schedule,
+        TypeDefinition,
+    },
+    integration_type,
+    logs_filter::FilterType,
+    logs_time_window::Type as LogsTimeWindowType,
+    metric_missing_values::MissingValues,
 };
 
 /// The Alerts API client.

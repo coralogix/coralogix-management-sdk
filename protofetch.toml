@@ -11,7 +11,7 @@ revision = "v0.4.2"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = 'a14c87f2e662c316eab97d701a3a9d267edf5d43'
+revision = 'v1.0'
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
@@ -33,7 +33,7 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "4264186854ae73990848a4c973ea76953d619dc9"
+revision = "v1.0"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
@@ -43,7 +43,7 @@ revision = "v0.301"
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
 deny_policies = ["/com/coralogixapis/logs2metrics/audit_log.proto"]
-revision = 'ec44a77572bf77cf5c731107238bbda65e7c1089'
+revision = 'v0.3.0'
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
@@ -64,7 +64,7 @@ revision = "v0.1.31"
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.97"
+revision = "v0.3.98"
 
 
 [cx-api-scopes-service]

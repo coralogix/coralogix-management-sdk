@@ -13,19 +13,23 @@
 // limitations under the License.
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 use cx_api::proto::com::coralogixapis::dataprime::v1::{
-    dataprime_query_service_client::DataprimeQueryServiceClient,
     QueryRequest,
     QueryResponse,
+    dataprime_query_service_client::DataprimeQueryServiceClient,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
+use tonic::{
+    Streaming,
+    transport::ClientTlsConfig,
+};
 use tonic::{
     metadata::MetadataMap,
     transport::{
@@ -33,13 +37,9 @@ use tonic::{
         Endpoint,
     },
 };
-use tonic::{
-    transport::ClientTlsConfig,
-    Streaming,
-};
 
-pub use cx_api::proto::com::coralogixapis::dataprime::v1::query_response::Message;
 pub use cx_api::proto::com::coralogixapis::dataprime::v1::Metadata;
+pub use cx_api::proto::com::coralogixapis::dataprime::v1::query_response::Message;
 
 /// The Dataprime Query API client.
 /// Read more at [https://coralogix.com/docs/dataprime-query-language/]()
