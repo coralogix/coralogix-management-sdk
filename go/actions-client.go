@@ -67,8 +67,8 @@ const (
 	// ReplaceActionRPC is the RPC for replacing an action.
 	ReplaceActionRPC = actions.ActionsService_ReplaceAction_FullMethodName
 
-	// RemoveActionRPC is the RPC for removing an action.
-	RemoveActionRPC = actions.ActionsService_DeleteAction_FullMethodName
+	// DeleteActionRPC is the RPC for removing an action.
+	DeleteActionRPC = actions.ActionsService_DeleteAction_FullMethodName
 
 	// OrderActionsRPC is the RPC for ordering actions.
 	OrderActionsRPC = actions.ActionsService_OrderActions_FullMethodName
