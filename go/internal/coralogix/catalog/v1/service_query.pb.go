@@ -26,9 +26,10 @@ type ServiceQuery struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TimeRange             *TimeRange             `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
-	ServiceCatalogFilters []*ApmFilter           `protobuf:"bytes,2,rep,name=service_catalog_filters,json=serviceCatalogFilters,proto3" json:"service_catalog_filters,omitempty"`
-	TrendOffset           *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=trend_offset,json=trendOffset,proto3" json:"trend_offset,omitempty"`
+	TimeRange             *TimeRange                `protobuf:"bytes,1,opt,name=time_range,json=timeRange,proto3" json:"time_range,omitempty"`
+	ServiceCatalogFilters []*ApmFilter              `protobuf:"bytes,2,rep,name=service_catalog_filters,json=serviceCatalogFilters,proto3" json:"service_catalog_filters,omitempty"`
+	TrendOffset           *wrapperspb.Int64Value    `protobuf:"bytes,3,opt,name=trend_offset,json=trendOffset,proto3" json:"trend_offset,omitempty"`
+	Columns               []*wrapperspb.StringValue `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
 }
 
 func (x *ServiceQuery) Reset() {
@@ -84,6 +85,13 @@ func (x *ServiceQuery) GetTrendOffset() *wrapperspb.Int64Value {
 	return nil
 }
 
+func (x *ServiceQuery) GetColumns() []*wrapperspb.StringValue {
+	if x != nil {
+		return x.Columns
+	}
+	return nil
+}
+
 var File_com_coralogix_catalog_v1_service_query_proto protoreflect.FileDescriptor
 
 var file_com_coralogix_catalog_v1_service_query_proto_rawDesc = []byte{
@@ -98,7 +106,7 @@ var file_com_coralogix_catalog_v1_service_query_proto_rawDesc = []byte{
 	0x61, 0x74, 0x61, 0x6c, 0x6f, 0x67, 0x2f, 0x76, 0x31, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
 	0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x77, 0x72, 0x61, 0x70, 0x70, 0x65, 0x72,
-	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xef, 0x01, 0x0a, 0x0c, 0x53, 0x65, 0x72, 0x76,
+	0x73, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0xa7, 0x02, 0x0a, 0x0c, 0x53, 0x65, 0x72, 0x76,
 	0x69, 0x63, 0x65, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x42, 0x0a, 0x0a, 0x74, 0x69, 0x6d, 0x65,
 	0x5f, 0x72, 0x61, 0x6e, 0x67, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x23, 0x2e, 0x63,
 	0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x63, 0x61, 0x74,
@@ -113,8 +121,11 @@ var file_com_coralogix_catalog_v1_service_query_proto_rawDesc = []byte{
 	0x6e, 0x64, 0x5f, 0x6f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
 	0x66, 0x2e, 0x49, 0x6e, 0x74, 0x36, 0x34, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x0b, 0x74, 0x72,
-	0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x65, 0x6e, 0x64, 0x4f, 0x66, 0x66, 0x73, 0x65, 0x74, 0x12, 0x36, 0x0a, 0x07, 0x63, 0x6f, 0x6c,
+	0x75, 0x6d, 0x6e, 0x73, 0x18, 0x04, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72,
+	0x69, 0x6e, 0x67, 0x56, 0x61, 0x6c, 0x75, 0x65, 0x52, 0x07, 0x63, 0x6f, 0x6c, 0x75, 0x6d, 0x6e,
+	0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -131,20 +142,22 @@ func file_com_coralogix_catalog_v1_service_query_proto_rawDescGZIP() []byte {
 
 var file_com_coralogix_catalog_v1_service_query_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_com_coralogix_catalog_v1_service_query_proto_goTypes = []interface{}{
-	(*ServiceQuery)(nil),          // 0: com.coralogix.catalog.v1.ServiceQuery
-	(*TimeRange)(nil),             // 1: com.coralogix.catalog.v1.TimeRange
-	(*ApmFilter)(nil),             // 2: com.coralogix.catalog.v1.ApmFilter
-	(*wrapperspb.Int64Value)(nil), // 3: google.protobuf.Int64Value
+	(*ServiceQuery)(nil),           // 0: com.coralogix.catalog.v1.ServiceQuery
+	(*TimeRange)(nil),              // 1: com.coralogix.catalog.v1.TimeRange
+	(*ApmFilter)(nil),              // 2: com.coralogix.catalog.v1.ApmFilter
+	(*wrapperspb.Int64Value)(nil),  // 3: google.protobuf.Int64Value
+	(*wrapperspb.StringValue)(nil), // 4: google.protobuf.StringValue
 }
 var file_com_coralogix_catalog_v1_service_query_proto_depIdxs = []int32{
 	1, // 0: com.coralogix.catalog.v1.ServiceQuery.time_range:type_name -> com.coralogix.catalog.v1.TimeRange
 	2, // 1: com.coralogix.catalog.v1.ServiceQuery.service_catalog_filters:type_name -> com.coralogix.catalog.v1.ApmFilter
 	3, // 2: com.coralogix.catalog.v1.ServiceQuery.trend_offset:type_name -> google.protobuf.Int64Value
-	3, // [3:3] is the sub-list for method output_type
-	3, // [3:3] is the sub-list for method input_type
-	3, // [3:3] is the sub-list for extension type_name
-	3, // [3:3] is the sub-list for extension extendee
-	0, // [0:3] is the sub-list for field type_name
+	4, // 3: com.coralogix.catalog.v1.ServiceQuery.columns:type_name -> google.protobuf.StringValue
+	4, // [4:4] is the sub-list for method output_type
+	4, // [4:4] is the sub-list for method input_type
+	4, // [4:4] is the sub-list for extension type_name
+	4, // [4:4] is the sub-list for extension extendee
+	0, // [0:4] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_catalog_v1_service_query_proto_init() }

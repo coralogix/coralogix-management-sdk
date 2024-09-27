@@ -42,6 +42,11 @@ do
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogixapis/alerts/v3 "
                 args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogixapis/alerts/v3 "
                 ;;
+            # The archive v2 protos contain circular dependencies, so we need to make sure that all dashboard files end up in the same package
+            *archive/dataset/v2* )
+                args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/archive/v2 "
+                args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/archive/v2 "
+                ;;
             # The permissions proto contain circular dependencies, so we need to make sure that all permissions files end up in the same package
             *permissions* )
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/permissions/v1 "

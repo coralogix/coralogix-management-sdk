@@ -26,6 +26,7 @@ const (
 	ArchiveLogsDataSourceService_SearchArchiveGroupedLogsSeries_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveGroupedLogsSeries"
 	ArchiveLogsDataSourceService_SearchArchiveGroupedLogsTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveGroupedLogsTimeSeries"
 	ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_FullMethodName         = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveLogsTimeValue"
+	ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveLogsGroupedValues"
 )
 
 // ArchiveLogsDataSourceServiceClient is the client API for ArchiveLogsDataSourceService service.
@@ -39,6 +40,7 @@ type ArchiveLogsDataSourceServiceClient interface {
 	SearchArchiveGroupedLogsSeries(ctx context.Context, in *SearchArchiveGroupedLogsSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedLogsSeriesResponse, error)
 	SearchArchiveGroupedLogsTimeSeries(ctx context.Context, in *SearchArchiveGroupedLogsTimeSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedLogsTimeSeriesResponse, error)
 	SearchArchiveLogsTimeValue(ctx context.Context, in *SearchArchiveLogsTimeValueRequest, opts ...grpc.CallOption) (*SearchArchiveLogsTimeValueResponse, error)
+	SearchArchiveLogsGroupedValues(ctx context.Context, in *SearchArchiveLogsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveLogsGroupedValuesResponse, error)
 }
 
 type archiveLogsDataSourceServiceClient struct {
@@ -112,6 +114,15 @@ func (c *archiveLogsDataSourceServiceClient) SearchArchiveLogsTimeValue(ctx cont
 	return out, nil
 }
 
+func (c *archiveLogsDataSourceServiceClient) SearchArchiveLogsGroupedValues(ctx context.Context, in *SearchArchiveLogsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveLogsGroupedValuesResponse, error) {
+	out := new(SearchArchiveLogsGroupedValuesResponse)
+	err := c.cc.Invoke(ctx, ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ArchiveLogsDataSourceServiceServer is the server API for ArchiveLogsDataSourceService service.
 // All implementations must embed UnimplementedArchiveLogsDataSourceServiceServer
 // for forward compatibility
@@ -123,6 +134,7 @@ type ArchiveLogsDataSourceServiceServer interface {
 	SearchArchiveGroupedLogsSeries(context.Context, *SearchArchiveGroupedLogsSeriesRequest) (*SearchArchiveGroupedLogsSeriesResponse, error)
 	SearchArchiveGroupedLogsTimeSeries(context.Context, *SearchArchiveGroupedLogsTimeSeriesRequest) (*SearchArchiveGroupedLogsTimeSeriesResponse, error)
 	SearchArchiveLogsTimeValue(context.Context, *SearchArchiveLogsTimeValueRequest) (*SearchArchiveLogsTimeValueResponse, error)
+	SearchArchiveLogsGroupedValues(context.Context, *SearchArchiveLogsGroupedValuesRequest) (*SearchArchiveLogsGroupedValuesResponse, error)
 	mustEmbedUnimplementedArchiveLogsDataSourceServiceServer()
 }
 
@@ -150,6 +162,9 @@ func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveGroupedLogsT
 }
 func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveLogsTimeValue(context.Context, *SearchArchiveLogsTimeValueRequest) (*SearchArchiveLogsTimeValueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveLogsTimeValue not implemented")
+}
+func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveLogsGroupedValues(context.Context, *SearchArchiveLogsGroupedValuesRequest) (*SearchArchiveLogsGroupedValuesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveLogsGroupedValues not implemented")
 }
 func (UnimplementedArchiveLogsDataSourceServiceServer) mustEmbedUnimplementedArchiveLogsDataSourceServiceServer() {
 }
@@ -291,6 +306,24 @@ func _ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_Handler(srv interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchArchiveLogsGroupedValuesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArchiveLogsDataSourceServiceServer).SearchArchiveLogsGroupedValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArchiveLogsDataSourceServiceServer).SearchArchiveLogsGroupedValues(ctx, req.(*SearchArchiveLogsGroupedValuesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ArchiveLogsDataSourceService_ServiceDesc is the grpc.ServiceDesc for ArchiveLogsDataSourceService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -325,6 +358,10 @@ var ArchiveLogsDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchArchiveLogsTimeValue",
 			Handler:    _ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_Handler,
+		},
+		{
+			MethodName: "SearchArchiveLogsGroupedValues",
+			Handler:    _ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
