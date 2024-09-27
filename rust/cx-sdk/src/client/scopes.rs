@@ -27,7 +27,6 @@ pub use cx_api::proto::com::coralogixapis::scopes::v1::{
 };
 
 use cx_api::proto::com::coralogixapis::scopes::v1::{
-    scopes_service_client::ScopesServiceClient,
     CreateScopeRequest,
     CreateScopeResponse,
     DeleteScopeRequest,
@@ -37,6 +36,7 @@ use cx_api::proto::com::coralogixapis::scopes::v1::{
     GetTeamScopesRequest,
     UpdateScopeRequest,
     UpdateScopeResponse,
+    scopes_service_client::ScopesServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{

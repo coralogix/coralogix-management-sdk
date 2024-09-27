@@ -13,8 +13,8 @@
 // limitations under the License.
 
 use tonic::{
-    metadata::MetadataMap,
     Request,
+    metadata::MetadataMap,
 };
 
 #[allow(dead_code)]

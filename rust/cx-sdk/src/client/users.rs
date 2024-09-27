@@ -17,10 +17,6 @@ use serde::{
 };
 
 use crate::{
-    auth::{
-        ApiKey,
-        AuthContext,
-    },
     CoralogixRegion,
     RUSTC_VERSION,
     SDK_CORRELATION_ID_HEADER_NAME,
@@ -28,6 +24,10 @@ use crate::{
     SDK_RUSTC_VERSION_HEADER_NAME,
     SDK_VERSION,
     SDK_VERSION_HEADER_NAME,
+    auth::{
+        ApiKey,
+        AuthContext,
+    },
 };
 
 #[derive(Serialize, Deserialize)]

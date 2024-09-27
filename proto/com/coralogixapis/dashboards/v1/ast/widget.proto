@@ -9,6 +9,7 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto";
 import "com/coralogixapis/dashboards/v1/types.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -30,6 +31,7 @@ message Widget {
       widgets.BarChart bar_chart = 5;
       widgets.HorizontalBarChart horizontal_bar_chart = 6;
       widgets.Markdown markdown = 7;
+      widgets.Hexagon hexagon = 8;
     }
   }
 

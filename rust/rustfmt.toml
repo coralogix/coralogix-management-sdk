@@ -1,7 +1,6 @@
-version = "Two"
+style_edition = "2024"
 imports_layout = "Vertical" 
 reorder_imports = true
 reorder_modules = true
-edition = "2021"
 newline_style = "Unix"
 max_width = 100

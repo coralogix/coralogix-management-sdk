@@ -22,8 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogix::quota::v1::{
-    policies_service_client::PoliciesServiceClient,
-    update_policy_request,
     CreatePolicyRequest,
     CreatePolicyResponse,
     DeletePolicyRequest,
@@ -34,6 +32,8 @@ use cx_api::proto::com::coralogix::quota::v1::{
     GetPolicyResponse,
     UpdatePolicyRequest,
     UpdatePolicyResponse,
+    policies_service_client::PoliciesServiceClient,
+    update_policy_request,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -46,13 +46,13 @@ use tonic::{
 };
 
 pub use cx_api::proto::com::coralogix::quota::v1::{
-    create_policy_request::SourceTypeRules,
     ArchiveRetention,
     LogRules,
     Rule,
     RuleTypeId,
     SourceType,
     SpanRules,
+    create_policy_request::SourceTypeRules,
 };
 
 fn convert_source_types(a: SourceTypeRules) -> update_policy_request::SourceTypeRules {

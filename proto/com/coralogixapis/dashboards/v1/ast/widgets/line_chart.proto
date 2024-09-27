@@ -14,6 +14,7 @@ import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -38,6 +39,7 @@ message LineChart {
     Resolution resolution = 10;
     common.DataModeType data_mode_type = 11;
     google.protobuf.StringValue custom_unit = 12;
+    google.protobuf.Int32Value decimal = 13;
   }
 
   message Query {
@@ -60,12 +62,14 @@ message LineChart {
     repeated v1.common.LogsAggregation aggregations = 3;
     repeated Filter.LogsFilter filters = 4;
     repeated v1.common.ObservationField group_bys = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
   }
 
   message MetricsQuery {
     common.PromQlQuery promql_query = 1;
     repeated Filter.MetricsFilter filters = 2;
     common.MetricsQueryEditorMode editor_mode = 3;
+    v1.common.TimeFrameSelect time_frame = 4;
   }
 
   message SpansQuery {
@@ -73,11 +77,13 @@ message LineChart {
     repeated v1.common.SpanField group_by = 2;
     repeated v1.common.SpansAggregation aggregations = 3;
     repeated Filter.SpansFilter filters = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
   }
 
   message DataprimeQuery {
     v1.common.DataprimeQuery dataprime_query = 1;
     repeated Filter.Source filters = 2;
+    v1.common.TimeFrameSelect time_frame = 3;
   }
 
   message Resolution {

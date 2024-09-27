@@ -13,8 +13,6 @@
 // limitations under the License.
 
 use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
-    metrics_configurator_public_service_client::MetricsConfiguratorPublicServiceClient,
-    metrics_configurator_service_client::MetricsConfiguratorServiceClient,
     ConfigureTenantRequest,
     GetTenantConfigRequest,
     GetTenantConfigResponse,
@@ -27,6 +25,8 @@ use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
     MigrateTenantRequest,
     UpdateRequest,
     ValidateBucketRequest,
+    metrics_configurator_public_service_client::MetricsConfiguratorPublicServiceClient,
+    metrics_configurator_service_client::MetricsConfiguratorServiceClient,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
@@ -40,22 +40,22 @@ use tonic::{
 };
 
 use crate::{
+    CoralogixRegion,
     auth::AuthContext,
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
-    CoralogixRegion,
 };
 
 pub use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
+    RetentionPolicyRequest,
+    S3Config,
     configure_tenant_request::StorageConfig,
     internal_update_request::StorageConfig as InternalStorageConfigUpdate,
     tenant_config::StorageConfig as InternalStorageConfig,
     tenant_config_v2::StorageConfig as StorageConfigView,
     update_request::StorageConfig as StorageConfigUpdate,
     validate_bucket_request::StorageConfig as StorageConfigValidation,
-    RetentionPolicyRequest,
-    S3Config,
 };
 
 /// The metrics archive API client.

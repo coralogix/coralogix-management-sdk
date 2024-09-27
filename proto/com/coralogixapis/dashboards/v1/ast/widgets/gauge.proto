@@ -9,8 +9,10 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 
 message Gauge {
   Query query = 1;
@@ -40,6 +42,7 @@ message Gauge {
     Aggregation aggregation = 2;
     repeated Filter.MetricsFilter filters = 3;
     common.MetricsQueryEditorMode editor_mode = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
   }
 
   message LogsQuery {
@@ -48,6 +51,7 @@ message Gauge {
     Aggregation aggregation = 3 [deprecated = true];
     repeated Filter.LogsFilter filters = 4;
     repeated v1.common.ObservationField group_by = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
   }
 
   message SpansQuery {
@@ -55,11 +59,14 @@ message Gauge {
     v1.common.SpansAggregation spans_aggregation = 2;
     Aggregation aggregation = 3 [deprecated = true];
     repeated Filter.SpansFilter filters = 4;
+    repeated v1.common.SpanField group_by = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
   }
 
   message DataprimeQuery {
     v1.common.DataprimeQuery dataprime_query = 1;
     repeated Filter.Source filters = 2;
+    v1.common.TimeFrameSelect time_frame = 3;
   }
 
   message Threshold {

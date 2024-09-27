@@ -22,8 +22,6 @@ use crate::{
 };
 
 use cx_api::proto::com::coralogix::integrations::v1::{
-    integration_metadata::SpecificData,
-    integration_service_client::IntegrationServiceClient,
     DeleteIntegrationRequest,
     DeleteIntegrationResponse,
     GenericIntegrationParameters,
@@ -50,14 +48,16 @@ use cx_api::proto::com::coralogix::integrations::v1::{
     TestIntegrationResponse,
     UpdateIntegrationRequest,
     UpdateIntegrationResponse,
+    integration_metadata::SpecificData,
+    integration_service_client::IntegrationServiceClient,
 };
 
 pub use cx_api::proto::com::coralogix::integrations::v1::{
+    Parameter,
     integration_details::default_integration_details::*,
     integration_details::*,
     parameter::*,
     test_integration_result::Result as TestResult,
-    Parameter,
 };
 
 use tokio::sync::Mutex;

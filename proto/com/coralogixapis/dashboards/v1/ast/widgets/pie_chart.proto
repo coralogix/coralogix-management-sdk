@@ -12,6 +12,7 @@ import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
 
 message PieChart {
@@ -26,6 +27,7 @@ message PieChart {
   google.protobuf.StringValue color_scheme = 9;
   common.DataModeType data_mode_type = 10;
   google.protobuf.StringValue custom_unit = 11;
+  google.protobuf.Int32Value decimal = 12;
 
   message Query {
     oneof value {
@@ -63,6 +65,7 @@ message PieChart {
     google.protobuf.StringValue stacked_group_name = 5;
     repeated v1.common.ObservationField group_names_fields = 6;
     v1.common.ObservationField stacked_group_name_field = 7;
+    v1.common.TimeFrameSelect time_frame = 8;
   }
 
   message SpansQuery {
@@ -71,6 +74,7 @@ message PieChart {
     repeated Filter.SpansFilter filters = 3;
     repeated v1.common.SpanField group_names = 4;
     v1.common.SpanField stacked_group_name = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
   }
 
   message MetricsQuery {
@@ -79,6 +83,7 @@ message PieChart {
     repeated google.protobuf.StringValue group_names = 3;
     google.protobuf.StringValue stacked_group_name = 4;
     common.MetricsQueryEditorMode editor_mode = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
   }
 
   message DataprimeQuery {
@@ -86,5 +91,6 @@ message PieChart {
     repeated Filter.Source filters = 2;
     repeated google.protobuf.StringValue group_names = 3;
     google.protobuf.StringValue stacked_group_name = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
   }
 }

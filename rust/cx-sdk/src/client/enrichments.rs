@@ -24,7 +24,6 @@ use crate::{
 pub use crate::com::coralogixapis::actions::v2::Action;
 
 use cx_api::proto::com::coralogix::enrichment::v1::{
-    enrichment_service_client::EnrichmentServiceClient,
     AddEnrichmentsRequest,
     AddEnrichmentsResponse,
     AtomicOverwriteEnrichmentsRequest,
@@ -35,6 +34,7 @@ use cx_api::proto::com::coralogix::enrichment::v1::{
     GetEnrichmentsResponse,
     RemoveEnrichmentsRequest,
     RemoveEnrichmentsResponse,
+    enrichment_service_client::EnrichmentServiceClient,
 };
 use tokio::sync::Mutex;
 use tonic::{
@@ -49,10 +49,10 @@ use tonic::{
 use crate::CoralogixRegion;
 
 pub use crate::com::coralogix::enrichment::v1::{
-    enrichment_type::Type,
     EnrichmentFieldDefinition,
     EnrichmentRequestModel as EnrichmentMapping,
     EnrichmentType,
+    enrichment_type::Type,
 };
 
 /// The Custom Enrichments API client.

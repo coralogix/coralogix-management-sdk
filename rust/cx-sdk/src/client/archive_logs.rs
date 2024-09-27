@@ -32,11 +32,11 @@ use tonic::{
     },
 };
 
-pub use cx_api::proto::com::coralogix::archive::v2::validate_target_request::TargetSpec as TargetSpecValidation;
 pub use cx_api::proto::com::coralogix::archive::v2::S3TargetSpec;
+pub use cx_api::proto::com::coralogix::archive::v2::validate_target_request::TargetSpec as TargetSpecValidation;
 
-use crate::auth::AuthContext;
 use crate::CoralogixRegion;
+use crate::auth::AuthContext;
 use crate::{
     error::Result,
     metadata::CallProperties,

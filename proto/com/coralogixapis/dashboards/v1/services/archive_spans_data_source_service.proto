@@ -36,6 +36,9 @@ service ArchiveSpansDataSourceService {
   rpc SearchArchiveSpansTimeValue(SearchArchiveSpansTimeValueRequest) returns (SearchArchiveSpansTimeValueResponse) {
     option (audit_log_description).description = "search archive spans time value";
   }
+  rpc SearchArchiveSpansGroupedValues(SearchArchiveSpansGroupedValuesRequest) returns (SearchArchiveSpansGroupedValuesResponse) {
+    option (audit_log_description).description = "search archive spans grouped values";
+  }
 }
 
 message SearchArchiveSpansTimeSeriesRequest {
@@ -169,4 +172,22 @@ message SearchArchiveSpansTimeValueRequest {
 
 message SearchArchiveSpansTimeValueResponse {
   google.protobuf.DoubleValue value = 1;
+}
+
+message SearchArchiveSpansGroupedValuesRequest {
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3;
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+  repeated google.protobuf.StringValue group_by_keys = 6;
+  google.protobuf.StringValue aggregation_keys = 7;
+  google.protobuf.Int32Value limit = 8;
+}
+
+message SearchArchiveSpansGroupedValuesResponse {
+  repeated common.Group groups = 1;
+  bool is_limit_exceeded = 2;
+  google.protobuf.Int64Value total = 3;
+  map<string, string> meta = 4;
 }
