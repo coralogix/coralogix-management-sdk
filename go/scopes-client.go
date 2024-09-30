@@ -50,7 +50,7 @@ const (
 	CreateScopeRPC        = scopes.ScopesService_CreateScope_FullMethodName
 	DeleteScopeRPC        = scopes.ScopesService_DeleteScope_FullMethodName
 	GetTeamScopesRPC      = scopes.ScopesService_GetTeamScopes_FullMethodName
-	GetTeamScopesByIdsRPC = scopes.ScopesService_GetTeamScopesByIds_FullMethodName
+	GetTeamScopesByIDsRPC = scopes.ScopesService_GetTeamScopesByIds_FullMethodName
 	UpdateScopeRPC        = scopes.ScopesService_UpdateScope_FullMethodName
 )
 
