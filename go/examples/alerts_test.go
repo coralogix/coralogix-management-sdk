@@ -155,11 +155,11 @@ func TestAlertScheduler(t *testing.T) {
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
-	a := cxsdk.NewAlertsSchedulersClient(creator)
+	a := cxsdk.NewAlertSchedulerClient(creator)
 	description := "example"
 	metaLabels := make([]*cxsdk.MetaLabel, 0)
 	schedule := cxsdk.Schedule{
-		ScheduleOperation: cxsdk.ScheduleOperationScheduleOperationMute,
+		ScheduleOperation: cxsdk.ScheduleOperationMute,
 		Scheduler: &cxsdk.ScheduleOneTime{
 			OneTime: &cxsdk.OneTime{
 				Timeframe: &cxsdk.Timeframe{

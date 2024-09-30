@@ -35,7 +35,7 @@ type ClientSet struct {
 	archiveRetentions *ArchiveRetentionsClient
 	archiveMetrics    *ArchiveMetricsClient
 	archiveLogs       *ArchiveLogsClient
-	alertsSchedulers  *AlertsSchedulersClient
+	alertScheduler    *AlertSchedulerClient
 	teams             *TeamsClient
 	slos              *SLOsClient
 	scopes            *ScopesClient
@@ -103,9 +103,9 @@ func (c *ClientSet) ArchiveLogs() *ArchiveLogsClient {
 	return c.archiveLogs
 }
 
-// AlertSchedulers Gets an AlertsSchedulersClient from the ClientSet.
-func (c *ClientSet) AlertSchedulers() *AlertsSchedulersClient {
-	return c.alertsSchedulers
+// AlertSchedulers Gets an AlertSchedulerClient from the ClientSet.
+func (c *ClientSet) AlertSchedulers() *AlertSchedulerClient {
+	return c.alertScheduler
 }
 
 // Teams gets a TeamsClient from the ClientSet.
@@ -156,7 +156,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		archiveRetentions: NewArchiveRetentionsClient(apikeyCPC),
 		archiveMetrics:    NewArchiveMetricsClient(apikeyCPC),
 		archiveLogs:       NewArchiveLogsClient(apikeyCPC),
-		alertsSchedulers:  NewAlertsSchedulersClient(apikeyCPC),
+		alertScheduler:    NewAlertSchedulerClient(apikeyCPC),
 		teams:             NewTeamsClient(apikeyCPC),
 		slos:              NewSLOsClient(apikeyCPC),
 		scopes:            NewScopesClient(apikeyCPC),
