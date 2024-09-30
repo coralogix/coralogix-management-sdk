@@ -12,7 +12,7 @@ on:
       - '.github/workflows/**'
 
 jobs:
-  FLT_linux:
+  format_test_linux:
     name: "[Go SDK - Linux] Format, Lint, Test"
     runs-on: ubuntu-latest
     steps:
@@ -47,7 +47,16 @@ jobs:
           # skip-build-cache: true
       # - name: test
       #   run: make test 
-      - name: Run Examples 
+  run_examples:
+    name: "[Go SDK - Linux] Run Examples"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+      - uses: arduino/setup-protoc@v3
+        with:
+          version: ${{env.PROTOC_VERSION}}
+      - name: Run Examples
         env:
           AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
           CORALOGIX_TEAM_API_KEY: ${{ secrets.CORALOGIX_TEAM_API_KEY }} 
@@ -57,7 +66,11 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
-        run: make test
+        run: |
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+          make test
+
 
   # FLT_windows:
   #   name: "[Go SDK - Windows] Format, Lint, Test"

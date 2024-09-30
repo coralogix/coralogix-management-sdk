@@ -14,8 +14,8 @@ env:
   PROTOC_VERSION: "26.1"
 
 jobs:
-  tests_linux:
-    name: "[Rust SDK - Linux] Format, Lint, Test"
+  examples_linux:
+    name: "[Rust SDK - Linux] Run examples"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -45,8 +45,8 @@ jobs:
         run: cargo nextest run --all
         working-directory: rust/examples
 
-  tests_windows:
-    name: "[Rust SDK - Windows] Format, Lint, Test"
+  examples_windows:
+    name: "[Rust SDK - Windows] Run examples"
     runs-on: windows-latest
     defaults:
       run:
@@ -59,9 +59,6 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
       - uses: taiki-e/install-action@nextest
-
-      - name: SDK tests
-        run: cargo nextest run --all
       
       - name: Run Examples
         env:
@@ -77,7 +74,7 @@ jobs:
         working-directory: rust/examples
 
   clippy:
-    name: "[Rust SDK] Run Clippy & Formatting check"
+    name: "[Rust SDK] Run Clippy, Formatting check & SDK tests"
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -92,6 +89,7 @@ jobs:
     - uses: dtolnay/rust-toolchain@nightly
       with:
         components: clippy, rustfmt
+    - uses: taiki-e/install-action@nextest
     - uses: Swatinem/rust-cache@v2
     - name: Check formatting
       run: cargo +nightly fmt --all -- --check
@@ -113,3 +111,5 @@ jobs:
     #     wait-for-processing: true
     - name: Run Clippy
       run: cargo clippy --workspace --all-features --all-targets -- -D warnings --allow deprecated
+    - name: SDK tests
+      run: cargo nextest run --all

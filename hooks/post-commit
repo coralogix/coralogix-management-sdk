@@ -1,0 +1,5 @@
+#!/bin/sh
+license_header_start="Copyright 2024 Coralogix Ltd"
+
+#Check go breaking changes
+modver -git .git HEAD~1 HEAD
