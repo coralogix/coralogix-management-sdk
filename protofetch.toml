@@ -11,7 +11,7 @@ revision = "v0.4.2"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = 'v1.0'
+revision = "v1.1"
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
@@ -33,7 +33,7 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "v1.0"
+revision = "v1.1"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
