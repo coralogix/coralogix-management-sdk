@@ -50,41 +50,32 @@ type OutgoingWebhookInputData = webhooks.OutgoingWebhookInputData
 // WebhookType ... is the type of webhook
 type WebhookType = webhooks.WebhookType
 
-// WebhookTypeUnknown is an unknown webhook type.
-const WebhookTypeUnknown = webhooks.WebhookType_UNKNOWN
-
-// WebhookTypeGeneric is a generic webhook type.
-const WebhookTypeGeneric = webhooks.WebhookType_GENERIC
-
-// WebhookTypeSlack is a Slack webhook type.
-const WebhookTypeSlack = webhooks.WebhookType_SLACK
-
-// WebhookTypePagerduty is a PagerDuty webhook type.
-const WebhookTypePagerduty = webhooks.WebhookType_PAGERDUTY
-
-// WebhookTypeSendLog is a SendLog webhook type.
-const WebhookTypeSendLog = webhooks.WebhookType_SEND_LOG
-
-// WebhookTypeEmailGroup is an EmailGroup webhook type.
-const WebhookTypeEmailGroup = webhooks.WebhookType_EMAIL_GROUP
-
-// WebhookTypeMicrosoftTeams is a MicrosoftTeams webhook type.
-const WebhookTypeMicrosoftTeams = webhooks.WebhookType_MICROSOFT_TEAMS
-
-// WebhookTypeJira is a Jira webhook type.
-const WebhookTypeJira = webhooks.WebhookType_JIRA
-
-// WebhookTypeOpsgenie is an Opsgenie webhook type.
-const WebhookTypeOpsgenie = webhooks.WebhookType_OPSGENIE
-
-// WebhookTypeDemisto is a Demisto webhook type.
-const WebhookTypeDemisto = webhooks.WebhookType_DEMISTO
-
-// WebhookTypeAwsEventBridge is an AWS EventBridge webhook type.
-const WebhookTypeAwsEventBridge = webhooks.WebhookType_AWS_EVENT_BRIDGE
-
-// WebhookTypeIbmEventNotifications is an IBM Event Notifications webhook type.
-const WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
+const (
+	// WebhookTypeUnknown is an unknown webhook type.
+	WebhookTypeUnknown = webhooks.WebhookType_UNKNOWN
+	// WebhookTypeGeneric is a generic webhook type.
+	WebhookTypeGeneric = webhooks.WebhookType_GENERIC
+	// WebhookTypeSlack is a Slack webhook type.
+	WebhookTypeSlack = webhooks.WebhookType_SLACK
+	// WebhookTypePagerduty is a PagerDuty webhook type.
+	WebhookTypePagerduty = webhooks.WebhookType_PAGERDUTY
+	// WebhookTypeSendLog is a SendLog webhook type.
+	WebhookTypeSendLog = webhooks.WebhookType_SEND_LOG
+	// WebhookTypeEmailGroup is an EmailGroup webhook type.
+	WebhookTypeEmailGroup = webhooks.WebhookType_EMAIL_GROUP
+	// WebhookTypeMicrosoftTeams is a MicrosoftTeams webhook type.
+	WebhookTypeMicrosoftTeams = webhooks.WebhookType_MICROSOFT_TEAMS
+	// WebhookTypeJira is a Jira webhook type.
+	WebhookTypeJira = webhooks.WebhookType_JIRA
+	// WebhookTypeOpsgenie is an Opsgenie webhook type.
+	WebhookTypeOpsgenie = webhooks.WebhookType_OPSGENIE
+	// WebhookTypeDemisto is a Demisto webhook type.
+	WebhookTypeDemisto = webhooks.WebhookType_DEMISTO
+	// WebhookTypeAwsEventBridge is an AWS EventBridge webhook type.
+	WebhookTypeAwsEventBridge = webhooks.WebhookType_AWS_EVENT_BRIDGE
+	// WebhookTypeIbmEventNotifications is an IBM Event Notifications webhook type.
+	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
+)
 
 // GenericWebhook is a Webhook Type
 type GenericWebhook = webhooks.OutgoingWebhookInputData_GenericWebhook
@@ -119,44 +110,38 @@ type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
 // IbmEventNotifications is a Webhook Type
 type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
-// GenericWebhookConfigUnknown is an unknown config
-const GenericWebhookConfigUnknown = webhooks.GenericWebhookConfig_UNKNOWN
-
-// GenericWebhookConfigGet is a GET request
-const GenericWebhookConfigGet = webhooks.GenericWebhookConfig_GET
-
-// GenericWebhookConfigPost is a POST request
-const GenericWebhookConfigPost = webhooks.GenericWebhookConfig_POST
-
-// GenericWebhookConfigPut is a PUT request
-const GenericWebhookConfigPut = webhooks.GenericWebhookConfig_PUT
+const (
+	// GenericWebhookConfigUnknown is an unknown config
+	GenericWebhookConfigUnknown = webhooks.GenericWebhookConfig_UNKNOWN
+	// GenericWebhookConfigGet is a GET request
+	GenericWebhookConfigGet = webhooks.GenericWebhookConfig_GET
+	// GenericWebhookConfigPost is a POST request
+	GenericWebhookConfigPost = webhooks.GenericWebhookConfig_POST
+	// GenericWebhookConfigPut is a PUT request
+	GenericWebhookConfigPut = webhooks.GenericWebhookConfig_PUT
+)
 
 // GenericWebhookConfig is the configuration for a generic webhook.
 type GenericWebhookConfig = webhooks.GenericWebhookConfig
 
-// SlackConfigEmpty is an empty attachment
-const SlackConfigEmpty = webhooks.SlackConfig_EMPTY
-
-// SlackConfigMetricSnapshot for metrics
-const SlackConfigMetricSnapshot = webhooks.SlackConfig_METRIC_SNAPSHOT
-
-// SlackConfigLogs for logs
-const SlackConfigLogs = webhooks.SlackConfig_LOGS
-
-// SlackConfigUnknown unknown digest
-const SlackConfigUnknown = webhooks.SlackConfig_UNKNOWN
-
-// SlackConfigErrorAndCriticalLogs for error and critical logs
-const SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
-
-// SlackConfigFlowAnomalies for flow anomalies
-const SlackConfigFlowAnomalies = webhooks.SlackConfig_FLOW_ANOMALIES
-
-// SlackConfigSpikeAnomalies for spike anomalies
-const SlackConfigSpikeAnomalies = webhooks.SlackConfig_SPIKE_ANOMALIES
-
-// SlackConfigDataUsage for data usage
-const SlackConfigDataUsage = webhooks.SlackConfig_DATA_USAGE
+const (
+	// SlackConfigEmpty is an empty attachment
+	SlackConfigEmpty = webhooks.SlackConfig_EMPTY
+	// SlackConfigMetricSnapshot for metrics
+	SlackConfigMetricSnapshot = webhooks.SlackConfig_METRIC_SNAPSHOT
+	// SlackConfigLogs for logs
+	SlackConfigLogs = webhooks.SlackConfig_LOGS
+	// SlackConfigUnknown unknown digest
+	SlackConfigUnknown = webhooks.SlackConfig_UNKNOWN
+	// SlackConfigErrorAndCriticalLogs for error and critical logs
+	SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
+	// SlackConfigFlowAnomalies for flow anomalies
+	SlackConfigFlowAnomalies = webhooks.SlackConfig_FLOW_ANOMALIES
+	// SlackConfigSpikeAnomalies for spike anomalies
+	SlackConfigSpikeAnomalies = webhooks.SlackConfig_SPIKE_ANOMALIES
+	// SlackConfigDataUsage for data usage
+	SlackConfigDataUsage = webhooks.SlackConfig_DATA_USAGE
+)
 
 // SlackConfigDigest is a config
 type SlackConfigDigest = webhooks.SlackConfig_Digest
