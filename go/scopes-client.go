@@ -38,15 +38,20 @@ type DeleteScopeRequest = scopes.DeleteScopeRequest
 // Filter is a filter for a scope
 type Filter = scopes.Filter
 
+// EntityType values
 const (
-	// EntityTypeUnspecified is an unspecified entity type
 	EntityTypeUnspecified = scopes.EntityType_ENTITY_TYPE_UNSPECIFIED
+	EntityTypeLogs        = scopes.EntityType_ENTITY_TYPE_LOGS
+	EntityTypeSpans       = scopes.EntityType_ENTITY_TYPE_SPANS
+)
 
-	// EntityTypeLogs is a logs entity type
-	EntityTypeLogs = scopes.EntityType_ENTITY_TYPE_LOGS
-
-	// EntityTypeSpans is a metrics entity type
-	EntityTypeSpans = scopes.EntityType_ENTITY_TYPE_SPANS
+// RPC Name values
+const (
+	CreateScopeRPC        = scopes.ScopesService_CreateScope_FullMethodName
+	DeleteScopeRPC        = scopes.ScopesService_DeleteScope_FullMethodName
+	GetTeamScopesRPC      = scopes.ScopesService_GetTeamScopes_FullMethodName
+	GetTeamScopesByIDsRPC = scopes.ScopesService_GetTeamScopesByIds_FullMethodName
+	UpdateScopeRPC        = scopes.ScopesService_UpdateScope_FullMethodName
 )
 
 // ScopesClient is a client for the scopes service

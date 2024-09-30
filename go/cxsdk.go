@@ -35,7 +35,7 @@ type ClientSet struct {
 	archiveRetentions *ArchiveRetentionsClient
 	archiveMetrics    *ArchiveMetricsClient
 	archiveLogs       *ArchiveLogsClient
-	alertsSchedulers  *AlertsSchedulersClient
+	alertScheduler    *AlertSchedulerClient
 	teams             *TeamsClient
 	slos              *SLOsClient
 	scopes            *ScopesClient
@@ -103,9 +103,9 @@ func (c *ClientSet) ArchiveLogs() *ArchiveLogsClient {
 	return c.archiveLogs
 }
 
-// AlertSchedulers Gets an AlertsSchedulersClient from the ClientSet.
-func (c *ClientSet) AlertSchedulers() *AlertsSchedulersClient {
-	return c.alertsSchedulers
+// AlertSchedulers Gets an AlertSchedulerClient from the ClientSet.
+func (c *ClientSet) AlertSchedulers() *AlertSchedulerClient {
+	return c.alertScheduler
 }
 
 // Teams gets a TeamsClient from the ClientSet.
@@ -156,7 +156,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		archiveRetentions: NewArchiveRetentionsClient(apikeyCPC),
 		archiveMetrics:    NewArchiveMetricsClient(apikeyCPC),
 		archiveLogs:       NewArchiveLogsClient(apikeyCPC),
-		alertsSchedulers:  NewAlertsSchedulersClient(apikeyCPC),
+		alertScheduler:    NewAlertSchedulerClient(apikeyCPC),
 		teams:             NewTeamsClient(apikeyCPC),
 		slos:              NewSLOsClient(apikeyCPC),
 		scopes:            NewScopesClient(apikeyCPC),
@@ -227,43 +227,23 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 	}
 }
 
+// GRPC URLs for the Coralogix regions.
 const (
-	// GrpcUS1 is the URL for the us1 region.
 	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
-
-	// GrpcUS2 is the URL for the us2 region.
 	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
-
-	// GrpcEU1 is the URL for the eu1 region.
 	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
-
-	// GrpcEU2 is the URL for the eu2 region.
 	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
-
-	// GrpcAP1 is the URL for the ap1 region.
 	GrpcAP1 = "ng-api-grpc.app.coralogix.in:443"
-
-	// GrpcAP2 is the URL for the ap2 region.
 	GrpcAP2 = "ng-api-grpc.coralogixsg.com:443"
 )
 
+// RESt URLs for the Coralogix regions.
 const (
-	// RestUS1 is the URL for the us1 region.
 	RestUS1 = "https://ng-api-http.coralogix.com"
-
-	// RestUS2 is the URL for the us2 region.
 	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
-
-	// RestEU1 is the URL for the eu1 region.
 	RestEU1 = "https://ng-api-http.coralogix.com"
-
-	// RestEU2 is the URL for the eu2 region.
 	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
-
-	// RestAP1 is the URL for the ap1 region.
 	RestAP1 = "https://ng-api-http.app.coralogix.in"
-
-	// RestAP2 is the URL for the ap2 region.
 	RestAP2 = "https://ng-api-http.coralogixsg.com"
 )
 
