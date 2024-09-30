@@ -25,9 +25,6 @@ type ActionsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// SourceType is a source type for the action to trigger.
-type SourceType = actions.SourceType
-
 // CreateActionRequest is a request to create an action.
 type CreateActionRequest = actions.CreateActionRequest
 
@@ -46,29 +43,42 @@ type OrderActionsRequest = actions.OrderActionsRequest
 // Action is an action.
 type Action = actions.Action
 
-// SourceTypeSourceTypeUnspecified is an unspecified source type.
-const SourceTypeSourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
+// SourceType is a type of source for an action.
+type SourceType = actions.SourceType
 
-// SourceTypeSourceTypeLog is a webhook source type.
-const SourceTypeSourceTypeLog = actions.SourceType_SOURCE_TYPE_LOG
+const (
+	// SourceTypeUnspecified is an unspecified source type.
+	SourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
 
-// SourceTypeSourceTypeDataMap is a data map source type.
-const SourceTypeSourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
+	// SourceTypeLog is a webhook source type.
+	SourceTypeLog = actions.SourceType_SOURCE_TYPE_LOG
 
-// CreateActionRpc is the method name for Create
-const CreateActionRpc = actions.ActionsService_CreateAction_FullMethodName
+	// SourceTypeDataMap is a data map source type.
+	SourceTypeDataMap = actions.SourceType_SOURCE_TYPE_DATA_MAP
+)
 
-// ReplaceActionRpc is the method name for Replace
-const ReplaceActionRpc = actions.ActionsService_ReplaceAction_FullMethodName
+const (
+	// GetActionRPC is the RPC for getting an action.
+	GetActionRPC = actions.ActionsService_GetAction_FullMethodName
 
-// GetActionRpc is the method name for Get
-const GetActionRpc = actions.ActionsService_GetAction_FullMethodName
+	// CreateActionRPC is the RPC for creating an action.
+	CreateActionRPC = actions.ActionsService_CreateAction_FullMethodName
 
-// DeleteActionRpc is the method name for Delete
-const DeleteActionRpc = actions.ActionsService_DeleteAction_FullMethodName
+	// ReplaceActionRPC is the RPC for replacing an action.
+	ReplaceActionRPC = actions.ActionsService_ReplaceAction_FullMethodName
 
-// OrderActionRpc is the method name for Order
-const OrderActionRpc = actions.ActionsService_OrderActions_FullMethodName
+	// RemoveActionRPC is the RPC for removing an action.
+	RemoveActionRPC = actions.ActionsService_DeleteAction_FullMethodName
+
+	// OrderActionsRPC is the RPC for ordering actions.
+	OrderActionsRPC = actions.ActionsService_OrderActions_FullMethodName
+
+	// ListActionsRPC is the RPC for listing actions.
+	ListActionsRPC = actions.ActionsService_ListActions_FullMethodName
+
+	// AtomicBatchExecuteActionsRPC is the RPC for executing actions atomically.
+	AtomicBatchExecuteActionsRPC = actions.ActionsService_AtomicBatchExecuteActions_FullMethodName
+)
 
 // Create creates a new action.
 func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {
