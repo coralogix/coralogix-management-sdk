@@ -98,6 +98,23 @@ type GetDeployedIntegrationRequest = ext.GetDeployedIntegrationRequest
 // GetDeployedIntegrationResponse contains the response to a GetDeployedIntegrationRequest.
 type GetDeployedIntegrationResponse = ext.GetDeployedIntegrationResponse
 
+// RPC method names.
+const (
+	ListManagedIntegrationKeysRPC   = ext.IntegrationService_ListManagedIntegrationKeys_FullMethodName
+	GetDeployedIntegrationRPC       = ext.IntegrationService_GetDeployedIntegration_FullMethodName
+	GetIntegrationsRPC              = ext.IntegrationService_GetIntegrations_FullMethodName
+	GetIntegrationDefinitionRPC     = ext.IntegrationService_GetIntegrationDefinition_FullMethodName
+	GetIntegrationDetailsRPC        = ext.IntegrationService_GetIntegrationDetails_FullMethodName
+	GetManagedIntegrationStatusRPC  = ext.IntegrationService_GetManagedIntegrationStatus_FullMethodName
+	SaveIntegrationRPC              = ext.IntegrationService_SaveIntegration_FullMethodName
+	UpdateIntegrationRPC            = ext.IntegrationService_UpdateIntegration_FullMethodName
+	DeleteIntegrationRPC            = ext.IntegrationService_DeleteIntegration_FullMethodName
+	GetTemplateRPC                  = ext.IntegrationService_GetTemplate_FullMethodName
+	GetRumApplicationVersionDataRPC = ext.IntegrationService_GetRumApplicationVersionData_FullMethodName
+	SyncRumDataRPC                  = ext.IntegrationService_SyncRumData_FullMethodName
+	TestIntegrationRPC              = ext.IntegrationService_TestIntegration_FullMethodName
+)
+
 // IntegrationsClient is a client for the Coralogix Extensions API.
 type IntegrationsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
