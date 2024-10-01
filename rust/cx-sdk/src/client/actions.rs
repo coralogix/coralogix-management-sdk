@@ -12,43 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{
-    collections::HashMap,
-    str::FromStr,
-};
+use std::{collections::HashMap, str::FromStr};
 
 use crate::{
     auth::AuthContext,
     com::coralogixapis::actions::v2::{
-        CreateActionRequest,
-        CreateActionResponse,
-        DeleteActionRequest,
-        GetActionRequest,
-        ListActionsRequest,
-        OrderActionsRequest,
-        ReplaceActionRequest,
-        ReplaceActionResponse,
-        actions_service_client::ActionsServiceClient,
+        actions_service_client::ActionsServiceClient, CreateActionRequest, CreateActionResponse,
+        DeleteActionRequest, GetActionRequest, ListActionsRequest, OrderActionsRequest,
+        ReplaceActionRequest, ReplaceActionResponse,
     },
     error::Result,
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
 
-pub use crate::com::coralogixapis::actions::v2::{
-    Action,
-    SourceType,
-};
+pub use crate::com::coralogixapis::actions::v2::{Action, SourceType};
 
 use cx_api::proto::com::coralogixapis::actions::v2::DeleteActionResponse;
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
-    transport::{
-        Channel,
-        ClientTlsConfig,
-        Endpoint,
-    },
+    transport::{Channel, ClientTlsConfig, Endpoint},
 };
 
 use crate::CoralogixRegion;
@@ -93,6 +77,7 @@ impl ActionsClient {
             },
             &self.teams_level_metadata_map,
         );
+        //let client = self.service_client.lock().await.descri
         self.service_client
             .lock()
             .await

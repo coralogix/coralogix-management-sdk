@@ -79,6 +79,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         groups_service(&root),
         #[cfg(feature = "integrations")]
         integrations_service(&root),
+        #[cfg(feature = "recording_rule_groups")]
+        recording_rule_group_sets_service(&root),
     ]
     .concat();
 
@@ -164,6 +166,13 @@ fn quota_service(root: &str) -> Vec<String> {
 fn e2m_service(root: &str) -> Vec<String> {
     vec![format!(
         "{}/proto/com/coralogixapis/events2metrics/v2/events2metrics_service.proto",
+        root
+    )]
+}
+
+fn recording_rule_group_sets_service(root: &str) -> Vec<String> {
+    vec![format!(
+        "{}/proto/com/coralogixapis/metrics-rule-manager/v1/groups.proto",
         root
     )]
 }

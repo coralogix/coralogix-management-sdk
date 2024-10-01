@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package rule_manager.tasks;
+
+option go_package = "/golang";
+
+
+message GetTaskRequest {}
+message GetTaskResponse {
+    oneof task {
+        RuleGroupEval eval = 1;
+    }
+}
+
+message RuleGroupEval {
+    string id = 1;
+    RuleGroup rule_group = 2;
+    uint64 eval_at = 3;
+}
+
+message RuleGroup {
+    string id = 1;
+    uint32 tenant_id = 2;
+    repeated Rule rules = 3;
+    uint64 limit = 4;
+}
+
+message Rule {
+    string record = 1;
+    string expr = 2;
+    map<string, string> labels = 3;
+}
+
+message TaskCompletedRequest {
+    message Success {
+        map<string, uint64> rule_eval_durations_ms = 1;
+    }
+    message Failure {
+        enum Kind {
+            Transient = 0;
+            Final = 1; 
+        }
+        string message = 1;
+        Kind kind = 2;
+    }
+
+    string task_id = 1;
+    oneof result {
+        Success success = 2;
+        Failure failure = 3;
+    }
+}
+message TaskCompletedResponse {}
+
+service Tasks {
+    rpc GetTask(GetTaskRequest) returns (GetTaskResponse) {}
+    rpc TaskCompleted(TaskCompletedRequest) returns (TaskCompletedResponse) {}
+}

@@ -102,6 +102,11 @@ allow_policies = ["/com/coralogix/metrics/*"]
 content_roots = ["/proto/"]
 revision = '5aacd2545eb7ae5f76193fc872348c5756db2c8d'
 
+[cx-api-metrics-rule-manager]
+url = "github.com/coralogix/cx-api-clientsets"
+revision = "v0.0.7"
+allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
+
 
 [google-api]
 url = "github.com/googleapis/googleapis"
