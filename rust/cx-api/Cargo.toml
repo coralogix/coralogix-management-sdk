@@ -38,6 +38,7 @@ default = [
     "target",
     "team",
     "views",
+    "recording_rule_groups",
 ]
 alerts = []
 rules = []
@@ -62,6 +63,7 @@ slos = []
 e2m = []
 groups = []
 integrations = []
+recording_rule_groups = []
 
 [dependencies]
 prost = { workspace = true }

@@ -1,0 +1,137 @@
+syntax = "proto3";
+
+package rule_manager.groups;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "/golang";
+
+
+/**
+ * A group of recording rules. Rules within a group are run sequentially at a regular interval, 
+ * with the same evaluation time.
+ */
+message InRuleGroup {
+    // Name of the group.
+    string name = 1; 
+
+    // How often rules in the group are evaluated.
+    optional uint32 interval = 2; // optional, default = 60 secs
+
+    // Limits the number of series a rule can produce.
+    optional uint64 limit = 3; // optional, 0 is no limit, default = 0
+
+    // Rules of the group.
+    repeated InRule rules = 4; 
+}
+
+message InRule {
+    // The name of the time series to output to. Must be a valid metric name.
+    string record = 1;
+
+    /**
+     * The PromQL expression to evaluate. Every evaluation cycle this is
+     * evaluated at the current time, and the result recorded as a new set of
+     * time series with the metric name as given by 'record'.
+     */
+    string expr = 2;
+
+    // Labels to add or overwrite before storing the result.
+    map<string, string> labels = 3;
+}
+
+message OutRuleGroup {
+    string name = 1; 
+    optional uint32 interval = 2; 
+    optional uint64 limit = 3; 
+    repeated OutRule rules = 4; 
+    optional uint64 last_eval_at = 5;
+}
+
+message OutRule {
+    string record = 1;
+    string expr = 2;
+    map<string, string> labels = 3;
+    optional uint64 last_eval_duration_ms = 4;
+}
+
+/** A matcher specifying a group to delete. */
+message DeleteRuleGroup {
+    // Name of the group.
+    string name = 1;
+}
+
+/** A listing of rule groups. */
+message RuleGroupListing {
+    // List of groups.
+    repeated OutRuleGroup rule_groups = 1;
+}
+
+/** A matcher specifying a group to fetch. */
+message FetchRuleGroup {
+    // Name of the group.
+    string name = 1;
+}
+
+/** Result of a rule group fetch operation. */
+message FetchRuleGroupResult {
+    // A fetched rule group.
+    OutRuleGroup rule_group = 1; // optional, empty if not found
+}
+
+/**
+ * CRUD operations on recording rule groups.
+ */
+service RuleGroups {
+    // Creates or updates a rule group.
+    rpc Save(InRuleGroup) returns (google.protobuf.Empty) {}
+
+    // Deletes a rule group matching the given input.
+    rpc Delete(DeleteRuleGroup) returns (google.protobuf.Empty) {}
+
+    // Lists all the rule groups.
+    rpc List(google.protobuf.Empty) returns (RuleGroupListing) {}
+    
+    // Fetches a rule group matching a given input.
+    rpc Fetch(FetchRuleGroup) returns (FetchRuleGroupResult) {}
+}
+
+message CreateRuleGroupSet {
+    repeated InRuleGroup groups = 1;
+    optional string name = 2;
+}
+
+message CreateRuleGroupSetResult {
+    string id = 1;
+}
+
+message UpdateRuleGroupSet {
+    string id = 1;
+    repeated InRuleGroup groups = 2;
+}
+
+message RuleGroupSetListing {
+    repeated OutRuleGroupSet sets = 1;
+}
+
+message FetchRuleGroupSet {
+    string id = 1;
+}
+
+message DeleteRuleGroupSet {
+    string id = 1;
+}
+
+message OutRuleGroupSet {
+    string id = 1;
+    repeated OutRuleGroup groups = 2;
+    optional string name = 3;
+}
+
+service RuleGroupSets {
+    rpc Create(CreateRuleGroupSet) returns (CreateRuleGroupSetResult) {}
+    rpc Update(UpdateRuleGroupSet) returns (google.protobuf.Empty) {}
+    rpc List(google.protobuf.Empty) returns (RuleGroupSetListing) {}
+    rpc Fetch(FetchRuleGroupSet) returns (OutRuleGroupSet) {}
+    rpc Delete(DeleteRuleGroupSet) returns (google.protobuf.Empty) {}
+}

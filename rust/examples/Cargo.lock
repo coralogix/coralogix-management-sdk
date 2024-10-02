@@ -1344,6 +1344,23 @@ dependencies = [
 ]
 
 [[package]]
+name = "recording-rule-group-sets"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http",
+ "prost 0.12.6",
+ "prost-wkt 0.5.1",
+ "prost-wkt-types 0.5.1",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "redox_syscall"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"

@@ -74,3 +74,6 @@ pub mod integrations;
 
 /// This module contains the client for the dashboard folders API.
 pub mod dashboard_folders;
+
+/// This module contains the client for the recording rule groups API.
+pub mod recording_rule_group_sets;

@@ -13,6 +13,8 @@
 - `protoc` - for compiling protobuf files
 - `Make` - for Go development
 
+The file `proto-toolchain-versions.txt` contains the versions of the protobuf tools that you need to contribute to the SDK: please make sure these are the versions that you have on your system.
+
 Please refer to the individual languages on how to build the SDKs
 
 ## Configuration

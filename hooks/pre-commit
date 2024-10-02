@@ -38,3 +38,6 @@ for file in $(git ls-files | grep '\.go$' | grep -v '\.pb\.go$'); do
   check_license "$file"
   check_go_does_not_print_to_std_out "$file"
 done
+
+cd rust && cargo +nightly fmt --all && cd ..
+cd go && go fmt && cd ..
