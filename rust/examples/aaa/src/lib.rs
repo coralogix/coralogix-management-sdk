@@ -15,6 +15,7 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::{
             apikeys::{
@@ -40,7 +41,6 @@ mod tests {
                 UsersClient,
             },
         },
-        CoralogixRegion,
     };
     #[tokio::test]
     async fn test_api_keys_client() {

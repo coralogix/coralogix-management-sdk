@@ -7,7 +7,7 @@ members = [
     "logs",
     "metrics",
     "dashboards",
-    "dataprime",
     "integrations",
+    "dataprime",
     "infra-monitoring", "recording-rule-group-sets",
 ]

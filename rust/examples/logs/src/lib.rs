@@ -15,6 +15,7 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::{
             archive_logs::{
@@ -25,7 +26,6 @@ mod tests {
             },
             datasets::DatasetClient,
         },
-        CoralogixRegion,
     };
     use tokio::fs;
 

@@ -15,6 +15,7 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::{
             dashboard_folders::{
@@ -26,7 +27,6 @@ mod tests {
                 DashboardsClient,
             },
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

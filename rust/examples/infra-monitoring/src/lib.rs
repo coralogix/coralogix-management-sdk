@@ -15,6 +15,7 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::slos::{
             CompareType,
@@ -26,7 +27,6 @@ mod tests {
             SloPeriod,
             SloStatus,
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

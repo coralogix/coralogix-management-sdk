@@ -15,6 +15,7 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::archive_metrics::{
             MetricsArchiveClient,
@@ -24,7 +25,6 @@ mod tests {
             StorageConfigValidation,
             StorageConfigView,
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

@@ -15,12 +15,12 @@
 #[cfg(test)]
 mod tests {
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::dataprime_query::{
             DataprimeQueryClient,
             Message,
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]
