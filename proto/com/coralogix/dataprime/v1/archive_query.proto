@@ -10,7 +10,7 @@ import "com/coralogix/dataprime/v1/archive_log.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-message RunQueryRequest { 
+message RunQueryRequest {
   google.protobuf.StringValue name = 1;
   optional google.protobuf.StringValue description = 2;
   QuerySyntax syntax = 3;
@@ -24,6 +24,8 @@ message RunQueryRequest {
   optional google.protobuf.StringValue widget_id = 11;
   optional google.protobuf.StringValue request_params_hash = 12;
   optional OutputSchema tsv_output_schema = 13;
+  // contextual `now` for the query, default: current time
+  optional google.protobuf.Timestamp now_date = 14;
 }
 
 message OutputSchema {

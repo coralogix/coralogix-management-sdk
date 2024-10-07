@@ -26,7 +26,7 @@ enum Source {
 message GetServiceErrorTrackingOverviewRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  map<string, google.protobuf.ListValue> filters = 3;
+  repeated ApmFilter filters = 3;
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   Source source = 6;
@@ -48,7 +48,7 @@ message GetServiceErrorTrackingOverviewResponse {
 message GetServiceErrorTrackingListRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  map<string, google.protobuf.ListValue> filters = 3;
+  repeated ApmFilter filters = 3;
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   Source source = 6;

@@ -14,6 +14,7 @@ service InternalDatasetManagementService {
 
 message GetAllDatasetRulesRequest {
   optional google.protobuf.Timestamp last_update_time = 1;
+  bool force_update = 2;
 }
 
 message CompanyDatasetRules {

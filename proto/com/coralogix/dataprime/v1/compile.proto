@@ -8,6 +8,8 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogix/dataprime/v1/schema.proto";
 import "com/coralogix/dataprime/v1/common.proto";
 
+import "google/protobuf/timestamp.proto";
+
 enum QuerySyntax {
   QUERY_SYNTAX_DATAPRIME_UNSPECIFIED = 0;
   QUERY_SYNTAX_LUCENE = 1;
@@ -23,6 +25,8 @@ message CompileRequest {
   repeated com.coralogix.dataprime.ast.v1.Source available_sources = 6;
   optional SchemaLookup override_schema = 7;
   optional Backend backend = 8;
+  // contextual `now` for the query, default: current time
+  optional google.protobuf.Timestamp now_date = 9;
 }
 
 message CompileResponse {

@@ -49,7 +49,6 @@ message SearchMetricsTimeSeriesRequest {
 
 message SearchMetricsTimeSeriesResponse {
   repeated common.TimeSeries time_series = 1;
-  bool is_limit_exceeded = 2;
   google.protobuf.Int64Value total = 3;
 }
 

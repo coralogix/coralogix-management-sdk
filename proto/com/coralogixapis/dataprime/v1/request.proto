@@ -29,6 +29,8 @@ message Metadata {
   optional int32 limit = 6;
   // prohibit using unknown fields, ones which were not detected in the ingested data, default = false
   optional bool strict_fields_validation = 7;
+  // contextual `now` for the query, default: current time
+  optional google.protobuf.Timestamp now_date = 8;
 
   // tier on which query runs, default: TIER_FREQUENT_SEARCH
   enum Tier {

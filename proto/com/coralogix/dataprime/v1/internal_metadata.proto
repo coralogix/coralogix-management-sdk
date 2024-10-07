@@ -33,6 +33,8 @@ message QueryMetadata {
   // skip application and subsystem filters based on user scopes from RBAC.
   // WARNING: if you set this flag, you are responsible for managing access to the data.
   optional bool skip_rbac_filters = 6;
+  // contextual `now` for the query, default: current time
+  optional google.protobuf.Timestamp now_date = 7;
 }
 
 // only text related metadata

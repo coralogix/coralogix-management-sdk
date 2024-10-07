@@ -17,6 +17,7 @@ message ObjectStoreLocation {
   string prefix = 3;
   bool enable_tags = 4;
   repeated com.coralogix.archive.v2.ObjectTag tags = 5;
+  optional com.coralogix.archive.v2.PartitioningScheme partitioning_scheme = 6;
 }
 
 // Publicly known location spec. Customers could use this model in future "set location" API.
@@ -35,7 +36,7 @@ message IngestionLocationSpecProps {
   int32 max_compaction_level = 1;
   bool collect_labels = 2;
   repeated string split_by_event_labels = 3;
-  optional com.coralogix.archive.v2.PartitioningScheme partitioning_scheme = 4;
+  optional com.coralogix.archive.v2.PartitioningScheme partitioning_scheme = 4 [deprecated = true];
 }
 
 // Specifies where specific dataset data can be found at the location.
