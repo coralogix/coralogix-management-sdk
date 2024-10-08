@@ -8,7 +8,7 @@ import "com/coralogix/dataprime/v1/common.proto";
 import "com/coralogix/dataprime/v1/histogram.proto";
 import "com/coralogix/dataprime/v1/query.proto";
 
-message RunDataprimeQueryRequest { 
+message RunDataprimeQueryRequest {
   google.protobuf.StringValue query_id = 1;
   QueryPayload query = 2;
   google.protobuf.Timestamp start_date = 3;
@@ -24,6 +24,8 @@ message RunDataprimeQueryRequest {
   optional Filter.Horizon default_filter_horizon = 13;
   // readable string describing what feature it is used for
   optional string internal_client_id = 14;
+  // contextual `now` for the query, default: current time
+  optional google.protobuf.Timestamp now_date = 15;
 }
 
 message RequestComponent {

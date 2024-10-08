@@ -18,11 +18,11 @@ mod tests {
     use std::vec;
 
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::{
             alerts::{
                 self,
-                integration_type,
                 ActivitySchedule,
                 AlertDef,
                 AlertDefNotificationGroup,
@@ -51,6 +51,7 @@ mod tests {
                 Targets,
                 TimeOfDay,
                 TypeDefinition,
+                integration_type,
             },
             alerts_scheduler::{
                 AlertSchedulerClient,
@@ -66,7 +67,6 @@ mod tests {
                 WhichAlerts,
             },
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

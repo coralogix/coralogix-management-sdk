@@ -16,13 +16,13 @@
 mod tests {
 
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::actions::{
             Action,
             ActionsClient,
             SourceType,
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

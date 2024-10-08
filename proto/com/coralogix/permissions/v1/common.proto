@@ -1,20 +1,9 @@
 syntax = "proto3";
 
 package com.coralogix.permissions.v1;
-import "google/protobuf/descriptor.proto";
 
 message UserId {
   string id = 1;
-}
-
-message ResourceId {
-  option deprecated = true;
-  uint32 id = 1;
-}
-
-message ActionId {
-  option deprecated = true;
-  uint32 id = 1;
 }
 
 message TeamId {

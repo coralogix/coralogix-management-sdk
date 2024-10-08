@@ -363,7 +363,9 @@ message Expression {
       optional Expression time_unit = 2;
     }
 
-    message Now {} // returns timestamp
+    message Now {
+      optional Expression offset = 1; // interval
+    } // returns timestamp
 
     message ParseInterval {
       Expression string = 1;

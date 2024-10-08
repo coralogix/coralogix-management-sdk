@@ -16,9 +16,13 @@ mod tests {
     use std::collections::HashMap;
 
     use cx_sdk::{
-        auth::AuthContext,
-        client::recording_rule_group_sets::{InRule, InRuleGroup, RecordingRuleGroupSetsClient},
         CoralogixRegion,
+        auth::AuthContext,
+        client::recording_rule_group_sets::{
+            InRule,
+            InRuleGroup,
+            RecordingRuleGroupSetsClient,
+        },
     };
 
     #[tokio::test]

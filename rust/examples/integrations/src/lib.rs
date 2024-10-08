@@ -17,6 +17,7 @@ mod tests {
     use std::env;
 
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::{
             integrations::{
@@ -28,8 +29,6 @@ mod tests {
             },
             webhooks::{
                 self,
-                generic_webhook_config,
-                slack_config,
                 AwsEventBridgeConfig,
                 Config,
                 DemistoConfig,
@@ -42,9 +41,10 @@ mod tests {
                 SlackConfig,
                 WebhookType,
                 WebhooksClient,
+                generic_webhook_config,
+                slack_config,
             },
         },
-        CoralogixRegion,
     };
     use url::Url;
     use uuid::Uuid;
