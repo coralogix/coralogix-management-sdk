@@ -20,23 +20,44 @@ import (
 	webhooks "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/outgoing_webhooks/v1"
 )
 
+// OutgoingWebhook is a webhook.
+type OutgoingWebhook = webhooks.OutgoingWebhook
+
 // CreateOutgoingWebhookRequest is a request to create a new webhook.
 type CreateOutgoingWebhookRequest = webhooks.CreateOutgoingWebhookRequest
+
+// CreateOutgoingWebhookResponse is a response for creating a new webhook.
+type CreateOutgoingWebhookResponse = webhooks.CreateOutgoingWebhookResponse
 
 // GetOutgoingWebhookRequest is a request to get a webhook by its ID.
 type GetOutgoingWebhookRequest = webhooks.GetOutgoingWebhookRequest
 
+// GetOutgoingWebhookResponse is a response for getting a webhook.
+type GetOutgoingWebhookResponse = webhooks.GetOutgoingWebhookResponse
+
 // UpdateOutgoingWebhookRequest is a request to update a webhook.
 type UpdateOutgoingWebhookRequest = webhooks.UpdateOutgoingWebhookRequest
+
+// UpdateOutgoingWebhookResponse is a response for updating a webhook.
+type UpdateOutgoingWebhookResponse = webhooks.UpdateOutgoingWebhookResponse
 
 // DeleteOutgoingWebhookRequest is a request to delete a webhook.
 type DeleteOutgoingWebhookRequest = webhooks.DeleteOutgoingWebhookRequest
 
+// DeleteOutgoingWebhookResponse is a response for deleting a webhook.
+type DeleteOutgoingWebhookResponse = webhooks.DeleteOutgoingWebhookResponse
+
 // ListOutgoingWebhookTypesRequest is a request to list all webhook types.
 type ListOutgoingWebhookTypesRequest = webhooks.ListOutgoingWebhookTypesRequest
 
+// ListOutgoingWebhookTypesResponse is a response for listing all webhook types.
+type ListOutgoingWebhookTypesResponse = webhooks.ListOutgoingWebhookTypesResponse
+
 // ListAllOutgoingWebhooksRequest is a request to list all webhooks.
 type ListAllOutgoingWebhooksRequest = webhooks.ListAllOutgoingWebhooksRequest
+
+// ListAllOutgoingWebhooksResponse is a response for listing all webhooks.
+type ListAllOutgoingWebhooksResponse = webhooks.ListAllOutgoingWebhooksResponse
 
 // TestExistingOutgoingWebhookRequest is a request to test an existing webhook.
 type TestExistingOutgoingWebhookRequest = webhooks.TestExistingOutgoingWebhookRequest
@@ -77,38 +98,38 @@ const (
 	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
-// GenericWebhook is a Webhook Type
-type GenericWebhook = webhooks.OutgoingWebhookInputData_GenericWebhook
+// GenericWebhookInputData is a generic webhook input type.
+type GenericWebhookInputData = webhooks.OutgoingWebhookInputData_GenericWebhook
 
-// Slack is a Webhook Type
-type Slack = webhooks.OutgoingWebhookInputData_Slack
+// SlackWebhookInputData is a Slack webhook input type.
+type SlackWebhookInputData = webhooks.OutgoingWebhookInputData_Slack
 
-// PagerDuty is a Webhook Type
-type PagerDuty = webhooks.OutgoingWebhookInputData_PagerDuty
+// PagerDutyWebhookInputData is a PagerDuty webhook input type.
+type PagerDutyWebhookInputData = webhooks.OutgoingWebhookInputData_PagerDuty
 
-// SendLog is a Webhook Type
-type SendLog = webhooks.OutgoingWebhookInputData_SendLog
+// SendLogWebhookInputData is a SendLog webhook input type.
+type SendLogWebhookInputData = webhooks.OutgoingWebhookInputData_SendLog
 
-// EmailGroup is a Webhook Type
-type EmailGroup = webhooks.OutgoingWebhookInputData_EmailGroup
+// EmailGroupWebhookInputData is an EmailGroup webhook input type.
+type EmailGroupWebhookInputData = webhooks.OutgoingWebhookInputData_EmailGroup
 
-// MicrosoftTeams is a Webhook Type
-type MicrosoftTeams = webhooks.OutgoingWebhookInputData_MicrosoftTeams
+// MicrosoftTeamsWebhookInputData is a MicrosoftTeams webhook input type.
+type MicrosoftTeamsWebhookInputData = webhooks.OutgoingWebhookInputData_MicrosoftTeams
 
-// Jira is a Webhook Type
-type Jira = webhooks.OutgoingWebhookInputData_Jira
+// JiraWebhookInputData is a Jira webhook input type.
+type JiraWebhookInputData = webhooks.OutgoingWebhookInputData_Jira
 
-// Opsgenie is a Webhook Type
-type Opsgenie = webhooks.OutgoingWebhookInputData_Opsgenie
+// OpsgenieWebhookInputData is an Opsgenie webhook input type.
+type OpsgenieWebhookInputData = webhooks.OutgoingWebhookInputData_Opsgenie
 
-// Demisto is a Webhook Type
-type Demisto = webhooks.OutgoingWebhookInputData_Demisto
+// DemistoWebhookInputData is a Demisto webhook input type.
+type DemistoWebhookInputData = webhooks.OutgoingWebhookInputData_Demisto
 
-// AwsEventBridge is a Webhook Type
-type AwsEventBridge = webhooks.OutgoingWebhookInputData_AwsEventBridge
+// AwsEventBridgeWebhookInputData is an AWS EventBridge webhook input type.
+type AwsEventBridgeWebhookInputData = webhooks.OutgoingWebhookInputData_AwsEventBridge
 
-// IbmEventNotifications is a Webhook Type
-type IbmEventNotifications = webhooks.OutgoingWebhookInputData_IbmEventNotifications
+// IbmEventNotificationsWebhookInputData is an IBM Event Notifications webhook input type.
+type IbmEventNotificationsWebhookInputData = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
 const (
 	// GenericWebhookConfigUnknown is an unknown config
@@ -123,6 +144,9 @@ const (
 
 // GenericWebhookConfig is the configuration for a generic webhook.
 type GenericWebhookConfig = webhooks.GenericWebhookConfig
+
+// GenericWebhookConfigMethodType is the type of the method.
+type GenericWebhookConfigMethodType = webhooks.GenericWebhookConfig_MethodType
 
 const (
 	// SlackConfigEmpty is an empty attachment
@@ -146,8 +170,14 @@ const (
 // SlackConfigDigest is a config
 type SlackConfigDigest = webhooks.SlackConfig_Digest
 
+// SlackConfigDigestType is a config type
+type SlackConfigDigestType = webhooks.SlackConfig_DigestType
+
 // SlackConfigAttachment is a config
 type SlackConfigAttachment = webhooks.SlackConfig_Attachment
+
+// SlackConfigAttachmentType is a config type
+type SlackConfigAttachmentType = webhooks.SlackConfig_AttachmentType
 
 // SlackConfig is a config
 type SlackConfig = webhooks.SlackConfig
@@ -185,6 +215,36 @@ type TestOutgoingWebhookSuccess = webhooks.TestOutgoingWebhookResponse_Success
 // TestOutgoingWebhookFailure response for testing a webhook
 type TestOutgoingWebhookFailure = webhooks.TestOutgoingWebhookResponse_Failure
 
+// GenericWebhook is a generic webhook.
+type GenericWebhook = webhooks.OutgoingWebhook_GenericWebhook
+
+// SlackWebhook is a Slack webhook.
+type SlackWebhook = webhooks.OutgoingWebhook_Slack
+
+// PagerDutyWebhook is a PagerDuty webhook.
+type PagerDutyWebhook = webhooks.OutgoingWebhook_PagerDuty
+
+// SendLogWebhook is a SendLog webhook.
+type SendLogWebhook = webhooks.OutgoingWebhook_SendLog
+
+// EmailGroupWebhook is an EmailGroup webhook.
+type EmailGroupWebhook = webhooks.OutgoingWebhook_EmailGroup
+
+// MicrosoftTeamsWebhook is a MicrosoftTeams webhook.
+type MicrosoftTeamsWebhook = webhooks.OutgoingWebhook_MicrosoftTeams
+
+// JiraWebhook is a Jira webhook.
+type JiraWebhook = webhooks.OutgoingWebhook_Jira
+
+// OpsgenieWebhook is an Opsgenie webhook.
+type OpsgenieWebhook = webhooks.OutgoingWebhook_Opsgenie
+
+// DemistoWebhook is a Demisto webhook.
+type DemistoWebhook = webhooks.OutgoingWebhook_Demisto
+
+// AwsEventBridgeWebhook is an AWS EventBridge webhook.
+type AwsEventBridgeWebhook = webhooks.OutgoingWebhook_AwsEventBridge
+
 // WebhooksClient is a client for the Coralogix Webhooks API.
 type WebhooksClient struct {
 	callPropertiesCreator *CallPropertiesCreator
@@ -218,8 +278,8 @@ func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest)
 	return client.GetOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Replace replaces the specified webhook.
-func (c WebhooksClient) Replace(ctx context.Context, req *UpdateOutgoingWebhookRequest) (*webhooks.UpdateOutgoingWebhookResponse, error) {
+// Update updates the specified webhook.
+func (c WebhooksClient) Update(ctx context.Context, req *UpdateOutgoingWebhookRequest) (*webhooks.UpdateOutgoingWebhookResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
