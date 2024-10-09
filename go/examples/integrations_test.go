@@ -158,7 +158,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("slack-webhook"),
 			Url:  wrapperspb.String("https://join.slack.com/example"),
 			Type: cxsdk.WebhookTypeSlack,
-			Config: &cxsdk.Slack{
+			Config: &cxsdk.SlackWebhookInputData{
 				Slack: &cxsdk.SlackConfig{
 					Attachments: []*cxsdk.SlackConfigAttachment{
 						{
@@ -182,7 +182,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("custom-webhook"),
 			Url:  wrapperspb.String("https://example-url.com"),
 			Type: cxsdk.WebhookTypeGeneric,
-			Config: &cxsdk.GenericWebhook{
+			Config: &cxsdk.GenericWebhookInputData{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
 					Method:  cxsdk.GenericWebhookConfigGet,
@@ -197,7 +197,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("pager-duty-webhook"),
 			Url:  wrapperspb.String("https://example-url.com/"),
 			Type: cxsdk.WebhookTypePagerduty,
-			Config: &cxsdk.PagerDuty{
+			Config: &cxsdk.PagerDutyWebhookInputData{
 				PagerDuty: &cxsdk.PagerDutyConfig{
 					ServiceKey: wrapperspb.String("example-key"),
 				},
@@ -210,7 +210,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("email-group-webhook"),
 			Url:  wrapperspb.String("https://example-url.com/"),
 			Type: cxsdk.WebhookTypeEmailGroup,
-			Config: &cxsdk.EmailGroup{
+			Config: &cxsdk.EmailGroupWebhookInputData{
 				EmailGroup: &cxsdk.EmailGroupConfig{
 					EmailAddresses: []*wrapperspb.StringValue{wrapperspb.String("user@example.com")},
 				},
@@ -223,7 +223,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("jira-webhook"),
 			Url:  wrapperspb.String("https://my-jira.atlassian.net/jira/"),
 			Type: cxsdk.WebhookTypeJira,
-			Config: &cxsdk.Jira{
+			Config: &cxsdk.JiraWebhookInputData{
 				Jira: &cxsdk.JiraConfig{
 					ProjectKey: wrapperspb.String("example-key"),
 					Email:      wrapperspb.String("email@coralogix.com"),
@@ -238,7 +238,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("opsgenie-webhook"),
 			Url:  wrapperspb.String("https://example.opsgenie.com"),
 			Type: cxsdk.WebhookTypeOpsgenie,
-			Config: &cxsdk.Opsgenie{
+			Config: &cxsdk.OpsgenieWebhookInputData{
 				Opsgenie: &cxsdk.OpsgenieConfig{},
 			},
 		},
@@ -248,7 +248,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("demisto-webhook"),
 			Url:  wrapperspb.String("https://example.com"),
 			Type: cxsdk.WebhookTypeDemisto,
-			Config: &cxsdk.Demisto{
+			Config: &cxsdk.DemistoWebhookInputData{
 				Demisto: &cxsdk.DemistoConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
 					Payload: wrapperspb.String("Hello from $ALERT_NAME, a coralogix alert"),
@@ -262,7 +262,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("sendlog-webhook"),
 			Url:  wrapperspb.String("https://example.com"),
 			Type: cxsdk.WebhookTypeSendLog,
-			Config: &cxsdk.SendLog{
+			Config: &cxsdk.SendLogWebhookInputData{
 				SendLog: &cxsdk.SendLogConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
 					Payload: wrapperspb.String("Hello from $ALERT_NAME, a coralogix alert"),
@@ -276,7 +276,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("event-bridge-webhook"),
 			Url:  wrapperspb.String("https://aws.amazon.com"),
 			Type: cxsdk.WebhookTypeAwsEventBridge,
-			Config: &cxsdk.AwsEventBridge{
+			Config: &cxsdk.AwsEventBridgeWebhookInputData{
 				AwsEventBridge: &cxsdk.AwsEventBridgeConfig{
 					EventBusArn: wrapperspb.String("arn:aws:events:us-east-1:123456789012:event-bus/default"),
 					Detail:      wrapperspb.String("example-detail"),
@@ -300,7 +300,7 @@ func TestWebhooks(t *testing.T) {
 			Name: wrapperspb.String("custom-webhook"),
 			Url:  wrapperspb.String("https://httpbin.org/status/200"),
 			Type: cxsdk.WebhookTypeGeneric,
-			Config: &cxsdk.GenericWebhook{
+			Config: &cxsdk.GenericWebhookInputData{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{
 					Uuid:    wrapperspb.String(uuid.NewString()),
 					Method:  cxsdk.GenericWebhookConfigGet,
@@ -332,7 +332,7 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 	}
 	assert.Nil(t, e)
 	newName := fmt.Sprintf("%v-2", req.Data.Name.GetValue())
-	_, e = c.Replace(context.Background(),
+	_, e = c.Update(context.Background(),
 		&cxsdk.UpdateOutgoingWebhookRequest{
 			Id: result.Id.GetValue(),
 			Data: &cxsdk.OutgoingWebhookInputData{
