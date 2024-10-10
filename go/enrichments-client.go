@@ -38,8 +38,8 @@ type DeleteEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
 // EnrichmentTypeAws is a type of enrichment.
 type EnrichmentTypeAws = enrichment.EnrichmentType_Aws
 
-// EnrichmentTypeGeoIp is a type of enrichment.
-type EnrichmentTypeGeoIp = enrichment.EnrichmentType_GeoIp
+// EnrichmentTypeGeoIP is a type of enrichment.
+type EnrichmentTypeGeoIP = enrichment.EnrichmentType_GeoIp
 
 // EnrichmentTypeCustomEnrichment is a type of enrichment.
 type EnrichmentTypeCustomEnrichment = enrichment.EnrichmentType_CustomEnrichment
@@ -50,11 +50,11 @@ type EnrichmentType = enrichment.EnrichmentType
 // AwsType is a type of enrichment.
 type AwsType = enrichment.AwsType
 
-// SuspiciousIpType is a type of enrichment.
-type SuspiciousIpType = enrichment.EnrichmentType_SuspiciousIp
+// SuspiciousIPType is a type of enrichment.
+type SuspiciousIPType = enrichment.EnrichmentType_SuspiciousIp
 
-// GeoIpType is a type of enrichment.
-type GeoIpType = enrichment.GeoIpType
+// GeoIPType is a type of enrichment.
+type GeoIPType = enrichment.GeoIpType
 
 // CustomEnrichmentType is a type of enrichment.
 type CustomEnrichmentType = enrichment.CustomEnrichmentType
