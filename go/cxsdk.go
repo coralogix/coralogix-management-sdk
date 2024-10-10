@@ -23,30 +23,36 @@ import (
 
 // ClientSet is a set of clients for the Coralogix SDK.
 type ClientSet struct {
-	ruleGroups        *RuleGroupsClient
-	alerts            *AlertsClient
-	enrichments       *EnrichmentsClient
-	dataSet           *DataSetClient
-	dashboards        *DashboardsClient
-	actions           *ActionsClient
-	tcoPolicies       *TCOPoliciesClient
-	webhooks          *WebhooksClient
-	events2Metrics    *Events2MetricsClient
-	archiveRetentions *ArchiveRetentionsClient
-	archiveMetrics    *ArchiveMetricsClient
-	archiveLogs       *ArchiveLogsClient
-	alertScheduler    *AlertSchedulerClient
-	teams             *TeamsClient
-	slos              *SLOsClient
-	scopes            *ScopesClient
-	apiKeys           *ApikeysClient
-	users             *UsersClient
-	groups            *GroupsClient
+	ruleGroups          *RuleGroupsClient
+	recordingRuleGroups *RecordingRuleGroupSetsClient
+	alerts              *AlertsClient
+	enrichments         *EnrichmentsClient
+	dataSet             *DataSetClient
+	dashboards          *DashboardsClient
+	actions             *ActionsClient
+	tcoPolicies         *TCOPoliciesClient
+	webhooks            *WebhooksClient
+	events2Metrics      *Events2MetricsClient
+	archiveRetentions   *ArchiveRetentionsClient
+	archiveMetrics      *ArchiveMetricsClient
+	archiveLogs         *ArchiveLogsClient
+	alertScheduler      *AlertSchedulerClient
+	teams               *TeamsClient
+	slos                *SLOsClient
+	scopes              *ScopesClient
+	apiKeys             *ApikeysClient
+	users               *UsersClient
+	groups              *GroupsClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
 func (c *ClientSet) RuleGroups() *RuleGroupsClient {
 	return c.ruleGroups
+}
+
+// RecordingRuleGroups gets a RecordingRuleGroupSetsClient from the ClientSet.
+func (c *ClientSet) RecordingRuleGroups() *RecordingRuleGroupSetsClient {
+	return c.recordingRuleGroups
 }
 
 // Alerts gets an AlertsClient from the ClientSet.
@@ -144,22 +150,23 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 	apikeyCPC := NewCallPropertiesCreator(targetURL, authContext)
 
 	return &ClientSet{
-		ruleGroups:        NewRuleGroupsClient(apikeyCPC),
-		alerts:            NewAlertsClient(apikeyCPC),
-		events2Metrics:    NewEvents2MetricsClient(apikeyCPC),
-		enrichments:       NewEnrichmentClient(apikeyCPC),
-		dataSet:           NewDataSetClient(apikeyCPC),
-		dashboards:        NewDashboardsClient(apikeyCPC),
-		actions:           NewActionsClient(apikeyCPC),
-		tcoPolicies:       NewTCOPoliciesClient(apikeyCPC),
-		webhooks:          NewWebhooksClient(apikeyCPC),
-		archiveRetentions: NewArchiveRetentionsClient(apikeyCPC),
-		archiveMetrics:    NewArchiveMetricsClient(apikeyCPC),
-		archiveLogs:       NewArchiveLogsClient(apikeyCPC),
-		alertScheduler:    NewAlertSchedulerClient(apikeyCPC),
-		teams:             NewTeamsClient(apikeyCPC),
-		slos:              NewSLOsClient(apikeyCPC),
-		scopes:            NewScopesClient(apikeyCPC),
+		ruleGroups:          NewRuleGroupsClient(apikeyCPC),
+		recordingRuleGroups: NewRecordingRuleGroupSetsClient(apikeyCPC),
+		alerts:              NewAlertsClient(apikeyCPC),
+		events2Metrics:      NewEvents2MetricsClient(apikeyCPC),
+		enrichments:         NewEnrichmentClient(apikeyCPC),
+		dataSet:             NewDataSetClient(apikeyCPC),
+		dashboards:          NewDashboardsClient(apikeyCPC),
+		actions:             NewActionsClient(apikeyCPC),
+		tcoPolicies:         NewTCOPoliciesClient(apikeyCPC),
+		webhooks:            NewWebhooksClient(apikeyCPC),
+		archiveRetentions:   NewArchiveRetentionsClient(apikeyCPC),
+		archiveMetrics:      NewArchiveMetricsClient(apikeyCPC),
+		archiveLogs:         NewArchiveLogsClient(apikeyCPC),
+		alertScheduler:      NewAlertSchedulerClient(apikeyCPC),
+		teams:               NewTeamsClient(apikeyCPC),
+		slos:                NewSLOsClient(apikeyCPC),
+		scopes:              NewScopesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewAPIKeysClient(apikeyCPC),
 		groups:  NewGroupsClient(apikeyCPC),
