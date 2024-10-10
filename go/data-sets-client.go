@@ -32,6 +32,9 @@ type UpdateDataSetRequest = enrichment.UpdateCustomEnrichmentRequest
 // DeleteDataSetRequest is a request to delete a data set.
 type DeleteDataSetRequest = enrichment.DeleteCustomEnrichmentRequest
 
+// CustomEnrichment is a custom data set (enrichment).
+type CustomEnrichment = enrichment.CustomEnrichment
+
 // File is a file. Can be either FileBinary or FileTextual.
 type File = enrichment.File
 

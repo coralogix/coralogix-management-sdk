@@ -20,13 +20,28 @@ import (
 	enrichment "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/enrichment/v1"
 )
 
+// Enrichment is a column mapping for enrichments.
+type Enrichment = enrichment.Enrichment
+
+// GetEnrichmentsRequest is a request for getting enrichments.
+type GetEnrichmentsRequest = enrichment.GetEnrichmentsRequest
+
+// GetEnrichmentLimitRequest is a request for getting the enrichment limits.
+type GetEnrichmentLimitRequest = enrichment.GetEnrichmentLimitRequest
+
+// AddEnrichmentsRequest is a request to add enrichments.
+type AddEnrichmentsRequest = enrichment.AddEnrichmentsRequest
+
+// RemoveEnrichmentsRequest is a request to remove enrichments.
+type RemoveEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
+
 // EnrichmentsClient is a client for the Coralogix Enrichments API.
 type EnrichmentsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
 // Create creates a new enrichment.
-func (e EnrichmentsClient) Create(ctx context.Context, req *enrichment.AddEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+func (e EnrichmentsClient) Create(ctx context.Context, req *AddEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -58,12 +73,12 @@ func (e EnrichmentsClient) GetByType(ctx context.Context, enrichmentType string)
 	defer conn.Close()
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	resp, err := client.GetEnrichments(callProperties.Ctx, &enrichment.GetEnrichmentsRequest{}, callProperties.CallOptions...)
+	resp, err := client.GetEnrichments(callProperties.Ctx, &GetEnrichmentsRequest{}, callProperties.CallOptions...)
 	if err != nil {
 		return nil, err
 	}
 
-	result := make([]*enrichment.Enrichment, 0)
+	result := make([]*Enrichment, 0)
 	for _, enrichment := range resp.GetEnrichments() {
 		if enrichment.GetEnrichmentType().String() == enrichmentType+":{}" {
 			result = append(result, enrichment)
@@ -84,7 +99,7 @@ func (e EnrichmentsClient) Get(ctx context.Context, customEnrichmentID uint32) (
 	defer conn.Close()
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	resp, err := client.GetEnrichments(callProperties.Ctx, &enrichment.GetEnrichmentsRequest{}, callProperties.CallOptions...)
+	resp, err := client.GetEnrichments(callProperties.Ctx, &GetEnrichmentsRequest{}, callProperties.CallOptions...)
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +115,7 @@ func (e EnrichmentsClient) Get(ctx context.Context, customEnrichmentID uint32) (
 }
 
 // Delete deletes the specified enrichments.
-func (e EnrichmentsClient) Delete(ctx context.Context, req *enrichment.RemoveEnrichmentsRequest) error {
+func (e EnrichmentsClient) Delete(ctx context.Context, req *RemoveEnrichmentsRequest) error {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return err
@@ -116,7 +131,7 @@ func (e EnrichmentsClient) Delete(ctx context.Context, req *enrichment.RemoveEnr
 }
 
 // List returns all enrichments.
-func (e EnrichmentsClient) List(ctx context.Context, req *enrichment.GetEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -147,7 +162,7 @@ func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrich
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	return client.GetEnrichmentLimit(callProperties.Ctx, &enrichment.GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
+	return client.GetEnrichmentLimit(callProperties.Ctx, &GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
 }
 
 // NewEnrichmentClient creates a new enrichments client.

@@ -69,14 +69,8 @@ mod tests {
         },
     };
 
-    #[tokio::test]
-    async fn test_alerts() {
-        let alerts_service = AlertsClient::new(
-            CoralogixRegion::from_env().unwrap(),
-            AuthContext::from_env(),
-        )
-        .unwrap();
-        let alert = AlertDef {
+    fn create_alert() -> AlertDef {
+        AlertDef {
             updated_time: None,
             created_time: None,
             alert_def_properties: Some(AlertDefProperties {
@@ -156,16 +150,26 @@ mod tests {
             }),
             id: None,
             alert_version_id: None,
-        };
+        }
+    }
 
-        let created_alert = alerts_service
+    #[tokio::test]
+    async fn test_alerts() {
+        let alerts_client = AlertsClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+        let alert = create_alert();
+
+        let created_alert = alerts_client
             .create(alert.clone())
             .await
             .unwrap()
             .alert_def
             .unwrap();
 
-        let retrieved_alert = alerts_service
+        let retrieved_alert = alerts_client
             .get(created_alert.id.clone().unwrap())
             .await
             .unwrap()
@@ -181,7 +185,7 @@ mod tests {
             ..created_alert
         };
 
-        let updated_alert = alerts_service
+        let updated_alert = alerts_client
             .replace(updated_alert.clone())
             .await
             .unwrap()
@@ -197,7 +201,7 @@ mod tests {
                 == "updated description"
         );
 
-        alerts_service
+        alerts_client
             .delete(updated_alert.id.unwrap())
             .await
             .unwrap();
@@ -210,6 +214,19 @@ mod tests {
             AuthContext::from_env(),
         )
         .unwrap();
+        let alerts_client = AlertsClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+        let alert = create_alert();
+
+        let created_alert = alerts_client
+            .create(alert.clone())
+            .await
+            .unwrap()
+            .alert_def
+            .unwrap();
 
         let alert_schduler_rule = AlertSchedulerRule {
             unique_identifier: None,
@@ -220,7 +237,7 @@ mod tests {
             filter: Some(AlertSchedulerFilter {
                 what_expression: "source logs | filter $d.cpodId:string == '122'".into(),
                 which_alerts: Some(WhichAlerts::AlertUniqueIds(AlertUniqueIds {
-                    value: vec!["55a457ed-5f23-407a-a724-12d7fe533a4e".into()],
+                    value: vec![created_alert.id.unwrap()],
                 })),
             }),
             schedule: Some(Schedule {
@@ -263,6 +280,11 @@ mod tests {
 
         alert_scheduler_client
             .delete(retrieved_alert_scheduler_rule.unique_identifier.unwrap())
+            .await
+            .unwrap();
+
+        alerts_client
+            .delete(updated_alert.id.unwrap())
             .await
             .unwrap();
     }
