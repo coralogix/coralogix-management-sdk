@@ -35,14 +35,31 @@ type AddEnrichmentsRequest = enrichment.AddEnrichmentsRequest
 // DeleteEnrichmentsRequest is a request to remove enrichments.
 type DeleteEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
 
+// EnrichmentTypeAws is a type of enrichment.
 type EnrichmentTypeAws = enrichment.EnrichmentType_Aws
+
+// EnrichmentTypeGeoIp is a type of enrichment.
 type EnrichmentTypeGeoIp = enrichment.EnrichmentType_GeoIp
+
+// EnrichmentTypeCustomEnrichment is a type of enrichment.
 type EnrichmentTypeCustomEnrichment = enrichment.EnrichmentType_CustomEnrichment
+
+// EnrichmentType is a type of enrichment.
 type EnrichmentType = enrichment.EnrichmentType
+
+// AwsType is a type of enrichment.
 type AwsType = enrichment.AwsType
+
+// SuspiciousIpType is a type of enrichment.
 type SuspiciousIpType = enrichment.EnrichmentType_SuspiciousIp
+
+// GeoIpType is a type of enrichment.
 type GeoIpType = enrichment.GeoIpType
+
+// CustomEnrichmentType is a type of enrichment.
 type CustomEnrichmentType = enrichment.CustomEnrichmentType
+
+// EnrichmentRequestModel is a inner type requests.
 type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
 
 // RPC names.
