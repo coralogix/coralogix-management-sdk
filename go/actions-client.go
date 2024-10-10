@@ -53,7 +53,7 @@ const (
 	GetActionRPC                 = actions.ActionsService_GetAction_FullMethodName
 	CreateActionRPC              = actions.ActionsService_CreateAction_FullMethodName
 	ReplaceActionRPC             = actions.ActionsService_ReplaceAction_FullMethodName
-	RemoveActionRPC              = actions.ActionsService_DeleteAction_FullMethodName
+	DeleteActionRPC              = actions.ActionsService_DeleteAction_FullMethodName
 	OrderActionsRPC              = actions.ActionsService_OrderActions_FullMethodName
 	ListActionsRPC               = actions.ActionsService_ListActions_FullMethodName
 	AtomicBatchExecuteActionsRPC = actions.ActionsService_AtomicBatchExecuteActions_FullMethodName
