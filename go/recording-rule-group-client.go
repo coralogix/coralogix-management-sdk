@@ -47,6 +47,12 @@ type InRuleGroup = recordingRuleGroups.InRuleGroup
 // InRule is a recording rule.
 type InRule = recordingRuleGroups.InRule
 
+// OutRuleGroup is a recording rule group.
+type OutRuleGroup = recordingRuleGroups.OutRuleGroup
+
+// OutRule is a recording rule.
+type OutRule = recordingRuleGroups.OutRule
+
 // RPC Name values
 const (
 	CreateRuleGroupSetRPC = recordingRuleGroups.RuleGroupSets_Create_FullMethodName
