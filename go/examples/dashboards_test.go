@@ -39,7 +39,7 @@ func TestDashboards(t *testing.T) {
 	assert.Nil(t, err)
 	var d cxsdk.Dashboard
 	assert.Nil(t, protojson.Unmarshal(dat, &d))
-
+	d.Id = wrapperspb.String(uuid.New().String()[:21])
 	_, e := c.Get(context.Background(), &cxsdk.GetDashboardRequest{
 		DashboardId: d.Id,
 	})
