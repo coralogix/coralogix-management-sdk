@@ -32,8 +32,18 @@ type GetEnrichmentLimitRequest = enrichment.GetEnrichmentLimitRequest
 // AddEnrichmentsRequest is a request to add enrichments.
 type AddEnrichmentsRequest = enrichment.AddEnrichmentsRequest
 
-// RemoveEnrichmentsRequest is a request to remove enrichments.
-type RemoveEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
+// DeleteEnrichmentsRequest is a request to remove enrichments.
+type DeleteEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
+
+// Rpc names.
+const (
+	GetEnrichmentsRpc               = enrichment.EnrichmentService_GetEnrichments_FullMethodName
+	AddEnrichmentsRpc               = enrichment.EnrichmentService_AddEnrichments_FullMethodName
+	DeleteEnrichmentsRpc            = enrichment.EnrichmentService_RemoveEnrichments_FullMethodName
+	GetEnrichmentLimitRpc           = enrichment.EnrichmentService_GetEnrichmentLimit_FullMethodName
+	AtomicOverwriteEnrichmentsRpc   = enrichment.EnrichmentService_AtomicOverwriteEnrichments_FullMethodName
+	GetCompanyEnrichmentSettingsRpc = enrichment.EnrichmentService_GetCompanyEnrichmentSettings_FullMethodName
+)
 
 // EnrichmentsClient is a client for the Coralogix Enrichments API.
 type EnrichmentsClient struct {
@@ -115,7 +125,7 @@ func (e EnrichmentsClient) Get(ctx context.Context, customEnrichmentID uint32) (
 }
 
 // Delete deletes the specified enrichments.
-func (e EnrichmentsClient) Delete(ctx context.Context, req *RemoveEnrichmentsRequest) error {
+func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsRequest) error {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return err

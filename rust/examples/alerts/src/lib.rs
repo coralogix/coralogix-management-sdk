@@ -237,7 +237,7 @@ mod tests {
             filter: Some(AlertSchedulerFilter {
                 what_expression: "source logs | filter $d.cpodId:string == '122'".into(),
                 which_alerts: Some(WhichAlerts::AlertUniqueIds(AlertUniqueIds {
-                    value: vec![created_alert.id.unwrap()],
+                    value: vec![created_alert.id.clone().unwrap()],
                 })),
             }),
             schedule: Some(Schedule {
@@ -284,7 +284,7 @@ mod tests {
             .unwrap();
 
         alerts_client
-            .delete(updated_alert.id.unwrap())
+            .delete(created_alert.id.unwrap())
             .await
             .unwrap();
     }
