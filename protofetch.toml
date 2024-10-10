@@ -78,7 +78,7 @@ revision = 'v2.0.5'
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
-revision = '85c62965137513ec113a421a7fb46648540cd4d6'
+revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'

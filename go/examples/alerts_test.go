@@ -24,6 +24,94 @@ import (
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
 
+func CreateAlert() *cxsdk.AlertDefProperties {
+	return &cxsdk.AlertDefProperties{
+		Name:              wrapperspb.String("Standard alert example"),
+		Description:       wrapperspb.String("Standard alert example from terraform"),
+		Enabled:           &wrapperspb.BoolValue{Value: true},
+		Priority:          cxsdk.AlertDefPriorityP1,
+		Deleted:           nil,
+		Type:              cxsdk.AlertDefTypeLogsThreshold,
+		IncidentsSettings: nil,
+		PhantomMode:       &wrapperspb.BoolValue{Value: false},
+		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
+			GroupByFields: []*wrapperspb.StringValue{},
+			Targets: &cxsdk.AlertDefNotificationGroupSimple{
+				Simple: &cxsdk.AlertDefTargetSimple{
+					Integrations: []*cxsdk.AlertDefIntegrationType{
+						{IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
+							Recipients: &cxsdk.AlertDefRecipients{
+								Emails: []*wrapperspb.StringValue{
+									{Value: "example@coralogix.com"},
+								},
+							},
+						}},
+					},
+				},
+			},
+		},
+		Labels: map[string]string{
+			"alert_type":        "security",
+			"security_severity": "high",
+		},
+		Schedule: &cxsdk.AlertDefScheduleActiveOn{
+			ActiveOn: &cxsdk.AlertsActivitySchedule{
+				DayOfWeek: []cxsdk.AlertDayOfWeek{
+					cxsdk.AlertDayOfWeekWednesday,
+					cxsdk.AlertDayOfWeekThursday,
+				},
+				StartTime: &cxsdk.AlertTimeOfDay{
+					Hours:   8,
+					Minutes: 30,
+				},
+				EndTime: &cxsdk.AlertTimeOfDay{
+					Hours:   20,
+					Minutes: 30,
+				},
+			},
+		},
+		TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
+			LogsThreshold: &cxsdk.LogsThresholdType{
+				Rules: []*cxsdk.LogsThresholdRule{
+					{Condition: &cxsdk.LogsThresholdCondition{
+						Threshold: wrapperspb.Double(10.0),
+						TimeWindow: &cxsdk.LogsTimeWindow{
+							Type: &cxsdk.LogsTimeWindowSpecificValue{
+								LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
+							},
+						},
+						ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
+					},
+					},
+				},
+				LogsFilter: &cxsdk.LogsFilter{
+					FilterType: &cxsdk.LogsFilterSimpleFilter{
+						SimpleFilter: &cxsdk.SimpleFilter{
+							LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
+							LabelFilters: &cxsdk.LabelFilters{
+								ApplicationName: []*cxsdk.LabelFilterType{
+									{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
+								},
+								SubsystemName: []*cxsdk.LabelFilterType{
+									{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
+								},
+								Severities: []cxsdk.LogSeverity{
+									*cxsdk.LogSeverityWarning.Enum(),
+									*cxsdk.LogSeverityError.Enum(),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		GroupBy: []*wrapperspb.StringValue{
+			{Value: "coralogix.metadata.sdkId"},
+			{Value: "EventType"},
+		},
+	}
+}
+
 func TestAlerts(t *testing.T) {
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
@@ -34,91 +122,7 @@ func TestAlerts(t *testing.T) {
 	c := cxsdk.NewAlertsClient(creator)
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
-		AlertDefProperties: &cxsdk.AlertDefProperties{
-			Name:              wrapperspb.String("Standard alert example"),
-			Description:       wrapperspb.String("Standard alert example from terraform"),
-			Enabled:           &wrapperspb.BoolValue{Value: true},
-			Priority:          cxsdk.AlertDefPriorityP1,
-			Deleted:           nil,
-			Type:              cxsdk.AlertDefTypeLogsThreshold,
-			IncidentsSettings: nil,
-			PhantomMode:       &wrapperspb.BoolValue{Value: false},
-			NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-				GroupByFields: []*wrapperspb.StringValue{},
-				Targets: &cxsdk.AlertDefNotificationGroupSimple{
-					Simple: &cxsdk.AlertDefTargetSimple{
-						Integrations: []*cxsdk.AlertDefIntegrationType{
-							{IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
-								Recipients: &cxsdk.AlertDefRecipients{
-									Emails: []*wrapperspb.StringValue{
-										{Value: "example@coralogix.com"},
-									},
-								},
-							}},
-						},
-					},
-				},
-			},
-			Labels: map[string]string{
-				"alert_type":        "security",
-				"security_severity": "high",
-			},
-			Schedule: &cxsdk.AlertDefScheduleActiveOn{
-				ActiveOn: &cxsdk.AlertsActivitySchedule{
-					DayOfWeek: []cxsdk.AlertDayOfWeek{
-						cxsdk.AlertDayOfWeekWednesday,
-						cxsdk.AlertDayOfWeekThursday,
-					},
-					StartTime: &cxsdk.AlertTimeOfDay{
-						Hours:   8,
-						Minutes: 30,
-					},
-					EndTime: &cxsdk.AlertTimeOfDay{
-						Hours:   20,
-						Minutes: 30,
-					},
-				},
-			},
-			TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
-				LogsThreshold: &cxsdk.LogsThresholdType{
-					Rules: []*cxsdk.LogsThresholdRule{
-						{Condition: &cxsdk.LogsThresholdCondition{
-							Threshold: wrapperspb.Double(10.0),
-							TimeWindow: &cxsdk.LogsTimeWindow{
-								Type: &cxsdk.LogsTimeWindowSpecificValue{
-									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
-								},
-							},
-							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
-						},
-						},
-					},
-					LogsFilter: &cxsdk.LogsFilter{
-						FilterType: &cxsdk.LogsFilterSimpleFilter{
-							SimpleFilter: &cxsdk.SimpleFilter{
-								LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
-								LabelFilters: &cxsdk.LabelFilters{
-									ApplicationName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
-									},
-									SubsystemName: []*cxsdk.LabelFilterType{
-										{Value: wrapperspb.String("subsystem-name"), Operation: *cxsdk.LogFilterOperationStartsWith.Enum()},
-									},
-									Severities: []cxsdk.LogSeverity{
-										*cxsdk.LogSeverityWarning.Enum(),
-										*cxsdk.LogSeverityError.Enum(),
-									},
-								},
-							},
-						},
-					},
-				},
-			},
-			GroupBy: []*wrapperspb.StringValue{
-				{Value: "coralogix.metadata.sdkId"},
-				{Value: "EventType"},
-			},
-		},
+		AlertDefProperties: CreateAlert(),
 	})
 
 	if err != nil {
@@ -156,6 +160,17 @@ func TestAlertScheduler(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	a := cxsdk.NewAlertSchedulerClient(creator)
+	c := cxsdk.NewAlertsClient(creator)
+
+	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
+		AlertDefProperties: CreateAlert(),
+	})
+
+	if err != nil {
+		t.Errorf("Error creating alert: %v", err)
+	}
+	assert.Nil(t, err)
+
 	description := "example"
 	metaLabels := make([]*cxsdk.MetaLabel, 0)
 	schedule := cxsdk.Schedule{
@@ -182,7 +197,7 @@ func TestAlertScheduler(t *testing.T) {
 				WhatExpression: "source logs | filter $d.cpodId:string == '122'",
 				WhichAlerts: &cxsdk.AlertSchedulerFilterUniqueIDs{
 					AlertUniqueIds: &cxsdk.AlertUniqueIDs{
-						Value: []string{"55a457ed-5f23-407a-a724-12d7fe533a4e"},
+						Value: []string{createdAlertDef.AlertDef.Id.Value},
 					},
 				},
 			},
@@ -218,4 +233,9 @@ func TestAlertScheduler(t *testing.T) {
 	})
 	assert.Nil(t, error)
 
+	_, e = c.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
+		Id: createdAlertDef.AlertDef.Id,
+	})
+
+	assert.Nil(t, e)
 }

@@ -32,6 +32,9 @@ type UpdateDataSetRequest = enrichment.UpdateCustomEnrichmentRequest
 // DeleteDataSetRequest is a request to delete a data set.
 type DeleteDataSetRequest = enrichment.DeleteCustomEnrichmentRequest
 
+// DataSet is a custom data set (enrichment).
+type DataSet = enrichment.CustomEnrichment
+
 // File is a file. Can be either FileBinary or FileTextual.
 type File = enrichment.File
 
@@ -40,6 +43,15 @@ type FileBinary = enrichment.File_Binary
 
 // FileTextual is a textual file.
 type FileTextual = enrichment.File_Textual
+
+// RPC names.
+const (
+	CreateDataSetRPC = enrichment.CustomEnrichmentService_CreateCustomEnrichment_FullMethodName
+	GetDataSetRPC    = enrichment.CustomEnrichmentService_GetCustomEnrichment_FullMethodName
+	UpdateDataSetRPC = enrichment.CustomEnrichmentService_UpdateCustomEnrichment_FullMethodName
+	DeleteDataSetRPC = enrichment.CustomEnrichmentService_DeleteCustomEnrichment_FullMethodName
+	GetCDataSetRPC   = enrichment.CustomEnrichmentService_GetCustomEnrichments_FullMethodName
+)
 
 // DataSetClient is a client for the Coralogix Data Sets API.
 type DataSetClient struct {
