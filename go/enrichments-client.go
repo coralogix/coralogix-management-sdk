@@ -35,14 +35,24 @@ type AddEnrichmentsRequest = enrichment.AddEnrichmentsRequest
 // DeleteEnrichmentsRequest is a request to remove enrichments.
 type DeleteEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
 
-// Rpc names.
+type EnrichmentTypeAws = enrichment.EnrichmentType_Aws
+type EnrichmentTypeGeoIp = enrichment.EnrichmentType_GeoIp
+type EnrichmentTypeCustomEnrichment = enrichment.EnrichmentType_CustomEnrichment
+type EnrichmentType = enrichment.EnrichmentType
+type AwsType = enrichment.AwsType
+type SuspiciousIpType = enrichment.EnrichmentType_SuspiciousIp
+type GeoIpType = enrichment.GeoIpType
+type CustomEnrichmentType = enrichment.CustomEnrichmentType
+type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
+
+// RPC names.
 const (
-	GetEnrichmentsRpc               = enrichment.EnrichmentService_GetEnrichments_FullMethodName
-	AddEnrichmentsRpc               = enrichment.EnrichmentService_AddEnrichments_FullMethodName
-	DeleteEnrichmentsRpc            = enrichment.EnrichmentService_RemoveEnrichments_FullMethodName
-	GetEnrichmentLimitRpc           = enrichment.EnrichmentService_GetEnrichmentLimit_FullMethodName
-	AtomicOverwriteEnrichmentsRpc   = enrichment.EnrichmentService_AtomicOverwriteEnrichments_FullMethodName
-	GetCompanyEnrichmentSettingsRpc = enrichment.EnrichmentService_GetCompanyEnrichmentSettings_FullMethodName
+	GetEnrichmentsRPC               = enrichment.EnrichmentService_GetEnrichments_FullMethodName
+	AddEnrichmentsRPC               = enrichment.EnrichmentService_AddEnrichments_FullMethodName
+	DeleteEnrichmentsRPC            = enrichment.EnrichmentService_RemoveEnrichments_FullMethodName
+	GetEnrichmentLimitRPC           = enrichment.EnrichmentService_GetEnrichmentLimit_FullMethodName
+	AtomicOverwriteEnrichmentsRPC   = enrichment.EnrichmentService_AtomicOverwriteEnrichments_FullMethodName
+	GetCompanyEnrichmentSettingsRPC = enrichment.EnrichmentService_GetCompanyEnrichmentSettings_FullMethodName
 )
 
 // EnrichmentsClient is a client for the Coralogix Enrichments API.
