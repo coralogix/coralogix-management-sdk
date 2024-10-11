@@ -136,9 +136,7 @@ impl EnrichmentsClient {
             .lock()
             .await
             .remove_enrichments(make_request_with_metadata(
-                RemoveEnrichmentsRequest {
-                    enrichment_ids: enrichment_ids,
-                },
+                RemoveEnrichmentsRequest { enrichment_ids },
                 &self.metadata_map,
             ))
             .await?
