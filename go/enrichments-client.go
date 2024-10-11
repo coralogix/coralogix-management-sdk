@@ -41,6 +41,9 @@ type EnrichmentTypeAws = enrichment.EnrichmentType_Aws
 // EnrichmentTypeGeoIP is a type of enrichment.
 type EnrichmentTypeGeoIP = enrichment.EnrichmentType_GeoIp
 
+// SuspiciousIP is a type of enrichment.
+type EnrichmentTypeSuspiciousIP = enrichment.EnrichmentType_SuspiciousIp
+
 // EnrichmentTypeCustomEnrichment is a type of enrichment.
 type EnrichmentTypeCustomEnrichment = enrichment.EnrichmentType_CustomEnrichment
 
