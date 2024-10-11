@@ -94,32 +94,6 @@ func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) 
 	return client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// Get gets all custom enrichments.
-func (e EnrichmentsClient) Get(ctx context.Context, customEnrichmentID uint32) ([]*enrichment.Enrichment, error) {
-	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := enrichment.NewEnrichmentServiceClient(conn)
-
-	resp, err := client.GetEnrichments(callProperties.Ctx, &GetEnrichmentsRequest{}, callProperties.CallOptions...)
-	if err != nil {
-		return nil, err
-	}
-
-	result := make([]*enrichment.Enrichment, 0)
-	for _, enrichment := range resp.GetEnrichments() {
-		if customEnrichment := enrichment.GetEnrichmentType().GetCustomEnrichment(); customEnrichment != nil && customEnrichment.GetId().GetValue() == customEnrichmentID {
-			result = append(result, enrichment)
-		}
-	}
-
-	return result, nil
-}
-
 // Delete deletes the specified enrichments.
 func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsRequest) error {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
