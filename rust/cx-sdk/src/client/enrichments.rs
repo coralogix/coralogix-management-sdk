@@ -130,14 +130,14 @@ impl EnrichmentsClient {
     ///
     /// # Arguments
     /// * `ids` - The ids to remove mappings from.
-    pub async fn remove_all(&self, dataset_ids: Vec<u32>) -> Result<RemoveEnrichmentsResponse> {
+    pub async fn delete(&self, enrichment_ids: Vec<u32>) -> Result<RemoveEnrichmentsResponse> {
         Ok(self
             .service_client
             .lock()
             .await
             .remove_enrichments(make_request_with_metadata(
                 RemoveEnrichmentsRequest {
-                    enrichment_ids: dataset_ids,
+                    enrichment_ids: enrichment_ids,
                 },
                 &self.metadata_map,
             ))

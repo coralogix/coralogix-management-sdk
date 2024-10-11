@@ -80,8 +80,8 @@ type EnrichmentsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// Create creates a new enrichment.
-func (e EnrichmentsClient) Create(ctx context.Context, req *AddEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+// Add creates a new enrichment.
+func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) (*enrichment.AddEnrichmentsResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -91,41 +91,7 @@ func (e EnrichmentsClient) Create(ctx context.Context, req *AddEnrichmentsReques
 	defer conn.Close()
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	resp, err := client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, err
-	}
-
-	enrichments := resp.GetEnrichments()
-	from := len(enrichments) - len(req.GetRequestEnrichments())
-	to := len(enrichments)
-	return enrichments[from:to], nil
-}
-
-// GetByType gets all enrichments of a certain type.
-func (e EnrichmentsClient) GetByType(ctx context.Context, enrichmentType string) ([]*enrichment.Enrichment, error) {
-	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := enrichment.NewEnrichmentServiceClient(conn)
-
-	resp, err := client.GetEnrichments(callProperties.Ctx, &GetEnrichmentsRequest{}, callProperties.CallOptions...)
-	if err != nil {
-		return nil, err
-	}
-
-	result := make([]*Enrichment, 0)
-	for _, enrichment := range resp.GetEnrichments() {
-		if enrichment.GetEnrichmentType().String() == enrichmentType+":{}" {
-			result = append(result, enrichment)
-		}
-	}
-
-	return result, nil
+	return client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Get gets all custom enrichments.
@@ -171,7 +137,7 @@ func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsReq
 }
 
 // List returns all enrichments.
-func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest) ([]*enrichment.Enrichment, error) {
+func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest) (*enrichment.GetEnrichmentsResponse, error) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -182,12 +148,7 @@ func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest)
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	resp, err := client.GetEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, err
-	}
-
-	return resp.GetEnrichments(), nil
+	return client.GetEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // GetLimits returns the enrichment limits.
