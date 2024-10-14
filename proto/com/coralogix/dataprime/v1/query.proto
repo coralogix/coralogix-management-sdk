@@ -90,6 +90,7 @@ message QuerySource {
 
   message SchemaStoreSource {
     repeated string team_ids = 1;
+    string name = 2;
   }
 
   oneof source {
@@ -103,10 +104,76 @@ message QuerySource {
   reserved 3, 4;
 }
 
+message PhysicalLocation {
+  enum Partitioning {
+    PARTITIONING_UNSPECIFIED = 0;
+    PARTITIONING_NONE = 1;
+    PARTITIONING_DT_HR = 2;
+  }
+
+  enum Format {
+    FORMAT_UNSPECIFIED = 0;
+    FORMAT_CSV = 1;
+    FORMAT_WIDE_PARQUET_V1 = 2;
+    FORMAT_WIDE_PARQUET_V3 = 3;
+  }
+
+  enum BucketType {
+    BUCKET_TYPE_UNSPECIFIED = 0;
+    BUCKET_TYPE_EXTERNAL = 1;
+    BUCKET_TYPE_INTERNAL = 2;
+  }
+
+  message S3Location {
+    string region = 1;
+    string bucket = 2;
+    // Absolute path, root is represented by `/`
+    string prefix = 3;
+  }
+
+  message COSLocation {
+    string endpoint = 1;
+    string bucket = 2;
+    // Absolute path, root is represented by `/`
+    string prefix = 3;
+    BucketType bucket_type = 4;
+  }
+
+  message ObjectStoreLocation {
+    Format format = 1;
+    oneof location {
+      S3Location s3 = 2;
+      COSLocation cos = 3;
+    }
+  }
+
+  message ArchiveLocation {
+    Partitioning partitioning = 1;
+    repeated ObjectStoreLocation locations = 2;
+  }
+
+  message OpenSearchLocation {
+    string host = 1;
+    string index = 2;
+  }
+
+  message SchemaStoreLocation {
+    repeated string team_ids = 1;
+  }
+
+  oneof location {
+    ArchiveLocation archive = 1;
+    OpenSearchLocation open_search = 2;
+    SchemaStoreLocation schema_store = 3;
+  }
+}
+
 message NamedQuerySource {
   reserved 1;
   com.coralogix.dataprime.ast.v1.Source name = 3;
-  QuerySource source = 2;
+  // Use `physical_location` instead
+  QuerySource source = 2 [deprecated = true];
+  PhysicalLocation physical_location = 4;
 }
 
 message SubmitQueryResponse {

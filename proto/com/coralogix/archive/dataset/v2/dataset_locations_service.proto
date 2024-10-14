@@ -16,12 +16,26 @@ service DatasetLocationsService {
   }
 }
 
+service InternalDatasetLocationsService {
+  rpc GetDatasetLocations(InternalDatasetLocationsServiceGetDatasetLocationsRequest) returns (InternalDatasetLocationsServiceGetDatasetLocationsResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
+  }
+  rpc GetDatasetList(InternalDatasetLocationsServiceGetDatasetListRequest) returns (InternalDatasetLocationsServiceGetDatasetListResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset list according to company id";
+  }
+}
+
 message Timeframe {
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Timestamp end_time = 2;
 }
 
 message GetDatasetLocationsRequest {
+  repeated DatasetLocationRequest datasets_locations = 1;
+
+}
+
+message InternalDatasetLocationsServiceGetDatasetLocationsRequest {
   repeated DatasetLocationRequest datasets_locations = 1;
 
 }
@@ -34,6 +48,10 @@ message DatasetLocationRequest {
 }
 
 message GetDatasetLocationsResponse {
+  repeated DatasetLocations dataset_locations = 1;
+}
+
+message InternalDatasetLocationsServiceGetDatasetLocationsResponse {
   repeated DatasetLocations dataset_locations = 1;
 }
 
@@ -52,6 +70,9 @@ message DatasetLocation {
 message GetDatasetListRequest {
   repeated uint32 company_ids = 1;
 }
+message InternalDatasetLocationsServiceGetDatasetListRequest {
+  repeated uint32 company_ids = 1;
+}
 
 message DatasetsInfo {
   uint32 company_id = 1;
@@ -60,4 +81,8 @@ message DatasetsInfo {
 
 message GetDatasetListResponse {
     repeated DatasetsInfo datasets_info = 1;
+}
+
+message InternalDatasetLocationsServiceGetDatasetListResponse {
+  repeated DatasetsInfo datasets_info = 1;
 }

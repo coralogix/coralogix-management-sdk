@@ -7,6 +7,7 @@ import "google/protobuf/wrappers.proto";
 message Threshold {
   google.protobuf.DoubleValue from = 1;
   google.protobuf.StringValue color = 2;
+  google.protobuf.StringValue label = 3;
 }
 
 enum ThresholdType {

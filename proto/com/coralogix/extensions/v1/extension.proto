@@ -19,6 +19,7 @@ enum TargetDomain {
   CX_CUSTOM_DASHBOARD = 8;
   METRICS_RULE_GROUP = 9;
   EVENTS_TO_METRICS = 10;
+  ALERT_V3 = 11;
 }
 
 message ExtensionItemBinary {

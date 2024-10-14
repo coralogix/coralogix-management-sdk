@@ -26,11 +26,11 @@ enum Source {
 message GetServiceErrorTrackingOverviewRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  repeated ApmFilter filters = 3;
+  repeated ApmFilter service_catalog_filters = 3;
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   Source source = 6;
-  repeated com.coralogixapis.service_catalog.v1.SpanKind span_kinds = 7;
+  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 7;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
   google.protobuf.UInt64Value topk = 9;
 }
@@ -48,21 +48,42 @@ message GetServiceErrorTrackingOverviewResponse {
 message GetServiceErrorTrackingListRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
-  repeated ApmFilter filters = 3;
+  repeated ApmFilter service_catalog_filters = 3;
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   Source source = 6;
-  repeated com.coralogixapis.service_catalog.v1.SpanKind span_kinds = 7;
+  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 7;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
 }
 
+message GetServiceErrorOperationsListRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue service_name = 2;
+  repeated ApmFilter service_catalog_filters = 3;
+  GroupBy group_by = 4;
+  Source source = 5;
+  repeated com.coralogixapis.service_catalog.v1.SpanKind span_kinds = 6;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 7;
+  google.protobuf.StringValue error_message = 8;
+}
+
+message OperationDetails {
+  google.protobuf.StringValue operation = 1;
+  google.protobuf.Int64Value occurrences = 2;
+}
+
+message GetServiceErrorOperationsListResponse {
+  repeated OperationDetails operationDetails = 1;
+}
+
 message GetServiceErrorTrackingListResponse {
-  repeated ErrorDetails error_details = 1;
-  GroupBy group_by = 2;
+  google.protobuf.StringValue query = 1;
+  repeated ErrorDetails error_details = 2;
+  GroupBy group_by = 3;
 }
 
 message Operations {
-  repeated google.protobuf.StringValue operations = 1;
+  map<string, google.protobuf.Int64Value> operations = 1;
 }
 
 message ErrorDetails {
@@ -83,5 +104,9 @@ service ErrorTrackingService {
 
   rpc GetServiceErrorTrackingListStream(GetServiceErrorTrackingListRequest) returns (stream GetServiceErrorTrackingListResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service error tracking list";
+  }
+
+  rpc GetServiceErrorOperationsList(GetServiceErrorOperationsListRequest) returns (GetServiceErrorOperationsListResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service error operations list";
   }
 }

@@ -27,6 +27,10 @@ message Permission {
     ActionId action = 2;
 }
 
+message PermissionId {
+    google.protobuf.UInt32Value id = 1;
+}
+
 service PermissionCheckService {
 
     rpc CheckApiKeyPermission(CheckApiKeyPermissionRequest) returns (CheckApiKeyPermissionResponse) {
@@ -39,9 +43,10 @@ service PermissionCheckService {
 
 }
 
-message CheckApiKeyPermissionRequest{
-    Permission permission = 1;
+message CheckApiKeyPermissionRequest {
+    Permission permission = 1 [deprecated = true];
     ApiKeyValue api_key = 2;
+    PermissionId permission_id = 3;
 }
 
 message CheckApiKeyPermissionResponse {
