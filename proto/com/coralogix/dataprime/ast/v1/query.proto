@@ -62,6 +62,8 @@ message TimeFrame {
 
 message Schema {
   string name = 1;
+  optional string team_id = 2;
+  optional TimeFrame time_frame = 3;
 }
 
 message Operator {

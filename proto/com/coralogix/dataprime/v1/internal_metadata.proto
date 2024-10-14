@@ -20,6 +20,7 @@ message MetadataEnums {
 }
 
 message QueryMetadata {
+  reserved 6; // formerly skip_rbac_filters
   // beginning of the time range for the query
   optional google.protobuf.Timestamp start_date = 1;
   // end of the time range for the query
@@ -30,9 +31,6 @@ message QueryMetadata {
   optional int32 limit = 4;
   // dataprime strict fields validation in parser
   optional bool strict_fields_validation = 5;
-  // skip application and subsystem filters based on user scopes from RBAC.
-  // WARNING: if you set this flag, you are responsible for managing access to the data.
-  optional bool skip_rbac_filters = 6;
   // contextual `now` for the query, default: current time
   optional google.protobuf.Timestamp now_date = 7;
 }

@@ -27,14 +27,14 @@ commit_hash = "0d9733fd0052f743cdb14e62a6e4ae179676ea41"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.62"
-commit_hash = "fc2c027ea0df265801aa52c89917df3e1ba71fc0"
+revision = "v0.0.63"
+commit_hash = "6c41a3b506946a877aa1fa9f04e832819abd0887"
 
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v1.2.1"
-commit_hash = "90fab2eed21e184ac693a16178a8b9b7ccb7bf52"
+revision = "v1.2.2"
+commit_hash = "605de7e4c962b1a366f7f50866caab0a0a048b0d"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -45,8 +45,8 @@ commit_hash = "28dc6f7ba38585d9641d014e8474eb0db47d30a2"
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.303"
-commit_hash = "5eac8841c47c271259863d4bcb359438f5d59ebc"
+revision = "v0.307"
+commit_hash = "ac67c50e3170e7c6554ef635daca024cf649510a"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -57,8 +57,8 @@ commit_hash = "19e36962f6fcced9bd167870b78c408ba4caafc6"
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-revision = "v1.0.0"
-commit_hash = "0c93cdb178b9324c2e05c1260aba61f21d071428"
+revision = "v1.0.1"
+commit_hash = "f08ff60f5c8836062c171127c007de32cbeced7a"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -87,8 +87,8 @@ commit_hash = "64fc6023e1ec94c5096e749a6739cf1de07f645b"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.81"
-commit_hash = "844cd2c89265a468dff8eeb5120c8f28a6b0b44c"
+revision = "v0.1.82"
+commit_hash = "455737602f4b1a059b97f750935f5f01e14ab6d4"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -105,8 +105,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.99"
-commit_hash = "b5d88ce3ba771b276ebac8d476ccc604255ad5e9"
+revision = "v0.3.101"
+commit_hash = "35931517a1427a405896acbf1deb6d02593ba08d"
 
 [[dependencies]]
 name = "cx-api-tags"
