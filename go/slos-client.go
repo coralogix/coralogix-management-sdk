@@ -29,6 +29,15 @@ type CreateServiceSloRequest = slos.CreateServiceSloRequest
 // ServiceSloErrorSli is an SLO error SLI.
 type ServiceSloErrorSli = slos.ServiceSlo_ErrorSli
 
+// ErrorSli is an SLO error SLI.
+type ErrorSli = slos.ErrorSli
+
+// LatencySli is an SLO latency SLI.
+type LatencySli = slos.LatencySli
+
+// ServiceSloLatencySli is a something.
+type ServiceSloLatencySli = slos.ServiceSlo_LatencySli
+
 // GetServiceSloRequest is a request to get an SLO.
 type GetServiceSloRequest = slos.GetServiceSloRequest
 
@@ -38,12 +47,56 @@ type ReplaceServiceSloRequest = slos.ReplaceServiceSloRequest
 // DeleteServiceSloRequest is a request to delete an SLO.
 type DeleteServiceSloRequest = slos.DeleteServiceSloRequest
 
+// SliFilter is an SLO filter.
+type SliFilter = slos.SliFilter
+
+// ThresholdSymbol is an SLO threshold symbol.
+type ThresholdSymbol = slos.ThresholdSymbol
+
+// SloThresholdSymbol values.
+const (
+	SloThresholdSymbolGreater        = slos.ThresholdSymbol_THRESHOLD_SYMBOL_GREATER
+	SloThresholdSymbolGreaterOrEqual = slos.ThresholdSymbol_THRESHOLD_SYMBOL_GREATER_OR_EQUAL
+	SloThresholdSymbolLess           = slos.ThresholdSymbol_THRESHOLD_SYMBOL_LESS
+	SloThresholdSymbolLessOrEqual    = slos.ThresholdSymbol_THRESHOLD_SYMBOL_LESS_OR_EQUAL
+	SloThresholdSymbolEqual          = slos.ThresholdSymbol_THRESHOLD_SYMBOL_EQUAL
+)
+
 // SLO period values.
 const (
-	SloPeriod7Days       = slos.SloPeriod_SLO_PERIOD_7_DAYS
 	SloPeriodUnspecified = slos.SloPeriod_SLO_PERIOD_UNSPECIFIED
+	SloPeriod7Days       = slos.SloPeriod_SLO_PERIOD_7_DAYS
 	SloPeriod14Days      = slos.SloPeriod_SLO_PERIOD_14_DAYS
 	SloPeriod30Days      = slos.SloPeriod_SLO_PERIOD_30_DAYS
+)
+
+// CompareType is an SLO compare type.
+type CompareType = slos.CompareType
+
+// SloCompareType values.
+const (
+	SloCompareTypeUnspecified = slos.CompareType_COMPARE_TYPE_UNSPECIFIED
+	SloCompareTypeIs          = slos.CompareType_COMPARE_TYPE_IS
+	SloCompareTypeStartsWith  = slos.CompareType_COMPARE_TYPE_START_WITH
+	SloCompareTypeEndsWith    = slos.CompareType_COMPARE_TYPE_ENDS_WITH
+	SloCompareTypeIncludes    = slos.CompareType_COMPARE_TYPE_INCLUDES
+)
+
+// SloStatus values.
+const (
+	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_UNSPECIFIED
+	SloStatusOk          = slos.SloStatus_SLO_STATUS_OK
+	SloStatusBreached    = slos.SloStatus_SLO_STATUS_BREACHED
+)
+
+// RPC names.
+const (
+	SloGetRPC      = slos.ServiceSloService_GetServiceSlo_FullMethodName
+	SloCreateRPC   = slos.ServiceSloService_CreateServiceSlo_FullMethodName
+	SloReplaceRPC  = slos.ServiceSloService_ReplaceServiceSlo_FullMethodName
+	SloDeleteRPC   = slos.ServiceSloService_DeleteServiceSlo_FullMethodName
+	SloListRPC     = slos.ServiceSloService_ListServiceSlos_FullMethodName
+	SloBatchGetRPC = slos.ServiceSloService_BatchGetServiceSlos_FullMethodName
 )
 
 // SLOsClient is a client for the Coralogix SLOs API.
