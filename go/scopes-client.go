@@ -29,6 +29,9 @@ type GetTeamScopesByIDsRequest = scopes.GetTeamScopesByIdsRequest
 // GetTeamScopesRequest is a request to list all scopes for the current team
 type GetTeamScopesRequest = scopes.GetTeamScopesRequest
 
+// GetScopesResponse is a response containing a list of scopes
+type GetScopesResponse = scopes.GetScopesResponse
+
 // UpdateScopeRequest is a request to update a scope
 type UpdateScopeRequest = scopes.UpdateScopeRequest
 
@@ -37,6 +40,15 @@ type DeleteScopeRequest = scopes.DeleteScopeRequest
 
 // Filter is a filter for a scope
 type Filter = scopes.Filter
+
+// EntityTypeValue is an entity type value.
+var EntityTypeValueLookup = scopes.EntityType_value
+
+// EntityTypeValue is an entity type value.
+var EntityTypeNameLookup = scopes.EntityType_value
+
+// EntityType is an entity type.
+type EntityType = scopes.EntityType
 
 // EntityType values
 const (
