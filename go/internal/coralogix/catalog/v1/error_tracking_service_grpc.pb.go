@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion8
 const (
 	ErrorTrackingService_GetServiceErrorTrackingOverviewStream_FullMethodName = "/com.coralogix.catalog.v1.ErrorTrackingService/GetServiceErrorTrackingOverviewStream"
 	ErrorTrackingService_GetServiceErrorTrackingListStream_FullMethodName     = "/com.coralogix.catalog.v1.ErrorTrackingService/GetServiceErrorTrackingListStream"
+	ErrorTrackingService_GetServiceErrorOperationsList_FullMethodName         = "/com.coralogix.catalog.v1.ErrorTrackingService/GetServiceErrorOperationsList"
 )
 
 // ErrorTrackingServiceClient is the client API for ErrorTrackingService service.
@@ -29,6 +30,7 @@ const (
 type ErrorTrackingServiceClient interface {
 	GetServiceErrorTrackingOverviewStream(ctx context.Context, in *GetServiceErrorTrackingOverviewRequest, opts ...grpc.CallOption) (ErrorTrackingService_GetServiceErrorTrackingOverviewStreamClient, error)
 	GetServiceErrorTrackingListStream(ctx context.Context, in *GetServiceErrorTrackingListRequest, opts ...grpc.CallOption) (ErrorTrackingService_GetServiceErrorTrackingListStreamClient, error)
+	GetServiceErrorOperationsList(ctx context.Context, in *GetServiceErrorOperationsListRequest, opts ...grpc.CallOption) (*GetServiceErrorOperationsListResponse, error)
 }
 
 type errorTrackingServiceClient struct {
@@ -105,12 +107,23 @@ func (x *errorTrackingServiceGetServiceErrorTrackingListStreamClient) Recv() (*G
 	return m, nil
 }
 
+func (c *errorTrackingServiceClient) GetServiceErrorOperationsList(ctx context.Context, in *GetServiceErrorOperationsListRequest, opts ...grpc.CallOption) (*GetServiceErrorOperationsListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetServiceErrorOperationsListResponse)
+	err := c.cc.Invoke(ctx, ErrorTrackingService_GetServiceErrorOperationsList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ErrorTrackingServiceServer is the server API for ErrorTrackingService service.
 // All implementations must embed UnimplementedErrorTrackingServiceServer
 // for forward compatibility
 type ErrorTrackingServiceServer interface {
 	GetServiceErrorTrackingOverviewStream(*GetServiceErrorTrackingOverviewRequest, ErrorTrackingService_GetServiceErrorTrackingOverviewStreamServer) error
 	GetServiceErrorTrackingListStream(*GetServiceErrorTrackingListRequest, ErrorTrackingService_GetServiceErrorTrackingListStreamServer) error
+	GetServiceErrorOperationsList(context.Context, *GetServiceErrorOperationsListRequest) (*GetServiceErrorOperationsListResponse, error)
 	mustEmbedUnimplementedErrorTrackingServiceServer()
 }
 
@@ -123,6 +136,9 @@ func (UnimplementedErrorTrackingServiceServer) GetServiceErrorTrackingOverviewSt
 }
 func (UnimplementedErrorTrackingServiceServer) GetServiceErrorTrackingListStream(*GetServiceErrorTrackingListRequest, ErrorTrackingService_GetServiceErrorTrackingListStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetServiceErrorTrackingListStream not implemented")
+}
+func (UnimplementedErrorTrackingServiceServer) GetServiceErrorOperationsList(context.Context, *GetServiceErrorOperationsListRequest) (*GetServiceErrorOperationsListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServiceErrorOperationsList not implemented")
 }
 func (UnimplementedErrorTrackingServiceServer) mustEmbedUnimplementedErrorTrackingServiceServer() {}
 
@@ -179,13 +195,36 @@ func (x *errorTrackingServiceGetServiceErrorTrackingListStreamServer) Send(m *Ge
 	return x.ServerStream.SendMsg(m)
 }
 
+func _ErrorTrackingService_GetServiceErrorOperationsList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServiceErrorOperationsListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ErrorTrackingServiceServer).GetServiceErrorOperationsList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ErrorTrackingService_GetServiceErrorOperationsList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ErrorTrackingServiceServer).GetServiceErrorOperationsList(ctx, req.(*GetServiceErrorOperationsListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ErrorTrackingService_ServiceDesc is the grpc.ServiceDesc for ErrorTrackingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var ErrorTrackingService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "com.coralogix.catalog.v1.ErrorTrackingService",
 	HandlerType: (*ErrorTrackingServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetServiceErrorOperationsList",
+			Handler:    _ErrorTrackingService_GetServiceErrorOperationsList_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "GetServiceErrorTrackingOverviewStream",

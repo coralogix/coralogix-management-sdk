@@ -9,7 +9,6 @@ package v1
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	_ "google.golang.org/protobuf/types/descriptorpb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -68,102 +67,6 @@ func (x *UserId) GetId() string {
 	return ""
 }
 
-// Deprecated: Marked as deprecated in com/coralogix/permissions/v1/common.proto.
-type ResourceId struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *ResourceId) Reset() {
-	*x = ResourceId{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[1]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ResourceId) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ResourceId) ProtoMessage() {}
-
-func (x *ResourceId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[1]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ResourceId.ProtoReflect.Descriptor instead.
-func (*ResourceId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{1}
-}
-
-func (x *ResourceId) GetId() uint32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
-// Deprecated: Marked as deprecated in com/coralogix/permissions/v1/common.proto.
-type ActionId struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id uint32 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *ActionId) Reset() {
-	*x = ActionId{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ActionId) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ActionId) ProtoMessage() {}
-
-func (x *ActionId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ActionId.ProtoReflect.Descriptor instead.
-func (*ActionId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *ActionId) GetId() uint32 {
-	if x != nil {
-		return x.Id
-	}
-	return 0
-}
-
 type TeamId struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -175,7 +78,7 @@ type TeamId struct {
 func (x *TeamId) Reset() {
 	*x = TeamId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[3]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -188,7 +91,7 @@ func (x *TeamId) String() string {
 func (*TeamId) ProtoMessage() {}
 
 func (x *TeamId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[3]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -201,7 +104,7 @@ func (x *TeamId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamId.ProtoReflect.Descriptor instead.
 func (*TeamId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *TeamId) GetId() uint32 {
@@ -222,7 +125,7 @@ type UserAccountId struct {
 func (x *UserAccountId) Reset() {
 	*x = UserAccountId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[4]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -235,7 +138,7 @@ func (x *UserAccountId) String() string {
 func (*UserAccountId) ProtoMessage() {}
 
 func (x *UserAccountId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[4]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -248,7 +151,7 @@ func (x *UserAccountId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserAccountId.ProtoReflect.Descriptor instead.
 func (*UserAccountId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UserAccountId) GetId() uint32 {
@@ -269,7 +172,7 @@ type OrganizationId struct {
 func (x *OrganizationId) Reset() {
 	*x = OrganizationId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[5]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -282,7 +185,7 @@ func (x *OrganizationId) String() string {
 func (*OrganizationId) ProtoMessage() {}
 
 func (x *OrganizationId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[5]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -295,7 +198,7 @@ func (x *OrganizationId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrganizationId.ProtoReflect.Descriptor instead.
 func (*OrganizationId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *OrganizationId) GetId() string {
@@ -316,7 +219,7 @@ type RoleId struct {
 func (x *RoleId) Reset() {
 	*x = RoleId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[6]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -329,7 +232,7 @@ func (x *RoleId) String() string {
 func (*RoleId) ProtoMessage() {}
 
 func (x *RoleId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[6]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -342,7 +245,7 @@ func (x *RoleId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RoleId.ProtoReflect.Descriptor instead.
 func (*RoleId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *RoleId) GetId() uint32 {
@@ -363,7 +266,7 @@ type OrgGroupId struct {
 func (x *OrgGroupId) Reset() {
 	*x = OrgGroupId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[7]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -376,7 +279,7 @@ func (x *OrgGroupId) String() string {
 func (*OrgGroupId) ProtoMessage() {}
 
 func (x *OrgGroupId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[7]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -389,7 +292,7 @@ func (x *OrgGroupId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OrgGroupId.ProtoReflect.Descriptor instead.
 func (*OrgGroupId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *OrgGroupId) GetId() string {
@@ -410,7 +313,7 @@ type TeamGroupId struct {
 func (x *TeamGroupId) Reset() {
 	*x = TeamGroupId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[8]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -423,7 +326,7 @@ func (x *TeamGroupId) String() string {
 func (*TeamGroupId) ProtoMessage() {}
 
 func (x *TeamGroupId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[8]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -436,7 +339,7 @@ func (x *TeamGroupId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TeamGroupId.ProtoReflect.Descriptor instead.
 func (*TeamGroupId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *TeamGroupId) GetId() uint32 {
@@ -457,7 +360,7 @@ type ScopeId struct {
 func (x *ScopeId) Reset() {
 	*x = ScopeId{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[9]
+		mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -470,7 +373,7 @@ func (x *ScopeId) String() string {
 func (*ScopeId) ProtoMessage() {}
 
 func (x *ScopeId) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[9]
+	mi := &file_com_coralogix_permissions_v1_common_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -483,7 +386,7 @@ func (x *ScopeId) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ScopeId.ProtoReflect.Descriptor instead.
 func (*ScopeId) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogix_permissions_v1_common_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ScopeId) GetId() uint32 {
@@ -500,28 +403,22 @@ var file_com_coralogix_permissions_v1_common_proto_rawDesc = []byte{
 	0x70, 0x65, 0x72, 0x6d, 0x69, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x63,
 	0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x1c, 0x63, 0x6f, 0x6d,
 	0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x70, 0x65, 0x72, 0x6d, 0x69,
-	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x76, 0x31, 0x1a, 0x20, 0x67, 0x6f, 0x6f, 0x67, 0x6c,
-	0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x64, 0x65, 0x73, 0x63, 0x72,
-	0x69, 0x70, 0x74, 0x6f, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x18, 0x0a, 0x06, 0x55,
-	0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x20, 0x0a, 0x0a, 0x52, 0x65, 0x73, 0x6f, 0x75, 0x72, 0x63,
-	0x65, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52,
-	0x02, 0x69, 0x64, 0x3a, 0x02, 0x18, 0x01, 0x22, 0x1e, 0x0a, 0x08, 0x41, 0x63, 0x74, 0x69, 0x6f,
-	0x6e, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52,
-	0x02, 0x69, 0x64, 0x3a, 0x02, 0x18, 0x01, 0x22, 0x18, 0x0a, 0x06, 0x54, 0x65, 0x61, 0x6d, 0x49,
-	0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69,
-	0x64, 0x22, 0x1f, 0x0a, 0x0d, 0x55, 0x73, 0x65, 0x72, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x73, 0x73, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x76, 0x31, 0x22, 0x18, 0x0a, 0x06, 0x55, 0x73, 0x65,
+	0x72, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x22, 0x18, 0x0a, 0x06, 0x54, 0x65, 0x61, 0x6d, 0x49, 0x64, 0x12, 0x0e, 0x0a,
+	0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1f, 0x0a,
+	0x0d, 0x55, 0x73, 0x65, 0x72, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x20,
+	0x0a, 0x0e, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64,
+	0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64,
+	0x22, 0x18, 0x0a, 0x06, 0x52, 0x6f, 0x6c, 0x65, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1c, 0x0a, 0x0a, 0x4f, 0x72,
+	0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1d, 0x0a, 0x0b, 0x54, 0x65, 0x61, 0x6d,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x19, 0x0a, 0x07, 0x53, 0x63, 0x6f, 0x70, 0x65,
 	0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02,
-	0x69, 0x64, 0x22, 0x20, 0x0a, 0x0e, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x02, 0x69, 0x64, 0x22, 0x18, 0x0a, 0x06, 0x52, 0x6f, 0x6c, 0x65, 0x49, 0x64, 0x12, 0x0e,
-	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1c,
-	0x0a, 0x0a, 0x4f, 0x72, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02,
-	0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x1d, 0x0a, 0x0b,
-	0x54, 0x65, 0x61, 0x6d, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69,
-	0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x22, 0x19, 0x0a, 0x07, 0x53,
-	0x63, 0x6f, 0x70, 0x65, 0x49, 0x64, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x0d, 0x52, 0x02, 0x69, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -536,18 +433,16 @@ func file_com_coralogix_permissions_v1_common_proto_rawDescGZIP() []byte {
 	return file_com_coralogix_permissions_v1_common_proto_rawDescData
 }
 
-var file_com_coralogix_permissions_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_com_coralogix_permissions_v1_common_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_com_coralogix_permissions_v1_common_proto_goTypes = []any{
 	(*UserId)(nil),         // 0: com.coralogix.permissions.v1.UserId
-	(*ResourceId)(nil),     // 1: com.coralogix.permissions.v1.ResourceId
-	(*ActionId)(nil),       // 2: com.coralogix.permissions.v1.ActionId
-	(*TeamId)(nil),         // 3: com.coralogix.permissions.v1.TeamId
-	(*UserAccountId)(nil),  // 4: com.coralogix.permissions.v1.UserAccountId
-	(*OrganizationId)(nil), // 5: com.coralogix.permissions.v1.OrganizationId
-	(*RoleId)(nil),         // 6: com.coralogix.permissions.v1.RoleId
-	(*OrgGroupId)(nil),     // 7: com.coralogix.permissions.v1.OrgGroupId
-	(*TeamGroupId)(nil),    // 8: com.coralogix.permissions.v1.TeamGroupId
-	(*ScopeId)(nil),        // 9: com.coralogix.permissions.v1.ScopeId
+	(*TeamId)(nil),         // 1: com.coralogix.permissions.v1.TeamId
+	(*UserAccountId)(nil),  // 2: com.coralogix.permissions.v1.UserAccountId
+	(*OrganizationId)(nil), // 3: com.coralogix.permissions.v1.OrganizationId
+	(*RoleId)(nil),         // 4: com.coralogix.permissions.v1.RoleId
+	(*OrgGroupId)(nil),     // 5: com.coralogix.permissions.v1.OrgGroupId
+	(*TeamGroupId)(nil),    // 6: com.coralogix.permissions.v1.TeamGroupId
+	(*ScopeId)(nil),        // 7: com.coralogix.permissions.v1.ScopeId
 }
 var file_com_coralogix_permissions_v1_common_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
@@ -576,30 +471,6 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 			}
 		}
 		file_com_coralogix_permissions_v1_common_proto_msgTypes[1].Exporter = func(v any, i int) any {
-			switch v := v.(*ResourceId); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[2].Exporter = func(v any, i int) any {
-			switch v := v.(*ActionId); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[3].Exporter = func(v any, i int) any {
 			switch v := v.(*TeamId); i {
 			case 0:
 				return &v.state
@@ -611,7 +482,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[4].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[2].Exporter = func(v any, i int) any {
 			switch v := v.(*UserAccountId); i {
 			case 0:
 				return &v.state
@@ -623,7 +494,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[5].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[3].Exporter = func(v any, i int) any {
 			switch v := v.(*OrganizationId); i {
 			case 0:
 				return &v.state
@@ -635,7 +506,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[6].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[4].Exporter = func(v any, i int) any {
 			switch v := v.(*RoleId); i {
 			case 0:
 				return &v.state
@@ -647,7 +518,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[7].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[5].Exporter = func(v any, i int) any {
 			switch v := v.(*OrgGroupId); i {
 			case 0:
 				return &v.state
@@ -659,7 +530,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[8].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[6].Exporter = func(v any, i int) any {
 			switch v := v.(*TeamGroupId); i {
 			case 0:
 				return &v.state
@@ -671,7 +542,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 				return nil
 			}
 		}
-		file_com_coralogix_permissions_v1_common_proto_msgTypes[9].Exporter = func(v any, i int) any {
+		file_com_coralogix_permissions_v1_common_proto_msgTypes[7].Exporter = func(v any, i int) any {
 			switch v := v.(*ScopeId); i {
 			case 0:
 				return &v.state
@@ -690,7 +561,7 @@ func file_com_coralogix_permissions_v1_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_com_coralogix_permissions_v1_common_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   10,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
