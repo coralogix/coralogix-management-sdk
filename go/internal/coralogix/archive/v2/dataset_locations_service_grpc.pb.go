@@ -147,3 +147,133 @@ var DatasetLocationsService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "com/coralogix/archive/dataset/v2/dataset_locations_service.proto",
 }
+
+const (
+	InternalDatasetLocationsService_GetDatasetLocations_FullMethodName = "/com.coralogix.archive.dataset.v2.InternalDatasetLocationsService/GetDatasetLocations"
+	InternalDatasetLocationsService_GetDatasetList_FullMethodName      = "/com.coralogix.archive.dataset.v2.InternalDatasetLocationsService/GetDatasetList"
+)
+
+// InternalDatasetLocationsServiceClient is the client API for InternalDatasetLocationsService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type InternalDatasetLocationsServiceClient interface {
+	GetDatasetLocations(ctx context.Context, in *InternalDatasetLocationsServiceGetDatasetLocationsRequest, opts ...grpc.CallOption) (*InternalDatasetLocationsServiceGetDatasetLocationsResponse, error)
+	GetDatasetList(ctx context.Context, in *InternalDatasetLocationsServiceGetDatasetListRequest, opts ...grpc.CallOption) (*InternalDatasetLocationsServiceGetDatasetListResponse, error)
+}
+
+type internalDatasetLocationsServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewInternalDatasetLocationsServiceClient(cc grpc.ClientConnInterface) InternalDatasetLocationsServiceClient {
+	return &internalDatasetLocationsServiceClient{cc}
+}
+
+func (c *internalDatasetLocationsServiceClient) GetDatasetLocations(ctx context.Context, in *InternalDatasetLocationsServiceGetDatasetLocationsRequest, opts ...grpc.CallOption) (*InternalDatasetLocationsServiceGetDatasetLocationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InternalDatasetLocationsServiceGetDatasetLocationsResponse)
+	err := c.cc.Invoke(ctx, InternalDatasetLocationsService_GetDatasetLocations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *internalDatasetLocationsServiceClient) GetDatasetList(ctx context.Context, in *InternalDatasetLocationsServiceGetDatasetListRequest, opts ...grpc.CallOption) (*InternalDatasetLocationsServiceGetDatasetListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InternalDatasetLocationsServiceGetDatasetListResponse)
+	err := c.cc.Invoke(ctx, InternalDatasetLocationsService_GetDatasetList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// InternalDatasetLocationsServiceServer is the server API for InternalDatasetLocationsService service.
+// All implementations must embed UnimplementedInternalDatasetLocationsServiceServer
+// for forward compatibility
+type InternalDatasetLocationsServiceServer interface {
+	GetDatasetLocations(context.Context, *InternalDatasetLocationsServiceGetDatasetLocationsRequest) (*InternalDatasetLocationsServiceGetDatasetLocationsResponse, error)
+	GetDatasetList(context.Context, *InternalDatasetLocationsServiceGetDatasetListRequest) (*InternalDatasetLocationsServiceGetDatasetListResponse, error)
+	mustEmbedUnimplementedInternalDatasetLocationsServiceServer()
+}
+
+// UnimplementedInternalDatasetLocationsServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedInternalDatasetLocationsServiceServer struct {
+}
+
+func (UnimplementedInternalDatasetLocationsServiceServer) GetDatasetLocations(context.Context, *InternalDatasetLocationsServiceGetDatasetLocationsRequest) (*InternalDatasetLocationsServiceGetDatasetLocationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDatasetLocations not implemented")
+}
+func (UnimplementedInternalDatasetLocationsServiceServer) GetDatasetList(context.Context, *InternalDatasetLocationsServiceGetDatasetListRequest) (*InternalDatasetLocationsServiceGetDatasetListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDatasetList not implemented")
+}
+func (UnimplementedInternalDatasetLocationsServiceServer) mustEmbedUnimplementedInternalDatasetLocationsServiceServer() {
+}
+
+// UnsafeInternalDatasetLocationsServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to InternalDatasetLocationsServiceServer will
+// result in compilation errors.
+type UnsafeInternalDatasetLocationsServiceServer interface {
+	mustEmbedUnimplementedInternalDatasetLocationsServiceServer()
+}
+
+func RegisterInternalDatasetLocationsServiceServer(s grpc.ServiceRegistrar, srv InternalDatasetLocationsServiceServer) {
+	s.RegisterService(&InternalDatasetLocationsService_ServiceDesc, srv)
+}
+
+func _InternalDatasetLocationsService_GetDatasetLocations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InternalDatasetLocationsServiceGetDatasetLocationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InternalDatasetLocationsServiceServer).GetDatasetLocations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InternalDatasetLocationsService_GetDatasetLocations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InternalDatasetLocationsServiceServer).GetDatasetLocations(ctx, req.(*InternalDatasetLocationsServiceGetDatasetLocationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InternalDatasetLocationsService_GetDatasetList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InternalDatasetLocationsServiceGetDatasetListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InternalDatasetLocationsServiceServer).GetDatasetList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InternalDatasetLocationsService_GetDatasetList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InternalDatasetLocationsServiceServer).GetDatasetList(ctx, req.(*InternalDatasetLocationsServiceGetDatasetListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// InternalDatasetLocationsService_ServiceDesc is the grpc.ServiceDesc for InternalDatasetLocationsService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var InternalDatasetLocationsService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "com.coralogix.archive.dataset.v2.InternalDatasetLocationsService",
+	HandlerType: (*InternalDatasetLocationsServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetDatasetLocations",
+			Handler:    _InternalDatasetLocationsService_GetDatasetLocations_Handler,
+		},
+		{
+			MethodName: "GetDatasetList",
+			Handler:    _InternalDatasetLocationsService_GetDatasetList_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "com/coralogix/archive/dataset/v2/dataset_locations_service.proto",
+}

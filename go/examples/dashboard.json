@@ -42,7 +42,8 @@
                       "columns": [
                         "LEGEND_COLUMN_MAX",
                         "LEGEND_COLUMN_LAST"
-                      ]
+                      ],
+                      "placement": 1
                     }
                   }
                 },
@@ -79,7 +80,8 @@
                         "LEGEND_COLUMN_SUM",
                         "LEGEND_COLUMN_AVG",
                         "LEGEND_COLUMN_LAST"
-                      ]
+                      ],
+                      "placement": 1
                     }
                   }
                 },
@@ -120,7 +122,8 @@
                       "columns": [
                         "LEGEND_COLUMN_MAX",
                         "LEGEND_COLUMN_LAST"
-                      ]
+                      ],
+                      "placement": 1
                     }
                   }
                 },
