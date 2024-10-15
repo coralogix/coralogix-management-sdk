@@ -62,6 +62,12 @@ const (
 	SloThresholdSymbolEqual          = slos.ThresholdSymbol_THRESHOLD_SYMBOL_EQUAL
 )
 
+// SloPeriod is a SLO period.
+type SloPeriod = slos.SloPeriod
+
+// SloStatus is a SLO status.
+type SloStatus = slos.SloStatus
+
 // SLO period values.
 const (
 	SloPeriodUnspecified = slos.SloPeriod_SLO_PERIOD_UNSPECIFIED
