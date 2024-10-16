@@ -173,6 +173,39 @@ const (
 	PieChartLabelSourceStack       = dashboards.PieChart_LABEL_SOURCE_STACK
 )
 
+// SpansAggregationDimensionAggregationDimensionField is a type for spans aggregation dimension aggregation dimension field.
+type SpansAggregationDimensionAggregationDimensionField = dashboards.SpansAggregation_DimensionAggregation_DimensionField
+
+// SpansAggregationDimensionAggregationDimensionField values.
+const (
+	SpansAggregationDimensionAggregationDimensionFieldUnspecified = dashboards.SpansAggregation_DimensionAggregation_DIMENSION_FIELD_UNSPECIFIED
+	SpansAggregationDimensionAggregationDimensionFieldTraceID     = dashboards.SpansAggregation_DimensionAggregation_DIMENSION_FIELD_TRACE_ID
+)
+
+// SpansAggregationMetricAggregationMetricAggregationType is a type for spans aggregation metric aggregation metric aggregation type.
+type SpansAggregationMetricAggregationMetricAggregationType = dashboards.SpansAggregation_MetricAggregation_MetricAggregationType
+
+// SpansAggregationMetricAggregationMetricTypeUnspecified values.
+const (
+	SpansAggregationMetricAggregationMetricTypeUnspecified  = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_UNSPECIFIED
+	SpansAggregationMetricAggregationMetricTypeMin          = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_MIN
+	SpansAggregationMetricAggregationMetricTypeMax          = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_MAX
+	SpansAggregationMetricAggregationMetricTypeAverage      = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_AVERAGE
+	SpansAggregationMetricAggregationMetricTypeSum          = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_SUM
+	SpansAggregationMetricAggregationMetricTypePercentile99 = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_PERCENTILE_99
+	SpansAggregationMetricAggregationMetricTypePercentile95 = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_PERCENTILE_95
+	SpansAggregationMetricAggregationMetricTypePercentile50 = dashboards.SpansAggregation_MetricAggregation_METRIC_AGGREGATION_TYPE_PERCENTILE_50
+)
+
+// SpansAggregationMetricAggregationMetricField is a type for spans aggregation metric aggregation metric field.
+type SpansAggregationMetricAggregationMetricField = dashboards.SpansAggregation_MetricAggregation_MetricField
+
+// SpansAggregationMetricAggregationMetricField values.
+const (
+	SpansAggregationMetricAggregationMetricFieldUnspecified = dashboards.SpansAggregation_MetricAggregation_METRIC_FIELD_UNSPECIFIED
+	SpansAggregationMetricAggregationMetricFieldDuration    = dashboards.SpansAggregation_MetricAggregation_METRIC_FIELD_DURATION
+)
+
 // GaugeQueryMetrics is a type for gauge query for metrics.
 type GaugeQueryMetrics = dashboards.Gauge_Query_Metrics
 
