@@ -52,6 +52,167 @@ type FolderPath = dashboards.FolderPath
 // Dashboard is a dashboard.
 type Dashboard = dashboards.Dashboard
 
+// RowStyle is a style for a row.
+type RowStyle = dashboards.RowStyle
+
+// RowStyle values.
+const (
+	RowStyleOneLine   = dashboards.RowStyle_ROW_STYLE_ONE_LINE
+	RowStyleTwoLine   = dashboards.RowStyle_ROW_STYLE_TWO_LINE
+	RowStyleCondensed = dashboards.RowStyle_ROW_STYLE_CONDENSED
+	RowStyleJson      = dashboards.RowStyle_ROW_STYLE_JSON
+	RowStyleList      = dashboards.RowStyle_ROW_STYLE_LIST
+)
+
+// LegendColumn is the column type for the legends.
+type LegendColumn = dashboards.Legend_LegendColumn
+
+// LegendColumn values.
+const (
+	LegendColumnUnspecified = dashboards.Legend_LEGEND_COLUMN_UNSPECIFIED
+	LegendColumnMin         = dashboards.Legend_LEGEND_COLUMN_MIN
+	LegendColumnMax         = dashboards.Legend_LEGEND_COLUMN_MAX
+	LegendColumnSum         = dashboards.Legend_LEGEND_COLUMN_SUM
+	LegendColumnAvg         = dashboards.Legend_LEGEND_COLUMN_AVG
+	LegendColumnLast        = dashboards.Legend_LEGEND_COLUMN_LAST
+	LegendColumnName        = dashboards.Legend_LEGEND_COLUMN_NAME
+)
+
+// OrderDirection is the sorting direction
+type OrderDirection = dashboards.OrderDirection
+
+// OrderDirection values.
+const (
+	OderDirectionAsc  = dashboards.OrderDirection_ORDER_DIRECTION_ASC
+	OderDirectionDesc = dashboards.OrderDirection_ORDER_DIRECTION_DESC
+)
+
+// LineChartTooltipType is the type of the line chart tooltip.
+type LineChartTooltipType = dashboards.LineChart_TooltipType
+
+// LineChartTooltipType values.
+const (
+	LineChartToolTipTypeUnspecified = dashboards.LineChart_TOOLTIP_TYPE_UNSPECIFIED
+	LineChartToolTipTypeAll         = dashboards.LineChart_TOOLTIP_TYPE_ALL
+	LineChartToolTipTypeSingle      = dashboards.LineChart_TOOLTIP_TYPE_SINGLE
+)
+
+// ScaleType is the type of the scale.
+type ScaleType = dashboards.ScaleType
+
+// ScaleType values.
+const (
+	ScaleTypeUnspecified = dashboards.ScaleType_SCALE_TYPE_UNSPECIFIED
+	ScaleTypeLinear      = dashboards.ScaleType_SCALE_TYPE_LINEAR
+	ScaleTypeLogarithmic = dashboards.ScaleType_SCALE_TYPE_LOGARITHMIC
+)
+
+// Unit is the unit for a widget.
+type Unit = dashboards.Unit
+
+// Unit values.
+const (
+	UnitUnspecified  = dashboards.Unit_UNIT_UNSPECIFIED
+	UnitMicroseconds = dashboards.Unit_UNIT_MICROSECONDS
+	UnitMilliseconds = dashboards.Unit_UNIT_MILLISECONDS
+	UnitNanoseconds  = dashboards.Unit_UNIT_NANOSECONDS
+	UnitSeconds      = dashboards.Unit_UNIT_SECONDS
+	UnitBytes        = dashboards.Unit_UNIT_BYTES
+	UnitKbytes       = dashboards.Unit_UNIT_KBYTES
+	UnitMbytes       = dashboards.Unit_UNIT_MBYTES
+	UnitGbytes       = dashboards.Unit_UNIT_GBYTES
+	UnitBytes_iec    = dashboards.Unit_UNIT_BYTES_IEC
+	UnitKibytes      = dashboards.Unit_UNIT_KIBYTES
+	UnitMibytes      = dashboards.Unit_UNIT_MIBYTES
+	UnitGibytes      = dashboards.Unit_UNIT_GIBYTES
+	UnitEurCents     = dashboards.Unit_UNIT_EUR_CENTS
+	UnitEur          = dashboards.Unit_UNIT_EUR
+	UnitUsdCents     = dashboards.Unit_UNIT_USD_CENTS
+	UnitUsd          = dashboards.Unit_UNIT_USD
+	UnitCustom       = dashboards.Unit_UNIT_CUSTOM
+	UnitPercent01    = dashboards.Unit_UNIT_PERCENT_ZERO_ONE
+	UnitPercent100   = dashboards.Unit_UNIT_PERCENT_ZERO_HUNDRED
+)
+
+// GaugeUnit is the unit for a widget.
+type GaugeUnit = dashboards.Gauge_Unit
+
+// GaugeUnit values.
+const (
+	GaugeUnitUnspecified  = dashboards.Gauge_UNIT_UNSPECIFIED
+	GaugeUnitMicroseconds = dashboards.Gauge_UNIT_MICROSECONDS
+	GaugeUnitMilliseconds = dashboards.Gauge_UNIT_MILLISECONDS
+	GaugeUnitNanoseconds  = dashboards.Gauge_UNIT_NANOSECONDS
+	GaugeUnitNumber       = dashboards.Gauge_UNIT_NUMBER
+	GaugeUnitPercent      = dashboards.Gauge_UNIT_PERCENT
+	GaugeUnitSeconds      = dashboards.Gauge_UNIT_SECONDS
+	GaugeUnitBytes        = dashboards.Gauge_UNIT_BYTES
+	GaugeUnitKbytes       = dashboards.Gauge_UNIT_KBYTES
+	GaugeUnitMbytes       = dashboards.Gauge_UNIT_MBYTES
+	GaugeUnitGbytes       = dashboards.Gauge_UNIT_GBYTES
+	GaugeUnitBytes_iec    = dashboards.Gauge_UNIT_BYTES_IEC
+	GaugeUnitKibytes      = dashboards.Gauge_UNIT_KIBYTES
+	GaugeUnitMibytes      = dashboards.Gauge_UNIT_MIBYTES
+	GaugeUnitGibytes      = dashboards.Gauge_UNIT_GIBYTES
+	GaugeUnitEur_cents    = dashboards.Gauge_UNIT_EUR_CENTS
+	GaugeUnitEur          = dashboards.Gauge_UNIT_EUR
+	GaugeUnitUsd_cents    = dashboards.Gauge_UNIT_USD_CENTS
+	GaugeUnitUsd          = dashboards.Gauge_UNIT_USD
+	GaugeUnitCustom       = dashboards.Gauge_UNIT_CUSTOM
+	GaugeUnitPercent01    = dashboards.Gauge_UNIT_PERCENT_ZERO_ONE
+	GaugeUnitPercent100   = dashboards.Gauge_UNIT_PERCENT_ZERO_HUNDRED
+)
+
+// PieChartLabelSource is the source of the labels for the pie chart.
+type PieChartLabelSource = dashboards.PieChart_LabelSource
+
+// PieChartLabelSource values.
+const (
+	PieChartLabelSourceUnspecified = dashboards.PieChart_LABEL_SOURCE_UNSPECIFIED
+	PieChartLabelSourceInner       = dashboards.PieChart_LABEL_SOURCE_INNER
+	PieChartLabelSourceStack       = dashboards.PieChart_LABEL_SOURCE_STACK
+)
+
+// GaugeQueryMetrics is a type for gauge query for metrics.
+type GaugeQueryMetrics = dashboards.Gauge_Query_Metrics
+
+// GaugeQueryLogs is a type for gauge query for logs.
+type GaugeQueryLogs = dashboards.Gauge_Query_Logs
+
+// GaugeQuerySpans is a type for gauge query for spans.
+type GaugeQuerySpans = dashboards.Gauge_Query_Spans
+
+// GaugeSpansQuery is a type of gauge query for spans.
+type GaugeSpansQuery = dashboards.Gauge_SpansQuery
+
+// GaugeQuery is a type for gauge query.
+type GaugeQuery = dashboards.Gauge_Query
+
+// GaugeAggregration is a type for gauge aggregation.
+type GaugeAggregation = dashboards.Gauge_Aggregation
+
+// GaugeAggregation values.
+const (
+	GaugeAggregationUnspecified = dashboards.Gauge_AGGREGATION_UNSPECIFIED
+	GaugeAggregationLast        = dashboards.Gauge_AGGREGATION_LAST
+	GaugeAggregationMin         = dashboards.Gauge_AGGREGATION_MIN
+	GaugeAggregationMax         = dashboards.Gauge_AGGREGATION_MAX
+	GaugeAggregationAvg         = dashboards.Gauge_AGGREGATION_AVG
+	GaugeAggregationSum         = dashboards.Gauge_AGGREGATION_SUM
+)
+
+// RPC names.
+const (
+	CreateDashboardRPC         = dashboards.DashboardsService_CreateDashboard_FullMethodName
+	ReplaceDashboardRPC        = dashboards.DashboardsService_ReplaceDashboard_FullMethodName
+	DeleteDashboardRPC         = dashboards.DashboardsService_DeleteDashboard_FullMethodName
+	GetDashboardRPC            = dashboards.DashboardsService_GetDashboard_FullMethodName
+	PinDashboardRPC            = dashboards.DashboardsService_PinDashboard_FullMethodName
+	UnpinDashboardRPC          = dashboards.DashboardsService_UnpinDashboard_FullMethodName
+	ReplaceDefaultDashboardRPC = dashboards.DashboardsService_ReplaceDefaultDashboard_FullMethodName
+	AssignDashboardFolderRPC   = dashboards.DashboardsService_AssignDashboardFolder_FullMethodName
+)
+
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
