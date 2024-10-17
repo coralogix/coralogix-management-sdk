@@ -246,6 +246,78 @@ const (
 	AssignDashboardFolderRPC   = dashboards.DashboardsService_AssignDashboardFolder_FullMethodName
 )
 
+// SortByType is the type for sorting by.
+type SortByType = dashboards.SortByType
+
+// SortByType values.
+const (
+	SortByTypeUnspecified = dashboards.SortByType_SORT_BY_TYPE_UNSPECIFIED
+	SortByTypeValue       = dashboards.SortByType_SORT_BY_TYPE_VALUE
+	SortByTypeName        = dashboards.SortByType_SORT_BY_TYPE_NAME
+)
+
+// SpanFieldMetadataField is the type for span field metadata field.
+type SpanFieldMetadataField = dashboards.SpanField_MetadataField
+
+// SpanFieldMetadataField values.
+const (
+	SpanFieldMetadataFieldUnspecified     = dashboards.SpanField_METADATA_FIELD_UNSPECIFIED
+	SpanFieldMetadataFieldApplicationName = dashboards.SpanField_METADATA_FIELD_APPLICATION_NAME
+	SpanFieldMetadataFieldSubsystemName   = dashboards.SpanField_METADATA_FIELD_SUBSYSTEM_NAME
+	SpanFieldMetadataFieldServiceName     = dashboards.SpanField_METADATA_FIELD_SERVICE_NAME
+	SpanFieldMetadataFieldOperationName   = dashboards.SpanField_METADATA_FIELD_OPERATION_NAME
+)
+
+// SpansAggregationDimensionAggregationType is the type for spans aggregation dimension aggregation type.
+type SpansAggregationDimensionAggregationType = dashboards.SpansAggregation_DimensionAggregation_DimensionAggregationType
+
+// SpansAggregationDimensionAggregationType values.
+const (
+	SpansAggregationDimensionAggregationTypeUnspecified = dashboards.SpansAggregation_DimensionAggregation_DIMENSION_AGGREGATION_TYPE_UNSPECIFIED
+	SpansAggregationDimensionAggregationTypeUniqueCount = dashboards.SpansAggregation_DimensionAggregation_DIMENSION_AGGREGATION_TYPE_UNIQUE_COUNT
+	SpansAggregationDimensionAggregationTypeErrorCount  = dashboards.SpansAggregation_DimensionAggregation_DIMENSION_AGGREGATION_TYPE_ERROR_COUNT
+)
+
+// DatasetScope is the scope of the dataset.
+type DatasetScope = dashboards.DatasetScope
+
+// DatasetScope values.
+const (
+	DatasetScopeUnspecified = dashboards.DatasetScope_DATASET_SCOPE_UNSPECIFIED
+	DatasetScopeUser_data   = dashboards.DatasetScope_DATASET_SCOPE_USER_DATA
+	DatasetScopeLabel       = dashboards.DatasetScope_DATASET_SCOPE_LABEL
+	DatasetScopeMetadata    = dashboards.DatasetScope_DATASET_SCOPE_METADATA
+)
+
+// DataModeType is the type for data mode.
+type DataModeType = dashboards.DataModeType
+
+// DataModeType values.
+const (
+	DataModeTypeHighUnspecified = dashboards.DataModeType_DATA_MODE_TYPE_HIGH_UNSPECIFIED
+	DataModeTypeArchive         = dashboards.DataModeType_DATA_MODE_TYPE_ARCHIVE
+)
+
+// GaugeThresholdBy is the type for gauge threshold by.
+type GaugeThresholdBy = dashboards.Gauge_ThresholdBy
+
+// GaugeThresholdBy values.
+const (
+	GaugeThresholdByUnspecified = dashboards.Gauge_THRESHOLD_BY_UNSPECIFIED
+	GaugeThresholdByValue       = dashboards.Gauge_THRESHOLD_BY_VALUE
+	GaugeThresholdByBackground  = dashboards.Gauge_THRESHOLD_BY_BACKGROUND
+)
+
+// MultiSelectRefreshStrategy is the type for multi select refresh strategy.
+type MultiSelectRefreshStrategy = dashboards.MultiSelect_RefreshStrategy
+
+// MultiSelectRefreshStrategy values.
+const (
+	MultiSelectRefreshStrategyUnspecified       = dashboards.MultiSelect_REFRESH_STRATEGY_UNSPECIFIED
+	MultiSelectRefreshStrategyOnDashboardLoad   = dashboards.MultiSelect_REFRESH_STRATEGY_ON_DASHBOARD_LOAD
+	MultiSelectRefreshStrategyOnTimeFrameChange = dashboards.MultiSelect_REFRESH_STRATEGY_ON_TIME_FRAME_CHANGE
+)
+
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
