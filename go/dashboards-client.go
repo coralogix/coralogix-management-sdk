@@ -408,6 +408,124 @@ type DashboardWidget = dashboards.Widget
 // DashboardWidgetAppearance is the appearance of a widget in a dashboard.
 type DashboardWidgetAppearance = dashboards.Widget_Appearance
 
+// MultiSelectQueryMetricsQuerySelection is a selection for a multi select query.
+type MultiSelectQueryMetricsQuerySelection = dashboards.MultiSelect_Query_MetricsQuery_Selection
+
+// MultiSelectQueryMetricsQuerySelectionList is a selection for a multi select query.
+type MultiSelectQueryMetricsQuerySelectionList = dashboards.MultiSelect_Query_MetricsQuery_Selection_List
+
+// MultiSelectQueryMetricsQuerySelectionListSelection is a selection for a multi select query.
+type MultiSelectQueryMetricsQuerySelectionListSelection = dashboards.MultiSelect_Query_MetricsQuery_Selection_ListSelection
+
+// MultiSelectQueryMetricsQueryOperatorEquals is a selection for a multi select query.
+type MultiSelectQueryMetricsQueryOperatorEquals = dashboards.MultiSelect_Query_MetricsQuery_Operator_Equals
+
+// MultiSelectQueryMetricsQueryEquals is a selection for a multi select query.
+type MultiSelectQueryMetricsQueryEquals = dashboards.MultiSelect_Query_MetricsQuery_Equals
+
+// MultiSelectQueryMetricsQueryOperator is a selection for a multi select query.
+type MultiSelectQueryMetricsQueryOperator = dashboards.MultiSelect_Query_MetricsQuery_Operator
+
+// MultiSelectQueryMetricsQueryOperatorNotEquals is a selection for a multi select query.
+type MultiSelectQueryMetricsQueryOperatorNotEquals = dashboards.MultiSelect_Query_MetricsQuery_Operator_NotEquals
+
+// MultiSelectQueryMetricsQueryNotEquals is a selection for a multi select query.
+// MultiSelectQueryMetricsQueryNotEquals is a metrics query operator.
+type MultiSelectQueryMetricsQueryNotEquals = dashboards.MultiSelect_Query_MetricsQuery_NotEquals
+
+// MultiSelectQuerySpansQuery is a spans query.
+type MultiSelectQuerySpansQuery = dashboards.MultiSelect_Query_SpansQuery_
+
+// MultiSelectQuerySpansQueryInner is a spans query inner type.
+type MultiSelectQuerySpansQueryInner = dashboards.MultiSelect_Query_SpansQuery
+
+// MultiSelectQuerySpansQueryType is a spans query type.
+type MultiSelectQuerySpansQueryType = dashboards.MultiSelect_Query_SpansQuery_Type
+
+// MultiSelect_Query_SpansQuery_Type_FieldName_ is a field name for the spans query.
+type MultiSelect_Query_SpansQuery_Type_FieldName_ = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName_
+
+// MultiSelect_Query_SpansQuery_Type_FieldNameInner is a field name for the spans query.
+type MultiSelect_Query_SpansQuery_Type_FieldNameInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName
+
+// MultiSelect_Query_SpansQuery_Type_FieldValue_ is a field value for the spans query.
+type MultiSelect_Query_SpansQuery_Type_FieldValue_ = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue_
+
+// MultiSelect_Query_SpansQuery_Type_FieldValueInner is a field value for the spans query.
+type MultiSelect_Query_SpansQuery_Type_FieldValueInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue
+
+// GaugeMetricsQuery is a gauge metrics query.
+type GaugeMetricsQuery = dashboards.Gauge_MetricsQuery
+
+// DashboardMetricsFilter is a metrics filter.
+type DashboardMetricsFilter = dashboards.Filter_MetricsFilter
+
+// DashboardFilterOperatorEquals is a filter operator.
+type DashboardFilterOperatorEquals = dashboards.Filter_Operator_Equals
+
+// DashboardFilterEquals is a filter operator: equals.
+type DashboardFilterEquals = dashboards.Filter_Equals
+
+// DashboardFilterEqualsSelection is a filter equals selection.
+type DashboardFilterEqualsSelection = dashboards.Filter_Equals_Selection
+
+// DashboardFilterEqualsSelectionList is a filter equals selection list.
+type DashboardFilterEqualsSelectionList = dashboards.Filter_Equals_Selection_List
+
+// DashboardFilterEqualsSelectionListSelection is a filter equals selection list selection.
+type DashboardFilterEqualsSelectionListSelection = dashboards.Filter_Equals_Selection_ListSelection
+
+// DashboardFilterEqualsSelectionAll is a filter equals selection all.
+type DashboardFilterEqualsSelectionAll = dashboards.Filter_Equals_Selection_All
+
+// DashboardFilterEqualsSelectionAllSelection is a filter equals selection all selection.
+type DashboardFilterEqualsSelectionAllSelection = dashboards.Filter_Equals_Selection_AllSelection
+
+// DashboardFilterOperator is a filter operator.
+type DashboardFilterOperator = dashboards.Filter_Operator
+
+// DashboardFilterOperatorNotEquals is a filter operator.
+type DashboardFilterOperatorNotEquals = dashboards.Filter_Operator_NotEquals
+
+// DashboardFilterNotEquals is a filter operator not equals.
+type DashboardFilterNotEquals = dashboards.Filter_NotEquals
+
+// DashboardFilterNotEqualsSelection is a filter not equals selection.
+type DashboardFilterNotEqualsSelection = dashboards.Filter_NotEquals_Selection
+
+// DashboardFilterNotEqualsSelectionList is a filter not equals selection list.
+type DashboardFilterNotEqualsSelectionList = dashboards.Filter_NotEquals_Selection_List
+
+// DashboardFilterNotEqualsSelectionListSelection is a filter not equals selection list selection.
+type DashboardFilterNotEqualsSelectionListSelection = dashboards.Filter_NotEquals_Selection_ListSelection
+
+// DashboardPromQlQuery is a promQL query.
+type DashboardPromQlQuery = dashboards.PromQlQuery
+
+// DashboardLuceneQuery is a lucene query.
+type DashboardLuceneQuery = dashboards.LuceneQuery
+
+// GaugeLogsQuery is a logs query for gauges.
+type GaugeLogsQuery = dashboards.Gauge_LogsQuery
+
+// LogsAggregation is a logs aggregation.
+type LogsAggregation = dashboards.LogsAggregation
+
+type LogsAggregationCount = dashboards.LogsAggregation_Count_
+type LogsAggregationCountInner = dashboards.LogsAggregation_Count
+type LogsAggregationCountDistinct = dashboards.LogsAggregation_CountDistinct_
+type LogsAggregationCountDistinctInner = dashboards.LogsAggregation_CountDistinct
+type LogsAggregationSum = dashboards.LogsAggregation_Sum_
+type LogsAggregationSumInner = dashboards.LogsAggregation_Sum
+type LogsAggregationAverage = dashboards.LogsAggregation_Average_
+type LogsAggregationAverageInner = dashboards.LogsAggregation_Average
+type LogsAggregationMin = dashboards.LogsAggregation_Min_
+type LogsAggregationMinInner = dashboards.LogsAggregation_Min
+type LogsAggregationMax = dashboards.LogsAggregation_Max_
+type LogsAggregationMaxInner = dashboards.LogsAggregation_Max
+type LogsAggregationPercentile = dashboards.LogsAggregation_Percentile_
+type LogsAggregationPercentileInner = dashboards.LogsAggregation_Percentile
+
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
