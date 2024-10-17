@@ -39,7 +39,7 @@ type UpdateScopeRequest = scopes.UpdateScopeRequest
 type DeleteScopeRequest = scopes.DeleteScopeRequest
 
 // Filter is a filter for a scope
-type Filter = scopes.Filter
+type ScopeFilter = scopes.Filter
 
 // EntityTypeValueLookup is an entity type value lookup.
 var EntityTypeValueLookup = scopes.EntityType_value
