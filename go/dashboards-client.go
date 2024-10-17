@@ -121,7 +121,7 @@ const (
 	UnitKbytes       = dashboards.Unit_UNIT_KBYTES
 	UnitMbytes       = dashboards.Unit_UNIT_MBYTES
 	UnitGbytes       = dashboards.Unit_UNIT_GBYTES
-	UnitBytes_iec    = dashboards.Unit_UNIT_BYTES_IEC
+	UnitBytesIec     = dashboards.Unit_UNIT_BYTES_IEC
 	UnitKibytes      = dashboards.Unit_UNIT_KIBYTES
 	UnitMibytes      = dashboards.Unit_UNIT_MIBYTES
 	UnitGibytes      = dashboards.Unit_UNIT_GIBYTES
@@ -150,13 +150,13 @@ const (
 	GaugeUnitKbytes       = dashboards.Gauge_UNIT_KBYTES
 	GaugeUnitMbytes       = dashboards.Gauge_UNIT_MBYTES
 	GaugeUnitGbytes       = dashboards.Gauge_UNIT_GBYTES
-	GaugeUnitBytes_iec    = dashboards.Gauge_UNIT_BYTES_IEC
+	GaugeUnitBytesIec     = dashboards.Gauge_UNIT_BYTES_IEC
 	GaugeUnitKibytes      = dashboards.Gauge_UNIT_KIBYTES
 	GaugeUnitMibytes      = dashboards.Gauge_UNIT_MIBYTES
 	GaugeUnitGibytes      = dashboards.Gauge_UNIT_GIBYTES
-	GaugeUnitEur_cents    = dashboards.Gauge_UNIT_EUR_CENTS
+	GaugeUnitEurCents     = dashboards.Gauge_UNIT_EUR_CENTS
 	GaugeUnitEur          = dashboards.Gauge_UNIT_EUR
-	GaugeUnitUsd_cents    = dashboards.Gauge_UNIT_USD_CENTS
+	GaugeUnitUsdCents     = dashboards.Gauge_UNIT_USD_CENTS
 	GaugeUnitUsd          = dashboards.Gauge_UNIT_USD
 	GaugeUnitCustom       = dashboards.Gauge_UNIT_CUSTOM
 	GaugeUnitPercent01    = dashboards.Gauge_UNIT_PERCENT_ZERO_ONE
@@ -320,6 +320,81 @@ const (
 
 // Annotatin is an annotation for dashboards.
 type Annotation = dashboards.Annotation
+
+// DashboardFilter is a filter for dashboards.
+type DashboardFilter = dashboards.Filter
+
+// MultiSelectSource is a source for multi select.
+type MultiSelectSource = dashboards.MultiSelect_Source
+
+// MultiSelectSourceSpanField is a source for multi select.
+type MultiSelectSourceSpanField = dashboards.MultiSelect_Source_SpanField
+
+// MultiSelectSpanFieldSource is a source for multi select.
+type MultiSelectSpanFieldSource = dashboards.MultiSelect_SpanFieldSource
+
+// MultiSelectSourceConstantList is a source for multi select.
+type MultiSelectSourceConstantList = dashboards.MultiSelect_Source_ConstantList
+
+// MultiSelectConstantListSource is a source for multi select.
+type MultiSelectConstantListSource = dashboards.MultiSelect_ConstantListSource
+
+// MultiSelectSourceMetricLabel is a source for multi select.
+type MultiSelectSourceMetricLabel = dashboards.MultiSelect_Source_MetricLabel
+
+// MultiSelectMetricLabelSource is a source for multi select.
+type MultiSelectMetricLabelSource = dashboards.MultiSelect_MetricLabelSource
+
+// MultiSelectLogsPathSource is a source for multi select.
+type MultiSelectLogsPathSource = dashboards.MultiSelect_LogsPathSource
+
+// MultiSelectSourceLogsPath is a source for multi select.
+type MultiSelectSourceLogsPath = dashboards.MultiSelect_Source_LogsPath
+
+// WidgetDefinitionMarkdown is a widget definition.
+type WidgetDefinitionMarkdown = dashboards.Widget_Definition_Markdown
+
+// WidgetDefinitionHorizontalBarChart is a widget definition.
+type WidgetDefinitionHorizontalBarChart = dashboards.Widget_Definition_HorizontalBarChart
+
+// WidgetDefinitionLineChart is a widget definition.
+type WidgetDefinitionLineChart = dashboards.Widget_Definition_LineChart
+
+// WidgetDefinitionDataTable is a widget definition.
+type WidgetDefinitionDataTable = dashboards.Widget_Definition_DataTable
+
+// WidgetDefinitionGauge is a widget definition.
+type WidgetDefinitionGauge = dashboards.Widget_Definition_Gauge
+
+// WidgetDefinitionPieChart is a widget definition.
+type WidgetDefinitionPieChart = dashboards.Widget_Definition_PieChart
+
+// WidgetDefinitionBarChart is a widget definition.
+type WidgetDefinitionBarChart = dashboards.Widget_Definition_BarChart
+
+// Markdown is a widget definition inner type.
+type Markdown = dashboards.Markdown
+
+// HorizontalBarChart is a widget definition inner type.
+type HorizontalBarChart = dashboards.HorizontalBarChart
+
+// LineChart is a widget definition inner type.
+type LineChart = dashboards.LineChart
+
+// DataTable is a widget definition inner type.
+type DataTable = dashboards.DataTable
+
+// Gauge is a widget definition inner type.
+type Gauge = dashboards.Gauge
+
+// PieChart is a widget definition inner type.
+type PieChart = dashboards.PieChart
+
+// BarChart is a widget definition inner type.
+type BarChart = dashboards.BarChart
+
+// WidgetDefinition is a widget definition.
+type WidgetDefinition = dashboards.Widget_Definition
 
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
