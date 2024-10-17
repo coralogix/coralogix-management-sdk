@@ -396,6 +396,18 @@ type BarChart = dashboards.BarChart
 // WidgetDefinition is a widget definition.
 type WidgetDefinition = dashboards.Widget_Definition
 
+// DashboardRow is a row in a dashboard.
+type DashboardRow = dashboards.Row
+
+// DashboardRowAppearance is the appearance of a row in a dashboard.
+type DashboardRowAppearance = dashboards.Row_Appearance
+
+// DashboardWidget is a widget in a dashboard.
+type DashboardWidget = dashboards.Widget
+
+// DashboardWidgetAppearance is the appearance of a widget in a dashboard.
+type DashboardWidgetAppearance = dashboards.Widget_Appearance
+
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
