@@ -511,20 +511,153 @@ type GaugeLogsQuery = dashboards.Gauge_LogsQuery
 // LogsAggregation is a logs aggregation.
 type LogsAggregation = dashboards.LogsAggregation
 
+// LogsAggregationCount is a logs aggregation type.
 type LogsAggregationCount = dashboards.LogsAggregation_Count_
+
+// LogsAggregationCountInner is a logs aggregation type.
 type LogsAggregationCountInner = dashboards.LogsAggregation_Count
+
+// LogsAggregationCountDistinct is a logs aggregation type.
 type LogsAggregationCountDistinct = dashboards.LogsAggregation_CountDistinct_
+
+// LogsAggregationCountDistinctInner is a logs aggregation type.
 type LogsAggregationCountDistinctInner = dashboards.LogsAggregation_CountDistinct
+
+// LogsAggregationSum is a logs aggregation type.
 type LogsAggregationSum = dashboards.LogsAggregation_Sum_
+
+// LogsAggregationSumInner is a logs aggregation type.
 type LogsAggregationSumInner = dashboards.LogsAggregation_Sum
+
+// LogsAggregationAverage is a logs aggregation type.
 type LogsAggregationAverage = dashboards.LogsAggregation_Average_
+
+// LogsAggregationAverageInner is a logs aggregation type.
 type LogsAggregationAverageInner = dashboards.LogsAggregation_Average
+
+// LogsAggregationMin is a logs aggregation type.
 type LogsAggregationMin = dashboards.LogsAggregation_Min_
+
+// LogsAggregationMinInner is a logs aggregation type.
 type LogsAggregationMinInner = dashboards.LogsAggregation_Min
+
+// LogsAggregationMax is a logs aggregation type.
 type LogsAggregationMax = dashboards.LogsAggregation_Max_
+
+// LogsAggregationMaxInner is a logs aggregation type.
 type LogsAggregationMaxInner = dashboards.LogsAggregation_Max
+
+// LogsAggregationPercentile is a logs aggregation type.
 type LogsAggregationPercentile = dashboards.LogsAggregation_Percentile_
+
+// LogsAggregationPercentileInner is a logs aggregation type.
 type LogsAggregationPercentileInner = dashboards.LogsAggregation_Percentile
+
+// AnnotationSource is an annotation variant.
+type AnnotationSource = dashboards.Annotation_Source
+
+// AnnotationSourceLogs is an annotation variant.
+type AnnotationSourceLogs = dashboards.Annotation_Source_Logs
+
+// AnnotationLogsSourceStrategy is an annotation variant.
+type AnnotationLogsSourceStrategy = dashboards.Annotation_LogsSource_Strategy
+
+// AnnotationSourceSpans is an annotation variant.
+type AnnotationSourceSpans = dashboards.Annotation_Source_Spans
+
+// AnnotationSpansSource is an annotation variant.
+type AnnotationSpansSource = dashboards.Annotation_SpansSource
+
+// AnnotationSpansSourceStrategy is an annotation variant.
+type AnnotationSpansSourceStrategy = dashboards.Annotation_SpansSource_Strategy
+
+// AnnotationSourceMetrics is an annotation variant.
+type AnnotationSourceMetrics = dashboards.Annotation_Source_Metrics
+
+// AnnotationMetricsSource is an annotation variant.
+type AnnotationMetricsSource = dashboards.Annotation_MetricsSource
+
+// AnnotationMetricsSourceStrategy is an annotation variant.
+type AnnotationMetricsSourceStrategy = dashboards.Annotation_MetricsSource_Strategy
+
+// AnnotationSpansSourceStrategyDurationInner is an annotation variant.
+type AnnotationSpansSourceStrategyDurationInner = dashboards.Annotation_SpansSource_Strategy_Duration
+
+// AnnotationSpansSourceStrategyDuration is an annotation variant.
+type AnnotationSpansSourceStrategyDuration = dashboards.Annotation_SpansSource_Strategy_Duration_
+
+// AnnotationSpansSourceStrategyRange is an annotation variant.
+type AnnotationSpansSourceStrategyRange = dashboards.Annotation_SpansSource_Strategy_Range_
+
+// AnnotationSpansSourceStrategyRangeInner is an annotation variant.
+type AnnotationSpansSourceStrategyRangeInner = dashboards.Annotation_SpansSource_Strategy_Range
+
+// AnnotationSpansSourceStrategyInstant is an annotation variant.
+type AnnotationSpansSourceStrategyInstant = dashboards.Annotation_SpansSource_Strategy_Instant_
+
+// AnnotationSpansSourceStrategyInstantInner is an annotation variant.
+type AnnotationSpansSourceStrategyInstantInner = dashboards.Annotation_SpansSource_Strategy_Instant
+
+// AnnotationLogsSourceStrategyDurationInner is an annotation variant.
+type AnnotationLogsSourceStrategyDurationInner = dashboards.Annotation_LogsSource_Strategy_Duration
+
+// AnnotationLogsSourceStrategyDuration is an annotation variant.
+type AnnotationLogsSourceStrategyDuration = dashboards.Annotation_LogsSource_Strategy_Duration_
+
+// AnnotationLogsSourceStrategyRange is an annotation variant.
+type AnnotationLogsSourceStrategyRange = dashboards.Annotation_LogsSource_Strategy_Range_
+
+// AnnotationLogsSourceStrategyRangeInner is an annotation variant.
+type AnnotationLogsSourceStrategyRangeInner = dashboards.Annotation_LogsSource_Strategy_Range
+
+// AnnotationLogsSourceStrategyInstant is an annotation variant.
+type AnnotationLogsSourceStrategyInstant = dashboards.Annotation_LogsSource_Strategy_Instant_
+
+// AnnotationLogsSourceStrategyInstantInner is an annotation variant.
+type AnnotationLogsSourceStrategyInstantInner = dashboards.Annotation_LogsSource_Strategy_Instant
+
+// AnnotationMetricsSourceStartTimeMetric is an annotation variant.
+type AnnotationMetricsSourceStartTimeMetric = dashboards.Annotation_MetricsSource_StartTimeMetric
+
+// AnnotationMetricsSourceStrategyStartTimeMetric is an annotation variant.
+type AnnotationMetricsSourceStrategyStartTimeMetric = dashboards.Annotation_MetricsSource_Strategy_StartTimeMetric
+
+// AnnotationMetricsSourceStrategyRange is an annotation variant.
+type AnnotationMetricsSourceStrategyRange = dashboards.Annotation_MetricsSource_Strategy_Range_
+
+// AnnotationMetricsSourceStrategyRangeInner is an annotation variant.
+type AnnotationMetricsSourceStrategyRangeInner = dashboards.Annotation_MetricsSource_Strategy_Range
+
+// AnnotationMetricsSourceStrategyInstant is an annotation variant.
+type AnnotationMetricsSourceStrategyInstant = dashboards.Annotation_MetricsSource_Strategy_Instant_
+
+// AnnotationMetricsSourceStrategyInstantInner is an annotation variant.
+type AnnotationMetricsSourceStrategyInstantInner = dashboards.Annotation_MetricsSource_Strategy_Instant
+
+// DashboardLayout is a dashboard layout type.
+type DashboardLayout = dashboards.Layout
+
+// DashboardSection is a dashboard layout type.
+type DashboardSection = dashboards.Section
+
+// DashboardSectionOptions is a dashboard layout type.
+type DashboardSectionOptions = dashboards.SectionOptions
+
+// DashboardSectionColor is a dashboard layout type.
+type DashboardSectionColor = dashboards.SectionColor
+
+// DashboardSectionColorPredefined is a dashboard layout type.
+type DashboardSectionColorPredefined = dashboards.SectionColor_Predefined
+
+// DashboardSectionColorPredefinedColor is a dashboard layout type.
+type DashboardSectionColorPredefinedColor = dashboards.SectionPredefinedColor
+
+var (
+	// DashboardSectionPredefinedColorValueLookup is a map of predefined color values to strings.
+	DashboardSectionPredefinedColorValueLookup = dashboards.SectionPredefinedColor_value
+	// DashboardSectionPredefinedColorNameLookup is a map of predefined strings to color values.
+	DashboardSectionPredefinedColorNameLookup = dashboards.SectionPredefinedColor_name
+)
 
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
