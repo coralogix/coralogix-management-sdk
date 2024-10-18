@@ -623,16 +623,16 @@ type AnnotationMetricsSourceStartTimeMetric = dashboards.Annotation_MetricsSourc
 type AnnotationMetricsSourceStrategyStartTimeMetric = dashboards.Annotation_MetricsSource_Strategy_StartTimeMetric
 
 // AnnotationMetricsSourceStrategyRange is an annotation variant.
-type AnnotationMetricsSourceStrategyRange = dashboards.Annotation_MetricsSource_Strategy_Range_
+// type AnnotationMetricsSourceStrategyRange = dashboards.Annotation_MetricsSource_Strategy_Range_
 
-// AnnotationMetricsSourceStrategyRangeInner is an annotation variant.
-type AnnotationMetricsSourceStrategyRangeInner = dashboards.Annotation_MetricsSource_Strategy_Range
+// // AnnotationMetricsSourceStrategyRangeInner is an annotation variant.
+// type AnnotationMetricsSourceStrategyRangeInner = dashboards.Annotation_MetricsSource_Strategy_Range
 
-// AnnotationMetricsSourceStrategyInstant is an annotation variant.
-type AnnotationMetricsSourceStrategyInstant = dashboards.Annotation_MetricsSource_Strategy_Instant_
+// // AnnotationMetricsSourceStrategyInstant is an annotation variant.
+// type AnnotationMetricsSourceStrategyInstant = dashboards.Annotation_MetricsSource_Strategy_Instant_
 
-// AnnotationMetricsSourceStrategyInstantInner is an annotation variant.
-type AnnotationMetricsSourceStrategyInstantInner = dashboards.Annotation_MetricsSource_Strategy_Instant
+// // AnnotationMetricsSourceStrategyInstantInner is an annotation variant.
+// type AnnotationMetricsSourceStrategyInstantInner = dashboards.Annotation_MetricsSource_Strategy_Instant
 
 // DashboardLayout is a dashboard layout type.
 type DashboardLayout = dashboards.Layout
