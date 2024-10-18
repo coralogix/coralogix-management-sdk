@@ -71,31 +71,21 @@ type OutgoingWebhookInputData = webhooks.OutgoingWebhookInputData
 // WebhookType ... is the type of webhook
 type WebhookType = webhooks.WebhookType
 
+// WebhookType values.
 const (
-	// WebhookTypeUnknown is an unknown webhook type.
-	WebhookTypeUnknown = webhooks.WebhookType_UNKNOWN
-	// WebhookTypeGeneric is a generic webhook type.
-	WebhookTypeGeneric = webhooks.WebhookType_GENERIC
-	// WebhookTypeSlack is a Slack webhook type.
-	WebhookTypeSlack = webhooks.WebhookType_SLACK
-	// WebhookTypePagerduty is a PagerDuty webhook type.
-	WebhookTypePagerduty = webhooks.WebhookType_PAGERDUTY
-	// WebhookTypeSendLog is a SendLog webhook type.
-	WebhookTypeSendLog = webhooks.WebhookType_SEND_LOG
-	// WebhookTypeEmailGroup is an EmailGroup webhook type.
-	WebhookTypeEmailGroup = webhooks.WebhookType_EMAIL_GROUP
-	// WebhookTypeMicrosoftTeams is a MicrosoftTeams webhook type.
-	WebhookTypeMicrosoftTeams = webhooks.WebhookType_MICROSOFT_TEAMS
-	// WebhookTypeJira is a Jira webhook type.
-	WebhookTypeJira = webhooks.WebhookType_JIRA
-	// WebhookTypeOpsgenie is an Opsgenie webhook type.
-	WebhookTypeOpsgenie = webhooks.WebhookType_OPSGENIE
-	// WebhookTypeDemisto is a Demisto webhook type.
-	WebhookTypeDemisto = webhooks.WebhookType_DEMISTO
-	// WebhookTypeAwsEventBridge is an AWS EventBridge webhook type.
-	WebhookTypeAwsEventBridge = webhooks.WebhookType_AWS_EVENT_BRIDGE
-	// WebhookTypeIbmEventNotifications is an IBM Event Notifications webhook type.
-	WebhookTypeIbmEventNotifications = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
+	WebhookTypeUnknown                = webhooks.WebhookType_UNKNOWN
+	WebhookTypeGeneric                = webhooks.WebhookType_GENERIC
+	WebhookTypeSlack                  = webhooks.WebhookType_SLACK
+	WebhookTypePagerduty              = webhooks.WebhookType_PAGERDUTY
+	WebhookTypeSendLog                = webhooks.WebhookType_SEND_LOG
+	WebhookTypeEmailGroup             = webhooks.WebhookType_EMAIL_GROUP
+	WebhookTypeMicrosoftTeams         = webhooks.WebhookType_MICROSOFT_TEAMS
+	WebhookTypeMicrosoftTeamsWorkflow = webhooks.WebhookType_MS_TEAMS_WORKFLOW
+	WebhookTypeJira                   = webhooks.WebhookType_JIRA
+	WebhookTypeOpsgenie               = webhooks.WebhookType_OPSGENIE
+	WebhookTypeDemisto                = webhooks.WebhookType_DEMISTO
+	WebhookTypeAwsEventBridge         = webhooks.WebhookType_AWS_EVENT_BRIDGE
+	WebhookTypeIbmEventNotifications  = webhooks.WebhookType_IBM_EVENT_NOTIFICATIONS
 )
 
 // GenericWebhookInputData is a generic webhook input type.
@@ -131,15 +121,18 @@ type AwsEventBridgeWebhookInputData = webhooks.OutgoingWebhookInputData_AwsEvent
 // IbmEventNotificationsWebhookInputData is an IBM Event Notifications webhook input type.
 type IbmEventNotificationsWebhookInputData = webhooks.OutgoingWebhookInputData_IbmEventNotifications
 
+// MsTeamsWorkflowInputData is an MsTeamsWorkflow webhook input type.
+type MsTeamsWorkflowInputData = webhooks.OutgoingWebhookInputData_MsTeamsWorkflow
+
+// MSTeamsWorkflowConfig is an MsTeamsWorkflow webhook config.
+type MSTeamsWorkflowConfig = webhooks.MSTeamsWorkflowConfig
+
+// GenericWebhookConfig values
 const (
-	// GenericWebhookConfigUnknown is an unknown config
 	GenericWebhookConfigUnknown = webhooks.GenericWebhookConfig_UNKNOWN
-	// GenericWebhookConfigGet is a GET request
-	GenericWebhookConfigGet = webhooks.GenericWebhookConfig_GET
-	// GenericWebhookConfigPost is a POST request
-	GenericWebhookConfigPost = webhooks.GenericWebhookConfig_POST
-	// GenericWebhookConfigPut is a PUT request
-	GenericWebhookConfigPut = webhooks.GenericWebhookConfig_PUT
+	GenericWebhookConfigGet     = webhooks.GenericWebhookConfig_GET
+	GenericWebhookConfigPost    = webhooks.GenericWebhookConfig_POST
+	GenericWebhookConfigPut     = webhooks.GenericWebhookConfig_PUT
 )
 
 // GenericWebhookConfig is the configuration for a generic webhook.
@@ -148,23 +141,32 @@ type GenericWebhookConfig = webhooks.GenericWebhookConfig
 // GenericWebhookConfigMethodType is the type of the method.
 type GenericWebhookConfigMethodType = webhooks.GenericWebhookConfig_MethodType
 
+// SlackConfig values
 const (
-	// SlackConfigEmpty is an empty attachment
-	SlackConfigEmpty = webhooks.SlackConfig_EMPTY
-	// SlackConfigMetricSnapshot for metrics
-	SlackConfigMetricSnapshot = webhooks.SlackConfig_METRIC_SNAPSHOT
-	// SlackConfigLogs for logs
-	SlackConfigLogs = webhooks.SlackConfig_LOGS
-	// SlackConfigUnknown unknown digest
-	SlackConfigUnknown = webhooks.SlackConfig_UNKNOWN
-	// SlackConfigErrorAndCriticalLogs for error and critical logs
+	SlackConfigEmpty                = webhooks.SlackConfig_EMPTY
+	SlackConfigMetricSnapshot       = webhooks.SlackConfig_METRIC_SNAPSHOT
+	SlackConfigLogs                 = webhooks.SlackConfig_LOGS
+	SlackConfigUnknown              = webhooks.SlackConfig_UNKNOWN
 	SlackConfigErrorAndCriticalLogs = webhooks.SlackConfig_ERROR_AND_CRITICAL_LOGS
-	// SlackConfigFlowAnomalies for flow anomalies
-	SlackConfigFlowAnomalies = webhooks.SlackConfig_FLOW_ANOMALIES
-	// SlackConfigSpikeAnomalies for spike anomalies
-	SlackConfigSpikeAnomalies = webhooks.SlackConfig_SPIKE_ANOMALIES
-	// SlackConfigDataUsage for data usage
-	SlackConfigDataUsage = webhooks.SlackConfig_DATA_USAGE
+	SlackConfigFlowAnomalies        = webhooks.SlackConfig_FLOW_ANOMALIES
+	SlackConfigSpikeAnomalies       = webhooks.SlackConfig_SPIKE_ANOMALIES
+	SlackConfigDataUsage            = webhooks.SlackConfig_DATA_USAGE
+)
+
+// RPC names.
+const (
+	OutgoingWebhookListOutgoingRPC                       = webhooks.OutgoingWebhooksService_ListOutgoingWebhookTypes_FullMethodName
+	OutgoingWebhookGetOutgoingDetailsRPC                 = webhooks.OutgoingWebhooksService_GetOutgoingWebhookTypeDetails_FullMethodName
+	OutgoingWebhookListRPC                               = webhooks.OutgoingWebhooksService_ListOutgoingWebhooks_FullMethodName
+	OutgoingWebhookListSummaryRPC                        = webhooks.OutgoingWebhooksService_ListOutboundWebhooksSummary_FullMethodName
+	OutgoingWebhookListAllOutgoingWebhooksRPC            = webhooks.OutgoingWebhooksService_ListAllOutgoingWebhooks_FullMethodName
+	OutgoingWebhookGetRPC                                = webhooks.OutgoingWebhooksService_GetOutgoingWebhook_FullMethodName
+	OutgoingWebhookCreateRPC                             = webhooks.OutgoingWebhooksService_CreateOutgoingWebhook_FullMethodName
+	OutgoingWebhookUpdateRPC                             = webhooks.OutgoingWebhooksService_UpdateOutgoingWebhook_FullMethodName
+	OutgoingWebhookDeleteRPC                             = webhooks.OutgoingWebhooksService_DeleteOutgoingWebhook_FullMethodName
+	OutgoingWebhookTestRPC                               = webhooks.OutgoingWebhooksService_TestOutgoingWebhook_FullMethodName
+	OutgoingWebhookTestExistingRPC                       = webhooks.OutgoingWebhooksService_TestExistingOutgoingWebhook_FullMethodName
+	OutgoingWebhookListIbmEventNotificationsInstancesRPC = webhooks.OutgoingWebhooksService_ListIbmEventNotificationsInstances_FullMethodName
 )
 
 // SlackConfigDigest is a config
@@ -232,6 +234,9 @@ type EmailGroupWebhook = webhooks.OutgoingWebhook_EmailGroup
 
 // MicrosoftTeamsWebhook is a MicrosoftTeams webhook.
 type MicrosoftTeamsWebhook = webhooks.OutgoingWebhook_MicrosoftTeams
+
+// MsTeamsWorkflowWebhook is an MsTeamsWorkflow webhook.
+type MsTeamsWorkflowWebhook = webhooks.OutgoingWebhook_MsTeamsWorkflow
 
 // JiraWebhook is a Jira webhook.
 type JiraWebhook = webhooks.OutgoingWebhook_Jira
