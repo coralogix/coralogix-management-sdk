@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
-import "com/coralogixapis/dashboards/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/group.proto";
 import "com/coralogixapis/dashboards/v1/common/group_limit.proto";
 import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
@@ -16,28 +16,25 @@ import "google/protobuf/wrappers.proto";
 
 service ArchiveLogsDataSourceService {
   rpc SearchArchiveLogsTimeSeries(SearchArchiveLogsTimeSeriesRequest) returns (SearchArchiveLogsTimeSeriesResponse) {
-    option (audit_log_description).description = "search archive logs time series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs time series";
   }
   rpc SearchArchiveLogsEvents(SearchArchiveLogsEventsRequest) returns (SearchArchiveLogsEventsResponse) {
-    option (audit_log_description).description = "search archive logs events";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events";
   }
   rpc SearchArchiveLogsEventsCount(SearchArchiveLogsEventsCountRequest) returns (SearchArchiveLogsEventsCountResponse) {
-    option (audit_log_description).description = "search archive logs events count";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events count";
   }
   rpc SearchArchiveLogsEventGroups(SearchArchiveLogsEventGroupsRequest) returns (SearchArchiveLogsEventGroupsResponse) {
-    option (audit_log_description).description = "search archive logs event groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs event groups";
   }
   rpc SearchArchiveGroupedLogsSeries(SearchArchiveGroupedLogsSeriesRequest) returns (SearchArchiveGroupedLogsSeriesResponse) {
-    option (audit_log_description).description = "search archive grouped logs series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs series";
   }
   rpc SearchArchiveGroupedLogsTimeSeries(SearchArchiveGroupedLogsTimeSeriesRequest) returns (SearchArchiveGroupedLogsTimeSeriesResponse) {
-    option (audit_log_description).description = "search archive grouped logs time series";
-  }
-  rpc SearchArchiveLogsTimeValue(SearchArchiveLogsTimeValueRequest) returns (SearchArchiveLogsTimeValueResponse) {
-    option (audit_log_description).description = "search archive logs aggregated value";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs time series";
   }
   rpc SearchArchiveLogsGroupedValues(SearchArchiveLogsGroupedValuesRequest) returns (SearchArchiveLogsGroupedValuesResponse) {
-    option (audit_log_description).description = "search archive logs grouped values";
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs grouped values";
   }
 }
 
@@ -139,19 +136,6 @@ message SearchArchiveGroupedLogsTimeSeriesRequest {
 message SearchArchiveGroupedLogsTimeSeriesResponse {
   common.GroupedSeries series = 1;
   map<string, string> meta = 2;
-}
-
-message SearchArchiveLogsTimeValueRequest {
-  google.protobuf.StringValue widget_id = 1;
-  common.TimeFrame time_frame = 2;
-  google.protobuf.StringValue request_params_hash = 3;
-  common.SerializedDataprimeQuery query = 4;
-  common.DataprimeQuery query_raw = 5;
-  google.protobuf.StringValue aggregation_key = 6;
-}
-
-message SearchArchiveLogsTimeValueResponse {
-  google.protobuf.DoubleValue value = 1;
 }
 
 message SearchArchiveLogsGroupedValuesRequest {

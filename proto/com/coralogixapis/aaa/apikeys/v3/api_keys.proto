@@ -5,6 +5,7 @@ package com.coralogixapis.aaa.apikeys.v3;
 service ApiKeysService {
   rpc CreateApiKey(CreateApiKeyRequest) returns(CreateApiKeyResponse) {};
   rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {};
+  rpc GetSendDataApiKeys(GetSendDataApiKeysRequest) returns (GetSendDataApiKeysResponse) {};
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {};
   rpc UpdateApiKey(UpdateApiKeyRequest) returns (UpdateApiKeyResponse) {};
 }
@@ -29,6 +30,7 @@ message KeyInfo {
   bool hashed = 4;
   KeyPermissions key_permissions = 5;
   optional string value = 6;
+  string id = 7;
 }
 
 message PresetInfo {
@@ -83,4 +85,11 @@ message GetApiKeyRequest {
 
 message GetApiKeyResponse{
   KeyInfo key_info = 1;
+}
+
+message GetSendDataApiKeysRequest {
+}
+
+message GetSendDataApiKeysResponse {
+  repeated KeyInfo keys = 1;
 }

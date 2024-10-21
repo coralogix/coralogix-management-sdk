@@ -348,8 +348,9 @@ message Operator {
   }
 
   message DedupeBy {
-    repeated Expression expressions = 1;
-    Condition condition             = 2;
+    repeated Expression expressions             = 1;
+    Condition condition                         = 2;
+    repeated OrderBy.OrderByExpression order_by = 3;
 
     message Condition {
       oneof condition {

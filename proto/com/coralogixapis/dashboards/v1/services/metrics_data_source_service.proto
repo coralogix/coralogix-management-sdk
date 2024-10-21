@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/ast/annotation.proto";
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
-import "com/coralogixapis/dashboards/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/annotation_event.proto";
 import "com/coralogixapis/dashboards/v1/common/group.proto";
 import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
@@ -17,25 +17,25 @@ import "google/protobuf/wrappers.proto";
 
 service MetricsDataSourceService {
   rpc SearchMetricsTimeSeries(SearchMetricsTimeSeriesRequest) returns (SearchMetricsTimeSeriesResponse) {
-    option (audit_log_description).description = "search time series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search time series";
   }
   rpc SearchMetricsTimeValues(SearchMetricsTimeValuesRequest) returns (SearchMetricsTimeValuesResponse) {
-    option (audit_log_description).description = "search instant values";
+    option (com.coralogix.common.v1.audit_log_description).description = "search instant values";
   }
   rpc SearchMetricsGroupedSeries(SearchMetricsGroupedSeriesRequest) returns (SearchMetricsGroupedSeriesResponse) {
-    option (audit_log_description).description = "search grouped series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search grouped series";
   }
   rpc SearchMetricsGroupedTimeSeries(SearchMetricsGroupedTimeSeriesRequest) returns (SearchMetricsGroupedTimeSeriesResponse) {
-    option (audit_log_description).description = "search grouped time series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search grouped time series";
   }
   rpc SearchMetricsEvents(SearchMetricsEventsRequest) returns (SearchMetricsEventsResponse) {
-    option (audit_log_description).description = "search metrics as events";
+    option (com.coralogix.common.v1.audit_log_description).description = "search metrics as events";
   }
   rpc SearchMetricsAnnotationEvents(SearchMetricsAnnotationEventsRequest) returns (SearchMetricsAnnotationEventsResponse) {
-    option (audit_log_description).description = "search metrics annotation events";
+    option (com.coralogix.common.v1.audit_log_description).description = "search metrics annotation events";
   }
   rpc SearchMetricsGroupedValues(SearchMetricsGroupedValuesRequest) returns (SearchMetricsGroupedValuesResponse) {
-    option (audit_log_description).description = "search spans grouped values";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped values";
   }
 }
 
