@@ -46,6 +46,9 @@ type UnpinDashboardRequest = dashboards.UnpinDashboardRequest
 // DashboardFolderPath is a dashboard folder path.
 type DashboardFolderPath = dashboards.Dashboard_FolderPath
 
+// DashboardFolderPath is a dashboard folder id.
+type DashboardFolderID = dashboards.Dashboard_FolderId
+
 // FolderPath is a dashboard folder path.
 type FolderPath = dashboards.FolderPath
 
@@ -57,15 +60,19 @@ type RowStyle = dashboards.RowStyle
 
 // RowStyle values.
 const (
-	RowStyleOneLine   = dashboards.RowStyle_ROW_STYLE_ONE_LINE
-	RowStyleTwoLine   = dashboards.RowStyle_ROW_STYLE_TWO_LINE
-	RowStyleCondensed = dashboards.RowStyle_ROW_STYLE_CONDENSED
-	RowStyleJson      = dashboards.RowStyle_ROW_STYLE_JSON
-	RowStyleList      = dashboards.RowStyle_ROW_STYLE_LIST
+	RowStyleOneLine     = dashboards.RowStyle_ROW_STYLE_ONE_LINE
+	RowStyleTwoLine     = dashboards.RowStyle_ROW_STYLE_TWO_LINE
+	RowStyleCondensed   = dashboards.RowStyle_ROW_STYLE_CONDENSED
+	RowStyleJson        = dashboards.RowStyle_ROW_STYLE_JSON
+	RowStyleList        = dashboards.RowStyle_ROW_STYLE_LIST
+	RowStyleUnspecified = dashboards.RowStyle_ROW_STYLE_UNSPECIFIED
 )
 
-// LegendColumn is the column type for the legends.
-type LegendColumn = dashboards.Legend_LegendColumn
+// DashboardLegend is the type for the legends.
+type DashboardLegend = dashboards.Legend
+
+// DashboardLegendColumn is the column type for the legends.
+type DashboardLegendColumn = dashboards.Legend_LegendColumn
 
 // LegendColumn values.
 const (
@@ -78,14 +85,29 @@ const (
 	LegendColumnName        = dashboards.Legend_LEGEND_COLUMN_NAME
 )
 
+type LegendPlacement = dashboards.Legend_LegendPlacement
+
+// LegendPlacement values.
+const (
+	LegendPlacementUnspecified = dashboards.Legend_LEGEND_PLACEMENT_UNSPECIFIED
+	LegendPlacementAuto        = dashboards.Legend_LEGEND_PLACEMENT_AUTO
+	LegendPlacementBottom      = dashboards.Legend_LEGEND_PLACEMENT_BOTTOM
+	LegendPlacementSide        = dashboards.Legend_LEGEND_PLACEMENT_SIDE
+	LegendPlacementHidden      = dashboards.Legend_LEGEND_PLACEMENT_HIDDEN
+)
+
 // OrderDirection is the sorting direction
 type OrderDirection = dashboards.OrderDirection
 
 // OrderDirection values.
 const (
-	OderDirectionAsc  = dashboards.OrderDirection_ORDER_DIRECTION_ASC
-	OderDirectionDesc = dashboards.OrderDirection_ORDER_DIRECTION_DESC
+	OrderDirectionAsc         = dashboards.OrderDirection_ORDER_DIRECTION_ASC
+	OrderDirectionDesc        = dashboards.OrderDirection_ORDER_DIRECTION_DESC
+	OrderDirectionUnspecified = dashboards.OrderDirection_ORDER_DIRECTION_UNSPECIFIED
 )
+
+// LineChartTooltip is a tooltip for the line chart.
+type LineChartTooltip = dashboards.LineChart_Tooltip
 
 // LineChartTooltipType is the type of the line chart tooltip.
 type LineChartTooltipType = dashboards.LineChart_TooltipType
@@ -173,6 +195,36 @@ const (
 	PieChartLabelSourceStack       = dashboards.PieChart_LABEL_SOURCE_STACK
 )
 
+// PieChartLabelDefinition is a label definition type.
+type PieChartLabelDefinition = dashboards.PieChart_LabelDefinition
+
+// PieChartStackDefinition is a stack definition type.
+type PieChartStackDefinition = dashboards.PieChart_StackDefinition
+
+// BarChartStackDefinition is a stack definition type.
+type BarChartStackDefinition = dashboards.BarChart_StackDefinition
+
+// BarChartDataprimeQuery is a type for bar chart data prime query.
+type BarChartDataprimeQuery = dashboards.BarChart_DataprimeQuery
+
+// HorizontalBarChartLabelSource is the source of the labels for the horizontal bar chart.
+type HorizontalBarChartStackDefinition = dashboards.HorizontalBarChart_StackDefinition
+
+// SpansAggregation is a type for spans aggregation.
+type SpansAggregation = dashboards.SpansAggregation
+
+// SpansAggregation_MetricAggregation_
+type SpansAggregationMetricAggregation = dashboards.SpansAggregation_MetricAggregation_
+
+// SpansAggregationMetricAggregationInner is a type for spans aggregation metric aggregation.
+type SpansAggregationMetricAggregationInner = dashboards.SpansAggregation_MetricAggregation
+
+// SpansAggregation_MetricAggregation_
+type SpansAggregationDimensionAggregation = dashboards.SpansAggregation_DimensionAggregation_
+
+// SpansAggregationDimensionAggregationInner is a type for spans aggregation metric aggregation.
+type SpansAggregationDimensionAggregationInner = dashboards.SpansAggregation_DimensionAggregation
+
 // SpansAggregationDimensionAggregationDimensionField is a type for spans aggregation dimension aggregation dimension field.
 type SpansAggregationDimensionAggregationDimensionField = dashboards.SpansAggregation_DimensionAggregation_DimensionField
 
@@ -205,6 +257,9 @@ const (
 	SpansAggregationMetricAggregationMetricFieldUnspecified = dashboards.SpansAggregation_MetricAggregation_METRIC_FIELD_UNSPECIFIED
 	SpansAggregationMetricAggregationMetricFieldDuration    = dashboards.SpansAggregation_MetricAggregation_METRIC_FIELD_DURATION
 )
+
+// UUID is a type wrapper for UUID.
+type UUID = dashboards.UUID
 
 // GaugeQueryMetrics is a type for gauge query for metrics.
 type GaugeQueryMetrics = dashboards.Gauge_Query_Metrics
@@ -256,9 +311,6 @@ const (
 	SortByTypeName        = dashboards.SortByType_SORT_BY_TYPE_NAME
 )
 
-// SpanFieldMetadataField is the type for span field metadata field.
-type SpanFieldMetadataField = dashboards.SpanField_MetadataField
-
 // SpanFieldMetadataField values.
 const (
 	SpanFieldMetadataFieldUnspecified     = dashboards.SpanField_METADATA_FIELD_UNSPECIFIED
@@ -298,6 +350,9 @@ const (
 	DataModeTypeArchive         = dashboards.DataModeType_DATA_MODE_TYPE_ARCHIVE
 )
 
+// GaugeThreshold is the type for gauge threshold.
+type GaugeThreshold = dashboards.Gauge_Threshold
+
 // GaugeThresholdBy is the type for gauge threshold by.
 type GaugeThresholdBy = dashboards.Gauge_ThresholdBy
 
@@ -324,8 +379,65 @@ type Annotation = dashboards.Annotation
 // DashboardFilter is a filter for dashboards.
 type DashboardFilter = dashboards.Filter
 
+// DashboardFilterSource is a filter source for dashboards.
+type DashboardFilterSource = dashboards.Filter_Source
+
+// DashboardFilterSourceSpans is a filter source for dashboards.
+type DashboardFilterSourceSpans = dashboards.Filter_Source_Spans
+
+// DashboardFilterSourceLogs is a filter source for dashboards.
+type DashboardFilterSourceLogs = dashboards.Filter_Source_Logs
+
+// DashboardFilterSourceMetrics is a filter source for dashboards.
+type DashboardFilterSourceMetrics = dashboards.Filter_Source_Metrics
+
+// DashboardFilterSpansFilter is a filter type.
+type DashboardFilterSpansFilter = dashboards.Filter_SpansFilter
+
+// DashboardFilterLogsFilter is a filter type.
+type DashboardFilterLogsFilter = dashboards.Filter_LogsFilter
+
+// DashboardFilterMetricsFilter is a filter type.
+type DashboardFilterMetricsFilter = dashboards.Filter_MetricsFilter
+
+// SpanField is a filter type.
+type SpanField = dashboards.SpanField
+
+// SpanFieldMetadataField is the type for span field metadata field.
+type SpanFieldMetadataField = dashboards.SpanField_MetadataField_
+
+// SpanFieldMetadataFieldInner is the type for span field metadata field.
+type SpanFieldMetadataFieldInner = dashboards.SpanField_MetadataField
+
+// SpanFieldTagField is a tag field type for spans.
+type SpanFieldTagField = dashboards.SpanField_TagField
+
+// SpanFieldProcessTagField is a tag field type for spans.
+type SpanFieldProcessTagField = dashboards.SpanField_ProcessTagField
+
+// MultiSelectValueDisplayOptions is a type for display options.
+type MultiSelectValueDisplayOptions = dashboards.MultiSelect_ValueDisplayOptions
+
 // MultiSelectSource is a source for multi select.
 type MultiSelectSource = dashboards.MultiSelect_Source
+
+// MultiSelectSourceQuery is a source for multi select.
+type MultiSelectSourceQuery = dashboards.MultiSelect_Source_Query
+
+// MultiSelectQuery is a query type for multi select.
+type MultiSelectQuery = dashboards.MultiSelect_Query
+
+// MultiSelectQuerySource is a source for multi select.
+type MultiSelectQuerySource = dashboards.MultiSelect_QuerySource
+
+// MultiSelectQueryLogsQuery is a query type for multi select.
+type MultiSelectQueryLogsQuery = dashboards.MultiSelect_Query_LogsQuery_
+
+// MultiSelectQueryLogsQueryInner is a query type for multi select.
+type MultiSelectQueryLogsQueryInner = dashboards.MultiSelect_Query_LogsQuery
+
+// MultiSelectQueryLogsQueryType is a query type for multi select.
+type MultiSelectQueryLogsQueryType = dashboards.MultiSelect_Query_LogsQuery_Type
 
 // MultiSelectSourceSpanField is a source for multi select.
 type MultiSelectSourceSpanField = dashboards.MultiSelect_Source_SpanField
@@ -408,6 +520,15 @@ type DashboardWidget = dashboards.Widget
 // DashboardWidgetAppearance is the appearance of a widget in a dashboard.
 type DashboardWidgetAppearance = dashboards.Widget_Appearance
 
+// MultiSelectQueryMetricsQueryStringOrVariable is a query string type.
+type MultiSelectQueryMetricsQueryStringOrVariable = dashboards.MultiSelect_Query_MetricsQuery_StringOrVariable
+
+// MultiSelectQueryMetricsQueryStringOrVariableString is a string query type.
+type MultiSelectQueryMetricsQueryStringOrVariableString = dashboards.MultiSelect_Query_MetricsQuery_StringOrVariable_StringValue
+
+// MultiSelectQueryMetricsQueryStringOrVariableVariable is a variable query type.
+type MultiSelectQueryMetricsQueryStringOrVariableVariable = dashboards.MultiSelect_Query_MetricsQuery_StringOrVariable_VariableName
+
 // MultiSelectQueryMetricsQuerySelection is a selection for a multi select query.
 type MultiSelectQueryMetricsQuerySelection = dashboards.MultiSelect_Query_MetricsQuery_Selection
 
@@ -442,17 +563,59 @@ type MultiSelectQuerySpansQueryInner = dashboards.MultiSelect_Query_SpansQuery
 // MultiSelectQuerySpansQueryType is a spans query type.
 type MultiSelectQuerySpansQueryType = dashboards.MultiSelect_Query_SpansQuery_Type
 
-// MultiSelect_Query_SpansQuery_Type_FieldName_ is a field name for the spans query.
-type MultiSelect_Query_SpansQuery_Type_FieldName_ = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName_
+// MultiSelectQuerySpansQueryTypeFieldName is a field name for the spans query.
+type MultiSelectQuerySpansQueryTypeFieldName = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName_
 
-// MultiSelect_Query_SpansQuery_Type_FieldNameInner is a field name for the spans query.
-type MultiSelect_Query_SpansQuery_Type_FieldNameInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName
+// MultiSelectQuerySpansQueryTypeFieldNameInner is a field name for the spans query.
+type MultiSelectQuerySpansQueryTypeFieldNameInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldName
 
-// MultiSelect_Query_SpansQuery_Type_FieldValue_ is a field value for the spans query.
-type MultiSelect_Query_SpansQuery_Type_FieldValue_ = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue_
+// MultiSelectQuerySpansQueryTypeFieldValue is a field value for the spans query.
+type MultiSelectQuerySpansQueryTypeFieldValue = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue_
 
-// MultiSelect_Query_SpansQuery_Type_FieldValueInner is a field value for the spans query.
-type MultiSelect_Query_SpansQuery_Type_FieldValueInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue
+// MultiSelectQuerySpansQueryTypeFieldValueInner is a field value for the spans query.
+type MultiSelectQuerySpansQueryTypeFieldValueInner = dashboards.MultiSelect_Query_SpansQuery_Type_FieldValue
+
+// MultiSelectQueryLogsQueryTypeFieldName is a field name for the logs query.
+type MultiSelectQueryLogsQueryTypeFieldName = dashboards.MultiSelect_Query_LogsQuery_Type_FieldName_
+
+// MultiSelectQueryLogsQueryTypeFieldNameInner is a field name for the logs query.
+type MultiSelectQueryLogsQueryTypeFieldNameInner = dashboards.MultiSelect_Query_LogsQuery_Type_FieldName
+
+// MultiSelectQueryLogsQueryTypeFieldValue is a field value for the logs query.
+type MultiSelectQueryLogsQueryTypeFieldValue = dashboards.MultiSelect_Query_LogsQuery_Type_FieldValue_
+
+// MultiSelectQueryLogsQueryTypeFieldValueInner is a field value for the logs query.
+type MultiSelectQueryLogsQueryTypeFieldValueInner = dashboards.MultiSelect_Query_LogsQuery_Type_FieldValue
+
+// MultiSelectQueryMetricsQuery is a metrics query.
+type MultiSelectQueryMetricsQuery = dashboards.MultiSelect_Query_MetricsQuery_
+
+// MultiSelectQueryMetricsQueryInner is a metrics query.
+type MultiSelectQueryMetricsQueryInner = dashboards.MultiSelect_Query_MetricsQuery
+
+// MultiSelectQueryMetricsQueryType is a metrics query.
+type MultiSelectQueryMetricsQueryType = dashboards.MultiSelect_Query_MetricsQuery_Type
+
+// MultiSelectQueryMetricsQueryTypeMetricName is a field name for the metrics query.
+type MultiSelectQueryMetricsQueryTypeMetricName = dashboards.MultiSelect_Query_MetricsQuery_Type_MetricName_
+
+// MultiSelectQueryMetricsQueryTypeMetricNameInner is a field name for the metrics query.
+type MultiSelectQueryMetricsQueryTypeMetricNameInner = dashboards.MultiSelect_Query_MetricsQuery_Type_MetricName
+
+// MultiSelectQueryMetricsQueryTypeMetricValue is a field value for the metrics query.
+type MultiSelectQueryMetricsQueryTypeLabelValue = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelValue_
+
+// MultiSelectQueryMetricsQueryTypeLabelValueInner is a field value for the metrics query.
+type MultiSelectQueryMetricsQueryTypeLabelValueInner = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelValue
+
+// MultiSelectQueryMetricsQueryTypeMetricName is a field value for the metrics query.
+type MultiSelectQueryMetricsQueryTypeLabelName = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelName_
+
+// MultiSelectQueryMetricsQueryTypeLabelNameInner is a field value for the metrics query.
+type MultiSelectQueryMetricsQueryTypeLabelNameInner = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelName
+
+// MultiSelectQueryMetricsQueryMetricsLabelFilter is a metrics query label filter.
+type MultiSelectQueryMetricsQueryMetricsLabelFilter = dashboards.MultiSelect_Query_MetricsQuery_MetricsLabelFilter
 
 // GaugeMetricsQuery is a gauge metrics query.
 type GaugeMetricsQuery = dashboards.Gauge_MetricsQuery
@@ -559,6 +722,9 @@ type AnnotationSource = dashboards.Annotation_Source
 // AnnotationSourceLogs is an annotation variant.
 type AnnotationSourceLogs = dashboards.Annotation_Source_Logs
 
+// AnnotationLogsSource is an annotation variant.
+type AnnotationLogsSource = dashboards.Annotation_LogsSource
+
 // AnnotationLogsSourceStrategy is an annotation variant.
 type AnnotationLogsSourceStrategy = dashboards.Annotation_LogsSource_Strategy
 
@@ -643,6 +809,12 @@ type DashboardSection = dashboards.Section
 // DashboardSectionOptions is a dashboard layout type.
 type DashboardSectionOptions = dashboards.SectionOptions
 
+// DashboardSectionOptionsCustom is a customizable dashboard layout option.
+type DashboardSectionOptionsCustom = dashboards.SectionOptions_Custom
+
+// CustomSectionOptions is a type for customizing section options.
+type CustomSectionOptions = dashboards.CustomSectionOptions
+
 // DashboardSectionColor is a dashboard layout type.
 type DashboardSectionColor = dashboards.SectionColor
 
@@ -658,6 +830,236 @@ var (
 	// DashboardSectionPredefinedColorNameLookup is a map of predefined strings to color values.
 	DashboardSectionPredefinedColorNameLookup = dashboards.SectionPredefinedColor_name
 )
+
+// DashboardTwoMinutes is a auto refresh setting
+type DashboardTwoMinutes = dashboards.Dashboard_TwoMinutes
+
+// DashboardAutoRefreshTwoMinutes is a auto refresh setting
+type DashboardAutoRefreshTwoMinutes = dashboards.Dashboard_AutoRefreshTwoMinutes
+
+// DashboardFiveMinutes is a auto refresh setting
+type DashboardFiveMinutes = dashboards.Dashboard_FiveMinutes
+
+// DashboardAutoRefreshFiveMinutes is a auto refresh setting
+type DashboardAutoRefreshFiveMinutes = dashboards.Dashboard_AutoRefreshFiveMinutes
+
+// DashboardOff is a auto refresh setting
+type DashboardOff = dashboards.Dashboard_Off
+
+// DashboardAutoRefreshOff is a auto refresh setting
+type DashboardAutoRefreshOff = dashboards.Dashboard_AutoRefreshOff
+
+// HorizontalBarChartYAxisViewBy is a type for the horizontal bar chart y axis.
+type HorizontalBarChartYAxisViewBy = dashboards.HorizontalBarChart_YAxisViewBy
+
+// HorizontalBarChartYAxisViewByCategory is a type for the horizontal bar chart y axis.
+type HorizontalBarChartYAxisViewByCategory = dashboards.HorizontalBarChart_YAxisViewBy_Category
+
+// HorizontalBarChartYAxisViewByValue is a type for the horizontal bar chart y axis.
+type HorizontalBarChartYAxisViewByValue = dashboards.HorizontalBarChart_YAxisViewBy_Value
+
+// BarChartXAxis is a type for the  bar chart x axis.
+type BarChartXAxis = dashboards.BarChart_XAxis
+
+// BarChartXAxisTime is a type for the  bar chart x axis.
+type BarChartXAxisTime = dashboards.BarChart_XAxis_Time
+
+// BarChartXAxisValue is a type for the  bar chart x axis.
+type BarChartXAxisValue = dashboards.BarChart_XAxis_Value
+
+// BarChartXAxisByTime is a type for the  bar chart x axis.
+type BarChartXAxisByTime = dashboards.BarChart_XAxis_XAxisByTime
+
+// BarChartXAxisByValue is a type for the  bar chart x axis.
+type BarChartXAxisByValue = dashboards.BarChart_XAxis_XAxisByValue
+
+// BarChartQuery is a type for bar chart data.
+type BarChartQuery = dashboards.BarChart_Query
+
+// BarChartQueryLogs is a type for bar chart data.
+type BarChartQueryLogs = dashboards.BarChart_Query_Logs
+
+// BarChartQueryMetrics is a type for bar chart data.
+type BarChartQueryMetrics = dashboards.BarChart_Query_Metrics
+
+// BarChartQuerySpans is a type for bar chart data.
+type BarChartQuerySpans = dashboards.BarChart_Query_Spans
+
+// BarChartQueryDataprime is a type for bar chart data.
+type BarChartQueryDataprime = dashboards.BarChart_Query_Dataprime
+
+// HorizontalBarChartQuery is a type for bar chart data.
+type HorizontalBarChartQuery = dashboards.HorizontalBarChart_Query
+
+// HorizontalBarChartQueryLogs is a type for bar chart data.
+type HorizontalBarChartQueryLogs = dashboards.HorizontalBarChart_Query_Logs
+
+// HorizontalBarChartQueryMetrics is a type for bar chart data.
+type HorizontalBarChartQueryMetrics = dashboards.HorizontalBarChart_Query_Metrics
+
+// HorizontalBarChartQuerySpans is a type for bar chart data.
+type HorizontalBarChartQuerySpans = dashboards.HorizontalBarChart_Query_Spans
+
+// HorizontalBarChartQueryDataprime is a type for bar chart data.
+type HorizontalBarChartQueryDataprime = dashboards.HorizontalBarChart_Query_Dataprime
+
+// HorizontalBarChartLogsQuery is a type for bar chart data.
+type HorizontalBarChartLogsQuery = dashboards.HorizontalBarChart_LogsQuery
+
+// HorizontalBarChartMetricsQuery is a type for bar chart data.
+type HorizontalBarChartMetricsQuery = dashboards.HorizontalBarChart_MetricsQuery
+
+// HorizontalBarChartSpansQuery is a type for bar chart data.
+type HorizontalBarChartSpansQuery = dashboards.HorizontalBarChart_SpansQuery
+
+// BarChartLogsQuery is a type for data in bar chart.
+type BarChartLogsQuery = dashboards.BarChart_LogsQuery
+
+// BarChartMetricsQuery is a type for data in bar chart.
+type BarChartMetricsQuery = dashboards.BarChart_MetricsQuery
+
+// BarChartSpansQuery is a type for data in bar chart.
+type BarChartSpansQuery = dashboards.BarChart_SpansQuery
+
+// ObservationField is a type for data in bar chart.
+type ObservationField = dashboards.ObservationField
+
+// DashboardsColorsBy is a type for dashboard coloring.
+type DashboardsColorsBy = dashboards.ColorsBy
+
+// DashboardsColorsByStack is a type for dashboard coloring.
+type DashboardsColorsByStack = dashboards.ColorsBy_Stack
+
+// DashboardsColorsByGroupBy is a type for dashboard coloring.
+type DashboardsColorsByGroupBy = dashboards.ColorsBy_GroupBy
+
+// DashboardsColorsByAggregation is a type for dashboard coloring.
+type DashboardsColorsByAggregation = dashboards.ColorsBy_Aggregation
+
+// DashboardsColorsByStackInner is a type for dashboard coloring.
+type DashboardsColorsByStackInner = dashboards.ColorsBy_ColorsByStack
+
+// DashboardsColorsByGroupByInner is a type for dashboard coloring.
+type DashboardsColorsByGroupByInner = dashboards.ColorsBy_ColorsByGroupBy
+
+// DashboardsColorsByAggregationInner is a type for dashboard coloring.
+type DashboardsColorsByAggregationInner = dashboards.ColorsBy_ColorsByAggregation
+
+// PieChartQuery is a type for data for charts.
+type PieChartQuery = dashboards.PieChart_Query
+
+// PieChartQueryDataprime is a type for data for charts.
+type PieChartQueryDataprime = dashboards.PieChart_Query_Dataprime
+
+// PieChartDataprimeQuery is a type for data for charts.
+type PieChartDataprimeQuery = dashboards.PieChart_DataprimeQuery
+
+// DashboardDataprimeQuery is a type for data for charts.
+type DashboardDataprimeQuery = dashboards.DataprimeQuery
+
+// PieChartQuerySpans is a type for data for charts.
+type PieChartQuerySpans = dashboards.PieChart_Query_Spans
+
+// PieChartSpansQuery is a type for data for charts.
+type PieChartSpansQuery = dashboards.PieChart_SpansQuery
+
+// PieChartQueryMetrics is a type for data for charts.
+type PieChartQueryMetrics = dashboards.PieChart_Query_Metrics
+
+// PieChartMetricsQuery is a type for data for charts.
+type PieChartMetricsQuery = dashboards.PieChart_MetricsQuery
+
+// PieChartQueryLogs is a type for data for charts.
+type PieChartQueryLogs = dashboards.PieChart_Query_Logs
+
+// PieChartLogsQuery is a type for data for charts.
+type PieChartLogsQuery = dashboards.PieChart_LogsQuery
+
+// DashboardVariable is a type for data for charts.
+type DashboardVariable = dashboards.Variable
+
+// DashboardConstant is a type for data for charts.
+type DashboardConstant = dashboards.Constant
+
+// DashboardMultiSelect is a type for data for charts.
+type DashboardMultiSelect = dashboards.MultiSelect
+
+// DashboardMultiSelectSource is a type for data for charts.
+type DashboardMultiSelectSource = dashboards.MultiSelect_Source
+
+// DashboardMultiSelectSelectionAll is a type for data for charts.
+type DashboardMultiSelectSelectionAll = dashboards.MultiSelect_Selection_All
+
+// DashboardMultiSelectAllSelection is a type for data for charts.
+type DashboardMultiSelectAllSelection = dashboards.MultiSelect_Selection_AllSelection
+
+// DashboardMultiSelectSelectionList is a type for data for charts.
+type DashboardMultiSelectSelectionList = dashboards.MultiSelect_Selection_List
+
+// DashboardMultiSelectListSelection is a type for data for charts.
+type DashboardMultiSelectListSelection = dashboards.MultiSelect_Selection_ListSelection
+
+// DashboardMultiSelectSelection is a type for data for charts.
+type DashboardMultiSelectSelection = dashboards.MultiSelect_Selection
+
+// DashboardVariableDefinition is a type for data for charts.
+type DashboardVariableDefinition = dashboards.Variable_Definition
+
+// DashboardVariableDefinitionConstant is a type for data for charts.
+type DashboardVariableDefinitionConstant = dashboards.Variable_Definition_Constant
+
+// DashboardVariableDefinitionMultiSelect is a type for data for charts.
+type DashboardVariableDefinitionMultiSelect = dashboards.Variable_Definition_MultiSelect
+
+// LineChartQuery is a type for data for charts.
+type LineChartQuery = dashboards.LineChart_Query
+
+// LineChartQueryDefinition is a type for data for charts.
+type LineChartQueryDefinition = dashboards.LineChart_QueryDefinition
+
+// LineChartResolution is a type for data for charts.
+type LineChartResolution = dashboards.LineChart_Resolution
+
+// LineChartQueryLogs is a type for data for charts.
+type LineChartQueryLogs = dashboards.LineChart_Query_Logs
+
+// LineChartLogsQuery is a type for data for charts.
+type LineChartLogsQuery = dashboards.LineChart_LogsQuery
+
+// LineChartQueryDataprime is a type for data for charts.
+type LineChartQueryDataprime = dashboards.LineChart_Query_Dataprime
+
+// LineChartQueryMetrics is a type for data for charts.
+type LineChartQueryMetrics = dashboards.LineChart_Query_Metrics
+
+// LineChartMetricsQuery is a type for data for charts.
+type LineChartMetricsQuery = dashboards.LineChart_MetricsQuery
+
+// LineChartQuerySpans is a type for data for charts.
+type LineChartQuerySpans = dashboards.LineChart_Query_Spans
+
+// LineChartSpansQuery is a type for data for charts.
+type LineChartSpansQuery = dashboards.LineChart_SpansQuery
+
+type DashboardDataTable = dashboards.DataTable
+type DashboardDataTableQuery = dashboards.DataTable_Query
+type DashboardDataTableQueryDataprime = dashboards.DataTable_Query_Dataprime
+type DashboardDataTableDataprimeQuery = dashboards.DataTable_DataprimeQuery
+type DashboardDataTableQueryMetrics = dashboards.DataTable_Query_Metrics
+type DashboardDataTableMetricsQuery = dashboards.DataTable_MetricsQuery
+type DashboardDataTableQueryLogs = dashboards.DataTable_Query_Logs
+type DashboardDataTableLogsQuery = dashboards.DataTable_LogsQuery
+type DashboardDataTableLogsQueryGrouping = dashboards.DataTable_LogsQuery_Grouping
+type DashboardDataTableLogsQueryAggregation = dashboards.DataTable_LogsQuery_Aggregation
+type DashboardDataTableQuerySpans = dashboards.DataTable_Query_Spans
+type DashboardDataTableSpansQuery = dashboards.DataTable_SpansQuery
+type DashboardDataTableSpansQueryGrouping = dashboards.DataTable_SpansQuery_Grouping
+type DashboardDataTableSpansQueryAggregation = dashboards.DataTable_SpansQuery_Aggregation
+type DashboardDataTableColumn = dashboards.DataTable_Column
+type DashboardRelativeTimeFrame = dashboards.Dashboard_RelativeTimeFrame
+type DashboardAbsoluteTimeFrame = dashboards.Dashboard_AbsoluteTimeFrame
+type DashboardTimeFrame = dashboards.TimeFrame
+type DashboardOrderingField = dashboards.OrderingField
 
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
