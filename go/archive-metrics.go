@@ -37,6 +37,12 @@ type GetTenantConfigRequest = archiveMetrics.GetTenantConfigRequest
 // ConfigureTenantRequestS3 is a request to configure the tenant with S3.
 type ConfigureTenantRequestS3 = archiveMetrics.ConfigureTenantRequest_S3
 
+// ConfigureTenantRequestIbm is a request to configure the tenant with Ibm.
+type ConfigureTenantRequestIbm = archiveMetrics.ConfigureTenantRequest_Ibm
+
+// ArchiveIbmConfigV2 is an Ibm configuration for the archive.
+type ArchiveIbmConfigV2 = archiveMetrics.IbmConfigV2
+
 // ArchiveS3Config is an S3 configuration for the archive.
 type ArchiveS3Config = archiveMetrics.S3Config
 
@@ -58,8 +64,21 @@ type TenantConfigV2S3 = archiveMetrics.TenantConfigV2_S3
 // TenantConfigV2Ibm is a type to view the IBM storage config.
 type TenantConfigV2Ibm = archiveMetrics.TenantConfigV2_Ibm
 
+// TenantConfigV2 is a type to configure the tenant.
+type TenantConfigV2 = archiveMetrics.TenantConfigV2
+
 // RetentionPolicyRequest is a request to set the retention policy.
 type RetentionPolicyRequest = archiveMetrics.RetentionPolicyRequest
+
+// RPC names.
+const (
+	ArchiveMetricsConfigureTenantRPC = archiveMetrics.MetricsConfiguratorPublicService_ConfigureTenant_FullMethodName
+	ArchiveMetricsUpdateRPC          = archiveMetrics.MetricsConfiguratorPublicService_Update_FullMethodName
+	ArchiveMetricsValidateBucketRPC  = archiveMetrics.MetricsConfiguratorPublicService_ValidateBucket_FullMethodName
+	ArchiveMetricsGetTenantConfigRPC = archiveMetrics.MetricsConfiguratorPublicService_GetTenantConfig_FullMethodName
+	ArchiveMetricsEnableArchiveRPC   = archiveMetrics.MetricsConfiguratorPublicService_EnableArchive_FullMethodName
+	ArchiveMetricsDisableArchiveRPC  = archiveMetrics.MetricsConfiguratorPublicService_DisableArchive_FullMethodName
+)
 
 // ArchiveMetricsClient is a client for the Coralogix Archive Metrics API.
 type ArchiveMetricsClient struct {

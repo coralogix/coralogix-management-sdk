@@ -32,6 +32,22 @@ type S3TargetSpec = archiveLogs.S3TargetSpec
 // SetTargetRequestIbmCos is a request to set the archive logs target to IBM COS.
 type SetTargetRequestIbmCos = archiveLogs.SetTargetRequest_IbmCos
 
+// Target is a target for storing archive logs.
+type Target = archiveLogs.Target
+
+// TargetS3 is a S3 target for storing archive logs.
+type TargetS3 = archiveLogs.Target_S3
+
+// TargetIbmCos is an IBM COS target for storing archive logs.
+type TargetIbmCos = archiveLogs.Target_IbmCos
+
+// RPC names.
+const (
+	ArchiveLogsGetTargetRPC      = archiveLogs.TargetService_GetTarget_FullMethodName
+	ArchiveLogsSetTargetRPC      = archiveLogs.TargetService_SetTarget_FullMethodName
+	ArchiveLogsValidateTargetRPC = archiveLogs.TargetService_ValidateTarget_FullMethodName
+)
+
 // ArchiveLogsClient is a client for the Coralogix Archive Logs API.
 type ArchiveLogsClient struct {
 	callPropertiesCreator *CallPropertiesCreator

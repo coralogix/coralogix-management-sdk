@@ -20,6 +20,19 @@ import (
 	archiveRetention "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v1"
 )
 
+type UpdateRetentionsRequest = archiveRetention.UpdateRetentionsRequest
+type RetentionUpdateElement = archiveRetention.RetentionUpdateElement
+type Retention = archiveRetention.Retention
+type GetRetentionsRequest = archiveRetention.GetRetentionsRequest
+
+// RPC values.
+const (
+	ArchiveRetentionGetRetentionsRPC        = archiveRetention.RetentionsService_GetRetentions_FullMethodName
+	ArchiveRetentionUpdateRetentionsRPC     = archiveRetention.RetentionsService_UpdateRetentions_FullMethodName
+	ArchiveRetentionActivateRetentionsRPC   = archiveRetention.RetentionsService_ActivateRetentions_FullMethodName
+	ArchiveRetentionGetRetentionsEnabledRPC = archiveRetention.RetentionsService_GetRetentionsEnabled_FullMethodName
+)
+
 // ArchiveRetentionsClient is a client for the Coralogix Archive Retentions API.
 type ArchiveRetentionsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
