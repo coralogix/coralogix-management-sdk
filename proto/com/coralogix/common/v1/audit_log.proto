@@ -1,0 +1,12 @@
+syntax = "proto3";
+import "google/protobuf/descriptor.proto";
+
+package com.coralogix.common.v1;
+
+message AuditLogDescription {
+  string description = 1;
+}
+
+extend google.protobuf.MethodOptions {
+  AuditLogDescription audit_log_description = 5000;
+}

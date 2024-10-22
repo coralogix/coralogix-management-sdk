@@ -66,10 +66,9 @@ message ExplainQueryResponse {
 
 message QuerySource {
   message ArchiveSource {
+    reserved 3, 4; // formerly max_archive_version, bucket_v2
     string bucket_name = 1;
     string region_name = 2;
-    uint32 max_archive_version = 3;
-    google.protobuf.StringValue bucket_v2 = 4;
   }
 
   message OpenSearchSource {
@@ -321,6 +320,8 @@ message ExecutionConfig {
   // If the limit is hit during query execution, the `shuffle_limit_reached` flag should
   // be set in the query status 
   optional uint64 shuffle_size_limit = 22;
+
+  optional bool enable_cx_data = 23;
 }
 
 enum SchedulingTier {

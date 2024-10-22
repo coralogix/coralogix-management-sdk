@@ -2,30 +2,30 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
-import "com/coralogixapis/dashboards/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/folder.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
 
 service DashboardFoldersService {
   rpc ListDashboardFolders(ListDashboardFoldersRequest) returns (ListDashboardFoldersResponse) {
-    option (audit_log_description).description = "list dashboard folders";
+    option (com.coralogix.common.v1.audit_log_description).description = "list dashboard folders";
   }
 
   rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
-    option (audit_log_description).description = "get dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "get dashboard folder";
   }
 
   rpc CreateDashboardFolder(CreateDashboardFolderRequest) returns (CreateDashboardFolderResponse) {
-    option (audit_log_description).description = "create dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "create dashboard folder";
   }
 
   rpc ReplaceDashboardFolder(ReplaceDashboardFolderRequest) returns (ReplaceDashboardFolderResponse) {
-    option (audit_log_description).description = "replace dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "replace dashboard folder";
   }
 
   rpc DeleteDashboardFolder(DeleteDashboardFolderRequest) returns (DeleteDashboardFolderResponse) {
-    option (audit_log_description).description = "delete dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard folder";
   }
 }
 

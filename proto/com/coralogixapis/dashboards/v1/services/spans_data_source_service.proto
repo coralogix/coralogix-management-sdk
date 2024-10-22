@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/ast/annotation.proto";
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
-import "com/coralogixapis/dashboards/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/annotation_event.proto";
 import "com/coralogixapis/dashboards/v1/common/group.proto";
 import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
@@ -19,28 +19,25 @@ import "google/protobuf/wrappers.proto";
 
 service SpansDataSourceService {
   rpc SearchSpansTimeSeries(SearchSpansTimeSeriesRequest) returns (SearchSpansTimeSeriesResponse) {
-    option (audit_log_description).description = "search spans as time series";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans as time series";
   }
   rpc SearchSpansEvents(SearchSpansEventsRequest) returns (SearchSpansEventsResponse) {
-    option (audit_log_description).description = "search spans as events";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans as events";
   }
   rpc SearchSpansEventGroups(SearchSpansEventGroupsRequest) returns (SearchSpansEventGroupsResponse) {
-    option (audit_log_description).description = "search spans as event groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans as event groups";
   }
   rpc SearchGroupedSpansSeries(SearchGroupedSpansSeriesRequest) returns (SearchGroupedSpansSeriesResponse) {
-    option (audit_log_description).description = "grouped spans series";
+    option (com.coralogix.common.v1.audit_log_description).description = "grouped spans series";
   }
   rpc SearchSpansGroupedTimeSeries(SearchSpansGroupedTimeSeriesRequest) returns (SearchSpansGroupedTimeSeriesResponse) {
-    option (audit_log_description).description = "search spans grouped time series";
-  }
-  rpc SearchSpansTimeValue(SearchSpansTimeValueRequest) returns (SearchSpansTimeValueResponse) {
-    option (audit_log_description).description = "search spans aggregated value";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped time series";
   }
   rpc SearchSpansAnnotationEvents(SearchSpansAnnotationEventsRequest) returns (SearchSpansAnnotationEventsResponse) {
-    option (audit_log_description).description = "search spans annotation events";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans annotation events";
   }
   rpc SearchSpansGroupedValues(SearchSpansGroupedValuesRequest) returns (SearchSpansGroupedValuesResponse) {
-    option (audit_log_description).description = "search spans grouped values";
+    option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped values";
   }
 }
 
@@ -154,17 +151,6 @@ message SpansEvent {
     google.protobuf.Timestamp timestamp = 1;
     map<string, google.protobuf.StringValue> fields = 2;
   }
-}
-
-message SearchSpansTimeValueRequest {
-  common.TimeFrame time_frame = 1;
-  repeated ast.Filter.SpansFilter filters = 2;
-  google.protobuf.StringValue lucene_query = 3;
-  common.SpansAggregation aggregation = 4;
-}
-
-message SearchSpansTimeValueResponse {
-  google.protobuf.DoubleValue value = 1;
 }
 
 message SearchSpansAnnotationEventsRequest {

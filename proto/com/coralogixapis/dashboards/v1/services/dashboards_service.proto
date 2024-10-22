@@ -2,43 +2,43 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/ast/dashboard.proto";
-import "com/coralogixapis/dashboards/v1/audit_log.proto";
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 service DashboardsService {
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
-    option (audit_log_description).description = "create dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "create dashboard";
   }
 
   rpc ReplaceDashboard(ReplaceDashboardRequest) returns (ReplaceDashboardResponse) {
-    option (audit_log_description).description = "replace dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "replace dashboard";
   }
 
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
-    option (audit_log_description).description = "delete dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard";
   }
 
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
-    option (audit_log_description).description = "get dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "get dashboard";
   }
 
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {
-    option (audit_log_description).description = "pin dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "pin dashboard";
   }
 
   rpc UnpinDashboard(UnpinDashboardRequest) returns (UnpinDashboardResponse) {
-    option (audit_log_description).description = "unpin dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "unpin dashboard";
   }
 
   rpc ReplaceDefaultDashboard(ReplaceDefaultDashboardRequest) returns (ReplaceDefaultDashboardResponse) {
-    option (audit_log_description).description = "replace default dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "replace default dashboard";
   }
 
   rpc AssignDashboardFolder(AssignDashboardFolderRequest) returns (AssignDashboardFolderResponse) {
-    option (audit_log_description).description = "assign a dashboard to a folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "assign a dashboard to a folder";
   }
 }
 
