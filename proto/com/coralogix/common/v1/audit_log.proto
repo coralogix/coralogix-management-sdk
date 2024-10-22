@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "google/protobuf/descriptor.proto";
 
-package com.coralogix.enrichment.v1;
+package com.coralogix.common.v1;
 
 message AuditLogDescription {
   string description = 1;
