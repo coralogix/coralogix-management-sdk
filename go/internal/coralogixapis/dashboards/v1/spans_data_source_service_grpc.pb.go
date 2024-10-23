@@ -24,7 +24,6 @@ const (
 	SpansDataSourceService_SearchSpansEventGroups_FullMethodName       = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchSpansEventGroups"
 	SpansDataSourceService_SearchGroupedSpansSeries_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchGroupedSpansSeries"
 	SpansDataSourceService_SearchSpansGroupedTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchSpansGroupedTimeSeries"
-	SpansDataSourceService_SearchSpansTimeValue_FullMethodName         = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchSpansTimeValue"
 	SpansDataSourceService_SearchSpansAnnotationEvents_FullMethodName  = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchSpansAnnotationEvents"
 	SpansDataSourceService_SearchSpansGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.SpansDataSourceService/SearchSpansGroupedValues"
 )
@@ -38,7 +37,6 @@ type SpansDataSourceServiceClient interface {
 	SearchSpansEventGroups(ctx context.Context, in *SearchSpansEventGroupsRequest, opts ...grpc.CallOption) (*SearchSpansEventGroupsResponse, error)
 	SearchGroupedSpansSeries(ctx context.Context, in *SearchGroupedSpansSeriesRequest, opts ...grpc.CallOption) (*SearchGroupedSpansSeriesResponse, error)
 	SearchSpansGroupedTimeSeries(ctx context.Context, in *SearchSpansGroupedTimeSeriesRequest, opts ...grpc.CallOption) (*SearchSpansGroupedTimeSeriesResponse, error)
-	SearchSpansTimeValue(ctx context.Context, in *SearchSpansTimeValueRequest, opts ...grpc.CallOption) (*SearchSpansTimeValueResponse, error)
 	SearchSpansAnnotationEvents(ctx context.Context, in *SearchSpansAnnotationEventsRequest, opts ...grpc.CallOption) (*SearchSpansAnnotationEventsResponse, error)
 	SearchSpansGroupedValues(ctx context.Context, in *SearchSpansGroupedValuesRequest, opts ...grpc.CallOption) (*SearchSpansGroupedValuesResponse, error)
 }
@@ -96,15 +94,6 @@ func (c *spansDataSourceServiceClient) SearchSpansGroupedTimeSeries(ctx context.
 	return out, nil
 }
 
-func (c *spansDataSourceServiceClient) SearchSpansTimeValue(ctx context.Context, in *SearchSpansTimeValueRequest, opts ...grpc.CallOption) (*SearchSpansTimeValueResponse, error) {
-	out := new(SearchSpansTimeValueResponse)
-	err := c.cc.Invoke(ctx, SpansDataSourceService_SearchSpansTimeValue_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *spansDataSourceServiceClient) SearchSpansAnnotationEvents(ctx context.Context, in *SearchSpansAnnotationEventsRequest, opts ...grpc.CallOption) (*SearchSpansAnnotationEventsResponse, error) {
 	out := new(SearchSpansAnnotationEventsResponse)
 	err := c.cc.Invoke(ctx, SpansDataSourceService_SearchSpansAnnotationEvents_FullMethodName, in, out, opts...)
@@ -132,7 +121,6 @@ type SpansDataSourceServiceServer interface {
 	SearchSpansEventGroups(context.Context, *SearchSpansEventGroupsRequest) (*SearchSpansEventGroupsResponse, error)
 	SearchGroupedSpansSeries(context.Context, *SearchGroupedSpansSeriesRequest) (*SearchGroupedSpansSeriesResponse, error)
 	SearchSpansGroupedTimeSeries(context.Context, *SearchSpansGroupedTimeSeriesRequest) (*SearchSpansGroupedTimeSeriesResponse, error)
-	SearchSpansTimeValue(context.Context, *SearchSpansTimeValueRequest) (*SearchSpansTimeValueResponse, error)
 	SearchSpansAnnotationEvents(context.Context, *SearchSpansAnnotationEventsRequest) (*SearchSpansAnnotationEventsResponse, error)
 	SearchSpansGroupedValues(context.Context, *SearchSpansGroupedValuesRequest) (*SearchSpansGroupedValuesResponse, error)
 	mustEmbedUnimplementedSpansDataSourceServiceServer()
@@ -156,9 +144,6 @@ func (UnimplementedSpansDataSourceServiceServer) SearchGroupedSpansSeries(contex
 }
 func (UnimplementedSpansDataSourceServiceServer) SearchSpansGroupedTimeSeries(context.Context, *SearchSpansGroupedTimeSeriesRequest) (*SearchSpansGroupedTimeSeriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchSpansGroupedTimeSeries not implemented")
-}
-func (UnimplementedSpansDataSourceServiceServer) SearchSpansTimeValue(context.Context, *SearchSpansTimeValueRequest) (*SearchSpansTimeValueResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchSpansTimeValue not implemented")
 }
 func (UnimplementedSpansDataSourceServiceServer) SearchSpansAnnotationEvents(context.Context, *SearchSpansAnnotationEventsRequest) (*SearchSpansAnnotationEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchSpansAnnotationEvents not implemented")
@@ -270,24 +255,6 @@ func _SpansDataSourceService_SearchSpansGroupedTimeSeries_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SpansDataSourceService_SearchSpansTimeValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchSpansTimeValueRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SpansDataSourceServiceServer).SearchSpansTimeValue(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SpansDataSourceService_SearchSpansTimeValue_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SpansDataSourceServiceServer).SearchSpansTimeValue(ctx, req.(*SearchSpansTimeValueRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SpansDataSourceService_SearchSpansAnnotationEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchSpansAnnotationEventsRequest)
 	if err := dec(in); err != nil {
@@ -350,10 +317,6 @@ var SpansDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchSpansGroupedTimeSeries",
 			Handler:    _SpansDataSourceService_SearchSpansGroupedTimeSeries_Handler,
-		},
-		{
-			MethodName: "SearchSpansTimeValue",
-			Handler:    _SpansDataSourceService_SearchSpansTimeValue_Handler,
 		},
 		{
 			MethodName: "SearchSpansAnnotationEvents",

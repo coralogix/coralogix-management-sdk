@@ -24,7 +24,6 @@ const (
 	LogsDataSourceService_SearchGroupedLogsSeries_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchGroupedLogsSeries"
 	LogsDataSourceService_SearchLogsGroupedTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchLogsGroupedTimeSeries"
 	LogsDataSourceService_SearchLogsEventGroups_FullMethodName       = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchLogsEventGroups"
-	LogsDataSourceService_SearchLogsTimeValue_FullMethodName         = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchLogsTimeValue"
 	LogsDataSourceService_SearchLogsAnnotationEvents_FullMethodName  = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchLogsAnnotationEvents"
 	LogsDataSourceService_SearchLogsGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.LogsDataSourceService/SearchLogsGroupedValues"
 )
@@ -38,7 +37,6 @@ type LogsDataSourceServiceClient interface {
 	SearchGroupedLogsSeries(ctx context.Context, in *SearchGroupedLogsSeriesRequest, opts ...grpc.CallOption) (*SearchGroupedLogsSeriesResponse, error)
 	SearchLogsGroupedTimeSeries(ctx context.Context, in *SearchLogsGroupedTimeSeriesRequest, opts ...grpc.CallOption) (*SearchLogsGroupedTimeSeriesResponse, error)
 	SearchLogsEventGroups(ctx context.Context, in *SearchLogsEventGroupsRequest, opts ...grpc.CallOption) (*SearchLogsEventGroupsResponse, error)
-	SearchLogsTimeValue(ctx context.Context, in *SearchLogsTimeValueRequest, opts ...grpc.CallOption) (*SearchLogsTimeValueResponse, error)
 	SearchLogsAnnotationEvents(ctx context.Context, in *SearchLogsAnnotationEventsRequest, opts ...grpc.CallOption) (*SearchLogsAnnotationEventsResponse, error)
 	SearchLogsGroupedValues(ctx context.Context, in *SearchLogsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchLogsGroupedValuesResponse, error)
 }
@@ -96,15 +94,6 @@ func (c *logsDataSourceServiceClient) SearchLogsEventGroups(ctx context.Context,
 	return out, nil
 }
 
-func (c *logsDataSourceServiceClient) SearchLogsTimeValue(ctx context.Context, in *SearchLogsTimeValueRequest, opts ...grpc.CallOption) (*SearchLogsTimeValueResponse, error) {
-	out := new(SearchLogsTimeValueResponse)
-	err := c.cc.Invoke(ctx, LogsDataSourceService_SearchLogsTimeValue_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *logsDataSourceServiceClient) SearchLogsAnnotationEvents(ctx context.Context, in *SearchLogsAnnotationEventsRequest, opts ...grpc.CallOption) (*SearchLogsAnnotationEventsResponse, error) {
 	out := new(SearchLogsAnnotationEventsResponse)
 	err := c.cc.Invoke(ctx, LogsDataSourceService_SearchLogsAnnotationEvents_FullMethodName, in, out, opts...)
@@ -132,7 +121,6 @@ type LogsDataSourceServiceServer interface {
 	SearchGroupedLogsSeries(context.Context, *SearchGroupedLogsSeriesRequest) (*SearchGroupedLogsSeriesResponse, error)
 	SearchLogsGroupedTimeSeries(context.Context, *SearchLogsGroupedTimeSeriesRequest) (*SearchLogsGroupedTimeSeriesResponse, error)
 	SearchLogsEventGroups(context.Context, *SearchLogsEventGroupsRequest) (*SearchLogsEventGroupsResponse, error)
-	SearchLogsTimeValue(context.Context, *SearchLogsTimeValueRequest) (*SearchLogsTimeValueResponse, error)
 	SearchLogsAnnotationEvents(context.Context, *SearchLogsAnnotationEventsRequest) (*SearchLogsAnnotationEventsResponse, error)
 	SearchLogsGroupedValues(context.Context, *SearchLogsGroupedValuesRequest) (*SearchLogsGroupedValuesResponse, error)
 	mustEmbedUnimplementedLogsDataSourceServiceServer()
@@ -156,9 +144,6 @@ func (UnimplementedLogsDataSourceServiceServer) SearchLogsGroupedTimeSeries(cont
 }
 func (UnimplementedLogsDataSourceServiceServer) SearchLogsEventGroups(context.Context, *SearchLogsEventGroupsRequest) (*SearchLogsEventGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchLogsEventGroups not implemented")
-}
-func (UnimplementedLogsDataSourceServiceServer) SearchLogsTimeValue(context.Context, *SearchLogsTimeValueRequest) (*SearchLogsTimeValueResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchLogsTimeValue not implemented")
 }
 func (UnimplementedLogsDataSourceServiceServer) SearchLogsAnnotationEvents(context.Context, *SearchLogsAnnotationEventsRequest) (*SearchLogsAnnotationEventsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchLogsAnnotationEvents not implemented")
@@ -269,24 +254,6 @@ func _LogsDataSourceService_SearchLogsEventGroups_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _LogsDataSourceService_SearchLogsTimeValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchLogsTimeValueRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(LogsDataSourceServiceServer).SearchLogsTimeValue(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: LogsDataSourceService_SearchLogsTimeValue_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(LogsDataSourceServiceServer).SearchLogsTimeValue(ctx, req.(*SearchLogsTimeValueRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _LogsDataSourceService_SearchLogsAnnotationEvents_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchLogsAnnotationEventsRequest)
 	if err := dec(in); err != nil {
@@ -349,10 +316,6 @@ var LogsDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchLogsEventGroups",
 			Handler:    _LogsDataSourceService_SearchLogsEventGroups_Handler,
-		},
-		{
-			MethodName: "SearchLogsTimeValue",
-			Handler:    _LogsDataSourceService_SearchLogsTimeValue_Handler,
 		},
 		{
 			MethodName: "SearchLogsAnnotationEvents",

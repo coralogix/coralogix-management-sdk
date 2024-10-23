@@ -1913,8 +1913,9 @@ type Operator_DedupeBy struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Expressions []*Expression                `protobuf:"bytes,1,rep,name=expressions,proto3" json:"expressions,omitempty"`
-	Condition   *Operator_DedupeBy_Condition `protobuf:"bytes,2,opt,name=condition,proto3" json:"condition,omitempty"`
+	Expressions []*Expression                         `protobuf:"bytes,1,rep,name=expressions,proto3" json:"expressions,omitempty"`
+	Condition   *Operator_DedupeBy_Condition          `protobuf:"bytes,2,opt,name=condition,proto3" json:"condition,omitempty"`
+	OrderBy     []*Operator_OrderBy_OrderByExpression `protobuf:"bytes,3,rep,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
 }
 
 func (x *Operator_DedupeBy) Reset() {
@@ -1957,6 +1958,13 @@ func (x *Operator_DedupeBy) GetExpressions() []*Expression {
 func (x *Operator_DedupeBy) GetCondition() *Operator_DedupeBy_Condition {
 	if x != nil {
 		return x.Condition
+	}
+	return nil
+}
+
+func (x *Operator_DedupeBy) GetOrderBy() []*Operator_OrderBy_OrderByExpression {
+	if x != nil {
+		return x.OrderBy
 	}
 	return nil
 }
@@ -3844,7 +3852,7 @@ var file_com_coralogix_dataprime_ast_v1_query_proto_rawDesc = []byte{
 	0x74, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x69, 0x6d, 0x65, 0x46, 0x72, 0x61, 0x6d, 0x65, 0x48, 0x01,
 	0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x46, 0x72, 0x61, 0x6d, 0x65, 0x88, 0x01, 0x01, 0x42, 0x0a,
 	0x0a, 0x08, 0x5f, 0x74, 0x65, 0x61, 0x6d, 0x5f, 0x69, 0x64, 0x42, 0x0d, 0x0a, 0x0b, 0x5f, 0x74,
-	0x69, 0x6d, 0x65, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x22, 0xf0, 0x54, 0x0a, 0x08, 0x4f, 0x70,
+	0x69, 0x6d, 0x65, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65, 0x22, 0xcf, 0x55, 0x0a, 0x08, 0x4f, 0x70,
 	0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x12, 0x49, 0x0a, 0x06, 0x66, 0x69, 0x6c, 0x74, 0x65, 0x72,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2f, 0x2e, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72,
 	0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x70, 0x72, 0x69, 0x6d, 0x65,
@@ -4500,7 +4508,7 @@ var file_com_coralogix_dataprime_ast_v1_query_proto_rawDesc = []byte{
 	0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61,
 	0x70, 0x72, 0x69, 0x6d, 0x65, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x70,
 	0x72, 0x65, 0x73, 0x73, 0x69, 0x6f, 0x6e, 0x2e, 0x4b, 0x65, 0x79, 0x70, 0x61, 0x74, 0x68, 0x52,
-	0x07, 0x6b, 0x65, 0x79, 0x70, 0x61, 0x74, 0x68, 0x1a, 0xd9, 0x02, 0x0a, 0x08, 0x44, 0x65, 0x64,
+	0x07, 0x6b, 0x65, 0x79, 0x70, 0x61, 0x74, 0x68, 0x1a, 0xb8, 0x03, 0x0a, 0x08, 0x44, 0x65, 0x64,
 	0x75, 0x70, 0x65, 0x42, 0x79, 0x12, 0x4c, 0x0a, 0x0b, 0x65, 0x78, 0x70, 0x72, 0x65, 0x73, 0x73,
 	0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x2a, 0x2e, 0x63, 0x6f, 0x6d,
 	0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x70,
@@ -4511,20 +4519,26 @@ var file_com_coralogix_dataprime_ast_v1_query_proto_rawDesc = []byte{
 	0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x70, 0x72, 0x69, 0x6d, 0x65,
 	0x2e, 0x61, 0x73, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
 	0x2e, 0x44, 0x65, 0x64, 0x75, 0x70, 0x65, 0x42, 0x79, 0x2e, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74,
-	0x69, 0x6f, 0x6e, 0x52, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0xa3,
-	0x01, 0x0a, 0x09, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x56, 0x0a, 0x04,
-	0x6b, 0x65, 0x65, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x40, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x70,
-	0x72, 0x69, 0x6d, 0x65, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x72,
-	0x61, 0x74, 0x6f, 0x72, 0x2e, 0x44, 0x65, 0x64, 0x75, 0x70, 0x65, 0x42, 0x79, 0x2e, 0x43, 0x6f,
-	0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4b, 0x65, 0x65, 0x70, 0x48, 0x00, 0x52, 0x04,
-	0x6b, 0x65, 0x65, 0x70, 0x1a, 0x31, 0x0a, 0x04, 0x4b, 0x65, 0x65, 0x70, 0x12, 0x29, 0x0a, 0x01,
-	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x52, 0x01, 0x6e, 0x42, 0x0b, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69,
-	0x74, 0x69, 0x6f, 0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72,
-	0x4a, 0x04, 0x08, 0x0c, 0x10, 0x0d, 0x4a, 0x04, 0x08, 0x0d, 0x10, 0x0e, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x6f, 0x6e, 0x52, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x5d,
+	0x0a, 0x08, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x5f, 0x62, 0x79, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x42, 0x2e, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78,
+	0x2e, 0x64, 0x61, 0x74, 0x61, 0x70, 0x72, 0x69, 0x6d, 0x65, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x76,
+	0x31, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72,
+	0x42, 0x79, 0x2e, 0x4f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x79, 0x45, 0x78, 0x70, 0x72, 0x65, 0x73,
+	0x73, 0x69, 0x6f, 0x6e, 0x52, 0x07, 0x6f, 0x72, 0x64, 0x65, 0x72, 0x42, 0x79, 0x1a, 0xa3, 0x01,
+	0x0a, 0x09, 0x43, 0x6f, 0x6e, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x56, 0x0a, 0x04, 0x6b,
+	0x65, 0x65, 0x70, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x40, 0x2e, 0x63, 0x6f, 0x6d, 0x2e,
+	0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x70, 0x72,
+	0x69, 0x6d, 0x65, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x76, 0x31, 0x2e, 0x4f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x6f, 0x72, 0x2e, 0x44, 0x65, 0x64, 0x75, 0x70, 0x65, 0x42, 0x79, 0x2e, 0x43, 0x6f, 0x6e,
+	0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x4b, 0x65, 0x65, 0x70, 0x48, 0x00, 0x52, 0x04, 0x6b,
+	0x65, 0x65, 0x70, 0x1a, 0x31, 0x0a, 0x04, 0x4b, 0x65, 0x65, 0x70, 0x12, 0x29, 0x0a, 0x01, 0x6e,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x49, 0x6e, 0x74, 0x33, 0x32, 0x56, 0x61,
+	0x6c, 0x75, 0x65, 0x52, 0x01, 0x6e, 0x42, 0x0b, 0x0a, 0x09, 0x63, 0x6f, 0x6e, 0x64, 0x69, 0x74,
+	0x69, 0x6f, 0x6e, 0x42, 0x0a, 0x0a, 0x08, 0x6f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x6f, 0x72, 0x4a,
+	0x04, 0x08, 0x0c, 0x10, 0x0d, 0x4a, 0x04, 0x08, 0x0d, 0x10, 0x0e, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -4680,82 +4694,83 @@ var file_com_coralogix_dataprime_ast_v1_query_proto_depIdxs = []int32{
 	60,  // 67: com.coralogix.dataprime.ast.v1.Operator.Explode.keypath:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
 	59,  // 68: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.expressions:type_name -> com.coralogix.dataprime.ast.v1.Expression
 	55,  // 69: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.condition:type_name -> com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition
-	59,  // 70: com.coralogix.dataprime.ast.v1.Operator.Choose.Chosen.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 71: com.coralogix.dataprime.ast.v1.Operator.Choose.Chosen.as:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	64,  // 72: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractRegex.regex:type_name -> com.coralogix.dataprime.ast.v1.Expression.Regex
-	64,  // 73: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractMultiRegex.regex:type_name -> com.coralogix.dataprime.ast.v1.Expression.Regex
-	57,  // 74: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.pair_delimiter:type_name -> google.protobuf.StringValue
-	57,  // 75: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.key_delimiter:type_name -> google.protobuf.StringValue
-	57,  // 76: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.quote_char_value:type_name -> google.protobuf.StringValue
-	57,  // 77: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractDelimited.delimiter:type_name -> google.protobuf.StringValue
-	65,  // 78: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractDelimited.type:type_name -> com.coralogix.dataprime.ast.v1.Datatype.PrimitiveType
-	63,  // 79: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractJson.max_unescape_count:type_name -> google.protobuf.Int32Value
-	59,  // 80: com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	0,   // 81: com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.order:type_name -> com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.Order
-	39,  // 82: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.count:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count
-	40,  // 83: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.distinct_count:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount
-	41,  // 84: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sum:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum
-	42,  // 85: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.min:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min
-	43,  // 86: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.max:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max
-	44,  // 87: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.avg:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg
-	45,  // 88: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.stddev:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev
-	46,  // 89: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sample_stddev:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev
-	47,  // 90: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.variance:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance
-	48,  // 91: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sample_variance:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance
-	49,  // 92: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.percentile:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile
-	50,  // 93: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.any_value:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue
-	51,  // 94: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.approx_count_distinct:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct
-	52,  // 95: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.collect:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect
-	53,  // 96: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.max_by:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy
-	54,  // 97: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.min_by:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy
-	38,  // 98: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSet.fields:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField
-	59,  // 99: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 100: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 101: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 102: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 103: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 104: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 105: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 106: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 107: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 108: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 109: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 110: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 111: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 112: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 113: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 114: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 115: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 116: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 117: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 118: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 119: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 120: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 121: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.percentile:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 122: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 123: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.error_threshold:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 124: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 125: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 126: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 127: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.value:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 128: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.values:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 129: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 130: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 131: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.order_by:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 132: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 133: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.sort_key:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 134: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 135: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	59,  // 136: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.sort_key:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	59,  // 137: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
-	60,  // 138: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
-	56,  // 139: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.keep:type_name -> com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.Keep
-	63,  // 140: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.Keep.n:type_name -> google.protobuf.Int32Value
-	141, // [141:141] is the sub-list for method output_type
-	141, // [141:141] is the sub-list for method input_type
-	141, // [141:141] is the sub-list for extension type_name
-	141, // [141:141] is the sub-list for extension extendee
-	0,   // [0:141] is the sub-list for field type_name
+	35,  // 70: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.order_by:type_name -> com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression
+	59,  // 71: com.coralogix.dataprime.ast.v1.Operator.Choose.Chosen.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 72: com.coralogix.dataprime.ast.v1.Operator.Choose.Chosen.as:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	64,  // 73: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractRegex.regex:type_name -> com.coralogix.dataprime.ast.v1.Expression.Regex
+	64,  // 74: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractMultiRegex.regex:type_name -> com.coralogix.dataprime.ast.v1.Expression.Regex
+	57,  // 75: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.pair_delimiter:type_name -> google.protobuf.StringValue
+	57,  // 76: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.key_delimiter:type_name -> google.protobuf.StringValue
+	57,  // 77: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractKeyValue.quote_char_value:type_name -> google.protobuf.StringValue
+	57,  // 78: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractDelimited.delimiter:type_name -> google.protobuf.StringValue
+	65,  // 79: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractDelimited.type:type_name -> com.coralogix.dataprime.ast.v1.Datatype.PrimitiveType
+	63,  // 80: com.coralogix.dataprime.ast.v1.Operator.Extract.ExtractJson.max_unescape_count:type_name -> google.protobuf.Int32Value
+	59,  // 81: com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	0,   // 82: com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.order:type_name -> com.coralogix.dataprime.ast.v1.Operator.OrderBy.OrderByExpression.Order
+	39,  // 83: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.count:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count
+	40,  // 84: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.distinct_count:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount
+	41,  // 85: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sum:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum
+	42,  // 86: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.min:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min
+	43,  // 87: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.max:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max
+	44,  // 88: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.avg:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg
+	45,  // 89: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.stddev:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev
+	46,  // 90: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sample_stddev:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev
+	47,  // 91: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.variance:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance
+	48,  // 92: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.sample_variance:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance
+	49,  // 93: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.percentile:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile
+	50,  // 94: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.any_value:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue
+	51,  // 95: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.approx_count_distinct:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct
+	52,  // 96: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.collect:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect
+	53,  // 97: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.max_by:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy
+	54,  // 98: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.min_by:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy
+	38,  // 99: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSet.fields:type_name -> com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField
+	59,  // 100: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 101: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupingSetField.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 102: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 103: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Count.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 104: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 105: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.DistinctCount.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 106: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 107: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Sum.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 108: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 109: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Min.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 110: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 111: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Max.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 112: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 113: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Avg.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 114: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 115: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.StdDev.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 116: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 117: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleStdDev.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 118: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 119: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Variance.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 120: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 121: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.SampleVariance.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 122: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.percentile:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 123: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 124: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.error_threshold:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 125: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Percentile.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 126: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 127: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.AnyValue.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 128: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.value:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 129: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.values:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 130: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.ApproxCountDistinct.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 131: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 132: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.order_by:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 133: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.Collect.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 134: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.sort_key:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 135: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 136: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MaxBy.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	59,  // 137: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.sort_key:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	59,  // 138: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.expression:type_name -> com.coralogix.dataprime.ast.v1.Expression
+	60,  // 139: com.coralogix.dataprime.ast.v1.Operator.GroupBy.GroupByFunction.MinBy.alias:type_name -> com.coralogix.dataprime.ast.v1.Expression.Keypath
+	56,  // 140: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.keep:type_name -> com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.Keep
+	63,  // 141: com.coralogix.dataprime.ast.v1.Operator.DedupeBy.Condition.Keep.n:type_name -> google.protobuf.Int32Value
+	142, // [142:142] is the sub-list for method output_type
+	142, // [142:142] is the sub-list for method input_type
+	142, // [142:142] is the sub-list for extension type_name
+	142, // [142:142] is the sub-list for extension extendee
+	0,   // [0:142] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_dataprime_ast_v1_query_proto_init() }

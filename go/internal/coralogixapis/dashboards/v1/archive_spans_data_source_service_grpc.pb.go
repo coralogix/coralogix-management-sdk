@@ -25,7 +25,6 @@ const (
 	ArchiveSpansDataSourceService_SearchArchiveSpansEventGroups_FullMethodName       = "/com.coralogixapis.dashboards.v1.services.ArchiveSpansDataSourceService/SearchArchiveSpansEventGroups"
 	ArchiveSpansDataSourceService_SearchArchiveGroupedSpansSeries_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveSpansDataSourceService/SearchArchiveGroupedSpansSeries"
 	ArchiveSpansDataSourceService_SearchArchiveGroupedSpansTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.ArchiveSpansDataSourceService/SearchArchiveGroupedSpansTimeSeries"
-	ArchiveSpansDataSourceService_SearchArchiveSpansTimeValue_FullMethodName         = "/com.coralogixapis.dashboards.v1.services.ArchiveSpansDataSourceService/SearchArchiveSpansTimeValue"
 	ArchiveSpansDataSourceService_SearchArchiveSpansGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveSpansDataSourceService/SearchArchiveSpansGroupedValues"
 )
 
@@ -39,7 +38,6 @@ type ArchiveSpansDataSourceServiceClient interface {
 	SearchArchiveSpansEventGroups(ctx context.Context, in *SearchArchiveSpansEventGroupsRequest, opts ...grpc.CallOption) (*SearchArchiveSpansEventGroupsResponse, error)
 	SearchArchiveGroupedSpansSeries(ctx context.Context, in *SearchArchiveGroupedSpansSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedSpansSeriesResponse, error)
 	SearchArchiveGroupedSpansTimeSeries(ctx context.Context, in *SearchArchiveGroupedSpansTimeSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedSpansTimeSeriesResponse, error)
-	SearchArchiveSpansTimeValue(ctx context.Context, in *SearchArchiveSpansTimeValueRequest, opts ...grpc.CallOption) (*SearchArchiveSpansTimeValueResponse, error)
 	SearchArchiveSpansGroupedValues(ctx context.Context, in *SearchArchiveSpansGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveSpansGroupedValuesResponse, error)
 }
 
@@ -105,15 +103,6 @@ func (c *archiveSpansDataSourceServiceClient) SearchArchiveGroupedSpansTimeSerie
 	return out, nil
 }
 
-func (c *archiveSpansDataSourceServiceClient) SearchArchiveSpansTimeValue(ctx context.Context, in *SearchArchiveSpansTimeValueRequest, opts ...grpc.CallOption) (*SearchArchiveSpansTimeValueResponse, error) {
-	out := new(SearchArchiveSpansTimeValueResponse)
-	err := c.cc.Invoke(ctx, ArchiveSpansDataSourceService_SearchArchiveSpansTimeValue_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *archiveSpansDataSourceServiceClient) SearchArchiveSpansGroupedValues(ctx context.Context, in *SearchArchiveSpansGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveSpansGroupedValuesResponse, error) {
 	out := new(SearchArchiveSpansGroupedValuesResponse)
 	err := c.cc.Invoke(ctx, ArchiveSpansDataSourceService_SearchArchiveSpansGroupedValues_FullMethodName, in, out, opts...)
@@ -133,7 +122,6 @@ type ArchiveSpansDataSourceServiceServer interface {
 	SearchArchiveSpansEventGroups(context.Context, *SearchArchiveSpansEventGroupsRequest) (*SearchArchiveSpansEventGroupsResponse, error)
 	SearchArchiveGroupedSpansSeries(context.Context, *SearchArchiveGroupedSpansSeriesRequest) (*SearchArchiveGroupedSpansSeriesResponse, error)
 	SearchArchiveGroupedSpansTimeSeries(context.Context, *SearchArchiveGroupedSpansTimeSeriesRequest) (*SearchArchiveGroupedSpansTimeSeriesResponse, error)
-	SearchArchiveSpansTimeValue(context.Context, *SearchArchiveSpansTimeValueRequest) (*SearchArchiveSpansTimeValueResponse, error)
 	SearchArchiveSpansGroupedValues(context.Context, *SearchArchiveSpansGroupedValuesRequest) (*SearchArchiveSpansGroupedValuesResponse, error)
 	mustEmbedUnimplementedArchiveSpansDataSourceServiceServer()
 }
@@ -159,9 +147,6 @@ func (UnimplementedArchiveSpansDataSourceServiceServer) SearchArchiveGroupedSpan
 }
 func (UnimplementedArchiveSpansDataSourceServiceServer) SearchArchiveGroupedSpansTimeSeries(context.Context, *SearchArchiveGroupedSpansTimeSeriesRequest) (*SearchArchiveGroupedSpansTimeSeriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveGroupedSpansTimeSeries not implemented")
-}
-func (UnimplementedArchiveSpansDataSourceServiceServer) SearchArchiveSpansTimeValue(context.Context, *SearchArchiveSpansTimeValueRequest) (*SearchArchiveSpansTimeValueResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveSpansTimeValue not implemented")
 }
 func (UnimplementedArchiveSpansDataSourceServiceServer) SearchArchiveSpansGroupedValues(context.Context, *SearchArchiveSpansGroupedValuesRequest) (*SearchArchiveSpansGroupedValuesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveSpansGroupedValues not implemented")
@@ -288,24 +273,6 @@ func _ArchiveSpansDataSourceService_SearchArchiveGroupedSpansTimeSeries_Handler(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArchiveSpansDataSourceService_SearchArchiveSpansTimeValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchArchiveSpansTimeValueRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ArchiveSpansDataSourceServiceServer).SearchArchiveSpansTimeValue(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ArchiveSpansDataSourceService_SearchArchiveSpansTimeValue_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArchiveSpansDataSourceServiceServer).SearchArchiveSpansTimeValue(ctx, req.(*SearchArchiveSpansTimeValueRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ArchiveSpansDataSourceService_SearchArchiveSpansGroupedValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchArchiveSpansGroupedValuesRequest)
 	if err := dec(in); err != nil {
@@ -354,10 +321,6 @@ var ArchiveSpansDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchArchiveGroupedSpansTimeSeries",
 			Handler:    _ArchiveSpansDataSourceService_SearchArchiveGroupedSpansTimeSeries_Handler,
-		},
-		{
-			MethodName: "SearchArchiveSpansTimeValue",
-			Handler:    _ArchiveSpansDataSourceService_SearchArchiveSpansTimeValue_Handler,
 		},
 		{
 			MethodName: "SearchArchiveSpansGroupedValues",

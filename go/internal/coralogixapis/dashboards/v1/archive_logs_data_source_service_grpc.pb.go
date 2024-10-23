@@ -25,7 +25,6 @@ const (
 	ArchiveLogsDataSourceService_SearchArchiveLogsEventGroups_FullMethodName       = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveLogsEventGroups"
 	ArchiveLogsDataSourceService_SearchArchiveGroupedLogsSeries_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveGroupedLogsSeries"
 	ArchiveLogsDataSourceService_SearchArchiveGroupedLogsTimeSeries_FullMethodName = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveGroupedLogsTimeSeries"
-	ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_FullMethodName         = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveLogsTimeValue"
 	ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_FullMethodName     = "/com.coralogixapis.dashboards.v1.services.ArchiveLogsDataSourceService/SearchArchiveLogsGroupedValues"
 )
 
@@ -39,7 +38,6 @@ type ArchiveLogsDataSourceServiceClient interface {
 	SearchArchiveLogsEventGroups(ctx context.Context, in *SearchArchiveLogsEventGroupsRequest, opts ...grpc.CallOption) (*SearchArchiveLogsEventGroupsResponse, error)
 	SearchArchiveGroupedLogsSeries(ctx context.Context, in *SearchArchiveGroupedLogsSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedLogsSeriesResponse, error)
 	SearchArchiveGroupedLogsTimeSeries(ctx context.Context, in *SearchArchiveGroupedLogsTimeSeriesRequest, opts ...grpc.CallOption) (*SearchArchiveGroupedLogsTimeSeriesResponse, error)
-	SearchArchiveLogsTimeValue(ctx context.Context, in *SearchArchiveLogsTimeValueRequest, opts ...grpc.CallOption) (*SearchArchiveLogsTimeValueResponse, error)
 	SearchArchiveLogsGroupedValues(ctx context.Context, in *SearchArchiveLogsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveLogsGroupedValuesResponse, error)
 }
 
@@ -105,15 +103,6 @@ func (c *archiveLogsDataSourceServiceClient) SearchArchiveGroupedLogsTimeSeries(
 	return out, nil
 }
 
-func (c *archiveLogsDataSourceServiceClient) SearchArchiveLogsTimeValue(ctx context.Context, in *SearchArchiveLogsTimeValueRequest, opts ...grpc.CallOption) (*SearchArchiveLogsTimeValueResponse, error) {
-	out := new(SearchArchiveLogsTimeValueResponse)
-	err := c.cc.Invoke(ctx, ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *archiveLogsDataSourceServiceClient) SearchArchiveLogsGroupedValues(ctx context.Context, in *SearchArchiveLogsGroupedValuesRequest, opts ...grpc.CallOption) (*SearchArchiveLogsGroupedValuesResponse, error) {
 	out := new(SearchArchiveLogsGroupedValuesResponse)
 	err := c.cc.Invoke(ctx, ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_FullMethodName, in, out, opts...)
@@ -133,7 +122,6 @@ type ArchiveLogsDataSourceServiceServer interface {
 	SearchArchiveLogsEventGroups(context.Context, *SearchArchiveLogsEventGroupsRequest) (*SearchArchiveLogsEventGroupsResponse, error)
 	SearchArchiveGroupedLogsSeries(context.Context, *SearchArchiveGroupedLogsSeriesRequest) (*SearchArchiveGroupedLogsSeriesResponse, error)
 	SearchArchiveGroupedLogsTimeSeries(context.Context, *SearchArchiveGroupedLogsTimeSeriesRequest) (*SearchArchiveGroupedLogsTimeSeriesResponse, error)
-	SearchArchiveLogsTimeValue(context.Context, *SearchArchiveLogsTimeValueRequest) (*SearchArchiveLogsTimeValueResponse, error)
 	SearchArchiveLogsGroupedValues(context.Context, *SearchArchiveLogsGroupedValuesRequest) (*SearchArchiveLogsGroupedValuesResponse, error)
 	mustEmbedUnimplementedArchiveLogsDataSourceServiceServer()
 }
@@ -159,9 +147,6 @@ func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveGroupedLogsS
 }
 func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveGroupedLogsTimeSeries(context.Context, *SearchArchiveGroupedLogsTimeSeriesRequest) (*SearchArchiveGroupedLogsTimeSeriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveGroupedLogsTimeSeries not implemented")
-}
-func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveLogsTimeValue(context.Context, *SearchArchiveLogsTimeValueRequest) (*SearchArchiveLogsTimeValueResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveLogsTimeValue not implemented")
 }
 func (UnimplementedArchiveLogsDataSourceServiceServer) SearchArchiveLogsGroupedValues(context.Context, *SearchArchiveLogsGroupedValuesRequest) (*SearchArchiveLogsGroupedValuesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchArchiveLogsGroupedValues not implemented")
@@ -288,24 +273,6 @@ func _ArchiveLogsDataSourceService_SearchArchiveGroupedLogsTimeSeries_Handler(sr
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SearchArchiveLogsTimeValueRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ArchiveLogsDataSourceServiceServer).SearchArchiveLogsTimeValue(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ArchiveLogsDataSourceServiceServer).SearchArchiveLogsTimeValue(ctx, req.(*SearchArchiveLogsTimeValueRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _ArchiveLogsDataSourceService_SearchArchiveLogsGroupedValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(SearchArchiveLogsGroupedValuesRequest)
 	if err := dec(in); err != nil {
@@ -354,10 +321,6 @@ var ArchiveLogsDataSourceService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SearchArchiveGroupedLogsTimeSeries",
 			Handler:    _ArchiveLogsDataSourceService_SearchArchiveGroupedLogsTimeSeries_Handler,
-		},
-		{
-			MethodName: "SearchArchiveLogsTimeValue",
-			Handler:    _ArchiveLogsDataSourceService_SearchArchiveLogsTimeValue_Handler,
 		},
 		{
 			MethodName: "SearchArchiveLogsGroupedValues",

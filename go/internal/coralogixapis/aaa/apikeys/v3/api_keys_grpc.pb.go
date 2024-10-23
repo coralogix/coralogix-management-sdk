@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	ApiKeysService_CreateApiKey_FullMethodName = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/CreateApiKey"
-	ApiKeysService_GetApiKey_FullMethodName    = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/GetApiKey"
-	ApiKeysService_DeleteApiKey_FullMethodName = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/DeleteApiKey"
-	ApiKeysService_UpdateApiKey_FullMethodName = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/UpdateApiKey"
+	ApiKeysService_CreateApiKey_FullMethodName       = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/CreateApiKey"
+	ApiKeysService_GetApiKey_FullMethodName          = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/GetApiKey"
+	ApiKeysService_GetSendDataApiKeys_FullMethodName = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/GetSendDataApiKeys"
+	ApiKeysService_DeleteApiKey_FullMethodName       = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/DeleteApiKey"
+	ApiKeysService_UpdateApiKey_FullMethodName       = "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/UpdateApiKey"
 )
 
 // ApiKeysServiceClient is the client API for ApiKeysService service.
@@ -31,6 +32,7 @@ const (
 type ApiKeysServiceClient interface {
 	CreateApiKey(ctx context.Context, in *CreateApiKeyRequest, opts ...grpc.CallOption) (*CreateApiKeyResponse, error)
 	GetApiKey(ctx context.Context, in *GetApiKeyRequest, opts ...grpc.CallOption) (*GetApiKeyResponse, error)
+	GetSendDataApiKeys(ctx context.Context, in *GetSendDataApiKeysRequest, opts ...grpc.CallOption) (*GetSendDataApiKeysResponse, error)
 	DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error)
 	UpdateApiKey(ctx context.Context, in *UpdateApiKeyRequest, opts ...grpc.CallOption) (*UpdateApiKeyResponse, error)
 }
@@ -61,6 +63,15 @@ func (c *apiKeysServiceClient) GetApiKey(ctx context.Context, in *GetApiKeyReque
 	return out, nil
 }
 
+func (c *apiKeysServiceClient) GetSendDataApiKeys(ctx context.Context, in *GetSendDataApiKeysRequest, opts ...grpc.CallOption) (*GetSendDataApiKeysResponse, error) {
+	out := new(GetSendDataApiKeysResponse)
+	err := c.cc.Invoke(ctx, ApiKeysService_GetSendDataApiKeys_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *apiKeysServiceClient) DeleteApiKey(ctx context.Context, in *DeleteApiKeyRequest, opts ...grpc.CallOption) (*DeleteApiKeyResponse, error) {
 	out := new(DeleteApiKeyResponse)
 	err := c.cc.Invoke(ctx, ApiKeysService_DeleteApiKey_FullMethodName, in, out, opts...)
@@ -85,6 +96,7 @@ func (c *apiKeysServiceClient) UpdateApiKey(ctx context.Context, in *UpdateApiKe
 type ApiKeysServiceServer interface {
 	CreateApiKey(context.Context, *CreateApiKeyRequest) (*CreateApiKeyResponse, error)
 	GetApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error)
+	GetSendDataApiKeys(context.Context, *GetSendDataApiKeysRequest) (*GetSendDataApiKeysResponse, error)
 	DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error)
 	UpdateApiKey(context.Context, *UpdateApiKeyRequest) (*UpdateApiKeyResponse, error)
 	mustEmbedUnimplementedApiKeysServiceServer()
@@ -99,6 +111,9 @@ func (UnimplementedApiKeysServiceServer) CreateApiKey(context.Context, *CreateAp
 }
 func (UnimplementedApiKeysServiceServer) GetApiKey(context.Context, *GetApiKeyRequest) (*GetApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetApiKey not implemented")
+}
+func (UnimplementedApiKeysServiceServer) GetSendDataApiKeys(context.Context, *GetSendDataApiKeysRequest) (*GetSendDataApiKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSendDataApiKeys not implemented")
 }
 func (UnimplementedApiKeysServiceServer) DeleteApiKey(context.Context, *DeleteApiKeyRequest) (*DeleteApiKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiKey not implemented")
@@ -155,6 +170,24 @@ func _ApiKeysService_GetApiKey_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ApiKeysService_GetSendDataApiKeys_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSendDataApiKeysRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ApiKeysServiceServer).GetSendDataApiKeys(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ApiKeysService_GetSendDataApiKeys_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ApiKeysServiceServer).GetSendDataApiKeys(ctx, req.(*GetSendDataApiKeysRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _ApiKeysService_DeleteApiKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteApiKeyRequest)
 	if err := dec(in); err != nil {
@@ -205,6 +238,10 @@ var ApiKeysService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetApiKey",
 			Handler:    _ApiKeysService_GetApiKey_Handler,
+		},
+		{
+			MethodName: "GetSendDataApiKeys",
+			Handler:    _ApiKeysService_GetSendDataApiKeys_Handler,
 		},
 		{
 			MethodName: "DeleteApiKey",

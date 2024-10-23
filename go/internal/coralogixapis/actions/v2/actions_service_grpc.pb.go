@@ -32,42 +32,12 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ActionsServiceClient interface {
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "POST"
-	// body: "action"
-	// )
 	CreateAction(ctx context.Context, in *CreateActionRequest, opts ...grpc.CallOption) (*CreateActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "PUT"
-	// body: "action"
-	// )
 	ReplaceAction(ctx context.Context, in *ReplaceActionRequest, opts ...grpc.CallOption) (*ReplaceActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions/<id>"
-	// method: "DELETE"
-	// )
 	DeleteAction(ctx context.Context, in *DeleteActionRequest, opts ...grpc.CallOption) (*DeleteActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions/<id>"
-	// method: "GET"
-	// )
 	GetAction(ctx context.Context, in *GetActionRequest, opts ...grpc.CallOption) (*GetActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "GET"
-	// )
 	ListActions(ctx context.Context, in *ListActionsRequest, opts ...grpc.CallOption) (*ListActionsResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions:order"
-	// method: "Post"
-	// )
 	OrderActions(ctx context.Context, in *OrderActionsRequest, opts ...grpc.CallOption) (*OrderActionsResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions:atomicBatchExecute"
-	// method: "Post"
-	// )
 	AtomicBatchExecuteActions(ctx context.Context, in *AtomicBatchExecuteActionsRequest, opts ...grpc.CallOption) (*AtomicBatchExecuteActionsResponse, error)
 }
 
@@ -146,42 +116,12 @@ func (c *actionsServiceClient) AtomicBatchExecuteActions(ctx context.Context, in
 // All implementations must embed UnimplementedActionsServiceServer
 // for forward compatibility
 type ActionsServiceServer interface {
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "POST"
-	// body: "action"
-	// )
 	CreateAction(context.Context, *CreateActionRequest) (*CreateActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "PUT"
-	// body: "action"
-	// )
 	ReplaceAction(context.Context, *ReplaceActionRequest) (*ReplaceActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions/<id>"
-	// method: "DELETE"
-	// )
 	DeleteAction(context.Context, *DeleteActionRequest) (*DeleteActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions/<id>"
-	// method: "GET"
-	// )
 	GetAction(context.Context, *GetActionRequest) (*GetActionResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions"
-	// method: "GET"
-	// )
 	ListActions(context.Context, *ListActionsRequest) (*ListActionsResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions:order"
-	// method: "Post"
-	// )
 	OrderActions(context.Context, *OrderActionsRequest) (*OrderActionsResponse, error)
-	// google.protobuf.http(
-	// path: "v2/actions/actions:atomicBatchExecute"
-	// method: "Post"
-	// )
 	AtomicBatchExecuteActions(context.Context, *AtomicBatchExecuteActionsRequest) (*AtomicBatchExecuteActionsResponse, error)
 	mustEmbedUnimplementedActionsServiceServer()
 }
