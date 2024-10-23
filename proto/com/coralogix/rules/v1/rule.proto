@@ -49,10 +49,12 @@ message JsonExtractParameters {
     DESTINATION_FIELD_METHODNAME = 2;
     DESTINATION_FIELD_THREADID = 3;
     DESTINATION_FIELD_SEVERITY = 4;
+    DESTINATION_FIELD_TEXT = 5;
   }
 
-  DestinationField destination_field = 1;
+  DestinationField destination_field_type = 1;
   google.protobuf.StringValue rule = 2;
+  google.protobuf.StringValue destination_field_text = 3;
 }
 
 message ReplaceParameters {

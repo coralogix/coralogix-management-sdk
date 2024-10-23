@@ -21,7 +21,7 @@ import (
 
 // UsersClient is a client for the SCIM Users API
 type UsersClient struct {
-	client *restClient
+	client *RestClient
 }
 
 // SCIMUser represents a SCIM User
@@ -122,6 +122,10 @@ func (c UsersClient) Delete(ctx context.Context, userID string) error {
 func NewUsersClient(c *CallPropertiesCreator) *UsersClient {
 	restEndpoint := CoralogixRestEndpointFromRegion(c.coraglogixRegion)
 	targetURL := restEndpoint + "/scim/Users"
-	client := newRestClient(targetURL, c.teamsLevelAPIKey)
+	client := NewRestClient(targetURL, c.teamsLevelAPIKey)
 	return &UsersClient{client: client}
+}
+
+func (c UsersClient) BaseUrl() string {
+	return c.client.url
 }

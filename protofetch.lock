@@ -141,5 +141,5 @@ commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 [[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
-revision = "v0.16.0"
-commit_hash = "d1b33742b8465dfa1e101e4121bd0164873b166f"
+revision = "v0.17.1"
+commit_hash = "abfa4bf6a2c16b7dfa9b185fde5774ee40fbfa36"
