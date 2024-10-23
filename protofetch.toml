@@ -93,6 +93,7 @@ allow_policies = [
     "/com/coralogix/permissions/v1/permissions_mgmt.proto",
     "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
     "/com/coralogixapis/aaa/apikeys/v3/*",
+    "/com/coralogixapis/aaa/rbac/v2/*",
 ]
 
 [cx-api-archive]
