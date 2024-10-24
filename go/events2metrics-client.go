@@ -18,31 +18,130 @@ import (
 	"context"
 
 	e2m "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/events2metrics/v2"
+	l2m "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/logs2metrics/v2"
+	s2m "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/spans2metrics/v2"
 )
 
+// E2M is a type for configuring the Events2Metrics service.
 type E2M = e2m.E2M
 
+// GetE2MRequest is a type for configuring the Events2Metrics service.
 type GetE2MRequest = e2m.GetE2MRequest
+
+// CreateE2MRequest is a type for configuring the Events2Metrics service.
 type CreateE2MRequest = e2m.CreateE2MRequest
+
+// ReplaceE2MRequest is a type for configuring the Events2Metrics service.
 type ReplaceE2MRequest = e2m.ReplaceE2MRequest
+
+// DeleteE2MRequest is a type for configuring the Events2Metrics service.
 type DeleteE2MRequest = e2m.DeleteE2MRequest
+
+// ListLabelsCardinalityRequest is a type for configuring the Events2Metrics service.
 type ListLabelsCardinalityRequest = e2m.ListLabelsCardinalityRequest
+
+// AtomicBatchExecuteE2MRequest is a type for configuring the Events2Metrics service.
 type AtomicBatchExecuteE2MRequest = e2m.AtomicBatchExecuteE2MRequest
 
+// E2MAggSampleType is a type for configuring the Events2Metrics service.
+type E2MAggSampleType = e2m.E2MAggSamples_SampleType
+
+// E2MAggSamples is a type for configuring the Events2Metrics service.
+type E2MAggSamples = e2m.E2MAggSamples
+
+// E2MAggHistogram is a type for configuring the Events2Metrics service.
+type E2MAggHistogram = e2m.E2MAggHistogram
+
+// E2MCreateParams is a type for configuring the Events2Metrics service.
+type E2MCreateParams = e2m.E2MCreateParams
+
+// E2MPermutations is a type for configuring the Events2Metrics service.
+type E2MPermutations = e2m.E2MPermutations
+
+// MetricLabel is a type for configuring the Events2Metrics service.
+type MetricLabel = e2m.MetricLabel
+
+// MetricField is a type for configuring the Events2Metrics service.
+type MetricField = e2m.MetricField
+
+// E2MCreateParamsSpansQuery is a type for configuring the Events2Metrics service.
+type E2MCreateParamsSpansQuery = e2m.E2MCreateParams_SpansQuery
+
+// E2MCreateParamsLogsQuery is a type for configuring the Events2Metrics service.
+type E2MCreateParamsLogsQuery = e2m.E2MCreateParams_LogsQuery
+
+// E2MSpansQuery is a type for configuring the Events2Metrics service.
+type E2MSpansQuery = e2m.E2M_SpansQuery
+
+// S2MSpansQuery is a type for configuring the Events2Metrics service.
+type S2MSpansQuery = s2m.SpansQuery
+
+// E2MLogsQuery is a type for configuring the Events2Metrics service.
+type E2MLogsQuery = e2m.E2M_LogsQuery
+
+// L2MLogsQuery is a type for configuring the Events2Metrics service.
+type L2MLogsQuery = l2m.LogsQuery
+
+// L2MSeverity is a type for configuring the Events2Metrics service.
+type L2MSeverity = l2m.Severity
+
+// L2MSeverity values.
+const (
+	L2MSeverityUnspecified = l2m.Severity_SEVERITY_UNSPECIFIED
+	L2MSeverityDebug       = l2m.Severity_SEVERITY_DEBUG
+	L2MSeverityVerbose     = l2m.Severity_SEVERITY_VERBOSE
+	L2MSeverityInfo        = l2m.Severity_SEVERITY_INFO
+	L2MSeverityWarning     = l2m.Severity_SEVERITY_WARNING
+	L2MSeverityError       = l2m.Severity_SEVERITY_ERROR
+	L2MSeverityCritical    = l2m.Severity_SEVERITY_CRITICAL
+)
+
+// E2MAggSampleType values.
 const (
 	E2MAggSampleTypeMin = e2m.E2MAggSamples_SAMPLE_TYPE_MIN
 	E2MAggSampleTypeMax = e2m.E2MAggSamples_SAMPLE_TYPE_MAX
 )
 
+// E2MAggregationType is a type for configuring the Events2Metrics service.
+type E2MAggregationType = e2m.Aggregation_AggType
+
+// E2MAggregation is a type for configuring the Events2Metrics service.
+type E2MAggregation = e2m.Aggregation
+
+// E2MAggregationHistogram is a type for configuring the Events2Metrics service.
+type E2MAggregationHistogram = e2m.Aggregation_Histogram
+
+// E2MAggregationSamples is a type for configuring the Events2Metrics service.
+type E2MAggregationSamples = e2m.Aggregation_Samples
+
+// E2MAggregationType values.
 const (
-	E2MCreateRPC                = cxsdk.Events2MetricService_CreateE2M_FullMethodName
-	E2MListRPC                  = cxsdk.Events2MetricService_ListE2M_FullMethodName
-	E2MReplaceRPC               = cxsdk.Events2MetricService_ReplaceE2M_FullMethodName
-	E2MGetRPC                   = cxsdk.Events2MetricService_GetE2M_FullMethodName
-	E2MDeleteRPC                = cxsdk.Events2MetricService_DeleteE2M_FullMethodName
-	E2MAtomicBatchExecuteRPC    = cxsdk.Events2MetricService_AtomicBatchExecuteE2M_FullMethodName
-	E2MListLabelsCardinalityRPC = cxsdk.Events2MetricService_ListLabelsCardinality_FullMethodName
-	E2MGetLimtsRPC              = cxsdk.Events2MetricService_GetLimits_FullMethodName
+	E2MAggregationTypeMin       = e2m.Aggregation_AGG_TYPE_MIN
+	E2MAggregationTypeMax       = e2m.Aggregation_AGG_TYPE_MAX
+	E2MAggregationTypeCount     = e2m.Aggregation_AGG_TYPE_COUNT
+	E2MAggregationTypeAvg       = e2m.Aggregation_AGG_TYPE_AVG
+	E2MAggregationTypeSum       = e2m.Aggregation_AGG_TYPE_SUM
+	E2MAggregationTypeHistogram = e2m.Aggregation_AGG_TYPE_HISTOGRAM
+	E2MAggregationTypeSamples   = e2m.Aggregation_AGG_TYPE_SAMPLES
+)
+
+// E2MType values.
+const (
+	E2MTypeUnspecified   = e2m.E2MType_E2M_TYPE_UNSPECIFIED
+	E2MTypeLogs2Metrics  = e2m.E2MType_E2M_TYPE_LOGS2METRICS
+	E2MTypeSpans2Metrics = e2m.E2MType_E2M_TYPE_SPANS2METRICS
+)
+
+// RPC values.
+const (
+	E2MCreateRPC                = e2m.Events2MetricService_CreateE2M_FullMethodName
+	E2MListRPC                  = e2m.Events2MetricService_ListE2M_FullMethodName
+	E2MReplaceRPC               = e2m.Events2MetricService_ReplaceE2M_FullMethodName
+	E2MGetRPC                   = e2m.Events2MetricService_GetE2M_FullMethodName
+	E2MDeleteRPC                = e2m.Events2MetricService_DeleteE2M_FullMethodName
+	E2MAtomicBatchExecuteRPC    = e2m.Events2MetricService_AtomicBatchExecuteE2M_FullMethodName
+	E2MListLabelsCardinalityRPC = e2m.Events2MetricService_ListLabelsCardinality_FullMethodName
+	E2MGetLimtsRPC              = e2m.Events2MetricService_GetLimits_FullMethodName
 )
 
 // Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/
