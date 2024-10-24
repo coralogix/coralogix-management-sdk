@@ -63,7 +63,7 @@ const (
 	RowStyleOneLine     = dashboards.RowStyle_ROW_STYLE_ONE_LINE
 	RowStyleTwoLine     = dashboards.RowStyle_ROW_STYLE_TWO_LINE
 	RowStyleCondensed   = dashboards.RowStyle_ROW_STYLE_CONDENSED
-	RowStyleJson        = dashboards.RowStyle_ROW_STYLE_JSON
+	RowStyleJSON        = dashboards.RowStyle_ROW_STYLE_JSON
 	RowStyleList        = dashboards.RowStyle_ROW_STYLE_LIST
 	RowStyleUnspecified = dashboards.RowStyle_ROW_STYLE_UNSPECIFIED
 )
@@ -336,7 +336,7 @@ type DatasetScope = dashboards.DatasetScope
 // DatasetScope values.
 const (
 	DatasetScopeUnspecified = dashboards.DatasetScope_DATASET_SCOPE_UNSPECIFIED
-	DatasetScopeUser_data   = dashboards.DatasetScope_DATASET_SCOPE_USER_DATA
+	DatasetScopeUserData    = dashboards.DatasetScope_DATASET_SCOPE_USER_DATA
 	DatasetScopeLabel       = dashboards.DatasetScope_DATASET_SCOPE_LABEL
 	DatasetScopeMetadata    = dashboards.DatasetScope_DATASET_SCOPE_METADATA
 )
