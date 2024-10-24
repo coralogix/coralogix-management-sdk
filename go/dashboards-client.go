@@ -1041,24 +1041,61 @@ type LineChartQuerySpans = dashboards.LineChart_Query_Spans
 // LineChartSpansQuery is a type for data for charts.
 type LineChartSpansQuery = dashboards.LineChart_SpansQuery
 
+// DashboardDataTable is a type for dashboard charts.
 type DashboardDataTable = dashboards.DataTable
+
+// DashboardDataTableQuery is a type for dashboard charts.
 type DashboardDataTableQuery = dashboards.DataTable_Query
+
+// DashboardDataTableQueryDataprime is a type for dashboard charts.
 type DashboardDataTableQueryDataprime = dashboards.DataTable_Query_Dataprime
+
+// DashboardDataTableDataprimeQuery is a type for dashboard charts.
 type DashboardDataTableDataprimeQuery = dashboards.DataTable_DataprimeQuery
+
+// DashboardDataTableQueryMetrics is a type for dashboard charts.
 type DashboardDataTableQueryMetrics = dashboards.DataTable_Query_Metrics
+
+// DashboardDataTableMetricsQuery is a type for dashboard charts.
 type DashboardDataTableMetricsQuery = dashboards.DataTable_MetricsQuery
+
+// DashboardDataTableQueryLogs is a type for dashboard charts.
 type DashboardDataTableQueryLogs = dashboards.DataTable_Query_Logs
+
+// DashboardDataTableLogsQuery is a type for dashboard charts.
 type DashboardDataTableLogsQuery = dashboards.DataTable_LogsQuery
+
+// DashboardDataTableLogsQueryGrouping is a type for dashboard charts.
 type DashboardDataTableLogsQueryGrouping = dashboards.DataTable_LogsQuery_Grouping
+
+// DashboardDataTableLogsQueryAggregation is a type for dashboard charts.
 type DashboardDataTableLogsQueryAggregation = dashboards.DataTable_LogsQuery_Aggregation
+
+// DashboardDataTableQuerySpans is a type for dashboard charts.
 type DashboardDataTableQuerySpans = dashboards.DataTable_Query_Spans
+
+// DashboardDataTableSpansQuery is a type for dashboard charts.
 type DashboardDataTableSpansQuery = dashboards.DataTable_SpansQuery
+
+// DashboardDataTableSpansQueryGrouping is a type for dashboard charts.
 type DashboardDataTableSpansQueryGrouping = dashboards.DataTable_SpansQuery_Grouping
+
+// DashboardDataTableSpansQueryAggregation is a type for dashboard charts.
 type DashboardDataTableSpansQueryAggregation = dashboards.DataTable_SpansQuery_Aggregation
+
+// DashboardDataTableColumn is a type for dashboard charts.
 type DashboardDataTableColumn = dashboards.DataTable_Column
+
+// DashboardRelativeTimeFrame is a type for dashboard charts.
 type DashboardRelativeTimeFrame = dashboards.Dashboard_RelativeTimeFrame
+
+// DashboardAbsoluteTimeFrame is a type for dashboard charts.
 type DashboardAbsoluteTimeFrame = dashboards.Dashboard_AbsoluteTimeFrame
+
+// DashboardTimeFrame is a type for dashboard charts.
 type DashboardTimeFrame = dashboards.TimeFrame
+
+// DashboardOrderingField is a type for dashboard charts.
 type DashboardOrderingField = dashboards.OrderingField
 
 // Create Creates a new dashboard.
