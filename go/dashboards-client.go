@@ -46,7 +46,7 @@ type UnpinDashboardRequest = dashboards.UnpinDashboardRequest
 // DashboardFolderPath is a dashboard folder path.
 type DashboardFolderPath = dashboards.Dashboard_FolderPath
 
-// DashboardFolderPath is a dashboard folder id.
+// DashboardFolderID is a dashboard folder id.
 type DashboardFolderID = dashboards.Dashboard_FolderId
 
 // FolderPath is a dashboard folder path.
@@ -214,13 +214,13 @@ type HorizontalBarChartStackDefinition = dashboards.HorizontalBarChart_StackDefi
 // SpansAggregation is a type for spans aggregation.
 type SpansAggregation = dashboards.SpansAggregation
 
-// SpansAggregation_MetricAggregation_
+// SpansAggregationMetricAggregation is a type for metric aggregation.
 type SpansAggregationMetricAggregation = dashboards.SpansAggregation_MetricAggregation_
 
 // SpansAggregationMetricAggregationInner is a type for spans aggregation metric aggregation.
 type SpansAggregationMetricAggregationInner = dashboards.SpansAggregation_MetricAggregation
 
-// SpansAggregation_MetricAggregation_
+// SpansAggregationDimensionAggregation is a type for aggregation.
 type SpansAggregationDimensionAggregation = dashboards.SpansAggregation_DimensionAggregation_
 
 // SpansAggregationDimensionAggregationInner is a type for spans aggregation metric aggregation.
@@ -374,7 +374,7 @@ const (
 	MultiSelectRefreshStrategyOnTimeFrameChange = dashboards.MultiSelect_REFRESH_STRATEGY_ON_TIME_FRAME_CHANGE
 )
 
-// Annotatin is an annotation for dashboards.
+// Annotation is an annotation for dashboards.
 type Annotation = dashboards.Annotation
 
 // DashboardFilter is a filter for dashboards.

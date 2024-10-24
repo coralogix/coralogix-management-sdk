@@ -109,8 +109,8 @@ const (
 	TCOPolicySeverityCritical = tcopolicies.Severity_SEVERITY_CRITICAL
 )
 
-// TCOPolicyRuleTypeId is a type for TCO policy rule type ID.
-type TCOPolicyRuleTypeId = tcopolicies.RuleTypeId
+// TCOPolicyRuleTypeID is a type for TCO policy rule type ID.
+type TCOPolicyRuleTypeID = tcopolicies.RuleTypeId
 
 // TCOPolicyRuleTypeId values.
 const (
