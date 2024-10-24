@@ -17,169 +17,182 @@ package cxsdk
 import (
 	"context"
 
-	rulesgroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/rules/v1"
+	rulegroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/rules/v1"
 )
 
 // CreateRuleGroupRequest represents a request to create a rule group.
-type CreateRuleGroupRequest = rulesgroups.CreateRuleGroupRequest
+type CreateRuleGroupRequest = rulegroups.CreateRuleGroupRequest
 
 // CreateRuleGroupResponse represents the response after creating a rule group.
-type CreateRuleGroupResponse = rulesgroups.CreateRuleGroupResponse
+type CreateRuleGroupResponse = rulegroups.CreateRuleGroupResponse
 
 // GetRuleGroupRequest represents a request to get a rule group.
-type GetRuleGroupRequest = rulesgroups.GetRuleGroupRequest
+type GetRuleGroupRequest = rulegroups.GetRuleGroupRequest
 
 // GetRuleGroupResponse represents the response after getting a rule group.
-type GetRuleGroupResponse = rulesgroups.GetRuleGroupResponse
+type GetRuleGroupResponse = rulegroups.GetRuleGroupResponse
 
 // UpdateRuleGroupRequest represents a request to update a rule group.
-type UpdateRuleGroupRequest = rulesgroups.UpdateRuleGroupRequest
+type UpdateRuleGroupRequest = rulegroups.UpdateRuleGroupRequest
 
 // UpdateRuleGroupResponse represents the response after updating a rule group.
-type UpdateRuleGroupResponse = rulesgroups.UpdateRuleGroupResponse
+type UpdateRuleGroupResponse = rulegroups.UpdateRuleGroupResponse
 
 // DeleteRuleGroupRequest represents a request to delete a rule group.
-type DeleteRuleGroupRequest = rulesgroups.DeleteRuleGroupRequest
+type DeleteRuleGroupRequest = rulegroups.DeleteRuleGroupRequest
 
 // DeleteRuleGroupResponse represents the response after deleting a rule group.
-type DeleteRuleGroupResponse = rulesgroups.DeleteRuleGroupResponse
+type DeleteRuleGroupResponse = rulegroups.DeleteRuleGroupResponse
 
 // CreateRuleGroupRequestCreateRuleSubgroup represents a subgroup in the create rule group request.
-type CreateRuleGroupRequestCreateRuleSubgroup = rulesgroups.CreateRuleGroupRequest_CreateRuleSubgroup
+type CreateRuleGroupRequestCreateRuleSubgroup = rulegroups.CreateRuleGroupRequest_CreateRuleSubgroup
 
 // CreateRuleGroupRequestCreateRuleSubgroupCreateRule represents a rule in the create rule group subgroup request.
-type CreateRuleGroupRequestCreateRuleSubgroupCreateRule = rulesgroups.CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule
+type CreateRuleGroupRequestCreateRuleSubgroupCreateRule = rulegroups.CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule
 
 // RuleParameters represents rule parameters.
-type RuleParameters = rulesgroups.RuleParameters
+type RuleParameters = rulegroups.RuleParameters
 
 // RuleParametersParseParameters represents parse parameters for a rule.
-type RuleParametersParseParameters = rulesgroups.RuleParameters_ParseParameters
+type RuleParametersParseParameters = rulegroups.RuleParameters_ParseParameters
 
 // ParseParameters represents parse parameters.
-type ParseParameters = rulesgroups.ParseParameters
+type ParseParameters = rulegroups.ParseParameters
 
 // RuleParametersJSONParseParameters represents JSON parse parameters for a rule.
-type RuleParametersJSONParseParameters = rulesgroups.RuleParameters_JsonParseParameters
+type RuleParametersJSONParseParameters = rulegroups.RuleParameters_JsonParseParameters
 
 // JSONParseParameters represents JSON parse parameters.
-type JSONParseParameters = rulesgroups.JsonParseParameters
+type JSONParseParameters = rulegroups.JsonParseParameters
 
 // RuleParametersJSONStringifyParameters represents JSON stringify parameters for a rule.
-type RuleParametersJSONStringifyParameters = rulesgroups.RuleParameters_JsonStringifyParameters
+type RuleParametersJSONStringifyParameters = rulegroups.RuleParameters_JsonStringifyParameters
 
 // JSONStringifyParameters represents JSON stringify parameters.
-type JSONStringifyParameters = rulesgroups.JsonStringifyParameters
+type JSONStringifyParameters = rulegroups.JsonStringifyParameters
 
 // RuleParametersJSONExtractParameters represents JSON extract parameters for a rule.
-type RuleParametersJSONExtractParameters = rulesgroups.RuleParameters_JsonExtractParameters
+type RuleParametersJSONExtractParameters = rulegroups.RuleParameters_JsonExtractParameters
 
 // JSONExtractParameters represents JSON extract parameters.
-type JSONExtractParameters = rulesgroups.JsonExtractParameters
+type JSONExtractParameters = rulegroups.JsonExtractParameters
 
 // RuleParametersRemoveFieldsParameters represents parameters to remove fields in a rule.
-type RuleParametersRemoveFieldsParameters = rulesgroups.RuleParameters_RemoveFieldsParameters
+type RuleParametersRemoveFieldsParameters = rulegroups.RuleParameters_RemoveFieldsParameters
 
 // RemoveFieldsParameters represents parameters to remove fields.
-type RemoveFieldsParameters = rulesgroups.RemoveFieldsParameters
+type RemoveFieldsParameters = rulegroups.RemoveFieldsParameters
 
 // RuleParametersExtractTimestampParameters represents parameters to extract timestamp in a rule.
-type RuleParametersExtractTimestampParameters = rulesgroups.RuleParameters_ExtractTimestampParameters
+type RuleParametersExtractTimestampParameters = rulegroups.RuleParameters_ExtractTimestampParameters
 
 // ExtractTimestampParameters represents parameters to extract timestamp.
-type ExtractTimestampParameters = rulesgroups.ExtractTimestampParameters
+type ExtractTimestampParameters = rulegroups.ExtractTimestampParameters
 
 // RuleParametersBlockParameters represents parameters to block in a rule.
-type RuleParametersBlockParameters = rulesgroups.RuleParameters_BlockParameters
+type RuleParametersBlockParameters = rulegroups.RuleParameters_BlockParameters
 
 // BlockParameters represents block parameters.
-type BlockParameters = rulesgroups.BlockParameters
+type BlockParameters = rulegroups.BlockParameters
 
 // RuleParametersAllowParameters represents allow parameters in a rule.
-type RuleParametersAllowParameters = rulesgroups.RuleParameters_AllowParameters
+type RuleParametersAllowParameters = rulegroups.RuleParameters_AllowParameters
 
 // AllowParameters represents allow parameters.
-type AllowParameters = rulesgroups.AllowParameters
+type AllowParameters = rulegroups.AllowParameters
 
 // RuleParametersReplaceParameters represents replace parameters in a rule.
-type RuleParametersReplaceParameters = rulesgroups.RuleParameters_ReplaceParameters
+type RuleParametersReplaceParameters = rulegroups.RuleParameters_ReplaceParameters
 
 // ReplaceParameters represents replace parameters.
-type ReplaceParameters = rulesgroups.ReplaceParameters
+type ReplaceParameters = rulegroups.ReplaceParameters
 
 // RuleParametersExtractParameters represents extract parameters in a rule.
-type RuleParametersExtractParameters = rulesgroups.RuleParameters_ExtractParameters
+type RuleParametersExtractParameters = rulegroups.RuleParameters_ExtractParameters
 
 // ExtractParameters represents extract parameters.
-type ExtractParameters = rulesgroups.ExtractParameters
+type ExtractParameters = rulegroups.ExtractParameters
 
 // RuleMatcher represents a rule matcher.
-type RuleMatcher = rulesgroups.RuleMatcher
+type RuleMatcher = rulegroups.RuleMatcher
 
 // ExtractTimestampParametersFormatStandard represents the standard timestamp format.
-type ExtractTimestampParametersFormatStandard = rulesgroups.ExtractTimestampParameters_FormatStandard
+type ExtractTimestampParametersFormatStandard = rulegroups.ExtractTimestampParameters_FormatStandard
 
 // ApplicationNameConstraint represents an application name constraint.
-type ApplicationNameConstraint = rulesgroups.ApplicationNameConstraint
+type ApplicationNameConstraint = rulegroups.ApplicationNameConstraint
 
 // RuleMatcherApplicationName represents an application name matcher.
-type RuleMatcherApplicationName = rulesgroups.RuleMatcher_ApplicationName
+type RuleMatcherApplicationName = rulegroups.RuleMatcher_ApplicationName
 
 // SubsystemNameConstraint represents a subsystem name constraint.
-type SubsystemNameConstraint = rulesgroups.SubsystemNameConstraint
+type SubsystemNameConstraint = rulegroups.SubsystemNameConstraint
 
 // RuleMatcherSubsystemName represents a subsystem name matcher.
-type RuleMatcherSubsystemName = rulesgroups.RuleMatcher_SubsystemName
+type RuleMatcherSubsystemName = rulegroups.RuleMatcher_SubsystemName
 
 // SeverityConstraint represents a severity constraint.
-type SeverityConstraint = rulesgroups.SeverityConstraint
+type SeverityConstraint = rulegroups.SeverityConstraint
 
 // SeverityConstraintValue represents a severity constraint value.
-type SeverityConstraintValue = rulesgroups.SeverityConstraint_Value
+type SeverityConstraintValue = rulegroups.SeverityConstraint_Value
 
 // JSONExtractParametersDestinationField represents a JSON extract destination field.
-type JSONExtractParametersDestinationField = rulesgroups.JsonExtractParameters_DestinationField
+type JSONExtractParametersDestinationField = rulegroups.JsonExtractParameters_DestinationField
 
 // RuleMatcherSeverity represents a severity matcher.
-type RuleMatcherSeverity = rulesgroups.RuleMatcher_Severity
+type RuleMatcherSeverity = rulegroups.RuleMatcher_Severity
 
 // RuleGroup represents a rule group.
-type RuleGroup = rulesgroups.RuleGroup
+type RuleGroup = rulegroups.RuleGroup
 
 // RuleSubgroup represents a subgroup of a rule.
-type RuleSubgroup = rulesgroups.RuleSubgroup
+type RuleSubgroup = rulegroups.RuleSubgroup
 
 // Rule represents a rule.
-type Rule = rulesgroups.Rule
+type Rule = rulegroups.Rule
 
 // SeverityConstraint values.
 const (
-	SeverityConstraintValueDebugOrUnspecified = rulesgroups.SeverityConstraint_VALUE_DEBUG_OR_UNSPECIFIED
-	SeverityConstraintValueVerbose            = rulesgroups.SeverityConstraint_VALUE_VERBOSE
-	SeverityConstraintValueInfo               = rulesgroups.SeverityConstraint_VALUE_INFO
-	SeverityConstraintValueWarning            = rulesgroups.SeverityConstraint_VALUE_WARNING
-	SeverityConstraintValueError              = rulesgroups.SeverityConstraint_VALUE_ERROR
-	SeverityConstraintValueCritical           = rulesgroups.SeverityConstraint_VALUE_CRITICAL
+	SeverityConstraintValueDebugOrUnspecified = rulegroups.SeverityConstraint_VALUE_DEBUG_OR_UNSPECIFIED
+	SeverityConstraintValueVerbose            = rulegroups.SeverityConstraint_VALUE_VERBOSE
+	SeverityConstraintValueInfo               = rulegroups.SeverityConstraint_VALUE_INFO
+	SeverityConstraintValueWarning            = rulegroups.SeverityConstraint_VALUE_WARNING
+	SeverityConstraintValueError              = rulegroups.SeverityConstraint_VALUE_ERROR
+	SeverityConstraintValueCritical           = rulegroups.SeverityConstraint_VALUE_CRITICAL
 )
 
 // JSONExtractParameters values.
 const (
-	JSONExtractParametersDestinationFieldCategoryOrUnspecified = rulesgroups.JsonExtractParameters_DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
-	JSONExtractParametersDestinationFieldClassName             = rulesgroups.JsonExtractParameters_DESTINATION_FIELD_CLASSNAME
-	JSONExtractParametersDestinationFieldMethodName            = rulesgroups.JsonExtractParameters_DESTINATION_FIELD_METHODNAME
-	JSONExtractParametersDestinationFieldThreadID              = rulesgroups.JsonExtractParameters_DESTINATION_FIELD_THREADID
-	JSONExtractParametersDestinationFieldSeverity              = rulesgroups.JsonExtractParameters_DESTINATION_FIELD_SEVERITY
+	JSONExtractParametersDestinationFieldCategoryOrUnspecified = rulegroups.JsonExtractParameters_DESTINATION_FIELD_CATEGORY_OR_UNSPECIFIED
+	JSONExtractParametersDestinationFieldClassName             = rulegroups.JsonExtractParameters_DESTINATION_FIELD_CLASSNAME
+	JSONExtractParametersDestinationFieldMethodName            = rulegroups.JsonExtractParameters_DESTINATION_FIELD_METHODNAME
+	JSONExtractParametersDestinationFieldThreadID              = rulegroups.JsonExtractParameters_DESTINATION_FIELD_THREADID
+	JSONExtractParametersDestinationFieldSeverity              = rulegroups.JsonExtractParameters_DESTINATION_FIELD_SEVERITY
+	JSONExtractParametersDestinationFieldText                  = rulegroups.JsonExtractParameters_DESTINATION_FIELD_TEXT
 )
 
 // ExtractTimestampParameters values.
 const (
-	ExtractTimestampParametersFormatStandardStrftimeOrUnspecified = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED
-	ExtractTimestampParametersFormatStandardJavasdf               = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_JAVASDF
-	ExtractTimestampParametersFormatStandardGolang                = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_GOLANG
-	ExtractTimestampParametersFormatStandardSecondsTS             = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_SECONDSTS
-	ExtractTimestampParametersFormatStandardMilliTS               = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_MILLITS
-	ExtractTimestampParametersFormatStandardMicroTS               = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_MICROTS
-	ExtractTimestampParametersFormatStandardNanoTS                = rulesgroups.ExtractTimestampParameters_FORMAT_STANDARD_NANOTS
+	ExtractTimestampParametersFormatStandardStrftimeOrUnspecified = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED
+	ExtractTimestampParametersFormatStandardJavasdf               = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_JAVASDF
+	ExtractTimestampParametersFormatStandardGolang                = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_GOLANG
+	ExtractTimestampParametersFormatStandardSecondsTS             = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_SECONDSTS
+	ExtractTimestampParametersFormatStandardMilliTS               = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_MILLITS
+	ExtractTimestampParametersFormatStandardMicroTS               = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_MICROTS
+	ExtractTimestampParametersFormatStandardNanoTS                = rulegroups.ExtractTimestampParameters_FORMAT_STANDARD_NANOTS
+)
+
+// RPC names.
+const (
+	RuleGroupsGetRuleGroupRPC             = rulegroups.RuleGroupsService_GetRuleGroup_FullMethodName
+	RuleGroupsListRuleGroupsRPC           = rulegroups.RuleGroupsService_ListRuleGroups_FullMethodName
+	RuleGroupsCreateRuleGroupRPC          = rulegroups.RuleGroupsService_CreateRuleGroup_FullMethodName
+	RuleGroupsUpdateRuleGroupRPC          = rulegroups.RuleGroupsService_UpdateRuleGroup_FullMethodName
+	RuleGroupsDeleteRuleGroupRPC          = rulegroups.RuleGroupsService_DeleteRuleGroup_FullMethodName
+	RuleGroupsBulkDeleteRuleGroupRPC      = rulegroups.RuleGroupsService_BulkDeleteRuleGroup_FullMethodName
+	RuleGroupsGetRuleGroupModelMappingRPC = rulegroups.RuleGroupsService_GetRuleGroupModelMapping_FullMethodName
+	RuleGroupsGetCompanyUsageLimitsRPC    = rulegroups.RuleGroupsService_GetCompanyUsageLimits_FullMethodName
 )
 
 // RuleGroupsClient is a client for the Coralogix Rules Groups API.
@@ -188,7 +201,7 @@ type RuleGroupsClient struct {
 }
 
 // Create creates a new rule group.
-func (r RuleGroupsClient) Create(ctx context.Context, req *rulesgroups.CreateRuleGroupRequest) (*rulesgroups.CreateRuleGroupResponse, error) {
+func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupRequest) (*rulegroups.CreateRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -196,13 +209,13 @@ func (r RuleGroupsClient) Create(ctx context.Context, req *rulesgroups.CreateRul
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := rulesgroups.NewRuleGroupsServiceClient(conn)
+	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	return client.CreateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Get gets a rule group.
-func (r RuleGroupsClient) Get(ctx context.Context, req *rulesgroups.GetRuleGroupRequest) (*rulesgroups.GetRuleGroupResponse, error) {
+func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*rulegroups.GetRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -210,13 +223,13 @@ func (r RuleGroupsClient) Get(ctx context.Context, req *rulesgroups.GetRuleGroup
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := rulesgroups.NewRuleGroupsServiceClient(conn)
+	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	return client.GetRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Update updates a rule group.
-func (r RuleGroupsClient) Update(ctx context.Context, req *rulesgroups.UpdateRuleGroupRequest) (*rulesgroups.UpdateRuleGroupResponse, error) {
+func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupRequest) (*rulegroups.UpdateRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -225,13 +238,13 @@ func (r RuleGroupsClient) Update(ctx context.Context, req *rulesgroups.UpdateRul
 	conn := callProperties.Connection
 	defer conn.Close()
 
-	client := rulesgroups.NewRuleGroupsServiceClient(conn)
+	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	return client.UpdateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Delete deletes a rule group.
-func (r RuleGroupsClient) Delete(ctx context.Context, req *rulesgroups.DeleteRuleGroupRequest) (*rulesgroups.DeleteRuleGroupResponse, error) {
+func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupRequest) (*rulegroups.DeleteRuleGroupResponse, error) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -240,7 +253,7 @@ func (r RuleGroupsClient) Delete(ctx context.Context, req *rulesgroups.DeleteRul
 	conn := callProperties.Connection
 	defer conn.Close()
 
-	client := rulesgroups.NewRuleGroupsServiceClient(conn)
+	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	return client.DeleteRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 }

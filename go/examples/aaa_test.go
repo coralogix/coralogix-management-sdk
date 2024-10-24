@@ -118,7 +118,7 @@ func TestScopes(t *testing.T) {
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
 		DisplayName: "Test Data Access Rule",
 		Description: &description,
-		Filters: []*cxsdk.Filter{
+		Filters: []*cxsdk.ScopeFilter{
 			{EntityType: cxsdk.EntityTypeLogs, Expression: "<v1> foo == 'bar'"},
 		},
 		DefaultExpression: "<v1>true",

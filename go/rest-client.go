@@ -27,21 +27,22 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// restClient for Coralogix API
-type restClient struct {
+// RestClient for Coralogix API
+type RestClient struct {
 	url           string
 	apiKey        string
 	client        *http.Client
 	correlationID string
 }
 
-func newRestClient(url string, apiKey string) *restClient {
+// NewRestClient creates a new RestClient
+func NewRestClient(url string, apiKey string) *RestClient {
 	correlationID := uuid.New().String()
-	return &restClient{url, apiKey, &http.Client{}, correlationID}
+	return &RestClient{url, apiKey, &http.Client{}, correlationID}
 }
 
 // Request executes request to Coralogix API
-func (c *restClient) Request(ctx context.Context, method, path, contentType string, body interface{}, headers ...string) (string, error) {
+func (c *RestClient) Request(ctx context.Context, method, path, contentType string, body interface{}, headers ...string) (string, error) {
 	var request *http.Request
 	if body != nil {
 		bodyReader := bytes.NewBuffer([]byte(body.(string)))
@@ -99,21 +100,21 @@ func (c *restClient) Request(ctx context.Context, method, path, contentType stri
 }
 
 // Get executes GET request to Coralogix API
-func (c *restClient) Get(ctx context.Context, path string, headers ...string) (string, error) {
+func (c *RestClient) Get(ctx context.Context, path string, headers ...string) (string, error) {
 	return c.Request(ctx, "GET", path, "", nil, headers...)
 }
 
 // Post executes POST request to Coralogix API
-func (c *restClient) Post(ctx context.Context, path, contentType, body string, headers ...string) (string, error) {
+func (c *RestClient) Post(ctx context.Context, path, contentType, body string, headers ...string) (string, error) {
 	return c.Request(ctx, "POST", path, contentType, body, headers...)
 }
 
 // Put executes PUT request to Coralogix API
-func (c *restClient) Put(ctx context.Context, path, contentType, body string, headers ...string) (string, error) {
+func (c *RestClient) Put(ctx context.Context, path, contentType, body string, headers ...string) (string, error) {
 	return c.Request(ctx, "PUT", path, contentType, body, headers...)
 }
 
 // Delete executes DELETE request to Coralogix API
-func (c *restClient) Delete(ctx context.Context, path string, headers ...string) (string, error) {
+func (c *RestClient) Delete(ctx context.Context, path string, headers ...string) (string, error) {
 	return c.Request(ctx, "DELETE", path, "", nil, headers...)
 }

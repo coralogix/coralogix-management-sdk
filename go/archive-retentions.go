@@ -20,6 +20,32 @@ import (
 	archiveRetention "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/archive/v1"
 )
 
+// UpdateRetentionsRequest is a type for archive retention.
+type UpdateRetentionsRequest = archiveRetention.UpdateRetentionsRequest
+
+// GetRetentionsRequest is a type for archive retention.
+type GetRetentionsRequest = archiveRetention.GetRetentionsRequest
+
+// RetentionUpdateElement is a type for archive retention.
+type RetentionUpdateElement = archiveRetention.RetentionUpdateElement
+
+// GetRetentionsEnabledRequest is a request type.
+type GetRetentionsEnabledRequest = archiveRetention.GetRetentionsEnabledRequest
+
+// ActivateRetentionsRequest is a request type.
+type ActivateRetentionsRequest = archiveRetention.ActivateRetentionsRequest
+
+// Retention is a type for archive retention.
+type Retention = archiveRetention.Retention
+
+// RPC values.
+const (
+	ArchiveRetentionGetRetentionsRPC        = archiveRetention.RetentionsService_GetRetentions_FullMethodName
+	ArchiveRetentionUpdateRetentionsRPC     = archiveRetention.RetentionsService_UpdateRetentions_FullMethodName
+	ArchiveRetentionActivateRetentionsRPC   = archiveRetention.RetentionsService_ActivateRetentions_FullMethodName
+	ArchiveRetentionGetRetentionsEnabledRPC = archiveRetention.RetentionsService_GetRetentionsEnabled_FullMethodName
+)
+
 // ArchiveRetentionsClient is a client for the Coralogix Archive Retentions API.
 type ArchiveRetentionsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
@@ -40,7 +66,7 @@ func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.
 }
 
 // Update updates the archive retentions.
-func (c ArchiveRetentionsClient) Update(ctx context.Context, req *archiveRetention.UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, error) {
+func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -54,7 +80,7 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *archiveRetenti
 }
 
 // Activate activates the archive retentions.
-func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *archiveRetention.ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
+func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -68,7 +94,7 @@ func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *archiveReten
 }
 
 // GetEnabled returns a boolean that signals whether archive retentions are enabled.
-func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *archiveRetention.GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, error) {
+func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err

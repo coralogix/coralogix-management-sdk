@@ -20,11 +20,6 @@ import (
 	dashboards "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
 )
 
-// DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.
-type DashboardsFoldersClient struct {
-	callPropertiesCreator *CallPropertiesCreator
-}
-
 // ListDashboardFolderRequest is a request to get a dashboard folders.
 type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
 
@@ -42,6 +37,20 @@ type ReplaceDashboardFolderRequest = dashboards.ReplaceDashboardFolderRequest
 
 // DeleteDashboardFolderRequest is a request to delete a dashboard folder.
 type DeleteDashboardFolderRequest = dashboards.DeleteDashboardFolderRequest
+
+// RPC names.
+const (
+	DashboardFoldersListDashboardFoldersRPC   = dashboards.DashboardFoldersService_ListDashboardFolders_FullMethodName
+	DashboardFoldersGetDashboardFolderRPC     = dashboards.DashboardFoldersService_GetDashboardFolder_FullMethodName
+	DashboardFoldersCreateDashboardFolderRPC  = dashboards.DashboardFoldersService_CreateDashboardFolder_FullMethodName
+	DashboardFoldersReplaceDashboardFolderRPC = dashboards.DashboardFoldersService_ReplaceDashboardFolder_FullMethodName
+	DashboardFoldersDeleteDashboardFolderRPC  = dashboards.DashboardFoldersService_DeleteDashboardFolder_FullMethodName
+)
+
+// DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.
+type DashboardsFoldersClient struct {
+	callPropertiesCreator *CallPropertiesCreator
+}
 
 // Create creates a new dashboard folder.
 func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {

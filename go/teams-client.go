@@ -44,6 +44,18 @@ type MoveQuotaRequest = teams.MoveQuotaRequest
 // TeamID identifies a team.
 type TeamID = teams.TeamId
 
+// RPC names.
+const (
+	CreateTeamInOrgRPC = teams.TeamService_CreateTeamInOrg_FullMethodName
+	MoveQuotaRPC       = teams.TeamService_MoveQuota_FullMethodName
+	GetTeamQuotaRPC    = teams.TeamService_GetTeamQuota_FullMethodName
+	SetDailyQuotaRPC   = teams.TeamService_SetDailyQuota_FullMethodName
+	UpdateTeamRPC      = teams.TeamService_UpdateTeam_FullMethodName
+	GetTeamRPC         = teams.TeamService_GetTeam_FullMethodName
+	DeleteTeamRPC      = teams.TeamService_DeleteTeam_FullMethodName
+	ListTeamsRPC       = teams.TeamService_ListTeams_FullMethodName
+)
+
 // TeamsClient is a client for the Coralogix Teams API.
 type TeamsClient struct {
 	callPropertiesCreator *CallPropertiesCreator

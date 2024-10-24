@@ -31,6 +31,9 @@ type AlertSchedulerFilter = scheduler.Filter
 // AlertSchedulerFilterUniqueIDs is a filter for an alert scheduler rule that contains unique IDs.
 type AlertSchedulerFilterUniqueIDs = scheduler.Filter_AlertUniqueIds
 
+// AlertSchedulerFilterMetaLabels is a filter for an alert scheduler rule that contains unique IDs.
+type AlertSchedulerFilterMetaLabels = scheduler.Filter_AlertMetaLabels
+
 // AlertUniqueIDs is a list of alert unique IDs.
 type AlertUniqueIDs = scheduler.AlertUniqueIds
 
@@ -52,6 +55,42 @@ type Schedule = scheduler.Schedule
 // ScheduleOneTime is a one-time schedule container.
 type ScheduleOneTime = scheduler.Schedule_OneTime
 
+// ScheduleRecurring is a recurring schedule container.
+type ScheduleRecurring = scheduler.Schedule_Recurring
+
+// Recurring is a recurring schedule container.
+type Recurring = scheduler.Recurring
+
+// RecurringAlways is a recurring schedule container.
+type RecurringAlways = scheduler.Recurring_Always_
+
+// RecurringAlwaysInner is a recurring schedule container.
+type RecurringAlwaysInner = scheduler.Recurring_Always
+
+// RecurringDynamicInner is a recurring schedule container.
+type RecurringDynamicInner = scheduler.Recurring_Dynamic
+
+// RecurringDynamic is a recurring schedule container.
+type RecurringDynamic = scheduler.Recurring_Dynamic_
+
+// RecurringDynamicDaily is a type for recurring alert schedules.
+type RecurringDynamicDaily = scheduler.Recurring_Dynamic_Daily
+
+// RecurringDynamicWeekly is a type for recurring alert schedules.
+type RecurringDynamicWeekly = scheduler.Recurring_Dynamic_Weekly
+
+// RecurringDynamicMonthly is a type for recurring alert schedules.
+type RecurringDynamicMonthly = scheduler.Recurring_Dynamic_Monthly
+
+// Weekly is a type for recurring alert schedules.
+type Weekly = scheduler.Weekly
+
+// Monthly is a type for recurring alert schedules.
+type Monthly = scheduler.Monthly
+
+// Daily is a type for recurring alert schedules.
+type Daily = scheduler.Daily
+
 // OneTime is a one-time schedule.
 type OneTime = scheduler.OneTime
 
@@ -61,18 +100,36 @@ type Timeframe = scheduler.Timeframe
 // TimeframeEndTime is the end time of a timeframe.
 type TimeframeEndTime = scheduler.Timeframe_EndTime
 
+// TimeframeDuration is the duration of a timeframe.
+type TimeframeDuration = scheduler.Timeframe_Duration
+
 // MetaLabel is a piece of metadata.
 type MetaLabel = metaLabels.MetaLabel
 
+// MetaLabels is a meta labels type for the alert scheduler.
+type MetaLabels = scheduler.MetaLabels
+
+// AlertSchedulerDuration is a duration type.
+type AlertSchedulerDuration = scheduler.Duration
+
+// ScheduleOperation values.
 const (
-	// ScheduleOperationActivate is a ScheduleOperation that activates an alert scheduler.
-	ScheduleOperationActivate = scheduler.ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE
-
-	// ScheduleOperationUnspecified is an unspecified ScheduleOperation.
+	ScheduleOperationActivate    = scheduler.ScheduleOperation_SCHEDULE_OPERATION_ACTIVATE
 	ScheduleOperationUnspecified = scheduler.ScheduleOperation_SCHEDULE_OPERATION_UNSPECIFIED
+	ScheduleOperationMute        = scheduler.ScheduleOperation_SCHEDULE_OPERATION_MUTE
+)
 
-	// ScheduleOperationMute is a ScheduleOperation that mutes an alert scheduler.
-	ScheduleOperationMute = scheduler.ScheduleOperation_SCHEDULE_OPERATION_MUTE
+// ScheduleOperation is a schedule operation.
+type ScheduleOperation = scheduler.ScheduleOperation
+
+// DurationFrequency is a duration frequency.
+type DurationFrequency = scheduler.DurationFrequency
+
+// DurationFrequency values.
+const (
+	DurationFrequencyMinute = scheduler.DurationFrequency_DURATION_FREQUENCY_MINUTE
+	DurationFrequencyHour   = scheduler.DurationFrequency_DURATION_FREQUENCY_HOUR
+	DurationFrequencyDay    = scheduler.DurationFrequency_DURATION_FREQUENCY_DAY
 )
 
 // RPC names.
