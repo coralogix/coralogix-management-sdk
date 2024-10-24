@@ -29,7 +29,7 @@ type TCOPolicyLogRules = tcopolicies.Policy_LogRules
 // TCOPolicySpanRules is a spans type.
 type TCOPolicySpanRules = tcopolicies.Policy_SpanRules
 
-// TCOPolicyTagRule is a rule type.
+// TCOSpanRules is a rule type.
 type TCOSpanRules = tcopolicies.SpanRules
 
 // TCOPolicyTagRule is a rule type.
@@ -114,11 +114,11 @@ type TCOPolicyRuleTypeId = tcopolicies.RuleTypeId
 
 // TCOPolicyRuleTypeId values.
 const (
-	TCOPolicyRuleTypeIdUnspecified = tcopolicies.RuleTypeId_RULE_TYPE_ID_UNSPECIFIED
-	TCOPolicyRuleTypeIdIs          = tcopolicies.RuleTypeId_RULE_TYPE_ID_IS
-	TCOPolicyRuleTypeIdIsNot       = tcopolicies.RuleTypeId_RULE_TYPE_ID_IS_NOT
-	TCOPolicyRuleTypeIdStartWith   = tcopolicies.RuleTypeId_RULE_TYPE_ID_START_WITH
-	TCOPolicyRuleTypeIdIncludes    = tcopolicies.RuleTypeId_RULE_TYPE_ID_INCLUDES
+	TCOPolicyRuleTypeIDUnspecified = tcopolicies.RuleTypeId_RULE_TYPE_ID_UNSPECIFIED
+	TCOPolicyRuleTypeIDIs          = tcopolicies.RuleTypeId_RULE_TYPE_ID_IS
+	TCOPolicyRuleTypeIDIsNot       = tcopolicies.RuleTypeId_RULE_TYPE_ID_IS_NOT
+	TCOPolicyRuleTypeIDStartWith   = tcopolicies.RuleTypeId_RULE_TYPE_ID_START_WITH
+	TCOPolicyRuleTypeIDIncludes    = tcopolicies.RuleTypeId_RULE_TYPE_ID_INCLUDES
 )
 
 // TCOPolicyPriority is a type for TCO policy priority.
@@ -152,7 +152,7 @@ type TCOPoliciesClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
-// CreateTCOPolicy creates a new TCO policy.
+// Create creates a new TCO policy.
 func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest) (*tcopolicies.CreatePolicyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
@@ -166,7 +166,7 @@ func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest)
 	return client.CreatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
-// GetTCOPolicy gets the specified TCO policy.
+// Get gets the specified TCO policy.
 func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tcopolicies.GetPolicyResponse, error) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {

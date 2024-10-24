@@ -27,7 +27,7 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-// restClient for Coralogix API
+// RestClient for Coralogix API
 type RestClient struct {
 	url           string
 	apiKey        string
@@ -35,6 +35,7 @@ type RestClient struct {
 	correlationID string
 }
 
+// NewRestClient creates a new RestClient
 func NewRestClient(url string, apiKey string) *RestClient {
 	correlationID := uuid.New().String()
 	return &RestClient{url, apiKey, &http.Client{}, correlationID}

@@ -85,6 +85,7 @@ const (
 	LegendColumnName        = dashboards.Legend_LEGEND_COLUMN_NAME
 )
 
+// LegendPlacement is a type for the legend placement.
 type LegendPlacement = dashboards.Legend_LegendPlacement
 
 // LegendPlacement values.
@@ -207,7 +208,7 @@ type BarChartStackDefinition = dashboards.BarChart_StackDefinition
 // BarChartDataprimeQuery is a type for bar chart data prime query.
 type BarChartDataprimeQuery = dashboards.BarChart_DataprimeQuery
 
-// HorizontalBarChartLabelSource is the source of the labels for the horizontal bar chart.
+// HorizontalBarChartStackDefinition is the source of the labels for the horizontal bar chart.
 type HorizontalBarChartStackDefinition = dashboards.HorizontalBarChart_StackDefinition
 
 // SpansAggregation is a type for spans aggregation.
@@ -276,7 +277,7 @@ type GaugeSpansQuery = dashboards.Gauge_SpansQuery
 // GaugeQuery is a type for gauge query.
 type GaugeQuery = dashboards.Gauge_Query
 
-// GaugeAggregration is a type for gauge aggregation.
+// GaugeAggregation is a type for gauge aggregation.
 type GaugeAggregation = dashboards.Gauge_Aggregation
 
 // GaugeAggregation values.
@@ -602,13 +603,13 @@ type MultiSelectQueryMetricsQueryTypeMetricName = dashboards.MultiSelect_Query_M
 // MultiSelectQueryMetricsQueryTypeMetricNameInner is a field name for the metrics query.
 type MultiSelectQueryMetricsQueryTypeMetricNameInner = dashboards.MultiSelect_Query_MetricsQuery_Type_MetricName
 
-// MultiSelectQueryMetricsQueryTypeMetricValue is a field value for the metrics query.
+// MultiSelectQueryMetricsQueryTypeLabelValue is a field value for the metrics query.
 type MultiSelectQueryMetricsQueryTypeLabelValue = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelValue_
 
 // MultiSelectQueryMetricsQueryTypeLabelValueInner is a field value for the metrics query.
 type MultiSelectQueryMetricsQueryTypeLabelValueInner = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelValue
 
-// MultiSelectQueryMetricsQueryTypeMetricName is a field value for the metrics query.
+// MultiSelectQueryMetricsQueryTypeLabelName is a field value for the metrics query.
 type MultiSelectQueryMetricsQueryTypeLabelName = dashboards.MultiSelect_Query_MetricsQuery_Type_LabelName_
 
 // MultiSelectQueryMetricsQueryTypeLabelNameInner is a field value for the metrics query.

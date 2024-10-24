@@ -126,6 +126,7 @@ func NewUsersClient(c *CallPropertiesCreator) *UsersClient {
 	return &UsersClient{client: client}
 }
 
-func (c UsersClient) BaseUrl() string {
+// BaseURL is a function to fetch the base URL.
+func (c UsersClient) BaseURL() string {
 	return c.client.url
 }

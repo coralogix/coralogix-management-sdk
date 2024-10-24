@@ -73,12 +73,22 @@ type RecurringDynamicInner = scheduler.Recurring_Dynamic
 // RecurringDynamic is a recurring schedule container.
 type RecurringDynamic = scheduler.Recurring_Dynamic_
 
+// RecurringDynamicDaily is a type for recurring alert schedules.
 type RecurringDynamicDaily = scheduler.Recurring_Dynamic_Daily
+
+// RecurringDynamicWeekly is a type for recurring alert schedules.
 type RecurringDynamicWeekly = scheduler.Recurring_Dynamic_Weekly
+
+// RecurringDynamicMonthly is a type for recurring alert schedules.
 type RecurringDynamicMonthly = scheduler.Recurring_Dynamic_Monthly
 
+// Weekly is a type for recurring alert schedules.
 type Weekly = scheduler.Weekly
+
+// Monthly is a type for recurring alert schedules.
 type Monthly = scheduler.Monthly
+
+// Daily is a type for recurring alert schedules.
 type Daily = scheduler.Daily
 
 // OneTime is a one-time schedule.
