@@ -41,6 +41,7 @@ message RequestComponent {
     Component.ComparedHistogram compared_histogram = 10;
     Component.SidebarFiltersCounts sidebar_filters_count = 11;
     Component.TeamIdCounts team_id_counts = 12;
+    Component.MappingExceptionsCount mapping_exceptions_count = 13;
   }
 }
 
@@ -84,6 +85,8 @@ message Component {
   }
 
   message TeamIdCounts {}
+
+  message MappingExceptionsCount {}
 }
 
 message Filter {

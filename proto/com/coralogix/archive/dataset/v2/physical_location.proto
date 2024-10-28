@@ -44,6 +44,8 @@ message FinalLocation {
   LocationSpec spec = 1;
   // In case of data saved to S3 - base prefix of the dataset inside the bucket, without the dynamic dt/hr part
   optional string final_location_base_prefix = 2;
+  // Represents a relation between datasets and its physical location. created by datasets-tracker service
+  string id = 3;
 }
 
 // Intended for internal use inside ingestion pipeline. Only part that may change after dataset-ingress.

@@ -13,7 +13,7 @@ message TimeSelection {
 }
 
 message QuickTimeSelection {
-  google.protobuf.StringValue caption = 2;
+  google.protobuf.StringValue caption = 2 [deprecated = true];
   uint32 seconds = 3;
 }
 

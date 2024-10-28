@@ -110,13 +110,6 @@ message PhysicalLocation {
     PARTITIONING_DT_HR = 2;
   }
 
-  enum Format {
-    FORMAT_UNSPECIFIED = 0;
-    FORMAT_CSV = 1;
-    FORMAT_WIDE_PARQUET_V1 = 2;
-    FORMAT_WIDE_PARQUET_V3 = 3;
-  }
-
   enum BucketType {
     BUCKET_TYPE_UNSPECIFIED = 0;
     BUCKET_TYPE_EXTERNAL = 1;
@@ -139,7 +132,7 @@ message PhysicalLocation {
   }
 
   message ObjectStoreLocation {
-    Format format = 1;
+    reserved 1; // formerly format
     oneof location {
       S3Location s3 = 2;
       COSLocation cos = 3;
@@ -158,12 +151,18 @@ message PhysicalLocation {
 
   message SchemaStoreLocation {
     repeated string team_ids = 1;
+    string name = 2;
+  }
+
+  message CsvLocation {
+      ObjectStoreLocation location = 1;
   }
 
   oneof location {
     ArchiveLocation archive = 1;
     OpenSearchLocation open_search = 2;
     SchemaStoreLocation schema_store = 3;
+    CsvLocation csv = 4;
   }
 }
 

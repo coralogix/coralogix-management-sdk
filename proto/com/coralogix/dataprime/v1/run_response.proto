@@ -24,6 +24,7 @@ message RunDataprimeQueryResponse {
     SideBarFilters sidebar_filters = 11;
     RequestStatistics request_statistics = 12;
     TeamIdCounts team_id_counts = 13;
+    MappingExceptionsCount mapping_exceptions_count = 14;
   }
 }
 
@@ -106,6 +107,10 @@ message TeamIdCounts {
 message TeamIdCount {
   google.protobuf.StringValue term = 1;
   google.protobuf.Int64Value count = 2;
+}
+
+message MappingExceptionsCount {
+  google.protobuf.Int64Value count = 1;
 }
 
   // ------- Response entities

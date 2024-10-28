@@ -137,6 +137,8 @@ enum Resource {
   RESOURCE_RESOURCE_CATALOG = 125 [(name) = "resource-catalog"];
   RESOURCE_TEAM_ALERTS_SETTINGS = 126 [(name) = "team-alerts-settings"];
   RESOURCE_TEAM_AI_SETTINGS = 127 [(name) = "team-ai-settings"];
+  RESOURCE_NOTIFICATION_CENTER_CONNECTORS = 128 [(name) = "notification-center-connectors"];
+  RESOURCE_NOTIFICATION_CENTER_PRESETS = 129 [(name) = "notification-center-presets"];
 }
 
 
