@@ -68,7 +68,7 @@ revision = "v0.3.101"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
-revision = "v1.0.6"
+revision = "v1.0.7"
 
 [cx-api-scopes-service]
 url = 'github.com/coralogix/cx-api-scopes'

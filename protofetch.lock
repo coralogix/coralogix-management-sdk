@@ -33,8 +33,8 @@ commit_hash = "8c26dedfb8ca8934ed23d5131dd62b7b781f2de9"
 [[dependencies]]
 name = "cx-api-common"
 url = "github.com/coralogix/cx-api-common"
-revision = "v1.0.6"
-commit_hash = "7c653f7dc051e9d32524ebf10435e2eb90d460e2"
+revision = "v1.0.7"
+commit_hash = "f270227ba8c1066faaf64191df7438c224069596"
 
 [[dependencies]]
 name = "cx-api-dashboards"
