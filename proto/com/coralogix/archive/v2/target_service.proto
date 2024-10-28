@@ -29,6 +29,7 @@ message SetExternalTargetRequest {
     S3TargetSpec s3 = 2;
     IBMCosTargetSpec ibm_cos = 3;
   }
+  uint32 company_id = 4;
 }
 
 message SetExternalTargetResponse {

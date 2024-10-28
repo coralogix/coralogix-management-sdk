@@ -11,11 +11,11 @@ revision = "v0.4.2"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.1"
+revision = "v1.2"
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
-revision = "v0.3.0"
+revision = "v0.4.0"
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
@@ -33,12 +33,12 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "v1.2.5"
+revision = "v1.2.7"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = "v0.310"
+revision = "v0.313"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -68,7 +68,7 @@ revision = "v0.3.101"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
-revision = "v1.0.2"
+revision = "v1.0.7"
 
 [cx-api-scopes-service]
 url = 'github.com/coralogix/cx-api-scopes'
@@ -85,7 +85,7 @@ revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.83"
+revision = "v0.1.85"
 allow_policies = [
     "/com/coralogix/permissions/models/v1/*",
     "/com/coralogix/permissions/v1/actions_resources.proto",
@@ -98,7 +98,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.63"
+revision = "v0.0.66"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/metrics-configurator'

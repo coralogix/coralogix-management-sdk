@@ -47,7 +47,9 @@ message CreateDashboardRequest {
   ast.Dashboard dashboard = 2;
 }
 
-message CreateDashboardResponse {}
+message CreateDashboardResponse {
+  google.protobuf.StringValue dashboard_id = 1;
+}
 
 message ReplaceDashboardRequest {
   google.protobuf.StringValue request_id = 1;

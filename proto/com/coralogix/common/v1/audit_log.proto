@@ -3,6 +3,8 @@ import "google/protobuf/descriptor.proto";
 
 package com.coralogix.common.v1;
 
+option go_package = "com/coralogix/common/v1";
+
 message AuditLogDescription {
   string description = 1;
 }
