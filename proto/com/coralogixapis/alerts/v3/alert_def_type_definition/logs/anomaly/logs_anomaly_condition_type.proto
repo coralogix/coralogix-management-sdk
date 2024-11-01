@@ -1,0 +1,7 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+enum LogsAnomalyConditionType {
+  LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED = 0;
+}

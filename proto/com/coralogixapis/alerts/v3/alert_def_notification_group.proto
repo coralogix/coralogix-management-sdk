@@ -12,21 +12,11 @@ message AlertDefIncidentSettings {
 }
 
 message AlertDefNotificationGroup {
-  repeated google.protobuf.StringValue group_by_fields = 1;
-  oneof targets {
-     AlertDefAdvancedTargets advanced = 2;
-     AlertDefTargetSimple simple = 3;
-  }
+  repeated google.protobuf.StringValue group_by_keys = 1;
+  repeated AlertDefWebhooksSettings webhooks = 2;
 }
 
-message AlertDefTargetSimple{
-   repeated IntegrationType integrations = 1;
-}
-
-message AlertDefAdvancedTargets{
-    repeated AlertDefAdvancedTargetSettings advanced_targets_settings = 1;
-}
-message AlertDefAdvancedTargetSettings {
+message AlertDefWebhooksSettings {
   oneof retriggering_period {
     google.protobuf.UInt32Value minutes = 100;
   }

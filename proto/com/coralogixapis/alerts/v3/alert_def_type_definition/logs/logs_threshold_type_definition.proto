@@ -7,6 +7,7 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_f
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 
 message LogsThresholdType  {
     LogsFilter logs_filter = 1;
@@ -16,6 +17,7 @@ message LogsThresholdType  {
 }
 message LogsThresholdRule {
     LogsThresholdCondition condition = 1;
+    AlertDefOverride override = 2;
 }
 
 message LogsThresholdCondition {

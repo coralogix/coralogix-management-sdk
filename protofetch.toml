@@ -5,13 +5,22 @@ proto_out_dir = './proto'
 url = 'github.com/coralogix/rules-api-protobuf'
 revision = 'v0.17.1'
 
-[alerts-api-protobuf-v3]
+[alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.4.2"
+revision = "v0.5.0"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
 revision = "v1.2"
+allow_policies = [
+    "/com/coralogixapis/views/v1/filters.proto",
+    "/com/coralogixapis/views/v1/search_query.proto",
+    "/com/coralogixapis/views/v1/services/views_folders_service.proto",
+    "/com/coralogixapis/views/v1/services/views_service.proto",
+    "/com/coralogixapis/views/v1/time_selection.proto",
+    "/com/coralogixapis/views/v1/view_folder.proto",
+    "/com/coralogixapis/views/v1/audit_log.proto"
+]
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
@@ -42,7 +51,11 @@ revision = "v0.313"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
-deny_policies = ["/com/coralogixapis/logs2metrics/audit_log.proto"]
+# allow_policies = [
+#     "/com/coralogixapis/logs2metrics/v2/logs_query.proto",
+#     "/com/coralogixapis/events2metrics/v2/events2metrics_definition.proto",
+#     "/com/coralogixapis/events2metrics/v2/events2metrics_service.proto"
+# ]
 revision = 'v0.3.0'
 
 [cx-api-data-usage]

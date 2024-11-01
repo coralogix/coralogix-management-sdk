@@ -7,20 +7,22 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_f
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_compared_to.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 
 message LogsTimeRelativeThresholdType  {
     LogsFilter logs_filter = 1;
     repeated LogsTimeRelativeRule rules = 2;
+    google.protobuf.BoolValue ignore_infinity = 3;
     repeated google.protobuf.StringValue notification_payload_filter = 4;
     UndetectedValuesManagement undetected_values_management = 5;
 }
 message LogsTimeRelativeRule {
     LogsTimeRelativeCondition condition = 1;
+    AlertDefOverride override = 2;
 }
 
-message LogsTimeRelativeCondition{
-    google.protobuf.DoubleValue threshold =1;
+message LogsTimeRelativeCondition {
+    google.protobuf.DoubleValue threshold = 1;
     LogsTimeRelativeComparedTo compared_to = 2;
-    google.protobuf.BoolValue ignore_infinity = 3;
     LogsTimeRelativeConditionType condition_type  = 4;
 }

@@ -28,8 +28,8 @@ mod tests {
                 AlertDefNotificationGroup,
                 AlertDefPriority,
                 AlertDefProperties,
-                AlertDefTargetSimple,
                 AlertDefType,
+                AlertDefWebhooksSettings,
                 AlertsClient,
                 DayOfWeek,
                 FilterType,
@@ -47,8 +47,8 @@ mod tests {
                 LogsTimeWindow,
                 LogsTimeWindowType,
                 LogsTimeWindowValue,
+                NotifyOn,
                 Recipients,
-                Targets,
                 TimeOfDay,
                 TypeDefinition,
                 integration_type,
@@ -80,22 +80,24 @@ mod tests {
                 priority: AlertDefPriority::P1.into(),
                 deleted: None,
                 r#type: AlertDefType::LogsThreshold.into(),
-                group_by: vec![],
+                group_by_keys: vec![],
                 incidents_settings: None,
                 phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
-                    group_by_fields: vec![],
-                    targets: Some(Targets::Simple(AlertDefTargetSimple {
-                        integrations: vec![IntegrationType {
+                    group_by_keys: vec![],
+                    webhooks: vec![AlertDefWebhooksSettings {
+                        notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
+                        retriggering_period: None,
+                        integration: Some(IntegrationType {
                             integration_type: Some(integration_type::IntegrationType::Recipients(
                                 Recipients {
                                     emails: vec![String::from("example@coralogix.com")],
                                 },
                             )),
-                        }],
-                    })),
+                        }),
+                    }],
                 }),
-                labels: [
+                entity_labels: [
                     ("alert_type".to_string(), "security".to_string()),
                     ("security_severity".to_string(), "high".to_string()),
                 ]
@@ -135,6 +137,7 @@ mod tests {
                     notification_payload_filter: vec![],
                     undetected_values_management: None,
                     rules: vec![LogsThresholdRule {
+                        r#override: None,
                         condition: Some(LogsThresholdCondition {
                             threshold: Some(10.0),
                             condition_type: LogsThresholdConditionType::MoreThanOrUnspecified
