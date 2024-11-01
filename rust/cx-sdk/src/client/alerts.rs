@@ -51,6 +51,7 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
 
     AlertDefIncidentSettings,
     AlertDefNotificationGroup,
+    AlertDefOverride,
     AlertDefPriority,
     AlertDefProperties,
     AlertDefType,

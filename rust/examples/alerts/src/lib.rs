@@ -26,6 +26,7 @@ mod tests {
                 ActivitySchedule,
                 AlertDef,
                 AlertDefNotificationGroup,
+                AlertDefOverride,
                 AlertDefPriority,
                 AlertDefProperties,
                 AlertDefType,
@@ -137,7 +138,9 @@ mod tests {
                     notification_payload_filter: vec![],
                     undetected_values_management: None,
                     rules: vec![LogsThresholdRule {
-                        r#override: None,
+                        r#override: Some(AlertDefOverride {
+                            priority: AlertDefPriority::P1.into(),
+                        }),
                         condition: Some(LogsThresholdCondition {
                             threshold: Some(10.0),
                             condition_type: LogsThresholdConditionType::MoreThanOrUnspecified
