@@ -77,3 +77,6 @@ pub mod dashboard_folders;
 
 /// This module contains the client for the recording rule groups API.
 pub mod recording_rule_group_sets;
+
+/// This module contains the client for the SAML Configuration API.
+pub mod saml;

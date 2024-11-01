@@ -19,7 +19,7 @@ allow_policies = [
     "/com/coralogixapis/views/v1/services/views_service.proto",
     "/com/coralogixapis/views/v1/time_selection.proto",
     "/com/coralogixapis/views/v1/view_folder.proto",
-    "/com/coralogixapis/views/v1/audit_log.proto"
+    "/com/coralogixapis/views/v1/audit_log.proto",
 ]
 
 [cx-api-actions]
@@ -107,6 +107,7 @@ allow_policies = [
     "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
     "/com/coralogixapis/aaa/apikeys/v3/*",
     "/com/coralogixapis/aaa/rbac/v2/*",
+    "/com/coralogixapis/aaa/sso/v2/*",
 ]
 
 [cx-api-archive]

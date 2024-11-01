@@ -81,6 +81,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         integrations_service(&root),
         #[cfg(feature = "recording_rule_groups")]
         recording_rule_group_sets_service(&root),
+        #[cfg(feature = "saml_configuration")]
+        saml_configuration_service(&root),
     ]
     .concat();
 
@@ -308,6 +310,13 @@ fn groups_service(root: &str) -> Vec<String> {
 fn integrations_service(root: &str) -> Vec<String> {
     vec![format!(
         "{}/proto/com/coralogix/integrations/v1/integration_service.proto",
+        root
+    )]
+}
+
+fn saml_configuration_service(root: &str) -> Vec<String> {
+    vec![format!(
+        "{}/proto/com/coralogixapis/aaa/sso/v2/saml.proto",
         root
     )]
 }
