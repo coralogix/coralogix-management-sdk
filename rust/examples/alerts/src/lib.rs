@@ -50,6 +50,7 @@ mod tests {
                 LogsTimeWindowValue,
                 NotifyOn,
                 Recipients,
+                RetriggeringPeriod,
                 TimeOfDay,
                 TypeDefinition,
                 integration_type,
@@ -88,7 +89,7 @@ mod tests {
                     group_by_keys: vec![],
                     webhooks: vec![AlertDefWebhooksSettings {
                         notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
-                        retriggering_period: None,
+                        retriggering_period: Some(RetriggeringPeriod::Minutes(5)),
                         integration: Some(IntegrationType {
                             integration_type: Some(integration_type::IntegrationType::Recipients(
                                 Recipients {

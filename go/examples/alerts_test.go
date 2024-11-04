@@ -39,6 +39,9 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 			GroupByKeys: []*wrapperspb.StringValue{},
 			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
 				{
+					RetriggeringPeriod: &cxsdk.AlertDefWebhooksSettingsMinutes{
+						Minutes: wrapperspb.UInt32(5),
+					},
 					NotifyOn: &notifyOn,
 					Integration: &cxsdk.AlertDefIntegrationType{
 						IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
