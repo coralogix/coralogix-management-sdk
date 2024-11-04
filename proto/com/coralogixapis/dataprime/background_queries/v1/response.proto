@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package com.coralogixapis.dataprime.background_queries.v1;
+
+import "com/coralogixapis/dataprime/v1/response.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message RunQueryResponse {
+  string query_id = 1;
+  repeated com.coralogixapis.dataprime.v1.DataprimeWarning warnings = 2;
+}
+
+message GetStatusResponse {
+  oneof status {
+    Running running = 1;
+    Terminated terminated = 2;
+  }
+
+  message Running {
+  }
+
+  message Terminated {
+    repeated com.coralogixapis.dataprime.v1.DataprimeWarning warnings = 1;
+    google.protobuf.Timestamp terminated_at = 2;
+
+    oneof status {
+      Success success = 3;
+      Error error = 4;
+    }
+
+    message Success {
+    }
+
+    message Error {
+      oneof error {
+        TimedOut timed_out = 1;
+        Cancelled cancelled = 2;
+        Failed failed = 3;
+      }
+
+      message TimedOut {
+      }
+
+      message Cancelled {
+      }
+
+      message Failed {
+        google.protobuf.StringValue reason = 1;
+      }
+    }
+  }
+}
+
+message GetResultsResponse {
+  // contains JSON results
+  repeated google.protobuf.StringValue results = 1;
+}

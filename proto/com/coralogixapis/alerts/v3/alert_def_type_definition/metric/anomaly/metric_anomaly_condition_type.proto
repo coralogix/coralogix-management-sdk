@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+enum MetricAnomalyConditionType {
+  METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED = 0;
+  METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL= 1;
+}

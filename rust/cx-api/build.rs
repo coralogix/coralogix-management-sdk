@@ -97,7 +97,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .include_file("coralogix_management_api_grpc.rs")
         .build_server(false)
         .build_client(true)
-        .compile(building, &[format!("{}/proto/", root)])?;
+        .compile_protos(building, &[format!("{}/proto/", root)])?;
     Ok(())
 }
 

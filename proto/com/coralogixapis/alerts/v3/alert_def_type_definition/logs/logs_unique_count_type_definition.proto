@@ -10,15 +10,15 @@ message LogsUniqueCountType  {
     LogsFilter logs_filter = 1;
     repeated LogsUniqueCountRule rules = 2;
     repeated google.protobuf.StringValue notification_payload_filter = 3;
+    google.protobuf.Int64Value max_unique_count_per_group_by_key = 4;
+    google.protobuf.StringValue unique_count_keypath = 5;
 }
 
-message LogsUniqueCountRule{
+message LogsUniqueCountRule {
     LogsUniqueCountCondition condition = 1;
 }
 
-message LogsUniqueCountCondition{
-    google.protobuf.StringValue unique_count_keypath = 1;
+message LogsUniqueCountCondition {
     google.protobuf.Int64Value max_unique_count = 2;
     LogsUniqueValueTimeWindow time_window = 3;
-    google.protobuf.Int64Value max_unique_count_per_group_by_key = 4;
 }

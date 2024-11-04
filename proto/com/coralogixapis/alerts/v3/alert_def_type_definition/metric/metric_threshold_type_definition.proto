@@ -8,20 +8,23 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_missing_values.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 
 message MetricThresholdType  {
     MetricFilter metric_filter = 1;
     repeated MetricThresholdRule rules = 2;
+    MetricMissingValues missing_values = 4;
     UndetectedValuesManagement undetected_values_management = 3;
 }
 
 message MetricThresholdRule {
     MetricThresholdCondition condition = 1;
+    AlertDefOverride override = 2;
 }
+
 message MetricThresholdCondition {
     google.protobuf.DoubleValue threshold = 1;
     google.protobuf.UInt32Value for_over_pct = 2;
     MetricTimeWindow of_the_last = 3;
-    MetricMissingValues missing_values = 4;
     MetricThresholdConditionType condition_type = 5;
 }

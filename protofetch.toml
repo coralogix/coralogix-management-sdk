@@ -5,13 +5,22 @@ proto_out_dir = './proto'
 url = 'github.com/coralogix/rules-api-protobuf'
 revision = 'v0.17.1'
 
-[alerts-api-protobuf-v3]
+[alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.4.2"
+revision = "v0.5.0"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
 revision = "v1.2"
+allow_policies = [
+    "/com/coralogixapis/views/v1/filters.proto",
+    "/com/coralogixapis/views/v1/search_query.proto",
+    "/com/coralogixapis/views/v1/services/views_folders_service.proto",
+    "/com/coralogixapis/views/v1/services/views_service.proto",
+    "/com/coralogixapis/views/v1/time_selection.proto",
+    "/com/coralogixapis/views/v1/view_folder.proto",
+    "/com/coralogixapis/views/v1/audit_log.proto"
+]
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
@@ -33,16 +42,20 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "v1.2.7"
+revision = "v1.2.8"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = "v0.313"
+revision = "v0.318"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
-deny_policies = ["/com/coralogixapis/logs2metrics/audit_log.proto"]
+# allow_policies = [
+#     "/com/coralogixapis/logs2metrics/v2/logs_query.proto",
+#     "/com/coralogixapis/events2metrics/v2/events2metrics_definition.proto",
+#     "/com/coralogixapis/events2metrics/v2/events2metrics_service.proto"
+# ]
 revision = 'v0.3.0'
 
 [cx-api-data-usage]
@@ -64,7 +77,7 @@ revision = "v0.1.31"
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.101"
+revision = "v0.3.102"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -85,7 +98,7 @@ revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.85"
+revision = "v0.1.88"
 allow_policies = [
     "/com/coralogix/permissions/models/v1/*",
     "/com/coralogix/permissions/v1/actions_resources.proto",

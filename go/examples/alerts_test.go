@@ -25,6 +25,7 @@ import (
 )
 
 func CreateAlert() *cxsdk.AlertDefProperties {
+	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
 		Description:       wrapperspb.String("Standard alert example from terraform"),
@@ -35,22 +36,26 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 		IncidentsSettings: nil,
 		PhantomMode:       &wrapperspb.BoolValue{Value: false},
 		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-			GroupByFields: []*wrapperspb.StringValue{},
-			Targets: &cxsdk.AlertDefNotificationGroupSimple{
-				Simple: &cxsdk.AlertDefTargetSimple{
-					Integrations: []*cxsdk.AlertDefIntegrationType{
-						{IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
+			GroupByKeys: []*wrapperspb.StringValue{},
+			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
+				{
+					RetriggeringPeriod: &cxsdk.AlertDefWebhooksSettingsMinutes{
+						Minutes: wrapperspb.UInt32(5),
+					},
+					NotifyOn: &notifyOn,
+					Integration: &cxsdk.AlertDefIntegrationType{
+						IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
 							Recipients: &cxsdk.AlertDefRecipients{
 								Emails: []*wrapperspb.StringValue{
 									{Value: "example@coralogix.com"},
 								},
 							},
-						}},
+						},
 					},
 				},
 			},
 		},
-		Labels: map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -73,15 +78,19 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 		TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
 			LogsThreshold: &cxsdk.LogsThresholdType{
 				Rules: []*cxsdk.LogsThresholdRule{
-					{Condition: &cxsdk.LogsThresholdCondition{
-						Threshold: wrapperspb.Double(10.0),
-						TimeWindow: &cxsdk.LogsTimeWindow{
-							Type: &cxsdk.LogsTimeWindowSpecificValue{
-								LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
-							},
+					{
+						Override: &cxsdk.AlertDefPriorityOverride{
+							Priority: cxsdk.AlertDefPriorityP1,
 						},
-						ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
-					},
+						Condition: &cxsdk.LogsThresholdCondition{
+							Threshold: wrapperspb.Double(10.0),
+							TimeWindow: &cxsdk.LogsTimeWindow{
+								Type: &cxsdk.LogsTimeWindowSpecificValue{
+									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
+								},
+							},
+							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
+						},
 					},
 				},
 				LogsFilter: &cxsdk.LogsFilter{
@@ -105,7 +114,7 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 				},
 			},
 		},
-		GroupBy: []*wrapperspb.StringValue{
+		GroupByKeys: []*wrapperspb.StringValue{
 			{Value: "coralogix.metadata.sdkId"},
 			{Value: "EventType"},
 		},

@@ -341,6 +341,14 @@ message Operator {
     Query query               = 1;
     Expression join_condition = 2;
     Expression.Keypath into   = 3;
+    Modifier modifier         = 4;
+
+    enum Modifier {
+      MODIFIER_UNSPECIFIED = 0;
+      MODIFIER_LEFT        = 1;
+      MODIFIER_INNER       = 2;
+      MODIFIER_FULL        = 3;
+    }
   }
 
   message Explode {

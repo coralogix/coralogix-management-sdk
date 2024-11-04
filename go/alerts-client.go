@@ -29,18 +29,6 @@ type AlertDefPropertiesActiveOn = alerts.AlertDefProperties_ActiveOn
 // AlertDefNotificationGroup represents a notification group.
 type AlertDefNotificationGroup = alerts.AlertDefNotificationGroup
 
-// AlertDefNotificationGroupSimple represents a simple notification group.
-type AlertDefNotificationGroupSimple = alerts.AlertDefNotificationGroup_Simple
-
-// AlertDefNotificationGroupAdvanced represents an advanced notification group.
-type AlertDefNotificationGroupAdvanced = alerts.AlertDefNotificationGroup_Advanced
-
-// AlertDefTargetSimple represents a simple target.
-type AlertDefTargetSimple = alerts.AlertDefTargetSimple
-
-// AlertDefAdvancedTargetSettings represents a simple target.
-type AlertDefAdvancedTargetSettings = alerts.AlertDefAdvancedTargetSettings
-
 // AlertDefIntegrationType represents an integration type.
 type AlertDefIntegrationType = alerts.IntegrationType
 
@@ -53,11 +41,8 @@ type AlertDefIntegrationTypeRecipients = alerts.IntegrationType_Recipients
 // AlertDefRecipients represents the recipients of a notification.
 type AlertDefRecipients = alerts.Recipients
 
-// AlertDefAdvancedTargets represents a set of advanced targets.
-type AlertDefAdvancedTargets = alerts.AlertDefAdvancedTargets
-
-// AlertDefAdvancedTargetSettingsMinutes represents the minute settings of an advanced target.
-type AlertDefAdvancedTargetSettingsMinutes = alerts.AlertDefAdvancedTargetSettings_Minutes
+// AlertDefWebhooksSettings is a webhook setting for an alert.
+type AlertDefWebhooksSettings = alerts.AlertDefWebhooksSettings
 
 // AlertDefScheduleActiveOn represents the active on schedule of an alert.
 type AlertDefScheduleActiveOn = alerts.AlertDefProperties_ActiveOn
@@ -128,11 +113,11 @@ type AlertDefPropertiesTracingThreshold = alerts.AlertDefProperties_TracingThres
 // AlertDefPropertiesFlow is a property of an alert.
 type AlertDefPropertiesFlow = alerts.AlertDefProperties_Flow
 
-// AlertDefPropertiesLogsUnusual is a property of an alert.
-type AlertDefPropertiesLogsUnusual = alerts.AlertDefProperties_LogsUnusual
+// AlertDefPropertiesLogsAnomaly is a property of an alert.
+type AlertDefPropertiesLogsAnomaly = alerts.AlertDefProperties_LogsAnomaly
 
-// AlertDefPropertiesMetricUnusual is a property of an alert.
-type AlertDefPropertiesMetricUnusual = alerts.AlertDefProperties_MetricUnusual
+// AlertDefPropertiesMetricAnomaly is a property of an alert.
+type AlertDefPropertiesMetricAnomaly = alerts.AlertDefProperties_MetricAnomaly
 
 // AlertDefPropertiesLogsNewValue is a property of an alert.
 type AlertDefPropertiesLogsNewValue = alerts.AlertDefProperties_LogsNewValue
@@ -263,14 +248,14 @@ type LogsImmediateType = alerts.LogsImmediateType
 // LogsRatioThresholdType is a type of alert type
 type LogsRatioThresholdType = alerts.LogsRatioThresholdType
 
-// MetricUnusualType is a type of alert type
-type MetricUnusualType = alerts.MetricUnusualType
+// MetricAnomalyType is a type of alert type
+type MetricAnomalyType = alerts.MetricAnomalyType
 
-// MetricUnusualRule is a type of alert type
-type MetricUnusualRule = alerts.MetricUnusualRule
+// MetricAnomalyRule is a type of alert type
+type MetricAnomalyRule = alerts.MetricAnomalyRule
 
-// MetricUnusualCondition is a type of alert type
-type MetricUnusualCondition = alerts.MetricUnusualCondition
+// MetricAnomalyCondition is a type of alert type
+type MetricAnomalyCondition = alerts.MetricAnomalyCondition
 
 // MetricThresholdType is a type of alert type
 type MetricThresholdType = alerts.MetricThresholdType
@@ -281,20 +266,20 @@ type TracingThresholdType = alerts.TracingThresholdType
 // TracingTimeWindow is a time window setting for tracing alerts.
 type TracingTimeWindow = alerts.TracingTimeWindow
 
-// LogsUnusualRule is a rule for ususual alert types.
-type LogsUnusualRule = alerts.LogsUnusualRule
+// LogsAnomalyRule is a rule for ususual alert types.
+type LogsAnomalyRule = alerts.LogsAnomalyRule
 
-// LogsUnusualCondition is a condition type for ususual alert types.
-type LogsUnusualCondition = alerts.LogsUnusualCondition
+// LogsAnomalyCondition is a condition type for ususual alert types.
+type LogsAnomalyCondition = alerts.LogsAnomalyCondition
 
 // UndetectedValuesManagement is a type for undetected values management.
 type UndetectedValuesManagement = alerts.UndetectedValuesManagement
 
-// LogsUnusualConditionType is the condition type for unusual alert types.
-type LogsUnusualConditionType = alerts.LogsUnusualConditionType
+// LogsAnomalyConditionType is the condition type for anomaly alert types.
+type LogsAnomalyConditionType = alerts.LogsAnomalyConditionType
 
-// LogsUnusualConditionTypeMoreThanOrUnspecified is a value for unusual alert type conditions.
-const LogsUnusualConditionTypeMoreThanOrUnspecified = alerts.LogsUnusualConditionType_LOGS_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+// LogsAnomalyConditionTypeMoreThanOrUnspecified is a value for anomaly alert type conditions.
+const LogsAnomalyConditionTypeMoreThanOrUnspecified = alerts.LogsAnomalyConditionType_LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
 
 // TracingFilter is a filter type for tracing alerts.
 type TracingFilter = alerts.TracingFilter
@@ -314,8 +299,8 @@ type TracingThresholdCondition = alerts.TracingThresholdCondition
 // TracingThresholdConditionTypeMoreThanOrUnspecified is a value for the tracing threshold alert type.
 const TracingThresholdConditionTypeMoreThanOrUnspecified = alerts.TracingThresholdConditionType_TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED
 
-// LogsUnusualType is a type of alert.
-type LogsUnusualType = alerts.LogsUnusualType
+// LogsAnomalyType is a type of alert.
+type LogsAnomalyType = alerts.LogsAnomalyType
 
 // FlowType is a type of alert.
 type FlowType = alerts.FlowType
@@ -345,13 +330,13 @@ type AlertDefType = alerts.AlertDefType
 const (
 	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
 	AlertDefTypeLogsThreshold              = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_THRESHOLD
-	AlertDefTypeLogsUnusual                = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNUSUAL
+	AlertDefTypeLogsAnomaly                = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_ANOMALY
 	AlertDefTypeLogsRatioThreshold         = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD
 	AlertDefTypeLogsNewValue               = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE
 	AlertDefTypeLogsUniqueCount            = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT
 	AlertDefTypeLogsTimeRelativeThreshold  = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_TIME_RELATIVE_THRESHOLD
 	AlertDefTypeMetricThreshold            = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_THRESHOLD
-	AlertDefTypeMetricUnusual              = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_UNUSUAL
+	AlertDefTypeMetricAnomaly              = alerts.AlertDefType_ALERT_DEF_TYPE_METRIC_ANOMALY
 	AlertDefTypeTracingImmediate           = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE
 	AlertDefTypeTracingThreshold           = alerts.AlertDefType_ALERT_DEF_TYPE_TRACING_THRESHOLD
 	AlertDefTypeFlow                       = alerts.AlertDefType_ALERT_DEF_TYPE_FLOW
@@ -416,11 +401,11 @@ const (
 	SetAlertDefActiveRPC = alerts.AlertDefsService_SetActive_FullMethodName
 )
 
-// AlertNotifyOnTriggeredOnlyUnspecified is a notification setting for an alert.
-const AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-
-// AlertNotifyOnTriggeredAndResolved is a notification setting for an alert.
-const AlertNotifyOnTriggeredAndResolved = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
+// AlertNotifyOn values.
+const (
+	AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+	AlertNotifyOnTriggeredAndResolved     = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
+)
 
 // LogFilterOperation values.
 const (
@@ -440,13 +425,13 @@ const (
 	LogSeverityCritical           = alerts.LogSeverity_LOG_SEVERITY_CRITICAL
 )
 
-// MetricUnusualConditionType is a type of condition for unusual metrics.
-type MetricUnusualConditionType = alerts.MetricUnusualConditionType
+// MetricAnomalyConditionType is a type of condition for unusual metrics.
+type MetricAnomalyConditionType = alerts.MetricAnomalyConditionType
 
-// MetricUnusualConditionType values.
+// MetricAnomalyConditionType values.
 const (
-	MetricUnusualConditionTypeMoreThanOrUnspecified = alerts.MetricUnusualConditionType_METRIC_UNUSUAL_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
-	MetricUnusualConditionTypeLessThan              = alerts.MetricUnusualConditionType_METRIC_UNUSUAL_CONDITION_TYPE_LESS_THAN_USUAL
+	MetricAnomalyConditionTypeMoreThanOrUnspecified = alerts.MetricAnomalyConditionType_METRIC_ANOMALY_CONDITION_TYPE_MORE_THAN_USUAL_OR_UNSPECIFIED
+	MetricAnomalyConditionTypeLessThan              = alerts.MetricAnomalyConditionType_METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL
 )
 
 // LogsNewValueTimeWindow is a time window setting for new log alerts.
@@ -604,6 +589,12 @@ const (
 	TimeframeTypeUnspecified = alerts.TimeframeType_TIMEFRAME_TYPE_UNSPECIFIED
 	TimeframeTypeUpTo        = alerts.TimeframeType_TIMEFRAME_TYPE_UP_TO
 )
+
+// AlertDefWebhooksSettingsMinutes is a webhook setting for an alert.
+type AlertDefWebhooksSettingsMinutes = alerts.AlertDefWebhooksSettings_Minutes
+
+// AlertDefPriorityOverride is a priority override for webhooks.
+type AlertDefPriorityOverride = alerts.AlertDefOverride
 
 // AutoRetireTimeframe values.
 const (
