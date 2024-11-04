@@ -4,6 +4,7 @@ env:
   PROTOC_VERSION: "26.1"
 
 on:
+  workflow_dispatch:  
   pull_request:
     branches: [ master ]
     paths:
