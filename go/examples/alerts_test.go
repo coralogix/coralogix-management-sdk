@@ -78,15 +78,19 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 		TypeDefinition: &cxsdk.AlertDefPropertiesLogsThreshold{
 			LogsThreshold: &cxsdk.LogsThresholdType{
 				Rules: []*cxsdk.LogsThresholdRule{
-					{Condition: &cxsdk.LogsThresholdCondition{
-						Threshold: wrapperspb.Double(10.0),
-						TimeWindow: &cxsdk.LogsTimeWindow{
-							Type: &cxsdk.LogsTimeWindowSpecificValue{
-								LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
-							},
+					{
+						Override: &cxsdk.AlertDefPriorityOverride{
+							Priority: cxsdk.AlertDefPriorityP1,
 						},
-						ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
-					},
+						Condition: &cxsdk.LogsThresholdCondition{
+							Threshold: wrapperspb.Double(10.0),
+							TimeWindow: &cxsdk.LogsTimeWindow{
+								Type: &cxsdk.LogsTimeWindowSpecificValue{
+									LogsTimeWindowSpecificValue: cxsdk.LogsTimeWindowValue10Minutes,
+								},
+							},
+							ConditionType: cxsdk.LogsThresholdConditionTypeMoreThanOrUnspecified,
+						},
 					},
 				},
 				LogsFilter: &cxsdk.LogsFilter{

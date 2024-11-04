@@ -593,6 +593,9 @@ const (
 // AlertDefWebhooksSettingsMinutes is a webhook setting for an alert.
 type AlertDefWebhooksSettingsMinutes = alerts.AlertDefWebhooksSettings_Minutes
 
+// AlertDefPriorityOverride is a priority override for webhooks.
+type AlertDefPriorityOverride = alerts.AlertDefOverride
+
 // AutoRetireTimeframe values.
 const (
 	AutoRetireTimeframeNeverOrUnspecified = alerts.AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
