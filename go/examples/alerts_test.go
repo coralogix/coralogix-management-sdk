@@ -25,6 +25,7 @@ import (
 )
 
 func CreateAlert() *cxsdk.AlertDefProperties {
+	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
 		Description:       wrapperspb.String("Standard alert example from terraform"),
@@ -35,22 +36,23 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 		IncidentsSettings: nil,
 		PhantomMode:       &wrapperspb.BoolValue{Value: false},
 		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
-			GroupByFields: []*wrapperspb.StringValue{},
-			Targets: &cxsdk.AlertDefNotificationGroupSimple{
-				Simple: &cxsdk.AlertDefTargetSimple{
-					Integrations: []*cxsdk.AlertDefIntegrationType{
-						{IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
+			GroupByKeys: []*wrapperspb.StringValue{},
+			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
+				{
+					NotifyOn: &notifyOn,
+					Integration: &cxsdk.AlertDefIntegrationType{
+						IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
 							Recipients: &cxsdk.AlertDefRecipients{
 								Emails: []*wrapperspb.StringValue{
 									{Value: "example@coralogix.com"},
 								},
 							},
-						}},
+						},
 					},
 				},
 			},
 		},
-		Labels: map[string]string{
+		EntityLabels: map[string]string{
 			"alert_type":        "security",
 			"security_severity": "high",
 		},
@@ -105,7 +107,7 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 				},
 			},
 		},
-		GroupBy: []*wrapperspb.StringValue{
+		GroupByKeys: []*wrapperspb.StringValue{
 			{Value: "coralogix.metadata.sdkId"},
 			{Value: "EventType"},
 		},

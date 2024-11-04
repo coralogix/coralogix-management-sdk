@@ -401,11 +401,11 @@ const (
 	SetAlertDefActiveRPC = alerts.AlertDefsService_SetActive_FullMethodName
 )
 
-// AlertNotifyOnTriggeredOnlyUnspecified is a notification setting for an alert.
-const AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
-
-// AlertNotifyOnTriggeredAndResolved is a notification setting for an alert.
-const AlertNotifyOnTriggeredAndResolved = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
+// AlertNotifyOn values.
+const (
+	AlertNotifyOnTriggeredOnlyUnspecified = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED
+	AlertNotifyOnTriggeredAndResolved     = alerts.NotifyOn_NOTIFY_ON_TRIGGERED_AND_RESOLVED
+)
 
 // LogFilterOperation values.
 const (
