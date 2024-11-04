@@ -8,6 +8,7 @@ import "google/protobuf/wrappers.proto";
 
 // internal dataprime query request
 message UnauthenticatedInternalDataprimeQueryServiceQueryRequest {
+  reserved 6; // formerly user_id
   oneof query {
     // AST query
     InternalAstQueryRequest ast_query = 1;
@@ -20,7 +21,10 @@ message UnauthenticatedInternalDataprimeQueryServiceQueryRequest {
   optional QueryMetadata metadata = 4;
   // team id for which the query is run
   google.protobuf.StringValue team_id = 5;
-  reserved 6; // formerly `user_id`
   // query id, identifies query in DQE, used in tracing (tags.query.id)
   optional string query_id = 7;
+  // when requested, the response will include a `QuerySchema` message at the beginning
+  bool include_schema = 8;
+  // when requested, the response will include a `QueryStats` message at the end
+  bool include_stats = 9;
 }

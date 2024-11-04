@@ -5,20 +5,20 @@ package com.coralogixapis.alerts.v3;
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/unusual/metric_unsual_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/metric_anomaly_condition_type.proto";
 
-message MetricUnusualType {
+message MetricAnomalyType {
     MetricFilter metric_filter = 1;
-    repeated MetricUnusualRule rules = 2;
+    repeated MetricAnomalyRule rules = 2;
 }
-message MetricUnusualRule {
-    MetricUnusualCondition condition = 1;
+message MetricAnomalyRule {
+    MetricAnomalyCondition condition = 1;
 }
 
-message MetricUnusualCondition {
+message MetricAnomalyCondition {
     google.protobuf.DoubleValue threshold = 1;
     google.protobuf.UInt32Value for_over_pct = 2;
     MetricTimeWindow of_the_last = 3;
     google.protobuf.UInt32Value min_non_null_values_pct = 4;
-    MetricUnusualConditionType condition_type = 5;
+    MetricAnomalyConditionType condition_type = 5;
 }

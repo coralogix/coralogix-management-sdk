@@ -128,5 +128,7 @@ message TracingMetadata {
     QUERY_SYNTAX_DATAPRIME = 1;
   }
   QuerySyntax query_syntax = 1;
-  google.protobuf.StringValue query_text = 2;
+  // Use query_text_base64 instead to avoid CloudFlare false negatives.
+  google.protobuf.StringValue query_text = 2 [deprecated = true];
+  google.protobuf.StringValue query_text_base64 = 3;
 }

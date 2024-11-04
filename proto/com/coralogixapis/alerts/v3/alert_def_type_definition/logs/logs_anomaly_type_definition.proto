@@ -5,19 +5,19 @@ package com.coralogixapis.alerts.v3;
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/unusual/logs_unsual_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto";
 
-message LogsUnusualType  {
+message LogsAnomalyType  {
     LogsFilter logs_filter = 1;
-    repeated LogsUnusualRule rules = 2;
+    repeated LogsAnomalyRule rules = 2;
     repeated google.protobuf.StringValue notification_payload_filter = 3;
 }
-message LogsUnusualRule {
-    LogsUnusualCondition condition = 1;
+message LogsAnomalyRule {
+    LogsAnomalyCondition condition = 1;
 }
 
-message LogsUnusualCondition {
+message LogsAnomalyCondition {
     google.protobuf.DoubleValue minimum_threshold = 1;
     LogsTimeWindow time_window = 2;
-    LogsUnusualConditionType condition_type = 3;
+    LogsAnomalyConditionType condition_type = 3;
 }

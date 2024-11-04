@@ -8,12 +8,12 @@ import "com/coralogixapis/alerts/v3/alert_def_scheduling.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_unusual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unusual_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto";
@@ -53,15 +53,15 @@ message AlertDefProperties {
     MetricThresholdType metric_threshold = 106;
     TracingThresholdType tracing_threshold = 107;
     FlowType flow = 108;
-    LogsUnusualType logs_unusual = 109;
-    MetricUnusualType metric_unusual = 110;
+    LogsAnomalyType logs_anomaly = 109;
+    MetricAnomalyType metric_anomaly = 110;
     LogsNewValueType logs_new_value = 111;
     LogsUniqueCountType logs_unique_count = 112;
   }
-  repeated google.protobuf.StringValue group_by = 7;
+  repeated google.protobuf.StringValue group_by_keys = 7;
   AlertDefIncidentSettings incidents_settings = 8;
   AlertDefNotificationGroup notification_group = 9;
-  map<string, string> labels = 10;
+  map<string, string> entity_labels = 10;
   google.protobuf.BoolValue phantom_mode = 11;
   google.protobuf.BoolValue deleted = 12;
 }

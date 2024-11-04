@@ -2,7 +2,9 @@ syntax = "proto3";
 
 package com.coralogix.dataprime.v1;
 
+import "com/coralogix/dataprime/v1/schema.proto";
 import "com/coralogixapis/dataprime/v1/response.proto";
+import "google/protobuf/duration.proto";
 
 // dataprime response for text query
 message QueryResponse {
@@ -11,5 +13,18 @@ message QueryResponse {
     com.coralogixapis.dataprime.v1.DataprimeResult result = 2;
     com.coralogixapis.dataprime.v1.DataprimeWarning warning = 3;
     com.coralogixapis.dataprime.v1.QueryId query_id = 4;
+    QuerySchema schema = 5;
+    QueryStats stats = 6;
   }
+}
+
+message QuerySchema {
+  Schema output_schema = 1;
+  repeated SchemaField columns = 2;
+}
+
+message QueryStats {
+  int64 row_count = 1;
+  int64 bytes_scanned = 2;
+  google.protobuf.Duration execution_time = 3;
 }
