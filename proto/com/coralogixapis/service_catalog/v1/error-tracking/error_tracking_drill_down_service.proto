@@ -1,0 +1,42 @@
+syntax = "proto3";
+package com.coralogixapis.service_catalog.v1;
+
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "com/coralogixapis/service_catalog/v1/distributed_tracing_service.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/apm/common/v2/time_range.proto";
+import "com/coralogixapis/apm/widgets/v1/stat.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/service_catalog/v1/error-tracking/error_tracking_shared.proto";
+import "com/coralogixapis/service_catalog/v1/transaction.proto";
+
+message GetErrorStatsRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue service_name = 2;
+  repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
+  google.protobuf.StringValue status_code = 4;
+  ErrorMessageSource error_message_source = 5;
+  ErrorDataSource data_source = 6;
+  repeated google.protobuf.StringValue operations = 7;
+  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 8;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 9;
+}
+
+message GetErrorStatsResponse {
+  UnitValue first_appearance = 1;
+  UnitValue last_appearance = 2;
+  UnitValue p95_latency = 3;
+  UnitValue p99_latency = 4;
+  UnitValue error_amount = 5;
+  UnitValue errors_percentage = 6;
+}
+
+service ErrorTrackingDrillDownService {
+  rpc GetErrorStats(GetErrorStatsRequest) returns (GetErrorStatsResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get error stats response";
+  }
+}

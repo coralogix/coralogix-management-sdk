@@ -20,7 +20,12 @@ message QueryRequest {
   optional QueryMetadata metadata = 4;
   // query id, identifies query in DQE, used in tracing (tags.query.id)
   optional string query_id = 5;
+  // specifies where DPXL scope filters will placed within the query
   DpxlScopesPlacement dpxl_scopes_placement = 6;
+  // when requested, the response will include a `QuerySchema` message at the beginning
+  bool include_schema = 7;
+  // when requested, the response will include a `QueryStats` message at the end
+  bool include_stats = 8;
 }
 
 message DpxlScopesPlacement {

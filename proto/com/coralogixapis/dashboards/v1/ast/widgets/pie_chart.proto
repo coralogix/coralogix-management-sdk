@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
@@ -28,6 +29,7 @@ message PieChart {
   common.DataModeType data_mode_type = 10;
   google.protobuf.StringValue custom_unit = 11;
   google.protobuf.Int32Value decimal = 12;
+  common.Legend legend = 13;
 
   message Query {
     oneof value {
