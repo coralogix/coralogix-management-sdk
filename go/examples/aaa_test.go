@@ -274,3 +274,87 @@ func TestTeams(t *testing.T) {
 
 	assert.Nil(t, deletionError)
 }
+
+func TestSamlConfigurationRetrieval(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewSamlClient(creator)
+
+	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
+	if err != nil {
+		t.Error(err)
+	}
+
+	_, e := c.GetSPParameters(context.Background(), &cxsdk.GetSPParametersRequest{TeamId: uint32(teamId)})
+	assert.Nil(t, e)
+
+	_, e = c.GetConfiguration(context.Background(), &cxsdk.GetSamlConfigurationRequest{TeamId: uint32(teamId)})
+	assert.Nil(t, e)
+
+	_, e = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamId), IsActive: false})
+}
+
+func TestSamlSetUpWithContent(t *testing.T) {
+	t.Skip("Skipping integration test")
+
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewSamlClient(creator)
+
+	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
+	if err != nil {
+		t.Error(err)
+	}
+
+	teamEntityId := uint32(teamId)
+
+	_, e := c.SetIDPParameters(context.Background(), &cxsdk.SetIDPParametersRequest{
+		TeamId: uint32(teamId),
+		Params: &cxsdk.IDPParameters{
+			Active:     true,
+			GroupNames: []string{"ReadOnlyUsers"},
+			Metadata: &cxsdk.IDPParametersContent{
+				MetadataContent: "<?xml version=\"1.0\" encoding=\"UTF-8\"?><md:EntityDescriptor entityID=\"http://www.okta.com/<...>\" xmlns:md=\"urn:oasis:names:tc:SAML:2.0:metadata\"><md:IDPSSODescriptor WantAuthnRequestsSigned=\"false\" protocolSupportEnumeration=\"urn:oasis:names:tc:SAML:2.0:protocol\"><md:KeyDescriptor use=\"signing\"><ds:KeyInfo xmlns:ds=\"http://www.w3.org/2000/09/xmldsig#\"><ds:X509Data><ds:X509Certificate>MIIDqDCCApCgAwIBAgIGAY1FD/bXMA0GCSqGSIb3DQEBCwUAMIGUMQswCQYDVQQGEwJVUzETMBEG\nA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEU\nMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGRldi01OTMyOTA1NzEcMBoGCSqGSIb3DQEJ\nARYNaW5mb0Bva3RhLmNvbTAeFw0yNDAxMjYwOTE3MTBaFw0zNDAxMjYwOTE4MTBaMIGUMQswCQYD\nVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsG\nA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxFTATBgNVBAMMDGRldi01OTMyOTA1NzEc\nMBoGCSqGSIb3DQEJARYNaW5mb0Bva3RhLmNvbTCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoC\nggEBAL7Ict7Pv1vRJsFRJCuygCYM/ELN+I6Am9vLQ8dbXUNphdD1qPxAXjjOR9zs9SetVZfrtAmw\n/o7zpJeIYEEQ9fVd2ayDY3lm2WgzK9NS3aO/9Lti0Z17Ppxih6S76FnQT3/4B5CRXNpw9cC11QGj\nmzNirZ3I2h6F9qNGZ3DSkyG6PdvcdX4J/AFcKqvm6l9dwfnRDV3pBUZjHMoR/IrwosEkLe20zxHM\nLrkKaxTk0hzXKSFWxWw+qJJv3IIMG02iVD59zxsVP07FsD5ThJ8tU+FWuAi+P//P3upHdqpfViXr\n7G9ydgVnedi2cIua78JAqcK8W0hzEpJgy89i0q4JwRUCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEA\nNAQ2nQ7RSN1gW/pBvSxwSy7NkVEbVFygJCwBdaLE3ksqcz9wKsh7aL6AKNC44ry5CkONW8EZ2bGz\niVcZgg4fyEHNbBOnnUojadVszueOtijrnaiHCMwZRumhM9p/LJQ6trUvWZTsarYJdrLd+fDFtbfS\nMbKMSAt/jrmJ+okRCbu8yscB8BRcOuJ0tM0ZDstzCJ7O4P77o8iGTu5W8Itx0FMiy3aL3BT/7qaP\n1vYCJs5TFYHTaQe5GURPhJEQ8RCKy8WLN+KfyK1mz6slSmO/Jaqu6ppPc4YVPVClejLOv05hx0bs\nblLzVsAZsNpbTBo77bFopxaUk9fzuowO9xukpw==</ds:X509Certificate></ds:X509Data></ds:KeyInfo></md:KeyDescriptor><md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress</md:NameIDFormat><md:SingleSignOnService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST\" Location=\"https://<...>.okta.com/app/<...>/sso/saml\"/><md:SingleSignOnService Binding=\"urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect\" Location=\"https://<...>.okta.com/app/<...>/sso/saml\"/></md:IDPSSODescriptor></md:EntityDescriptor>",
+			},
+			TeamEntityId: &teamEntityId,
+		},
+	})
+	assert.Nil(t, e)
+}
+
+func TestSamlSetUpWithUrl(t *testing.T) {
+	t.Skip("Skipping integration test")
+
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewSamlClient(creator)
+
+	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
+	if err != nil {
+		t.Error(err)
+	}
+
+	teamEntityId := uint32(teamId)
+
+	_, e := c.SetIDPParameters(context.Background(), &cxsdk.SetIDPParametersRequest{
+		TeamId: uint32(teamId),
+		Params: &cxsdk.IDPParameters{
+			Active:     true,
+			GroupNames: []string{"ReadOnlyUsers"},
+			Metadata: &cxsdk.IDPParametersURL{
+				MetadataUrl: "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+			},
+			TeamEntityId: &teamEntityId,
+		},
+	})
+	assert.Nil(t, e)
+}

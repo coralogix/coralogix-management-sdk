@@ -39,6 +39,7 @@ default = [
     "team",
     "views",
     "recording_rule_groups",
+    "saml_configuration",
 ]
 alerts = []
 rules = []
@@ -64,6 +65,7 @@ e2m = []
 groups = []
 integrations = []
 recording_rule_groups = []
+saml_configuration = []
 
 [dependencies]
 prost = { workspace = true }

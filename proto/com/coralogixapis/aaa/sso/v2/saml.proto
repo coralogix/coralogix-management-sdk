@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+package com.coralogixapis.aaa.sso.v2;
+
+message GetSPParametersRequest {
+  uint32 team_id = 1;
+}
+
+message SPParameters {
+  string metadata_url = 1;
+  string signing_cert_pem = 2;
+  string name_id_format = 3;
+  string assertion_consumer_service_url = 4;
+  string binding = 5;
+}
+
+message GetSPParametersResponse {
+  SPParameters params = 1;
+}
+
+message IDPParameters {
+  bool active = 2;
+  oneof metadata {
+    string metadata_url = 3;
+    string metadata_content = 4;
+  }
+  optional uint32 team_entity_id = 5;
+  repeated string group_names = 6;
+}
+
+message SetIDPParametersRequest {
+  uint32 team_id = 1;
+  IDPParameters params = 2;
+}
+
+message SetIDPParametersResponse {
+
+}
+
+message SetActiveRequest {
+  uint32 team_id = 1;
+  bool is_active = 2;
+}
+
+message SetActiveResponse {
+
+}
+
+message GetConfigurationRequest {
+  uint32 team_id = 1;
+}
+
+message GetConfigurationResponse {
+  uint32 team_id = 1;
+  SPParameters sp_parameters = 2;
+  IDPParameters idp_parameters = 3;
+}
+
+service SamlConfigurationService {
+  rpc GetSPParameters(GetSPParametersRequest) returns(GetSPParametersResponse) {};
+  rpc SetIDPParameters(SetIDPParametersRequest) returns (SetIDPParametersResponse) {};
+  rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {};
+  rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse) {};
+}

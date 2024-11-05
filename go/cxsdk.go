@@ -43,6 +43,7 @@ type ClientSet struct {
 	apiKeys             *ApikeysClient
 	users               *UsersClient
 	groups              *GroupsClient
+	saml                *SamlClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -170,6 +171,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewAPIKeysClient(apikeyCPC),
 		groups:  NewGroupsClient(apikeyCPC),
+		saml:    NewSamlClient(apikeyCPC),
 		// users:             NewUsersClient(apikeyCPC),
 	}
 }
