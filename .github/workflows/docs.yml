@@ -5,6 +5,7 @@ on:
     paths:
       - 'rust/**'
       - 'go/**'
+  workflow_dispatch:
  
 permissions:
   contents: read
@@ -39,6 +40,8 @@ jobs:
       - uses: actions/configure-pages@v4
         id: pages
 
+      
+
       - name: Generate Rust docs
         working-directory: rust
         run: |
@@ -52,6 +55,11 @@ jobs:
       - name: Generate Go Docs
         run: |
           doc2go -out $RUNNER_TEMP/docs/go ./...
+
+      - name: redoc-cli test
+        uses: seeebiii/redoc-cli-github-action@v10
+        with:
+          args: 'bundle openapi.yaml -o $RUNNER_TEMP/docs/openapi.html'
       
       - name: Generate index.html
         run: | 
@@ -63,15 +71,16 @@ jobs:
           <head>
               <meta charset="UTF-8">
               <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>My SDK Documentation</title>
+              <title>Coralogix API Documentation</title>
           </head>
 
           <body>
               <h1>SDK Documentation</h1>
-              <p>Welcome to the documentation for the Coralogix SDKs!</p>
+              <p>Welcome to the documentation for the Coralogix APIs!</p>
               <ul>
                   <li><a href="rust/cx_sdk/index.html">Rust SDK Documentation</a></li>
                   <li><a href="go/github.com/coralogix/coralogix-management-sdk/go/index.html">Go SDK Documentation</a></li>
+                  <li><a href="openapi.html">OpenAPI Spec</a></li>
               </ul>
           </body>
 
