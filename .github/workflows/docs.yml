@@ -31,6 +31,9 @@ jobs:
       - uses: actions/setup-go@v3
         with:
           go-version: '^1.18'  # Update this with your desired Go version
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
     
       - name: Install Protoc # This is required for build.rs
         uses: arduino/setup-protoc@v3
@@ -55,11 +58,10 @@ jobs:
       - name: Generate Go Docs
         run: |
           doc2go -out $RUNNER_TEMP/docs/go ./...
-
-      - name: redoc-cli test
-        uses: seeebiii/redoc-cli-github-action@v10
-        with:
-          args: 'bundle openapi.yaml -o $RUNNER_TEMP/docs/openapi.html'
+          
+      - name: Generate OpenAPI Spec
+        run: |
+          npx @redocly/cli build-docs openapi.yaml -o $RUNNER_TEMP/docs/openapi.html
       
       - name: Generate index.html
         run: | 
