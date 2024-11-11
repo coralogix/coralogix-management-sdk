@@ -56,12 +56,12 @@ message SearchArchiveSpansTimeSeriesResponse {
 message SearchArchiveSpansEventsRequest {
   reserved 10, 11, 12;
 
-  google.protobuf.StringValue widget_id = 1;
+  google.protobuf.StringValue widget_id = 1 [deprecated = true];
   common.TimeFrame time_frame = 2;
   v1.common.Pagination pagination = 6;
-  google.protobuf.StringValue request_params_hash = 7;
+  google.protobuf.StringValue request_params_hash = 7 [deprecated = true];
   common.SerializedDataprimeQuery query = 8;
-  common.DataprimeQuery query_raw = 9;
+  common.DataprimeQuery query_raw = 9 [deprecated = true];
 }
 
 message SearchArchiveSpansEventsResponse {
@@ -70,11 +70,11 @@ message SearchArchiveSpansEventsResponse {
 }
 
 message SearchArchiveSpansEventsCountRequest {
-  google.protobuf.StringValue widget_id = 1;
+  google.protobuf.StringValue widget_id = 1 [deprecated = true];
   common.TimeFrame time_frame = 2;
-  google.protobuf.StringValue request_params_hash = 3;
+  google.protobuf.StringValue request_params_hash = 3 [deprecated = true];
   common.SerializedDataprimeQuery query = 4;
-  common.DataprimeQuery query_raw = 5;
+  common.DataprimeQuery query_raw = 5 [deprecated = true];
 }
 
 message SearchArchiveSpansEventsCountResponse {

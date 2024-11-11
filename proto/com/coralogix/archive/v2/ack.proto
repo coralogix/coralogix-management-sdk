@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+import "com/coralogix/archive/v2/event.proto";
+
+message MetastoreAck {
+    repeated ObjectCreatedStatus created = 1;
+    repeated ObjectRemovedStatus removed = 2;
+}
+
+message ObjectCreatedStatus {
+    ObjectCreated command = 1;
+    oneof status {
+        Success success = 2;
+        AlreadyExists already_exists = 3;
+        Skipped skipped = 4;
+    }
+}
+
+message ObjectRemovedStatus {
+    ObjectRemoved command = 1;
+    oneof status {
+        Success success = 2;
+        AlreadyRemoved already_removed = 3;
+    }
+}
+
+message AlreadyExists {}
+message AlreadyRemoved {}
+message Skipped {}
+message Success {}

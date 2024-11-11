@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogix.archive.private.state.v1;
+
+import "com/coralogix/archive/private/state/v1/file_split.proto";
+
+message S3Object {
+  string bucket = 1;
+  string key = 2;
+  optional int64 row_count = 3;
+  optional FileSplit file_split = 4;
+}

@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.coralogix.archive.private.state.v1;
+
+import "google/protobuf/timestamp.proto";
+import "com/coralogix/archive/dataset/v1/dataset.proto";
+import "com/coralogix/archive/private/state/v1/min_max.proto";
+import "com/coralogix/archive/private/state/v1/tree_schema.proto";
+import "com/coralogix/archive/private/state/v1/schema.proto";
+import "com/coralogix/archive/private/state/v1/s3_object.proto";
+import "com/coralogix/archive/v2/archive_target.proto";
+import "com/coralogix/archive/v2/format.proto";
+
+message StateValue {
+  optional string company_id = 1;
+  optional Schema aggregated_schema = 2;
+  int64 total_size = 3;
+  repeated S3Object files = 4;
+  google.protobuf.Timestamp aggregating_since = 5;
+  optional com.coralogix.archive.v2.ArchiveTarget target = 6;
+  google.protobuf.Timestamp earliest_ingestion_time = 7;
+  optional int64 total_row_count = 8;
+  optional com.coralogix.archive.v2.Format input_format = 9;
+  optional com.coralogix.archive.dataset.v1.Dataset dataset = 10;
+  int32 compaction_level = 11;
+  optional TreeSchema tree_schema = 12;
+  bool truncated = 13;
+  optional MinMax compaction_job_timestamp_min_max = 14;
+}
