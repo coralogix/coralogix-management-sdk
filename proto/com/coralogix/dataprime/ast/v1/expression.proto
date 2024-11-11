@@ -268,6 +268,10 @@ message Expression {
       Expression suffix = 2;
     }
 
+    message ByteLength {
+      Expression string = 1;
+    }
+
     // Number //
     message Round {
       Expression number          = 1;
@@ -643,6 +647,7 @@ message Expression {
       ArrayRemove array_remove                = 84;
       IpInRange ip_in_range                   = 85;
       ArraySort array_sort                    = 86;
+      ByteLength byte_length                  = 87;
     }
   }
 

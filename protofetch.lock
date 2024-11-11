@@ -27,8 +27,8 @@ commit_hash = "0d9733fd0052f743cdb14e62a6e4ae179676ea41"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.66"
-commit_hash = "8c26dedfb8ca8934ed23d5131dd62b7b781f2de9"
+revision = "v0.0.70"
+commit_hash = "ddfde3787b4d4fb079a8074c59643040ade6bcb7"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,8 +39,8 @@ commit_hash = "f270227ba8c1066faaf64191df7438c224069596"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v1.2.8"
-commit_hash = "914823b187678004819b8e611aec0db2321a9b69"
+revision = "v1.2.9"
+commit_hash = "141c19bfc7744bbc181e3057ef849b4dd5f656a1"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -51,8 +51,8 @@ commit_hash = "28dc6f7ba38585d9641d014e8474eb0db47d30a2"
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.318"
-commit_hash = "9d788049bc5614e1e948401c7e6bd2c091cc852d"
+revision = "v0.320"
+commit_hash = "2a8b6e60270d13999170ea5981a5859fb3c6cc23"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -87,8 +87,8 @@ commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
 [[dependencies]]
 name = "cx-api-organisations"
 url = "github.com/coralogix/cx-api-organisations"
-revision = "v0.1.31"
-commit_hash = "64fc6023e1ec94c5096e749a6739cf1de07f645b"
+revision = "v0.1.32"
+commit_hash = "54f3039f90c8a0eb57a33908c03f211ff9b11520"
 
 [[dependencies]]
 name = "cx-api-permissions"
@@ -111,8 +111,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.102"
-commit_hash = "41068fabcd1e422cc1cbcd57e3414cc2691e7c6e"
+revision = "v0.3.103"
+commit_hash = "78a41d72f45914be315eca6ed16e4aa785451605"
 
 [[dependencies]]
 name = "cx-api-tags"

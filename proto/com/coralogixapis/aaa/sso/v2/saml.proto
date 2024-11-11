@@ -51,9 +51,14 @@ message GetConfigurationRequest {
 }
 
 message GetConfigurationResponse {
+  message IDPDetails {
+    string name = 1;
+    string icon = 2;
+  }
   uint32 team_id = 1;
   SPParameters sp_parameters = 2;
   IDPParameters idp_parameters = 3;
+  optional IDPDetails idp_details = 4;
 }
 
 service SamlConfigurationService {

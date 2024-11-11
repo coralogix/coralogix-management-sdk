@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.coralogix.archive.private.state.v1;
+
+message FileSplit {
+  int64 first_byte = 1;
+  int64 last_byte = 2;
+  int32 first_row = 3;
+  int32 last_row = 4;
+  FileMetadata file_metadata = 5;
+}
+
+message FileMetadata {
+  oneof file_metadata {
+    AvroFileMetadata avro_file_metadata = 1;
+  }
+}
+
+message AvroFileMetadata {
+  CompressionType compression_type = 1;
+  optional AvroMarker avro_marker = 2;
+}
+
+enum CompressionType {
+  COMPRESSION_TYPE_UNSPECIFIED = 0;
+  COMPRESSION_TYPE_GZIP = 1;
+  COMPRESSION_TYPE_ZSTANDARD = 2;
+}
+
+message AvroMarker {
+  sint64 lsb = 1;
+  sint64 msb = 2;
+}

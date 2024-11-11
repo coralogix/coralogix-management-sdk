@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/struct.proto";
+
+package com.coralogixapis.apm.common.v2;
+
+
+message GridQueryInfo {
+  google.protobuf.StringValue query = 1;
+  google.protobuf.StringValue column = 2;
+}
