@@ -7,6 +7,7 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto"
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
@@ -27,8 +28,9 @@ message Gauge {
   ThresholdBy threshold_by = 9;
   google.protobuf.StringValue custom_unit = 10;
   google.protobuf.Int32Value decimal = 11;
-  ThresholdType threshold_type = 12;
+  common.ThresholdType threshold_type = 12;
   common.Legend legend = 13;
+  common.LegendBy legend_by = 14;
 
   message Query {
     oneof value {
@@ -115,11 +117,5 @@ message Gauge {
     THRESHOLD_BY_UNSPECIFIED = 0;
     THRESHOLD_BY_VALUE = 1;
     THRESHOLD_BY_BACKGROUND = 2;
-  }
-
-  enum ThresholdType {
-    THRESHOLD_TYPE_UNSPECIFIED = 0;
-    THRESHOLD_TYPE_RELATIVE = 1;
-    THRESHOLD_TYPE_ABSOLUTE = 2;
   }
 }

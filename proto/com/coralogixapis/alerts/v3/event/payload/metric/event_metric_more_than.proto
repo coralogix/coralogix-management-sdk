@@ -4,6 +4,7 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
 
 message EventMetricMoreThan {
   google.protobuf.FloatValue percentage_over_threshold = 1;
@@ -12,4 +13,5 @@ message EventMetricMoreThan {
   optional google.protobuf.FloatValue max_value_across_threshold = 4;
   google.protobuf.Timestamp from_timestamp = 5;
   google.protobuf.Timestamp to_timestamp = 6;
+  AlertDefSeverity severity = 7;
 }

@@ -8,11 +8,15 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
 service DataUsageService {
-  rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse);
+  // Deprecated. Please use GetDataUsage instead.
+  rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse) {
+    option deprecated = true;
+  }
   rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse);
   rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse);
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse);
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse);
+  rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse);
 }
 
 enum AggregateBy {
@@ -116,4 +120,38 @@ message UpdateDataUsageMetricsExportStatusRequest {
 
 message UpdateDataUsageMetricsExportStatusResponse {
   bool enabled = 1;
+}
+
+message GetDataUsageRequest {
+  // Date request interval
+  DateRange date_range = 1;
+
+  // Aggregation resolution. Minimum supported value is 1h
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // This means that, for instance, requests with 1 hour resolution for an interval of 30 days will be rejected but accepted for 1 day interval.
+  //
+  // Resolution must be between 1 hour and date_range interval
+  google.protobuf.Duration resolution = 2;
+  // List of aggregate parameters.
+  // i.e. if AggregateBy is [AGGREGATE_BY_PILLAR, AGGREGATE_BY_PRIORITY], then the response will stream data aggregated by pillar and priority.
+  repeated AggregateBy aggregate = 3;
+  // Dimensions to filter by.
+  // When used together with aggregation it is pointless to filter by dimension keys that are not aggregated.
+  // i.e. if we filter by Dimension [ {"subsystem", "subsystem1"}]
+  //      we only return entries that at least have that dimension i.e. [{"subsystem", "subsystem1"}, {"application", "application1"}]
+  repeated Dimension dimension_filters = 4;
+}
+
+
+message DataUsageEntry {
+  google.protobuf.Timestamp timestamp = 1;
+  float size_gb = 2;
+  float units = 3;
+  repeated Dimension dimensions = 4;
+}
+
+message GetDataUsageResponse {
+  repeated DataUsageEntry entries = 1;
 }

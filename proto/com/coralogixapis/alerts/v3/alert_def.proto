@@ -61,6 +61,7 @@ message AlertDefProperties {
   repeated google.protobuf.StringValue group_by_keys = 7;
   AlertDefIncidentSettings incidents_settings = 8;
   AlertDefNotificationGroup notification_group = 9;
+  repeated AlertDefNotificationGroup notification_group_excess = 210 [deprecated = true];
   map<string, string> entity_labels = 10;
   google.protobuf.BoolValue phantom_mode = 11;
   google.protobuf.BoolValue deleted = 12;

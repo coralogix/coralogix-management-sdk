@@ -26,6 +26,7 @@ message SearchDataprimeRequest {
 
 message SearchDataprimeResponse {
   repeated common.DataprimeResult results = 1;
+  map<string, string> meta = 2;
 }
 
 message SearchDataprimeArchiveRequest {
