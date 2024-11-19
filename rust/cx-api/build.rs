@@ -83,6 +83,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         recording_rule_group_sets_service(&root),
         #[cfg(feature = "saml_configuration")]
         saml_configuration_service(&root),
+        #[cfg(feature = "notifications")]
+        notifications_service(&root),
     ]
     .concat();
 
@@ -319,4 +321,25 @@ fn saml_configuration_service(root: &str) -> Vec<String> {
         "{}/proto/com/coralogixapis/aaa/sso/v2/saml.proto",
         root
     )]
+}
+
+fn notifications_service(root: &str) -> Vec<String> {
+    vec![
+        format!(
+            "{}/proto/com/coralogixapis/notification_center/connectors/v1/connectors_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/notification_center/entities/v1/entities_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
+            root
+        ),
+        format!(
+            "{}/proto/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
+            root
+        ),
+    ]
 }
