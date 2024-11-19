@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.presets.v1;
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/presets/v1/preset.proto";
+import "google/api/annotations.proto";
+
+// Public API that allows retrieving available presets and managing custom presets.
+service PresetsService {
+
+  rpc CreateCustomPreset(CreateCustomPresetRequest) returns (CreateCustomPresetResponse) {
+    option (google.api.http) = {
+      post: "/v1/notification-center/presets/custom"
+      body: "preset"
+    };
+  }
+
+  rpc ReplaceCustomPreset(ReplaceCustomPresetRequest) returns (ReplaceCustomPresetResponse) {
+    option (google.api.http) = {
+      put: "/v1/notification-center/presets/custom"
+      body: "preset"
+    };
+  }
+
+  rpc DeleteCustomPreset(DeleteCustomPresetRequest) returns (DeleteCustomPresetResponse) {
+    option (google.api.http) = {
+      delete: "/v1/notification-center/presets/custom/{id}"
+    };
+  }
+
+  rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
+    option (google.api.http) = {
+      post: "/v1/notification-center/presets/custom/{id}:defaultSet"
+      body: "id"
+    };
+  }
+
+  rpc GetPreset(GetPresetRequest) returns (GetPresetResponse) {
+    option (google.api.http) = {
+      get: "/v1/notification-center/presets/{id}"
+    };
+  }
+
+  rpc ListPresetSummaries(ListPresetSummariesRequest) returns (ListPresetSummariesResponse) {
+    option (google.api.http) = {
+      get: "/v1/notification-center/presets:summariesList"
+    };
+  }
+
+  rpc BatchGetPresets(BatchGetPresetsRequest) returns (BatchGetPresetsResponse) {
+    option (google.api.http) = {
+      get: "/v1/notification-center/presets:batchGet"
+    };
+  }
+
+  rpc GetDefaultPresetSummary(GetDefaultPresetSummaryRequest) returns (GetDefaultPresetSummaryResponse) {
+    option (google.api.http) = {
+      get: "/v1/notification-center/presets:defaultSummaryGet"
+    };
+  }
+
+  rpc GetSystemDefaultPresetSummary(GetSystemDefaultPresetSummaryRequest) returns (GetSystemDefaultPresetSummaryResponse) {
+    option (google.api.http) = {
+      get: "/v1/notification-center/presets:systemDefaultSummaryGet"
+    };
+  }
+}
+
+message CreateCustomPresetRequest {
+  Preset preset = 1;
+}
+
+message CreateCustomPresetResponse {
+  Preset preset = 1;
+}
+
+message ReplaceCustomPresetRequest {
+  Preset preset = 1;
+}
+
+message ReplaceCustomPresetResponse {
+  Preset preset = 1;
+}
+
+message DeleteCustomPresetRequest {
+  string id = 1;
+}
+
+message DeleteCustomPresetResponse {
+}
+
+message SetCustomPresetAsDefaultRequest {
+  string id = 1;
+}
+
+message SetCustomPresetAsDefaultResponse {
+}
+
+message GetPresetRequest {
+  string id = 1;
+}
+
+message GetPresetResponse {
+  Preset preset = 1;
+}
+
+message ListPresetSummariesRequest {
+  ConnectorType connector_type = 1;
+  string entity_type = 2;
+  repeated OrderBy order_bys = 3;
+}
+
+message ListPresetSummariesResponse {
+  repeated PresetSummary preset_summaries = 1;
+}
+
+message BatchGetPresetsRequest {
+  repeated string ids = 1;
+}
+
+message BatchGetPresetsResponse {
+  map<string, Preset> presets = 1;
+  repeated string not_found_ids = 2;
+}
+
+message GetDefaultPresetSummaryRequest {
+  ConnectorType connector_type = 1;
+  string entity_type = 2;
+}
+
+message GetDefaultPresetSummaryResponse {
+  PresetSummary preset_summary = 1;
+}
+
+message GetSystemDefaultPresetSummaryRequest {
+  ConnectorType connector_type = 1;
+  string entity_type = 2;
+}
+
+message GetSystemDefaultPresetSummaryResponse {
+  PresetSummary preset_summary = 1;
+}

@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.connectors.v1;
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+import "google/protobuf/timestamp.proto";
+
+message Connector {
+  optional string id = 1;
+  // for declarative API
+  optional string user_facing_id = 2;
+  ConnectorType type = 3;
+  optional uint32 team_id = 4;
+  string name = 5;
+  string description = 6;
+  optional google.protobuf.Timestamp create_time = 7;
+  optional google.protobuf.Timestamp update_time = 8;
+  repeated ConnectorConfig connector_configs = 9;
+  string entity_type = 10;
+}
+
+message ConnectorConfig {
+  string output_schema_id = 1;
+  repeated ConnectorConfigField fields = 2;
+}
+
+message ConnectorTypeSummary {
+  ConnectorType type = 1;
+  uint32 count = 2;
+}

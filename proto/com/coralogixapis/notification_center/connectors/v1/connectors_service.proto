@@ -1,0 +1,105 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.connectors.v1;
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/connectors/v1/connector.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+// Public API that allows managing connectors.
+service ConnectorsService {
+  rpc CreateConnector(CreateConnectorRequest) returns (CreateConnectorResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/connectors"
+      body: "connector"
+    };
+  }
+
+  rpc ReplaceConnector(ReplaceConnectorRequest) returns (ReplaceConnectorResponse) {
+    option (google.api.http) = {
+      put: "v1/notification-center/connector"
+      body: "connector"
+    };
+  }
+
+  rpc DeleteConnector(DeleteConnectorRequest) returns (DeleteConnectorResponse) {
+    option (google.api.http) = {
+      delete: "v1/notification-center/connectors/{id}"
+    };
+  }
+
+  rpc GetConnector(GetConnectorRequest) returns (GetConnectorResponse) {
+    option (google.api.http) = {
+      get: "v1/notification-center/connectors/{id}"
+    };
+  }
+
+  rpc ListConnectors(ListConnectorsRequest) returns (ListConnectorsResponse) {
+    option (google.api.http) = {
+      get: "v1/notification-center/connectors"
+      body: "*"
+    };
+  }
+
+  rpc BatchGetConnectors(BatchGetConnectorsRequest) returns (BatchGetConnectorsResponse) {
+    option (google.api.http) = {
+      get: "v1/notification-center/connectors:batchGet"
+    };
+  }
+
+  rpc GetConnectorTypeSummaries(GetConnectorTypeSummariesRequest) returns (GetConnectorTypeSummariesResponse) {
+    option (google.api.http) = {
+      get: "v1/notification-center/connectors:getSummaries"
+    };
+  }
+}
+
+message CreateConnectorRequest {
+  Connector connector = 1;
+}
+message CreateConnectorResponse {
+  Connector connector = 1;
+}
+
+message ReplaceConnectorRequest {
+  Connector connector = 1;
+}
+message ReplaceConnectorResponse {
+  Connector connector = 1;
+}
+
+message DeleteConnectorRequest {
+  string id = 1;
+}
+message DeleteConnectorResponse {}
+
+message GetConnectorRequest {
+  string id = 1;
+}
+message GetConnectorResponse {
+  Connector connector = 1;
+}
+
+message ListConnectorsRequest {
+  ConnectorType connector_type = 1;
+  repeated OrderBy order_bys = 2;
+  optional string entity_type = 3;
+}
+
+message ListConnectorsResponse {
+  repeated Connector connectors = 1;
+}
+
+message BatchGetConnectorsRequest {
+  repeated string ids = 1;
+}
+message BatchGetConnectorsResponse {
+  map<string, Connector> connectors = 1;
+  repeated string not_found_ids = 2;
+}
+
+message GetConnectorTypeSummariesRequest {}
+message GetConnectorTypeSummariesResponse {
+  repeated ConnectorTypeSummary connector_type_summaries = 1;
+}
