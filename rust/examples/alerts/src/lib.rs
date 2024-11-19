@@ -154,6 +154,7 @@ mod tests {
                         }),
                     }],
                 })),
+                notification_group_excess: vec![],
             }),
             id: None,
             alert_version_id: None,
