@@ -125,6 +125,21 @@ url = "github.com/coralogix/cx-api-clientsets"
 revision = "v0.0.7"
 allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
 
+[cx-api-notification-center]
+url = 'github.com/coralogix/cx-api-notification-center'
+revision = "v0.2.0"
+allow_policies = [
+    "/com/coralogixapis/notification_center/common/*",
+    "/com/coralogixapis/notification_center/connectors/v1/connector.proto",
+    "/com/coralogixapis/notification_center/connectors/v1/connectors_service.proto",
+    "/com/coralogixapis/notification_center/entities/v1/entities_service.proto",
+    "/com/coralogixapis/notification_center/notifications/v1/notification.proto",
+    "/com/coralogixapis/notification_center/notifications/v1/testing.proto",
+    "/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
+    "/com/coralogixapis/notification_center/presets/v1/preset.proto",
+    "/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
+]
+
 
 [google-api]
 url = "github.com/googleapis/googleapis"
@@ -137,6 +152,7 @@ allow_policies = [
     "/google/api/launch_stage.proto",
     "/google/api/resource.proto",
     "google/rpc/status.proto",
+    "google/rpc/code.proto",
 ]
 
 [global-mapping]

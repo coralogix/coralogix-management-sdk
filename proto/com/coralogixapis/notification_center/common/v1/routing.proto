@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center;
+import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+
+/**
+* This file contains public models used across the notification sources APIs.
+* any updates should be made with caution to ensure backward compatibility.
+
+* Proto definitions for specifying notification routing rules and targets.
+ */
+
+message RoutingRule {
+  string condition = 1;
+  repeated RoutingTarget targets = 2;
+}
+
+message RoutingTarget {
+  string connector_id = 1;
+  optional string preset_id = 2;
+  optional SourceOverrides config_overrides = 3;
+}
+
+message SourceOverrides {
+  string output_schema_id = 1;
+  optional string entity_sub_type = 2;
+  repeated MessageConfigField message_config_fields = 3;
+  repeated ConnectorConfigField connector_config_fields = 4;
+}

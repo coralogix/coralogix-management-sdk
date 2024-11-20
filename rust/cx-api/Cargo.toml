@@ -40,6 +40,7 @@ default = [
     "views",
     "recording_rule_groups",
     "saml_configuration",
+    "notifications"
 ]
 alerts = []
 rules = []
@@ -66,6 +67,7 @@ groups = []
 integrations = []
 recording_rule_groups = []
 saml_configuration = []
+notifications = []
 
 [dependencies]
 prost = { workspace = true }

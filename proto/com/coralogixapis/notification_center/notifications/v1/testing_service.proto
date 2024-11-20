@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.notifications.v1;
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/common/config_overrides.proto";
+import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+import "com/coralogixapis/notification_center/common/rpc_common.proto";
+import "com/coralogixapis/notification_center/notifications/v1/testing.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+// Public API for testing Notification Center configurations including connectors, presets, and templates.
+service TestingService {
+  rpc TestConnectorConfig(TestConnectorConfigRequest) returns (TestConnectorConfigResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testConnectorConfiguration"
+      body: "*"
+    };
+  }
+
+  rpc TestExistingConnector(TestExistingConnectorRequest) returns (TestExistingConnectorResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testExistingConnector"
+      body: "*"
+    };
+  }
+
+  rpc TestPresetConfig(TestPresetConfigRequest) returns (TestPresetConfigResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testPresetConfiguration"
+      body: "*"
+    };
+  }
+
+  rpc TestExistingPreset(TestExistingPresetRequest) returns (TestExistingPresetResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testExistingPreset"
+      body: "*"
+    };
+  }
+
+  rpc TestDestination(TestDestinationRequest) returns (TestDestinationResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testDestination"
+      body: "*"
+    };
+  }
+
+  rpc TestTemplateRender(TestTemplateRenderRequest) returns (TestTemplateRenderResponse) {
+    option (google.api.http) = {
+      post: "v1/notification-center/notifications/testing:testTemplateRender"
+      body: "*"
+    };
+  }
+}
+
+message TestConnectorConfigRequest {
+  ConnectorType type = 1;
+  string output_schema_id = 2;
+  repeated ConnectorConfigField fields = 3;
+  string entity_type = 4;
+}
+
+message TestConnectorConfigResponse {
+  TestResult result = 1;
+}
+
+message TestExistingConnectorRequest {
+  string connector_id = 1;
+  string output_schema_id = 2;
+}
+message TestExistingConnectorResponse {
+  TestResult result = 1;
+}
+
+message TestPresetConfigRequest {
+  string entity_type = 1;
+  optional string entity_sub_type = 2;
+  string connector_id = 3;
+  string output_schema_id = 4 [deprecated = true];
+  repeated MessageConfigField fields = 5 [deprecated = true];
+  string preset_id = 6;
+  repeated ConfigOverrides config_overrides = 7;
+}
+message TestPresetConfigResponse {
+  TestResult result = 1;
+}
+
+message TestExistingPresetRequest {
+  string entity_type = 1;
+  optional string entity_sub_type = 2;
+  string preset_id = 3;
+  string connector_id = 4;
+}
+message TestExistingPresetResponse {
+  TestResult result = 1;
+}
+
+message TestDestinationRequest {
+  string entity_type = 1;
+  optional string entity_sub_type = 2;
+  string connector_id = 3;
+  string preset_id = 4;
+  string output_schema_id = 5;
+  repeated ConnectorConfigField connector_config_fields = 6;
+  repeated MessageConfigField message_config_fields = 7;
+}
+message TestDestinationResponse {
+  TestResult result = 1;
+}
+
+message TestTemplateRenderRequest {
+  string entity_type = 1;
+  optional string entity_sub_type = 2;
+  string template = 3;
+}
+
+message TestTemplateRenderResult {
+  message Success {
+    string rendered_value = 1;
+  }
+  message Failure {
+    string message = 1;
+  }
+
+  oneof result {
+    Success success = 1;
+    Failure failure = 2;
+  }
+}
+message TestTemplateRenderResponse {
+  TestTemplateRenderResult result = 1;
+}
