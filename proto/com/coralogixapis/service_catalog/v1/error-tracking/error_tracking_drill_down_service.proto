@@ -2,11 +2,12 @@ syntax = "proto3";
 package com.coralogixapis.service_catalog.v1;
 
 import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogix/catalog/v1/span_kind.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
 import "com/coralogixapis/apm/widgets/v1/stat.proto";
+import "com/coralogixapis/apm_shared/common/queries.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
-import "com/coralogixapis/service_catalog/v1/distributed_tracing_service.proto";
 import "com/coralogixapis/service_catalog/v1/error-tracking/error_tracking_shared.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/service_catalog/v1/transaction.proto";
@@ -23,7 +24,7 @@ message GetErrorStatsRequest {
   ErrorDataSource data_source = 6;
   repeated google.protobuf.StringValue operations = 7;
   google.protobuf.StringValue method = 10;
-  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 8;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 8;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 9;
 }
 
@@ -36,8 +37,27 @@ message GetErrorStatsResponse {
   UnitValue errors_percentage = 6;
 }
 
+message DrillDownSubFiltersRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue service_name = 2;
+  repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 4;
+  google.protobuf.StringValue status_code = 5;
+  ErrorMessageSource error_message_source = 6;
+  ErrorDataSource data_source = 7;
+}
+
+message DrillDownSubFilterResponse {
+  com.coralogix.catalog.v1.ApmFilter operation = 1;
+  repeated com.coralogixapis.apm.common.v2.QueryInfo queriesInfo = 2;
+}
+
 service ErrorTrackingDrillDownService {
   rpc GetErrorStats(GetErrorStatsRequest) returns (GetErrorStatsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get error stats response";
+  }
+
+  rpc GetDrillDownSubFilters(DrillDownSubFiltersRequest) returns (DrillDownSubFilterResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get drill down sub filters";
   }
 }

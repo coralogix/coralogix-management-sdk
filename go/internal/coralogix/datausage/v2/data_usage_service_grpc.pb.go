@@ -24,17 +24,21 @@ const (
 	DataUsageService_GetLogsCount_FullMethodName                       = "/com.coralogix.datausage.v2.DataUsageService/GetLogsCount"
 	DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName    = "/com.coralogix.datausage.v2.DataUsageService/GetDataUsageMetricsExportStatus"
 	DataUsageService_UpdateDataUsageMetricsExportStatus_FullMethodName = "/com.coralogix.datausage.v2.DataUsageService/UpdateDataUsageMetricsExportStatus"
+	DataUsageService_GetDataUsage_FullMethodName                       = "/com.coralogix.datausage.v2.DataUsageService/GetDataUsage"
 )
 
 // DataUsageServiceClient is the client API for DataUsageService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DataUsageServiceClient interface {
+	// Deprecated: Do not use.
+	// Deprecated. Please use GetDataUsage instead.
 	GetTeamDetailedDataUsage(ctx context.Context, in *GetTeamDetailedDataUsageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetTeamDetailedDataUsageResponse], error)
 	GetSpansCount(ctx context.Context, in *GetSpansCountRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetSpansCountResponse], error)
 	GetLogsCount(ctx context.Context, in *GetLogsCountRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetLogsCountResponse], error)
 	GetDataUsageMetricsExportStatus(ctx context.Context, in *GetDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(ctx context.Context, in *UpdateDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*UpdateDataUsageMetricsExportStatusResponse, error)
+	GetDataUsage(ctx context.Context, in *GetDataUsageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetDataUsageResponse], error)
 }
 
 type dataUsageServiceClient struct {
@@ -45,6 +49,7 @@ func NewDataUsageServiceClient(cc grpc.ClientConnInterface) DataUsageServiceClie
 	return &dataUsageServiceClient{cc}
 }
 
+// Deprecated: Do not use.
 func (c *dataUsageServiceClient) GetTeamDetailedDataUsage(ctx context.Context, in *GetTeamDetailedDataUsageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetTeamDetailedDataUsageResponse], error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &DataUsageService_ServiceDesc.Streams[0], DataUsageService_GetTeamDetailedDataUsage_FullMethodName, cOpts...)
@@ -122,15 +127,37 @@ func (c *dataUsageServiceClient) UpdateDataUsageMetricsExportStatus(ctx context.
 	return out, nil
 }
 
+func (c *dataUsageServiceClient) GetDataUsage(ctx context.Context, in *GetDataUsageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetDataUsageResponse], error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &DataUsageService_ServiceDesc.Streams[3], DataUsageService_GetDataUsage_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &grpc.GenericClientStream[GetDataUsageRequest, GetDataUsageResponse]{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type DataUsageService_GetDataUsageClient = grpc.ServerStreamingClient[GetDataUsageResponse]
+
 // DataUsageServiceServer is the server API for DataUsageService service.
 // All implementations must embed UnimplementedDataUsageServiceServer
 // for forward compatibility.
 type DataUsageServiceServer interface {
+	// Deprecated: Do not use.
+	// Deprecated. Please use GetDataUsage instead.
 	GetTeamDetailedDataUsage(*GetTeamDetailedDataUsageRequest, grpc.ServerStreamingServer[GetTeamDetailedDataUsageResponse]) error
 	GetSpansCount(*GetSpansCountRequest, grpc.ServerStreamingServer[GetSpansCountResponse]) error
 	GetLogsCount(*GetLogsCountRequest, grpc.ServerStreamingServer[GetLogsCountResponse]) error
 	GetDataUsageMetricsExportStatus(context.Context, *GetDataUsageMetricsExportStatusRequest) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(context.Context, *UpdateDataUsageMetricsExportStatusRequest) (*UpdateDataUsageMetricsExportStatusResponse, error)
+	GetDataUsage(*GetDataUsageRequest, grpc.ServerStreamingServer[GetDataUsageResponse]) error
 	mustEmbedUnimplementedDataUsageServiceServer()
 }
 
@@ -155,6 +182,9 @@ func (UnimplementedDataUsageServiceServer) GetDataUsageMetricsExportStatus(conte
 }
 func (UnimplementedDataUsageServiceServer) UpdateDataUsageMetricsExportStatus(context.Context, *UpdateDataUsageMetricsExportStatusRequest) (*UpdateDataUsageMetricsExportStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDataUsageMetricsExportStatus not implemented")
+}
+func (UnimplementedDataUsageServiceServer) GetDataUsage(*GetDataUsageRequest, grpc.ServerStreamingServer[GetDataUsageResponse]) error {
+	return status.Errorf(codes.Unimplemented, "method GetDataUsage not implemented")
 }
 func (UnimplementedDataUsageServiceServer) mustEmbedUnimplementedDataUsageServiceServer() {}
 func (UnimplementedDataUsageServiceServer) testEmbeddedByValue()                          {}
@@ -246,6 +276,17 @@ func _DataUsageService_UpdateDataUsageMetricsExportStatus_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DataUsageService_GetDataUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetDataUsageRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DataUsageServiceServer).GetDataUsage(m, &grpc.GenericServerStream[GetDataUsageRequest, GetDataUsageResponse]{ServerStream: stream})
+}
+
+// This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
+type DataUsageService_GetDataUsageServer = grpc.ServerStreamingServer[GetDataUsageResponse]
+
 // DataUsageService_ServiceDesc is the grpc.ServiceDesc for DataUsageService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -276,6 +317,11 @@ var DataUsageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetLogsCount",
 			Handler:       _DataUsageService_GetLogsCount_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetDataUsage",
+			Handler:       _DataUsageService_GetDataUsage_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -8,10 +8,10 @@ package metrics
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -29,9 +29,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MetricsTcoServiceClient interface {
-	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error)
+	Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Get(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetResponse, error)
 }
 
 type metricsTcoServiceClient struct {
@@ -42,9 +42,9 @@ func NewMetricsTcoServiceClient(cc grpc.ClientConnInterface) MetricsTcoServiceCl
 	return &metricsTcoServiceClient{cc}
 }
 
-func (c *metricsTcoServiceClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsTcoServiceClient) Add(ctx context.Context, in *AddRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsTcoService_Add_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -52,9 +52,9 @@ func (c *metricsTcoServiceClient) Add(ctx context.Context, in *AddRequest, opts 
 	return out, nil
 }
 
-func (c *metricsTcoServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsTcoServiceClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsTcoService_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -62,7 +62,7 @@ func (c *metricsTcoServiceClient) Delete(ctx context.Context, in *DeleteRequest,
 	return out, nil
 }
 
-func (c *metricsTcoServiceClient) Get(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
+func (c *metricsTcoServiceClient) Get(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResponse)
 	err := c.cc.Invoke(ctx, MetricsTcoService_Get_FullMethodName, in, out, cOpts...)
@@ -76,9 +76,9 @@ func (c *metricsTcoServiceClient) Get(ctx context.Context, in *emptypb.Empty, op
 // All implementations must embed UnimplementedMetricsTcoServiceServer
 // for forward compatibility.
 type MetricsTcoServiceServer interface {
-	Add(context.Context, *AddRequest) (*emptypb.Empty, error)
-	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
-	Get(context.Context, *emptypb.Empty) (*GetResponse, error)
+	Add(context.Context, *AddRequest) (*empty.Empty, error)
+	Delete(context.Context, *DeleteRequest) (*empty.Empty, error)
+	Get(context.Context, *empty.Empty) (*GetResponse, error)
 	mustEmbedUnimplementedMetricsTcoServiceServer()
 }
 
@@ -89,13 +89,13 @@ type MetricsTcoServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMetricsTcoServiceServer struct{}
 
-func (UnimplementedMetricsTcoServiceServer) Add(context.Context, *AddRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsTcoServiceServer) Add(context.Context, *AddRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Add not implemented")
 }
-func (UnimplementedMetricsTcoServiceServer) Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsTcoServiceServer) Delete(context.Context, *DeleteRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedMetricsTcoServiceServer) Get(context.Context, *emptypb.Empty) (*GetResponse, error) {
+func (UnimplementedMetricsTcoServiceServer) Get(context.Context, *empty.Empty) (*GetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Get not implemented")
 }
 func (UnimplementedMetricsTcoServiceServer) mustEmbedUnimplementedMetricsTcoServiceServer() {}
@@ -156,7 +156,7 @@ func _MetricsTcoService_Delete_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _MetricsTcoService_Get_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -168,7 +168,7 @@ func _MetricsTcoService_Get_Handler(srv interface{}, ctx context.Context, dec fu
 		FullMethod: MetricsTcoService_Get_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricsTcoServiceServer).Get(ctx, req.(*emptypb.Empty))
+		return srv.(MetricsTcoServiceServer).Get(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

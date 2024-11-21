@@ -8,10 +8,10 @@ package metrics
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -32,12 +32,12 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MetricsConfiguratorPublicServiceClient interface {
-	ConfigureTenant(ctx context.Context, in *ConfigureTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	ValidateBucket(ctx context.Context, in *ValidateBucketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	GetTenantConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetTenantConfigResponseV2, error)
-	EnableArchive(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	DisableArchive(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ConfigureTenant(ctx context.Context, in *ConfigureTenantRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	ValidateBucket(ctx context.Context, in *ValidateBucketRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	GetTenantConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetTenantConfigResponseV2, error)
+	EnableArchive(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
+	DisableArchive(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type metricsConfiguratorPublicServiceClient struct {
@@ -48,9 +48,9 @@ func NewMetricsConfiguratorPublicServiceClient(cc grpc.ClientConnInterface) Metr
 	return &metricsConfiguratorPublicServiceClient{cc}
 }
 
-func (c *metricsConfiguratorPublicServiceClient) ConfigureTenant(ctx context.Context, in *ConfigureTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorPublicServiceClient) ConfigureTenant(ctx context.Context, in *ConfigureTenantRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_ConfigureTenant_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -58,9 +58,9 @@ func (c *metricsConfiguratorPublicServiceClient) ConfigureTenant(ctx context.Con
 	return out, nil
 }
 
-func (c *metricsConfiguratorPublicServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorPublicServiceClient) Update(ctx context.Context, in *UpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -68,9 +68,9 @@ func (c *metricsConfiguratorPublicServiceClient) Update(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *metricsConfiguratorPublicServiceClient) ValidateBucket(ctx context.Context, in *ValidateBucketRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorPublicServiceClient) ValidateBucket(ctx context.Context, in *ValidateBucketRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_ValidateBucket_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *metricsConfiguratorPublicServiceClient) ValidateBucket(ctx context.Cont
 	return out, nil
 }
 
-func (c *metricsConfiguratorPublicServiceClient) GetTenantConfig(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetTenantConfigResponseV2, error) {
+func (c *metricsConfiguratorPublicServiceClient) GetTenantConfig(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*GetTenantConfigResponseV2, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetTenantConfigResponseV2)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_GetTenantConfig_FullMethodName, in, out, cOpts...)
@@ -88,9 +88,9 @@ func (c *metricsConfiguratorPublicServiceClient) GetTenantConfig(ctx context.Con
 	return out, nil
 }
 
-func (c *metricsConfiguratorPublicServiceClient) EnableArchive(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorPublicServiceClient) EnableArchive(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_EnableArchive_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -98,9 +98,9 @@ func (c *metricsConfiguratorPublicServiceClient) EnableArchive(ctx context.Conte
 	return out, nil
 }
 
-func (c *metricsConfiguratorPublicServiceClient) DisableArchive(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorPublicServiceClient) DisableArchive(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorPublicService_DisableArchive_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -112,12 +112,12 @@ func (c *metricsConfiguratorPublicServiceClient) DisableArchive(ctx context.Cont
 // All implementations must embed UnimplementedMetricsConfiguratorPublicServiceServer
 // for forward compatibility.
 type MetricsConfiguratorPublicServiceServer interface {
-	ConfigureTenant(context.Context, *ConfigureTenantRequest) (*emptypb.Empty, error)
-	Update(context.Context, *UpdateRequest) (*emptypb.Empty, error)
-	ValidateBucket(context.Context, *ValidateBucketRequest) (*emptypb.Empty, error)
-	GetTenantConfig(context.Context, *emptypb.Empty) (*GetTenantConfigResponseV2, error)
-	EnableArchive(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
-	DisableArchive(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	ConfigureTenant(context.Context, *ConfigureTenantRequest) (*empty.Empty, error)
+	Update(context.Context, *UpdateRequest) (*empty.Empty, error)
+	ValidateBucket(context.Context, *ValidateBucketRequest) (*empty.Empty, error)
+	GetTenantConfig(context.Context, *empty.Empty) (*GetTenantConfigResponseV2, error)
+	EnableArchive(context.Context, *empty.Empty) (*empty.Empty, error)
+	DisableArchive(context.Context, *empty.Empty) (*empty.Empty, error)
 	mustEmbedUnimplementedMetricsConfiguratorPublicServiceServer()
 }
 
@@ -128,22 +128,22 @@ type MetricsConfiguratorPublicServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedMetricsConfiguratorPublicServiceServer struct{}
 
-func (UnimplementedMetricsConfiguratorPublicServiceServer) ConfigureTenant(context.Context, *ConfigureTenantRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) ConfigureTenant(context.Context, *ConfigureTenantRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ConfigureTenant not implemented")
 }
-func (UnimplementedMetricsConfiguratorPublicServiceServer) Update(context.Context, *UpdateRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) Update(context.Context, *UpdateRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedMetricsConfiguratorPublicServiceServer) ValidateBucket(context.Context, *ValidateBucketRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) ValidateBucket(context.Context, *ValidateBucketRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateBucket not implemented")
 }
-func (UnimplementedMetricsConfiguratorPublicServiceServer) GetTenantConfig(context.Context, *emptypb.Empty) (*GetTenantConfigResponseV2, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) GetTenantConfig(context.Context, *empty.Empty) (*GetTenantConfigResponseV2, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTenantConfig not implemented")
 }
-func (UnimplementedMetricsConfiguratorPublicServiceServer) EnableArchive(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) EnableArchive(context.Context, *empty.Empty) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EnableArchive not implemented")
 }
-func (UnimplementedMetricsConfiguratorPublicServiceServer) DisableArchive(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorPublicServiceServer) DisableArchive(context.Context, *empty.Empty) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DisableArchive not implemented")
 }
 func (UnimplementedMetricsConfiguratorPublicServiceServer) mustEmbedUnimplementedMetricsConfiguratorPublicServiceServer() {
@@ -223,7 +223,7 @@ func _MetricsConfiguratorPublicService_ValidateBucket_Handler(srv interface{}, c
 }
 
 func _MetricsConfiguratorPublicService_GetTenantConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -235,13 +235,13 @@ func _MetricsConfiguratorPublicService_GetTenantConfig_Handler(srv interface{}, 
 		FullMethod: MetricsConfiguratorPublicService_GetTenantConfig_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricsConfiguratorPublicServiceServer).GetTenantConfig(ctx, req.(*emptypb.Empty))
+		return srv.(MetricsConfiguratorPublicServiceServer).GetTenantConfig(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _MetricsConfiguratorPublicService_EnableArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -253,13 +253,13 @@ func _MetricsConfiguratorPublicService_EnableArchive_Handler(srv interface{}, ct
 		FullMethod: MetricsConfiguratorPublicService_EnableArchive_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricsConfiguratorPublicServiceServer).EnableArchive(ctx, req.(*emptypb.Empty))
+		return srv.(MetricsConfiguratorPublicServiceServer).EnableArchive(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _MetricsConfiguratorPublicService_DisableArchive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -271,7 +271,7 @@ func _MetricsConfiguratorPublicService_DisableArchive_Handler(srv interface{}, c
 		FullMethod: MetricsConfiguratorPublicService_DisableArchive_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MetricsConfiguratorPublicServiceServer).DisableArchive(ctx, req.(*emptypb.Empty))
+		return srv.(MetricsConfiguratorPublicServiceServer).DisableArchive(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -327,8 +327,8 @@ type MetricsConfiguratorServiceClient interface {
 	GetTenantConfig(ctx context.Context, in *GetTenantConfigRequest, opts ...grpc.CallOption) (*GetTenantConfigResponse, error)
 	ListTenantConfigs(ctx context.Context, in *ListTenantConfigsRequest, opts ...grpc.CallOption) (*ListTenantConfigsResponse, error)
 	ListHostStoreConfigs(ctx context.Context, in *ListHotStoreConfigsRequest, opts ...grpc.CallOption) (*ListHotStoreConfigsResponse, error)
-	MigrateTenant(ctx context.Context, in *MigrateTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	Update(ctx context.Context, in *InternalUpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	MigrateTenant(ctx context.Context, in *MigrateTenantRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	Update(ctx context.Context, in *InternalUpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type metricsConfiguratorServiceClient struct {
@@ -369,9 +369,9 @@ func (c *metricsConfiguratorServiceClient) ListHostStoreConfigs(ctx context.Cont
 	return out, nil
 }
 
-func (c *metricsConfiguratorServiceClient) MigrateTenant(ctx context.Context, in *MigrateTenantRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorServiceClient) MigrateTenant(ctx context.Context, in *MigrateTenantRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorService_MigrateTenant_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -379,9 +379,9 @@ func (c *metricsConfiguratorServiceClient) MigrateTenant(ctx context.Context, in
 	return out, nil
 }
 
-func (c *metricsConfiguratorServiceClient) Update(ctx context.Context, in *InternalUpdateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *metricsConfiguratorServiceClient) Update(ctx context.Context, in *InternalUpdateRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, MetricsConfiguratorService_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -396,8 +396,8 @@ type MetricsConfiguratorServiceServer interface {
 	GetTenantConfig(context.Context, *GetTenantConfigRequest) (*GetTenantConfigResponse, error)
 	ListTenantConfigs(context.Context, *ListTenantConfigsRequest) (*ListTenantConfigsResponse, error)
 	ListHostStoreConfigs(context.Context, *ListHotStoreConfigsRequest) (*ListHotStoreConfigsResponse, error)
-	MigrateTenant(context.Context, *MigrateTenantRequest) (*emptypb.Empty, error)
-	Update(context.Context, *InternalUpdateRequest) (*emptypb.Empty, error)
+	MigrateTenant(context.Context, *MigrateTenantRequest) (*empty.Empty, error)
+	Update(context.Context, *InternalUpdateRequest) (*empty.Empty, error)
 	mustEmbedUnimplementedMetricsConfiguratorServiceServer()
 }
 
@@ -417,10 +417,10 @@ func (UnimplementedMetricsConfiguratorServiceServer) ListTenantConfigs(context.C
 func (UnimplementedMetricsConfiguratorServiceServer) ListHostStoreConfigs(context.Context, *ListHotStoreConfigsRequest) (*ListHotStoreConfigsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListHostStoreConfigs not implemented")
 }
-func (UnimplementedMetricsConfiguratorServiceServer) MigrateTenant(context.Context, *MigrateTenantRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorServiceServer) MigrateTenant(context.Context, *MigrateTenantRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MigrateTenant not implemented")
 }
-func (UnimplementedMetricsConfiguratorServiceServer) Update(context.Context, *InternalUpdateRequest) (*emptypb.Empty, error) {
+func (UnimplementedMetricsConfiguratorServiceServer) Update(context.Context, *InternalUpdateRequest) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedMetricsConfiguratorServiceServer) mustEmbedUnimplementedMetricsConfiguratorServiceServer() {

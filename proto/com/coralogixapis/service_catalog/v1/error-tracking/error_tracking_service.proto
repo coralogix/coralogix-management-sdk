@@ -2,11 +2,11 @@ syntax = "proto3";
 package com.coralogixapis.service_catalog.v1;
 
 import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogix/catalog/v1/span_kind.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
 import "com/coralogixapis/apm/widgets/v1/stat.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
-import "com/coralogixapis/service_catalog/v1/distributed_tracing_service.proto";
 import "com/coralogixapis/service_catalog/v1/error-tracking/error_tracking_shared.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "google/protobuf/struct.proto";
@@ -20,7 +20,7 @@ message GetServiceErrorTrackingOverviewRequest {
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   ErrorDataSource data_source = 6;
-  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 7;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 7;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
   google.protobuf.UInt64Value topk = 9;
 }
@@ -42,7 +42,7 @@ message GetServiceErrorTrackingListRequest {
   GroupBy group_by = 4;
   google.protobuf.Int64Value trend_offset = 5;
   ErrorDataSource data_source = 6;
-  repeated com.coralogixapis.service_catalog.v1.SpanKind operation_span_kinds = 7;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 7;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
 }
 
