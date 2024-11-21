@@ -4,6 +4,7 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
 
 message EventMetricLessThan {
   google.protobuf.FloatValue percentage_over_threshold = 1;
@@ -13,4 +14,5 @@ message EventMetricLessThan {
   google.protobuf.BoolValue is_deadman = 5;
   google.protobuf.Timestamp from_timestamp = 6;
   google.protobuf.Timestamp to_timestamp = 7;
+  AlertDefSeverity severity = 8;
 }

@@ -28,6 +28,7 @@ const (
 	DatabaseCatalogService_ListCallingServices_FullMethodName                  = "/com.coralogixapis.database_catalog.v1.DatabaseCatalogService/ListCallingServices"
 	DatabaseCatalogService_ListTables_FullMethodName                           = "/com.coralogixapis.database_catalog.v1.DatabaseCatalogService/ListTables"
 	DatabaseCatalogService_GetAffectedAlerts_FullMethodName                    = "/com.coralogixapis.database_catalog.v1.DatabaseCatalogService/GetAffectedAlerts"
+	DatabaseCatalogService_GetDbHierarchyInfoFromTags_FullMethodName           = "/com.coralogixapis.database_catalog.v1.DatabaseCatalogService/GetDbHierarchyInfoFromTags"
 )
 
 // DatabaseCatalogServiceClient is the client API for DatabaseCatalogService service.
@@ -43,6 +44,7 @@ type DatabaseCatalogServiceClient interface {
 	ListCallingServices(ctx context.Context, in *ListCallingServicesRequest, opts ...grpc.CallOption) (*ListCallingServicesResponse, error)
 	ListTables(ctx context.Context, in *ListTablesRequest, opts ...grpc.CallOption) (*ListTablesResponse, error)
 	GetAffectedAlerts(ctx context.Context, in *GetAffectedAlertsRequest, opts ...grpc.CallOption) (*GetAffectedAlertsResponse, error)
+	GetDbHierarchyInfoFromTags(ctx context.Context, in *GetDbHierarchyInfoFromTagsRequest, opts ...grpc.CallOption) (*GetDbHierarchyInfoFromTagsResponse, error)
 }
 
 type databaseCatalogServiceClient struct {
@@ -179,6 +181,16 @@ func (c *databaseCatalogServiceClient) GetAffectedAlerts(ctx context.Context, in
 	return out, nil
 }
 
+func (c *databaseCatalogServiceClient) GetDbHierarchyInfoFromTags(ctx context.Context, in *GetDbHierarchyInfoFromTagsRequest, opts ...grpc.CallOption) (*GetDbHierarchyInfoFromTagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDbHierarchyInfoFromTagsResponse)
+	err := c.cc.Invoke(ctx, DatabaseCatalogService_GetDbHierarchyInfoFromTags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DatabaseCatalogServiceServer is the server API for DatabaseCatalogService service.
 // All implementations must embed UnimplementedDatabaseCatalogServiceServer
 // for forward compatibility.
@@ -192,6 +204,7 @@ type DatabaseCatalogServiceServer interface {
 	ListCallingServices(context.Context, *ListCallingServicesRequest) (*ListCallingServicesResponse, error)
 	ListTables(context.Context, *ListTablesRequest) (*ListTablesResponse, error)
 	GetAffectedAlerts(context.Context, *GetAffectedAlertsRequest) (*GetAffectedAlertsResponse, error)
+	GetDbHierarchyInfoFromTags(context.Context, *GetDbHierarchyInfoFromTagsRequest) (*GetDbHierarchyInfoFromTagsResponse, error)
 	mustEmbedUnimplementedDatabaseCatalogServiceServer()
 }
 
@@ -228,6 +241,9 @@ func (UnimplementedDatabaseCatalogServiceServer) ListTables(context.Context, *Li
 }
 func (UnimplementedDatabaseCatalogServiceServer) GetAffectedAlerts(context.Context, *GetAffectedAlertsRequest) (*GetAffectedAlertsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAffectedAlerts not implemented")
+}
+func (UnimplementedDatabaseCatalogServiceServer) GetDbHierarchyInfoFromTags(context.Context, *GetDbHierarchyInfoFromTagsRequest) (*GetDbHierarchyInfoFromTagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDbHierarchyInfoFromTags not implemented")
 }
 func (UnimplementedDatabaseCatalogServiceServer) mustEmbedUnimplementedDatabaseCatalogServiceServer() {
 }
@@ -385,6 +401,24 @@ func _DatabaseCatalogService_GetAffectedAlerts_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DatabaseCatalogService_GetDbHierarchyInfoFromTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDbHierarchyInfoFromTagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DatabaseCatalogServiceServer).GetDbHierarchyInfoFromTags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DatabaseCatalogService_GetDbHierarchyInfoFromTags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DatabaseCatalogServiceServer).GetDbHierarchyInfoFromTags(ctx, req.(*GetDbHierarchyInfoFromTagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DatabaseCatalogService_ServiceDesc is the grpc.ServiceDesc for DatabaseCatalogService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -411,6 +445,10 @@ var DatabaseCatalogService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAffectedAlerts",
 			Handler:    _DatabaseCatalogService_GetAffectedAlerts_Handler,
+		},
+		{
+			MethodName: "GetDbHierarchyInfoFromTags",
+			Handler:    _DatabaseCatalogService_GetDbHierarchyInfoFromTags_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

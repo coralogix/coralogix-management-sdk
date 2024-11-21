@@ -4,7 +4,7 @@
 // - protoc             v5.28.3
 // source: com/coralogixapis/service_catalog/v1/error-tracking/error_tracking_drill_down_service.proto
 
-package error_tracking
+package v1
 
 import (
 	context "context"
@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ErrorTrackingDrillDownService_GetErrorStats_FullMethodName = "/com.coralogixapis.service_catalog.v1.ErrorTrackingDrillDownService/GetErrorStats"
+	ErrorTrackingDrillDownService_GetErrorStats_FullMethodName          = "/com.coralogixapis.service_catalog.v1.ErrorTrackingDrillDownService/GetErrorStats"
+	ErrorTrackingDrillDownService_GetDrillDownSubFilters_FullMethodName = "/com.coralogixapis.service_catalog.v1.ErrorTrackingDrillDownService/GetDrillDownSubFilters"
 )
 
 // ErrorTrackingDrillDownServiceClient is the client API for ErrorTrackingDrillDownService service.
@@ -27,6 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ErrorTrackingDrillDownServiceClient interface {
 	GetErrorStats(ctx context.Context, in *GetErrorStatsRequest, opts ...grpc.CallOption) (*GetErrorStatsResponse, error)
+	GetDrillDownSubFilters(ctx context.Context, in *DrillDownSubFiltersRequest, opts ...grpc.CallOption) (*DrillDownSubFilterResponse, error)
 }
 
 type errorTrackingDrillDownServiceClient struct {
@@ -47,11 +49,22 @@ func (c *errorTrackingDrillDownServiceClient) GetErrorStats(ctx context.Context,
 	return out, nil
 }
 
+func (c *errorTrackingDrillDownServiceClient) GetDrillDownSubFilters(ctx context.Context, in *DrillDownSubFiltersRequest, opts ...grpc.CallOption) (*DrillDownSubFilterResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DrillDownSubFilterResponse)
+	err := c.cc.Invoke(ctx, ErrorTrackingDrillDownService_GetDrillDownSubFilters_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ErrorTrackingDrillDownServiceServer is the server API for ErrorTrackingDrillDownService service.
 // All implementations must embed UnimplementedErrorTrackingDrillDownServiceServer
 // for forward compatibility.
 type ErrorTrackingDrillDownServiceServer interface {
 	GetErrorStats(context.Context, *GetErrorStatsRequest) (*GetErrorStatsResponse, error)
+	GetDrillDownSubFilters(context.Context, *DrillDownSubFiltersRequest) (*DrillDownSubFilterResponse, error)
 	mustEmbedUnimplementedErrorTrackingDrillDownServiceServer()
 }
 
@@ -64,6 +77,9 @@ type UnimplementedErrorTrackingDrillDownServiceServer struct{}
 
 func (UnimplementedErrorTrackingDrillDownServiceServer) GetErrorStats(context.Context, *GetErrorStatsRequest) (*GetErrorStatsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetErrorStats not implemented")
+}
+func (UnimplementedErrorTrackingDrillDownServiceServer) GetDrillDownSubFilters(context.Context, *DrillDownSubFiltersRequest) (*DrillDownSubFilterResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDrillDownSubFilters not implemented")
 }
 func (UnimplementedErrorTrackingDrillDownServiceServer) mustEmbedUnimplementedErrorTrackingDrillDownServiceServer() {
 }
@@ -105,6 +121,24 @@ func _ErrorTrackingDrillDownService_GetErrorStats_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ErrorTrackingDrillDownService_GetDrillDownSubFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DrillDownSubFiltersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ErrorTrackingDrillDownServiceServer).GetDrillDownSubFilters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: ErrorTrackingDrillDownService_GetDrillDownSubFilters_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ErrorTrackingDrillDownServiceServer).GetDrillDownSubFilters(ctx, req.(*DrillDownSubFiltersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // ErrorTrackingDrillDownService_ServiceDesc is the grpc.ServiceDesc for ErrorTrackingDrillDownService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -115,6 +149,10 @@ var ErrorTrackingDrillDownService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetErrorStats",
 			Handler:    _ErrorTrackingDrillDownService_GetErrorStats_Handler,
+		},
+		{
+			MethodName: "GetDrillDownSubFilters",
+			Handler:    _ErrorTrackingDrillDownService_GetDrillDownSubFilters_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

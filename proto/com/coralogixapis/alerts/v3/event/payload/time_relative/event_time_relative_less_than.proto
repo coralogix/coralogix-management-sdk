@@ -5,6 +5,7 @@ package com.coralogixapis.alerts.v3;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto";
+import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
 
 message EventTimeRelativeLessThan {
   google.protobuf.Int64Value numerator_hit_value = 1;
@@ -15,4 +16,5 @@ message EventTimeRelativeLessThan {
   }
   google.protobuf.Timestamp from_timestamp = 4;
   google.protobuf.Timestamp to_timestamp = 5;
+  AlertDefSeverity severity = 6;
 }

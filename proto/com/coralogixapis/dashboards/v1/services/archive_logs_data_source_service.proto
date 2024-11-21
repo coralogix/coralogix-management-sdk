@@ -53,6 +53,7 @@ message SearchArchiveLogsTimeSeriesRequest {
 message SearchArchiveLogsTimeSeriesResponse {
   repeated common.TimeSeries time_series = 1;
   google.protobuf.Int64Value total = 2;
+  map<string, string> meta = 3;
 }
 
 message SearchArchiveLogsEventsRequest {
@@ -69,6 +70,7 @@ message SearchArchiveLogsEventsRequest {
 message SearchArchiveLogsEventsResponse {
   repeated ArchiveLogsEvent events = 1;
   google.protobuf.Int32Value total_fetched = 2; // How many events were fetched before pagination applied.
+  map<string, string> meta = 3;
 }
 
 message SearchArchiveLogsEventsCountRequest {
@@ -103,6 +105,7 @@ message SearchArchiveLogsEventGroupsRequest {
 
 message SearchArchiveLogsEventGroupsResponse {
   repeated common.MultiGroup groups = 1;
+  map<string, string> meta = 2;
 }
 
 message SearchArchiveGroupedLogsSeriesRequest {

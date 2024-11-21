@@ -28,3 +28,8 @@ message Legend {
     LEGEND_PLACEMENT_HIDDEN = 4;
   }
 }
+
+enum LegendBy {
+    LEGEND_BY_GROUPS = 0;
+    LEGEND_BY_THRESHOLDS = 1;
+}

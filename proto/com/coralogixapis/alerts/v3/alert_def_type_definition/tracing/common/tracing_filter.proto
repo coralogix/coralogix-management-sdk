@@ -11,7 +11,7 @@ message TracingFilter {
 }
 message TracingSimpleFilter {
   TracingLabelFilters tracing_label_filters = 1;
-  google.protobuf.UInt32Value latency_threshold_ms = 2;
+  google.protobuf.UInt64Value latency_threshold_ms = 2;
 }
 
 message TracingLabelFilters {

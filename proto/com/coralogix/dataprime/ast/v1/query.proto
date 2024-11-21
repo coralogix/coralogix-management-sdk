@@ -85,6 +85,7 @@ message Operator {
     Join join          = 17;
     Explode explode    = 18;
     DedupeBy dedupe_by = 19;
+    Stitch stitch      = 20;
   }
 
   reserved 12, 13;
@@ -369,5 +370,11 @@ message Operator {
         google.protobuf.Int32Value n = 1;
       }
     }
+  }
+
+  message Stitch {
+    Query query                     = 1;
+    Expression.Keypath into         = 2;
+    google.protobuf.BoolValue merge = 3;
   }
 }

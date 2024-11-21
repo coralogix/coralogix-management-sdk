@@ -4,7 +4,7 @@
 // - protoc             v5.28.3
 // source: com/coralogixapis/service_catalog/v1/error-tracking/error_tracking_service.proto
 
-package error_tracking
+package v1
 
 import (
 	context "context"

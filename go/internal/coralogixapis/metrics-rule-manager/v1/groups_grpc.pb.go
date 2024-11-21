@@ -8,10 +8,10 @@ package golang
 
 import (
 	context "context"
+	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
-	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -34,11 +34,11 @@ const (
 // CRUD operations on recording rule groups.
 type RuleGroupsClient interface {
 	// Creates or updates a rule group.
-	Save(ctx context.Context, in *InRuleGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Save(ctx context.Context, in *InRuleGroup, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Deletes a rule group matching the given input.
-	Delete(ctx context.Context, in *DeleteRuleGroup, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Delete(ctx context.Context, in *DeleteRuleGroup, opts ...grpc.CallOption) (*empty.Empty, error)
 	// Lists all the rule groups.
-	List(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuleGroupListing, error)
+	List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuleGroupListing, error)
 	// Fetches a rule group matching a given input.
 	Fetch(ctx context.Context, in *FetchRuleGroup, opts ...grpc.CallOption) (*FetchRuleGroupResult, error)
 }
@@ -51,9 +51,9 @@ func NewRuleGroupsClient(cc grpc.ClientConnInterface) RuleGroupsClient {
 	return &ruleGroupsClient{cc}
 }
 
-func (c *ruleGroupsClient) Save(ctx context.Context, in *InRuleGroup, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *ruleGroupsClient) Save(ctx context.Context, in *InRuleGroup, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, RuleGroups_Save_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -61,9 +61,9 @@ func (c *ruleGroupsClient) Save(ctx context.Context, in *InRuleGroup, opts ...gr
 	return out, nil
 }
 
-func (c *ruleGroupsClient) Delete(ctx context.Context, in *DeleteRuleGroup, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *ruleGroupsClient) Delete(ctx context.Context, in *DeleteRuleGroup, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, RuleGroups_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -71,7 +71,7 @@ func (c *ruleGroupsClient) Delete(ctx context.Context, in *DeleteRuleGroup, opts
 	return out, nil
 }
 
-func (c *ruleGroupsClient) List(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuleGroupListing, error) {
+func (c *ruleGroupsClient) List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuleGroupListing, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RuleGroupListing)
 	err := c.cc.Invoke(ctx, RuleGroups_List_FullMethodName, in, out, cOpts...)
@@ -99,11 +99,11 @@ func (c *ruleGroupsClient) Fetch(ctx context.Context, in *FetchRuleGroup, opts .
 // CRUD operations on recording rule groups.
 type RuleGroupsServer interface {
 	// Creates or updates a rule group.
-	Save(context.Context, *InRuleGroup) (*emptypb.Empty, error)
+	Save(context.Context, *InRuleGroup) (*empty.Empty, error)
 	// Deletes a rule group matching the given input.
-	Delete(context.Context, *DeleteRuleGroup) (*emptypb.Empty, error)
+	Delete(context.Context, *DeleteRuleGroup) (*empty.Empty, error)
 	// Lists all the rule groups.
-	List(context.Context, *emptypb.Empty) (*RuleGroupListing, error)
+	List(context.Context, *empty.Empty) (*RuleGroupListing, error)
 	// Fetches a rule group matching a given input.
 	Fetch(context.Context, *FetchRuleGroup) (*FetchRuleGroupResult, error)
 	mustEmbedUnimplementedRuleGroupsServer()
@@ -116,13 +116,13 @@ type RuleGroupsServer interface {
 // pointer dereference when methods are called.
 type UnimplementedRuleGroupsServer struct{}
 
-func (UnimplementedRuleGroupsServer) Save(context.Context, *InRuleGroup) (*emptypb.Empty, error) {
+func (UnimplementedRuleGroupsServer) Save(context.Context, *InRuleGroup) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Save not implemented")
 }
-func (UnimplementedRuleGroupsServer) Delete(context.Context, *DeleteRuleGroup) (*emptypb.Empty, error) {
+func (UnimplementedRuleGroupsServer) Delete(context.Context, *DeleteRuleGroup) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
-func (UnimplementedRuleGroupsServer) List(context.Context, *emptypb.Empty) (*RuleGroupListing, error) {
+func (UnimplementedRuleGroupsServer) List(context.Context, *empty.Empty) (*RuleGroupListing, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedRuleGroupsServer) Fetch(context.Context, *FetchRuleGroup) (*FetchRuleGroupResult, error) {
@@ -186,7 +186,7 @@ func _RuleGroups_Delete_Handler(srv interface{}, ctx context.Context, dec func(i
 }
 
 func _RuleGroups_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -198,7 +198,7 @@ func _RuleGroups_List_Handler(srv interface{}, ctx context.Context, dec func(int
 		FullMethod: RuleGroups_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RuleGroupsServer).List(ctx, req.(*emptypb.Empty))
+		return srv.(RuleGroupsServer).List(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -262,10 +262,10 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RuleGroupSetsClient interface {
 	Create(ctx context.Context, in *CreateRuleGroupSet, opts ...grpc.CallOption) (*CreateRuleGroupSetResult, error)
-	Update(ctx context.Context, in *UpdateRuleGroupSet, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	List(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuleGroupSetListing, error)
+	Update(ctx context.Context, in *UpdateRuleGroupSet, opts ...grpc.CallOption) (*empty.Empty, error)
+	List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuleGroupSetListing, error)
 	Fetch(ctx context.Context, in *FetchRuleGroupSet, opts ...grpc.CallOption) (*OutRuleGroupSet, error)
-	Delete(ctx context.Context, in *DeleteRuleGroupSet, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Delete(ctx context.Context, in *DeleteRuleGroupSet, opts ...grpc.CallOption) (*empty.Empty, error)
 }
 
 type ruleGroupSetsClient struct {
@@ -286,9 +286,9 @@ func (c *ruleGroupSetsClient) Create(ctx context.Context, in *CreateRuleGroupSet
 	return out, nil
 }
 
-func (c *ruleGroupSetsClient) Update(ctx context.Context, in *UpdateRuleGroupSet, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *ruleGroupSetsClient) Update(ctx context.Context, in *UpdateRuleGroupSet, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, RuleGroupSets_Update_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -296,7 +296,7 @@ func (c *ruleGroupSetsClient) Update(ctx context.Context, in *UpdateRuleGroupSet
 	return out, nil
 }
 
-func (c *ruleGroupSetsClient) List(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*RuleGroupSetListing, error) {
+func (c *ruleGroupSetsClient) List(ctx context.Context, in *empty.Empty, opts ...grpc.CallOption) (*RuleGroupSetListing, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RuleGroupSetListing)
 	err := c.cc.Invoke(ctx, RuleGroupSets_List_FullMethodName, in, out, cOpts...)
@@ -316,9 +316,9 @@ func (c *ruleGroupSetsClient) Fetch(ctx context.Context, in *FetchRuleGroupSet, 
 	return out, nil
 }
 
-func (c *ruleGroupSetsClient) Delete(ctx context.Context, in *DeleteRuleGroupSet, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *ruleGroupSetsClient) Delete(ctx context.Context, in *DeleteRuleGroupSet, opts ...grpc.CallOption) (*empty.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(empty.Empty)
 	err := c.cc.Invoke(ctx, RuleGroupSets_Delete_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -331,10 +331,10 @@ func (c *ruleGroupSetsClient) Delete(ctx context.Context, in *DeleteRuleGroupSet
 // for forward compatibility.
 type RuleGroupSetsServer interface {
 	Create(context.Context, *CreateRuleGroupSet) (*CreateRuleGroupSetResult, error)
-	Update(context.Context, *UpdateRuleGroupSet) (*emptypb.Empty, error)
-	List(context.Context, *emptypb.Empty) (*RuleGroupSetListing, error)
+	Update(context.Context, *UpdateRuleGroupSet) (*empty.Empty, error)
+	List(context.Context, *empty.Empty) (*RuleGroupSetListing, error)
 	Fetch(context.Context, *FetchRuleGroupSet) (*OutRuleGroupSet, error)
-	Delete(context.Context, *DeleteRuleGroupSet) (*emptypb.Empty, error)
+	Delete(context.Context, *DeleteRuleGroupSet) (*empty.Empty, error)
 	mustEmbedUnimplementedRuleGroupSetsServer()
 }
 
@@ -348,16 +348,16 @@ type UnimplementedRuleGroupSetsServer struct{}
 func (UnimplementedRuleGroupSetsServer) Create(context.Context, *CreateRuleGroupSet) (*CreateRuleGroupSetResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
-func (UnimplementedRuleGroupSetsServer) Update(context.Context, *UpdateRuleGroupSet) (*emptypb.Empty, error) {
+func (UnimplementedRuleGroupSetsServer) Update(context.Context, *UpdateRuleGroupSet) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
-func (UnimplementedRuleGroupSetsServer) List(context.Context, *emptypb.Empty) (*RuleGroupSetListing, error) {
+func (UnimplementedRuleGroupSetsServer) List(context.Context, *empty.Empty) (*RuleGroupSetListing, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method List not implemented")
 }
 func (UnimplementedRuleGroupSetsServer) Fetch(context.Context, *FetchRuleGroupSet) (*OutRuleGroupSet, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Fetch not implemented")
 }
-func (UnimplementedRuleGroupSetsServer) Delete(context.Context, *DeleteRuleGroupSet) (*emptypb.Empty, error) {
+func (UnimplementedRuleGroupSetsServer) Delete(context.Context, *DeleteRuleGroupSet) (*empty.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
 }
 func (UnimplementedRuleGroupSetsServer) mustEmbedUnimplementedRuleGroupSetsServer() {}
@@ -418,7 +418,7 @@ func _RuleGroupSets_Update_Handler(srv interface{}, ctx context.Context, dec fun
 }
 
 func _RuleGroupSets_List_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(empty.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -430,7 +430,7 @@ func _RuleGroupSets_List_Handler(srv interface{}, ctx context.Context, dec func(
 		FullMethod: RuleGroupSets_List_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(RuleGroupSetsServer).List(ctx, req.(*emptypb.Empty))
+		return srv.(RuleGroupSetsServer).List(ctx, req.(*empty.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }

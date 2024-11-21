@@ -7,7 +7,7 @@ revision = 'v0.17.1'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.0"
+revision = "v0.5.3"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
@@ -42,12 +42,12 @@ revision = 'v0.0.8'
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
 allow_policies = ["/com/coralogixapis/*"]
-revision = "v1.2.9"
+revision = "v1.2.11"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
-revision = "v0.320"
+revision = "v0.321"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -60,7 +60,7 @@ revision = 'v0.3.0'
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.17"
+revision = "v0.1.18"
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
@@ -77,7 +77,7 @@ revision = "v0.1.32"
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.103"
+revision = "v0.3.107"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -112,7 +112,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.70"
+revision = "v0.0.71"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/metrics-configurator'
