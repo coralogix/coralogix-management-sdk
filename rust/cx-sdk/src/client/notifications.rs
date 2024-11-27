@@ -96,7 +96,11 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -162,7 +166,12 @@ impl NotificationsClient {
                 .get_connector(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/GetConnector".into(),
+                    },
+                ))
         }
     }
 
@@ -192,7 +201,12 @@ impl NotificationsClient {
                 .list_connectors(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/ListConnectors".into(),
+                    },
+                ))
         }
     }
 
@@ -213,7 +227,12 @@ impl NotificationsClient {
                 .create_connector(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/CreateConnector".into(),
+                    },
+                ))
         }
     }
 
@@ -237,7 +256,12 @@ impl NotificationsClient {
                 .replace_connector(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/ReplaceConnector".into(),
+                    },
+                ))
         }
     }
 
@@ -256,7 +280,12 @@ impl NotificationsClient {
                 .delete_connector(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/DeleteConnector".into(),
+                    },
+                ))
         }
     }
 
@@ -278,7 +307,12 @@ impl NotificationsClient {
                 .batch_get_connectors(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/BatchGetConnectors".into(),
+                    },
+                ))
         }
     }
 
@@ -293,7 +327,12 @@ impl NotificationsClient {
                 .get_connector_type_summaries(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/GetConnectorTypeSummaries".into(),
+                    },
+                ))
         }
     }
 
@@ -314,7 +353,12 @@ impl NotificationsClient {
                 .create_custom_preset(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/CreateCustomPreset".into(),
+                    },
+                ))
         }
     }
 
@@ -338,7 +382,12 @@ impl NotificationsClient {
                 .replace_custom_preset(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/ReplaceCustomPreset".into(),
+                    },
+                ))
         }
     }
 
@@ -360,7 +409,12 @@ impl NotificationsClient {
                 .delete_custom_preset(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/DeleteCustomPreset".into(),
+                    },
+                ))
         }
     }
 
@@ -382,7 +436,12 @@ impl NotificationsClient {
                 .set_custom_preset_as_default(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/SetCustomPresetAsDefault".into(),
+                    },
+                ))
         }
     }
 
@@ -399,7 +458,12 @@ impl NotificationsClient {
                 .get_preset(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetPreset".into(),
+                    },
+                ))
         }
     }
 
@@ -429,7 +493,12 @@ impl NotificationsClient {
                 .list_preset_summaries(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/ListPresetSummaries".into(),
+                    },
+                ))
         }
     }
 
@@ -451,7 +520,12 @@ impl NotificationsClient {
                 .batch_get_presets(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/BatchGetPresets".into(),
+                    },
+                ))
         }
     }
 
@@ -478,7 +552,12 @@ impl NotificationsClient {
                 .get_default_preset_summary(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetDefaultPresetSummary".into(),
+                    },
+                ))
         }
     }
 
@@ -505,7 +584,12 @@ impl NotificationsClient {
                 .get_system_default_preset_summary(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetSystemDefaultPresetSummary".into(),
+                    },
+                ))
         }
     }
 
@@ -538,7 +622,12 @@ impl NotificationsClient {
                 .test_connector_config(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestConnectorConfig".into(),
+                    },
+                ))
         }
     }
 
@@ -565,7 +654,12 @@ impl NotificationsClient {
                 .test_existing_connector(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestExistingConnector".into(),
+                    },
+                ))
         }
     }
 
@@ -595,7 +689,12 @@ impl NotificationsClient {
                 .test_preset_config(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                    },
+                ))
         }
     }
 
@@ -625,7 +724,12 @@ impl NotificationsClient {
                 .test_template_render(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                    },
+                ))
         }
     }
 }

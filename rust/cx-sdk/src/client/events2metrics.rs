@@ -16,7 +16,10 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -94,7 +97,12 @@ impl Events2MetricsClient {
             .lock()
             .await
             .create_e2m(request)
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/CreateE2M"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -111,7 +119,12 @@ impl Events2MetricsClient {
                 ReplaceE2mRequest { e2m: Some(e2m) },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ReplaceE2M"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -128,7 +141,12 @@ impl Events2MetricsClient {
                 DeleteE2mRequest { id: Some(id) },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/DeleteE2M"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -145,7 +163,12 @@ impl Events2MetricsClient {
                 GetE2mRequest { id: Some(id) },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/GetE2M"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -162,7 +185,12 @@ impl Events2MetricsClient {
                 GetLimitsRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/GetLimits"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -179,7 +207,12 @@ impl Events2MetricsClient {
                 ListE2mRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ListE2M"
+                    .to_string(),
+            })?
             .into_inner())
     }
 
@@ -204,7 +237,11 @@ impl Events2MetricsClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ListLabelsCardinality".to_string(),
+            })?
             .into_inner())
     }
 

@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::error::{
+    SdkApiError,
+    SdkError,
+};
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
@@ -85,7 +89,17 @@ impl DataprimeQueryClient {
         );
         {
             let mut client = self.service_client.lock().await;
-            Ok(client.query(request).await?.into_inner())
+            Ok(client
+                .query(request)
+                .await
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dataprime.v1.DataprimeQueryService/Query"
+                            .into(),
+                    })
+                })?
+                .into_inner())
         }
     }
 }

@@ -42,7 +42,11 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -106,7 +110,12 @@ impl MetricsArchiveClient {
                 .configure_tenant(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/ConfigureTenant".into(),
+                    },
+                ))
         }
     }
 
@@ -130,7 +139,12 @@ impl MetricsArchiveClient {
         {
             let mut client = self.service_client.lock().await.clone();
 
-            client.update(request).await.map(|_| ()).map_err(From::from)
+            client.update(request).await.map(|_| ()).map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/Update".into(),
+                },
+            ))
         }
     }
 
@@ -153,7 +167,12 @@ impl MetricsArchiveClient {
                 .validate_bucket(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/ValidateBucket".into(),
+                    },
+                ))
         }
     }
 
@@ -167,7 +186,12 @@ impl MetricsArchiveClient {
                 .get_tenant_config(request)
                 .await
                 .map(|response| response.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/GetTenantConfig".into(),
+                    },
+                ))
         }
     }
 
@@ -181,7 +205,12 @@ impl MetricsArchiveClient {
                 .enable_archive(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/EnableArchive".into(),
+                    },
+                ))
         }
     }
 
@@ -195,7 +224,12 @@ impl MetricsArchiveClient {
                 .disable_archive(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/DisableArchive".into(),
+                    },
+                ))
         }
     }
 }
@@ -237,7 +271,12 @@ impl MetricsArchiveInternalClient {
                 .get_tenant_config(request)
                 .await
                 .map(|response| response.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/GetTenantConfig".into(),
+                    },
+                ))
         }
     }
 
@@ -251,7 +290,12 @@ impl MetricsArchiveInternalClient {
                 .list_tenant_configs(request)
                 .await
                 .map(|response| response.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/ListTenantConfigs".into(),
+                    },
+                ))
         }
     }
 
@@ -265,7 +309,12 @@ impl MetricsArchiveInternalClient {
                 .list_host_store_configs(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/ListHotStoreConfigs".into(),
+                    },
+                ))
         }
     }
 
@@ -283,7 +332,12 @@ impl MetricsArchiveInternalClient {
                 .migrate_tenant(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/MigrateTenant".into(),
+                    },
+                ))
         }
     }
 
@@ -308,7 +362,12 @@ impl MetricsArchiveInternalClient {
         {
             let mut client = self.service_client.lock().await.clone();
 
-            client.update(request).await.map(|_| ()).map_err(From::from)
+            client.update(request).await.map(|_| ()).map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/Update".into(),
+                },
+            ))
         }
     }
 }

@@ -12,6 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use crate::error::{
+    SdkApiError,
+    SdkError,
+};
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
@@ -171,7 +175,13 @@ impl AlertsClient {
                 .get_alert_def(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/GetAlertDef"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -185,7 +195,13 @@ impl AlertsClient {
                 .list_alert_defs(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/ListAlertDefs"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -207,7 +223,13 @@ impl AlertsClient {
                 .create_alert_def(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/CreateAlertDef"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -229,7 +251,13 @@ impl AlertsClient {
                 .replace_alert_def(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/ReplaceAlertDef"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -247,7 +275,13 @@ impl AlertsClient {
                 .delete_alert_def(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/DeleteAlertDef"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -269,7 +303,12 @@ impl AlertsClient {
                 .set_active(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/SetActive".into(),
+                    })
+                })
         }
     }
 }

@@ -14,6 +14,10 @@
 
 use std::str::FromStr;
 
+use crate::error::{
+    SdkApiError,
+    SdkError,
+};
 use crate::{
     auth::AuthContext,
     error::Result,
@@ -100,7 +104,14 @@ impl SloClient {
             .create_service_slo(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.apm.services.v1.ServiceSloService/CreateServiceSlo"
+                            .to_string(),
+                })
+            })
     }
 
     /// Updates an existing SLO.
@@ -118,7 +129,14 @@ impl SloClient {
             .replace_service_slo(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.apm.services.v1.ServiceSloService/ReplaceServiceSlo"
+                            .to_string(),
+                })
+            })
     }
 
     /// Deletes a Service SLO.
@@ -136,7 +154,14 @@ impl SloClient {
             .delete_service_slo(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.apm.services.v1.ServiceSloService/DeleteServiceSlo"
+                            .to_string(),
+                })
+            })
     }
 
     /// Get the Service SLO.
@@ -153,7 +178,13 @@ impl SloClient {
             .get_service_slo(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.apm.services.v1.ServiceSloService/GetServiceSlo"
+                        .to_string(),
+                })
+            })
     }
 
     /// Get the Service SLO in bulk.
@@ -170,7 +201,14 @@ impl SloClient {
             .batch_get_service_slos(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.apm.services.v1.ServiceSloService/BatchGetServiceSlos"
+                            .to_string(),
+                })
+            })
     }
 
     /// List the Service SLOs.
@@ -197,6 +235,13 @@ impl SloClient {
             .list_service_slos(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.apm.services.v1.ServiceSloService/ListServiceSlos"
+                            .to_string(),
+                })
+            })
     }
 }

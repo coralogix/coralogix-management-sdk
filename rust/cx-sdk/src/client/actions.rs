@@ -30,7 +30,10 @@ use crate::{
         ReplaceActionResponse,
         actions_service_client::ActionsServiceClient,
     },
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -94,13 +97,17 @@ impl ActionsClient {
             &self.teams_level_metadata_map,
         );
         //let client = self.service_client.lock().await.descri
-        self.service_client
+        Ok(self
+            .service_client
             .lock()
             .await
             .create_action(request)
             .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/CreateAction".into(),
+            })?
+            .into_inner())
     }
 
     /// Replaces the existing [`Action`] identified by its id.
@@ -114,13 +121,17 @@ impl ActionsClient {
             },
             &self.teams_level_metadata_map,
         );
-        self.service_client
+        Ok(self
+            .service_client
             .lock()
             .await
             .replace_action(request)
             .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/ReplaceAction".to_string(),
+            })?
+            .into_inner())
     }
 
     /// Deletes the [`Action`] identified by its id.
@@ -134,13 +145,17 @@ impl ActionsClient {
             },
             &self.teams_level_metadata_map,
         );
-        self.service_client
+        Ok(self
+            .service_client
             .lock()
             .await
             .delete_action(request)
             .await
-            .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/DeleteAction".to_string(),
+            })?
+            .into_inner())
     }
 
     /// Retrieves the [`Action`] by id.
@@ -155,13 +170,18 @@ impl ActionsClient {
             &self.teams_level_metadata_map,
         );
 
-        self.service_client
+        Ok(self
+            .service_client
             .lock()
             .await
             .get_action(request)
             .await
-            .map(|r| r.into_inner().action)
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/GetAction".to_string(),
+            })?
+            .into_inner()
+            .action)
     }
 
     /// Retrieves a list of all [`Action`]s.
@@ -172,13 +192,18 @@ impl ActionsClient {
         let request =
             make_request_with_metadata(ListActionsRequest {}, &self.teams_level_metadata_map);
 
-        self.service_client
+        Ok(self
+            .service_client
             .lock()
             .await
             .list_actions(request)
             .await
-            .map(|r| r.into_inner().actions)
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/ListActions".to_string(),
+            })?
+            .into_inner()
+            .actions)
     }
 
     /// Orders the actions.
@@ -205,7 +230,10 @@ impl ActionsClient {
             .await
             .order_actions(request)
             .await
-            .map(|_| ())
-            .map_err(From::from)
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.actions.v2.ActionsService/OrderActions".to_string(),
+            })?;
+        Ok(())
     }
 }

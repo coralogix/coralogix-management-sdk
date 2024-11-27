@@ -43,6 +43,7 @@ use crate::{
     auth::AuthContext,
     error::{
         Result,
+        SdkApiError,
         SdkError,
     },
     metadata::CallProperties,
@@ -108,7 +109,12 @@ impl AlertSchedulerClient {
             .create_alert_scheduler_rule(request)
             .await
             .map(|r| r.into_inner().alert_scheduler_rule.unwrap()) //There should not be a case where the result is successful but the alert_scheduler_rule is None
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/CreateAlertSchedulerRule".into(),
+                }),
+            )
     }
 
     /// Creates multiple Alert Scheduler Rules
@@ -143,7 +149,12 @@ impl AlertSchedulerClient {
                     .map(|response| response.alert_scheduler_rule.unwrap()) //There should not be a case where the result is successful but the alert_scheduler_rule is None
                     .collect()
             })
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/CreateBulkAlertSchedulerRule".into(),
+                }),
+            )
     }
 
     /// Updates an existing Alert Scheduler Rule identified by its unique identifier.
@@ -167,7 +178,12 @@ impl AlertSchedulerClient {
             .update_alert_scheduler_rule(request)
             .await
             .map(|r| r.into_inner().alert_scheduler_rule.unwrap()) //There should not be a case where the result is successful but the alert_scheduler_rule is None
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/UpdateAlertSchedulerRule".into(),
+                }),
+            )
     }
 
     /// Updates multiple existing Alert Scheduler Rules identified by their unique identifiers.
@@ -201,7 +217,12 @@ impl AlertSchedulerClient {
                     .map(|response| response.alert_scheduler_rule.unwrap()) //There should not be a case where the result is successful but the alert_scheduler_rule is None
                     .collect()
             })
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/UpdateBulkAlertSchedulerRule".into(),
+                }),
+            )
     }
 
     /// Retrieves an Alert Scheduler Rule by its unique identifier.
@@ -221,7 +242,12 @@ impl AlertSchedulerClient {
             .get_alert_scheduler_rule(request)
             .await
             .map(|r| r.into_inner().alert_scheduler_rule.unwrap())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/GetAlertSchedulerRule".into(),
+                }),
+            )
     }
 
     /// Retrieves multiple Alert Scheduler Rules by their unique identifiers.
@@ -262,7 +288,12 @@ impl AlertSchedulerClient {
                     let response = r.into_inner();
                     (response.alert_scheduler_rules, response.next_page_token)
                 })
-                .map_err(SdkError::from)?;
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/GetBulkAlertSchedulerRule".into(),
+                    }),
+                )?;
             all_rules.extend(alert_scheduler_rules);
             if new_token.is_empty() {
                 next_page_token = None;
@@ -290,6 +321,11 @@ impl AlertSchedulerClient {
             .delete_alert_scheduler_rule(request)
             .await
             .map(|_| ())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/DeleteAlertSchedulerRule".into(),
+                }),
+            )
     }
 }

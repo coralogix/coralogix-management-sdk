@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -107,7 +111,13 @@ impl DatasetClient {
                 .lock()
                 .await
                 .create_custom_enrichment(request)
-                .await?
+                .await
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/CreateCustomEnrichment".into(),
+                    }),
+                )?
                 .into_inner())
         }
     }
@@ -148,7 +158,13 @@ impl DatasetClient {
                 .lock()
                 .await
                 .update_custom_enrichment(request)
-                .await?
+                .await
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/UpdateCustomEnrichment".into(),
+                    }),
+                )?
                 .into_inner())
         }
     }
@@ -171,7 +187,13 @@ impl DatasetClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/DeleteCustomEnrichment".into(),
+                }),
+            )?
             .into_inner())
     }
 
@@ -188,7 +210,13 @@ impl DatasetClient {
                 GetCustomEnrichmentRequest { id: Some(id) },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/GetCustomEnrichment".into(),
+                }),
+            )?
             .into_inner())
     }
 
@@ -205,7 +233,13 @@ impl DatasetClient {
                 GetCustomEnrichmentsRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/GetCustomEnrichments".into(),
+                }),
+            )?
             .into_inner())
     }
 }
