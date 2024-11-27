@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -103,7 +107,13 @@ impl TeamsClient {
             .create_team_in_org(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/CreateTeamInOrg"
+                        .to_string(),
+                })
+            })
     }
 
     /// Update the Team identified by its id.
@@ -132,7 +142,13 @@ impl TeamsClient {
             .update_team(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/UpdateTeam"
+                        .to_string(),
+                })
+            })
     }
 
     /// Deletes the Team identified by its id.
@@ -152,7 +168,13 @@ impl TeamsClient {
             .delete_team(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/DeleteTeam"
+                        .to_string(),
+                })
+            })
     }
 
     /// Retrieves the Team metadata.
@@ -173,7 +195,13 @@ impl TeamsClient {
             .get_team(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/GetTeam"
+                        .to_string(),
+                })
+            })
     }
 
     /// Retrieves the Team quota.
@@ -194,7 +222,13 @@ impl TeamsClient {
             .get_team_quota(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/GetTeamQuota"
+                        .to_string(),
+                })
+            })
     }
 
     /// Sets the daily Team quota.
@@ -221,7 +255,13 @@ impl TeamsClient {
             .set_daily_quota(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/SetDailyQuota"
+                        .to_string(),
+                })
+            })
     }
 
     /// Moves the quota units from one team to the other.
@@ -253,7 +293,13 @@ impl TeamsClient {
             .move_quota(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/MoveQuota"
+                        .to_string(),
+                })
+            })
     }
 
     /// Retrieves a list of all [`TeamInfo`]s.
@@ -269,6 +315,12 @@ impl TeamsClient {
             .list_teams(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/ListTeams"
+                        .to_string(),
+                })
+            })
     }
 }

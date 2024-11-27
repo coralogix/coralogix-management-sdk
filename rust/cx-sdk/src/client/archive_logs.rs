@@ -37,6 +37,10 @@ pub use cx_api::proto::com::coralogix::archive::v2::validate_target_request::Tar
 
 use crate::CoralogixRegion;
 use crate::auth::AuthContext;
+use crate::error::{
+    SdkApiError,
+    SdkError,
+};
 use crate::{
     error::Result,
     metadata::CallProperties,
@@ -77,7 +81,12 @@ impl LogsArchiveClient {
                 .get_target(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogix.archive.v2.TargetService/GetTarget".into(),
+                    })
+                })
         }
     }
 
@@ -105,7 +114,12 @@ impl LogsArchiveClient {
                 .set_target(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogix.archive.v2.TargetService/SetTarget".into(),
+                    })
+                })
         }
     }
 
@@ -133,7 +147,12 @@ impl LogsArchiveClient {
                 .validate_target(request)
                 .await
                 .map(|_| ())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogix.archive.v2.TargetService/ValidateTarget".into(),
+                    })
+                })
         }
     }
 }

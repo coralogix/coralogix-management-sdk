@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -131,7 +135,12 @@ impl WebhooksClient {
             .create_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/CreateOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Update the Outgoing Webhook identified by its id.
@@ -168,7 +177,12 @@ impl WebhooksClient {
             .update_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/UpdateOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Deletes the Outgoing Webhook.
@@ -188,7 +202,12 @@ impl WebhooksClient {
             .delete_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/DeleteOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Retrieves the Outgoing Webhook by id.
@@ -209,7 +228,12 @@ impl WebhooksClient {
             .get_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/GetOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Get outgoing [`WebhookType`] details.
@@ -233,7 +257,12 @@ impl WebhooksClient {
             .get_outgoing_webhook_type_details(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/GetOutgoingWebhookTypeDetails".into(),
+                }),
+            )
     }
 
     /// Tests the provided outgoing webhook
@@ -268,7 +297,12 @@ impl WebhooksClient {
             .test_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/TestOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Tests the existing outgoing webhook
@@ -292,7 +326,12 @@ impl WebhooksClient {
             .test_existing_outgoing_webhook(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/TestExistingOutgoingWebhook".into(),
+                }),
+            )
     }
 
     /// Get [`WebhookType`] details.
@@ -316,7 +355,12 @@ impl WebhooksClient {
             .list_outgoing_webhooks(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListOutgoingWebhooks".into(),
+                }),
+            )
     }
 
     /// Retrieves a list of all outgoing webhooks.
@@ -333,7 +377,12 @@ impl WebhooksClient {
             .list_all_outgoing_webhooks(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListAllOutgoingWebhooks".into(),
+                }),
+            )
     }
 
     /// Retrieves a list of all [`WebhookType`]s.
@@ -350,6 +399,11 @@ impl WebhooksClient {
             .list_outgoing_webhook_types(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListOutgoingWebhookTypes".into(),
+                }),
+            )
     }
 }

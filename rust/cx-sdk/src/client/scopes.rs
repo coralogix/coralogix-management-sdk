@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -101,7 +105,13 @@ impl ScopesClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.scopes.v1.ScopesService/CreateScope".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -135,7 +145,13 @@ impl ScopesClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.scopes.v1.ScopesService/UpdateScope".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -152,7 +168,13 @@ impl ScopesClient {
                 DeleteScopeRequest { id },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.scopes.v1.ScopesService/DeleteScope".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -169,7 +191,14 @@ impl ScopesClient {
                 GetTeamScopesByIdsRequest { ids },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.scopes.v1.ScopesService/GetTeamScopesByIds"
+                        .to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -183,7 +212,14 @@ impl ScopesClient {
                 GetTeamScopesRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.scopes.v1.ScopesService/GetTeamScopes"
+                        .to_string(),
+                })
+            })?
             .into_inner())
     }
 }

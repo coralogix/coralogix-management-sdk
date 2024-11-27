@@ -43,7 +43,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
-        run: cargo nextest run --all
+        run: cargo nextest run --no-tests=warn --all
         working-directory: rust/examples
 
   examples_windows:
@@ -71,7 +71,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
-        run: cargo nextest run --all
+        run: cargo nextest run --no-tests=warn --all
         working-directory: rust/examples
 
   clippy:

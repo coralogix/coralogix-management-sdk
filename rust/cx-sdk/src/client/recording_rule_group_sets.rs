@@ -38,7 +38,11 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -91,7 +95,13 @@ impl RecordingRuleGroupSetsClient {
             .lock()
             .await
             .create(request)
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Create".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -106,7 +116,13 @@ impl RecordingRuleGroupSetsClient {
             .lock()
             .await
             .fetch(request)
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Fetch".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -118,7 +134,13 @@ impl RecordingRuleGroupSetsClient {
             .lock()
             .await
             .list(request)
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/List".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -128,7 +150,17 @@ impl RecordingRuleGroupSetsClient {
     pub async fn update(&self, id: String, groups: Vec<InRuleGroup>) -> Result<()> {
         let request =
             make_request_with_metadata(UpdateRuleGroupSet { id, groups }, &self.metadata_map);
-        self.service_client.lock().await.update(request).await?;
+        self.service_client
+            .lock()
+            .await
+            .update(request)
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Update".to_string(),
+                })
+            })?;
         Ok(())
     }
 
@@ -138,7 +170,17 @@ impl RecordingRuleGroupSetsClient {
     /// * `id` - The id of the recording rule group set to delete.
     pub async fn delete(&self, id: String) -> Result<()> {
         let request = make_request_with_metadata(DeleteRuleGroupSet { id }, &self.metadata_map);
-        self.service_client.lock().await.delete(request).await?;
+        self.service_client
+            .lock()
+            .await
+            .delete(request)
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Delete".to_string(),
+                })
+            })?;
         Ok(())
     }
 }

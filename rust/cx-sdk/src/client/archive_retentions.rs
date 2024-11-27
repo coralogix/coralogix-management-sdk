@@ -37,7 +37,11 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -78,7 +82,14 @@ impl ArchiveRetentionClient {
                 GetRetentionsRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.archive.v1.RetentionsService/GetRetentions"
+                        .to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -92,7 +103,13 @@ impl ArchiveRetentionClient {
                 GetRetentionsEnabledRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.archive.v1.RetentionsService/GetEnabled".to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -111,7 +128,14 @@ impl ArchiveRetentionClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.archive.v1.RetentionsService/UpdateRetentions"
+                        .to_string(),
+                })
+            })?
             .into_inner())
     }
 
@@ -125,7 +149,14 @@ impl ArchiveRetentionClient {
                 ActivateRetentionsRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.archive.v1.RetentionsService/ActivateRetentions"
+                        .to_string(),
+                })
+            })?
             .into_inner())
     }
 }

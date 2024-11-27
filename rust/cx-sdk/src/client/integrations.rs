@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -128,7 +132,14 @@ impl IntegrationsClient {
             .save_integration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.integrations.v1.IntegrationService/SaveIntegration"
+                            .into(),
+                })
+            })
     }
 
     /// Update the Integration identified by its id.
@@ -166,7 +177,14 @@ impl IntegrationsClient {
             .update_integration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.integrations.v1.IntegrationService/UpdateIntegration"
+                            .into(),
+                })
+            })
     }
 
     /// Deletes the Integration identified by its id.
@@ -187,7 +205,14 @@ impl IntegrationsClient {
             .delete_integration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.integrations.v1.IntegrationService/DeleteIntegration"
+                            .into(),
+                })
+            })
     }
 
     /// Retrieves the Integration identified by its id.
@@ -214,7 +239,13 @@ impl IntegrationsClient {
             .get_integration_details(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrationDetails"
+                        .into(),
+                }),
+            )
     }
 
     /// Retrieves the Deployed Integration identified by its id.
@@ -235,7 +266,13 @@ impl IntegrationsClient {
             .get_deployed_integration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetDeployedIntegration"
+                        .into(),
+                }),
+            )
     }
 
     /// Retrieves the Integration definition identified by its id.
@@ -262,7 +299,13 @@ impl IntegrationsClient {
             .get_integration_definition(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrationDefinition"
+                        .into(),
+                }),
+            )
     }
 
     /// Retrieves the Integration status identified by its id.
@@ -284,7 +327,13 @@ impl IntegrationsClient {
             .get_managed_integration_status(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetManagedIntegrationStatus"
+                        .into(),
+                }),
+            )
     }
 
     /// Retrieves the Integration template identified by its id.
@@ -306,7 +355,13 @@ impl IntegrationsClient {
             .get_template(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetTemplate"
+                        .into(),
+                })
+            })
     }
 
     /// Retrieves the RUM application version data.
@@ -330,7 +385,13 @@ impl IntegrationsClient {
             .get_rum_application_version_data(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetRumApplicationVersionData"
+                        .into(),
+                }),
+            )
     }
 
     /// Synchronizes the RUM data.
@@ -349,7 +410,13 @@ impl IntegrationsClient {
             .sync_rum_data(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/SyncRumData"
+                        .into(),
+                })
+            })
     }
 
     /// Tests the Integration identified by its id.
@@ -388,7 +455,14 @@ impl IntegrationsClient {
             .test_integration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.integrations.v1.IntegrationService/TestIntegration"
+                            .into(),
+                })
+            })
     }
 
     /// Retrieves a list of all Integrations.
@@ -409,6 +483,13 @@ impl IntegrationsClient {
             .get_integrations(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrations"
+                            .into(),
+                })
+            })
     }
 }

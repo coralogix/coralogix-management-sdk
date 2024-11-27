@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -127,7 +131,12 @@ impl TcoPoliciesClient {
             .create_policy(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.quota.v1.PoliciesService/CreatePolicy".into(),
+                })
+            })
     }
 
     /// Creates a new TCO policy.
@@ -174,7 +183,12 @@ impl TcoPoliciesClient {
             .update_policy(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.quota.v1.PoliciesService/UpdatePolicy".into(),
+                })
+            })
     }
 
     /// Deletes a TCO policy.
@@ -190,7 +204,12 @@ impl TcoPoliciesClient {
             .delete_policy(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.quota.v1.PoliciesService/DeletePolicy".into(),
+                })
+            })
     }
 
     /// Retrieves a TCO policy.
@@ -207,7 +226,12 @@ impl TcoPoliciesClient {
             .get_policy(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.quota.v1.PoliciesService/GetPolicy".into(),
+                })
+            })
     }
 
     /// Retrieves a list of TCO policies.
@@ -234,6 +258,12 @@ impl TcoPoliciesClient {
             .get_company_policies(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.quota.v1.PoliciesService/GetCompanyPolicies"
+                        .into(),
+                })
+            })
     }
 }

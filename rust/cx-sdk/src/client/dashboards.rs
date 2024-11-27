@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -105,7 +109,14 @@ impl DashboardsClient {
                 .create_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint:
+                            "/com.coralogixapis.dashboards.v1.DashboardsService/CreateDashboard"
+                                .into(),
+                    })
+                })
         }
     }
 
@@ -128,7 +139,14 @@ impl DashboardsClient {
                 .replace_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint:
+                            "/com.coralogixapis.dashboards.v1.DashboardsService/ReplaceDashboard"
+                                .into(),
+                    })
+                })
         }
     }
 
@@ -150,7 +168,13 @@ impl DashboardsClient {
                 .get_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/GetDashboard"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -165,7 +189,12 @@ impl DashboardsClient {
             ))
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.dashboards.v1.DashboardCatalogService/GetDashboardCatalog".into(),
+                },
+            ))
     }
 
     /// Deletes a dashboard by its ID.
@@ -187,7 +216,14 @@ impl DashboardsClient {
                 .delete_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint:
+                            "/com.coralogixapis.dashboards.v1.DashboardsService/DeleteDashboard"
+                                .into(),
+                    })
+                })
         }
     }
 
@@ -210,7 +246,13 @@ impl DashboardsClient {
                 .pin_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/PinDashboard"
+                            .into(),
+                    })
+                })
         }
     }
 
@@ -233,7 +275,14 @@ impl DashboardsClient {
                 .unpin_dashboard(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(|status| {
+                    SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint:
+                            "/com.coralogixapis.dashboards.v1.DashboardsService/UnpinDashboard"
+                                .into(),
+                    })
+                })
         }
     }
 
@@ -262,7 +311,12 @@ impl DashboardsClient {
                 .assign_dashboard_folder(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/AssignDashboardFolder".into(),
+                    },
+                ))
         }
     }
 }
