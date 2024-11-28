@@ -63,7 +63,7 @@ type TeamsClient struct {
 
 // Create creates a new team.
 func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*
 
 // Update updates a team.
 func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -91,7 +91,7 @@ func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams
 
 // Get gets a team.
 func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -105,7 +105,7 @@ func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTe
 
 // Delete deletes a team.
 func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +119,7 @@ func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams
 
 // SetDailyQuota sets the daily quota for a team.
 func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaRequest) (*teams.SetDailyQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaReques
 
 // GetQuota gets the quota for a team.
 func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*teams.GetTeamQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -147,7 +147,7 @@ func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*t
 
 // MoveQuota moves the quota from one team to another.
 func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*teams.MoveQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}

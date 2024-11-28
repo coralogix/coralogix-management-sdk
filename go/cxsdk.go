@@ -157,8 +157,8 @@ func (c *ClientSet) DataUsage() *DataUsageClient {
 }
 
 // NewClientSet Creates a new ClientSet.
-func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *ClientSet {
-	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey)
+func NewClientSet(targetURL, teamsLevelAPIKey, userLevelAPIKey, orgLevelAPIKey string) *ClientSet {
+	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey, orgLevelAPIKey)
 	apikeyCPC := NewCallPropertiesCreator(targetURL, authContext)
 
 	return &ClientSet{
@@ -195,6 +195,9 @@ const EnvCoralogixTeamLevelAPIKey = "CORALOGIX_TEAM_API_KEY"
 
 // EnvCoralogixUserLevelAPIKey is the name of the environment variable that contains the Coralogix User API key.
 const EnvCoralogixUserLevelAPIKey = "CORALOGIX_USER_API_KEY"
+
+// EnvCoralogixOrgLevelAPIKey is the name of the environment variable that contains the Coralogix Organization API key.
+const EnvCoralogixOrgLevelAPIKey = "CORALOGIX_ORG_API_KEY"
 
 // CoralogixRegionFromEnv reads the Coralogix region from environment variables.
 func CoralogixRegionFromEnv() (string, error) {
@@ -271,31 +274,34 @@ const (
 type AuthContext struct {
 	teamLevelAPIKey string
 	userLevelAPIKey string
+	orgLevelAPIKey  string
 }
 
 // NewAuthContext creates a new AuthContext.
-func NewAuthContext(teamLevelAPIKey, userLevelAPIKey string) AuthContext {
+func NewAuthContext(teamLevelAPIKey, userLevelAPIKey, orgLevelAPIKey string) AuthContext {
 	if teamLevelAPIKey == "" {
 		log.Println("Warning: teamLevelAPIKey was not provided. Some functionality will not be available.")
 	}
 	if userLevelAPIKey == "" {
 		log.Println("Warning: userLevelAPIKey was not provided. Some functionality will not be available.")
 	}
+	if orgLevelAPIKey == "" {
+		log.Println("Warning: orgLevelAPIKey was not provided. Some functionality will not be available.")
+	}
 	return AuthContext{
 		teamLevelAPIKey: teamLevelAPIKey,
 		userLevelAPIKey: userLevelAPIKey,
+		orgLevelAPIKey:  orgLevelAPIKey,
 	}
 }
 
 // AuthContextFromEnv reads the Coralogix API keys from environment variables.
 func AuthContextFromEnv() (AuthContext, error) {
-	teamLevelAPIKey, err := CoralogixTeamsLevelAPIKeyFromEnv()
-	if err != nil {
-		return AuthContext{}, err
-	}
-	userLevelAPIKey, err := CoralogixUserLevelAPIKeyFromEnv()
-	if err != nil {
-		return AuthContext{}, err
+	teamLevelAPIKey := os.Getenv(EnvCoralogixTeamLevelAPIKey)
+	userLevelAPIKey := os.Getenv(EnvCoralogixUserLevelAPIKey)
+	orgLevelAPIKey := os.Getenv(EnvCoralogixOrgLevelAPIKey)
+	if teamLevelAPIKey == "" && userLevelAPIKey == "" && orgLevelAPIKey == "" {
+		return AuthContext{}, fmt.Errorf("at least one of %s, %s, or %s must be set", EnvCoralogixTeamLevelAPIKey, EnvCoralogixUserLevelAPIKey, EnvCoralogixOrgLevelAPIKey)
 	}
 	if teamLevelAPIKey == "" {
 		log.Println("Warning: teamLevelAPIKey is empty. Some functionality will not be available.")
@@ -303,24 +309,9 @@ func AuthContextFromEnv() (AuthContext, error) {
 	if userLevelAPIKey == "" {
 		log.Println("Warning: userLevelAPIKey is empty. Some functionality will not be available.")
 	}
-
-	return AuthContext{teamLevelAPIKey: teamLevelAPIKey, userLevelAPIKey: userLevelAPIKey}, nil
-}
-
-// CoralogixTeamsLevelAPIKeyFromEnv reads the Coralogix Team API key from environment variables.
-func CoralogixTeamsLevelAPIKeyFromEnv() (string, error) {
-	apiKey := os.Getenv(EnvCoralogixTeamLevelAPIKey)
-	if apiKey == "" {
-		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogixTeamLevelAPIKey)
+	if orgLevelAPIKey == "" {
+		log.Println("Warning: orgLevelAPIKey is empty. Some functionality will not be available.")
 	}
-	return apiKey, nil
-}
 
-// CoralogixUserLevelAPIKeyFromEnv reads the Coralogix User API key from environment variables.
-func CoralogixUserLevelAPIKeyFromEnv() (string, error) {
-	apiKey := os.Getenv(EnvCoralogixUserLevelAPIKey)
-	if apiKey == "" {
-		return "", fmt.Errorf("the %s environment variable is not set", EnvCoralogixUserLevelAPIKey)
-	}
-	return apiKey, nil
+	return AuthContext{teamLevelAPIKey: teamLevelAPIKey, userLevelAPIKey: userLevelAPIKey, orgLevelAPIKey: orgLevelAPIKey}, nil
 }

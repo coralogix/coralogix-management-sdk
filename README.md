@@ -23,6 +23,7 @@ The SDK can be configured using environment variables:
 
 - `CORALOGIX_TEAM_API_KEY`: The API key that is used for all team-level interactions. Note that it has to have appropriate permissions. Read the [docs](https://coralogix.com/docs/api-keys/) for more information.
 - `CORALOGIX_USER_API_KEY`: The API key that is used for all user-level interactions. Note that it has to have appropriate permissions. Read the [docs](https://coralogix.com/docs/api-keys/) for more information.
+- `CORALOGIX_ORG_API_KEY`: The API key that is used for all organization-level interactions.
 - `CORALGOIX_REGION`: The region/cluster to connect to as a shorthand (EU2, AP1, etc. read more [here](https://coralogix.com/docs/coralogix-domain/)). 
 
 Furthermore, if you want to run the examples locally, you're going to to have set the following environment variables:

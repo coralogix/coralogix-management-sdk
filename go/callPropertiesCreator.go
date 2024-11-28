@@ -33,6 +33,7 @@ type CallPropertiesCreator struct {
 	coraglogixRegion string
 	teamsLevelAPIKey string
 	userLevelAPIKey  string
+	orgLevelAPIKey   string
 	correlationID    string
 	sdkVersion       string
 	//allowRetry bool
@@ -75,6 +76,21 @@ func (c CallPropertiesCreator) GetUserLevelCallProperties(ctx context.Context) (
 	return &CallProperties{Ctx: ctx, Connection: conn, CallOptions: callOptions}, nil
 }
 
+// GetOrgLevelCallProperties returns a new CallProperties object built from an organization-level API key. It essentially prepares the context, connection, and call options for a gRPC call.
+func (c CallPropertiesCreator) GetOrgLevelCallProperties(ctx context.Context) (*CallProperties, error) {
+	ctx = createContext(ctx, c.orgLevelAPIKey, c.correlationID, c.sdkVersion)
+
+	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
+	conn, err := createSecureConnection(endpoint)
+	if err != nil {
+		return nil, err
+	}
+
+	callOptions := createCallOptions()
+
+	return &CallProperties{Ctx: ctx, Connection: conn, CallOptions: callOptions}, nil
+}
+
 func createCallOptions() []grpc.CallOption {
 	var callOptions []grpc.CallOption
 	callOptions = append(callOptions, grpc_retry.WithMax(5))
@@ -99,6 +115,7 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 		coraglogixRegion: region,
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
+		orgLevelAPIKey:   authContext.orgLevelAPIKey,
 		correlationID:    uuid.New().String(),
 		sdkVersion:       vanillaSdkVersion,
 	}
@@ -109,6 +126,7 @@ func NewCallPropertiesCreatorTerraformOperator(region string, authContext AuthCo
 	return &CallPropertiesCreator{
 		coraglogixRegion: region,
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
+		orgLevelAPIKey:   authContext.orgLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
 		sdkVersion:       terraformOperatorVersion,

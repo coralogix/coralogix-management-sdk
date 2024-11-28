@@ -74,7 +74,7 @@ impl TeamsClient {
         let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.org_level_api_key).into();
         Ok(Self {
             metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(TeamServiceClient::new(channel)),
