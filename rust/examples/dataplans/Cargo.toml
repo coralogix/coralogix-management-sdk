@@ -1,0 +1,12 @@
+[package]
+name = "dataplans"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"

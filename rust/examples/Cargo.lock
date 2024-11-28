@@ -329,6 +329,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "dataplans"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "dataprime"
 version = "0.1.0"
 dependencies = [
