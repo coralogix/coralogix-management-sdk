@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -98,7 +102,12 @@ impl DashboardFoldersClient {
                 .create_dashboard_folder(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/CreateDashboardFolder".to_string(),
+                    }),
+                )
         }
     }
 
@@ -121,7 +130,12 @@ impl DashboardFoldersClient {
                 .replace_dashboard_folder(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/ReplaceDashboardFolder".to_string(),
+                    }),
+                )
         }
     }
 
@@ -144,7 +158,12 @@ impl DashboardFoldersClient {
                 .get_dashboard_folder(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/GetDashboardFolder".to_string(),
+                    }),
+                )
         }
     }
 
@@ -167,7 +186,12 @@ impl DashboardFoldersClient {
                 .delete_dashboard_folder(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/DeleteDashboardFolder".to_string(),
+                    }),
+                )
         }
     }
 
@@ -184,7 +208,12 @@ impl DashboardFoldersClient {
                 .list_dashboard_folders(request)
                 .await
                 .map(|r| r.into_inner())
-                .map_err(From::from)
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/ListDashboardFolders".to_string(),
+                    }),
+                )
         }
     }
 }

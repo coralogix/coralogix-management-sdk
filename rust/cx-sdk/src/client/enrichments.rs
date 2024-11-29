@@ -16,7 +16,11 @@ use std::str::FromStr;
 
 use crate::{
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -98,7 +102,13 @@ impl EnrichmentsClient {
             ))
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/AddEnrichments"
+                        .into(),
+                })
+            })
     }
 
     /// Updates the mappings for an enrichment.
@@ -122,7 +132,13 @@ impl EnrichmentsClient {
                 },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(
+                |status| SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/AtomicOverwriteEnrichments".into(),
+                },
+            ))?
             .into_inner())
     }
 
@@ -139,7 +155,15 @@ impl EnrichmentsClient {
                 RemoveEnrichmentsRequest { enrichment_ids },
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.enrichment.v1.EnrichmentService/RemoveEnrichments"
+                            .into(),
+                })
+            })?
             .into_inner())
     }
 
@@ -153,7 +177,14 @@ impl EnrichmentsClient {
                 GetEnrichmentsRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/GetEnrichments"
+                        .into(),
+                })
+            })?
             .into_inner())
     }
 
@@ -167,7 +198,15 @@ impl EnrichmentsClient {
                 GetEnrichmentLimitRequest {},
                 &self.metadata_map,
             ))
-            .await?
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.enrichment.v1.EnrichmentService/GetEnrichmentLimit"
+                            .into(),
+                })
+            })?
             .into_inner())
     }
 }

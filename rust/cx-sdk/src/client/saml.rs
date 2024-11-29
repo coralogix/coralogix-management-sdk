@@ -41,7 +41,11 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -83,7 +87,13 @@ impl SamlClient {
             .get_sp_parameters(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/GetSpParameters"
+                        .to_string(),
+                })
+            })
     }
 
     /// Sets the IDP parameters for a given team.
@@ -109,7 +119,13 @@ impl SamlClient {
             .set_idp_parameters(request)
             .await
             .map(|_| ())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/SetIdpParameters"
+                        .to_string(),
+                })
+            })
     }
 
     /// Sets the active status for a given team.
@@ -126,7 +142,13 @@ impl SamlClient {
             .set_active(request)
             .await
             .map(|_| ())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/SetActive"
+                        .to_string(),
+                })
+            })
     }
 
     /// Retrieves the configuration for a given team.
@@ -143,6 +165,12 @@ impl SamlClient {
             .get_configuration(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/GetConfiguration"
+                        .to_string(),
+                })
+            })
     }
 }

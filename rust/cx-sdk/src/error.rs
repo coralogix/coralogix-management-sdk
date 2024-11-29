@@ -18,6 +18,21 @@ use tonic::transport::Error as TonicError;
 /// The result type for the SDK.
 pub type Result<T> = std::result::Result<T, SdkError>;
 
+/// An error returned by the underlying API.
+#[derive(Debug, thiserror::Error)]
+pub struct SdkApiError {
+    /// The status code of the error.
+    pub status: tonic::Status,
+    /// The endpoint that the error occurred on.
+    pub endpoint: String,
+}
+
+impl std::fmt::Display for SdkApiError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "API error on {}: {}", self.endpoint, self.status)
+    }
+}
+
 /// The error type for the SDK.
 #[derive(Debug, thiserror::Error)]
 pub enum SdkError {
@@ -31,7 +46,7 @@ pub enum SdkError {
 
     /// This error is returned when an underying API throws an error.
     #[error("API error: {0}")]
-    ApiError(#[from] tonic::Status),
+    ApiError(#[from] SdkApiError),
 
     /// This error is returned when an environment variable is not found or is invalid.
     #[error("Invalid environment variable for CORALOGIX_REGION: {0}")]

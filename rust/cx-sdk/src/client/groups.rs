@@ -40,7 +40,10 @@ use tonic::{
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -121,7 +124,13 @@ impl GroupsClient {
             .lock()
             .await
             .create_team_group(request)
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint:
+                    "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/CreateTeamGroup"
+                        .into(),
+            })?
             .into_inner())
     }
 
@@ -141,7 +150,12 @@ impl GroupsClient {
             .lock()
             .await
             .get_team_group(request)
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/GetTeamGroup"
+                    .into(),
+            })?
             .into_inner())
     }
 
@@ -161,7 +175,12 @@ impl GroupsClient {
             .lock()
             .await
             .get_team_groups(request)
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/GetTeamGroups"
+                    .into(),
+            })?
             .into_inner())
     }
 
@@ -182,7 +201,13 @@ impl GroupsClient {
             .lock()
             .await
             .add_users_to_team_group(request)
-            .await?;
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint:
+                    "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/AddUsersToTeamGroup"
+                        .into(),
+            })?;
         Ok(())
     }
 
@@ -226,7 +251,13 @@ impl GroupsClient {
             .lock()
             .await
             .update_team_group(request)
-            .await?
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint:
+                    "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/UpdateTeamGroup"
+                        .into(),
+            })?
             .into_inner())
     }
 
@@ -247,7 +278,11 @@ impl GroupsClient {
             .lock()
             .await
             .remove_users_from_team_group(request)
-            .await?;
+            .await
+            .map_err(|status| SdkApiError{
+                status,
+                endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/RemoveUsersFromTeamGroup".into() 
+            })?;
         Ok(())
     }
 
@@ -266,7 +301,13 @@ impl GroupsClient {
             .lock()
             .await
             .delete_team_group(request)
-            .await?;
+            .await
+            .map_err(|status| SdkApiError {
+                status,
+                endpoint:
+                    "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/DeleteTeamGroup"
+                        .into(),
+            })?;
         Ok(())
     }
 }

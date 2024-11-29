@@ -34,7 +34,11 @@ use std::str::FromStr;
 use crate::{
     CoralogixRegion,
     auth::AuthContext,
-    error::Result,
+    error::{
+        Result,
+        SdkApiError,
+        SdkError,
+    },
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
@@ -111,7 +115,13 @@ impl ApiKeysClient {
             .create_api_key(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/CreateApiKey"
+                        .into(),
+                })
+            })
     }
 
     /// Updates an API key.
@@ -146,7 +156,13 @@ impl ApiKeysClient {
             .update_api_key(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/UpdateApiKey"
+                        .into(),
+                })
+            })
     }
 
     /// Deletes an API key.
@@ -162,7 +178,13 @@ impl ApiKeysClient {
             .delete_api_key(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/DeleteApiKey"
+                        .into(),
+                })
+            })
     }
 
     /// Retrieves an API key by its ID.
@@ -177,6 +199,11 @@ impl ApiKeysClient {
             .get_api_key(request)
             .await
             .map(|r| r.into_inner())
-            .map_err(From::from)
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/GetApiKey".into(),
+                })
+            })
     }
 }
