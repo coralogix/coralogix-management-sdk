@@ -83,3 +83,6 @@ pub mod saml;
 
 /// This module contains the client for the Notification Center API.
 pub mod notifications;
+
+/// This module contains the client for the Data Usage API.
+pub mod data_usage;

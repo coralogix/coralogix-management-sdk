@@ -9,5 +9,7 @@ members = [
     "dashboards",
     "integrations",
     "dataprime",
-    "infra-monitoring", "recording-rule-group-sets",
+    "infra-monitoring",
+    "recording-rule-group-sets",
+    "dataplans",
 ]

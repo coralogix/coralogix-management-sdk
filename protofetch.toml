@@ -140,7 +140,6 @@ allow_policies = [
     "/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
 ]
 
-
 [google-api]
 url = "github.com/googleapis/googleapis"
 revision = "54d659d0ae74f39e92755948b821a1495b3cb3c8"

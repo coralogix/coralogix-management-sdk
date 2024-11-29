@@ -44,6 +44,7 @@ type ClientSet struct {
 	users               *UsersClient
 	groups              *GroupsClient
 	saml                *SamlClient
+	dataUsage           *DataUsageClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -143,6 +144,16 @@ func (c *ClientSet) Users() *UsersClient {
 // Groups gets a GroupsClient from the ClientSet.
 func (c *ClientSet) Groups() *GroupsClient {
 	return c.groups
+}
+
+// Saml gets a SamlClient from the ClientSet.
+func (c *ClientSet) Saml() *SamlClient {
+	return c.saml
+}
+
+// DataUsage gets a DataUsageClient from the ClientSet.
+func (c *ClientSet) DataUsage() *DataUsageClient {
+	return c.dataUsage
 }
 
 // NewClientSet Creates a new ClientSet.
