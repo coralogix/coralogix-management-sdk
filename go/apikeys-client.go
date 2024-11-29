@@ -23,6 +23,9 @@ import (
 // CreateAPIKeyRequest is a request to create an API key.
 type CreateAPIKeyRequest = apikeys.CreateApiKeyRequest
 
+// CreateAPIKeyResponse is a response to the API keys request.
+type CreateAPIKeyResponse = apikeys.CreateApiKeyResponse
+
 // GetAPIKeyRequest is a request to get an API key.
 type GetAPIKeyRequest = apikeys.GetApiKeyRequest
 
@@ -32,8 +35,14 @@ type GetAPIKeyResponse = apikeys.GetApiKeyResponse
 // UpdateAPIKeyRequest is a request to update an API key.
 type UpdateAPIKeyRequest = apikeys.UpdateApiKeyRequest
 
+// UpdateAPIKeyResponse is a response to the API keys request.
+type UpdateAPIKeyResponse = apikeys.UpdateApiKeyResponse
+
 // DeleteAPIKeyRequest is a request to delete an API key.
 type DeleteAPIKeyRequest = apikeys.DeleteApiKeyRequest
+
+// DeleteAPIKeyResponse is a response to the API keys request.
+type DeleteAPIKeyResponse = apikeys.DeleteApiKeyResponse
 
 // APIKeyPermissions is a set of permissions for an API key.
 type APIKeyPermissions = apikeys.CreateApiKeyRequest_KeyPermissions
