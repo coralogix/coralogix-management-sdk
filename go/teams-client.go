@@ -23,14 +23,26 @@ import (
 // CreateTeamInOrgRequest is a request to create a team.
 type CreateTeamInOrgRequest = teams.CreateTeamInOrgRequest
 
+// CreateTeamInOrgResponse is a response to creating a team.
+type CreateTeamInOrgResponse = teams.CreateTeamInOrgResponse
+
 // UpdateTeamRequest is a request to update a team.
 type UpdateTeamRequest = teams.UpdateTeamRequest
+
+// UpdateTeamResponse is a response to updating a team.
+type UpdateTeamResponse = teams.UpdateTeamResponse
 
 // GetTeamRequest is a request to get a team.
 type GetTeamRequest = teams.GetTeamRequest
 
+// GetTeamResponse is a response to getting a team.
+type GetTeamResponse = teams.GetTeamResponse
+
 // DeleteTeamRequest is a request to delete a team.
 type DeleteTeamRequest = teams.DeleteTeamRequest
+
+// DeleteTeamResponse is a response to deleting a team.
+type DeleteTeamResponse = teams.DeleteTeamResponse
 
 // SetDailyQuotaRequest is a request to set the daily quota for a team.
 type SetDailyQuotaRequest = teams.SetDailyQuotaRequest
