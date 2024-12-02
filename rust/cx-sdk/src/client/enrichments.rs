@@ -52,6 +52,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const ENRICHMENTS_FEATURE_GROUP_ID: &str = "enrichments";
+
 pub use crate::com::coralogix::enrichment::v1::{
     EnrichmentFieldDefinition,
     EnrichmentRequestModel as EnrichmentMapping,
@@ -107,6 +109,7 @@ impl EnrichmentsClient {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/AddEnrichments"
                         .into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -137,6 +140,7 @@ impl EnrichmentsClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/AtomicOverwriteEnrichments".into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 },
             ))?
             .into_inner())
@@ -162,6 +166,7 @@ impl EnrichmentsClient {
                     endpoint:
                         "/com.coralogixapis.enrichment.v1.EnrichmentService/RemoveEnrichments"
                             .into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -183,6 +188,7 @@ impl EnrichmentsClient {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.EnrichmentService/GetEnrichments"
                         .into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -205,6 +211,7 @@ impl EnrichmentsClient {
                     endpoint:
                         "/com.coralogixapis.enrichment.v1.EnrichmentService/GetEnrichmentLimit"
                             .into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())

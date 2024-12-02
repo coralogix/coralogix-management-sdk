@@ -65,6 +65,8 @@ type CustomEnrichmentType = enrichment.CustomEnrichmentType
 // EnrichmentRequestModel is a inner type requests.
 type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
 
+const enrichmentsFeatureGroupID = "enrichments"
+
 // RPC names.
 const (
 	GetEnrichmentsRPC               = enrichment.EnrichmentService_GetEnrichments_FullMethodName
@@ -91,7 +93,11 @@ func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) 
 	defer conn.Close()
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	return client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, AddEnrichmentsRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes the specified enrichments.
@@ -107,7 +113,10 @@ func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsReq
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
 	_, err = client.RemoveEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
-	return err
+	if err != nil {
+		return NewSdkAPIError(err, DeleteEnrichmentsRPC, "enrichments")
+	}
+	return nil
 }
 
 // List returns all enrichments.
@@ -122,7 +131,11 @@ func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest)
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	return client.GetEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetEnrichmentsRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetLimits returns the enrichment limits.
@@ -137,7 +150,11 @@ func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrich
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
-	return client.GetEnrichmentLimit(callProperties.Ctx, &GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
+	response, err := client.GetEnrichmentLimit(callProperties.Ctx, &GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetEnrichmentLimitRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewEnrichmentClient creates a new enrichments client.

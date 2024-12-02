@@ -195,6 +195,8 @@ type TestTemplateRenderRequest = notifications.TestTemplateRenderRequest
 // TestTemplateRenderResponse is a response to test a template rendering.
 type TestTemplateRenderResponse = notifications.TestTemplateRenderResponse
 
+const notificationsFeatureGroupID = "notifications"
+
 // RPC names.
 const (
 	ConnectorsCreateRPC                    = connectores.ConnectorsService_CreateConnector_FullMethodName
@@ -235,7 +237,11 @@ func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateCon
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.CreateConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsCreateRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ReplaceConnector replaces a connector.
@@ -249,7 +255,11 @@ func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceC
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.ReplaceConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsReplaceRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // DeleteConnector deletes a connector.
@@ -263,7 +273,11 @@ func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteCon
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.DeleteConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsDeleteRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetConnector retrieves a connector by ID.
@@ -277,7 +291,11 @@ func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnector
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.GetConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsGetRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ListConnectors lists connectors.
@@ -291,7 +309,11 @@ func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnec
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.ListConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsListRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // BatchGetConnectors retrieves connectors by IDs.
@@ -304,7 +326,11 @@ func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchG
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.BatchGetConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.BatchGetConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsBatchGetRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetConnectorTypeSummaries retrieves connector type summaries.
@@ -317,7 +343,11 @@ func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req 
 	defer conn.Close()
 	client := connectores.NewConnectorsServiceClient(conn)
 
-	return client.GetConnectorTypeSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetConnectorTypeSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ConnectorsGetConnectorTypeSummariesRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // CreateCustomPreset creates a new custom preset.
@@ -330,7 +360,11 @@ func (c NotificationsClient) CreateCustomPreset(ctx context.Context, req *Create
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.CreateCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsCreateRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ReplaceCustomPreset replaces a custom preset.
@@ -343,7 +377,11 @@ func (c NotificationsClient) ReplaceCustomPreset(ctx context.Context, req *Repla
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.ReplaceCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsReplaceRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // DeleteCustomPreset deletes a custom preset.
@@ -356,7 +394,11 @@ func (c NotificationsClient) DeleteCustomPreset(ctx context.Context, req *Delete
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.DeleteCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsDeleteRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // SetCustomPresetAsDefault sets a custom preset as default.
@@ -369,7 +411,11 @@ func (c NotificationsClient) SetCustomPresetAsDefault(ctx context.Context, req *
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.SetCustomPresetAsDefault(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetCustomPresetAsDefault(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsSetAsDefaultRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetPreset retrieves a preset.
@@ -382,7 +428,11 @@ func (c NotificationsClient) GetPreset(ctx context.Context, req *GetPresetReques
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.GetPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsGetRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ListPresetSummaries lists preset summaries.
@@ -395,7 +445,11 @@ func (c NotificationsClient) ListPresetSummaries(ctx context.Context, req *ListP
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.ListPresetSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListPresetSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsListRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // BatchGetPresets retrieves a group of presets.
@@ -408,7 +462,11 @@ func (c NotificationsClient) BatchGetPresets(ctx context.Context, req *BatchGetP
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.BatchGetPresets(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.BatchGetPresets(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsBatchGetRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetDefaultPresetSummary retrieves the default preset summary.
@@ -421,7 +479,11 @@ func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *G
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.GetDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsGetDefaultRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetSystemDefaultPresetSummary retrieves the system default preset summary.
@@ -434,7 +496,11 @@ func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, 
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
 
-	return client.GetSystemDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetSystemDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsGetSystemDefaultRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // TestConnectorConfig tests a connector configuration.
@@ -448,7 +514,11 @@ func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestC
 	defer conn.Close()
 	client := notifications.NewTestingServiceClient(conn)
 
-	return client.TestConnectorConfig(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.TestConnectorConfig(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestConnectorConfigRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // TestExistingConnector tests an existing connector.
@@ -462,7 +532,11 @@ func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *Tes
 	defer conn.Close()
 	client := notifications.NewTestingServiceClient(conn)
 
-	return client.TestExistingConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.TestExistingConnector(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestExistingConnectorRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // TestPresetConfig tests a preset configuration.
@@ -476,7 +550,11 @@ func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPres
 	defer conn.Close()
 	client := notifications.NewTestingServiceClient(conn)
 
-	return client.TestPresetConfig(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.TestPresetConfig(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestPresetConfigRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // TestTemplateRender tests a template rendering.
@@ -490,7 +568,11 @@ func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTe
 	defer conn.Close()
 	client := notifications.NewTestingServiceClient(conn)
 
-	return client.TestTemplateRender(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.TestTemplateRender(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewNotificationsClient creates a new notifications' client.

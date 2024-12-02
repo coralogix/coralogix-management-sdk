@@ -56,6 +56,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const ACTIONS_FEATURE_GROUP_ID: &str = "actions";
+
 /// The Actions API client.
 /// Read more at <https://coralogix.com/docs/coralogix-action-extension/>
 pub struct ActionsClient {
@@ -106,6 +108,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/CreateAction".into(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.into(),
             })?
             .into_inner())
     }
@@ -130,6 +133,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/ReplaceAction".to_string(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -154,6 +158,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/DeleteAction".to_string(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -179,6 +184,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/GetAction".to_string(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner()
             .action)
@@ -201,6 +207,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/ListActions".to_string(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner()
             .actions)
@@ -233,6 +240,7 @@ impl ActionsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.actions.v2.ActionsService/OrderActions".to_string(),
+                feature_group: ACTIONS_FEATURE_GROUP_ID.to_string(),
             })?;
         Ok(())
     }

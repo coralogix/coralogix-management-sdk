@@ -10,6 +10,6 @@ members = [
     "integrations",
     "dataprime",
     "infra-monitoring",
-    "recording-rule-group-sets",
+    "recording-rules",
     "dataplans",
 ]

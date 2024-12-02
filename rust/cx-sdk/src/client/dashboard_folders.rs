@@ -56,6 +56,8 @@ pub use cx_api::proto::com::coralogixapis::dashboards::v1::common::DashboardFold
 
 use crate::CoralogixRegion;
 
+const DASHBOARD_FOLDERS_FEATURE_GROUP_ID: &str = "dashboards";
+
 /// The Dashboard Folders API client.
 /// Read more at <https://coralogix.com/docs/custom-dashboards/>
 pub struct DashboardFoldersClient {
@@ -106,6 +108,7 @@ impl DashboardFoldersClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/CreateDashboardFolder".to_string(),
+                        feature_group: DASHBOARD_FOLDERS_FEATURE_GROUP_ID.to_string(),
                     }),
                 )
         }
@@ -134,6 +137,7 @@ impl DashboardFoldersClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/ReplaceDashboardFolder".to_string(),
+                        feature_group: DASHBOARD_FOLDERS_FEATURE_GROUP_ID.to_string(),
                     }),
                 )
         }
@@ -162,6 +166,7 @@ impl DashboardFoldersClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/GetDashboardFolder".to_string(),
+                        feature_group: DASHBOARD_FOLDERS_FEATURE_GROUP_ID.to_string(),
                     }),
                 )
         }
@@ -190,6 +195,7 @@ impl DashboardFoldersClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/DeleteDashboardFolder".to_string(),
+                        feature_group: DASHBOARD_FOLDERS_FEATURE_GROUP_ID.to_string(),
                     }),
                 )
         }
@@ -212,6 +218,7 @@ impl DashboardFoldersClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardFoldersService/ListDashboardFolders".to_string(),
+                        feature_group: DASHBOARD_FOLDERS_FEATURE_GROUP_ID.to_string(),
                     }),
                 )
         }

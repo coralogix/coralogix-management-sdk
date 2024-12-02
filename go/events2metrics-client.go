@@ -144,6 +144,8 @@ const (
 	E2MGetLimtsRPC              = e2m.Events2MetricService_GetLimits_FullMethodName
 )
 
+const events2MetricsFeatureGroupID = "events2metrics"
+
 // Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/
 type Events2MetricsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
@@ -160,7 +162,11 @@ func (e Events2MetricsClient) Create(ctx context.Context, req *CreateE2MRequest)
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.CreateE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MCreateRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a metric.
@@ -174,7 +180,11 @@ func (e Events2MetricsClient) Get(ctx context.Context, req *GetE2MRequest) (*e2m
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.GetE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MGetRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Replace replaces a metric.
@@ -188,7 +198,11 @@ func (e Events2MetricsClient) Replace(ctx context.Context, req *ReplaceE2MReques
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.ReplaceE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MReplaceRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a metric.
@@ -202,7 +216,11 @@ func (e Events2MetricsClient) Delete(ctx context.Context, req *DeleteE2MRequest)
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.DeleteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MDeleteRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ListLabelsCardinality lists the cardinality of labels for a given metric.
@@ -216,7 +234,11 @@ func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *Li
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.ListLabelsCardinality(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListLabelsCardinality(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MListLabelsCardinalityRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List lists all metrics
@@ -230,7 +252,11 @@ func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, e
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.ListE2M(callProperties.Ctx, &e2m.ListE2MRequest{}, callProperties.CallOptions...)
+	response, err := client.ListE2M(callProperties.Ctx, &e2m.ListE2MRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MListRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // AtomicBatchExecute executes a batch of atomic operations.
@@ -244,7 +270,11 @@ func (e Events2MetricsClient) AtomicBatchExecute(ctx context.Context, req *Atomi
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.AtomicBatchExecuteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AtomicBatchExecuteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MAtomicBatchExecuteRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetLimits lists all limits.
@@ -258,7 +288,11 @@ func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResp
 	defer conn.Close()
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
-	return client.GetLimits(callProperties.Ctx, &e2m.GetLimitsRequest{}, callProperties.CallOptions...)
+	response, err := client.GetLimits(callProperties.Ctx, &e2m.GetLimitsRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, E2MGetLimtsRPC, events2MetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewEvents2MetricsClient creates a new Events2MetricsClient.

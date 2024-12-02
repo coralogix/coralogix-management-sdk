@@ -38,6 +38,8 @@ type ReplaceDashboardFolderRequest = dashboards.ReplaceDashboardFolderRequest
 // DeleteDashboardFolderRequest is a request to delete a dashboard folder.
 type DeleteDashboardFolderRequest = dashboards.DeleteDashboardFolderRequest
 
+const dashboardFoldersFeatureGroupID = "dashboards"
+
 // RPC names.
 const (
 	DashboardFoldersListDashboardFoldersRPC   = dashboards.DashboardFoldersService_ListDashboardFolders_FullMethodName
@@ -63,7 +65,11 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.Cre
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DashboardFoldersCreateDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get dashboard folder details.
@@ -77,7 +83,11 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDas
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.GetDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DashboardFoldersGetDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List gets all dashboard folders.
@@ -91,7 +101,11 @@ func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDash
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.ListDashboardFolders(callProperties.Ctx, &dashboards.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
+	response, err := client.ListDashboardFolders(callProperties.Ctx, &dashboards.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DashboardFoldersListDashboardFoldersRPC, dashboardFoldersFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Replace updates a dashboard folder.
@@ -105,7 +119,11 @@ func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.Re
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.ReplaceDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DashboardFoldersReplaceDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a dashboard folder.
@@ -119,7 +137,11 @@ func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.Del
 	defer conn.Close()
 	client := dashboards.NewDashboardFoldersServiceClient(conn)
 
-	return client.DeleteDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DashboardFoldersDeleteDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewDashboardsFoldersClient Creates a new DashboardsFoldersClient.

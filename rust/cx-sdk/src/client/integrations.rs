@@ -76,6 +76,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const INTEGRATIONS_FEATURE_GROUP_ID: &str = "integrations";
+
 /// The Integration API client.
 /// Read more at <https://coralogix.com/docs/user-team-management/>
 pub struct IntegrationsClient {
@@ -138,6 +140,7 @@ impl IntegrationsClient {
                     endpoint:
                         "/com.coralogixapis.integrations.v1.IntegrationService/SaveIntegration"
                             .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -183,6 +186,7 @@ impl IntegrationsClient {
                     endpoint:
                         "/com.coralogixapis.integrations.v1.IntegrationService/UpdateIntegration"
                             .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -211,6 +215,7 @@ impl IntegrationsClient {
                     endpoint:
                         "/com.coralogixapis.integrations.v1.IntegrationService/DeleteIntegration"
                             .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -244,6 +249,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrationDetails"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -271,6 +277,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetDeployedIntegration"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -304,6 +311,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrationDefinition"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -332,6 +340,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetManagedIntegrationStatus"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -360,6 +369,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetTemplate"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -390,6 +400,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/GetRumApplicationVersionData"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -415,6 +426,7 @@ impl IntegrationsClient {
                     status,
                     endpoint: "/com.coralogixapis.integrations.v1.IntegrationService/SyncRumData"
                         .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -461,6 +473,7 @@ impl IntegrationsClient {
                     endpoint:
                         "/com.coralogixapis.integrations.v1.IntegrationService/TestIntegration"
                             .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -489,6 +502,7 @@ impl IntegrationsClient {
                     endpoint:
                         "/com.coralogixapis.integrations.v1.IntegrationService/GetIntegrations"
                             .into(),
+                    feature_group: INTEGRATIONS_FEATURE_GROUP_ID.into(),
                 })
             })
     }

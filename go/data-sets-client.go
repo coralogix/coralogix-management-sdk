@@ -44,6 +44,8 @@ type FileBinary = enrichment.File_Binary
 // FileTextual is a textual file.
 type FileTextual = enrichment.File_Textual
 
+const dataSetsFeatureGroupID = "logs"
+
 // RPC names.
 const (
 	CreateDataSetRPC = enrichment.CustomEnrichmentService_CreateCustomEnrichment_FullMethodName
@@ -70,7 +72,11 @@ func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
-	return client.CreateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateDataSetRPC, dataSetsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a data set.
@@ -85,7 +91,11 @@ func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrich
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
-	return client.GetCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetDataSetRPC, dataSetsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates a data set.
@@ -100,7 +110,11 @@ func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
-	return client.UpdateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateDataSetRPC, dataSetsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a data set.
@@ -130,7 +144,11 @@ func (d DataSetClient) List(ctx context.Context, req *enrichment.GetCustomEnrich
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
-	return client.GetCustomEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetCustomEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetCDataSetRPC, dataSetsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewDataSetClient creates a new data set client.

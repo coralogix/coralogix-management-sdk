@@ -38,6 +38,8 @@ type ActivateRetentionsRequest = archiveRetention.ActivateRetentionsRequest
 // Retention is a type for archive retention.
 type Retention = archiveRetention.Retention
 
+const archiveFeatureGroupID = "archive"
+
 // RPC values.
 const (
 	ArchiveRetentionGetRetentionsRPC        = archiveRetention.RetentionsService_GetRetentions_FullMethodName
@@ -62,7 +64,11 @@ func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.
 	defer conn.Close()
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
-	return client.GetRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveRetentionGetRetentionsRPC, archiveFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates the archive retentions.
@@ -76,7 +82,11 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentio
 	defer conn.Close()
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
-	return client.UpdateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveRetentionUpdateRetentionsRPC, archiveFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Activate activates the archive retentions.
@@ -90,7 +100,11 @@ func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRete
 	defer conn.Close()
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
-	return client.ActivateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ActivateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveRetentionActivateRetentionsRPC, archiveFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetEnabled returns a boolean that signals whether archive retentions are enabled.
@@ -104,7 +118,12 @@ func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetenti
 	defer conn.Close()
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
-	return client.GetRetentionsEnabled(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetRetentionsEnabled(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveRetentionGetRetentionsEnabledRPC, archiveFeatureGroupID)
+	}
+	return response, nil
+
 }
 
 // NewArchiveRetentionsClient Creates a new archive retentions client.

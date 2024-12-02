@@ -41,6 +41,8 @@ type TargetS3 = archiveLogs.Target_S3
 // TargetIbmCos is an IBM COS target for storing archive logs.
 type TargetIbmCos = archiveLogs.Target_IbmCos
 
+const archiveLogsFeatureGroupID = "logs"
+
 // RPC names.
 const (
 	ArchiveLogsGetTargetRPC      = archiveLogs.TargetService_GetTarget_FullMethodName
@@ -64,7 +66,11 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTarge
 	defer conn.Close()
 	client := archiveLogs.NewTargetServiceClient(conn)
 
-	return client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveLogsSetTargetRPC, archiveLogsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets the archive logs target.
@@ -78,7 +84,11 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetRespo
 	defer conn.Close()
 	client := archiveLogs.NewTargetServiceClient(conn)
 
-	return client.GetTarget(callProperties.Ctx, &archiveLogs.GetTargetRequest{}, callProperties.CallOptions...)
+	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.GetTargetRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveLogsGetTargetRPC, archiveLogsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ValidateTarget validates the archive logs target.
@@ -92,7 +102,11 @@ func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.
 	defer conn.Close()
 	client := archiveLogs.NewTargetServiceClient(conn)
 
-	return client.ValidateTarget(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ValidateTarget(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveLogsValidateTargetRPC, archiveLogsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewArchiveLogsClient creates a new archive logs client.

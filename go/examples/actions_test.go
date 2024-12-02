@@ -45,7 +45,7 @@ func TestActions(t *testing.T) {
 	_, e = c.Replace(context.Background(), &cxsdk.ReplaceActionRequest{
 		Action: &cxsdk.Action{
 			Id:               action.Action.Id,
-			Name:             wrapperspb.String("bing search action"),
+			Name:             wrapperspb.String("updated action"),
 			Url:              wrapperspb.String("https://www.bing.com/search?q={{$p.selected_value}}"),
 			IsPrivate:        wrapperspb.Bool(false),
 			IsHidden:         wrapperspb.Bool(false),

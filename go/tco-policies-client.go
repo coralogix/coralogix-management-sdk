@@ -147,6 +147,8 @@ const (
 	TCOPoliciesAtomicOverwriteSpanPoliciesRPC = tcopolicies.PoliciesService_AtomicOverwriteSpanPolicies_FullMethodName
 )
 
+const tcoFeatureGroupID = "tco"
+
 // TCOPoliciesClient is a client for the Coralogix TCO Policies API.
 type TCOPoliciesClient struct {
 	callPropertiesCreator *CallPropertiesCreator
@@ -163,7 +165,11 @@ func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest)
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.CreatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesCreatePolicyRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets the specified TCO policy.
@@ -177,7 +183,11 @@ func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tco
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.GetPolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetPolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesGetPolicyRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // OverwriteTCOTracesPolicies overwrites the specified TCO traces policies.
@@ -191,7 +201,11 @@ func (t TCOPoliciesClient) OverwriteTCOTracesPolicies(ctx context.Context, req *
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.AtomicOverwriteSpanPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AtomicOverwriteSpanPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesAtomicOverwriteSpanPoliciesRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates the specified TCO policy.
@@ -205,7 +219,11 @@ func (t TCOPoliciesClient) Update(ctx context.Context, req *UpdatePolicyRequest)
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.UpdatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesUpdatePolicyRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // OverwriteTCOLogsPolicies overwrites the specified TCO logs policies.
@@ -219,7 +237,11 @@ func (t TCOPoliciesClient) OverwriteTCOLogsPolicies(ctx context.Context, req *tc
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.AtomicOverwriteLogPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AtomicOverwriteLogPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesAtomicOverwriteLogPoliciesRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes the specified TCO policy.
@@ -233,7 +255,11 @@ func (t TCOPoliciesClient) Delete(ctx context.Context, req *DeletePolicyRequest)
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.DeletePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeletePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesDeletePolicyRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Reorder reorders the specified TCO policies.
@@ -247,12 +273,11 @@ func (t TCOPoliciesClient) Reorder(ctx context.Context, req *ReorderPoliciesRequ
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.ReorderPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
-}
-
-// NewTCOPoliciesClient Creates a new TCO policies client.
-func NewTCOPoliciesClient(c *CallPropertiesCreator) *TCOPoliciesClient {
-	return &TCOPoliciesClient{callPropertiesCreator: c}
+	response, err := client.ReorderPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesReorderPoliciesRPC, tcoFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List gets the specified TCO logs policies.
@@ -266,5 +291,15 @@ func (t TCOPoliciesClient) List(ctx context.Context, req *GetCompanyPoliciesRequ
 	defer conn.Close()
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
-	return client.GetCompanyPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetCompanyPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
+
+	if err != nil {
+		return nil, NewSdkAPIError(err, TCOPoliciesGetCompanyPoliciesRPC, tcoFeatureGroupID)
+	}
+	return response, nil
+}
+
+// NewTCOPoliciesClient Creates a new TCO policies client.
+func NewTCOPoliciesClient(c *CallPropertiesCreator) *TCOPoliciesClient {
+	return &TCOPoliciesClient{callPropertiesCreator: c}
 }

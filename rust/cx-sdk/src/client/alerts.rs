@@ -52,7 +52,6 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     ActivitySchedule,
     ActivitySchedule as AlertDefActivitySchedule,
     AlertDef,
-
     AlertDefIncidentSettings,
     AlertDefNotificationGroup,
     AlertDefOverride,
@@ -136,8 +135,11 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     metric_missing_values::MissingValues,
 };
 
+const ALERTS_FEATURE_GROUP_ID: &str = "alerts";
+
 /// The Alerts API client.
 /// Read more at [https://coralogix.com/docs/coralogix-user-defined-alerts/]()
+///
 pub struct AlertsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<AlertDefsServiceClient<Channel>>,
@@ -180,6 +182,7 @@ impl AlertsClient {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/GetAlertDef"
                             .into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -200,6 +203,7 @@ impl AlertsClient {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/ListAlertDefs"
                             .into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -228,6 +232,7 @@ impl AlertsClient {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/CreateAlertDef"
                             .into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -256,6 +261,7 @@ impl AlertsClient {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/ReplaceAlertDef"
                             .into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -280,6 +286,7 @@ impl AlertsClient {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/DeleteAlertDef"
                             .into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -307,6 +314,7 @@ impl AlertsClient {
                     SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.alerts.v3.AlertDefsService/SetActive".into(),
+                        feature_group: ALERTS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }

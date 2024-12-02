@@ -152,6 +152,8 @@ type RuleSubgroup = rulegroups.RuleSubgroup
 // Rule represents a rule.
 type Rule = rulegroups.Rule
 
+const rulesFeatureGroupID = "rules"
+
 // SeverityConstraint values.
 const (
 	SeverityConstraintValueDebugOrUnspecified = rulegroups.SeverityConstraint_VALUE_DEBUG_OR_UNSPECIFIED
@@ -211,7 +213,11 @@ func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupReques
 	defer conn.Close()
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
-	return client.CreateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, RuleGroupsCreateRuleGroupRPC, rulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a rule group.
@@ -225,7 +231,11 @@ func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*r
 	defer conn.Close()
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
-	return client.GetRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, RuleGroupsGetRuleGroupRPC, rulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates a rule group.
@@ -240,7 +250,11 @@ func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupReques
 
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
-	return client.UpdateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, RuleGroupsUpdateRuleGroupRPC, rulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a rule group.
@@ -255,7 +269,11 @@ func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupReques
 
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
-	return client.DeleteRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, RuleGroupsDeleteRuleGroupRPC, rulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewRuleGroupsClient creates a new rule groups client.

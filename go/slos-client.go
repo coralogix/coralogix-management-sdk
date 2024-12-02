@@ -53,6 +53,8 @@ type SliFilter = slos.SliFilter
 // ThresholdSymbol is an SLO threshold symbol.
 type ThresholdSymbol = slos.ThresholdSymbol
 
+const infraMonitoringFeatureGroupID = "infra-monitoring"
+
 // SloThresholdSymbol values.
 const (
 	SloThresholdSymbolGreater        = slos.ThresholdSymbol_THRESHOLD_SYMBOL_GREATER
@@ -121,7 +123,11 @@ func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloReques
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.CreateServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloCreateRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets the specified SLO.
@@ -135,7 +141,11 @@ func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*s
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.GetServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloGetRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates the specified SLO.
@@ -149,7 +159,11 @@ func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloReque
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.ReplaceServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloReplaceRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes the specified SLO.
@@ -163,7 +177,11 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloReques
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.DeleteServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloDeleteRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetBulk gets multiple SLOs in a single call.
@@ -177,7 +195,11 @@ func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRe
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.BatchGetServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.BatchGetServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloBatchGetRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List lists all service SLOs.
@@ -191,7 +213,11 @@ func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) 
 	defer conn.Close()
 	client := slos.NewServiceSloServiceClient(conn)
 
-	return client.ListServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SloListRPC, infraMonitoringFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewSLOsClient creates a new SLOs client.

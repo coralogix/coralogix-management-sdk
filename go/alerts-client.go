@@ -326,6 +326,8 @@ type LogsUniqueCountCondition = alerts.LogsUniqueCountCondition
 // AlertDefType is a type of alert type
 type AlertDefType = alerts.AlertDefType
 
+const alertsFeatureGroupID = "alerts"
+
 // AlertDefType values.
 const (
 	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
@@ -684,7 +686,11 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateAlertDefRPC, alertsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets an alert.
@@ -698,7 +704,11 @@ func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.GetAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetAlertDefRPC, alertsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Replace replaces an alert.
@@ -712,7 +722,11 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ReplaceAlertDefRPC, alertsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes an alert.
@@ -726,7 +740,12 @@ func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.DeleteAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteAlertDefRPC, alertsFeatureGroupID)
+	}
+	return response, nil
+
 }
 
 // Set sets the active status of an alert.
@@ -740,7 +759,11 @@ func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.S
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SetAlertDefActiveRPC, alertsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List lists the alerts.
@@ -754,7 +777,11 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 
-	return client.ListAlertDefs(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListAlertDefs(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ListAlertDefsRPC, alertsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewAlertsClient creates a new alerts client.

@@ -47,6 +47,8 @@ use crate::{
     util::make_request_with_metadata,
 };
 
+const ARCHIVE_LOGS_FEATURE_GROUP_ID: &str = "logs";
+
 /// The logs archive API client.
 /// Read more at [https://coralogix.com/docs/archive-s3-bucket-forever/]()
 pub struct LogsArchiveClient {
@@ -85,6 +87,7 @@ impl LogsArchiveClient {
                     SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogix.archive.v2.TargetService/GetTarget".into(),
+                        feature_group: ARCHIVE_LOGS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -118,6 +121,7 @@ impl LogsArchiveClient {
                     SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogix.archive.v2.TargetService/SetTarget".into(),
+                        feature_group: ARCHIVE_LOGS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -151,6 +155,7 @@ impl LogsArchiveClient {
                     SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogix.archive.v2.TargetService/ValidateTarget".into(),
+                        feature_group: ARCHIVE_LOGS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
