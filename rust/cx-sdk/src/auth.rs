@@ -20,6 +20,7 @@ use std::fmt::{
 
 const ENV_TEAM_API_KEY: &str = "CORALOGIX_TEAM_API_KEY";
 const ENV_USER_API_KEY: &str = "CORALOGIX_USER_API_KEY";
+const ENV_ORG_API_KEY: &str = "CORALOGIX_ORG_API_KEY";
 
 #[derive(Clone, Hash, PartialEq, Eq, PartialOrd, Ord, Default)]
 /// The authentication context.
@@ -28,6 +29,8 @@ pub struct AuthContext {
     pub(crate) team_level_api_key: ApiKey,
     /// The user level API key.
     pub(crate) user_level_api_key: ApiKey,
+    /// The organization level API key.
+    pub(crate) org_level_api_key: ApiKey,
 }
 
 impl AuthContext {
@@ -36,16 +39,27 @@ impl AuthContext {
     /// # Arguments
     /// * `team_level_api_key` - The team level API key.
     /// * `user_level_api_key` - The user level API key.
-    pub fn new(team_level_api_key: Option<ApiKey>, user_level_api_key: Option<ApiKey>) -> Self {
+    /// * `org_level_api_key` - The organization level API key.
+    pub fn new(
+        team_level_api_key: Option<ApiKey>,
+        user_level_api_key: Option<ApiKey>,
+        org_level_api_key: Option<ApiKey>,
+    ) -> Self {
         if team_level_api_key.is_none() {
             log::warn!("Team level API key is not set. some functionality may not be available.");
         }
         if user_level_api_key.is_none() {
             log::warn!("User level API key is not set. some functionality may not be available.");
         }
+        if org_level_api_key.is_none() {
+            log::warn!(
+                "Organization level API key is not set. some functionality may not be available."
+            );
+        }
         AuthContext {
             team_level_api_key: team_level_api_key.unwrap_or_default(),
             user_level_api_key: user_level_api_key.unwrap_or_default(),
+            org_level_api_key: org_level_api_key.unwrap_or_default(),
         }
     }
 
@@ -54,6 +68,7 @@ impl AuthContext {
         AuthContext::new(
             ApiKey::teams_level_from_env().ok(),
             ApiKey::user_level_from_env().ok(),
+            ApiKey::org_level_from_env().ok(),
         )
     }
 }
@@ -78,6 +93,13 @@ impl ApiKey {
     /// Creates a new user-level API key from the ENV_API_KEY environment variable.
     pub fn user_level_from_env() -> Result<Self> {
         std::env::var(ENV_USER_API_KEY)
+            .map(ApiKey)
+            .map_err(From::from)
+    }
+
+    /// Creates a new organization-level API key from the ENV_API_KEY environment variable.
+    pub fn org_level_from_env() -> Result<Self> {
+        std::env::var(ENV_ORG_API_KEY)
             .map(ApiKey)
             .map_err(From::from)
     }

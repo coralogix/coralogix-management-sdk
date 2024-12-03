@@ -23,14 +23,26 @@ import (
 // CreateTeamInOrgRequest is a request to create a team.
 type CreateTeamInOrgRequest = teams.CreateTeamInOrgRequest
 
+// CreateTeamInOrgResponse is a response to creating a team.
+type CreateTeamInOrgResponse = teams.CreateTeamInOrgResponse
+
 // UpdateTeamRequest is a request to update a team.
 type UpdateTeamRequest = teams.UpdateTeamRequest
+
+// UpdateTeamResponse is a response to updating a team.
+type UpdateTeamResponse = teams.UpdateTeamResponse
 
 // GetTeamRequest is a request to get a team.
 type GetTeamRequest = teams.GetTeamRequest
 
+// GetTeamResponse is a response to getting a team.
+type GetTeamResponse = teams.GetTeamResponse
+
 // DeleteTeamRequest is a request to delete a team.
 type DeleteTeamRequest = teams.DeleteTeamRequest
+
+// DeleteTeamResponse is a response to deleting a team.
+type DeleteTeamResponse = teams.DeleteTeamResponse
 
 // SetDailyQuotaRequest is a request to set the daily quota for a team.
 type SetDailyQuotaRequest = teams.SetDailyQuotaRequest
@@ -65,7 +77,7 @@ type TeamsClient struct {
 
 // Create creates a new team.
 func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -83,7 +95,7 @@ func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*
 
 // Update updates a team.
 func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -101,7 +113,7 @@ func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams
 
 // Get gets a team.
 func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -119,7 +131,7 @@ func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTe
 
 // Delete deletes a team.
 func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -137,7 +149,7 @@ func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams
 
 // SetDailyQuota sets the daily quota for a team.
 func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaRequest) (*teams.SetDailyQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -155,7 +167,7 @@ func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaReques
 
 // GetQuota gets the quota for a team.
 func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*teams.GetTeamQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +185,7 @@ func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*t
 
 // MoveQuota moves the quota from one team to another.
 func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*teams.MoveQuotaResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetOrgLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
