@@ -65,6 +65,8 @@ type OwnerTeamID = apikeys.Owner_TeamId
 // OwnerOrganisationID is an owner organisation ID.
 type OwnerOrganisationID = apikeys.Owner_OrganisationId
 
+const apiKeysFeatureGroupID = "aaa"
+
 // RPC method names.
 const (
 	CreateAPIKeyRPC = apikeys.ApiKeysService_CreateApiKey_FullMethodName
@@ -89,7 +91,11 @@ func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequ
 	defer conn.Close()
 	client := apikeys.NewApiKeysServiceClient(conn)
 
-	return client.CreateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateAPIKeyRPC, apiKeysFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets an API key.
@@ -103,7 +109,11 @@ func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (
 	defer conn.Close()
 	client := apikeys.NewApiKeysServiceClient(conn)
 
-	return client.GetApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetAPIKeyRPC, apiKeysFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates an API key.
@@ -117,7 +127,11 @@ func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequ
 	defer conn.Close()
 	client := apikeys.NewApiKeysServiceClient(conn)
 
-	return client.UpdateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateAPIKeyRPC, apiKeysFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes an API key.
@@ -131,7 +145,11 @@ func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequ
 	defer conn.Close()
 	client := apikeys.NewApiKeysServiceClient(conn)
 
-	return client.DeleteApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteAPIKeyRPC, apiKeysFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewAPIKeysClient creates a new API keys client.

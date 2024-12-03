@@ -30,6 +30,8 @@ type DataprimeClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
 
+const dataprimeFeatureGroupID = "dataprime"
+
 // Query runs a query.
 func (c DataprimeClient) Query(ctx context.Context, req *QueryRequest) (dataprime.DataprimeQueryService_QueryClient, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
@@ -41,7 +43,11 @@ func (c DataprimeClient) Query(ctx context.Context, req *QueryRequest) (dataprim
 	defer conn.Close()
 	client := dataprime.NewDataprimeQueryServiceClient(conn)
 
-	return client.Query(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Query(ctx, req)
+	if err != nil {
+		return nil, NewSdkAPIError(err, dataprime.DataprimeQueryService_Query_FullMethodName, dataprimeFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewDataprimeClient creates a new dataprime client.

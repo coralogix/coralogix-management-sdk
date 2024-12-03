@@ -47,6 +47,8 @@ use crate::{
     util::make_request_with_metadata,
 };
 
+const RECORDING_RULES_FEATURE_GROUP_ID: &str = "recording-rules";
+
 use cx_api::proto::rule_manager::groups::rule_group_sets_client::RuleGroupSetsClient;
 
 /// A client for the recording rule group sets service.
@@ -100,6 +102,7 @@ impl RecordingRuleGroupSetsClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Create".to_string(),
+                    feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -121,6 +124,7 @@ impl RecordingRuleGroupSetsClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Fetch".to_string(),
+                    feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -139,6 +143,7 @@ impl RecordingRuleGroupSetsClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/List".to_string(),
+                    feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -159,6 +164,7 @@ impl RecordingRuleGroupSetsClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Update".to_string(),
+                    feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?;
         Ok(())
@@ -179,6 +185,7 @@ impl RecordingRuleGroupSetsClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Delete".to_string(),
+                    feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?;
         Ok(())

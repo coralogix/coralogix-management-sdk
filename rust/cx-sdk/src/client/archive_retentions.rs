@@ -48,6 +48,8 @@ use crate::{
 
 pub use cx_api::proto::com::coralogix::archive::v1::RetentionUpdateElement;
 
+const ARCHIVE_FEATURE_GROUP_ID: &str = "archive";
+
 /// The Archive Retention API client.
 /// Read more at <https://coralogix.com/docs/archive-retention/>
 pub struct ArchiveRetentionClient {
@@ -88,6 +90,7 @@ impl ArchiveRetentionClient {
                     status,
                     endpoint: "/com.coralogix.archive.v1.RetentionsService/GetRetentions"
                         .to_string(),
+                    feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -108,6 +111,7 @@ impl ArchiveRetentionClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.archive.v1.RetentionsService/GetEnabled".to_string(),
+                    feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -134,6 +138,7 @@ impl ArchiveRetentionClient {
                     status,
                     endpoint: "/com.coralogix.archive.v1.RetentionsService/UpdateRetentions"
                         .to_string(),
+                    feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())
@@ -155,6 +160,7 @@ impl ArchiveRetentionClient {
                     status,
                     endpoint: "/com.coralogix.archive.v1.RetentionsService/ActivateRetentions"
                         .to_string(),
+                    feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
                 })
             })?
             .into_inner())

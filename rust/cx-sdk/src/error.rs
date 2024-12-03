@@ -25,6 +25,8 @@ pub struct SdkApiError {
     pub status: tonic::Status,
     /// The endpoint that the error occurred on.
     pub endpoint: String,
+    /// The feature group the endpoint belongs to.
+    pub feature_group: String,
 }
 
 impl std::fmt::Display for SdkApiError {

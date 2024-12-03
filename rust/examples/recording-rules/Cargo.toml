@@ -1,5 +1,5 @@
 [package]
-name = "recording-rule-group-sets"
+name = "recording-rules"
 version = "0.1.0"
 edition = "2021"
 

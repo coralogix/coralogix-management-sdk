@@ -80,6 +80,8 @@ use url::Url;
 
 use crate::CoralogixRegion;
 
+const WEBHOOKS_FEATURE_GROUP_ID: &str = "integrations";
+
 /// The Webhooks API client.
 /// Read more at <https://coralogix.com/docs/webhooks-api/>
 pub struct WebhooksClient {
@@ -139,6 +141,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/CreateOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -181,6 +184,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/UpdateOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -206,6 +210,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/DeleteOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -232,6 +237,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/GetOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -261,6 +267,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/GetOutgoingWebhookTypeDetails".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -301,6 +308,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/TestOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -330,6 +338,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/TestExistingOutgoingWebhook".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -359,6 +368,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListOutgoingWebhooks".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -381,6 +391,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListAllOutgoingWebhooks".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }
@@ -403,6 +414,7 @@ impl WebhooksClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.outgoing_webhooks.v1.OutgoingWebhooksService/ListOutgoingWebhookTypes".into(),
+                    feature_group: WEBHOOKS_FEATURE_GROUP_ID.into(),
                 }),
             )
     }

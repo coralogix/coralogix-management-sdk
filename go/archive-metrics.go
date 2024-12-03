@@ -70,6 +70,8 @@ type TenantConfigV2 = archiveMetrics.TenantConfigV2
 // RetentionPolicyRequest is a request to set the retention policy.
 type RetentionPolicyRequest = archiveMetrics.RetentionPolicyRequest
 
+const archiveMetricsFeatureGroupID = "metrics"
+
 // RPC names.
 const (
 	ArchiveMetricsConfigureTenantRPC = archiveMetrics.MetricsConfiguratorPublicService_ConfigureTenant_FullMethodName
@@ -96,7 +98,11 @@ func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.Up
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsUpdateRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets the archive metrics configuration.
@@ -110,7 +116,11 @@ func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenan
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.GetTenantConfig(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	response, err := client.GetTenantConfig(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsGetTenantConfigRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ConfigureTenant configures the archive metrics bucket.
@@ -124,7 +134,11 @@ func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveM
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsConfigureTenantRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // ValidateTarget validates the archive metrics bucket.
@@ -138,7 +152,11 @@ func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMe
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsValidateBucketRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Enable enables the metrics archive.
@@ -152,7 +170,11 @@ func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, error
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.EnableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	response, err := client.EnableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsEnableArchiveRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Disable disables the metrics archive.
@@ -166,7 +188,11 @@ func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, erro
 	defer conn.Close()
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
-	return client.DisableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	response, err := client.DisableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveMetricsDisableArchiveRPC, archiveMetricsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewArchiveMetricsClient creates a new archive metrics client.

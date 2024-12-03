@@ -55,6 +55,8 @@ use tonic::{
 
 pub use crate::com::coralogixapis::aaa::apikeys::v3::owner::Owner;
 
+const API_KEYS_FEATURE_GROUP_ID: &str = "aaa";
+
 /// The API Keys API client.
 /// Read more at <https://coralogix.com/docs/api-keys/>
 pub struct ApiKeysClient {
@@ -120,6 +122,7 @@ impl ApiKeysClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/CreateApiKey"
                         .into(),
+                    feature_group: API_KEYS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -161,6 +164,7 @@ impl ApiKeysClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/UpdateApiKey"
                         .into(),
+                    feature_group: API_KEYS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -183,6 +187,7 @@ impl ApiKeysClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/DeleteApiKey"
                         .into(),
+                    feature_group: API_KEYS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -203,6 +208,7 @@ impl ApiKeysClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.aaa.apikeys.v3.ApiKeysService/GetApiKey".into(),
+                    feature_group: API_KEYS_FEATURE_GROUP_ID.into(),
                 })
             })
     }

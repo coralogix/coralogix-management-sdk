@@ -62,6 +62,8 @@ type Dimension = dataUsage.Dimension
 // AggregateBy is a type of aggregation.
 type AggregateBy = dataUsage.AggregateBy
 
+const dataPlansFeatureGroupID = "dataplans"
+
 // AggregateBy enum values.
 const (
 	AggregateByUnspecified  AggregateBy = dataUsage.AggregateBy_AGGREGATE_BY_UNSPECIFIED
@@ -96,7 +98,11 @@ func (c DataUsageClient) GetSpansCount(ctx context.Context, req *dataUsage.GetSp
 	defer conn.Close()
 	client := dataUsage.NewDataUsageServiceClient(conn)
 
-	return client.GetSpansCount(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetSpansCount(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetSpansCountRPC, dataPlansFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetLogsCount gets the logs count as a stream.
@@ -109,8 +115,11 @@ func (c DataUsageClient) GetLogsCount(ctx context.Context, req *dataUsage.GetLog
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dataUsage.NewDataUsageServiceClient(conn)
-
-	return client.GetLogsCount(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetLogsCount(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetLogsCountRPC, dataPlansFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetDataUsageMetricsExportStatus gets the metrics export status.
@@ -123,8 +132,11 @@ func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, re
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dataUsage.NewDataUsageServiceClient(conn)
-
-	return client.GetDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
+	}
+	return response, nil
 }
 
 // UpdateDataUsageMetricsExportStatus updates the metrics export status.
@@ -137,8 +149,11 @@ func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context,
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dataUsage.NewDataUsageServiceClient(conn)
-
-	return client.UpdateDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetDataUsage gets the data usage as a stream.
@@ -151,8 +166,11 @@ func (c DataUsageClient) GetDataUsage(ctx context.Context, req *dataUsage.GetDat
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dataUsage.NewDataUsageServiceClient(conn)
-
-	return client.GetDataUsage(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDataUsage(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetDataUsageRPC, dataPlansFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewDataUsageClient creates a new DataUsageClient.

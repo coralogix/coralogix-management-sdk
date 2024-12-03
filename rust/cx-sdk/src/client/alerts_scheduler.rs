@@ -64,6 +64,8 @@ pub use cx_api::proto::com::coralogixapis::alerting::alert_scheduler_rule_protob
     timeframe::Until,
 };
 
+const ALERT_SCHEDULER_FEATURE_GROUP_ID: &str = "alerts";
+
 /// The Alert Scheduler API client.
 /// Read more at [https://coralogix.com/docs/coralogix-user-defined-alerts/]()
 pub struct AlertSchedulerClient {
@@ -113,6 +115,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/CreateAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }
@@ -153,6 +156,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/CreateBulkAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }
@@ -182,6 +186,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/UpdateAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }
@@ -221,6 +226,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/UpdateBulkAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }
@@ -246,6 +252,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/GetAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }
@@ -292,6 +299,7 @@ impl AlertSchedulerClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/GetBulkAlertSchedulerRule".into(),
+                        feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                     }),
                 )?;
             all_rules.extend(alert_scheduler_rules);
@@ -325,6 +333,7 @@ impl AlertSchedulerClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleService/DeleteAlertSchedulerRule".into(),
+                    feature_group: ALERT_SCHEDULER_FEATURE_GROUP_ID.into()
                 }),
             )
     }

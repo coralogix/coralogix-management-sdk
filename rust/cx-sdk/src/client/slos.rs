@@ -65,6 +65,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const INFRA_MONITORING_FEATURE_GROUP_ID: &str = "infra-monitoring";
+
 /// The Service Line Objectives (SLO) client.
 /// Read more at <https://coralogix.com/docs/slo-management-api/>
 pub struct SloClient {
@@ -110,6 +112,7 @@ impl SloClient {
                     endpoint:
                         "/com.coralogixapis.apm.services.v1.ServiceSloService/CreateServiceSlo"
                             .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }
@@ -135,6 +138,7 @@ impl SloClient {
                     endpoint:
                         "/com.coralogixapis.apm.services.v1.ServiceSloService/ReplaceServiceSlo"
                             .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }
@@ -160,6 +164,7 @@ impl SloClient {
                     endpoint:
                         "/com.coralogixapis.apm.services.v1.ServiceSloService/DeleteServiceSlo"
                             .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }
@@ -183,6 +188,7 @@ impl SloClient {
                     status,
                     endpoint: "/com.coralogixapis.apm.services.v1.ServiceSloService/GetServiceSlo"
                         .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }
@@ -207,6 +213,7 @@ impl SloClient {
                     endpoint:
                         "/com.coralogixapis.apm.services.v1.ServiceSloService/BatchGetServiceSlos"
                             .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }
@@ -241,6 +248,7 @@ impl SloClient {
                     endpoint:
                         "/com.coralogixapis.apm.services.v1.ServiceSloService/ListServiceSlos"
                             .to_string(),
+                    feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
     }

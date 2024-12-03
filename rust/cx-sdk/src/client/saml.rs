@@ -50,6 +50,7 @@ use crate::{
     util::make_request_with_metadata,
 };
 
+const SAML_FEATURE_GROUP_ID: &str = "aaa";
 /// A client for the SAML Configuration API.
 /// Read more at <https://coralogix.com/docs/slo-management-api/>
 pub struct SamlClient {
@@ -92,6 +93,7 @@ impl SamlClient {
                     status,
                     endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/GetSpParameters"
                         .to_string(),
+                    feature_group: SAML_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -124,6 +126,7 @@ impl SamlClient {
                     status,
                     endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/SetIdpParameters"
                         .to_string(),
+                    feature_group: SAML_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -147,6 +150,7 @@ impl SamlClient {
                     status,
                     endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/SetActive"
                         .to_string(),
+                    feature_group: SAML_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -170,6 +174,7 @@ impl SamlClient {
                     status,
                     endpoint: "/com.coralogix.aaa.sso.v2.SamlConfigurationService/GetConfiguration"
                         .to_string(),
+                    feature_group: SAML_FEATURE_GROUP_ID.into(),
                 })
             })
     }
