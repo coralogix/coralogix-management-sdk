@@ -5,16 +5,35 @@ package com.coralogix.archive.dataset.v2;
 import "com/coralogix/archive/dataset/v2/dataset_rules.proto";
 import "com/coralogix/archive/v1/audit_log.proto";
 import "google/protobuf/timestamp.proto";
+import "com/coralogix/archive/dataset/v2/preferred_schema.proto";
+import "com/coralogix/archive/dataset/v2/dataset.proto";
 
 service InternalDatasetManagementService {
   rpc GetAllDatasetRules(GetAllDatasetRulesRequest) returns (GetAllDatasetRulesResponse) {
     option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset rules (by last update time, optionally)";
+  }
+  rpc GetDatasetSchemaFields(GetDatasetSchemaFieldsRequest) returns (GetDatasetSchemaFieldsResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
+  }
+  rpc SetDatasetRule(InternalDatasetManagementServiceSetDatasetRuleRequest) returns (InternalDatasetManagementServiceSetDatasetRuleResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
   }
 }
 
 message GetAllDatasetRulesRequest {
   optional google.protobuf.Timestamp last_update_time = 1;
   bool force_update = 2;
+}
+
+message GetDatasetSchemaFieldsResponse {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
+  repeated NamedSchemaTemplateField fields = 3;
+}
+
+message GetDatasetSchemaFieldsRequest {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
 }
 
 message CompanyDatasetRules {
@@ -25,4 +44,14 @@ message CompanyDatasetRules {
 message GetAllDatasetRulesResponse {
   repeated CompanyDatasetRules rules = 1;
   google.protobuf.Timestamp last_update_time = 2;
+}
+
+message InternalDatasetManagementServiceSetDatasetRuleRequest {
+  uint32 company_id = 1;
+  DatasetRule dataset_rule = 2;
+  repeated string schema_template_ids = 3;
+}
+
+message InternalDatasetManagementServiceSetDatasetRuleResponse {
+
 }

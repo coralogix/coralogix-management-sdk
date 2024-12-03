@@ -9,6 +9,7 @@ message DatasetRule {
   Dataspace dataspace = 1;
   Predicate predicate = 2;
   repeated IngestionLocationSpec locations = 3;
+  repeated string schema_template_ids = 4;
 }
 
 message Predicate {

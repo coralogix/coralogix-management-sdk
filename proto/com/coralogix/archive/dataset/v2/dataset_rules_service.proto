@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/archive/dataset/v2/dataset_rules.proto";
+
+package com.coralogix.archive.dataset.v2;
+
+service DatasetRulesService {
+  rpc SetDatasetRule(SetDatasetRuleRequest) returns (SetDatasetRuleResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
+  }
+}
+
+message SetDatasetRuleRequest {
+  uint32 company_id = 1;
+  DatasetRule dataset_rule = 2;
+}
+
+message SetDatasetRuleResponse {
+
+}

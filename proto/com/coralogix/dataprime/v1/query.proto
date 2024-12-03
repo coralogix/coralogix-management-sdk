@@ -6,6 +6,7 @@ import "com/coralogix/dataprime/ast/v1/ast.proto";
 import "com/coralogix/dataprime/ast/v1/query.proto";
 import "com/coralogix/dataprime/v1/object_store_warning.proto";
 import "com/coralogix/dataprime/v1/common.proto";
+import "com/coralogix/elasticclientproxy/mapping.proto";
 import "google/protobuf/wrappers.proto";
 
 message FieldCardinality {
@@ -144,9 +145,16 @@ message PhysicalLocation {
     repeated ObjectStoreLocation locations = 2;
   }
 
+
+  message OpenSearchIndexedField {
+    UntypedKeypath keypath = 1;
+    com.coralogix.elasticclientproxy.models.proto.OpenSearchMappingResponse.Field field = 2;
+  }
+
   message OpenSearchLocation {
     string host = 1;
     string index = 2;
+    repeated OpenSearchIndexedField fields = 3;
   }
 
   message SchemaStoreLocation {

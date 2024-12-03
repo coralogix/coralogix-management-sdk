@@ -1,5 +1,4 @@
 syntax = "proto3";
-import "com/coralogix/enrichment/v1/audit_log.proto";
 
 package com.coralogix.enrichment.v1;
 
@@ -14,7 +13,5 @@ message SupportedAwsResourceType {
 }
 
 service AwsEnrichmentService {
-  rpc GetSupportedAwsResourceTypes(GetSupportedAwsResourceTypesRequest) returns (GetSupportedAwsResourceTypesResponse) {
-    option (audit_log_description).description = "Get supported Aws resource types";
-  };
+  rpc GetSupportedAwsResourceTypes(GetSupportedAwsResourceTypesRequest) returns (GetSupportedAwsResourceTypesResponse);
 }

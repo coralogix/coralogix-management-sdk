@@ -13,7 +13,9 @@ message EnrichmentType {
   }
 }
 
-message GeoIpType {}
+message GeoIpType {
+  optional bool with_asn = 4;
+}
 
 message SuspiciousIpType {}
 
