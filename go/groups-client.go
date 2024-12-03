@@ -76,6 +76,8 @@ type SetTeamGroupScopeRequest = groups.SetTeamGroupScopeRequest
 // GetTeamGroupScopeRequest is a type for a request.
 type GetTeamGroupScopeRequest = groups.GetTeamGroupScopeRequest
 
+const groupsFeatureGroupID = "aaa"
+
 // RPC Values
 const (
 	CreateTeamGroupRPC          = groups.TeamPermissionsMgmtService_CreateTeamGroup_FullMethodName
@@ -103,7 +105,11 @@ func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupReq
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.CreateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get retrieves a group by ID
@@ -117,7 +123,11 @@ func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) 
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.GetTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List retrieves all groups in the team
@@ -131,7 +141,11 @@ func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.GetTeamGroups(callPoperties.Ctx, req, callPoperties.CallOptions...)
+	response, err := client.GetTeamGroups(callPoperties.Ctx, req, callPoperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamGroupsRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates a group
@@ -145,7 +159,11 @@ func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupReq
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.UpdateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a group by ID
@@ -159,7 +177,11 @@ func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupReq
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.DeleteTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // AddUsers adds users to a group
@@ -173,7 +195,11 @@ func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGr
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.AddUsersToTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AddUsersToTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, AddUsersToTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // RemoveUsers removes users from a group
@@ -187,7 +213,11 @@ func (c GroupsClient) RemoveUsers(ctx context.Context, req *groups.RemoveUsersFr
 	defer conn.Close()
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
-	return client.RemoveUsersFromTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.RemoveUsersFromTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, RemoveUsersFromTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewGroupsClient creates a new GroupsClient

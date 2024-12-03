@@ -60,6 +60,8 @@ pub use cx_api::proto::com::coralogix::permissions::v1::{
     },
 };
 
+const AAA_FEATURE_GROUP_ID: &str = "aaa";
+
 /// GroupsClient is a client for the groups service.
 pub struct GroupsClient {
     service_client: Mutex<TeamPermissionsMgmtServiceClient<Channel>>,
@@ -130,6 +132,7 @@ impl GroupsClient {
                 endpoint:
                     "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/CreateTeamGroup"
                         .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?
             .into_inner())
     }
@@ -155,6 +158,7 @@ impl GroupsClient {
                 status,
                 endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/GetTeamGroup"
                     .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?
             .into_inner())
     }
@@ -180,6 +184,7 @@ impl GroupsClient {
                 status,
                 endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/GetTeamGroups"
                     .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?
             .into_inner())
     }
@@ -207,6 +212,7 @@ impl GroupsClient {
                 endpoint:
                     "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/AddUsersToTeamGroup"
                         .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?;
         Ok(())
     }
@@ -257,6 +263,7 @@ impl GroupsClient {
                 endpoint:
                     "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/UpdateTeamGroup"
                         .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?
             .into_inner())
     }
@@ -281,7 +288,8 @@ impl GroupsClient {
             .await
             .map_err(|status| SdkApiError{
                 status,
-                endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/RemoveUsersFromTeamGroup".into() 
+                endpoint: "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/RemoveUsersFromTeamGroup".into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?;
         Ok(())
     }
@@ -307,6 +315,7 @@ impl GroupsClient {
                 endpoint:
                     "/com.coralogix.permissions.v1.TeamPermissionsMgmtService/DeleteTeamGroup"
                         .into(),
+                feature_group: AAA_FEATURE_GROUP_ID.into(),
             })?;
         Ok(())
     }

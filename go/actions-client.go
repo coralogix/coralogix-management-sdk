@@ -41,6 +41,8 @@ type Action = actions.Action
 // SourceType is a type of source for an action.
 type SourceType = actions.SourceType
 
+const actionsFeatureGroupID = "actions"
+
 // SourceType values
 const (
 	SourceTypeUnspecified = actions.SourceType_SOURCE_TYPE_UNSPECIFIED
@@ -75,7 +77,11 @@ func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*a
 	defer conn.Close()
 	client := actions.NewActionsServiceClient(conn)
 
-	return client.CreateAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateActionRPC, actionsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets an action.
@@ -89,7 +95,11 @@ func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions
 	defer conn.Close()
 	client := actions.NewActionsServiceClient(conn)
 
-	return client.GetAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetActionRPC, actionsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Replace replaces an action.
@@ -103,7 +113,11 @@ func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (
 	defer conn.Close()
 	client := actions.NewActionsServiceClient(conn)
 
-	return client.ReplaceAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ReplaceActionRPC, actionsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes an action.
@@ -117,7 +131,11 @@ func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*a
 	defer conn.Close()
 	client := actions.NewActionsServiceClient(conn)
 
-	return client.DeleteAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteAction(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteActionRPC, actionsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Order sets the order of actions.
@@ -131,7 +149,11 @@ func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsReque
 	defer conn.Close()
 	client := actions.NewActionsServiceClient(conn)
 
-	return client.OrderActions(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.OrderActions(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, OrderActionsRPC, actionsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewActionsClient Creates a new actions client.

@@ -54,6 +54,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const SCOPES_FEATURE_GROUP_ID: &str = "aaa";
+
 /// The Scopes Service client.
 /// Read more at <https://coralogix.com/docs/scopes/>
 pub struct ScopesClient {
@@ -110,6 +112,7 @@ impl ScopesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.scopes.v1.ScopesService/CreateScope".to_string(),
+                    feature_group: SCOPES_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -150,6 +153,7 @@ impl ScopesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.scopes.v1.ScopesService/UpdateScope".to_string(),
+                    feature_group: SCOPES_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -173,6 +177,7 @@ impl ScopesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.scopes.v1.ScopesService/DeleteScope".to_string(),
+                    feature_group: SCOPES_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -197,6 +202,7 @@ impl ScopesClient {
                     status,
                     endpoint: "/com.coralogixapis.scopes.v1.ScopesService/GetTeamScopesByIds"
                         .to_string(),
+                    feature_group: SCOPES_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -218,6 +224,7 @@ impl ScopesClient {
                     status,
                     endpoint: "/com.coralogixapis.scopes.v1.ScopesService/GetTeamScopes"
                         .to_string(),
+                    feature_group: SCOPES_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())

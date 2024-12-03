@@ -44,6 +44,8 @@ type MoveQuotaRequest = teams.MoveQuotaRequest
 // TeamID identifies a team.
 type TeamID = teams.TeamId
 
+const teamsFeatureGroupID = "aaa"
+
 // RPC names.
 const (
 	CreateTeamInOrgRPC = teams.TeamService_CreateTeamInOrg_FullMethodName
@@ -72,7 +74,11 @@ func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.CreateTeamInOrg(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateTeamInOrg(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateTeamInOrgRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates a team.
@@ -86,7 +92,11 @@ func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.UpdateTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateTeamRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a team.
@@ -100,7 +110,11 @@ func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTe
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.GetTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a team.
@@ -114,7 +128,11 @@ func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.DeleteTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteTeam(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteTeamRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // SetDailyQuota sets the daily quota for a team.
@@ -128,7 +146,11 @@ func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaReques
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.SetDailyQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetDailyQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SetDailyQuotaRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetQuota gets the quota for a team.
@@ -142,7 +164,11 @@ func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*t
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.GetTeamQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTeamQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamQuotaRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // MoveQuota moves the quota from one team to another.
@@ -156,7 +182,11 @@ func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*tea
 	defer conn.Close()
 	client := teams.NewTeamServiceClient(conn)
 
-	return client.MoveQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.MoveQuota(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, MoveQuotaRPC, teamsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewTeamsClient creates a new teams client.

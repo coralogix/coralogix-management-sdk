@@ -47,6 +47,8 @@ var EntityTypeValueLookup = scopes.EntityType_value
 // EntityTypeNameLookup is an entity type name lookup.
 var EntityTypeNameLookup = scopes.EntityType_name
 
+const scopesFeatureGroupID = "aaa"
+
 // EntityType is an entity type.
 type EntityType = scopes.EntityType
 
@@ -82,7 +84,11 @@ func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*sco
 	defer conn.Close()
 	client := scopes.NewScopesServiceClient(conn)
 
-	return client.CreateScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateScopeRPC, scopesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a scope by its ID
@@ -96,7 +102,11 @@ func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIDsRequest) (
 	defer conn.Close()
 	client := scopes.NewScopesServiceClient(conn)
 
-	return client.GetTeamScopesByIds(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTeamScopesByIds(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamScopesByIDsRPC, scopesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List lists all scopes for the current team
@@ -110,7 +120,11 @@ func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*sco
 	defer conn.Close()
 	client := scopes.NewScopesServiceClient(conn)
 
-	return client.GetTeamScopes(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTeamScopes(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTeamScopesRPC, scopesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates a scope
@@ -124,7 +138,11 @@ func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*sco
 	defer conn.Close()
 	client := scopes.NewScopesServiceClient(conn)
 
-	return client.UpdateScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateScopeRPC, scopesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a scope
@@ -138,7 +156,11 @@ func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*sco
 	defer conn.Close()
 	client := scopes.NewScopesServiceClient(conn)
 
-	return client.DeleteScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteScope(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteScopeRPC, scopesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewScopesClient creates a new ScopesClient

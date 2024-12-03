@@ -1099,6 +1099,8 @@ type DashboardTimeFrame = dashboards.TimeFrame
 // DashboardOrderingField is a type for dashboard charts.
 type DashboardOrderingField = dashboards.OrderingField
 
+const dashboardsFeatureGroupID = "dashboards"
+
 // Create Creates a new dashboard.
 func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
@@ -1110,7 +1112,11 @@ func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardReques
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.CreateDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateDashboardRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a dashboard.
@@ -1124,7 +1130,11 @@ func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*d
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetDashboardRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List lists all dashboards.
@@ -1138,7 +1148,11 @@ func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCat
 	defer conn.Close()
 	client := dashboards.NewDashboardCatalogServiceClient(conn)
 
-	return client.GetDashboardCatalog(callProperties.Ctx, &dashboards.GetDashboardCatalogRequest{}, callProperties.CallOptions...)
+	response, err := client.GetDashboardCatalog(callProperties.Ctx, &dashboards.GetDashboardCatalogRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, dashboards.DashboardCatalogService_GetDashboardCatalog_FullMethodName, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Replace replaces a dashboard.
@@ -1166,7 +1180,11 @@ func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardReques
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.DeleteDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteDashboardRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Pin pins a dashboard.
@@ -1180,7 +1198,11 @@ func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*d
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.PinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.PinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PinDashboardRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Unpin unpins a dashboard.
@@ -1194,7 +1216,11 @@ func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest)
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.UnpinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UnpinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UnpinDashboardRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // AssignToFolder assigns a dashboard to a folder.
@@ -1208,7 +1234,11 @@ func (d DashboardsClient) AssignToFolder(ctx context.Context, req *dashboards.As
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	return client.AssignDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.AssignDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, AssignDashboardFolderRPC, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewDashboardsClient creates a new DashboardsClient.

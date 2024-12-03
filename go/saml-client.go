@@ -50,6 +50,8 @@ type GetSamlConfigurationRequest = saml.GetConfigurationRequest
 // GetSamlConfigurationResponse is the response for GetConfiguration.
 type GetSamlConfigurationResponse = saml.GetConfigurationResponse
 
+const samlFeatureGroupID = "aaa"
+
 // SamlClient is a client for the Coralogix SAML API.
 type SamlClient struct {
 	callPropertiesCreator *CallPropertiesCreator
@@ -66,7 +68,11 @@ func (s SamlClient) GetSPParameters(ctx context.Context, req *saml.GetSPParamete
 	defer conn.Close()
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
-	return client.GetSPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetSPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_GetSPParameters_FullMethodName, samlFeatureGroupID)
+	}
+	return response, nil
 }
 
 // SetIDPParameters sets the SAML identity provider parameters for a given team.
@@ -80,7 +86,11 @@ func (s SamlClient) SetIDPParameters(cxt context.Context, req *saml.SetIDPParame
 	defer conn.Close()
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
-	return client.SetIDPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetIDPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_SetIDPParameters_FullMethodName, samlFeatureGroupID)
+	}
+	return response, nil
 }
 
 // SetActive sets the SAML configuration active state for a given team.
@@ -94,7 +104,11 @@ func (s SamlClient) SetActive(ctx context.Context, req *saml.SetActiveRequest) (
 	defer conn.Close()
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
-	return client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_SetActive_FullMethodName, samlFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetConfiguration returns the SAML configuration for a given team.
@@ -108,7 +122,11 @@ func (s SamlClient) GetConfiguration(ctx context.Context, req *saml.GetConfigura
 	defer conn.Close()
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
-	return client.GetConfiguration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetConfiguration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_GetConfiguration_FullMethodName, samlFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewSamlClient creates a new SAML client.

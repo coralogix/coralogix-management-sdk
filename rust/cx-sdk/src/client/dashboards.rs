@@ -59,6 +59,8 @@ use tonic::{
     },
 };
 
+const DASHBOARDS_FEATURE_GROUP_ID: &str = "dashboards";
+
 use crate::CoralogixRegion;
 
 /// The Dashboards API client.
@@ -115,6 +117,7 @@ impl DashboardsClient {
                         endpoint:
                             "/com.coralogixapis.dashboards.v1.DashboardsService/CreateDashboard"
                                 .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -145,6 +148,7 @@ impl DashboardsClient {
                         endpoint:
                             "/com.coralogixapis.dashboards.v1.DashboardsService/ReplaceDashboard"
                                 .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -173,6 +177,7 @@ impl DashboardsClient {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/GetDashboard"
                             .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -193,6 +198,7 @@ impl DashboardsClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.dashboards.v1.DashboardCatalogService/GetDashboardCatalog".into(),
+                    feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                 },
             ))
     }
@@ -222,6 +228,7 @@ impl DashboardsClient {
                         endpoint:
                             "/com.coralogixapis.dashboards.v1.DashboardsService/DeleteDashboard"
                                 .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -251,6 +258,7 @@ impl DashboardsClient {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/PinDashboard"
                             .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -281,6 +289,7 @@ impl DashboardsClient {
                         endpoint:
                             "/com.coralogixapis.dashboards.v1.DashboardsService/UnpinDashboard"
                                 .into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     })
                 })
         }
@@ -315,6 +324,7 @@ impl DashboardsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.dashboards.v1.DashboardsService/AssignDashboardFolder".into(),
+                        feature_group: DASHBOARDS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }

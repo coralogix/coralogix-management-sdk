@@ -98,6 +98,8 @@ type GetDeployedIntegrationRequest = ext.GetDeployedIntegrationRequest
 // GetDeployedIntegrationResponse contains the response to a GetDeployedIntegrationRequest.
 type GetDeployedIntegrationResponse = ext.GetDeployedIntegrationResponse
 
+const integrationsFeatureGroupID = "integrations"
+
 // RPC method names.
 const (
 	ListManagedIntegrationKeysRPC   = ext.IntegrationService_ListManagedIntegrationKeys_FullMethodName
@@ -131,7 +133,11 @@ func (c IntegrationsClient) Create(ctx context.Context, req *SaveIntegrationRequ
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.SaveIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SaveIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SaveIntegrationRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates an integration
@@ -145,7 +151,11 @@ func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRe
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.UpdateIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.UpdateIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateIntegrationRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetDetails gets all deployed integrations
@@ -159,7 +169,11 @@ func (c IntegrationsClient) GetDetails(ctx context.Context, req *GetIntegrationD
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetIntegrationDetails(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetIntegrationDetails(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetIntegrationDetailsRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get gets a deployed integration
@@ -173,7 +187,11 @@ func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegra
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetDeployedIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetDeployedIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetDeployedIntegrationRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetDefinition gets an integration definition
@@ -187,7 +205,11 @@ func (c IntegrationsClient) GetDefinition(ctx context.Context, req *GetIntegrati
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetIntegrationDefinition(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetIntegrationDefinition(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetIntegrationDefinitionRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetIntegrationStatus gets the status of a integration
@@ -201,7 +223,11 @@ func (c IntegrationsClient) GetIntegrationStatus(ctx context.Context, req *GetMa
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetManagedIntegrationStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetManagedIntegrationStatus(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetManagedIntegrationStatusRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes an integration
@@ -215,7 +241,11 @@ func (c IntegrationsClient) Delete(ctx context.Context, req *DeleteIntegrationRe
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.DeleteIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteIntegrationRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetTemplate gets an integration template
@@ -229,7 +259,11 @@ func (c IntegrationsClient) GetTemplate(ctx context.Context, req *GetTemplateReq
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetTemplate(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetTemplate(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetTemplateRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // GetRumApplicationVersionData gets RUM application version data
@@ -243,7 +277,11 @@ func (c IntegrationsClient) GetRumApplicationVersionData(ctx context.Context, re
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.GetRumApplicationVersionData(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetRumApplicationVersionData(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetRumApplicationVersionDataRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // SyncRumData syncs RUM data
@@ -257,7 +295,11 @@ func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataReq
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.SyncRumData(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.SyncRumData(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, SyncRumDataRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Test tests an integration
@@ -271,7 +313,11 @@ func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationReques
 	defer conn.Close()
 	client := ext.NewIntegrationServiceClient(conn)
 
-	return client.TestIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.TestIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestIntegrationRPC, integrationsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewIntegrationsClient creates a new client.

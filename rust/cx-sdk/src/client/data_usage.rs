@@ -68,6 +68,8 @@ pub use crate::com::coralogix::enrichment::v1::{
     enrichment_type::Type,
 };
 
+const DATA_PLANS_FEATURE_GROUP_ID: &str = "dataplans";
+
 /// A client for the Data Usage API.
 /// Read more at <https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/>
 pub struct DataUsageClient {
@@ -124,6 +126,7 @@ impl DataUsageClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/GetDataUsage".into(),
+                    feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -157,6 +160,7 @@ impl DataUsageClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/GetSpansCount".into(),
+                    feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -191,6 +195,7 @@ impl DataUsageClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/GetLogsCount".into(),
+                    feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -220,6 +225,7 @@ impl DataUsageClient {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/UpdateDataUsageMetricsExportStatus"
                         .into(),
+                        feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())
@@ -243,6 +249,7 @@ impl DataUsageClient {
                     status,
                     endpoint: "/com.coralogix.datausage.v2.DataUsageService/GetDataUsageMetricsExportStatus"
                         .into(),
+                        feature_group: DATA_PLANS_FEATURE_GROUP_ID.into(),
                 })
             })?
             .into_inner())

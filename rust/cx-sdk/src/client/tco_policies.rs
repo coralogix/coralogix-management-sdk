@@ -68,6 +68,8 @@ fn convert_source_types(a: SourceTypeRules) -> update_policy_request::SourceType
 
 use crate::CoralogixRegion;
 
+const TCO_FEATURE_GROUP_ID: &str = "tco";
+
 /// The TCO client.
 /// Read more at <https://coralogix.com/docs/tco-tracing-policy-grpc-api/>
 pub struct TcoPoliciesClient {
@@ -135,6 +137,7 @@ impl TcoPoliciesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.quota.v1.PoliciesService/CreatePolicy".into(),
+                    feature_group: TCO_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -187,6 +190,7 @@ impl TcoPoliciesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.quota.v1.PoliciesService/UpdatePolicy".into(),
+                    feature_group: TCO_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -208,6 +212,7 @@ impl TcoPoliciesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.quota.v1.PoliciesService/DeletePolicy".into(),
+                    feature_group: TCO_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -230,6 +235,7 @@ impl TcoPoliciesClient {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.quota.v1.PoliciesService/GetPolicy".into(),
+                    feature_group: TCO_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -263,6 +269,7 @@ impl TcoPoliciesClient {
                     status,
                     endpoint: "/com.coralogixapis.quota.v1.PoliciesService/GetCompanyPolicies"
                         .into(),
+                    feature_group: TCO_FEATURE_GROUP_ID.into(),
                 })
             })
     }

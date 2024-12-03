@@ -105,6 +105,8 @@ use crate::{
     util::make_request_with_metadata,
 };
 
+const NOTIFICATIONS_FEATURE_GROUP_ID: &str = "notifications";
+
 /// Parameters for testing a preset configuration.
 ///
 /// This struct groups the parameters required for the `test_preset_config` function.
@@ -170,6 +172,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/GetConnector".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -205,6 +208,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/ListConnectors".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -231,6 +235,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/CreateConnector".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -260,6 +265,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/ReplaceConnector".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -284,6 +290,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/DeleteConnector".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -311,6 +318,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/BatchGetConnectors".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -331,6 +339,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.connectors.v1.ConnectorsService/GetConnectorTypeSummaries".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -357,6 +366,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/CreateCustomPreset".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -386,6 +396,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/ReplaceCustomPreset".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -413,6 +424,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/DeleteCustomPreset".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -440,6 +452,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/SetCustomPresetAsDefault".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -462,6 +475,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetPreset".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -497,6 +511,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/ListPresetSummaries".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -524,6 +539,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/BatchGetPresets".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -556,6 +572,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetDefaultPresetSummary".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -588,6 +605,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/GetSystemDefaultPresetSummary".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -626,6 +644,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestConnectorConfig".into(),
+                                                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -658,6 +677,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestExistingConnector".into(),
+                                                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -693,6 +713,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -728,6 +749,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }

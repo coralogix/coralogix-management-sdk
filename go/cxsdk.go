@@ -21,6 +21,30 @@ import (
 	"strings"
 )
 
+// SdkAPIError is an error that occurs in the Coralogix SDK.
+type SdkAPIError struct {
+	apiError       error
+	endpoint       string
+	featureGroupID string
+}
+
+// NewSdkAPIError creates a new SdkAPIError.
+func NewSdkAPIError(
+	apiError error,
+	endpoint string,
+	featureGroupID string,
+) *SdkAPIError {
+	return &SdkAPIError{
+		apiError:       apiError,
+		endpoint:       endpoint,
+		featureGroupID: featureGroupID,
+	}
+}
+
+func (e *SdkAPIError) Error() string {
+	return fmt.Sprintf("SDK API error from %s for feature group %s: %s", e.endpoint, e.featureGroupID, e.apiError)
+}
+
 // ClientSet is a set of clients for the Coralogix SDK.
 type ClientSet struct {
 	ruleGroups          *RuleGroupsClient

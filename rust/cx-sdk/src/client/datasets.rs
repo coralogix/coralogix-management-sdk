@@ -56,6 +56,8 @@ use crate::CoralogixRegion;
 
 pub use crate::com::coralogix::enrichment::v1::CustomEnrichment;
 
+const DATASETS_FEATURE_GROUP_ID: &str = "logs";
+
 /// The Custom Enrichments API client.
 /// Read more at <https://coralogix.com/docs/custom-enrichment-api/>
 pub struct DatasetClient {
@@ -116,6 +118,7 @@ impl DatasetClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/CreateCustomEnrichment".into(),
+                        feature_group: DATASETS_FEATURE_GROUP_ID.into(),
                     }),
                 )?
                 .into_inner())
@@ -163,6 +166,7 @@ impl DatasetClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/UpdateCustomEnrichment".into(),
+                        feature_group: DATASETS_FEATURE_GROUP_ID.into(),
                     }),
                 )?
                 .into_inner())
@@ -192,6 +196,7 @@ impl DatasetClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/DeleteCustomEnrichment".into(),
+                    feature_group: DATASETS_FEATURE_GROUP_ID.into(),
                 }),
             )?
             .into_inner())
@@ -215,6 +220,7 @@ impl DatasetClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/GetCustomEnrichment".into(),
+                    feature_group: DATASETS_FEATURE_GROUP_ID.into(),
                 }),
             )?
             .into_inner())
@@ -238,6 +244,7 @@ impl DatasetClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.enrichment.v1.CustomEnrichmentService/GetCustomEnrichments".into(),
+                    feature_group: DATASETS_FEATURE_GROUP_ID.into(),
                 }),
             )?
             .into_inner())

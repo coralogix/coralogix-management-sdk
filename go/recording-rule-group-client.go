@@ -53,6 +53,8 @@ type OutRuleGroup = recordingRuleGroups.OutRuleGroup
 // OutRule is a recording rule.
 type OutRule = recordingRuleGroups.OutRule
 
+const recordingRulesFeatureGroupID = "recording-rules"
+
 // RPC Name values
 const (
 	CreateRuleGroupSetRPC = recordingRuleGroups.RuleGroupSets_Create_FullMethodName
@@ -78,7 +80,11 @@ func (r RecordingRuleGroupSetsClient) Create(ctx context.Context, req *CreateRul
 	defer conn.Close()
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
-	return client.Create(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Create(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, CreateRuleGroupSetRPC, recordingRulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Update updates an existing recording rule group set.
@@ -92,7 +98,11 @@ func (r RecordingRuleGroupSetsClient) Update(ctx context.Context, req *UpdateRul
 	defer conn.Close()
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
-	return client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, UpdateRuleGroupSetRPC, recordingRulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a recording rule group set.
@@ -106,7 +116,11 @@ func (r RecordingRuleGroupSetsClient) Delete(ctx context.Context, req *DeleteRul
 	defer conn.Close()
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
-	return client.Delete(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Delete(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteRuleGroupSetRPC, recordingRulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Get retrieves a recording rule group set by ID.
@@ -120,7 +134,11 @@ func (r RecordingRuleGroupSetsClient) Get(ctx context.Context, req *GetRuleGroup
 	defer conn.Close()
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
-	return client.Fetch(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.Fetch(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetRuleGroupSetRPC, recordingRulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List retrieves all recording rule group sets.
@@ -134,7 +152,11 @@ func (r RecordingRuleGroupSetsClient) List(ctx context.Context) (*ListRuleGroupS
 	defer conn.Close()
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
-	return client.List(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	response, err := client.List(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, ListRuleGroupSetRPC, recordingRulesFeatureGroupID)
+	}
+	return response, nil
 }
 
 // NewRecordingRuleGroupSetsClient creates a new rule groups client.

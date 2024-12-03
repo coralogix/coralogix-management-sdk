@@ -45,6 +45,8 @@ use tonic::{
 pub use cx_api::proto::com::coralogixapis::dataprime::v1::Metadata;
 pub use cx_api::proto::com::coralogixapis::dataprime::v1::query_response::Message;
 
+const DATAPRIME_FEATURE_GROUP_ID: &str = "dataprime";
+
 /// The Dataprime Query API client.
 /// Read more at [https://coralogix.com/docs/dataprime-query-language/]()
 pub struct DataprimeQueryClient {
@@ -97,6 +99,7 @@ impl DataprimeQueryClient {
                         status,
                         endpoint: "/com.coralogixapis.dataprime.v1.DataprimeQueryService/Query"
                             .into(),
+                        feature_group: DATAPRIME_FEATURE_GROUP_ID.into(),
                     })
                 })?
                 .into_inner())

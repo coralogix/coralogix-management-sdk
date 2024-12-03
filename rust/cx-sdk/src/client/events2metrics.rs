@@ -61,6 +61,8 @@ pub use cx_api::proto::com::coralogixapis::events2metrics::v2::{
 
 use crate::CoralogixRegion;
 
+const EVENTS2METRICS_FEATURE_GROUP_ID: &str = "events_2_metrics";
+
 /// The Events2Metrics API client.
 /// Read more at <https://coralogix.com/docs/events2metrics/>
 pub struct Events2MetricsClient {
@@ -102,6 +104,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/CreateE2M"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -124,6 +127,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ReplaceE2M"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -146,6 +150,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/DeleteE2M"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -168,6 +173,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/GetE2M"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -190,6 +196,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/GetLimits"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -212,6 +219,7 @@ impl Events2MetricsClient {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ListE2M"
                     .to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }
@@ -241,6 +249,7 @@ impl Events2MetricsClient {
             .map_err(|status| SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.events2metrics.v2.Events2MetricService/ListLabelsCardinality".to_string(),
+                feature_group: EVENTS2METRICS_FEATURE_GROUP_ID.to_string(),
             })?
             .into_inner())
     }

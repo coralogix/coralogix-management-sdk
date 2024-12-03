@@ -62,6 +62,8 @@ pub use cx_api::proto::com::coralogix::metrics::metrics_configurator::{
     validate_bucket_request::StorageConfig as StorageConfigValidation,
 };
 
+const ARCHIVE_METRICS_FEATURE_GROUP_ID: &str = "metrics";
+
 /// The metrics archive API client.
 /// Read more at [https://coralogix.com/docs/archive-s3-bucket-forever/]()
 pub struct MetricsArchiveClient {
@@ -114,6 +116,7 @@ impl MetricsArchiveClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/ConfigureTenant".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -143,6 +146,7 @@ impl MetricsArchiveClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/Update".into(),
+                    feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                 },
             ))
         }
@@ -171,6 +175,7 @@ impl MetricsArchiveClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/ValidateBucket".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -190,6 +195,7 @@ impl MetricsArchiveClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/GetTenantConfig".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -209,6 +215,7 @@ impl MetricsArchiveClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/EnableArchive".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -228,6 +235,7 @@ impl MetricsArchiveClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorPublicService/DisableArchive".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -275,6 +283,7 @@ impl MetricsArchiveInternalClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/GetTenantConfig".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -294,6 +303,7 @@ impl MetricsArchiveInternalClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/ListTenantConfigs".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -313,6 +323,7 @@ impl MetricsArchiveInternalClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/ListHotStoreConfigs".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -336,6 +347,7 @@ impl MetricsArchiveInternalClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/MigrateTenant".into(),
+                        feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                     },
                 ))
         }
@@ -366,6 +378,7 @@ impl MetricsArchiveInternalClient {
                 |status| SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogixapis.metrics.metrics_configurator.MetricsConfiguratorService/Update".into(),
+                    feature_group: ARCHIVE_METRICS_FEATURE_GROUP_ID.into(),
                 },
             ))
         }

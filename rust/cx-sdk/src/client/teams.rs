@@ -57,6 +57,8 @@ use tonic::{
 
 use crate::CoralogixRegion;
 
+const TEAMS_FEATURE_GROUP_ID: &str = "aaa";
+
 /// The Team API client.
 /// Read more at <https://coralogix.com/docs/user-team-management/>
 pub struct TeamsClient {
@@ -112,6 +114,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/CreateTeamInOrg"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -147,6 +150,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/UpdateTeam"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -173,6 +177,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/DeleteTeam"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -200,6 +205,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/GetTeam"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -227,6 +233,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/GetTeamQuota"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -260,6 +267,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/SetDailyQuota"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -298,6 +306,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/MoveQuota"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
@@ -320,6 +329,7 @@ impl TeamsClient {
                     status,
                     endpoint: "/com.coralogixapis.aaa.organisations.v2.TeamService/ListTeams"
                         .to_string(),
+                    feature_group: TEAMS_FEATURE_GROUP_ID.into(),
                 })
             })
     }
