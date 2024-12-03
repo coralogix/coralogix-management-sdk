@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
@@ -27,6 +28,8 @@ message Hexagon {
   google.protobuf.StringValue custom_unit = 10;
   google.protobuf.Int32Value decimal = 11;
   common.ThresholdType threshold_type = 12;
+  common.Legend legend = 13;
+  common.LegendBy legend_by = 14;
 
   message Query {
     oneof value {

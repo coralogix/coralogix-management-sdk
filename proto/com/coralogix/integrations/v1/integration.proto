@@ -38,6 +38,38 @@ message IntegrationDoc {
   google.protobuf.StringValue link = 2;
 }
 
+message IntegrationType {
+  message Managed {
+    enum Variant {
+      DEFAULT = 0;
+      GCP = 1;
+      OAUTH = 2;
+      CUSTOM = 3;
+    }
+
+    Variant variant = 2;
+  }
+  message Untracked {}
+  message Cloudformation {}
+  message AzureArm {}
+  // Handling this as a separate type because it's managed only by extensions-api.
+  // At some point, as soon as it's moved to integrations-service,
+  // it's expected to be merged under contextual data integrations.
+  message PushBasedContextualData {}
+  message ContextualData {}
+  message GenericWebhook {}
+
+  oneof integration_type {
+    Managed managed = 1;
+    Untracked untracked = 2;
+    Cloudformation cloudformation = 3;
+    AzureArm arm = 4;
+    PushBasedContextualData push_based_contextual_data = 5;
+    ContextualData contextual_data = 6;
+    GenericWebhook generic_webhook = 7;
+  }
+}
+
 message Integration {
   google.protobuf.StringValue id = 1; // short_name in the integrations.integration_definitions
   google.protobuf.StringValue name = 2;
@@ -46,6 +78,8 @@ message Integration {
   google.protobuf.StringValue dark_icon = 5;
   repeated google.protobuf.StringValue tags = 7;
   repeated google.protobuf.StringValue versions = 8;
+  IntegrationType integration_type = 9;
+  google.protobuf.StringValue feature_flag = 10;
 }
 
 message RevisionRef {
@@ -98,7 +132,9 @@ message IntegrationDetails {
 
 message IntegrationDefinition {
   google.protobuf.StringValue key = 1; // short_name in the integrations.integration_definitions
+  IntegrationType integration_type = 2;
   repeated IntegrationRevision revisions = 3;
+  google.protobuf.StringValue feature_flag = 4;
 }
 
 message IntegrationRevision {
@@ -108,8 +144,7 @@ message IntegrationRevision {
     map<string, string> post_installation_steps = 3;
   }
 
-  message ManagedService {
-  }
+  message ManagedService {}
 
   message HelmChart {
     optional google.protobuf.StringValue template = 1;
@@ -140,6 +175,7 @@ message IntegrationRevision {
     JSON = 6;
     NUMBER = 7;
     SENSITIVE_DATA = 8;
+    JSON_OBJECT_ARRAY = 9;
   }
 
   message ListTextValue {
@@ -213,6 +249,7 @@ message IntegrationRevision {
     optional google.protobuf.StringValue group_id = 11;
     optional google.protobuf.StringValue upgrade_notice = 12;
     optional google.protobuf.StringValue allowed_pattern = 13;
+    optional google.protobuf.StringValue documentation_reference = 14;
   }
 
   message CommandInformation {
@@ -258,6 +295,7 @@ message IntegrationRevision {
   }
   optional string upgrade_instructions_md = 5;
   bool revision_deployment_supported = 6;
+  google.protobuf.StringValue feature_flag = 7;
 }
 
 message Parameter {

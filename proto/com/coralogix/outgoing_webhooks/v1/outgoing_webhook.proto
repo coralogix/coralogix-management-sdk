@@ -97,10 +97,17 @@ message AwsEventBridgeConfig {
 }
 
 message IbmEventNotificationsConfig {
+
+  enum EndpointType {
+    ENDPOINT_TYPE_DEFAULT_OR_PUBLIC = 0;
+    ENDPOINT_TYPE_PRIVATE = 1;
+  }
+
   google.protobuf.StringValue event_notifications_instance_id = 1;
   google.protobuf.StringValue region_id = 2;
   google.protobuf.StringValue source_id = 3;
   google.protobuf.StringValue source_name = 4;
+  EndpointType endpoint_type = 5;
 }
 
 message OutgoingWebhook {

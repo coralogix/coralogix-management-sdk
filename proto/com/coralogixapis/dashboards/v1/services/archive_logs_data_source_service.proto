@@ -64,7 +64,7 @@ message SearchArchiveLogsEventsRequest {
   v1.common.Pagination pagination = 6;
   google.protobuf.StringValue request_params_hash = 7 [deprecated = true];
   common.SerializedDataprimeQuery query = 8;
-  common.DataprimeQuery query_raw = 9 [deprecated = true];
+  common.DataprimeQuery query_raw = 9;
 }
 
 message SearchArchiveLogsEventsResponse {
@@ -78,7 +78,7 @@ message SearchArchiveLogsEventsCountRequest {
   common.TimeFrame time_frame = 2;
   google.protobuf.StringValue request_params_hash = 3 [deprecated = true];
   common.SerializedDataprimeQuery query = 4;
-  common.DataprimeQuery query_raw = 5 [deprecated = true];
+  common.DataprimeQuery query_raw = 5;
 }
 
 message SearchArchiveLogsEventsCountResponse {

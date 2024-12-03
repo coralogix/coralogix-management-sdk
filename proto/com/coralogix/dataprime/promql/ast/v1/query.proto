@@ -108,11 +108,14 @@ message VectorExpression {
     Aggregation aggregation = 4;
     Selector selector = 5;
     VectorOperation grouped = 6;
+    NumericConstants numeric_constants = 7;
   }
 
   message FunctionCall {
     string name = 1;
     repeated VectorOperation parameters = 2;
+    optional Duration offset = 3; // MetricsQL
+    optional Selector.Modifier at_modifier = 4; // MetricsQL
   }
 
   message Aggregation {
@@ -120,10 +123,12 @@ message VectorExpression {
     optional Modifier front_modifier = 2;
     repeated VectorOperation parameters = 3;
     optional Modifier back_modifier = 4;
+    optional Duration offset = 5; // MetricsQL
+    optional Selector.Modifier at_modifier = 6; // MetricsQL
 
     message Modifier {
       Kind kind = 1;
-      repeated string labels = 2; 
+      repeated string labels = 2;
 
       enum Kind {
         KIND_UNSPECIFIED = 0;
@@ -136,9 +141,14 @@ message VectorExpression {
   message Selector {
     optional google.protobuf.StringValue metric = 1;
     repeated LabelMatcher label_matchers = 2;
+    repeated LabelMatcherOrClause label_matchers_or = 6; // MetricsQL allows this https://docs.victoriametrics.com/keyconcepts/#filtering
     optional Duration time_range = 3;
     optional Duration offset = 4;
     optional Modifier at_modifier = 5;
+
+    message LabelMatcherOrClause {
+      repeated LabelMatcher matchers = 1;
+    }
 
     message LabelMatcher {
       string name = 1;
@@ -167,6 +177,10 @@ message VectorExpression {
       }
     }
   }
+
+  message NumericConstants {
+    repeated Num constants = 1;
+  } // MetricsQL allows this, e.g. `status_code == (300, 301, 304)`
 }
 
 message Num {

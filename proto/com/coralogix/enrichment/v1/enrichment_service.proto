@@ -3,7 +3,6 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/enrichment/v1/enrichment.proto";
 import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
-import "com/coralogix/enrichment/v1/audit_log.proto";
 import "com/coralogix/enrichment/v1/enrichment_type.proto";
 import "com/coralogix/enrichment/v1/company_enrichment_settings.proto";
 
@@ -56,22 +55,15 @@ message GetCompanyEnrichmentSettingsResponse {
 }
 
 service EnrichmentService {
-  rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse) {
-    option (audit_log_description).description = "Get enrichments";
-  };
-  rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse) {
-    option (audit_log_description).description = "Add enrichments";
-  };
-  rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse) {
-    option (audit_log_description).description = "Delete enrichments";
-  };
-  rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse) {
-    option (audit_log_description).description = "Get enrichments limit";
-  };
-  rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
-    option (audit_log_description).description = "Atomic overwrite enrichments";
-  };
-  rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
-    option (audit_log_description).description = "Get company enrichment settings";
-  };
+  rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse);
+
+  rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse);
+
+  rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse);
+
+  rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse);
+
+  rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse);
+
+  rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse);
 }

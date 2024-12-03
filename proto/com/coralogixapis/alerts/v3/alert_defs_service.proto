@@ -26,6 +26,13 @@ service AlertDefsService {
     };
   }
 
+  rpc GetAlertDefByVersionId(GetAlertDefByVersionIdRequest) returns (GetAlertDefByVersionIdResponse) {
+    option (audit_log_description).description = "get alert definition by alert version id";
+    option (google.api.http) = {
+      get: "/v3/alert-defs/alertVersionId/{alert_version_id}"
+    };
+  }
+
   rpc CreateAlertDef(CreateAlertDefRequest) returns (CreateAlertDefResponse){
     option (audit_log_description).description = "create alert definition";
     option (google.api.http) = {
@@ -126,7 +133,15 @@ message GetAlertDefRequest {
   google.protobuf.StringValue id = 1; // The Alert's non changing ID
 }
 
+message GetAlertDefByVersionIdRequest {
+  google.protobuf.StringValue alert_version_id = 1; // The Alert's version ID
+}
+
 message GetAlertDefResponse {
+  AlertDef alert_def = 1;
+}
+
+message GetAlertDefByVersionIdResponse {
   AlertDef alert_def = 1;
 }
 
