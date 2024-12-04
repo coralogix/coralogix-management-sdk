@@ -348,8 +348,8 @@ const (
 const (
 	LogsTimeWindowValue5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
 	LogsTimeWindowValue10Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
-	LogsTimeWindowValue20Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_20
 	LogsTimeWindowValue15Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
+	LogsTimeWindowValue20Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_20
 	LogsTimeWindowValue30Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
 	LogsTimeWindowValue1Hour                 = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
 	LogsTimeWindowValue2Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
@@ -462,6 +462,7 @@ const (
 	LogsTimeWindow5MinutesOrUnspecified = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
 	LogsTimeWindow10Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_10
 	LogsTimeWindow15Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_15
+	LogsTimeWindow20Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_20
 	LogsTimeWindow30Minutes             = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_MINUTES_30
 	LogsTimeWindow1Hour                 = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOUR_1
 	LogsTimeWindow2Hours                = alerts.LogsTimeWindowValue_LOGS_TIME_WINDOW_VALUE_HOURS_2
@@ -506,6 +507,8 @@ type LogsUniqueValueTimeWindowValue = alerts.LogsUniqueValueTimeWindowValue
 // LogsUniqueValueTimeWindow values.
 const (
 	LogsUniqueValueTimeWindowValue1MinuteOrUnspecified = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED
+	LogsUniqueValueTimeWindowValue5Minutes             = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_5
+	LogsUniqueValueTimeWindowValue10Minutes            = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_10
 	LogsUniqueValueTimeWindowValue15Minutes            = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_15
 	LogsUniqueValueTimeWindowValue20Minutes            = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_20
 	LogsUniqueValueTimeWindowValue30Minutes            = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTES_30
@@ -515,6 +518,7 @@ const (
 	LogsUniqueValueTimeWindowValue6Hours               = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_6
 	LogsUniqueValueTimeWindowValue12Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12
 	LogsUniqueValueTimeWindowValue24Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_24
+	LogsUniqueValueTimeWindowValue36Hours              = alerts.LogsUniqueValueTimeWindowValue_LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_36
 )
 
 // LogsTimeRelativeRule is a rule for the time relative alert type.
@@ -551,6 +555,7 @@ const (
 	MetricTimeWindowValue5Minutes             = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_5
 	MetricTimeWindowValue10Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_10
 	MetricTimeWindowValue15Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_15
+	MetricTimeWindowValue20Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_20
 	MetricTimeWindowValue30Minutes            = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_MINUTES_30
 	MetricTimeWindowValue1Hour                = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOUR_1
 	MetricTimeWindowValue2Hours               = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_2
@@ -558,6 +563,7 @@ const (
 	MetricTimeWindowValue6Hours               = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_6
 	MetricTimeWindowValue12Hours              = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_12
 	MetricTimeWindowValue24Hours              = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_24
+	MetricTimeWindowValue36Hours              = alerts.MetricTimeWindowValue_METRIC_TIME_WINDOW_VALUE_HOURS_36
 )
 
 // TracingTimeWindowValue values.
@@ -565,6 +571,7 @@ const (
 	TracingTimeWindowValue5MinutesOrUnspecified = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED
 	TracingTimeWindowValue10Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_10
 	TracingTimeWindowValue15Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_15
+	TracingTimeWindowValue20Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_20
 	TracingTimeWindowValue30Minutes             = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_MINUTES_30
 	TracingTimeWindowValue1Hour                 = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOUR_1
 	TracingTimeWindowValue2Hours                = alerts.TracingTimeWindowValue_TRACING_TIME_WINDOW_VALUE_HOURS_2
@@ -581,6 +588,7 @@ const (
 	TracingFilterOperationTypeIncludes        = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_INCLUDES
 	TracingFilterOperationTypeEndsWith        = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_ENDS_WITH
 	TracingFilterOperationTypeStartsWith      = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_STARTS_WITH
+	TracingFilterOperationTypeIsNot           = alerts.TracingFilterOperationType_TRACING_FILTER_OPERATION_TYPE_IS_NOT
 )
 
 // TimeframeType is a type for timeframes.
