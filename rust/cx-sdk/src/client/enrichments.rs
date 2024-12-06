@@ -58,6 +58,7 @@ pub use crate::com::coralogix::enrichment::v1::{
     EnrichmentFieldDefinition,
     EnrichmentRequestModel as EnrichmentMapping,
     EnrichmentType,
+    GeoIpType,
     enrichment_type::Type,
 };
 

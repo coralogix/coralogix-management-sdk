@@ -12,4 +12,5 @@ members = [
     "infra-monitoring",
     "recording-rules",
     "dataplans",
+    "enrichments",
 ]
