@@ -78,8 +78,6 @@ message TestPresetConfigRequest {
   string entity_type = 1;
   optional string entity_sub_type = 2;
   string connector_id = 3;
-  string output_schema_id = 4 [deprecated = true];
-  repeated MessageConfigField fields = 5 [deprecated = true];
   string preset_id = 6;
   repeated ConfigOverrides config_overrides = 7;
 }
@@ -122,6 +120,13 @@ message TestTemplateRenderResult {
   }
   message Failure {
     string message = 1;
+    FailureReason reason = 2;
+  }
+
+  enum FailureReason {
+    FAILURE_REASON_UNSPECIFIED = 0;
+    INVALID_TEMPLATE = 1;
+    FIELD_NOT_FOUND = 2;
   }
 
   oneof result {

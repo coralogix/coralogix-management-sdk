@@ -21,6 +21,7 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_c
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+
 /**
  * Represents An Existing or Created Alert Definition
  */

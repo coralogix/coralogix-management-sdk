@@ -123,12 +123,12 @@ message SortModelItem {
 }
 
 message TracingMetadata {
+  reserved 2; // formerly query_text
   enum QuerySyntax {
     QUERY_SYNTAX_LUCENE_UNSPECIFIED = 0;
     QUERY_SYNTAX_DATAPRIME = 1;
   }
   QuerySyntax query_syntax = 1;
-  // Use query_text_base64 instead to avoid CloudFlare false negatives.
-  google.protobuf.StringValue query_text = 2 [deprecated = true];
+  // Encoded as base64 to avoid CloudFlare flagging the query as an SQL injection.
   google.protobuf.StringValue query_text_base64 = 3;
 }

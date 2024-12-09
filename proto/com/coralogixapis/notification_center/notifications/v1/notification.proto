@@ -12,7 +12,7 @@ message NotificationTarget {
   }
 
   message PrivateRouterConfig {
-    string router_id = 1;
+    string router_key = 1;
   }
 
   oneof target {
@@ -54,9 +54,19 @@ message NotificationAttachment {
 }
 
 message Trigger {
-  string activator = 1;
-  string origin = 2;
-  TriggerType type = 3;
+  // client id is a user-defined string identifying the use case (e.g., "alert-notification-sender")
+  string client_id = 1;
+  string cx_service_name = 2;
+  oneof trigger_detail {
+    ManualTrigger manual_trigger = 100;
+    AutomaticTrigger automatic_trigger = 101;
+  }
+
+  message ManualTrigger {
+    string user_email = 1;
+  }
+
+  message AutomaticTrigger {}
 }
 
 enum TriggerType {

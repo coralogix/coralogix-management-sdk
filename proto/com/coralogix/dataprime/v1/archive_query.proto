@@ -105,6 +105,7 @@ message ArchiveQuery {
     STATUS_IN_PROGRESS = 1;
     STATUS_COMPLETED = 2;
     STATUS_FAILED = 3;
+    STATUS_WAITING_FOR_EXECUTION = 4;
   }
 
   google.protobuf.StringValue id = 1;
