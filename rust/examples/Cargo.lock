@@ -399,6 +399,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "enrichments"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "tokio",
+]
+
+[[package]]
 name = "equivalent"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
