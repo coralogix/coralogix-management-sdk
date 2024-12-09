@@ -18,4 +18,5 @@ enum ConnectorType {
   SLACK = 1;
   GENERIC_HTTPS = 2;
   PAGERDUTY = 3;
+  AWS = 4;
 }

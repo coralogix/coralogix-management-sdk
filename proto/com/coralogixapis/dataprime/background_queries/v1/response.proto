@@ -15,6 +15,10 @@ message GetStatusResponse {
   oneof status {
     Running running = 1;
     Terminated terminated = 2;
+    WaitingForExecution waiting_for_execution = 3;
+  }
+
+  message WaitingForExecution {
   }
 
   message Running {
