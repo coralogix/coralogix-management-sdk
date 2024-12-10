@@ -32,6 +32,9 @@ type UpdateDataSetRequest = enrichment.UpdateCustomEnrichmentRequest
 // DeleteDataSetRequest is a request to delete a data set.
 type DeleteDataSetRequest = enrichment.DeleteCustomEnrichmentRequest
 
+// ListDataSetsRequest is a request to list data sets.
+type ListDataSetsRequest = enrichment.GetCustomEnrichmentsRequest
+
 // DataSet is a custom data set (enrichment).
 type DataSet = enrichment.CustomEnrichment
 
@@ -133,7 +136,7 @@ func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*
 }
 
 // List retrieves all data sets.
-func (d DataSetClient) List(ctx context.Context, req *enrichment.GetCustomEnrichmentsRequest) (*enrichment.GetCustomEnrichmentsResponse, error) {
+func (d DataSetClient) List(ctx context.Context, req *ListDataSetsRequest) (*enrichment.GetCustomEnrichmentsResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
