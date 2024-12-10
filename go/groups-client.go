@@ -95,10 +95,10 @@ type GroupsClient struct {
 }
 
 // Create creates a new group
-func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupRequest) (*groups.CreateTeamGroupResponse, error) {
+func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupRequest) (*groups.CreateTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -113,10 +113,10 @@ func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupReq
 }
 
 // Get retrieves a group by ID
-func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) (*groups.GetTeamGroupResponse, error) {
+func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) (*groups.GetTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -131,10 +131,10 @@ func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) 
 }
 
 // List retrieves all groups in the team
-func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest) (*groups.GetTeamGroupsResponse, error) {
+func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest) (*groups.GetTeamGroupsResponse, *SdkAPIError) {
 	callPoperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetTeamGroupsRPC, groupsFeatureGroupID)
 	}
 
 	conn := callPoperties.Connection
@@ -149,10 +149,10 @@ func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest
 }
 
 // Update updates a group
-func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupRequest) (*groups.UpdateTeamGroupResponse, error) {
+func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupRequest) (*groups.UpdateTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -167,10 +167,10 @@ func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupReq
 }
 
 // Delete deletes a group by ID
-func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupRequest) (*groups.DeleteTeamGroupResponse, error) {
+func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupRequest) (*groups.DeleteTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -185,10 +185,10 @@ func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupReq
 }
 
 // AddUsers adds users to a group
-func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGroupRequest) (*groups.AddUsersToTeamGroupResponse, error) {
+func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGroupRequest) (*groups.AddUsersToTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, AddUsersToTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -203,10 +203,10 @@ func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGr
 }
 
 // RemoveUsers removes users from a group
-func (c GroupsClient) RemoveUsers(ctx context.Context, req *groups.RemoveUsersFromTeamGroupRequest) (*groups.RemoveUsersFromTeamGroupResponse, error) {
+func (c GroupsClient) RemoveUsers(ctx context.Context, req *groups.RemoveUsersFromTeamGroupRequest) (*groups.RemoveUsersFromTeamGroupResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RemoveUsersFromTeamGroupRPC, groupsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

@@ -70,10 +70,10 @@ type RecordingRuleGroupSetsClient struct {
 }
 
 // Create creates a new recording rule group set.
-func (r RecordingRuleGroupSetsClient) Create(ctx context.Context, req *CreateRuleGroupSetRequest) (*CreateRuleGroupSetResponse, error) {
+func (r RecordingRuleGroupSetsClient) Create(ctx context.Context, req *CreateRuleGroupSetRequest) (*CreateRuleGroupSetResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateRuleGroupSetRPC, recordingRulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -88,10 +88,10 @@ func (r RecordingRuleGroupSetsClient) Create(ctx context.Context, req *CreateRul
 }
 
 // Update updates an existing recording rule group set.
-func (r RecordingRuleGroupSetsClient) Update(ctx context.Context, req *UpdateRuleGroupSetRequest) (*emptypb.Empty, error) {
+func (r RecordingRuleGroupSetsClient) Update(ctx context.Context, req *UpdateRuleGroupSetRequest) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateRuleGroupSetRPC, recordingRulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -106,10 +106,10 @@ func (r RecordingRuleGroupSetsClient) Update(ctx context.Context, req *UpdateRul
 }
 
 // Delete deletes a recording rule group set.
-func (r RecordingRuleGroupSetsClient) Delete(ctx context.Context, req *DeleteRuleGroupSetRequest) (*emptypb.Empty, error) {
+func (r RecordingRuleGroupSetsClient) Delete(ctx context.Context, req *DeleteRuleGroupSetRequest) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteRuleGroupSetRPC, recordingRulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -124,10 +124,10 @@ func (r RecordingRuleGroupSetsClient) Delete(ctx context.Context, req *DeleteRul
 }
 
 // Get retrieves a recording rule group set by ID.
-func (r RecordingRuleGroupSetsClient) Get(ctx context.Context, req *GetRuleGroupSetRequest) (*GetRuleGroupSetResponse, error) {
+func (r RecordingRuleGroupSetsClient) Get(ctx context.Context, req *GetRuleGroupSetRequest) (*GetRuleGroupSetResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetRuleGroupSetRPC, recordingRulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -142,10 +142,10 @@ func (r RecordingRuleGroupSetsClient) Get(ctx context.Context, req *GetRuleGroup
 }
 
 // List retrieves all recording rule group sets.
-func (r RecordingRuleGroupSetsClient) List(ctx context.Context) (*ListRuleGroupSetResponse, error) {
+func (r RecordingRuleGroupSetsClient) List(ctx context.Context) (*ListRuleGroupSetResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ListRuleGroupSetRPC, recordingRulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

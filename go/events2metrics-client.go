@@ -152,10 +152,10 @@ type Events2MetricsClient struct {
 }
 
 // Create Creates a new metric.
-func (e Events2MetricsClient) Create(ctx context.Context, req *CreateE2MRequest) (*e2m.CreateE2MResponse, error) {
+func (e Events2MetricsClient) Create(ctx context.Context, req *CreateE2MRequest) (*e2m.CreateE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MCreateRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -170,10 +170,10 @@ func (e Events2MetricsClient) Create(ctx context.Context, req *CreateE2MRequest)
 }
 
 // Get gets a metric.
-func (e Events2MetricsClient) Get(ctx context.Context, req *GetE2MRequest) (*e2m.GetE2MResponse, error) {
+func (e Events2MetricsClient) Get(ctx context.Context, req *GetE2MRequest) (*e2m.GetE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MGetRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -188,10 +188,10 @@ func (e Events2MetricsClient) Get(ctx context.Context, req *GetE2MRequest) (*e2m
 }
 
 // Replace replaces a metric.
-func (e Events2MetricsClient) Replace(ctx context.Context, req *ReplaceE2MRequest) (*e2m.ReplaceE2MResponse, error) {
+func (e Events2MetricsClient) Replace(ctx context.Context, req *ReplaceE2MRequest) (*e2m.ReplaceE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MReplaceRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -206,10 +206,10 @@ func (e Events2MetricsClient) Replace(ctx context.Context, req *ReplaceE2MReques
 }
 
 // Delete deletes a metric.
-func (e Events2MetricsClient) Delete(ctx context.Context, req *DeleteE2MRequest) (*e2m.DeleteE2MResponse, error) {
+func (e Events2MetricsClient) Delete(ctx context.Context, req *DeleteE2MRequest) (*e2m.DeleteE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MDeleteRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -224,10 +224,10 @@ func (e Events2MetricsClient) Delete(ctx context.Context, req *DeleteE2MRequest)
 }
 
 // ListLabelsCardinality lists the cardinality of labels for a given metric.
-func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *ListLabelsCardinalityRequest) (*e2m.ListLabelsCardinalityResponse, error) {
+func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *ListLabelsCardinalityRequest) (*e2m.ListLabelsCardinalityResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MListLabelsCardinalityRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -242,10 +242,10 @@ func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *Li
 }
 
 // List lists all metrics
-func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, error) {
+func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MListRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -260,10 +260,10 @@ func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, e
 }
 
 // AtomicBatchExecute executes a batch of atomic operations.
-func (e Events2MetricsClient) AtomicBatchExecute(ctx context.Context, req *AtomicBatchExecuteE2MRequest) (*e2m.AtomicBatchExecuteE2MResponse, error) {
+func (e Events2MetricsClient) AtomicBatchExecute(ctx context.Context, req *AtomicBatchExecuteE2MRequest) (*e2m.AtomicBatchExecuteE2MResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MAtomicBatchExecuteRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -278,10 +278,10 @@ func (e Events2MetricsClient) AtomicBatchExecute(ctx context.Context, req *Atomi
 }
 
 // GetLimits lists all limits.
-func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResponse, error) {
+func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, E2MGetLimtsRPC, events2MetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

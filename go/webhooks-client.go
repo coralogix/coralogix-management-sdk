@@ -258,10 +258,10 @@ type WebhooksClient struct {
 const webhooksFeatureGroupID = "webhooks"
 
 // Create creates a new webhook.
-func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRequest) (*webhooks.CreateOutgoingWebhookResponse, error) {
+func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRequest) (*webhooks.CreateOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookCreateRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -277,10 +277,10 @@ func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRe
 }
 
 // Get gets the specified webhook.
-func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest) (*webhooks.GetOutgoingWebhookResponse, error) {
+func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest) (*webhooks.GetOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookGetRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -295,10 +295,10 @@ func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest)
 }
 
 // Update updates the specified webhook.
-func (c WebhooksClient) Update(ctx context.Context, req *UpdateOutgoingWebhookRequest) (*webhooks.UpdateOutgoingWebhookResponse, error) {
+func (c WebhooksClient) Update(ctx context.Context, req *UpdateOutgoingWebhookRequest) (*webhooks.UpdateOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookUpdateRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -313,10 +313,10 @@ func (c WebhooksClient) Update(ctx context.Context, req *UpdateOutgoingWebhookRe
 }
 
 // Delete deletes the specified webhook.
-func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRequest) (*webhooks.DeleteOutgoingWebhookResponse, error) {
+func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRequest) (*webhooks.DeleteOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookDeleteRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -331,10 +331,10 @@ func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRe
 }
 
 // ListTypes lists all webhook types.
-func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookTypesRequest) (*webhooks.ListOutgoingWebhookTypesResponse, error) {
+func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookTypesRequest) (*webhooks.ListOutgoingWebhookTypesResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookListOutgoingRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -349,10 +349,10 @@ func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookT
 }
 
 // List lists all webhooks.
-func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRequest) (*webhooks.ListAllOutgoingWebhooksResponse, error) {
+func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRequest) (*webhooks.ListAllOutgoingWebhooksResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookListAllOutgoingWebhooksRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -367,10 +367,10 @@ func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRe
 }
 
 // TestByID tests an existing webhook.
-func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
+func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookTestExistingRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -385,10 +385,10 @@ func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingW
 }
 
 // Test tests the included webhook.
-func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, error) {
+func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookRequest) (*webhooks.TestOutgoingWebhookResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, OutgoingWebhookTestRPC, webhooksFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

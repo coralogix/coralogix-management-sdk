@@ -203,10 +203,10 @@ type RuleGroupsClient struct {
 }
 
 // Create creates a new rule group.
-func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupRequest) (*rulegroups.CreateRuleGroupResponse, error) {
+func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupRequest) (*rulegroups.CreateRuleGroupResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RuleGroupsCreateRuleGroupRPC, rulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -221,10 +221,10 @@ func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupReques
 }
 
 // Get gets a rule group.
-func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*rulegroups.GetRuleGroupResponse, error) {
+func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*rulegroups.GetRuleGroupResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RuleGroupsGetRuleGroupRPC, rulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -239,10 +239,10 @@ func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*r
 }
 
 // Update updates a rule group.
-func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupRequest) (*rulegroups.UpdateRuleGroupResponse, error) {
+func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupRequest) (*rulegroups.UpdateRuleGroupResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RuleGroupsUpdateRuleGroupRPC, rulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -258,10 +258,10 @@ func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupReques
 }
 
 // Delete deletes a rule group.
-func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupRequest) (*rulegroups.DeleteRuleGroupResponse, error) {
+func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupRequest) (*rulegroups.DeleteRuleGroupResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RuleGroupsDeleteRuleGroupRPC, rulesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

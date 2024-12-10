@@ -64,10 +64,10 @@ type DataSetClient struct {
 }
 
 // Create creates a new data set.
-func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*enrichment.CreateCustomEnrichmentResponse, error) {
+func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*enrichment.CreateCustomEnrichmentResponse, *SdkAPIError) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateDataSetRPC, dataSetsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -83,10 +83,10 @@ func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*
 }
 
 // Get gets a data set.
-func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrichment.GetCustomEnrichmentResponse, error) {
+func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrichment.GetCustomEnrichmentResponse, *SdkAPIError) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetDataSetRPC, dataSetsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -102,10 +102,10 @@ func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrich
 }
 
 // Update updates a data set.
-func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*enrichment.UpdateCustomEnrichmentResponse, error) {
+func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*enrichment.UpdateCustomEnrichmentResponse, *SdkAPIError) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateDataSetRPC, dataSetsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -121,10 +121,10 @@ func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*
 }
 
 // Delete deletes a data set.
-func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*enrichment.DeleteCustomEnrichmentResponse, error) {
+func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*enrichment.DeleteCustomEnrichmentResponse, *SdkAPIError) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetCDataSetRPC, dataSetsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -132,14 +132,18 @@ func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
-	return client.DeleteCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteCustomEnrichment(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, DeleteDataSetRPC, dataSetsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // List retrieves all data sets.
-func (d DataSetClient) List(ctx context.Context, req *ListDataSetsRequest) (*enrichment.GetCustomEnrichmentsResponse, error) {
+func (d DataSetClient) List(ctx context.Context, req *ListDataSetsRequest) (*enrichment.GetCustomEnrichmentsResponse, *SdkAPIError) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetCDataSetRPC, dataSetsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

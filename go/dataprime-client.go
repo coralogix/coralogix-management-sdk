@@ -33,10 +33,10 @@ type DataprimeClient struct {
 const dataprimeFeatureGroupID = "dataprime"
 
 // Query runs a query.
-func (c DataprimeClient) Query(ctx context.Context, req *QueryRequest) (dataprime.DataprimeQueryService_QueryClient, error) {
+func (c DataprimeClient) Query(ctx context.Context, req *QueryRequest) (dataprime.DataprimeQueryService_QueryClient, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, dataprime.DataprimeQueryService_Query_FullMethodName, dataprimeFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

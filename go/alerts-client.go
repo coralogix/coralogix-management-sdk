@@ -684,10 +684,10 @@ type AlertsClient struct {
 }
 
 // Create creates an alert.
-func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
+func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateAlertDefRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -702,10 +702,10 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 }
 
 // Get gets an alert.
-func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts.GetAlertDefResponse, error) {
+func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts.GetAlertDefResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetAlertDefRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -720,10 +720,10 @@ func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts
 }
 
 // Replace replaces an alert.
-func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, error) {
+func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRequest) (*alerts.ReplaceAlertDefResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ReplaceAlertDefRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -738,10 +738,10 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 }
 
 // Delete deletes an alert.
-func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, error) {
+func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*alerts.DeleteAlertDefResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteAlertDefRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -757,10 +757,10 @@ func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*
 }
 
 // Set sets the active status of an alert.
-func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.SetActiveResponse, error) {
+func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.SetActiveResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SetAlertDefActiveRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -775,10 +775,10 @@ func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.S
 }
 
 // List lists the alerts.
-func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*alerts.ListAlertDefsResponse, error) {
+func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*alerts.ListAlertDefsResponse, *SdkAPIError) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ListAlertDefsRPC, alertsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

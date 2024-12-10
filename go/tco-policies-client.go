@@ -155,10 +155,10 @@ type TCOPoliciesClient struct {
 }
 
 // Create creates a new TCO policy.
-func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest) (*tcopolicies.CreatePolicyResponse, error) {
+func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest) (*tcopolicies.CreatePolicyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesCreatePolicyRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -173,10 +173,10 @@ func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest)
 }
 
 // Get gets the specified TCO policy.
-func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tcopolicies.GetPolicyResponse, error) {
+func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tcopolicies.GetPolicyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesGetPolicyRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -191,10 +191,10 @@ func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tco
 }
 
 // OverwriteTCOTracesPolicies overwrites the specified TCO traces policies.
-func (t TCOPoliciesClient) OverwriteTCOTracesPolicies(ctx context.Context, req *AtomicOverwriteSpanPoliciesRequest) (*tcopolicies.AtomicOverwriteSpanPoliciesResponse, error) {
+func (t TCOPoliciesClient) OverwriteTCOTracesPolicies(ctx context.Context, req *AtomicOverwriteSpanPoliciesRequest) (*tcopolicies.AtomicOverwriteSpanPoliciesResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesAtomicOverwriteSpanPoliciesRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -209,10 +209,10 @@ func (t TCOPoliciesClient) OverwriteTCOTracesPolicies(ctx context.Context, req *
 }
 
 // Update updates the specified TCO policy.
-func (t TCOPoliciesClient) Update(ctx context.Context, req *UpdatePolicyRequest) (*tcopolicies.UpdatePolicyResponse, error) {
+func (t TCOPoliciesClient) Update(ctx context.Context, req *UpdatePolicyRequest) (*tcopolicies.UpdatePolicyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesUpdatePolicyRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -227,10 +227,10 @@ func (t TCOPoliciesClient) Update(ctx context.Context, req *UpdatePolicyRequest)
 }
 
 // OverwriteTCOLogsPolicies overwrites the specified TCO logs policies.
-func (t TCOPoliciesClient) OverwriteTCOLogsPolicies(ctx context.Context, req *tcopolicies.AtomicOverwriteLogPoliciesRequest) (*tcopolicies.AtomicOverwriteLogPoliciesResponse, error) {
+func (t TCOPoliciesClient) OverwriteTCOLogsPolicies(ctx context.Context, req *tcopolicies.AtomicOverwriteLogPoliciesRequest) (*tcopolicies.AtomicOverwriteLogPoliciesResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesAtomicOverwriteLogPoliciesRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -245,10 +245,10 @@ func (t TCOPoliciesClient) OverwriteTCOLogsPolicies(ctx context.Context, req *tc
 }
 
 // Delete deletes the specified TCO policy.
-func (t TCOPoliciesClient) Delete(ctx context.Context, req *DeletePolicyRequest) (*tcopolicies.DeletePolicyResponse, error) {
+func (t TCOPoliciesClient) Delete(ctx context.Context, req *DeletePolicyRequest) (*tcopolicies.DeletePolicyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesDeletePolicyRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -263,10 +263,10 @@ func (t TCOPoliciesClient) Delete(ctx context.Context, req *DeletePolicyRequest)
 }
 
 // Reorder reorders the specified TCO policies.
-func (t TCOPoliciesClient) Reorder(ctx context.Context, req *ReorderPoliciesRequest) (*tcopolicies.ReorderPoliciesResponse, error) {
+func (t TCOPoliciesClient) Reorder(ctx context.Context, req *ReorderPoliciesRequest) (*tcopolicies.ReorderPoliciesResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesReorderPoliciesRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -281,10 +281,10 @@ func (t TCOPoliciesClient) Reorder(ctx context.Context, req *ReorderPoliciesRequ
 }
 
 // List gets the specified TCO logs policies.
-func (t TCOPoliciesClient) List(ctx context.Context, req *GetCompanyPoliciesRequest) (*tcopolicies.GetCompanyPoliciesResponse, error) {
+func (t TCOPoliciesClient) List(ctx context.Context, req *GetCompanyPoliciesRequest) (*tcopolicies.GetCompanyPoliciesResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, TCOPoliciesGetCompanyPoliciesRPC, tcoFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
