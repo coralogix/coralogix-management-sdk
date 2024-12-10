@@ -113,10 +113,10 @@ type SLOsClient struct {
 }
 
 // Create creates a new SLO.
-func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloRequest) (*slos.CreateServiceSloResponse, error) {
+func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloRequest) (*slos.CreateServiceSloResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloCreateRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -131,10 +131,10 @@ func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloReques
 }
 
 // Get gets the specified SLO.
-func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*slos.GetServiceSloResponse, error) {
+func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*slos.GetServiceSloResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloGetRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -149,10 +149,10 @@ func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*s
 }
 
 // Update updates the specified SLO.
-func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloRequest) (*slos.ReplaceServiceSloResponse, error) {
+func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloRequest) (*slos.ReplaceServiceSloResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloReplaceRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -167,10 +167,10 @@ func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloReque
 }
 
 // Delete deletes the specified SLO.
-func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloRequest) (*slos.DeleteServiceSloResponse, error) {
+func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloRequest) (*slos.DeleteServiceSloResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloDeleteRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -185,10 +185,10 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloReques
 }
 
 // GetBulk gets multiple SLOs in a single call.
-func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRequest) (*slos.BatchGetServiceSlosResponse, error) {
+func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRequest) (*slos.BatchGetServiceSlosResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloBatchGetRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -203,10 +203,10 @@ func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRe
 }
 
 // List lists all service SLOs.
-func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) (*slos.ListServiceSlosResponse, error) {
+func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) (*slos.ListServiceSlosResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SloListRPC, infraMonitoringFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

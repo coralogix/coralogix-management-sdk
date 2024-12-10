@@ -88,10 +88,10 @@ type DataUsageClient struct {
 }
 
 // GetSpansCount gets the spans count as a stream.
-func (c DataUsageClient) GetSpansCount(ctx context.Context, req *dataUsage.GetSpansCountRequest) (dataUsage.DataUsageService_GetSpansCountClient, error) {
+func (c DataUsageClient) GetSpansCount(ctx context.Context, req *dataUsage.GetSpansCountRequest) (dataUsage.DataUsageService_GetSpansCountClient, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetSpansCountRPC, dataPlansFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -106,10 +106,10 @@ func (c DataUsageClient) GetSpansCount(ctx context.Context, req *dataUsage.GetSp
 }
 
 // GetLogsCount gets the logs count as a stream.
-func (c DataUsageClient) GetLogsCount(ctx context.Context, req *dataUsage.GetLogsCountRequest) (dataUsage.DataUsageService_GetLogsCountClient, error) {
+func (c DataUsageClient) GetLogsCount(ctx context.Context, req *dataUsage.GetLogsCountRequest) (dataUsage.DataUsageService_GetLogsCountClient, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetLogsCountRPC, dataPlansFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -123,10 +123,10 @@ func (c DataUsageClient) GetLogsCount(ctx context.Context, req *dataUsage.GetLog
 }
 
 // GetDataUsageMetricsExportStatus gets the metrics export status.
-func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, req *dataUsage.GetDataUsageMetricsExportStatusRequest) (*dataUsage.GetDataUsageMetricsExportStatusResponse, error) {
+func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, req *dataUsage.GetDataUsageMetricsExportStatusRequest) (*dataUsage.GetDataUsageMetricsExportStatusResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -140,10 +140,10 @@ func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, re
 }
 
 // UpdateDataUsageMetricsExportStatus updates the metrics export status.
-func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context, req *dataUsage.UpdateDataUsageMetricsExportStatusRequest) (*dataUsage.UpdateDataUsageMetricsExportStatusResponse, error) {
+func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context, req *dataUsage.UpdateDataUsageMetricsExportStatusRequest) (*dataUsage.UpdateDataUsageMetricsExportStatusResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateDataUsageMetricsExportStatusRPC, dataPlansFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -157,10 +157,10 @@ func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context,
 }
 
 // GetDataUsage gets the data usage as a stream.
-func (c DataUsageClient) GetDataUsage(ctx context.Context, req *dataUsage.GetDataUsageRequest) (dataUsage.DataUsageService_GetDataUsageClient, error) {
+func (c DataUsageClient) GetDataUsage(ctx context.Context, req *dataUsage.GetDataUsageRequest) (dataUsage.DataUsageService_GetDataUsageClient, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetDataUsageRPC, dataPlansFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

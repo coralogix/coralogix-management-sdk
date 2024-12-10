@@ -81,10 +81,10 @@ type ApikeysClient struct {
 }
 
 // Create creates a new API key.
-func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, error) {
+func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequest) (*apikeys.CreateApiKeyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateAPIKeyRPC, apiKeysFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -99,10 +99,10 @@ func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequ
 }
 
 // Get gets an API key.
-func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, error) {
+func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (*apikeys.GetApiKeyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetAPIKeyRPC, apiKeysFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -117,10 +117,10 @@ func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (
 }
 
 // Update updates an API key.
-func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, error) {
+func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequest) (*apikeys.UpdateApiKeyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateAPIKeyRPC, apiKeysFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -135,10 +135,10 @@ func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequ
 }
 
 // Delete deletes an API key.
-func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, error) {
+func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequest) (*apikeys.DeleteApiKeyResponse, *SdkAPIError) {
 	callProperties, err := t.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteAPIKeyRPC, apiKeysFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

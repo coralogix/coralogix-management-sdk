@@ -160,10 +160,10 @@ type AlertSchedulerClient struct {
 }
 
 // Create creates a new alert scheduler.
-func (c AlertSchedulerClient) Create(ctx context.Context, req *scheduler.CreateAlertSchedulerRuleRequest) (*scheduler.CreateAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) Create(ctx context.Context, req *scheduler.CreateAlertSchedulerRuleRequest) (*scheduler.CreateAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -178,10 +178,10 @@ func (c AlertSchedulerClient) Create(ctx context.Context, req *scheduler.CreateA
 }
 
 // Get gets an alert scheduler.
-func (c AlertSchedulerClient) Get(ctx context.Context, req *scheduler.GetAlertSchedulerRuleRequest) (*scheduler.GetAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) Get(ctx context.Context, req *scheduler.GetAlertSchedulerRuleRequest) (*scheduler.GetAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -196,10 +196,10 @@ func (c AlertSchedulerClient) Get(ctx context.Context, req *scheduler.GetAlertSc
 }
 
 // Update updates an alert scheduler.
-func (c AlertSchedulerClient) Update(ctx context.Context, req *scheduler.UpdateAlertSchedulerRuleRequest) (*scheduler.UpdateAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) Update(ctx context.Context, req *scheduler.UpdateAlertSchedulerRuleRequest) (*scheduler.UpdateAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -214,10 +214,10 @@ func (c AlertSchedulerClient) Update(ctx context.Context, req *scheduler.UpdateA
 }
 
 // Delete deletes an alert scheduler.
-func (c AlertSchedulerClient) Delete(ctx context.Context, req *scheduler.DeleteAlertSchedulerRuleRequest) (*scheduler.DeleteAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) Delete(ctx context.Context, req *scheduler.DeleteAlertSchedulerRuleRequest) (*scheduler.DeleteAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -232,10 +232,10 @@ func (c AlertSchedulerClient) Delete(ctx context.Context, req *scheduler.DeleteA
 }
 
 // CreateBulk creates multiple alert schedulers in bulk.
-func (c AlertSchedulerClient) CreateBulk(ctx context.Context, req *scheduler.CreateBulkAlertSchedulerRuleRequest) (*scheduler.CreateBulkAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) CreateBulk(ctx context.Context, req *scheduler.CreateBulkAlertSchedulerRuleRequest) (*scheduler.CreateBulkAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateBulkAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -250,10 +250,10 @@ func (c AlertSchedulerClient) CreateBulk(ctx context.Context, req *scheduler.Cre
 }
 
 // UpdateBulk updates multiple alert schedulers in bulk.
-func (c AlertSchedulerClient) UpdateBulk(ctx context.Context, req *scheduler.UpdateBulkAlertSchedulerRuleRequest) (*scheduler.UpdateBulkAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) UpdateBulk(ctx context.Context, req *scheduler.UpdateBulkAlertSchedulerRuleRequest) (*scheduler.UpdateBulkAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateBulkAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -268,10 +268,10 @@ func (c AlertSchedulerClient) UpdateBulk(ctx context.Context, req *scheduler.Upd
 }
 
 // GetBulk gets multiple alert schedulers in bulk.
-func (c AlertSchedulerClient) GetBulk(ctx context.Context, req *scheduler.GetBulkAlertSchedulerRuleRequest) (*scheduler.GetBulkAlertSchedulerRuleResponse, error) {
+func (c AlertSchedulerClient) GetBulk(ctx context.Context, req *scheduler.GetBulkAlertSchedulerRuleRequest) (*scheduler.GetBulkAlertSchedulerRuleResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetBulkAlertSchedulerRuleRPC, alertSchedulerFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

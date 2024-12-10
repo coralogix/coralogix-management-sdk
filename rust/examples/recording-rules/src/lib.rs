@@ -35,7 +35,7 @@ mod tests {
 
         let create_rule_group_set_response = client
             .create(
-                "TestRecordingRuleGroupSet".into(),
+                "TestRecordingRuleGroupSet2".into(),
                 vec![InRuleGroup {
                     name: "foo".into(),
                     interval: Some(180),

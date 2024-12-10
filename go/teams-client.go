@@ -64,10 +64,10 @@ type TeamsClient struct {
 }
 
 // Create creates a new team.
-func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, error) {
+func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*teams.CreateTeamInOrgResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, CreateTeamInOrgRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -82,10 +82,10 @@ func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*
 }
 
 // Update updates a team.
-func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, error) {
+func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams.UpdateTeamResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, UpdateTeamRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -100,10 +100,10 @@ func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams
 }
 
 // Get gets a team.
-func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, error) {
+func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTeamResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetTeamRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -118,10 +118,10 @@ func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTe
 }
 
 // Delete deletes a team.
-func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, error) {
+func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams.DeleteTeamResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, DeleteTeamRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -136,10 +136,10 @@ func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams
 }
 
 // SetDailyQuota sets the daily quota for a team.
-func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaRequest) (*teams.SetDailyQuotaResponse, error) {
+func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaRequest) (*teams.SetDailyQuotaResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, SetDailyQuotaRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -154,10 +154,10 @@ func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaReques
 }
 
 // GetQuota gets the quota for a team.
-func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*teams.GetTeamQuotaResponse, error) {
+func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*teams.GetTeamQuotaResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetTeamQuotaRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -172,10 +172,10 @@ func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*t
 }
 
 // MoveQuota moves the quota from one team to another.
-func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*teams.MoveQuotaResponse, error) {
+func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*teams.MoveQuotaResponse, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, MoveQuotaRPC, teamsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

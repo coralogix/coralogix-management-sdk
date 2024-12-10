@@ -83,10 +83,10 @@ type EnrichmentsClient struct {
 }
 
 // Add creates a new enrichment.
-func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) (*enrichment.AddEnrichmentsResponse, error) {
+func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) (*enrichment.AddEnrichmentsResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, AddEnrichmentsRPC, enrichmentsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -101,10 +101,10 @@ func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) 
 }
 
 // Delete deletes the specified enrichments.
-func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsRequest) error {
+func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsRequest) *SdkAPIError {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return err
+		return NewSdkAPIError(err, DeleteEnrichmentsRPC, enrichmentsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -120,10 +120,10 @@ func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsReq
 }
 
 // List returns all enrichments.
-func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest) (*enrichment.GetEnrichmentsResponse, error) {
+func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest) (*enrichment.GetEnrichmentsResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetEnrichmentsRPC, enrichmentsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -139,10 +139,10 @@ func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest)
 }
 
 // GetLimits returns the enrichment limits.
-func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrichmentLimitResponse, error) {
+func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrichmentLimitResponse, *SdkAPIError) {
 	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, GetEnrichmentLimitRPC, enrichmentsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

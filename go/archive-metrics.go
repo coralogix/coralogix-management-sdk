@@ -88,10 +88,10 @@ type ArchiveMetricsClient struct {
 }
 
 // Update updates the archive metrics configuration.
-func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.UpdateRequest) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.UpdateRequest) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsUpdateRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -106,10 +106,10 @@ func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.Up
 }
 
 // Get gets the archive metrics configuration.
-func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenantConfigResponseV2, error) {
+func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenantConfigResponseV2, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsGetTenantConfigRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -124,10 +124,10 @@ func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenan
 }
 
 // ConfigureTenant configures the archive metrics bucket.
-func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveMetrics.ConfigureTenantRequest) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsConfigureTenantRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -142,10 +142,10 @@ func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveM
 }
 
 // ValidateTarget validates the archive metrics bucket.
-func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMetrics.ValidateBucketRequest) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMetrics.ValidateBucketRequest) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsValidateBucketRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -160,10 +160,10 @@ func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMe
 }
 
 // Enable enables the metrics archive.
-func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsEnableArchiveRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -178,10 +178,10 @@ func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, error
 }
 
 // Disable disables the metrics archive.
-func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, error) {
+func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, *SdkAPIError) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, ArchiveMetricsDisableArchiveRPC, archiveMetricsFeatureGroupID)
 	}
 
 	conn := callProperties.Connection

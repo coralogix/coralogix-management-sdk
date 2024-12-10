@@ -65,10 +65,10 @@ type RolesClient struct {
 }
 
 // Create creates a new role.
-func (r RolesClient) Create(ctx context.Context, req *CreateRoleRequest) (*roles.CreateRoleResponse, error) {
+func (r RolesClient) Create(ctx context.Context, req *CreateRoleRequest) (*roles.CreateRoleResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesCreateRoleRPC, rolesFeatureGroupID)
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -82,10 +82,10 @@ func (r RolesClient) Create(ctx context.Context, req *CreateRoleRequest) (*roles
 }
 
 // Update updates a role.
-func (r RolesClient) Update(ctx context.Context, req *UpdateRoleRequest) (*roles.UpdateRoleResponse, error) {
+func (r RolesClient) Update(ctx context.Context, req *UpdateRoleRequest) (*roles.UpdateRoleResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesUpdateRoleRPC, rolesFeatureGroupID)
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -100,10 +100,10 @@ func (r RolesClient) Update(ctx context.Context, req *UpdateRoleRequest) (*roles
 }
 
 // Delete deletes a role.
-func (r RolesClient) Delete(ctx context.Context, req *DeleteRoleRequest) (*roles.DeleteRoleResponse, error) {
+func (r RolesClient) Delete(ctx context.Context, req *DeleteRoleRequest) (*roles.DeleteRoleResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesDeleteRoleRPC, rolesFeatureGroupID)
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -118,10 +118,10 @@ func (r RolesClient) Delete(ctx context.Context, req *DeleteRoleRequest) (*roles
 }
 
 // Get retrieves a role by ID.
-func (r RolesClient) Get(ctx context.Context, req *GetCustomRoleRequest) (*roles.GetCustomRoleResponse, error) {
+func (r RolesClient) Get(ctx context.Context, req *GetCustomRoleRequest) (*roles.GetCustomRoleResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesGetCustomRoleRPC, rolesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -136,10 +136,10 @@ func (r RolesClient) Get(ctx context.Context, req *GetCustomRoleRequest) (*roles
 }
 
 // List retrieves all accessible roles.
-func (r RolesClient) List(ctx context.Context, req *ListCustomRolesRequest) (*roles.ListCustomRolesResponse, error) {
+func (r RolesClient) List(ctx context.Context, req *ListCustomRolesRequest) (*roles.ListCustomRolesResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesListCustomRolesRPC, rolesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
@@ -154,10 +154,10 @@ func (r RolesClient) List(ctx context.Context, req *ListCustomRolesRequest) (*ro
 }
 
 // ListSystemRoles retrieves all system roles.
-func (r RolesClient) ListSystemRoles(ctx context.Context, req *ListSystemRolesRequest) (*roles.ListSystemRolesResponse, error) {
+func (r RolesClient) ListSystemRoles(ctx context.Context, req *ListSystemRolesRequest) (*roles.ListSystemRolesResponse, *SdkAPIError) {
 	callProperties, err := r.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, err
+		return nil, NewSdkAPIError(err, RolesListSystemRolesRPC, rolesFeatureGroupID)
 	}
 
 	conn := callProperties.Connection
