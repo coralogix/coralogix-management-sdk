@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.coralogix.metrics.metrics_blocking_rules;
+
+import "google/protobuf/empty.proto";
+
+message ByMetricName {
+  string name = 1;
+}
+
+message RuleExpression {
+  oneof rule_expression {
+    ByMetricName by_metric_name = 1;
+  }
+}
+
+message Rule {
+  uint64 rule_id = 1;
+  RuleExpression rule_expression = 2;
+}
+
+message BlockRequest {
+  repeated RuleExpression rule_expressions = 1;
+}
+
+message AllowRequest {
+  repeated uint64 rule_ids = 1;
+}
+
+message ListResponse {
+  repeated Rule rules = 1;
+}
+
+service MetricsBlockingRulesService {
+  rpc Block(BlockRequest) returns (google.protobuf.Empty) {}
+  rpc Allow(AllowRequest) returns (google.protobuf.Empty) {}
+  rpc List(google.protobuf.Empty) returns (ListResponse) {}
+}
