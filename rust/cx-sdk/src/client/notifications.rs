@@ -695,8 +695,6 @@ impl NotificationsClient {
                 entity_type: params.entity_type,
                 entity_sub_type: params.entity_sub_type,
                 connector_id: params.connector_id,
-                output_schema_id: params.output_schema_id,
-                fields: params.message_config_fields,
                 preset_id: params.preset_id,
                 config_overrides: params.config_overrides,
             },

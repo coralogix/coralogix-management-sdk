@@ -13,13 +13,13 @@ revision = "v0.5.6"
 url = 'github.com/coralogix/cx-api-views'
 revision = "v1.2"
 allow_policies = [
+    "/com/coralogixapis/views/v1/audit_log.proto",
     "/com/coralogixapis/views/v1/filters.proto",
     "/com/coralogixapis/views/v1/search_query.proto",
     "/com/coralogixapis/views/v1/services/views_folders_service.proto",
     "/com/coralogixapis/views/v1/services/views_service.proto",
     "/com/coralogixapis/views/v1/time_selection.proto",
     "/com/coralogixapis/views/v1/view_folder.proto",
-    "/com/coralogixapis/views/v1/audit_log.proto",
 ]
 
 [cx-api-actions]
@@ -47,6 +47,9 @@ revision = "v1.2.13"
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
 content_roots = ["/service", "ast"]
+allow_policies = [
+    "/com/coralogixapis/dataprime/v1/*",
+]
 revision = "v0.328"
 
 [cx-api-logs2metrics]
@@ -116,7 +119,10 @@ revision = "v0.0.72"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
-allow_policies = ["/com/coralogix/metrics/metrics-configurator.proto", "/com/coralogix/metrics/metrics-tco.proto"]
+allow_policies = [
+    "/com/coralogix/metrics/metrics-configurator.proto",
+    "/com/coralogix/metrics/metrics-tco.proto",
+]
 revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
@@ -149,8 +155,8 @@ allow_policies = [
     "/google/api/http.proto",
     "/google/api/launch_stage.proto",
     "/google/api/resource.proto",
-    "google/rpc/status.proto",
     "google/rpc/code.proto",
+    "google/rpc/status.proto",
 ]
 
 [global-mapping]

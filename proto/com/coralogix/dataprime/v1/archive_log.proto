@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.dataprime.v1;
-
-import "google/protobuf/wrappers.proto";
-
-message ArchiveLog {
-  google.protobuf.StringValue log = 1;
-}
