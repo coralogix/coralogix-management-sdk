@@ -15,10 +15,14 @@
 package cxsdk
 
 import (
+	"errors"
 	"fmt"
 	"log"
 	"os"
 	"strings"
+
+	"google.golang.org/grpc/codes"
+	"google.golang.org/grpc/status"
 )
 
 // SdkAPIError is an error that occurs in the Coralogix SDK.
@@ -43,6 +47,15 @@ func NewSdkAPIError(
 
 func (e *SdkAPIError) Error() string {
 	return fmt.Sprintf("SDK API error from %s for feature group %s: %s", e.endpoint, e.featureGroupID, e.apiError)
+}
+
+// Code returns the error code of the SdkAPIError.apiError.
+func Code(err error) codes.Code {
+	var sdkErr *SdkAPIError
+	if errors.As(err, &sdkErr) {
+		return status.Code(sdkErr.apiError)
+	}
+	return codes.Unknown
 }
 
 // ClientSet is a set of clients for the Coralogix SDK.
