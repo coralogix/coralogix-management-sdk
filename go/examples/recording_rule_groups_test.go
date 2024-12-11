@@ -29,7 +29,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewRecordingRuleGroupSetsClient(creator)
-	setName := "TestRecordingRuleGroupSet"
+	setName := "TestRecordingRuleGroupSet2"
 	interval := uint32(180)
 	limit := uint64(100)
 
