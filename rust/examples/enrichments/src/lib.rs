@@ -22,7 +22,6 @@ mod tests {
         Type,
     };
     use cx_sdk::client::enrichments::{
-        self,
         EnrichmentsClient,
         GeoIpType,
     };

@@ -46,7 +46,7 @@ revision = "v1.2.13"
 
 [cx-api-dataprime]
 url = 'github.com/coralogix/cx-api-dataprime'
-content_roots = ["/service", "ast"]
+content_roots = ["/service"]
 allow_policies = [
     "/com/coralogixapis/dataprime/v1/*",
 ]
