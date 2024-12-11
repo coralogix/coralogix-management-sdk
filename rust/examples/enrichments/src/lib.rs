@@ -14,10 +14,17 @@
 
 #[cfg(test)]
 mod tests {
-    use cx_sdk::auth::AuthContext;
-    use cx_sdk::client::data_usage::{EnrichmentMapping, EnrichmentType, Type};
-    use cx_sdk::client::enrichments::{self, EnrichmentsClient, GeoIpType};
     use cx_sdk::CoralogixRegion;
+    use cx_sdk::auth::AuthContext;
+    use cx_sdk::client::data_usage::{
+        EnrichmentMapping,
+        EnrichmentType,
+        Type,
+    };
+    use cx_sdk::client::enrichments::{
+        EnrichmentsClient,
+        GeoIpType,
+    };
 
     #[tokio::test]
     async fn test_enrichments() {
@@ -49,18 +56,22 @@ mod tests {
 
         //Test retrieving enrichments
         let enrichments_with_created_enrichments = client.list().await.unwrap();
-        assert!(enrichments_with_created_enrichments
-            .enrichments
-            .iter()
-            .any(|e| enrichment_ids.contains(&e.id)));
+        assert!(
+            enrichments_with_created_enrichments
+                .enrichments
+                .iter()
+                .any(|e| enrichment_ids.contains(&e.id))
+        );
 
         //Test deleting enrichments
         let _ = client.delete(enrichment_ids.clone()).await.unwrap();
 
         let enrichments_after_deletion = client.list().await.unwrap();
-        assert!(enrichments_after_deletion
-            .enrichments
-            .iter()
-            .all(|e| !enrichment_ids.contains(&e.id)));
+        assert!(
+            enrichments_after_deletion
+                .enrichments
+                .iter()
+                .all(|e| !enrichment_ids.contains(&e.id))
+        );
     }
 }

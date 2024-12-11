@@ -14,6 +14,7 @@ import "com/coralogixapis/service_catalog/v1/transaction.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 
 message GetErrorStatsRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
@@ -52,6 +53,24 @@ message DrillDownSubFilterResponse {
   repeated com.coralogixapis.apm.common.v2.QueryInfo queriesInfo = 2;
 }
 
+message GetServiceErrorTrackingDrillDownGraphRequest {
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
+  google.protobuf.StringValue service_name = 2;
+  repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
+  GroupBy group_by = 4;
+  ErrorDataSource data_source = 6;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 7;
+  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
+  google.protobuf.UInt64Value topk = 9;
+  google.protobuf.StringValue status_code = 10;
+  google.protobuf.StringValue method = 11;
+  ErrorMessageSource error_message_source = 12;
+}
+
+message GetServiceErrorTrackingDrillDownGraphResponse {
+  com.coralogixapis.service_catalog.v1.RepeatedLineChart operations = 1;
+  google.protobuf.UInt64Value total_amount = 2;
+}
 service ErrorTrackingDrillDownService {
   rpc GetErrorStats(GetErrorStatsRequest) returns (GetErrorStatsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get error stats response";
@@ -59,5 +78,9 @@ service ErrorTrackingDrillDownService {
 
   rpc GetDrillDownSubFilters(DrillDownSubFiltersRequest) returns (DrillDownSubFilterResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get drill down sub filters";
+  }
+
+  rpc GetDrillDownOperationsGraph(GetServiceErrorTrackingDrillDownGraphRequest) returns (GetServiceErrorTrackingDrillDownGraphResponse) {
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get drill down error operations graph";
   }
 }

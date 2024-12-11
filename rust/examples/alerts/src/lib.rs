@@ -87,6 +87,7 @@ mod tests {
                 phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
                     group_by_keys: vec![],
+                    destinations: vec![],
                     webhooks: vec![AlertDefWebhooksSettings {
                         notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
                         retriggering_period: Some(RetriggeringPeriod::Minutes(5)),
