@@ -17,9 +17,13 @@ mod tests {
     use std::time::Duration;
 
     use cx_sdk::{
-        auth::AuthContext,
-        client::data_usage::{DataUsageClient, DateRange, ScopesFilter},
         CoralogixRegion,
+        auth::AuthContext,
+        client::data_usage::{
+            DataUsageClient,
+            DateRange,
+            ScopesFilter,
+        },
     };
 
     #[tokio::test]
