@@ -54,10 +54,10 @@ type ArchiveRetentionsClient struct {
 }
 
 // Get gets the archive retentions.
-func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.GetRetentionsRequest) (*archiveRetention.GetRetentionsResponse, *SdkAPIError) {
+func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.GetRetentionsRequest) (*archiveRetention.GetRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveRetentionGetRetentionsRPC, archiveFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -72,10 +72,10 @@ func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.
 }
 
 // Update updates the archive retentions.
-func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, *SdkAPIError) {
+func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentionsRequest) (*archiveRetention.UpdateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveRetentionUpdateRetentionsRPC, archiveFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -90,10 +90,10 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentio
 }
 
 // Activate activates the archive retentions.
-func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, *SdkAPIError) {
+func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveRetentionActivateRetentionsRPC, archiveFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -108,10 +108,10 @@ func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRete
 }
 
 // GetEnabled returns a boolean that signals whether archive retentions are enabled.
-func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, *SdkAPIError) {
+func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetentionsEnabledRequest) (*archiveRetention.GetRetentionsEnabledResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveRetentionGetRetentionsEnabledRPC, archiveFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

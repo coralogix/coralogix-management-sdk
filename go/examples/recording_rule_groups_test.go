@@ -29,11 +29,11 @@ func TestRecordingRuleGroups(t *testing.T) {
 	assert.Nil(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewRecordingRuleGroupSetsClient(creator)
-	setName := "TestRecordingRuleGroupSet2"
+	setName := "TestRecordingRuleGroupSet"
 	interval := uint32(180)
 	limit := uint64(100)
 
-	createRuleGroupSet, createRuleGroupSetErr := c.Create(context.Background(), &cxsdk.CreateRuleGroupSetRequest{
+	createRuleGroupSet, err := c.Create(context.Background(), &cxsdk.CreateRuleGroupSetRequest{
 		Name: &setName,
 		Groups: []*cxsdk.InRuleGroup{
 			{
@@ -68,23 +68,23 @@ func TestRecordingRuleGroups(t *testing.T) {
 			},
 		},
 	})
-	if createRuleGroupSetErr != nil {
-		t.Fatal(createRuleGroupSetErr)
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	recordingRuleGroupSet, getRuleGroupSetErr := c.Get(context.Background(), &cxsdk.GetRuleGroupSetRequest{
+	recordingRuleGroupSet, err := c.Get(context.Background(), &cxsdk.GetRuleGroupSetRequest{
 		Id: createRuleGroupSet.Id,
 	})
 
-	if getRuleGroupSetErr != nil {
-		t.Fatal(getRuleGroupSetErr)
+	if err != nil {
+		t.Fatal(err)
 	}
 
 	assert.Equal(&testing.T{}, (recordingRuleGroupSet.Groups), 2)
 
-	_, deleteRuleGroupSetErr := c.Delete(context.Background(), &cxsdk.DeleteRuleGroupSetRequest{Id: createRuleGroupSet.Id})
+	_, err = c.Delete(context.Background(), &cxsdk.DeleteRuleGroupSetRequest{Id: createRuleGroupSet.Id})
 
-	if deleteRuleGroupSetErr != nil {
-		t.Fatal(deleteRuleGroupSetErr)
+	if err != nil {
+		t.Fatal(err)
 	}
 }

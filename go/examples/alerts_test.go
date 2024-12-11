@@ -96,7 +96,7 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 				LogsFilter: &cxsdk.LogsFilter{
 					FilterType: &cxsdk.LogsFilterSimpleFilter{
 						SimpleFilter: &cxsdk.SimpleFilter{
-							LuceneQuery: wrapperspb.String(".*"),
+							LuceneQuery: wrapperspb.String("remote_addr_enriched:/.*/"),
 							LabelFilters: &cxsdk.LabelFilters{
 								ApplicationName: []*cxsdk.LabelFilterType{
 									{Value: wrapperspb.String("nginx"), Operation: *cxsdk.LogFilterOperationIncludes.Enum()},
@@ -122,6 +122,7 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 }
 
 func TestAlerts(t *testing.T) {
+
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -129,12 +130,12 @@ func TestAlerts(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewAlertsClient(creator)
 
-	createdAlertDef, createAlertDefErr := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
+	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlert(),
 	})
 
-	if createAlertDefErr != nil {
-		t.Errorf("Error creating alert: %v", createAlertDefErr)
+	if err != nil {
+		t.Errorf("Error creating alert: %v", err)
 	}
 	assert.Nil(t, err)
 
@@ -170,11 +171,11 @@ func TestAlertScheduler(t *testing.T) {
 	a := cxsdk.NewAlertSchedulerClient(creator)
 	c := cxsdk.NewAlertsClient(creator)
 
-	createdAlertDef, createAlertDefErr := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
+	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlert(),
 	})
 
-	if createAlertDefErr != nil {
+	if err != nil {
 		t.Errorf("Error creating alert: %v", err)
 	}
 	assert.Nil(t, err)

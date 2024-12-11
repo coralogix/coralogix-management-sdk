@@ -55,10 +55,10 @@ type DashboardsFoldersClient struct {
 }
 
 // Create creates a new dashboard folder.
-func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, *SdkAPIError) {
+func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DashboardFoldersCreateDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -73,10 +73,10 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.Cre
 }
 
 // Get dashboard folder details.
-func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDashboardFolderRequest) (*dashboards.GetDashboardFolderResponse, *SdkAPIError) {
+func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDashboardFolderRequest) (*dashboards.GetDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DashboardFoldersGetDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -91,10 +91,10 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDas
 }
 
 // List gets all dashboard folders.
-func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDashboardFoldersResponse, *SdkAPIError) {
+func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDashboardFoldersResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DashboardFoldersListDashboardFoldersRPC, dashboardFoldersFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -109,10 +109,10 @@ func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDash
 }
 
 // Replace updates a dashboard folder.
-func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.ReplaceDashboardFolderRequest) (*dashboards.ReplaceDashboardFolderResponse, *SdkAPIError) {
+func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.ReplaceDashboardFolderRequest) (*dashboards.ReplaceDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DashboardFoldersReplaceDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -127,10 +127,10 @@ func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.Re
 }
 
 // Delete deletes a dashboard folder.
-func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.DeleteDashboardFolderRequest) (*dashboards.DeleteDashboardFolderResponse, *SdkAPIError) {
+func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.DeleteDashboardFolderRequest) (*dashboards.DeleteDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DashboardFoldersDeleteDashboardFolderRPC, dashboardFoldersFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
