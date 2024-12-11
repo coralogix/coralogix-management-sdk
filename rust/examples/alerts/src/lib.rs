@@ -119,7 +119,7 @@ mod tests {
                 type_definition: Some(TypeDefinition::LogsThreshold(LogsThresholdType {
                     logs_filter: Some(LogsFilter {
                         filter_type: Some(FilterType::SimpleFilter(LogsSimpleFilter {
-                            lucene_query: Some(String::from(".*")),
+                            lucene_query: Some(String::from("remote_addr_enriched:/.*/")),
                             label_filters: Some(LabelFilters {
                                 application_name: vec![LabelFilterType {
                                     value: Some(String::from("nginx")),

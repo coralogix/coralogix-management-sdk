@@ -67,10 +67,10 @@ type ActionsClient struct {
 }
 
 // Create creates a new action.
-func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, *SdkAPIError) {
+func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*actions.CreateActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, CreateActionRPC, actionsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -85,10 +85,10 @@ func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*a
 }
 
 // Get gets an action.
-func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions.GetActionResponse, *SdkAPIError) {
+func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions.GetActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetActionRPC, actionsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -103,10 +103,10 @@ func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions
 }
 
 // Replace replaces an action.
-func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (*actions.ReplaceActionResponse, *SdkAPIError) {
+func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (*actions.ReplaceActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ReplaceActionRPC, actionsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -121,10 +121,10 @@ func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (
 }
 
 // Delete deletes an action.
-func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*actions.DeleteActionResponse, *SdkAPIError) {
+func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*actions.DeleteActionResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DeleteActionRPC, actionsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -139,10 +139,10 @@ func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*a
 }
 
 // Order sets the order of actions.
-func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsRequest) (*actions.OrderActionsResponse, *SdkAPIError) {
+func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsRequest) (*actions.OrderActionsResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, OrderActionsRPC, actionsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

@@ -123,10 +123,10 @@ type IntegrationsClient struct {
 }
 
 // Create creates a new integration.
-func (c IntegrationsClient) Create(ctx context.Context, req *SaveIntegrationRequest) (*ext.SaveIntegrationResponse, *SdkAPIError) {
+func (c IntegrationsClient) Create(ctx context.Context, req *SaveIntegrationRequest) (*ext.SaveIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, SaveIntegrationRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -141,10 +141,10 @@ func (c IntegrationsClient) Create(ctx context.Context, req *SaveIntegrationRequ
 }
 
 // Update updates an integration
-func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRequest) (*ext.UpdateIntegrationResponse, *SdkAPIError) {
+func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRequest) (*ext.UpdateIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, UpdateIntegrationRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -159,10 +159,10 @@ func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRe
 }
 
 // GetDetails gets all deployed integrations
-func (c IntegrationsClient) GetDetails(ctx context.Context, req *GetIntegrationDetailsRequest) (*ext.GetIntegrationDetailsResponse, *SdkAPIError) {
+func (c IntegrationsClient) GetDetails(ctx context.Context, req *GetIntegrationDetailsRequest) (*ext.GetIntegrationDetailsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetIntegrationDetailsRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -177,10 +177,10 @@ func (c IntegrationsClient) GetDetails(ctx context.Context, req *GetIntegrationD
 }
 
 // Get gets a deployed integration
-func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegrationRequest) (*ext.GetDeployedIntegrationResponse, *SdkAPIError) {
+func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegrationRequest) (*ext.GetDeployedIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetDeployedIntegrationRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -195,10 +195,10 @@ func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegra
 }
 
 // GetDefinition gets an integration definition
-func (c IntegrationsClient) GetDefinition(ctx context.Context, req *GetIntegrationDefinitionRequest) (*ext.GetIntegrationDefinitionResponse, *SdkAPIError) {
+func (c IntegrationsClient) GetDefinition(ctx context.Context, req *GetIntegrationDefinitionRequest) (*ext.GetIntegrationDefinitionResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetIntegrationDefinitionRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -213,10 +213,10 @@ func (c IntegrationsClient) GetDefinition(ctx context.Context, req *GetIntegrati
 }
 
 // GetIntegrationStatus gets the status of a integration
-func (c IntegrationsClient) GetIntegrationStatus(ctx context.Context, req *GetManagedIntegrationStatusRequest) (*ext.GetManagedIntegrationStatusResponse, *SdkAPIError) {
+func (c IntegrationsClient) GetIntegrationStatus(ctx context.Context, req *GetManagedIntegrationStatusRequest) (*ext.GetManagedIntegrationStatusResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetManagedIntegrationStatusRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -231,10 +231,10 @@ func (c IntegrationsClient) GetIntegrationStatus(ctx context.Context, req *GetMa
 }
 
 // Delete deletes an integration
-func (c IntegrationsClient) Delete(ctx context.Context, req *DeleteIntegrationRequest) (*ext.DeleteIntegrationResponse, *SdkAPIError) {
+func (c IntegrationsClient) Delete(ctx context.Context, req *DeleteIntegrationRequest) (*ext.DeleteIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DeleteIntegrationRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -249,10 +249,10 @@ func (c IntegrationsClient) Delete(ctx context.Context, req *DeleteIntegrationRe
 }
 
 // GetTemplate gets an integration template
-func (c IntegrationsClient) GetTemplate(ctx context.Context, req *GetTemplateRequest) (*ext.GetTemplateResponse, *SdkAPIError) {
+func (c IntegrationsClient) GetTemplate(ctx context.Context, req *GetTemplateRequest) (*ext.GetTemplateResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetTemplateRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -267,10 +267,10 @@ func (c IntegrationsClient) GetTemplate(ctx context.Context, req *GetTemplateReq
 }
 
 // GetRumApplicationVersionData gets RUM application version data
-func (c IntegrationsClient) GetRumApplicationVersionData(ctx context.Context, req *GetRumApplicationVersionDataRequest) (*ext.GetRumApplicationVersionDataResponse, *SdkAPIError) {
+func (c IntegrationsClient) GetRumApplicationVersionData(ctx context.Context, req *GetRumApplicationVersionDataRequest) (*ext.GetRumApplicationVersionDataResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetRumApplicationVersionDataRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -285,10 +285,10 @@ func (c IntegrationsClient) GetRumApplicationVersionData(ctx context.Context, re
 }
 
 // SyncRumData syncs RUM data
-func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataRequest) (*ext.SyncRumDataResponse, *SdkAPIError) {
+func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataRequest) (*ext.SyncRumDataResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, SyncRumDataRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -303,10 +303,10 @@ func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataReq
 }
 
 // Test tests an integration
-func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationRequest) (*ext.TestIntegrationResponse, *SdkAPIError) {
+func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationRequest) (*ext.TestIntegrationResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestIntegrationRPC, integrationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

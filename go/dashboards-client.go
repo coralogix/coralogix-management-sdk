@@ -1102,10 +1102,10 @@ type DashboardOrderingField = dashboards.OrderingField
 const dashboardsFeatureGroupID = "dashboards"
 
 // Create Creates a new dashboard.
-func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardRequest) (*dashboards.CreateDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, CreateDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1120,10 +1120,10 @@ func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardReques
 }
 
 // Get gets a dashboard.
-func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*dashboards.GetDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*dashboards.GetDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1138,10 +1138,10 @@ func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*d
 }
 
 // List lists all dashboards.
-func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCatalogResponse, *SdkAPIError) {
+func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCatalogResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, dashboards.DashboardCatalogService_GetDashboardCatalog_FullMethodName, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1156,28 +1156,24 @@ func (d DashboardsClient) List(ctx context.Context) (*dashboards.GetDashboardCat
 }
 
 // Replace replaces a dashboard.
-func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*dashboards.ReplaceDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequest) (*dashboards.ReplaceDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DeleteDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
 
-	response, err := client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, NewSdkAPIError(err, ReplaceDashboardRPC, dashboardsFeatureGroupID)
-	}
-	return response, nil
+	return client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 }
 
 // Delete deletes a dashboard.
-func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardRequest) (*dashboards.DeleteDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardRequest) (*dashboards.DeleteDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DeleteDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1192,10 +1188,10 @@ func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardReques
 }
 
 // Pin pins a dashboard.
-func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*dashboards.PinDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*dashboards.PinDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PinDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1210,10 +1206,10 @@ func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*d
 }
 
 // Unpin unpins a dashboard.
-func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest) (*dashboards.UnpinDashboardResponse, *SdkAPIError) {
+func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest) (*dashboards.UnpinDashboardResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, UnpinDashboardRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -1228,10 +1224,10 @@ func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest)
 }
 
 // AssignToFolder assigns a dashboard to a folder.
-func (d DashboardsClient) AssignToFolder(ctx context.Context, req *dashboards.AssignDashboardFolderRequest) (*dashboards.AssignDashboardFolderResponse, *SdkAPIError) {
+func (d DashboardsClient) AssignToFolder(ctx context.Context, req *dashboards.AssignDashboardFolderRequest) (*dashboards.AssignDashboardFolderResponse, error) {
 	callProperties, err := d.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, AssignDashboardFolderRPC, dashboardsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

@@ -227,10 +227,10 @@ type NotificationsClient struct {
 }
 
 // CreateConnector creates a new connector.
-func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateConnectorRequest) (*CreateConnectorResponse, *SdkAPIError) {
+func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateConnectorRequest) (*CreateConnectorResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsCreateRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -245,10 +245,10 @@ func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateCon
 }
 
 // ReplaceConnector replaces a connector.
-func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceConnectorRequest) (*ReplaceConnectorResponse, *SdkAPIError) {
+func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceConnectorRequest) (*ReplaceConnectorResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsReplaceRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -263,10 +263,10 @@ func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceC
 }
 
 // DeleteConnector deletes a connector.
-func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteConnectorRequest) (*DeleteConnectorResponse, *SdkAPIError) {
+func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteConnectorRequest) (*DeleteConnectorResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsDeleteRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -281,10 +281,10 @@ func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteCon
 }
 
 // GetConnector retrieves a connector by ID.
-func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnectorRequest) (*GetConnectorResponse, *SdkAPIError) {
+func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnectorRequest) (*GetConnectorResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsGetRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -299,10 +299,10 @@ func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnector
 }
 
 // ListConnectors lists connectors.
-func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnectorsRequest) (*ListConnectorsResponse, *SdkAPIError) {
+func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnectorsRequest) (*ListConnectorsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsListRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -317,10 +317,10 @@ func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnec
 }
 
 // BatchGetConnectors retrieves connectors by IDs.
-func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchGetConnectorsRequest) (*BatchGetConnectorsResponse, *SdkAPIError) {
+func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchGetConnectorsRequest) (*BatchGetConnectorsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsBatchGetRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -334,10 +334,10 @@ func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchG
 }
 
 // GetConnectorTypeSummaries retrieves connector type summaries.
-func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req *GetConnectorTypeSummariesRequest) (*GetConnectorTypeSummariesResponse, *SdkAPIError) {
+func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req *GetConnectorTypeSummariesRequest) (*GetConnectorTypeSummariesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ConnectorsGetConnectorTypeSummariesRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -351,10 +351,10 @@ func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req 
 }
 
 // CreateCustomPreset creates a new custom preset.
-func (c NotificationsClient) CreateCustomPreset(ctx context.Context, req *CreateCustomPresetRequest) (*CreateCustomPresetResponse, *SdkAPIError) {
+func (c NotificationsClient) CreateCustomPreset(ctx context.Context, req *CreateCustomPresetRequest) (*CreateCustomPresetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsCreateRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -368,10 +368,10 @@ func (c NotificationsClient) CreateCustomPreset(ctx context.Context, req *Create
 }
 
 // ReplaceCustomPreset replaces a custom preset.
-func (c NotificationsClient) ReplaceCustomPreset(ctx context.Context, req *ReplaceCustomPresetRequest) (*ReplaceCustomPresetResponse, *SdkAPIError) {
+func (c NotificationsClient) ReplaceCustomPreset(ctx context.Context, req *ReplaceCustomPresetRequest) (*ReplaceCustomPresetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsReplaceRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -385,10 +385,10 @@ func (c NotificationsClient) ReplaceCustomPreset(ctx context.Context, req *Repla
 }
 
 // DeleteCustomPreset deletes a custom preset.
-func (c NotificationsClient) DeleteCustomPreset(ctx context.Context, req *DeleteCustomPresetRequest) (*DeleteCustomPresetResponse, *SdkAPIError) {
+func (c NotificationsClient) DeleteCustomPreset(ctx context.Context, req *DeleteCustomPresetRequest) (*DeleteCustomPresetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsDeleteRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -402,10 +402,10 @@ func (c NotificationsClient) DeleteCustomPreset(ctx context.Context, req *Delete
 }
 
 // SetCustomPresetAsDefault sets a custom preset as default.
-func (c NotificationsClient) SetCustomPresetAsDefault(ctx context.Context, req *SetCustomPresetAsDefaultRequest) (*SetCustomPresetAsDefaultResponse, *SdkAPIError) {
+func (c NotificationsClient) SetCustomPresetAsDefault(ctx context.Context, req *SetCustomPresetAsDefaultRequest) (*SetCustomPresetAsDefaultResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsSetAsDefaultRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -419,10 +419,10 @@ func (c NotificationsClient) SetCustomPresetAsDefault(ctx context.Context, req *
 }
 
 // GetPreset retrieves a preset.
-func (c NotificationsClient) GetPreset(ctx context.Context, req *GetPresetRequest) (*GetPresetResponse, *SdkAPIError) {
+func (c NotificationsClient) GetPreset(ctx context.Context, req *GetPresetRequest) (*GetPresetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsGetRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -436,10 +436,10 @@ func (c NotificationsClient) GetPreset(ctx context.Context, req *GetPresetReques
 }
 
 // ListPresetSummaries lists preset summaries.
-func (c NotificationsClient) ListPresetSummaries(ctx context.Context, req *ListPresetSummariesRequest) (*ListPresetSummariesResponse, *SdkAPIError) {
+func (c NotificationsClient) ListPresetSummaries(ctx context.Context, req *ListPresetSummariesRequest) (*ListPresetSummariesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsListRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -453,10 +453,10 @@ func (c NotificationsClient) ListPresetSummaries(ctx context.Context, req *ListP
 }
 
 // BatchGetPresets retrieves a group of presets.
-func (c NotificationsClient) BatchGetPresets(ctx context.Context, req *BatchGetPresetsRequest) (*BatchGetPresetsResponse, *SdkAPIError) {
+func (c NotificationsClient) BatchGetPresets(ctx context.Context, req *BatchGetPresetsRequest) (*BatchGetPresetsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsBatchGetRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -470,10 +470,10 @@ func (c NotificationsClient) BatchGetPresets(ctx context.Context, req *BatchGetP
 }
 
 // GetDefaultPresetSummary retrieves the default preset summary.
-func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *GetDefaultPresetSummaryRequest) (*GetDefaultPresetSummaryResponse, *SdkAPIError) {
+func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *GetDefaultPresetSummaryRequest) (*GetDefaultPresetSummaryResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsGetDefaultRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -487,10 +487,10 @@ func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *G
 }
 
 // GetSystemDefaultPresetSummary retrieves the system default preset summary.
-func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, req *GetSystemDefaultPresetSummaryRequest) (*GetSystemDefaultPresetSummaryResponse, *SdkAPIError) {
+func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, req *GetSystemDefaultPresetSummaryRequest) (*GetSystemDefaultPresetSummaryResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, PresetsGetSystemDefaultRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
@@ -504,10 +504,10 @@ func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, 
 }
 
 // TestConnectorConfig tests a connector configuration.
-func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestConnectorConfigRequest) (*TestConnectorConfigResponse, *SdkAPIError) {
+func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestConnectorConfigRequest) (*TestConnectorConfigResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestConnectorConfigRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -522,10 +522,10 @@ func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestC
 }
 
 // TestExistingConnector tests an existing connector.
-func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *TestExistingConnectorRequest) (*TestExistingConnectorResponse, *SdkAPIError) {
+func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *TestExistingConnectorRequest) (*TestExistingConnectorResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestExistingConnectorRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -540,10 +540,10 @@ func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *Tes
 }
 
 // TestPresetConfig tests a preset configuration.
-func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPresetConfigRequest) (*TestPresetConfigResponse, *SdkAPIError) {
+func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPresetConfigRequest) (*TestPresetConfigResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestPresetConfigRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -558,10 +558,10 @@ func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPres
 }
 
 // TestTemplateRender tests a template rendering.
-func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTemplateRenderRequest) (*TestTemplateRenderResponse, *SdkAPIError) {
+func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTemplateRenderRequest) (*TestTemplateRenderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

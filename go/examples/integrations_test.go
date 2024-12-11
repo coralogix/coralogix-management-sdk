@@ -84,7 +84,7 @@ func TestIntegration(t *testing.T) {
 		bp("WithAggregations", false),
 		bp("EnrichWithTags", true),
 	}
-	_, integrationTestErr := c.Test(context.Background(), &cxsdk.TestIntegrationRequest{
+	_, err = c.Test(context.Background(), &cxsdk.TestIntegrationRequest{
 		IntegrationData: &cxsdk.IntegrationMetadata{
 			IntegrationKey: &wrapperspb.StringValue{Value: name},
 			Version:        &wrapperspb.StringValue{Value: version},
@@ -95,7 +95,7 @@ func TestIntegration(t *testing.T) {
 			},
 		},
 	})
-	if integrationTestErr != nil {
+	if err != nil {
 		log.Fatal(err.Error())
 	}
 	assert.Nil(t, err)

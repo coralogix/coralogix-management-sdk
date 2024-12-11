@@ -56,10 +56,10 @@ type ArchiveLogsClient struct {
 }
 
 // Update updates the archive logs target.
-func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTargetRequest) (*archiveLogs.SetTargetResponse, *SdkAPIError) {
+func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTargetRequest) (*archiveLogs.SetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveLogsSetTargetRPC, archiveLogsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -74,10 +74,10 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTarge
 }
 
 // Get gets the archive logs target.
-func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetResponse, *SdkAPIError) {
+func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveLogsGetTargetRPC, archiveLogsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -92,10 +92,10 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetRespo
 }
 
 // ValidateTarget validates the archive logs target.
-func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.ValidateTargetRequest) (*archiveLogs.ValidateTargetResponse, *SdkAPIError) {
+func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.ValidateTargetRequest) (*archiveLogs.ValidateTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveLogsValidateTargetRPC, archiveLogsFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

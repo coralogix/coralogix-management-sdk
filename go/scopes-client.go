@@ -74,10 +74,10 @@ type ScopesClient struct {
 }
 
 // Create creates a new scope
-func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*scopes.CreateScopeResponse, *SdkAPIError) {
+func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*scopes.CreateScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, CreateScopeRPC, scopesFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -92,10 +92,10 @@ func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*sco
 }
 
 // Get gets a scope by its ID
-func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIDsRequest) (*scopes.GetScopesResponse, *SdkAPIError) {
+func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIDsRequest) (*scopes.GetScopesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetTeamScopesByIDsRPC, scopesFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -110,10 +110,10 @@ func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIDsRequest) (
 }
 
 // List lists all scopes for the current team
-func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*scopes.GetScopesResponse, *SdkAPIError) {
+func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*scopes.GetScopesResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GetTeamScopesRPC, scopesFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -128,10 +128,10 @@ func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*sco
 }
 
 // Update updates a scope
-func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*scopes.UpdateScopeResponse, *SdkAPIError) {
+func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*scopes.UpdateScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, UpdateScopeRPC, scopesFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -146,10 +146,10 @@ func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*sco
 }
 
 // Delete deletes a scope
-func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*scopes.DeleteScopeResponse, *SdkAPIError) {
+func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*scopes.DeleteScopeResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, DeleteScopeRPC, scopesFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection

@@ -58,10 +58,10 @@ type SamlClient struct {
 }
 
 // GetSPParameters returns the SAML service provider parameters for a given team.
-func (s SamlClient) GetSPParameters(ctx context.Context, req *saml.GetSPParametersRequest) (*saml.GetSPParametersResponse, *SdkAPIError) {
+func (s SamlClient) GetSPParameters(ctx context.Context, req *saml.GetSPParametersRequest) (*saml.GetSPParametersResponse, error) {
 	callProperties, err := s.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_GetSPParameters_FullMethodName, samlFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -76,10 +76,10 @@ func (s SamlClient) GetSPParameters(ctx context.Context, req *saml.GetSPParamete
 }
 
 // SetIDPParameters sets the SAML identity provider parameters for a given team.
-func (s SamlClient) SetIDPParameters(cxt context.Context, req *saml.SetIDPParametersRequest) (*saml.SetIDPParametersResponse, *SdkAPIError) {
+func (s SamlClient) SetIDPParameters(cxt context.Context, req *saml.SetIDPParametersRequest) (*saml.SetIDPParametersResponse, error) {
 	callProperties, err := s.callPropertiesCreator.GetTeamsLevelCallProperties(cxt)
 	if err != nil {
-		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_SetIDPParameters_FullMethodName, samlFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -94,10 +94,10 @@ func (s SamlClient) SetIDPParameters(cxt context.Context, req *saml.SetIDPParame
 }
 
 // SetActive sets the SAML configuration active state for a given team.
-func (s SamlClient) SetActive(ctx context.Context, req *saml.SetActiveRequest) (*saml.SetActiveResponse, *SdkAPIError) {
+func (s SamlClient) SetActive(ctx context.Context, req *saml.SetActiveRequest) (*saml.SetActiveResponse, error) {
 	callProperties, err := s.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_SetActive_FullMethodName, samlFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
@@ -112,10 +112,10 @@ func (s SamlClient) SetActive(ctx context.Context, req *saml.SetActiveRequest) (
 }
 
 // GetConfiguration returns the SAML configuration for a given team.
-func (s SamlClient) GetConfiguration(ctx context.Context, req *saml.GetConfigurationRequest) (*saml.GetConfigurationResponse, *SdkAPIError) {
+func (s SamlClient) GetConfiguration(ctx context.Context, req *saml.GetConfigurationRequest) (*saml.GetConfigurationResponse, error) {
 	callProperties, err := s.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
-		return nil, NewSdkAPIError(err, saml.SamlConfigurationService_GetConfiguration_FullMethodName, samlFeatureGroupID)
+		return nil, err
 	}
 
 	conn := callProperties.Connection
