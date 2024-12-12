@@ -44,7 +44,7 @@ struct Args {
     #[arg(short = 'c', long, default_value = "rust")]
     rust_root: String,
 
-    #[arg(short = 'g', long, default_value = "go")]
+    #[arg(short = 't', long, default_value = "go")]
     go_root: String,
 }
 
@@ -111,6 +111,8 @@ async fn main() -> eyre::Result<()> {
 async fn set_rust_sdk_version(args: &Args, cargo_toml_string: &str) -> eyre::Result<String> {
     let mut cargo_toml = cargo_toml_string.parse::<DocumentMut>()?;
     cargo_toml["workspace"]["package"]["version"] = toml_edit::value(args.sdk_version.clone());
+    cargo_toml["workspace"]["dependencies"]["cx-api"]["version"] =
+        toml_edit::value(args.sdk_version.clone());
     Ok(cargo_toml.to_string())
 }
 
@@ -157,6 +159,9 @@ mod test {
         authors = ["The YAK team at Coralogix"]
         readme = "README.md"
         homepage = "https://coralogix.com"
+
+        [workspace.dependencies]
+        cx-api = { version = "0.1.0" }
         "#;
         let expected_cargo_toml = r#"
         [workspace]
@@ -180,6 +185,9 @@ mod test {
         authors = ["The YAK team at Coralogix"]
         readme = "README.md"
         homepage = "https://coralogix.com"
+
+        [workspace.dependencies]
+        cx-api = { version = "0.2.1" }
         "#;
         let args = super::Args {
             root: String::from("."),
@@ -194,7 +202,7 @@ mod test {
             .await
             .unwrap();
 
-        assert!(updated_cargo_toml == expected_cargo_toml);
+        assert_eq!(updated_cargo_toml, expected_cargo_toml);
     }
 
     #[tokio::test]
@@ -206,7 +214,7 @@ const sdkVersionHeaderName = "cx-sdk-version"
 const sdkLanguageHeaderName = "cx-sdk-language"
 const sdkGoVersionHeaderName = "cx-go-version"
 const sdkCorrelationIDHeaderName = "cx-correlation-id"
-const sdkVersion = "0.1.0"
+const vanillaSdkVersion = "0.1.0"
         "#;
         let expected_go_constants = r#"
 package cxsdk
@@ -215,7 +223,7 @@ const sdkVersionHeaderName = "cx-sdk-version"
 const sdkLanguageHeaderName = "cx-sdk-language"
 const sdkGoVersionHeaderName = "cx-go-version"
 const sdkCorrelationIDHeaderName = "cx-correlation-id"
-const sdkVersion = "0.2.1"
+const vanillaSdkVersion = "coralogix-mgmt-sdk-0.2.1"
         "#;
         let args = super::Args {
             root: String::from("."),
@@ -230,6 +238,6 @@ const sdkVersion = "0.2.1"
             .await
             .unwrap();
 
-        assert!(updated_go_source_code == expected_go_constants);
+        assert_eq!(updated_go_source_code, expected_go_constants);
     }
 }
