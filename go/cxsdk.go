@@ -25,6 +25,28 @@ import (
 	"google.golang.org/grpc/status"
 )
 
+// GRPC URLs for the Coralogix regions.
+const (
+	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
+	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
+	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
+	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
+	GrpcAP1 = "ng-api-grpc.app.coralogix.in:443"
+	GrpcAP2 = "ng-api-grpc.coralogixsg.com:443"
+	GrpcAP3 = "ng-api-grpc.ap3.coralogix.com:443"
+)
+
+// RESt URLs for the Coralogix regions.
+const (
+	RestUS1 = "https://ng-api-http.coralogix.com"
+	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
+	RestEU1 = "https://ng-api-http.coralogix.com"
+	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
+	RestAP1 = "https://ng-api-http.app.coralogix.in"
+	RestAP2 = "https://ng-api-http.coralogixsg.com"
+	RestAP3 = "https://ng-api-http.ap3.coralogix.com"
+)
+
 // SdkAPIError is an error that occurs in the Coralogix SDK.
 type SdkAPIError struct {
 	apiError       error
@@ -258,6 +280,8 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 		return GrpcAP1
 	case "ap2":
 		return GrpcAP2
+	case "ap3":
+		return GrpcAP3
 	default:
 		return regionIdentifier
 	}
@@ -279,30 +303,12 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 		return RestAP1
 	case "ap2":
 		return RestAP2
+	case "ap3":
+		return RestAP3
 	default:
 		return regionIdentifier
 	}
 }
-
-// GRPC URLs for the Coralogix regions.
-const (
-	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
-	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
-	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
-	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
-	GrpcAP1 = "ng-api-grpc.app.coralogix.in:443"
-	GrpcAP2 = "ng-api-grpc.coralogixsg.com:443"
-)
-
-// RESt URLs for the Coralogix regions.
-const (
-	RestUS1 = "https://ng-api-http.coralogix.com"
-	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
-	RestEU1 = "https://ng-api-http.coralogix.com"
-	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
-	RestAP1 = "https://ng-api-http.app.coralogix.in"
-	RestAP2 = "https://ng-api-http.coralogixsg.com"
-)
 
 // AuthContext is a struct that holds the API keys for the Coralogix SDK.
 type AuthContext struct {
