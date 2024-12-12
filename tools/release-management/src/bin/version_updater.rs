@@ -44,7 +44,7 @@ struct Args {
     #[arg(short = 'c', long, default_value = "rust")]
     rust_root: String,
 
-    #[arg(short = 'g', long, default_value = "go")]
+    #[arg(short = 't', long, default_value = "go")]
     go_root: String,
 }
 

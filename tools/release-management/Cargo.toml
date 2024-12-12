@@ -3,8 +3,17 @@ name = "release-management"
 version = "0.1.0"
 edition = "2021"
 
+
+[[bin]]
+name = "tags_updater"
+path = "src/bin/protofetch_tags_updater.rs"
+
+[[bin]]
+name = "version_updater"
+path = "src/bin/version_updater.rs"
+
 [dependencies]
-octocrab = "0.39"
+octocrab = "0.42"
 serde = { version = "1", features = ["derive"] }
 toml_edit = "0.22"
 protofetch = "0"                                         #{ git = "https://github.com/coralogix/protofetch", branch = "expose-protofetch-descriptor"}
