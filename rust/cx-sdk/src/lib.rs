@@ -98,7 +98,7 @@ impl CoralogixRegion {
             CoralogixRegion::EU2 => "https://ng-api-http.eu2.coralogix.com".into(),
             CoralogixRegion::AP1 => "https://ng-api-http.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-http.coralogixsg.com".into(),
-            CoralogixRegion::AP3 => "https://ng-api-http.ap3.coralogix.com".into(), 
+            CoralogixRegion::AP3 => "https://ng-api-http.ap3.coralogix.com".into(),
             CoralogixRegion::Custom(custom) => {
                 format!("https://{}", custom.replace("grpc", "http"))
             }
@@ -123,6 +123,7 @@ impl FromStr for CoralogixRegion {
             "eu2" => Ok(CoralogixRegion::EU2),
             "ap1" => Ok(CoralogixRegion::AP1),
             "ap2" => Ok(CoralogixRegion::AP2),
+            "ap3" => Ok(CoralogixRegion::AP3),
             custom => Ok(CoralogixRegion::Custom(custom.to_string())),
         }
     }
