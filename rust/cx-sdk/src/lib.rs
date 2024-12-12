@@ -66,6 +66,8 @@ pub enum CoralogixRegion {
     AP1,
     /// AP2 region. Associated to the endpoint `https://ng-api-grpc.coralogixsg.com`
     AP2,
+    /// AP3 region. Associated to the endpoint `https://ng-api-grpc.ap3.coralogix.com`
+    AP3,
     /// Custom region. It's associated with a custom endpoint.
     Custom(String),
 }
