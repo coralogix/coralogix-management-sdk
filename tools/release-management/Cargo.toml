@@ -16,7 +16,7 @@ path = "src/bin/version_updater.rs"
 octocrab = "0.42"
 serde = { version = "1", features = ["derive"] }
 toml_edit = "0.22"
-protofetch = "0"                                         #{ git = "https://github.com/coralogix/protofetch", branch = "expose-protofetch-descriptor"}
+protofetch = "0"
 tokio = { version = "1", features = ["full"] }
 eyre = "0"
 git_cmd = "0.6"
