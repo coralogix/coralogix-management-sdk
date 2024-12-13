@@ -1,0 +1,18 @@
+name: "[Rust] Yank Cargo Package"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to yank (e.g., 1.0.0)'
+        required: true
+        type: string
+
+jobs:
+  yank:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Yank crate version
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        run: cargo yank --version ${{ github.event.inputs.version }} cx-sdk

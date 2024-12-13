@@ -1,3 +1,4 @@
 **/target
 .DS_Store
-rust/cx-api/proto
+rust/cx-api/src/generated/**/*.rs
+

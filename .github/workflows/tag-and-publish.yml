@@ -27,6 +27,7 @@ jobs:
           version: ${{env.PROTOC_VERSION}}
       - name: "cargo workspace publish"
         run:  | 
+          cargo check
           cargo install cargo-workspaces
           cargo workspaces publish --allow-dirty --no-individual-tags  --from-git --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
         env:
