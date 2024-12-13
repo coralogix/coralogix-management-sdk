@@ -55,9 +55,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     rust_root.push(PROTOS_DIR);
 
     let project_root_created = project_root.metadata().unwrap().created().ok();
-    let source_is_newer = !rust_root.exists() || project_root_created.map_or(false, |c| {
-        rust_root.metadata().unwrap().created().unwrap() < c
-    });
+    let source_is_newer = !rust_root.exists()
+        || project_root_created.map_or(false, |c| {
+            rust_root.metadata().unwrap().created().unwrap() < c
+        });
     if source_is_newer {
         println!("copying proto files from the project root to the rust root");
         copy_recursively(project_root, &rust_root).unwrap()
