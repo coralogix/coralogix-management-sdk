@@ -1,2 +1,3 @@
 **/target
 .DS_Store
+rust/cx-api/proto

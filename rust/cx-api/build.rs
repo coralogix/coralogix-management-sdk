@@ -24,13 +24,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .unwrap_or("false".into())
         .parse()
         .unwrap();
+
     let root = if is_ci {
-        std::env::var("GITHUB_WORKSPACE").unwrap()
+        format!("{}/rust/cx-api", std::env::var("GITHUB_WORKSPACE").unwrap())
     } else {
-        let mut project_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
-        project_root.pop();
-        project_root.pop();
-        project_root.into_os_string().into_string().unwrap()
+        PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap())
+            .into_os_string()
+            .into_string()
+            .unwrap()
     };
 
     println!("project_root: {:?}", root);

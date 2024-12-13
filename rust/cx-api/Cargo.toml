@@ -9,6 +9,7 @@ categories = { workspace = true }
 authors = { workspace = true }
 description = "Coralogix Management API Proxies. Support package for cx-sdk"
 readme = "../README.md"
+include = ["/src", "/proto", "build.rs"]
 
 [lib]
 doctest = false
@@ -40,7 +41,7 @@ default = [
     "views",
     "recording_rule_groups",
     "saml_configuration",
-    "notifications"
+    "notifications",
 ]
 alerts = []
 rules = []
