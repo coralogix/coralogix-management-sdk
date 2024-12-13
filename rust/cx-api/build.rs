@@ -24,6 +24,9 @@ const PROTOS_DIR: &str = "proto";
 
 /// Copy files from source to destination recursively.
 pub fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>) -> io::Result<()> {
+    if destination.as_ref().exists() {
+        fs::remove_dir_all(&destination)?;
+    }
     fs::create_dir_all(&destination)?;
     for entry in fs::read_dir(source)? {
         let entry = entry?;
@@ -47,13 +50,14 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     project_root.pop();
     project_root.pop();
     project_root.push(PROTOS_DIR);
+
     let mut rust_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
     rust_root.push(PROTOS_DIR);
-    println!(
-        "project_root: {:?}, rust_root: {:?}",
-        project_root, rust_root
-    );
-    if !rust_root.exists() {
+    let project_root_created = project_root.metadata().unwrap().created().ok();
+    let source_is_newer = project_root_created.map_or(false, |c| {
+        rust_root.metadata().unwrap().created().unwrap() < c
+    });
+    if !rust_root.exists() || source_is_newer {
         println!("copying proto files from the project root to the rust root");
         copy_recursively(project_root, &rust_root).unwrap()
     }
