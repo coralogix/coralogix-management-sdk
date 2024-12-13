@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+use git2::Repository;
 use std::{
     fs,
     io,
@@ -40,28 +41,46 @@ pub fn copy_recursively(source: impl AsRef<Path>, destination: impl AsRef<Path>)
     Ok(())
 }
 
+fn is_dev_repository() -> bool {
+    std::env::var("CARGO_MANIFEST_DIR")
+        .ok()
+        .and_then(|dir| Repository::discover(dir).ok())
+        .and_then(|repo| {
+            repo.find_remote("origin")
+                .ok()
+                .and_then(|remote| remote.url().map(|url| url.to_owned()))
+        })
+        .is_some_and(|url| url == "git@github.com:coralogix/coralogix-management-sdk.git")
+}
+
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../Cargo.lock");
     println!("cargo:rerun-if-changed=protofetch.toml");
     println!("cargo:rerun-if-changed=protofetch.lock");
 
-    let mut project_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
-    project_root.pop();
-    project_root.pop();
-    project_root.push(PROTOS_DIR);
-
     let mut rust_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
     rust_root.push(PROTOS_DIR);
 
-    let project_root_created = project_root.metadata().unwrap().created().ok();
-    let source_is_newer = !rust_root.exists()
-        || project_root_created
-            .is_some_and(|c| rust_root.metadata().unwrap().created().unwrap() < c);
-    if source_is_newer {
-        println!("copying proto files from the project root to the rust root");
+    let is_ci = std::env::var("CI").is_ok();
+
+    // We need the proto files in the /proto directory under cx-api to be able to compile the crate.
+    // We ship the proto files with the crate when we publish it to crates.io, however we don't commit the cx-api/proto folder to the repo
+    // because we want to avoid unnecessary copies of the proto files in the repo.
+    // We're only going to copy the proto files if the crate being compiled is cx-api or one of the example crates,
+    // because it means that we're the developer and we don't have the proto files where they're supposed to be.
+    if is_dev_repository() || is_ci
+    // || crate_being_compiled == "cx-sdk"
+    {
+        let mut project_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
+        project_root.pop();
+        project_root.pop();
+        project_root.push(PROTOS_DIR);
+        let mut rust_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
+        rust_root.push(PROTOS_DIR);
         copy_recursively(project_root, &rust_root).unwrap()
     }
+
     let root = rust_root.into_os_string().into_string().unwrap();
 
     println!("project_root: {:?}", root);
