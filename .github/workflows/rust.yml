@@ -30,13 +30,6 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
       - uses: taiki-e/install-action@nextest
 
-      - name: Copy proto files
-        working-directory: ${{ github.workspace }}
-        run: |
-          echo "Copying proto files from $(pwd)/proto to $(pwd)/rust/cx-api/proto"
-          mkdir -p rust/cx-api/proto
-          cp -r proto/* rust/cx-api/proto/
-
       - name: SDK tests
         run: cargo nextest run --no-tests=warn --all
       
@@ -67,14 +60,7 @@ jobs:
 
       - uses: dtolnay/rust-toolchain@stable
       - uses: taiki-e/install-action@nextest
-
-      - name: Copy proto files
-        working-directory: ${{ github.workspace }}
-        run: |
-          echo "Copying proto files from $(pwd)/proto to $(pwd)/rust/cx-api/proto"
-          mkdir -p rust/cx-api/proto
-          cp -r proto/* rust/cx-api/proto/
-
+      
       - name: Run Examples
         env:
           TEAM_ID: ${{ secrets.TEAM_ID }}
@@ -106,14 +92,6 @@ jobs:
         components: clippy, rustfmt
     - uses: taiki-e/install-action@nextest
     - uses: Swatinem/rust-cache@v2
-    
-    - name: Copy proto files
-      working-directory: ${{ github.workspace }}
-      run: |
-        echo "Copying proto files from $(pwd)/proto to $(pwd)/rust/cx-api/proto"
-        mkdir -p rust/cx-api/proto
-        cp -r proto/* rust/cx-api/proto/
-    
     - name: Check formatting
       run: cargo +nightly fmt --all -- --check
     # - name: Install SARIF tools
