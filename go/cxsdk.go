@@ -104,6 +104,7 @@ type ClientSet struct {
 	groups              *GroupsClient
 	saml                *SamlClient
 	dataUsage           *DataUsageClient
+	notifications       *NotificationsClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -215,6 +216,11 @@ func (c *ClientSet) DataUsage() *DataUsageClient {
 	return c.dataUsage
 }
 
+// Notifications gets a NotificationsClient from the ClientSet.
+func (c *ClientSet) Notifications() *NotificationsClient {
+	return c.notifications
+}
+
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *ClientSet {
 	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey)
@@ -239,9 +245,10 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		slos:                NewSLOsClient(apikeyCPC),
 		scopes:              NewScopesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
-		apiKeys: NewAPIKeysClient(apikeyCPC),
-		groups:  NewGroupsClient(apikeyCPC),
-		saml:    NewSamlClient(apikeyCPC),
+		apiKeys:       NewAPIKeysClient(apikeyCPC),
+		groups:        NewGroupsClient(apikeyCPC),
+		saml:          NewSamlClient(apikeyCPC),
+		notifications: NewNotificationsClient(apikeyCPC),
 		// users:             NewUsersClient(apikeyCPC),
 	}
 }
