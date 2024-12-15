@@ -72,6 +72,9 @@ type Connector = connectores.Connector
 // ConnectorConfig represents a connector configuration.
 type ConnectorConfig = connectores.ConnectorConfig
 
+// EntityTypeConfigOverrides represents a connector configuration overrides.
+type EntityTypeConfigOverrides = connectores.EntityTypeConfigOverrides
+
 // ConnectorConfigField represents a connector configuration field.
 type ConnectorConfigField = commonv1.ConnectorConfigField
 
@@ -143,6 +146,18 @@ type GetSystemDefaultPresetSummaryResponse = presets.GetSystemDefaultPresetSumma
 // Preset represents a preset.
 type Preset = presets.Preset
 
+// GetPresetIDIdentifier is a preset ID identifier for get requests.
+type GetPresetIDIdentifier = presets.GetPresetRequest_Id
+
+// GetPresetUserFacingIDIdentifier is a preset user-facing ID identifier for get requests.
+type GetPresetUserFacingIDIdentifier = presets.GetPresetRequest_UserFacingId
+
+// DeletePresetIDIdentifier is a preset ID identifier for delete requests.
+type DeletePresetIDIdentifier = presets.DeleteCustomPresetRequest_Id
+
+// DeletePresetUserFacingIDIdentifier is a preset user-facing ID identifier for delete requests.
+type DeletePresetUserFacingIDIdentifier = presets.DeleteCustomPresetRequest_UserFacingId
+
 // ConfigOverrides is a configuration override.
 type ConfigOverrides = common.ConfigOverrides
 
@@ -154,6 +169,12 @@ type ConditionTypeMatchEntityType = common.ConditionType_MatchEntityType
 
 // MatchEntityTypeCondition is a match entity type condition.
 type MatchEntityTypeCondition = common.MatchEntityTypeCondition
+
+// ConditionTypeMatchEntityTypeAndSubType is a match entity type and sub-type condition type.
+type ConditionTypeMatchEntityTypeAndSubType = common.ConditionType_MatchEntityTypeAndSubType
+
+// MatchEntityTypeAndSubTypeCondition is a match entity type and sub-type condition.
+type MatchEntityTypeAndSubTypeCondition = common.MatchEntityTypeAndSubTypeCondition
 
 // PresetType is a preset type.
 type PresetType = presets.PresetType

@@ -95,7 +95,8 @@ mod tests {
             user_facing_id: None,
             update_time: None,
             parent: Some(Box::new(Preset {
-                id: Some("parent_id".to_string()),
+                user_facing_id: Some("preset_system_generic_https_alerts_empty".to_string()),
+                id: Some("".to_string()),
                 name: "".to_string(),
                 description: "".to_string(),
                 connector_type: 0,
@@ -103,7 +104,6 @@ mod tests {
                 create_time: None,
                 entity_type: "".to_string(),
                 preset_type: None,
-                user_facing_id: None,
                 update_time: None,
                 parent: None,
             })),

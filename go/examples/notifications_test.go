@@ -23,7 +23,7 @@ import (
 )
 
 func TestConnectors(t *testing.T) {
-	t.Skip("Connectors are not supported in the current version of the SDK")
+	//t.Skip("Connectors are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -36,7 +36,6 @@ func TestConnectors(t *testing.T) {
 			Type:        cxsdk.ConnectorTypeGenericHTTPS,
 			Name:        "TestConnector",
 			Description: "This is the connector to use for Notification Center testing.",
-			EntityType:  "alerts",
 			ConnectorConfigs: []*cxsdk.ConnectorConfig{
 				{
 					OutputSchemaId: "default",
@@ -74,7 +73,7 @@ func TestConnectors(t *testing.T) {
 }
 
 func TestPresets(t *testing.T) {
-	t.Skip("Presets are not supported in the current version of the SDK")
+	//t.Skip("Presets are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -83,7 +82,7 @@ func TestPresets(t *testing.T) {
 
 	c := cxsdk.NewNotificationsClient(creator)
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+	parentUserFacingId := "preset_system_generic_https_alerts_empty"
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: &cxsdk.Preset{
 			Name:        "TestPreset",
@@ -91,7 +90,7 @@ func TestPresets(t *testing.T) {
 			PresetType:  &presetType,
 			EntityType:  "alerts",
 			Parent: &cxsdk.Preset{
-				Id: &parentId,
+				UserFacingId: &parentUserFacingId,
 			},
 			ConnectorType: cxsdk.ConnectorTypeGenericHTTPS,
 			ConfigOverrides: []*cxsdk.ConfigOverrides{
@@ -126,8 +125,9 @@ func TestPresets(t *testing.T) {
 
 	presetId := createRes.Preset.Id
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
-		Id: *presetId,
-	})
+		Identifier: &cxsdk.GetPresetIDIdentifier{
+			Id: *presetId,
+		}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -135,7 +135,9 @@ func TestPresets(t *testing.T) {
 	assert.Equal(t, preset.Preset.Name, "TestPreset")
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Identifier: &cxsdk.DeletePresetIDIdentifier{
+			Id: *presetId,
+		},
 	})
 
 	if err != nil {

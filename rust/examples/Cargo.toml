@@ -13,4 +13,5 @@ members = [
     "recording-rules",
     "dataplans",
     "enrichments",
+    "notifications",
 ]
