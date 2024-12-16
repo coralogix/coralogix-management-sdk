@@ -14,5 +14,5 @@
 
 #![allow(clippy::all)]
 pub mod proto {
-    tonic::include_proto!("coralogix_management_api_grpc");
+    include!("generated/coralogix_management_api_grpc.rs");
 }
