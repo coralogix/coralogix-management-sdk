@@ -155,6 +155,12 @@ type ConditionTypeMatchEntityType = common.ConditionType_MatchEntityType
 // MatchEntityTypeCondition is a match entity type condition.
 type MatchEntityTypeCondition = common.MatchEntityTypeCondition
 
+// ConditionTypeMatchEntityTypeAndSubType is a match entity type and sub-type condition type.
+type ConditionTypeMatchEntityTypeAndSubType = common.ConditionType_MatchEntityTypeAndSubType
+
+// MatchEntityTypeAndSubTypeCondition is a match entity type and sub-type condition.
+type MatchEntityTypeAndSubTypeCondition = common.MatchEntityTypeAndSubTypeCondition
+
 // PresetType is a preset type.
 type PresetType = presets.PresetType
 
