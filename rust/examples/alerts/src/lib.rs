@@ -18,9 +18,47 @@ mod tests {
     use std::vec;
 
     use cx_sdk::{
-        auth::AuthContext, client::{
+        CoralogixRegion,
+        auth::AuthContext,
+        client::{
             alerts::{
-                self, integration_type, ActivitySchedule, AlertDef, AlertDefNotificationGroup, AlertDefOverride, AlertDefPriority, AlertDefProperties, AlertDefType, AlertDefWebhooksSettings, AlertsClient, DayOfWeek, FilterType, IntegrationType, LabelFilterType, LabelFilters, LogFilterOperationType, LogSeverity, LogsFilter, LogsSimpleFilter, LogsThresholdCondition, LogsThresholdConditionType, LogsThresholdRule, LogsThresholdType, LogsTimeWindow, LogsTimeWindowType, LogsTimeWindowValue, LogsUniqueCountCondition, LogsUniqueCountRule, LogsUniqueCountType, LogsUniqueValueTimeWindow, LogsUniqueValueTimeWindowType, NotifyOn, Recipients, RetriggeringPeriod, TimeOfDay, TypeDefinition
+                self,
+                ActivitySchedule,
+                AlertDef,
+                AlertDefNotificationGroup,
+                AlertDefOverride,
+                AlertDefPriority,
+                AlertDefProperties,
+                AlertDefType,
+                AlertDefWebhooksSettings,
+                AlertsClient,
+                DayOfWeek,
+                FilterType,
+                IntegrationType,
+                LabelFilterType,
+                LabelFilters,
+                LogFilterOperationType,
+                LogSeverity,
+                LogsFilter,
+                LogsSimpleFilter,
+                LogsThresholdCondition,
+                LogsThresholdConditionType,
+                LogsThresholdRule,
+                LogsThresholdType,
+                LogsTimeWindow,
+                LogsTimeWindowType,
+                LogsTimeWindowValue,
+                LogsUniqueCountCondition,
+                LogsUniqueCountRule,
+                LogsUniqueCountType,
+                LogsUniqueValueTimeWindow,
+                LogsUniqueValueTimeWindowType,
+                NotifyOn,
+                Recipients,
+                RetriggeringPeriod,
+                TimeOfDay,
+                TypeDefinition,
+                integration_type,
             },
             alerts_scheduler::{
                 AlertSchedulerClient,
@@ -35,9 +73,8 @@ mod tests {
                 Until,
                 WhichAlerts,
             },
-        }, CoralogixRegion
+        },
     };
-
 
     fn create_alert() -> AlertDef {
         AlertDef {
@@ -131,7 +168,6 @@ mod tests {
         }
     }
 
-
     fn create_logs_unique_count_alert() -> AlertDef {
         AlertDef {
             updated_time: None,
@@ -207,7 +243,7 @@ mod tests {
             alert_version_id: None,
         }
     }
-    
+
     #[tokio::test]
     async fn test_logs_unique_count_alert() {
         let alerts_client = AlertsClient::new(
@@ -233,7 +269,6 @@ mod tests {
             .alert_def;
 
         assert_eq!(retrieved_alert.unwrap(), created_alert);
-
         alerts_client
             .delete(created_alert.id.unwrap())
             .await
