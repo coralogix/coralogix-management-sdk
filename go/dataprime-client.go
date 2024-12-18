@@ -25,6 +25,24 @@ type QueryRequest = dataprime.QueryRequest
 // DataprimeQueryMetadata is the metadata for the query
 type DataprimeQueryMetadata = dataprime.Metadata
 
+// DataprimeQueryMetadataSyntax is a syntax for the query.
+type DataprimeQueryMetadataSyntax = dataprime.Metadata_QuerySyntax
+
+// DataprimeQueryMetadataTier is a tier value for the query.
+type DataprimeQueryMetadataTier = dataprime.Metadata_Tier
+
+// DataprimeQueryMetadataTier values.
+const (
+	DataprimeQueryMetadataTierUnspecified = dataprime.Metadata_TIER_UNSPECIFIED
+	DataprimeQueryMetadataTierArchive = dataprime.Metadata_TIER_ARCHIVE
+	DataprimeQueryMetadataTierFrequentSearch = dataprime.Metadata_TIER_FREQUENT_SEARCH
+)
+
+// RPC values.
+const (
+	DataprimeQueryServiceRPC = dataprime.DataprimeQueryService_Query_FullMethodName
+)
+
 // DataprimeClient is a client for the Coralogix Dataprime API.
 type DataprimeClient struct {
 	callPropertiesCreator *CallPropertiesCreator
