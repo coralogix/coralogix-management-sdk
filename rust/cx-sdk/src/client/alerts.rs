@@ -102,6 +102,7 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     LogsUniqueCountCondition,
     LogsUniqueCountRule,
     LogsUniqueCountType,
+    LogsUniqueValueTimeWindow,
     MetricAnomalyCondition,
     MetricAnomalyRule,
     MetricAnomalyType,
@@ -132,6 +133,7 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     integration_type,
     logs_filter::FilterType,
     logs_time_window::Type as LogsTimeWindowType,
+    logs_unique_value_time_window::Type as LogsUniqueValueTimeWindowType,
     metric_missing_values::MissingValues,
 };
 
