@@ -18,42 +18,9 @@ mod tests {
     use std::vec;
 
     use cx_sdk::{
-        CoralogixRegion,
-        auth::AuthContext,
-        client::{
+        auth::AuthContext, client::{
             alerts::{
-                self,
-                ActivitySchedule,
-                AlertDef,
-                AlertDefNotificationGroup,
-                AlertDefOverride,
-                AlertDefPriority,
-                AlertDefProperties,
-                AlertDefType,
-                AlertDefWebhooksSettings,
-                AlertsClient,
-                DayOfWeek,
-                FilterType,
-                IntegrationType,
-                LabelFilterType,
-                LabelFilters,
-                LogFilterOperationType,
-                LogSeverity,
-                LogsFilter,
-                LogsSimpleFilter,
-                LogsThresholdCondition,
-                LogsThresholdConditionType,
-                LogsThresholdRule,
-                LogsThresholdType,
-                LogsTimeWindow,
-                LogsTimeWindowType,
-                LogsTimeWindowValue,
-                NotifyOn,
-                Recipients,
-                RetriggeringPeriod,
-                TimeOfDay,
-                TypeDefinition,
-                integration_type,
+                self, integration_type, ActivitySchedule, AlertDef, AlertDefNotificationGroup, AlertDefOverride, AlertDefPriority, AlertDefProperties, AlertDefType, AlertDefWebhooksSettings, AlertsClient, DayOfWeek, FilterType, IntegrationType, LabelFilterType, LabelFilters, LogFilterOperationType, LogSeverity, LogsFilter, LogsSimpleFilter, LogsThresholdCondition, LogsThresholdConditionType, LogsThresholdRule, LogsThresholdType, LogsTimeWindow, LogsTimeWindowType, LogsTimeWindowValue, LogsUniqueCountCondition, LogsUniqueCountRule, LogsUniqueCountType, LogsUniqueValueTimeWindow, LogsUniqueValueTimeWindowType, NotifyOn, Recipients, RetriggeringPeriod, TimeOfDay, TypeDefinition
             },
             alerts_scheduler::{
                 AlertSchedulerClient,
@@ -68,8 +35,9 @@ mod tests {
                 Until,
                 WhichAlerts,
             },
-        },
+        }, CoralogixRegion
     };
+
 
     fn create_alert() -> AlertDef {
         AlertDef {
@@ -161,6 +129,115 @@ mod tests {
             id: None,
             alert_version_id: None,
         }
+    }
+
+
+    fn create_logs_unique_count_alert() -> AlertDef {
+        AlertDef {
+            updated_time: None,
+            created_time: None,
+            alert_def_properties: Some(AlertDefProperties {
+                name: Some("Unique Count alert example".to_string()),
+                description: Some("Example of Unique Count alert from terraform".to_string()),
+                enabled: Some(true),
+                priority: AlertDefPriority::P1.into(),
+                deleted: None,
+                r#type: AlertDefType::LogsUniqueCount.into(),
+                group_by_keys: vec![],
+                incidents_settings: None,
+                phantom_mode: Some(false),
+                notification_group: Some(AlertDefNotificationGroup {
+                    group_by_keys: vec![],
+                    destinations: vec![],
+                    webhooks: vec![AlertDefWebhooksSettings {
+                        notify_on: Some(NotifyOn::TriggeredAndResolved.into()),
+                        retriggering_period: Some(RetriggeringPeriod::Minutes(5)),
+                        integration: Some(IntegrationType {
+                            integration_type: Some(integration_type::IntegrationType::Recipients(
+                                Recipients {
+                                    emails: vec![String::from("example@coralogix.com")],
+                                },
+                            )),
+                        }),
+                    }],
+                }),
+                entity_labels: [
+                    ("alert_type".to_string(), "security".to_string()),
+                    ("security_severity".to_string(), "high".to_string()),
+                ]
+                .into_iter()
+                .collect(),
+                schedule: None,
+                type_definition: Some(TypeDefinition::LogsUniqueCount(LogsUniqueCountType {
+                    
+                    logs_filter: Some(LogsFilter {
+                        filter_type: Some(FilterType::SimpleFilter(LogsSimpleFilter {
+                            lucene_query: Some(String::from("remote_addr_enriched:/.*/")),
+                            label_filters: Some(LabelFilters {
+                                application_name: vec![LabelFilterType {
+                                    value: Some(String::from("nginx")),
+                                    operation: LogFilterOperationType::Includes.into(),
+                                }],
+                                subsystem_name: vec![LabelFilterType {
+                                    value: Some(String::from("subsystem-name")),
+                                    operation: LogFilterOperationType::StartsWith.into(),
+                                }],
+                                severities: vec![
+                                    LogSeverity::Warning.into(),
+                                    LogSeverity::Info.into(),
+                                ],
+                            }),
+                        })),
+                    }),
+                    notification_payload_filter: vec![],
+                    rules: vec![LogsUniqueCountRule {
+                        condition: Some(LogsUniqueCountCondition {
+                            time_window: Some(LogsUniqueValueTimeWindow {
+                                r#type: Some(LogsUniqueValueTimeWindowType::LogsUniqueValueTimeWindowSpecificValue(LogsTimeWindowValue::Minutes5OrUnspecified.into())),
+                            }),
+                            max_unique_count: Some(2),
+                        }),
+                    }],
+                    max_unique_count_per_group_by_key: Some(500),
+                    unique_count_keypath: Some("remote_addr_geoip.country_name".to_string()),
+                })),
+                notification_group_excess: vec![],
+            }),
+            id: None,
+            alert_version_id: None,
+        }
+    }
+    
+    #[tokio::test]
+    async fn test_logs_unique_count_alert() {
+        let alerts_client = AlertsClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+        let alert = create_logs_unique_count_alert();
+
+        let created_alert = alerts_client
+            .create(alert.clone())
+            .await
+            .unwrap()
+            .alert_def
+            .unwrap();
+        println!("{:#?}", created_alert);
+        println!("{:#?}", alert);
+        assert_eq!(alert, created_alert);
+        let retrieved_alert = alerts_client
+            .get(created_alert.id.clone().unwrap())
+            .await
+            .unwrap()
+            .alert_def;
+
+        assert_eq!(retrieved_alert.unwrap(), created_alert);
+
+        alerts_client
+            .delete(created_alert.id.unwrap())
+            .await
+            .unwrap();
     }
 
     #[tokio::test]
