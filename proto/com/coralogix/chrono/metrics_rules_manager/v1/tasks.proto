@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package rule_manager.tasks;
 
-option go_package = "/golang";
-
-
 message GetTaskRequest {}
 message GetTaskResponse {
     oneof task {

@@ -126,9 +126,10 @@ allow_policies = [
 revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
-url = "github.com/coralogix/cx-api-clientsets"
-revision = "v0.0.7"
-allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
+url = "github.com/coralogix/cx-api-metrics-rule-manager"
+revision = "v0.0.2"
+content_roots = ["/proto"]
+allow_policies = ["/com/coralogix/chrono/metrics_rules_manager/v1/*"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
