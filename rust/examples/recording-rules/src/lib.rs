@@ -37,6 +37,8 @@ mod tests {
             .create(
                 "TestRecordingRuleGroupSet2".into(),
                 vec![InRuleGroup {
+                    id: None,
+                    version: None,
                     name: "foo".into(),
                     interval: Some(180),
                     limit: Some(100),
@@ -46,6 +48,8 @@ mod tests {
                         labels: HashMap::new(),
                     }, InRule{ record: "job:http_requests_total:sum".into(), expr: "sum(rate(http_requests_total[5m])) by (job)".into(), labels: HashMap::new() }],
                 }, InRuleGroup {
+                    id: None,
+                    version: None,
                     name: "bar".into(),
                     interval: Some(180),
                     limit: Some(100),

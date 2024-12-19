@@ -119,17 +119,17 @@ revision = "v0.0.72"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
+revision = 'v0.0.2'
 allow_policies = [
     "/com/coralogix/metrics/metrics-configurator.proto",
     "/com/coralogix/metrics/metrics-tco.proto",
 ]
-revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
-revision = "v0.0.2"
+revision = "v0.0.3"
 content_roots = ["/proto"]
-allow_policies = ["/com/coralogix/chrono/metrics_rules_manager/v1/groups.proto"]
+allow_policies = ["/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
