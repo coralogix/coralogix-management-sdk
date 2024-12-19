@@ -119,16 +119,17 @@ revision = "v0.0.72"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
+revision = 'v0.0.2'
 allow_policies = [
     "/com/coralogix/metrics/metrics-configurator.proto",
     "/com/coralogix/metrics/metrics-tco.proto",
 ]
-revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
-url = "github.com/coralogix/cx-api-clientsets"
-revision = "v0.0.7"
-allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
+url = "github.com/coralogix/cx-api-metrics-rule-manager"
+revision = "v0.0.3"
+content_roots = ["/proto"]
+allow_policies = ["/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
@@ -162,3 +163,10 @@ allow_policies = [
 [global-mapping]
 url = 'github.com/coralogix/cx-api-global-mapping'
 revision = 'v1.26.0'
+
+[grpc-gateway]  
+url = "github.com/grpc-ecosystem/grpc-gateway"
+revision = "v2.24.0"
+allow_policies = [
+    "/protoc-gen-openapiv2/options/*.proto",
+]

@@ -80,9 +80,9 @@ commit_hash = "7f7c1d01938bdedd8c6923edee51a3aed4777ad6"
 
 [[dependencies]]
 name = "cx-api-metrics-rule-manager"
-url = "github.com/coralogix/cx-api-clientsets"
-revision = "v0.0.7"
-commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
+url = "github.com/coralogix/cx-api-metrics-rule-manager"
+revision = "v0.0.3"
+commit_hash = "c87f468085ef0f749ddac1fdb4c805a98acf2052"
 
 [[dependencies]]
 name = "cx-api-notification-center"
@@ -143,6 +143,12 @@ name = "google-api"
 url = "github.com/googleapis/googleapis"
 revision = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
+
+[[dependencies]]
+name = "grpc-gateway"
+url = "github.com/grpc-ecosystem/grpc-gateway"
+revision = "v2.24.0"
+commit_hash = "a5f1b64039b6e6aa1ab9bccc1cd31f4342c5ecc3"
 
 [[dependencies]]
 name = "rules-api-protobuf"
