@@ -171,7 +171,7 @@ fn e2m_service(root: &str) -> Vec<String> {
 
 fn recording_rule_group_sets_service(root: &str) -> Vec<String> {
     vec![format!(
-        "{}/com/coralogixapis/metrics-rule-manager/v1/groups.proto",
+        "{}/com/coralogix/chrono/metrics_rules_manager/v1/groups.proto",
         root
     )]
 }

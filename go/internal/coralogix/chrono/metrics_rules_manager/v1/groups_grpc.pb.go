@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.26.1
-// source: proto/com/coralogix/chrono/metrics_rules_manager/v1/groups.proto
+// source: com/coralogix/chrono/metrics_rules_manager/v1/groups.proto
 
 package v1
 
@@ -246,7 +246,7 @@ var RuleGroups_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/com/coralogix/chrono/metrics_rules_manager/v1/groups.proto",
+	Metadata: "com/coralogix/chrono/metrics_rules_manager/v1/groups.proto",
 }
 
 const (
@@ -500,5 +500,5 @@ var RuleGroupSets_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/com/coralogix/chrono/metrics_rules_manager/v1/groups.proto",
+	Metadata: "com/coralogix/chrono/metrics_rules_manager/v1/groups.proto",
 }

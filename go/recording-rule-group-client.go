@@ -16,7 +16,7 @@ package cxsdk
 import (
 	"context"
 
-	recordingRuleGroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/metrics-rule-manager/v1"
+	recordingRuleGroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/chrono/metrics_rules_manager/v1"
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 

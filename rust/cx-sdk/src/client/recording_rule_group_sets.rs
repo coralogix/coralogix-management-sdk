@@ -13,7 +13,7 @@
 // limitations under the License.
 use std::str::FromStr;
 
-pub use cx_api::proto::rule_manager::groups::{
+pub use cx_api::proto::com::coralogixapis::metrics_rule_manager::v1::{
     CreateRuleGroupSet,
     CreateRuleGroupSetResult,
     DeleteRuleGroupSet,
@@ -49,7 +49,7 @@ use crate::{
 
 const RECORDING_RULES_FEATURE_GROUP_ID: &str = "recording-rules";
 
-use cx_api::proto::rule_manager::groups::rule_group_sets_client::RuleGroupSetsClient;
+use cx_api::proto::com::coralogixapis::metrics_rule_manager::v1::rule_group_sets_client::RuleGroupSetsClient;
 
 /// A client for the recording rule group sets service.
 pub struct RecordingRuleGroupSetsClient {
@@ -152,9 +152,14 @@ impl RecordingRuleGroupSetsClient {
     /// Updates a group.
     /// * `id` - The id of the rule group set to update.
     /// * `groups` - The [`InRuleGroup`]s to update.
-    pub async fn update(&self, id: String, groups: Vec<InRuleGroup>) -> Result<()> {
+    pub async fn update(
+        &self,
+        id: String,
+        name: Option<String>,
+        groups: Vec<InRuleGroup>,
+    ) -> Result<()> {
         let request =
-            make_request_with_metadata(UpdateRuleGroupSet { id, groups }, &self.metadata_map);
+            make_request_with_metadata(UpdateRuleGroupSet { id, name, groups }, &self.metadata_map);
         self.service_client
             .lock()
             .await

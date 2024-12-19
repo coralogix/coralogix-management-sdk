@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.26.1
-// source: proto/com/coralogix/chrono/metrics_rules_manager/v1/tasks.proto
+// source: com/coralogix/chrono/metrics_rules_manager/v1/tasks.proto
 
 package v1
 
@@ -155,5 +155,5 @@ var Tasks_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "proto/com/coralogix/chrono/metrics_rules_manager/v1/tasks.proto",
+	Metadata: "com/coralogix/chrono/metrics_rules_manager/v1/tasks.proto",
 }
