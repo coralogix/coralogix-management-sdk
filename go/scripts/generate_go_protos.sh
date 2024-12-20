@@ -68,6 +68,11 @@ done
 # Generate go files one by one. All together only works if there are no duplicates
 for proto_file in "${proto_files[@]}" 
 do
+
+    if [[ $proto_file == *"openapiv2"* ]]; then
+        echo "Generating openapiv2 file $proto_file, $proto_dir, $go_out_dir"
+        protoc --proto_path=$proto_dir --go_out=$go_out_dir $proto_file
+    fi
     if [[ $proto_file == *"coralogix"* ]]; then
         case "$proto_file" in
             *dashboards/v1/ast/widgets/common/queries.proto ) 
