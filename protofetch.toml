@@ -163,10 +163,3 @@ allow_policies = [
 [global-mapping]
 url = 'github.com/coralogix/cx-api-global-mapping'
 revision = 'v1.26.0'
-
-[grpc-gateway]  
-url = "github.com/grpc-ecosystem/grpc-gateway"
-revision = "v2.24.0"
-allow_policies = [
-    "/protoc-gen-openapiv2/options/*.proto",
-]

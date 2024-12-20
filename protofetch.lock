@@ -145,12 +145,6 @@ revision = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 
 [[dependencies]]
-name = "grpc-gateway"
-url = "github.com/grpc-ecosystem/grpc-gateway"
-revision = "v2.24.0"
-commit_hash = "a5f1b64039b6e6aa1ab9bccc1cd31f4342c5ecc3"
-
-[[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
 revision = "v0.17.1"
