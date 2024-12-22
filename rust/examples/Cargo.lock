@@ -1098,6 +1098,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "notifications"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "num-conv"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
