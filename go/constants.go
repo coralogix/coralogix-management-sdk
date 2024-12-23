@@ -14,8 +14,8 @@
 
 package cxsdk
 
-const sdkVersionHeaderName = "cx-sdk-version"
-const sdkLanguageHeaderName = "cx-sdk-language"
-const sdkGoVersionHeaderName = "cx-go-version"
-const sdkCorrelationIDHeaderName = "cx-correlation-id"
+const sdkVersionHeaderName = "x-cx-sdk-version"
+const sdkLanguageHeaderName = "x-cx-sdk-language"
+const sdkGoVersionHeaderName = "x-cx-go-version"
+const sdkCorrelationIDHeaderName = "x-cx-correlation-id"
 const vanillaSdkVersion = "coralogix-mgmt-sdk-0.12.1"

@@ -42,10 +42,10 @@ mod metadata;
 
 const ENV_CORALOGIX_REGION: &str = "CORALOGIX_REGION";
 const AUTHORIZATION_HEADER_NAME: &str = "authorization";
-const SDK_VERSION_HEADER_NAME: &str = "cx-sdk-version";
-const SDK_LANGUAGE_HEADER_NAME: &str = "cx-sdk-language";
-const SDK_RUSTC_VERSION_HEADER_NAME: &str = "cx-sdk-rustc-version";
-const SDK_CORRELATION_ID_HEADER_NAME: &str = "cx-sdk-correlation-id";
+const SDK_VERSION_HEADER_NAME: &str = "x-cx-sdk-version";
+const SDK_LANGUAGE_HEADER_NAME: &str = "x-cx-sdk-language";
+const SDK_RUSTC_VERSION_HEADER_NAME: &str = "x-cx-sdk-rustc-version";
+const SDK_CORRELATION_ID_HEADER_NAME: &str = "x-cx-sdk-correlation-id";
 const RUSTC_VERSION: &str = env!("RUSTC_VERSION");
 
 /// The SDK version.
