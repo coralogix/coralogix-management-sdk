@@ -186,6 +186,14 @@ mod tests {
 
         assert_eq!(retrieved_alert.unwrap(), created_alert);
 
+        let retrieved_alerts = alerts_client
+        .list()
+        .await
+        .unwrap()
+        .alert_defs;
+    
+        assert!(retrieved_alerts.len() > 0);
+
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {
                 description: Some("updated description".to_string()),
