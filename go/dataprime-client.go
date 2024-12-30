@@ -33,8 +33,8 @@ type DataprimeQueryMetadataTier = dataprime.Metadata_Tier
 
 // DataprimeQueryMetadataTier values.
 const (
-	DataprimeQueryMetadataTierUnspecified = dataprime.Metadata_TIER_UNSPECIFIED
-	DataprimeQueryMetadataTierArchive = dataprime.Metadata_TIER_ARCHIVE
+	DataprimeQueryMetadataTierUnspecified    = dataprime.Metadata_TIER_UNSPECIFIED
+	DataprimeQueryMetadataTierArchive        = dataprime.Metadata_TIER_ARCHIVE
 	DataprimeQueryMetadataTierFrequentSearch = dataprime.Metadata_TIER_FREQUENT_SEARCH
 )
 
