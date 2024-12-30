@@ -104,6 +104,7 @@ type ClientSet struct {
 	groups              *GroupsClient
 	saml                *SamlClient
 	dataUsage           *DataUsageClient
+	roles               *RolesClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -215,6 +216,11 @@ func (c *ClientSet) DataUsage() *DataUsageClient {
 	return c.dataUsage
 }
 
+// Roles gets a RolesClient from the ClientSet.
+func (c *ClientSet) Roles() *RolesClient {
+	return c.roles
+}
+
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *ClientSet {
 	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey)
@@ -238,6 +244,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		teams:               NewTeamsClient(apikeyCPC),
 		slos:                NewSLOsClient(apikeyCPC),
 		scopes:              NewScopesClient(apikeyCPC),
+		roles:               NewRolesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewAPIKeysClient(apikeyCPC),
 		groups:  NewGroupsClient(apikeyCPC),
