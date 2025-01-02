@@ -27,7 +27,7 @@ import (
 
 // GRPC URLs for the Coralogix regions.
 const (
-	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
+	GrpcUS1 = "ng-api-grpc.coralogix.us:443"
 	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
 	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
 	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
@@ -38,7 +38,7 @@ const (
 
 // RESt URLs for the Coralogix regions.
 const (
-	RestUS1 = "https://ng-api-http.coralogix.com"
+	RestUS1 = "https://ng-api-http.coralogix.us"
 	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
 	RestEU1 = "https://ng-api-http.coralogix.com"
 	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
@@ -104,6 +104,7 @@ type ClientSet struct {
 	groups              *GroupsClient
 	saml                *SamlClient
 	dataUsage           *DataUsageClient
+	roles               *RolesClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -215,6 +216,11 @@ func (c *ClientSet) DataUsage() *DataUsageClient {
 	return c.dataUsage
 }
 
+// Roles gets a RolesClient from the ClientSet.
+func (c *ClientSet) Roles() *RolesClient {
+	return c.roles
+}
+
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *ClientSet {
 	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey)
@@ -238,6 +244,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		teams:               NewTeamsClient(apikeyCPC),
 		slos:                NewSLOsClient(apikeyCPC),
 		scopes:              NewScopesClient(apikeyCPC),
+		roles:               NewRolesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
 		apiKeys: NewAPIKeysClient(apikeyCPC),
 		groups:  NewGroupsClient(apikeyCPC),

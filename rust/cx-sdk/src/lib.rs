@@ -42,10 +42,10 @@ mod metadata;
 
 const ENV_CORALOGIX_REGION: &str = "CORALOGIX_REGION";
 const AUTHORIZATION_HEADER_NAME: &str = "authorization";
-const SDK_VERSION_HEADER_NAME: &str = "cx-sdk-version";
-const SDK_LANGUAGE_HEADER_NAME: &str = "cx-sdk-language";
-const SDK_RUSTC_VERSION_HEADER_NAME: &str = "cx-sdk-rustc-version";
-const SDK_CORRELATION_ID_HEADER_NAME: &str = "cx-sdk-correlation-id";
+const SDK_VERSION_HEADER_NAME: &str = "x-cx-sdk-version";
+const SDK_LANGUAGE_HEADER_NAME: &str = "x-cx-sdk-language";
+const SDK_RUSTC_VERSION_HEADER_NAME: &str = "x-cx-sdk-rustc-version";
+const SDK_CORRELATION_ID_HEADER_NAME: &str = "x-cx-sdk-correlation-id";
 const RUSTC_VERSION: &str = env!("RUSTC_VERSION");
 
 /// The SDK version.
@@ -77,7 +77,7 @@ impl CoralogixRegion {
     /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn grpc_endpoint(&self) -> String {
         match self {
-            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.com".into(),
+            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.us".into(),
             CoralogixRegion::US2 => "https://ng-api-grpc.cx498.coralogix.com".into(),
             CoralogixRegion::EU1 => "https://ng-api-grpc.coralogix.com".into(),
             CoralogixRegion::EU2 => "https://ng-api-grpc.eu2.coralogix.com".into(),
@@ -92,7 +92,7 @@ impl CoralogixRegion {
     /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn rest_endpoint(&self) -> String {
         match self {
-            CoralogixRegion::US1 => "https://ng-api-http.coralogix.com".into(),
+            CoralogixRegion::US1 => "https://ng-api-http.coralogix.us".into(),
             CoralogixRegion::US2 => "https://ng-api-http.cx498.coralogix.com".into(),
             CoralogixRegion::EU1 => "https://ng-api-http.coralogix.com".into(),
             CoralogixRegion::EU2 => "https://ng-api-http.eu2.coralogix.com".into(),

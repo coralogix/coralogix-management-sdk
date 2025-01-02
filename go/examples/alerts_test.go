@@ -145,6 +145,10 @@ func TestAlerts(t *testing.T) {
 
 	assert.Nil(t, err)
 
+	alerts, err := c.List(context.Background(), &cxsdk.ListAlertDefsRequest{})
+	assert.Nil(t, err)
+	assert.Greater(t, len(alerts.AlertDefs), 0)
+
 	updatedAlertDef := retrievedAlert.AlertDef
 	updatedAlertDef.AlertDefProperties.Description = &wrapperspb.StringValue{Value: "Updated description"}
 

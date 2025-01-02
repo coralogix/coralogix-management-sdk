@@ -6,6 +6,22 @@
 
 🌟 [Master Docs](https://coralogix.github.io/coralogix-management-sdk) 🌟
 
+# Versioning
+
+The SDK follows a rolling release schedule with one LTS version once a year (in June). Revisions allow additional fixes that add hotfixes for immediate bugs, security fixes, etc. The remaining issue fixes are rolled up in the following month’s release. The exception is the LTS release which will contain relevant fixes. 
+
+### LTS
+
+Every year in June the x.6.x version is considered LTS and will be backwards compatible for a year. This is the version recommended for any stable product (Terraform Provider, …) and will be maintained without major (API-related) changes.
+
+### Examples
+
+Here are a few examples of (anticipated) versions:
+
+- 0.12.0 → Year 0 (= 2024), month (12), revision (0)
+- 1.1.0 → January 2025 without any additional revisions
+- 1.6.10 → June 2025 (LTS) with 10 revisions
+
 # Building
 
 ## Prerequisites
