@@ -84,21 +84,33 @@ message ReplaceCustomPresetResponse {
 }
 
 message DeleteCustomPresetRequest {
-  string id = 1;
+  optional string deprecated_id = 1;
+  oneof identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
 }
 
 message DeleteCustomPresetResponse {
 }
 
 message SetCustomPresetAsDefaultRequest {
-  string id = 1;
+  optional string deprecated_id = 1;
+  oneof identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
 }
 
 message SetCustomPresetAsDefaultResponse {
 }
 
 message GetPresetRequest {
-  string id = 1;
+  optional string deprecated_id = 1;
+  oneof identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
 }
 
 message GetPresetResponse {

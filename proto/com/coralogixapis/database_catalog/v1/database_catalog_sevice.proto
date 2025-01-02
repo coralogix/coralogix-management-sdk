@@ -1,24 +1,19 @@
 syntax = "proto3";
 
 package com.coralogixapis.database_catalog.v1;
+
 import "com/coralogix/catalog/v1/common.proto";
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/struct.proto";
-
-import "com/coralogixapis/service_catalog/v1/apm_source.proto";
-import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
-
+import "com/coralogixapis/alerts/v3/alert_def.proto";
+import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
-import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
-
 import "com/coralogixapis/database_catalog/v1/aggregation_type.proto";
-import "com/coralogixapis/database_catalog/v1/error_graph_type.proto";
-
 import "com/coralogixapis/database_catalog/v1/database.proto";
-
-import "com/coralogixapis/alerts/v3/alert_def.proto";
-
+import "com/coralogixapis/database_catalog/v1/error_graph_type.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
 
 message UpdateDatabaseCatalogFiltersRequest {
   repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 1;
@@ -41,7 +36,7 @@ message GetDatabaseCatalogFiltersResponse {
 message GetDatabaseRequestLatencyGraphStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
-  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
   google.protobuf.UInt64Value topk = 4;
   repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 5;
   repeated google.protobuf.StringValue calling_services = 6;
@@ -50,7 +45,7 @@ message GetDatabaseRequestLatencyGraphStreamRequest {
 message GetDatabaseErrorsGraphStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
-  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
   google.protobuf.UInt64Value topk = 4;
   repeated ErrorGraphType error_graph_types = 5;
   repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 6;
@@ -60,7 +55,7 @@ message GetDatabaseErrorsGraphStreamRequest {
 message GetDatabaseStatementsGraphStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
-  map<string, google.protobuf.ListValue> filters = 3 [deprecated=true];
+  map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
   google.protobuf.UInt64Value topk = 4;
   repeated AggregationType aggregation_types = 5;
   repeated com.coralogix.catalog.v1.ApmFilter database_catalog_filters = 6;
@@ -69,7 +64,7 @@ message GetDatabaseStatementsGraphStreamRequest {
 
 message GetDatabaseRequestLatencyGraphStreamResponse {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
-  oneof widget{
+  oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart avg = 2;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart max = 3;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart p50 = 4;
@@ -82,7 +77,7 @@ message GetDatabaseRequestLatencyGraphStreamResponse {
 
 message GetDatabaseErrorsGraphStreamResponse {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
-  oneof widget{
+  oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart error_rate = 2;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart error_percentage = 3;
   }
@@ -91,7 +86,7 @@ message GetDatabaseErrorsGraphStreamResponse {
 
 message GetDatabaseStatementsGraphStreamResponse {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
-  oneof widget{
+  oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart operations = 2;
   }
   google.protobuf.UInt64Value total_amount = 3;
@@ -106,6 +101,7 @@ message GetDatabasesColumnsStreamRequest {
 
 message GetDatabasesColumnsStreamResponse {
   repeated DatabaseData databases = 1;
+  google.protobuf.StringValue query = 2;
 }
 
 message ListCallingServicesRequest {
@@ -154,32 +150,32 @@ service DatabaseCatalogService {
   rpc GetDatabasesColumnsStream(GetDatabasesColumnsStreamRequest) returns (stream GetDatabasesColumnsStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases column stream";
   }
-  rpc GetDatabaseRequestLatencyGraphStream (GetDatabaseRequestLatencyGraphStreamRequest) returns (stream GetDatabaseRequestLatencyGraphStreamResponse) {
+  rpc GetDatabaseRequestLatencyGraphStream(GetDatabaseRequestLatencyGraphStreamRequest) returns (stream GetDatabaseRequestLatencyGraphStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog requests graph";
   }
-  rpc GetDatabaseErrorsGraphStream (GetDatabaseErrorsGraphStreamRequest) returns (stream GetDatabaseErrorsGraphStreamResponse){
+  rpc GetDatabaseErrorsGraphStream(GetDatabaseErrorsGraphStreamRequest) returns (stream GetDatabaseErrorsGraphStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog errors graph";
   }
-  rpc GetDatabaseStatementsGraphStream (GetDatabaseStatementsGraphStreamRequest) returns (stream GetDatabaseStatementsGraphStreamResponse) {
+  rpc GetDatabaseStatementsGraphStream(GetDatabaseStatementsGraphStreamRequest) returns (stream GetDatabaseStatementsGraphStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database catalog statements graph";
   }
-  rpc UpdateDatabaseCatalogFilters(UpdateDatabaseCatalogFiltersRequest) returns (UpdateDatabaseCatalogFiltersResponse){
+  rpc UpdateDatabaseCatalogFilters(UpdateDatabaseCatalogFiltersRequest) returns (UpdateDatabaseCatalogFiltersResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Update DB Catalog Filters";
-  };
-  rpc GetDatabaseCatalogFilters(GetDatabaseCatalogFiltersRequest) returns (GetDatabaseCatalogFiltersResponse){
+  }
+  rpc GetDatabaseCatalogFilters(GetDatabaseCatalogFiltersRequest) returns (GetDatabaseCatalogFiltersResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get DB Catalog Filters";
-  };
-  rpc ListCallingServices (ListCallingServicesRequest) returns (ListCallingServicesResponse){
+  }
+  rpc ListCallingServices(ListCallingServicesRequest) returns (ListCallingServicesResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list the services calling the database";
-  };
-  rpc ListTables (ListTablesRequest) returns (ListTablesResponse){
+  }
+  rpc ListTables(ListTablesRequest) returns (ListTablesResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list the tables in database";
-  };
-  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
+  }
+  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
   }
 
-  rpc GetDbHierarchyInfoFromTags(GetDbHierarchyInfoFromTagsRequest) returns (GetDbHierarchyInfoFromTagsResponse){
+  rpc GetDbHierarchyInfoFromTags(GetDbHierarchyInfoFromTagsRequest) returns (GetDbHierarchyInfoFromTagsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get DB Hierarchy Info From Tags";
   }
 }

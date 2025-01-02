@@ -5,6 +5,7 @@ import "com/coralogix/catalog/v1/common.proto";
 import "com/coralogix/catalog/v1/span_kind.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
+import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/apm/widgets/v1/stat.proto";
 import "com/coralogixapis/apm_shared/common/queries.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
@@ -14,7 +15,6 @@ import "com/coralogixapis/service_catalog/v1/transaction.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 
 message GetErrorStatsRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
@@ -24,7 +24,7 @@ message GetErrorStatsRequest {
   ErrorMessageSource error_message_source = 5;
   ErrorDataSource data_source = 6;
   repeated google.protobuf.StringValue operations = 7;
-  google.protobuf.StringValue method = 10;
+  repeated google.protobuf.StringValue methods = 10;
   repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 8;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 9;
 }
@@ -50,6 +50,7 @@ message DrillDownSubFiltersRequest {
 
 message DrillDownSubFilterResponse {
   com.coralogix.catalog.v1.ApmFilter operation = 1;
+  com.coralogix.catalog.v1.ApmFilter method = 3;
   repeated com.coralogixapis.apm.common.v2.QueryInfo queriesInfo = 2;
 }
 

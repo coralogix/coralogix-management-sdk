@@ -17,27 +17,50 @@ import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+import "google/api/annotations.proto";
+
 service SpansDataSourceService {
   rpc SearchSpansTimeSeries(SearchSpansTimeSeriesRequest) returns (SearchSpansTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans as time series";
+    option (google.api.http) = {
+      get: "/dashboards/spans/time-series"
+    };
   }
   rpc SearchSpansEvents(SearchSpansEventsRequest) returns (SearchSpansEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans as events";
+    option (google.api.http) = {
+      get: "/dashboards/spans/events"
+    };
   }
   rpc SearchSpansEventGroups(SearchSpansEventGroupsRequest) returns (SearchSpansEventGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans as event groups";
+    option (google.api.http) = {
+      get: "/dashboards/spans/event-groups"
+    };
   }
   rpc SearchGroupedSpansSeries(SearchGroupedSpansSeriesRequest) returns (SearchGroupedSpansSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "grouped spans series";
+    option (google.api.http) = {
+      get: "/dashboards/spans/grouped-series"
+    };
   }
   rpc SearchSpansGroupedTimeSeries(SearchSpansGroupedTimeSeriesRequest) returns (SearchSpansGroupedTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped time series";
+    option (google.api.http) = {
+      get: "/dashboards/spans/grouped-time-series"
+    };
   }
   rpc SearchSpansAnnotationEvents(SearchSpansAnnotationEventsRequest) returns (SearchSpansAnnotationEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans annotation events";
+    option (google.api.http) = {
+      get: "/dashboards/spans/annotation-events"
+    };
   }
   rpc SearchSpansGroupedValues(SearchSpansGroupedValuesRequest) returns (SearchSpansGroupedValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped values";
+    option (google.api.http) = {
+      get: "/dashboards/spans/grouped-values"
+    };
   }
 }
 
