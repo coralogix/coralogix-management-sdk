@@ -98,6 +98,18 @@ func TestUsers(t *testing.T) {
 
 	assert.Nil(t, retrievalError)
 
+	users, err := c.List(context.Background())
+	assert.Nil(t, err)
+
+	found := false
+	for _, user := range users {
+		if user.ID != nil && *user.ID == *createdUser.ID {
+			found = true
+			break
+		}
+	}
+	assert.True(t, found)
+
 	deletionError := c.Delete(context.Background(), *createdUser.ID)
 
 	assert.Nil(t, deletionError)

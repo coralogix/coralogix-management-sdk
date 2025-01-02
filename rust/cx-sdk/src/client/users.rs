@@ -80,6 +80,19 @@ pub struct ScimUserGroup {
     pub value: String,
 }
 
+/// ListResponse represents the structure of the response for the List SCIM Users operation.
+#[derive(Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct ListResponse {
+    /// The schemas of the SCIM users.
+    pub schemas: Vec<String>,
+    /// The total number of results.
+    pub total_results: usize,
+    /// The list of SCIM users.
+    #[serde(rename = "Resources")]
+    pub resources: Vec<ScimUser>,
+}
+
 /// UsersClient is a client for the users API.
 pub struct UsersClient {
     target_url: String,
@@ -176,5 +189,24 @@ impl UsersClient {
             .await?;
         response.error_for_status()?;
         Ok(())
+    }
+
+    /// List all SCIM users.
+    ///
+    /// This function retrieves all SCIM users.
+    pub async fn list(&self) -> Result<Vec<ScimUser>, reqwest::Error> {
+        let response = self
+            .http_client
+            .get(&self.target_url)
+            .header("Authorization", format!("Bearer {}", self.api_key.token()))
+            .header(SDK_VERSION_HEADER_NAME, SDK_VERSION)
+            .header(SDK_LANGUAGE_HEADER_NAME, "rust")
+            .header(SDK_RUSTC_VERSION_HEADER_NAME, RUSTC_VERSION)
+            .header(SDK_CORRELATION_ID_HEADER_NAME, &self.correlation_id)
+            .send()
+            .await?;
+
+        let list_response: ListResponse = response.json().await?;
+        Ok(list_response.resources)
     }
 }
