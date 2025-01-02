@@ -77,7 +77,7 @@ impl CoralogixRegion {
     /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn grpc_endpoint(&self) -> String {
         match self {
-            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.com".into(),
+            CoralogixRegion::US1 => "https://ng-api-grpc.coralogix.us".into(),
             CoralogixRegion::US2 => "https://ng-api-grpc.cx498.coralogix.com".into(),
             CoralogixRegion::EU1 => "https://ng-api-grpc.coralogix.com".into(),
             CoralogixRegion::EU2 => "https://ng-api-grpc.eu2.coralogix.com".into(),
@@ -92,7 +92,7 @@ impl CoralogixRegion {
     /// <https://coralogix.com/docs/coralogix-domain/>
     pub fn rest_endpoint(&self) -> String {
         match self {
-            CoralogixRegion::US1 => "https://ng-api-http.coralogix.com".into(),
+            CoralogixRegion::US1 => "https://ng-api-http.coralogix.us".into(),
             CoralogixRegion::US2 => "https://ng-api-http.cx498.coralogix.com".into(),
             CoralogixRegion::EU1 => "https://ng-api-http.coralogix.com".into(),
             CoralogixRegion::EU2 => "https://ng-api-http.eu2.coralogix.com".into(),

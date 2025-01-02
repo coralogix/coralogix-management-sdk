@@ -27,7 +27,7 @@ import (
 
 // GRPC URLs for the Coralogix regions.
 const (
-	GrpcUS1 = "ng-api-grpc.coralogix.com:443"
+	GrpcUS1 = "ng-api-grpc.coralogix.us:443"
 	GrpcUS2 = "ng-api-grpc.cx498.coralogix.com:443"
 	GrpcEU1 = "ng-api-grpc.coralogix.com:443"
 	GrpcEU2 = "ng-api-grpc.eu2.coralogix.com:443"
@@ -38,7 +38,7 @@ const (
 
 // RESt URLs for the Coralogix regions.
 const (
-	RestUS1 = "https://ng-api-http.coralogix.com"
+	RestUS1 = "https://ng-api-http.coralogix.us"
 	RestUS2 = "https://ng-api-http.cx498.coralogix.com"
 	RestEU1 = "https://ng-api-http.coralogix.com"
 	RestEU2 = "https://ng-api-http.eu2.coralogix.com"
