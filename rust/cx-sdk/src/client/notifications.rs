@@ -62,7 +62,10 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         ReplaceCustomPresetResponse,
         SetCustomPresetAsDefaultRequest,
         SetCustomPresetAsDefaultResponse,
+        delete_custom_preset_request::Identifier as DeleteIdentifier,
+        get_preset_request::Identifier as GetIdentifier,
         presets_service_client::PresetsServiceClient,
+        set_custom_preset_as_default_request::Identifier as SetIdentifier,
     },
 };
 
@@ -187,13 +190,11 @@ impl NotificationsClient {
         &self,
         connector_type: ConnectorType,
         order_bys: Vec<OrderBy>,
-        entity_type: String,
     ) -> Result<ListConnectorsResponse> {
         let request = make_request_with_metadata(
             ListConnectorsRequest {
                 connector_type: connector_type as i32,
                 order_bys,
-                entity_type: Some(entity_type),
             },
             &self.metadata_map,
         );
@@ -407,10 +408,13 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to delete.
     pub async fn delete_custom_preset(
         &self,
-        preset_id: String,
+        preset_id: DeleteIdentifier,
     ) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
-            DeleteCustomPresetRequest { id: preset_id },
+            DeleteCustomPresetRequest {
+                identifier: Some(preset_id),
+                deprecated_id: None,
+            },
             &self.metadata_map,
         );
         {
@@ -435,10 +439,13 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to set as the default.
     pub async fn set_custom_preset_as_default(
         &self,
-        preset_id: String,
+        preset_id: SetIdentifier,
     ) -> Result<SetCustomPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
-            SetCustomPresetAsDefaultRequest { id: preset_id },
+            SetCustomPresetAsDefaultRequest {
+                identifier: Some(preset_id),
+                deprecated_id: None,
+            },
             &self.metadata_map,
         );
         {
@@ -461,9 +468,14 @@ impl NotificationsClient {
     /// Get a preset by ID.
     /// # Arguments
     /// * `preset_id` - The ID of the preset to get.
-    pub async fn get_preset(&self, preset_id: String) -> Result<GetPresetResponse> {
-        let request =
-            make_request_with_metadata(GetPresetRequest { id: preset_id }, &self.metadata_map);
+    pub async fn get_preset(&self, preset_id: GetIdentifier) -> Result<GetPresetResponse> {
+        let request = make_request_with_metadata(
+            GetPresetRequest {
+                identifier: Some(preset_id),
+                deprecated_id: None,
+            },
+            &self.metadata_map,
+        );
         {
             let mut client = self.presets_client.lock().await.clone();
 

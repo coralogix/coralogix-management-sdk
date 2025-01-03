@@ -4,6 +4,7 @@ package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/format/generic/v1/generic.proto";
 import "com/coralogix/archive/format/wide_parquet/v1/wide_parquet.proto";
+import "com/coralogix/archive/format/csv/v1/csv.proto";
 
 message LogsAvro {
 }
@@ -16,7 +17,8 @@ message Format {
   oneof format {
     LogsAvro logs_avro = 1 [deprecated = true];
     SpansAvro spans_avro = 2 [deprecated = true];
-    com.coralogix.archive.format.generic.v1.GenericEventAvro generic_event_avro = 3;
-    com.coralogix.archive.format.wide_parquet.v1.WideParquet wide_parquet = 4;
+    format.generic.v1.GenericEventAvro generic_event_avro = 3;
+    format.wide_parquet.v1.WideParquet wide_parquet = 4;
+    format.csv.v1.Csv csv = 5;
   }
 }

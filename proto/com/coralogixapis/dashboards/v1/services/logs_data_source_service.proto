@@ -21,27 +21,51 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+import "google/api/annotations.proto";
+
+
 service LogsDataSourceService {
   rpc SearchLogsTimeSeries(SearchLogsTimeSeriesRequest) returns (SearchLogsTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search logs time series";
+    option (google.api.http) = {
+      get: "/dashboards/logs/time-series"
+    };
   }
   rpc SearchLogsEvents(SearchLogsEventsRequest) returns (SearchLogsEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search logs events";
+    option (google.api.http) = {
+      get: "/dashboards/logs/events"
+    };
   }
   rpc SearchGroupedLogsSeries(SearchGroupedLogsSeriesRequest) returns (SearchGroupedLogsSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "grouped logs series";
+    option (google.api.http) = {
+      get: "/dashboards/logs/grouped-series"
+    };
   }
   rpc SearchLogsGroupedTimeSeries(SearchLogsGroupedTimeSeriesRequest) returns (SearchLogsGroupedTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "grouped logs time series";
+    option (google.api.http) = {
+      get: "/dashboards/logs/grouped-time-series"
+    };
   }
   rpc SearchLogsEventGroups(SearchLogsEventGroupsRequest) returns (SearchLogsEventGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search logs event groups";
+    option (google.api.http) = {
+      get: "/dashboards/logs/event-groups"
+    };
   }
   rpc SearchLogsAnnotationEvents(SearchLogsAnnotationEventsRequest) returns (SearchLogsAnnotationEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search logs annotation events";
+    option (google.api.http) = {
+      get: "/dashboards/logs/annotation-events"
+    };
   }
   rpc SearchLogsGroupedValues(SearchLogsGroupedValuesRequest) returns (SearchLogsGroupedValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search logs grouped values";
+    option (google.api.http) = {
+      get: "/dashboards/logs/grouped-values"
+    };
   }
 }
 

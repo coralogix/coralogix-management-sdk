@@ -35,7 +35,7 @@ message BarChart {
   BarValueDisplay bar_value_display = 12;
   google.protobuf.StringValue custom_unit = 13;
   google.protobuf.Int32Value decimal = 14;
-  common.Legend Legend = 15;
+  common.Legend legend = 15;
 
   message Query {
     oneof value {

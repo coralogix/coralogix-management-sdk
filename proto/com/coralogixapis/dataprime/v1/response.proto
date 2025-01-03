@@ -136,3 +136,15 @@ message FieldCountLimitWarning {}
 
 // warning for when shuffle file size limit is reached - e.g. during a join with a large right side
 message ShuffleFileSizeLimitReachedWarning {}
+
+// this is only used in BG queries but will be also used as part of QueryResponse
+message ResponseMetadata  {
+    oneof message {
+        Statistics statistics = 1;
+        // more metadata messages will be added here (like columns)
+    }
+    message Statistics{
+        int64 bytes_scanned = 1;
+        // more corrrelated stats will be added here like total rows etc
+    }
+}

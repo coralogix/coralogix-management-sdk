@@ -14,27 +14,52 @@ import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
+import "google/api/annotations.proto";
+
+
 service ArchiveLogsDataSourceService {
   rpc SearchArchiveLogsTimeSeries(SearchArchiveLogsTimeSeriesRequest) returns (SearchArchiveLogsTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive logs time series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/time-series"
+    };
   }
   rpc SearchArchiveLogsEvents(SearchArchiveLogsEventsRequest) returns (SearchArchiveLogsEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/events"
+    };
   }
   rpc SearchArchiveLogsEventsCount(SearchArchiveLogsEventsCountRequest) returns (SearchArchiveLogsEventsCountResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events count";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/events/count"
+    };
   }
   rpc SearchArchiveLogsEventGroups(SearchArchiveLogsEventGroupsRequest) returns (SearchArchiveLogsEventGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive logs event groups";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/event-groups"
+    };
   }
   rpc SearchArchiveGroupedLogsSeries(SearchArchiveGroupedLogsSeriesRequest) returns (SearchArchiveGroupedLogsSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/grouped-series"
+    };
+
   }
   rpc SearchArchiveGroupedLogsTimeSeries(SearchArchiveGroupedLogsTimeSeriesRequest) returns (SearchArchiveGroupedLogsTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs time series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/grouped-time-series"
+    };
   }
   rpc SearchArchiveLogsGroupedValues(SearchArchiveLogsGroupedValuesRequest) returns (SearchArchiveLogsGroupedValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive logs grouped values";
+    option (google.api.http) = {
+      get: "/dashboards/archive-logs/grouped-values"
+    };
   }
 }
 

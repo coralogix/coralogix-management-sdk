@@ -21,6 +21,12 @@ message PromQlQuery {
   google.protobuf.StringValue value = 1;
 }
 
+enum PromQLQueryType {
+  PROM_QL_QUERY_TYPE_UNSPECIFIED = 0;
+  PROM_QL_QUERY_TYPE_RANGE = 1;
+  PROM_QL_QUERY_TYPE_INSTANT = 2;
+}
+
 message LuceneQuery {
   google.protobuf.StringValue value = 1;
 }

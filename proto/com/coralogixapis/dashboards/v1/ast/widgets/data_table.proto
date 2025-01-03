@@ -76,6 +76,7 @@ message DataTable {
     repeated Filter.MetricsFilter filters = 2;
     common.MetricsQueryEditorMode editor_mode = 3;
     v1.common.TimeFrameSelect time_frame = 4;
+    v1.common.PromQLQueryType promql_query_type = 5;
   }
 
   message DataprimeQuery {

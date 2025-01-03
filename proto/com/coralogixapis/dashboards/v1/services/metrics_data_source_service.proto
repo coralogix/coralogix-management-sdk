@@ -10,32 +10,56 @@ import "com/coralogixapis/dashboards/v1/common/group.proto";
 import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
 import "com/coralogixapis/dashboards/v1/common/labelled_value.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "com/coralogixapis/dashboards/v1/common/time_series.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
 
+import "google/api/annotations.proto";
+
 service MetricsDataSourceService {
   rpc SearchMetricsTimeSeries(SearchMetricsTimeSeriesRequest) returns (SearchMetricsTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search time series";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/time-series"
+    };
   }
   rpc SearchMetricsTimeValues(SearchMetricsTimeValuesRequest) returns (SearchMetricsTimeValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search instant values";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/time-values"
+    };
   }
   rpc SearchMetricsGroupedSeries(SearchMetricsGroupedSeriesRequest) returns (SearchMetricsGroupedSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search grouped series";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/grouped-series"
+    };
   }
   rpc SearchMetricsGroupedTimeSeries(SearchMetricsGroupedTimeSeriesRequest) returns (SearchMetricsGroupedTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search grouped time series";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/grouped-time-series"
+    };
   }
   rpc SearchMetricsEvents(SearchMetricsEventsRequest) returns (SearchMetricsEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search metrics as events";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/events"
+    };
   }
   rpc SearchMetricsAnnotationEvents(SearchMetricsAnnotationEventsRequest) returns (SearchMetricsAnnotationEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search metrics annotation events";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/annotation-events"
+    };
   }
   rpc SearchMetricsGroupedValues(SearchMetricsGroupedValuesRequest) returns (SearchMetricsGroupedValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search spans grouped values";
+    option (google.api.http) = {
+      get: "/dashboards/metrics/grouped-values"
+    };
   }
 }
 
@@ -108,6 +132,7 @@ message SearchMetricsEventsRequest {
   Pagination pagination = 4;
   repeated ast.Filter.MetricsFilter filters = 5;
   OrderBy order_by = 6;
+  common.PromQLQueryType promql_query_type = 7;
 
   message OrderBy {
     v1.common.OrderDirection direction = 1;

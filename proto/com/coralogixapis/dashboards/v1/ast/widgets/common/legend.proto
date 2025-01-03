@@ -30,6 +30,7 @@ message Legend {
 }
 
 enum LegendBy {
-    LEGEND_BY_GROUPS = 0;
-    LEGEND_BY_THRESHOLDS = 1;
+  LEGEND_BY_UNSPECIFIED = 0;
+  LEGEND_BY_THRESHOLDS = 1;
+  LEGEND_BY_GROUPS = 2;
 }

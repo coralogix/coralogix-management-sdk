@@ -7,6 +7,7 @@ import "com/coralogix/archive/v1/audit_log.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogix/archive/dataset/v2/preferred_schema.proto";
 import "com/coralogix/archive/dataset/v2/dataset.proto";
+import "com/coralogix/archive/dataset/v2/dataset_rules_service.proto";
 
 service InternalDatasetManagementService {
   rpc GetAllDatasetRules(GetAllDatasetRulesRequest) returns (GetAllDatasetRulesResponse) {
@@ -15,7 +16,10 @@ service InternalDatasetManagementService {
   rpc GetDatasetSchemaFields(GetDatasetSchemaFieldsRequest) returns (GetDatasetSchemaFieldsResponse) {
     option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
   }
-  rpc SetDatasetRule(InternalDatasetManagementServiceSetDatasetRuleRequest) returns (InternalDatasetManagementServiceSetDatasetRuleResponse) {
+  rpc SetSchemaRule(InternalDatasetManagementServiceSetSchemaRuleRequest) returns (InternalDatasetManagementServiceSetSchemaRuleResponse) {
+    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
+  }
+  rpc GetSchemaRule(InternalDatasetManagementServiceGetSchemaRuleRequest) returns (InternalDatasetManagementServiceGetSchemaRuleResponse) {
     option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
   }
 }
@@ -24,16 +28,23 @@ message GetAllDatasetRulesRequest {
   optional google.protobuf.Timestamp last_update_time = 1;
   bool force_update = 2;
 }
-
 message GetDatasetSchemaFieldsResponse {
+  repeated DatasetSchemaFields schema_fields = 1;
+}
+
+message DatasetSchemaFields {
   uint32 company_id = 1;
   Dataset dataset = 2;
-  repeated NamedSchemaTemplateField fields = 3;
+  repeated MergedNamedSchemaTemplateField fields = 3;
+}
+
+message CompanyDataset {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
 }
 
 message GetDatasetSchemaFieldsRequest {
-  uint32 company_id = 1;
-  Dataset dataset = 2;
+  repeated CompanyDataset datasets = 1;
 }
 
 message CompanyDatasetRules {
@@ -46,12 +57,20 @@ message GetAllDatasetRulesResponse {
   google.protobuf.Timestamp last_update_time = 2;
 }
 
-message InternalDatasetManagementServiceSetDatasetRuleRequest {
-  uint32 company_id = 1;
-  DatasetRule dataset_rule = 2;
-  repeated string schema_template_ids = 3;
+message InternalDatasetManagementServiceSetSchemaRuleRequest {
+  int32 company_id = 1;
+  SchemaRule schema_rule = 2;
 }
 
-message InternalDatasetManagementServiceSetDatasetRuleResponse {
+message InternalDatasetManagementServiceSetSchemaRuleResponse {
+  Rule rule = 1;
+}
 
+message InternalDatasetManagementServiceGetSchemaRuleRequest {
+  int32 company_id = 1;
+  DataPillar data_pillar = 2;
+}
+
+message InternalDatasetManagementServiceGetSchemaRuleResponse {
+  Rule rule = 1;
 }
