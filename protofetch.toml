@@ -80,7 +80,7 @@ revision = "v0.1.32"
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.124"
+revision = "v0.3.110"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"

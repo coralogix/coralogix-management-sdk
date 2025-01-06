@@ -73,14 +73,6 @@ message GetSpanMetricDimensionsByServiceNamesResponse {
   repeated google.protobuf.StringValue dimensions = 1;
 }
 
-message IsCompanySupportVersionsRequest {
-  com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
-}
-
-message IsCompanySupportVersionsResponse {
-  google.protobuf.BoolValue version_supported = 1;
-}
-
 service ApmSettingsService {
   rpc GetApmSettings(GetApmSettingsRequest) returns (GetApmSettingsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apm Settings";
@@ -108,9 +100,5 @@ service ApmSettingsService {
 
   rpc GetSpanMetricDimensionsByServiceNames(GetSpanMetricDimensionsByServiceNamesRequest) returns (GetSpanMetricDimensionsByServiceNamesResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions By Service Name";
-  }
-
-  rpc IsCompanySupportVersions(IsCompanySupportVersionsRequest) returns (IsCompanySupportVersionsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Is Company Support Versions";
   }
 }

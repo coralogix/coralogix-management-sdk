@@ -16,7 +16,6 @@ message GetServiceSideModelGraphsRequest {
   repeated ApmFilter service_catalog_filters = 4;
   repeated SpanKind span_kind = 5;
   google.protobuf.StringValue method = 6;
-  google.protobuf.StringValue service_version = 7;
   
 }
 
@@ -27,10 +26,6 @@ message GetServiceSideModelGraphsResponse {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles = 3;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_per_second = 4;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_per_second = 5;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_by_service_version = 6;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_by_service_version = 7;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_per_second_by_service_version = 8;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_per_second_by_service_version = 9;
   }
 }
 

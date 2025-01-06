@@ -1,10 +1,9 @@
 syntax = "proto3";
 package com.coralogix.catalog.v1;
 
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogix/catalog/v1/common.proto";
 import "com/coralogix/catalog/v1/sli.proto";
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
-import "com/coralogixapis/apm_shared/common/queries.proto";
 import "google/protobuf/wrappers.proto";
 
 message GetSlisRequest {
@@ -13,7 +12,6 @@ message GetSlisRequest {
 
 message GetSlisResponse {
   repeated Sli slis = 1;
-  repeated com.coralogixapis.apm.common.v2.GridQueryInfo queries_info = 2;
 }
 
 message CreateSliRequest {
