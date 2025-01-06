@@ -249,7 +249,7 @@ func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *C
 		apiKeys: NewAPIKeysClient(apikeyCPC),
 		groups:  NewGroupsClient(apikeyCPC),
 		saml:    NewSamlClient(apikeyCPC),
-		// users:             NewUsersClient(apikeyCPC),
+		users:   NewUsersClient(apikeyCPC),
 	}
 }
 

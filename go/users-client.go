@@ -53,6 +53,13 @@ type SCIMUserGroup struct {
 	Value string `json:"value"`
 }
 
+// ListResponse represents the structure of the response for the List SCIM Users operation
+type ListResponse struct {
+	Schemas      []string   `json:"schemas"`
+	TotalResults int        `json:"totalResults"`
+	Resources    []SCIMUser `json:"Resources"`
+}
+
 // Create creates a new SCIM User
 func (c UsersClient) Create(ctx context.Context, userReq *SCIMUser) (*SCIMUser, error) {
 	body, err := json.Marshal(userReq)
@@ -88,6 +95,22 @@ func (c UsersClient) Get(ctx context.Context, userID string) (*SCIMUser, error) 
 	}
 
 	return &UserResp, nil
+}
+
+// List retrieves all SCIM Users
+func (c UsersClient) List(ctx context.Context) ([]SCIMUser, error) {
+	bodyResp, err := c.client.Get(ctx, "")
+	if err != nil {
+		return nil, err
+	}
+
+	var listResp ListResponse
+	err = json.Unmarshal([]byte(bodyResp), &listResp)
+	if err != nil {
+		return nil, err
+	}
+
+	return listResp.Resources, nil
 }
 
 // Update updates a SCIM User by ID

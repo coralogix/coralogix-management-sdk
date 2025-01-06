@@ -272,6 +272,16 @@ mod tests {
             .await
             .unwrap();
 
+        let users = client.list().await.unwrap();
+
+        let found = users.iter().any(|user| {
+            user.id
+                .as_ref()
+                .map_or(false, |id| id == &created_user.id.clone().unwrap())
+        });
+
+        assert!(found, "The created user was not found in the list.");
+
         client
             .delete(created_user.id.clone().unwrap().as_str())
             .await
