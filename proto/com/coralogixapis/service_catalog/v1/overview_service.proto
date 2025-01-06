@@ -11,6 +11,7 @@ import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/apm/widgets/v1/topk.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/apm_shared/common/apdex.proto";
 
 
 message GetOverviewRequest {
@@ -40,6 +41,15 @@ message GetOverviewResponse {
   com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
   com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
   repeated com.coralogixapis.apm.widgets.v1.LineChart errors_per_seconds = 19;
+  RepeatedLineChart requests_and_errors_by_service_version = 20;
+  RepeatedLineChart apdex_score_by_service_version = 21;
+  RepeatedLineChart errors_by_service_version = 22;
+  RepeatedLineChart error_rate_by_service_version = 23;
+  RepeatedLineChart errors_per_seconds_by_service_version = 24;
+  RepeatedLineChart latency_p99_by_service_version = 25;
+  RepeatedLineChart latency_p95_by_service_version = 26;
+  RepeatedLineChart latency_p75_by_service_version = 27;
+  RepeatedLineChart latency_avg_by_service_version = 28;
 }
 
 message GetOverviewStreamRequest {
@@ -72,6 +82,15 @@ message GetOverviewStreamResponse {
     com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
     com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
     RepeatedLineChart errors_per_seconds = 19;
+    RepeatedLineChart requests_and_errors_by_service_version = 20;
+    RepeatedLineChart apdex_score_by_service_version = 21;
+    RepeatedLineChart errors_by_service_version = 22;
+    RepeatedLineChart error_rate_by_service_version = 23;
+    RepeatedLineChart errors_per_seconds_by_service_version = 24;
+    RepeatedLineChart latency_p99_by_service_version = 25;
+    RepeatedLineChart latency_p95_by_service_version = 26;
+    RepeatedLineChart latency_p75_by_service_version = 27;
+    RepeatedLineChart latency_avg_by_service_version = 28;
   }
 }
 
@@ -81,11 +100,6 @@ message GetApdexRequest{
   map<string, google.protobuf.ListValue> filters = 3;
 }
 
-message GetApdexResponse{
-  com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 1;
-  google.protobuf.BoolValue has_buckets_error = 2;
-}
-
 service OverviewService {
   rpc GetOverview(GetOverviewRequest)returns(GetOverviewResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Overview";
@@ -93,7 +107,7 @@ service OverviewService {
   rpc GetOverviewStream(GetOverviewStreamRequest)returns(stream GetOverviewStreamResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Overview Stream";
   }
-  rpc GetApdex(GetApdexRequest)returns(GetApdexResponse){
+  rpc GetApdex(GetApdexRequest)returns(com.coralogixapis.apm.common.v2.GetApdexResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apdex";
   }
 }

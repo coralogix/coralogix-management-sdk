@@ -6,9 +6,14 @@ import "com/coralogix/common/v1/audit_log.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
 
+import "google/api/annotations.proto";
+
 service TeamSettingsService {
   rpc GetTeamSettings(GetTeamSettingsRequest) returns (GetTeamSettingsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get team settings";
+    option (google.api.http) = {
+      get: "/dashboards/team_settings"
+    };
   }
 }
 

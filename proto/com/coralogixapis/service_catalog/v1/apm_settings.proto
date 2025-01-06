@@ -5,12 +5,14 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/service_catalog/v1/catalog.proto";
+import "google/protobuf/struct.proto";
 
 message CatalogSettings {
   ApmSource source = 1;
   google.protobuf.Timestamp migration_period_end_date = 2;
   google.protobuf.Int32Value retention_policy = 3;
   Catalog catalog = 4;
+  google.protobuf.Struct e2m_custom_creation_param = 5;
 }
 
 message ApmSettings{

@@ -13,28 +13,50 @@ import "com/coralogixapis/dashboards/v1/common/time_series.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
 
 service ArchiveSpansDataSourceService {
   rpc SearchArchiveSpansTimeSeries(SearchArchiveSpansTimeSeriesRequest) returns (SearchArchiveSpansTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive spans time series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/time-series"
+    };
   }
   rpc SearchArchiveSpansEvents(SearchArchiveSpansEventsRequest) returns (SearchArchiveSpansEventsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive spans events";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/events"
+    };
   }
   rpc SearchArchiveSpansEventsCount(SearchArchiveSpansEventsCountRequest) returns (SearchArchiveSpansEventsCountResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive spans events count";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/events/count"
+    };
   }
   rpc SearchArchiveSpansEventGroups(SearchArchiveSpansEventGroupsRequest) returns (SearchArchiveSpansEventGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive spans event groups";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/event-groups"
+    };
   }
   rpc SearchArchiveGroupedSpansSeries(SearchArchiveGroupedSpansSeriesRequest) returns (SearchArchiveGroupedSpansSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped spans series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/grouped-series"
+    };
   }
   rpc SearchArchiveGroupedSpansTimeSeries(SearchArchiveGroupedSpansTimeSeriesRequest) returns (SearchArchiveGroupedSpansTimeSeriesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped spans time series";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/grouped-time-series"
+    };
   }
   rpc SearchArchiveSpansGroupedValues(SearchArchiveSpansGroupedValuesRequest) returns (SearchArchiveSpansGroupedValuesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "search archive spans grouped values";
+    option (google.api.http) = {
+      get: "/dashboards/archive-spans/grouped-values"
+    };
   }
 }
 

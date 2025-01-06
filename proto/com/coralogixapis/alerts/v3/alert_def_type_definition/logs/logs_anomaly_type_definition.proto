@@ -11,6 +11,7 @@ message LogsAnomalyType  {
     LogsFilter logs_filter = 1;
     repeated LogsAnomalyRule rules = 2;
     repeated google.protobuf.StringValue notification_payload_filter = 3;
+    google.protobuf.Int32Value evaluation_delay_ms = 4;
 }
 message LogsAnomalyRule {
     LogsAnomalyCondition condition = 1;

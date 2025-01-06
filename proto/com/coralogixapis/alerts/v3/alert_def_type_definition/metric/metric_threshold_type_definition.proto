@@ -13,8 +13,9 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 message MetricThresholdType  {
     MetricFilter metric_filter = 1;
     repeated MetricThresholdRule rules = 2;
-    MetricMissingValues missing_values = 4;
     UndetectedValuesManagement undetected_values_management = 3;
+    MetricMissingValues missing_values = 4;
+    google.protobuf.Int32Value evaluation_delay_ms = 5;
 }
 
 message MetricThresholdRule {

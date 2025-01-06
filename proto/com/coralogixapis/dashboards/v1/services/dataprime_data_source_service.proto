@@ -7,13 +7,20 @@ import "com/coralogixapis/dashboards/v1/common/dataprime_result.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
 
 service DataprimeDataSourceService {
   rpc SearchDataprime(SearchDataprimeRequest) returns (SearchDataprimeResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Search Dataprime";
+    option (google.api.http) = {
+      get: "/dashboards/dataprime"
+    };
   }
   rpc SearchDataprimeArchive(SearchDataprimeArchiveRequest) returns (SearchDataprimeArchiveResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Search Dataprime archive";
+    option (google.api.http) = {
+      get: "/dashboards/dataprime/archive"
+    };
   }
 }
 

@@ -38,11 +38,11 @@ message Metadata {
     TIER_ARCHIVE = 1;
     TIER_FREQUENT_SEARCH = 2;
   }
+}
 
-  // syntax of the query, default: QUERY_SYNTAX_DATAPRIME
-  enum QuerySyntax {
-    QUERY_SYNTAX_UNSPECIFIED = 0;
-    QUERY_SYNTAX_LUCENE = 1;
-    QUERY_SYNTAX_DATAPRIME = 2;
-  }
+// syntax of the query, default: QUERY_SYNTAX_DATAPRIME
+enum QuerySyntax {
+  QUERY_SYNTAX_UNSPECIFIED = 0;
+  QUERY_SYNTAX_LUCENE = 1;
+  QUERY_SYNTAX_DATAPRIME = 2;
 }

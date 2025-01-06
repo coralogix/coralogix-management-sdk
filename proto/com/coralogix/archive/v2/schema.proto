@@ -14,20 +14,30 @@ enum SchemaType {
     SCHEMA_TYPE_STRING = 1;
     SCHEMA_TYPE_TIMESTAMP_NANOS = 2;
     SCHEMA_TYPE_TIMESTAMP_MICROS = 3;
-    SCHEMA_TYPE_BINARY = 4;
-}
-
-message Field {
-    repeated string path = 2;
-    int32 occurrences = 3;
-    SchemaType type = 4;
 }
 
 message SubSchema {
     Namespace namespace = 1;
-    repeated Field fields = 2;
+    map<string, FieldNode> fields = 2;
 }
 
-message Schema {
+message SchemaTree {
     repeated SubSchema schemas = 1;
+}
+
+message FieldNode {
+   FieldLocation location = 1;
+   map<string, FieldNode> children = 2;
+}
+
+message FieldLocation {
+  oneof location {
+    Payload payload = 1;
+    Column column = 2;
+  }
+}
+
+message Payload {}
+message Column {
+    int32 index = 1;
 }

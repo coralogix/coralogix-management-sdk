@@ -15,6 +15,7 @@ message LogsTimeRelativeThresholdType  {
     google.protobuf.BoolValue ignore_infinity = 3;
     repeated google.protobuf.StringValue notification_payload_filter = 4;
     UndetectedValuesManagement undetected_values_management = 5;
+    google.protobuf.Int32Value evaluation_delay_ms = 6;
 }
 message LogsTimeRelativeRule {
     LogsTimeRelativeCondition condition = 1;
