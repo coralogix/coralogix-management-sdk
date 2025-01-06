@@ -8,6 +8,7 @@ package v1
 
 import (
 	context "context"
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm_shared/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -30,7 +31,7 @@ const (
 type OverviewServiceClient interface {
 	GetOverview(ctx context.Context, in *GetOverviewRequest, opts ...grpc.CallOption) (*GetOverviewResponse, error)
 	GetOverviewStream(ctx context.Context, in *GetOverviewStreamRequest, opts ...grpc.CallOption) (OverviewService_GetOverviewStreamClient, error)
-	GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*GetApdexResponse, error)
+	GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*common.GetApdexResponse, error)
 }
 
 type overviewServiceClient struct {
@@ -82,8 +83,8 @@ func (x *overviewServiceGetOverviewStreamClient) Recv() (*GetOverviewStreamRespo
 	return m, nil
 }
 
-func (c *overviewServiceClient) GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*GetApdexResponse, error) {
-	out := new(GetApdexResponse)
+func (c *overviewServiceClient) GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*common.GetApdexResponse, error) {
+	out := new(common.GetApdexResponse)
 	err := c.cc.Invoke(ctx, OverviewService_GetApdex_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -97,7 +98,7 @@ func (c *overviewServiceClient) GetApdex(ctx context.Context, in *GetApdexReques
 type OverviewServiceServer interface {
 	GetOverview(context.Context, *GetOverviewRequest) (*GetOverviewResponse, error)
 	GetOverviewStream(*GetOverviewStreamRequest, OverviewService_GetOverviewStreamServer) error
-	GetApdex(context.Context, *GetApdexRequest) (*GetApdexResponse, error)
+	GetApdex(context.Context, *GetApdexRequest) (*common.GetApdexResponse, error)
 	mustEmbedUnimplementedOverviewServiceServer()
 }
 
@@ -111,7 +112,7 @@ func (UnimplementedOverviewServiceServer) GetOverview(context.Context, *GetOverv
 func (UnimplementedOverviewServiceServer) GetOverviewStream(*GetOverviewStreamRequest, OverviewService_GetOverviewStreamServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetOverviewStream not implemented")
 }
-func (UnimplementedOverviewServiceServer) GetApdex(context.Context, *GetApdexRequest) (*GetApdexResponse, error) {
+func (UnimplementedOverviewServiceServer) GetApdex(context.Context, *GetApdexRequest) (*common.GetApdexResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetApdex not implemented")
 }
 func (UnimplementedOverviewServiceServer) mustEmbedUnimplementedOverviewServiceServer() {}

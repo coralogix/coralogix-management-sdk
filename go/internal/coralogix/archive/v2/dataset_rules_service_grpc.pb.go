@@ -19,89 +19,126 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DatasetRulesService_SetDatasetRule_FullMethodName = "/com.coralogix.archive.dataset.v2.DatasetRulesService/SetDatasetRule"
+	SchemaRuleService_SetSchemaRule_FullMethodName = "/com.coralogix.archive.dataset.v2.SchemaRuleService/SetSchemaRule"
+	SchemaRuleService_GetSchemaRule_FullMethodName = "/com.coralogix.archive.dataset.v2.SchemaRuleService/GetSchemaRule"
 )
 
-// DatasetRulesServiceClient is the client API for DatasetRulesService service.
+// SchemaRuleServiceClient is the client API for SchemaRuleService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type DatasetRulesServiceClient interface {
-	SetDatasetRule(ctx context.Context, in *SetDatasetRuleRequest, opts ...grpc.CallOption) (*SetDatasetRuleResponse, error)
+type SchemaRuleServiceClient interface {
+	SetSchemaRule(ctx context.Context, in *SetSchemaRuleRequest, opts ...grpc.CallOption) (*SetSchemaRuleResponse, error)
+	GetSchemaRule(ctx context.Context, in *GetSchemaRuleRequest, opts ...grpc.CallOption) (*GetSchemaRuleResponse, error)
 }
 
-type datasetRulesServiceClient struct {
+type schemaRuleServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewDatasetRulesServiceClient(cc grpc.ClientConnInterface) DatasetRulesServiceClient {
-	return &datasetRulesServiceClient{cc}
+func NewSchemaRuleServiceClient(cc grpc.ClientConnInterface) SchemaRuleServiceClient {
+	return &schemaRuleServiceClient{cc}
 }
 
-func (c *datasetRulesServiceClient) SetDatasetRule(ctx context.Context, in *SetDatasetRuleRequest, opts ...grpc.CallOption) (*SetDatasetRuleResponse, error) {
-	out := new(SetDatasetRuleResponse)
-	err := c.cc.Invoke(ctx, DatasetRulesService_SetDatasetRule_FullMethodName, in, out, opts...)
+func (c *schemaRuleServiceClient) SetSchemaRule(ctx context.Context, in *SetSchemaRuleRequest, opts ...grpc.CallOption) (*SetSchemaRuleResponse, error) {
+	out := new(SetSchemaRuleResponse)
+	err := c.cc.Invoke(ctx, SchemaRuleService_SetSchemaRule_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// DatasetRulesServiceServer is the server API for DatasetRulesService service.
-// All implementations must embed UnimplementedDatasetRulesServiceServer
+func (c *schemaRuleServiceClient) GetSchemaRule(ctx context.Context, in *GetSchemaRuleRequest, opts ...grpc.CallOption) (*GetSchemaRuleResponse, error) {
+	out := new(GetSchemaRuleResponse)
+	err := c.cc.Invoke(ctx, SchemaRuleService_GetSchemaRule_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// SchemaRuleServiceServer is the server API for SchemaRuleService service.
+// All implementations must embed UnimplementedSchemaRuleServiceServer
 // for forward compatibility
-type DatasetRulesServiceServer interface {
-	SetDatasetRule(context.Context, *SetDatasetRuleRequest) (*SetDatasetRuleResponse, error)
-	mustEmbedUnimplementedDatasetRulesServiceServer()
+type SchemaRuleServiceServer interface {
+	SetSchemaRule(context.Context, *SetSchemaRuleRequest) (*SetSchemaRuleResponse, error)
+	GetSchemaRule(context.Context, *GetSchemaRuleRequest) (*GetSchemaRuleResponse, error)
+	mustEmbedUnimplementedSchemaRuleServiceServer()
 }
 
-// UnimplementedDatasetRulesServiceServer must be embedded to have forward compatible implementations.
-type UnimplementedDatasetRulesServiceServer struct {
+// UnimplementedSchemaRuleServiceServer must be embedded to have forward compatible implementations.
+type UnimplementedSchemaRuleServiceServer struct {
 }
 
-func (UnimplementedDatasetRulesServiceServer) SetDatasetRule(context.Context, *SetDatasetRuleRequest) (*SetDatasetRuleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetDatasetRule not implemented")
+func (UnimplementedSchemaRuleServiceServer) SetSchemaRule(context.Context, *SetSchemaRuleRequest) (*SetSchemaRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetSchemaRule not implemented")
 }
-func (UnimplementedDatasetRulesServiceServer) mustEmbedUnimplementedDatasetRulesServiceServer() {}
+func (UnimplementedSchemaRuleServiceServer) GetSchemaRule(context.Context, *GetSchemaRuleRequest) (*GetSchemaRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSchemaRule not implemented")
+}
+func (UnimplementedSchemaRuleServiceServer) mustEmbedUnimplementedSchemaRuleServiceServer() {}
 
-// UnsafeDatasetRulesServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to DatasetRulesServiceServer will
+// UnsafeSchemaRuleServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to SchemaRuleServiceServer will
 // result in compilation errors.
-type UnsafeDatasetRulesServiceServer interface {
-	mustEmbedUnimplementedDatasetRulesServiceServer()
+type UnsafeSchemaRuleServiceServer interface {
+	mustEmbedUnimplementedSchemaRuleServiceServer()
 }
 
-func RegisterDatasetRulesServiceServer(s grpc.ServiceRegistrar, srv DatasetRulesServiceServer) {
-	s.RegisterService(&DatasetRulesService_ServiceDesc, srv)
+func RegisterSchemaRuleServiceServer(s grpc.ServiceRegistrar, srv SchemaRuleServiceServer) {
+	s.RegisterService(&SchemaRuleService_ServiceDesc, srv)
 }
 
-func _DatasetRulesService_SetDatasetRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(SetDatasetRuleRequest)
+func _SchemaRuleService_SetSchemaRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSchemaRuleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DatasetRulesServiceServer).SetDatasetRule(ctx, in)
+		return srv.(SchemaRuleServiceServer).SetSchemaRule(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DatasetRulesService_SetDatasetRule_FullMethodName,
+		FullMethod: SchemaRuleService_SetSchemaRule_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DatasetRulesServiceServer).SetDatasetRule(ctx, req.(*SetDatasetRuleRequest))
+		return srv.(SchemaRuleServiceServer).SetSchemaRule(ctx, req.(*SetSchemaRuleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// DatasetRulesService_ServiceDesc is the grpc.ServiceDesc for DatasetRulesService service.
+func _SchemaRuleService_GetSchemaRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSchemaRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchemaRuleServiceServer).GetSchemaRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SchemaRuleService_GetSchemaRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchemaRuleServiceServer).GetSchemaRule(ctx, req.(*GetSchemaRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// SchemaRuleService_ServiceDesc is the grpc.ServiceDesc for SchemaRuleService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var DatasetRulesService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "com.coralogix.archive.dataset.v2.DatasetRulesService",
-	HandlerType: (*DatasetRulesServiceServer)(nil),
+var SchemaRuleService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "com.coralogix.archive.dataset.v2.SchemaRuleService",
+	HandlerType: (*SchemaRuleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "SetDatasetRule",
-			Handler:    _DatasetRulesService_SetDatasetRule_Handler,
+			MethodName: "SetSchemaRule",
+			Handler:    _SchemaRuleService_SetSchemaRule_Handler,
+		},
+		{
+			MethodName: "GetSchemaRule",
+			Handler:    _SchemaRuleService_GetSchemaRule_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

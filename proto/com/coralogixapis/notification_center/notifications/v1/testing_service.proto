@@ -127,8 +127,6 @@ message TestTemplateRenderResult {
     FAILURE_REASON_UNSPECIFIED = 0;
     INVALID_TEMPLATE = 1;
     FIELD_NOT_FOUND = 2;
-    TEMPLATE_EXCEEDS_MAX_LENGTH = 3;
-    RENDERED_VALUE_EXCEEDS_MAX_LENGTH = 4;
   }
 
   oneof result {

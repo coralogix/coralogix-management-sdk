@@ -21,6 +21,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type PromQLQueryType int32
+
+const (
+	PromQLQueryType_PROM_QL_QUERY_TYPE_UNSPECIFIED PromQLQueryType = 0
+	PromQLQueryType_PROM_QL_QUERY_TYPE_RANGE       PromQLQueryType = 1
+	PromQLQueryType_PROM_QL_QUERY_TYPE_INSTANT     PromQLQueryType = 2
+)
+
+// Enum value maps for PromQLQueryType.
+var (
+	PromQLQueryType_name = map[int32]string{
+		0: "PROM_QL_QUERY_TYPE_UNSPECIFIED",
+		1: "PROM_QL_QUERY_TYPE_RANGE",
+		2: "PROM_QL_QUERY_TYPE_INSTANT",
+	}
+	PromQLQueryType_value = map[string]int32{
+		"PROM_QL_QUERY_TYPE_UNSPECIFIED": 0,
+		"PROM_QL_QUERY_TYPE_RANGE":       1,
+		"PROM_QL_QUERY_TYPE_INSTANT":     2,
+	}
+)
+
+func (x PromQLQueryType) Enum() *PromQLQueryType {
+	p := new(PromQLQueryType)
+	*p = x
+	return p
+}
+
+func (x PromQLQueryType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (PromQLQueryType) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_dashboards_v1_common_query_proto_enumTypes[0].Descriptor()
+}
+
+func (PromQLQueryType) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_dashboards_v1_common_query_proto_enumTypes[0]
+}
+
+func (x PromQLQueryType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use PromQLQueryType.Descriptor instead.
+func (PromQLQueryType) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_common_query_proto_rawDescGZIP(), []int{0}
+}
+
 type DataprimeQuery struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -290,8 +339,15 @@ var file_com_coralogixapis_dashboards_v1_common_query_proto_rawDesc = []byte{
 	0x6e, 0x65, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x32, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
 	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x53, 0x74, 0x72, 0x69, 0x6e, 0x67, 0x56,
-	0x61, 0x6c, 0x75, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x61, 0x6c, 0x75, 0x65, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x2a, 0x73, 0x0a, 0x0f, 0x50,
+	0x72, 0x6f, 0x6d, 0x51, 0x4c, 0x51, 0x75, 0x65, 0x72, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x22,
+	0x0a, 0x1e, 0x50, 0x52, 0x4f, 0x4d, 0x5f, 0x51, 0x4c, 0x5f, 0x51, 0x55, 0x45, 0x52, 0x59, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x1c, 0x0a, 0x18, 0x50, 0x52, 0x4f, 0x4d, 0x5f, 0x51, 0x4c, 0x5f, 0x51, 0x55,
+	0x45, 0x52, 0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x52, 0x41, 0x4e, 0x47, 0x45, 0x10, 0x01,
+	0x12, 0x1e, 0x0a, 0x1a, 0x50, 0x52, 0x4f, 0x4d, 0x5f, 0x51, 0x4c, 0x5f, 0x51, 0x55, 0x45, 0x52,
+	0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x49, 0x4e, 0x53, 0x54, 0x41, 0x4e, 0x54, 0x10, 0x02,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -306,20 +362,22 @@ func file_com_coralogixapis_dashboards_v1_common_query_proto_rawDescGZIP() []byt
 	return file_com_coralogixapis_dashboards_v1_common_query_proto_rawDescData
 }
 
+var file_com_coralogixapis_dashboards_v1_common_query_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_com_coralogixapis_dashboards_v1_common_query_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_com_coralogixapis_dashboards_v1_common_query_proto_goTypes = []any{
-	(*DataprimeQuery)(nil),           // 0: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*SerializedDataprimeQuery)(nil), // 1: com.coralogixapis.dashboards.v1.common.SerializedDataprimeQuery
-	(*FullDataprimeQuery)(nil),       // 2: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery
-	(*PromQlQuery)(nil),              // 3: com.coralogixapis.dashboards.v1.common.PromQlQuery
-	(*LuceneQuery)(nil),              // 4: com.coralogixapis.dashboards.v1.common.LuceneQuery
-	(*wrapperspb.StringValue)(nil),   // 5: google.protobuf.StringValue
+	(PromQLQueryType)(0),             // 0: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(*DataprimeQuery)(nil),           // 1: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*SerializedDataprimeQuery)(nil), // 2: com.coralogixapis.dashboards.v1.common.SerializedDataprimeQuery
+	(*FullDataprimeQuery)(nil),       // 3: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery
+	(*PromQlQuery)(nil),              // 4: com.coralogixapis.dashboards.v1.common.PromQlQuery
+	(*LuceneQuery)(nil),              // 5: com.coralogixapis.dashboards.v1.common.LuceneQuery
+	(*wrapperspb.StringValue)(nil),   // 6: google.protobuf.StringValue
 }
 var file_com_coralogixapis_dashboards_v1_common_query_proto_depIdxs = []int32{
-	1, // 0: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery.serialized:type_name -> com.coralogixapis.dashboards.v1.common.SerializedDataprimeQuery
-	0, // 1: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery.raw:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	5, // 2: com.coralogixapis.dashboards.v1.common.PromQlQuery.value:type_name -> google.protobuf.StringValue
-	5, // 3: com.coralogixapis.dashboards.v1.common.LuceneQuery.value:type_name -> google.protobuf.StringValue
+	2, // 0: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery.serialized:type_name -> com.coralogixapis.dashboards.v1.common.SerializedDataprimeQuery
+	1, // 1: com.coralogixapis.dashboards.v1.common.FullDataprimeQuery.raw:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	6, // 2: com.coralogixapis.dashboards.v1.common.PromQlQuery.value:type_name -> google.protobuf.StringValue
+	6, // 3: com.coralogixapis.dashboards.v1.common.LuceneQuery.value:type_name -> google.protobuf.StringValue
 	4, // [4:4] is the sub-list for method output_type
 	4, // [4:4] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
@@ -337,13 +395,14 @@ func file_com_coralogixapis_dashboards_v1_common_query_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_com_coralogixapis_dashboards_v1_common_query_proto_rawDesc,
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_com_coralogixapis_dashboards_v1_common_query_proto_goTypes,
 		DependencyIndexes: file_com_coralogixapis_dashboards_v1_common_query_proto_depIdxs,
+		EnumInfos:         file_com_coralogixapis_dashboards_v1_common_query_proto_enumTypes,
 		MessageInfos:      file_com_coralogixapis_dashboards_v1_common_query_proto_msgTypes,
 	}.Build()
 	File_com_coralogixapis_dashboards_v1_common_query_proto = out.File

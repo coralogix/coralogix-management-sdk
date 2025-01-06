@@ -380,7 +380,7 @@ func (x *Gauge) GetLegendBy() LegendBy {
 	if x != nil {
 		return x.LegendBy
 	}
-	return LegendBy_LEGEND_BY_GROUPS
+	return LegendBy_LEGEND_BY_UNSPECIFIED
 }
 
 type Gauge_Query struct {

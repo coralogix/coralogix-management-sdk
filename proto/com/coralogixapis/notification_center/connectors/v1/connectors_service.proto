@@ -48,16 +48,9 @@ service ConnectorsService {
     };
   }
 
-  rpc ListConnectorSummaries(ListConnectorSummariesRequest) returns (ListConnectorSummariesResponse) {
-    option (google.api.http) = {
-      get: "v1/notification-center/connectors:listSummaries"
-      body: "*"
-    };
-  }
-
   rpc GetConnectorTypeSummaries(GetConnectorTypeSummariesRequest) returns (GetConnectorTypeSummariesResponse) {
     option (google.api.http) = {
-      get: "v1/notification-center/connectors:getTypeSummaries"
+      get: "v1/notification-center/connectors:getSummaries"
     };
   }
 }
@@ -89,12 +82,9 @@ message GetConnectorResponse {
 }
 
 message ListConnectorsRequest {
-  // Deprecated with the introduction of Global connectors.
-  reserved 3;
-  reserved "entity_type";
-  
   ConnectorType connector_type = 1;
   repeated OrderBy order_bys = 2;
+  optional string entity_type = 3;
 }
 
 message ListConnectorsResponse {
@@ -107,18 +97,6 @@ message BatchGetConnectorsRequest {
 message BatchGetConnectorsResponse {
   map<string, Connector> connectors = 1;
   repeated string not_found_ids = 2;
-}
-
-message ListConnectorSummariesRequest {
-  // Deprecated with the introduction of Global connectors.
-  reserved 3;
-  reserved "entity_type";
-  
-  ConnectorType connector_type = 1;
-  repeated OrderBy order_bys = 2;
-}
-message ListConnectorSummariesResponse {
-  repeated ConnectorSummary connector_summaries = 1;
 }
 
 message GetConnectorTypeSummariesRequest {}

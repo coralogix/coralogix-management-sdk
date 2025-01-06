@@ -7,10 +7,6 @@ import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "google/protobuf/timestamp.proto";
 
 message Connector {
-  // Deprecated with the introduction of Global connectors.
-  reserved 10;
-  reserved "entity_type";
-  
   optional string id = 1;
   // for declarative API
   optional string user_facing_id = 2;
@@ -21,28 +17,7 @@ message Connector {
   optional google.protobuf.Timestamp create_time = 7;
   optional google.protobuf.Timestamp update_time = 8;
   repeated ConnectorConfig connector_configs = 9;
-  repeated EntityTypeConfigOverrides config_overrides = 11;
-}
-
-message EntityTypeConfigOverrides {
-  string entity_type = 1;
-  repeated ConnectorConfig connector_configs = 2;
-}
-
-message ConnectorSummary {
-  // Deprecated with the introduction of Global connectors.
-  reserved 9;
-  reserved "entity_type";
-  
-  optional string id = 1;
-  // for declarative API
-  optional string user_facing_id = 2;
-  ConnectorType type = 3;
-  optional uint32 team_id = 4;
-  string name = 5;
-  string description = 6;
-  optional google.protobuf.Timestamp create_time = 7;
-  optional google.protobuf.Timestamp update_time = 8;
+  string entity_type = 10;
 }
 
 message ConnectorConfig {

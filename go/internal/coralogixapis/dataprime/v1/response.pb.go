@@ -1129,6 +1129,72 @@ func (*ShuffleFileSizeLimitReachedWarning) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dataprime_v1_response_proto_rawDescGZIP(), []int{17}
 }
 
+// this is only used in BG queries but will be also used as part of QueryResponse
+type ResponseMetadata struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Types that are assignable to Message:
+	//
+	//	*ResponseMetadata_Statistics_
+	Message isResponseMetadata_Message `protobuf_oneof:"message"`
+}
+
+func (x *ResponseMetadata) Reset() {
+	*x = ResponseMetadata{}
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseMetadata) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseMetadata) ProtoMessage() {}
+
+func (x *ResponseMetadata) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResponseMetadata.ProtoReflect.Descriptor instead.
+func (*ResponseMetadata) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dataprime_v1_response_proto_rawDescGZIP(), []int{18}
+}
+
+func (m *ResponseMetadata) GetMessage() isResponseMetadata_Message {
+	if m != nil {
+		return m.Message
+	}
+	return nil
+}
+
+func (x *ResponseMetadata) GetStatistics() *ResponseMetadata_Statistics {
+	if x, ok := x.GetMessage().(*ResponseMetadata_Statistics_); ok {
+		return x.Statistics
+	}
+	return nil
+}
+
+type isResponseMetadata_Message interface {
+	isResponseMetadata_Message()
+}
+
+type ResponseMetadata_Statistics_ struct {
+	Statistics *ResponseMetadata_Statistics `protobuf:"bytes,1,opt,name=statistics,proto3,oneof"` // more metadata messages will be added here (like columns)
+}
+
+func (*ResponseMetadata_Statistics_) isResponseMetadata_Message() {}
+
 type DataprimeResults_KeyValue struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1140,7 +1206,7 @@ type DataprimeResults_KeyValue struct {
 
 func (x *DataprimeResults_KeyValue) Reset() {
 	*x = DataprimeResults_KeyValue{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1152,7 +1218,7 @@ func (x *DataprimeResults_KeyValue) String() string {
 func (*DataprimeResults_KeyValue) ProtoMessage() {}
 
 func (x *DataprimeResults_KeyValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1190,7 +1256,7 @@ type DataprimeError_RateLimitReached struct {
 
 func (x *DataprimeError_RateLimitReached) Reset() {
 	*x = DataprimeError_RateLimitReached{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[19]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1202,7 +1268,7 @@ func (x *DataprimeError_RateLimitReached) String() string {
 func (*DataprimeError_RateLimitReached) ProtoMessage() {}
 
 func (x *DataprimeError_RateLimitReached) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[19]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1231,7 +1297,7 @@ type DataprimeError_Code struct {
 
 func (x *DataprimeError_Code) Reset() {
 	*x = DataprimeError_Code{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[20]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1243,7 +1309,7 @@ func (x *DataprimeError_Code) String() string {
 func (*DataprimeError_Code) ProtoMessage() {}
 
 func (x *DataprimeError_Code) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[20]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1291,7 +1357,7 @@ type ArchiveWarning_NoMetastoreData struct {
 
 func (x *ArchiveWarning_NoMetastoreData) Reset() {
 	*x = ArchiveWarning_NoMetastoreData{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1303,7 +1369,7 @@ func (x *ArchiveWarning_NoMetastoreData) String() string {
 func (*ArchiveWarning_NoMetastoreData) ProtoMessage() {}
 
 func (x *ArchiveWarning_NoMetastoreData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1327,7 +1393,7 @@ type ArchiveWarning_BucketAccessDenied struct {
 
 func (x *ArchiveWarning_BucketAccessDenied) Reset() {
 	*x = ArchiveWarning_BucketAccessDenied{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1339,7 +1405,7 @@ func (x *ArchiveWarning_BucketAccessDenied) String() string {
 func (*ArchiveWarning_BucketAccessDenied) ProtoMessage() {}
 
 func (x *ArchiveWarning_BucketAccessDenied) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1363,7 +1429,7 @@ type ArchiveWarning_BucketReadFailed struct {
 
 func (x *ArchiveWarning_BucketReadFailed) Reset() {
 	*x = ArchiveWarning_BucketReadFailed{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1375,7 +1441,7 @@ func (x *ArchiveWarning_BucketReadFailed) String() string {
 func (*ArchiveWarning_BucketReadFailed) ProtoMessage() {}
 
 func (x *ArchiveWarning_BucketReadFailed) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1399,7 +1465,7 @@ type ArchiveWarning_MissingData struct {
 
 func (x *ArchiveWarning_MissingData) Reset() {
 	*x = ArchiveWarning_MissingData{}
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1411,7 +1477,7 @@ func (x *ArchiveWarning_MissingData) String() string {
 func (*ArchiveWarning_MissingData) ProtoMessage() {}
 
 func (x *ArchiveWarning_MissingData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1425,6 +1491,51 @@ func (x *ArchiveWarning_MissingData) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ArchiveWarning_MissingData.ProtoReflect.Descriptor instead.
 func (*ArchiveWarning_MissingData) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dataprime_v1_response_proto_rawDescGZIP(), []int{14, 3}
+}
+
+type ResponseMetadata_Statistics struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BytesScanned int64 `protobuf:"varint,1,opt,name=bytes_scanned,json=bytesScanned,proto3" json:"bytes_scanned,omitempty"` // more corrrelated stats will be added here like total rows etc
+}
+
+func (x *ResponseMetadata_Statistics) Reset() {
+	*x = ResponseMetadata_Statistics{}
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResponseMetadata_Statistics) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResponseMetadata_Statistics) ProtoMessage() {}
+
+func (x *ResponseMetadata_Statistics) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResponseMetadata_Statistics.ProtoReflect.Descriptor instead.
+func (*ResponseMetadata_Statistics) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dataprime_v1_response_proto_rawDescGZIP(), []int{18, 0}
+}
+
+func (x *ResponseMetadata_Statistics) GetBytesScanned() int64 {
+	if x != nil {
+		return x.BytesScanned
+	}
+	return 0
 }
 
 var File_com_coralogixapis_dataprime_v1_response_proto protoreflect.FileDescriptor
@@ -1664,7 +1775,18 @@ var file_com_coralogixapis_dataprime_v1_response_proto_rawDesc = []byte{
 	0x74, 0x4c, 0x69, 0x6d, 0x69, 0x74, 0x57, 0x61, 0x72, 0x6e, 0x69, 0x6e, 0x67, 0x22, 0x24, 0x0a,
 	0x22, 0x53, 0x68, 0x75, 0x66, 0x66, 0x6c, 0x65, 0x46, 0x69, 0x6c, 0x65, 0x53, 0x69, 0x7a, 0x65,
 	0x4c, 0x69, 0x6d, 0x69, 0x74, 0x52, 0x65, 0x61, 0x63, 0x68, 0x65, 0x64, 0x57, 0x61, 0x72, 0x6e,
-	0x69, 0x6e, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x6e, 0x67, 0x22, 0xaf, 0x01, 0x0a, 0x10, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
+	0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x12, 0x5d, 0x0a, 0x0a, 0x73, 0x74, 0x61, 0x74,
+	0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3b, 0x2e, 0x63,
+	0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x61, 0x70, 0x69, 0x73,
+	0x2e, 0x64, 0x61, 0x74, 0x61, 0x70, 0x72, 0x69, 0x6d, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x4d, 0x65, 0x74, 0x61, 0x64, 0x61, 0x74, 0x61, 0x2e, 0x53,
+	0x74, 0x61, 0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x48, 0x00, 0x52, 0x0a, 0x73, 0x74, 0x61,
+	0x74, 0x69, 0x73, 0x74, 0x69, 0x63, 0x73, 0x1a, 0x31, 0x0a, 0x0a, 0x53, 0x74, 0x61, 0x74, 0x69,
+	0x73, 0x74, 0x69, 0x63, 0x73, 0x12, 0x23, 0x0a, 0x0d, 0x62, 0x79, 0x74, 0x65, 0x73, 0x5f, 0x73,
+	0x63, 0x61, 0x6e, 0x6e, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x62, 0x79,
+	0x74, 0x65, 0x73, 0x53, 0x63, 0x61, 0x6e, 0x6e, 0x65, 0x64, 0x42, 0x09, 0x0a, 0x07, 0x6d, 0x65,
+	0x73, 0x73, 0x61, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1679,7 +1801,7 @@ func file_com_coralogixapis_dataprime_v1_response_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_dataprime_v1_response_proto_rawDescData
 }
 
-var file_com_coralogixapis_dataprime_v1_response_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_com_coralogixapis_dataprime_v1_response_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_com_coralogixapis_dataprime_v1_response_proto_goTypes = []any{
 	(*QueryResponse)(nil),                      // 0: com.coralogixapis.dataprime.v1.QueryResponse
 	(*DataprimeWarning)(nil),                   // 1: com.coralogixapis.dataprime.v1.DataprimeWarning
@@ -1699,15 +1821,17 @@ var file_com_coralogixapis_dataprime_v1_response_proto_goTypes = []any{
 	(*ScrollTimeoutWarning)(nil),               // 15: com.coralogixapis.dataprime.v1.ScrollTimeoutWarning
 	(*FieldCountLimitWarning)(nil),             // 16: com.coralogixapis.dataprime.v1.FieldCountLimitWarning
 	(*ShuffleFileSizeLimitReachedWarning)(nil), // 17: com.coralogixapis.dataprime.v1.ShuffleFileSizeLimitReachedWarning
-	(*DataprimeResults_KeyValue)(nil),          // 18: com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
-	(*DataprimeError_RateLimitReached)(nil),    // 19: com.coralogixapis.dataprime.v1.DataprimeError.RateLimitReached
-	(*DataprimeError_Code)(nil),                // 20: com.coralogixapis.dataprime.v1.DataprimeError.Code
-	(*ArchiveWarning_NoMetastoreData)(nil),     // 21: com.coralogixapis.dataprime.v1.ArchiveWarning.NoMetastoreData
-	(*ArchiveWarning_BucketAccessDenied)(nil),  // 22: com.coralogixapis.dataprime.v1.ArchiveWarning.BucketAccessDenied
-	(*ArchiveWarning_BucketReadFailed)(nil),    // 23: com.coralogixapis.dataprime.v1.ArchiveWarning.BucketReadFailed
-	(*ArchiveWarning_MissingData)(nil),         // 24: com.coralogixapis.dataprime.v1.ArchiveWarning.MissingData
-	(*timestamppb.Timestamp)(nil),              // 25: google.protobuf.Timestamp
-	(*wrapperspb.StringValue)(nil),             // 26: google.protobuf.StringValue
+	(*ResponseMetadata)(nil),                   // 18: com.coralogixapis.dataprime.v1.ResponseMetadata
+	(*DataprimeResults_KeyValue)(nil),          // 19: com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
+	(*DataprimeError_RateLimitReached)(nil),    // 20: com.coralogixapis.dataprime.v1.DataprimeError.RateLimitReached
+	(*DataprimeError_Code)(nil),                // 21: com.coralogixapis.dataprime.v1.DataprimeError.Code
+	(*ArchiveWarning_NoMetastoreData)(nil),     // 22: com.coralogixapis.dataprime.v1.ArchiveWarning.NoMetastoreData
+	(*ArchiveWarning_BucketAccessDenied)(nil),  // 23: com.coralogixapis.dataprime.v1.ArchiveWarning.BucketAccessDenied
+	(*ArchiveWarning_BucketReadFailed)(nil),    // 24: com.coralogixapis.dataprime.v1.ArchiveWarning.BucketReadFailed
+	(*ArchiveWarning_MissingData)(nil),         // 25: com.coralogixapis.dataprime.v1.ArchiveWarning.MissingData
+	(*ResponseMetadata_Statistics)(nil),        // 26: com.coralogixapis.dataprime.v1.ResponseMetadata.Statistics
+	(*timestamppb.Timestamp)(nil),              // 27: google.protobuf.Timestamp
+	(*wrapperspb.StringValue)(nil),             // 28: google.protobuf.StringValue
 }
 var file_com_coralogixapis_dataprime_v1_response_proto_depIdxs = []int32{
 	11, // 0: com.coralogixapis.dataprime.v1.QueryResponse.error:type_name -> com.coralogixapis.dataprime.v1.DataprimeError
@@ -1725,23 +1849,24 @@ var file_com_coralogixapis_dataprime_v1_response_proto_depIdxs = []int32{
 	15, // 12: com.coralogixapis.dataprime.v1.DataprimeWarning.scroll_timeout_warning:type_name -> com.coralogixapis.dataprime.v1.ScrollTimeoutWarning
 	16, // 13: com.coralogixapis.dataprime.v1.DataprimeWarning.field_count_limit_warning:type_name -> com.coralogixapis.dataprime.v1.FieldCountLimitWarning
 	17, // 14: com.coralogixapis.dataprime.v1.DataprimeWarning.shuffle_file_size_limit_reached_warning:type_name -> com.coralogixapis.dataprime.v1.ShuffleFileSizeLimitReachedWarning
-	25, // 15: com.coralogixapis.dataprime.v1.TimeRangeWarning.start_date:type_name -> google.protobuf.Timestamp
-	25, // 16: com.coralogixapis.dataprime.v1.TimeRangeWarning.end_date:type_name -> google.protobuf.Timestamp
+	27, // 15: com.coralogixapis.dataprime.v1.TimeRangeWarning.start_date:type_name -> google.protobuf.Timestamp
+	27, // 16: com.coralogixapis.dataprime.v1.TimeRangeWarning.end_date:type_name -> google.protobuf.Timestamp
 	10, // 17: com.coralogixapis.dataprime.v1.DataprimeResult.results:type_name -> com.coralogixapis.dataprime.v1.DataprimeResults
-	18, // 18: com.coralogixapis.dataprime.v1.DataprimeResults.metadata:type_name -> com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
-	18, // 19: com.coralogixapis.dataprime.v1.DataprimeResults.labels:type_name -> com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
-	26, // 20: com.coralogixapis.dataprime.v1.DataprimeError.message:type_name -> google.protobuf.StringValue
-	20, // 21: com.coralogixapis.dataprime.v1.DataprimeError.code:type_name -> com.coralogixapis.dataprime.v1.DataprimeError.Code
-	21, // 22: com.coralogixapis.dataprime.v1.ArchiveWarning.no_metastore_data:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.NoMetastoreData
-	22, // 23: com.coralogixapis.dataprime.v1.ArchiveWarning.bucket_access_denied:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.BucketAccessDenied
-	23, // 24: com.coralogixapis.dataprime.v1.ArchiveWarning.bucket_read_failed:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.BucketReadFailed
-	24, // 25: com.coralogixapis.dataprime.v1.ArchiveWarning.missing_data:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.MissingData
-	19, // 26: com.coralogixapis.dataprime.v1.DataprimeError.Code.rate_limit_reached:type_name -> com.coralogixapis.dataprime.v1.DataprimeError.RateLimitReached
-	27, // [27:27] is the sub-list for method output_type
-	27, // [27:27] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	19, // 18: com.coralogixapis.dataprime.v1.DataprimeResults.metadata:type_name -> com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
+	19, // 19: com.coralogixapis.dataprime.v1.DataprimeResults.labels:type_name -> com.coralogixapis.dataprime.v1.DataprimeResults.KeyValue
+	28, // 20: com.coralogixapis.dataprime.v1.DataprimeError.message:type_name -> google.protobuf.StringValue
+	21, // 21: com.coralogixapis.dataprime.v1.DataprimeError.code:type_name -> com.coralogixapis.dataprime.v1.DataprimeError.Code
+	22, // 22: com.coralogixapis.dataprime.v1.ArchiveWarning.no_metastore_data:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.NoMetastoreData
+	23, // 23: com.coralogixapis.dataprime.v1.ArchiveWarning.bucket_access_denied:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.BucketAccessDenied
+	24, // 24: com.coralogixapis.dataprime.v1.ArchiveWarning.bucket_read_failed:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.BucketReadFailed
+	25, // 25: com.coralogixapis.dataprime.v1.ArchiveWarning.missing_data:type_name -> com.coralogixapis.dataprime.v1.ArchiveWarning.MissingData
+	26, // 26: com.coralogixapis.dataprime.v1.ResponseMetadata.statistics:type_name -> com.coralogixapis.dataprime.v1.ResponseMetadata.Statistics
+	20, // 27: com.coralogixapis.dataprime.v1.DataprimeError.Code.rate_limit_reached:type_name -> com.coralogixapis.dataprime.v1.DataprimeError.RateLimitReached
+	28, // [28:28] is the sub-list for method output_type
+	28, // [28:28] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dataprime_v1_response_proto_init() }
@@ -1776,7 +1901,10 @@ func file_com_coralogixapis_dataprime_v1_response_proto_init() {
 		(*ArchiveWarning_BucketReadFailed_)(nil),
 		(*ArchiveWarning_MissingData_)(nil),
 	}
-	file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[20].OneofWrappers = []any{
+	file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[18].OneofWrappers = []any{
+		(*ResponseMetadata_Statistics_)(nil),
+	}
+	file_com_coralogixapis_dataprime_v1_response_proto_msgTypes[21].OneofWrappers = []any{
 		(*DataprimeError_Code_RateLimitReached)(nil),
 	}
 	type x struct{}
@@ -1785,7 +1913,7 @@ func file_com_coralogixapis_dataprime_v1_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_com_coralogixapis_dataprime_v1_response_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

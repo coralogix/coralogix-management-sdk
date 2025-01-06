@@ -19,13 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DistributedTracingService_GetTimeConsuming_FullMethodName = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetTimeConsuming"
-	DistributedTracingService_GetThroughput_FullMethodName    = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetThroughput"
-	DistributedTracingService_GetErrors_FullMethodName        = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetErrors"
-	DistributedTracingService_GetErrorsStream_FullMethodName  = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetErrorsStream"
-	DistributedTracingService_GetP99Latency_FullMethodName    = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetP99Latency"
-	DistributedTracingService_ListOperations_FullMethodName   = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/ListOperations"
-	DistributedTracingService_GetLatencyGraph_FullMethodName  = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetLatencyGraph"
+	DistributedTracingService_GetTimeConsuming_FullMethodName        = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetTimeConsuming"
+	DistributedTracingService_GetThroughput_FullMethodName           = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetThroughput"
+	DistributedTracingService_GetErrors_FullMethodName               = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetErrors"
+	DistributedTracingService_GetErrorsStream_FullMethodName         = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetErrorsStream"
+	DistributedTracingService_GetP99Latency_FullMethodName           = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetP99Latency"
+	DistributedTracingService_ListOperations_FullMethodName          = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/ListOperations"
+	DistributedTracingService_OperationsColumnsStream_FullMethodName = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/operationsColumnsStream"
+	DistributedTracingService_GetLatencyGraph_FullMethodName         = "/com.coralogixapis.service_catalog.v1.DistributedTracingService/GetLatencyGraph"
 )
 
 // DistributedTracingServiceClient is the client API for DistributedTracingService service.
@@ -38,6 +39,7 @@ type DistributedTracingServiceClient interface {
 	GetErrorsStream(ctx context.Context, in *GetErrorsStreamRequest, opts ...grpc.CallOption) (DistributedTracingService_GetErrorsStreamClient, error)
 	GetP99Latency(ctx context.Context, in *GetP99LatencyRequest, opts ...grpc.CallOption) (*GetP99LatencyResponse, error)
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error)
+	OperationsColumnsStream(ctx context.Context, in *OperationsColumnsStreamRequest, opts ...grpc.CallOption) (DistributedTracingService_OperationsColumnsStreamClient, error)
 	GetLatencyGraph(ctx context.Context, in *GetLatencyGraphRequest, opts ...grpc.CallOption) (DistributedTracingService_GetLatencyGraphClient, error)
 }
 
@@ -126,8 +128,40 @@ func (c *distributedTracingServiceClient) ListOperations(ctx context.Context, in
 	return out, nil
 }
 
+func (c *distributedTracingServiceClient) OperationsColumnsStream(ctx context.Context, in *OperationsColumnsStreamRequest, opts ...grpc.CallOption) (DistributedTracingService_OperationsColumnsStreamClient, error) {
+	stream, err := c.cc.NewStream(ctx, &DistributedTracingService_ServiceDesc.Streams[1], DistributedTracingService_OperationsColumnsStream_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &distributedTracingServiceOperationsColumnsStreamClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type DistributedTracingService_OperationsColumnsStreamClient interface {
+	Recv() (*OperationsColumnsStreamResponse, error)
+	grpc.ClientStream
+}
+
+type distributedTracingServiceOperationsColumnsStreamClient struct {
+	grpc.ClientStream
+}
+
+func (x *distributedTracingServiceOperationsColumnsStreamClient) Recv() (*OperationsColumnsStreamResponse, error) {
+	m := new(OperationsColumnsStreamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *distributedTracingServiceClient) GetLatencyGraph(ctx context.Context, in *GetLatencyGraphRequest, opts ...grpc.CallOption) (DistributedTracingService_GetLatencyGraphClient, error) {
-	stream, err := c.cc.NewStream(ctx, &DistributedTracingService_ServiceDesc.Streams[1], DistributedTracingService_GetLatencyGraph_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &DistributedTracingService_ServiceDesc.Streams[2], DistributedTracingService_GetLatencyGraph_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +202,7 @@ type DistributedTracingServiceServer interface {
 	GetErrorsStream(*GetErrorsStreamRequest, DistributedTracingService_GetErrorsStreamServer) error
 	GetP99Latency(context.Context, *GetP99LatencyRequest) (*GetP99LatencyResponse, error)
 	ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error)
+	OperationsColumnsStream(*OperationsColumnsStreamRequest, DistributedTracingService_OperationsColumnsStreamServer) error
 	GetLatencyGraph(*GetLatencyGraphRequest, DistributedTracingService_GetLatencyGraphServer) error
 	mustEmbedUnimplementedDistributedTracingServiceServer()
 }
@@ -193,6 +228,9 @@ func (UnimplementedDistributedTracingServiceServer) GetP99Latency(context.Contex
 }
 func (UnimplementedDistributedTracingServiceServer) ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+}
+func (UnimplementedDistributedTracingServiceServer) OperationsColumnsStream(*OperationsColumnsStreamRequest, DistributedTracingService_OperationsColumnsStreamServer) error {
+	return status.Errorf(codes.Unimplemented, "method OperationsColumnsStream not implemented")
 }
 func (UnimplementedDistributedTracingServiceServer) GetLatencyGraph(*GetLatencyGraphRequest, DistributedTracingService_GetLatencyGraphServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetLatencyGraph not implemented")
@@ -322,6 +360,27 @@ func _DistributedTracingService_ListOperations_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _DistributedTracingService_OperationsColumnsStream_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(OperationsColumnsStreamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DistributedTracingServiceServer).OperationsColumnsStream(m, &distributedTracingServiceOperationsColumnsStreamServer{stream})
+}
+
+type DistributedTracingService_OperationsColumnsStreamServer interface {
+	Send(*OperationsColumnsStreamResponse) error
+	grpc.ServerStream
+}
+
+type distributedTracingServiceOperationsColumnsStreamServer struct {
+	grpc.ServerStream
+}
+
+func (x *distributedTracingServiceOperationsColumnsStreamServer) Send(m *OperationsColumnsStreamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _DistributedTracingService_GetLatencyGraph_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetLatencyGraphRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -375,6 +434,11 @@ var DistributedTracingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetErrorsStream",
 			Handler:       _DistributedTracingService_GetErrorsStream_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "operationsColumnsStream",
+			Handler:       _DistributedTracingService_OperationsColumnsStream_Handler,
 			ServerStreams: true,
 		},
 		{
