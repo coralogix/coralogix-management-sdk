@@ -179,7 +179,7 @@ mod tests {
                 priority: AlertDefPriority::P1.into(),
                 deleted: None,
                 r#type: AlertDefType::LogsUniqueCount.into(),
-                group_by_keys: vec![],
+                group_by_keys: vec![String::from("remote_addr_geoip.city_name")],
                 incidents_settings: None,
                 phantom_mode: Some(false),
                 notification_group: Some(AlertDefNotificationGroup {
@@ -205,7 +205,6 @@ mod tests {
                 .collect(),
                 schedule: None,
                 type_definition: Some(TypeDefinition::LogsUniqueCount(LogsUniqueCountType {
-                    
                     logs_filter: Some(LogsFilter {
                         filter_type: Some(FilterType::SimpleFilter(LogsSimpleFilter {
                             lucene_query: Some(String::from("remote_addr_enriched:/.*/")),
