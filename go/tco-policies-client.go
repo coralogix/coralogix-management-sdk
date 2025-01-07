@@ -74,6 +74,24 @@ type CreatePolicyRequest = tcopolicies.CreatePolicyRequest
 // CreateLogPolicyRequest is a request type.
 type CreateLogPolicyRequest = tcopolicies.CreateLogPolicyRequest
 
+// LogPolicySeverityValueLookup is a LogPolicy severity value lookup.
+var LogPolicySeverityValueLookup = tcopolicies.Severity_value
+
+// LogPolicySeverityNameLookup is a LogPolicy severity name lookup.
+var LogPolicySeverityNameLookup = tcopolicies.Severity_name
+
+// LogPolicyPriorityValueLookup is a LogPolicy priority value lookup.
+var LogPolicyPriorityValueLookup = tcopolicies.Priority_value
+
+// LogPolicyPriorityNameLookup is a LogPolicy priority name lookup.
+var LogPolicyPriorityNameLookup = tcopolicies.Priority_name
+
+// LogPolicyRuleTypeValueLookup is a LogPolicy rule type value lookup.
+var LogPolicyRuleTypeValueLookup = tcopolicies.RuleTypeId_value
+
+// LogPolicyRuleTypeNameLookup is a LogPolicy rule type name lookup.
+var LogPolicyRuleTypeNameLookup = tcopolicies.RuleTypeId_name
+
 // CreateGenericPolicyRequest is a request type.
 type CreateGenericPolicyRequest = tcopolicies.CreateGenericPolicyRequest
 
