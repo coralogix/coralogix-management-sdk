@@ -13,12 +13,12 @@ message Object {
   reserved 4;
   reserved 5;
   uint32 compaction_level = 6;
-  com.coralogix.archive.dataset.v1.Dataset dataset = 7;
+  dataset.v1.Dataset dataset = 7;
   uint64 row_count = 8;
   repeated Labels collected_event_labels = 9;
   Labels split_by_event_labels = 10;
   ArchiveTarget archive_target = 11;
-  com.coralogix.archive.dataset.v2.IngestionFinalLocation physical_location = 16;
+  dataset.v2.IngestionFinalLocation physical_location = 16;
   reserved 12;
   reserved 13;
   bool columns_limit_reached = 14;

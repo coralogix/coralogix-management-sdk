@@ -6,6 +6,7 @@ import "com/coralogix/archive/v2/target.proto";
 import "com/coralogix/archive/v2/object_tag.proto";
 import "com/coralogix/archive/v2/archive_target.proto";
 import "com/coralogix/archive/v2/format.proto";
+import "com/coralogix/archive/dataset/v2/default_keys.proto";
 
 // IMPORTANT: messages with "Props" suffix mean that it has values generated based on data itself.
 
@@ -54,7 +55,8 @@ message IngestionFinalLocationProps {
   IngestionLocationSpecProps spec = 1;
   optional string filename_prefix = 2;
   repeated com.coralogix.archive.v2.ObjectTag tags = 3;
-  optional string final_location_full_prefix = 4; // includes the dynamic dt/hr part (if there is one)
+  optional string final_location_full_prefix = 4; // does not include the dynamic dt/hr part (if there is one), but everything up to it
+  repeated FieldPath default_key_fields = 5; // Optional, needed for keyed datasets, like enrichments
   // Collected labels and split by label values for blobsets?
 }
 

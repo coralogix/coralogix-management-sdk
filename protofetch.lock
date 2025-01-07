@@ -3,8 +3,8 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.6"
-commit_hash = "45d3a3d02bd8b69fe408984bdbe1ea954c559475"
+revision = "v0.5.7"
+commit_hash = "71df9fd4e85ec092860641374aab9955098a26e9"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -27,20 +27,20 @@ commit_hash = "0d9733fd0052f743cdb14e62a6e4ae179676ea41"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.72"
-commit_hash = "3ccbee7ae8e2aee260aa2b698ea3c2e7096b01ff"
+revision = "v0.0.81"
+commit_hash = "25c207d3e6e4d0e2293b9a6c4f8e51b8c08360e1"
 
 [[dependencies]]
 name = "cx-api-common"
 url = "github.com/coralogix/cx-api-common"
-revision = "v1.0.7"
-commit_hash = "f270227ba8c1066faaf64191df7438c224069596"
+revision = "v1.0.9"
+commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v1.2.13"
-commit_hash = "e5df00d69ac133d632643f47e1fb20258974edeb"
+revision = "v2.1.0"
+commit_hash = "8cd5a1e482526de8764f7a627483fcc4aa136727"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -51,8 +51,8 @@ commit_hash = "fe159097ef2f94678a2e655ac30eb18aefdc067f"
 [[dependencies]]
 name = "cx-api-dataprime"
 url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.328"
-commit_hash = "a0b9fcd5b20cd9322b31c5b3b307778d92c5b94e"
+revision = "v0.339"
+commit_hash = "2f484009a7571ea936529239d5cb53a5844f1f86"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -99,8 +99,8 @@ commit_hash = "54f3039f90c8a0eb57a33908c03f211ff9b11520"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.89"
-commit_hash = "6f9b0d6a6881d8edc35c05b0723264a23e5a3bc6"
+revision = "v0.1.90"
+commit_hash = "8e697ef027cfe1ac087bb77629780f968e94ac1a"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -117,8 +117,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.109"
-commit_hash = "76244b88ec1d2edba2927622cf61b2b7ae7fdbe8"
+revision = "v0.3.110"
+commit_hash = "08742acc81a9e793716fb4601ad7aef8490e0011"
 
 [[dependencies]]
 name = "cx-api-tags"

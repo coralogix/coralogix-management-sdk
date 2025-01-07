@@ -26,7 +26,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     project_root.pop();
     project_root.push(PROTOS_DIR);
 
-    println!("project_root: {:?}", project_root);
     let root = project_root.into_os_string().into_string().unwrap();
     println!("root: {:?}", root);
     let building = &[
@@ -82,8 +81,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         notifications_service(&root),
     ]
     .concat();
-
-    println!("made it to line 106");
 
     // Replacing the original prost types with the WKT crate ones will add the serde attributes without having
     // to recompile those proto files which would lead to having to use the raw Google protobuf types.

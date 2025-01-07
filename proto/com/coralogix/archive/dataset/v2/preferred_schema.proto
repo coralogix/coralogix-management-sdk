@@ -3,8 +3,11 @@ syntax = "proto3";
 package com.coralogix.archive.dataset.v2;
 
 
-message NamedSchemaTemplateField {
+message MergedNamedSchemaTemplateField {
   repeated string path_array = 1;
+  repeated NamedSchemaDataType data_types = 2;
+}
+message NamedSchemaDataType {
   DataType data_type = 2;
   string logical_data_type = 3;
 }

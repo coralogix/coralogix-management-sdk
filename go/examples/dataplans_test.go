@@ -27,16 +27,16 @@ import (
 
 func TestDataUsage(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDataUsageClient(creator)
 
 	dateRangeBegin, err := time.Parse(time.RFC3339, "2021-01-01T00:00:00Z")
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	dateRangeEnd, err := time.Parse(time.RFC3339, "2021-01-02T00:00:00Z")
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	logsCount, err := c.GetLogsCount(context.Background(), &cxsdk.GetLogsCountRequest{
 		DateRange: &cxsdk.DateRange{
@@ -54,7 +54,7 @@ func TestDataUsage(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.NotNil(t, logsCount)
 
 	spansCount, err := c.GetSpansCount(context.Background(), &cxsdk.GetSpansCountRequest{
@@ -73,7 +73,7 @@ func TestDataUsage(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.NotNil(t, spansCount)
 
 	dataUsageStream, err := c.GetDataUsage(context.Background(), &cxsdk.GetDataUsageRequest{
@@ -90,7 +90,7 @@ func TestDataUsage(t *testing.T) {
 		DimensionFilters: []*cxsdk.Dimension{},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.NotNil(t, dataUsageStream)
 
 }

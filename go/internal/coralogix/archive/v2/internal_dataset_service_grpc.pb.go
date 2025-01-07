@@ -21,7 +21,8 @@ const _ = grpc.SupportPackageIsVersion7
 const (
 	InternalDatasetManagementService_GetAllDatasetRules_FullMethodName     = "/com.coralogix.archive.dataset.v2.InternalDatasetManagementService/GetAllDatasetRules"
 	InternalDatasetManagementService_GetDatasetSchemaFields_FullMethodName = "/com.coralogix.archive.dataset.v2.InternalDatasetManagementService/GetDatasetSchemaFields"
-	InternalDatasetManagementService_SetDatasetRule_FullMethodName         = "/com.coralogix.archive.dataset.v2.InternalDatasetManagementService/SetDatasetRule"
+	InternalDatasetManagementService_SetSchemaRule_FullMethodName          = "/com.coralogix.archive.dataset.v2.InternalDatasetManagementService/SetSchemaRule"
+	InternalDatasetManagementService_GetSchemaRule_FullMethodName          = "/com.coralogix.archive.dataset.v2.InternalDatasetManagementService/GetSchemaRule"
 )
 
 // InternalDatasetManagementServiceClient is the client API for InternalDatasetManagementService service.
@@ -30,7 +31,8 @@ const (
 type InternalDatasetManagementServiceClient interface {
 	GetAllDatasetRules(ctx context.Context, in *GetAllDatasetRulesRequest, opts ...grpc.CallOption) (*GetAllDatasetRulesResponse, error)
 	GetDatasetSchemaFields(ctx context.Context, in *GetDatasetSchemaFieldsRequest, opts ...grpc.CallOption) (*GetDatasetSchemaFieldsResponse, error)
-	SetDatasetRule(ctx context.Context, in *InternalDatasetManagementServiceSetDatasetRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceSetDatasetRuleResponse, error)
+	SetSchemaRule(ctx context.Context, in *InternalDatasetManagementServiceSetSchemaRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceSetSchemaRuleResponse, error)
+	GetSchemaRule(ctx context.Context, in *InternalDatasetManagementServiceGetSchemaRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceGetSchemaRuleResponse, error)
 }
 
 type internalDatasetManagementServiceClient struct {
@@ -59,9 +61,18 @@ func (c *internalDatasetManagementServiceClient) GetDatasetSchemaFields(ctx cont
 	return out, nil
 }
 
-func (c *internalDatasetManagementServiceClient) SetDatasetRule(ctx context.Context, in *InternalDatasetManagementServiceSetDatasetRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceSetDatasetRuleResponse, error) {
-	out := new(InternalDatasetManagementServiceSetDatasetRuleResponse)
-	err := c.cc.Invoke(ctx, InternalDatasetManagementService_SetDatasetRule_FullMethodName, in, out, opts...)
+func (c *internalDatasetManagementServiceClient) SetSchemaRule(ctx context.Context, in *InternalDatasetManagementServiceSetSchemaRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceSetSchemaRuleResponse, error) {
+	out := new(InternalDatasetManagementServiceSetSchemaRuleResponse)
+	err := c.cc.Invoke(ctx, InternalDatasetManagementService_SetSchemaRule_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *internalDatasetManagementServiceClient) GetSchemaRule(ctx context.Context, in *InternalDatasetManagementServiceGetSchemaRuleRequest, opts ...grpc.CallOption) (*InternalDatasetManagementServiceGetSchemaRuleResponse, error) {
+	out := new(InternalDatasetManagementServiceGetSchemaRuleResponse)
+	err := c.cc.Invoke(ctx, InternalDatasetManagementService_GetSchemaRule_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +85,8 @@ func (c *internalDatasetManagementServiceClient) SetDatasetRule(ctx context.Cont
 type InternalDatasetManagementServiceServer interface {
 	GetAllDatasetRules(context.Context, *GetAllDatasetRulesRequest) (*GetAllDatasetRulesResponse, error)
 	GetDatasetSchemaFields(context.Context, *GetDatasetSchemaFieldsRequest) (*GetDatasetSchemaFieldsResponse, error)
-	SetDatasetRule(context.Context, *InternalDatasetManagementServiceSetDatasetRuleRequest) (*InternalDatasetManagementServiceSetDatasetRuleResponse, error)
+	SetSchemaRule(context.Context, *InternalDatasetManagementServiceSetSchemaRuleRequest) (*InternalDatasetManagementServiceSetSchemaRuleResponse, error)
+	GetSchemaRule(context.Context, *InternalDatasetManagementServiceGetSchemaRuleRequest) (*InternalDatasetManagementServiceGetSchemaRuleResponse, error)
 	mustEmbedUnimplementedInternalDatasetManagementServiceServer()
 }
 
@@ -88,8 +100,11 @@ func (UnimplementedInternalDatasetManagementServiceServer) GetAllDatasetRules(co
 func (UnimplementedInternalDatasetManagementServiceServer) GetDatasetSchemaFields(context.Context, *GetDatasetSchemaFieldsRequest) (*GetDatasetSchemaFieldsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDatasetSchemaFields not implemented")
 }
-func (UnimplementedInternalDatasetManagementServiceServer) SetDatasetRule(context.Context, *InternalDatasetManagementServiceSetDatasetRuleRequest) (*InternalDatasetManagementServiceSetDatasetRuleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method SetDatasetRule not implemented")
+func (UnimplementedInternalDatasetManagementServiceServer) SetSchemaRule(context.Context, *InternalDatasetManagementServiceSetSchemaRuleRequest) (*InternalDatasetManagementServiceSetSchemaRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetSchemaRule not implemented")
+}
+func (UnimplementedInternalDatasetManagementServiceServer) GetSchemaRule(context.Context, *InternalDatasetManagementServiceGetSchemaRuleRequest) (*InternalDatasetManagementServiceGetSchemaRuleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSchemaRule not implemented")
 }
 func (UnimplementedInternalDatasetManagementServiceServer) mustEmbedUnimplementedInternalDatasetManagementServiceServer() {
 }
@@ -141,20 +156,38 @@ func _InternalDatasetManagementService_GetDatasetSchemaFields_Handler(srv interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _InternalDatasetManagementService_SetDatasetRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InternalDatasetManagementServiceSetDatasetRuleRequest)
+func _InternalDatasetManagementService_SetSchemaRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InternalDatasetManagementServiceSetSchemaRuleRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(InternalDatasetManagementServiceServer).SetDatasetRule(ctx, in)
+		return srv.(InternalDatasetManagementServiceServer).SetSchemaRule(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: InternalDatasetManagementService_SetDatasetRule_FullMethodName,
+		FullMethod: InternalDatasetManagementService_SetSchemaRule_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(InternalDatasetManagementServiceServer).SetDatasetRule(ctx, req.(*InternalDatasetManagementServiceSetDatasetRuleRequest))
+		return srv.(InternalDatasetManagementServiceServer).SetSchemaRule(ctx, req.(*InternalDatasetManagementServiceSetSchemaRuleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _InternalDatasetManagementService_GetSchemaRule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InternalDatasetManagementServiceGetSchemaRuleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(InternalDatasetManagementServiceServer).GetSchemaRule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: InternalDatasetManagementService_GetSchemaRule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InternalDatasetManagementServiceServer).GetSchemaRule(ctx, req.(*InternalDatasetManagementServiceGetSchemaRuleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -175,8 +208,12 @@ var InternalDatasetManagementService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _InternalDatasetManagementService_GetDatasetSchemaFields_Handler,
 		},
 		{
-			MethodName: "SetDatasetRule",
-			Handler:    _InternalDatasetManagementService_SetDatasetRule_Handler,
+			MethodName: "SetSchemaRule",
+			Handler:    _InternalDatasetManagementService_SetSchemaRule_Handler,
+		},
+		{
+			MethodName: "GetSchemaRule",
+			Handler:    _InternalDatasetManagementService_GetSchemaRule_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

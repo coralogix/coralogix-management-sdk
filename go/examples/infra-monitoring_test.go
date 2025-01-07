@@ -28,9 +28,9 @@ import (
 
 func TestSlos(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSLOsClient(creator)
 
@@ -45,13 +45,13 @@ func TestSlos(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	_, retrievalError := c.Get(context.Background(), &cxsdk.GetServiceSloRequest{
 		Id: createSloResponse.Slo.Id,
 	})
 
-	assert.Nil(t, retrievalError)
+	assertNilAndPrintError(t, retrievalError)
 
 	updateSloResponse, updateError := c.Update(context.Background(), &cxsdk.ReplaceServiceSloRequest{
 		Slo: &cxsdk.ServiceSlo{
@@ -65,7 +65,7 @@ func TestSlos(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, updateError)
+	assertNilAndPrintError(t, updateError)
 
 	assert.Equal(t, createSloResponse.Slo.Id.Value, updateSloResponse.Slo.Id.Value)
 
@@ -73,15 +73,15 @@ func TestSlos(t *testing.T) {
 		Id: createSloResponse.Slo.Id,
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 }
 
 func TestSlosWithFilters(t *testing.T) {
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSLOsClient(creator)
 
@@ -99,13 +99,13 @@ func TestSlosWithFilters(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	_, retrievalError := c.Get(context.Background(), &cxsdk.GetServiceSloRequest{
 		Id: createSloResponse.Slo.Id,
 	})
 
-	assert.Nil(t, retrievalError)
+	assertNilAndPrintError(t, retrievalError)
 
 	updateSloResponse, updateError := c.Update(context.Background(), &cxsdk.ReplaceServiceSloRequest{
 		Slo: &cxsdk.ServiceSlo{
@@ -119,7 +119,7 @@ func TestSlosWithFilters(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, updateError)
+	assertNilAndPrintError(t, updateError)
 
 	assert.Equal(t, createSloResponse.Slo.Id.Value, updateSloResponse.Slo.Id.Value)
 
@@ -127,5 +127,5 @@ func TestSlosWithFilters(t *testing.T) {
 		Id: createSloResponse.Slo.Id,
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 }

@@ -64,9 +64,9 @@ func sl(k string, v []string) *cxsdk.IntegrationParameter {
 func TestIntegration(t *testing.T) {
 	awsRegion := os.Getenv("AWS_REGION")
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewIntegrationsClient(creator)
@@ -98,7 +98,7 @@ func TestIntegration(t *testing.T) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	createResponse, err := c.Create(context.Background(), &cxsdk.SaveIntegrationRequest{
 		Metadata: &cxsdk.IntegrationMetadata{
@@ -112,7 +112,7 @@ func TestIntegration(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	details, listError := c.GetDetails(context.Background(), &cxsdk.GetIntegrationDetailsRequest{
 		Id:                     wrapperspb.String(name),
@@ -121,7 +121,7 @@ func TestIntegration(t *testing.T) {
 	if listError != nil {
 		log.Fatal(listError.Error())
 	}
-	assert.Nil(t, listError)
+	assertNilAndPrintError(t, listError)
 
 	integrationDetail := details.IntegrationDetail.IntegrationTypeDetails.(*cxsdk.IntegrationDetailsDefault)
 	found := false
@@ -141,14 +141,14 @@ func TestIntegration(t *testing.T) {
 		log.Fatal(getError.Error())
 	}
 
-	assert.Nil(t, getError)
+	assertNilAndPrintError(t, getError)
 	assert.NotNil(t, deployedIntegration)
 
 	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteIntegrationRequest{
 		IntegrationId: createResponse.IntegrationId,
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 
 }
 
@@ -289,9 +289,9 @@ func TestWebhooks(t *testing.T) {
 	})
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewWebhooksClient(creator)
@@ -309,28 +309,27 @@ func TestWebhooks(t *testing.T) {
 			},
 		},
 	})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	if testResult.GetFailure() != nil {
 		log.Fatal(testResult.GetFailure().ErrorMessage.Value)
 	}
 	assert.NotNil(t, testResult.GetSuccess())
 	assert.Nil(t, testResult.GetFailure())
-
 }
 
 func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewWebhooksClient(creator)
 	result, e := c.Create(context.Background(), req)
 	if e != nil {
 		log.Fatal(e.Error())
 	}
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	newName := fmt.Sprintf("%v-2", req.Data.Name.GetValue())
 	_, e = c.Update(context.Background(),
 		&cxsdk.UpdateOutgoingWebhookRequest{
@@ -343,13 +342,13 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 			},
 		})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	_, e = c.Get(context.Background(), &cxsdk.GetOutgoingWebhookRequest{
 		Id: result.Id,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteOutgoingWebhookRequest{
 		Id: result.Id,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }

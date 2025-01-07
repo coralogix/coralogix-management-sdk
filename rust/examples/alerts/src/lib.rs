@@ -139,6 +139,7 @@ mod tests {
                     }),
                     notification_payload_filter: vec![],
                     undetected_values_management: None,
+                    evaluation_delay_ms: None,
                     rules: vec![LogsThresholdRule {
                         r#override: Some(AlertDefOverride {
                             priority: AlertDefPriority::P1.into(),

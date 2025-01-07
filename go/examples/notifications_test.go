@@ -25,9 +25,9 @@ import (
 func TestConnectors(t *testing.T) {
 	t.Skip("Connectors are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
@@ -76,9 +76,9 @@ func TestConnectors(t *testing.T) {
 func TestPresets(t *testing.T) {
 	t.Skip("Presets are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)

@@ -122,11 +122,10 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 }
 
 func TestAlerts(t *testing.T) {
-
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewAlertsClient(creator)
 
@@ -134,19 +133,16 @@ func TestAlerts(t *testing.T) {
 		AlertDefProperties: CreateAlert(),
 	})
 
-	if err != nil {
-		t.Errorf("Error creating alert: %v", err)
-	}
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	retrievedAlert, err := c.Get(context.Background(), &cxsdk.GetAlertDefRequest{
 		Id: createdAlertDef.AlertDef.Id,
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	alerts, err := c.List(context.Background(), &cxsdk.ListAlertDefsRequest{})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.Greater(t, len(alerts.AlertDefs), 0)
 
 	updatedAlertDef := retrievedAlert.AlertDef
@@ -157,20 +153,20 @@ func TestAlerts(t *testing.T) {
 		Id:                 updatedAlertDef.Id,
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	_, e := c.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
 		Id: updatedAlert.AlertDef.Id,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }
 
 func TestAlertScheduler(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	a := cxsdk.NewAlertSchedulerClient(creator)
 	c := cxsdk.NewAlertsClient(creator)
@@ -179,10 +175,7 @@ func TestAlertScheduler(t *testing.T) {
 		AlertDefProperties: CreateAlert(),
 	})
 
-	if err != nil {
-		t.Errorf("Error creating alert: %v", err)
-	}
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	description := "example"
 	metaLabels := make([]*cxsdk.MetaLabel, 0)
@@ -220,7 +213,7 @@ func TestAlertScheduler(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	alertScheduler := createAlertSchedulerResponse.AlertSchedulerRule
 	alertScheduler.Name = "MyAlertUpdated"
@@ -229,7 +222,7 @@ func TestAlertScheduler(t *testing.T) {
 		AlertSchedulerRule: alertScheduler,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	assert.Equal(t, updateAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
@@ -237,18 +230,18 @@ func TestAlertScheduler(t *testing.T) {
 		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	assert.Equal(t, getAlertSchedulerResponse.AlertSchedulerRule.Name, "MyAlertUpdated")
 
 	_, error := a.Delete(context.Background(), &cxsdk.DeleteAlertSchedulerRuleRequest{
 		AlertSchedulerRuleId: *updateAlertSchedulerResponse.AlertSchedulerRule.UniqueIdentifier,
 	})
-	assert.Nil(t, error)
+	assertNilAndPrintError(t, error)
 
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteAlertDefRequest{
 		Id: createdAlertDef.AlertDef.Id,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }

@@ -26,9 +26,9 @@ import (
 
 func TestActions(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewActionsClient(creator)
 
@@ -40,7 +40,7 @@ func TestActions(t *testing.T) {
 		ApplicationNames: []*wrapperspb.StringValue{},
 		SubsystemNames:   []*wrapperspb.StringValue{},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	_, e = c.Replace(context.Background(), &cxsdk.ReplaceActionRequest{
 		Action: &cxsdk.Action{
@@ -55,7 +55,7 @@ func TestActions(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	updated, _ := c.Get(context.Background(), &cxsdk.GetActionRequest{
 		Id: action.Action.Id,

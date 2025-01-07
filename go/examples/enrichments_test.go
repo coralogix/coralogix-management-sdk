@@ -25,9 +25,9 @@ import (
 
 func TestEnrichments(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	client := cxsdk.NewEnrichmentClient(creator)
 
@@ -47,7 +47,7 @@ func TestEnrichments(t *testing.T) {
 			},
 		},
 	})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.NotNil(t, enrichments)
 
 	enrichmentIDs := []uint32{}
@@ -57,7 +57,7 @@ func TestEnrichments(t *testing.T) {
 
 	// List enrichments and verify creation
 	listEnrichmentsResponse, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
 
 	// Verify our created enrichments exist in the list
@@ -73,11 +73,11 @@ func TestEnrichments(t *testing.T) {
 	err = client.Delete(context.Background(), &cxsdk.DeleteEnrichmentsRequest{
 		EnrichmentIds: wrappedEnrichmentIDs,
 	})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	// Verify deletion
 	listEnrichmentsResponseAfterDeletion, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	// Verify our enrichments no longer exist
 	for _, e := range listEnrichmentsResponseAfterDeletion.Enrichments {

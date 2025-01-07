@@ -19,7 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	DataprimeQueryService_Query_FullMethodName = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/Query"
+	DataprimeQueryService_Query_FullMethodName                    = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/Query"
+	DataprimeQueryService_SubmitBackgroundQuery_FullMethodName    = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/SubmitBackgroundQuery"
+	DataprimeQueryService_GetBackgroundQueryStatus_FullMethodName = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/GetBackgroundQueryStatus"
+	DataprimeQueryService_GetBackgroundQueryData_FullMethodName   = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/GetBackgroundQueryData"
+	DataprimeQueryService_CancelBackgroundQuery_FullMethodName    = "/com.coralogixapis.dataprime.v1.DataprimeQueryService/CancelBackgroundQuery"
 )
 
 // DataprimeQueryServiceClient is the client API for DataprimeQueryService service.
@@ -28,6 +32,10 @@ const (
 type DataprimeQueryServiceClient interface {
 	// method to run dataprime text queries
 	Query(ctx context.Context, in *QueryRequest, opts ...grpc.CallOption) (DataprimeQueryService_QueryClient, error)
+	SubmitBackgroundQuery(ctx context.Context, in *SubmitBackgroundQueryRequest, opts ...grpc.CallOption) (*SubmitBackgroundQueryResponse, error)
+	GetBackgroundQueryStatus(ctx context.Context, in *GetBackgroundQueryStatusRequest, opts ...grpc.CallOption) (*GetBackgroundQueryStatusResponse, error)
+	GetBackgroundQueryData(ctx context.Context, in *GetBackgroundQueryDataRequest, opts ...grpc.CallOption) (DataprimeQueryService_GetBackgroundQueryDataClient, error)
+	CancelBackgroundQuery(ctx context.Context, in *CancelBackgroundQueryRequest, opts ...grpc.CallOption) (*CancelBackgroundQueryResponse, error)
 }
 
 type dataprimeQueryServiceClient struct {
@@ -70,12 +78,75 @@ func (x *dataprimeQueryServiceQueryClient) Recv() (*QueryResponse, error) {
 	return m, nil
 }
 
+func (c *dataprimeQueryServiceClient) SubmitBackgroundQuery(ctx context.Context, in *SubmitBackgroundQueryRequest, opts ...grpc.CallOption) (*SubmitBackgroundQueryResponse, error) {
+	out := new(SubmitBackgroundQueryResponse)
+	err := c.cc.Invoke(ctx, DataprimeQueryService_SubmitBackgroundQuery_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataprimeQueryServiceClient) GetBackgroundQueryStatus(ctx context.Context, in *GetBackgroundQueryStatusRequest, opts ...grpc.CallOption) (*GetBackgroundQueryStatusResponse, error) {
+	out := new(GetBackgroundQueryStatusResponse)
+	err := c.cc.Invoke(ctx, DataprimeQueryService_GetBackgroundQueryStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataprimeQueryServiceClient) GetBackgroundQueryData(ctx context.Context, in *GetBackgroundQueryDataRequest, opts ...grpc.CallOption) (DataprimeQueryService_GetBackgroundQueryDataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &DataprimeQueryService_ServiceDesc.Streams[1], DataprimeQueryService_GetBackgroundQueryData_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &dataprimeQueryServiceGetBackgroundQueryDataClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type DataprimeQueryService_GetBackgroundQueryDataClient interface {
+	Recv() (*GetBackgroundQueryDataResponse, error)
+	grpc.ClientStream
+}
+
+type dataprimeQueryServiceGetBackgroundQueryDataClient struct {
+	grpc.ClientStream
+}
+
+func (x *dataprimeQueryServiceGetBackgroundQueryDataClient) Recv() (*GetBackgroundQueryDataResponse, error) {
+	m := new(GetBackgroundQueryDataResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *dataprimeQueryServiceClient) CancelBackgroundQuery(ctx context.Context, in *CancelBackgroundQueryRequest, opts ...grpc.CallOption) (*CancelBackgroundQueryResponse, error) {
+	out := new(CancelBackgroundQueryResponse)
+	err := c.cc.Invoke(ctx, DataprimeQueryService_CancelBackgroundQuery_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DataprimeQueryServiceServer is the server API for DataprimeQueryService service.
 // All implementations must embed UnimplementedDataprimeQueryServiceServer
 // for forward compatibility
 type DataprimeQueryServiceServer interface {
 	// method to run dataprime text queries
 	Query(*QueryRequest, DataprimeQueryService_QueryServer) error
+	SubmitBackgroundQuery(context.Context, *SubmitBackgroundQueryRequest) (*SubmitBackgroundQueryResponse, error)
+	GetBackgroundQueryStatus(context.Context, *GetBackgroundQueryStatusRequest) (*GetBackgroundQueryStatusResponse, error)
+	GetBackgroundQueryData(*GetBackgroundQueryDataRequest, DataprimeQueryService_GetBackgroundQueryDataServer) error
+	CancelBackgroundQuery(context.Context, *CancelBackgroundQueryRequest) (*CancelBackgroundQueryResponse, error)
 	mustEmbedUnimplementedDataprimeQueryServiceServer()
 }
 
@@ -85,6 +156,18 @@ type UnimplementedDataprimeQueryServiceServer struct {
 
 func (UnimplementedDataprimeQueryServiceServer) Query(*QueryRequest, DataprimeQueryService_QueryServer) error {
 	return status.Errorf(codes.Unimplemented, "method Query not implemented")
+}
+func (UnimplementedDataprimeQueryServiceServer) SubmitBackgroundQuery(context.Context, *SubmitBackgroundQueryRequest) (*SubmitBackgroundQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SubmitBackgroundQuery not implemented")
+}
+func (UnimplementedDataprimeQueryServiceServer) GetBackgroundQueryStatus(context.Context, *GetBackgroundQueryStatusRequest) (*GetBackgroundQueryStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBackgroundQueryStatus not implemented")
+}
+func (UnimplementedDataprimeQueryServiceServer) GetBackgroundQueryData(*GetBackgroundQueryDataRequest, DataprimeQueryService_GetBackgroundQueryDataServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetBackgroundQueryData not implemented")
+}
+func (UnimplementedDataprimeQueryServiceServer) CancelBackgroundQuery(context.Context, *CancelBackgroundQueryRequest) (*CancelBackgroundQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CancelBackgroundQuery not implemented")
 }
 func (UnimplementedDataprimeQueryServiceServer) mustEmbedUnimplementedDataprimeQueryServiceServer() {}
 
@@ -120,17 +203,110 @@ func (x *dataprimeQueryServiceQueryServer) Send(m *QueryResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _DataprimeQueryService_SubmitBackgroundQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SubmitBackgroundQueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataprimeQueryServiceServer).SubmitBackgroundQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataprimeQueryService_SubmitBackgroundQuery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataprimeQueryServiceServer).SubmitBackgroundQuery(ctx, req.(*SubmitBackgroundQueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DataprimeQueryService_GetBackgroundQueryStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBackgroundQueryStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataprimeQueryServiceServer).GetBackgroundQueryStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataprimeQueryService_GetBackgroundQueryStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataprimeQueryServiceServer).GetBackgroundQueryStatus(ctx, req.(*GetBackgroundQueryStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DataprimeQueryService_GetBackgroundQueryData_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetBackgroundQueryDataRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(DataprimeQueryServiceServer).GetBackgroundQueryData(m, &dataprimeQueryServiceGetBackgroundQueryDataServer{stream})
+}
+
+type DataprimeQueryService_GetBackgroundQueryDataServer interface {
+	Send(*GetBackgroundQueryDataResponse) error
+	grpc.ServerStream
+}
+
+type dataprimeQueryServiceGetBackgroundQueryDataServer struct {
+	grpc.ServerStream
+}
+
+func (x *dataprimeQueryServiceGetBackgroundQueryDataServer) Send(m *GetBackgroundQueryDataResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _DataprimeQueryService_CancelBackgroundQuery_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CancelBackgroundQueryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataprimeQueryServiceServer).CancelBackgroundQuery(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataprimeQueryService_CancelBackgroundQuery_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataprimeQueryServiceServer).CancelBackgroundQuery(ctx, req.(*CancelBackgroundQueryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DataprimeQueryService_ServiceDesc is the grpc.ServiceDesc for DataprimeQueryService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var DataprimeQueryService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "com.coralogixapis.dataprime.v1.DataprimeQueryService",
 	HandlerType: (*DataprimeQueryServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "SubmitBackgroundQuery",
+			Handler:    _DataprimeQueryService_SubmitBackgroundQuery_Handler,
+		},
+		{
+			MethodName: "GetBackgroundQueryStatus",
+			Handler:    _DataprimeQueryService_GetBackgroundQueryStatus_Handler,
+		},
+		{
+			MethodName: "CancelBackgroundQuery",
+			Handler:    _DataprimeQueryService_CancelBackgroundQuery_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "Query",
 			Handler:       _DataprimeQueryService_Query_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetBackgroundQueryData",
+			Handler:       _DataprimeQueryService_GetBackgroundQueryData_Handler,
 			ServerStreams: true,
 		},
 	},

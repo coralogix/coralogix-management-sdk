@@ -25,11 +25,18 @@ type QueryRequest = dataprime.QueryRequest
 // DataprimeQueryMetadata is the metadata for the query
 type DataprimeQueryMetadata = dataprime.Metadata
 
-// DataprimeQueryMetadataSyntax is a syntax for the query.
-type DataprimeQueryMetadataSyntax = dataprime.Metadata_QuerySyntax
+// DataprimeQuerySyntax is the syntax for the query
+type DataprimeQuerySyntax = dataprime.QuerySyntax
 
 // DataprimeQueryMetadataTier is a tier value for the query.
 type DataprimeQueryMetadataTier = dataprime.Metadata_Tier
+
+// DataprimeQuerySyntax values.
+const (
+	DataprimeQuerySyntaxUnspecified = dataprime.QuerySyntax_QUERY_SYNTAX_UNSPECIFIED
+	DataprimeQuerySyntaxLucene      = dataprime.QuerySyntax_QUERY_SYNTAX_LUCENE
+	DataprimeQuerySyntaxDataprime   = dataprime.QuerySyntax_QUERY_SYNTAX_DATAPRIME
+)
 
 // DataprimeQueryMetadataTier values.
 const (

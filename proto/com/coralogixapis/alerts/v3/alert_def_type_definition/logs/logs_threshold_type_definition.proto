@@ -14,6 +14,7 @@ message LogsThresholdType  {
     UndetectedValuesManagement undetected_values_management = 2;
     repeated LogsThresholdRule rules = 3;
     repeated google.protobuf.StringValue notification_payload_filter = 4;
+    google.protobuf.Int32Value evaluation_delay_ms = 5;
 }
 message LogsThresholdRule {
     LogsThresholdCondition condition = 1;

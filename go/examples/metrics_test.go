@@ -28,9 +28,9 @@ func TestArchiveMetrics(t *testing.T) {
 	metricsBucket := os.Getenv("METRICS_BUCKET")
 	awsRegion := os.Getenv("AWS_REGION")
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveMetricsClient(creator)
 	s3Config := &cxsdk.ArchiveS3Config{
@@ -43,14 +43,14 @@ func TestArchiveMetrics(t *testing.T) {
 			S3: s3Config,
 		},
 	})
-	assert.Nil(t, configureErr)
+	assertNilAndPrintError(t, configureErr)
 
 	_, validateErr := c.ValidateTarget(context.Background(), &cxsdk.ValidateBucketRequest{
 		StorageConfig: &cxsdk.ValidateBucketRequestS3{
 			S3: s3Config,
 		},
 	})
-	assert.Nil(t, validateErr)
+	assertNilAndPrintError(t, validateErr)
 
 	days := uint32(2)
 	_, updateErr := c.Update(context.Background(), &cxsdk.UpdateTenantRequest{
@@ -59,14 +59,14 @@ func TestArchiveMetrics(t *testing.T) {
 			S3: s3Config,
 		},
 	})
-	assert.Nil(t, updateErr)
+	assertNilAndPrintError(t, updateErr)
 
 	config, getTenantError := c.Get(context.Background())
 
-	assert.Nil(t, getTenantError)
+	assertNilAndPrintError(t, getTenantError)
 	assert.Equal(t, config.TenantConfig.StorageConfig.(*cxsdk.TenantConfigV2S3).S3.Bucket, s3Config.Bucket)
 	_, e := c.Enable(context.Background())
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	_, e = c.Disable(context.Background())
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }

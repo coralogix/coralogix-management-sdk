@@ -10,6 +10,7 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/met
 message MetricAnomalyType {
     MetricFilter metric_filter = 1;
     repeated MetricAnomalyRule rules = 2;
+    google.protobuf.Int32Value evaluation_delay_ms = 3;
 }
 message MetricAnomalyRule {
     MetricAnomalyCondition condition = 1;

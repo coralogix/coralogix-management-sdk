@@ -143,7 +143,7 @@ func (x *Hexagon) GetLegendBy() LegendBy {
 	if x != nil {
 		return x.LegendBy
 	}
-	return LegendBy_LEGEND_BY_GROUPS
+	return LegendBy_LEGEND_BY_UNSPECIFIED
 }
 
 type Hexagon_Query struct {
