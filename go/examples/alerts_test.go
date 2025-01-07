@@ -122,7 +122,6 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 }
 
 func TestAlerts(t *testing.T) {
-
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -133,6 +132,7 @@ func TestAlerts(t *testing.T) {
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlert(),
 	})
+
 	assertNilAndPrintError(t, err)
 
 	retrievedAlert, err := c.Get(context.Background(), &cxsdk.GetAlertDefRequest{

@@ -16,12 +16,14 @@ package examples
 import (
 	"testing"
 
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	"github.com/stretchr/testify/assert"
 )
 
 func assertNilAndPrintError(t *testing.T, err error) {
 	if err != nil {
-		t.Fatal(err.Error())
+		e := err.(*cxsdk.SdkAPIError)
+		t.Fatal(e.Error())
 	}
 	assert.Nil(t, err)
 }
