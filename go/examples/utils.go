@@ -21,7 +21,7 @@ import (
 
 func assertNilAndPrintError(t *testing.T, err error) {
 	if err != nil {
-		t.Error(err.Error())
+		t.Fatal(err.Error())
 	}
 	assert.Nil(t, err)
 }

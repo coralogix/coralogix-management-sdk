@@ -68,7 +68,7 @@ func NewSdkAPIError(
 }
 
 func (e *SdkAPIError) Error() string {
-	return fmt.Sprintf("SDK API error from %s for feature group %s: %s", e.endpoint, e.featureGroupID, e.apiError)
+	return fmt.Sprintf("SDK API error from %s for feature group %s: %s", e.endpoint, e.featureGroupID, e.apiError.Error())
 }
 
 // Code returns the error code of the SdkAPIError.apiError.
