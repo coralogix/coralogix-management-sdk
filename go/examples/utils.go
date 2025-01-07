@@ -15,11 +15,13 @@ package examples
 
 import (
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func assertNilAndPrintError(t *testing.T, err error) {
 	if err != nil {
 		t.Error(err)
 	}
-	assertNilAndPrintError(t, err)
+	assert.Nil(t, err)
 }
