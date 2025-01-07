@@ -28,13 +28,13 @@ import (
 
 func TestApiKeys(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	k := cxsdk.NewAPIKeysClient(creator)
 	teamId, e := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	key, e := k.Create(context.Background(), &cxsdk.CreateAPIKeyRequest{
 		Name: "My APM KEY",
@@ -48,7 +48,7 @@ func TestApiKeys(t *testing.T) {
 			Permissions: []string{},
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	newName := "new-name"
 	k.Update(context.Background(), &cxsdk.UpdateAPIKeyRequest{
@@ -69,9 +69,9 @@ func TestApiKeys(t *testing.T) {
 
 func TestUsers(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewUsersClient(creator)
@@ -92,11 +92,11 @@ func TestUsers(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	_, retrievalError := c.Get(context.Background(), *createdUser.ID)
 
-	assert.Nil(t, retrievalError)
+	assertNilAndPrintError(t, retrievalError)
 
 	users, err := c.List(context.Background())
 	assert.Nil(t, err)
@@ -112,19 +112,19 @@ func TestUsers(t *testing.T) {
 
 	deletionError := c.Delete(context.Background(), *createdUser.ID)
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 
 }
 
 func TestScopes(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewScopesClient(creator)
 	all, e := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	beginngingCount := len(all.Scopes)
 	description := "Data Access Rule intended for testing"
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
@@ -135,7 +135,7 @@ func TestScopes(t *testing.T) {
 		},
 		DefaultExpression: "<v1>true",
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	_, e = c.Update(context.Background(), &cxsdk.UpdateScopeRequest{
 		Id:                result.Scope.Id,
@@ -143,7 +143,7 @@ func TestScopes(t *testing.T) {
 		Filters:           result.Scope.Filters,
 		DefaultExpression: result.Scope.DefaultExpression,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	updated, _ := c.Get(context.Background(), &cxsdk.GetTeamScopesByIDsRequest{
 		Ids: []string{result.Scope.Id},
@@ -156,18 +156,18 @@ func TestScopes(t *testing.T) {
 	})
 
 	all, e = c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	assert.Equal(t, beginngingCount, len(all.Scopes))
 }
 
 func TestGroups(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewGroupsClient(creator)
 
 	groups, err := c.List(context.Background(), &v1.GetTeamGroupsRequest{
@@ -175,7 +175,7 @@ func TestGroups(t *testing.T) {
 			Id: uint32(teamId),
 		},
 	})
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.Greater(t, len(groups.Groups), 0)
 
 	groupDesc := "A Test Group"
@@ -193,7 +193,7 @@ func TestGroups(t *testing.T) {
 		UserIds: []*v1.UserId{},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 
 	retrievedGroup, err := c.Get(context.Background(), &v1.GetTeamGroupRequest{
 		GroupId: &v1.TeamGroupId{
@@ -201,7 +201,7 @@ func TestGroups(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	assert.Equal(t, createdGroup.GroupId.Id, retrievedGroup.Group.GroupId.Id)
 
 	_, updateError := c.Update(context.Background(), &v1.UpdateTeamGroupRequest{
@@ -210,7 +210,7 @@ func TestGroups(t *testing.T) {
 		Description: &groupDesc,
 	})
 
-	assert.Nil(t, updateError)
+	assertNilAndPrintError(t, updateError)
 
 	_, deletionError := c.Delete(context.Background(), &v1.DeleteTeamGroupRequest{
 		GroupId: &v1.TeamGroupId{
@@ -218,7 +218,7 @@ func TestGroups(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 }
 
 func TestTeams(t *testing.T) {
@@ -226,7 +226,7 @@ func TestTeams(t *testing.T) {
 	t.Skip("Skipping integration test")
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
@@ -239,7 +239,7 @@ func TestTeams(t *testing.T) {
 			"admin2@coralogix.com",
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	team2, e := c.Create(context.Background(), &cxsdk.CreateTeamInOrgRequest{
 		TeamName: "team_2",
@@ -248,20 +248,20 @@ func TestTeams(t *testing.T) {
 			"admin2@coralogix.com",
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	team_1_updated_name := "team_1_updated"
 	_, e = c.Update(context.Background(), &cxsdk.UpdateTeamRequest{
 		TeamName: &team_1_updated_name,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	updated, e := c.Get(context.Background(), &cxsdk.GetTeamRequest{
 		TeamId: team1.TeamId,
 	})
 
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	assert.Equal(t, updated.TeamName, "team_1_updated")
 
@@ -270,7 +270,7 @@ func TestTeams(t *testing.T) {
 		TargetDailyQuota: 250,
 	})
 
-	assert.Nil(t, setQuotaError)
+	assertNilAndPrintError(t, setQuotaError)
 
 	_, moveQuotaError := c.MoveQuota(context.Background(), &cxsdk.MoveQuotaRequest{
 		SourceTeam:      team1.TeamId,
@@ -278,20 +278,20 @@ func TestTeams(t *testing.T) {
 		UnitsToMove:     50,
 	})
 
-	assert.Nil(t, moveQuotaError)
+	assertNilAndPrintError(t, moveQuotaError)
 
 	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteTeamRequest{
 		TeamId: team1.TeamId,
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 }
 
 func TestSamlConfigurationRetrieval(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
@@ -301,10 +301,10 @@ func TestSamlConfigurationRetrieval(t *testing.T) {
 	}
 
 	_, e := c.GetSPParameters(context.Background(), &cxsdk.GetSPParametersRequest{TeamId: uint32(teamId)})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	_, e = c.GetConfiguration(context.Background(), &cxsdk.GetSamlConfigurationRequest{TeamId: uint32(teamId)})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	_, e = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamId), IsActive: false})
 }
@@ -313,9 +313,9 @@ func TestSamlSetUpWithContent(t *testing.T) {
 	t.Skip("Skipping integration test")
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
@@ -337,16 +337,16 @@ func TestSamlSetUpWithContent(t *testing.T) {
 			TeamEntityId: &teamEntityId,
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }
 
 func TestSamlSetUpWithUrl(t *testing.T) {
 	t.Skip("Skipping integration test")
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
@@ -368,5 +368,5 @@ func TestSamlSetUpWithUrl(t *testing.T) {
 			TeamEntityId: &teamEntityId,
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }

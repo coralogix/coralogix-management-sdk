@@ -29,9 +29,9 @@ func TestArchiveLogs(t *testing.T) {
 	logsBucket := os.Getenv("LOGS_BUCKET")
 	awsRegion := os.Getenv("AWS_REGION")
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveLogsClient(creator)
 	_, setTargetError := c.Update(context.Background(), &cxsdk.SetTargetRequest{
@@ -42,23 +42,23 @@ func TestArchiveLogs(t *testing.T) {
 			},
 		},
 	})
-	assert.Nil(t, setTargetError)
+	assertNilAndPrintError(t, setTargetError)
 
 	_, getTargetError := c.Get(context.Background())
 
-	assert.Nil(t, getTargetError)
+	assertNilAndPrintError(t, getTargetError)
 }
 
 func TestDataSets(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDataSetClient(creator)
 
 	raw, e := os.ReadFile("date-to-day-of-the-week.csv")
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	textual := string(raw)
 
 	data, e := c.Create(context.Background(), &cxsdk.CreateDataSetRequest{
@@ -72,7 +72,7 @@ func TestDataSets(t *testing.T) {
 			},
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	updated, e := c.Update(context.Background(), &cxsdk.UpdateDataSetRequest{
 		CustomEnrichmentId: wrapperspb.UInt32(data.CustomEnrichment.Id),
@@ -85,11 +85,11 @@ func TestDataSets(t *testing.T) {
 			},
 		},
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	fetched, e := c.Get(context.Background(), &cxsdk.GetDataSetRequest{
 		Id: wrapperspb.UInt32(updated.CustomEnrichment.Id),
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	assert.Equal(t, updated.CustomEnrichment.Description, fetched.CustomEnrichment.Description)
 	assert.Equal(t, data.CustomEnrichment.Version+1, fetched.CustomEnrichment.Version)

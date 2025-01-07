@@ -26,15 +26,15 @@ import (
 
 func TestDataprimeQuery(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDataprimeClient(creator)
 	data, e := c.Query(context.Background(), &cxsdk.QueryRequest{
 		Query:    wrapperspb.String("filter log_obj.message ~ 'Hello world'"),
 		Metadata: nil,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	assert.NotNil(t, data)
 }

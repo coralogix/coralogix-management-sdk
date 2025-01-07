@@ -24,9 +24,9 @@ import (
 func TestRecordingRuleGroups(t *testing.T) {
 
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewRecordingRuleGroupSetsClient(creator)
 	setName := "TestRecordingRuleGroupSet2"

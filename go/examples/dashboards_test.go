@@ -30,15 +30,15 @@ import (
 
 func TestDashboards(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDashboardsClient(creator)
 	dat, err := os.ReadFile("dashboard.json")
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	var d cxsdk.Dashboard
-	assert.Nil(t, protojson.Unmarshal(dat, &d))
+	assertNilAndPrintError(t, protojson.Unmarshal(dat, &d))
 	d.Id = wrapperspb.String(uuid.New().String()[:21])
 	_, e := c.Get(context.Background(), &cxsdk.GetDashboardRequest{
 		DashboardId: d.Id,
@@ -54,18 +54,18 @@ func TestDashboards(t *testing.T) {
 	if e != nil {
 		log.Fatal(e.Error())
 	}
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	_, e = c.Pin(context.Background(), &cxsdk.PinDashboardRequest{
 		DashboardId: d.Id,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	_, e = c.Unpin(context.Background(), &cxsdk.UnpinDashboardRequest{
 		DashboardId: d.Id,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 
 	all, e := c.List(context.Background())
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 	found := false
 	for _, v := range all.Items {
 		if v.Id.Value == d.Id.Value {
@@ -77,14 +77,14 @@ func TestDashboards(t *testing.T) {
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
 		DashboardId: d.Id,
 	})
-	assert.Nil(t, e)
+	assertNilAndPrintError(t, e)
 }
 
 func TestDashboardFolders(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	assert.Nil(t, err)
+	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDashboardsFoldersClient(creator)
 
@@ -99,7 +99,7 @@ func TestDashboardFolders(t *testing.T) {
 		Folder: &dashboardFolder,
 	})
 
-	assert.Nil(t, creationError)
+	assertNilAndPrintError(t, creationError)
 
 	_, updateError := c.Replace(context.Background(), &cxsdk.ReplaceDashboardFolderRequest{
 		Folder: &cxsdk.DashboardFolder{
@@ -108,23 +108,23 @@ func TestDashboardFolders(t *testing.T) {
 		},
 	})
 
-	assert.Nil(t, updateError)
+	assertNilAndPrintError(t, updateError)
 
 	getDashboardFolderResponse, retrievalError := c.Get(context.Background(), &cxsdk.GetDashboardFolderRequest{
 		FolderId: wrapperspb.String(id),
 	})
 
-	assert.Nil(t, retrievalError)
+	assertNilAndPrintError(t, retrievalError)
 	assert.Equal(t, "updated "+id, getDashboardFolderResponse.Folder.Name.Value)
 
 	_, listError := c.List(context.Background())
 
-	assert.Nil(t, listError)
+	assertNilAndPrintError(t, listError)
 
 	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteDashboardFolderRequest{
 		FolderId: wrapperspb.String(id),
 	})
 
-	assert.Nil(t, deletionError)
+	assertNilAndPrintError(t, deletionError)
 
 }
