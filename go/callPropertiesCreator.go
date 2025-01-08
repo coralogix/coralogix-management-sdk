@@ -104,14 +104,14 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 	}
 }
 
-// Deprecated: NewCallPropertiesCreatorTerraform creates a new CallPropertiesCreator object, specifying which version of the Terraform Operator is being used. Use CustomSdk instead.
+// NewCallPropertiesCreatorTerraform creates a new CallPropertiesCreator object, specifying which version of the Terraform Operator is being used.
 func NewCallPropertiesCreatorTerraform(region string, authContext AuthContext, terraformProviderVersion string) *CallPropertiesCreator {
 	return &CallPropertiesCreator{
 		coraglogixRegion: region,
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
-		sdkVersion:       terraformProviderVersion,
+		sdkVersion:       fmt.Sprint("terraform-", terraformProviderVersion),
 	}
 }
 
@@ -122,6 +122,6 @@ func NewCallPropertiesCreatorCustomSdk(region string, authContext AuthContext, c
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
-		sdkVersion:       fmt.Sprint("custom-%v", customSdkVersion),
+		sdkVersion:       fmt.Sprint("custom-", customSdkVersion),
 	}
 }
