@@ -104,13 +104,24 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 	}
 }
 
-// NewCallPropertiesCreatorTerraformOperator creates a new CallPropertiesCreator object, specifying which version of the Terraform Operator is being used.
-func NewCallPropertiesCreatorTerraformOperator(region string, authContext AuthContext, terraformOperatorVersion string) *CallPropertiesCreator {
+// NewCallPropertiesCreatorTerraform creates a new CallPropertiesCreator object, specifying which version of the Terraform Operator is being used.
+func NewCallPropertiesCreatorTerraform(region string, authContext AuthContext, terraformProviderVersion string) *CallPropertiesCreator {
 	return &CallPropertiesCreator{
 		coraglogixRegion: region,
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
-		sdkVersion:       terraformOperatorVersion,
+		sdkVersion:       fmt.Sprint("terraform-", terraformProviderVersion),
+	}
+}
+
+// NewCallPropertiesCreatorCustomSdk creates a new CallPropertiesCreator object with a custom version.
+func NewCallPropertiesCreatorCustomSdk(region string, authContext AuthContext, customSdkVersion string) *CallPropertiesCreator {
+	return &CallPropertiesCreator{
+		coraglogixRegion: region,
+		teamsLevelAPIKey: authContext.teamLevelAPIKey,
+		userLevelAPIKey:  authContext.userLevelAPIKey,
+		correlationID:    uuid.New().String(),
+		sdkVersion:       fmt.Sprint("custom-", customSdkVersion),
 	}
 }
