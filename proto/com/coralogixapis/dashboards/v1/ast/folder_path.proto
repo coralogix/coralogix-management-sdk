@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.dashboards.v1.ast;
-
-message FolderPath {
-  repeated string segments = 1;
-}

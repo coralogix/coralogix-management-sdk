@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v1;
+
+import "google/protobuf/wrappers.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message Retention {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Retention"
+      description: "This data structure represents a retention"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  google.protobuf.StringValue id = 1;
+  google.protobuf.Int32Value order = 2;
+  google.protobuf.StringValue name = 3;
+  google.protobuf.BoolValue editable = 4;
+}

@@ -2,15 +2,14 @@ syntax = "proto3";
 
 package com.coralogixapis.database_catalog.v1;
 
-import "google/protobuf/wrappers.proto";
-
+import "com/coralogix/catalog/v1/common.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
 import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
-import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/database_catalog/v1/database.proto";
 import "com/coralogixapis/database_catalog/v1/database_operation.proto";
-import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "google/protobuf/wrappers.proto";
 
 message GetDatabaseOperationsColumnsStreamRequest {
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
@@ -25,6 +24,7 @@ message GetDatabaseOperationsColumnsStreamRequest {
 
 message GetDatabaseOperationsColumnsStreamResponse {
   repeated DatabaseOperationData database_operations = 1;
+  google.protobuf.StringValue query = 2;
 }
 
 message GetDatabaseOperationsRequestsRequest {
@@ -139,7 +139,7 @@ message GetOperationStatsResponse {
   google.protobuf.UInt64Value p75_response_time = 8;
 }
 
-message GetDatabaseOperationGraphsStreamRequest{
+message GetDatabaseOperationGraphsStreamRequest {
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -151,36 +151,36 @@ message GetDatabaseOperationGraphsStreamRequest{
   repeated google.protobuf.StringValue calling_services = 9;
 }
 
-message GetDatabaseOperationGraphsStreamResponse{
-  oneof widget{
+message GetDatabaseOperationGraphsStreamResponse {
+  oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency = 2;
   }
 }
 
 service DatabaseOperationsService {
-  rpc GetDatabaseOperationsColumnsStream (GetDatabaseOperationsColumnsStreamRequest) returns (stream GetDatabaseOperationsColumnsStreamResponse){
+  rpc GetDatabaseOperationsColumnsStream(GetDatabaseOperationsColumnsStreamRequest) returns (stream GetDatabaseOperationsColumnsStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation column stream";
   }
-  rpc GetDatabaseOperationsRequests (GetDatabaseOperationsRequestsRequest) returns (GetDatabaseOperationsRequestsResponse){
+  rpc GetDatabaseOperationsRequests(GetDatabaseOperationsRequestsRequest) returns (GetDatabaseOperationsRequestsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation requests";
   }
-  rpc GetDatabaseOperationsErrorsStream (GetDatabaseOperationsErrorsStreamRequest) returns (stream GetDatabaseOperationsErrorsStreamResponse){
+  rpc GetDatabaseOperationsErrorsStream(GetDatabaseOperationsErrorsStreamRequest) returns (stream GetDatabaseOperationsErrorsStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation errors stream";
   }
-  rpc GetDatabaseOperationsTimeConsuming (GetDatabaseOperationsTimeConsumingRequest) returns (GetDatabaseOperationsTimeConsumingResponse){
+  rpc GetDatabaseOperationsTimeConsuming(GetDatabaseOperationsTimeConsumingRequest) returns (GetDatabaseOperationsTimeConsumingResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation time consuming";
   }
-  rpc GetDatabaseOperationsResponseTimeStream (GetDatabaseOperationsResponseTimeStreamRequest) returns (stream GetDatabaseOperationsResponseTimeStreamResponse){
+  rpc GetDatabaseOperationsResponseTimeStream(GetDatabaseOperationsResponseTimeStreamRequest) returns (stream GetDatabaseOperationsResponseTimeStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation response time stream";
   }
-  rpc ListOperations (ListOperationsRequest) returns (ListOperationsResponse){
+  rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list operations";
   }
-  rpc GetOperationStats (GetOperationStatsRequest) returns (GetOperationStatsResponse){
+  rpc GetOperationStats(GetOperationStatsRequest) returns (GetOperationStatsResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get operation stats";
   }
-  rpc GetDatabaseOperationGraphsStream(GetDatabaseOperationGraphsStreamRequest) returns (stream GetDatabaseOperationGraphsStreamResponse){
+  rpc GetDatabaseOperationGraphsStream(GetDatabaseOperationGraphsStreamRequest) returns (stream GetDatabaseOperationGraphsStreamResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database operation graphs stream";
-  };
+  }
 }

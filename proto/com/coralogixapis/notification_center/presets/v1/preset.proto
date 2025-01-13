@@ -39,3 +39,10 @@ enum PresetType {
   SYSTEM = 1;
   CUSTOM = 2;
 }
+
+message PresetIdentifier {
+  oneof value {
+    string id = 1;
+    string user_facing_id = 2;
+  }
+}

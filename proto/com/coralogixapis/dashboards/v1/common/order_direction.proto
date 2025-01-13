@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.dashboards.v1.common;
-
-enum OrderDirection {
-  ORDER_DIRECTION_UNSPECIFIED = 0;
-  ORDER_DIRECTION_ASC = 1;
-  ORDER_DIRECTION_DESC = 2;
-}

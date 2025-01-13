@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.dashboards.v1.ast.widgets.common;
-
-enum SortByType {
-  SORT_BY_TYPE_UNSPECIFIED = 0;
-  SORT_BY_TYPE_VALUE = 1;
-  SORT_BY_TYPE_NAME = 2;
-}

@@ -27,8 +27,13 @@ commit_hash = "1b0242ca59a72843f6b33aefe24e4765b097f034"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
+<<<<<<< HEAD
 revision = "v0.0.82"
 commit_hash = "9d722b4fe040e6c685e5050842d228dcd464354e"
+=======
+revision = "v0.0.85"
+commit_hash = "e47ab498fcc108f3dc4123c1b3029963a86d9cc0"
+>>>>>>> e6c932a (chore: Update protofetch.toml)
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,8 +44,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.1.0"
-commit_hash = "8cd5a1e482526de8764f7a627483fcc4aa136727"
+revision = "v2.2.0"
+commit_hash = "d92efcebaa6ca67be8a5fc07fb4defd645682b39"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -49,6 +54,15 @@ revision = "v0.1.18"
 commit_hash = "fe159097ef2f94678a2e655ac30eb18aefdc067f"
 
 [[dependencies]]
+<<<<<<< HEAD
+=======
+name = "cx-api-dataprime"
+url = "github.com/coralogix/cx-api-dataprime"
+revision = "v0.344"
+commit_hash = "9d9f4e63a6923a990ed30a543336c8d7f52943d1"
+
+[[dependencies]]
+>>>>>>> e6c932a (chore: Update protofetch.toml)
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
 revision = "v0.5.7"
@@ -81,8 +95,8 @@ commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.3.0"
-commit_hash = "9e7d97f96fac4fad6c472a5c4efb2515acd7c486"
+revision = "v0.4.2"
+commit_hash = "f0fbaf2adf0bd2050268b9659cef9b1cf6ee8005"
 
 [[dependencies]]
 name = "cx-api-organisations"
@@ -111,8 +125,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.110"
-commit_hash = "08742acc81a9e793716fb4601ad7aef8490e0011"
+revision = "v0.3.126"
+commit_hash = "5368158e5686d36501f541aa41e7313470bbd6ec"
 
 [[dependencies]]
 name = "cx-api-tags"

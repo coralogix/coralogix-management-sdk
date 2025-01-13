@@ -1,0 +1,204 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+import "com/coralogix/archive/v2/target.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/archive/v2/internal_get_targets.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
+
+
+
+message GetTargetRequest {}
+
+message GetTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Target Response"
+      description: "This data structure is used to retrieve a storage target for logs."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  Target target = 1;
+}
+
+message SetTargetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is used to set a storage target for logs."
+      required: [
+        "is_active",
+        "target_spec"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+    IBMCosTargetSpec ibm_cos = 3;
+  }
+}
+
+message SetTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is obtained after setting a storage target for logs."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  Target target = 1;
+}
+
+message SetExternalTargetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set External Target Request"
+      description: "This data structure is obtained after setting an external storage target for logs."
+      required: [
+        "is_active",
+        "target_spec",
+        "company_id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+    IBMCosTargetSpec ibm_cos = 3;
+  }
+  uint32 company_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message SetExternalTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is obtained after setting an external storage target for logs."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  Target target = 1;
+}
+
+message CompanyArchiveConfig {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Common Archive Config"
+      description: "This data structure represents a common archive configuration for a company within the organization."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  uint32 company_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1234567" }];
+  bool archive_configured = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message ValidateTargetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is used to validate a storage target for logs."
+      required: [
+        "is_active",
+        "target_spec"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  bool is_active = 1;
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+    IBMCosTargetSpec ibm_cos = 3;
+  }
+}
+
+message ValidateTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Validate Target Response"
+      description: "This data structure is obtained after validating a storage target for logs."
+      required: [
+        "is_valid"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  bool is_valid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+service TargetService {
+  rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get target";
+    option (google.api.http) = {
+      get: "/v2/target"
+    };
+  }
+  
+  rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Set target";
+    option (google.api.http) = {
+      post: "/v2/target"
+      body: "*"
+    };
+  }
+
+  rpc ValidateTarget(ValidateTargetRequest) returns (ValidateTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Validate target";
+    option (google.api.http) = {
+      post: "/v2/target:validate"
+      body: "*"
+    };
+  }
+}
+
+service InternalTargetService {
+  rpc GetTargets(InternalTargetServiceGetTargetsRequest) returns (InternalTargetServiceGetTargetsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get targets";
+  }
+  rpc SetExternalTarget(SetExternalTargetRequest) returns (SetExternalTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Set target with external region for internal use";
+  }
+}
