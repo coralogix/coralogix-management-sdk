@@ -20,6 +20,7 @@ message InternalMetricSchema {
     google.protobuf.StringValue httpStatusCode = 9;
     google.protobuf.StringValue grpcStatusCode = 10;
     google.protobuf.StringValue dbOperation = 11;
+    google.protobuf.StringValue service_version = 12;
 }
 
 message LineChart {

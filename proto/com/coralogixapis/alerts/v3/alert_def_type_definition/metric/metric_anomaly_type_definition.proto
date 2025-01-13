@@ -6,11 +6,13 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/metric_anomaly_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto";
 
 message MetricAnomalyType {
     MetricFilter metric_filter = 1;
     repeated MetricAnomalyRule rules = 2;
     google.protobuf.Int32Value evaluation_delay_ms = 3;
+    AnomalyAlertSettings anomaly_alert_settings = 4;
 }
 message MetricAnomalyRule {
     MetricAnomalyCondition condition = 1;

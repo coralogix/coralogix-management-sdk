@@ -26,8 +26,14 @@ message SchemaTree {
 }
 
 message FieldNode {
-   FieldLocation location = 1;
+   reserved 1;
    map<string, FieldNode> children = 2;
+   FieldMetadata metadata = 3;
+}
+
+message FieldMetadata {
+   FieldLocation location = 1;
+   bool required = 2;
 }
 
 message FieldLocation {

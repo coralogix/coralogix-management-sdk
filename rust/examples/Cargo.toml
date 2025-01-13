@@ -1,16 +1,17 @@
 [workspace]
 resolver = "2"
 members = [
+    "aaa",
     "actions",
     "alerts",
-    "aaa",
-    "logs",
-    "metrics",
+    "dashboard-folders",
     "dashboards",
-    "integrations",
-    "dataprime",
-    "infra-monitoring",
-    "recording-rules",
     "dataplans",
     "enrichments",
+    "infra-monitoring",
+    "integrations",
+    "logs",
+    "metrics",
+    "notifications",
+    "recording-rules",
 ]

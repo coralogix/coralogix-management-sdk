@@ -94,19 +94,7 @@ mod tests {
             id: None,
             user_facing_id: None,
             update_time: None,
-            parent: Some(Box::new(Preset {
-                id: Some("parent_id".to_string()),
-                name: "".to_string(),
-                description: "".to_string(),
-                connector_type: 0,
-                config_overrides: vec![],
-                create_time: None,
-                entity_type: "".to_string(),
-                preset_type: None,
-                user_facing_id: None,
-                update_time: None,
-                parent: None,
-            })),
+            parent: None,
         }
     }
 
@@ -141,6 +129,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[ignore = "Presets are not yet supported"]
     async fn test_presets() {
         let notifications_client = NotificationsClient::new(
             AuthContext::from_env(),

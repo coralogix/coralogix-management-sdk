@@ -36,9 +36,6 @@ pub mod archive_retentions;
 /// This module contains the client for the Dashboards API.
 pub mod dashboards;
 
-/// This module contains the client for the Dataprime Query API.
-pub mod dataprime_query;
-
 /// This module contains the client for the datasets API.
 pub mod datasets;
 

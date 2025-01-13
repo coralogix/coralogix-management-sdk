@@ -325,6 +325,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "dashboard-folders"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http",
+ "prost 0.12.6",
+ "prost-wkt 0.5.1",
+ "prost-wkt-types 0.5.1",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+ "uuid",
+]
+
+[[package]]
 name = "dashboards"
 version = "0.1.0"
 dependencies = [
@@ -340,18 +358,6 @@ dependencies = [
 
 [[package]]
 name = "dataplans"
-version = "0.1.0"
-dependencies = [
- "anyhow",
- "async-trait",
- "cx-sdk",
- "http",
- "tokio",
- "tonic",
-]
-
-[[package]]
-name = "dataprime"
 version = "0.1.0"
 dependencies = [
  "anyhow",
@@ -1098,6 +1104,19 @@ dependencies = [
  "security-framework 2.11.1",
  "security-framework-sys",
  "tempfile",
+]
+
+[[package]]
+name = "notifications"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+ "uuid",
 ]
 
 [[package]]
