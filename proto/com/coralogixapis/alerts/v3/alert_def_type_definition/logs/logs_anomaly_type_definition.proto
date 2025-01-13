@@ -6,12 +6,14 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto";
 
 message LogsAnomalyType  {
     LogsFilter logs_filter = 1;
     repeated LogsAnomalyRule rules = 2;
     repeated google.protobuf.StringValue notification_payload_filter = 3;
     google.protobuf.Int32Value evaluation_delay_ms = 4;
+    AnomalyAlertSettings anomaly_alert_settings = 5;
 }
 message LogsAnomalyRule {
     LogsAnomalyCondition condition = 1;

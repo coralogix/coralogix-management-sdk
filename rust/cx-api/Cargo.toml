@@ -23,7 +23,6 @@ default = [
     "api_keys",
     "dashboards",
     "data_usage",
-    "dataprime",
     "e2m",
     "enrichment",
     "extensions",
@@ -53,7 +52,6 @@ data_usage = []
 dashboards = []
 tags = []
 extensions = []
-dataprime = []
 views = []
 actions = []
 alert_scheduler = []

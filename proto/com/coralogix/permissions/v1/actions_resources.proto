@@ -139,6 +139,9 @@ enum Resource {
   RESOURCE_TEAM_AI_SETTINGS = 127 [(name) = "team-ai-settings"];
   RESOURCE_NOTIFICATION_CENTER_CONNECTORS = 128 [(name) = "notification-center-connectors"];
   RESOURCE_NOTIFICATION_CENTER_PRESETS = 129 [(name) = "notification-center-presets"];
+  RESOURCE_HIDE_ERRORS = 130 [(name) = "hide-errors"];
+  RESOURCE_RUM_SETTINGS = 131 [(name) = "rum-settings"];
+  RESOURCE_SESSION_RECORDING = 132 [(name) = "session-recording"];
 }
 
 

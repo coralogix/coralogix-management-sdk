@@ -49,8 +49,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         tags_service(&root),
         #[cfg(feature = "e2m")]
         e2m_service(&root),
-        #[cfg(feature = "dataprime")]
-        dataprime_service(&root),
         #[cfg(feature = "views")]
         views_service(&root),
         #[cfg(feature = "actions")]
@@ -216,13 +214,6 @@ fn dashboards_service(root: &str) -> Vec<String> {
             root
         ),
     ]
-}
-
-fn dataprime_service(root: &str) -> Vec<String> {
-    vec![format!(
-        "{}/com/coralogixapis/dataprime/v1/query_service.proto",
-        root
-    )]
 }
 
 fn views_service(root: &str) -> Vec<String> {
