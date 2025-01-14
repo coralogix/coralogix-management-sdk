@@ -100,7 +100,7 @@ func NewCallPropertiesCreator(region string, authContext AuthContext) *CallPrope
 		teamsLevelAPIKey: authContext.teamLevelAPIKey,
 		userLevelAPIKey:  authContext.userLevelAPIKey,
 		correlationID:    uuid.New().String(),
-		sdkVersion:       vanillaSdkVersion,
+		sdkVersion:       fmt.Sprint("sdk-", vanillaSdkVersion),
 	}
 }
 
