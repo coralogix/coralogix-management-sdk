@@ -84,21 +84,45 @@ message ReplaceCustomPresetResponse {
 }
 
 message DeleteCustomPresetRequest {
-  string id = 1;
+  // removed deprecated_id
+  reserved 1;
+
+  oneof deprecated_identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
+
+  PresetIdentifier identifier = 2;
 }
 
 message DeleteCustomPresetResponse {
 }
 
 message SetCustomPresetAsDefaultRequest {
-  string id = 1;
+  // removed deprecated_id
+  reserved 1;
+
+  oneof deprecated_identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
+
+  PresetIdentifier identifier = 2;
 }
 
 message SetCustomPresetAsDefaultResponse {
 }
 
 message GetPresetRequest {
-  string id = 1;
+  // removed deprecated_id
+  reserved 1;
+
+  oneof deprecated_identifier {
+    string id = 101;
+    string user_facing_id = 102;
+  }
+
+  PresetIdentifier identifier = 2;
 }
 
 message GetPresetResponse {

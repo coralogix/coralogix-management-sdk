@@ -3,7 +3,7 @@ syntax = "proto3";
 package com.coralogix.archive.v1;
 
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/archive/v1/target.proto";
 
 message IsArchiveConfiguredRequest {
@@ -46,20 +46,20 @@ message SetTargetResponse {
 
 service TargetService {
   rpc IsArchiveConfigured(IsArchiveConfiguredRequest) returns (IsArchiveConfiguredResponse) {
-    option (audit_log_description).description = "Is archive configured";
+    option (com.coralogix.common.v1.audit_log_description).description = "Is archive configured";
   }
 
   rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
-    option (audit_log_description).description = "Get target";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get target";
   }
   
   rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
-    option (audit_log_description).description = "Set target";
+    option (com.coralogix.common.v1.audit_log_description).description = "Set target";
   }
 }
 
 service InternalTargetService {
   rpc IsArchiveConfigured(InternalTargetServiceIsArchiveConfiguredRequest) returns (InternalTargetServiceIsArchiveConfiguredResponse) {
-    option (audit_log_description).description = "Is archive configured";
+    option (com.coralogix.common.v1.audit_log_description).description = "Is archive configured";
   }
 }

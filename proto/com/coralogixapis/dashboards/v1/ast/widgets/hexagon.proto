@@ -5,18 +5,18 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
-import "com/coralogixapis/dashboards/v1/common/span_field.proto";
-import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
-import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
-import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
 
 message Hexagon {
   Query query = 1;

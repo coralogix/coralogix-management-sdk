@@ -50,7 +50,7 @@ message Dashboard {
 
   repeated Annotation annotations = 11;
 
-  // Specifies the auto refresh interval for the dashboard. 
+  // Specifies the auto refresh interval for the dashboard.
   oneof auto_refresh {
     AutoRefreshOff off = 12;
     AutoRefreshTwoMinutes two_minutes = 13;
@@ -60,5 +60,4 @@ message Dashboard {
   message AutoRefreshOff {}
   message AutoRefreshTwoMinutes {}
   message AutoRefreshFiveMinutes {}
-
 }

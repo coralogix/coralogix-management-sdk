@@ -4,8 +4,11 @@ package com.coralogix.archive.v1;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/archive/v1/retention.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
 
 message GetRetentionsRequest {
 }
@@ -27,10 +30,36 @@ message RetentionUpdateElement {
 }
 
 message UpdateRetentionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Retentions Request"
+      description: "This data structure is used to update retentions"
+      required: [
+        "retention_update_elements"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
   repeated RetentionUpdateElement retention_update_elements = 1 [(validation_max_elements) = 4];
 }
 
 message UpdateRetentionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Retentions Response"
+      description: "This data structure is obtained after updating retentions"
+      required: [
+        "retentions"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
   repeated Retention retentions = 1;
 }
 
@@ -38,29 +67,69 @@ message ActivateRetentionsRequest {
 }
 
 message ActivateRetentionsResponse {
-  google.protobuf.BoolValue activate_retentions = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Activate Retentions Response"
+      description: "This data structure is obtained after setting the active status of retentions"
+      required: [
+        "retentions"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  google.protobuf.BoolValue activate_retentions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
 }
 
 message GetRetentionsEnabledRequest {
 }
 
 message GetRetentionsEnabledResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Retentions Enabled Response"
+      description: "This data structure is obtained when retrieving the active status of retentions"
+      required: [
+        "retentions"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
   google.protobuf.BoolValue enable_tags = 1;
 }
 
 service RetentionsService {
   rpc GetRetentions(GetRetentionsRequest) returns (GetRetentionsResponse) {
-    option (audit_log_description).description = "Get retentions";
+    option (google.api.http) = {
+      get: "/v1/retentions"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get retentions";
   }
   rpc UpdateRetentions(UpdateRetentionsRequest) returns (UpdateRetentionsResponse) {
-    option (audit_log_description).description = "Update retention names";
+    option (google.api.http) = {
+      post: "/v1/retentions"
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Update retention names";
   }
 
   rpc ActivateRetentions(ActivateRetentionsRequest) returns (ActivateRetentionsResponse) {
-    option (audit_log_description).description = "Activate retention tags";
+    option (google.api.http) = {
+      post: "/v1/retentions:activate"
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Activate retention tags";
   }
 
   rpc GetRetentionsEnabled(GetRetentionsEnabledRequest) returns (GetRetentionsEnabledResponse) {
-    option (audit_log_description).description = "Get retention tags enabled status";
+    option (google.api.http) = {
+      get: "/v1/retentions/enabled"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get retention tags enabled status";
   }
 }

@@ -4,23 +4,19 @@ package com.coralogixapis.dashboards.v1.services;
 
 import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/folder.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
-import "google/api/annotations.proto";
 
 service DashboardFoldersService {
   rpc ListDashboardFolders(ListDashboardFoldersRequest) returns (ListDashboardFoldersResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "list dashboard folders";
-    option (google.api.http) = {
-      get: "/dashboards/folders"
-    };
+    option (google.api.http) = {get: "/dashboards/folders"};
   }
 
   rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get dashboard folder";
-    option (google.api.http) = {
-      get: "/dashboards/folders/{folder_id}"
-    };
+    option (google.api.http) = {get: "/dashboards/folders/{folder_id}"};
   }
 
   rpc CreateDashboardFolder(CreateDashboardFolderRequest) returns (CreateDashboardFolderResponse) {
@@ -41,9 +37,7 @@ service DashboardFoldersService {
 
   rpc DeleteDashboardFolder(DeleteDashboardFolderRequest) returns (DeleteDashboardFolderResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard folder";
-    option (google.api.http) = {
-      delete: "/dashboards/folders/{folder_id}"
-    };
+    option (google.api.http) = {delete: "/dashboards/folders/{folder_id}"};
   }
 }
 

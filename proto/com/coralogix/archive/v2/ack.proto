@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/v2/event.proto";
+import "com/coralogix/archive/v2/target.proto";
 
 message MetastoreAck {
     repeated ObjectCreatedStatus created = 1;
@@ -24,9 +25,17 @@ message ObjectRemovedStatus {
         Success success = 2;
         AlreadyRemoved already_removed = 3;
     }
+    repeated FileSpec related_files_to_remove = 4;
 }
 
 message AlreadyExists {}
 message AlreadyRemoved {}
 message Skipped {}
 message Success {}
+message FileSpec {
+    oneof bucket {
+        archive.v2.S3TargetSpec s3 = 1;
+        archive.v2.IBMCosTargetSpec ibm_cos = 2;
+    };
+    string file_path = 3;
+}

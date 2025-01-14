@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 package com.coralogix.archive.dataset.v2;
 
 service SchemaRuleService {
   rpc SetSchemaRule(SetSchemaRuleRequest) returns (SetSchemaRuleResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
+    option (com.coralogix.common.v1.audit_log_description).description = "Set dataset rule definition";
   }
   rpc GetSchemaRule(GetSchemaRuleRequest) returns (GetSchemaRuleResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Set dataset rule definition";
+    option (com.coralogix.common.v1.audit_log_description).description = "Set dataset rule definition";
   }
 }
 

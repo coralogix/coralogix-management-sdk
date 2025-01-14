@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "com/coralogix/archive/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogix/archive/dataset/v2/dataset.proto";
 import "com/coralogix/archive/dataset/v2/physical_location.proto";
@@ -12,22 +12,22 @@ package com.coralogix.archive.dataset.v2;
 
 service DatasetLocationsService {
   rpc GetDatasetLocations(GetDatasetLocationsRequest) returns (GetDatasetLocationsResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
   }
   rpc GetDatasetList(GetDatasetListRequest) returns (GetDatasetListResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset list according to company id";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dataset list according to company id";
   }
 }
 
 service InternalDatasetLocationsService {
   rpc GetDatasetLocations(InternalDatasetLocationsServiceGetDatasetLocationsRequest) returns (InternalDatasetLocationsServiceGetDatasetLocationsResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dataset locations by team_id, dataspace, dataset and timeframe";
   }
   rpc GetDatasetList(InternalDatasetLocationsServiceGetDatasetListRequest) returns (InternalDatasetLocationsServiceGetDatasetListResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Get dataset list according to company id";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dataset list according to company id";
   }
   rpc UpdateDatasetLocation(InternalDatasetLocationsServiceUpdateDatasetLocationRequest) returns (InternalDatasetLocationsServiceUpdateDatasetLocationResponse) {
-    option (com.coralogix.archive.v1.audit_log_description).description = "Update dataset location according to companyId, location, dataspace and dataset";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update dataset location according to companyId, location, dataspace and dataset";
   }
 }
 

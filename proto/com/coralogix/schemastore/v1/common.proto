@@ -1,0 +1,226 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "google/protobuf/timestamp.proto";
+
+message LabelFilter {
+  string key = 1;
+  repeated string value = 2;
+}
+
+message SchemaFilter {
+  string path = 1;
+  repeated DataType expected_types = 2;
+  repeated FullDataType expected_full_types = 3;
+}
+
+message SchemaIdFilter {
+  uint64 id = 1;
+}
+
+message PriorityClassFilter {
+  PriorityClass priority_class = 1;
+}
+
+message MetadataFilter {
+  repeated DataType data_types = 1;
+  repeated string logical_data_types = 2;
+  repeated PriorityClass priority_classes = 3;
+}
+
+enum PriorityClass {
+  PRIORITY_CLASS_UNSPECIFIED = 0;
+  PRIORITY_CLASS_LOW = 1;
+  PRIORITY_CLASS_MEDIUM = 2;
+  PRIORITY_CLASS_HIGH = 3;
+}
+
+message TimeRange {
+  google.protobuf.Timestamp start = 1;
+  google.protobuf.Timestamp end = 2;
+}
+
+enum DataType {
+  DATA_TYPE_UNSPECIFIED = 0;
+  DATA_TYPE_NUM = 1;
+  DATA_TYPE_STRING = 2;
+  DATA_TYPE_BOOL = 3;
+  // Will be returned for all arrays unless `OBSERVATIONS_FEATURE_ADVANCED_ARRAY_TYPES` is specified in the request
+  // When `OBSERVATIONS_FEATURE_ADVANCED_ARRAY_TYPES` is specified, DATA_TYPE_UNTRACKED_ARRAY refers to historical data where
+  // no type information on the array contents is available
+  DATA_TYPE_UNTRACKED_ARRAY = 4;
+  DATA_TYPE_OBJECT = 5;
+  DATA_TYPE_NUM_ARRAY = 6;
+  DATA_TYPE_STRING_ARRAY = 7;
+  DATA_TYPE_BOOL_ARRAY = 8;
+  DATA_TYPE_ARRAY_ARRAY = 9;
+  DATA_TYPE_OBJECT_ARRAY = 10;
+  DATA_TYPE_NULL = 11;
+  DATA_TYPE_NULL_ARRAY = 12;
+  DATA_TYPE_EMPTY_ARRAY = 13;
+}
+
+message FullDataType {
+  DataType data_type = 1;
+  string logical_data_type = 2;
+}
+
+enum TimeResolution {
+  TIME_RESOLUTION_UNSPECIFIED = 0;
+  TIME_RESOLUTION_HOURLY = 1;
+  TIME_RESOLUTION_MONTHLY = 2;
+}
+
+message Label {
+  string key = 1;
+  repeated string values = 2;
+}
+
+enum LabelResultType {
+  LABEL_RESULT_TYPE_UNSPECIFIED = 0;
+  LABEL_RESULT_TYPE_LABEL_KEYS = 1;
+  LABEL_RESULT_TYPE_FULL= 2;
+}
+
+enum DataSourceType {
+  DATA_SOURCE_TYPE_UNSPECIFIED = 0;
+  DATA_SOURCE_TYPE_LOGS = 1;
+  DATA_SOURCE_TYPE_TRACES = 2;
+  DATA_SOURCE_TYPE_METRICS = 3;
+}
+
+enum MatchMode {
+  MATCH_MODE_UNSPECIFIED = 0;
+  MATCH_MODE_STRICT = 1;
+  MATCH_MODE_FUZZY = 2;
+  MATCH_MODE_STARTS_WITH = 3;
+  MATCH_MODE_ENDS_WITH = 4;
+  MATCH_MODE_REGEX = 5;
+}
+
+message MatchExpression {
+  string value = 1;
+  MatchMode match_mode = 2;
+  bool case_sensitive = 3;
+  bool invert = 4;
+}
+
+message VirtualFieldFilter {
+  bool is_virtual = 1;
+}
+
+enum CustomDatasetTargetFormat {
+  CUSTOM_DATASET_TARGET_FORMAT_UNSPECIFIED = 0;
+  CUSTOM_DATASET_TARGET_FORMAT_WIDEPARQUET_V1 = 1;
+}
+
+enum CustomDatasetTargetType {
+  CUSTOM_DATASET_TARGET_TYPE_UNSPECIFIED = 0;
+  CUSTOM_DATASET_TARGET_TYPE_S3 = 1;
+  CUSTOM_DATASET_TARGET_TYPE_IBMCOS = 2;
+}
+
+message CustomDatasetTarget {
+  CustomDatasetTargetFormat format = 1;
+  CustomDatasetTargetType type = 2;
+  string prefix = 3;
+  string partitioning_scheme = 4;
+  oneof target_properties {
+    CustomDatasetS3TargetProperties s3_target_properties = 5;
+    CustomDatasetIbmCosTargetProperties ibm_cos_target_properties = 6;
+  }
+}
+
+message CustomDatasetS3TargetProperties {
+  string region = 1;
+  string bucket = 2;
+}
+
+message CustomDatasetIbmCosTargetProperties {
+  string crn = 1;
+  string endpoint = 2;
+  string bucket_type = 3;
+}
+
+message Enrichment {
+  uint32 id = 1;
+  string name = 2;
+  string display_name = 3;
+  EnrichmentType enrichment_type = 4;
+  string description = 5;
+  uint32 version = 6;
+  string matching_key = 7;
+}
+
+enum EnrichmentType {
+  ENRICHMENT_TYPE_UNSPECIFIED = 0;
+  ENRICHMENT_TYPE_CUSTOM = 1; // CSV
+  ENRICHMENT_TYPE_LOOKUP = 2; // External lookups
+  ENRICHMENT_TYPE_MATERIALIZED = 3; // Materialized stream of events
+}
+
+message DatasetFilter {
+  DatasetType dataset_type = 1;
+  optional string dataset_id = 2;
+  optional string namespace_id = 3;
+  optional EnrichmentType enrichment_type = 4;
+}
+
+message Dataset {
+  DatasetType dataset_type = 1;
+  string dataset_id = 2;
+  oneof dataset {
+    BuiltInDataset built_in_dataset = 3;
+    CustomDataset custom_dataset = 4;
+    EnrichmentDataset enrichment_dataset = 5;
+  }
+}
+
+message BuiltInDataset {}
+
+message CustomDataset {
+  uint32 team_id = 1;
+  string dataset_id = 2;
+  string namespace_id = 3;
+  repeated CustomDatasetTarget targets = 4;
+}
+
+message EnrichmentDataset {
+  uint32 team_id = 1;
+  string dataset_id = 2;
+  EnrichmentType enrichment_type = 3;
+  uint32 internal_id = 4;
+  string display_name = 5;
+  string description = 6;
+  uint32 version = 7;
+  string matching_key = 8;
+}
+
+message DatasetDescriptor {
+  DatasetType dataset_type = 1;
+  // When used in Requests, accepts wildcards (e.g. `d*`)
+  // In Response it will contain fully resolved dataset name
+  optional string dataset = 2;
+  // In Request and Response it should be the fully resolved dataspace name
+  optional string dataspace = 3;
+}
+
+enum DatasetType {
+  DATASET_TYPE_UNSPECIFIED = 0;
+  DATASET_TYPE_LOGS = 1;
+  DATASET_TYPE_SPANS = 2;
+  DATASET_TYPE_METRICS = 3;
+  DATASET_TYPE_ENRICHMENT = 4;
+  // Deprecated, please use DATASET_TYPE_DATASPACE_DATASET
+  DATASET_TYPE_CUSTOM = 5 [deprecated = true];
+  // New dataspaces/datasets
+  DATASET_TYPE_DATASPACE_DATASET = 6;
+}
+
+enum DatasetScope {
+  DATASET_SCOPE_UNSPECIFIED = 0;
+  DATASET_SCOPE_USER_DATA = 1;
+  DATASET_SCOPE_LABEL = 2;
+  DATASET_SCOPE_METADATA = 3;
+}

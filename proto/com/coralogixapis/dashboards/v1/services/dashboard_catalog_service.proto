@@ -4,16 +4,14 @@ package com.coralogixapis.dashboards.v1.services;
 
 import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/common/folder.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "google/api/annotations.proto";
 
 service DashboardCatalogService {
   rpc GetDashboardCatalog(GetDashboardCatalogRequest) returns (GetDashboardCatalogResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get dashboard catalog";
-    option (google.api.http) = {
-      get: "/dashboards/catalog"
-    };
+    option (google.api.http) = {get: "/dashboards/catalog"};
   }
 }
 

@@ -78,6 +78,12 @@ type ConnectorConfigField = commonv1.ConnectorConfigField
 // ConnectorType is a connector type.
 type ConnectorType = common.ConnectorType
 
+// PresetIdentifier is a preset identifier.
+type PresetIdentifier = presets.PresetIdentifier
+
+// PresetIdentifierIDValue is a preset identifier user id value.
+type PresetIdentifierIDValue = presets.PresetIdentifier_UserFacingId
+
 // ConnectorType values.
 const (
 	ConnectorTypeUnSpecified  = common.ConnectorType_CONNECTOR_TYPE_UNSPECIFIED

@@ -27,8 +27,8 @@ commit_hash = "1b0242ca59a72843f6b33aefe24e4765b097f034"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.82"
-commit_hash = "9d722b4fe040e6c685e5050842d228dcd464354e"
+revision = "v0.0.85"
+commit_hash = "e47ab498fcc108f3dc4123c1b3029963a86d9cc0"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,8 +39,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.1.0"
-commit_hash = "8cd5a1e482526de8764f7a627483fcc4aa136727"
+revision = "v2.2.0"
+commit_hash = "d92efcebaa6ca67be8a5fc07fb4defd645682b39"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -81,8 +81,8 @@ commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.3.0"
-commit_hash = "9e7d97f96fac4fad6c472a5c4efb2515acd7c486"
+revision = "v0.4.2"
+commit_hash = "f0fbaf2adf0bd2050268b9659cef9b1cf6ee8005"
 
 [[dependencies]]
 name = "cx-api-organisations"
@@ -101,6 +101,12 @@ name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
 revision = "v0.0.8"
 commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
+
+[[dependencies]]
+name = "cx-api-schema-store"
+url = "github.com/coralogix/cx-api-schema-store"
+branch = "master"
+commit_hash = "8a5b29e643f231c75156103dfbea9078c50a2319"
 
 [[dependencies]]
 name = "cx-api-scopes-service"

@@ -15,12 +15,12 @@
 mod tests {
 
     use cx_sdk::{
+        CoralogixRegion,
         auth::AuthContext,
         client::dashboard_folders::{
             DashboardFolder,
             DashboardFoldersClient,
         },
-        CoralogixRegion,
     };
 
     #[tokio::test]

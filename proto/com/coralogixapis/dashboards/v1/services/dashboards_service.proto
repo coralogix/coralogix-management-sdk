@@ -4,10 +4,10 @@ package com.coralogixapis.dashboards.v1.services;
 
 import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/ast/dashboard.proto";
+import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "google/api/annotations.proto";
 
 service DashboardsService {
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
@@ -28,16 +28,12 @@ service DashboardsService {
 
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard";
-    option (google.api.http) = {
-      delete: "/dashboards/{dashboard_id}"
-    };
+    option (google.api.http) = {delete: "/dashboards/{dashboard_id}"};
   }
 
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get dashboard";
-    option (google.api.http) = {
-      get: "/dashboards/{dashboard_id}"
-    };
+    option (google.api.http) = {get: "/dashboards/{dashboard_id}"};
   }
 
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {

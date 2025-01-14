@@ -36,7 +36,6 @@ func TestConnectors(t *testing.T) {
 			Type:        cxsdk.ConnectorTypeGenericHTTPS,
 			Name:        "TestConnector",
 			Description: "This is the connector to use for Notification Center testing.",
-			EntityType:  "alerts",
 			ConnectorConfigs: []*cxsdk.ConnectorConfig{
 				{
 					OutputSchemaId: "default",
@@ -126,7 +125,11 @@ func TestPresets(t *testing.T) {
 
 	presetId := createRes.Preset.Id
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
-		Id: *presetId,
+		Identifier: &cxsdk.PresetIdentifier{
+			Value: &cxsdk.PresetIdentifierIDValue{
+				UserFacingId: *presetId,
+			},
+		},
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -135,7 +138,11 @@ func TestPresets(t *testing.T) {
 	assert.Equal(t, preset.Preset.Name, "TestPreset")
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
-		Id: *presetId,
+		Identifier: &cxsdk.PresetIdentifier{
+			Value: &cxsdk.PresetIdentifierIDValue{
+				UserFacingId: *presetId,
+			},
+		},
 	})
 
 	if err != nil {

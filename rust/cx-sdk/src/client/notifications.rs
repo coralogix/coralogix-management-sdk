@@ -58,10 +58,12 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         GetSystemDefaultPresetSummaryResponse,
         ListPresetSummariesRequest,
         ListPresetSummariesResponse,
+        PresetIdentifier,
         ReplaceCustomPresetRequest,
         ReplaceCustomPresetResponse,
         SetCustomPresetAsDefaultRequest,
         SetCustomPresetAsDefaultResponse,
+        preset_identifier,
         presets_service_client::PresetsServiceClient,
     },
 };
@@ -122,7 +124,7 @@ pub struct TestPresetConfigParams {
     /// The message configuration fields to use in the test.
     pub message_config_fields: Vec<MessageConfigField>,
     /// The ID of the preset to test with.
-    pub preset_id: String,
+    pub preset_user_facing_id: String,
     /// The configuration overrides to apply during the test.
     pub config_overrides: Vec<ConfigOverrides>,
 }
@@ -187,13 +189,11 @@ impl NotificationsClient {
         &self,
         connector_type: ConnectorType,
         order_bys: Vec<OrderBy>,
-        entity_type: String,
     ) -> Result<ListConnectorsResponse> {
         let request = make_request_with_metadata(
             ListConnectorsRequest {
                 connector_type: connector_type as i32,
                 order_bys,
-                entity_type: Some(entity_type),
             },
             &self.metadata_map,
         );
@@ -407,10 +407,17 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to delete.
     pub async fn delete_custom_preset(
         &self,
-        preset_id: String,
+        preset_user_facing_id: String,
     ) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
-            DeleteCustomPresetRequest { id: preset_id },
+            DeleteCustomPresetRequest {
+                identifier: Some(PresetIdentifier {
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
+                }),
+                deprecated_identifier: None,
+            },
             &self.metadata_map,
         );
         {
@@ -435,10 +442,17 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to set as the default.
     pub async fn set_custom_preset_as_default(
         &self,
-        preset_id: String,
+        preset_user_facing_id: String,
     ) -> Result<SetCustomPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
-            SetCustomPresetAsDefaultRequest { id: preset_id },
+            SetCustomPresetAsDefaultRequest {
+                identifier: Some(PresetIdentifier {
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
+                }),
+                deprecated_identifier: None,
+            },
             &self.metadata_map,
         );
         {
@@ -461,9 +475,18 @@ impl NotificationsClient {
     /// Get a preset by ID.
     /// # Arguments
     /// * `preset_id` - The ID of the preset to get.
-    pub async fn get_preset(&self, preset_id: String) -> Result<GetPresetResponse> {
-        let request =
-            make_request_with_metadata(GetPresetRequest { id: preset_id }, &self.metadata_map);
+    pub async fn get_preset(&self, preset_user_facing_id: String) -> Result<GetPresetResponse> {
+        let request = make_request_with_metadata(
+            GetPresetRequest {
+                identifier: Some(PresetIdentifier {
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
+                }),
+                deprecated_identifier: None,
+            },
+            &self.metadata_map,
+        );
         {
             let mut client = self.presets_client.lock().await.clone();
 
@@ -629,7 +652,7 @@ impl NotificationsClient {
                 r#type: connector_type as i32,
                 output_schema_id,
                 fields: connector_config_fields,
-                entity_type,
+                entity_type: Some(entity_type),
             },
             &self.metadata_map,
         );
@@ -695,7 +718,7 @@ impl NotificationsClient {
                 entity_type: params.entity_type,
                 entity_sub_type: params.entity_sub_type,
                 connector_id: params.connector_id,
-                preset_id: params.preset_id,
+                preset_id: params.preset_user_facing_id,
                 config_overrides: params.config_overrides,
             },
             &self.metadata_map,

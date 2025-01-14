@@ -59,7 +59,7 @@ message TestConnectorConfigRequest {
   ConnectorType type = 1;
   string output_schema_id = 2;
   repeated ConnectorConfigField fields = 3;
-  string entity_type = 4;
+  optional string entity_type = 4;
 }
 
 message TestConnectorConfigResponse {
@@ -127,6 +127,8 @@ message TestTemplateRenderResult {
     FAILURE_REASON_UNSPECIFIED = 0;
     INVALID_TEMPLATE = 1;
     FIELD_NOT_FOUND = 2;
+    TEMPLATE_EXCEEDS_MAX_LENGTH = 3;
+    RENDERED_VALUE_EXCEEDS_MAX_LENGTH = 4;
   }
 
   oneof result {

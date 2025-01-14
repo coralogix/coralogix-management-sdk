@@ -9,12 +9,12 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
-import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 
 message Gauge {
   Query query = 1;
