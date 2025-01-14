@@ -222,16 +222,10 @@ func (x *SchemaTree) GetSchemas() []*SubSchema {
 
 type FieldNode struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Location      *FieldLocation         `protobuf:"bytes,1,opt,name=location,proto3" json:"location,omitempty"`
 	Children      map[string]*FieldNode  `protobuf:"bytes,2,rep,name=children,proto3" json:"children,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Metadata      *FieldMetadata         `protobuf:"bytes,3,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	unknownFields protoimpl.UnknownFields
-<<<<<<< HEAD
-
-	Children map[string]*FieldNode `protobuf:"bytes,2,rep,name=children,proto3" json:"children,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Metadata *FieldMetadata        `protobuf:"bytes,3,opt,name=metadata,proto3" json:"metadata,omitempty"`
-=======
 	sizeCache     protoimpl.SizeCache
->>>>>>> 8d3958a (chore: updates)
 }
 
 func (x *FieldNode) Reset() {
@@ -279,12 +273,11 @@ func (x *FieldNode) GetMetadata() *FieldMetadata {
 }
 
 type FieldMetadata struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Location      *FieldLocation         `protobuf:"bytes,1,opt,name=location,proto3" json:"location,omitempty"`
+	Required      bool                   `protobuf:"varint,2,opt,name=required,proto3" json:"required,omitempty"`
 	unknownFields protoimpl.UnknownFields
-
-	Location *FieldLocation `protobuf:"bytes,1,opt,name=location,proto3" json:"location,omitempty"`
-	Required bool           `protobuf:"varint,2,opt,name=required,proto3" json:"required,omitempty"`
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *FieldMetadata) Reset() {

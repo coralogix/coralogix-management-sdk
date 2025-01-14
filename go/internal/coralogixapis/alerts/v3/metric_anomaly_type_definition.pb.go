@@ -22,23 +22,13 @@ const (
 )
 
 type MetricAnomalyType struct {
-<<<<<<< HEAD
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
+	state                protoimpl.MessageState `protogen:"open.v1"`
 	MetricFilter         *MetricFilter          `protobuf:"bytes,1,opt,name=metric_filter,json=metricFilter,proto3" json:"metric_filter,omitempty"`
 	Rules                []*MetricAnomalyRule   `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
 	EvaluationDelayMs    *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=evaluation_delay_ms,json=evaluationDelayMs,proto3" json:"evaluation_delay_ms,omitempty"`
 	AnomalyAlertSettings *AnomalyAlertSettings  `protobuf:"bytes,4,opt,name=anomaly_alert_settings,json=anomalyAlertSettings,proto3" json:"anomaly_alert_settings,omitempty"`
-=======
-	state             protoimpl.MessageState `protogen:"open.v1"`
-	MetricFilter      *MetricFilter          `protobuf:"bytes,1,opt,name=metric_filter,json=metricFilter,proto3" json:"metric_filter,omitempty"`
-	Rules             []*MetricAnomalyRule   `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
-	EvaluationDelayMs *wrapperspb.Int32Value `protobuf:"bytes,3,opt,name=evaluation_delay_ms,json=evaluationDelayMs,proto3" json:"evaluation_delay_ms,omitempty"`
-	unknownFields     protoimpl.UnknownFields
-	sizeCache         protoimpl.SizeCache
->>>>>>> 8d3958a (chore: updates)
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *MetricAnomalyType) Reset() {

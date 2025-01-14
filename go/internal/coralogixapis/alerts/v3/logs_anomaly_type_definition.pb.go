@@ -27,12 +27,9 @@ type LogsAnomalyType struct {
 	Rules                     []*LogsAnomalyRule        `protobuf:"bytes,2,rep,name=rules,proto3" json:"rules,omitempty"`
 	NotificationPayloadFilter []*wrapperspb.StringValue `protobuf:"bytes,3,rep,name=notification_payload_filter,json=notificationPayloadFilter,proto3" json:"notification_payload_filter,omitempty"`
 	EvaluationDelayMs         *wrapperspb.Int32Value    `protobuf:"bytes,4,opt,name=evaluation_delay_ms,json=evaluationDelayMs,proto3" json:"evaluation_delay_ms,omitempty"`
-<<<<<<< HEAD
 	AnomalyAlertSettings      *AnomalyAlertSettings     `protobuf:"bytes,5,opt,name=anomaly_alert_settings,json=anomalyAlertSettings,proto3" json:"anomaly_alert_settings,omitempty"`
-=======
 	unknownFields             protoimpl.UnknownFields
 	sizeCache                 protoimpl.SizeCache
->>>>>>> 8d3958a (chore: updates)
 }
 
 func (x *LogsAnomalyType) Reset() {
