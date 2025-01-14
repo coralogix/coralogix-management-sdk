@@ -279,7 +279,8 @@ mod tests {
             .alert_def;
 
         assert!(
-            retrieved_alert.unwrap()
+            retrieved_alert
+                .unwrap()
                 .alert_def_properties
                 .unwrap()
                 .schedule

@@ -139,12 +139,11 @@ impl From<&ApiKey> for metadata::CallProperties {
                 (HeaderName::from_static(AUTHORIZATION_HEADER_NAME), value),
                 (
                     HeaderName::from_static(SDK_RUSTC_VERSION_HEADER_NAME),
-                    HeaderValue::from_str(&format!("sdk-{}", RUSTC_VERSION)).unwrap(),
+                    HeaderValue::from_str(RUSTC_VERSION).unwrap(),
                 ),
                 (
                     HeaderName::from_static(SDK_VERSION_HEADER_NAME),
-                    HeaderValue::from_str(format!("coralogix-mgmt-sdk-{}", SDK_VERSION).as_str())
-                        .unwrap(),
+                    HeaderValue::from_str(format!("sdk-{}", SDK_VERSION).as_str()).unwrap(),
                 ),
                 (
                     HeaderName::from_static(SDK_LANGUAGE_HEADER_NAME),

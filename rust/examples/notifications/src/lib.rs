@@ -19,9 +19,18 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::notifications::{
-            ConditionType, ConfigOverrides, Connector, ConnectorConfig, ConnectorConfigField,
-            ConnectorType, MatchEntityTypeCondition, MessageConfig, MessageConfigField,
-            NotificationsClient, Preset, condition_type,
+            ConditionType,
+            ConfigOverrides,
+            Connector,
+            ConnectorConfig,
+            ConnectorConfigField,
+            ConnectorType,
+            MatchEntityTypeCondition,
+            MessageConfig,
+            MessageConfigField,
+            NotificationsClient,
+            Preset,
+            condition_type,
         },
     };
 

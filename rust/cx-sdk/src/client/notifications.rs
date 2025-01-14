@@ -124,7 +124,7 @@ pub struct TestPresetConfigParams {
     /// The message configuration fields to use in the test.
     pub message_config_fields: Vec<MessageConfigField>,
     /// The ID of the preset to test with.
-    pub preset_id: String,
+    pub preset_user_facing_id: String,
     /// The configuration overrides to apply during the test.
     pub config_overrides: Vec<ConfigOverrides>,
 }
@@ -407,12 +407,14 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to delete.
     pub async fn delete_custom_preset(
         &self,
-        preset_id: String,
+        preset_user_facing_id: String,
     ) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
             DeleteCustomPresetRequest {
                 identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::Id(preset_id)),
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
                 }),
                 deprecated_identifier: None,
             },
@@ -440,12 +442,14 @@ impl NotificationsClient {
     /// * `preset_id` - The ID of the preset to set as the default.
     pub async fn set_custom_preset_as_default(
         &self,
-        preset_id: String,
+        preset_user_facing_id: String,
     ) -> Result<SetCustomPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
             SetCustomPresetAsDefaultRequest {
                 identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::Id(preset_id)),
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
                 }),
                 deprecated_identifier: None,
             },
@@ -471,11 +475,13 @@ impl NotificationsClient {
     /// Get a preset by ID.
     /// # Arguments
     /// * `preset_id` - The ID of the preset to get.
-    pub async fn get_preset(&self, preset_id: String) -> Result<GetPresetResponse> {
+    pub async fn get_preset(&self, preset_user_facing_id: String) -> Result<GetPresetResponse> {
         let request = make_request_with_metadata(
             GetPresetRequest {
                 identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::Id(preset_id)),
+                    value: Some(preset_identifier::Value::UserFacingId(
+                        preset_user_facing_id,
+                    )),
                 }),
                 deprecated_identifier: None,
             },
@@ -712,7 +718,7 @@ impl NotificationsClient {
                 entity_type: params.entity_type,
                 entity_sub_type: params.entity_sub_type,
                 connector_id: params.connector_id,
-                preset_id: params.preset_id,
+                preset_id: params.preset_user_facing_id,
                 config_overrides: params.config_overrides,
             },
             &self.metadata_map,

@@ -81,8 +81,8 @@ type ConnectorType = common.ConnectorType
 // PresetIdentifier is a preset identifier.
 type PresetIdentifier = presets.PresetIdentifier
 
-// PresetIdentifierIDValue is a preset identifier id value.
-type PresetIdentifierIDValue = presets.PresetIdentifier_Id
+// PresetIdentifierIDValue is a preset identifier user id value.
+type PresetIdentifierIDValue = presets.PresetIdentifier_UserFacingId
 
 // ConnectorType values.
 const (

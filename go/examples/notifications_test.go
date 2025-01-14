@@ -127,7 +127,7 @@ func TestPresets(t *testing.T) {
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
 		Identifier: &cxsdk.PresetIdentifier{
 			Value: &cxsdk.PresetIdentifierIDValue{
-				Id: *presetId,
+				UserFacingId: *presetId,
 			},
 		},
 	})
@@ -140,7 +140,7 @@ func TestPresets(t *testing.T) {
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
 		Identifier: &cxsdk.PresetIdentifier{
 			Value: &cxsdk.PresetIdentifierIDValue{
-				Id: *presetId,
+				UserFacingId: *presetId,
 			},
 		},
 	})
