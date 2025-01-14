@@ -222,6 +222,77 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn test_alerts_rm_schedule() {
+        let alerts_client = AlertsClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+        let alert = create_alert();
+
+        let created_alert = alerts_client
+            .create(alert.clone())
+            .await
+            .unwrap()
+            .alert_def
+            .unwrap();
+
+        let retrieved_alert = alerts_client
+            .get(created_alert.id.clone().unwrap())
+            .await
+            .unwrap()
+            .alert_def;
+
+        assert_eq!(retrieved_alert.unwrap(), created_alert);
+
+        let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
+
+        assert!(retrieved_alerts.len() > 0);
+
+        let updated_alert = AlertDef {
+            alert_def_properties: Some(AlertDefProperties {
+                schedule: None,
+                ..created_alert.alert_def_properties.clone().unwrap()
+            }),
+            ..created_alert
+        };
+
+        let updated_alert = alerts_client
+            .replace(updated_alert.clone())
+            .await
+            .unwrap()
+            .alert_def
+            .unwrap();
+
+        assert!(
+            updated_alert
+                .alert_def_properties
+                .unwrap()
+                .schedule
+                .is_none()
+        );
+
+        let retrieved_alert = alerts_client
+            .get(updated_alert.id.clone().unwrap())
+            .await
+            .unwrap()
+            .alert_def;
+
+        assert!(
+            retrieved_alert.unwrap()
+                .alert_def_properties
+                .unwrap()
+                .schedule
+                .is_none()
+        );
+
+        alerts_client
+            .delete(updated_alert.id.unwrap())
+            .await
+            .unwrap();
+    }
+
+    #[tokio::test]
     async fn test_alert_scheduler_client() {
         let alert_scheduler_client = AlertSchedulerClient::new(
             CoralogixRegion::from_env().unwrap(),

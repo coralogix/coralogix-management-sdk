@@ -125,10 +125,7 @@ async fn set_go_sdk_version(
             .lines()
             .find(|line| line.contains("vanillaSdkVersion ="))
             .unwrap(),
-        &format!(
-            "const vanillaSdkVersion = \"coralogix-mgmt-sdk-{}\"",
-            &args.sdk_version
-        ),
+        &format!("const vanillaSdkVersion = \"{}\"", &args.sdk_version),
     ))
 }
 
@@ -223,7 +220,7 @@ const sdkVersionHeaderName = "cx-sdk-version"
 const sdkLanguageHeaderName = "cx-sdk-language"
 const sdkGoVersionHeaderName = "cx-go-version"
 const sdkCorrelationIDHeaderName = "cx-correlation-id"
-const vanillaSdkVersion = "coralogix-mgmt-sdk-0.2.1"
+const vanillaSdkVersion = "0.2.1"
         "#;
         let args = super::Args {
             root: String::from("."),

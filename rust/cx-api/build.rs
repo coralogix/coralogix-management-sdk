@@ -174,14 +174,6 @@ fn recording_rule_group_sets_service(root: &str) -> Vec<String> {
 fn dashboards_service(root: &str) -> Vec<String> {
     vec![
         format!(
-            "{}/com/coralogixapis/dashboards/v1/services/archive_logs_data_source_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/archive_spans_data_source_service.proto",
-            root
-        ),
-        format!(
             "{}/com/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto",
             root
         ),
@@ -191,26 +183,6 @@ fn dashboards_service(root: &str) -> Vec<String> {
         ),
         format!(
             "{}/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/dataprime_data_source_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/logs_data_source_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/metrics_data_source_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/spans_data_source_service.proto",
-            root
-        ),
-        format!(
-            "{}/com/coralogixapis/dashboards/v1/services/team_settings_service.proto",
             root
         ),
     ]
