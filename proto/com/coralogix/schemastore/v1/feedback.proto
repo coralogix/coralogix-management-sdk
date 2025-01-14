@@ -1,0 +1,141 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+message AutoFeedbackRequest {
+  string session_id = 1;
+  oneof event {
+    // Total baseline of sessions that could possibly have used QA
+    // i.e. have seen the QA button
+    Presented presented = 2;
+    // Pressed the button in order to reveal the prompt ui
+    Opened opened = 3;
+    // Typed something in the prompt ui
+    Typed typed = 4;
+    // Submitted the query to be generated
+    Submitted submitted = 5;
+    // Query was generated
+    Generated generated = 6;
+    // User edited the query in the DP editor
+    Edited edited = 7;
+    // User executed the query in the DP editor
+    Executed executed = 8;
+    // There was an error
+    Failure failure = 100;
+    // There was an error during query generation
+    GenerationFailure generation_failure = 101;
+  }
+}
+
+message Presented {
+}
+
+message Opened {
+}
+
+message Typed {
+}
+
+message Submitted {
+  string prompt = 1;
+}
+
+message Generated {
+  string generated_query_id = 1;
+  string generated_query = 2;
+}
+
+message Edited {
+  string edited_query = 1;
+  string generated_query_id = 2;
+}
+
+message Executed {
+  string executed_query = 1;
+  string generated_query_id = 2;
+}
+
+message Failure {
+  string text = 1;
+}
+
+message GenerationFailure {
+  string text = 1;
+}
+
+message AutoFeedbackResponse {
+}
+
+// deprecated: Use UserFeedbackRequestV2
+message UserFeedbackRequest {
+  string session_id = 1;
+  string query_id = 2;
+  oneof rating_type {
+    // Positive feedback (1)
+    Positive positive = 3;
+    // Negative feedback (-1)
+    Negative negative = 4;
+    // Negative feedback, generated query was untrue or incorrect
+    Untrue untrue = 5;
+    // Negative feedback, generated query didn't address the question asked
+    DidntAddressQuestion didnt_address_question = 6;
+    // Negative feedback, generated query was harmful or unsafe
+    Harmful harmful = 7;
+    // Negative feedback, generated query had another issue 
+    Other other = 8;
+  }
+}
+
+message UserFeedbackV2Request {
+  string session_id = 1;
+  string query_id = 2;
+  oneof rating_type {
+    // Positive feedback (1)
+    Positive positive = 3;
+    // Negative feedback (-1)
+    Negative negative = 4;
+  }
+}
+
+message Positive {
+}
+
+message Negative {
+  repeated NegativeFeedback negative_feedback = 1;
+  string comment = 2;
+}
+
+enum NegativeFeedback {
+  NEGATIVE_FEEDBACK_UNSPECIFIED = 0;
+  NEGATIVE_FEEDBACK_WRONG_FIELD = 1;
+  NEGATIVE_FEEDBACK_WRONG_VALUE = 2;
+  NEGATIVE_FEEDBACK_WRONG_OPERATORS = 3;
+  NEGATIVE_FEEDBACK_WRONG_SYNTAX_USED = 4;
+  NEGATIVE_FEEDBACK_QUERY_RETURNED_NO_RESULTS = 5;
+  NEGATIVE_FEEDBACK_INCORRECT_REGEX = 6;
+  NEGATIVE_FEEDBACK_MY_INSTRUCTIONS_WERE_IGNORED = 7;
+  NEGATIVE_FEEDBACK_GENERATION_FAILED = 8;
+}
+
+// deprecated
+message Untrue {
+}
+
+// deprecated
+message DidntAddressQuestion {
+}
+
+// deprecated
+message Harmful {
+}
+
+// deprecated
+message Other {
+  string comment = 1;
+}
+
+message UserFeedbackResponse {
+}
+
+message UserFeedbackV2Response {
+}

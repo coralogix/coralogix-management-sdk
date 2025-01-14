@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+import "com/coralogix/schemastore/v1/correlations.proto";
+
+message CorrelationChoiceRequest {
+  Field requested_field  = 2;
+  Field selected_field = 3;
+  uint32 total_fields = 4; // how many fields were selected from
+  uint32 selection_position = 5; // the position in results
+}
+
+message CorrelationChoiceResponse {}

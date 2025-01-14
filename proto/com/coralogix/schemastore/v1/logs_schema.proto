@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+enum LogsSchemaDataType {
+  LOGS_SCHEMA_DATA_TYPE_UNSPECIFIED = 0;
+  LOGS_SCHEMA_DATA_TYPE_NUM = 1;
+  LOGS_SCHEMA_DATA_TYPE_STRING = 2;
+  LOGS_SCHEMA_DATA_TYPE_BOOL = 3;
+  LOGS_SCHEMA_DATA_TYPE_OBJECT = 5;
+}
+
+message DefaultLogsSchemaField {
+  repeated string path_array = 1;
+  LogsSchemaDataType data_type = 2;
+}
+
+message SetDefaultLogsSchemaRequest {
+  repeated DefaultLogsSchemaField fields = 1;
+}
+
+message SetDefaultLogsSchemaResponse {}
+
+message GetDefaultLogsSchemaRequest {}
+
+message GetDefaultLogsSchemaResponse {
+  repeated DefaultLogsSchemaField fields = 1;
+}

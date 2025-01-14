@@ -41,15 +41,8 @@ revision = 'v0.0.8'
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-allow_policies = [
-    "src/com/coralogixapis/dashboards/v1/ast/*",
-    "src/com/coralogixapis/dashboards/v1/common/*",
-    "src/com/coralogixapis/dashboards/v1/types.proto",
-    "src/com/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto",
-    "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
-    "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
-]
-revision = "v2.1.0"
+allow_policies = ["src/com/coralogixapis/*"]
+revision = "v2.2.0"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -161,3 +154,7 @@ allow_policies = [
 [global-mapping]
 url = 'github.com/coralogix/cx-api-global-mapping'
 revision = 'v1.26.0'
+
+[cx-api-schema-store]
+url = 'github.com/coralogix/cx-api-schema-store'
+branch = 'master'

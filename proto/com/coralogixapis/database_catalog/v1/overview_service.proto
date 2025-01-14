@@ -12,7 +12,6 @@ import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/database_catalog/v1/database.proto";
 import "com/coralogix/catalog/v1/common.proto";
-import "com/coralogixapis/apm_shared/common/apdex.proto";
 
 message GetDatabaseOverviewStreamRequest {
   google.protobuf.StringValue database_name = 1;
@@ -73,12 +72,16 @@ message GetApdexRequest{
   repeated google.protobuf.StringValue calling_services = 5;
 }
 
+message GetApdexResponse{
+  com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 1;
+}
+
 
 service DatabaseOverviewService {
   rpc GetDatabaseOverviewStream(GetDatabaseOverviewStreamRequest)returns(stream GetDatabaseOverviewStreamResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Database Overview Stream";
   }
-  rpc GetApdex(GetApdexRequest)returns(com.coralogixapis.apm.common.v2.GetApdexResponse){
+  rpc GetApdex(GetApdexRequest)returns(GetApdexResponse){
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apdex";
   }
 }

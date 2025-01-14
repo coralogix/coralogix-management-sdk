@@ -19,18 +19,9 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::notifications::{
-            ConditionType,
-            ConfigOverrides,
-            Connector,
-            ConnectorConfig,
-            ConnectorConfigField,
-            ConnectorType,
-            MatchEntityTypeCondition,
-            MessageConfig,
-            MessageConfigField,
-            NotificationsClient,
-            Preset,
-            condition_type,
+            ConditionType, ConfigOverrides, Connector, ConnectorConfig, ConnectorConfigField,
+            ConnectorType, MatchEntityTypeCondition, MessageConfig, MessageConfigField,
+            NotificationsClient, Preset, condition_type,
         },
     };
 
@@ -39,7 +30,6 @@ mod tests {
             name: "TestConnector".to_string(),
             description: "Connector for Notification Center testing.".to_string(),
             r#type: ConnectorType::GenericHttps as i32,
-            entity_type: "alerts".to_string(),
             connector_configs: vec![ConnectorConfig {
                 output_schema_id: "default".to_string(),
                 fields: vec![
@@ -58,6 +48,7 @@ mod tests {
             team_id: None,
             create_time: None,
             update_time: None,
+            config_overrides: vec![],
         }
     }
 

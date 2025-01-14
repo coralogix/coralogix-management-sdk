@@ -1,10 +1,11 @@
 #!/bin/sh
-license_header_start="Copyright 2024 Coralogix Ltd"
+license_header_2024_start="Copyright 2024 Coralogix Ltd"
+license_header_2025_start="Copyright 2025 Coralogix Ltd"
 
 check_license() {
   local file="$1"
   local first_line=$(head -n 1 "$file")
-  if [[ ! "$first_line" == *"$license_header_start"* ]]; then
+  if [[ ! "$first_line" == *"$license_header_2024_start"* ]] && [[ ! "$first_line" == *"$license_header_2025_start"* ]]; then
     echo "Error: Missing Apache license header in $file"
     exit 1
   fi

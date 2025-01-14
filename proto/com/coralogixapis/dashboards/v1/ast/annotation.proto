@@ -1,0 +1,98 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast;
+
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "google/protobuf/wrappers.proto";
+
+message Annotation {
+  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue name = 2;
+  google.protobuf.BoolValue enabled = 3;
+
+  Source source = 4;
+
+  message Source {
+    oneof value {
+      MetricsSource metrics = 1;
+      LogsSource logs = 2;
+      SpansSource spans = 3;
+    }
+  }
+
+  message MetricsSource {
+    common.PromQlQuery promql_query = 1;
+    Strategy strategy = 2;
+    google.protobuf.StringValue message_template = 3;
+    repeated google.protobuf.StringValue labels = 4;
+
+    // Strategy for turning metrics data into annotations
+    message Strategy {
+      oneof value {
+        // Take first data point and use its value as annotation timestamp (instead of point own timestamp)
+        StartTimeMetric start_time_metric = 1;
+      }
+    }
+
+    message StartTimeMetric {}
+  }
+
+  message LogsSource {
+    common.LuceneQuery lucene_query = 1;
+    Strategy strategy = 2;
+    google.protobuf.StringValue message_template = 3;
+    repeated common.ObservationField label_fields = 4;
+
+    message Strategy {
+      oneof value {
+        Instant instant = 1;
+        Range range = 2;
+        Duration duration = 3;
+      }
+
+      message Instant {
+        common.ObservationField timestamp_field = 1;
+      }
+
+      message Range {
+        common.ObservationField start_timestamp_field = 1;
+        common.ObservationField end_timestamp_field = 2;
+      }
+
+      message Duration {
+        common.ObservationField start_timestamp_field = 1;
+        common.ObservationField duration_field = 2;
+      }
+    }
+  }
+
+  message SpansSource {
+    common.LuceneQuery lucene_query = 1;
+    Strategy strategy = 2;
+    google.protobuf.StringValue message_template = 3;
+    repeated common.ObservationField label_fields = 4;
+
+    message Strategy {
+      oneof value {
+        Instant instant = 1;
+        Range range = 2;
+        Duration duration = 3;
+      }
+
+      message Instant {
+        common.ObservationField timestamp_field = 1;
+      }
+
+      message Range {
+        common.ObservationField start_timestamp_field = 1;
+        common.ObservationField end_timestamp_field = 2;
+      }
+
+      message Duration {
+        common.ObservationField start_timestamp_field = 1;
+        common.ObservationField duration_field = 2;
+      }
+    }
+  }
+}

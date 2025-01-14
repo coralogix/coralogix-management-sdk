@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+message TimeFrameSelect {
+  oneof value {
+    TimeFrame absolute_time_frame = 1;
+    google.protobuf.Duration relative_time_frame = 2;
+  }
+}
+
+message TimeFrame {
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+}

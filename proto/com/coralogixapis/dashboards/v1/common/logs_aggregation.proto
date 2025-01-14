@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "google/protobuf/wrappers.proto";
+
+message LogsAggregation {
+  oneof value {
+    Count count = 1;
+    CountDistinct count_distinct = 2;
+    Sum sum = 3;
+    Average average = 4;
+    Min min = 5;
+    Max max = 6;
+    Percentile percentile = 7;
+  }
+
+  message Count {}
+
+  message CountDistinct {
+    google.protobuf.StringValue field = 1;
+    v1.common.ObservationField observation_field = 2;
+  }
+
+  message Sum {
+    google.protobuf.StringValue field = 1;
+    v1.common.ObservationField observation_field = 2;
+  }
+
+  message Average {
+    google.protobuf.StringValue field = 1;
+    v1.common.ObservationField observation_field = 2;
+  }
+
+  message Min {
+    google.protobuf.StringValue field = 1;
+    v1.common.ObservationField observation_field = 2;
+  }
+
+  message Max {
+    google.protobuf.StringValue field = 1;
+    v1.common.ObservationField observation_field = 2;
+  }
+
+  message Percentile {
+    google.protobuf.StringValue field = 1;
+    // Value in range (0, 100]
+    google.protobuf.DoubleValue percent = 2;
+    v1.common.ObservationField observation_field = 3;
+  }
+}

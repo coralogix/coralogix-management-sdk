@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+
+import "com/coralogix/schemastore/v1/common.proto";
+import "google/protobuf/timestamp.proto";
+
+service SchemaStoreQueryService {
+  rpc Query (QueryRequest) returns (stream QueryResponse);
+}
+
+message QueryRequest {
+  string virtual_table = 1;
+  optional uint32 shard = 2;
+  repeated uint32 company_ids = 3;
+  repeated QueryRequestExpr filters = 4;
+  optional uint32 limit = 5;
+}
+
+message QueryRequestExpr {
+  oneof expr {
+    Literal literal = 1;
+    Column column = 2;
+    BinaryExpr binary_expr = 3;
+    Not not = 4;
+    Function function = 5;
+  }
+
+  message Literal {
+    oneof value {
+      Null null = 1;
+      string string = 2;
+      google.protobuf.Timestamp timestamp = 3;
+    }
+
+  }
+
+  message Null {}
+
+  message Column {
+    Keypath keypath = 1;
+  }
+
+  message Keypath {
+    DatasetScope dataset_scope = 1;
+    repeated string path = 2;
+  }
+
+  message BinaryExpr {
+    QueryRequestExpr left = 1;
+    Operator op = 2;
+    QueryRequestExpr right = 3;
+  }
+
+  enum Operator {
+    OPERATOR_UNSPECIFIED = 0;
+    OPERATOR_EQ = 1;
+    OPERATOR_NOT_EQ = 2;
+    OPERATOR_GT_EQ = 3;
+    OPERATOR_LT = 4;
+    OPERATOR_AND = 5;
+    OPERATOR_OR = 6;
+  }
+
+  message Not {
+    QueryRequestExpr expr = 1;
+  }
+
+  message Function {
+    oneof function {
+      RegexMatch regex_match = 1;
+      SearchText search_text = 2;
+      StartsWith starts_with = 3;
+      EndsWith ends_with = 4;
+    }
+
+    message RegexMatch {
+      QueryRequestExpr expr = 1;
+      string regex = 2;
+    }
+
+    message SearchText {
+      QueryRequestExpr expr = 1;
+      string raw_query = 2;
+      repeated string tokens = 3;
+    }
+
+    message StartsWith {
+      QueryRequestExpr expr = 1;
+      string prefix = 2;
+    }
+
+    message EndsWith {
+      QueryRequestExpr expr = 1;
+      string suffix = 2;
+    }
+  }
+}
+
+message QueryResponse {
+  bytes arrow_stream_bytes = 1;
+}

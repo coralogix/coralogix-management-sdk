@@ -27,13 +27,8 @@ commit_hash = "1b0242ca59a72843f6b33aefe24e4765b097f034"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-<<<<<<< HEAD
-revision = "v0.0.82"
-commit_hash = "9d722b4fe040e6c685e5050842d228dcd464354e"
-=======
 revision = "v0.0.85"
 commit_hash = "e47ab498fcc108f3dc4123c1b3029963a86d9cc0"
->>>>>>> e6c932a (chore: Update protofetch.toml)
 
 [[dependencies]]
 name = "cx-api-common"
@@ -54,15 +49,6 @@ revision = "v0.1.18"
 commit_hash = "fe159097ef2f94678a2e655ac30eb18aefdc067f"
 
 [[dependencies]]
-<<<<<<< HEAD
-=======
-name = "cx-api-dataprime"
-url = "github.com/coralogix/cx-api-dataprime"
-revision = "v0.344"
-commit_hash = "9d9f4e63a6923a990ed30a543336c8d7f52943d1"
-
-[[dependencies]]
->>>>>>> e6c932a (chore: Update protofetch.toml)
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
 revision = "v0.5.7"
@@ -117,6 +103,12 @@ revision = "v0.0.8"
 commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
 
 [[dependencies]]
+name = "cx-api-schema-store"
+url = "github.com/coralogix/cx-api-schema-store"
+branch = "master"
+commit_hash = "8a5b29e643f231c75156103dfbea9078c50a2319"
+
+[[dependencies]]
 name = "cx-api-scopes-service"
 url = "github.com/coralogix/cx-api-scopes"
 revision = "v0.0.1"
@@ -125,8 +117,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.126"
-commit_hash = "5368158e5686d36501f541aa41e7313470bbd6ec"
+revision = "v0.3.110"
+commit_hash = "08742acc81a9e793716fb4601ad7aef8490e0011"
 
 [[dependencies]]
 name = "cx-api-tags"

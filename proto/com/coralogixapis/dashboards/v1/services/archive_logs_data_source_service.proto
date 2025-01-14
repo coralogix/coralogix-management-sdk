@@ -1,0 +1,168 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.services;
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/dashboards/v1/common/group.proto";
+import "com/coralogixapis/dashboards/v1/common/group_limit.proto";
+import "com/coralogixapis/dashboards/v1/common/grouped_series.proto";
+import "com/coralogixapis/dashboards/v1/common/pagination.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
+import "com/coralogixapis/dashboards/v1/common/time_series.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+service ArchiveLogsDataSourceService {
+  rpc SearchArchiveLogsTimeSeries(SearchArchiveLogsTimeSeriesRequest) returns (SearchArchiveLogsTimeSeriesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs time series";
+    option (google.api.http) = {get: "/dashboards/archive-logs/time-series"};
+  }
+  rpc SearchArchiveLogsEvents(SearchArchiveLogsEventsRequest) returns (SearchArchiveLogsEventsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events";
+    option (google.api.http) = {get: "/dashboards/archive-logs/events"};
+  }
+  rpc SearchArchiveLogsEventsCount(SearchArchiveLogsEventsCountRequest) returns (SearchArchiveLogsEventsCountResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs events count";
+    option (google.api.http) = {get: "/dashboards/archive-logs/events/count"};
+  }
+  rpc SearchArchiveLogsEventGroups(SearchArchiveLogsEventGroupsRequest) returns (SearchArchiveLogsEventGroupsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs event groups";
+    option (google.api.http) = {get: "/dashboards/archive-logs/event-groups"};
+  }
+  rpc SearchArchiveGroupedLogsSeries(SearchArchiveGroupedLogsSeriesRequest) returns (SearchArchiveGroupedLogsSeriesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs series";
+    option (google.api.http) = {get: "/dashboards/archive-logs/grouped-series"};
+  }
+  rpc SearchArchiveGroupedLogsTimeSeries(SearchArchiveGroupedLogsTimeSeriesRequest) returns (SearchArchiveGroupedLogsTimeSeriesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive grouped logs time series";
+    option (google.api.http) = {get: "/dashboards/archive-logs/grouped-time-series"};
+  }
+  rpc SearchArchiveLogsGroupedValues(SearchArchiveLogsGroupedValuesRequest) returns (SearchArchiveLogsGroupedValuesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "search archive logs grouped values";
+    option (google.api.http) = {get: "/dashboards/archive-logs/grouped-values"};
+  }
+}
+
+message SearchArchiveLogsTimeSeriesRequest {
+  reserved 3, 4, 5, 6, 8;
+
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.Int32Value limit = 7;
+  google.protobuf.StringValue request_params_hash = 9;
+  common.SerializedDataprimeQuery query = 10;
+  common.DataprimeQuery query_raw = 11;
+  repeated google.protobuf.StringValue aggregation_keys = 12;
+}
+
+message SearchArchiveLogsTimeSeriesResponse {
+  repeated common.TimeSeries time_series = 1;
+  google.protobuf.Int64Value total = 2;
+  map<string, string> meta = 3;
+}
+
+message SearchArchiveLogsEventsRequest {
+  reserved 3, 4, 5, 10, 11, 12;
+
+  google.protobuf.StringValue widget_id = 1 [deprecated = true];
+  common.TimeFrame time_frame = 2;
+  v1.common.Pagination pagination = 6;
+  google.protobuf.StringValue request_params_hash = 7 [deprecated = true];
+  common.SerializedDataprimeQuery query = 8;
+  common.DataprimeQuery query_raw = 9;
+}
+
+message SearchArchiveLogsEventsResponse {
+  repeated ArchiveLogsEvent events = 1;
+  google.protobuf.Int32Value total_fetched = 2; // How many events were fetched before pagination applied.
+  map<string, string> meta = 3;
+}
+
+message SearchArchiveLogsEventsCountRequest {
+  google.protobuf.StringValue widget_id = 1 [deprecated = true];
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3 [deprecated = true];
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+}
+
+message SearchArchiveLogsEventsCountResponse {
+  google.protobuf.Int64Value count = 1;
+}
+
+message ArchiveLogsEvent {
+  google.protobuf.Timestamp timestamp = 1;
+  map<string, string> metadata = 2;
+  map<string, string> labels = 3;
+  google.protobuf.Struct user_data = 4;
+}
+
+message SearchArchiveLogsEventGroupsRequest {
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3;
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+  repeated google.protobuf.StringValue group_by_keys = 6;
+  repeated google.protobuf.StringValue aggregation_keys = 7;
+  v1.common.Pagination pagination = 8;
+}
+
+message SearchArchiveLogsEventGroupsResponse {
+  repeated common.MultiGroup groups = 1;
+  map<string, string> meta = 2;
+}
+
+message SearchArchiveGroupedLogsSeriesRequest {
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3;
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+  repeated google.protobuf.StringValue group_by_keys = 6; // Have to be ordered for correctly structured results.
+  google.protobuf.StringValue aggregation_key = 7;
+  repeated common.GroupLimit limits = 8;
+}
+
+message SearchArchiveGroupedLogsSeriesResponse {
+  repeated common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
+}
+
+// Assumes timestamp is aliased to `timestamp` in the results.
+message SearchArchiveGroupedLogsTimeSeriesRequest {
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3;
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+  repeated google.protobuf.StringValue group_by_keys = 6; // Expects up to 1 element for now, without `timestamp`.
+  google.protobuf.StringValue aggregation_key = 7;
+  repeated common.GroupLimit limits = 8;
+}
+
+message SearchArchiveGroupedLogsTimeSeriesResponse {
+  common.GroupedSeries series = 1;
+  map<string, string> meta = 2;
+}
+
+message SearchArchiveLogsGroupedValuesRequest {
+  google.protobuf.StringValue widget_id = 1;
+  common.TimeFrame time_frame = 2;
+  google.protobuf.StringValue request_params_hash = 3;
+  common.SerializedDataprimeQuery query = 4;
+  common.DataprimeQuery query_raw = 5;
+  repeated google.protobuf.StringValue group_by_keys = 6;
+  google.protobuf.StringValue aggregation_key = 7;
+  google.protobuf.Int32Value limit = 8;
+}
+
+message SearchArchiveLogsGroupedValuesResponse {
+  repeated common.Group groups = 1;
+  bool is_limit_exceeded = 2;
+  google.protobuf.Int64Value total = 3;
+  map<string, string> meta = 4;
+}

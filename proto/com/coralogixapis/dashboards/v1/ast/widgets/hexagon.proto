@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets;
+
+import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
+import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
+import "google/protobuf/wrappers.proto";
+
+message Hexagon {
+  Query query = 1;
+  google.protobuf.DoubleValue min = 2;
+  google.protobuf.DoubleValue max = 3;
+  common.Unit unit = 6;
+  repeated common.Threshold thresholds = 7;
+  common.DataModeType data_mode_type = 8;
+  google.protobuf.StringValue custom_unit = 10;
+  google.protobuf.Int32Value decimal = 11;
+  common.ThresholdType threshold_type = 12;
+  common.Legend legend = 13;
+  common.LegendBy legend_by = 14;
+
+  message Query {
+    oneof value {
+      MetricsQuery metrics = 1;
+      LogsQuery logs = 2;
+      SpansQuery spans = 3;
+      DataprimeQuery dataprime = 4;
+    }
+  }
+
+  message MetricsQuery {
+    common.PromQlQuery promql_query = 1;
+    repeated Filter.MetricsFilter filters = 2;
+    common.MetricsQueryEditorMode editor_mode = 3;
+    v1.common.TimeFrameSelect time_frame = 4;
+    common.Aggregation aggregation = 5;
+  }
+
+  message LogsQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.LogsAggregation logs_aggregation = 2;
+    repeated Filter.LogsFilter filters = 3;
+    repeated v1.common.ObservationField group_by = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
+  }
+
+  message SpansQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.SpansAggregation spans_aggregation = 2;
+    repeated Filter.SpansFilter filters = 3;
+    repeated v1.common.SpanField group_by = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
+  }
+
+  message DataprimeQuery {
+    v1.common.DataprimeQuery dataprime_query = 1;
+    repeated Filter.Source filters = 2;
+    v1.common.TimeFrameSelect time_frame = 3;
+  }
+}

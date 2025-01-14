@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+import "google/protobuf/wrappers.proto";
+
+message Legend {
+  google.protobuf.BoolValue is_visible = 1;
+  repeated LegendColumn columns = 2;
+  google.protobuf.BoolValue group_by_query = 3;
+  LegendPlacement placement = 4;
+
+  enum LegendColumn {
+    LEGEND_COLUMN_UNSPECIFIED = 0;
+    LEGEND_COLUMN_MIN = 1;
+    LEGEND_COLUMN_MAX = 2;
+    LEGEND_COLUMN_SUM = 3;
+    LEGEND_COLUMN_AVG = 4;
+    LEGEND_COLUMN_LAST = 5;
+    LEGEND_COLUMN_NAME = 6;
+  }
+
+  enum LegendPlacement {
+    LEGEND_PLACEMENT_UNSPECIFIED = 0;
+    LEGEND_PLACEMENT_AUTO = 1;
+    LEGEND_PLACEMENT_BOTTOM = 2;
+    LEGEND_PLACEMENT_SIDE = 3;
+    LEGEND_PLACEMENT_HIDDEN = 4;
+  }
+}
+
+enum LegendBy {
+  LEGEND_BY_UNSPECIFIED = 0;
+  LEGEND_BY_THRESHOLDS = 1;
+  LEGEND_BY_GROUPS = 2;
+}

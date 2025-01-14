@@ -143,7 +143,8 @@ impl From<&ApiKey> for metadata::CallProperties {
                 ),
                 (
                     HeaderName::from_static(SDK_VERSION_HEADER_NAME),
-                    HeaderValue::from_str(SDK_VERSION).unwrap(),
+                    HeaderValue::from_str(format!("coralogix-mgmt-sdk-{}", SDK_VERSION).as_str())
+                        .unwrap(),
                 ),
                 (
                     HeaderName::from_static(SDK_LANGUAGE_HEADER_NAME),

@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message Group {
+  FieldGroup field = 1;
+  google.protobuf.DoubleValue value = 2;
+  repeated Group groups = 3;
+}
+
+message MultiGroup {
+  repeated FieldGroup fields = 1;
+  repeated google.protobuf.DoubleValue values = 2;
+}
+
+message FieldGroup {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue value = 2;
+}

@@ -1,0 +1,135 @@
+syntax = "proto3";
+
+package com.coralogix.schemastore.v1;
+import "com/coralogix/schemastore/v1/common.proto";
+
+enum CreateNamedSchemaOnConflict {
+  CREATE_NAMED_SCHEMA_ON_CONFLICT_FAIL_UNSPECIFIED = 0;
+  CREATE_NAMED_SCHEMA_ON_CONFLICT_REPLACE = 1;
+}
+
+message NamedSchemaTemplateField {
+  repeated string path_array = 1;
+  DataType data_type = 2;
+  string logical_data_type = 3;
+}
+
+message NamedSchemaTemplateId {
+  NamedSchemaTemplateType template_type = 1;
+  string template_name = 2;
+}
+
+message NamedSchemaTemplate {
+  NamedSchemaTemplateId id = 1;
+  repeated NamedSchemaTemplateField fields = 2;
+}
+
+
+message NamedSchemaTemplateType {
+  oneof template_type {
+    GlobalNamedSchemaTemplate global_template = 1;
+    CompanyNamedSchemaTemplate company_template = 2;
+  }
+}
+
+message GlobalNamedSchemaTemplate {}
+
+message CompanyNamedSchemaTemplate {
+  uint32 company_id = 1;
+}
+
+message CreateNamedSchemaTemplateRequest {
+  NamedSchemaTemplate schema = 1;
+  CreateNamedSchemaOnConflict on_conflict = 2;
+}
+
+message CreateNamedSchemaTemplateResponse {
+  NamedSchemaTemplate schema = 1;
+}
+
+message GetNamedSchemaTemplateRequest {
+  NamedSchemaTemplateId id = 1;
+}
+
+message GetNamedSchemaTemplateResponse {
+  NamedSchemaTemplate schema = 1;
+}
+
+message ListNamedSchemaTemplatesRequest {
+  NamedSchemaTemplateType template_type = 1;
+  reserved 2;
+  uint32 limit = 3;
+}
+
+message ListNamedSchemaTemplatesResponse {
+  repeated string template_names  = 1;
+}
+
+message DeleteNamedSchemaTemplateRequest {
+  NamedSchemaTemplateId id = 1;
+}
+
+message DeleteNamedSchemaTemplateResponse {
+}
+
+// Company specific variants
+message CreateCompanyNamedSchemaTemplateRequest {
+  string schema_name = 1;
+  repeated NamedSchemaTemplateField fields = 2;
+  CreateNamedSchemaOnConflict on_conflict = 3;
+}
+
+message CreateCompanyNamedSchemaTemplateResponse {
+  NamedSchemaTemplate schema = 1;
+}
+
+message GetCompanyNamedSchemaTemplateRequest {
+  string schema_name = 1;
+}
+
+message GetCompanyNamedSchemaTemplateResponse {
+  NamedSchemaTemplate schema = 1;
+}
+
+message ListCompanyNamedSchemaTemplatesRequest {
+  uint32 limit = 1;
+}
+
+message ListCompanyNamedSchemaTemplatesResponse {
+  repeated string template_names  = 1;
+}
+
+message DeleteCompanyNamedSchemaTemplateRequest {
+  string schema_name = 1;
+}
+
+message DeleteCompanyNamedSchemaTemplateResponse {
+}
+
+message GetMergedNamedSchemaTemplateFieldsRequest {
+ repeated NamedSchemaTemplateId ids = 1;
+}
+
+message GetMergedNamedSchemaTemplateFieldsResponse {
+  repeated MergedNamedSchemaTemplateField fields = 1;
+}
+
+message MergedNamedSchemaTemplateField {
+  repeated string path_array = 1;
+  // One set of data types per occurance of the field in the templates
+  repeated NamedSchemaDataType data_types = 2;
+}
+
+message NamedSchemaDataType {
+  DataType data_type = 2;
+  string logical_data_type = 3;
+}
+
+
+message BatchGetNamedSchemaTemplateRequest {
+  repeated NamedSchemaTemplateId id = 1;
+}
+
+message BatchGetNamedSchemaTemplateResponse {
+  repeated NamedSchemaTemplate schema = 1;
+}

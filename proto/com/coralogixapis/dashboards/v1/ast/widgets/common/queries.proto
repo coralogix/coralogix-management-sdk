@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets.common;
+
+import "google/protobuf/wrappers.proto";
+
+message PromQlQuery {
+  google.protobuf.StringValue value = 1;
+}
+
+message LuceneQuery {
+  google.protobuf.StringValue value = 1;
+}
