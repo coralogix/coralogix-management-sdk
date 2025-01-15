@@ -125,7 +125,7 @@ async fn set_go_sdk_version(
             .lines()
             .find(|line| line.contains("vanillaSdkVersion ="))
             .unwrap(),
-        &format!("const vanillaSdkVersion = \"sdk-{}\"", &args.sdk_version),
+        &format!("const vanillaSdkVersion = \"{}\"", &args.sdk_version),
     ))
 }
 
