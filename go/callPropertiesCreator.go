@@ -115,6 +115,17 @@ func NewCallPropertiesCreatorTerraform(region string, authContext AuthContext, t
 	}
 }
 
+// NewCallPropertiesCreatorOperator creates a new CallPropertiesCreator object, specifying which version of the Operator Operator is being used.
+func NewCallPropertiesCreatorOperator(region string, authContext AuthContext, cxOperator string) *CallPropertiesCreator {
+	return &CallPropertiesCreator{
+		coraglogixRegion: region,
+		teamsLevelAPIKey: authContext.teamLevelAPIKey,
+		userLevelAPIKey:  authContext.userLevelAPIKey,
+		correlationID:    uuid.New().String(),
+		sdkVersion:       fmt.Sprint("cxo-", cxOperator),
+	}
+}
+
 // NewCallPropertiesCreatorCustomSdk creates a new CallPropertiesCreator object with a custom version.
 func NewCallPropertiesCreatorCustomSdk(region string, authContext AuthContext, customSdkVersion string) *CallPropertiesCreator {
 	return &CallPropertiesCreator{
