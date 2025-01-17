@@ -130,6 +130,18 @@ const (
 	ScheduleOperationMute        = scheduler.ScheduleOperation_SCHEDULE_OPERATION_MUTE
 )
 
+// FilterByAlertSchedulerRuleIDs is a filter for filters in the alert scheduler.
+type FilterByAlertSchedulerRuleIDs = scheduler.FilterByAlertSchedulerRuleIds
+
+// FilterByAlertSchedulerRuleIDsAlertSchedulerIDs is a variant of scheduler ids.
+type FilterByAlertSchedulerRuleIDsAlertSchedulerIDs = scheduler.FilterByAlertSchedulerRuleIds_AlertSchedulerIds
+
+// FilterByAlertSchedulerRuleIDsAlertSchedulerVersionIDs is a variant of scheduler ids.
+type FilterByAlertSchedulerRuleIDsAlertSchedulerVersionIDs = scheduler.FilterByAlertSchedulerRuleIds_AlertSchedulerVersionIds
+
+// ActiveTimeframe is a schedule operation.
+type ActiveTimeframe = scheduler.ActiveTimeframe
+
 // ScheduleOperation is a schedule operation.
 type ScheduleOperation = scheduler.ScheduleOperation
 
