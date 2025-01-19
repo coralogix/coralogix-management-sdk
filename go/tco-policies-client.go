@@ -74,24 +74,6 @@ type CreatePolicyRequest = tcopolicies.CreatePolicyRequest
 // CreateLogPolicyRequest is a request type.
 type CreateLogPolicyRequest = tcopolicies.CreateLogPolicyRequest
 
-// LogPolicySeverityValueLookup is a LogPolicy severity value lookup.
-var LogPolicySeverityValueLookup = tcopolicies.Severity_value
-
-// LogPolicySeverityNameLookup is a LogPolicy severity name lookup.
-var LogPolicySeverityNameLookup = tcopolicies.Severity_name
-
-// LogPolicyPriorityValueLookup is a LogPolicy priority value lookup.
-var LogPolicyPriorityValueLookup = tcopolicies.Priority_value
-
-// LogPolicyPriorityNameLookup is a LogPolicy priority name lookup.
-var LogPolicyPriorityNameLookup = tcopolicies.Priority_name
-
-// LogPolicyRuleTypeValueLookup is a LogPolicy rule type value lookup.
-var LogPolicyRuleTypeValueLookup = tcopolicies.RuleTypeId_value
-
-// LogPolicyRuleTypeNameLookup is a LogPolicy rule type name lookup.
-var LogPolicyRuleTypeNameLookup = tcopolicies.RuleTypeId_name
-
 // CreateGenericPolicyRequest is a request type.
 type CreateGenericPolicyRequest = tcopolicies.CreateGenericPolicyRequest
 
@@ -149,6 +131,24 @@ const (
 	TCOPolicyPriorityLow    = tcopolicies.Priority_PRIORITY_TYPE_LOW
 	TCOPolicyPriorityMedium = tcopolicies.Priority_PRIORITY_TYPE_MEDIUM
 )
+
+// TCOPolicySeverityValueLookup is a TCO Policy severity value lookup.
+var TCOPolicySeverityValueLookup = tcopolicies.Severity_value
+
+// TCOPolicySeverityNameLookup is a TCO Policy severity name lookup.
+var TCOPolicySeverityNameLookup = tcopolicies.Severity_name
+
+// TCOPolicyPriorityValueLookup is a TCO Policy priority value lookup.
+var TCOPolicyPriorityValueLookup = tcopolicies.Priority_value
+
+// TCOPolicyPriorityNameLookup is a TCO Policy priority name lookup.
+var TCOPolicyPriorityNameLookup = tcopolicies.Priority_name
+
+// TCOPolicyRuleTypeValueLookup is a TCO Policy rule type value lookup.
+var TCOPolicyRuleTypeValueLookup = tcopolicies.RuleTypeId_value
+
+// TCOPolicyRuleTypeNameLookup is a TCO Policy rule type name lookup.
+var TCOPolicyRuleTypeNameLookup = tcopolicies.RuleTypeId_name
 
 // RPC names.
 const (
