@@ -72,6 +72,9 @@ type Connector = connectores.Connector
 // ConnectorConfig represents a connector configuration.
 type ConnectorConfig = connectores.ConnectorConfig
 
+// EntityTypeConfigOverrides represents a connector configuration overrides.
+type EntityTypeConfigOverrides = connectores.EntityTypeConfigOverrides
+
 // ConnectorConfigField represents a connector configuration field.
 type ConnectorConfigField = commonv1.ConnectorConfigField
 
@@ -160,6 +163,12 @@ type ConditionTypeMatchEntityType = common.ConditionType_MatchEntityType
 
 // MatchEntityTypeCondition is a match entity type condition.
 type MatchEntityTypeCondition = common.MatchEntityTypeCondition
+
+// ConditionTypeMatchEntityTypeAndSubType is a match entity type and sub-type condition type.
+type ConditionTypeMatchEntityTypeAndSubType = common.ConditionType_MatchEntityTypeAndSubType
+
+// MatchEntityTypeAndSubTypeCondition is a match entity type and sub-type condition.
+type MatchEntityTypeAndSubTypeCondition = common.MatchEntityTypeAndSubTypeCondition
 
 // PresetType is a preset type.
 type PresetType = presets.PresetType
