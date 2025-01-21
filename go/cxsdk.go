@@ -222,10 +222,7 @@ func (c *ClientSet) Roles() *RolesClient {
 }
 
 // NewClientSet Creates a new ClientSet.
-func NewClientSet(targetURL, teamsLevelAPIKey string, userLevelAPIKey string) *ClientSet {
-	authContext := NewAuthContext(teamsLevelAPIKey, userLevelAPIKey)
-	apikeyCPC := NewCallPropertiesCreator(targetURL, authContext)
-
+func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
 		ruleGroups:          NewRuleGroupsClient(apikeyCPC),
 		recordingRuleGroups: NewRecordingRuleGroupSetsClient(apikeyCPC),
