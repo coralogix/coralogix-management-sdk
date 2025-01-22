@@ -274,31 +274,17 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 	switch regionIdentifier {
 	case "us1":
 		return GrpcUS1
-	case "usa1":
-		return GrpcUS1
 	case "us2":
-		return GrpcUS2
-	case "usa2":
 		return GrpcUS2
 	case "eu1":
 		return GrpcEU1
-	case "europe1":
-		return GrpcEU1
 	case "eu2":
-		return GrpcEU2
-	case "europe2":
 		return GrpcEU2
 	case "ap1":
 		return GrpcAP1
-	case "apac1":
-		return GrpcAP1
 	case "ap2":
 		return GrpcAP2
-	case "apac2":
-		return GrpcAP2
 	case "ap3":
-		return GrpcAP3
-	case "apac3":
 		return GrpcAP3
 	default:
 		return fmt.Sprintf("ng-api-grpc.%s:443", regionIdentifier)
@@ -310,31 +296,17 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 	switch regionIdentifier {
 	case "us1":
 		return RestUS1
-	case "usa1":
-		return RestUS1
 	case "us2":
-		return RestUS2
-	case "usa2":
 		return RestUS2
 	case "eu1":
 		return RestEU1
-	case "europe1":
-		return RestEU1
 	case "eu2":
-		return RestEU2
-	case "europe2":
 		return RestEU2
 	case "ap1":
 		return RestAP1
-	case "apac1":
-		return RestAP1
 	case "ap2":
 		return RestAP2
-	case "apac2":
-		return RestAP2
 	case "ap3":
-		return RestAP3
-	case "apac3":
 		return RestAP3
 	default:
 		return fmt.Sprintf("https://ng-api-http.%s", regionIdentifier)

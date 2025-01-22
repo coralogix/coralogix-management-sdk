@@ -116,19 +116,12 @@ impl FromStr for CoralogixRegion {
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         match s.to_lowercase().as_str() {
             "us1" => Ok(CoralogixRegion::US1),
-            "usa1" => Ok(CoralogixRegion::US1),
             "us2" => Ok(CoralogixRegion::US2),
-            "usa2" => Ok(CoralogixRegion::US2),
             "eu1" => Ok(CoralogixRegion::EU1),
-            "europe1" => Ok(CoralogixRegion::EU1),
             "eu2" => Ok(CoralogixRegion::EU2),
-            "europe2" => Ok(CoralogixRegion::EU2),
             "ap1" => Ok(CoralogixRegion::AP1),
-            "apac1" => Ok(CoralogixRegion::AP1),
             "ap2" => Ok(CoralogixRegion::AP2),
-            "apac2" => Ok(CoralogixRegion::AP2),
             "ap3" => Ok(CoralogixRegion::AP3),
-            "apac3" => Ok(CoralogixRegion::AP3),
             custom => Ok(CoralogixRegion::Custom(custom.to_string())),
         }
     }
