@@ -84,7 +84,7 @@ impl CoralogixRegion {
             CoralogixRegion::AP1 => "https://ng-api-grpc.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-grpc.coralogixsg.com".into(),
             CoralogixRegion::AP3 => "https://ng-api-grpc.ap3.coralogix.com".into(),
-            CoralogixRegion::Custom(custom) => format!("https://{}", custom),
+            CoralogixRegion::Custom(custom) => format!("https://ng-api-grpc.{}:443", custom),
         }
     }
 
@@ -99,9 +99,7 @@ impl CoralogixRegion {
             CoralogixRegion::AP1 => "https://ng-api-http.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-http.coralogixsg.com".into(),
             CoralogixRegion::AP3 => "https://ng-api-http.ap3.coralogix.com".into(),
-            CoralogixRegion::Custom(custom) => {
-                format!("https://{}", custom.replace("grpc", "http"))
-            }
+            CoralogixRegion::Custom(custom) => format!("https://ng-api-http.{}", custom),
         }
     }
 
