@@ -287,12 +287,13 @@ func CoralogixGrpcEndpointFromRegion(regionIdentifier string) string {
 	case "ap3":
 		return GrpcAP3
 	default:
-		return fmt.Sprintf("ng-api-grpc.%s:443", regionIdentifier)
+		return regionIdentifier
 	}
 }
 
 // CoralogixRestEndpointFromRegion reads the Coralogix REST endpoint from environment variables.
 func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
+
 	switch regionIdentifier {
 	case "us1":
 		return RestUS1
@@ -309,7 +310,7 @@ func CoralogixRestEndpointFromRegion(regionIdentifier string) string {
 	case "ap3":
 		return RestAP3
 	default:
-		return fmt.Sprintf("https://ng-api-http.%s", regionIdentifier)
+		return regionIdentifier
 	}
 }
 
