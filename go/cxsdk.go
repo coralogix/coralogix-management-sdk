@@ -105,6 +105,7 @@ type ClientSet struct {
 	saml                *SamlClient
 	dataUsage           *DataUsageClient
 	roles               *RolesClient
+	integrations        *IntegrationsClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -221,6 +222,11 @@ func (c *ClientSet) Roles() *RolesClient {
 	return c.roles
 }
 
+// Integrations gets an IntegrationsClient from the ClientSet.
+func (c *ClientSet) Integrations() *IntegrationsClient {
+	return c.integrations
+}
+
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
@@ -243,10 +249,11 @@ func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 		scopes:              NewScopesClient(apikeyCPC),
 		roles:               NewRolesClient(apikeyCPC),
 		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
-		apiKeys: NewAPIKeysClient(apikeyCPC),
-		groups:  NewGroupsClient(apikeyCPC),
-		saml:    NewSamlClient(apikeyCPC),
-		users:   NewUsersClient(apikeyCPC),
+		apiKeys:      NewAPIKeysClient(apikeyCPC),
+		groups:       NewGroupsClient(apikeyCPC),
+		saml:         NewSamlClient(apikeyCPC),
+		users:        NewUsersClient(apikeyCPC),
+		integrations: NewIntegrationsClient(apikeyCPC),
 	}
 }
 
