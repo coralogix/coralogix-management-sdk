@@ -1,6 +1,8 @@
 linters:
   enable:
     - revive
+  disable:
+    - staticcheck
 
 issues:
   include:

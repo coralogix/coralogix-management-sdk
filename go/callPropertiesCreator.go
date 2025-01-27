@@ -83,7 +83,8 @@ func createCallOptions() []grpc.CallOption {
 }
 
 func createSecureConnection(targetURL string) (*grpc.ClientConn, error) {
-	return grpc.NewClient(targetURL,
+	// We cannot use grpc.NewClient because it doesn't work behind a proxy: https://github.com/grpc/grpc-go/releases/tag/v1.69.0
+	return grpc.Dial(targetURL,
 		grpc.WithTransportCredentials(credentials.NewTLS(&tls.Config{})))
 }
 
