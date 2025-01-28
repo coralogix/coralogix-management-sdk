@@ -58,6 +58,16 @@ type Dashboard = dashboards.Dashboard
 // RowStyle is a style for a row.
 type RowStyle = dashboards.RowStyle
 
+// PromQlQueryType is a type for promql query.
+type PromQLQueryType = dashboards.PromQLQueryType
+
+// PromQlQueryType values.
+const (
+	PromQLQueryTypeInstant     = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_INSTANT
+	PromQLQueryTypeRange       = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_RANGE
+	PromQLQueryTypeUnspecified = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_UNSPECIFIED
+)
+
 // RowStyle values.
 const (
 	RowStyleOneLine     = dashboards.RowStyle_ROW_STYLE_ONE_LINE
