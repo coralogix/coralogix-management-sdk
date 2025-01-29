@@ -680,7 +680,11 @@ type DashboardFilterNotEqualsSelectionList = dashboards.Filter_NotEquals_Selecti
 type DashboardFilterNotEqualsSelectionListSelection = dashboards.Filter_NotEquals_Selection_ListSelection
 
 // DashboardPromQlQuery is a promQL query.
+// Deprecated: Use DashboardPromQLQuery (upper case 'L') instead.
 type DashboardPromQlQuery = dashboards.PromQlQuery
+
+// DashboardPromQLQuery is a promQL query.
+type DashboardPromQLQuery = dashboards.PromQlQuery
 
 // DashboardLuceneQuery is a lucene query.
 type DashboardLuceneQuery = dashboards.LuceneQuery
@@ -1154,16 +1158,6 @@ const (
 	ThresholdTypeUnspecified = dashboards.ThresholdType_THRESHOLD_TYPE_UNSPECIFIED
 	ThresholdTypeAbsolute    = dashboards.ThresholdType_THRESHOLD_TYPE_ABSOLUTE
 	ThresholdTypeRelative    = dashboards.ThresholdType_THRESHOLD_TYPE_RELATIVE
-)
-
-// PromQlQueryType is a legend configuration option.
-type PromQlQueryType = dashboards.PromQLQueryType
-
-// PromQlQueryType values.
-const (
-	PromQlQueryTypeUnspecified = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_UNSPECIFIED
-	PromQlQueryTypeRange       = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_RANGE
-	PromQlQueryTypeInstant     = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_INSTANT
 )
 
 const dashboardsFeatureGroupID = "dashboards"
