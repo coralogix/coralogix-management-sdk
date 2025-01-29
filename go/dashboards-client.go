@@ -495,6 +495,9 @@ type WidgetDefinitionPieChart = dashboards.Widget_Definition_PieChart
 // WidgetDefinitionBarChart is a widget definition.
 type WidgetDefinitionBarChart = dashboards.Widget_Definition_BarChart
 
+// WidgetDefinitionHexagon is a widget definition for hexagons.
+type WidgetDefinitionHexagon = dashboards.Widget_Definition_Hexagon
+
 // Markdown is a widget definition inner type.
 type Markdown = dashboards.Markdown
 
@@ -518,6 +521,9 @@ type BarChart = dashboards.BarChart
 
 // WidgetDefinition is a widget definition.
 type WidgetDefinition = dashboards.Widget_Definition
+
+// Hexagon is a widget definition inner type.
+type Hexagon = dashboards.Hexagon
 
 // DashboardRow is a row in a dashboard.
 type DashboardRow = dashboards.Row
@@ -798,18 +804,6 @@ type AnnotationMetricsSourceStartTimeMetric = dashboards.Annotation_MetricsSourc
 
 // AnnotationMetricsSourceStrategyStartTimeMetric is an annotation variant.
 type AnnotationMetricsSourceStrategyStartTimeMetric = dashboards.Annotation_MetricsSource_Strategy_StartTimeMetric
-
-// AnnotationMetricsSourceStrategyRange is an annotation variant.
-// type AnnotationMetricsSourceStrategyRange = dashboards.Annotation_MetricsSource_Strategy_Range_
-
-// // AnnotationMetricsSourceStrategyRangeInner is an annotation variant.
-// type AnnotationMetricsSourceStrategyRangeInner = dashboards.Annotation_MetricsSource_Strategy_Range
-
-// // AnnotationMetricsSourceStrategyInstant is an annotation variant.
-// type AnnotationMetricsSourceStrategyInstant = dashboards.Annotation_MetricsSource_Strategy_Instant_
-
-// // AnnotationMetricsSourceStrategyInstantInner is an annotation variant.
-// type AnnotationMetricsSourceStrategyInstantInner = dashboards.Annotation_MetricsSource_Strategy_Instant
 
 // DashboardLayout is a dashboard layout type.
 type DashboardLayout = dashboards.Layout
@@ -1108,6 +1102,69 @@ type DashboardTimeFrame = dashboards.TimeFrame
 
 // DashboardOrderingField is a type for dashboard charts.
 type DashboardOrderingField = dashboards.OrderingField
+
+// LegendBy is a legend configuration option.
+type LegendBy = dashboards.LegendBy
+
+// LegendBy values.
+const (
+	LegendByUnspecified = dashboards.LegendBy_LEGEND_BY_UNSPECIFIED
+	LegendByThresholds  = dashboards.LegendBy_LEGEND_BY_THRESHOLDS
+	LegendByGroups      = dashboards.LegendBy_LEGEND_BY_GROUPS
+)
+
+// HexagonQuery is a query class for hexagons.
+type HexagonQuery = dashboards.Hexagon_Query
+
+// HexagonDataprimeQuery is a dataprime query for hexagon widgets.
+type HexagonDataprimeQuery = dashboards.Hexagon_DataprimeQuery
+
+// HexagonQueryDataprime is a dataprime query for hexagon widgets.
+type HexagonQueryDataprime = dashboards.Hexagon_Query_Dataprime
+
+// HexagonLogsQuery is a logs query for hexagon widgets.
+type HexagonLogsQuery = dashboards.Hexagon_LogsQuery
+
+// HexagonQueryLogs is a logs query for hexagon widgets.
+type HexagonQueryLogs = dashboards.Hexagon_Query_Logs
+
+// HexagonMetricsQuery is a metrics query for hexagon widgets.
+type HexagonMetricsQuery = dashboards.Hexagon_MetricsQuery
+
+// HexagonQueryMetrics is a metrics query for hexagon widgets.
+type HexagonQueryMetrics = dashboards.Hexagon_Query_Metrics
+
+// HexagonSpansQuery is a spans query for hexagon widgets.
+type HexagonSpansQuery = dashboards.Hexagon_SpansQuery
+
+// HexagonQuerySpans is a spans query for hexagon widgets.
+type HexagonQuerySpans = dashboards.Hexagon_Query_Spans
+
+// HexagonSpansQueryGrouping is a spans query grouping for hexagon widgets.
+type HexagonSpansQueryGrouping = dashboards.Hexagon_SpansQuery
+
+// Threshold is a hexagon threshold configuration option.
+type Threshold = dashboards.Threshold
+
+// ThresholdType is a legend configuration option.
+type ThresholdType = dashboards.ThresholdType
+
+// ThresholdType values.
+const (
+	ThresholdTypeUnspecified = dashboards.ThresholdType_THRESHOLD_TYPE_UNSPECIFIED
+	ThresholdTypeAbsolute    = dashboards.ThresholdType_THRESHOLD_TYPE_ABSOLUTE
+	ThresholdTypeRelative    = dashboards.ThresholdType_THRESHOLD_TYPE_RELATIVE
+)
+
+// PromQlQueryType is a legend configuration option.
+type PromQlQueryType = dashboards.PromQLQueryType
+
+// PromQlQueryType values.
+const (
+	PromQlQueryTypeUnspecified = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_UNSPECIFIED
+	PromQlQueryTypeRange       = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_RANGE
+	PromQlQueryTypeInstant     = dashboards.PromQLQueryType_PROM_QL_QUERY_TYPE_INSTANT
+)
 
 const dashboardsFeatureGroupID = "dashboards"
 
