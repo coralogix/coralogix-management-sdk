@@ -5,61 +5,80 @@ package com.coralogixapis.notification_center.notifications.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/config_overrides.proto";
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
-import "com/coralogixapis/notification_center/common/rpc_common.proto";
 import "com/coralogixapis/notification_center/notifications/v1/testing.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 // Public API for testing Notification Center configurations including connectors, presets, and templates.
 service TestingService {
   rpc TestConnectorConfig(TestConnectorConfigRequest) returns (TestConnectorConfigResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testConnectorConfiguration"
+      post: "/v1/notification-center/notifications/testing:testConnectorConfiguration"
       body: "*"
     };
   }
 
   rpc TestExistingConnector(TestExistingConnectorRequest) returns (TestExistingConnectorResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testExistingConnector"
+      post: "/v1/notification-center/notifications/testing:testExistingConnector"
       body: "*"
     };
   }
 
   rpc TestPresetConfig(TestPresetConfigRequest) returns (TestPresetConfigResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testPresetConfiguration"
+      post: "/v1/notification-center/notifications/testing:testPresetConfiguration"
       body: "*"
     };
   }
 
   rpc TestExistingPreset(TestExistingPresetRequest) returns (TestExistingPresetResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testExistingPreset"
+      post: "/v1/notification-center/notifications/testing:testExistingPreset"
       body: "*"
     };
   }
 
   rpc TestDestination(TestDestinationRequest) returns (TestDestinationResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testDestination"
+      post: "/v1/notification-center/notifications/testing:testDestination"
       body: "*"
     };
   }
 
   rpc TestTemplateRender(TestTemplateRenderRequest) returns (TestTemplateRenderResponse) {
     option (google.api.http) = {
-      post: "v1/notification-center/notifications/testing:testTemplateRender"
+      post: "/v1/notification-center/notifications/testing:testTemplateRender"
+      body: "*"
+    };
+  }
+
+  rpc TestRoutingConditionValid(TestRoutingConditionValidRequest) returns (TestRoutingConditionValidResponse) {
+    option (google.api.http) = {
+      post: "/v1/notification-center/notifications/testing:testRoutingConditionValid"
       body: "*"
     };
   }
 }
 
 message TestConnectorConfigRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test Connector Config Request"
+      description: "Request to test a connector configuration"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   ConnectorType type = 1;
-  string output_schema_id = 2;
+  string output_schema_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
   repeated ConnectorConfigField fields = 3;
-  optional string entity_type = 4;
+  optional string entity_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
 }
 
 message TestConnectorConfigResponse {
@@ -67,18 +86,18 @@ message TestConnectorConfigResponse {
 }
 
 message TestExistingConnectorRequest {
-  string connector_id = 1;
-  string output_schema_id = 2;
+  string connector_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string output_schema_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
 }
 message TestExistingConnectorResponse {
   TestResult result = 1;
 }
 
 message TestPresetConfigRequest {
-  string entity_type = 1;
-  optional string entity_sub_type = 2;
-  string connector_id = 3;
-  string preset_id = 6;
+  string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"metric\"" }];
+  string connector_id = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string preset_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
   repeated ConfigOverrides config_overrides = 7;
 }
 message TestPresetConfigResponse {
@@ -86,21 +105,21 @@ message TestPresetConfigResponse {
 }
 
 message TestExistingPresetRequest {
-  string entity_type = 1;
-  optional string entity_sub_type = 2;
-  string preset_id = 3;
-  string connector_id = 4;
+  string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
+  string preset_id = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string connector_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
 }
 message TestExistingPresetResponse {
   TestResult result = 1;
 }
 
 message TestDestinationRequest {
-  string entity_type = 1;
-  optional string entity_sub_type = 2;
-  string connector_id = 3;
-  string preset_id = 4;
-  string output_schema_id = 5;
+  string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
+  string connector_id = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string preset_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string output_schema_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
   repeated ConnectorConfigField connector_config_fields = 6;
   repeated MessageConfigField message_config_fields = 7;
 }
@@ -109,17 +128,17 @@ message TestDestinationResponse {
 }
 
 message TestTemplateRenderRequest {
-  string entity_type = 1;
-  optional string entity_sub_type = 2;
-  string template = 3;
+  string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
+  string template = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"{{ alertDef.name }}\"" }];
 }
 
 message TestTemplateRenderResult {
   message Success {
-    string rendered_value = 1;
+    string rendered_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Rendered template result\"" }];
   }
   message Failure {
-    string message = 1;
+    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Template rendering failed\"" }];
     FailureReason reason = 2;
   }
 
@@ -138,4 +157,46 @@ message TestTemplateRenderResult {
 }
 message TestTemplateRenderResponse {
   TestTemplateRenderResult result = 1;
+}
+
+message TestRoutingConditionValidRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test Routing Condition Valid Request"
+      description: "Request to check that provided routing condition is valid"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+  string template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alertDef.priority == 'P1'\"" }];
+}
+message TestRoutingConditionValidResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test Routing Condition Valid Response"
+      description: "Response which specifies condition evaluation result or error"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
+  oneof result {
+    Success success = 1;
+    Failure failure = 2;
+  }
+
+  message Success {
+    bool result = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }]; 
+  }
+
+  message Failure {
+    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Invalid condition: condition should be rendered to a boolean value (true or false)\"" }]; 
+  }
 }

@@ -5,6 +5,7 @@ package com.coralogixapis.notification_center.presets.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/presets/v1/preset.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 // Public API that allows retrieving available presets and managing custom presets.
 service PresetsService {
@@ -32,6 +33,14 @@ service PresetsService {
   rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
     option (google.api.http) = {
       post: "/v1/notification-center/presets/custom/{id}:defaultSet"
+      body: "id"
+    };
+    option deprecated = true;
+  }
+
+  rpc SetPresetAsDefault(SetPresetAsDefaultRequest) returns (SetPresetAsDefaultResponse) {
+    option (google.api.http) = {
+      post: "/v1/notification-center/presets/{id}:defaultSet"
       body: "id"
     };
   }
@@ -68,10 +77,32 @@ service PresetsService {
 }
 
 message CreateCustomPresetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Custom Preset Request"
+      description: "Request to create a new custom preset"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   Preset preset = 1;
 }
 
 message CreateCustomPresetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Custom Preset Response"
+      description: "Response containing the created custom preset"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   Preset preset = 1;
 }
 
@@ -113,6 +144,13 @@ message SetCustomPresetAsDefaultRequest {
 message SetCustomPresetAsDefaultResponse {
 }
 
+message SetPresetAsDefaultRequest {
+  PresetIdentifier identifier = 1;
+}
+
+message SetPresetAsDefaultResponse {
+}
+
 message GetPresetRequest {
   // removed deprecated_id
   reserved 1;
@@ -131,7 +169,7 @@ message GetPresetResponse {
 
 message ListPresetSummariesRequest {
   ConnectorType connector_type = 1;
-  string entity_type = 2;
+  string entity_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
   repeated OrderBy order_bys = 3;
 }
 
@@ -150,7 +188,7 @@ message BatchGetPresetsResponse {
 
 message GetDefaultPresetSummaryRequest {
   ConnectorType connector_type = 1;
-  string entity_type = 2;
+  string entity_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
 }
 
 message GetDefaultPresetSummaryResponse {
@@ -159,7 +197,7 @@ message GetDefaultPresetSummaryResponse {
 
 message GetSystemDefaultPresetSummaryRequest {
   ConnectorType connector_type = 1;
-  string entity_type = 2;
+  string entity_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
 }
 
 message GetSystemDefaultPresetSummaryResponse {

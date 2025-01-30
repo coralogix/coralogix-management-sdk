@@ -24,9 +24,10 @@ message TestNotification {
   uint32 team_id = 2;
   string connector_id = 3;
   string output_schema_id = 4;
-  google.protobuf.Struct entity_data = 5;
+  optional google.protobuf.Struct deprecated_entity_data = 5 [deprecated = true];
   repeated ConnectorConfigField connector_config = 6;
   repeated MessageConfigField message_config = 7;
   repeated NotificationOperation available_operations = 8;
   repeated NotificationAttachment attachments = 9;
+  string entity_data = 10;
 }
