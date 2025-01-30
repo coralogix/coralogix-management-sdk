@@ -290,5 +290,9 @@ fn notifications_service(root: &str) -> Vec<String> {
             "{}/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
             root
         ),
+        format!(
+            "{}/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
+            root
+        ),
     ]
 }

@@ -23,7 +23,6 @@ import (
 )
 
 func TestConnectors(t *testing.T) {
-	t.Skip("Connectors are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -73,7 +72,6 @@ func TestConnectors(t *testing.T) {
 }
 
 func TestPresets(t *testing.T) {
-	t.Skip("Presets are not supported in the current version of the SDK")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -82,7 +80,7 @@ func TestPresets(t *testing.T) {
 
 	c := cxsdk.NewNotificationsClient(creator)
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee"
+	parentUserFacingId := "preset_system_generic_https_alerts_empty"
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: &cxsdk.Preset{
 			Name:        "TestPreset",
@@ -90,7 +88,7 @@ func TestPresets(t *testing.T) {
 			PresetType:  &presetType,
 			EntityType:  "alerts",
 			Parent: &cxsdk.Preset{
-				Id: &parentId,
+				UserFacingId: &parentUserFacingId,
 			},
 			ConnectorType: cxsdk.ConnectorTypeGenericHTTPS,
 			ConfigOverrides: []*cxsdk.ConfigOverrides{
@@ -127,7 +125,7 @@ func TestPresets(t *testing.T) {
 	preset, err := c.GetPreset(context.Background(), &cxsdk.GetPresetRequest{
 		Identifier: &cxsdk.PresetIdentifier{
 			Value: &cxsdk.PresetIdentifierIDValue{
-				UserFacingId: *presetId,
+				Id: *presetId,
 			},
 		},
 	})
@@ -140,11 +138,58 @@ func TestPresets(t *testing.T) {
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
 		Identifier: &cxsdk.PresetIdentifier{
 			Value: &cxsdk.PresetIdentifierIDValue{
-				UserFacingId: *presetId,
+				Id: *presetId,
 			},
 		},
 	})
 
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestGlobalRouter(t *testing.T) {
+	t.Skip("Global Router API is still unstable")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assert.Nil(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assert.Nil(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+
+	c := cxsdk.NewNotificationsClient(creator)
+
+	createRes, err := c.CreateGlobalRouter(context.Background(), &cxsdk.CreateGlobalRouterRequest{
+		Router: &cxsdk.GlobalRouter{
+			Name:        "TestGlobalRouter",
+			EntityType:  "alerts",
+			Description: "This is a test Global Router.",
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	routerId := createRes.Router.Id
+	router, err := c.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
+		Identifier: &cxsdk.GlobalRouterIdentifier{
+			Value: &cxsdk.GlobalRouterIdentifierIDValue{
+				Id: *routerId,
+			},
+		},
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	assert.Equal(t, router.Router.Name, "TestGlobalRouter")
+
+	_, err = c.DeleteGlobalRouter(context.Background(), &cxsdk.DeleteGlobalRouterRequest{
+		Identifier: &cxsdk.GlobalRouterIdentifier{
+			Value: &cxsdk.GlobalRouterIdentifierIDValue{
+				Id: *routerId,
+			},
+		},
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

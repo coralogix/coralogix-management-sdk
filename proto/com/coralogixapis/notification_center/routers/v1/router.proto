@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.routers.v1;
+import "com/coralogixapis/notification_center/common/v1/routing.proto";
+import "google/protobuf/timestamp.proto";
+
+// The private router allows notification destinations and routing rules
+// to be specified as part of the notification request.
+message PrivateRouter {
+  string router_key = 1;
+  repeated routing.RoutingRule rules = 2;
+  repeated routing.RoutingTarget fallback = 3;
+}
+
+// The global router contains a pre-configured list of routing rules
+// and can be specified as a part of the notification request.
+message GlobalRouter {
+  optional string id = 1;
+  optional string user_facing_id = 2;
+  string entity_type = 3;
+  string name = 4;
+  string description = 5;
+  repeated routing.RoutingRule rules = 6;
+  repeated routing.RoutingTarget fallback = 7;
+  optional google.protobuf.Timestamp create_time = 8;
+  optional google.protobuf.Timestamp update_time = 9;
+  map<string, string> entity_labels = 10;
+}

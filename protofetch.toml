@@ -131,7 +131,8 @@ allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.4.2"
+revision = "v0.5.0"
+content_roots = ["/src"]
 allow_policies = [
     "/com/coralogixapis/notification_center/common/*",
     "/com/coralogixapis/notification_center/connectors/v1/connector.proto",
@@ -142,6 +143,8 @@ allow_policies = [
     "/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
     "/com/coralogixapis/notification_center/presets/v1/preset.proto",
     "/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
+    "/com/coralogixapis/notification_center/routers/v1/router.proto",
+    "/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
 ]
 
 [google-api]

@@ -61,10 +61,25 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         PresetIdentifier,
         ReplaceCustomPresetRequest,
         ReplaceCustomPresetResponse,
-        SetCustomPresetAsDefaultRequest,
-        SetCustomPresetAsDefaultResponse,
+        SetPresetAsDefaultRequest,
+        SetPresetAsDefaultResponse,
         preset_identifier,
         presets_service_client::PresetsServiceClient,
+    },
+    routers::v1::{
+        BatchGetGlobalRoutersRequest,
+        BatchGetGlobalRoutersResponse,
+        CreateGlobalRouterRequest,
+        CreateGlobalRouterResponse,
+        DeleteGlobalRouterRequest,
+        DeleteGlobalRouterResponse,
+        GetGlobalRouterRequest,
+        GetGlobalRouterResponse,
+        ListGlobalRoutersRequest,
+        ListGlobalRoutersResponse,
+        ReplaceGlobalRouterRequest,
+        ReplaceGlobalRouterResponse,
+        global_routers_service_client::GlobalRoutersServiceClient,
     },
 };
 
@@ -83,6 +98,11 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
         ConnectorConfig,
     },
     presets::v1::Preset,
+    routers::v1::GlobalRouter,
+    routing::{
+        GlobalRouterIdentifier,
+        global_router_identifier,
+    },
 };
 
 use tokio::sync::Mutex;
@@ -134,6 +154,7 @@ pub struct NotificationsClient {
     metadata_map: MetadataMap,
     connectors_client: Mutex<ConnectorsServiceClient<Channel>>,
     presets_client: Mutex<PresetsServiceClient<Channel>>,
+    global_routers_client: Mutex<GlobalRoutersServiceClient<Channel>>,
     testing_client: Mutex<TestingServiceClient<Channel>>,
 }
 
@@ -151,6 +172,7 @@ impl NotificationsClient {
             metadata_map: request_metadata.to_metadata_map(),
             connectors_client: Mutex::new(ConnectorsServiceClient::new(channel.clone())),
             presets_client: Mutex::new(PresetsServiceClient::new(channel.clone())),
+            global_routers_client: Mutex::new(GlobalRoutersServiceClient::new(channel.clone())),
             testing_client: Mutex::new(TestingServiceClient::new(channel)),
         })
     }
@@ -437,39 +459,37 @@ impl NotificationsClient {
         }
     }
 
-    /// Set a custom preset as the default.
+    /// Set a preset as the default.
     /// # Arguments
-    /// * `preset_id` - The ID of the preset to set as the default.
-    pub async fn set_custom_preset_as_default(
+    /// * `preset_user_facing_id` - The user-facing ID of the preset to set as the default.
+    pub async fn set_preset_as_default(
         &self,
         preset_user_facing_id: String,
-    ) -> Result<SetCustomPresetAsDefaultResponse> {
+    ) -> Result<SetPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
-            SetCustomPresetAsDefaultRequest {
+            SetPresetAsDefaultRequest {
                 identifier: Some(PresetIdentifier {
                     value: Some(preset_identifier::Value::UserFacingId(
                         preset_user_facing_id,
                     )),
                 }),
-                deprecated_identifier: None,
             },
             &self.metadata_map,
         );
-        {
-            let mut client = self.presets_client.lock().await.clone();
 
-            client
-                .set_custom_preset_as_default(request)
-                .await
-                .map(|r| r.into_inner())
-                .map_err(
-                    |status| SdkError::ApiError(SdkApiError {
-                        status,
-                        endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/SetCustomPresetAsDefault".into(),
-                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
-                    },
-                ))
-        }
+        let mut client = self.presets_client.lock().await.clone();
+
+        client
+            .set_preset_as_default(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint: "/com.coralogixapis.notification_center.presets.v1.PresetsService/SetPresetAsDefault".into(),
+                    feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+                })
+            })
     }
 
     /// Get a preset by ID.
@@ -632,6 +652,162 @@ impl NotificationsClient {
                     },
                 ))
         }
+    }
+
+    /// Create a new global router.
+    /// # Arguments
+    /// * `global_router` - The [`GlobalRouter`] to create.
+    pub async fn create_global_router(
+        &self,
+        global_router: GlobalRouter,
+    ) -> Result<CreateGlobalRouterResponse> {
+        let request = make_request_with_metadata(
+            CreateGlobalRouterRequest {
+                router: Some(global_router),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .create_global_router(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/CreateGlobalRouter".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// Replace an existing global router.
+    /// # Arguments
+    /// * `global_router` - The [`GlobalRouter`] to replace.
+    pub async fn replace_global_router(
+        &self,
+        global_router: GlobalRouter,
+    ) -> Result<ReplaceGlobalRouterResponse> {
+        let request = make_request_with_metadata(
+            ReplaceGlobalRouterRequest {
+                router: Some(global_router),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .replace_global_router(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/ReplaceGlobalRouter".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// Delete a global router by identifier.
+    /// # Arguments
+    /// * `global_router_identifier` - The identifier of the global router to delete.
+    pub async fn delete_global_router(
+        &self,
+        global_router_identifier: GlobalRouterIdentifier,
+    ) -> Result<DeleteGlobalRouterResponse> {
+        let request = make_request_with_metadata(
+            DeleteGlobalRouterRequest {
+                identifier: Some(global_router_identifier),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .delete_global_router(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/DeleteGlobalRouter".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// Get a global router by identifier.
+    /// # Arguments
+    /// * `global_router_identifier` - The identifier of the global router to get.
+    pub async fn get_global_router(
+        &self,
+        global_router_identifier: GlobalRouterIdentifier,
+    ) -> Result<GetGlobalRouterResponse> {
+        let request = make_request_with_metadata(
+            GetGlobalRouterRequest {
+                identifier: Some(global_router_identifier),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .get_global_router(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/GetGlobalRouter".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// List all global routers.
+    /// # Arguments
+    /// * `entity_type` - The entity type to filter global routers by.
+    pub async fn list_global_routers(
+        &self,
+        entity_type: String,
+    ) -> Result<ListGlobalRoutersResponse> {
+        let request = make_request_with_metadata(
+            ListGlobalRoutersRequest {
+                entity_type: Some(entity_type),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .list_global_routers(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/ListGlobalRouters".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// Batch get global routers by identifiers.
+    /// # Arguments
+    /// * `global_router_identifiers` - The identifiers of the global routers to retrieve.
+    pub async fn batch_get_global_routers(
+        &self,
+        global_router_identifiers: Vec<GlobalRouterIdentifier>,
+    ) -> Result<BatchGetGlobalRoutersResponse> {
+        let request = make_request_with_metadata(
+            BatchGetGlobalRoutersRequest {
+                ids: global_router_identifiers,
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .batch_get_global_routers(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/BatchGetGlobalRouters".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
     }
 
     /// Test a connector configuration.

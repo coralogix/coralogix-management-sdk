@@ -25,12 +25,15 @@ mod tests {
             ConnectorConfig,
             ConnectorConfigField,
             ConnectorType,
+            GlobalRouter,
+            GlobalRouterIdentifier,
             MatchEntityTypeCondition,
             MessageConfig,
             MessageConfigField,
             NotificationsClient,
             Preset,
             condition_type,
+            global_router_identifier,
         },
     };
 
@@ -94,7 +97,25 @@ mod tests {
             id: None,
             user_facing_id: None,
             update_time: None,
-            parent: None,
+            parent: Some(Box::new(Preset {
+                user_facing_id: Some("preset_system_generic_https_alerts_empty".to_string()),
+                ..Default::default()
+            })),
+        }
+    }
+
+    fn create_test_global_router() -> GlobalRouter {
+        GlobalRouter {
+            name: "TestGlobalRouter".to_string(),
+            entity_type: "alerts".to_string(),
+            description: "Global Router for Notification Center testing.".to_string(),
+            id: None,
+            user_facing_id: None,
+            create_time: None,
+            update_time: None,
+            rules: vec![],
+            fallback: vec![],
+            entity_labels: std::collections::HashMap::new(),
         }
     }
 
@@ -129,7 +150,6 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Presets are not yet supported"]
     async fn test_presets() {
         let notifications_client = NotificationsClient::new(
             AuthContext::from_env(),
@@ -155,6 +175,41 @@ mod tests {
 
         notifications_client
             .delete_custom_preset(preset_id)
+            .await
+            .unwrap();
+    }
+
+    #[tokio::test]
+    #[ignore = "Global Router API is still unstable"]
+    async fn test_global_router() {
+        let notifications_client = NotificationsClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        let global_router = create_test_global_router();
+
+        let create_response = notifications_client
+            .create_global_router(global_router.clone())
+            .await
+            .unwrap();
+        let router_id = create_response.router.unwrap().id.unwrap();
+
+        let retrieved_router = notifications_client
+            .get_global_router(GlobalRouterIdentifier {
+                value: Some(global_router_identifier::Value::Id(router_id.clone())),
+            })
+            .await
+            .unwrap()
+            .router;
+
+        assert_eq!(retrieved_router.unwrap().name, global_router.name);
+
+        notifications_client
+            .delete_global_router(GlobalRouterIdentifier {
+                value: Some(global_router_identifier::Value::Id(router_id)),
+            })
             .await
             .unwrap();
     }

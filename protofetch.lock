@@ -81,8 +81,8 @@ commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.4.2"
-commit_hash = "f0fbaf2adf0bd2050268b9659cef9b1cf6ee8005"
+revision = "v0.5.0"
+commit_hash = "c6aee34363e3819cd24c3b2e7672b9b1c7c3c401"
 
 [[dependencies]]
 name = "cx-api-organisations"
@@ -106,7 +106,7 @@ commit_hash = "a503745d7392e1d811120fcc071f1687701d5e44"
 name = "cx-api-schema-store"
 url = "github.com/coralogix/cx-api-schema-store"
 branch = "master"
-commit_hash = "8a5b29e643f231c75156103dfbea9078c50a2319"
+commit_hash = "31c928ce64eedadc7a9387d87bb6e9fa8e73cfca"
 
 [[dependencies]]
 name = "cx-api-scopes-service"
