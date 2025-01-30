@@ -22,6 +22,7 @@ import (
 	connectores "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/connectors/v1"
 	notifications "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/notifications/v1"
 	presets "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/presets/v1"
+	routers "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/routers/v1"
 )
 
 // CreateConnectorRequest represents a request to create a connector.
@@ -72,6 +73,9 @@ type Connector = connectores.Connector
 // ConnectorConfig represents a connector configuration.
 type ConnectorConfig = connectores.ConnectorConfig
 
+// EntityTypeConfigOverrides represents a connector configuration overrides.
+type EntityTypeConfigOverrides = connectores.EntityTypeConfigOverrides
+
 // ConnectorConfigField represents a connector configuration field.
 type ConnectorConfigField = commonv1.ConnectorConfigField
 
@@ -81,8 +85,11 @@ type ConnectorType = common.ConnectorType
 // PresetIdentifier is a preset identifier.
 type PresetIdentifier = presets.PresetIdentifier
 
-// PresetIdentifierIDValue is a preset identifier user id value.
-type PresetIdentifierIDValue = presets.PresetIdentifier_UserFacingId
+// PresetIdentifierIDValue is a preset identifier id value.
+type PresetIdentifierIDValue = presets.PresetIdentifier_Id
+
+// PresetIdentifierUserFacingIDValue is a preset identifier user facing id value.
+type PresetIdentifierUserFacingIDValue = presets.PresetIdentifier_UserFacingId
 
 // ConnectorType values.
 const (
@@ -161,6 +168,12 @@ type ConditionTypeMatchEntityType = common.ConditionType_MatchEntityType
 // MatchEntityTypeCondition is a match entity type condition.
 type MatchEntityTypeCondition = common.MatchEntityTypeCondition
 
+// ConditionTypeMatchEntityTypeAndSubType is a match entity type and subtype condition type.
+type ConditionTypeMatchEntityTypeAndSubType = common.ConditionType_MatchEntityTypeAndSubType
+
+// MatchEntityTypeAndSubTypeCondition is a match entity type and subtype condition.
+type MatchEntityTypeAndSubTypeCondition = common.MatchEntityTypeAndSubTypeCondition
+
 // PresetType is a preset type.
 type PresetType = presets.PresetType
 
@@ -170,6 +183,60 @@ const (
 	PresetTypeSystem      = presets.PresetType_SYSTEM
 	PresetTypeCustom      = presets.PresetType_CUSTOM
 )
+
+// CreateGlobalRouterRequest is a request to create a global router.
+type CreateGlobalRouterRequest = routers.CreateGlobalRouterRequest
+
+// CreateGlobalRouterResponse is a response to create a global router.
+type CreateGlobalRouterResponse = routers.CreateGlobalRouterResponse
+
+// ReplaceGlobalRouterRequest is a request to replace a global router.
+type ReplaceGlobalRouterRequest = routers.ReplaceGlobalRouterRequest
+
+// ReplaceGlobalRouterResponse is a response to replace a global router.
+type ReplaceGlobalRouterResponse = routers.ReplaceGlobalRouterResponse
+
+// DeleteGlobalRouterRequest is a request to delete a global router.
+type DeleteGlobalRouterRequest = routers.DeleteGlobalRouterRequest
+
+// DeleteGlobalRouterResponse is a response to delete a global router.
+type DeleteGlobalRouterResponse = routers.DeleteGlobalRouterResponse
+
+// GetGlobalRouterRequest is a request to get a global router.
+type GetGlobalRouterRequest = routers.GetGlobalRouterRequest
+
+// GetGlobalRouterResponse is a response to get a global router.
+type GetGlobalRouterResponse = routers.GetGlobalRouterResponse
+
+// ListGlobalRoutersRequest is a request to list global routers.
+type ListGlobalRoutersRequest = routers.ListGlobalRoutersRequest
+
+// ListGlobalRoutersResponse is a response to list global routers.
+type ListGlobalRoutersResponse = routers.ListGlobalRoutersResponse
+
+// BatchGetGlobalRoutersRequest is a request to batch get global routers.
+type BatchGetGlobalRoutersRequest = routers.BatchGetGlobalRoutersRequest
+
+// BatchGetGlobalRoutersResponse is a response to batch get global routers.
+type BatchGetGlobalRoutersResponse = routers.BatchGetGlobalRoutersResponse
+
+// GlobalRouter represents a global router.
+type GlobalRouter = routers.GlobalRouter
+
+// GlobalRouterIdentifier is a global router identifier.
+type GlobalRouterIdentifier = commonv1.GlobalRouterIdentifier
+
+// GlobalRouterIdentifierIDValue is a global router identifier id value.
+type GlobalRouterIdentifierIDValue = commonv1.GlobalRouterIdentifier_Id
+
+// GlobalRouterIdentifierUserFacingIDValue is a global router identifier user facing id value.
+type GlobalRouterIdentifierUserFacingIDValue = commonv1.GlobalRouterIdentifier_UserFacingId
+
+// RoutingRule represents a routing rule.
+type RoutingRule = commonv1.RoutingRule
+
+// RoutingTarget represents a routing target.
+type RoutingTarget = commonv1.RoutingTarget
 
 // MessageConfig is a message configuration.
 type MessageConfig = common.MessageConfig
@@ -221,6 +288,12 @@ const (
 	PresetsBatchGetRPC                     = presets.PresetsService_BatchGetPresets_FullMethodName
 	PresetsGetDefaultRPC                   = presets.PresetsService_GetDefaultPresetSummary_FullMethodName
 	PresetsGetSystemDefaultRPC             = presets.PresetsService_GetSystemDefaultPresetSummary_FullMethodName
+	GlobalRoutersCreateRPC                 = routers.GlobalRoutersService_CreateGlobalRouter_FullMethodName
+	GlobalRoutersReplaceRPC                = routers.GlobalRoutersService_ReplaceGlobalRouter_FullMethodName
+	GlobalRoutersDeleteRPC                 = routers.GlobalRoutersService_DeleteGlobalRouter_FullMethodName
+	GlobalRoutersGetRPC                    = routers.GlobalRoutersService_GetGlobalRouter_FullMethodName
+	GlobalRoutersListRPC                   = routers.GlobalRoutersService_ListGlobalRouters_FullMethodName
+	GlobalRoutersBatchGetRPC               = routers.GlobalRoutersService_BatchGetGlobalRouters_FullMethodName
 	TestingTestConnectorConfigRPC          = notifications.TestingService_TestConnectorConfig_FullMethodName
 	TestingTestExistingConnectorRPC        = notifications.TestingService_TestExistingConnector_FullMethodName
 	TestingTestPresetConfigRPC             = notifications.TestingService_TestPresetConfig_FullMethodName
@@ -505,6 +578,108 @@ func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, 
 	response, err := client.GetSystemDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, PresetsGetSystemDefaultRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// CreateGlobalRouter creates a new global router.
+func (c NotificationsClient) CreateGlobalRouter(ctx context.Context, req *CreateGlobalRouterRequest) (*CreateGlobalRouterResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.CreateGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersCreateRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// ReplaceGlobalRouter replaces a global router.
+func (c NotificationsClient) ReplaceGlobalRouter(ctx context.Context, req *ReplaceGlobalRouterRequest) (*ReplaceGlobalRouterResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.ReplaceGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersReplaceRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// DeleteGlobalRouter deletes a global router.
+func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *DeleteGlobalRouterRequest) (*DeleteGlobalRouterResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.DeleteGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersDeleteRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// GetGlobalRouter retrieves a global router.
+func (c NotificationsClient) GetGlobalRouter(ctx context.Context, req *GetGlobalRouterRequest) (*GetGlobalRouterResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.GetGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersGetRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// ListGlobalRouters lists global routers.
+func (c NotificationsClient) ListGlobalRouters(ctx context.Context, req *ListGlobalRoutersRequest) (*ListGlobalRoutersResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.ListGlobalRouters(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersListRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// BatchGetGlobalRouters retrieves global routers by IDs.
+func (c NotificationsClient) BatchGetGlobalRouters(ctx context.Context, req *BatchGetGlobalRoutersRequest) (*BatchGetGlobalRoutersResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.BatchGetGlobalRouters(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersBatchGetRPC, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
