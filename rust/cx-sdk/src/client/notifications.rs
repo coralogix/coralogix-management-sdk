@@ -71,6 +71,8 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         BatchGetGlobalRoutersResponse,
         CreateGlobalRouterRequest,
         CreateGlobalRouterResponse,
+        CreateOrReplaceGlobalRouterRequest,
+        CreateOrReplaceGlobalRouterResponse,
         DeleteGlobalRouterRequest,
         DeleteGlobalRouterResponse,
         GetGlobalRouterRequest,
@@ -676,6 +678,32 @@ impl NotificationsClient {
             .map_err(|status| SdkError::ApiError(SdkApiError {
                 status,
                 endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/CreateGlobalRouter".into(),
+                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
+            }))
+    }
+
+    /// Create or replace a global router.
+    /// # Arguments
+    /// * `global_router` - The [`GlobalRouter`] to create or replace.
+    pub async fn create_or_replace_global_router(
+        &self,
+        global_router: GlobalRouter,
+    ) -> Result<CreateOrReplaceGlobalRouterResponse> {
+        let request = make_request_with_metadata(
+            CreateOrReplaceGlobalRouterRequest {
+                router: Some(global_router),
+            },
+            &self.metadata_map,
+        );
+        let mut client = self.global_routers_client.lock().await.clone();
+
+        client
+            .create_or_replace_global_router(request)
+            .await
+            .map(|r| r.into_inner())
+            .map_err(|status| SdkError::ApiError(SdkApiError {
+                status,
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/CreateOrReplaceGlobalRouter".into(),
                 feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
             }))
     }

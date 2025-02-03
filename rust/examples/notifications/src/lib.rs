@@ -104,21 +104,6 @@ mod tests {
         }
     }
 
-    fn create_test_global_router() -> GlobalRouter {
-        GlobalRouter {
-            name: "TestGlobalRouter".to_string(),
-            entity_type: "alerts".to_string(),
-            description: "Global Router for Notification Center testing.".to_string(),
-            id: None,
-            user_facing_id: None,
-            create_time: None,
-            update_time: None,
-            rules: vec![],
-            fallback: vec![],
-            entity_labels: std::collections::HashMap::new(),
-        }
-    }
-
     #[tokio::test]
     async fn test_connectors() {
         let notifications_client = NotificationsClient::new(
@@ -180,7 +165,6 @@ mod tests {
     }
 
     #[tokio::test]
-    #[ignore = "Global Router API is still unstable"]
     async fn test_global_router() {
         let notifications_client = NotificationsClient::new(
             AuthContext::from_env(),
@@ -188,13 +172,32 @@ mod tests {
         )
         .unwrap();
 
-        let global_router = create_test_global_router();
-
-        let create_response = notifications_client
-            .create_global_router(global_router.clone())
+        let list_response = notifications_client
+            .list_global_routers("alerts".to_string())
             .await
             .unwrap();
-        let router_id = create_response.router.unwrap().id.unwrap();
+
+        let existing_router_id = list_response.routers.first().and_then(|r| r.id.clone());
+
+        let global_router = GlobalRouter {
+            id: existing_router_id.clone(),
+            name: "TestGlobalRouter".to_string(),
+            entity_type: "alerts".to_string(),
+            description: "Global Router for Notification Center testing.".to_string(),
+            user_facing_id: None,
+            create_time: None,
+            update_time: None,
+            rules: vec![],
+            fallback: vec![],
+            entity_labels: std::collections::HashMap::new(),
+        };
+
+        let create_or_replace_response = notifications_client
+            .create_or_replace_global_router(global_router.clone())
+            .await
+            .unwrap();
+
+        let router_id = create_or_replace_response.router.unwrap().id.unwrap();
 
         let retrieved_router = notifications_client
             .get_global_router(GlobalRouterIdentifier {
@@ -205,12 +208,5 @@ mod tests {
             .router;
 
         assert_eq!(retrieved_router.unwrap().name, global_router.name);
-
-        notifications_client
-            .delete_global_router(GlobalRouterIdentifier {
-                value: Some(global_router_identifier::Value::Id(router_id)),
-            })
-            .await
-            .unwrap();
     }
 }
