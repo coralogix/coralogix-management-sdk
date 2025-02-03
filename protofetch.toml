@@ -167,7 +167,7 @@ revision = 'v1.26.0'
 
 [cx-api-schema-store]
 url = 'github.com/coralogix/cx-api-schema-store'
-branch = 'master'
+revision = 'v0.0.1'
 allow_policies = [
     "/com/coralogix/schemastore/v1/tracing_fields.proto",
     "com/coralogix/schemastore/v1/common.proto",

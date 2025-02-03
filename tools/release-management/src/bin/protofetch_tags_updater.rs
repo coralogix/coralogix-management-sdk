@@ -99,6 +99,10 @@ async fn main() -> eyre::Result<()> {
 
         let url = val["url"].as_str().expect("URL must be a string");
         let (owner, repo) = owner_repo_from_url(url).expect("Invalid URL");
+        if val.get("revision").is_none() {
+            tracing::warn!(%url, %val, "no revision found, skipping");
+            continue;
+        }
         let revision = val["revision"].as_str().expect("Revision must be a string");
 
         let release = authed_github
