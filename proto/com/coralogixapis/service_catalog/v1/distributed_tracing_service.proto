@@ -1,18 +1,35 @@
 syntax = "proto3";
 package com.coralogixapis.service_catalog.v1;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/struct.proto";
-import "com/coralogixapis/service_catalog/v1/operation.proto";
-import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogix/catalog/v1/span_kind.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
 import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/service_catalog/v1/operation.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
-import "com/coralogix/catalog/v1/span_kind.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
-message GetTimeConsumingRequest{
+message GetTimeConsumingRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Time Consuming Request"
+      description: "This data structure represents a request to get time consuming."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -21,13 +38,33 @@ message GetTimeConsumingRequest{
   ApmSource apm_source = 6;
 }
 
-message GetTimeConsumingResponse{
+message GetTimeConsumingResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Time Consuming Response"
+      description: "This data structure represents a response to get time consuming."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart time_consuming = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
-message GetThroughputRequest{
+message GetThroughputRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Throughput Request"
+      description: "This data structure represents a request to get Throughput."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -36,13 +73,33 @@ message GetThroughputRequest{
   ApmSource apm_source = 6;
 }
 
-message GetThroughputResponse{
+message GetThroughputResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Throughput Response"
+      description: "This data structure represents a response to get Throughput."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart throughput = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
-message GetErrorsRequest{
+message GetErrorsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Errors Request"
+      description: "This data structure represents a request to get Errors."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -51,13 +108,33 @@ message GetErrorsRequest{
   ApmSource apm_source = 6;
 }
 
-message GetErrorsResponse{
+message GetErrorsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Errors Request"
+      description: "This data structure represents a response to get Errors."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart errors = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
-message GetErrorsStreamRequest{
+message GetErrorsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Errors Request With Stream Response"
+      description: "This data structure represents a request to get Errors."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -66,7 +143,15 @@ message GetErrorsStreamRequest{
   ApmSource apm_source = 6;
 }
 
-message GetErrorsStreamResponse{
+message GetErrorsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Errors Stream Response"
+      description: "This data structure represents a stream response to get Errors."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.UInt64Value total_amount = 1;
   oneof widget {
     RepeatedLineChart errors = 2;
@@ -75,7 +160,19 @@ message GetErrorsStreamResponse{
   }
 }
 
-message GetP99LatencyRequest{
+message GetP99LatencyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get P99 Latency Request"
+      description: "This data structure represents a request to get P99 Latency."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -84,13 +181,37 @@ message GetP99LatencyRequest{
   ApmSource apm_source = 6;
 }
 
-message GetP99LatencyResponse{
+message GetP99LatencyResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get P99 Latency Response"
+      description: "This data structure represents a response to get P99 Latency."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart p99_latency = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
-message ListOperationsRequest{
+message ListOperationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get List Of Operations Request"
+      description: "This data structure represents a request to get List Of Operations."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -100,12 +221,67 @@ message ListOperationsRequest{
   repeated google.protobuf.StringValue columns = 7;
 }
 
-message ListOperationsResponse{
+message operationsColumnsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Operations Columns Stream Request"
+      description: "This data structure represents a request to get Operations Columns Stream."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
+  google.protobuf.StringValue service_name = 1;
+  com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
+  repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
+  repeated coralogix.catalog.v1.SpanKind operation_span_kinds = 4;
+  ApmSource apm_source = 5;
+  google.protobuf.Int64Value trend_offset = 6;
+  repeated google.protobuf.StringValue columns = 7;
+}
+
+message operationsColumnsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Operations Columns Stream Response"
+      description: "This data structure represents a response to get Operations Columns Stream."
+      required: []
+    }
+    external_docs: {}
+  };
+  repeated OperationData operations = 1;
+  repeated google.protobuf.StringValue queries = 3;
+}
+
+message ListOperationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get List Of Operations Response"
+      description: "This data structure represents a response to get List Of Operations."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated Operation operations = 1;
   ApmSource apm_source = 2;
 }
 
-message GetLatencyGraphRequest{
+message GetLatencyGraphRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Latency Graph Request"
+      description: "This data structure represents a request to get Latency Graph."
+      required: [
+        "service_name",
+        "time_range",
+        "span_kind"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -115,6 +291,14 @@ message GetLatencyGraphRequest{
 }
 
 message GetLatencyGraphResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Latency Graph Response"
+      description: "This data structure represents a response to get Latency Graph."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.UInt64Value total_amount = 1;
   oneof widget {
     RepeatedLineChart p50_latency = 2;
@@ -125,26 +309,53 @@ message GetLatencyGraphResponse {
   }
 }
 
-service DistributedTracingService{
-  rpc GetTimeConsuming(GetTimeConsumingRequest) returns (GetTimeConsumingResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Time Consuming";
-  };
-  rpc GetThroughput(GetThroughputRequest) returns (GetThroughputResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Throughput";
-  };
-  rpc GetErrors(GetErrorsRequest) returns (GetErrorsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Errors";
-  };
-  rpc GetErrorsStream(GetErrorsStreamRequest) returns (stream GetErrorsStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Errors Per Seconds";
-  };
-  rpc GetP99Latency(GetP99LatencyRequest) returns (GetP99LatencyResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get P99 Latency";
-  };
-  rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Operations";
-  };
-  rpc GetLatencyGraph(GetLatencyGraphRequest) returns (stream GetLatencyGraphResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Percentiles Graph";
-  };
+service DistributedTracingService {
+  rpc GetTimeConsuming(GetTimeConsumingRequest) returns (GetTimeConsumingResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/time-consuming"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Time Consuming";
+  }
+  rpc GetThroughput(GetThroughputRequest) returns (GetThroughputResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/throughput"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Throughput";
+  }
+  rpc GetErrors(GetErrorsRequest) returns (GetErrorsResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/errors"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Errors";
+  }
+  rpc GetErrorsStream(GetErrorsStreamRequest) returns (stream GetErrorsStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/errors-stream"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Errors Per Seconds";
+  }
+  rpc GetP99Latency(GetP99LatencyRequest) returns (GetP99LatencyResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/p99-latency"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get P99 Latency";
+  }
+  rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/list-operations"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "List Operations";
+  }
+  rpc operationsColumnsStream(operationsColumnsStreamRequest) returns (stream operationsColumnsStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/operations-stream"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Columns Stream Request";
+  }
+  rpc GetLatencyGraph(GetLatencyGraphRequest) returns (stream GetLatencyGraphResponse) {
+    option (google.api.http) = {
+      get: "/v1/distributed-tracing/latency-graph"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Percentiles Graph";
+  }
 }

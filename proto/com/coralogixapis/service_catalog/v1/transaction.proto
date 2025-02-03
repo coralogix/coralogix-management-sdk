@@ -30,6 +30,7 @@ message Transaction {
   UnitValue time_consuming_percentage = 11;
   google.protobuf.StringValue method = 12;
   UnitValue subflow_count = 19;
+  UnitValue total_response_time = 20;
 }
 
 enum Source {
@@ -61,4 +62,5 @@ message SegmentBreakDown {
   UnitValue errors_percentage = 12;
   UnitValue time_consuming_percentage = 13;
   google.protobuf.BoolValue is_transaction_root = 14;
+  UnitValue total_response_time = 22;
 }

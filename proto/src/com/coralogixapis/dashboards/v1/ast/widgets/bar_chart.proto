@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.widgets;
+
+import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
+import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
+
+message BarChart {
+  Query query = 1;
+  google.protobuf.Int32Value max_bars_per_chart = 2;
+  google.protobuf.StringValue group_name_template = 3;
+  StackDefinition stack_definition = 4;
+  common.ScaleType scale_type = 5;
+  common.ColorsBy colors_by = 6;
+  XAxis x_axis = 7;
+  common.Unit unit = 8;
+  common.SortByType sort_by = 9;
+  google.protobuf.StringValue color_scheme = 10;
+  common.DataModeType data_mode_type = 11;
+  BarValueDisplay bar_value_display = 12;
+  google.protobuf.StringValue custom_unit = 13;
+  google.protobuf.Int32Value decimal = 14;
+  common.Legend legend = 15;
+
+  message Query {
+    oneof value {
+      LogsQuery logs = 1;
+      SpansQuery spans = 2;
+      MetricsQuery metrics = 3;
+      DataprimeQuery dataprime = 4;
+    }
+  }
+
+  message StackDefinition {
+    google.protobuf.Int32Value max_slices_per_bar = 1;
+    google.protobuf.StringValue stack_name_template = 2;
+  }
+
+  message XAxis {
+    oneof type {
+      XAxisByValue value = 1;
+      XAxisByTime time = 2;
+    }
+
+    message XAxisByValue {}
+    message XAxisByTime {
+      google.protobuf.Duration interval = 1;
+      google.protobuf.Int32Value buckets_presented = 2;
+    }
+  }
+
+  message LogsQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.LogsAggregation aggregation = 2;
+    repeated Filter.LogsFilter filters = 3;
+    repeated google.protobuf.StringValue group_names = 4;
+    google.protobuf.StringValue stacked_group_name = 5;
+    repeated v1.common.ObservationField group_names_fields = 6;
+    v1.common.ObservationField stacked_group_name_field = 7;
+    v1.common.TimeFrameSelect time_frame = 8;
+  }
+
+  message SpansQuery {
+    common.LuceneQuery lucene_query = 1;
+    v1.common.SpansAggregation aggregation = 2;
+    repeated Filter.SpansFilter filters = 3;
+    repeated v1.common.SpanField group_names = 4;
+    v1.common.SpanField stacked_group_name = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
+  }
+
+  message MetricsQuery {
+    common.PromQlQuery promql_query = 1;
+    repeated Filter.MetricsFilter filters = 2;
+    repeated google.protobuf.StringValue group_names = 3;
+    google.protobuf.StringValue stacked_group_name = 4;
+    common.MetricsQueryEditorMode editor_mode = 5;
+    v1.common.TimeFrameSelect time_frame = 6;
+    v1.common.PromQLQueryType promql_query_type = 7;
+    common.Aggregation aggregation = 8;
+  }
+
+  message DataprimeQuery {
+    v1.common.DataprimeQuery dataprime_query = 1;
+    repeated Filter.Source filters = 2;
+    repeated google.protobuf.StringValue group_names = 3;
+    google.protobuf.StringValue stacked_group_name = 4;
+    v1.common.TimeFrameSelect time_frame = 5;
+  }
+}
+
+enum BarValueDisplay {
+  BAR_VALUE_DISPLAY_UNSPECIFIED = 0;
+  BAR_VALUE_DISPLAY_TOP = 1;
+  BAR_VALUE_DISPLAY_INSIDE = 2;
+  BAR_VALUE_DISPLAY_BOTH = 3;
+}

@@ -1,0 +1,339 @@
+syntax = "proto3";
+
+package com.coralogix.datausage.v2;
+
+import "com/coralogix/datausage/v2/data_usage.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
+service DataUsageService {
+  // Deprecated. Please use GetDataUsage instead.
+  rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse) {
+    option deprecated = true;
+  }
+  rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse) {
+    option (google.api.http) = {
+      get: "/v2/datausage/spanscount"
+    };
+  }
+  rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse) {
+    option (google.api.http) = {
+      get: "/v2/datausage/logscount"
+    };
+  }
+  rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse) {
+    option (google.api.http) = {
+      get: "/v2/datausage/exportstatus"
+    };
+  }
+  rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse) {
+    option (google.api.http) = {
+      post: "/v2/datausage/exportstatus"
+      body: "*"
+    };
+  }
+  rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse) {
+    option (google.api.http) = {
+      get: "/v2/datausage"
+    };
+  }
+}
+
+enum AggregateBy {
+  AGGREGATE_BY_UNSPECIFIED = 0;
+  AGGREGATE_BY_APPLICATION = 1;
+  AGGREGATE_BY_SUBSYSTEM = 2;
+  AGGREGATE_BY_PILLAR = 3;
+  AGGREGATE_BY_PRIORITY = 4;
+}
+
+message GetTeamDetailedDataUsageRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Team Detailed Data Usage Request"
+      description: "This data structure is used to request detailed data usage for a team."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  reserved 1;
+  // Date request interval
+  DateRange date_range = 2;
+  // Aggregation resolution with minute precision.
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // This means that, for instance, requests with 1 min resolution for an interval of 30 days will be rejected.
+  //
+  // Resolution must be between 1 min and date_range interval
+  google.protobuf.Duration resolution = 3;
+  // List of aggregate parameters.
+  // i.e. if AggregateBy is [AGGREGATE_BY_PILLAR, AGGREGATE_BY_PRIORITY], then the response will stream data aggregated by pillar and priority.
+  repeated AggregateBy aggregate = 4;
+}
+
+message GetTeamDetailedDataUsageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Team Detailed Data Usage Response"
+      description: "This data structure is used to return detailed data usage for a team."
+      required: []
+    }
+  };
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.FloatValue size_gb = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "2.50" }];
+  google.protobuf.FloatValue units = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5.00" }];
+  repeated Dimension dimensions = 4;
+}
+
+message GetSpansCountRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Spans Count Request"
+      description: "This data structure is used to request spans count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  DateRange date_range = 1;
+  // Aggregation resolution with second precision.
+  //
+  // Resolution must be between 1 second and date_range interval
+  google.protobuf.Duration resolution = 2;
+
+  // Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
+  // Match occurs on full match
+  optional ScopesFilter filters = 3;
+}
+
+message ScopesFilter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Scopes Filter"
+      description: "This data structure represents a filter for scopes."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  repeated string application = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"application1\"" }];
+  repeated string subsystem = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"subsystem1\"" }];
+}
+
+message SpansCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Spans Count"
+      description: "This data structure represents a spans count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.Int64Value success_span_count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
+  google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "50" }];
+  google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
+}
+
+
+message GetSpansCountResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Spans Count Response"
+      description: "This data structure is used to return spans count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  repeated SpansCount spans_count = 1;
+}
+
+message GetLogsCountRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Logs Count Request"
+      description: "This data structure is used to request logs count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  DateRange date_range = 1;
+  // Aggregation resolution with second precision.
+  //
+  // Resolution must be between 1 second and date_range interval
+  google.protobuf.Duration resolution = 2;
+
+  // Example: (application1 OR application2) AND (subsystem1 OR subsystem2)
+  // Match occurs on full match
+  optional ScopesFilter filters = 3;
+}
+
+message LogsCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Count"
+      description: "This data structure represents a logs count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  google.protobuf.Timestamp timestamp = 1;
+  uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
+  Severity severity = 3;
+  Priority priority = 4;
+}
+
+message GetLogsCountResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Logs Count Response"
+      description: "This data structure is used to return logs count."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  repeated LogsCount logs_count = 1;
+}
+
+message GetDataUsageMetricsExportStatusRequest {}
+
+message GetDataUsageMetricsExportStatusResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Data Usage Metrics Export Status Response"
+      description: "This data structure is used to return data usage metrics export status."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  reserved 2;
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message UpdateDataUsageMetricsExportStatusRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Data Usage Metrics Export Status Request"
+      description: "This data structure is used to update data usage metrics export status."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  reserved 1;
+  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message UpdateDataUsageMetricsExportStatusResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Data Usage Metrics Export Status Response"
+      description: "This data structure is used to return data usage metrics export status."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message GetDataUsageRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Data Usage Request"
+      description: "This data structure is used to request data usage."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  // Date request interval
+  DateRange date_range = 1;
+
+  // Aggregation resolution. Minimum supported value is 1h
+  //
+  // Do note that to avoid overloading the service we enforce resolution limits
+  // that depend on the server configuration. This is configured by the server.
+  // This means that, for instance, requests with 1 hour resolution for an interval of 30 days will be rejected but accepted for 1 day interval.
+  //
+  // Resolution must be between 1 hour and date_range interval
+  google.protobuf.Duration resolution = 2;
+  // List of aggregate parameters.
+  // i.e. if AggregateBy is [AGGREGATE_BY_PILLAR, AGGREGATE_BY_PRIORITY], then the response will stream data aggregated by pillar and priority.
+  repeated AggregateBy aggregate = 3;
+  // Dimensions to filter by.
+  // When used together with aggregation it is pointless to filter by dimension keys that are not aggregated.
+  // i.e. if we filter by Dimension [ {"subsystem", "subsystem1"}]
+  //      we only return entries that at least have that dimension i.e. [{"subsystem", "subsystem1"}, {"application", "application1"}]
+  repeated Dimension dimension_filters = 4;
+}
+
+
+message DataUsageEntry {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Data Usage Entry"
+      description: "This data structure represents a data usage entry."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  google.protobuf.Timestamp timestamp = 1;
+  float size_gb = 2;
+  float units = 3;
+  repeated Dimension dimensions = 4;
+}
+
+message GetDataUsageResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Data Usage Response"
+      description: "This data structure is used to return data usage."
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+      description: "Find out more about data usage."
+    }
+  };
+  repeated DataUsageEntry entries = 1;
+}

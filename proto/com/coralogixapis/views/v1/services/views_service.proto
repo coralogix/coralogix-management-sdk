@@ -78,4 +78,5 @@ message View {
   TimeSelection time_selection = 4;
   SelectedFilters filters = 5;
   google.protobuf.StringValue folder_id = 6;
+  google.protobuf.BoolValue is_compact_mode = 7;
 }
