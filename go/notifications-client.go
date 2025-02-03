@@ -196,6 +196,12 @@ type ReplaceGlobalRouterRequest = routers.ReplaceGlobalRouterRequest
 // ReplaceGlobalRouterResponse is a response to replace a global router.
 type ReplaceGlobalRouterResponse = routers.ReplaceGlobalRouterResponse
 
+// CreateOrReplaceGlobalRouterRequest is a request to create or replace a global router.
+type CreateOrReplaceGlobalRouterRequest = routers.CreateOrReplaceGlobalRouterRequest
+
+// CreateOrReplaceGlobalRouterResponse is a response to create or replace a global router.
+type CreateOrReplaceGlobalRouterResponse = routers.CreateOrReplaceGlobalRouterResponse
+
 // DeleteGlobalRouterRequest is a request to delete a global router.
 type DeleteGlobalRouterRequest = routers.DeleteGlobalRouterRequest
 
@@ -610,6 +616,23 @@ func (c NotificationsClient) ReplaceGlobalRouter(ctx context.Context, req *Repla
 	client := routers.NewGlobalRoutersServiceClient(conn)
 
 	response, err := client.ReplaceGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GlobalRoutersReplaceRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// CreateOrReplaceGlobalRouter creates or replaces a global router.
+func (c NotificationsClient) CreateOrReplaceGlobalRouter(ctx context.Context, req *CreateOrReplaceGlobalRouterRequest) (*CreateOrReplaceGlobalRouterResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := routers.NewGlobalRoutersServiceClient(conn)
+
+	response, err := client.CreateOrReplaceGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, GlobalRoutersReplaceRPC, notificationsFeatureGroupID)
 	}

@@ -149,7 +149,6 @@ func TestPresets(t *testing.T) {
 }
 
 func TestGlobalRouter(t *testing.T) {
-	t.Skip("Global Router API is still unstable")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -158,10 +157,24 @@ func TestGlobalRouter(t *testing.T) {
 
 	c := cxsdk.NewNotificationsClient(creator)
 
-	createRes, err := c.CreateGlobalRouter(context.Background(), &cxsdk.CreateGlobalRouterRequest{
+	alertsEntityType := "alerts"
+	listRes, err := c.ListGlobalRouters(context.Background(), &cxsdk.ListGlobalRoutersRequest{
+		EntityType: &alertsEntityType,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	var routerId *string
+	if len(listRes.Routers) > 0 {
+		routerId = listRes.Routers[0].Id
+	}
+
+	createOrReplaceRes, err := c.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
 		Router: &cxsdk.GlobalRouter{
+			Id:          routerId,
 			Name:        "TestGlobalRouter",
-			EntityType:  "alerts",
+			EntityType:  alertsEntityType,
 			Description: "This is a test Global Router.",
 		},
 	})
@@ -169,11 +182,10 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	routerId := createRes.Router.Id
-	router, err := c.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
+	getRes, err := c.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
 		Identifier: &cxsdk.GlobalRouterIdentifier{
 			Value: &cxsdk.GlobalRouterIdentifierIDValue{
-				Id: *routerId,
+				Id: *createOrReplaceRes.Router.Id,
 			},
 		},
 	})
@@ -181,16 +193,5 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, router.Router.Name, "TestGlobalRouter")
-
-	_, err = c.DeleteGlobalRouter(context.Background(), &cxsdk.DeleteGlobalRouterRequest{
-		Identifier: &cxsdk.GlobalRouterIdentifier{
-			Value: &cxsdk.GlobalRouterIdentifierIDValue{
-				Id: *routerId,
-			},
-		},
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
+	assert.Equal(t, getRes.Router.Name, "TestGlobalRouter")
 }
