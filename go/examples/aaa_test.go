@@ -19,6 +19,7 @@ import (
 	"os"
 	"strconv"
 	"testing"
+	"time"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
@@ -181,7 +182,7 @@ func TestGroups(t *testing.T) {
 	groupDesc := "A Test Group"
 
 	createdGroup, err := c.Create(context.Background(), &v1.CreateTeamGroupRequest{
-		Name: "Test Group",
+		Name: "Test Group " + strconv.FormatInt(time.Now().UnixMilli(), 10),
 		TeamId: &v1.TeamId{
 			Id: uint32(teamId),
 		},

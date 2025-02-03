@@ -105,7 +105,7 @@ mod tests {
 
         let created_group = client
             .create(
-                "Test Group".to_string(),
+                format!("Test group {}", chrono::Utc::now().timestamp_millis()),
                 team_id,
                 "A Test Group".to_string(),
                 None,
