@@ -151,11 +151,11 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: alert.GetId().GetValue(), Name: alertName})
 			}
 		case "archive_logs":
-			idsAndNames = append(idsAndNames, IdAndName{Id: "", Name: "archive_logs"})
+			idsAndNames = append(idsAndNames, IdAndName{Id: "archive_logs", Name: "archive_logs"})
 		case "archive_metrics":
-			idsAndNames = append(idsAndNames, IdAndName{Id: "", Name: "archive_metrics"})
+			idsAndNames = append(idsAndNames, IdAndName{Id: "archive_metrics", Name: "archive_metrics"})
 		case "archive_retentions":
-			idsAndNames = append(idsAndNames, IdAndName{Id: "", Name: "archive_retentions"})
+			idsAndNames = append(idsAndNames, IdAndName{Id: "archive_retentions", Name: "archive_retentions"})
 		case "custom_role":
 			rolesClients := cxsdk.NewRolesClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
 			roles, err := rolesClients.List(context.Background(), &cxsdk.ListCustomRolesRequest{})
