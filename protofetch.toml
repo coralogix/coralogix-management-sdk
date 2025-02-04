@@ -79,7 +79,7 @@ revision = "v0.1.32"
 
 [cx-api-service-catalog]
 url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.133"
+revision = "v0.3.110"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -100,16 +100,17 @@ revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.93"
+revision = "v0.1.94"
 allow_policies = [
-    "/com/coralogix/permissions/models/v1/*",
-    "/com/coralogix/permissions/v1/actions_resources.proto",
-    "/com/coralogix/permissions/v1/common.proto",
-    "/com/coralogix/permissions/v1/permissions_mgmt.proto",
-    "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
-    "/com/coralogixapis/aaa/apikeys/v3/*",
-    "/com/coralogixapis/aaa/rbac/v2/*",
-    "/com/coralogixapis/aaa/sso/v2/*",
+    "src/com/coralogix/permissions/models/v1/*",
+    "src/com/coralogix/permissions/v1/actions_resources.proto",
+    "src/com/coralogix/permissions/v1/common.proto",
+    "src/com/coralogix/permissions/v1/permissions_mgmt.proto",
+    "src/com/coralogix/permissions/v1/permission_definitions.proto",
+    "src/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
+    "src/com/coralogixapis/aaa/apikeys/v3/*",
+    "src/com/coralogixapis/aaa/rbac/v2/*",
+    "src/com/coralogixapis/aaa/sso/v2/*",
 ]
 
 [cx-api-archive]

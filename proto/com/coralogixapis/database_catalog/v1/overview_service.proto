@@ -12,28 +12,8 @@ import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/database_catalog/v1/database.proto";
 import "com/coralogix/catalog/v1/common.proto";
-import "com/coralogixapis/apm_shared/common/apdex.proto";
-
-import "com/coralogix/common/v1/audit_log.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
 
 message GetDatabaseOverviewStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get DB Overview Stream Request"
-      description: "This data structure represents a request to Get DB Overview Stream."
-      required: [
-        "time_range",
-        "database_name",
-        "database_name_source",
-        "database_system",
-        "operation"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -45,14 +25,7 @@ message GetDatabaseOverviewStreamRequest {
 }
 
 message GetDatabaseOverviewStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get DB Overview Stream Response"
-      description: "This data structure represents a response to Get DB Overview Stream."
-      required: []
-    }
-    external_docs: {}
-  };
+
   oneof widget {
     com.coralogixapis.apm.widgets.v1.Stat avg_latency = 1;
     com.coralogixapis.apm.widgets.v1.Stat throughput = 2;
@@ -92,19 +65,6 @@ message GetDatabaseOverviewStreamResponse {
 }
 
 message GetApdexRequest{
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get DB Overview Apdex Request"
-      description: "This data structure represents a request to Get DB Overview Apdex."
-      required: [
-        "time_range",
-        "database_name",
-        "database_name_source",
-        "database_system"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -112,18 +72,16 @@ message GetApdexRequest{
   repeated google.protobuf.StringValue calling_services = 5;
 }
 
+message GetApdexResponse{
+  com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 1;
+}
+
 
 service DatabaseOverviewService {
   rpc GetDatabaseOverviewStream(GetDatabaseOverviewStreamRequest)returns(stream GetDatabaseOverviewStreamResponse){
-    option (google.api.http) = {
-      get: "/v1/db-catalog/overview/graphs",
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Database Overview Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Database Overview Stream";
   }
-  rpc GetApdex(GetApdexRequest)returns(com.coralogixapis.apm.common.v2.GetApdexResponse){
-    option (google.api.http) = {
-      get: "/v1/db-catalog/overview/apdex",
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Apdex";
+  rpc GetApdex(GetApdexRequest)returns(GetApdexResponse){
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apdex";
   }
 }

@@ -93,8 +93,8 @@ commit_hash = "54f3039f90c8a0eb57a33908c03f211ff9b11520"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.93"
-commit_hash = "d172033be9046b0a6471c204f5ed0a38dc940a84"
+revision = "v0.1.94"
+commit_hash = "165feca0746378a82f99a789361ebe5e22cd9d5b"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -117,8 +117,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.133"
-commit_hash = "e8db4e5586e1a1c0c4abebdaa9abe6f9dc6edc9d"
+revision = "v0.3.110"
+commit_hash = "08742acc81a9e793716fb4601ad7aef8490e0011"
 
 [[dependencies]]
 name = "cx-api-tags"

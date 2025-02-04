@@ -14,14 +14,6 @@ message GetReportResponse {
     repeated CompanyReport company_report = 1;
 }
 
-message GetServicesReportRequest {
-  google.protobuf.StringValue company_id = 1;
-}
-
-message GetServicesReportResponse {
-  repeated ServicesReport services_report = 1;
-}
-
 message CompanyReport {
   google.protobuf.Int64Value company_id = 1;
   google.protobuf.StringValue company_name = 2;
@@ -43,24 +35,8 @@ message CompanyReport {
   google.protobuf.StringValue db_migration_period = 18;
 }
 
-message ServicesReport {
-  google.protobuf.Int64Value company_id = 1;
-  google.protobuf.StringValue company_name = 2;
-  google.protobuf.StringValue environment = 3;
-  com.coralogixapis.service_catalog.v1.ApmSource apm_source = 4;
-  google.protobuf.StringValue cx_source = 5;
-  google.protobuf.BoolValue active = 6;
-  google.protobuf.StringValue last_seen = 7;
-  google.protobuf.StringValue service_language = 8;
-  google.protobuf.StringValue service_type = 9;
-}
-
 service ReportService{
   rpc GetReport(GetReportRequest) returns (GetReportResponse) {
     option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Report of service catalog usage.";
-  }
-
-  rpc GetServicesReport(GetServicesReportRequest) returns (GetServicesReportResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Report of services in the service catalog.";
   }
 }
