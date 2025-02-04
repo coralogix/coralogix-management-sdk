@@ -26,6 +26,9 @@ service InternalDatasetLocationsService {
   rpc GetDatasetList(InternalDatasetLocationsServiceGetDatasetListRequest) returns (InternalDatasetLocationsServiceGetDatasetListResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get dataset list according to company id";
   }
+  rpc GetLocationsByStableIds(InternalDatasetLocationsServiceGetLocationsByStableIdsRequest) returns (InternalDatasetLocationsServiceGetLocationsByStableIdsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get physical locations by stable ids";
+  }
   rpc UpdateDatasetLocation(InternalDatasetLocationsServiceUpdateDatasetLocationRequest) returns (InternalDatasetLocationsServiceUpdateDatasetLocationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Update dataset location according to companyId, location, dataspace and dataset";
   }
@@ -94,11 +97,21 @@ message InternalDatasetLocationsServiceGetDatasetListResponse {
   repeated DatasetsInfo datasets_info = 1;
 }
 
+message InternalDatasetLocationsServiceGetLocationsByStableIdsRequest {
+  repeated string stable_ids = 1;
+}
+
+message InternalDatasetLocationsServiceGetLocationsByStableIdsResponse {
+  // Contains stable id within it
+  repeated FinalLocation locations = 1;
+}
+
 message InternalDatasetLocationsServiceUpdateDatasetLocationRequest {
   uint32 company_id = 1;
   Dataset dataset = 2;
   DatasetLocationDetails location = 3;
   Timeframe timeframe = 4;
+  repeated FieldPath default_key_fields = 5;
 }
 
 message DatasetLocationDetails {
@@ -109,6 +122,7 @@ message DatasetLocationDetails {
   com.coralogix.archive.v2.Format format = 3;
   // the base path in the bucket (not including: dt/hr). for example: cx/parquet/v1/team_id=555585
   string final_location_base_prefix = 4;
+  bool is_active = 5;
 }
 
 message InternalDatasetLocationsServiceUpdateDatasetLocationResponse {

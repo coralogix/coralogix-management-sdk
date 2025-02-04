@@ -3,10 +3,15 @@ syntax = "proto3";
 package com.coralogix.archive.private.state.v1;
 
 import "com/coralogix/archive/private/state/v1/file_split.proto";
+import "com/coralogix/archive/v2/target.proto";
 
 message S3Object {
   string bucket = 1;
   string key = 2;
   optional int64 row_count = 3;
   optional FileSplit file_split = 4;
+  oneof physical_target {
+    com.coralogix.archive.v2.S3TargetSpec s3 = 5;
+    com.coralogix.archive.v2.IBMCosTargetSpec ibm_cos = 6;
+  }
 }

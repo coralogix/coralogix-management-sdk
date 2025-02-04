@@ -6,6 +6,7 @@ import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
@@ -91,6 +92,8 @@ message BarChart {
     google.protobuf.StringValue stacked_group_name = 4;
     common.MetricsQueryEditorMode editor_mode = 5;
     v1.common.TimeFrameSelect time_frame = 6;
+    v1.common.PromQLQueryType promql_query_type = 7;
+    common.Aggregation aggregation = 8;
   }
 
   message DataprimeQuery {

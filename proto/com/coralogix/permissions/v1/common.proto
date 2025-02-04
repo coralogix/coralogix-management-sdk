@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 package com.coralogix.permissions.v1;
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message UserId {
   string id = 1;
@@ -27,6 +28,18 @@ message OrgGroupId {
 }
 
 message TeamGroupId {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "TeamGroupId"
+      description: "This data structure represents the information associated with a team group."
+      required: [
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+      description: "Find out more about groups"
+    }
+  };
   uint32 id = 1;
 }
 

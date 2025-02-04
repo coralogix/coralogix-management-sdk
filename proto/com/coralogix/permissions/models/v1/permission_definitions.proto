@@ -1,3 +1,4 @@
+// clang-format off
 syntax = "proto3";
 
 package com.coralogix.permissions.models.v1;
@@ -56,6 +57,7 @@ enum PermissionGroup {
   PERMISSION_GROUP_VERSION_BENCHMARKS = 33 [ (com.coralogix.permissions.v1.name) = "version-benchmarks", (description) = "Version Benchmarks", (display_name)= "Version Benchmarks"];
   PERMISSION_GROUP_INVESTIGATIONS = 34 [ (com.coralogix.permissions.v1.name) = "investigations", (description) = "Investigations", (display_name)= "Investigations"];
   PERMISSION_GROUP_ADMINISTRATION = 35 [ (com.coralogix.permissions.v1.name) = "administration", (description) = "Administration", (display_name)= "Administration"];
+  PERMISSION_GROUP_PROFILES = 36 [ (com.coralogix.permissions.v1.name) = "profiles", (description) = "Profiles", (display_name)= "Send Profiles"];
 }
 
 enum Permission {
@@ -295,5 +297,9 @@ enum Permission {
   PERMISSION_HIDE_ERRORS_UPDATE_CONFIG = 237 [(expression) = "hide-errors:UpdateConfig", (action) = ACTION_UPDATECONFIG, (resource) = RESOURCE_HIDE_ERRORS, (permission_group) = PERMISSION_GROUP_RUM, (description) = "Hide Error", (doc_link) = "https://coralogix.com/docs/user-guides/rum/product-features/hide-error-templates/", (explanation) = "Enable to hide specific errors from the UI", (is_team_level) = true];
   PERMISSION_RUM_SETTINGS_UPDATE_CONFIG = 238 [(expression) = "rum-settings:UpdateConfig", (action) = ACTION_UPDATECONFIG, (resource) = RESOURCE_RUM_SETTINGS, (permission_group) = PERMISSION_GROUP_RUM, (description) = "RUM Settings", (doc_link) = "", (explanation) = "Observe rum settings", (is_team_level) = true];
   PERMISSION_SESSION_RECORDING_READ_CONFIG = 239 [(expression) = "session-recording:ReadConfig", (action) = ACTION_READ_CONFIG, (resource) = RESOURCE_SESSION_RECORDING, (permission_group) = PERMISSION_GROUP_RUM, (description) = "Session Replay", (doc_link) = "https://coralogix.com/docs/user-guides/rum/product-features/session-replay/", (explanation) = "Record user sessions", (is_team_level) = true];
+  PERMISSION_NOTIFICATION_CENTER_ROUTERS_READ_CONFIG = 240 [(expression) = "notification-center-routers:ReadConfig", (action) = ACTION_READ_CONFIG, (resource) = RESOURCE_NOTIFICATION_CENTER_ROUTERS, (permission_group) = PERMISSION_GROUP_NOTIFICATIONS, (description) = "Read Notification Center routers data", (doc_link) = "", (explanation) = "View the existing routers in the notification center and their routing rules", (hidden) = true, (is_team_level) = true];
+  PERMISSION_NOTIFICATION_CENTER_ROUTERS_READ_SUMMARY = 241 [(expression) = "notification-center-routers:ReadSummary", (action) = ACTION_READ_SUMMARY, (resource) = RESOURCE_NOTIFICATION_CENTER_ROUTERS, (permission_group) = PERMISSION_GROUP_NOTIFICATIONS, (description) = "View Notification Center routers list", (doc_link) = "", (explanation) = "View the list of existing routers in the notification center", (hidden) = true, (is_team_level) = true];
+  PERMISSION_NOTIFICATION_CENTER_ROUTERS_UPDATE_CONFIG = 242 [(expression) = "notification-center-routers:UpdateConfig", (action) = ACTION_UPDATECONFIG, (resource) = RESOURCE_NOTIFICATION_CENTER_ROUTERS, (permission_group) = PERMISSION_GROUP_NOTIFICATIONS, (description) = "Edit Notification Center routers", (doc_link) = "", (explanation) = "Create and edit routers in the notification center and their routing rules", (hidden) = true, (is_team_level) = true];
+  PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA = 243 [(expression) = "profiles-data-ingress:SendData", (action) = ACTION_SENDDATA, (resource) = RESOURCE_PROFILES_DATA_INGRESS, (permission_group) = PERMISSION_GROUP_PROFILES, (description) = "Send Profiles", (doc_link) = "", (explanation) = "Send profiles to Coralogix.", (send_data) = true, (is_team_level) = true];
 }
 

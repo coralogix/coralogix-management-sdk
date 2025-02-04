@@ -96,10 +96,23 @@ message GetDashboardRequest {
   google.protobuf.StringValue dashboard_id = 1;
 }
 
+enum TokenOriginType {
+  TOKEN_ORIGIN_TYPE_UNSPECIFIED = 0;
+  TOKEN_ORIGIN_TYPE_USER = 1;
+  TOKEN_ORIGIN_TYPE_API = 2;
+}
+
 message GetDashboardResponse {
   ast.Dashboard dashboard = 1;
 
   google.protobuf.Timestamp updated_at = 2;
+  google.protobuf.Timestamp created_at = 3;
+
+  google.protobuf.StringValue updater_author_id = 4;
+  google.protobuf.StringValue author_id = 5;
+
+  TokenOriginType updated_origin_type = 6;
+  TokenOriginType created_origin_type = 7;
 }
 
 message PinDashboardRequest {

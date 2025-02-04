@@ -16,7 +16,7 @@ message AlertNotificationEvent {
   google.protobuf.StringValue id = 2;
   AlertStatus status = 3;
   Attachments attachments = 4;
-  repeated Group groups = 5;
+  map<string, Group> groups = 5;
 }
 
 message Group {

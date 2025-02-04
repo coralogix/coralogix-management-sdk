@@ -47,6 +47,7 @@ message Gauge {
     repeated Filter.MetricsFilter filters = 3;
     common.MetricsQueryEditorMode editor_mode = 4;
     v1.common.TimeFrameSelect time_frame = 5;
+    v1.common.PromQLQueryType promql_query_type = 6;
   }
 
   message LogsQuery {

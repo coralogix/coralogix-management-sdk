@@ -3,7 +3,7 @@ syntax = "proto3";
 package com.coralogix.datausage.v1;
 
 import "com/coralogix/datausage/v1/common.proto";
-import "com/coralogix/datausage/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/datausage/v1/data_usage.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
@@ -14,7 +14,7 @@ import "google/protobuf/wrappers.proto";
 service DataUsageService {
   /// Returns a list of quota (units) used per day for a list of teams in the requested days
   rpc GetTeamsDailyUsage(GetTeamsDailyUsageRequest) returns (GetTeamsDailyUsageResponse) {
-    option (audit_log_description).description = "Get daily quota details for a given set of teams";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get daily quota details for a given set of teams";
     option (google.api.http) = {
       post: "/api/v1/data_usage/teams/daily/usage"
       body: "*"
@@ -23,7 +23,7 @@ service DataUsageService {
 
   /// Returns a list of block events (can be more than one per day) for a list of teams in the requested days
   rpc GetTeamsBlocks(GetTeamsBlocksRequest) returns (GetTeamsBlocksResponse) {
-    option (audit_log_description).description = "Get all blocked events for a given set of teams";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all blocked events for a given set of teams";
     option (google.api.http) = {
       post: "/api/v1/data_usage/teams/blocks"
       body: "*"
@@ -32,7 +32,7 @@ service DataUsageService {
 
   /// Returns a list of quota updates (can be more than one per day) for a list of teams in the requested days
   rpc GetTeamsQuotaHistory(GetTeamsQuotaHistoryRequest) returns (GetTeamsQuotaHistoryResponse) {
-    option (audit_log_description).description = "Get quota history a given set of teams";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get quota history a given set of teams";
     option (google.api.http) = {
       post: "/api/v1/data_usage/teams/quota_history"
       body: "*"
@@ -41,7 +41,7 @@ service DataUsageService {
 
   /// Returns the quota plan for a given set of teams at the requested timestamp
   rpc GetTeamsQuota(GetTeamsQuotaRequest) returns (GetTeamsQuotaResponse) {
-    option (audit_log_description).description = "Get Teams Quota of a given set of teams";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Teams Quota of a given set of teams";
     option (google.api.http) = {
       post: "/api/v1/data_usage/teams/quota"
       body: "*"
@@ -49,13 +49,13 @@ service DataUsageService {
   }
 
   rpc GetTeamsDetailedUsage(GetTeamsDetailedUsageRequest) returns (stream GetTeamsDetailedUsageResponse) {
-    option (audit_log_description).description = "Get Teams' logs Data Usage broken down per application/subsystem/severity/tco";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Teams' logs Data Usage broken down per application/subsystem/severity/tco";
     option deprecated = true;
   };
 
   /// Returns a list of data usage for a given set of teams, time_range and resolution
   rpc GetDataUsage(GetDataUsageRequest) returns (GetDataUsageResponse) {
-    option (audit_log_description).description = "Get Teams data usage";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Teams data usage";
     option (google.api.http) = {
       post: "/api/v1/data_usage/teams"
       body: "*"
@@ -63,11 +63,11 @@ service DataUsageService {
   }
 
   rpc GetDetailedDataUsage(GetDetailedDataUsageRequest) returns (stream GetDetailedDataUsageResponse) {
-    option (audit_log_description).description = "Get Team Data Usage broken down to dimensions";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Team Data Usage broken down to dimensions";
   }
 
   rpc GetDetailedDataUsageChunked(GetDetailedDataUsageChunkedRequest) returns (stream GetDetailedDataUsageChunkedResponse) {
-    option (audit_log_description).description = "Get Team Data Usage broken down to dimensions (chunked)";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Team Data Usage broken down to dimensions (chunked)";
   }
 }
 

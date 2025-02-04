@@ -8,6 +8,9 @@ import "google/protobuf/timestamp.proto";
 import "com/coralogix/archive/dataset/v2/preferred_schema.proto";
 import "com/coralogix/archive/dataset/v2/dataset.proto";
 import "com/coralogix/archive/dataset/v2/dataset_rules_service.proto";
+import "com/coralogix/archive/v2/target.proto";
+import "com/coralogix/archive/v2/format.proto";
+import "com/coralogix/archive/dataset/v2/default_keys.proto";
 
 service InternalDatasetManagementService {
   rpc GetAllDatasetRules(GetAllDatasetRulesRequest) returns (GetAllDatasetRulesResponse) {
@@ -21,6 +24,10 @@ service InternalDatasetManagementService {
   }
   rpc GetSchemaRule(InternalDatasetManagementServiceGetSchemaRuleRequest) returns (InternalDatasetManagementServiceGetSchemaRuleResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Set dataset rule definition";
+  }
+
+  rpc InternalWriteToDataset(InternalWriteToDatasetRequest) returns (InternalWriteToDatasetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Create a dataset from files";
   }
 }
 
@@ -74,3 +81,28 @@ message InternalDatasetManagementServiceGetSchemaRuleRequest {
 message InternalDatasetManagementServiceGetSchemaRuleResponse {
   Rule rule = 1;
 }
+
+message InputFile {
+  oneof bucket {
+    archive.v2.S3TargetSpec s3 = 1;
+    archive.v2.IBMCosTargetSpec ibm_cos = 2;
+  };
+  string path = 3;
+  com.coralogix.archive.v2.Format format = 4;
+}
+
+enum WriteToDatasetMode {
+  WRITE_TO_DATASET_MODE_UNSPECIFIED = 0;
+  WRITE_TO_DATASET_MODE_OVERWRITE = 1;
+  WRITE_TO_DATASET_MODE_APPEND = 2;
+}
+
+message InternalWriteToDatasetRequest {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
+  repeated InputFile input_files = 3;
+  repeated FieldPath default_key_fields = 4;
+  WriteToDatasetMode mode = 5;
+}
+
+message InternalWriteToDatasetResponse {}

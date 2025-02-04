@@ -5,6 +5,7 @@ package com.coralogix.archive.v2;
 import "com/coralogix/archive/dataset/v1/dataset.proto";
 import "com/coralogix/archive/v2/archive_target.proto";
 import "com/coralogix/archive/dataset/v2/physical_location.proto";
+import "com/coralogix/archive/v2/schema.proto";
 
 message Object {
   reserved 1;
@@ -18,11 +19,12 @@ message Object {
   repeated Labels collected_event_labels = 9;
   Labels split_by_event_labels = 10;
   ArchiveTarget archive_target = 11;
-  dataset.v2.IngestionFinalLocation physical_location = 16;
   reserved 12;
   reserved 13;
   bool columns_limit_reached = 14;
   EventTimeRange event_time_range = 15;
+  dataset.v2.IngestionFinalLocation physical_location = 16;
+  SchemaTree schema = 17;
 }
 
 message ObjectCreated {
@@ -38,10 +40,18 @@ message ObjectsReplaced {
   repeated ObjectRemoved removed = 2;
 }
 
+message ObjectsReplacedAll {
+  repeated ObjectCreated created = 1;
+  repeated string removed_physical_location_ids = 2;
+  // Added for compatibility reasons. Will be removed once metastore moved to PL stable id everywhere
+  repeated dataset.v2.FinalLocation locations = 3;
+}
+
 message CompactionEvent {
   oneof event {
     ObjectCreated created = 1;
     ObjectsReplaced replaced = 2;
+    ObjectsReplacedAll replaced_all = 4;
   }
   string archive_id = 3;
 }

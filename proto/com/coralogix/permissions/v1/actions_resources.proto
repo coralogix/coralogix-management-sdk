@@ -1,3 +1,4 @@
+// clang-format off
 syntax = "proto3";
 
 package com.coralogix.permissions.v1;
@@ -142,6 +143,8 @@ enum Resource {
   RESOURCE_HIDE_ERRORS = 130 [(name) = "hide-errors"];
   RESOURCE_RUM_SETTINGS = 131 [(name) = "rum-settings"];
   RESOURCE_SESSION_RECORDING = 132 [(name) = "session-recording"];
+  RESOURCE_NOTIFICATION_CENTER_ROUTERS = 133 [(name) = "notification-center-routers"];
+  RESOURCE_PROFILES_DATA_INGRESS = 134 [(name) = "profiles-data-ingress"];
 }
 
 

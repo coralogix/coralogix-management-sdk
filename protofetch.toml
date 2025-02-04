@@ -7,11 +7,11 @@ revision = 'v0.17.1'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.8"
+revision = "v0.5.9"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.2"
+revision = "v1.3"
 allow_policies = [
     "/com/coralogixapis/views/v1/audit_log.proto",
     "/com/coralogixapis/views/v1/filters.proto",
@@ -49,7 +49,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
 ]
-revision = "v2.2.0"
+revision = "v2.3.1"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -62,7 +62,7 @@ revision = 'v0.3.0'
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.18"
+revision = "v0.1.20"
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
@@ -100,21 +100,22 @@ revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.91"
+revision = "v0.1.94"
 allow_policies = [
-    "/com/coralogix/permissions/models/v1/*",
-    "/com/coralogix/permissions/v1/actions_resources.proto",
-    "/com/coralogix/permissions/v1/common.proto",
-    "/com/coralogix/permissions/v1/permissions_mgmt.proto",
-    "/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
-    "/com/coralogixapis/aaa/apikeys/v3/*",
-    "/com/coralogixapis/aaa/rbac/v2/*",
-    "/com/coralogixapis/aaa/sso/v2/*",
+    "src/com/coralogix/permissions/models/v1/*",
+    "src/com/coralogix/permissions/v1/actions_resources.proto",
+    "src/com/coralogix/permissions/v1/common.proto",
+    "src/com/coralogix/permissions/v1/permissions_mgmt.proto",
+    "src/com/coralogix/permissions/v1/permission_definitions.proto",
+    "src/com/coralogix/permissions/v1/team_permissions_mgmt_service.proto",
+    "src/com/coralogixapis/aaa/apikeys/v3/*",
+    "src/com/coralogixapis/aaa/rbac/v2/*",
+    "src/com/coralogixapis/aaa/sso/v2/*",
 ]
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.85"
+revision = "v0.0.92"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'

@@ -46,6 +46,7 @@ message Hexagon {
     common.MetricsQueryEditorMode editor_mode = 3;
     v1.common.TimeFrameSelect time_frame = 4;
     common.Aggregation aggregation = 5;
+    v1.common.PromQLQueryType promql_query_type = 6;
   }
 
   message LogsQuery {
