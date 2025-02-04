@@ -1095,6 +1095,15 @@ type DashboardDataTableSpansQueryAggregation = dashboards.DataTable_SpansQuery_A
 // DashboardDataTableColumn is a type for dashboard charts.
 type DashboardDataTableColumn = dashboards.DataTable_Column
 
+// TimeframeSelectRelative is a type for dashboard charts.
+type TimeframeSelectRelative = dashboards.TimeFrameSelect_RelativeTimeFrame
+
+// TimeframeSelectAbsolute is a type for dashboard charts.
+type TimeframeSelectAbsolute = dashboards.TimeFrameSelect_AbsoluteTimeFrame
+
+// TimeframeSelect is a type for dashboard charts.
+type TimeframeSelect = dashboards.TimeFrameSelect
+
 // DashboardRelativeTimeFrame is a type for dashboard charts.
 type DashboardRelativeTimeFrame = dashboards.Dashboard_RelativeTimeFrame
 
@@ -1158,6 +1167,19 @@ const (
 	ThresholdTypeUnspecified = dashboards.ThresholdType_THRESHOLD_TYPE_UNSPECIFIED
 	ThresholdTypeAbsolute    = dashboards.ThresholdType_THRESHOLD_TYPE_ABSOLUTE
 	ThresholdTypeRelative    = dashboards.ThresholdType_THRESHOLD_TYPE_RELATIVE
+)
+
+// HexagonMetricAggregation is a type for aggregating values.
+type HexagonMetricAggregation = dashboards.Aggregation
+
+// HexagonMetricAggregation values
+const (
+	HexagonMetricAggregationUnspecified = dashboards.Aggregation_AGGREGATION_UNSPECIFIED
+	HexagonMetricAggregationLast        = dashboards.Aggregation_AGGREGATION_LAST
+	HexagonMetricAggregationMin         = dashboards.Aggregation_AGGREGATION_MIN
+	HexagonMetricAggregationMax         = dashboards.Aggregation_AGGREGATION_MAX
+	HexagonMetricAggregationAvg         = dashboards.Aggregation_AGGREGATION_AVG
+	HexagonMetricAggregationSum         = dashboards.Aggregation_AGGREGATION_SUM
 )
 
 const dashboardsFeatureGroupID = "dashboards"
