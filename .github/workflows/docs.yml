@@ -3,6 +3,7 @@ on:
   push:
     branches: [master]
     paths:
+      - openapi.yaml
       - 'rust/**'
       - 'go/**'
   workflow_dispatch:
