@@ -78,8 +78,9 @@ impl DashboardsClient {
     /// # Arguments
     /// * `auth_context` - The [`AuthContext`] to use for authentication.
     /// * `region` - The [`CoralogixRegion`] to connect to.
-    pub fn new(auth_context: AuthContext, region: CoralogixRegion) -> Result<Self> {
-        let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?
+    pub fn new(auth_context: AuthContext, _: CoralogixRegion) -> Result<Self> {
+        let local_endpoint = "localhost:50051";
+        let channel: Channel = Endpoint::from_str(&local_endpoint)?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
         let teams_level_auth_data: CallProperties = (&auth_context.team_level_api_key).into();
