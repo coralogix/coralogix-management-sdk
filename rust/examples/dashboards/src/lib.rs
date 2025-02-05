@@ -36,7 +36,9 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-        let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
+        let raw_dashboard = tokio::fs::read_to_string("dashboard_test.json")
+            .await
+            .unwrap();
         let mut dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
         dashboard.id = Some(uuid::Uuid::new_v4().to_string()[..21].to_string());
         let id = dashboard.id.as_ref().unwrap().clone();

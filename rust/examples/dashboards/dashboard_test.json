@@ -1,0 +1,747 @@
+{
+
+    "id": "1e4aEBwZ6jmzpzW0JcE6O",
+
+    "name": "DRE Aurora Bronze Signals ",
+
+    "layout": {
+
+      "sections": [
+
+        {
+
+          "id": {
+
+            "value": "c723c722-84a5-8c47-6eeb-214acdf129ba"
+
+          },
+
+          "rows": [
+
+            {
+
+              "id": {
+
+                "value": "4dbec50e-9083-e456-81ce-63c424a00163"
+
+              },
+
+              "appearance": {
+
+                "height": 10
+
+              },
+
+              "widgets": [
+
+                {
+
+                  "id": {
+
+                    "value": "fb9ca888-7b65-27ae-d417-01fe47d3b08c"
+
+                  },
+
+                  "title": "Total DBLoad",
+
+                  "definition": {
+
+                    "lineChart": {
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [],
+
+                        "groupByQuery": true,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "tooltip": {
+
+                        "showLabels": true,
+
+                        "type": "TOOLTIP_TYPE_ALL"
+
+                      },
+
+                      "queryDefinitions": [
+
+                        {
+
+                          "id": "3cb11618-784b-79f9-424d-dae898809d7f",
+
+                          "query": {
+
+                            "metrics": {
+
+                              "promqlQuery": {
+
+                                "value": "avg(avg(amazonaws_com_AWS_RDS_DBLoadCPU_avg{DBInstanceIdentifier=~\"db\\\\d-\\\\d\"}) by (DBInstanceIdentifier) + avg(amazonaws_com_AWS_RDS_DBLoadNonCPU_avg{DBInstanceIdentifier=~\"db\\\\d-\\\\d\"}) by (DBInstanceIdentifier)) by (DBInstanceIdentifier)\n"
+
+                              },
+
+                              "filters": [],
+
+                              "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                            }
+
+                          },
+
+                          "seriesNameTemplate": "{{DBInstanceIdentifier}}",
+
+                          "seriesCountLimit": "20",
+
+                          "unit": "UNIT_UNSPECIFIED",
+
+                          "scaleType": "SCALE_TYPE_LINEAR",
+
+                          "name": "Query 1",
+
+                          "isVisible": true,
+
+                          "colorScheme": "cold",
+
+                          "resolution": {
+
+                            "bucketsPresented": 96
+
+                          },
+
+                          "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                          "customUnit": "",
+
+                          "decimal": 2
+
+                        }
+
+                      ],
+
+                      "stackedLine": "STACKED_LINE_UNSPECIFIED"
+
+                    }
+
+                  }
+
+                },
+
+                {
+
+                  "id": {
+
+                    "value": "6685c0bf-d6cd-afa2-e621-b6bb27c14bfe"
+
+                  },
+
+                  "title": "Total DBLoad vs Num vCPUs",
+
+                  "description": "Values > 1 indicate overloading",
+
+                  "definition": {
+
+                    "lineChart": {
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [],
+
+                        "groupByQuery": true,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "tooltip": {
+
+                        "showLabels": true,
+
+                        "type": "TOOLTIP_TYPE_ALL"
+
+                      },
+
+                      "queryDefinitions": [
+
+                        {
+
+                          "id": "2ca84121-5c3c-ed1a-12b9-7aadc8a20d92",
+
+                          "query": {
+
+                            "metrics": {
+
+                              "promqlQuery": {
+
+                                "value": "avg(amazonaws_com_AWS_RDS_DBLoadRelativeToNumVCPUs_avg{DBInstanceIdentifier=~\"db\\\\d-\\\\d\"}) by (DBInstanceIdentifier)"
+
+                              },
+
+                              "filters": [],
+
+                              "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                            }
+
+                          },
+
+                          "seriesNameTemplate": "{{DBInstanceIdentifier}}",
+
+                          "seriesCountLimit": "20",
+
+                          "unit": "UNIT_UNSPECIFIED",
+
+                          "scaleType": "SCALE_TYPE_LINEAR",
+
+                          "name": "Query 1",
+
+                          "isVisible": true,
+
+                          "colorScheme": "cold",
+
+                          "resolution": {
+
+                            "bucketsPresented": 96
+
+                          },
+
+                          "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                          "customUnit": "",
+
+                          "decimal": 2
+
+                        },
+
+                        {
+
+                          "id": "7eba2f2d-0921-6ad9-74c8-207e44df597d",
+
+                          "query": {
+
+                            "metrics": {
+
+                              "promqlQuery": {
+
+                                "value": "1"
+
+                              },
+
+                              "filters": [],
+
+                              "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                            }
+
+                          },
+
+                          "seriesNameTemplate": "Max",
+
+                          "seriesCountLimit": "20",
+
+                          "unit": "UNIT_UNSPECIFIED",
+
+                          "scaleType": "SCALE_TYPE_LINEAR",
+
+                          "isVisible": true,
+
+                          "colorScheme": "negative",
+
+                          "resolution": {
+
+                            "bucketsPresented": 96
+
+                          },
+
+                          "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                          "customUnit": "",
+
+                          "decimal": 2
+
+                        }
+
+                      ],
+
+                      "stackedLine": "STACKED_LINE_UNSPECIFIED"
+
+                    }
+
+                  }
+
+                }
+
+              ]
+
+            },
+
+            {
+
+              "id": {
+
+                "value": "a0515287-ca30-a152-ddc6-625efd4febb5"
+
+              },
+
+              "appearance": {
+
+                "height": 8
+
+              },
+
+              "widgets": [
+
+                {
+
+                  "id": {
+
+                    "value": "c900ec41-c7bc-8c9e-086e-28460f93e0e6"
+
+                  },
+
+                  "title": "Total DBLoad CPU",
+
+                  "definition": {
+
+                    "lineChart": {
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [],
+
+                        "groupByQuery": true,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "tooltip": {
+
+                        "showLabels": false,
+
+                        "type": "TOOLTIP_TYPE_ALL"
+
+                      },
+
+                      "queryDefinitions": [
+
+                        {
+
+                          "id": "8dbe2fff-97be-7599-53a6-dad3b5dbb459",
+
+                          "query": {
+
+                            "metrics": {
+
+                              "promqlQuery": {
+
+                                "value": "avg(amazonaws_com_AWS_RDS_DBLoadCPU_avg{DBInstanceIdentifier=~\"db\\\\d-\\\\d\"}) by (DBInstanceIdentifier)"
+
+                              },
+
+                              "filters": [],
+
+                              "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                            }
+
+                          },
+
+                          "seriesNameTemplate": "{{DBInstanceIdentifier}}",
+
+                          "seriesCountLimit": "20",
+
+                          "unit": "UNIT_UNSPECIFIED",
+
+                          "scaleType": "SCALE_TYPE_LINEAR",
+
+                          "name": "Query 1",
+
+                          "isVisible": true,
+
+                          "colorScheme": "cold",
+
+                          "resolution": {
+
+                            "bucketsPresented": 96
+
+                          },
+
+                          "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                          "customUnit": "",
+
+                          "decimal": 2
+
+                        }
+
+                      ],
+
+                      "stackedLine": "STACKED_LINE_UNSPECIFIED"
+
+                    }
+
+                  }
+
+                },
+
+                {
+
+                  "id": {
+
+                    "value": "c4ea5122-b0d9-b44d-f1a7-632a3a17a211"
+
+                  },
+
+                  "title": "Total DBLoad Non-CPU",
+
+                  "definition": {
+
+                    "lineChart": {
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [],
+
+                        "groupByQuery": true,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "tooltip": {
+
+                        "showLabels": false,
+
+                        "type": "TOOLTIP_TYPE_ALL"
+
+                      },
+
+                      "queryDefinitions": [
+
+                        {
+
+                          "id": "c4da3d74-1566-6c47-b100-d12a4b38a1c2",
+
+                          "query": {
+
+                            "metrics": {
+
+                              "promqlQuery": {
+
+                                "value": "avg(amazonaws_com_AWS_RDS_DBLoadNonCPU_avg{DBInstanceIdentifier=~\"db\\\\d-\\\\d\"}) by (DBInstanceIdentifier)"
+
+                              },
+
+                              "filters": [],
+
+                              "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                            }
+
+                          },
+
+                          "seriesNameTemplate": "{{DBInstanceIdentifier}}",
+
+                          "seriesCountLimit": "20",
+
+                          "unit": "UNIT_UNSPECIFIED",
+
+                          "scaleType": "SCALE_TYPE_LINEAR",
+
+                          "name": "Query 1",
+
+                          "isVisible": true,
+
+                          "colorScheme": "cold",
+
+                          "resolution": {
+
+                            "bucketsPresented": 96
+
+                          },
+
+                          "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                          "customUnit": "",
+
+                          "decimal": 2
+
+                        }
+
+                      ],
+
+                      "stackedLine": "STACKED_LINE_UNSPECIFIED"
+
+                    }
+
+                  }
+
+                }
+
+              ]
+
+            },
+
+            {
+
+              "id": {
+
+                "value": "33b3b4b4-f216-ed31-cf57-5304365f0f03"
+
+              },
+
+              "appearance": {
+
+                "height": 8
+
+              },
+
+              "widgets": [
+
+                {
+
+                  "id": {
+
+                    "value": "7de158ca-e122-1b56-4793-f97bbff6be3f"
+
+                  },
+
+                  "title": "Deadlocks",
+
+                  "definition": {
+
+                    "gauge": {
+
+                      "query": {
+
+                        "metrics": {
+
+                          "promqlQuery": {
+
+                            "value": "max(amazonaws_com_AWS_RDS_Deadlocks_max{DBClusterIdentifier =~ 'db\\\\d'}) by (DBClusterIdentifier)"
+
+                          },
+
+                          "aggregation": "AGGREGATION_UNSPECIFIED",
+
+                          "filters": [],
+
+                          "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                        }
+
+                      },
+
+                      "min": 0,
+
+                      "max": 3,
+
+                      "showInnerArc": false,
+
+                      "showOuterArc": false,
+
+                      "unit": "UNIT_NUMBER",
+
+                      "thresholds": [
+
+                        {
+
+                          "from": 0,
+
+                          "color": "var(--c-severity-log-verbose)"
+
+                        },
+
+                        {
+
+                          "from": 33,
+
+                          "color": "var(--c-severity-log-warning)"
+
+                        },
+
+                        {
+
+                          "from": 66,
+
+                          "color": "var(--c-severity-log-error)"
+
+                        }
+
+                      ],
+
+                      "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                      "thresholdBy": "THRESHOLD_BY_VALUE",
+
+                      "customUnit": "",
+
+                      "decimal": 0,
+
+                      "thresholdType": "THRESHOLD_TYPE_RELATIVE",
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [],
+
+                        "groupByQuery": false,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "legendBy": "LEGEND_BY_GROUPS"
+
+                    }
+
+                  }
+
+                },
+
+                {
+
+                  "id": {
+
+                    "value": "d0933dfd-5d9a-2504-a900-73254e8ac047"
+
+                  },
+
+                  "title": "Uptime",
+
+                  "definition": {
+
+                    "gauge": {
+
+                      "query": {
+
+                        "metrics": {
+
+                          "promqlQuery": {
+
+                            "value": "avg(amazonaws_com_AWS_RDS_EngineUptime_avg{DBInstanceIdentifier=\"db2-1\"}) by (DBInstanceIdentifier)"
+
+                          },
+
+                          "aggregation": "AGGREGATION_UNSPECIFIED",
+
+                          "filters": [],
+
+                          "editorMode": "METRICS_QUERY_EDITOR_MODE_TEXT"
+
+                        }
+
+                      },
+
+                      "min": 0,
+
+                      "max": 14400,
+
+                      "showInnerArc": false,
+
+                      "showOuterArc": false,
+
+                      "unit": "UNIT_SECONDS",
+
+                      "thresholds": [
+
+                        {
+
+                          "from": 0,
+
+                          "color": "var(--c-severity-log-error)"
+
+                        },
+
+                        {
+
+                          "from": 3600,
+
+                          "color": "var(--c-severity-log-warning)"
+
+                        },
+
+                        {
+
+                          "from": 7200,
+
+                          "color": "var(--c-severity-log-verbose)"
+
+                        }
+
+                      ],
+
+                      "dataModeType": "DATA_MODE_TYPE_HIGH_UNSPECIFIED",
+
+                      "thresholdBy": "THRESHOLD_BY_VALUE",
+
+                      "customUnit": "",
+
+                      "decimal": 2,
+
+                      "thresholdType": "THRESHOLD_TYPE_ABSOLUTE",
+
+                      "legend": {
+
+                        "isVisible": true,
+
+                        "columns": [
+
+                          "LEGEND_COLUMN_NAME"
+
+                        ],
+
+                        "groupByQuery": false,
+
+                        "placement": "LEGEND_PLACEMENT_AUTO"
+
+                      },
+
+                      "legendBy": "LEGEND_BY_GROUPS"
+
+                    }
+
+                  }
+
+                }
+
+              ]
+
+            }
+
+          ],
+
+          "options": {
+
+            "internal": {}
+
+          }
+
+        }
+
+      ]
+
+    },
+
+    "variables": [],
+
+    "filters": [],
+
+    "relativeTimeFrame": "7200s",
+
+    "annotations": [],
+
+    "off": {}
+
+  }
