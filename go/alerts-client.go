@@ -44,6 +44,21 @@ type AlertDefRecipients = alerts.Recipients
 // AlertDefWebhooksSettings is a webhook setting for an alert.
 type AlertDefWebhooksSettings = alerts.AlertDefWebhooksSettings
 
+// NotificationDestination is a destination for notifications.
+type NotificationDestination = alerts.NotificationDestination
+
+// NotificationRouting is a routing for notifications.
+type NotificationRouting = alerts.NotificationRouting
+
+// SourceOverrides is a source override for alerts.
+type SourceOverrides = alerts.SourceOverrides
+
+// AlertsMessageConfigField is a message configuration field for alerts.
+type AlertsMessageConfigField = alerts.MessageConfigField
+
+// AlertsConnectorConfigField is a connector configuration field for alerts.
+type AlertsConnectorConfigField = alerts.ConnectorConfigField
+
 // AlertDefScheduleActiveOn represents the active on schedule of an alert.
 type AlertDefScheduleActiveOn = alerts.AlertDefProperties_ActiveOn
 
