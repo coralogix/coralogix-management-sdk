@@ -495,6 +495,9 @@ type WidgetDefinitionPieChart = dashboards.Widget_Definition_PieChart
 // WidgetDefinitionBarChart is a widget definition.
 type WidgetDefinitionBarChart = dashboards.Widget_Definition_BarChart
 
+// WidgetDefinitionHexagon is a widget definition for hexagons.
+type WidgetDefinitionHexagon = dashboards.Widget_Definition_Hexagon
+
 // Markdown is a widget definition inner type.
 type Markdown = dashboards.Markdown
 
@@ -518,6 +521,9 @@ type BarChart = dashboards.BarChart
 
 // WidgetDefinition is a widget definition.
 type WidgetDefinition = dashboards.Widget_Definition
+
+// Hexagon is a widget definition inner type.
+type Hexagon = dashboards.Hexagon
 
 // DashboardRow is a row in a dashboard.
 type DashboardRow = dashboards.Row
@@ -674,7 +680,11 @@ type DashboardFilterNotEqualsSelectionList = dashboards.Filter_NotEquals_Selecti
 type DashboardFilterNotEqualsSelectionListSelection = dashboards.Filter_NotEquals_Selection_ListSelection
 
 // DashboardPromQlQuery is a promQL query.
+// Deprecated: Use DashboardPromQLQuery (upper case 'L') instead.
 type DashboardPromQlQuery = dashboards.PromQlQuery
+
+// DashboardPromQLQuery is a promQL query.
+type DashboardPromQLQuery = dashboards.PromQlQuery
 
 // DashboardLuceneQuery is a lucene query.
 type DashboardLuceneQuery = dashboards.LuceneQuery
@@ -798,18 +808,6 @@ type AnnotationMetricsSourceStartTimeMetric = dashboards.Annotation_MetricsSourc
 
 // AnnotationMetricsSourceStrategyStartTimeMetric is an annotation variant.
 type AnnotationMetricsSourceStrategyStartTimeMetric = dashboards.Annotation_MetricsSource_Strategy_StartTimeMetric
-
-// AnnotationMetricsSourceStrategyRange is an annotation variant.
-// type AnnotationMetricsSourceStrategyRange = dashboards.Annotation_MetricsSource_Strategy_Range_
-
-// // AnnotationMetricsSourceStrategyRangeInner is an annotation variant.
-// type AnnotationMetricsSourceStrategyRangeInner = dashboards.Annotation_MetricsSource_Strategy_Range
-
-// // AnnotationMetricsSourceStrategyInstant is an annotation variant.
-// type AnnotationMetricsSourceStrategyInstant = dashboards.Annotation_MetricsSource_Strategy_Instant_
-
-// // AnnotationMetricsSourceStrategyInstantInner is an annotation variant.
-// type AnnotationMetricsSourceStrategyInstantInner = dashboards.Annotation_MetricsSource_Strategy_Instant
 
 // DashboardLayout is a dashboard layout type.
 type DashboardLayout = dashboards.Layout
@@ -1097,6 +1095,15 @@ type DashboardDataTableSpansQueryAggregation = dashboards.DataTable_SpansQuery_A
 // DashboardDataTableColumn is a type for dashboard charts.
 type DashboardDataTableColumn = dashboards.DataTable_Column
 
+// TimeframeSelectRelative is a type for dashboard charts.
+type TimeframeSelectRelative = dashboards.TimeFrameSelect_RelativeTimeFrame
+
+// TimeframeSelectAbsolute is a type for dashboard charts.
+type TimeframeSelectAbsolute = dashboards.TimeFrameSelect_AbsoluteTimeFrame
+
+// TimeframeSelect is a type for dashboard charts.
+type TimeframeSelect = dashboards.TimeFrameSelect
+
 // DashboardRelativeTimeFrame is a type for dashboard charts.
 type DashboardRelativeTimeFrame = dashboards.Dashboard_RelativeTimeFrame
 
@@ -1108,6 +1115,72 @@ type DashboardTimeFrame = dashboards.TimeFrame
 
 // DashboardOrderingField is a type for dashboard charts.
 type DashboardOrderingField = dashboards.OrderingField
+
+// LegendBy is a legend configuration option.
+type LegendBy = dashboards.LegendBy
+
+// LegendBy values.
+const (
+	LegendByUnspecified = dashboards.LegendBy_LEGEND_BY_UNSPECIFIED
+	LegendByThresholds  = dashboards.LegendBy_LEGEND_BY_THRESHOLDS
+	LegendByGroups      = dashboards.LegendBy_LEGEND_BY_GROUPS
+)
+
+// HexagonQuery is a query class for hexagons.
+type HexagonQuery = dashboards.Hexagon_Query
+
+// HexagonDataprimeQuery is a dataprime query for hexagon widgets.
+type HexagonDataprimeQuery = dashboards.Hexagon_DataprimeQuery
+
+// HexagonQueryDataprime is a dataprime query for hexagon widgets.
+type HexagonQueryDataprime = dashboards.Hexagon_Query_Dataprime
+
+// HexagonLogsQuery is a logs query for hexagon widgets.
+type HexagonLogsQuery = dashboards.Hexagon_LogsQuery
+
+// HexagonQueryLogs is a logs query for hexagon widgets.
+type HexagonQueryLogs = dashboards.Hexagon_Query_Logs
+
+// HexagonMetricsQuery is a metrics query for hexagon widgets.
+type HexagonMetricsQuery = dashboards.Hexagon_MetricsQuery
+
+// HexagonQueryMetrics is a metrics query for hexagon widgets.
+type HexagonQueryMetrics = dashboards.Hexagon_Query_Metrics
+
+// HexagonSpansQuery is a spans query for hexagon widgets.
+type HexagonSpansQuery = dashboards.Hexagon_SpansQuery
+
+// HexagonQuerySpans is a spans query for hexagon widgets.
+type HexagonQuerySpans = dashboards.Hexagon_Query_Spans
+
+// HexagonSpansQueryGrouping is a spans query grouping for hexagon widgets.
+type HexagonSpansQueryGrouping = dashboards.Hexagon_SpansQuery
+
+// Threshold is a hexagon threshold configuration option.
+type Threshold = dashboards.Threshold
+
+// ThresholdType is a legend configuration option.
+type ThresholdType = dashboards.ThresholdType
+
+// ThresholdType values.
+const (
+	ThresholdTypeUnspecified = dashboards.ThresholdType_THRESHOLD_TYPE_UNSPECIFIED
+	ThresholdTypeAbsolute    = dashboards.ThresholdType_THRESHOLD_TYPE_ABSOLUTE
+	ThresholdTypeRelative    = dashboards.ThresholdType_THRESHOLD_TYPE_RELATIVE
+)
+
+// HexagonMetricAggregation is a type for aggregating values.
+type HexagonMetricAggregation = dashboards.Aggregation
+
+// HexagonMetricAggregation values
+const (
+	HexagonMetricAggregationUnspecified = dashboards.Aggregation_AGGREGATION_UNSPECIFIED
+	HexagonMetricAggregationLast        = dashboards.Aggregation_AGGREGATION_LAST
+	HexagonMetricAggregationMin         = dashboards.Aggregation_AGGREGATION_MIN
+	HexagonMetricAggregationMax         = dashboards.Aggregation_AGGREGATION_MAX
+	HexagonMetricAggregationAvg         = dashboards.Aggregation_AGGREGATION_AVG
+	HexagonMetricAggregationSum         = dashboards.Aggregation_AGGREGATION_SUM
+)
 
 const dashboardsFeatureGroupID = "dashboards"
 
