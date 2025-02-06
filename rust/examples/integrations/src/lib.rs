@@ -20,29 +20,15 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::{
-            integrations::{
-                IntegrationsClient,
-                Parameter,
-                StringList,
-                TestResult,
-                Value,
+            contextual_data_integrations::{
+                ContextualDataIntegrationsClient, GenericIntegrationParameters,
+                IntegrationMetadata, SpecificData,
             },
+            integrations::{IntegrationsClient, Parameter, StringList, TestResult, Value},
             webhooks::{
-                self,
-                AwsEventBridgeConfig,
-                Config,
-                DemistoConfig,
-                EmailGroupConfig,
-                GenericWebhookConfig,
-                JiraConfig,
-                OpsgenieConfig,
-                PagerDutyConfig,
-                SendLogConfig,
-                SlackConfig,
-                WebhookType,
-                WebhooksClient,
-                generic_webhook_config,
-                slack_config,
+                self, AwsEventBridgeConfig, Config, DemistoConfig, EmailGroupConfig,
+                GenericWebhookConfig, JiraConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig,
+                SlackConfig, WebhookType, WebhooksClient, generic_webhook_config, slack_config,
             },
         },
     };
@@ -307,5 +293,52 @@ mod tests {
             .unwrap();
         let _ = client.get(hook.id.clone().unwrap()).await.unwrap();
         let _ = client.delete(hook.id.clone().unwrap()).await.unwrap();
+    }
+
+    #[tokio::test]
+    async fn test_contextual_data_integrations() {
+        let integration_key = "AWS-Status-Logs";
+        let client = ContextualDataIntegrationsClient::new(
+            CoralogixRegion::from_env().unwrap(),
+            AuthContext::from_env(),
+        )
+        .unwrap();
+
+        // Get the integration definition
+        let _ = client
+            .get_definition(integration_key.into(), true)
+            .await
+            .unwrap();
+
+        // Create a new integration
+
+        let created_integration = client
+            .create(IntegrationMetadata {
+                integration_key: Some(integration_key.into()),
+                version: Some("0.0.1".into()),
+                specific_data: Some(SpecificData::IntegrationParameters(
+                    GenericIntegrationParameters { parameters: vec![] },
+                )),
+            })
+            .await
+            .unwrap();
+
+        let integration_id = created_integration.integration_id.unwrap();
+
+
+        // List integrations
+        let integrations = client.list(true).await.unwrap().integrations;
+        assert!(!integrations.is_empty());
+
+        // Delete the integration
+        client.delete(integration_id.clone()).await.unwrap();
+
+        // Verify deletion
+        let integrations_after_deletion = client.list(true).await.unwrap().integrations;
+        assert!(
+            !integrations_after_deletion
+                .into_iter()
+                .any(|i| i.integration.unwrap().id == Some(integration_id.clone()))
+        );
     }
 }

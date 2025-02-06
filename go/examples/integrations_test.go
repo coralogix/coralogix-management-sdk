@@ -352,3 +352,48 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 	})
 	assertNilAndPrintError(t, e)
 }
+
+func TestContextualDataIntegrations(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewContextualDataIntegrationsClient(creator)
+
+	// Get all integrations first to check initial state
+	allIntegrations, err := c.List(context.Background(), &cxsdk.GetContextualDataIntegrationsRequest{})
+	assertNilAndPrintError(t, err)
+	initialCount := len(allIntegrations.Integrations)
+
+	// Create a new integration
+	createResponse, err := c.Create(context.Background(), &cxsdk.SaveContextualDataIntegrationRequest{
+		Metadata: &cxsdk.IntegrationMetadata{
+			IntegrationKey: wrapperspb.String("AWS-Status-Logs"),
+			Version:        wrapperspb.String("0.0.1"),
+			SpecificData: &cxsdk.IntegrationMetadataIntegrationParameters{
+				IntegrationParameters: &cxsdk.GenericIntegrationParameters{
+					Parameters: []*cxsdk.IntegrationParameter{},
+				},
+			},
+		},
+	})
+	assertNilAndPrintError(t, err)
+
+	// Get integration definition
+	_, err = c.GetDefinition(context.Background(), &cxsdk.GetContextualDataIntegrationDefinitionRequest{
+		Id: &wrapperspb.StringValue{Value: "AWS-Status-Logs"},
+	})
+	assertNilAndPrintError(t, err)
+
+	// Delete the integration
+	_, err = c.Delete(context.Background(), &cxsdk.DeleteContextualDataIntegrationRequest{
+		IntegrationId: createResponse.IntegrationId,
+	})
+	assertNilAndPrintError(t, err)
+
+	// Verify deletion by getting all integrations again
+	finalIntegrations, err := c.List(context.Background(), &cxsdk.GetContextualDataIntegrationsRequest{})
+	assertNilAndPrintError(t, err)
+	assert.Equal(t, initialCount, len(finalIntegrations.Integrations))
+}

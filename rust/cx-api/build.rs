@@ -77,6 +77,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         saml_configuration_service(&root),
         #[cfg(feature = "notifications")]
         notifications_service(&root),
+        #[cfg(feature = "contextual_data_integrations")]
+        contextual_data_integrations_service(&root),
     ]
     .concat();
 
@@ -264,6 +266,13 @@ fn groups_service(root: &str) -> Vec<String> {
 fn integrations_service(root: &str) -> Vec<String> {
     vec![format!(
         "{}/com/coralogix/integrations/v1/integration_service.proto",
+        root
+    )]
+}
+
+fn contextual_data_integrations_service(root: &str) -> Vec<String> {
+    vec![format!(
+        "{}/com/coralogix/integrations/v1/contextual_data_integration_service.proto",
         root
     )]
 }
