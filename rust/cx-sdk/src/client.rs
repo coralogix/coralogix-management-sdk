@@ -83,3 +83,6 @@ pub mod notifications;
 
 /// This module contains the client for the Data Usage API.
 pub mod data_usage;
+
+/// This module contains the client for the Contextual Data Integrations API.
+pub mod contextual_data_integrations;

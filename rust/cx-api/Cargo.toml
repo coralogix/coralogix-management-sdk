@@ -42,6 +42,7 @@ default = [
     "recording_rule_groups",
     "saml_configuration",
     "notifications",
+    "contextual_data_integrations",
 ]
 alerts = []
 rules = []
@@ -68,6 +69,7 @@ integrations = []
 recording_rule_groups = []
 saml_configuration = []
 notifications = []
+contextual_data_integrations = []
 
 [dependencies]
 prost = { workspace = true }
