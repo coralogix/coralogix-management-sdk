@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogixapis/aaa/sso/v2/saml.proto
+// source: com/coralogixapis/aaa/sso/v2/saml.proto
 
 package v2
 
@@ -232,5 +232,5 @@ var SamlConfigurationService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogixapis/aaa/sso/v2/saml.proto",
+	Metadata: "com/coralogixapis/aaa/sso/v2/saml.proto",
 }

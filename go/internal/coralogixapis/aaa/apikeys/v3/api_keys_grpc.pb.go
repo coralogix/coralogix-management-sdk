@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogixapis/aaa/apikeys/v3/api_keys.proto
+// source: com/coralogixapis/aaa/apikeys/v3/api_keys.proto
 
 package v3
 
@@ -269,5 +269,5 @@ var ApiKeysService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogixapis/aaa/apikeys/v3/api_keys.proto",
+	Metadata: "com/coralogixapis/aaa/apikeys/v3/api_keys.proto",
 }

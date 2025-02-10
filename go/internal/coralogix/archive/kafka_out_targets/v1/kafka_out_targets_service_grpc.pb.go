@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogix/archive/kafka_out_targets/v1/kafka_out_targets_service.proto
+// source: com/coralogix/archive/kafka_out_targets/v1/kafka_out_targets_service.proto
 
 package v1
 
@@ -231,5 +231,5 @@ var KafkaOutTargetService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogix/archive/kafka_out_targets/v1/kafka_out_targets_service.proto",
+	Metadata: "com/coralogix/archive/kafka_out_targets/v1/kafka_out_targets_service.proto",
 }

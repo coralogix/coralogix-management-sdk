@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.2
 // 	protoc        v5.29.1
-// source: src/com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto
+// source: com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto
 
 package v1
 
@@ -53,11 +53,11 @@ func (x SortByType) String() string {
 }
 
 func (SortByType) Descriptor() protoreflect.EnumDescriptor {
-	return file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes[0].Descriptor()
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes[0].Descriptor()
 }
 
 func (SortByType) Type() protoreflect.EnumType {
-	return &file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes[0]
+	return &file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes[0]
 }
 
 func (x SortByType) Number() protoreflect.EnumNumber {
@@ -66,45 +66,45 @@ func (x SortByType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SortByType.Descriptor instead.
 func (SortByType) EnumDescriptor() ([]byte, []int) {
-	return file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescGZIP(), []int{0}
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescGZIP(), []int{0}
 }
 
-var File_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto protoreflect.FileDescriptor
+var File_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto protoreflect.FileDescriptor
 
-var file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc = []byte{
-	0x0a, 0x44, 0x73, 0x72, 0x63, 0x2f, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f,
-	0x67, 0x69, 0x78, 0x61, 0x70, 0x69, 0x73, 0x2f, 0x64, 0x61, 0x73, 0x68, 0x62, 0x6f, 0x61, 0x72,
-	0x64, 0x73, 0x2f, 0x76, 0x31, 0x2f, 0x61, 0x73, 0x74, 0x2f, 0x77, 0x69, 0x64, 0x67, 0x65, 0x74,
-	0x73, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x73, 0x6f, 0x72, 0x74, 0x5f, 0x62, 0x79,
-	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x32, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61,
-	0x6c, 0x6f, 0x67, 0x69, 0x78, 0x61, 0x70, 0x69, 0x73, 0x2e, 0x64, 0x61, 0x73, 0x68, 0x62, 0x6f,
-	0x61, 0x72, 0x64, 0x73, 0x2e, 0x76, 0x31, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x77, 0x69, 0x64, 0x67,
-	0x65, 0x74, 0x73, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2a, 0x59, 0x0a, 0x0a, 0x53, 0x6f,
-	0x72, 0x74, 0x42, 0x79, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1c, 0x0a, 0x18, 0x53, 0x4f, 0x52, 0x54,
-	0x5f, 0x42, 0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49,
-	0x46, 0x49, 0x45, 0x44, 0x10, 0x00, 0x12, 0x16, 0x0a, 0x12, 0x53, 0x4f, 0x52, 0x54, 0x5f, 0x42,
-	0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x56, 0x41, 0x4c, 0x55, 0x45, 0x10, 0x01, 0x12, 0x15,
-	0x0a, 0x11, 0x53, 0x4f, 0x52, 0x54, 0x5f, 0x42, 0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x4e,
-	0x41, 0x4d, 0x45, 0x10, 0x02, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+var file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc = []byte{
+	0x0a, 0x40, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x61,
+	0x70, 0x69, 0x73, 0x2f, 0x64, 0x61, 0x73, 0x68, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x73, 0x2f, 0x76,
+	0x31, 0x2f, 0x61, 0x73, 0x74, 0x2f, 0x77, 0x69, 0x64, 0x67, 0x65, 0x74, 0x73, 0x2f, 0x63, 0x6f,
+	0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x73, 0x6f, 0x72, 0x74, 0x5f, 0x62, 0x79, 0x2e, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x12, 0x32, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69,
+	0x78, 0x61, 0x70, 0x69, 0x73, 0x2e, 0x64, 0x61, 0x73, 0x68, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x73,
+	0x2e, 0x76, 0x31, 0x2e, 0x61, 0x73, 0x74, 0x2e, 0x77, 0x69, 0x64, 0x67, 0x65, 0x74, 0x73, 0x2e,
+	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2a, 0x59, 0x0a, 0x0a, 0x53, 0x6f, 0x72, 0x74, 0x42, 0x79,
+	0x54, 0x79, 0x70, 0x65, 0x12, 0x1c, 0x0a, 0x18, 0x53, 0x4f, 0x52, 0x54, 0x5f, 0x42, 0x59, 0x5f,
+	0x54, 0x59, 0x50, 0x45, 0x5f, 0x55, 0x4e, 0x53, 0x50, 0x45, 0x43, 0x49, 0x46, 0x49, 0x45, 0x44,
+	0x10, 0x00, 0x12, 0x16, 0x0a, 0x12, 0x53, 0x4f, 0x52, 0x54, 0x5f, 0x42, 0x59, 0x5f, 0x54, 0x59,
+	0x50, 0x45, 0x5f, 0x56, 0x41, 0x4c, 0x55, 0x45, 0x10, 0x01, 0x12, 0x15, 0x0a, 0x11, 0x53, 0x4f,
+	0x52, 0x54, 0x5f, 0x42, 0x59, 0x5f, 0x54, 0x59, 0x50, 0x45, 0x5f, 0x4e, 0x41, 0x4d, 0x45, 0x10,
+	0x02, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescOnce sync.Once
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData = file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescOnce sync.Once
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData = file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc
 )
 
-func file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescGZIP() []byte {
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescOnce.Do(func() {
-		file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData = protoimpl.X.CompressGZIP(file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData)
+func file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescGZIP() []byte {
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescOnce.Do(func() {
+		file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData = protoimpl.X.CompressGZIP(file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData)
 	})
-	return file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData
+	return file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDescData
 }
 
-var file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes = []any{
+var file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes = []any{
 	(SortByType)(0), // 0: com.coralogixapis.dashboards.v1.ast.widgets.common.SortByType
 }
-var file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs = []int32{
+var file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type
 	0, // [0:0] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -112,27 +112,27 @@ var file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_de
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_init() }
-func file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_init() {
-	if File_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto != nil {
+func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_init() }
+func file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_init() {
+	if File_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc,
+			RawDescriptor: file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc,
 			NumEnums:      1,
 			NumMessages:   0,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes,
-		DependencyIndexes: file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs,
-		EnumInfos:         file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes,
+		GoTypes:           file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes,
+		DependencyIndexes: file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs,
+		EnumInfos:         file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_enumTypes,
 	}.Build()
-	File_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto = out.File
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc = nil
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes = nil
-	file_src_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs = nil
+	File_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto = out.File
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_rawDesc = nil
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_goTypes = nil
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_sort_by_proto_depIdxs = nil
 }

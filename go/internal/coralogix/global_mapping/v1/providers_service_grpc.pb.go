@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogix/global_mapping/v1/providers_service.proto
+// source: com/coralogix/global_mapping/v1/providers_service.proto
 
 package v1
 
@@ -118,5 +118,5 @@ var CompanyProvidersService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogix/global_mapping/v1/providers_service.proto",
+	Metadata: "com/coralogix/global_mapping/v1/providers_service.proto",
 }

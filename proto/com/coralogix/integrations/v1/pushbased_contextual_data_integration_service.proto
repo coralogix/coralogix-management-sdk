@@ -1,0 +1,308 @@
+syntax = "proto3";
+
+package com.coralogix.integrations.v1;
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/integrations/v1/push_based_platform.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+service PushBasedContextualDataIntegrationService {
+  rpc CreatePushBasedContextualDataIntegration(CreatePushBasedIntegrationRequest) returns (CreatePushBasedIntegrationResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Create a push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/create"
+      body: "*"
+    };
+  }
+
+  rpc UpdatePushBasedContextualDataIntegration(UpdatePushBasedContextualDataIntegrationsRequest) returns (UpdatePushBasedContextualDataIntegrationsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Update a push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/update"
+      body: "*"
+    };
+  }
+
+  rpc ListPushBasedContextualDataIntegrations(ListPushBasedContextualDataIntegrationsRequest) returns (ListPushBasedContextualDataIntegrationsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "List push-based contextual data integrations";
+    option (google.api.http) = {
+      post: "/push-based/v1/list"
+      body: "*"
+    };
+  }
+
+  rpc DeletePushBasedContextualDataIntegration(DeletePushBasedContextualDataIntegrationRequest) returns (DeletePushBasedContextualDataIntegrationResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete push-based contextual data integration";
+    option (google.api.http) = {
+      post: "/push-based/v1/delete"
+      body: "*"
+    };
+  }
+
+  rpc CountPushBasedContextualDataIntegrations(CountPushBasedContextualDataIntegrationsRequest) returns (CountPushBasedContextualDataIntegrationsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Count push-based contextual data integrations";
+    option (google.api.http) = {
+      post: "/push-based/v1/count"
+      body: "*"
+    };
+  }
+}
+
+message CreatePushBasedIntegrationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Push Based Integration Request"
+      description: "Creates a new push based integration for different type of sources"
+      required: ["name", "application", "subsystem", "platform_data"]
+    }
+  };
+  message Bitbucket {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Bitbucket"
+        description: "Creates a new push based integration for diffBitbucket data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message AmazonSns {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - AmazonSns"
+        description: "Creates a new push based integration for diffAmazonSns data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message PagerDuty {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - PagerDuty"
+        description: "Creates a new push based integration for diffPagerDuty data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Github {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Github"
+        description: "Creates a new push based integration for dGithub data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Gitlab {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Gitlab"
+        description: "Creates a new push based integration for dGitlab data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Opsgenie {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Opsgenie"
+        description: "Creates a new push based integration for difOpsgenie data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Prometheus {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Prometheus"
+        description: "Creates a new push based integration for diffePrometheus data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Intercom {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Intercom"
+        description: "Creates a new push based integration for difIntercom data consumption"
+        required: ["token"]
+      }
+    };
+    google.protobuf.StringValue token = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  message Slack {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Create Push Based Integration Request - Slack"
+        description: "Creates a new push based integration for Slack data consumption"
+        required: ["internal_token_id"]
+      }
+    };
+    google.protobuf.StringValue internal_token_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  }
+  oneof platform_data {
+    Bitbucket bitbucket = 101;
+    AmazonSns amazon_sns = 102;
+    PagerDuty pager_duty = 103;
+    Github github = 104;
+    Gitlab gitlab = 105;
+    Opsgenie opsgenie = 106;
+    Prometheus prometheus = 107;
+    Intercom intercom = 108;
+    Slack slack = 109;
+  }
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"I love chocolate\""}];
+  google.protobuf.StringValue application = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"authorization\""}];
+  google.protobuf.StringValue subsystem = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"token_validator\""}];
+}
+
+message CreatePushBasedIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Push Based Integration Response"
+      description: "Returns the id of the created integration"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+}
+
+message ListPushBasedContextualDataIntegrationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List PushBased ContextualData Integrations Request"
+      description: "Requests all the registered integrations for a given platform"
+      required: ["platform"]
+    }
+  };
+  PushBasedPlatform platform = 1;
+}
+
+message ListPushBasedContextualDataIntegrationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Push Based Integration Response"
+      description: "Returns all the registered integrations for a given platform"
+      required: ["integrations"]
+    }
+  };
+  message PushBasedContextualDataIntegration  {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Push Based ContextualData Integration"
+        description: "Registered integration information for a given platform"
+        required: [
+          "id",
+          "name",
+          "application",
+          "subsystem",
+          "platform",
+          "token",
+          "created_at",
+          "updated_at"
+        ]
+      }
+    };
+    google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+    google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"I love chocolate\""}];
+    google.protobuf.StringValue application = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"authorization\""}];
+    google.protobuf.StringValue subsystem = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"token_validator\""}];
+    PushBasedPlatform platform = 5;
+    google.protobuf.StringValue token = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+    google.protobuf.Timestamp created_at = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-24T00:00:00\""}];
+    google.protobuf.Timestamp updated_at = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-24T00:00:00\""}];
+  }
+
+  repeated PushBasedContextualDataIntegration integrations = 1;
+}
+
+message DeletePushBasedContextualDataIntegrationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Push Based ContextualData Integration Request"
+      description: "Request to delete a push based contextual data integration"
+      required: [
+        "id"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+}
+
+message DeletePushBasedContextualDataIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Push Based ContextualData Integration Response"
+      description: "Empty response in case the Push Based ContextualData was successfully deleted"
+      required: []
+    }
+  };
+}
+
+message CountPushBasedContextualDataIntegrationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Count Push Based ContextualData Integration Request"
+      description: "Request to return the number of Push Based Contextual Data Integration by a given platform"
+      required: []
+    }
+  };
+  PushBasedPlatform platform = 1;
+}
+
+message CountPushBasedContextualDataIntegrationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Count Push Based ContextualData Integration Response"
+      description: "Response of the number of Push Based Contextual Data Integration by a given platform"
+      required: ["counts"]
+    }
+  };
+  message IntegrationCount {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Count Push Based ContextualData Integration"
+        description: "The number of Push Based Contextual Data Integration by a given platform"
+        required: ["platform", "count"]
+      }
+    };
+    PushBasedPlatform platform = 1;
+    google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
+  }
+
+  repeated IntegrationCount counts = 1;
+}
+
+message UpdatePushBasedContextualDataIntegrationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Push Based ContextualData Integration Request"
+      description: "Request to updated a Push Based ContextualData Integration by id"
+      required: ["id", "name"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"I love chocolate\""}];
+  google.protobuf.StringValue application = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"authorization\""}];
+  google.protobuf.StringValue subsystem = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"token_validator\""}];
+}
+
+message UpdatePushBasedContextualDataIntegrationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Push Based ContextualData Integration Response"
+      description: "Empty if the Push Based ContextualData Integration was successfully updated"
+      required: []
+    }
+  };
+}

@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogixapis/aaa/rbac/v2/roles.proto
+// source: com/coralogixapis/aaa/rbac/v2/roles.proto
 
 package v2
 
@@ -307,5 +307,5 @@ var RoleManagementService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogixapis/aaa/rbac/v2/roles.proto",
+	Metadata: "com/coralogixapis/aaa/rbac/v2/roles.proto",
 }

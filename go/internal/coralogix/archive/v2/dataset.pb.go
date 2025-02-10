@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.2
 // 	protoc        v5.29.1
-// source: src/com/coralogix/archive/dataset/v2/dataset.proto
+// source: com/coralogix/archive/dataset/v2/dataset.proto
 
 package v2
 
@@ -29,7 +29,7 @@ type Dataspace struct {
 
 func (x *Dataspace) Reset() {
 	*x = Dataspace{}
-	mi := &file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[0]
+	mi := &file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -41,7 +41,7 @@ func (x *Dataspace) String() string {
 func (*Dataspace) ProtoMessage() {}
 
 func (x *Dataspace) ProtoReflect() protoreflect.Message {
-	mi := &file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[0]
+	mi := &file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -54,7 +54,7 @@ func (x *Dataspace) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dataspace.ProtoReflect.Descriptor instead.
 func (*Dataspace) Descriptor() ([]byte, []int) {
-	return file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP(), []int{0}
+	return file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Dataspace) GetDataspace() string {
@@ -74,7 +74,7 @@ type Dataset struct {
 
 func (x *Dataset) Reset() {
 	*x = Dataset{}
-	mi := &file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[1]
+	mi := &file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -86,7 +86,7 @@ func (x *Dataset) String() string {
 func (*Dataset) ProtoMessage() {}
 
 func (x *Dataset) ProtoReflect() protoreflect.Message {
-	mi := &file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[1]
+	mi := &file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -99,7 +99,7 @@ func (x *Dataset) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Dataset.ProtoReflect.Descriptor instead.
 func (*Dataset) Descriptor() ([]byte, []int) {
-	return file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *Dataset) GetDataspace() *Dataspace {
@@ -116,45 +116,45 @@ func (x *Dataset) GetDataset() string {
 	return ""
 }
 
-var File_src_com_coralogix_archive_dataset_v2_dataset_proto protoreflect.FileDescriptor
+var File_com_coralogix_archive_dataset_v2_dataset_proto protoreflect.FileDescriptor
 
-var file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc = []byte{
-	0x0a, 0x32, 0x73, 0x72, 0x63, 0x2f, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f,
-	0x67, 0x69, 0x78, 0x2f, 0x61, 0x72, 0x63, 0x68, 0x69, 0x76, 0x65, 0x2f, 0x64, 0x61, 0x74, 0x61,
-	0x73, 0x65, 0x74, 0x2f, 0x76, 0x32, 0x2f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x20, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f,
-	0x67, 0x69, 0x78, 0x2e, 0x61, 0x72, 0x63, 0x68, 0x69, 0x76, 0x65, 0x2e, 0x64, 0x61, 0x74, 0x61,
-	0x73, 0x65, 0x74, 0x2e, 0x76, 0x32, 0x22, 0x29, 0x0a, 0x09, 0x44, 0x61, 0x74, 0x61, 0x73, 0x70,
-	0x61, 0x63, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63,
-	0x65, 0x22, 0x6e, 0x0a, 0x07, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x12, 0x49, 0x0a, 0x09,
-	0x64, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x2b, 0x2e, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e,
+var file_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc = []byte{
+	0x0a, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2f,
+	0x61, 0x72, 0x63, 0x68, 0x69, 0x76, 0x65, 0x2f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x2f,
+	0x76, 0x32, 0x2f, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x12, 0x20, 0x63, 0x6f, 0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e,
 	0x61, 0x72, 0x63, 0x68, 0x69, 0x76, 0x65, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x2e,
-	0x76, 0x32, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x52, 0x09, 0x64, 0x61,
-	0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x64, 0x61, 0x74, 0x61, 0x73,
-	0x65, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65,
-	0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x76, 0x32, 0x22, 0x29, 0x0a, 0x09, 0x44, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x12,
+	0x1c, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x22, 0x6e, 0x0a,
+	0x07, 0x44, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x12, 0x49, 0x0a, 0x09, 0x64, 0x61, 0x74, 0x61,
+	0x73, 0x70, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2b, 0x2e, 0x63, 0x6f,
+	0x6d, 0x2e, 0x63, 0x6f, 0x72, 0x61, 0x6c, 0x6f, 0x67, 0x69, 0x78, 0x2e, 0x61, 0x72, 0x63, 0x68,
+	0x69, 0x76, 0x65, 0x2e, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x2e, 0x76, 0x32, 0x2e, 0x44,
+	0x61, 0x74, 0x61, 0x73, 0x70, 0x61, 0x63, 0x65, 0x52, 0x09, 0x64, 0x61, 0x74, 0x61, 0x73, 0x70,
+	0x61, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x64, 0x61, 0x74, 0x61, 0x73, 0x65, 0x74, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescOnce sync.Once
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData = file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc
+	file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescOnce sync.Once
+	file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData = file_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc
 )
 
-func file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP() []byte {
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescOnce.Do(func() {
-		file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData = protoimpl.X.CompressGZIP(file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData)
+func file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescGZIP() []byte {
+	file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescOnce.Do(func() {
+		file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData = protoimpl.X.CompressGZIP(file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData)
 	})
-	return file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData
+	return file_com_coralogix_archive_dataset_v2_dataset_proto_rawDescData
 }
 
-var file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_src_com_coralogix_archive_dataset_v2_dataset_proto_goTypes = []any{
+var file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_com_coralogix_archive_dataset_v2_dataset_proto_goTypes = []any{
 	(*Dataspace)(nil), // 0: com.coralogix.archive.dataset.v2.Dataspace
 	(*Dataset)(nil),   // 1: com.coralogix.archive.dataset.v2.Dataset
 }
-var file_src_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs = []int32{
+var file_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs = []int32{
 	0, // 0: com.coralogix.archive.dataset.v2.Dataset.dataspace:type_name -> com.coralogix.archive.dataset.v2.Dataspace
 	1, // [1:1] is the sub-list for method output_type
 	1, // [1:1] is the sub-list for method input_type
@@ -163,27 +163,27 @@ var file_src_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs = []int32{
 	0, // [0:1] is the sub-list for field type_name
 }
 
-func init() { file_src_com_coralogix_archive_dataset_v2_dataset_proto_init() }
-func file_src_com_coralogix_archive_dataset_v2_dataset_proto_init() {
-	if File_src_com_coralogix_archive_dataset_v2_dataset_proto != nil {
+func init() { file_com_coralogix_archive_dataset_v2_dataset_proto_init() }
+func file_com_coralogix_archive_dataset_v2_dataset_proto_init() {
+	if File_com_coralogix_archive_dataset_v2_dataset_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc,
+			RawDescriptor: file_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_src_com_coralogix_archive_dataset_v2_dataset_proto_goTypes,
-		DependencyIndexes: file_src_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs,
-		MessageInfos:      file_src_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes,
+		GoTypes:           file_com_coralogix_archive_dataset_v2_dataset_proto_goTypes,
+		DependencyIndexes: file_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs,
+		MessageInfos:      file_com_coralogix_archive_dataset_v2_dataset_proto_msgTypes,
 	}.Build()
-	File_src_com_coralogix_archive_dataset_v2_dataset_proto = out.File
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc = nil
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_goTypes = nil
-	file_src_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs = nil
+	File_com_coralogix_archive_dataset_v2_dataset_proto = out.File
+	file_com_coralogix_archive_dataset_v2_dataset_proto_rawDesc = nil
+	file_com_coralogix_archive_dataset_v2_dataset_proto_goTypes = nil
+	file_com_coralogix_archive_dataset_v2_dataset_proto_depIdxs = nil
 }

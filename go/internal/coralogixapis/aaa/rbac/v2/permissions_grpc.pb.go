@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.1
-// source: src/com/coralogixapis/aaa/rbac/v2/permissions.proto
+// source: com/coralogixapis/aaa/rbac/v2/permissions.proto
 
 package v2
 
@@ -117,5 +117,5 @@ var PermissionsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "src/com/coralogixapis/aaa/rbac/v2/permissions.proto",
+	Metadata: "com/coralogixapis/aaa/rbac/v2/permissions.proto",
 }
