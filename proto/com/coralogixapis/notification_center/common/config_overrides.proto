@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center;
+
+import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+
+message ConfigOverrides {
+  ConditionType condition_type = 1;
+  string output_schema_id = 2;
+  MessageConfig message_config = 3;
+}
+
+message ConditionType {
+  oneof condition {
+    MatchEntityTypeCondition match_entity_type = 1;
+    MatchEntityTypeAndSubTypeCondition match_entity_type_and_sub_type = 2;
+  }
+}
+
+message MessageConfig {
+  repeated MessageConfigField fields = 1;
+}
+
+message MatchEntityTypeCondition {
+  string entity_type = 1;
+}
+
+message MatchEntityTypeAndSubTypeCondition {
+  string entity_type = 1;
+  string entity_sub_type = 2;
+}
