@@ -4,61 +4,151 @@ package com.coralogixapis.database_catalog.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
 message GetApdexThresholdRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get APDEX Threshold Request"
+      description: "This data structure represents a request to get APDEX Threshold."
+      required: [
+        "database_name",
+        "database_name_source"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
 }
 
 message GetApdexThresholdResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get APDEX Threshold Request"
+      description: "This data structure represents a response to get APDEX Threshold."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   google.protobuf.UInt64Value apdex_threshold_us = 3;
 }
 
 message ReplaceApdexThresholdRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace APDEX Threshold Request"
+      description: "This data structure represents a request to replace APDEX Threshold."
+      required: [
+        "database_name",
+        "database_name_source",
+        "apdex_threshold_us"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   google.protobuf.UInt64Value apdex_threshold_us = 3;
 }
 
 message ReplaceApdexThresholdResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace APDEX Threshold Request"
+      description: "This data structure represents a response to replace APDEX Threshold."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   google.protobuf.UInt64Value apdex_threshold_us = 3;
 }
 
 message ApdexThresholdExecutionRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "APDEX Threshold Execution Request"
+      description: "This data structure represents a request to Execution of APDEX Threshold."
+      required: [
+        "replace"
+      ]
+    }
+    external_docs: {}
+  };
   oneof request {
     ReplaceApdexThresholdRequest replace = 1;
   }
 }
 
 message ApdexThresholdExecutionResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "APDEX Threshold Execution Response"
+      description: "This data structure represents a response to Execution of APDEX Threshold."
+      required: []
+    }
+    external_docs: {}
+  };
   oneof response {
     ReplaceApdexThresholdResponse replace = 1;
   }
 }
 
 message BatchExecuteApdexThresholdRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Execute APDEX Threshold Request"
+      description: "This data structure represents a request to Batch Execute APDEX Threshold."
+      required: [
+        "requests"
+      ]
+    }
+    external_docs: {}
+  };
     repeated ApdexThresholdExecutionRequest requests = 1;
 }
 
 message BatchExecuteApdexThresholdResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Execute APDEX Threshold Response"
+      description: "This data structure represents a response to Batch Execute APDEX Threshold."
+      required: []
+    }
+    external_docs: {}
+  };
     repeated ApdexThresholdExecutionResponse responses = 1;
 }
 
 
 service ApdexService {
   rpc GetApdexThreshold(GetApdexThresholdRequest)returns(GetApdexThresholdResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apdex Threshold";
+    option (google.api.http) = {
+      get: "/v1/db-catalog/apdex-threshold"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Apdex Threshold";
   }
 
   rpc ReplaceApdexThreshold(ReplaceApdexThresholdRequest)returns(ReplaceApdexThresholdResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Replace Apdex Threshold";
+    option (google.api.http) = {
+      post: "/v1/db-catalog/apdex-threshold",
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace Apdex Threshold";
   }
 
   rpc BatchExecuteApdexThreshold(BatchExecuteApdexThresholdRequest)returns(BatchExecuteApdexThresholdResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = " Batch Execute Apdex Threshold";
+    option (google.api.http) = {
+      post: "/v1/db-catalog/apdex-threshold/batch",
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = " Batch Execute Apdex Threshold";
   }
 }

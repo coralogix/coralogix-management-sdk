@@ -1,0 +1,55 @@
+syntax = "proto3";
+package com.coralogix.global_mapping.v1;
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/label_mapping.proto";
+import "com/coralogix/global_mapping/v1/label_values.proto";
+import "google/protobuf/wrappers.proto";
+
+message UpsertLabelMappingsInternalRequest {
+  reserved 2;
+  repeated LabelMapping mappings = 1;
+}
+
+message UpsertLabelMappingsInternalResponse {
+  repeated LabelMapping mappings = 1;
+}
+
+message GetLabelMappingsInternalRequest{
+  repeated google.protobuf.StringValue labels = 1;
+  repeated DataSourceType data_source_types = 2;
+  repeated DataSource data_sources = 3;
+}
+
+message GetLabelMappingsInternalResponse {
+  repeated LabelMapping mappings = 1;
+}
+
+message GetLabelValuesInternalRequest {
+  repeated LabelValues current_label_values = 1;
+  google.protobuf.StringValue start_time_seconds = 2;
+  google.protobuf.StringValue end_time_seconds = 3;
+  repeated google.protobuf.StringValue requested_labels = 4;
+  repeated DataSource data_sources = 5;
+}
+
+message GetLabelValuesInternalResponse {
+  repeated LabelValues label_values = 1;
+  DataSource data_source = 2;
+}
+
+
+service LabelMappingsInternalService {
+  rpc UpsertLabelMappingsInternal(UpsertLabelMappingsInternalRequest) returns (UpsertLabelMappingsInternalResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Label Mappings Internal";
+  }
+
+  rpc GetLabelMappingsInternal(GetLabelMappingsInternalRequest) returns (GetLabelMappingsInternalResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Label Mappings Internal";
+  }
+  rpc GetLabelValuesInternal(GetLabelValuesInternalRequest) returns (GetLabelValuesInternalResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Returns possible label values from prometheus labels";
+  }
+}

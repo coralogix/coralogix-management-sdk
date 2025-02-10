@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.apm_shared.common.v1.grid;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/apm_shared/common/v1/unit.proto";
+
+message ColumnValue {
+  com.coralogixapis.apm_shared.common.v1.unit.ApmUnitValue value = 1;
+  com.coralogixapis.apm_shared.common.v1.unit.ApmUnitValue offset_value = 2;
+}

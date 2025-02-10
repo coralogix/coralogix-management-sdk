@@ -1,0 +1,131 @@
+syntax = "proto3";
+package com.coralogix.global_mapping.v1;
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/measurement.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/extracted_label.proto";
+import "com/coralogix/global_mapping/v1/measurement_query.proto";
+import "com/coralogix/global_mapping/v1/query_pagination.proto";
+import "com/coralogix/global_mapping/v1/label_values.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+
+message GetMeasurementsRequest {
+  reserved "data_source_providers";
+  reserved 3;
+  repeated google.protobuf.StringValue measurement_names = 1;
+  repeated DataSourceType data_source_types = 2;
+  repeated google.protobuf.StringValue labels = 4;
+  repeated DataSource data_sources = 5;
+}
+
+message GetMeasurementsResponse {
+  repeated Measurement measurements = 1;
+}
+
+message UpsertMeasurementsRequest {
+  repeated Measurement measurements = 1;
+}
+
+message UpsertMeasurementsResponse {
+  repeated Measurement measurements = 1;
+}
+
+message RemoveMeasurementsRequest {
+  repeated string measurement_ids = 1;
+}
+
+message RemoveMeasurementsResponse {
+  google.protobuf.Int32Value number_of_deleted_measurements = 1;
+}
+
+message InsertCompanyMeasurementsRequest {
+  repeated string measurement_ids = 1;
+}
+
+message InsertCompanyMeasurementsResponse {
+  repeated Measurement measurements = 1;
+}
+
+message RemoveCompanyMeasurementsRequest {
+  repeated string measurement_ids = 1;
+}
+
+message RemoveCompanyMeasurementsResponse {
+  repeated Measurement measurements = 1;
+}
+
+message RecreateCompanyMeasurementsRequest {
+  repeated string measurement_ids = 1;
+}
+
+message RecreateCompanyMeasurementsResponse {
+  repeated Measurement measurements = 1;
+}
+
+message GetQueriesRequest {
+  reserved "data_source_provider";
+  reserved 8;
+  repeated ExtractedLabel extracted_labels = 1;
+  repeated string measurement_names = 2;
+  google.protobuf.StringValue start_time_seconds = 3;
+  google.protobuf.StringValue end_time_seconds = 4;
+  google.protobuf.Int32Value topk = 5;
+  google.protobuf.StringValue ordering_label = 6[deprecated=true];
+  repeated MeasurementMetadata measurement_metadata = 7;
+  google.protobuf.StringValue subject_label = 9;
+  DataSource data_source = 10;
+}
+
+message GetQueriesResponse {
+  repeated MeasurementQuery queries = 1;
+}
+
+message GetMeasurementsTableRequest {
+  reserved "data_source_provider";
+  reserved 9;
+  LabelValues row_label_values = 1 [deprecated=true];
+  repeated string measurement_names = 2;
+  google.protobuf.StringValue start_time_seconds = 3;
+  google.protobuf.StringValue end_time_seconds = 4;
+  google.protobuf.Int32Value topk = 5;
+  google.protobuf.StringValue ordering_label = 6;
+  repeated MeasurementMetadata measurement_metadata = 7;
+  PaginationData pagination_data = 8;
+  google.protobuf.StringValue subject_label = 10;
+  repeated LabelValues label_values = 11;
+  DataSource data_source = 12;
+}
+
+message GetMeasurementsTableResponse {
+  google.protobuf.Int32Value page_size = 1;
+  google.protobuf.Int32Value page_index = 2;
+  repeated TableRow rows = 3;
+  google.protobuf.Int32Value total_row_count = 4;
+  repeated string existing_columns = 5;
+}
+
+message UpsertCompanyProvidersRequest {
+  repeated google.protobuf.StringValue providers = 1 [deprecated=true];
+  repeated DataSource data_sources = 2;
+}
+
+message UpsertCompanyProvidersResponse {
+  repeated google.protobuf.StringValue providers = 1 [deprecated=true];
+  repeated DataSource data_sources = 2;
+}
+
+service MeasurementsService {
+  rpc GetMeasurements(GetMeasurementsRequest) returns (GetMeasurementsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Measurements";
+  }
+  rpc UpsertCompanyProviders(UpsertCompanyProvidersRequest) returns (UpsertCompanyProvidersResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Company Providers";
+  }
+  rpc GetQueries(GetQueriesRequest)returns(GetQueriesResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Queries";
+  }
+  rpc GetMeasurementsTable(GetMeasurementsTableRequest)returns(GetMeasurementsTableResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Measurement Table";
+  }
+}

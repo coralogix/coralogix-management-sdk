@@ -2,17 +2,34 @@ syntax = "proto3";
 
 package com.coralogixapis.database_catalog.v1;
 
-import "google/protobuf/wrappers.proto";
-
+import "com/coralogix/catalog/v1/common.proto";
 import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/time_range.proto";
 import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
-import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/database_catalog/v1/database.proto";
 import "com/coralogixapis/database_catalog/v1/database_operation.proto";
-import "com/coralogix/catalog/v1/common.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
 message GetDatabaseOperationsColumnsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Columns Stream Request"
+      description: "This data structure represents a request to Get DB Operations Columns Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -24,10 +41,32 @@ message GetDatabaseOperationsColumnsStreamRequest {
 }
 
 message GetDatabaseOperationsColumnsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Columns Stream Response"
+      description: "This data structure represents a response to Get DB Operations Columns Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated DatabaseOperationData database_operations = 1;
+  google.protobuf.StringValue query = 2;
 }
 
 message GetDatabaseOperationsRequestsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Requests Request"
+      description: "This data structure represents a request to Get DB Operations Requests."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -39,11 +78,32 @@ message GetDatabaseOperationsRequestsRequest {
 }
 
 message GetDatabaseOperationsRequestsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Requests Response"
+      description: "This data structure represents a response to Get DB Operations Requests."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart requests = 1;
   google.protobuf.UInt64Value total_amount = 2;
 }
 
 message GetDatabaseOperationsErrorsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Errors Stream Request"
+      description: "This data structure represents a request to Get DB Operations Errors Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -55,6 +115,14 @@ message GetDatabaseOperationsErrorsStreamRequest {
 }
 
 message GetDatabaseOperationsErrorsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Errors Stream Response"
+      description: "This data structure represents a response to Get DB Operations Errors Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart errors = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart error_percentage = 2;
@@ -64,6 +132,19 @@ message GetDatabaseOperationsErrorsStreamResponse {
 }
 
 message GetDatabaseOperationsTimeConsumingRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Time Consuming Request"
+      description: "This data structure represents a request to Get DB Operations Time Consuming."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -75,11 +156,32 @@ message GetDatabaseOperationsTimeConsumingRequest {
 }
 
 message GetDatabaseOperationsTimeConsumingResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  json_schema: {
+  title: "Get DB Operations Time Consuming Request"
+      description: "This data structure represents a request to Get DB Operations Time Consuming."
+      required: []
+      }
+    external_docs: {}
+  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart time_consuming = 1;
   google.protobuf.UInt64Value total_amount = 2;
 }
 
 message GetDatabaseOperationsResponseTimeStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Response Time Stream Request"
+      description: "This data structure represents a request to Get DB Operations Response Time Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -91,6 +193,14 @@ message GetDatabaseOperationsResponseTimeStreamRequest {
 }
 
 message GetDatabaseOperationsResponseTimeStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Response Time Stream Response"
+      description: "This data structure represents a response to Get DB Operations Response Time Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart p95 = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart p99 = 2;
@@ -103,6 +213,19 @@ message GetDatabaseOperationsResponseTimeStreamResponse {
 }
 
 message ListOperationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List DB Operations Request"
+      description: "This data structure represents a request to List DB Operations."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -113,10 +236,38 @@ message ListOperationsRequest {
 }
 
 message ListOperationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List DB Operations Request"
+      description: "This data structure represents a request to List DB Operations."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   repeated DatabaseOperation operations = 1;
 }
 
 message GetOperationStatsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Stats Request"
+      description: "This data structure represents a request to Get DB Operations Stats."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system",
+        "operation",
+        "operation_source"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -129,6 +280,14 @@ message GetOperationStatsRequest {
 }
 
 message GetOperationStatsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Stats Response"
+      description: "This data structure represents a response to Get DB Operations Stats."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.UInt64Value avg_response_time = 1;
   google.protobuf.UInt64Value p95_response_time = 2;
   google.protobuf.UInt64Value p99_response_time = 3;
@@ -139,7 +298,22 @@ message GetOperationStatsResponse {
   google.protobuf.UInt64Value p75_response_time = 8;
 }
 
-message GetDatabaseOperationGraphsStreamRequest{
+message GetDatabaseOperationGraphsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Graph Stream Request"
+      description: "This data structure represents a request to Get DB Operations Graph Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system",
+        "operation",
+        "operation_source"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -151,36 +325,68 @@ message GetDatabaseOperationGraphsStreamRequest{
   repeated google.protobuf.StringValue calling_services = 9;
 }
 
-message GetDatabaseOperationGraphsStreamResponse{
-  oneof widget{
+message GetDatabaseOperationGraphsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get DB Operations Graph Stream Request"
+      description: "This data structure represents a request to Get DB Operations Graph Stream."
+      required: []
+    }
+    external_docs: {}
+  };
+  oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency = 2;
   }
 }
 
 service DatabaseOperationsService {
-  rpc GetDatabaseOperationsColumnsStream (GetDatabaseOperationsColumnsStreamRequest) returns (stream GetDatabaseOperationsColumnsStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation column stream";
+  rpc GetDatabaseOperationsColumnsStream(GetDatabaseOperationsColumnsStreamRequest) returns (stream GetDatabaseOperationsColumnsStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/columns",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get databases operation column stream";
   }
-  rpc GetDatabaseOperationsRequests (GetDatabaseOperationsRequestsRequest) returns (GetDatabaseOperationsRequestsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation requests";
+  rpc GetDatabaseOperationsRequests(GetDatabaseOperationsRequestsRequest) returns (GetDatabaseOperationsRequestsResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/requests",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get databases operation requests";
   }
-  rpc GetDatabaseOperationsErrorsStream (GetDatabaseOperationsErrorsStreamRequest) returns (stream GetDatabaseOperationsErrorsStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation errors stream";
+  rpc GetDatabaseOperationsErrorsStream(GetDatabaseOperationsErrorsStreamRequest) returns (stream GetDatabaseOperationsErrorsStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/errors",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get databases operation errors stream";
   }
-  rpc GetDatabaseOperationsTimeConsuming (GetDatabaseOperationsTimeConsumingRequest) returns (GetDatabaseOperationsTimeConsumingResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation time consuming";
+  rpc GetDatabaseOperationsTimeConsuming(GetDatabaseOperationsTimeConsumingRequest) returns (GetDatabaseOperationsTimeConsumingResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/time-consuming",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get databases operation time consuming";
   }
-  rpc GetDatabaseOperationsResponseTimeStream (GetDatabaseOperationsResponseTimeStreamRequest) returns (stream GetDatabaseOperationsResponseTimeStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get databases operation response time stream";
+  rpc GetDatabaseOperationsResponseTimeStream(GetDatabaseOperationsResponseTimeStreamRequest) returns (stream GetDatabaseOperationsResponseTimeStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/response-time",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get databases operation response time stream";
   }
-  rpc ListOperations (ListOperationsRequest) returns (ListOperationsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "list operations";
+  rpc ListOperations(ListOperationsRequest) returns (ListOperationsResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/list",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "list operations";
   }
-  rpc GetOperationStats (GetOperationStatsRequest) returns (GetOperationStatsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get operation stats";
+  rpc GetOperationStats(GetOperationStatsRequest) returns (GetOperationStatsResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/stats",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get operation stats";
   }
-  rpc GetDatabaseOperationGraphsStream(GetDatabaseOperationGraphsStreamRequest) returns (stream GetDatabaseOperationGraphsStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database operation graphs stream";
-  };
+  rpc GetDatabaseOperationGraphsStream(GetDatabaseOperationGraphsStreamRequest) returns (stream GetDatabaseOperationGraphsStreamResponse) {
+    option (google.api.http) = {
+      get: "/v1/db-catalog/operations/graphs",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get database operation graphs stream";
+  }
 }
