@@ -13,6 +13,7 @@ message BaseDatabase {
 message DatabaseData {
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
+  google.protobuf.StringValue database_system = 30;
   oneof database_data {
     BaseDatabase base_database = 3;
     google.protobuf.Int64Value total_client_services = 4;

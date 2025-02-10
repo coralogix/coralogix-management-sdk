@@ -2,23 +2,26 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
 service ExtensionDeploymentService {
   rpc GetDeployedExtensions(GetDeployedExtensionsRequest) returns (GetDeployedExtensionsResponse) {
-    option (audit_log_description).description = "Get deployed extensions";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get deployed extensions";
     option (google.api.http) = {
       get: "/extensions-deployment/v1/deployed"
     };
   }
 
   rpc DeployExtension(DeployExtensionRequest) returns (DeployExtensionResponse) {
-    option (audit_log_description).description = "Deploy extension";
+    option (com.coralogix.common.v1.audit_log_description).description = "Deploy extension";
     option (google.api.http) = {
       post: "/extensions-deployment/v1/deploy"
       body: "*"
@@ -26,7 +29,7 @@ service ExtensionDeploymentService {
   }
 
   rpc UpdateExtension(UpdateExtensionRequest) returns (UpdateExtensionResponse) {
-    option (audit_log_description).description = "Update extension";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update extension";
     option (google.api.http) = {
       post: "/extensions-deployment/v1/update"
       body: "*"
@@ -34,7 +37,7 @@ service ExtensionDeploymentService {
   }
 
   rpc UndeployExtension(UndeployExtensionRequest) returns (UndeployExtensionResponse) {
-    option (audit_log_description).description = "Undeploy extension";
+    option (com.coralogix.common.v1.audit_log_description).description = "Undeploy extension";
     option (google.api.http) = {
       post: "/extensions-deployment/v1/undeploy"
       body: "*"
@@ -42,10 +45,32 @@ service ExtensionDeploymentService {
   }
 }
 
-message GetDeployedExtensionsRequest {}
+message GetDeployedExtensionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetDeployedExtensionsRequest"
+      description: "Request to list all deployed extensions"
+      required: []
+    }
+  };
+}
 
 message GetDeployedExtensionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetDeployedExtensionsResponse"
+      description: "List of deployed extensions"
+      required: ["deployed_extensions"]
+    }
+  };
   message DeployedExtensionSummary {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "DeployedExtensionSummary"
+        description: "Information about the deployed item"
+        required: ["deployed_item_counts"]
+      }
+    };
     ItemCounts deployed_item_counts = 1;
   }
   message DeployedExtension {

@@ -2,16 +2,17 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 
+
 service ExtensionTestingService {
   rpc InitializeTestingRevision(InitializeTestingRevisionRequest) returns (InitializeTestingRevisionResponse) {
-    option (audit_log_description).description = "Initialize testing revision";
+    option (com.coralogix.common.v1.audit_log_description).description = "Initialize testing revision";
     option (google.api.http) = {
       post: "/extensions-testing/v1/initialize"
       body: "*"
@@ -19,7 +20,7 @@ service ExtensionTestingService {
   }
 
   rpc CleanupTestingRevision(CleanupTestingRevisionRequest) returns (CleanupTestingRevisionResponse) {
-    option (audit_log_description).description = "Cleanup testing extension";
+    option (com.coralogix.common.v1.audit_log_description).description = "Cleanup testing extension";
     option (google.api.http) = {
       post: "/extensions-testing/v1/cleanup"
       body: "*"
@@ -27,7 +28,7 @@ service ExtensionTestingService {
   }
 
   rpc TestExtensionRevision(TestExtensionRevisionRequest) returns (TestExtensionRevisionResponse) {
-    option (audit_log_description).description = "Test extension";
+    option (com.coralogix.common.v1.audit_log_description).description = "Test extension";
     option (google.api.http) = {
       post: "/extensions-testing/v1/test"
       body: "*"

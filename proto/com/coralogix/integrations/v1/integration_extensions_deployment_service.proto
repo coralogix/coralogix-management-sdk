@@ -2,26 +2,42 @@ syntax = "proto3";
 
 package com.coralogix.integrations.v1;
 
-import "com/coralogix/integrations/v1/integration.proto";
-import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "google/api/annotations.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 service IntegrationExtensionsDeploymentService {
 
   rpc DeployIntegrationExtensions(DeployIntegrationExtensionsRequest) returns (DeployIntegrationExtensionsResponse) {
-    option (audit_log_description).description = "Deploy integration extensions";
+    option (com.coralogix.common.v1.audit_log_description).description = "Deploy integration extensions";
   }
 }
 
 message DeployIntegrationExtensionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "DeployIntegrationExtensionsRequest"
+      description: "Request to deploy auto-assigned extensions of the specific integration"
+      required: [
+        "integration_key"
+      ]
+    }
+  };
   google.protobuf.StringValue integration_key = 1;
 }
 
 message DeployIntegrationExtensionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Deploy Integration Extensions Response"
+      description: "Empty response indicating successful deployment of the extension"
+      required: []
+    }
+  };
 }
 
 

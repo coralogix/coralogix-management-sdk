@@ -9,8 +9,25 @@ import "com/coralogixapis/database_catalog/v1/blueprints.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogix/catalog/v1/common.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
 message GetBlueprintsColumnsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Columns Stream Request"
+      description: "This data structure represents a request to Blueprints Columns Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue database_name = 2;
   google.protobuf.StringValue database_name_source = 3;
@@ -21,11 +38,32 @@ message GetBlueprintsColumnsStreamRequest {
 }
 
 message GetBlueprintsColumnsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Columns Stream Response"
+      description: "This data structure represents a response to Blueprints Columns Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated BlueprintData blueprints = 1;
 }
 
 
 message GetBlueprintStatsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Stats Request"
+      description: "This data structure represents a request to Blueprints Stats."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -37,6 +75,14 @@ message GetBlueprintStatsRequest {
 }
 
 message GetBlueprintStatsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Stats Response"
+      description: "This data structure represents a response to Blueprints Stats."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.UInt64Value avg_response_time = 1;
   google.protobuf.UInt64Value p95_response_time = 2;
   google.protobuf.UInt64Value p99_response_time = 3;
@@ -46,6 +92,19 @@ message GetBlueprintStatsResponse {
 }
 
 message GetBlueprintGraphsStreamRequest{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Graph Stream Request"
+      description: "This data structure represents a request to Blueprints Graph Stream."
+      required: [
+        "time_range",
+        "database_name",
+        "database_name_source",
+        "database_system"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue database_name = 1;
   google.protobuf.StringValue database_name_source = 2;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 3;
@@ -57,6 +116,14 @@ message GetBlueprintGraphsStreamRequest{
 }
 
 message GetBlueprintGraphsStreamResponse{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Blueprints Graph Stream Response"
+      description: "This data structure represents a response to Blueprints Graph Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   oneof widget{
     com.coralogixapis.service_catalog.v1.RepeatedLineChart successes_and_failures = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency = 2;
@@ -65,12 +132,21 @@ message GetBlueprintGraphsStreamResponse{
 
 service BlueprintsService {
   rpc GetBlueprintsColumnsStream(GetBlueprintsColumnsStreamRequest) returns (stream GetBlueprintsColumnsStreamResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get blueprints column stream";
+    option (google.api.http) = {
+      get: "/v1/db-catalog/blueprints/columns",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get blueprints column stream";
   }
   rpc GetBlueprintStats(GetBlueprintStatsRequest) returns (GetBlueprintStatsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get blueprint stats";
+    option (google.api.http) = {
+      get: "/v1/db-catalog/blueprints/stats",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get blueprint stats";
   }
   rpc GetBlueprintGraphsStream(GetBlueprintGraphsStreamRequest) returns (stream GetBlueprintGraphsStreamResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get database blueprint graphs stream";
+    option (google.api.http) = {
+      get: "/v1/db-catalog/blueprints/graphs",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get database blueprint graphs stream";
   }
 }

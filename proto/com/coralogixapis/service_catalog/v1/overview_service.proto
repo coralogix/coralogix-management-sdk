@@ -11,9 +11,25 @@ import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
 import "com/coralogixapis/apm/widgets/v1/topk.proto";
 import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/apm_shared/common/apdex.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
 message GetOverviewRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Overview Request"
+      description: "This data structure represents a request to get Overview."
+      required: [
+        "service_name",
+        "time_range"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -21,6 +37,14 @@ message GetOverviewRequest {
 }
 
 message GetOverviewResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Overview Response"
+      description: "This data structure represents a response to get Overview."
+      required: []
+    }
+    external_docs: {}
+  };
   com.coralogixapis.apm.widgets.v1.MultiStat slo = 1;
   com.coralogixapis.apm.widgets.v1.Stat avg_latency = 2;
   com.coralogixapis.apm.widgets.v1.Stat throughput = 3;
@@ -40,9 +64,30 @@ message GetOverviewResponse {
   com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
   com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
   repeated com.coralogixapis.apm.widgets.v1.LineChart errors_per_seconds = 19;
+  RepeatedLineChart requests_and_errors_by_service_version = 20;
+  RepeatedLineChart apdex_score_by_service_version = 21;
+  RepeatedLineChart errors_by_service_version = 22;
+  RepeatedLineChart error_rate_by_service_version = 23;
+  RepeatedLineChart errors_per_seconds_by_service_version = 24;
+  RepeatedLineChart latency_p99_by_service_version = 25;
+  RepeatedLineChart latency_p95_by_service_version = 26;
+  RepeatedLineChart latency_p75_by_service_version = 27;
+  RepeatedLineChart latency_avg_by_service_version = 28;
+  RepeatedLineChart time_consuming_actions_overtime = 29;
 }
 
 message GetOverviewStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Overview Stream Request"
+      description: "This data structure represents a request to get Overview Stream."
+      required: [
+        "service_name",
+        "time_range"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
@@ -52,6 +97,14 @@ message GetOverviewStreamRequest {
 }
 
 message GetOverviewStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Overview Stream Response"
+      description: "This data structure represents a response to get Overview Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   ApmSource apm_source = 12;
   oneof widget{
     com.coralogixapis.apm.widgets.v1.MultiStat slo = 1;
@@ -72,28 +125,53 @@ message GetOverviewStreamResponse {
     com.coralogixapis.apm.widgets.v1.Stat throughput_with_offset = 17;
     com.coralogixapis.apm.widgets.v1.Stat error_percentage_with_offset = 18;
     RepeatedLineChart errors_per_seconds = 19;
+    RepeatedLineChart requests_and_errors_by_service_version = 20;
+    RepeatedLineChart apdex_score_by_service_version = 21;
+    RepeatedLineChart errors_by_service_version = 22;
+    RepeatedLineChart error_rate_by_service_version = 23;
+    RepeatedLineChart errors_per_seconds_by_service_version = 24;
+    RepeatedLineChart latency_p99_by_service_version = 25;
+    RepeatedLineChart latency_p95_by_service_version = 26;
+    RepeatedLineChart latency_p75_by_service_version = 27;
+    RepeatedLineChart latency_avg_by_service_version = 28;
+    RepeatedLineChart time_consuming_actions_overtime = 29;
   }
 }
 
 message GetApdexRequest{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Overview Apdex Request"
+      description: "This data structure represents a request to get Overview Apdex."
+      required: [
+        "service_name",
+        "time_range"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3;
 }
 
-message GetApdexResponse{
-  com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 1;
-  google.protobuf.BoolValue has_buckets_error = 2;
-}
-
 service OverviewService {
   rpc GetOverview(GetOverviewRequest)returns(GetOverviewResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Overview";
+    option (google.api.http) = {
+      get: "/v1/overview"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Overview";
   }
   rpc GetOverviewStream(GetOverviewStreamRequest)returns(stream GetOverviewStreamResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Overview Stream";
+    option (google.api.http) = {
+      get: "/v1/overview/stream"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Overview Stream";
   }
-  rpc GetApdex(GetApdexRequest)returns(GetApdexResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apdex";
+  rpc GetApdex(GetApdexRequest)returns(com.coralogixapis.apm.common.v2.GetApdexResponse){
+    option (google.api.http) = {
+      get: "/v1/overview/apdex"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Apdex";
   }
 }

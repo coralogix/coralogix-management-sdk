@@ -1,8 +1,9 @@
 syntax = "proto3";
 package com.coralogixapis.service_catalog.v1;
 
-import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/apm_shared/common/v1/grid.proto";
 import "com/coralogixapis/service_catalog/v1/transaction.proto";
+import "google/protobuf/wrappers.proto";
 
 message Operation {
   google.protobuf.StringValue operation = 1;
@@ -43,4 +44,26 @@ message Operation {
   UnitValue errors_percentage_with_offset = 20;
 }
 
+message OperationData {
+  google.protobuf.StringValue operation = 1;
+  google.protobuf.StringValue method = 2;
 
+  oneof operation_data {
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue p99_response_time = 3;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue p90_response_time = 4;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue p75_response_time = 5;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue p50_response_time = 6;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue avg_response_time = 7;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue requests = 8;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue throughput = 9;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue max_throughput = 10;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue errors = 11;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue errors_per_minute = 12;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue max_errors_per_minute = 13;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue errors_per_second = 14;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue time_consuming = 15;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue time_consuming_percentage = 16;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue p95_response_time = 17;
+    com.coralogixapis.apm_shared.common.v1.grid.ColumnValue errors_percentage = 18;
+  }
+}

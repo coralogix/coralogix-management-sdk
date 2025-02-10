@@ -2,59 +2,60 @@ syntax = "proto3";
 
 package com.coralogix.outgoing_webhooks.v1;
 
-import "com/coralogix/outgoing_webhooks/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/timestamp.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/api/annotations.proto";
 
 service OutgoingWebhooksService {
   rpc ListOutgoingWebhookTypes(ListOutgoingWebhookTypesRequest) returns (ListOutgoingWebhookTypesResponse) {
-    option (audit_log_description).description = "Get outgoing webhook types";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook types";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks/types"
     };
   }
 
   rpc GetOutgoingWebhookTypeDetails(GetOutgoingWebhookTypeDetailsRequest) returns (GetOutgoingWebhookTypeDetailsResponse) {
-    option (audit_log_description).description = "Get outgoing webhook type";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook type";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks/types/{type}"
     };
   }
 
   rpc ListOutgoingWebhooks(ListOutgoingWebhooksRequest) returns (ListOutgoingWebhooksResponse) {
-    option (audit_log_description).description = "Get outgoing webhooks";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhooks";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks"
     };
   }
 
   rpc ListOutboundWebhooksSummary(ListOutboundWebhooksSummaryRequest) returns (ListOutboundWebhooksSummaryResponse) {
-    option (audit_log_description).description = "Get outgoing webhook summaries";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook summaries";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks/summaries"
     };
   }
 
   rpc ListAllOutgoingWebhooks(ListAllOutgoingWebhooksRequest) returns (ListAllOutgoingWebhooksResponse) {
-    option (audit_log_description).description = "Get all outgoing webhooks";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all outgoing webhooks";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks/all"
     };
   }
 
   rpc GetOutgoingWebhook(GetOutgoingWebhookRequest) returns (GetOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Get outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook";
     option (google.api.http) = {
       get: "/v1/outgoing_webhooks/{id}"
     };
   }
 
   rpc CreateOutgoingWebhook(CreateOutgoingWebhookRequest) returns (CreateOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Create an outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create an outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing_webhooks"
       body: "*"
@@ -62,7 +63,7 @@ service OutgoingWebhooksService {
   }
 
   rpc UpdateOutgoingWebhook(UpdateOutgoingWebhookRequest) returns (UpdateOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Update an outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update an outgoing webhook";
     option (google.api.http) = {
       put: "/v1/outgoing_webhooks"
       body: "*"
@@ -70,14 +71,14 @@ service OutgoingWebhooksService {
   }
 
   rpc DeleteOutgoingWebhook(DeleteOutgoingWebhookRequest) returns (DeleteOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Delete an outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete an outgoing webhook";
     option (google.api.http) = {
       delete: "/v1/outgoing_webhooks/{id}"
     };
   }
 
   rpc TestOutgoingWebhook(TestOutgoingWebhookRequest) returns (TestOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Test an outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Test an outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing_webhooks/test"
       body: "*"
@@ -85,7 +86,7 @@ service OutgoingWebhooksService {
   }
 
   rpc TestExistingOutgoingWebhook(TestExistingOutgoingWebhookRequest) returns (TestOutgoingWebhookResponse) {
-    option (audit_log_description).description = "Test an existing outgoing webhook";
+    option (com.coralogix.common.v1.audit_log_description).description = "Test an existing outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing_webhooks/test_existing"
       body: "*"
@@ -101,61 +102,247 @@ service OutgoingWebhooksService {
 
 message ListOutgoingWebhookTypesRequest {}
 message ListOutgoingWebhookTypesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Outgoing Webhook Types Response"
+      description: "This data structure represents a list of outgoing webhook types."
+      required: [
+        "webhooks"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   message OutgoingWebhookType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Outgoing Webhook Type"
+        description: "This data structure represents an outgoing webhook type."
+        required: [
+          "type",
+          "label",
+          "count"
+        ]
+      }
+      external_docs: {
+        url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+        description: "Find out more about outbound webhooks."
+      }
+    };
     WebhookType type = 1;
-    google.protobuf.StringValue label = 2;
-    google.protobuf.UInt32Value count = 3;
+    google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_label\"" }];
+    google.protobuf.UInt32Value count = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "3" }];
   }
 
   repeated OutgoingWebhookType webhooks = 1;
 }
 
 message GetOutgoingWebhookTypeDetailsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook Type"
+      description: "This data structure represents an outgoing webhook type."
+      required: [
+        "type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   WebhookType type = 1;
 }
 message GetOutgoingWebhookTypeDetailsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Outgoing Webhook Type Details Response"
+      description: "This data structure represents an outgoing webhook type."
+      required: [
+        "details"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   OutgoingWebhookDetails details = 1;
 }
 
 message ListOutgoingWebhooksRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Outgoing Webhooks Request"
+      description: "This data structure represents an outgoing webhook type."
+      required: [
+        "type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   WebhookType type = 1;
 }
+
 message ListOutgoingWebhooksResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Outgoing Webhooks Response"
+      description: "This data structure represents an outgoing webhook type."
+      required: [
+        "deployed"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   repeated OutgoingWebhookSummary deployed = 1;
 }
 
 message ListAllOutgoingWebhooksRequest {}
 message ListAllOutgoingWebhooksResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List All Outgoing Webhooks Response"
+      description: "This data structure represents a list of all outgoing webhooks."
+      required: [
+        "deployed"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   repeated OutgoingWebhookExtendedSummary deployed = 1;
 }
 
 message ListOutboundWebhooksSummaryRequest {}
 message ListOutboundWebhooksSummaryResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Outgoing Webhooks Summary Response"
+      description: "This data structure represents a list of outgoing webhook summaries."
+      required: [
+        "outbound_webhook_summaries"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   repeated OutboundWebhookSummary outbound_webhook_summaries = 1;
 }
 
 message GetOutgoingWebhookRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Outgoing Webhook Request"
+      description: "This data structure represents a request to get an outgoing webhook."
+      required: [
+        "id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   google.protobuf.StringValue id = 1;
 }
 message GetOutgoingWebhookResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Outgoing Webhook Response"
+      description: "This data structure represents an outgoing webhook."
+      required: [
+        "webhook"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   OutgoingWebhook webhook = 1;
 }
 
 message CreateOutgoingWebhookRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Outgoing Webhook Request"
+      description: "This data structure represents a request to create an outgoing webhook."
+      required: [
+        "data"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   OutgoingWebhookInputData data = 1;
 }
 message CreateOutgoingWebhookResponse {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Outgoing Webhook Response"
+      description: "This data structure represents a response to create an outgoing webhook."
+      required: [
+        "id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
 }
 
 message UpdateOutgoingWebhookRequest {
-  string id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Outgoing Webhook Request"
+      description: "This data structure represents a request to update an outgoing webhook."
+      required: [
+        "id",
+        "data"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
   OutgoingWebhookInputData data = 2;
 }
 message UpdateOutgoingWebhookResponse {}
 
 message DeleteOutgoingWebhookRequest {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Outgoing Webhook Request"
+      description: "This data structure represents a request to delete an outgoing webhook."
+      required: [
+        "id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
 }
 message DeleteOutgoingWebhookResponse {}
 
@@ -163,14 +350,55 @@ message TestOutgoingWebhookRequest {
   OutgoingWebhookInputData data = 1;
 }
 message TestExistingOutgoingWebhookRequest {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test Existing Outgoing Webhook Request"
+      description: "This data structure represents a request to test an existing outgoing webhook."
+      required: [
+        "id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
 }
 message TestOutgoingWebhookResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test Outgoing Webhook Response"
+      description: "This data structure represents a response to test an outgoing webhook."
+      required: [
+        "result"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   message Success {}
   message Failure {
-    google.protobuf.StringValue error_message = 1;
-    google.protobuf.StringValue display_message = 2;
-    optional google.protobuf.UInt32Value status_code = 3;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Test Outgoing Webhook Failure"
+        description: "This data structure represents a failure response to test an outgoing webhook."
+        required: [
+          "error_message",
+          "display_message",
+          "status_code"
+        ]
+      }
+      external_docs: {
+        url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+        description: "Find out more about outbound webhooks."
+      }
+    };
+    google.protobuf.StringValue error_message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_error_message\"" }];
+    google.protobuf.StringValue display_message = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_display_message\"" }];
+    optional google.protobuf.UInt32Value status_code = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "400" }];
   }
 
   oneof result {
@@ -182,11 +410,23 @@ message TestOutgoingWebhookResponse {
 message ListIbmEventNotificationsInstancesRequest {}
 message ListIbmEventNotificationsInstancesResponse {
   message EventNotificationsInstance {
-    string instance_id = 1;
-    string region_id = 2;
-    string name = 3;
-    string crn = 4; // Cloud Resource Name
-    bool is_used = 5;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Even Notification intances"
+        description: "This data structure represents the available EventNofitication instances."
+        required: [
+          "instance_id",
+          "region_id",
+          "crn",
+          "is_used"
+        ]
+      }
+    };
+    string instance_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"5a8b249b-3915-49e7-ad43-030f585d84c5\"" }];
+    string region_id = 2[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"eu-gb\"" }];
+    string name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"chocolate-is-love\"" }];
+    string crn = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"" }]; // Cloud Resource Name
+    bool is_used = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
   }
 
   repeated EventNotificationsInstance instances = 1;

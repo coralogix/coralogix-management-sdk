@@ -7,23 +7,75 @@ import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "com/coralogixapis/service_catalog/v1/catalog.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
+
 message GetApmSettingsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Apm Settings Request"
+      description: "This data structure represents a request to get Apm Settings."
+      required: [
+        "catalog"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
 }
 
 message GetApmSettingsResponse{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Apm Settings Request"
+      description: "This data structure represents a response to get Apm Settings."
+      required: [
+      ]
+    }
+    external_docs: {}
+  };
   ApmSettings apm_settings = 1;
 }
 
 message ReplaceApmSettingsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Apm Settings Request"
+      description: "This data structure represents a request to replace Apm Settings."
+      required: [
+        "apm_settings"
+      ]
+    }
+    external_docs: {}
+  };
   ApmSettings apm_settings = 1;
 }
 
 message ReplaceApmSettingsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Apm Settings Request"
+      description: "This data structure represents a response to replace Apm Settings."
+      required: []
+    }
+    external_docs: {}
+  };
   ApmSettings apm_settings = 1;
 }
 
 message ValidateApmSourceRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Validate Apm source Request"
+      description: "This data structure represents a request to validate Apm source."
+      required: [
+        "source"
+      ]
+    }
+    external_docs: {}
+  };
   ApmSource source = 1;
 }
 
@@ -35,70 +87,207 @@ message Metric {
 }
 
 message ValidateApmSourceResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Validate Apm source Request"
+      description: "This data structure represents a response to validate Apm source."
+      required: []
+    }
+    external_docs: {}
+  };
   bool is_valid = 1;
   repeated Metric metrics = 2;
 }
 
 message ReplaceRetentionPeriodRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Retention Period Request"
+      description: "This data structure represents a request to Replace Retention Period."
+      required: [
+        "retention_period_in_days",
+        "catalog"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.Int32Value retention_period_in_days = 1;
   com.coralogixapis.service_catalog.v1.Catalog catalog = 2;
 }
 
 message ReplaceRetentionPeriodResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Retention Period Response"
+      description: "This data structure represents a response to Replace Retention Period."
+      required: []
+    }
+    external_docs: {}
+  };
   google.protobuf.Int32Value retention_period_in_days = 1;
 }
 
 message GetApmSourceRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get APM Source Request"
+      description: "This data structure represents a request to Get APM Source."
+      required: [
+        "catalog"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
 }
 
 message GetApmSourceResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get APM Source Response"
+      description: "This data structure represents a response to Get APM Source."
+      required: []
+    }
+    external_docs: {}
+  };
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 1;
 }
 
 message GetSpanMetricDimensionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metric Dimensions Request"
+      description: "This data structure represents a request to Get span metrics dimensions."
+      required: [
+        "catalog"
+      ]
+    }
+    external_docs: {}
+  };
   com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
 }
 
 message GetSpanMetricDimensionsByServiceNamesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metric Dimensions By Service Name Request"
+      description: "This data structure represents a request to Get span metrics dimensions by service name."
+      required: [
+        "service_names"
+      ]
+    }
+    external_docs: {}
+  };
   repeated google.protobuf.StringValue service_names = 1;
 }
 
 message GetSpanMetricDimensionsResponse{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metric Dimensions response"
+      description: "This data structure represents a response to Get span metrics dimensions."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated google.protobuf.StringValue dimensions = 1;
   map<string, google.protobuf.ListValue> dimensions_values = 2;
 }
 
 message GetSpanMetricDimensionsByServiceNamesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metric Dimensions By Service Name Response"
+      description: "This data structure represents a response to Get span metrics dimensions by service name."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated google.protobuf.StringValue dimensions = 1;
+}
+
+message IsCompanySupportVersionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Is Company Support Versions Request"
+      description: "This data structure represents a request to check if company support versions."
+      required: [
+        "catalog"
+      ]
+    }
+    external_docs: {}
+  };
+  com.coralogixapis.service_catalog.v1.Catalog catalog = 1;
+}
+
+message IsCompanySupportVersionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Is Company Support Versions Response"
+      description: "This data structure represents a response to check if company support versions."
+      required: []
+    }
+    external_docs: {}
+  };
+  google.protobuf.BoolValue version_supported = 1;
 }
 
 service ApmSettingsService {
   rpc GetApmSettings(GetApmSettingsRequest) returns (GetApmSettingsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apm Settings";
+    option (google.api.http) = {
+      get: "/v1/apm-settings"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Apm Settings";
   }
 
   rpc ReplaceApmSettings(ReplaceApmSettingsRequest) returns (ReplaceApmSettingsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Replace Apm Settings";
+    option (google.api.http) = {
+      post: "/v1/apm-settings"
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace Apm Settings";
   }
 
   rpc ValidateApmSource(ValidateApmSourceRequest) returns (ValidateApmSourceResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Validate Apm Source";
+    option (google.api.http) = {
+      get: "/v1/apm-settings/validate"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Validate Apm Source";
   }
 
   rpc ReplaceRetentionPeriod(ReplaceRetentionPeriodRequest) returns (ReplaceRetentionPeriodResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Replace Retention Period";
+    option (google.api.http) = {
+      post: "/v1/apm-settings/retention-period"
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace Retention Period";
   }
 
   rpc GetApmSource(GetApmSourceRequest) returns (GetApmSourceResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Apm Source Request";
+    option (google.api.http) = {
+      get: "/v1/apm-settings/apm-source"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Apm Source Request";
   }
 
   rpc GetSpanMetricDimensions(GetSpanMetricDimensionsRequest) returns (GetSpanMetricDimensionsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions";
+    option (google.api.http) = {
+      get: "/v1/apm-settings/span-metric-dimensions"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Span Metric Dimensions";
   }
 
   rpc GetSpanMetricDimensionsByServiceNames(GetSpanMetricDimensionsByServiceNamesRequest) returns (GetSpanMetricDimensionsByServiceNamesResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Dimensions By Service Name";
+    option (google.api.http) = {
+      get: "/v1/apm-settings/span-metric-dimensions-by-service"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Span Metric Dimensions By Service Name";
+  }
+
+  rpc IsCompanySupportVersions(IsCompanySupportVersionsRequest) returns (IsCompanySupportVersionsResponse) {
+    option (google.api.http) = {
+      get: "/v1/apm-settings/service-versions"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Is Company Support Versions";
   }
 }

@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.apm.common.v2;
+
+import "com/coralogixapis/apm/widgets/v1/line_chart.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "google/protobuf/wrappers.proto";
+
+message GetApdexResponse{
+  com.coralogixapis.apm.widgets.v1.LineChart apdex_score = 1;
+  com.coralogixapis.service_catalog.v1.RepeatedLineChart apdex_score_by_service_version = 3;
+  google.protobuf.BoolValue has_buckets_error = 2;
+}

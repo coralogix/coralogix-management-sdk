@@ -42,7 +42,7 @@ message GetDatasetSchemaFieldsResponse {
 message DatasetSchemaFields {
   uint32 company_id = 1;
   Dataset dataset = 2;
-  repeated MergedNamedSchemaTemplateField fields = 3;
+  repeated SchemaTemplateField fields = 3;
 }
 
 message CompanyDataset {

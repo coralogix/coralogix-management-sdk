@@ -5,16 +5,42 @@ import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogix/catalog/v1/service_overview.proto";
 import "com/coralogix/catalog/v1/service_overviewe_query.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
+
 message GetServiceOverviewRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Overview Request"
+      description: "This data structure represents a request to Get Service Overview."
+      required: [
+        "query"
+      ]
+    }
+    external_docs: {}
+  };
   ServiceOverviewQuery query = 1;
 }
 
 message GetServiceOverviewResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Overview Response"
+      description: "This data structure represents a response to Get Service Overview."
+      required: []
+    }
+    external_docs: {}
+  };
   ServiceOverview service_overview = 1;
 }
 
 service ServiceOverviewService {
   rpc GetServiceOverview(GetServiceOverviewRequest) returns (GetServiceOverviewResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service overview";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/service/overview",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get service overview";
   }
 }

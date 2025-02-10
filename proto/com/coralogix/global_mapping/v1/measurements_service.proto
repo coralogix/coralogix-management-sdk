@@ -2,7 +2,7 @@ syntax = "proto3";
 package com.coralogix.global_mapping.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/global_mapping/v1/measurement.proto";
-import "com/coralogix/global_mapping/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/global_mapping/v1/data_source_type.proto";
 import "com/coralogix/global_mapping/v1/extracted_label.proto";
 import "com/coralogix/global_mapping/v1/measurement_query.proto";
@@ -117,15 +117,15 @@ message UpsertCompanyProvidersResponse {
 
 service MeasurementsService {
   rpc GetMeasurements(GetMeasurementsRequest) returns (GetMeasurementsResponse) {
-    option (audit_log_description).description = "Get Measurements";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Measurements";
   }
   rpc UpsertCompanyProviders(UpsertCompanyProvidersRequest) returns (UpsertCompanyProvidersResponse){
-    option (audit_log_description).description = "Upsert Company Providers";
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Company Providers";
   }
   rpc GetQueries(GetQueriesRequest)returns(GetQueriesResponse){
-    option (audit_log_description).description = "Get Queries";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Queries";
   }
   rpc GetMeasurementsTable(GetMeasurementsTableRequest)returns(GetMeasurementsTableResponse){
-    option (audit_log_description).description = "Get Measurement Table";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Measurement Table";
   }
 }

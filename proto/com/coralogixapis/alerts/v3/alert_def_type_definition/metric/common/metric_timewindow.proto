@@ -2,9 +2,13 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "google/protobuf/wrappers.proto";
+
+
 message MetricTimeWindow {
   oneof type {
     MetricTimeWindowValue metric_time_window_specific_value = 1;
+    google.protobuf.StringValue metric_time_window_dynamic_duration = 2; // will accept a string like 1h30m that stands for 1 hour and 30 minutes
   }
 }
 
