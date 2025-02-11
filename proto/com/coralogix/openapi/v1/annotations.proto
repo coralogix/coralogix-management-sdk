@@ -34,6 +34,8 @@ message MethodOpenAPI {
     string path_parameter_name = 8;              // Name of the path parameter used in openapi spec.
     map<string, string> extensions = 9;          // Map of extensions. Value is a free-form property to include a JSON of this field. This is copied to generated schema. Quotes must be escaped.
     bool datasource = 10;                        // Indicates if the method is a datasource.
+    string request_body_example = 11;            // A free-form property to include a JSON example of the request body. This is copied to generated schema. Quotes must be escaped.
+    string response_body_example = 12;           // A free-form property to include a JSON example of the response body. This is copied to generated schema. Quotes must be escaped.
 
 }
 
@@ -58,6 +60,7 @@ extend google.protobuf.MessageOptions {
     MessageOpenAPI message = 99999;
 }
 
+// EnumOpenAPI is a message used to annotate gRPC enum types with additional OpenAPI-specific metadata.
 message EnumOpenAPI {
     string name = 1;                    // Name of the enum.
     string description = 2;             // Description of the enum.
@@ -71,28 +74,47 @@ extend google.protobuf.EnumOptions {
     EnumOpenAPI enum = 99999;
 }
 
+// EnumValueOpenAPI is a message used to annotate enum values with additional OpenAPI-specific metadata.
+message EnumValueOpenAPI {
+    repeated Cloud skip_in = 1; // List of clouds to skip this enum value in.
+}
 
+// Extending google.protobuf.EnumValueOptions to include EnumValueOpenAPI annotations.
+// This allows attaching the EnumValueOpenAPI metadata to enum value definitions.
+extend google.protobuf.EnumValueOptions {
+    EnumValueOpenAPI enum_value = 99999;
+}
 // FieldOpenAPI is a message used to annotate fields within gRPC message types
 // with additional OpenAPI-specific metadata. This includes field descriptions,
 // examples, validation patterns, length constraints, and other properties.
 message FieldOpenAPI {
-    string name = 1;        // Used for renaming field in OpenAPI schema.
-    string description = 2; // Description of the field. Defaults to the field name.
-    string example = 3;     // A free-form property to include a JSON example of this field. This is copied to generated schema. Quotes must be escaped.
-    string pattern = 4;     // Regex pattern the field value should match.
-    int32 min_length = 5;   // Minimum length for string fields. Defaults to 1.
-    int32 max_length = 6;   // Maximum length for string fields. Defaults to 4096.
-    int32 min_items = 7;    // Minimum number of items for repeated fields. Defaults to 1.
-    int32 max_items = 8;    // Maximum number of items for repeated fields. Defaults to 4096.
-    bool required = 9;      // Indicates if the field is required.
-    bool identifier = 10;   // Indicates if the field is an identifier.
-    string format = 11;     // Format of the field.
+    string name = 1;             // Used for renaming field in OpenAPI schema.
+    string description = 2;      // Description of the field. Defaults to the field name.
+    string example = 3;          // A free-form property to include a JSON example of this field. This is copied to generated schema. Quotes must be escaped.
+    string pattern = 4;          // Regex pattern the field value should match.
+    int32 min_length = 5;        // Minimum length for string fields. Defaults to 1.
+    int32 max_length = 6;        // Maximum length for string fields. Defaults to 4096.
+    int32 min_items = 7;         // Minimum number of items for repeated fields. Defaults to 1.
+    int32 max_items = 8;         // Maximum number of items for repeated fields. Defaults to 4096.
+    bool required = 9;           // Indicates if the field is required.
+    bool identifier = 10;        // Indicates if the field is an identifier.
+    string format = 11;          // Format of the field.
+    repeated Cloud skip_in = 12; // List of clouds to skip this field in.
 }
 
 // Extending google.protobuf.FieldOptions to include FieldOpenAPI annotations.
 // This allows attaching the FieldOpenAPI metadata to field definitions within gRPC messages.
 extend google.protobuf.FieldOptions {
     FieldOpenAPI field = 99999;
+}
+
+
+enum Cloud {
+    CLOUD_UNSPECIFIED = 0;
+    CLOUD_IBM = 1;
+    CLOUD_AWS = 2;
+    CLOUD_AZURE = 3;
+    CLOUD_GCP = 4;
 }
 
 // ApiError is a message representing a standardized error response format.
@@ -112,11 +134,24 @@ message ApiError {
             ERROR_CODE_RESOURCE_EXHAUSTED = 7;
             ERROR_CODE_DEADLINE_EXCEEDED = 8;
         }
-        ErrorCode code = 1 [(com.coralogix.openapi.v1.field) = { required: true, description: "Error code" } ];
-        google.protobuf.StringValue message = 2;    // Human-readable error message.
-        google.protobuf.StringValue more_info = 3;  // Additional information about the error.
+        // Error code
+        ErrorCode code = 1 [(com.coralogix.openapi.v1.field) = { required: true } ];
+        // Human-readable error message
+        google.protobuf.StringValue message = 2 [(com.coralogix.openapi.v1.field) = { example: "\"Not found\""} ];
+        // Additional information about the error
+        google.protobuf.StringValue more_info = 3 [(com.coralogix.openapi.v1.field) = { example: "\"View not found\""} ];
     }
-    repeated Error errors = 1 [(com.coralogix.openapi.v1.field) = { required: true, description: "List of errors", min_length: 1 } ];
-    google.protobuf.StringValue trace = 2 [(com.coralogix.openapi.v1.field) = { required: true, description: "UUID uniquely identifying the request" } ];
-    google.protobuf.Int32Value status_code = 3;   // HTTP status code associated with the error.
+    // List of errors
+    repeated Error errors = 1 [(com.coralogix.openapi.v1.field) = { required: true, min_length: 1 } ];
+    // UUID uniquely identifying the request
+    google.protobuf.StringValue trace = 2 [(com.coralogix.openapi.v1.field) = {
+        required: true,
+        format : "uuid",
+        min_length : 36,
+        max_length : 36,
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+        example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    }];
+    // HTTP status code associated with the error
+    google.protobuf.Int32Value status_code = 3 [(com.coralogix.openapi.v1.field) = { example: "404"}];
 }

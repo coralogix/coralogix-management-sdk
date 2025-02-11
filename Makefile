@@ -22,3 +22,10 @@ release:
 
 test:
 	cd ./go; make test TESTARGS=${TESTARGS}
+
+proto-renew:
+	protofetch clean
+	protofetch fetch
+	cp -a proto/src/** proto/
+	rm -rf proto/src
+	cd ./go; make proto-clean; make proto-compile

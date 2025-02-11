@@ -3,39 +3,38 @@ syntax = "proto3";
 package com.coralogix.integrations.v1;
 
 import "com/coralogix/integrations/v1/integration.proto";
-import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "google/api/annotations.proto";
 
 service ContextualDataIntegrationService {
   rpc GetContextualDataIntegrations(GetContextualDataIntegrationsRequest) returns (GetContextualDataIntegrationsResponse) {
-    option (audit_log_description).description = "Get all contextual data integrations";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all contextual data integrations";
   }
 
   rpc GetContextualDataIntegrationDefinition(GetContextualDataIntegrationDefinitionRequest) returns (GetContextualDataIntegrationDefinitionResponse) {
-    option (audit_log_description).description = "Get contextual data integration definition";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration definition";
   }
 
   rpc GetContextualDataIntegrationDetails(GetContextualDataIntegrationDetailsRequest) returns (GetContextualDataIntegrationDetailsResponse) {
-    option (audit_log_description).description = "Get contextual data integration details";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration details";
   }
 
   rpc TestContextualDataIntegration(TestContextualDataIntegrationRequest) returns (TestContextualDataIntegrationResponse) {
-    option (audit_log_description).description = "Test contextual data integration";
+    option (com.coralogix.common.v1.audit_log_description).description = "Test contextual data integration";
   }
 
   rpc SaveContextualDataIntegration(SaveContextualDataIntegrationRequest) returns (SaveContextualDataIntegrationResponse) {
-    option (audit_log_description).description = "Save contextual data integration registration metadata";
+    option (com.coralogix.common.v1.audit_log_description).description = "Save contextual data integration registration metadata";
   }
 
   rpc UpdateContextualDataIntegration(UpdateContextualDataIntegrationRequest) returns (UpdateContextualDataIntegrationResponse) {
-    option (audit_log_description).description = "Update contextual data integration";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update contextual data integration";
   }
 
   rpc DeleteContextualDataIntegration(DeleteContextualDataIntegrationRequest) returns (DeleteContextualDataIntegrationResponse) {
-    option (audit_log_description).description = "Delete contextual data integration";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete contextual data integration";
   }
 }
 

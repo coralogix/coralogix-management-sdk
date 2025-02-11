@@ -5,6 +5,8 @@ package com.coralogix.outgoing_webhooks.v1;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 enum WebhookType {
   UNKNOWN = 0;
   GENERIC = 1;
@@ -29,12 +31,43 @@ message GenericWebhookConfig {
     PUT = 3;
   }
 
-  google.protobuf.StringValue uuid = 1;
-  MethodType method = 2;
-  map<string, string> headers = 3;
-  google.protobuf.StringValue payload = 4;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Generic Webhook Configuration"
+      description: "This data structure represents the configuration of a generic outgoing webhook"
+      required: [
+        "uuid",
+        "method",
+        "headers",
+        "payload"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  MethodType method = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  map<string, string> headers = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"Content-Type\": \"application/json\"}" }];
+  google.protobuf.StringValue payload = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 message SlackConfig {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Slack Configuration"
+      description: "This data structure represents the configuration of a Slack outgoing webhook"
+      required: [
+        "digests",
+        "attachments"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   enum DigestType {
     UNKNOWN = 0;
     ERROR_AND_CRITICAL_LOGS = 1;
@@ -50,13 +83,13 @@ message SlackConfig {
   }
 
   message Digest {
-    DigestType type = 1;
-    google.protobuf.BoolValue is_active = 2;
+    DigestType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
   }
 
   message Attachment {
-    AttachmentType type = 1;
-    google.protobuf.BoolValue is_active = 2;
+    AttachmentType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
   }
 
   repeated Digest digests = 1;
@@ -64,36 +97,121 @@ message SlackConfig {
 }
 
 message PagerDutyConfig {
-  google.protobuf.StringValue service_key = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "PagerDuty Configuration"
+      description: "This data structure represents the configuration of a PagerDuty outgoing webhook"
+      required: [
+        "service_key"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue service_key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"pager_duty_service_key\"" }];
 }
 message SendLogConfig {
-  google.protobuf.StringValue uuid = 1;
-  google.protobuf.StringValue payload = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Send Log Configuration"
+      description: "This data structure represents the configuration of a SendLog outgoing webhook"
+      required: [
+        "service_key"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 message EmailGroupConfig {
-  repeated google.protobuf.StringValue email_addresses = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Email Group Configuration"
+      description: "This data structure represents the configuration of an EmailGroup outgoing webhook"
+      required: [
+        "email_addresses"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  repeated google.protobuf.StringValue email_addresses = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"example@coralogix.com\"]" }];
 }
 message MicrosoftTeamsConfig {}
 message MSTeamsWorkflowConfig {}
 message JiraConfig {
-  google.protobuf.StringValue api_token = 1;
-  google.protobuf.StringValue email = 2;
-  google.protobuf.StringValue project_key = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Jira Configuration"
+      description: "This data structure represents the configuration of a Jira outgoing webhook"
+      required: [
+        "api_token",
+        "email",
+        "project_key"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue api_token = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_api_token\"" }];
+  google.protobuf.StringValue email = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_email\"" }];
+  google.protobuf.StringValue project_key = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_project_key\"" }];
 }
 message OpsgenieConfig {}
 message DemistoConfig {
-  google.protobuf.StringValue uuid = 1;
-  google.protobuf.StringValue payload = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Demisto Configuration"
+      description: "This data structure represents the configuration of a Demisto outgoing webhook"
+      required: [
+        "uuid",
+        "payload"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 message AwsEventBridgeConfig {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "AWS EventBridge Configuration"
+      description: "This data structure represents the configuration of an AWS EventBridge outgoing webhook"
+      required: [
+        "event_bus_arn",
+        "detail",
+        "detail_type",
+        "source",
+        "role_name"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   reserved 5;
   reserved "region"; // Region was deprecated, as it could be inferred from the event bus arn.
 
-  google.protobuf.StringValue event_bus_arn = 1;
-  google.protobuf.StringValue detail = 2;
-  google.protobuf.StringValue detail_type = 3;
-  google.protobuf.StringValue source = 4;
-  google.protobuf.StringValue role_name = 6;
+  google.protobuf.StringValue event_bus_arn = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"arn:aws:events:us-east-1:123456789012:event-bus/default\"" }];
+  google.protobuf.StringValue detail = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
+  google.protobuf.StringValue detail_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"detail_type\"" }];
+  google.protobuf.StringValue source = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"source\"" }];
+  google.protobuf.StringValue role_name = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"role_name\"" }];
 }
 
 message IbmEventNotificationsConfig {
@@ -111,13 +229,32 @@ message IbmEventNotificationsConfig {
 }
 
 message OutgoingWebhook {
-  google.protobuf.StringValue id = 1;
-  WebhookType type = 2;
-  google.protobuf.StringValue name = 3;
-  google.protobuf.StringValue url = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
-  google.protobuf.UInt32Value external_id = 7;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook"
+      description: "This data structure represents an outgoing webhook"
+      required: [
+        "id",
+        "type",
+        "name",
+        "url",
+        "created_at",
+        "updated_at",
+        "config"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
   oneof config {
     GenericWebhookConfig generic_webhook = 100;
     SlackConfig slack = 101;
@@ -135,9 +272,25 @@ message OutgoingWebhook {
 }
 
 message OutgoingWebhookInputData {
-  WebhookType type = 1;
-  google.protobuf.StringValue name = 2;
-  google.protobuf.StringValue url = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook Input Data"
+      description: "This data structure represents the input data of an outgoing webhook"
+      required: [
+        "type",
+        "name",
+        "url",
+        "config"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  WebhookType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
   oneof config {
     GenericWebhookConfig generic_webhook = 100;
     SlackConfig slack = 101;
@@ -155,27 +308,72 @@ message OutgoingWebhookInputData {
 }
 
 message OutgoingWebhookSummary {
-  google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue name = 2;
-  google.protobuf.StringValue url = 3;
-  google.protobuf.Timestamp created_at = 4;
-  google.protobuf.Timestamp updated_at = 5;
-  google.protobuf.UInt32Value external_id = 6;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook Summary"
+      description: "This data structure represents an outgoing webhook type."
+      required: [
+        "type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
 }
 
 message OutgoingWebhookExtendedSummary {
-  google.protobuf.StringValue id = 1;
-  WebhookType type = 2;
-  google.protobuf.StringValue name = 3;
-  google.protobuf.StringValue url = 4;
-  google.protobuf.Timestamp created_at = 5;
-  google.protobuf.Timestamp updated_at = 6;
-  google.protobuf.UInt32Value external_id = 7;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook Extended Summary"
+      description: "This data structure fully summarizes an outgoing webhook."
+      required: [
+        "id",
+        "type",
+        "name",
+        "url",
+        "created_at",
+        "updated_at"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
 }
 
 message OutgoingWebhookDetails {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Outgoing Webhook Details"
+      description: "This data structure represents the details of an outgoing webhook type."
+      required: [
+        "type",
+        "label"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      description: "Find out more about outbound webhooks."
+    }
+  };
   WebhookType type = 1;
-  google.protobuf.StringValue label = 2;
+  google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_label\"" }];
 }
 
 message OutboundWebhookSummary{

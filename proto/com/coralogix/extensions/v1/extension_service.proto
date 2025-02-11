@@ -2,16 +2,18 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogix/extensions/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 service ExtensionService {
   rpc GetAllExtensions(GetAllExtensionsRequest) returns (GetAllExtensionsResponse) {
-    option (audit_log_description).description = "Get all extensions";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all extensions";
     option (google.api.http) = {
       post: "/extensions/v1/all"
       body: "*"
@@ -19,7 +21,7 @@ service ExtensionService {
   }
 
   rpc GetExtension(GetExtensionRequest) returns (GetExtensionResponse) {
-    option (audit_log_description).description = "Get extension by id";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get extension by id";
     option (google.api.http) = {
       get: "/extensions/v1/{id}"
       response_body: "extension"
@@ -29,7 +31,22 @@ service ExtensionService {
 }
 
 message GetAllExtensionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetAllExtensionsRequest"
+      description: "Request to list all extensions"
+      required: [
+      ]
+    }
+  };
   message Filter {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "GetAllExtensionsRequest - Filter"
+        description: "Filter by integration ids"
+        required: ["integrations"]
+      }
+    };
     repeated string integrations = 1;
   }
   google.protobuf.BoolValue include_hidden_extensions = 1;
@@ -37,6 +54,13 @@ message GetAllExtensionsRequest {
 }
 
 message GetAllExtensionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetAllExtensionsResponse"
+      description: "Response to list all extensions"
+      required: [ "extensions"]
+    }
+  };
   message RevisionSummary {
     ItemCounts item_counts = 1;
     google.protobuf.BoolValue is_new = 2;

@@ -72,6 +72,7 @@ service DashboardsService {
 message CreateDashboardRequest {
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
+  google.protobuf.BoolValue is_locked = 3;
 }
 
 message CreateDashboardResponse {
@@ -81,6 +82,7 @@ message CreateDashboardResponse {
 message ReplaceDashboardRequest {
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
+  google.protobuf.BoolValue is_locked = 3;
 }
 
 message ReplaceDashboardResponse {}
@@ -109,10 +111,14 @@ message GetDashboardResponse {
   google.protobuf.Timestamp created_at = 3;
 
   google.protobuf.StringValue updater_author_id = 4;
+  google.protobuf.StringValue updater_name = 8;
   google.protobuf.StringValue author_id = 5;
+  google.protobuf.StringValue author_name = 9;
 
   TokenOriginType updated_origin_type = 6;
   TokenOriginType created_origin_type = 7;
+
+  google.protobuf.BoolValue is_locked = 10;
 }
 
 message PinDashboardRequest {

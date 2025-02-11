@@ -3,13 +3,9 @@ syntax = "proto3";
 package com.coralogix.archive.dataset.v2;
 
 
-message MergedNamedSchemaTemplateField {
+message SchemaTemplateField {
   repeated string path_array = 1;
-  repeated NamedSchemaDataType data_types = 2;
-}
-message NamedSchemaDataType {
   DataType data_type = 2;
-  string logical_data_type = 3;
 }
 
 enum DataType {
@@ -27,4 +23,9 @@ enum DataType {
   DATA_TYPE_NULL = 11;
   DATA_TYPE_NULL_ARRAY = 12;
   DATA_TYPE_EMPTY_ARRAY = 13;
+}
+
+enum FieldReservation {
+  FIELD_RESERVATION_NOT_RESERVED_UNSPECIFIED = 0;
+  FIELD_RESERVATION_RESERVED = 1;
 }

@@ -1,7 +1,7 @@
 syntax = "proto3";
 package com.coralogix.global_mapping.v1;
 
-import "com/coralogix/global_mapping/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/global_mapping/v1/data_source.proto";
 import "com/coralogix/global_mapping/v1/data_source_type.proto";
 import "com/coralogix/global_mapping/v1/label_mapping.proto";
@@ -43,13 +43,13 @@ message GetLabelValuesInternalResponse {
 
 service LabelMappingsInternalService {
   rpc UpsertLabelMappingsInternal(UpsertLabelMappingsInternalRequest) returns (UpsertLabelMappingsInternalResponse) {
-    option (audit_log_description).description = "Upsert Label Mappings Internal";
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Label Mappings Internal";
   }
 
   rpc GetLabelMappingsInternal(GetLabelMappingsInternalRequest) returns (GetLabelMappingsInternalResponse) {
-    option (audit_log_description).description = "Get Label Mappings Internal";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Label Mappings Internal";
   }
   rpc GetLabelValuesInternal(GetLabelValuesInternalRequest) returns (GetLabelValuesInternalResponse) {
-    option (audit_log_description).description = "Returns possible label values from prometheus labels";
+    option (com.coralogix.common.v1.audit_log_description).description = "Returns possible label values from prometheus labels";
   }
 }

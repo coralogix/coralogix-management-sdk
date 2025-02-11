@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogix.integrations.v1;
 
-import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
@@ -34,7 +34,7 @@ message PermissionId {
 service PermissionCheckService {
 
     rpc CheckApiKeyPermission(CheckApiKeyPermissionRequest) returns (CheckApiKeyPermissionResponse) {
-        option (audit_log_description).description = "CheckPermission for api-key";
+        option (com.coralogix.common.v1.audit_log_description).description = "CheckPermission for api-key";
         option (google.api.http) = {
           post: "/integrations/v1/check-permission"
           body: "*"

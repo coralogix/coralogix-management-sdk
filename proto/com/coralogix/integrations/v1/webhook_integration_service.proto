@@ -2,15 +2,16 @@ syntax = "proto3";
 
 package com.coralogix.integrations.v1;
 
-import "com/coralogix/integrations/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/integrations/v1/webhook.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service WebhookIntegrationService {
   rpc CreateWebhookIntegration(CreateWebhookIntegrationRequest) returns (CreateWebhookIntegrationResponse) {
-    option (audit_log_description).description = "Create a webhook integration";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create a webhook integration";
     option (google.api.http) = {
       post: "/webhook-integration/v1/create"
       body: "*"
@@ -18,7 +19,7 @@ service WebhookIntegrationService {
   }
 
   rpc ListWebhookIntegrations(ListWebhookIntegrationsRequest) returns (ListWebhookIntegrationsResponse) {
-    option (audit_log_description).description = "List webhook integrations";
+    option (com.coralogix.common.v1.audit_log_description).description = "List webhook integrations";
     option (google.api.http) = {
       post: "/webhook-integration/v1/list"
       body: "*"
@@ -26,7 +27,7 @@ service WebhookIntegrationService {
   }
 
   rpc DeleteWebhookIntegration(DeleteWebhookIntegrationRequest) returns (DeleteWebhookIntegrationResponse) {
-    option (audit_log_description).description = "Delete webhook integration";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete webhook integration";
     option (google.api.http) = {
       post: "/webhook-integration/v1/delete"
       body: "*"
@@ -34,7 +35,7 @@ service WebhookIntegrationService {
   }
 
   rpc ToggleWebhookIntegrationActivation(ToggleWebhookIntegrationActivationRequest) returns (ToggleWebhookIntegrationActivationResponse) {
-    option (audit_log_description).description = "Toggle webhook integration activation status";
+    option (com.coralogix.common.v1.audit_log_description).description = "Toggle webhook integration activation status";
     option (google.api.http) = {
       post: "/webhook-integration/v1/toggle_activation"
       body: "*"
@@ -42,7 +43,7 @@ service WebhookIntegrationService {
   }
 
   rpc CountWebhookIntegrations(CountWebhookIntegrationsRequest) returns (CountWebhookIntegrationsResponse) {
-    option (audit_log_description).description = "Count webhook integrations";
+    option (com.coralogix.common.v1.audit_log_description).description = "Count webhook integrations";
     option (google.api.http) = {
       post: "/webhook-integration/v1/count"
       body: "*"
@@ -51,11 +52,25 @@ service WebhookIntegrationService {
 }
 
 message CreateWebhookIntegrationRequest {
-  google.protobuf.StringValue name = 1;
-  google.protobuf.StringValue api_key_value = 2;
-  google.protobuf.StringValue application = 3;
-  google.protobuf.StringValue subsystem = 4;
-  google.protobuf.BoolValue is_private = 5;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Webhook Request"
+      description: "Request to create a new webhook"
+      required: [
+        "name",
+        "api_key_value",
+        "application",
+        "subsystem",
+        "is_private",
+        "content_type"
+      ]
+    }
+  };
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Chocolate is love\""}];
+  google.protobuf.StringValue api_key_value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"apn_b486d10b58184b25ae02c30dcba87775\""}];
+  google.protobuf.StringValue application = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"authorization\""}];
+  google.protobuf.StringValue subsystem = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"token_validator\""}];
+  google.protobuf.BoolValue is_private = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
   oneof content_type {
     JsonContentType json = 10;
     TextContentType text = 11;
@@ -63,48 +78,142 @@ message CreateWebhookIntegrationRequest {
 }
 
 message CreateWebhookIntegrationResponse {
-  google.protobuf.StringValue id = 1;
-  google.protobuf.StringValue webhook_url = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Webhook Integration Response"
+      description: "Response of the created webhook integration"
+      required: [
+        "id",
+        "webhook_url"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"b486d10b58184b25ae02c30dcba87775\""}];
+  google.protobuf.StringValue webhook_url = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"http://chocolate.is.love\""}];
 }
 
-message ListWebhookIntegrationsRequest {
+message ListWebhookIntegrationsRequest {  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  json_schema: {
+    title: "List Webhook Integration Request",
+    description: "Request to list integrations",
+    required: [
+    ]
+  }
+};
 }
 
 message ListWebhookIntegrationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Webhook Integration Response",
+      description: "Webhook integration data",
+      required: [
+        "webhooks"
+      ]
+    }
+  };
+
   message WebhookIntegration  {
-    google.protobuf.StringValue webhook_id = 1;
-    google.protobuf.StringValue company_id = 2;
-    google.protobuf.StringValue name = 3;
-    google.protobuf.StringValue application = 4;
-    google.protobuf.StringValue subsystem = 5;
-    google.protobuf.BoolValue is_private = 6;
-    google.protobuf.StringValue url = 7;
-    google.protobuf.BoolValue is_active = 8;
-    google.protobuf.Timestamp created_at = 9;
-    google.protobuf.Timestamp updated_at = 10;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Webhook Integration Response Body",
+        description: "Webhook integration data",
+        required: [
+          "webhook_id",
+          "company_id",
+          "name",
+          "application",
+          "subsystem",
+          "is_private",
+          "url",
+          "is_active",
+          "created_at",
+          "updated_at"
+        ]
+      }
+    };
+    google.protobuf.StringValue webhook_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"b486d10b58184b25ae02c30dcba87775\""}];
+    google.protobuf.StringValue company_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"123456789\""}];
+    google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Chocolate is love\""}];
+    google.protobuf.StringValue application = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"authorization\""}];
+    google.protobuf.StringValue subsystem = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"token_validator\""}];
+    google.protobuf.BoolValue is_private = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
+    google.protobuf.StringValue url = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"http://chocolate.is.love\""}];
+    google.protobuf.BoolValue is_active = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
+    google.protobuf.Timestamp created_at = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
+    google.protobuf.Timestamp updated_at = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
   }
 
   repeated WebhookIntegration webhooks = 1;
 }
 
 message DeleteWebhookIntegrationRequest {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Delete Webhook Integration Request",
+      description: "Request to delete a webhook"
+      required: [
+        "id"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"b486d10b58184b25ae02c30dcba87775\""}];
 }
 
 message DeleteWebhookIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Delete Webhook Integration Response",
+      description: "Empty response in case of successful deletion"
+      required: []
+    }
+  };
 }
 
 message ToggleWebhookIntegrationActivationRequest {
-  google.protobuf.StringValue id = 1;
-  google.protobuf.BoolValue is_active = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Webhook Integration Activation Response",
+      description: "To enable/disable webhook integrations"
+      required: [
+        "id",
+        "is_active"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"b486d10b58184b25ae02c30dcba87775\""}];
+  google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }
 
 message ToggleWebhookIntegrationActivationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Webhook Integration Activation Response",
+      description : "Empty message if the request is successful",
+      required: []
+    }
+  };
 }
 
 message CountWebhookIntegrationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Count Webhook Integration Request",
+      description : "Request to count the webhooks",
+      required: []
+    }
+  };
 }
 
 message CountWebhookIntegrationsResponse {
-  google.protobuf.UInt32Value count = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title : "Count Webhook Integration Response",
+      description : "Count of webhook integrations",
+      required: [
+        "count"
+      ]
+    }
+  };
+  google.protobuf.UInt32Value count = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "15"}];
 }

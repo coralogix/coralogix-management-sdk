@@ -5,7 +5,10 @@ package com.coralogixapis.events2metrics.v2;
 import "com/coralogixapis/logs2metrics/v2/logs_query.proto";
 import "com/coralogixapis/spans2metrics/v2/spans_query.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/openapi/v1/annotations.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
 // Enum defining e2m type
 enum E2MType {
   E2M_TYPE_UNSPECIFIED = 0;
@@ -14,143 +17,198 @@ enum E2MType {
 }
 // E2M represents the Event to metrics base model.
 message E2M {
-  option (com.coralogix.openapi.v1.message) = {
-    name: "Event2Metric",
-    description: "Event2Metric model"
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "E2M"
+      description: "This data structure represents an Event to Metrics (E2M) object."
+      required: [
+        "name",
+        "type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
   };
-  //E2M id, required on update requests
-  google.protobuf.StringValue id = 1 [ (com.coralogix.openapi.v1.field) = {
+  //E2M unique ID, required on update requests
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
    format : "uuid",
    min_length : 36,
    max_length : 36,
    example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"",
    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-   description: "E2M unique id"
   } ];
-  // E2M name
-  google.protobuf.StringValue name = 2 [ (com.coralogix.openapi.v1.field) = {
-    required : true,
-    example : "\"Service_catalog_latency\""
+  // Name of the E2M
+  google.protobuf.StringValue name = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example : "\"Service_catalog_latency\"",
   } ];
-  // E2m description
-  google.protobuf.StringValue description = 3 [ (com.coralogix.openapi.v1.field) = {
+  // Description of the E2M
+  google.protobuf.StringValue description = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     example : "\"avg and max the latency of catalog service\"",
   } ];
   // E2M create time
-  google.protobuf.StringValue create_time = 4 [ (com.coralogix.openapi.v1.field) = {
-    description : "e2m create time",
+  google.protobuf.StringValue create_time = 4 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     example: "\"2022-06-30T12:30:00Z'\""
   } ];
   // E2M update time
-  google.protobuf.StringValue update_time = 5 [ (com.coralogix.openapi.v1.field) = {
-    description : "e2m update time",
+  google.protobuf.StringValue update_time = 5 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     example: "\"2022-06-30T12:30:00Z'\""
   } ];
-  // represents E2M permutations limit
-  E2MPermutations permutations = 6 [ (com.coralogix.openapi.v1.field) = {
-    description : "represents the limit of the permutations and if the limit was exceeded"
-  } ];
+  // Represents the limit of the permutations and if the limit was exceeded
+  E2MPermutations permutations = 6 ;
   // E2M metric labels
-  repeated MetricLabel metric_labels = 7 [ (com.coralogix.openapi.v1.field) = {
-    required : false,
-    description : "e2m metric labels"
-  } ];
+  repeated MetricLabel metric_labels = 7;
   // E2M metric fields
-  repeated MetricField metric_fields = 8 [ (com.coralogix.openapi.v1.field) = {
-    description : "e2m metric fields",
+  repeated MetricField metric_fields = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     max_items: 10
   } ];
   // E2M type logs2metrics/spans2metrics
-  E2MType type = 9 [ (com.coralogix.openapi.v1.field) = {
-    required : true,
-    description : "e2m type"
-  } ];
-  // spans or logs type query
+  E2MType type = 9;
+  // Spans or logs type query
   oneof query {
-    //spans query
-    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 10 [ (com.coralogix.openapi.v1.field) = {
-      description : "e2m span query"
-    } ];
-    // logs query
-    com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 11 [ (com.coralogix.openapi.v1.field) = {
-      description : "e2m logs query"
-    } ];
+    // E2M spans query
+    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 10;
+    //  E2M logs query
+    com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 11;
   }
-  // a flag that represents if the e2m is for internal usage
+  // A flag that represents if the e2m is for internal usage
   google.protobuf.BoolValue is_internal = 12;
 }
 // E2M Create message
 message E2MCreateParams {
-  option (com.coralogix.openapi.v1.message) = {
-    name: "Event2MetricPrototype"
-    description: "Event2Metric to create"
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "E2M Create Params"
+      description: "This data structure is used to create a new event to metric definition"
+      required: [
+        "name"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
   };
 
-  // e2m create name
-  google.protobuf.StringValue name = 1 [ (com.coralogix.openapi.v1.field) = {
-    required : true
+  // Name of E2M to create
+  google.protobuf.StringValue name = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     example : "\"Service catalog latency\""
   } ];
-  // e2m description
-  google.protobuf.StringValue description = 2 [ (com.coralogix.openapi.v1.field) = {
+  // Description of E2M to create
+  google.protobuf.StringValue description = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     example : "\"avg and max the latency of catalog service\""
   } ];
-  // permutation limit
-  google.protobuf.Int32Value permutations_limit = 3;
-  // e2m metric labels
+  // The permutation limit of the E2M
+  google.protobuf.Int32Value permutations_limit = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example : "30000"
+  } ];
+  // E2M metric labels
   repeated MetricLabel metric_labels = 4;
-  // e2m metric fields
+  // E2M metric fields
   repeated MetricField metric_fields = 5;
-  // e2m type
+  // E2M type
   E2MType type = 6;
-  // spans or logs query type
+  // E2M spans or logs query type
   oneof query {
-    // spans query
-    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 7 [ (com.coralogix.openapi.v1.field) = {
-      description : "e2m span query",
-    } ];
-    // logs query
-    com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 8 [ (com.coralogix.openapi.v1.field) = {
-      description : "e2m logs query",
-    } ];
+    // E2M span query
+    com.coralogixapis.spans2metrics.v2.SpansQuery spans_query = 7;
+    // E2M logs query
+    com.coralogixapis.logs2metrics.v2.LogsQuery logs_query = 8;
   }
 }
-// represents e2m permutation limit
+// Represents e2m permutation limit
 message E2MPermutations {
-  // e2m permutation limit
-  int32 limit = 1 [ (com.coralogix.openapi.v1.field) = {
-    description : "e2m permutation limit",
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "E2M Permutations"
+      description: "This data structure represents the limit of events2metrics permutations and if the limit was exceeded"
+      required: [
+        "limit",
+        "has_exceeded_limit"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // E2M permutation limit
+  int32 limit = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "30000"
   } ];
-  // flag to indicate if limit was exceeded
-  bool has_exceeded_limit = 2 [ (com.coralogix.openapi.v1.field) = {
-    description : "has exceeded limit",
-  } ];
+  // Flag to indicate if limit was exceeded
+  bool has_exceeded_limit = 2 ;
 }
-// e2m metric label
+// E2M metric label
 message MetricLabel {
-  // metric label target label
-  google.protobuf.StringValue target_label = 1 [ (com.coralogix.openapi.v1.field) = {
-    description : "metric label target label",
-    pattern: "/^[\\w/-]+$/"
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Metric Label"
+      description: "This data structure represents a metric label"
+      required: [
+        "target_label",
+        "source_field"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // Metric label target alias name
+  google.protobuf.StringValue target_label = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    pattern: "^[\\w/-]+$",
+    example: "\"alias_label_name\""
   } ];
-  // metric label source field
-  google.protobuf.StringValue source_field = 2 [ (com.coralogix.openapi.v1.field) = {
-    description : "metric label source field",
+  // Metric label source field
+  google.protobuf.StringValue source_field = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"log_obj.string_value\""
   } ];
 }
-//e2m metric field
+//E2M metric field
 message MetricField {
-  google.protobuf.StringValue target_base_metric_name = 1 [ (com.coralogix.openapi.v1.field) = {
-    pattern: "/^[\\w/-]+$/"
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Metric Field"
+      description: "This data structure represents a metric field"
+      required: [
+        "target_base_metric_name",
+        "source_field",
+        "aggregations"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // Target metric field alias name
+  google.protobuf.StringValue target_base_metric_name = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    pattern: "^[\\w/-]+$",
+    example: "\"alias_field_name\""
   } ];
-  // source field
-  google.protobuf.StringValue source_field = 2;
-  // represents Aggregation type list
+  // Source field
+  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"log_obj.numeric_field\""
+  }];
+  // Represents Aggregation type list
   repeated Aggregation aggregations = 7;
 }
-// e2m aggregation
+// E2M aggregation
 message Aggregation {
-  // enum - aggregation type
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Aggregation"
+      description: "This data structure represents an aggregation"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // Enum - Aggregation type
   enum AggType {
     AGG_TYPE_UNSPECIFIED = 0;
     AGG_TYPE_MIN = 1;
@@ -161,37 +219,62 @@ message Aggregation {
     AGG_TYPE_HISTOGRAM = 6;
     AGG_TYPE_SAMPLES = 7;
   }
-  // is enabled
+  // Is enabled
   bool enabled = 1;
-  // aggregation type
+  // Aggregation type
   AggType agg_type = 2;
-  // target metric field
-  string target_metric_name = 3;
-  // aggregate metadata, samples or histogram type
+  // Target metric field alias name
+  string target_metric_name = 3  [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"alias_field_name_agg_func\""
+  } ];
+  // Aggregate metadata, samples or histogram type
   oneof agg_metadata {
-    // e2m sample type metadata
+    // E2M sample type metadata
     E2MAggSamples samples = 4;
-    // e2m aggregate histogram type metadata
-    E2MAggHistogram histogram = 5 [ (com.coralogix.openapi.v1.field) = {
+    // E2M aggregate histogram type metadata
+    E2MAggHistogram histogram = 5 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description : "e2m aggregate histogram type metadata",
-      required: true,
       min_items: 1
     } ];
   }
 }
-// e2m aggregate sample type
+// E2M aggregate sample type
 message E2MAggSamples {
-  // enum of aggregate type
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "E2M Aggregate Samples"
+      description: "This data structure represents the e2m aggregate samples"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // Enum of aggregate type
   enum SampleType {
     SAMPLE_TYPE_UNSPECIFIED = 0;
     SAMPLE_TYPE_MIN = 1;
     SAMPLE_TYPE_MAX = 2;
   }
-  // sample type min/max
+  // Sample type min/max
   SampleType sample_type = 2;
 }
- // represents the e2m aggregate histogram
+ // Represents the e2m aggregate histogram
 message E2MAggHistogram {
-  // buckets that describe the e2m
-  repeated float buckets = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "E2M Aggregate Histogram"
+      description: "This data structure represents the e2m aggregate histogram"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
+      description: "Find out more about events2metrics"
+    }
+  };
+  // Buckets of the E2M
+  repeated float buckets = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "2"
+  } ];
 }

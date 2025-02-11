@@ -1,7 +1,9 @@
 syntax = "proto3";
 import "google/protobuf/descriptor.proto";
 
-package com.coralogix.global_mapping.v1;
+package com.coralogix.common.v1;
+
+option go_package = "com/coralogix/common/v1";
 
 message AuditLogDescription {
   string description = 1;

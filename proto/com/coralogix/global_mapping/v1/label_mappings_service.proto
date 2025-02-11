@@ -1,7 +1,7 @@
 syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 
-import "com/coralogix/global_mapping/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/global_mapping/v1/label_mapping.proto";
 import "com/coralogix/global_mapping/v1/data_source_type.proto";
 import "com/coralogix/global_mapping/v1/context_data.proto";
@@ -114,42 +114,42 @@ message GetLabelKeysResponse {
 
 service LabelMappingsService {
   rpc GetLabelMappings(GetLabelMappingsRequest) returns (GetLabelMappingsResponse) {
-    option (audit_log_description).description = "Get Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Label Mappings";
   }
 
   rpc RemoveLabelMappings(RemoveLabelMappingsRequest) returns (RemoveLabelMappingsResponse) {
-    option (audit_log_description).description = "Remove Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Remove Label Mappings";
   }
 
   rpc UpsertLabelMappings(UpsertLabelMappingsRequest) returns (UpsertLabelMappingsResponse) {
-    option (audit_log_description).description = "Upsert Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Label Mappings";
   }
 
   rpc GetLabels(GetLabelsRequest) returns (GetLabelsResponse) {
-    option (audit_log_description).description = "Get Labels";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Labels";
   }
 
   rpc Extract(ExtractRequest) returns(ExtractResponse) {
-    option (audit_log_description).description = "Extract labels from context";
+    option (com.coralogix.common.v1.audit_log_description).description = "Extract labels from context";
   }
 
   rpc GetLabelValues(GetLabelValuesRequest) returns (GetLabelValuesResponse) {
-    option (audit_log_description).description = "Returns possible label values from prometheus labels";
+    option (com.coralogix.common.v1.audit_log_description).description = "Returns possible label values from prometheus labels";
   }
 
   rpc GetCustomLabelMappings(GetCustomLabelMappingsRequest) returns (GetCustomLabelMappingsResponse) {
-    option (audit_log_description).description = "Get Custom Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Custom Label Mappings";
   }
 
   rpc UpsertCustomLabelMappings(UpsertCustomLabelMappingsRequest) returns (UpsertCustomLabelMappingsResponse) {
-    option (audit_log_description).description = "Upsert Custom Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Custom Label Mappings";
   }
 
   rpc RemoveCustomLabelMappings (RemoveCustomLabelMappingsRequest) returns (RemoveCustomLabelMappingsResponse) {
-    option (audit_log_description).description = "Remove Custom Label Mappings";
+    option (com.coralogix.common.v1.audit_log_description).description = "Remove Custom Label Mappings";
   }
 
   rpc GetLabelKeys(GetLabelKeysRequest) returns (GetLabelKeysResponse) {
-    option (audit_log_description).description = "Returns possible label keys from prometheus labels";
+    option (com.coralogix.common.v1.audit_log_description).description = "Returns possible label keys from prometheus labels";
   }
 }
