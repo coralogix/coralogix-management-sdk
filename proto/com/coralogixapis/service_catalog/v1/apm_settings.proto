@@ -5,30 +5,12 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "google/protobuf/timestamp.proto";
 import "com/coralogixapis/service_catalog/v1/catalog.proto";
-import "google/protobuf/struct.proto";
-
-import "com/coralogix/common/v1/audit_log.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
 
 message CatalogSettings {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Apm Catalog Settings"
-      description: "This data structure represents a apm catalog settings for APM."
-      required: [
-        "source",
-        "catalog"
-      ]
-    }
-    external_docs: {}
-  };
   ApmSource source = 1;
   google.protobuf.Timestamp migration_period_end_date = 2;
   google.protobuf.Int32Value retention_policy = 3;
   Catalog catalog = 4;
-  google.protobuf.Struct e2m_custom_creation_param = 5;
 }
 
 message ApmSettings{

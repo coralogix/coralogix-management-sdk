@@ -19,8 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	ReportService_GetReport_FullMethodName         = "/com.coralogixapis.service_catalog.v1.ReportService/GetReport"
-	ReportService_GetServicesReport_FullMethodName = "/com.coralogixapis.service_catalog.v1.ReportService/GetServicesReport"
+	ReportService_GetReport_FullMethodName = "/com.coralogixapis.service_catalog.v1.ReportService/GetReport"
 )
 
 // ReportServiceClient is the client API for ReportService service.
@@ -28,7 +27,6 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ReportServiceClient interface {
 	GetReport(ctx context.Context, in *GetReportRequest, opts ...grpc.CallOption) (*GetReportResponse, error)
-	GetServicesReport(ctx context.Context, in *GetServicesReportRequest, opts ...grpc.CallOption) (*GetServicesReportResponse, error)
 }
 
 type reportServiceClient struct {
@@ -49,22 +47,11 @@ func (c *reportServiceClient) GetReport(ctx context.Context, in *GetReportReques
 	return out, nil
 }
 
-func (c *reportServiceClient) GetServicesReport(ctx context.Context, in *GetServicesReportRequest, opts ...grpc.CallOption) (*GetServicesReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetServicesReportResponse)
-	err := c.cc.Invoke(ctx, ReportService_GetServicesReport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // ReportServiceServer is the server API for ReportService service.
 // All implementations must embed UnimplementedReportServiceServer
 // for forward compatibility.
 type ReportServiceServer interface {
 	GetReport(context.Context, *GetReportRequest) (*GetReportResponse, error)
-	GetServicesReport(context.Context, *GetServicesReportRequest) (*GetServicesReportResponse, error)
 	mustEmbedUnimplementedReportServiceServer()
 }
 
@@ -77,9 +64,6 @@ type UnimplementedReportServiceServer struct{}
 
 func (UnimplementedReportServiceServer) GetReport(context.Context, *GetReportRequest) (*GetReportResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReport not implemented")
-}
-func (UnimplementedReportServiceServer) GetServicesReport(context.Context, *GetServicesReportRequest) (*GetServicesReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetServicesReport not implemented")
 }
 func (UnimplementedReportServiceServer) mustEmbedUnimplementedReportServiceServer() {}
 func (UnimplementedReportServiceServer) testEmbeddedByValue()                       {}
@@ -120,24 +104,6 @@ func _ReportService_GetReport_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ReportService_GetServicesReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetServicesReportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(ReportServiceServer).GetServicesReport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: ReportService_GetServicesReport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ReportServiceServer).GetServicesReport(ctx, req.(*GetServicesReportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // ReportService_ServiceDesc is the grpc.ServiceDesc for ReportService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -148,10 +114,6 @@ var ReportService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetReport",
 			Handler:    _ReportService_GetReport_Handler,
-		},
-		{
-			MethodName: "GetServicesReport",
-			Handler:    _ReportService_GetServicesReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

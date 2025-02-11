@@ -72,17 +72,5 @@ message ServiceData{
     google.protobuf.Int64Value outgoing_requests_with_offset = 23;
     google.protobuf.Int64Value incoming_requests_with_offset = 24;
     google.protobuf.Int64Value internal_requests_with_offset = 25;
-    google.protobuf.Int64Value internal_errors = 37;
-    google.protobuf.Int64Value internal_errors_rate = 38;
-    google.protobuf.Int64Value internal_errors_with_offset = 39;
-    google.protobuf.Int64Value internal_errors_rate_with_offset = 40;
-    google.protobuf.Int64Value outgoing_errors = 41;
-    google.protobuf.Int64Value outgoing_errors_rate = 42;
-    google.protobuf.Int64Value outgoing_errors_with_offset = 43;
-    google.protobuf.Int64Value outgoing_errors_rate_with_offset = 44;
-    google.protobuf.FloatValue apdex_average = 45;
-    google.protobuf.FloatValue apdex_average_with_offset = 46;
-    google.protobuf.FloatValue apdex_last_step = 47;
-    google.protobuf.FloatValue apdex_last_step_with_offset = 48;
   }
 }

@@ -117,8 +117,8 @@ commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 [[dependencies]]
 name = "cx-api-service-catalog"
 url = "github.com/coralogix/cx-api-service-catalog"
-revision = "v0.3.135"
-commit_hash = "21270010b7cee38b20ac49aff3c7a2eff7fe0a01"
+revision = "v0.3.110"
+commit_hash = "08742acc81a9e793716fb4601ad7aef8490e0011"
 
 [[dependencies]]
 name = "cx-api-tags"

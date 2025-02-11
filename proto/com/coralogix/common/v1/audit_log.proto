@@ -8,5 +8,5 @@ message AuditLogDescription {
 }
 
 extend google.protobuf.MethodOptions {
-  AuditLogDescription audit_log_description = 5001;
+  AuditLogDescription audit_log_description = 5000;
 }

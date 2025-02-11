@@ -9,64 +9,29 @@ import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "com/coralogixapis/apm/widgets/v1/stat.proto";
 import "com/coralogix/catalog/v1/span_kind.proto";
 
-import "com/coralogix/common/v1/audit_log.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
-
 message GetServiceSideModelGraphsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Side Model Graph Request"
-      description: "This data structure represents a request to get service side model graph."
-      required: [
-        "service_name",
-        "time_range",
-        "operation",
-        "span_kind",
-        "method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   google.protobuf.StringValue operation = 2;
   TimeRange time_range = 3;
   repeated ApmFilter service_catalog_filters = 4;
   repeated SpanKind span_kind = 5;
   google.protobuf.StringValue method = 6;
-  google.protobuf.StringValue service_version = 7;
   
 }
 
 message GetServiceSideModelGraphsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Side Model Graph Response"
-      description: "This data structure represents a response to get service side model graph."
-      required: []
-    }
-    external_docs: {}
-  };
   oneof widget {
     com.coralogixapis.service_catalog.v1.RepeatedStats span_drill_down_side_modal_stats = 1;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors = 2;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles = 3;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_per_second = 4;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_per_second = 5;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_by_service_version = 6;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_by_service_version = 7;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart requests_and_errors_per_second_by_service_version = 8;
-    com.coralogixapis.service_catalog.v1.RepeatedLineChart latency_percentiles_per_second_by_service_version = 9;
   }
 }
 
 
 service SpanDrillDownService {
   rpc GetServiceSideModelGraphs(GetServiceSideModelGraphsRequest) returns (stream GetServiceSideModelGraphsResponse) {
-    option (google.api.http) = {
-      get: "/v1/service-catalog/side-model/graphs"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get service side modal graphs";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service side modal graphs";
   }
 }

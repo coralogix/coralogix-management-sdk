@@ -12,24 +12,7 @@ import "com/coralogixapis/service_catalog/v1/transaction.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/wrappers.proto";
 
-import "com/coralogix/common/v1/audit_log.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
-
 message GetTransactionsMetricStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Metrics Stream Request"
-      description: "This data structure represents a request to get Transactions Metrics Stream."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -40,14 +23,6 @@ message GetTransactionsMetricStreamRequest {
 }
 
 message GetTransactionsMetricStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Metrics Stream Response"
-      description: "This data structure represents a response to get Transactions Metrics Stream."
-      required: []
-    }
-    external_docs: {}
-  };
   ApmSource apm_source = 4;
   oneof widget {
     RepeatedLineChart response_time = 1;
@@ -58,20 +33,6 @@ message GetTransactionsMetricStreamResponse {
 }
 
 message GetTransactionsResponseTimeRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Response Time Request"
-      description: "This data structure represents a request to get Transactions Response Time."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "transactions",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -85,34 +46,12 @@ message GetTransactionsResponseTimeRequest {
 }
 
 message GetTransactionsResponseTimeResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Response Time Response"
-      description: "This data structure represents a Response to get Transactions Response Time."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart response_time = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message GetTransactionsErrorsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Errors Request"
-      description: "This data structure represents a request to get Transactions Errors."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "transactions",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -126,34 +65,12 @@ message GetTransactionsErrorsRequest {
 }
 
 message GetTransactionsErrorsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Errors Response"
-      description: "This data structure represents a response to get Transactions Errors."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart error_rate = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message GetTransactionsTimeConsumingGraphRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Time Consuming Request"
-      description: "This data structure represents a request to get Transactions Time Consuming."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "transactions",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -167,34 +84,12 @@ message GetTransactionsTimeConsumingGraphRequest {
 }
 
 message GetTransactionsTimeConsumingGraphResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Time Consuming Response"
-      description: "This data structure represents a response to get Transactions Time Consuming."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart time_consuming = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message GetTransactionsErrorsStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Errors Stream Request"
-      description: "This data structure represents a request to get Transactions Errors Stream."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "transactions",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -208,14 +103,6 @@ message GetTransactionsErrorsStreamRequest {
 }
 
 message GetTransactionsErrorsStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Errors Stream Response"
-      description: "This data structure represents a response to get Transactions Errors Stream."
-      required: []
-    }
-    external_docs: {}
-  };
   oneof widget {
     RepeatedLineChart errors = 1;
     RepeatedLineChart errors_per_seconds = 2;
@@ -226,19 +113,6 @@ message GetTransactionsErrorsStreamResponse {
 }
 
 message GetTransactionsThroughputRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Throughput Request"
-      description: "This data structure represents a request to get Transactions Throughput."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -251,33 +125,12 @@ message GetTransactionsThroughputRequest {
 }
 
 message GetTransactionsThroughputResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Throughput Response"
-      description: "This data structure represents a response to get Transactions Throughput."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart throughput = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message ListTransactionsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "List Transactions Request"
-      description: "This data structure represents a request to List Transactions."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction_span_kind_source",
-        "service_supports_transactions"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -289,34 +142,12 @@ message ListTransactionsRequest {
 }
 
 message ListTransactionsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "List Transactions Response"
-      description: "This data structure represents a response to List Transactions."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated Transaction transactions = 1;
   ApmSource apm_source = 2;
   repeated com.coralogixapis.apm.common.v2.GridQueryInfo queriesInfo = 3;
 }
 
 message GetTransactionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Request"
-      description: "This data structure represents a request to Get Transactions."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "service_supports_transactions",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -328,32 +159,11 @@ message GetTransactionRequest {
 }
 
 message GetTransactionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Response"
-      description: "This data structure represents a response to Get Transactions."
-      required: []
-    }
-    external_docs: {}
-  };
   Transaction transaction = 1;
   ApmSource apm_source = 2;
 }
 
 message GetTransactionMetricStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Stream Request"
-      description: "This data structure represents a request to Get Transactions Stream."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -365,14 +175,6 @@ message GetTransactionMetricStreamRequest {
 }
 
 message GetTransactionMetricStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Stream Response"
-      description: "This data structure represents a Response to Get Transactions Stream."
-      required: []
-    }
-    external_docs: {}
-  };
   ApmSource apm_source = 4;
   oneof widget {
     RepeatedLineChart response_time = 1;
@@ -382,20 +184,6 @@ message GetTransactionMetricStreamResponse {
 }
 
 message GetTransactionSegmentsResponseTimeRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Response Time Request"
-      description: "This data structure represents a request to Get Transactions Segments Response Time."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "segments",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -408,34 +196,12 @@ message GetTransactionSegmentsResponseTimeRequest {
 }
 
 message GetTransactionSegmentsResponseTimeResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Response Time Response"
-      description: "This data structure represents a Response to Get Transactions Segments Response Time."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart response_time = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message GetTransactionSegmentsErrorRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Errors Request"
-      description: "This data structure represents a request to Get Transactions Errors."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "segments",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -448,34 +214,12 @@ message GetTransactionSegmentsErrorRequest {
 }
 
 message GetTransactionSegmentsErrorResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Errors Response"
-      description: "This data structure represents a Response to Get Transactions Errors."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated com.coralogixapis.apm.widgets.v1.LineChart error = 1;
   google.protobuf.UInt64Value total_amount = 2;
   ApmSource apm_source = 3;
 }
 
 message GetTransactionSegmentsErrorStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Errors Stream Request"
-      description: "This data structure represents a request to Get Transactions Errors Stream."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "segments",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -488,14 +232,6 @@ message GetTransactionSegmentsErrorStreamRequest {
 }
 
 message GetTransactionSegmentsErrorStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Segments Errors Stream Response"
-      description: "This data structure represents a response to Get Transactions Errors Stream."
-      required: []
-    }
-    external_docs: {}
-  };
   oneof widget {
     RepeatedLineChart errors = 1;
     RepeatedLineChart errors_per_seconds = 2;
@@ -506,20 +242,6 @@ message GetTransactionSegmentsErrorStreamResponse {
 }
 
 message GetTransactionLatencyGraphStreamRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Latency Graph Errors Stream Request"
-      description: "This data structure represents a request to Get Transactions Latency Graph Stream."
-      required: [
-        "service_name",
-        "time_range",
-        "transactions",
-        "service_supports_transactions",
-        "transaction_span_kind_source"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   Source source = 3 [deprecated = true];
@@ -533,14 +255,6 @@ message GetTransactionLatencyGraphStreamRequest {
 }
 
 message GetTransactionLatencyGraphStreamResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Latency Graph Errors Stream Response"
-      description: "This data structure represents a response to Get Transactions Latency Graph Stream."
-      required: []
-    }
-    external_docs: {}
-  };
   google.protobuf.UInt64Value total_amount = 1;
   oneof widget {
     RepeatedLineChart p50_latency = 2;
@@ -553,20 +267,6 @@ message GetTransactionLatencyGraphStreamResponse {
 }
 
 message GetTransactionThroughputRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Throughput Request"
-      description: "This data structure represents a request to Get Transactions Throughput."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "segments",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -578,32 +278,11 @@ message GetTransactionThroughputRequest {
 }
 
 message GetTransactionThroughputResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Throughput Response"
-      description: "This data structure represents a response to Get Transactions Throughput."
-      required: []
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.widgets.v1.LineChart throughput = 1;
   ApmSource apm_source = 2;
 }
 
 message GetExampleTraceIDRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Example Trace ID Request"
-      description: "This data structure represents a request to Get Transactions Example Trace ID."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -614,30 +293,9 @@ message GetExampleTraceIDRequest {
 }
 
 message GetExampleTraceIDResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions Example Trace ID Request"
-      description: "This data structure represents a request to Get Transactions Example Trace ID."
-      required: []
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue trace_id = 1;
 }
 message ListSegmentsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segments Request"
-      description: "This data structure represents a request to Get Transactions List Segments."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -648,38 +306,11 @@ message ListSegmentsRequest {
 }
 
 message ListSegmentsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segments Request"
-      description: "This data structure represents a request to Get Transactions List Segments."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method"
-      ]
-    }
-    external_docs: {}
-  };
   repeated google.protobuf.StringValue segments = 1;
   ApmSource apm_source = 2;
 }
 
 message ListSegmentsBreakdownRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segments Breakdown Request"
-      description: "This data structure represents a request to Get Transactions List Segments Breakdown."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segments"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -691,34 +322,12 @@ message ListSegmentsBreakdownRequest {
 }
 
 message ListSegmentsBreakdownResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segments Breakdown response"
-      description: "This data structure represents a response to Get Transactions List Segments Breakdown."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated SegmentBreakDown segments = 1;
   ApmSource apm_source = 2;
   repeated com.coralogixapis.apm.common.v2.GridQueryInfo queriesInfo = 3;
 }
 
 message GetSegmentPercentilesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segment Percentiles Request"
-      description: "This data structure represents a request to Get Transactions List Segments Percentiles."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segment"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -730,34 +339,12 @@ message GetSegmentPercentilesRequest {
 }
 
 message GetSegmentPercentilesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segment Percentiles Response"
-      description: "This data structure represents a response to Get Transactions List Segments Percentiles."
-      required: []
-    }
-    external_docs: {}
-  };
   UnitValue p95 = 1;
   UnitValue p99 = 2;
   ApmSource apm_source = 3;
 }
 
 message GetSegmentStatsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segment Stats Request"
-      description: "This data structure represents a request to Get Transactions List Segments Stats."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segment"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -769,20 +356,6 @@ message GetSegmentStatsRequest {
 }
 
 message GetSegmentStatsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Transactions List Segment Stats Response"
-      description: "This data structure represents a response to Get Transactions List Segments Stats."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segment"
-      ]
-    }
-    external_docs: {}
-  };
   ApmSource apm_source = 1;
   UnitValue requests = 2;
   UnitValue error = 3;
@@ -790,20 +363,6 @@ message GetSegmentStatsResponse {
 }
 
 message GetSegmentRequestsAndErrorsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Segment Request And Error Request"
-      description: "This data structure represents a request to Get Segment Request And Error."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segment"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -815,33 +374,11 @@ message GetSegmentRequestsAndErrorsRequest {
 }
 
 message GetSegmentRequestsAndErrorsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Segment Request And Error Request"
-      description: "This data structure represents a request to Get Segment Request And Error."
-      required: []
-    }
-    external_docs: {}
-  };
   ApmSource apm_source = 1;
   repeated com.coralogixapis.apm.widgets.v1.LineChart requests_and_errors = 2;
 }
 
 message GetSegmentPercentilesGraphRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Segment Percentiles Graph Request"
-      description: "This data structure represents a request to Get Segment Percentiles Graph."
-      required: [
-        "service_name",
-        "time_range",
-        "transaction",
-        "transaction_method",
-        "segment"
-      ]
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.apm.common.v2.TimeRange time_range = 2;
   map<string, google.protobuf.ListValue> filters = 3 [deprecated = true];
@@ -853,14 +390,6 @@ message GetSegmentPercentilesGraphRequest {
 }
 
 message GetSegmentPercentilesGraphResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Segment Percentiles Graph Request"
-      description: "This data structure represents a request to Get Segment Percentiles Graph."
-      required: []
-    }
-    external_docs: {}
-  };
   ApmSource apm_source = 1;
   com.coralogixapis.apm.widgets.v1.LineChart p99 = 2;
   com.coralogixapis.apm.widgets.v1.LineChart p95 = 3;
@@ -872,129 +401,66 @@ message GetSegmentPercentilesGraphResponse {
 
 service TransactionService {
   rpc GetTransactionsMetricStream(GetTransactionsMetricStreamRequest) returns (stream GetTransactionsMetricStreamResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/transactions-metric-stream"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions' Metrics Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' Metrics Stream";
   }
   rpc GetTransaction(GetTransactionRequest) returns (GetTransactionResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/transaction"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transaction";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transaction";
   }
   rpc ListTransactions(ListTransactionsRequest) returns (ListTransactionsResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/list-transactions"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "List Transactions";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Transactions";
   }
   rpc GetTransactionMetricStream(GetTransactionMetricStreamRequest) returns (stream GetTransactionMetricStreamResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/metric-stream"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transaction Metrics Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transaction Metrics Stream";
   }
   rpc GetTransactionsResponseTime(GetTransactionsResponseTimeRequest) returns (GetTransactionsResponseTimeResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/response-time"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions Response Time";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions Response Time";
   }
   rpc GetTransactionsErrors(GetTransactionsErrorsRequest) returns (GetTransactionsErrorsResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/errors"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions Errors";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions Errors";
   }
   rpc GetTransactionsThroughput(GetTransactionsThroughputRequest) returns (GetTransactionsThroughputResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/transactions-throughput"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions Throughput";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions Throughput";
   }
   rpc GetExampleTraceID(GetExampleTraceIDRequest) returns (GetExampleTraceIDResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/example-trace-id"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Example Trace ID";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Example Trace ID";
   }
   rpc ListSegments(ListSegmentsRequest) returns (ListSegmentsResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/list-segments"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "List Segments";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Segments";
   }
   rpc ListSegmentsBreakdown(ListSegmentsBreakdownRequest) returns (ListSegmentsBreakdownResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/list-segments-breakdown"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "List Segments Breakdown";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Segments Breakdown";
   }
   rpc GetTransactionSegmentsResponseTime(GetTransactionSegmentsResponseTimeRequest) returns (GetTransactionSegmentsResponseTimeResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/transaction-segment-response-time"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transaction Segment Response Time";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transaction Segment Response Time";
   }
   rpc GetTransactionSegmentsError(GetTransactionSegmentsErrorRequest) returns (GetTransactionSegmentsErrorResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segments-error"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transaction Segment Error";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transaction Segment Error";
   }
   rpc GetTransactionThroughput(GetTransactionThroughputRequest) returns (GetTransactionThroughputResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/transaction-throughput"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transaction Throughput";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transaction Throughput";
   }
   rpc GetSegmentPercentiles(GetSegmentPercentilesRequest) returns (GetSegmentPercentilesResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segment-percentiles"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Segment Percentiles";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Segment Percentiles";
   }
   rpc GetSegmentPercentilesGraph(GetSegmentPercentilesGraphRequest) returns (GetSegmentPercentilesGraphResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segment-percentiles-graph"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Segment Percentilies Graph";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Segment Percentilies Graph";
   }
   rpc GetSegmentRequestsAndErrors(GetSegmentRequestsAndErrorsRequest) returns (GetSegmentRequestsAndErrorsResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segment-requests-and-errors"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Segment Requests And Errors";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Segment Requests And Errors";
   }
   rpc GetSegmentStats(GetSegmentStatsRequest) returns (GetSegmentStatsResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segment-stats"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Segment Stats";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Segment Stats";
   }
   rpc GetTransactionsErrorsStream(GetTransactionsErrorsStreamRequest) returns (stream GetTransactionsErrorsStreamResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/errors-stream"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions' Errors Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' Errors Stream";
   }
   rpc GetTransactionSegmentsErrorStream(GetTransactionSegmentsErrorStreamRequest) returns (stream GetTransactionSegmentsErrorStreamResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/segments-error-stream"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions' segments Errors Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' segments Errors Stream";
   }
   rpc GetTransactionLatencyGraphStream(GetTransactionLatencyGraphStreamRequest) returns (stream GetTransactionLatencyGraphStreamResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/latency-graph-stream"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions' latency graph Stream";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions' latency graph Stream";
   }
   rpc GetTransactionsTimeConsumingGraph(GetTransactionsTimeConsumingGraphRequest) returns (GetTransactionsTimeConsumingGraphResponse) {
-    option (google.api.http) = {
-      get: "/v1/transaction/time-consuming"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Transactions Time Consuming Graph";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Transactions Time Consuming Graph";
   }
 }

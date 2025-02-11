@@ -8,7 +8,6 @@ package v1
 
 import (
 	context "context"
-	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm_shared/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -29,7 +28,7 @@ const (
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DatabaseOverviewServiceClient interface {
 	GetDatabaseOverviewStream(ctx context.Context, in *GetDatabaseOverviewStreamRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetDatabaseOverviewStreamResponse], error)
-	GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*common.GetApdexResponse, error)
+	GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*GetApdexResponse, error)
 }
 
 type databaseOverviewServiceClient struct {
@@ -59,9 +58,9 @@ func (c *databaseOverviewServiceClient) GetDatabaseOverviewStream(ctx context.Co
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type DatabaseOverviewService_GetDatabaseOverviewStreamClient = grpc.ServerStreamingClient[GetDatabaseOverviewStreamResponse]
 
-func (c *databaseOverviewServiceClient) GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*common.GetApdexResponse, error) {
+func (c *databaseOverviewServiceClient) GetApdex(ctx context.Context, in *GetApdexRequest, opts ...grpc.CallOption) (*GetApdexResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(common.GetApdexResponse)
+	out := new(GetApdexResponse)
 	err := c.cc.Invoke(ctx, DatabaseOverviewService_GetApdex_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -74,7 +73,7 @@ func (c *databaseOverviewServiceClient) GetApdex(ctx context.Context, in *GetApd
 // for forward compatibility.
 type DatabaseOverviewServiceServer interface {
 	GetDatabaseOverviewStream(*GetDatabaseOverviewStreamRequest, grpc.ServerStreamingServer[GetDatabaseOverviewStreamResponse]) error
-	GetApdex(context.Context, *GetApdexRequest) (*common.GetApdexResponse, error)
+	GetApdex(context.Context, *GetApdexRequest) (*GetApdexResponse, error)
 	mustEmbedUnimplementedDatabaseOverviewServiceServer()
 }
 
@@ -88,7 +87,7 @@ type UnimplementedDatabaseOverviewServiceServer struct{}
 func (UnimplementedDatabaseOverviewServiceServer) GetDatabaseOverviewStream(*GetDatabaseOverviewStreamRequest, grpc.ServerStreamingServer[GetDatabaseOverviewStreamResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method GetDatabaseOverviewStream not implemented")
 }
-func (UnimplementedDatabaseOverviewServiceServer) GetApdex(context.Context, *GetApdexRequest) (*common.GetApdexResponse, error) {
+func (UnimplementedDatabaseOverviewServiceServer) GetApdex(context.Context, *GetApdexRequest) (*GetApdexResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetApdex not implemented")
 }
 func (UnimplementedDatabaseOverviewServiceServer) mustEmbedUnimplementedDatabaseOverviewServiceServer() {
