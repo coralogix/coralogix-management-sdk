@@ -17,6 +17,7 @@ message AlertDefNotificationGroup {
   repeated google.protobuf.StringValue group_by_keys = 1;
   repeated AlertDefWebhooksSettings webhooks = 2;
   repeated NotificationDestination destinations = 3;
+  optional NotificationRouter router = 4;
 }
 
 message AlertDefWebhooksSettings {

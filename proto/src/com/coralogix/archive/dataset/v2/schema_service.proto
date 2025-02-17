@@ -6,21 +6,27 @@ import "com/coralogix/common/v1/audit_log.proto";
 package com.coralogix.archive.dataset.v2;
 
 service SchemaService {
-  rpc SetNamedSchema (SetNamedSchemaRequest) returns (SetNamedSchemaResponse) {
+  rpc SetNamedLogsSchema (SetNamedLogsSchemaRequest) returns (SetNamedLogsSchemaResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Set schema for company";
   }
-  rpc GetNamedSchema (GetNamedSchemaRequest) returns (GetNamedSchemaResponse) {
+  rpc GetNamedLogsSchema (GetNamedLogsSchemaRequest) returns (GetNamedLogsSchemaResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get schema for company";
   }
 }
 
-message SetNamedSchemaRequest {
-  NamedSchema schema = 1;
+message SetNamedLogsSchemaRequest {
+  Schema schema = 1;
   bool update_schema = 2;
 }
 
-message SetNamedSchemaResponse {
+message SetNamedLogsSchemaResponse {
   NamedSchema schema = 1;
+}
+
+message Schema {
+  repeated NamedSchemaField fields = 2;
+  google.protobuf.Timestamp created_at = 3;
+  google.protobuf.Timestamp updated_at = 4;
 }
 
 message NamedSchema {
@@ -43,10 +49,8 @@ message NamedSchemaFieldSettings {
   FieldReservation is_reserved = 1;
 }
 
-message GetNamedSchemaRequest {
-  string key  = 1;
-}
+message GetNamedLogsSchemaRequest {}
 
-message GetNamedSchemaResponse {
+message GetNamedLogsSchemaResponse {
   NamedSchema schema = 1;
 }

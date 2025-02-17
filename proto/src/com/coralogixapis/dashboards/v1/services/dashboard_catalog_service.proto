@@ -31,4 +31,5 @@ message DashboardCatalogItem {
   google.protobuf.Timestamp update_time = 7;
   common.DashboardFolder folder = 8;
   google.protobuf.StringValue author_id = 9;
+  google.protobuf.BoolValue is_locked = 10;
 }
