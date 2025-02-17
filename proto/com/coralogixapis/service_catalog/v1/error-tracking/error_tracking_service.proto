@@ -12,25 +12,8 @@ import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/common/v1/audit_log.proto";
-
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
 
 message GetServiceErrorTrackingOverviewRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Overview Graphs Request"
-      description: "This data structure represents a request to get a Service Error Overview graphs on error tracking."
-      required: [
-        "time_range",
-        "service_name",
-        "topk"
-      ]
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
@@ -43,38 +26,16 @@ message GetServiceErrorTrackingOverviewRequest {
 }
 
 message GetServiceErrorTrackingOverviewResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Overview Graphs Stream Response"
-      description: "This data structure represents a response to get a Service Error Overview graphs on error tracking."
-      required: []
-    }
-    external_docs: {}
-  };
   oneof widget {
     com.coralogixapis.apm.widgets.v1.Stat error_groups = 1;
     com.coralogixapis.apm.widgets.v1.Stat total_errors = 2;
     com.coralogixapis.apm.widgets.v1.Stat errors_percentage = 3;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart errors = 4;
     com.coralogixapis.service_catalog.v1.RepeatedLineChart errors_percentages = 5;
-    com.coralogixapis.apm.widgets.v1.Stat error_groups_with_offset = 6;
-    com.coralogixapis.apm.widgets.v1.Stat total_errors_with_offset = 7;
-    com.coralogixapis.apm.widgets.v1.Stat errors_percentage_with_offset = 8;
   }
 }
 
 message GetServiceErrorTrackingListRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Overview List Request"
-      description: "This data structure represents a request to get a Service Error Overview list on error tracking."
-      required: [
-        "time_range",
-        "service_name"
-      ]
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
@@ -92,14 +53,6 @@ message OperationDetails {
 }
 
 message GetServiceErrorTrackingListResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Overview List Response"
-      description: "This data structure represents a response to get a Service Error Overview List on error tracking."
-      required: []
-    }
-    external_docs: {}
-  };
   google.protobuf.StringValue query = 1;
   repeated ErrorDetails error_details = 2;
   GroupBy group_by = 3;
@@ -121,25 +74,15 @@ message ErrorDetails {
     google.protobuf.Int64Value last_appearance = 6;
     google.protobuf.Int64Value occurrences = 7;
     google.protobuf.FloatValue error_percentage = 8;
-    google.protobuf.Int64Value occurrences_with_offset = 9;
-    google.protobuf.FloatValue error_percentage_with_offset = 10;
   }
 }
 
 service ErrorTrackingService {
   rpc GetServiceErrorTrackingOverviewStream(GetServiceErrorTrackingOverviewRequest) returns (stream GetServiceErrorTrackingOverviewResponse) {
-    option (google.api.http) = {
-      post: "/v1/apis-errors/errors-overview-graph"
-      body: "*"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get service error tracking overview";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service error tracking overview";
   }
 
   rpc GetServiceErrorTrackingListStream(GetServiceErrorTrackingListRequest) returns (stream GetServiceErrorTrackingListResponse) {
-    option (google.api.http) = {
-      post: "/v1/apis-errors/errors-overview-list"
-      body: "*"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get service error tracking list";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service error tracking list";
   }
 }

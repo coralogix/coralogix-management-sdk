@@ -15,24 +15,8 @@ import "com/coralogixapis/service_catalog/v1/transaction.proto";
 import "google/protobuf/struct.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/common/v1/audit_log.proto";
-
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
 
 message GetErrorStatsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Error Stats Request"
-      description: "This data structure represents a request to get a Service Error stats on error tracking."
-      required: [
-        "time_range",
-        "service_name"
-      ]
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
@@ -46,14 +30,6 @@ message GetErrorStatsRequest {
 }
 
 message GetErrorStatsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Error Stats Response"
-      description: "This data structure represents a response to get a Service Error stats on error tracking."
-      required: []
-    }
-    external_docs: {}
-  };
   UnitValue first_appearance = 1;
   UnitValue last_appearance = 2;
   UnitValue p95_latency = 3;
@@ -63,17 +39,6 @@ message GetErrorStatsResponse {
 }
 
 message DrillDownSubFiltersRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Drill Down Sub Filters Request"
-      description: "This data structure represents a request to get a Drill Down Sub Filters on error tracking."
-      required: [
-        "time_range",
-        "service_name"
-      ]
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
@@ -84,33 +49,12 @@ message DrillDownSubFiltersRequest {
 }
 
 message DrillDownSubFilterResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Drill Down Sub Filters Response"
-      description: "This data structure represents a response to get a Drill Down Sub Filters on error tracking."
-      required: []
-    }
-    external_docs: {}
-  };
   com.coralogix.catalog.v1.ApmFilter operation = 1;
   com.coralogix.catalog.v1.ApmFilter method = 3;
   repeated com.coralogixapis.apm.common.v2.QueryInfo queriesInfo = 2;
 }
 
 message GetServiceErrorTrackingDrillDownGraphRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Drill Down Graphs Request"
-      description: "This data structure represents a request to get a Service Error graphs on error tracking."
-      required: [
-        "time_range",
-        "service_name",
-        "staus_code",
-        "error_message_source"
-      ]
-    }
-    external_docs: {}
-  };
   com.coralogixapis.apm.common.v2.TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated com.coralogix.catalog.v1.ApmFilter service_catalog_filters = 3;
@@ -120,46 +64,24 @@ message GetServiceErrorTrackingDrillDownGraphRequest {
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 8;
   google.protobuf.UInt64Value topk = 9;
   google.protobuf.StringValue status_code = 10;
-  repeated google.protobuf.StringValue methods = 11;
+  google.protobuf.StringValue method = 11;
   ErrorMessageSource error_message_source = 12;
-  repeated google.protobuf.StringValue operations = 13;
 }
 
 message GetServiceErrorTrackingDrillDownGraphResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Error Tracking Drill Down Graphs response"
-      description: "This data structure represents a request to get a Service Error graphs on error tracking."
-      required: []
-    }
-    external_docs: {}
-  };
   com.coralogixapis.service_catalog.v1.RepeatedLineChart operations = 1;
   google.protobuf.UInt64Value total_amount = 2;
-  com.coralogixapis.service_catalog.v1.RepeatedLineChart operations_percentages = 3;
 }
 service ErrorTrackingDrillDownService {
   rpc GetErrorStats(GetErrorStatsRequest) returns (GetErrorStatsResponse) {
-    option (google.api.http) = {
-      post: "/v1/apis-errors/errors-stats"
-      body: "*"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get error stats response";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get error stats response";
   }
 
   rpc GetDrillDownSubFilters(DrillDownSubFiltersRequest) returns (DrillDownSubFilterResponse) {
-    option (google.api.http) = {
-      post: "/v1/apis-errors/drill-down-sub-filters"
-      body: "*"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get drill down sub filters";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get drill down sub filters";
   }
 
   rpc GetDrillDownOperationsGraph(GetServiceErrorTrackingDrillDownGraphRequest) returns (GetServiceErrorTrackingDrillDownGraphResponse) {
-    option (google.api.http) = {
-      post: "/v1/apis-errors/drill-down-error-graphs"
-      body: "*"
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get drill down error operations graph";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get drill down error operations graph";
   }
 }

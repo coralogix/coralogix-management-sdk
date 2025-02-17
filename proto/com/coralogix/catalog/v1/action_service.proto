@@ -8,24 +8,7 @@ import "com/coralogix/catalog/v1/service.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/catalog/v1/span_kind.proto";
 
-import "com/coralogix/common/v1/audit_log.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/http.proto";
-
 message GetServiceActionsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Actions Request"
-      description: "This data structure represents a request to Get Service Actions."
-      required: [
-        "time_range",
-        "service_name",
-        "span_kinds"
-      ]
-    }
-    external_docs: {}
-  };
   TimeRange time_range = 1;
   google.protobuf.StringValue service_name = 2;
   repeated ApmFilter service_catalog_filters = 3;
@@ -33,22 +16,11 @@ message GetServiceActionsRequest {
 }
 
 message GetServiceActionsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Service Actions Response"
-      description: "This data structure represents a response to Get Service Actions."
-      required: []
-    }
-    external_docs: {}
-  };
   repeated ServiceAction service_actions = 1;
 }
 
 service ActionService {
   rpc GetServiceActions(GetServiceActionsRequest) returns (GetServiceActionsResponse) {
-    option (google.api.http) = {
-      get: "/v1/service-catalog/service-actions",
-    };
-    option (com.coralogix.common.v1.audit_log_description).description = "get service actions";
+    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service actions";
   }
 }
