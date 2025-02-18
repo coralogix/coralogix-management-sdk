@@ -30,6 +30,7 @@ tags:
   - name: Views
     description: Create and manage views.
   - name: ScopesService
+  - name: IncidentsService
   - name: MetricsTcoService
   - name: MetricsConfiguratorPublicService
   - name: DataUsageService
@@ -11098,6 +11099,1301 @@ paths:
             curl --request PUT \
               --url https://api.coralogix.com/mgmt/openapi/v1/external-tokens/%7Bid%7D \
               --header 'Authorization: Bearer <API_KEY>'
+  /v1/incidents:
+    post:
+      operationId: IncidentsService_ListIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ListIncidentsRequest'
+        description: >-
+          Request to list incidents with filtering, pagination and ordering
+          options
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: |-
+            const fetch = require('node-fetch');
+
+            let url = 'https://api.coralogix.com/mgmt/openapi/v1/incidents';
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"},"pagination":{"pageSize":0,"pageToken":"string"},"orderBys":[{"incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string","direction":"ORDER_BY_DIRECTION_UNSPECIFIED"}]}'
+            };
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents"
+
+
+            payload = {
+                "filter": {
+                    "assignee": ["string"],
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "state": ["INCIDENT_STATE_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "startTime": "2019-08-24T14:15:22Z",
+                    "endTime": "2019-08-24T14:15:22Z",
+                    "searchQuery": {
+                        "query": "string",
+                        "incidentField": "INCIDENTS_FIELDS_UNSPECIFIED",
+                        "contextualLabel": "string"
+                    },
+                    "applicationName": ["string"],
+                    "subsystemName": ["string"],
+                    "isMuted": True,
+                    "createdAtRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "incidentDurationRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "metaLabels": [
+                        {
+                            "key": "key",
+                            "value": "value"
+                        }
+                    ],
+                    "metaLabelsOp": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                },
+                "pagination": {
+                    "pageSize": 0,
+                    "pageToken": "string"
+                },
+                "orderBys": [
+                    {
+                        "incidentField": "INCIDENTS_FIELDS_UNSPECIFIED",
+                        "contextualLabel": "string",
+                        "direction": "ORDER_BY_DIRECTION_UNSPECIFIED"
+                    }
+                ]
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"},"pagination":{"pageSize":0,"pageToken":"string"},"orderBys":[{"incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string","direction":"ORDER_BY_DIRECTION_UNSPECIFIED"}]}'
+  /v1/incidents/{id}:
+    get:
+      operationId: IncidentsService_GetIncident
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetIncidentResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents/%7Bid%7D';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: |-
+            import requests
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents/%7Bid%7D"
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents/%7Bid%7D \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v1/incidents/{incidentId}/events:
+    get:
+      operationId: IncidentsService_GetIncidentEvents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetIncidentEventsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+        - name: incidentId
+          in: path
+          required: true
+          schema:
+            type: string
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents/%7BincidentId%7D/events';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents/%7BincidentId%7D/events"
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents/%7BincidentId%7D/events \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v1/incidents:acknowledge:
+    post:
+      operationId: IncidentsService_AcknowledgeIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AcknowledgeIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AcknowledgeIncidentsRequest'
+        description: Request to acknowledge one or more incidents
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:acknowledge';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"incidentIds":["incident_id_1","incident_id_2"]}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:acknowledge"
+
+
+            payload = {"incidentIds": ["incident_id_1", "incident_id_2"]}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:acknowledge \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"incidentIds":["incident_id_1","incident_id_2"]}'
+  /v1/incidents:assign:
+    post:
+      operationId: IncidentsService_AssignIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1AssignIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1AssignIncidentsRequest'
+        description: Request to assign one or more incidents to a user
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:assign';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"incidentIds":["string"],"assignedTo":{"userId":"string"}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents:assign"
+
+
+            payload = {
+                "incidentIds": ["string"],
+                "assignedTo": {"userId": "string"}
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:assign \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"incidentIds":["string"],"assignedTo":{"userId":"string"}}'
+  /v1/incidents:batchGet:
+    post:
+      operationId: IncidentsService_BatchGetIncident
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1BatchGetIncidentResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      parameters:
+        - name: ids
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:batchGet?ids=SOME_ARRAY_VALUE';
+
+
+            let options = {method: 'POST', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents:batchGet"
+
+
+            querystring = {"ids":"SOME_ARRAY_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("POST", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url 'https://api.coralogix.com/mgmt/openapi/v1/incidents:batchGet?ids=SOME_ARRAY_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v1/incidents:close:
+    post:
+      operationId: IncidentsService_CloseIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1CloseIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1CloseIncidentsRequest'
+        description: Request to close one or more incidents
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:close';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"incidentIds":["incident_id_1","incident_id_2"]}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents:close"
+
+
+            payload = {"incidentIds": ["incident_id_1", "incident_id_2"]}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:close \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"incidentIds":["incident_id_1","incident_id_2"]}'
+  /v1/incidents:getFilterValues:
+    post:
+      operationId: IncidentsService_GetFilterValues
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetFilterValuesResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GetFilterValuesRequest'
+        description: Request to get available filter values for incidents
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:getFilterValues';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:getFilterValues"
+
+
+            payload = {"filter": {
+                    "assignee": ["string"],
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "state": ["INCIDENT_STATE_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "startTime": "2019-08-24T14:15:22Z",
+                    "endTime": "2019-08-24T14:15:22Z",
+                    "searchQuery": {
+                        "query": "string",
+                        "incidentField": "INCIDENTS_FIELDS_UNSPECIFIED",
+                        "contextualLabel": "string"
+                    },
+                    "applicationName": ["string"],
+                    "subsystemName": ["string"],
+                    "isMuted": True,
+                    "createdAtRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "incidentDurationRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "metaLabels": [
+                        {
+                            "key": "key",
+                            "value": "value"
+                        }
+                    ],
+                    "metaLabelsOp": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                }}
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:getFilterValues \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}'
+  /v1/incidents:getIncidentUsingCorrelationKey:
+    post:
+      summary: This shouldn't be exposed in the docs, it has no external usecase
+      operationId: IncidentsService_GetIncidentUsingCorrelationKey
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1GetIncidentUsingCorrelationKeyResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1GetIncidentUsingCorrelationKeyRequest'
+        description: Request to get an incident using a correlation key and timestamp
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:getIncidentUsingCorrelationKey';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"correlationKey":"correlation_key_123","incidentPointInTime":"2024-01-01T00:00:00.000Z"}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:getIncidentUsingCorrelationKey"
+
+
+            payload = {
+                "correlationKey": "correlation_key_123",
+                "incidentPointInTime": "2024-01-01T00:00:00.000Z"
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:getIncidentUsingCorrelationKey \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"correlationKey":"correlation_key_123","incidentPointInTime":"2024-01-01T00:00:00.000Z"}'
+  /v1/incidents:listIncidentAggregations:
+    post:
+      operationId: IncidentsService_ListIncidentAggregations
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListIncidentAggregationsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ListIncidentAggregationsRequest'
+        description: >-
+          Request to get aggregated incident data with filtering and grouping
+          options
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentAggregations';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"},"groupBys":[{"incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string","orderByDirection":"ORDER_BY_DIRECTION_UNSPECIFIED"}],"pagination":{"pageSize":0,"pageToken":"string"}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentAggregations"
+
+
+            payload = {
+                "filter": {
+                    "assignee": ["string"],
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "state": ["INCIDENT_STATE_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "startTime": "2019-08-24T14:15:22Z",
+                    "endTime": "2019-08-24T14:15:22Z",
+                    "searchQuery": {
+                        "query": "string",
+                        "incidentField": "INCIDENTS_FIELDS_UNSPECIFIED",
+                        "contextualLabel": "string"
+                    },
+                    "applicationName": ["string"],
+                    "subsystemName": ["string"],
+                    "isMuted": True,
+                    "createdAtRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "incidentDurationRange": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "metaLabels": [
+                        {
+                            "key": "key",
+                            "value": "value"
+                        }
+                    ],
+                    "metaLabelsOp": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                },
+                "groupBys": [
+                    {
+                        "incidentField": "INCIDENTS_FIELDS_UNSPECIFIED",
+                        "contextualLabel": "string",
+                        "orderByDirection": "ORDER_BY_DIRECTION_UNSPECIFIED"
+                    }
+                ],
+                "pagination": {
+                    "pageSize": 0,
+                    "pageToken": "string"
+                }
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentAggregations \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"assignee":["string"],"status":["INCIDENT_STATUS_UNSPECIFIED"],"state":["INCIDENT_STATE_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z","searchQuery":{"query":"string","incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string"},"applicationName":["string"],"subsystemName":["string"],"isMuted":true,"createdAtRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"incidentDurationRange":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"metaLabels":[{"key":"key","value":"value"}],"metaLabelsOp":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"},"groupBys":[{"incidentField":"INCIDENTS_FIELDS_UNSPECIFIED","contextualLabel":"string","orderByDirection":"ORDER_BY_DIRECTION_UNSPECIFIED"}],"pagination":{"pageSize":0,"pageToken":"string"}}'
+  /v1/incidents:listIncidentEvents:
+    post:
+      operationId: IncidentsService_ListIncidentEvents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListIncidentEventsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ListIncidentEventsRequest'
+        description: >-
+          Request to list incident events with filtering, pagination and
+          ordering options
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEvents';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}},"pagination":{"pageSize":0,"pageToken":"string"},"orderBy":{"field":"INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED","direction":"ORDER_BY_DIRECTION_UNSPECIFIED"}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEvents"
+
+
+            payload = {
+                "filter": {
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "name": "string",
+                    "isMuted": True,
+                    "timestamp": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "labels": {
+                        "metaLabels": [
+                            {
+                                "key": "key",
+                                "value": "value"
+                            }
+                        ],
+                        "operator": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                    }
+                },
+                "pagination": {
+                    "pageSize": 0,
+                    "pageToken": "string"
+                },
+                "orderBy": {
+                    "field": "INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED",
+                    "direction": "ORDER_BY_DIRECTION_UNSPECIFIED"
+                }
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEvents \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}},"pagination":{"pageSize":0,"pageToken":"string"},"orderBy":{"field":"INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED","direction":"ORDER_BY_DIRECTION_UNSPECIFIED"}}'
+  /v1/incidents:listIncidentEventsFilterValues:
+    post:
+      operationId: IncidentsService_ListIncidentEventsFilterValues
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListIncidentEventsFilterValuesResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ListIncidentEventsFilterValuesRequest'
+        description: Request to get available filter values for incident events
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsFilterValues';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsFilterValues"
+
+
+            payload = {"filter": {
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "name": "string",
+                    "isMuted": True,
+                    "timestamp": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "labels": {
+                        "metaLabels": [
+                            {
+                                "key": "key",
+                                "value": "value"
+                            }
+                        ],
+                        "operator": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                    }
+                }}
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsFilterValues \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}}'
+  /v1/incidents:listIncidentEventsTotalCount:
+    post:
+      operationId: IncidentsService_ListIncidentEventsTotalCount
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ListIncidentEventsTotalCountResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ListIncidentEventsTotalCountRequest'
+        description: Request to get the total count of incident events matching a filter
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsTotalCount';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsTotalCount"
+
+
+            payload = {"filter": {
+                    "status": ["INCIDENT_STATUS_UNSPECIFIED"],
+                    "severity": ["INCIDENT_SEVERITY_UNSPECIFIED"],
+                    "contextualLabels": {
+                        "property1": {"contextualLabelValues": ["string"]},
+                        "property2": {"contextualLabelValues": ["string"]}
+                    },
+                    "name": "string",
+                    "isMuted": True,
+                    "timestamp": {
+                        "startTime": "2019-08-24T14:15:22Z",
+                        "endTime": "2019-08-24T14:15:22Z"
+                    },
+                    "labels": {
+                        "metaLabels": [
+                            {
+                                "key": "key",
+                                "value": "value"
+                            }
+                        ],
+                        "operator": "FILTER_OPERATOR_OR_OR_UNSPECIFIED"
+                    }
+                }}
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:listIncidentEventsTotalCount \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"filter":{"status":["INCIDENT_STATUS_UNSPECIFIED"],"severity":["INCIDENT_SEVERITY_UNSPECIFIED"],"contextualLabels":{"property1":{"contextualLabelValues":["string"]},"property2":{"contextualLabelValues":["string"]}},"name":"string","isMuted":true,"timestamp":{"startTime":"2019-08-24T14:15:22Z","endTime":"2019-08-24T14:15:22Z"},"labels":{"metaLabels":[{"key":"key","value":"value"}],"operator":"FILTER_OPERATOR_OR_OR_UNSPECIFIED"}}}'
+  /v1/incidents:resolve:
+    post:
+      operationId: IncidentsService_ResolveIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ResolveIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1ResolveIncidentsRequest'
+        description: Request to resolve one or more incidents
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:resolve';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"incidentIds":["incident_id_1","incident_id_2"]}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents:resolve"
+
+
+            payload = {"incidentIds": ["incident_id_1", "incident_id_2"]}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:resolve \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"incidentIds":["incident_id_1","incident_id_2"]}'
+  /v1/incidents:unassign:
+    post:
+      operationId: IncidentsService_UnassignIncidents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1UnassignIncidentsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/rpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/v1UnassignIncidentsRequest'
+        description: Request to remove assignments from one or more incidents
+        required: true
+      tags:
+        - IncidentsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/incidents:unassign';
+
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"incidentIds":["string"]}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/incidents:unassign"
+
+
+            payload = {"incidentIds": ["string"]}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/incidents:unassign \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"incidentIds":["string"]}'
   /v1/integrations:
     get:
       operationId: IntegrationService_GetIntegrations
@@ -25551,6 +26847,22 @@ components:
           type: string
         template:
           type: string
+    alertsv3PaginationRequest:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int64
+        pageToken:
+          type: string
+    alertsv3PaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+          format: int64
+        nextPageToken:
+          type: string
     alertsv3SetActiveResponse:
       type: object
       description: Response after enabling or disabling an alert definition
@@ -26382,6 +27694,13 @@ components:
         - ORDER_BY_DIRECTION_ASC
         - ORDER_BY_DIRECTION_DESC
       default: ORDER_BY_DIRECTION_UNSPECIFIED
+    commonv2TimeRange:
+      type: object
+      properties:
+        startTimeSeconds:
+          type: string
+        endTimeSeconds:
+          type: string
     coralogixapislogs2metricsv2Severity:
       type: string
       enum:
@@ -26792,6 +28111,70 @@ components:
           type: object
           additionalProperties:
             type: string
+    incidentsv1GroupBy:
+      type: object
+      properties:
+        incidentField:
+          $ref: '#/components/schemas/v1IncidentFields'
+        contextualLabel:
+          type: string
+        orderByDirection:
+          $ref: '#/components/schemas/incidentsv1OrderByDirection'
+      description: A group by for an incident
+      title: GroupBy
+      required:
+        - field
+        - orderByDirection
+    incidentsv1OrderBy:
+      type: object
+      properties:
+        incidentField:
+          $ref: '#/components/schemas/v1IncidentFields'
+        contextualLabel:
+          type: string
+        direction:
+          $ref: '#/components/schemas/incidentsv1OrderByDirection'
+      description: An order by for an incident
+      title: OrderBy
+      required:
+        - field
+        - direction
+    incidentsv1OrderByDirection:
+      type: string
+      enum:
+        - ORDER_BY_DIRECTION_UNSPECIFIED
+        - ORDER_BY_DIRECTION_ASC
+        - ORDER_BY_DIRECTION_DESC
+      default: ORDER_BY_DIRECTION_UNSPECIFIED
+    incidentsv1PaginationRequest:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int64
+        pageToken:
+          type: string
+      description: Pagination parameters for list requests
+      title: Pagination Request
+    incidentsv1PaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+          format: int64
+        nextPageToken:
+          type: string
+      description: Pagination information for list responses
+      title: Pagination Response
+    incidentsv1TimeRange:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+        endTime:
+          type: string
+          format: date-time
     integrationsv1IntegrationType:
       type: object
       properties:
@@ -28659,6 +30042,30 @@ components:
       externalDocs:
         description: Find out more about integrations
         url: https://coralogix.com/integrations/
+    v1AcknowledgeIncidentsRequest:
+      type: object
+      properties:
+        incidentIds:
+          type: array
+          example:
+            - incident_id_1
+            - incident_id_2
+          items:
+            type: string
+          description: List of incident IDs to acknowledge
+      description: Request to acknowledge one or more incidents
+      title: Acknowledge Incidents Request
+      required:
+        - incidentIds
+    v1AcknowledgeIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+      description: Response containing the updated incidents after acknowledgment
+      title: Acknowledge Incidents Response
     v1ActionId:
       type: object
       properties:
@@ -28818,6 +30225,51 @@ components:
       properties:
         id:
           type: string
+    v1AssignIncidentsRequest:
+      type: object
+      properties:
+        incidentIds:
+          type: array
+          items:
+            type: string
+        assignedTo:
+          $ref: '#/components/schemas/v1UserDetails'
+      description: Request to assign one or more incidents to a user
+      title: Assign Incidents Request
+      required:
+        - incidentIds
+        - assignedTo
+    v1AssignIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+      description: Response containing the updated incidents after assignment
+      title: Assign Incidents Response
+    v1AssigneeWithCount:
+      type: object
+      properties:
+        assignee:
+          type: string
+          example: assignee
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: An assignee with count
+      title: AssigneeWithCount
+      required:
+        - assignee
+        - count
+    v1Assignment:
+      type: object
+      properties:
+        assignedTo:
+          $ref: '#/components/schemas/v1UserDetails'
+        assignedBy:
+          $ref: '#/components/schemas/v1UserDetails'
     v1AtomicBatchCreatePolicyRequest:
       type: object
       properties:
@@ -29020,6 +30472,21 @@ components:
         description: Find out more about notification center
         url: >-
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+    v1BatchGetIncidentResponse:
+      type: object
+      properties:
+        incidents:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1Incident'
+        notFoundIds:
+          type: array
+          items:
+            type: string
+      description: >-
+        Response containing the requested incidents and any IDs that weren't
+        found
+      title: Batch Get Incident Response
     v1BatchGetPresetsResponse:
       type: object
       properties:
@@ -29114,6 +30581,30 @@ components:
           type: string
     v1CleanupTestingRevisionResponse:
       type: object
+    v1CloseIncidentsRequest:
+      type: object
+      properties:
+        incidentIds:
+          type: array
+          example:
+            - incident_id_1
+            - incident_id_2
+          items:
+            type: string
+          description: List of incident IDs to close
+      description: Request to close one or more incidents
+      title: Close Incidents Request
+      required:
+        - incidentIds
+    v1CloseIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+      description: Response containing the updated incidents after closing
+      title: Close Incidents Response
     v1CloudFormationStack:
       type: object
       properties:
@@ -29145,7 +30636,7 @@ components:
         selectedClusterName:
           type: string
         timeRange:
-          $ref: '#/components/schemas/v2TimeRange'
+          $ref: '#/components/schemas/commonv2TimeRange'
     v1ClusterOptions:
       type: object
       properties:
@@ -29302,6 +30793,53 @@ components:
         description: Find out more about notification center
         url: >-
           https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/
+    v1ContextualLabelValueWithCount:
+      type: object
+      properties:
+        contextualLabelValue:
+          type: string
+          example: contextual_label_value
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: A contextual label value with count
+      title: ContextualLabelValueWithCount
+      required:
+        - contextualLabelValue
+        - count
+    v1ContextualLabelValues:
+      type: object
+      properties:
+        contextualLabelValues:
+          type: array
+          items:
+            type: string
+    v1ContextualLabelValuesWithCount:
+      type: object
+      properties:
+        valuesWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1ContextualLabelValueWithCount'
+      description: A contextual label values with count
+      title: ContextualLabelValuesWithCount
+      required:
+        - valuesWithCount
+    v1ContextualLabels:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          example: field_name
+        fieldValue:
+          type: string
+          example: field_value
+      description: Contextual labels for an incident
+      title: ContextualLabels
+      required:
+        - fieldName
+        - fieldValue
     v1Coordinate:
       type: object
       properties:
@@ -30448,6 +31986,12 @@ components:
         description: Find out more about Custom Enrichment in our documentation.
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+    v1FilterOperator:
+      type: string
+      enum:
+        - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+        - FILTER_OPERATOR_AND
+      default: FILTER_OPERATOR_OR_OR_UNSPECIFIED
     v1FilterType:
       type: string
       enum:
@@ -30815,6 +32359,20 @@ components:
       properties:
         extension:
           $ref: '#/components/schemas/extensionsv1Extension'
+    v1GetFilterValuesRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentQueryFilter'
+      description: Request to get available filter values for incidents
+      title: Get Filter Values Request
+    v1GetFilterValuesResponse:
+      type: object
+      properties:
+        filtersValues:
+          $ref: '#/components/schemas/v1IncidentQueryFiltersValues'
+      description: Response containing available filter values for incidents
+      title: Get Filter Values Response
     v1GetGroupUsersResponse:
       type: object
       properties:
@@ -30841,6 +32399,48 @@ components:
           type: array
           items:
             type: string
+    v1GetIncidentEventsResponse:
+      type: object
+      properties:
+        incidentEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentEvent'
+      description: Response containing all events associated with the requested incident
+      title: Get Incident Events Response
+    v1GetIncidentResponse:
+      type: object
+      properties:
+        incident:
+          $ref: '#/components/schemas/v1Incident'
+      description: Response containing the requested incident
+      title: Get Incident Response
+    v1GetIncidentUsingCorrelationKeyRequest:
+      type: object
+      properties:
+        correlationKey:
+          type: string
+          example: correlation_key_123
+          description: Correlation key to identify the incident
+        incidentPointInTime:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+          description: Timestamp to identify the specific point in time for the incident
+      description: Request to get an incident using a correlation key and timestamp
+      title: Get Incident Using Correlation Key Request
+      required:
+        - correlationKey
+        - incidentPointInTime
+    v1GetIncidentUsingCorrelationKeyResponse:
+      type: object
+      properties:
+        incident:
+          $ref: '#/components/schemas/v1Incident'
+      description: >-
+        Response containing the incident matching the correlation key and
+        timestamp
+      title: Get Incident Using Correlation Key Response
     v1GetIntegrationDefinitionResponse:
       type: object
       properties:
@@ -31216,6 +32816,13 @@ components:
       externalDocs:
         description: Find out more about integrations
         url: https://coralogix.com/integrations/
+    v1GroupByValues:
+      type: object
+      properties:
+        incidentField:
+          $ref: '#/components/schemas/v1IncidentFieldOneOf'
+        contextualLabels:
+          $ref: '#/components/schemas/v1ContextualLabels'
     v1GroupOrigin:
       type: string
       enum:
@@ -31309,6 +32916,621 @@ components:
         description: Find out more about recording rules
         url: >-
           https://coralogix.com/docs/user-guides/data-transformation/metric-rules/recording-rules/
+    v1Incident:
+      type: object
+      properties:
+        id:
+          type: string
+          example: incident_id
+          title: The Incident's id
+        name:
+          type: string
+          example: incident_name
+          title: The Incident's name
+        state:
+          $ref: '#/components/schemas/v1IncidentState'
+        status:
+          $ref: '#/components/schemas/v1IncidentStatus'
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Assignment'
+          title: The Incident's current assignments
+        description:
+          type: string
+          example: incident_description
+          title: The Incident's current description
+        severity:
+          $ref: '#/components/schemas/v1IncidentSeverity'
+        contextualLabels:
+          type: object
+          additionalProperties:
+            type: string
+          title: >-
+            The Incident's current contextual labels, contextual labels are
+            dynamic labels that gives contextual information about the incident
+            ( for example: alert_name label can appear in an incident created by
+            an event originated from the alerting system )
+        displayLabels:
+          type: object
+          additionalProperties:
+            type: string
+          title: >-
+            The Incident's current display labels, display labels are dynamic
+            labels that gives more of an extension to the name of the incident,
+            for identification and naming purposes
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentEvent'
+          title: The Incident's current events
+        createdAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        closedAt:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        lastStateUpdateTime:
+          type: string
+          format: date-time
+          example: '2024-01-01T00:00:00.000Z'
+        lastStateUpdateKey:
+          type: string
+          example: last_state_update_key
+          title: >-
+            The Incident's last event payload key that caused the incident to
+            change state
+        isMuted:
+          type: boolean
+          example: false
+          title: Is the incident muted/suppressed
+        metaLabels:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MetaLabel'
+          title: The Incident's current meta labels
+        duration:
+          type: string
+          title: The Incident duration between created at and close time
+      description: An incident
+      title: Incident
+      required:
+        - id
+        - name
+        - state
+        - status
+        - assignments
+        - description
+        - severity
+        - contextualLabels
+        - displayLabels
+        - events
+        - createdAt
+        - closedAt
+        - lastStateUpdateTime
+        - lastStateUpdateKey
+        - isMuted
+    v1IncidentAggregation:
+      type: object
+      properties:
+        groupBysValue:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1GroupByValues'
+          title: The Aggregation's group by fields and values
+        aggStateCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStateCount'
+          title: The Aggregation's count of states
+        aggStatusCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStatusCount'
+          title: The Aggregation's count of statuses
+        aggSeverityCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentSeverityCount'
+          title: The Aggregation's count of severities
+        aggAssignmentsCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentAssignmentCount'
+          title: The Aggregation's count of assignments
+        firstCreatedAt:
+          type: string
+          format: date-time
+          title: The Aggregation's first incident created time
+        lastClosedAt:
+          type: string
+          format: date-time
+          title: The Aggregation's last incident closed time
+        allValuesCount:
+          type: integer
+          format: int64
+          title: The Aggregation's count of incidents
+        listIncidentsId:
+          type: array
+          items:
+            type: string
+          title: The Aggregation's list of incident's id
+        lastStateUpdateTime:
+          type: string
+          format: date-time
+          title: The Aggregation's last state update time
+        aggMetaLabelsCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentMetaLabelsCount'
+          title: The Aggregation's of meta labels
+      description: An incident aggregation
+      title: IncidentAggregation
+      required:
+        - groupBysValue
+        - aggStateCount
+        - aggStatusCount
+        - aggSeverityCount
+        - aggAssignmentsCount
+        - firstCreatedAt
+        - lastClosedAt
+        - allValuesCount
+        - listIncidentsId
+        - lastStateUpdateTime
+        - aggMetaLabelsCount
+    v1IncidentAssignmentCount:
+      type: object
+      properties:
+        assignedTo:
+          $ref: '#/components/schemas/v1UserDetails'
+        count:
+          type: integer
+          format: int64
+          example: 10
+    v1IncidentEvent:
+      type: object
+      properties:
+        id:
+          type: string
+        incidentEventType:
+          $ref: '#/components/schemas/v1IncidentEventType'
+        snoozeIndicator:
+          $ref: '#/components/schemas/v1IncidentEventSnoozeIndicator'
+        assignment:
+          $ref: '#/components/schemas/v1IncidentEventAssign'
+        unassign:
+          $ref: '#/components/schemas/v1IncidentEventUnassign'
+        upsertState:
+          $ref: '#/components/schemas/v1IncidentEventUpsertState'
+        acknowledge:
+          $ref: '#/components/schemas/v1IncidentEventAcknowledge'
+        close:
+          $ref: '#/components/schemas/v1IncidentEventClose'
+        originatorType:
+          $ref: '#/components/schemas/v1OriginatorType'
+        administrativeEvent:
+          $ref: '#/components/schemas/v1IncidentEventOriginatorAdministrative'
+        operationalEvent:
+          $ref: '#/components/schemas/v1IncidentEventOriginatorOperational'
+    v1IncidentEventAcknowledge:
+      type: object
+      properties:
+        acknowledgedBy:
+          $ref: '#/components/schemas/v1UserDetails'
+    v1IncidentEventAlertType:
+      type: string
+      enum:
+        - INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+        - INCIDENT_EVENT_ALERT_TYPE_METRIC
+        - INCIDENT_EVENT_ALERT_TYPE_NEW_VALUE
+        - INCIDENT_EVENT_ALERT_TYPE_RATIO
+        - INCIDENT_EVENT_ALERT_TYPE_TIME_RELATIVE
+        - INCIDENT_EVENT_ALERT_TYPE_UNIQUE_COUNT
+        - INCIDENT_EVENT_ALERT_TYPE_TRACING
+        - INCIDENT_EVENT_ALERT_TYPE_FLOW
+      default: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+    v1IncidentEventAssign:
+      type: object
+      properties:
+        assignment:
+          $ref: '#/components/schemas/v1Assignment'
+    v1IncidentEventClose:
+      type: object
+      properties:
+        closedBy:
+          $ref: '#/components/schemas/v1UserDetails'
+    v1IncidentEventExtended:
+      type: object
+      properties:
+        cxEventKey:
+          type: string
+        incidentEvent:
+          $ref: '#/components/schemas/v1IncidentEvent'
+        cxEventTimestamp:
+          type: string
+          format: date-time
+        incidentEventExtendedMetadata:
+          $ref: '#/components/schemas/v1IncidentEventExtendedMetadata'
+    v1IncidentEventExtendedMetadata:
+      type: object
+      properties:
+        incidentSeverity:
+          $ref: '#/components/schemas/v1IncidentSeverity'
+        alertId:
+          type: string
+        incidentState:
+          $ref: '#/components/schemas/v1IncidentState'
+        alertName:
+          type: string
+        alertType:
+          $ref: '#/components/schemas/v1IncidentEventAlertType'
+        isMuted:
+          type: boolean
+        incidentStatus:
+          $ref: '#/components/schemas/v1IncidentStatus'
+        alertGroupByFields:
+          type: array
+          items:
+            type: string
+        alertLabels:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MetaLabel'
+        incidentPermutation:
+          type: object
+          additionalProperties:
+            type: string
+    v1IncidentEventOrderByFieldType:
+      type: string
+      enum:
+        - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
+      default: INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
+    v1IncidentEventOriginatorAdministrative:
+      type: object
+      properties:
+        userId:
+          type: string
+    v1IncidentEventOriginatorOperational:
+      type: object
+      properties:
+        systemName:
+          type: string
+    v1IncidentEventQueryFilter:
+      type: object
+      properties:
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStatus'
+        severity:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentSeverity'
+        contextualLabels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1ContextualLabelValues'
+        name:
+          type: string
+        isMuted:
+          type: boolean
+        timestamp:
+          $ref: '#/components/schemas/incidentsv1TimeRange'
+        labels:
+          $ref: '#/components/schemas/v1LabelsFilter'
+    v1IncidentEventSnoozeIndicator:
+      type: object
+      properties:
+        startTime:
+          type: string
+          format: date-time
+        durationMinutes:
+          type: integer
+          format: int32
+        userId:
+          type: string
+    v1IncidentEventType:
+      type: string
+      enum:
+        - INCIDENT_EVENT_TYPE_UNSPECIFIED
+        - INCIDENT_EVENT_TYPE_UPSERT_STATE
+        - INCIDENT_EVENT_TYPE_OPEN
+        - INCIDENT_EVENT_TYPE_CLOSE
+        - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+        - INCIDENT_EVENT_TYPE_ASSIGN
+        - INCIDENT_EVENT_TYPE_UNASSIGN
+        - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+      default: INCIDENT_EVENT_TYPE_UNSPECIFIED
+    v1IncidentEventUnassign:
+      type: object
+    v1IncidentEventUpsertState:
+      type: object
+      properties:
+        stateType:
+          $ref: '#/components/schemas/v1UpsertIncidentStateType'
+        payload:
+          $ref: '#/components/schemas/v1UpsertIncidentStatePayload'
+        isMuted:
+          type: boolean
+    v1IncidentFieldOneOf:
+      type: object
+      properties:
+        id:
+          type: string
+        severity:
+          $ref: '#/components/schemas/v1IncidentSeverity'
+        name:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        closedAt:
+          type: string
+          format: date-time
+        state:
+          $ref: '#/components/schemas/v1IncidentState'
+        status:
+          $ref: '#/components/schemas/v1IncidentStatus'
+        lastStateUpdateTime:
+          type: string
+          format: date-time
+        applicationName:
+          type: string
+        subsystemName:
+          type: string
+        duration:
+          type: string
+    v1IncidentFields:
+      type: string
+      enum:
+        - INCIDENTS_FIELDS_UNSPECIFIED
+        - INCIDENTS_FIELDS_ID
+        - INCIDENTS_FIELDS_SEVERITY
+        - INCIDENTS_FIELDS_NAME
+        - INCIDENTS_FIELDS_CREATED_TIME
+        - INCIDENTS_FIELDS_CLOSED_TIME
+        - INCIDENTS_FIELDS_STATE
+        - INCIDENTS_FIELDS_STATUS
+        - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
+        - INCIDENTS_FIELDS_APPLICATION_NAME
+        - INCIDENTS_FIELDS_SUBSYSTEM_NAME
+        - INCIDENTS_FIELDS_DURATION
+      default: INCIDENTS_FIELDS_UNSPECIFIED
+    v1IncidentMetaLabelsCount:
+      type: object
+      properties:
+        metaLabel:
+          $ref: '#/components/schemas/v1MetaLabel'
+        count:
+          type: integer
+          format: int64
+          example: 10
+      description: An incident meta labels count
+      title: IncidentMetaLabelsCount
+      required:
+        - metaLabel
+        - count
+    v1IncidentMetaLabelsWithCount:
+      type: object
+      properties:
+        metaLabel:
+          $ref: '#/components/schemas/v1MetaLabel'
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: An incident meta labels with count
+      title: IncidentMetaLabelsWithCount
+      required:
+        - metaLabel
+        - count
+    v1IncidentQueryFilter:
+      type: object
+      properties:
+        assignee:
+          type: array
+          items:
+            type: string
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStatus'
+        state:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentState'
+        severity:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentSeverity'
+        contextualLabels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1ContextualLabelValues'
+        startTime:
+          type: string
+          format: date-time
+          title: >-
+            filters all incidents that were open in the given timeframe start
+            time (deprecated, use incident_open_range instead)
+        endTime:
+          type: string
+          format: date-time
+          title: >-
+            filters all incidents that were open in the given timeframe end time
+            (deprecated, use incident_open_range instead)
+        searchQuery:
+          $ref: '#/components/schemas/v1IncidentSearchQuery'
+        applicationName:
+          type: array
+          items:
+            type: string
+        subsystemName:
+          type: array
+          items:
+            type: string
+        isMuted:
+          type: boolean
+        createdAtRange:
+          $ref: '#/components/schemas/incidentsv1TimeRange'
+        incidentDurationRange:
+          $ref: '#/components/schemas/incidentsv1TimeRange'
+        metaLabels:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MetaLabel'
+          title: filters all incidents with the given meta labels
+        metaLabelsOp:
+          $ref: '#/components/schemas/v1FilterOperator'
+    v1IncidentQueryFiltersValues:
+      type: object
+      properties:
+        assigneeWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1AssigneeWithCount'
+        statusWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStatusWithCount'
+        stateWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentStateWithCount'
+        severityWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentSeverityWithCount'
+        contextualLabels:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v1ContextualLabelValuesWithCount'
+        metaLabelsWithCount:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentMetaLabelsWithCount'
+        metaLabelsOp:
+          $ref: '#/components/schemas/v1FilterOperator'
+      description: An incident query filters values
+      title: IncidentQueryFiltersValues
+      required:
+        - assigneeWithCount
+        - statusWithCount
+        - stateWithCount
+        - severityWithCount
+        - contextualLabels
+        - metaLabelsWithCount
+        - metaLabelsOp
+    v1IncidentSearchQuery:
+      type: object
+      properties:
+        query:
+          type: string
+        incidentField:
+          $ref: '#/components/schemas/v1IncidentFields'
+        contextualLabel:
+          type: string
+      description: An incident search query
+      title: IncidentSearchQuery
+      required:
+        - query
+        - field
+    v1IncidentSeverity:
+      type: string
+      enum:
+        - INCIDENT_SEVERITY_UNSPECIFIED
+        - INCIDENT_SEVERITY_INFO
+        - INCIDENT_SEVERITY_WARNING
+        - INCIDENT_SEVERITY_ERROR
+        - INCIDENT_SEVERITY_CRITICAL
+        - INCIDENT_SEVERITY_LOW
+      default: INCIDENT_SEVERITY_UNSPECIFIED
+    v1IncidentSeverityCount:
+      type: object
+      properties:
+        severity:
+          $ref: '#/components/schemas/v1IncidentSeverity'
+        count:
+          type: integer
+          format: int64
+          example: 10
+    v1IncidentSeverityWithCount:
+      type: object
+      properties:
+        severity:
+          $ref: '#/components/schemas/v1IncidentSeverity'
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: An incident severity with count
+      title: IncidentSeverityWithCount
+      required:
+        - severity
+        - count
+    v1IncidentState:
+      type: string
+      enum:
+        - INCIDENT_STATE_UNSPECIFIED
+        - INCIDENT_STATE_TRIGGERED
+        - INCIDENT_STATE_RESOLVED
+      default: INCIDENT_STATE_UNSPECIFIED
+    v1IncidentStateCount:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/v1IncidentState'
+        count:
+          type: integer
+          format: int64
+          example: 10
+    v1IncidentStateWithCount:
+      type: object
+      properties:
+        state:
+          $ref: '#/components/schemas/v1IncidentState'
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: An incident state with count
+      title: IncidentStateWithCount
+      required:
+        - state
+        - count
+    v1IncidentStatus:
+      type: string
+      enum:
+        - INCIDENT_STATUS_UNSPECIFIED
+        - INCIDENT_STATUS_TRIGGERED
+        - INCIDENT_STATUS_ACKNOWLEDGED
+        - INCIDENT_STATUS_RESOLVED
+      default: INCIDENT_STATUS_UNSPECIFIED
+    v1IncidentStatusCount:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/v1IncidentStatus'
+        count:
+          type: integer
+          format: int64
+          example: 10
+    v1IncidentStatusWithCount:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/v1IncidentStatus'
+        count:
+          type: integer
+          format: int32
+          example: 10
+      description: An incident status with count
+      title: IncidentStatusWithCount
+      required:
+        - status
+        - count
     v1InitializeTestingRevisionRequest:
       type: object
       properties:
@@ -31660,6 +33882,15 @@ components:
           type: array
           items:
             type: string
+    v1LabelsFilter:
+      type: object
+      properties:
+        metaLabels:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1MetaLabel'
+        operator:
+          $ref: '#/components/schemas/v1FilterOperator'
     v1LatencySli:
       type: object
       properties:
@@ -31791,6 +34022,128 @@ components:
           items:
             $ref: >-
               #/components/schemas/ListIbmEventNotificationsInstancesResponseEventNotificationsInstance
+    v1ListIncidentAggregationsRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentQueryFilter'
+        groupBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/incidentsv1GroupBy'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationRequest'
+      description: >-
+        Request to get aggregated incident data with filtering and grouping
+        options
+      title: List Incident Aggregations Request
+    v1ListIncidentAggregationsResponse:
+      type: object
+      properties:
+        incidentAggs:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentAggregation'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationResponse'
+      description: Response containing aggregated incident data and pagination information
+      title: List Incident Aggregations Response
+    v1ListIncidentEventRequestOrderBy:
+      type: object
+      properties:
+        field:
+          $ref: '#/components/schemas/v1IncidentEventOrderByFieldType'
+        direction:
+          $ref: '#/components/schemas/incidentsv1OrderByDirection'
+      description: Ordering configuration for incident events list
+      title: List Incident Event Request Order By
+    v1ListIncidentEventsFilterValuesRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentEventQueryFilter'
+      description: Request to get available filter values for incident events
+      title: List Incident Events Filter Values Request
+    v1ListIncidentEventsFilterValuesResponse:
+      type: object
+      properties:
+        filtersValues:
+          $ref: '#/components/schemas/v1IncidentQueryFiltersValues'
+      description: Response containing available filter values for incident events
+      title: List Incident Events Filter Values Response
+    v1ListIncidentEventsRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentEventQueryFilter'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationRequest'
+        orderBy:
+          $ref: '#/components/schemas/v1ListIncidentEventRequestOrderBy'
+      description: >-
+        Request to list incident events with filtering, pagination and ordering
+        options
+      title: List Incident Events Request
+    v1ListIncidentEventsResponse:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1IncidentEventExtended'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationResponse'
+      description: Response containing list of incident events and pagination information
+      title: List Incident Events Response
+    v1ListIncidentEventsTotalCountRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentEventQueryFilter'
+      description: Request to get the total count of incident events matching a filter
+      title: List Incident Events Total Count Request
+    v1ListIncidentEventsTotalCountResponse:
+      type: object
+      properties:
+        count:
+          type: string
+          format: uint64
+          example: 100
+          description: Total number of incident events matching the filter
+        reachedLimit:
+          type: boolean
+          example: false
+          description: Indicates if the count reached the system limit
+      description: >-
+        Response containing the total count of matching incident events and
+        whether the count limit was reached
+      title: List Incident Events Total Count Response
+    v1ListIncidentsRequest:
+      type: object
+      properties:
+        filter:
+          $ref: '#/components/schemas/v1IncidentQueryFilter'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationRequest'
+        orderBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/incidentsv1OrderBy'
+      description: >-
+        Request to list incidents with filtering, pagination and ordering
+        options
+      title: List Incidents Request
+    v1ListIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+        pagination:
+          $ref: '#/components/schemas/incidentsv1PaginationResponse'
+      description: Response containing a list of incidents and pagination information
+      title: List Incidents Response
     v1ListManagedIntegrationKeysResponse:
       type: object
       properties:
@@ -32091,6 +34444,20 @@ components:
         aggregationWindowSeconds:
           type: integer
           format: int32
+    v1MetaLabel:
+      type: object
+      properties:
+        key:
+          type: string
+          example: key
+        value:
+          type: string
+          example: value
+      description: A meta label for an incident
+      title: MetaLabel
+      required:
+        - key
+        - value
     v1MicrosoftTeamsConfig:
       type: object
     v1NoDeployment:
@@ -32133,6 +34500,13 @@ components:
           $ref: '#/components/schemas/NotificationTargetGlobalRouterConfig'
     v1OpsgenieConfig:
       type: object
+    v1OriginatorType:
+      type: string
+      enum:
+        - ORIGINATOR_TYPE_UNSPECIFIED
+        - ORIGINATOR_TYPE_OPERATIONAL
+        - ORIGINATOR_TYPE_ADMINISTRATIVE
+      default: ORIGINATOR_TYPE_UNSPECIFIED
     v1OutRule:
       type: object
       properties:
@@ -32835,6 +35209,30 @@ components:
           https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/
       required:
         - slo
+    v1ResolveIncidentsRequest:
+      type: object
+      properties:
+        incidentIds:
+          type: array
+          example:
+            - incident_id_1
+            - incident_id_2
+          items:
+            type: string
+          description: List of incident IDs to resolve
+      description: Request to resolve one or more incidents
+      title: Resolve Incidents Request
+      required:
+        - incidentIds
+    v1ResolveIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+      description: Response containing the updated incidents after resolution
+      title: Resolve Incidents Response
     v1ResourceId:
       type: object
       properties:
@@ -34001,6 +36399,26 @@ components:
       properties:
         value:
           type: string
+    v1UnassignIncidentsRequest:
+      type: object
+      properties:
+        incidentIds:
+          type: array
+          items:
+            type: string
+      description: Request to remove assignments from one or more incidents
+      title: Unassign Incidents Request
+      required:
+        - incidentIds
+    v1UnassignIncidentsResponse:
+      type: object
+      properties:
+        incidents:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Incident'
+      description: Response containing the updated incidents after unassignment
+      title: Unassign Incidents Response
     v1UndeployExtensionRequest:
       type: object
       properties:
@@ -34354,6 +36772,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1Measurement'
+    v1UpsertIncidentStatePayload:
+      type: object
+      properties:
+        cxEventKey:
+          type: string
+    v1UpsertIncidentStateType:
+      type: string
+      enum:
+        - UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+        - UPSERT_INCIDENT_STATE_TYPE_TRIGGERED
+        - UPSERT_INCIDENT_STATE_TYPE_RESOLVED
+      default: UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
     v1UpsertLabelMappingsInternalResponse:
       type: object
       properties:
@@ -34395,6 +36825,11 @@ components:
         id:
           type: integer
           format: int64
+    v1UserDetails:
+      type: object
+      properties:
+        userId:
+          type: string
     v1UserId:
       type: object
       properties:
@@ -35969,13 +38404,6 @@ components:
         - TCO_TIER_HIGH
         - TCO_TIER_BLOCKED
       default: TCO_TIER_UNSPECIFIED
-    v2TimeRange:
-      type: object
-      properties:
-        startTimeSeconds:
-          type: string
-        endTimeSeconds:
-          type: string
     v2Timeframe:
       type: object
       properties:
@@ -36594,7 +39022,7 @@ components:
         multiplePermutation:
           $ref: '#/components/schemas/v3AlertEventMultiplePermutation'
         pagination:
-          $ref: '#/components/schemas/v3PaginationResponse'
+          $ref: '#/components/schemas/alertsv3PaginationResponse'
     v3GetAlertEventStatsResponse:
       type: object
       properties:
@@ -37398,22 +39826,6 @@ components:
           type: integer
           format: int64
         organisationId:
-          type: string
-    v3PaginationRequest:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int64
-        pageToken:
-          type: string
-    v3PaginationResponse:
-      type: object
-      properties:
-        totalSize:
-          type: integer
-          format: int64
-        nextPageToken:
           type: string
     v3Permutation:
       type: object
