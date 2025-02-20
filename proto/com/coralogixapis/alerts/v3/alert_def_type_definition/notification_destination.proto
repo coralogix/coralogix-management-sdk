@@ -30,3 +30,9 @@ message MessageConfigField {
   string field_name = 1;
   string template = 2;
 }
+
+
+message NotificationRouter {
+  string id = 1;
+  optional NotifyOn notify_on = 2;
+}

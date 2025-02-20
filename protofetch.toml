@@ -7,7 +7,7 @@ revision = 'v0.17.1'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.10"
+revision = "v0.5.11"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
@@ -49,7 +49,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
 ]
-revision = "v2.3.3"
+revision = "v2.3.5"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -115,7 +115,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.93"
+revision = "v0.0.95"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
@@ -163,7 +163,7 @@ allow_policies = [
 
 [global-mapping]
 url = 'github.com/coralogix/cx-api-global-mapping'
-revision = "v1.26.1"
+revision = "v1.26.2"
 
 [cx-api-schema-store]
 url = 'github.com/coralogix/cx-api-schema-store'

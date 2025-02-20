@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+message DataPrimeQuerySchema {
+  // Represents the schema object returned by DataPrime API, serialized as a binary blob.
+  // https://github.com/coralogix/cx-api-dataprime/blob/54b99f1990af74dcb7328de37ce8a38cb43e14fd/service/com/coralogix/dataprime/v1/internal_query_response.proto#L21
+  bytes blob = 1;
+}
