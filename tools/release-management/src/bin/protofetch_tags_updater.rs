@@ -139,20 +139,20 @@ async fn main() -> eyre::Result<()> {
         return Ok(());
     }
 
-    // Protofetch updating
-    tokio::fs::write(&protofetch_path, protofetch_descriptor.to_string()).await?;
-    tokio::fs::remove_dir_all(&proto_dir).await?;
+    // // Protofetch updating
+    // tokio::fs::write(&protofetch_path, protofetch_descriptor.to_string()).await?;
+    // tokio::fs::remove_dir_all(&proto_dir).await?;
 
-    let protos = Protofetch::builder()
-        .module_file_name(&protofetch_path)
-        .output_directory_name(&proto_dir)
-        .lock_file_name(&protolock_path)
-        .try_build()
-        .expect("Protofetch failed");
+    // let protos = Protofetch::builder()
+    //     .module_file_name(&protofetch_path)
+    //     .output_directory_name(&proto_dir)
+    //     .lock_file_name(&protolock_path)
+    //     .try_build()
+    //     .expect("Protofetch failed");
 
-    protos
-        .fetch(protofetch::LockMode::Recreate)
-        .expect("Protofetch failed");
+    // protos
+    //     .fetch(protofetch::LockMode::Recreate)
+    //     .expect("Protofetch failed");
 
     // Git operations
     let repo = Repo::new(&args.git_dir)
