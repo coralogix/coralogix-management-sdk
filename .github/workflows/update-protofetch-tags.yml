@@ -31,6 +31,8 @@ jobs:
           curl -sL https://github.com/coralogix/protofetch/releases/download/v0.1.8/protofetch_x86_64-unknown-linux-musl.tar.gz  | tar xz
           sudo mv bin/protofetch /usr/bin/protofetch
           sudo chmod +x /usr/bin/protofetch
+
+          protofetch --version
       - uses: de-vri-es/setup-git-credentials@v2
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
