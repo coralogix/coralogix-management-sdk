@@ -4,6 +4,10 @@ name: "[Protofetch] Check Tags"
 #   pull-requests: write
 #   contents: write
 
+env:
+  PROTOC_VERSION: "26.1"
+
+
 on:
   workflow_dispatch:
   schedule:
@@ -16,6 +20,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-go@v5
+      - uses: arduino/setup-protoc@v3
+        with:
+          version: ${{env.PROTOC_VERSION}}
+      - name: Install dependencies
+        run: | 
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest    
+          curl -sL https://github.com/coralogix/protofetch/releases/download/v0.1.8/protofetch_x86_64-unknown-linux-musl.tar.gz  | tar xz -
+          mv protofetch /usr/bin/protofetch
+          chmod +x /usr/bin/protofetch
       - uses: de-vri-es/setup-git-credentials@v2
         with:
           credentials: ${{secrets.GIT_CREDENTIALS}}
@@ -23,6 +38,7 @@ jobs:
         run: |
           git config --global user.email "github@coralogix.com"
           git config --global user.name "Github Actions"
+
           cargo run --bin protofetch_tags_updater  -- -r ../.. -o ${{ github.repository }} -s
         working-directory: tools/release-management
         env:
