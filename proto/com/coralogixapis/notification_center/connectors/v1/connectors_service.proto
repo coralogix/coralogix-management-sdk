@@ -50,7 +50,7 @@ service ConnectorsService {
 
   rpc BatchGetConnectorSummaries(BatchGetConnectorSummariesRequest) returns (BatchGetConnectorSummariesResponse) {
     option (google.api.http) = {
-      get: "v1/notification-center/connectors:batchGetSummaries"
+      get: "/v1/notification-center/connectors:batchGetSummaries"
     };
   }
 
@@ -115,7 +115,7 @@ message ReplaceConnectorResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Replace Connector Response"
-      description: "Response containing the replaced connector"
+      description: "Response containing the updated connector"
       required: []
     }
     external_docs: {
@@ -142,17 +142,6 @@ message DeleteConnectorRequest {
 }
 
 message DeleteConnectorResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Delete Connector Response"
-      description: "Response from deleting a connector"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-      description: "Find out more about notification center"
-    }
-  };
 }
 
 message GetConnectorRequest {

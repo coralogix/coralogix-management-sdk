@@ -4,8 +4,16 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-message TracingImmediateType  {
-    TracingFilter tracing_filter = 1;
-    repeated google.protobuf.StringValue notification_payload_filter = 2;
+message TracingImmediateType {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Tracing Immediate Alert Type"
+      description: "Configuration for immediate alerts triggered on trace entries"
+      required: ["tracing_filter"]
+    }
+  };
+  TracingFilter tracing_filter = 1;
+  repeated google.protobuf.StringValue notification_payload_filter = 2;
 }

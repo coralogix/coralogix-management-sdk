@@ -1,0 +1,528 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/assignee.proto";
+import "com/coralogixapis/incidents/v1/incident.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/incident_event_query_filter.proto";
+import "com/coralogixapis/incidents/v1/incident_query.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filters_values.proto";
+import "com/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+
+service IncidentsService {
+  rpc GetIncident(GetIncidentRequest) returns (GetIncidentResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get incident";
+    option (google.api.http) = {get: "/v1/incidents/{id}"};
+  }
+
+  rpc BatchGetIncident(BatchGetIncidentRequest) returns (BatchGetIncidentResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Batch get incidents";
+    option (google.api.http) = {post: "/v1/incidents:batchGet"};
+  }
+
+  rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get incidents list";
+    option (google.api.http) = {
+      post: "/v1/incidents"
+      body: "*"
+    };
+  }
+  rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "List incident aggregations";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentAggregations"
+      body: "*"
+    };
+  }
+
+  rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get filter values";
+    option (google.api.http) = {
+      post: "/v1/incidents:getFilterValues"
+      body: "*"
+    };
+  }
+
+  rpc AssignIncidents(AssignIncidentsRequest) returns (AssignIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Assign incidents";
+    option (google.api.http) = {
+      post: "/v1/incidents:assign"
+      body: "*"
+    };
+  }
+
+  rpc UnassignIncidents(UnassignIncidentsRequest) returns (UnassignIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Unassign incidents";
+    option (google.api.http) = {
+      post: "/v1/incidents:unassign"
+      body: "*"
+    };
+  }
+  rpc AcknowledgeIncidents(AcknowledgeIncidentsRequest) returns (AcknowledgeIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Acknowledge incidents";
+    option (google.api.http) = {
+      post: "/v1/incidents:acknowledge"
+      body: "*"
+    };
+  }
+  rpc CloseIncidents(CloseIncidentsRequest) returns (CloseIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Close incidents";
+    option (google.api.http) = {
+      post: "/v1/incidents:close"
+      body: "*"
+    };
+  }
+  rpc GetIncidentEvents(GetIncidentEventsRequest) returns (GetIncidentEventsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all incident events of the incident";
+    option (google.api.http) = {
+      get: "/v1/incidents/{incident_id}/events"
+    };
+  }
+
+  rpc ResolveIncidents(ResolveIncidentsRequest) returns (ResolveIncidentsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Resolve incidents";
+    option (google.api.http) = {
+      post: "/v1/incidents:resolve"
+      body: "*"
+    };
+  }
+
+  /*
+     This shouldn't be exposed in the docs, it has no external usecase
+  */
+  rpc GetIncidentUsingCorrelationKey(GetIncidentUsingCorrelationKeyRequest) returns (GetIncidentUsingCorrelationKeyResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get incident by correlation key and specific point in time";
+    option (google.api.http) = {
+      post: "/v1/incidents:getIncidentUsingCorrelationKey"
+      body: "*"
+    };
+  }
+
+  rpc ListIncidentEvents(ListIncidentEventsRequest) returns (ListIncidentEventsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "List incident events";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEvents"
+      body: "*"
+    };
+  }
+
+  rpc ListIncidentEventsTotalCount(ListIncidentEventsTotalCountRequest) returns (ListIncidentEventsTotalCountResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "List incident events total count";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEventsTotalCount"
+      body: "*"
+    };
+  }
+
+  rpc ListIncidentEventsFilterValues(ListIncidentEventsFilterValuesRequest) returns (ListIncidentEventsFilterValuesResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "List incident events filter values";
+    option (google.api.http) = {
+      post: "/v1/incidents:listIncidentEventsFilterValues"
+      body: "*"
+    };
+  }
+}
+
+
+message GetIncidentRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Request"
+      description: "A request to get an incident by its id"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_id\"" }];
+}
+
+message GetIncidentResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Response"
+      description: "Response containing the requested incident"
+    }
+  };
+  Incident incident = 1;
+}
+
+message ListIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incidents Response"
+      description: "Response containing a list of incidents and pagination information"
+    }
+  };
+  repeated Incident incidents = 1;
+  PaginationResponse pagination = 4;
+}
+
+message ListIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incidents Request"
+      description: "Request to list incidents with filtering, pagination and ordering options"
+    }
+  };
+  IncidentQueryFilter filter = 4;
+  PaginationRequest pagination = 5;
+  repeated OrderBy order_bys = 6;
+}
+
+message BatchGetIncidentRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Incident Request"
+      description: "Request to get multiple incidents by their IDs"
+      required: ["ids"]
+    }
+  };
+  repeated google.protobuf.StringValue ids = 1;
+}
+
+message BatchGetIncidentResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Incident Response"
+      description: "Response containing the requested incidents and any IDs that weren't found"
+    }
+  };
+  map<string, Incident> incidents = 1;
+  repeated google.protobuf.StringValue not_found_ids = 2;
+}
+
+message DeleteIncidentRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Incident Request"
+      description: "Request to delete an incident by its ID"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1;
+}
+message PaginationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Pagination Request"
+      description: "Pagination parameters for list requests"
+    }
+  };
+  google.protobuf.UInt32Value page_size = 1;
+  google.protobuf.StringValue page_token = 2;
+}
+message PaginationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Pagination Response"
+      description: "Pagination information for list responses"
+    }
+  };
+  google.protobuf.UInt32Value total_size = 1;
+  google.protobuf.StringValue next_page_token = 2;
+}
+
+message ListIncidentAggregationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Aggregations Request"
+      description: "Request to get aggregated incident data with filtering and grouping options"
+    }
+  };
+  IncidentQueryFilter filter = 1;
+  repeated GroupBy group_bys = 2;
+  PaginationRequest pagination = 3;
+}
+message ListIncidentAggregationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Aggregations Response"
+      description: "Response containing aggregated incident data and pagination information"
+    }
+  };
+  repeated IncidentAggregation incident_aggs = 1;
+  PaginationResponse pagination = 2;
+}
+
+message GetFilterValuesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Filter Values Request"
+      description: "Request to get available filter values for incidents"
+    }
+  };
+  IncidentQueryFilter filter = 1;
+}
+message GetFilterValuesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Filter Values Response"
+      description: "Response containing available filter values for incidents"
+    }
+  };
+  IncidentQueryFiltersValues filters_values = 1;
+}
+
+message GetIncidentEventsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Events Request"
+      description: "Request to get all events associated with a specific incident"
+      required: ["incident_id"]
+    }
+  };
+  google.protobuf.StringValue incident_id = 1;
+}
+
+message GetIncidentEventsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Events Response"
+      description: "Response containing all events associated with the requested incident"
+    }
+  };
+  repeated IncidentEvent incident_events = 1;
+}
+
+message AssignIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Assign Incidents Request"
+      description: "Request to assign one or more incidents to a user"
+      required: ["incident_ids", "assigned_to"]
+    }
+  };
+  repeated google.protobuf.StringValue incident_ids = 5;
+  UserDetails assigned_to = 2;
+}
+
+message UnassignIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Unassign Incidents Request"
+      description: "Request to remove assignments from one or more incidents"
+      required: ["incident_ids"]
+    }
+  };
+  repeated google.protobuf.StringValue incident_ids = 1;
+}
+
+message UnassignIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Unassign Incidents Response"
+      description: "Response containing the updated incidents after unassignment"
+    }
+  };
+  repeated Incident incidents = 1;
+}
+
+message AssignIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Assign Incidents Response"
+      description: "Response containing the updated incidents after assignment"
+    }
+  };
+  repeated Incident incidents = 2;
+}
+
+message AcknowledgeIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Acknowledge Incidents Request"
+      description: "Request to acknowledge one or more incidents"
+      required: ["incident_ids"]
+    }
+  };
+  repeated google.protobuf.StringValue incident_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident IDs to acknowledge"
+    example: "[\"incident_id_1\", \"incident_id_2\"]"
+  }];
+}
+
+message AcknowledgeIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Acknowledge Incidents Response"
+      description: "Response containing the updated incidents after acknowledgment"
+    }
+  };
+  repeated Incident incidents = 2;
+}
+
+message CloseIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Close Incidents Request"
+      description: "Request to close one or more incidents"
+      required: ["incident_ids"]
+    }
+  };
+  repeated google.protobuf.StringValue incident_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident IDs to close"
+    example: "[\"incident_id_1\", \"incident_id_2\"]"
+  }];
+}
+
+message CloseIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Close Incidents Response"
+      description: "Response containing the updated incidents after closing"
+    }
+  };
+  repeated Incident incidents = 2;
+}
+
+message ResolveIncidentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Resolve Incidents Request"
+      description: "Request to resolve one or more incidents"
+      required: ["incident_ids"]
+    }
+  };
+  repeated google.protobuf.StringValue incident_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "List of incident IDs to resolve"
+    example: "[\"incident_id_1\", \"incident_id_2\"]"
+  }];
+}
+
+message ResolveIncidentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Resolve Incidents Response"
+      description: "Response containing the updated incidents after resolution"
+    }
+  };
+  repeated Incident incidents = 1;
+}
+
+message GetIncidentUsingCorrelationKeyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Using Correlation Key Request"
+      description: "Request to get an incident using a correlation key and timestamp"
+      required: ["correlation_key", "incident_point_in_time"]
+    }
+  };
+  google.protobuf.StringValue correlation_key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Correlation key to identify the incident"
+    example: "\"correlation_key_123\""
+  }];
+  google.protobuf.Timestamp incident_point_in_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Timestamp to identify the specific point in time for the incident"
+    example: "\"2024-01-01T00:00:00Z\""
+  }];
+}
+
+message GetIncidentUsingCorrelationKeyResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Incident Using Correlation Key Response"
+      description: "Response containing the incident matching the correlation key and timestamp"
+    }
+  };
+  Incident incident = 1;
+}
+
+message ListIncidentEventsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Request"
+      description: "Request to list incident events with filtering, pagination and ordering options"
+    }
+  };
+  IncidentEventQueryFilter filter = 1;
+  PaginationRequest pagination = 2;
+  ListIncidentEventRequestOrderBy order_by = 3;
+}
+
+message ListIncidentEventRequestOrderBy {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Event Request Order By"
+      description: "Ordering configuration for incident events list"
+    }
+  };
+  IncidentEventOrderByFieldType field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Field to order by"
+    example: "\"INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED\""
+  }];
+  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Sort direction (ascending or descending)"
+    example: "\"ASC\""
+  }];
+}
+
+enum IncidentEventOrderByFieldType {
+  INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED = 0;
+}
+
+message ListIncidentEventsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Response"
+      description: "Response containing list of incident events and pagination information"
+    }
+  };
+  repeated IncidentEventExtended items = 1;
+  PaginationResponse pagination = 2;
+}
+
+message ListIncidentEventsTotalCountRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Total Count Request"
+      description: "Request to get the total count of incident events matching a filter"
+    }
+  };
+  IncidentEventQueryFilter filter = 1;
+}
+
+message ListIncidentEventsTotalCountResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Total Count Response"
+      description: "Response containing the total count of matching incident events and whether the count limit was reached"
+    }
+  };
+  google.protobuf.UInt64Value count = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Total number of incident events matching the filter"
+    example: "100"
+  }];
+  google.protobuf.BoolValue reached_limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Indicates if the count reached the system limit"
+    example: "false"
+  }];
+}
+
+message ListIncidentEventsFilterValuesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Filter Values Request"
+      description: "Request to get available filter values for incident events"
+    }
+  };
+  IncidentEventQueryFilter filter = 1;
+}
+
+message ListIncidentEventsFilterValuesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Incident Events Filter Values Response"
+      description: "Response containing available filter values for incident events"
+    }
+  };
+  IncidentQueryFiltersValues filters_values = 1;
+}

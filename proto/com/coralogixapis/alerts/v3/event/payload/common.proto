@@ -1,6 +1,7 @@
 syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
+package com.coralogixapis.alerts.v3;
 
 message CoralogixLogMetadata {
   google.protobuf.StringValue application_name = 1;

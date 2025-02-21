@@ -1,0 +1,143 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/assignee.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+/**
+ * Represents an Incident.
+ */
+message Incident {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident"
+      description: "An incident"
+      required: ["id", "name", "state", "status", "assignments", "description", "severity", "contextual_labels", "display_labels", "events", "created_at", "closed_at", "last_state_update_time", "last_state_update_key", "is_muted"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_id\"" }]; // The Incident's id
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_name\"" }]; // The Incident's name
+  IncidentState state = 3; // The Incident's current state, the internal state of the incident, usually is derived from the operational events of the incident
+  IncidentStatus status = 4; // The Incident's current status, the status of the incident can be derived from state of the incident and/or administrative user operation (i.e acknowledging the incident)
+  repeated Assignment assignments = 5; // The Incident's current assignments
+  google.protobuf.StringValue description = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_description\"" }]; // The Incident's current description
+  IncidentSeverity severity = 7; // The Incident's current severity
+  map<string, string> contextual_labels = 13; // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident ( for example: alert_name label can appear in an incident created by an event originated from the alerting system )
+  map<string, string> display_labels = 14; // The Incident's current display labels, display labels are dynamic labels that gives more of an extension to the name of the incident, for identification and naming purposes
+  repeated IncidentEvent events = 10;  // The Incident's current events
+  google.protobuf.Timestamp created_at = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
+  google.protobuf.Timestamp closed_at = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
+  google.protobuf.Timestamp last_state_update_time = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
+  google.protobuf.StringValue last_state_update_key = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"last_state_update_key\"" }]; // The Incident's last event payload key that caused the incident to change state
+  google.protobuf.BoolValue is_muted = 17 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "false" }]; // Is the incident muted/suppressed
+  repeated MetaLabel meta_labels = 18; // The Incident's current meta labels
+  google.protobuf.Duration duration = 19; // The Incident duration between created at and close time
+}
+
+
+message IncidentFieldOneOf {
+  oneof field {
+    google.protobuf.StringValue id = 1;
+    IncidentSeverity severity = 2;
+    google.protobuf.StringValue name = 3;
+    google.protobuf.Timestamp created_at = 4;
+    google.protobuf.Timestamp closed_at = 5;
+    IncidentState state = 6;
+    IncidentStatus status = 7;
+    google.protobuf.Timestamp last_state_update_time = 8;
+    google.protobuf.StringValue application_name = 9;
+    google.protobuf.StringValue subsystem_name = 10;
+    google.protobuf.Duration duration = 11;
+  }
+}
+message ContextualLabels {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ContextualLabels"
+      description: "Contextual labels for an incident"
+      required: ["field_name", "field_value"]
+    }
+  };
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_name\"" }];
+  google.protobuf.StringValue field_value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_value\"" }];
+}
+message GroupByValues {
+  oneof values {
+    IncidentFieldOneOf incident_field = 1;
+    ContextualLabels contextual_labels = 2;
+  }
+}
+// Represents and Incident Aggregation (group by)
+message IncidentAggregation {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentAggregation"
+      description: "An incident aggregation"
+      required: ["group_bys_value", "agg_state_count", "agg_status_count", "agg_severity_count", "agg_assignments_count", "first_created_at", "last_closed_at", "all_values_count", "list_incidents_id", "last_state_update_time", "agg_meta_labels_count"]
+    }
+  };
+  repeated GroupByValues group_bys_value = 1; // The Aggregation's group by fields and values
+  repeated IncidentStateCount agg_state_count = 2; // The Aggregation's count of states
+  repeated IncidentStatusCount agg_status_count = 3; // The Aggregation's count of statuses
+  repeated IncidentSeverityCount agg_severity_count = 4; // The Aggregation's count of severities
+  repeated IncidentAssignmentCount agg_assignments_count = 5; // The Aggregation's count of assignments
+  google.protobuf.Timestamp first_created_at = 6; // The Aggregation's first incident created time
+  google.protobuf.Timestamp last_closed_at = 7; // The Aggregation's last incident closed time
+  google.protobuf.UInt32Value all_values_count = 8; // The Aggregation's count of incidents
+  repeated google.protobuf.StringValue list_incidents_id = 9; // The Aggregation's list of incident's id
+  google.protobuf.Timestamp last_state_update_time = 10; // The Aggregation's last state update time
+  repeated IncidentMetaLabelsCount agg_meta_labels_count = 11; // The Aggregation's of meta labels
+}
+
+message IncidentMetaLabelsCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentMetaLabelsCount"
+      description: "An incident meta labels count"
+      required: ["meta_label", "count"]
+    }
+  };
+  MetaLabel meta_label = 1;
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentAssignmentCount {
+  UserDetails assigned_to = 1;
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentSeverityCount {
+  IncidentSeverity severity = 1;
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentStatusCount {
+  IncidentStatus status = 1;
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+
+message IncidentStateCount {
+  IncidentState state = 1;
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+
+enum IncidentFields {
+  INCIDENTS_FIELDS_UNSPECIFIED = 0;
+  INCIDENTS_FIELDS_ID = 1;
+  INCIDENTS_FIELDS_SEVERITY = 2;
+  INCIDENTS_FIELDS_NAME = 3;
+  INCIDENTS_FIELDS_CREATED_TIME = 4;
+  INCIDENTS_FIELDS_CLOSED_TIME = 5;
+  INCIDENTS_FIELDS_STATE = 6;
+  INCIDENTS_FIELDS_STATUS = 7;
+  INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME = 8;
+  INCIDENTS_FIELDS_APPLICATION_NAME = 9;
+  INCIDENTS_FIELDS_SUBSYSTEM_NAME = 10;
+  INCIDENTS_FIELDS_DURATION = 11;
+
+}

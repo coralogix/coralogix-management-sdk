@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/incident_event/incident_event.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+
+message IncidentEventExtended {
+  google.protobuf.StringValue cx_event_key = 1;
+  IncidentEvent incident_event = 2;
+  google.protobuf.Timestamp cx_event_timestamp = 4;
+  IncidentEventExtendedMetadata incident_event_extended_metadata = 5;
+}
+
+message IncidentEventExtendedMetadata {
+  IncidentSeverity incident_severity = 1;
+  google.protobuf.StringValue alert_id = 2;
+  IncidentState incident_state = 3;
+  google.protobuf.StringValue alert_name = 4;
+  IncidentEventAlertType alert_type = 5;
+  google.protobuf.BoolValue is_muted = 6;
+  IncidentStatus incident_status = 7;
+  repeated google.protobuf.StringValue alert_group_by_fields = 8;
+  repeated MetaLabel alert_labels = 9;
+  map<string, string> incident_permutation = 10;
+}
+
+enum IncidentEventAlertType {
+  INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED = 0;
+  INCIDENT_EVENT_ALERT_TYPE_METRIC = 1;
+  INCIDENT_EVENT_ALERT_TYPE_NEW_VALUE = 2;
+  INCIDENT_EVENT_ALERT_TYPE_RATIO = 3;
+  INCIDENT_EVENT_ALERT_TYPE_TIME_RELATIVE = 4;
+  INCIDENT_EVENT_ALERT_TYPE_UNIQUE_COUNT = 5;
+  INCIDENT_EVENT_ALERT_TYPE_TRACING = 6;
+  INCIDENT_EVENT_ALERT_TYPE_FLOW = 7;
+}
+

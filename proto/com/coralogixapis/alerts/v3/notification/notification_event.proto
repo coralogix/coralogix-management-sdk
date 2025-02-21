@@ -9,7 +9,6 @@ import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
 import "com/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto";
-import "com/coralogixapis/alerts/v3/alert_def.proto";
 
 message AlertNotificationEvent {
   google.protobuf.Timestamp timestamp = 1;

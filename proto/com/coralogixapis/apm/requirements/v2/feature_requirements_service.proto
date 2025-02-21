@@ -2,7 +2,7 @@ syntax = "proto3";
 package com.coralogixapis.apm.requirements.v2;
 
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/apm/common/v2/data_source.proto";
 import "com/coralogixapis/apm/requirements/v2/data_source_requirements.proto";
 import "com/coralogixapis/apm/requirements/v2/features.proto";
@@ -28,10 +28,10 @@ message ListFeatureRequirementsDataSourcesResponse {
 
 service FeatureRequirementsService {
   rpc ValidateFeatureRequirements (ValidateFeatureRequirementsRequest) returns (ValidateFeatureRequirementsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Validate Feature Requirements";
+     option (com.coralogix.common.v1.audit_log_description).description = "Validate Feature Requirements";
   };
 
   rpc ListFeatureRequirementsDataSources(ListFeatureRequirementsDataSourcesRequest) returns (ListFeatureRequirementsDataSourcesResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Feature Requirements Data Sources";
+     option (com.coralogix.common.v1.audit_log_description).description = "List Feature Requirements Data Sources";
   }
 }

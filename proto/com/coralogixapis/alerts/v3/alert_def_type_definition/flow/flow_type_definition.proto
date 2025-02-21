@@ -4,20 +4,43 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 
-message FlowType  {
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message FlowType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Flow Alert Type"
+            description: "Configuration for flow-based alerts with multiple stages"
+            required: ["stages"]
+        }
+    };
     repeated FlowStages stages = 1 ;
-    google.protobuf.BoolValue enforce_suppression = 2;
+    google.protobuf.BoolValue enforce_suppression = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
 }
 
 message FlowStages {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Flow Stages"
+            description: "Defines stages in a flow alert"
+            required: ["flow_stages", "timeframe_ms"]
+        }
+    };
     oneof flow_stages {
         FlowStagesGroups flow_stages_groups = 10;
     }
-    google.protobuf.Int64Value timeframe_ms = 3;
+    google.protobuf.Int64Value timeframe_ms = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
     TimeframeType timeframe_type = 4;
 }
 
 message FlowStagesGroups {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Flow Stages Groups"
+            description: "Groups of stages in a flow alert"
+            required: ["groups"]
+        }
+    };
     repeated FlowStagesGroup groups = 1;
 }
 
@@ -28,8 +51,15 @@ message FlowStagesGroup {
 }
 
 message FlowStagesGroupsAlertDefs {
-    google.protobuf.StringValue id = 1;
-    google.protobuf.BoolValue not = 2;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Flow Stages Groups Alert Defs"
+            description: "Alert definitions for a flow stage group"
+            required: ["id", "not"]
+        }
+    };
+    google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+    google.protobuf.BoolValue not = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
 }
 
 enum NextOp {

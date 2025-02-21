@@ -4,7 +4,7 @@ package com.coralogix.measurements.v1;
 
 import "google/protobuf/wrappers.proto";
 
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 import "com/coralogix/global_mapping/v1/data_source.proto";
 import "com/coralogix/global_mapping/v1/extracted_label.proto";
@@ -62,12 +62,12 @@ message GetHierarchyResponse{
 
 service MeasurementsService {
   rpc GetQueries(GetQueriesRequest)returns(GetQueriesResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Queries";
+     option (com.coralogix.common.v1.audit_log_description).description = "Get Queries";
   }
   rpc GetMeasurementsTable(GetMeasurementsTableRequest)returns(GetMeasurementsTableResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Measurement Table";
+     option (com.coralogix.common.v1.audit_log_description).description = "Get Measurement Table";
   }
   rpc GetHierarchy(GetHierarchyRequest) returns (GetHierarchyResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Hierarchy";
+     option (com.coralogix.common.v1.audit_log_description).description = "Get Hierarchy";
   }
 }

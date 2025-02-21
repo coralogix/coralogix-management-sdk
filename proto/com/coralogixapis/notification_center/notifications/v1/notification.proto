@@ -2,8 +2,6 @@ syntax = "proto3";
 
 package com.coralogixapis.notification_center.notifications.v1;
 
-import "google/protobuf/struct.proto";
-import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "com/coralogixapis/notification_center/common/v1/routing.proto";
 
 message NotificationTarget {

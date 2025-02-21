@@ -6,34 +6,119 @@ import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
 import "com/coralogix/enrichment/v1/enrichment_type.proto";
 import "com/coralogix/enrichment/v1/company_enrichment_settings.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
 package com.coralogix.enrichment.v1;
 
 message GetEnrichmentLimitRequest {}
 
 message GetEnrichmentLimitResponse {
-  uint32 limit = 1;
-  uint32 used = 2;
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Enrichment Limit"
+      description: "This response data structure represents the enrichments limit"
+      required: [
+        "limit",
+        "used"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
+
+  uint32 limit = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  uint32 used = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
 }
 
 message GetEnrichmentsRequest {}
 
 message GetEnrichmentsResponse {
+
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Enrichment Collection"
+      description: "This response data structure represents a collection of enrichments"
+      required: [
+        "enrichments"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
   repeated Enrichment enrichments = 1;
 }
 
 message AddEnrichmentsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Enrichments Creation Request"
+      description: "This response data structure represents a collection of enrichments"
+      required: [
+        "request_enrichments"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
   repeated EnrichmentRequestModel request_enrichments = 1;
 }
 
 message AddEnrichmentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Encrichments Creation Response"
+      description: "Response data structure for enrichments creation"
+      required: [
+        "enrichments"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
   repeated Enrichment enrichments = 1;
 }
 
 message RemoveEnrichmentsRequest {
-  repeated google.protobuf.UInt32Value enrichment_ids = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Encrichments Delettion Request"
+      description: "Request data structure for enrichments deletion"
+      required: [
+        "enrichment_ids"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
+  repeated google.protobuf.UInt32Value enrichment_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[1, 2, 3]" }];
 }
 
 message RemoveEnrichmentsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Encrichments Delettion Response"
+      description: "Response data structure for enrichments deletion"
+      required: [
+        "remaining_enrichments"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
   repeated Enrichment remaining_enrichments = 1;
 }
 
@@ -55,15 +140,38 @@ message GetCompanyEnrichmentSettingsResponse {
 }
 
 service EnrichmentService {
-  rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse);
+  rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse) {
+    option (google.api.http) = {
+      get: "/enrichments"
+    };
+  };
+  rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse) {
+    option (google.api.http) = {
+      post: "/enrichments"
+      body: "*"
+    };
+  };
 
-  rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse);
+  rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse) {
+    option (google.api.http) = {
+      delete: "/enrichments"
+    };
+  };
+  rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse) {
+    option (google.api.http) = {
+      get: "/enrichments/limit"
+    };
+  };
 
-  rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse);
-
-  rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse);
-
-  rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse);
-
-  rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse);
+  rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
+    option (google.api.http) = {
+      patch: "/enrichments:atomicOverwrite"
+      body: "*"
+    };
+  };
+  rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
+    option (google.api.http) = {
+      get: "/enrichments/settings"
+    };
+  };
 }

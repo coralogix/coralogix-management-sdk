@@ -19,4 +19,5 @@ enum ConnectorType {
   GENERIC_HTTPS = 2;
   PAGERDUTY = 3;
   AWS = 4;
+  IBM_EVENT_NOTIFICATIONS = 5;
 }

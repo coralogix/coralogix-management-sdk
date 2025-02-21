@@ -9,8 +9,16 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/m
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-message MetricThresholdType  {
+message MetricThresholdType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Metric Threshold Alert Type"
+            description: "Configuration for alerts based on metric threshold violations"
+            required: ["metric_source", "rules"]
+        }
+    };
     MetricFilter metric_filter = 1;
     repeated MetricThresholdRule rules = 2;
     UndetectedValuesManagement undetected_values_management = 3;
@@ -24,6 +32,13 @@ message MetricThresholdRule {
 }
 
 message MetricThresholdCondition {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Metric Threshold Condition"
+            description: "Defines conditions for metric threshold alerts"
+            required: ["threshold", "time_window"]
+        }
+    };
     google.protobuf.DoubleValue threshold = 1;
     google.protobuf.UInt32Value for_over_pct = 2;
     MetricTimeWindow of_the_last = 3;

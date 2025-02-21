@@ -26,28 +26,26 @@ service PresetsService {
 
   rpc DeleteCustomPreset(DeleteCustomPresetRequest) returns (DeleteCustomPresetResponse) {
     option (google.api.http) = {
-      delete: "/v1/notification-center/presets/custom/{id}"
+      delete: "/v1/notification-center/presets/custom/{identifier.user_facing_id}"
     };
   }
 
   rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/custom/{id}:defaultSet"
-      body: "id"
+      post: "/v1/notification-center/presets/custom/{identifier.user_facing_id}:defaultSet"
     };
     option deprecated = true;
   }
 
   rpc SetPresetAsDefault(SetPresetAsDefaultRequest) returns (SetPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/{id}:defaultSet"
-      body: "id"
+      post: "/v1/notification-center/presets/{identifier.user_facing_id}:defaultSet"
     };
   }
 
   rpc GetPreset(GetPresetRequest) returns (GetPresetResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets/{id}"
+      get: "/v1/notification-center/presets/{identifier.user_facing_id}"
     };
   }
 
@@ -107,14 +105,48 @@ message CreateCustomPresetResponse {
 }
 
 message ReplaceCustomPresetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Custom Preset Request"
+      description: "Request to replace an existing custom preset"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   Preset preset = 1;
 }
 
 message ReplaceCustomPresetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Custom Preset Response"
+      description: "Response containing the updated custom preset"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   Preset preset = 1;
 }
 
 message DeleteCustomPresetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Custom Preset Request"
+      description: "Request to delete a custom preset"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
   // removed deprecated_id
   reserved 1;
 
@@ -145,6 +177,18 @@ message SetCustomPresetAsDefaultResponse {
 }
 
 message SetPresetAsDefaultRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Preset As Default Request"
+      description: "Request to set custom or system preset as default"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
   PresetIdentifier identifier = 1;
 }
 
@@ -178,10 +222,32 @@ message ListPresetSummariesResponse {
 }
 
 message BatchGetPresetsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Presets Request"
+      description: "Request to get multiple presets by their ids"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   repeated string ids = 1;
 }
 
 message BatchGetPresetsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Presets Response"
+      description: "Response containing the requested presets and any IDs not found"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   map<string, Preset> presets = 1;
   repeated string not_found_ids = 2;
 }
@@ -196,6 +262,17 @@ message GetDefaultPresetSummaryResponse {
 }
 
 message GetSystemDefaultPresetSummaryRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get System Default Preset Summary Request"
+      description: "Returns the preset summary for the system default preset (i.e., not a user-selected default)"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
   ConnectorType connector_type = 1;
   string entity_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
 }

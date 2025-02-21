@@ -5,7 +5,23 @@ package com.coralogix.quota.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/quota/v1/enums.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message GetCompanyPoliciesRequest {
-  google.protobuf.BoolValue enabled_only = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Company Policies Request"
+      description: "This data structue is used to retrieve all company policies."
+      required: [
+      "enabled_only",
+      "source_type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
+  google.protobuf.BoolValue enabled_only = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
   optional SourceType source_type = 2;
 }

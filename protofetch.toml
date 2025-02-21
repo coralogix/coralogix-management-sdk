@@ -3,11 +3,11 @@ proto_out_dir = './proto'
 
 [rules-api-protobuf]
 url = 'github.com/coralogix/rules-api-protobuf'
-revision = 'v0.17.1'
+revision = 'v0.17.2'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.11"
+revision = "v0.5.12"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
@@ -37,7 +37,7 @@ allow_policies = [
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
-revision = 'v0.0.8'
+revision = 'v0.0.9'
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
@@ -66,20 +66,16 @@ revision = "v0.1.20"
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.5.7"
+revision = "v0.5.7.2"
 
 [cx-api-tags]
 url = 'github.com/coralogix/cx-api-tags'
-revision = 'v0.0.6'
+revision = 'v0.0.7'
 
 [cx-api-organisations]
 url = 'github.com/coralogix/cx-api-organisations'
 allow_policies = ["/com/coralogixapis/aaa/*"]
 revision = "v0.1.32"
-
-[cx-api-service-catalog]
-url = 'github.com/coralogix/cx-api-service-catalog'
-revision = "v0.3.110"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -87,12 +83,12 @@ revision = "v1.0.9"
 
 [cx-api-scopes-service]
 url = 'github.com/coralogix/cx-api-scopes'
-allow_policies = ["/com/coralogixapis/*"]
-revision = 'v0.0.1'
+allow_policies = ["src/com/coralogixapis/*"]
+revision = 'v0.0.2'
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
-revision = 'v2.0.6'
+revision = 'v2.0.7'
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
@@ -132,7 +128,7 @@ allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.5.0"
+revision = "v0.5.1"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/*",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",
@@ -172,3 +168,7 @@ allow_policies = [
     "/com/coralogix/schemastore/v1/tracing_fields.proto",
     "com/coralogix/schemastore/v1/common.proto",
 ]
+
+[cx-api-incidents]
+url = 'github.com/coralogix/cx-api-incidents'
+revision = "v1.0.1"
