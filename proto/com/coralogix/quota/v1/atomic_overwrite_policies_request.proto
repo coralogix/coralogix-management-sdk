@@ -10,29 +10,100 @@ import "com/coralogix/quota/v1/log_rules.proto";
 import "com/coralogix/quota/v1/span_rules.proto";
 
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 // In an atomic operation delete all existing log policies and create the provided list by order
 message AtomicOverwriteLogPoliciesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Atomic Overwrite Log Policies Request"
+      description: "In an atomic operation delete all existing log policies and create the provided list by order."
+      required: [
+        "policies"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   repeated CreateLogPolicyRequest policies = 1;
 }
 
 // In an atomic operation delete all existing span policies and create the provided list by order
 message AtomicOverwriteSpanPoliciesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Atomic Overwrite Span Policies Request"
+      description: "In an atomic operation delete all existing span policies and create the provided list by order."
+      required: [
+        "policies"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   repeated CreateSpanPolicyRequest policies = 1;
 }
 
 message CreateSpanPolicyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Span Policy Request"
+      description: "This data structue is used to create a new span policy."
+      required : [
+        "policy",
+        "span_rules"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   CreateGenericPolicyRequest policy = 1;
   SpanRules span_rules = 2;
 }
 
 message CreateLogPolicyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Log Policy Request"
+      description: "This data structue is used to create a new log policy."
+      required : [
+        "policy",
+        "log_rules"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   CreateGenericPolicyRequest policy = 1;
   LogRules log_rules = 2;
 }
 
 message CreateGenericPolicyRequest {
-  google.protobuf.StringValue name = 1;
-  google.protobuf.StringValue description = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Generic Policy Request"
+      description: "This data structue is used to create a new policy."
+      required : [
+        "name",
+        "description",
+        "priority"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy\"" }];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy Description\"" }];
   Priority priority = 3;
   optional Rule application_rule = 4;
   optional Rule subsystem_rule = 5;

@@ -6,8 +6,16 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_condition_type.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message TracingThresholdType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Tracing Threshold Alert Type"
+            description: "Configuration for alerts based on trace count thresholds"
+            required: ["tracing_filter", "rules"]
+        }
+    };
     TracingFilter tracing_filter = 1;
     repeated TracingThresholdRule rules = 2;
     repeated google.protobuf.StringValue notification_payload_filter = 3;
@@ -17,6 +25,13 @@ message TracingThresholdRule {
 }
 
 message TracingThresholdCondition {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Tracing Threshold Condition"
+            description: "Defines conditions for trace threshold alerts"
+            required: ["threshold", "time_window"]
+        }
+    };
     google.protobuf.DoubleValue span_amount = 1;
     TracingTimeWindow time_window = 2;
     TracingThresholdConditionType condition_type = 3;

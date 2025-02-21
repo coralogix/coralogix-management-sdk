@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_acknowledge.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_close.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_administrative.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_operational.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_type.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_type.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto";
+import "google/protobuf/wrappers.proto";
+
+message IncidentEvent {
+  google.protobuf.StringValue id = 1;
+  IncidentEventType incident_event_type = 2;
+  oneof incident_event_payload {
+    IncidentEventSnoozeIndicator snooze_indicator = 200;
+    IncidentEventAssign assignment = 201;
+    IncidentEventUnassign unassign = 205;
+    IncidentEventUpsertState upsert_state = 202;
+    IncidentEventAcknowledge acknowledge = 203;
+    IncidentEventClose close = 204;
+  }
+  OriginatorType originator_type = 3;
+  oneof originator {
+    IncidentEventOriginatorAdministrative administrative_event = 100;
+    IncidentEventOriginatorOperational operational_event = 101;
+  }
+}

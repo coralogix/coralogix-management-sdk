@@ -2,7 +2,16 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message LogsNewValueTimeWindow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs New Value Time Window"
+      description: "Time window configuration for new value alerts"
+      required: ["type"]
+    }
+  };
   oneof type {
     LogsNewValueTimeWindowValue logs_new_value_time_window_specific_value = 1;
   }

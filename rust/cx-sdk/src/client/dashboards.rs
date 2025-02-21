@@ -101,6 +101,7 @@ impl DashboardsClient {
             CreateDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
+                is_locked: None,
             },
             &self.teams_level_metadata_map,
         );
@@ -132,6 +133,7 @@ impl DashboardsClient {
             ReplaceDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
+                is_locked: None,
             },
             &self.teams_level_metadata_map,
         );

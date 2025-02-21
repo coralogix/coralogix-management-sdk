@@ -9,17 +9,39 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 // Public API that allows managing global routers
 service GlobalRoutersService {
-  rpc CreateGlobalRouter(CreateGlobalRouterRequest) returns (CreateGlobalRouterResponse) {}
+  rpc CreateGlobalRouter(CreateGlobalRouterRequest) returns (CreateGlobalRouterResponse) {
+      option (google.api.http) = {
+          post: "/v1/notification-center/routers"
+          body: "router"
+      };
+  }
 
   rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {}
 
-  rpc CreateOrReplaceGlobalRouter(CreateOrReplaceGlobalRouterRequest) returns (CreateOrReplaceGlobalRouterResponse) {}
+  rpc CreateOrReplaceGlobalRouter(CreateOrReplaceGlobalRouterRequest) returns (CreateOrReplaceGlobalRouterResponse) {
+      option (google.api.http) = {
+          put: "/v1/notification-center/routers"
+          body: "router"
+      };
+  }
 
-  rpc DeleteGlobalRouter(DeleteGlobalRouterRequest) returns (DeleteGlobalRouterResponse) {}
+  rpc DeleteGlobalRouter(DeleteGlobalRouterRequest) returns (DeleteGlobalRouterResponse) {
+      option (google.api.http) = {
+          delete: "/v1/notification-center/routers/{identifier.user_facing_id}"
+      };
+  }
 
-  rpc GetGlobalRouter(GetGlobalRouterRequest) returns (GetGlobalRouterResponse) {}
+  rpc GetGlobalRouter(GetGlobalRouterRequest) returns (GetGlobalRouterResponse) {
+      option (google.api.http) = {
+          get: "/v1/notification-center/routers/{identifier.user_facing_id}"
+      };
+  }
 
-  rpc ListGlobalRouters(ListGlobalRoutersRequest) returns (ListGlobalRoutersResponse) {}
+  rpc ListGlobalRouters(ListGlobalRoutersRequest) returns (ListGlobalRoutersResponse) {
+      option (google.api.http) = {
+          get: "/v1/notification-center/routers"
+      };
+  }
 
   rpc BatchGetGlobalRouters(BatchGetGlobalRoutersRequest) returns (BatchGetGlobalRoutersResponse) {}
 }
@@ -126,17 +148,6 @@ message DeleteGlobalRouterRequest {
     routing.GlobalRouterIdentifier identifier = 1;
 }
 message DeleteGlobalRouterResponse {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Delete Global Router Response"
-            description: "Response from deleting a global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
 }
 
 message GetGlobalRouterRequest {
