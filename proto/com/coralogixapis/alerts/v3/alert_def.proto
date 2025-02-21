@@ -20,14 +20,35 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_th
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 
 
 /**
  * Represents An Existing or Created Alert Definition
  */
 message AlertDef {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert Definition"
+      description: "This data structure represents an alert definition"
+      required: [
+        "alert_def_properties",
+        "id",
+        "alert_version_id",
+        "created_time",
+        "updated_time"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
   AlertDefProperties alert_def_properties = 1;
-  google.protobuf.StringValue id = 2; // This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+
+  // This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+  google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
   google.protobuf.StringValue alert_version_id = 20; // the old alertId
   google.protobuf.Timestamp created_time = 3;
   google.protobuf.Timestamp updated_time = 4;
@@ -37,9 +58,16 @@ message AlertDef {
  * Represents The non generated alert definition properties (the ones that are set by the user)
  */
 message AlertDefProperties {
-  google.protobuf.StringValue name = 1;
-  google.protobuf.StringValue description = 2;
-  google.protobuf.BoolValue enabled = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert Definition Properties"
+      description: "User-configurable properties of an alert definition"
+      required: ["name", "enabled", "type", "type_definition"]
+    }
+  };
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Alert\"" }];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Alert description\"" }];
+  google.protobuf.BoolValue enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
   AlertDefPriority priority = 4;
   oneof schedule {
     ActivitySchedule active_on = 5;

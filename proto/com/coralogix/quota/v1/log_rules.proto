@@ -4,6 +4,21 @@ package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/enums.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message LogRules {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log Rules"
+      description: "Log rules for a policy."
+      required: [
+        "severities"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   repeated Severity severities = 1;
 }

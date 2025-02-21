@@ -4,6 +4,21 @@ package com.coralogix.quota.v1;
 
 import "google/protobuf/wrappers.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message DeletePolicyRequest {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Policy Request"
+      description: "This data structue is used to delete a policy by its ID."
+      required: [
+        "id"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"id\"" }];
 }

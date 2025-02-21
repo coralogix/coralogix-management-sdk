@@ -99,6 +99,7 @@ mod tests {
                             )),
                         }),
                     }],
+                    router: None,
                 }),
                 entity_labels: [
                     ("alert_type".to_string(), "security".to_string()),

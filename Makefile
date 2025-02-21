@@ -28,4 +28,6 @@ proto-renew:
 	protofetch fetch
 	cp -a proto/src/** proto/
 	rm -rf proto/src
-	cd ./go; make proto-clean; make proto-compile
+	rm -rf proto/deps
+
+pull-and-build: proto-renew build

@@ -6,25 +6,25 @@ import "google/protobuf/wrappers.proto";
 
 import "com/coralogix/tags/v1/tag.proto";
 import "com/coralogix/tags/v1/tag_type.proto";
-import "com/coralogix/tags/v1/audit_log.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/struct.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 
 
 service TagsExternalService {
   rpc CreateExternalTag(CreateExternalTagRequest) returns (CreateExternalTagResponse) {
-    option (audit_log_description).description = "create external tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "create external tag";
     option (google.api.http) = {
-      post: "/api/v1/external/tags/"
+      post: "/api/v1/external/tags"
       body: "*"
     };
   }
 
   rpc AddExternalTag(AddExternalTagRequest) returns (AddExternalTagResponse) {
-    option (audit_log_description).description = "add external tag with get";
+    option (com.coralogix.common.v1.audit_log_description).description = "add external tag with get";
     option (google.api.http) = {
       get: "/api/v1/external/tags/add"
       additional_bindings: [
@@ -41,7 +41,7 @@ service TagsExternalService {
   }
 
   rpc CreateBitbucketTag(CreateBitbucketTagRequest) returns (CreateBitbucketTagResponse) {
-    option (audit_log_description).description = "create external bitbucket tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "create external bitbucket tag";
     option (google.api.http) = {
       post: "/api/v1/external/bitbucket"
       body: "body"
@@ -54,7 +54,7 @@ service TagsExternalService {
     };
   }
   rpc CreateTfsTag(CreateTfsTagRequest) returns (CreateTfsTagResponse) {
-    option (audit_log_description).description = "create external tfs tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "create external tfs tag";
     option (google.api.http) = {
       post: "/api/v1/external/tfs"
       body: "body"
@@ -62,7 +62,7 @@ service TagsExternalService {
     };
   }
   rpc CreateGitlabTag(CreateGitlabTagRequest) returns (CreateGitlabTagResponse) {
-    option (audit_log_description).description = "create external gitlab tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "create external gitlab tag";
     option (google.api.http) = {
       post: "/api/v1/external/gitlab"
       body: "body"

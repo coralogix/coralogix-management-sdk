@@ -2,7 +2,7 @@ syntax = "proto3";
 
 import "google/protobuf/wrappers.proto";
 
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 import "com/coralogixapis/apm/queries/k8s/v1/cluster_filters.proto";
 import "com/coralogixapis/apm/queries/k8s/v1/cluster_options.proto";
@@ -61,22 +61,22 @@ message ListNamesResponse{
 
 service ClustersService {
     rpc ListClusters (ListClustersRequest) returns (ListClustersResponse){
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List Available Clusters";
+         option (com.coralogix.common.v1.audit_log_description).description = "List Available Clusters";
     };
 
     rpc ListClusterStats (ListClusterStatsRequest) returns (ListClusterStatsResponse){
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Returns the cluster stats metrics";
+         option (com.coralogix.common.v1.audit_log_description).description = "Returns the cluster stats metrics";
     };
     
     rpc ListClusterTopK (ListClusterTopKRequest) returns (ListClusterTopKResponse) {
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get top k cluster";
+         option (com.coralogix.common.v1.audit_log_description).description = "Get top k cluster";
     };
 
     rpc ListClusterMetrics (ListClusterMetricsRequest) returns (ListClusterMetricsResponse){
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get cluster metrics";
+         option (com.coralogix.common.v1.audit_log_description).description = "Get cluster metrics";
     };
 
     rpc ListNames(ListNamesRequest) returns (ListNamesResponse){
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List names of objects in widget";
+         option (com.coralogix.common.v1.audit_log_description).description = "List names of objects in widget";
     }
 }

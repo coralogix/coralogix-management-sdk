@@ -4,7 +4,16 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message UndetectedValuesManagement {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Undetected Values Management"
+            description: "Configuration for handling undetected values in alerts"
+            required: ["auto_retire_ratio"]
+        }
+    };
     google.protobuf.BoolValue trigger_undetected_values = 1;
     optional AutoRetireTimeframe auto_retire_timeframe = 2;
 }

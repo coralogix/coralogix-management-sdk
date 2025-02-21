@@ -8,19 +8,43 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_t
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto";
 
-message LogsAnomalyType  {
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message LogsAnomalyType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Anomaly Alert Type"
+            description: "Configuration for alerts triggered by anomalous log patterns"
+            required: ["logs_filter", "rules"]
+        }
+    };
     LogsFilter logs_filter = 1;
     repeated LogsAnomalyRule rules = 2;
-    repeated google.protobuf.StringValue notification_payload_filter = 3;
-    google.protobuf.Int32Value evaluation_delay_ms = 4;
+    repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
+    google.protobuf.Int32Value evaluation_delay_ms = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
     AnomalyAlertSettings anomaly_alert_settings = 5;
 }
+
 message LogsAnomalyRule {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Anomaly Rule"
+            description: "Defines a rule for detecting log anomalies"
+            required: ["condition"]
+        }
+    };
     LogsAnomalyCondition condition = 1;
 }
 
 message LogsAnomalyCondition {
-    google.protobuf.DoubleValue minimum_threshold = 1;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Anomaly Condition"
+            description: "Defines conditions for detecting log anomalies"
+            required: ["minimum_threshold", "time_window"]
+        }
+    };
+    google.protobuf.DoubleValue minimum_threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
     LogsTimeWindow time_window = 2;
     LogsAnomalyConditionType condition_type = 3;
 }

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.notification_center.routing;
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 /**
 * This file contains public models used across the notification sources APIs.
@@ -11,14 +12,42 @@ import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
  */
 
 message RoutingRule {
-  string condition = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Routing Rule"
+      description: "Defines routing rule for notifications"
+      required: ["condition", "targets"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
+  //Condition template that is rendered to true or false and used to determine if the rule should be applied
+  string condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alertDef.priority == 'P3'\"" }];
+  //List of targets to send the notification to
   repeated RoutingTarget targets = 2;
   map<string, string> custom_details = 3;
   optional string name = 4;
 }
 
 message RoutingTarget {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Routing Target"
+      description: "Defines routing target for notifications"
+      required: ["connector_id"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
+  //Connector ID to send the notification to
   string connector_id = 1;
+  // Preset to use for rendering notification content, default preset is used if not provided
   optional string preset_id = 2;
   optional SourceOverrides config_overrides = 3;
   map<string, string> custom_details = 4;

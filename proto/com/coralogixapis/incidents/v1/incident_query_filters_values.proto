@@ -1,0 +1,106 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/filter_operators.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "com/coralogixapis/incidents/v1/incident_state.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message AssigneeWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "AssigneeWithCount"
+      description: "An assignee with count"
+      required: ["assignee", "count"]
+    }
+  };
+  google.protobuf.StringValue assignee = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"assignee\"" }];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentStatusWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentStatusWithCount"
+      description: "An incident status with count"
+      required: ["status", "count"]
+    }
+  };
+  IncidentStatus status = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_status\"" }];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentStateWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentStateWithCount"
+      description: "An incident state with count"
+      required: ["state", "count"]
+    }
+  };
+  IncidentState state = 1;
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentSeverityWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentSeverityWithCount"
+      description: "An incident severity with count"
+      required: ["severity", "count"]
+    }
+  };
+  IncidentSeverity severity = 1;
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentMetaLabelsWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentMetaLabelsWithCount"
+      description: "An incident meta labels with count"
+      required: ["meta_label", "count"]
+    }
+  };
+  MetaLabel meta_label = 1;
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}
+message IncidentQueryFiltersValues {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IncidentQueryFiltersValues"
+      description: "An incident query filters values"
+      required: ["assignee_with_count", "status_with_count", "state_with_count", "severity_with_count", "contextual_labels", "meta_labels_with_count", "meta_labels_op"]
+    }
+  };
+  repeated AssigneeWithCount assignee_with_count = 1;
+  repeated IncidentStatusWithCount status_with_count = 2;
+  repeated IncidentStateWithCount state_with_count = 3;
+  repeated IncidentSeverityWithCount severity_with_count = 4;
+  map<string, ContextualLabelValuesWithCount> contextual_labels = 5;
+  repeated IncidentMetaLabelsWithCount meta_labels_with_count = 6;
+  FilterOperator meta_labels_op = 7;
+}
+
+message ContextualLabelValuesWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ContextualLabelValuesWithCount"
+      description: "A contextual label values with count"
+      required: ["values_with_count"]
+    }
+  };
+  repeated ContextualLabelValueWithCount values_with_count = 1;
+}
+
+message ContextualLabelValueWithCount {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ContextualLabelValueWithCount"
+      description: "A contextual label value with count"
+      required: ["contextual_label_value", "count"]
+    }
+  };
+  google.protobuf.StringValue contextual_label_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"contextual_label_value\"" }];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+}

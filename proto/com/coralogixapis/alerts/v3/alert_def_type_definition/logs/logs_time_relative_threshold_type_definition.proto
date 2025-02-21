@@ -8,22 +8,38 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-message LogsTimeRelativeThresholdType  {
+message LogsTimeRelativeThresholdType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Time Relative Threshold Alert Type"
+            description: "Configuration for alerts comparing log counts between different time periods"
+            required: ["logs_filter", "rules"]
+        }
+    };
     LogsFilter logs_filter = 1;
     repeated LogsTimeRelativeRule rules = 2;
-    google.protobuf.BoolValue ignore_infinity = 3;
-    repeated google.protobuf.StringValue notification_payload_filter = 4;
+    google.protobuf.BoolValue ignore_infinity = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+    repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
     UndetectedValuesManagement undetected_values_management = 5;
-    google.protobuf.Int32Value evaluation_delay_ms = 6;
+    google.protobuf.Int32Value evaluation_delay_ms = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
 }
+
 message LogsTimeRelativeRule {
     LogsTimeRelativeCondition condition = 1;
     AlertDefOverride override = 2;
 }
 
 message LogsTimeRelativeCondition {
-    google.protobuf.DoubleValue threshold = 1;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Time Relative Condition"
+            description: "Defines conditions for time-relative comparison alerts"
+            required: ["threshold", "compared_to"]
+        }
+    };
+    google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
     LogsTimeRelativeComparedTo compared_to = 2;
     LogsTimeRelativeConditionType condition_type  = 4;
 }

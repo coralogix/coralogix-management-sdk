@@ -9,59 +9,51 @@ import "com/coralogix/rules/v1/rule_group.proto";
 import "com/coralogix/rules/v1/rule_matcher.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
-
-message AuditLogDescription {
-  optional string description = 1;
-}
-
-extend google.protobuf.MethodOptions {
-  AuditLogDescription audit_log_description = 5000;
-}
+import "com/coralogix/common/v1/audit_log.proto";
 
 service RuleGroupsService {
   rpc GetRuleGroup(GetRuleGroupRequest) returns (GetRuleGroupResponse) {
-    option (audit_log_description).description = "get rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "get rule group";
     option (google.api.http) = {
       get: "/api/v1/rulegroups/{group_id}"
     };
   }
   rpc ListRuleGroups(ListRuleGroupsRequest) returns (ListRuleGroupsResponse) {
-    option (audit_log_description).description = "get all rule groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "get all rule groups";
     option (google.api.http) = {
       get: "/api/v1/rulegroups"
     };
   }
   rpc CreateRuleGroup(CreateRuleGroupRequest) returns (CreateRuleGroupResponse) {
-    option (audit_log_description).description = "create rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "create rule group";
     option (google.api.http) = {
-      post: "/api/v1/rulegroups/"
+      post: "/api/v1/rulegroups"
       body: "*"
     };
   }
   rpc UpdateRuleGroup(UpdateRuleGroupRequest) returns (UpdateRuleGroupResponse) {
-    option (audit_log_description).description = "update rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "update rule group";
     option (google.api.http) = {
       put: "/api/v1/rulegroups/{group_id}"
       body: "rule_group"
     };
   }
   rpc DeleteRuleGroup(DeleteRuleGroupRequest) returns (DeleteRuleGroupResponse) {
-    option (audit_log_description).description = "delete rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "delete rule group";
     option (google.api.http) = {
       delete: "/api/v1/rulegroups/{group_id}"
     };
   }
 
   rpc BulkDeleteRuleGroup(BulkDeleteRuleGroupRequest) returns (BulkDeleteRuleGroupResponse) {
-    option (audit_log_description).description = "bulk delete rule groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "bulk delete rule groups";
     option (google.api.http) = {
       delete: "/api/v1/rulegroups"
-      body: "group_ids"
     };
   }
 
   rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse){
-    option (audit_log_description).description = "get rule mapping";
+    option (com.coralogix.common.v1.audit_log_description).description = "get rule mapping";
     option (google.api.http) = {
       post: "/api/v1/rulegroup-mapping"
       body: "*"
@@ -69,7 +61,7 @@ service RuleGroupsService {
   }
 
   rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse){
-    option (audit_log_description).description = "get company usage with limits";
+    option (com.coralogix.common.v1.audit_log_description).description = "get company usage with limits";
     option (google.api.http) = {
       post: "/api/v1/rulegroups/company-limits"
       body: "*"

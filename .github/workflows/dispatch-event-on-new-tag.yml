@@ -1,0 +1,18 @@
+# In coralogix-management-sdk repository
+name: "Notify OpenAPI Facade of New Tag"
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  notify-openapi-facade:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_READER_TOKEN }}
+          repository: coralogix/openapi-facade
+          event-type: sdk-tag-created
+          client-payload: '{"tag": "${{ github.ref_name }}"}'

@@ -1,8 +1,0 @@
-syntax = "proto3";
-package com.coralogixapis.service_catalog.v1;
-
-enum Catalog{
-  CATALOG_UNSPECIFIED = 0;
-  SERVICE_CATALOG = 1;
-  DATABASE_CATALOG = 2;
-}

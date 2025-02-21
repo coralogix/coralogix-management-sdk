@@ -21,14 +21,34 @@ mod tests {
         auth::AuthContext,
         client::{
             contextual_data_integrations::{
-                ContextualDataIntegrationsClient, GenericIntegrationParameters,
-                IntegrationMetadata, SpecificData,
+                ContextualDataIntegrationsClient,
+                GenericIntegrationParameters,
+                IntegrationMetadata,
+                SpecificData,
             },
-            integrations::{IntegrationsClient, Parameter, StringList, TestResult, Value},
+            integrations::{
+                IntegrationsClient,
+                Parameter,
+                StringList,
+                TestResult,
+                Value,
+            },
             webhooks::{
-                self, AwsEventBridgeConfig, Config, DemistoConfig, EmailGroupConfig,
-                GenericWebhookConfig, JiraConfig, OpsgenieConfig, PagerDutyConfig, SendLogConfig,
-                SlackConfig, WebhookType, WebhooksClient, generic_webhook_config, slack_config,
+                self,
+                AwsEventBridgeConfig,
+                Config,
+                DemistoConfig,
+                EmailGroupConfig,
+                GenericWebhookConfig,
+                JiraConfig,
+                OpsgenieConfig,
+                PagerDutyConfig,
+                SendLogConfig,
+                SlackConfig,
+                WebhookType,
+                WebhooksClient,
+                generic_webhook_config,
+                slack_config,
             },
         },
     };
@@ -324,7 +344,6 @@ mod tests {
             .unwrap();
 
         let integration_id = created_integration.integration_id.unwrap();
-
 
         // List integrations
         let integrations = client.list(true).await.unwrap().integrations;

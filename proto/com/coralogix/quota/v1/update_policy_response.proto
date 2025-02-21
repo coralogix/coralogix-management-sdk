@@ -4,6 +4,21 @@ package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/policy.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message UpdatePolicyResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Policy Response"
+      description: "This data structue is obtained when updating a policy."
+      required: [
+        "policy"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
   Policy policy = 1;
 }

@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+enum UpsertIncidentStateType {
+  UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED = 0;
+  UPSERT_INCIDENT_STATE_TYPE_TRIGGERED = 1;
+  UPSERT_INCIDENT_STATE_TYPE_RESOLVED = 2;
+}
