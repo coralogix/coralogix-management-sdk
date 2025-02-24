@@ -1,0 +1,35 @@
+syntax = "proto3";
+package com.coralogixapis.apm.requirements.v2;
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/apm/common/v2/data_source.proto";
+import "com/coralogixapis/apm/requirements/v2/data_source_requirements.proto";
+import "com/coralogixapis/apm/requirements/v2/features.proto";
+
+
+message ValidateFeatureRequirementsInternalRequest {
+  Feature feature = 1;
+  repeated com.coralogixapis.apm.common.v2.DataSource data_sources = 2;
+}
+
+message ValidateFeatureRequirementsInternalResponse {
+  repeated DataSourceRequirements requirements = 1;
+}
+
+message ListFeatureRequirementsInternalDataSourcesRequest {
+  Feature feature = 1;
+}
+
+message ListFeatureRequirementsInternalDataSourcesResponse {
+  repeated com.coralogixapis.apm.common.v2.DataSource data_sources = 1;
+}
+
+service FeatureRequirementsInternalService {
+  rpc ValidateFeatureRequirementsInternal (ValidateFeatureRequirementsInternalRequest) returns (ValidateFeatureRequirementsInternalResponse){
+     option (com.coralogix.common.v1.audit_log_description).description = "Validate Feature Requirements";
+  };
+
+  rpc ListFeatureRequirementsInternalDataSources(ListFeatureRequirementsInternalDataSourcesRequest) returns (ListFeatureRequirementsInternalDataSourcesResponse){
+     option (com.coralogix.common.v1.audit_log_description).description = "List Feature Requirements Data Sources";
+  }
+}

@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message AlertDefIncidentSettings {
+  oneof retriggering_period {
+    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  }
+  NotifyOn notify_on = 2;
+}
+
+message AlertDefNotificationGroup {
+  repeated google.protobuf.StringValue group_by_keys = 1;
+  repeated AlertDefWebhooksSettings webhooks = 2;
+  repeated NotificationDestination destinations = 3;
+  optional NotificationRouter router = 4;
+}
+
+message AlertDefWebhooksSettings {
+  oneof retriggering_period {
+    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  }
+   optional NotifyOn notify_on = 1;
+   IntegrationType integration = 2;
+}
+
+message IntegrationType {
+  oneof integration_type {
+    google.protobuf.UInt32Value integration_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "123" }];
+    Recipients recipients = 3;
+  }
+}
+
+message Recipients {
+  repeated google.protobuf.StringValue emails = 1;
+}

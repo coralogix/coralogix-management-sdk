@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message LogsNewValueTimeWindow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs New Value Time Window"
+      description: "Time window configuration for new value alerts"
+      required: ["type"]
+    }
+  };
+  oneof type {
+    LogsNewValueTimeWindowValue logs_new_value_time_window_specific_value = 1;
+  }
+}
+
+enum LogsNewValueTimeWindowValue {
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED = 0;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_24 = 1;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_48 = 2;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_72 = 3;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_WEEK_1 = 4;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTH_1 = 5;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_2 = 6;
+  LOGS_NEW_VALUE_TIME_WINDOW_VALUE_MONTHS_3 = 7;
+}

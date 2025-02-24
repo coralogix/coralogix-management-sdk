@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message LogsNewValueType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs New Value Alert Type"
+            description: "Configuration for alerts triggered by new values appearing in logs"
+            required: ["logs_filter", "rules"]
+        }
+    };
+    LogsFilter logs_filter = 1;
+    repeated LogsNewValueRule rules = 2;
+    repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
+}
+message LogsNewValueRule {
+    LogsNewValueCondition condition = 1;
+}
+message LogsNewValueCondition {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs New Value Condition"
+            description: "Defines conditions for detecting new values in logs"
+            required: ["keypath_to_track", "time_window"]
+        }
+    };
+    google.protobuf.StringValue keypath_to_track = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"metadata.field\"" }];
+    LogsNewValueTimeWindow time_window = 2;
+}

@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message LogsUniqueCountType {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Unique Count Alert Type"
+            description: "Configuration for alerts based on unique value counts in logs"
+            required: ["logs_filter", "rules", "unique_count_keypath"]
+        }
+    };
+    LogsFilter logs_filter = 1;
+    repeated LogsUniqueCountRule rules = 2;
+    repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
+    google.protobuf.Int64Value max_unique_count_per_group_by_key = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
+    google.protobuf.StringValue unique_count_keypath = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"unique_count\"" }];
+}
+
+message LogsUniqueCountRule {
+    LogsUniqueCountCondition condition = 1;
+}
+
+message LogsUniqueCountCondition {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+            title: "Logs Unique Count Condition"
+            description: "Defines conditions for unique count alerts"
+            required: ["max_unique_count", "time_window"]
+        }
+    };
+    google.protobuf.Int64Value max_unique_count = 2;
+    LogsUniqueValueTimeWindow time_window = 3;
+}

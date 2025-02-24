@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.quota.v1;
-
-import "com/coralogix/quota/v1/log_meta_field_values.proto";
-
-message BulkTestLogPoliciesRequest {
-  repeated LogMetaFieldsValues meta_fields_values_list = 1;
-}

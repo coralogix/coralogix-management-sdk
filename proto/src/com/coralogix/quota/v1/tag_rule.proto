@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message TagRule {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Tag Rule"
+      description: "Tag rule for a policy."
+      required: [
+        "rule_type_id",
+        "tag_name",
+        "tag_value"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
+  RuleTypeId rule_type_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"rule_type_id\"" }];
+  google.protobuf.StringValue tag_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_name\"" }];
+  google.protobuf.StringValue tag_value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_value\"" }];
+}

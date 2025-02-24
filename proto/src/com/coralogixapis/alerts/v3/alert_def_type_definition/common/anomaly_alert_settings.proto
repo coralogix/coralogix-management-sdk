@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+import "google/protobuf/wrappers.proto";
+
+message AnomalyAlertSettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Anomaly Alert Settings"
+      description: "Common settings for anomaly-based alerts"
+      required: ["percentage_of_deviation"]
+    }
+  };
+  google.protobuf.FloatValue percentage_of_deviation = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
+}

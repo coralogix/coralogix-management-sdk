@@ -1,27 +1,64 @@
 syntax = "proto3";
 package com.coralogix.catalog.v1;
 
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogix/catalog/v1/common.proto";
 import "com/coralogix/catalog/v1/service.proto";
 import "com/coralogix/catalog/v1/service_query.proto";
-import "google/protobuf/wrappers.proto";
 import "com/coralogix/schemastore/v1/tracing_fields.proto";
-import "com/coralogixapis/service_catalog/v1/apm_source.proto";
 import "com/coralogixapis/alerts/v3/alert_def.proto";
 import "com/coralogixapis/apm/common/v2/alert_meta_label.proto";
-import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "com/coralogixapis/apm/common/v2/audit_log.proto";
 import "com/coralogixapis/apm/widgets/v1/stat.proto";
+import "com/coralogixapis/service_catalog/v1/apm_source.proto";
+import "com/coralogixapis/service_catalog/v1/repeated_widgets.proto";
+import "google/protobuf/wrappers.proto";
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/http.proto";
 
 message GetServicesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Services Request"
+      description: "This data structure represents a request to Get Services."
+      required: [
+        "query"
+      ]
+    }
+    external_docs: {}
+  };
   ServiceQuery query = 1;
 }
 
 message GetServicesResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Services Response"
+      description: "This data structure represents a response to Get Services."
+      required: [
+        "query"
+      ]
+    }
+    external_docs: {}
+  };
   repeated Service services = 1;
 }
 
 message GetServiceRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Request"
+      description: "This data structure represents a request to Get Service."
+      required: [
+        "service_id",
+        "service_name",
+        "time_range"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_id = 1;
   google.protobuf.StringValue service_name = 2;
   TimeRange time_range = 3;
@@ -29,21 +66,59 @@ message GetServiceRequest {
 }
 
 message GetServiceResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Response"
+      description: "This data structure represents a response to Get Service."
+      required: []
+    }
+    external_docs: {}
+  };
   Service service = 1;
 }
 
 message UpdateServiceCatalogFiltersRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Service Catalog Filters Request"
+      description: "This data structure represents a request to Update Service Catalog Filters."
+      required: [
+        "service_catalog_filters",
+        "apm_source"
+      ]
+    }
+    external_docs: {}
+  };
   repeated ApmFilter service_catalog_filters = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
   repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 3;
 }
 
 message UpdateServiceCatalogFiltersResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update Service Catalog Filters Response"
+      description: "This data structure represents a response to Update Service Catalog Filters."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated ApmFilter service_catalog_filters = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
 }
 
 message GetServiceCatalogFiltersRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Catalog Filters Request"
+      description: "This data structure represents a request to Get Service Catalog Filters."
+      required: [
+        "service_name",
+        "time_range"
+      ]
+    }
+    external_docs: {}
+  };
   google.protobuf.StringValue service_name = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
   TimeRange time_range = 3;
@@ -51,64 +126,151 @@ message GetServiceCatalogFiltersRequest {
 }
 
 message GetServiceCatalogFiltersResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Catalog Filters Response"
+      description: "This data structure represents a request to Get Service Catalog Filters."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated ApmFilter service_catalog_filters = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
 }
 
-message GetServicesColumnsStreamRequest{
+message GetServicesColumnsStreamRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Catalog Columns Stream Request"
+      description: "This data structure represents a request to Get Service Catalog Columns Stream."
+      required: [
+        "query"
+      ]
+    }
+    external_docs: {}
+  };
   ServiceQuery query = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
 }
 
-message GetServicesColumnsStreamResponse{
+message GetServicesColumnsStreamResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Service Catalog Columns Stream Response"
+      description: "This data structure represents a response to Get Service Catalog Columns Stream."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated ServiceData services = 1;
   com.coralogixapis.service_catalog.v1.ApmSource apm_source = 2;
+  google.protobuf.StringValue query = 3;
 }
 
-message GetSpanMetricBucketsRequest {}
+message GetSpanMetricBucketsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metrics Buckets Request"
+      description: "This data structure represents a request to Get span metrics buckets."
+      required: [
+        "service_name"
+      ]
+    }
+    external_docs: {}
+  };
+  google.protobuf.StringValue service_name = 1;
+}
 
 message GetSpanMetricBucketsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Span Metrics Buckets Request"
+      description: "This data structure represents a request to Get span metrics buckets."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated google.protobuf.StringValue metricBuckets = 1;
 }
 
 message GetAffectedAlertsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Affected Alerts Request"
+      description: "This data structure represents a request to Get affected alerts."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated ApmFilter service_catalog_filters = 1;
   repeated com.coralogixapis.apm.common.v2.AlertMetaLabel alert_label_filters = 2;
 }
 
 message GetAffectedAlertsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Affected Alerts Response"
+      description: "This data structure represents a response to Get affected alerts."
+      required: []
+    }
+    external_docs: {}
+  };
   repeated com.coralogixapis.alerts.v3.AlertDef alerts = 1;
 }
 
 service ServiceCatalogService {
   rpc GetServices(GetServicesRequest) returns (GetServicesResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get services";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/services",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get services";
   }
   rpc GetServicesColumnsStream(GetServicesColumnsStreamRequest) returns (stream GetServicesColumnsStreamResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get services column stream";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/services/columns",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get services column stream";
   }
   rpc GetService(GetServiceRequest) returns (GetServiceResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/services/service",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get service";
   }
 
   rpc GetServiceCatalogFilters(GetServiceCatalogFiltersRequest) returns (GetServiceCatalogFiltersResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get service catalog filters";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/services/filters",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get service catalog filters";
   }
 
   rpc UpdateServiceCatalogFilters(UpdateServiceCatalogFiltersRequest) returns (UpdateServiceCatalogFiltersResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "update service catalog filters";
+    option (google.api.http) = {
+      post: "/v1/service-catalog/services/filters",
+      body: "*"
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "update service catalog filters";
   }
 
   rpc GetTracingLabels(com.coralogix.schemastore.v1.TracingFieldsRequest) returns (com.coralogix.schemastore.v1.TracingFieldsResponse) {
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "get tracing labels under the limitation of cardinality";
+    option (google.api.http) = {
+      get: "/v1/service-catalog/tracing-labels",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "get tracing labels under the limitation of cardinality";
   }
 
-  rpc GetSpanMetricBuckets(GetSpanMetricBucketsRequest) returns (GetSpanMetricBucketsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Span Metric Buckets";
+  rpc GetSpanMetricBuckets(GetSpanMetricBucketsRequest) returns (GetSpanMetricBucketsResponse) {
+    option (google.api.http) = {
+      get: "/v1/service-catalog/span-metrics/buckets",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Span Metric Buckets";
   }
 
-  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse){
-    option (com.coralogixapis.apm.common.v2.audit_log_description).description = "Get Affected Alerts By Dimension Change";
+  rpc GetAffectedAlerts(GetAffectedAlertsRequest) returns (GetAffectedAlertsResponse) {
+    option (google.api.http) = {
+      get: "/v1/service-catalog/affected-alerts",
+    };
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Affected Alerts By Dimension Change";
   }
-
 }

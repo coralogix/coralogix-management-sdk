@@ -1,6 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.alerts.v3;
-import "google/protobuf/wrappers.proto";
-
-message LogsImmediateNotification {}

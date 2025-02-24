@@ -3,10 +3,26 @@ syntax = "proto3";
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/enrichment/v1/enrichment_type.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 package com.coralogix.enrichment.v1;
 
 message EnrichmentRequestModel {
-  google.protobuf.StringValue field_name = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Enrichment Prototype"
+      description: "The enrichment request model"
+      required: [
+        "field_name",
+        "enrichment_type"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"sourceIPs\"" }];
   EnrichmentType enrichment_type = 2;
   optional google.protobuf.StringValue enriched_field_name = 3;
 }

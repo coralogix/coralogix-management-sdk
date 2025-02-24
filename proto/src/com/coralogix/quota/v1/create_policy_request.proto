@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+import "com/coralogix/quota/v1/rule.proto";
+import "com/coralogix/quota/v1/archive_retention.proto";
+import "com/coralogix/quota/v1/log_rules.proto";
+import "com/coralogix/quota/v1/span_rules.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message CreatePolicyRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Policy Request"
+      description: "This data structue is used to create a new policy."
+      required: [
+        "name",
+        "priority"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+      description: "Find out more about quota management."
+    }
+  };
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy\"" }];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy Description\"" }];
+  Priority priority = 3;
+  optional Rule application_rule = 4;
+  optional Rule subsystem_rule = 5;
+  optional ArchiveRetention archive_retention = 6;
+  oneof source_type_rules {
+    LogRules log_rules = 7;
+    SpanRules span_rules = 8;
+  };
+}

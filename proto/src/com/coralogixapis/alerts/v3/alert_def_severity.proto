@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message AlertDefSeverity {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert Definition Severity"
+      description: "Defines the severity level and priority of an alert"
+      required: ["severity", "priority"]
+    }
+  };
+  google.protobuf.Int32Value severity = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "3" }];
+  AlertDefPriority priority = 2;
+}

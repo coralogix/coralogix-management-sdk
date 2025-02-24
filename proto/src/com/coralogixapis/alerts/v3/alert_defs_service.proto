@@ -1,0 +1,351 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+service AlertDefsService {
+  // Get Alert Def by non changing ID AKA UniqueIdentifier
+  rpc GetAlertDef(GetAlertDefRequest) returns (GetAlertDefResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert definition";
+    option (google.api.http) = {
+      get: "/v3/alert-defs/{id}"
+    };
+  }
+
+  rpc GetAlertDefByVersionId(GetAlertDefByVersionIdRequest) returns (GetAlertDefByVersionIdResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert definition by alert version id";
+    option (google.api.http) = {
+      get: "/v3/alert-defs/alertVersionId/{alert_version_id}"
+    };
+  }
+
+  rpc CreateAlertDef(CreateAlertDefRequest) returns (CreateAlertDefResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "create alert definition";
+    option (google.api.http) = {
+      post: "/v3/alert-defs"
+      body: "alert_def_properties"
+    };
+  }
+
+  rpc ReplaceAlertDef(ReplaceAlertDefRequest) returns (ReplaceAlertDefResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "replace alert definition";
+    option (google.api.http) = {
+      put: "/v3/alert-defs"
+      body: "*"
+    };
+  }
+
+//  rpc BatchGetAlertDef(BatchGetAlertDefRequest) returns (BatchGetAlertDefResponse){
+//    option (com.coralogix.common.v1.audit_log_description).description = "batch get alert definitions";
+//    option (google.api.http) = {
+//      get: "/v3/alertDefs:batchGet"
+//    };
+//  }
+
+  rpc ListAlertDefs(ListAlertDefsRequest) returns (ListAlertDefsResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert definitions list";
+    option (google.api.http) = {
+      get: "/v3/alert-defs"
+    };
+  }
+
+  rpc DownloadAlerts(DownloadAlertsRequest) returns (stream DownloadAlertsResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "Download alerts";
+    option (google.api.http) = {
+      get: "/v3/alerts/download"
+    };
+  }
+
+  rpc DeleteAlertDef(DeleteAlertDefRequest) returns (DeleteAlertDefResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "delete alert definitions";
+    option (google.api.http) = {
+      delete: "/v3/alert-defs/{id}"
+    };
+  }
+
+//  rpc AtomicBatchExecuteAlert(AtomicBatchExecuteAlertRequest) returns (AtomicBatchExecuteAlertResponse) {
+//    option (com.coralogix.common.v1.audit_log_description).description = "atomic batch execute alert";
+//    option (google.api.http) = {
+//      post: "/v3/alerts:atomicBatchExecute"
+//      body: "*"
+//    };
+//  }
+
+
+//  rpc GetLimits(GetLimitsRequest) returns (GetLimitsResponse) {
+//    option (com.coralogix.common.v1.audit_log_description).description = "get limits";
+//    option (google.api.http) = {
+//      get: "/v3/alerts:getLimits"
+//    };
+//  }
+//
+//  rpc ValidateAlert(ValidateAlertRequest) returns (ValidateAlertResponse) {
+//    option (com.coralogix.common.v1.audit_log_description).description = "validate alert";
+//    option (google.api.http) = {
+//      post: "/v3/alerts:validate"
+//      body: "alert"
+//    };
+//  }
+
+  rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "disable or enable the alert definitions";
+    option (google.api.http) = {
+      post: "/v3/alert-defs/{id}:setActive"
+    };
+  }
+}
+
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED = 0;
+  ORDER_BY_DIRECTION_DESC = 1;
+}
+
+enum OrderByFields {
+  ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED = 0;
+  ORDER_BY_FIELDS_ID = 1;
+  ORDER_BY_FIELDS_SEVERITY = 2;
+  ORDER_BY_FIELDS_CREATED_TIME = 3;
+  ORDER_BY_FIELDS_UPDATED_TIME = 4;
+}
+
+message OrderBy {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Order By"
+      description: "Specifies the field and direction for ordering results"
+      required: ["field_name", "direction"]
+    }
+  };
+  OrderByFields field_name = 1;
+  OrderByDirection direction = 2;
+}
+
+message GetAlertDefRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Alert Definition Request"
+      description: "Request to retrieve an alert definition by ID"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
+}
+
+message GetAlertDefByVersionIdRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Alert Definition By Version ID Request"
+      description: "Request to retrieve an alert definition by version ID"
+      required: ["alert_version_id"]
+    }
+  };
+  google.protobuf.StringValue alert_version_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"v1-123\"" }];
+}
+
+message GetAlertDefResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Alert Definition Response"
+      description: "Response containing the requested alert definition"
+      required: ["alert_def"]
+    }
+  };
+  AlertDef alert_def = 1;
+}
+
+message GetAlertDefByVersionIdResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Alert Definition By Version ID Response"
+      description: "Response containing the alert definition for the requested version"
+      required: ["alert_def"]
+    }
+  };
+  AlertDef alert_def = 1;
+}
+
+message ListAlertDefsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Alert Definitions Response"
+      description: "Response containing a list of alert definitions"
+      required: ["alert_defs"]
+    }
+  };
+  repeated AlertDef alert_defs = 1;
+}
+
+message ListAlertDefsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "List Alert Definitions Request"
+      description: "Request to retrieve a list of alert definitions"
+    }
+  };
+}
+
+message DownloadAlertsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Download Alerts Request"
+      description: "Request to download alerts data"
+    }
+  };
+}
+
+
+message DownloadAlertsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Download Alerts Response"
+      description: "Response containing the downloaded alerts data"
+      required: ["content"]
+    }
+  };
+  bytes content = 1;
+}
+
+
+message BatchGetAlertDefRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Alert Definitions Request"
+      description: "Request to retrieve multiple alert definitions by their IDs"
+      required: ["ids"]
+    }
+  };
+  repeated google.protobuf.StringValue ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"alert-123\", \"alert-456\"]" }];
+}
+
+message BatchGetAlertDefResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Batch Get Alert Definitions Response"
+      description: "Response containing the requested alert definitions and any IDs that weren't found"
+      required: ["alert_defs", "not_found_ids"]
+    }
+  };
+  map<string,AlertDef> alert_defs = 1;
+  repeated google.protobuf.StringValue not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"alert-789\"]" }];
+}
+
+message DeleteAlertDefRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Alert Definition Request"
+      description: "Request to delete an alert definition by ID"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
+}
+message DeleteAlertDefResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete Alert Definition Response"
+      description: "Response after deleting an alert definition"
+    }
+  };
+}
+message ReplaceAlertDefRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Alert Definition Request"
+      description: "Request to replace an existing alert definition"
+      required: ["alert_def_properties", "id"]
+    }
+  };
+  AlertDefProperties alert_def_properties = 1;
+  google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
+}
+message ReplaceAlertDefResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Replace Alert Definition Response"
+      description: "Response containing the replaced alert definition"
+      required: ["alert_def"]
+    }
+  };
+  AlertDef alert_def = 1;
+}
+message CreateAlertDefRequest{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Alert Definition Request"
+      description: "Request to create a new alert definition"
+      required: ["alert_def_properties"]
+    }
+  };
+  AlertDefProperties alert_def_properties = 1;
+}
+message CreateAlertDefResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Create Alert Definition Response"
+      description: "Response containing the newly created alert definition"
+      required: ["alert_def"]
+    }
+  };
+  AlertDef alert_def = 1;
+}
+//message AtomicBatchExecuteAlertRequest {
+// repeated AlertExecutionRequest requests = 1;
+//}
+//message AtomicBatchExecuteAlertResponse {
+//  repeated AlertExecutionResponse matching_responses = 1;
+//  //TODO: Where should this object be placed
+//  com.coralogix.api.ResponseStatus status = 2;
+//}
+
+//message AlertExecutionRequest {
+//  oneof request {
+//    CreateAlertDefRequest create = 1;
+//    ReplaceAlertDefRequest replace = 2;
+//    DeleteAlertDefRequest delete = 3;
+//  }
+//}
+//message AlertExecutionResponse {
+//  oneof response {
+//    CreateAlertDefResponse create = 1;
+//    ReplaceAlertDefResponse replace = 2;
+//    DeleteAlertDefResponse delete = 3;
+//  }
+//}
+//message GetLimitsRequest {}
+//
+//message GetLimitsResponse {
+//  google.protobuf.StringValue company_id = 1;
+//  google.protobuf.Int32Value limit = 2;
+//  google.protobuf.Int32Value used = 3;
+//}
+//message ValidateAlertRequest {
+//  Alert alert = 1;
+//}
+//message ValidateAlertResponse {
+//  google.protobuf.BoolValue valid = 1;
+//}
+message SetActiveRequest{
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Active Request"
+      description: "Request to enable or disable an alert definition"
+      required: ["id", "active"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
+  google.protobuf.BoolValue active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+message SetActiveResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Active Response"
+      description: "Response after enabling or disabling an alert definition"
+    }
+  };
+}

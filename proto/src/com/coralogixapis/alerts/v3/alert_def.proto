@@ -1,0 +1,97 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/alert_def_notification_group.proto";
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+import "com/coralogixapis/alerts/v3/alert_def_scheduling.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
+
+/**
+ * Represents An Existing or Created Alert Definition
+ */
+message AlertDef {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert Definition"
+      description: "This data structure represents an alert definition"
+      required: [
+        "alert_def_properties",
+        "id",
+        "alert_version_id",
+        "created_time",
+        "updated_time"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about enrichments"
+    }
+  };
+  AlertDefProperties alert_def_properties = 1;
+
+  // This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+  google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue alert_version_id = 20; // the old alertId
+  google.protobuf.Timestamp created_time = 3;
+  google.protobuf.Timestamp updated_time = 4;
+}
+
+/**
+ * Represents The non generated alert definition properties (the ones that are set by the user)
+ */
+message AlertDefProperties {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert Definition Properties"
+      description: "User-configurable properties of an alert definition"
+      required: ["name", "enabled", "type", "type_definition"]
+    }
+  };
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Alert\"" }];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Alert description\"" }];
+  google.protobuf.BoolValue enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  AlertDefPriority priority = 4;
+  oneof schedule {
+    ActivitySchedule active_on = 5;
+  }
+  AlertDefType type = 6;
+  oneof type_definition {
+    LogsImmediateType logs_immediate = 101;
+    TracingImmediateType tracing_immediate = 102;
+    LogsThresholdType logs_threshold = 103;
+    LogsRatioThresholdType logs_ratio_threshold = 104;
+    LogsTimeRelativeThresholdType logs_time_relative_threshold = 105;
+    MetricThresholdType metric_threshold = 106;
+    TracingThresholdType tracing_threshold = 107;
+    FlowType flow = 108;
+    LogsAnomalyType logs_anomaly = 109;
+    MetricAnomalyType metric_anomaly = 110;
+    LogsNewValueType logs_new_value = 111;
+    LogsUniqueCountType logs_unique_count = 112;
+  }
+  repeated google.protobuf.StringValue group_by_keys = 7;
+  AlertDefIncidentSettings incidents_settings = 8;
+  AlertDefNotificationGroup notification_group = 9;
+  repeated AlertDefNotificationGroup notification_group_excess = 210 [deprecated = true];
+  map<string, string> entity_labels = 10;
+  google.protobuf.BoolValue phantom_mode = 11;
+  google.protobuf.BoolValue deleted = 12;
+}

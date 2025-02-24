@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+
+package com.coralogixapis.apm.common.v2;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_UNSPECIFIED = 0;
+  ORDER_BY_DIRECTION_ASC = 1;
+  ORDER_BY_DIRECTION_DESC = 2;
+}
+
+message OrderBy {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Order By"
+      description: "This data structure represents an order by clause in Coralogix APM."
+      required: [
+        "field_name", 
+        "direction"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+      description: "Find out more about SLOs in Coralogix APM"
+    }
+  };
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_name\"" }];
+  OrderByDirection direction = 2;
+}

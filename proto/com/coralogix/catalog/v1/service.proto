@@ -66,11 +66,28 @@ message ServiceData{
     google.protobuf.FloatValue outgoing_requests_trend = 17;
     google.protobuf.FloatValue incoming_requests_trend = 18;
     google.protobuf.FloatValue internal_requests_trend = 19;
+    google.protobuf.Int64Value p99_latency_with_offset = 49;
     google.protobuf.Int64Value p95_latency_with_offset = 20;
+    google.protobuf.Int64Value p90_latency_with_offset = 50;
+    google.protobuf.Int64Value p75_latency_with_offset = 51;
+    google.protobuf.Int64Value p50_latency_with_offset = 52;
+    google.protobuf.Int64Value avg_latency_with_offset = 53;
     google.protobuf.Int64Value max_latency_with_offset = 21;
     google.protobuf.Int64Value errors_with_offset = 22;
     google.protobuf.Int64Value outgoing_requests_with_offset = 23;
     google.protobuf.Int64Value incoming_requests_with_offset = 24;
     google.protobuf.Int64Value internal_requests_with_offset = 25;
+    google.protobuf.Int64Value internal_errors = 37;
+    google.protobuf.Int64Value internal_errors_rate = 38;
+    google.protobuf.Int64Value internal_errors_with_offset = 39;
+    google.protobuf.Int64Value internal_errors_rate_with_offset = 40;
+    google.protobuf.Int64Value outgoing_errors = 41;
+    google.protobuf.Int64Value outgoing_errors_rate = 42;
+    google.protobuf.Int64Value outgoing_errors_with_offset = 43;
+    google.protobuf.Int64Value outgoing_errors_rate_with_offset = 44;
+    google.protobuf.FloatValue apdex_average = 45;
+    google.protobuf.FloatValue apdex_average_with_offset = 46;
+    google.protobuf.FloatValue apdex_last_step = 47;
+    google.protobuf.FloatValue apdex_last_step_with_offset = 48;
   }
 }

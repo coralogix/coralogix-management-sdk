@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-package com.coralogixapis.alerts.v3;
-
-import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
-
-message AlertDefOverride {
-  AlertDefPriority priority = 1;
-}
