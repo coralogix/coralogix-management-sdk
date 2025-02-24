@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogix/quota/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
 import "com/coralogix/quota/v1/get_policy_request.proto";
 import "com/coralogix/quota/v1/get_policy_response.proto";
 import "com/coralogix/quota/v1/create_policy_request.proto";
@@ -22,34 +23,34 @@ import "com/coralogix/quota/v1/toggle_policy_response.proto";
 
 service InternalPoliciesService {
   rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
-    option (audit_log_description).description = "Get Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Policy";
   }
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
-    option (audit_log_description).description = "Create Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create Policy";
   }
 
   rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
-    option (audit_log_description).description = "Update Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update Policy";
   }
 
   rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
-    option (audit_log_description).description = "Get Company Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Company Policies";
   }
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
-    option (audit_log_description).description = "Delete Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete Policy";
   }
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
-    option (audit_log_description).description = "Reorder Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Reorder Policies";
   }
 
   rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
-    option (audit_log_description).description = "Bulk Test Log Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Bulk Test Log Policies";
   }
 
   rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
-    option (audit_log_description).description = "Toggle Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Toggle Policy";
   }
 }

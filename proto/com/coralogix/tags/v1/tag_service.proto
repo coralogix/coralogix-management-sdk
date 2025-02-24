@@ -5,14 +5,14 @@ package com.coralogix.tags.v1;
 import "google/protobuf/wrappers.proto";
 
 import "com/coralogix/tags/v1/tag.proto";
-import "com/coralogix/tags/v1/audit_log.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/timestamp.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 service TagsService {
   rpc CreateTag(CreateTagRequest) returns (CreateTagResponse) {
-    option (audit_log_description).description = "create tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "create tag";
     option (google.api.http) = {
       post: "/api/v1/addtag"
       body: "*"
@@ -21,7 +21,7 @@ service TagsService {
   }
 
   rpc GetTags(GetTagsRequest) returns (GetTagsResponse) {
-    option (audit_log_description).description = "get tags";
+    option (com.coralogix.common.v1.audit_log_description).description = "get tags";
     option (google.api.http) = {
       post: "/api/v1/tag"
       body: "*"
@@ -29,7 +29,7 @@ service TagsService {
   }
 
   rpc UpdateTag(UpdateTagRequest) returns (UpdateTagResponse) {
-    option (audit_log_description).description = "update tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "update tag";
     option (google.api.http) = {
       post: "/api/v1/edittag"
       body: "tag"
@@ -38,7 +38,7 @@ service TagsService {
   }
 
   rpc DeleteTag(DeleteTagRequest) returns (DeleteTagResponse) {
-    option (audit_log_description).description = "delete tag";
+    option (com.coralogix.common.v1.audit_log_description).description = "delete tag";
     option (google.api.http) = {
       delete: "/api/v1/deletetag/{id}"
       response_body: "response"
@@ -46,7 +46,7 @@ service TagsService {
   }
 
   rpc GetTagSummary(GetTagSummaryRequest) returns (GetTagSummaryResponse) {
-    option (audit_log_description).description = "get tag summary";
+    option (com.coralogix.common.v1.audit_log_description).description = "get tag summary";
     option (google.api.http) = {
       post: "/api/v1/tag/summary"
       body: "*"
@@ -54,7 +54,7 @@ service TagsService {
   }
 
   rpc GetTagAlerts(GetTagAlertsRequest) returns (GetTagAlertsResponse) {
-    option (audit_log_description).description = "get tag alerts";
+    option (com.coralogix.common.v1.audit_log_description).description = "get tag alerts";
     option (google.api.http) = {
       post: "/api/v1/tag/alerts"
       body: "*"
@@ -62,7 +62,7 @@ service TagsService {
   }
 
   rpc GetTagErrorVolume(GetTagErrorVolumeRequest) returns (GetTagErrorVolumeResponse) {
-    option (audit_log_description).description = "get tag error volume";
+    option (com.coralogix.common.v1.audit_log_description).description = "get tag error volume";
     option (google.api.http) = {
       post: "/api/v1/tag/error-volume"
       body: "*"

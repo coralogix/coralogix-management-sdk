@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package com.coralogixapis.incidents.v1;
+
+import "com/coralogixapis/incidents/v1/filter_operators.proto";
+import "com/coralogixapis/incidents/v1/incident_severity.proto";
+import "com/coralogixapis/incidents/v1/incident_status.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
+
+message IncidentEventQueryFilter {
+  repeated IncidentStatus status = 1;
+  repeated IncidentSeverity severity = 2;
+  map<string, ContextualLabelValues> contextual_labels = 3;
+  google.protobuf.StringValue name = 4;
+  google.protobuf.BoolValue is_muted = 5;
+  TimeRange timestamp = 6;
+  LabelsFilter labels = 7;
+}
+
+message LabelsFilter {
+  repeated MetaLabel meta_labels = 1;
+  FilterOperator operator = 2;
+}

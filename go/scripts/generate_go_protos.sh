@@ -56,6 +56,10 @@ do
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/permissions/v1 "
                 args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/permissions/v1 "
                 ;;
+            *incidents* )
+                args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/incidents/v1 "
+                args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/incidents/v1 "
+                ;;
             *)    
             # For all other protos, the package path is the same as the directory path
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "

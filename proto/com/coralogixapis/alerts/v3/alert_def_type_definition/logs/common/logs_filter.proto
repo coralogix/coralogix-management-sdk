@@ -4,17 +4,38 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message LogsFilter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Filter"
+      description: "Filter configuration for log-based alerts"
+      required: ["filter_type"]
+    }
+  };
   oneof filter_type {
     LogsSimpleFilter simple_filter = 1;
   }
 }
 message LogsSimpleFilter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Simple Logs Filter"
+      description: "Basic filter configuration using Lucene query and label filters"
+    }
+  };
   google.protobuf.StringValue lucene_query = 1;
   LabelFilters label_filters = 2;
 }
 
 message LabelFilters {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Label Filters"
+      description: "Filters for application name, subsystem name, and log severities"
+    }
+  };
   repeated LabelFilterType application_name = 1;
   repeated LabelFilterType subsystem_name = 2;
   repeated LogSeverity severities = 3;

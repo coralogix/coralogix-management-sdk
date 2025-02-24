@@ -9,26 +9,42 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_group_by_for.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-message LogsRatioThresholdType  {
-    LogsFilter numerator = 1;
-    google.protobuf.StringValue numerator_alias =2;
-    LogsFilter denominator = 3;
-    google.protobuf.StringValue denominator_alias = 4;
-    repeated LogsRatioRules rules = 5;
-    repeated google.protobuf.StringValue notification_payload_filter = 6;
-    LogsRatioGroupByFor group_by_for = 7;
-    UndetectedValuesManagement undetected_values_management = 8;
-    google.protobuf.BoolValue ignore_infinity = 9;
-    google.protobuf.Int32Value evaluation_delay_ms = 10;
+message LogsRatioThresholdType {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Ratio Threshold Alert Type"
+      description: "Configuration for alerts based on the ratio between two log queries"
+      required: ["numerator", "denominator", "rules"]
+    }
+  };
+  LogsFilter numerator = 1;
+  google.protobuf.StringValue numerator_alias =2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"numerator_alias\"" }];
+  LogsFilter denominator = 3;
+  google.protobuf.StringValue denominator_alias = 4;
+  repeated LogsRatioRules rules = 5;
+  repeated google.protobuf.StringValue notification_payload_filter = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
+  LogsRatioGroupByFor group_by_for = 7;
+  UndetectedValuesManagement undetected_values_management = 8;
+  google.protobuf.BoolValue ignore_infinity = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  google.protobuf.Int32Value evaluation_delay_ms = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
 }
+
 message LogsRatioRules {
-    LogsRatioCondition condition = 1;
-    AlertDefOverride override = 2;
+  LogsRatioCondition condition = 1;
+  AlertDefOverride override = 2;
 }
 
 message LogsRatioCondition {
-    google.protobuf.DoubleValue threshold = 1;
-    LogsRatioTimeWindow time_window = 2;
-    LogsRatioConditionType condition_type  = 4;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Ratio Condition"
+      description: "Defines conditions for ratio-based alerts"
+      required: ["threshold", "time_window"]
+    }
+  };
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
+  LogsRatioTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  LogsRatioConditionType condition_type  = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"GREATER_THAN\"" }];
 }

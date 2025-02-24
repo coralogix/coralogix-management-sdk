@@ -43,7 +43,7 @@ mod tests {
         if (client.get(id.clone()).await).is_ok() {
             let _ = client.delete(id.clone()).await.unwrap();
         }
-        let _ = client.create(dashboard).await.unwrap();
+        let _ = client.create(dashboard, false).await.unwrap();
 
         let actual_dashboard = client.get(id.clone()).await.unwrap();
         assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));

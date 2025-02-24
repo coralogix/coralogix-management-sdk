@@ -6,18 +6,19 @@ import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
-import "com/coralogixapis/alerts/v3/alert_defs_service.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
 
 service AlertEventService {
   rpc GetAlertEvent(GetAlertEventRequest) returns (GetAlertEventResponse) {
-    option (audit_log_description).description = "get alert event";
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert event";
     option (google.api.http) = {
       get: "/v3/alert_event/{id}"
     };
   }
 
   rpc GetAlertEventsStats(GetAlertEventStatsRequest) returns (GetAlertEventStatsResponse) {
-    option (audit_log_description).description = "get alert events stats";
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert events stats";
     option (google.api.http) = {
       get: "/v3/alert_event_stats"
     };

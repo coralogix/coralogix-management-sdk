@@ -2,7 +2,8 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogix/quota/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
 import "com/coralogix/quota/v1/get_policy_request.proto";
 import "com/coralogix/quota/v1/get_policy_response.proto";
 import "com/coralogix/quota/v1/create_policy_request.proto";
@@ -23,49 +24,91 @@ import "com/coralogix/quota/v1/bulk_create_policy_request.proto";
 import "com/coralogix/quota/v1/bulk_create_policy_response.proto";
 import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
 import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+import "google/api/annotations.proto";
 
 service PoliciesService {
   rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
-    option (audit_log_description).description = "Get Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Policy";
+    option (google.api.http) = {
+      get: "/v1/policies/{id}"
+    };
   }
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
-    option (audit_log_description).description = "Create Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create Policy";
+    option (google.api.http) = {
+      post: "/v1/policies"
+      body: "*"
+    };
   }
 
   rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
-    option (audit_log_description).description = "Update Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Update Policy";
+    option (google.api.http) = {
+      put: "/v1/policies"
+      body: "*"
+    };
   }
 
   rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
-    option (audit_log_description).description = "Get Company Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Company Policies";
+    option (google.api.http) = {
+      get: "/v1/policies"
+    };
   }
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
-    option (audit_log_description).description = "Delete Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete Policy";
+    option (google.api.http) = {
+      delete: "/v1/policies/{id}"
+    };
   }
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
-    option (audit_log_description).description = "Reorder Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Reorder Policies";
+    option (google.api.http) = {
+      post: "/v1/policies:reorder"
+      body: "*"
+    };
   }
 
   rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
-    option (audit_log_description).description = "Bulk Test Log Policies";
+    option (com.coralogix.common.v1.audit_log_description).description = "Bulk Test Log Policies";
+    option (google.api.http) = {
+      post: "/v1/policies:bulkTestLog"
+      body: "*"
+    };
   }
 
   rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
-    option (audit_log_description).description = "Toggle Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Toggle Policy";
+    option (google.api.http) = {
+      post: "/v1/policies:toggle"
+      body: "*"
+    };
   }
 
   rpc AtomicBatchCreatePolicy(AtomicBatchCreatePolicyRequest) returns (AtomicBatchCreatePolicyResponse) {
-    option (audit_log_description).description = "Bulk Create Policy";
+    option (com.coralogix.common.v1.audit_log_description).description = "Bulk Create Policy";
+    option (google.api.http) = {
+      post: "/v1/policies:bulkCreate"
+      body: "*"
+    };
   }
 
   rpc AtomicOverwriteLogPolicies(AtomicOverwriteLogPoliciesRequest) returns (AtomicOverwriteLogPoliciesResponse) {
-    option (audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
+    option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
+    option (google.api.http) = {
+      post: "/v1/policies:atomicOverwriteLogPolicies"
+      body: "*"
+    };
   }
 
   rpc AtomicOverwriteSpanPolicies(AtomicOverwriteSpanPoliciesRequest) returns (AtomicOverwriteSpanPoliciesResponse) {
-    option (audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
+    option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
+    option (google.api.http) = {
+      post: "/v1/policies:atomicOverwriteSpanPolicies"
+      body: "*"
+    };
   }
 }

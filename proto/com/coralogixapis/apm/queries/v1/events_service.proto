@@ -4,7 +4,7 @@ import "google/protobuf/wrappers.proto";
 
 import "com/coralogixapis/apm/common/v2/data_source.proto";
 import "com/coralogixapis/apm/common/v2/order_by.proto";
-import "com/coralogixapis/apm/common/v2/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 
 import "com/coralogixapis/apm/queries/v1/event.proto";
 
@@ -31,6 +31,6 @@ message ListEventsResponse {
 service EventsService {
     rpc ListEvents (ListEventsRequest) returns (ListEventsResponse){
         option deprecated = true;
-        option (com.coralogixapis.apm.common.v2.audit_log_description).description = "List events";
+         option (com.coralogix.common.v1.audit_log_description).description = "List events";
     }
 }

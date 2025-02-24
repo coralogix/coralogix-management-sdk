@@ -96,11 +96,16 @@ impl DashboardsClient {
     ///
     /// # Arguments
     /// * `dashboard` - The dashboard to create.
-    pub async fn create(&self, dashboard: Dashboard) -> Result<CreateDashboardResponse> {
+    pub async fn create(
+        &self,
+        dashboard: Dashboard,
+        is_locked: bool,
+    ) -> Result<CreateDashboardResponse> {
         let request: Request<CreateDashboardRequest> = make_request_with_metadata(
             CreateDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
+                is_locked: Some(is_locked),
             },
             &self.teams_level_metadata_map,
         );
@@ -127,11 +132,16 @@ impl DashboardsClient {
     ///
     /// # Arguments
     /// * `dashboard` - The [`Dashboard`] to replace.
-    pub async fn replace(&self, dashboard: Dashboard) -> Result<ReplaceDashboardResponse> {
+    pub async fn replace(
+        &self,
+        dashboard: Dashboard,
+        is_locked: bool,
+    ) -> Result<ReplaceDashboardResponse> {
         let request: Request<ReplaceDashboardRequest> = make_request_with_metadata(
             ReplaceDashboardRequest {
                 request_id: None,
                 dashboard: Some(dashboard),
+                is_locked: Some(is_locked),
             },
             &self.teams_level_metadata_map,
         );
