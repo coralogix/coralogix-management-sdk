@@ -20,7 +20,7 @@ use time::format_description;
 use toml_edit::{value, DocumentMut};
 
 
-const GO_DIR: &str = "go";
+const GO_DIR: &str = "../../go";
 
 const PROTOFETCH_META_KEYS: [&str; 3] = ["name", "description", "proto_out_dir"];
 
