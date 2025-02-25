@@ -12,13 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::path::PathBuf;
+use std::{path::PathBuf, process::Output};
 
 use clap::Parser;
 use git_cmd::Repo;
-use protofetch::Protofetch;
 use time::format_description;
 use toml_edit::{value, DocumentMut};
+
+
+const GO_DIR: &str = "go";
 
 const PROTOFETCH_META_KEYS: [&str; 3] = ["name", "description", "proto_out_dir"];
 
@@ -139,6 +141,14 @@ async fn main() -> eyre::Result<()> {
         return Ok(());
     }
 
+    let output = tokio::process::Command::new("make")
+        .arg("proto-go-generate")
+        .output().await.unwrap();
+
+    if !output.status.success() {
+        println!("Error calling make: {}", String::from_utf8_lossy(&output.stderr))
+    }
+
     // // Protofetch updating
     // tokio::fs::write(&protofetch_path, protofetch_descriptor.to_string()).await?;
     // tokio::fs::remove_dir_all(&proto_dir).await?;
@@ -171,6 +181,7 @@ async fn main() -> eyre::Result<()> {
         protofetch_path.into_os_string().to_str().unwrap(),
         protolock_path.into_os_string().to_str().unwrap(),
         proto_dir.into_os_string().to_str().unwrap(),
+        GO_DIR,
     ])
     .expect("Failed to add files");
     repo.commit("chore: Update protofetch.toml")
