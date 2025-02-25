@@ -145,7 +145,7 @@ async fn main() -> eyre::Result<()> {
     // Make: protofetch & build Go proxies
     let output = tokio::process::Command::new("make")
         .arg("proto-go-generate")
-        .current_dir(&args.git_dir)
+        .current_dir(&args.root)
         .output().await.unwrap();
 
     if !output.status.success() {
