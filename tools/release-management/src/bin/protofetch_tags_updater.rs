@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{f32::consts::E, path::PathBuf, process::Output};
+use std::path::PathBuf;
 
 use clap::Parser;
 use git_cmd::Repo;
