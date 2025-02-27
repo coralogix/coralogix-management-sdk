@@ -30,4 +30,7 @@ proto-renew:
 	rm -rf proto/src
 	rm -rf proto/deps
 
+proto-go-generate: proto-renew
+	cd ./go; make proto-clean; make proto-compile
+
 pull-and-build: proto-renew build
