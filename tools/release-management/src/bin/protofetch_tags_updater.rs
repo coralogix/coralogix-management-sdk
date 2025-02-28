@@ -12,13 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::{path::PathBuf, process::Output};
+use std::path::PathBuf;
 
 use clap::Parser;
 use git_cmd::Repo;
 use time::format_description;
 use toml_edit::{value, DocumentMut};
-
 
 const GO_DIR: &str = "../../go";
 
@@ -141,15 +140,20 @@ async fn main() -> eyre::Result<()> {
         return Ok(());
     }
 
-
     // Make: protofetch & build Go proxies
     let output = tokio::process::Command::new("make")
         .arg("proto-go-generate")
         .current_dir(&args.root)
-        .output().await.unwrap();
+        .output()
+        .await
+        .unwrap();
 
     if !output.status.success() {
-        println!("Error calling make: {}", String::from_utf8_lossy(&output.stderr))
+        tracing::error!(
+            "Error calling make: {}",
+            String::from_utf8_lossy(&output.stderr)
+        );
+        return Err(eyre::Error::msg("Couldn't run update"));
     }
 
     // Git operations
