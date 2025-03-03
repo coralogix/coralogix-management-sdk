@@ -1,5 +1,4 @@
 {
-  "id": "ybcdefghijklmnopqrstx",
   "name": "test",
   "description": "dashboards team is messing with this 🗿",
   "time_frame": {
@@ -11,7 +10,7 @@
     "sections": [
       {
         "id": {
-          "value": "6BD2412D-E3F4-4EF2-8567-BBAB907E6062"
+          "value": "id"
         },
         "options": {
           "custom": {
@@ -24,7 +23,7 @@
         "rows": [
           {
             "id": {
-              "value": "3615FE6F-21D6-4EF2-B3BB-2F1C8F09B2A6"
+              "value": "id"
             },
             "appearance": {
               "height": 19
@@ -32,7 +31,7 @@
             "widgets": [
               {
                 "id": {
-                  "value": "FA439AB8-C485-499A-A3AB-D66BEF6E952D"
+                  "value": "id"
                 },
                 "title": "status 4XX",
                 "definition": {
@@ -77,7 +76,7 @@
               },
               {
                 "id": {
-                  "value": "7301455C-B6E4-40AD-8140-1A8B1E3BFBED"
+                  "value": "id"
                 },
                 "title": "count",
                 "definition": {
@@ -131,7 +130,7 @@
               },
               {
                 "id": {
-                  "value": "CAF689A0-58E0-436B-BADF-3386AF2967F3"
+                  "value": "id"
                 },
                 "title": "error throwing pods",
                 "definition": {
@@ -189,7 +188,7 @@
           },
           {
             "id": {
-              "value": "C7F16112-E5D4-479D-A76A-8FCB878E01E8"
+              "value": "id"
             },
             "appearance": {
               "height": 28
@@ -197,7 +196,7 @@
             "widgets": [
               {
                 "id": {
-                  "value": "234B5859-01AB-4B0C-9047-7278C63A6A23"
+                  "value": "id"
                 },
                 "title": "dashboards-api logz",
                 "description": "warnings, errors, criticals",

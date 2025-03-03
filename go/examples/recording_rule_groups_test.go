@@ -15,7 +15,9 @@ package examples
 
 import (
 	"context"
+	"strconv"
 	"testing"
+	"time"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	"github.com/stretchr/testify/assert"
@@ -29,7 +31,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewRecordingRuleGroupSetsClient(creator)
-	setName := "TestRecordingRuleGroupSet2"
+	setName := "TestRecordingRuleGroupSet " + strconv.FormatInt(time.Now().UnixMilli(), 10)
 	interval := uint32(180)
 	limit := uint64(100)
 

@@ -150,7 +150,6 @@ mod tests {
         )
         .unwrap();
 
-        let before_count = client.list().await.unwrap().scopes.len();
         let create = client
             .create(
                 "Test Data Access Rule".into(),
@@ -181,8 +180,16 @@ mod tests {
         assert_eq!(new_scope.display_name, "Updated Test Data Access Rule");
 
         let _ = client.get(vec![new_scope.id.clone()]).await.unwrap();
+        let deleted_scope_id = new_scope.id.clone();
         let _ = client.delete(new_scope.id).await.unwrap();
-        assert!(client.list().await.unwrap().scopes.len() - before_count == 0);
+
+        let scopes_list = client.list().await.unwrap();
+        for scope in scopes_list.scopes {
+            assert_ne!(
+                scope.id, deleted_scope_id,
+                "Deleted scope should not be in the list"
+            );
+        }
     }
 
     #[tokio::test]
