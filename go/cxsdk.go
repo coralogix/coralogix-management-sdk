@@ -107,6 +107,7 @@ type ClientSet struct {
 	roles               *RolesClient
 	integrations        *IntegrationsClient
 	notifications       *NotificationsClient
+	incidents           *IncidentsClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -231,6 +232,11 @@ func (c *ClientSet) Integrations() *IntegrationsClient {
 // Notifications gets a NotificationsClient from the ClientSet.
 func (c *ClientSet) Notifications() *NotificationsClient {
 	return c.notifications
+}
+
+// Incidents gets an IncidentsClient from the ClientSet.
+func (c *ClientSet) Incidents() *IncidentsClient {
+	return c.incidents
 }
 
 // NewClientSet Creates a new ClientSet.

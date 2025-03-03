@@ -1,0 +1,19 @@
+[package]
+name = "incidents"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/coralogix/coralogix-management-sdk"
+keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
+categories = ["asynchronous", "log"]
+authors = []
+
+[dependencies]
+anyhow = "*"
+cx-sdk = { path = "../../cx-sdk" }
+serde_json = "*"
+time = "0.3.36"
+
+tokio = { version = "*", features = ["full"] }
+tonic = "*"
+chrono = "*"

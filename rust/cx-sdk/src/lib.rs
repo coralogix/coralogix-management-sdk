@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#![allow(clippy::result_large_err)]
+#![allow(renamed_and_removed_lints)]
+
 //! The Rust SDK for Coralogix  APIs.
 use auth::ApiKey;
 use cx_api::proto::*;

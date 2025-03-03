@@ -916,6 +916,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "incidents"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "chrono",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic",
+]
+
+[[package]]
 name = "indexmap"
 version = "1.9.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"

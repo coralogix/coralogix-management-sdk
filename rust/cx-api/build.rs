@@ -79,6 +79,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         notifications_service(&root),
         #[cfg(feature = "contextual_data_integrations")]
         contextual_data_integrations_service(&root),
+        #[cfg(feature = "incidents")]
+        incidents_service(&root),
     ]
     .concat();
 
@@ -304,4 +306,11 @@ fn notifications_service(root: &str) -> Vec<String> {
             root
         ),
     ]
+}
+
+fn incidents_service(root: &str) -> Vec<String> {
+    vec![format!(
+        "{}/com/coralogixapis/incidents/v1/incidents_service.proto",
+        root
+    )]
 }
