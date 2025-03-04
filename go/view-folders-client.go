@@ -52,6 +52,7 @@ type ReplaceViewFolderRequest = vservices.ReplaceViewFolderRequest
 // ReplaceViewFolderResponse is a response to replacing a view folder
 type ReplaceViewFolderResponse = vservices.ReplaceViewFolderResponse
 
+// ViewFolder is a view folder
 type ViewFolder = views.ViewFolder
 
 const viewFolderFeatureGroupID = "data-exploration"
