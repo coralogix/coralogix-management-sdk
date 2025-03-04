@@ -37,23 +37,30 @@ mod tests {
         )
         .unwrap();
         let raw_dashboard = tokio::fs::read_to_string("dashboard.json").await.unwrap();
-        let mut dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
-        dashboard.id = Some(uuid::Uuid::new_v4().to_string()[..21].to_string());
-        let id = dashboard.id.as_ref().unwrap().clone();
-        if (client.get(id.clone()).await).is_ok() {
-            let _ = client.delete(id.clone()).await.unwrap();
-        }
-        let _ = client.create(dashboard, false).await.unwrap();
+        let dashboard: Dashboard = serde_json::from_str(raw_dashboard.as_str()).unwrap();
+        let created_dashboard = client.create(dashboard, false).await.unwrap();
 
-        let actual_dashboard = client.get(id.clone()).await.unwrap();
-        assert_eq!(actual_dashboard.dashboard.unwrap().id, Some(id.clone()));
-        let _ = client.pin(id.clone()).await.unwrap();
-        let _ = client.unpin(id.clone()).await.unwrap();
+        let _ = client
+            .pin(created_dashboard.dashboard_id.clone().unwrap())
+            .await
+            .unwrap();
+        let _ = client
+            .unpin(created_dashboard.dashboard_id.clone().unwrap())
+            .await
+            .unwrap();
 
         let dashboards = client.list().await.unwrap();
         assert!(!dashboards.items.is_empty());
-        assert!(dashboards.items.iter().any(|d| d.id == Some(id.clone())));
-        let _ = client.delete(id.clone()).await.unwrap();
+        assert!(
+            dashboards
+                .items
+                .iter()
+                .any(|d| d.id == created_dashboard.dashboard_id)
+        );
+        let _ = client
+            .delete(created_dashboard.dashboard_id.unwrap())
+            .await
+            .unwrap();
     }
 
     #[tokio::test]

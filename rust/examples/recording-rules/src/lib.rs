@@ -35,7 +35,7 @@ mod tests {
 
         let create_rule_group_set_response = client
             .create(
-                "TestRecordingRuleGroupSet2".into(),
+                format!("TestRecordingRuleGroupSet {}", chrono::Utc::now().timestamp_millis()).into(),
                 vec![InRuleGroup {
                     name: "foo".into(),
                     interval: Some(180),

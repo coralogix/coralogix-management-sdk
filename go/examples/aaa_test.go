@@ -124,9 +124,6 @@ func TestScopes(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewScopesClient(creator)
-	all, e := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
-	assertNilAndPrintError(t, e)
-	beginngingCount := len(all.Scopes)
 	description := "Data Access Rule intended for testing"
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
 		DisplayName: "Test Data Access Rule",
@@ -156,9 +153,12 @@ func TestScopes(t *testing.T) {
 		Id: result.Scope.Id,
 	})
 
-	all, e = c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
-	assertNilAndPrintError(t, e)
-	assert.Equal(t, beginngingCount, len(all.Scopes))
+	scopes, err := c.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
+	assert.Nil(t, err)
+
+	for _, scope := range scopes.Scopes {
+		assert.NotEqual(t, result.Scope.Id, scope.Id)
+	}
 }
 
 func TestGroups(t *testing.T) {
@@ -207,7 +207,7 @@ func TestGroups(t *testing.T) {
 
 	_, updateError := c.Update(context.Background(), &v1.UpdateTeamGroupRequest{
 		GroupId:     createdGroup.GroupId,
-		Name:        "Updated Test Group",
+		Name:        "Updated Test Group " + strconv.FormatInt(time.Now().UnixMilli(), 10),
 		Description: &groupDesc,
 	})
 

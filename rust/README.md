@@ -57,7 +57,7 @@ Please note that for all examples these variables have to be set to a valid clus
 These are just used within the examples:
 
 - `TEAM_ID`: This environment variable is required for running some examples and should contain your Coralogix team's id.
-- `AWS_TEST_ROLE`: This environment variable is also requried for certain tests and requires a valid AWS role that can access resources required for the test.
+- `AWS_TEST_ROLE`: This environment variable is also required for certain tests and requires a valid AWS role that can access resources required for the test.
 
 # License
 

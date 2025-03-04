@@ -20,6 +20,7 @@ name = "actions"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "chrono",
  "cx-sdk",
  "serde_json",
  "time",
@@ -1603,6 +1604,7 @@ version = "0.1.0"
 dependencies = [
  "anyhow",
  "async-trait",
+ "chrono",
  "cx-sdk",
  "http",
  "prost 0.12.6",
