@@ -52,18 +52,28 @@ type ReplaceViewRequest = vservices.ReplaceViewRequest
 // ReplaceViewResponse is a response to replacing a view
 type ReplaceViewResponse = vservices.ReplaceViewResponse
 
+// SearchQuery is a type for managing view properties
 type SearchQuery = views.SearchQuery
 
+// TimeSelection is a type for managing view properties
 type TimeSelection = views.TimeSelection
 
+// SelectedFilters is a type for managing view properties
 type SelectedFilters = views.SelectedFilters
 
+// ViewFilter is a type for managing view properties
 type ViewFilter = views.Filter
 
+// ViewTimeSelectionQuick is a type for managing view properties
 type ViewTimeSelectionQuick = views.TimeSelection_QuickSelection
 
+// QuickTimeSelection is a type for managing view properties
+type QuickTimeSelection = views.QuickTimeSelection
+
+// ViewTimeSelectionCustom is a type for managing view properties
 type ViewTimeSelectionCustom = views.TimeSelection_CustomSelection
 
+// View is a type for managing view properties
 type View = vservices.View
 
 const viewFeatureGroupID = "data-exploration"
