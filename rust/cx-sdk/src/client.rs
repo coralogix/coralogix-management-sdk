@@ -89,3 +89,6 @@ pub mod contextual_data_integrations;
 
 /// This module contains the client for the Incidents API.
 pub mod incidents;
+
+/// This module contains the client for the Events API.
+pub mod events;

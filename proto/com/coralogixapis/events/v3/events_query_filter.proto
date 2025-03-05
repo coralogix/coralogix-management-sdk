@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package com.coralogixapis.events.v3;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message EventsQueryFilter {
+  TimestampRange timestamp = 1;
+}
+
+message EventsFilter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "EventsFilter"
+      description: "This data structure represents an events filter"
+      required: [
+        "timestamp",
+        "cx_event_types",
+        "cx_event_keys",
+        "cx_event_metadata_filters"
+      ]
+    }
+  };
+  TimestampRange timestamp = 1;
+  repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_type\"]" }];
+  repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_key\"]" }];
+  Filters cx_event_metadata_filters = 5;
+}
+
+message Filters {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Filters"
+      description: "This data structure represents a filter"
+      required: [
+        "operator",
+        "path_and_values"
+      ]
+    }
+  };
+  FilterOperator operator = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"FILTER_OPERATOR_OR\"" }];
+  repeated FilterPathAndValues path_and_values = 2;
+}
+
+
+message FilterPathAndValues {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "FilterPathAndValues"
+      description: "This data structure represents a filter path and values"
+      required: [
+        "path",
+        "values"
+      ]
+    }
+  };
+  google.protobuf.StringValue path = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  oneof values {
+    MultipleValues multiple_values = 100;
+    Filters filters = 101;
+  }
+}
+
+message MultipleValues {
+  repeated google.protobuf.StringValue values = 1;
+  FilterMatcher matcher = 2;
+}
+
+enum FilterOperator {
+  FILTER_OPERATOR_AND_OR_UNSPECIFIED = 0;
+  FILTER_OPERATOR_OR = 1;
+}
+
+enum FilterMatcher {
+  FILTER_MATCHER_TEXT_OR_UNSPECIFIED = 0;
+  FILTER_MATCHER_REGEXP = 1;
+}
+
+message TimestampRange {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "TimestampRange"
+      description: "This data structure represents a timestamp range"
+      required: [
+        "from",
+        "to"
+      ]
+    }
+  };
+  google.protobuf.Timestamp from = 1;
+  google.protobuf.Timestamp to = 2;
+}
