@@ -20,12 +20,12 @@ import (
 	"os"
 	"testing"
 
-	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 	"github.com/google/uuid"
-
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/types/known/wrapperspb"
+
+	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 )
 
 func TestDashboards(t *testing.T) {
@@ -39,16 +39,7 @@ func TestDashboards(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	var d cxsdk.Dashboard
 	assertNilAndPrintError(t, protojson.Unmarshal(dat, &d))
-	d.Id = wrapperspb.String(uuid.New().String()[:21])
-	_, e := c.Get(context.Background(), &cxsdk.GetDashboardRequest{
-		DashboardId: d.Id,
-	})
-	if e != nil {
-		c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
-			DashboardId: d.Id,
-		})
-	}
-	_, e = c.Create(context.Background(), &cxsdk.CreateDashboardRequest{
+	createRes, e := c.Create(context.Background(), &cxsdk.CreateDashboardRequest{
 		Dashboard: &d,
 	})
 	if e != nil {
@@ -56,11 +47,11 @@ func TestDashboards(t *testing.T) {
 	}
 	assertNilAndPrintError(t, e)
 	_, e = c.Pin(context.Background(), &cxsdk.PinDashboardRequest{
-		DashboardId: d.Id,
+		DashboardId: createRes.DashboardId,
 	})
 	assertNilAndPrintError(t, e)
 	_, e = c.Unpin(context.Background(), &cxsdk.UnpinDashboardRequest{
-		DashboardId: d.Id,
+		DashboardId: createRes.DashboardId,
 	})
 	assertNilAndPrintError(t, e)
 
@@ -68,14 +59,14 @@ func TestDashboards(t *testing.T) {
 	assertNilAndPrintError(t, e)
 	found := false
 	for _, v := range all.Items {
-		if v.Id.Value == d.Id.Value {
+		if v.Id.Value == createRes.DashboardId.Value {
 			found = true
 			break
 		}
 	}
 	assert.True(t, found)
 	_, e = c.Delete(context.Background(), &cxsdk.DeleteDashboardRequest{
-		DashboardId: d.Id,
+		DashboardId: createRes.DashboardId,
 	})
 	assertNilAndPrintError(t, e)
 }

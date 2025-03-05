@@ -36,7 +36,10 @@ mod tests {
         delete_all_actions(&client).await;
 
         let action = Action {
-            name: Some("google search action".to_string()),
+            name: Some(format!(
+                "google search action {}",
+                chrono::Utc::now().timestamp_millis()
+            )),
             url: Some("https://www.google.com/search?q={{$p.selected_value}}".to_string()),
             is_private: Some(false),
             source_type: SourceType::Log.into(),
@@ -49,8 +52,10 @@ mod tests {
 
         let created_action = client.create(action).await.unwrap().action.unwrap();
 
+        let updated_action_name =
+            format!("updated action {}", chrono::Utc::now().timestamp_millis());
         let updated_action = Action {
-            name: Some("updated action".to_string()),
+            name: Some(updated_action_name.clone()),
             ..created_action
         };
 
@@ -58,7 +63,7 @@ mod tests {
         assert!(replace_action_result.is_ok());
 
         let replaced_action = replace_action_result.unwrap().action.unwrap();
-        assert!(replaced_action.name.unwrap() == "updated action");
+        assert!(replaced_action.name.unwrap() == updated_action_name);
 
         let retrieved_action = client.get(replaced_action.id.clone().unwrap()).await;
 

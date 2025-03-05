@@ -16,7 +16,9 @@ package examples
 
 import (
 	"context"
+	"strconv"
 	"testing"
+	"time"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 
@@ -33,7 +35,7 @@ func TestActions(t *testing.T) {
 	c := cxsdk.NewActionsClient(creator)
 
 	action, e := c.Create(context.Background(), &cxsdk.CreateActionRequest{
-		Name:             wrapperspb.String("google search action"),
+		Name:             wrapperspb.String("google search action " + strconv.FormatInt(time.Now().UnixMilli(), 10)),
 		Url:              wrapperspb.String("https://www.google.com/search?q={{$p.selected_value}}"),
 		IsPrivate:        wrapperspb.Bool(false),
 		SourceType:       cxsdk.SourceTypeLog,
@@ -45,7 +47,7 @@ func TestActions(t *testing.T) {
 	_, e = c.Replace(context.Background(), &cxsdk.ReplaceActionRequest{
 		Action: &cxsdk.Action{
 			Id:               action.Action.Id,
-			Name:             wrapperspb.String("updated action"),
+			Name:             wrapperspb.String("updated action " + strconv.FormatInt(time.Now().UnixMilli(), 10)),
 			Url:              wrapperspb.String("https://www.bing.com/search?q={{$p.selected_value}}"),
 			IsPrivate:        wrapperspb.Bool(false),
 			IsHidden:         wrapperspb.Bool(false),

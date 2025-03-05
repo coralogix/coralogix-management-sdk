@@ -1,17 +1,16 @@
 {
-  "id": "gpiSS8UJC336GEnJFALiq",
   "name": "from json",
   "description": "dashboards team is messing with this 🗿",
   "layout": {
     "sections": [
       {
         "id": {
-          "value": "jyFMEvjUGSuzXlqewnZyJ"
+          "value": "id"
         },
         "rows": [
           {
             "id": {
-              "value": "acijlLEtkdoEzOsQGUhEV"
+              "value": "id"
             },
             "appearance": {
               "height": 19
@@ -19,14 +18,14 @@
             "widgets": [
               {
                 "id": {
-                  "value": "kDPRjjpUQoAeNkAlWvYvb"
+                  "value": "id"
                 },
                 "title": "process_cpu_cores_available",
                 "definition": {
                   "lineChart": {
                     "queryDefinitions": [
                       {
-                        "id": "kDPRjjpUQoAeNkAlWvYvd",
+                        "id": "id",
                         "query": {
                           "metrics": {
                             "promqlQuery": {
@@ -53,14 +52,14 @@
               },
               {
                 "id": {
-                  "value": "FbRChvZQzZCPgwbbAQimI"
+                  "value": "id"
                 },
                 "title": "count",
                 "definition": {
                   "lineChart": {
                     "queryDefinitions": [
                       {
-                        "id": "kDPRjjpUQoAeNkAlWvYvc",
+                        "id": "id",
                         "query": {
                           "logs": {
                             "aggregations": [
@@ -91,14 +90,14 @@
               },
               {
                 "id": {
-                  "value": "becCcvfhRasjRswYufdmZ"
+                  "value": "id"
                 },
                 "title": "error throwing pods",
                 "definition": {
                   "lineChart": {
                     "queryDefinitions": [
                       {
-                        "id": "kDPRjjpUQoAeOkAlWvYvb",
+                        "id": "id",
                         "seriesNameTemplate": "[{{ subsystem }}]: {{ kubernetes.pod_id.keyword }}",
                         "query": {
                           "logs": {
@@ -135,7 +134,7 @@
           },
           {
             "id": {
-              "value": "EOpnAkimDnyGsOKzVFuuQ"
+              "value": "id"
             },
             "appearance": {
               "height": 28
@@ -143,7 +142,7 @@
             "widgets": [
               {
                 "id": {
-                  "value": "pHJPvPBdMIZrbGVmxLSaV"
+                  "value": "id"
                 },
                 "title": "dashboards-api logz",
                 "description": "warnings, errors, criticals",
