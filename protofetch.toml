@@ -143,6 +143,7 @@ allow_policies = [
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
 ]
 
+
 [google-api]
 url = "github.com/googleapis/googleapis"
 revision = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
@@ -172,3 +173,7 @@ allow_policies = [
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
 revision = "v1.0.1"
+
+[cx-api-events]
+url = 'github.com/coralogix/cx-api-events'
+revision = "v0.1.1"

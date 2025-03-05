@@ -1,0 +1,218 @@
+syntax = "proto3";
+
+package com.coralogixapis.events.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/events/v3/cx_event.proto";
+import "com/coralogixapis/events/v3/event_order_by.proto";
+import "com/coralogixapis/events/v3/events_query_filter.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
+
+service EventsService {
+
+  rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "get event";
+    option (google.api.http) = {
+      get: "/v3/events/{id}"
+    };
+  }
+
+  rpc BatchGetEvent(BatchGetEventRequest) returns (BatchGetEventResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "batch get events";
+    option (google.api.http) = {
+      get: "/v3/events/events:batchGet"
+    };
+  }
+
+  rpc ListEvents(ListEventsRequest) returns (ListEventsResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "get events list";
+    option (google.api.http) = {
+      get: "/v3/events"
+    };
+  }
+
+  rpc ListEventsCount(ListEventsCountRequest) returns (ListEventsCountResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "get events list count";
+    option (google.api.http) = {
+      get: "/v3/events:count"
+    };
+  }
+
+  rpc GetEventsStatistics(GetEventsStatisticsRequest) returns (GetEventsStatisticsResponse){
+    option (com.coralogix.common.v1.audit_log_description).description = "get events statistics";
+    option (google.api.http) = {
+      get: "/v3/events:statistics"
+    };
+  }
+}
+
+message CxEventArray {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "CxEventArray"
+      description: "This data structure represents an array of events"
+      required: [
+        "events"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+      description: "Find out more about events"
+    }
+  };
+
+  repeated CxEvent events = 1;
+}
+
+message CxEventSingleOrMultiple {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "CxEventSingleOrMultiple"
+      description: "This data structure represents a single or multiple events"
+      required: [
+        "event"
+      ]
+    }
+  };
+  oneof event {
+    CxEvent single_event = 1; 
+    CxEventArray multiple_events = 2;
+  }
+}
+
+message GetEventRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetEventRequest"
+      description: "This data structure represents a request to get an event"
+      required: [
+        "id"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  repeated OrderBy order_bys = 2;
+  PaginationRequest pagination = 3;
+}
+
+message GetEventResponse {
+  CxEventSingleOrMultiple event = 1;
+  PaginationResponse pagination = 2;
+}
+
+message BatchGetEventRequest {
+  repeated google.protobuf.StringValue ids = 1;
+  repeated OrderBy order_bys = 2;
+  PaginationRequest pagination = 3;
+  EventsQueryFilter filter = 4;
+}
+
+message BatchGetEventResponse {
+  map<string, CxEventSingleOrMultiple> events = 1;
+  repeated google.protobuf.StringValue not_found_ids = 2;
+  PaginationResponse pagination = 3;
+}
+
+message PaginationRequest {
+  google.protobuf.UInt32Value page_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.StringValue page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+}
+
+message PaginationResponse {
+  google.protobuf.UInt32Value total_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.StringValue next_page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+}
+
+message ListEventsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListEventsRequest"
+      description: "This data structure represents a request to list events"
+      required: [
+        "filter",
+        "order_bys",
+        "pagination"
+      ]
+    }
+  };
+  EventsFilter filter = 1;
+  repeated OrderBy order_bys = 2;
+  PaginationRequest pagination = 3;
+}
+
+message ListEventsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListEventsResponse"
+      description: "This data structure represents a response to list events"
+      required: [
+        "events",
+        "pagination"
+      ]
+    }
+  };
+  repeated CxEvent events = 1;
+  PaginationResponse pagination = 2;
+}
+
+message GetEventsStatisticsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetEventsStatisticsRequest"
+      description: "This data structure represents a request to get events statistics"
+      required: [
+        "filter"
+      ]
+    }
+  };
+  EventsFilter filter = 1;
+}
+
+message GetEventsStatisticsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetEventsStatisticsResponse"
+      description: "This data structure represents a response to get events statistics"
+      required: [
+        "cx_event_metadata_field_statistics"
+      ]
+    }
+  };
+  map<string, FieldStatistics> cx_event_metadata_field_statistics = 1;
+}
+
+message FieldStatistics {
+  map<string, google.protobuf.Int64Value> field_statistics = 1;
+}
+
+message ListEventsCountRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListEventsCountRequest"
+      description: "This data structure represents a request to list events count"
+      required: [
+        "filter"
+      ]
+    }
+  };
+  EventsFilter filter = 1;
+}
+
+message ListEventsCountResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListEventsCountResponse"
+      description: "This data structure represents a response to list events count"
+      required: [
+        "count",
+        "reached_limit"
+      ]
+    }
+  };
+  google.protobuf.UInt64Value count = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.BoolValue reached_limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "false" }];
+}

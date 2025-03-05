@@ -55,6 +55,12 @@ revision = "v0.5.7.2"
 commit_hash = "4834aa80fb0cd0f075e5df0c1e20ec1014348beb"
 
 [[dependencies]]
+name = "cx-api-events"
+url = "github.com/coralogix/cx-api-events"
+revision = "v0.1.1"
+commit_hash = "e228c1b732604857f7e1f34715ef20928cede510"
+
+[[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
 revision = "v1.0.6"

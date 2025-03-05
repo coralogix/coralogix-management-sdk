@@ -8,6 +8,7 @@ members = [
     "dashboards",
     "dataplans",
     "enrichments",
+    "events",
     "incidents",
     "infra-monitoring",
     "integrations",
