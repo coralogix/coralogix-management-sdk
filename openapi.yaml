@@ -3,6 +3,7 @@ info:
   title: google/api/client.proto
   version: version not set
 tags:
+  - name: EventsService
   - name: ServiceSloService
   - name: GlobalRoutersService
   - name: ConnectorsService
@@ -21866,6 +21867,486 @@ paths:
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
               --data '{"newName":"my_new_name","isActive":true,"presets":{"presets":["string"]},"permissions":{"permissions":["string"]}}'
+  /v3/events:
+    get:
+      operationId: EventsService_ListEvents
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/eventsv3ListEventsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: filter.timestamp.from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.timestamp.to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.cxEventTypes
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventKeys
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventMetadataFilters.operator
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+              - FILTER_OPERATOR_OR
+            default: FILTER_OPERATOR_AND_OR_UNSPECIFIED
+        - name: pagination.pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: pagination.pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - EventsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v3/events?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE&pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v3/events"
+
+
+            querystring =
+            {"filter.timestamp.from":"SOME_STRING_VALUE","filter.timestamp.to":"SOME_STRING_VALUE","filter.cxEventTypes":"SOME_ARRAY_VALUE","filter.cxEventKeys":"SOME_ARRAY_VALUE","filter.cxEventMetadataFilters.operator":"SOME_STRING_VALUE","pagination.pageSize":"SOME_INTEGER_VALUE","pagination.pageToken":"SOME_STRING_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url 'https://api.coralogix.com/mgmt/openapi/v3/events?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE&pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v3/events/events:batchGet:
+    get:
+      operationId: EventsService_BatchGetEvent
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3BatchGetEventResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: ids
+          in: query
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: pagination.pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: pagination.pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: filter.timestamp.from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.timestamp.to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+      tags:
+        - EventsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE&filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet"
+
+
+            querystring =
+            {"ids":"SOME_ARRAY_VALUE","pagination.pageSize":"SOME_INTEGER_VALUE","pagination.pageToken":"SOME_STRING_VALUE","filter.timestamp.from":"SOME_STRING_VALUE","filter.timestamp.to":"SOME_STRING_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url 'https://api.coralogix.com/mgmt/openapi/v3/events/events:batchGet?ids=SOME_ARRAY_VALUE&pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE&filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v3/events/{id}:
+    get:
+      operationId: EventsService_GetEvent
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetEventResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: pagination.pageSize
+          in: query
+          required: false
+          schema:
+            type: integer
+            format: int64
+        - name: pagination.pageToken
+          in: query
+          required: false
+          schema:
+            type: string
+      tags:
+        - EventsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v3/events/%7Bid%7D?pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v3/events/%7Bid%7D"
+
+
+            querystring =
+            {"pagination.pageSize":"SOME_INTEGER_VALUE","pagination.pageToken":"SOME_STRING_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url 'https://api.coralogix.com/mgmt/openapi/v3/events/%7Bid%7D?pagination.pageSize=SOME_INTEGER_VALUE&pagination.pageToken=SOME_STRING_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v3/events:count:
+    get:
+      operationId: EventsService_ListEventsCount
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3ListEventsCountResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: filter.timestamp.from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.timestamp.to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.cxEventTypes
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventKeys
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventMetadataFilters.operator
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+              - FILTER_OPERATOR_OR
+            default: FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      tags:
+        - EventsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v3/events:count"
+
+
+            querystring =
+            {"filter.timestamp.from":"SOME_STRING_VALUE","filter.timestamp.to":"SOME_STRING_VALUE","filter.cxEventTypes":"SOME_ARRAY_VALUE","filter.cxEventKeys":"SOME_ARRAY_VALUE","filter.cxEventMetadataFilters.operator":"SOME_STRING_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url 'https://api.coralogix.com/mgmt/openapi/v3/events:count?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v3/events:statistics:
+    get:
+      operationId: EventsService_GetEventsStatistics
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v3GetEventsStatisticsResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: filter.timestamp.from
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.timestamp.to
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: filter.cxEventTypes
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventKeys
+          in: query
+          required: true
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: filter.cxEventMetadataFilters.operator
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+              - FILTER_OPERATOR_OR
+            default: FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      tags:
+        - EventsService
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v3/events:statistics"
+
+
+            querystring =
+            {"filter.timestamp.from":"SOME_STRING_VALUE","filter.timestamp.to":"SOME_STRING_VALUE","filter.cxEventTypes":"SOME_ARRAY_VALUE","filter.cxEventKeys":"SOME_ARRAY_VALUE","filter.cxEventMetadataFilters.operator":"SOME_STRING_VALUE"}
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers,
+            params=querystring)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url 'https://api.coralogix.com/mgmt/openapi/v3/events:statistics?filter.timestamp.from=SOME_STRING_VALUE&filter.timestamp.to=SOME_STRING_VALUE&filter.cxEventTypes=SOME_ARRAY_VALUE&filter.cxEventKeys=SOME_ARRAY_VALUE&filter.cxEventMetadataFilters.operator=SOME_STRING_VALUE' \
+              --header 'Authorization: Bearer <API_KEY>'
   /webhook-integration/v1/count:
     post:
       operationId: WebhookIntegrationService_CountWebhookIntegrations
@@ -24266,22 +24747,6 @@ components:
           type: string
         template:
           type: string
-    alertsv3PaginationRequest:
-      type: object
-      properties:
-        pageSize:
-          type: integer
-          format: int64
-        pageToken:
-          type: string
-    alertsv3PaginationResponse:
-      type: object
-      properties:
-        totalSize:
-          type: integer
-          format: int64
-        nextPageToken:
-          type: string
     alertsv3SetActiveResponse:
       type: object
       description: Response after enabling or disabling an alert definition
@@ -24985,6 +25450,62 @@ components:
           type: string
         endTimeSeconds:
           type: string
+    coralogixapisalertsv3PaginationRequest:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int64
+        pageToken:
+          type: string
+    coralogixapisalertsv3PaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+          format: int64
+        nextPageToken:
+          type: string
+    coralogixapiseventsv3OrderBy:
+      type: object
+      properties:
+        fieldName:
+          $ref: '#/components/schemas/coralogixapiseventsv3OrderByFields'
+        direction:
+          $ref: '#/components/schemas/coralogixapiseventsv3OrderByDirection'
+    coralogixapiseventsv3OrderByDirection:
+      type: string
+      enum:
+        - ORDER_BY_DIRECTION_UNSPECIFIED
+        - ORDER_BY_DIRECTION_ASC
+        - ORDER_BY_DIRECTION_DESC
+      default: ORDER_BY_DIRECTION_UNSPECIFIED
+    coralogixapiseventsv3OrderByFields:
+      type: string
+      enum:
+        - ORDER_BY_FIELDS_UNSPECIFIED
+        - ORDER_BY_FIELDS_TIMESTAMP
+      default: ORDER_BY_FIELDS_UNSPECIFIED
+    coralogixapiseventsv3PaginationRequest:
+      type: object
+      properties:
+        pageSize:
+          type: integer
+          format: int64
+          example: 10
+        pageToken:
+          type: string
+          example: test
+    coralogixapiseventsv3PaginationResponse:
+      type: object
+      properties:
+        totalSize:
+          type: integer
+          format: int64
+          example: 10
+        nextPageToken:
+          type: string
+          example: test
     coralogixapisincidentsv1MetaLabel:
       type: object
       properties:
@@ -25744,6 +26265,26 @@ components:
         - targetBaseMetricName
         - sourceField
         - aggregations
+    eventsv3FilterOperator:
+      type: string
+      enum:
+        - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+        - FILTER_OPERATOR_OR
+      default: FILTER_OPERATOR_AND_OR_UNSPECIFIED
+    eventsv3ListEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3CxEvent'
+        pagination:
+          $ref: '#/components/schemas/coralogixapiseventsv3PaginationResponse'
+      description: This data structure represents a response to list events
+      title: ListEventsResponse
+      required:
+        - events
+        - pagination
     extensionsv1Extension:
       type: object
       properties:
@@ -25988,6 +26529,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/groupsOutRuleGroupSet'
+    incidentsv1FilterOperator:
+      type: string
+      enum:
+        - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+        - FILTER_OPERATOR_AND
+      default: FILTER_OPERATOR_OR_OR_UNSPECIFIED
     incidentsv1OrderBy:
       type: object
       properties:
@@ -26760,6 +27307,13 @@ components:
           title: >-
             String represents the object's name, value represents if it is
             selected or not
+    queriesv1ListEventsResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/v1Event'
     quotav1SourceType:
       type: string
       enum:
@@ -29687,12 +30241,6 @@ components:
           $ref: '#/components/schemas/v1AlertSchedulerRuleIds'
         alertSchedulerVersionIds:
           $ref: '#/components/schemas/v1AlertSchedulerRuleVersionIds'
-    v1FilterOperator:
-      type: string
-      enum:
-        - FILTER_OPERATOR_OR_OR_UNSPECIFIED
-        - FILTER_OPERATOR_AND
-      default: FILTER_OPERATOR_OR_OR_UNSPECIFIED
     v1FilterType:
       type: string
       enum:
@@ -31347,7 +31895,7 @@ components:
             $ref: '#/components/schemas/coralogixapisincidentsv1MetaLabel'
           title: filters all incidents with the given meta labels
         metaLabelsOp:
-          $ref: '#/components/schemas/v1FilterOperator'
+          $ref: '#/components/schemas/incidentsv1FilterOperator'
     v1IncidentQueryFiltersValues:
       type: object
       properties:
@@ -31376,7 +31924,7 @@ components:
           items:
             $ref: '#/components/schemas/v1IncidentMetaLabelsWithCount'
         metaLabelsOp:
-          $ref: '#/components/schemas/v1FilterOperator'
+          $ref: '#/components/schemas/incidentsv1FilterOperator'
       description: An incident query filters values
       title: IncidentQueryFiltersValues
       required:
@@ -31881,7 +32429,7 @@ components:
           items:
             $ref: '#/components/schemas/coralogixapisincidentsv1MetaLabel'
         operator:
-          $ref: '#/components/schemas/v1FilterOperator'
+          $ref: '#/components/schemas/incidentsv1FilterOperator'
     v1LatencySli:
       type: object
       properties:
@@ -31987,13 +32535,6 @@ components:
           type: array
           items:
             type: string
-    v1ListEventsResponse:
-      type: object
-      properties:
-        events:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1Event'
     v1ListFiltersResponse:
       type: object
       properties:
@@ -36931,6 +37472,19 @@ components:
         - AUTO_RETIRE_TIMEFRAME_HOURS_12
         - AUTO_RETIRE_TIMEFRAME_HOURS_24
       default: AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
+    v3BatchGetEventResponse:
+      type: object
+      properties:
+        events:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v3CxEventSingleOrMultiple'
+        notFoundIds:
+          type: array
+          items:
+            type: string
+        pagination:
+          $ref: '#/components/schemas/coralogixapiseventsv3PaginationResponse'
     v3CreateAlertDefResponse:
       type: object
       properties:
@@ -37012,6 +37566,85 @@ components:
         - keyId
         - name
         - value
+    v3CxEvent:
+      type: object
+      properties:
+        cxEventKey:
+          type: string
+          example: test
+        cxEventType:
+          type: string
+          example: test_type
+        cxEventLabels:
+          type: object
+          example:
+            test: test
+          additionalProperties:
+            type: string
+        companyId:
+          type: integer
+          format: int32
+          example: 1
+        cxEventTimestamp:
+          type: string
+          format: date-time
+          example: 1714857600
+        cxEventPayloadType:
+          type: string
+          example: test_payload_type
+        cxEventPayload:
+          type: object
+          example:
+            test: test
+        cxEventDedupKey:
+          type: string
+          example: test_dedup_key
+        cxEventMetadata:
+          type: object
+          example:
+            test: test
+          additionalProperties:
+            type: string
+      description: This data structure represents an event
+      title: Event
+      externalDocs:
+        description: Find out more about events
+        url: >-
+          https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      required:
+        - cxEventKey
+        - cxEventType
+        - cxEventLabels
+        - companyId
+        - cxEventTimestamp
+        - cxEventPayloadType
+        - cxEventPayload
+    v3CxEventArray:
+      type: object
+      properties:
+        events:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3CxEvent'
+      description: This data structure represents an array of events
+      title: CxEventArray
+      externalDocs:
+        description: Find out more about events
+        url: >-
+          https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      required:
+        - events
+    v3CxEventSingleOrMultiple:
+      type: object
+      properties:
+        singleEvent:
+          $ref: '#/components/schemas/v3CxEvent'
+        multipleEvents:
+          $ref: '#/components/schemas/v3CxEventArray'
+      description: This data structure represents a single or multiple events
+      title: CxEventSingleOrMultiple
+      required:
+        - event
     v3DayOfWeek:
       type: string
       enum:
@@ -37061,6 +37694,80 @@ components:
             $ref: '#/components/schemas/v3Permutation'
         activityAnalysisStats:
           $ref: '#/components/schemas/v3ActivityAnalysisStats'
+    v3EventsFilter:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/v3TimestampRange'
+        cxEventTypes:
+          type: array
+          example:
+            - test_type
+          items:
+            type: string
+        cxEventKeys:
+          type: array
+          example:
+            - test_key
+          items:
+            type: string
+        cxEventMetadataFilters:
+          $ref: '#/components/schemas/v3Filters'
+      description: This data structure represents an events filter
+      title: EventsFilter
+      required:
+        - timestamp
+        - cxEventTypes
+        - cxEventKeys
+        - cxEventMetadataFilters
+    v3EventsQueryFilter:
+      type: object
+      properties:
+        timestamp:
+          $ref: '#/components/schemas/v3TimestampRange'
+    v3FieldStatistics:
+      type: object
+      properties:
+        fieldStatistics:
+          type: object
+          additionalProperties:
+            type: string
+            format: int64
+    v3FilterMatcher:
+      type: string
+      enum:
+        - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+        - FILTER_MATCHER_REGEXP
+      default: FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+    v3FilterPathAndValues:
+      type: object
+      properties:
+        path:
+          type: string
+          example: test
+        multipleValues:
+          $ref: '#/components/schemas/v3MultipleValues'
+        filters:
+          $ref: '#/components/schemas/v3Filters'
+      description: This data structure represents a filter path and values
+      title: FilterPathAndValues
+      required:
+        - path
+        - values
+    v3Filters:
+      type: object
+      properties:
+        operator:
+          $ref: '#/components/schemas/eventsv3FilterOperator'
+        pathAndValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/v3FilterPathAndValues'
+      description: This data structure represents a filter
+      title: Filters
+      required:
+        - operator
+        - pathAndValues
     v3FlowStages:
       type: object
       properties:
@@ -37160,7 +37867,7 @@ components:
         multiplePermutation:
           $ref: '#/components/schemas/v3AlertEventMultiplePermutation'
         pagination:
-          $ref: '#/components/schemas/alertsv3PaginationResponse'
+          $ref: '#/components/schemas/coralogixapisalertsv3PaginationResponse'
     v3GetAlertEventStatsResponse:
       type: object
       properties:
@@ -37181,6 +37888,24 @@ components:
           https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
       required:
         - keyInfo
+    v3GetEventResponse:
+      type: object
+      properties:
+        event:
+          $ref: '#/components/schemas/v3CxEventSingleOrMultiple'
+        pagination:
+          $ref: '#/components/schemas/coralogixapiseventsv3PaginationResponse'
+    v3GetEventsStatisticsResponse:
+      type: object
+      properties:
+        cxEventMetadataFieldStatistics:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/v3FieldStatistics'
+      description: This data structure represents a response to get events statistics
+      title: GetEventsStatisticsResponse
+      required:
+        - cxEventMetadataFieldStatistics
     v3GetSendDataApiKeysResponse:
       type: object
       properties:
@@ -37286,6 +38011,21 @@ components:
       title: List Alert Definitions Response
       required:
         - alertDefs
+    v3ListEventsCountResponse:
+      type: object
+      properties:
+        count:
+          type: string
+          format: uint64
+          example: 10
+        reachedLimit:
+          type: boolean
+          example: false
+      description: This data structure represents a response to list events count
+      title: ListEventsCountResponse
+      required:
+        - count
+        - reachedLimit
     v3LogFilterOperationType:
       type: string
       enum:
@@ -37901,6 +38641,15 @@ components:
         - METRIC_TIME_WINDOW_VALUE_HOURS_24
         - METRIC_TIME_WINDOW_VALUE_HOURS_36
       default: METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED
+    v3MultipleValues:
+      type: object
+      properties:
+        values:
+          type: array
+          items:
+            type: string
+        matcher:
+          $ref: '#/components/schemas/v3FilterMatcher'
     v3NextOp:
       type: string
       enum:
@@ -38048,6 +38797,20 @@ components:
         - TIMEFRAME_TYPE_UNSPECIFIED
         - TIMEFRAME_TYPE_UP_TO
       default: TIMEFRAME_TYPE_UNSPECIFIED
+    v3TimestampRange:
+      type: object
+      properties:
+        from:
+          type: string
+          format: date-time
+        to:
+          type: string
+          format: date-time
+      description: This data structure represents a timestamp range
+      title: TimestampRange
+      required:
+        - from
+        - to
     v3TracingFilter:
       type: object
       properties:
