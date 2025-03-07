@@ -1,0 +1,13 @@
+[package]
+name = "data-exploration"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+anyhow = "*"
+async-trait = "*"
+cx-sdk = { path = "../../cx-sdk" }
+http = "*"
+tokio = { version = "*", features = ["full"] }
+tonic = "*"
+uuid = { version = "*", features = ["v4"] }

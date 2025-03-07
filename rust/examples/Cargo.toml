@@ -6,6 +6,7 @@ members = [
     "alerts",
     "dashboard-folders",
     "dashboards",
+    "data-exploration",
     "dataplans",
     "enrichments",
     "events",

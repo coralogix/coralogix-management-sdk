@@ -81,7 +81,7 @@ impl ViewFoldersClient {
     /// * `folder` - The [`ViewFolder`] to create.
     pub async fn create(&self, folder: ViewFolder) -> Result<CreateViewFolderResponse> {
         let request = make_request_with_metadata(
-            CreateViewFolderRequest { name: view.name },
+            CreateViewFolderRequest { name: folder.name },
             &self.teams_level_metadata_map,
         );
         Ok(self

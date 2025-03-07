@@ -90,10 +90,11 @@ pub mod contextual_data_integrations;
 /// This module contains the client for the Incidents API.
 pub mod incidents;
 
+/// This module contains the client for the Events API.
 pub mod events;
 
-// This module contains the client for the Views API.
+/// This module contains the client for the Views API.
 pub mod views;
 
-// This module contains the client for the Views Folders API.
+/// This module contains the client for the Views Folders API.
 pub mod views_folders;

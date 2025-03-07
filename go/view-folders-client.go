@@ -37,7 +37,7 @@ type GetViewFolderResponse = vservices.GetViewFolderResponse
 // ListViewFoldersRequest is a request to list all views
 type ListViewFoldersRequest = vservices.ListViewFoldersRequest
 
-// ListViewsResponse is a response when listing views
+// ListViewFoldersResponse is a response when listing views
 type ListViewFoldersResponse = vservices.ListViewFoldersResponse
 
 // DeleteViewFolderRequest is a request to delete a view folder
