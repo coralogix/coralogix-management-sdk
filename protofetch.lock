@@ -135,8 +135,8 @@ commit_hash = "c95fd671aef052a3ce7c0f1ca46f7ecaf42c476b"
 [[dependencies]]
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
-revision = "v1.3"
-commit_hash = "a60a1e3f54c852881b721ad28495f53dea481689"
+branch = "IAC-468"
+commit_hash = "b95ab565b17f15f5527652eb417c5fb6cffa4a8c"
 
 [[dependencies]]
 name = "global-mapping"

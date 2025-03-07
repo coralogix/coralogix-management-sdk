@@ -77,7 +77,7 @@ impl ViewsClient {
         let channel: Channel = Endpoint::from_str(region.grpc_endpoint().as_str())?
             .tls_config(ClientTlsConfig::new().with_native_roots())?
             .connect_lazy();
-        let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
+        let request_metadata: CallProperties = (&auth_context.user_level_api_key).into();
         Ok(Self {
             teams_level_metadata_map: request_metadata.to_metadata_map(),
             service_client: Mutex::new(ViewsServiceClient::new(channel)),

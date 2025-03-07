@@ -94,7 +94,7 @@ type ViewsClient struct {
 
 // Create creates a new view
 func (c ViewsClient) Create(ctx context.Context, req *CreateViewRequest) (*CreateViewResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (c ViewsClient) Create(ctx context.Context, req *CreateViewRequest) (*Creat
 
 // Get gets a view by its ID
 func (c ViewsClient) Get(ctx context.Context, req *GetViewRequest) (*GetViewResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -130,7 +130,7 @@ func (c ViewsClient) Get(ctx context.Context, req *GetViewRequest) (*GetViewResp
 
 // List lists all views for the current team
 func (c ViewsClient) List(ctx context.Context, req *ListViewsRequest) (*ListViewsResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -148,7 +148,7 @@ func (c ViewsClient) List(ctx context.Context, req *ListViewsRequest) (*ListView
 
 // Replace updates a view
 func (c ViewsClient) Replace(ctx context.Context, req *ReplaceViewRequest) (*ReplaceViewResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -166,7 +166,7 @@ func (c ViewsClient) Replace(ctx context.Context, req *ReplaceViewRequest) (*Rep
 
 // Delete deletes a view
 func (c ViewsClient) Delete(ctx context.Context, req *DeleteViewRequest) (*DeleteViewResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
