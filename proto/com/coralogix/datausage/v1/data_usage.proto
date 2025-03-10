@@ -93,18 +93,6 @@ message TeamQuota {
   Retention retention = 3;
 }
 
-message DataUsageReport {
-  Team team = 1;
-  DataType type = 2;
-  TcoTier tier = 3;
-  google.protobuf.Timestamp date = 4;
-  google.protobuf.StringValue application = 5;
-  google.protobuf.StringValue subsystem = 6;
-  Severity severity = 7;
-  google.protobuf.DoubleValue usage_in_gb = 8;
-  Unit units = 9;
-}
-
 enum Pillar {
   PILLAR_UNSPECIFIED = 0;
   PILLAR_METRICS = 1;

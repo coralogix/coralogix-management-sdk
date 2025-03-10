@@ -32,6 +32,9 @@ service InternalDatasetLocationsService {
   rpc UpdateDatasetLocation(InternalDatasetLocationsServiceUpdateDatasetLocationRequest) returns (InternalDatasetLocationsServiceUpdateDatasetLocationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Update dataset location according to companyId, location, dataspace and dataset";
   }
+  rpc DeleteDatasetLocations(InternalDatasetLocationsServiceDeleteDatasetLocationsRequest) returns (InternalDatasetLocationsServiceDeleteDatasetLocationsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete dataset locations according to companyId, dataspace and dataset";
+  }
 }
 
 message Timeframe {
@@ -90,7 +93,7 @@ message DatasetsInfo {
 }
 
 message GetDatasetListResponse {
-    repeated DatasetsInfo datasets_info = 1;
+  repeated DatasetsInfo datasets_info = 1;
 }
 
 message InternalDatasetLocationsServiceGetDatasetListResponse {
@@ -126,5 +129,13 @@ message DatasetLocationDetails {
 }
 
 message InternalDatasetLocationsServiceUpdateDatasetLocationResponse {
-    DatasetLocation dataset_location = 1;
+  DatasetLocation dataset_location = 1;
+}
+
+message InternalDatasetLocationsServiceDeleteDatasetLocationsRequest {
+  uint32 company_id = 1;
+  Dataset dataset = 2;
+}
+
+message InternalDatasetLocationsServiceDeleteDatasetLocationsResponse {
 }

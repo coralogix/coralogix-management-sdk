@@ -10,6 +10,8 @@ message DatasetRule {
   Predicate predicate = 2;
   repeated IngestionLocationSpec locations = 3;
   repeated string schema_template_ids = 4;
+  Pillar pillar = 5;
+  string entity_type = 6;
 }
 
 message Predicate {
@@ -22,4 +24,12 @@ enum PredicateType {
   PREDICATE_TYPE_REGEX = 1;
   PREDICATE_TYPE_DPXL = 2;
   PREDICATE_TYPE_EXACT = 3;
+}
+
+enum Pillar {
+  PILLAR_UNSPECIFIED = 0;
+  PILLAR_LOGS = 1;
+  PILLAR_SPANS = 2;
+  PILLAR_METRICS = 3;
+  PILLAR_BINARY = 4;
 }

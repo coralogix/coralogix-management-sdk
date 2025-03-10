@@ -139,6 +139,8 @@ async fn main() -> eyre::Result<()> {
         tracing::info!("No changes");
         return Ok(());
     }
+    
+    tokio::fs::write(&protofetch_path, protofetch_descriptor.to_string()).await?;
 
     // Make: protofetch & build Go proxies
     let output = tokio::process::Command::new("make")

@@ -144,7 +144,15 @@ enum Resource {
   RESOURCE_RUM_SETTINGS = 131 [(name) = "rum-settings"];
   RESOURCE_SESSION_RECORDING = 132 [(name) = "session-recording"];
   RESOURCE_NOTIFICATION_CENTER_ROUTERS = 133 [(name) = "notification-center-routers"];
-  RESOURCE_PROFILES_DATA_INGRESS = 134 [(name) = "profiles-data-ingress"];
+  RESOURCE_PROFILES_DATA_INGRESS = 134 [(name) = "profiles.data-ingress"];
+  RESOURCE_AI_APP_CATALOG = 135 [(name) = "ai-app-catalog"];
+  RESOURCE_AI_APP_DISCOVERY = 136 [(name) = "ai-app-discovery"];
+  RESOURCE_AI_APP_EVALUATORS = 137 [(name) = "ai-app-evaluators"];
+  RESOURCE_AI_OVERVIEW = 138 [(name) = "ai-overview"];
+  RESOURCE_AI_SPM = 139 [(name) = "ai-spm"];
+  RESOURCE_LOGS_RESERVED_FIELDS = 140 [(name) = "logs.reserved-fields"];
+  RESOURCE_PROFILES_CPU_PROFILES = 141 [(name) = "profiles.cpu-profiles"];
+  RESOURCE_PROFILES_DEBUG_SYMBOLS = 142 [(name) = "profiles.debug-symbols"];
 }
 
 
@@ -202,4 +210,5 @@ enum Action {
   ACTION_READ_ALL = 50 [(name) = "ReadAll"];
   ACTION_UPDATE_ALL = 51 [(name) = "UpdateAll"];
   ACTION_READ_SUMMARY = 52 [(name) = "ReadSummary"];
+  ACTION_UPLOAD = 53 [(name) = "Upload"];
 }

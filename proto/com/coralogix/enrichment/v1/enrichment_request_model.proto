@@ -25,6 +25,7 @@ message EnrichmentRequestModel {
   google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"sourceIPs\"" }];
   EnrichmentType enrichment_type = 2;
   optional google.protobuf.StringValue enriched_field_name = 3;
+  repeated string selected_columns = 4;
 }
 
 message EnrichmentFieldDefinition {
@@ -32,4 +33,6 @@ message EnrichmentFieldDefinition {
   google.protobuf.StringValue field_name = 1;
   // the field of the enriched key after enrichment
   optional google.protobuf.StringValue enriched_field_name = 3;
+  // the columns to be selected from the enrichment
+  repeated string selected_columns = 4;
 }

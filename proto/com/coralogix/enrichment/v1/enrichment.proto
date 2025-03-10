@@ -28,4 +28,5 @@ message Enrichment {
   string field_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
   EnrichmentType enrichment_type = 3;
   optional google.protobuf.StringValue enriched_field_name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  repeated string selected_columns = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: '["city", "population"]' }];
 }

@@ -10,12 +10,16 @@ import "com/coralogixapis/alerts/v3/notification/logs_immediate_notification.pro
 import "com/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto";
 import "com/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto";
 
+
 message AlertNotificationEvent {
   google.protobuf.Timestamp timestamp = 1;
   google.protobuf.StringValue id = 2;
   AlertStatus status = 3;
   Attachments attachments = 4;
   map<string, Group> groups = 5;
+  google.protobuf.StringValue grouping_key = 6;
+  Priority highest_priority = 7;
+
 }
 
 message Group {
