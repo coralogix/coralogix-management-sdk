@@ -61,6 +61,7 @@ message DataTable {
     message Grouping {
       repeated v1.common.SpanField group_by = 1;
       repeated Aggregation aggregations = 2;
+      repeated v1.common.ObservationField group_bys = 3;
     }
 
     message Aggregation {

@@ -42,13 +42,6 @@ enum Priority {
   PRIORITY_BLOCKED = 4;
 }
 
-enum DataType {
-  DATA_TYPE_UNSPECIFIED = 0;
-  DATA_TYPE_LOGS = 1;
-  DATA_TYPE_METRICS = 2;
-  DATA_TYPE_TRACING = 3;
-}
-
 enum Severity {
   SEVERITY_UNSPECIFIED = 0;
   SEVERITY_DEBUG = 1;

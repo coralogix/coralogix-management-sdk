@@ -3,14 +3,14 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.12"
-commit_hash = "2a7f04e6ee712ab5863dcce34b176b505ca59ab4"
+revision = "v0.5.13"
+commit_hash = "60ce37a76d29aadc376f665dcdc8bf45d51fb7a3"
 
 [[dependencies]]
 name = "cx-api-actions"
 url = "github.com/coralogix/cx-api-actions"
-revision = "v0.4.0"
-commit_hash = "c53e6e6f9c195585efda4dbbfd5d14a22c1d9508"
+revision = "v0.4.1"
+commit_hash = "d023a3fbc1946a9a613555ea546b5e077955ebd2"
 
 [[dependencies]]
 name = "cx-api-alert-scheduler"
@@ -27,8 +27,8 @@ commit_hash = "2d9a436efea0c81853559fd679266e8c30377b7c"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.95"
-commit_hash = "27942daaa1ec9ed955008bc302ee7143509fc4d0"
+revision = "v0.0.98"
+commit_hash = "179ba7ce3b07518c738e36e59e54f5729a66b722"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,20 +39,20 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.3.5"
-commit_hash = "11cd0b80d1cbb3a9c8bf6b1827fcb18cd09052cf"
+revision = "v2.3.10"
+commit_hash = "f25170abe0f017d34ee3dbef40b49794f1040277"
 
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.1.20"
-commit_hash = "fcb82469e94392acdabdd9b3b1136fc6cf6eb22b"
+revision = "v0.1.21"
+commit_hash = "4c3862cdd933bdf8c0cc6f8de6fd413a056ea554"
 
 [[dependencies]]
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
-revision = "v0.5.7.2"
-commit_hash = "4834aa80fb0cd0f075e5df0c1e20ec1014348beb"
+revision = "v0.5.9"
+commit_hash = "5e11455489a5b1f7d994bb9f093ce975bed8402b"
 
 [[dependencies]]
 name = "cx-api-events"
@@ -105,8 +105,8 @@ commit_hash = "54f3039f90c8a0eb57a33908c03f211ff9b11520"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.95"
-commit_hash = "4a85d809da3f991d47ee856369e56ce0a22d91ef"
+revision = "v0.1.98"
+commit_hash = "c6d218436cf7226c58e35756799703f2cddd3f17"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -121,7 +121,7 @@ revision = "v0.0.1"
 commit_hash = "31c928ce64eedadc7a9387d87bb6e9fa8e73cfca"
 
 [[dependencies]]
-name = "cx-api-scopes-service"
+name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
 revision = "v0.0.2"
 commit_hash = "1d2350ed6d5354170c89ae38decbec8fb76ffa2f"
@@ -135,14 +135,14 @@ commit_hash = "c95fd671aef052a3ce7c0f1ca46f7ecaf42c476b"
 [[dependencies]]
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
-revision = "v1.3"
-commit_hash = "a60a1e3f54c852881b721ad28495f53dea481689"
+revision = "v1.4"
+commit_hash = "e17473fa930dac485b3c4ce4417acab7bd374fce"
 
 [[dependencies]]
 name = "global-mapping"
 url = "github.com/coralogix/cx-api-global-mapping"
-revision = "v1.26.2"
-commit_hash = "e9ba4cca81ce61c8ce4d70709a42e342349a3ba4"
+revision = "v1.27.0"
+commit_hash = "ef85c89f71ce6b063d3bdf6c9925b9f3b9320fbe"
 
 [[dependencies]]
 name = "google-api"

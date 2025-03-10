@@ -43,7 +43,7 @@ message ObjectsReplaced {
 message ObjectsReplacedAll {
   repeated ObjectCreated created = 1;
   repeated string removed_physical_location_ids = 2;
-  // Added for compatibility reasons. Will be removed once metastore moved to PL stable id everywhere
+  // Needed from metastore to sent us proper acks with actual removed files
   repeated dataset.v2.FinalLocation locations = 3;
 }
 

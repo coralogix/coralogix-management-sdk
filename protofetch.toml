@@ -7,11 +7,11 @@ revision = 'v0.17.2'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.12"
+revision = "v0.5.13"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.3"
+revision = "v1.4"
 allow_policies = [
     "/com/coralogixapis/views/v1/audit_log.proto",
     "/com/coralogixapis/views/v1/filters.proto",
@@ -24,7 +24,7 @@ allow_policies = [
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
-revision = "v0.4.0"
+revision = "v0.4.1"
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
@@ -49,7 +49,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
 ]
-revision = "v2.3.5"
+revision = "v2.3.10"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -62,11 +62,11 @@ revision = "v0.3.2"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.20"
+revision = "v0.1.21"
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.5.7.2"
+revision = "v0.5.9"
 
 [cx-api-tags]
 url = 'github.com/coralogix/cx-api-tags'
@@ -81,7 +81,7 @@ revision = "v0.1.32"
 url = "github.com/coralogix/cx-api-common"
 revision = "v1.0.9"
 
-[cx-api-scopes-service]
+[cx-api-scopes]
 url = 'github.com/coralogix/cx-api-scopes'
 allow_policies = ["src/com/coralogixapis/*"]
 revision = 'v0.0.2'
@@ -96,7 +96,7 @@ revision = 'v0.0.1'
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.95"
+revision = "v0.1.98"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/*",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -111,7 +111,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.95"
+revision = "v0.0.98"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
@@ -160,7 +160,7 @@ allow_policies = [
 
 [global-mapping]
 url = 'github.com/coralogix/cx-api-global-mapping'
-revision = "v1.26.2"
+revision = "v1.27.0"
 
 [cx-api-schema-store]
 url = 'github.com/coralogix/cx-api-schema-store'

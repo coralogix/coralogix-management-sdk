@@ -32,4 +32,5 @@ message DashboardCatalogItem {
   common.DashboardFolder folder = 8;
   google.protobuf.StringValue author_id = 9;
   google.protobuf.BoolValue is_locked = 10;
+  google.protobuf.StringValue locker_author_id = 11;
 }
