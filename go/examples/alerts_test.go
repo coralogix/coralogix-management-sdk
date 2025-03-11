@@ -217,6 +217,7 @@ func TestAlertScheduler(t *testing.T) {
 
 	alertScheduler := createAlertSchedulerResponse.AlertSchedulerRule
 	alertScheduler.Name = "MyAlertUpdated"
+	alertScheduler.Id = nil
 
 	updateAlertSchedulerResponse, e := a.Update(context.Background(), &cxsdk.UpdateAlertSchedulerRuleRequest{
 		AlertSchedulerRule: alertScheduler,
