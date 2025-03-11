@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-FROM rust:1.79.0-slim-bullseye
+FROM rust:1.85.0-slim-bullseye
 ENV PB_REL="https://github.com/protocolbuffers/protobuf/releases"
 ENV RUST_BACKTRACE=1
 
