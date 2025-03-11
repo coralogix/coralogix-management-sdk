@@ -349,6 +349,7 @@ mod tests {
 
         let new_alert_scheduler_rule = AlertSchedulerRule {
             name: String::from("MyAlertUpdated"),
+            id: None,
             ..created_alert_scheduler_rule
         };
 
