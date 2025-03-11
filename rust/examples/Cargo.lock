@@ -379,6 +379,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "data-exploration"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "async-trait",
+ "cx-sdk",
+ "http",
+ "tokio",
+ "tonic",
+ "uuid",
+]
+
+[[package]]
 name = "dataplans"
 version = "0.1.0"
 dependencies = [
