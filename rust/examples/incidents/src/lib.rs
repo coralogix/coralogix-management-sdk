@@ -43,8 +43,8 @@ mod tests {
         let initial_count = list_response.incidents.len();
 
         // Get incident events
-        let now = String::from("2025-03-03t00:00:00z");
-        let yesterday = String::from("2025-03-02t00:00:00z");
+        let now = chrono::Utc::now().to_rfc3339();
+        let yesterday = (chrono::Utc::now() - chrono::Days::new(1)).to_rfc3339();
         let _ = client
             .list_incident_events(
                 Some(IncidentEventQueryFilter {

@@ -43,6 +43,7 @@ mod tests {
                 })),
             }),
             enriched_field_name: None,
+            selected_columns: vec![],
         }];
 
         // Test adding enrichments
