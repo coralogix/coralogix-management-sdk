@@ -91,18 +91,20 @@ message InputFile {
   com.coralogix.archive.v2.Format format = 4;
 }
 
-enum WriteToDatasetMode {
-  WRITE_TO_DATASET_MODE_UNSPECIFIED = 0;
-  WRITE_TO_DATASET_MODE_OVERWRITE = 1;
-  WRITE_TO_DATASET_MODE_APPEND = 2;
-}
-
 message InternalWriteToDatasetRequest {
+  message AppendMode {}
+  message OverwriteMode {
+    repeated Dataset overwritten_datasets = 1;
+  }
+
   uint32 company_id = 1;
   Dataset dataset = 2;
   repeated InputFile input_files = 3;
   repeated FieldPath default_key_fields = 4;
-  WriteToDatasetMode mode = 5;
+  oneof mode {
+    AppendMode append = 5;
+    OverwriteMode overwrite = 6;
+  };
 }
 
 message InternalWriteToDatasetResponse {}

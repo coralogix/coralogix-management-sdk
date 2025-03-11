@@ -63,6 +63,7 @@ message Hexagon {
     repeated Filter.SpansFilter filters = 3;
     repeated v1.common.SpanField group_by = 4;
     v1.common.TimeFrameSelect time_frame = 5;
+    repeated v1.common.ObservationField group_bys = 6;
   }
 
   message DataprimeQuery {

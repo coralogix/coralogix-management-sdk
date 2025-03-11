@@ -304,7 +304,7 @@ type ObjectsReplacedAll struct {
 
 	Created                    []*ObjectCreated `protobuf:"bytes,1,rep,name=created,proto3" json:"created,omitempty"`
 	RemovedPhysicalLocationIds []string         `protobuf:"bytes,2,rep,name=removed_physical_location_ids,json=removedPhysicalLocationIds,proto3" json:"removed_physical_location_ids,omitempty"`
-	// Added for compatibility reasons. Will be removed once metastore moved to PL stable id everywhere
+	// Needed from metastore to sent us proper acks with actual removed files
 	Locations []*FinalLocation `protobuf:"bytes,3,rep,name=locations,proto3" json:"locations,omitempty"`
 }
 

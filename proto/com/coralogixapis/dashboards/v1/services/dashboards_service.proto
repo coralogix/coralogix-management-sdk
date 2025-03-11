@@ -119,6 +119,8 @@ message GetDashboardResponse {
   TokenOriginType created_origin_type = 7;
 
   google.protobuf.BoolValue is_locked = 10;
+  google.protobuf.StringValue locker_author_id = 11;
+  google.protobuf.StringValue locker_name = 12;
 }
 
 message PinDashboardRequest {

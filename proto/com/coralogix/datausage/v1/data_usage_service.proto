@@ -48,11 +48,6 @@ service DataUsageService {
     };
   }
 
-  rpc GetTeamsDetailedUsage(GetTeamsDetailedUsageRequest) returns (stream GetTeamsDetailedUsageResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Teams' logs Data Usage broken down per application/subsystem/severity/tco";
-    option deprecated = true;
-  };
-
   /// Returns a list of data usage for a given set of teams, time_range and resolution
   rpc GetDataUsage(GetDataUsageRequest) returns (GetDataUsageResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get Teams data usage";
@@ -113,14 +108,6 @@ message GetTeamsQuotaRequest {
 
 message GetTeamsQuotaResponse {
  repeated TeamQuota teams_quota = 1 ;
-}
-
-message GetTeamsDetailedUsageRequest {
-  TeamsAndTimeRange param = 1;
-}
-
-message GetTeamsDetailedUsageResponse {
-  repeated DataUsageReport reports = 1;
 }
 
 message GetDetailedDataUsageRequest {

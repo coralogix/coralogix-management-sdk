@@ -2,64 +2,174 @@ syntax = "proto3";
 
 package com.coralogixapis.views.v1.services;
 
-import "com/coralogixapis/views/v1/audit_log.proto";
 import "com/coralogixapis/views/v1/filters.proto";
 import "com/coralogixapis/views/v1/search_query.proto";
 import "com/coralogixapis/views/v1/time_selection.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
 
 service ViewsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+      name: "Views"
+      description: "Create and manage views."
+    };
+
   rpc CreateView(CreateViewRequest) returns (CreateViewResponse) {
-    option (audit_log_description).description = "create view";
+    option (google.api.http) = {
+      post: "/v1/views"
+      body: "*"
+      response_body: "view"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Creates a new view"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value:  "{\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}"
+          }
+        }
+      }
+    };
   }
 
   rpc ReplaceView(ReplaceViewRequest) returns (ReplaceViewResponse) {
-    option (audit_log_description).description = "replace view";
+    option (google.api.http) = {
+      put: "/v1/views/{view.id}"
+      body: "view"
+      response_body: "view"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Replaces an existing view"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value:  "{\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs new\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}"
+          }
+        }
+      }
+    };
   }
 
   rpc GetView(GetViewRequest) returns (GetViewResponse) {
-    option (audit_log_description).description = "get view";
+    option (google.api.http) = {
+      get: "/v1/views/{id}"
+      response_body: "view"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Gets a view by ID"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"id\":52,\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}"
+          }
+        }
+      }
+    };
   }
 
   rpc DeleteView(DeleteViewRequest) returns (DeleteViewResponse) {
-    option (audit_log_description).description = "get view";
+    option (google.api.http) = {
+      delete: "/v1/views/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Deletes a view by ID"
+    };
   }
 
   rpc ListViews(ListViewsRequest) returns (ListViewsResponse) {
-    option (audit_log_description).description = "list all company public views";
+    option (google.api.http) = {
+      get: "/v1/views"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Lists all company public views"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"views\":[{\"id\":52,\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}]}"
+          }
+        }
+      }
+    };
   }
 }
 
 message CreateViewRequest {
-  google.protobuf.StringValue name = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "ViewFolder"
+        description: "View folder."
+        required: ["name", "time_selection"]
+      }
+    };
+
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "View name"
+    min_length: 1
+    example: "\"Logs view\""
+  }];
+
+  // View search query
   SearchQuery search_query = 2;
+  
+  // View time selection
   TimeSelection time_selection = 3;
+  
+  // View selected filters
   SelectedFilters filters = 4;
-  google.protobuf.StringValue folder_id = 5;
+
+
+  google.protobuf.StringValue folder_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Unique identifier for folders"
+    format: "uuid"
+    min_length: 36,
+    max_length: 36,
+    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
 }
 
 message CreateViewResponse {
+  // View
   View view = 1;
 }
 
 message ReplaceViewRequest {
- View view = 1;
+  // View
+  View view = 1;
 }
 
 message ReplaceViewResponse {
+  // View
   View view = 1;
 }
 
 message GetViewRequest {
-  google.protobuf.Int32Value id = 1;
+  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "id"
+    example: "52"
+  }]; 
 }
 
 message GetViewResponse {
+  // View
   View view = 1;
 }
 
 message DeleteViewRequest {
- google.protobuf.Int32Value id = 1;
+ google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "id"
+    example: "52"
+  }]; 
 }
 
 message DeleteViewResponse {
@@ -68,15 +178,50 @@ message DeleteViewResponse {
 message ListViewsRequest {}
 
 message ListViewsResponse {
+  // List of views
   repeated View views = 1;
 }
 
+// View
 message View {
-  google.protobuf.Int32Value id = 1;
-  google.protobuf.StringValue name = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "View"
+        description: "Response for views."
+        required: ["name", "id", "time_selection"]
+      }
+  };
+
+  // View id
+  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "id"
+    example: "52"
+  }]; 
+
+  // View name
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "View name"
+    min_length: 1
+    example: "\"Logs view\""
+  }];
+
+  // View search query
   SearchQuery search_query = 3;
+  
+  // View time selection
   TimeSelection time_selection = 4;
+  
+  // View selected filters
   SelectedFilters filters = 5;
-  google.protobuf.StringValue folder_id = 6;
+
+  google.protobuf.StringValue folder_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Unique identifier for folders"
+    format: "uuid"
+    min_length: 36,
+    max_length: 36,
+    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
+
   google.protobuf.BoolValue is_compact_mode = 7;
 }

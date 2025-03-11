@@ -79,6 +79,8 @@ message HorizontalBarChart {
     repeated v1.common.SpanField group_names = 4;
     v1.common.SpanField stacked_group_name = 5;
     v1.common.TimeFrameSelect time_frame = 6;
+    repeated v1.common.ObservationField group_names_fields = 7;
+    v1.common.ObservationField stacked_group_name_field = 8;
   }
 
   message MetricsQuery {

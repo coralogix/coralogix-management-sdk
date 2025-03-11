@@ -66,6 +66,7 @@ message Gauge {
     repeated Filter.SpansFilter filters = 4;
     repeated v1.common.SpanField group_by = 5;
     v1.common.TimeFrameSelect time_frame = 6;
+    repeated v1.common.ObservationField group_bys = 7;
   }
 
   message DataprimeQuery {
