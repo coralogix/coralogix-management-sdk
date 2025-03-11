@@ -11,15 +11,15 @@ revision = "v0.5.13"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.4"
+revision = "v1.5"
 allow_policies = [
-    "/com/coralogixapis/views/v1/audit_log.proto",
-    "/com/coralogixapis/views/v1/filters.proto",
-    "/com/coralogixapis/views/v1/search_query.proto",
-    "/com/coralogixapis/views/v1/services/views_folders_service.proto",
-    "/com/coralogixapis/views/v1/services/views_service.proto",
-    "/com/coralogixapis/views/v1/time_selection.proto",
-    "/com/coralogixapis/views/v1/view_folder.proto",
+    "src/com/coralogixapis/views/v1/audit_log.proto",
+    "src/com/coralogixapis/views/v1/filters.proto",
+    "src/com/coralogixapis/views/v1/search_query.proto",
+    "src/com/coralogixapis/views/v1/services/views_folders_service.proto",
+    "src/com/coralogixapis/views/v1/services/views_service.proto",
+    "src/com/coralogixapis/views/v1/time_selection.proto",
+    "src/com/coralogixapis/views/v1/view_folder.proto",
 ]
 
 [cx-api-actions]

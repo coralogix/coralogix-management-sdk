@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// View search query
+message SearchQuery {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SearchQuery"
+      required: ["query"]
+    }
+  };
+
+  // View search query
+  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    max_length: 1
+    min_length: 1
+    description: "Only digits are allowed."
+  }];
+
+}

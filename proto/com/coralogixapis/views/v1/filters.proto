@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+// Filter
+message Filter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ViewFolder"
+      description: "View folder."
+      required: ["name", "selected_values"]
+    }
+  };
+  // Filter name
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Filter name"
+    min_length: 1
+    example: "\"applicationName\""
+  }];
+
+  // Filter selected values
+  map<string, bool> selected_values = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Filter selected values"
+    example: "{\"demo\": true, \"cs-rest-test1\": true}"
+  }];
+}
+
+// Selected filters
+message SelectedFilters {
+  // Selected filters
+  repeated Filter filters = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    min_items: 1
+  }];
+}

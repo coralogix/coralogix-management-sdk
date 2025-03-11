@@ -1,0 +1,184 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1.services;
+
+import "com/coralogixapis/views/v1/view_folder.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
+
+service ViewsFoldersService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+      name: "Folders for views"
+      description: "Create and manage view folders."
+    };
+
+  rpc ListViewFolders(ListViewFoldersRequest) returns (ListViewFoldersResponse) {
+    option (google.api.http) = {
+      get: "/v1/view_folders"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "List view's folders"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"view_folders\":[{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}]}"
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetViewFolder(GetViewFolderRequest) returns (GetViewFolderResponse) {
+    option (google.api.http) = {
+      get: "/v1/view_folders/{id}"
+      response_body: "folder"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Create view folder"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}"
+          }
+        }
+      }
+    };
+  }
+
+  rpc CreateViewFolder(CreateViewFolderRequest) returns (CreateViewFolderResponse) {
+     option (google.api.http) = {
+      post: "/v1/view_folders"
+      body: "*"
+      response_body: "folder"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Create view folder"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}"
+          }
+        }
+      }
+    };
+  }
+
+  rpc DeleteViewFolder(DeleteViewFolderRequest) returns (DeleteViewFolderResponse) {
+    option (google.api.http) = {
+      delete: "/v1/view_folders/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Deletes a view folder by ID"
+    };
+  }
+
+  rpc ReplaceViewFolder(ReplaceViewFolderRequest) returns (ReplaceViewFolderResponse) {
+    option (google.api.http) = {
+      put: "/v1/view_folders/{folder.id}"
+      body: "folder"
+      response_body: "folder"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      description: "Replaces an existing view folder"
+      responses: {
+        key: "200"
+        value: {
+          examples: {
+            key: "application/json"
+            value: "{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}"
+          }
+        }
+      }
+    };
+  }
+}
+// Create view folder
+message CreateViewFolderRequest {
+   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "CreateViewFolderRequest"
+        description: "Create view folder."
+      }
+    };
+
+  // View folder name
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Folder name"
+    min_length: 1
+    example: "\"My Folder\""
+  }]; 
+}
+
+message CreateViewFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "CreateViewFolderRequest"
+        description: "Request for creating view folder."
+      }
+    };
+
+  // View folder
+  ViewFolder folder = 1;
+}
+
+message GetViewFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "GetViewFolderRequest"
+        description: "Request for getting view folder."
+      }
+    };
+  google.protobuf.StringValue id = 1[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Unique identifier for folders"
+    format: "uuid"
+    min_length: 36,
+    max_length: 36,
+    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
+}
+
+message GetViewFolderResponse {
+  ViewFolder folder = 1;
+}
+
+message ListViewFoldersRequest {}
+
+message ListViewFoldersResponse {
+  // List of view folders
+  repeated ViewFolder folders = 1;
+}
+
+message DeleteViewFolderRequest {
+  // View folder id
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Unique identifier for folders"
+    format: "uuid"
+    min_length: 36,
+    max_length: 36,
+    example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
+    pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+  }];
+}
+
+message DeleteViewFolderResponse {
+}
+
+message ReplaceViewFolderRequest {
+  // View folder
+  ViewFolder folder = 1;
+}
+
+message ReplaceViewFolderResponse {
+  // View folder
+  ViewFolder folder = 1;
+}
