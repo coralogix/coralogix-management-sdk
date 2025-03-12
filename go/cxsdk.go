@@ -135,9 +135,10 @@ func (c *ClientSet) DataSet() *DataSetClient {
 	return c.dataSet
 }
 
-// func (c *ClientSet) Dashboards() *DashboardsClient {
-// 	return c.dashboards
-// }
+// Dashboards gets a DashboardsClient from the ClientSet.
+func (c *ClientSet) Dashboards() *DashboardsClient {
+	return c.dashboards
+}
 
 // Actions gets an ActionsClient from the ClientSet.
 func (c *ClientSet) Actions() *ActionsClient {
