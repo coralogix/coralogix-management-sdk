@@ -20,6 +20,10 @@ tags:
   - name: DashboardFoldersService
   - name: ActionsService
   - name: Events2MetricService
+  - name: Folders for views
+    description: Create and manage view folders.
+  - name: Views
+    description: Create and manage views.
   - name: ScopesService
   - name: IncidentsService
   - name: MetricsTcoService
@@ -3531,7 +3535,7 @@ paths:
             let options = {
               method: 'POST',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
+              body: '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
             };
 
             fetch(url, options)
@@ -3590,7 +3594,8 @@ paths:
                                                                     "spans": {
                                                                         "groupBy": [],
                                                                         "aggregations": [],
-                                                                        "filters": []
+                                                                        "filters": [],
+                                                                        "groupBys": []
                                                                     },
                                                                     "dataprime": {"filters": []}
                                                                 },
@@ -3632,7 +3637,8 @@ paths:
                                                                 "filters": [{}],
                                                                 "grouping": {
                                                                     "groupBy": [None],
-                                                                    "aggregations": [None]
+                                                                    "aggregations": [None],
+                                                                    "groupBys": [None]
                                                                 },
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
@@ -3716,7 +3722,8 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
-                                                                }
+                                                                },
+                                                                "groupBys": [{"keypath": []}]
                                                             },
                                                             "dataprime": {
                                                                 "dataprimeQuery": {"text": "string"},
@@ -3794,6 +3801,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -3889,6 +3901,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -3990,6 +4007,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -4092,7 +4114,8 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
-                                                                }
+                                                                },
+                                                                "groupBys": [{"keypath": []}]
                                                             },
                                                             "dataprime": {
                                                                 "dataprimeQuery": {"text": "string"},
@@ -4396,7 +4419,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/dashboards \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
+              --data '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
     put:
       operationId: DashboardsService_ReplaceDashboard
       responses:
@@ -4430,7 +4453,7 @@ paths:
             let options = {
               method: 'PUT',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
+              body: '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
             };
 
             fetch(url, options)
@@ -4489,7 +4512,8 @@ paths:
                                                                     "spans": {
                                                                         "groupBy": [],
                                                                         "aggregations": [],
-                                                                        "filters": []
+                                                                        "filters": [],
+                                                                        "groupBys": []
                                                                     },
                                                                     "dataprime": {"filters": []}
                                                                 },
@@ -4531,7 +4555,8 @@ paths:
                                                                 "filters": [{}],
                                                                 "grouping": {
                                                                     "groupBy": [None],
-                                                                    "aggregations": [None]
+                                                                    "aggregations": [None],
+                                                                    "groupBys": [None]
                                                                 },
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
@@ -4615,7 +4640,8 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
-                                                                }
+                                                                },
+                                                                "groupBys": [{"keypath": []}]
                                                             },
                                                             "dataprime": {
                                                                 "dataprimeQuery": {"text": "string"},
@@ -4693,6 +4719,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -4788,6 +4819,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -4889,6 +4925,11 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
+                                                                },
+                                                                "groupNamesFields": [{"keypath": []}],
+                                                                "stackedGroupNameField": {
+                                                                    "keypath": [None],
+                                                                    "scope": "DATASET_SCOPE_UNSPECIFIED"
                                                                 }
                                                             },
                                                             "metrics": {
@@ -4991,7 +5032,8 @@ paths:
                                                                 "timeFrame": {
                                                                     "absoluteTimeFrame": {},
                                                                     "relativeTimeFrame": "string"
-                                                                }
+                                                                },
+                                                                "groupBys": [{"keypath": []}]
                                                             },
                                                             "dataprime": {
                                                                 "dataprimeQuery": {"text": "string"},
@@ -5295,7 +5337,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/dashboards \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
+              --data '{"requestId":"string","dashboard":{"id":"string","name":"string","description":"string","layout":{"sections":[{"id":{"value":"string"},"rows":[{"id":{"value":"string"},"appearance":{"height":0},"widgets":[{"id":{"value":"string"},"title":"string","description":"string","definition":{"lineChart":{"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"tooltip":{"showLabels":true,"type":"TOOLTIP_TYPE_UNSPECIFIED"},"queryDefinitions":[{"id":"string","query":{"logs":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"metrics":{"filters":[]},"spans":{"groupBy":[],"aggregations":[],"filters":[],"groupBys":[]},"dataprime":{"filters":[]}},"seriesNameTemplate":"string","seriesCountLimit":"string","unit":"UNIT_UNSPECIFIED","scaleType":"SCALE_TYPE_UNSPECIFIED","name":"string","isVisible":true,"colorScheme":"string","resolution":{"interval":"string","bucketsPresented":0},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0}],"stackedLine":"STACKED_LINE_UNSPECIFIED"},"dataTable":{"query":{"logs":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"filters":[{}],"grouping":{"groupBy":[null],"aggregations":[null],"groupBys":[null]},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"resultsPerPage":0,"rowStyle":"ROW_STYLE_UNSPECIFIED","columns":[{"field":"string","width":0}],"orderBy":{"field":"string","orderDirection":"ORDER_DIRECTION_UNSPECIFIED"},"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED"},"gauge":{"query":{"metrics":{"promqlQuery":{"value":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"aggregation":"AGGREGATION_UNSPECIFIED","filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"showInnerArc":true,"showOuterArc":true,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","thresholdBy":"THRESHOLD_BY_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"},"pieChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxSlicesPerChart":0,"minSlicePercentage":0,"stackDefinition":{"maxSlicesPerStack":0,"stackNameTemplate":"string"},"labelDefinition":{"labelSource":"LABEL_SOURCE_UNSPECIFIED","isVisible":true,"showName":true,"showValue":true,"showPercentage":true},"showLegend":true,"groupNameTemplate":"string","unit":"UNIT_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"barChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"xAxis":{"value":{},"time":{"interval":"string","bucketsPresented":0}},"unit":"UNIT_UNSPECIFIED","sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","barValueDisplay":"BAR_VALUE_DISPLAY_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"horizontalBarChart":{"query":{"logs":{"luceneQuery":{"value":"string"},"aggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"aggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupNames":[{}],"stackedGroupName":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupNamesFields":[{"keypath":[]}],"stackedGroupNameField":{"keypath":[null],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED","aggregation":"AGGREGATION_UNSPECIFIED"},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"groupNames":["string"],"stackedGroupName":"string","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"maxBarsPerChart":0,"groupNameTemplate":"string","stackDefinition":{"maxSlicesPerBar":0,"stackNameTemplate":"string"},"scaleType":"SCALE_TYPE_UNSPECIFIED","colorsBy":{"stack":{},"groupBy":{},"aggregation":{}},"unit":"UNIT_UNSPECIFIED","displayOnBar":true,"yAxisViewBy":{"category":{},"value":{}},"sortBy":"SORT_BY_TYPE_UNSPECIFIED","colorScheme":"string","dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"}},"markdown":{"markdownText":"string","tooltipText":"string"},"hexagon":{"query":{"metrics":{"promqlQuery":{"value":"string"},"filters":[{}],"editorMode":"METRICS_QUERY_EDITOR_MODE_UNSPECIFIED","timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"aggregation":"AGGREGATION_UNSPECIFIED","promqlQueryType":"PROM_QL_QUERY_TYPE_UNSPECIFIED"},"logs":{"luceneQuery":{"value":"string"},"logsAggregation":{"count":{},"countDistinct":{},"sum":{},"average":{},"min":{},"max":{},"percentile":{}},"filters":[{}],"groupBy":[{"keypath":[]}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}},"spans":{"luceneQuery":{"value":"string"},"spansAggregation":{"metricAggregation":{},"dimensionAggregation":{}},"filters":[{}],"groupBy":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"},"groupBys":[{"keypath":[]}]},"dataprime":{"dataprimeQuery":{"text":"string"},"filters":[{}],"timeFrame":{"absoluteTimeFrame":{},"relativeTimeFrame":"string"}}},"min":0.1,"max":0.1,"unit":"UNIT_UNSPECIFIED","thresholds":[{"from":0.1,"color":"string","label":"string"}],"dataModeType":"DATA_MODE_TYPE_HIGH_UNSPECIFIED","customUnit":"string","decimal":0,"thresholdType":"THRESHOLD_TYPE_UNSPECIFIED","legend":{"isVisible":true,"columns":["LEGEND_COLUMN_UNSPECIFIED"],"groupByQuery":true,"placement":"LEGEND_PLACEMENT_UNSPECIFIED"},"legendBy":"LEGEND_BY_UNSPECIFIED"}},"appearance":{"width":0},"createdAt":"2019-08-24T14:15:22Z","updatedAt":"2019-08-24T14:15:22Z"}]}],"options":{"internal":{},"custom":{"name":"string","description":"string","collapsed":true,"color":{"predefined":"SECTION_PREDEFINED_COLOR_UNSPECIFIED"}}}}]},"variables":[{"name":"string","definition":{"constant":{"value":"string"},"multiSelect":{"selected":["string"],"source":{"logsPath":{"value":"string","observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"metricLabel":{"metricName":"string","label":"string"},"constantList":{"values":["string"]},"spanField":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}},"query":{"query":{"logsQuery":{"type":{"fieldName":{"logRegex":"string"},"fieldValue":{"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}}},"metricsQuery":{"type":{"metricName":{"metricRegex":"string"},"labelName":{"metricRegex":"string"},"labelValue":{"metricName":{"stringValue":"string","variableName":"string"},"labelName":{"stringValue":"string","variableName":"string"},"labelFilters":[{"metric":{},"label":{},"operator":{}}]}}},"spansQuery":{"type":{"fieldName":{"spanRegex":"string"},"fieldValue":{"value":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"}}}}},"refreshStrategy":"REFRESH_STRATEGY_UNSPECIFIED","valueDisplayOptions":{"valueRegex":"string","labelRegex":"string"}}},"selection":{"all":{},"list":{"values":["string"],"labels":["string"]}},"valuesOrderDirection":"ORDER_DIRECTION_UNSPECIFIED","selectionOptions":{"selectionType":"SELECTION_TYPE_UNSPECIFIED"}}},"displayName":"string","description":"string","displayType":"VARIABLE_DISPLAY_TYPE_UNSPECIFIED"}],"filters":[{"source":{"logs":{"field":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}},"observationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"spans":{"field":{"metadataField":"METADATA_FIELD_UNSPECIFIED","tagField":"string","processTagField":"string"},"operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}},"metrics":{"metric":"string","label":"string","operator":{"equals":{"selection":{"all":{},"list":{"values":["string"]}}},"notEquals":{"selection":{"list":{"values":["string"]}}}}}},"enabled":true,"collapsed":true}],"absoluteTimeFrame":{"from":"2019-08-24T14:15:22Z","to":"2019-08-24T14:15:22Z"},"relativeTimeFrame":"string","folderId":{"value":"string"},"folderPath":{"segments":["string"]},"annotations":[{"id":"string","name":"string","enabled":true,"source":{"metrics":{"promqlQuery":{"value":"string"},"strategy":{"startTimeMetric":{}},"messageTemplate":"string","labels":["string"]},"logs":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]},"spans":{"luceneQuery":{"value":"string"},"strategy":{"instant":{"timestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"range":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"endTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}},"duration":{"startTimestampField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"},"durationField":{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}}},"messageTemplate":"string","labelFields":[{"keypath":["string"],"scope":"DATASET_SCOPE_UNSPECIFIED"}]}}}],"off":{},"twoMinutes":{},"fiveMinutes":{}},"isLocked":true}'
   /dashboards/catalog:
     get:
       operationId: DashboardCatalogService_GetDashboardCatalog
@@ -6313,7 +6355,7 @@ paths:
             let options = {
               method: 'POST',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"requestEnrichments":[{"fieldName":"sourceIPs","enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichedFieldName":"string"}]}'
+              body: '{"requestEnrichments":[{"fieldName":"sourceIPs","enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichedFieldName":"string","selectedColumns":["string"]}]}'
             };
 
             fetch(url, options)
@@ -6337,7 +6379,8 @@ paths:
                             "aws": {"resourceType": "ec2"},
                             "customEnrichment": {"id": 1}
                         },
-                        "enrichedFieldName": "string"
+                        "enrichedFieldName": "string",
+                        "selectedColumns": ["string"]
                     }
                 ]}
             headers = {
@@ -6357,7 +6400,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/enrichments \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"requestEnrichments":[{"fieldName":"sourceIPs","enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichedFieldName":"string"}]}'
+              --data '{"requestEnrichments":[{"fieldName":"sourceIPs","enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichedFieldName":"string","selectedColumns":["string"]}]}'
   /enrichments/limit:
     get:
       operationId: EnrichmentService_GetEnrichmentLimit
@@ -6499,7 +6542,7 @@ paths:
             let options = {
               method: 'PATCH',
               headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
-              body: '{"enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichmentFields":[{"fieldName":"string","enrichedFieldName":"string"}]}'
+              body: '{"enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichmentFields":[{"fieldName":"string","enrichedFieldName":"string","selectedColumns":["string"]}]}'
             };
 
 
@@ -6526,7 +6569,8 @@ paths:
                 "enrichmentFields": [
                     {
                         "fieldName": "string",
-                        "enrichedFieldName": "string"
+                        "enrichedFieldName": "string",
+                        "selectedColumns": ["string"]
                     }
                 ]
             }
@@ -6548,7 +6592,7 @@ paths:
               --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
-              --data '{"enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichmentFields":[{"fieldName":"string","enrichedFieldName":"string"}]}'
+              --data '{"enrichmentType":{"geoIp":{"withAsn":true},"suspiciousIp":{},"aws":{"resourceType":"ec2"},"customEnrichment":{"id":1}},"enrichmentFields":[{"fieldName":"string","enrichedFieldName":"string","selectedColumns":["string"]}]}'
   /extensions-content-management/v1/import:
     post:
       operationId: ExtensionContentManagementService_ImportAndReleaseExtensions
@@ -18582,6 +18626,886 @@ paths:
               --header 'Authorization: Bearer <API_KEY>' \
               --header 'content-type: application/json' \
               --data '{"groupId":{},"userIds":[{"id":"string"}]}'
+  /v1/view_folders:
+    get:
+      description: List view's folders
+      operationId: ViewsFoldersService_ListViewFolders
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesListViewFoldersResponse'
+              examples:
+                response:
+                  value:
+                    view_folders:
+                      - id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                        name: My Folder
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      tags:
+        - Folders for views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url = 'https://api.coralogix.com/mgmt/openapi/v1/view_folders';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: |-
+            import requests
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/view_folders"
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/view_folders \
+              --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: Create view folder
+      operationId: ViewsFoldersService_CreateViewFolder
+      responses:
+        '200':
+          description: View folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ViewFolder'
+              examples:
+                response:
+                  value:
+                    id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                    name: My Folder
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicesCreateViewFolderRequest'
+        description: Create view folder.
+        required: true
+      tags:
+        - Folders for views
+      x-codeSamples:
+        - lang: Node
+          source: |-
+            const fetch = require('node-fetch');
+
+            let url = 'https://api.coralogix.com/mgmt/openapi/v1/view_folders';
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"name":"My Folder"}'
+            };
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/view_folders"
+
+
+            payload = {"name": "My Folder"}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/view_folders \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"name":"My Folder"}'
+  /v1/view_folders/{folder.id}:
+    put:
+      description: Replaces an existing view folder
+      operationId: ViewsFoldersService_ReplaceViewFolder
+      responses:
+        '200':
+          description: View folder
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ViewFolder'
+              examples:
+                response:
+                  value:
+                    id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                    name: My Folder
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: folder.id
+          description: Unique identifier for folders
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: My Folder
+                  description: Folder name
+                  minLength: 1
+              title: View folder
+              required:
+                - name
+        description: View folder
+        required: true
+      tags:
+        - Folders for views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bfolder.id%7D';
+
+
+            let options = {
+              method: 'PUT',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"name":"My Folder"}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bfolder.id%7D"
+
+
+            payload = {"name": "My Folder"}
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("PUT", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request PUT \
+              --url https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bfolder.id%7D \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"name":"My Folder"}'
+  /v1/view_folders/{id}:
+    get:
+      description: Create view folder
+      operationId: ViewsFoldersService_GetViewFolder
+      responses:
+        '200':
+          description: ''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/v1ViewFolder'
+              examples:
+                response:
+                  value:
+                    id: 0cd4ed54-9b59-4eef-b329-151a167e2304
+                    name: My Folder
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: id
+          description: Unique identifier for folders
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      tags:
+        - Folders for views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D"
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("GET", url, headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D \
+              --header 'Authorization: Bearer <API_KEY>'
+    delete:
+      description: Deletes a view folder by ID
+      operationId: ViewsFoldersService_DeleteViewFolder
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesDeleteViewFolderResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: id
+          description: Unique identifier for folders
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      tags:
+        - Folders for views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D';
+
+
+            let options = {method: 'DELETE', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D"
+
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+
+            response = requests.request("DELETE", url, headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request DELETE \
+              --url https://api.coralogix.com/mgmt/openapi/v1/view_folders/%7Bid%7D \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v1/views:
+    get:
+      description: Lists all company public views
+      operationId: ViewsService_ListViews
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesListViewsResponse'
+              examples:
+                response:
+                  value:
+                    views:
+                      - id: 52
+                        name: Logs view
+                        search_query:
+                          query: logs
+                        time_selection:
+                          custom_selection:
+                            from_time: '2024-01-25T11:31:43.152Z'
+                            to_time: '2024-01-25T11:37:13.238Z'
+                        filters:
+                          filters:
+                            - name: applicationName
+                              selected_values:
+                                demo: true
+                            - name: subsystemName
+                              selected_values:
+                                demo: true
+                            - name: operationName
+                              selected_values:
+                                demo: true
+                            - name: serviceName
+                              selected_values:
+                                demo: true
+                            - name: severity
+                              selected_values:
+                                demo: true
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      tags:
+        - Views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url = 'https://api.coralogix.com/mgmt/openapi/v1/views';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: |-
+            import requests
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/views"
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/views \
+              --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: Creates a new view
+      operationId: ViewsService_CreateView
+      responses:
+        '200':
+          description: View
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesView'
+              examples:
+                response:
+                  value:
+                    name: Logs view
+                    search_query:
+                      query: logs
+                    time_selection:
+                      custom_selection:
+                        from_time: '2024-01-25T11:31:43.152Z'
+                        to_time: '2024-01-25T11:37:13.238Z'
+                    filters:
+                      filters:
+                        - name: applicationName
+                          selected_values:
+                            demo: true
+                        - name: subsystemName
+                          selected_values:
+                            demo: true
+                        - name: operationName
+                          selected_values:
+                            demo: true
+                        - name: serviceName
+                          selected_values:
+                            demo: true
+                        - name: severity
+                          selected_values:
+                            demo: true
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/servicesCreateViewRequest'
+        description: View folder.
+        required: true
+      tags:
+        - Views
+      x-codeSamples:
+        - lang: Node
+          source: |-
+            const fetch = require('node-fetch');
+
+            let url = 'https://api.coralogix.com/mgmt/openapi/v1/views';
+
+            let options = {
+              method: 'POST',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"name":"Logs view","searchQuery":{"query":"s"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600},"customSelection":{"fromTime":"2024-01-25T11:31:43.152Z","toTime":"2024-01-25T11:35:43.152Z"}},"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f"}'
+            };
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/views"
+
+
+            payload = {
+                "name": "Logs view",
+                "searchQuery": {"query": "s"},
+                "timeSelection": {
+                    "quickSelection": {
+                        "caption": "Last Hour",
+                        "seconds": 3600
+                    },
+                    "customSelection": {
+                        "fromTime": "2024-01-25T11:31:43.152Z",
+                        "toTime": "2024-01-25T11:35:43.152Z"
+                    }
+                },
+                "filters": {"filters": [
+                        {
+                            "name": "applicationName",
+                            "selectedValues": {
+                                "demo": True,
+                                "cs-rest-test1": True
+                            }
+                        }
+                    ]},
+                "folderId": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("POST", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request POST \
+              --url https://api.coralogix.com/mgmt/openapi/v1/views \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"name":"Logs view","searchQuery":{"query":"s"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600},"customSelection":{"fromTime":"2024-01-25T11:31:43.152Z","toTime":"2024-01-25T11:35:43.152Z"}},"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f"}'
+  /v1/views/{id}:
+    get:
+      description: Gets a view by ID
+      operationId: ViewsService_GetView
+      responses:
+        '200':
+          description: View
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesView'
+              examples:
+                response:
+                  value:
+                    id: 52
+                    name: Logs view
+                    search_query:
+                      query: logs
+                    time_selection:
+                      custom_selection:
+                        from_time: '2024-01-25T11:31:43.152Z'
+                        to_time: '2024-01-25T11:37:13.238Z'
+                    filters:
+                      filters:
+                        - name: applicationName
+                          selected_values:
+                            demo: true
+                        - name: subsystemName
+                          selected_values:
+                            demo: true
+                        - name: operationName
+                          selected_values:
+                            demo: true
+                        - name: serviceName
+                          selected_values:
+                            demo: true
+                        - name: severity
+                          selected_values:
+                            demo: true
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: id
+          description: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      tags:
+        - Views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D';
+
+
+            let options = {method: 'GET', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: |-
+            import requests
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D"
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+            response = requests.request("GET", url, headers=headers)
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request GET \
+              --url https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D \
+              --header 'Authorization: Bearer <API_KEY>'
+    delete:
+      description: Deletes a view by ID
+      operationId: ViewsService_DeleteView
+      responses:
+        '200':
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesDeleteViewResponse'
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: id
+          description: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      tags:
+        - Views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D';
+
+
+            let options = {method: 'DELETE', headers: {Authorization: 'Bearer
+            <API_KEY>'}};
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: |-
+            import requests
+
+            url = "https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D"
+
+            headers = {"Authorization": "Bearer <API_KEY>"}
+
+            response = requests.request("DELETE", url, headers=headers)
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request DELETE \
+              --url https://api.coralogix.com/mgmt/openapi/v1/views/%7Bid%7D \
+              --header 'Authorization: Bearer <API_KEY>'
+  /v1/views/{view.id}:
+    put:
+      description: Replaces an existing view
+      operationId: ViewsService_ReplaceView
+      responses:
+        '200':
+          description: View
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/servicesView'
+              examples:
+                response:
+                  value:
+                    name: Logs view
+                    search_query:
+                      query: logs new
+                    time_selection:
+                      custom_selection:
+                        from_time: '2024-01-25T11:31:43.152Z'
+                        to_time: '2024-01-25T11:37:13.238Z'
+                    filters:
+                      filters:
+                        - name: applicationName
+                          selected_values:
+                            demo: true
+                        - name: subsystemName
+                          selected_values:
+                            demo: true
+                        - name: operationName
+                          selected_values:
+                            demo: true
+                        - name: serviceName
+                          selected_values:
+                            demo: true
+                        - name: severity
+                          selected_values:
+                            demo: true
+        default:
+          description: An unexpected error response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/googlerpcStatus'
+      parameters:
+        - name: view.id
+          description: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: Logs view
+                  description: View name
+                  title: View name
+                  minLength: 1
+                searchQuery:
+                  $ref: '#/components/schemas/v1SearchQuery'
+                timeSelection:
+                  $ref: '#/components/schemas/v1TimeSelection'
+                filters:
+                  $ref: '#/components/schemas/v1SelectedFilters'
+                folderId:
+                  type: string
+                  format: uuid
+                  example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+                  description: Unique identifier for folders
+                  maxLength: 36
+                  minLength: 36
+                  pattern: >-
+                    ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+                isCompactMode:
+                  type: boolean
+              title: View
+              required:
+                - name
+                - timeSelection
+        description: View
+        required: true
+      tags:
+        - Views
+      x-codeSamples:
+        - lang: Node
+          source: >-
+            const fetch = require('node-fetch');
+
+
+            let url =
+            'https://api.coralogix.com/mgmt/openapi/v1/views/%7Bview.id%7D';
+
+
+            let options = {
+              method: 'PUT',
+              headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+              body: '{"name":"Logs view","searchQuery":{"query":"s"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600},"customSelection":{"fromTime":"2024-01-25T11:31:43.152Z","toTime":"2024-01-25T11:35:43.152Z"}},"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","isCompactMode":true}'
+            };
+
+
+            fetch(url, options)
+              .then(res => res.json())
+              .then(json => console.log(json))
+              .catch(err => console.error('error:' + err));
+        - lang: Python
+          source: >-
+            import requests
+
+
+            url =
+            "https://api.coralogix.com/mgmt/openapi/v1/views/%7Bview.id%7D"
+
+
+            payload = {
+                "name": "Logs view",
+                "searchQuery": {"query": "s"},
+                "timeSelection": {
+                    "quickSelection": {
+                        "caption": "Last Hour",
+                        "seconds": 3600
+                    },
+                    "customSelection": {
+                        "fromTime": "2024-01-25T11:31:43.152Z",
+                        "toTime": "2024-01-25T11:35:43.152Z"
+                    }
+                },
+                "filters": {"filters": [
+                        {
+                            "name": "applicationName",
+                            "selectedValues": {
+                                "demo": True,
+                                "cs-rest-test1": True
+                            }
+                        }
+                    ]},
+                "folderId": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                "isCompactMode": True
+            }
+
+            headers = {
+                "Authorization": "Bearer <API_KEY>",
+                "content-type": "application/json"
+            }
+
+
+            response = requests.request("PUT", url, json=payload,
+            headers=headers)
+
+
+            print(response.text)
+        - lang: Shell
+          source: |-
+            curl --request PUT \
+              --url https://api.coralogix.com/mgmt/openapi/v1/views/%7Bview.id%7D \
+              --header 'Authorization: Bearer <API_KEY>' \
+              --header 'content-type: application/json' \
+              --data '{"name":"Logs view","searchQuery":{"query":"s"},"timeSelection":{"quickSelection":{"caption":"Last Hour","seconds":3600},"customSelection":{"fromTime":"2024-01-25T11:31:43.152Z","toTime":"2024-01-25T11:35:43.152Z"}},"filters":{"filters":[{"name":"applicationName","selectedValues":{"demo":true,"cs-rest-test1":true}}]},"folderId":"3dc02998-0b50-4ea8-b68a-4779d716fa1f","isCompactMode":true}'
   /v2/actions:
     get:
       operationId: ActionsService_ListActions
@@ -23114,6 +24038,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/DataTableSpansQueryAggregation'
+        groupBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
     DefaultIntegrationDetailsRegisteredInstance:
       type: object
       properties:
@@ -23832,6 +24760,15 @@ components:
       externalDocs:
         description: Find out more about integrations
         url: https://coralogix.com/integrations/
+    InternalWriteToDatasetRequestAppendMode:
+      type: object
+    InternalWriteToDatasetRequestOverwriteMode:
+      type: object
+      properties:
+        overwrittenDatasets:
+          type: array
+          items:
+            $ref: '#/components/schemas/datasetv2Dataset'
     JsonExtractParametersDestinationField:
       type: string
       enum:
@@ -24798,6 +25735,15 @@ components:
         - UNIT_X_PER_MINUTE
         - UNIT_MEGABYTES
       default: UNIT_UNSPECIFIED
+    archivedatasetv2Pillar:
+      type: string
+      enum:
+        - PILLAR_UNSPECIFIED
+        - PILLAR_LOGS
+        - PILLAR_SPANS
+        - PILLAR_METRICS
+        - PILLAR_BINARY
+      default: PILLAR_UNSPECIFIED
     archivekafka_out_targetsv1CompressionType:
       type: string
       enum:
@@ -25639,10 +26585,24 @@ components:
       properties:
         name:
           type: string
+          example: applicationName
+          description: Filter name
+          title: Filter name
+          minLength: 1
         selectedValues:
           type: object
+          example:
+            demo: true
+            cs-rest-test1: true
           additionalProperties:
             type: boolean
+          description: Filter selected values
+          title: Filter selected values
+      description: View folder.
+      title: ViewFolder
+      required:
+        - name
+        - selectedValues
     coralogixarchivev1Retention:
       type: object
       properties:
@@ -25699,14 +26659,6 @@ components:
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       required:
         - target_specarchive_spec
-    coralogixdatausagev1DataType:
-      type: string
-      enum:
-        - DATA_TYPE_UNSPECIFIED
-        - DATA_TYPE_LOGS
-        - DATA_TYPE_METRICS
-        - DATA_TYPE_TRACING
-      default: DATA_TYPE_UNSPECIFIED
     coralogixdatausagev1Priority:
       type: string
       enum:
@@ -25739,6 +26691,15 @@ components:
         value:
           type: number
           format: float
+    coralogixdatausagev2Pillar:
+      type: string
+      enum:
+        - PILLAR_UNSPECIFIED
+        - PILLAR_METRICS
+        - PILLAR_LOGS
+        - PILLAR_SPANS
+        - PILLAR_BINARY
+      default: PILLAR_UNSPECIFIED
     coralogixdatausagev2Severity:
       type: string
       enum:
@@ -25765,6 +26726,13 @@ components:
         enrichedFieldName:
           type: string
           example: 1
+        selectedColumns:
+          type: array
+          example:
+            - city
+            - population
+          items:
+            type: string
       description: This data structure represents an enrichment
       title: Enrichment
       externalDocs:
@@ -25794,6 +26762,7 @@ components:
         - DATA_SOURCE_TYPE_SPAN
         - DATA_SOURCE_TYPE_METRICS
         - DATA_SOURCE_TYPE_EVENTS
+        - DATA_SOURCE_TYPE_PROFILES
       default: DATA_SOURCE_TYPE_UNSPECIFIED
     coralogixglobal_mappingv1GetMeasurementsTableResponse:
       type: object
@@ -26152,7 +27121,7 @@ components:
       type: object
       properties:
         pillar:
-          $ref: '#/components/schemas/datausagev2Pillar'
+          $ref: '#/components/schemas/coralogixdatausagev2Pillar'
         genericDimension:
           $ref: '#/components/schemas/datausagev2GenericDimension'
         tier:
@@ -26189,15 +27158,6 @@ components:
         description: Find out more about data usage.
         url: >-
           https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
-    datausagev2Pillar:
-      type: string
-      enum:
-        - PILLAR_UNSPECIFIED
-        - PILLAR_METRICS
-        - PILLAR_LOGS
-        - PILLAR_SPANS
-        - PILLAR_BINARY
-      default: PILLAR_UNSPECIFIED
     datausagev2Priority:
       type: string
       enum:
@@ -27513,11 +28473,51 @@ components:
       properties:
         dashboardId:
           type: string
+    servicesCreateViewFolderRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: My Folder
+          description: Folder name
+          title: View folder name
+          minLength: 1
+      description: Create view folder.
+      title: CreateViewFolderRequest
     servicesCreateViewFolderResponse:
       type: object
       properties:
         folder:
           $ref: '#/components/schemas/v1ViewFolder'
+      description: Request for creating view folder.
+      title: CreateViewFolderRequest
+    servicesCreateViewRequest:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Logs view
+          description: View name
+          minLength: 1
+        searchQuery:
+          $ref: '#/components/schemas/v1SearchQuery'
+        timeSelection:
+          $ref: '#/components/schemas/v1TimeSelection'
+        filters:
+          $ref: '#/components/schemas/v1SelectedFilters'
+        folderId:
+          type: string
+          format: uuid
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          description: Unique identifier for folders
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
+      description: View folder.
+      title: ViewFolder
+      required:
+        - name
+        - timeSelection
     servicesCreateViewResponse:
       type: object
       properties:
@@ -27548,6 +28548,8 @@ components:
           type: string
         isLocked:
           type: boolean
+        lockerAuthorId:
+          type: string
     servicesDeleteDashboardFolderResponse:
       type: object
     servicesDeleteDashboardResponse:
@@ -27593,6 +28595,10 @@ components:
           $ref: '#/components/schemas/servicesTokenOriginType'
         isLocked:
           type: boolean
+        lockerAuthorId:
+          type: string
+        lockerName:
+          type: string
     servicesGetViewFolderResponse:
       type: object
       properties:
@@ -27617,6 +28623,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1ViewFolder'
+          title: List of view folders
     servicesListViewsResponse:
       type: object
       properties:
@@ -27624,6 +28631,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/servicesView'
+          title: List of views
     servicesPinDashboardResponse:
       type: object
     servicesReplaceDashboardFolderRequest:
@@ -27673,8 +28681,15 @@ components:
         id:
           type: integer
           format: int32
+          example: 52
+          description: id
+          title: View id
         name:
           type: string
+          example: Logs view
+          description: View name
+          title: View name
+          minLength: 1
         searchQuery:
           $ref: '#/components/schemas/v1SearchQuery'
         timeSelection:
@@ -27683,8 +28698,20 @@ components:
           $ref: '#/components/schemas/v1SelectedFilters'
         folderId:
           type: string
+          format: uuid
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          description: Unique identifier for folders
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
         isCompactMode:
           type: boolean
+      description: Response for views.
+      title: View
+      required:
+        - name
+        - id
+        - timeSelection
     spans2metricsv2SpansQuery:
       type: object
       properties:
@@ -29499,9 +30526,19 @@ components:
         fromTime:
           type: string
           format: date-time
+          example: '2024-01-25T11:31:43.152Z'
+          title: Custom time selection start timestamp
+          minLength: 1
         toTime:
           type: string
           format: date-time
+          example: '2024-01-25T11:35:43.152Z'
+          title: Custom time selection end timestamp
+          minLength: 1
+      title: Custom time selection
+      required:
+        - fromTime
+        - toTime
     v1Daily:
       type: object
     v1DailyUsageMetrics:
@@ -29560,29 +30597,6 @@ components:
           type: array
           items:
             type: string
-    v1DataUsageReport:
-      type: object
-      properties:
-        team:
-          $ref: '#/components/schemas/datausagev1Team'
-        type:
-          $ref: '#/components/schemas/coralogixdatausagev1DataType'
-        tier:
-          $ref: '#/components/schemas/datausagev1TcoTier'
-        date:
-          type: string
-          format: date-time
-        application:
-          type: string
-        subsystem:
-          type: string
-        severity:
-          $ref: '#/components/schemas/coralogixdatausagev1Severity'
-        usageInGb:
-          type: number
-          format: double
-        units:
-          $ref: '#/components/schemas/coralogixdatausagev1Unit'
     v1DataUsageUsage:
       type: object
       properties:
@@ -29907,6 +30921,11 @@ components:
         enrichedFieldName:
           type: string
           title: the field of the enriched key after enrichment
+        selectedColumns:
+          type: array
+          items:
+            type: string
+          title: the columns to be selected from the enrichment
     v1EnrichmentRequestModel:
       type: object
       properties:
@@ -29917,6 +30936,10 @@ components:
           $ref: '#/components/schemas/coralogixenrichmentv1EnrichmentType'
         enrichedFieldName:
           type: string
+        selectedColumns:
+          type: array
+          items:
+            type: string
       description: The enrichment request model
       title: Enrichment Prototype
       externalDocs:
@@ -31268,13 +32291,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/v1TeamsDailyDataUsage'
-    v1GetTeamsDetailedUsageResponse:
-      type: object
-      properties:
-        reports:
-          type: array
-          items:
-            $ref: '#/components/schemas/v1DataUsageReport'
     v1GetTeamsQuotaHistoryRequest:
       type: object
       properties:
@@ -33579,9 +34595,18 @@ components:
       properties:
         caption:
           type: string
+          example: Last Hour
+          description: Folder name
+          minLength: 1
         seconds:
           type: integer
           format: int64
+          example: 3600
+          description: Folder name
+      title: Quick time selection
+      required:
+        - caption
+        - seconds
     v1QuotaHistoryEntry:
       type: object
       properties:
@@ -34040,6 +35065,13 @@ components:
       properties:
         query:
           type: string
+          description: Only digits are allowed.
+          title: View search query
+          maxLength: 1
+          minLength: 1
+      title: SearchQuery
+      required:
+        - query
     v1SelectedFilter:
       type: object
       properties:
@@ -34056,6 +35088,9 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/coralogixapisviewsv1Filter'
+          title: Selected filters
+          minItems: 1
+      title: Selected filters
     v1SendLogConfig:
       type: object
       properties:
@@ -34879,6 +35914,7 @@ components:
           $ref: '#/components/schemas/v1QuickTimeSelection'
         customSelection:
           $ref: '#/components/schemas/v1CustomTimeSelection'
+      title: Time selection
     v1TimestampFormatAutomatic:
       type: object
       description: Indicates that the timestamp will be automatically formatted
@@ -35510,8 +36546,21 @@ components:
       properties:
         id:
           type: string
+          format: uuid
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          description: Unique identifier for folders
+          maxLength: 36
+          minLength: 36
+          pattern: ^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$
         name:
           type: string
+          example: My Folder
+          description: Folder name
+          minLength: 1
+      description: View folder.
+      title: ViewFolder
+      required:
+        - name
     v1WebhookType:
       type: string
       enum:
@@ -35849,6 +36898,10 @@ components:
           type: array
           items:
             type: string
+        pillar:
+          $ref: '#/components/schemas/archivedatasetv2Pillar'
+        entityType:
+          type: string
     v2DatasetSchemaFields:
       type: object
       properties:
@@ -36462,6 +37515,8 @@ components:
       properties:
         bucketV2:
           type: string
+    v2InternalDatasetLocationsServiceDeleteDatasetLocationsResponse:
+      type: object
     v2InternalDatasetLocationsServiceGetDatasetListResponse:
       type: object
       properties:
@@ -37164,13 +38219,6 @@ components:
           https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
       required:
         - isValid
-    v2WriteToDatasetMode:
-      type: string
-      enum:
-        - WRITE_TO_DATASET_MODE_UNSPECIFIED
-        - WRITE_TO_DATASET_MODE_OVERWRITE
-        - WRITE_TO_DATASET_MODE_APPEND
-      default: WRITE_TO_DATASET_MODE_UNSPECIFIED
     v3ActivityAnalysis:
       type: object
       properties:
@@ -39107,6 +40155,12 @@ components:
           $ref: '#/components/schemas/commonSpanField'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupNamesFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
+        stackedGroupNameField:
+          $ref: '#/components/schemas/commonObservationField'
     widgetsBarChartStackDefinition:
       type: object
       properties:
@@ -39299,6 +40353,10 @@ components:
             $ref: '#/components/schemas/commonSpanField'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
     widgetsGaugeThreshold:
       type: object
       properties:
@@ -39445,6 +40503,10 @@ components:
             $ref: '#/components/schemas/commonSpanField'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
     widgetsHorizontalBarChart:
       type: object
       properties:
@@ -39575,6 +40637,12 @@ components:
           $ref: '#/components/schemas/commonSpanField'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupNamesFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
+        stackedGroupNameField:
+          $ref: '#/components/schemas/commonObservationField'
     widgetsHorizontalBarChartStackDefinition:
       type: object
       properties:
@@ -39668,6 +40736,10 @@ components:
             $ref: '#/components/schemas/FilterSpansFilter'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupBys:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
     widgetsMarkdown:
       type: object
       properties:
@@ -39802,6 +40874,12 @@ components:
           $ref: '#/components/schemas/commonSpanField'
         timeFrame:
           $ref: '#/components/schemas/commonTimeFrameSelect'
+        groupNamesFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/commonObservationField'
+        stackedGroupNameField:
+          $ref: '#/components/schemas/commonObservationField'
     widgetsPieChartStackDefinition:
       type: object
       properties:
