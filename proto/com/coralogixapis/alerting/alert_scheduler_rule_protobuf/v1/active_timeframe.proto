@@ -1,8 +1,0 @@
-syntax = "proto3";
-package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
-
-message ActiveTimeframe {
-  string start_time = 1; // Timeframe start time: The point in the time(date-time) when the rule will start to be active.
-  string end_time = 2; // Timeframe end time: The point in the time(date-time) when the rule will finish to be active.
-  string timezone = 3; // Timeframe timezone: The rule will be active according to a specific timezone.
-}

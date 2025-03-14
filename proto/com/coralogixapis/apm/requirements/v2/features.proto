@@ -1,7 +1,0 @@
-syntax = "proto3";
-package com.coralogixapis.apm.requirements.v2;
-
-enum Feature {
-  FEATURE_UNSPECIFIED = 0;
-  FEATURE_K8S_DASHBOARD = 1;
-}

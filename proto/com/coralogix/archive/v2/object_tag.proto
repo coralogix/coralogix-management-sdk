@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.archive.v2;
-
-message ObjectTag {
-  string key = 1;
-  string value = 2;
-}
