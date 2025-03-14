@@ -1,9 +1,0 @@
-syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-
-package com.coralogixapis.apm.common.v2;
-
-message TimeRange {
-  google.protobuf.StringValue start_time_seconds = 1;
-  google.protobuf.StringValue end_time_seconds = 2;
-}

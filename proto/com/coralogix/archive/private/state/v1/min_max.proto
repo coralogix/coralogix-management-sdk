@@ -1,8 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.archive.private.state.v1;
-
-message MinMax {
-  int64 min = 3;
-  int64 max = 4;
-}
