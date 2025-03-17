@@ -49,7 +49,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
 ]
-revision = "v2.3.10"
+revision = "v2.3.11"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -84,7 +84,7 @@ revision = "v1.0.9"
 [cx-api-scopes]
 url = 'github.com/coralogix/cx-api-scopes'
 allow_policies = ["src/com/coralogixapis/*"]
-revision = 'v0.0.2'
+revision = "v0.0.1"
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'

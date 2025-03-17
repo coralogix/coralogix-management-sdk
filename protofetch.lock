@@ -39,8 +39,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.3.10"
-commit_hash = "f25170abe0f017d34ee3dbef40b49794f1040277"
+revision = "v2.3.11"
+commit_hash = "fbc5f652cb61376ba2bdbf936cd74a4655981c94"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -123,8 +123,8 @@ commit_hash = "31c928ce64eedadc7a9387d87bb6e9fa8e73cfca"
 [[dependencies]]
 name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
-revision = "v0.0.2"
-commit_hash = "1d2350ed6d5354170c89ae38decbec8fb76ffa2f"
+revision = "v0.0.1"
+commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 
 [[dependencies]]
 name = "cx-api-tags"

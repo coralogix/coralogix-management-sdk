@@ -45,6 +45,7 @@ message DataTable {
     }
 
     message Aggregation {
+      // Aggregation unique identifier
       google.protobuf.StringValue id = 1;
       google.protobuf.StringValue name = 2;
       google.protobuf.BoolValue is_visible = 3;
@@ -65,6 +66,7 @@ message DataTable {
     }
 
     message Aggregation {
+      // Aggregation unique identifier
       google.protobuf.StringValue id = 1;
       google.protobuf.StringValue name = 2;
       google.protobuf.BoolValue is_visible = 3;
