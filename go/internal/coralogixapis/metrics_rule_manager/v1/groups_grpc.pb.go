@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: com/coralogixapis/metrics-rule-manager/v1/groups.proto
+// source: proto/com/coralogixapis/metrics_rule_manager/v1/groups.proto
 
-package golang
+package v1
 
 import (
 	context "context"
@@ -20,10 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RuleGroups_Save_FullMethodName   = "/rule_manager.groups.RuleGroups/Save"
-	RuleGroups_Delete_FullMethodName = "/rule_manager.groups.RuleGroups/Delete"
-	RuleGroups_List_FullMethodName   = "/rule_manager.groups.RuleGroups/List"
-	RuleGroups_Fetch_FullMethodName  = "/rule_manager.groups.RuleGroups/Fetch"
+	RuleGroups_Save_FullMethodName   = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroups/Save"
+	RuleGroups_Delete_FullMethodName = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroups/Delete"
+	RuleGroups_List_FullMethodName   = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroups/List"
+	RuleGroups_Fetch_FullMethodName  = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroups/Fetch"
 )
 
 // RuleGroupsClient is the client API for RuleGroups service.
@@ -225,7 +225,7 @@ func _RuleGroups_Fetch_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RuleGroups_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rule_manager.groups.RuleGroups",
+	ServiceName: "com.coralogixapis.metrics_rule_manager.v1.RuleGroups",
 	HandlerType: (*RuleGroupsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -246,15 +246,15 @@ var RuleGroups_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "com/coralogixapis/metrics-rule-manager/v1/groups.proto",
+	Metadata: "proto/com/coralogixapis/metrics_rule_manager/v1/groups.proto",
 }
 
 const (
-	RuleGroupSets_Create_FullMethodName = "/rule_manager.groups.RuleGroupSets/Create"
-	RuleGroupSets_Update_FullMethodName = "/rule_manager.groups.RuleGroupSets/Update"
-	RuleGroupSets_List_FullMethodName   = "/rule_manager.groups.RuleGroupSets/List"
-	RuleGroupSets_Fetch_FullMethodName  = "/rule_manager.groups.RuleGroupSets/Fetch"
-	RuleGroupSets_Delete_FullMethodName = "/rule_manager.groups.RuleGroupSets/Delete"
+	RuleGroupSets_Create_FullMethodName = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Create"
+	RuleGroupSets_Update_FullMethodName = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Update"
+	RuleGroupSets_List_FullMethodName   = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/List"
+	RuleGroupSets_Fetch_FullMethodName  = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Fetch"
+	RuleGroupSets_Delete_FullMethodName = "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Delete"
 )
 
 // RuleGroupSetsClient is the client API for RuleGroupSets service.
@@ -475,7 +475,7 @@ func _RuleGroupSets_Delete_Handler(srv interface{}, ctx context.Context, dec fun
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RuleGroupSets_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "rule_manager.groups.RuleGroupSets",
+	ServiceName: "com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets",
 	HandlerType: (*RuleGroupSetsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -500,5 +500,5 @@ var RuleGroupSets_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "com/coralogixapis/metrics-rule-manager/v1/groups.proto",
+	Metadata: "proto/com/coralogixapis/metrics_rule_manager/v1/groups.proto",
 }

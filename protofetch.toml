@@ -260,13 +260,13 @@ allow_policies = [
 url = 'github.com/coralogix/cx-api-enrichment'
 revision = "v0.5.9"
 allow_policies = [
-    "src/com/coralogix/enrichment/v1/enrichment.proto",
-    "src/com/coralogix/enrichment/v1/enrichment_type.proto",
-    "src/com/coralogix/enrichment/v1/enrichment_service.proto",
-    "src/com/coralogix/enrichment/v1/enrichment_request_model.proto",
-    "src/com/coralogix/enrichment/v1/company_enrichment_settings.proto",
-    "src/com/coralogix/enrichment/v1/custom_enrichment_service.proto",
-    "src/com/coralogix/enrichment/v1/custom_enrichment.proto",
+    "com/coralogix/enrichment/v1/enrichment.proto",
+    "com/coralogix/enrichment/v1/enrichment_type.proto",
+    "com/coralogix/enrichment/v1/enrichment_service.proto",
+    "com/coralogix/enrichment/v1/enrichment_request_model.proto",
+    "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
+    "com/coralogix/enrichment/v1/custom_enrichment_service.proto",
+    "com/coralogix/enrichment/v1/custom_enrichment.proto",
 ]
 
 [cx-api-tags]
@@ -337,12 +337,18 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.98"
+revision = "v0.0.99"
 allow_policies = [
     "src/com/coralogix/archive/v1/retentions_service.proto",
     "src/com/coralogix/archive/v1/retention.proto",
-    "src/com/coralogix/archive/v1/target_service.proto",
-    "src/com/coralogix/archive/v1/target.proto",
+    "src/com/coralogix/archive/v2/archive_target.proto",
+    "src/com/coralogix/archive/v2/target_service.proto",
+    "src/com/coralogix/archive/v2/target.proto",
+    "src/com/coralogix/archive/v2/format.proto",
+    "src/com/coralogix/archive/v2/object_tag.proto",
+    "src/com/coralogix/archive/format/generic/v1/generic.proto",
+    "src/com/coralogix/archive/format/csv/v1/csv.proto",
+    "src/com/coralogix/archive/format/wide_parquet/v1/wide_parquet.proto",
 ]
 
 [cx-api-metrics-configurator]
@@ -354,9 +360,11 @@ allow_policies = [
 revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
-url = "github.com/coralogix/cx-api-clientsets"
-revision = "v0.0.7"
-allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
+url = "github.com/coralogix/cx-api-metrics-rule-manager"
+revision = "v0.0.3"
+allow_policies = [
+    "proto/com/coralogixapis/metrics_rule_manager/v1/groups.proto"
+]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
