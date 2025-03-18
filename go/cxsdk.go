@@ -88,6 +88,7 @@ type ClientSet struct {
 	enrichments         *EnrichmentsClient
 	dataSet             *DataSetClient
 	dashboards          *DashboardsClient
+	dashboardsFolders   *DashboardsFoldersClient
 	actions             *ActionsClient
 	tcoPolicies         *TCOPoliciesClient
 	webhooks            *WebhooksClient
@@ -138,6 +139,11 @@ func (c *ClientSet) DataSet() *DataSetClient {
 // Dashboards gets a DashboardsClient from the ClientSet.
 func (c *ClientSet) Dashboards() *DashboardsClient {
 	return c.dashboards
+}
+
+// DashboardsFolders gets a DashboardsFoldersClient from the ClientSet.
+func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
+	return c.dashboardsFolders
 }
 
 // Actions gets an ActionsClient from the ClientSet.
@@ -250,6 +256,7 @@ func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 		enrichments:         NewEnrichmentClient(apikeyCPC),
 		dataSet:             NewDataSetClient(apikeyCPC),
 		dashboards:          NewDashboardsClient(apikeyCPC),
+		dashboardsFolders:   NewDashboardsFoldersClient(apikeyCPC),
 		actions:             NewActionsClient(apikeyCPC),
 		tcoPolicies:         NewTCOPoliciesClient(apikeyCPC),
 		webhooks:            NewWebhooksClient(apikeyCPC),
@@ -261,13 +268,12 @@ func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 		slos:                NewSLOsClient(apikeyCPC),
 		scopes:              NewScopesClient(apikeyCPC),
 		roles:               NewRolesClient(apikeyCPC),
-		// dahboardsFolders:  NewDashboardsFoldersClient(apikeyCPC),
-		apiKeys:       NewAPIKeysClient(apikeyCPC),
-		groups:        NewGroupsClient(apikeyCPC),
-		saml:          NewSamlClient(apikeyCPC),
-		users:         NewUsersClient(apikeyCPC),
-		integrations:  NewIntegrationsClient(apikeyCPC),
-		notifications: NewNotificationsClient(apikeyCPC),
+		apiKeys:             NewAPIKeysClient(apikeyCPC),
+		groups:              NewGroupsClient(apikeyCPC),
+		saml:                NewSamlClient(apikeyCPC),
+		users:               NewUsersClient(apikeyCPC),
+		integrations:        NewIntegrationsClient(apikeyCPC),
+		notifications:       NewNotificationsClient(apikeyCPC),
 	}
 }
 
