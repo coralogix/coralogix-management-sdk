@@ -27,8 +27,8 @@ commit_hash = "2d9a436efea0c81853559fd679266e8c30377b7c"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.98"
-commit_hash = "179ba7ce3b07518c738e36e59e54f5729a66b722"
+revision = "v0.0.99"
+commit_hash = "10637bcb866ec1ed900037e600a1069da3749f8d"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -86,9 +86,9 @@ commit_hash = "7f7c1d01938bdedd8c6923edee51a3aed4777ad6"
 
 [[dependencies]]
 name = "cx-api-metrics-rule-manager"
-url = "github.com/coralogix/cx-api-clientsets"
-revision = "v0.0.7"
-commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
+url = "github.com/coralogix/cx-api-metrics-rule-manager"
+revision = "v0.0.3"
+commit_hash = "c87f468085ef0f749ddac1fdb4c805a98acf2052"
 
 [[dependencies]]
 name = "cx-api-notification-center"

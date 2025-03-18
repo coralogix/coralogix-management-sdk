@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+package com.coralogix.archive.v2;
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message IBMCosTargetSpec {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "IBM COS Target Spec"
+      description: "This data structure represents an IBM COS target."
+      required: [
+        "bucket_crn",
+        "endpoint"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  string bucket_crn = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"bucket_crn\"" }];
+  string endpoint = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"http://some.endpoint.com:8081\"" }];
+  optional string service_crn = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"service_crn\"" }];
+  optional IbmBucketType bucket_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "0" }];
+}
+
+enum IbmBucketType {
+  IBM_BUCKET_TYPE_UNSPECIFIED = 0;
+  IBM_BUCKET_TYPE_EXTERNAL = 1;
+  IBM_BUCKET_TYPE_INTERNAL = 2;
+}
+
+message S3TargetSpec {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "S3 Target Spec"
+      description: "This data structure represents an S3 target."
+      required: [
+        "bucket"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  string bucket = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"bucket\"" }];
+  optional string region = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"us-west-2\"" }];
+}
+
+message ArchiveSpec {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Archive Spec"
+      description: "This data structure contains metadata about the archive."
+      required: [
+        "bucket"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  string archiving_format_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"json_id\"" }];
+  bool is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool enable_tags = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+}
+
+message Target {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Target"
+      description: "This data structure represents a target to archive logs."
+      required: [
+        "target_spec"
+        "archive_spec"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  oneof target_spec {
+    S3TargetSpec s3 = 1;
+    IBMCosTargetSpec ibm_cos = 2;
+  }
+
+  ArchiveSpec archive_spec = 3;
+}
