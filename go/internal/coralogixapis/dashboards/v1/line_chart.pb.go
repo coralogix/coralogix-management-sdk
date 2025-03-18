@@ -189,7 +189,8 @@ func (x *LineChart) GetStackedLine() LineChart_StackedLine {
 }
 
 type LineChart_QueryDefinition struct {
-	state              protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// QueryDefinition unique identifier
 	Id                 *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Query              *LineChart_Query        `protobuf:"bytes,2,opt,name=query,proto3" json:"query,omitempty"`
 	SeriesNameTemplate *wrapperspb.StringValue `protobuf:"bytes,3,opt,name=series_name_template,json=seriesNameTemplate,proto3" json:"series_name_template,omitempty"`

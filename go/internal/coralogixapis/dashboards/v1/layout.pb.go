@@ -130,10 +130,11 @@ func (x *Layout) GetSections() []*Section {
 }
 
 type Section struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *UUID                  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Rows          []*Row                 `protobuf:"bytes,2,rep,name=rows,proto3" json:"rows,omitempty"`
-	Options       *SectionOptions        `protobuf:"bytes,3,opt,name=options,proto3" json:"options,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Section unique identifier
+	Id            *UUID           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Rows          []*Row          `protobuf:"bytes,2,rep,name=rows,proto3" json:"rows,omitempty"`
+	Options       *SectionOptions `protobuf:"bytes,3,opt,name=options,proto3" json:"options,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -190,10 +191,11 @@ func (x *Section) GetOptions() *SectionOptions {
 }
 
 type Row struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Id            *UUID                  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Appearance    *Row_Appearance        `protobuf:"bytes,2,opt,name=appearance,proto3" json:"appearance,omitempty"`
-	Widgets       []*Widget              `protobuf:"bytes,3,rep,name=widgets,proto3" json:"widgets,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Row unique identifier
+	Id            *UUID           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Appearance    *Row_Appearance `protobuf:"bytes,2,opt,name=appearance,proto3" json:"appearance,omitempty"`
+	Widgets       []*Widget       `protobuf:"bytes,3,rep,name=widgets,proto3" json:"widgets,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

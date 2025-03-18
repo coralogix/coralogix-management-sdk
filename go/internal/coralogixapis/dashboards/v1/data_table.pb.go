@@ -662,7 +662,8 @@ func (x *DataTable_LogsQuery_Grouping) GetGroupBys() []*ObservationField {
 }
 
 type DataTable_LogsQuery_Aggregation struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Aggregation unique identifier
 	Id            *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	IsVisible     *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=is_visible,json=isVisible,proto3" json:"is_visible,omitempty"`
@@ -790,7 +791,8 @@ func (x *DataTable_SpansQuery_Grouping) GetGroupBys() []*ObservationField {
 }
 
 type DataTable_SpansQuery_Aggregation struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Aggregation unique identifier
 	Id            *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	IsVisible     *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=is_visible,json=isVisible,proto3" json:"is_visible,omitempty"`

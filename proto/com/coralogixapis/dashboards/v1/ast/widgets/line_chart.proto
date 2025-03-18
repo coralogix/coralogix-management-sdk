@@ -27,6 +27,7 @@ message LineChart {
   StackedLine stacked_line = 9;
 
   message QueryDefinition {
+    // QueryDefinition unique identifier
     google.protobuf.StringValue id = 1;
     Query query = 2;
     google.protobuf.StringValue series_name_template = 3;

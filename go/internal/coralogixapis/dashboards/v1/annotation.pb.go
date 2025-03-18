@@ -22,7 +22,8 @@ const (
 )
 
 type Annotation struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Annotation unique identifier
 	Id            *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Enabled       *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -391,7 +392,7 @@ func (x *Annotation_SpansSource) GetLabelFields() []*ObservationField {
 	return nil
 }
 
-// Strategy for turning metrics data into annotations
+// A strategy for turning metrics data into annotations
 type Annotation_MetricsSource_Strategy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -453,7 +454,7 @@ type isAnnotation_MetricsSource_Strategy_Value interface {
 }
 
 type Annotation_MetricsSource_Strategy_StartTimeMetric struct {
-	// Take first data point and use its value as annotation timestamp (instead of point own timestamp)
+	// Take the first data point and use its value as annotation timestamp (instead of pointing to its own timestamp)
 	StartTimeMetric *Annotation_MetricsSource_StartTimeMetric `protobuf:"bytes,1,opt,name=start_time_metric,json=startTimeMetric,proto3,oneof"`
 }
 

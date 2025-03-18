@@ -482,7 +482,7 @@ func (x *LogsAggregation_Max) GetObservationField() *ObservationField {
 type LogsAggregation_Percentile struct {
 	state protoimpl.MessageState  `protogen:"open.v1"`
 	Field *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	// Value in range (0, 100]
+	// A value in range (0, 100]
 	Percent          *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=percent,proto3" json:"percent,omitempty"`
 	ObservationField *ObservationField       `protobuf:"bytes,3,opt,name=observation_field,json=observationField,proto3" json:"observation_field,omitempty"`
 	unknownFields    protoimpl.UnknownFields
