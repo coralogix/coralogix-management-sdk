@@ -400,10 +400,6 @@ allow_policies = [
     "google/rpc/status.proto",
 ]
 
-[global-mapping]
-url = 'github.com/coralogix/cx-api-global-mapping'
-revision = "v1.27.0"
-
 [cx-api-schema-store]
 url = 'github.com/coralogix/cx-api-schema-store'
 revision = 'v0.0.1'
@@ -456,5 +452,4 @@ allow_policies = [
     "src/com/coralogixapis/events/v3/event_order_by.proto",
     "src/com/coralogixapis/events/v3/events_query_filter.proto",
     "src/com/coralogixapis/events/v3/events_service.proto",
-
 ]
