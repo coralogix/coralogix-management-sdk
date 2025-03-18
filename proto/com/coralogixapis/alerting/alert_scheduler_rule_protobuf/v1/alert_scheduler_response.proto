@@ -1,0 +1,36 @@
+syntax = "proto3";
+package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto";
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto";
+
+
+message GetAlertSchedulerRuleResponse {
+  AlertSchedulerRule alert_scheduler_rule = 1;
+}
+
+message CreateAlertSchedulerRuleResponse {
+  AlertSchedulerRule alert_scheduler_rule = 1;
+}
+
+message UpdateAlertSchedulerRuleResponse {
+  AlertSchedulerRule alert_scheduler_rule = 1;
+}
+
+message DeleteAlertSchedulerRuleResponse {}
+
+message CreateBulkAlertSchedulerRuleResponse {
+  repeated CreateAlertSchedulerRuleResponse create_suppression_responses = 1;
+}
+
+message UpdateBulkAlertSchedulerRuleResponse {
+  repeated UpdateAlertSchedulerRuleResponse update_suppression_responses = 1;
+}
+
+message GetBulkAlertSchedulerRuleResponse {
+  repeated AlertSchedulerRuleWithActiveTimeframe alert_scheduler_rules = 1;
+  string next_page_token = 2;
+}
+message AlertSchedulerRuleWithActiveTimeframe {
+    AlertSchedulerRule alert_scheduler_rule = 1;
+    repeated ActiveTimeframe next_active_timeframes = 2;
+}

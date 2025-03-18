@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package com.coralogixapis.aaa.organisations.v2;
+
+enum PlanType {
+  PLAN_TYPE_UNSPECIFIED = 0;
+  PLAN_TYPE_POST_TRIAL = 1;
+  PLAN_TYPE_PLAN = 2;
+  PLAN_TYPE_TRIAL = 3;
+}
+message Team {
+  TeamId id = 1;
+  string cluster_id = 2;
+  optional float quota = 3;
+  optional int32 retention = 4;
+  optional PlanType plan_type = 5;
+  bool is_auditing_team = 6;
+  string name = 7;
+}
+
+message TeamInfo {
+  TeamId id = 1;
+  OrganisationId organisation_id = 2;
+  string organisation_name = 3;
+
+}
+
+message TeamId {
+  uint32 id = 1;
+}
+
+message OrganisationId {
+  string id = 1;
+}
+
+message UserId {
+  string id = 1;
+}
+
+message UserAccountId {
+  uint32 id = 1;
+}
+
+message User {
+  string first_name = 1;
+  string last_name = 2;
+  string username = 3;
+  UserAccountId user_account_id = 4;
+}
+
+message TeamCount {
+  TeamId team_id = 1;
+  uint32 team_member_count = 2;
+}
