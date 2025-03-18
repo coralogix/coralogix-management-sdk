@@ -88,6 +88,7 @@ type ClientSet struct {
 	enrichments         *EnrichmentsClient
 	dataSet             *DataSetClient
 	dashboards          *DashboardsClient
+	dashboardsFolders   *DashboardsFoldersClient
 	actions             *ActionsClient
 	tcoPolicies         *TCOPoliciesClient
 	webhooks            *WebhooksClient
@@ -138,6 +139,11 @@ func (c *ClientSet) DataSet() *DataSetClient {
 // Dashboards gets a DashboardsClient from the ClientSet.
 func (c *ClientSet) Dashboards() *DashboardsClient {
 	return c.dashboards
+}
+
+// Dashboards gets a DashboardsFoldersClient from the ClientSet.
+func (c *ClientSet) DashboardsFolders() *DashboardsFoldersClient {
+	return c.dashboardsFolders
 }
 
 // Actions gets an ActionsClient from the ClientSet.
