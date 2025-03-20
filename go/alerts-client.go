@@ -708,7 +708,9 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
-
+	if req.AlertDefProperties != nil {
+		req.AlertDefProperties.EntityLabels[sdkVersionHeaderName] = vanillaSdkVersion
+	}
 	response, err := client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, CreateAlertDefRPC, alertsFeatureGroupID)
@@ -744,7 +746,9 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
-
+	if req.AlertDefProperties != nil {
+		req.AlertDefProperties.EntityLabels[sdkVersionHeaderName] = vanillaSdkVersion
+	}
 	response, err := client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, ReplaceAlertDefRPC, alertsFeatureGroupID)

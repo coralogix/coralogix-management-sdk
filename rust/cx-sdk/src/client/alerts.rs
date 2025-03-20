@@ -23,6 +23,10 @@ use crate::{
     metadata::CallProperties,
     util::make_request_with_metadata,
 };
+use crate::{
+    SDK_VERSION,
+    SDK_VERSION_HEADER_NAME,
+};
 use cx_api::proto::com::coralogixapis::alerts::v3::alert_defs_service_client::AlertDefsServiceClient;
 use cx_api::proto::com::coralogixapis::alerts::v3::{
     CreateAlertDefRequest,
@@ -216,13 +220,20 @@ impl AlertsClient {
     pub async fn create(&self, alert: AlertDef) -> Result<CreateAlertDefResponse> {
         let request = make_request_with_metadata(
             CreateAlertDefRequest {
-                alert_def_properties: alert.alert_def_properties,
+                alert_def_properties: alert.alert_def_properties.clone(),
             },
             &self.metadata_map,
         );
         {
             let mut client = self.service_client.lock().await.clone();
-
+            let mut alert = alert;
+            if let Some(alert_def) = &mut alert.alert_def_properties {
+                alert_def
+                    .entity_labels
+                    .entry(SDK_VERSION_HEADER_NAME.to_string())
+                    .and_modify(|v| *v = SDK_VERSION.to_string())
+                    .or_insert(SDK_VERSION.to_string());
+            }
             client
                 .create_alert_def(request)
                 .await
@@ -242,6 +253,14 @@ impl AlertsClient {
     /// # Arguments
     /// * `alert` - The [`AlertDef`] to replace.
     pub async fn replace(&self, alert: AlertDef) -> Result<ReplaceAlertDefResponse> {
+        let mut alert = alert;
+        if let Some(alert_def) = &mut alert.alert_def_properties {
+            alert_def
+                .entity_labels
+                .entry(SDK_VERSION_HEADER_NAME.to_string())
+                .and_modify(|v| *v = SDK_VERSION.to_string())
+                .or_insert(SDK_VERSION.to_string());
+        }
         let request = make_request_with_metadata(
             ReplaceAlertDefRequest {
                 alert_def_properties: alert.alert_def_properties,
