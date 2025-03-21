@@ -45,7 +45,7 @@ message LogsAggregation {
 
   message Percentile {
     google.protobuf.StringValue field = 1;
-    // Value in range (0, 100]
+    // A value in range (0, 100]
     google.protobuf.DoubleValue percent = 2;
     v1.common.ObservationField observation_field = 3;
   }

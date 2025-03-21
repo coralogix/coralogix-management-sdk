@@ -5,7 +5,9 @@ package com.coralogixapis.dashboards.v1.common;
 import "google/protobuf/wrappers.proto";
 
 message DashboardFolder {
+  // Folder unique identifier
   google.protobuf.StringValue id = 1;
+  // Folder name
   google.protobuf.StringValue name = 2;
   google.protobuf.StringValue parent_id = 3;
 }
