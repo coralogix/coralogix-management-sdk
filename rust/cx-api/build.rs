@@ -285,6 +285,10 @@ fn saml_configuration_service(root: &str) -> Vec<String> {
     vec![format!("{}/com/coralogixapis/aaa/sso/v2/saml.proto", root)]
 }
 
+#[deprecated(
+    since = "1.3.0",
+    note = "This API is still in Alpha and will change. Use with care."
+)]
 fn notifications_service(root: &str) -> Vec<String> {
     vec![
         format!(

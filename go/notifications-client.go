@@ -780,6 +780,7 @@ func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTe
 }
 
 // NewNotificationsClient creates a new notifications' client.
+// Deprecated: This is an alpha API and subject to change. Use with care.
 func NewNotificationsClient(c *CallPropertiesCreator) *NotificationsClient {
 	return &NotificationsClient{callPropertiesCreator: c}
 }

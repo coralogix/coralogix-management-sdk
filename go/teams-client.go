@@ -59,6 +59,7 @@ const (
 )
 
 // TeamsClient is a client for the Coralogix Teams API.
+// Read more at https://coralogix.com/docs/user-team-management/ and https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
 type TeamsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
