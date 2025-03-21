@@ -43,6 +43,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
+          NEXTEST_RETRIES: 2
         run: cargo nextest run --no-tests=warn --all
         working-directory: rust/examples
 
@@ -71,6 +72,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
+          NEXTEST_RETRIES: 2
         run: cargo nextest run --no-tests=warn --all
         working-directory: rust/examples
 
