@@ -101,7 +101,8 @@ impl RecordingRuleGroupSetsClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Create".to_string(),
+                    endpoint: "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Create"
+                        .to_string(),
                     feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
@@ -123,7 +124,8 @@ impl RecordingRuleGroupSetsClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Fetch".to_string(),
+                    endpoint: "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Fetch"
+                        .to_string(),
                     feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
@@ -142,7 +144,8 @@ impl RecordingRuleGroupSetsClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/List".to_string(),
+                    endpoint: "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/List"
+                        .to_string(),
                     feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?
@@ -152,6 +155,7 @@ impl RecordingRuleGroupSetsClient {
     /// Updates a group.
     /// * `id` - The id of the rule group set to update.
     /// * `groups` - The [`InRuleGroup`]s to update.
+    /// * `name` - The optional name for the rule groups.
     pub async fn update(
         &self,
         id: String,
@@ -168,7 +172,8 @@ impl RecordingRuleGroupSetsClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Update".to_string(),
+                    endpoint: "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Update"
+                        .to_string(),
                     feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?;
@@ -189,7 +194,8 @@ impl RecordingRuleGroupSetsClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogix.rule_manager.groups.RuleGroupSets/Delete".to_string(),
+                    endpoint: "/com.coralogixapis.metrics_rule_manager.v1.RuleGroupSets/Delete"
+                        .to_string(),
                     feature_group: RECORDING_RULES_FEATURE_GROUP_ID.to_string(),
                 })
             })?;
