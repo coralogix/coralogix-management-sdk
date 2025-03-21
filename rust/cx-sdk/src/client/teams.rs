@@ -61,7 +61,6 @@ const TEAMS_FEATURE_GROUP_ID: &str = "aaa";
 
 /// The Team API client.
 /// Read more at https://coralogix.com/docs/user-team-management/ and https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
-/// 
 pub struct TeamsClient {
     metadata_map: MetadataMap,
     service_client: Mutex<TeamServiceClient<Channel>>,
