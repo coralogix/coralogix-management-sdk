@@ -11,7 +11,7 @@ authors = []
 
 [dependencies]
 anyhow = "*"
-cx-sdk = { path = "../../cx-sdk", features = ["notifications"] }
+cx-sdk = { path = "../../cx-sdk" }
 serde_json = "*"
 time = "0.3.36"
 
