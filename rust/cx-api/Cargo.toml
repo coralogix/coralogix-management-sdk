@@ -41,7 +41,6 @@ default = [
     "views",
     "recording_rule_groups",
     "saml_configuration",
-    "notifications",
     "contextual_data_integrations",
     "incidents",
     "events",
