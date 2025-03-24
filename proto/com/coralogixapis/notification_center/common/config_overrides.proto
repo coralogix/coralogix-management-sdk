@@ -8,6 +8,7 @@ message ConfigOverrides {
   ConditionType condition_type = 1;
   string output_schema_id = 2;
   MessageConfig message_config = 3;
+  optional bool is_default_output_type = 4;
 }
 
 message ConditionType {

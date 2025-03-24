@@ -7,72 +7,280 @@ import "com/coralogixapis/dashboards/v1/common/folder.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service DashboardFoldersService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Dashboard folders service"
+    description: "Manage your dashboard folders."
+  };
+
   rpc ListDashboardFolders(ListDashboardFoldersRequest) returns (ListDashboardFoldersResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "list dashboard folders";
+    option (com.coralogix.common.v1.audit_log_description).description = "List dashboard folders";
     option (google.api.http) = {get: "/dashboards/folders"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard folders service"]
+      operation_id: "List dashboard folders"
+      description: "List all dashboard folders accessible."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "get dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dashboard folder";
     option (google.api.http) = {get: "/dashboards/folders/{folder_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard folders service"]
+      operation_id: "Get a dashboard folder"
+      description: "Returns a dashboard folder data."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
+    };
   }
 
   rpc CreateDashboardFolder(CreateDashboardFolderRequest) returns (CreateDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "create dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create dashboard folder";
     option (google.api.http) = {
       post: "/dashboards/folders"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard folders service"]
+      operation_id: "Create a dashboard folder"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
+    };
   }
 
   rpc ReplaceDashboardFolder(ReplaceDashboardFolderRequest) returns (ReplaceDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "replace dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace dashboard folder";
     option (google.api.http) = {
       put: "/dashboards/folders"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard folders service"]
+      operation_id: "Replace a dashboard folder"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
+    };
   }
 
   rpc DeleteDashboardFolder(DeleteDashboardFolderRequest) returns (DeleteDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete dashboard folder";
     option (google.api.http) = {delete: "/dashboards/folders/{folder_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard folders service"]
+      operation_id: "Delete a dashboard folder"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
+    };
   }
 }
 
 message CreateDashboardFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Create dashboard folder request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   common.DashboardFolder folder = 2;
 }
 
-message CreateDashboardFolderResponse {}
+message CreateDashboardFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Create dashboard folder response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
 message ReplaceDashboardFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Replace dashboard folder request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   common.DashboardFolder folder = 2;
 }
 
-message ReplaceDashboardFolderResponse {}
+message ReplaceDashboardFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Replace dashboard folder response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
 message DeleteDashboardFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Delete dashboard folder request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue folder_id = 2;
 }
 
-message DeleteDashboardFolderResponse {}
+message DeleteDashboardFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Delete dashboard folder response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
-message ListDashboardFoldersRequest {}
+message ListDashboardFoldersRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "List dashboard folders request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
 message ListDashboardFoldersResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "List dashboard folders response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   repeated common.DashboardFolder folder = 1;
 }
 
 message GetDashboardFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Get dashboard folder request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue folder_id = 2;
 }
 
 message GetDashboardFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Get dashboard folder response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   common.DashboardFolder folder = 1;
 }

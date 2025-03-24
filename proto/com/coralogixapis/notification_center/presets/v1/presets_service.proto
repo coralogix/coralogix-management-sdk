@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogixapis.notification_center.presets.v1;
 
 import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/common/v1/identifier.proto";
 import "com/coralogixapis/notification_center/presets/v1/preset.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
@@ -26,26 +27,26 @@ service PresetsService {
 
   rpc DeleteCustomPreset(DeleteCustomPresetRequest) returns (DeleteCustomPresetResponse) {
     option (google.api.http) = {
-      delete: "/v1/notification-center/presets/custom/{identifier.user_facing_id}"
+      delete: "/v1/notification-center/presets/custom/{identifier.user_defined_id}"
     };
   }
 
   rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/custom/{identifier.user_facing_id}:defaultSet"
+      post: "/v1/notification-center/presets/custom/{identifier.user_defined_id}:defaultSet"
     };
     option deprecated = true;
   }
 
   rpc SetPresetAsDefault(SetPresetAsDefaultRequest) returns (SetPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/{identifier.user_facing_id}:defaultSet"
+      post: "/v1/notification-center/presets/{identifier.user_defined_id}:defaultSet"
     };
   }
 
   rpc GetPreset(GetPresetRequest) returns (GetPresetResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets/{identifier.user_facing_id}"
+      get: "/v1/notification-center/presets/{identifier.user_defined_id}"
     };
   }
 
@@ -152,10 +153,11 @@ message DeleteCustomPresetRequest {
 
   oneof deprecated_identifier {
     string id = 101;
-    string user_facing_id = 102;
+    string user_defined_id = 102;
   }
 
-  PresetIdentifier identifier = 2;
+  presets.v1.PresetIdentifier deprecated_identifier_2 = 2 [deprecated = true];
+  notification_center.PresetIdentifier identifier = 3;
 }
 
 message DeleteCustomPresetResponse {
@@ -167,10 +169,11 @@ message SetCustomPresetAsDefaultRequest {
 
   oneof deprecated_identifier {
     string id = 101;
-    string user_facing_id = 102;
+    string user_defined_id = 102;
   }
 
-  PresetIdentifier identifier = 2;
+  presets.v1.PresetIdentifier deprecated_identifier_2 = 2 [deprecated = true];
+  notification_center.PresetIdentifier identifier = 3;
 }
 
 message SetCustomPresetAsDefaultResponse {
@@ -189,7 +192,8 @@ message SetPresetAsDefaultRequest {
     }
   };
 
-  PresetIdentifier identifier = 1;
+  presets.v1.PresetIdentifier deprecated_identifier = 1 [deprecated = true];
+  notification_center.PresetIdentifier identifier = 2;
 }
 
 message SetPresetAsDefaultResponse {
@@ -201,10 +205,11 @@ message GetPresetRequest {
 
   oneof deprecated_identifier {
     string id = 101;
-    string user_facing_id = 102;
+    string user_defined_id = 102;
   }
 
-  PresetIdentifier identifier = 2;
+  presets.v1.PresetIdentifier deprecated_identifier_2 = 2 [deprecated = true];
+  notification_center.PresetIdentifier identifier = 3;
 }
 
 message GetPresetResponse {
@@ -233,7 +238,8 @@ message BatchGetPresetsRequest {
       description: "Find out more about notification center"
     }
   };
-  repeated string ids = 1;
+  repeated string deprecated_ids = 1 [deprecated = true];
+  repeated notification_center.PresetIdentifier ids = 2;
 }
 
 message BatchGetPresetsResponse {

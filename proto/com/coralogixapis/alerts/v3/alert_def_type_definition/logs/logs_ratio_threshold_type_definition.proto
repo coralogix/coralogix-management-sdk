@@ -33,7 +33,7 @@ message LogsRatioThresholdType {
 
 message LogsRatioRules {
   LogsRatioCondition condition = 1;
-  AlertDefOverride override = 2;
+  optional AlertDefOverride override = 2;
 }
 
 message LogsRatioCondition {

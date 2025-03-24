@@ -31,6 +31,7 @@ message Gauge {
   common.ThresholdType threshold_type = 12;
   common.Legend legend = 13;
   common.LegendBy legend_by = 14;
+  google.protobuf.BoolValue display_series_name = 15;
 
   message Query {
     oneof value {

@@ -3,8 +3,8 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.13"
-commit_hash = "60ce37a76d29aadc376f665dcdc8bf45d51fb7a3"
+revision = "v0.5.14"
+commit_hash = "c0fdacda344fad786d0b409a14c8fb602634a26a"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -27,8 +27,8 @@ commit_hash = "2d9a436efea0c81853559fd679266e8c30377b7c"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.98"
-commit_hash = "179ba7ce3b07518c738e36e59e54f5729a66b722"
+revision = "v0.0.100"
+commit_hash = "4d073a0d3bba4e9e3935548e86205a4a849001aa"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,8 +39,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.3.10"
-commit_hash = "f25170abe0f017d34ee3dbef40b49794f1040277"
+revision = "v2.3.12"
+commit_hash = "3fd99210031b44ac3c983e45aaf90c2fdb33776a"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -93,14 +93,14 @@ commit_hash = "9a744b4a877903f3d16fa5ea65bcfe1a291394df"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.5.1"
-commit_hash = "c58faff8e7c6d8ac0964c2b2d216d58d2dd2fe5c"
+revision = "v0.6.0"
+commit_hash = "5c3a6b7f6bcce7125699b7d9d850671edc8f20da"
 
 [[dependencies]]
 name = "cx-api-organisations"
 url = "github.com/coralogix/cx-api-organisations"
-revision = "v0.1.32"
-commit_hash = "54f3039f90c8a0eb57a33908c03f211ff9b11520"
+revision = "v0.1.33"
+commit_hash = "1f1d3d3acabe1b382ebca7d7609515f214f8e5fa"
 
 [[dependencies]]
 name = "cx-api-permissions"
@@ -123,8 +123,8 @@ commit_hash = "31c928ce64eedadc7a9387d87bb6e9fa8e73cfca"
 [[dependencies]]
 name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
-revision = "v0.0.2"
-commit_hash = "1d2350ed6d5354170c89ae38decbec8fb76ffa2f"
+revision = "v0.0.1"
+commit_hash = "e1375b8f745ee1f85a328a93ed4f4af2e71fd053"
 
 [[dependencies]]
 name = "cx-api-tags"

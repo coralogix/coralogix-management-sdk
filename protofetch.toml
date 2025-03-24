@@ -7,7 +7,7 @@ revision = 'v0.17.2'
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.13"
+revision = "v0.5.14"
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
@@ -49,7 +49,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
 ]
-revision = "v2.3.10"
+revision = "v2.3.12"
 
 [cx-api-logs2metrics]
 url = 'github.com/coralogix/cx-api-logs2metrics'
@@ -75,7 +75,7 @@ revision = 'v0.0.7'
 [cx-api-organisations]
 url = 'github.com/coralogix/cx-api-organisations'
 allow_policies = ["/com/coralogixapis/aaa/*"]
-revision = "v0.1.32"
+revision = "v0.1.33"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -84,7 +84,7 @@ revision = "v1.0.9"
 [cx-api-scopes]
 url = 'github.com/coralogix/cx-api-scopes'
 allow_policies = ["src/com/coralogixapis/*"]
-revision = 'v0.0.2'
+revision = "v0.0.1"
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
@@ -111,7 +111,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.98"
+revision = "v0.0.100"
 
 [cx-api-metrics-configurator]
 url = 'github.com/coralogix/cx-api-metrics-configurator'
@@ -128,7 +128,7 @@ allow_policies = ["/com/coralogixapis/metrics-rule-manager/*"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.5.1"
+revision = "v0.6.0"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/*",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",

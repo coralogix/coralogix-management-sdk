@@ -11,12 +11,14 @@ message Layout {
 }
 
 message Section {
+  // Section unique identifier
   UUID id = 1;
   repeated Row rows = 2;
   SectionOptions options = 3;
 }
 
 message Row {
+  // Row unique identifier
   UUID id = 1;
   Appearance appearance = 2;
   repeated Widget widgets = 3;
