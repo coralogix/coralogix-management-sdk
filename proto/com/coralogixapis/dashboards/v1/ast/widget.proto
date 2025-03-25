@@ -13,8 +13,21 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto";
 import "com/coralogixapis/dashboards/v1/types.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message Widget {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Widget"
+      description: "This data structure represents a dashboard widget."
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/#add-new-widgets"
+      description: "Find out more about creating dashboard widgets in our documentation."
+    }
+  };
+
+  // Widget unique identifier
   UUID id = 1;
   google.protobuf.StringValue title = 2;
   google.protobuf.StringValue description = 3;

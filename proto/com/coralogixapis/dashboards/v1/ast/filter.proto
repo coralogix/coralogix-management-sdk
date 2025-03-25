@@ -5,10 +5,21 @@ package com.coralogixapis.dashboards.v1.ast;
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-// Filter represents the configuration for filtering data on the dashboard.
 message Filter {
-  // Source of the filter, which can be logs, spans, or metrics.
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Filter"
+      description: "This data structure represents the configuration for filtering data on the dashboard."
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Discover how to filter and query data in Custom Dashboards by exploring our documentation."
+    }
+  };
+
+  // The source of the filter, which can be logs, spans, or metrics.
   Source source = 1;
 
   // Indicates if the filter is currently enabled or not.
@@ -17,9 +28,14 @@ message Filter {
   // Indicates if the filter's UI representation should be collapsed or expanded.
   google.protobuf.BoolValue collapsed = 3;
 
-  // Source defines the type of data the filter applies to.
   message Source {
-    // Specifies the type of data for the filter.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Source"
+        description: "Defines the type of data the filter applies to."
+      }
+    };
+
     oneof value {
       LogsFilter logs = 1; // Filter configuration for logs.
       SpansFilter spans = 2; // Filter configuration for spans.
@@ -27,86 +43,152 @@ message Filter {
     }
   }
 
-  // LogsFilter represents the filter criteria for logs.
   message LogsFilter {
-    // Field in the logs to apply the filter on.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "LogsFilter"
+        description: "This data structure represents the filter criteria for logs."
+      }
+    };
+
+    // The log field to which the filter is applied.
     google.protobuf.StringValue field = 1;
 
-    // Operator to use for filtering the logs.
+    // An operator used for filtering the logs.
     Operator operator = 2;
 
     v1.common.ObservationField observation_field = 3;
   }
 
-  // SpansFilter represents the filter criteria for spans.
   message SpansFilter {
-    // Field in the spans to apply the filter on.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "SpansFilter"
+        description: "This data structure represents the filter criteria for spans."
+      }
+    };
+
+    // The span field to which the filter is applied.
     common.SpanField field = 1;
 
-    // Operator to use for filtering the spans.
+    // An operator used for filtering the spans.
     Operator operator = 2;
   }
 
-  // MetricsFilter represents the filter criteria for metrics.
   message MetricsFilter {
-    // Metric name to apply the filter on.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "MetricsFilter"
+        description: "This data structure represents the filter criteria for metrics."
+      }
+    };
+
+    // The name of the metric to which the filter is applied.
     google.protobuf.StringValue metric = 1;
 
-    // Label associated with the metric.
+    // The label associated with the metric.
     google.protobuf.StringValue label = 2;
 
-    // Operator to use for filtering the metrics.
+    // An operator used for filtering the metrics.
     Operator operator = 3;
   }
 
-  // Operator defines the comparison operation for the filter.
   message Operator {
-    // Specifies the type of comparison operation.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Operator"
+        description: "This data structure defines the comparison operation for the filter."
+      }
+    };
+
+    // Specifies the type of the comparison operation.
     oneof value {
       Equals equals = 1; // Equality comparison.
       NotEquals not_equals = 2; // Non-equality comparison.
     }
   }
 
-  // Equals represents an equality comparison operation.
   message Equals {
-    // Selection criteria for the equality comparison.
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Equals"
+        description: "This data structure represents an equality comparison operation."
+      }
+    };
+
+    // The selection criteria for the equality comparison.
     Selection selection = 1;
 
-    // Selection defines the values for the equality comparison.
     message Selection {
+      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Selection"
+          description: "This data structure defines the values for the equality comparison."
+        }
+      };
+
       // Specifies the type of selection for the equality comparison.
       oneof value {
         AllSelection all = 1; // Represents a selection of all values.
         ListSelection list = 2; // Represents a selection from a list of values.
       }
 
-      // AllSelection indicates that all values are selected.
-      message AllSelection {}
+      message AllSelection {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "AllSelection"
+            description: "This data structure indicates that all values are selected."
+          }
+        };
+      }
 
-      // ListSelection represents a selection from a list of specific values.
       message ListSelection {
-        // List of values for the selection.
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "ListSelection"
+            description: "This data structure represents a selection from a list of specific values."
+          }
+        };
+
+        // A list of selected values.
         repeated google.protobuf.StringValue values = 1;
       }
     }
   }
 
-  // NotEquals represents a non-equality comparison operation.
   message NotEquals {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "NotEquals"
+        description: "This data structure represents a non-equality comparison operation."
+      }
+    };
+
     // Selection criteria for the non-equality comparison.
     Selection selection = 1;
 
-    // Selection defines the values for the non-equality comparison.
     message Selection {
+      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Selection"
+          description: "This data structure defines the values for the non-equality comparison."
+        }
+      };
+
       // Specifies the type of selection for the non-equality comparison.
       oneof value {
         ListSelection list = 1; // Represents a selection from a list of values.
       }
 
-      // ListSelection represents a selection from a list of specific values.
       message ListSelection {
-        // List of values for the selection.
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "ListSelection"
+            description: "This data structure represents a selection from a list of specific values."
+          }
+        };
+
+        // A list of values for the selection.
         repeated google.protobuf.StringValue values = 1;
       }
     }
