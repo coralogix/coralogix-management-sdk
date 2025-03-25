@@ -8,93 +8,347 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service DashboardsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Dashboard service"
+    description: "Manage your dashboards."
+  };
+
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "create dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "Create dashboard";
     option (google.api.http) = {
-      post: "/dashboards"
+      post: "/v1/dashboards/dashboards"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Create a new dashboard"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
     };
   }
 
   rpc ReplaceDashboard(ReplaceDashboardRequest) returns (ReplaceDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "replace dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace dashboard";
     option (google.api.http) = {
-      put: "/dashboards"
+      put: "/v1/dashboards/dashboards"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Replace a dashboard"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
     };
   }
 
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "delete dashboard";
-    option (google.api.http) = {delete: "/dashboards/{dashboard_id}"};
+    option (com.coralogix.common.v1.audit_log_description).description = "Delete dashboard";
+    option (google.api.http) = {delete: "/v1/dashboards/dashboards/{dashboard_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Delete a dashboard"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "get dashboard";
-    option (google.api.http) = {get: "/dashboards/{dashboard_id}"};
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dashboard";
+    option (google.api.http) = {get: "/v1/dashboards/dashboards/{dashboard_id}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Get a dashboard"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
+    };
   }
 
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "pin dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "Pin dashboard";
     option (google.api.http) = {
-      patch: "/dashboards/{dashboard_id}:pin"
+      patch: "/v1/dashboards/dashboards/{dashboard_id}:pin"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Add dashboard to favorites"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
     };
   }
 
   rpc UnpinDashboard(UnpinDashboardRequest) returns (UnpinDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "unpin dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "Unpin dashboard";
     option (google.api.http) = {
-      patch: "/dashboards/{dashboard_id}:unpin"
+      patch: "/v1/dashboards/dashboards/{dashboard_id}:unpin"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Remove dashboard from favorites"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
     };
   }
 
   rpc ReplaceDefaultDashboard(ReplaceDefaultDashboardRequest) returns (ReplaceDefaultDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "replace default dashboard";
+    option (com.coralogix.common.v1.audit_log_description).description = "Replace default dashboard";
     option (google.api.http) = {
-      put: "/dashboards/{dashboard_id}/default"
+      put: "/v1/dashboards/dashboards/{dashboard_id}/default"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Replace the default dashboard"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
     };
   }
 
   rpc AssignDashboardFolder(AssignDashboardFolderRequest) returns (AssignDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "assign a dashboard to a folder";
+    option (com.coralogix.common.v1.audit_log_description).description = "Assign a dashboard to a folder";
     option (google.api.http) = {
-      post: "/dashboards/{dashboard_id}/folder"
+      post: "/v1/dashboards/dashboards/{dashboard_id}/folder"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      operation_id: "Assign a dashboard to a folder"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Update"}
+          }
+        }
+      }
     };
   }
 }
 
 message CreateDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Create dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
   google.protobuf.BoolValue is_locked = 3;
 }
 
 message CreateDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Create dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue dashboard_id = 1;
 }
 
 message ReplaceDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Replace dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   ast.Dashboard dashboard = 2;
   google.protobuf.BoolValue is_locked = 3;
 }
 
-message ReplaceDashboardResponse {}
+message ReplaceDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Create dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
 message DeleteDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Delete dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue dashboard_id = 2;
 }
 
-message DeleteDashboardResponse {}
+message DeleteDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Delete dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+}
 
 message GetDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Get dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue dashboard_id = 1;
 }
 
@@ -105,6 +359,14 @@ enum TokenOriginType {
 }
 
 message GetDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Get dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
   ast.Dashboard dashboard = 1;
 
   google.protobuf.Timestamp updated_at = 2;
@@ -124,30 +386,94 @@ message GetDashboardResponse {
 }
 
 message PinDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Pin dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue dashboard_id = 2;
 }
 
-message PinDashboardResponse {}
+message PinDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Pin dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+}
 
 message UnpinDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Unpin dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue dashboard_id = 2;
 }
 
-message UnpinDashboardResponse {}
+message UnpinDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Unpin dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+}
 
 message ReplaceDefaultDashboardRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Replace default dashboard request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue dashboard_id = 2;
 }
 
-message ReplaceDefaultDashboardResponse {}
+message ReplaceDefaultDashboardResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Replace default dashboard response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+}
 
 message AssignDashboardFolderRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Assign dashboard to folder request data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
   google.protobuf.StringValue request_id = 1;
   google.protobuf.StringValue dashboard_id = 2;
   google.protobuf.StringValue folder_id = 3; // could be null to assign the dashboard to root
 }
 
-message AssignDashboardFolderResponse {}
+message AssignDashboardFolderResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {title: "Assign dashboard to folder response data structure"}
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+}

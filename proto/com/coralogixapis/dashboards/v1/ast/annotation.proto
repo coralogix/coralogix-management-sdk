@@ -7,6 +7,7 @@ import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "google/protobuf/wrappers.proto";
 
 message Annotation {
+  // Annotation unique identifier
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue name = 2;
   google.protobuf.BoolValue enabled = 3;
@@ -27,10 +28,10 @@ message Annotation {
     google.protobuf.StringValue message_template = 3;
     repeated google.protobuf.StringValue labels = 4;
 
-    // Strategy for turning metrics data into annotations
+    // A strategy for turning metrics data into annotations
     message Strategy {
       oneof value {
-        // Take first data point and use its value as annotation timestamp (instead of point own timestamp)
+        // Take the first data point and use its value as annotation timestamp (instead of pointing to its own timestamp)
         StartTimeMetric start_time_metric = 1;
       }
     }
