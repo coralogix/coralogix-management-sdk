@@ -6232,7 +6232,11 @@ paths:
       description: No description available
   /v1/dashboards/catalog:
     get:
-      description: Get a list of all dashboards accessible.
+      description: |-
+        Get a list of all dashboards accessible.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
       operationId: Get dashboard catalog
       responses:
         '200':
@@ -8753,7 +8757,11 @@ paths:
       description: No description available
   /v1/dashboards/folders:
     get:
-      description: List all dashboard folders accessible.
+      description: |-
+        List all dashboard folders accessible.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
       operationId: List dashboard folders
       responses:
         '200':
@@ -9017,7 +9025,11 @@ paths:
       description: No description available
   /v1/dashboards/folders/{folderId}:
     get:
-      description: Returns a dashboard folder data.
+      description: |-
+        Returns a dashboard folder data.
+
+        Requires the following permissions:
+        - `team-dashboards:Read`
       operationId: Get a dashboard folder
       responses:
         '200':
