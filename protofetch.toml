@@ -284,7 +284,7 @@ allow_policies = [
     "com/coralogixapis/aaa/organisations/v2/team_service.proto",
     "com/coralogixapis/aaa/organisations/v2/types.proto",
 ]
-revision = "v0.1.32"
+revision = "v0.1.33"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -339,7 +339,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.99"
+revision = "v0.0.100"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -363,9 +363,9 @@ revision = 'v0.0.2'
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
-revision = "v0.0.3"
+revision = "v0.0.4"
 allow_policies = [
-    "proto/com/coralogixapis/metrics_rule_manager/v1/groups.proto",
+    "src/com/coralogixapis/metrics_rule_manager/v1/groups.proto",
 ]
 
 [cx-api-notification-center]

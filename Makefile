@@ -27,8 +27,7 @@ proto-renew:
 	protofetch clean
 	protofetch fetch
 	cp -a proto/src/** proto/
-	cp -a proto/proto/** proto/
-	rm -rf proto/src proto/proto
+	rm -rf proto/src
 	rm -rf proto/deps
 
 proto-go-generate: proto-renew
