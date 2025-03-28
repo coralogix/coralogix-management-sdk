@@ -1,7 +1,0 @@
-syntax = "proto3";
-
-package com.coralogix.archive.dataset.v2;
-
-message FieldPath {
-  repeated string path = 1;
-}

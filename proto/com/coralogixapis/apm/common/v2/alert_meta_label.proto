@@ -1,9 +1,0 @@
-syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-
-package com.coralogixapis.apm.common.v2;
-
-message AlertMetaLabel {
-  google.protobuf.StringValue key = 1;
-  google.protobuf.StringValue value = 2;
-}

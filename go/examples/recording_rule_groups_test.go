@@ -72,6 +72,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+
 	}
 
 	recordingRuleGroupSet, err := c.Get(context.Background(), &cxsdk.GetRuleGroupSetRequest{
@@ -83,6 +84,20 @@ func TestRecordingRuleGroups(t *testing.T) {
 	}
 
 	assert.Equal(&testing.T{}, (recordingRuleGroupSet.Groups), 2)
+
+	all, err := c.List(context.Background())
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	found := false
+	for _, a := range all.Sets {
+		if a.Id == createRuleGroupSet.Id {
+			found = true
+			break
+		}
+	}
+	assert.True(&testing.T{}, found)
 
 	_, err = c.Delete(context.Background(), &cxsdk.DeleteRuleGroupSetRequest{Id: createRuleGroupSet.Id})
 

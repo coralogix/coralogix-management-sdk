@@ -32,7 +32,7 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-
+        println!("{:?}", CoralogixRegion::from_env().unwrap());
         let create_rule_group_set_response = client
             .create(
                 format!("TestRecordingRuleGroupSet {}", chrono::Utc::now().timestamp_millis()).into(),
@@ -45,6 +45,8 @@ mod tests {
                         expr: "sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)".into(),
                         labels: HashMap::new(),
                     }, InRule{ record: "job:http_requests_total:sum".into(), expr: "sum(rate(http_requests_total[5m])) by (job)".into(), labels: HashMap::new() }],
+                    id: None, 
+                    version: None,
                 }, InRuleGroup {
                     name: "bar".into(),
                     interval: Some(180),
@@ -54,6 +56,8 @@ mod tests {
                         expr: "sum(rate(ts3db_live_ingester_write_latency_seconds_count{CX_LEVEL=\"staging\",pod=~\"ts3db-live-ingester.*\"}[2m])) by (pod)".into(),
                         labels: HashMap::new(),
                     }, InRule{ record: "job:http_requests_total:sum".into(), expr: "sum(rate(http_requests_total[5m])) by (job)".into(), labels: HashMap::new() }],
+                    id: None, 
+                    version: None,
                 }],
             )
             .await.unwrap();
