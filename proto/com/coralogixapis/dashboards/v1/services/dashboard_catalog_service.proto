@@ -32,7 +32,7 @@ service DashboardCatalogService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Get dashboard catalog"
+      summary: "Get dashboard catalog"
       description: "Get a list of all dashboards accessible."
       extensions: {
         key: "x-coralogixPermissions"
