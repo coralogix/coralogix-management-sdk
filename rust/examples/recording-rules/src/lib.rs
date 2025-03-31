@@ -32,7 +32,6 @@ mod tests {
             CoralogixRegion::from_env().unwrap(),
         )
         .unwrap();
-        println!("{:?}", CoralogixRegion::from_env().unwrap());
         let create_rule_group_set_response = client
             .create(
                 format!("TestRecordingRuleGroupSet {}", chrono::Utc::now().timestamp_millis()).into(),
