@@ -28,7 +28,7 @@ message MetricThresholdType {
 
 message MetricThresholdRule {
     MetricThresholdCondition condition = 1;
-    AlertDefOverride override = 2;
+    optional AlertDefOverride override = 2;
 }
 
 message MetricThresholdCondition {

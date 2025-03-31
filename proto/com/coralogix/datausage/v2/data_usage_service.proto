@@ -40,6 +40,30 @@ service DataUsageService {
       get: "/v2/datausage"
     };
   }
+
+  ///Endpoint to fetch daily usage in units
+  rpc GetDailyUsageUnits(GetDailyUsageUnitsRequest) returns (GetDailyUsageUnitsResponse) {
+    option (google.api.http) = {
+      post: "/v2/datausage/daily/units"
+      body: "*"
+    };
+  }
+
+  ///Endpoint to fetch daily usage in GBs
+  rpc GetDailyUsageProcessedGbs(GetDailyUsageProcessedGbsRequest) returns (GetDailyUsageProcessedGbsResponse) {
+    option (google.api.http) = {
+      post: "/v2/datausage/daily/processed_gbs"
+      body: "*"
+    };
+  }
+
+  ///Endpoint to fetch daily usage in evaluation tokens
+  rpc GetDailyUsageEvaluationTokens(GetDailyUsageEvaluationTokensRequest) returns (GetDailyUsageEvaluationTokensResponse) {
+    option (google.api.http) = {
+      post: "/v2/datausage/daily/evaluation_tokens"
+      body: "*"
+    };
+  }
 }
 
 enum AggregateBy {
@@ -336,4 +360,40 @@ message GetDataUsageResponse {
     }
   };
   repeated DataUsageEntry entries = 1;
+}
+
+
+message GetDailyUsageUnitsRequest {
+  oneof request_time {
+    Range range = 1;
+    DateRange date_range = 2;
+  }
+}
+
+message GetDailyUsageUnitsResponse {
+  repeated DetailedDailyUnits units = 1;
+}
+
+
+message GetDailyUsageProcessedGbsRequest {
+  oneof request_time {
+    Range range = 1;
+    DateRange date_range = 2;
+  }
+}
+
+message GetDailyUsageProcessedGbsResponse {
+  repeated DetailedDailyProcessedGbs gbs = 1;
+}
+
+
+message GetDailyUsageEvaluationTokensRequest {
+  oneof request_time {
+    Range range = 1;
+    DateRange date_range = 2;
+  }
+}
+
+message GetDailyUsageEvaluationTokensResponse {
+  repeated DetailedDailyEvaluationTokens tokens = 1;
 }

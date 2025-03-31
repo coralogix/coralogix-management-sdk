@@ -78,6 +78,7 @@ message DatasetLocation {
   google.protobuf.Timestamp first_event_time = 4;
   google.protobuf.Timestamp last_event_time = 5;
   repeated FieldPath default_key_fields = 6;
+  string id = 7;
 }
 
 message GetDatasetListRequest {

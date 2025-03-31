@@ -12,5 +12,5 @@ message AlertDefOverride {
       description: "Override settings for specific alert conditions"
     }
   };
-  AlertDefPriority priority = 1;
+  optional AlertDefPriority priority = 1;
 }

@@ -25,6 +25,7 @@ message Object {
   EventTimeRange event_time_range = 15;
   dataset.v2.IngestionFinalLocation physical_location = 16;
   SchemaTree schema = 17;
+  optional TextIndexMetadata index = 18;
 }
 
 message ObjectCreated {
@@ -68,4 +69,9 @@ message KeyVal {
 message EventTimeRange {
   int64 max_timestamp = 1;
   int64 min_timestamp = 2;
+}
+
+message TextIndexMetadata {
+  uint64 length = 1;
+  uint64 metadata_offset = 2;
 }

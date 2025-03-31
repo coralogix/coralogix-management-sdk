@@ -4,7 +4,6 @@ package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/v2/target.proto";
 import "com/coralogix/common/v1/audit_log.proto";
-import "com/coralogix/archive/v2/internal_get_targets.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/api/annotations.proto";
 
@@ -191,14 +190,5 @@ service TargetService {
       post: "/v2/target:validate"
       body: "*"
     };
-  }
-}
-
-service InternalTargetService {
-  rpc GetTargets(InternalTargetServiceGetTargetsRequest) returns (InternalTargetServiceGetTargetsResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get targets";
-  }
-  rpc SetExternalTarget(SetExternalTargetRequest) returns (SetExternalTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Set target with external region for internal use";
   }
 }
