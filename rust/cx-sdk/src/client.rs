@@ -78,7 +78,7 @@ pub mod recording_rule_group_sets;
 /// This module contains the client for the SAML Configuration API.
 pub mod saml;
 
-/// This module contains the client for the Notification Center API.
+// This module contains the client for the Notification Center API.
 // pub mod notifications;
 
 /// This module contains the client for the Data Usage API.
