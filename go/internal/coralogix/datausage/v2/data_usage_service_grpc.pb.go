@@ -25,6 +25,9 @@ const (
 	DataUsageService_GetDataUsageMetricsExportStatus_FullMethodName    = "/com.coralogix.datausage.v2.DataUsageService/GetDataUsageMetricsExportStatus"
 	DataUsageService_UpdateDataUsageMetricsExportStatus_FullMethodName = "/com.coralogix.datausage.v2.DataUsageService/UpdateDataUsageMetricsExportStatus"
 	DataUsageService_GetDataUsage_FullMethodName                       = "/com.coralogix.datausage.v2.DataUsageService/GetDataUsage"
+	DataUsageService_GetDailyUsageUnits_FullMethodName                 = "/com.coralogix.datausage.v2.DataUsageService/GetDailyUsageUnits"
+	DataUsageService_GetDailyUsageProcessedGbs_FullMethodName          = "/com.coralogix.datausage.v2.DataUsageService/GetDailyUsageProcessedGbs"
+	DataUsageService_GetDailyUsageEvaluationTokens_FullMethodName      = "/com.coralogix.datausage.v2.DataUsageService/GetDailyUsageEvaluationTokens"
 )
 
 // DataUsageServiceClient is the client API for DataUsageService service.
@@ -39,6 +42,12 @@ type DataUsageServiceClient interface {
 	GetDataUsageMetricsExportStatus(ctx context.Context, in *GetDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(ctx context.Context, in *UpdateDataUsageMetricsExportStatusRequest, opts ...grpc.CallOption) (*UpdateDataUsageMetricsExportStatusResponse, error)
 	GetDataUsage(ctx context.Context, in *GetDataUsageRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[GetDataUsageResponse], error)
+	// /Endpoint to fetch daily usage in units
+	GetDailyUsageUnits(ctx context.Context, in *GetDailyUsageUnitsRequest, opts ...grpc.CallOption) (*GetDailyUsageUnitsResponse, error)
+	// /Endpoint to fetch daily usage in GBs
+	GetDailyUsageProcessedGbs(ctx context.Context, in *GetDailyUsageProcessedGbsRequest, opts ...grpc.CallOption) (*GetDailyUsageProcessedGbsResponse, error)
+	// /Endpoint to fetch daily usage in evaluation tokens
+	GetDailyUsageEvaluationTokens(ctx context.Context, in *GetDailyUsageEvaluationTokensRequest, opts ...grpc.CallOption) (*GetDailyUsageEvaluationTokensResponse, error)
 }
 
 type dataUsageServiceClient struct {
@@ -146,6 +155,36 @@ func (c *dataUsageServiceClient) GetDataUsage(ctx context.Context, in *GetDataUs
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type DataUsageService_GetDataUsageClient = grpc.ServerStreamingClient[GetDataUsageResponse]
 
+func (c *dataUsageServiceClient) GetDailyUsageUnits(ctx context.Context, in *GetDailyUsageUnitsRequest, opts ...grpc.CallOption) (*GetDailyUsageUnitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDailyUsageUnitsResponse)
+	err := c.cc.Invoke(ctx, DataUsageService_GetDailyUsageUnits_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataUsageServiceClient) GetDailyUsageProcessedGbs(ctx context.Context, in *GetDailyUsageProcessedGbsRequest, opts ...grpc.CallOption) (*GetDailyUsageProcessedGbsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDailyUsageProcessedGbsResponse)
+	err := c.cc.Invoke(ctx, DataUsageService_GetDailyUsageProcessedGbs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataUsageServiceClient) GetDailyUsageEvaluationTokens(ctx context.Context, in *GetDailyUsageEvaluationTokensRequest, opts ...grpc.CallOption) (*GetDailyUsageEvaluationTokensResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDailyUsageEvaluationTokensResponse)
+	err := c.cc.Invoke(ctx, DataUsageService_GetDailyUsageEvaluationTokens_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // DataUsageServiceServer is the server API for DataUsageService service.
 // All implementations must embed UnimplementedDataUsageServiceServer
 // for forward compatibility.
@@ -158,6 +197,12 @@ type DataUsageServiceServer interface {
 	GetDataUsageMetricsExportStatus(context.Context, *GetDataUsageMetricsExportStatusRequest) (*GetDataUsageMetricsExportStatusResponse, error)
 	UpdateDataUsageMetricsExportStatus(context.Context, *UpdateDataUsageMetricsExportStatusRequest) (*UpdateDataUsageMetricsExportStatusResponse, error)
 	GetDataUsage(*GetDataUsageRequest, grpc.ServerStreamingServer[GetDataUsageResponse]) error
+	// /Endpoint to fetch daily usage in units
+	GetDailyUsageUnits(context.Context, *GetDailyUsageUnitsRequest) (*GetDailyUsageUnitsResponse, error)
+	// /Endpoint to fetch daily usage in GBs
+	GetDailyUsageProcessedGbs(context.Context, *GetDailyUsageProcessedGbsRequest) (*GetDailyUsageProcessedGbsResponse, error)
+	// /Endpoint to fetch daily usage in evaluation tokens
+	GetDailyUsageEvaluationTokens(context.Context, *GetDailyUsageEvaluationTokensRequest) (*GetDailyUsageEvaluationTokensResponse, error)
 	mustEmbedUnimplementedDataUsageServiceServer()
 }
 
@@ -185,6 +230,15 @@ func (UnimplementedDataUsageServiceServer) UpdateDataUsageMetricsExportStatus(co
 }
 func (UnimplementedDataUsageServiceServer) GetDataUsage(*GetDataUsageRequest, grpc.ServerStreamingServer[GetDataUsageResponse]) error {
 	return status.Errorf(codes.Unimplemented, "method GetDataUsage not implemented")
+}
+func (UnimplementedDataUsageServiceServer) GetDailyUsageUnits(context.Context, *GetDailyUsageUnitsRequest) (*GetDailyUsageUnitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyUsageUnits not implemented")
+}
+func (UnimplementedDataUsageServiceServer) GetDailyUsageProcessedGbs(context.Context, *GetDailyUsageProcessedGbsRequest) (*GetDailyUsageProcessedGbsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyUsageProcessedGbs not implemented")
+}
+func (UnimplementedDataUsageServiceServer) GetDailyUsageEvaluationTokens(context.Context, *GetDailyUsageEvaluationTokensRequest) (*GetDailyUsageEvaluationTokensResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDailyUsageEvaluationTokens not implemented")
 }
 func (UnimplementedDataUsageServiceServer) mustEmbedUnimplementedDataUsageServiceServer() {}
 func (UnimplementedDataUsageServiceServer) testEmbeddedByValue()                          {}
@@ -287,6 +341,60 @@ func _DataUsageService_GetDataUsage_Handler(srv interface{}, stream grpc.ServerS
 // This type alias is provided for backwards compatibility with existing code that references the prior non-generic stream type by name.
 type DataUsageService_GetDataUsageServer = grpc.ServerStreamingServer[GetDataUsageResponse]
 
+func _DataUsageService_GetDailyUsageUnits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyUsageUnitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataUsageServiceServer).GetDailyUsageUnits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataUsageService_GetDailyUsageUnits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataUsageServiceServer).GetDailyUsageUnits(ctx, req.(*GetDailyUsageUnitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DataUsageService_GetDailyUsageProcessedGbs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyUsageProcessedGbsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataUsageServiceServer).GetDailyUsageProcessedGbs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataUsageService_GetDailyUsageProcessedGbs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataUsageServiceServer).GetDailyUsageProcessedGbs(ctx, req.(*GetDailyUsageProcessedGbsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _DataUsageService_GetDailyUsageEvaluationTokens_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDailyUsageEvaluationTokensRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DataUsageServiceServer).GetDailyUsageEvaluationTokens(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DataUsageService_GetDailyUsageEvaluationTokens_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DataUsageServiceServer).GetDailyUsageEvaluationTokens(ctx, req.(*GetDailyUsageEvaluationTokensRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // DataUsageService_ServiceDesc is the grpc.ServiceDesc for DataUsageService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -301,6 +409,18 @@ var DataUsageService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateDataUsageMetricsExportStatus",
 			Handler:    _DataUsageService_UpdateDataUsageMetricsExportStatus_Handler,
+		},
+		{
+			MethodName: "GetDailyUsageUnits",
+			Handler:    _DataUsageService_GetDailyUsageUnits_Handler,
+		},
+		{
+			MethodName: "GetDailyUsageProcessedGbs",
+			Handler:    _DataUsageService_GetDailyUsageProcessedGbs_Handler,
+		},
+		{
+			MethodName: "GetDailyUsageEvaluationTokens",
+			Handler:    _DataUsageService_GetDailyUsageEvaluationTokens_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

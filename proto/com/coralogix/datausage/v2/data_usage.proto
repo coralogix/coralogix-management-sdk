@@ -11,6 +11,18 @@ message Team {
   google.protobuf.UInt64Value id = 2;
 }
 
+message Unit {
+  google.protobuf.FloatValue value = 1;
+}
+
+message GB {
+  google.protobuf.FloatValue value = 1;
+}
+
+message Token {
+  google.protobuf.FloatValue value = 1;
+}
+
 message DateRange {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -25,6 +37,14 @@ message DateRange {
   };
   google.protobuf.Timestamp from_date = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
   google.protobuf.Timestamp to_date = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+}
+
+enum Range {
+  RANGE_UNSPECIFIED = 0;
+  RANGE_CURRENT_MONTH = 1;
+  RANGE_LAST_30_DAYS = 2;
+  RANGE_LAST_90_DAYS = 3;
+  RANGE_LAST_WEEK = 4;
 }
 
 enum Pillar {
@@ -86,4 +106,64 @@ message Dimension{
     Severity severity = 4;
     Priority priority = 5;
   }
+}
+
+/// Daily data usage in units
+message DetailedDailyUnits {
+  google.protobuf.Timestamp stats_date = 1;
+
+  Unit total_units = 2;
+  Unit blocked_units = 3;
+
+  Unit low_logs_units = 4;
+  Unit medium_logs_units = 5;
+  Unit high_logs_units = 6;
+
+  Unit high_metrics_units = 7;
+
+  Unit low_tracing_units = 8;
+  Unit medium_tracing_units = 9;
+  Unit high_tracing_units = 10;
+
+  Unit low_session_recording_units = 11;
+
+  Unit evaluation_units = 12;
+
+  Unit cpu_profiles_units = 13;
+}
+
+/// Daily data usage in GBs. This entity represents only data processed by CX
+message DetailedDailyProcessedGbs {
+  google.protobuf.Timestamp stats_date = 1;
+
+  GB total_gbs = 2;
+  GB blocked_gbs = 3;
+
+  GB low_logs_gbs = 4;
+  GB medium_logs_gbs = 5;
+  GB high_logs_gbs = 6;
+
+  GB high_metrics_gbs = 7;
+
+  GB low_tracing_gbs = 8;
+  GB medium_tracing_gbs = 9;
+  GB high_tracing_gbs = 10;
+
+  GB low_session_recording_gbs = 11;
+
+  GB cpu_profiles_gbs = 12;
+}
+
+/// Daily data usage in evaluation tokens
+message DetailedDailyEvaluationTokens {
+  google.protobuf.Timestamp stats_date = 1;
+
+  Token total_tokens = 2;
+
+  repeated Evaluation evaluations = 3;
+}
+
+message Evaluation {
+  google.protobuf.StringValue evaluator_name = 1;
+  Token evaluation_tokens = 2;
 }

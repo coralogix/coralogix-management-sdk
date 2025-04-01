@@ -16,7 +16,7 @@ package cxsdk
 import (
 	"context"
 
-	incidents "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/incidents/v1"
+	incidents "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/incidents/v1"
 )
 
 // GetIncidentRequest is a type for a request.

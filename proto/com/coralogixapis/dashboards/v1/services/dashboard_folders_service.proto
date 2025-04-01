@@ -32,7 +32,7 @@ service DashboardFoldersService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard folders service"]
-      operation_id: "List dashboard folders"
+      summary: "List dashboard folders"
       description: "List all dashboard folders accessible."
       extensions: {
         key: "x-coralogixPermissions"
@@ -62,7 +62,7 @@ service DashboardFoldersService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard folders service"]
-      operation_id: "Get a dashboard folder"
+      summary: "Get a dashboard folder"
       description: "Returns a dashboard folder data."
       extensions: {
         key: "x-coralogixPermissions"
@@ -95,7 +95,7 @@ service DashboardFoldersService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard folders service"]
-      operation_id: "Create a dashboard folder"
+      summary: "Create a dashboard folder"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -127,7 +127,7 @@ service DashboardFoldersService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard folders service"]
-      operation_id: "Replace a dashboard folder"
+      summary: "Replace a dashboard folder"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -156,7 +156,7 @@ service DashboardFoldersService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard folders service"]
-      operation_id: "Delete a dashboard folder"
+      summary: "Delete a dashboard folder"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

@@ -153,6 +153,8 @@ enum Resource {
   RESOURCE_LOGS_RESERVED_FIELDS = 140 [(name) = "logs.reserved-fields"];
   RESOURCE_PROFILES_CPU_PROFILES = 141 [(name) = "profiles.cpu-profiles"];
   RESOURCE_PROFILES_DEBUG_SYMBOLS = 142 [(name) = "profiles.debug-symbols"];
+  RESOURCE_SLO_MGMT_ALERTS = 143 [(name) = "slo-mgmt.alerts"];
+  RESOURCE_SLO = 144 [(name) = "slo"];
 }
 
 

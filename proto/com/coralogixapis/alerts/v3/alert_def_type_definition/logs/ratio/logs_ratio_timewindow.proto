@@ -7,9 +7,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message LogsRatioTimeWindow {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Logs Ratio Time Window"
+      title: "Logs ratio time window"
       description: "Time window configuration for ratio alerts"
       required: ["type"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"
+      description: "Learn more about log-based ratio alerts in our documentation"
     }
   };
   oneof type {

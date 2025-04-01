@@ -14,9 +14,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message LogsRatioThresholdType {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Logs Ratio Threshold Alert Type"
+      title: "Log-based ratio threshold alert type"
       description: "Configuration for alerts based on the ratio between two log queries"
       required: ["numerator", "denominator", "rules"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/"
+      description: "Learn more about logs ratio alerts in our documentation"
     }
   };
   LogsFilter numerator = 1;
@@ -39,7 +43,7 @@ message LogsRatioRules {
 message LogsRatioCondition {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Logs Ratio Condition"
+      title: "Log-based ratio condition"
       description: "Defines conditions for ratio-based alerts"
       required: ["threshold", "time_window"]
     }

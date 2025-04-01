@@ -9,7 +9,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message LogsFilter {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Logs Filter"
+      title: "Log filter"
       description: "Filter configuration for log-based alerts"
       required: ["filter_type"]
     }
@@ -21,8 +21,8 @@ message LogsFilter {
 message LogsSimpleFilter {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Simple Logs Filter"
-      description: "Basic filter configuration using Lucene query and label filters"
+      title: "Simple log filter"
+      description: "Basic filter configuration using a Lucene query and label filters"
     }
   };
   google.protobuf.StringValue lucene_query = 1;
@@ -32,7 +32,7 @@ message LogsSimpleFilter {
 message LabelFilters {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Label Filters"
+      title: "Label filters"
       description: "Filters for application name, subsystem name, and log severities"
     }
   };

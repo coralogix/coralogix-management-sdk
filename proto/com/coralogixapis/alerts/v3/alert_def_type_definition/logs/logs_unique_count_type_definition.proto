@@ -10,9 +10,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message LogsUniqueCountType {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Logs Unique Count Alert Type"
+            title: "Log-based unique count alert type"
             description: "Configuration for alerts based on unique value counts in logs"
             required: ["logs_filter", "rules", "unique_count_keypath"]
+        }
+        external_docs: {
+            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/"
+            description: "Learn more about log-based, unique count alerts in our documentation"
         }
     };
     LogsFilter logs_filter = 1;
@@ -29,7 +33,7 @@ message LogsUniqueCountRule {
 message LogsUniqueCountCondition {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Logs Unique Count Condition"
+            title: "Logs unique count condition"
             description: "Defines conditions for unique count alerts"
             required: ["max_unique_count", "time_window"]
         }

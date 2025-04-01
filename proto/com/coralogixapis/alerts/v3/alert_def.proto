@@ -25,29 +25,27 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 /**
- * Represents An Existing or Created Alert Definition
+ * Represents an existing or created alert definition
  */
 message AlertDef {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Alert Definition"
+      title: "Alert definition"
       description: "This data structure represents an alert definition"
       required: [
         "alert_def_properties",
         "id",
-        "alert_version_id",
-        "created_time",
-        "updated_time"
+        "alert_version_id"
       ]
     }
     external_docs: {
-      url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
-      description: "Find out more about enrichments"
+      url: "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+      description: "Find out more about alerts in our documentation"
     }
   };
   AlertDefProperties alert_def_properties = 1;
 
-  // This is the Alert Definition's Persistent ID (does not change on replace) , AKA UniqueIdentifier
+  // This is the alert definition's persistent ID (does not change on replace), AKA UniqueIdentifier
   google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
   google.protobuf.StringValue alert_version_id = 20; // the old alertId
   google.protobuf.Timestamp created_time = 3;
@@ -55,14 +53,14 @@ message AlertDef {
 }
 
 /**
- * Represents The non generated alert definition properties (the ones that are set by the user)
+ * Represents the non generated alert definition properties (the ones that are set by the user)
  */
 message AlertDefProperties {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Alert Definition Properties"
+      title: "Alert definition properties"
       description: "User-configurable properties of an alert definition"
-      required: ["name", "enabled", "type", "type_definition"]
+      required: ["name", "description", "enabled", "priority", "schedule", "type", "type_definition", "group_by_keys", "incidents_settings", "notification_group", "notification_group_excess", "entity_labels", "phantom_mode", "deleted"]
     }
   };
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Alert\"" }];
