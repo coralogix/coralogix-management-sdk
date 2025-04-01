@@ -6,7 +6,16 @@ import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/struct.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+
 message AlertEvent {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert event"
+      required: ["permutation_labels", "group_labels", "timestamp", "alert_id", "status", "pre_grouping_event_id", "payload", "payload_type", "permutation_id", "incident_correlation_key", "activity_analysis"]
+    }
+  };
   map<string, string> permutation_labels = 1;
   map<string, string> group_labels = 2;
   google.protobuf.Timestamp timestamp = 3;

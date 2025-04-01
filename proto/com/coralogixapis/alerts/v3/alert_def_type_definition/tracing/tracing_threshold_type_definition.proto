@@ -11,9 +11,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message TracingThresholdType {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Tracing Threshold Alert Type"
+            title: "Trace-based threshold alert type"
             description: "Configuration for alerts based on trace count thresholds"
             required: ["tracing_filter", "rules"]
+        }
+        external_docs: {
+            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/"
+            description: "Learn more about trace-based alerts in our documentation"
         }
     };
     TracingFilter tracing_filter = 1;
@@ -27,8 +31,7 @@ message TracingThresholdRule {
 message TracingThresholdCondition {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Tracing Threshold Condition"
-            description: "Defines conditions for trace threshold alerts"
+            title: "Trace-based alert threshold condition"
             required: ["threshold", "time_window"]
         }
     };

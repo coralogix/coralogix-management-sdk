@@ -36,7 +36,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Create a new dashboard"
+      summary: "Create a new dashboard"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -68,7 +68,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Replace a dashboard"
+      summary: "Replace a dashboard"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -97,7 +97,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Delete a dashboard"
+      summary: "Delete a dashboard"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -126,7 +126,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Get a dashboard"
+      summary: "Get a dashboard"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -158,7 +158,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Add dashboard to favorites"
+      summary: "Add dashboard to favorites"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -190,7 +190,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Remove dashboard from favorites"
+      summary: "Remove dashboard from favorites"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -222,7 +222,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Replace the default dashboard"
+      summary: "Replace the default dashboard"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -254,7 +254,7 @@ service DashboardsService {
         value: {description: "Internal server error"}
       }
       tags: ["Dashboard service"]
-      operation_id: "Assign a dashboard to a folder"
+      summary: "Assign a dashboard to a folder"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

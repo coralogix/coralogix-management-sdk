@@ -10,18 +10,91 @@ import "com/coralogix/common/v1/audit_log.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 service AlertDefsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Alert definitions service"
+    description: "View and manage your alerts using alert definitions - data structures that contain the configuration required to create an alert."
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+      description: "Learn more about alerts in our documentation"
+    }
+  };
+
   // Get Alert Def by non changing ID AKA UniqueIdentifier
   rpc GetAlertDef(GetAlertDefRequest) returns (GetAlertDefResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get alert definition";
     option (google.api.http) = {
       get: "/v3/alert-defs/{id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Get alert definition by ID"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
+    };
   }
 
   rpc GetAlertDefByVersionId(GetAlertDefByVersionIdRequest) returns (GetAlertDefByVersionIdResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "get alert definition by alert version id";
+    option (com.coralogix.common.v1.audit_log_description).description = "get alert definition by alert version ID";
     option (google.api.http) = {
-      get: "/v3/alert-defs/alertVersionId/{alert_version_id}"
+      get: "/v3/alert-defs/alert-version-id/{alert_version_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Get alert definition by alert version ID"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
     };
   }
 
@@ -31,6 +104,38 @@ service AlertDefsService {
       post: "/v3/alert-defs"
       body: "alert_def_properties"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Create an alert"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:UpdateConfig"
+            }
+          }
+        }
+      }
+    };
   }
 
   rpc ReplaceAlertDef(ReplaceAlertDefRequest) returns (ReplaceAlertDefResponse){
@@ -38,6 +143,38 @@ service AlertDefsService {
     option (google.api.http) = {
       put: "/v3/alert-defs"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Replace an alert definition"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:UpdateConfig"
+            }
+          }
+        }
+      }
     };
   }
 
@@ -53,12 +190,77 @@ service AlertDefsService {
     option (google.api.http) = {
       get: "/v3/alert-defs"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Get a list of all accessible alert definitions"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
+    };
   }
 
   rpc DownloadAlerts(DownloadAlertsRequest) returns (stream DownloadAlertsResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Download alerts";
+    option (com.coralogix.common.v1.audit_log_description).description = "download alerts";
     option (google.api.http) = {
       get: "/v3/alerts/download"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Download alerts"
+      description: "Download a list of all accessible alert definitions in base64-encoded byte format."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
     };
   }
 
@@ -66,6 +268,38 @@ service AlertDefsService {
     option (com.coralogix.common.v1.audit_log_description).description = "delete alert definitions";
     option (google.api.http) = {
       delete: "/v3/alert-defs/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: ""
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:UpdateConfig"
+            }
+          }
+        }
+      }
     };
   }
 
@@ -98,6 +332,38 @@ service AlertDefsService {
     option (google.api.http) = {
       post: "/v3/alert-defs/{id}:setActive"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert definitions service"]
+      operation_id: "Disable or enable an alert"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:UpdateConfig"
+            }
+          }
+        }
+      }
+    };
   }
 }
 
@@ -117,8 +383,8 @@ enum OrderByFields {
 message OrderBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Order By"
-      description: "Specifies the field and direction for ordering results"
+      title: "Order by"
+      description: "A data structure that specifies the field and direction for ordering query results"
       required: ["field_name", "direction"]
     }
   };
@@ -129,19 +395,20 @@ message OrderBy {
 message GetAlertDefRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Get Alert Definition Request"
-      description: "Request to retrieve an alert definition by ID"
+      title: "Get alert definition request"
+      description: "A request to retrieve an alert definition by ID"
       required: ["id"]
     }
   };
+  // Alert definition ID
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
 }
 
 message GetAlertDefByVersionIdRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Get Alert Definition By Version ID Request"
-      description: "Request to retrieve an alert definition by version ID"
+      title: "Get alert definition by version ID request"
+      description: "A request to retrieve an alert definition by version ID"
       required: ["alert_version_id"]
     }
   };
@@ -151,8 +418,8 @@ message GetAlertDefByVersionIdRequest {
 message GetAlertDefResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Get Alert Definition Response"
-      description: "Response containing the requested alert definition"
+      title: "Get alert definition response"
+      description: "A response containing the requested alert definition"
       required: ["alert_def"]
     }
   };
@@ -162,8 +429,8 @@ message GetAlertDefResponse {
 message GetAlertDefByVersionIdResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Get Alert Definition By Version ID Response"
-      description: "Response containing the alert definition for the requested version"
+      title: "Get alert definition by version ID response"
+      description: "A response that contains an alert definition for the requested version"
       required: ["alert_def"]
     }
   };
@@ -173,8 +440,8 @@ message GetAlertDefByVersionIdResponse {
 message ListAlertDefsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "List Alert Definitions Response"
-      description: "Response containing a list of alert definitions"
+      title: "List alert definitions response"
+      description: "A response that contains a list of alert definitions"
       required: ["alert_defs"]
     }
   };
@@ -184,8 +451,8 @@ message ListAlertDefsResponse {
 message ListAlertDefsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "List Alert Definitions Request"
-      description: "Request to retrieve a list of alert definitions"
+      title: "List alert definitions request"
+      description: "A request to get list of alert definitions"
     }
   };
 }
@@ -193,8 +460,8 @@ message ListAlertDefsRequest {
 message DownloadAlertsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Download Alerts Request"
-      description: "Request to download alerts data"
+      title: "Download alert definitions request"
+      description: "A request to download all accesible alert definitions in base-64 encoded binary format"
     }
   };
 }
@@ -203,8 +470,8 @@ message DownloadAlertsRequest {
 message DownloadAlertsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Download Alerts Response"
-      description: "Response containing the downloaded alerts data"
+      title: "Download alerts response"
+      description: "A response containing the downloaded alert data"
       required: ["content"]
     }
   };
@@ -215,8 +482,8 @@ message DownloadAlertsResponse {
 message BatchGetAlertDefRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Batch Get Alert Definitions Request"
-      description: "Request to retrieve multiple alert definitions by their IDs"
+      title: "Batch get alert definitions request"
+      description: "A request to retrieve multiple alert definitions by their IDs"
       required: ["ids"]
     }
   };
@@ -226,8 +493,8 @@ message BatchGetAlertDefRequest {
 message BatchGetAlertDefResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Batch Get Alert Definitions Response"
-      description: "Response containing the requested alert definitions and any IDs that weren't found"
+      title: "Batch get alert definitions response"
+      description: "A response that contains the requested alert definitions and not-found alert IDs"
       required: ["alert_defs", "not_found_ids"]
     }
   };
@@ -238,62 +505,70 @@ message BatchGetAlertDefResponse {
 message DeleteAlertDefRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Delete Alert Definition Request"
-      description: "Request to delete an alert definition by ID"
+      title: "Delete alert definition request"
+      description: "A request to delete an alert definition by ID"
       required: ["id"]
     }
   };
+  // Alert definition ID
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
 }
+
 message DeleteAlertDefResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Delete Alert Definition Response"
-      description: "Response after deleting an alert definition"
+      title: "Delete alert definition response"
+      description: "A response to the deletion of an alert definition"
     }
   };
 }
+
 message ReplaceAlertDefRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Replace Alert Definition Request"
-      description: "Request to replace an existing alert definition"
+      title: "Replace alert definition request"
+      description: "A request to replace an existing alert definition"
       required: ["alert_def_properties", "id"]
     }
   };
   AlertDefProperties alert_def_properties = 1;
+  // Alert definition ID
   google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
 }
+
 message ReplaceAlertDefResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Replace Alert Definition Response"
-      description: "Response containing the replaced alert definition"
+      title: "Replace alert definition response"
+      description: "A response that contains the updated alert definition"
       required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1;
 }
+
 message CreateAlertDefRequest{
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Create Alert Definition Request"
-      description: "Request to create a new alert definition"
+      title: "Create alert definition request"
+      description: "A request to create a new alert definition"
       required: ["alert_def_properties"]
     }
   };
   AlertDefProperties alert_def_properties = 1;
 }
+
 message CreateAlertDefResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Create Alert Definition Response"
-      description: "Response containing the newly created alert definition"
+      title: "Create alert definition response"
+      description: "A response that contains the newly created alert definition"
       required: ["alert_def"]
     }
   };
   AlertDef alert_def = 1;
 }
+
 //message AtomicBatchExecuteAlertRequest {
 // repeated AlertExecutionRequest requests = 1;
 //}
@@ -333,18 +608,20 @@ message CreateAlertDefResponse {
 message SetActiveRequest{
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Set Active Request"
-      description: "Request to enable or disable an alert definition"
+      title: "Enable/disable alert request"
+      description: "A request to enable or disable an alert"
       required: ["id", "active"]
     }
   };
+  // Alert definition ID
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alert-123\"" }];
   google.protobuf.BoolValue active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
 }
+
 message SetActiveResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Set Active Response"
+      title: "Set active response"
       description: "Response after enabling or disabling an alert definition"
     }
   };

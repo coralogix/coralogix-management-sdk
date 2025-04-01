@@ -14,9 +14,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message MetricThresholdType {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Metric Threshold Alert Type"
+            title: "Metric-based threshold alert type"
             description: "Configuration for alerts based on metric threshold violations"
             required: ["metric_source", "rules"]
+        }
+        external_docs: {
+            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/threshold-alerts/"
+            description: "Learn more about metric-based threshold alerts in our documentation"
         }
     };
     MetricFilter metric_filter = 1;

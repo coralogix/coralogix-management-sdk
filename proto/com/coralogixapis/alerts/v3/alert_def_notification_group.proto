@@ -8,6 +8,12 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/notification_desti
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message AlertDefIncidentSettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert definition incident settings"
+      required: ["retriggering_period", "notify_on"]
+    }
+  };
   oneof retriggering_period {
     google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
   }
@@ -15,6 +21,12 @@ message AlertDefIncidentSettings {
 }
 
 message AlertDefNotificationGroup {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert definition notification group"
+      required: ["group_by_keys", "webhooks", "destinations", "router"]
+    }
+  };
   repeated google.protobuf.StringValue group_by_keys = 1;
   repeated AlertDefWebhooksSettings webhooks = 2;
   repeated NotificationDestination destinations = 3;
@@ -22,6 +34,13 @@ message AlertDefNotificationGroup {
 }
 
 message AlertDefWebhooksSettings {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert definition webhook settings"
+      description: "Configuration for webhook notifications for an alert"
+      required: ["retriggering_period", "notify_on", "integration"]
+    }
+  };
   oneof retriggering_period {
     google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
   }
@@ -30,6 +49,13 @@ message AlertDefWebhooksSettings {
 }
 
 message IntegrationType {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Integration type"
+      description: "Defines the type of integration to use for notifications"
+      required: ["integration_type"]
+    }
+  };
   oneof integration_type {
     google.protobuf.UInt32Value integration_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "123" }];
     Recipients recipients = 3;
@@ -37,5 +63,12 @@ message IntegrationType {
 }
 
 message Recipients {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Recipients"
+      description: "List of email recipients for alert notifications"
+      required: ["emails"]
+    }
+  };
   repeated google.protobuf.StringValue emails = 1;
 }

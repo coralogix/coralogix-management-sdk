@@ -7,38 +7,137 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
 import "com/coralogix/common/v1/audit_log.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 service AlertEventService {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Alert events service"
+    description: "Get information regarding your alert events - instances of alerts being triggered."
+      external_docs: {
+        url: "https://coralogix.com/docs/user-guides/alerting/incidents/"
+        description: "Learn more about alert events and incidents in our documentation."
+      }
+  };
+
   rpc GetAlertEvent(GetAlertEventRequest) returns (GetAlertEventResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get alert event";
     option (google.api.http) = {
-      get: "/v3/alert_event/{id}"
+      get: "/v3/alert-event/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert events service"]
+      operation_id: "Get alert event by ID"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
     };
   }
 
   rpc GetAlertEventsStats(GetAlertEventStatsRequest) returns (GetAlertEventStatsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get alert events stats";
     option (google.api.http) = {
-      get: "/v3/alert_event_stats"
+      get: "/v3/alert-event-stats"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {
+          description: "Bad Request"
+        }
+      },
+      responses: {
+        key: "401"
+        value: {
+          description: "Unauthorized request"
+        }
+      },
+      responses: {
+        key: "500"
+        value: {
+          description: "Internal server error"
+        }
+      },
+      tags: ["Alert events service"]
+      operation_id: "Get alert events statistics"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {
+              string_value: "alerts:ReadConfig"
+            }
+          }
+        }
+      }
     };
   }
 }
 
 message GetAlertEventStatsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get alert event statistics request"
+
+    }
+  };
+
   repeated google.protobuf.StringValue ids = 1;
   repeated AlertEventOrderBy order_bys = 2;
 }
 
 message GetAlertEventStatsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get alert event statistics response"
+    }
+  };
+
   map<string, EventStats> events_stats = 1;
 }
 
 message Permutation {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Permutation data structure"
+    }
+  };
+
   map<string, string> permutation_labels = 1;
 }
 
 message EventStats {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert event statistics data structure"
+    }
+  };
+
   google.protobuf.UInt32Value count = 1;
   google.protobuf.UInt32Value resolved_count = 2;
   google.protobuf.UInt32Value triggered_count = 3;
@@ -48,17 +147,37 @@ message EventStats {
 }
 
 message ActivityAnalysisStats {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Event activity analysis statistics"
+    }
+  };
+
   google.protobuf.UInt32Value is_muted_count = 1;
   repeated google.protobuf.StringValue rules = 2;
 }
 
 message GetAlertEventRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get alert event by ID request"
+    }
+  };
+
+  // Alert event ID
   google.protobuf.StringValue id = 1;
   repeated AlertEventOrderBy order_bys = 2;
   PaginationRequest pagination = 3;
 }
 
 message GetAlertEventResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get alert event response"
+    }
+  };
+
+  // Alert event ID
   google.protobuf.StringValue id = 1;
   oneof alert_event {
     AlertEvent single_permutation = 2;
@@ -66,16 +185,16 @@ message GetAlertEventResponse {
   }
   PaginationResponse pagination = 4;
 }
+
 message PaginationRequest {
   google.protobuf.UInt32Value page_size = 1;
   google.protobuf.StringValue page_token = 2;
 }
+
 message PaginationResponse {
   google.protobuf.UInt32Value total_size = 1;
   google.protobuf.StringValue next_page_token = 2;
 }
-
-
 
 message AlertEventMultiplePermutation{
   repeated AlertEvent alert_event_multiple_permutation = 1;

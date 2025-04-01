@@ -7,7 +7,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message ActivitySchedule {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Activity Schedule"
+      title: "Alert activity schedule"
       description: "Defines when an alert should be active based on days of the week and time windows"
       required: ["day_of_week", "start_time", "end_time"]
     }
@@ -28,7 +28,7 @@ enum DayOfWeek {
 message TimeOfDay {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Time of Day"
+      title: "Time of day"
       description: "Represents a specific time in 24-hour format"
       required: ["hours", "minutes"]
     }

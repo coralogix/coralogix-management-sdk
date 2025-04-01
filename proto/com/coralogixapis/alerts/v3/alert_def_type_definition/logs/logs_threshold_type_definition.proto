@@ -13,9 +13,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message LogsThresholdType {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Logs Threshold Alert Type"
+      title: "Log-based threshold alert type"
       description: "Configuration for alerts triggered when log counts exceed or fall below specified thresholds"
       required: ["logs_filter", "rules"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/threshold-alerts/"
+      description: "Learn more about log-based threshold alerts in our documentation"
     }
   };
   LogsFilter logs_filter = 1;

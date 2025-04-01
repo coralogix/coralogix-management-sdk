@@ -15,7 +15,7 @@ allow_policies = [
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.13"
+revision = "v0.5.16"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -249,7 +249,7 @@ revision = "v0.3.2"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.21"
+revision = "v0.1.23"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -284,7 +284,7 @@ allow_policies = [
     "com/coralogixapis/aaa/organisations/v2/team_service.proto",
     "com/coralogixapis/aaa/organisations/v2/types.proto",
 ]
-revision = "v0.1.33"
+revision = "v0.1.34"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
@@ -324,7 +324,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.98"
+revision = "v0.1.102"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -339,7 +339,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.100"
+revision = "v0.0.101"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",

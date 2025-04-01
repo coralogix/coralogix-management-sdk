@@ -4,12 +4,17 @@ import "com/coralogixapis/alerts/v3/commons.proto";
 package com.coralogixapis.alerts.v3;
 
 import "protoc-gen-openapiv2/options/annotations.proto";
+
 message NotificationDestination {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Notification Destination"
-      description: "Configuration for where alert notifications should be sent"
-      required: ["destination"]
+      title: "Notification destination configuration"
+      description: "Configuration for where and how alert notifications should be sent"
+      required: ["connector_id", "preset_id", "notify_on", "triggeredRoutingOverrides", "resolvedRouteOverrides"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/configure-notifications/destinations/"
+      description: "Learn more about alert notification destinations in our documentation"
     }
   };
   string connector_id = 1;
@@ -20,27 +25,59 @@ message NotificationDestination {
 }
 
 message NotificationRouting {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Notification routing"
+      required: ["config_overrides"]
+    }
+  };
   optional SourceOverrides config_overrides = 1;
 }
 
 message SourceOverrides {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Source overrides"
+      required: ["output_schema_id", "message_config_fields", "connector_config_fields"]
+    }
+  };
   string output_schema_id = 1;
   repeated MessageConfigField message_config_fields = 2;
   repeated ConnectorConfigField connector_config_fields = 3;
 }
 
 message ConnectorConfigField {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Connector config field"
+      required: ["field_name", "template"]
+    }
+  };
   string field_name = 1;
   string template = 2;
 }
 
 message MessageConfigField {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Message config field"
+      description: "Configuration field for a notification message"
+      required: ["field_name", "template"]
+    }
+  };
   string field_name = 1;
   string template = 2;
 }
 
 
 message NotificationRouter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Notification router"
+      description: "Configuration for routing notifications"
+      required: ["id", "notify_on"]
+    }
+  };
   string id = 1;
   optional NotifyOn notify_on = 2;
 }

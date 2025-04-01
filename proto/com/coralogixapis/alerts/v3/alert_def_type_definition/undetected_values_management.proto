@@ -9,7 +9,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message UndetectedValuesManagement {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
         json_schema: {
-            title: "Undetected Values Management"
+            title: "Undetected value management"
             description: "Configuration for handling undetected values in alerts"
             required: ["auto_retire_ratio"]
         }

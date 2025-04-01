@@ -10,8 +10,8 @@ import "google/protobuf/wrappers.proto";
 message AnomalyAlertSettings {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "Anomaly Alert Settings"
-      description: "Common settings for anomaly-based alerts"
+      title: "Anomaly alert settings"
+      description: "Common settings for anomaly-based alerts."
       required: ["percentage_of_deviation"]
     }
   };
