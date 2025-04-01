@@ -23,6 +23,7 @@ import (
 )
 
 func TestConnectors(t *testing.T) {
+	t.Skip("This API will be removed")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
