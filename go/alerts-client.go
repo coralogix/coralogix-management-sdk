@@ -823,7 +823,7 @@ func NewAlertsClient(c *CallPropertiesCreator) *AlertsClient {
 	}}
 }
 
-// NewAlertsClient creates a new alerts client with custom labels attached to each alert.
+// NewAlertsClientWithCustomLabels creates a new alerts client with custom labels attached to each alert.
 func NewAlertsClientWithCustomLabels(c *CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
 	return &AlertsClient{callPropertiesCreator: c, defaultLabels: defaultLabels}
 }

@@ -175,7 +175,7 @@ impl AlertsClient {
             .connect_lazy();
         let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
 
-        let default_labels = match self.default_labels.as_ref() {
+        let default_labels: HashMap<String, String> = match default_labels.as_ref() {
             Some(labels) => match labels {
                 DefaultLabels::SdkVersion => default_label_hashmap(),
                 DefaultLabels::Custom(hash_map) => hash_map.clone(),
