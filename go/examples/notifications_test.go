@@ -73,6 +73,8 @@ func TestConnectors(t *testing.T) {
 }
 
 func TestPresets(t *testing.T) {
+	t.Skip("This API will be removed")
+
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -150,6 +152,8 @@ func TestPresets(t *testing.T) {
 }
 
 func TestGlobalRouter(t *testing.T) {
+	t.Skip("This API will be removed")
+
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
