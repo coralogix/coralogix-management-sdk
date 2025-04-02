@@ -696,6 +696,7 @@ const (
 // AlertsClient is a client for the Coralogix Alerts API.
 type AlertsClient struct {
 	callPropertiesCreator *CallPropertiesCreator
+	defaultLabels         map[string]string
 }
 
 // Create creates an alert.
@@ -708,8 +709,10 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
-	if req.AlertDefProperties != nil {
-		req.AlertDefProperties.EntityLabels[sdkVersionHeaderName] = vanillaSdkVersion
+	if req.AlertDefProperties != nil && a.defaultLabels != nil {
+		for k, v := range a.defaultLabels {
+			req.AlertDefProperties.EntityLabels[k] = v
+		}
 	}
 	response, err := client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -746,8 +749,10 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
-	if req.AlertDefProperties != nil {
-		req.AlertDefProperties.EntityLabels[sdkVersionHeaderName] = vanillaSdkVersion
+	if req.AlertDefProperties != nil && a.defaultLabels != nil {
+		for k, v := range a.defaultLabels {
+			req.AlertDefProperties.EntityLabels[k] = v
+		}
 	}
 	response, err := client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -811,7 +816,14 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 	return response, nil
 }
 
-// NewAlertsClient creates a new alerts client.
+// NewAlertsClient creates a new alerts client with the SDK's version as a default label for each alert.
 func NewAlertsClient(c *CallPropertiesCreator) *AlertsClient {
-	return &AlertsClient{callPropertiesCreator: c}
+	return &AlertsClient{callPropertiesCreator: c, defaultLabels: map[string]string{
+		sdkVersionHeaderName: c.sdkVersion,
+	}}
+}
+
+// NewAlertsClient creates a new alerts client with custom labels attached to each alert.
+func NewAlertsClientWithCustomLabels(c *CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
+	return &AlertsClient{callPropertiesCreator: c, defaultLabels: defaultLabels}
 }
