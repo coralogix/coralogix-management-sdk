@@ -229,6 +229,7 @@ mod tests {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
+            Some(DefaultLabels::SdkVersion)
         )
         .unwrap();
         let alert = create_alert();
@@ -306,6 +307,7 @@ mod tests {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
+            Some(DefaultLabels::SdkVersion)
         )
         .unwrap();
         let alert = create_alert();
