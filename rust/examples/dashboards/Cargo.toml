@@ -2,7 +2,7 @@
 name = "dashboards"
 version = "0.1.0"
 license = "MIT"
-edition = "2021"
+edition = "2024"
 repository = "https://github.com/coralogix/coralogix-management-sdk"
 keywords = ["asynchronous", "coralogix", "log", "management", "sdk"]
 categories = ["asynchronous", "log"]

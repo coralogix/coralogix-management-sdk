@@ -149,7 +149,7 @@ mod test {
         [workspace.package]
         version = "0.1.0"
         license = "Apache-2.0"
-        edition = "2021"
+        edition = "2024"
         repository = "https://github.com/coralogix/coralogix-management-sdk"
         keywords = ["api-bindings", "coralogix", "log", "management", "sdk"]
         categories = ["api-bindings", "development-tools::debugging", "config"]
@@ -175,7 +175,7 @@ mod test {
         [workspace.package]
         version = "0.2.1"
         license = "Apache-2.0"
-        edition = "2021"
+        edition = "2024"
         repository = "https://github.com/coralogix/coralogix-management-sdk"
         keywords = ["api-bindings", "coralogix", "log", "management", "sdk"]
         categories = ["api-bindings", "development-tools::debugging", "config"]
