@@ -17,6 +17,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 )
 
 // UsersClient is a client for the SCIM Users API
@@ -143,7 +144,7 @@ func (c UsersClient) Delete(ctx context.Context, userID string) error {
 
 // NewUsersClient creates a new UsersClient
 func NewUsersClient(c *CallPropertiesCreator) *UsersClient {
-	restEndpoint := CoralogixRestEndpointFromRegion(c.coraglogixRegion)
+	restEndpoint := CoralogixRestEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
 	targetURL := restEndpoint + "/scim/Users"
 	client := NewRestClient(targetURL, c.teamsLevelAPIKey)
 	return &UsersClient{client: client}
