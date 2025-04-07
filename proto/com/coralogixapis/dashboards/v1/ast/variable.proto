@@ -115,6 +115,7 @@ message MultiSelect {
 
         message FieldValue {
           common.SpanField value = 1;
+          v1.common.ObservationField observation_field = 2;
         }
       }
     }
