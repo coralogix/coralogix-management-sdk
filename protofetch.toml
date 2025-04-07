@@ -370,7 +370,7 @@ allow_policies = [
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.6.0"
+revision = "v0.5.1"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/*",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",
