@@ -19,6 +19,7 @@ import (
 	"crypto/tls"
 	"fmt"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -49,7 +50,7 @@ type CallProperties struct {
 func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) (*CallProperties, error) {
 	ctx = createContext(ctx, c.teamsLevelAPIKey, c.correlationID, c.sdkVersion)
 
-	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
+	endpoint := CoralogixGrpcEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
 	conn, err := createSecureConnection(endpoint)
 	if err != nil {
 		return nil, err
@@ -64,7 +65,7 @@ func (c CallPropertiesCreator) GetTeamsLevelCallProperties(ctx context.Context) 
 func (c CallPropertiesCreator) GetUserLevelCallProperties(ctx context.Context) (*CallProperties, error) {
 	ctx = createContext(ctx, c.userLevelAPIKey, c.correlationID, c.sdkVersion)
 
-	endpoint := CoralogixGrpcEndpointFromRegion(c.coraglogixRegion)
+	endpoint := CoralogixGrpcEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
 	conn, err := createSecureConnection(endpoint)
 	if err != nil {
 		return nil, err
