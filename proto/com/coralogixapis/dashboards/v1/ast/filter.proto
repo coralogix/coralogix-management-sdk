@@ -57,6 +57,7 @@ message Filter {
     // An operator used for filtering the logs.
     Operator operator = 2;
 
+    // The observation log field to which the filter is applied.
     v1.common.ObservationField observation_field = 3;
   }
 
@@ -73,6 +74,9 @@ message Filter {
 
     // An operator used for filtering the spans.
     Operator operator = 2;
+
+    // The observation span field to which the filter is applied.
+    v1.common.ObservationField observation_field = 3;
   }
 
   message MetricsFilter {

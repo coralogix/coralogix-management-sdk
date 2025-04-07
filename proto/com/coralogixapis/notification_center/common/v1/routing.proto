@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogixapis.notification_center.routing;
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogixapis/notification_center/common/v1/identifier.proto";
 
 /**
 * This file contains public models used across the notification sources APIs.
@@ -37,7 +38,7 @@ message RoutingTarget {
     json_schema: {
       title: "Routing Target"
       description: "Defines routing target for notifications"
-      required: ["connector_id"]
+      required: ["connector_identifier"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -46,11 +47,13 @@ message RoutingTarget {
   };
 
   //Connector ID to send the notification to
-  string connector_id = 1;
+  string deprecated_connector_id = 1 [deprecated = true];
   // Preset to use for rendering notification content, default preset is used if not provided
-  optional string preset_id = 2;
+  optional string deprecated_preset_id = 2 [deprecated = true];
   optional SourceOverrides config_overrides = 3;
   map<string, string> custom_details = 4;
+  ConnectorIdentifier connector_identifier = 5;
+  optional PresetIdentifier preset_identifier = 6;
 }
 
 message SourceOverrides {
