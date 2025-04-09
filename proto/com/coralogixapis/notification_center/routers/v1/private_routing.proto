@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.routers.v1;
+
+import "com/coralogixapis/notification_center/common/v1/identifier.proto";
+import "com/coralogixapis/notification_center/common/v1/routing/routing.proto";
+
+option go_package = "com/coralogixapis/notification_center/routers/v1";
+
+/**
+* These are internal, private models intended for use by other Coralogix teams.
+*/
+
+message PrivateRoutingRule {
+  //Condition template that is rendered to true or false and used to determine if the rule should be applied
+  string condition = 1;
+  //List of targets to send the notification to
+  repeated PrivateRoutingTarget targets = 2;
+  map<string, string> custom_details = 3;
+  optional string name = 4;
+}
+
+message PrivateRoutingTarget {
+  ConnectorIdentifier connector_identifier = 1 [deprecated = true];
+  optional PresetIdentifier preset_identifier = 2 [deprecated = true];
+  optional routing.SourceOverrides config_overrides = 3;
+  map<string, string> custom_details = 4;
+  string connector_id = 5;
+  optional string preset_id = 6;
+}

@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "com/coralogixapis/notification_center/remote_action_templates/v1/remote_action_templates.proto";
+
+package com.coralogixapis.notification_center.remote_action_templates.v1;
+
+
+// Public API that allows managing remote action templates.
+// Note: This API is in development phase and subject to change.
+service RemoteActionTemplatesService {
+  rpc ListRemoteActionTemplates(ListRemoteActionTemplatesRequest) returns (ListRemoteActionTemplatesResponse) {}
+}
+
+message ListRemoteActionTemplatesRequest {}
+
+message ListRemoteActionTemplatesResponse {
+  repeated RemoteActionTemplate remote_actions = 1;
+}

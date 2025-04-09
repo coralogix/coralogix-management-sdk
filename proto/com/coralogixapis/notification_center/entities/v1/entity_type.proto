@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/common/config_overrides.proto";
+import "com/coralogixapis/notification_center/entities/v1/presentation_details.proto";
+
+package com.coralogixapis.notification_center.entities.v1;
+
+option go_package = "com/coralogixapis/notification_center/entities/v1";
+
+message EntityType {
+  string entity_name = 1;
+  string version = 2;
+  string schema = 3;
+  repeated EntitySubType entity_sub_types = 4;
+  // Fallback if example is not provided for entity subtype
+  string default_example = 5;
+  repeated ConnectorSystemPresets connector_system_presets = 6;
+  PresentationDetails presentation_details = 7;
+}
+
+message EntitySubType {
+  string name = 1;
+  optional string example = 2;
+}
+
+message ConnectorSystemPresets {
+  message Preset {
+    string user_defined_id = 1 [deprecated = true];
+    string name = 2;
+    string description = 3;
+    repeated ConfigOverrides config_overrides = 4;
+    string id = 5;
+  }
+  ConnectorType connector = 1;
+  string default_preset_user_defined_id = 2 [deprecated = true];
+  repeated Preset presets = 3;
+  string default_preset_id = 4;
+}
