@@ -32,6 +32,7 @@ default = [
     "incidents",
     "integrations",
     "metrics_configurator",
+    "notifications",
     "outgoing_webhooks",
     "quota",
     "recording_rule_groups",

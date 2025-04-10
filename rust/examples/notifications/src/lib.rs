@@ -12,6 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// 1. Create Connectors
+// User creates connector: ConnectorsService/CreateConnector API
+// User send test notification to confirm that connector configuration is correct: TestingService/TestExistingConnector API
+// 2. Create Custom Presets [Optional - system presets can be used out of box]
+// User create custom preset: PresetsService/CreateCustomPreset API
+// User test custom preset: TestingService/TestExistingPreset API
+// 3. Set Preset as default [Optional - there is always default provided by the system]
+// User sets selected preset as default: PresetsService/SetPresetAsDefault API
+// 4. Option 1: User use configured connectors and presets as a destinations in the Alerts v3 API
+// User test destination using TestingService/TestDestination
+// 4. Option 2: User configure global router and use router in Alerts v3 API
+// User test routing condition (if the syntax is correct): TestingService/TestRoutingConditionValid
+// User create Global Router using GlobalRoutersService/CreateGlobalRouter
+// User use Global router in Alerts v3 notifications configuration
+
 #[cfg(test)]
 mod tests {
 
@@ -25,38 +40,35 @@ mod tests {
             ConnectorConfig,
             ConnectorConfigField,
             ConnectorType,
+            EntityType,
             GlobalRouter,
-            GlobalRouterIdentifier,
             MatchEntityTypeCondition,
             MessageConfig,
             MessageConfigField,
             NotificationsClient,
             Preset,
             condition_type,
-            global_router_identifier,
         },
     };
 
     fn create_test_connector() -> Connector {
         Connector {
-            name: "TestConnector".to_string(),
-            description: "Connector for Notification Center testing.".to_string(),
+            name: "TestConnector".into(),
+            description: "Connector for Notification Center testing.".into(),
             r#type: ConnectorType::GenericHttps as i32,
-            connector_configs: vec![ConnectorConfig {
-                output_schema_id: "default".to_string(),
+            id: None,
+            connector_config: Some(ConnectorConfig {
                 fields: vec![
                     ConnectorConfigField {
-                        field_name: "url".to_string(),
-                        template: "https://example.coralogix.com".to_string(),
+                        field_name: "url".into(),
+                        value: "https://httpbin.org/post".into(),
                     },
                     ConnectorConfigField {
-                        field_name: "method".to_string(),
-                        template: "post".to_string(),
+                        field_name: "method".into(),
+                        value: "post".into(),
                     },
                 ],
-            }],
-            id: None,
-            user_facing_id: None,
+            }),
             team_id: None,
             create_time: None,
             update_time: None,
@@ -66,41 +78,38 @@ mod tests {
 
     fn create_test_preset() -> Preset {
         Preset {
-            name: "TestPreset".to_string(),
-            description: "Preset for Notification Center testing.".to_string(),
+            name: "TestPreset".into(),
+            description: "Preset for Notification Center testing.".into(),
             preset_type: Some(2),
             connector_type: ConnectorType::GenericHttps as i32,
             config_overrides: vec![ConfigOverrides {
-                output_schema_id: "default".to_string(),
                 condition_type: Some(ConditionType {
                     condition: Some(condition_type::Condition::MatchEntityType(
                         MatchEntityTypeCondition {
-                            entity_type: "alerts".to_string(),
+                            ..Default::default()
                         },
                     )),
                 }),
                 message_config: Some(MessageConfig {
                     fields: vec![
                         MessageConfigField {
-                            field_name: "headers".to_string(),
-                            template: "{ \"example\": \"header_value\" }".to_string(),
+                            field_name: "headers".into(),
+                            template: "{ \"example\": \"header_value\" }".into(),
                         },
                         MessageConfigField {
-                            field_name: "body".to_string(),
-                            template: "{ \"example\": \"body_value\" }".to_string(),
+                            field_name: "body".into(),
+                            template: "{ \"example\": \"body_value\" }".into(),
                         },
                     ],
                 }),
+                payload_type: "web".into(),
             }],
             create_time: None,
-            entity_type: "alerts".to_string(),
+            entity_type: EntityType::Alerts.into(),
             id: None,
-            user_facing_id: None,
             update_time: None,
-            parent: Some(Box::new(Preset {
-                user_facing_id: Some("preset_system_generic_https_alerts_empty".to_string()),
-                ..Default::default()
-            })),
+            parent: None,
+            ..Default::default()
         }
     }
 
@@ -173,7 +182,7 @@ mod tests {
         .unwrap();
 
         let list_response = notifications_client
-            .list_global_routers("alerts".to_string())
+            .list_global_routers(EntityType::Alerts)
             .await
             .unwrap();
 
@@ -182,14 +191,14 @@ mod tests {
         let global_router = GlobalRouter {
             id: existing_router_id.clone(),
             name: "TestGlobalRouter".to_string(),
-            entity_type: "alerts".to_string(),
+            entity_type: EntityType::Alerts.into(),
             description: "Global Router for Notification Center testing.".to_string(),
-            user_facing_id: None,
             create_time: None,
             update_time: None,
             rules: vec![],
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
+            ..Default::default()
         };
 
         let create_or_replace_response = notifications_client
@@ -200,9 +209,7 @@ mod tests {
         let router_id = create_or_replace_response.router.unwrap().id.unwrap();
 
         let retrieved_router = notifications_client
-            .get_global_router(GlobalRouterIdentifier {
-                value: Some(global_router_identifier::Value::Id(router_id.clone())),
-            })
+            .get_global_router(router_id)
             .await
             .unwrap()
             .router;

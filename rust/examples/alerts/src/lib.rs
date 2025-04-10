@@ -22,7 +22,6 @@ mod tests {
         auth::AuthContext,
         client::{
             alerts::{
-                DefaultLabels,
                 self,
                 ActivitySchedule,
                 AlertDef,
@@ -34,6 +33,7 @@ mod tests {
                 AlertDefWebhooksSettings,
                 AlertsClient,
                 DayOfWeek,
+                DefaultLabels,
                 FilterType,
                 IntegrationType,
                 LabelFilterType,
@@ -170,7 +170,7 @@ mod tests {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
-            Some(DefaultLabels::SdkVersion)
+            Some(DefaultLabels::SdkVersion),
         )
         .unwrap();
         let alert = create_alert();
@@ -229,7 +229,7 @@ mod tests {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
-            Some(DefaultLabels::SdkVersion)
+            Some(DefaultLabels::SdkVersion),
         )
         .unwrap();
         let alert = create_alert();
@@ -307,7 +307,7 @@ mod tests {
         let alerts_client = AlertsClient::new(
             CoralogixRegion::from_env().unwrap(),
             AuthContext::from_env(),
-            Some(DefaultLabels::SdkVersion)
+            Some(DefaultLabels::SdkVersion),
         )
         .unwrap();
         let alert = create_alert();
