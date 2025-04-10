@@ -348,7 +348,11 @@ dependencies = [
 
 [[package]]
 name = "cx-api"
+<<<<<<< HEAD
 version = "1.4.1"
+=======
+version = "1.4.0"
+>>>>>>> c7e3f3d5 (feat: notification center SDK proxies - v2)
 dependencies = [
  "prost 0.13.5",
  "prost-types 0.13.5",
@@ -362,7 +366,11 @@ dependencies = [
 
 [[package]]
 name = "cx-sdk"
+<<<<<<< HEAD
 version = "1.4.1"
+=======
+version = "1.4.0"
+>>>>>>> c7e3f3d5 (feat: notification center SDK proxies - v2)
 dependencies = [
  "backoff",
  "bytes",
