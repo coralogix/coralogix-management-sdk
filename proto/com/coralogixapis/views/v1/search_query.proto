@@ -16,9 +16,7 @@ message SearchQuery {
 
   // View search query
   google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    max_length: 1
     min_length: 1
-    description: "Only digits are allowed."
   }];
 
 }

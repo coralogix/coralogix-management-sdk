@@ -15,7 +15,7 @@ allow_policies = [
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.16"
+revision = 'v0.5.17'
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -113,7 +113,7 @@ allow_policies = [
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.5"
+revision = 'v1.6'
 allow_policies = [
     "src/com/coralogixapis/views/v1/audit_log.proto",
     "src/com/coralogixapis/views/v1/filters.proto",
@@ -131,7 +131,7 @@ allow_policies = ["src/com/coralogixapis/actions/v2/actions_service.proto"]
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
-revision = "v1.0.6"
+revision = "v1.0.7"
 allow_policies = [
     # "src/com/coralogix/extensions/v1/extension_service.proto",
     "src/com/coralogix/extensions/v1/extension.proto",
@@ -185,7 +185,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.3.15"
+revision = 'v2.3.16'
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -300,7 +300,7 @@ revision = 'v0.0.2'
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
-revision = 'v2.0.7'
+revision = 'v2.0.8'
 allow_policies = [
     "src/com/coralogixapis/apm/common/v2/order_by.proto",
     "src/com/coralogixapis/apm/services/v1/service_slo.proto",
@@ -364,9 +364,7 @@ revision = 'v0.0.2'
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
 revision = "v0.0.4"
-allow_policies = [
-    "src/com/coralogixapis/metrics_rule_manager/v1/groups.proto",
-]
+allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
@@ -384,7 +382,6 @@ allow_policies = [
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/router.proto",
 ]
-
 
 [google-api]
 url = "github.com/googleapis/googleapis"
@@ -446,7 +443,7 @@ allow_policies = [
 
 [cx-api-events]
 url = 'github.com/coralogix/cx-api-events'
-revision = "v0.1.1"
+revision = 'v0.1.2'
 allow_policies = [
     "src/com/coralogixapis/events/v3/cx_event.proto",
     "src/com/coralogixapis/events/v3/event_order_by.proto",

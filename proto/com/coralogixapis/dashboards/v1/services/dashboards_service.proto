@@ -387,7 +387,10 @@ message GetDashboardResponse {
 
 message PinDashboardRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {title: "Pin dashboard request data structure"}
+    json_schema: {
+      title: "Pin dashboard request data structure"
+      required: ["dashboard_id"]
+    }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
       description: "Find out more about Dashboards in our documentation."

@@ -21,7 +21,7 @@ message TimeSelection {
 message QuickTimeSelection {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        required: ["caption", "seconds"]
+        required: ["seconds"]
       }
     };
 

@@ -60,7 +60,7 @@ message AlertDefProperties {
     json_schema: {
       title: "Alert definition properties"
       description: "User-configurable properties of an alert definition"
-      required: ["name", "description", "enabled", "priority", "schedule", "type", "type_definition", "group_by_keys", "incidents_settings", "notification_group", "notification_group_excess", "entity_labels", "phantom_mode", "deleted"]
+      required: ["name", "description", "enabled", "priority", "schedule", "type", "type_definition", "group_by_keys", "notification_group", "entity_labels", "phantom_mode"]
     }
   };
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Alert\"" }];
