@@ -15,13 +15,17 @@
 // 1. Create Connectors
 // User creates connector: ConnectorsService/CreateConnector API
 // User send test notification to confirm that connector configuration is correct: TestingService/TestExistingConnector API
+
 // 2. Create Custom Presets [Optional - system presets can be used out of box]
 // User create custom preset: PresetsService/CreateCustomPreset API
 // User test custom preset: TestingService/TestExistingPreset API
+
 // 3. Set Preset as default [Optional - there is always default provided by the system]
 // User sets selected preset as default: PresetsService/SetPresetAsDefault API
+
 // 4. Option 1: User use configured connectors and presets as a destinations in the Alerts v3 API
 // User test destination using TestingService/TestDestination
+
 // 4. Option 2: User configure global router and use router in Alerts v3 API
 // User test routing condition (if the syntax is correct): TestingService/TestRoutingConditionValid
 // User create Global Router using GlobalRoutersService/CreateGlobalRouter
@@ -48,6 +52,9 @@ mod tests {
             NotificationsClient,
             Preset,
             condition_type,
+            test_result::{
+                self,
+            },
         },
     };
 
@@ -123,12 +130,56 @@ mod tests {
 
         let connector = create_test_connector();
 
+        let fields = connector
+            .connector_config
+            .as_ref()
+            .map_or(vec![], |f| f.fields.clone());
+
+        let success: bool = match notifications_client
+            .test_connector_config(
+                (&connector.r#type()).clone(),
+                "payload_type".into(),
+                fields,
+                EntityType::Alerts,
+            )
+            .await
+            .unwrap()
+            .result
+            .unwrap()
+            .result
+            .unwrap()
+        {
+            test_result::Result::Success(_) => true,
+            test_result::Result::Failure(f) => {
+                eprintln!("{:?}", f);
+                false
+            }
+        };
+        assert!(success);
+
         let create_response = notifications_client
             .create_connector(connector.clone())
             .await
             .unwrap();
         let connector_id = create_response.connector.unwrap().id.unwrap();
 
+        let success: bool = match notifications_client
+            .test_existing_connector(connector_id.clone(), "payload_type".into())
+            .await
+            .unwrap()
+            .result
+            .unwrap()
+            .result
+            .unwrap()
+        {
+            test_result::Result::Success(_) => true,
+            test_result::Result::Failure(f) => {
+                eprintln!("{:?}", f);
+                false
+            }
+        };
+
+        assert!(success);
         let retrieved_connector = notifications_client
             .get_connector(connector_id.clone())
             .await
@@ -158,7 +209,22 @@ mod tests {
             .await
             .unwrap();
         let preset_id = create_response.preset.unwrap().id.unwrap();
-
+        let success: bool = match notifications_client
+            .test_preset_config(preset_id.clone())
+            .await
+            .unwrap()
+            .result
+            .unwrap()
+            .result
+            .unwrap()
+        {
+            test_result::Result::Success(_) => true,
+            test_result::Result::Failure(f) => {
+                eprintln!("{:?}", f);
+                false
+            }
+        };
+        assert!(success);
         let retrieved_preset = notifications_client
             .get_preset(preset_id.clone())
             .await

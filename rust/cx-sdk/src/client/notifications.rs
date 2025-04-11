@@ -35,10 +35,16 @@ use cx_api::proto::com::coralogixapis::notification_center::{
     notifications::v1::{
         TestConnectorConfigRequest,
         TestConnectorConfigResponse,
+        TestDestinationRequest,
+        TestDestinationResponse,
         TestExistingConnectorRequest,
         TestExistingConnectorResponse,
+        TestExistingPresetRequest,
+        TestExistingPresetResponse,
         TestPresetConfigRequest,
         TestPresetConfigResponse,
+        TestRoutingConditionValidRequest,
+        TestRoutingConditionValidResponse,
         TestTemplateRenderRequest,
         TestTemplateRenderResponse,
         testing_service_client::TestingServiceClient,
@@ -97,8 +103,16 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
         Connector,
         ConnectorConfig,
     },
+    notifications::v1::{
+        TestResult,
+        test_result,
+        test_template_render_result,
+    },
     presets::v1::Preset,
-    routers::v1::GlobalRouter,
+    routers::v1::{
+        GlobalRouter,
+        TemplatedConnectorConfigField,
+    },
 };
 
 use tokio::sync::Mutex;
@@ -124,26 +138,6 @@ use crate::{
 };
 
 const NOTIFICATIONS_FEATURE_GROUP_ID: &str = "notifications";
-
-/// Parameters for testing a preset configuration.
-///
-/// This struct groups the parameters required for the `test_preset_config` function.
-pub struct TestPresetConfigParams {
-    /// The entity type to test with.
-    pub entity_type: EntityType,
-    /// The entity sub-type to test with (optional).
-    pub entity_sub_type: Option<String>,
-    /// The ID of the connector to test with.
-    pub connector_id: String,
-    /// The payload type to test with.
-    pub payload_type: String,
-    /// The message configuration fields to use in the test.
-    pub message_config_fields: Vec<MessageConfigField>,
-    /// The ID of the preset to test with.
-    pub id: String,
-    /// The configuration overrides to apply during the test.
-    pub config_overrides: Vec<ConfigOverrides>,
-}
 
 /// A client for interacting with the Coralogix Notification Center APIs.
 pub struct NotificationsClient {
@@ -186,7 +180,6 @@ impl NotificationsClient {
         );
         {
             let mut client = self.connectors_client.lock().await.clone();
-
             client
                 .get_connector(request)
                 .await
@@ -935,6 +928,44 @@ impl NotificationsClient {
         }
     }
 
+    /// Test a preset configuration.
+    /// # Arguments
+    /// * `params` - The parameters for testing the preset configuration.
+    /// * `entity_type` - The entity type.
+    /// * `connector_id` - The ID for the connector to test.
+    /// * `preset_id` - The ID of the preset to test.
+    pub async fn test_existing_preset_config(
+        &self,
+        entity_type: EntityType,
+        connector_id: String,
+        preset_id: String,
+    ) -> Result<TestExistingPresetResponse> {
+        let request = make_request_with_metadata(
+            TestExistingPresetRequest {
+                entity_type: entity_type.into(),
+                connector_id,
+                preset_id,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_existing_preset(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
     /// Test rendering a template.
     /// # Arguments
     /// * `entity_type` - The entity type to test with.
@@ -960,6 +991,87 @@ impl NotificationsClient {
 
             client
                 .test_template_render(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
+    /// Test a destination.
+    /// # Arguments
+    /// * `entity_type` - The entity type to test with.
+    /// * `payload_type` - The payload type.
+    /// * `connector_config_fields` - Connector configuration (templated).
+    /// * `preset_id` - Preset ID.
+    /// * `connector_id` - Connector ID.
+    /// * `message_config_fields` - Message configuration.
+    pub async fn test_destination(
+        &self,
+        connector_type: ConnectorType,
+        payload_type: String,
+        connector_config_fields: Vec<TemplatedConnectorConfigField>,
+        entity_type: EntityType,
+        preset_id: String,
+        connector_id: String,
+        message_config_fields: Vec<MessageConfigField>,
+    ) -> Result<TestDestinationResponse> {
+        let request = make_request_with_metadata(
+            TestDestinationRequest {
+                entity_type: entity_type.into(),
+                payload_type,
+                connector_config_fields,
+                message_config_fields,
+                preset_id,
+                connector_id,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_destination(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
+    /// Tests whether a routing condition is valid.
+    /// # Arguments
+    /// * `entity_type` - The entity type to test with.
+    /// * `template` - The template to render.
+    pub async fn test_routing_condition_valid(
+        &self,
+        entity_type: EntityType,
+        template: String,
+    ) -> Result<TestRoutingConditionValidResponse> {
+        let request = make_request_with_metadata(
+            TestRoutingConditionValidRequest {
+                entity_type: entity_type.into(),
+                template,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_routing_condition_valid(request)
                 .await
                 .map(|r| r.into_inner())
                 .map_err(
