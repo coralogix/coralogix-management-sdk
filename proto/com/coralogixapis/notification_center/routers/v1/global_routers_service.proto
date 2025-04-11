@@ -155,7 +155,8 @@ message DeleteGlobalRouterRequest {
         }
     };
     routing.GlobalRouterIdentifier deprecated_identifier = 1 [deprecated = true];
-    notification_center.GlobalRouterIdentifier identifier = 2;
+    notification_center.GlobalRouterIdentifier identifier = 2 [deprecated = true];
+    string id = 3;
 }
 message DeleteGlobalRouterResponse {
 }

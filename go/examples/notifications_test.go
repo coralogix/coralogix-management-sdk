@@ -23,7 +23,6 @@ import (
 )
 
 func TestConnectors(t *testing.T) {
-	t.Skip("This API will be removed")
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -36,15 +35,12 @@ func TestConnectors(t *testing.T) {
 			Type:        cxsdk.ConnectorTypeGenericHTTPS,
 			Name:        "TestConnector",
 			Description: "This is the connector to use for Notification Center testing.",
-			ConnectorConfigs: []*cxsdk.ConnectorConfig{
-				{
-					OutputSchemaId: "default",
-					Fields: []*cxsdk.ConnectorConfigField{
-						{FieldName: "url", Template: "https://example@coralogix.com"},
-						{FieldName: "method", Template: "post"},
-						{FieldName: "additionalHeaders", Template: "{}"},
-						{FieldName: "additionalBodyFields", Template: "{}"},
-					},
+			ConnectorConfig: &cxsdk.ConnectorConfig{
+				Fields: []*cxsdk.ConnectorConfigField{
+					{FieldName: "url", Value: "https://example@coralogix.com"},
+					{FieldName: "method", Value: "post"},
+					{FieldName: "additionalHeaders", Value: "{}"},
+					{FieldName: "additionalBodyFields", Value: "{}"},
 				},
 			},
 		},
@@ -89,7 +85,6 @@ func TestPresets(t *testing.T) {
 			Name:        "TestPreset",
 			Description: "This is the preset to use for Notification Center testing.",
 			PresetType:  &presetType,
-			EntityType:  "alerts",
 			Parent: &cxsdk.Preset{
 				UserFacingId: &parentUserFacingId,
 			},

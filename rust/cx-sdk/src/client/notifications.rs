@@ -98,6 +98,7 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
     MatchEntityTypeCondition,
     MessageConfig,
     MessageConfigField,
+    TemplatedConnectorConfigField,
     condition_type,
     connectors::v1::{
         Connector,
@@ -109,10 +110,7 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
         test_template_render_result,
     },
     presets::v1::Preset,
-    routers::v1::{
-        GlobalRouter,
-        TemplatedConnectorConfigField,
-    },
+    routers::v1::GlobalRouter,
 };
 
 use tokio::sync::Mutex;
@@ -716,17 +714,16 @@ impl NotificationsClient {
     /// Delete a global router by identifier.
     /// # Arguments
     /// * `id` - The identifier of the global router to delete.
-    pub async fn delete_global_router(&self, _id: String) -> Result<DeleteGlobalRouterResponse> {
+    pub async fn delete_global_router(&self, id: String) -> Result<DeleteGlobalRouterResponse> {
         let request = make_request_with_metadata(
             DeleteGlobalRouterRequest {
-                identifier: None,
+                id,
                 ..Default::default()
             },
             &self.metadata_map,
         );
         let mut client = self.global_routers_client.lock().await.clone();
 
-        unimplemented!("Protobuf update is required for this to work");
         client
             .delete_global_router(request)
             .await
@@ -895,18 +892,18 @@ impl NotificationsClient {
     /// * `params` - The parameters for testing the preset configuration.
     /// * `entity_type` - The entity type.
     /// * `connector_id` - The ID for the connector to test.
-    /// * `preset_id` - The ID of the preset to test.
+    /// * `parent_preset_id` - The ID of the preset's parent to test.
     pub async fn test_preset_config(
         &self,
         entity_type: EntityType,
         connector_id: String,
-        preset_id: String,
+        parent_preset_id: String,
     ) -> Result<TestPresetConfigResponse> {
         let request = make_request_with_metadata(
             TestPresetConfigRequest {
                 entity_type: entity_type.into(),
                 connector_id,
-                preset_id,
+                parent_preset_id,
                 ..Default::default()
             },
             &self.metadata_map,

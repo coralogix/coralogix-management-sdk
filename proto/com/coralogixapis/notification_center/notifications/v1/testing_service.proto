@@ -109,7 +109,7 @@ message TestPresetConfigRequest {
   ConnectorIdentifier connector_identifier = 8 [deprecated = true];
   PresetIdentifier preset_identifier = 9 [deprecated = true];
   EntityType entity_type = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
-  string preset_id = 11;
+  string parent_preset_id = 11;
   string connector_id = 12;
 }
 message TestPresetConfigResponse {
@@ -127,6 +127,7 @@ message TestExistingPresetRequest {
   string preset_id = 8;
   string connector_id = 9;
 }
+
 message TestExistingPresetResponse {
   TestResult result = 1;
 }
