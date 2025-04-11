@@ -921,7 +921,7 @@ impl NotificationsClient {
                 .map_err(
                     |status| SdkError::ApiError(SdkApiError {
                         status,
-                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPreset".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
@@ -959,7 +959,7 @@ impl NotificationsClient {
                 .map_err(
                     |status| SdkError::ApiError(SdkApiError {
                         status,
-                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestExistingPreset".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
@@ -1043,7 +1043,7 @@ impl NotificationsClient {
                 .map_err(
                     |status| SdkError::ApiError(SdkApiError {
                         status,
-                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestDestination".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
@@ -1077,7 +1077,7 @@ impl NotificationsClient {
                 .map_err(
                     |status| SdkError::ApiError(SdkApiError {
                         status,
-                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestRoutingConditionValid".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
