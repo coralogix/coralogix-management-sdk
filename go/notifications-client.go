@@ -17,64 +17,64 @@ package cxsdk
 import (
 	"context"
 
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	commonv1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
-	connectores "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/connectors/v1"
+	connectors "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/connectors/v1"
 	notifications "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/notifications/v1"
 	presets "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/presets/v1"
 	routers "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/routers/v1"
 )
 
 // CreateConnectorRequest represents a request to create a connector.
-type CreateConnectorRequest = connectores.CreateConnectorRequest
+type CreateConnectorRequest = connectors.CreateConnectorRequest
 
 // CreateConnectorResponse represents a response to create a connector.
-type CreateConnectorResponse = connectores.CreateConnectorResponse
+type CreateConnectorResponse = connectors.CreateConnectorResponse
 
 // ReplaceConnectorRequest represents a request to replace a connector.
-type ReplaceConnectorRequest = connectores.ReplaceConnectorRequest
+type ReplaceConnectorRequest = connectors.ReplaceConnectorRequest
 
 // ReplaceConnectorResponse represents a response to replace a connector.
-type ReplaceConnectorResponse = connectores.ReplaceConnectorResponse
+type ReplaceConnectorResponse = connectors.ReplaceConnectorResponse
 
 // DeleteConnectorRequest represents a request to delete a connector.
-type DeleteConnectorRequest = connectores.DeleteConnectorRequest
+type DeleteConnectorRequest = connectors.DeleteConnectorRequest
 
 // DeleteConnectorResponse represents a response to delete a connector.
-type DeleteConnectorResponse = connectores.DeleteConnectorResponse
+type DeleteConnectorResponse = connectors.DeleteConnectorResponse
 
 // GetConnectorRequest represents a request to get a connector.
-type GetConnectorRequest = connectores.GetConnectorRequest
+type GetConnectorRequest = connectors.GetConnectorRequest
 
 // GetConnectorResponse represents a response to get a connector.
-type GetConnectorResponse = connectores.GetConnectorResponse
+type GetConnectorResponse = connectors.GetConnectorResponse
 
 // ListConnectorsRequest represents a request to list connectors.
-type ListConnectorsRequest = connectores.ListConnectorsRequest
+type ListConnectorsRequest = connectors.ListConnectorsRequest
 
 // ListConnectorsResponse represents a response to list connectors.
-type ListConnectorsResponse = connectores.ListConnectorsResponse
+type ListConnectorsResponse = connectors.ListConnectorsResponse
 
 // BatchGetConnectorsRequest represents a request to batch get connectors.
-type BatchGetConnectorsRequest = connectores.BatchGetConnectorsRequest
+type BatchGetConnectorsRequest = connectors.BatchGetConnectorsRequest
 
 // BatchGetConnectorsResponse represents a response to batch get connectors.
-type BatchGetConnectorsResponse = connectores.BatchGetConnectorsResponse
+type BatchGetConnectorsResponse = connectors.BatchGetConnectorsResponse
 
 // GetConnectorTypeSummariesRequest represents a request to get connector type summaries.
-type GetConnectorTypeSummariesRequest = connectores.GetConnectorTypeSummariesRequest
+type GetConnectorTypeSummariesRequest = connectors.GetConnectorTypeSummariesRequest
 
 // GetConnectorTypeSummariesResponse represents a response to get connector type summaries.
-type GetConnectorTypeSummariesResponse = connectores.GetConnectorTypeSummariesResponse
+type GetConnectorTypeSummariesResponse = connectors.GetConnectorTypeSummariesResponse
 
 // Connector represents a connector.
-type Connector = connectores.Connector
+type Connector = connectors.Connector
 
 // ConnectorConfig represents a connector configuration.
-type ConnectorConfig = connectores.ConnectorConfig
+type ConnectorConfig = connectors.ConnectorConfig
 
 // EntityTypeConfigOverrides represents a connector configuration overrides.
-type EntityTypeConfigOverrides = connectores.EntityTypeConfigOverrides
+type EntityTypeConfigOverrides = connectors.EntityTypeConfigOverrides
 
 // ConnectorConfigField represents a connector configuration field.
 type ConnectorConfigField = commonv1.ConnectorConfigField
@@ -184,6 +184,15 @@ const (
 	PresetTypeCustom      = presets.PresetType_CUSTOM
 )
 
+// EntityType is a type of entity.
+type EntityType = common.EntityType
+
+// EntityType values.
+const (
+	EntityTypeUnspecified = common.EntityType_ENTITY_TYPE_UNSPECIFIED
+	EntityTypeAlerts      = common.EntityType_ALERTS
+)
+
 // CreateGlobalRouterRequest is a request to create a global router.
 type CreateGlobalRouterRequest = routers.CreateGlobalRouterRequest
 
@@ -235,15 +244,6 @@ type GlobalRouterIdentifier = commonv1.GlobalRouterIdentifier
 // GlobalRouterIdentifierIDValue is a global router identifier id value.
 type GlobalRouterIdentifierIDValue = commonv1.GlobalRouterIdentifier_Id
 
-// GlobalRouterIdentifierUserFacingIDValue is a global router identifier user facing id value.
-type GlobalRouterIdentifierUserFacingIDValue = commonv1.GlobalRouterIdentifier_UserFacingId
-
-// RoutingRule represents a routing rule.
-type RoutingRule = commonv1.RoutingRule
-
-// RoutingTarget represents a routing target.
-type RoutingTarget = commonv1.RoutingTarget
-
 // MessageConfig is a message configuration.
 type MessageConfig = common.MessageConfig
 
@@ -262,6 +262,12 @@ type TestExistingConnectorRequest = notifications.TestExistingConnectorRequest
 // TestExistingConnectorResponse is a response to test an existing connector.
 type TestExistingConnectorResponse = notifications.TestExistingConnectorResponse
 
+// TestExistingPresetConfigRequest is a request to test an existing preset configuration.
+type TestExistingPresetConfigRequest = notifications.TestExistingPresetRequest
+
+// TestExistingPresetConfigResponse is a response to test an existing preset configuration.
+type TestExistingPresetConfigResponse = notifications.TestExistingPresetResponse
+
 // TestPresetConfigRequest is a request to test a preset configuration.
 type TestPresetConfigRequest = notifications.TestPresetConfigRequest
 
@@ -274,17 +280,29 @@ type TestTemplateRenderRequest = notifications.TestTemplateRenderRequest
 // TestTemplateRenderResponse is a response to test a template rendering.
 type TestTemplateRenderResponse = notifications.TestTemplateRenderResponse
 
+// TestDestinationRequest is a request for testing a destination.
+type TestDestinationRequest = notifications.TestDestinationRequest
+
+// TestDestinationResponse is a response for testing a destination.
+type TestDestinationResponse = notifications.TestDestinationResponse
+
+// TestRoutingConditionValidRequest is a request for testing a routing condition.
+type TestRoutingConditionValidRequest = notifications.TestRoutingConditionValidRequest
+
+// TestRoutingConditionValidResponse is a response for testing a routing condition.
+type TestRoutingConditionValidResponse = notifications.TestRoutingConditionValidResponse
+
 const notificationsFeatureGroupID = "notifications"
 
 // RPC names.
 const (
-	ConnectorsCreateRPC                    = connectores.ConnectorsService_CreateConnector_FullMethodName
-	ConnectorsReplaceRPC                   = connectores.ConnectorsService_ReplaceConnector_FullMethodName
-	ConnectorsDeleteRPC                    = connectores.ConnectorsService_DeleteConnector_FullMethodName
-	ConnectorsGetRPC                       = connectores.ConnectorsService_GetConnector_FullMethodName
-	ConnectorsListRPC                      = connectores.ConnectorsService_ListConnectors_FullMethodName
-	ConnectorsBatchGetRPC                  = connectores.ConnectorsService_BatchGetConnectors_FullMethodName
-	ConnectorsGetConnectorTypeSummariesRPC = connectores.ConnectorsService_GetConnectorTypeSummaries_FullMethodName
+	ConnectorsCreateRPC                    = connectors.ConnectorsService_CreateConnector_FullMethodName
+	ConnectorsReplaceRPC                   = connectors.ConnectorsService_ReplaceConnector_FullMethodName
+	ConnectorsDeleteRPC                    = connectors.ConnectorsService_DeleteConnector_FullMethodName
+	ConnectorsGetRPC                       = connectors.ConnectorsService_GetConnector_FullMethodName
+	ConnectorsListRPC                      = connectors.ConnectorsService_ListConnectors_FullMethodName
+	ConnectorsBatchGetRPC                  = connectors.ConnectorsService_BatchGetConnectors_FullMethodName
+	ConnectorsGetConnectorTypeSummariesRPC = connectors.ConnectorsService_GetConnectorTypeSummaries_FullMethodName
 	PresetsCreateRPC                       = presets.PresetsService_CreateCustomPreset_FullMethodName
 	PresetsReplaceRPC                      = presets.PresetsService_ReplaceCustomPreset_FullMethodName
 	PresetsDeleteRPC                       = presets.PresetsService_DeleteCustomPreset_FullMethodName
@@ -320,7 +338,7 @@ func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateCon
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.CreateConnector(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -338,7 +356,7 @@ func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceC
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.ReplaceConnector(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -356,7 +374,7 @@ func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteCon
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.DeleteConnector(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -374,7 +392,7 @@ func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnector
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.GetConnector(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -392,7 +410,7 @@ func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnec
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.ListConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -409,7 +427,7 @@ func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchG
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.BatchGetConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -426,7 +444,7 @@ func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req 
 	}
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := connectores.NewConnectorsServiceClient(conn)
+	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.GetConnectorTypeSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -761,6 +779,24 @@ func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPres
 	return response, nil
 }
 
+// TestPresetConfig tests a preset configuration.
+func (c NotificationsClient) TestExistingPresetConfig(ctx context.Context, req *TestExistingPresetConfigRequest) (*TestExistingPresetConfigResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := notifications.NewTestingServiceClient(conn)
+
+	response, err := client.TestExistingPreset(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestPresetConfigRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
 // TestTemplateRender tests a template rendering.
 func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTemplateRenderRequest) (*TestTemplateRenderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
@@ -773,6 +809,42 @@ func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTe
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestTemplateRender(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// TestDestination tests a destination.
+func (c NotificationsClient) TestDestination(ctx context.Context, req *TestDestinationRequest) (*TestDestinationResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := notifications.NewTestingServiceClient(conn)
+
+	response, err := client.TestDestination(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// TestRoutingConditionValid tests a routing condition.
+func (c NotificationsClient) TestRoutingConditionValid(ctx context.Context, req *TestRoutingConditionValidRequest) (*TestRoutingConditionValidResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := notifications.NewTestingServiceClient(conn)
+
+	response, err := client.TestRoutingConditionValid(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
 	}
