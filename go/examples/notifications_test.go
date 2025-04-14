@@ -29,30 +29,49 @@ func TestConnectors(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
-	c := cxsdk.NewNotificationsClient(creator)
-	createRes, err := c.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
-		Connector: &cxsdk.Connector{
-			Type:        cxsdk.ConnectorTypeGenericHTTPS,
-			Name:        "TestConnector",
-			Description: "This is the connector to use for Notification Center testing.",
-			ConnectorConfig: &cxsdk.ConnectorConfig{
-				Fields: []*cxsdk.ConnectorConfigField{
-					{FieldName: "url", Value: "https://example@coralogix.com"},
-					{FieldName: "method", Value: "post"},
-					{FieldName: "additionalHeaders", Value: "{}"},
-					{FieldName: "additionalBodyFields", Value: "{}"},
-				},
+	connectorRaw := cxsdk.Connector{
+		Type:        cxsdk.ConnectorTypeGenericHTTPS,
+		Name:        "TestConnector",
+		Description: "This is the connector to use for Notification Center testing.",
+		ConnectorConfig: &cxsdk.ConnectorConfig{
+			Fields: []*cxsdk.ConnectorConfigField{
+				{FieldName: "url", Value: "https://httpbin.org/post"},
+				{FieldName: "method", Value: "post"},
 			},
 		},
+	}
+
+	entityType := cxsdk.EntityTypeAlerts
+	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
+		Type:        connectorRaw.Type,
+		PayloadType: "payload_type",
+		Fields:      connectorRaw.ConnectorConfig.Fields,
+		EntityType:  &entityType,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if success.Result.GetFailure() != nil {
+		t.Fatal(success.Result.GetFailure().Message)
+	} else {
+		assert.NotNil(success.Result.GetSuccess())
+	}
+
+	c := cxsdk.NewNotificationsClient(creator)
+	createRes, err := c.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
+		Connector: &connectorRaw,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	connectorId := createRes.Connector.Id
+
 	connector, err := c.GetConnector(context.Background(), &cxsdk.GetConnectorRequest{
 		Id: *connectorId,
 	})
+
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -79,15 +98,13 @@ func TestPresets(t *testing.T) {
 
 	c := cxsdk.NewNotificationsClient(creator)
 	presetType := cxsdk.PresetTypeCustom
-	parentUserFacingId := "preset_system_generic_https_alerts_empty"
+	parentId := "preset_system_generic_https_alerts_empty"
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: &cxsdk.Preset{
-			Name:        "TestPreset",
-			Description: "This is the preset to use for Notification Center testing.",
-			PresetType:  &presetType,
-			Parent: &cxsdk.Preset{
-				UserFacingId: &parentUserFacingId,
-			},
+			Name:          "TestPreset",
+			Description:   "This is the preset to use for Notification Center testing.",
+			PresetType:    &presetType,
+			Parent:        parentId,
 			ConnectorType: cxsdk.ConnectorTypeGenericHTTPS,
 			ConfigOverrides: []*cxsdk.ConfigOverrides{
 				{

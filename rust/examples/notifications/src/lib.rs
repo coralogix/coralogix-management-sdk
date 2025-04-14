@@ -38,6 +38,7 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::notifications::{
+            PresetType,
             ConditionType,
             ConfigOverrides,
             Connector,
@@ -87,7 +88,7 @@ mod tests {
         Preset {
             name: "TestPreset".into(),
             description: "Preset for Notification Center testing.".into(),
-            preset_type: Some(2),
+            preset_type: Some(PresetType::Custom.into()),
             connector_type: ConnectorType::GenericHttps as i32,
             config_overrides: vec![ConfigOverrides {
                 condition_type: Some(ConditionType {
