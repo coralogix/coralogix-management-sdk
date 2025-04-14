@@ -99,6 +99,7 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
     MessageConfig,
     MessageConfigField,
     TemplatedConnectorConfigField,
+    presets::v1::PresetType,
     condition_type,
     connectors::v1::{
         Connector,
@@ -1010,10 +1011,9 @@ impl NotificationsClient {
     /// * `message_config_fields` - Message configuration.
     pub async fn test_destination(
         &self,
-        connector_type: ConnectorType,
+        entity_type: EntityType,
         payload_type: String,
         connector_config_fields: Vec<TemplatedConnectorConfigField>,
-        entity_type: EntityType,
         preset_id: String,
         connector_id: String,
         message_config_fields: Vec<MessageConfigField>,
