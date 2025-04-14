@@ -35,10 +35,16 @@ use cx_api::proto::com::coralogixapis::notification_center::{
     notifications::v1::{
         TestConnectorConfigRequest,
         TestConnectorConfigResponse,
+        TestDestinationRequest,
+        TestDestinationResponse,
         TestExistingConnectorRequest,
         TestExistingConnectorResponse,
+        TestExistingPresetRequest,
+        TestExistingPresetResponse,
         TestPresetConfigRequest,
         TestPresetConfigResponse,
+        TestRoutingConditionValidRequest,
+        TestRoutingConditionValidResponse,
         TestTemplateRenderRequest,
         TestTemplateRenderResponse,
         testing_service_client::TestingServiceClient,
@@ -58,12 +64,10 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         GetSystemDefaultPresetSummaryResponse,
         ListPresetSummariesRequest,
         ListPresetSummariesResponse,
-        PresetIdentifier,
         ReplaceCustomPresetRequest,
         ReplaceCustomPresetResponse,
         SetPresetAsDefaultRequest,
         SetPresetAsDefaultResponse,
-        preset_identifier,
         presets_service_client::PresetsServiceClient,
     },
     routers::v1::{
@@ -90,21 +94,24 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
     ConfigOverrides,
     ConnectorConfigField,
     ConnectorType,
+    EntityType,
     MatchEntityTypeCondition,
     MessageConfig,
     MessageConfigField,
-    OrderBy,
+    TemplatedConnectorConfigField,
+    presets::v1::PresetType,
     condition_type,
     connectors::v1::{
         Connector,
         ConnectorConfig,
     },
+    notifications::v1::{
+        TestResult,
+        test_result,
+        test_template_render_result,
+    },
     presets::v1::Preset,
     routers::v1::GlobalRouter,
-    routing::{
-        GlobalRouterIdentifier,
-        global_router_identifier,
-    },
 };
 
 use tokio::sync::Mutex;
@@ -130,26 +137,6 @@ use crate::{
 };
 
 const NOTIFICATIONS_FEATURE_GROUP_ID: &str = "notifications";
-
-/// Parameters for testing a preset configuration.
-///
-/// This struct groups the parameters required for the `test_preset_config` function.
-pub struct TestPresetConfigParams {
-    /// The entity type to test with.
-    pub entity_type: String,
-    /// The entity sub-type to test with (optional).
-    pub entity_sub_type: Option<String>,
-    /// The ID of the connector to test with.
-    pub connector_id: String,
-    /// The ID of the output schema to test with.
-    pub output_schema_id: String,
-    /// The message configuration fields to use in the test.
-    pub message_config_fields: Vec<MessageConfigField>,
-    /// The ID of the preset to test with.
-    pub preset_user_facing_id: String,
-    /// The configuration overrides to apply during the test.
-    pub config_overrides: Vec<ConfigOverrides>,
-}
 
 /// A client for interacting with the Coralogix Notification Center APIs.
 pub struct NotificationsClient {
@@ -184,12 +171,14 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to get.
     pub async fn get_connector(&self, connector_id: String) -> Result<GetConnectorResponse> {
         let request = make_request_with_metadata(
-            GetConnectorRequest { id: connector_id },
+            GetConnectorRequest {
+                id: connector_id,
+                ..Default::default()
+            },
             &self.metadata_map,
         );
         {
             let mut client = self.connectors_client.lock().await.clone();
-
             client
                 .get_connector(request)
                 .await
@@ -207,17 +196,14 @@ impl NotificationsClient {
     /// List all connectors.
     /// # Arguments
     /// * `connector_type` - The [`ConnectorType`] to filter by.
-    /// * `order_bys` - The [`OrderBy`]s to use for sorting.
     /// * `entity_type` - The entity type to filter by.
     pub async fn list_connectors(
         &self,
         connector_type: ConnectorType,
-        order_bys: Vec<OrderBy>,
     ) -> Result<ListConnectorsResponse> {
         let request = make_request_with_metadata(
             ListConnectorsRequest {
-                connector_type: connector_type as i32,
-                order_bys,
+                connector_type: connector_type.into(),
             },
             &self.metadata_map,
         );
@@ -300,7 +286,10 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to delete.
     pub async fn delete_connector(&self, connector_id: String) -> Result<DeleteConnectorResponse> {
         let request = make_request_with_metadata(
-            DeleteConnectorRequest { id: connector_id },
+            DeleteConnectorRequest {
+                id: connector_id,
+                ..Default::default()
+            },
             &self.metadata_map,
         );
         {
@@ -328,7 +317,10 @@ impl NotificationsClient {
         connector_ids: Vec<String>,
     ) -> Result<BatchGetConnectorsResponse> {
         let request = make_request_with_metadata(
-            BatchGetConnectorsRequest { ids: connector_ids },
+            BatchGetConnectorsRequest {
+                ids: connector_ids,
+                ..Default::default()
+            },
             &self.metadata_map,
         );
         {
@@ -429,18 +421,11 @@ impl NotificationsClient {
     /// Delete a custom preset by ID.
     /// # Arguments
     /// * `preset_id` - The ID of the preset to delete.
-    pub async fn delete_custom_preset(
-        &self,
-        preset_user_facing_id: String,
-    ) -> Result<DeleteCustomPresetResponse> {
+    pub async fn delete_custom_preset(&self, id: String) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
             DeleteCustomPresetRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
-                deprecated_identifier: None,
+                id: id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -463,18 +448,12 @@ impl NotificationsClient {
 
     /// Set a preset as the default.
     /// # Arguments
-    /// * `preset_user_facing_id` - The user-facing ID of the preset to set as the default.
-    pub async fn set_preset_as_default(
-        &self,
-        preset_user_facing_id: String,
-    ) -> Result<SetPresetAsDefaultResponse> {
+    /// * `id` - The user-facing ID of the preset to set as the default.
+    pub async fn set_preset_as_default(&self, id: String) -> Result<SetPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
             SetPresetAsDefaultRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
+                id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -497,15 +476,11 @@ impl NotificationsClient {
     /// Get a preset by ID.
     /// # Arguments
     /// * `preset_id` - The ID of the preset to get.
-    pub async fn get_preset(&self, preset_user_facing_id: String) -> Result<GetPresetResponse> {
+    pub async fn get_preset(&self, id: String) -> Result<GetPresetResponse> {
         let request = make_request_with_metadata(
             GetPresetRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
-                deprecated_identifier: None,
+                id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -530,18 +505,16 @@ impl NotificationsClient {
     /// # Arguments
     /// * `connector_type` - The [`ConnectorType`] to list presets for.
     /// * `entity_type` - The entity type to list presets for.
-    /// * `order_bys` - The [`OrderBy`]s to use for sorting.
     pub async fn list_preset_summaries(
         &self,
-        connector_type: ConnectorType,
-        entity_type: String,
-        order_bys: Vec<OrderBy>,
+        connector_type: Option<ConnectorType>,
+        entity_type: EntityType,
     ) -> Result<ListPresetSummariesResponse> {
         let request = make_request_with_metadata(
             ListPresetSummariesRequest {
-                connector_type: connector_type as i32,
-                entity_type,
-                order_bys,
+                connector_type: connector_type.map(From::from),
+                entity_type: entity_type.into(),
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -570,7 +543,10 @@ impl NotificationsClient {
         preset_ids: Vec<String>,
     ) -> Result<BatchGetPresetsResponse> {
         let request = make_request_with_metadata(
-            BatchGetPresetsRequest { ids: preset_ids },
+            BatchGetPresetsRequest {
+                ids: preset_ids,
+                ..Default::default()
+            },
             &self.metadata_map,
         );
         {
@@ -597,12 +573,13 @@ impl NotificationsClient {
     pub async fn get_default_preset_summary(
         &self,
         connector_type: ConnectorType,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<GetDefaultPresetSummaryResponse> {
         let request = make_request_with_metadata(
             GetDefaultPresetSummaryRequest {
-                connector_type: connector_type as i32,
-                entity_type,
+                connector_type: connector_type.into(),
+                entity_type: entity_type.into(),
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -630,12 +607,13 @@ impl NotificationsClient {
     pub async fn get_system_default_preset_summary(
         &self,
         connector_type: ConnectorType,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<GetSystemDefaultPresetSummaryResponse> {
         let request = make_request_with_metadata(
             GetSystemDefaultPresetSummaryRequest {
                 connector_type: connector_type as i32,
-                entity_type,
+                entity_type: entity_type.into(),
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -736,14 +714,12 @@ impl NotificationsClient {
 
     /// Delete a global router by identifier.
     /// # Arguments
-    /// * `global_router_identifier` - The identifier of the global router to delete.
-    pub async fn delete_global_router(
-        &self,
-        global_router_identifier: GlobalRouterIdentifier,
-    ) -> Result<DeleteGlobalRouterResponse> {
+    /// * `id` - The identifier of the global router to delete.
+    pub async fn delete_global_router(&self, id: String) -> Result<DeleteGlobalRouterResponse> {
         let request = make_request_with_metadata(
             DeleteGlobalRouterRequest {
-                identifier: Some(global_router_identifier),
+                id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -762,14 +738,12 @@ impl NotificationsClient {
 
     /// Get a global router by identifier.
     /// # Arguments
-    /// * `global_router_identifier` - The identifier of the global router to get.
-    pub async fn get_global_router(
-        &self,
-        global_router_identifier: GlobalRouterIdentifier,
-    ) -> Result<GetGlobalRouterResponse> {
+    /// * `id` - The identifier of the global router to get.
+    pub async fn get_global_router(&self, id: String) -> Result<GetGlobalRouterResponse> {
         let request = make_request_with_metadata(
             GetGlobalRouterRequest {
-                identifier: Some(global_router_identifier),
+                id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -791,11 +765,12 @@ impl NotificationsClient {
     /// * `entity_type` - The entity type to filter global routers by.
     pub async fn list_global_routers(
         &self,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<ListGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             ListGlobalRoutersRequest {
-                entity_type: Some(entity_type),
+                entity_type: Some(entity_type.into()),
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -814,14 +789,15 @@ impl NotificationsClient {
 
     /// Batch get global routers by identifiers.
     /// # Arguments
-    /// * `global_router_identifiers` - The identifiers of the global routers to retrieve.
+    /// * `ids` - The identifiers of the global routers to retrieve.
     pub async fn batch_get_global_routers(
         &self,
-        global_router_identifiers: Vec<GlobalRouterIdentifier>,
+        ids: Vec<String>,
     ) -> Result<BatchGetGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             BatchGetGlobalRoutersRequest {
-                ids: global_router_identifiers,
+                ids,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -841,22 +817,23 @@ impl NotificationsClient {
     /// Test a connector configuration.
     /// # Arguments
     /// * `connector_type` - The [`ConnectorType`] to test.
-    /// * `output_schema_id` - The ID of the output schema to test with.
+    /// * `payload_type` - The type of payload of to test with.
     /// * `connector_config_fields` - The [ConnectorConfigField]s to test with.
     /// * `entity_type` - The entity type to test with.
     pub async fn test_connector_config(
         &self,
         connector_type: ConnectorType,
-        output_schema_id: String,
+        payload_type: String,
         connector_config_fields: Vec<ConnectorConfigField>,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<TestConnectorConfigResponse> {
         let request = make_request_with_metadata(
             TestConnectorConfigRequest {
-                r#type: connector_type as i32,
-                output_schema_id,
+                r#type: connector_type.into(),
                 fields: connector_config_fields,
-                entity_type: Some(entity_type),
+                payload_type,
+                entity_type: Some(entity_type.into()),
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -880,16 +857,17 @@ impl NotificationsClient {
     /// Test an existing connector.
     /// # Arguments
     /// * `connector_id` - The ID of the connector to test.
-    /// * `output_schema_id` - The ID of the output schema to test with.
+    /// * `payload_type` - The payload type to test with.
     pub async fn test_existing_connector(
         &self,
         connector_id: String,
-        output_schema_id: String,
+        payload_type: String,
     ) -> Result<TestExistingConnectorResponse> {
         let request = make_request_with_metadata(
             TestExistingConnectorRequest {
                 connector_id,
-                output_schema_id,
+                payload_type,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -913,17 +891,21 @@ impl NotificationsClient {
     /// Test a preset configuration.
     /// # Arguments
     /// * `params` - The parameters for testing the preset configuration.
+    /// * `entity_type` - The entity type.
+    /// * `connector_id` - The ID for the connector to test.
+    /// * `parent_preset_id` - The ID of the preset's parent to test.
     pub async fn test_preset_config(
         &self,
-        params: TestPresetConfigParams,
+        entity_type: EntityType,
+        connector_id: String,
+        parent_preset_id: String,
     ) -> Result<TestPresetConfigResponse> {
         let request = make_request_with_metadata(
             TestPresetConfigRequest {
-                entity_type: params.entity_type,
-                entity_sub_type: params.entity_sub_type,
-                connector_id: params.connector_id,
-                preset_id: params.preset_user_facing_id,
-                config_overrides: params.config_overrides,
+                entity_type: entity_type.into(),
+                connector_id,
+                parent_preset_id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -937,7 +919,45 @@ impl NotificationsClient {
                 .map_err(
                     |status| SdkError::ApiError(SdkApiError {
                         status,
-                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPresetConfig".into(),
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestPreset".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
+    /// Test a preset configuration.
+    /// # Arguments
+    /// * `params` - The parameters for testing the preset configuration.
+    /// * `entity_type` - The entity type.
+    /// * `connector_id` - The ID for the connector to test.
+    /// * `preset_id` - The ID of the preset to test.
+    pub async fn test_existing_preset_config(
+        &self,
+        entity_type: EntityType,
+        connector_id: String,
+        preset_id: String,
+    ) -> Result<TestExistingPresetResponse> {
+        let request = make_request_with_metadata(
+            TestExistingPresetRequest {
+                entity_type: entity_type.into(),
+                connector_id,
+                preset_id,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_existing_preset(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestExistingPreset".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
@@ -951,15 +971,16 @@ impl NotificationsClient {
     /// * `template` - The template to render.
     pub async fn test_template_render(
         &self,
-        entity_type: String,
+        entity_type: EntityType,
         entity_sub_type: Option<String>,
         template: String,
     ) -> Result<TestTemplateRenderResponse> {
         let request = make_request_with_metadata(
             TestTemplateRenderRequest {
-                entity_type,
+                entity_type: entity_type.into(),
                 entity_sub_type,
                 template,
+                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -974,6 +995,86 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestTemplateRender".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
+    /// Test a destination.
+    /// # Arguments
+    /// * `entity_type` - The entity type to test with.
+    /// * `payload_type` - The payload type.
+    /// * `connector_config_fields` - Connector configuration (templated).
+    /// * `preset_id` - Preset ID.
+    /// * `connector_id` - Connector ID.
+    /// * `message_config_fields` - Message configuration.
+    pub async fn test_destination(
+        &self,
+        entity_type: EntityType,
+        payload_type: String,
+        connector_config_fields: Vec<TemplatedConnectorConfigField>,
+        preset_id: String,
+        connector_id: String,
+        message_config_fields: Vec<MessageConfigField>,
+    ) -> Result<TestDestinationResponse> {
+        let request = make_request_with_metadata(
+            TestDestinationRequest {
+                entity_type: entity_type.into(),
+                payload_type,
+                connector_config_fields,
+                message_config_fields,
+                preset_id,
+                connector_id,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_destination(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestDestination".into(),
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                    },
+                ))
+        }
+    }
+
+    /// Tests whether a routing condition is valid.
+    /// # Arguments
+    /// * `entity_type` - The entity type to test with.
+    /// * `template` - The template to render.
+    pub async fn test_routing_condition_valid(
+        &self,
+        entity_type: EntityType,
+        template: String,
+    ) -> Result<TestRoutingConditionValidResponse> {
+        let request = make_request_with_metadata(
+            TestRoutingConditionValidRequest {
+                entity_type: entity_type.into(),
+                template,
+                ..Default::default()
+            },
+            &self.metadata_map,
+        );
+        {
+            let mut client = self.testing_client.lock().await.clone();
+
+            client
+                .test_routing_condition_valid(request)
+                .await
+                .map(|r| r.into_inner())
+                .map_err(
+                    |status| SdkError::ApiError(SdkApiError {
+                        status,
+                        endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestRoutingConditionValid".into(),
                         feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
