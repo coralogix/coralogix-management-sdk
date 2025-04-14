@@ -42,6 +42,7 @@ func TestConnectors(t *testing.T) {
 	}
 
 	entityType := cxsdk.EntityTypeAlerts
+	c := cxsdk.NewNotificationsClient(creator)
 	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
 		Type:        connectorRaw.Type,
 		PayloadType: "payload_type",
@@ -58,7 +59,6 @@ func TestConnectors(t *testing.T) {
 		assert.NotNil(success.Result.GetSuccess())
 	}
 
-	c := cxsdk.NewNotificationsClient(creator)
 	createRes, err := c.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
 		Connector: &connectorRaw,
 	})
