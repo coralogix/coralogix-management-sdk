@@ -24,7 +24,7 @@ message AlertDefNotificationGroup {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Alert definition notification group"
-      required: ["group_by_keys", "webhooks", "destinations", "router"]
+      required: ["group_by_keys", "webhooks", "destinations"]
     }
   };
   repeated google.protobuf.StringValue group_by_keys = 1;

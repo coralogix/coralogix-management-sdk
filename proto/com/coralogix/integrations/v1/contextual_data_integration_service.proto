@@ -7,43 +7,266 @@ import "com/coralogix/common/v1/audit_log.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
 
 service ContextualDataIntegrationService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Contextual data integration service"
+    description: "Query for contextual data integration information."
+  };
+
   rpc GetContextualDataIntegrations(GetContextualDataIntegrationsRequest) returns (GetContextualDataIntegrationsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get all contextual data integrations";
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Get all contextual data integrations accessible"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetContextualDataIntegrationDefinition(GetContextualDataIntegrationDefinitionRequest) returns (GetContextualDataIntegrationDefinitionResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration definition";
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations/definition/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Get contextual data integration definition"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetContextualDataIntegrationDetails(GetContextualDataIntegrationDetailsRequest) returns (GetContextualDataIntegrationDetailsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration details";
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Get contextual data integration details"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc TestContextualDataIntegration(TestContextualDataIntegrationRequest) returns (TestContextualDataIntegrationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Test contextual data integration";
+    option (google.api.http) = {
+      post: "/v1/contextual-data/integration/test"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Test contextual data integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:UpdateConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc SaveContextualDataIntegration(SaveContextualDataIntegrationRequest) returns (SaveContextualDataIntegrationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Save contextual data integration registration metadata";
+    option (google.api.http) = {
+      post: "/v1/contextual-data/integration"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Save contextual data integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:UpdateConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc UpdateContextualDataIntegration(UpdateContextualDataIntegrationRequest) returns (UpdateContextualDataIntegrationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Update contextual data integration";
+    option (google.api.http) = {
+      put: "/v1/contextual-data/integration"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Update contextual data integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:UpdateConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc DeleteContextualDataIntegration(DeleteContextualDataIntegrationRequest) returns (DeleteContextualDataIntegrationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Delete contextual data integration";
+    option (google.api.http) = {
+      delete: "/v1/contextual-data/integration/{integration_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Contextual data integration service"]
+      operation_id: "Delete contextual data integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "contextual-data:UpdateConfig"}
+          }
+        }
+      }
+    };
   }
 }
 
 message GetContextualDataIntegrationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integrations request"
+      required: [
+      ]
+    }
+  };
   google.protobuf.BoolValue include_testing_integrations = 1;
 }
 
 message GetContextualDataIntegrationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integrations response"
+      required: []
+    }
+  };
+
   message IntegrationWithCounts {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Integration with counts"
+        required: [
+          "integration",
+          "amount_integrations"
+        ]
+      }
+    };
+    
     Integration integration = 1;
     google.protobuf.UInt32Value amount_integrations = 2;
     repeated google.protobuf.StringValue errors = 3;
@@ -55,51 +278,124 @@ message GetContextualDataIntegrationsResponse {
 }
 
 message GetContextualDataIntegrationDefinitionRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integration definition request"
+      required: ["id"]
+    }
+  };
   google.protobuf.StringValue id = 1;
   google.protobuf.BoolValue include_testing_integrations = 2;
 }
 
 message GetContextualDataIntegrationDefinitionResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integration definition response"
+      required: ["integration_definition"]
+    }
+  };
   IntegrationDefinition integration_definition = 1;
 }
 
 message GetContextualDataIntegrationDetailsRequest {
-  google.protobuf.StringValue id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integration details request"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
   google.protobuf.BoolValue include_testing_revisions = 2;
 }
 
 message GetContextualDataIntegrationDetailsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get contextual data integration details response"
+      required: ["integration_detail"]
+    }
+  };
   IntegrationDetails integration_detail = 1;
 }
 
 message UpdateContextualDataIntegrationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update contextual data integration request"
+      required: ["integration_id", "metadata"]
+    }
+  };
   google.protobuf.StringValue integration_id = 1;
   IntegrationMetadata metadata = 2;
 }
 
-message UpdateContextualDataIntegrationResponse {}
+message UpdateContextualDataIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Update contextual data integration response"
+      required: []
+    }
+  };
+}
 
 message TestContextualDataIntegrationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test contextual data integration request"
+      required: ["integration_data"]
+    }
+  };
   IntegrationMetadata integration_data = 1;
   google.protobuf.StringValue integration_id = 2;
 }
 
 message TestContextualDataIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Test contextual data integration response"
+      required: ["result"]
+    }
+  };
   TestIntegrationResult result = 1;
 }
 
 message SaveContextualDataIntegrationRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Save contextual data integration request"
+      required: ["metadata"]
+    }
+  };
   IntegrationMetadata metadata = 1;
 }
 
 message SaveContextualDataIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Save contextual data integration response"
+      required: ["integration_id"]
+    }
+  };
   google.protobuf.StringValue integration_id = 1;
 }
 
 message DeleteContextualDataIntegrationRequest {
-  google.protobuf.StringValue integration_id = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete contextual data integration request"
+      required: ["integration_id"]
+    }
+  };
+  google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
 }
 
 message DeleteContextualDataIntegrationResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Delete contextual data integration response"
+      required: []
+    }
+  };
 }
 

@@ -18,8 +18,7 @@ message EventsFilter {
       required: [
         "timestamp",
         "cx_event_types",
-        "cx_event_keys",
-        "cx_event_metadata_filters"
+        "cx_event_keys"
       ]
     }
   };
@@ -35,7 +34,6 @@ message Filters {
       title: "Filters"
       description: "This data structure represents a filter"
       required: [
-        "operator",
         "path_and_values"
       ]
     }

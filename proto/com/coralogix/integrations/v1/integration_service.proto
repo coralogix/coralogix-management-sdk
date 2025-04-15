@@ -15,11 +15,43 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 service IntegrationService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Integration service"
+    description: "A service that enables querying for integration information."
+    external_docs: {
+      url: "https://coralogix.com/docs/integrations/getting-started/"
+      description: "Find out more about integrations in our documentation."
+    }
+  };
 
   rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "List managed integration names";
     option (google.api.http) = {
       get: "/v1/integrations/managed/list"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "List managed integration keys"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
     };
   }
 
@@ -28,12 +60,60 @@ service IntegrationService {
     option (google.api.http) = {
       get: "/v1/integrations/deployed/{integration_id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get deployed integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get all integrations";
     option (google.api.http) = {
       get: "/v1/integrations"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get all integrations"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
     };
   }
 
@@ -42,6 +122,30 @@ service IntegrationService {
     option (google.api.http) = {
       get: "/v1/integrations/definition/{id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get integration definition"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetIntegrationDetails(GetIntegrationDetailsRequest) returns (GetIntegrationDetailsResponse){
@@ -49,12 +153,60 @@ service IntegrationService {
     option (google.api.http) = {
       get: "/v1/integrations/{id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get integration details"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetManagedIntegrationStatus(GetManagedIntegrationStatusRequest) returns (GetManagedIntegrationStatusResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get managed integration status";
     option (google.api.http) = {
       get: "/v1/integrations/managed/status/{integration_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get managed integration status"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
     };
   }
 
@@ -64,6 +216,30 @@ service IntegrationService {
       post: "/v1/integrations/metadata"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Save integration registration metadata"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:Deploy"}
+          }
+        }
+      }
+    };
   }
 
   rpc UpdateIntegration(UpdateIntegrationRequest) returns (UpdateIntegrationResponse){
@@ -72,12 +248,60 @@ service IntegrationService {
       put: "/v1/integrations/metadata"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Update integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:Deploy"}
+          }
+        }
+      }
+    };
   }
 
   rpc DeleteIntegration(DeleteIntegrationRequest) returns (DeleteIntegrationResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Delete integration";
     option (google.api.http) = {
       delete: "/v1/integrations/instance/{integration_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Delete integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:Deploy"}
+          }
+        }
+      }
     };
   }
 
@@ -86,12 +310,60 @@ service IntegrationService {
     option (google.api.http) = {
       get: "/v1/integrations/template"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get integration template"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc GetRumApplicationVersionData(GetRumApplicationVersionDataRequest) returns (GetRumApplicationVersionDataResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get RUM integration versions data";
     option (google.api.http) = {
       get: "/v1/integrations/rum/app-versions"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Get RUM integration versions data"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
     };
   }
 
@@ -101,6 +373,30 @@ service IntegrationService {
       post: "/v1/integrations/rum/sync"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Trigger sync of RUM integration data"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
+    };
   }
 
   rpc TestIntegration(TestIntegrationRequest) returns (TestIntegrationResponse) {
@@ -108,6 +404,30 @@ service IntegrationService {
     option (google.api.http) = {
       post: "/v1/integrations/metadata/test"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Integration service"]
+      operation_id: "Test integration"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "integrations:ReadConfig"}
+          }
+        }
+      }
     };
   }
 }
@@ -117,15 +437,10 @@ message ListManagedIntegrationKeysRequest {}
 message ListManagedIntegrationKeysResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ListManagedIntegrationKeysResponse"
-      description: "This data structure is the response obtained when retrieving a list of managed integration keys."
+      title: "List managed integration keys response"
       required: [
         "integration_keys"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   repeated google.protobuf.StringValue integration_keys = 1;
@@ -134,30 +449,22 @@ message ListManagedIntegrationKeysResponse {
 message GetDeployedIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetDeployedIntegrationRequest"
-      description: "This data structure represents a request to retrieve a deployed integration."
+      title: "Get deployed integration request"
       required: [
         "integration_id"
       ]
     }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
-    }
   };
   google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"aws-sqs\""}];
 }
+
 message GetDeployedIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetDeployedIntegrationResponse"
-      description: "This data structure is the response obtained when retrieving a deployed integration."
+      title: "Get deployed integration response"
       required: [
+        "integration"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   DeployedIntegrationInformation integration = 1;
@@ -166,16 +473,12 @@ message GetDeployedIntegrationResponse  {
 message UpdateIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "UpdateIntegrationRequest"
+      title: "Update integration request"
       description: "This data structure represents a list of outgoing webhook types."
       required: ["id", "metadata"]
     }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
-    }
   };
-  google.protobuf.StringValue id = 1; //This is the integration id generated at creation time
+  google.protobuf.StringValue id = 1; // This is the integration ID generated at creation time
   IntegrationMetadata metadata = 2;
 }
 
@@ -184,13 +487,9 @@ message UpdateIntegrationResponse {}
 message GetIntegrationDefinitionRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationDefinitionRequest"
+      title: "Get integration definition request"
       description: "This data structure represents a list of outgoing webhook types."
       required: ["id"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"aws-sqs\""}];
@@ -200,13 +499,9 @@ message GetIntegrationDefinitionRequest  {
 message GetIntegrationDefinitionResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationDefinitionResponse"
+      title: "Get integration definition response"
       description: "This data structure represents a list of outgoing webhook types."
       required: ["integration_definition"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   IntegrationDefinition integration_definition = 1;
@@ -215,13 +510,8 @@ message GetIntegrationDefinitionResponse  {
 message GetIntegrationsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationsRequest"
-      description: "This data structure represents a request to retrieve a list of integrations."
+      title: "Get integrations request"
       required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.BoolValue include_testing_revision = 1;
@@ -230,26 +520,17 @@ message GetIntegrationsRequest {
 message GetIntegrationsResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationsResponse"
+      title: "Get integrations response"
       description: "This data structure represents a list of outgoing webhook types."
       required: [
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   message IntegrationWithCounts {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "IntegrationWithCounts"
-        description: "This data structure represents an integration with counts."
+        title: "Integration with counts"
         required: ["integrations"]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
       }
     };
     Integration integration = 1;
@@ -265,28 +546,19 @@ message GetIntegrationsResponse  {
 message GetIntegrationDetailsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationDetailsRequest"
-      description: "This data structure represents a request to retrieve the details of an integration."
+      title: "Get integration details request"
       required: ["id"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.BoolValue include_testing_revision = 2;
 }
+
 message GetIntegrationDetailsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetIntegrationDetailsResponse"
-      description: "This data structure is a response obtained when retrieving the details of an integration."
+      title: "Get integration details response"
       required: ["integration_detail"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   IntegrationDetails integration_detail = 1;
@@ -295,15 +567,10 @@ message GetIntegrationDetailsResponse {
 message GetManagedIntegrationStatusRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetManagedIntegrationStatusRequest"
-      description: "This data structure represents a request to retrieve the status of a managed integration."
+      title: "Get managed integration status request"
       required: [
         "integration_id"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   string integration_id = 1;
@@ -312,16 +579,11 @@ message GetManagedIntegrationStatusRequest  {
 message GetManagedIntegrationStatusResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetManagedIntegrationStatusResponse"
-      description: "This data structure represents a response obtained when retrieving the status of a managed integration."
+      title: "Get managed integration status response"
       required: [
         "integration_id",
         "status"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   string integration_id = 1;
@@ -331,31 +593,22 @@ message GetManagedIntegrationStatusResponse  {
 message SaveIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "SaveIntegrationRequest"
-      description: "This data structure represents a request to save an integration."
+      title: "Save integration request"
       required: [
         "metadata"
       ]
     }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
-    }
   };
   IntegrationMetadata metadata = 1;
 }
+
 message SaveIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "SaveIntegrationResponse"
-      description: "This data structure represents a response obtained when saving an integration."
+      title: "Save integration response"
       required: [
         "integration_id"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue integration_id = 1;
@@ -364,15 +617,10 @@ message SaveIntegrationResponse  {
 message DeleteIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "DeleteIntegrationRequest"
-      description: "This data structure represents a request to delete an integration."
+      title: "Delete integration request"
       required: [
         "integration_id"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue integration_id = 1;
@@ -383,14 +631,10 @@ message DeleteIntegrationResponse  {}
 message GetTemplateRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetTemplateRequest"
-      description: "This data structure is a request to retrieve a template."
+      title: "Get template request"
       required: [
+        "integration_id"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
 
@@ -398,14 +642,12 @@ message GetTemplateRequest  {
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "CommonARMParams"
-        description: "This data structure represents the common parameters for ARM integrations."
+        title: "Common ARM integration parameters"
         required: [
+          "logs_url",
+          "api_key",
+          "cgx_domain"
         ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
       }
     };
     google.protobuf.StringValue logs_url = 1;
@@ -425,14 +667,9 @@ message GetTemplateRequest  {
 message GetTemplateResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetTemplateResponse"
-      description: "This data structure represents a response obtained when retrieving a template."
+      title: "Get template response"
       required: [
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue template_url = 1;
@@ -441,14 +678,10 @@ message GetTemplateResponse  {
 message GetRumApplicationVersionDataRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetRumApplicationVersionDataRequest"
-      description: "This data structure is a request to retrieve RUM application version data."
+      title: "Get RUM application version data request"
       required: [
+        "application_name"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue application_name = 1;
@@ -457,14 +690,10 @@ message GetRumApplicationVersionDataRequest  {
 message GetRumApplicationVersionDataResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GetRumApplicationVersionDataResponse"
-      description: "This data structure represents a response obtained when retrieving RUM application version data."
+      title: "Get RUM application version data response"
       required: [
+        "version_data"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   RumVersionData version_data = 1;
@@ -473,31 +702,21 @@ message GetRumApplicationVersionDataResponse  {
 message SyncRumDataRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "SyncRumDataRequest"
-      description: "This data structure is a request to trigger a sync of RUM data."
-      required: [
-      ]
+      title: "Sync RUM data request"
+      required: []
     }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
-    }
-  };  // If set to false, it may not be triggered if it was synced just recently.
-  // The period amount when the sync is not triggered is determined by configuration.
+  };  // If false, sync may be skipped if performed recently.
+  // The time between syncs is controlled by configuration.
   google.protobuf.BoolValue force = 1;
 }
 
 message SyncRumDataResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "SyncRumDataResponse"
-      description: "This data structure represents a response obtained when syncing RUM data."
+      title: "Sync RUM data response"
       required: [
+        "synced_at"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   reserved 3;
@@ -510,15 +729,10 @@ message SyncRumDataResponse  {
 message TestIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "TestIntegrationRequest"
-      description: "This data structure represents a request to test an integration."
+      title: "Test integration request"
       required: [
         "integration_data"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   IntegrationMetadata integration_data = 1;
@@ -528,15 +742,10 @@ message TestIntegrationRequest  {
 message TestIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "TestIntegrationResponse"
-      description: "This data structure is a response obtained when testing an integration."
+      title: "Test integration response"
       required: [
         "result"
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   TestIntegrationResult result = 1;

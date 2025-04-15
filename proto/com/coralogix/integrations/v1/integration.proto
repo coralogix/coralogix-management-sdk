@@ -11,14 +11,13 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message CloudFormationStack {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "CloudFormationStack"
-      description: "This data structure represents a Cloud Formation stack."
-      required: [
-      ]
+      title: "CloudFormation stack"
+      description: "This data structure represents a CloudFormation stack."
+      required: []
     }
     external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      url: "https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/"
+      description: "Find out more about the AWS CloudFormation integration in our documentation"
     }
   };
   google.protobuf.StringValue arn = 1;
@@ -28,14 +27,13 @@ message CloudFormationStack {
 message ARMStack {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ARMStack"
+      title: "ARM stack"
       description: "This data structure represents an Azure Resource Manager stack."
-      required: [
-      ]
+      required: []
     }
     external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      url: "https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/"
+      description: "Find out more about the Azure Resource Manager (ARM) integration in our documentation"
     }
   };
   google.protobuf.StringValue subscription_id = 1;
@@ -45,14 +43,9 @@ message ARMStack {
 message NoDeployment {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "NoDeployment"
+      title: "No deployment"
       description: "This data structure represents an integration that does not require deployment."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };}
 
@@ -66,14 +59,9 @@ enum ConnectionStatus {
 message IntegrationStatus {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationStatus"
+      title: "Integration status"
       description: "This data structure represents an integration status."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: ["connection_status"]
     }
   };
   reserved 2;
@@ -86,14 +74,9 @@ message IntegrationStatus {
 message IntegrationDoc {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationDoc"
-      description: "This data structure represents an integration documentation."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Integration doc"
+      description: "This data structure represents integration documentation."
+      required: []
     }
   };
   google.protobuf.StringValue name = 1;
@@ -103,27 +86,17 @@ message IntegrationDoc {
 message IntegrationType {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationType"
-      description: "This data structure represents an integration type"
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Integration type"
+      description: "This data structure represents an integration type."
+      required: []
     }
   };
   message Managed {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
         title: "Managed"
-        description: "this data structure represents a managed integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        description: "This data structure represents a managed integration."
+        required: ["variant"]
       }
     };
     enum Variant {
@@ -139,41 +112,26 @@ message IntegrationType {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
         title: "Untracked"
-        description: "This data structure represents an untracked integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        description: "This data structure represents an untracked integration."
+        required: []
       }
     }
   ;}
   message Cloudformation {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Cloudformation"
-        description: "This data structure represents a cloudformation integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "CloudFormation"
+        description: "This data structure represents a CloudFormation integration."
+        required: []
       }
     }
   ;}
   message AzureArm {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "AzureArm"
-        description: "This data structure represents an Azure ARM integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Azure ARM"
+        description: "This data structure represents an Azure ARM integration."
+        required: []
       }
     }
   ;}
@@ -183,42 +141,27 @@ message IntegrationType {
   message PushBasedContextualData {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "PushBasedContextualData"
-        description: "This data structure represents a push based contextual data integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Push based contextual data"
+        description: "This data structure represents a push based contextual data integration."
+        required: []
       }
     }
   ;}
   message ContextualData {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "ContextualData"
-        description: "This data structure represents a contextual data integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Contextual data"
+        description: "This data structure represents a contextual data integration."
+        required: []
       }
     }
   ;}
   message GenericWebhook {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "GenericWebhook"
-        description: "This data structure represents a generic webhook integration"
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Generic webhook"
+        description: "This data structure represents a generic webhook integration."
+        required: []
       }
     }
   ;}
@@ -239,12 +182,7 @@ message Integration {
     json_schema: {
       title: "Integration"
       description: "This data structure represents an integration"
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };
   google.protobuf.StringValue id = 1; // short_name in the integrations.integration_definitions
@@ -261,14 +199,8 @@ message Integration {
 message RevisionRef {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "RevisionRef"
-      description: "This data structure represents a revision reference."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Revision reference"
+      required: []
     }
   };
   string version = 1; //integration revision version
@@ -277,14 +209,8 @@ message RevisionRef {
 message LocalChangelog {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "LocalChangelog"
-      description: "This data structure represents a local changelog."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Local changelog"
+      required: []
     }
   };
   repeated RevisionRef changes = 1;
@@ -293,14 +219,8 @@ message LocalChangelog {
 message ExternalUrl {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ExternalUrl"
-      description: "This data structure represents an external URL."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "External URL"
+      required: []
     }
   };
   string url = 1;
@@ -309,14 +229,9 @@ message ExternalUrl {
 message IntegrationDetails {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationDetails"
+      title: "Integration details"
       description: "This data structure represents a set of integration details."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };
   reserved 2, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113;
@@ -325,27 +240,15 @@ message IntegrationDetails {
   message DefaultIntegrationDetails {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "DefaultIntegrationDetails"
-        description: "This data structure represents a set of default integration details."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Default integration details"
+        required: []
       }
     };
     message RegisteredInstance {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "RegisteredInstance"
-        description: "This data structure represents a registered instance."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Registered instance"
+        required: []
       }
     };
       reserved 5, 6;
@@ -381,14 +284,9 @@ message IntegrationDetails {
 message IntegrationDefinition {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationDefinition"
-      description: "This data structure represents an integration definition."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Integration definition"
+      description: "This data structure represents a definition of an integration."
+      required: []
     }
   };
   google.protobuf.StringValue key = 1; // short_name in the integrations.integration_definitions
@@ -400,27 +298,16 @@ message IntegrationDefinition {
 message IntegrationRevision {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationRevision"
+      title: "Integration revision"
       description: "This data structure represents an integration revision."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };
   message CloudFormationTemplate {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "CloudFormationTemplate"
-        description: "This data structure represents a cloud formation template."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "CloudFormation template"
+        required: []
       }
     };
     google.protobuf.StringValue template_url = 1;
@@ -431,28 +318,18 @@ message IntegrationRevision {
   message ManagedService {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "ManagedService"
+        title: "Managed service"
         description: "This data structure represents a managed service."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        required: []
       }
     };}
 
   message HelmChart {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "HelmChart"
+        title: "Helm chart"
         description: "This data structure represents a Helm chart."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        required: []
       }
     };
     optional google.protobuf.StringValue template = 1;
@@ -465,12 +342,7 @@ message IntegrationRevision {
       json_schema: {
         title: "Terraform"
         description: "This data structure represents a Terraform integration."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        required: []
       }
     };
     repeated ConfigurationBlock configuration_blocks = 1;
@@ -479,14 +351,9 @@ message IntegrationRevision {
   message Rum {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Rum"
+        title: "RUM"
         description: "This data structure represents a RUM integration."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        required: []
       }
     };
     repeated CommandInformation browser_sdk_commands = 1;
@@ -496,14 +363,9 @@ message IntegrationRevision {
   message AzureArmTemplate {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "AzureArmTemplate"
-        description: "This data structure represents an azure arm template."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Azure ARM template"
+        description: "This data structure represents an azure ARM template."
+        required: []
       }
     };
     google.protobuf.StringValue template_url = 1;
@@ -525,14 +387,8 @@ message IntegrationRevision {
   message ListTextValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "ListTextValue"
-        description: "This data structure represents a list text value."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "List text value"
+        required: []
       }
     };
     reserved 1, 3;
@@ -544,14 +400,8 @@ message IntegrationRevision {
   message SingleValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SingleValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Single value"
+        required: []
       }
     };
     optional google.protobuf.StringValue default_value = 1;
@@ -560,14 +410,8 @@ message IntegrationRevision {
   message SingleBooleanValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SingleBooleanValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Single boolean value"
+        required: []
       }
     };
     optional google.protobuf.BoolValue default_value = 1;
@@ -576,14 +420,8 @@ message IntegrationRevision {
   message SingleNumericValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SingleNumericValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Single numeric value"
+        required: []
       }
     };
     optional google.protobuf.DoubleValue default_value = 1;
@@ -592,14 +430,8 @@ message IntegrationRevision {
   message MultipleSelectionValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "MultipleSelectionValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Multiple selection value"
+        required: []
       }
     };
     repeated google.protobuf.StringValue options = 1;
@@ -608,14 +440,8 @@ message IntegrationRevision {
   message SelectionValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SelectionValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Selection value"
+        required: []
       }
     };
     repeated google.protobuf.StringValue options = 1;
@@ -625,14 +451,8 @@ message IntegrationRevision {
   message FieldCondition {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "FieldCondition"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Field condition"
+        required: ["type"]
       }
     };
     enum ConditionType {
@@ -643,14 +463,8 @@ message IntegrationRevision {
     message FieldValue {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "FieldValue"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Field value"        
+        required: []
       }
     };
       string field_name = 1;
@@ -664,14 +478,8 @@ message IntegrationRevision {
   message Group {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Group"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Group"        
+        required: []
       }
     };
     google.protobuf.StringValue id = 1;
@@ -681,14 +489,8 @@ message IntegrationRevision {
   message FieldInformation {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "FieldInformation"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Field information"
+        required: ["type"]
       }
     };
     oneof value {
@@ -719,14 +521,8 @@ message IntegrationRevision {
   message CommandInformation {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "CommandInformation"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Command information"
+        required: []
       }
     };
     enum Language {
@@ -737,14 +533,8 @@ message IntegrationRevision {
     message Link {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Link"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Link"        
+        required: []
       }
     };
       string key = 1;
@@ -762,14 +552,8 @@ message IntegrationRevision {
   message ConfigurationBlock {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "ConfigurationBlock"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Configuration block"
+        required: []
       }
     };
     google.protobuf.StringValue name = 1;
@@ -780,14 +564,8 @@ message IntegrationRevision {
   message IntegrationGuide  {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "IntegrationGuide "
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Integration guide"      
+        required: []
       }
     };
     google.protobuf.StringValue introduction = 1;
@@ -814,26 +592,14 @@ message Parameter {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Parameter"
-      description: "This data structure represents a list of outgoing webhook types."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };
   message StringList {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "StringList"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "String list"        
+        required: []
       }
     };
     repeated google.protobuf.StringValue values = 1;
@@ -842,14 +608,8 @@ message Parameter {
   message ApiKeyData {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "ApiKeyData"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "API key data"       
+        required: []
       }
     };
     google.protobuf.StringValue id = 1;
@@ -859,14 +619,8 @@ message Parameter {
   message SensitiveDataPlaceholder {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SensitiveDataPlaceholder"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Sensitive data placeholder"        
+        required: []
       }
     }
   ;}
@@ -885,14 +639,8 @@ message Parameter {
 message GenericIntegrationParameters {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "GenericIntegrationParameters"
-      description: "This data structure represents a list of outgoing webhook types."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Generic integration parameters"      
+      required: []
     }
   };
   repeated Parameter parameters = 1;
@@ -901,14 +649,9 @@ message GenericIntegrationParameters {
 message IntegrationMetadata {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IntegrationMetadata"
+      title: "Integration metadata"
       description: "This data structure represents the metadata of an integration."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      required: []
     }
   };
   reserved 1, 2, 3, 5, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 114;
@@ -925,41 +668,23 @@ message IntegrationMetadata {
 message TestIntegrationResult {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "TestIntegrationResult"
-      description: "This data structure represents a list of outgoing webhook types."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "Test integration result"     
+      required: []
     }
   };
   message Success {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Success"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Success"      
+        required: []
       }
     }
   ;}
   message Failure {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Failure"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Failure"        
+        required: []
       }
     };
     google.protobuf.StringValue error_message = 1;
@@ -974,27 +699,15 @@ message TestIntegrationResult {
 message RumVersionData {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "RumVersionData"
-      description: "This data structure represents a list of outgoing webhook types."
-      required: [
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
+      title: "RUM version data"     
+      required: []
     }
   };
   message SourceMapMetadata {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "SourceMapMetadata"
-        description: "This data structure represents a list of outgoing webhook types."
-        required: [
-        ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
+        title: "Source map metadata"        
+        required: []
       }
     };
     google.protobuf.Timestamp created_at = 1;
@@ -1003,14 +716,9 @@ message RumVersionData {
   message LogMetadata {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "LogMetadata"
-        description: "This data structure represents a list of outgoing webhook types."
+        title: "Log metadata"        
         required: [
         ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
       }
     };
     google.protobuf.Timestamp first_occurrence = 1;
@@ -1019,14 +727,9 @@ message RumVersionData {
   message Version {
      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
-        title: "Version"
-        description: "This data structure represents a list of outgoing webhook types."
+        title: "Version"        
         required: [
         ]
-      }
-      external_docs: {
-        url: "https://coralogix.com/integrations/"
-        description: "Find out more about integrations"
       }
     };
     google.protobuf.StringValue version = 1;
@@ -1041,14 +744,9 @@ message RumVersionData {
 message DeployedIntegrationInformation {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "DeployedIntegrationInformation"
-      description: "This data structure represents a list of outgoing webhook types."
+      title: "Deployed integration information"      
       required: [
       ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/integrations/"
-      description: "Find out more about integrations"
     }
   };
   google.protobuf.StringValue id = 1;

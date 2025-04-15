@@ -91,14 +91,11 @@ message ServiceSlo {
       title: "Service SLO"
       description: "This data structure represents a Service Level Objective (SLO) in Coralogix APM."
       required: [
-        "id", 
         "name", 
         "service_name", 
         "status", 
         "description", 
         "target_percentage", 
-        "created_at", 
-        "remaining_error_budget_percentage", 
         "sli_type", 
         "filters", 
         "period"
