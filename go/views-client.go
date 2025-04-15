@@ -73,6 +73,9 @@ type QuickTimeSelection = views.QuickTimeSelection
 // ViewTimeSelectionCustom is a type for managing view properties
 type ViewTimeSelectionCustom = views.TimeSelection_CustomSelection
 
+// CustomTimeSelection is a type for managing view properties
+type CustomTimeSelection = views.CustomTimeSelection
+
 // View is a type for managing view properties
 type View = vservices.View
 
