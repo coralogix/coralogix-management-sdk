@@ -19,6 +19,7 @@ import (
 
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	commonv1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
+	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1/routing"
 	connectors "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/connectors/v1"
 	notifications "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/notifications/v1"
 	presets "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/presets/v1"
@@ -174,6 +175,12 @@ type ConditionTypeMatchEntityTypeAndSubType = common.ConditionType_MatchEntityTy
 // MatchEntityTypeAndSubTypeCondition is a match entity type and subtype condition.
 type MatchEntityTypeAndSubTypeCondition = common.MatchEntityTypeAndSubTypeCondition
 
+// RoutingRule is a routing target.
+type RoutingRule = routing.RoutingRule
+
+// RoutingTarget is a routing target.
+type RoutingTarget = routing.RoutingTarget
+
 // PresetType is a preset type.
 type PresetType = presets.PresetType
 
@@ -184,13 +191,13 @@ const (
 	PresetTypeCustom      = presets.PresetType_CUSTOM
 )
 
-// EntityType is a type of entity.
-type EntityType = common.EntityType
+// NotificationsEntityType is a type of entity.
+type NotificationsEntityType = common.EntityType
 
-// EntityType values.
+// NotificationsEntityType values.
 const (
-	EntityTypeUnspecified = common.EntityType_ENTITY_TYPE_UNSPECIFIED
-	EntityTypeAlerts      = common.EntityType_ALERTS
+	NotificationsEntityTypeUnspecified = common.EntityType_ENTITY_TYPE_UNSPECIFIED
+	NotificationsEntityTypeAlerts      = common.EntityType_ALERTS
 )
 
 // CreateGlobalRouterRequest is a request to create a global router.
@@ -249,6 +256,9 @@ type MessageConfig = common.MessageConfig
 
 // MessageConfigField is a message configuration field.
 type MessageConfigField = commonv1.MessageConfigField
+
+// TemplatedConnectorConfigField is a templated message configuration field.
+type TemplatedConnectorConfigField = commonv1.TemplatedConnectorConfigField
 
 // TestConnectorConfigRequest is a request to test a connector configuration.
 type TestConnectorConfigRequest = notifications.TestConnectorConfigRequest
