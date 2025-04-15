@@ -35,7 +35,7 @@ jobs:
           protofetch --version
       - uses: de-vri-es/setup-git-credentials@v2
         with:
-          credentials: ${{secrets.GIT_CREDENTIALS}}
+          credentials: https://coralogix-concourse:${{ secrets.GH_TOKEN }}@github.com
       - name: Run protofetch tags updater
         run: |
           git config --global user.email "github@coralogix.com"
@@ -44,6 +44,6 @@ jobs:
           cargo run --bin protofetch_tags_updater  -- -r ../.. -o ${{ github.repository }} -s
         working-directory: tools/release-management
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_READER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           RUST_LOG: debug
