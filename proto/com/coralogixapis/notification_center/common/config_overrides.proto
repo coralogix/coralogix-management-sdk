@@ -11,7 +11,7 @@ message ConfigOverrides {
   reserved 4;
 
   ConditionType condition_type = 1;
-  string payload_type = 2;
+  optional string payload_type = 2;
   MessageConfig message_config = 3;
 }
 

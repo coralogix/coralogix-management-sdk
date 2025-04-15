@@ -36,11 +36,14 @@ message RoutingRule {
 }
 
 message RoutingTarget {
+  reserved 3;
+  reserved "config_overrides";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Routing Target"
       description: "Defines routing target for notifications"
-      required: ["connector_identifier"]
+      required: ["connector_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
@@ -52,10 +55,11 @@ message RoutingTarget {
   string deprecated_connector_id = 1 [deprecated = true];
   // Preset to use for rendering notification content, default preset is used if not provided
   optional string deprecated_preset_id = 2 [deprecated = true];
-  optional SourceOverrides config_overrides = 3 [deprecated = true];
   map<string, string> custom_details = 4;
-  ConnectorIdentifier connector_identifier = 5;
-  optional PresetIdentifier preset_identifier = 6;
+  ConnectorIdentifier connector_identifier = 5 [deprecated = true];
+  optional PresetIdentifier preset_identifier = 6 [deprecated = true];
+  string connector_id = 7;
+  optional string preset_id = 8;
 }
 
 message SourceOverrides {
