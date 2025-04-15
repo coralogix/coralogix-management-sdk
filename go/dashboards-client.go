@@ -1038,6 +1038,9 @@ type LineChartLogsQuery = dashboards.LineChart_LogsQuery
 // LineChartQueryDataprime is a type for data for charts.
 type LineChartQueryDataprime = dashboards.LineChart_Query_Dataprime
 
+// LineChartDataprimeQuery is the inner type for data for charts.
+type LineChartDataprimeQuery = dashboards.LineChart_DataprimeQuery
+
 // LineChartQueryMetrics is a type for data for charts.
 type LineChartQueryMetrics = dashboards.LineChart_Query_Metrics
 
