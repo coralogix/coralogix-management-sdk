@@ -109,6 +109,8 @@ type ClientSet struct {
 	integrations        *IntegrationsClient
 	notifications       *NotificationsClient
 	incidents           *IncidentsClient
+	views               *ViewsClient
+	viewFolders         *ViewFoldersClient
 }
 
 // RuleGroups gets a RuleGroupsClient from the ClientSet.
@@ -246,6 +248,16 @@ func (c *ClientSet) Incidents() *IncidentsClient {
 	return c.incidents
 }
 
+// Views gets a ViewsClient from the ClientSet.
+func (c *ClientSet) Views() *ViewsClient {
+	return c.views
+}
+
+// ViewFolders gets a ViewFoldersClient from the ClientSet.
+func (c *ClientSet) ViewFolders() *ViewFoldersClient {
+	return c.viewFolders
+}
+
 // NewClientSet Creates a new ClientSet.
 func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
@@ -273,6 +285,8 @@ func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 		saml:                NewSamlClient(apikeyCPC),
 		users:               NewUsersClient(apikeyCPC),
 		integrations:        NewIntegrationsClient(apikeyCPC),
+		views:               NewViewsClient(apikeyCPC),
+		viewFolders:         NewViewFoldersClient(apikeyCPC),
 		notifications:       NewNotificationsClient(apikeyCPC),
 	}
 }
