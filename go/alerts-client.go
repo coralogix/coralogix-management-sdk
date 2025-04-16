@@ -710,6 +710,10 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
+		if req.AlertDefProperties.EntityLabels == nil {
+			req.AlertDefProperties.EntityLabels = make(map[string]string)
+		}
+
 		for k, v := range a.defaultLabels {
 			req.AlertDefProperties.EntityLabels[k] = v
 		}
@@ -750,6 +754,10 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	defer conn.Close()
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
+		if req.AlertDefProperties.EntityLabels == nil {
+			req.AlertDefProperties.EntityLabels = make(map[string]string)
+		}
+
 		for k, v := range a.defaultLabels {
 			req.AlertDefProperties.EntityLabels[k] = v
 		}
