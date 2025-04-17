@@ -127,12 +127,6 @@ revision = "v0.0.2"
 commit_hash = "1d2350ed6d5354170c89ae38decbec8fb76ffa2f"
 
 [[dependencies]]
-name = "cx-api-tags"
-url = "github.com/coralogix/cx-api-tags"
-revision = "v0.0.7"
-commit_hash = "c95fd671aef052a3ce7c0f1ca46f7ecaf42c476b"
-
-[[dependencies]]
 name = "cx-api-views"
 url = "github.com/coralogix/cx-api-views"
 revision = "v1.6"

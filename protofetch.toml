@@ -269,15 +269,6 @@ allow_policies = [
     "com/coralogix/enrichment/v1/enrichment_type.proto",
 ]
 
-[cx-api-tags]
-url = 'github.com/coralogix/cx-api-tags'
-revision = 'v0.0.7'
-allow_policies = [
-    "src/com/coralogix/tags/v1/tag.proto",
-    "src/com/coralogix/tags/v1/tag_service.proto",
-    "src/com/coralogix/tags/v1/tag_type.proto",
-]
-
 [cx-api-organisations]
 url = 'github.com/coralogix/cx-api-organisations'
 allow_policies = [
