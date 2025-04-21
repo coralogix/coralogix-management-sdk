@@ -2,35 +2,43 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/alerts/v3/commons.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message AlertDefIncidentSettings {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Alert definition incident settings"
-      required: ["retriggering_period", "notify_on"]
-    }
+    json_schema: {title: "Alert definition incident settings"}
   };
   oneof retriggering_period {
-    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      example: "30"
+      description: "The time in minutes before the alert can be retriggered"
+    }];
   }
-  NotifyOn notify_on = 2;
+  NotifyOn notify_on = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The condition to notify about the alert"
+    example: "\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\""
+  }];
 }
 
 message AlertDefNotificationGroup {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Alert definition notification group"
-      required: ["group_by_keys", "webhooks", "destinations"]
-    }
+    json_schema: {title: "Alert definition notification group"}
   };
-  repeated google.protobuf.StringValue group_by_keys = 1;
-  repeated AlertDefWebhooksSettings webhooks = 2;
-  repeated NotificationDestination destinations = 3;
-  optional NotificationRouter router = 4;
+  repeated google.protobuf.StringValue group_by_keys = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The keys to group the alerts by"
+    example: "[\"key1\", \"key2\"]"
+    pattern: "^[a-zA-Z0-9_.]+$"
+    min_items: 0
+  }];
+  repeated AlertDefWebhooksSettings webhooks = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The settings for webhooks associated with the alert definition"
+    min_items: 0
+  }];
+  repeated NotificationDestination destinations = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The destinations for notifications.  (Notification Center feature)"}];
+  optional NotificationRouter router = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The router for notifications.  (Notification Center feature)"}];
 }
 
 message AlertDefWebhooksSettings {
@@ -38,14 +46,20 @@ message AlertDefWebhooksSettings {
     json_schema: {
       title: "Alert definition webhook settings"
       description: "Configuration for webhook notifications for an alert"
-      required: ["retriggering_period", "notify_on", "integration"]
+      required: ["integration"]
     }
   };
   oneof retriggering_period {
-    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+    google.protobuf.UInt32Value minutes = 100 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      example: "15"
+      description: "The time in minutes before the alert can be retriggered"
+    }];
   }
-   optional NotifyOn notify_on = 1;
-   IntegrationType integration = 2;
+  optional NotifyOn notify_on = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The condition under which the alert should be notified"
+    example: "\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\""
+  }];
+  IntegrationType integration = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The integration type for webhook notifications"}];
 }
 
 message IntegrationType {
@@ -57,8 +71,11 @@ message IntegrationType {
     }
   };
   oneof integration_type {
-    google.protobuf.UInt32Value integration_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "123" }];
-    Recipients recipients = 3;
+    google.protobuf.UInt32Value integration_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      example: "123"
+      description: "The integration ID for the notification"
+    }];
+    Recipients recipients = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The recipients for the notification."}];
   }
 }
 
@@ -70,5 +87,10 @@ message Recipients {
       required: ["emails"]
     }
   };
-  repeated google.protobuf.StringValue emails = 1;
+  repeated google.protobuf.StringValue emails = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The list of email recipients for alert notifications"
+    example: "[\"mail@gmail.com\"]"
+    format: "list of emails"
+    min_items: 1
+  }];
 }

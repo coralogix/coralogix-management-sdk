@@ -2,53 +2,75 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto";
-
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogsAnomalyType {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based anomaly alert type"
-            description: "Configuration for alerts triggered by anomalous log patterns"
-            required: ["logs_filter", "rules"]
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/"
-            description: "Learn more about logs anomaly alerts in our documentation"
-        }
-    };
-    LogsFilter logs_filter = 1;
-    repeated LogsAnomalyRule rules = 2;
-    repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
-    google.protobuf.Int32Value evaluation_delay_ms = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
-    AnomalyAlertSettings anomaly_alert_settings = 5;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based anomaly alert type"
+      description: "Configuration for alerts triggered by anomalous log patterns"
+      required: ["rules"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/"
+      description: "Learn more about logs anomaly alerts in our documentation"
+    }
+  };
+  LogsFilter logs_filter = 1;
+  repeated LogsAnomalyRule rules = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the log anomaly alert"
+    min_items: 1
+    max_items: 1
+  }];
+  repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The filter to specify which fields to include in the notification payload"
+    example: "[\"obj.field\"]"
+    pattern: "^[a-zA-Z0-9_.]+$"
+    min_items: 0
+  }];
+  google.protobuf.Int32Value evaluation_delay_ms = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "60000"
+    description: "The delay in milliseconds before evaluating the alert condition"
+    format: "milliseconds"
+  }];
+  AnomalyAlertSettings anomaly_alert_settings = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Anomaly alert settings configuration"}];
 }
 
 message LogsAnomalyRule {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based anomaly rule"
-            description: "Defines a rule for detecting log anomalies"
-            required: ["condition"]
-        }
-    };
-    LogsAnomalyCondition condition = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based anomaly rule"
+      description: "Defines a rule for detecting log anomalies"
+      required: ["condition"]
+    }
+  };
+  LogsAnomalyCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for the threshold alert"}];
 }
 
 message LogsAnomalyCondition {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based anomaly condition"
-            description: "Defines conditions for detecting log anomalies"
-            required: ["minimum_threshold", "time_window"]
-        }
-    };
-    google.protobuf.DoubleValue minimum_threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
-    LogsTimeWindow time_window = 2;
-    LogsAnomalyConditionType condition_type = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based anomaly condition"
+      description: "Defines conditions for detecting log anomalies"
+      required: [
+        "minimum_threshold",
+        "time_window",
+        "condition_type"
+      ]
+    }
+  };
+  google.protobuf.DoubleValue minimum_threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The threshold value for the alert condition"
+    example: "10.0"
+  }];
+  LogsTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time window for the alert condition"}];
+  LogsAnomalyConditionType condition_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The type of condition for the alert"
+    example: "\"LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\""
+  }];
 }

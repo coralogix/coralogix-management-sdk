@@ -3,12 +3,25 @@ syntax = "proto3";
 package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
-
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message MetricTimeWindow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Metric time window"
+      required: ["type"]
+    }
+  };
   oneof type {
-    MetricTimeWindowValue metric_time_window_specific_value = 1;
-    google.protobuf.StringValue metric_time_window_dynamic_duration = 2; // will accept a string like 1h30m that stands for 1 hour and 30 minutes
+    MetricTimeWindowValue metric_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "The time window as a specific value"
+      example: "METRIC_TIME_WINDOW_VALUE_MINUTES_5"
+    }];
+    google.protobuf.StringValue metric_time_window_dynamic_duration = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "The time window as a dynamic value"
+      example: "1h30m"
+      format: "duration"
+    }];
   }
 }
 

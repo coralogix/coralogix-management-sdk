@@ -21,3 +21,9 @@ enum ConnectorType {
   AWS = 4;
   IBM_EVENT_NOTIFICATIONS = 5;
 }
+
+enum EntityType {
+  ENTITY_TYPE_UNSPECIFIED = 0;
+  ALERTS = 1;
+  TEST_NOTIFICATIONS = 2;
+}

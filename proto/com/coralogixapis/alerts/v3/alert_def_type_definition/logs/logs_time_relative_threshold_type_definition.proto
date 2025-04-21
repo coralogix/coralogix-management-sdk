@@ -2,48 +2,84 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_compared_to.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative/logs_time_relative_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogsTimeRelativeThresholdType {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based time-relative threshold alert type"
-            description: "Configuration for alerts that are triggered when a fixed ratio reaches a set threshold compared to a past time frame."
-            required: ["logs_filter", "rules"]
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/time-relative-alerts/"
-            description: "Learn more about log-based, time-relative alerts in our documentation"
-        }
-    };
-    LogsFilter logs_filter = 1;
-    repeated LogsTimeRelativeRule rules = 2;
-    google.protobuf.BoolValue ignore_infinity = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
-    repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
-    UndetectedValuesManagement undetected_values_management = 5;
-    google.protobuf.Int32Value evaluation_delay_ms = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based time-relative threshold alert type"
+      description: "Configuration for alerts that are triggered when a fixed ratio reaches a set threshold compared to a past time frame."
+      required: ["rules"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/time-relative-alerts/"
+      description: "Learn more about log-based, time-relative alerts in our documentation"
+    }
+  };
+  LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The filter to match log entries for the alert."}];
+  repeated LogsTimeRelativeRule rules = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the time-relative alert"
+    min_items: 1
+    max_items: 5
+  }];
+  google.protobuf.BoolValue ignore_infinity = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "true"
+    description: "Ignore infinity values in the alert"
+  }];
+  repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "[\"obj.field\"]"
+    min_items: 0
+    pattern: "^[a-zA-Z0-9_.]+$"
+  }];
+  UndetectedValuesManagement undetected_values_management = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling the undetected values in the alert."}];
+  google.protobuf.Int32Value evaluation_delay_ms = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "60000"
+    description: "The delay in milliseconds before evaluating the alert condition"
+  }];
 }
 
 message LogsTimeRelativeRule {
-    LogsTimeRelativeCondition condition = 1;
-    AlertDefOverride override = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Time Relative Rule"
+      description: "LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts"
+      required: [
+        "condition",
+        "override"
+      ]
+    }
+  };
+  LogsTimeRelativeCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for the time-relative alert."}];
+  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The override settings for the alert."}];
 }
 
 message LogsTimeRelativeCondition {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based time-relative condition"
-            description: "Defines conditions for time-relative comparison alerts"
-            required: ["threshold", "compared_to"]
-        }
-    };
-    google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10.0" }];
-    LogsTimeRelativeComparedTo compared_to = 2;
-    LogsTimeRelativeConditionType condition_type  = 4;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based time-relative condition"
+      description: "Defines conditions for time-relative comparison alerts"
+      required: [
+        "threshold",
+        "compared_to",
+        "condition_type"
+      ]
+    }
+  };
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The threshold value for the alert condition."
+  }];
+  LogsTimeRelativeComparedTo compared_to = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The time frame to compare the current value against"
+    example: "\"LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY\""
+  }];
+  LogsTimeRelativeConditionType condition_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The type of condition for the alert"
+    example: "\"LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\""
+  }];
 }

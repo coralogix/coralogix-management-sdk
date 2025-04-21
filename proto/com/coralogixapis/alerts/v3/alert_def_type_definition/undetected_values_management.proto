@@ -3,29 +3,33 @@ syntax = "proto3";
 package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
-
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message UndetectedValuesManagement {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Undetected value management"
-            description: "Configuration for handling undetected values in alerts"
-            required: ["auto_retire_ratio"]
-        }
-    };
-    google.protobuf.BoolValue trigger_undetected_values = 1;
-    optional AutoRetireTimeframe auto_retire_timeframe = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Undetected value management"
+      description: "Configuration for handling undetected values in alerts"
+      required: ["auto_retire_ratio"]
+    }
+  };
+  google.protobuf.BoolValue trigger_undetected_values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Should trigger the alert when undetected values are detected"
+    example: "true"
+  }];
+  optional AutoRetireTimeframe auto_retire_timeframe = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The timeframe for auto-retiring the alert when undetected values are detected"
+    example: "AUTO_RETIRE_TIMEFRAME_HOURS_24"
+  }];
 }
 
-enum AutoRetireTimeframe  {
+enum AutoRetireTimeframe {
   AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED = 0;
   AUTO_RETIRE_TIMEFRAME_MINUTES_5 = 1;
   AUTO_RETIRE_TIMEFRAME_MINUTES_10 = 2;
   AUTO_RETIRE_TIMEFRAME_HOUR_1 = 3;
   AUTO_RETIRE_TIMEFRAME_HOURS_2 = 4;
   AUTO_RETIRE_TIMEFRAME_HOURS_6 = 5;
-  AUTO_RETIRE_TIMEFRAME_HOURS_12 =6;
+  AUTO_RETIRE_TIMEFRAME_HOURS_12 = 6;
   AUTO_RETIRE_TIMEFRAME_HOURS_24 = 7;
 }
-
