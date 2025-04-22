@@ -5,19 +5,12 @@ import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 package com.coralogixapis.notification_center.entities.v1;
-import "com/coralogixapis/notification_center/common/common.proto";
 
 // Public API to query information on registered entities in the Notification Center
 service EntitiesService {
   rpc ListEntityTypes(ListEntityTypesRequest) returns (ListEntityTypesResponse) {
     option (google.api.http) = {
       get: "/v1/notification-center/entities:listEntityTypes"
-    };
-  }
-
-  rpc ListEntitySubTypes(ListEntitySubTypesRequest) returns (ListEntitySubTypesResponse) {
-    option (google.api.http) = {
-      get: "/v1/notification-center/entities:listEntitySubTypes"
     };
   }
 }
@@ -37,26 +30,5 @@ message ListEntityTypesRequest {
 }
 
 message ListEntityTypesResponse {
-  repeated string deprecated_entity_types = 1 [deprecated = true];
-  repeated EntityType entity_types = 2;
-}
-
-message ListEntitySubTypesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "List Entity Sub Types"
-      description: "Request to list entity subtypes by entity type supported by Notification Center"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-      description: "Find out more about notification center"
-    }
-  };
-
-  EntityType entity_type = 1;
-}
-
-message ListEntitySubTypesResponse {
-  repeated string entity_sub_types = 2;
+  repeated string entity_types = 1;
 }
