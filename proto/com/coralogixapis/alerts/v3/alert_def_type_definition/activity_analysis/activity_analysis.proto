@@ -9,10 +9,13 @@ message ActivityAnalysis {
     json_schema: {
       title: "Activity analysis data structure"
       description: "Configuration for alert activity analysis, containing rules and status."
-      required: ["rules", "status"]
+      required: [
+        "rules",
+        "status"
+      ]
     }
   };
-  repeated string rules = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"rule1\", \"rule2\"]" }];
+  repeated string rules = 1;
   ActivityAnalysisStatus status = 2;
 }
 

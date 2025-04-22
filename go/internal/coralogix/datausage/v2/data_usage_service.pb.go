@@ -337,14 +337,16 @@ func (x *ScopesFilter) GetSubsystem() []string {
 }
 
 type SpansCount struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	Timestamp           *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
-	SuccessSpanCount    *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=success_span_count,json=successSpanCount,proto3" json:"success_span_count,omitempty"`
-	ErrorSpanCount      *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=error_span_count,json=errorSpanCount,proto3" json:"error_span_count,omitempty"`
-	LowSuccessSpanCount *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=low_success_span_count,json=lowSuccessSpanCount,proto3" json:"low_success_span_count,omitempty"`
-	LowErrorSpanCount   *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=low_error_span_count,json=lowErrorSpanCount,proto3" json:"low_error_span_count,omitempty"`
-	unknownFields       protoimpl.UnknownFields
-	sizeCache           protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Timestamp              *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=timestamp,proto3" json:"timestamp,omitempty"`
+	SuccessSpanCount       *wrapperspb.Int64Value `protobuf:"bytes,2,opt,name=success_span_count,json=successSpanCount,proto3" json:"success_span_count,omitempty"`
+	ErrorSpanCount         *wrapperspb.Int64Value `protobuf:"bytes,3,opt,name=error_span_count,json=errorSpanCount,proto3" json:"error_span_count,omitempty"`
+	LowSuccessSpanCount    *wrapperspb.Int64Value `protobuf:"bytes,4,opt,name=low_success_span_count,json=lowSuccessSpanCount,proto3" json:"low_success_span_count,omitempty"`
+	LowErrorSpanCount      *wrapperspb.Int64Value `protobuf:"bytes,5,opt,name=low_error_span_count,json=lowErrorSpanCount,proto3" json:"low_error_span_count,omitempty"`
+	MediumSuccessSpanCount *wrapperspb.Int64Value `protobuf:"bytes,6,opt,name=medium_success_span_count,json=mediumSuccessSpanCount,proto3" json:"medium_success_span_count,omitempty"`
+	MediumErrorSpanCount   *wrapperspb.Int64Value `protobuf:"bytes,7,opt,name=medium_error_span_count,json=mediumErrorSpanCount,proto3" json:"medium_error_span_count,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *SpansCount) Reset() {
@@ -408,6 +410,20 @@ func (x *SpansCount) GetLowSuccessSpanCount() *wrapperspb.Int64Value {
 func (x *SpansCount) GetLowErrorSpanCount() *wrapperspb.Int64Value {
 	if x != nil {
 		return x.LowErrorSpanCount
+	}
+	return nil
+}
+
+func (x *SpansCount) GetMediumSuccessSpanCount() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MediumSuccessSpanCount
+	}
+	return nil
+}
+
+func (x *SpansCount) GetMediumErrorSpanCount() *wrapperspb.Int64Value {
+	if x != nil {
+		return x.MediumErrorSpanCount
 	}
 	return nil
 }
@@ -1413,14 +1429,16 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\vapplication\x18\x01 \x03(\tB\x13\x92A\x10J\x0e\"application1\"R\vapplication\x12/\n" +
 	"\tsubsystem\x18\x02 \x03(\tB\x11\x92A\x0eJ\f\"subsystem1\"R\tsubsystem:\xc8\x01\x92A\xc4\x01\n" +
 	"D*\rScopes Filter23This data structure represents a filter for scopes.*|\n" +
-	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xfc\x04\n" +
+	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xbb\x06\n" +
 	"\n" +
 	"SpansCount\x12U\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\ttimestamp\x12S\n" +
 	"\x12success_span_count\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x92A\x05J\x03100R\x10successSpanCount\x12N\n" +
 	"\x10error_span_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0210R\x0eerrorSpanCount\x12Y\n" +
 	"\x16low_success_span_count\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0250R\x13lowSuccessSpanCount\x12T\n" +
-	"\x14low_error_span_count\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\x92A\x03J\x015R\x11lowErrorSpanCount:\xc0\x01\x92A\xbc\x01\n" +
+	"\x14low_error_span_count\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\x92A\x03J\x015R\x11lowErrorSpanCount\x12`\n" +
+	"\x19medium_success_span_count\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x92A\x05J\x03200R\x16mediumSuccessSpanCount\x12[\n" +
+	"\x17medium_error_span_count\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0220R\x14mediumErrorSpanCount:\xc0\x01\x92A\xbc\x01\n" +
 	"<*\vSpans Count2-This data structure represents a spans count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xb5\x02\n" +
 	"\x15GetSpansCountResponse\x12G\n" +
@@ -1594,53 +1612,55 @@ var file_com_coralogix_datausage_v2_data_usage_service_proto_depIdxs = []int32{
 	28, // 12: com.coralogix.datausage.v2.SpansCount.error_span_count:type_name -> google.protobuf.Int64Value
 	28, // 13: com.coralogix.datausage.v2.SpansCount.low_success_span_count:type_name -> google.protobuf.Int64Value
 	28, // 14: com.coralogix.datausage.v2.SpansCount.low_error_span_count:type_name -> google.protobuf.Int64Value
-	5,  // 15: com.coralogix.datausage.v2.GetSpansCountResponse.spans_count:type_name -> com.coralogix.datausage.v2.SpansCount
-	23, // 16: com.coralogix.datausage.v2.GetLogsCountRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
-	24, // 17: com.coralogix.datausage.v2.GetLogsCountRequest.resolution:type_name -> google.protobuf.Duration
-	4,  // 18: com.coralogix.datausage.v2.GetLogsCountRequest.filters:type_name -> com.coralogix.datausage.v2.ScopesFilter
-	25, // 19: com.coralogix.datausage.v2.LogsCount.timestamp:type_name -> google.protobuf.Timestamp
-	29, // 20: com.coralogix.datausage.v2.LogsCount.severity:type_name -> com.coralogix.datausage.v2.Severity
-	30, // 21: com.coralogix.datausage.v2.LogsCount.priority:type_name -> com.coralogix.datausage.v2.Priority
-	8,  // 22: com.coralogix.datausage.v2.GetLogsCountResponse.logs_count:type_name -> com.coralogix.datausage.v2.LogsCount
-	23, // 23: com.coralogix.datausage.v2.GetDataUsageRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
-	24, // 24: com.coralogix.datausage.v2.GetDataUsageRequest.resolution:type_name -> google.protobuf.Duration
-	0,  // 25: com.coralogix.datausage.v2.GetDataUsageRequest.aggregate:type_name -> com.coralogix.datausage.v2.AggregateBy
-	27, // 26: com.coralogix.datausage.v2.GetDataUsageRequest.dimension_filters:type_name -> com.coralogix.datausage.v2.Dimension
-	25, // 27: com.coralogix.datausage.v2.DataUsageEntry.timestamp:type_name -> google.protobuf.Timestamp
-	27, // 28: com.coralogix.datausage.v2.DataUsageEntry.dimensions:type_name -> com.coralogix.datausage.v2.Dimension
-	15, // 29: com.coralogix.datausage.v2.GetDataUsageResponse.entries:type_name -> com.coralogix.datausage.v2.DataUsageEntry
-	31, // 30: com.coralogix.datausage.v2.GetDailyUsageUnitsRequest.range:type_name -> com.coralogix.datausage.v2.Range
-	23, // 31: com.coralogix.datausage.v2.GetDailyUsageUnitsRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
-	32, // 32: com.coralogix.datausage.v2.GetDailyUsageUnitsResponse.units:type_name -> com.coralogix.datausage.v2.DetailedDailyUnits
-	31, // 33: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest.range:type_name -> com.coralogix.datausage.v2.Range
-	23, // 34: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
-	33, // 35: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse.gbs:type_name -> com.coralogix.datausage.v2.DetailedDailyProcessedGbs
-	31, // 36: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest.range:type_name -> com.coralogix.datausage.v2.Range
-	23, // 37: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
-	34, // 38: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse.tokens:type_name -> com.coralogix.datausage.v2.DetailedDailyEvaluationTokens
-	1,  // 39: com.coralogix.datausage.v2.DataUsageService.GetTeamDetailedDataUsage:input_type -> com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest
-	3,  // 40: com.coralogix.datausage.v2.DataUsageService.GetSpansCount:input_type -> com.coralogix.datausage.v2.GetSpansCountRequest
-	7,  // 41: com.coralogix.datausage.v2.DataUsageService.GetLogsCount:input_type -> com.coralogix.datausage.v2.GetLogsCountRequest
-	10, // 42: com.coralogix.datausage.v2.DataUsageService.GetDataUsageMetricsExportStatus:input_type -> com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest
-	12, // 43: com.coralogix.datausage.v2.DataUsageService.UpdateDataUsageMetricsExportStatus:input_type -> com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest
-	14, // 44: com.coralogix.datausage.v2.DataUsageService.GetDataUsage:input_type -> com.coralogix.datausage.v2.GetDataUsageRequest
-	17, // 45: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageUnits:input_type -> com.coralogix.datausage.v2.GetDailyUsageUnitsRequest
-	19, // 46: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageProcessedGbs:input_type -> com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest
-	21, // 47: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageEvaluationTokens:input_type -> com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest
-	2,  // 48: com.coralogix.datausage.v2.DataUsageService.GetTeamDetailedDataUsage:output_type -> com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse
-	6,  // 49: com.coralogix.datausage.v2.DataUsageService.GetSpansCount:output_type -> com.coralogix.datausage.v2.GetSpansCountResponse
-	9,  // 50: com.coralogix.datausage.v2.DataUsageService.GetLogsCount:output_type -> com.coralogix.datausage.v2.GetLogsCountResponse
-	11, // 51: com.coralogix.datausage.v2.DataUsageService.GetDataUsageMetricsExportStatus:output_type -> com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse
-	13, // 52: com.coralogix.datausage.v2.DataUsageService.UpdateDataUsageMetricsExportStatus:output_type -> com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse
-	16, // 53: com.coralogix.datausage.v2.DataUsageService.GetDataUsage:output_type -> com.coralogix.datausage.v2.GetDataUsageResponse
-	18, // 54: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageUnits:output_type -> com.coralogix.datausage.v2.GetDailyUsageUnitsResponse
-	20, // 55: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageProcessedGbs:output_type -> com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse
-	22, // 56: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageEvaluationTokens:output_type -> com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse
-	48, // [48:57] is the sub-list for method output_type
-	39, // [39:48] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	28, // 15: com.coralogix.datausage.v2.SpansCount.medium_success_span_count:type_name -> google.protobuf.Int64Value
+	28, // 16: com.coralogix.datausage.v2.SpansCount.medium_error_span_count:type_name -> google.protobuf.Int64Value
+	5,  // 17: com.coralogix.datausage.v2.GetSpansCountResponse.spans_count:type_name -> com.coralogix.datausage.v2.SpansCount
+	23, // 18: com.coralogix.datausage.v2.GetLogsCountRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
+	24, // 19: com.coralogix.datausage.v2.GetLogsCountRequest.resolution:type_name -> google.protobuf.Duration
+	4,  // 20: com.coralogix.datausage.v2.GetLogsCountRequest.filters:type_name -> com.coralogix.datausage.v2.ScopesFilter
+	25, // 21: com.coralogix.datausage.v2.LogsCount.timestamp:type_name -> google.protobuf.Timestamp
+	29, // 22: com.coralogix.datausage.v2.LogsCount.severity:type_name -> com.coralogix.datausage.v2.Severity
+	30, // 23: com.coralogix.datausage.v2.LogsCount.priority:type_name -> com.coralogix.datausage.v2.Priority
+	8,  // 24: com.coralogix.datausage.v2.GetLogsCountResponse.logs_count:type_name -> com.coralogix.datausage.v2.LogsCount
+	23, // 25: com.coralogix.datausage.v2.GetDataUsageRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
+	24, // 26: com.coralogix.datausage.v2.GetDataUsageRequest.resolution:type_name -> google.protobuf.Duration
+	0,  // 27: com.coralogix.datausage.v2.GetDataUsageRequest.aggregate:type_name -> com.coralogix.datausage.v2.AggregateBy
+	27, // 28: com.coralogix.datausage.v2.GetDataUsageRequest.dimension_filters:type_name -> com.coralogix.datausage.v2.Dimension
+	25, // 29: com.coralogix.datausage.v2.DataUsageEntry.timestamp:type_name -> google.protobuf.Timestamp
+	27, // 30: com.coralogix.datausage.v2.DataUsageEntry.dimensions:type_name -> com.coralogix.datausage.v2.Dimension
+	15, // 31: com.coralogix.datausage.v2.GetDataUsageResponse.entries:type_name -> com.coralogix.datausage.v2.DataUsageEntry
+	31, // 32: com.coralogix.datausage.v2.GetDailyUsageUnitsRequest.range:type_name -> com.coralogix.datausage.v2.Range
+	23, // 33: com.coralogix.datausage.v2.GetDailyUsageUnitsRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
+	32, // 34: com.coralogix.datausage.v2.GetDailyUsageUnitsResponse.units:type_name -> com.coralogix.datausage.v2.DetailedDailyUnits
+	31, // 35: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest.range:type_name -> com.coralogix.datausage.v2.Range
+	23, // 36: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
+	33, // 37: com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse.gbs:type_name -> com.coralogix.datausage.v2.DetailedDailyProcessedGbs
+	31, // 38: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest.range:type_name -> com.coralogix.datausage.v2.Range
+	23, // 39: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest.date_range:type_name -> com.coralogix.datausage.v2.DateRange
+	34, // 40: com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse.tokens:type_name -> com.coralogix.datausage.v2.DetailedDailyEvaluationTokens
+	1,  // 41: com.coralogix.datausage.v2.DataUsageService.GetTeamDetailedDataUsage:input_type -> com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest
+	3,  // 42: com.coralogix.datausage.v2.DataUsageService.GetSpansCount:input_type -> com.coralogix.datausage.v2.GetSpansCountRequest
+	7,  // 43: com.coralogix.datausage.v2.DataUsageService.GetLogsCount:input_type -> com.coralogix.datausage.v2.GetLogsCountRequest
+	10, // 44: com.coralogix.datausage.v2.DataUsageService.GetDataUsageMetricsExportStatus:input_type -> com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest
+	12, // 45: com.coralogix.datausage.v2.DataUsageService.UpdateDataUsageMetricsExportStatus:input_type -> com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest
+	14, // 46: com.coralogix.datausage.v2.DataUsageService.GetDataUsage:input_type -> com.coralogix.datausage.v2.GetDataUsageRequest
+	17, // 47: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageUnits:input_type -> com.coralogix.datausage.v2.GetDailyUsageUnitsRequest
+	19, // 48: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageProcessedGbs:input_type -> com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest
+	21, // 49: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageEvaluationTokens:input_type -> com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest
+	2,  // 50: com.coralogix.datausage.v2.DataUsageService.GetTeamDetailedDataUsage:output_type -> com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse
+	6,  // 51: com.coralogix.datausage.v2.DataUsageService.GetSpansCount:output_type -> com.coralogix.datausage.v2.GetSpansCountResponse
+	9,  // 52: com.coralogix.datausage.v2.DataUsageService.GetLogsCount:output_type -> com.coralogix.datausage.v2.GetLogsCountResponse
+	11, // 53: com.coralogix.datausage.v2.DataUsageService.GetDataUsageMetricsExportStatus:output_type -> com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse
+	13, // 54: com.coralogix.datausage.v2.DataUsageService.UpdateDataUsageMetricsExportStatus:output_type -> com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse
+	16, // 55: com.coralogix.datausage.v2.DataUsageService.GetDataUsage:output_type -> com.coralogix.datausage.v2.GetDataUsageResponse
+	18, // 56: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageUnits:output_type -> com.coralogix.datausage.v2.GetDailyUsageUnitsResponse
+	20, // 57: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageProcessedGbs:output_type -> com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse
+	22, // 58: com.coralogix.datausage.v2.DataUsageService.GetDailyUsageEvaluationTokens:output_type -> com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse
+	50, // [50:59] is the sub-list for method output_type
+	41, // [41:50] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_datausage_v2_data_usage_service_proto_init() }

@@ -3,8 +3,8 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.17"
-commit_hash = "465beec1e9c5e17a52dad80d0b16d48c0d797b66"
+revision = "v0.5.18"
+commit_hash = "daf8c66b32eda019a415ce7e8a9da24acb0527fe"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -27,8 +27,8 @@ commit_hash = "e189d81b3f55aa3368072f9eb0fd8af46288d1e4"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.102"
-commit_hash = "42115749c39553052dd833094e34b48c5d95a0de"
+revision = "v0.0.107"
+commit_hash = "3f3262083d57e5fb650a230e599d2e9a26fb22cf"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -45,14 +45,14 @@ commit_hash = "33963d621b208fc0d944467c657b6a7acaf2380e"
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.1.23"
-commit_hash = "a684ce743790233f4bd574d719afd0427dcabe67"
+revision = "v0.1.25"
+commit_hash = "dec855c82629e420d1baa52e077c212db16ce75e"
 
 [[dependencies]]
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
-revision = "v0.5.9"
-commit_hash = "5e11455489a5b1f7d994bb9f093ce975bed8402b"
+revision = "v0.6.0"
+commit_hash = "26a19d7b0f6c51545fdc47110a26e142803abf31"
 
 [[dependencies]]
 name = "cx-api-events"
@@ -105,8 +105,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.104"
-commit_hash = "864ea64ac68ef43ffb0b3caac91991ba35137655"
+revision = "v0.1.105"
+commit_hash = "e6346af177b353db2d8ab4e440ecd0b4ba359573"
 
 [[dependencies]]
 name = "cx-api-quota"

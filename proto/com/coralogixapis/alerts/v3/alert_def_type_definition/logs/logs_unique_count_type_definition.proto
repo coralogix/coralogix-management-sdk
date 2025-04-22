@@ -2,42 +2,73 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogsUniqueCountType {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Log-based unique count alert type"
-            description: "Configuration for alerts based on unique value counts in logs"
-            required: ["logs_filter", "rules", "unique_count_keypath"]
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/"
-            description: "Learn more about log-based, unique count alerts in our documentation"
-        }
-    };
-    LogsFilter logs_filter = 1;
-    repeated LogsUniqueCountRule rules = 2;
-    repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
-    google.protobuf.Int64Value max_unique_count_per_group_by_key = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
-    google.protobuf.StringValue unique_count_keypath = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"unique_count\"" }];
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based unique count alert type"
+      description: "Configuration for alerts based on unique value counts in logs"
+      required: [
+        "rules",
+        "unique_count_keypath"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/"
+      description: "Learn more about log-based, unique count alerts in our documentation"
+    }
+  };
+  LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The filter to match log entries for the alert."}];
+  repeated LogsUniqueCountRule rules = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the log unique count alert"
+    min_items: 1
+    max_items: 1
+  }];
+  repeated google.protobuf.StringValue notification_payload_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The filter to specify which fields to include in the notification payload"
+    example: "[\"obj.field\"]"
+    pattern: "^[a-zA-Z0-9_.]+$"
+    min_items: 0
+  }];
+  google.protobuf.Int64Value max_unique_count_per_group_by_key = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "100"
+    description: "The maximum unique count per group by key"
+  }];
+  google.protobuf.StringValue unique_count_keypath = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The keypath in the logs to be used for unique count"
+    example: "\"obj.field\""
+  }];
 }
 
 message LogsUniqueCountRule {
-    LogsUniqueCountCondition condition = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based unique count rule"
+      description: "Defines the rule for detecting unique counts in logs"
+      required: ["condition"]
+    }
+  };
+  LogsUniqueCountCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for detecting unique counts in logs."}];
 }
 
 message LogsUniqueCountCondition {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Logs unique count condition"
-            description: "Defines conditions for unique count alerts"
-            required: ["max_unique_count", "time_window"]
-        }
-    };
-    google.protobuf.Int64Value max_unique_count = 2;
-    LogsUniqueValueTimeWindow time_window = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs unique count condition"
+      description: "Defines conditions for unique count alerts"
+      required: [
+        "max_unique_count",
+        "time_window"
+      ]
+    }
+  };
+  google.protobuf.Int64Value max_unique_count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The maximum unique count"
+    example: "100"
+  }];
+  LogsUniqueValueTimeWindow time_window = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time window for the unique count alert."}];
 }

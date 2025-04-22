@@ -255,32 +255,32 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_ratio_t
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_ratio_threshold_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1a\\com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x1a^com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_group_by_for.proto\x1a`com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_condition_type.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa1\t\n" +
-	"\x16LogsRatioThresholdType\x12E\n" +
-	"\tnumerator\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterR\tnumerator\x12]\n" +
-	"\x0fnumerator_alias\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x16\x92A\x13J\x11\"numerator_alias\"R\x0enumeratorAlias\x12I\n" +
-	"\vdenominator\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterR\vdenominator\x12I\n" +
-	"\x11denominator_alias\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\x10denominatorAlias\x12A\n" +
-	"\x05rules\x18\x05 \x03(\v2+.com.coralogixapis.alerts.v3.LogsRatioRulesR\x05rules\x12i\n" +
-	"\x1bnotification_payload_filter\x18\x06 \x03(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"text\"R\x19notificationPayloadFilter\x12R\n" +
-	"\fgroup_by_for\x18\a \x01(\x0e20.com.coralogixapis.alerts.v3.LogsRatioGroupByForR\n" +
-	"groupByFor\x12y\n" +
-	"\x1cundetected_values_management\x18\b \x01(\v27.com.coralogixapis.alerts.v3.UndetectedValuesManagementR\x1aundetectedValuesManagement\x12N\n" +
-	"\x0fignore_infinity\x18\t \x01(\v2\x1a.google.protobuf.BoolValueB\t\x92A\x06J\x04trueR\x0eignoreInfinity\x12W\n" +
+	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1a`com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_condition_type.proto\x1a^com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_group_by_for.proto\x1a\\com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc4\x0e\n" +
+	"\x16LogsRatioThresholdType\x12\x8a\x01\n" +
+	"\tnumerator\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterBC\x92A@2>The filter to match log entries for the numerator of the ratioR\tnumerator\x12\x9c\x01\n" +
+	"\x0fnumerator_alias\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBU\x92AR2=The alias for the numerator filter, used for display purposesJ\x11\"numerator_alias\"R\x0enumeratorAlias\x12\x90\x01\n" +
+	"\vdenominator\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterBE\x92AB2@The filter to match log entries for the denominator of the ratioR\vdenominator\x12\xa4\x01\n" +
+	"\x11denominator_alias\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBY\x92AV2?The alias for the denominator filter, used for display purposesJ\x13\"denominator_alias\"R\x10denominatorAlias\x12k\n" +
+	"\x05rules\x18\x05 \x03(\v2+.com.coralogixapis.alerts.v3.LogsRatioRulesB(\x92A%2\x1dThe rules for the ratio alert\xa0\x01\x05\xa8\x01\x01R\x05rules\x12\x83\x01\n" +
+	"\x1bnotification_payload_filter\x18\x06 \x03(\v2\x1c.google.protobuf.StringValueB%\x92A\"J\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\xc0\x01\n" +
+	"\fgroup_by_for\x18\a \x01(\x0e20.com.coralogixapis.alerts.v3.LogsRatioGroupByForBl\x92Ai2?The group by settings for the numerator and denominator filtersJ&LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLYR\n" +
+	"groupByFor\x12\xbd\x01\n" +
+	"\x1cundetected_values_management\x18\b \x01(\v27.com.coralogixapis.alerts.v3.UndetectedValuesManagementBB\x92A?2=Configuration for handling the undetected values in the alertR\x1aundetectedValuesManagement\x12\x8b\x01\n" +
+	"\x0fignore_infinity\x18\t \x01(\v2\x1a.google.protobuf.BoolValueBF\x92AC2;The configuration for ignoring infinity values in the ratioJ\x04trueR\x0eignoreInfinity\x12\x98\x01\n" +
 	"\x13evaluation_delay_ms\x18\n" +
-	" \x01(\v2\x1b.google.protobuf.Int32ValueB\n" +
-	"\x92A\aJ\x0560000R\x11evaluationDelayMs:\xa4\x02\x92A\xa0\x02\n" +
+	" \x01(\v2\x1b.google.protobuf.Int32ValueBK\x92AH2?The delay in milliseconds before evaluating the alert conditionJ\x0560000R\x11evaluationDelayMs:\xa4\x02\x92A\xa0\x02\n" +
 	"\x8d\x01*$Log-based ratio threshold alert type2CConfiguration for alerts based on the ratio between two log queries\xd2\x01\tnumerator\xd2\x01\vdenominator\xd2\x01\x05rules*\x8d\x01\n" +
-	"7Learn more about logs ratio alerts in our documentation\x12Rhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/\"\xaa\x01\n" +
-	"\x0eLogsRatioRules\x12M\n" +
-	"\tcondition\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.LogsRatioConditionR\tcondition\x12I\n" +
-	"\boverride\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.AlertDefOverrideR\boverride\"\x8f\x03\n" +
-	"\x12LogsRatioCondition\x12E\n" +
-	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB\t\x92A\x06J\x0410.0R\tthreshold\x12Z\n" +
-	"\vtime_window\x18\x02 \x01(\v20.com.coralogixapis.alerts.v3.LogsRatioTimeWindowB\a\x92A\x04J\x0210R\n" +
-	"timeWindow\x12o\n" +
-	"\x0econdition_type\x18\x04 \x01(\x0e23.com.coralogixapis.alerts.v3.LogsRatioConditionTypeB\x13\x92A\x10J\x0e\"GREATER_THAN\"R\rconditionType:e\x92Ab\n" +
-	"`*\x19Log-based ratio condition2)Defines conditions for ratio-based alerts\xd2\x01\tthreshold\xd2\x01\vtime_windowb\x06proto3"
+	"7Learn more about logs ratio alerts in our documentation\x12Rhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/\"\xdf\x02\n" +
+	"\x0eLogsRatioRules\x12u\n" +
+	"\tcondition\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.LogsRatioConditionB&\x92A#2!The condition for the ratio alertR\tcondition\x12s\n" +
+	"\boverride\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.AlertDefOverrideB(\x92A%2#The override settings for the alertR\boverride:a\x92A^\n" +
+	"\\*\x15Log-based ratio rules2,Defines the rules for log-based ratio alerts\xd2\x01\tcondition\xd2\x01\boverride\"\xd4\x04\n" +
+	"\x12LogsRatioCondition\x12\x82\x01\n" +
+	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueBF\x92AC2+The threshold value for the alert conditionJ\x0410.0\x8a\x01\r^\\d+(\\.\\d+)?$R\tthreshold\x12\x83\x01\n" +
+	"\vtime_window\x18\x02 \x01(\v20.com.coralogixapis.alerts.v3.LogsRatioTimeWindowB0\x92A-2'The time window for the alert conditionJ\x0210R\n" +
+	"timeWindow\x12\xba\x01\n" +
+	"\x0econdition_type\x18\x04 \x01(\x0e23.com.coralogixapis.alerts.v3.LogsRatioConditionTypeB^\x92A[2#The type of condition for the alertJ4\"LOGS_RATIO_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:v\x92As\n" +
+	"q*\x19Log-based ratio condition2)Defines conditions for ratio-based alerts\xd2\x01\tthreshold\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_ratio_threshold_type_definition_proto_rawDescOnce sync.Once
@@ -341,11 +341,11 @@ func file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_ratio_
 		return
 	}
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_filter_proto_init()
-	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_timewindow_proto_init()
-	file_com_coralogixapis_alerts_v3_alert_def_type_definition_undetected_values_management_proto_init()
-	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_group_by_for_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_condition_type_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_group_by_for_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_timewindow_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_overrides_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_type_definition_undetected_values_management_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

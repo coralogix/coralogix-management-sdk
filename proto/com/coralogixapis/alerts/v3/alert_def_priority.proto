@@ -1,8 +1,10 @@
 syntax = "proto3";
-import "google/protobuf/descriptor.proto";
-import "google/protobuf/wrappers.proto";
 
 package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 enum AlertDefPriority {
   ALERT_DEF_PRIORITY_P5_OR_UNSPECIFIED = 0;
@@ -13,6 +15,19 @@ enum AlertDefPriority {
 }
 
 message Priority {
-  AlertDefPriority value   = 1;
-  google.protobuf.StringValue name   = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Alert definition priority"
+      description: "Defines the priority of an alert definition"
+      required: [
+        "value",
+        "name"
+      ]
+    }
+  };
+  AlertDefPriority value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The priority of the alert definition"
+    example: "ALERT_DEF_PRIORITY_P3"
+  }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "String representation of the priority"}];
 }

@@ -13,7 +13,10 @@ message LogsNewValueTimeWindow {
     }
   };
   oneof type {
-    LogsNewValueTimeWindowValue logs_new_value_time_window_specific_value = 1;
+    LogsNewValueTimeWindowValue logs_new_value_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "A time window defined by a specific value"
+      example: "\"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\""
+    }];
   }
 }
 

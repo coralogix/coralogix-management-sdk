@@ -199,21 +199,22 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_unique_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_unique_count_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"bcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1ajcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa3\x06\n" +
-	"\x13LogsUniqueCountType\x12H\n" +
-	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterR\n" +
-	"logsFilter\x12F\n" +
-	"\x05rules\x18\x02 \x03(\v20.com.coralogixapis.alerts.v3.LogsUniqueCountRuleR\x05rules\x12i\n" +
-	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"text\"R\x19notificationPayloadFilter\x12m\n" +
-	"!max_unique_count_per_group_by_key\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x92A\x05J\x03100R\x1bmaxUniqueCountPerGroupByKey\x12c\n" +
-	"\x14unique_count_keypath\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x13\x92A\x10J\x0e\"unique_count\"R\x12uniqueCountKeypath:\xba\x02\x92A\xb6\x02\n" +
-	"\x8f\x01*!Log-based unique count alert type2=Configuration for alerts based on unique value counts in logs\xd2\x01\vlogs_filter\xd2\x01\x05rules\xd2\x01\x14unique_count_keypath*\xa1\x01\n" +
-	"DLearn more about log-based, unique count alerts in our documentation\x12Yhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/\"j\n" +
-	"\x13LogsUniqueCountRule\x12S\n" +
-	"\tcondition\x18\x01 \x01(\v25.com.coralogixapis.alerts.v3.LogsUniqueCountConditionR\tcondition\"\xab\x02\n" +
-	"\x18LogsUniqueCountCondition\x12E\n" +
-	"\x10max_unique_count\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x0emaxUniqueCount\x12W\n" +
-	"\vtime_window\x18\x03 \x01(\v26.com.coralogixapis.alerts.v3.LogsUniqueValueTimeWindowR\n" +
+	"bcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1ajcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc4\b\n" +
+	"\x13LogsUniqueCountType\x12}\n" +
+	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB3\x92A02.The filter to match log entries for the alert.R\n" +
+	"logsFilter\x12{\n" +
+	"\x05rules\x18\x02 \x03(\v20.com.coralogixapis.alerts.v3.LogsUniqueCountRuleB3\x92A02(The rules for the log unique count alert\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xce\x01\n" +
+	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBp\x92Am2IThe filter to specify which fields to include in the notification payloadJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\x98\x01\n" +
+	"!max_unique_count_per_group_by_key\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB3\x92A02)The maximum unique count per group by keyJ\x03100R\x1bmaxUniqueCountPerGroupByKey\x12\x95\x01\n" +
+	"\x14unique_count_keypath\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueBE\x92AB23The keypath in the logs to be used for unique countJ\v\"obj.field\"R\x12uniqueCountKeypath:\xac\x02\x92A\xa8\x02\n" +
+	"\x81\x01*!Log-based unique count alert type2=Configuration for alerts based on unique value counts in logs\xd2\x01\x05rules\xd2\x01\x14unique_count_keypath*\xa1\x01\n" +
+	"DLearn more about log-based, unique count alerts in our documentation\x12Yhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/unique-count-alerts/\"\x8a\x02\n" +
+	"\x13LogsUniqueCountRule\x12\x8c\x01\n" +
+	"\tcondition\x18\x01 \x01(\v25.com.coralogixapis.alerts.v3.LogsUniqueCountConditionB7\x92A422The condition for detecting unique counts in logs.R\tcondition:d\x92Aa\n" +
+	"_*\x1bLog-based unique count rule24Defines the rule for detecting unique counts in logs\xd2\x01\tcondition\"\x82\x03\n" +
+	"\x18LogsUniqueCountCondition\x12i\n" +
+	"\x10max_unique_count\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\"\x92A\x1f2\x18The maximum unique countJ\x03100R\x0emaxUniqueCount\x12\x89\x01\n" +
+	"\vtime_window\x18\x03 \x01(\v26.com.coralogixapis.alerts.v3.LogsUniqueValueTimeWindowB0\x92A-2+The time window for the unique count alert.R\n" +
 	"timeWindow:o\x92Al\n" +
 	"j*\x1bLogs unique count condition2*Defines conditions for unique count alerts\xd2\x01\x10max_unique_count\xd2\x01\vtime_windowb\x06proto3"
 

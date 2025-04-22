@@ -7,6 +7,7 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -171,9 +172,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_unique_count
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_unique_count_logs_unique_value_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"jcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\"\xc1\x01\n" +
-	"\x19LogsUniqueValueTimeWindow\x12\x9b\x01\n" +
-	",logs_unique_value_time_window_specific_value\x18\x01 \x01(\x0e2;.com.coralogixapis.alerts.v3.LogsUniqueValueTimeWindowValueH\x00R&logsUniqueValueTimeWindowSpecificValueB\x06\n" +
+	"jcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/unique_count/logs_unique_value_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x96\x03\n" +
+	"\x19LogsUniqueValueTimeWindow\x12\xfb\x01\n" +
+	",logs_unique_value_time_window_specific_value\x18\x01 \x01(\x0e2;.com.coralogixapis.alerts.v3.LogsUniqueValueTimeWindowValueB^\x92A[2)A time window defined by a specific valueJ.\"LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12\"H\x00R&logsUniqueValueTimeWindowSpecificValue:s\x92Ap\n" +
+	"n*(Log-based unique value alert time window2;Time window configuration for log-based unique value alerts\xd2\x01\x04typeB\x06\n" +
 	"\x04type*\xbe\x05\n" +
 	"\x1eLogsUniqueValueTimeWindowValue\x12?\n" +
 	";LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_MINUTE_1_OR_UNSPECIFIED\x10\x00\x121\n" +

@@ -201,18 +201,18 @@ var File_com_coralogixapis_alerts_v3_alert_def_scheduling_proto protoreflect.Fil
 
 const file_com_coralogixapis_alerts_v3_alert_def_scheduling_proto_rawDesc = "" +
 	"\n" +
-	"6com/coralogixapis/alerts/v3/alert_def_scheduling.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x80\x03\n" +
-	"\x10ActivitySchedule\x12F\n" +
-	"\vday_of_week\x18\x01 \x03(\x0e2&.com.coralogixapis.alerts.v3.DayOfWeekR\tdayOfWeek\x12E\n" +
+	"6com/coralogixapis/alerts/v3/alert_def_scheduling.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x90\x04\n" +
+	"\x10ActivitySchedule\x12\x89\x01\n" +
+	"\vday_of_week\x18\x01 \x03(\x0e2&.com.coralogixapis.alerts.v3.DayOfWeekBA\x92A>J<[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\", \"DAY_OF_WEEK_TUESDAY\"]R\tdayOfWeek\x12l\n" +
 	"\n" +
-	"start_time\x18\x02 \x01(\v2&.com.coralogixapis.alerts.v3.TimeOfDayR\tstartTime\x12A\n" +
-	"\bend_time\x18\x03 \x01(\v2&.com.coralogixapis.alerts.v3.TimeOfDayR\aendTime:\x99\x01\x92A\x95\x01\n" +
+	"start_time\x18\x02 \x01(\v2&.com.coralogixapis.alerts.v3.TimeOfDayB%\x92A\"2 Start time of the alert activityR\tstartTime\x12f\n" +
+	"\bend_time\x18\x03 \x01(\v2&.com.coralogixapis.alerts.v3.TimeOfDayB#\x92A 2\x1eEnd time of the alert activityR\aendTime:\x99\x01\x92A\x95\x01\n" +
 	"\x92\x01*\x17Alert activity schedule2QDefines when an alert should be active based on days of the week and time windows\xd2\x01\vday_of_week\xd2\x01\n" +
-	"start_time\xd2\x01\bend_time\"\xa1\x01\n" +
-	"\tTimeOfDay\x12\x1d\n" +
-	"\x05hours\x18\x01 \x01(\x05B\a\x92A\x04J\x0214R\x05hours\x12!\n" +
-	"\aminutes\x18\x02 \x01(\x05B\a\x92A\x04J\x0230R\aminutes:R\x92AO\n" +
-	"M*\vTime of day2,Represents a specific time in 24-hour format\xd2\x01\x05hours\xd2\x01\aminutes*\xca\x01\n" +
+	"start_time\xd2\x01\bend_time\"\xd7\x01\n" +
+	"\tTimeOfDay\x12:\n" +
+	"\x05hours\x18\x01 \x01(\x05B$\x92A!J\x0214\x8a\x01\x1a^([01][0-9]|2[0-3]|[0-9])$R\x05hours\x128\n" +
+	"\aminutes\x18\x02 \x01(\x05B\x1e\x92A\x1bJ\x0230\x8a\x01\x14^([0-5][0-9]|[0-9])$R\aminutes:T\x92AQ\n" +
+	"O*\vTime of day2.Represents a specific time in a 24-hour format\xd2\x01\x05hours\xd2\x01\aminutes*\xca\x01\n" +
 	"\tDayOfWeek\x12%\n" +
 	"!DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13DAY_OF_WEEK_TUESDAY\x10\x01\x12\x19\n" +

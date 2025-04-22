@@ -29,6 +29,7 @@ type CustomEnrichment struct {
 	Description   string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
 	Version       uint32                 `protobuf:"varint,5,opt,name=version,proto3" json:"version,omitempty"`
 	IsQueryOnly   bool                   `protobuf:"varint,6,opt,name=is_query_only,json=isQueryOnly,proto3" json:"is_query_only,omitempty"`
+	FileName      string                 `protobuf:"bytes,7,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -96,6 +97,13 @@ func (x *CustomEnrichment) GetIsQueryOnly() bool {
 		return x.IsQueryOnly
 	}
 	return false
+}
+
+func (x *CustomEnrichment) GetFileName() string {
+	if x != nil {
+		return x.FileName
+	}
+	return ""
 }
 
 type CustomEnrichmentData struct {
@@ -192,13 +200,14 @@ var File_com_coralogix_enrichment_v1_custom_enrichment_proto protoreflect.FileDe
 
 const file_com_coralogix_enrichment_v1_custom_enrichment_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogix/enrichment/v1/custom_enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\x96\x01\n" +
+	"3com/coralogix/enrichment/v1/custom_enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\xb3\x01\n" +
 	"\x10CustomEnrichment\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\rR\x02id\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x04 \x01(\tR\vdescription\x12\x18\n" +
 	"\aversion\x18\x05 \x01(\rR\aversion\x12\"\n" +
-	"\ris_query_only\x18\x06 \x01(\bR\visQueryOnly\"\xe1\x01\n" +
+	"\ris_query_only\x18\x06 \x01(\bR\visQueryOnly\x12\x1b\n" +
+	"\tfile_name\x18\a \x01(\tR\bfileName\"\xe1\x01\n" +
 	"\x14CustomEnrichmentData\x12M\n" +
 	"\n" +
 	"definition\x18\x01 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\n" +

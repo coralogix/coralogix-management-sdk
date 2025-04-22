@@ -9,12 +9,16 @@ message ActivitySchedule {
     json_schema: {
       title: "Alert activity schedule"
       description: "Defines when an alert should be active based on days of the week and time windows"
-      required: ["day_of_week", "start_time", "end_time"]
+      required: [
+        "day_of_week",
+        "start_time",
+        "end_time"
+      ]
     }
   };
-  repeated DayOfWeek day_of_week = 1;
-  TimeOfDay start_time = 2;
-  TimeOfDay end_time = 3;
+  repeated DayOfWeek day_of_week = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED\", \"DAY_OF_WEEK_TUESDAY\"]"}];
+  TimeOfDay start_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Start time of the alert activity"}];
+  TimeOfDay end_time = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "End time of the alert activity"}];
 }
 enum DayOfWeek {
   DAY_OF_WEEK_MONDAY_OR_UNSPECIFIED = 0;
@@ -29,12 +33,21 @@ message TimeOfDay {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Time of day"
-      description: "Represents a specific time in 24-hour format"
-      required: ["hours", "minutes"]
+      description: "Represents a specific time in a 24-hour format"
+      required: [
+        "hours",
+        "minutes"
+      ]
     }
   };
   // Hours of day in 24 hour format. Should be from 0 to 23.
-  int32 hours = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "14" }];
+  int32 hours = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "14"
+    pattern: "^([01][0-9]|2[0-3]|[0-9])$"
+  }];
   // Minutes of hour of day. Must be from 0 to 59.
-  int32 minutes = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "30" }];
+  int32 minutes = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "30"
+    pattern: "^([0-5][0-9]|[0-9])$"
+  }];
 }

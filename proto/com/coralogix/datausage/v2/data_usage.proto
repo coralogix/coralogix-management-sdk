@@ -53,6 +53,7 @@ enum Pillar {
   PILLAR_LOGS = 2;
   PILLAR_SPANS = 3;
   PILLAR_BINARY = 4;
+  PILLAR_PROFILES = 5;
 }
 
 enum TcoTier {

@@ -3,80 +3,116 @@ syntax = "proto3";
 package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
-
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message FlowType {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Flow alert type"
-            description: "Configuration for flow-based alerts with multiple stages"
-            required: ["stages"]
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/"
-            description: "Learn more about flow alerts in our documentation"
-        }
-    };
-    repeated FlowStages stages = 1 ;
-    google.protobuf.BoolValue enforce_suppression = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Flow alert type"
+      description: "Configuration for flow-based alerts with multiple stages"
+      required: ["stages"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/"
+      description: "Learn more about flow alerts in our documentation"
+    }
+  };
+  repeated FlowStages stages = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The stages of the flow alert."
+    min_items: 1
+  }];
+  google.protobuf.BoolValue enforce_suppression = 2;
 }
 
 message FlowStages {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Flow stages"
-            description: "Defines stages in a flow alert"
-            required: ["flow_stages", "timeframe_ms"]
-        }
-    };
-    oneof flow_stages {
-        FlowStagesGroups flow_stages_groups = 10;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Flow stages"
+      description: "Defines stages in a flow alert"
+      required: [
+        "flow_stages",
+        "timeframe_ms",
+        "timeframe_type"
+      ]
     }
-    google.protobuf.Int64Value timeframe_ms = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
-    TimeframeType timeframe_type = 4;
+  };
+  oneof flow_stages {
+    FlowStagesGroups flow_stages_groups = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The flow stages groups."}];
+  }
+  google.protobuf.Int64Value timeframe_ms = 3;
+  TimeframeType timeframe_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The type of timeframe for the flow alert."
+    example: "TIMEFRAME_TYPE_UP_TO"
+  }];
 }
 
 message FlowStagesGroups {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Flow stage groups"
-            description: "Groups of stages in a flow alert"
-            required: ["groups"]
-        }
-    };
-    repeated FlowStagesGroup groups = 1;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Flow stage groups"
+      description: "Groups of stages in a flow alert"
+      required: ["groups"]
+    }
+  };
+  repeated FlowStagesGroup groups = 1;
 }
 
 message FlowStagesGroup {
-    repeated FlowStagesGroupsAlertDefs alert_defs = 1;
-    NextOp next_op = 2;
-    AlertsOp alerts_op = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Flow stage group"
+      description: "Defines a group of stages in a flow alert"
+      required: [
+        "alert_defs",
+        "next_op",
+        "alerts_op"
+      ]
+    }
+  };
+  repeated FlowStagesGroupsAlertDefs alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The alert definitions for the flow stage group."
+    min_items: 1
+  }];
+  NextOp next_op = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The logical operation to apply to the next stage."
+    example: "\"NEXT_OP_OR\""
+  }];
+  AlertsOp alerts_op = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The logical operation to apply to the alerts in the group."
+    example: "\"ALERTS_OP_OR\""
+  }];
 }
 
 message FlowStagesGroupsAlertDefs {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-        json_schema: {
-            title: "Flow stage group alert definitions"
-            description: "Alert definitions for a flow stage group"
-            required: ["id", "not"]
-        }
-    };
-    google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
-    google.protobuf.BoolValue not = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Flow stage group alert definitions"
+      description: "Alert definitions for a flow stage group"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The alert definition ID"
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    format: "UUIDv4"
+  }];
+  google.protobuf.BoolValue not = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether to negate the alert definition or not."
+    example: "true"
+  }];
 }
 
 enum NextOp {
-    NEXT_OP_AND_OR_UNSPECIFIED = 0;
-    NEXT_OP_OR = 1;
+  NEXT_OP_AND_OR_UNSPECIFIED = 0;
+  NEXT_OP_OR = 1;
 }
 
 enum AlertsOp {
-    ALERTS_OP_AND_OR_UNSPECIFIED = 0;
-    ALERTS_OP_OR = 1;
+  ALERTS_OP_AND_OR_UNSPECIFIED = 0;
+  ALERTS_OP_OR = 1;
 }
 
 enum TimeframeType {
-    TIMEFRAME_TYPE_UNSPECIFIED = 0;
-    TIMEFRAME_TYPE_UP_TO = 1;
+  TIMEFRAME_TYPE_UNSPECIFIED = 0;
+  TIMEFRAME_TYPE_UP_TO = 1;
 }

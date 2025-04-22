@@ -7,6 +7,7 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -167,9 +168,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_threshold
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_threshold_tracing_threshold_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"jcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\"\x8d\x01\n" +
-	"\x11TracingTimeWindow\x12p\n" +
-	"\x19tracing_time_window_value\x18\x01 \x01(\x0e23.com.coralogixapis.alerts.v3.TracingTimeWindowValueH\x00R\x16tracingTimeWindowValueB\x06\n" +
+	"jcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x95\x02\n" +
+	"\x11TracingTimeWindow\x12\xd4\x01\n" +
+	"\x19tracing_time_window_value\x18\x01 \x01(\x0e23.com.coralogixapis.alerts.v3.TracingTimeWindowValueBb\x92A_2)A time window defined by a specific valueJ2TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIEDH\x00R\x16tracingTimeWindowValue:!\x92A\x1e\n" +
+	"\x1c*\x13Tracing time window\xd2\x01\x04typeB\x06\n" +
 	"\x04type*\x8b\x04\n" +
 	"\x16TracingTimeWindowValue\x126\n" +
 	"2TRACING_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\x10\x00\x12(\n" +

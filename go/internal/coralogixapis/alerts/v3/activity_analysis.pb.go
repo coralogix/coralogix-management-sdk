@@ -124,9 +124,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_activity_analysis
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_activity_analysis_activity_analysis_proto_rawDesc = "" +
 	"\n" +
-	"_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x92\x02\n" +
-	"\x10ActivityAnalysis\x12-\n" +
-	"\x05rules\x18\x01 \x03(\tB\x17\x92A\x14J\x12[\"rule1\", \"rule2\"]R\x05rules\x12K\n" +
+	"_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf9\x01\n" +
+	"\x10ActivityAnalysis\x12\x14\n" +
+	"\x05rules\x18\x01 \x03(\tR\x05rules\x12K\n" +
 	"\x06status\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.ActivityAnalysisStatusR\x06status:\x81\x01\x92A~\n" +
 	"|* Activity analysis data structure2GConfiguration for alert activity analysis, containing rules and status.\xd2\x01\x05rules\xd2\x01\x06status*q\n" +
 	"\x16ActivityAnalysisStatus\x124\n" +

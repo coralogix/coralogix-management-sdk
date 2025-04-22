@@ -7,22 +7,20 @@ import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
 import "com/coralogixapis/alerts/v3/alert_def_scheduling.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-
-
 
 /**
  * Represents an existing or created alert definition
@@ -43,13 +41,22 @@ message AlertDef {
       description: "Find out more about alerts in our documentation"
     }
   };
-  AlertDefProperties alert_def_properties = 1;
+  AlertDefProperties alert_def_properties = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The alert definition's properties"}];
 
   // This is the alert definition's persistent ID (does not change on replace), AKA UniqueIdentifier
-  google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
-  google.protobuf.StringValue alert_version_id = 20; // the old alertId
-  google.protobuf.Timestamp created_time = 3;
-  google.protobuf.Timestamp updated_time = 4;
+  google.protobuf.StringValue id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "123e4567-e89b-12d3-a456-426614174000"
+    description: "The alert definition's persistent ID"
+  }];
+  google.protobuf.StringValue alert_version_id = 20 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The old alert ID"}]; // the old alertId
+  google.protobuf.Timestamp created_time = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "2023-10-01T12:00:00Z"
+    description: "The time when the alert definition was created"
+  }];
+  google.protobuf.Timestamp updated_time = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "2023-10-01T12:00:00Z"
+    description: "The time when the alert definition was last updated"
+  }];
 }
 
 /**
@@ -60,36 +67,76 @@ message AlertDefProperties {
     json_schema: {
       title: "Alert definition properties"
       description: "User-configurable properties of an alert definition"
-      required: ["name", "description", "enabled", "priority", "schedule", "type", "type_definition", "group_by_keys", "notification_group", "entity_labels", "phantom_mode"]
+      required: [
+        "name",
+        "priority",
+        "type",
+        "type_definition"
+      ]
     }
   };
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Alert\"" }];
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Alert description\"" }];
-  google.protobuf.BoolValue enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
-  AlertDefPriority priority = 4;
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"My Alert\""
+    description: "The name of the alert definition"
+  }];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"Alert description\""
+    description: "A detailed description of what the alert monitors and when it triggers"
+  }];
+  google.protobuf.BoolValue enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "true"
+    description: "Whether the alert is currently active and monitoring"
+    default: "true"
+  }];
+  AlertDefPriority priority = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The priority level of the alert"
+    example: "ALERT_DEF_PRIORITY_P4"
+  }];
   oneof schedule {
-    ActivitySchedule active_on = 5;
+    ActivitySchedule active_on = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The schedule defining when the alert should be active"}];
   }
-  AlertDefType type = 6;
+  AlertDefType type = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Alert type"
+    example: "ALERT_DEF_TYPE_METRIC_THRESHOLD"
+  }];
   oneof type_definition {
-    LogsImmediateType logs_immediate = 101;
-    TracingImmediateType tracing_immediate = 102;
-    LogsThresholdType logs_threshold = 103;
-    LogsRatioThresholdType logs_ratio_threshold = 104;
-    LogsTimeRelativeThresholdType logs_time_relative_threshold = 105;
-    MetricThresholdType metric_threshold = 106;
-    TracingThresholdType tracing_threshold = 107;
-    FlowType flow = 108;
-    LogsAnomalyType logs_anomaly = 109;
-    MetricAnomalyType metric_anomaly = 110;
-    LogsNewValueType logs_new_value = 111;
-    LogsUniqueCountType logs_unique_count = 112;
+    LogsImmediateType logs_immediate = 101 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for immediate log-based alerts"}];
+    TracingImmediateType tracing_immediate = 102 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for immediate tracing-based alerts"}];
+    LogsThresholdType logs_threshold = 103 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for log-based threshold alerts"}];
+    LogsRatioThresholdType logs_ratio_threshold = 104 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for log-based ratio threshold alerts"}];
+    LogsTimeRelativeThresholdType logs_time_relative_threshold = 105 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for time-relative log threshold alerts"}];
+    MetricThresholdType metric_threshold = 106 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for metric-based threshold alerts"}];
+    TracingThresholdType tracing_threshold = 107 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for tracing-based threshold alerts"}];
+    FlowType flow = 108 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for flow-based alerts"}];
+    LogsAnomalyType logs_anomaly = 109 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for log-based anomaly detection alerts"}];
+    MetricAnomalyType metric_anomaly = 110 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for metric-based anomaly detection alerts"}];
+    LogsNewValueType logs_new_value = 111 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for alerts triggered by new log values"}];
+    LogsUniqueCountType logs_unique_count = 112 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for alerts based on unique log value counts"}];
   }
-  repeated google.protobuf.StringValue group_by_keys = 7;
-  AlertDefIncidentSettings incidents_settings = 8;
-  AlertDefNotificationGroup notification_group = 9;
-  repeated AlertDefNotificationGroup notification_group_excess = 210 [deprecated = true];
-  map<string, string> entity_labels = 10;
-  google.protobuf.BoolValue phantom_mode = 11;
-  google.protobuf.BoolValue deleted = 12;
+  repeated google.protobuf.StringValue group_by_keys = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Keys used to group and aggregate alert data"
+    example: "[\"key1\", \"key2\"]"
+    min_items: 0
+    max_items: 2
+  }];
+  AlertDefIncidentSettings incidents_settings = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Incident creation and management settings"}];
+  AlertDefNotificationGroup notification_group = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Primary notification group for alert events"}];
+  repeated AlertDefNotificationGroup notification_group_excess = 210 [
+    deprecated = true,
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Additional notification groups for alerts (deprecated)"}
+  ];
+  map<string, string> entity_labels = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Labels used to identify and categorize the alert entity"
+    example: "{\"key\": \"value\"}"
+  }];
+  google.protobuf.BoolValue phantom_mode = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether the alert is in phantom mode (creating incidents or not)"
+    example: "false"
+    default: "false"
+  }];
+  google.protobuf.BoolValue deleted = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether the alert has been marked as deleted"
+    example: "false"
+    default: "false"
+  }];
 }

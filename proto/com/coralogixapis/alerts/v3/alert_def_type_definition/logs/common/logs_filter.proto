@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
-
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogsFilter {
@@ -15,9 +14,10 @@ message LogsFilter {
     }
   };
   oneof filter_type {
-    LogsSimpleFilter simple_filter = 1;
+    LogsSimpleFilter simple_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A simple filter that uses a Lucene query and label filters"}];
   }
 }
+
 message LogsSimpleFilter {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -42,18 +42,34 @@ message LabelFilters {
 }
 
 message LabelFilterType {
-  google.protobuf.StringValue value = 1;
-  LogFilterOperationType operation = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Label filter type"
+      description: "Label filter type for log entries"
+      required: [
+        "value",
+        "operation"
+      ]
+    }
+  };
+  google.protobuf.StringValue value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The value of the label to filter by"
+    example: "my-app"
+  }];
+  LogFilterOperationType operation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The operation to perform on the label value"
+    example: "LOG_FILTER_OPERATION_TYPE_INCLUDES"
+  }];
 }
 
 enum LogFilterOperationType {
   LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED = 0;
   LOG_FILTER_OPERATION_TYPE_INCLUDES = 1;
   LOG_FILTER_OPERATION_TYPE_ENDS_WITH = 2;
-  LOG_FILTER_OPERATION_TYPE_STARTS_WITH =3;
+  LOG_FILTER_OPERATION_TYPE_STARTS_WITH = 3;
 }
 
-enum LogSeverity{
+enum LogSeverity {
   LOG_SEVERITY_VERBOSE_UNSPECIFIED = 0;
   LOG_SEVERITY_DEBUG = 1;
   LOG_SEVERITY_INFO = 2;
