@@ -28,21 +28,21 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .spawn();
 
     if rustc_version_command.is_err() {
-        println!("cargo:rustc-env=RUSTC_VERSION={}", DEFAULT_VERSION_STRING);
+        println!("cargo:rustc-env=RUSTC_VERSION={DEFAULT_VERSION_STRING}");
         return Ok(());
     }
 
     let rustc_version_output = rustc_version_command.unwrap().wait_with_output();
 
     if rustc_version_output.is_err() {
-        println!("cargo:rustc-env=RUSTC_VERSION={}", DEFAULT_VERSION_STRING);
+        println!("cargo:rustc-env=RUSTC_VERSION={DEFAULT_VERSION_STRING}");
         return Ok(());
     }
 
     let rust_version_string = String::from_utf8(rustc_version_output.unwrap().stdout);
 
     if rust_version_string.is_err() {
-        println!("cargo:rustc-env=RUSTC_VERSION={}", DEFAULT_VERSION_STRING);
+        println!("cargo:rustc-env=RUSTC_VERSION={DEFAULT_VERSION_STRING}");
         return Ok(());
     }
 
