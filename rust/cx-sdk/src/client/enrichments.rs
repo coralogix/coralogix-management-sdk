@@ -55,10 +55,13 @@ use crate::CoralogixRegion;
 const ENRICHMENTS_FEATURE_GROUP_ID: &str = "enrichments";
 
 pub use crate::com::coralogix::enrichment::v1::{
+    AwsType,
+    CustomEnrichmentType,
     EnrichmentFieldDefinition,
     EnrichmentRequestModel as EnrichmentMapping,
     EnrichmentType,
     GeoIpType,
+    SuspiciousIpType,
     enrichment_type::Type,
 };
 

@@ -84,3 +84,183 @@ func TestEnrichments(t *testing.T) {
 		assert.NotContains(t, enrichmentIDs, e.Id)
 	}
 }
+
+func TestEnrichments(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	client := cxsdk.NewEnrichmentClient(creator)
+
+	withAsn := true
+
+	enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
+		RequestEnrichments: []*cxsdk.EnrichmentRequestModel{
+			{
+				FieldName: &wrapperspb.StringValue{Value: "coralogix.metadata.sdkId"},
+				EnrichmentType: &cxsdk.EnrichmentType{
+					Type: &cxsdk.EnrichmentTypeGeoIP{
+						GeoIp: &cxsdk.GeoIPType{
+							WithAsn: &withAsn,
+						},
+					},
+				},
+			},
+		},
+	})
+	assertNilAndPrintError(t, err)
+	assert.NotNil(t, enrichments)
+
+	enrichmentIDs := []uint32{}
+	for _, e := range enrichments.Enrichments {
+		enrichmentIDs = append(enrichmentIDs, e.Id)
+	}
+
+	// List enrichments and verify creation
+	listEnrichmentsResponse, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
+
+	// Verify our created enrichments exist in the list
+	for _, e := range listEnrichmentsResponse.Enrichments {
+		assert.Contains(t, enrichmentIDs, e.Id)
+	}
+
+	// Delete enrichments
+	wrappedEnrichmentIDs := []*wrapperspb.UInt32Value{}
+	for _, id := range enrichmentIDs {
+		wrappedEnrichmentIDs = append(wrappedEnrichmentIDs, &wrapperspb.UInt32Value{Value: id})
+	}
+	err = client.Delete(context.Background(), &cxsdk.DeleteEnrichmentsRequest{
+		EnrichmentIds: wrappedEnrichmentIDs,
+	})
+	assertNilAndPrintError(t, err)
+
+	// Verify deletion
+	listEnrichmentsResponseAfterDeletion, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+
+	// Verify our enrichments no longer exist
+	for _, e := range listEnrichmentsResponseAfterDeletion.Enrichments {
+		assert.NotContains(t, enrichmentIDs, e.Id)
+	}
+}
+
+func TestEnrichments(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	client := cxsdk.NewEnrichmentClient(creator)
+
+	withAsn := true
+
+	enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
+		RequestEnrichments: []*cxsdk.EnrichmentRequestModel{
+			{
+				FieldName: &wrapperspb.StringValue{Value: "coralogix.metadata.sdkId"},
+				EnrichmentType: &cxsdk.EnrichmentType{
+					Type: &cxsdk.EnrichmentTypeGeoIP{
+						GeoIp: &cxsdk.GeoIPType{
+							WithAsn: &withAsn,
+						},
+					},
+				},
+			},
+		},
+	})
+	assertNilAndPrintError(t, err)
+	assert.NotNil(t, enrichments)
+
+	enrichmentIDs := []uint32{}
+	for _, e := range enrichments.Enrichments {
+		enrichmentIDs = append(enrichmentIDs, e.Id)
+	}
+
+	// List enrichments and verify creation
+	listEnrichmentsResponse, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
+
+	// Verify our created enrichments exist in the list
+	for _, e := range listEnrichmentsResponse.Enrichments {
+		assert.Contains(t, enrichmentIDs, e.Id)
+	}
+
+	// Delete enrichments
+	wrappedEnrichmentIDs := []*wrapperspb.UInt32Value{}
+	for _, id := range enrichmentIDs {
+		wrappedEnrichmentIDs = append(wrappedEnrichmentIDs, &wrapperspb.UInt32Value{Value: id})
+	}
+	err = client.Delete(context.Background(), &cxsdk.DeleteEnrichmentsRequest{
+		EnrichmentIds: wrappedEnrichmentIDs,
+	})
+	assertNilAndPrintError(t, err)
+
+	// Verify deletion
+	listEnrichmentsResponseAfterDeletion, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+
+	// Verify our enrichments no longer exist
+	for _, e := range listEnrichmentsResponseAfterDeletion.Enrichments {
+		assert.NotContains(t, enrichmentIDs, e.Id)
+	}
+}
+
+func TestEnrichmentsSusIp(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	client := cxsdk.NewEnrichmentClient(creator)
+
+	enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
+		RequestEnrichments: []*cxsdk.EnrichmentRequestModel{
+			{
+				FieldName: &wrapperspb.StringValue{Value: "coralogix.metadata.sdkId"},
+				EnrichmentType: &cxsdk.EnrichmentTypeSuspiciousIP{
+					Type: &cxsdk.SuspiciousIPType{},
+				},
+			},
+		},
+	})
+	assertNilAndPrintError(t, err)
+	assert.NotNil(t, enrichments)
+
+	enrichmentIDs := []uint32{}
+	for _, e := range enrichments.Enrichments {
+		enrichmentIDs = append(enrichmentIDs, e.Id)
+	}
+
+	// List enrichments and verify creation
+	listEnrichmentsResponse, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+	assert.NotEmpty(t, listEnrichmentsResponse.Enrichments)
+
+	// Verify our created enrichments exist in the list
+	for _, e := range listEnrichmentsResponse.Enrichments {
+		assert.Contains(t, enrichmentIDs, e.Id)
+	}
+
+	// Delete enrichments
+	wrappedEnrichmentIDs := []*wrapperspb.UInt32Value{}
+	for _, id := range enrichmentIDs {
+		wrappedEnrichmentIDs = append(wrappedEnrichmentIDs, &wrapperspb.UInt32Value{Value: id})
+	}
+	err = client.Delete(context.Background(), &cxsdk.DeleteEnrichmentsRequest{
+		EnrichmentIds: wrappedEnrichmentIDs,
+	})
+	assertNilAndPrintError(t, err)
+
+	// Verify deletion
+	listEnrichmentsResponseAfterDeletion, err := client.List(context.Background(), &cxsdk.GetEnrichmentsRequest{})
+	assertNilAndPrintError(t, err)
+
+	// Verify our enrichments no longer exist
+	for _, e := range listEnrichmentsResponseAfterDeletion.Enrichments {
+		assert.NotContains(t, enrichmentIDs, e.Id)
+	}
+}
