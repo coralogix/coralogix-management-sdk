@@ -98,3 +98,6 @@ pub mod views;
 
 /// This module contains the client for the Views Folders API.
 pub mod views_folders;
+
+/// This module contains the client for the Notification Center API.
+pub mod notifications;

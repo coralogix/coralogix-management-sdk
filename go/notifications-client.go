@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	"github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	commonv1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
 	connectores "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/connectors/v1"
 	notifications "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/notifications/v1"
@@ -234,15 +234,6 @@ type GlobalRouterIdentifier = commonv1.GlobalRouterIdentifier
 
 // GlobalRouterIdentifierIDValue is a global router identifier id value.
 type GlobalRouterIdentifierIDValue = commonv1.GlobalRouterIdentifier_Id
-
-// GlobalRouterIdentifierUserFacingIDValue is a global router identifier user facing id value.
-type GlobalRouterIdentifierUserFacingIDValue = commonv1.GlobalRouterIdentifier_UserFacingId
-
-// RoutingRule represents a routing rule.
-type RoutingRule = commonv1.RoutingRule
-
-// RoutingTarget represents a routing target.
-type RoutingTarget = commonv1.RoutingTarget
 
 // MessageConfig is a message configuration.
 type MessageConfig = common.MessageConfig

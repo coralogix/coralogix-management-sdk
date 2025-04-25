@@ -15,6 +15,7 @@
 use std::str::FromStr;
 
 use cx_api::proto::com::coralogixapis::notification_center::{
+    EntityType,
     connectors::v1::{
         BatchGetConnectorsRequest,
         BatchGetConnectorsResponse,
@@ -58,12 +59,10 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         GetSystemDefaultPresetSummaryResponse,
         ListPresetSummariesRequest,
         ListPresetSummariesResponse,
-        PresetIdentifier,
         ReplaceCustomPresetRequest,
         ReplaceCustomPresetResponse,
         SetPresetAsDefaultRequest,
         SetPresetAsDefaultResponse,
-        preset_identifier,
         presets_service_client::PresetsServiceClient,
     },
     routers::v1::{
@@ -93,7 +92,6 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
     MatchEntityTypeCondition,
     MessageConfig,
     MessageConfigField,
-    OrderBy,
     condition_type,
     connectors::v1::{
         Connector,
@@ -136,7 +134,7 @@ const NOTIFICATIONS_FEATURE_GROUP_ID: &str = "notifications";
 /// This struct groups the parameters required for the `test_preset_config` function.
 pub struct TestPresetConfigParams {
     /// The entity type to test with.
-    pub entity_type: String,
+    pub entity_type: EntityType,
     /// The entity sub-type to test with (optional).
     pub entity_sub_type: Option<String>,
     /// The ID of the connector to test with.
@@ -184,7 +182,11 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to get.
     pub async fn get_connector(&self, connector_id: String) -> Result<GetConnectorResponse> {
         let request = make_request_with_metadata(
-            GetConnectorRequest { id: connector_id },
+            GetConnectorRequest {
+                id: connector_id.clone(),
+                deprecated_id: connector_id,
+                identifier: None,
+            },
             &self.metadata_map,
         );
         {
@@ -212,12 +214,10 @@ impl NotificationsClient {
     pub async fn list_connectors(
         &self,
         connector_type: ConnectorType,
-        order_bys: Vec<OrderBy>,
     ) -> Result<ListConnectorsResponse> {
         let request = make_request_with_metadata(
             ListConnectorsRequest {
                 connector_type: connector_type as i32,
-                order_bys,
             },
             &self.metadata_map,
         );
@@ -300,7 +300,11 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to delete.
     pub async fn delete_connector(&self, connector_id: String) -> Result<DeleteConnectorResponse> {
         let request = make_request_with_metadata(
-            DeleteConnectorRequest { id: connector_id },
+            DeleteConnectorRequest {
+                id: connector_id.clone(),
+                deprecated_id: connector_id,
+                identifier: None,
+            },
             &self.metadata_map,
         );
         {
@@ -328,7 +332,11 @@ impl NotificationsClient {
         connector_ids: Vec<String>,
     ) -> Result<BatchGetConnectorsResponse> {
         let request = make_request_with_metadata(
-            BatchGetConnectorsRequest { ids: connector_ids },
+            BatchGetConnectorsRequest {
+                ids: connector_ids.clone(),
+                deprecated_ids: connector_ids,
+                deprecated_identifiers: vec![],
+            },
             &self.metadata_map,
         );
         {
@@ -435,12 +443,9 @@ impl NotificationsClient {
     ) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
             DeleteCustomPresetRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
-                deprecated_identifier: None,
+                identifier: None,
+                deprecated_identifier_2: None,
+                id: preset_user_facing_id,
             },
             &self.metadata_map,
         );
@@ -470,11 +475,9 @@ impl NotificationsClient {
     ) -> Result<SetPresetAsDefaultResponse> {
         let request = make_request_with_metadata(
             SetPresetAsDefaultRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
+                identifier: None,
+                deprecated_identifier: None,
+                id: preset_user_facing_id,
             },
             &self.metadata_map,
         );
@@ -500,12 +503,9 @@ impl NotificationsClient {
     pub async fn get_preset(&self, preset_user_facing_id: String) -> Result<GetPresetResponse> {
         let request = make_request_with_metadata(
             GetPresetRequest {
-                identifier: Some(PresetIdentifier {
-                    value: Some(preset_identifier::Value::UserFacingId(
-                        preset_user_facing_id,
-                    )),
-                }),
-                deprecated_identifier: None,
+                identifier: None,
+                deprecated_identifier_2: None,
+                id: preset_user_facing_id,
             },
             &self.metadata_map,
         );
@@ -534,14 +534,13 @@ impl NotificationsClient {
     pub async fn list_preset_summaries(
         &self,
         connector_type: ConnectorType,
-        entity_type: String,
-        order_bys: Vec<OrderBy>,
+        entity_type: EntityType,
     ) -> Result<ListPresetSummariesResponse> {
         let request = make_request_with_metadata(
             ListPresetSummariesRequest {
-                connector_type: connector_type as i32,
-                entity_type,
-                order_bys,
+                connector_type: Some(connector_type.into()),
+                deprecated_entity_type: String::from("alerts"),
+                entity_type: entity_type.into(),
             },
             &self.metadata_map,
         );
@@ -565,12 +564,17 @@ impl NotificationsClient {
     /// Batch get presets by ID.
     /// # Arguments
     /// * `preset_ids` - The IDs of the presets to get.
+    #[allow(deprecated)]
     pub async fn batch_get_presets(
         &self,
         preset_ids: Vec<String>,
     ) -> Result<BatchGetPresetsResponse> {
         let request = make_request_with_metadata(
-            BatchGetPresetsRequest { ids: preset_ids },
+            BatchGetPresetsRequest {
+                ids: preset_ids.clone(),
+                deprecated_ids: preset_ids,
+                deprecated_identifiers: vec![],
+            },
             &self.metadata_map,
         );
         {
@@ -597,12 +601,13 @@ impl NotificationsClient {
     pub async fn get_default_preset_summary(
         &self,
         connector_type: ConnectorType,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<GetDefaultPresetSummaryResponse> {
         let request = make_request_with_metadata(
             GetDefaultPresetSummaryRequest {
                 connector_type: connector_type as i32,
-                entity_type,
+                deprecated_entity_type: String::from("alerts"),
+                entity_type: entity_type.into(),
             },
             &self.metadata_map,
         );
@@ -630,12 +635,13 @@ impl NotificationsClient {
     pub async fn get_system_default_preset_summary(
         &self,
         connector_type: ConnectorType,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<GetSystemDefaultPresetSummaryResponse> {
         let request = make_request_with_metadata(
             GetSystemDefaultPresetSummaryRequest {
                 connector_type: connector_type as i32,
-                entity_type,
+                entity_type: entity_type.into(),
+                deprecated_entity_type: String::from("alerts"),
             },
             &self.metadata_map,
         );
@@ -737,13 +743,12 @@ impl NotificationsClient {
     /// Delete a global router by identifier.
     /// # Arguments
     /// * `global_router_identifier` - The identifier of the global router to delete.
-    pub async fn delete_global_router(
-        &self,
-        global_router_identifier: GlobalRouterIdentifier,
-    ) -> Result<DeleteGlobalRouterResponse> {
+    pub async fn delete_global_router(&self, id: String) -> Result<DeleteGlobalRouterResponse> {
         let request = make_request_with_metadata(
             DeleteGlobalRouterRequest {
-                identifier: Some(global_router_identifier),
+                identifier: None,
+                deprecated_identifier: None,
+                id,
             },
             &self.metadata_map,
         );
@@ -763,13 +768,12 @@ impl NotificationsClient {
     /// Get a global router by identifier.
     /// # Arguments
     /// * `global_router_identifier` - The identifier of the global router to get.
-    pub async fn get_global_router(
-        &self,
-        global_router_identifier: GlobalRouterIdentifier,
-    ) -> Result<GetGlobalRouterResponse> {
+    pub async fn get_global_router(&self, id: String) -> Result<GetGlobalRouterResponse> {
         let request = make_request_with_metadata(
             GetGlobalRouterRequest {
-                identifier: Some(global_router_identifier),
+                identifier: None,
+                deprecated_identifier: None,
+                id,
             },
             &self.metadata_map,
         );
@@ -791,11 +795,12 @@ impl NotificationsClient {
     /// * `entity_type` - The entity type to filter global routers by.
     pub async fn list_global_routers(
         &self,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<ListGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             ListGlobalRoutersRequest {
-                entity_type: Some(entity_type),
+                entity_type: Some(entity_type.into()),
+                deprecated_entity_type: None,
             },
             &self.metadata_map,
         );
@@ -817,11 +822,13 @@ impl NotificationsClient {
     /// * `global_router_identifiers` - The identifiers of the global routers to retrieve.
     pub async fn batch_get_global_routers(
         &self,
-        global_router_identifiers: Vec<GlobalRouterIdentifier>,
+        global_router_identifiers: Vec<String>,
     ) -> Result<BatchGetGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             BatchGetGlobalRoutersRequest {
                 ids: global_router_identifiers,
+                deprecated_ids: vec![],
+                deprecated_identifiers: vec![],
             },
             &self.metadata_map,
         );
@@ -841,22 +848,23 @@ impl NotificationsClient {
     /// Test a connector configuration.
     /// # Arguments
     /// * `connector_type` - The [`ConnectorType`] to test.
-    /// * `output_schema_id` - The ID of the output schema to test with.
+    /// * `payload_type` - The payload type to test with.
     /// * `connector_config_fields` - The [ConnectorConfigField]s to test with.
     /// * `entity_type` - The entity type to test with.
     pub async fn test_connector_config(
         &self,
         connector_type: ConnectorType,
-        output_schema_id: String,
+        payload_type: String,
         connector_config_fields: Vec<ConnectorConfigField>,
-        entity_type: String,
+        entity_type: EntityType,
     ) -> Result<TestConnectorConfigResponse> {
         let request = make_request_with_metadata(
             TestConnectorConfigRequest {
                 r#type: connector_type as i32,
-                output_schema_id,
                 fields: connector_config_fields,
-                entity_type: Some(entity_type),
+                entity_type: Some(entity_type.into()),
+                payload_type,
+                deprecated_entity_type: None,
             },
             &self.metadata_map,
         );
@@ -884,12 +892,14 @@ impl NotificationsClient {
     pub async fn test_existing_connector(
         &self,
         connector_id: String,
-        output_schema_id: String,
+        payload_type: String,
     ) -> Result<TestExistingConnectorResponse> {
         let request = make_request_with_metadata(
             TestExistingConnectorRequest {
+                deprecated_connector_id: connector_id.clone(),
                 connector_id,
-                output_schema_id,
+                payload_type,
+                connector_identifier: None,
             },
             &self.metadata_map,
         );
@@ -919,11 +929,16 @@ impl NotificationsClient {
     ) -> Result<TestPresetConfigResponse> {
         let request = make_request_with_metadata(
             TestPresetConfigRequest {
-                entity_type: params.entity_type,
+                entity_type: params.entity_type.into(),
                 entity_sub_type: params.entity_sub_type,
-                connector_id: params.connector_id,
-                preset_id: params.preset_user_facing_id,
+                connector_id: params.connector_id.clone(),
                 config_overrides: params.config_overrides,
+                deprecated_entity_type: String::from("alerts"),
+                deprecated_connector_id: params.connector_id,
+                deprecated_preset_id: params.preset_user_facing_id.clone(),
+                connector_identifier: None,
+                preset_identifier: None,
+                parent_preset_id: params.preset_user_facing_id,
             },
             &self.metadata_map,
         );
@@ -951,15 +966,16 @@ impl NotificationsClient {
     /// * `template` - The template to render.
     pub async fn test_template_render(
         &self,
-        entity_type: String,
+        entity_type: EntityType,
         entity_sub_type: Option<String>,
         template: String,
     ) -> Result<TestTemplateRenderResponse> {
         let request = make_request_with_metadata(
             TestTemplateRenderRequest {
-                entity_type,
                 entity_sub_type,
                 template,
+                deprecated_entity_type: String::from("alerts"),
+                entity_type: entity_type.into(),
             },
             &self.metadata_map,
         );

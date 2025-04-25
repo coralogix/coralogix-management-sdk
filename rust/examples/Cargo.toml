@@ -16,4 +16,5 @@ members = [
     "logs",
     "metrics",
     "recording-rules",
+    "notifications",
 ]

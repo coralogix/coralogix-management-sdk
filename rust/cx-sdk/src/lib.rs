@@ -14,6 +14,7 @@
 
 #![allow(clippy::result_large_err)]
 #![allow(renamed_and_removed_lints)]
+#![allow(deprecated, clippy::deprecated)]
 
 //! The Rust SDK for Coralogix  APIs.
 use auth::ApiKey;
