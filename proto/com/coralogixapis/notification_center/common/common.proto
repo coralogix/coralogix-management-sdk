@@ -2,7 +2,16 @@ syntax = "proto3";
 
 package com.coralogixapis.notification_center;
 
-option go_package = "com/coralogixapis/notification_center";
+enum OrderByDirection {
+  ORDER_BY_DIRECTION_UNSPECIFIED = 0;
+  ASC = 1;
+  DESC = 2;
+}
+
+message OrderBy {
+  string field_name = 1;
+  OrderByDirection direction = 2;
+}
 
 enum ConnectorType {
   CONNECTOR_TYPE_UNSPECIFIED = 0;
@@ -11,10 +20,4 @@ enum ConnectorType {
   PAGERDUTY = 3;
   AWS = 4;
   IBM_EVENT_NOTIFICATIONS = 5;
-}
-
-enum EntityType {
-  ENTITY_TYPE_UNSPECIFIED = 0;
-  ALERTS = 1;
-  TEST_NOTIFICATIONS = 2;
 }
