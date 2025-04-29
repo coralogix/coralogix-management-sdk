@@ -7,7 +7,7 @@ The Golang SDK for Coralogix uses (mostly) GRPC for interacting with the SaaS pl
 - `make build` - builds the binary in the default architecture 
 - `make proto-clean` - clean the Go files created from protobuf
 - `make proto-compile` - compile the Go files from protobuf
-- `make test` - run examples/tests
+- `make test` - run examples/tests. NB: if you wish to run a single example test, run `go test -run < NAME_OF_TEST > ./examples`.
 
 # Troubleshooting
 

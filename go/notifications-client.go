@@ -92,6 +92,14 @@ type PresetIdentifierIDValue = presets.PresetIdentifier_Id
 // PresetIdentifierUserFacingIDValue is a preset identifier user facing id value.
 type PresetIdentifierUserFacingIDValue = presets.PresetIdentifier_UserFacingId
 
+// SetPresetAsDefaultRequest is a request to set a preset as default.
+type SetPresetAsDefaultRequest = presets.SetPresetAsDefaultRequest
+
+// EntityType values.
+const (
+	EntityTypeAlerts = common.EntityType_ALERTS
+)
+
 // ConnectorType values.
 const (
 	ConnectorTypeUnSpecified  = common.ConnectorType_CONNECTOR_TYPE_UNSPECIFIED
@@ -302,6 +310,9 @@ type TestRoutingConditionValidRequest = notifications.TestRoutingConditionValidR
 // TestRoutingConditionValidResponse is a response for testing a routing condition.
 type TestRoutingConditionValidResponse = notifications.TestRoutingConditionValidResponse
 
+// SetPresetAsDefaultResponse is a response to set a preset as default.
+type SetPresetAsDefaultResponse = presets.SetPresetAsDefaultResponse
+
 const notificationsFeatureGroupID = "notifications"
 
 // RPC names.
@@ -332,6 +343,7 @@ const (
 	TestingTestExistingConnectorRPC        = notifications.TestingService_TestExistingConnector_FullMethodName
 	TestingTestPresetConfigRPC             = notifications.TestingService_TestPresetConfig_FullMethodName
 	TestingTestTemplateRenderRPC           = notifications.TestingService_TestTemplateRender_FullMethodName
+	TestingTestDestinationRPC              = notifications.TestingService_TestDestination_FullMethodName
 )
 
 // NotificationsClient is a client for the Coralogix Notifications API.
@@ -395,7 +407,7 @@ func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteCon
 
 // GetConnector retrieves a connector by ID.
 func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnectorRequest) (*GetConnectorResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -591,10 +603,26 @@ func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *G
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := presets.NewPresetsServiceClient(conn)
-
 	response, err := client.GetDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, PresetsGetDefaultRPC, notificationsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// SetPresetAsDefault sets a preset as default.
+func (c NotificationsClient) SetPresetAsDefault(ctx context.Context, req *SetPresetAsDefaultRequest) (*SetPresetAsDefaultResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := presets.NewPresetsServiceClient(conn)
+
+	response, err := client.SetPresetAsDefault(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, PresetsSetAsDefaultRPC, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
@@ -737,7 +765,7 @@ func (c NotificationsClient) BatchGetGlobalRouters(ctx context.Context, req *Bat
 
 // TestConnectorConfig tests a connector configuration.
 func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestConnectorConfigRequest) (*TestConnectorConfigResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -748,14 +776,14 @@ func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestC
 
 	response, err := client.TestConnectorConfig(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestConnectorConfigRPC, notificationsFeatureGroupID)
+		return nil, NewSdkAPIError(err, TestingTestDestinationRPC, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
 
 // TestExistingConnector tests an existing connector.
 func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *TestExistingConnectorRequest) (*TestExistingConnectorResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
 	}
@@ -789,7 +817,7 @@ func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPres
 	return response, nil
 }
 
-// TestPresetConfig tests a preset configuration.
+// TestExistingPresetConfig tests a preset configuration.
 func (c NotificationsClient) TestExistingPresetConfig(ctx context.Context, req *TestExistingPresetConfigRequest) (*TestExistingPresetConfigResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
@@ -838,7 +866,7 @@ func (c NotificationsClient) TestDestination(ctx context.Context, req *TestDesti
 
 	response, err := client.TestDestination(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
-		return nil, NewSdkAPIError(err, TestingTestTemplateRenderRPC, notificationsFeatureGroupID)
+		return nil, NewSdkAPIError(err, TestingTestDestinationRPC, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
@@ -862,7 +890,6 @@ func (c NotificationsClient) TestRoutingConditionValid(ctx context.Context, req 
 }
 
 // NewNotificationsClient creates a new notifications' client.
-// Deprecated: This is an alpha API and subject to change. Use with care.
 func NewNotificationsClient(c *CallPropertiesCreator) *NotificationsClient {
 	return &NotificationsClient{callPropertiesCreator: c}
 }

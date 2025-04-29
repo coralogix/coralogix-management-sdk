@@ -15,6 +15,7 @@
 use std::str::FromStr;
 
 use cx_api::proto::com::coralogixapis::notification_center::{
+    GlobalRouterIdentifier,
     connectors::v1::{
         BatchGetConnectorsRequest,
         BatchGetConnectorsResponse,
@@ -32,6 +33,7 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         ReplaceConnectorResponse,
         connectors_service_client::ConnectorsServiceClient,
     },
+    global_router_identifier,
     notifications::v1::{
         TestConnectorConfigRequest,
         TestConnectorConfigResponse,
@@ -99,7 +101,6 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
     MessageConfig,
     MessageConfigField,
     TemplatedConnectorConfigField,
-    presets::v1::PresetType,
     condition_type,
     connectors::v1::{
         Connector,
@@ -111,6 +112,7 @@ pub use cx_api::proto::com::coralogixapis::notification_center::{
         test_template_render_result,
     },
     presets::v1::Preset,
+    presets::v1::PresetType,
     routers::v1::GlobalRouter,
 };
 
@@ -318,7 +320,7 @@ impl NotificationsClient {
     ) -> Result<BatchGetConnectorsResponse> {
         let request = make_request_with_metadata(
             BatchGetConnectorsRequest {
-                ids: connector_ids,
+                connector_ids,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -424,7 +426,7 @@ impl NotificationsClient {
     pub async fn delete_custom_preset(&self, id: String) -> Result<DeleteCustomPresetResponse> {
         let request = make_request_with_metadata(
             DeleteCustomPresetRequest {
-                id: id,
+                id,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -544,7 +546,7 @@ impl NotificationsClient {
     ) -> Result<BatchGetPresetsResponse> {
         let request = make_request_with_metadata(
             BatchGetPresetsRequest {
-                ids: preset_ids,
+                preset_ids,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -796,7 +798,7 @@ impl NotificationsClient {
     ) -> Result<BatchGetGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             BatchGetGlobalRoutersRequest {
-                ids,
+                global_router_ids: ids,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -817,13 +819,11 @@ impl NotificationsClient {
     /// Test a connector configuration.
     /// # Arguments
     /// * `connector_type` - The [`ConnectorType`] to test.
-    /// * `payload_type` - The type of payload of to test with.
     /// * `connector_config_fields` - The [ConnectorConfigField]s to test with.
     /// * `entity_type` - The entity type to test with.
     pub async fn test_connector_config(
         &self,
         connector_type: ConnectorType,
-        payload_type: String,
         connector_config_fields: Vec<ConnectorConfigField>,
         entity_type: EntityType,
     ) -> Result<TestConnectorConfigResponse> {
@@ -831,7 +831,6 @@ impl NotificationsClient {
             TestConnectorConfigRequest {
                 r#type: connector_type.into(),
                 fields: connector_config_fields,
-                payload_type,
                 entity_type: Some(entity_type.into()),
                 ..Default::default()
             },
@@ -857,16 +856,13 @@ impl NotificationsClient {
     /// Test an existing connector.
     /// # Arguments
     /// * `connector_id` - The ID of the connector to test.
-    /// * `payload_type` - The payload type to test with.
     pub async fn test_existing_connector(
         &self,
         connector_id: String,
-        payload_type: String,
     ) -> Result<TestExistingConnectorResponse> {
         let request = make_request_with_metadata(
             TestExistingConnectorRequest {
                 connector_id,
-                payload_type,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -1012,7 +1008,6 @@ impl NotificationsClient {
     pub async fn test_destination(
         &self,
         entity_type: EntityType,
-        payload_type: String,
         connector_config_fields: Vec<TemplatedConnectorConfigField>,
         preset_id: String,
         connector_id: String,
@@ -1021,7 +1016,6 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             TestDestinationRequest {
                 entity_type: entity_type.into(),
-                payload_type,
                 connector_config_fields,
                 message_config_fields,
                 preset_id,

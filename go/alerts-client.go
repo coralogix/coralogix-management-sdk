@@ -341,6 +341,9 @@ type LogsUniqueCountCondition = alerts.LogsUniqueCountCondition
 // AlertDefType is a type of alert type
 type AlertDefType = alerts.AlertDefType
 
+// NotificationRouter represents a NC Router.
+type NotificationRouter = alerts.NotificationRouter
+
 const alertsFeatureGroupID = "alerts"
 
 // AlertDefType values.
@@ -714,9 +717,10 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 			req.AlertDefProperties.EntityLabels = make(map[string]string)
 		}
 
-		for k, v := range a.defaultLabels {
-			req.AlertDefProperties.EntityLabels[k] = v
-		}
+		// TODO: talk to #falkor-interface to create a separate field for default labels
+		// for k, v := range a.defaultLabels {
+		// 	req.AlertDefProperties.EntityLabels[k] = v
+		// }
 	}
 	response, err := client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -758,9 +762,9 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 			req.AlertDefProperties.EntityLabels = make(map[string]string)
 		}
 
-		for k, v := range a.defaultLabels {
-			req.AlertDefProperties.EntityLabels[k] = v
-		}
+		// for k, v := range a.defaultLabels {
+		// 	req.AlertDefProperties.EntityLabels[k] = v
+		// }
 	}
 	response, err := client.ReplaceAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {

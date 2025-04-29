@@ -38,7 +38,6 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::notifications::{
-            PresetType,
             ConditionType,
             ConfigOverrides,
             Connector,
@@ -52,6 +51,7 @@ mod tests {
             MessageConfigField,
             NotificationsClient,
             Preset,
+            PresetType,
             condition_type,
             test_result::{
                 self,
@@ -81,6 +81,7 @@ mod tests {
             create_time: None,
             update_time: None,
             config_overrides: vec![],
+            user_defined_id: None,
         }
     }
 
@@ -110,13 +111,12 @@ mod tests {
                         },
                     ],
                 }),
-                payload_type: "web".into(),
+                payload_type: Some("web".into()),
             }],
             create_time: None,
             entity_type: EntityType::Alerts.into(),
             id: None,
             update_time: None,
-            parent: None,
             ..Default::default()
         }
     }
@@ -137,12 +137,7 @@ mod tests {
             .map_or(vec![], |f| f.fields.clone());
 
         let success: bool = match notifications_client
-            .test_connector_config(
-                (&connector.r#type()).clone(),
-                "payload_type".into(),
-                fields,
-                EntityType::Alerts,
-            )
+            .test_connector_config((&connector.r#type()).clone(), fields, EntityType::Alerts)
             .await
             .unwrap()
             .result
@@ -151,10 +146,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => {
-                eprintln!("{:?}", f);
-                false
-            }
+            test_result::Result::Failure(f) => false,
         };
         assert!(success);
 
@@ -174,10 +166,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => {
-                eprintln!("{:?}", f);
-                false
-            }
+            test_result::Result::Failure(f) => false,
         };
 
         assert!(success);
@@ -204,14 +193,21 @@ mod tests {
         .unwrap();
 
         let preset = create_test_preset();
+        let connector = create_test_connector();
 
-        let create_response = notifications_client
+        let create_preset_response = notifications_client
             .create_custom_preset(preset.clone())
             .await
             .unwrap();
-        let preset_id = create_response.preset.unwrap().id.unwrap();
+
+        let create_connector_response = notifications_client
+            .create_connector(connector.clone())
+            .await
+            .unwrap();
+        let preset_id = create_preset_response.preset.unwrap().id.unwrap();
+        let connector_id = create_connector_response.connector.unwrap().id.unwrap();
         let success: bool = match notifications_client
-            .test_preset_config(preset_id.clone())
+            .test_preset_config(EntityType::Alerts, connector_id.clone(), preset_id.clone())
             .await
             .unwrap()
             .result
@@ -220,10 +216,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => {
-                eprintln!("{:?}", f);
-                false
-            }
+            test_result::Result::Failure(f) => false,
         };
         assert!(success);
         let retrieved_preset = notifications_client
