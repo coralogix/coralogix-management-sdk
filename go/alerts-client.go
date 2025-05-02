@@ -344,6 +344,12 @@ type AlertDefType = alerts.AlertDefType
 // NotificationRouter represents a NC Router.
 type NotificationRouter = alerts.NotificationRouter
 
+// ConnectorOverride is a configuration override for NC connectors.
+type ConnectorOverride = alerts.ConnectorConfigField
+
+// PresetOverride is a configuration override for NC messages.
+type PresetOverride = alerts.MessageConfigField
+
 const alertsFeatureGroupID = "alerts"
 
 // AlertDefType values.
