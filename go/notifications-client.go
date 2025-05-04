@@ -644,40 +644,6 @@ func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, 
 	return response, nil
 }
 
-// CreateGlobalRouter creates a new global router.
-func (c NotificationsClient) CreateGlobalRouter(ctx context.Context, req *CreateGlobalRouterRequest) (*CreateGlobalRouterResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := routers.NewGlobalRoutersServiceClient(conn)
-
-	response, err := client.CreateGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, NewSdkAPIError(err, GlobalRoutersCreateRPC, notificationsFeatureGroupID)
-	}
-	return response, nil
-}
-
-// ReplaceGlobalRouter replaces a global router.
-func (c NotificationsClient) ReplaceGlobalRouter(ctx context.Context, req *ReplaceGlobalRouterRequest) (*ReplaceGlobalRouterResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := routers.NewGlobalRoutersServiceClient(conn)
-
-	response, err := client.ReplaceGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, NewSdkAPIError(err, GlobalRoutersReplaceRPC, notificationsFeatureGroupID)
-	}
-	return response, nil
-}
-
 // CreateOrReplaceGlobalRouter creates or replaces a global router.
 func (c NotificationsClient) CreateOrReplaceGlobalRouter(ctx context.Context, req *CreateOrReplaceGlobalRouterRequest) (*CreateOrReplaceGlobalRouterResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)

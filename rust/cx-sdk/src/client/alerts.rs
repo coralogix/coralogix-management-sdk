@@ -115,6 +115,8 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     MetricTimeWindow,
     MetricTimeWindowValue,
     NextOp,
+    NotificationDestination,
+    NotificationRouter,
     NotifyOn,
     Recipients,
     TimeOfDay,

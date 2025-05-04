@@ -423,17 +423,14 @@ func TestGlobalRouter(t *testing.T) {
 	notificationCenterClient := cxsdk.NewNotificationsClient(creator)
 	alertsClient := cxsdk.NewAlertsClient(creator)
 
-	listRes, err := notificationCenterClient.ListGlobalRouters(context.Background(), &cxsdk.ListGlobalRoutersRequest{
+	_, err = notificationCenterClient.ListGlobalRouters(context.Background(), &cxsdk.ListGlobalRoutersRequest{
 		EntityType: cxsdk.EntityTypeAlerts.Enum(),
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	var routerId *string
-	if len(listRes.Routers) > 0 {
-		routerId = listRes.Routers[0].Id
-	}
+	routerId := "router_default"
 
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
@@ -477,7 +474,7 @@ func TestGlobalRouter(t *testing.T) {
 
 	createOrReplaceRes, err := notificationCenterClient.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
 		Router: &cxsdk.GlobalRouter{
-			Id:          routerId,
+			Id:          &routerId,
 			Name:        "TestGlobalRouter",
 			EntityType:  cxsdk.EntityTypeAlerts,
 			Description: "This is a test Global Router.",
@@ -511,9 +508,7 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	createdAlertDefWithRouter, err := alertsClient.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
-		AlertDefProperties: CreateAlertWithRouter(
-			*createOrReplaceRes.Router.Id,
-		),
+		AlertDefProperties: CreateAlertWithRouter(),
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -762,7 +757,7 @@ func CreateAlertWithDestination(connectorId string, presetId *string) *cxsdk.Ale
 	}
 }
 
-func CreateAlertWithRouter(routerId string) *cxsdk.AlertDefProperties {
+func CreateAlertWithRouter() *cxsdk.AlertDefProperties {
 	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
@@ -775,7 +770,7 @@ func CreateAlertWithRouter(routerId string) *cxsdk.AlertDefProperties {
 		PhantomMode:       &wrapperspb.BoolValue{Value: false},
 		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
 			Router: &cxsdk.NotificationRouter{
-				Id: routerId,
+				Id: "router_default",
 			},
 			GroupByKeys: []*wrapperspb.StringValue{},
 			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
