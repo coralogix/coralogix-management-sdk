@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
@@ -37,6 +38,7 @@ message BarChart {
   google.protobuf.StringValue custom_unit = 13;
   google.protobuf.Int32Value decimal = 14;
   common.Legend legend = 15;
+  repeated common.CustomLink custom_links = 16;
 
   message Query {
     oneof value {

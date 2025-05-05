@@ -185,7 +185,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = 'v2.3.16'
+revision = "v2.4.1"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -249,7 +249,7 @@ revision = "v0.3.2"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.25"
+revision = "v0.1.26"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -258,7 +258,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.0"
+revision = "v0.6.6"
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
     "com/coralogix/enrichment/v1/custom_enrichment.proto",
@@ -339,7 +339,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.107"
+revision = "v0.0.110"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -368,7 +368,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.5.1"
+revision = "v0.8.0"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/*",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",
