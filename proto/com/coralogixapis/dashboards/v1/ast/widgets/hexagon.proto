@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
@@ -30,6 +31,7 @@ message Hexagon {
   common.ThresholdType threshold_type = 12;
   common.Legend legend = 13;
   common.LegendBy legend_by = 14;
+  repeated common.CustomLink custom_links = 15;
 
   message Query {
     oneof value {

@@ -96,6 +96,7 @@ impl DatasetClient {
     ) -> Result<CreateCustomEnrichmentResponse> {
         let file = File {
             name: Some(name.clone()),
+            size: Some(data.len() as u32),
             content: Some(Content::Binary(data)),
             extension: Some("csv".into()),
         };
@@ -143,6 +144,7 @@ impl DatasetClient {
     ) -> Result<UpdateCustomEnrichmentResponse> {
         let file = File {
             name: Some(name.clone()),
+            size: Some(data.len() as u32),
             content: Some(Content::Binary(data)),
             extension: Some("csv".into()),
         };

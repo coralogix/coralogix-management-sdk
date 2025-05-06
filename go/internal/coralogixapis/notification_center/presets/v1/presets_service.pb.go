@@ -8,6 +8,7 @@ package v1
 
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
+	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -202,14 +203,13 @@ func (x *ReplaceCustomPresetResponse) GetPreset() *Preset {
 
 type DeleteCustomPresetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to DeprecatedIdentifier:
-	//
-	//	*DeleteCustomPresetRequest_Id
-	//	*DeleteCustomPresetRequest_UserFacingId
-	DeprecatedIdentifier isDeleteCustomPresetRequest_DeprecatedIdentifier `protobuf_oneof:"deprecated_identifier"`
-	Identifier           *PresetIdentifier                                `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedIdentifier_2 *PresetIdentifier `protobuf:"bytes,2,opt,name=deprecated_identifier_2,json=deprecatedIdentifier2,proto3" json:"deprecated_identifier_2,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	Identifier    *v1.PresetIdentifier `protobuf:"bytes,3,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Id            string               `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *DeleteCustomPresetRequest) Reset() {
@@ -242,53 +242,28 @@ func (*DeleteCustomPresetRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescGZIP(), []int{4}
 }
 
-func (x *DeleteCustomPresetRequest) GetDeprecatedIdentifier() isDeleteCustomPresetRequest_DeprecatedIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *DeleteCustomPresetRequest) GetDeprecatedIdentifier_2() *PresetIdentifier {
 	if x != nil {
-		return x.DeprecatedIdentifier
+		return x.DeprecatedIdentifier_2
 	}
 	return nil
 }
 
-func (x *DeleteCustomPresetRequest) GetId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*DeleteCustomPresetRequest_Id); ok {
-			return x.Id
-		}
-	}
-	return ""
-}
-
-func (x *DeleteCustomPresetRequest) GetUserFacingId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*DeleteCustomPresetRequest_UserFacingId); ok {
-			return x.UserFacingId
-		}
-	}
-	return ""
-}
-
-func (x *DeleteCustomPresetRequest) GetIdentifier() *PresetIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *DeleteCustomPresetRequest) GetIdentifier() *v1.PresetIdentifier {
 	if x != nil {
 		return x.Identifier
 	}
 	return nil
 }
 
-type isDeleteCustomPresetRequest_DeprecatedIdentifier interface {
-	isDeleteCustomPresetRequest_DeprecatedIdentifier()
+func (x *DeleteCustomPresetRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
-
-type DeleteCustomPresetRequest_Id struct {
-	Id string `protobuf:"bytes,101,opt,name=id,proto3,oneof"`
-}
-
-type DeleteCustomPresetRequest_UserFacingId struct {
-	UserFacingId string `protobuf:"bytes,102,opt,name=user_facing_id,json=userFacingId,proto3,oneof"`
-}
-
-func (*DeleteCustomPresetRequest_Id) isDeleteCustomPresetRequest_DeprecatedIdentifier() {}
-
-func (*DeleteCustomPresetRequest_UserFacingId) isDeleteCustomPresetRequest_DeprecatedIdentifier() {}
 
 type DeleteCustomPresetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -328,14 +303,13 @@ func (*DeleteCustomPresetResponse) Descriptor() ([]byte, []int) {
 
 type SetCustomPresetAsDefaultRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to DeprecatedIdentifier:
-	//
-	//	*SetCustomPresetAsDefaultRequest_Id
-	//	*SetCustomPresetAsDefaultRequest_UserFacingId
-	DeprecatedIdentifier isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier `protobuf_oneof:"deprecated_identifier"`
-	Identifier           *PresetIdentifier                                      `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedIdentifier_2 *PresetIdentifier `protobuf:"bytes,2,opt,name=deprecated_identifier_2,json=deprecatedIdentifier2,proto3" json:"deprecated_identifier_2,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	Identifier    *v1.PresetIdentifier `protobuf:"bytes,3,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Id            string               `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *SetCustomPresetAsDefaultRequest) Reset() {
@@ -368,53 +342,27 @@ func (*SetCustomPresetAsDefaultRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescGZIP(), []int{6}
 }
 
-func (x *SetCustomPresetAsDefaultRequest) GetDeprecatedIdentifier() isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *SetCustomPresetAsDefaultRequest) GetDeprecatedIdentifier_2() *PresetIdentifier {
 	if x != nil {
-		return x.DeprecatedIdentifier
+		return x.DeprecatedIdentifier_2
 	}
 	return nil
 }
 
-func (x *SetCustomPresetAsDefaultRequest) GetId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*SetCustomPresetAsDefaultRequest_Id); ok {
-			return x.Id
-		}
-	}
-	return ""
-}
-
-func (x *SetCustomPresetAsDefaultRequest) GetUserFacingId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*SetCustomPresetAsDefaultRequest_UserFacingId); ok {
-			return x.UserFacingId
-		}
-	}
-	return ""
-}
-
-func (x *SetCustomPresetAsDefaultRequest) GetIdentifier() *PresetIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *SetCustomPresetAsDefaultRequest) GetIdentifier() *v1.PresetIdentifier {
 	if x != nil {
 		return x.Identifier
 	}
 	return nil
 }
 
-type isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier interface {
-	isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier()
-}
-
-type SetCustomPresetAsDefaultRequest_Id struct {
-	Id string `protobuf:"bytes,101,opt,name=id,proto3,oneof"`
-}
-
-type SetCustomPresetAsDefaultRequest_UserFacingId struct {
-	UserFacingId string `protobuf:"bytes,102,opt,name=user_facing_id,json=userFacingId,proto3,oneof"`
-}
-
-func (*SetCustomPresetAsDefaultRequest_Id) isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier() {}
-
-func (*SetCustomPresetAsDefaultRequest_UserFacingId) isSetCustomPresetAsDefaultRequest_DeprecatedIdentifier() {
+func (x *SetCustomPresetAsDefaultRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 type SetCustomPresetAsDefaultResponse struct {
@@ -454,8 +402,12 @@ func (*SetCustomPresetAsDefaultResponse) Descriptor() ([]byte, []int) {
 }
 
 type SetPresetAsDefaultRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Identifier    *PresetIdentifier      `protobuf:"bytes,1,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedIdentifier *PresetIdentifier `protobuf:"bytes,1,opt,name=deprecated_identifier,json=deprecatedIdentifier,proto3" json:"deprecated_identifier,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	Identifier    *v1.PresetIdentifier `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Id            string               `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -490,11 +442,27 @@ func (*SetPresetAsDefaultRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescGZIP(), []int{8}
 }
 
-func (x *SetPresetAsDefaultRequest) GetIdentifier() *PresetIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *SetPresetAsDefaultRequest) GetDeprecatedIdentifier() *PresetIdentifier {
+	if x != nil {
+		return x.DeprecatedIdentifier
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *SetPresetAsDefaultRequest) GetIdentifier() *v1.PresetIdentifier {
 	if x != nil {
 		return x.Identifier
 	}
 	return nil
+}
+
+func (x *SetPresetAsDefaultRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
 
 type SetPresetAsDefaultResponse struct {
@@ -535,14 +503,13 @@ func (*SetPresetAsDefaultResponse) Descriptor() ([]byte, []int) {
 
 type GetPresetRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to DeprecatedIdentifier:
-	//
-	//	*GetPresetRequest_Id
-	//	*GetPresetRequest_UserFacingId
-	DeprecatedIdentifier isGetPresetRequest_DeprecatedIdentifier `protobuf_oneof:"deprecated_identifier"`
-	Identifier           *PresetIdentifier                       `protobuf:"bytes,2,opt,name=identifier,proto3" json:"identifier,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedIdentifier_2 *PresetIdentifier `protobuf:"bytes,2,opt,name=deprecated_identifier_2,json=deprecatedIdentifier2,proto3" json:"deprecated_identifier_2,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	Identifier    *v1.PresetIdentifier `protobuf:"bytes,3,opt,name=identifier,proto3" json:"identifier,omitempty"`
+	Id            string               `protobuf:"bytes,4,opt,name=id,proto3" json:"id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetPresetRequest) Reset() {
@@ -575,53 +542,28 @@ func (*GetPresetRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *GetPresetRequest) GetDeprecatedIdentifier() isGetPresetRequest_DeprecatedIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *GetPresetRequest) GetDeprecatedIdentifier_2() *PresetIdentifier {
 	if x != nil {
-		return x.DeprecatedIdentifier
+		return x.DeprecatedIdentifier_2
 	}
 	return nil
 }
 
-func (x *GetPresetRequest) GetId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*GetPresetRequest_Id); ok {
-			return x.Id
-		}
-	}
-	return ""
-}
-
-func (x *GetPresetRequest) GetUserFacingId() string {
-	if x != nil {
-		if x, ok := x.DeprecatedIdentifier.(*GetPresetRequest_UserFacingId); ok {
-			return x.UserFacingId
-		}
-	}
-	return ""
-}
-
-func (x *GetPresetRequest) GetIdentifier() *PresetIdentifier {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *GetPresetRequest) GetIdentifier() *v1.PresetIdentifier {
 	if x != nil {
 		return x.Identifier
 	}
 	return nil
 }
 
-type isGetPresetRequest_DeprecatedIdentifier interface {
-	isGetPresetRequest_DeprecatedIdentifier()
+func (x *GetPresetRequest) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
 }
-
-type GetPresetRequest_Id struct {
-	Id string `protobuf:"bytes,101,opt,name=id,proto3,oneof"`
-}
-
-type GetPresetRequest_UserFacingId struct {
-	UserFacingId string `protobuf:"bytes,102,opt,name=user_facing_id,json=userFacingId,proto3,oneof"`
-}
-
-func (*GetPresetRequest_Id) isGetPresetRequest_DeprecatedIdentifier() {}
-
-func (*GetPresetRequest_UserFacingId) isGetPresetRequest_DeprecatedIdentifier() {}
 
 type GetPresetResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -669,11 +611,12 @@ func (x *GetPresetResponse) GetPreset() *Preset {
 
 type ListPresetSummariesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectorType common.ConnectorType   `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"connector_type,omitempty"`
-	EntityType    string                 `protobuf:"bytes,2,opt,name=entity_type,json=entityType,proto3" json:"entity_type,omitempty"`
-	OrderBys      []*common.OrderBy      `protobuf:"bytes,3,rep,name=order_bys,json=orderBys,proto3" json:"order_bys,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	ConnectorType *common.ConnectorType  `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType,oneof" json:"connector_type,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedEntityType string            `protobuf:"bytes,2,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
+	EntityType           common.EntityType `protobuf:"varint,4,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *ListPresetSummariesRequest) Reset() {
@@ -707,24 +650,25 @@ func (*ListPresetSummariesRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ListPresetSummariesRequest) GetConnectorType() common.ConnectorType {
-	if x != nil {
-		return x.ConnectorType
+	if x != nil && x.ConnectorType != nil {
+		return *x.ConnectorType
 	}
 	return common.ConnectorType(0)
 }
 
-func (x *ListPresetSummariesRequest) GetEntityType() string {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *ListPresetSummariesRequest) GetDeprecatedEntityType() string {
 	if x != nil {
-		return x.EntityType
+		return x.DeprecatedEntityType
 	}
 	return ""
 }
 
-func (x *ListPresetSummariesRequest) GetOrderBys() []*common.OrderBy {
+func (x *ListPresetSummariesRequest) GetEntityType() common.EntityType {
 	if x != nil {
-		return x.OrderBys
+		return x.EntityType
 	}
-	return nil
+	return common.EntityType(0)
 }
 
 type ListPresetSummariesResponse struct {
@@ -772,8 +716,12 @@ func (x *ListPresetSummariesResponse) GetPresetSummaries() []*PresetSummary {
 }
 
 type BatchGetPresetsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Ids           []string               `protobuf:"bytes,1,rep,name=ids,proto3" json:"ids,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedIds []string `protobuf:"bytes,1,rep,name=deprecated_ids,json=deprecatedIds,proto3" json:"deprecated_ids,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	Ids           []*v1.PresetIdentifier `protobuf:"bytes,2,rep,name=ids,proto3" json:"ids,omitempty"`
+	PresetIds     []string               `protobuf:"bytes,3,rep,name=preset_ids,json=presetIds,proto3" json:"preset_ids,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -808,9 +756,25 @@ func (*BatchGetPresetsRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescGZIP(), []int{14}
 }
 
-func (x *BatchGetPresetsRequest) GetIds() []string {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *BatchGetPresetsRequest) GetDeprecatedIds() []string {
+	if x != nil {
+		return x.DeprecatedIds
+	}
+	return nil
+}
+
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *BatchGetPresetsRequest) GetIds() []*v1.PresetIdentifier {
 	if x != nil {
 		return x.Ids
+	}
+	return nil
+}
+
+func (x *BatchGetPresetsRequest) GetPresetIds() []string {
+	if x != nil {
+		return x.PresetIds
 	}
 	return nil
 }
@@ -870,9 +834,11 @@ func (x *BatchGetPresetsResponse) GetNotFoundIds() []string {
 type GetDefaultPresetSummaryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ConnectorType common.ConnectorType   `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"connector_type,omitempty"`
-	EntityType    string                 `protobuf:"bytes,2,opt,name=entity_type,json=entityType,proto3" json:"entity_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedEntityType string            `protobuf:"bytes,2,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
+	EntityType           common.EntityType `protobuf:"varint,3,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetDefaultPresetSummaryRequest) Reset() {
@@ -912,11 +878,19 @@ func (x *GetDefaultPresetSummaryRequest) GetConnectorType() common.ConnectorType
 	return common.ConnectorType(0)
 }
 
-func (x *GetDefaultPresetSummaryRequest) GetEntityType() string {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *GetDefaultPresetSummaryRequest) GetDeprecatedEntityType() string {
+	if x != nil {
+		return x.DeprecatedEntityType
+	}
+	return ""
+}
+
+func (x *GetDefaultPresetSummaryRequest) GetEntityType() common.EntityType {
 	if x != nil {
 		return x.EntityType
 	}
-	return ""
+	return common.EntityType(0)
 }
 
 type GetDefaultPresetSummaryResponse struct {
@@ -966,9 +940,11 @@ func (x *GetDefaultPresetSummaryResponse) GetPresetSummary() *PresetSummary {
 type GetSystemDefaultPresetSummaryRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ConnectorType common.ConnectorType   `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"connector_type,omitempty"`
-	EntityType    string                 `protobuf:"bytes,2,opt,name=entity_type,json=entityType,proto3" json:"entity_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+	DeprecatedEntityType string            `protobuf:"bytes,2,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
+	EntityType           common.EntityType `protobuf:"varint,3,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	unknownFields        protoimpl.UnknownFields
+	sizeCache            protoimpl.SizeCache
 }
 
 func (x *GetSystemDefaultPresetSummaryRequest) Reset() {
@@ -1008,11 +984,19 @@ func (x *GetSystemDefaultPresetSummaryRequest) GetConnectorType() common.Connect
 	return common.ConnectorType(0)
 }
 
-func (x *GetSystemDefaultPresetSummaryRequest) GetEntityType() string {
+// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/presets/v1/presets_service.proto.
+func (x *GetSystemDefaultPresetSummaryRequest) GetDeprecatedEntityType() string {
+	if x != nil {
+		return x.DeprecatedEntityType
+	}
+	return ""
+}
+
+func (x *GetSystemDefaultPresetSummaryRequest) GetEntityType() common.EntityType {
 	if x != nil {
 		return x.EntityType
 	}
-	return ""
+	return common.EntityType(0)
 }
 
 type GetSystemDefaultPresetSummaryResponse struct {
@@ -1063,7 +1047,7 @@ var File_com_coralogixapis_notification_center_presets_v1_presets_service_proto 
 
 const file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDesc = "" +
 	"\n" +
-	"Fcom/coralogixapis/notification_center/presets/v1/presets_service.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1a=com/coralogixapis/notification_center/presets/v1/preset.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb8\x02\n" +
+	"Fcom/coralogixapis/notification_center/presets/v1/presets_service.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1a@com/coralogixapis/notification_center/common/v1/identifier.proto\x1a=com/coralogixapis/notification_center/presets/v1/preset.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb8\x02\n" +
 	"\x19CreateCustomPresetRequest\x12P\n" +
 	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xc8\x01\x92A\xc4\x01\n" +
 	"E*\x1cCreate Custom Preset Request2%Request to create a new custom preset*{\n" +
@@ -1079,51 +1063,54 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x1bReplaceCustomPresetResponse\x12P\n" +
 	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd2\x01\x92A\xce\x01\n" +
 	"O*\x1eReplace Custom Preset Response2-Response containing the updated custom preset*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x9f\x03\n" +
-	"\x19DeleteCustomPresetRequest\x12\x10\n" +
-	"\x02id\x18e \x01(\tH\x00R\x02id\x12&\n" +
-	"\x0euser_facing_id\x18f \x01(\tH\x00R\fuserFacingId\x12b\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x89\x04\n" +
+	"\x19DeleteCustomPresetRequest\x12~\n" +
+	"\x17deprecated_identifier_2\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierB\x02\x18\x01R\x15deprecatedIdentifier2\x12[\n" +
 	"\n" +
-	"identifier\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierR\n" +
-	"identifier:\xc4\x01\x92A\xc0\x01\n" +
+	"identifier\x18\x03 \x01(\v27.com.coralogixapis.notification_center.PresetIdentifierB\x02\x18\x01R\n" +
+	"identifier\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id:\xc4\x01\x92A\xc0\x01\n" +
 	"A*\x1cDelete Custom Preset Request2!Request to delete a custom preset*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x17\n" +
-	"\x15deprecated_identifierJ\x04\b\x01\x10\x02\"\x1c\n" +
-	"\x1aDeleteCustomPresetResponse\"\xde\x01\n" +
-	"\x1fSetCustomPresetAsDefaultRequest\x12\x10\n" +
-	"\x02id\x18e \x01(\tH\x00R\x02id\x12&\n" +
-	"\x0euser_facing_id\x18f \x01(\tH\x00R\fuserFacingId\x12b\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02J\x04\be\x10fJ\x04\bf\x10gR\x15deprecated_identifierR\x0fuser_defined_id\"\x1c\n" +
+	"\x1aDeleteCustomPresetResponse\"\xc8\x02\n" +
+	"\x1fSetCustomPresetAsDefaultRequest\x12~\n" +
+	"\x17deprecated_identifier_2\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierB\x02\x18\x01R\x15deprecatedIdentifier2\x12[\n" +
 	"\n" +
-	"identifier\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierR\n" +
-	"identifierB\x17\n" +
-	"\x15deprecated_identifierJ\x04\b\x01\x10\x02\"\"\n" +
-	" SetCustomPresetAsDefaultResponse\"\xd7\x02\n" +
-	"\x19SetPresetAsDefaultRequest\x12b\n" +
+	"identifier\x18\x03 \x01(\v27.com.coralogixapis.notification_center.PresetIdentifierB\x02\x18\x01R\n" +
+	"identifier\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02idJ\x04\b\x01\x10\x02J\x04\be\x10fJ\x04\bf\x10gR\x15deprecated_identifierR\x0fuser_defined_id\"\"\n" +
+	" SetCustomPresetAsDefaultResponse\"\xdd\x03\n" +
+	"\x19SetPresetAsDefaultRequest\x12{\n" +
+	"\x15deprecated_identifier\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierB\x02\x18\x01R\x14deprecatedIdentifier\x12[\n" +
 	"\n" +
-	"identifier\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierR\n" +
-	"identifier:\xd5\x01\x92A\xd1\x01\n" +
+	"identifier\x18\x02 \x01(\v27.com.coralogixapis.notification_center.PresetIdentifierB\x02\x18\x01R\n" +
+	"identifier\x12\x0e\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id:\xd5\x01\x92A\xd1\x01\n" +
 	"R*\x1dSet Preset As Default Request21Request to set custom or system preset as default*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x1c\n" +
-	"\x1aSetPresetAsDefaultResponse\"\xcf\x01\n" +
-	"\x10GetPresetRequest\x12\x10\n" +
-	"\x02id\x18e \x01(\tH\x00R\x02id\x12&\n" +
-	"\x0euser_facing_id\x18f \x01(\tH\x00R\fuserFacingId\x12b\n" +
+	"\x1aSetPresetAsDefaultResponse\"\xb9\x02\n" +
+	"\x10GetPresetRequest\x12~\n" +
+	"\x17deprecated_identifier_2\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierB\x02\x18\x01R\x15deprecatedIdentifier2\x12[\n" +
 	"\n" +
-	"identifier\x18\x02 \x01(\v2B.com.coralogixapis.notification_center.presets.v1.PresetIdentifierR\n" +
-	"identifierB\x17\n" +
-	"\x15deprecated_identifierJ\x04\b\x01\x10\x02\"e\n" +
+	"identifier\x18\x03 \x01(\v27.com.coralogixapis.notification_center.PresetIdentifierB\x02\x18\x01R\n" +
+	"identifier\x12\x0e\n" +
+	"\x02id\x18\x04 \x01(\tR\x02idJ\x04\b\x01\x10\x02J\x04\be\x10fJ\x04\bf\x10gR\x15deprecated_identifierR\x0fuser_defined_id\"e\n" +
 	"\x11GetPresetResponse\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset\"\xf6\x01\n" +
-	"\x1aListPresetSummariesRequest\x12[\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12.\n" +
-	"\ventity_type\x18\x02 \x01(\tB\r\x92A\n" +
-	"J\b\"alerts\"R\n" +
-	"entityType\x12K\n" +
-	"\torder_bys\x18\x03 \x03(\v2..com.coralogixapis.notification_center.OrderByR\borderBys\"\x89\x01\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset\"\xb4\x02\n" +
+	"\x1aListPresetSummariesRequest\x12`\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeH\x00R\rconnectorType\x88\x01\x01\x128\n" +
+	"\x16deprecated_entity_type\x18\x02 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12a\n" +
+	"\ventity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"J\b\"ALERTS\"R\n" +
+	"entityTypeB\x11\n" +
+	"\x0f_connector_typeJ\x04\b\x03\x10\x04\"\x89\x01\n" +
 	"\x1bListPresetSummariesResponse\x12j\n" +
-	"\x10preset_summaries\x18\x01 \x03(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\x0fpresetSummaries\"\xf9\x01\n" +
-	"\x16BatchGetPresetsRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\tR\x03ids:\xcc\x01\x92A\xc8\x01\n" +
+	"\x10preset_summaries\x18\x01 \x03(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\x0fpresetSummaries\"\x80\x03\n" +
+	"\x16BatchGetPresetsRequest\x12)\n" +
+	"\x0edeprecated_ids\x18\x01 \x03(\tB\x02\x18\x01R\rdeprecatedIds\x12M\n" +
+	"\x03ids\x18\x02 \x03(\v27.com.coralogixapis.notification_center.PresetIdentifierB\x02\x18\x01R\x03ids\x12\x1d\n" +
+	"\n" +
+	"preset_ids\x18\x03 \x03(\tR\tpresetIds:\xcc\x01\x92A\xc8\x01\n" +
 	"I*\x19Batch Get Presets Request2,Request to get multiple presets by their ids*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x88\x04\n" +
 	"\x17BatchGetPresetsResponse\x12p\n" +
@@ -1133,34 +1120,36 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x03key\x18\x01 \x01(\tR\x03key\x12N\n" +
 	"\x05value\x18\x02 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x05value:\x028\x01:\xe0\x01\x92A\xdc\x01\n" +
 	"]*\x1aBatch Get Presets Response2?Response containing the requested presets and any IDs not found*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xad\x01\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x9a\x02\n" +
 	"\x1eGetDefaultPresetSummaryRequest\x12[\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12.\n" +
-	"\ventity_type\x18\x02 \x01(\tB\r\x92A\n" +
-	"J\b\"alerts\"R\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x128\n" +
+	"\x16deprecated_entity_type\x18\x02 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12a\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"J\b\"ALERTS\"R\n" +
 	"entityType\"\x89\x01\n" +
 	"\x1fGetDefaultPresetSummaryResponse\x12f\n" +
-	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary\"\xc3\x03\n" +
+	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary\"\xb0\x04\n" +
 	"$GetSystemDefaultPresetSummaryRequest\x12[\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12.\n" +
-	"\ventity_type\x18\x02 \x01(\tB\r\x92A\n" +
-	"J\b\"alerts\"R\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x128\n" +
+	"\x16deprecated_entity_type\x18\x02 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12a\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"J\b\"ALERTS\"R\n" +
 	"entityType:\x8d\x02\x92A\x89\x02\n" +
 	"\x89\x01*)Get System Default Preset Summary Request2\\Returns the preset summary for the system default preset (i.e., not a user-selected default)*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x8f\x01\n" +
 	"%GetSystemDefaultPresetSummaryResponse\x12f\n" +
-	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\xb8\x13\n" +
+	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary2\xdc\x12\n" +
 	"\x0ePresetsService\x12\xe7\x01\n" +
 	"\x12CreateCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse\"6\x82\xd3\xe4\x93\x020:\x06preset\"&/v1/notification-center/presets/custom\x12\xea\x01\n" +
-	"\x13ReplaceCustomPreset\x12L.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse\"6\x82\xd3\xe4\x93\x020:\x06preset\x1a&/v1/notification-center/presets/custom\x12\xfb\x01\n" +
-	"\x12DeleteCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetResponse\"J\x82\xd3\xe4\x93\x02D*B/v1/notification-center/presets/custom/{identifier.user_facing_id}\x12\x9b\x02\n" +
-	"\x18SetCustomPresetAsDefault\x12Q.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest\x1aR.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultResponse\"X\x82\xd3\xe4\x93\x02O\"M/v1/notification-center/presets/custom/{identifier.user_facing_id}:defaultSet\x88\x02\x01\x12\xff\x01\n" +
-	"\x12SetPresetAsDefault\x12K.com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest\x1aL.com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultResponse\"N\x82\xd3\xe4\x93\x02H\"F/v1/notification-center/presets/{identifier.user_facing_id}:defaultSet\x12\xd9\x01\n" +
-	"\tGetPreset\x12B.com.coralogixapis.notification_center.presets.v1.GetPresetRequest\x1aC.com.coralogixapis.notification_center.presets.v1.GetPresetResponse\"C\x82\xd3\xe4\x93\x02=\x12;/v1/notification-center/presets/{identifier.user_facing_id}\x12\xe9\x01\n" +
+	"\x13ReplaceCustomPreset\x12L.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse\"6\x82\xd3\xe4\x93\x020:\x06preset\x1a&/v1/notification-center/presets/custom\x12\xe4\x01\n" +
+	"\x12DeleteCustomPreset\x12K.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest\x1aL.com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetResponse\"3\x82\xd3\xe4\x93\x02-*+/v1/notification-center/presets/custom/{id}\x12\x84\x02\n" +
+	"\x18SetCustomPresetAsDefault\x12Q.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest\x1aR.com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultResponse\"A\x82\xd3\xe4\x93\x028\"6/v1/notification-center/presets/custom/{id}:defaultSet\x88\x02\x01\x12\xe8\x01\n" +
+	"\x12SetPresetAsDefault\x12K.com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest\x1aL.com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultResponse\"7\x82\xd3\xe4\x93\x021\"//v1/notification-center/presets/{id}:defaultSet\x12\xc2\x01\n" +
+	"\tGetPreset\x12B.com.coralogixapis.notification_center.presets.v1.GetPresetRequest\x1aC.com.coralogixapis.notification_center.presets.v1.GetPresetResponse\",\x82\xd3\xe4\x93\x02&\x12$/v1/notification-center/presets/{id}\x12\xe9\x01\n" +
 	"\x13ListPresetSummaries\x12L.com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest\x1aM.com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse\"5\x82\xd3\xe4\x93\x02/\x12-/v1/notification-center/presets:summariesList\x12\xd8\x01\n" +
 	"\x0fBatchGetPresets\x12H.com.coralogixapis.notification_center.presets.v1.BatchGetPresetsRequest\x1aI.com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse\"0\x82\xd3\xe4\x93\x02*\x12(/v1/notification-center/presets:batchGet\x12\xf9\x01\n" +
 	"\x17GetDefaultPresetSummary\x12P.com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest\x1aQ.com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse\"9\x82\xd3\xe4\x93\x023\x121/v1/notification-center/presets:defaultSummaryGet\x12\x91\x02\n" +
-	"\x1dGetSystemDefaultPresetSummary\x12V.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest\x1aW.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse\"?\x82\xd3\xe4\x93\x029\x127/v1/notification-center/presets:systemDefaultSummaryGetb\x06proto3"
+	"\x1dGetSystemDefaultPresetSummary\x12V.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest\x1aW.com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse\"?\x82\xd3\xe4\x93\x029\x127/v1/notification-center/presets:systemDefaultSummaryGetB2Z0com/coralogixapis/notification_center/presets/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDescOnce sync.Once
@@ -1196,57 +1185,65 @@ var file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_
 	(*GetDefaultPresetSummaryResponse)(nil),       // 17: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse
 	(*GetSystemDefaultPresetSummaryRequest)(nil),  // 18: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest
 	(*GetSystemDefaultPresetSummaryResponse)(nil), // 19: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse
-	nil,                       // 20: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry
-	(*Preset)(nil),            // 21: com.coralogixapis.notification_center.presets.v1.Preset
-	(*PresetIdentifier)(nil),  // 22: com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	(common.ConnectorType)(0), // 23: com.coralogixapis.notification_center.ConnectorType
-	(*common.OrderBy)(nil),    // 24: com.coralogixapis.notification_center.OrderBy
-	(*PresetSummary)(nil),     // 25: com.coralogixapis.notification_center.presets.v1.PresetSummary
+	nil,                         // 20: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry
+	(*Preset)(nil),              // 21: com.coralogixapis.notification_center.presets.v1.Preset
+	(*PresetIdentifier)(nil),    // 22: com.coralogixapis.notification_center.presets.v1.PresetIdentifier
+	(*v1.PresetIdentifier)(nil), // 23: com.coralogixapis.notification_center.PresetIdentifier
+	(common.ConnectorType)(0),   // 24: com.coralogixapis.notification_center.ConnectorType
+	(common.EntityType)(0),      // 25: com.coralogixapis.notification_center.EntityType
+	(*PresetSummary)(nil),       // 26: com.coralogixapis.notification_center.presets.v1.PresetSummary
 }
 var file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_depIdxs = []int32{
 	21, // 0: com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
 	21, // 1: com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
 	21, // 2: com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
 	21, // 3: com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
-	22, // 4: com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest.identifier:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	22, // 5: com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest.identifier:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	22, // 6: com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest.identifier:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	22, // 7: com.coralogixapis.notification_center.presets.v1.GetPresetRequest.identifier:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	21, // 8: com.coralogixapis.notification_center.presets.v1.GetPresetResponse.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
-	23, // 9: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	24, // 10: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest.order_bys:type_name -> com.coralogixapis.notification_center.OrderBy
-	25, // 11: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse.preset_summaries:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
-	20, // 12: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.presets:type_name -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry
-	23, // 13: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	25, // 14: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse.preset_summary:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
-	23, // 15: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	25, // 16: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse.preset_summary:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
-	21, // 17: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry.value:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
-	0,  // 18: com.coralogixapis.notification_center.presets.v1.PresetsService.CreateCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest
-	2,  // 19: com.coralogixapis.notification_center.presets.v1.PresetsService.ReplaceCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest
-	4,  // 20: com.coralogixapis.notification_center.presets.v1.PresetsService.DeleteCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest
-	6,  // 21: com.coralogixapis.notification_center.presets.v1.PresetsService.SetCustomPresetAsDefault:input_type -> com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest
-	8,  // 22: com.coralogixapis.notification_center.presets.v1.PresetsService.SetPresetAsDefault:input_type -> com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest
-	10, // 23: com.coralogixapis.notification_center.presets.v1.PresetsService.GetPreset:input_type -> com.coralogixapis.notification_center.presets.v1.GetPresetRequest
-	12, // 24: com.coralogixapis.notification_center.presets.v1.PresetsService.ListPresetSummaries:input_type -> com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest
-	14, // 25: com.coralogixapis.notification_center.presets.v1.PresetsService.BatchGetPresets:input_type -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsRequest
-	16, // 26: com.coralogixapis.notification_center.presets.v1.PresetsService.GetDefaultPresetSummary:input_type -> com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest
-	18, // 27: com.coralogixapis.notification_center.presets.v1.PresetsService.GetSystemDefaultPresetSummary:input_type -> com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest
-	1,  // 28: com.coralogixapis.notification_center.presets.v1.PresetsService.CreateCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse
-	3,  // 29: com.coralogixapis.notification_center.presets.v1.PresetsService.ReplaceCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse
-	5,  // 30: com.coralogixapis.notification_center.presets.v1.PresetsService.DeleteCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetResponse
-	7,  // 31: com.coralogixapis.notification_center.presets.v1.PresetsService.SetCustomPresetAsDefault:output_type -> com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultResponse
-	9,  // 32: com.coralogixapis.notification_center.presets.v1.PresetsService.SetPresetAsDefault:output_type -> com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultResponse
-	11, // 33: com.coralogixapis.notification_center.presets.v1.PresetsService.GetPreset:output_type -> com.coralogixapis.notification_center.presets.v1.GetPresetResponse
-	13, // 34: com.coralogixapis.notification_center.presets.v1.PresetsService.ListPresetSummaries:output_type -> com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse
-	15, // 35: com.coralogixapis.notification_center.presets.v1.PresetsService.BatchGetPresets:output_type -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse
-	17, // 36: com.coralogixapis.notification_center.presets.v1.PresetsService.GetDefaultPresetSummary:output_type -> com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse
-	19, // 37: com.coralogixapis.notification_center.presets.v1.PresetsService.GetSystemDefaultPresetSummary:output_type -> com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse
-	28, // [28:38] is the sub-list for method output_type
-	18, // [18:28] is the sub-list for method input_type
-	18, // [18:18] is the sub-list for extension type_name
-	18, // [18:18] is the sub-list for extension extendee
-	0,  // [0:18] is the sub-list for field type_name
+	22, // 4: com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest.deprecated_identifier_2:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
+	23, // 5: com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest.identifier:type_name -> com.coralogixapis.notification_center.PresetIdentifier
+	22, // 6: com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest.deprecated_identifier_2:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
+	23, // 7: com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest.identifier:type_name -> com.coralogixapis.notification_center.PresetIdentifier
+	22, // 8: com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest.deprecated_identifier:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
+	23, // 9: com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest.identifier:type_name -> com.coralogixapis.notification_center.PresetIdentifier
+	22, // 10: com.coralogixapis.notification_center.presets.v1.GetPresetRequest.deprecated_identifier_2:type_name -> com.coralogixapis.notification_center.presets.v1.PresetIdentifier
+	23, // 11: com.coralogixapis.notification_center.presets.v1.GetPresetRequest.identifier:type_name -> com.coralogixapis.notification_center.PresetIdentifier
+	21, // 12: com.coralogixapis.notification_center.presets.v1.GetPresetResponse.preset:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
+	24, // 13: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	25, // 14: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	26, // 15: com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse.preset_summaries:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
+	23, // 16: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsRequest.ids:type_name -> com.coralogixapis.notification_center.PresetIdentifier
+	20, // 17: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.presets:type_name -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry
+	24, // 18: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	25, // 19: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	26, // 20: com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse.preset_summary:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
+	24, // 21: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	25, // 22: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	26, // 23: com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse.preset_summary:type_name -> com.coralogixapis.notification_center.presets.v1.PresetSummary
+	21, // 24: com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse.PresetsEntry.value:type_name -> com.coralogixapis.notification_center.presets.v1.Preset
+	0,  // 25: com.coralogixapis.notification_center.presets.v1.PresetsService.CreateCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.CreateCustomPresetRequest
+	2,  // 26: com.coralogixapis.notification_center.presets.v1.PresetsService.ReplaceCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetRequest
+	4,  // 27: com.coralogixapis.notification_center.presets.v1.PresetsService.DeleteCustomPreset:input_type -> com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetRequest
+	6,  // 28: com.coralogixapis.notification_center.presets.v1.PresetsService.SetCustomPresetAsDefault:input_type -> com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultRequest
+	8,  // 29: com.coralogixapis.notification_center.presets.v1.PresetsService.SetPresetAsDefault:input_type -> com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultRequest
+	10, // 30: com.coralogixapis.notification_center.presets.v1.PresetsService.GetPreset:input_type -> com.coralogixapis.notification_center.presets.v1.GetPresetRequest
+	12, // 31: com.coralogixapis.notification_center.presets.v1.PresetsService.ListPresetSummaries:input_type -> com.coralogixapis.notification_center.presets.v1.ListPresetSummariesRequest
+	14, // 32: com.coralogixapis.notification_center.presets.v1.PresetsService.BatchGetPresets:input_type -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsRequest
+	16, // 33: com.coralogixapis.notification_center.presets.v1.PresetsService.GetDefaultPresetSummary:input_type -> com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryRequest
+	18, // 34: com.coralogixapis.notification_center.presets.v1.PresetsService.GetSystemDefaultPresetSummary:input_type -> com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryRequest
+	1,  // 35: com.coralogixapis.notification_center.presets.v1.PresetsService.CreateCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.CreateCustomPresetResponse
+	3,  // 36: com.coralogixapis.notification_center.presets.v1.PresetsService.ReplaceCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.ReplaceCustomPresetResponse
+	5,  // 37: com.coralogixapis.notification_center.presets.v1.PresetsService.DeleteCustomPreset:output_type -> com.coralogixapis.notification_center.presets.v1.DeleteCustomPresetResponse
+	7,  // 38: com.coralogixapis.notification_center.presets.v1.PresetsService.SetCustomPresetAsDefault:output_type -> com.coralogixapis.notification_center.presets.v1.SetCustomPresetAsDefaultResponse
+	9,  // 39: com.coralogixapis.notification_center.presets.v1.PresetsService.SetPresetAsDefault:output_type -> com.coralogixapis.notification_center.presets.v1.SetPresetAsDefaultResponse
+	11, // 40: com.coralogixapis.notification_center.presets.v1.PresetsService.GetPreset:output_type -> com.coralogixapis.notification_center.presets.v1.GetPresetResponse
+	13, // 41: com.coralogixapis.notification_center.presets.v1.PresetsService.ListPresetSummaries:output_type -> com.coralogixapis.notification_center.presets.v1.ListPresetSummariesResponse
+	15, // 42: com.coralogixapis.notification_center.presets.v1.PresetsService.BatchGetPresets:output_type -> com.coralogixapis.notification_center.presets.v1.BatchGetPresetsResponse
+	17, // 43: com.coralogixapis.notification_center.presets.v1.PresetsService.GetDefaultPresetSummary:output_type -> com.coralogixapis.notification_center.presets.v1.GetDefaultPresetSummaryResponse
+	19, // 44: com.coralogixapis.notification_center.presets.v1.PresetsService.GetSystemDefaultPresetSummary:output_type -> com.coralogixapis.notification_center.presets.v1.GetSystemDefaultPresetSummaryResponse
+	35, // [35:45] is the sub-list for method output_type
+	25, // [25:35] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_init() }
@@ -1255,18 +1252,7 @@ func file_com_coralogixapis_notification_center_presets_v1_presets_service_proto
 		return
 	}
 	file_com_coralogixapis_notification_center_presets_v1_preset_proto_init()
-	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_msgTypes[4].OneofWrappers = []any{
-		(*DeleteCustomPresetRequest_Id)(nil),
-		(*DeleteCustomPresetRequest_UserFacingId)(nil),
-	}
-	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_msgTypes[6].OneofWrappers = []any{
-		(*SetCustomPresetAsDefaultRequest_Id)(nil),
-		(*SetCustomPresetAsDefaultRequest_UserFacingId)(nil),
-	}
-	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_msgTypes[10].OneofWrappers = []any{
-		(*GetPresetRequest_Id)(nil),
-		(*GetPresetRequest_UserFacingId)(nil),
-	}
+	file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_msgTypes[12].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
