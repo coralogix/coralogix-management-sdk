@@ -1,11 +1,16 @@
 syntax = "proto3";
 
 package com.coralogixapis.notification_center.routers.v1;
-import "com/coralogixapis/notification_center/common/v1/routing.proto";
+
+import "com/coralogixapis/notification_center/common/common.proto";
+import "com/coralogixapis/notification_center/common/v1/identifier.proto";
+import "com/coralogixapis/notification_center/common/v1/routing/routing.proto";
 import "com/coralogixapis/notification_center/routers/v1/router.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+
+option go_package = "com/coralogixapis/notification_center/routers/v1";
 
 // Public API that allows managing global routers
 service GlobalRoutersService {
@@ -16,24 +21,24 @@ service GlobalRoutersService {
       };
   }
 
-  rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {}
-
-  rpc CreateOrReplaceGlobalRouter(CreateOrReplaceGlobalRouterRequest) returns (CreateOrReplaceGlobalRouterResponse) {
+  rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {
       option (google.api.http) = {
           put: "/v1/notification-center/routers"
           body: "router"
       };
   }
 
+  rpc CreateOrReplaceGlobalRouter(CreateOrReplaceGlobalRouterRequest) returns (CreateOrReplaceGlobalRouterResponse) {}
+
   rpc DeleteGlobalRouter(DeleteGlobalRouterRequest) returns (DeleteGlobalRouterResponse) {
       option (google.api.http) = {
-          delete: "/v1/notification-center/routers/{identifier.user_facing_id}"
+          delete: "/v1/notification-center/routers/{id}"
       };
   }
 
   rpc GetGlobalRouter(GetGlobalRouterRequest) returns (GetGlobalRouterResponse) {
       option (google.api.http) = {
-          get: "/v1/notification-center/routers/{identifier.user_facing_id}"
+          get: "/v1/notification-center/routers/{id}"
       };
   }
 
@@ -43,7 +48,11 @@ service GlobalRoutersService {
       };
   }
 
-  rpc BatchGetGlobalRouters(BatchGetGlobalRoutersRequest) returns (BatchGetGlobalRoutersResponse) {}
+  rpc BatchGetGlobalRouters(BatchGetGlobalRoutersRequest) returns (BatchGetGlobalRoutersResponse) {
+      option (google.api.http) = {
+          get: "/v1/notification-center/routers:batchGetSummaries"
+      };
+  }
 }
 
 message CreateGlobalRouterRequest {
@@ -145,7 +154,9 @@ message DeleteGlobalRouterRequest {
             description: "Find out more about notification center"
         }
     };
-    routing.GlobalRouterIdentifier identifier = 1;
+    routing.GlobalRouterIdentifier deprecated_identifier = 1 [deprecated = true];
+    notification_center.GlobalRouterIdentifier identifier = 2 [deprecated = true];
+    string id = 3;
 }
 message DeleteGlobalRouterResponse {
 }
@@ -162,7 +173,9 @@ message GetGlobalRouterRequest {
             description: "Find out more about notification center"
         }
     };
-    routing.GlobalRouterIdentifier identifier = 1;
+    routing.GlobalRouterIdentifier deprecated_identifier = 1 [deprecated = true];
+    notification_center.GlobalRouterIdentifier identifier = 2 [deprecated = true];
+    string id = 3;
 }
 message GetGlobalRouterResponse {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -191,7 +204,8 @@ message ListGlobalRoutersRequest {
             description: "Find out more about notification center"
         }
     };
-    optional string entity_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alerts\"" }];
+    optional string deprecated_entity_type = 1 [deprecated = true];
+    optional EntityType entity_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }]; 
 }
 message ListGlobalRoutersResponse {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -220,7 +234,9 @@ message BatchGetGlobalRoutersRequest {
             description: "Find out more about notification center"
         }
     };
-    repeated routing.GlobalRouterIdentifier ids = 1;
+    repeated routing.GlobalRouterIdentifier deprecated_ids = 1 [deprecated = true];
+    repeated notification_center.GlobalRouterIdentifier ids = 2 [deprecated = true];
+    repeated string global_router_ids = 3;
 }
 message BatchGetGlobalRoutersResponse {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -235,5 +251,5 @@ message BatchGetGlobalRoutersResponse {
         }
     };
     map<string, GlobalRouter> routers = 1;
-    repeated string not_found_identifiers = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"global-router-id-3\"]" }];
+    repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"global-router-id-3\"]" }];
 }

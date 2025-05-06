@@ -56,7 +56,8 @@
                           },
                           "unit": 1,
                           "scale_type": 1,
-                          "data_mode_type": 1
+                          "data_mode_type": 1,
+                          "custom_links": []
                         }
                       ],
                       "legend": {
@@ -107,7 +108,8 @@
                           },
                           "unit": 1,
                           "scale_type": 1,
-                          "data_mode_type": 1
+                          "data_mode_type": 1,
+                          "custom_links": []
                         }
                       ],
                       "legend": {
@@ -166,7 +168,8 @@
                           },
                           "unit": 1,
                           "scale_type": 1,
-                          "data_mode_type": 1
+                          "data_mode_type": 1,
+                          "custom_links": []
                         }
                       ],
                       "legend": {
@@ -256,7 +259,8 @@
                           "field": "textObject.log_obj.e2e_test.config"
                         }
                       ],
-                      "data_mode_type": 1
+                      "data_mode_type": 1,
+                      "custom_links": []
                     }
                   }
                 },

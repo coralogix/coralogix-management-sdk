@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
+import "com/coralogixapis/notification_center/common/v1/identifier.proto";
+
+package com.coralogixapis.notification_center.remote_actions.v1;
+
+
+// Public API for Remote Actions execution.
+// Note: This API is in development phase and subject to change.
+service RemoteActionsService {
+  rpc TriggerRemoteAction(TriggerRemoteActionRequest) returns (TriggerRemoteActionResponse) {}
+}
+
+message TriggerRemoteActionRequest {
+  string remote_action_template_id = 1;
+  string deprecated_connector_id = 2 [deprecated = true];
+  repeated RenderedMessageConfigField message_config = 3;
+  ConnectorIdentifier connector_identifier = 4 [deprecated = true];
+  string connector_id = 5;
+}
+
+message TriggerRemoteActionResponse {}

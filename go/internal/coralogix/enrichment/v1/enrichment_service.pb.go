@@ -584,14 +584,22 @@ const file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc = "" +
 	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments\"%\n" +
 	"#GetCompanyEnrichmentSettingsRequest\"\x8f\x01\n" +
 	"$GetCompanyEnrichmentSettingsResponse\x12g\n" +
-	"\x13enrichment_settings\x18\x01 \x01(\v26.com.coralogix.enrichment.v1.CompanyEnrichmentSettingsR\x12enrichmentSettings2\x87\b\n" +
-	"\x11EnrichmentService\x12\x8f\x01\n" +
-	"\x0eGetEnrichments\x122.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/enrichments\x12\x92\x01\n" +
-	"\x0eAddEnrichments\x122.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/enrichments\x12\x98\x01\n" +
-	"\x11RemoveEnrichments\x125.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a6.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"\x14\x82\xd3\xe4\x93\x02\x0e*\f/enrichments\x12\xa1\x01\n" +
-	"\x12GetEnrichmentLimit\x126.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a7.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"\x1a\x82\xd3\xe4\x93\x02\x14\x12\x12/enrichments/limit\x12\xc6\x01\n" +
-	"\x1aAtomicOverwriteEnrichments\x12>.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest\x1a?.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse\"'\x82\xd3\xe4\x93\x02!:\x01*2\x1c/enrichments:atomicOverwrite\x12\xc2\x01\n" +
-	"\x1cGetCompanyEnrichmentSettings\x12@.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest\x1aA.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/enrichments/settingsb\x06proto3"
+	"\x13enrichment_settings\x18\x01 \x01(\v26.com.coralogix.enrichment.v1.CompanyEnrichmentSettingsR\x12enrichmentSettings2\xd6\n" +
+	"\n" +
+	"\x11EnrichmentService\x12\xb8\x01\n" +
+	"\x0eGetEnrichments\x122.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"=\x92A&\n" +
+	"\x13Enrichments Service\x12\x0fGet Enrichments\x82\xd3\xe4\x93\x02\x0e\x12\f/enrichments\x12\xbb\x01\n" +
+	"\x0eAddEnrichments\x122.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"@\x92A&\n" +
+	"\x13Enrichments Service\x12\x0fAdd Enrichments\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/enrichments\x12\xc4\x01\n" +
+	"\x11RemoveEnrichments\x125.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a6.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"@\x92A)\n" +
+	"\x13Enrichments Service\x12\x12Delete Enrichments\x82\xd3\xe4\x93\x02\x0e*\f/enrichments\x12\xcf\x01\n" +
+	"\x12GetEnrichmentLimit\x126.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a7.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"H\x92A+\n" +
+	"\x13Enrichments Service\x12\x14Get Enrichment Limit\x82\xd3\xe4\x93\x02\x14\x12\x12/enrichments/limit\x12\xfc\x01\n" +
+	"\x1aAtomicOverwriteEnrichments\x12>.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest\x1a?.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse\"]\x92A3\n" +
+	"\x13Enrichments Service\x12\x1cAtomic Overwrite Enrichments\x82\xd3\xe4\x93\x02!:\x01*2\x1c/enrichments:atomicOverwrite\x12\xfb\x01\n" +
+	"\x1cGetCompanyEnrichmentSettings\x12@.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest\x1aA.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse\"V\x92A6\n" +
+	"\x13Enrichments Service\x12\x1fGet Company Enrichment Settings\x82\xd3\xe4\x93\x02\x17\x12\x15/enrichments/settings\x1a2\x92A/\n" +
+	"\x13Enrichments Service\x12\x18Manage your enrichments.b\x06proto3"
 
 var (
 	file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDescOnce sync.Once

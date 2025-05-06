@@ -86,6 +86,7 @@ type PieChart struct {
 	CustomUnit         *wrapperspb.StringValue   `protobuf:"bytes,11,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
 	Decimal            *wrapperspb.Int32Value    `protobuf:"bytes,12,opt,name=decimal,proto3" json:"decimal,omitempty"`
 	Legend             *Legend                   `protobuf:"bytes,13,opt,name=legend,proto3" json:"legend,omitempty"`
+	CustomLinks        []*CustomLink             `protobuf:"bytes,14,rep,name=custom_links,json=customLinks,proto3" json:"custom_links,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -207,6 +208,13 @@ func (x *PieChart) GetDecimal() *wrapperspb.Int32Value {
 func (x *PieChart) GetLegend() *Legend {
 	if x != nil {
 		return x.Legend
+	}
+	return nil
+}
+
+func (x *PieChart) GetCustomLinks() []*CustomLink {
+	if x != nil {
+		return x.CustomLinks
 	}
 	return nil
 }
@@ -833,7 +841,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto protoreflec
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9d%\n" +
+	";com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aEcom/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x80&\n" +
 	"\bPieChart\x12Q\n" +
 	"\x05query\x18\x01 \x01(\v2;.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.QueryR\x05query\x12L\n" +
 	"\x14max_slices_per_chart\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x11maxSlicesPerChart\x12M\n" +
@@ -850,7 +858,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_rawDesc =
 	"\vcustom_unit\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\n" +
 	"customUnit\x125\n" +
 	"\adecimal\x18\f \x01(\v2\x1b.google.protobuf.Int32ValueR\adecimal\x12R\n" +
-	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendR\x06legend\x1a\x87\x03\n" +
+	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendR\x06legend\x12a\n" +
+	"\fcustom_links\x18\x0e \x03(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLinkR\vcustomLinks\x1a\x87\x03\n" +
 	"\x05Query\x12U\n" +
 	"\x04logs\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQueryH\x00R\x04logs\x12X\n" +
 	"\x05spans\x18\x02 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQueryH\x00R\x05spans\x12^\n" +
@@ -946,21 +955,22 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_goTypes = [
 	(Unit)(0),                        // 12: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
 	(DataModeType)(0),                // 13: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
 	(*Legend)(nil),                   // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	(*LuceneQuery)(nil),              // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	(*LogsAggregation)(nil),          // 16: com.coralogixapis.dashboards.v1.common.LogsAggregation
-	(*Filter_LogsFilter)(nil),        // 17: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	(*ObservationField)(nil),         // 18: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*TimeFrameSelect)(nil),          // 19: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	(*SpansAggregation)(nil),         // 20: com.coralogixapis.dashboards.v1.common.SpansAggregation
-	(*Filter_SpansFilter)(nil),       // 21: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	(*SpanField)(nil),                // 22: com.coralogixapis.dashboards.v1.common.SpanField
-	(*PromQlQuery)(nil),              // 23: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	(*Filter_MetricsFilter)(nil),     // 24: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	(MetricsQueryEditorMode)(0),      // 25: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	(PromQLQueryType)(0),             // 26: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(Aggregation)(0),                 // 27: com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
-	(*DataprimeQuery)(nil),           // 28: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*Filter_Source)(nil),            // 29: com.coralogixapis.dashboards.v1.ast.Filter.Source
+	(*CustomLink)(nil),               // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLink
+	(*LuceneQuery)(nil),              // 16: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*LogsAggregation)(nil),          // 17: com.coralogixapis.dashboards.v1.common.LogsAggregation
+	(*Filter_LogsFilter)(nil),        // 18: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	(*ObservationField)(nil),         // 19: com.coralogixapis.dashboards.v1.common.ObservationField
+	(*TimeFrameSelect)(nil),          // 20: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	(*SpansAggregation)(nil),         // 21: com.coralogixapis.dashboards.v1.common.SpansAggregation
+	(*Filter_SpansFilter)(nil),       // 22: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	(*SpanField)(nil),                // 23: com.coralogixapis.dashboards.v1.common.SpanField
+	(*PromQlQuery)(nil),              // 24: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*Filter_MetricsFilter)(nil),     // 25: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	(MetricsQueryEditorMode)(0),      // 26: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(PromQLQueryType)(0),             // 27: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(Aggregation)(0),                 // 28: com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
+	(*DataprimeQuery)(nil),           // 29: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*Filter_Source)(nil),            // 30: com.coralogixapis.dashboards.v1.ast.Filter.Source
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_depIdxs = []int32{
 	2,  // 0: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query
@@ -976,51 +986,52 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_depIdxs = [
 	11, // 10: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.custom_unit:type_name -> google.protobuf.StringValue
 	9,  // 11: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.decimal:type_name -> google.protobuf.Int32Value
 	14, // 12: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	5,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery
-	6,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery
-	7,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery
-	8,  // 16: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery
-	9,  // 17: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinition.max_slices_per_stack:type_name -> google.protobuf.Int32Value
-	11, // 18: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinition.stack_name_template:type_name -> google.protobuf.StringValue
-	0,  // 19: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelSource
-	10, // 20: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
-	10, // 21: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
-	10, // 22: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
-	10, // 23: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
-	15, // 24: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	16, // 25: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	17, // 26: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	11, // 27: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.group_names:type_name -> google.protobuf.StringValue
-	11, // 28: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.stacked_group_name:type_name -> google.protobuf.StringValue
-	18, // 29: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	18, // 30: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 31: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	15, // 32: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	20, // 33: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
-	21, // 34: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	22, // 35: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.group_names:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	22, // 36: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.stacked_group_name:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	19, // 37: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	18, // 38: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	18, // 39: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	23, // 40: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	24, // 41: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	11, // 42: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.group_names:type_name -> google.protobuf.StringValue
-	11, // 43: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.stacked_group_name:type_name -> google.protobuf.StringValue
-	25, // 44: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	19, // 45: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	26, // 46: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	27, // 47: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
-	28, // 48: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	29, // 49: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
-	11, // 50: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.group_names:type_name -> google.protobuf.StringValue
-	11, // 51: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.stacked_group_name:type_name -> google.protobuf.StringValue
-	19, // 52: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	53, // [53:53] is the sub-list for method output_type
-	53, // [53:53] is the sub-list for method input_type
-	53, // [53:53] is the sub-list for extension type_name
-	53, // [53:53] is the sub-list for extension extendee
-	0,  // [0:53] is the sub-list for field type_name
+	15, // 13: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.custom_links:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLink
+	5,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery
+	6,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery
+	7,  // 16: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery
+	8,  // 17: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery
+	9,  // 18: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinition.max_slices_per_stack:type_name -> google.protobuf.Int32Value
+	11, // 19: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinition.stack_name_template:type_name -> google.protobuf.StringValue
+	0,  // 20: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.label_source:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelSource
+	10, // 21: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.is_visible:type_name -> google.protobuf.BoolValue
+	10, // 22: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_name:type_name -> google.protobuf.BoolValue
+	10, // 23: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_value:type_name -> google.protobuf.BoolValue
+	10, // 24: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinition.show_percentage:type_name -> google.protobuf.BoolValue
+	16, // 25: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	17, // 26: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	18, // 27: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	11, // 28: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.group_names:type_name -> google.protobuf.StringValue
+	11, // 29: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.stacked_group_name:type_name -> google.protobuf.StringValue
+	19, // 30: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	19, // 31: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	20, // 32: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	16, // 33: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	21, // 34: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
+	22, // 35: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	23, // 36: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.group_names:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	23, // 37: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.stacked_group_name:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	20, // 38: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	19, // 39: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	19, // 40: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 41: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	25, // 42: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	11, // 43: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.group_names:type_name -> google.protobuf.StringValue
+	11, // 44: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.stacked_group_name:type_name -> google.protobuf.StringValue
+	26, // 45: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	20, // 46: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	27, // 47: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	28, // 48: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.MetricsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
+	29, // 49: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	30, // 50: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
+	11, // 51: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.group_names:type_name -> google.protobuf.StringValue
+	11, // 52: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.stacked_group_name:type_name -> google.protobuf.StringValue
+	20, // 53: com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	54, // [54:54] is the sub-list for method output_type
+	54, // [54:54] is the sub-list for method input_type
+	54, // [54:54] is the sub-list for extension type_name
+	54, // [54:54] is the sub-list for extension extendee
+	0,  // [0:54] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_init() }
@@ -1029,6 +1040,7 @@ func file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_init() {
 		return
 	}
 	file_com_coralogixapis_dashboards_v1_ast_filter_proto_init()
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_custom_links_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_widgets_common_data_mode_type_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_widgets_common_metrics_aggregation_type_proto_init()

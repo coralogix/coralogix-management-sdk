@@ -9,6 +9,7 @@ message CustomEnrichment {
   uint32 version = 5;
   bool is_query_only = 6;
   string file_name = 7;
+  uint32 file_size = 8;
 }
 
 message CustomEnrichmentData {

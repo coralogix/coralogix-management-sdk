@@ -23,6 +23,7 @@ message File {
 
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"file_name\"" }];
   google.protobuf.StringValue extension = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"csv\"" }];
+  google.protobuf.UInt32Value size = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
   oneof content {
     google.protobuf.StringValue textual = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"row1,row2 value1,value2\"" }];
     google.protobuf.BytesValue binary = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"0xFABB32\"" }];
@@ -229,14 +230,26 @@ message SearchCustomEnrichmentDataResponse {
 }
 
 service CustomEnrichmentService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Custom Enrichments Service"
+    description: "Manage your enrichments."
+  };
   rpc GetCustomEnrichment(GetCustomEnrichmentRequest) returns (GetCustomEnrichmentResponse) {
     option (google.api.http) = {
       get: "/v1/custom_enrichment/{id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Get Custom Enrichment"
     };
   };
   rpc GetCustomEnrichments(GetCustomEnrichmentsRequest) returns (GetCustomEnrichmentsResponse) {
     option (google.api.http) = {
       get: "/v1/custom_enrichment"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Get Custom Enrichments"
     };
   };
   rpc CreateCustomEnrichment(CreateCustomEnrichmentRequest) returns (CreateCustomEnrichmentResponse) {
@@ -244,21 +257,37 @@ service CustomEnrichmentService {
       post: "/v1/custom_enrichment"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Create Custom Enrichments"
+    };
   };
   rpc UpdateCustomEnrichment(UpdateCustomEnrichmentRequest) returns (UpdateCustomEnrichmentResponse) {
     option (google.api.http) = {
       put: "/v1/custom_enrichment"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Update Custom Enrichment"
+    };
   };
   rpc DeleteCustomEnrichment(DeleteCustomEnrichmentRequest) returns (DeleteCustomEnrichmentResponse) {
     option (google.api.http) = {
       delete: "/v1/custom_enrichment/{custom_enrichment_id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Delete Custom Enrichments"
+    };
   };
   rpc SearchCustomEnrichmentData(SearchCustomEnrichmentDataRequest) returns (SearchCustomEnrichmentDataResponse) {
     option (google.api.http) = {
       post: "/v1/custom_enrichment/search"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Custom Enrichments Service"]
+      summary: "Search Custom Enrichment Data"
     };
   };
 }
