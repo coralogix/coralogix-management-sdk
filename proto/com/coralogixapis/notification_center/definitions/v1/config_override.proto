@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center.definitions.v1;
+import "com/coralogixapis/notification_center/common/common.proto";
+
+message ConfigOverrideComponentDefinition {
+  string deprecated_entity_type = 1 [deprecated = true];
+  string entity_display_name = 2;
+  string entity_type_description = 3;
+  OverrideAllDefinition override_all = 4;
+  SubTypeGroupingDefinition sub_type_grouping = 5;
+  repeated EntitySubType entity_sub_types = 6;
+  EntityType entity_type = 7;
+}
+
+message OverrideAllDefinition {
+  string display_name = 1;
+  string summary = 2;
+  string description = 3;
+}
+
+message SubTypeGroupingDefinition {
+  GroupingKey primary_grouping_key = 1;
+  repeated GroupingKey secondary_grouping_keys = 2;
+}
+
+message GroupingKey {
+  string display_name = 1;
+}
+
+message EntitySubType {
+  string entity_sub_type = 1;
+  string primary_grouping_value = 2;
+  map<string, string> secondary_grouping_values = 3;
+  string variant = 4;
+}

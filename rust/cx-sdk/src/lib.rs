@@ -87,7 +87,7 @@ impl CoralogixRegion {
             CoralogixRegion::AP1 => "https://ng-api-grpc.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-grpc.coralogixsg.com".into(),
             CoralogixRegion::AP3 => "https://ng-api-grpc.ap3.coralogix.com".into(),
-            CoralogixRegion::Custom(custom) => format!("https://ng-api-grpc.{}:443", custom),
+            CoralogixRegion::Custom(custom) => format!("https://ng-api-grpc.{custom}:443"),
         }
     }
 
@@ -102,7 +102,7 @@ impl CoralogixRegion {
             CoralogixRegion::AP1 => "https://ng-api-http.app.coralogix.in".into(),
             CoralogixRegion::AP2 => "https://ng-api-http.coralogixsg.com".into(),
             CoralogixRegion::AP3 => "https://ng-api-http.ap3.coralogix.com".into(),
-            CoralogixRegion::Custom(custom) => format!("https://ng-api-http.{}", custom),
+            CoralogixRegion::Custom(custom) => format!("https://ng-api-http.{custom}"),
         }
     }
 
@@ -144,7 +144,7 @@ impl From<&ApiKey> for metadata::CallProperties {
                 ),
                 (
                     HeaderName::from_static(SDK_VERSION_HEADER_NAME),
-                    HeaderValue::from_str(format!("sdk-{}", SDK_VERSION).as_str()).unwrap(),
+                    HeaderValue::from_str(format!("sdk-{SDK_VERSION}").as_str()).unwrap(),
                 ),
                 (
                     HeaderName::from_static(SDK_LANGUAGE_HEADER_NAME),

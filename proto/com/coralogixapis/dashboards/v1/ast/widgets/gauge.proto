@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
@@ -32,6 +33,7 @@ message Gauge {
   common.Legend legend = 13;
   common.LegendBy legend_by = 14;
   google.protobuf.BoolValue display_series_name = 15;
+  repeated common.CustomLink custom_links = 16;
 
   message Query {
     oneof value {

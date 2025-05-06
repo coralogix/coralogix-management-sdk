@@ -71,10 +71,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_common_anomaly_al
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_common_anomaly_alert_settings_proto_rawDesc = "" +
 	"\n" +
-	"Ycom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xda\x01\n" +
-	"\x14AnomalyAlertSettings\x12^\n" +
-	"\x17percentage_of_deviation\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueB\t\x92A\x06J\x0410.0R\x15percentageOfDeviation:b\x92A_\n" +
-	"]*\x16Anomaly alert settings2)Common settings for anomaly-based alerts.\xd2\x01\x17percentage_of_deviationb\x06proto3"
+	"Ycom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x84\x02\n" +
+	"\x14AnomalyAlertSettings\x12\xa1\x01\n" +
+	"\x17percentage_of_deviation\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueBL\x92AI2GThe percentage of deviation from the baseline for triggering the alert.R\x15percentageOfDeviation:H\x92AE\n" +
+	"C*\x16Anomaly alert settings2)Common settings for anomaly-based alerts.b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_common_anomaly_alert_settings_proto_rawDescOnce sync.Once

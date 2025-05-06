@@ -28,6 +28,7 @@ type File struct {
 	state     protoimpl.MessageState  `protogen:"open.v1"`
 	Name      *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Extension *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=extension,proto3" json:"extension,omitempty"`
+	Size      *wrapperspb.UInt32Value `protobuf:"bytes,5,opt,name=size,proto3" json:"size,omitempty"`
 	// Types that are valid to be assigned to Content:
 	//
 	//	*File_Textual
@@ -77,6 +78,13 @@ func (x *File) GetName() *wrapperspb.StringValue {
 func (x *File) GetExtension() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Extension
+	}
+	return nil
+}
+
+func (x *File) GetSize() *wrapperspb.UInt32Value {
+	if x != nil {
+		return x.Size
 	}
 	return nil
 }
@@ -794,11 +802,12 @@ var File_com_coralogix_enrichment_v1_custom_enrichment_service_proto protoreflec
 
 const file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xf3\x03\n" +
+	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xaf\x04\n" +
 	"\x04File\x12B\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"file_name\"R\x04name\x12F\n" +
 	"\textension\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
-	"\x92A\aJ\x05\"csv\"R\textension\x12X\n" +
+	"\x92A\aJ\x05\"csv\"R\textension\x12:\n" +
+	"\x04size\x18\x05 \x01(\v2\x1c.google.protobuf.UInt32ValueB\b\x92A\x05J\x03100R\x04size\x12X\n" +
 	"\atextual\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1bJ\x19\"row1,row2 value1,value2\"H\x00R\atextual\x12F\n" +
 	"\x06binary\x18\x04 \x01(\v2\x1b.google.protobuf.BytesValueB\x0f\x92A\fJ\n" +
 	"\"0xFABB32\"H\x00R\x06binary:\xb1\x01\x92A\xad\x01\n" +
@@ -859,14 +868,21 @@ const file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDesc =
 	"~*%Search Custom Enrichment Data Request2DThis request data structure is used to search custom enrichment data\xd2\x01\x0esearch_clauses*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x8f\x01\n" +
 	"\"SearchCustomEnrichmentDataResponse\x12i\n" +
-	"\x17custom_enrichments_data\x18\x01 \x03(\v21.com.coralogix.enrichment.v1.CustomEnrichmentDataR\x15customEnrichmentsData2\xf1\b\n" +
-	"\x17CustomEnrichmentService\x12\xac\x01\n" +
-	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/custom_enrichment/{id}\x12\xaa\x01\n" +
-	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/custom_enrichment\x12\xb3\x01\n" +
-	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/custom_enrichment\x12\xb3\x01\n" +
-	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/custom_enrichment\x12\xc7\x01\n" +
-	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"4\x82\xd3\xe4\x93\x02.*,/v1/custom_enrichment/{custom_enrichment_id}\x12\xc3\x01\n" +
-	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"$\x82\xd3\xe4\x93\x02\x1e\"\x1c/v1/custom_enrichment/searchb\x06proto3"
+	"\x17custom_enrichments_data\x18\x01 \x03(\v21.com.coralogix.enrichment.v1.CustomEnrichmentDataR\x15customEnrichmentsData2\x84\f\n" +
+	"\x17CustomEnrichmentService\x12\xe2\x01\n" +
+	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"X\x92A3\n" +
+	"\x1aCustom Enrichments Service\x12\x15Get Custom Enrichment\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/custom_enrichment/{id}\x12\xe1\x01\n" +
+	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"T\x92A4\n" +
+	"\x1aCustom Enrichments Service\x12\x16Get Custom Enrichments\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/custom_enrichment\x12\xed\x01\n" +
+	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\"Z\x92A7\n" +
+	"\x1aCustom Enrichments Service\x12\x19Create Custom Enrichments\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/custom_enrichment\x12\xec\x01\n" +
+	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\"Y\x92A6\n" +
+	"\x1aCustom Enrichments Service\x12\x18Update Custom Enrichment\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/custom_enrichment\x12\x81\x02\n" +
+	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"n\x92A7\n" +
+	"\x1aCustom Enrichments Service\x12\x19Delete Custom Enrichments\x82\xd3\xe4\x93\x02.*,/v1/custom_enrichment/{custom_enrichment_id}\x12\x81\x02\n" +
+	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"b\x92A;\n" +
+	"\x1aCustom Enrichments Service\x12\x1dSearch Custom Enrichment Data\x82\xd3\xe4\x93\x02\x1e\"\x1c/v1/custom_enrichment/search\x1a9\x92A6\n" +
+	"\x1aCustom Enrichments Service\x12\x18Manage your enrichments.b\x06proto3"
 
 var (
 	file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDescOnce sync.Once
@@ -897,50 +913,51 @@ var file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_goTypes = [
 	(*SearchCustomEnrichmentDataResponse)(nil),             // 12: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse
 	(*SearchCustomEnrichmentDataRequest_SearchClause)(nil), // 13: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause
 	(*wrapperspb.StringValue)(nil),                         // 14: google.protobuf.StringValue
-	(*wrapperspb.BytesValue)(nil),                          // 15: google.protobuf.BytesValue
-	(*wrapperspb.UInt32Value)(nil),                         // 16: google.protobuf.UInt32Value
+	(*wrapperspb.UInt32Value)(nil),                         // 15: google.protobuf.UInt32Value
+	(*wrapperspb.BytesValue)(nil),                          // 16: google.protobuf.BytesValue
 	(*CustomEnrichment)(nil),                               // 17: com.coralogix.enrichment.v1.CustomEnrichment
 	(*CustomEnrichmentData)(nil),                           // 18: com.coralogix.enrichment.v1.CustomEnrichmentData
 }
 var file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_depIdxs = []int32{
 	14, // 0: com.coralogix.enrichment.v1.File.name:type_name -> google.protobuf.StringValue
 	14, // 1: com.coralogix.enrichment.v1.File.extension:type_name -> google.protobuf.StringValue
-	14, // 2: com.coralogix.enrichment.v1.File.textual:type_name -> google.protobuf.StringValue
-	15, // 3: com.coralogix.enrichment.v1.File.binary:type_name -> google.protobuf.BytesValue
-	16, // 4: com.coralogix.enrichment.v1.GetCustomEnrichmentRequest.id:type_name -> google.protobuf.UInt32Value
-	17, // 5: com.coralogix.enrichment.v1.GetCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
-	17, // 6: com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse.custom_enrichments:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
-	14, // 7: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.name:type_name -> google.protobuf.StringValue
-	14, // 8: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.description:type_name -> google.protobuf.StringValue
-	0,  // 9: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.file:type_name -> com.coralogix.enrichment.v1.File
-	17, // 10: com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
-	16, // 11: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.custom_enrichment_id:type_name -> google.protobuf.UInt32Value
-	14, // 12: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.name:type_name -> google.protobuf.StringValue
-	14, // 13: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.description:type_name -> google.protobuf.StringValue
-	0,  // 14: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.file:type_name -> com.coralogix.enrichment.v1.File
-	17, // 15: com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
-	16, // 16: com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest.custom_enrichment_id:type_name -> google.protobuf.UInt32Value
-	13, // 17: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.search_clauses:type_name -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause
-	18, // 18: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse.custom_enrichments_data:type_name -> com.coralogix.enrichment.v1.CustomEnrichmentData
-	16, // 19: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause.id:type_name -> google.protobuf.UInt32Value
-	14, // 20: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause.name:type_name -> google.protobuf.StringValue
-	1,  // 21: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichment:input_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentRequest
-	3,  // 22: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichments:input_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest
-	5,  // 23: com.coralogix.enrichment.v1.CustomEnrichmentService.CreateCustomEnrichment:input_type -> com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest
-	7,  // 24: com.coralogix.enrichment.v1.CustomEnrichmentService.UpdateCustomEnrichment:input_type -> com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest
-	9,  // 25: com.coralogix.enrichment.v1.CustomEnrichmentService.DeleteCustomEnrichment:input_type -> com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest
-	11, // 26: com.coralogix.enrichment.v1.CustomEnrichmentService.SearchCustomEnrichmentData:input_type -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest
-	2,  // 27: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichment:output_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentResponse
-	4,  // 28: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichments:output_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse
-	6,  // 29: com.coralogix.enrichment.v1.CustomEnrichmentService.CreateCustomEnrichment:output_type -> com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse
-	8,  // 30: com.coralogix.enrichment.v1.CustomEnrichmentService.UpdateCustomEnrichment:output_type -> com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse
-	10, // 31: com.coralogix.enrichment.v1.CustomEnrichmentService.DeleteCustomEnrichment:output_type -> com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse
-	12, // 32: com.coralogix.enrichment.v1.CustomEnrichmentService.SearchCustomEnrichmentData:output_type -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse
-	27, // [27:33] is the sub-list for method output_type
-	21, // [21:27] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	15, // 2: com.coralogix.enrichment.v1.File.size:type_name -> google.protobuf.UInt32Value
+	14, // 3: com.coralogix.enrichment.v1.File.textual:type_name -> google.protobuf.StringValue
+	16, // 4: com.coralogix.enrichment.v1.File.binary:type_name -> google.protobuf.BytesValue
+	15, // 5: com.coralogix.enrichment.v1.GetCustomEnrichmentRequest.id:type_name -> google.protobuf.UInt32Value
+	17, // 6: com.coralogix.enrichment.v1.GetCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
+	17, // 7: com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse.custom_enrichments:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
+	14, // 8: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.name:type_name -> google.protobuf.StringValue
+	14, // 9: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.description:type_name -> google.protobuf.StringValue
+	0,  // 10: com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest.file:type_name -> com.coralogix.enrichment.v1.File
+	17, // 11: com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
+	15, // 12: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.custom_enrichment_id:type_name -> google.protobuf.UInt32Value
+	14, // 13: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.name:type_name -> google.protobuf.StringValue
+	14, // 14: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.description:type_name -> google.protobuf.StringValue
+	0,  // 15: com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest.file:type_name -> com.coralogix.enrichment.v1.File
+	17, // 16: com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse.custom_enrichment:type_name -> com.coralogix.enrichment.v1.CustomEnrichment
+	15, // 17: com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest.custom_enrichment_id:type_name -> google.protobuf.UInt32Value
+	13, // 18: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.search_clauses:type_name -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause
+	18, // 19: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse.custom_enrichments_data:type_name -> com.coralogix.enrichment.v1.CustomEnrichmentData
+	15, // 20: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause.id:type_name -> google.protobuf.UInt32Value
+	14, // 21: com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClause.name:type_name -> google.protobuf.StringValue
+	1,  // 22: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichment:input_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentRequest
+	3,  // 23: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichments:input_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest
+	5,  // 24: com.coralogix.enrichment.v1.CustomEnrichmentService.CreateCustomEnrichment:input_type -> com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest
+	7,  // 25: com.coralogix.enrichment.v1.CustomEnrichmentService.UpdateCustomEnrichment:input_type -> com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest
+	9,  // 26: com.coralogix.enrichment.v1.CustomEnrichmentService.DeleteCustomEnrichment:input_type -> com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest
+	11, // 27: com.coralogix.enrichment.v1.CustomEnrichmentService.SearchCustomEnrichmentData:input_type -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest
+	2,  // 28: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichment:output_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentResponse
+	4,  // 29: com.coralogix.enrichment.v1.CustomEnrichmentService.GetCustomEnrichments:output_type -> com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse
+	6,  // 30: com.coralogix.enrichment.v1.CustomEnrichmentService.CreateCustomEnrichment:output_type -> com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse
+	8,  // 31: com.coralogix.enrichment.v1.CustomEnrichmentService.UpdateCustomEnrichment:output_type -> com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse
+	10, // 32: com.coralogix.enrichment.v1.CustomEnrichmentService.DeleteCustomEnrichment:output_type -> com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse
+	12, // 33: com.coralogix.enrichment.v1.CustomEnrichmentService.SearchCustomEnrichmentData:output_type -> com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse
+	28, // [28:34] is the sub-list for method output_type
+	22, // [22:28] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_init() }

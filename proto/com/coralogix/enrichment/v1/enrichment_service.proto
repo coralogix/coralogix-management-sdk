@@ -140,9 +140,17 @@ message GetCompanyEnrichmentSettingsResponse {
 }
 
 service EnrichmentService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Enrichments Service"
+    description: "Manage your enrichments."
+  };
   rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse) {
     option (google.api.http) = {
       get: "/enrichments"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Get Enrichments"
     };
   };
   rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse) {
@@ -150,16 +158,28 @@ service EnrichmentService {
       post: "/enrichments"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Add Enrichments"
+    };
   };
 
   rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse) {
     option (google.api.http) = {
       delete: "/enrichments"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Delete Enrichments"
+    };
   };
   rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse) {
     option (google.api.http) = {
       get: "/enrichments/limit"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Get Enrichment Limit"
     };
   };
 
@@ -168,10 +188,18 @@ service EnrichmentService {
       patch: "/enrichments:atomicOverwrite"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Atomic Overwrite Enrichments"
+    };
   };
   rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
     option (google.api.http) = {
       get: "/enrichments/settings"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Enrichments Service"]
+      summary: "Get Company Enrichment Settings"
     };
   };
 }

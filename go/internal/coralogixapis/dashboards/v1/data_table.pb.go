@@ -87,6 +87,7 @@ type DataTable struct {
 	RowStyle       RowStyle               `protobuf:"varint,3,opt,name=row_style,json=rowStyle,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.RowStyle" json:"row_style,omitempty"`
 	Columns        []*DataTable_Column    `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
 	OrderBy        *OrderingField         `protobuf:"bytes,5,opt,name=order_by,json=orderBy,proto3" json:"order_by,omitempty"`
+	CustomLinks    []*CustomLink          `protobuf:"bytes,6,rep,name=custom_links,json=customLinks,proto3" json:"custom_links,omitempty"`
 	DataModeType   DataModeType           `protobuf:"varint,11,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType" json:"data_mode_type,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
@@ -153,6 +154,13 @@ func (x *DataTable) GetColumns() []*DataTable_Column {
 func (x *DataTable) GetOrderBy() *OrderingField {
 	if x != nil {
 		return x.OrderBy
+	}
+	return nil
+}
+
+func (x *DataTable) GetCustomLinks() []*CustomLink {
+	if x != nil {
+		return x.CustomLinks
 	}
 	return nil
 }
@@ -864,13 +872,14 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto protorefle
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a;com/coralogixapis/dashboards/v1/common/ordering_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xe4\x1c\n" +
+	"<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aEcom/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a;com/coralogixapis/dashboards/v1/common/ordering_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xc7\x1d\n" +
 	"\tDataTable\x12R\n" +
 	"\x05query\x18\x01 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.QueryR\x05query\x12E\n" +
 	"\x10results_per_page\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0eresultsPerPage\x12R\n" +
 	"\trow_style\x18\x03 \x01(\x0e25.com.coralogixapis.dashboards.v1.ast.widgets.RowStyleR\browStyle\x12W\n" +
 	"\acolumns\x18\x04 \x03(\v2=.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.ColumnR\acolumns\x12P\n" +
-	"\border_by\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.common.OrderingFieldR\aorderBy\x12f\n" +
+	"\border_by\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.common.OrderingFieldR\aorderBy\x12a\n" +
+	"\fcustom_links\x18\x06 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLinkR\vcustomLinks\x12f\n" +
 	"\x0edata_mode_type\x18\v \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeR\fdataModeType\x1a\x8b\x03\n" +
 	"\x05Query\x12V\n" +
 	"\x04logs\x18\x01 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQueryH\x00R\x04logs\x12Y\n" +
@@ -964,23 +973,24 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_goTypes = 
 	(*DataTable_SpansQuery_Aggregation)(nil), // 11: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation
 	(*wrapperspb.Int32Value)(nil),            // 12: google.protobuf.Int32Value
 	(*OrderingField)(nil),                    // 13: com.coralogixapis.dashboards.v1.common.OrderingField
-	(DataModeType)(0),                        // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	(*LuceneQuery)(nil),                      // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	(*Filter_LogsFilter)(nil),                // 16: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	(*TimeFrameSelect)(nil),                  // 17: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	(*Filter_SpansFilter)(nil),               // 18: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	(*PromQlQuery)(nil),                      // 19: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	(*Filter_MetricsFilter)(nil),             // 20: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	(MetricsQueryEditorMode)(0),              // 21: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	(PromQLQueryType)(0),                     // 22: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(*DataprimeQuery)(nil),                   // 23: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*Filter_Source)(nil),                    // 24: com.coralogixapis.dashboards.v1.ast.Filter.Source
-	(*wrapperspb.StringValue)(nil),           // 25: google.protobuf.StringValue
-	(*ObservationField)(nil),                 // 26: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*wrapperspb.BoolValue)(nil),             // 27: google.protobuf.BoolValue
-	(*LogsAggregation)(nil),                  // 28: com.coralogixapis.dashboards.v1.common.LogsAggregation
-	(*SpanField)(nil),                        // 29: com.coralogixapis.dashboards.v1.common.SpanField
-	(*SpansAggregation)(nil),                 // 30: com.coralogixapis.dashboards.v1.common.SpansAggregation
+	(*CustomLink)(nil),                       // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLink
+	(DataModeType)(0),                        // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	(*LuceneQuery)(nil),                      // 16: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*Filter_LogsFilter)(nil),                // 17: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	(*TimeFrameSelect)(nil),                  // 18: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	(*Filter_SpansFilter)(nil),               // 19: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	(*PromQlQuery)(nil),                      // 20: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*Filter_MetricsFilter)(nil),             // 21: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	(MetricsQueryEditorMode)(0),              // 22: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(PromQLQueryType)(0),                     // 23: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(*DataprimeQuery)(nil),                   // 24: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*Filter_Source)(nil),                    // 25: com.coralogixapis.dashboards.v1.ast.Filter.Source
+	(*wrapperspb.StringValue)(nil),           // 26: google.protobuf.StringValue
+	(*ObservationField)(nil),                 // 27: com.coralogixapis.dashboards.v1.common.ObservationField
+	(*wrapperspb.BoolValue)(nil),             // 28: google.protobuf.BoolValue
+	(*LogsAggregation)(nil),                  // 29: com.coralogixapis.dashboards.v1.common.LogsAggregation
+	(*SpanField)(nil),                        // 30: com.coralogixapis.dashboards.v1.common.SpanField
+	(*SpansAggregation)(nil),                 // 31: com.coralogixapis.dashboards.v1.common.SpansAggregation
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_depIdxs = []int32{
 	2,  // 0: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query
@@ -988,48 +998,49 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_depIdxs = 
 	0,  // 2: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.row_style:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.RowStyle
 	7,  // 3: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.columns:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Column
 	13, // 4: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.order_by:type_name -> com.coralogixapis.dashboards.v1.common.OrderingField
-	14, // 5: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	3,  // 6: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery
-	4,  // 7: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery
-	5,  // 8: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery
-	6,  // 9: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery
-	15, // 10: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	16, // 11: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	8,  // 12: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.grouping:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping
-	17, // 13: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	15, // 14: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	18, // 15: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	10, // 16: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.grouping:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping
-	17, // 17: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	19, // 18: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	20, // 19: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	21, // 20: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	17, // 21: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	22, // 22: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	23, // 23: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	24, // 24: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
-	17, // 25: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	25, // 26: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Column.field:type_name -> google.protobuf.StringValue
-	12, // 27: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Column.width:type_name -> google.protobuf.Int32Value
-	25, // 28: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.group_by:type_name -> google.protobuf.StringValue
-	9,  // 29: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.aggregations:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation
-	26, // 30: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	25, // 31: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.id:type_name -> google.protobuf.StringValue
-	25, // 32: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.name:type_name -> google.protobuf.StringValue
-	27, // 33: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.is_visible:type_name -> google.protobuf.BoolValue
-	28, // 34: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	29, // 35: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	11, // 36: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.aggregations:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation
-	26, // 37: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	25, // 38: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.id:type_name -> google.protobuf.StringValue
-	25, // 39: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.name:type_name -> google.protobuf.StringValue
-	27, // 40: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.is_visible:type_name -> google.protobuf.BoolValue
-	30, // 41: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
-	42, // [42:42] is the sub-list for method output_type
-	42, // [42:42] is the sub-list for method input_type
-	42, // [42:42] is the sub-list for extension type_name
-	42, // [42:42] is the sub-list for extension extendee
-	0,  // [0:42] is the sub-list for field type_name
+	14, // 5: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.custom_links:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.CustomLink
+	15, // 6: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	3,  // 7: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery
+	4,  // 8: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery
+	5,  // 9: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery
+	6,  // 10: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery
+	16, // 11: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	17, // 12: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	8,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.grouping:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping
+	18, // 14: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	16, // 15: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	19, // 16: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	10, // 17: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.grouping:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping
+	18, // 18: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	20, // 19: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	21, // 20: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	22, // 21: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	18, // 22: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	23, // 23: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	24, // 24: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	25, // 25: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
+	18, // 26: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	26, // 27: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Column.field:type_name -> google.protobuf.StringValue
+	12, // 28: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.Column.width:type_name -> google.protobuf.Int32Value
+	26, // 29: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.group_by:type_name -> google.protobuf.StringValue
+	9,  // 30: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.aggregations:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation
+	27, // 31: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Grouping.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	26, // 32: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.id:type_name -> google.protobuf.StringValue
+	26, // 33: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.name:type_name -> google.protobuf.StringValue
+	28, // 34: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.is_visible:type_name -> google.protobuf.BoolValue
+	29, // 35: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.Aggregation.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	30, // 36: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	11, // 37: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.aggregations:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation
+	27, // 38: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Grouping.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	26, // 39: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.id:type_name -> google.protobuf.StringValue
+	26, // 40: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.name:type_name -> google.protobuf.StringValue
+	28, // 41: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.is_visible:type_name -> google.protobuf.BoolValue
+	31, // 42: com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.Aggregation.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
+	43, // [43:43] is the sub-list for method output_type
+	43, // [43:43] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_init() }
@@ -1038,6 +1049,7 @@ func file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_init() {
 		return
 	}
 	file_com_coralogixapis_dashboards_v1_ast_filter_proto_init()
+	file_com_coralogixapis_dashboards_v1_ast_widgets_common_custom_links_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_widgets_common_data_mode_type_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_widgets_common_metrics_query_editor_mode_proto_init()
 	//file_com_coralogixapis_dashboards_v1_ast_widgets_common_queries_proto_init()

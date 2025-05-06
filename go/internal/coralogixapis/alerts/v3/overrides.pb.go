@@ -70,9 +70,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_overrides_proto p
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_overrides_proto_rawDesc = "" +
 	"\n" +
-	"Ecom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x86\x01\n" +
-	"\x10AlertDefOverride\x12I\n" +
-	"\bpriority\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityR\bpriority:'\x92A$\n" +
+	"Ecom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc9\x01\n" +
+	"\x10AlertDefOverride\x12\x8b\x01\n" +
+	"\bpriority\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityB@\x92A=2$The priority of the alert definitionJ\x15ALERT_DEF_PRIORITY_P3R\bpriority:'\x92A$\n" +
 	"\"* Alert definition priority updateb\x06proto3"
 
 var (

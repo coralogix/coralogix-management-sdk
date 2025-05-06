@@ -377,37 +377,37 @@ var File_com_coralogixapis_alerts_v3_alert_def_notification_group_proto protoref
 
 const file_com_coralogixapis_alerts_v3_alert_def_notification_group_proto_rawDesc = "" +
 	"\n" +
-	">com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1aTcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x85\x02\n" +
-	"\x18AlertDefIncidentSettings\x12A\n" +
-	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210H\x00R\aminutes\x12B\n" +
-	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnR\bnotifyOn:K\x92AH\n" +
-	"F*\"Alert definition incident settings\xd2\x01\x13retriggering_period\xd2\x01\tnotify_onB\x15\n" +
-	"\x13retriggering_period\"\xb9\x03\n" +
-	"\x19AlertDefNotificationGroup\x12@\n" +
-	"\rgroup_by_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\vgroupByKeys\x12Q\n" +
-	"\bwebhooks\x18\x02 \x03(\v25.com.coralogixapis.alerts.v3.AlertDefWebhooksSettingsR\bwebhooks\x12X\n" +
-	"\fdestinations\x18\x03 \x03(\v24.com.coralogixapis.alerts.v3.NotificationDestinationR\fdestinations\x12L\n" +
-	"\x06router\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.NotificationRouterH\x00R\x06router\x88\x01\x01:T\x92AQ\n" +
-	"O*#Alert definition notification group\xd2\x01\rgroup_by_keys\xd2\x01\bwebhooks\xd2\x01\fdestinationsB\t\n" +
-	"\a_router\"\xae\x03\n" +
-	"\x18AlertDefWebhooksSettings\x12A\n" +
-	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210H\x00R\aminutes\x12G\n" +
-	"\tnotify_on\x18\x01 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnH\x01R\bnotifyOn\x88\x01\x01\x12N\n" +
-	"\vintegration\x18\x02 \x01(\v2,.com.coralogixapis.alerts.v3.IntegrationTypeR\vintegration:\x90\x01\x92A\x8c\x01\n" +
-	"\x89\x01*!Alert definition webhook settings24Configuration for webhook notifications for an alert\xd2\x01\x13retriggering_period\xd2\x01\tnotify_on\xd2\x01\vintegrationB\x15\n" +
+	">com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aTcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xef\x02\n" +
+	"\x18AlertDefIncidentSettings\x12z\n" +
+	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x92A=27The time in minutes before the alert can be retriggeredJ\x0230H\x00R\aminutes\x12\x94\x01\n" +
+	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBP\x92AM2'The condition to notify about the alertJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"R\bnotifyOn:)\x92A&\n" +
+	"$*\"Alert definition incident settingsB\x15\n" +
+	"\x13retriggering_period\"\xaf\x05\n" +
+	"\x19AlertDefNotificationGroup\x12\x8b\x01\n" +
+	"\rgroup_by_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBI\x92AF2\x1fThe keys to group the alerts byJ\x10[\"key1\", \"key2\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\vgroupByKeys\x12\x96\x01\n" +
+	"\bwebhooks\x18\x02 \x03(\v25.com.coralogixapis.alerts.v3.AlertDefWebhooksSettingsBC\x92A@2>The settings for webhooks associated with the alert definitionR\bwebhooks\x12\xa1\x01\n" +
+	"\fdestinations\x18\x03 \x03(\v24.com.coralogixapis.alerts.v3.NotificationDestinationBG\x92AD2BThe destinations for notifications.  (Notification Center feature)R\fdestinations\x12\x8f\x01\n" +
+	"\x06router\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.NotificationRouterBA\x92A>2<The router for notifications.  (Notification Center feature)H\x00R\x06router\x88\x01\x01:*\x92A'\n" +
+	"%*#Alert definition notification groupB\t\n" +
+	"\a_router\"\xda\x04\n" +
+	"\x18AlertDefWebhooksSettings\x12z\n" +
+	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x92A=27The time in minutes before the alert can be retriggeredJ\x0215H\x00R\aminutes\x12\xa8\x01\n" +
+	"\tnotify_on\x18\x01 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnB_\x92A\\26The condition under which the alert should be notifiedJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"H\x01R\bnotifyOn\x88\x01\x01\x12\x83\x01\n" +
+	"\vintegration\x18\x02 \x01(\v2,.com.coralogixapis.alerts.v3.IntegrationTypeB3\x92A02.The integration type for webhook notificationsR\vintegration:l\x92Ai\n" +
+	"g*!Alert definition webhook settings24Configuration for webhook notifications for an alert\xd2\x01\vintegrationB\x15\n" +
 	"\x13retriggering_periodB\f\n" +
 	"\n" +
-	"_notify_on\"\xa7\x02\n" +
-	"\x0fIntegrationType\x12O\n" +
-	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\b\x92A\x05J\x03123H\x00R\rintegrationId\x12I\n" +
+	"_notify_on\"\xfb\x02\n" +
+	"\x0fIntegrationType\x12x\n" +
+	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB1\x92A.2'The integration ID for the notificationJ\x03123H\x00R\rintegrationId\x12t\n" +
 	"\n" +
-	"recipients\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.RecipientsH\x00R\n" +
+	"recipients\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.RecipientsB)\x92A&2$The recipients for the notification.H\x00R\n" +
 	"recipients:d\x92Aa\n" +
 	"_*\x10Integration type28Defines the type of integration to use for notifications\xd2\x01\x10integration_typeB\x12\n" +
-	"\x10integration_type\"\x90\x01\n" +
+	"\x10integration_type\"\xf4\x01\n" +
 	"\n" +
-	"Recipients\x124\n" +
-	"\x06emails\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x06emails:L\x92AI\n" +
+	"Recipients\x12\x97\x01\n" +
+	"\x06emails\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBa\x92A^24The list of email recipients for alert notificationsJ\x12[\"mail@gmail.com\"]\xa8\x01\x01\xa2\x02\x0elist of emailsR\x06emails:L\x92AI\n" +
 	"G*\n" +
 	"Recipients20List of email recipients for alert notifications\xd2\x01\x06emailsb\x06proto3"
 
@@ -461,8 +461,8 @@ func file_com_coralogixapis_alerts_v3_alert_def_notification_group_proto_init() 
 	if File_com_coralogixapis_alerts_v3_alert_def_notification_group_proto != nil {
 		return
 	}
-	file_com_coralogixapis_alerts_v3_commons_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_destination_proto_init()
+	file_com_coralogixapis_alerts_v3_commons_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_notification_group_proto_msgTypes[0].OneofWrappers = []any{
 		(*AlertDefIncidentSettings_Minutes)(nil),
 	}

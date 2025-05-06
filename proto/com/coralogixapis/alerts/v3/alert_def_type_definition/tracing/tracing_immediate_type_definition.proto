@@ -2,8 +2,8 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message TracingImmediateType {
@@ -18,6 +18,11 @@ message TracingImmediateType {
       description: "Learn more about trace-based alerts in our documentation."
     }
   };
-  TracingFilter tracing_filter = 1;
-  repeated google.protobuf.StringValue notification_payload_filter = 2;
+  TracingFilter tracing_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A filter to match trace entries for immediate alerts"}];
+  repeated google.protobuf.StringValue notification_payload_filter = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Notification payload field filter"
+    example: "[\"obj.field\"]"
+    pattern: "^[a-zA-Z0-9_.]+$"
+    min_items: 0
+  }];
 }

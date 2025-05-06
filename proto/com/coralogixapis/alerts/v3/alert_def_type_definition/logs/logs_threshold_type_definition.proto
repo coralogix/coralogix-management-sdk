@@ -2,12 +2,12 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto";
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogsThresholdType {
@@ -15,26 +15,66 @@ message LogsThresholdType {
     json_schema: {
       title: "Log-based threshold alert type"
       description: "Configuration for alerts triggered when log counts exceed or fall below specified thresholds"
-      required: ["logs_filter", "rules"]
+      required: ["rules"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/threshold-alerts/"
       description: "Learn more about log-based threshold alerts in our documentation"
     }
   };
-  LogsFilter logs_filter = 1;
-  UndetectedValuesManagement undetected_values_management = 2;
-  repeated LogsThresholdRule rules = 3;
-  repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"text\"" }];
-  google.protobuf.Int32Value evaluation_delay_ms = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "60000" }];
+  LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The filter to match log entries for threshold alerts"}];
+  UndetectedValuesManagement undetected_values_management = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling the undetected values in the alert"}];
+  repeated LogsThresholdRule rules = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the threshold alert"
+    min_items: 1
+    max_items: 5
+  }];
+  repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "[\"obj.field\"]"
+    description: "The filter to specify which fields to include in the notification payload"
+    pattern: "^[a-zA-Z0-9_.]+$"
+    min_items: 0
+  }];
+  google.protobuf.Int32Value evaluation_delay_ms = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "60000"
+    description: "The delay in milliseconds before evaluating the alert condition"
+  }];
 }
 message LogsThresholdRule {
-    LogsThresholdCondition condition = 1;
-    AlertDefOverride override = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Threshold Rule"
+      description: "LogsThresholdRule is a message that defines a rule for log-based threshold alerts."
+      required: [
+        "condition",
+        "override"
+      ]
+    }
+  };
+  LogsThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for the threshold alert"}];
+  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The override settings for the alert"}];
 }
 
 message LogsThresholdCondition {
-    google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100.0" }];
-    LogsTimeWindow time_window = 2;
-    LogsThresholdConditionType condition_type = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Logs Threshold Condition"
+      description: "LogsThresholdCondition is a message that defines the condition for log-based threshold alerts."
+      required: [
+        "threshold",
+        "time_window",
+        "condition_type"
+      ]
+    }
+  };
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "100.0"
+    description: "The threshold value for the alert condition"
+    pattern: "^\\d+(\\.\\d+)?$"
+  }];
+  LogsTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time window for the alert condition"}];
+  LogsThresholdConditionType condition_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The type of condition for the alert"
+    example: "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
+  }];
 }

@@ -53,6 +53,7 @@ enum Pillar {
   PILLAR_LOGS = 2;
   PILLAR_SPANS = 3;
   PILLAR_BINARY = 4;
+  PILLAR_PROFILES = 5;
 }
 
 enum TcoTier {
@@ -130,6 +131,8 @@ message DetailedDailyUnits {
   Unit evaluation_units = 12;
 
   Unit cpu_profiles_units = 13;
+
+  Unit blocked_metrics_units = 14;
 }
 
 /// Daily data usage in GBs. This entity represents only data processed by CX
@@ -152,6 +155,8 @@ message DetailedDailyProcessedGbs {
   GB low_session_recording_gbs = 11;
 
   GB cpu_profiles_gbs = 12;
+
+  GB blocked_metrics_gbs = 13;
 }
 
 /// Daily data usage in evaluation tokens

@@ -18,8 +18,8 @@ const PROTOS_DIR: &str = "proto";
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("cargo:rerun-if-changed=build.rs");
     println!("cargo:rerun-if-changed=../Cargo.lock");
-    println!("cargo:rerun-if-changed=protofetch.toml");
-    println!("cargo:rerun-if-changed=protofetch.lock");
+    println!("cargo:rerun-if-changed=../../protofetch.toml");
+    println!("cargo:rerun-if-changed=../../protofetch.lock");
 
     let mut project_root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap());
     project_root.pop();
@@ -27,7 +27,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     project_root.push(PROTOS_DIR);
 
     let root = project_root.into_os_string().into_string().unwrap();
-    println!("root: {:?}", root);
+    println!("root: {root:?}");
     let building = &[
         #[cfg(feature = "alerts")]
         alerts_service(&root),
@@ -98,7 +98,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .build_server(false)
         .build_client(true)
         .out_dir("src/generated")
-        .compile_protos(building, &[format!("{}/", root)])?;
+        .compile_protos(building, &[format!("{root}/")])?;
     Ok(())
 }
 

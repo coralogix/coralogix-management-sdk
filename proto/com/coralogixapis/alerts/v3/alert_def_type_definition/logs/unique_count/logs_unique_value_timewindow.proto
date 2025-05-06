@@ -2,9 +2,21 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message LogsUniqueValueTimeWindow {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Log-based unique value alert time window"
+      description: "Time window configuration for log-based unique value alerts"
+      required: ["type"]
+    }
+  };
   oneof type {
-    LogsUniqueValueTimeWindowValue logs_unique_value_time_window_specific_value = 1;
+    LogsUniqueValueTimeWindowValue logs_unique_value_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "A time window defined by a specific value"
+      example: "\"LOGS_UNIQUE_VALUE_TIME_WINDOW_VALUE_HOURS_12\""
+    }];
   }
 }
 

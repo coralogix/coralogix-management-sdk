@@ -7,6 +7,7 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -176,7 +177,7 @@ type MetricTimeWindow_MetricTimeWindowSpecificValue struct {
 }
 
 type MetricTimeWindow_MetricTimeWindowDynamicDuration struct {
-	MetricTimeWindowDynamicDuration *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=metric_time_window_dynamic_duration,json=metricTimeWindowDynamicDuration,proto3,oneof"` // will accept a string like 1h30m that stands for 1 hour and 30 minutes
+	MetricTimeWindowDynamicDuration *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=metric_time_window_dynamic_duration,json=metricTimeWindowDynamicDuration,proto3,oneof"`
 }
 
 func (*MetricTimeWindow_MetricTimeWindowSpecificValue) isMetricTimeWindow_Type() {}
@@ -187,10 +188,11 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_met
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_metric_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\"\x88\x02\n" +
-	"\x10MetricTimeWindow\x12~\n" +
-	"!metric_time_window_specific_value\x18\x01 \x01(\x0e22.com.coralogixapis.alerts.v3.MetricTimeWindowValueH\x00R\x1dmetricTimeWindowSpecificValue\x12l\n" +
-	"#metric_time_window_dynamic_duration\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueH\x00R\x1fmetricTimeWindowDynamicDurationB\x06\n" +
+	"[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb5\x03\n" +
+	"\x10MetricTimeWindow\x12\xcc\x01\n" +
+	"!metric_time_window_specific_value\x18\x01 \x01(\x0e22.com.coralogixapis.alerts.v3.MetricTimeWindowValueBL\x92AI2#The time window as a specific valueJ\"METRIC_TIME_WINDOW_VALUE_MINUTES_5H\x00R\x1dmetricTimeWindowSpecificValue\x12\xa7\x01\n" +
+	"#metric_time_window_dynamic_duration\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB9\x92A62\"The time window as a dynamic valueJ\x051h30m\xa2\x02\bdurationH\x00R\x1fmetricTimeWindowDynamicDuration: \x92A\x1d\n" +
+	"\x1b*\x12Metric time window\xd2\x01\x04typeB\x06\n" +
 	"\x04type*\xa6\x04\n" +
 	"\x15MetricTimeWindowValue\x125\n" +
 	"1METRIC_TIME_WINDOW_VALUE_MINUTES_1_OR_UNSPECIFIED\x10\x00\x12&\n" +

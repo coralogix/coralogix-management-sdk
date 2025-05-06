@@ -172,6 +172,8 @@ message SpansCount {
   google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
   google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "50" }];
   google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
+  google.protobuf.Int64Value medium_success_span_count = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "200" }];
+  google.protobuf.Int64Value medium_error_span_count = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "20" }];
 }
 
 

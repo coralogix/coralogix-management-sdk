@@ -79,10 +79,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_severity_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_def_severity_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_def_severity.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8b\x02\n" +
+	"4com/coralogixapis/alerts/v3/alert_def_severity.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xce\x02\n" +
 	"\x10AlertDefSeverity\x12?\n" +
-	"\bseverity\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x06\x92A\x03J\x013R\bseverity\x12I\n" +
-	"\bpriority\x18\x02 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityR\bpriority:k\x92Ah\n" +
+	"\bseverity\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x06\x92A\x03J\x013R\bseverity\x12\x8b\x01\n" +
+	"\bpriority\x18\x02 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityB@\x92A=2$The priority of the alert definitionJ\x15ALERT_DEF_PRIORITY_P3R\bpriority:k\x92Ah\n" +
 	"f*\x19Alert definition severity23Defines the severity level and priority of an alert\xd2\x01\bseverity\xd2\x01\bpriorityb\x06proto3"
 
 var (

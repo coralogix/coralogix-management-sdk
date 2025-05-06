@@ -15,7 +15,7 @@ allow_policies = [
 
 [alerts-api-protobuf]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = 'v0.5.17'
+revision = "v0.5.18"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -185,7 +185,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = 'v2.3.16'
+revision = "v2.4.1"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -212,6 +212,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto",
     "src/com/coralogixapis/dashboards/v1/common/annotation_event.proto",
     "src/com/coralogixapis/dashboards/v1/common/dataprime_query_schema.proto",
     "src/com/coralogixapis/dashboards/v1/common/dataprime_result.proto",
@@ -249,7 +250,7 @@ revision = "v0.3.2"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.23"
+revision = "v0.1.26"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -258,7 +259,8 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.5.9"
+revision = "v0.6.6"
+content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
     "com/coralogix/enrichment/v1/custom_enrichment.proto",
@@ -315,7 +317,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.104"
+revision = "v0.1.105"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -330,7 +332,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.102"
+revision = "v0.0.110"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -359,18 +361,31 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.5.1"
+revision = 'v0.8.0'
 allow_policies = [
-    "src/com/coralogixapis/notification_center/common/*",
+    "src/com/coralogixapis/notification_center/common/common.proto",
+    "src/com/coralogixapis/notification_center/common/config_overrides.proto",
+    "src/com/coralogixapis/notification_center/common/rpc_common.proto",
+    "src/com/coralogixapis/notification_center/common/v1/config_fields.proto",
+    "src/com/coralogixapis/notification_center/common/v1/identifier.proto",
+    "src/com/coralogixapis/notification_center/common/v1/routing/routing.proto",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",
     "src/com/coralogixapis/notification_center/connectors/v1/connectors_service.proto",
+    "src/com/coralogixapis/notification_center/definitions/v1/config_override.proto",
+    "src/com/coralogixapis/notification_center/definitions/v1/connector_type.proto",
     "src/com/coralogixapis/notification_center/entities/v1/entities_service.proto",
+    "src/com/coralogixapis/notification_center/entities/v1/entity_type.proto",
+    "src/com/coralogixapis/notification_center/entities/v1/presentation_details.proto",
     "src/com/coralogixapis/notification_center/notifications/v1/notification.proto",
     "src/com/coralogixapis/notification_center/notifications/v1/testing.proto",
     "src/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
     "src/com/coralogixapis/notification_center/presets/v1/preset.proto",
     "src/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
+    "src/com/coralogixapis/notification_center/remote_action_templates/v1/remote_action_templates.proto",
+    "src/com/coralogixapis/notification_center/remote_action_templates/v1/remote_action_templates_service.proto",
+    "src/com/coralogixapis/notification_center/remote_actions/v1/remote_actions_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
+    "src/com/coralogixapis/notification_center/routers/v1/private_routing.proto",
     "src/com/coralogixapis/notification_center/routers/v1/router.proto",
 ]
 
@@ -400,6 +415,15 @@ allow_policies = [
 url = 'github.com/coralogix/cx-api-incidents'
 revision = "v1.0.1"
 allow_policies = [
+    "src/com/coralogixapis/incidents/v1/assignee.proto",
+    "src/com/coralogixapis/incidents/v1/filter_operators.proto",
+    "src/com/coralogixapis/incidents/v1/incident.proto",
+    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
+    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
+    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
+    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto",
+    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto",
+    "src/com/coralogixapis/incidents/v1/incident_event/incident_event.proto",
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event.proto",
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event_acknowledge.proto",
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto",
@@ -411,22 +435,13 @@ allow_policies = [
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event_type.proto",
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto",
     "src/com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto",
-    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
-    "src/com/coralogixapis/incidents/v1/incident_state.proto",
-    "src/com/coralogixapis/incidents/v1/assignee.proto",
-    "src/com/coralogixapis/incidents/v1/filter_operators.proto",
-    "src/com/coralogixapis/incidents/v1/incident.proto",
-    "src/com/coralogixapis/incidents/v1/incident_event/incident_event.proto",
     "src/com/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto",
     "src/com/coralogixapis/incidents/v1/incident_event_query_filter.proto",
-    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
-    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto",
-    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto",
-    "src/com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto",
     "src/com/coralogixapis/incidents/v1/incident_query.proto",
     "src/com/coralogixapis/incidents/v1/incident_query_filter.proto",
     "src/com/coralogixapis/incidents/v1/incident_query_filters_values.proto",
     "src/com/coralogixapis/incidents/v1/incident_severity.proto",
+    "src/com/coralogixapis/incidents/v1/incident_state.proto",
     "src/com/coralogixapis/incidents/v1/incident_status.proto",
     "src/com/coralogixapis/incidents/v1/incidents_service.proto",
     "src/com/coralogixapis/incidents/v1/meta_label.proto",

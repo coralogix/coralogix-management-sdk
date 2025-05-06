@@ -87,6 +87,7 @@ const (
 	Pillar_PILLAR_LOGS        Pillar = 2
 	Pillar_PILLAR_SPANS       Pillar = 3
 	Pillar_PILLAR_BINARY      Pillar = 4
+	Pillar_PILLAR_PROFILES    Pillar = 5
 )
 
 // Enum value maps for Pillar.
@@ -97,6 +98,7 @@ var (
 		2: "PILLAR_LOGS",
 		3: "PILLAR_SPANS",
 		4: "PILLAR_BINARY",
+		5: "PILLAR_PROFILES",
 	}
 	Pillar_value = map[string]int32{
 		"PILLAR_UNSPECIFIED": 0,
@@ -104,6 +106,7 @@ var (
 		"PILLAR_LOGS":        2,
 		"PILLAR_SPANS":       3,
 		"PILLAR_BINARY":      4,
+		"PILLAR_PROFILES":    5,
 	}
 )
 
@@ -734,6 +737,7 @@ type DetailedDailyUnits struct {
 	LowSessionRecordingUnits *Unit                  `protobuf:"bytes,11,opt,name=low_session_recording_units,json=lowSessionRecordingUnits,proto3" json:"low_session_recording_units,omitempty"`
 	EvaluationUnits          *Unit                  `protobuf:"bytes,12,opt,name=evaluation_units,json=evaluationUnits,proto3" json:"evaluation_units,omitempty"`
 	CpuProfilesUnits         *Unit                  `protobuf:"bytes,13,opt,name=cpu_profiles_units,json=cpuProfilesUnits,proto3" json:"cpu_profiles_units,omitempty"`
+	BlockedMetricsUnits      *Unit                  `protobuf:"bytes,14,opt,name=blocked_metrics_units,json=blockedMetricsUnits,proto3" json:"blocked_metrics_units,omitempty"`
 	unknownFields            protoimpl.UnknownFields
 	sizeCache                protoimpl.SizeCache
 }
@@ -859,6 +863,13 @@ func (x *DetailedDailyUnits) GetCpuProfilesUnits() *Unit {
 	return nil
 }
 
+func (x *DetailedDailyUnits) GetBlockedMetricsUnits() *Unit {
+	if x != nil {
+		return x.BlockedMetricsUnits
+	}
+	return nil
+}
+
 // / Daily data usage in GBs. This entity represents only data processed by CX
 type DetailedDailyProcessedGbs struct {
 	state                  protoimpl.MessageState `protogen:"open.v1"`
@@ -874,6 +885,7 @@ type DetailedDailyProcessedGbs struct {
 	HighTracingGbs         *GB                    `protobuf:"bytes,10,opt,name=high_tracing_gbs,json=highTracingGbs,proto3" json:"high_tracing_gbs,omitempty"`
 	LowSessionRecordingGbs *GB                    `protobuf:"bytes,11,opt,name=low_session_recording_gbs,json=lowSessionRecordingGbs,proto3" json:"low_session_recording_gbs,omitempty"`
 	CpuProfilesGbs         *GB                    `protobuf:"bytes,12,opt,name=cpu_profiles_gbs,json=cpuProfilesGbs,proto3" json:"cpu_profiles_gbs,omitempty"`
+	BlockedMetricsGbs      *GB                    `protobuf:"bytes,13,opt,name=blocked_metrics_gbs,json=blockedMetricsGbs,proto3" json:"blocked_metrics_gbs,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -988,6 +1000,13 @@ func (x *DetailedDailyProcessedGbs) GetLowSessionRecordingGbs() *GB {
 func (x *DetailedDailyProcessedGbs) GetCpuProfilesGbs() *GB {
 	if x != nil {
 		return x.CpuProfilesGbs
+	}
+	return nil
+}
+
+func (x *DetailedDailyProcessedGbs) GetBlockedMetricsGbs() *GB {
+	if x != nil {
+		return x.BlockedMetricsGbs
 	}
 	return nil
 }
@@ -1136,7 +1155,7 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\x04tier\x18\x03 \x01(\x0e2#.com.coralogix.datausage.v2.TcoTierB\x02\x18\x01H\x00R\x04tier\x12B\n" +
 	"\bseverity\x18\x04 \x01(\x0e2$.com.coralogix.datausage.v2.SeverityH\x00R\bseverity\x12B\n" +
 	"\bpriority\x18\x05 \x01(\x0e2$.com.coralogix.datausage.v2.PriorityH\x00R\bpriorityB\v\n" +
-	"\tdimension\"\xf9\a\n" +
+	"\tdimension\"\xcf\b\n" +
 	"\x12DetailedDailyUnits\x129\n" +
 	"\n" +
 	"stats_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstatsDate\x12A\n" +
@@ -1153,7 +1172,8 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	" \x01(\v2 .com.coralogix.datausage.v2.UnitR\x10highTracingUnits\x12_\n" +
 	"\x1blow_session_recording_units\x18\v \x01(\v2 .com.coralogix.datausage.v2.UnitR\x18lowSessionRecordingUnits\x12K\n" +
 	"\x10evaluation_units\x18\f \x01(\v2 .com.coralogix.datausage.v2.UnitR\x0fevaluationUnits\x12N\n" +
-	"\x12cpu_profiles_units\x18\r \x01(\v2 .com.coralogix.datausage.v2.UnitR\x10cpuProfilesUnits\"\xf1\x06\n" +
+	"\x12cpu_profiles_units\x18\r \x01(\v2 .com.coralogix.datausage.v2.UnitR\x10cpuProfilesUnits\x12T\n" +
+	"\x15blocked_metrics_units\x18\x0e \x01(\v2 .com.coralogix.datausage.v2.UnitR\x13blockedMetricsUnits\"\xc1\a\n" +
 	"\x19DetailedDailyProcessedGbs\x129\n" +
 	"\n" +
 	"stats_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstatsDate\x12;\n" +
@@ -1170,7 +1190,8 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\x10high_tracing_gbs\x18\n" +
 	" \x01(\v2\x1e.com.coralogix.datausage.v2.GBR\x0ehighTracingGbs\x12Y\n" +
 	"\x19low_session_recording_gbs\x18\v \x01(\v2\x1e.com.coralogix.datausage.v2.GBR\x16lowSessionRecordingGbs\x12H\n" +
-	"\x10cpu_profiles_gbs\x18\f \x01(\v2\x1e.com.coralogix.datausage.v2.GBR\x0ecpuProfilesGbs\"\xea\x01\n" +
+	"\x10cpu_profiles_gbs\x18\f \x01(\v2\x1e.com.coralogix.datausage.v2.GBR\x0ecpuProfilesGbs\x12N\n" +
+	"\x13blocked_metrics_gbs\x18\r \x01(\v2\x1e.com.coralogix.datausage.v2.GBR\x11blockedMetricsGbs\"\xea\x01\n" +
 	"\x1dDetailedDailyEvaluationTokens\x129\n" +
 	"\n" +
 	"stats_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstatsDate\x12D\n" +
@@ -1185,13 +1206,14 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\x13RANGE_CURRENT_MONTH\x10\x01\x12\x16\n" +
 	"\x12RANGE_LAST_30_DAYS\x10\x02\x12\x16\n" +
 	"\x12RANGE_LAST_90_DAYS\x10\x03\x12\x13\n" +
-	"\x0fRANGE_LAST_WEEK\x10\x04*j\n" +
+	"\x0fRANGE_LAST_WEEK\x10\x04*\x7f\n" +
 	"\x06Pillar\x12\x16\n" +
 	"\x12PILLAR_UNSPECIFIED\x10\x00\x12\x12\n" +
 	"\x0ePILLAR_METRICS\x10\x01\x12\x0f\n" +
 	"\vPILLAR_LOGS\x10\x02\x12\x10\n" +
 	"\fPILLAR_SPANS\x10\x03\x12\x11\n" +
-	"\rPILLAR_BINARY\x10\x04*w\n" +
+	"\rPILLAR_BINARY\x10\x04\x12\x13\n" +
+	"\x0fPILLAR_PROFILES\x10\x05*w\n" +
 	"\aTcoTier\x12\x18\n" +
 	"\x14TCO_TIER_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fTCO_TIER_LOW\x10\x01\x12\x13\n" +
@@ -1274,28 +1296,30 @@ var file_com_coralogix_datausage_v2_data_usage_proto_depIdxs = []int32{
 	6,  // 21: com.coralogix.datausage.v2.DetailedDailyUnits.low_session_recording_units:type_name -> com.coralogix.datausage.v2.Unit
 	6,  // 22: com.coralogix.datausage.v2.DetailedDailyUnits.evaluation_units:type_name -> com.coralogix.datausage.v2.Unit
 	6,  // 23: com.coralogix.datausage.v2.DetailedDailyUnits.cpu_profiles_units:type_name -> com.coralogix.datausage.v2.Unit
-	18, // 24: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.stats_date:type_name -> google.protobuf.Timestamp
-	7,  // 25: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.total_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 26: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.blocked_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 27: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 28: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.medium_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 29: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 30: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_metrics_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 31: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 32: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.medium_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 33: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 34: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_session_recording_gbs:type_name -> com.coralogix.datausage.v2.GB
-	7,  // 35: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.cpu_profiles_gbs:type_name -> com.coralogix.datausage.v2.GB
-	18, // 36: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.stats_date:type_name -> google.protobuf.Timestamp
-	8,  // 37: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.total_tokens:type_name -> com.coralogix.datausage.v2.Token
-	15, // 38: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.evaluations:type_name -> com.coralogix.datausage.v2.Evaluation
-	19, // 39: com.coralogix.datausage.v2.Evaluation.evaluator_name:type_name -> google.protobuf.StringValue
-	8,  // 40: com.coralogix.datausage.v2.Evaluation.evaluation_tokens:type_name -> com.coralogix.datausage.v2.Token
-	41, // [41:41] is the sub-list for method output_type
-	41, // [41:41] is the sub-list for method input_type
-	41, // [41:41] is the sub-list for extension type_name
-	41, // [41:41] is the sub-list for extension extendee
-	0,  // [0:41] is the sub-list for field type_name
+	6,  // 24: com.coralogix.datausage.v2.DetailedDailyUnits.blocked_metrics_units:type_name -> com.coralogix.datausage.v2.Unit
+	18, // 25: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.stats_date:type_name -> google.protobuf.Timestamp
+	7,  // 26: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.total_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 27: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.blocked_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 28: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 29: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.medium_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 30: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_logs_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 31: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_metrics_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 32: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 33: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.medium_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 34: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.high_tracing_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 35: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.low_session_recording_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 36: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.cpu_profiles_gbs:type_name -> com.coralogix.datausage.v2.GB
+	7,  // 37: com.coralogix.datausage.v2.DetailedDailyProcessedGbs.blocked_metrics_gbs:type_name -> com.coralogix.datausage.v2.GB
+	18, // 38: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.stats_date:type_name -> google.protobuf.Timestamp
+	8,  // 39: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.total_tokens:type_name -> com.coralogix.datausage.v2.Token
+	15, // 40: com.coralogix.datausage.v2.DetailedDailyEvaluationTokens.evaluations:type_name -> com.coralogix.datausage.v2.Evaluation
+	19, // 41: com.coralogix.datausage.v2.Evaluation.evaluator_name:type_name -> google.protobuf.StringValue
+	8,  // 42: com.coralogix.datausage.v2.Evaluation.evaluation_tokens:type_name -> com.coralogix.datausage.v2.Token
+	43, // [43:43] is the sub-list for method output_type
+	43, // [43:43] is the sub-list for method input_type
+	43, // [43:43] is the sub-list for extension type_name
+	43, // [43:43] is the sub-list for extension extendee
+	0,  // [0:43] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_datausage_v2_data_usage_proto_init() }

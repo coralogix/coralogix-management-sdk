@@ -7,6 +7,7 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -379,27 +380,33 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_common_tr
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_common_tracing_filter_proto_rawDesc = "" +
 	"\n" +
-	"Ycom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\"w\n" +
-	"\rTracingFilter\x12W\n" +
-	"\rsimple_filter\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.TracingSimpleFilterH\x00R\fsimpleFilterB\r\n" +
-	"\vfilter_type\"\xcb\x01\n" +
-	"\x13TracingSimpleFilter\x12d\n" +
-	"\x15tracing_label_filters\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.TracingLabelFiltersR\x13tracingLabelFilters\x12N\n" +
-	"\x14latency_threshold_ms\x18\x02 \x01(\v2\x1c.google.protobuf.UInt64ValueR\x12latencyThresholdMs\"\xcc\x03\n" +
-	"\x13TracingLabelFilters\x12Y\n" +
-	"\x10application_name\x18\x01 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeR\x0fapplicationName\x12U\n" +
-	"\x0esubsystem_name\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeR\rsubsystemName\x12Q\n" +
-	"\fservice_name\x18\x03 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeR\vserviceName\x12U\n" +
-	"\x0eoperation_name\x18\x04 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeR\roperationName\x12Y\n" +
-	"\vspan_fields\x18\x05 \x03(\v28.com.coralogixapis.alerts.v3.TracingSpanFieldsFilterTypeR\n" +
-	"spanFields\"\x9e\x01\n" +
-	"\x1bTracingSpanFieldsFilterType\x12.\n" +
-	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x03key\x12O\n" +
-	"\vfilter_type\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeR\n" +
-	"filterType\"\xa0\x01\n" +
-	"\x11TracingFilterType\x124\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x06values\x12U\n" +
-	"\toperation\x18\x02 \x01(\x0e27.com.coralogixapis.alerts.v3.TracingFilterOperationTypeR\toperation*\x83\x02\n" +
+	"Ycom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8a\x02\n" +
+	"\rTracingFilter\x12\x95\x01\n" +
+	"\rsimple_filter\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.TracingSimpleFilterB<\x92A927Simple filter using latency threshold and label filtersH\x00R\fsimpleFilter:R\x92AO\n" +
+	"M*\x0eTracing filter2-Filter configuration for tracing-based alerts\xd2\x01\vfilter_typeB\r\n" +
+	"\vfilter_type\"\xae\x03\n" +
+	"\x13TracingSimpleFilter\x12~\n" +
+	"\x15tracing_label_filters\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.TracingLabelFiltersB\x18\x92A\x152\x13Trace label filtersR\x13tracingLabelFilters\x12\x99\x01\n" +
+	"\x14latency_threshold_ms\x18\x02 \x01(\v2\x1c.google.protobuf.UInt64ValueBI\x92AF26The latency threshold to filter traces in millisecondsJ\x041000\x8a\x01\x05^\\d+$R\x12latencyThresholdMs:{\x92Ax\n" +
+	"v*\x15Simple tracing filter2FBasic filter configuration using a latency threshold and label filters\xd2\x01\x14latency_threshold_ms\"\xe2\x05\n" +
+	"\x13TracingLabelFilters\x12{\n" +
+	"\x10application_name\x18\x01 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB \x92A\x1d2\x1bFilter by application namesR\x0fapplicationName\x12u\n" +
+	"\x0esubsystem_name\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB\x1e\x92A\x1b2\x19Filter by subsystem namesR\rsubsystemName\x12o\n" +
+	"\fservice_name\x18\x03 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB\x1c\x92A\x192\x17Filter by service namesR\vserviceName\x12u\n" +
+	"\x0eoperation_name\x18\x04 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB\x1e\x92A\x1b2\x19Filter by operation namesR\roperationName\x12u\n" +
+	"\vspan_fields\x18\x05 \x03(\v28.com.coralogixapis.alerts.v3.TracingSpanFieldsFilterTypeB\x1a\x92A\x172\x15Filter by span fieldsR\n" +
+	"spanFields:x\x92Au\n" +
+	"s*\x15Tracing label filters2ZFilters for application name, subsystem name, service name, operation name and span fields\"\xf2\x02\n" +
+	"\x1bTracingSpanFieldsFilterType\x12x\n" +
+	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBH\x92AE2&The key of the span field to filter byJ\x0espan.field.key\x8a\x01\n" +
+	"^\\w+\\.\\w+$R\x03key\x12r\n" +
+	"\vfilter_type\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB!\x92A\x1e2\x1cThe FilterType to filter by.R\n" +
+	"filterType:e\x92Ab\n" +
+	"`*\x1fTracing span fields filter type2)A filter for span fields in trace entries\xd2\x01\x03key\xd2\x01\vfilter_type\"\x92\x03\n" +
+	"\x11TracingFilterType\x12x\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBB\x92A?2$The values of the label to filter byJ\x14[\"value1\", \"value2\"]\xa8\x01\x01R\x06values\x12\xb2\x01\n" +
+	"\toperation\x18\x02 \x01(\x0e27.com.coralogixapis.alerts.v3.TracingFilterOperationTypeB[\x92AX2+The operation to perform on the label valueJ)TRACING_FILTER_OPERATION_TYPE_STARTS_WITHR\toperation:N\x92AK\n" +
+	"I*\x13Tracing filter type2\x1dFilter type for trace entries\xd2\x01\x06values\xd2\x01\toperation*\x83\x02\n" +
 	"\x1aTracingFilterOperationType\x123\n" +
 	"/TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\x10\x00\x12*\n" +
 	"&TRACING_FILTER_OPERATION_TYPE_INCLUDES\x10\x01\x12+\n" +
