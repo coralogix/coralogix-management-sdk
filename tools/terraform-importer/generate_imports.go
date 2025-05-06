@@ -29,21 +29,21 @@ import (
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
 )
 
-var envToGrpcUrl = map[string]string{
-	"APAC1":   "ng-api-grpc.app.coralogix.in:443",
-	"AP1":     "ng-api-grpc.app.coralogix.in:443",
-	"APAC2":   "ng-api-grpc.coralogixsg.com:443",
-	"AP2":     "ng-api-grpc.coralogixsg.com:443",
-	"APAC3":   "ng-api-grpc.ap3.coralogix.com:443",
-	"AP3":     "ng-api-grpc.ap3.coralogix.com:443",
-	"EUROPE1": "ng-api-grpc.coralogix.com:443",
-	"EU1":     "ng-api-grpc.coralogix.com:443",
-	"EUROPE2": "ng-api-grpc.eu2.coralogix.com:443",
-	"EU2":     "ng-api-grpc.eu2.coralogix.com:443",
-	"USA1":    "ng-api-grpc.coralogix.us:443",
-	"US1":     "ng-api-grpc.coralogix.us:443",
-	"USA2":    "ng-api-grpc.cx498.coralogix.com:443",
-	"US2":     "ng-api-grpc.cx498.coralogix.com:443",
+var terraformEnvironmentAliasToSdkEnvironment = map[string]string{
+	"APAC1":   "ap1",
+	"AP1":     "ap1",
+	"APAC2":   "ap2",
+	"AP2":     "ap2",
+	"APAC3":   "ap3",
+	"AP3":     "ap3",
+	"EUROPE1": "eu1",
+	"EU1":     "eu1",
+	"EUROPE2": "eu2",
+	"EU2":     "eu2",
+	"USA1":    "us1",
+	"US1":     "us1",
+	"USA2":    "us2",
+	"US2":     "us2",
 }
 
 // Resource represents a resource in the Terraform state file
@@ -135,12 +135,12 @@ func main() {
 	if *resourceType != "" {
 		var idsAndNames []IdAndName
 		apiKey := os.Getenv("CORALOGIX_API_KEY")
-		region := os.Getenv("CORALOGIX_ENV")
-		url := envToGrpcUrl[region]
+		region := strings.ToUpper(os.Getenv("CORALOGIX_ENV"))
+		mappedRegion := terraformEnvironmentAliasToSdkEnvironment[region]
 
 		switch *resourceType {
 		case "alert":
-			alertClient := cxsdk.NewAlertsClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			alertClient := cxsdk.NewAlertsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			alerts, err := alertClient.List(context.Background(), &cxsdk.ListAlertDefsRequest{})
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -157,7 +157,7 @@ func main() {
 		case "archive_retentions":
 			idsAndNames = append(idsAndNames, IdAndName{Id: "archive_retentions", Name: "archive_retentions"})
 		case "custom_role":
-			rolesClients := cxsdk.NewRolesClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			rolesClients := cxsdk.NewRolesClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			roles, err := rolesClients.List(context.Background(), &cxsdk.ListCustomRolesRequest{})
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -168,7 +168,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: strconv.Itoa(int(role.RoleId)), Name: roleName})
 			}
 		case "dashboard":
-			dashboardClient := cxsdk.NewDashboardsClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			dashboardClient := cxsdk.NewDashboardsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			dashboards, err := dashboardClient.List(context.Background())
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -179,7 +179,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: dashboard.GetId().GetValue(), Name: dashboardName})
 			}
 		case "dashboards_folder":
-			dashboardsFolderClient := cxsdk.NewDashboardsFoldersClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			dashboardsFolderClient := cxsdk.NewDashboardsFoldersClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			dashboardsFolders, err := dashboardsFolderClient.List(context.Background())
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -190,7 +190,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: dashboardsFolder.GetId().GetValue(), Name: dashboardsFolderName})
 			}
 		case "events2metrics":
-			events2metricsClient := cxsdk.NewEvents2MetricsClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			events2metricsClient := cxsdk.NewEvents2MetricsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			events2metrics, err := events2metricsClient.List(context.Background())
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -201,7 +201,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: events2metric.GetId().GetValue(), Name: events2metricName})
 			}
 		case "group":
-			groupClient := cxsdk.NewGroupsClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			groupClient := cxsdk.NewGroupsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			groups, err := groupClient.List(context.Background(), &cxsdk.GetTeamGroupsRequest{})
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -212,7 +212,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: strconv.Itoa(int(group.GroupId.Id)), Name: groupName})
 			}
 		case "recording_rules_groups_set":
-			recordingRulesGroupsSetClient := cxsdk.NewRecordingRuleGroupSetsClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			recordingRulesGroupsSetClient := cxsdk.NewRecordingRuleGroupSetsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			recordingRulesGroupsSets, err := recordingRulesGroupsSetClient.List(context.Background())
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -223,7 +223,7 @@ func main() {
 				idsAndNames = append(idsAndNames, IdAndName{Id: recordingRulesGroupsSet.GetId(), Name: recordingRulesGroupsSetName})
 			}
 		case "scope":
-			scopesClient := cxsdk.NewScopesClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			scopesClient := cxsdk.NewScopesClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			scopes, err := scopesClient.List(context.Background(), &cxsdk.GetTeamScopesRequest{})
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
@@ -238,7 +238,7 @@ func main() {
 		case "tco_policies_traces":
 			idsAndNames = []IdAndName{{Id: " ", Name: "tco_policies_traces"}}
 		case "webhook":
-			webhookClient := cxsdk.NewWebhooksClient(cxsdk.NewCallPropertiesCreator(url, cxsdk.NewAuthContext(apiKey, apiKey)))
+			webhookClient := cxsdk.NewWebhooksClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			webhooks, err := webhookClient.List(context.Background(), &cxsdk.ListAllOutgoingWebhooksRequest{})
 			if err != nil {
 				fmt.Printf("Error: %v\n", err)
