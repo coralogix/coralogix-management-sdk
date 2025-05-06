@@ -257,13 +257,13 @@ mod tests {
             schemas: vec![],
             active: true,
             id: None,
-            user_name: "yak@coralogix.com".into(),
+            user_name: format!("yak{}@coralogix.com", chrono::Utc::now().timestamp_millis()),
             name: ScimUserName {
                 given_name: "example".into(),
                 family_name: "example".into(),
             },
             emails: vec![ScimUserEmail {
-                value: "example@coralogix.com".into(),
+                value: format!("example{}@coralogix.com", chrono::Utc::now().timestamp_millis()),
                 r#type: Some("work".into()),
                 primary: true,
             }],
