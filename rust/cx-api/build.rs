@@ -45,8 +45,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         data_usage_service(&root),
         #[cfg(feature = "dashboards")]
         dashboards_service(&root),
-        #[cfg(feature = "tags")]
-        tags_service(&root),
         #[cfg(feature = "e2m")]
         e2m_service(&root),
         #[cfg(feature = "views")]
@@ -102,10 +100,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         .out_dir("src/generated")
         .compile_protos(building, &[format!("{root}/")])?;
     Ok(())
-}
-
-fn tags_service(root: &str) -> Vec<String> {
-    vec![format!("{}/com/coralogix/tags/v1/tag_service.proto", root)]
 }
 
 fn alerts_service(root: &str) -> Vec<String> {
