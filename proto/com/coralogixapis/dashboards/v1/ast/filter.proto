@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast;
 
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "com/coralogixapis/dashboards/v1/common/span_relation_type.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -77,6 +78,9 @@ message Filter {
 
     // The observation span field to which the filter is applied.
     v1.common.ObservationField observation_field = 3;
+
+    // The span relation for the filter. Only supported in spans widget filters. (Not supported in global dashboard filters)
+    v1.common.SpanRelationType relation_type = 4;
   }
 
   message MetricsFilter {
