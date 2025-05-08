@@ -13,9 +13,33 @@ import "com/coralogix/common/v1/audit_log.proto";
 
 
 service EventsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Events Service"
+    description: "A service for querying events."
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+      description: "Learn more about alerts in our documentation"
+    }
+  };
 
   rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get event";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Events Service"]
+      summary: "Get Event"
+    };
     option (google.api.http) = {
       get: "/v3/events/{id}"
     };
@@ -23,6 +47,22 @@ service EventsService {
 
   rpc BatchGetEvent(BatchGetEventRequest) returns (BatchGetEventResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "batch get events";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Events Service"]
+      summary: "Batch Get Event"
+    };
     option (google.api.http) = {
       get: "/v3/events/events:batchGet"
     };
@@ -30,6 +70,22 @@ service EventsService {
 
   rpc ListEvents(ListEventsRequest) returns (ListEventsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get events list";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Events service"]
+      summary: "List Events"
+    };
     option (google.api.http) = {
       get: "/v3/events"
     };
@@ -37,13 +93,46 @@ service EventsService {
 
   rpc ListEventsCount(ListEventsCountRequest) returns (ListEventsCountResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get events list count";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Events service"]
+      summary: "List Events Count"
+    };
     option (google.api.http) = {
       get: "/v3/events:count"
     };
+
   }
 
   rpc GetEventsStatistics(GetEventsStatisticsRequest) returns (GetEventsStatisticsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get events statistics";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Events service"]
+      summary: "Get Events Statistics"
+    };
     option (google.api.http) = {
       get: "/v3/events:statistics"
     };

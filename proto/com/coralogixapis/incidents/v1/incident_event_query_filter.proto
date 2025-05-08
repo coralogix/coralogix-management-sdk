@@ -3,23 +3,36 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/filter_operators.proto";
+import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
 import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
-import "com/coralogixapis/incidents/v1/incident_query_filter.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message IncidentEventQueryFilter {
-  repeated IncidentStatus status = 1;
-  repeated IncidentSeverity severity = 2;
-  map<string, ContextualLabelValues> contextual_labels = 3;
-  google.protobuf.StringValue name = 4;
-  google.protobuf.BoolValue is_muted = 5;
-  TimeRange timestamp = 6;
-  LabelsFilter labels = 7;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident event query filter"
+      description: "Filter configuration for incident events"
+    }
+  };
+  repeated IncidentStatus status = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The status of the incident"}];
+  repeated IncidentSeverity severity = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The severity of the incident"}];
+  map<string, ContextualLabelValues> contextual_labels = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The contextual labels of the incident"}];
+  google.protobuf.StringValue name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The name of the incident"}];
+  google.protobuf.BoolValue is_muted = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the incident is muted"}];
+  TimeRange timestamp = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time range of the incident"}];
+  LabelsFilter labels = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The labels of the incident"}];
 }
 
 message LabelsFilter {
-  repeated MetaLabel meta_labels = 1;
-  FilterOperator operator = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Label filter configuration"
+      required: ["meta_labels"]
+    }
+  };
+  repeated MetaLabel meta_labels = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The meta labels of the incident"}];
+  FilterOperator operator = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The operator for the labels filter"}];
 }

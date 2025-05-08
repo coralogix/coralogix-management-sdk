@@ -1856,21 +1856,113 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\x05scope\x18\x01 \x01(\v2#.com.coralogix.permissions.v1.ScopeH\x00R\x05scope\x88\x01\x01:\xae\x02\x92A\xaa\x02\n" +
 	"\x94\x01*\x19GetTeamGroupScopeResponse2wResponse message containing the optional scope configuration (filters for subsystems and applications) for a team group*\x90\x01\n" +
 	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/B\b\n" +
-	"\x06_scope2\xef\x11\n" +
-	"\x1aTeamPermissionsMgmtService\x12\x9d\x01\n" +
-	"\fGetTeamGroup\x121.com.coralogix.permissions.v1.GetTeamGroupRequest\x1a2.com.coralogix.permissions.v1.GetTeamGroupResponse\"&\x82\xd3\xe4\x93\x02 \x12\x1e/v1/teams/groups/{group_id.id}\x12\xa1\x01\n" +
-	"\x12GetTeamGroupByName\x127.com.coralogix.permissions.v1.GetTeamGroupByNameRequest\x1a8.com.coralogix.permissions.v1.GetTeamGroupByNameResponse\"\x18\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/teams/groups\x12\x97\x01\n" +
-	"\rGetTeamGroups\x122.com.coralogix.permissions.v1.GetTeamGroupsRequest\x1a3.com.coralogix.permissions.v1.GetTeamGroupsResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/teams/groups/list\x12\x9b\x01\n" +
-	"\x0fCreateTeamGroup\x124.com.coralogix.permissions.v1.CreateTeamGroupRequest\x1a5.com.coralogix.permissions.v1.CreateTeamGroupResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/teams/groups\x12\x9b\x01\n" +
-	"\x0fUpdateTeamGroup\x124.com.coralogix.permissions.v1.UpdateTeamGroupRequest\x1a5.com.coralogix.permissions.v1.UpdateTeamGroupResponse\"\x1b\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/v1/teams/groups\x12\xa6\x01\n" +
-	"\x0fDeleteTeamGroup\x124.com.coralogix.permissions.v1.DeleteTeamGroupRequest\x1a5.com.coralogix.permissions.v1.DeleteTeamGroupResponse\"&\x82\xd3\xe4\x93\x02 *\x1e/v1/teams/groups/{group_id.id}\x12\xa6\x01\n" +
-	"\rGetGroupUsers\x122.com.coralogix.permissions.v1.GetGroupUsersRequest\x1a3.com.coralogix.permissions.v1.GetGroupUsersResponse\",\x82\xd3\xe4\x93\x02&\x12$/v1/teams/groups/{group_id.id}/users\x12\xbb\x01\n" +
-	"\x13AddUsersToTeamGroup\x128.com.coralogix.permissions.v1.AddUsersToTeamGroupRequest\x1a9.com.coralogix.permissions.v1.AddUsersToTeamGroupResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/teams/groups/{group_id.id}/users\x12\xb0\x01\n" +
-	"\x14AddUsersToTeamGroups\x129.com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest\x1a:.com.coralogix.permissions.v1.AddUsersToTeamGroupsResponse\"!\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/teams/groups/users\x12\xc7\x01\n" +
-	"\x18RemoveUsersFromTeamGroup\x12=.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest\x1a>.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupResponse\",\x82\xd3\xe4\x93\x02&*$/v1/teams/groups/{group_id.id}/users\x12\xbc\x01\n" +
-	"\x19RemoveUsersFromTeamGroups\x12>.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest\x1a?.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsResponse\"\x1e\x82\xd3\xe4\x93\x02\x18*\x16/v1/teams/groups/users\x12\xb5\x01\n" +
-	"\x11SetTeamGroupScope\x126.com.coralogix.permissions.v1.SetTeamGroupScopeRequest\x1a7.com.coralogix.permissions.v1.SetTeamGroupScopeResponse\"/\x82\xd3\xe4\x93\x02):\x01*\"$/v1/teams/groups/{group_id.id}/scope\x12\xb2\x01\n" +
-	"\x11GetTeamGroupScope\x126.com.coralogix.permissions.v1.GetTeamGroupScopeRequest\x1a7.com.coralogix.permissions.v1.GetTeamGroupScopeResponse\",\x82\xd3\xe4\x93\x02&\x12$/v1/teams/groups/{group_id.id}/scopeb\x06proto3"
+	"\x06_scope2\xc0!\n" +
+	"\x1aTeamPermissionsMgmtService\x12\xac\x02\n" +
+	"\fGetTeamGroup\x121.com.coralogix.permissions.v1.GetTeamGroupRequest\x1a2.com.coralogix.permissions.v1.GetTeamGroupResponse\"\xb4\x01\x92A\x8a\x01\n" +
+	"#Team Permissions Management Service\x12\x0eGet Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02 \x12\x1e/v1/teams/groups/{group_id.id}\x12\xb8\x02\n" +
+	"\x12GetTeamGroupByName\x127.com.coralogix.permissions.v1.GetTeamGroupByNameRequest\x1a8.com.coralogix.permissions.v1.GetTeamGroupByNameResponse\"\xae\x01\x92A\x92\x01\n" +
+	"#Team Permissions Management Service\x12\x16Get Team Group By NameJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/teams/groups\x12\xa7\x02\n" +
+	"\rGetTeamGroups\x122.com.coralogix.permissions.v1.GetTeamGroupsRequest\x1a3.com.coralogix.permissions.v1.GetTeamGroupsResponse\"\xac\x01\x92A\x8b\x01\n" +
+	"#Team Permissions Management Service\x12\x0fGet Team GroupsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/teams/groups/list\x12\xad\x02\n" +
+	"\x0fCreateTeamGroup\x124.com.coralogix.permissions.v1.CreateTeamGroupRequest\x1a5.com.coralogix.permissions.v1.CreateTeamGroupResponse\"\xac\x01\x92A\x8d\x01\n" +
+	"#Team Permissions Management Service\x12\x11Create Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/teams/groups\x12\xad\x02\n" +
+	"\x0fUpdateTeamGroup\x124.com.coralogix.permissions.v1.UpdateTeamGroupRequest\x1a5.com.coralogix.permissions.v1.UpdateTeamGroupResponse\"\xac\x01\x92A\x8d\x01\n" +
+	"#Team Permissions Management Service\x12\x11Update Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/v1/teams/groups\x12\xb8\x02\n" +
+	"\x0fDeleteTeamGroup\x124.com.coralogix.permissions.v1.DeleteTeamGroupRequest\x1a5.com.coralogix.permissions.v1.DeleteTeamGroupResponse\"\xb7\x01\x92A\x8d\x01\n" +
+	"#Team Permissions Management Service\x12\x11Delete Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02 *\x1e/v1/teams/groups/{group_id.id}\x12\xb6\x02\n" +
+	"\rGetGroupUsers\x122.com.coralogix.permissions.v1.GetGroupUsersRequest\x1a3.com.coralogix.permissions.v1.GetGroupUsersResponse\"\xbb\x01\x92A\x8b\x01\n" +
+	"#Team Permissions Management Service\x12\x0fGet Group UsersJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02&\x12$/v1/teams/groups/{group_id.id}/users\x12\xd3\x02\n" +
+	"\x13AddUsersToTeamGroup\x128.com.coralogix.permissions.v1.AddUsersToTeamGroupRequest\x1a9.com.coralogix.permissions.v1.AddUsersToTeamGroupResponse\"\xc6\x01\x92A\x93\x01\n" +
+	"#Team Permissions Management Service\x12\x17Add Users To Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02):\x01*\"$/v1/teams/groups/{group_id.id}/users\x12\xc9\x02\n" +
+	"\x14AddUsersToTeamGroups\x129.com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest\x1a:.com.coralogix.permissions.v1.AddUsersToTeamGroupsResponse\"\xb9\x01\x92A\x94\x01\n" +
+	"#Team Permissions Management Service\x12\x18Add Users To Team GroupsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/teams/groups/users\x12\xe4\x02\n" +
+	"\x18RemoveUsersFromTeamGroup\x12=.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest\x1a>.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupResponse\"\xc8\x01\x92A\x98\x01\n" +
+	"#Team Permissions Management Service\x12\x1cRemove Users From Team GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02&*$/v1/teams/groups/{group_id.id}/users\x12\xda\x02\n" +
+	"\x19RemoveUsersFromTeamGroups\x12>.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest\x1a?.com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsResponse\"\xbb\x01\x92A\x99\x01\n" +
+	"#Team Permissions Management Service\x12\x1dRemove Users From Team GroupsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18*\x16/v1/teams/groups/users\x12\xca\x02\n" +
+	"\x11SetTeamGroupScope\x126.com.coralogix.permissions.v1.SetTeamGroupScopeRequest\x1a7.com.coralogix.permissions.v1.SetTeamGroupScopeResponse\"\xc3\x01\x92A\x90\x01\n" +
+	"#Team Permissions Management Service\x12\x14Set Team Group ScopeJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02):\x01*\"$/v1/teams/groups/{group_id.id}/scope\x12\xc7\x02\n" +
+	"\x11GetTeamGroupScope\x126.com.coralogix.permissions.v1.GetTeamGroupScopeRequest\x1a7.com.coralogix.permissions.v1.GetTeamGroupScopeResponse\"\xc0\x01\x92A\x90\x01\n" +
+	"#Team Permissions Management Service\x12\x14Get Team Group ScopeJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02&\x12$/v1/teams/groups/{group_id.id}/scope\x1a=\x92A:\n" +
+	"#Team Permissions Management Service\x12\x13Manage Team Groups.b\x06proto3"
 
 var (
 	file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawDescOnce sync.Once

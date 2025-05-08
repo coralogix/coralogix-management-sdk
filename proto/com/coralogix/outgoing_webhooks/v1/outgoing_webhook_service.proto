@@ -39,7 +39,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Get outgoing webhook types"
+      summary: "Get outgoing webhook types"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -70,7 +70,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Get outgoing webhook type details"
+      summary: "Get outgoing webhook type details"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -101,7 +101,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "List outgoing webhooks"
+      summary: "List outgoing webhooks"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -132,7 +132,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "List outbound webhooks summary"
+      summary: "List outbound webhooks summary"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -163,7 +163,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "List all outgoing webhooks"
+      summary: "List all outgoing webhooks"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -194,7 +194,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Get outgoing webhook"
+      summary: "Get outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -226,7 +226,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Create an outgoing webhook"
+      summary: "Create an outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -258,7 +258,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Update an outgoing webhook"
+      summary: "Update an outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -289,7 +289,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Delete an outgoing webhook"
+      summary: "Delete an outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -321,7 +321,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Test an outgoing webhook"
+      summary: "Test an outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -353,7 +353,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "Test an existing outgoing webhook"
+      summary: "Test an existing outgoing webhook"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -383,7 +383,7 @@ service OutgoingWebhooksService {
         value: {description: "Internal server error"}
       }
       tags: ["Outgoing webhooks service"]
-      operation_id: "List IBM event notification instances"
+      summary: "List IBM event notification instances"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

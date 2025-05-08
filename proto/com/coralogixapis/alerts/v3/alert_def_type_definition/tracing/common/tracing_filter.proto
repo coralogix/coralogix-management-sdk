@@ -74,7 +74,7 @@ message TracingSpanFieldsFilterType {
   };
   google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The key of the span field to filter by"
-    example: "span.field.key"
+    example: "\"span.field.key\""
     pattern: "^\\w+\\.\\w+$"
   }];
   TracingFilterType filter_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The FilterType to filter by."}];
@@ -98,7 +98,7 @@ message TracingFilterType {
   }];
   TracingFilterOperationType operation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The operation to perform on the label value"
-    example: "TRACING_FILTER_OPERATION_TYPE_STARTS_WITH"
+    example: "\"TRACING_FILTER_OPERATION_TYPE_STARTS_WITH\""
   }];
 }
 

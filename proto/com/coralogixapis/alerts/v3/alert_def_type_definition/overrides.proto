@@ -11,6 +11,6 @@ message AlertDefOverride {
   };
   AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The priority of the alert definition"
-    example: "ALERT_DEF_PRIORITY_P3"
+    example: "\"ALERT_DEF_PRIORITY_P3\""
   }];
 }

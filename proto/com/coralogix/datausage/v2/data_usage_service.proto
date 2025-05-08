@@ -10,32 +10,117 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/api/annotations.proto";
 
 service DataUsageService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Data Usage Service"
+    description: "A service to manage data usage metrics."
+  };
   // Deprecated. Please use GetDataUsage instead.
   rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse) {
     option deprecated = true;
   }
   rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Spans Count"
+    };
     option (google.api.http) = {
       get: "/v2/datausage/spanscount"
     };
   }
   rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Logs Count"
+    };
     option (google.api.http) = {
       get: "/v2/datausage/logscount"
     };
   }
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Data Usage Metrics Export Status"
+    };
     option (google.api.http) = {
       get: "/v2/datausage/exportstatus"
     };
   }
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Update Data Usage Metrics Export Status"
+    };
     option (google.api.http) = {
       post: "/v2/datausage/exportstatus"
       body: "*"
     };
   }
   rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Data Usage"
+    };
+
     option (google.api.http) = {
       get: "/v2/datausage"
     };
@@ -43,6 +128,22 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in units
   rpc GetDailyUsageUnits(GetDailyUsageUnitsRequest) returns (GetDailyUsageUnitsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Daily Usage Units"
+    };
     option (google.api.http) = {
       post: "/v2/datausage/daily/units"
       body: "*"
@@ -51,6 +152,22 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in GBs
   rpc GetDailyUsageProcessedGbs(GetDailyUsageProcessedGbsRequest) returns (GetDailyUsageProcessedGbsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Daily Usage Processed GBs"
+    };
     option (google.api.http) = {
       post: "/v2/datausage/daily/processed_gbs"
       body: "*"
@@ -59,6 +176,22 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in evaluation tokens
   rpc GetDailyUsageEvaluationTokens(GetDailyUsageEvaluationTokensRequest) returns (GetDailyUsageEvaluationTokensResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Data Usage Service"]
+      summary: "Get Daily Usage Evaluation Tokens"
+    };
     option (google.api.http) = {
       post: "/v2/datausage/daily/evaluation_tokens"
       body: "*"

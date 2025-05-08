@@ -4,6 +4,7 @@ package com.coralogixapis.actions.v2;
 
 import "google/protobuf/wrappers.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 
@@ -100,7 +101,28 @@ message AtomicBatchExecuteActionsResponse {
 }
 
 service ActionsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Actions Service"
+    description: "A service for managing actions."
+  };
+
   rpc CreateAction(CreateActionRequest) returns (CreateActionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Create Action"
+    };
     option (google.api.http) = {
       post: "/v2/actions"
       body: "*"
@@ -108,6 +130,22 @@ service ActionsService {
   }
 
   rpc ReplaceAction(ReplaceActionRequest) returns (ReplaceActionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Replace Action"
+    };
     option (google.api.http) = {
       put: "/v2/actions"
       body: "*"
@@ -115,24 +153,88 @@ service ActionsService {
   }
 
   rpc DeleteAction(DeleteActionRequest) returns (DeleteActionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Delete Action"
+    };
     option (google.api.http) = {
       delete: "/v2/actions/{id}"
     };
   }
 
   rpc GetAction(GetActionRequest) returns (GetActionResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Get Action"
+    };
     option (google.api.http) = {
       get: "/v2/actions/{id}"
     };
   }
 
   rpc ListActions(ListActionsRequest) returns (ListActionsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "List Actions"
+    };
     option (google.api.http) = {
       get: "/v2/actions"
     };
   }
 
   rpc OrderActions(OrderActionsRequest) returns (OrderActionsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Order Actions"
+    };
     option (google.api.http) = {
       post: "/v2/actions/actions:order"
       body: "*"
@@ -143,6 +245,22 @@ service ActionsService {
     option (google.api.http) = {
       post: "/v2/actions/actions:atomicBatchExecute"
       body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Actions Service"]
+      summary: "Atomic Batch Execute Actions"
     };
   }
 }

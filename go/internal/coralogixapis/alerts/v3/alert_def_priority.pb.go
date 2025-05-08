@@ -135,9 +135,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_priority_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_def_priority_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_def_priority.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xce\x02\n" +
-	"\bPriority\x12\x85\x01\n" +
-	"\x05value\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityB@\x92A=2$The priority of the alert definitionJ\x15ALERT_DEF_PRIORITY_P3R\x05value\x12\\\n" +
+	"4com/coralogixapis/alerts/v3/alert_def_priority.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd0\x02\n" +
+	"\bPriority\x12\x87\x01\n" +
+	"\x05value\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityBB\x92A?2$The priority of the alert definitionJ\x17\"ALERT_DEF_PRIORITY_P3\"R\x05value\x12\\\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB*\x92A'2%String representation of the priorityR\x04name:\\\x92AY\n" +
 	"W*\x19Alert definition priority2+Defines the priority of an alert definition\xd2\x01\x05value\xd2\x01\x04name*\xa8\x01\n" +
 	"\x10AlertDefPriority\x12(\n" +

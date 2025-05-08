@@ -1035,13 +1035,49 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x1aGetSendDataApiKeysResponse\x12=\n" +
 	"\x04keys\x18\x01 \x03(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\x04keys:\xdf\x01\x92A\xdb\x01\n" +
 	"k*\x14Get Api Key Response2HThis data structure is the response obtained when retrieving an API key.\xd2\x01\bkey_info*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xb2\x06\n" +
-	"\x0eApiKeysService\x12\x96\x01\n" +
-	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x17\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v3/api_keys\x12\x93\x01\n" +
-	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/api_keys/{key_id}\x12\xaf\x01\n" +
-	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\x1e\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x9c\x01\n" +
-	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x1d\x82\xd3\xe4\x93\x02\x17*\x15/v3/api_keys/{key_id}\x12\x9f\x01\n" +
-	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\" \x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v3/api_keys/{key_id}b\x06proto3"
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xc6\v\n" +
+	"\x0eApiKeysService\x12\x91\x02\n" +
+	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x91\x01\x92Aw\n" +
+	"\x10API Keys Service\x12\x0eCreate API KeyJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v3/api_keys\x12\x8b\x02\n" +
+	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\x94\x01\x92At\n" +
+	"\x10API Keys Service\x12\vGet API KeyJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/api_keys/{key_id}\x12\xb5\x02\n" +
+	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\xa3\x01\x92A\x81\x01\n" +
+	"\x10API Keys Service\x12\x18Get \"Send Data\" API KeysJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x8e\x02\n" +
+	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x8e\x01\x92Aw\n" +
+	"\x10API Keys Service\x12\x0eDelete API KeyJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e*\f/v3/api_keys\x12\x9a\x02\n" +
+	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\x9a\x01\x92Aw\n" +
+	"\x10API Keys Service\x12\x0eUpdate API KeyJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v3/api_keys/{key_id}\x1a,\x92A)\n" +
+	"\x10API Keys Service\x12\x15Manage your API Keys.b\x06proto3"
 
 var (
 	file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDescOnce sync.Once

@@ -23,6 +23,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Views"]
+      summary: "Create a view"
       description: "Creates a new view"
       responses: {
         key: "200"
@@ -43,6 +45,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Views"]
+      summary: "Replace a view"
       description: "Replaces an existing view"
       responses: {
         key: "200"
@@ -62,6 +66,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Views"]
+      summary: "Get view"
       description: "Gets a view by ID"
       responses: {
         key: "200"
@@ -80,6 +86,8 @@ service ViewsService {
       delete: "/v1/views/{id}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Views"]
+      summary: "Delete view"
       description: "Deletes a view by ID"
     };
   }
@@ -89,6 +97,8 @@ service ViewsService {
       get: "/v1/views"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      tags: ["Views"]
+      summary: "List views"
       description: "Lists all company public views"
       responses: {
         key: "200"

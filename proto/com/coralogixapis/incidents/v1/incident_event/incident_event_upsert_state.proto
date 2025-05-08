@@ -5,7 +5,18 @@ package com.coralogixapis.incidents.v1;
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto";
 import "com/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 message IncidentEventUpsertState {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident event upsert state"
+      required: [
+        "state_type",
+        "payload"
+      ]
+    }
+  };
   UpsertIncidentStateType state_type = 1;
   UpsertIncidentStatePayload payload = 2;
   google.protobuf.BoolValue is_muted = 3;

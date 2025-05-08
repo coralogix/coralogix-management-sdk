@@ -460,13 +460,13 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_flow_flow_type_
 	"\x06stages\x18\x01 \x03(\v2'.com.coralogixapis.alerts.v3.FlowStagesB%\x92A\"2\x1dThe stages of the flow alert.\xa8\x01\x01R\x06stages\x12K\n" +
 	"\x13enforce_suppression\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x12enforceSuppression:\xde\x01\x92A\xda\x01\n" +
 	"T*\x0fFlow alert type28Configuration for flow-based alerts with multiple stages\xd2\x01\x06stages*\x81\x01\n" +
-	"1Learn more about flow alerts in our documentation\x12Lhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/\"\xd4\x03\n" +
+	"1Learn more about flow alerts in our documentation\x12Lhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/flow-alerts/\"\xd6\x03\n" +
 	"\n" +
 	"FlowStages\x12{\n" +
 	"\x12flow_stages_groups\x18\n" +
 	" \x01(\v2-.com.coralogixapis.alerts.v3.FlowStagesGroupsB\x1c\x92A\x192\x17The flow stages groups.H\x00R\x10flowStagesGroups\x12>\n" +
-	"\ftimeframe_ms\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtimeframeMs\x12\x97\x01\n" +
-	"\x0etimeframe_type\x18\x04 \x01(\x0e2*.com.coralogixapis.alerts.v3.TimeframeTypeBD\x92AA2)The type of timeframe for the flow alert.J\x14TIMEFRAME_TYPE_UP_TOR\rtimeframeType:`\x92A]\n" +
+	"\ftimeframe_ms\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueR\vtimeframeMs\x12\x99\x01\n" +
+	"\x0etimeframe_type\x18\x04 \x01(\x0e2*.com.coralogixapis.alerts.v3.TimeframeTypeBF\x92AC2)The type of timeframe for the flow alert.J\x16\"TIMEFRAME_TYPE_UP_TO\"R\rtimeframeType:`\x92A]\n" +
 	"[*\vFlow stages2\x1eDefines stages in a flow alert\xd2\x01\vflow_stages\xd2\x01\ftimeframe_ms\xd2\x01\x0etimeframe_typeB\r\n" +
 	"\vflow_stages\"\x9d\x01\n" +
 	"\x10FlowStagesGroups\x12D\n" +
@@ -478,9 +478,9 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_flow_flow_type_
 	"\anext_op\x18\x02 \x01(\x0e2#.com.coralogixapis.alerts.v3.NextOpBD\x92AA21The logical operation to apply to the next stage.J\f\"NEXT_OP_OR\"R\x06nextOp\x12\x93\x01\n" +
 	"\talerts_op\x18\x03 \x01(\x0e2%.com.coralogixapis.alerts.v3.AlertsOpBO\x92AL2:The logical operation to apply to the alerts in the group.J\x0e\"ALERTS_OP_OR\"R\balertsOp:e\x92Ab\n" +
 	"`*\x10Flow stage group2)Defines a group of stages in a flow alert\xd2\x01\n" +
-	"alert_defs\xd2\x01\anext_op\xd2\x01\talerts_op\"\xd9\x02\n" +
-	"\x19FlowStagesGroupsAlertDefs\x12y\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBK\x92AH2\x17The alert definition IDJ$123e4567-e89b-12d3-a456-426614174000\xa2\x02\x06UUIDv4R\x02id\x12g\n" +
+	"alert_defs\xd2\x01\anext_op\xd2\x01\talerts_op\"\xdb\x02\n" +
+	"\x19FlowStagesGroupsAlertDefs\x12{\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBM\x92AJ2\x17The alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id\x12g\n" +
 	"\x03not\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB9\x92A62.Whether to negate the alert definition or not.J\x04trueR\x03not:X\x92AU\n" +
 	"S*\"Flow stage group alert definitions2(Alert definitions for a flow stage group\xd2\x01\x02id*8\n" +
 	"\x06NextOp\x12\x1e\n" +

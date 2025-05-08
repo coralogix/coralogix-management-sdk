@@ -45,7 +45,7 @@ service AlertEventService {
         }
       },
       tags: ["Alert events service"]
-      operation_id: "Get alert event by ID"
+      summary: "Get alert event by ID"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -84,7 +84,7 @@ service AlertEventService {
         }
       },
       tags: ["Alert events service"]
-      operation_id: "Get alert events statistics"
+      summary: "Get alert events statistics"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

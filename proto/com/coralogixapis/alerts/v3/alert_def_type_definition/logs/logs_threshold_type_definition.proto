@@ -75,6 +75,6 @@ message LogsThresholdCondition {
   LogsTimeWindow time_window = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time window for the alert condition"}];
   LogsThresholdConditionType condition_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The type of condition for the alert"
-    example: "LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED"
+    example: "\"LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\""
   }];
 }

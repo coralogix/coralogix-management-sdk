@@ -9,8 +9,19 @@ import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message IncidentEventExtended {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Extended incident event"
+      required: [
+        "cx_event_key",
+        "incident_event",
+        "cx_event_timestamp"
+      ]
+    }
+  };
   google.protobuf.StringValue cx_event_key = 1;
   IncidentEvent incident_event = 2;
   google.protobuf.Timestamp cx_event_timestamp = 4;
