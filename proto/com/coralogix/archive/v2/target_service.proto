@@ -169,10 +169,34 @@ message ValidateTargetResponse {
 }
 
 service TargetService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Target Service"
+    description: "View and manage your storage targets for logs."
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
   rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get target";
     option (google.api.http) = {
       get: "/v2/target"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Target Service"]
+      summary: "Get target"
     };
   }
   
@@ -182,6 +206,23 @@ service TargetService {
       post: "/v2/target"
       body: "*"
     };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Target Service"]
+      summary: "Set target"
+    };
   }
 
   rpc ValidateTarget(ValidateTargetRequest) returns (ValidateTargetResponse) {
@@ -189,6 +230,23 @@ service TargetService {
     option (google.api.http) = {
       post: "/v2/target:validate"
       body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Target Service"]
+      summary: "Validate target"
     };
   }
 }

@@ -228,12 +228,12 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_thres
 	"\x11LogsThresholdRule\x12}\n" +
 	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.LogsThresholdConditionB*\x92A'2%The condition for the threshold alertR\tcondition\x12s\n" +
 	"\boverride\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.AlertDefOverrideB(\x92A%2#The override settings for the alertR\boverride:\x87\x01\x92A\x83\x01\n" +
-	"\x80\x01*\x13Logs Threshold Rule2RLogsThresholdRule is a message that defines a rule for log-based threshold alerts.\xd2\x01\tcondition\xd2\x01\boverride\"\x8c\x05\n" +
+	"\x80\x01*\x13Logs Threshold Rule2RLogsThresholdRule is a message that defines a rule for log-based threshold alerts.\xd2\x01\tcondition\xd2\x01\boverride\"\x8e\x05\n" +
 	"\x16LogsThresholdCondition\x12\x83\x01\n" +
 	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueBG\x92AD2+The threshold value for the alert conditionJ\x05100.0\x8a\x01\r^\\d+(\\.\\d+)?$R\tthreshold\x12z\n" +
 	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x92A)2'The time window for the alert conditionR\n" +
-	"timeWindow\x12\xc0\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e27.com.coralogixapis.alerts.v3.LogsThresholdConditionTypeB`\x92A]2#The type of condition for the alertJ6LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIEDR\rconditionType:\xac\x01\x92A\xa8\x01\n" +
+	"timeWindow\x12\xc2\x01\n" +
+	"\x0econdition_type\x18\x03 \x01(\x0e27.com.coralogixapis.alerts.v3.LogsThresholdConditionTypeBb\x92A_2#The type of condition for the alertJ8\"LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\xac\x01\x92A\xa8\x01\n" +
 	"\xa5\x01*\x18Logs Threshold Condition2^LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.\xd2\x01\tthreshold\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (

@@ -42,7 +42,7 @@ message FlowStages {
   google.protobuf.Int64Value timeframe_ms = 3;
   TimeframeType timeframe_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The type of timeframe for the flow alert."
-    example: "TIMEFRAME_TYPE_UP_TO"
+    example: "\"TIMEFRAME_TYPE_UP_TO\""
   }];
 }
 
@@ -93,7 +93,7 @@ message FlowStagesGroupsAlertDefs {
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The alert definition ID"
-    example: "123e4567-e89b-12d3-a456-426614174000"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
     format: "UUIDv4"
   }];
   google.protobuf.BoolValue not = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {

@@ -43,7 +43,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "List managed integration keys"
+      summary: "List managed integration keys"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -74,7 +74,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get deployed integration"
+      summary: "Get deployed integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -105,7 +105,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get all integrations"
+      summary: "Get all integrations"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -136,7 +136,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get integration definition"
+      summary: "Get integration definition"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -167,7 +167,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get integration details"
+      summary: "Get integration details"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -198,7 +198,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get managed integration status"
+      summary: "Get managed integration status"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -230,7 +230,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Save integration registration metadata"
+      summary: "Save integration registration metadata"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -262,7 +262,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Update integration"
+      summary: "Update integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -293,7 +293,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Delete integration"
+      summary: "Delete integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -324,7 +324,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get integration template"
+      summary: "Get integration template"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -355,7 +355,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Get RUM integration versions data"
+      summary: "Get RUM integration versions data"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -387,7 +387,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Trigger sync of RUM integration data"
+      summary: "Trigger sync of RUM integration data"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -419,7 +419,7 @@ service IntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Integration service"]
-      operation_id: "Test integration"
+      summary: "Test integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

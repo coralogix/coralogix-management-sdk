@@ -922,20 +922,57 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x05count\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\a\x92A\x04J\x0210R\x05count\x12K\n" +
 	"\rreached_limit\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
 	"\x92A\aJ\x05falseR\freachedLimit:v\x92As\n" +
-	"q*\x17ListEventsCountResponse2>This data structure represents a response to list events count\xd2\x01\x05count\xd2\x01\rreached_limit2\xe6\x06\n" +
-	"\rEventsService\x12\x8f\x01\n" +
-	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"&¸\x02\v\n" +
-	"\tget event\x82\xd3\xe4\x93\x02\x11\x12\x0f/v3/events/{id}\x12\xb0\x01\n" +
-	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"8¸\x02\x12\n" +
-	"\x10batch get events\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v3/events/events:batchGet\x12\x96\x01\n" +
+	"q*\x17ListEventsCountResponse2>This data structure represents a response to list events count\xd2\x01\x05count\xd2\x01\rreached_limit2\xf6\f\n" +
+	"\rEventsService\x12\x83\x02\n" +
+	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"\x99\x01\x92Ap\n" +
+	"\x0eEvents Service\x12\tGet EventJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\v\n" +
+	"\tget event\x82\xd3\xe4\x93\x02\x11\x12\x0f/v3/events/{id}\x12\xaa\x02\n" +
+	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"\xb1\x01\x92Av\n" +
+	"\x0eEvents Service\x12\x0fBatch Get EventJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x12\n" +
+	"\x10batch get events\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v3/events/events:batchGet\x12\x8c\x02\n" +
 	"\n" +
-	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"'¸\x02\x11\n" +
+	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\x9c\x01\x92Ar\n" +
+	"\x0eEvents service\x12\vList EventsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x11\n" +
 	"\x0fget events list\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v3/events\x12\xb1\x01\n" +
-	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"3¸\x02\x17\n" +
-	"\x15get events list count\x82\xd3\xe4\x93\x02\x12\x12\x10/v3/events:count\x12\xc2\x01\n" +
-	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"8¸\x02\x17\n" +
-	"\x15get events statistics\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/events:statisticsb\x06proto3"
+	"/v3/events\x12\xad\x02\n" +
+	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xae\x01\x92Ax\n" +
+	"\x0eEvents service\x12\x11List Events CountJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x17\n" +
+	"\x15get events list count\x82\xd3\xe4\x93\x02\x12\x12\x10/v3/events:count\x12\xc2\x02\n" +
+	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xb7\x01\x92A|\n" +
+	"\x0eEvents service\x12\x15Get Events StatisticsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x17\n" +
+	"\x15get events statistics\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/events:statistics\x1a\xad\x01\x92A\xa9\x01\n" +
+	"\x0eEvents Service\x12\x1eA service for querying events.\x1aw\n" +
+	",Learn more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/b\x06proto3"
 
 var (
 	file_com_coralogixapis_events_v3_events_service_proto_rawDescOnce sync.Once

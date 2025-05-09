@@ -15,7 +15,7 @@ message MetricFilter {
   oneof type {
     google.protobuf.StringValue promql = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "A PromQL filter for metrics"
-      example: "avg_over_time(metric_name[5m]) > 10"
+      example: "\"avg_over_time(metric_name[5m]) > 10\""
       format: "promql"
     }];
   }

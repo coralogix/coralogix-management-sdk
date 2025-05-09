@@ -15,11 +15,11 @@ message MetricTimeWindow {
   oneof type {
     MetricTimeWindowValue metric_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "The time window as a specific value"
-      example: "METRIC_TIME_WINDOW_VALUE_MINUTES_5"
+      example: "\"METRIC_TIME_WINDOW_VALUE_MINUTES_5\""
     }];
     google.protobuf.StringValue metric_time_window_dynamic_duration = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "The time window as a dynamic value"
-      example: "1h30m"
+      example: "\"1h30m\""
       format: "duration"
     }];
   }

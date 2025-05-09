@@ -4,8 +4,14 @@ package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message IncidentEventSnoozeIndicator {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident event snooze indicator"
+    }
+  };
   google.protobuf.Timestamp start_time = 1;
   google.protobuf.Int32Value duration_minutes = 2;
   google.protobuf.StringValue user_id = 3;

@@ -143,10 +143,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_undetected_values
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_undetected_values_management_proto_rawDesc = "" +
 	"\n" +
-	"Xcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa8\x04\n" +
+	"Xcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xaa\x04\n" +
 	"\x1aUndetectedValuesManagement\x12\x9f\x01\n" +
-	"\x19trigger_undetected_values\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBG\x92AD2<Should trigger the alert when undetected values are detectedJ\x04trueR\x17triggerUndetectedValues\x12\xdd\x01\n" +
-	"\x15auto_retire_timeframe\x18\x02 \x01(\x0e20.com.coralogixapis.alerts.v3.AutoRetireTimeframeBr\x92Ao2MThe timeframe for auto-retiring the alert when undetected values are detectedJ\x1eAUTO_RETIRE_TIMEFRAME_HOURS_24H\x00R\x13autoRetireTimeframe\x88\x01\x01:n\x92Ak\n" +
+	"\x19trigger_undetected_values\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBG\x92AD2<Should trigger the alert when undetected values are detectedJ\x04trueR\x17triggerUndetectedValues\x12\xdf\x01\n" +
+	"\x15auto_retire_timeframe\x18\x02 \x01(\x0e20.com.coralogixapis.alerts.v3.AutoRetireTimeframeBt\x92Aq2MThe timeframe for auto-retiring the alert when undetected values are detectedJ \"AUTO_RETIRE_TIMEFRAME_HOURS_24\"H\x00R\x13autoRetireTimeframe\x88\x01\x01:n\x92Ak\n" +
 	"i*\x1bUndetected value management26Configuration for handling undetected values in alerts\xd2\x01\x11auto_retire_ratioB\x18\n" +
 	"\x16_auto_retire_timeframe*\xc0\x02\n" +
 	"\x13AutoRetireTimeframe\x12.\n" +

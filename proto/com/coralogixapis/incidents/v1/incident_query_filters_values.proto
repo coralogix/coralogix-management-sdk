@@ -13,8 +13,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message AssigneeWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "AssigneeWithCount"
-      description: "An assignee with count"
+      title: "Assignee with count"
       required: ["assignee", "count"]
     }
   };
@@ -24,8 +23,7 @@ message AssigneeWithCount {
 message IncidentStatusWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentStatusWithCount"
-      description: "An incident status with count"
+      title: "Incident status with count"
       required: ["status", "count"]
     }
   };
@@ -35,8 +33,7 @@ message IncidentStatusWithCount {
 message IncidentStateWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentStateWithCount"
-      description: "An incident state with count"
+      title: "Incident state with count"
       required: ["state", "count"]
     }
   };
@@ -46,8 +43,7 @@ message IncidentStateWithCount {
 message IncidentSeverityWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentSeverityWithCount"
-      description: "An incident severity with count"
+      title: "Incident severity with count"
       required: ["severity", "count"]
     }
   };
@@ -57,8 +53,7 @@ message IncidentSeverityWithCount {
 message IncidentMetaLabelsWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentMetaLabelsWithCount"
-      description: "An incident meta labels with count"
+      title: "Incident meta labels with count"
       required: ["meta_label", "count"]
     }
   };
@@ -68,8 +63,7 @@ message IncidentMetaLabelsWithCount {
 message IncidentQueryFiltersValues {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "IncidentQueryFiltersValues"
-      description: "An incident query filters values"
+      title: "Incident query filter values"
       required: ["assignee_with_count", "status_with_count", "state_with_count", "severity_with_count", "contextual_labels", "meta_labels_with_count", "meta_labels_op"]
     }
   };
@@ -85,8 +79,7 @@ message IncidentQueryFiltersValues {
 message ContextualLabelValuesWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ContextualLabelValuesWithCount"
-      description: "A contextual label values with count"
+      title: "Contextual label values with count"
       required: ["values_with_count"]
     }
   };
@@ -96,8 +89,7 @@ message ContextualLabelValuesWithCount {
 message ContextualLabelValueWithCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "ContextualLabelValueWithCount"
-      description: "A contextual label value with count"
+      title: "Contextual label value with count"
       required: ["contextual_label_value", "count"]
     }
   };

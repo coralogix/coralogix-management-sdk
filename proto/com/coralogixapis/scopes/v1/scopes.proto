@@ -8,19 +8,71 @@ import "google/api/annotations.proto";
 
 
 service ScopesService {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+      name: "Scopes Service"
+      description: "A service to manage scopes"
+    };
     rpc GetTeamScopesByIds(GetTeamScopesByIdsRequest) returns (GetScopesResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Get Team Scopes By Ids"
+        };
         option (google.api.http) = {
             get: "/v1/scopes"
         };
     }
 
     rpc GetTeamScopes(GetTeamScopesRequest) returns (GetScopesResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Get Team Scopes"
+        };
         option (google.api.http) = {
             get: "/v1/scopes/list"
         };
     }
 
     rpc CreateScope(CreateScopeRequest) returns (CreateScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Create Scope"
+        };
         option (google.api.http) = {
             post: "/v1/scopes"
             body: "*"
@@ -28,6 +80,22 @@ service ScopesService {
     }
 
     rpc UpdateScope(UpdateScopeRequest) returns (UpdateScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Update Scope"
+        };
         option (google.api.http) = {
             put: "/v1/scopes"
             body: "*"
@@ -35,6 +103,22 @@ service ScopesService {
     }
 
     rpc DeleteScope(DeleteScopeRequest) returns (DeleteScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Delete Scope"
+        };
         option (google.api.http) = {
             delete: "/v1/scopes/{id}"
         };

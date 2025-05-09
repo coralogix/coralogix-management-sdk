@@ -10,13 +10,35 @@ import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_originator_type.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_type.proto";
-import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto";
 import "com/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto";
+import "com/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message IncidentEvent {
-  google.protobuf.StringValue id = 1;
-  IncidentEventType incident_event_type = 2;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Incident event"
+      required: [
+        "id",
+        "incident_event_type",
+        "originator_type",
+        "originator",
+        "incident_event_payload"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "The ID of the incident event"
+      example: "\"incident_event_id\""
+    }
+  ];
+  IncidentEventType incident_event_type = 2 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      example: "\"INCIDENT_EVENT_TYPE_ACKNOWLEDGE\""
+    }
+  ];
   oneof incident_event_payload {
     IncidentEventSnoozeIndicator snooze_indicator = 200;
     IncidentEventAssign assignment = 201;
@@ -25,7 +47,11 @@ message IncidentEvent {
     IncidentEventAcknowledge acknowledge = 203;
     IncidentEventClose close = 204;
   }
-  OriginatorType originator_type = 3;
+  OriginatorType originator_type = 3 [
+    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      example: "\"ORIGINATOR_TYPE_OPERATIONAL\""
+    }
+  ];
   oneof originator {
     IncidentEventOriginatorAdministrative administrative_event = 100;
     IncidentEventOriginatorOperational operational_event = 101;

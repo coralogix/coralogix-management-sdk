@@ -618,20 +618,63 @@ const file_com_coralogixapis_apm_services_v1_service_slo_service_proto_rawDesc =
 	"\x03key\x18\x01 \x01(\tR\x03key\x12C\n" +
 	"\x05value\x18\x02 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x05value:\x028\x01:\xfc\x01\x92A\xf8\x01\n" +
 	"n*\x1fBatch Get Service SLOs Response2DThis data structure represents a response to batch get Service SLOs.\xd2\x01\x04slos*\x85\x01\n" +
-	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/2\xa7\t\n" +
-	"\x11ServiceSloService\x12\xb6\x01\n" +
-	"\rGetServiceSlo\x127.com.coralogixapis.apm.services.v1.GetServiceSloRequest\x1a8.com.coralogixapis.apm.services.v1.GetServiceSloResponse\"2¸\x02\x11\n" +
-	"\x0fGet Service SLO\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/service_slos/{id}\x12\xc0\x01\n" +
-	"\x10CreateServiceSlo\x12:.com.coralogixapis.apm.services.v1.CreateServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.CreateServiceSloResponse\"3¸\x02\x14\n" +
-	"\x12Create Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/service_slos\x12\xc3\x01\n" +
-	"\x11ReplaceServiceSlo\x12;.com.coralogixapis.apm.services.v1.ReplaceServiceSloRequest\x1a<.com.coralogixapis.apm.services.v1.ReplaceServiceSloResponse\"3¸\x02\x14\n" +
-	"\x12Update Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/v1/service_slos\x12\xc2\x01\n" +
-	"\x10DeleteServiceSlo\x12:.com.coralogixapis.apm.services.v1.DeleteServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.DeleteServiceSloResponse\"5¸\x02\x14\n" +
-	"\x12Delete Service SLO\x82\xd3\xe4\x93\x02\x17*\x15/v1/service_slos/{id}\x12\xbd\x01\n" +
-	"\x0fListServiceSlos\x129.com.coralogixapis.apm.services.v1.ListServiceSlosRequest\x1a:.com.coralogixapis.apm.services.v1.ListServiceSlosResponse\"3¸\x02\x13\n" +
-	"\x11List Service SLOs\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/service_slos/all\x12\xca\x01\n" +
-	"\x13BatchGetServiceSlos\x12=.com.coralogixapis.apm.services.v1.BatchGetServiceSlosRequest\x1a>.com.coralogixapis.apm.services.v1.BatchGetServiceSlosResponse\"4¸\x02\x18\n" +
-	"\x16Batch get Service SLOs\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/service_slosb\x06proto3"
+	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/2\xa9\x0f\n" +
+	"\x11ServiceSloService\x12\xad\x02\n" +
+	"\rGetServiceSlo\x127.com.coralogixapis.apm.services.v1.GetServiceSloRequest\x1a8.com.coralogixapis.apm.services.v1.GetServiceSloResponse\"\xa8\x01\x92As\n" +
+	"\vSLO Service\x12\x0fGet Service SLOJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x11\n" +
+	"\x0fGet Service SLO\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/service_slos/{id}\x12\xba\x02\n" +
+	"\x10CreateServiceSlo\x12:.com.coralogixapis.apm.services.v1.CreateServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.CreateServiceSloResponse\"\xac\x01\x92Av\n" +
+	"\vSLO Service\x12\x12Create Service SLOJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x14\n" +
+	"\x12Create Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/service_slos\x12\xbe\x02\n" +
+	"\x11ReplaceServiceSlo\x12;.com.coralogixapis.apm.services.v1.ReplaceServiceSloRequest\x1a<.com.coralogixapis.apm.services.v1.ReplaceServiceSloResponse\"\xad\x01\x92Aw\n" +
+	"\vSLO Service\x12\x13Replace Service SLOJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x14\n" +
+	"\x12Update Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/v1/service_slos\x12\xbc\x02\n" +
+	"\x10DeleteServiceSlo\x12:.com.coralogixapis.apm.services.v1.DeleteServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.DeleteServiceSloResponse\"\xae\x01\x92Av\n" +
+	"\vSLO Service\x12\x12Delete Service SLOJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x14\n" +
+	"\x12Delete Service SLO\x82\xd3\xe4\x93\x02\x17*\x15/v1/service_slos/{id}\x12\xb6\x02\n" +
+	"\x0fListServiceSlos\x129.com.coralogixapis.apm.services.v1.ListServiceSlosRequest\x1a:.com.coralogixapis.apm.services.v1.ListServiceSlosResponse\"\xab\x01\x92Au\n" +
+	"\vSLO Service\x12\x11List Service SLOsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x13\n" +
+	"\x11List Service SLOs\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/service_slos/all\x12\xc8\x02\n" +
+	"\x13BatchGetServiceSlos\x12=.com.coralogixapis.apm.services.v1.BatchGetServiceSlosRequest\x1a>.com.coralogixapis.apm.services.v1.BatchGetServiceSlosResponse\"\xb1\x01\x92Az\n" +
+	"\vSLO Service\x12\x16Batch Get Service SLOsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x18\n" +
+	"\x16Batch get Service SLOs\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/service_slos\x1a#\x92A \n" +
+	"\vSLO Service\x12\x11Manage your SLOs.b\x06proto3"
 
 var (
 	file_com_coralogixapis_apm_services_v1_service_slo_service_proto_rawDescOnce sync.Once

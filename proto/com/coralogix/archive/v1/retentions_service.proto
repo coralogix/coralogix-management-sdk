@@ -104,11 +104,31 @@ message GetRetentionsEnabledResponse {
 }
 
 service RetentionsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Retensions Service"
+    description: "View and manage retentions"
+  };
   rpc GetRetentions(GetRetentionsRequest) returns (GetRetentionsResponse) {
     option (google.api.http) = {
       get: "/v1/retentions"
     };
     option (com.coralogix.common.v1.audit_log_description).description = "Get retentions";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Retentions Service"]
+      summary: "Get Retentions"
+    };
   }
   rpc UpdateRetentions(UpdateRetentionsRequest) returns (UpdateRetentionsResponse) {
     option (google.api.http) = {
@@ -116,6 +136,23 @@ service RetentionsService {
       body: "*"
     };
     option (com.coralogix.common.v1.audit_log_description).description = "Update retention names";
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Retentions Service"]
+      summary: "Update Retentions"
+    };
   }
 
   rpc ActivateRetentions(ActivateRetentionsRequest) returns (ActivateRetentionsResponse) {
@@ -124,6 +161,22 @@ service RetentionsService {
       body: "*"
     };
     option (com.coralogix.common.v1.audit_log_description).description = "Activate retention tags";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Retentions Service"]
+      summary: "Activate Retentions"
+    };
   }
 
   rpc GetRetentionsEnabled(GetRetentionsEnabledRequest) returns (GetRetentionsEnabledResponse) {
@@ -131,5 +184,21 @@ service RetentionsService {
       get: "/v1/retentions/enabled"
     };
     option (com.coralogix.common.v1.audit_log_description).description = "Get retention tags enabled status";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Retentions Service"]
+      summary: "Get Retentions Enabled"
+    };
   }
 }

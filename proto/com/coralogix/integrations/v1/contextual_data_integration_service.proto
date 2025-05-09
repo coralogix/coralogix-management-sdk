@@ -35,7 +35,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Get all contextual data integrations accessible"
+      summary: "Get all contextual data integrations accessible"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -66,7 +66,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Get contextual data integration definition"
+      summary: "Get contextual data integration definition"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -97,7 +97,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Get contextual data integration details"
+      summary: "Get contextual data integration details"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -129,7 +129,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Test contextual data integration"
+      summary: "Test contextual data integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -161,7 +161,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Save contextual data integration"
+      summary: "Save contextual data integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -193,7 +193,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Update contextual data integration"
+      summary: "Update contextual data integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
@@ -224,7 +224,7 @@ service ContextualDataIntegrationService {
         value: {description: "Internal server error"}
       }
       tags: ["Contextual data integration service"]
-      operation_id: "Delete contextual data integration"
+      summary: "Delete contextual data integration"
       extensions: {
         key: "x-coralogixPermissions"
         value: {

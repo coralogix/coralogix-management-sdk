@@ -49,7 +49,7 @@ message LogsRatioThresholdType {
   }];
   LogsRatioGroupByFor group_by_for = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The group by settings for the numerator and denominator filters"
-    example: "LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY"
+    example: "\"LOGS_RATIO_GROUP_BY_FOR_NUMERATOR_ONLY\""
   }];
   UndetectedValuesManagement undetected_values_management = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling the undetected values in the alert"}];
   google.protobuf.BoolValue ignore_infinity = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {

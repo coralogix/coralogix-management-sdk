@@ -19,7 +19,7 @@ message UndetectedValuesManagement {
   }];
   optional AutoRetireTimeframe auto_retire_timeframe = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The timeframe for auto-retiring the alert when undetected values are detected"
-    example: "AUTO_RETIRE_TIMEFRAME_HOURS_24"
+    example: "\"AUTO_RETIRE_TIMEFRAME_HOURS_24\""
   }];
 }
 

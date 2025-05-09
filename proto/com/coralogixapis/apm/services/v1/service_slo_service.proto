@@ -10,6 +10,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 message GetServiceSloRequest {
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Service SLO Request"
@@ -20,6 +21,7 @@ message GetServiceSloRequest {
       url: "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
       description: "Find out more about SLOs in Coralogix APM"
     }
+
   };
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slo_id\"" }];
 }
@@ -201,7 +203,28 @@ message BatchGetServiceSlosResponse {
 
 
 service ServiceSloService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "SLO Service"
+    description: "Manage your SLOs."
+  };
+
   rpc GetServiceSlo(GetServiceSloRequest) returns (GetServiceSloResponse){
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "Get Service SLO"
+     };
      option (com.coralogix.common.v1.audit_log_description).description = "Get Service SLO";
      option (google.api.http) = {
        get: "/v1/service_slos/{id}"
@@ -210,6 +233,22 @@ service ServiceSloService {
 
   rpc CreateServiceSlo(CreateServiceSloRequest) returns (CreateServiceSloResponse){
      option (com.coralogix.common.v1.audit_log_description).description = "Create Service SLO";
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "Create Service SLO"
+     };
      option (google.api.http) = {
        post: "/v1/service_slos"
        body: "*"
@@ -218,6 +257,22 @@ service ServiceSloService {
 
   rpc ReplaceServiceSlo(ReplaceServiceSloRequest) returns (ReplaceServiceSloResponse){
      option (com.coralogix.common.v1.audit_log_description).description = "Update Service SLO";
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "Replace Service SLO"
+     };
      option (google.api.http) = {
        put: "/v1/service_slos"
        body: "*"
@@ -229,6 +284,22 @@ service ServiceSloService {
      option (google.api.http) = {
        delete: "/v1/service_slos/{id}"
      };
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "Delete Service SLO"
+     };
   }
 
   rpc ListServiceSlos(ListServiceSlosRequest) returns (ListServiceSlosResponse){
@@ -236,12 +307,44 @@ service ServiceSloService {
      option (google.api.http) = {
        get: "/v1/service_slos/all"
      };
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "List Service SLOs"
+     };
   }
 
   rpc BatchGetServiceSlos(BatchGetServiceSlosRequest) returns (BatchGetServiceSlosResponse){
      option (com.coralogix.common.v1.audit_log_description).description = "Batch get Service SLOs";
      option (google.api.http) = {
        get: "/v1/service_slos"
+     };
+     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+       responses: {
+         key: "400"
+         value: {description: "Bad Request"}
+       }
+       responses: {
+         key: "401"
+         value: {description: "Unauthorized request"}
+       }
+       responses: {
+         key: "500"
+         value: {description: "Internal server error"}
+       }
+       tags: ["SLO Service"]
+       summary: "Batch Get Service SLOs"
      };
   }
 

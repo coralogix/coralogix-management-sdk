@@ -975,13 +975,49 @@ const file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDesc = "" +
 	"\x04Save\x126.com.coralogixapis.metrics_rule_manager.v1.InRuleGroup\x1a\x16.google.protobuf.Empty\"\x00\x12^\n" +
 	"\x06Delete\x12:.com.coralogixapis.metrics_rule_manager.v1.DeleteRuleGroup\x1a\x16.google.protobuf.Empty\"\x00\x12]\n" +
 	"\x04List\x12\x16.google.protobuf.Empty\x1a;.com.coralogixapis.metrics_rule_manager.v1.RuleGroupListing\"\x00\x12\x85\x01\n" +
-	"\x05Fetch\x129.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroup\x1a?.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupResult\"\x002\xec\x05\n" +
-	"\rRuleGroupSets\x12\xac\x01\n" +
-	"\x06Create\x12=.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSet\x1aC.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSetResult\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/rule-group-sets\x12\x84\x01\n" +
-	"\x06Update\x12=.com.coralogixapis.metrics_rule_manager.v1.UpdateRuleGroupSet\x1a\x16.google.protobuf.Empty\"#\x82\xd3\xe4\x93\x02\x1d:\x01*\x1a\x18/v1/rule-group-sets/{id}\x12{\n" +
-	"\x04List\x12\x16.google.protobuf.Empty\x1a>.com.coralogixapis.metrics_rule_manager.v1.RuleGroupSetListing\"\x1b\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/rule-group-sets\x12\xa3\x01\n" +
-	"\x05Fetch\x12<.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupSet\x1a:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSet\" \x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/rule-group-sets/{id}\x12\x81\x01\n" +
-	"\x06Delete\x12=.com.coralogixapis.metrics_rule_manager.v1.DeleteRuleGroupSet\x1a\x16.google.protobuf.Empty\" \x82\xd3\xe4\x93\x02\x1a*\x18/v1/rule-group-sets/{id}b\x06proto3"
+	"\x05Fetch\x129.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroup\x1a?.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupResult\"\x002\xe3\v\n" +
+	"\rRuleGroupSets\x12\xb7\x02\n" +
+	"\x06Create\x12=.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSet\x1aC.com.coralogixapis.metrics_rule_manager.v1.CreateRuleGroupSetResult\"\xa8\x01\x92A\x86\x01\n" +
+	"\x17Recording Rules Service\x12\x16Create Recording RulesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/rule-group-sets\x12\x8f\x02\n" +
+	"\x06Update\x12=.com.coralogixapis.metrics_rule_manager.v1.UpdateRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xad\x01\x92A\x86\x01\n" +
+	"\x17Recording Rules Service\x12\x16Update Recording RulesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1d:\x01*\x1a\x18/v1/rule-group-sets/{id}\x12\x84\x02\n" +
+	"\x04List\x12\x16.google.protobuf.Empty\x1a>.com.coralogixapis.metrics_rule_manager.v1.RuleGroupSetListing\"\xa3\x01\x92A\x84\x01\n" +
+	"\x17Recording Rules Service\x12\x14List Recording RulesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x15\x12\x13/v1/rule-group-sets\x12\xab\x02\n" +
+	"\x05Fetch\x12<.com.coralogixapis.metrics_rule_manager.v1.FetchRuleGroupSet\x1a:.com.coralogixapis.metrics_rule_manager.v1.OutRuleGroupSet\"\xa7\x01\x92A\x83\x01\n" +
+	"\x17Recording Rules Service\x12\x13Get Recording RulesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a\x12\x18/v1/rule-group-sets/{id}\x12\x8c\x02\n" +
+	"\x06Delete\x12=.com.coralogixapis.metrics_rule_manager.v1.DeleteRuleGroupSet\x1a\x16.google.protobuf.Empty\"\xaa\x01\x92A\x86\x01\n" +
+	"\x17Recording Rules Service\x12\x16Delete Recording RulesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a*\x18/v1/rule-group-sets/{id}\x1aB\x92A?\n" +
+	"\x17Recording Rules Service\x12$A service to manage recording rules.b\x06proto3"
 
 var (
 	file_com_coralogixapis_metrics_rule_manager_v1_groups_proto_rawDescOnce sync.Once

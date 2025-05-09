@@ -181,9 +181,29 @@ message GetConfigurationResponse {
 }
 
 service SamlConfigurationService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "SAML Configuration Service"
+    description: "Manage your SAML configuration"
+  };
   rpc GetSPParameters(GetSPParametersRequest) returns(GetSPParametersResponse) {
     option (google.api.http) = {
       get: "/v1/sso/saml/sp_parameters"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["SAML Configuration Service"]
+      summary: "Get SP Parameters"
     };
   };
   rpc SetIDPParameters(SetIDPParametersRequest) returns (SetIDPParametersResponse) {
@@ -191,16 +211,64 @@ service SamlConfigurationService {
       post: "/v1/sso/saml/idp_parameters"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["SAML Configuration Service"]
+      summary: "Set IDP Parameters"
+    };
   };
   rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {
     option (google.api.http) = {
       post: "/v1/sso/saml/active"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["SAML Configuration Service"]
+      summary: "Activate/Deactivate SAML"
+    };
   };
   rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse) {
     option (google.api.http) = {
       get: "/v1/sso/saml/configuration"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["SAML Configuration Service"]
+      summary: "Get SAML Configuration"
     };
   };
 }

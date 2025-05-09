@@ -695,12 +695,42 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\x04icon\x18\x02 \x01(\tR\x04icon:\xd8\x02\x92A\xd4\x02\n" +
 	"\xd3\x01*\x1aGet Configuration Response2\x89\x01This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider\xd2\x01\ateam_id\xd2\x01\rsp_parameters\xd2\x01\x0eidp_parameters*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\x0e\n" +
-	"\f_idp_details2\xa2\x05\n" +
-	"\x18SamlConfigurationService\x12\xa2\x01\n" +
-	"\x0fGetSPParameters\x124.com.coralogixapis.aaa.sso.v2.GetSPParametersRequest\x1a5.com.coralogixapis.aaa.sso.v2.GetSPParametersResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/sp_parameters\x12\xa9\x01\n" +
-	"\x10SetIDPParameters\x125.com.coralogixapis.aaa.sso.v2.SetIDPParametersRequest\x1a6.com.coralogixapis.aaa.sso.v2.SetIDPParametersResponse\"&\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/sso/saml/idp_parameters\x12\x8c\x01\n" +
-	"\tSetActive\x12..com.coralogixapis.aaa.sso.v2.SetActiveRequest\x1a/.com.coralogixapis.aaa.sso.v2.SetActiveResponse\"\x1e\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/sso/saml/active\x12\xa5\x01\n" +
-	"\x10GetConfiguration\x125.com.coralogixapis.aaa.sso.v2.GetConfigurationRequest\x1a6.com.coralogixapis.aaa.sso.v2.GetConfigurationResponse\"\"\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/configurationb\x06proto3"
+	"\f_idp_details2\x94\n" +
+	"\n" +
+	"\x18SamlConfigurationService\x12\xab\x02\n" +
+	"\x0fGetSPParameters\x124.com.coralogixapis.aaa.sso.v2.GetSPParametersRequest\x1a5.com.coralogixapis.aaa.sso.v2.GetSPParametersResponse\"\xaa\x01\x92A\x84\x01\n" +
+	"\x1aSAML Configuration Service\x12\x11Get SP ParametersJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/sp_parameters\x12\xb3\x02\n" +
+	"\x10SetIDPParameters\x125.com.coralogixapis.aaa.sso.v2.SetIDPParametersRequest\x1a6.com.coralogixapis.aaa.sso.v2.SetIDPParametersResponse\"\xaf\x01\x92A\x85\x01\n" +
+	"\x1aSAML Configuration Service\x12\x12Set IDP ParametersJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/sso/saml/idp_parameters\x12\x9c\x02\n" +
+	"\tSetActive\x12..com.coralogixapis.aaa.sso.v2.SetActiveRequest\x1a/.com.coralogixapis.aaa.sso.v2.SetActiveResponse\"\xad\x01\x92A\x8b\x01\n" +
+	"\x1aSAML Configuration Service\x12\x18Activate/Deactivate SAMLJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/sso/saml/active\x12\xb3\x02\n" +
+	"\x10GetConfiguration\x125.com.coralogixapis.aaa.sso.v2.GetConfigurationRequest\x1a6.com.coralogixapis.aaa.sso.v2.GetConfigurationResponse\"\xaf\x01\x92A\x89\x01\n" +
+	"\x1aSAML Configuration Service\x12\x16Get SAML ConfigurationJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/configuration\x1a?\x92A<\n" +
+	"\x1aSAML Configuration Service\x12\x1eManage your SAML configurationb\x06proto3"
 
 var (
 	file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDescOnce sync.Once

@@ -362,10 +362,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_dest
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_destination_proto_rawDesc = "" +
 	"\n" +
-	"Tcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x95\t\n" +
-	"\x17NotificationDestination\x12i\n" +
-	"\fconnector_id\x18\x01 \x01(\tBF\x92AC2+The connector ID used to send notificationsJ\x14connector_id_exampleR\vconnectorId\x12m\n" +
-	"\tpreset_id\x18\x02 \x01(\tBK\x92AH23Optional preset ID for the notification destinationJ\x11preset_id_exampleH\x00R\bpresetId\x88\x01\x01\x12\xa6\x01\n" +
+	"Tcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x99\t\n" +
+	"\x17NotificationDestination\x12k\n" +
+	"\fconnector_id\x18\x01 \x01(\tBH\x92AE2+The connector ID used to send notificationsJ\x16\"connector_id_example\"R\vconnectorId\x12o\n" +
+	"\tpreset_id\x18\x02 \x01(\tBM\x92AJ23Optional preset ID for the notification destinationJ\x13\"preset_id_example\"H\x00R\bpresetId\x88\x01\x01\x12\xa6\x01\n" +
 	"\tnotify_on\x18\x03 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBb\x92A_29The condition under which the notification should be sentJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"R\bnotifyOn\x12\xd1\x01\n" +
 	"\x19triggeredRoutingOverrides\x18\x04 \x01(\v20.com.coralogixapis.alerts.v3.NotificationRoutingBa\x92A^2\\The routing configuration to override from the connector/preset for triggered notifications.R\x19triggeredRoutingOverrides\x12\xd4\x01\n" +
 	"\x16resolvedRouteOverrides\x18\x05 \x01(\v20.com.coralogixapis.alerts.v3.NotificationRoutingBe\x92Ab2`Optional routing configuration to override from the connector/preset for resolved notifications.H\x01R\x16resolvedRouteOverrides\x88\x01\x01:\xa2\x02\x92A\x9e\x02\n" +
@@ -377,26 +377,26 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_de
 	"\x13NotificationRouting\x12\x8a\x01\n" +
 	"\x10config_overrides\x18\x01 \x01(\v2,.com.coralogixapis.alerts.v3.SourceOverridesB,\x92A)2'Configuration for routing notificationsH\x00R\x0fconfigOverrides\x88\x01\x01:\x1b\x92A\x18\n" +
 	"\x16*\x14Notification routingB\x13\n" +
-	"\x11_config_overrides\"\x9e\x04\n" +
-	"\x0fSourceOverrides\x12\x85\x01\n" +
-	"\x10output_schema_id\x18\x01 \x01(\tB[\x92AX2<The ID of the output schema to use for routing notificationsJ\x18output_schema_id_exampleR\x0eoutputSchemaId\x12\x93\x01\n" +
+	"\x11_config_overrides\"\xa0\x04\n" +
+	"\x0fSourceOverrides\x12\x87\x01\n" +
+	"\x10output_schema_id\x18\x01 \x01(\tB]\x92AZ2<The ID of the output schema to use for routing notificationsJ\x1a\"output_schema_id_example\"R\x0eoutputSchemaId\x12\x93\x01\n" +
 	"\x15message_config_fields\x18\x02 \x03(\v2/.com.coralogixapis.alerts.v3.MessageConfigFieldB.\x92A+2)Notification message configuration fieldsR\x13messageConfigFields\x12\x8e\x01\n" +
 	"\x17connector_config_fields\x18\x03 \x03(\v21.com.coralogixapis.alerts.v3.ConnectorConfigFieldB#\x92A 2\x1eConnector configuration fieldsR\x15connectorConfigFields:\\\x92AY\n" +
-	"W*\x10Source overrides\xd2\x01\x10output_schema_id\xd2\x01\x15message_config_fields\xd2\x01\x17connector_config_fields\"\x87\x02\n" +
-	"\x14ConnectorConfigField\x12T\n" +
+	"W*\x10Source overrides\xd2\x01\x10output_schema_id\xd2\x01\x15message_config_fields\xd2\x01\x17connector_config_fields\"\x8b\x02\n" +
+	"\x14ConnectorConfigField\x12V\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\tB5\x92A22#The name of the configuration fieldJ\vdescriptionR\tfieldName\x12b\n" +
-	"\btemplate\x18\x02 \x01(\tBF\x92AC2(The template for the configuration fieldJ\x10template_example\xa2\x02\x04teraR\btemplate:5\x92A2\n" +
+	"field_name\x18\x01 \x01(\tB7\x92A42#The name of the configuration fieldJ\r\"description\"R\tfieldName\x12d\n" +
+	"\btemplate\x18\x02 \x01(\tBH\x92AE2(The template for the configuration fieldJ\x12\"template_example\"\xa2\x02\x04teraR\btemplate:5\x92A2\n" +
 	"0*\x16Connector config field\xd2\x01\n" +
-	"field_name\xd2\x01\btemplate\"\xb3\x02\n" +
-	"\x12MessageConfigField\x12T\n" +
+	"field_name\xd2\x01\btemplate\"\xb7\x02\n" +
+	"\x12MessageConfigField\x12V\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\tB5\x92A22#The name of the configuration fieldJ\vdescriptionR\tfieldName\x12b\n" +
-	"\btemplate\x18\x02 \x01(\tBF\x92AC2(The template for the configuration fieldJ\x10template_example\xa2\x02\x04teraR\btemplate:c\x92A`\n" +
+	"field_name\x18\x01 \x01(\tB7\x92A42#The name of the configuration fieldJ\r\"description\"R\tfieldName\x12d\n" +
+	"\btemplate\x18\x02 \x01(\tBH\x92AE2(The template for the configuration fieldJ\x12\"template_example\"\xa2\x02\x04teraR\btemplate:c\x92A`\n" +
 	"^*\x14Message config field2.Configuration field for a notification message\xd2\x01\n" +
-	"field_name\xd2\x01\btemplate\"\x85\x03\n" +
-	"\x12NotificationRouter\x12e\n" +
-	"\x02id\x18\x01 \x01(\tBU\x92AR2!The ID of the notification routerJ$123e4567-e89b-12d3-a456-426614174000\xa2\x02\x06UUIDv4R\x02id\x12\xaf\x01\n" +
+	"field_name\xd2\x01\btemplate\"\x87\x03\n" +
+	"\x12NotificationRouter\x12g\n" +
+	"\x02id\x18\x01 \x01(\tBW\x92AT2!The ID of the notification routerJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id\x12\xaf\x01\n" +
 	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBf\x92Ac29The condition under which the notification should be sentJ&\"NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\"H\x00R\bnotifyOn\x88\x01\x01:H\x92AE\n" +
 	"C*\x13Notification router2'Configuration for routing notifications\xd2\x01\x02idB\f\n" +
 	"\n" +

@@ -10,26 +10,94 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 /// Service for creating and managing team groups, roles, users and scopes.
 service TeamPermissionsMgmtService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Team Permissions Management Service"
+    description: "Manage Team Groups."
+  };
   /// Fetch team group for given team id
   rpc GetTeamGroup(GetTeamGroupRequest) returns (GetTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Get Team Group"
+    };
     option (google.api.http) = {
       get: "/v1/teams/groups/{group_id.id}"
     };
   }
   /// Fetch team group by name for authenticated team id
   rpc GetTeamGroupByName(GetTeamGroupByNameRequest) returns (GetTeamGroupByNameResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Get Team Group By Name"
+    };
     option (google.api.http) = {
       get: "/v1/teams/groups"
     };
   }
   /// Fetches all team groups linked with team
   rpc GetTeamGroups(GetTeamGroupsRequest) returns (GetTeamGroupsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Get Team Groups"
+    };
     option (google.api.http) = {
       get: "/v1/teams/groups/list"
     };
   }
   /// Creates a new team group and optionally associates roles, users and a scope to it
   rpc CreateTeamGroup(CreateTeamGroupRequest) returns (CreateTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Create Team Group"
+    };
     option (google.api.http) = {
       post: "/v1/teams/groups"
       body: "*"
@@ -37,6 +105,22 @@ service TeamPermissionsMgmtService {
   }
   /// Updates an existing team group details
   rpc UpdateTeamGroup(UpdateTeamGroupRequest) returns (UpdateTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Update Team Group"
+    };
     option (google.api.http) = {
       put: "/v1/teams/groups"
       body: "*"
@@ -44,18 +128,66 @@ service TeamPermissionsMgmtService {
   }
   /// Deletes an existing team group
   rpc DeleteTeamGroup(DeleteTeamGroupRequest) returns (DeleteTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Delete Team Group"
+    };
     option (google.api.http) = {
       delete: "/v1/teams/groups/{group_id.id}"
     };
   }
   /// Fetches all users assigned to group
   rpc GetGroupUsers(GetGroupUsersRequest) returns (GetGroupUsersResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Get Group Users"
+    };
     option (google.api.http) = {
       get: "/v1/teams/groups/{group_id.id}/users"
     };
   }
   /// Add users to team groups
   rpc AddUsersToTeamGroup(AddUsersToTeamGroupRequest) returns (AddUsersToTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Add Users To Team Group"
+    };
     option (google.api.http) = {
       post: "/v1/teams/groups/{group_id.id}/users"
       body: "*"
@@ -63,6 +195,22 @@ service TeamPermissionsMgmtService {
   }
   /// Bulk Add users to team groups
   rpc AddUsersToTeamGroups(AddUsersToTeamGroupsRequest) returns (AddUsersToTeamGroupsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Add Users To Team Groups"
+    };
     option (google.api.http) = {
       post: "/v1/teams/groups/users"
       body: "*"
@@ -70,18 +218,66 @@ service TeamPermissionsMgmtService {
   }
   /// Remove user accounts to organisation group
   rpc RemoveUsersFromTeamGroup(RemoveUsersFromTeamGroupRequest) returns (RemoveUsersFromTeamGroupResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Remove Users From Team Group"
+    };
     option (google.api.http) = {
       delete: "/v1/teams/groups/{group_id.id}/users"
     };
   }
   /// Bulk Remove user accounts to organisation group
   rpc RemoveUsersFromTeamGroups(RemoveUsersFromTeamGroupsRequest) returns (RemoveUsersFromTeamGroupsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Remove Users From Team Groups"
+    };
     option (google.api.http) = {
       delete: "/v1/teams/groups/users"
     };
   }
   /// Sets team group scope. Replaces it if it already exists.
   rpc SetTeamGroupScope(SetTeamGroupScopeRequest) returns (SetTeamGroupScopeResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Set Team Group Scope"
+    };
     option (google.api.http) = {
       post: "/v1/teams/groups/{group_id.id}/scope"
       body: "*"
@@ -89,6 +285,22 @@ service TeamPermissionsMgmtService {
   }
   /// Fetches team group scope
   rpc GetTeamGroupScope(GetTeamGroupScopeRequest) returns (GetTeamGroupScopeResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Team Permissions Management Service"]
+      summary: "Get Team Group Scope"
+    };
     option (google.api.http) = {
       get: "/v1/teams/groups/{group_id.id}/scope"
     };

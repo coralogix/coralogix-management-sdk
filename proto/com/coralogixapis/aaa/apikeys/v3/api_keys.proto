@@ -7,30 +7,113 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 
 
 service ApiKeysService {
-
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "API Keys Service"
+    description: "Manage your API Keys."
+  };
 
   rpc CreateApiKey(CreateApiKeyRequest) returns(CreateApiKeyResponse) {
     option (google.api.http) = {
       post: "/v3/api_keys"
       body: "*"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["API Keys Service"]
+      summary: "Create API Key"
+    };
   };
   rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["API Keys Service"]
+      summary: "Get API Key"
+    };
     option (google.api.http) = {
       get: "/v3/api_keys/{key_id}"
     };
   };
   rpc GetSendDataApiKeys(GetSendDataApiKeysRequest) returns (GetSendDataApiKeysResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["API Keys Service"]
+      summary: "Get \"Send Data\" API Keys"
+    };
     option (google.api.http) = {
       get: "/v3/api_keys/send_data"
     };
   };
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["API Keys Service"]
+      summary: "Delete API Key"
+    };
     option (google.api.http) = {
-      delete: "/v3/api_keys/{key_id}"
+      delete: "/v3/api_keys"
     };
   };
   rpc UpdateApiKey(UpdateApiKeyRequest) returns (UpdateApiKeyResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["API Keys Service"]
+      summary: "Update API Key"
+    };
     option (google.api.http) = {
       put: "/v3/api_keys/{key_id}"
       body: "*"

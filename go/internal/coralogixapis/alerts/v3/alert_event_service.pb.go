@@ -830,7 +830,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"#ORDER_BY_ALERT_EVENT_DIRECTION_DESC\x10\x022\xef\a\n" +
 	"\x11AlertEventService\x12\xe3\x02\n" +
 	"\rGetAlertEvent\x121.com.coralogixapis.alerts.v3.GetAlertEventRequest\x1a2.com.coralogixapis.alerts.v3.GetAlertEventResponse\"\xea\x01\x92A\xb5\x01\n" +
-	"\x14Alert events service*\x15Get alert event by IDJ\x14\n" +
+	"\x14Alert events service\x12\x15Get alert event by IDJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -841,7 +841,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x13\x1a\x11alerts:ReadConfig¸\x02\x11\n" +
 	"\x0fget alert event\x82\xd3\xe4\x93\x02\x16\x12\x14/v3/alert-event/{id}\x12\x81\x03\n" +
 	"\x13GetAlertEventsStats\x126.com.coralogixapis.alerts.v3.GetAlertEventStatsRequest\x1a7.com.coralogixapis.alerts.v3.GetAlertEventStatsResponse\"\xf8\x01\x92A\xbb\x01\n" +
-	"\x14Alert events service*\x1bGet alert events statisticsJ\x14\n" +
+	"\x14Alert events service\x12\x1bGet alert events statisticsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +

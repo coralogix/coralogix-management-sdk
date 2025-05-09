@@ -25,10 +25,32 @@ import "com/coralogix/quota/v1/bulk_create_policy_response.proto";
 import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
 import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
 import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service PoliciesService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Policies Service"
+    description: "View and manage your TCO policies"
+  };
+
   rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Get Policy by ID"
+    };
     option (google.api.http) = {
       get: "/v1/policies/{id}"
     };
@@ -36,6 +58,22 @@ service PoliciesService {
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Create Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Get Policy by ID"
+    };
     option (google.api.http) = {
       post: "/v1/policies"
       body: "*"
@@ -44,6 +82,22 @@ service PoliciesService {
 
   rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Update Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Update Policy"
+    };
     option (google.api.http) = {
       put: "/v1/policies"
       body: "*"
@@ -52,6 +106,22 @@ service PoliciesService {
 
   rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get Company Policies";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Get Company Policies"
+    };
     option (google.api.http) = {
       get: "/v1/policies"
     };
@@ -59,6 +129,22 @@ service PoliciesService {
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Delete Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Delete Policy"
+    };
     option (google.api.http) = {
       delete: "/v1/policies/{id}"
     };
@@ -66,6 +152,22 @@ service PoliciesService {
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Reorder Policies";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Reorder Policies"
+    };
     option (google.api.http) = {
       post: "/v1/policies:reorder"
       body: "*"
@@ -74,6 +176,22 @@ service PoliciesService {
 
   rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Bulk Test Log Policies";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Bulk Test Log Policies"
+    };
     option (google.api.http) = {
       post: "/v1/policies:bulkTestLog"
       body: "*"
@@ -82,6 +200,22 @@ service PoliciesService {
 
   rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Toggle Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Toggle Policies"
+    };
     option (google.api.http) = {
       post: "/v1/policies:toggle"
       body: "*"
@@ -90,6 +224,22 @@ service PoliciesService {
 
   rpc AtomicBatchCreatePolicy(AtomicBatchCreatePolicyRequest) returns (AtomicBatchCreatePolicyResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Bulk Create Policy";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Atomic Batch Create Policy"
+    };
     option (google.api.http) = {
       post: "/v1/policies:bulkCreate"
       body: "*"
@@ -98,6 +248,22 @@ service PoliciesService {
 
   rpc AtomicOverwriteLogPolicies(AtomicOverwriteLogPoliciesRequest) returns (AtomicOverwriteLogPoliciesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Atomic Overwrite Log Policies"
+    };
     option (google.api.http) = {
       post: "/v1/policies:atomicOverwriteLogPolicies"
       body: "*"
@@ -106,6 +272,22 @@ service PoliciesService {
 
   rpc AtomicOverwriteSpanPolicies(AtomicOverwriteSpanPoliciesRequest) returns (AtomicOverwriteSpanPoliciesResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Policies Service"]
+      summary: "Atomic Overwrite Span Policies"
+    };
     option (google.api.http) = {
       post: "/v1/policies:atomicOverwriteSpanPolicies"
       body: "*"

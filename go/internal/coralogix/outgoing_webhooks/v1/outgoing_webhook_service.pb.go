@@ -1363,7 +1363,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"0*.List IBM event notification instances response2\xba+\n" +
 	"\x17OutgoingWebhooksService\x12\xb9\x03\n" +
 	"\x18ListOutgoingWebhookTypes\x12C.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesRequest\x1aD.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse\"\x91\x02\x92A\xca\x01\n" +
-	"\x19Outgoing webhooks service*\x1aGet outgoing webhook typesJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1aGet outgoing webhook typesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1374,7 +1374,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x1c\n" +
 	"\x1aGet outgoing webhook types\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1/outgoing-webhooks/types\x12\xd5\x03\n" +
 	"\x1dGetOutgoingWebhookTypeDetails\x12H.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsRequest\x1aI.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsResponse\"\x9e\x02\x92A\xd1\x01\n" +
-	"\x19Outgoing webhooks service*!Get outgoing webhook type detailsJ\x14\n" +
+	"\x19Outgoing webhooks service\x12!Get outgoing webhook type detailsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1385,7 +1385,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x1b\n" +
 	"\x19Get outgoing webhook type\x82\xd3\xe4\x93\x02$\x12\"/v1/outgoing-webhooks/types/{type}\x12\x9e\x03\n" +
 	"\x14ListOutgoingWebhooks\x12?.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksRequest\x1a@.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksResponse\"\x82\x02\x92A\xc6\x01\n" +
-	"\x19Outgoing webhooks service*\x16List outgoing webhooksJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x16List outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1396,7 +1396,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x17\n" +
 	"\x15Get outgoing webhooks\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/outgoing-webhooks\x12\xcd\x03\n" +
 	"\x1bListOutboundWebhooksSummary\x12F.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryRequest\x1aG.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryResponse\"\x9c\x02\x92A\xcf\x01\n" +
-	"\x19Outgoing webhooks service*\x1eList outbound webhooks summaryJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1eList outbound webhooks summaryJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1407,7 +1407,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1f\x1a\x1doutbound-webhooks:ReadSummary¸\x02 \n" +
 	"\x1eGet outgoing webhook summaries\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/outgoing-webhooks/summary\x12\xb3\x03\n" +
 	"\x17ListAllOutgoingWebhooks\x12B.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksRequest\x1aC.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksResponse\"\x8e\x02\x92A\xca\x01\n" +
-	"\x19Outgoing webhooks service*\x1aList all outgoing webhooksJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1aList all outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1418,7 +1418,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x1b\n" +
 	"\x19Get all outgoing webhooks\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/outgoing-webhooks/all\x12\x9a\x03\n" +
 	"\x12GetOutgoingWebhook\x12=.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookRequest\x1a>.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookResponse\"\x84\x02\x92A\xc4\x01\n" +
-	"\x19Outgoing webhooks service*\x14Get outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x14Get outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1429,7 +1429,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x16\n" +
 	"\x14Get outgoing webhook\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/outgoing-webhooks/{id}\x12\xaf\x03\n" +
 	"\x15CreateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookResponse\"\x90\x02\x92A\xcc\x01\n" +
-	"\x19Outgoing webhooks service*\x1aCreate an outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1aCreate an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1440,7 +1440,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	" \x1a\x1eoutbound-webhooks:UpdateConfig¸\x02\x1c\n" +
 	"\x1aCreate an outgoing webhook\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/outgoing-webhooks\x12\xaf\x03\n" +
 	"\x15UpdateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookResponse\"\x90\x02\x92A\xcc\x01\n" +
-	"\x19Outgoing webhooks service*\x1aUpdate an outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1aUpdate an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1451,7 +1451,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	" \x1a\x1eoutbound-webhooks:UpdateConfig¸\x02\x1c\n" +
 	"\x1aUpdate an outgoing webhook\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/outgoing-webhooks\x12\xb1\x03\n" +
 	"\x15DeleteOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookResponse\"\x92\x02\x92A\xcc\x01\n" +
-	"\x19Outgoing webhooks service*\x1aDelete an outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x1aDelete an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1462,7 +1462,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	" \x1a\x1eoutbound-webhooks:UpdateConfig¸\x02\x1c\n" +
 	"\x1aDelete an outgoing webhook\x82\xd3\xe4\x93\x02\x1c*\x1a/v1/outgoing-webhooks/{id}\x12\xa8\x03\n" +
 	"\x13TestOutgoingWebhook\x12>.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\x8f\x02\x92A\xc8\x01\n" +
-	"\x19Outgoing webhooks service*\x18Test an outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12\x18Test an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1473,7 +1473,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02\x1a\n" +
 	"\x18Test an outgoing webhook\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/outgoing-webhooks/test\x12\xd3\x03\n" +
 	"\x1bTestExistingOutgoingWebhook\x12F.com.coralogix.outgoing_webhooks.v1.TestExistingOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\xaa\x02\x92A\xd1\x01\n" +
-	"\x19Outgoing webhooks service*!Test an existing outgoing webhookJ\x14\n" +
+	"\x19Outgoing webhooks service\x12!Test an existing outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -1484,7 +1484,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfig¸\x02#\n" +
 	"!Test an existing outgoing webhook\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/outgoing-webhooks/test-existing\x12\xde\x03\n" +
 	"\"ListIbmEventNotificationsInstances\x12M.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesRequest\x1aN.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesResponse\"\x98\x02\x92A\xd5\x01\n" +
-	"\x19Outgoing webhooks service*%List IBM event notification instancesJ\x14\n" +
+	"\x19Outgoing webhooks service\x12%List IBM event notification instancesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +

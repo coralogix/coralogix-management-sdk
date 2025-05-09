@@ -8,9 +8,7 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 message MetaLabel {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
-      title: "MetaLabel"
-      description: "A meta label for an incident"
-      required: ["key", "value"]
+      title: "Incident meta label"
     }
   };
   google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"key\"" }];

@@ -15,7 +15,7 @@ message LogsTimeWindow {
   oneof type {
     LogsTimeWindowValue logs_time_window_specific_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "A time window defined by a specific value"
-      example: "LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED"
+      example: "\"LOGS_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\""
     }];
   }
 }
