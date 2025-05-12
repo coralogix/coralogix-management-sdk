@@ -19,11 +19,11 @@ message NotificationDestination {
   };
   string connector_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The connector ID used to send notifications"
-    example: "connector_id_example"
+    example: "\"connector_id_example\""
   }];
   optional string preset_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Optional preset ID for the notification destination"
-    example: "preset_id_example"
+    example: "\"preset_id_example\""
   }];
   NotifyOn notify_on = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The condition under which the notification should be sent"
@@ -53,7 +53,7 @@ message SourceOverrides {
   };
   string output_schema_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The ID of the output schema to use for routing notifications"
-    example: "output_schema_id_example"
+    example: "\"output_schema_id_example\""
   }];
   repeated MessageConfigField message_config_fields = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Notification message configuration fields"}];
   repeated ConnectorConfigField connector_config_fields = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Connector configuration fields"}];
@@ -71,11 +71,11 @@ message ConnectorConfigField {
   };
   string field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The name of the configuration field"
-    example: "description"
+    example: "\"description\""
   }];
   string template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The template for the configuration field"
-    example: "template_example"
+    example: "\"template_example\""
     format: "tera"
   }];
 }
@@ -93,11 +93,11 @@ message MessageConfigField {
   };
   string field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The name of the configuration field"
-    example: "description"
+    example: "\"description\""
   }];
   string template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The template for the configuration field"
-    example: "template_example"
+    example: "\"template_example\""
     format: "tera"
   }];
 }
@@ -113,7 +113,7 @@ message NotificationRouter {
   string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The ID of the notification router"
     format: "UUIDv4"
-    example: "123e4567-e89b-12d3-a456-426614174000"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
   }];
   optional NotifyOn notify_on = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The condition under which the notification should be sent"

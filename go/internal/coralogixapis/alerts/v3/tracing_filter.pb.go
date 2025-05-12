@@ -396,16 +396,16 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_common_
 	"\x0eoperation_name\x18\x04 \x03(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB\x1e\x92A\x1b2\x19Filter by operation namesR\roperationName\x12u\n" +
 	"\vspan_fields\x18\x05 \x03(\v28.com.coralogixapis.alerts.v3.TracingSpanFieldsFilterTypeB\x1a\x92A\x172\x15Filter by span fieldsR\n" +
 	"spanFields:x\x92Au\n" +
-	"s*\x15Tracing label filters2ZFilters for application name, subsystem name, service name, operation name and span fields\"\xf2\x02\n" +
-	"\x1bTracingSpanFieldsFilterType\x12x\n" +
-	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBH\x92AE2&The key of the span field to filter byJ\x0espan.field.key\x8a\x01\n" +
+	"s*\x15Tracing label filters2ZFilters for application name, subsystem name, service name, operation name and span fields\"\xf4\x02\n" +
+	"\x1bTracingSpanFieldsFilterType\x12z\n" +
+	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBJ\x92AG2&The key of the span field to filter byJ\x10\"span.field.key\"\x8a\x01\n" +
 	"^\\w+\\.\\w+$R\x03key\x12r\n" +
 	"\vfilter_type\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingFilterTypeB!\x92A\x1e2\x1cThe FilterType to filter by.R\n" +
 	"filterType:e\x92Ab\n" +
-	"`*\x1fTracing span fields filter type2)A filter for span fields in trace entries\xd2\x01\x03key\xd2\x01\vfilter_type\"\x92\x03\n" +
+	"`*\x1fTracing span fields filter type2)A filter for span fields in trace entries\xd2\x01\x03key\xd2\x01\vfilter_type\"\x94\x03\n" +
 	"\x11TracingFilterType\x12x\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBB\x92A?2$The values of the label to filter byJ\x14[\"value1\", \"value2\"]\xa8\x01\x01R\x06values\x12\xb2\x01\n" +
-	"\toperation\x18\x02 \x01(\x0e27.com.coralogixapis.alerts.v3.TracingFilterOperationTypeB[\x92AX2+The operation to perform on the label valueJ)TRACING_FILTER_OPERATION_TYPE_STARTS_WITHR\toperation:N\x92AK\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBB\x92A?2$The values of the label to filter byJ\x14[\"value1\", \"value2\"]\xa8\x01\x01R\x06values\x12\xb4\x01\n" +
+	"\toperation\x18\x02 \x01(\x0e27.com.coralogixapis.alerts.v3.TracingFilterOperationTypeB]\x92AZ2+The operation to perform on the label valueJ+\"TRACING_FILTER_OPERATION_TYPE_STARTS_WITH\"R\toperation:N\x92AK\n" +
 	"I*\x13Tracing filter type2\x1dFilter type for trace entries\xd2\x01\x06values\xd2\x01\toperation*\x83\x02\n" +
 	"\x1aTracingFilterOperationType\x123\n" +
 	"/TRACING_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\x10\x00\x12*\n" +

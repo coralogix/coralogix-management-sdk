@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -242,10 +243,11 @@ var File_com_coralogixapis_incidents_v1_incident_event_incident_event_proto prot
 
 const file_com_coralogixapis_incidents_v1_incident_event_incident_event_proto_rawDesc = "" +
 	"\n" +
-	"Bcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x12\x1ecom.coralogixapis.incidents.v1\x1aNcom/coralogixapis/incidents/v1/incident_event/incident_event_acknowledge.proto\x1aIcom/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto\x1aHcom/coralogixapis/incidents/v1/incident_event/incident_event_close.proto\x1a\\com/coralogixapis/incidents/v1/incident_event/incident_event_originator_administrative.proto\x1aYcom/coralogixapis/incidents/v1/incident_event/incident_event_originator_operational.proto\x1aRcom/coralogixapis/incidents/v1/incident_event/incident_event_originator_type.proto\x1aScom/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto\x1aGcom/coralogixapis/incidents/v1/incident_event/incident_event_type.proto\x1aOcom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x1aKcom/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\b\n" +
-	"\rIncidentEvent\x12,\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12a\n" +
-	"\x13incident_event_type\x18\x02 \x01(\x0e21.com.coralogixapis.incidents.v1.IncidentEventTypeR\x11incidentEventType\x12j\n" +
+	"Bcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x12\x1ecom.coralogixapis.incidents.v1\x1aNcom/coralogixapis/incidents/v1/incident_event/incident_event_acknowledge.proto\x1aIcom/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto\x1aHcom/coralogixapis/incidents/v1/incident_event/incident_event_close.proto\x1a\\com/coralogixapis/incidents/v1/incident_event/incident_event_originator_administrative.proto\x1aYcom/coralogixapis/incidents/v1/incident_event/incident_event_originator_operational.proto\x1aRcom/coralogixapis/incidents/v1/incident_event/incident_event_originator_type.proto\x1aScom/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto\x1aGcom/coralogixapis/incidents/v1/incident_event/incident_event_type.proto\x1aKcom/coralogixapis/incidents/v1/incident_event/incident_event_unassign.proto\x1aOcom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa5\n" +
+	"\n" +
+	"\rIncidentEvent\x12d\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB6\x92A32\x1cThe ID of the incident eventJ\x13\"incident_event_id\"R\x02id\x12\x89\x01\n" +
+	"\x13incident_event_type\x18\x02 \x01(\x0e21.com.coralogixapis.incidents.v1.IncidentEventTypeB&\x92A#J!\"INCIDENT_EVENT_TYPE_ACKNOWLEDGE\"R\x11incidentEventType\x12j\n" +
 	"\x10snooze_indicator\x18\xc8\x01 \x01(\v2<.com.coralogixapis.incidents.v1.IncidentEventSnoozeIndicatorH\x00R\x0fsnoozeIndicator\x12V\n" +
 	"\n" +
 	"assignment\x18\xc9\x01 \x01(\v23.com.coralogixapis.incidents.v1.IncidentEventAssignH\x00R\n" +
@@ -253,10 +255,12 @@ const file_com_coralogixapis_incidents_v1_incident_event_incident_event_proto_ra
 	"\bunassign\x18\xcd\x01 \x01(\v25.com.coralogixapis.incidents.v1.IncidentEventUnassignH\x00R\bunassign\x12^\n" +
 	"\fupsert_state\x18\xca\x01 \x01(\v28.com.coralogixapis.incidents.v1.IncidentEventUpsertStateH\x00R\vupsertState\x12]\n" +
 	"\vacknowledge\x18\xcb\x01 \x01(\v28.com.coralogixapis.incidents.v1.IncidentEventAcknowledgeH\x00R\vacknowledge\x12K\n" +
-	"\x05close\x18\xcc\x01 \x01(\v22.com.coralogixapis.incidents.v1.IncidentEventCloseH\x00R\x05close\x12W\n" +
-	"\x0foriginator_type\x18\x03 \x01(\x0e2..com.coralogixapis.incidents.v1.OriginatorTypeR\x0eoriginatorType\x12z\n" +
+	"\x05close\x18\xcc\x01 \x01(\v22.com.coralogixapis.incidents.v1.IncidentEventCloseH\x00R\x05close\x12{\n" +
+	"\x0foriginator_type\x18\x03 \x01(\x0e2..com.coralogixapis.incidents.v1.OriginatorTypeB\"\x92A\x1fJ\x1d\"ORIGINATOR_TYPE_OPERATIONAL\"R\x0eoriginatorType\x12z\n" +
 	"\x14administrative_event\x18d \x01(\v2E.com.coralogixapis.incidents.v1.IncidentEventOriginatorAdministrativeH\x01R\x13administrativeEvent\x12q\n" +
-	"\x11operational_event\x18e \x01(\v2B.com.coralogixapis.incidents.v1.IncidentEventOriginatorOperationalH\x01R\x10operationalEventB\x18\n" +
+	"\x11operational_event\x18e \x01(\v2B.com.coralogixapis.incidents.v1.IncidentEventOriginatorOperationalH\x01R\x10operationalEvent:h\x92Ae\n" +
+	"c*\x0eIncident event\xd2\x01\x02id\xd2\x01\x13incident_event_type\xd2\x01\x0foriginator_type\xd2\x01\n" +
+	"originator\xd2\x01\x16incident_event_payloadB\x18\n" +
 	"\x16incident_event_payloadB\f\n" +
 	"\n" +
 	"originatorb\x06proto3"
@@ -320,8 +324,8 @@ func file_com_coralogixapis_incidents_v1_incident_event_incident_event_proto_ini
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_originator_type_proto_init()
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_snooze_indicator_proto_init()
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_type_proto_init()
-	file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto_init()
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_unassign_proto_init()
+	file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto_init()
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_proto_msgTypes[0].OneofWrappers = []any{
 		(*IncidentEvent_SnoozeIndicator)(nil),
 		(*IncidentEvent_Assignment)(nil),

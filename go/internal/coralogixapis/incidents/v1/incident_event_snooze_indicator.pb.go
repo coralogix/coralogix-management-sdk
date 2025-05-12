@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -87,12 +88,13 @@ var File_com_coralogixapis_incidents_v1_incident_event_incident_event_snooze_ind
 
 const file_com_coralogixapis_incidents_v1_incident_event_incident_event_snooze_indicator_proto_rawDesc = "" +
 	"\n" +
-	"Scom/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd8\x01\n" +
+	"Scom/coralogixapis/incidents/v1/incident_event/incident_event_snooze_indicator.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x80\x02\n" +
 	"\x1cIncidentEventSnoozeIndicator\x129\n" +
 	"\n" +
 	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\tstartTime\x12F\n" +
 	"\x10duration_minutes\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x0fdurationMinutes\x125\n" +
-	"\auser_id\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06userIdb\x06proto3"
+	"\auser_id\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06userId:&\x92A#\n" +
+	"!*\x1fIncident event snooze indicatorb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_snooze_indicator_proto_rawDescOnce sync.Once

@@ -475,30 +475,30 @@ var File_com_coralogixapis_incidents_v1_incident_query_filters_values_proto prot
 
 const file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDesc = "" +
 	"\n" +
-	"Bcom/coralogixapis/incidents/v1/incident_query_filters_values.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdf\x01\n" +
+	"Bcom/coralogixapis/incidents/v1/incident_query_filters_values.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc9\x01\n" +
 	"\x11AssigneeWithCount\x12I\n" +
 	"\bassignee\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
 	"\"assignee\"R\bassignee\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:C\x92A@\n" +
-	">*\x11AssigneeWithCount2\x16An assignee with count\xd2\x01\bassignee\xd2\x01\x05count\"\x85\x02\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:-\x92A*\n" +
+	"(*\x13Assignee with count\xd2\x01\bassignee\xd2\x01\x05count\"\xe9\x01\n" +
 	"\x17IncidentStatusWithCount\x12^\n" +
 	"\x06status\x18\x01 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusB\x16\x92A\x13J\x11\"incident_status\"R\x06status\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:N\x92AK\n" +
-	"I*\x17IncidentStatusWithCount2\x1dAn incident status with count\xd2\x01\x06status\xd2\x01\x05count\"\xe6\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:2\x92A/\n" +
+	"-*\x1aIncident status with count\xd2\x01\x06status\xd2\x01\x05count\"\xcb\x01\n" +
 	"\x16IncidentStateWithCount\x12C\n" +
 	"\x05state\x18\x01 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateR\x05state\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:K\x92AH\n" +
-	"F*\x16IncidentStateWithCount2\x1cAn incident state with count\xd2\x01\x05state\xd2\x01\x05count\"\xfb\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:0\x92A-\n" +
+	"+*\x19Incident state with count\xd2\x01\x05state\xd2\x01\x05count\"\xdd\x01\n" +
 	"\x19IncidentSeverityWithCount\x12L\n" +
 	"\bseverity\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\bseverity\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:T\x92AQ\n" +
-	"O*\x19IncidentSeverityWithCount2\x1fAn incident severity with count\xd2\x01\bseverity\xd2\x01\x05count\"\x80\x02\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"1*\x1cIncident severity with count\xd2\x01\bseverity\xd2\x01\x05count\"\xe0\x01\n" +
 	"\x1bIncidentMetaLabelsWithCount\x12H\n" +
 	"\n" +
 	"meta_label\x18\x01 \x01(\v2).com.coralogixapis.incidents.v1.MetaLabelR\tmetaLabel\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:[\x92AX\n" +
-	"V*\x1bIncidentMetaLabelsWithCount2\"An incident meta labels with count\xd2\x01\n" +
-	"meta_label\xd2\x01\x05count\"\xd7\b\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:;\x92A8\n" +
+	"6*\x1fIncident meta labels with count\xd2\x01\n" +
+	"meta_label\xd2\x01\x05count\"\xb7\b\n" +
 	"\x1aIncidentQueryFiltersValues\x12a\n" +
 	"\x13assignee_with_count\x18\x01 \x03(\v21.com.coralogixapis.incidents.v1.AssigneeWithCountR\x11assigneeWithCount\x12c\n" +
 	"\x11status_with_count\x18\x02 \x03(\v27.com.coralogixapis.incidents.v1.IncidentStatusWithCountR\x0fstatusWithCount\x12`\n" +
@@ -509,15 +509,15 @@ const file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_ra
 	"\x0emeta_labels_op\x18\a \x01(\x0e2..com.coralogixapis.incidents.v1.FilterOperatorR\fmetaLabelsOp\x1a\x83\x01\n" +
 	"\x15ContextualLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12T\n" +
-	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.incidents.v1.ContextualLabelValuesWithCountR\x05value:\x028\x01:\xd6\x01\x92A\xd2\x01\n" +
-	"\xcf\x01*\x1aIncidentQueryFiltersValues2 An incident query filters values\xd2\x01\x13assignee_with_count\xd2\x01\x11status_with_count\xd2\x01\x10state_with_count\xd2\x01\x13severity_with_count\xd2\x01\x11contextual_labels\xd2\x01\x16meta_labels_with_count\xd2\x01\x0emeta_labels_op\"\xec\x01\n" +
+	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.incidents.v1.ContextualLabelValuesWithCountR\x05value:\x028\x01:\xb6\x01\x92A\xb2\x01\n" +
+	"\xaf\x01*\x1cIncident query filter values\xd2\x01\x13assignee_with_count\xd2\x01\x11status_with_count\xd2\x01\x10state_with_count\xd2\x01\x13severity_with_count\xd2\x01\x11contextual_labels\xd2\x01\x16meta_labels_with_count\xd2\x01\x0emeta_labels_op\"\xca\x01\n" +
 	"\x1eContextualLabelValuesWithCount\x12i\n" +
-	"\x11values_with_count\x18\x01 \x03(\v2=.com.coralogixapis.incidents.v1.ContextualLabelValueWithCountR\x0fvaluesWithCount:_\x92A\\\n" +
-	"Z*\x1eContextualLabelValuesWithCount2$A contextual label values with count\xd2\x01\x11values_with_count\"\xba\x02\n" +
+	"\x11values_with_count\x18\x01 \x03(\v2=.com.coralogixapis.incidents.v1.ContextualLabelValueWithCountR\x0fvaluesWithCount:=\x92A:\n" +
+	"8*\"Contextual label values with count\xd2\x01\x11values_with_count\"\x99\x02\n" +
 	"\x1dContextualLabelValueWithCount\x12q\n" +
 	"\x16contextual_label_value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"contextual_label_value\"R\x14contextualLabelValue\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:j\x92Ag\n" +
-	"e*\x1dContextualLabelValueWithCount2#A contextual label value with count\xd2\x01\x16contextual_label_value\xd2\x01\x05countb\x06proto3"
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:I\x92AF\n" +
+	"D*!Contextual label value with count\xd2\x01\x16contextual_label_value\xd2\x01\x05countb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDescOnce sync.Once

@@ -661,16 +661,53 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\"scope_id\"R\x02id:\xce\x01\x92A\xca\x01\n" +
 	"W*\x14Delete Scope Request2:This data structure represents a request to delete a scope\xd2\x01\x02id*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\x15\n" +
-	"\x13DeleteScopeResponse2\xd0\x05\n" +
-	"\rScopesService\x12\x90\x01\n" +
-	"\x12GetTeamScopesByIds\x126.com.coralogixapis.scopes.v1.GetTeamScopesByIdsRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x12\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v1/scopes\x12\x8b\x01\n" +
-	"\rGetTeamScopes\x121.com.coralogixapis.scopes.v1.GetTeamScopesRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x17\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/scopes/list\x12\x87\x01\n" +
-	"\vCreateScope\x12/.com.coralogixapis.scopes.v1.CreateScopeRequest\x1a0.com.coralogixapis.scopes.v1.CreateScopeResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v1/scopes\x12\x87\x01\n" +
-	"\vUpdateScope\x12/.com.coralogixapis.scopes.v1.UpdateScopeRequest\x1a0.com.coralogixapis.scopes.v1.UpdateScopeResponse\"\x15\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
-	"/v1/scopes\x12\x89\x01\n" +
-	"\vDeleteScope\x12/.com.coralogixapis.scopes.v1.DeleteScopeRequest\x1a0.com.coralogixapis.scopes.v1.DeleteScopeResponse\"\x17\x82\xd3\xe4\x93\x02\x11*\x0f/v1/scopes/{id}b\x06proto3"
+	"\x13DeleteScopeResponse2\xe1\n" +
+	"\n" +
+	"\rScopesService\x12\x91\x02\n" +
+	"\x12GetTeamScopesByIds\x126.com.coralogixapis.scopes.v1.GetTeamScopesByIdsRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x92\x01\x92A}\n" +
+	"\x0eScopes Service\x12\x16Get Team Scopes By IdsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/v1/scopes\x12\x85\x02\n" +
+	"\rGetTeamScopes\x121.com.coralogixapis.scopes.v1.GetTeamScopesRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x90\x01\x92Av\n" +
+	"\x0eScopes Service\x12\x0fGet Team ScopesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/scopes/list\x12\xfe\x01\n" +
+	"\vCreateScope\x12/.com.coralogixapis.scopes.v1.CreateScopeRequest\x1a0.com.coralogixapis.scopes.v1.CreateScopeResponse\"\x8b\x01\x92As\n" +
+	"\x0eScopes Service\x12\fCreate ScopeJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v1/scopes\x12\xfe\x01\n" +
+	"\vUpdateScope\x12/.com.coralogixapis.scopes.v1.UpdateScopeRequest\x1a0.com.coralogixapis.scopes.v1.UpdateScopeResponse\"\x8b\x01\x92As\n" +
+	"\x0eScopes Service\x12\fUpdate ScopeJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
+	"/v1/scopes\x12\x80\x02\n" +
+	"\vDeleteScope\x12/.com.coralogixapis.scopes.v1.DeleteScopeRequest\x1a0.com.coralogixapis.scopes.v1.DeleteScopeResponse\"\x8d\x01\x92As\n" +
+	"\x0eScopes Service\x12\fDelete ScopeJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11*\x0f/v1/scopes/{id}\x1a/\x92A,\n" +
+	"\x0eScopes Service\x12\x1aA service to manage scopesb\x06proto3"
 
 var (
 	file_com_coralogixapis_scopes_v1_scopes_proto_rawDescOnce sync.Once

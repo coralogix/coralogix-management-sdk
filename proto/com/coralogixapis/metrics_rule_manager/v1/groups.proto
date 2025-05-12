@@ -267,29 +267,113 @@ message OutRuleGroupSet {
 }
 
 service RuleGroupSets {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Recording Rules Service"
+    description: "A service to manage recording rules."
+  };
     rpc Create(CreateRuleGroupSet) returns (CreateRuleGroupSetResult) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Recording Rules Service"]
+          summary: "Create Recording Rules"
+        };
         option (google.api.http) = {
             post: "/v1/rule-group-sets"
             body: "*"
         };
     }
     rpc Update(UpdateRuleGroupSet) returns (google.protobuf.Empty) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Recording Rules Service"]
+          summary: "Update Recording Rules"
+        };
         option (google.api.http) = {
             put: "/v1/rule-group-sets/{id}"
             body: "*"
         };
     }
     rpc List(google.protobuf.Empty) returns (RuleGroupSetListing) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Recording Rules Service"]
+          summary: "List Recording Rules"
+        };
         option (google.api.http) = {
             get: "/v1/rule-group-sets"
         };
     }
     rpc Fetch(FetchRuleGroupSet) returns (OutRuleGroupSet) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Recording Rules Service"]
+          summary: "Get Recording Rules"
+        };
         option (google.api.http) = {
             get: "/v1/rule-group-sets/{id}"
         };
     }
     rpc Delete(DeleteRuleGroupSet) returns (google.protobuf.Empty) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Recording Rules Service"]
+          summary: "Delete Recording Rules"
+        };
         option (google.api.http) = {
             delete: "/v1/rule-group-sets/{id}"
         };

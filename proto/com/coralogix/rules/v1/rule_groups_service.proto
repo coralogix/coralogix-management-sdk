@@ -10,22 +10,76 @@ import "com/coralogix/rules/v1/rule_matcher.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "com/coralogix/common/v1/audit_log.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service RuleGroupsService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Rule Groups Service"
+    description: "A service to manage rule groups."
+  };
+
   rpc GetRuleGroup(GetRuleGroupRequest) returns (GetRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get rule group";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Get Rule Group"
+    };
     option (google.api.http) = {
       get: "/api/v1/rulegroups/{group_id}"
     };
   }
   rpc ListRuleGroups(ListRuleGroupsRequest) returns (ListRuleGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get all rule groups";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "List Rule Groups"
+    };
     option (google.api.http) = {
       get: "/api/v1/rulegroups"
     };
   }
   rpc CreateRuleGroup(CreateRuleGroupRequest) returns (CreateRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "create rule group";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Create Rule Group"
+    };
     option (google.api.http) = {
       post: "/api/v1/rulegroups"
       body: "*"
@@ -33,6 +87,22 @@ service RuleGroupsService {
   }
   rpc UpdateRuleGroup(UpdateRuleGroupRequest) returns (UpdateRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "update rule group";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Update Rule Group"
+    };
     option (google.api.http) = {
       put: "/api/v1/rulegroups/{group_id}"
       body: "rule_group"
@@ -43,10 +113,42 @@ service RuleGroupsService {
     option (google.api.http) = {
       delete: "/api/v1/rulegroups/{group_id}"
     };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Delete Rule Group"
+    };
   }
 
   rpc BulkDeleteRuleGroup(BulkDeleteRuleGroupRequest) returns (BulkDeleteRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "bulk delete rule groups";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Bulk Delete Rule Group"
+    };
     option (google.api.http) = {
       delete: "/api/v1/rulegroups"
     };
@@ -54,6 +156,22 @@ service RuleGroupsService {
 
   rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get rule mapping";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Get Rule Group Model Mapping"
+    };
     option (google.api.http) = {
       post: "/api/v1/rulegroup-mapping"
       body: "*"
@@ -62,6 +180,22 @@ service RuleGroupsService {
 
   rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get company usage with limits";
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Rule Groups Service"]
+      summary: "Get Company Usage Limits"
+    };
     option (google.api.http) = {
       post: "/api/v1/rulegroups/company-limits"
       body: "*"

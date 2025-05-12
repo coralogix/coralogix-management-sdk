@@ -54,11 +54,11 @@ message LabelFilterType {
   };
   google.protobuf.StringValue value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The value of the label to filter by"
-    example: "my-app"
+    example: "\"my-app\""
   }];
   LogFilterOperationType operation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The operation to perform on the label value"
-    example: "LOG_FILTER_OPERATION_TYPE_INCLUDES"
+    example: "\"LOG_FILTER_OPERATION_TYPE_INCLUDES\""
   }];
 }
 

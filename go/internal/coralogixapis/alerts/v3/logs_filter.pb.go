@@ -384,10 +384,10 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_log
 	"\n" +
 	"severities\x18\x03 \x03(\x0e2(.com.coralogixapis.alerts.v3.LogSeverityR\n" +
 	"severities:V\x92AS\n" +
-	"Q*\rLabel filters2@Filters for application name, subsystem name, and log severities\"\xf2\x02\n" +
-	"\x0fLabelFilterType\x12d\n" +
-	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB0\x92A-2#The value of the label to filter byJ\x06my-appR\x05value\x12\xa7\x01\n" +
-	"\toperation\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.LogFilterOperationTypeBT\x92AQ2+The operation to perform on the label valueJ\"LOG_FILTER_OPERATION_TYPE_INCLUDESR\toperation:O\x92AL\n" +
+	"Q*\rLabel filters2@Filters for application name, subsystem name, and log severities\"\xf6\x02\n" +
+	"\x0fLabelFilterType\x12f\n" +
+	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x92A/2#The value of the label to filter byJ\b\"my-app\"R\x05value\x12\xa9\x01\n" +
+	"\toperation\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.LogFilterOperationTypeBV\x92AS2+The operation to perform on the label valueJ$\"LOG_FILTER_OPERATION_TYPE_INCLUDES\"R\toperation:O\x92AL\n" +
 	"J*\x11Label filter type2!Label filter type for log entries\xd2\x01\x05value\xd2\x01\toperation*\xc5\x01\n" +
 	"\x16LogFilterOperationType\x12/\n" +
 	"+LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\x10\x00\x12&\n" +

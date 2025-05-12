@@ -8,6 +8,7 @@ package v1
 
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1194,7 +1195,7 @@ var File_com_coralogix_rules_v1_rule_groups_service_proto protoreflect.FileDescr
 
 const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogix/rules/v1/rule_groups_service.proto\x12\x16com.coralogix.rules.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!com/coralogix/rules/v1/rule.proto\x1a'com/coralogix/rules/v1/rule_group.proto\x1a)com/coralogix/rules/v1/rule_matcher.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a'com/coralogix/common/v1/audit_log.proto\"0\n" +
+	"0com/coralogix/rules/v1/rule_groups_service.proto\x12\x16com.coralogix.rules.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!com/coralogix/rules/v1/rule.proto\x1a'com/coralogix/rules/v1/rule_group.proto\x1a)com/coralogix/rules/v1/rule_matcher.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"0\n" +
 	"\x13GetRuleGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\x17\n" +
 	"\x15ListRuleGroupsRequest\"\\\n" +
@@ -1278,25 +1279,82 @@ const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\x06Counts\x12B\n" +
 	"\x0eparsing_themes\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\rparsingThemes\x123\n" +
 	"\x06groups\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06groups\x121\n" +
-	"\x05rules\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05rules2\xdc\v\n" +
-	"\x11RuleGroupsService\x12\xa4\x01\n" +
-	"\fGetRuleGroup\x12+.com.coralogix.rules.v1.GetRuleGroupRequest\x1a,.com.coralogix.rules.v1.GetRuleGroupResponse\"9¸\x02\x10\n" +
-	"\x0eget rule group\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/rulegroups/{group_id}\x12\xa4\x01\n" +
-	"\x0eListRuleGroups\x12-.com.coralogix.rules.v1.ListRuleGroupsRequest\x1a..com.coralogix.rules.v1.ListRuleGroupsResponse\"3¸\x02\x15\n" +
-	"\x13get all rule groups\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/rulegroups\x12\xa8\x01\n" +
-	"\x0fCreateRuleGroup\x12..com.coralogix.rules.v1.CreateRuleGroupRequest\x1a/.com.coralogix.rules.v1.CreateRuleGroupResponse\"4¸\x02\x13\n" +
-	"\x11create rule group\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/rulegroups\x12\xbc\x01\n" +
-	"\x0fUpdateRuleGroup\x12..com.coralogix.rules.v1.UpdateRuleGroupRequest\x1a/.com.coralogix.rules.v1.UpdateRuleGroupResponse\"H¸\x02\x13\n" +
+	"\x05rules\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05rules2\xb6\x14\n" +
+	"\x11RuleGroupsService\x12\xa2\x02\n" +
+	"\fGetRuleGroup\x12+.com.coralogix.rules.v1.GetRuleGroupRequest\x1a,.com.coralogix.rules.v1.GetRuleGroupResponse\"\xb6\x01\x92Az\n" +
+	"\x13Rule Groups Service\x12\x0eGet Rule GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x10\n" +
+	"\x0eget rule group\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/rulegroups/{group_id}\x12\xa4\x02\n" +
+	"\x0eListRuleGroups\x12-.com.coralogix.rules.v1.ListRuleGroupsRequest\x1a..com.coralogix.rules.v1.ListRuleGroupsResponse\"\xb2\x01\x92A|\n" +
+	"\x13Rule Groups Service\x12\x10List Rule GroupsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x15\n" +
+	"\x13get all rule groups\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/rulegroups\x12\xa9\x02\n" +
+	"\x0fCreateRuleGroup\x12..com.coralogix.rules.v1.CreateRuleGroupRequest\x1a/.com.coralogix.rules.v1.CreateRuleGroupResponse\"\xb4\x01\x92A}\n" +
+	"\x13Rule Groups Service\x12\x11Create Rule GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x13\n" +
+	"\x11create rule group\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/rulegroups\x12\xbd\x02\n" +
+	"\x0fUpdateRuleGroup\x12..com.coralogix.rules.v1.UpdateRuleGroupRequest\x1a/.com.coralogix.rules.v1.UpdateRuleGroupResponse\"\xc8\x01\x92A}\n" +
+	"\x13Rule Groups Service\x12\x11Update Rule GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x13\n" +
 	"\x11update rule group\x82\xd3\xe4\x93\x02+:\n" +
-	"rule_group\x1a\x1d/api/v1/rulegroups/{group_id}\x12\xb0\x01\n" +
-	"\x0fDeleteRuleGroup\x12..com.coralogix.rules.v1.DeleteRuleGroupRequest\x1a/.com.coralogix.rules.v1.DeleteRuleGroupResponse\"<¸\x02\x13\n" +
-	"\x11delete rule group\x82\xd3\xe4\x93\x02\x1f*\x1d/api/v1/rulegroups/{group_id}\x12\xb7\x01\n" +
-	"\x13BulkDeleteRuleGroup\x122.com.coralogix.rules.v1.BulkDeleteRuleGroupRequest\x1a3.com.coralogix.rules.v1.BulkDeleteRuleGroupResponse\"7¸\x02\x19\n" +
-	"\x17bulk delete rule groups\x82\xd3\xe4\x93\x02\x14*\x12/api/v1/rulegroups\x12\xc9\x01\n" +
-	"\x18GetRuleGroupModelMapping\x127.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest\x1a8.com.coralogix.rules.v1.GetRuleGroupModelMappingResponse\":¸\x02\x12\n" +
-	"\x10get rule mapping\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/rulegroup-mapping\x12\xd5\x01\n" +
-	"\x15GetCompanyUsageLimits\x124.com.coralogix.rules.v1.GetCompanyUsageLimitsRequest\x1a5.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse\"O¸\x02\x1f\n" +
-	"\x1dget company usage with limits\x82\xd3\xe4\x93\x02&:\x01*\"!/api/v1/rulegroups/company-limitsb\x06proto3"
+	"rule_group\x1a\x1d/api/v1/rulegroups/{group_id}\x12\xb1\x02\n" +
+	"\x0fDeleteRuleGroup\x12..com.coralogix.rules.v1.DeleteRuleGroupRequest\x1a/.com.coralogix.rules.v1.DeleteRuleGroupResponse\"\xbc\x01\x92A}\n" +
+	"\x13Rule Groups Service\x12\x11Delete Rule GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x13\n" +
+	"\x11delete rule group\x82\xd3\xe4\x93\x02\x1f*\x1d/api/v1/rulegroups/{group_id}\x12\xbe\x02\n" +
+	"\x13BulkDeleteRuleGroup\x122.com.coralogix.rules.v1.BulkDeleteRuleGroupRequest\x1a3.com.coralogix.rules.v1.BulkDeleteRuleGroupResponse\"\xbd\x01\x92A\x82\x01\n" +
+	"\x13Rule Groups Service\x12\x16Bulk Delete Rule GroupJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x19\n" +
+	"\x17bulk delete rule groups\x82\xd3\xe4\x93\x02\x14*\x12/api/v1/rulegroups\x12\xd6\x02\n" +
+	"\x18GetRuleGroupModelMapping\x127.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest\x1a8.com.coralogix.rules.v1.GetRuleGroupModelMappingResponse\"\xc6\x01\x92A\x88\x01\n" +
+	"\x13Rule Groups Service\x12\x1cGet Rule Group Model MappingJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x12\n" +
+	"\x10get rule mapping\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/rulegroup-mapping\x12\xde\x02\n" +
+	"\x15GetCompanyUsageLimits\x124.com.coralogix.rules.v1.GetCompanyUsageLimitsRequest\x1a5.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse\"\xd7\x01\x92A\x84\x01\n" +
+	"\x13Rule Groups Service\x12\x18Get Company Usage LimitsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\x1f\n" +
+	"\x1dget company usage with limits\x82\xd3\xe4\x93\x02&:\x01*\"!/api/v1/rulegroups/company-limits\x1a:\x92A7\n" +
+	"\x13Rule Groups Service\x12 A service to manage rule groups.b\x06proto3"
 
 var (
 	file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescOnce sync.Once

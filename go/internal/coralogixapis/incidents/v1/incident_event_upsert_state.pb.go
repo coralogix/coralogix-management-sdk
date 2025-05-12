@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -86,12 +87,14 @@ var File_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_sta
 
 const file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto_rawDesc = "" +
 	"\n" +
-	"Ocom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x12\x1ecom.coralogixapis.incidents.v1\x1ahcom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto\x1aecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xff\x01\n" +
+	"Ocom/coralogixapis/incidents/v1/incident_event/incident_event_upsert_state.proto\x12\x1ecom.coralogixapis.incidents.v1\x1ahcom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_payload.proto\x1aecom/coralogixapis/incidents/v1/incident_action/upsert_incident_state/upsert_incident_state_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xba\x02\n" +
 	"\x18IncidentEventUpsertState\x12V\n" +
 	"\n" +
 	"state_type\x18\x01 \x01(\x0e27.com.coralogixapis.incidents.v1.UpsertIncidentStateTypeR\tstateType\x12T\n" +
 	"\apayload\x18\x02 \x01(\v2:.com.coralogixapis.incidents.v1.UpsertIncidentStatePayloadR\apayload\x125\n" +
-	"\bis_muted\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aisMutedb\x06proto3"
+	"\bis_muted\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aisMuted:9\x92A6\n" +
+	"4*\x1bIncident event upsert state\xd2\x01\n" +
+	"state_type\xd2\x01\apayloadb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_event_incident_event_upsert_state_proto_rawDescOnce sync.Once

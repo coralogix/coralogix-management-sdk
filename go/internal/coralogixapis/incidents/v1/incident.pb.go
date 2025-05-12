@@ -105,23 +105,23 @@ func (IncidentFields) EnumDescriptor() ([]byte, []int) {
 // Represents an Incident.
 type Incident struct {
 	state               protoimpl.MessageState  `protogen:"open.v1"`
-	Id                  *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                                                                                                // The Incident's id
-	Name                *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                            // The Incident's name
-	State               IncidentState           `protobuf:"varint,3,opt,name=state,proto3,enum=com.coralogixapis.incidents.v1.IncidentState" json:"state,omitempty"`                                                                       // The Incident's current state, the internal state of the incident, usually is derived from the operational events of the incident
-	Status              IncidentStatus          `protobuf:"varint,4,opt,name=status,proto3,enum=com.coralogixapis.incidents.v1.IncidentStatus" json:"status,omitempty"`                                                                    // The Incident's current status, the status of the incident can be derived from state of the incident and/or administrative user operation (i.e acknowledging the incident)
-	Assignments         []*Assignment           `protobuf:"bytes,5,rep,name=assignments,proto3" json:"assignments,omitempty"`                                                                                                              // The Incident's current assignments
-	Description         *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`                                                                                                              // The Incident's current description
-	Severity            IncidentSeverity        `protobuf:"varint,7,opt,name=severity,proto3,enum=com.coralogixapis.incidents.v1.IncidentSeverity" json:"severity,omitempty"`                                                              // The Incident's current severity
-	ContextualLabels    map[string]string       `protobuf:"bytes,13,rep,name=contextual_labels,json=contextualLabels,proto3" json:"contextual_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // The Incident's current contextual labels, contextual labels are dynamic labels that gives contextual information about the incident ( for example: alert_name label can appear in an incident created by an event originated from the alerting system )
-	DisplayLabels       map[string]string       `protobuf:"bytes,14,rep,name=display_labels,json=displayLabels,proto3" json:"display_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`          // The Incident's current display labels, display labels are dynamic labels that gives more of an extension to the name of the incident, for identification and naming purposes
-	Events              []*IncidentEvent        `protobuf:"bytes,10,rep,name=events,proto3" json:"events,omitempty"`                                                                                                                       // The Incident's current events
+	Id                  *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`                                                                                                                                // Incident id
+	Name                *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`                                                                                                                            // Incident name
+	State               IncidentState           `protobuf:"varint,3,opt,name=state,proto3,enum=com.coralogixapis.incidents.v1.IncidentState" json:"state,omitempty"`                                                                       // The incident's current internal state, usually derived from the operational events of the incident
+	Status              IncidentStatus          `protobuf:"varint,4,opt,name=status,proto3,enum=com.coralogixapis.incidents.v1.IncidentStatus" json:"status,omitempty"`                                                                    // The incident's current status. Can be derived from the incident state and/or administrative user operation (i.e acknowledging the incident)
+	Assignments         []*Assignment           `protobuf:"bytes,5,rep,name=assignments,proto3" json:"assignments,omitempty"`                                                                                                              // The incident's current assignments
+	Description         *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`                                                                                                              // The incident's current description
+	Severity            IncidentSeverity        `protobuf:"varint,7,opt,name=severity,proto3,enum=com.coralogixapis.incidents.v1.IncidentSeverity" json:"severity,omitempty"`                                                              // The incident's current severity
+	ContextualLabels    map[string]string       `protobuf:"bytes,13,rep,name=contextual_labels,json=contextualLabels,proto3" json:"contextual_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"` // The incident's current contextual labels - dynamic labels that give contextual information about the incident (for example, the alert_name label can appear in an incident created by an event originating from the alerting system).
+	DisplayLabels       map[string]string       `protobuf:"bytes,14,rep,name=display_labels,json=displayLabels,proto3" json:"display_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`          // The incident's current display labels -  dynamic labels that extend the incident name for identification purposes
+	Events              []*IncidentEvent        `protobuf:"bytes,10,rep,name=events,proto3" json:"events,omitempty"`                                                                                                                       // The incident's current events
 	CreatedAt           *timestamppb.Timestamp  `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	ClosedAt            *timestamppb.Timestamp  `protobuf:"bytes,12,opt,name=closed_at,json=closedAt,proto3" json:"closed_at,omitempty"`
 	LastStateUpdateTime *timestamppb.Timestamp  `protobuf:"bytes,15,opt,name=last_state_update_time,json=lastStateUpdateTime,proto3" json:"last_state_update_time,omitempty"`
-	LastStateUpdateKey  *wrapperspb.StringValue `protobuf:"bytes,16,opt,name=last_state_update_key,json=lastStateUpdateKey,proto3" json:"last_state_update_key,omitempty"` // The Incident's last event payload key that caused the incident to change state
+	LastStateUpdateKey  *wrapperspb.StringValue `protobuf:"bytes,16,opt,name=last_state_update_key,json=lastStateUpdateKey,proto3" json:"last_state_update_key,omitempty"` // The payload key of the last event that caused the incident's to state change
 	IsMuted             *wrapperspb.BoolValue   `protobuf:"bytes,17,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`                                      // Is the incident muted/suppressed
-	MetaLabels          []*MetaLabel            `protobuf:"bytes,18,rep,name=meta_labels,json=metaLabels,proto3" json:"meta_labels,omitempty"`                             // The Incident's current meta labels
-	Duration            *durationpb.Duration    `protobuf:"bytes,19,opt,name=duration,proto3" json:"duration,omitempty"`                                                   // The Incident duration between created at and close time
+	MetaLabels          []*MetaLabel            `protobuf:"bytes,18,rep,name=meta_labels,json=metaLabels,proto3" json:"meta_labels,omitempty"`                             // The incident's current meta labels
+	Duration            *durationpb.Duration    `protobuf:"bytes,19,opt,name=duration,proto3" json:"duration,omitempty"`                                                   // The time duration between created at and closed time of the incident
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -638,17 +638,17 @@ func (*GroupByValues_ContextualLabels) isGroupByValues_Values() {}
 // Represents and Incident Aggregation (group by)
 type IncidentAggregation struct {
 	state               protoimpl.MessageState     `protogen:"open.v1"`
-	GroupBysValue       []*GroupByValues           `protobuf:"bytes,1,rep,name=group_bys_value,json=groupBysValue,proto3" json:"group_bys_value,omitempty"`                      // The Aggregation's group by fields and values
-	AggStateCount       []*IncidentStateCount      `protobuf:"bytes,2,rep,name=agg_state_count,json=aggStateCount,proto3" json:"agg_state_count,omitempty"`                      // The Aggregation's count of states
-	AggStatusCount      []*IncidentStatusCount     `protobuf:"bytes,3,rep,name=agg_status_count,json=aggStatusCount,proto3" json:"agg_status_count,omitempty"`                   // The Aggregation's count of statuses
-	AggSeverityCount    []*IncidentSeverityCount   `protobuf:"bytes,4,rep,name=agg_severity_count,json=aggSeverityCount,proto3" json:"agg_severity_count,omitempty"`             // The Aggregation's count of severities
-	AggAssignmentsCount []*IncidentAssignmentCount `protobuf:"bytes,5,rep,name=agg_assignments_count,json=aggAssignmentsCount,proto3" json:"agg_assignments_count,omitempty"`    // The Aggregation's count of assignments
-	FirstCreatedAt      *timestamppb.Timestamp     `protobuf:"bytes,6,opt,name=first_created_at,json=firstCreatedAt,proto3" json:"first_created_at,omitempty"`                   // The Aggregation's first incident created time
-	LastClosedAt        *timestamppb.Timestamp     `protobuf:"bytes,7,opt,name=last_closed_at,json=lastClosedAt,proto3" json:"last_closed_at,omitempty"`                         // The Aggregation's last incident closed time
-	AllValuesCount      *wrapperspb.UInt32Value    `protobuf:"bytes,8,opt,name=all_values_count,json=allValuesCount,proto3" json:"all_values_count,omitempty"`                   // The Aggregation's count of incidents
-	ListIncidentsId     []*wrapperspb.StringValue  `protobuf:"bytes,9,rep,name=list_incidents_id,json=listIncidentsId,proto3" json:"list_incidents_id,omitempty"`                // The Aggregation's list of incident's id
-	LastStateUpdateTime *timestamppb.Timestamp     `protobuf:"bytes,10,opt,name=last_state_update_time,json=lastStateUpdateTime,proto3" json:"last_state_update_time,omitempty"` // The Aggregation's last state update time
-	AggMetaLabelsCount  []*IncidentMetaLabelsCount `protobuf:"bytes,11,rep,name=agg_meta_labels_count,json=aggMetaLabelsCount,proto3" json:"agg_meta_labels_count,omitempty"`    // The Aggregation's of meta labels
+	GroupBysValue       []*GroupByValues           `protobuf:"bytes,1,rep,name=group_bys_value,json=groupBysValue,proto3" json:"group_bys_value,omitempty"`                      // The aggregation's group by fields and values
+	AggStateCount       []*IncidentStateCount      `protobuf:"bytes,2,rep,name=agg_state_count,json=aggStateCount,proto3" json:"agg_state_count,omitempty"`                      // The aggregation's state count
+	AggStatusCount      []*IncidentStatusCount     `protobuf:"bytes,3,rep,name=agg_status_count,json=aggStatusCount,proto3" json:"agg_status_count,omitempty"`                   // The aggregation's status count
+	AggSeverityCount    []*IncidentSeverityCount   `protobuf:"bytes,4,rep,name=agg_severity_count,json=aggSeverityCount,proto3" json:"agg_severity_count,omitempty"`             // The aggregation's severity count
+	AggAssignmentsCount []*IncidentAssignmentCount `protobuf:"bytes,5,rep,name=agg_assignments_count,json=aggAssignmentsCount,proto3" json:"agg_assignments_count,omitempty"`    // The aggregation's assignments count
+	FirstCreatedAt      *timestamppb.Timestamp     `protobuf:"bytes,6,opt,name=first_created_at,json=firstCreatedAt,proto3" json:"first_created_at,omitempty"`                   // The aggregation's first incident created time
+	LastClosedAt        *timestamppb.Timestamp     `protobuf:"bytes,7,opt,name=last_closed_at,json=lastClosedAt,proto3" json:"last_closed_at,omitempty"`                         // The aggregation's last incident closed time
+	AllValuesCount      *wrapperspb.UInt32Value    `protobuf:"bytes,8,opt,name=all_values_count,json=allValuesCount,proto3" json:"all_values_count,omitempty"`                   // The aggregation's incident count
+	ListIncidentsId     []*wrapperspb.StringValue  `protobuf:"bytes,9,rep,name=list_incidents_id,json=listIncidentsId,proto3" json:"list_incidents_id,omitempty"`                // The aggregation's list of incidents ID
+	LastStateUpdateTime *timestamppb.Timestamp     `protobuf:"bytes,10,opt,name=last_state_update_time,json=lastStateUpdateTime,proto3" json:"last_state_update_time,omitempty"` // The aggregation's last state update time
+	AggMetaLabelsCount  []*IncidentMetaLabelsCount `protobuf:"bytes,11,rep,name=agg_meta_labels_count,json=aggMetaLabelsCount,proto3" json:"agg_meta_labels_count,omitempty"`    // The aggregation's meta labels count
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1024,11 +1024,11 @@ var File_com_coralogixapis_incidents_v1_incident_proto protoreflect.FileDescript
 
 const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogixapis/incidents/v1/incident.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1egoogle/protobuf/duration.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf2\r\n" +
+	"-com/coralogixapis/incidents/v1/incident.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1egoogle/protobuf/duration.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xae\x0e\n" +
 	"\bIncident\x12@\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"incident_id\"R\x02id\x12F\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x92A\x11J\x0f\"incident_name\"R\x04name\x12C\n" +
-	"\x05state\x18\x03 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateR\x05state\x12F\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x92A\x11J\x0f\"incident_name\"R\x04name\x12\xac\x01\n" +
+	"\x05state\x18\x03 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateBg\x92Ad2bThe incident's current internal state, usually derived from the operational events of the incidentR\x05state\x12F\n" +
 	"\x06status\x18\x04 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusR\x06status\x12L\n" +
 	"\vassignments\x18\x05 \x03(\v2*.com.coralogixapis.incidents.v1.AssignmentR\vassignments\x12[\n" +
 	"\vdescription\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x18J\x16\"incident_description\"R\vdescription\x12L\n" +
@@ -1052,9 +1052,9 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a@\n" +
 	"\x12DisplayLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xe5\x01\x92A\xe1\x01\n" +
-	"\xde\x01*\bIncident2\vAn incident\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05state\xd2\x01\x06status\xd2\x01\vassignments\xd2\x01\vdescription\xd2\x01\bseverity\xd2\x01\x11contextual_labels\xd2\x01\x0edisplay_labels\xd2\x01\x06events\xd2\x01\n" +
-	"created_at\xd2\x01\tclosed_at\xd2\x01\x16last_state_update_time\xd2\x01\x15last_state_update_key\xd2\x01\bis_muted\"\xf8\x05\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xb7\x01\x92A\xb3\x01\n" +
+	"\xb0\x01*\bIncident\xd2\x01\x02id\xd2\x01\x05state\xd2\x01\x06status\xd2\x01\vassignments\xd2\x01\bseverity\xd2\x01\x11contextual_labels\xd2\x01\x0edisplay_labels\xd2\x01\x06events\xd2\x01\n" +
+	"created_at\xd2\x01\x16last_state_update_time\xd2\x01\x15last_state_update_key\xd2\x01\bduration\"\xf8\x05\n" +
 	"\x12IncidentFieldOneOf\x12.\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueH\x00R\x02id\x12N\n" +
 	"\bseverity\x18\x02 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityH\x00R\bseverity\x122\n" +
@@ -1069,18 +1069,18 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x0esubsystem_name\x18\n" +
 	" \x01(\v2\x1c.google.protobuf.StringValueH\x00R\rsubsystemName\x127\n" +
 	"\bduration\x18\v \x01(\v2\x19.google.protobuf.DurationH\x00R\bdurationB\a\n" +
-	"\x05field\"\x8c\x02\n" +
+	"\x05field\"\xf3\x01\n" +
 	"\x10ContextualLabels\x12N\n" +
 	"\n" +
 	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"field_name\"R\tfieldName\x12Q\n" +
 	"\vfield_value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"field_value\"R\n" +
-	"fieldValue:U\x92AR\n" +
-	"P*\x10ContextualLabels2!Contextual labels for an incident\xd2\x01\n" +
+	"fieldValue:<\x92A9\n" +
+	"7*\x1aIncident contextual labels\xd2\x01\n" +
 	"field_name\xd2\x01\vfield_value\"\xd7\x01\n" +
 	"\rGroupByValues\x12[\n" +
 	"\x0eincident_field\x18\x01 \x01(\v22.com.coralogixapis.incidents.v1.IncidentFieldOneOfH\x00R\rincidentField\x12_\n" +
 	"\x11contextual_labels\x18\x02 \x01(\v20.com.coralogixapis.incidents.v1.ContextualLabelsH\x00R\x10contextualLabelsB\b\n" +
-	"\x06values\"\xe8\t\n" +
+	"\x06values\"\xd0\t\n" +
 	"\x13IncidentAggregation\x12U\n" +
 	"\x0fgroup_bys_value\x18\x01 \x03(\v2-.com.coralogixapis.incidents.v1.GroupByValuesR\rgroupBysValue\x12Z\n" +
 	"\x0fagg_state_count\x18\x02 \x03(\v22.com.coralogixapis.incidents.v1.IncidentStateCountR\raggStateCount\x12]\n" +
@@ -1093,27 +1093,31 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x11list_incidents_id\x18\t \x03(\v2\x1c.google.protobuf.StringValueR\x0flistIncidentsId\x12O\n" +
 	"\x16last_state_update_time\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x13lastStateUpdateTime\x12j\n" +
-	"\x15agg_meta_labels_count\x18\v \x03(\v27.com.coralogixapis.incidents.v1.IncidentMetaLabelsCountR\x12aggMetaLabelsCount:\x95\x02\x92A\x91\x02\n" +
-	"\x8e\x02*\x13IncidentAggregation2\x17An incident aggregation\xd2\x01\x0fgroup_bys_value\xd2\x01\x0fagg_state_count\xd2\x01\x10agg_status_count\xd2\x01\x12agg_severity_count\xd2\x01\x15agg_assignments_count\xd2\x01\x10first_created_at\xd2\x01\x0elast_closed_at\xd2\x01\x10all_values_count\xd2\x01\x11list_incidents_id\xd2\x01\x16last_state_update_time\xd2\x01\x15agg_meta_labels_count\"\xf4\x01\n" +
+	"\x15agg_meta_labels_count\x18\v \x03(\v27.com.coralogixapis.incidents.v1.IncidentMetaLabelsCountR\x12aggMetaLabelsCount:\xfd\x01\x92A\xf9\x01\n" +
+	"\xf6\x01*\x14Incident aggregation\xd2\x01\x0fgroup_bys_value\xd2\x01\x0fagg_state_count\xd2\x01\x10agg_status_count\xd2\x01\x12agg_severity_count\xd2\x01\x15agg_assignments_count\xd2\x01\x10first_created_at\xd2\x01\x0elast_closed_at\xd2\x01\x10all_values_count\xd2\x01\x11list_incidents_id\xd2\x01\x16last_state_update_time\xd2\x01\x15agg_meta_labels_count\"\xd8\x01\n" +
 	"\x17IncidentMetaLabelsCount\x12H\n" +
 	"\n" +
 	"meta_label\x18\x01 \x01(\v2).com.coralogixapis.incidents.v1.MetaLabelR\tmetaLabel\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:R\x92AO\n" +
-	"M*\x17IncidentMetaLabelsCount2\x1dAn incident meta labels count\xd2\x01\n" +
-	"meta_label\xd2\x01\x05count\"\xa4\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"1*\x1aIncident meta labels count\xd2\x01\n" +
+	"meta_label\xd2\x01\x05count\"\xdc\x01\n" +
 	"\x17IncidentAssignmentCount\x12L\n" +
 	"\vassigned_to\x18\x01 \x01(\v2+.com.coralogixapis.incidents.v1.UserDetailsR\n" +
 	"assignedTo\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count\"\xa2\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"1*\x19Incident assignment count\xd2\x01\vassigned_to\xd2\x01\x05count\"\xd5\x01\n" +
 	"\x15IncidentSeverityCount\x12L\n" +
 	"\bseverity\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\bseverity\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count\"\x9a\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:1\x92A.\n" +
+	",*\x17Incident severity count\xd2\x01\bseverity\xd2\x01\x05count\"\xc9\x01\n" +
 	"\x13IncidentStatusCount\x12F\n" +
 	"\x06status\x18\x01 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusR\x06status\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count\"\x96\x01\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:-\x92A*\n" +
+	"(*\x15Incident status count\xd2\x01\x06status\xd2\x01\x05count\"\xc3\x01\n" +
 	"\x12IncidentStateCount\x12C\n" +
 	"\x05state\x18\x01 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateR\x05state\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count*\x9b\x03\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:+\x92A(\n" +
+	"&*\x14Incident state count\xd2\x01\x05state\xd2\x01\x05count*\x9b\x03\n" +
 	"\x0eIncidentFields\x12 \n" +
 	"\x1cINCIDENTS_FIELDS_UNSPECIFIED\x10\x00\x12\x17\n" +
 	"\x13INCIDENTS_FIELDS_ID\x10\x01\x12\x1d\n" +

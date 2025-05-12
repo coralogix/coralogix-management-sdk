@@ -79,12 +79,12 @@ var File_com_coralogixapis_incidents_v1_meta_label_proto protoreflect.FileDescri
 
 const file_com_coralogixapis_incidents_v1_meta_label_proto_rawDesc = "" +
 	"\n" +
-	"/com/coralogixapis/incidents/v1/meta_label.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc7\x01\n" +
+	"/com/coralogixapis/incidents/v1/meta_label.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa5\x01\n" +
 	"\tMetaLabel\x12:\n" +
 	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
 	"\x92A\aJ\x05\"key\"R\x03key\x12@\n" +
-	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\f\x92A\tJ\a\"value\"R\x05value:<\x92A9\n" +
-	"7*\tMetaLabel2\x1cA meta label for an incident\xd2\x01\x03key\xd2\x01\x05valueb\x06proto3"
+	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\f\x92A\tJ\a\"value\"R\x05value:\x1a\x92A\x17\n" +
+	"\x15*\x13Incident meta labelb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_meta_label_proto_rawDescOnce sync.Once
