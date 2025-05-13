@@ -83,7 +83,7 @@ service EventsService {
         key: "500"
         value: {description: "Internal server error"}
       }
-      tags: ["Events service"]
+      tags: ["Events Service"]
       summary: "List Events"
     };
     option (google.api.http) = {
@@ -106,7 +106,7 @@ service EventsService {
         key: "500"
         value: {description: "Internal server error"}
       }
-      tags: ["Events service"]
+      tags: ["Events Service"]
       summary: "List Events Count"
     };
     option (google.api.http) = {
@@ -130,7 +130,7 @@ service EventsService {
         key: "500"
         value: {description: "Internal server error"}
       }
-      tags: ["Events service"]
+      tags: ["Events Service"]
       summary: "Get Events Statistics"
     };
     option (google.api.http) = {
@@ -239,8 +239,7 @@ message ListEventsResponse {
       title: "ListEventsResponse"
       description: "This data structure represents a response to list events"
       required: [
-        "events",
-        "pagination"
+        "events"
       ]
     }
   };

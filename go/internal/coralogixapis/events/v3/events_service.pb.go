@@ -893,14 +893,13 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"pagination\x18\x03 \x01(\v2..com.coralogixapis.events.v3.PaginationRequestR\n" +
 	"pagination:s\x92Ap\n" +
 	"n*\x11ListEventsRequest27This data structure represents a request to list events\xd2\x01\x06filter\xd2\x01\torder_bys\xd2\x01\n" +
-	"pagination\"\x8e\x02\n" +
+	"pagination\"\x81\x02\n" +
 	"\x12ListEventsResponse\x12<\n" +
 	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events\x12O\n" +
 	"\n" +
 	"pagination\x18\x02 \x01(\v2/.com.coralogixapis.events.v3.PaginationResponseR\n" +
-	"pagination:i\x92Af\n" +
-	"d*\x12ListEventsResponse28This data structure represents a response to list events\xd2\x01\x06events\xd2\x01\n" +
-	"pagination\"\xce\x01\n" +
+	"pagination:\\\x92AY\n" +
+	"W*\x12ListEventsResponse28This data structure represents a response to list events\xd2\x01\x06events\"\xce\x01\n" +
 	"\x1aGetEventsStatisticsRequest\x12A\n" +
 	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:m\x92Aj\n" +
 	"h*\x1aGetEventsStatisticsRequest2AThis data structure represents a request to get events statistics\xd2\x01\x06filter\"\xd9\x03\n" +
@@ -944,7 +943,7 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x10batch get events\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v3/events/events:batchGet\x12\x8c\x02\n" +
 	"\n" +
 	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\x9c\x01\x92Ar\n" +
-	"\x0eEvents service\x12\vList EventsJ\x14\n" +
+	"\x0eEvents Service\x12\vList EventsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -954,7 +953,7 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x0fget events list\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/v3/events\x12\xad\x02\n" +
 	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xae\x01\x92Ax\n" +
-	"\x0eEvents service\x12\x11List Events CountJ\x14\n" +
+	"\x0eEvents Service\x12\x11List Events CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -963,7 +962,7 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x15Internal server error¸\x02\x17\n" +
 	"\x15get events list count\x82\xd3\xe4\x93\x02\x12\x12\x10/v3/events:count\x12\xc2\x02\n" +
 	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xb7\x01\x92A|\n" +
-	"\x0eEvents service\x12\x15Get Events StatisticsJ\x14\n" +
+	"\x0eEvents Service\x12\x15Get Events StatisticsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +

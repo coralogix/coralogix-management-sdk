@@ -1035,7 +1035,7 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x1aGetSendDataApiKeysResponse\x12=\n" +
 	"\x04keys\x18\x01 \x03(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\x04keys:\xdf\x01\x92A\xdb\x01\n" +
 	"k*\x14Get Api Key Response2HThis data structure is the response obtained when retrieving an API key.\xd2\x01\bkey_info*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xc6\v\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xcf\v\n" +
 	"\x0eApiKeysService\x12\x91\x02\n" +
 	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x91\x01\x92Aw\n" +
 	"\x10API Keys Service\x12\x0eCreate API KeyJ\x14\n" +
@@ -1060,15 +1060,15 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x8e\x02\n" +
-	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x8e\x01\x92Aw\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x97\x02\n" +
+	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x97\x01\x92Aw\n" +
 	"\x10API Keys Service\x12\x0eDelete API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e*\f/v3/api_keys\x12\x9a\x02\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17*\x15/v3/api_keys/{key_id}\x12\x9a\x02\n" +
 	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\x9a\x01\x92Aw\n" +
 	"\x10API Keys Service\x12\x0eUpdate API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
