@@ -298,7 +298,7 @@ func TestWebhooks(t *testing.T) {
 	testResult, err := c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
-			Url:  wrapperspb.String("https://httpbin.org/status/200"),
+			Url:  wrapperspb.String("https://httpbun.org/status/200"),
 			Type: cxsdk.WebhookTypeGeneric,
 			Config: &cxsdk.GenericWebhookInputData{
 				GenericWebhook: &cxsdk.GenericWebhookConfig{

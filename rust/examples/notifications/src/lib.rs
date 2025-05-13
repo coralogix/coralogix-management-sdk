@@ -96,7 +96,7 @@ mod tests {
                 fields: vec![
                     ConnectorConfigField {
                         field_name: "url".into(),
-                        value: "https://httpbin.org/post".into(),
+                        value: "https://httpbun.org/post".into(),
                     },
                     ConnectorConfigField {
                         field_name: "method".into(),

@@ -94,7 +94,7 @@ service ApiKeysService {
       summary: "Delete API Key"
     };
     option (google.api.http) = {
-      delete: "/v3/api_keys"
+      delete: "/v3/api_keys/{key_id}"
     };
   };
   rpc UpdateApiKey(UpdateApiKeyRequest) returns (UpdateApiKeyResponse) {

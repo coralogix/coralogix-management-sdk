@@ -273,7 +273,7 @@ mod tests {
             .test_webhook(
                 WebhookType::Generic,
                 Some("custom-webhook".into()),
-                "https://httpbin.org/status/200".parse().unwrap(),
+                "https://httpbun.org/status/200".parse().unwrap(),
                 Config::GenericWebhook(GenericWebhookConfig {
                     uuid: Some(Uuid::new_v4().to_string()),
                     method: generic_webhook_config::MethodType::Get.into(),

@@ -317,7 +317,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.107"
+revision = "v0.1.108"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -449,7 +449,7 @@ allow_policies = [
 
 [cx-api-events]
 url = 'github.com/coralogix/cx-api-events'
-revision = 'v0.1.3'
+revision = 'v0.1.4'
 allow_policies = [
     "src/com/coralogixapis/events/v3/cx_event.proto",
     "src/com/coralogixapis/events/v3/event_order_by.proto",

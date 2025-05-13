@@ -36,7 +36,7 @@ func TestHttpsConnector(t *testing.T) {
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
-				{FieldName: "url", Value: "https://httpbin.org/post"},
+				{FieldName: "url", Value: "https://httpbun.org/post"},
 				{FieldName: "method", Value: "post"},
 			},
 		},
@@ -438,7 +438,7 @@ func TestGlobalRouter(t *testing.T) {
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
-				{FieldName: "url", Value: "https://httpbin.org/post"},
+				{FieldName: "url", Value: "https://httpbun.org/post"},
 				{FieldName: "method", Value: "post"},
 			},
 		},
@@ -575,7 +575,7 @@ func TestCreateAlertWithDestination(t *testing.T) {
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
-				{FieldName: "url", Value: "https://httpbin.org/post"},
+				{FieldName: "url", Value: "https://httpbun.org/post"},
 				{FieldName: "method", Value: "post"},
 			},
 		},
