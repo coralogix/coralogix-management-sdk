@@ -25,34 +25,33 @@ use crate::{
     util::make_request_with_metadata,
 };
 
-use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    BatchGetServiceSlosRequest,
-    BatchGetServiceSlosResponse,
-    CreateServiceSloRequest,
-    CreateServiceSloResponse,
-    DeleteServiceSloRequest,
-    DeleteServiceSloResponse,
-    GetServiceSloRequest,
-    GetServiceSloResponse,
-    ListServiceSlosRequest,
-    ListServiceSlosResponse,
-    ReplaceServiceSloRequest,
-    ReplaceServiceSloResponse,
-    service_slo_service_client::ServiceSloServiceClient,
+pub use cx_api::proto::com::coralogixapis::slo::v1::{
+    Metric,
+    MetricSli,
+    Slo,
+    SloFilters,
+    SloTimeFrame,
+    slo::{
+        Sli,
+        Window,
+    },
 };
 
-pub use cx_api::proto::com::coralogixapis::apm::common::v2::OrderBy;
-pub use cx_api::proto::com::coralogixapis::apm::services::v1::{
-    CompareType,
-    ErrorSli,
-    ServiceSlo,
-    SliFilter,
-    SliMetricType,
-    SloPeriod,
-    SloStatus,
-    service_slo::SliType,
+use cx_api::proto::com::coralogixapis::slo::v1::slos_service_client::SlosServiceClient;
+use cx_api::proto::com::coralogixapis::slo::v1::{
+    BatchGetSlosRequest,
+    BatchGetSlosResponse,
+    CreateSloRequest,
+    CreateSloResponse,
+    DeleteSloRequest,
+    DeleteSloResponse,
+    GetSloRequest,
+    GetSloResponse,
+    ListSlosRequest,
+    ListSlosResponse,
+    ReplaceSloRequest,
+    ReplaceSloResponse,
 };
-
 use tokio::sync::Mutex;
 use tonic::{
     metadata::MetadataMap,
@@ -71,7 +70,7 @@ const INFRA_MONITORING_FEATURE_GROUP_ID: &str = "infra-monitoring";
 /// Read more at <https://coralogix.com/docs/slo-management-api/>
 pub struct SloClient {
     metadata_map: MetadataMap,
-    service_client: Mutex<ServiceSloServiceClient<Channel>>,
+    service_client: Mutex<SlosServiceClient<Channel>>,
 }
 
 impl SloClient {
@@ -87,7 +86,7 @@ impl SloClient {
         let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
             metadata_map: request_metadata.to_metadata_map(),
-            service_client: Mutex::new(ServiceSloServiceClient::new(channel)),
+            service_client: Mutex::new(SlosServiceClient::new(channel)),
         })
     }
 
@@ -95,15 +94,13 @@ impl SloClient {
     ///
     /// # Arguments
     /// * `slo` - The [`ServiceSlo`] to create.
-    pub async fn create(&self, slo: ServiceSlo) -> Result<CreateServiceSloResponse> {
-        let request = make_request_with_metadata(
-            CreateServiceSloRequest { slo: Some(slo) },
-            &self.metadata_map,
-        );
+    pub async fn create(&self, slo: Slo) -> Result<CreateSloResponse> {
+        let request =
+            make_request_with_metadata(CreateSloRequest { slo: Some(slo) }, &self.metadata_map);
         self.service_client
             .lock()
             .await
-            .create_service_slo(request)
+            .create_slo(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
@@ -121,15 +118,13 @@ impl SloClient {
     ///
     /// # Arguments
     /// * `slo` - The [`ServiceSlo`] to update.    
-    pub async fn update(&self, slo: ServiceSlo) -> Result<ReplaceServiceSloResponse> {
-        let request = make_request_with_metadata(
-            ReplaceServiceSloRequest { slo: Some(slo) },
-            &self.metadata_map,
-        );
+    pub async fn update(&self, slo: Slo) -> Result<ReplaceSloResponse> {
+        let request =
+            make_request_with_metadata(ReplaceSloRequest { slo: Some(slo) }, &self.metadata_map);
         self.service_client
             .lock()
             .await
-            .replace_service_slo(request)
+            .replace_slo(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
@@ -147,15 +142,12 @@ impl SloClient {
     ///
     /// # Arguments
     /// * `id` - The id of the Service SLO to delete.
-    pub async fn delete(&self, id: String) -> Result<DeleteServiceSloResponse> {
-        let request = make_request_with_metadata(
-            DeleteServiceSloRequest { id: Some(id) },
-            &self.metadata_map,
-        );
+    pub async fn delete(&self, id: String) -> Result<DeleteSloResponse> {
+        let request = make_request_with_metadata(DeleteSloRequest { id }, &self.metadata_map);
         self.service_client
             .lock()
             .await
-            .delete_service_slo(request)
+            .delete_slo(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
@@ -173,14 +165,13 @@ impl SloClient {
     ///
     /// # Arguments
     /// * `id` - The ID of the Service SLO
-    pub async fn get(&self, id: String) -> Result<GetServiceSloResponse> {
-        let request =
-            make_request_with_metadata(GetServiceSloRequest { id: Some(id) }, &self.metadata_map);
+    pub async fn get(&self, id: String) -> Result<GetSloResponse> {
+        let request = make_request_with_metadata(GetSloRequest { id }, &self.metadata_map);
 
         self.service_client
             .lock()
             .await
-            .get_service_slo(request)
+            .get_slo(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
@@ -197,14 +188,13 @@ impl SloClient {
     ///
     /// # Arguments
     /// * `ids` - The IDs of the Service SLO
-    pub async fn get_bulk(&self, ids: Vec<String>) -> Result<BatchGetServiceSlosResponse> {
-        let request =
-            make_request_with_metadata(BatchGetServiceSlosRequest { ids }, &self.metadata_map);
+    pub async fn get_bulk(&self, ids: Vec<String>) -> Result<BatchGetSlosResponse> {
+        let request = make_request_with_metadata(BatchGetSlosRequest { ids }, &self.metadata_map);
 
         self.service_client
             .lock()
             .await
-            .batch_get_service_slos(request)
+            .batch_get_slos(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
@@ -221,25 +211,14 @@ impl SloClient {
     /// List the Service SLOs.
     ///
     /// # Arguments
-    /// * `service_names` - The names of the services to list SLOs for.
-    /// * `order_by` - Ordering of the SLOs.
-    pub async fn list(
-        &self,
-        service_names: Vec<String>,
-        order_by: Option<OrderBy>,
-    ) -> Result<ListServiceSlosResponse> {
-        let request = make_request_with_metadata(
-            ListServiceSlosRequest {
-                order_by,
-                service_names,
-            },
-            &self.metadata_map,
-        );
+    /// * `filter` - The [`SloFilters`] .
+    pub async fn list(&self, filters: Option<SloFilters>) -> Result<ListSlosResponse> {
+        let request = make_request_with_metadata(ListSlosRequest { filters }, &self.metadata_map);
 
         self.service_client
             .lock()
             .await
-            .list_service_slos(request)
+            .list_slos(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| {
