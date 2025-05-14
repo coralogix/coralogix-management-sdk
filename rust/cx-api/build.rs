@@ -251,7 +251,7 @@ fn scopes_service(root: &str) -> Vec<String> {
 
 fn slos_service(root: &str) -> Vec<String> {
     vec![format!(
-        "{}/com/coralogixapis/apm/services/v1/service_slo_service.proto",
+        "{}/com/coralogixapis/slo/v1/slo_service.proto",
         root
     )]
 }

@@ -14,18 +14,19 @@
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashMap;
+
     use cx_sdk::{
         CoralogixRegion,
         auth::AuthContext,
         client::slos::{
-            CompareType,
-            ErrorSli,
-            ServiceSlo,
-            SliFilter,
-            SliType,
+            Metric,
+            MetricSli,
+            Sli,
+            Slo,
             SloClient,
-            SloPeriod,
-            SloStatus,
+            SloTimeFrame,
+            Window,
         },
     };
 
@@ -37,86 +38,40 @@ mod tests {
         )
         .unwrap();
 
-        let slo = ServiceSlo {
-            id: None,
-            name: Some("coralogix_slo_example".to_string()),
-            service_name: Some("service_name".to_string()),
-            status: SloStatus::Ok.into(),
+        let slo = Slo {
+            id: String::default(),
+            name: "coralogix_rust_slo_example".into(),
             description: Some("description".to_string()),
-            target_percentage: Some(30),
-            created_at: None,
-            remaining_error_budget_percentage: None,
-            filters: vec![],
-            period: SloPeriod::SloPeriod7Days.into(),
-            sli_type: Some(SliType::ErrorSli(ErrorSli {})),
+            creator: String::default(),
+            labels: HashMap::new(),
+            target_threshold_percentage: 95,
+            create_time: None,
+            update_time: None,
+            sli: Some(Sli::MetricSli(MetricSli {
+                good_events: Some(Metric {
+                    query: "avg(rate(cpu_usage_seconds_total[5m])) by instance".to_string(),
+                }),
+                total_events: Some(Metric {
+                    query: "avg(rate(cpu_usage_seconds_total[5m])) by instance".to_string(),
+                }),
+                group_by_labels: vec![],
+            })),
+            window: Some(Window::SloTimeFrame(SloTimeFrame::SloTimeFrame7Days.into())),
         };
 
         let create_slo_response = slos_client.create(slo.clone()).await.unwrap();
 
-        let _ = slos_client
-            .get(create_slo_response.slo.clone().unwrap().id.unwrap())
-            .await
-            .unwrap();
-
-        let updated_slo = ServiceSlo {
-            name: Some("updated_slo".to_string()),
+        let updated_slo = Slo {
+            name: "updated_rust_slo".to_string(),
             ..create_slo_response.slo.unwrap()
         };
 
         let slo_update_response = slos_client.update(updated_slo).await.unwrap();
 
-        assert!(slo_update_response.slo.clone().unwrap().name.unwrap() == "updated_slo");
+        assert!(slo_update_response.slo.clone().unwrap().name == "updated_rust_slo");
 
         let _ = slos_client
-            .delete(slo_update_response.slo.unwrap().id.unwrap())
-            .await
-            .unwrap();
-    }
-
-    #[tokio::test]
-    async fn test_slos_with_filters() {
-        let slos_client = SloClient::new(
-            AuthContext::from_env(),
-            CoralogixRegion::from_env().unwrap(),
-        )
-        .unwrap();
-
-        let slo = ServiceSlo {
-            id: None,
-            name: Some("coralogix_slo_example".to_string()),
-            service_name: Some("service_name".to_string()),
-            status: SloStatus::Ok.into(),
-            description: Some("description".to_string()),
-            target_percentage: Some(30),
-            created_at: None,
-            remaining_error_budget_percentage: None,
-            filters: vec![SliFilter {
-                field: Some("severity".to_string()),
-                compare_type: CompareType::Is.into(),
-                field_values: vec!["error".to_string(), "warning".to_string()],
-            }],
-            period: SloPeriod::SloPeriod7Days.into(),
-            sli_type: Some(SliType::ErrorSli(ErrorSli {})),
-        };
-
-        let create_slo_response = slos_client.create(slo.clone()).await.unwrap();
-
-        let _ = slos_client
-            .get(create_slo_response.slo.clone().unwrap().id.unwrap())
-            .await
-            .unwrap();
-
-        let updated_slo = ServiceSlo {
-            name: Some("updated_slo".to_string()),
-            ..create_slo_response.slo.unwrap()
-        };
-
-        let slo_update_response = slos_client.update(updated_slo).await.unwrap();
-
-        assert!(slo_update_response.slo.clone().unwrap().name.unwrap() == "updated_slo");
-
-        let _ = slos_client
-            .delete(slo_update_response.slo.unwrap().id.unwrap())
+            .delete(slo_update_response.slo.unwrap().id)
             .await
             .unwrap();
     }

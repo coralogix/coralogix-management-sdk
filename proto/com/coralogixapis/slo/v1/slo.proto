@@ -1,0 +1,76 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+//import "google/protobuf/duration.proto";
+
+option go_package = "com/coralogixapis/slo/v1";
+package com.coralogixapis.slo.v1;
+
+message Metric {
+  string query = 1;
+}
+
+message MetricSli {
+  Metric good_events = 1;
+  Metric total_events = 2;
+  repeated string group_by_labels = 3;
+}
+
+enum SloTimeFrame {
+  SLO_TIME_FRAME_UNSPECIFIED = 0;
+  SLO_TIME_FRAME_7_DAYS = 1;
+  SLO_TIME_FRAME_14_DAYS = 2;
+  SLO_TIME_FRAME_21_DAYS = 3;
+  SLO_TIME_FRAME_28_DAYS = 4;
+  SLO_TIME_FRAME_90_DAYS = 5;
+}
+
+
+message Slo{
+  string id = 1;
+  string name = 2;
+  optional string description = 3;
+  string creator = 4;
+  map<string, string> labels = 5;
+  oneof sli {
+    MetricSli metric_sli = 6;
+  };
+  oneof window {
+    SloTimeFrame slo_time_frame = 7;
+    //    google.protobuf.Duration duration = 11;
+  };
+  int32 target_threshold_percentage = 8;
+  google.protobuf.Timestamp create_time = 9;
+  google.protobuf.Timestamp update_time = 10;
+}
+
+enum SloConstantFilterField {
+  SLO_CONST_FILTER_FIELD_UNSPECIFIED = 0;
+  SLO_CONST_FILTER_FIELD_USER_NAME = 1;
+}
+
+message SloFilterField {
+  oneof field {
+    SloConstantFilterField const_filter = 1;
+    string label_name = 2;
+  }
+}
+
+message IsFilterPredicate {
+  repeated string is = 1;
+}
+
+message SloFilterPredicate {
+  oneof predicate {
+    IsFilterPredicate is = 1;
+  }
+}
+
+message SloFilter {
+  SloFilterField field = 1;
+  SloFilterPredicate predicate = 2;
+}
+
+message SloFilters {
+  repeated SloFilter filters = 1;
+}
