@@ -32,6 +32,12 @@ type GetEnrichmentLimitRequest = enrichment.GetEnrichmentLimitRequest
 // AddEnrichmentsRequest is a request to add enrichments.
 type AddEnrichmentsRequest = enrichment.AddEnrichmentsRequest
 
+// AtomicOverwriteEnrichmentsRequest is a request to atomically overwrite enrichments.
+type AtomicOverwriteEnrichmentsRequest = enrichment.AtomicOverwriteEnrichmentsRequest
+
+// AtomicOverwriteEnrichmentsResponse is a response to an atomic overwrite enrichments request.
+type AtomicOverwriteEnrichmentsResponse = enrichment.AtomicOverwriteEnrichmentsResponse
+
 // DeleteEnrichmentsRequest is a request to remove enrichments.
 type DeleteEnrichmentsRequest = enrichment.RemoveEnrichmentsRequest
 
@@ -94,6 +100,23 @@ func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
 	response, err := client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, AddEnrichmentsRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
+}
+
+func (e EnrichmentsClient) AtomicOverwrite(ctx context.Context, req *AtomicOverwriteEnrichmentsRequest) (*AtomicOverwriteEnrichmentsResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := enrichment.NewEnrichmentServiceClient(conn)
+
+	response, err := client.AtomicOverwriteEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, AddEnrichmentsRPC, enrichmentsFeatureGroupID)
 	}
