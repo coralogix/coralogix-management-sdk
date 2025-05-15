@@ -1,12 +1,6 @@
 version = 2
 
 [[dependencies]]
-name = "alerts-api-protobuf"
-url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.19"
-commit_hash = "d7dd662783e76d469a4540ca16fd21d5e5773fa3"
-
-[[dependencies]]
 name = "cx-api-actions"
 url = "github.com/coralogix/cx-api-actions"
 revision = "v0.4.3"
@@ -21,9 +15,8 @@ commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-protocol = "ssh"
-branch = "feature/fix-common-to-ssh"
-commit_hash = "37e18d0b7ce9bd116c9c4102df80a2af6e42ba5a"
+revision = "v0.5.20"
+commit_hash = "d4febb6ef3243216e475065f30eddfbb6a001ca9"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -136,8 +129,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.1"
-commit_hash = "1d544a040ce2dd58953a6be66179446bee8fbb92"
+revision = "v0.0.11"
+commit_hash = "479aa34ebf501c925b4b4fdc0282a3e2ebde1347"
 
 [[dependencies]]
 name = "cx-api-views"

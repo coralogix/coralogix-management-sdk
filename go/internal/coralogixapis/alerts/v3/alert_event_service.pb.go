@@ -557,110 +557,6 @@ func (*GetAlertEventResponse_SinglePermutation) isGetAlertEventResponse_AlertEve
 
 func (*GetAlertEventResponse_MultiplePermutation) isGetAlertEventResponse_AlertEvent() {}
 
-type PaginationRequest struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	PageSize      *wrapperspb.UInt32Value `protobuf:"bytes,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PageToken     *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PaginationRequest) Reset() {
-	*x = PaginationRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[7]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PaginationRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PaginationRequest) ProtoMessage() {}
-
-func (x *PaginationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[7]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PaginationRequest.ProtoReflect.Descriptor instead.
-func (*PaginationRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{7}
-}
-
-func (x *PaginationRequest) GetPageSize() *wrapperspb.UInt32Value {
-	if x != nil {
-		return x.PageSize
-	}
-	return nil
-}
-
-func (x *PaginationRequest) GetPageToken() *wrapperspb.StringValue {
-	if x != nil {
-		return x.PageToken
-	}
-	return nil
-}
-
-type PaginationResponse struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	TotalSize     *wrapperspb.UInt32Value `protobuf:"bytes,1,opt,name=total_size,json=totalSize,proto3" json:"total_size,omitempty"`
-	NextPageToken *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PaginationResponse) Reset() {
-	*x = PaginationResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PaginationResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PaginationResponse) ProtoMessage() {}
-
-func (x *PaginationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PaginationResponse.ProtoReflect.Descriptor instead.
-func (*PaginationResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *PaginationResponse) GetTotalSize() *wrapperspb.UInt32Value {
-	if x != nil {
-		return x.TotalSize
-	}
-	return nil
-}
-
-func (x *PaginationResponse) GetNextPageToken() *wrapperspb.StringValue {
-	if x != nil {
-		return x.NextPageToken
-	}
-	return nil
-}
-
 type AlertEventMultiplePermutation struct {
 	state                         protoimpl.MessageState `protogen:"open.v1"`
 	AlertEventMultiplePermutation []*AlertEvent          `protobuf:"bytes,1,rep,name=alert_event_multiple_permutation,json=alertEventMultiplePermutation,proto3" json:"alert_event_multiple_permutation,omitempty"`
@@ -670,7 +566,7 @@ type AlertEventMultiplePermutation struct {
 
 func (x *AlertEventMultiplePermutation) Reset() {
 	*x = AlertEventMultiplePermutation{}
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -682,7 +578,7 @@ func (x *AlertEventMultiplePermutation) String() string {
 func (*AlertEventMultiplePermutation) ProtoMessage() {}
 
 func (x *AlertEventMultiplePermutation) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -695,7 +591,7 @@ func (x *AlertEventMultiplePermutation) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlertEventMultiplePermutation.ProtoReflect.Descriptor instead.
 func (*AlertEventMultiplePermutation) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *AlertEventMultiplePermutation) GetAlertEventMultiplePermutation() []*AlertEvent {
@@ -715,7 +611,7 @@ type AlertEventOrderBy struct {
 
 func (x *AlertEventOrderBy) Reset() {
 	*x = AlertEventOrderBy{}
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -727,7 +623,7 @@ func (x *AlertEventOrderBy) String() string {
 func (*AlertEventOrderBy) ProtoMessage() {}
 
 func (x *AlertEventOrderBy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -740,7 +636,7 @@ func (x *AlertEventOrderBy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AlertEventOrderBy.ProtoReflect.Descriptor instead.
 func (*AlertEventOrderBy) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *AlertEventOrderBy) GetFieldName() OrderByAlertEventFields {
@@ -761,7 +657,7 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_service_proto protoreflec
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc3\x01\n" +
+	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
 	"\x19GetAlertEventStatsRequest\x12.\n" +
 	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x03ids\x12K\n" +
 	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys:)\x92A&\n" +
@@ -806,15 +702,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"pagination\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.PaginationResponseR\n" +
 	"pagination:\x1f\x92A\x1c\n" +
 	"\x1a*\x18Get alert event responseB\r\n" +
-	"\valert_event\"\x8b\x01\n" +
-	"\x11PaginationRequest\x129\n" +
-	"\tpage_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueR\bpageSize\x12;\n" +
-	"\n" +
-	"page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\tpageToken\"\x97\x01\n" +
-	"\x12PaginationResponse\x12;\n" +
-	"\n" +
-	"total_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueR\ttotalSize\x12D\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rnextPageToken\"\x91\x01\n" +
+	"\valert_event\"\x91\x01\n" +
 	"\x1dAlertEventMultiplePermutation\x12p\n" +
 	" alert_event_multiple_permutation\x18\x01 \x03(\v2'.com.coralogixapis.alerts.v3.AlertEventR\x1dalertEventMultiplePermutation\"\xbf\x01\n" +
 	"\x11AlertEventOrderBy\x12S\n" +
@@ -867,7 +755,7 @@ func file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDescGZI
 }
 
 var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_goTypes = []any{
 	(OrderByAlertEventFields)(0),          // 0: com.coralogixapis.alerts.v3.OrderByAlertEventFields
 	(OrderByAlertEventDirection)(0),       // 1: com.coralogixapis.alerts.v3.OrderByAlertEventDirection
@@ -878,53 +766,49 @@ var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_goTypes = [
 	(*ActivityAnalysisStats)(nil),         // 6: com.coralogixapis.alerts.v3.ActivityAnalysisStats
 	(*GetAlertEventRequest)(nil),          // 7: com.coralogixapis.alerts.v3.GetAlertEventRequest
 	(*GetAlertEventResponse)(nil),         // 8: com.coralogixapis.alerts.v3.GetAlertEventResponse
-	(*PaginationRequest)(nil),             // 9: com.coralogixapis.alerts.v3.PaginationRequest
-	(*PaginationResponse)(nil),            // 10: com.coralogixapis.alerts.v3.PaginationResponse
-	(*AlertEventMultiplePermutation)(nil), // 11: com.coralogixapis.alerts.v3.AlertEventMultiplePermutation
-	(*AlertEventOrderBy)(nil),             // 12: com.coralogixapis.alerts.v3.AlertEventOrderBy
-	nil,                                   // 13: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry
-	nil,                                   // 14: com.coralogixapis.alerts.v3.Permutation.PermutationLabelsEntry
-	(*wrapperspb.StringValue)(nil),        // 15: google.protobuf.StringValue
-	(*wrapperspb.UInt32Value)(nil),        // 16: google.protobuf.UInt32Value
-	(*AlertEvent)(nil),                    // 17: com.coralogixapis.alerts.v3.AlertEvent
+	(*AlertEventMultiplePermutation)(nil), // 9: com.coralogixapis.alerts.v3.AlertEventMultiplePermutation
+	(*AlertEventOrderBy)(nil),             // 10: com.coralogixapis.alerts.v3.AlertEventOrderBy
+	nil,                                   // 11: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry
+	nil,                                   // 12: com.coralogixapis.alerts.v3.Permutation.PermutationLabelsEntry
+	(*wrapperspb.StringValue)(nil),        // 13: google.protobuf.StringValue
+	(*wrapperspb.UInt32Value)(nil),        // 14: google.protobuf.UInt32Value
+	(*PaginationRequest)(nil),             // 15: com.coralogixapis.alerts.v3.PaginationRequest
+	(*AlertEvent)(nil),                    // 16: com.coralogixapis.alerts.v3.AlertEvent
+	(*PaginationResponse)(nil),            // 17: com.coralogixapis.alerts.v3.PaginationResponse
 }
 var file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_depIdxs = []int32{
-	15, // 0: com.coralogixapis.alerts.v3.GetAlertEventStatsRequest.ids:type_name -> google.protobuf.StringValue
-	12, // 1: com.coralogixapis.alerts.v3.GetAlertEventStatsRequest.order_bys:type_name -> com.coralogixapis.alerts.v3.AlertEventOrderBy
-	13, // 2: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.events_stats:type_name -> com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry
-	14, // 3: com.coralogixapis.alerts.v3.Permutation.permutation_labels:type_name -> com.coralogixapis.alerts.v3.Permutation.PermutationLabelsEntry
-	16, // 4: com.coralogixapis.alerts.v3.EventStats.count:type_name -> google.protobuf.UInt32Value
-	16, // 5: com.coralogixapis.alerts.v3.EventStats.resolved_count:type_name -> google.protobuf.UInt32Value
-	16, // 6: com.coralogixapis.alerts.v3.EventStats.triggered_count:type_name -> google.protobuf.UInt32Value
+	13, // 0: com.coralogixapis.alerts.v3.GetAlertEventStatsRequest.ids:type_name -> google.protobuf.StringValue
+	10, // 1: com.coralogixapis.alerts.v3.GetAlertEventStatsRequest.order_bys:type_name -> com.coralogixapis.alerts.v3.AlertEventOrderBy
+	11, // 2: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.events_stats:type_name -> com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry
+	12, // 3: com.coralogixapis.alerts.v3.Permutation.permutation_labels:type_name -> com.coralogixapis.alerts.v3.Permutation.PermutationLabelsEntry
+	14, // 4: com.coralogixapis.alerts.v3.EventStats.count:type_name -> google.protobuf.UInt32Value
+	14, // 5: com.coralogixapis.alerts.v3.EventStats.resolved_count:type_name -> google.protobuf.UInt32Value
+	14, // 6: com.coralogixapis.alerts.v3.EventStats.triggered_count:type_name -> google.protobuf.UInt32Value
 	4,  // 7: com.coralogixapis.alerts.v3.EventStats.triggered_permutations_samples:type_name -> com.coralogixapis.alerts.v3.Permutation
 	4,  // 8: com.coralogixapis.alerts.v3.EventStats.resolved_permutations_samples:type_name -> com.coralogixapis.alerts.v3.Permutation
 	6,  // 9: com.coralogixapis.alerts.v3.EventStats.activity_analysis_stats:type_name -> com.coralogixapis.alerts.v3.ActivityAnalysisStats
-	16, // 10: com.coralogixapis.alerts.v3.ActivityAnalysisStats.is_muted_count:type_name -> google.protobuf.UInt32Value
-	15, // 11: com.coralogixapis.alerts.v3.ActivityAnalysisStats.rules:type_name -> google.protobuf.StringValue
-	15, // 12: com.coralogixapis.alerts.v3.GetAlertEventRequest.id:type_name -> google.protobuf.StringValue
-	12, // 13: com.coralogixapis.alerts.v3.GetAlertEventRequest.order_bys:type_name -> com.coralogixapis.alerts.v3.AlertEventOrderBy
-	9,  // 14: com.coralogixapis.alerts.v3.GetAlertEventRequest.pagination:type_name -> com.coralogixapis.alerts.v3.PaginationRequest
-	15, // 15: com.coralogixapis.alerts.v3.GetAlertEventResponse.id:type_name -> google.protobuf.StringValue
-	17, // 16: com.coralogixapis.alerts.v3.GetAlertEventResponse.single_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEvent
-	11, // 17: com.coralogixapis.alerts.v3.GetAlertEventResponse.multiple_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEventMultiplePermutation
-	10, // 18: com.coralogixapis.alerts.v3.GetAlertEventResponse.pagination:type_name -> com.coralogixapis.alerts.v3.PaginationResponse
-	16, // 19: com.coralogixapis.alerts.v3.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
-	15, // 20: com.coralogixapis.alerts.v3.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
-	16, // 21: com.coralogixapis.alerts.v3.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
-	15, // 22: com.coralogixapis.alerts.v3.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
-	17, // 23: com.coralogixapis.alerts.v3.AlertEventMultiplePermutation.alert_event_multiple_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEvent
-	0,  // 24: com.coralogixapis.alerts.v3.AlertEventOrderBy.field_name:type_name -> com.coralogixapis.alerts.v3.OrderByAlertEventFields
-	1,  // 25: com.coralogixapis.alerts.v3.AlertEventOrderBy.direction:type_name -> com.coralogixapis.alerts.v3.OrderByAlertEventDirection
-	5,  // 26: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry.value:type_name -> com.coralogixapis.alerts.v3.EventStats
-	7,  // 27: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEvent:input_type -> com.coralogixapis.alerts.v3.GetAlertEventRequest
-	2,  // 28: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEventsStats:input_type -> com.coralogixapis.alerts.v3.GetAlertEventStatsRequest
-	8,  // 29: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEvent:output_type -> com.coralogixapis.alerts.v3.GetAlertEventResponse
-	3,  // 30: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEventsStats:output_type -> com.coralogixapis.alerts.v3.GetAlertEventStatsResponse
-	29, // [29:31] is the sub-list for method output_type
-	27, // [27:29] is the sub-list for method input_type
-	27, // [27:27] is the sub-list for extension type_name
-	27, // [27:27] is the sub-list for extension extendee
-	0,  // [0:27] is the sub-list for field type_name
+	14, // 10: com.coralogixapis.alerts.v3.ActivityAnalysisStats.is_muted_count:type_name -> google.protobuf.UInt32Value
+	13, // 11: com.coralogixapis.alerts.v3.ActivityAnalysisStats.rules:type_name -> google.protobuf.StringValue
+	13, // 12: com.coralogixapis.alerts.v3.GetAlertEventRequest.id:type_name -> google.protobuf.StringValue
+	10, // 13: com.coralogixapis.alerts.v3.GetAlertEventRequest.order_bys:type_name -> com.coralogixapis.alerts.v3.AlertEventOrderBy
+	15, // 14: com.coralogixapis.alerts.v3.GetAlertEventRequest.pagination:type_name -> com.coralogixapis.alerts.v3.PaginationRequest
+	13, // 15: com.coralogixapis.alerts.v3.GetAlertEventResponse.id:type_name -> google.protobuf.StringValue
+	16, // 16: com.coralogixapis.alerts.v3.GetAlertEventResponse.single_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEvent
+	9,  // 17: com.coralogixapis.alerts.v3.GetAlertEventResponse.multiple_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEventMultiplePermutation
+	17, // 18: com.coralogixapis.alerts.v3.GetAlertEventResponse.pagination:type_name -> com.coralogixapis.alerts.v3.PaginationResponse
+	16, // 19: com.coralogixapis.alerts.v3.AlertEventMultiplePermutation.alert_event_multiple_permutation:type_name -> com.coralogixapis.alerts.v3.AlertEvent
+	0,  // 20: com.coralogixapis.alerts.v3.AlertEventOrderBy.field_name:type_name -> com.coralogixapis.alerts.v3.OrderByAlertEventFields
+	1,  // 21: com.coralogixapis.alerts.v3.AlertEventOrderBy.direction:type_name -> com.coralogixapis.alerts.v3.OrderByAlertEventDirection
+	5,  // 22: com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntry.value:type_name -> com.coralogixapis.alerts.v3.EventStats
+	7,  // 23: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEvent:input_type -> com.coralogixapis.alerts.v3.GetAlertEventRequest
+	2,  // 24: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEventsStats:input_type -> com.coralogixapis.alerts.v3.GetAlertEventStatsRequest
+	8,  // 25: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEvent:output_type -> com.coralogixapis.alerts.v3.GetAlertEventResponse
+	3,  // 26: com.coralogixapis.alerts.v3.AlertEventService.GetAlertEventsStats:output_type -> com.coralogixapis.alerts.v3.GetAlertEventStatsResponse
+	25, // [25:27] is the sub-list for method output_type
+	23, // [23:25] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_init() }
@@ -933,6 +817,7 @@ func file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_init() {
 		return
 	}
 	file_com_coralogixapis_alerts_v3_event_alert_event_proto_init()
+	file_com_coralogixapis_alerts_v3_pagination_proto_init()
 	file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_msgTypes[6].OneofWrappers = []any{
 		(*GetAlertEventResponse_SinglePermutation)(nil),
 		(*GetAlertEventResponse_MultiplePermutation)(nil),
@@ -943,7 +828,7 @@ func file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   13,
+			NumMessages:   11,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

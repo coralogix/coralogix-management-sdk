@@ -26,15 +26,23 @@ use crate::{
 };
 
 pub use cx_api::proto::com::coralogixapis::slo::v1::{
+    IsFilterPredicate,
     Metric,
-    MetricSli,
+    RequestBasedMetricSli,
     Slo,
+    SloConstantFilterField,
+    SloFilter,
+    SloFilterField,
+    SloFilterPredicate,
     SloFilters,
     SloTimeFrame,
+    WindowBasedMetricSli,
     slo::{
         Sli,
         Window,
     },
+    slo_filter_field::Field,
+    slo_filter_predicate::Predicate,
 };
 
 use cx_api::proto::com::coralogixapis::slo::v1::slos_service_client::SlosServiceClient;
@@ -106,9 +114,8 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint:
-                        "/com.coralogixapis.apm.services.v1.ServiceSloService/CreateServiceSlo"
-                            .to_string(),
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/CreateServiceSlo"
+                        .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
@@ -130,9 +137,8 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint:
-                        "/com.coralogixapis.apm.services.v1.ServiceSloService/ReplaceServiceSlo"
-                            .to_string(),
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/ReplaceServiceSlo"
+                        .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
@@ -153,9 +159,8 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint:
-                        "/com.coralogixapis.apm.services.v1.ServiceSloService/DeleteServiceSlo"
-                            .to_string(),
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/DeleteServiceSlo"
+                        .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
@@ -177,7 +182,7 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint: "/com.coralogixapis.apm.services.v1.ServiceSloService/GetServiceSlo"
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/GetServiceSlo"
                         .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
@@ -200,9 +205,8 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint:
-                        "/com.coralogixapis.apm.services.v1.ServiceSloService/BatchGetServiceSlos"
-                            .to_string(),
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/BatchGetServiceSlos"
+                        .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })
@@ -224,9 +228,8 @@ impl SloClient {
             .map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
-                    endpoint:
-                        "/com.coralogixapis.apm.services.v1.ServiceSloService/ListServiceSlos"
-                            .to_string(),
+                    endpoint: "/com.coralogixapis.slo.v1.ServiceSloService/ListServiceSlos"
+                        .to_string(),
                     feature_group: INFRA_MONITORING_FEATURE_GROUP_ID.to_string(),
                 })
             })

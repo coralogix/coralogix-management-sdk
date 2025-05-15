@@ -1,0 +1,112 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message SloThresholdType {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SLO Threshold Type"
+      description: "SLO threshold type definition"
+      required: [
+        "slo_definition",
+        "threshold"
+      ]
+    }
+  };
+  SloDefinition slo_definition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "SLO definition"}];
+  oneof threshold {
+    ErrorBudgetThreshold error_budget = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Error budget threshold"}];
+    BurnRateThreshold burn_rate = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Burn rate threshold"}];
+  }
+}
+
+message ErrorBudgetThreshold {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Error Budget Threshold"
+      description: "Error budget threshold definition"
+      required: ["rules"]
+    }
+  };
+  repeated SloThresholdRule rules = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the error budget threshold"
+    min_items: 1
+    max_items: 5
+  }];
+}
+
+message SloThresholdRule {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SLO Threshold Rule"
+      description: "SLO threshold rule definition"
+      required: [
+        "condition",
+        "override"
+      ]
+    }
+  };
+  SloThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Condition for the SLO threshold rule"}];
+  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The override settings for the alert"}];
+}
+
+message SloThresholdCondition {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SLO Threshold Condition"
+      description: "Condition for the SLO threshold rule"
+      required: ["threshold"]
+    }
+  };
+  google.protobuf.DoubleValue threshold = 1;
+}
+
+message BurnRateThreshold {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Burn Rate Threshold"
+      description: "Burn rate threshold definition"
+      required: [
+        "rules",
+        "type"
+      ]
+    }
+  };
+  repeated SloThresholdRule rules = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The rules for the burn rate threshold"
+    min_items: 1
+    max_items: 5
+  }];
+  oneof type {
+    BurnRateTypeDual dual = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Burn rate type dual"}];
+    BurnRateTypeSingle single = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Burn rate type single"}];
+  }
+}
+
+message BurnRateTypeSingle {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Burn Rate Type Single"
+      description: "Burn rate type single definition"
+      required: ["time_duration"]
+    }
+  };
+  TimeDuration time_duration = 1;
+}
+
+message BurnRateTypeDual {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Burn Rate Type Dual"
+      description: "Burn rate type dual definition"
+      required: ["time_duration"]
+    }
+  };
+  TimeDuration time_duration = 1;
+}

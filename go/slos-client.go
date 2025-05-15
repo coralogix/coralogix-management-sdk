@@ -20,7 +20,7 @@ import (
 	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/slo/v1"
 )
 
-// ServiceSlo is an SLO.
+// Slo is an SLO.
 type Slo = slos.Slo
 
 // CreateServiceSloRequest is a request to create an SLO.
@@ -35,14 +35,41 @@ type ReplaceServiceSloRequest = slos.ReplaceSloRequest
 // DeleteServiceSloRequest is a request to delete an SLO.
 type DeleteServiceSloRequest = slos.DeleteSloRequest
 
-// SliFilter is an SLO filter.
+// SloFilter is an SLO filter.
 type SloFilter = slos.SloFilter
 
-// SloMetricSli is a metric SLI.
-type SloMetricSli = slos.Slo_MetricSli
+// SloFilterField is an SLO filter field.
+type SloFilterField = slos.SloFilterField
 
-// MetricSli is a metric SLI.
-type MetricSli = slos.MetricSli
+// SloConstantFilterField is an SLO constant filter.
+type SloConstantFilterField = slos.SloFilterField_ConstFilter
+
+// SloConstantFilterFieldEnum is an SLO constant filter field enum.
+type SloConstantFilterFieldEnum = slos.SloConstantFilterField
+
+// SloLabelNameFilterField is an SLO label name filter.
+type SloLabelNameFilterField = slos.SloFilterField_LabelName
+
+// SloFilterPredicate is an SLO filter predicate.
+type SloFilterPredicate = slos.SloFilterPredicate
+
+// SloFilterPredicateIs is an SLO filter predicate is.
+type SloFilterPredicateIs = slos.SloFilterPredicate_Is
+
+// IsSloFilterPredicate is an SLO filter is predicate.
+type IsSloFilterPredicate = slos.IsFilterPredicate
+
+// SloRequestBasedMetricSli is a metric SLI.
+type SloRequestBasedMetricSli = slos.Slo_RequestBasedMetricSli
+
+// SloWindowBasedMetricSli is a metric SLI.
+type SloWindowBasedMetricSli = slos.Slo_WindowBasedMetricSli
+
+// WindowBasedMetricSli is a window-based metric SLI.
+type WindowBasedMetricSli = slos.WindowBasedMetricSli
+
+// RequestBasedMetricSli is a metric SLI.
+type RequestBasedMetricSli = slos.RequestBasedMetricSli
 
 // Metric is a metric.
 type Metric = slos.Metric
@@ -50,7 +77,17 @@ type Metric = slos.Metric
 // SloTimeframe is an SLO time frame.
 type SloTimeframe = slos.Slo_SloTimeFrame
 
+// SloTimeframeEnum is an enum type for SLO time frames.
 type SloTimeframeEnum = slos.SloTimeFrame
+
+// ListSlosRequest is a request to list SLOs.
+type ListSlosRequest = slos.ListSlosRequest
+
+// ListSlosResponse is a response to a list SLOs request.
+type ListSlosResponse = slos.ListSlosResponse
+
+// SloFilters is a type that allows to filter SLOs.
+type SloFilters = slos.SloFilters
 
 // SloTimeframe variants
 const (
@@ -60,6 +97,12 @@ const (
 	SloTimeframe21Days      = slos.SloTimeFrame_SLO_TIME_FRAME_21_DAYS
 	SloTimeframe28Days      = slos.SloTimeFrame_SLO_TIME_FRAME_28_DAYS
 	SloTimeframe90Days      = slos.SloTimeFrame_SLO_TIME_FRAME_90_DAYS
+)
+
+// SloFilterField variants
+const (
+	SloConstantFilterFieldUnspecified = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_UNSPECIFIED
+	SloConstantFilterFieldUserName    = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_USER_NAME
 )
 
 // SLO RPC names

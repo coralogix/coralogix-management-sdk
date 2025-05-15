@@ -217,10 +217,11 @@ func (x *ReplaceSloRequest) GetSlo() *Slo {
 }
 
 type ReplaceSloResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Slo           *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Slo                 *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	EffectedSloAlertIds []string               `protobuf:"bytes,2,rep,name=effected_slo_alert_ids,json=effectedSloAlertIds,proto3" json:"effected_slo_alert_ids,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *ReplaceSloResponse) Reset() {
@@ -256,6 +257,13 @@ func (*ReplaceSloResponse) Descriptor() ([]byte, []int) {
 func (x *ReplaceSloResponse) GetSlo() *Slo {
 	if x != nil {
 		return x.Slo
+	}
+	return nil
+}
+
+func (x *ReplaceSloResponse) GetEffectedSloAlertIds() []string {
+	if x != nil {
+		return x.EffectedSloAlertIds
 	}
 	return nil
 }
@@ -305,9 +313,10 @@ func (x *DeleteSloRequest) GetId() string {
 }
 
 type DeleteSloResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	EffectedSloAlertIds []string               `protobuf:"bytes,1,rep,name=effected_slo_alert_ids,json=effectedSloAlertIds,proto3" json:"effected_slo_alert_ids,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *DeleteSloResponse) Reset() {
@@ -338,6 +347,13 @@ func (x *DeleteSloResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use DeleteSloResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSloResponse) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DeleteSloResponse) GetEffectedSloAlertIds() []string {
+	if x != nil {
+		return x.EffectedSloAlertIds
+	}
+	return nil
 }
 
 type GetSloRequest struct {
@@ -924,12 +940,14 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x11CreateSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"D\n" +
 	"\x11ReplaceSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"E\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"z\n" +
 	"\x12ReplaceSloResponse\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"\"\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x123\n" +
+	"\x16effected_slo_alert_ids\x18\x02 \x03(\tR\x13effectedSloAlertIds\"\"\n" +
 	"\x10DeleteSloRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"\x13\n" +
-	"\x11DeleteSloResponse\"\x1f\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id\"H\n" +
+	"\x11DeleteSloResponse\x123\n" +
+	"\x16effected_slo_alert_ids\x18\x01 \x03(\tR\x13effectedSloAlertIds\"\x1f\n" +
 	"\rGetSloRequest\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
 	"\x0eGetSloResponse\x12/\n" +
