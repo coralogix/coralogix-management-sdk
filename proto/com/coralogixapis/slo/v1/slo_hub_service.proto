@@ -1,0 +1,35 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "com/coralogixapis/slo/v1/slo_hub.proto";
+
+package com.coralogixapis.slo.v1;
+option go_package = "com/coralogixapis/slo/v1";
+
+message ListSloRowsRequest {}
+
+message ListSloRowsResponse {
+  repeated SloHubRow slo_rows = 1;
+}
+
+message GetSloDataRequest {
+  string slo_id = 1;
+}
+
+message GetSloDataResponse {
+  repeated SloPermutationData slo_permutation_data = 1;
+}
+
+service SloHubService {
+  rpc ListSloRows(ListSloRowsRequest) returns (ListSloRowsResponse) {
+    option (google.api.http) = {
+      get: "/v1/slo-hub/slo-hub-rows"
+    };
+  }
+
+  rpc GetSloData(GetSloDataRequest) returns (GetSloDataResponse) {
+    option (google.api.http) = {
+      get: "/v1/slo-hub/slo-data"
+    };
+  }
+}

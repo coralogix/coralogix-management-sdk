@@ -128,6 +128,8 @@ type Group struct {
 	//	*Group_LogsImmediate
 	//	*Group_LogsThreshold
 	//	*Group_MetricThreshold
+	//	*Group_SloBurnRateThreshold
+	//	*Group_SloErrorBudgetThreshold
 	Details       isGroup_Details `protobuf_oneof:"details"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -225,6 +227,24 @@ func (x *Group) GetMetricThreshold() *MetricThresholdNotification {
 	return nil
 }
 
+func (x *Group) GetSloBurnRateThreshold() *SloBurnRateThresholdNotification {
+	if x != nil {
+		if x, ok := x.Details.(*Group_SloBurnRateThreshold); ok {
+			return x.SloBurnRateThreshold
+		}
+	}
+	return nil
+}
+
+func (x *Group) GetSloErrorBudgetThreshold() *SloErrorBudgetThresholdNotification {
+	if x != nil {
+		if x, ok := x.Details.(*Group_SloErrorBudgetThreshold); ok {
+			return x.SloErrorBudgetThreshold
+		}
+	}
+	return nil
+}
+
 type isGroup_Details interface {
 	isGroup_Details()
 }
@@ -241,11 +261,23 @@ type Group_MetricThreshold struct {
 	MetricThreshold *MetricThresholdNotification `protobuf:"bytes,102,opt,name=metric_threshold,json=metricThreshold,proto3,oneof"`
 }
 
+type Group_SloBurnRateThreshold struct {
+	SloBurnRateThreshold *SloBurnRateThresholdNotification `protobuf:"bytes,103,opt,name=slo_burn_rate_threshold,json=sloBurnRateThreshold,proto3,oneof"`
+}
+
+type Group_SloErrorBudgetThreshold struct {
+	SloErrorBudgetThreshold *SloErrorBudgetThresholdNotification `protobuf:"bytes,104,opt,name=slo_error_budget_threshold,json=sloErrorBudgetThreshold,proto3,oneof"`
+}
+
 func (*Group_LogsImmediate) isGroup_Details() {}
 
 func (*Group_LogsThreshold) isGroup_Details() {}
 
 func (*Group_MetricThreshold) isGroup_Details() {}
+
+func (*Group_SloBurnRateThreshold) isGroup_Details() {}
+
+func (*Group_SloErrorBudgetThreshold) isGroup_Details() {}
 
 type Attachments struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
@@ -295,7 +327,7 @@ var File_com_coralogixapis_alerts_v3_notification_notification_event_proto proto
 
 const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd\x05\n" +
+	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1aScom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x1aVcom/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd\x05\n" +
 	"\x16AlertNotificationEvent\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12,\n" +
 	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12@\n" +
@@ -307,7 +339,7 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\vGroupsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
 	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.alerts.v3.GroupR\x05value:\x028\x01:r\x92Ao\n" +
-	"m*\x18Alert notification event\xd2\x01\ttimestamp\xd2\x01\x02id\xd2\x01\x06status\xd2\x01\vattachments\xd2\x01\x06groups\xd2\x01\fgrouping_key\xd2\x01\x10highest_priority\"\xa0\x06\n" +
+	"m*\x18Alert notification event\xd2\x01\ttimestamp\xd2\x01\x02id\xd2\x01\x06status\xd2\x01\vattachments\xd2\x01\x06groups\xd2\x01\fgrouping_key\xd2\x01\x10highest_priority\"\x99\b\n" +
 	"\x05Group\x12@\n" +
 	"\x06status\x18\x01 \x01(\x0e2(.com.coralogixapis.alerts.v3.AlertStatusR\x06status\x12:\n" +
 	"\n" +
@@ -318,7 +350,9 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"key_values\x18\x04 \x03(\v21.com.coralogixapis.alerts.v3.Group.KeyValuesEntryR\tkeyValues\x12_\n" +
 	"\x0elogs_immediate\x18d \x01(\v26.com.coralogixapis.alerts.v3.LogsImmediateNotificationH\x00R\rlogsImmediate\x12_\n" +
 	"\x0elogs_threshold\x18e \x01(\v26.com.coralogixapis.alerts.v3.LogsThresholdNotificationH\x00R\rlogsThreshold\x12e\n" +
-	"\x10metric_threshold\x18f \x01(\v28.com.coralogixapis.alerts.v3.MetricThresholdNotificationH\x00R\x0fmetricThreshold\x1a<\n" +
+	"\x10metric_threshold\x18f \x01(\v28.com.coralogixapis.alerts.v3.MetricThresholdNotificationH\x00R\x0fmetricThreshold\x12v\n" +
+	"\x17slo_burn_rate_threshold\x18g \x01(\v2=.com.coralogixapis.alerts.v3.SloBurnRateThresholdNotificationH\x00R\x14sloBurnRateThreshold\x12\x7f\n" +
+	"\x1aslo_error_budget_threshold\x18h \x01(\v2@.com.coralogixapis.alerts.v3.SloErrorBudgetThresholdNotificationH\x00R\x17sloErrorBudgetThreshold\x1a<\n" +
 	"\x0eKeyValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x89\x01\x92A\x85\x01\n" +
@@ -347,20 +381,22 @@ func file_com_coralogixapis_alerts_v3_notification_notification_event_proto_rawD
 
 var file_com_coralogixapis_alerts_v3_notification_notification_event_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_com_coralogixapis_alerts_v3_notification_notification_event_proto_goTypes = []any{
-	(*AlertNotificationEvent)(nil),      // 0: com.coralogixapis.alerts.v3.AlertNotificationEvent
-	(*Group)(nil),                       // 1: com.coralogixapis.alerts.v3.Group
-	(*Attachments)(nil),                 // 2: com.coralogixapis.alerts.v3.Attachments
-	nil,                                 // 3: com.coralogixapis.alerts.v3.AlertNotificationEvent.GroupsEntry
-	nil,                                 // 4: com.coralogixapis.alerts.v3.Group.KeyValuesEntry
-	(*timestamppb.Timestamp)(nil),       // 5: google.protobuf.Timestamp
-	(*wrapperspb.StringValue)(nil),      // 6: google.protobuf.StringValue
-	(AlertStatus)(0),                    // 7: com.coralogixapis.alerts.v3.AlertStatus
-	(*Priority)(nil),                    // 8: com.coralogixapis.alerts.v3.Priority
-	(*wrapperspb.BoolValue)(nil),        // 9: google.protobuf.BoolValue
-	(AlertDefPriority)(0),               // 10: com.coralogixapis.alerts.v3.AlertDefPriority
-	(*LogsImmediateNotification)(nil),   // 11: com.coralogixapis.alerts.v3.LogsImmediateNotification
-	(*LogsThresholdNotification)(nil),   // 12: com.coralogixapis.alerts.v3.LogsThresholdNotification
-	(*MetricThresholdNotification)(nil), // 13: com.coralogixapis.alerts.v3.MetricThresholdNotification
+	(*AlertNotificationEvent)(nil),              // 0: com.coralogixapis.alerts.v3.AlertNotificationEvent
+	(*Group)(nil),                               // 1: com.coralogixapis.alerts.v3.Group
+	(*Attachments)(nil),                         // 2: com.coralogixapis.alerts.v3.Attachments
+	nil,                                         // 3: com.coralogixapis.alerts.v3.AlertNotificationEvent.GroupsEntry
+	nil,                                         // 4: com.coralogixapis.alerts.v3.Group.KeyValuesEntry
+	(*timestamppb.Timestamp)(nil),               // 5: google.protobuf.Timestamp
+	(*wrapperspb.StringValue)(nil),              // 6: google.protobuf.StringValue
+	(AlertStatus)(0),                            // 7: com.coralogixapis.alerts.v3.AlertStatus
+	(*Priority)(nil),                            // 8: com.coralogixapis.alerts.v3.Priority
+	(*wrapperspb.BoolValue)(nil),                // 9: google.protobuf.BoolValue
+	(AlertDefPriority)(0),                       // 10: com.coralogixapis.alerts.v3.AlertDefPriority
+	(*LogsImmediateNotification)(nil),           // 11: com.coralogixapis.alerts.v3.LogsImmediateNotification
+	(*LogsThresholdNotification)(nil),           // 12: com.coralogixapis.alerts.v3.LogsThresholdNotification
+	(*MetricThresholdNotification)(nil),         // 13: com.coralogixapis.alerts.v3.MetricThresholdNotification
+	(*SloBurnRateThresholdNotification)(nil),    // 14: com.coralogixapis.alerts.v3.SloBurnRateThresholdNotification
+	(*SloErrorBudgetThresholdNotification)(nil), // 15: com.coralogixapis.alerts.v3.SloErrorBudgetThresholdNotification
 }
 var file_com_coralogixapis_alerts_v3_notification_notification_event_proto_depIdxs = []int32{
 	5,  // 0: com.coralogixapis.alerts.v3.AlertNotificationEvent.timestamp:type_name -> google.protobuf.Timestamp
@@ -377,13 +413,15 @@ var file_com_coralogixapis_alerts_v3_notification_notification_event_proto_depId
 	11, // 11: com.coralogixapis.alerts.v3.Group.logs_immediate:type_name -> com.coralogixapis.alerts.v3.LogsImmediateNotification
 	12, // 12: com.coralogixapis.alerts.v3.Group.logs_threshold:type_name -> com.coralogixapis.alerts.v3.LogsThresholdNotification
 	13, // 13: com.coralogixapis.alerts.v3.Group.metric_threshold:type_name -> com.coralogixapis.alerts.v3.MetricThresholdNotification
-	6,  // 14: com.coralogixapis.alerts.v3.Attachments.logExample:type_name -> google.protobuf.StringValue
-	1,  // 15: com.coralogixapis.alerts.v3.AlertNotificationEvent.GroupsEntry.value:type_name -> com.coralogixapis.alerts.v3.Group
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	14, // 14: com.coralogixapis.alerts.v3.Group.slo_burn_rate_threshold:type_name -> com.coralogixapis.alerts.v3.SloBurnRateThresholdNotification
+	15, // 15: com.coralogixapis.alerts.v3.Group.slo_error_budget_threshold:type_name -> com.coralogixapis.alerts.v3.SloErrorBudgetThresholdNotification
+	6,  // 16: com.coralogixapis.alerts.v3.Attachments.logExample:type_name -> google.protobuf.StringValue
+	1,  // 17: com.coralogixapis.alerts.v3.AlertNotificationEvent.GroupsEntry.value:type_name -> com.coralogixapis.alerts.v3.Group
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_notification_notification_event_proto_init() }
@@ -396,10 +434,14 @@ func file_com_coralogixapis_alerts_v3_notification_notification_event_proto_init
 	file_com_coralogixapis_alerts_v3_notification_logs_immediate_notification_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_logs_threshold_notification_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_metric_threshold_notification_proto_init()
+	file_com_coralogixapis_alerts_v3_notification_slo_burn_rate_threshold_notification_proto_init()
+	file_com_coralogixapis_alerts_v3_notification_slo_error_budget_threshold_notification_proto_init()
 	file_com_coralogixapis_alerts_v3_notification_notification_event_proto_msgTypes[1].OneofWrappers = []any{
 		(*Group_LogsImmediate)(nil),
 		(*Group_LogsThreshold)(nil),
 		(*Group_MetricThreshold)(nil),
+		(*Group_SloBurnRateThreshold)(nil),
+		(*Group_SloErrorBudgetThreshold)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

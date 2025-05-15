@@ -19,6 +19,13 @@ revision = "v0.0.1"
 commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
 
 [[dependencies]]
+name = "cx-api-alerts"
+url = "github.com/coralogix/cx-api-alerts"
+protocol = "ssh"
+branch = "slo"
+commit_hash = "7345cb177d1438fd8e16f9a63c149d6fb2c1b0cb"
+
+[[dependencies]]
 name = "cx-api-apm"
 url = "github.com/coralogix/cx-api-apm"
 revision = "v2.0.9"
@@ -125,6 +132,12 @@ name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
 revision = "v0.0.3"
 commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
+
+[[dependencies]]
+name = "cx-api-slo"
+url = "github.com/coralogix/cx-api-slo"
+revision = "v0.0.8"
+commit_hash = "6c40aa9732e596dff4d8c57069c89da6f9065116"
 
 [[dependencies]]
 name = "cx-api-views"

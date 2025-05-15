@@ -8,7 +8,7 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
 import "com/coralogix/common/v1/audit_log.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-
+import "com/coralogixapis/alerts/v3/pagination.proto";
 
 service AlertEventService {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -184,16 +184,6 @@ message GetAlertEventResponse {
     AlertEventMultiplePermutation multiple_permutation = 3;
   }
   PaginationResponse pagination = 4;
-}
-
-message PaginationRequest {
-  google.protobuf.UInt32Value page_size = 1;
-  google.protobuf.StringValue page_token = 2;
-}
-
-message PaginationResponse {
-  google.protobuf.UInt32Value total_size = 1;
-  google.protobuf.StringValue next_page_token = 2;
 }
 
 message AlertEventMultiplePermutation{

@@ -263,7 +263,10 @@ mod tests {
                 family_name: "example".into(),
             },
             emails: vec![ScimUserEmail {
-                value: format!("example{}@coralogix.com", chrono::Utc::now().timestamp_millis()),
+                value: format!(
+                    "example{}@coralogix.com",
+                    chrono::Utc::now().timestamp_millis()
+                ),
                 r#type: Some("work".into()),
                 primary: true,
             }],
