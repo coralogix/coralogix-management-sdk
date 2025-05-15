@@ -1002,7 +1002,7 @@ var File_com_coralogixapis_alerts_v3_alert_defs_service_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xab\x03\n" +
+	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_filter/alert_query_filter.proto\"\xab\x03\n" +
 	"\aOrderBy\x12\x8d\x01\n" +
 	"\n" +
 	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.alerts.v3.OrderByFieldsBB\x92A?2\x16Field name to order byJ%\"ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED\"R\tfieldName\x12\x91\x01\n" +
@@ -1261,6 +1261,7 @@ func file_com_coralogixapis_alerts_v3_alert_defs_service_proto_init() {
 		return
 	}
 	file_com_coralogixapis_alerts_v3_alert_def_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_filter_alert_query_filter_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

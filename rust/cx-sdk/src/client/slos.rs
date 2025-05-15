@@ -26,15 +26,23 @@ use crate::{
 };
 
 pub use cx_api::proto::com::coralogixapis::slo::v1::{
+    IsFilterPredicate,
     Metric,
-    MetricSli,
+    RequestBasedMetricSli,
     Slo,
+    SloConstantFilterField,
+    SloFilter,
+    SloFilterField,
+    SloFilterPredicate,
     SloFilters,
     SloTimeFrame,
+    WindowBasedMetricSli,
     slo::{
         Sli,
         Window,
     },
+    slo_filter_field::Field,
+    slo_filter_predicate::Predicate,
 };
 
 use cx_api::proto::com::coralogixapis::slo::v1::slos_service_client::SlosServiceClient;

@@ -7,6 +7,7 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -112,17 +113,134 @@ func (x *GetAlertDefByVersionIdInternalResponse) GetAlertDef() *AlertDef {
 	return nil
 }
 
+type ListAlertDefsInternalRequest struct {
+	state            protoimpl.MessageState    `protogen:"open.v1"`
+	AlertQueryFilter *AlertQueryFilterInternal `protobuf:"bytes,1,opt,name=alert_query_filter,json=alertQueryFilter,proto3" json:"alert_query_filter,omitempty"`
+	Pagination       *PaginationRequest        `protobuf:"bytes,20,opt,name=pagination,proto3" json:"pagination,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
+}
+
+func (x *ListAlertDefsInternalRequest) Reset() {
+	*x = ListAlertDefsInternalRequest{}
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertDefsInternalRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertDefsInternalRequest) ProtoMessage() {}
+
+func (x *ListAlertDefsInternalRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertDefsInternalRequest.ProtoReflect.Descriptor instead.
+func (*ListAlertDefsInternalRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ListAlertDefsInternalRequest) GetAlertQueryFilter() *AlertQueryFilterInternal {
+	if x != nil {
+		return x.AlertQueryFilter
+	}
+	return nil
+}
+
+func (x *ListAlertDefsInternalRequest) GetPagination() *PaginationRequest {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type ListAlertDefsInternalResponse struct {
+	state              protoimpl.MessageState `protogen:"open.v1"`
+	AlertDefs          []*AlertDef            `protobuf:"bytes,1,rep,name=alert_defs,json=alertDefs,proto3" json:"alert_defs,omitempty"`
+	PaginationResponse *PaginationResponse    `protobuf:"bytes,20,opt,name=pagination_response,json=paginationResponse,proto3" json:"pagination_response,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *ListAlertDefsInternalResponse) Reset() {
+	*x = ListAlertDefsInternalResponse{}
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListAlertDefsInternalResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlertDefsInternalResponse) ProtoMessage() {}
+
+func (x *ListAlertDefsInternalResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlertDefsInternalResponse.ProtoReflect.Descriptor instead.
+func (*ListAlertDefsInternalResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListAlertDefsInternalResponse) GetAlertDefs() []*AlertDef {
+	if x != nil {
+		return x.AlertDefs
+	}
+	return nil
+}
+
+func (x *ListAlertDefsInternalResponse) GetPaginationResponse() *PaginationResponse {
+	if x != nil {
+		return x.PaginationResponse
+	}
+	return nil
+}
+
 var File_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDesc = "" +
 	"\n" +
-	"=com/coralogixapis/alerts/v3/alert_defs_internal_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\"o\n" +
+	"=com/coralogixapis/alerts/v3/alert_defs_internal_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_filter/alert_query_filter.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"o\n" +
 	"%GetAlertDefByVersionIdInternalRequest\x12F\n" +
 	"\x10alert_version_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x0ealertVersionId\"l\n" +
 	"&GetAlertDefByVersionIdInternalResponse\x12B\n" +
-	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefR\balertDef2\x89\x02\n" +
+	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefR\balertDef\"\xa6\x02\n" +
+	"\x1cListAlertDefsInternalRequest\x12c\n" +
+	"\x12alert_query_filter\x18\x01 \x01(\v25.com.coralogixapis.alerts.v3.AlertQueryFilterInternalR\x10alertQueryFilter\x12N\n" +
+	"\n" +
+	"pagination\x18\x14 \x01(\v2..com.coralogixapis.alerts.v3.PaginationRequestR\n" +
+	"pagination:Q\x92AN\n" +
+	"L*\x1eList alert definitions request2*A request to get list of alert definitions\"\xb2\x02\n" +
+	"\x1dListAlertDefsInternalResponse\x12D\n" +
+	"\n" +
+	"alert_defs\x18\x01 \x03(\v2%.com.coralogixapis.alerts.v3.AlertDefR\talertDefs\x12`\n" +
+	"\x13pagination_response\x18\x14 \x01(\v2/.com.coralogixapis.alerts.v3.PaginationResponseR\x12paginationResponse:i\x92Af\n" +
+	"d*\x1fList alert definitions response24A response that contains a list of alert definitions\xd2\x01\n" +
+	"alert_defs2\x9c\x03\n" +
 	"\x18AlertDefsInternalService\x12\xec\x01\n" +
-	"\x1eGetAlertDefByVersionIdInternal\x12B.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest\x1aC.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse\"A\x82\xd3\xe4\x93\x02;\x129/v3/alert-defs-internal/alertVersionId/{alert_version_id}b\x06proto3"
+	"\x1eGetAlertDefByVersionIdInternal\x12B.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest\x1aC.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse\"A\x82\xd3\xe4\x93\x02;\x129/v3/alert_defs_internal/alertVersionId/{alert_version_id}\x12\x90\x01\n" +
+	"\x15ListAlertDefsInternal\x129.com.coralogixapis.alerts.v3.ListAlertDefsInternalRequest\x1a:.com.coralogixapis.alerts.v3.ListAlertDefsInternalResponse\"\x00b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDescOnce sync.Once
@@ -136,23 +254,34 @@ func file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDescG
 	return file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_goTypes = []any{
 	(*GetAlertDefByVersionIdInternalRequest)(nil),  // 0: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest
 	(*GetAlertDefByVersionIdInternalResponse)(nil), // 1: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse
-	(*wrapperspb.StringValue)(nil),                 // 2: google.protobuf.StringValue
-	(*AlertDef)(nil),                               // 3: com.coralogixapis.alerts.v3.AlertDef
+	(*ListAlertDefsInternalRequest)(nil),           // 2: com.coralogixapis.alerts.v3.ListAlertDefsInternalRequest
+	(*ListAlertDefsInternalResponse)(nil),          // 3: com.coralogixapis.alerts.v3.ListAlertDefsInternalResponse
+	(*wrapperspb.StringValue)(nil),                 // 4: google.protobuf.StringValue
+	(*AlertDef)(nil),                               // 5: com.coralogixapis.alerts.v3.AlertDef
+	(*AlertQueryFilterInternal)(nil),               // 6: com.coralogixapis.alerts.v3.AlertQueryFilterInternal
+	(*PaginationRequest)(nil),                      // 7: com.coralogixapis.alerts.v3.PaginationRequest
+	(*PaginationResponse)(nil),                     // 8: com.coralogixapis.alerts.v3.PaginationResponse
 }
 var file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_depIdxs = []int32{
-	2, // 0: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest.alert_version_id:type_name -> google.protobuf.StringValue
-	3, // 1: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	0, // 2: com.coralogixapis.alerts.v3.AlertDefsInternalService.GetAlertDefByVersionIdInternal:input_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest
-	1, // 3: com.coralogixapis.alerts.v3.AlertDefsInternalService.GetAlertDefByVersionIdInternal:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse
-	3, // [3:4] is the sub-list for method output_type
-	2, // [2:3] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest.alert_version_id:type_name -> google.protobuf.StringValue
+	5, // 1: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	6, // 2: com.coralogixapis.alerts.v3.ListAlertDefsInternalRequest.alert_query_filter:type_name -> com.coralogixapis.alerts.v3.AlertQueryFilterInternal
+	7, // 3: com.coralogixapis.alerts.v3.ListAlertDefsInternalRequest.pagination:type_name -> com.coralogixapis.alerts.v3.PaginationRequest
+	5, // 4: com.coralogixapis.alerts.v3.ListAlertDefsInternalResponse.alert_defs:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	8, // 5: com.coralogixapis.alerts.v3.ListAlertDefsInternalResponse.pagination_response:type_name -> com.coralogixapis.alerts.v3.PaginationResponse
+	0, // 6: com.coralogixapis.alerts.v3.AlertDefsInternalService.GetAlertDefByVersionIdInternal:input_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalRequest
+	2, // 7: com.coralogixapis.alerts.v3.AlertDefsInternalService.ListAlertDefsInternal:input_type -> com.coralogixapis.alerts.v3.ListAlertDefsInternalRequest
+	1, // 8: com.coralogixapis.alerts.v3.AlertDefsInternalService.GetAlertDefByVersionIdInternal:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdInternalResponse
+	3, // 9: com.coralogixapis.alerts.v3.AlertDefsInternalService.ListAlertDefsInternal:output_type -> com.coralogixapis.alerts.v3.ListAlertDefsInternalResponse
+	8, // [8:10] is the sub-list for method output_type
+	6, // [6:8] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_init() }
@@ -161,13 +290,15 @@ func file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_init() {
 		return
 	}
 	file_com_coralogixapis_alerts_v3_alert_def_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_filter_alert_query_filter_proto_init()
+	file_com_coralogixapis_alerts_v3_pagination_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_alert_defs_internal_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

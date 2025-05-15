@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "google/protobuf/wrappers.proto";
+
+message AlertQueryFilter {
+  AlertDefType alert_def_type = 1;
+}
+
+message SloThresholdFilter {
+ google.protobuf.StringValue slo_id = 1;
+}
+
+
+message AlertQueryFilterInternal {
+  oneof filter {
+    AlertDefType alert_def_type = 1;
+    SloThresholdFilter slo_threshold_filter = 2;
+  }
+}

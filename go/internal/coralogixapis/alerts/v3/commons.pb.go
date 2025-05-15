@@ -7,8 +7,10 @@
 package v3
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -67,14 +69,119 @@ func (NotifyOn) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP(), []int{0}
 }
 
+type DurationUnit int32
+
+const (
+	DurationUnit_DURATION_UNIT_UNSPECIFIED DurationUnit = 0
+	DurationUnit_DURATION_UNIT_HOURS       DurationUnit = 1
+)
+
+// Enum value maps for DurationUnit.
+var (
+	DurationUnit_name = map[int32]string{
+		0: "DURATION_UNIT_UNSPECIFIED",
+		1: "DURATION_UNIT_HOURS",
+	}
+	DurationUnit_value = map[string]int32{
+		"DURATION_UNIT_UNSPECIFIED": 0,
+		"DURATION_UNIT_HOURS":       1,
+	}
+)
+
+func (x DurationUnit) Enum() *DurationUnit {
+	p := new(DurationUnit)
+	*p = x
+	return p
+}
+
+func (x DurationUnit) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (DurationUnit) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_alerts_v3_commons_proto_enumTypes[1].Descriptor()
+}
+
+func (DurationUnit) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_alerts_v3_commons_proto_enumTypes[1]
+}
+
+func (x DurationUnit) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use DurationUnit.Descriptor instead.
+func (DurationUnit) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP(), []int{1}
+}
+
+type TimeDuration struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Duration      *wrapperspb.UInt64Value `protobuf:"bytes,1,opt,name=duration,proto3" json:"duration,omitempty"`
+	Unit          DurationUnit            `protobuf:"varint,2,opt,name=unit,proto3,enum=com.coralogixapis.alerts.v3.DurationUnit" json:"unit,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TimeDuration) Reset() {
+	*x = TimeDuration{}
+	mi := &file_com_coralogixapis_alerts_v3_commons_proto_msgTypes[0]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TimeDuration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TimeDuration) ProtoMessage() {}
+
+func (x *TimeDuration) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_alerts_v3_commons_proto_msgTypes[0]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TimeDuration.ProtoReflect.Descriptor instead.
+func (*TimeDuration) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP(), []int{0}
+}
+
+func (x *TimeDuration) GetDuration() *wrapperspb.UInt64Value {
+	if x != nil {
+		return x.Duration
+	}
+	return nil
+}
+
+func (x *TimeDuration) GetUnit() DurationUnit {
+	if x != nil {
+		return x.Unit
+	}
+	return DurationUnit_DURATION_UNIT_UNSPECIFIED
+}
+
 var File_com_coralogixapis_alerts_v3_commons_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_commons_proto_rawDesc = "" +
 	"\n" +
-	")com/coralogixapis/alerts/v3/commons.proto\x12\x1bcom.coralogixapis.alerts.v3*Z\n" +
+	")com/coralogixapis/alerts/v3/commons.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa3\x02\n" +
+	"\fTimeDuration\x12U\n" +
+	"\bduration\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\x1b\x92A\x182\x12The duration valueJ\x0260R\bduration\x12s\n" +
+	"\x04unit\x18\x02 \x01(\x0e2).com.coralogixapis.alerts.v3.DurationUnitB4\x92A12\x18The unit of the durationJ\x15\"DURATION_UNIT_HOURS\"R\x04unit:G\x92AD\n" +
+	"B*\rTime duration2\x1fConfiguration for time duration\xd2\x01\bduration\xd2\x01\x04unit*Z\n" +
 	"\bNotifyOn\x12(\n" +
 	"$NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED\x10\x00\x12$\n" +
-	" NOTIFY_ON_TRIGGERED_AND_RESOLVED\x10\x01b\x06proto3"
+	" NOTIFY_ON_TRIGGERED_AND_RESOLVED\x10\x01*F\n" +
+	"\fDurationUnit\x12\x1d\n" +
+	"\x19DURATION_UNIT_UNSPECIFIED\x10\x00\x12\x17\n" +
+	"\x13DURATION_UNIT_HOURS\x10\x01b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_commons_proto_rawDescOnce sync.Once
@@ -88,16 +195,22 @@ func file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescData
 }
 
-var file_com_coralogixapis_alerts_v3_commons_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_com_coralogixapis_alerts_v3_commons_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_com_coralogixapis_alerts_v3_commons_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_com_coralogixapis_alerts_v3_commons_proto_goTypes = []any{
-	(NotifyOn)(0), // 0: com.coralogixapis.alerts.v3.NotifyOn
+	(NotifyOn)(0),                  // 0: com.coralogixapis.alerts.v3.NotifyOn
+	(DurationUnit)(0),              // 1: com.coralogixapis.alerts.v3.DurationUnit
+	(*TimeDuration)(nil),           // 2: com.coralogixapis.alerts.v3.TimeDuration
+	(*wrapperspb.UInt64Value)(nil), // 3: google.protobuf.UInt64Value
 }
 var file_com_coralogixapis_alerts_v3_commons_proto_depIdxs = []int32{
-	0, // [0:0] is the sub-list for method output_type
-	0, // [0:0] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3, // 0: com.coralogixapis.alerts.v3.TimeDuration.duration:type_name -> google.protobuf.UInt64Value
+	1, // 1: com.coralogixapis.alerts.v3.TimeDuration.unit:type_name -> com.coralogixapis.alerts.v3.DurationUnit
+	2, // [2:2] is the sub-list for method output_type
+	2, // [2:2] is the sub-list for method input_type
+	2, // [2:2] is the sub-list for extension type_name
+	2, // [2:2] is the sub-list for extension extendee
+	0, // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_commons_proto_init() }
@@ -110,14 +223,15 @@ func file_com_coralogixapis_alerts_v3_commons_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_commons_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_commons_proto_rawDesc)),
-			NumEnums:      1,
-			NumMessages:   0,
+			NumEnums:      2,
+			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_com_coralogixapis_alerts_v3_commons_proto_goTypes,
 		DependencyIndexes: file_com_coralogixapis_alerts_v3_commons_proto_depIdxs,
 		EnumInfos:         file_com_coralogixapis_alerts_v3_commons_proto_enumTypes,
+		MessageInfos:      file_com_coralogixapis_alerts_v3_commons_proto_msgTypes,
 	}.Build()
 	File_com_coralogixapis_alerts_v3_commons_proto = out.File
 	file_com_coralogixapis_alerts_v3_commons_proto_goTypes = nil

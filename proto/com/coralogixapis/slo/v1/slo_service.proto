@@ -3,7 +3,6 @@ import "google/protobuf/wrappers.proto";
 import "google/api/annotations.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
-//import "protoc-gen-openapiv2/options/annotations.proto";
 
 package com.coralogixapis.slo.v1;
 option go_package = "com/coralogixapis/slo/v1";
@@ -28,13 +27,16 @@ message ReplaceSloRequest {
 
 message ReplaceSloResponse {
   Slo slo = 1;
+  repeated string effected_slo_alert_ids = 2;
 }
 
 message DeleteSloRequest {
   string id = 1;
 }
 
-message DeleteSloResponse {}
+message DeleteSloResponse {
+  repeated string effected_slo_alert_ids = 1;
+}
 
 message GetSloRequest {
   string id = 1;
