@@ -22,7 +22,11 @@ mod tests {
         Type,
     };
     use cx_sdk::client::enrichments::{
-        AwsType, CustomEnrichmentType, EnrichmentsClient, GeoIpType, SuspiciousIpType
+        AwsType,
+        CustomEnrichmentType,
+        EnrichmentsClient,
+        GeoIpType,
+        SuspiciousIpType,
     };
 
     #[tokio::test]
@@ -88,13 +92,13 @@ mod tests {
         let field_mappings = vec![EnrichmentMapping {
             field_name: Some("coralogix.metadata.sdkId".to_string()),
             enrichment_type: Some(EnrichmentType {
-                r#type: Some(Type::Aws(AwsType { resource_type: Some("ec2".into()) })),
+                r#type: Some(Type::Aws(AwsType {
+                    resource_type: Some("ec2".into()),
+                })),
             }),
             enriched_field_name: None,
             selected_columns: vec![],
         }];
-
-        println!("{:?}", field_mappings);
 
         // Test adding enrichments
         let creation_response = client.add(field_mappings).await.unwrap();
@@ -126,7 +130,6 @@ mod tests {
         );
     }
 
-
     #[tokio::test]
     #[should_panic]
     async fn test_enrichments_custom() {
@@ -140,13 +143,11 @@ mod tests {
         let field_mappings = vec![EnrichmentMapping {
             field_name: Some("coralogix.metadata.sdkId".to_string()),
             enrichment_type: Some(EnrichmentType {
-                r#type: Some(Type::CustomEnrichment(CustomEnrichmentType { id: None  })),
+                r#type: Some(Type::CustomEnrichment(CustomEnrichmentType { id: None })),
             }),
             enriched_field_name: None,
             selected_columns: vec![],
         }];
-
-        println!("{:?}", field_mappings);
 
         // Test adding enrichments
         let creation_response = client.add(field_mappings).await.unwrap();
@@ -190,13 +191,11 @@ mod tests {
         let field_mappings = vec![EnrichmentMapping {
             field_name: Some("coralogix.metadata.sdkId".to_string()),
             enrichment_type: Some(EnrichmentType {
-                r#type: Some(Type::SuspiciousIp(SuspiciousIpType { })),
+                r#type: Some(Type::SuspiciousIp(SuspiciousIpType {})),
             }),
             enriched_field_name: None,
             selected_columns: vec![],
         }];
-
-        println!("{:?}", field_mappings);
 
         // Test adding enrichments
         let creation_response = client.add(field_mappings).await.unwrap();

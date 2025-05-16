@@ -119,8 +119,8 @@ func TestSlackConnector(t *testing.T) {
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
 				{FieldName: "integrationId", Value: "c6e72871-388b-4776-a7de-8b7d17ed4828"},
-				{FieldName: "fallbackChannel", Value: "iac-internal"},
-				{FieldName: "channel", Value: "iac-internal"},
+				{FieldName: "fallbackChannel", Value: "luigis-testing-grounds"},
+				{FieldName: "channel", Value: "luigis-testing-grounds"},
 			},
 		},
 		ConfigOverrides: []*cxsdk.EntityTypeConfigOverrides{
