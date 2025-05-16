@@ -22,12 +22,15 @@ mod tests {
         Type,
     };
     use cx_sdk::client::enrichments::{
+        AwsType,
+        CustomEnrichmentType,
         EnrichmentsClient,
         GeoIpType,
+        SuspiciousIpType,
     };
 
     #[tokio::test]
-    async fn test_enrichments() {
+    async fn test_enrichments_geo() {
         let client = EnrichmentsClient::new(
             AuthContext::from_env(),
             CoralogixRegion::from_env().unwrap(),
@@ -41,6 +44,154 @@ mod tests {
                 r#type: Some(Type::GeoIp(GeoIpType {
                     with_asn: Some(true),
                 })),
+            }),
+            enriched_field_name: None,
+            selected_columns: vec![],
+        }];
+
+        // Test adding enrichments
+        let creation_response = client.add(field_mappings).await.unwrap();
+
+        let enrichment_ids = creation_response
+            .enrichments
+            .iter()
+            .map(|e| e.id)
+            .collect::<Vec<_>>();
+
+        //Test retrieving enrichments
+        let enrichments_with_created_enrichments = client.list().await.unwrap();
+        assert!(
+            enrichments_with_created_enrichments
+                .enrichments
+                .iter()
+                .any(|e| enrichment_ids.contains(&e.id))
+        );
+
+        //Test deleting enrichments
+        let _ = client.delete(enrichment_ids.clone()).await.unwrap();
+
+        let enrichments_after_deletion = client.list().await.unwrap();
+        assert!(
+            enrichments_after_deletion
+                .enrichments
+                .iter()
+                .all(|e| !enrichment_ids.contains(&e.id))
+        );
+    }
+
+    #[tokio::test]
+    #[should_panic]
+    async fn test_enrichments_aws() {
+        let client = EnrichmentsClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        // Create field mappings for testing
+        let field_mappings = vec![EnrichmentMapping {
+            field_name: Some("coralogix.metadata.sdkId".to_string()),
+            enrichment_type: Some(EnrichmentType {
+                r#type: Some(Type::Aws(AwsType {
+                    resource_type: Some("ec2".into()),
+                })),
+            }),
+            enriched_field_name: None,
+            selected_columns: vec![],
+        }];
+
+        // Test adding enrichments
+        let creation_response = client.add(field_mappings).await.unwrap();
+
+        let enrichment_ids = creation_response
+            .enrichments
+            .iter()
+            .map(|e| e.id)
+            .collect::<Vec<_>>();
+
+        //Test retrieving enrichments
+        let enrichments_with_created_enrichments = client.list().await.unwrap();
+        assert!(
+            enrichments_with_created_enrichments
+                .enrichments
+                .iter()
+                .any(|e| enrichment_ids.contains(&e.id))
+        );
+
+        //Test deleting enrichments
+        let _ = client.delete(enrichment_ids.clone()).await.unwrap();
+
+        let enrichments_after_deletion = client.list().await.unwrap();
+        assert!(
+            enrichments_after_deletion
+                .enrichments
+                .iter()
+                .all(|e| !enrichment_ids.contains(&e.id))
+        );
+    }
+
+    #[tokio::test]
+    #[should_panic]
+    async fn test_enrichments_custom() {
+        let client = EnrichmentsClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        // Create field mappings for testing
+        let field_mappings = vec![EnrichmentMapping {
+            field_name: Some("coralogix.metadata.sdkId".to_string()),
+            enrichment_type: Some(EnrichmentType {
+                r#type: Some(Type::CustomEnrichment(CustomEnrichmentType { id: None })),
+            }),
+            enriched_field_name: None,
+            selected_columns: vec![],
+        }];
+
+        // Test adding enrichments
+        let creation_response = client.add(field_mappings).await.unwrap();
+
+        let enrichment_ids = creation_response
+            .enrichments
+            .iter()
+            .map(|e| e.id)
+            .collect::<Vec<_>>();
+
+        //Test retrieving enrichments
+        let enrichments_with_created_enrichments = client.list().await.unwrap();
+        assert!(
+            enrichments_with_created_enrichments
+                .enrichments
+                .iter()
+                .any(|e| enrichment_ids.contains(&e.id))
+        );
+
+        //Test deleting enrichments
+        let _ = client.delete(enrichment_ids.clone()).await.unwrap();
+
+        let enrichments_after_deletion = client.list().await.unwrap();
+        assert!(
+            enrichments_after_deletion
+                .enrichments
+                .iter()
+                .all(|e| !enrichment_ids.contains(&e.id))
+        );
+    }
+
+    #[tokio::test]
+    async fn test_enrichments_susip() {
+        let client = EnrichmentsClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+        .unwrap();
+
+        // Create field mappings for testing
+        let field_mappings = vec![EnrichmentMapping {
+            field_name: Some("coralogix.metadata.sdkId".to_string()),
+            enrichment_type: Some(EnrichmentType {
+                r#type: Some(Type::SuspiciousIp(SuspiciousIpType {})),
             }),
             enriched_field_name: None,
             selected_columns: vec![],
