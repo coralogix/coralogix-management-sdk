@@ -133,11 +133,11 @@ mod tests {
                     },
                     ConnectorConfigField {
                         field_name: "channel".into(),
-                        value: "iac-internal".into(),
+                        value: "luigis-testing-grounds".into(),
                     },
                     ConnectorConfigField {
                         field_name: "fallbackChannel".into(),
-                        value: "iac-internal".into(),
+                        value: "luigis-testing-grounds".into(),
                     },
                 ],
             }),
