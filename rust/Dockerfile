@@ -14,11 +14,11 @@
 
 
 ARG TARGETARCH
-FROM rust:1.85.0-slim-bullseye as interim
-FROM interim as interim-amd64
+FROM rust:1.85.0-slim-bullseye AS interim
+FROM interim AS interim-amd64
 ENV ARCH=x86_64
-FROM interim as interim-arm64
-ENV ARCH=aarch64
+FROM interim AS interim-arm64
+ENV ARCH=aarch_64
 
 FROM interim-${TARGETARCH}
 ENV PB_REL="https://github.com/protocolbuffers/protobuf/releases"
