@@ -24,7 +24,7 @@ jobs:
       - uses: aws-actions/amazon-ecr-login@v2
       - uses: docker/build-push-action@v6
         with:
-          platforms: linux/amd64
+          platforms: linux/amd64,linux/arm64
           context: .
           file: rust/Dockerfile
           push: true
