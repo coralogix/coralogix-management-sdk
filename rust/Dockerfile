@@ -13,16 +13,23 @@
 # limitations under the License.
 
 
-FROM rust:1.85.0-slim-bullseye
+ARG TARGETARCH
+FROM rust:1.85.0-slim-bullseye AS interim
+FROM interim AS interim-amd64
+ENV ARCH=x86_64
+FROM interim AS interim-arm64
+ENV ARCH=aarch_64
+
+FROM interim-${TARGETARCH}
 ENV PB_REL="https://github.com/protocolbuffers/protobuf/releases"
 ENV RUST_BACKTRACE=1
 
 WORKDIR /app
 ADD . /app
 WORKDIR /app/rust/examples
-ADD $PB_REL/download/v25.1/protoc-25.1-linux-x86_64.zip /tmp
+ADD $PB_REL/download/v25.1/protoc-25.1-linux-${ARCH}.zip /tmp
 RUN apt update && \
     apt install -y unzip pkg-config libssl-dev curl && \
-    unzip /tmp/protoc-25.1-linux-x86_64.zip -d /usr && \
+    unzip /tmp/protoc-25.1-linux-${ARCH}.zip -d /usr && \
     curl -LsSf https://get.nexte.st/latest/linux | tar zxf - -C ${CARGO_HOME:-~/.cargo}/bin && \
     cargo build --tests
