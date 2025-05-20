@@ -98,7 +98,6 @@ impl ActionsClient {
             },
             &self.teams_level_metadata_map,
         );
-        //let client = self.service_client.lock().await.descri
         Ok(self
             .service_client
             .lock()

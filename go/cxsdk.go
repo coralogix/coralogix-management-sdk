@@ -93,6 +93,7 @@ type ClientSet struct {
 	tcoPolicies         *TCOPoliciesClient
 	webhooks            *WebhooksClient
 	events2Metrics      *Events2MetricsClient
+	extensions          *ExtensionsClient
 	archiveRetentions   *ArchiveRetentionsClient
 	archiveMetrics      *ArchiveMetricsClient
 	archiveLogs         *ArchiveLogsClient
@@ -166,6 +167,11 @@ func (c *ClientSet) Webhooks() *WebhooksClient {
 // Events2Metrics gets an Events2MetricsClient from the ClientSet.
 func (c *ClientSet) Events2Metrics() *Events2MetricsClient {
 	return c.events2Metrics
+}
+
+// Extensions gets an ExtensionsClient from the ClientSet.
+func (c *ClientSet) Extensions() *ExtensionsClient {
+	return c.extensions
 }
 
 // ArchiveRetentions gets an ArchiveRetentionsClient from the ClientSet.
@@ -265,6 +271,7 @@ func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 		recordingRuleGroups: NewRecordingRuleGroupSetsClient(apikeyCPC),
 		alerts:              NewAlertsClient(apikeyCPC),
 		events2Metrics:      NewEvents2MetricsClient(apikeyCPC),
+		extensions:          NewExtensionsClient(apikeyCPC),
 		enrichments:         NewEnrichmentClient(apikeyCPC),
 		dataSet:             NewDataSetClient(apikeyCPC),
 		dashboards:          NewDashboardsClient(apikeyCPC),

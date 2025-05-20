@@ -80,6 +80,8 @@ func createCallOptions() []grpc.CallOption {
 	var callOptions []grpc.CallOption
 	callOptions = append(callOptions, grpc_retry.WithMax(5))
 	callOptions = append(callOptions, grpc_retry.WithBackoff(grpc_retry.BackoffLinear(time.Second)))
+	callOptions = append(callOptions, grpc.MaxCallRecvMsgSize(50*1024*1024)) // 50MB
+	callOptions = append(callOptions, grpc.MaxCallSendMsgSize(50*1024*1024)) // 50MB
 	return callOptions
 }
 

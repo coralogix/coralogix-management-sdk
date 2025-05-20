@@ -527,6 +527,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "extensions"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "cx-sdk",
+ "serde_json",
+ "time",
+ "tokio",
+ "tonic 0.12.3",
+ "uuid",
+]
+
+[[package]]
 name = "fastrand"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

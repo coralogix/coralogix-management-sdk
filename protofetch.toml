@@ -133,11 +133,11 @@ allow_policies = ["src/com/coralogixapis/actions/v2/actions_service.proto"]
 url = 'github.com/coralogix/cx-api-extensions'
 revision = "v1.0.8"
 allow_policies = [
-    # "src/com/coralogix/extensions/v1/extension_service.proto",
+    "src/com/coralogix/extensions/v1/extension_service.proto",
     "src/com/coralogix/extensions/v1/extension.proto",
-    # "src/com/coralogix/extensions/v1/extension_deployment_service.proto",
-    # "src/com/coralogix/extensions/v1/extension_testing_service.proto",
-    # "src/com/coralogix/extensions/v1/quota_service.proto",
+    "src/com/coralogix/extensions/v1/extension_deployment_service.proto",
+    "src/com/coralogix/extensions/v1/extension_testing_service.proto",
+    # "src/com/coralogix/extensions/v1/quota_service.proto",,
     # "src/com/coralogix/extensions/v1/extension_content_management_service.proto",
     "src/com/coralogix/integrations/v1/contextual_data_integration_service.proto",
     "src/com/coralogix/integrations/v1/integration.proto",
