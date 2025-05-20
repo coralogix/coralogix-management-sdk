@@ -209,6 +209,9 @@ type MetricTimeWindowValue = alerts.MetricTimeWindowValue
 // MetricTimeWindowSpecificValue is a time window setting for metrics.
 type MetricTimeWindowSpecificValue = alerts.MetricTimeWindow_MetricTimeWindowSpecificValue
 
+// MetricTimeWindowDynamicDuration is a dynamic duration for the time window setting for metrics.
+type MetricTimeWindowDynamicDuration = alerts.MetricTimeWindow_MetricTimeWindowDynamicDuration
+
 // TracingTimeWindowValue is a time window setting for tracing.
 type TracingTimeWindowValue = alerts.TracingTimeWindowValue
 
