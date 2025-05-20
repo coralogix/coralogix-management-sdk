@@ -4,8 +4,15 @@ package com.coralogixapis.dashboards.v1.common;
 
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message OrderingField {
-  google.protobuf.StringValue field = 1;
-  v1.common.OrderDirection order_direction = 2;
+  google.protobuf.StringValue field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Field name to order by"
+    example: '{ "value":"coralogix.metadata.applicationName" }'
+  }];
+  v1.common.OrderDirection order_direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Order direction, ascending or descending"
+    example: "1"
+  }];
 }
