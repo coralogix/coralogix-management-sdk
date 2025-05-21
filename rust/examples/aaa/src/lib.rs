@@ -18,12 +18,32 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::{
-            apikeys::{ApiKeysClient, Owner},
-            groups::{GroupsClient, RoleId, TeamId},
-            saml::{IdpParameters, Metadata},
-            scopes::{EntityType, Filter, ScopesClient},
+            apikeys::{
+                ApiKeysClient,
+                Owner,
+            },
+            groups::{
+                GroupsClient,
+                RoleId,
+                TeamId,
+            },
+            saml::{
+                IdpParameters,
+                Metadata,
+            },
+            scopes::{
+                EntityType,
+                Filter,
+                ScopesClient,
+            },
             teams::TeamsClient,
-            users::{ScimUser, ScimUserEmail, ScimUserGroup, ScimUserName, UsersClient},
+            users::{
+                ScimUser,
+                ScimUserEmail,
+                ScimUserGroup,
+                ScimUserName,
+                UsersClient,
+            },
         },
     };
     #[tokio::test]
