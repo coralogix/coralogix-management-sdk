@@ -128,7 +128,10 @@ mod tests {
         client
             .update(
                 group_id,
-                "Updated Test Group".to_string(),
+                format!(
+                    "Updated Test Group {}",
+                    chrono::Utc::now().timestamp_millis()
+                ),
                 "A Test Group".to_string(),
                 None,
                 None,
