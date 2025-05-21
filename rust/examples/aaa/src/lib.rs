@@ -18,32 +18,12 @@ mod tests {
         CoralogixRegion,
         auth::AuthContext,
         client::{
-            apikeys::{
-                ApiKeysClient,
-                Owner,
-            },
-            groups::{
-                GroupsClient,
-                RoleId,
-                TeamId,
-            },
-            saml::{
-                IdpParameters,
-                Metadata,
-            },
-            scopes::{
-                EntityType,
-                Filter,
-                ScopesClient,
-            },
+            apikeys::{ApiKeysClient, Owner},
+            groups::{GroupsClient, RoleId, TeamId},
+            saml::{IdpParameters, Metadata},
+            scopes::{EntityType, Filter, ScopesClient},
             teams::TeamsClient,
-            users::{
-                ScimUser,
-                ScimUserEmail,
-                ScimUserGroup,
-                ScimUserName,
-                UsersClient,
-            },
+            users::{ScimUser, ScimUserEmail, ScimUserGroup, ScimUserName, UsersClient},
         },
     };
     #[tokio::test]
@@ -128,7 +108,10 @@ mod tests {
         client
             .update(
                 group_id,
-                "Updated Test Group".to_string(),
+                format!(
+                    "Updated Test Group {}",
+                    chrono::Utc::now().timestamp_millis()
+                ),
                 "A Test Group".to_string(),
                 None,
                 None,
