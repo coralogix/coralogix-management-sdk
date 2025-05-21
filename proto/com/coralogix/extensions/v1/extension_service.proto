@@ -1,0 +1,203 @@
+syntax = "proto3";
+
+package com.coralogix.extensions.v1;
+
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/extensions/v1/extension.proto";
+
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+service ExtensionService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Extension service"
+    description: "A service that enables querying for extension information."
+    external_docs: {
+      url: "https://coralogix.com/docs/integrations/extensions/"
+      description: "Learn more about extensions in our documentation."
+    }
+  };
+
+  rpc GetAllExtensions(GetAllExtensionsRequest) returns (GetAllExtensionsResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get all extensions";
+    option (google.api.http) = {
+      post: "/v1/extensions/all"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Extension service"]
+      summary: "Get all extensions"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "extensions:ReadConfig"}
+          }
+        }
+      }
+    };
+  }
+
+  rpc GetExtension(GetExtensionRequest) returns (GetExtensionResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get extension by id";
+    option (google.api.http) = {
+      get: "/v1/extensions/{id}"
+      response_body: "extension"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Extension service"]
+      summary: "Get extension by ID"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "extensions:ReadConfig"}
+          }
+        }
+      }
+    };
+  }
+
+}
+
+message GetAllExtensionsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get all extensions request"
+      description: "Request to list all extensions"
+      required: []
+    }
+  };
+  
+  message Filter {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "A filter structure for a request to get all extensions"
+        description: "Filter by integration ids"
+        required: []
+      }
+    };
+    repeated string integrations = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  }
+  google.protobuf.BoolValue include_hidden_extensions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  Filter filter = 2;
+}
+
+message GetAllExtensionsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get all extensions response"
+      description: "Response to list all extensions"
+      required: []
+    }
+  };
+  
+  message RevisionSummary {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Revision summary"
+        required: [
+          "item_counts"
+        ]
+      }
+    };
+    ItemCounts item_counts = 1;
+    google.protobuf.BoolValue is_new = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  }
+
+  message Revision {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Revision"
+        required: [
+          "version",
+          "summary"
+        ]
+      }
+    };
+    google.protobuf.StringValue version = 1;
+    google.protobuf.StringValue description = 2;
+    google.protobuf.StringValue excerpt = 3;
+    repeated google.protobuf.StringValue labels = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    repeated IntegrationDetail integration_details = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    RevisionSummary summary = 6;
+  }
+
+  message Extension {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Extension"
+        required: [
+          "id",
+          "name",
+          "image"
+        ]
+      }
+    };
+    google.protobuf.StringValue id = 1;
+    google.protobuf.StringValue name = 2;
+    google.protobuf.StringValue image = 3;
+    google.protobuf.StringValue dark_mode_image = 4;
+    repeated Revision revisions = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    google.protobuf.BoolValue is_hidden = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+    repeated string integrations = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    repeated string keywords = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    Deprecation deprecation = 9;
+  }
+
+  repeated Extension extensions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+}
+
+message GetExtensionRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get extension request"
+      required: [
+        "id"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1;
+  // On the frontend, we don't need the dashboard binaries.
+  // But we need them for deployment in the extensions-service - so it's kind of a temporary argument,
+  // As soon all the deployment logic is moved to the extensions-api, it can be removed.
+  google.protobuf.BoolValue include_dashboard_binaries = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  google.protobuf.BoolValue include_testing_revision = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+}
+
+message GetExtensionResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get extension response"
+      required: []
+    }
+  };
+  Extension extension = 1;
+}

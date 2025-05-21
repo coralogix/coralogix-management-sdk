@@ -81,6 +81,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         incidents_service(&root),
         #[cfg(feature = "events")]
         events_service(&root),
+        #[cfg(feature = "extensions")]
+        extensions_service(&root),
     ]
     .concat();
 
@@ -320,4 +322,21 @@ fn events_service(root: &str) -> Vec<String> {
         "{}/com/coralogixapis/events/v3/events_service.proto",
         root
     )]
+}
+
+fn extensions_service(root: &str) -> Vec<String> {
+    vec![
+        format!(
+            "{}/com/coralogix/extensions/v1/extension_service.proto",
+            root
+        ),
+        format!(
+            "{}/com/coralogix/extensions/v1/extension_deployment_service.proto",
+            root
+        ),
+        format!(
+            "{}/com/coralogix/extensions/v1/extension_testing_service.proto",
+            root
+        ),
+    ]
 }
