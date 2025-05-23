@@ -68,6 +68,9 @@ type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
 // AtomicOverwriteEnrichmentsRequest is a type of request.
 type AtomicOverwriteEnrichmentsRequest = enrichment.AtomicOverwriteEnrichmentsRequest
 
+// EnrichmentFieldDefinition is a definition of enrichment fields.
+type EnrichmentFieldDefinition = enrichment.EnrichmentFieldDefinition
+
 const enrichmentsFeatureGroupID = "enrichments"
 
 // RPC names.
