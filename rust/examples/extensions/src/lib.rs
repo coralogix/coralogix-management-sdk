@@ -13,7 +13,7 @@
 // limitations under the License.
 
 mod tests {
-   
+
     #[tokio::test]
     async fn test_extensions() {
         let extensions_client = ExtensionsClient::new(
