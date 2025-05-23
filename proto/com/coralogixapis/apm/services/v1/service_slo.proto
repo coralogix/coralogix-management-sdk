@@ -1,0 +1,123 @@
+syntax = "proto3";
+package com.coralogixapis.apm.services.v1;
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+enum CompareType {
+  COMPARE_TYPE_UNSPECIFIED = 0;
+  COMPARE_TYPE_IS = 1;
+  COMPARE_TYPE_START_WITH = 2;
+  COMPARE_TYPE_ENDS_WITH = 3;
+  COMPARE_TYPE_INCLUDES = 4;
+}
+
+enum SloStatus {
+  SLO_STATUS_UNSPECIFIED = 0;
+  SLO_STATUS_OK = 1;
+  SLO_STATUS_BREACHED = 2;
+}
+
+enum SliMetricType {
+  SLI_METRIC_TYPE_UNSPECIFIED = 0;
+  SLI_METRIC_TYPE_ERROR = 1;
+  SLI_METRIC_TYPE_LATENCY = 2;
+  SLI_METRIC_TYPE_CUSTOM = 3;
+}
+
+message SliFilter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SLI Filter"
+      description: "This data structure represents a filter for a Service Level Indicator (SLI) in Coralogix APM."
+      required: [
+        "field", 
+        "compare_type", 
+        "field_values"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+      description: "Find out more about SLOs in Coralogix APM"
+    }
+  };
+  google.protobuf.StringValue field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_name\"" }];
+  CompareType compare_type = 2;
+  repeated google.protobuf.StringValue field_values = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"value1\", \"value2\"]" }];
+}
+
+enum ThresholdSymbol {
+  THRESHOLD_SYMBOL_UNSPECIFIED = 0;
+  THRESHOLD_SYMBOL_GREATER = 1;
+  THRESHOLD_SYMBOL_GREATER_OR_EQUAL = 2;
+  THRESHOLD_SYMBOL_LESS = 3;
+  THRESHOLD_SYMBOL_LESS_OR_EQUAL = 4;
+  THRESHOLD_SYMBOL_EQUAL = 5;
+  THRESHOLD_SYMBOL_NOT_EQUAL = 6;
+}
+
+message LatencySli {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Latency SLO"
+      description: "This data structure represents a Latency Service Level Indicator (SLO) in Coralogix APM."
+      required: [
+        "threshold_microseconds", 
+        "threshold_symbol"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+      description: "Find out more about SLOs in Coralogix APM"
+    }
+  };
+  google.protobuf.StringValue threshold_microseconds = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"1000000\"" }];
+  ThresholdSymbol threshold_symbol = 2;
+}
+
+message ErrorSli {}
+
+enum SloPeriod {
+  SLO_PERIOD_UNSPECIFIED = 0;
+  SLO_PERIOD_7_DAYS = 1;
+  SLO_PERIOD_14_DAYS = 2;
+  SLO_PERIOD_30_DAYS = 3;
+}
+
+message ServiceSlo {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Service SLO"
+      description: "This data structure represents a Service Level Objective (SLO) in Coralogix APM."
+      required: [
+        "name", 
+        "service_name", 
+        "status", 
+        "description", 
+        "target_percentage", 
+        "sli_type", 
+        "filters", 
+        "period"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/"
+      description: "Find out more about SLOs in Coralogix APM"
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slo_id\"" }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slo_name\"" }];
+  google.protobuf.StringValue service_name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"service_name\"" }];
+  SloStatus status = 4;
+  google.protobuf.StringValue description = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slo_description\"" }];
+  google.protobuf.UInt32Value target_percentage = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "99" }];
+  google.protobuf.Timestamp created_at = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.UInt32Value remaining_error_budget_percentage = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  oneof sli_type {
+    LatencySli latency_sli = 9;
+    ErrorSli error_sli = 10;
+  }
+  repeated SliFilter filters = 11;
+  SloPeriod period = 12;
+}

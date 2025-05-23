@@ -299,7 +299,11 @@ revision = 'v0.0.3'
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
 revision = 'v2.0.9'
-allow_policies = ["src/com/coralogixapis/apm/common/v2/order_by.proto"]
+allow_policies = [
+    "src/com/coralogixapis/apm/common/v2/order_by.proto",
+    "src/com/coralogixapis/apm/services/v1/service_slo.proto",
+    "src/com/coralogixapis/apm/services/v1/service_slo_service.proto",
+]
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
