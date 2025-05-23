@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+import "google/protobuf/wrappers.proto";
+
+message PaginationRequest {
+  google.protobuf.UInt32Value page_size = 1;
+  google.protobuf.StringValue page_token = 2;
+}
+
+
+message PaginationResponse {
+  google.protobuf.UInt32Value total_size = 1;
+  google.protobuf.StringValue next_page_token = 2;
+}
+
