@@ -65,7 +65,7 @@ type CustomEnrichmentType = enrichment.CustomEnrichmentType
 // EnrichmentRequestModel is a inner type requests.
 type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
 
-// AtomicOverwriteEnrichmentRequest is a type of request.
+// AtomicOverwriteEnrichmentsRequest is a type of request.
 type AtomicOverwriteEnrichmentsRequest = enrichment.AtomicOverwriteEnrichmentsRequest
 
 const enrichmentsFeatureGroupID = "enrichments"
