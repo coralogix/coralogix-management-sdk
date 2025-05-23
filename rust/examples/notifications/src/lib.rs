@@ -602,7 +602,7 @@ mod tests {
             .await
             .unwrap();
         let connector_id = create_response.connector.unwrap().id.unwrap();
-        let preset = create_https_preset("TestHttpsPresetRustGlobalRouter".into());
+        let preset = create_https_preset(format!("TestHttpsConnectorRustGlobalRouter-{}", name));
         let create_preset_response = notifications_client
             .create_custom_preset(preset.clone())
             .await

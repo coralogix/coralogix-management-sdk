@@ -17,7 +17,7 @@ mod tests {
     use cx_sdk::auth::AuthContext;
     use cx_sdk::client::extensions::ExtensionsClient;
     use cx_sdk::client::extensions::TargetDomain;
-    
+
     #[tokio::test]
     async fn test_extensions() {
         let extensions_client = ExtensionsClient::new(
