@@ -597,7 +597,8 @@ mod tests {
         )
         .unwrap();
 
-        let connector = create_test_https_connector("TestHttpsConnectorRustGlobalRouter".into());
+        let name = uuid::new_uuid::Uuid::new_v4().to_string(),
+        let connector = create_test_https_connector(format!("TestHttpsConnectorRustGlobalRouter-%s".into(), name));
         let create_response = notifications_client
             .create_connector(connector.clone())
             .await
