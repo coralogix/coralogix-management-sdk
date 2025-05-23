@@ -13,21 +13,7 @@
 // limitations under the License.
 
 mod tests {
-    use std::{
-        f32::consts::E,
-        vec,
-    };
-
-    use cx_sdk::{
-        CoralogixRegion,
-        auth::AuthContext,
-        client::extensions::{
-            ExtensionsClient,
-            TargetDomain,
-        },
-    };
-    use time::ext;
-
+   
     #[tokio::test]
     async fn test_extensions() {
         let extensions_client = ExtensionsClient::new(
