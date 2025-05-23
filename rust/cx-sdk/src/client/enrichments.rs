@@ -32,6 +32,8 @@ use cx_api::proto::com::coralogix::enrichment::v1::{
     AddEnrichmentsResponse,
     AtomicOverwriteEnrichmentsRequest,
     AtomicOverwriteEnrichmentsResponse,
+    GetCompanyEnrichmentSettingsRequest,
+    GetCompanyEnrichmentSettingsResponse,
     GetEnrichmentLimitRequest,
     GetEnrichmentLimitResponse,
     GetEnrichmentsRequest,
@@ -214,6 +216,29 @@ impl EnrichmentsClient {
                     status,
                     endpoint:
                         "/com.coralogixapis.enrichment.v1.EnrichmentService/GetEnrichmentLimit"
+                            .into(),
+                    feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
+                })
+            })?
+            .into_inner())
+    }
+
+    /// Retrieves the Enrichment settings for a company.
+    pub async fn get_enrichment_settings(&self) -> Result<GetCompanyEnrichmentSettingsResponse> {
+        Ok(self
+            .service_client
+            .lock()
+            .await
+            .get_company_enrichment_settings(make_request_with_metadata(
+                GetCompanyEnrichmentSettingsRequest {},
+                &self.metadata_map,
+            ))
+            .await
+            .map_err(|status| {
+                SdkError::ApiError(SdkApiError {
+                    status,
+                    endpoint:
+                        "/com.coralogixapis.enrichment.v1.EnrichmentService/GetCompanyEnrichmentSettings"
                             .into(),
                     feature_group: ENRICHMENTS_FEATURE_GROUP_ID.into(),
                 })

@@ -65,6 +65,12 @@ type CustomEnrichmentType = enrichment.CustomEnrichmentType
 // EnrichmentRequestModel is a inner type requests.
 type EnrichmentRequestModel = enrichment.EnrichmentRequestModel
 
+// AtomicOverwriteEnrichmentsRequest is a type of request.
+type AtomicOverwriteEnrichmentsRequest = enrichment.AtomicOverwriteEnrichmentsRequest
+
+// EnrichmentFieldDefinition is a definition of enrichment fields.
+type EnrichmentFieldDefinition = enrichment.EnrichmentFieldDefinition
+
 const enrichmentsFeatureGroupID = "enrichments"
 
 // RPC names.
@@ -73,7 +79,7 @@ const (
 	AddEnrichmentsRPC               = enrichment.EnrichmentService_AddEnrichments_FullMethodName
 	DeleteEnrichmentsRPC            = enrichment.EnrichmentService_RemoveEnrichments_FullMethodName
 	GetEnrichmentLimitRPC           = enrichment.EnrichmentService_GetEnrichmentLimit_FullMethodName
-	AtomicOverwriteEnrichmentsRPC   = enrichment.EnrichmentService_AtomicOverwriteEnrichments_FullMethodName
+	UpdateEnrichmentsRPC            = enrichment.EnrichmentService_AtomicOverwriteEnrichments_FullMethodName
 	GetCompanyEnrichmentSettingsRPC = enrichment.EnrichmentService_GetCompanyEnrichmentSettings_FullMethodName
 )
 
@@ -151,6 +157,44 @@ func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrich
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
 	response, err := client.GetEnrichmentLimit(callProperties.Ctx, &GetEnrichmentLimitRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetEnrichmentLimitRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// GetCompanyEnrichmentSettings returns the enrichment limits.
+func (e EnrichmentsClient) GetCompanyEnrichmentSettings(ctx context.Context) (*enrichment.GetCompanyEnrichmentSettingsResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+
+	client := enrichment.NewEnrichmentServiceClient(conn)
+
+	response, err := client.GetCompanyEnrichmentSettings(callProperties.Ctx, &enrichment.GetCompanyEnrichmentSettingsRequest{}, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetEnrichmentLimitRPC, enrichmentsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// Update updates the provided enrichments in a single transaction.
+func (e EnrichmentsClient) Update(ctx context.Context, request *AtomicOverwriteEnrichmentsRequest) (*enrichment.AtomicOverwriteEnrichmentsResponse, error) {
+	callProperties, err := e.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+
+	client := enrichment.NewEnrichmentServiceClient(conn)
+
+	response, err := client.AtomicOverwriteEnrichments(callProperties.Ctx, request, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, GetEnrichmentLimitRPC, enrichmentsFeatureGroupID)
 	}

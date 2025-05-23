@@ -15,9 +15,6 @@
 #[cfg(test)]
 mod tests {
 
-    use std::hash::Hash;
-    use std::vec;
-
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -324,7 +321,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => false,
+            test_result::Result::Failure(_) => false,
         };
         assert!(success);
 
@@ -344,7 +341,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => false,
+            test_result::Result::Failure(_) => false,
         };
 
         assert!(success);
@@ -392,7 +389,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => false,
+            test_result::Result::Failure(_) => false,
         };
         assert!(success);
 
@@ -412,7 +409,7 @@ mod tests {
             .unwrap()
         {
             test_result::Result::Success(_) => true,
-            test_result::Result::Failure(f) => false,
+            test_result::Result::Failure(_) => false,
         };
 
         assert!(success);
@@ -597,13 +594,15 @@ mod tests {
         )
         .unwrap();
 
-        let connector = create_test_https_connector("TestHttpsConnectorRustGlobalRouter".into());
+        let name = uuid::Uuid::new_v4().to_string();
+        let connector =
+            create_test_https_connector(format!("TestHttpsConnectorRustGlobalRouter-{}", name));
         let create_response = notifications_client
             .create_connector(connector.clone())
             .await
             .unwrap();
         let connector_id = create_response.connector.unwrap().id.unwrap();
-        let preset = create_https_preset("TestHttpsPresetRustGlobalRouter".into());
+        let preset = create_https_preset(format!("TestHttpsConnectorRustGlobalRouter-{}", name));
         let create_preset_response = notifications_client
             .create_custom_preset(preset.clone())
             .await
