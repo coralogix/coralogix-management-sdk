@@ -155,6 +155,9 @@ type SloThresholdRule = alerts.SloThresholdRule
 // SloThresholdCondition is a condition for SLO thresholds.
 type SloThresholdCondition = alerts.SloThresholdCondition
 
+// SloDurationUnit is a unit of time for SLOs.
+type SloDurationUnit = alerts.DurationUnit
+
 // AlertDefPropertiesLogsRatioThreshold is a property of an alert.
 type AlertDefPropertiesLogsRatioThreshold = alerts.AlertDefProperties_LogsRatioThreshold
 
@@ -399,7 +402,7 @@ const alertsFeatureGroupID = "alerts"
 
 // Duration Unity Variants
 const (
-	DurationUnitHours       = alerts.DurationUnit_DURATION_UNIT_UNSPECIFIED
+	DurationUnitHours       = alerts.DurationUnit_DURATION_UNIT_HOURS
 	DurationUnitUnspecified = alerts.DurationUnit_DURATION_UNIT_UNSPECIFIED
 )
 

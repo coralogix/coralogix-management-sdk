@@ -86,8 +86,17 @@ type ListSlosRequest = slos.ListSlosRequest
 // ListSlosResponse is a response to a list SLOs request.
 type ListSlosResponse = slos.ListSlosResponse
 
+// SloGrouping is a type that represents the SLO grouping.
+type SloGrouping = slos.Grouping
+
 // SloFilters is a type that allows to filter SLOs.
 type SloFilters = slos.SloFilters
+
+// SloWindow is a type that represents the SLO window.
+type SloWindow = slos.WindowSloWindow
+
+// SloComparisonOperator is a type that represents the SLO comparison operator.
+type SloComparisonOperator = slos.ComparisonOperator
 
 // SloTimeframe variants
 const (
@@ -99,10 +108,26 @@ const (
 	SloTimeframe90Days      = slos.SloTimeFrame_SLO_TIME_FRAME_90_DAYS
 )
 
+// SloWindow variants
+const (
+	SloWindowUnspecified = slos.WindowSloWindow_WINDOW_SLO_WINDOW_UNSPECIFIED
+	SloWindow1Minute     = slos.WindowSloWindow_WINDOW_SLO_WINDOW_1_MINUTE
+	SloWindow5Minutes    = slos.WindowSloWindow_WINDOW_SLO_WINDOW_5_MINUTES
+)
+
 // SloFilterField variants
 const (
 	SloConstantFilterFieldUnspecified = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_UNSPECIFIED
 	SloConstantFilterFieldUserName    = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_USER_NAME
+)
+
+// SloComparisonOperator variants
+const (
+	SloComparisonOperatorUnspecified         = slos.ComparisonOperator_COMPARISON_OPERATOR_UNSPECIFIED
+	SloComparisonOperatorGreaterThan         = slos.ComparisonOperator_COMPARISON_OPERATOR_GREATER_THAN
+	SloComparisonOperatorLessThan            = slos.ComparisonOperator_COMPARISON_OPERATOR_LESS_THAN
+	SloComparisonOperatorGreaterThanOrEquals = slos.ComparisonOperator_COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS
+	SloComparisonOperatorLessThanOrEquals    = slos.ComparisonOperator_COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS
 )
 
 // SLO RPC names
