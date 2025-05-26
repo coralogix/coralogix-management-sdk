@@ -71,10 +71,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_definitio
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_definition_proto_rawDesc = "" +
 	"\n" +
-	"Ncom/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbd\x01\n" +
-	"\rSloDefinition\x12j\n" +
-	"\x06slo_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB5\x92A22\n" +
-	"The SLO IDJ$123e4567-e89b-12d3-a456-426614174000R\x05sloId:@\x92A=\n" +
+	"Ncom/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbf\x01\n" +
+	"\rSloDefinition\x12l\n" +
+	"\x06slo_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB7\x92A42\n" +
+	"The SLO IDJ&\"123e4567-e89b-12d3-a456-426614174000\"R\x05sloId:@\x92A=\n" +
 	";*\x0eSLO Definition2 Configuration for SLO definition\xd2\x01\x06slo_idb\x06proto3"
 
 var (

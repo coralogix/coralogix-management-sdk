@@ -62,6 +62,7 @@ func (*ListSloRowsRequest) Descriptor() ([]byte, []int) {
 type ListSloRowsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	SloRows       []*SloHubRow           `protobuf:"bytes,1,rep,name=slo_rows,json=sloRows,proto3" json:"slo_rows,omitempty"`
+	ZeroState     *bool                  `protobuf:"varint,2,opt,name=zero_state,json=zeroState,proto3,oneof" json:"zero_state,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -101,6 +102,13 @@ func (x *ListSloRowsResponse) GetSloRows() []*SloHubRow {
 		return x.SloRows
 	}
 	return nil
+}
+
+func (x *ListSloRowsResponse) GetZeroState() bool {
+	if x != nil && x.ZeroState != nil {
+		return *x.ZeroState
+	}
+	return false
 }
 
 type GetSloDataRequest struct {
@@ -204,9 +212,12 @@ var File_com_coralogixapis_slo_v1_slo_hub_service_proto protoreflect.FileDescrip
 const file_com_coralogixapis_slo_v1_slo_hub_service_proto_rawDesc = "" +
 	"\n" +
 	".com/coralogixapis/slo/v1/slo_hub_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\x1a&com/coralogixapis/slo/v1/slo_hub.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\"\x14\n" +
-	"\x12ListSloRowsRequest\"U\n" +
+	"\x12ListSloRowsRequest\"\x88\x01\n" +
 	"\x13ListSloRowsResponse\x12>\n" +
-	"\bslo_rows\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloHubRowR\asloRows\"*\n" +
+	"\bslo_rows\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloHubRowR\asloRows\x12\"\n" +
+	"\n" +
+	"zero_state\x18\x02 \x01(\bH\x00R\tzeroState\x88\x01\x01B\r\n" +
+	"\v_zero_state\"*\n" +
 	"\x11GetSloDataRequest\x12\x15\n" +
 	"\x06slo_id\x18\x01 \x01(\tR\x05sloId\"\xa5\x01\n" +
 	"\x12GetSloDataResponse\x12/\n" +
@@ -261,6 +272,7 @@ func file_com_coralogixapis_slo_v1_slo_hub_service_proto_init() {
 	}
 	file_com_coralogixapis_slo_v1_slo_hub_proto_init()
 	file_com_coralogixapis_slo_v1_slo_proto_init()
+	file_com_coralogixapis_slo_v1_slo_hub_service_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

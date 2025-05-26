@@ -77,6 +77,7 @@ message Slo{
 enum SloConstantFilterField {
   SLO_CONST_FILTER_FIELD_UNSPECIFIED = 0;
   SLO_CONST_FILTER_FIELD_USER_NAME = 1;
+  SLO_CONST_FILTER_FIELD_SLO_NAME = 2;
 }
 
 message SloFilterField {

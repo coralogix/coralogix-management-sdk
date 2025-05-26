@@ -90,9 +90,9 @@ const (
 
 // SloStatus values.
 const (
-	SloStatusUnspecified = legacySlos.SloStatus_SLO_STATUS_UNSPECIFIED
-	SloStatusOk          = legacySlos.SloStatus_SLO_STATUS_OK
-	SloStatusBreached    = legacySlos.SloStatus_SLO_STATUS_BREACHED
+	LegacySloStatusUnspecified = legacySlos.SloStatus_SLO_STATUS_UNSPECIFIED
+	LegacySloStatusOk          = legacySlos.SloStatus_SLO_STATUS_OK
+	LegacySloStatusBreached    = legacySlos.SloStatus_SLO_STATUS_BREACHED
 )
 
 // RPC names.

@@ -503,7 +503,7 @@ const file_com_coralogixapis_alerts_v3_alert_def_proto_rawDesc = "" +
 	"\fcreated_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampBK\x92AH2.The time when the alert definition was createdJ\x16\"2023-10-01T12:00:00Z\"R\vcreatedTime\x12\x8f\x01\n" +
 	"\fupdated_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampBP\x92AM23The time when the alert definition was last updatedJ\x16\"2023-10-01T12:00:00Z\"R\vupdatedTime:\xf7\x01\x92A\xf3\x01\n" +
 	"u*\x10Alert definition22This data structure represents an alert definition\xd2\x01\x14alert_def_properties\xd2\x01\x02id\xd2\x01\x10alert_version_id*z\n" +
-	"/Find out more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/\"\xbf\x1f\n" +
+	"/Find out more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/\"\xbc\x1f\n" +
 	"\x12AlertDefProperties\x12c\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB1\x92A.2 The name of the alert definitionJ\n" +
 	"\"My Alert\"R\x04name\x12\xa0\x01\n" +
@@ -525,8 +525,8 @@ const file_com_coralogixapis_alerts_v3_alert_def_proto_rawDesc = "" +
 	"\x0emetric_anomaly\x18n \x01(\v2..com.coralogixapis.alerts.v3.MetricAnomalyTypeB<\x92A927Configuration for metric-based anomaly detection alertsH\x01R\rmetricAnomaly\x12\x90\x01\n" +
 	"\x0elogs_new_value\x18o \x01(\v2-.com.coralogixapis.alerts.v3.LogsNewValueTypeB9\x92A624Configuration for alerts triggered by new log valuesH\x01R\flogsNewValue\x12\x9e\x01\n" +
 	"\x11logs_unique_count\x18p \x01(\v20.com.coralogixapis.alerts.v3.LogsUniqueCountTypeB>\x92A;29Configuration for alerts based on unique log value countsH\x01R\x0flogsUniqueCount\x12}\n" +
-	"\rslo_threshold\x18q \x01(\v2-.com.coralogixapis.alerts.v3.SloThresholdTypeB'\x92A$2\"Configuration for SLO-based alertsH\x01R\fsloThreshold\x12\x87\x01\n" +
-	"\rgroup_by_keys\x18\a \x03(\v2\x1c.google.protobuf.StringValueBE\x92AB2+Keys used to group and aggregate alert dataJ\x10[\"key1\", \"key2\"]\xa0\x01\x02R\vgroupByKeys\x12\x94\x01\n" +
+	"\rslo_threshold\x18q \x01(\v2-.com.coralogixapis.alerts.v3.SloThresholdTypeB'\x92A$2\"Configuration for SLO-based alertsH\x01R\fsloThreshold\x12\x84\x01\n" +
+	"\rgroup_by_keys\x18\a \x03(\v2\x1c.google.protobuf.StringValueBB\x92A?2+Keys used to group and aggregate alert dataJ\x10[\"key1\", \"key2\"]R\vgroupByKeys\x12\x94\x01\n" +
 	"\x12incidents_settings\x18\b \x01(\v25.com.coralogixapis.alerts.v3.AlertDefIncidentSettingsB.\x92A+2)Incident creation and management settingsR\x11incidentsSettings\x12\x97\x01\n" +
 	"\x12notification_group\x18\t \x01(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB0\x92A-2+Primary notification group for alert eventsR\x11notificationGroup\x12\xb2\x01\n" +
 	"\x19notification_group_excess\x18\xd2\x01 \x03(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB=\x92A826Additional notification groups for alerts (deprecated)\x18\x01R\x17notificationGroupExcess\x12\xb6\x01\n" +

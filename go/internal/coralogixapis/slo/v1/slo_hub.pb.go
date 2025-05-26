@@ -31,6 +31,7 @@ const (
 	SloStatus_SLO_STATUS_WARNING     SloStatus = 2
 	SloStatus_SLO_STATUS_CRITICAL    SloStatus = 3
 	SloStatus_SLO_STATUS_BREACHED    SloStatus = 4
+	SloStatus_SLO_STATUS_PENDING     SloStatus = 5
 )
 
 // Enum value maps for SloStatus.
@@ -41,6 +42,7 @@ var (
 		2: "SLO_STATUS_WARNING",
 		3: "SLO_STATUS_CRITICAL",
 		4: "SLO_STATUS_BREACHED",
+		5: "SLO_STATUS_PENDING",
 	}
 	SloStatus_value = map[string]int32{
 		"SLO_STATUS_UNSPECIFIED": 0,
@@ -48,6 +50,7 @@ var (
 		"SLO_STATUS_WARNING":     2,
 		"SLO_STATUS_CRITICAL":    3,
 		"SLO_STATUS_BREACHED":    4,
+		"SLO_STATUS_PENDING":     5,
 	}
 )
 
@@ -135,6 +138,7 @@ type SloData struct {
 	StatusCount             []*SloStatusCount      `protobuf:"bytes,1,rep,name=status_count,json=statusCount,proto3" json:"status_count,omitempty"`
 	MinRemainingErrorBudget float32                `protobuf:"fixed32,2,opt,name=min_remaining_error_budget,json=minRemainingErrorBudget,proto3" json:"min_remaining_error_budget,omitempty"`
 	MinCompliance           float32                `protobuf:"fixed32,3,opt,name=min_compliance,json=minCompliance,proto3" json:"min_compliance,omitempty"`
+	IncompleteData          *bool                  `protobuf:"varint,4,opt,name=incomplete_data,json=incompleteData,proto3,oneof" json:"incomplete_data,omitempty"`
 	unknownFields           protoimpl.UnknownFields
 	sizeCache               protoimpl.SizeCache
 }
@@ -188,6 +192,13 @@ func (x *SloData) GetMinCompliance() float32 {
 		return x.MinCompliance
 	}
 	return 0
+}
+
+func (x *SloData) GetIncompleteData() bool {
+	if x != nil && x.IncompleteData != nil {
+		return *x.IncompleteData
+	}
+	return false
 }
 
 type SloHubRow struct {
@@ -453,6 +464,7 @@ type SloPermutationData struct {
 	//	*SloPermutationData_RequestBasedPermutationData
 	//	*SloPermutationData_WindowBasedPermutationData
 	PermutationData isSloPermutationData_PermutationData `protobuf_oneof:"permutation_data"`
+	IncompleteData  *bool                                `protobuf:"varint,7,opt,name=incomplete_data,json=incompleteData,proto3,oneof" json:"incomplete_data,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -540,6 +552,13 @@ func (x *SloPermutationData) GetWindowBasedPermutationData() *WindowBasedPermuta
 	return nil
 }
 
+func (x *SloPermutationData) GetIncompleteData() bool {
+	if x != nil && x.IncompleteData != nil {
+		return *x.IncompleteData
+	}
+	return false
+}
+
 type isSloPermutationData_PermutationData interface {
 	isSloPermutationData_PermutationData()
 }
@@ -563,11 +582,13 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"&com/coralogixapis/slo/v1/slo_hub.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\"c\n" +
 	"\x0eSloStatusCount\x12;\n" +
 	"\x06status\x18\x01 \x01(\x0e2#.com.coralogixapis.slo.v1.SloStatusR\x06status\x12\x14\n" +
-	"\x05count\x18\x02 \x01(\rR\x05count\"\xba\x01\n" +
+	"\x05count\x18\x02 \x01(\rR\x05count\"\xfc\x01\n" +
 	"\aSloData\x12K\n" +
 	"\fstatus_count\x18\x01 \x03(\v2(.com.coralogixapis.slo.v1.SloStatusCountR\vstatusCount\x12;\n" +
 	"\x1amin_remaining_error_budget\x18\x02 \x01(\x02R\x17minRemainingErrorBudget\x12%\n" +
-	"\x0emin_compliance\x18\x03 \x01(\x02R\rminCompliance\"\x8c\x01\n" +
+	"\x0emin_compliance\x18\x03 \x01(\x02R\rminCompliance\x12,\n" +
+	"\x0fincomplete_data\x18\x04 \x01(\bH\x00R\x0eincompleteData\x88\x01\x01B\x12\n" +
+	"\x10_incomplete_data\"\x8c\x01\n" +
 	"\tSloHubRow\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12A\n" +
 	"\bslo_data\x18\x02 \x01(\v2!.com.coralogixapis.slo.v1.SloDataH\x00R\asloData\x88\x01\x01B\v\n" +
@@ -587,7 +608,7 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"\x1aWindowBasedPermutationData\x12!\n" +
 	"\fgood_windows\x18\x01 \x01(\rR\vgoodWindows\x12\x1f\n" +
 	"\vbad_windows\x18\x02 \x01(\rR\n" +
-	"badWindows\"\xf0\x03\n" +
+	"badWindows\"\xb2\x04\n" +
 	"\x12SloPermutationData\x12:\n" +
 	"\x05group\x18\x01 \x01(\v2$.com.coralogixapis.slo.v1.GroupValueR\x05group\x12;\n" +
 	"\x06status\x18\x02 \x01(\x0e2#.com.coralogixapis.slo.v1.SloStatusR\x06status\x124\n" +
@@ -596,14 +617,17 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"compliance\x18\x04 \x01(\x02R\n" +
 	"compliance\x12|\n" +
 	"\x1erequest_based_permutation_data\x18\x05 \x01(\v25.com.coralogixapis.slo.v1.RequestBasedPermutationDataH\x00R\x1brequestBasedPermutationData\x12y\n" +
-	"\x1dwindow_based_permutation_data\x18\x06 \x01(\v24.com.coralogixapis.slo.v1.WindowBasedPermutationDataH\x00R\x1awindowBasedPermutationDataB\x12\n" +
-	"\x10permutation_data*\x84\x01\n" +
+	"\x1dwindow_based_permutation_data\x18\x06 \x01(\v24.com.coralogixapis.slo.v1.WindowBasedPermutationDataH\x00R\x1awindowBasedPermutationData\x12,\n" +
+	"\x0fincomplete_data\x18\a \x01(\bH\x01R\x0eincompleteData\x88\x01\x01B\x12\n" +
+	"\x10permutation_dataB\x12\n" +
+	"\x10_incomplete_data*\x9c\x01\n" +
 	"\tSloStatus\x12\x1a\n" +
 	"\x16SLO_STATUS_UNSPECIFIED\x10\x00\x12\x11\n" +
 	"\rSLO_STATUS_OK\x10\x01\x12\x16\n" +
 	"\x12SLO_STATUS_WARNING\x10\x02\x12\x17\n" +
 	"\x13SLO_STATUS_CRITICAL\x10\x03\x12\x17\n" +
-	"\x13SLO_STATUS_BREACHED\x10\x04B\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
+	"\x13SLO_STATUS_BREACHED\x10\x04\x12\x16\n" +
+	"\x12SLO_STATUS_PENDING\x10\x05B\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescOnce sync.Once
@@ -654,6 +678,7 @@ func file_com_coralogixapis_slo_v1_slo_hub_proto_init() {
 		return
 	}
 	file_com_coralogixapis_slo_v1_slo_proto_init()
+	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[1].OneofWrappers = []any{}
 	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[2].OneofWrappers = []any{}
 	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7].OneofWrappers = []any{
 		(*SloPermutationData_RequestBasedPermutationData)(nil),

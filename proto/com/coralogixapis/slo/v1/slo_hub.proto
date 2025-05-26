@@ -12,6 +12,7 @@ enum SloStatus {
   SLO_STATUS_WARNING = 2;
   SLO_STATUS_CRITICAL = 3;
   SLO_STATUS_BREACHED = 4;
+  SLO_STATUS_PENDING = 5;
 }
 
 message SloStatusCount {
@@ -23,6 +24,7 @@ message SloData {
   repeated SloStatusCount status_count = 1;
   float min_remaining_error_budget = 2;
   float min_compliance = 3;
+  optional bool incomplete_data = 4;
 }
 
 message SloHubRow {
@@ -58,4 +60,5 @@ message SloPermutationData {
     RequestBasedPermutationData request_based_permutation_data = 5;
     WindowBasedPermutationData window_based_permutation_data = 6;
   }
+  optional bool incomplete_data = 7;
 }

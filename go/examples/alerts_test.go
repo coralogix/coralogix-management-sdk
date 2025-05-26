@@ -121,7 +121,91 @@ func CreateAlert() *cxsdk.AlertDefProperties {
 	}
 }
 
-func CreateSloAlert(sloId string) *cxsdk.AlertDefProperties {
+func CreateBurnRateSloAlert(sloId string) *cxsdk.AlertDefProperties {
+	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
+	return &cxsdk.AlertDefProperties{
+		Name:              wrapperspb.String("Standard alert example"),
+		Description:       wrapperspb.String("Standard alert example from terraform"),
+		Enabled:           &wrapperspb.BoolValue{Value: true},
+		Priority:          cxsdk.AlertDefPriorityP1,
+		Deleted:           nil,
+		Type:              cxsdk.AlertDefTypeSloThreshold,
+		IncidentsSettings: nil,
+		PhantomMode:       &wrapperspb.BoolValue{Value: false},
+		NotificationGroup: &cxsdk.AlertDefNotificationGroup{
+			GroupByKeys: []*wrapperspb.StringValue{},
+			Webhooks: []*cxsdk.AlertDefWebhooksSettings{
+				{
+					RetriggeringPeriod: &cxsdk.AlertDefWebhooksSettingsMinutes{
+						Minutes: wrapperspb.UInt32(5),
+					},
+					NotifyOn: &notifyOn,
+					Integration: &cxsdk.AlertDefIntegrationType{
+						IntegrationType: &cxsdk.AlertDefIntegrationTypeRecipients{
+							Recipients: &cxsdk.AlertDefRecipients{
+								Emails: []*wrapperspb.StringValue{
+									{Value: "example@coralogix.com"},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		EntityLabels: map[string]string{
+			"alert_type":        "security",
+			"security_severity": "high",
+		},
+		Schedule: &cxsdk.AlertDefScheduleActiveOn{
+			ActiveOn: &cxsdk.AlertsActivitySchedule{
+				DayOfWeek: []cxsdk.AlertDayOfWeek{
+					cxsdk.AlertDayOfWeekWednesday,
+					cxsdk.AlertDayOfWeekThursday,
+				},
+				StartTime: &cxsdk.AlertTimeOfDay{
+					Hours:   8,
+					Minutes: 30,
+				},
+				EndTime: &cxsdk.AlertTimeOfDay{
+					Hours:   20,
+					Minutes: 30,
+				},
+			},
+		},
+		TypeDefinition: &cxsdk.AlertDefPropertiesSlo{
+			SloThreshold: &cxsdk.SloThresholdType{
+				SloDefinition: &cxsdk.AlertSloDefinition{
+					SloId: &wrapperspb.StringValue{Value: sloId},
+				},
+				Threshold: &cxsdk.SloBurnRateThresholdType{
+					BurnRate: &cxsdk.SloBurnRateThreshold{
+						Rules: []*cxsdk.SloThresholdRule{
+							{
+								Condition: &cxsdk.SloThresholdCondition{
+									Threshold: wrapperspb.Double(1.0),
+								},
+								Override: &cxsdk.AlertDefPriorityOverride{
+									Priority: cxsdk.AlertDefPriorityP1,
+								},
+							},
+						},
+						Type: &cxsdk.SingleBurnRateThresholdType{
+							Single: &cxsdk.SingleBurnRateThreshold{
+								TimeDuration: &cxsdk.TimeDuration{
+									Duration: &wrapperspb.UInt64Value{Value: 1},
+									Unit:     cxsdk.DurationUnitHours,
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		GroupByKeys: []*wrapperspb.StringValue{},
+	}
+}
+
+func CreateErrorBudgetSloAlert(sloId string) *cxsdk.AlertDefProperties {
 	notifyOn := cxsdk.AlertNotifyOnTriggeredAndResolved
 	return &cxsdk.AlertDefProperties{
 		Name:              wrapperspb.String("Standard alert example"),
@@ -244,9 +328,15 @@ func TestAlerts(t *testing.T) {
 	})
 
 	assertNilAndPrintError(t, e)
+
+	_, err = c.Get(context.Background(), &cxsdk.GetAlertDefRequest{
+		Id: updatedAlert.AlertDef.Id,
+	})
+	// Returns NotFound
+	assert.NotNil(t, err)
 }
 
-func TestSloAlerts(t *testing.T) {
+func TestBurnRateSloAlerts(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
@@ -284,7 +374,7 @@ func TestSloAlerts(t *testing.T) {
 	}
 
 	createdAlertDef, err := alertsClient.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
-		AlertDefProperties: CreateSloAlert(*createSloResponse.Slo.Id),
+		AlertDefProperties: CreateBurnRateSloAlert(*createSloResponse.Slo.Id),
 	})
 
 	assertNilAndPrintError(t, err)
@@ -318,6 +408,83 @@ func TestSloAlerts(t *testing.T) {
 		Id: *createSloResponse.Slo.Id,
 	})
 	assertNilAndPrintError(t, e)
+}
+
+func TestAlertGetsDeletedOnSloDeletion(t *testing.T) {
+	// t.Skip("We're testing that when an SLO is deleted, the associated alert is also deleted. This functionality is not yet implemented in the API, so this test will fail until it is.")
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	alertsClient := cxsdk.NewAlertsClient(creator)
+	slosClient := cxsdk.NewSLOsClient(creator)
+	sloDescription := "description"
+
+	createSloResponse, err := slosClient.Create(context.Background(), &cxsdk.CreateServiceSloRequest{
+		Slo: &cxsdk.Slo{
+			Name:                      "coralogix_slo_go_example",
+			Description:               &sloDescription,
+			TargetThresholdPercentage: 30,
+			Sli: &cxsdk.SloRequestBasedMetricSli{
+				RequestBasedMetricSli: &cxsdk.RequestBasedMetricSli{
+					GoodEvents: &cxsdk.Metric{
+						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+					},
+					TotalEvents: &cxsdk.Metric{
+						Query: "avg(rate(cpu_usage_seconds_total[5m])) by (instance)",
+					},
+				},
+			},
+			Window: &cxsdk.SloTimeframe{
+				SloTimeFrame: cxsdk.SloTimeframe7Days,
+			},
+			Labels: map[string]string{
+				"label1": "value1",
+			},
+		},
+	})
+	if err != nil {
+		t.Fatalf("Failed to create SLO: %v", err)
+	}
+
+	createdAlertDef, err := alertsClient.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
+		AlertDefProperties: CreateBurnRateSloAlert(*createSloResponse.Slo.Id),
+	})
+
+	assertNilAndPrintError(t, err)
+
+	retrievedAlert, err := alertsClient.Get(context.Background(), &cxsdk.GetAlertDefRequest{
+		Id: createdAlertDef.AlertDef.Id,
+	})
+
+	assertNilAndPrintError(t, err)
+
+	alerts, err := alertsClient.List(context.Background(), &cxsdk.ListAlertDefsRequest{})
+	assertNilAndPrintError(t, err)
+	assert.Greater(t, len(alerts.AlertDefs), 0)
+
+	updatedAlertDef := retrievedAlert.AlertDef
+	updatedAlertDef.AlertDefProperties.Description = &wrapperspb.StringValue{Value: "Updated description"}
+
+	updateAlertResponse, err := alertsClient.Replace(context.Background(), &cxsdk.ReplaceAlertDefRequest{
+		AlertDefProperties: updatedAlertDef.AlertDefProperties,
+		Id:                 updatedAlertDef.Id,
+	})
+
+	assertNilAndPrintError(t, err)
+
+	_, err = slosClient.Delete(context.Background(), &cxsdk.DeleteServiceSloRequest{
+		Id: *createSloResponse.Slo.Id,
+	})
+	assertNilAndPrintError(t, err)
+
+	_, err = alertsClient.Get(context.Background(), &cxsdk.GetAlertDefRequest{
+		Id: updateAlertResponse.AlertDef.Id,
+	})
+
+	// Returns NotFound
+	assert.NotNil(t, err)
 }
 
 func TestAlertScheduler(t *testing.T) {

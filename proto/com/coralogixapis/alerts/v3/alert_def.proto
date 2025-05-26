@@ -119,7 +119,6 @@ message AlertDefProperties {
     description: "Keys used to group and aggregate alert data"
     example: "[\"key1\", \"key2\"]"
     min_items: 0
-    max_items: 2
   }];
   AlertDefIncidentSettings incidents_settings = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Incident creation and management settings"}];
   AlertDefNotificationGroup notification_group = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Primary notification group for alert events"}];

@@ -849,9 +849,9 @@ var File_com_coralogixapis_alerts_v3_alert_defs_service_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe6\x01\n" +
-	"\x12GetAlertDefRequest\x12u\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBG\x92AD2\x13Alert definition IDJ$123e4567-e89b-12d3-a456-426614174000\xa2\x02\x06UUIDv4R\x02id:Y\x92AV\n" +
+	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe8\x01\n" +
+	"\x12GetAlertDefRequest\x12w\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x92AF2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Y\x92AV\n" +
 	"T*\x1cGet alert definition request2/A request to retrieve an alert definition by ID\xd2\x01\x02id\"\xaf\x02\n" +
 	"\x1dGetAlertDefByVersionIdRequest\x12\x8e\x01\n" +
 	"\x10alert_version_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBF\x92AC2\x10Alert version IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x0ealertVersionId:}\x92Az\n" +

@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.20"
+revision = "v0.5.22"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -307,13 +307,11 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = 'v0.0.11'
+revision = 'v0.0.16'
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
     "src/com/coralogixapis/slo/v1/slo_service.proto",
-    "src/com/coralogixapis/slo/v1/slo_hub_service.proto",
-    "src/com/coralogixapis/slo/v1/slo_hub.proto",
 ]
 
 [cx-api-alert-scheduler]

@@ -190,6 +190,7 @@ type SloConstantFilterField int32
 const (
 	SloConstantFilterField_SLO_CONST_FILTER_FIELD_UNSPECIFIED SloConstantFilterField = 0
 	SloConstantFilterField_SLO_CONST_FILTER_FIELD_USER_NAME   SloConstantFilterField = 1
+	SloConstantFilterField_SLO_CONST_FILTER_FIELD_SLO_NAME    SloConstantFilterField = 2
 )
 
 // Enum value maps for SloConstantFilterField.
@@ -197,10 +198,12 @@ var (
 	SloConstantFilterField_name = map[int32]string{
 		0: "SLO_CONST_FILTER_FIELD_UNSPECIFIED",
 		1: "SLO_CONST_FILTER_FIELD_USER_NAME",
+		2: "SLO_CONST_FILTER_FIELD_SLO_NAME",
 	}
 	SloConstantFilterField_value = map[string]int32{
 		"SLO_CONST_FILTER_FIELD_UNSPECIFIED": 0,
 		"SLO_CONST_FILTER_FIELD_USER_NAME":   1,
+		"SLO_CONST_FILTER_FIELD_SLO_NAME":    2,
 	}
 )
 
@@ -1053,10 +1056,11 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\x16SLO_TIME_FRAME_14_DAYS\x10\x02\x12\x1a\n" +
 	"\x16SLO_TIME_FRAME_21_DAYS\x10\x03\x12\x1a\n" +
 	"\x16SLO_TIME_FRAME_28_DAYS\x10\x04\x12\x1a\n" +
-	"\x16SLO_TIME_FRAME_90_DAYS\x10\x05*f\n" +
+	"\x16SLO_TIME_FRAME_90_DAYS\x10\x05*\x8b\x01\n" +
 	"\x16SloConstantFilterField\x12&\n" +
 	"\"SLO_CONST_FILTER_FIELD_UNSPECIFIED\x10\x00\x12$\n" +
-	" SLO_CONST_FILTER_FIELD_USER_NAME\x10\x01B\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
+	" SLO_CONST_FILTER_FIELD_USER_NAME\x10\x01\x12#\n" +
+	"\x1fSLO_CONST_FILTER_FIELD_SLO_NAME\x10\x02B\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_slo_v1_slo_proto_rawDescOnce sync.Once

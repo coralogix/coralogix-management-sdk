@@ -15,8 +15,8 @@ commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.20"
-commit_hash = "d4febb6ef3243216e475065f30eddfbb6a001ca9"
+revision = "v0.5.22"
+commit_hash = "9f8d6435e1ff728cef36399b3dfcb1c6a3b695e2"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -129,8 +129,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.11"
-commit_hash = "479aa34ebf501c925b4b4fdc0282a3e2ebde1347"
+revision = "v0.0.16"
+commit_hash = "e527b1710af132cc0bc11db73aaa1c24ad4d9370"
 
 [[dependencies]]
 name = "cx-api-views"

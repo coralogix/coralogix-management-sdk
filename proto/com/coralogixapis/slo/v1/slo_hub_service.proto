@@ -11,6 +11,7 @@ message ListSloRowsRequest {}
 
 message ListSloRowsResponse {
   repeated SloHubRow slo_rows = 1;
+  optional bool zero_state = 2;
 }
 
 message GetSloDataRequest {

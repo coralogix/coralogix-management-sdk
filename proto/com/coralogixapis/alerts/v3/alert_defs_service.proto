@@ -301,7 +301,7 @@ message GetAlertDefRequest {
   // Alert definition ID
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Alert definition ID"
-    example: "123e4567-e89b-12d3-a456-426614174000"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
     format: "UUIDv4"
   }];
 }
