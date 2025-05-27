@@ -19,14 +19,11 @@ message Filter {
     }
   };
 
-  // The source of the filter, which can be logs, spans, or metrics.
-  Source source = 1;
+  Source source = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The source of the filter, which can be logs, spans, or metrics."}];
 
-  // Indicates if the filter is currently enabled or not.
-  google.protobuf.BoolValue enabled = 2;
+  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the filter is currently enabled or not."}];
 
-  // Indicates if the filter's UI representation should be collapsed or expanded.
-  google.protobuf.BoolValue collapsed = 3;
+  google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the filter's UI representation should be collapsed or expanded."}];
 
   message Source {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -37,9 +34,9 @@ message Filter {
     };
 
     oneof value {
-      LogsFilter logs = 1; // Filter configuration for logs.
-      SpansFilter spans = 2; // Filter configuration for spans.
-      MetricsFilter metrics = 3; // Filter configuration for metrics.
+      LogsFilter logs = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for logs."}];
+      SpansFilter spans = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for spans."}];
+      MetricsFilter metrics = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for metrics."}];
     }
   }
 
@@ -51,14 +48,11 @@ message Filter {
       }
     };
 
-    // The log field to which the filter is applied.
-    google.protobuf.StringValue field = 1;
+    google.protobuf.StringValue field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The log field to which the filter is applied."}];
 
-    // An operator used for filtering the logs.
-    Operator operator = 2;
+    Operator operator = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the logs."}];
 
-    // The observation log field to which the filter is applied.
-    v1.common.ObservationField observation_field = 3;
+    v1.common.ObservationField observation_field = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The observation log field to which the filter is applied."}];
   }
 
   message SpansFilter {
@@ -69,14 +63,11 @@ message Filter {
       }
     };
 
-    // The span field to which the filter is applied.
-    common.SpanField field = 1;
+    common.SpanField field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The span field to which the filter is applied."}];
 
-    // An operator used for filtering the spans.
-    Operator operator = 2;
+    Operator operator = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the spans."}];
 
-    // The observation span field to which the filter is applied.
-    v1.common.ObservationField observation_field = 3;
+    v1.common.SpanObservationField observation_field = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)"}];
   }
 
   message MetricsFilter {
@@ -87,14 +78,11 @@ message Filter {
       }
     };
 
-    // The name of the metric to which the filter is applied.
-    google.protobuf.StringValue metric = 1;
+    google.protobuf.StringValue metric = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The name of the metric to which the filter is applied."}];
 
-    // The label associated with the metric.
-    google.protobuf.StringValue label = 2;
+    google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The label associated with the metric."}];
 
-    // An operator used for filtering the metrics.
-    Operator operator = 3;
+    Operator operator = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the metrics."}];
   }
 
   message Operator {
@@ -107,8 +95,8 @@ message Filter {
 
     // Specifies the type of the comparison operation.
     oneof value {
-      Equals equals = 1; // Equality comparison.
-      NotEquals not_equals = 2; // Non-equality comparison.
+      Equals equals = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Equality comparison."}];
+      NotEquals not_equals = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Non-equality comparison."}];
     }
   }
 
@@ -120,8 +108,7 @@ message Filter {
       }
     };
 
-    // The selection criteria for the equality comparison.
-    Selection selection = 1;
+    Selection selection = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The selection criteria for the equality comparison."}];
 
     message Selection {
       option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -133,8 +120,8 @@ message Filter {
 
       // Specifies the type of selection for the equality comparison.
       oneof value {
-        AllSelection all = 1; // Represents a selection of all values.
-        ListSelection list = 2; // Represents a selection from a list of values.
+        AllSelection all = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection of all values."}];
+        ListSelection list = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection from a list of values."}];
       }
 
       message AllSelection {
@@ -154,8 +141,7 @@ message Filter {
           }
         };
 
-        // A list of selected values.
-        repeated google.protobuf.StringValue values = 1;
+        repeated google.protobuf.StringValue values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of selected values."}];
       }
     }
   }
@@ -168,8 +154,7 @@ message Filter {
       }
     };
 
-    // Selection criteria for the non-equality comparison.
-    Selection selection = 1;
+    Selection selection = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The selection criteria for the non-equality comparison."}];
 
     message Selection {
       option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -181,7 +166,7 @@ message Filter {
 
       // Specifies the type of selection for the non-equality comparison.
       oneof value {
-        ListSelection list = 1; // Represents a selection from a list of values.
+        ListSelection list = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection from a list of values."}];
       }
 
       message ListSelection {
@@ -192,8 +177,7 @@ message Filter {
           }
         };
 
-        // A list of values for the selection.
-        repeated google.protobuf.StringValue values = 1;
+        repeated google.protobuf.StringValue values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of values for the selection."}];
       }
     }
   }

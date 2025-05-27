@@ -18,6 +18,7 @@ message Dashboard {
     json_schema: {
       title: "Dashboard"
       description: "Dashboard represents the structure and configuration of a Coralogix Custom Dashboard."
+      required: ["name", "layout"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -26,30 +27,51 @@ message Dashboard {
   };
 
   // A unique identifier of the dashboard.
-  google.protobuf.StringValue id = 1;
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"GZLHSeqelCbD3I7HbIDtL\""
+    description: "A unique identifier of the dashboard"
+  }];
 
   // The display name of the dashboard.
-  google.protobuf.StringValue name = 2;
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"Example Name\""
+    description: "The display name of the dashboard"
+  }];
 
   // A brief description or summary of the dashboard's purpose or content.
-  google.protobuf.StringValue description = 3;
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"Sample description\""
+    description: "A brief description or summary of the dashboard's purpose or content"
+  }];
 
   // The layout configuration for the dashboard's visual elements.
-  Layout layout = 4;
+  Layout layout = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The layout configuration for the dashboard's visual elements."
+  }];
 
   // A list of variables that can be used within the dashboard for dynamic content.
-  repeated Variable variables = 5;
+  repeated Variable variables = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "A list of variables that can be used within the dashboard for dynamic content"
+  }];
 
   // A list of filters that can be applied to the dashboard's data.
-  repeated Filter filters = 6;
+  repeated Filter filters = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "A list of filters that can be applied to the dashboard's data"
+  }];
 
   // Specifies the time frame for the dashboard's data. Can be either absolute or relative.
   oneof time_frame {
     // Absolute time frame specifying a fixed start and end time.
-    common.TimeFrame absolute_time_frame = 7;
+    common.TimeFrame absolute_time_frame = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Absolute time frame specifying a fixed start and end time"
+      // would use an example
+    }];
 
     // Relative time frame specifying a duration from the current time.
-    google.protobuf.Duration relative_time_frame = 8;
+    google.protobuf.Duration relative_time_frame = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Relative time frame specifying a duration from the current time"
+      // would use an example
+    }];
   }
 
   // A polymorphic field for the dashboard's folder. Either a folder ID or a folder path is supported.
@@ -58,7 +80,9 @@ message Dashboard {
     FolderPath folder_path = 10;
   }
 
-  repeated Annotation annotations = 11;
+  repeated Annotation annotations = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "A list of annotations that can be used within the dashboard's visualizations"
+  }];
 
   // The auto refresh interval for the dashboard.
   oneof auto_refresh {

@@ -16,6 +16,7 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_rel
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto";
 import "google/protobuf/timestamp.proto";
@@ -112,12 +113,12 @@ message AlertDefProperties {
     MetricAnomalyType metric_anomaly = 110 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for metric-based anomaly detection alerts"}];
     LogsNewValueType logs_new_value = 111 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for alerts triggered by new log values"}];
     LogsUniqueCountType logs_unique_count = 112 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for alerts based on unique log value counts"}];
+    SloThresholdType slo_threshold = 113 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for SLO-based alerts"}];
   }
   repeated google.protobuf.StringValue group_by_keys = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Keys used to group and aggregate alert data"
     example: "[\"key1\", \"key2\"]"
     min_items: 0
-    max_items: 2
   }];
   AlertDefIncidentSettings incidents_settings = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Incident creation and management settings"}];
   AlertDefNotificationGroup notification_group = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Primary notification group for alert events"}];

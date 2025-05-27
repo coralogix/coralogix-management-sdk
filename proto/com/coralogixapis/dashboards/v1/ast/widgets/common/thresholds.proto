@@ -3,11 +3,26 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets.common;
 
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message Threshold {
-  google.protobuf.DoubleValue from = 1;
-  google.protobuf.StringValue color = 2;
-  google.protobuf.StringValue label = 3;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Threshold"
+      description: "Definition of a single gauge threshold"
+      required: []
+    }
+  };
+
+  google.protobuf.DoubleValue from = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Minimum bound value of the threshold"
+  }];
+  google.protobuf.StringValue color = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Color of the threshold"
+  }];
+  google.protobuf.StringValue label = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Optional label of the threshold"
+  }];
 }
 
 enum ThresholdType {

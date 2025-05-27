@@ -28,24 +28,53 @@ message Widget {
   };
 
   // Widget unique identifier
-  UUID id = 1;
-  google.protobuf.StringValue title = 2;
-  google.protobuf.StringValue description = 3;
-  Definition definition = 4;
+  UUID id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Widget unique identifier"
+    example: '{ "value": "83aed974-510b-43be-bd19-c92daf56beff" }'
+  }];
+  google.protobuf.StringValue title = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Name of the widget"
+    example: '{ "value": "Gauge" }'
+  }];
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Short description of the widget"
+    example: '{ "value": "Average delay of application" }'
+  }];
+  Definition definition = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Definition of the widget type and details"
+  }];
+  // Appearance was probably planned but is unused and deprecated
   Appearance appearance = 5 [deprecated = true];
+  // these are existing in DB but not mapped in the API
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp updated_at = 7;
 
   message Definition {
     oneof value {
-      widgets.LineChart line_chart = 1;
-      widgets.DataTable data_table = 2;
-      widgets.Gauge gauge = 3;
-      widgets.PieChart pie_chart = 4;
-      widgets.BarChart bar_chart = 5;
-      widgets.HorizontalBarChart horizontal_bar_chart = 6;
-      widgets.Markdown markdown = 7;
-      widgets.Hexagon hexagon = 8;
+      widgets.LineChart line_chart = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Line chart widget definition"
+      }];
+      widgets.DataTable data_table = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Data table widget definition"
+      }];
+      widgets.Gauge gauge = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Gauge widget definition"
+      }];
+      widgets.PieChart pie_chart = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Pie chart widget definition"
+      }];
+      widgets.BarChart bar_chart = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Vertical bar chart widget definition"
+      }];
+      widgets.HorizontalBarChart horizontal_bar_chart = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Horizontal bar chart widget definition"
+      }];
+      widgets.Markdown markdown = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Markdown widget definition"
+      }];
+      widgets.Hexagon hexagon = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "Hexagon widget definition"
+      }];
     }
   }
 
