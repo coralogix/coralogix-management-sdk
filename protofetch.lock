@@ -3,8 +3,8 @@ version = 2
 [[dependencies]]
 name = "alerts-api-protobuf"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.19"
-commit_hash = "d7dd662783e76d469a4540ca16fd21d5e5773fa3"
+revision = "v0.5.22"
+commit_hash = "9f8d6435e1ff728cef36399b3dfcb1c6a3b695e2"
 
 [[dependencies]]
 name = "cx-api-actions"
@@ -27,8 +27,8 @@ commit_hash = "995f2fa4245ab060a96963566fabdfa7dc5b88c5"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.111"
-commit_hash = "ebfbb611165d8754504fb75b985107b3d531fd78"
+revision = "v0.0.115"
+commit_hash = "0db0bba9900eb9e6f254123fab6e383b663635bb"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,14 +39,14 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.4.1"
-commit_hash = "a5a9c7defe0afcc515cce0ebf903c568b631a131"
+revision = "v2.5.0"
+commit_hash = "b8c301781f5af130467bb83886b6b5ca26e1792a"
 
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.1.27"
-commit_hash = "de1857e1be7860addfb9781f3da8a3483eb03d86"
+revision = "v0.3.4"
+commit_hash = "2b854434f01f17075542b8f6c27b53b0966531a1"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -71,6 +71,12 @@ name = "cx-api-incidents"
 url = "github.com/coralogix/cx-api-incidents"
 revision = "v1.0.2"
 commit_hash = "aaea20e337ae89cc93a4222906918f3092a49240"
+
+[[dependencies]]
+name = "cx-api-lmd-model"
+url = "github.com/coralogix/cx-api-lmd-model"
+branch = "master"
+commit_hash = "d6ef2857302a0583278a96ed4e781330796a6780"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -105,8 +111,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.108"
-commit_hash = "6165358717f90cbf75b06aade88ca861ffa07453"
+revision = "v0.1.112"
+commit_hash = "b4816120aa883fc2da5f698a92bedf88e1bc1eff"
 
 [[dependencies]]
 name = "cx-api-quota"
