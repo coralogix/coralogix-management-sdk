@@ -5,129 +5,192 @@ This guide provides step-by-step instructions on how to use the Terraform migrat
 ---
 
 ## **Prerequisites**
-1. **Terraform Installed**:
-   - Ensure you have Terraform installed. You can download it [here](https://www.terraform.io/downloads).
-2. **Go Installed**:
-   - Install Go from [golang.org](https://golang.org/dl/).
-3. **Python Installed**:
-   - The script uses Python 3 for JSON processing, so make sure you have Python 3 installed.
-4. **`hcl2json` Installed**:
-   - Install the `hcl2json` utility. You can find it [here](https://github.com/tmccombs/hcl2json).
+
+1. **Terraform Installed**  
+   Ensure you have Terraform installed. You can download it [here](https://www.terraform.io/downloads).
+
+2. **Go Installed**  
+   Install Go from [golang.org](https://golang.org/dl/).
+
+3. **Python Installed**  
+   The script uses Python 3 for JSON processing, so make sure you have Python 3 installed.
+
+4. **`hcl2json` Installed**  
+   Install the `hcl2json` utility. You can find it [here](https://github.com/tmccombs/hcl2json).
+
+5. **Homebrew (for macOS users)**  
+   Used to manage dependencies via the `Makefile`.
+
+---
+
+## **Installing Prerequisites (macOS)**
+
+To automatically install all required tools using Homebrew, run:
+
+```bash
+make install
+```
+
+This will:
+
+- Install **Terraform**, **Go**, **Python3**, and **hcl2json** using Homebrew.
+- Install Homebrew itself if it's not already available.
+
+To verify installation:
+
+```bash
+make check
+```
 
 ---
 
 ## **Usage**
 
-### **1. Script Purpose**
+### 1. Script Purpose
+
 The script allows you to:
+
 - Migrate Terraform configurations based on:
-   - A folder containing a `terraform.tfstate` file.
-   - A specific resource type (e.g., `alert`, `dashboard`).
+  - A folder containing a `terraform.tfstate` file.
+  - A specific resource type (e.g., `alert`, `dashboard`).
 - Generate a migration folder with cleaned and updated configurations.
-- Specify the provider version interactively during the process.
+- Specify the provider version interactively.
+- Optionally apply the Terraform plan based on a prompt.
 
 ---
 
-### **2. Running the Script**
-Before running the script, ensure you defined the required environment variables -  
-`CORALOGIX_API_KEY` and `CORALOGIX_ENV`.
+### 2. Running the Script with Make
 
-Use the script as follows:
+Before running the script, you can set the required environment variables:
+
+- `CORALOGIX_API_KEY`
+- `CORALOGIX_ENV`
+
+Then use the `Makefile`:
+
 ```bash
-./generate_and_migrate.sh
+make run
 ```
 
+> If you are not setting up the env vars, then make command will take care of that during execution
+
+You will be prompted during execution:
+
+```
+Do you want to run terraform apply? (yes/no):
+```
+
+This prompt sets an environment variable that determines whether `terraform apply` is executed.
+
+> ⚠️ You do **not** need to pass `APPLY_TERRAFORM=yes` manually. The prompt will handle it.
+
 ---
 
-### **3. Interactive Steps**
+### 3. Interactive Steps
 
-#### **Step 1: Select Migration Type**
+#### Step 1: Select Migration Type
+
 You will be prompted to choose the migration type:
+
 - **Option 1**: Migrate based on a folder containing a `terraform.tfstate` file.
-   - Provide the path to the folder.
-   - The script ensures that the folder contains a valid `terraform.tfstate` file.
+  - Provide the path to the folder.
+  - The script checks for the presence of the state file.
 - **Option 2**: Migrate based on a specific resource type.
-   - A list of resource types will be displayed. Choose from options like:
-      - `alert`, `dashboard`, `archive_logs`, `events2metrics`, etc.
-   - Select the desired resource type from the list.
+  - A list of resource types will be displayed.
+  - Choose from options like: `alert`, `dashboard`, `archive_logs`, `events2metrics`, etc.
 
-#### **Step 2: Specify Provider Version**
-After selecting the migration type, you will be prompted to specify the Terraform provider version:
-- Example: `~>1.19.0`.
-- The script will default to `>=2.0.0` if no input is provided.
+#### Step 2: Specify Provider Version
 
----
-
-### **4. What Happens Next**
-
-#### **Step 3: Generate Migration Folder**
-- The script creates a new migration folder based on your input:
-   - For a folder, it appends `_migration` to the folder name.
-   - For a resource type, it creates a folder like `./<resource_type>_migration`.
-
-#### **Step 4: Run `generate_imports.go`**
-- The script runs a Go program (`generate_imports.go`) to generate an `imports.tf` file inside the migration folder.
-
-#### **Step 5: Generate `provider.tf`**
-- A `provider.tf` file is generated in the migration folder with the specified provider version.
-
-#### **Step 6: Run `terraform init`**
-- The script initializes Terraform inside the migration folder using `terraform init`.
-
-#### **Step 7: Run `terraform plan`**
-- The script runs `terraform plan` with the `-generate-config-out` flag to generate a new configuration file (`generated.tf`).
-
-#### **Step 8: Remove Null Values**
-- Python is used to clean the JSON file by removing null values, generating a cleaned JSON file (`cleaned_config.json`).
-
-#### **Step 9: Apply the Configuration**
-- The script applies the cleaned configuration using `terraform apply`.
-**Note**: The script will prompt you to confirm the apply action and will override your existing resources with the new configuration. 
-If you choose not to apply, the script will exit.
-
-#### **Step 10: Cleanup**
-- Temporary files are deleted.
+- Enter the Terraform provider version (e.g., `~>2.0.0`).
+- If left blank, the default `>=2.0.0` is used.
 
 ---
 
-### **5. Example Outputs**
+### 4. What Happens Next
 
-#### **Migration Type Selection**
-```plaintext
+#### Step 3: Generate Migration Folder
+
+- Folder structure is created based on your input.
+
+#### Step 4: Run `generate_imports.go`
+
+- A Go program generates `imports.tf` based on the resource or folder.
+
+#### Step 5: Generate `provider.tf`
+
+- The required provider version is written into `provider.tf`.
+
+#### Step 6: Initialize Terraform
+
+- Terraform is initialized using `terraform init`.
+
+#### Step 7: Generate Configuration Plan
+
+- `terraform plan -generate-config-out` creates `generated.tf`.
+
+#### Step 8: JSON Cleanup
+
+- `generated.tf` is converted to JSON.
+- Null values are removed using a Python script.
+- JSON is converted back to cleaned HCL.
+
+#### Step 9: (Optional) Terraform Apply
+
+- If you answered `yes` when prompted, the script runs `terraform apply`.
+- If you answered `no`, this step is skipped.
+
+#### Step 10: Cleanup
+
+- Temporary files like `imports.tf`, `config.json`, and cleaned JSON are deleted.
+
+---
+
+## **Example Outputs**
+
+### Migration Type Selection
+
+```text
 [INFO] Select the migration type:
 [INFO] 1) Migrate based on a folder containing terraform.tfstate
 [INFO] 2) Migrate based on a specific resource name
 Enter your choice (1 or 2): 2
 ```
 
-#### **Provider Version Prompt**
-```plaintext
+### Provider Version Prompt
+
+```text
 Enter the Terraform provider version to migrate to (e.g., ~>1.19.0): >=2.0.0
 ```
 
-#### **Logs During Execution**
-```plaintext
-2024-12-01 15:45:22 [INFO] Creating migration folder: ./alert_migration
-2024-12-01 15:45:22 [INFO] Running generate_imports.go with -type...
-2024-12-01 15:45:22 [INFO] Successfully generated imports.tf at ./alert_migration.
-2024-12-01 15:45:22 [INFO] Generating provider configuration in ./alert_migration/provider.tf...
-2024-12-01 15:45:22 [INFO] Provider configuration generated in ./alert_migration/provider.tf.
-2024-12-01 15:45:22 [INFO] Initializing Terraform in ./alert_migration...
-2024-12-01 15:45:22 [INFO] Running terraform plan in ./alert_migration...
+### Apply Prompt
+
+```text
+Do you want to run terraform apply? (yes/no): yes
+```
+
+### Logs During Execution
+
+```text
+2025-05-28 12:25:10 [INFO] Creating migration folder: ./alert_migration
+2025-05-28 12:25:10 [INFO] Running generate_imports.go with -type...
+2025-05-28 12:25:10 [INFO] Provider configuration generated in ./alert_migration/provider.tf.
+2025-05-28 12:25:10 [INFO] Initializing Terraform...
 ...
-2024-12-01 15:45:22 [INFO] Terraform apply completed.
-2024-12-01 15:45:22 [INFO] Cleanup completed.
-2024-12-01 15:45:22 [INFO] Script completed successfully.
+2025-05-28 12:25:10 [INFO] Terraform apply completed.
+2025-05-28 12:25:10 [INFO] Cleanup completed.
 ```
 
 ---
 
-### **6. Notes**
-- **Customization**:
-   - Update the resource types in the script if new ones are added.
-   - Adjust the default provider version if needed.
-- **Error Handling**:
-   - The script will exit if any step fails (`set -e`).
-   - Logs are color-coded for better visibility (`INFO`, `ERROR`, `WARNING`, etc.).
+## **Notes**
+
+- **Error Handling**  
+  Uses `set -euo pipefail` for strict error checking. Logs errors with `[ERROR]` prefix and exits on failure.
+
+- **Makefile**  
+  Includes targets to check/install dependencies and run the script with a friendly interactive experience.
+
+- **Safe Execution**  
+  Terraform apply is skipped unless the user explicitly consents via prompt.
 
 ---
