@@ -24,6 +24,7 @@ test:
 	cd ./go; make test TESTARGS=${TESTARGS}
 
 proto-renew:
+	protofetch clear-cache
 	protofetch clean
 	protofetch fetch
 	cp -a proto/src/** proto/

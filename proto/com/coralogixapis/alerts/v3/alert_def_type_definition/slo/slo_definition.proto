@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message SloDefinition {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SLO Definition"
+      description: "Configuration for SLO definition"
+      required: ["slo_id"]
+    }
+  };
+  google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The SLO ID"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
+  }];
+}

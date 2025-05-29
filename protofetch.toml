@@ -13,9 +13,9 @@ allow_policies = [
 ]
 
 
-[alerts-api-protobuf]
+[cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.19"
+revision = "v0.5.22"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -108,6 +108,11 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual.proto",
     "src/com/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual_enriched.proto",
     "src/com/coralogixapis/alerts/v5/event/payload/standard/event_standard_unusual_payload.proto",
+    "src/com/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto",
+    "src/com/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto",
+    "src/com/coralogixapis/alerts/v3/pagination.proto",
 ]
 
 
@@ -298,6 +303,15 @@ allow_policies = [
     "src/com/coralogixapis/apm/common/v2/order_by.proto",
     "src/com/coralogixapis/apm/services/v1/service_slo.proto",
     "src/com/coralogixapis/apm/services/v1/service_slo_service.proto",
+]
+
+[cx-api-slo]
+url = 'github.com/coralogix/cx-api-slo'
+revision = 'v0.0.16'
+allow_policies = [
+    "src/com/coralogixapis/slo/v1/slo_alert.proto",
+    "src/com/coralogixapis/slo/v1/slo.proto",
+    "src/com/coralogixapis/slo/v1/slo_service.proto",
 ]
 
 [cx-api-alert-scheduler]

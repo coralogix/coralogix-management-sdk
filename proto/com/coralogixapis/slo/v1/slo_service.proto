@@ -1,0 +1,135 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "com/coralogixapis/slo/v1/slo.proto";
+import "google/rpc/code.proto";
+
+package com.coralogixapis.slo.v1;
+option go_package = "com/coralogixapis/slo/v1";
+
+message ResponseStatus {
+  google.rpc.Code status_code = 1;
+  optional string message = 2;
+  map<string,string> details = 3;
+}
+
+message CreateSloRequest {
+  Slo slo = 1;
+}
+
+message CreateSloResponse {
+  Slo slo = 1;
+}
+
+message ReplaceSloRequest {
+  Slo slo = 1;
+}
+
+message ReplaceSloResponse {
+  Slo slo = 1;
+  repeated string effected_slo_alert_ids = 2;
+}
+
+message DeleteSloRequest {
+  string id = 1;
+}
+
+message DeleteSloResponse {
+  repeated string effected_slo_alert_ids = 1;
+}
+
+message GetSloRequest {
+  string id = 1;
+}
+
+message GetSloResponse {
+  Slo slo = 1;
+}
+
+message ListSlosRequest {
+  SloFilters filters = 1;
+}
+
+message ListSlosResponse {
+  repeated Slo slos = 1;
+}
+
+message BatchGetSlosRequest {
+  repeated string ids = 1;
+}
+
+message BatchGetSlosResponse {
+  repeated Slo slos = 1;
+  repeated string not_found_ids = 2;
+}
+
+message SloExecutionRequest {
+  oneof request {
+    CreateSloRequest create_slo_request = 1;
+    ReplaceSloRequest replace_slo_request = 2;
+    DeleteSloRequest delete_slo_request = 3;
+  }
+}
+
+message SloExecutionResponse {
+  oneof response {
+    CreateSloResponse create_slo_response = 1;
+    ReplaceSloResponse replace_slo_response = 2;
+    DeleteSloResponse delete_slo_response = 3;
+  }
+}
+
+message BatchExecuteSloRequest {
+  repeated SloExecutionRequest requests = 1;
+}
+
+message BatchExecuteSloResponse {
+  repeated SloExecutionResponse matching_responses = 1;
+  ResponseStatus status = 2;
+}
+
+service SlosService {
+  rpc CreateSlo(CreateSloRequest) returns (CreateSloResponse) {
+    option (google.api.http) = {
+      post: "/v1/slo/slos"
+      body: "slo"
+    };
+  }
+
+  rpc ReplaceSlo(ReplaceSloRequest) returns (ReplaceSloResponse) {
+    option (google.api.http) = {
+      put: "/v1/slo/slos"
+      body: "slo"
+    };
+  }
+
+  rpc DeleteSlo(DeleteSloRequest) returns (DeleteSloResponse) {
+    option (google.api.http) = {
+      delete: "/v1/slo/slos/{id}"
+    };
+  }
+
+  rpc GetSlo(GetSloRequest) returns (GetSloResponse) {
+    option (google.api.http) = {
+      get: "/v1/slo/slos/{id}"
+    };
+  }
+
+  rpc ListSlos(ListSlosRequest) returns (ListSlosResponse) {
+    option (google.api.http) = {
+      get: "/v1/slo/slos"
+    };
+  }
+
+  rpc BatchGetSlos(BatchGetSlosRequest) returns (BatchGetSlosResponse) {
+    option (google.api.http) = {
+      get: "/v1/slo/slos:batchGet"
+    };
+  }
+
+  rpc BatchExecuteSlo(BatchExecuteSloRequest) returns (BatchExecuteSloResponse) {
+    option (google.api.http) = {
+      post: "/v1/slo/slos:batchExecute"
+    };
+  }
+}
