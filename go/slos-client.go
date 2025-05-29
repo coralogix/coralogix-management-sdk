@@ -119,6 +119,7 @@ const (
 const (
 	SloConstantFilterFieldUnspecified = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_UNSPECIFIED
 	SloConstantFilterFieldUserName    = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_USER_NAME
+	SloConstantFilterFieldSloName     = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_SLO_NAME
 )
 
 // SloComparisonOperator variants
