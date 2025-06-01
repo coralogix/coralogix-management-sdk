@@ -290,40 +290,6 @@ service AlertDefsService {
   }
 }
 
-enum OrderByDirection {
-  ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED = 0;
-  ORDER_BY_DIRECTION_DESC = 1;
-}
-
-enum OrderByFields {
-  ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED = 0;
-  ORDER_BY_FIELDS_ID = 1;
-  ORDER_BY_FIELDS_SEVERITY = 2;
-  ORDER_BY_FIELDS_CREATED_TIME = 3;
-  ORDER_BY_FIELDS_UPDATED_TIME = 4;
-}
-
-message OrderBy {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Order by"
-      description: "A data structure that specifies the field and direction for ordering query results"
-      required: [
-        "field_name",
-        "direction"
-      ]
-    }
-  };
-  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Field name to order by"
-    example: "\"ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED\""
-  }];
-  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Direction for ordering"
-    example: "\"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\""
-  }];
-}
-
 message GetAlertDefRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -335,7 +301,7 @@ message GetAlertDefRequest {
   // Alert definition ID
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Alert definition ID"
-    example: "123e4567-e89b-12d3-a456-426614174000"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
     format: "UUIDv4"
   }];
 }
@@ -382,7 +348,9 @@ message ListAlertDefsResponse {
     json_schema: {
       title: "List alert definitions response"
       description: "A response that contains a list of alert definitions"
-      required: ["alert_defs"]
+      required: [
+        "alert_defs"
+      ]
     }
   };
   repeated AlertDef alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -599,3 +567,5 @@ message SetActiveResponse {
     }
   };
 }
+
+

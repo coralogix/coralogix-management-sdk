@@ -1,0 +1,98 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/duration.proto";
+
+enum SloMetricThresholdConditionType {
+  METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED = 0;
+  METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS = 1;
+}
+
+message SloMetricTimeWindow {
+  oneof type {
+    SloMetricTimeWindowValue slo_metric_time_window_specific_value = 1;
+  }
+}
+
+enum SloMetricTimeWindowValue {
+  SLO_METRIC_TIME_WINDOW_VALUE_UNSPECIFIED = 0;
+  SLO_METRIC_TIME_WINDOW_VALUE_1_MINUTE = 1;
+}
+
+message SloMetricFilter {
+  oneof type {
+    google.protobuf.StringValue promql = 1;
+  }
+}
+
+message SloMetricMissingValues {
+  oneof missing_values {
+    google.protobuf.BoolValue replace_with_zero = 1;
+    google.protobuf.UInt32Value min_non_null_values_pct = 2;
+  }
+}
+
+message BurnRateMetricTypeDual {
+  SloMetricFilter long_metric_filter = 1;
+  SloMetricFilter short_metric_filter = 2;
+}
+
+message BurnRateMetricTypeSingle {
+  SloMetricFilter metric_filter = 1;
+}
+
+message ErrorBudgetMetricType {
+  SloMetricFilter metric_filter = 1;
+}
+
+
+message BurnRateAlertTypeDual {
+  google.protobuf.Duration long_window = 1;
+  google.protobuf.Duration short_window = 2;
+  repeated google.protobuf.DoubleValue thresholds = 3;
+}
+
+message BurnRateAlertTypeSingle {
+  google.protobuf.Duration window = 1;
+  repeated google.protobuf.DoubleValue thresholds = 2;
+}
+
+message BurnRateAlertDefinition {
+  oneof burn_rate {
+    BurnRateAlertTypeDual dual = 2;
+    BurnRateAlertTypeSingle single = 3;
+  };
+}
+
+message SloDefinition {
+  string slo_id = 1;
+}
+
+message ErrorBudgetAlertDefinition {}
+
+message MoreThanConditionOperator {}
+
+message MoreThanOrEqualsConditionOperator {}
+
+message LessThanConditionOperator {
+    UndetectedValuesManagement undetected_values_management = 1;
+}
+
+message LessThanOrEqualsConditionOperator {
+  UndetectedValuesManagement undetected_values_management = 1;
+}
+
+message UndetectedValuesManagement {
+  google.protobuf.BoolValue trigger_undetected_values = 1;
+  optional AutoRetireTimeframe auto_retire_timeframe = 2;
+}
+
+enum AutoRetireTimeframe {
+  AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED = 0;
+  AUTO_RETIRE_TIMEFRAME_MINUTES_5 = 1;
+  AUTO_RETIRE_TIMEFRAME_MINUTES_10 = 2;
+  AUTO_RETIRE_TIMEFRAME_HOUR_1 = 3;
+  AUTO_RETIRE_TIMEFRAME_HOURS_2 = 4;
+  AUTO_RETIRE_TIMEFRAME_HOURS_6 = 5;
+  AUTO_RETIRE_TIMEFRAME_HOURS_12 = 6;
+  AUTO_RETIRE_TIMEFRAME_HOURS_24 = 7;
+}

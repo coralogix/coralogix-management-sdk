@@ -1,0 +1,107 @@
+syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "com/coralogixapis/slo/v1";
+package com.coralogixapis.slo.v1;
+
+message Metric {
+  string query = 1;
+}
+
+enum ComparisonOperator {
+  COMPARISON_OPERATOR_UNSPECIFIED = 0;
+  COMPARISON_OPERATOR_GREATER_THAN = 1;
+  COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS = 2;
+  COMPARISON_OPERATOR_LESS_THAN = 3;
+  COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS = 4;
+}
+
+enum WindowSloWindow {
+  WINDOW_SLO_WINDOW_UNSPECIFIED = 0;
+  WINDOW_SLO_WINDOW_1_MINUTE = 1;
+  WINDOW_SLO_WINDOW_5_MINUTES = 2;
+}
+
+message RequestBasedMetricSli {
+  Metric good_events = 1;
+  Metric total_events = 2;
+}
+
+message WindowBasedMetricSli {
+  Metric query = 1;
+  WindowSloWindow window = 2;
+  ComparisonOperator comparison_operator = 3;
+  float threshold = 4;
+}
+
+enum SloTimeFrame {
+  SLO_TIME_FRAME_UNSPECIFIED = 0;
+  SLO_TIME_FRAME_7_DAYS = 1;
+  SLO_TIME_FRAME_14_DAYS = 2;
+  SLO_TIME_FRAME_21_DAYS = 3;
+  SLO_TIME_FRAME_28_DAYS = 4;
+  SLO_TIME_FRAME_90_DAYS = 5;
+}
+
+message Revision {
+  int32 revision = 1;
+  google.protobuf.Timestamp update_time = 2;
+}
+
+message Grouping {
+  repeated string labels = 1;
+}
+
+message Slo{
+  optional string id = 1;
+  string name = 2;
+  optional string description = 3;
+  optional string creator = 4;
+  map<string, string> labels = 5;
+  optional Revision revision = 6;
+  optional Grouping grouping = 7;
+  google.protobuf.Timestamp create_time = 8;
+  google.protobuf.Timestamp update_time = 9;
+  float target_threshold_percentage = 10;
+  oneof window {
+    SloTimeFrame slo_time_frame = 11;
+    //    google.protobuf.Duration duration = 11;
+  };
+  oneof sli {
+    RequestBasedMetricSli request_based_metric_sli = 12;
+    WindowBasedMetricSli window_based_metric_sli = 13;
+  };
+}
+
+enum SloConstantFilterField {
+  SLO_CONST_FILTER_FIELD_UNSPECIFIED = 0;
+  SLO_CONST_FILTER_FIELD_USER_NAME = 1;
+  SLO_CONST_FILTER_FIELD_SLO_NAME = 2;
+}
+
+message SloFilterField {
+  oneof field {
+    SloConstantFilterField const_filter = 1;
+    string label_name = 2;
+  }
+}
+
+message IsFilterPredicate {
+  repeated string is = 1;
+}
+
+message SloFilterPredicate {
+  oneof predicate {
+    IsFilterPredicate is = 1;
+  }
+}
+
+message SloFilter {
+  SloFilterField field = 1;
+  SloFilterPredicate predicate = 2;
+}
+
+message SloFilters {
+  repeated SloFilter filters = 1;
+}

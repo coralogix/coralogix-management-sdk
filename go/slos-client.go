@@ -17,77 +17,128 @@ package cxsdk
 import (
 	"context"
 
-	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/services/v1"
+	slos "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/slo/v1"
 )
 
-// ServiceSlo is an SLO.
-type ServiceSlo = slos.ServiceSlo
+// Slo is an SLO.
+type Slo = slos.Slo
 
 // CreateServiceSloRequest is a request to create an SLO.
-type CreateServiceSloRequest = slos.CreateServiceSloRequest
-
-// ServiceSloErrorSli is an SLO error SLI.
-type ServiceSloErrorSli = slos.ServiceSlo_ErrorSli
-
-// ErrorSli is an SLO error SLI.
-type ErrorSli = slos.ErrorSli
-
-// LatencySli is an SLO latency SLI.
-type LatencySli = slos.LatencySli
-
-// ServiceSloLatencySli is a something.
-type ServiceSloLatencySli = slos.ServiceSlo_LatencySli
+type CreateServiceSloRequest = slos.CreateSloRequest
 
 // GetServiceSloRequest is a request to get an SLO.
-type GetServiceSloRequest = slos.GetServiceSloRequest
+type GetServiceSloRequest = slos.GetSloRequest
 
 // ReplaceServiceSloRequest is a request to replace an SLO.
-type ReplaceServiceSloRequest = slos.ReplaceServiceSloRequest
+type ReplaceServiceSloRequest = slos.ReplaceSloRequest
 
 // DeleteServiceSloRequest is a request to delete an SLO.
-type DeleteServiceSloRequest = slos.DeleteServiceSloRequest
+type DeleteServiceSloRequest = slos.DeleteSloRequest
 
-// SliFilter is an SLO filter.
-type SliFilter = slos.SliFilter
+// SloFilter is an SLO filter.
+type SloFilter = slos.SloFilter
 
-// ThresholdSymbol is an SLO threshold symbol.
-type ThresholdSymbol = slos.ThresholdSymbol
+// SloFilterField is an SLO filter field.
+type SloFilterField = slos.SloFilterField
 
-const infraMonitoringFeatureGroupID = "infra-monitoring"
+// SloConstantFilterField is an SLO constant filter.
+type SloConstantFilterField = slos.SloFilterField_ConstFilter
 
-// SloThresholdSymbol values.
+// SloConstantFilterFieldEnum is an SLO constant filter field enum.
+type SloConstantFilterFieldEnum = slos.SloConstantFilterField
+
+// SloLabelNameFilterField is an SLO label name filter.
+type SloLabelNameFilterField = slos.SloFilterField_LabelName
+
+// SloFilterPredicate is an SLO filter predicate.
+type SloFilterPredicate = slos.SloFilterPredicate
+
+// SloFilterPredicateIs is an SLO filter predicate is.
+type SloFilterPredicateIs = slos.SloFilterPredicate_Is
+
+// IsSloFilterPredicate is an SLO filter is predicate.
+type IsSloFilterPredicate = slos.IsFilterPredicate
+
+// SloRequestBasedMetricSli is a metric SLI.
+type SloRequestBasedMetricSli = slos.Slo_RequestBasedMetricSli
+
+// SloWindowBasedMetricSli is a metric SLI.
+type SloWindowBasedMetricSli = slos.Slo_WindowBasedMetricSli
+
+// WindowBasedMetricSli is a window-based metric SLI.
+type WindowBasedMetricSli = slos.WindowBasedMetricSli
+
+// RequestBasedMetricSli is a metric SLI.
+type RequestBasedMetricSli = slos.RequestBasedMetricSli
+
+// Metric is a metric.
+type Metric = slos.Metric
+
+// SloTimeframe is an SLO time frame.
+type SloTimeframe = slos.Slo_SloTimeFrame
+
+// SloTimeframeEnum is an enum type for SLO time frames.
+type SloTimeframeEnum = slos.SloTimeFrame
+
+// ListSlosRequest is a request to list SLOs.
+type ListSlosRequest = slos.ListSlosRequest
+
+// ListSlosResponse is a response to a list SLOs request.
+type ListSlosResponse = slos.ListSlosResponse
+
+// SloGrouping is a type that represents the SLO grouping.
+type SloGrouping = slos.Grouping
+
+// SloFilters is a type that allows to filter SLOs.
+type SloFilters = slos.SloFilters
+
+// SloWindow is a type that represents the SLO window.
+type SloWindow = slos.WindowSloWindow
+
+// SloComparisonOperator is a type that represents the SLO comparison operator.
+type SloComparisonOperator = slos.ComparisonOperator
+
+// SloTimeframe variants
 const (
-	SloThresholdSymbolGreater        = slos.ThresholdSymbol_THRESHOLD_SYMBOL_GREATER
-	SloThresholdSymbolGreaterOrEqual = slos.ThresholdSymbol_THRESHOLD_SYMBOL_GREATER_OR_EQUAL
-	SloThresholdSymbolLess           = slos.ThresholdSymbol_THRESHOLD_SYMBOL_LESS
-	SloThresholdSymbolLessOrEqual    = slos.ThresholdSymbol_THRESHOLD_SYMBOL_LESS_OR_EQUAL
-	SloThresholdSymbolEqual          = slos.ThresholdSymbol_THRESHOLD_SYMBOL_EQUAL
+	SloTimeframeUnspecified = slos.SloTimeFrame_SLO_TIME_FRAME_UNSPECIFIED
+	SloTimeframe7Days       = slos.SloTimeFrame_SLO_TIME_FRAME_7_DAYS
+	SloTimeframe14Days      = slos.SloTimeFrame_SLO_TIME_FRAME_14_DAYS
+	SloTimeframe21Days      = slos.SloTimeFrame_SLO_TIME_FRAME_21_DAYS
+	SloTimeframe28Days      = slos.SloTimeFrame_SLO_TIME_FRAME_28_DAYS
+	SloTimeframe90Days      = slos.SloTimeFrame_SLO_TIME_FRAME_90_DAYS
 )
 
-// SloPeriod is a SLO period.
-type SloPeriod = slos.SloPeriod
-
-// SloStatus is a SLO status.
-type SloStatus = slos.SloStatus
-
-// SLO period values.
+// SloWindow variants
 const (
-	SloPeriodUnspecified = slos.SloPeriod_SLO_PERIOD_UNSPECIFIED
-	SloPeriod7Days       = slos.SloPeriod_SLO_PERIOD_7_DAYS
-	SloPeriod14Days      = slos.SloPeriod_SLO_PERIOD_14_DAYS
-	SloPeriod30Days      = slos.SloPeriod_SLO_PERIOD_30_DAYS
+	SloWindowUnspecified = slos.WindowSloWindow_WINDOW_SLO_WINDOW_UNSPECIFIED
+	SloWindow1Minute     = slos.WindowSloWindow_WINDOW_SLO_WINDOW_1_MINUTE
+	SloWindow5Minutes    = slos.WindowSloWindow_WINDOW_SLO_WINDOW_5_MINUTES
 )
 
-// CompareType is an SLO compare type.
-type CompareType = slos.CompareType
-
-// SloCompareType values.
+// SloFilterField variants
 const (
-	SloCompareTypeUnspecified = slos.CompareType_COMPARE_TYPE_UNSPECIFIED
-	SloCompareTypeIs          = slos.CompareType_COMPARE_TYPE_IS
-	SloCompareTypeStartsWith  = slos.CompareType_COMPARE_TYPE_START_WITH
-	SloCompareTypeEndsWith    = slos.CompareType_COMPARE_TYPE_ENDS_WITH
-	SloCompareTypeIncludes    = slos.CompareType_COMPARE_TYPE_INCLUDES
+	SloConstantFilterFieldUnspecified = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_UNSPECIFIED
+	SloConstantFilterFieldUserName    = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_USER_NAME
+	SloConstantFilterFieldSloName     = slos.SloConstantFilterField_SLO_CONST_FILTER_FIELD_SLO_NAME
+)
+
+// SloComparisonOperator variants
+const (
+	SloComparisonOperatorUnspecified         = slos.ComparisonOperator_COMPARISON_OPERATOR_UNSPECIFIED
+	SloComparisonOperatorGreaterThan         = slos.ComparisonOperator_COMPARISON_OPERATOR_GREATER_THAN
+	SloComparisonOperatorLessThan            = slos.ComparisonOperator_COMPARISON_OPERATOR_LESS_THAN
+	SloComparisonOperatorGreaterThanOrEquals = slos.ComparisonOperator_COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS
+	SloComparisonOperatorLessThanOrEquals    = slos.ComparisonOperator_COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS
+)
+
+// SLO RPC names
+const (
+	SloCreateRPC   = slos.SlosService_CreateSlo_FullMethodName
+	SloGetRPC      = slos.SlosService_GetSlo_FullMethodName
+	SloReplaceRPC  = slos.SlosService_ReplaceSlo_FullMethodName
+	SloDeleteRPC   = slos.SlosService_DeleteSlo_FullMethodName
+	SloBatchGetRPC = slos.SlosService_BatchGetSlos_FullMethodName
+	SlosListRPC    = slos.SlosService_ListSlos_FullMethodName
 )
 
 // SloStatus values.
@@ -95,17 +146,12 @@ const (
 	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_UNSPECIFIED
 	SloStatusOk          = slos.SloStatus_SLO_STATUS_OK
 	SloStatusBreached    = slos.SloStatus_SLO_STATUS_BREACHED
+	SloStatusCritical    = slos.SloStatus_SLO_STATUS_CRITICAL
+	SloStatusWarning     = slos.SloStatus_SLO_STATUS_WARNING
+	SloStatusPending     = slos.SloStatus_SLO_STATUS_PENDING
 )
 
-// RPC names.
-const (
-	SloGetRPC      = slos.ServiceSloService_GetServiceSlo_FullMethodName
-	SloCreateRPC   = slos.ServiceSloService_CreateServiceSlo_FullMethodName
-	SloReplaceRPC  = slos.ServiceSloService_ReplaceServiceSlo_FullMethodName
-	SloDeleteRPC   = slos.ServiceSloService_DeleteServiceSlo_FullMethodName
-	SloListRPC     = slos.ServiceSloService_ListServiceSlos_FullMethodName
-	SloBatchGetRPC = slos.ServiceSloService_BatchGetServiceSlos_FullMethodName
-)
+const infraMonitoringFeatureGroupID = "infra-monitoring"
 
 // SLOsClient is a client for the Coralogix SLOs API.
 type SLOsClient struct {
@@ -113,7 +159,7 @@ type SLOsClient struct {
 }
 
 // Create creates a new SLO.
-func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloRequest) (*slos.CreateServiceSloResponse, error) {
+func (c SLOsClient) Create(ctx context.Context, req *slos.CreateSloRequest) (*slos.CreateSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -121,9 +167,9 @@ func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloReques
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.CreateServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.CreateSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, SloCreateRPC, infraMonitoringFeatureGroupID)
 	}
@@ -131,7 +177,7 @@ func (c SLOsClient) Create(ctx context.Context, req *slos.CreateServiceSloReques
 }
 
 // Get gets the specified SLO.
-func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*slos.GetServiceSloResponse, error) {
+func (c SLOsClient) Get(ctx context.Context, req *slos.GetSloRequest) (*slos.GetSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -139,9 +185,9 @@ func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*s
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.GetServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.GetSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, SloGetRPC, infraMonitoringFeatureGroupID)
 	}
@@ -149,7 +195,7 @@ func (c SLOsClient) Get(ctx context.Context, req *slos.GetServiceSloRequest) (*s
 }
 
 // Update updates the specified SLO.
-func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloRequest) (*slos.ReplaceServiceSloResponse, error) {
+func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceSloRequest) (*slos.ReplaceSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -157,9 +203,9 @@ func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloReque
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.ReplaceServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, SloReplaceRPC, infraMonitoringFeatureGroupID)
 	}
@@ -167,7 +213,7 @@ func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceServiceSloReque
 }
 
 // Delete deletes the specified SLO.
-func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloRequest) (*slos.DeleteServiceSloResponse, error) {
+func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteSloRequest) (*slos.DeleteSloResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -175,9 +221,9 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloReques
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.DeleteServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.DeleteSlo(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, SloDeleteRPC, infraMonitoringFeatureGroupID)
 	}
@@ -185,7 +231,7 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteServiceSloReques
 }
 
 // GetBulk gets multiple SLOs in a single call.
-func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRequest) (*slos.BatchGetServiceSlosResponse, error) {
+func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetSlosRequest) (*slos.BatchGetSlosResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -193,9 +239,9 @@ func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRe
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.BatchGetServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.BatchGetSlos(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, SloBatchGetRPC, infraMonitoringFeatureGroupID)
 	}
@@ -203,7 +249,7 @@ func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetServiceSlosRe
 }
 
 // List lists all service SLOs.
-func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) (*slos.ListServiceSlosResponse, error) {
+func (c SLOsClient) List(ctx context.Context, req *slos.ListSlosRequest) (*slos.ListSlosResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -211,11 +257,11 @@ func (c SLOsClient) List(ctx context.Context, req *slos.ListServiceSlosRequest) 
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := slos.NewServiceSloServiceClient(conn)
+	client := slos.NewSlosServiceClient(conn)
 
-	response, err := client.ListServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ListSlos(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
-		return nil, NewSdkAPIError(err, SloListRPC, infraMonitoringFeatureGroupID)
+		return nil, NewSdkAPIError(err, SlosListRPC, infraMonitoringFeatureGroupID)
 	}
 	return response, nil
 }

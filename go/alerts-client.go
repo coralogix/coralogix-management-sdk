@@ -113,6 +113,51 @@ type AlertDefPropertiesTracingImmediate = alerts.AlertDefProperties_TracingImmed
 // AlertDefPropertiesLogsThreshold is a property of an alert.
 type AlertDefPropertiesLogsThreshold = alerts.AlertDefProperties_LogsThreshold
 
+// AlertDefPropertiesSlo is a property of an alert.
+type AlertDefPropertiesSlo = alerts.AlertDefProperties_SloThreshold
+
+// AlertSloDefinition is a definition of an SLO in the alerts service.
+type AlertSloDefinition = alerts.SloDefinition
+
+// SloThresholdType is a type of SLO threshold.
+type SloThresholdType = alerts.SloThresholdType
+
+// SloBurnRateThresholdType is a type of SLO threshold.
+type SloBurnRateThresholdType = alerts.SloThresholdType_BurnRate
+
+// SloBurnRateThreshold is a type of SLO threshold.
+type SloBurnRateThreshold = alerts.BurnRateThreshold
+
+// SingleBurnRateThresholdType is a type of SLO burnrate threshold.
+type SingleBurnRateThresholdType = alerts.BurnRateThreshold_Single
+
+// DualBurnRateThresholdType is a type of SLO burnrate threshold.
+type DualBurnRateThresholdType = alerts.BurnRateThreshold_Dual
+
+// SingleBurnRateThreshold is a type of SLO burnrate threshold.
+type SingleBurnRateThreshold = alerts.BurnRateTypeSingle
+
+// DualBurnRateThreshold is a type of SLO burnrate threshold.
+type DualBurnRateThreshold = alerts.BurnRateTypeDual
+
+// TimeDuration represents a time duration.
+type TimeDuration = alerts.TimeDuration
+
+// SloErrorBudgetThresholdType is a type of SLO threshold.
+type SloErrorBudgetThresholdType = alerts.SloThresholdType_ErrorBudget
+
+// SloErrorBudgetThreshold is a type of SLO threshold.
+type SloErrorBudgetThreshold = alerts.ErrorBudgetThreshold
+
+// SloThresholdRule is a rule for SLO thresholds.
+type SloThresholdRule = alerts.SloThresholdRule
+
+// SloThresholdCondition is a condition for SLO thresholds.
+type SloThresholdCondition = alerts.SloThresholdCondition
+
+// SloDurationUnit is a unit of time for SLOs.
+type SloDurationUnit = alerts.DurationUnit
+
 // AlertDefPropertiesLogsRatioThreshold is a property of an alert.
 type AlertDefPropertiesLogsRatioThreshold = alerts.AlertDefProperties_LogsRatioThreshold
 
@@ -355,10 +400,17 @@ type PresetOverride = alerts.MessageConfigField
 
 const alertsFeatureGroupID = "alerts"
 
+// Duration Unity Variants
+const (
+	DurationUnitHours       = alerts.DurationUnit_DURATION_UNIT_HOURS
+	DurationUnitUnspecified = alerts.DurationUnit_DURATION_UNIT_UNSPECIFIED
+)
+
 // AlertDefType values.
 const (
 	AlertDefTypeLogsImmediateOrUnspecified = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED
 	AlertDefTypeLogsThreshold              = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_THRESHOLD
+	AlertDefTypeSloThreshold               = alerts.AlertDefType_ALERT_DEF_TYPE_SLO_THRESHOLD
 	AlertDefTypeLogsAnomaly                = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_ANOMALY
 	AlertDefTypeLogsRatioThreshold         = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_RATIO_THRESHOLD
 	AlertDefTypeLogsNewValue               = alerts.AlertDefType_ALERT_DEF_TYPE_LOGS_NEW_VALUE

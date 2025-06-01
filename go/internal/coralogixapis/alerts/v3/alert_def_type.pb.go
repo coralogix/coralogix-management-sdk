@@ -36,6 +36,7 @@ const (
 	AlertDefType_ALERT_DEF_TYPE_TRACING_IMMEDIATE             AlertDefType = 15
 	AlertDefType_ALERT_DEF_TYPE_TRACING_THRESHOLD             AlertDefType = 16
 	AlertDefType_ALERT_DEF_TYPE_FLOW                          AlertDefType = 17
+	AlertDefType_ALERT_DEF_TYPE_SLO_THRESHOLD                 AlertDefType = 18
 )
 
 // Enum value maps for AlertDefType.
@@ -53,6 +54,7 @@ var (
 		15: "ALERT_DEF_TYPE_TRACING_IMMEDIATE",
 		16: "ALERT_DEF_TYPE_TRACING_THRESHOLD",
 		17: "ALERT_DEF_TYPE_FLOW",
+		18: "ALERT_DEF_TYPE_SLO_THRESHOLD",
 	}
 	AlertDefType_value = map[string]int32{
 		"ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED": 0,
@@ -67,6 +69,7 @@ var (
 		"ALERT_DEF_TYPE_TRACING_IMMEDIATE":             15,
 		"ALERT_DEF_TYPE_TRACING_THRESHOLD":             16,
 		"ALERT_DEF_TYPE_FLOW":                          17,
+		"ALERT_DEF_TYPE_SLO_THRESHOLD":                 18,
 	}
 )
 
@@ -101,7 +104,7 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/alerts/v3/alert_def_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\xd4\x03\n" +
+	"0com/coralogixapis/alerts/v3/alert_def_type.proto\x12\x1bcom.coralogixapis.alerts.v3*\xf6\x03\n" +
 	"\fAlertDefType\x120\n" +
 	",ALERT_DEF_TYPE_LOGS_IMMEDIATE_OR_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dALERT_DEF_TYPE_LOGS_THRESHOLD\x10\x01\x12\x1f\n" +
@@ -115,7 +118,8 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_proto_rawDesc = "" +
 	"\x1dALERT_DEF_TYPE_METRIC_ANOMALY\x10\x0e\x12$\n" +
 	" ALERT_DEF_TYPE_TRACING_IMMEDIATE\x10\x0f\x12$\n" +
 	" ALERT_DEF_TYPE_TRACING_THRESHOLD\x10\x10\x12\x17\n" +
-	"\x13ALERT_DEF_TYPE_FLOW\x10\x11b\x06proto3"
+	"\x13ALERT_DEF_TYPE_FLOW\x10\x11\x12 \n" +
+	"\x1cALERT_DEF_TYPE_SLO_THRESHOLD\x10\x12b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_alert_def_type_proto_rawDescOnce sync.Once

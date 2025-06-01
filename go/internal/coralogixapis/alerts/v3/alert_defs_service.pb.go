@@ -26,159 +26,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type OrderByDirection int32
-
-const (
-	OrderByDirection_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED OrderByDirection = 0
-	OrderByDirection_ORDER_BY_DIRECTION_DESC               OrderByDirection = 1
-)
-
-// Enum value maps for OrderByDirection.
-var (
-	OrderByDirection_name = map[int32]string{
-		0: "ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED",
-		1: "ORDER_BY_DIRECTION_DESC",
-	}
-	OrderByDirection_value = map[string]int32{
-		"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED": 0,
-		"ORDER_BY_DIRECTION_DESC":               1,
-	}
-)
-
-func (x OrderByDirection) Enum() *OrderByDirection {
-	p := new(OrderByDirection)
-	*p = x
-	return p
-}
-
-func (x OrderByDirection) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (OrderByDirection) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes[0].Descriptor()
-}
-
-func (OrderByDirection) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes[0]
-}
-
-func (x OrderByDirection) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use OrderByDirection.Descriptor instead.
-func (OrderByDirection) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{0}
-}
-
-type OrderByFields int32
-
-const (
-	OrderByFields_ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED OrderByFields = 0
-	OrderByFields_ORDER_BY_FIELDS_ID                  OrderByFields = 1
-	OrderByFields_ORDER_BY_FIELDS_SEVERITY            OrderByFields = 2
-	OrderByFields_ORDER_BY_FIELDS_CREATED_TIME        OrderByFields = 3
-	OrderByFields_ORDER_BY_FIELDS_UPDATED_TIME        OrderByFields = 4
-)
-
-// Enum value maps for OrderByFields.
-var (
-	OrderByFields_name = map[int32]string{
-		0: "ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED",
-		1: "ORDER_BY_FIELDS_ID",
-		2: "ORDER_BY_FIELDS_SEVERITY",
-		3: "ORDER_BY_FIELDS_CREATED_TIME",
-		4: "ORDER_BY_FIELDS_UPDATED_TIME",
-	}
-	OrderByFields_value = map[string]int32{
-		"ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED": 0,
-		"ORDER_BY_FIELDS_ID":                  1,
-		"ORDER_BY_FIELDS_SEVERITY":            2,
-		"ORDER_BY_FIELDS_CREATED_TIME":        3,
-		"ORDER_BY_FIELDS_UPDATED_TIME":        4,
-	}
-)
-
-func (x OrderByFields) Enum() *OrderByFields {
-	p := new(OrderByFields)
-	*p = x
-	return p
-}
-
-func (x OrderByFields) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (OrderByFields) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes[1].Descriptor()
-}
-
-func (OrderByFields) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes[1]
-}
-
-func (x OrderByFields) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use OrderByFields.Descriptor instead.
-func (OrderByFields) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{1}
-}
-
-type OrderBy struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	FieldName     OrderByFields          `protobuf:"varint,1,opt,name=field_name,json=fieldName,proto3,enum=com.coralogixapis.alerts.v3.OrderByFields" json:"field_name,omitempty"`
-	Direction     OrderByDirection       `protobuf:"varint,2,opt,name=direction,proto3,enum=com.coralogixapis.alerts.v3.OrderByDirection" json:"direction,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *OrderBy) Reset() {
-	*x = OrderBy{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *OrderBy) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*OrderBy) ProtoMessage() {}
-
-func (x *OrderBy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use OrderBy.ProtoReflect.Descriptor instead.
-func (*OrderBy) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *OrderBy) GetFieldName() OrderByFields {
-	if x != nil {
-		return x.FieldName
-	}
-	return OrderByFields_ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED
-}
-
-func (x *OrderBy) GetDirection() OrderByDirection {
-	if x != nil {
-		return x.Direction
-	}
-	return OrderByDirection_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED
-}
-
 type GetAlertDefRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Alert definition ID
@@ -189,7 +36,7 @@ type GetAlertDefRequest struct {
 
 func (x *GetAlertDefRequest) Reset() {
 	*x = GetAlertDefRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -201,7 +48,7 @@ func (x *GetAlertDefRequest) String() string {
 func (*GetAlertDefRequest) ProtoMessage() {}
 
 func (x *GetAlertDefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -214,7 +61,7 @@ func (x *GetAlertDefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlertDefRequest.ProtoReflect.Descriptor instead.
 func (*GetAlertDefRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GetAlertDefRequest) GetId() *wrapperspb.StringValue {
@@ -233,7 +80,7 @@ type GetAlertDefByVersionIdRequest struct {
 
 func (x *GetAlertDefByVersionIdRequest) Reset() {
 	*x = GetAlertDefByVersionIdRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -245,7 +92,7 @@ func (x *GetAlertDefByVersionIdRequest) String() string {
 func (*GetAlertDefByVersionIdRequest) ProtoMessage() {}
 
 func (x *GetAlertDefByVersionIdRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -258,7 +105,7 @@ func (x *GetAlertDefByVersionIdRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlertDefByVersionIdRequest.ProtoReflect.Descriptor instead.
 func (*GetAlertDefByVersionIdRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{2}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *GetAlertDefByVersionIdRequest) GetAlertVersionId() *wrapperspb.StringValue {
@@ -277,7 +124,7 @@ type GetAlertDefResponse struct {
 
 func (x *GetAlertDefResponse) Reset() {
 	*x = GetAlertDefResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -289,7 +136,7 @@ func (x *GetAlertDefResponse) String() string {
 func (*GetAlertDefResponse) ProtoMessage() {}
 
 func (x *GetAlertDefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -302,7 +149,7 @@ func (x *GetAlertDefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlertDefResponse.ProtoReflect.Descriptor instead.
 func (*GetAlertDefResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *GetAlertDefResponse) GetAlertDef() *AlertDef {
@@ -321,7 +168,7 @@ type GetAlertDefByVersionIdResponse struct {
 
 func (x *GetAlertDefByVersionIdResponse) Reset() {
 	*x = GetAlertDefByVersionIdResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -333,7 +180,7 @@ func (x *GetAlertDefByVersionIdResponse) String() string {
 func (*GetAlertDefByVersionIdResponse) ProtoMessage() {}
 
 func (x *GetAlertDefByVersionIdResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -346,7 +193,7 @@ func (x *GetAlertDefByVersionIdResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetAlertDefByVersionIdResponse.ProtoReflect.Descriptor instead.
 func (*GetAlertDefByVersionIdResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetAlertDefByVersionIdResponse) GetAlertDef() *AlertDef {
@@ -365,7 +212,7 @@ type ListAlertDefsResponse struct {
 
 func (x *ListAlertDefsResponse) Reset() {
 	*x = ListAlertDefsResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -377,7 +224,7 @@ func (x *ListAlertDefsResponse) String() string {
 func (*ListAlertDefsResponse) ProtoMessage() {}
 
 func (x *ListAlertDefsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -390,7 +237,7 @@ func (x *ListAlertDefsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAlertDefsResponse.ProtoReflect.Descriptor instead.
 func (*ListAlertDefsResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ListAlertDefsResponse) GetAlertDefs() []*AlertDef {
@@ -408,7 +255,7 @@ type ListAlertDefsRequest struct {
 
 func (x *ListAlertDefsRequest) Reset() {
 	*x = ListAlertDefsRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -420,7 +267,7 @@ func (x *ListAlertDefsRequest) String() string {
 func (*ListAlertDefsRequest) ProtoMessage() {}
 
 func (x *ListAlertDefsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -433,7 +280,7 @@ func (x *ListAlertDefsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAlertDefsRequest.ProtoReflect.Descriptor instead.
 func (*ListAlertDefsRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{5}
 }
 
 type DownloadAlertsRequest struct {
@@ -444,7 +291,7 @@ type DownloadAlertsRequest struct {
 
 func (x *DownloadAlertsRequest) Reset() {
 	*x = DownloadAlertsRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -456,7 +303,7 @@ func (x *DownloadAlertsRequest) String() string {
 func (*DownloadAlertsRequest) ProtoMessage() {}
 
 func (x *DownloadAlertsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -469,7 +316,7 @@ func (x *DownloadAlertsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadAlertsRequest.ProtoReflect.Descriptor instead.
 func (*DownloadAlertsRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{6}
 }
 
 type DownloadAlertsResponse struct {
@@ -481,7 +328,7 @@ type DownloadAlertsResponse struct {
 
 func (x *DownloadAlertsResponse) Reset() {
 	*x = DownloadAlertsResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -493,7 +340,7 @@ func (x *DownloadAlertsResponse) String() string {
 func (*DownloadAlertsResponse) ProtoMessage() {}
 
 func (x *DownloadAlertsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -506,7 +353,7 @@ func (x *DownloadAlertsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DownloadAlertsResponse.ProtoReflect.Descriptor instead.
 func (*DownloadAlertsResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DownloadAlertsResponse) GetContent() []byte {
@@ -525,7 +372,7 @@ type BatchGetAlertDefRequest struct {
 
 func (x *BatchGetAlertDefRequest) Reset() {
 	*x = BatchGetAlertDefRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -537,7 +384,7 @@ func (x *BatchGetAlertDefRequest) String() string {
 func (*BatchGetAlertDefRequest) ProtoMessage() {}
 
 func (x *BatchGetAlertDefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -550,7 +397,7 @@ func (x *BatchGetAlertDefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetAlertDefRequest.ProtoReflect.Descriptor instead.
 func (*BatchGetAlertDefRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *BatchGetAlertDefRequest) GetIds() []*wrapperspb.StringValue {
@@ -570,7 +417,7 @@ type BatchGetAlertDefResponse struct {
 
 func (x *BatchGetAlertDefResponse) Reset() {
 	*x = BatchGetAlertDefResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -582,7 +429,7 @@ func (x *BatchGetAlertDefResponse) String() string {
 func (*BatchGetAlertDefResponse) ProtoMessage() {}
 
 func (x *BatchGetAlertDefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -595,7 +442,7 @@ func (x *BatchGetAlertDefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetAlertDefResponse.ProtoReflect.Descriptor instead.
 func (*BatchGetAlertDefResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BatchGetAlertDefResponse) GetAlertDefs() map[string]*AlertDef {
@@ -622,7 +469,7 @@ type DeleteAlertDefRequest struct {
 
 func (x *DeleteAlertDefRequest) Reset() {
 	*x = DeleteAlertDefRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +481,7 @@ func (x *DeleteAlertDefRequest) String() string {
 func (*DeleteAlertDefRequest) ProtoMessage() {}
 
 func (x *DeleteAlertDefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -647,7 +494,7 @@ func (x *DeleteAlertDefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlertDefRequest.ProtoReflect.Descriptor instead.
 func (*DeleteAlertDefRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{11}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *DeleteAlertDefRequest) GetId() *wrapperspb.StringValue {
@@ -665,7 +512,7 @@ type DeleteAlertDefResponse struct {
 
 func (x *DeleteAlertDefResponse) Reset() {
 	*x = DeleteAlertDefResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -677,7 +524,7 @@ func (x *DeleteAlertDefResponse) String() string {
 func (*DeleteAlertDefResponse) ProtoMessage() {}
 
 func (x *DeleteAlertDefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -690,7 +537,7 @@ func (x *DeleteAlertDefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlertDefResponse.ProtoReflect.Descriptor instead.
 func (*DeleteAlertDefResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{12}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{11}
 }
 
 type ReplaceAlertDefRequest struct {
@@ -704,7 +551,7 @@ type ReplaceAlertDefRequest struct {
 
 func (x *ReplaceAlertDefRequest) Reset() {
 	*x = ReplaceAlertDefRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -716,7 +563,7 @@ func (x *ReplaceAlertDefRequest) String() string {
 func (*ReplaceAlertDefRequest) ProtoMessage() {}
 
 func (x *ReplaceAlertDefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -729,7 +576,7 @@ func (x *ReplaceAlertDefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplaceAlertDefRequest.ProtoReflect.Descriptor instead.
 func (*ReplaceAlertDefRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{13}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ReplaceAlertDefRequest) GetAlertDefProperties() *AlertDefProperties {
@@ -755,7 +602,7 @@ type ReplaceAlertDefResponse struct {
 
 func (x *ReplaceAlertDefResponse) Reset() {
 	*x = ReplaceAlertDefResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -767,7 +614,7 @@ func (x *ReplaceAlertDefResponse) String() string {
 func (*ReplaceAlertDefResponse) ProtoMessage() {}
 
 func (x *ReplaceAlertDefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -780,7 +627,7 @@ func (x *ReplaceAlertDefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplaceAlertDefResponse.ProtoReflect.Descriptor instead.
 func (*ReplaceAlertDefResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{14}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ReplaceAlertDefResponse) GetAlertDef() *AlertDef {
@@ -799,7 +646,7 @@ type CreateAlertDefRequest struct {
 
 func (x *CreateAlertDefRequest) Reset() {
 	*x = CreateAlertDefRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -811,7 +658,7 @@ func (x *CreateAlertDefRequest) String() string {
 func (*CreateAlertDefRequest) ProtoMessage() {}
 
 func (x *CreateAlertDefRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -824,7 +671,7 @@ func (x *CreateAlertDefRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAlertDefRequest.ProtoReflect.Descriptor instead.
 func (*CreateAlertDefRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{15}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *CreateAlertDefRequest) GetAlertDefProperties() *AlertDefProperties {
@@ -843,7 +690,7 @@ type CreateAlertDefResponse struct {
 
 func (x *CreateAlertDefResponse) Reset() {
 	*x = CreateAlertDefResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -855,7 +702,7 @@ func (x *CreateAlertDefResponse) String() string {
 func (*CreateAlertDefResponse) ProtoMessage() {}
 
 func (x *CreateAlertDefResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +715,7 @@ func (x *CreateAlertDefResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAlertDefResponse.ProtoReflect.Descriptor instead.
 func (*CreateAlertDefResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{16}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *CreateAlertDefResponse) GetAlertDef() *AlertDef {
@@ -920,7 +767,7 @@ type SetActiveRequest struct {
 
 func (x *SetActiveRequest) Reset() {
 	*x = SetActiveRequest{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[17]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -932,7 +779,7 @@ func (x *SetActiveRequest) String() string {
 func (*SetActiveRequest) ProtoMessage() {}
 
 func (x *SetActiveRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[17]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -945,7 +792,7 @@ func (x *SetActiveRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetActiveRequest.ProtoReflect.Descriptor instead.
 func (*SetActiveRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{17}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SetActiveRequest) GetId() *wrapperspb.StringValue {
@@ -970,7 +817,7 @@ type SetActiveResponse struct {
 
 func (x *SetActiveResponse) Reset() {
 	*x = SetActiveResponse{}
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -982,7 +829,7 @@ func (x *SetActiveResponse) String() string {
 func (*SetActiveResponse) ProtoMessage() {}
 
 func (x *SetActiveResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -995,22 +842,16 @@ func (x *SetActiveResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SetActiveResponse.ProtoReflect.Descriptor instead.
 func (*SetActiveResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{18}
+	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP(), []int{17}
 }
 
 var File_com_coralogixapis_alerts_v3_alert_defs_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xab\x03\n" +
-	"\aOrderBy\x12\x8d\x01\n" +
-	"\n" +
-	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.alerts.v3.OrderByFieldsBB\x92A?2\x16Field name to order byJ%\"ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED\"R\tfieldName\x12\x91\x01\n" +
-	"\tdirection\x18\x02 \x01(\x0e2-.com.coralogixapis.alerts.v3.OrderByDirectionBD\x92AA2\x16Direction for orderingJ'\"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\"R\tdirection:|\x92Ay\n" +
-	"w*\bOrder by2RA data structure that specifies the field and direction for ordering query results\xd2\x01\n" +
-	"field_name\xd2\x01\tdirection\"\xe6\x01\n" +
-	"\x12GetAlertDefRequest\x12u\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBG\x92AD2\x13Alert definition IDJ$123e4567-e89b-12d3-a456-426614174000\xa2\x02\x06UUIDv4R\x02id:Y\x92AV\n" +
+	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe8\x01\n" +
+	"\x12GetAlertDefRequest\x12w\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x92AF2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Y\x92AV\n" +
 	"T*\x1cGet alert definition request2/A request to retrieve an alert definition by ID\xd2\x01\x02id\"\xaf\x02\n" +
 	"\x1dGetAlertDefByVersionIdRequest\x12\x8e\x01\n" +
 	"\x10alert_version_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBF\x92AC2\x10Alert version IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x0ealertVersionId:}\x92Az\n" +
@@ -1068,16 +909,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x06active\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB<\x92A921Whether to enable or disable the alert definitionJ\x04trueR\x06active:Z\x92AW\n" +
 	"U*\x1cEnable/disable alert request2'A request to enable or disable an alert\xd2\x01\x02id\xd2\x01\x06active\"i\n" +
 	"\x11SetActiveResponse:T\x92AQ\n" +
-	"O*\x13Set active response28Response after enabling or disabling an alert definition*Z\n" +
-	"\x10OrderByDirection\x12)\n" +
-	"%ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\x10\x00\x12\x1b\n" +
-	"\x17ORDER_BY_DIRECTION_DESC\x10\x01*\xb2\x01\n" +
-	"\rOrderByFields\x12'\n" +
-	"#ORDER_BY_FIELDS_NAME_OR_UNSPECIFIED\x10\x00\x12\x16\n" +
-	"\x12ORDER_BY_FIELDS_ID\x10\x01\x12\x1c\n" +
-	"\x18ORDER_BY_FIELDS_SEVERITY\x10\x02\x12 \n" +
-	"\x1cORDER_BY_FIELDS_CREATED_TIME\x10\x03\x12 \n" +
-	"\x1cORDER_BY_FIELDS_UPDATED_TIME\x10\x042\x9e\x1b\n" +
+	"O*\x13Set active response28Response after enabling or disabling an alert definition2\x9e\x1b\n" +
 	"\x10AlertDefsService\x12\xeb\x02\n" +
 	"\vGetAlertDef\x12/.com.coralogixapis.alerts.v3.GetAlertDefRequest\x1a0.com.coralogixapis.alerts.v3.GetAlertDefResponse\"\xf8\x01\x92A\xbf\x01\n" +
 	"\x19Alert definitions service\x12\x1aGet alert definition by IDJ\x14\n" +
@@ -1182,77 +1014,71 @@ func file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescGZIP() []b
 	return file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_goTypes = []any{
-	(OrderByDirection)(0),                  // 0: com.coralogixapis.alerts.v3.OrderByDirection
-	(OrderByFields)(0),                     // 1: com.coralogixapis.alerts.v3.OrderByFields
-	(*OrderBy)(nil),                        // 2: com.coralogixapis.alerts.v3.OrderBy
-	(*GetAlertDefRequest)(nil),             // 3: com.coralogixapis.alerts.v3.GetAlertDefRequest
-	(*GetAlertDefByVersionIdRequest)(nil),  // 4: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest
-	(*GetAlertDefResponse)(nil),            // 5: com.coralogixapis.alerts.v3.GetAlertDefResponse
-	(*GetAlertDefByVersionIdResponse)(nil), // 6: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
-	(*ListAlertDefsResponse)(nil),          // 7: com.coralogixapis.alerts.v3.ListAlertDefsResponse
-	(*ListAlertDefsRequest)(nil),           // 8: com.coralogixapis.alerts.v3.ListAlertDefsRequest
-	(*DownloadAlertsRequest)(nil),          // 9: com.coralogixapis.alerts.v3.DownloadAlertsRequest
-	(*DownloadAlertsResponse)(nil),         // 10: com.coralogixapis.alerts.v3.DownloadAlertsResponse
-	(*BatchGetAlertDefRequest)(nil),        // 11: com.coralogixapis.alerts.v3.BatchGetAlertDefRequest
-	(*BatchGetAlertDefResponse)(nil),       // 12: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse
-	(*DeleteAlertDefRequest)(nil),          // 13: com.coralogixapis.alerts.v3.DeleteAlertDefRequest
-	(*DeleteAlertDefResponse)(nil),         // 14: com.coralogixapis.alerts.v3.DeleteAlertDefResponse
-	(*ReplaceAlertDefRequest)(nil),         // 15: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest
-	(*ReplaceAlertDefResponse)(nil),        // 16: com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
-	(*CreateAlertDefRequest)(nil),          // 17: com.coralogixapis.alerts.v3.CreateAlertDefRequest
-	(*CreateAlertDefResponse)(nil),         // 18: com.coralogixapis.alerts.v3.CreateAlertDefResponse
-	(*SetActiveRequest)(nil),               // 19: com.coralogixapis.alerts.v3.SetActiveRequest
-	(*SetActiveResponse)(nil),              // 20: com.coralogixapis.alerts.v3.SetActiveResponse
-	nil,                                    // 21: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry
-	(*wrapperspb.StringValue)(nil),         // 22: google.protobuf.StringValue
-	(*AlertDef)(nil),                       // 23: com.coralogixapis.alerts.v3.AlertDef
-	(*AlertDefProperties)(nil),             // 24: com.coralogixapis.alerts.v3.AlertDefProperties
-	(*wrapperspb.BoolValue)(nil),           // 25: google.protobuf.BoolValue
+	(*GetAlertDefRequest)(nil),             // 0: com.coralogixapis.alerts.v3.GetAlertDefRequest
+	(*GetAlertDefByVersionIdRequest)(nil),  // 1: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest
+	(*GetAlertDefResponse)(nil),            // 2: com.coralogixapis.alerts.v3.GetAlertDefResponse
+	(*GetAlertDefByVersionIdResponse)(nil), // 3: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
+	(*ListAlertDefsResponse)(nil),          // 4: com.coralogixapis.alerts.v3.ListAlertDefsResponse
+	(*ListAlertDefsRequest)(nil),           // 5: com.coralogixapis.alerts.v3.ListAlertDefsRequest
+	(*DownloadAlertsRequest)(nil),          // 6: com.coralogixapis.alerts.v3.DownloadAlertsRequest
+	(*DownloadAlertsResponse)(nil),         // 7: com.coralogixapis.alerts.v3.DownloadAlertsResponse
+	(*BatchGetAlertDefRequest)(nil),        // 8: com.coralogixapis.alerts.v3.BatchGetAlertDefRequest
+	(*BatchGetAlertDefResponse)(nil),       // 9: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse
+	(*DeleteAlertDefRequest)(nil),          // 10: com.coralogixapis.alerts.v3.DeleteAlertDefRequest
+	(*DeleteAlertDefResponse)(nil),         // 11: com.coralogixapis.alerts.v3.DeleteAlertDefResponse
+	(*ReplaceAlertDefRequest)(nil),         // 12: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest
+	(*ReplaceAlertDefResponse)(nil),        // 13: com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
+	(*CreateAlertDefRequest)(nil),          // 14: com.coralogixapis.alerts.v3.CreateAlertDefRequest
+	(*CreateAlertDefResponse)(nil),         // 15: com.coralogixapis.alerts.v3.CreateAlertDefResponse
+	(*SetActiveRequest)(nil),               // 16: com.coralogixapis.alerts.v3.SetActiveRequest
+	(*SetActiveResponse)(nil),              // 17: com.coralogixapis.alerts.v3.SetActiveResponse
+	nil,                                    // 18: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry
+	(*wrapperspb.StringValue)(nil),         // 19: google.protobuf.StringValue
+	(*AlertDef)(nil),                       // 20: com.coralogixapis.alerts.v3.AlertDef
+	(*AlertDefProperties)(nil),             // 21: com.coralogixapis.alerts.v3.AlertDefProperties
+	(*wrapperspb.BoolValue)(nil),           // 22: google.protobuf.BoolValue
 }
 var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_depIdxs = []int32{
-	1,  // 0: com.coralogixapis.alerts.v3.OrderBy.field_name:type_name -> com.coralogixapis.alerts.v3.OrderByFields
-	0,  // 1: com.coralogixapis.alerts.v3.OrderBy.direction:type_name -> com.coralogixapis.alerts.v3.OrderByDirection
-	22, // 2: com.coralogixapis.alerts.v3.GetAlertDefRequest.id:type_name -> google.protobuf.StringValue
-	22, // 3: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest.alert_version_id:type_name -> google.protobuf.StringValue
-	23, // 4: com.coralogixapis.alerts.v3.GetAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	23, // 5: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	23, // 6: com.coralogixapis.alerts.v3.ListAlertDefsResponse.alert_defs:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	22, // 7: com.coralogixapis.alerts.v3.BatchGetAlertDefRequest.ids:type_name -> google.protobuf.StringValue
-	21, // 8: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.alert_defs:type_name -> com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry
-	22, // 9: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.not_found_ids:type_name -> google.protobuf.StringValue
-	22, // 10: com.coralogixapis.alerts.v3.DeleteAlertDefRequest.id:type_name -> google.protobuf.StringValue
-	24, // 11: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest.alert_def_properties:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties
-	22, // 12: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest.id:type_name -> google.protobuf.StringValue
-	23, // 13: com.coralogixapis.alerts.v3.ReplaceAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	24, // 14: com.coralogixapis.alerts.v3.CreateAlertDefRequest.alert_def_properties:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties
-	23, // 15: com.coralogixapis.alerts.v3.CreateAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	22, // 16: com.coralogixapis.alerts.v3.SetActiveRequest.id:type_name -> google.protobuf.StringValue
-	25, // 17: com.coralogixapis.alerts.v3.SetActiveRequest.active:type_name -> google.protobuf.BoolValue
-	23, // 18: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry.value:type_name -> com.coralogixapis.alerts.v3.AlertDef
-	3,  // 19: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:input_type -> com.coralogixapis.alerts.v3.GetAlertDefRequest
-	4,  // 20: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:input_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest
-	17, // 21: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:input_type -> com.coralogixapis.alerts.v3.CreateAlertDefRequest
-	15, // 22: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:input_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefRequest
-	8,  // 23: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:input_type -> com.coralogixapis.alerts.v3.ListAlertDefsRequest
-	9,  // 24: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:input_type -> com.coralogixapis.alerts.v3.DownloadAlertsRequest
-	13, // 25: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:input_type -> com.coralogixapis.alerts.v3.DeleteAlertDefRequest
-	19, // 26: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:input_type -> com.coralogixapis.alerts.v3.SetActiveRequest
-	5,  // 27: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:output_type -> com.coralogixapis.alerts.v3.GetAlertDefResponse
-	6,  // 28: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
-	18, // 29: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:output_type -> com.coralogixapis.alerts.v3.CreateAlertDefResponse
-	16, // 30: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:output_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
-	7,  // 31: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:output_type -> com.coralogixapis.alerts.v3.ListAlertDefsResponse
-	10, // 32: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:output_type -> com.coralogixapis.alerts.v3.DownloadAlertsResponse
-	14, // 33: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:output_type -> com.coralogixapis.alerts.v3.DeleteAlertDefResponse
-	20, // 34: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:output_type -> com.coralogixapis.alerts.v3.SetActiveResponse
-	27, // [27:35] is the sub-list for method output_type
-	19, // [19:27] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	19, // 0: com.coralogixapis.alerts.v3.GetAlertDefRequest.id:type_name -> google.protobuf.StringValue
+	19, // 1: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest.alert_version_id:type_name -> google.protobuf.StringValue
+	20, // 2: com.coralogixapis.alerts.v3.GetAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	20, // 3: com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	20, // 4: com.coralogixapis.alerts.v3.ListAlertDefsResponse.alert_defs:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	19, // 5: com.coralogixapis.alerts.v3.BatchGetAlertDefRequest.ids:type_name -> google.protobuf.StringValue
+	18, // 6: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.alert_defs:type_name -> com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry
+	19, // 7: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.not_found_ids:type_name -> google.protobuf.StringValue
+	19, // 8: com.coralogixapis.alerts.v3.DeleteAlertDefRequest.id:type_name -> google.protobuf.StringValue
+	21, // 9: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest.alert_def_properties:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties
+	19, // 10: com.coralogixapis.alerts.v3.ReplaceAlertDefRequest.id:type_name -> google.protobuf.StringValue
+	20, // 11: com.coralogixapis.alerts.v3.ReplaceAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	21, // 12: com.coralogixapis.alerts.v3.CreateAlertDefRequest.alert_def_properties:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties
+	20, // 13: com.coralogixapis.alerts.v3.CreateAlertDefResponse.alert_def:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	19, // 14: com.coralogixapis.alerts.v3.SetActiveRequest.id:type_name -> google.protobuf.StringValue
+	22, // 15: com.coralogixapis.alerts.v3.SetActiveRequest.active:type_name -> google.protobuf.BoolValue
+	20, // 16: com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntry.value:type_name -> com.coralogixapis.alerts.v3.AlertDef
+	0,  // 17: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:input_type -> com.coralogixapis.alerts.v3.GetAlertDefRequest
+	1,  // 18: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:input_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest
+	14, // 19: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:input_type -> com.coralogixapis.alerts.v3.CreateAlertDefRequest
+	12, // 20: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:input_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefRequest
+	5,  // 21: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:input_type -> com.coralogixapis.alerts.v3.ListAlertDefsRequest
+	6,  // 22: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:input_type -> com.coralogixapis.alerts.v3.DownloadAlertsRequest
+	10, // 23: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:input_type -> com.coralogixapis.alerts.v3.DeleteAlertDefRequest
+	16, // 24: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:input_type -> com.coralogixapis.alerts.v3.SetActiveRequest
+	2,  // 25: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:output_type -> com.coralogixapis.alerts.v3.GetAlertDefResponse
+	3,  // 26: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
+	15, // 27: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:output_type -> com.coralogixapis.alerts.v3.CreateAlertDefResponse
+	13, // 28: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:output_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
+	4,  // 29: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:output_type -> com.coralogixapis.alerts.v3.ListAlertDefsResponse
+	7,  // 30: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:output_type -> com.coralogixapis.alerts.v3.DownloadAlertsResponse
+	11, // 31: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:output_type -> com.coralogixapis.alerts.v3.DeleteAlertDefResponse
+	17, // 32: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:output_type -> com.coralogixapis.alerts.v3.SetActiveResponse
+	25, // [25:33] is the sub-list for method output_type
+	17, // [17:25] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_alert_defs_service_proto_init() }
@@ -1266,14 +1092,13 @@ func file_com_coralogixapis_alerts_v3_alert_defs_service_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   20,
+			NumEnums:      0,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
 		GoTypes:           file_com_coralogixapis_alerts_v3_alert_defs_service_proto_goTypes,
 		DependencyIndexes: file_com_coralogixapis_alerts_v3_alert_defs_service_proto_depIdxs,
-		EnumInfos:         file_com_coralogixapis_alerts_v3_alert_defs_service_proto_enumTypes,
 		MessageInfos:      file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes,
 	}.Build()
 	File_com_coralogixapis_alerts_v3_alert_defs_service_proto = out.File
