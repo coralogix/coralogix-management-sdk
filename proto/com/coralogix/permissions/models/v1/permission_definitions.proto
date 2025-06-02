@@ -59,6 +59,8 @@ enum PermissionGroup {
   PERMISSION_GROUP_PROFILES = 36 [ (com.coralogix.permissions.v1.name) = "profiles", (description) = "Profiles", (display_name)= "Send Profiles"];
   PERMISSION_GROUP_AI = 37 [ (com.coralogix.permissions.v1.name) = "ai", (description) = "Ai", (display_name)= "AI"];
   PERMISSION_GROUP_SLO_MGMT = 38 [ (com.coralogix.permissions.v1.name) = "slo-mgmt", (description) = "SLO Mgmt", (display_name)= "SLO management"];
+  PERMISSION_GROUP_QUOTA_RULES = 39 [ (com.coralogix.permissions.v1.name) = "quota-rules", (description) = "Quota Rules", (display_name)= "quota - rules"];
+  PERMISSION_GROUP_DATAENGINE = 40 [ (com.coralogix.permissions.v1.name) = "dataengine", (description) = "Dataengine", (display_name)= "Data Engine"];
 }
 
 enum Permission {
@@ -318,5 +320,9 @@ enum Permission {
   PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG = 257 [(expression) = "slo-mgmt.alerts:UpdateConfig", (action) = ACTION_UPDATECONFIG, (resource) = RESOURCE_SLO_MGMT_ALERTS, (permission_group) = PERMISSION_GROUP_ALERTS, (description) = "Manage SLO Based Alert Settings", (doc_link) = "", (explanation) = "Manage SLO Based Alert Settings.", (is_team_level) = true];
   PERMISSION_SLO_READ_CONFIG = 258 [(expression) = "slo:ReadConfig", (action) = ACTION_READ_CONFIG, (resource) = RESOURCE_SLO, (permission_group) = PERMISSION_GROUP_SLO_MGMT, (description) = "View SLO Settings", (doc_link) = "", (explanation) = "View SLO Settings", (is_team_level) = true];
   PERMISSION_SLO_UPDATE_CONFIG = 259 [(expression) = "slo:UpdateConfig", (action) = ACTION_UPDATECONFIG, (resource) = RESOURCE_SLO, (permission_group) = PERMISSION_GROUP_SLO_MGMT, (description) = "Manage SLO Settings", (doc_link) = "", (explanation) = "Manage SLO Settings", (is_team_level) = true];
+  PERMISSION_SYSTEM_DATASETS_MANAGE = 260 [(expression) = "system-datasets:Manage", (action) = ACTION_MANAGE, (resource) = RESOURCE_SYSTEM_DATASETS, (permission_group) = PERMISSION_GROUP_DATAENGINE, (description) = "Manage system datasets.", (doc_link) = "", (explanation) = "Manage system datasets.", (is_team_level) = true];
+  PERMISSION_SYSTEM_DATASETS_READ_CONFIG = 261 [(expression) = "system-datasets:ReadConfig", (action) = ACTION_READ_CONFIG, (resource) = RESOURCE_SYSTEM_DATASETS, (permission_group) = PERMISSION_GROUP_DATAENGINE, (description) = "View system datasets.", (doc_link) = "", (explanation) = "View system datasets.", (is_team_level) = true];
+  PERMISSION_TEAM_QUOTA_RULES_MANAGE = 262 [(expression) = "team-quota-rules:Manage", (action) = ACTION_MANAGE, (resource) = RESOURCE_TEAM_QUOTA_RULES, (permission_group) = PERMISSION_GROUP_QUOTA_RULES, (description) = "Manage team quota rules. Allocate quota units per entity type.", (doc_link) = "", (explanation) = "Manage team quota rules. Allocate quota units per entity type.", (is_team_level) = true];
+  PERMISSION_TEAM_QUOTA_RULES_READ = 263 [(expression) = "team-quota-rules:Read", (action) = ACTION_READ, (resource) = RESOURCE_TEAM_QUOTA_RULES, (permission_group) = PERMISSION_GROUP_QUOTA_RULES, (description) = "View team quota rules. Allocate quota units per entity type.", (doc_link) = "", (explanation) = "View team quota rules. Allocate quota units per entity type.", (is_team_level) = true];
 }
 

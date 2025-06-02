@@ -15,8 +15,8 @@ commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.22"
-commit_hash = "9f8d6435e1ff728cef36399b3dfcb1c6a3b695e2"
+revision = "v0.5.23"
+commit_hash = "571e97c3ee31cdd231aa057252e1f09eddc9e807"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -27,8 +27,8 @@ commit_hash = "995f2fa4245ab060a96963566fabdfa7dc5b88c5"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.111"
-commit_hash = "ebfbb611165d8754504fb75b985107b3d531fd78"
+revision = "v0.0.117"
+commit_hash = "039a39ea03ecb4705dadaaccc281a9a801eb0a41"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,14 +39,14 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.4.1"
-commit_hash = "a5a9c7defe0afcc515cce0ebf903c568b631a131"
+revision = "v2.5.1"
+commit_hash = "809aab1a05390c4683424f13c4111ad96cbed458"
 
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.1.27"
-commit_hash = "de1857e1be7860addfb9781f3da8a3483eb03d86"
+revision = "v0.3.4"
+commit_hash = "2b854434f01f17075542b8f6c27b53b0966531a1"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -71,6 +71,12 @@ name = "cx-api-incidents"
 url = "github.com/coralogix/cx-api-incidents"
 revision = "v1.0.2"
 commit_hash = "aaea20e337ae89cc93a4222906918f3092a49240"
+
+[[dependencies]]
+name = "cx-api-lmd-model"
+url = "github.com/coralogix/cx-api-lmd-model"
+branch = "master"
+commit_hash = "d6ef2857302a0583278a96ed4e781330796a6780"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -105,8 +111,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.108"
-commit_hash = "6165358717f90cbf75b06aade88ca861ffa07453"
+revision = "v0.1.114"
+commit_hash = "144940f24f4260816969fdba65e065ad6085695b"
 
 [[dependencies]]
 name = "cx-api-quota"

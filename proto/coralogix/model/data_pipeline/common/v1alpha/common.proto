@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+package coralogix.model.data_pipeline.common.v1alpha;
+
+enum Pillar {
+  PILLAR_UNSPECIFIED = 0;
+  // JSON representation: "logs"
+  PILLAR_LOGS = 1;
+  // JSON representation: "metrics"
+  PILLAR_METRICS = 2;
+  // JSON representation: "spans"
+  PILLAR_SPANS = 3;
+  // JSON representation: "binary"
+  PILLAR_BINARY = 4;
+  // JSON representation: "profiles"
+  PILLAR_PROFILES = 5;
+}
+
+enum EntityType {
+  ENTITY_TYPE_UNSPECIFIED = 0;
+
+  // Pillar "logs"
+
+  // JSON representation: "logs"
+  ENTITY_TYPE_LOGS = 1;
+  // JSON representation: "bulkSizes"
+  ENTITY_TYPE_BULK_SIZES = 4;
+  // JSON representation: "browserLogs"
+  ENTITY_TYPE_BROWSER_LOGS = 5;
+  // JSON representation: "alerts"
+  ENTITY_TYPE_ALERTS = 6;
+  // JSON representation: "alertDefs"
+  ENTITY_TYPE_ALERT_DEFS = 7;
+  // JSON representation: "auditEvents"
+  ENTITY_TYPE_AUDIT_EVENTS = 8;
+  // JSON representation: "dashboards"
+  ENTITY_TYPE_DASHBOARDS = 9;
+  // JSON representation: "enrichmentRules"
+  ENTITY_TYPE_ENRICHMENT_RULES = 10;
+  // JSON representation: "mobileLogs"
+  ENTITY_TYPE_MOBILE_LOGS = 11;
+  // JSON representation: "notificationDeliveries"
+  ENTITY_TYPE_NOTIFICATION_DELIVERIES = 12;
+  // JSON representation: "schemaFields"
+  ENTITY_TYPE_SCHEMA_FIELDS = 13;
+  // JSON representation: "text"
+  ENTITY_TYPE_TEXT = 14;
+
+  // Pillar "metrics"
+
+  // JSON representation: "metrics"
+  ENTITY_TYPE_METRICS = 2;
+
+  // Pillar "spans"
+
+  // JSON representation: "spans"
+  ENTITY_TYPE_SPANS = 3;
+
+  // Pillar "binary"
+
+  // JSON representation: "sessionRecordings"
+  ENTITY_TYPE_SESSION_RECORDINGS = 15;
+  // JSON representation: "dsym"
+  ENTITY_TYPE_DSYM = 16;
+  // JSON representation: "files"
+  ENTITY_TYPE_FILES = 17;
+  // JSON representation: "mobileSnapshots"
+  ENTITY_TYPE_MOBILE_SNAPSHOTS = 18;
+  // JSON representation: "proguard"
+  ENTITY_TYPE_PROGUARD = 19;
+  // JSON representation: "sourceMaps"
+  ENTITY_TYPE_SOURCE_MAPS = 20;
+
+  // Pillar "profiles"
+
+  // JSON representation: "cpuProfiles"
+  ENTITY_TYPE_CPU_PROFILES = 21;
+}
