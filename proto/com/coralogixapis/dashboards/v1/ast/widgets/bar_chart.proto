@@ -4,7 +4,6 @@ package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto";
-import "com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
@@ -21,24 +20,52 @@ import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message BarChart {
-  Query query = 1;
-  google.protobuf.Int32Value max_bars_per_chart = 2;
-  google.protobuf.StringValue group_name_template = 3;
-  StackDefinition stack_definition = 4;
-  common.ScaleType scale_type = 5;
-  common.ColorsBy colors_by = 6;
-  XAxis x_axis = 7;
-  common.Unit unit = 8;
-  common.SortByType sort_by = 9;
-  google.protobuf.StringValue color_scheme = 10;
-  common.DataModeType data_mode_type = 11;
-  BarValueDisplay bar_value_display = 12;
-  google.protobuf.StringValue custom_unit = 13;
-  google.protobuf.Int32Value decimal = 14;
-  common.Legend legend = 15;
-  repeated common.CustomLink custom_links = 16;
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "BarChart"
+      description: "BarChart represents the configuration of a vertical bar chart widget."
+      required: []
+    }
+  };
+  Query query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Query object"}];
+  google.protobuf.Int32Value max_bars_per_chart = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Maximum number of bars on a chart"
+    example: "20"
+  }];
+  google.protobuf.StringValue group_name_template = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Custom template name for a bar group, can contain variables"
+    example: "\"Result - {{ variable }}\""
+  }];
+  StackDefinition stack_definition = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration of stacked bars"}];
+  common.ScaleType scale_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Scale type - linear/logarithmic"}];
+  common.ColorsBy colors_by = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "How the bar colors should be organized"}];
+  XAxis x_axis = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies how to organize the x axis of the chart"}];
+  common.Unit unit = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Unit of the query results - one from a predefined list, or custom"
+    example: "3"
+  }];
+  common.SortByType sort_by = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Sort type, by name or by value"
+    example: "1"
+  }];
+  google.protobuf.StringValue color_scheme = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Applied color scheme, one of the predefined values"
+    example: "\"classic\""
+  }];
+  common.DataModeType data_mode_type = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type, either high or archive"}];
+  BarValueDisplay bar_value_display = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies where to display the bar value"}];
+  google.protobuf.StringValue custom_unit = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Custom unit (requires to have unit field set to custom to take effect)"
+    example: "\"mph\""
+  }];
+  google.protobuf.Int32Value decimal = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+    example: "4"
+  }];
+  common.Legend legend = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Widget's legend settings"}];
 
   message Query {
     oneof value {
@@ -50,62 +77,103 @@ message BarChart {
   }
 
   message StackDefinition {
-    google.protobuf.Int32Value max_slices_per_bar = 1;
-    google.protobuf.StringValue stack_name_template = 2;
+    google.protobuf.Int32Value max_slices_per_bar = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "How many slices can fit in a single bar"}];
+    google.protobuf.StringValue stack_name_template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Custom template name of an individual stack"}];
   }
 
   message XAxis {
     oneof type {
-      XAxisByValue value = 1;
-      XAxisByTime time = 2;
+      XAxisByValue value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "X axis scale showing individual group values"}];
+      XAxisByTime time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "X axis scale divided into time buckets"}];
     }
 
     message XAxisByValue {}
     message XAxisByTime {
-      google.protobuf.Duration interval = 1;
-      google.protobuf.Int32Value buckets_presented = 2;
+      google.protobuf.Duration interval = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Interval of value sampling, i.e. every 5 minutes, every 1 second and so on"}];
+      google.protobuf.Int32Value buckets_presented = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "How many buckets to present in the selected timeframe"}];
     }
   }
 
   message LogsQuery {
-    common.LuceneQuery lucene_query = 1;
-    v1.common.LogsAggregation aggregation = 2;
-    repeated Filter.LogsFilter filters = 3;
-    repeated google.protobuf.StringValue group_names = 4;
-    google.protobuf.StringValue stacked_group_name = 5;
-    repeated v1.common.ObservationField group_names_fields = 6;
-    v1.common.ObservationField stacked_group_name_field = 7;
-    v1.common.TimeFrameSelect time_frame = 8;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "LogsQuery"
+        description: "A logs variant of the query"
+        required: []
+      }
+    };
+
+    common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "A Lucene query string to search logs"
+      example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
+    }];
+    v1.common.LogsAggregation aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Query aggregation function"}];
+    repeated Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of filters that narrow down query results"}];
+    repeated google.protobuf.StringValue group_names = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names to group the query results"}];
+    google.protobuf.StringValue stacked_group_name = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Field name by which results are stacked in individual group"}];
+    repeated v1.common.ObservationField group_names_fields = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of observation fields to group the results"}];
+    v1.common.ObservationField stacked_group_name_field = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Observation field by results are stacked in a group"}];
+    v1.common.TimeFrameSelect time_frame = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the results should be returned"}];
   }
 
   message SpansQuery {
-    common.LuceneQuery lucene_query = 1;
-    v1.common.SpansAggregation aggregation = 2;
-    repeated Filter.SpansFilter filters = 3;
-    repeated v1.common.SpanField group_names = 4;
-    v1.common.SpanField stacked_group_name = 5;
-    v1.common.TimeFrameSelect time_frame = 6;
-    repeated v1.common.ObservationField group_names_fields = 7;
-    v1.common.ObservationField stacked_group_name_field = 8;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "SpansQuery"
+        description: "A spans variant of the query"
+        required: []
+      }
+    };
+
+    common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A Lucene query string to search span records"}];
+    v1.common.SpansAggregation aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
+    repeated Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
+    repeated v1.common.SpanField group_names = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names to group the span records"}];
+    v1.common.SpanField stacked_group_name = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Field name by which results are stacked in individual group"}];
+    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
+    repeated v1.common.SpanObservationField group_names_fields = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields definitions to group the records by"}];
+    v1.common.SpanObservationField stacked_group_name_field = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Observation field definition by which groups are divided into subgroups"}];
   }
 
   message MetricsQuery {
-    common.PromQlQuery promql_query = 1;
-    repeated Filter.MetricsFilter filters = 2;
-    repeated google.protobuf.StringValue group_names = 3;
-    google.protobuf.StringValue stacked_group_name = 4;
-    common.MetricsQueryEditorMode editor_mode = 5;
-    v1.common.TimeFrameSelect time_frame = 6;
-    v1.common.PromQLQueryType promql_query_type = 7;
-    common.Aggregation aggregation = 8;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "MetricsQuery"
+        description: "A metrics variant of the query"
+        required: []
+      }
+    };
+
+    common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "PromQL query string for querying metrics"
+      example: "{ \"value\": \"up{job='abc'}\" }"
+    }];
+    repeated Filter.MetricsFilter filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of metrics filters"}];
+    repeated google.protobuf.StringValue group_names = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names by which metric results are grouped"}];
+    google.protobuf.StringValue stacked_group_name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Field name by which results in groups are divided into subgroups"}];
+    common.MetricsQueryEditorMode editor_mode = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Type of the query editor used to generate the query, can be text or builder mode"
+      example: "1"
+    }];
+    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the result should be returned"}];
+    v1.common.PromQLQueryType promql_query_type = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
+    common.Aggregation aggregation = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Aggregation function"}];
   }
 
   message DataprimeQuery {
-    v1.common.DataprimeQuery dataprime_query = 1;
-    repeated Filter.Source filters = 2;
-    repeated google.protobuf.StringValue group_names = 3;
-    google.protobuf.StringValue stacked_group_name = 4;
-    v1.common.TimeFrameSelect time_frame = 5;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "DataprimeQuery"
+        description: "A Dataprime variant of the query"
+        required: []
+      }
+    };
+
+    v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Dataprime query text"}];
+    repeated Filter.Source filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of query filters"}];
+    repeated google.protobuf.StringValue group_names = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names by which results are grouped"}];
+    google.protobuf.StringValue stacked_group_name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Field name by which results in groups are divided into subgroups"}];
+    v1.common.TimeFrameSelect time_frame = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
   }
 }
 

@@ -3,8 +3,15 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message Markdown {
-  google.protobuf.StringValue markdown_text = 1;
-  google.protobuf.StringValue tooltip_text = 2;
+  google.protobuf.StringValue markdown_text = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Markdown text"
+    example: '{ "value": "# This is a markdown example" }'
+  }];
+  google.protobuf.StringValue tooltip_text = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Tooltip text to display on widget hover"
+    example: '{ "value": "This is a description in a tooltip" }'
+  }];
 }
