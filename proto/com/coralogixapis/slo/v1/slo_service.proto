@@ -3,67 +3,166 @@ import "google/protobuf/wrappers.proto";
 import "google/api/annotations.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 package com.coralogixapis.slo.v1;
 option go_package = "com/coralogixapis/slo/v1";
 
 message ResponseStatus {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ResponseStatus"
+      description: "Status of the response, including error code and message."
+      required: ["status_code"]
+    }
+  };
   google.rpc.Code status_code = 1;
   optional string message = 2;
   map<string,string> details = 3;
 }
 
 message CreateSloRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "CreateSloRequest"
+      description: "Request to create a new SLO."
+      required: ["slo"]
+    }
+  };
   Slo slo = 1;
 }
 
 message CreateSloResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "CreateSloResponse"
+      description: "Response after creating a new SLO."
+      required: ["slo"]
+    }
+  };
   Slo slo = 1;
 }
 
 message ReplaceSloRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloRequest"
+      description: "Request to replace an existing SLO."
+      required: ["slo"]
+    }
+  };
   Slo slo = 1;
 }
 
 message ReplaceSloResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloResponse"
+      description: "Response after replacing an existing SLO."
+      required: ["slo"]
+    }
+  };
   Slo slo = 1;
   repeated string effected_slo_alert_ids = 2;
 }
 
 message DeleteSloRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "DeleteSloRequest"
+      description: "Request to delete an existing SLO."
+      required: ["id"]
+    }
+  };
   string id = 1;
 }
 
 message DeleteSloResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "DeleteSloResponse"
+      description: "Response after deleting an existing SLO."
+      required: []
+    }
+  };
   repeated string effected_slo_alert_ids = 1;
 }
 
 message GetSloRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetSloRequest"
+      description: "Request to retrieve a specific SLO by its ID."
+      required: ["id"]
+    }
+  };
   string id = 1;
 }
 
 message GetSloResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetSloResponse"
+      description: "Response containing the details of a specific SLO."
+      required: ["slo"]
+    }
+  };
   Slo slo = 1;
 }
 
 message ListSlosRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListSlosRequest"
+      description: "Request to list SLOs with optional filters."
+      required: []
+    }
+  };
   SloFilters filters = 1;
 }
 
 message ListSlosResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ListSlosResponse"
+      description: "Response containing a list of SLOs."
+      required: ["slos"]
+    }
+  };
   repeated Slo slos = 1;
 }
 
 message BatchGetSlosRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "BatchGetSlosRequest"
+      description: "Request to retrieve multiple SLOs by their IDs."
+      required: ["ids"]
+    }
+  };
   repeated string ids = 1;
 }
 
 message BatchGetSlosResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "BatchGetSlosResponse"
+      description: "Response containing a batch of SLOs and any IDs not found."
+      required: ["slos"]
+    }
+  };
   repeated Slo slos = 1;
   repeated string not_found_ids = 2;
 }
 
 message SloExecutionRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SloExecutionRequest"
+      description: "Request for executing an SLO operation."
+      required: ["request"]
+    }
+  };
   oneof request {
     CreateSloRequest create_slo_request = 1;
     ReplaceSloRequest replace_slo_request = 2;
@@ -72,6 +171,13 @@ message SloExecutionRequest {
 }
 
 message SloExecutionResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "SloExecutionResponse"
+      description: "Response for an executed SLO operation."
+      required: []
+    }
+  };
   oneof response {
     CreateSloResponse create_slo_response = 1;
     ReplaceSloResponse replace_slo_response = 2;
@@ -80,16 +186,52 @@ message SloExecutionResponse {
 }
 
 message BatchExecuteSloRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "BatchExecuteSloRequest"
+      description: "Request to batch execute multiple SLO operations."
+      required: ["requests"]
+    }
+  };
   repeated SloExecutionRequest requests = 1;
 }
 
 message BatchExecuteSloResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "BatchExecuteSloResponse"
+      description: "Response containing the results of batch executed SLO operations."
+      required: ["matching_responses"]
+    }
+  };
   repeated SloExecutionResponse matching_responses = 1;
   ResponseStatus status = 2;
 }
 
 service SlosService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Slos Service"
+    description: "A service for managing Service Level Objectives (SLOs)."
+  };
+
   rpc CreateSlo(CreateSloRequest) returns (CreateSloResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Create Slo"
+    };
+
     option (google.api.http) = {
       post: "/v1/slo/slos"
       body: "slo"
@@ -97,6 +239,23 @@ service SlosService {
   }
 
   rpc ReplaceSlo(ReplaceSloRequest) returns (ReplaceSloResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Replace Slo"
+    };
+
     option (google.api.http) = {
       put: "/v1/slo/slos"
       body: "slo"
@@ -104,30 +263,116 @@ service SlosService {
   }
 
   rpc DeleteSlo(DeleteSloRequest) returns (DeleteSloResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Delete Slo"
+    };
+
     option (google.api.http) = {
       delete: "/v1/slo/slos/{id}"
     };
   }
 
   rpc GetSlo(GetSloRequest) returns (GetSloResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Get Slo"
+    };
+
     option (google.api.http) = {
       get: "/v1/slo/slos/{id}"
     };
   }
 
   rpc ListSlos(ListSlosRequest) returns (ListSlosResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "List Slos"
+    };
+
     option (google.api.http) = {
       get: "/v1/slo/slos"
     };
   }
 
   rpc BatchGetSlos(BatchGetSlosRequest) returns (BatchGetSlosResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Batch Get Slo"
+    };
+
     option (google.api.http) = {
       get: "/v1/slo/slos:batchGet"
     };
   }
 
   rpc BatchExecuteSlo(BatchExecuteSloRequest) returns (BatchExecuteSloResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Batch Execute Slo"
+    };
+
+
     option (google.api.http) = {
       post: "/v1/slo/slos:batchExecute"
     };

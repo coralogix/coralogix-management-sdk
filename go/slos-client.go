@@ -105,7 +105,6 @@ const (
 	SloTimeframe14Days      = slos.SloTimeFrame_SLO_TIME_FRAME_14_DAYS
 	SloTimeframe21Days      = slos.SloTimeFrame_SLO_TIME_FRAME_21_DAYS
 	SloTimeframe28Days      = slos.SloTimeFrame_SLO_TIME_FRAME_28_DAYS
-	SloTimeframe90Days      = slos.SloTimeFrame_SLO_TIME_FRAME_90_DAYS
 )
 
 // SloWindow variants
@@ -143,7 +142,7 @@ const (
 
 // SloStatus values.
 const (
-	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_UNSPECIFIED
+	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_BREACHED
 	SloStatusOk          = slos.SloStatus_SLO_STATUS_OK
 	SloStatusBreached    = slos.SloStatus_SLO_STATUS_BREACHED
 	SloStatusCritical    = slos.SloStatus_SLO_STATUS_CRITICAL
