@@ -155,6 +155,8 @@ enum Resource {
   RESOURCE_PROFILES_DEBUG_SYMBOLS = 142 [(name) = "profiles.debug-symbols"];
   RESOURCE_SLO_MGMT_ALERTS = 143 [(name) = "slo-mgmt.alerts"];
   RESOURCE_SLO = 144 [(name) = "slo"];
+  RESOURCE_SYSTEM_DATASETS = 145 [(name) = "system-datasets"];
+  RESOURCE_TEAM_QUOTA_RULES = 146 [(name) = "team-quota-rules"];
 }
 
 

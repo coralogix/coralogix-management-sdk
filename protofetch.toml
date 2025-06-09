@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.22"
+revision = "v0.5.24"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -136,7 +136,7 @@ allow_policies = ["src/com/coralogixapis/actions/v2/actions_service.proto"]
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
-revision = "v1.0.8"
+revision = "v1.0.9"
 allow_policies = [
     "src/com/coralogix/extensions/v1/extension_service.proto",
     "src/com/coralogix/extensions/v1/extension.proto",
@@ -190,7 +190,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.4.1"
+revision = "v2.5.3"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -255,7 +255,7 @@ revision = "v0.3.3"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.1.27"
+revision = "v0.3.5"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -307,7 +307,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = 'v0.0.16'
+revision = "v0.0.18"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -331,7 +331,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.108"
+revision = "v0.1.114"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -346,7 +346,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.111"
+revision = "v0.0.118"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
