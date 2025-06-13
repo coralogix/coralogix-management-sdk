@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+// Spans are organized in traces, traces can be seen as a tree where each node is a span.
+enum SpanRelationType {
+  // No relation, it references fields on a span.
+  SPAN_RELATION_TYPE_NONE_UNSPECIFIED = 0;
+  // Other relation, it references fields of "any other" span in the trace.
+  SPAN_RELATION_TYPE_OTHER = 1;
+  // Parent relation, it references fields of the parent span.
+  SPAN_RELATION_TYPE_PARENT = 2;
+  // Root relation, it references fields of the root span.
+  SPAN_RELATION_TYPE_ROOT = 3;
+}

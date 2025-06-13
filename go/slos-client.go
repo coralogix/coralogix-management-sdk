@@ -105,7 +105,6 @@ const (
 	SloTimeframe14Days      = slos.SloTimeFrame_SLO_TIME_FRAME_14_DAYS
 	SloTimeframe21Days      = slos.SloTimeFrame_SLO_TIME_FRAME_21_DAYS
 	SloTimeframe28Days      = slos.SloTimeFrame_SLO_TIME_FRAME_28_DAYS
-	SloTimeframe90Days      = slos.SloTimeFrame_SLO_TIME_FRAME_90_DAYS
 )
 
 // SloWindow variants
@@ -139,16 +138,6 @@ const (
 	SloDeleteRPC   = slos.SlosService_DeleteSlo_FullMethodName
 	SloBatchGetRPC = slos.SlosService_BatchGetSlos_FullMethodName
 	SlosListRPC    = slos.SlosService_ListSlos_FullMethodName
-)
-
-// SloStatus values.
-const (
-	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_UNSPECIFIED
-	SloStatusOk          = slos.SloStatus_SLO_STATUS_OK
-	SloStatusBreached    = slos.SloStatus_SLO_STATUS_BREACHED
-	SloStatusCritical    = slos.SloStatus_SLO_STATUS_CRITICAL
-	SloStatusWarning     = slos.SloStatus_SLO_STATUS_WARNING
-	SloStatusPending     = slos.SloStatus_SLO_STATUS_PENDING
 )
 
 const infraMonitoringFeatureGroupID = "infra-monitoring"

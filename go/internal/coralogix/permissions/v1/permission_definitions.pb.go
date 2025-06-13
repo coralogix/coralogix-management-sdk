@@ -64,6 +64,8 @@ const (
 	PermissionGroup_PERMISSION_GROUP_PROFILES                  PermissionGroup = 36
 	PermissionGroup_PERMISSION_GROUP_AI                        PermissionGroup = 37
 	PermissionGroup_PERMISSION_GROUP_SLO_MGMT                  PermissionGroup = 38
+	PermissionGroup_PERMISSION_GROUP_QUOTA_RULES               PermissionGroup = 39
+	PermissionGroup_PERMISSION_GROUP_DATAENGINE                PermissionGroup = 40
 )
 
 // Enum value maps for PermissionGroup.
@@ -108,6 +110,8 @@ var (
 		36: "PERMISSION_GROUP_PROFILES",
 		37: "PERMISSION_GROUP_AI",
 		38: "PERMISSION_GROUP_SLO_MGMT",
+		39: "PERMISSION_GROUP_QUOTA_RULES",
+		40: "PERMISSION_GROUP_DATAENGINE",
 	}
 	PermissionGroup_value = map[string]int32{
 		"PERMISSION_GROUP_UNSPECIFIED":               0,
@@ -149,6 +153,8 @@ var (
 		"PERMISSION_GROUP_PROFILES":                  36,
 		"PERMISSION_GROUP_AI":                        37,
 		"PERMISSION_GROUP_SLO_MGMT":                  38,
+		"PERMISSION_GROUP_QUOTA_RULES":               39,
+		"PERMISSION_GROUP_DATAENGINE":                40,
 	}
 )
 
@@ -451,6 +457,10 @@ const (
 	Permission_PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG       Permission = 257
 	Permission_PERMISSION_SLO_READ_CONFIG                     Permission = 258
 	Permission_PERMISSION_SLO_UPDATE_CONFIG                   Permission = 259
+	Permission_PERMISSION_SYSTEM_DATASETS_MANAGE              Permission = 260
+	Permission_PERMISSION_SYSTEM_DATASETS_READ_CONFIG         Permission = 261
+	Permission_PERMISSION_TEAM_QUOTA_RULES_MANAGE             Permission = 262
+	Permission_PERMISSION_TEAM_QUOTA_RULES_READ               Permission = 263
 )
 
 // Enum value maps for Permission.
@@ -711,6 +721,10 @@ var (
 		257: "PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG",
 		258: "PERMISSION_SLO_READ_CONFIG",
 		259: "PERMISSION_SLO_UPDATE_CONFIG",
+		260: "PERMISSION_SYSTEM_DATASETS_MANAGE",
+		261: "PERMISSION_SYSTEM_DATASETS_READ_CONFIG",
+		262: "PERMISSION_TEAM_QUOTA_RULES_MANAGE",
+		263: "PERMISSION_TEAM_QUOTA_RULES_READ",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -968,6 +982,10 @@ var (
 		"PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG":                    257,
 		"PERMISSION_SLO_READ_CONFIG":                                  258,
 		"PERMISSION_SLO_UPDATE_CONFIG":                                259,
+		"PERMISSION_SYSTEM_DATASETS_MANAGE":                           260,
+		"PERMISSION_SYSTEM_DATASETS_READ_CONFIG":                      261,
+		"PERMISSION_TEAM_QUOTA_RULES_MANAGE":                          262,
+		"PERMISSION_TEAM_QUOTA_RULES_READ":                            263,
 	}
 )
 
@@ -1129,7 +1147,7 @@ var File_com_coralogix_permissions_models_v1_permission_definitions_proto protor
 
 const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a google/protobuf/descriptor.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto*\xb5\x17\n" +
+	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a google/protobuf/descriptor.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto*\xd6\x18\n" +
 	"\x0fPermissionGroup\x12 \n" +
 	"\x1cPERMISSION_GROUP_UNSPECIFIED\x10\x00\x12:\n" +
 	"\x14PERMISSION_GROUP_AAA\x10\x01\x1a \x92\x82\x19\x03aaa҂\x19\x03Aaa\xe2\x82\x19\x0eAdministration\x12?\n" +
@@ -1173,7 +1191,11 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1fPERMISSION_GROUP_ADMINISTRATION\x10#\x1a6\x92\x82\x19\x0eadministration҂\x19\x0eAdministration\xe2\x82\x19\x0eAdministration\x12H\n" +
 	"\x19PERMISSION_GROUP_PROFILES\x10$\x1a)\x92\x82\x19\bprofiles҂\x19\bProfiles\xe2\x82\x19\rSend Profiles\x12+\n" +
 	"\x13PERMISSION_GROUP_AI\x10%\x1a\x12\x92\x82\x19\x02ai҂\x19\x02Ai\xe2\x82\x19\x02AI\x12I\n" +
-	"\x19PERMISSION_GROUP_SLO_MGMT\x10&\x1a*\x92\x82\x19\bslo-mgmt҂\x19\bSLO Mgmt\xe2\x82\x19\x0eSLO management*\xe8\xc2\x03\n" +
+	"\x19PERMISSION_GROUP_SLO_MGMT\x10&\x1a*\x92\x82\x19\bslo-mgmt҂\x19\bSLO Mgmt\xe2\x82\x19\x0eSLO management\x12Q\n" +
+	"\x1cPERMISSION_GROUP_QUOTA_RULES\x10'\x1a/\x92\x82\x19\vquota-rules҂\x19\vQuota Rules\xe2\x82\x19\rquota - rules\x12L\n" +
+	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
+	"dataengine҂\x19\n" +
+	"Dataengine\xe2\x82\x19\vData Engine*\xc7\xc8\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1479,7 +1501,13 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"&PERMISSION_SLO_MGMT_ALERTS_READ_CONFIG\x10\x80\x02\x1av\xba\x82\x19\x1aslo-mgmt.alerts:ReadConfig\xc0\x82\x19\fȂ\x19\x8f\x01҂\x19\x1dView SLO Based Alert Settings\u0602\x19\x03\xea\x82\x19\x00\xf2\x82\x19\x1eView SLO Based Alert Settings.\x88\x83\x19\x01\x12\xab\x01\n" +
 	"(PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG\x10\x81\x02\x1a|\xba\x82\x19\x1cslo-mgmt.alerts:UpdateConfig\xc0\x82\x19\x11Ȃ\x19\x8f\x01҂\x19\x1fManage SLO Based Alert Settings\u0602\x19\x03\xea\x82\x19\x00\xf2\x82\x19 Manage SLO Based Alert Settings.\x88\x83\x19\x01\x12r\n" +
 	"\x1aPERMISSION_SLO_READ_CONFIG\x10\x82\x02\x1aQ\xba\x82\x19\x0eslo:ReadConfig\xc0\x82\x19\fȂ\x19\x90\x01҂\x19\x11View SLO Settings\u0602\x19&\xea\x82\x19\x00\xf2\x82\x19\x11View SLO Settings\x88\x83\x19\x01\x12z\n" +
-	"\x1cPERMISSION_SLO_UPDATE_CONFIG\x10\x83\x02\x1aW\xba\x82\x19\x10slo:UpdateConfig\xc0\x82\x19\x11Ȃ\x19\x90\x01҂\x19\x13Manage SLO Settings\u0602\x19&\xea\x82\x19\x00\xf2\x82\x19\x13Manage SLO Settings\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"\x1cPERMISSION_SLO_UPDATE_CONFIG\x10\x83\x02\x1aW\xba\x82\x19\x10slo:UpdateConfig\xc0\x82\x19\x11Ȃ\x19\x90\x01҂\x19\x13Manage SLO Settings\u0602\x19&\xea\x82\x19\x00\xf2\x82\x19\x13Manage SLO Settings\x88\x83\x19\x01\x12\x8d\x01\n" +
+	"!PERMISSION_SYSTEM_DATASETS_MANAGE\x10\x84\x02\x1ae\xba\x82\x19\x16system-datasets:Manage\xc0\x82\x19\n" +
+	"Ȃ\x19\x91\x01҂\x19\x17Manage system datasets.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x17Manage system datasets.\x88\x83\x19\x01\x12\x92\x01\n" +
+	"&PERMISSION_SYSTEM_DATASETS_READ_CONFIG\x10\x85\x02\x1ae\xba\x82\x19\x1asystem-datasets:ReadConfig\xc0\x82\x19\fȂ\x19\x91\x01҂\x19\x15View system datasets.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x15View system datasets.\x88\x83\x19\x01\x12\xde\x01\n" +
+	"\"PERMISSION_TEAM_QUOTA_RULES_MANAGE\x10\x86\x02\x1a\xb4\x01\xba\x82\x19\x17team-quota-rules:Manage\xc0\x82\x19\n" +
+	"Ȃ\x19\x92\x01҂\x19>Manage team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19>Manage team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\x12\xd6\x01\n" +
+	" PERMISSION_TEAM_QUOTA_RULES_READ\x10\x87\x02\x1a\xae\x01\xba\x82\x19\x15team-quota-rules:Read\xc0\x82\x19\vȂ\x19\x92\x01҂\x19<View team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19<View team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

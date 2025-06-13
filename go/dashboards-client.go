@@ -1251,8 +1251,11 @@ func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequ
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := dashboards.NewDashboardsServiceClient(conn)
-
-	return client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	response, err := client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, dashboards.DashboardFoldersService_ReplaceDashboardFolder_FullMethodName, dashboardsFeatureGroupID)
+	}
+	return response, nil
 }
 
 // Delete deletes a dashboard.

@@ -24,13 +24,10 @@ const (
 )
 
 type Filter struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The source of the filter, which can be logs, spans, or metrics.
-	Source *Filter_Source `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
-	// Indicates if the filter is currently enabled or not.
-	Enabled *wrapperspb.BoolValue `protobuf:"bytes,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Indicates if the filter's UI representation should be collapsed or expanded.
-	Collapsed     *wrapperspb.BoolValue `protobuf:"bytes,3,opt,name=collapsed,proto3" json:"collapsed,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Source        *Filter_Source         `protobuf:"bytes,1,opt,name=source,proto3" json:"source,omitempty"`
+	Enabled       *wrapperspb.BoolValue  `protobuf:"bytes,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Collapsed     *wrapperspb.BoolValue  `protobuf:"bytes,3,opt,name=collapsed,proto3" json:"collapsed,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -167,15 +164,15 @@ type isFilter_Source_Value interface {
 }
 
 type Filter_Source_Logs struct {
-	Logs *Filter_LogsFilter `protobuf:"bytes,1,opt,name=logs,proto3,oneof"` // Filter configuration for logs.
+	Logs *Filter_LogsFilter `protobuf:"bytes,1,opt,name=logs,proto3,oneof"`
 }
 
 type Filter_Source_Spans struct {
-	Spans *Filter_SpansFilter `protobuf:"bytes,2,opt,name=spans,proto3,oneof"` // Filter configuration for spans.
+	Spans *Filter_SpansFilter `protobuf:"bytes,2,opt,name=spans,proto3,oneof"`
 }
 
 type Filter_Source_Metrics struct {
-	Metrics *Filter_MetricsFilter `protobuf:"bytes,3,opt,name=metrics,proto3,oneof"` // Filter configuration for metrics.
+	Metrics *Filter_MetricsFilter `protobuf:"bytes,3,opt,name=metrics,proto3,oneof"`
 }
 
 func (*Filter_Source_Logs) isFilter_Source_Value() {}
@@ -185,13 +182,10 @@ func (*Filter_Source_Spans) isFilter_Source_Value() {}
 func (*Filter_Source_Metrics) isFilter_Source_Value() {}
 
 type Filter_LogsFilter struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The log field to which the filter is applied.
-	Field *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	// An operator used for filtering the logs.
-	Operator *Filter_Operator `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	// The observation log field to which the filter is applied.
-	ObservationField *ObservationField `protobuf:"bytes,3,opt,name=observation_field,json=observationField,proto3" json:"observation_field,omitempty"`
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	Field            *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	Operator         *Filter_Operator        `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	ObservationField *ObservationField       `protobuf:"bytes,3,opt,name=observation_field,json=observationField,proto3" json:"observation_field,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -248,13 +242,10 @@ func (x *Filter_LogsFilter) GetObservationField() *ObservationField {
 }
 
 type Filter_SpansFilter struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The span field to which the filter is applied.
-	Field *SpanField `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
-	// An operator used for filtering the spans.
-	Operator *Filter_Operator `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
-	// The observation span field to which the filter is applied.
-	ObservationField *ObservationField `protobuf:"bytes,3,opt,name=observation_field,json=observationField,proto3" json:"observation_field,omitempty"`
+	state            protoimpl.MessageState `protogen:"open.v1"`
+	Field            *SpanField             `protobuf:"bytes,1,opt,name=field,proto3" json:"field,omitempty"`
+	Operator         *Filter_Operator       `protobuf:"bytes,2,opt,name=operator,proto3" json:"operator,omitempty"`
+	ObservationField *SpanObservationField  `protobuf:"bytes,3,opt,name=observation_field,json=observationField,proto3" json:"observation_field,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -303,7 +294,7 @@ func (x *Filter_SpansFilter) GetOperator() *Filter_Operator {
 	return nil
 }
 
-func (x *Filter_SpansFilter) GetObservationField() *ObservationField {
+func (x *Filter_SpansFilter) GetObservationField() *SpanObservationField {
 	if x != nil {
 		return x.ObservationField
 	}
@@ -311,13 +302,10 @@ func (x *Filter_SpansFilter) GetObservationField() *ObservationField {
 }
 
 type Filter_MetricsFilter struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The name of the metric to which the filter is applied.
-	Metric *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
-	// The label associated with the metric.
-	Label *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
-	// An operator used for filtering the metrics.
-	Operator      *Filter_Operator `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Metric        *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=metric,proto3" json:"metric,omitempty"`
+	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	Operator      *Filter_Operator        `protobuf:"bytes,3,opt,name=operator,proto3" json:"operator,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -446,11 +434,11 @@ type isFilter_Operator_Value interface {
 }
 
 type Filter_Operator_Equals struct {
-	Equals *Filter_Equals `protobuf:"bytes,1,opt,name=equals,proto3,oneof"` // Equality comparison.
+	Equals *Filter_Equals `protobuf:"bytes,1,opt,name=equals,proto3,oneof"`
 }
 
 type Filter_Operator_NotEquals struct {
-	NotEquals *Filter_NotEquals `protobuf:"bytes,2,opt,name=not_equals,json=notEquals,proto3,oneof"` // Non-equality comparison.
+	NotEquals *Filter_NotEquals `protobuf:"bytes,2,opt,name=not_equals,json=notEquals,proto3,oneof"`
 }
 
 func (*Filter_Operator_Equals) isFilter_Operator_Value() {}
@@ -458,8 +446,7 @@ func (*Filter_Operator_Equals) isFilter_Operator_Value() {}
 func (*Filter_Operator_NotEquals) isFilter_Operator_Value() {}
 
 type Filter_Equals struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The selection criteria for the equality comparison.
+	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Selection     *Filter_Equals_Selection `protobuf:"bytes,1,opt,name=selection,proto3" json:"selection,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -503,8 +490,7 @@ func (x *Filter_Equals) GetSelection() *Filter_Equals_Selection {
 }
 
 type Filter_NotEquals struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Selection criteria for the non-equality comparison.
+	state         protoimpl.MessageState      `protogen:"open.v1"`
 	Selection     *Filter_NotEquals_Selection `protobuf:"bytes,1,opt,name=selection,proto3" json:"selection,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -620,11 +606,11 @@ type isFilter_Equals_Selection_Value interface {
 }
 
 type Filter_Equals_Selection_All struct {
-	All *Filter_Equals_Selection_AllSelection `protobuf:"bytes,1,opt,name=all,proto3,oneof"` // Represents a selection of all values.
+	All *Filter_Equals_Selection_AllSelection `protobuf:"bytes,1,opt,name=all,proto3,oneof"`
 }
 
 type Filter_Equals_Selection_List struct {
-	List *Filter_Equals_Selection_ListSelection `protobuf:"bytes,2,opt,name=list,proto3,oneof"` // Represents a selection from a list of values.
+	List *Filter_Equals_Selection_ListSelection `protobuf:"bytes,2,opt,name=list,proto3,oneof"`
 }
 
 func (*Filter_Equals_Selection_All) isFilter_Equals_Selection_Value() {}
@@ -668,8 +654,7 @@ func (*Filter_Equals_Selection_AllSelection) Descriptor() ([]byte, []int) {
 }
 
 type Filter_Equals_Selection_ListSelection struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// A list of selected values.
+	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Values        []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -775,14 +760,13 @@ type isFilter_NotEquals_Selection_Value interface {
 }
 
 type Filter_NotEquals_Selection_List struct {
-	List *Filter_NotEquals_Selection_ListSelection `protobuf:"bytes,1,opt,name=list,proto3,oneof"` // Represents a selection from a list of values.
+	List *Filter_NotEquals_Selection_ListSelection `protobuf:"bytes,1,opt,name=list,proto3,oneof"`
 }
 
 func (*Filter_NotEquals_Selection_List) isFilter_NotEquals_Selection_Value() {}
 
 type Filter_NotEquals_Selection_ListSelection struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// A list of values for the selection.
+	state         protoimpl.MessageState    `protogen:"open.v1"`
 	Values        []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -829,59 +813,59 @@ var File_com_coralogixapis_dashboards_v1_ast_filter_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_dashboards_v1_ast_filter_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/dashboards/v1/ast/filter.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc2\x1a\n" +
-	"\x06Filter\x12J\n" +
-	"\x06source\x18\x01 \x01(\v22.com.coralogixapis.dashboards.v1.ast.Filter.SourceR\x06source\x124\n" +
-	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x128\n" +
-	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\tcollapsed\x1a\xc7\x02\n" +
-	"\x06Source\x12L\n" +
-	"\x04logs\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.ast.Filter.LogsFilterH\x00R\x04logs\x12O\n" +
-	"\x05spans\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.ast.Filter.SpansFilterH\x00R\x05spans\x12U\n" +
-	"\ametrics\x18\x03 \x01(\v29.com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilterH\x00R\ametrics:>\x92A;\n" +
+	"0com/coralogixapis/dashboards/v1/ast/filter.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf5$\n" +
+	"\x06Filter\x12\x90\x01\n" +
+	"\x06source\x18\x01 \x01(\v22.com.coralogixapis.dashboards.v1.ast.Filter.SourceBD\x92AA2?The source of the filter, which can be logs, spans, or metrics.R\x06source\x12o\n" +
+	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB9\x92A624Indicates if the filter is currently enabled or not.R\aenabled\x12\x8b\x01\n" +
+	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBQ\x92AN2LIndicates if the filter's UI representation should be collapsed or expanded.R\tcollapsed\x1a\xba\x03\n" +
+	"\x06Source\x12q\n" +
+	"\x04logs\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.ast.Filter.LogsFilterB#\x92A 2\x1eFilter configuration for logs.H\x00R\x04logs\x12u\n" +
+	"\x05spans\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.ast.Filter.SpansFilterB$\x92A!2\x1fFilter configuration for spans.H\x00R\x05spans\x12}\n" +
+	"\ametrics\x18\x03 \x01(\v29.com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilterB&\x92A#2!Filter configuration for metrics.H\x00R\ametrics:>\x92A;\n" +
 	"9*\x06Source2/Defines the type of data the filter applies to.B\a\n" +
-	"\x05value\x1a\xca\x02\n" +
+	"\x05value\x1a\xee\x03\n" +
 	"\n" +
-	"LogsFilter\x122\n" +
-	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x05field\x12P\n" +
-	"\boperator\x18\x02 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorR\boperator\x12e\n" +
-	"\x11observation_field\x18\x03 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x10observationField:O\x92AL\n" +
+	"LogsFilter\x12f\n" +
+	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x92A/2-The log field to which the filter is applied.R\x05field\x12\x7f\n" +
+	"\boperator\x18\x02 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorB-\x92A*2(An operator used for filtering the logs.R\boperator\x12\xa5\x01\n" +
+	"\x11observation_field\x18\x03 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB>\x92A;29The observation log field to which the filter is applied.R\x10observationField:O\x92AL\n" +
 	"J*\n" +
-	"LogsFilter2<This data structure represents the filter criteria for logs.\x1a\xe2\x02\n" +
-	"\vSpansFilter\x12G\n" +
-	"\x05field\x18\x01 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldR\x05field\x12P\n" +
-	"\boperator\x18\x02 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorR\boperator\x12e\n" +
-	"\x11observation_field\x18\x03 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x10observationField:Q\x92AN\n" +
-	"L*\vSpansFilter2=This data structure represents the filter criteria for spans.\x1a\xa2\x02\n" +
-	"\rMetricsFilter\x124\n" +
-	"\x06metric\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x06metric\x122\n" +
-	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x12P\n" +
-	"\boperator\x18\x03 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorR\boperator:U\x92AR\n" +
-	"P*\rMetricsFilter2?This data structure represents the filter criteria for metrics.\x1a\x90\x02\n" +
-	"\bOperator\x12L\n" +
-	"\x06equals\x18\x01 \x01(\v22.com.coralogixapis.dashboards.v1.ast.Filter.EqualsH\x00R\x06equals\x12V\n" +
+	"LogsFilter2<This data structure represents the filter criteria for logs.\x1a\xf6\x04\n" +
+	"\vSpansFilter\x12|\n" +
+	"\x05field\x18\x01 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB3\x92A02.The span field to which the filter is applied.R\x05field\x12\x80\x01\n" +
+	"\boperator\x18\x02 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorB.\x92A+2)An operator used for filtering the spans.R\boperator\x12\x92\x02\n" +
+	"\x11observation_field\x18\x03 \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB\xa6\x01\x92A\xa2\x012\x9f\x01The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)R\x10observationField:Q\x92AN\n" +
+	"L*\vSpansFilter2=This data structure represents the filter criteria for spans.\x1a\xbe\x03\n" +
+	"\rMetricsFilter\x12q\n" +
+	"\x06metric\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x92A826The name of the metric to which the filter is applied.R\x06metric\x12^\n" +
+	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB*\x92A'2%The label associated with the metric.R\x05label\x12\x82\x01\n" +
+	"\boperator\x18\x03 \x01(\v24.com.coralogixapis.dashboards.v1.ast.Filter.OperatorB0\x92A-2+An operator used for filtering the metrics.R\boperator:U\x92AR\n" +
+	"P*\rMetricsFilter2?This data structure represents the filter criteria for metrics.\x1a\xca\x02\n" +
+	"\bOperator\x12g\n" +
+	"\x06equals\x18\x01 \x01(\v22.com.coralogixapis.dashboards.v1.ast.Filter.EqualsB\x19\x92A\x162\x14Equality comparison.H\x00R\x06equals\x12u\n" +
 	"\n" +
-	"not_equals\x18\x02 \x01(\v25.com.coralogixapis.dashboards.v1.ast.Filter.NotEqualsH\x00R\tnotEquals:U\x92AR\n" +
+	"not_equals\x18\x02 \x01(\v25.com.coralogixapis.dashboards.v1.ast.Filter.NotEqualsB\x1d\x92A\x1a2\x18Non-equality comparison.H\x00R\tnotEquals:U\x92AR\n" +
 	"P*\bOperator2DThis data structure defines the comparison operation for the filter.B\a\n" +
-	"\x05value\x1a\xf0\x05\n" +
-	"\x06Equals\x12Z\n" +
-	"\tselection\x18\x01 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.Filter.Equals.SelectionR\tselection\x1a\xb8\x04\n" +
-	"\tSelection\x12]\n" +
-	"\x03all\x18\x01 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.Filter.Equals.Selection.AllSelectionH\x00R\x03all\x12`\n" +
-	"\x04list\x18\x02 \x01(\v2J.com.coralogixapis.dashboards.v1.ast.Filter.Equals.Selection.ListSelectionH\x00R\x04list\x1a`\n" +
+	"\x05value\x1a\xae\a\n" +
+	"\x06Equals\x12\x94\x01\n" +
+	"\tselection\x18\x01 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.Filter.Equals.SelectionB8\x92A523The selection criteria for the equality comparison.R\tselection\x1a\xbb\x05\n" +
+	"\tSelection\x12\x89\x01\n" +
+	"\x03all\x18\x01 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.Filter.Equals.Selection.AllSelectionB*\x92A'2%Represents a selection of all values.H\x00R\x03all\x12\x94\x01\n" +
+	"\x04list\x18\x02 \x01(\v2J.com.coralogixapis.dashboards.v1.ast.Filter.Equals.Selection.ListSelectionB2\x92A/2-Represents a selection from a list of values.H\x00R\x04list\x1a`\n" +
 	"\fAllSelection:P\x92AM\n" +
-	"K*\fAllSelection2;This data structure indicates that all values are selected.\x1a\xa7\x01\n" +
-	"\rListSelection\x124\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x06values:`\x92A]\n" +
+	"K*\fAllSelection2;This data structure indicates that all values are selected.\x1a\xc8\x01\n" +
+	"\rListSelection\x12U\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1f\x92A\x1c2\x1aA list of selected values.R\x06values:`\x92A]\n" +
 	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:U\x92AR\n" +
 	"P*\tSelection2CThis data structure defines the values for the equality comparison.B\a\n" +
 	"\x05value:O\x92AL\n" +
-	"J*\x06Equals2@This data structure represents an equality comparison operation.\x1a\xc2\x04\n" +
-	"\tNotEquals\x12]\n" +
-	"\tselection\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.Filter.NotEquals.SelectionR\tselection\x1a\xfe\x02\n" +
-	"\tSelection\x12c\n" +
-	"\x04list\x18\x01 \x01(\v2M.com.coralogixapis.dashboards.v1.ast.Filter.NotEquals.Selection.ListSelectionH\x00R\x04list\x1a\xa7\x01\n" +
-	"\rListSelection\x124\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x06values:`\x92A]\n" +
+	"J*\x06Equals2@This data structure represents an equality comparison operation.\x1a\xe0\x05\n" +
+	"\tNotEquals\x12\x9b\x01\n" +
+	"\tselection\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.Filter.NotEquals.SelectionB<\x92A927The selection criteria for the non-equality comparison.R\tselection\x1a\xdd\x03\n" +
+	"\tSelection\x12\x97\x01\n" +
+	"\x04list\x18\x01 \x01(\v2M.com.coralogixapis.dashboards.v1.ast.Filter.NotEquals.Selection.ListSelectionB2\x92A/2-Represents a selection from a list of values.H\x00R\x04list\x1a\xd1\x01\n" +
+	"\rListSelection\x12^\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB(\x92A%2#A list of values for the selection.R\x06values:`\x92A]\n" +
 	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:Y\x92AV\n" +
 	"T*\tSelection2GThis data structure defines the values for the non-equality comparison.B\a\n" +
 	"\x05value:U\x92AR\n" +
@@ -920,6 +904,7 @@ var file_com_coralogixapis_dashboards_v1_ast_filter_proto_goTypes = []any{
 	(*wrapperspb.StringValue)(nil),                   // 14: google.protobuf.StringValue
 	(*ObservationField)(nil),                         // 15: com.coralogixapis.dashboards.v1.common.ObservationField
 	(*SpanField)(nil),                                // 16: com.coralogixapis.dashboards.v1.common.SpanField
+	(*SpanObservationField)(nil),                     // 17: com.coralogixapis.dashboards.v1.common.SpanObservationField
 }
 var file_com_coralogixapis_dashboards_v1_ast_filter_proto_depIdxs = []int32{
 	1,  // 0: com.coralogixapis.dashboards.v1.ast.Filter.source:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
@@ -933,7 +918,7 @@ var file_com_coralogixapis_dashboards_v1_ast_filter_proto_depIdxs = []int32{
 	15, // 8: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
 	16, // 9: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter.field:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
 	5,  // 10: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter.operator:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Operator
-	15, // 11: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	17, // 11: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
 	14, // 12: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter.metric:type_name -> google.protobuf.StringValue
 	14, // 13: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter.label:type_name -> google.protobuf.StringValue
 	5,  // 14: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter.operator:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Operator

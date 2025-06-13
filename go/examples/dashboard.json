@@ -33,8 +33,7 @@
                             }
                           }
                         },
-                        "seriesNameTemplate": "{{ pod }}",
-                        "customLinks": []
+                        "seriesNameTemplate": "{{ pod }}"
                       }
                     ],
                     "legend": {
@@ -69,8 +68,7 @@
                               }
                             ]
                           }
-                        },
-                        "customLinks": []
+                        }
                       }
                     ],
                     "legend": {
@@ -115,8 +113,7 @@
                               }
                             ]
                           }
-                        },
-                        "customLinks": []
+                        }
                       }
                     ],
                     "legend": {

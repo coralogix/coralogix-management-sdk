@@ -904,41 +904,44 @@ var File_com_coralogixapis_dashboards_v1_services_dashboards_service_proto proto
 
 const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/dashboards/v1/services/dashboards_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a'com/coralogix/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8b\x03\n" +
+	"Acom/coralogixapis/dashboards/v1/services/dashboards_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a'com/coralogix/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdd\x03\n" +
 	"\x16CreateDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12L\n" +
 	"\tdashboard\x18\x02 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x127\n" +
-	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\xac\x01\x92A\xa8\x01\n" +
-	")*'Create dashboard request data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x8a\x02\n" +
+	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\xfe\x01\x92A\xfa\x01\n" +
+	"{*'Create dashboard request data structure27This is a request used to create a new custom dashboard\xd2\x01\n" +
+	"request_id\xd2\x01\tdashboard*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd7\x02\n" +
 	"\x17CreateDashboardResponse\x12?\n" +
-	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xad\x01\x92A\xa9\x01\n" +
-	"**(Create dashboard response data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x8d\x03\n" +
+	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xfa\x01\x92A\xf6\x01\n" +
+	"w*(Create dashboard response data structure2KThis is a response received when a custom dashboard is successfully created*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xf4\x03\n" +
 	"\x17ReplaceDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12L\n" +
 	"\tdashboard\x18\x02 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x127\n" +
-	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\xad\x01\x92A\xa9\x01\n" +
-	"**(Replace dashboard request data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xca\x01\n" +
-	"\x18ReplaceDashboardResponse:\xad\x01\x92A\xa9\x01\n" +
-	"**(Create dashboard response data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xc5\x02\n" +
+	"\tis_locked\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked:\x94\x02\x92A\x90\x02\n" +
+	"\x90\x01*(Replace dashboard request data structure2KThis is a request sent to update an existing dashboard with new information\xd2\x01\n" +
+	"request_id\xd2\x01\tdashboard*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x93\x02\n" +
+	"\x18ReplaceDashboardResponse:\xf6\x01\x92A\xf2\x01\n" +
+	"s*)Replace dashboard response data structure2FThis is a response received when the dashboard is successfully updated*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x96\x03\n" +
 	"\x16DeleteDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
-	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xac\x01\x92A\xa8\x01\n" +
-	")*'Delete dashboard request data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xc9\x01\n" +
-	"\x17DeleteDashboardResponse:\xad\x01\x92A\xa9\x01\n" +
-	"**(Delete dashboard response data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x82\x02\n" +
+	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xfd\x01\x92A\xf9\x01\n" +
+	"z*'Delete dashboard request data structure23This is a request used to delete a custom dashboard\xd2\x01\n" +
+	"request_id\xd2\x01\fdashboard_id*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x91\x02\n" +
+	"\x17DeleteDashboardResponse:\xf5\x01\x92A\xf1\x01\n" +
+	"r*(Delete dashboard response data structure2FThis is a response received when the dashboard is successfully deleted*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xc7\x02\n" +
 	"\x13GetDashboardRequest\x12?\n" +
-	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xa9\x01\x92A\xa5\x01\n" +
-	"&*$Get dashboard request data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xa9\b\n" +
+	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xee\x01\x92A\xea\x01\n" +
+	"k*$Get dashboard request data structure24This is a request to get a specific custom dashboard\xd2\x01\fdashboard_id*{\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe0\b\n" +
 	"\x14GetDashboardResponse\x12L\n" +
 	"\tdashboard\x18\x01 \x01(\v2..com.coralogixapis.dashboards.v1.ast.DashboardR\tdashboard\x129\n" +
 	"\n" +
@@ -956,45 +959,49 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12F\n" +
 	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId\x12=\n" +
 	"\vlocker_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\n" +
-	"lockerName:\xb1\x01\x92A\xad\x01\n" +
-	"'*%Get dashboard response data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd5\x02\n" +
+	"lockerName:\xe8\x01\x92A\xe4\x01\n" +
+	"^*%Get dashboard response data structure25This is a response containing the requested dashboard*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x9e\x03\n" +
 	"\x13PinDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
-	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xbf\x01\x92A\xbb\x01\n" +
-	"5*$Pin dashboard request data structure\xd2\x01\fdashboard_id*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xca\x01\n" +
-	"\x14PinDashboardResponse:\xb1\x01\x92A\xad\x01\n" +
-	"'*%Pin dashboard response data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xca\x02\n" +
+	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\x88\x02\x92A\x84\x02\n" +
+	"~*$Pin dashboard request data structure2:This is a request used to mark certain dashboard as pinned\xd2\x01\n" +
+	"request_id\xd2\x01\fdashboard_id*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x8e\x02\n" +
+	"\x14PinDashboardResponse:\xf5\x01\x92A\xf1\x01\n" +
+	"k*%Pin dashboard response data structure2BThis is a response received on successful pinning of the dashboard*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x9b\x03\n" +
 	"\x15UnpinDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
-	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xb2\x01\x92A\xae\x01\n" +
-	"(*&Unpin dashboard request data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xce\x01\n" +
-	"\x16UnpinDashboardResponse:\xb3\x01\x92A\xaf\x01\n" +
-	")*'Unpin dashboard response data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xdd\x02\n" +
+	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\x83\x02\x92A\xff\x01\n" +
+	"y*&Unpin dashboard request data structure23This is a request used to unpin a certain dashboard\xd2\x01\n" +
+	"request_id\xd2\x01\fdashboard_id*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x8c\x02\n" +
+	"\x16UnpinDashboardResponse:\xf1\x01\x92A\xed\x01\n" +
+	"g*'Unpin dashboard response data structure2<This is a response received when dashboard has been unpinned*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xac\x03\n" +
 	"\x1eReplaceDefaultDashboardRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
-	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\xbc\x01\x92A\xb8\x01\n" +
-	"2*0Replace default dashboard request data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe1\x01\n" +
-	"\x1fReplaceDefaultDashboardResponse:\xbd\x01\x92A\xb9\x01\n" +
-	"3*1Replace default dashboard response data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x97\x03\n" +
+	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId:\x8b\x02\x92A\x87\x02\n" +
+	"\x80\x01*0Replace default dashboard request data structure20This is a request to replace a default dashboard\xd2\x01\n" +
+	"request_id\xd2\x01\fdashboard_id*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xa7\x02\n" +
+	"\x1fReplaceDefaultDashboardResponse:\x83\x02\x92A\xff\x01\n" +
+	"y*1Replace default dashboard response data structure2DThis is a response received when default dashboard has been replaced*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xed\x03\n" +
 	"\x1cAssignDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12?\n" +
 	"\fdashboard_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdashboardId\x129\n" +
-	"\tfolder_id\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xbd\x01\x92A\xb9\x01\n" +
-	"3*1Assign dashboard to folder request data structure*\x81\x01\n" +
-	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe0\x01\n" +
-	"\x1dAssignDashboardFolderResponse:\xbe\x01\x92A\xba\x01\n" +
-	"4*2Assign dashboard to folder response data structure*\x81\x01\n" +
+	"\tfolder_id\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\x93\x02\x92A\x8f\x02\n" +
+	"\x88\x01*1Assign dashboard to folder request data structure27This is a request for assigning a folder to a dashboard\xd2\x01\n" +
+	"request_id\xd2\x01\fdashboard_id*\x81\x01\n" +
+	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xba\x02\n" +
+	"\x1dAssignDashboardFolderResponse:\x98\x02\x92A\x94\x02\n" +
+	"\x8d\x01*2Assign dashboard to folder response data structure2WThis is a response confirming that folder has been successfully assigned to a dashboard*\x81\x01\n" +
 	"4Find out more about Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/*k\n" +
 	"\x0fTokenOriginType\x12!\n" +
 	"\x1dTOKEN_ORIGIN_TYPE_UNSPECIFIED\x10\x00\x12\x1a\n" +

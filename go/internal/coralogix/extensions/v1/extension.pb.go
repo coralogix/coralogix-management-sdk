@@ -352,6 +352,7 @@ type ExtensionItem struct {
 	PermissionResource ExtensionItem_PermissionResource `protobuf:"varint,9,opt,name=permission_resource,json=permissionResource,proto3,enum=com.coralogix.extensions.v1.ExtensionItem_PermissionResource" json:"permission_resource,omitempty"`
 	ExtendedInternalId *wrapperspb.StringValue          `protobuf:"bytes,10,opt,name=extended_internal_id,json=extendedInternalId,proto3" json:"extended_internal_id,omitempty"`
 	UniqueId           *wrapperspb.StringValue          `protobuf:"bytes,11,opt,name=unique_id,json=uniqueId,proto3" json:"unique_id,omitempty"`
+	StableId           *wrapperspb.StringValue          `protobuf:"bytes,12,opt,name=stable_id,json=stableId,proto3" json:"stable_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -452,6 +453,13 @@ func (x *ExtensionItem) GetExtendedInternalId() *wrapperspb.StringValue {
 func (x *ExtensionItem) GetUniqueId() *wrapperspb.StringValue {
 	if x != nil {
 		return x.UniqueId
+	}
+	return nil
+}
+
+func (x *ExtensionItem) GetStableId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.StableId
 	}
 	return nil
 }
@@ -1188,6 +1196,7 @@ type ExtensionItemData struct {
 	InternalId         *wrapperspb.Int32Value           `protobuf:"bytes,7,opt,name=internal_id,json=internalId,proto3" json:"internal_id,omitempty"`
 	UniqueId           *wrapperspb.StringValue          `protobuf:"bytes,8,opt,name=unique_id,json=uniqueId,proto3" json:"unique_id,omitempty"`
 	PermissionResource ExtensionItem_PermissionResource `protobuf:"varint,9,opt,name=permission_resource,json=permissionResource,proto3,enum=com.coralogix.extensions.v1.ExtensionItem_PermissionResource" json:"permission_resource,omitempty"`
+	StableId           *wrapperspb.StringValue          `protobuf:"bytes,10,opt,name=stable_id,json=stableId,proto3" json:"stable_id,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -1285,6 +1294,13 @@ func (x *ExtensionItemData) GetPermissionResource() ExtensionItem_PermissionReso
 	return ExtensionItem_UNKNOWN
 }
 
+func (x *ExtensionItemData) GetStableId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.StableId
+	}
+	return nil
+}
+
 var File_com_coralogix_extensions_v1_extension_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
@@ -1301,7 +1317,7 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x1cGRAFANA_DASHBOARD_DEFINITION\x10\x02\x12\x12\n" +
 	"\x0eENRICHMENT_CSV\x10\x03\x12\"\n" +
 	"\x1eCX_CUSTOM_DASHBOARD_DEFINITION\x10\x04:6\x92A3\n" +
-	"1*\x15Extension item binary\xd2\x01\x04type\xd2\x01\x04data\xd2\x01\tfile_name\"\x8b\t\n" +
+	"1*\x15Extension item binary\xd2\x01\x04type\xd2\x01\x04data\xd2\x01\tfile_name\"\xc6\t\n" +
 	"\rExtensionItem\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
@@ -1314,7 +1330,8 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\x13permission_resource\x18\t \x01(\x0e2=.com.coralogix.extensions.v1.ExtensionItem.PermissionResourceR\x12permissionResource\x12N\n" +
 	"\x14extended_internal_id\x18\n" +
 	" \x01(\v2\x1c.google.protobuf.StringValueR\x12extendedInternalId\x129\n" +
-	"\tunique_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\buniqueId\"\xdc\x02\n" +
+	"\tunique_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\buniqueId\x129\n" +
+	"\tstable_id\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\bstableId\"\xdc\x02\n" +
 	"\x12PermissionResource\x12\v\n" +
 	"\aUNKNOWN\x10\x00\x12\n" +
 	"\n" +
@@ -1417,7 +1434,7 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\bkeywords\x18\x0e \x03(\v2\x1c.google.protobuf.StringValueB\a\x92A\x04:\x02[]R\bkeywords\x12R\n" +
 	"\tchangelog\x18\x0f \x03(\v2+.com.coralogix.extensions.v1.ChangelogEntryB\a\x92A\x04:\x02[]R\tchangelog\x12J\n" +
 	"\vdeprecation\x18\x10 \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:T\x92AQ\n" +
-	"O*\x0eExtension data2\x1fExtension details for ingestion\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image\xd2\x01\aversion\"\x85\x06\n" +
+	"O*\x0eExtension data2\x1fExtension details for ingestion\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image\xd2\x01\aversion\"\xc0\x06\n" +
 	"\x11ExtensionItemData\x12J\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"Low cocoa content\"R\x04name\x12Z\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1a\x92A\x17J\x15\"Less than 60% cocoa\"R\vdescription\x12N\n" +
@@ -1429,7 +1446,9 @@ const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\vinternal_id\x18\a \x01(\v2\x1b.google.protobuf.Int32ValueB\x06\x92A\x03:\x010R\n" +
 	"internalId\x129\n" +
 	"\tunique_id\x18\b \x01(\v2\x1c.google.protobuf.StringValueR\buniqueId\x12n\n" +
-	"\x13permission_resource\x18\t \x01(\x0e2=.com.coralogix.extensions.v1.ExtensionItem.PermissionResourceR\x12permissionResource:8\x92A5\n" +
+	"\x13permission_resource\x18\t \x01(\x0e2=.com.coralogix.extensions.v1.ExtensionItem.PermissionResourceR\x12permissionResource\x129\n" +
+	"\tstable_id\x18\n" +
+	" \x01(\v2\x1c.google.protobuf.StringValueR\bstableId:8\x92A5\n" +
 	"3*\x13Extension item data\xd2\x01\x04name\xd2\x01\rtarget_domain\xd2\x01\x04data*\xf1\x01\n" +
 	"\fTargetDomain\x12\n" +
 	"\n" +
@@ -1498,72 +1517,74 @@ var file_com_coralogix_extensions_v1_extension_proto_depIdxs = []int32{
 	2,  // 10: com.coralogix.extensions.v1.ExtensionItem.permission_resource:type_name -> com.coralogix.extensions.v1.ExtensionItem.PermissionResource
 	15, // 11: com.coralogix.extensions.v1.ExtensionItem.extended_internal_id:type_name -> google.protobuf.StringValue
 	15, // 12: com.coralogix.extensions.v1.ExtensionItem.unique_id:type_name -> google.protobuf.StringValue
-	18, // 13: com.coralogix.extensions.v1.ItemCounts.actions:type_name -> google.protobuf.UInt32Value
-	18, // 14: com.coralogix.extensions.v1.ItemCounts.alerts:type_name -> google.protobuf.UInt32Value
-	18, // 15: com.coralogix.extensions.v1.ItemCounts.custom_dashboards:type_name -> google.protobuf.UInt32Value
-	18, // 16: com.coralogix.extensions.v1.ItemCounts.enrichments:type_name -> google.protobuf.UInt32Value
-	18, // 17: com.coralogix.extensions.v1.ItemCounts.events_to_metrics:type_name -> google.protobuf.UInt32Value
-	18, // 18: com.coralogix.extensions.v1.ItemCounts.grafana_dashboards:type_name -> google.protobuf.UInt32Value
-	18, // 19: com.coralogix.extensions.v1.ItemCounts.kibana_dashboards:type_name -> google.protobuf.UInt32Value
-	18, // 20: com.coralogix.extensions.v1.ItemCounts.metrics_rule_group:type_name -> google.protobuf.UInt32Value
-	18, // 21: com.coralogix.extensions.v1.ItemCounts.parsing_rules:type_name -> google.protobuf.UInt32Value
-	18, // 22: com.coralogix.extensions.v1.ItemCounts.saved_views:type_name -> google.protobuf.UInt32Value
-	15, // 23: com.coralogix.extensions.v1.IntegrationDetail.name:type_name -> google.protobuf.StringValue
-	15, // 24: com.coralogix.extensions.v1.IntegrationDetail.link:type_name -> google.protobuf.StringValue
-	3,  // 25: com.coralogix.extensions.v1.ExtensionBinary.type:type_name -> com.coralogix.extensions.v1.ExtensionBinary.BinaryType
-	15, // 26: com.coralogix.extensions.v1.ExtensionBinary.data:type_name -> google.protobuf.StringValue
-	15, // 27: com.coralogix.extensions.v1.ChangelogEntry.version:type_name -> google.protobuf.StringValue
-	15, // 28: com.coralogix.extensions.v1.ChangelogEntry.description_md:type_name -> google.protobuf.StringValue
-	15, // 29: com.coralogix.extensions.v1.Deprecation.reason:type_name -> google.protobuf.StringValue
-	15, // 30: com.coralogix.extensions.v1.Deprecation.replacement_extensions:type_name -> google.protobuf.StringValue
-	15, // 31: com.coralogix.extensions.v1.ExtensionRevision.version:type_name -> google.protobuf.StringValue
-	15, // 32: com.coralogix.extensions.v1.ExtensionRevision.description:type_name -> google.protobuf.StringValue
-	15, // 33: com.coralogix.extensions.v1.ExtensionRevision.excerpt:type_name -> google.protobuf.StringValue
-	15, // 34: com.coralogix.extensions.v1.ExtensionRevision.labels:type_name -> google.protobuf.StringValue
-	7,  // 35: com.coralogix.extensions.v1.ExtensionRevision.integration_details:type_name -> com.coralogix.extensions.v1.IntegrationDetail
-	5,  // 36: com.coralogix.extensions.v1.ExtensionRevision.items:type_name -> com.coralogix.extensions.v1.ExtensionItem
-	8,  // 37: com.coralogix.extensions.v1.ExtensionRevision.binaries:type_name -> com.coralogix.extensions.v1.ExtensionBinary
-	5,  // 38: com.coralogix.extensions.v1.ExtensionRevision.permission_denied_items:type_name -> com.coralogix.extensions.v1.ExtensionItem
-	17, // 39: com.coralogix.extensions.v1.ExtensionRevision.is_testing:type_name -> google.protobuf.BoolValue
-	15, // 40: com.coralogix.extensions.v1.Extension.id:type_name -> google.protobuf.StringValue
-	15, // 41: com.coralogix.extensions.v1.Extension.name:type_name -> google.protobuf.StringValue
-	15, // 42: com.coralogix.extensions.v1.Extension.image:type_name -> google.protobuf.StringValue
-	15, // 43: com.coralogix.extensions.v1.Extension.dark_mode_image:type_name -> google.protobuf.StringValue
-	11, // 44: com.coralogix.extensions.v1.Extension.revisions:type_name -> com.coralogix.extensions.v1.ExtensionRevision
-	17, // 45: com.coralogix.extensions.v1.Extension.is_hidden:type_name -> google.protobuf.BoolValue
-	15, // 46: com.coralogix.extensions.v1.Extension.keywords:type_name -> google.protobuf.StringValue
-	11, // 47: com.coralogix.extensions.v1.Extension.permission_denied_revisions:type_name -> com.coralogix.extensions.v1.ExtensionRevision
-	9,  // 48: com.coralogix.extensions.v1.Extension.changelog:type_name -> com.coralogix.extensions.v1.ChangelogEntry
-	10, // 49: com.coralogix.extensions.v1.Extension.deprecation:type_name -> com.coralogix.extensions.v1.Deprecation
-	15, // 50: com.coralogix.extensions.v1.ExtensionData.id:type_name -> google.protobuf.StringValue
-	15, // 51: com.coralogix.extensions.v1.ExtensionData.name:type_name -> google.protobuf.StringValue
-	15, // 52: com.coralogix.extensions.v1.ExtensionData.description:type_name -> google.protobuf.StringValue
-	15, // 53: com.coralogix.extensions.v1.ExtensionData.excerpt:type_name -> google.protobuf.StringValue
-	15, // 54: com.coralogix.extensions.v1.ExtensionData.image:type_name -> google.protobuf.StringValue
-	15, // 55: com.coralogix.extensions.v1.ExtensionData.dark_mode_image:type_name -> google.protobuf.StringValue
-	15, // 56: com.coralogix.extensions.v1.ExtensionData.labels:type_name -> google.protobuf.StringValue
-	15, // 57: com.coralogix.extensions.v1.ExtensionData.version:type_name -> google.protobuf.StringValue
-	14, // 58: com.coralogix.extensions.v1.ExtensionData.items:type_name -> com.coralogix.extensions.v1.ExtensionItemData
-	7,  // 59: com.coralogix.extensions.v1.ExtensionData.integration_details:type_name -> com.coralogix.extensions.v1.IntegrationDetail
-	17, // 60: com.coralogix.extensions.v1.ExtensionData.is_hidden:type_name -> google.protobuf.BoolValue
-	8,  // 61: com.coralogix.extensions.v1.ExtensionData.binaries:type_name -> com.coralogix.extensions.v1.ExtensionBinary
-	15, // 62: com.coralogix.extensions.v1.ExtensionData.keywords:type_name -> google.protobuf.StringValue
-	9,  // 63: com.coralogix.extensions.v1.ExtensionData.changelog:type_name -> com.coralogix.extensions.v1.ChangelogEntry
-	10, // 64: com.coralogix.extensions.v1.ExtensionData.deprecation:type_name -> com.coralogix.extensions.v1.Deprecation
-	15, // 65: com.coralogix.extensions.v1.ExtensionItemData.name:type_name -> google.protobuf.StringValue
-	15, // 66: com.coralogix.extensions.v1.ExtensionItemData.description:type_name -> google.protobuf.StringValue
-	0,  // 67: com.coralogix.extensions.v1.ExtensionItemData.target_domain:type_name -> com.coralogix.extensions.v1.TargetDomain
-	16, // 68: com.coralogix.extensions.v1.ExtensionItemData.data:type_name -> google.protobuf.Struct
-	4,  // 69: com.coralogix.extensions.v1.ExtensionItemData.binaries:type_name -> com.coralogix.extensions.v1.ExtensionItemBinary
-	17, // 70: com.coralogix.extensions.v1.ExtensionItemData.is_mandatory:type_name -> google.protobuf.BoolValue
-	19, // 71: com.coralogix.extensions.v1.ExtensionItemData.internal_id:type_name -> google.protobuf.Int32Value
-	15, // 72: com.coralogix.extensions.v1.ExtensionItemData.unique_id:type_name -> google.protobuf.StringValue
-	2,  // 73: com.coralogix.extensions.v1.ExtensionItemData.permission_resource:type_name -> com.coralogix.extensions.v1.ExtensionItem.PermissionResource
-	74, // [74:74] is the sub-list for method output_type
-	74, // [74:74] is the sub-list for method input_type
-	74, // [74:74] is the sub-list for extension type_name
-	74, // [74:74] is the sub-list for extension extendee
-	0,  // [0:74] is the sub-list for field type_name
+	15, // 13: com.coralogix.extensions.v1.ExtensionItem.stable_id:type_name -> google.protobuf.StringValue
+	18, // 14: com.coralogix.extensions.v1.ItemCounts.actions:type_name -> google.protobuf.UInt32Value
+	18, // 15: com.coralogix.extensions.v1.ItemCounts.alerts:type_name -> google.protobuf.UInt32Value
+	18, // 16: com.coralogix.extensions.v1.ItemCounts.custom_dashboards:type_name -> google.protobuf.UInt32Value
+	18, // 17: com.coralogix.extensions.v1.ItemCounts.enrichments:type_name -> google.protobuf.UInt32Value
+	18, // 18: com.coralogix.extensions.v1.ItemCounts.events_to_metrics:type_name -> google.protobuf.UInt32Value
+	18, // 19: com.coralogix.extensions.v1.ItemCounts.grafana_dashboards:type_name -> google.protobuf.UInt32Value
+	18, // 20: com.coralogix.extensions.v1.ItemCounts.kibana_dashboards:type_name -> google.protobuf.UInt32Value
+	18, // 21: com.coralogix.extensions.v1.ItemCounts.metrics_rule_group:type_name -> google.protobuf.UInt32Value
+	18, // 22: com.coralogix.extensions.v1.ItemCounts.parsing_rules:type_name -> google.protobuf.UInt32Value
+	18, // 23: com.coralogix.extensions.v1.ItemCounts.saved_views:type_name -> google.protobuf.UInt32Value
+	15, // 24: com.coralogix.extensions.v1.IntegrationDetail.name:type_name -> google.protobuf.StringValue
+	15, // 25: com.coralogix.extensions.v1.IntegrationDetail.link:type_name -> google.protobuf.StringValue
+	3,  // 26: com.coralogix.extensions.v1.ExtensionBinary.type:type_name -> com.coralogix.extensions.v1.ExtensionBinary.BinaryType
+	15, // 27: com.coralogix.extensions.v1.ExtensionBinary.data:type_name -> google.protobuf.StringValue
+	15, // 28: com.coralogix.extensions.v1.ChangelogEntry.version:type_name -> google.protobuf.StringValue
+	15, // 29: com.coralogix.extensions.v1.ChangelogEntry.description_md:type_name -> google.protobuf.StringValue
+	15, // 30: com.coralogix.extensions.v1.Deprecation.reason:type_name -> google.protobuf.StringValue
+	15, // 31: com.coralogix.extensions.v1.Deprecation.replacement_extensions:type_name -> google.protobuf.StringValue
+	15, // 32: com.coralogix.extensions.v1.ExtensionRevision.version:type_name -> google.protobuf.StringValue
+	15, // 33: com.coralogix.extensions.v1.ExtensionRevision.description:type_name -> google.protobuf.StringValue
+	15, // 34: com.coralogix.extensions.v1.ExtensionRevision.excerpt:type_name -> google.protobuf.StringValue
+	15, // 35: com.coralogix.extensions.v1.ExtensionRevision.labels:type_name -> google.protobuf.StringValue
+	7,  // 36: com.coralogix.extensions.v1.ExtensionRevision.integration_details:type_name -> com.coralogix.extensions.v1.IntegrationDetail
+	5,  // 37: com.coralogix.extensions.v1.ExtensionRevision.items:type_name -> com.coralogix.extensions.v1.ExtensionItem
+	8,  // 38: com.coralogix.extensions.v1.ExtensionRevision.binaries:type_name -> com.coralogix.extensions.v1.ExtensionBinary
+	5,  // 39: com.coralogix.extensions.v1.ExtensionRevision.permission_denied_items:type_name -> com.coralogix.extensions.v1.ExtensionItem
+	17, // 40: com.coralogix.extensions.v1.ExtensionRevision.is_testing:type_name -> google.protobuf.BoolValue
+	15, // 41: com.coralogix.extensions.v1.Extension.id:type_name -> google.protobuf.StringValue
+	15, // 42: com.coralogix.extensions.v1.Extension.name:type_name -> google.protobuf.StringValue
+	15, // 43: com.coralogix.extensions.v1.Extension.image:type_name -> google.protobuf.StringValue
+	15, // 44: com.coralogix.extensions.v1.Extension.dark_mode_image:type_name -> google.protobuf.StringValue
+	11, // 45: com.coralogix.extensions.v1.Extension.revisions:type_name -> com.coralogix.extensions.v1.ExtensionRevision
+	17, // 46: com.coralogix.extensions.v1.Extension.is_hidden:type_name -> google.protobuf.BoolValue
+	15, // 47: com.coralogix.extensions.v1.Extension.keywords:type_name -> google.protobuf.StringValue
+	11, // 48: com.coralogix.extensions.v1.Extension.permission_denied_revisions:type_name -> com.coralogix.extensions.v1.ExtensionRevision
+	9,  // 49: com.coralogix.extensions.v1.Extension.changelog:type_name -> com.coralogix.extensions.v1.ChangelogEntry
+	10, // 50: com.coralogix.extensions.v1.Extension.deprecation:type_name -> com.coralogix.extensions.v1.Deprecation
+	15, // 51: com.coralogix.extensions.v1.ExtensionData.id:type_name -> google.protobuf.StringValue
+	15, // 52: com.coralogix.extensions.v1.ExtensionData.name:type_name -> google.protobuf.StringValue
+	15, // 53: com.coralogix.extensions.v1.ExtensionData.description:type_name -> google.protobuf.StringValue
+	15, // 54: com.coralogix.extensions.v1.ExtensionData.excerpt:type_name -> google.protobuf.StringValue
+	15, // 55: com.coralogix.extensions.v1.ExtensionData.image:type_name -> google.protobuf.StringValue
+	15, // 56: com.coralogix.extensions.v1.ExtensionData.dark_mode_image:type_name -> google.protobuf.StringValue
+	15, // 57: com.coralogix.extensions.v1.ExtensionData.labels:type_name -> google.protobuf.StringValue
+	15, // 58: com.coralogix.extensions.v1.ExtensionData.version:type_name -> google.protobuf.StringValue
+	14, // 59: com.coralogix.extensions.v1.ExtensionData.items:type_name -> com.coralogix.extensions.v1.ExtensionItemData
+	7,  // 60: com.coralogix.extensions.v1.ExtensionData.integration_details:type_name -> com.coralogix.extensions.v1.IntegrationDetail
+	17, // 61: com.coralogix.extensions.v1.ExtensionData.is_hidden:type_name -> google.protobuf.BoolValue
+	8,  // 62: com.coralogix.extensions.v1.ExtensionData.binaries:type_name -> com.coralogix.extensions.v1.ExtensionBinary
+	15, // 63: com.coralogix.extensions.v1.ExtensionData.keywords:type_name -> google.protobuf.StringValue
+	9,  // 64: com.coralogix.extensions.v1.ExtensionData.changelog:type_name -> com.coralogix.extensions.v1.ChangelogEntry
+	10, // 65: com.coralogix.extensions.v1.ExtensionData.deprecation:type_name -> com.coralogix.extensions.v1.Deprecation
+	15, // 66: com.coralogix.extensions.v1.ExtensionItemData.name:type_name -> google.protobuf.StringValue
+	15, // 67: com.coralogix.extensions.v1.ExtensionItemData.description:type_name -> google.protobuf.StringValue
+	0,  // 68: com.coralogix.extensions.v1.ExtensionItemData.target_domain:type_name -> com.coralogix.extensions.v1.TargetDomain
+	16, // 69: com.coralogix.extensions.v1.ExtensionItemData.data:type_name -> google.protobuf.Struct
+	4,  // 70: com.coralogix.extensions.v1.ExtensionItemData.binaries:type_name -> com.coralogix.extensions.v1.ExtensionItemBinary
+	17, // 71: com.coralogix.extensions.v1.ExtensionItemData.is_mandatory:type_name -> google.protobuf.BoolValue
+	19, // 72: com.coralogix.extensions.v1.ExtensionItemData.internal_id:type_name -> google.protobuf.Int32Value
+	15, // 73: com.coralogix.extensions.v1.ExtensionItemData.unique_id:type_name -> google.protobuf.StringValue
+	2,  // 74: com.coralogix.extensions.v1.ExtensionItemData.permission_resource:type_name -> com.coralogix.extensions.v1.ExtensionItem.PermissionResource
+	15, // 75: com.coralogix.extensions.v1.ExtensionItemData.stable_id:type_name -> google.protobuf.StringValue
+	76, // [76:76] is the sub-list for method output_type
+	76, // [76:76] is the sub-list for method input_type
+	76, // [76:76] is the sub-list for extension type_name
+	76, // [76:76] is the sub-list for extension extendee
+	0,  // [0:76] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_extensions_v1_extension_proto_init() }
