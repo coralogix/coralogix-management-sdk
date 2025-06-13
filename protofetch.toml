@@ -217,7 +217,6 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto",
-    "src/com/coralogixapis/dashboards/v1/ast/widgets/common/custom_links.proto",
     "src/com/coralogixapis/dashboards/v1/common/span_relation_type.proto",
     "src/com/coralogixapis/dashboards/v1/common/annotation_event.proto",
     "src/com/coralogixapis/dashboards/v1/common/dataprime_query_schema.proto",
