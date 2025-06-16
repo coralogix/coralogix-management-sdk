@@ -3,6 +3,6 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v1;
 
 enum FilterOperator {
-    FILTER_OPERATOR_OR_OR_UNSPECIFIED = 0;
-    FILTER_OPERATOR_AND = 1;
+  FILTER_OPERATOR_OR_OR_UNSPECIFIED = 0;
+  FILTER_OPERATOR_AND = 1;
 }

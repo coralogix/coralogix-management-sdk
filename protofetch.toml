@@ -190,7 +190,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.5.3"
+revision = "v2.5.4"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -307,7 +307,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.18"
+revision = "v0.0.19"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -331,7 +331,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.114"
+revision = "v0.1.115"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -346,7 +346,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.118"
+revision = "v0.0.121"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -428,7 +428,7 @@ allow_policies = [
 
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
-revision = "v1.0.2"
+revision = "v1.0.3"
 allow_policies = [
     "src/com/coralogixapis/incidents/v1/assignee.proto",
     "src/com/coralogixapis/incidents/v1/filter_operators.proto",

@@ -1,9 +1,8 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
+package com.coralogixapis.slo.v1;
+
 import "google/protobuf/timestamp.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-option go_package = "com/coralogixapis/slo/v1";
-package com.coralogixapis.slo.v1;
 
 message Metric {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -13,7 +12,8 @@ message Metric {
       required: ["query"]
     }
   };
-  string query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"sum(rate(http_requests_total{status=\"200\"}[5m]))\"" }];
+  string query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"" }];
+
 }
 
 enum ComparisonOperator {

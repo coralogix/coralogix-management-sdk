@@ -91,6 +91,14 @@ message LineChart {
       description: "Whether to ignore color scheme and derive colors from algorithm"
       example: "false"
     }];
+    google.protobuf.FloatValue y_axis_min = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Number indicating the lower band for y axis"
+      example: "-1000"
+    }];
+    google.protobuf.FloatValue y_axis_max = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "Number indicating the upper band for y axis"
+      example: "1000"
+    }];
   }
 
   message Query {

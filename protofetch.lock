@@ -27,8 +27,8 @@ commit_hash = "995f2fa4245ab060a96963566fabdfa7dc5b88c5"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.118"
-commit_hash = "8b8ecc7f8c00c80b35f305e49f588ca3bd509a2f"
+revision = "v0.0.121"
+commit_hash = "33749a2e7471d83641d77ddc8b54a4ddc5be087e"
 
 [[dependencies]]
 name = "cx-api-common"
@@ -39,8 +39,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.5.3"
-commit_hash = "6ed6ddcd13d555cdb4688a1b6bfe100efb6003f6"
+revision = "v2.5.4"
+commit_hash = "02a95d8e6b41b72731f01a7c601d6357cfdefe66"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -69,14 +69,14 @@ commit_hash = "28e174bc6313a738c1691d6e3cc44b364c5b0211"
 [[dependencies]]
 name = "cx-api-incidents"
 url = "github.com/coralogix/cx-api-incidents"
-revision = "v1.0.2"
-commit_hash = "aaea20e337ae89cc93a4222906918f3092a49240"
+revision = "v1.0.3"
+commit_hash = "a263697a62d693c205fb3cc0d33ccdad81c25c59"
 
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
 branch = "master"
-commit_hash = "d6ef2857302a0583278a96ed4e781330796a6780"
+commit_hash = "d3ea1bc199414596270ebdfe4ce469db42cbb7d1"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -111,8 +111,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.114"
-commit_hash = "144940f24f4260816969fdba65e065ad6085695b"
+revision = "v0.1.115"
+commit_hash = "86b69205b8de603a64fd4db43fed6a7c21005c63"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -135,8 +135,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.18"
-commit_hash = "fc683ad8401d5bcfb63fbe2c93cb3c075579b2f7"
+revision = "v0.0.19"
+commit_hash = "8c50ef36d269ba346641267ce433072f0ae61143"
 
 [[dependencies]]
 name = "cx-api-views"
