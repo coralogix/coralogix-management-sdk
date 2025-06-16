@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	code "google.golang.org/genproto/googleapis/rpc/code"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -924,7 +925,7 @@ var File_com_coralogixapis_slo_v1_slo_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a\x15google/rpc/code.proto\"\xfb\x01\n" +
+	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a\x15google/rpc/code.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdb\x02\n" +
 	"\x0eResponseStatus\x121\n" +
 	"\vstatus_code\x18\x01 \x01(\x0e2\x10.google.rpc.CodeR\n" +
 	"statusCode\x12\x1d\n" +
@@ -932,60 +933,129 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\adetails\x18\x03 \x03(\v25.com.coralogixapis.slo.v1.ResponseStatus.DetailsEntryR\adetails\x1a:\n" +
 	"\fDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01B\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:^\x92A[\n" +
+	"Y*\x0eResponseStatus29Status of the response, including error code and message.\xd2\x01\vstatus_codeB\n" +
 	"\n" +
-	"\b_message\"C\n" +
+	"\b_message\"\x80\x01\n" +
 	"\x10CreateSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"D\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:;\x92A8\n" +
+	"6*\x10CreateSloRequest2\x1cRequest to create a new SLO.\xd2\x01\x03slo\"\x88\x01\n" +
 	"\x11CreateSloResponse\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"D\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:B\x92A?\n" +
+	"=*\x11CreateSloResponse2\"Response after creating a new SLO.\xd2\x01\x03slo\"\x89\x01\n" +
 	"\x11ReplaceSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"z\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:C\x92A@\n" +
+	">*\x11ReplaceSloRequest2#Request to replace an existing SLO.\xd2\x01\x03slo\"\xc6\x01\n" +
 	"\x12ReplaceSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x123\n" +
-	"\x16effected_slo_alert_ids\x18\x02 \x03(\tR\x13effectedSloAlertIds\"\"\n" +
+	"\x16effected_slo_alert_ids\x18\x02 \x03(\tR\x13effectedSloAlertIds:J\x92AG\n" +
+	"E*\x12ReplaceSloResponse2)Response after replacing an existing SLO.\xd2\x01\x03slo\"d\n" +
 	"\x10DeleteSloRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"H\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id:@\x92A=\n" +
+	";*\x10DeleteSloRequest2\"Request to delete an existing SLO.\xd2\x01\x02id\"\x8c\x01\n" +
 	"\x11DeleteSloResponse\x123\n" +
-	"\x16effected_slo_alert_ids\x18\x01 \x03(\tR\x13effectedSloAlertIds\"\x1f\n" +
+	"\x16effected_slo_alert_ids\x18\x01 \x03(\tR\x13effectedSloAlertIds:B\x92A?\n" +
+	"=*\x11DeleteSloResponse2(Response after deleting an existing SLO.\"i\n" +
 	"\rGetSloRequest\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\"A\n" +
+	"\x02id\x18\x01 \x01(\tR\x02id:H\x92AE\n" +
+	"C*\rGetSloRequest2-Request to retrieve a specific SLO by its ID.\xd2\x01\x02id\"\x92\x01\n" +
 	"\x0eGetSloResponse\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\"Q\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:O\x92AL\n" +
+	"J*\x0eGetSloResponse22Response containing the details of a specific SLO.\xd2\x01\x03slo\"\x96\x01\n" +
 	"\x0fListSlosRequest\x12>\n" +
-	"\afilters\x18\x01 \x01(\v2$.com.coralogixapis.slo.v1.SloFiltersR\afilters\"E\n" +
+	"\afilters\x18\x01 \x01(\v2$.com.coralogixapis.slo.v1.SloFiltersR\afilters:C\x92A@\n" +
+	">*\x0fListSlosRequest2+Request to list SLOs with optional filters.\"\x8a\x01\n" +
 	"\x10ListSlosResponse\x121\n" +
-	"\x04slos\x18\x01 \x03(\v2\x1d.com.coralogixapis.slo.v1.SloR\x04slos\"'\n" +
+	"\x04slos\x18\x01 \x03(\v2\x1d.com.coralogixapis.slo.v1.SloR\x04slos:C\x92A@\n" +
+	">*\x10ListSlosResponse2#Response containing a list of SLOs.\xd2\x01\x04slos\"z\n" +
 	"\x13BatchGetSlosRequest\x12\x10\n" +
-	"\x03ids\x18\x01 \x03(\tR\x03ids\"m\n" +
+	"\x03ids\x18\x01 \x03(\tR\x03ids:Q\x92AN\n" +
+	"L*\x13BatchGetSlosRequest2/Request to retrieve multiple SLOs by their IDs.\xd2\x01\x03ids\"\xcd\x01\n" +
 	"\x14BatchGetSlosResponse\x121\n" +
 	"\x04slos\x18\x01 \x03(\v2\x1d.com.coralogixapis.slo.v1.SloR\x04slos\x12\"\n" +
-	"\rnot_found_ids\x18\x02 \x03(\tR\vnotFoundIds\"\xb7\x02\n" +
+	"\rnot_found_ids\x18\x02 \x03(\tR\vnotFoundIds:^\x92A[\n" +
+	"Y*\x14BatchGetSlosResponse2:Response containing a batch of SLOs and any IDs not found.\xd2\x01\x04slos\"\x86\x03\n" +
 	"\x13SloExecutionRequest\x12Z\n" +
 	"\x12create_slo_request\x18\x01 \x01(\v2*.com.coralogixapis.slo.v1.CreateSloRequestH\x00R\x10createSloRequest\x12]\n" +
 	"\x13replace_slo_request\x18\x02 \x01(\v2+.com.coralogixapis.slo.v1.ReplaceSloRequestH\x00R\x11replaceSloRequest\x12Z\n" +
-	"\x12delete_slo_request\x18\x03 \x01(\v2*.com.coralogixapis.slo.v1.DeleteSloRequestH\x00R\x10deleteSloRequestB\t\n" +
-	"\arequest\"\xc2\x02\n" +
+	"\x12delete_slo_request\x18\x03 \x01(\v2*.com.coralogixapis.slo.v1.DeleteSloRequestH\x00R\x10deleteSloRequest:M\x92AJ\n" +
+	"H*\x13SloExecutionRequest2'Request for executing an SLO operation.\xd2\x01\arequestB\t\n" +
+	"\arequest\"\x88\x03\n" +
 	"\x14SloExecutionResponse\x12]\n" +
 	"\x13create_slo_response\x18\x01 \x01(\v2+.com.coralogixapis.slo.v1.CreateSloResponseH\x00R\x11createSloResponse\x12`\n" +
 	"\x14replace_slo_response\x18\x02 \x01(\v2,.com.coralogixapis.slo.v1.ReplaceSloResponseH\x00R\x12replaceSloResponse\x12]\n" +
-	"\x13delete_slo_response\x18\x03 \x01(\v2+.com.coralogixapis.slo.v1.DeleteSloResponseH\x00R\x11deleteSloResponseB\n" +
+	"\x13delete_slo_response\x18\x03 \x01(\v2+.com.coralogixapis.slo.v1.DeleteSloResponseH\x00R\x11deleteSloResponse:D\x92AA\n" +
+	"?*\x14SloExecutionResponse2'Response for an executed SLO operation.B\n" +
 	"\n" +
-	"\bresponse\"c\n" +
+	"\bresponse\"\xc0\x01\n" +
 	"\x16BatchExecuteSloRequest\x12I\n" +
-	"\brequests\x18\x01 \x03(\v2-.com.coralogixapis.slo.v1.SloExecutionRequestR\brequests\"\xba\x01\n" +
+	"\brequests\x18\x01 \x03(\v2-.com.coralogixapis.slo.v1.SloExecutionRequestR\brequests:[\x92AX\n" +
+	"V*\x16BatchExecuteSloRequest21Request to batch execute multiple SLO operations.\xd2\x01\brequests\"\xb2\x02\n" +
 	"\x17BatchExecuteSloResponse\x12]\n" +
 	"\x12matching_responses\x18\x01 \x03(\v2..com.coralogixapis.slo.v1.SloExecutionResponseR\x11matchingResponses\x12@\n" +
-	"\x06status\x18\x02 \x01(\v2(.com.coralogixapis.slo.v1.ResponseStatusR\x06status2\xb0\a\n" +
-	"\vSlosService\x12\x7f\n" +
-	"\tCreateSlo\x12*.com.coralogixapis.slo.v1.CreateSloRequest\x1a+.com.coralogixapis.slo.v1.CreateSloResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x03slo\"\f/v1/slo/slos\x12\x82\x01\n" +
+	"\x06status\x18\x02 \x01(\v2(.com.coralogixapis.slo.v1.ResponseStatusR\x06status:v\x92As\n" +
+	"q*\x17BatchExecuteSloResponse2AResponse containing the results of batch executed SLO operations.\xd2\x01\x12matching_responses2\xac\x0e\n" +
+	"\vSlosService\x12\xf2\x01\n" +
+	"\tCreateSlo\x12*.com.coralogixapis.slo.v1.CreateSloRequest\x1a+.com.coralogixapis.slo.v1.CreateSloResponse\"\x8b\x01\x92Ao\n" +
+	"\fSlos Service\x12\n" +
+	"Create SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\"\f/v1/slo/slos\x12\xf6\x01\n" +
 	"\n" +
-	"ReplaceSlo\x12+.com.coralogixapis.slo.v1.ReplaceSloRequest\x1a,.com.coralogixapis.slo.v1.ReplaceSloResponse\"\x19\x82\xd3\xe4\x93\x02\x13:\x03slo\x1a\f/v1/slo/slos\x12\x7f\n" +
-	"\tDeleteSlo\x12*.com.coralogixapis.slo.v1.DeleteSloRequest\x1a+.com.coralogixapis.slo.v1.DeleteSloResponse\"\x19\x82\xd3\xe4\x93\x02\x13*\x11/v1/slo/slos/{id}\x12v\n" +
-	"\x06GetSlo\x12'.com.coralogixapis.slo.v1.GetSloRequest\x1a(.com.coralogixapis.slo.v1.GetSloResponse\"\x19\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/slo/slos/{id}\x12w\n" +
-	"\bListSlos\x12).com.coralogixapis.slo.v1.ListSlosRequest\x1a*.com.coralogixapis.slo.v1.ListSlosResponse\"\x14\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/slo/slos\x12\x8c\x01\n" +
-	"\fBatchGetSlos\x12-.com.coralogixapis.slo.v1.BatchGetSlosRequest\x1a..com.coralogixapis.slo.v1.BatchGetSlosResponse\"\x1d\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/slo/slos:batchGet\x12\x99\x01\n" +
-	"\x0fBatchExecuteSlo\x120.com.coralogixapis.slo.v1.BatchExecuteSloRequest\x1a1.com.coralogixapis.slo.v1.BatchExecuteSloResponse\"!\x82\xd3\xe4\x93\x02\x1b\"\x19/v1/slo/slos:batchExecuteB\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
+	"ReplaceSlo\x12+.com.coralogixapis.slo.v1.ReplaceSloRequest\x1a,.com.coralogixapis.slo.v1.ReplaceSloResponse\"\x8c\x01\x92Ap\n" +
+	"\fSlos Service\x12\vReplace SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\x1a\f/v1/slo/slos\x12\xf2\x01\n" +
+	"\tDeleteSlo\x12*.com.coralogixapis.slo.v1.DeleteSloRequest\x1a+.com.coralogixapis.slo.v1.DeleteSloResponse\"\x8b\x01\x92Ao\n" +
+	"\fSlos Service\x12\n" +
+	"Delete SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13*\x11/v1/slo/slos/{id}\x12\xe6\x01\n" +
+	"\x06GetSlo\x12'.com.coralogixapis.slo.v1.GetSloRequest\x1a(.com.coralogixapis.slo.v1.GetSloResponse\"\x88\x01\x92Al\n" +
+	"\fSlos Service\x12\aGet SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/slo/slos/{id}\x12\xe9\x01\n" +
+	"\bListSlos\x12).com.coralogixapis.slo.v1.ListSlosRequest\x1a*.com.coralogixapis.slo.v1.ListSlosResponse\"\x85\x01\x92An\n" +
+	"\fSlos Service\x12\tList SlosJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/slo/slos\x12\x82\x02\n" +
+	"\fBatchGetSlos\x12-.com.coralogixapis.slo.v1.BatchGetSlosRequest\x1a..com.coralogixapis.slo.v1.BatchGetSlosResponse\"\x92\x01\x92Ar\n" +
+	"\fSlos Service\x12\rBatch Get SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/slo/slos:batchGet\x12\x93\x02\n" +
+	"\x0fBatchExecuteSlo\x120.com.coralogixapis.slo.v1.BatchExecuteSloRequest\x1a1.com.coralogixapis.slo.v1.BatchExecuteSloResponse\"\x9a\x01\x92Av\n" +
+	"\fSlos Service\x12\x11Batch Execute SloJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b\"\x19/v1/slo/slos:batchExecute\x1aJ\x92AG\n" +
+	"\fSlos Service\x127A service for managing Service Level Objectives (SLOs).B\x1aZ\x18com/coralogixapis/slo/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_slo_v1_slo_service_proto_rawDescOnce sync.Once

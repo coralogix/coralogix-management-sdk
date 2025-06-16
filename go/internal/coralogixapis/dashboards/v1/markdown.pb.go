@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -78,10 +79,10 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_markdown_proto protoreflect
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_markdown_proto_rawDesc = "" +
 	"\n" +
-	":com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a\x1egoogle/protobuf/wrappers.proto\"\x8e\x01\n" +
-	"\bMarkdown\x12A\n" +
-	"\rmarkdown_text\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\fmarkdownText\x12?\n" +
-	"\ftooltip_text\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vtooltipTextb\x06proto3"
+	":com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb2\x02\n" +
+	"\bMarkdown\x12\x82\x01\n" +
+	"\rmarkdown_text\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB?\x92A<2\rMarkdown textJ+{ \"value\": \"# This is a markdown example\" }R\fmarkdownText\x12\xa0\x01\n" +
+	"\ftooltip_text\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB_\x92A\\2'Tooltip text to display on widget hoverJ1{ \"value\": \"This is a description in a tooltip\" }R\vtooltipTextb\x06proto3"
 
 var (
 	file_com_coralogixapis_dashboards_v1_ast_widgets_markdown_proto_rawDescOnce sync.Once

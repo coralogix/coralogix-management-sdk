@@ -91,6 +91,7 @@ message ExtensionItem {
   PermissionResource permission_resource = 9;
   google.protobuf.StringValue extended_internal_id = 10;
   google.protobuf.StringValue unique_id = 11;
+  google.protobuf.StringValue stable_id = 12;
 }
 
 message ItemCounts {
@@ -267,4 +268,5 @@ message ExtensionItemData {
   google.protobuf.Int32Value internal_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
   google.protobuf.StringValue unique_id = 8;
   ExtensionItem.PermissionResource permission_resource = 9;
+  google.protobuf.StringValue stable_id = 10;
 }

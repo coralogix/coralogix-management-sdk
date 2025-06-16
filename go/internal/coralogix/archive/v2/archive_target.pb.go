@@ -70,52 +70,6 @@ func (ProviderType) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogix_archive_v2_archive_target_proto_rawDescGZIP(), []int{0}
 }
 
-type PartitioningScheme int32
-
-const (
-	PartitioningScheme_PARTITIONING_SCHEME_UNSPECIFIED PartitioningScheme = 0
-	PartitioningScheme_PARTITIONING_SCHEME_DT_HR       PartitioningScheme = 1
-)
-
-// Enum value maps for PartitioningScheme.
-var (
-	PartitioningScheme_name = map[int32]string{
-		0: "PARTITIONING_SCHEME_UNSPECIFIED",
-		1: "PARTITIONING_SCHEME_DT_HR",
-	}
-	PartitioningScheme_value = map[string]int32{
-		"PARTITIONING_SCHEME_UNSPECIFIED": 0,
-		"PARTITIONING_SCHEME_DT_HR":       1,
-	}
-)
-
-func (x PartitioningScheme) Enum() *PartitioningScheme {
-	p := new(PartitioningScheme)
-	*p = x
-	return p
-}
-
-func (x PartitioningScheme) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (PartitioningScheme) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogix_archive_v2_archive_target_proto_enumTypes[1].Descriptor()
-}
-
-func (PartitioningScheme) Type() protoreflect.EnumType {
-	return &file_com_coralogix_archive_v2_archive_target_proto_enumTypes[1]
-}
-
-func (x PartitioningScheme) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use PartitioningScheme.Descriptor instead.
-func (PartitioningScheme) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogix_archive_v2_archive_target_proto_rawDescGZIP(), []int{1}
-}
-
 type ArchiveTarget struct {
 	state  protoimpl.MessageState `protogen:"open.v1"`
 	Format *Format                `protobuf:"bytes,1,opt,name=format,proto3" json:"format,omitempty"`
@@ -266,7 +220,7 @@ var File_com_coralogix_archive_v2_archive_target_proto protoreflect.FileDescript
 
 const file_com_coralogix_archive_v2_archive_target_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogix/archive/v2/archive_target.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a%com/coralogix/archive/v2/format.proto\x1a)com/coralogix/archive/v2/object_tag.proto\"\x8c\x05\n" +
+	"-com/coralogix/archive/v2/archive_target.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a%com/coralogix/archive/v2/format.proto\x1a)com/coralogix/archive/v2/object_tag.proto\x1a2com/coralogix/archive/v2/partitioning_scheme.proto\"\x8c\x05\n" +
 	"\rArchiveTarget\x128\n" +
 	"\x06format\x18\x01 \x01(\v2 .com.coralogix.archive.v2.FormatR\x06format\x128\n" +
 	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
@@ -286,10 +240,7 @@ const file_com_coralogix_archive_v2_archive_target_proto_rawDesc = "" +
 	"\fProviderType\x12\x1d\n" +
 	"\x19PROVIDER_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
 	"\x10PROVIDER_TYPE_S3\x10\x01\x12\x19\n" +
-	"\x15PROVIDER_TYPE_IBM_COS\x10\x02*X\n" +
-	"\x12PartitioningScheme\x12#\n" +
-	"\x1fPARTITIONING_SCHEME_UNSPECIFIED\x10\x00\x12\x1d\n" +
-	"\x19PARTITIONING_SCHEME_DT_HR\x10\x01b\x06proto3"
+	"\x15PROVIDER_TYPE_IBM_COS\x10\x02b\x06proto3"
 
 var (
 	file_com_coralogix_archive_v2_archive_target_proto_rawDescOnce sync.Once
@@ -303,24 +254,24 @@ func file_com_coralogix_archive_v2_archive_target_proto_rawDescGZIP() []byte {
 	return file_com_coralogix_archive_v2_archive_target_proto_rawDescData
 }
 
-var file_com_coralogix_archive_v2_archive_target_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_com_coralogix_archive_v2_archive_target_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_com_coralogix_archive_v2_archive_target_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_com_coralogix_archive_v2_archive_target_proto_goTypes = []any{
 	(ProviderType)(0),        // 0: com.coralogix.archive.v2.ProviderType
-	(PartitioningScheme)(0),  // 1: com.coralogix.archive.v2.PartitioningScheme
-	(*ArchiveTarget)(nil),    // 2: com.coralogix.archive.v2.ArchiveTarget
-	(*Format)(nil),           // 3: com.coralogix.archive.v2.Format
-	(*S3TargetSpec)(nil),     // 4: com.coralogix.archive.v2.S3TargetSpec
-	(*IBMCosTargetSpec)(nil), // 5: com.coralogix.archive.v2.IBMCosTargetSpec
-	(*ObjectTag)(nil),        // 6: com.coralogix.archive.v2.ObjectTag
+	(*ArchiveTarget)(nil),    // 1: com.coralogix.archive.v2.ArchiveTarget
+	(*Format)(nil),           // 2: com.coralogix.archive.v2.Format
+	(*S3TargetSpec)(nil),     // 3: com.coralogix.archive.v2.S3TargetSpec
+	(*IBMCosTargetSpec)(nil), // 4: com.coralogix.archive.v2.IBMCosTargetSpec
+	(*ObjectTag)(nil),        // 5: com.coralogix.archive.v2.ObjectTag
+	(PartitioningScheme)(0),  // 6: com.coralogix.archive.v2.PartitioningScheme
 }
 var file_com_coralogix_archive_v2_archive_target_proto_depIdxs = []int32{
-	3, // 0: com.coralogix.archive.v2.ArchiveTarget.format:type_name -> com.coralogix.archive.v2.Format
-	4, // 1: com.coralogix.archive.v2.ArchiveTarget.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
-	5, // 2: com.coralogix.archive.v2.ArchiveTarget.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
+	2, // 0: com.coralogix.archive.v2.ArchiveTarget.format:type_name -> com.coralogix.archive.v2.Format
+	3, // 1: com.coralogix.archive.v2.ArchiveTarget.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
+	4, // 2: com.coralogix.archive.v2.ArchiveTarget.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
 	0, // 3: com.coralogix.archive.v2.ArchiveTarget.provider_type:type_name -> com.coralogix.archive.v2.ProviderType
-	6, // 4: com.coralogix.archive.v2.ArchiveTarget.tags:type_name -> com.coralogix.archive.v2.ObjectTag
-	1, // 5: com.coralogix.archive.v2.ArchiveTarget.partitioning_scheme:type_name -> com.coralogix.archive.v2.PartitioningScheme
+	5, // 4: com.coralogix.archive.v2.ArchiveTarget.tags:type_name -> com.coralogix.archive.v2.ObjectTag
+	6, // 5: com.coralogix.archive.v2.ArchiveTarget.partitioning_scheme:type_name -> com.coralogix.archive.v2.PartitioningScheme
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -336,6 +287,7 @@ func file_com_coralogix_archive_v2_archive_target_proto_init() {
 	file_com_coralogix_archive_v2_target_proto_init()
 	file_com_coralogix_archive_v2_format_proto_init()
 	file_com_coralogix_archive_v2_object_tag_proto_init()
+	file_com_coralogix_archive_v2_partitioning_scheme_proto_init()
 	file_com_coralogix_archive_v2_archive_target_proto_msgTypes[0].OneofWrappers = []any{
 		(*ArchiveTarget_S3)(nil),
 		(*ArchiveTarget_IbmCos)(nil),
@@ -345,7 +297,7 @@ func file_com_coralogix_archive_v2_archive_target_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_archive_v2_archive_target_proto_rawDesc), len(file_com_coralogix_archive_v2_archive_target_proto_rawDesc)),
-			NumEnums:      2,
+			NumEnums:      1,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,

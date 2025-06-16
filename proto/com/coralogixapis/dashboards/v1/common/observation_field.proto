@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.common;
 
+import "com/coralogixapis/dashboards/v1/common/span_relation_type.proto";
 import "google/protobuf/wrappers.proto";
 
 enum DatasetScope {
@@ -14,4 +15,10 @@ enum DatasetScope {
 message ObservationField {
   repeated google.protobuf.StringValue keypath = 1;
   DatasetScope scope = 2;
+}
+
+message SpanObservationField {
+  repeated google.protobuf.StringValue keypath = 1;
+  DatasetScope scope = 2;
+  v1.common.SpanRelationType relation_type = 3;
 }

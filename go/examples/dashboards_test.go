@@ -38,7 +38,11 @@ func TestDashboards(t *testing.T) {
 	dat, err := os.ReadFile("dashboard.json")
 	assertNilAndPrintError(t, err)
 	var d cxsdk.Dashboard
-	assertNilAndPrintError(t, protojson.Unmarshal(dat, &d))
+	e := protojson.Unmarshal(dat, &d)
+	if e != nil {
+		log.Fatal(e.Error())
+	}
+
 	createRes, e := c.Create(context.Background(), &cxsdk.CreateDashboardRequest{
 		Dashboard: &d,
 	})

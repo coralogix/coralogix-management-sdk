@@ -5,17 +5,13 @@ package com.coralogix.archive.v2;
 import "com/coralogix/archive/v2/target.proto";
 import "com/coralogix/archive/v2/format.proto";
 import "com/coralogix/archive/v2/object_tag.proto";
+import "com/coralogix/archive/v2/partitioning_scheme.proto";
 
 
 enum ProviderType {
   PROVIDER_TYPE_UNSPECIFIED = 0;
   PROVIDER_TYPE_S3 = 1;
   PROVIDER_TYPE_IBM_COS = 2;
-}
-
-enum PartitioningScheme {
-  PARTITIONING_SCHEME_UNSPECIFIED = 0;
-  PARTITIONING_SCHEME_DT_HR = 1;
 }
 
 message ArchiveTarget {

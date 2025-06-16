@@ -126,14 +126,78 @@ func (x *ObservationField) GetScope() DatasetScope {
 	return DatasetScope_DATASET_SCOPE_UNSPECIFIED
 }
 
+type SpanObservationField struct {
+	state         protoimpl.MessageState    `protogen:"open.v1"`
+	Keypath       []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=keypath,proto3" json:"keypath,omitempty"`
+	Scope         DatasetScope              `protobuf:"varint,2,opt,name=scope,proto3,enum=com.coralogixapis.dashboards.v1.common.DatasetScope" json:"scope,omitempty"`
+	RelationType  SpanRelationType          `protobuf:"varint,3,opt,name=relation_type,json=relationType,proto3,enum=com.coralogixapis.dashboards.v1.common.SpanRelationType" json:"relation_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SpanObservationField) Reset() {
+	*x = SpanObservationField{}
+	mi := &file_com_coralogixapis_dashboards_v1_common_observation_field_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SpanObservationField) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SpanObservationField) ProtoMessage() {}
+
+func (x *SpanObservationField) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_common_observation_field_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SpanObservationField.ProtoReflect.Descriptor instead.
+func (*SpanObservationField) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_common_observation_field_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *SpanObservationField) GetKeypath() []*wrapperspb.StringValue {
+	if x != nil {
+		return x.Keypath
+	}
+	return nil
+}
+
+func (x *SpanObservationField) GetScope() DatasetScope {
+	if x != nil {
+		return x.Scope
+	}
+	return DatasetScope_DATASET_SCOPE_UNSPECIFIED
+}
+
+func (x *SpanObservationField) GetRelationType() SpanRelationType {
+	if x != nil {
+		return x.RelationType
+	}
+	return SpanRelationType_SPAN_RELATION_TYPE_NONE_UNSPECIFIED
+}
+
 var File_com_coralogixapis_dashboards_v1_common_observation_field_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_common_observation_field_proto_rawDesc = "" +
 	"\n" +
-	">com/coralogixapis/dashboards/v1/common/observation_field.proto\x12&com.coralogixapis.dashboards.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\"\x96\x01\n" +
+	">com/coralogixapis/dashboards/v1/common/observation_field.proto\x12&com.coralogixapis.dashboards.v1.common\x1a?com/coralogixapis/dashboards/v1/common/span_relation_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x96\x01\n" +
 	"\x10ObservationField\x126\n" +
 	"\akeypath\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\akeypath\x12J\n" +
-	"\x05scope\x18\x02 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DatasetScopeR\x05scope*\x7f\n" +
+	"\x05scope\x18\x02 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DatasetScopeR\x05scope\"\xf9\x01\n" +
+	"\x14SpanObservationField\x126\n" +
+	"\akeypath\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\akeypath\x12J\n" +
+	"\x05scope\x18\x02 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DatasetScopeR\x05scope\x12]\n" +
+	"\rrelation_type\x18\x03 \x01(\x0e28.com.coralogixapis.dashboards.v1.common.SpanRelationTypeR\frelationType*\x7f\n" +
 	"\fDatasetScope\x12\x1d\n" +
 	"\x19DATASET_SCOPE_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\x17DATASET_SCOPE_USER_DATA\x10\x01\x12\x17\n" +
@@ -153,20 +217,25 @@ func file_com_coralogixapis_dashboards_v1_common_observation_field_proto_rawDesc
 }
 
 var file_com_coralogixapis_dashboards_v1_common_observation_field_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_dashboards_v1_common_observation_field_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_com_coralogixapis_dashboards_v1_common_observation_field_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_com_coralogixapis_dashboards_v1_common_observation_field_proto_goTypes = []any{
 	(DatasetScope)(0),              // 0: com.coralogixapis.dashboards.v1.common.DatasetScope
 	(*ObservationField)(nil),       // 1: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*wrapperspb.StringValue)(nil), // 2: google.protobuf.StringValue
+	(*SpanObservationField)(nil),   // 2: com.coralogixapis.dashboards.v1.common.SpanObservationField
+	(*wrapperspb.StringValue)(nil), // 3: google.protobuf.StringValue
+	(SpanRelationType)(0),          // 4: com.coralogixapis.dashboards.v1.common.SpanRelationType
 }
 var file_com_coralogixapis_dashboards_v1_common_observation_field_proto_depIdxs = []int32{
-	2, // 0: com.coralogixapis.dashboards.v1.common.ObservationField.keypath:type_name -> google.protobuf.StringValue
+	3, // 0: com.coralogixapis.dashboards.v1.common.ObservationField.keypath:type_name -> google.protobuf.StringValue
 	0, // 1: com.coralogixapis.dashboards.v1.common.ObservationField.scope:type_name -> com.coralogixapis.dashboards.v1.common.DatasetScope
-	2, // [2:2] is the sub-list for method output_type
-	2, // [2:2] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	3, // 2: com.coralogixapis.dashboards.v1.common.SpanObservationField.keypath:type_name -> google.protobuf.StringValue
+	0, // 3: com.coralogixapis.dashboards.v1.common.SpanObservationField.scope:type_name -> com.coralogixapis.dashboards.v1.common.DatasetScope
+	4, // 4: com.coralogixapis.dashboards.v1.common.SpanObservationField.relation_type:type_name -> com.coralogixapis.dashboards.v1.common.SpanRelationType
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_common_observation_field_proto_init() }
@@ -174,13 +243,14 @@ func file_com_coralogixapis_dashboards_v1_common_observation_field_proto_init() 
 	if File_com_coralogixapis_dashboards_v1_common_observation_field_proto != nil {
 		return
 	}
+	file_com_coralogixapis_dashboards_v1_common_span_relation_type_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_common_observation_field_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_common_observation_field_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
