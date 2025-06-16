@@ -140,6 +140,16 @@ const (
 	SlosListRPC    = slos.SlosService_ListSlos_FullMethodName
 )
 
+// SloStatus values.Add commentMore actions
+const (
+	SloStatusUnspecified = slos.SloStatus_SLO_STATUS_UNSPECIFIED
+	SloStatusOk          = slos.SloStatus_SLO_STATUS_OK
+	SloStatusBreached    = slos.SloStatus_SLO_STATUS_BREACHED
+	SloStatusCritical    = slos.SloStatus_SLO_STATUS_CRITICAL
+	SloStatusWarning     = slos.SloStatus_SLO_STATUS_WARNING
+	SloStatusPending     = slos.SloStatus_SLO_STATUS_PENDING
+)
+
 const infraMonitoringFeatureGroupID = "infra-monitoring"
 
 // SLOsClient is a client for the Coralogix SLOs API.
