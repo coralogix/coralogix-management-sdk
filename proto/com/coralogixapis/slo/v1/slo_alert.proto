@@ -1,6 +1,8 @@
 syntax = "proto3";
+package com.coralogixapis.slo.v1;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/duration.proto";
+
 
 enum SloMetricThresholdConditionType {
   METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED = 0;
