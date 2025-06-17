@@ -59,6 +59,8 @@ const (
 )
 
 // DataSetClient is a client for the Coralogix Data Sets API.
+//
+// Deprecated: This API will be changed significantly in the future.
 type DataSetClient struct {
 	callPropertiesCreator *CallPropertiesCreator
 }
