@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       sdk_version:
-        description: 'SDK version to tag and publish'
+        description: 'SDK version to update to'
         required: true
 env:
   PROTOC_VERSION: "26.1"
