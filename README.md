@@ -6,6 +6,12 @@
 
 🌟 [Master Docs](https://coralogix.github.io/coralogix-management-sdk) 🌟
 
+## REST and OpenAPI
+
+Our APIs are also avaialable over REST through a variety of OpenAPI endpoints. Read more over at the [OpenAPI Docs](https://docs.coralogix.com)
+
+*These endpoints follow the same versioning schemes mentioned below.*
+
 # Versioning
 
 The SDK follows a rolling release schedule with one LTS version once a year (in June). Revisions allow additional fixes that add hotfixes for immediate bugs, security fixes, etc. The remaining issue fixes are rolled up in the following month’s release. The exception is the LTS release which will contain relevant fixes. 
