@@ -60,6 +60,7 @@ const DATASETS_FEATURE_GROUP_ID: &str = "logs";
 
 /// The Custom Enrichments API client.
 /// Read more at <https://coralogix.com/docs/custom-enrichment-api/>
+#[deprecated(note = "This API will change significantly under a new name.")]
 pub struct DatasetClient {
     metadata_map: MetadataMap,
     service_client: Mutex<CustomEnrichmentServiceClient<Channel>>,
