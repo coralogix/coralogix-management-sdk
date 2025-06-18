@@ -12,7 +12,7 @@ import "google/api/annotations.proto";
 
 service ViewsService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
-      name: "Views"
+      name: "Views service"
       description: "Create and manage views."
     };
 
@@ -23,8 +23,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Views"]
-      summary: "Create a view"
+      tags: ["Views service"]
+      summary: "Create a view service"
       description: "Creates a new view"
       responses: {
         key: "200"
@@ -45,8 +45,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Views"]
-      summary: "Replace a view"
+      tags: ["Views service"]
+      summary: "Replace a view service"
       description: "Replaces an existing view"
       responses: {
         key: "200"
@@ -66,8 +66,8 @@ service ViewsService {
       response_body: "view"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Views"]
-      summary: "Get view"
+      tags: ["Views service"]
+      summary: "Get view service"
       description: "Gets a view by ID"
       responses: {
         key: "200"
@@ -86,8 +86,8 @@ service ViewsService {
       delete: "/v1/views/{id}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Views"]
-      summary: "Delete view"
+      tags: ["Views service"]
+      summary: "Delete view service"
       description: "Deletes a view by ID"
     };
   }
@@ -97,8 +97,8 @@ service ViewsService {
       get: "/v1/views"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Views"]
-      summary: "List views"
+      tags: ["Views service"]
+      summary: "List views service"
       description: "Lists all company public views"
       responses: {
         key: "200"
