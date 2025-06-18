@@ -1,4 +1,4 @@
-name: "[Rust & Go SDK] Tag and Publish"
+name: "[Rust] Publish"
 
 permissions:
   pull-requests: write
@@ -14,7 +14,7 @@ env:
   
 jobs:
   crates_io_publish:
-    name: "[Rust & Go SDK] Tag and Publish to crates.io"
+    name: "[Rust] Publish to crates.io"
     runs-on: ubuntu-latest
     defaults:
       run:

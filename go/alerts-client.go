@@ -778,10 +778,9 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 			req.AlertDefProperties.EntityLabels = make(map[string]string)
 		}
 
-		// TODO: talk to #falkor-interface to create a separate field for default labels
-		// for k, v := range a.defaultLabels {
-		// 	req.AlertDefProperties.EntityLabels[k] = v
-		// }
+		for k, v := range a.defaultLabels {
+			req.AlertDefProperties.EntityLabels[k] = v
+		}
 	}
 	response, err := client.CreateAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
