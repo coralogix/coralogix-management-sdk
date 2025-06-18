@@ -45,6 +45,8 @@ enum EntityType {
   ENTITY_TYPE_SCHEMA_FIELDS = 13;
   // JSON representation: "text"
   ENTITY_TYPE_TEXT = 14;
+  // JSON representation: "browserEvents"
+  ENTITY_TYPE_BROWSER_EVENTS = 22;
 
   // Pillar "metrics"
 
@@ -70,6 +72,8 @@ enum EntityType {
   ENTITY_TYPE_PROGUARD = 19;
   // JSON representation: "sourceMaps"
   ENTITY_TYPE_SOURCE_MAPS = 20;
+  // JSON representation: "sessionSnapshots"
+  ENTITY_TYPE_SESSION_SNAPSHOTS = 23;
 
   // Pillar "profiles"
 
