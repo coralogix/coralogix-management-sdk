@@ -11,7 +11,7 @@ import "google/api/annotations.proto";
 
 service ViewsFoldersService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
-      name: "Folders for views"
+      name: "Folders for views service"
       description: "Create and manage view folders."
     };
 
@@ -20,8 +20,8 @@ service ViewsFoldersService {
       get: "/v1/view_folders"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Folders for views"]
-      summary: "List view folders"
+      tags: ["Folders for views service"]
+      summary: "List view folders service"
       description: "List view's folders"
       responses: {
         key: "200"
@@ -41,8 +41,8 @@ service ViewsFoldersService {
       response_body: "folder"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Folders for views"]
-      summary: "Get View Folder"
+      tags: ["Folders for views service"]
+      summary: "Get View Folder service"
       description: "Create view folder"
       responses: {
         key: "200"
@@ -63,8 +63,8 @@ service ViewsFoldersService {
       response_body: "folder"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Folders for views"]
-      summary: "Create View Folder"
+      tags: ["Folders for views service"]
+      summary: "Create View Folder service"
       description: "Create view folder"
       responses: {
         key: "200"
@@ -83,8 +83,8 @@ service ViewsFoldersService {
       delete: "/v1/view_folders/{id}"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Folders for views"]
-      summary: "Delete View Folder"
+      tags: ["Folders for views service"]
+      summary: "Delete View Folder service"
       description: "Deletes a view folder by ID"
     };
   }
@@ -96,8 +96,8 @@ service ViewsFoldersService {
       response_body: "folder"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      tags: ["Folders for views"]
-      summary: "Replace View Folder"
+      tags: ["Folders for views service"]
+      summary: "Replace View Folder service"
       description: "Replaces an existing view folder"
       responses: {
         key: "200"
