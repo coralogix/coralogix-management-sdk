@@ -112,6 +112,8 @@ const (
 	EntityType_ENTITY_TYPE_SCHEMA_FIELDS EntityType = 13
 	// JSON representation: "text"
 	EntityType_ENTITY_TYPE_TEXT EntityType = 14
+	// JSON representation: "browserEvents"
+	EntityType_ENTITY_TYPE_BROWSER_EVENTS EntityType = 22
 	// JSON representation: "metrics"
 	EntityType_ENTITY_TYPE_METRICS EntityType = 2
 	// JSON representation: "spans"
@@ -128,6 +130,8 @@ const (
 	EntityType_ENTITY_TYPE_PROGUARD EntityType = 19
 	// JSON representation: "sourceMaps"
 	EntityType_ENTITY_TYPE_SOURCE_MAPS EntityType = 20
+	// JSON representation: "sessionSnapshots"
+	EntityType_ENTITY_TYPE_SESSION_SNAPSHOTS EntityType = 23
 	// JSON representation: "cpuProfiles"
 	EntityType_ENTITY_TYPE_CPU_PROFILES EntityType = 21
 )
@@ -148,6 +152,7 @@ var (
 		12: "ENTITY_TYPE_NOTIFICATION_DELIVERIES",
 		13: "ENTITY_TYPE_SCHEMA_FIELDS",
 		14: "ENTITY_TYPE_TEXT",
+		22: "ENTITY_TYPE_BROWSER_EVENTS",
 		2:  "ENTITY_TYPE_METRICS",
 		3:  "ENTITY_TYPE_SPANS",
 		15: "ENTITY_TYPE_SESSION_RECORDINGS",
@@ -156,6 +161,7 @@ var (
 		18: "ENTITY_TYPE_MOBILE_SNAPSHOTS",
 		19: "ENTITY_TYPE_PROGUARD",
 		20: "ENTITY_TYPE_SOURCE_MAPS",
+		23: "ENTITY_TYPE_SESSION_SNAPSHOTS",
 		21: "ENTITY_TYPE_CPU_PROFILES",
 	}
 	EntityType_value = map[string]int32{
@@ -172,6 +178,7 @@ var (
 		"ENTITY_TYPE_NOTIFICATION_DELIVERIES": 12,
 		"ENTITY_TYPE_SCHEMA_FIELDS":           13,
 		"ENTITY_TYPE_TEXT":                    14,
+		"ENTITY_TYPE_BROWSER_EVENTS":          22,
 		"ENTITY_TYPE_METRICS":                 2,
 		"ENTITY_TYPE_SPANS":                   3,
 		"ENTITY_TYPE_SESSION_RECORDINGS":      15,
@@ -180,6 +187,7 @@ var (
 		"ENTITY_TYPE_MOBILE_SNAPSHOTS":        18,
 		"ENTITY_TYPE_PROGUARD":                19,
 		"ENTITY_TYPE_SOURCE_MAPS":             20,
+		"ENTITY_TYPE_SESSION_SNAPSHOTS":       23,
 		"ENTITY_TYPE_CPU_PROFILES":            21,
 	}
 )
@@ -222,7 +230,7 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x0ePILLAR_METRICS\x10\x02\x12\x10\n" +
 	"\fPILLAR_SPANS\x10\x03\x12\x11\n" +
 	"\rPILLAR_BINARY\x10\x04\x12\x13\n" +
-	"\x0fPILLAR_PROFILES\x10\x05*\xfc\x04\n" +
+	"\x0fPILLAR_PROFILES\x10\x05*\xbf\x05\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
@@ -238,7 +246,8 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x17ENTITY_TYPE_MOBILE_LOGS\x10\v\x12'\n" +
 	"#ENTITY_TYPE_NOTIFICATION_DELIVERIES\x10\f\x12\x1d\n" +
 	"\x19ENTITY_TYPE_SCHEMA_FIELDS\x10\r\x12\x14\n" +
-	"\x10ENTITY_TYPE_TEXT\x10\x0e\x12\x17\n" +
+	"\x10ENTITY_TYPE_TEXT\x10\x0e\x12\x1e\n" +
+	"\x1aENTITY_TYPE_BROWSER_EVENTS\x10\x16\x12\x17\n" +
 	"\x13ENTITY_TYPE_METRICS\x10\x02\x12\x15\n" +
 	"\x11ENTITY_TYPE_SPANS\x10\x03\x12\"\n" +
 	"\x1eENTITY_TYPE_SESSION_RECORDINGS\x10\x0f\x12\x14\n" +
@@ -246,7 +255,8 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x11ENTITY_TYPE_FILES\x10\x11\x12 \n" +
 	"\x1cENTITY_TYPE_MOBILE_SNAPSHOTS\x10\x12\x12\x18\n" +
 	"\x14ENTITY_TYPE_PROGUARD\x10\x13\x12\x1b\n" +
-	"\x17ENTITY_TYPE_SOURCE_MAPS\x10\x14\x12\x1c\n" +
+	"\x17ENTITY_TYPE_SOURCE_MAPS\x10\x14\x12!\n" +
+	"\x1dENTITY_TYPE_SESSION_SNAPSHOTS\x10\x17\x12\x1c\n" +
 	"\x18ENTITY_TYPE_CPU_PROFILES\x10\x15b\x06proto3"
 
 var (
