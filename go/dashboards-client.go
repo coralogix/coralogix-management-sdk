@@ -921,6 +921,9 @@ type HorizontalBarChartMetricsQuery = dashboards.HorizontalBarChart_MetricsQuery
 // HorizontalBarChartSpansQuery is a type for bar chart data.
 type HorizontalBarChartSpansQuery = dashboards.HorizontalBarChart_SpansQuery
 
+// HorizontalBarChartDataprimeQuery is a type for bar chart data.
+type HorizontalBarChartDataprimeQuery = dashboards.HorizontalBarChart_DataprimeQuery
+
 // BarChartLogsQuery is a type for data in bar chart.
 type BarChartLogsQuery = dashboards.BarChart_LogsQuery
 
