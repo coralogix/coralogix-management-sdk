@@ -117,6 +117,16 @@ const (
 	OrderDirectionUnspecified = dashboards.OrderDirection_ORDER_DIRECTION_UNSPECIFIED
 )
 
+// LineChartStackedLine is a tooltip for the line chart.
+type LineChartStackedLine = dashboards.LineChart_StackedLine
+
+// LineChartStackedLineType values.
+const (
+	LineChartStackedLineUnspecified = dashboards.LineChart_TOOLTIP_TYPE_UNSPECIFIED
+	LineChartStackedLineAbsolute    = dashboards.LineChart_STACKED_LINE_ABSOLUTE
+	LineChartStackedLineRelative    = dashboards.LineChart_STACKED_LINE_RELATIVE
+)
+
 // LineChartTooltip is a tooltip for the line chart.
 type LineChartTooltip = dashboards.LineChart_Tooltip
 
