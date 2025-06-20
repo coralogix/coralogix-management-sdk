@@ -397,8 +397,6 @@ allow_policies = [
     "src/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
     "src/com/coralogixapis/notification_center/presets/v1/preset.proto",
     "src/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
-    "src/com/coralogixapis/notification_center/remote_action_templates/v1/remote_action_templates.proto",
-    "src/com/coralogixapis/notification_center/remote_action_templates/v1/remote_action_templates_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/private_routing.proto",
     "src/com/coralogixapis/notification_center/routers/v1/router.proto",
