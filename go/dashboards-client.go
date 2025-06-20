@@ -117,7 +117,7 @@ const (
 	OrderDirectionUnspecified = dashboards.OrderDirection_ORDER_DIRECTION_UNSPECIFIED
 )
 
-// LineChartStackedLine is a tooltip for the line chart.
+// LineChartStackedLine is a visual configuration for the line chart.
 type LineChartStackedLine = dashboards.LineChart_StackedLine
 
 // LineChartStackedLineType values.
