@@ -122,7 +122,7 @@ type LineChartStackedLine = dashboards.LineChart_StackedLine
 
 // LineChartStackedLineType values.
 const (
-	LineChartStackedLineUnspecified = dashboards.LineChart_TOOLTIP_TYPE_UNSPECIFIED
+	LineChartStackedLineUnspecified = dashboards.LineChart_STACKED_LINE_UNSPECIFIED
 	LineChartStackedLineAbsolute    = dashboards.LineChart_STACKED_LINE_ABSOLUTE
 	LineChartStackedLineRelative    = dashboards.LineChart_STACKED_LINE_RELATIVE
 )
