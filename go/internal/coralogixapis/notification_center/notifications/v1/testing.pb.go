@@ -109,7 +109,7 @@ type TestNotification struct {
 	Id                  string                     `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	TeamId              uint32                     `protobuf:"varint,2,opt,name=team_id,json=teamId,proto3" json:"team_id,omitempty"`
 	ConnectorId         string                     `protobuf:"bytes,3,opt,name=connector_id,json=connectorId,proto3" json:"connector_id,omitempty"`
-	OutputSchemaId      string                     `protobuf:"bytes,4,opt,name=output_schema_id,json=outputSchemaId,proto3" json:"output_schema_id,omitempty"`
+	PayloadType         string                     `protobuf:"bytes,4,opt,name=payload_type,json=payloadType,proto3" json:"payload_type,omitempty"`
 	ConnectorConfig     []*v1.ConnectorConfigField `protobuf:"bytes,6,rep,name=connector_config,json=connectorConfig,proto3" json:"connector_config,omitempty"`
 	MessageConfig       []*v1.MessageConfigField   `protobuf:"bytes,7,rep,name=message_config,json=messageConfig,proto3" json:"message_config,omitempty"`
 	AvailableOperations []*NotificationOperation   `protobuf:"bytes,8,rep,name=available_operations,json=availableOperations,proto3" json:"available_operations,omitempty"`
@@ -169,9 +169,9 @@ func (x *TestNotification) GetConnectorId() string {
 	return ""
 }
 
-func (x *TestNotification) GetOutputSchemaId() string {
+func (x *TestNotification) GetPayloadType() string {
 	if x != nil {
-		return x.OutputSchemaId
+		return x.PayloadType
 	}
 	return ""
 }
@@ -307,12 +307,12 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_proto_
 	"\vstatus_code\x18\x02 \x01(\rH\x00R\n" +
 	"statusCode\x88\x01\x01B\x0e\n" +
 	"\f_status_codeB\b\n" +
-	"\x06result\"\xc7\x04\n" +
+	"\x06result\"\xc0\x04\n" +
 	"\x10TestNotification\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x17\n" +
 	"\ateam_id\x18\x02 \x01(\rR\x06teamId\x12!\n" +
-	"\fconnector_id\x18\x03 \x01(\tR\vconnectorId\x12(\n" +
-	"\x10output_schema_id\x18\x04 \x01(\tR\x0eoutputSchemaId\x12f\n" +
+	"\fconnector_id\x18\x03 \x01(\tR\vconnectorId\x12!\n" +
+	"\fpayload_type\x18\x04 \x01(\tR\vpayloadType\x12f\n" +
 	"\x10connector_config\x18\x06 \x03(\v2;.com.coralogixapis.notification_center.ConnectorConfigFieldR\x0fconnectorConfig\x12`\n" +
 	"\x0emessage_config\x18\a \x03(\v29.com.coralogixapis.notification_center.MessageConfigFieldR\rmessageConfig\x12\x80\x01\n" +
 	"\x14available_operations\x18\b \x03(\v2M.com.coralogixapis.notification_center.notifications.v1.NotificationOperationR\x13availableOperations\x12p\n" +
