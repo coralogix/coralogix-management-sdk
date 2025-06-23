@@ -461,6 +461,7 @@ const (
 	Permission_PERMISSION_SYSTEM_DATASETS_READ_CONFIG         Permission = 261
 	Permission_PERMISSION_TEAM_QUOTA_RULES_MANAGE             Permission = 262
 	Permission_PERMISSION_TEAM_QUOTA_RULES_READ               Permission = 263
+	Permission_PERMISSION_SPLIT_INDEX_MANAGE                  Permission = 264
 )
 
 // Enum value maps for Permission.
@@ -725,6 +726,7 @@ var (
 		261: "PERMISSION_SYSTEM_DATASETS_READ_CONFIG",
 		262: "PERMISSION_TEAM_QUOTA_RULES_MANAGE",
 		263: "PERMISSION_TEAM_QUOTA_RULES_READ",
+		264: "PERMISSION_SPLIT_INDEX_MANAGE",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -986,6 +988,7 @@ var (
 		"PERMISSION_SYSTEM_DATASETS_READ_CONFIG":                      261,
 		"PERMISSION_TEAM_QUOTA_RULES_MANAGE":                          262,
 		"PERMISSION_TEAM_QUOTA_RULES_READ":                            263,
+		"PERMISSION_SPLIT_INDEX_MANAGE":                               264,
 	}
 )
 
@@ -1147,7 +1150,7 @@ var File_com_coralogix_permissions_models_v1_permission_definitions_proto protor
 
 const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a google/protobuf/descriptor.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto*\xd6\x18\n" +
+	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a google/protobuf/descriptor.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto*\xd0\x18\n" +
 	"\x0fPermissionGroup\x12 \n" +
 	"\x1cPERMISSION_GROUP_UNSPECIFIED\x10\x00\x12:\n" +
 	"\x14PERMISSION_GROUP_AAA\x10\x01\x1a \x92\x82\x19\x03aaa҂\x19\x03Aaa\xe2\x82\x19\x0eAdministration\x12?\n" +
@@ -1190,12 +1193,12 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1fPERMISSION_GROUP_INVESTIGATIONS\x10\"\x1a6\x92\x82\x19\x0einvestigations҂\x19\x0eInvestigations\xe2\x82\x19\x0eInvestigations\x12[\n" +
 	"\x1fPERMISSION_GROUP_ADMINISTRATION\x10#\x1a6\x92\x82\x19\x0eadministration҂\x19\x0eAdministration\xe2\x82\x19\x0eAdministration\x12H\n" +
 	"\x19PERMISSION_GROUP_PROFILES\x10$\x1a)\x92\x82\x19\bprofiles҂\x19\bProfiles\xe2\x82\x19\rSend Profiles\x12+\n" +
-	"\x13PERMISSION_GROUP_AI\x10%\x1a\x12\x92\x82\x19\x02ai҂\x19\x02Ai\xe2\x82\x19\x02AI\x12I\n" +
-	"\x19PERMISSION_GROUP_SLO_MGMT\x10&\x1a*\x92\x82\x19\bslo-mgmt҂\x19\bSLO Mgmt\xe2\x82\x19\x0eSLO management\x12Q\n" +
+	"\x13PERMISSION_GROUP_AI\x10%\x1a\x12\x92\x82\x19\x02ai҂\x19\x02Ai\xe2\x82\x19\x02AI\x12C\n" +
+	"\x19PERMISSION_GROUP_SLO_MGMT\x10&\x1a$\x92\x82\x19\bslo-mgmt҂\x19\bSlo Mgmt\xe2\x82\x19\bslo-mgmt\x12Q\n" +
 	"\x1cPERMISSION_GROUP_QUOTA_RULES\x10'\x1a/\x92\x82\x19\vquota-rules҂\x19\vQuota Rules\xe2\x82\x19\rquota - rules\x12L\n" +
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
-	"Dataengine\xe2\x82\x19\vData Engine*\xc7\xc8\x03\n" +
+	"Dataengine\xe2\x82\x19\vData Engine*\x9a\xca\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1507,7 +1510,9 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"&PERMISSION_SYSTEM_DATASETS_READ_CONFIG\x10\x85\x02\x1ae\xba\x82\x19\x1asystem-datasets:ReadConfig\xc0\x82\x19\fȂ\x19\x91\x01҂\x19\x15View system datasets.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x15View system datasets.\x88\x83\x19\x01\x12\xde\x01\n" +
 	"\"PERMISSION_TEAM_QUOTA_RULES_MANAGE\x10\x86\x02\x1a\xb4\x01\xba\x82\x19\x17team-quota-rules:Manage\xc0\x82\x19\n" +
 	"Ȃ\x19\x92\x01҂\x19>Manage team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19>Manage team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\x12\xd6\x01\n" +
-	" PERMISSION_TEAM_QUOTA_RULES_READ\x10\x87\x02\x1a\xae\x01\xba\x82\x19\x15team-quota-rules:Read\xc0\x82\x19\vȂ\x19\x92\x01҂\x19<View team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19<View team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	" PERMISSION_TEAM_QUOTA_RULES_READ\x10\x87\x02\x1a\xae\x01\xba\x82\x19\x15team-quota-rules:Read\xc0\x82\x19\vȂ\x19\x92\x01҂\x19<View team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19<View team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\x12\xd0\x01\n" +
+	"\x1dPERMISSION_SPLIT_INDEX_MANAGE\x10\x88\x02\x1a\xab\x01\xba\x82\x19\x12split-index:Manage\xc0\x82\x19\n" +
+	"Ȃ\x19\x93\x01҂\x19<Apply split index on demand to apply reserved field changes.\u0602\x19\x14\xea\x82\x19\x00\xf2\x82\x19<Apply split index on demand to apply reserved field changes.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

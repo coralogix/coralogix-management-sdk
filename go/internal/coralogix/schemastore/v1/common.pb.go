@@ -1864,13 +1864,10 @@ func (x *EnrichmentDataset) GetMatchingKey() string {
 }
 
 type DatasetDescriptor struct {
-	state       protoimpl.MessageState `protogen:"open.v1"`
-	DatasetType DatasetType            `protobuf:"varint,1,opt,name=dataset_type,json=datasetType,proto3,enum=com.coralogix.schemastore.v1.DatasetType" json:"dataset_type,omitempty"`
-	// When used in Requests, accepts wildcards (e.g. `d*`)
-	// In Response it will contain fully resolved dataset name
-	Dataset *string `protobuf:"bytes,2,opt,name=dataset,proto3,oneof" json:"dataset,omitempty"`
-	// In Request and Response it should be the fully resolved dataspace name
-	Dataspace     *string `protobuf:"bytes,3,opt,name=dataspace,proto3,oneof" json:"dataspace,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DatasetType   DatasetType            `protobuf:"varint,1,opt,name=dataset_type,json=datasetType,proto3,enum=com.coralogix.schemastore.v1.DatasetType" json:"dataset_type,omitempty"`
+	Dataset       *string                `protobuf:"bytes,2,opt,name=dataset,proto3,oneof" json:"dataset,omitempty"`
+	Dataspace     *string                `protobuf:"bytes,3,opt,name=dataspace,proto3,oneof" json:"dataspace,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }

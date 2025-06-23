@@ -157,6 +157,7 @@ enum Resource {
   RESOURCE_SLO = 144 [(name) = "slo"];
   RESOURCE_SYSTEM_DATASETS = 145 [(name) = "system-datasets"];
   RESOURCE_TEAM_QUOTA_RULES = 146 [(name) = "team-quota-rules"];
+  RESOURCE_SPLIT_INDEX = 147 [(name) = "split-index"];
 }
 
 

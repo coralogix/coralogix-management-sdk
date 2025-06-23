@@ -27,7 +27,5 @@ message UserDetails {
       required: ["user_id"]
     }
   };
-  google.protobuf.StringValue user_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    example: "\"user_id\""
-  }];
+  google.protobuf.StringValue user_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"user_id\""}];
 }
