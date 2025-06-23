@@ -78,8 +78,3 @@ enum TriggerType {
   MANUAL = 1;
   AUTOMATIC = 2;
 }
-
-message EntityReference {
-    string id  = 1;
-    optional string entity_url = 2;
-}

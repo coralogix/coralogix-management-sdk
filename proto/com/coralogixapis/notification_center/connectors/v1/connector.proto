@@ -42,23 +42,6 @@ message Connector {
   ConnectorConfig connector_config = 12;
 }
 
-message ConnectorInternal {
-  string id = 1; // automatically generated unless provided by the user
-  string internal_id = 2; // system generated uuid
-  ConnectorType type = 3;
-  uint32 team_id = 4;
-  string name = 5;
-  string description = 6;
-  // System-generated timestamp for when the connector was last updated
-  google.protobuf.Timestamp create_time = 7;
-  // System-generated timestamp for when the connector was last updated
-  optional google.protobuf.Timestamp update_time = 8;
-  // Configuration override templates for specific entity types, values from connector_configs will be used if not overridden
-  repeated EntityTypeConfigOverrides config_overrides = 9;
-  ConnectorConfig connector_config = 10;
-}
-
-
 message EntityTypeConfigOverrides {
   reserved 2;
   reserved "connector_configs";
