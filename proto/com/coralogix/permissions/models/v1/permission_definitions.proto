@@ -58,7 +58,7 @@ enum PermissionGroup {
   PERMISSION_GROUP_ADMINISTRATION = 35 [ (com.coralogix.permissions.v1.name) = "administration", (description) = "Administration", (display_name)= "Administration"];
   PERMISSION_GROUP_PROFILES = 36 [ (com.coralogix.permissions.v1.name) = "profiles", (description) = "Profiles", (display_name)= "Send Profiles"];
   PERMISSION_GROUP_AI = 37 [ (com.coralogix.permissions.v1.name) = "ai", (description) = "Ai", (display_name)= "AI"];
-  PERMISSION_GROUP_SLO_MGMT = 38 [ (com.coralogix.permissions.v1.name) = "slo-mgmt", (description) = "SLO Mgmt", (display_name)= "SLO management"];
+  PERMISSION_GROUP_SLO_MGMT = 38 [ (com.coralogix.permissions.v1.name) = "slo-mgmt", (description) = "Slo Mgmt", (display_name)= "slo-mgmt"];
   PERMISSION_GROUP_QUOTA_RULES = 39 [ (com.coralogix.permissions.v1.name) = "quota-rules", (description) = "Quota Rules", (display_name)= "quota - rules"];
   PERMISSION_GROUP_DATAENGINE = 40 [ (com.coralogix.permissions.v1.name) = "dataengine", (description) = "Dataengine", (display_name)= "Data Engine"];
 }
@@ -324,5 +324,6 @@ enum Permission {
   PERMISSION_SYSTEM_DATASETS_READ_CONFIG = 261 [(expression) = "system-datasets:ReadConfig", (action) = ACTION_READ_CONFIG, (resource) = RESOURCE_SYSTEM_DATASETS, (permission_group) = PERMISSION_GROUP_DATAENGINE, (description) = "View system datasets.", (doc_link) = "", (explanation) = "View system datasets.", (is_team_level) = true];
   PERMISSION_TEAM_QUOTA_RULES_MANAGE = 262 [(expression) = "team-quota-rules:Manage", (action) = ACTION_MANAGE, (resource) = RESOURCE_TEAM_QUOTA_RULES, (permission_group) = PERMISSION_GROUP_QUOTA_RULES, (description) = "Manage team quota rules. Allocate quota units per entity type.", (doc_link) = "", (explanation) = "Manage team quota rules. Allocate quota units per entity type.", (is_team_level) = true];
   PERMISSION_TEAM_QUOTA_RULES_READ = 263 [(expression) = "team-quota-rules:Read", (action) = ACTION_READ, (resource) = RESOURCE_TEAM_QUOTA_RULES, (permission_group) = PERMISSION_GROUP_QUOTA_RULES, (description) = "View team quota rules. Allocate quota units per entity type.", (doc_link) = "", (explanation) = "View team quota rules. Allocate quota units per entity type.", (is_team_level) = true];
+  PERMISSION_SPLIT_INDEX_MANAGE = 264 [(expression) = "split-index:Manage", (action) = ACTION_MANAGE, (resource) = RESOURCE_SPLIT_INDEX, (permission_group) = PERMISSION_GROUP_LOGS, (description) = "Apply split index on demand to apply reserved field changes.", (doc_link) = "", (explanation) = "Apply split index on demand to apply reserved field changes.", (is_team_level) = true];
 }
 

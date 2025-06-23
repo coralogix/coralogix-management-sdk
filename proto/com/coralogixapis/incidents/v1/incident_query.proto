@@ -42,9 +42,7 @@ message GroupBy {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident group by"
-      required: [
-        "field"
-      ]
+      required: ["field"]
     }
   };
   oneof field {

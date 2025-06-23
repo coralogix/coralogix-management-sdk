@@ -199,10 +199,7 @@ message EnrichmentDataset {
 
 message DatasetDescriptor {
   DatasetType dataset_type = 1;
-  // When used in Requests, accepts wildcards (e.g. `d*`)
-  // In Response it will contain fully resolved dataset name
   optional string dataset = 2;
-  // In Request and Response it should be the fully resolved dataspace name
   optional string dataspace = 3;
 }
 

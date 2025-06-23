@@ -8,9 +8,9 @@ import "com/coralogixapis/incidents/v1/incident_severity.proto";
 import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
+import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "google/protobuf/duration.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 /**
@@ -20,30 +20,40 @@ message Incident {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident"
-      required: ["id", "state", "status", "assignments", "severity", "contextual_labels", "display_labels", "events", "created_at", "last_state_update_time", "last_state_update_key", "duration"]
+      required: [
+        "id",
+        "state",
+        "status",
+        "assignments",
+        "severity",
+        "contextual_labels",
+        "display_labels",
+        "events",
+        "created_at",
+        "last_state_update_time",
+        "last_state_update_key",
+        "duration"
+      ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_id\"" }]; // Incident id
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_name\"" }]; // Incident name
-  IncidentState state = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The incident's current internal state, usually derived from the operational events of the incident"
-  }]; // The incident's current internal state, usually derived from the operational events of the incident
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_id\""}]; // Incident id
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_name\""}]; // Incident name
+  IncidentState state = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The incident's current internal state, usually derived from the operational events of the incident"}]; // The incident's current internal state, usually derived from the operational events of the incident
   IncidentStatus status = 4; // The incident's current status. Can be derived from the incident state and/or administrative user operation (i.e acknowledging the incident)
   repeated Assignment assignments = 5; // The incident's current assignments
-  google.protobuf.StringValue description = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"incident_description\"" }]; // The incident's current description
+  google.protobuf.StringValue description = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_description\""}]; // The incident's current description
   IncidentSeverity severity = 7; // The incident's current severity
   map<string, string> contextual_labels = 13; // The incident's current contextual labels - dynamic labels that give contextual information about the incident (for example, the alert_name label can appear in an incident created by an event originating from the alerting system).
   map<string, string> display_labels = 14; // The incident's current display labels -  dynamic labels that extend the incident name for identification purposes
-  repeated IncidentEvent events = 10;  // The incident's current events
-  google.protobuf.Timestamp created_at = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
-  google.protobuf.Timestamp closed_at = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
-  google.protobuf.Timestamp last_state_update_time = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-01-01T00:00:00Z\"" }];
-  google.protobuf.StringValue last_state_update_key = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"last_state_update_key\"" }]; // The payload key of the last event that caused the incident's to state change
-  google.protobuf.BoolValue is_muted = 17 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "false" }]; // Is the incident muted/suppressed
+  repeated IncidentEvent events = 10; // The incident's current events
+  google.protobuf.Timestamp created_at = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-01-01T00:00:00Z\""}];
+  google.protobuf.Timestamp closed_at = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-01-01T00:00:00Z\""}];
+  google.protobuf.Timestamp last_state_update_time = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-01-01T00:00:00Z\""}];
+  google.protobuf.StringValue last_state_update_key = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"last_state_update_key\""}]; // The payload key of the last event that caused the incident's to state change
+  google.protobuf.BoolValue is_muted = 17 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "false"}]; // Is the incident muted/suppressed
   repeated MetaLabel meta_labels = 18; // The incident's current meta labels
   google.protobuf.Duration duration = 19; // The time duration between created at and closed time of the incident
 }
-
 
 message IncidentFieldOneOf {
   oneof field {
@@ -64,11 +74,14 @@ message ContextualLabels {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident contextual labels"
-      required: ["field_name", "field_value"]
+      required: [
+        "field_name",
+        "field_value"
+      ]
     }
   };
-  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_name\"" }];
-  google.protobuf.StringValue field_value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_value\"" }];
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"field_name\""}];
+  google.protobuf.StringValue field_value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"field_value\""}];
 }
 message GroupByValues {
   oneof values {
@@ -76,12 +89,25 @@ message GroupByValues {
     ContextualLabels contextual_labels = 2;
   }
 }
+
 // Represents and Incident Aggregation (group by)
 message IncidentAggregation {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident aggregation"
-      required: ["group_bys_value", "agg_state_count", "agg_status_count", "agg_severity_count", "agg_assignments_count", "first_created_at", "last_closed_at", "all_values_count", "list_incidents_id", "last_state_update_time", "agg_meta_labels_count"]
+      required: [
+        "group_bys_value",
+        "agg_state_count",
+        "agg_status_count",
+        "agg_severity_count",
+        "agg_assignments_count",
+        "first_created_at",
+        "last_closed_at",
+        "all_values_count",
+        "list_incidents_id",
+        "last_state_update_time",
+        "agg_meta_labels_count"
+      ]
     }
   };
   repeated GroupByValues group_bys_value = 1; // The aggregation's group by fields and values
@@ -101,52 +127,67 @@ message IncidentMetaLabelsCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident meta labels count"
-      required: ["meta_label", "count"]
+      required: [
+        "meta_label",
+        "count"
+      ]
     }
   };
   MetaLabel meta_label = 1;
-  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
 }
 message IncidentAssignmentCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident assignment count"
-      required: ["assigned_to", "count"]
+      required: [
+        "assigned_to",
+        "count"
+      ]
     }
   };
   UserDetails assigned_to = 1;
-  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
 }
 message IncidentSeverityCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident severity count"
-      required: ["severity", "count"]
+      required: [
+        "severity",
+        "count"
+      ]
     }
   };
   IncidentSeverity severity = 1;
-  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
 }
 message IncidentStatusCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident status count"
-      required: ["status", "count"]
+      required: [
+        "status",
+        "count"
+      ]
     }
   };
   IncidentStatus status = 1;
-  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
 }
 
 message IncidentStateCount {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Incident state count"
-      required: ["state", "count"]
+      required: [
+        "state",
+        "count"
+      ]
     }
   };
   IncidentState state = 1;
-  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
 }
 
 enum IncidentFields {
@@ -162,5 +203,4 @@ enum IncidentFields {
   INCIDENTS_FIELDS_APPLICATION_NAME = 9;
   INCIDENTS_FIELDS_SUBSYSTEM_NAME = 10;
   INCIDENTS_FIELDS_DURATION = 11;
-
 }

@@ -28,17 +28,11 @@ message IncidentEvent {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "The ID of the incident event"
-      example: "\"incident_event_id\""
-    }
-  ];
-  IncidentEventType incident_event_type = 2 [
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      example: "\"INCIDENT_EVENT_TYPE_ACKNOWLEDGE\""
-    }
-  ];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "The ID of the incident event"
+    example: "\"incident_event_id\""
+  }];
+  IncidentEventType incident_event_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"INCIDENT_EVENT_TYPE_ACKNOWLEDGE\""}];
   oneof incident_event_payload {
     IncidentEventSnoozeIndicator snooze_indicator = 200;
     IncidentEventAssign assignment = 201;
@@ -47,11 +41,7 @@ message IncidentEvent {
     IncidentEventAcknowledge acknowledge = 203;
     IncidentEventClose close = 204;
   }
-  OriginatorType originator_type = 3 [
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      example: "\"ORIGINATOR_TYPE_OPERATIONAL\""
-    }
-  ];
+  OriginatorType originator_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ORIGINATOR_TYPE_OPERATIONAL\""}];
   oneof originator {
     IncidentEventOriginatorAdministrative administrative_event = 100;
     IncidentEventOriginatorOperational operational_event = 101;

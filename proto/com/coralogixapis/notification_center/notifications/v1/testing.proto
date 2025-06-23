@@ -24,7 +24,7 @@ message TestNotification {
   string id = 1;
   uint32 team_id = 2;
   string connector_id = 3;
-  string output_schema_id = 4;
+  string payload_type = 4;
   repeated ConnectorConfigField connector_config = 6;
   repeated MessageConfigField message_config = 7;
   repeated NotificationOperation available_operations = 8;

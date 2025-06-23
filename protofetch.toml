@@ -190,7 +190,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.5.3"
+revision = "v2.5.5"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -255,7 +255,7 @@ revision = "v0.3.3"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.7"
+revision = "v0.3.9"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -332,7 +332,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.114"
+revision = "v0.1.115"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -347,7 +347,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.118"
+revision = "v0.0.123"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -377,7 +377,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = 'v0.8.0'
+revision = "v1.0.0"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",
@@ -418,7 +418,7 @@ allow_policies = [
 
 [cx-api-schema-store]
 url = 'github.com/coralogix/cx-api-schema-store'
-revision = 'v0.0.1'
+revision = "v0.0.2"
 allow_policies = [
     "/com/coralogix/schemastore/v1/tracing_fields.proto",
     "com/coralogix/schemastore/v1/common.proto",
@@ -426,7 +426,7 @@ allow_policies = [
 
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
-revision = "v1.0.2"
+revision = "v1.0.3"
 allow_policies = [
     "src/com/coralogixapis/incidents/v1/assignee.proto",
     "src/com/coralogixapis/incidents/v1/filter_operators.proto",
