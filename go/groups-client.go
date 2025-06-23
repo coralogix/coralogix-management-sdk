@@ -37,6 +37,9 @@ type RoleID = groups.RoleId
 // UserID is a type for a user ID to use in a group.
 type UserID = groups.UserId
 
+// GroupsTeamID is a type for a team ID to use in a group.
+type GroupsTeamID = groups.TeamId
+
 // UpdateTeamGroupRequestRoleUpdates is a type for a request.
 type UpdateTeamGroupRequestRoleUpdates = groups.UpdateTeamGroupRequest_RoleUpdates
 
@@ -101,7 +104,7 @@ type GroupsClient struct {
 }
 
 // Create creates a new group
-func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupRequest) (*groups.CreateTeamGroupResponse, error) {
+func (c GroupsClient) Create(ctx context.Context, req *CreateTeamGroupRequest) (*groups.CreateTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -119,7 +122,7 @@ func (c GroupsClient) Create(ctx context.Context, req *groups.CreateTeamGroupReq
 }
 
 // Get retrieves a group by ID
-func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) (*groups.GetTeamGroupResponse, error) {
+func (c GroupsClient) Get(ctx context.Context, req *GetTeamGroupRequest) (*groups.GetTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -137,7 +140,7 @@ func (c GroupsClient) Get(ctx context.Context, req *groups.GetTeamGroupRequest) 
 }
 
 // List retrieves all groups in the team
-func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest) (*groups.GetTeamGroupsResponse, error) {
+func (c GroupsClient) List(ctx context.Context, req *GetTeamGroupsRequest) (*groups.GetTeamGroupsResponse, error) {
 	callPoperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -155,7 +158,7 @@ func (c GroupsClient) List(ctx context.Context, req *groups.GetTeamGroupsRequest
 }
 
 // Update updates a group
-func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupRequest) (*groups.UpdateTeamGroupResponse, error) {
+func (c GroupsClient) Update(ctx context.Context, req *UpdateTeamGroupRequest) (*groups.UpdateTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -173,7 +176,7 @@ func (c GroupsClient) Update(ctx context.Context, req *groups.UpdateTeamGroupReq
 }
 
 // Delete deletes a group by ID
-func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupRequest) (*groups.DeleteTeamGroupResponse, error) {
+func (c GroupsClient) Delete(ctx context.Context, req *DeleteTeamGroupRequest) (*groups.DeleteTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -191,7 +194,7 @@ func (c GroupsClient) Delete(ctx context.Context, req *groups.DeleteTeamGroupReq
 }
 
 // AddUsers adds users to a group
-func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGroupRequest) (*groups.AddUsersToTeamGroupResponse, error) {
+func (c GroupsClient) AddUsers(ctx context.Context, req *AddUsersToTeamGroupRequest) (*groups.AddUsersToTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -209,7 +212,7 @@ func (c GroupsClient) AddUsers(ctx context.Context, req *groups.AddUsersToTeamGr
 }
 
 // RemoveUsers removes users from a group
-func (c GroupsClient) RemoveUsers(ctx context.Context, req *groups.RemoveUsersFromTeamGroupRequest) (*groups.RemoveUsersFromTeamGroupResponse, error) {
+func (c GroupsClient) RemoveUsers(ctx context.Context, req *RemoveUsersFromTeamGroupRequest) (*groups.RemoveUsersFromTeamGroupResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err

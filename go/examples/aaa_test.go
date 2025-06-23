@@ -171,8 +171,8 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	c := cxsdk.NewGroupsClient(creator)
 
-	groups, err := c.List(context.Background(), &v1.GetTeamGroupsRequest{
-		TeamId: &v1.TeamId{
+	groups, err := c.List(context.Background(), &cxsdk.GetTeamGroupsRequest{
+		TeamId: &cxsdk.GroupsTeamID{
 			Id: uint32(teamId),
 		},
 	})
@@ -181,9 +181,9 @@ func TestGroups(t *testing.T) {
 
 	groupDesc := "A Test Group"
 
-	createdGroup, err := c.Create(context.Background(), &v1.CreateTeamGroupRequest{
+	createdGroup, err := c.Create(context.Background(), &cxsdk.CreateTeamGroupRequest{
 		Name: "Test Group " + strconv.FormatInt(time.Now().UnixMilli(), 10),
-		TeamId: &v1.TeamId{
+		TeamId: &cxsdk.GroupsTeamID{
 			Id: uint32(teamId),
 		},
 		Description: &groupDesc,
@@ -196,8 +196,8 @@ func TestGroups(t *testing.T) {
 
 	assertNilAndPrintError(t, err)
 
-	retrievedGroup, err := c.Get(context.Background(), &v1.GetTeamGroupRequest{
-		GroupId: &v1.TeamGroupId{
+	retrievedGroup, err := c.Get(context.Background(), &cxsdk.GetTeamGroupRequest{
+		GroupId: &cxsdk.TeamGroupID{
 			Id: createdGroup.GroupId.Id,
 		},
 	})
@@ -205,7 +205,7 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	assert.Equal(t, createdGroup.GroupId.Id, retrievedGroup.Group.GroupId.Id)
 
-	_, updateError := c.Update(context.Background(), &v1.UpdateTeamGroupRequest{
+	_, updateError := c.Update(context.Background(), &cxsdk.UpdateTeamGroupRequest{
 		GroupId:     createdGroup.GroupId,
 		Name:        "Updated Test Group " + strconv.FormatInt(time.Now().UnixMilli(), 10),
 		Description: &groupDesc,
@@ -213,8 +213,8 @@ func TestGroups(t *testing.T) {
 
 	assertNilAndPrintError(t, updateError)
 
-	_, deletionError := c.Delete(context.Background(), &v1.DeleteTeamGroupRequest{
-		GroupId: &v1.TeamGroupId{
+	_, deletionError := c.Delete(context.Background(), &cxsdk.DeleteTeamGroupRequest{
+		GroupId: &cxsdk.TeamGroupID{
 			Id: createdGroup.GroupId.Id,
 		},
 	})
@@ -307,7 +307,7 @@ func TestSamlConfigurationRetrieval(t *testing.T) {
 	_, e = c.GetConfiguration(context.Background(), &cxsdk.GetSamlConfigurationRequest{TeamId: uint32(teamId)})
 	assertNilAndPrintError(t, e)
 
-	_, e = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamId), IsActive: false})
+	_, _ = c.SetActive(context.Background(), &cxsdk.SetSamlActiveRequest{TeamId: uint32(teamId), IsActive: false})
 }
 
 func TestSamlSetUpWithContent(t *testing.T) {
