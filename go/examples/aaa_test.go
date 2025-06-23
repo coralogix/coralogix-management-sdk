@@ -22,7 +22,6 @@ import (
 	"time"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
-	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/permissions/v1"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -188,10 +187,10 @@ func TestGroups(t *testing.T) {
 		},
 		Description: &groupDesc,
 		ExternalId:  nil,
-		RoleIds: []*v1.RoleId{
+		RoleIds: []*cxsdk.RoleID{
 			{Id: 1},
 		},
-		UserIds: []*v1.UserId{},
+		UserIds: []*cxsdk.UserID{},
 	})
 
 	assertNilAndPrintError(t, err)
