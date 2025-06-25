@@ -15,7 +15,8 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.24"
+# revision = "v0.5.24"
+branch = "change_outputchemaid_payloadtype"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",

@@ -15,8 +15,8 @@ commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.24"
-commit_hash = "d81e46b2c704f0eb83f687f0579051a0bb06637a"
+branch = "change_outputchemaid_payloadtype"
+commit_hash = "2e939c3a321a5e8c33fa18b4199023ccea4e87df"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -76,7 +76,7 @@ commit_hash = "a263697a62d693c205fb3cc0d33ccdad81c25c59"
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
 branch = "master"
-commit_hash = "6c58bb67895a1271626c730beeccbc96322bc8ca"
+commit_hash = "e0feef2f4310c73287da1acdf8219b1691cfe061"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
