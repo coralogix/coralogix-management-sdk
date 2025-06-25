@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogixapis.notification_center.routers.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/v1/routing/routing.proto";
-import "com/coralogixapis/notification_center/routers/v1/private_routing.proto";
 import "google/protobuf/timestamp.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -13,19 +12,6 @@ enum RouterEvaluationMode {
   ROUTER_EVALUATION_MODE_UNSPECIFIED = 0;
   EVALUATE_ALL = 1;
   STOP_ON_FIRST_MATCH = 2;
-}
-
-// The private router allows notification destinations and routing rules
-// to be specified as part of the notification request.
-message PrivateRouter {
-  reserved 2;
-  reserved "deprecated_rules";
-  reserved 3;
-  reserved "deprecated_fallback";
-
-  string router_key = 1;
-  repeated PrivateRoutingRule rules = 4;
-  repeated PrivateRoutingTarget fallback = 5;
 }
 
 // The global router contains a pre-configured list of routing rules

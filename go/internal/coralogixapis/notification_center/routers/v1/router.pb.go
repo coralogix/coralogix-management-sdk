@@ -74,68 +74,6 @@ func (RouterEvaluationMode) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{0}
 }
 
-// The private router allows notification destinations and routing rules
-// to be specified as part of the notification request.
-type PrivateRouter struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	RouterKey     string                  `protobuf:"bytes,1,opt,name=router_key,json=routerKey,proto3" json:"router_key,omitempty"`
-	Rules         []*PrivateRoutingRule   `protobuf:"bytes,4,rep,name=rules,proto3" json:"rules,omitempty"`
-	Fallback      []*PrivateRoutingTarget `protobuf:"bytes,5,rep,name=fallback,proto3" json:"fallback,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PrivateRouter) Reset() {
-	*x = PrivateRouter{}
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PrivateRouter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PrivateRouter) ProtoMessage() {}
-
-func (x *PrivateRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PrivateRouter.ProtoReflect.Descriptor instead.
-func (*PrivateRouter) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *PrivateRouter) GetRouterKey() string {
-	if x != nil {
-		return x.RouterKey
-	}
-	return ""
-}
-
-func (x *PrivateRouter) GetRules() []*PrivateRoutingRule {
-	if x != nil {
-		return x.Rules
-	}
-	return nil
-}
-
-func (x *PrivateRouter) GetFallback() []*PrivateRoutingTarget {
-	if x != nil {
-		return x.Fallback
-	}
-	return nil
-}
-
 // The global router contains a pre-configured list of routing rules
 // and can be specified as a part of the notification request.
 type GlobalRouter struct {
@@ -169,7 +107,7 @@ type GlobalRouter struct {
 
 func (x *GlobalRouter) Reset() {
 	*x = GlobalRouter{}
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -181,7 +119,7 @@ func (x *GlobalRouter) String() string {
 func (*GlobalRouter) ProtoMessage() {}
 
 func (x *GlobalRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -194,7 +132,7 @@ func (x *GlobalRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalRouter.ProtoReflect.Descriptor instead.
 func (*GlobalRouter) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GlobalRouter) GetId() string {
@@ -287,12 +225,7 @@ var File_com_coralogixapis_notification_center_routers_v1_router_proto protorefl
 
 const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc = "" +
 	"\n" +
-	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1aFcom/coralogixapis/notification_center/routers/v1/private_routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa1\x02\n" +
-	"\rPrivateRouter\x12\x1d\n" +
-	"\n" +
-	"router_key\x18\x01 \x01(\tR\trouterKey\x12Z\n" +
-	"\x05rules\x18\x04 \x03(\v2D.com.coralogixapis.notification_center.routers.v1.PrivateRoutingRuleR\x05rules\x12b\n" +
-	"\bfallback\x18\x05 \x03(\v2F.com.coralogixapis.notification_center.routers.v1.PrivateRoutingTargetR\bfallbackJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x10deprecated_rulesR\x13deprecated_fallback\"\x9f\n" +
+	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x9f\n" +
 	"\n" +
 	"\fGlobalRouter\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12F\n" +
@@ -340,34 +273,29 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescG
 }
 
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_goTypes = []any{
 	(RouterEvaluationMode)(0),     // 0: com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode
-	(*PrivateRouter)(nil),         // 1: com.coralogixapis.notification_center.routers.v1.PrivateRouter
-	(*GlobalRouter)(nil),          // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter
-	nil,                           // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	(*PrivateRoutingRule)(nil),    // 4: com.coralogixapis.notification_center.routers.v1.PrivateRoutingRule
-	(*PrivateRoutingTarget)(nil),  // 5: com.coralogixapis.notification_center.routers.v1.PrivateRoutingTarget
-	(*routing.RoutingRule)(nil),   // 6: com.coralogixapis.notification_center.routing.RoutingRule
-	(*routing.RoutingTarget)(nil), // 7: com.coralogixapis.notification_center.routing.RoutingTarget
-	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
-	(common.EntityType)(0),        // 9: com.coralogixapis.notification_center.EntityType
+	(*GlobalRouter)(nil),          // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter
+	nil,                           // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
+	(*routing.RoutingRule)(nil),   // 3: com.coralogixapis.notification_center.routing.RoutingRule
+	(*routing.RoutingTarget)(nil), // 4: com.coralogixapis.notification_center.routing.RoutingTarget
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(common.EntityType)(0),        // 6: com.coralogixapis.notification_center.EntityType
 }
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_depIdxs = []int32{
-	4, // 0: com.coralogixapis.notification_center.routers.v1.PrivateRouter.rules:type_name -> com.coralogixapis.notification_center.routers.v1.PrivateRoutingRule
-	5, // 1: com.coralogixapis.notification_center.routers.v1.PrivateRouter.fallback:type_name -> com.coralogixapis.notification_center.routers.v1.PrivateRoutingTarget
-	6, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
-	7, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
-	8, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
-	8, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
-	3, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	9, // 7: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	0, // 8: com.coralogixapis.notification_center.routers.v1.GlobalRouter.evaluation_mode:type_name -> com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode
-	9, // [9:9] is the sub-list for method output_type
-	9, // [9:9] is the sub-list for method input_type
-	9, // [9:9] is the sub-list for extension type_name
-	9, // [9:9] is the sub-list for extension extendee
-	0, // [0:9] is the sub-list for field type_name
+	3, // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
+	4, // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
+	5, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
+	5, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
+	2, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
+	6, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	0, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.evaluation_mode:type_name -> com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_routers_v1_router_proto_init() }
@@ -375,15 +303,14 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_init() {
 	if File_com_coralogixapis_notification_center_routers_v1_router_proto != nil {
 		return
 	}
-	file_com_coralogixapis_notification_center_routers_v1_private_routing_proto_init()
-	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1].OneofWrappers = []any{}
+	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc), len(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
