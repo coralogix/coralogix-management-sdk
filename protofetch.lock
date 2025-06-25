@@ -99,8 +99,8 @@ commit_hash = "32818c30c78d84256100709e325627a177578dfb"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.8.0"
-commit_hash = "2028c54aee655015627312a85cf0d8dac53a5396"
+revision = "v1.1.0"
+commit_hash = "1a1e2d7c0ff2bf5f68824600294d2c9bcdb928e6"
 
 [[dependencies]]
 name = "cx-api-organisations"

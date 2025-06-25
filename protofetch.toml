@@ -378,28 +378,21 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v0.8.0"
+revision = 'v1.1.0'
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",
-    "src/com/coralogixapis/notification_center/common/rpc_common.proto",
     "src/com/coralogixapis/notification_center/common/v1/config_fields.proto",
     "src/com/coralogixapis/notification_center/common/v1/identifier.proto",
     "src/com/coralogixapis/notification_center/common/v1/routing/routing.proto",
     "src/com/coralogixapis/notification_center/connectors/v1/connector.proto",
     "src/com/coralogixapis/notification_center/connectors/v1/connectors_service.proto",
-    "src/com/coralogixapis/notification_center/definitions/v1/config_override.proto",
-    "src/com/coralogixapis/notification_center/definitions/v1/connector_type.proto",
     "src/com/coralogixapis/notification_center/entities/v1/entities_service.proto",
-    "src/com/coralogixapis/notification_center/entities/v1/entity_type.proto",
-    "src/com/coralogixapis/notification_center/entities/v1/presentation_details.proto",
-    "src/com/coralogixapis/notification_center/notifications/v1/notification.proto",
     "src/com/coralogixapis/notification_center/notifications/v1/testing.proto",
     "src/com/coralogixapis/notification_center/notifications/v1/testing_service.proto",
     "src/com/coralogixapis/notification_center/presets/v1/preset.proto",
     "src/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
-    "src/com/coralogixapis/notification_center/routers/v1/private_routing.proto",
     "src/com/coralogixapis/notification_center/routers/v1/router.proto",
 ]
 
