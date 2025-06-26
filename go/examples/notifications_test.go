@@ -53,10 +53,10 @@ func TestHttpsConnector(t *testing.T) {
 	entityType := cxsdk.EntityTypeAlerts
 	c := cxsdk.NewNotificationsClient(creator)
 	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
-		OutputSchemaId: "generic_https_default",
-		Type:           connectorRaw.Type,
-		Fields:         connectorRaw.ConnectorConfig.Fields,
-		EntityType:     &entityType,
+		PayloadType: "generic_https_default",
+		Type:        connectorRaw.Type,
+		Fields:      connectorRaw.ConnectorConfig.Fields,
+		EntityType:  &entityType,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -88,8 +88,8 @@ func TestHttpsConnector(t *testing.T) {
 	assert.Equal(t, connector.Connector.Name, "TestConnector")
 
 	_, err = c.TestExistingConnector(context.Background(), &cxsdk.TestExistingConnectorRequest{
-		ConnectorId:    *connectorId,
-		OutputSchemaId: "generic_https_default",
+		ConnectorId: *connectorId,
+		PayloadType: "generic_https_default",
 	})
 
 	if err != nil {
@@ -136,10 +136,10 @@ func TestSlackConnector(t *testing.T) {
 	entityType := cxsdk.EntityTypeAlerts
 	c := cxsdk.NewNotificationsClient(creator)
 	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
-		OutputSchemaId: "slack_raw",
-		Type:           connectorRaw.Type,
-		Fields:         connectorRaw.ConnectorConfig.Fields,
-		EntityType:     &entityType,
+		PayloadType: "slack_raw",
+		Type:        connectorRaw.Type,
+		Fields:      connectorRaw.ConnectorConfig.Fields,
+		EntityType:  &entityType,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -171,8 +171,8 @@ func TestSlackConnector(t *testing.T) {
 	assert.Equal(t, connector.Connector.Name, "TestSlackConnector")
 
 	_, err = c.TestExistingConnector(context.Background(), &cxsdk.TestExistingConnectorRequest{
-		ConnectorId:    *connectorId,
-		OutputSchemaId: "slack_raw",
+		ConnectorId: *connectorId,
+		PayloadType: "slack_raw",
 	})
 
 	if err != nil {
@@ -523,10 +523,10 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	_, err = notificationCenterClient.TestDestination(context.Background(), &cxsdk.TestDestinationRequest{
-		EntityType:     cxsdk.EntityTypeAlerts,
-		ConnectorId:    *connectorId,
-		PresetId:       *presetId,
-		OutputSchemaId: "generic_https_default",
+		EntityType:  cxsdk.EntityTypeAlerts,
+		ConnectorId: *connectorId,
+		PresetId:    *presetId,
+		PayloadType: "generic_https_default",
 	})
 
 	if err != nil {
@@ -620,10 +620,10 @@ func TestCreateAlertWithDestination(t *testing.T) {
 	}
 
 	_, err = notificationCenterClient.TestDestination(context.Background(), &cxsdk.TestDestinationRequest{
-		EntityType:     cxsdk.EntityTypeAlerts,
-		ConnectorId:    *connectorId,
-		PresetId:       *presetId,
-		OutputSchemaId: "generic_https_default",
+		EntityType:  cxsdk.EntityTypeAlerts,
+		ConnectorId: *connectorId,
+		PresetId:    *presetId,
+		PayloadType: "generic_https_default",
 	})
 
 	if err != nil {

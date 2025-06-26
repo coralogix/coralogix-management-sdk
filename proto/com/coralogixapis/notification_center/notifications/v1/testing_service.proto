@@ -79,7 +79,7 @@ message TestConnectorConfigRequest {
     }
   };
   ConnectorType type = 1;
-  string output_schema_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
   repeated ConnectorConfigField fields = 3;
   optional string deprecated_entity_type = 4 [deprecated = true];
   optional EntityType entity_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
@@ -91,7 +91,7 @@ message TestConnectorConfigResponse {
 
 message TestExistingConnectorRequest {
   string deprecated_connector_id = 1 [deprecated = true];
-  string output_schema_id = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
   ConnectorIdentifier connector_identifier = 3 [deprecated = true];
   string connector_id = 4;
 }
@@ -138,7 +138,7 @@ message TestDestinationRequest {
   optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
   string deprecated_connector_id = 3 [deprecated = true];
   string deprecated_preset_id = 4 [deprecated = true];
-  string output_schema_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  string payload_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
   repeated MessageConfigField message_config_fields = 7;
   ConnectorIdentifier connector_identifier = 8 [deprecated = true];
   PresetIdentifier preset_identifier = 9 [deprecated = true];

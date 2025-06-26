@@ -47,6 +47,8 @@ enum EntityType {
   ENTITY_TYPE_TEXT = 14;
   // JSON representation: "browserEvents"
   ENTITY_TYPE_BROWSER_EVENTS = 22;
+  // JSON representation: "aiEvaluations"
+  ENTITY_TYPE_AI_EVALUATIONS = 24;
 
   // Pillar "metrics"
 

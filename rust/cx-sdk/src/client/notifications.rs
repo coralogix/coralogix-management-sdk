@@ -768,20 +768,20 @@ impl NotificationsClient {
     /// * `connector_type` - The [`ConnectorType`] to test.
     /// * `connector_config_fields` - The [ConnectorConfigField]s to test with.
     /// * `entity_type` - The [`EntityType`] to test with.
-    /// * `output_schema_id` - The id of the output schema to test with.
+    /// * `payload_type` - The id of the output schema to test with.
     pub async fn test_connector_config(
         &self,
         connector_type: ConnectorType,
         connector_config_fields: Vec<ConnectorConfigField>,
         entity_type: EntityType,
-        output_schema_id: String,
+        payload_type: String,
     ) -> Result<TestConnectorConfigResponse> {
         let request = make_request_with_metadata(
             TestConnectorConfigRequest {
                 r#type: connector_type.into(),
                 fields: connector_config_fields,
                 entity_type: Some(entity_type.into()),
-                output_schema_id,
+                payload_type,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -809,12 +809,12 @@ impl NotificationsClient {
     pub async fn test_existing_connector(
         &self,
         connector_id: String,
-        output_schema_id: String,
+        payload_type: String,
     ) -> Result<TestExistingConnectorResponse> {
         let request = make_request_with_metadata(
             TestExistingConnectorRequest {
                 connector_id,
-                output_schema_id,
+                payload_type,
                 ..Default::default()
             },
             &self.metadata_map,
@@ -964,7 +964,7 @@ impl NotificationsClient {
         preset_id: String,
         connector_id: String,
         message_config_fields: Vec<MessageConfigField>,
-        output_schema_id: String,
+        payload_type: String,
     ) -> Result<TestDestinationResponse> {
         let request = make_request_with_metadata(
             TestDestinationRequest {
@@ -973,7 +973,7 @@ impl NotificationsClient {
                 message_config_fields,
                 preset_id,
                 connector_id,
-                output_schema_id,
+                payload_type,
                 ..Default::default()
             },
             &self.metadata_map,
