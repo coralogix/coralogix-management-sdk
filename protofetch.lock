@@ -39,8 +39,8 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.5.5"
-commit_hash = "85cfa91ebec692d4e3e5b17d18947daeffcaf862"
+revision = "v2.5.9"
+commit_hash = "b56d8844a3e9df7eaa34f68cf5f3d4b46dff753a"
 
 [[dependencies]]
 name = "cx-api-data-usage"
@@ -76,7 +76,7 @@ commit_hash = "a263697a62d693c205fb3cc0d33ccdad81c25c59"
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
 branch = "master"
-commit_hash = "6c58bb67895a1271626c730beeccbc96322bc8ca"
+commit_hash = "e0feef2f4310c73287da1acdf8219b1691cfe061"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
@@ -99,8 +99,8 @@ commit_hash = "32818c30c78d84256100709e325627a177578dfb"
 [[dependencies]]
 name = "cx-api-notification-center"
 url = "github.com/coralogix/cx-api-notification-center"
-revision = "v0.8.0"
-commit_hash = "2028c54aee655015627312a85cf0d8dac53a5396"
+revision = "v1.1.0"
+commit_hash = "1a1e2d7c0ff2bf5f68824600294d2c9bcdb928e6"
 
 [[dependencies]]
 name = "cx-api-organisations"

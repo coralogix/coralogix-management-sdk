@@ -11,6 +11,19 @@ option go_package = "com/coralogixapis/notification_center/routers/v1";
 * These are internal, private models intended for use by other Coralogix teams.
 */
 
+// The private router allows notification destinations and routing rules
+// to be specified as part of the notification request.
+message PrivateRouter {
+  reserved 2;
+  reserved "deprecated_rules";
+  reserved 3;
+  reserved "deprecated_fallback";
+
+  string router_key = 1;
+  repeated PrivateRoutingRule rules = 4;
+  repeated PrivateRoutingTarget fallback = 5;
+}
+
 message PrivateRoutingRule {
   //Condition template that is rendered to true or false and used to determine if the rule should be applied
   string condition = 1;
