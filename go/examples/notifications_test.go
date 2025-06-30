@@ -16,9 +16,11 @@ package examples
 
 import (
 	"context"
+	"fmt"
 	"testing"
 
 	cxsdk "github.com/coralogix/coralogix-management-sdk/go"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/wrapperspb"
 )
@@ -29,10 +31,10 @@ func TestHttpsConnector(t *testing.T) {
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
-
+	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
-		Name:        "TestConnector",
+		Name:        name,
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
@@ -85,7 +87,7 @@ func TestHttpsConnector(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, connector.Connector.Name, "TestConnector")
+	assert.Equal(t, connector.Connector.Name, name)
 
 	_, err = c.TestExistingConnector(context.Background(), &cxsdk.TestExistingConnectorRequest{
 		ConnectorId: *connectorId,
@@ -431,10 +433,10 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	routerId := "router_default"
-
+	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
-		Name:        "TestConnector",
+		Name:        name,
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{
@@ -568,10 +570,10 @@ func TestCreateAlertWithDestination(t *testing.T) {
 	alertsClient := cxsdk.NewAlertsClient(creator)
 
 	notificationCenterClient := cxsdk.NewNotificationsClient(creator)
-
+	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
-		Name:        "TestConnector",
+		Name:        name,
 		Description: "This is the connector to use for Notification Center testing.",
 		ConnectorConfig: &cxsdk.ConnectorConfig{
 			Fields: []*cxsdk.ConnectorConfigField{

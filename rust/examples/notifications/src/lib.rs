@@ -14,7 +14,7 @@
 
 #[cfg(test)]
 mod tests {
-
+    use uuid::Uuid;
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -84,6 +84,7 @@ mod tests {
     };
 
     fn create_test_https_connector(name: String) -> Connector {
+        let fullName := format!("{}-{}", name, Uuid::new_v4().to_string())
         Connector {
             name,
             description: "Connector for Notification Center testing.".into(),
