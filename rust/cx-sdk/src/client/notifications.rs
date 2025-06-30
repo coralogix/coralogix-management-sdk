@@ -75,8 +75,6 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         BatchGetGlobalRoutersResponse,
         CreateOrReplaceGlobalRouterRequest,
         CreateOrReplaceGlobalRouterResponse,
-        DeleteGlobalRouterRequest,
-        DeleteGlobalRouterResponse,
         GetGlobalRouterRequest,
         GetGlobalRouterResponse,
         ListGlobalRoutersRequest,
