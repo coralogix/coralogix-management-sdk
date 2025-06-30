@@ -81,8 +81,6 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         GetGlobalRouterResponse,
         ListGlobalRoutersRequest,
         ListGlobalRoutersResponse,
-        ReplaceGlobalRouterRequest,
-        ReplaceGlobalRouterResponse,
         global_routers_service_client::GlobalRoutersServiceClient,
     },
 };
