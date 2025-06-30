@@ -258,9 +258,9 @@ func TestHttpsPreset(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
-	presetName := "TestGoHttpsPreset"
+	newPreset := CreateHttpsPreset("TestGoHttpsPreset")
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
-		Preset: CreateHttpsPreset(presetName),
+		Preset: newPreset,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -274,7 +274,7 @@ func TestHttpsPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, preset.Preset.Name, presetName)
+	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
 		Id: *presetId,
@@ -294,7 +294,7 @@ func TestHttpsPreset(t *testing.T) {
 	}
 
 	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, defaultPreset.PresetSummary.Name, presetName)
+	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
 		Id: *presetId,
@@ -313,9 +313,10 @@ func TestSlackPreset(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
-	presetName := "TestGoSlackPreset"
+	newPreset := CreateSlackPreset("TestGoSlackPreset")
+
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
-		Preset: CreateSlackPreset(presetName),
+		Preset: newPreset,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -329,7 +330,7 @@ func TestSlackPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, preset.Preset.Name, presetName)
+	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
 		Id: *presetId,
@@ -349,7 +350,7 @@ func TestSlackPreset(t *testing.T) {
 	}
 
 	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, defaultPreset.PresetSummary.Name, presetName)
+	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
 		Id: *presetId,
@@ -368,9 +369,9 @@ func TestPagerdutyPreset(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewNotificationsClient(creator)
-	presetName := "TestGoPagerdutyPreset"
+	newPreset := CreatePagerDutyPreset("TestPagerDutyPreset")
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
-		Preset: CreatePagerDutyPreset(presetName),
+		Preset: newPreset,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -384,7 +385,7 @@ func TestPagerdutyPreset(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, preset.Preset.Name, presetName)
+	assert.Equal(t, preset.Preset.Name, newPreset.Name)
 
 	_, err = c.SetPresetAsDefault(context.Background(), &cxsdk.SetPresetAsDefaultRequest{
 		Id: *presetId,
@@ -404,7 +405,7 @@ func TestPagerdutyPreset(t *testing.T) {
 	}
 
 	assert.NotNil(t, defaultPreset)
-	assert.Equal(t, defaultPreset.PresetSummary.Name, presetName)
+	assert.Equal(t, defaultPreset.PresetSummary.Name, newPreset.Name)
 
 	_, err = c.DeleteCustomPreset(context.Background(), &cxsdk.DeleteCustomPresetRequest{
 		Id: *presetId,
