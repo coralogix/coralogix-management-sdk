@@ -672,7 +672,7 @@ func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *Delete
 	client := routers.NewGlobalRoutersServiceClient(conn)
 	response, err := client.DeleteGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GlobalRoutersReplaceRPC, notificationsFeatureGroupID)
+		return nil, NewSdkAPIError(err, GlobalRoutersDeleteRPC, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
