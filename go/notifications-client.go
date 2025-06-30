@@ -662,7 +662,7 @@ func (c NotificationsClient) CreateOrReplaceGlobalRouter(ctx context.Context, re
 }
 
 // DeleteGlobalRouter deletes a global router.
-func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *DeleteGlobalRouterRequest) (*DeleteGlobalRouterResponse, error) {
+func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *DeleteGlobalRouterRequest) (*ReplaceGlobalRouterResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -670,10 +670,14 @@ func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *Delete
 	conn := callProperties.Connection
 	defer conn.Close()
 	client := routers.NewGlobalRoutersServiceClient(conn)
-
-	response, err := client.DeleteGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
+	replaceReq := ReplaceGlobalRouterRequest{
+		Router: &routers.GlobalRouter{
+			Id: &req.Id,
+		},
+	}
+	response, err := client.ReplaceGlobalRouter(callProperties.Ctx, &replaceReq, callProperties.CallOptions...)
 	if err != nil {
-		return nil, NewSdkAPIError(err, GlobalRoutersDeleteRPC, notificationsFeatureGroupID)
+		return nil, NewSdkAPIError(err, routers.GlobalRoutersService_CreateOrReplaceGlobalRouter_FullMethodName, notificationsFeatureGroupID)
 	}
 	return response, nil
 }
