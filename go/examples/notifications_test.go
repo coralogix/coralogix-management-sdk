@@ -860,10 +860,11 @@ func CreateAlertWithRouter() *cxsdk.AlertDefProperties {
 }
 
 func CreateHttpsPreset(presetName string) *cxsdk.Preset {
+	name := fmt.Sprintf("%v-%v", presetName, uuid.NewString())
 	presetType := cxsdk.PresetTypeCustom
 	parentId := "preset_system_generic_https_alerts_empty"
 	return &cxsdk.Preset{
-		Name:          presetName,
+		Name:          name,
 		Description:   "This is the preset to use for Notification Center testing.",
 		PresetType:    &presetType,
 		EntityType:    cxsdk.EntityTypeAlerts,

@@ -84,9 +84,9 @@ mod tests {
     };
 
     fn create_test_https_connector(name: String) -> Connector {
-        let fullName := format!("{}-{}", name, Uuid::new_v4().to_string())
+        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string()); 
         Connector {
-            name,
+            name: fullName,
             description: "Connector for Notification Center testing.".into(),
             r#type: ConnectorType::GenericHttps.into(),
             id: None,
@@ -182,8 +182,9 @@ mod tests {
     }
 
     fn create_https_preset(name: String) -> Preset {
+        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string()); 
         Preset {
-            name,
+            name: fullName,
             description: "Preset for Notification Center testing.".into(),
             preset_type: Some(PresetType::Custom.into()),
             connector_type: ConnectorType::GenericHttps as i32,
