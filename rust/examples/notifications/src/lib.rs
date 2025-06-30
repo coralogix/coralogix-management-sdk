@@ -14,7 +14,6 @@
 
 #[cfg(test)]
 mod tests {
-    use uuid::Uuid;
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -51,6 +50,7 @@ mod tests {
         TypeDefinition,
         integration_type,
     };
+    use uuid::Uuid;
 
     use cx_sdk::client::notifications::{
         RoutingRule,
@@ -84,7 +84,7 @@ mod tests {
     };
 
     fn create_test_https_connector(name: String) -> Connector {
-        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string()); 
+        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string());
         Connector {
             name: fullName,
             description: "Connector for Notification Center testing.".into(),
@@ -182,7 +182,7 @@ mod tests {
     }
 
     fn create_https_preset(name: String) -> Preset {
-        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string()); 
+        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string());
         Preset {
             name: fullName,
             description: "Preset for Notification Center testing.".into(),

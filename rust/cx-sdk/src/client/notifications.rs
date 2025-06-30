@@ -75,6 +75,8 @@ use cx_api::proto::com::coralogixapis::notification_center::{
         BatchGetGlobalRoutersResponse,
         CreateOrReplaceGlobalRouterRequest,
         CreateOrReplaceGlobalRouterResponse,
+        DeleteGlobalRouterRequest,
+        DeleteGlobalRouterResponse,
         GetGlobalRouterRequest,
         GetGlobalRouterResponse,
         ListGlobalRoutersRequest,
@@ -664,25 +666,23 @@ impl NotificationsClient {
     /// Delete a global router by identifier.
     /// # Arguments
     /// * `id` - The identifier of the global router to delete.
-    pub async fn delete_global_router(&self, id: String) -> Result<ReplaceGlobalRouterResponse> {
+    pub async fn delete_global_router(&self, id: String) -> Result<DeleteGlobalRouterResponse> {
         let request = make_request_with_metadata(
-            ReplaceGlobalRouterRequest {
-                router: Some(GlobalRouter {
-                    id: Some(id),
-                    ..Default::default()
-                }),
+            DeleteGlobalRouterRequest {
+                id,
+                ..Default::default()
             },
             &self.metadata_map,
         );
         let mut client = self.global_routers_client.lock().await.clone();
 
         client
-            .replace_global_router(request)
+            .delete_global_router(request)
             .await
             .map(|r| r.into_inner())
             .map_err(|status| SdkError::ApiError(SdkApiError {
                 status,
-                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/ReplaceGlobalRouter".into(),
+                endpoint: "/com.coralogixapis.notification_center.routers.v1.GlobalRoutersService/DeleteGlobalRouter".into(),
                 feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into(),
             }))
     }
