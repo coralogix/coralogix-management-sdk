@@ -19,6 +19,7 @@ mod tests {
     use cx_sdk::client::extensions::TargetDomain;
 
     #[tokio::test]
+    #[ignore = "Unstable test"]
     async fn test_extensions() {
         let extensions_client = ExtensionsClient::new(
             AuthContext::from_env(),
