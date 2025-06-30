@@ -24,20 +24,21 @@ const (
 )
 
 type Hexagon struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Query         *Hexagon_Query          `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Min           *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=min,proto3" json:"min,omitempty"`
-	Max           *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=max,proto3" json:"max,omitempty"`
-	Unit          Unit                    `protobuf:"varint,6,opt,name=unit,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.Unit" json:"unit,omitempty"`
-	Thresholds    []*Threshold            `protobuf:"bytes,7,rep,name=thresholds,proto3" json:"thresholds,omitempty"`
-	DataModeType  DataModeType            `protobuf:"varint,8,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType" json:"data_mode_type,omitempty"`
-	CustomUnit    *wrapperspb.StringValue `protobuf:"bytes,10,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
-	Decimal       *wrapperspb.Int32Value  `protobuf:"bytes,11,opt,name=decimal,proto3" json:"decimal,omitempty"`
-	ThresholdType ThresholdType           `protobuf:"varint,12,opt,name=threshold_type,json=thresholdType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType" json:"threshold_type,omitempty"`
-	Legend        *Legend                 `protobuf:"bytes,13,opt,name=legend,proto3" json:"legend,omitempty"`
-	LegendBy      LegendBy                `protobuf:"varint,14,opt,name=legend_by,json=legendBy,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy" json:"legend_by,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state            protoimpl.MessageState  `protogen:"open.v1"`
+	Query            *Hexagon_Query          `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	Min              *wrapperspb.DoubleValue `protobuf:"bytes,2,opt,name=min,proto3" json:"min,omitempty"`
+	Max              *wrapperspb.DoubleValue `protobuf:"bytes,3,opt,name=max,proto3" json:"max,omitempty"`
+	Unit             Unit                    `protobuf:"varint,6,opt,name=unit,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.Unit" json:"unit,omitempty"`
+	Thresholds       []*Threshold            `protobuf:"bytes,7,rep,name=thresholds,proto3" json:"thresholds,omitempty"`
+	DataModeType     DataModeType            `protobuf:"varint,8,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType" json:"data_mode_type,omitempty"`
+	CustomUnit       *wrapperspb.StringValue `protobuf:"bytes,10,opt,name=custom_unit,json=customUnit,proto3" json:"custom_unit,omitempty"`
+	Decimal          *wrapperspb.Int32Value  `protobuf:"bytes,11,opt,name=decimal,proto3" json:"decimal,omitempty"`
+	ThresholdType    ThresholdType           `protobuf:"varint,12,opt,name=threshold_type,json=thresholdType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType" json:"threshold_type,omitempty"`
+	Legend           *Legend                 `protobuf:"bytes,13,opt,name=legend,proto3" json:"legend,omitempty"`
+	LegendBy         LegendBy                `protobuf:"varint,14,opt,name=legend_by,json=legendBy,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy" json:"legend_by,omitempty"`
+	DecimalPrecision *wrapperspb.BoolValue   `protobuf:"bytes,15,opt,name=decimal_precision,json=decimalPrecision,proto3" json:"decimal_precision,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *Hexagon) Reset() {
@@ -145,6 +146,13 @@ func (x *Hexagon) GetLegendBy() LegendBy {
 		return x.LegendBy
 	}
 	return LegendBy_LEGEND_BY_UNSPECIFIED
+}
+
+func (x *Hexagon) GetDecimalPrecision() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DecimalPrecision
+	}
+	return nil
 }
 
 type Hexagon_Query struct {
@@ -569,7 +577,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc1)\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd*\n" +
 	"\aHexagon\x12\x81\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.QueryB/\x92A,2*A query object containing query definitionR\x05query\x12\x94\x01\n" +
 	"\x03min\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueBd\x92Aa2\\A minimum value used in percentage threshold calculation and for visual value representationJ\x010R\x03min\x12\x99\x01\n" +
@@ -585,7 +593,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDesc = "
 	"\adecimal\x18\v \x01(\v2\x1b.google.protobuf.Int32ValueBX\x92AU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x012R\adecimal\x12\x9a\x01\n" +
 	"\x0ethreshold_type\x18\f \x01(\x0e2A.com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdTypeB0\x92A-2+Type of the threshold, relative or absoluteR\rthresholdType\x12q\n" +
 	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12\xb3\x01\n" +
-	"\tlegend_by\x18\x0e \x01(\x0e2<.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendByBX\x92AU2SIndicates how to group the legend elements, either by thresholds or by query groupsR\blegendBy\x1a\x83\x03\n" +
+	"\tlegend_by\x18\x0e \x01(\x0e2<.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendByBX\x92AU2SIndicates how to group the legend elements, either by thresholds or by query groupsR\blegendBy\x12\x89\x01\n" +
+	"\x11decimal_precision\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x1a\x83\x03\n" +
 	"\x05Query\x12]\n" +
 	"\ametrics\x18\x01 \x01(\v2A.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQueryH\x00R\ametrics\x12T\n" +
 	"\x04logs\x18\x02 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQueryH\x00R\x04logs\x12W\n" +
@@ -657,22 +666,23 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_goTypes = []a
 	(ThresholdType)(0),             // 12: com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
 	(*Legend)(nil),                 // 13: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
 	(LegendBy)(0),                  // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	(*PromQlQuery)(nil),            // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	(*Filter_MetricsFilter)(nil),   // 16: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	(MetricsQueryEditorMode)(0),    // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	(*TimeFrameSelect)(nil),        // 18: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	(Aggregation)(0),               // 19: com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
-	(PromQLQueryType)(0),           // 20: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(*LuceneQuery)(nil),            // 21: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	(*LogsAggregation)(nil),        // 22: com.coralogixapis.dashboards.v1.common.LogsAggregation
-	(*Filter_LogsFilter)(nil),      // 23: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	(*ObservationField)(nil),       // 24: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*SpansAggregation)(nil),       // 25: com.coralogixapis.dashboards.v1.common.SpansAggregation
-	(*Filter_SpansFilter)(nil),     // 26: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	(*SpanField)(nil),              // 27: com.coralogixapis.dashboards.v1.common.SpanField
-	(*SpanObservationField)(nil),   // 28: com.coralogixapis.dashboards.v1.common.SpanObservationField
-	(*DataprimeQuery)(nil),         // 29: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*Filter_Source)(nil),          // 30: com.coralogixapis.dashboards.v1.ast.Filter.Source
+	(*wrapperspb.BoolValue)(nil),   // 15: google.protobuf.BoolValue
+	(*PromQlQuery)(nil),            // 16: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*Filter_MetricsFilter)(nil),   // 17: com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	(MetricsQueryEditorMode)(0),    // 18: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(*TimeFrameSelect)(nil),        // 19: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	(Aggregation)(0),               // 20: com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
+	(PromQLQueryType)(0),           // 21: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(*LuceneQuery)(nil),            // 22: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*LogsAggregation)(nil),        // 23: com.coralogixapis.dashboards.v1.common.LogsAggregation
+	(*Filter_LogsFilter)(nil),      // 24: com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	(*ObservationField)(nil),       // 25: com.coralogixapis.dashboards.v1.common.ObservationField
+	(*SpansAggregation)(nil),       // 26: com.coralogixapis.dashboards.v1.common.SpansAggregation
+	(*Filter_SpansFilter)(nil),     // 27: com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	(*SpanField)(nil),              // 28: com.coralogixapis.dashboards.v1.common.SpanField
+	(*SpanObservationField)(nil),   // 29: com.coralogixapis.dashboards.v1.common.SpanObservationField
+	(*DataprimeQuery)(nil),         // 30: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*Filter_Source)(nil),          // 31: com.coralogixapis.dashboards.v1.ast.Filter.Source
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_depIdxs = []int32{
 	1,  // 0: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query
@@ -686,35 +696,36 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_depIdxs = []i
 	12, // 8: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.threshold_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdType
 	13, // 9: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.legend:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
 	14, // 10: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.legend_by:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
-	2,  // 11: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery
-	3,  // 12: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery
-	4,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery
-	5,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery
-	15, // 15: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	16, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	17, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	18, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
-	20, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	21, // 21: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	22, // 22: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.logs_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	23, // 23: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	24, // 24: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	18, // 25: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	21, // 26: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	25, // 27: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.spans_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
-	26, // 28: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	27, // 29: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	18, // 30: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	28, // 31: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
-	29, // 32: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	30, // 33: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
-	18, // 34: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	35, // [35:35] is the sub-list for method output_type
-	35, // [35:35] is the sub-list for method input_type
-	35, // [35:35] is the sub-list for extension type_name
-	35, // [35:35] is the sub-list for extension extendee
-	0,  // [0:35] is the sub-list for field type_name
+	15, // 11: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.decimal_precision:type_name -> google.protobuf.BoolValue
+	2,  // 12: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery
+	3,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery
+	4,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery
+	5,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery
+	16, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	17, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	18, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	20, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
+	21, // 21: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	22, // 22: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	23, // 23: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.logs_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	24, // 24: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	25, // 25: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	19, // 26: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	22, // 27: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	26, // 28: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.spans_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
+	27, // 29: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	28, // 30: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	19, // 31: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	29, // 32: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
+	30, // 33: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	31, // 34: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
+	19, // 35: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	36, // [36:36] is the sub-list for method output_type
+	36, // [36:36] is the sub-list for method input_type
+	36, // [36:36] is the sub-list for extension type_name
+	36, // [36:36] is the sub-list for extension extendee
+	0,  // [0:36] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_init() }

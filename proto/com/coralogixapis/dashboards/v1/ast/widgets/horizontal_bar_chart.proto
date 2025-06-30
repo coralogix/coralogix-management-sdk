@@ -70,6 +70,10 @@ message HorizontalBarChart {
     description: "Number indicating the upper band for y axis"
     example: "1000"
   }];
+  google.protobuf.BoolValue decimal_precision = 20 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether to render numeric value without abbreviation"
+    example: "false"
+  }];
 
   message Query {
     oneof value {

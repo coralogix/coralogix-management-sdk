@@ -58,6 +58,10 @@ message PieChart {
     description: "Whether to ignore color scheme and derive colors from algorithm"
     example: "false"
   }];
+  google.protobuf.BoolValue decimal_precision = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether to render numeric value without abbreviation"
+    example: "false"
+  }];
 
   message Query {
     oneof value {

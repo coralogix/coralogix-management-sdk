@@ -208,6 +208,7 @@ type LineChart_QueryDefinition struct {
 	HashColors         *wrapperspb.BoolValue   `protobuf:"bytes,14,opt,name=hash_colors,json=hashColors,proto3" json:"hash_colors,omitempty"`
 	YAxisMin           *wrapperspb.FloatValue  `protobuf:"bytes,15,opt,name=y_axis_min,json=yAxisMin,proto3" json:"y_axis_min,omitempty"`
 	YAxisMax           *wrapperspb.FloatValue  `protobuf:"bytes,16,opt,name=y_axis_max,json=yAxisMax,proto3" json:"y_axis_max,omitempty"`
+	DecimalPrecision   *wrapperspb.BoolValue   `protobuf:"bytes,17,opt,name=decimal_precision,json=decimalPrecision,proto3" json:"decimal_precision,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -350,6 +351,13 @@ func (x *LineChart_QueryDefinition) GetYAxisMin() *wrapperspb.FloatValue {
 func (x *LineChart_QueryDefinition) GetYAxisMax() *wrapperspb.FloatValue {
 	if x != nil {
 		return x.YAxisMax
+	}
+	return nil
+}
+
+func (x *LineChart_QueryDefinition) GetDecimalPrecision() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.DecimalPrecision
 	}
 	return nil
 }
@@ -873,12 +881,12 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto protorefle
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x977\n" +
+	"<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa38\n" +
 	"\tLineChart\x12q\n" +
 	"\x06legend\x18\x02 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12o\n" +
 	"\atooltip\x18\x06 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipB\x15\x92A\x122\x10Tooltip settingsR\atooltip\x12\x97\x01\n" +
 	"\x11query_definitions\x18\a \x03(\v2F.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinitionB\"\x92A\x1f2\x1dDefinitions of widget queriesR\x10queryDefinitions\x12\xa8\x01\n" +
-	"\fstacked_line\x18\t \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.StackedLineBA\x92A>2<Type of stacked line, can be undefined, absolute or relativeR\vstackedLine\x1a\xdf\x11\n" +
+	"\fstacked_line\x18\t \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.StackedLineBA\x92A>2<Type of stacked line, can be undefined, absolute or relativeR\vstackedLine\x1a\xeb\x12\n" +
 	"\x0fQueryDefinition\x12\x89\x01\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB[\x92AX2!Unique id of the query definitionJ3{ \"value\": \"73c65643-91d5-dba2-35cd-baa49dc65331\" }R\x02id\x12e\n" +
 	"\x05query\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryB\x11\x92A\x0e2\fQuery objectR\x05query\x12\xa3\x01\n" +
@@ -904,7 +912,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc 
 	"\n" +
 	"y_axis_min\x18\x0f \x01(\v2\x1b.google.protobuf.FloatValueB7\x92A42+Number indicating the lower band for y axisJ\x05-1000R\byAxisMin\x12q\n" +
 	"\n" +
-	"y_axis_max\x18\x10 \x01(\v2\x1b.google.protobuf.FloatValueB6\x92A32+Number indicating the upper band for y axisJ\x041000R\byAxisMax:]\x92AZ\n" +
+	"y_axis_max\x18\x10 \x01(\v2\x1b.google.protobuf.FloatValueB6\x92A32+Number indicating the upper band for y axisJ\x041000R\byAxisMax\x12\x89\x01\n" +
+	"\x11decimal_precision\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision:]\x92AZ\n" +
 	"X*\tLineChart2>LineChart represents the configuration of a line chart widget.\xd2\x01\x02id\xd2\x01\x05query\x1a\x8b\x03\n" +
 	"\x05Query\x12V\n" +
 	"\x04logs\x18\x01 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQueryH\x00R\x04logs\x12_\n" +
@@ -1031,38 +1040,39 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_depIdxs = 
 	16, // 17: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.hash_colors:type_name -> google.protobuf.BoolValue
 	19, // 18: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_min:type_name -> google.protobuf.FloatValue
 	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_max:type_name -> google.protobuf.FloatValue
-	6,  // 20: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery
-	7,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery
-	8,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery
-	9,  // 23: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery
-	16, // 24: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.show_labels:type_name -> google.protobuf.BoolValue
-	0,  // 25: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipType
-	20, // 26: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	12, // 27: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_by:type_name -> google.protobuf.StringValue
-	21, // 28: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
-	22, // 29: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
-	23, // 30: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 31: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	25, // 32: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
-	26, // 33: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
-	27, // 34: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	24, // 35: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	20, // 36: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
-	28, // 37: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	29, // 38: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
-	30, // 39: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
-	24, // 40: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	31, // 41: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
-	32, // 42: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	33, // 43: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
-	24, // 44: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	34, // 45: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution.interval:type_name -> google.protobuf.Duration
-	18, // 46: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution.buckets_presented:type_name -> google.protobuf.Int32Value
-	47, // [47:47] is the sub-list for method output_type
-	47, // [47:47] is the sub-list for method input_type
-	47, // [47:47] is the sub-list for extension type_name
-	47, // [47:47] is the sub-list for extension extendee
-	0,  // [0:47] is the sub-list for field type_name
+	16, // 20: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.decimal_precision:type_name -> google.protobuf.BoolValue
+	6,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery
+	7,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery
+	8,  // 23: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery
+	9,  // 24: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery
+	16, // 25: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.show_labels:type_name -> google.protobuf.BoolValue
+	0,  // 26: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipType
+	20, // 27: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	12, // 28: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_by:type_name -> google.protobuf.StringValue
+	21, // 29: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	22, // 30: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.LogsFilter
+	23, // 31: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 32: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	25, // 33: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	26, // 34: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.MetricsFilter
+	27, // 35: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	24, // 36: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	20, // 37: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	28, // 38: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	29, // 39: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
+	30, // 40: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.SpansFilter
+	24, // 41: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	31, // 42: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
+	32, // 43: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	33, // 44: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter.Source
+	24, // 45: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
+	34, // 46: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution.interval:type_name -> google.protobuf.Duration
+	18, // 47: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution.buckets_presented:type_name -> google.protobuf.Int32Value
+	48, // [48:48] is the sub-list for method output_type
+	48, // [48:48] is the sub-list for method input_type
+	48, // [48:48] is the sub-list for extension type_name
+	48, // [48:48] is the sub-list for extension extendee
+	0,  // [0:48] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_init() }
