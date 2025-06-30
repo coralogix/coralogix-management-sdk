@@ -25,66 +25,53 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// The private router allows notification destinations and routing rules
-// to be specified as part of the notification request.
-type PrivateRouter struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	RouterKey     string                  `protobuf:"bytes,1,opt,name=router_key,json=routerKey,proto3" json:"router_key,omitempty"`
-	Rules         []*PrivateRoutingRule   `protobuf:"bytes,4,rep,name=rules,proto3" json:"rules,omitempty"`
-	Fallback      []*PrivateRoutingTarget `protobuf:"bytes,5,rep,name=fallback,proto3" json:"fallback,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
+type RouterEvaluationMode int32
 
-func (x *PrivateRouter) Reset() {
-	*x = PrivateRouter{}
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
+const (
+	RouterEvaluationMode_ROUTER_EVALUATION_MODE_UNSPECIFIED RouterEvaluationMode = 0
+	RouterEvaluationMode_EVALUATE_ALL                       RouterEvaluationMode = 1
+	RouterEvaluationMode_STOP_ON_FIRST_MATCH                RouterEvaluationMode = 2
+)
 
-func (x *PrivateRouter) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PrivateRouter) ProtoMessage() {}
-
-func (x *PrivateRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
+// Enum value maps for RouterEvaluationMode.
+var (
+	RouterEvaluationMode_name = map[int32]string{
+		0: "ROUTER_EVALUATION_MODE_UNSPECIFIED",
+		1: "EVALUATE_ALL",
+		2: "STOP_ON_FIRST_MATCH",
 	}
-	return mi.MessageOf(x)
+	RouterEvaluationMode_value = map[string]int32{
+		"ROUTER_EVALUATION_MODE_UNSPECIFIED": 0,
+		"EVALUATE_ALL":                       1,
+		"STOP_ON_FIRST_MATCH":                2,
+	}
+)
+
+func (x RouterEvaluationMode) Enum() *RouterEvaluationMode {
+	p := new(RouterEvaluationMode)
+	*p = x
+	return p
 }
 
-// Deprecated: Use PrivateRouter.ProtoReflect.Descriptor instead.
-func (*PrivateRouter) Descriptor() ([]byte, []int) {
+func (x RouterEvaluationMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (RouterEvaluationMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_enumTypes[0].Descriptor()
+}
+
+func (RouterEvaluationMode) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_notification_center_routers_v1_router_proto_enumTypes[0]
+}
+
+func (x RouterEvaluationMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use RouterEvaluationMode.Descriptor instead.
+func (RouterEvaluationMode) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{0}
-}
-
-func (x *PrivateRouter) GetRouterKey() string {
-	if x != nil {
-		return x.RouterKey
-	}
-	return ""
-}
-
-func (x *PrivateRouter) GetRules() []*PrivateRoutingRule {
-	if x != nil {
-		return x.Rules
-	}
-	return nil
-}
-
-func (x *PrivateRouter) GetFallback() []*PrivateRoutingTarget {
-	if x != nil {
-		return x.Fallback
-	}
-	return nil
 }
 
 // The global router contains a pre-configured list of routing rules
@@ -110,16 +97,17 @@ type GlobalRouter struct {
 	// System-generated timestamp for when the router was last updated
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,8,opt,name=create_time,json=createTime,proto3,oneof" json:"create_time,omitempty"`
 	// System-generated timestamp for when the router was last updated
-	UpdateTime    *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=update_time,json=updateTime,proto3,oneof" json:"update_time,omitempty"`
-	EntityLabels  map[string]string      `protobuf:"bytes,10,rep,name=entity_labels,json=entityLabels,proto3" json:"entity_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	EntityType    common.EntityType      `protobuf:"varint,11,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	UpdateTime     *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=update_time,json=updateTime,proto3,oneof" json:"update_time,omitempty"`
+	EntityLabels   map[string]string      `protobuf:"bytes,10,rep,name=entity_labels,json=entityLabels,proto3" json:"entity_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	EntityType     common.EntityType      `protobuf:"varint,11,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	EvaluationMode *RouterEvaluationMode  `protobuf:"varint,12,opt,name=evaluation_mode,json=evaluationMode,proto3,enum=com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode,oneof" json:"evaluation_mode,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
 }
 
 func (x *GlobalRouter) Reset() {
 	*x = GlobalRouter{}
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -131,7 +119,7 @@ func (x *GlobalRouter) String() string {
 func (*GlobalRouter) ProtoMessage() {}
 
 func (x *GlobalRouter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -144,7 +132,7 @@ func (x *GlobalRouter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GlobalRouter.ProtoReflect.Descriptor instead.
 func (*GlobalRouter) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GlobalRouter) GetId() string {
@@ -226,16 +214,19 @@ func (x *GlobalRouter) GetEntityType() common.EntityType {
 	return common.EntityType(0)
 }
 
+func (x *GlobalRouter) GetEvaluationMode() RouterEvaluationMode {
+	if x != nil && x.EvaluationMode != nil {
+		return *x.EvaluationMode
+	}
+	return RouterEvaluationMode_ROUTER_EVALUATION_MODE_UNSPECIFIED
+}
+
 var File_com_coralogixapis_notification_center_routers_v1_router_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc = "" +
 	"\n" +
-	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1aFcom/coralogixapis/notification_center/routers/v1/private_routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa1\x02\n" +
-	"\rPrivateRouter\x12\x1d\n" +
+	"=com/coralogixapis/notification_center/routers/v1/router.proto\x120com.coralogixapis.notification_center.routers.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aEcom/coralogixapis/notification_center/common/v1/routing/routing.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x9f\n" +
 	"\n" +
-	"router_key\x18\x01 \x01(\tR\trouterKey\x12Z\n" +
-	"\x05rules\x18\x04 \x03(\v2D.com.coralogixapis.notification_center.routers.v1.PrivateRoutingRuleR\x05rules\x12b\n" +
-	"\bfallback\x18\x05 \x03(\v2F.com.coralogixapis.notification_center.routers.v1.PrivateRoutingTargetR\bfallbackJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x10deprecated_rulesR\x13deprecated_fallback\"\x95\t\n" +
 	"\fGlobalRouter\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12F\n" +
 	"\x0fuser_defined_id\x18\x02 \x01(\tB\x19\x92A\x14J\x12\"user-provided-id\"\x18\x01H\x01R\ruserDefinedId\x88\x01\x01\x128\n" +
@@ -252,7 +243,8 @@ const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc
 	" \x03(\v2P.com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntryR\fentityLabels\x12a\n" +
 	"\ventity_type\x18\v \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
 	"J\b\"ALERTS\"R\n" +
-	"entityType\x1a?\n" +
+	"entityType\x12t\n" +
+	"\x0fevaluation_mode\x18\f \x01(\x0e2F.com.coralogixapis.notification_center.routers.v1.RouterEvaluationModeH\x04R\x0eevaluationMode\x88\x01\x01\x1a?\n" +
 	"\x11EntityLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xf2\x01\x92A\xee\x01\n" +
@@ -261,7 +253,12 @@ const file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc
 	"\x03_idB\x12\n" +
 	"\x10_user_defined_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +
-	"\f_update_timeB2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
+	"\f_update_timeB\x12\n" +
+	"\x10_evaluation_mode*i\n" +
+	"\x14RouterEvaluationMode\x12&\n" +
+	"\"ROUTER_EVALUATION_MODE_UNSPECIFIED\x10\x00\x12\x10\n" +
+	"\fEVALUATE_ALL\x10\x01\x12\x17\n" +
+	"\x13STOP_ON_FIRST_MATCH\x10\x02B2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescOnce sync.Once
@@ -275,32 +272,30 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescG
 	return file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDescData
 }
 
-var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_com_coralogixapis_notification_center_routers_v1_router_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_goTypes = []any{
-	(*PrivateRouter)(nil),         // 0: com.coralogixapis.notification_center.routers.v1.PrivateRouter
+	(RouterEvaluationMode)(0),     // 0: com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode
 	(*GlobalRouter)(nil),          // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter
 	nil,                           // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	(*PrivateRoutingRule)(nil),    // 3: com.coralogixapis.notification_center.routers.v1.PrivateRoutingRule
-	(*PrivateRoutingTarget)(nil),  // 4: com.coralogixapis.notification_center.routers.v1.PrivateRoutingTarget
-	(*routing.RoutingRule)(nil),   // 5: com.coralogixapis.notification_center.routing.RoutingRule
-	(*routing.RoutingTarget)(nil), // 6: com.coralogixapis.notification_center.routing.RoutingTarget
-	(*timestamppb.Timestamp)(nil), // 7: google.protobuf.Timestamp
-	(common.EntityType)(0),        // 8: com.coralogixapis.notification_center.EntityType
+	(*routing.RoutingRule)(nil),   // 3: com.coralogixapis.notification_center.routing.RoutingRule
+	(*routing.RoutingTarget)(nil), // 4: com.coralogixapis.notification_center.routing.RoutingTarget
+	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
+	(common.EntityType)(0),        // 6: com.coralogixapis.notification_center.EntityType
 }
 var file_com_coralogixapis_notification_center_routers_v1_router_proto_depIdxs = []int32{
-	3, // 0: com.coralogixapis.notification_center.routers.v1.PrivateRouter.rules:type_name -> com.coralogixapis.notification_center.routers.v1.PrivateRoutingRule
-	4, // 1: com.coralogixapis.notification_center.routers.v1.PrivateRouter.fallback:type_name -> com.coralogixapis.notification_center.routers.v1.PrivateRoutingTarget
-	5, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
-	6, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
-	7, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
-	7, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
-	2, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
-	8, // 7: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	8, // [8:8] is the sub-list for method output_type
-	8, // [8:8] is the sub-list for method input_type
-	8, // [8:8] is the sub-list for extension type_name
-	8, // [8:8] is the sub-list for extension extendee
-	0, // [0:8] is the sub-list for field type_name
+	3, // 0: com.coralogixapis.notification_center.routers.v1.GlobalRouter.rules:type_name -> com.coralogixapis.notification_center.routing.RoutingRule
+	4, // 1: com.coralogixapis.notification_center.routers.v1.GlobalRouter.fallback:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
+	5, // 2: com.coralogixapis.notification_center.routers.v1.GlobalRouter.create_time:type_name -> google.protobuf.Timestamp
+	5, // 3: com.coralogixapis.notification_center.routers.v1.GlobalRouter.update_time:type_name -> google.protobuf.Timestamp
+	2, // 4: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_labels:type_name -> com.coralogixapis.notification_center.routers.v1.GlobalRouter.EntityLabelsEntry
+	6, // 5: com.coralogixapis.notification_center.routers.v1.GlobalRouter.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	0, // 6: com.coralogixapis.notification_center.routers.v1.GlobalRouter.evaluation_mode:type_name -> com.coralogixapis.notification_center.routers.v1.RouterEvaluationMode
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_routers_v1_router_proto_init() }
@@ -308,20 +303,20 @@ func file_com_coralogixapis_notification_center_routers_v1_router_proto_init() {
 	if File_com_coralogixapis_notification_center_routers_v1_router_proto != nil {
 		return
 	}
-	file_com_coralogixapis_notification_center_routers_v1_private_routing_proto_init()
-	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[1].OneofWrappers = []any{}
+	file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes[0].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc), len(file_com_coralogixapis_notification_center_routers_v1_router_proto_rawDesc)),
-			NumEnums:      0,
-			NumMessages:   3,
+			NumEnums:      1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_com_coralogixapis_notification_center_routers_v1_router_proto_goTypes,
 		DependencyIndexes: file_com_coralogixapis_notification_center_routers_v1_router_proto_depIdxs,
+		EnumInfos:         file_com_coralogixapis_notification_center_routers_v1_router_proto_enumTypes,
 		MessageInfos:      file_com_coralogixapis_notification_center_routers_v1_router_proto_msgTypes,
 	}.Build()
 	File_com_coralogixapis_notification_center_routers_v1_router_proto = out.File

@@ -91,6 +91,11 @@ message Dashboard {
     AutoRefreshFiveMinutes five_minutes = 14;
   }
 
+  google.protobuf.StringValue slug_name = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"system-health-monitoring\""
+    description: "A unique slug name serving as an alias for accessing the dashboard"
+  }];
+
   message AutoRefreshOff {}
   message AutoRefreshTwoMinutes {}
   message AutoRefreshFiveMinutes {}

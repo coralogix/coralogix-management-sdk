@@ -61,6 +61,7 @@ type Dashboard struct {
 	//	*Dashboard_TwoMinutes
 	//	*Dashboard_FiveMinutes
 	AutoRefresh   isDashboard_AutoRefresh `protobuf_oneof:"auto_refresh"`
+	SlugName      *wrapperspb.StringValue `protobuf:"bytes,15,opt,name=slug_name,json=slugName,proto3" json:"slug_name,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -224,6 +225,13 @@ func (x *Dashboard) GetFiveMinutes() *Dashboard_AutoRefreshFiveMinutes {
 		if x, ok := x.AutoRefresh.(*Dashboard_FiveMinutes); ok {
 			return x.FiveMinutes
 		}
+	}
+	return nil
+}
+
+func (x *Dashboard) GetSlugName() *wrapperspb.StringValue {
+	if x != nil {
+		return x.SlugName
 	}
 	return nil
 }
@@ -396,7 +404,7 @@ var File_com_coralogixapis_dashboards_v1_ast_dashboard_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a4com/coralogixapis/dashboards/v1/ast/annotation.proto\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a2com/coralogixapis/dashboards/v1/ast/variable.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd4\x10\n" +
+	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a4com/coralogixapis/dashboards/v1/ast/annotation.proto\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a2com/coralogixapis/dashboards/v1/ast/variable.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf5\x11\n" +
 	"\tDashboard\x12p\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBB\x92A?2$A unique identifier of the dashboardJ\x17\"GZLHSeqelCbD3I7HbIDtL\"R\x02id\x12h\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB6\x92A32!The display name of the dashboardJ\x0e\"Example Name\"R\x04name\x12\x9f\x01\n" +
@@ -414,7 +422,8 @@ const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\x03off\x18\f \x01(\v2=.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOffH\x02R\x03off\x12g\n" +
 	"\vtwo_minutes\x18\r \x01(\v2D.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutesH\x02R\n" +
 	"twoMinutes\x12j\n" +
-	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x02R\vfiveMinutes\x1a\x10\n" +
+	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x02R\vfiveMinutes\x12\x9e\x01\n" +
+	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x92A`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x1a\x10\n" +
 	"\x0eAutoRefreshOff\x1a\x17\n" +
 	"\x15AutoRefreshTwoMinutes\x1a\x18\n" +
 	"\x16AutoRefreshFiveMinutes:\x80\x02\x92A\xfc\x01\n" +
@@ -468,11 +477,12 @@ var file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_depIdxs = []int32{
 	1,  // 11: com.coralogixapis.dashboards.v1.ast.Dashboard.off:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOff
 	2,  // 12: com.coralogixapis.dashboards.v1.ast.Dashboard.two_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutes
 	3,  // 13: com.coralogixapis.dashboards.v1.ast.Dashboard.five_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutes
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	4,  // 14: com.coralogixapis.dashboards.v1.ast.Dashboard.slug_name:type_name -> google.protobuf.StringValue
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_init() }

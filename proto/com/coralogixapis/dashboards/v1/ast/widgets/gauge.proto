@@ -54,6 +54,10 @@ message Gauge {
   common.Legend legend = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Widget's legend settings"}];
   common.LegendBy legend_by = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups"}];
   google.protobuf.BoolValue display_series_name = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "(multigauge display only) Whether to show the series names above the value"}];
+  google.protobuf.BoolValue decimal_precision = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether to render numeric value without abbreviation"
+    example: "false"
+  }];
 
   message Query {
     oneof value {

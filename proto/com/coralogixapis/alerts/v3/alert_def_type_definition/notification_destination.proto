@@ -45,15 +45,15 @@ message SourceOverrides {
     json_schema: {
       title: "Source overrides"
       required: [
-        "output_schema_id",
+        "payload_type",
         "message_config_fields",
         "connector_config_fields"
       ]
     }
   };
-  string output_schema_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The ID of the output schema to use for routing notifications"
-    example: "\"output_schema_id_example\""
+  string payload_type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "the payload type for the notification"
+    example: "\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\""
   }];
   repeated MessageConfigField message_config_fields = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Notification message configuration fields"}];
   repeated ConnectorConfigField connector_config_fields = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Connector configuration fields"}];

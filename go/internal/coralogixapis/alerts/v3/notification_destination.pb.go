@@ -144,7 +144,7 @@ func (x *NotificationRouting) GetConfigOverrides() *SourceOverrides {
 
 type SourceOverrides struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	OutputSchemaId        string                  `protobuf:"bytes,1,opt,name=output_schema_id,json=outputSchemaId,proto3" json:"output_schema_id,omitempty"`
+	PayloadType           string                  `protobuf:"bytes,1,opt,name=payload_type,json=payloadType,proto3" json:"payload_type,omitempty"`
 	MessageConfigFields   []*MessageConfigField   `protobuf:"bytes,2,rep,name=message_config_fields,json=messageConfigFields,proto3" json:"message_config_fields,omitempty"`
 	ConnectorConfigFields []*ConnectorConfigField `protobuf:"bytes,3,rep,name=connector_config_fields,json=connectorConfigFields,proto3" json:"connector_config_fields,omitempty"`
 	unknownFields         protoimpl.UnknownFields
@@ -181,9 +181,9 @@ func (*SourceOverrides) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_destination_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *SourceOverrides) GetOutputSchemaId() string {
+func (x *SourceOverrides) GetPayloadType() string {
 	if x != nil {
-		return x.OutputSchemaId
+		return x.PayloadType
 	}
 	return ""
 }
@@ -377,12 +377,12 @@ const file_com_coralogixapis_alerts_v3_alert_def_type_definition_notification_de
 	"\x13NotificationRouting\x12\x8a\x01\n" +
 	"\x10config_overrides\x18\x01 \x01(\v2,.com.coralogixapis.alerts.v3.SourceOverridesB,\x92A)2'Configuration for routing notificationsH\x00R\x0fconfigOverrides\x88\x01\x01:\x1b\x92A\x18\n" +
 	"\x16*\x14Notification routingB\x13\n" +
-	"\x11_config_overrides\"\xa0\x04\n" +
-	"\x0fSourceOverrides\x12\x87\x01\n" +
-	"\x10output_schema_id\x18\x01 \x01(\tB]\x92AZ2<The ID of the output schema to use for routing notificationsJ\x1a\"output_schema_id_example\"R\x0eoutputSchemaId\x12\x93\x01\n" +
+	"\x11_config_overrides\"\xc3\x04\n" +
+	"\x0fSourceOverrides\x12\xae\x01\n" +
+	"\fpayload_type\x18\x01 \x01(\tB\x8a\x01\x92A\x86\x012%the payload type for the notificationJ]\"slack_raw, slack_structured, pagerduty_triggered, pagerduty_resolved, generic_https_default\"R\vpayloadType\x12\x93\x01\n" +
 	"\x15message_config_fields\x18\x02 \x03(\v2/.com.coralogixapis.alerts.v3.MessageConfigFieldB.\x92A+2)Notification message configuration fieldsR\x13messageConfigFields\x12\x8e\x01\n" +
-	"\x17connector_config_fields\x18\x03 \x03(\v21.com.coralogixapis.alerts.v3.ConnectorConfigFieldB#\x92A 2\x1eConnector configuration fieldsR\x15connectorConfigFields:\\\x92AY\n" +
-	"W*\x10Source overrides\xd2\x01\x10output_schema_id\xd2\x01\x15message_config_fields\xd2\x01\x17connector_config_fields\"\x8b\x02\n" +
+	"\x17connector_config_fields\x18\x03 \x03(\v21.com.coralogixapis.alerts.v3.ConnectorConfigFieldB#\x92A 2\x1eConnector configuration fieldsR\x15connectorConfigFields:X\x92AU\n" +
+	"S*\x10Source overrides\xd2\x01\fpayload_type\xd2\x01\x15message_config_fields\xd2\x01\x17connector_config_fields\"\x8b\x02\n" +
 	"\x14ConnectorConfigField\x12V\n" +
 	"\n" +
 	"field_name\x18\x01 \x01(\tB7\x92A42#The name of the configuration fieldJ\r\"description\"R\tfieldName\x12d\n" +
