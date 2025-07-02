@@ -1,5 +1,5 @@
 # In coralogix-management-sdk repository
-name: "Notify OpenAPI Facade of New Tag"
+name: "Notify OpenAPI Facade of New Tag and Create Release Branch when LTS"
 
 on:
   push:
@@ -16,3 +16,12 @@ jobs:
           repository: coralogix/openapi-facade
           event-type: sdk-tag-created
           client-payload: '{"tag": "${{ github.ref_name }}"}'
+
+      - name: Create Release Branch
+        run: |
+          git config --global user.email "github@coralogix.com"
+          git config --global user.name "Github Actions"
+          cargo run --bin create_release_branch -- -r ../..
+        working-directory: tools/release-management
+        env:
+          GITHUB_REF: ${{ github.ref_name }}
