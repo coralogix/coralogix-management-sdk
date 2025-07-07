@@ -39,7 +39,9 @@ message ListEntityTypesRequest {
 }
 
 message ListEntityTypesResponse {
-  repeated string deprecated_entity_types = 1 [deprecated = true];
+  reserved 1;
+  reserved "deprecated_entity_types";
+
   repeated EntityType entity_types = 2;
 }
 

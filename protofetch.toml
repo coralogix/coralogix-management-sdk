@@ -190,7 +190,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.5.9"
+revision = "v2.6.1"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -307,7 +307,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.19"
+revision = "v0.0.21"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -347,7 +347,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.123"
+revision = "v0.0.124"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -377,7 +377,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = 'v1.1.0'
+revision = "v1.1.1"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",

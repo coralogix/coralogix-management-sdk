@@ -4,6 +4,7 @@ import "google/api/annotations.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogixapis/slo/v1/slo_alert.proto";
 
 
 message ResponseStatus {
@@ -19,6 +20,28 @@ message ResponseStatus {
   map<string,string> details = 3;
 }
 
+message ReplaceSloAlertsValidationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloAlertsValidationsRequest"
+      description: "Request to validate alerts before replacing an existing SLO."
+      required: ["slo"]
+    }
+  };
+  Slo slo = 1;
+}
+
+message ReplaceSloAlertsValidationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloAlertsValidationsResponse"
+      description: "Response with validated alerts before replacing an existing SLO."
+      required: ["alerts_validation_result"]
+    }
+  };
+  repeated SloAlertValidityResult alerts_validation_result = 1;
+}
+
 message CreateSloRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -28,6 +51,7 @@ message CreateSloRequest {
     }
   };
   Slo slo = 1;
+  optional bool silence_data_validations = 2;
 }
 
 message CreateSloResponse {
@@ -50,6 +74,7 @@ message ReplaceSloRequest {
     }
   };
   Slo slo = 1;
+  optional bool silence_data_validations = 2;
 }
 
 message ReplaceSloResponse {
@@ -256,6 +281,30 @@ service SlosService {
 
     option (google.api.http) = {
       put: "/v1/slo/slos"
+      body: "slo"
+    };
+  }
+
+  rpc ValidateReplaceSloAlerts(ReplaceSloAlertsValidationsRequest) returns (ReplaceSloAlertsValidationsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Replace Slo Pre-Validate Alerts"
+    };
+
+    option (google.api.http) = {
+      post: "/v1/slo/slos/validate"
       body: "slo"
     };
   }
