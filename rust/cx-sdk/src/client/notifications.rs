@@ -517,13 +517,8 @@ impl NotificationsClient {
         &self,
         preset_ids: Vec<String>,
     ) -> Result<BatchGetPresetsResponse> {
-        let request = make_request_with_metadata(
-            BatchGetPresetsRequest {
-                preset_ids,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request =
+            make_request_with_metadata(BatchGetPresetsRequest { preset_ids }, &self.metadata_map);
         {
             let mut client = self.presets_client.lock().await.clone();
 
@@ -587,7 +582,6 @@ impl NotificationsClient {
             GetSystemDefaultPresetSummaryRequest {
                 connector_type: connector_type as i32,
                 entity_type: entity_type.into(),
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -919,6 +913,7 @@ impl NotificationsClient {
     /// * `preset_id` - Preset ID.
     /// * `connector_id` - Connector ID.
     /// * `message_config_fields` - Message configuration.
+    #[allow(clippy::too_many_arguments)]
     pub async fn test_destination(
         &self,
         entity_type: EntityType,
@@ -971,7 +966,6 @@ impl NotificationsClient {
             TestRoutingConditionValidRequest {
                 entity_type: entity_type.into(),
                 template,
-                ..Default::default()
             },
             &self.metadata_map,
         );
