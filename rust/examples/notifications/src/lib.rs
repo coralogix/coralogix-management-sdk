@@ -142,7 +142,6 @@ mod tests {
             create_time: None,
             update_time: None,
             config_overrides: vec![EntityTypeConfigOverrides {
-                deprecated_entity_type: "alerts".into(),
                 entity_type: EntityType::Alerts.into(),
                 fields: vec![TemplatedConnectorConfigField {
                     field_name: "channel".into(),
