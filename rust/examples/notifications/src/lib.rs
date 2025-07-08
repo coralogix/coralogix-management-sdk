@@ -694,6 +694,7 @@ mod tests {
         notifications_client
             .test_destination(
                 EntityType::Alerts,
+                None,
                 vec![],
                 preset_id.clone(),
                 connector_id.clone(),

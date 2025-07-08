@@ -665,13 +665,8 @@ impl NotificationsClient {
     /// # Arguments
     /// * `id` - The identifier of the global router to delete.
     pub async fn delete_global_router(&self, id: String) -> Result<DeleteGlobalRouterResponse> {
-        let request = make_request_with_metadata(
-            DeleteGlobalRouterRequest {
-                id,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request =
+            make_request_with_metadata(DeleteGlobalRouterRequest { id }, &self.metadata_map);
         let mut client = self.global_routers_client.lock().await.clone();
 
         client
@@ -689,13 +684,7 @@ impl NotificationsClient {
     /// # Arguments
     /// * `id` - The identifier of the global router to get.
     pub async fn get_global_router(&self, id: String) -> Result<GetGlobalRouterResponse> {
-        let request = make_request_with_metadata(
-            GetGlobalRouterRequest {
-                id,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request = make_request_with_metadata(GetGlobalRouterRequest { id }, &self.metadata_map);
         let mut client = self.global_routers_client.lock().await.clone();
 
         client
@@ -719,7 +708,6 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             ListGlobalRoutersRequest {
                 entity_type: Some(entity_type.into()),
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -746,7 +734,6 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             BatchGetGlobalRoutersRequest {
                 global_router_ids: ids,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -782,7 +769,6 @@ impl NotificationsClient {
                 fields: connector_config_fields,
                 entity_type: Some(entity_type.into()),
                 payload_type,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -815,7 +801,6 @@ impl NotificationsClient {
             TestExistingConnectorRequest {
                 connector_id,
                 payload_type,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -830,7 +815,7 @@ impl NotificationsClient {
                     |status| SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogixapis.notification_center.notifications.v1.TestingService/TestExistingConnector".into(),
-                                                feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
+                        feature_group: NOTIFICATIONS_FEATURE_GROUP_ID.into()
                     },
                 ))
         }
@@ -839,12 +824,14 @@ impl NotificationsClient {
     /// Test a preset configuration.
     /// # Arguments
     /// * `entity_type` - The entity type.
+    /// * `entity_sub_type` - The entity sub type.
     /// * `connector_id` - The ID for the connector to test.
     /// * `parent_preset_id` - The ID of the preset's parent to test.
     /// * `config_overrides` - The set of [`ConfigOverrides`] to apply.
     pub async fn test_preset_config(
         &self,
         entity_type: EntityType,
+        entity_sub_type: Option<String>,
         connector_id: String,
         parent_preset_id: String,
         config_overrides: Vec<ConfigOverrides>,
@@ -852,10 +839,10 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             TestPresetConfigRequest {
                 entity_type: entity_type.into(),
+                entity_sub_type,
                 connector_id,
                 parent_preset_id,
                 config_overrides,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -879,20 +866,22 @@ impl NotificationsClient {
     /// Test a preset configuration.
     /// # Arguments
     /// * `entity_type` - The entity type.
+    /// * `entity_sub_type` - The entity sub type.
     /// * `connector_id` - The ID for the connector to test.
     /// * `preset_id` - The ID of the preset to test.
     pub async fn test_existing_preset_config(
         &self,
         entity_type: EntityType,
+        entity_sub_type: Option<String>,
         connector_id: String,
         preset_id: String,
     ) -> Result<TestExistingPresetResponse> {
         let request = make_request_with_metadata(
             TestExistingPresetRequest {
                 entity_type: entity_type.into(),
+                entity_sub_type,
                 connector_id,
                 preset_id,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -929,7 +918,6 @@ impl NotificationsClient {
                 entity_type: entity_type.into(),
                 entity_sub_type,
                 template,
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -953,6 +941,7 @@ impl NotificationsClient {
     /// Test a destination.
     /// # Arguments
     /// * `entity_type` - The entity type to test with.
+    /// * `entity_sub_type` - The entity sub type.
     /// * `connector_config_fields` - Connector configuration (templated).
     /// * `preset_id` - Preset ID.
     /// * `connector_id` - Connector ID.
@@ -960,6 +949,7 @@ impl NotificationsClient {
     pub async fn test_destination(
         &self,
         entity_type: EntityType,
+        entity_sub_type: Option<String>,
         connector_config_fields: Vec<TemplatedConnectorConfigField>,
         preset_id: String,
         connector_id: String,
@@ -969,12 +959,12 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             TestDestinationRequest {
                 entity_type: entity_type.into(),
+                entity_sub_type,
                 connector_config_fields,
                 message_config_fields,
                 preset_id,
                 connector_id,
                 payload_type,
-                ..Default::default()
             },
             &self.metadata_map,
         );
