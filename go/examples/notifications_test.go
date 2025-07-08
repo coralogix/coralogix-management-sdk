@@ -500,11 +500,7 @@ func TestGlobalRouter(t *testing.T) {
 	}
 
 	getRes, err := notificationCenterClient.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
-		Identifier: &cxsdk.GlobalRouterIdentifier{
-			Value: &cxsdk.GlobalRouterIdentifierIDValue{
-				Id: *createOrReplaceRes.Router.Id,
-			},
-		},
+		Id: *createOrReplaceRes.Router.Id,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -876,7 +872,6 @@ func CreateHttpsPreset(presetName string) *cxsdk.Preset {
 				ConditionType: &cxsdk.ConditionType{
 					Condition: &cxsdk.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &cxsdk.MatchEntityTypeAndSubTypeCondition{
-							EntityType:    cxsdk.EntityTypeAlerts,
 							EntitySubType: "logsImmediateResolved",
 						},
 					},
@@ -913,7 +908,6 @@ func CreateSlackPreset(presetName string) *cxsdk.Preset {
 				ConditionType: &cxsdk.ConditionType{
 					Condition: &cxsdk.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &cxsdk.MatchEntityTypeAndSubTypeCondition{
-							EntityType:    cxsdk.EntityTypeAlerts,
 							EntitySubType: "logsImmediateResolved",
 						},
 					},
@@ -950,7 +944,6 @@ func CreatePagerDutyPreset(presetName string) *cxsdk.Preset {
 				ConditionType: &cxsdk.ConditionType{
 					Condition: &cxsdk.ConditionTypeMatchEntityTypeAndSubType{
 						MatchEntityTypeAndSubType: &cxsdk.MatchEntityTypeAndSubTypeCondition{
-							EntityType:    cxsdk.EntityTypeAlerts,
 							EntitySubType: "logsImmediateTriggered",
 						},
 					},
