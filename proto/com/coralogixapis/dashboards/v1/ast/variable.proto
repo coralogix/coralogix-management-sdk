@@ -22,6 +22,13 @@ message Variable {
   }
 }
 
+enum VariableDisplayType {
+  VARIABLE_DISPLAY_TYPE_UNSPECIFIED = 0;
+  VARIABLE_DISPLAY_TYPE_LABEL_VALUE = 1;
+  VARIABLE_DISPLAY_TYPE_VALUE = 2;
+  VARIABLE_DISPLAY_TYPE_NOTHING = 3;
+}
+
 message Constant {
   google.protobuf.StringValue value = 1;
 }
@@ -208,11 +215,4 @@ message MultiSelect {
       SELECTION_TYPE_SINGLE = 3;
     }
   }
-}
-
-enum VariableDisplayType {
-  VARIABLE_DISPLAY_TYPE_UNSPECIFIED = 0;
-  VARIABLE_DISPLAY_TYPE_LABEL_VALUE = 1;
-  VARIABLE_DISPLAY_TYPE_VALUE = 2;
-  VARIABLE_DISPLAY_TYPE_NOTHING = 3;
 }

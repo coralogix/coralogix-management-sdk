@@ -375,7 +375,9 @@ message GetDashboardRequest {
     json_schema: {
       title: "Get dashboard request data structure"
       description: "This is a request to get a specific custom dashboard"
-      required: ["dashboard_id"]
+      required: [
+        "dashboard_id"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"

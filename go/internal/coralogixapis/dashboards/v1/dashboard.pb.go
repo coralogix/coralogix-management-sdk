@@ -35,10 +35,7 @@ type Dashboard struct {
 	// The layout configuration for the dashboard's visual elements.
 	Layout *Layout `protobuf:"bytes,4,opt,name=layout,proto3" json:"layout,omitempty"`
 	// A list of variables that can be used within the dashboard for dynamic content.
-	//
-	// Deprecated: Marked as deprecated in com/coralogixapis/dashboards/v1/ast/dashboard.proto.
-	Variables   []*Variable   `protobuf:"bytes,5,rep,name=variables,proto3" json:"variables,omitempty"`
-	VariablesV2 []*VariableV2 `protobuf:"bytes,16,rep,name=variables_v2,json=variablesV2,proto3" json:"variables_v2,omitempty"`
+	Variables []*Variable `protobuf:"bytes,5,rep,name=variables,proto3" json:"variables,omitempty"`
 	// A list of filters that can be applied to the dashboard's data.
 	Filters []*Filter `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Specifies the time frame for the dashboard's data. Can be either absolute or relative.
@@ -65,7 +62,6 @@ type Dashboard struct {
 	//	*Dashboard_FiveMinutes
 	AutoRefresh   isDashboard_AutoRefresh `protobuf_oneof:"auto_refresh"`
 	SlugName      *wrapperspb.StringValue `protobuf:"bytes,15,opt,name=slug_name,json=slugName,proto3" json:"slug_name,omitempty"`
-	Actions       []*DashboardAction      `protobuf:"bytes,17,rep,name=actions,proto3" json:"actions,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -128,17 +124,9 @@ func (x *Dashboard) GetLayout() *Layout {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/dashboards/v1/ast/dashboard.proto.
 func (x *Dashboard) GetVariables() []*Variable {
 	if x != nil {
 		return x.Variables
-	}
-	return nil
-}
-
-func (x *Dashboard) GetVariablesV2() []*VariableV2 {
-	if x != nil {
-		return x.VariablesV2
 	}
 	return nil
 }
@@ -244,13 +232,6 @@ func (x *Dashboard) GetFiveMinutes() *Dashboard_AutoRefreshFiveMinutes {
 func (x *Dashboard) GetSlugName() *wrapperspb.StringValue {
 	if x != nil {
 		return x.SlugName
-	}
-	return nil
-}
-
-func (x *Dashboard) GetActions() []*DashboardAction {
-	if x != nil {
-		return x.Actions
 	}
 	return nil
 }
@@ -423,14 +404,13 @@ var File_com_coralogixapis_dashboards_v1_ast_dashboard_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a4com/coralogixapis/dashboards/v1/ast/annotation.proto\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a2com/coralogixapis/dashboards/v1/ast/variable.proto\x1a?com/coralogixapis/dashboards/v1/ast/variables/variable_v2.proto\x1a3com/coralogixapis/dashboards/v1/common/action.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd\x14\n" +
+	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a4com/coralogixapis/dashboards/v1/ast/annotation.proto\x1a0com/coralogixapis/dashboards/v1/ast/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a2com/coralogixapis/dashboards/v1/ast/variable.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf5\x11\n" +
 	"\tDashboard\x12p\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBB\x92A?2$A unique identifier of the dashboardJ\x17\"GZLHSeqelCbD3I7HbIDtL\"R\x02id\x12h\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB6\x92A32!The display name of the dashboardJ\x0e\"Example Name\"R\x04name\x12\x9f\x01\n" +
 	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB_\x92A\\2DA brief description or summary of the dashboard's purpose or contentJ\x14\"Sample description\"R\vdescription\x12\x87\x01\n" +
-	"\x06layout\x18\x04 \x01(\v2+.com.coralogixapis.dashboards.v1.ast.LayoutBB\x92A?2=The layout configuration for the dashboard's visual elements.R\x06layout\x12\xa1\x01\n" +
-	"\tvariables\x18\x05 \x03(\v2-.com.coralogixapis.dashboards.v1.ast.VariableBT\x92AO2MA list of variables that can be used within the dashboard for dynamic content\x18\x01R\tvariables\x12\xb0\x01\n" +
-	"\fvariables_v2\x18\x10 \x03(\v29.com.coralogixapis.dashboards.v1.ast.variables.VariableV2BR\x92AO2MA list of variables that can be used within the dashboard for dynamic contentR\vvariablesV2\x12\x89\x01\n" +
+	"\x06layout\x18\x04 \x01(\v2+.com.coralogixapis.dashboards.v1.ast.LayoutBB\x92A?2=The layout configuration for the dashboard's visual elements.R\x06layout\x12\x9f\x01\n" +
+	"\tvariables\x18\x05 \x03(\v2-.com.coralogixapis.dashboards.v1.ast.VariableBR\x92AO2MA list of variables that can be used within the dashboard for dynamic contentR\tvariables\x12\x89\x01\n" +
 	"\afilters\x18\x06 \x03(\v2+.com.coralogixapis.dashboards.v1.ast.FilterBB\x92A?2=A list of filters that can be applied to the dashboard's dataR\afilters\x12\xa3\x01\n" +
 	"\x13absolute_time_frame\x18\a \x01(\v21.com.coralogixapis.dashboards.v1.common.TimeFrameB>\x92A;29Absolute time frame specifying a fixed start and end timeH\x00R\x11absoluteTimeFrame\x12\x91\x01\n" +
 	"\x13relative_time_frame\x18\b \x01(\v2\x19.google.protobuf.DurationBD\x92AA2?Relative time frame specifying a duration from the current timeH\x00R\x11relativeTimeFrame\x12D\n" +
@@ -443,8 +423,7 @@ const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\vtwo_minutes\x18\r \x01(\v2D.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutesH\x02R\n" +
 	"twoMinutes\x12j\n" +
 	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x02R\vfiveMinutes\x12\x9e\x01\n" +
-	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x92A`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x12\xa0\x01\n" +
-	"\aactions\x18\x11 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardActionBM\x92AJ2HA list of public actions that are available within the dashboard contextR\aactions\x1a\x10\n" +
+	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x92A`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x1a\x10\n" +
 	"\x0eAutoRefreshOff\x1a\x17\n" +
 	"\x15AutoRefreshTwoMinutes\x1a\x18\n" +
 	"\x16AutoRefreshFiveMinutes:\x80\x02\x92A\xfc\x01\n" +
@@ -476,14 +455,12 @@ var file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_goTypes = []any{
 	(*wrapperspb.StringValue)(nil),           // 4: google.protobuf.StringValue
 	(*Layout)(nil),                           // 5: com.coralogixapis.dashboards.v1.ast.Layout
 	(*Variable)(nil),                         // 6: com.coralogixapis.dashboards.v1.ast.Variable
-	(*VariableV2)(nil),                       // 7: com.coralogixapis.dashboards.v1.ast.variables.VariableV2
-	(*Filter)(nil),                           // 8: com.coralogixapis.dashboards.v1.ast.Filter
-	(*TimeFrame)(nil),                        // 9: com.coralogixapis.dashboards.v1.common.TimeFrame
-	(*durationpb.Duration)(nil),              // 10: google.protobuf.Duration
-	(*UUID)(nil),                             // 11: com.coralogixapis.dashboards.v1.UUID
-	(*FolderPath)(nil),                       // 12: com.coralogixapis.dashboards.v1.ast.FolderPath
-	(*Annotation)(nil),                       // 13: com.coralogixapis.dashboards.v1.ast.Annotation
-	(*DashboardAction)(nil),                  // 14: com.coralogixapis.dashboards.v1.common.DashboardAction
+	(*Filter)(nil),                           // 7: com.coralogixapis.dashboards.v1.ast.Filter
+	(*TimeFrame)(nil),                        // 8: com.coralogixapis.dashboards.v1.common.TimeFrame
+	(*durationpb.Duration)(nil),              // 9: google.protobuf.Duration
+	(*UUID)(nil),                             // 10: com.coralogixapis.dashboards.v1.UUID
+	(*FolderPath)(nil),                       // 11: com.coralogixapis.dashboards.v1.ast.FolderPath
+	(*Annotation)(nil),                       // 12: com.coralogixapis.dashboards.v1.ast.Annotation
 }
 var file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_depIdxs = []int32{
 	4,  // 0: com.coralogixapis.dashboards.v1.ast.Dashboard.id:type_name -> google.protobuf.StringValue
@@ -491,23 +468,21 @@ var file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_depIdxs = []int32{
 	4,  // 2: com.coralogixapis.dashboards.v1.ast.Dashboard.description:type_name -> google.protobuf.StringValue
 	5,  // 3: com.coralogixapis.dashboards.v1.ast.Dashboard.layout:type_name -> com.coralogixapis.dashboards.v1.ast.Layout
 	6,  // 4: com.coralogixapis.dashboards.v1.ast.Dashboard.variables:type_name -> com.coralogixapis.dashboards.v1.ast.Variable
-	7,  // 5: com.coralogixapis.dashboards.v1.ast.Dashboard.variables_v2:type_name -> com.coralogixapis.dashboards.v1.ast.variables.VariableV2
-	8,  // 6: com.coralogixapis.dashboards.v1.ast.Dashboard.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter
-	9,  // 7: com.coralogixapis.dashboards.v1.ast.Dashboard.absolute_time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrame
-	10, // 8: com.coralogixapis.dashboards.v1.ast.Dashboard.relative_time_frame:type_name -> google.protobuf.Duration
-	11, // 9: com.coralogixapis.dashboards.v1.ast.Dashboard.folder_id:type_name -> com.coralogixapis.dashboards.v1.UUID
-	12, // 10: com.coralogixapis.dashboards.v1.ast.Dashboard.folder_path:type_name -> com.coralogixapis.dashboards.v1.ast.FolderPath
-	13, // 11: com.coralogixapis.dashboards.v1.ast.Dashboard.annotations:type_name -> com.coralogixapis.dashboards.v1.ast.Annotation
-	1,  // 12: com.coralogixapis.dashboards.v1.ast.Dashboard.off:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOff
-	2,  // 13: com.coralogixapis.dashboards.v1.ast.Dashboard.two_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutes
-	3,  // 14: com.coralogixapis.dashboards.v1.ast.Dashboard.five_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutes
-	4,  // 15: com.coralogixapis.dashboards.v1.ast.Dashboard.slug_name:type_name -> google.protobuf.StringValue
-	14, // 16: com.coralogixapis.dashboards.v1.ast.Dashboard.actions:type_name -> com.coralogixapis.dashboards.v1.common.DashboardAction
-	17, // [17:17] is the sub-list for method output_type
-	17, // [17:17] is the sub-list for method input_type
-	17, // [17:17] is the sub-list for extension type_name
-	17, // [17:17] is the sub-list for extension extendee
-	0,  // [0:17] is the sub-list for field type_name
+	7,  // 5: com.coralogixapis.dashboards.v1.ast.Dashboard.filters:type_name -> com.coralogixapis.dashboards.v1.ast.Filter
+	8,  // 6: com.coralogixapis.dashboards.v1.ast.Dashboard.absolute_time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrame
+	9,  // 7: com.coralogixapis.dashboards.v1.ast.Dashboard.relative_time_frame:type_name -> google.protobuf.Duration
+	10, // 8: com.coralogixapis.dashboards.v1.ast.Dashboard.folder_id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	11, // 9: com.coralogixapis.dashboards.v1.ast.Dashboard.folder_path:type_name -> com.coralogixapis.dashboards.v1.ast.FolderPath
+	12, // 10: com.coralogixapis.dashboards.v1.ast.Dashboard.annotations:type_name -> com.coralogixapis.dashboards.v1.ast.Annotation
+	1,  // 11: com.coralogixapis.dashboards.v1.ast.Dashboard.off:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOff
+	2,  // 12: com.coralogixapis.dashboards.v1.ast.Dashboard.two_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutes
+	3,  // 13: com.coralogixapis.dashboards.v1.ast.Dashboard.five_minutes:type_name -> com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutes
+	4,  // 14: com.coralogixapis.dashboards.v1.ast.Dashboard.slug_name:type_name -> google.protobuf.StringValue
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_init() }
@@ -520,8 +495,6 @@ func file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_init() {
 	file_com_coralogixapis_dashboards_v1_ast_folder_path_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_layout_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_variable_proto_init()
-	file_com_coralogixapis_dashboards_v1_ast_variables_variable_v2_proto_init()
-	file_com_coralogixapis_dashboards_v1_common_action_proto_init()
 	file_com_coralogixapis_dashboards_v1_common_time_frame_proto_init()
 	file_com_coralogixapis_dashboards_v1_types_proto_init()
 	file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_msgTypes[0].OneofWrappers = []any{
