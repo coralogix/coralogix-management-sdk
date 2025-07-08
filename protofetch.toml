@@ -241,6 +241,11 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto",
     "src/com/coralogixapis/dashboards/v1/services/dashboards_service.proto",
     "src/com/coralogixapis/dashboards/v1/types.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables/variable_v2.proto",
+    "src/com/coralogixapis/dashboards/v1/common/action.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables/variable_display_type.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables/variable_source.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables/variable_value.proto",
 ]
 
 [cx-api-logs2metrics]

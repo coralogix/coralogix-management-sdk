@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.variables;
+
+enum VariableDisplayType {
+  VARIABLE_DISPLAY_TYPE_UNSPECIFIED = 0;
+  VARIABLE_DISPLAY_TYPE_LABEL_VALUE = 1;
+  VARIABLE_DISPLAY_TYPE_VALUE = 2;
+  VARIABLE_DISPLAY_TYPE_NOTHING = 3;
+}

@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.variables;
+
+import "google/protobuf/wrappers.proto";
+
+message VariableValue {
+  oneof value {
+    MultiStringValue multi_string = 1;
+    SingleStringValue single_string = 2;
+    SingleNumericValue single_numeric = 3;
+    RegexValue regex = 4;
+    LuceneQueryValue lucene = 5;
+  }
+
+  message MultiStringValue {
+    oneof value {
+      AllValue all = 1;
+      ListValue list = 2;
+    }
+    message AllValue {}
+    message ListValue {
+      repeated SingleStringValue values = 1;
+    }
+  }
+
+  message SingleStringValue {
+    google.protobuf.StringValue value = 1;
+    google.protobuf.StringValue label = 2;
+  }
+
+  message SingleNumericValue {
+    google.protobuf.FloatValue value = 1;
+    google.protobuf.StringValue label = 2;
+  }
+
+  message RegexValue {
+    google.protobuf.StringValue value = 1;
+    google.protobuf.StringValue label = 2;
+  }
+
+  message LuceneQueryValue {
+    google.protobuf.StringValue value = 1;
+    google.protobuf.StringValue label = 2;
+  }
+}
