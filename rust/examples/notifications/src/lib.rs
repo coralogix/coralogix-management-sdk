@@ -106,7 +106,6 @@ mod tests {
             create_time: None,
             update_time: None,
             config_overrides: vec![EntityTypeConfigOverrides {
-                deprecated_entity_type: "alerts".into(),
                 entity_type: EntityType::Alerts.into(),
                 fields: vec![TemplatedConnectorConfigField {
                     field_name: "additionalBodyFields".into(),
@@ -170,7 +169,6 @@ mod tests {
             create_time: None,
             update_time: None,
             config_overrides: vec![EntityTypeConfigOverrides {
-                deprecated_entity_type: "alerts".into(),
                 entity_type: EntityType::Alerts.into(),
                 fields: vec![TemplatedConnectorConfigField {
                     field_name: "integrationKey".into(),
@@ -192,9 +190,7 @@ mod tests {
                 condition_type: Some(ConditionType {
                     condition: Some(Condition::MatchEntityTypeAndSubType(
                         MatchEntityTypeAndSubTypeCondition {
-                            deprecated_entity_type: "alerts".into(),
                             entity_sub_type: "logsImmediateResolved".into(),
-                            entity_type: EntityType::Alerts.into(),
                         },
                     )),
                 }),
@@ -231,9 +227,7 @@ mod tests {
                 condition_type: Some(ConditionType {
                     condition: Some(Condition::MatchEntityTypeAndSubType(
                         MatchEntityTypeAndSubTypeCondition {
-                            deprecated_entity_type: "alerts".into(),
                             entity_sub_type: "logsImmediateResolved".into(),
-                            entity_type: EntityType::Alerts.into(),
                         },
                     )),
                 }),
@@ -270,9 +264,7 @@ mod tests {
                 condition_type: Some(ConditionType {
                     condition: Some(Condition::MatchEntityTypeAndSubType(
                         MatchEntityTypeAndSubTypeCondition {
-                            deprecated_entity_type: "alerts".into(),
                             entity_sub_type: "logsImmediateTriggered".into(),
-                            entity_type: EntityType::Alerts.into(),
                         },
                     )),
                 }),
