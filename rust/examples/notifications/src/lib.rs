@@ -84,7 +84,7 @@ mod tests {
     };
 
     fn create_test_https_connector(name: String) -> Connector {
-        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string());
+        let fullName = format!("{}-{}", name, Uuid::new_v4());
         Connector {
             name: fullName,
             description: "Connector for Notification Center testing.".into(),
@@ -176,7 +176,7 @@ mod tests {
     }
 
     fn create_https_preset(name: String) -> Preset {
-        let fullName = format!("{}-{}", name, Uuid::new_v4().to_string());
+        let fullName = format!("{}-{}", name, Uuid::new_v4());
         Preset {
             name: fullName,
             description: "Preset for Notification Center testing.".into(),
@@ -209,7 +209,6 @@ mod tests {
             id: None,
             update_time: None,
             parent_id: Some("preset_system_generic_https_alerts_empty".into()),
-            ..Default::default()
         }
     }
 
@@ -246,7 +245,6 @@ mod tests {
             id: None,
             update_time: None,
             parent_id: Some("preset_system_slack_alerts_empty".into()),
-            ..Default::default()
         }
     }
 
@@ -277,7 +275,6 @@ mod tests {
             id: None,
             update_time: None,
             parent_id: Some("preset_system_pagerduty_alerts_basic".into()),
-            ..Default::default()
         }
     }
 
@@ -298,7 +295,7 @@ mod tests {
 
         let success: bool = match notifications_client
             .test_connector_config(
-                (&connector.r#type()).clone(),
+                connector.r#type(),
                 fields,
                 EntityType::Alerts,
                 "generic_https_default".into(),
@@ -366,7 +363,7 @@ mod tests {
 
         let success: bool = match notifications_client
             .test_connector_config(
-                (&connector.r#type()).clone(),
+                connector.r#type(),
                 fields,
                 EntityType::Alerts,
                 "slack_raw".into(),
@@ -611,14 +608,14 @@ mod tests {
                 targets: vec![RoutingTarget {
                     connector_id: connector_id.clone(),
                     preset_id: Some(preset_id.clone()),
-                    ..Default::default()
+                    custom_details: std::collections::HashMap::new(),
                 }],
                 name: Some("TestRoutingRule".to_string()),
-                ..Default::default()
+                custom_details: std::collections::HashMap::new(),
             }],
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
-            ..Default::default()
+            evaluation_mode: None,
         };
 
         let create_or_replace_response = notifications_client
@@ -760,12 +757,14 @@ mod tests {
                 targets: vec![RoutingTarget {
                     connector_id: connector_id.clone(),
                     preset_id: Some(preset_id.clone()),
-                    ..Default::default()
+                    custom_details: std::collections::HashMap::new(),
                 }],
                 name: Some("TestRoutingRule".to_string()),
-                ..Default::default()
+                custom_details: std::collections::HashMap::new(),
             }],
-            ..Default::default()
+            evaluation_mode: None,
+            fallback: vec![],
+            entity_labels: std::collections::HashMap::new(),
         };
 
         notifications_client

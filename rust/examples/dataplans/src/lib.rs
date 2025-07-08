@@ -90,6 +90,6 @@ mod tests {
         let data_usage_metrics_export_status_response =
             client.get_data_usage_metrics_export_status().await.unwrap();
 
-        assert_eq!(data_usage_metrics_export_status_response.enabled, true);
+        assert!(data_usage_metrics_export_status_response.enabled);
     }
 }

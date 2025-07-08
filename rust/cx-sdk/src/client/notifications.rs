@@ -173,10 +173,7 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to get.
     pub async fn get_connector(&self, connector_id: String) -> Result<GetConnectorResponse> {
         let request = make_request_with_metadata(
-            GetConnectorRequest {
-                id: connector_id,
-                ..Default::default()
-            },
+            GetConnectorRequest { id: connector_id },
             &self.metadata_map,
         );
         {
@@ -287,10 +284,7 @@ impl NotificationsClient {
     /// * `connector_id` - The ID of the connector to delete.
     pub async fn delete_connector(&self, connector_id: String) -> Result<DeleteConnectorResponse> {
         let request = make_request_with_metadata(
-            DeleteConnectorRequest {
-                id: connector_id,
-                ..Default::default()
-            },
+            DeleteConnectorRequest { id: connector_id },
             &self.metadata_map,
         );
         {
@@ -318,10 +312,7 @@ impl NotificationsClient {
         connector_ids: Vec<String>,
     ) -> Result<BatchGetConnectorsResponse> {
         let request = make_request_with_metadata(
-            BatchGetConnectorsRequest {
-                connector_ids,
-                ..Default::default()
-            },
+            BatchGetConnectorsRequest { connector_ids },
             &self.metadata_map,
         );
         {
@@ -423,13 +414,8 @@ impl NotificationsClient {
     /// # Arguments
     /// * `id` - The ID of the preset to delete.
     pub async fn delete_custom_preset(&self, id: String) -> Result<DeleteCustomPresetResponse> {
-        let request = make_request_with_metadata(
-            DeleteCustomPresetRequest {
-                id,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request =
+            make_request_with_metadata(DeleteCustomPresetRequest { id }, &self.metadata_map);
         {
             let mut client = self.presets_client.lock().await.clone();
 
@@ -451,13 +437,8 @@ impl NotificationsClient {
     /// # Arguments
     /// * `id` - The user-facing ID of the preset to set as the default.
     pub async fn set_preset_as_default(&self, id: String) -> Result<SetPresetAsDefaultResponse> {
-        let request = make_request_with_metadata(
-            SetPresetAsDefaultRequest {
-                id,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request =
+            make_request_with_metadata(SetPresetAsDefaultRequest { id }, &self.metadata_map);
 
         let mut client = self.presets_client.lock().await.clone();
 
@@ -478,13 +459,7 @@ impl NotificationsClient {
     /// # Arguments
     /// * `id` - The ID of the preset to get.
     pub async fn get_preset(&self, id: String) -> Result<GetPresetResponse> {
-        let request = make_request_with_metadata(
-            GetPresetRequest {
-                id,
-                ..Default::default()
-            },
-            &self.metadata_map,
-        );
+        let request = make_request_with_metadata(GetPresetRequest { id }, &self.metadata_map);
         {
             let mut client = self.presets_client.lock().await.clone();
 
@@ -515,7 +490,6 @@ impl NotificationsClient {
             ListPresetSummariesRequest {
                 connector_type: connector_type.map(From::from),
                 entity_type: entity_type.into(),
-                ..Default::default()
             },
             &self.metadata_map,
         );
@@ -580,7 +554,6 @@ impl NotificationsClient {
             GetDefaultPresetSummaryRequest {
                 connector_type: connector_type.into(),
                 entity_type: entity_type.into(),
-                ..Default::default()
             },
             &self.metadata_map,
         );
