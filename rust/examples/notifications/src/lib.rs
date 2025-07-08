@@ -112,7 +112,6 @@ mod tests {
                     template: "{\"priority\": \"{{alertDef.priority}}\"}".into(),
                 }],
             }],
-            user_defined_id: None,
         }
     }
 
@@ -148,7 +147,6 @@ mod tests {
                     template: "{{alertDef.priority}}".into(),
                 }],
             }],
-            user_defined_id: None,
         }
     }
 
@@ -174,7 +172,6 @@ mod tests {
                     template: "integration_{{alertDef.priority}}".into(),
                 }],
             }],
-            user_defined_id: None,
         }
     }
 
