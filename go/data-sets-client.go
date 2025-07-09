@@ -62,7 +62,7 @@ const (
 //
 // Deprecated: This API will be changed significantly in the future.
 type DataSetClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new data set.
@@ -157,6 +157,6 @@ func (d DataSetClient) List(ctx context.Context, req *ListDataSetsRequest) (*enr
 }
 
 // NewDataSetClient creates a new data set client.
-func NewDataSetClient(c *CallPropertiesCreator) *DataSetClient {
+func NewDataSetClient(c CallPropertiesCreator) *DataSetClient {
 	return &DataSetClient{callPropertiesCreator: c}
 }

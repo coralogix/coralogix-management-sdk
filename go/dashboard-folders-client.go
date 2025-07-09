@@ -51,7 +51,7 @@ const (
 
 // DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.
 type DashboardsFoldersClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new dashboard folder.
@@ -145,6 +145,6 @@ func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.Del
 }
 
 // NewDashboardsFoldersClient Creates a new DashboardsFoldersClient.
-func NewDashboardsFoldersClient(c *CallPropertiesCreator) *DashboardsFoldersClient {
+func NewDashboardsFoldersClient(c CallPropertiesCreator) *DashboardsFoldersClient {
 	return &DashboardsFoldersClient{callPropertiesCreator: c}
 }

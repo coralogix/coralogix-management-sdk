@@ -148,7 +148,7 @@ const events2MetricsFeatureGroupID = "events2metrics"
 
 // Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/
 type Events2MetricsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create Creates a new metric.
@@ -296,6 +296,6 @@ func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResp
 }
 
 // NewEvents2MetricsClient creates a new Events2MetricsClient.
-func NewEvents2MetricsClient(c *CallPropertiesCreator) *Events2MetricsClient {
+func NewEvents2MetricsClient(c CallPropertiesCreator) *Events2MetricsClient {
 	return &Events2MetricsClient{callPropertiesCreator: c}
 }

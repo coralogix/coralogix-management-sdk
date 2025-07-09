@@ -65,7 +65,7 @@ const (
 
 // ArchiveLogsClient is a client for the Coralogix Archive Logs API.
 type ArchiveLogsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Update updates the archive logs target.
@@ -123,6 +123,6 @@ func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.
 }
 
 // NewArchiveLogsClient creates a new archive logs client.
-func NewArchiveLogsClient(c *CallPropertiesCreator) *ArchiveLogsClient {
+func NewArchiveLogsClient(c CallPropertiesCreator) *ArchiveLogsClient {
 	return &ArchiveLogsClient{callPropertiesCreator: c}
 }
