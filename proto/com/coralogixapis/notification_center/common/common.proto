@@ -5,11 +5,13 @@ package com.coralogixapis.notification_center;
 option go_package = "com/coralogixapis/notification_center";
 
 enum ConnectorType {
+  reserved 4;
+  reserved "AWS";
+
   CONNECTOR_TYPE_UNSPECIFIED = 0;
   SLACK = 1;
   GENERIC_HTTPS = 2;
   PAGERDUTY = 3;
-  AWS = 4;
   IBM_EVENT_NOTIFICATIONS = 5;
 }
 

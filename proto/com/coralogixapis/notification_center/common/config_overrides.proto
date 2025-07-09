@@ -2,7 +2,6 @@ syntax = "proto3";
 
 package com.coralogixapis.notification_center;
 
-import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 
 option go_package = "com/coralogixapis/notification_center";
@@ -27,12 +26,13 @@ message MessageConfig {
 }
 
 message MatchEntityTypeCondition {
-  string deprecated_entity_type = 1 [deprecated = true];
-  EntityType entity_type = 2 [deprecated = true];
+  reserved 1, 2;
+  reserved "deprecated_entity_type", "entity_type";
 }
 
 message MatchEntityTypeAndSubTypeCondition {
-  string deprecated_entity_type = 1 [deprecated = true];
+  reserved 1, 3;
+  reserved "deprecated_entity_type", "entity_type";
+
   string entity_sub_type = 2;
-  EntityType entity_type = 3 [deprecated = true];
 }

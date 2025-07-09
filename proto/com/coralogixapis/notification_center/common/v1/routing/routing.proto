@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogixapis.notification_center.routing;
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-import "com/coralogixapis/notification_center/common/v1/identifier.proto";
 
 option go_package = "com/coralogixapis/notification_center/routing";
 
@@ -36,8 +35,8 @@ message RoutingRule {
 }
 
 message RoutingTarget {
-  reserved 3;
-  reserved "config_overrides";
+  reserved 1, 2, 3, 5, 6;
+  reserved "deprecated_connector_id", "deprecated_preset_id", "config_overrides", "connector_identifier", "preset_identifier";
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -51,21 +50,17 @@ message RoutingTarget {
     }
   };
 
-  //Connector ID to send the notification to
-  string deprecated_connector_id = 1 [deprecated = true];
-  // Preset to use for rendering notification content, default preset is used if not provided
-  optional string deprecated_preset_id = 2 [deprecated = true];
   map<string, string> custom_details = 4;
-  ConnectorIdentifier connector_identifier = 5 [deprecated = true];
-  optional PresetIdentifier preset_identifier = 6 [deprecated = true];
   string connector_id = 7;
   optional string preset_id = 8;
 }
 
 message SourceOverrides {
+  reserved 4;
+  reserved "deprecated_connector_config_fields";
+
   string payload_type = 1;
   repeated MessageConfigField message_config_fields = 3;
-  repeated ConnectorConfigField deprecated_connector_config_fields = 4 [deprecated=true];
   repeated TemplatedConnectorConfigField connector_config_fields = 5;
 }
 

@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 env:
-  PROTOC_VERSION: "26.1"
+  PROTOC_VERSION: "29.3"
 
   
 jobs:

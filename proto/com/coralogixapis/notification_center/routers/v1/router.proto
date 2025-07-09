@@ -17,6 +17,9 @@ enum RouterEvaluationMode {
 // The global router contains a pre-configured list of routing rules
 // and can be specified as a part of the notification request.
 message GlobalRouter {
+  reserved 2, 3;
+  reserved "user_defined_id", "deprecated_entity_type";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Global Router"
@@ -30,10 +33,6 @@ message GlobalRouter {
   };
   // A unique identifier - automatically generated unless provided by the user
   optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
-  // DEPRECATED - A unique identifier provided by the user
-  optional string user_defined_id = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"user-provided-id\"" }];
-  // The source of the notification (e.g., "alerts")
-  string deprecated_entity_type = 3 [deprecated = true];
   string name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Router\"" }];
   string description = 5;
   // The routing rules to be applied in order to determine the destinations of the notification, teh first rule that matches will be used

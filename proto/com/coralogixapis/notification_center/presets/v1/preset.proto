@@ -10,8 +10,8 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 option go_package = "com/coralogixapis/notification_center/presets/v1";
 
 message Preset {
-  reserved 6;
-  reserved "parent";
+  reserved 2, 3, 6;
+  reserved "user_defined_id", "deprecated_entity_type", "parent";
 
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -26,9 +26,6 @@ message Preset {
   };
   // A unique identifier - automatically generated unless provided by the user
   optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
-  // DEPRECATED - A unique identifier provided by the user
-  optional string user_defined_id = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"user-preset-id\"" }];
-  string deprecated_entity_type = 3 [deprecated = true];
   ConnectorType connector_type = 4;
   // A list of of configuration override templates, each associated with a specific output schema and condition
   repeated ConfigOverrides config_overrides = 5;
@@ -45,6 +42,9 @@ message Preset {
 }
 
 message PresetSummary {
+  reserved 2, 3;
+  reserved "user_defined_id", "deprecated_entity_type";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Preset Summary"
@@ -57,8 +57,6 @@ message PresetSummary {
     }
   };
   string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
-  string user_defined_id = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"user-preset-id\"" }];
-  string deprecated_entity_type = 3 [deprecated = true];
   ConnectorType connector_type = 4;
   optional string parent_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"c246e826-10c2-405e-8d3f-afcc24ad4d15\"" }];
   string name = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Preset\"", max_length: 200 }];

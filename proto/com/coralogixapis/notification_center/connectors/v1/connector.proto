@@ -10,9 +10,8 @@ import "protoc-gen-openapiv2/options/annotations.proto";
 option go_package = "com/coralogixapis/notification_center/connectors/v1";
 
 message Connector {
-  // Deprecated with the introduction of Global connectors.
-  reserved 9, 10;
-  reserved "connector_configs", "entity_type";
+  reserved 2, 9, 10;
+  reserved "user_defined_id", "connector_configs", "entity_type";
   
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -27,8 +26,6 @@ message Connector {
   };
   // A unique identifier - automatically generated unless provided by the user
   optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
-  // DEPRECATED - A unique identifier provided by the user
-  optional string user_defined_id = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"user-connector-id\"" }];
   ConnectorType type = 3;
   optional uint32 team_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"12345\"" }];
   string name = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Slack Connector\"", max_length: 200 }];
@@ -60,22 +57,19 @@ message ConnectorInternal {
 
 
 message EntityTypeConfigOverrides {
-  reserved 2;
-  reserved "connector_configs";
+  reserved 1, 2;
+  reserved "deprecated_entity_type", "connector_configs";
 
-  string deprecated_entity_type = 1 [deprecated = true];
   EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
   repeated TemplatedConnectorConfigField fields = 4;
 }
 
 message ConnectorSummary {
   // Deprecated with the introduction of Global connectors.
-  reserved 9;
-  reserved "entity_type";
+  reserved 2, 9;
+  reserved "user_defined_id", "entity_type";
   
   optional string id = 1;
-  // for declarative API
-  optional string user_defined_id = 2 [deprecated = true];
   ConnectorType type = 3;
   optional uint32 team_id = 4;
   string name = 5;

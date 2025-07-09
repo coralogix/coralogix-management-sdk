@@ -355,7 +355,7 @@ mod tests {
 
         let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
 
-        assert!(retrieved_alerts.len() > 0);
+        assert!(!retrieved_alerts.is_empty());
 
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {
@@ -446,7 +446,7 @@ mod tests {
 
         let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
 
-        assert!(retrieved_alerts.len() > 0);
+        assert!(!retrieved_alerts.is_empty());
 
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {
@@ -538,7 +538,7 @@ mod tests {
 
         let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
 
-        assert!(retrieved_alerts.len() > 0);
+        assert!(!retrieved_alerts.is_empty());
 
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {
@@ -630,7 +630,7 @@ mod tests {
 
         let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
 
-        assert!(retrieved_alerts.len() > 0);
+        assert!(!retrieved_alerts.is_empty());
 
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {
@@ -693,7 +693,7 @@ mod tests {
 
         let retrieved_alerts = alerts_client.list().await.unwrap().alert_defs;
 
-        assert!(retrieved_alerts.len() > 0);
+        assert!(!retrieved_alerts.is_empty());
 
         let updated_alert = AlertDef {
             alert_def_properties: Some(AlertDefProperties {

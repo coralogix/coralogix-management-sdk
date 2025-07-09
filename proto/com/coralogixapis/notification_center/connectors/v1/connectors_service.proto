@@ -7,7 +7,6 @@ import "com/coralogixapis/notification_center/connectors/v1/connector.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-import "com/coralogixapis/notification_center/common/v1/identifier.proto";
 
 option go_package = "com/coralogixapis/notification_center/connectors/v1";
 
@@ -130,6 +129,9 @@ message ReplaceConnectorResponse {
 }
 
 message DeleteConnectorRequest {
+  reserved 1, 2;
+  reserved "deprecated_id", "identifier";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Delete Connector Request"
@@ -141,8 +143,6 @@ message DeleteConnectorRequest {
       description: "Find out more about notification center"
     }
   };
-  string deprecated_id = 1 [deprecated = true];
-  ConnectorIdentifier identifier = 2 [deprecated = true];
   string id = 3;
 }
 
@@ -150,6 +150,9 @@ message DeleteConnectorResponse {
 }
 
 message GetConnectorRequest {
+  reserved 1, 2;
+  reserved "deprecated_id", "identifier";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Connector Request"
@@ -162,8 +165,6 @@ message GetConnectorRequest {
     }
   };
 
-  string deprecated_id = 1 [deprecated = true];
-  ConnectorIdentifier identifier = 2 [deprecated = true];
   string id = 3;
 }
 
@@ -216,6 +217,9 @@ message ListConnectorsResponse {
 }
 
 message BatchGetConnectorsRequest {
+  reserved 1, 2;
+  reserved "deprecated_ids", "ids";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Batch Get Connectors Request"
@@ -227,8 +231,6 @@ message BatchGetConnectorsRequest {
       description: "Find out more about notification center"
     }
   };
-  repeated string deprecated_ids = 1 [deprecated = true];
-  repeated ConnectorIdentifier ids = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
   repeated string connector_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
 }
 
@@ -249,6 +251,9 @@ message BatchGetConnectorsResponse {
 }
 
 message BatchGetConnectorSummariesRequest {
+  reserved 1, 2;
+  reserved "deprecated_ids", "ids";
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Batch Get Connector Summaries Request"
@@ -260,8 +265,6 @@ message BatchGetConnectorSummariesRequest {
       description: "Find out more about notification center"
     }
   };
-  repeated string deprecated_ids = 1 [deprecated = true];
-  repeated ConnectorIdentifier ids = 2 [deprecated = true, (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
   repeated string connector_ids = 3;
 }
 message BatchGetConnectorSummariesResponse {

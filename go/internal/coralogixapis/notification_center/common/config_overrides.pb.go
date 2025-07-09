@@ -209,11 +209,7 @@ func (x *MessageConfig) GetFields() []*v1.MessageConfigField {
 }
 
 type MatchEntityTypeCondition struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-	DeprecatedEntityType string `protobuf:"bytes,1,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-	EntityType    EntityType `protobuf:"varint,2,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -248,29 +244,9 @@ func (*MatchEntityTypeCondition) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_common_config_overrides_proto_rawDescGZIP(), []int{3}
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-func (x *MatchEntityTypeCondition) GetDeprecatedEntityType() string {
-	if x != nil {
-		return x.DeprecatedEntityType
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-func (x *MatchEntityTypeCondition) GetEntityType() EntityType {
-	if x != nil {
-		return x.EntityType
-	}
-	return EntityType_ENTITY_TYPE_UNSPECIFIED
-}
-
 type MatchEntityTypeAndSubTypeCondition struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-	DeprecatedEntityType string `protobuf:"bytes,1,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
-	EntitySubType        string `protobuf:"bytes,2,opt,name=entity_sub_type,json=entitySubType,proto3" json:"entity_sub_type,omitempty"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-	EntityType    EntityType `protobuf:"varint,3,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EntitySubType string                 `protobuf:"bytes,2,opt,name=entity_sub_type,json=entitySubType,proto3" json:"entity_sub_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -305,14 +281,6 @@ func (*MatchEntityTypeAndSubTypeCondition) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_common_config_overrides_proto_rawDescGZIP(), []int{4}
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-func (x *MatchEntityTypeAndSubTypeCondition) GetDeprecatedEntityType() string {
-	if x != nil {
-		return x.DeprecatedEntityType
-	}
-	return ""
-}
-
 func (x *MatchEntityTypeAndSubTypeCondition) GetEntitySubType() string {
 	if x != nil {
 		return x.EntitySubType
@@ -320,19 +288,11 @@ func (x *MatchEntityTypeAndSubTypeCondition) GetEntitySubType() string {
 	return ""
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/common/config_overrides.proto.
-func (x *MatchEntityTypeAndSubTypeCondition) GetEntityType() EntityType {
-	if x != nil {
-		return x.EntityType
-	}
-	return EntityType_ENTITY_TYPE_UNSPECIFIED
-}
-
 var File_com_coralogixapis_notification_center_common_config_overrides_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_common_config_overrides_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/notification_center/common/config_overrides.proto\x12%com.coralogixapis.notification_center\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\"\x8a\x02\n" +
+	"Ccom/coralogixapis/notification_center/common/config_overrides.proto\x12%com.coralogixapis.notification_center\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\"\x8a\x02\n" +
 	"\x0fConfigOverrides\x12[\n" +
 	"\x0econdition_type\x18\x01 \x01(\v24.com.coralogixapis.notification_center.ConditionTypeR\rconditionType\x12&\n" +
 	"\fpayload_type\x18\x02 \x01(\tH\x00R\vpayloadType\x88\x01\x01\x12[\n" +
@@ -343,16 +303,10 @@ const file_com_coralogixapis_notification_center_common_config_overrides_proto_r
 	"\x1ematch_entity_type_and_sub_type\x18\x02 \x01(\v2I.com.coralogixapis.notification_center.MatchEntityTypeAndSubTypeConditionH\x00R\x19matchEntityTypeAndSubTypeB\v\n" +
 	"\tcondition\"b\n" +
 	"\rMessageConfig\x12Q\n" +
-	"\x06fields\x18\x01 \x03(\v29.com.coralogixapis.notification_center.MessageConfigFieldR\x06fields\"\xac\x01\n" +
-	"\x18MatchEntityTypeCondition\x128\n" +
-	"\x16deprecated_entity_type\x18\x01 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12V\n" +
-	"\ventity_type\x18\x02 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\x02\x18\x01R\n" +
-	"entityType\"\xde\x01\n" +
-	"\"MatchEntityTypeAndSubTypeCondition\x128\n" +
-	"\x16deprecated_entity_type\x18\x01 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12&\n" +
-	"\x0fentity_sub_type\x18\x02 \x01(\tR\rentitySubType\x12V\n" +
-	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\x02\x18\x01R\n" +
-	"entityTypeB'Z%com/coralogixapis/notification_centerb\x06proto3"
+	"\x06fields\x18\x01 \x03(\v29.com.coralogixapis.notification_center.MessageConfigFieldR\x06fields\"K\n" +
+	"\x18MatchEntityTypeConditionJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16deprecated_entity_typeR\ventity_type\"}\n" +
+	"\"MatchEntityTypeAndSubTypeCondition\x12&\n" +
+	"\x0fentity_sub_type\x18\x02 \x01(\tR\rentitySubTypeJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x04R\x16deprecated_entity_typeR\ventity_typeB'Z%com/coralogixapis/notification_centerb\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_common_config_overrides_proto_rawDescOnce sync.Once
@@ -374,7 +328,6 @@ var file_com_coralogixapis_notification_center_common_config_overrides_proto_goT
 	(*MatchEntityTypeCondition)(nil),           // 3: com.coralogixapis.notification_center.MatchEntityTypeCondition
 	(*MatchEntityTypeAndSubTypeCondition)(nil), // 4: com.coralogixapis.notification_center.MatchEntityTypeAndSubTypeCondition
 	(*v1.MessageConfigField)(nil),              // 5: com.coralogixapis.notification_center.MessageConfigField
-	(EntityType)(0),                            // 6: com.coralogixapis.notification_center.EntityType
 }
 var file_com_coralogixapis_notification_center_common_config_overrides_proto_depIdxs = []int32{
 	1, // 0: com.coralogixapis.notification_center.ConfigOverrides.condition_type:type_name -> com.coralogixapis.notification_center.ConditionType
@@ -382,13 +335,11 @@ var file_com_coralogixapis_notification_center_common_config_overrides_proto_dep
 	3, // 2: com.coralogixapis.notification_center.ConditionType.match_entity_type:type_name -> com.coralogixapis.notification_center.MatchEntityTypeCondition
 	4, // 3: com.coralogixapis.notification_center.ConditionType.match_entity_type_and_sub_type:type_name -> com.coralogixapis.notification_center.MatchEntityTypeAndSubTypeCondition
 	5, // 4: com.coralogixapis.notification_center.MessageConfig.fields:type_name -> com.coralogixapis.notification_center.MessageConfigField
-	6, // 5: com.coralogixapis.notification_center.MatchEntityTypeCondition.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	6, // 6: com.coralogixapis.notification_center.MatchEntityTypeAndSubTypeCondition.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	7, // [7:7] is the sub-list for method output_type
-	7, // [7:7] is the sub-list for method input_type
-	7, // [7:7] is the sub-list for extension type_name
-	7, // [7:7] is the sub-list for extension extendee
-	0, // [0:7] is the sub-list for field type_name
+	5, // [5:5] is the sub-list for method output_type
+	5, // [5:5] is the sub-list for method input_type
+	5, // [5:5] is the sub-list for extension type_name
+	5, // [5:5] is the sub-list for extension extendee
+	0, // [0:5] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_common_config_overrides_proto_init() }
@@ -396,7 +347,6 @@ func file_com_coralogixapis_notification_center_common_config_overrides_proto_in
 	if File_com_coralogixapis_notification_center_common_config_overrides_proto != nil {
 		return
 	}
-	file_com_coralogixapis_notification_center_common_common_proto_init()
 	file_com_coralogixapis_notification_center_common_config_overrides_proto_msgTypes[0].OneofWrappers = []any{}
 	file_com_coralogixapis_notification_center_common_config_overrides_proto_msgTypes[1].OneofWrappers = []any{
 		(*ConditionType_MatchEntityType)(nil),

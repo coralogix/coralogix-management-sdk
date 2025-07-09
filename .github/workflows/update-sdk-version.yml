@@ -11,7 +11,7 @@ on:
         description: 'SDK version to update to'
         required: true
 env:
-  PROTOC_VERSION: "26.1"
+  PROTOC_VERSION: "29.3"
 
   
 jobs:

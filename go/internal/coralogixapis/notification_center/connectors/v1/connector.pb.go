@@ -28,15 +28,11 @@ const (
 type Connector struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// A unique identifier - automatically generated unless provided by the user
-	Id *string `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	// DEPRECATED - A unique identifier provided by the user
-	//
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-	UserDefinedId *string              `protobuf:"bytes,2,opt,name=user_defined_id,json=userDefinedId,proto3,oneof" json:"user_defined_id,omitempty"`
-	Type          common.ConnectorType `protobuf:"varint,3,opt,name=type,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"type,omitempty"`
-	TeamId        *uint32              `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3,oneof" json:"team_id,omitempty"`
-	Name          string               `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
-	Description   string               `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
+	Id          *string              `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	Type        common.ConnectorType `protobuf:"varint,3,opt,name=type,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"type,omitempty"`
+	TeamId      *uint32              `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3,oneof" json:"team_id,omitempty"`
+	Name        string               `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Description string               `protobuf:"bytes,6,opt,name=description,proto3" json:"description,omitempty"`
 	// System-generated timestamp for when the connector was last updated
 	CreateTime *timestamppb.Timestamp `protobuf:"bytes,7,opt,name=create_time,json=createTime,proto3,oneof" json:"create_time,omitempty"`
 	// System-generated timestamp for when the connector was last updated
@@ -81,14 +77,6 @@ func (*Connector) Descriptor() ([]byte, []int) {
 func (x *Connector) GetId() string {
 	if x != nil && x.Id != nil {
 		return *x.Id
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-func (x *Connector) GetUserDefinedId() string {
-	if x != nil && x.UserDefinedId != nil {
-		return *x.UserDefinedId
 	}
 	return ""
 }
@@ -269,13 +257,11 @@ func (x *ConnectorInternal) GetConnectorConfig() *ConnectorConfig {
 }
 
 type EntityTypeConfigOverrides struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-	DeprecatedEntityType string                              `protobuf:"bytes,1,opt,name=deprecated_entity_type,json=deprecatedEntityType,proto3" json:"deprecated_entity_type,omitempty"`
-	EntityType           common.EntityType                   `protobuf:"varint,3,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
-	Fields               []*v1.TemplatedConnectorConfigField `protobuf:"bytes,4,rep,name=fields,proto3" json:"fields,omitempty"`
-	unknownFields        protoimpl.UnknownFields
-	sizeCache            protoimpl.SizeCache
+	state         protoimpl.MessageState              `protogen:"open.v1"`
+	EntityType    common.EntityType                   `protobuf:"varint,3,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	Fields        []*v1.TemplatedConnectorConfigField `protobuf:"bytes,4,rep,name=fields,proto3" json:"fields,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *EntityTypeConfigOverrides) Reset() {
@@ -308,14 +294,6 @@ func (*EntityTypeConfigOverrides) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_connectors_v1_connector_proto_rawDescGZIP(), []int{2}
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-func (x *EntityTypeConfigOverrides) GetDeprecatedEntityType() string {
-	if x != nil {
-		return x.DeprecatedEntityType
-	}
-	return ""
-}
-
 func (x *EntityTypeConfigOverrides) GetEntityType() common.EntityType {
 	if x != nil {
 		return x.EntityType
@@ -331,12 +309,8 @@ func (x *EntityTypeConfigOverrides) GetFields() []*v1.TemplatedConnectorConfigFi
 }
 
 type ConnectorSummary struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	Id    *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	// for declarative API
-	//
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-	UserDefinedId *string                `protobuf:"bytes,2,opt,name=user_defined_id,json=userDefinedId,proto3,oneof" json:"user_defined_id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	Type          common.ConnectorType   `protobuf:"varint,3,opt,name=type,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"type,omitempty"`
 	TeamId        *uint32                `protobuf:"varint,4,opt,name=team_id,json=teamId,proto3,oneof" json:"team_id,omitempty"`
 	Name          string                 `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
@@ -380,14 +354,6 @@ func (*ConnectorSummary) Descriptor() ([]byte, []int) {
 func (x *ConnectorSummary) GetId() string {
 	if x != nil && x.Id != nil {
 		return *x.Id
-	}
-	return ""
-}
-
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/connectors/v1/connector.proto.
-func (x *ConnectorSummary) GetUserDefinedId() string {
-	if x != nil && x.UserDefinedId != nil {
-		return *x.UserDefinedId
 	}
 	return ""
 }
@@ -534,30 +500,28 @@ var File_com_coralogixapis_notification_center_connectors_v1_connector_proto pro
 
 const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd7\b\n" +
+	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x91\b\n" +
 	"\tConnector\x12@\n" +
-	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12G\n" +
-	"\x0fuser_defined_id\x18\x02 \x01(\tB\x1a\x92A\x15J\x13\"user-connector-id\"\x18\x01H\x01R\ruserDefinedId\x88\x01\x01\x12H\n" +
+	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12H\n" +
 	"\x04type\x18\x03 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x12*\n" +
-	"\ateam_id\x18\x04 \x01(\rB\f\x92A\tJ\a\"12345\"H\x02R\x06teamId\x88\x01\x01\x120\n" +
+	"\ateam_id\x18\x04 \x01(\rB\f\x92A\tJ\a\"12345\"H\x01R\x06teamId\x88\x01\x01\x120\n" +
 	"\x04name\x18\x05 \x01(\tB\x1c\x92A\x19J\x14\"My Slack Connector\"x\xc8\x01R\x04name\x12L\n" +
 	"\vdescription\x18\x06 \x01(\tB*\x92A'J\"\"Connector for team notifications\"x\x88'R\vdescription\x12@\n" +
-	"\vcreate_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x03R\n" +
+	"\vcreate_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x02R\n" +
 	"createTime\x88\x01\x01\x12@\n" +
-	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x04R\n" +
+	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x03R\n" +
 	"updateTime\x88\x01\x01\x12y\n" +
 	"\x10config_overrides\x18\v \x03(\v2N.com.coralogixapis.notification_center.connectors.v1.EntityTypeConfigOverridesR\x0fconfigOverrides\x12o\n" +
 	"\x10connector_config\x18\f \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfig:\xe5\x01\x92A\xe1\x01\n" +
 	"b*\tConnector23A connector configuration for sending notifications\xd2\x01\x04type\xd2\x01\x04name\xd2\x01\x11connector_configs*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x05\n" +
-	"\x03_idB\x12\n" +
-	"\x10_user_defined_idB\n" +
+	"\x03_idB\n" +
 	"\n" +
 	"\b_team_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +
-	"\f_update_timeJ\x04\b\t\x10\n" +
+	"\f_update_timeJ\x04\b\x02\x10\x03J\x04\b\t\x10\n" +
 	"J\x04\b\n" +
-	"\x10\vR\x11connector_configsR\ventity_type\"\xd8\x04\n" +
+	"\x10\vR\x0fuser_defined_idR\x11connector_configsR\ventity_type\"\xd8\x04\n" +
 	"\x11ConnectorInternal\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1f\n" +
 	"\vinternal_id\x18\x02 \x01(\tR\n" +
@@ -573,31 +537,28 @@ const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_r
 	"\x10config_overrides\x18\t \x03(\v2N.com.coralogixapis.notification_center.connectors.v1.EntityTypeConfigOverridesR\x0fconfigOverrides\x12o\n" +
 	"\x10connector_config\x18\n" +
 	" \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfigB\x0e\n" +
-	"\f_update_time\"\xaf\x02\n" +
-	"\x19EntityTypeConfigOverrides\x128\n" +
-	"\x16deprecated_entity_type\x18\x01 \x01(\tB\x02\x18\x01R\x14deprecatedEntityType\x12a\n" +
+	"\f_update_time\"\x93\x02\n" +
+	"\x19EntityTypeConfigOverrides\x12a\n" +
 	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12\\\n" +
-	"\x06fields\x18\x04 \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x06fieldsJ\x04\b\x02\x10\x03R\x11connector_configs\"\xd4\x03\n" +
+	"\x06fields\x18\x04 \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x06fieldsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16deprecated_entity_typeR\x11connector_configs\"\xa6\x03\n" +
 	"\x10ConnectorSummary\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12/\n" +
-	"\x0fuser_defined_id\x18\x02 \x01(\tB\x02\x18\x01H\x01R\ruserDefinedId\x88\x01\x01\x12H\n" +
+	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01\x12H\n" +
 	"\x04type\x18\x03 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x12\x1c\n" +
-	"\ateam_id\x18\x04 \x01(\rH\x02R\x06teamId\x88\x01\x01\x12\x12\n" +
+	"\ateam_id\x18\x04 \x01(\rH\x01R\x06teamId\x88\x01\x01\x12\x12\n" +
 	"\x04name\x18\x05 \x01(\tR\x04name\x12 \n" +
 	"\vdescription\x18\x06 \x01(\tR\vdescription\x12@\n" +
-	"\vcreate_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x03R\n" +
+	"\vcreate_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x02R\n" +
 	"createTime\x88\x01\x01\x12@\n" +
-	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x04R\n" +
+	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x03R\n" +
 	"updateTime\x88\x01\x01B\x05\n" +
-	"\x03_idB\x12\n" +
-	"\x10_user_defined_idB\n" +
+	"\x03_idB\n" +
 	"\n" +
 	"\b_team_idB\x0e\n" +
 	"\f_create_timeB\x0e\n" +
-	"\f_update_timeJ\x04\b\t\x10\n" +
-	"R\ventity_type\"\xd1\x02\n" +
+	"\f_update_timeJ\x04\b\x02\x10\x03J\x04\b\t\x10\n" +
+	"R\x0fuser_defined_idR\ventity_type\"\xd1\x02\n" +
 	"\x0fConnectorConfig\x12S\n" +
 	"\x06fields\x18\x02 \x03(\v2;.com.coralogixapis.notification_center.ConnectorConfigFieldR\x06fields:\xd0\x01\x92A\xcc\x01\n" +
 	"M*\x10Connector Config29Configuration for a specific output schema of a connector*{\n" +

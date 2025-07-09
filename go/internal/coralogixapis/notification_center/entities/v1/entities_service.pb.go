@@ -62,12 +62,10 @@ func (*ListEntityTypesRequest) Descriptor() ([]byte, []int) {
 }
 
 type ListEntityTypesResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/entities/v1/entities_service.proto.
-	DeprecatedEntityTypes []string            `protobuf:"bytes,1,rep,name=deprecated_entity_types,json=deprecatedEntityTypes,proto3" json:"deprecated_entity_types,omitempty"`
-	EntityTypes           []common.EntityType `protobuf:"varint,2,rep,packed,name=entity_types,json=entityTypes,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_types,omitempty"`
-	unknownFields         protoimpl.UnknownFields
-	sizeCache             protoimpl.SizeCache
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EntityTypes   []common.EntityType    `protobuf:"varint,2,rep,packed,name=entity_types,json=entityTypes,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_types,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *ListEntityTypesResponse) Reset() {
@@ -98,14 +96,6 @@ func (x *ListEntityTypesResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use ListEntityTypesResponse.ProtoReflect.Descriptor instead.
 func (*ListEntityTypesResponse) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_notification_center_entities_v1_entities_service_proto_rawDescGZIP(), []int{1}
-}
-
-// Deprecated: Marked as deprecated in com/coralogixapis/notification_center/entities/v1/entities_service.proto.
-func (x *ListEntityTypesResponse) GetDeprecatedEntityTypes() []string {
-	if x != nil {
-		return x.DeprecatedEntityTypes
-	}
-	return nil
 }
 
 func (x *ListEntityTypesResponse) GetEntityTypes() []common.EntityType {
@@ -210,10 +200,9 @@ const file_com_coralogixapis_notification_center_entities_v1_entities_service_pr
 	"Hcom/coralogixapis/notification_center/entities/v1/entities_service.proto\x121com.coralogixapis.notification_center.entities.v1\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a9com/coralogixapis/notification_center/common/common.proto\"\xf0\x01\n" +
 	"\x16ListEntityTypesRequest:\xd5\x01\x92A\xd1\x01\n" +
 	"R*\x11List Entity Types2=Request to list entity types supported by Notification Center*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xab\x01\n" +
-	"\x17ListEntityTypesResponse\x12:\n" +
-	"\x17deprecated_entity_types\x18\x01 \x03(\tB\x02\x18\x01R\x15deprecatedEntityTypes\x12T\n" +
-	"\fentity_types\x18\x02 \x03(\x0e21.com.coralogixapis.notification_center.EntityTypeR\ventityTypes\"\xdd\x02\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x8e\x01\n" +
+	"\x17ListEntityTypesResponse\x12T\n" +
+	"\fentity_types\x18\x02 \x03(\x0e21.com.coralogixapis.notification_center.EntityTypeR\ventityTypesJ\x04\b\x01\x10\x02R\x17deprecated_entity_types\"\xdd\x02\n" +
 	"\x19ListEntitySubTypesRequest\x12R\n" +
 	"\ventity_type\x18\x01 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeR\n" +
 	"entityType:\xeb\x01\x92A\xe7\x01\n" +
