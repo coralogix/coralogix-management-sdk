@@ -78,6 +78,10 @@ func (ActionDataSourceType) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{0}
 }
 
+// Unused dormant model that was part of plans of the product team, however it is now on hold.
+// Recommended to not use this model or rely on it in any way.
+//
+// Deprecated: Marked as deprecated in com/coralogixapis/dashboards/v1/common/action.proto.
 type Action struct {
 	state                 protoimpl.MessageState  `protogen:"open.v1"`
 	Id                    *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -178,6 +182,90 @@ func (x *Action) GetDataSource() ActionDataSourceType {
 	return ActionDataSourceType_ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
 }
 
+type DashboardAction struct {
+	state                 protoimpl.MessageState  `protogen:"open.v1"`
+	Id                    *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                  *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ShouldOpenInNewWindow *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=should_open_in_new_window,json=shouldOpenInNewWindow,proto3" json:"should_open_in_new_window,omitempty"`
+	WidgetId              *wrapperspb.StringValue `protobuf:"bytes,4,opt,name=widget_id,json=widgetId,proto3,oneof" json:"widget_id,omitempty"`
+	Definition            *ActionDefinition       `protobuf:"bytes,5,opt,name=definition,proto3" json:"definition,omitempty"`
+	DataSource            *ActionDataSourceType   `protobuf:"varint,6,opt,name=data_source,json=dataSource,proto3,enum=com.coralogixapis.dashboards.v1.common.ActionDataSourceType,oneof" json:"data_source,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *DashboardAction) Reset() {
+	*x = DashboardAction{}
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DashboardAction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DashboardAction) ProtoMessage() {}
+
+func (x *DashboardAction) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DashboardAction.ProtoReflect.Descriptor instead.
+func (*DashboardAction) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *DashboardAction) GetId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Id
+	}
+	return nil
+}
+
+func (x *DashboardAction) GetName() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Name
+	}
+	return nil
+}
+
+func (x *DashboardAction) GetShouldOpenInNewWindow() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ShouldOpenInNewWindow
+	}
+	return nil
+}
+
+func (x *DashboardAction) GetWidgetId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.WidgetId
+	}
+	return nil
+}
+
+func (x *DashboardAction) GetDefinition() *ActionDefinition {
+	if x != nil {
+		return x.Definition
+	}
+	return nil
+}
+
+func (x *DashboardAction) GetDataSource() ActionDataSourceType {
+	if x != nil && x.DataSource != nil {
+		return *x.DataSource
+	}
+	return ActionDataSourceType_ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED
+}
+
 type ActionDefinition struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Type:
@@ -191,7 +279,7 @@ type ActionDefinition struct {
 
 func (x *ActionDefinition) Reset() {
 	*x = ActionDefinition{}
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -203,7 +291,7 @@ func (x *ActionDefinition) String() string {
 func (*ActionDefinition) ProtoMessage() {}
 
 func (x *ActionDefinition) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -216,7 +304,7 @@ func (x *ActionDefinition) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionDefinition.ProtoReflect.Descriptor instead.
 func (*ActionDefinition) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ActionDefinition) GetType() isActionDefinition_Type {
@@ -269,7 +357,7 @@ type ActionDefinition_CustomAction struct {
 
 func (x *ActionDefinition_CustomAction) Reset() {
 	*x = ActionDefinition_CustomAction{}
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -281,7 +369,7 @@ func (x *ActionDefinition_CustomAction) String() string {
 func (*ActionDefinition_CustomAction) ProtoMessage() {}
 
 func (x *ActionDefinition_CustomAction) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -294,7 +382,7 @@ func (x *ActionDefinition_CustomAction) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ActionDefinition_CustomAction.ProtoReflect.Descriptor instead.
 func (*ActionDefinition_CustomAction) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{1, 0}
+	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{2, 0}
 }
 
 func (x *ActionDefinition_CustomAction) GetUrl() *wrapperspb.StringValue {
@@ -313,7 +401,7 @@ type ActionDefinition_GoToDashboardTemplateAction struct {
 
 func (x *ActionDefinition_GoToDashboardTemplateAction) Reset() {
 	*x = ActionDefinition_GoToDashboardTemplateAction{}
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -325,7 +413,7 @@ func (x *ActionDefinition_GoToDashboardTemplateAction) String() string {
 func (*ActionDefinition_GoToDashboardTemplateAction) ProtoMessage() {}
 
 func (x *ActionDefinition_GoToDashboardTemplateAction) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -338,7 +426,7 @@ func (x *ActionDefinition_GoToDashboardTemplateAction) ProtoReflect() protorefle
 
 // Deprecated: Use ActionDefinition_GoToDashboardTemplateAction.ProtoReflect.Descriptor instead.
 func (*ActionDefinition_GoToDashboardTemplateAction) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{1, 1}
+	return file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP(), []int{2, 1}
 }
 
 func (x *ActionDefinition_GoToDashboardTemplateAction) GetDashboardId() *wrapperspb.StringValue {
@@ -352,12 +440,12 @@ var File_com_coralogixapis_dashboards_v1_common_action_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/common/action.proto\x12&com.coralogixapis.dashboards.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd0\n" +
+	"3com/coralogixapis/dashboards/v1/common/action.proto\x12&com.coralogixapis.dashboards.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfb\n" +
 	"\n" +
 	"\x06Action\x12T\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2!A unique identifier of the actionR\x02id\x12U\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A 2\x1eThe display name of the actionR\x04name\x12y\n" +
-	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB#\x92A 2\x1eThe display name of the actionR\x15shouldOpenInNewWindow\x12\x84\x01\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
+	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x92AT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\x84\x01\n" +
 	"\n" +
 	"is_private\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueBI\x92AF2DDefines if the action is private to the user or shared with the teamR\tisPrivate\x12\x92\x01\n" +
 	"\fdashboard_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueBL\x92AI2GReference to specific dashboard, can be null if the action is team wideH\x00R\vdashboardId\x88\x01\x01\x12\xae\x01\n" +
@@ -366,10 +454,25 @@ const file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc = "" +
 	"definition\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x92A\x1a2\x18Definition of the actionR\n" +
 	"definition\x12\xa2\x01\n" +
 	"\vdata_source\x18\b \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x92A;29Defines the data source type of the action, if applicableH\x02R\n" +
-	"dataSource\x88\x01\x01:\x83\x02\x92A\xff\x01\n" +
-	"u*\x06Action2_Actions are user-defined actions that can be triggered from the dashboard over specific widget.\xd2\x01\x02id\xd2\x01\x04name*\x85\x01\n" +
-	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\x0f\n" +
+	"dataSource\x88\x01\x01:\xf9\x01\x92A\xf3\x01\n" +
+	"i*\x06Action2_Actions are user-defined actions that can be triggered from the dashboard over specific widget.*\x85\x01\n" +
+	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\x18\x01B\x0f\n" +
 	"\r_dashboard_idB\f\n" +
+	"\n" +
+	"_widget_idB\x0e\n" +
+	"\f_data_source\"\xc0\b\n" +
+	"\x0fDashboardAction\x12T\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2!A unique identifier of the actionR\x02id\x12U\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
+	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x92AT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\xa1\x01\n" +
+	"\twidget_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBa\x92A^2\\Reference to specific widget within a dashboard, can be null if the action is dashboard wideH\x00R\bwidgetId\x88\x01\x01\x12w\n" +
+	"\n" +
+	"definition\x18\x05 \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x92A\x1a2\x18Definition of the actionR\n" +
+	"definition\x12\xa2\x01\n" +
+	"\vdata_source\x18\x06 \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x92A;29Defines the data source type of the action, if applicableH\x01R\n" +
+	"dataSource\x88\x01\x01:\xef\x01\x92A\xeb\x01\n" +
+	"a*\x10Dashboard Action2MPublic actions that are always available within specific dashboard's context.*\x85\x01\n" +
+	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\f\n" +
 	"\n" +
 	"_widget_idB\x0e\n" +
 	"\f_data_source\"\xb4\x05\n" +
@@ -401,34 +504,41 @@ func file_com_coralogixapis_dashboards_v1_common_action_proto_rawDescGZIP() []by
 }
 
 var file_com_coralogixapis_dashboards_v1_common_action_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_com_coralogixapis_dashboards_v1_common_action_proto_goTypes = []any{
 	(ActionDataSourceType)(0),                            // 0: com.coralogixapis.dashboards.v1.common.ActionDataSourceType
 	(*Action)(nil),                                       // 1: com.coralogixapis.dashboards.v1.common.Action
-	(*ActionDefinition)(nil),                             // 2: com.coralogixapis.dashboards.v1.common.ActionDefinition
-	(*ActionDefinition_CustomAction)(nil),                // 3: com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction
-	(*ActionDefinition_GoToDashboardTemplateAction)(nil), // 4: com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction
-	(*wrapperspb.StringValue)(nil),                       // 5: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                         // 6: google.protobuf.BoolValue
+	(*DashboardAction)(nil),                              // 2: com.coralogixapis.dashboards.v1.common.DashboardAction
+	(*ActionDefinition)(nil),                             // 3: com.coralogixapis.dashboards.v1.common.ActionDefinition
+	(*ActionDefinition_CustomAction)(nil),                // 4: com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction
+	(*ActionDefinition_GoToDashboardTemplateAction)(nil), // 5: com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction
+	(*wrapperspb.StringValue)(nil),                       // 6: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                         // 7: google.protobuf.BoolValue
 }
 var file_com_coralogixapis_dashboards_v1_common_action_proto_depIdxs = []int32{
-	5,  // 0: com.coralogixapis.dashboards.v1.common.Action.id:type_name -> google.protobuf.StringValue
-	5,  // 1: com.coralogixapis.dashboards.v1.common.Action.name:type_name -> google.protobuf.StringValue
-	6,  // 2: com.coralogixapis.dashboards.v1.common.Action.should_open_in_new_window:type_name -> google.protobuf.BoolValue
-	6,  // 3: com.coralogixapis.dashboards.v1.common.Action.is_private:type_name -> google.protobuf.BoolValue
-	5,  // 4: com.coralogixapis.dashboards.v1.common.Action.dashboard_id:type_name -> google.protobuf.StringValue
-	5,  // 5: com.coralogixapis.dashboards.v1.common.Action.widget_id:type_name -> google.protobuf.StringValue
-	2,  // 6: com.coralogixapis.dashboards.v1.common.Action.definition:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition
+	6,  // 0: com.coralogixapis.dashboards.v1.common.Action.id:type_name -> google.protobuf.StringValue
+	6,  // 1: com.coralogixapis.dashboards.v1.common.Action.name:type_name -> google.protobuf.StringValue
+	7,  // 2: com.coralogixapis.dashboards.v1.common.Action.should_open_in_new_window:type_name -> google.protobuf.BoolValue
+	7,  // 3: com.coralogixapis.dashboards.v1.common.Action.is_private:type_name -> google.protobuf.BoolValue
+	6,  // 4: com.coralogixapis.dashboards.v1.common.Action.dashboard_id:type_name -> google.protobuf.StringValue
+	6,  // 5: com.coralogixapis.dashboards.v1.common.Action.widget_id:type_name -> google.protobuf.StringValue
+	3,  // 6: com.coralogixapis.dashboards.v1.common.Action.definition:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition
 	0,  // 7: com.coralogixapis.dashboards.v1.common.Action.data_source:type_name -> com.coralogixapis.dashboards.v1.common.ActionDataSourceType
-	3,  // 8: com.coralogixapis.dashboards.v1.common.ActionDefinition.custom_action:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction
-	4,  // 9: com.coralogixapis.dashboards.v1.common.ActionDefinition.go_to_dashboard_action:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction
-	5,  // 10: com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction.url:type_name -> google.protobuf.StringValue
-	5,  // 11: com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction.dashboard_id:type_name -> google.protobuf.StringValue
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	6,  // 8: com.coralogixapis.dashboards.v1.common.DashboardAction.id:type_name -> google.protobuf.StringValue
+	6,  // 9: com.coralogixapis.dashboards.v1.common.DashboardAction.name:type_name -> google.protobuf.StringValue
+	7,  // 10: com.coralogixapis.dashboards.v1.common.DashboardAction.should_open_in_new_window:type_name -> google.protobuf.BoolValue
+	6,  // 11: com.coralogixapis.dashboards.v1.common.DashboardAction.widget_id:type_name -> google.protobuf.StringValue
+	3,  // 12: com.coralogixapis.dashboards.v1.common.DashboardAction.definition:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition
+	0,  // 13: com.coralogixapis.dashboards.v1.common.DashboardAction.data_source:type_name -> com.coralogixapis.dashboards.v1.common.ActionDataSourceType
+	4,  // 14: com.coralogixapis.dashboards.v1.common.ActionDefinition.custom_action:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction
+	5,  // 15: com.coralogixapis.dashboards.v1.common.ActionDefinition.go_to_dashboard_action:type_name -> com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction
+	6,  // 16: com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomAction.url:type_name -> google.protobuf.StringValue
+	6,  // 17: com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateAction.dashboard_id:type_name -> google.protobuf.StringValue
+	18, // [18:18] is the sub-list for method output_type
+	18, // [18:18] is the sub-list for method input_type
+	18, // [18:18] is the sub-list for extension type_name
+	18, // [18:18] is the sub-list for extension extendee
+	0,  // [0:18] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_common_action_proto_init() }
@@ -437,7 +547,8 @@ func file_com_coralogixapis_dashboards_v1_common_action_proto_init() {
 		return
 	}
 	file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[0].OneofWrappers = []any{}
-	file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[1].OneofWrappers = []any{}
+	file_com_coralogixapis_dashboards_v1_common_action_proto_msgTypes[2].OneofWrappers = []any{
 		(*ActionDefinition_CustomAction_)(nil),
 		(*ActionDefinition_GoToDashboardAction)(nil),
 	}
@@ -447,7 +558,7 @@ func file_com_coralogixapis_dashboards_v1_common_action_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   4,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

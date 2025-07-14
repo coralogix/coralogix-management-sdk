@@ -138,6 +138,35 @@ service DashboardsService {
     };
   }
 
+  rpc GetDashboardBySlug(GetDashboardBySlugRequest) returns (GetDashboardBySlugResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get dashboard by URL slug";
+    option (google.api.http) = {get: "/v1/dashboards/by-slug/{slug}"};
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Dashboard service"]
+      summary: "Get a dashboard by URL slug"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "team-dashboards:Read"}
+          }
+        }
+      }
+    };
+  }
+
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Pin dashboard";
     option (google.api.http) = {
@@ -375,9 +404,7 @@ message GetDashboardRequest {
     json_schema: {
       title: "Get dashboard request data structure"
       description: "This is a request to get a specific custom dashboard"
-      required: [
-        "dashboard_id"
-      ]
+      required: ["dashboard_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -386,6 +413,52 @@ message GetDashboardRequest {
   };
 
   google.protobuf.StringValue dashboard_id = 1;
+}
+
+message GetDashboardBySlugRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get dashboard by URL slug request data structure"
+      description: "This is a request to get a specific custom dashboard by its URL slug"
+      required: ["slug"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more Dashboards in our documentation."
+    }
+  };
+
+  google.protobuf.StringValue slug = 1;
+}
+
+message GetDashboardBySlugResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get dashboard by URL slug response data structure"
+      description: "This is a response containing the requested dashboard"
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Find out more about Dashboards in our documentation."
+    }
+  };
+
+  ast.Dashboard dashboard = 1;
+
+  google.protobuf.Timestamp updated_at = 2;
+  google.protobuf.Timestamp created_at = 3;
+
+  google.protobuf.StringValue updater_author_id = 4;
+  google.protobuf.StringValue updater_name = 8;
+  google.protobuf.StringValue author_id = 5;
+  google.protobuf.StringValue author_name = 9;
+
+  TokenOriginType updated_origin_type = 6;
+  TokenOriginType created_origin_type = 7;
+
+  google.protobuf.BoolValue is_locked = 10;
+  google.protobuf.StringValue locker_author_id = 11;
+  google.protobuf.StringValue locker_name = 12;
 }
 
 enum TokenOriginType {

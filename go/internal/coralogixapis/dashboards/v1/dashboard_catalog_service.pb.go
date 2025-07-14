@@ -120,6 +120,7 @@ type DashboardCatalogItem struct {
 	AuthorId       *wrapperspb.StringValue `protobuf:"bytes,9,opt,name=author_id,json=authorId,proto3" json:"author_id,omitempty"`
 	IsLocked       *wrapperspb.BoolValue   `protobuf:"bytes,10,opt,name=is_locked,json=isLocked,proto3" json:"is_locked,omitempty"`
 	LockerAuthorId *wrapperspb.StringValue `protobuf:"bytes,11,opt,name=locker_author_id,json=lockerAuthorId,proto3" json:"locker_author_id,omitempty"`
+	SlugName       *wrapperspb.StringValue `protobuf:"bytes,12,opt,name=slug_name,json=slugName,proto3" json:"slug_name,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -231,6 +232,13 @@ func (x *DashboardCatalogItem) GetLockerAuthorId() *wrapperspb.StringValue {
 	return nil
 }
 
+func (x *DashboardCatalogItem) GetSlugName() *wrapperspb.StringValue {
+	if x != nil {
+		return x.SlugName
+	}
+	return nil
+}
+
 var File_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_proto_rawDesc = "" +
@@ -239,7 +247,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_pr
 	"\x1aGetDashboardCatalogRequest\"\xaa\x01\n" +
 	"\x1bGetDashboardCatalogResponse\x12T\n" +
 	"\x05items\x18\x01 \x03(\v2>.com.coralogixapis.dashboards.v1.services.DashboardCatalogItemR\x05items:5\x92A2\n" +
-	"0*.Get dashboard catalog response data structure.\"\xfd\x05\n" +
+	"0*.Get dashboard catalog response data structure.\"\xb8\x06\n" +
 	"\x14DashboardCatalogItem\x12J\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"6U1Q8Hpa263Se8PkRKaiE\"R\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
@@ -255,7 +263,8 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_pr
 	"\tauthor_id\x18\t \x01(\v2\x1c.google.protobuf.StringValueR\bauthorId\x127\n" +
 	"\tis_locked\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12F\n" +
-	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId:,\x92A)\n" +
+	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId\x129\n" +
+	"\tslug_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\bslugName:,\x92A)\n" +
 	"'*%Dashboard catalog item data structure2\xad\x04\n" +
 	"\x17DashboardCatalogService\x12\xc1\x03\n" +
 	"\x13GetDashboardCatalog\x12D.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogRequest\x1aE.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogResponse\"\x9c\x02\x92A\xdf\x01\n" +
@@ -306,13 +315,14 @@ var file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_prot
 	3,  // 9: com.coralogixapis.dashboards.v1.services.DashboardCatalogItem.author_id:type_name -> google.protobuf.StringValue
 	4,  // 10: com.coralogixapis.dashboards.v1.services.DashboardCatalogItem.is_locked:type_name -> google.protobuf.BoolValue
 	3,  // 11: com.coralogixapis.dashboards.v1.services.DashboardCatalogItem.locker_author_id:type_name -> google.protobuf.StringValue
-	0,  // 12: com.coralogixapis.dashboards.v1.services.DashboardCatalogService.GetDashboardCatalog:input_type -> com.coralogixapis.dashboards.v1.services.GetDashboardCatalogRequest
-	1,  // 13: com.coralogixapis.dashboards.v1.services.DashboardCatalogService.GetDashboardCatalog:output_type -> com.coralogixapis.dashboards.v1.services.GetDashboardCatalogResponse
-	13, // [13:14] is the sub-list for method output_type
-	12, // [12:13] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	3,  // 12: com.coralogixapis.dashboards.v1.services.DashboardCatalogItem.slug_name:type_name -> google.protobuf.StringValue
+	0,  // 13: com.coralogixapis.dashboards.v1.services.DashboardCatalogService.GetDashboardCatalog:input_type -> com.coralogixapis.dashboards.v1.services.GetDashboardCatalogRequest
+	1,  // 14: com.coralogixapis.dashboards.v1.services.DashboardCatalogService.GetDashboardCatalog:output_type -> com.coralogixapis.dashboards.v1.services.GetDashboardCatalogResponse
+	14, // [14:15] is the sub-list for method output_type
+	13, // [13:14] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_proto_init() }
