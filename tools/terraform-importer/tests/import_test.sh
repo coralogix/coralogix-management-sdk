@@ -103,22 +103,15 @@ run_complete_test_for_resource() {
     # Step 1: Run migration
     log "$INFO" "Step 1: Running migration for $resource_name..."
     
-    # Create input for the interactive script
-    local input_data=$(cat <<EOF
-2
-$resource_number
-$DEFAULT_PROVIDER_VERSION
-yes
-EOF
-)
-    
     echo "===== MIGRATION OUTPUT for $resource_name =====" >> "$LOG_FILE"
     
     # Create temporary file to capture output
     local temp_output=$(mktemp)
     
     # Use timeout with proper error handling - output only to log file and temp file
-    echo "$input_data" | timeout 300 bash generate_and_migrate.sh > "$temp_output" 2>&1
+    # Use printf with explicit newlines and proper input redirection
+    # Include "yes" for terraform apply confirmation
+    printf "2\n%s\n%s\nyes\n" "$resource_number" "$DEFAULT_PROVIDER_VERSION" | timeout 300 bash generate_and_migrate.sh > "$temp_output" 2>&1
     local exit_code=$?
     
     # Append output to log file
