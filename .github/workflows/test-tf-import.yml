@@ -18,6 +18,7 @@ jobs:
     env:
       CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_TEST_KEY }}
       CORALOGIX_ENV: ${{ secrets.CORALOGIX_TEST_ENV }}
+      TERM: xterm
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
