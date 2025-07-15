@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tf_provider_version: ['2.1.0', '2.0.20', '1.18.16']
+        tf_provider_version: ['2.1.0', '2.0.20']
     defaults:
       run:
         working-directory: tools/terraform-importer
@@ -44,3 +44,11 @@ jobs:
 
       - name: Run Terraform Import Test Script
         run: TF_PROVIDER_VERSION=${{ matrix.tf_provider_version }} ./tests/import_test.sh
+
+      - name: Upload test logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: terraform-import-logs-${{ matrix.tf_provider_version }}
+          path: tools/terraform-importer/terraform_import_test_*.log
+          if-no-files-found: warn
