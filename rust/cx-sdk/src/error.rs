@@ -14,6 +14,10 @@
 
 use http::uri::InvalidUri;
 use tonic::transport::Error as TonicError;
+use tonic_types::{
+    ErrorDetails,
+    StatusExt,
+};
 
 /// The result type for the SDK.
 pub type Result<T> = std::result::Result<T, SdkError>;
@@ -27,6 +31,13 @@ pub struct SdkApiError {
     pub endpoint: String,
     /// The feature group the endpoint belongs to.
     pub feature_group: String,
+}
+
+impl SdkApiError {
+    /// The details of a tonic error
+    pub fn details(&self) -> ErrorDetails {
+        self.status.get_error_details()
+    }
 }
 
 impl std::fmt::Display for SdkApiError {

@@ -80,6 +80,29 @@ func Code(err error) codes.Code {
 	return codes.Unknown
 }
 
+// Details returns the details of the error.
+func Details(err error) string {
+	var sdkErr *SdkAPIError
+	if errors.As(err, &sdkErr) {
+		// Convert the error to a gRPC status
+		if st, ok := status.FromError(sdkErr.apiError); ok {
+			// Get the details from the status
+			details := st.Details()
+			if len(details) > 0 {
+				// Convert details to a readable format
+				var detailStrings []string
+				for _, detail := range details {
+					detailStrings = append(detailStrings, fmt.Sprintf("%v", detail))
+				}
+				return strings.Join(detailStrings, "; ")
+			}
+			// If no details, return the status message
+			return st.Message()
+		}
+	}
+	return ""
+}
+
 // ClientSet is a set of clients for the Coralogix SDK.
 type ClientSet struct {
 	ruleGroups          *RuleGroupsClient
