@@ -108,11 +108,11 @@ run_complete_test_for_resource() {
     # Create temporary file to capture output
     local temp_output=$(mktemp)
     
-    # Use timeout with proper error handling - output only to log file and temp file
+    # Use timeout with proper error handling - output to both stdout and temp file
     # Use printf with explicit newlines and proper input redirection
     # Include "yes" for terraform apply confirmation
-    printf "2\n%s\n%s\nyes\n" "$resource_number" "$DEFAULT_PROVIDER_VERSION" | timeout 300 bash generate_and_migrate.sh > "$temp_output" 2>&1
-    local exit_code=$?
+    printf "2\n%s\n%s\nyes\n" "$resource_number" "$DEFAULT_PROVIDER_VERSION" | timeout 300 bash generate_and_migrate.sh 2>&1 | tee "$temp_output"
+    local exit_code=${PIPESTATUS[1]}  # Get exit code from timeout command, not tee
     
     # Append output to log file
     cat "$temp_output" >> "$LOG_FILE"
@@ -170,9 +170,9 @@ run_complete_test_for_resource() {
     # Create temporary file to capture output
     local temp_plan_output=$(mktemp)
     
-    # Use proper error handling for terraform plan - output only to log file and temp file
-    terraform plan -detailed-exitcode > "$temp_plan_output" 2>&1
-    local plan_exit_code=$?
+    # Use proper error handling for terraform plan - output to both stdout and temp file
+    terraform plan -detailed-exitcode 2>&1 | tee "$temp_plan_output"
+    local plan_exit_code=${PIPESTATUS[0]}  # Get exit code from terraform plan command, not tee
     
     # Append output to log file
     cat "$temp_plan_output" >> "../$LOG_FILE"
