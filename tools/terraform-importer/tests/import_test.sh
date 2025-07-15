@@ -110,8 +110,8 @@ run_complete_test_for_resource() {
     
     # Use timeout with proper error handling - output to both stdout and temp file
     # Use printf with explicit newlines and proper input redirection
-    # Include "yes" for terraform apply confirmation
-    printf "2\n%s\n%s\nyes\n" "$resource_number" "$DEFAULT_PROVIDER_VERSION" | timeout 300 bash generate_and_migrate.sh 2>&1 | tee "$temp_output"
+    # No need for "yes" since we use terraform apply -auto-approve
+    printf "2\n%s\n%s\n" "$resource_number" "$DEFAULT_PROVIDER_VERSION" | timeout 300 bash generate_and_migrate.sh 2>&1 | tee "$temp_output"
     local exit_code=${PIPESTATUS[1]}  # Get exit code from timeout command, not tee
     
     # Append output to log file

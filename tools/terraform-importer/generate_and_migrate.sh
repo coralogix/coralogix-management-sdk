@@ -195,7 +195,7 @@ log "$INFO" "Cleaned Terraform file saved as generated.tf"
 # Step 10: Run Terraform apply
 cd "$MIGRATION_FOLDER" || exit 1
 log "$INFO" "Running terraform apply..."
-terraform apply 2>&1 | colorize_logs
+terraform apply -auto-approve 2>&1 | colorize_logs
 log "$INFO" "Terraform apply completed."
 
 # Step 11: Cleanup
