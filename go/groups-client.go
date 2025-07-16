@@ -49,6 +49,9 @@ type UpdateTeamGroupRequestUserUpdates = groups.UpdateTeamGroupRequest_UserUpdat
 // GetTeamGroupRequest is a type for a request.
 type GetTeamGroupRequest = groups.GetTeamGroupRequest
 
+// GetTeamGroupResponse is a type for a response.
+type GetTeamGroupResponse = groups.GetTeamGroupResponse
+
 // GetTeamGroupByNameRequest is a type for a request.
 type GetTeamGroupByNameRequest = groups.GetTeamGroupByNameRequest
 
