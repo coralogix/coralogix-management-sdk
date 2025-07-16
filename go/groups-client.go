@@ -34,6 +34,9 @@ type GroupsUser = groups.User
 // RoleID is a type for a role ID to use in a group.
 type RoleID = groups.RoleId
 
+// Role is a type for a role in a group.
+type Role = groups.Role
+
 // UserID is a type for a user ID to use in a group.
 type UserID = groups.UserId
 
