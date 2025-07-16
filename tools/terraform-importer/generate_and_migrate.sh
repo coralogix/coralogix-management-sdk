@@ -66,7 +66,7 @@ if [[ "$CHOICE" == "1" ]]; then
 elif [[ "$CHOICE" == "2" ]]; then
   log "$INFO" "Available resource types:"
   OPTIONS=("alert" "archive_logs" "archive_metrics" "archive_retentions" "custom_role" "dashboard"
-           "dashboards_folder" "events2metrics" "group" "recording_rules_groups_set" "scope"
+           "dashboards_folder" "events2metric" "group" "recording_rules_groups_set" "scope"
            "tco_policies_logs" "tco_policies_traces" "webhook")
 
   select RESOURCE in "${OPTIONS[@]}"; do
