@@ -90,6 +90,42 @@ func processBlock(key string, value interface{}) string {
 	}
 }
 
+// handleArchiveRetentions applies special logic for archive_retentions resource
+// The first retention is the default retention and can't have a name set
+func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]interface{} {
+	if retentions, ok := resourceMap["retentions"].([]interface{}); ok && len(retentions) > 0 {
+		// Check if the first retention has a name and remove it
+		if firstRetention, ok := retentions[0].(map[string]interface{}); ok {
+			if _, hasName := firstRetention["name"]; hasName {
+				// Create a copy of the first retention without the name field
+				newFirstRetention := make(map[string]interface{})
+				for key, value := range firstRetention {
+					if key != "name" {
+						newFirstRetention[key] = value
+					}
+				}
+
+				// Create a new retentions slice with the modified first retention
+				newRetentions := make([]interface{}, len(retentions))
+				newRetentions[0] = newFirstRetention
+				copy(newRetentions[1:], retentions[1:])
+
+				// Create a copy of the resource map with the new retentions
+				newResourceMap := make(map[string]interface{})
+				for key, value := range resourceMap {
+					if key == "retentions" {
+						newResourceMap[key] = newRetentions
+					} else {
+						newResourceMap[key] = value
+					}
+				}
+				return newResourceMap
+			}
+		}
+	}
+	return resourceMap
+}
+
 // generateTerraform converts parsed JSON into a Terraform HCL configuration.
 func generateTerraform(jsonData map[string]interface{}) string {
 	var terraformLines []string
@@ -101,6 +137,11 @@ func generateTerraform(jsonData map[string]interface{}) string {
 					if resourceArray, ok := resourceList.([]interface{}); ok {
 						for _, resource := range resourceArray {
 							if resourceMap, ok := resource.(map[string]interface{}); ok {
+								// Apply special handling for archive_retentions
+								if resourceType == "coralogix_archive_retentions" {
+									resourceMap = handleArchiveRetentions(resourceMap)
+								}
+
 								terraformLines = append(terraformLines, fmt.Sprintf(`resource "%s" "%s" {`, resourceType, resourceName))
 								for key, val := range resourceMap {
 									terraformLines = append(terraformLines, processBlock(key, val))
