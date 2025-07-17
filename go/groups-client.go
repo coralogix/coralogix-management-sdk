@@ -34,6 +34,9 @@ type GroupsUser = groups.User
 // RoleID is a type for a role ID to use in a group.
 type RoleID = groups.RoleId
 
+// FilterType is a type for a filter type in a group.
+type FilterType = groups.FilterType
+
 // ScopeFilters is a type for scope filters used in group operations.
 type ScopeFilters = groups.ScopeFilters
 
