@@ -135,8 +135,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.23"
-commit_hash = "4c1cb5cc26fe745de9ab6209da9fa6a2ce5f4f63"
+revision = "v0.0.19"
+commit_hash = "8c50ef36d269ba346641267ce433072f0ae61143"
 
 [[dependencies]]
 name = "cx-api-views"

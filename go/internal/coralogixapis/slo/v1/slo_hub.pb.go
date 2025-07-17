@@ -203,7 +203,6 @@ type SloHubRow struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Slo           *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
 	SloData       *SloData               `protobuf:"bytes,2,opt,name=slo_data,json=sloData,proto3,oneof" json:"slo_data,omitempty"`
-	ErrorMessage  *string                `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3,oneof" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -250,13 +249,6 @@ func (x *SloHubRow) GetSloData() *SloData {
 		return x.SloData
 	}
 	return nil
-}
-
-func (x *SloHubRow) GetErrorMessage() string {
-	if x != nil && x.ErrorMessage != nil {
-		return *x.ErrorMessage
-	}
-	return ""
 }
 
 type LabelValue struct {
@@ -594,13 +586,11 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"\x1amin_remaining_error_budget\x18\x02 \x01(\x02R\x17minRemainingErrorBudget\x12%\n" +
 	"\x0emin_compliance\x18\x03 \x01(\x02R\rminCompliance\x12,\n" +
 	"\x0fincomplete_data\x18\x04 \x01(\bH\x00R\x0eincompleteData\x88\x01\x01B\x12\n" +
-	"\x10_incomplete_data\"\xc8\x01\n" +
+	"\x10_incomplete_data\"\x8c\x01\n" +
 	"\tSloHubRow\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12A\n" +
-	"\bslo_data\x18\x02 \x01(\v2!.com.coralogixapis.slo.v1.SloDataH\x00R\asloData\x88\x01\x01\x12(\n" +
-	"\rerror_message\x18\x03 \x01(\tH\x01R\ferrorMessage\x88\x01\x01B\v\n" +
-	"\t_slo_dataB\x10\n" +
-	"\x0e_error_message\"8\n" +
+	"\bslo_data\x18\x02 \x01(\v2!.com.coralogixapis.slo.v1.SloDataH\x00R\asloData\x88\x01\x01B\v\n" +
+	"\t_slo_data\"8\n" +
 	"\n" +
 	"LabelValue\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12\x14\n" +
