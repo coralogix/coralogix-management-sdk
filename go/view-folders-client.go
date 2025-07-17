@@ -68,7 +68,7 @@ const (
 
 // ViewFoldersClient is a client for the view folders service
 type ViewFoldersClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new view folder
@@ -162,6 +162,6 @@ func (c ViewFoldersClient) Delete(ctx context.Context, req *DeleteViewFolderRequ
 }
 
 // NewViewFoldersClient creates a new ViewFoldersClient
-func NewViewFoldersClient(c *CallPropertiesCreator) *ViewFoldersClient {
+func NewViewFoldersClient(c CallPropertiesCreator) *ViewFoldersClient {
 	return &ViewFoldersClient{callPropertiesCreator: c}
 }

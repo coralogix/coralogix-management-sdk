@@ -66,7 +66,7 @@ const (
 
 // RecordingRuleGroupSetsClient is a client for managing rule groups.
 type RecordingRuleGroupSetsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new recording rule group set.
@@ -160,6 +160,6 @@ func (r RecordingRuleGroupSetsClient) List(ctx context.Context) (*ListRuleGroupS
 }
 
 // NewRecordingRuleGroupSetsClient creates a new rule groups client.
-func NewRecordingRuleGroupSetsClient(c *CallPropertiesCreator) *RecordingRuleGroupSetsClient {
+func NewRecordingRuleGroupSetsClient(c CallPropertiesCreator) *RecordingRuleGroupSetsClient {
 	return &RecordingRuleGroupSetsClient{callPropertiesCreator: c}
 }

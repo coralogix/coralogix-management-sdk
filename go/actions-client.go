@@ -63,7 +63,7 @@ const (
 
 // ActionsClient is a client for the Coralogix Actions API.
 type ActionsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new action.
@@ -157,6 +157,6 @@ func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsReque
 }
 
 // NewActionsClient Creates a new actions client.
-func NewActionsClient(c *CallPropertiesCreator) *ActionsClient {
+func NewActionsClient(c CallPropertiesCreator) *ActionsClient {
 	return &ActionsClient{callPropertiesCreator: c}
 }
