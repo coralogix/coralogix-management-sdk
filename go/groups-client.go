@@ -37,6 +37,14 @@ type RoleID = groups.RoleId
 // FilterType is a type for a filter type in a group.
 type FilterType = groups.FilterType
 
+const (
+	FilterTypeUnspecified = groups.FilterType_FILTER_TYPE_UNSPECIFIED
+	FilterTypeStartsWith  = groups.FilterType_FILTER_TYPE_STARTS_WITH
+	FilterTypeEndsWith    = groups.FilterType_FILTER_TYPE_ENDS_WITH
+	FilterTypeContains    = groups.FilterType_FILTER_TYPE_CONTAINS
+	FilterTypeExact       = groups.FilterType_FILTER_TYPE_EXACT
+)
+
 // ScopeFilters is a type for scope filters used in group operations.
 type ScopeFilters = groups.ScopeFilters
 
