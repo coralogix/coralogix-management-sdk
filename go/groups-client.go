@@ -37,6 +37,9 @@ type RoleID = groups.RoleId
 // ScopeFilters is a type for scope filters used in group operations.
 type ScopeFilters = groups.ScopeFilters
 
+// ScopeID is a type for a scope ID to use in a group.
+type ScopeID = groups.ScopeId
+
 // Role is a type for a role in a group.
 type Role = groups.Role
 
