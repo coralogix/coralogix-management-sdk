@@ -50,12 +50,8 @@ log() {
 
 # Resource types array - matches the OPTIONS array in generate_and_migrate.sh
 RESOURCE_TYPES=("alert" "archive_logs" "archive_metrics" "archive_retentions" "custom_role" "dashboard"
-                "dashboards_folder" "group" "recording_rules_groups_set" "scope"
+                "dashboards_folder" "events2metrics" "group" "recording_rules_groups_set" "scope"
                 "tco_policies_logs" "tco_policies_traces" "webhook")
-
-# TODO: remove this once events2metric bug is fixed
-# https://coralogix.atlassian.net/browse/IAC-971
-RESOURCE_TYPES_IGNORED=("events2metric")
 
 # Function to get resource selection number (1-indexed)
 get_resource_number() {
