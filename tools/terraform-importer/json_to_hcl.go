@@ -50,7 +50,12 @@ func formatValue(value interface{}) string {
 	case map[string]interface{}:
 		var lines []string
 		for key, val := range v {
-			lines = append(lines, fmt.Sprintf(`  %s = %s`, key, formatValue(val)))
+			// Quote keys that contain dots to handle cases like "tags.http.method"
+			quotedKey := key
+			if strings.Contains(key, ".") {
+				quotedKey = fmt.Sprintf(`"%s"`, key)
+			}
+			lines = append(lines, fmt.Sprintf(`  %s = %s`, quotedKey, formatValue(val)))
 		}
 		return fmt.Sprintf("{\n%s\n}", strings.Join(lines, "\n"))
 	default:
