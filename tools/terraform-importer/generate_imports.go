@@ -189,7 +189,7 @@ func main() {
 				dashboardsFolderName := convertToTerraformResourceName(dashboardsFolder.GetName().GetValue())
 				idsAndNames = append(idsAndNames, IdAndName{Id: dashboardsFolder.GetId().GetValue(), Name: dashboardsFolderName})
 			}
-		case "events2metrics":
+		case "events2metric":
 			events2metricsClient := cxsdk.NewEvents2MetricsClient(cxsdk.NewCallPropertiesCreator(mappedRegion, cxsdk.NewAuthContext(apiKey, apiKey)))
 			events2metrics, err := events2metricsClient.List(context.Background())
 			if err != nil {
