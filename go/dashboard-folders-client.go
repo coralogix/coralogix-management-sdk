@@ -17,36 +17,37 @@ package cxsdk
 import (
 	"context"
 
-	dashboards "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
+	services "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/services"
 )
 
 // ListDashboardFolderRequest is a request to get a dashboard folders.
-type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
+type ListDashboardFolderRequest = services.ListDashboardFoldersRequest
 
 // CreateDashboardFolderRequest is a request to create a dashboards folder.
-type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
+type CreateDashboardFolderRequest = services.CreateDashboardFolderRequest
 
 // DashboardFolder is a dashboard folder.
-type DashboardFolder = dashboards.DashboardFolder
+type DashboardFolder = common.DashboardFolder
 
 // GetDashboardFolderRequest is a request to get a dashboard folders.
-type GetDashboardFolderRequest = dashboards.GetDashboardFolderRequest
+type GetDashboardFolderRequest = services.GetDashboardFolderRequest
 
 // ReplaceDashboardFolderRequest is a request to replace a dashboard folder.
-type ReplaceDashboardFolderRequest = dashboards.ReplaceDashboardFolderRequest
+type ReplaceDashboardFolderRequest = services.ReplaceDashboardFolderRequest
 
 // DeleteDashboardFolderRequest is a request to delete a dashboard folder.
-type DeleteDashboardFolderRequest = dashboards.DeleteDashboardFolderRequest
+type DeleteDashboardFolderRequest = services.DeleteDashboardFolderRequest
 
 const dashboardFoldersFeatureGroupID = "dashboards"
 
 // RPC names.
 const (
-	DashboardFoldersListDashboardFoldersRPC   = dashboards.DashboardFoldersService_ListDashboardFolders_FullMethodName
-	DashboardFoldersGetDashboardFolderRPC     = dashboards.DashboardFoldersService_GetDashboardFolder_FullMethodName
-	DashboardFoldersCreateDashboardFolderRPC  = dashboards.DashboardFoldersService_CreateDashboardFolder_FullMethodName
-	DashboardFoldersReplaceDashboardFolderRPC = dashboards.DashboardFoldersService_ReplaceDashboardFolder_FullMethodName
-	DashboardFoldersDeleteDashboardFolderRPC  = dashboards.DashboardFoldersService_DeleteDashboardFolder_FullMethodName
+	DashboardFoldersListDashboardFoldersRPC   = services.DashboardFoldersService_ListDashboardFolders_FullMethodName
+	DashboardFoldersGetDashboardFolderRPC     = services.DashboardFoldersService_GetDashboardFolder_FullMethodName
+	DashboardFoldersCreateDashboardFolderRPC  = services.DashboardFoldersService_CreateDashboardFolder_FullMethodName
+	DashboardFoldersReplaceDashboardFolderRPC = services.DashboardFoldersService_ReplaceDashboardFolder_FullMethodName
+	DashboardFoldersDeleteDashboardFolderRPC  = services.DashboardFoldersService_DeleteDashboardFolder_FullMethodName
 )
 
 // DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.
@@ -55,7 +56,7 @@ type DashboardsFoldersClient struct {
 }
 
 // Create creates a new dashboard folder.
-func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.CreateDashboardFolderRequest) (*dashboards.CreateDashboardFolderResponse, error) {
+func (c DashboardsFoldersClient) Create(ctx context.Context, req *CreateDashboardFolderRequest) (*services.CreateDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -63,7 +64,7 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.Cre
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := dashboards.NewDashboardFoldersServiceClient(conn)
+	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -73,7 +74,7 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *dashboards.Cre
 }
 
 // Get dashboard folder details.
-func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDashboardFolderRequest) (*dashboards.GetDashboardFolderResponse, error) {
+func (c DashboardsFoldersClient) Get(ctx context.Context, req *GetDashboardFolderRequest) (*services.GetDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -81,7 +82,7 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDas
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := dashboards.NewDashboardFoldersServiceClient(conn)
+	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.GetDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -91,7 +92,7 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *dashboards.GetDas
 }
 
 // List gets all dashboard folders.
-func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDashboardFoldersResponse, error) {
+func (c DashboardsFoldersClient) List(ctx context.Context) (*services.ListDashboardFoldersResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetUserLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -99,9 +100,9 @@ func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDash
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := dashboards.NewDashboardFoldersServiceClient(conn)
+	client := services.NewDashboardFoldersServiceClient(conn)
 
-	response, err := client.ListDashboardFolders(callProperties.Ctx, &dashboards.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
+	response, err := client.ListDashboardFolders(callProperties.Ctx, &services.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, DashboardFoldersListDashboardFoldersRPC, dashboardFoldersFeatureGroupID)
 	}
@@ -109,7 +110,7 @@ func (c DashboardsFoldersClient) List(ctx context.Context) (*dashboards.ListDash
 }
 
 // Replace updates a dashboard folder.
-func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.ReplaceDashboardFolderRequest) (*dashboards.ReplaceDashboardFolderResponse, error) {
+func (c DashboardsFoldersClient) Replace(ctx context.Context, req *ReplaceDashboardFolderRequest) (*services.ReplaceDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -117,7 +118,7 @@ func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.Re
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := dashboards.NewDashboardFoldersServiceClient(conn)
+	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.ReplaceDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -127,7 +128,7 @@ func (c DashboardsFoldersClient) Replace(ctx context.Context, req *dashboards.Re
 }
 
 // Delete deletes a dashboard folder.
-func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.DeleteDashboardFolderRequest) (*dashboards.DeleteDashboardFolderResponse, error) {
+func (c DashboardsFoldersClient) Delete(ctx context.Context, req *DeleteDashboardFolderRequest) (*services.DeleteDashboardFolderResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -135,7 +136,7 @@ func (c DashboardsFoldersClient) Delete(ctx context.Context, req *dashboards.Del
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := dashboards.NewDashboardFoldersServiceClient(conn)
+	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.DeleteDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {

@@ -73,4 +73,5 @@ message DashboardCatalogItem {
   google.protobuf.StringValue author_id = 9;
   google.protobuf.BoolValue is_locked = 10;
   google.protobuf.StringValue locker_author_id = 11;
+  google.protobuf.StringValue slug_name = 12;
 }

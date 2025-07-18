@@ -5,15 +5,16 @@ package com.coralogixapis.dashboards.v1.common;
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
+//
+// Unused dormant model that was part of plans of the product team, however it is now on hold.
+// Recommended to not use this model or rely on it in any way.
+//
 message Action {
+  option deprecated = true;
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Action"
       description: "Actions are user-defined actions that can be triggered from the dashboard over specific widget."
-      required: [
-        "id",
-        "name"
-      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -25,7 +26,7 @@ message Action {
 
   google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The display name of the action"}];
 
-  google.protobuf.BoolValue should_open_in_new_window = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The display name of the action"}];
+  google.protobuf.BoolValue should_open_in_new_window = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Defines if the action should open in a new window or current window in the browser"}];
 
   google.protobuf.BoolValue is_private = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Defines if the action is private to the user or shared with the team"}];
 
@@ -36,6 +37,31 @@ message Action {
   ActionDefinition definition = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definition of the action"}];
 
   optional ActionDataSourceType data_source = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Defines the data source type of the action, if applicable"}];
+}
+
+message DashboardAction {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Dashboard Action"
+      description: "Public actions that are always available within specific dashboard's context."
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Learn more about Custom Dashboards in our documentation."
+    }
+  };
+
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A unique identifier of the action"}];
+
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The display name of the action"}];
+
+  google.protobuf.BoolValue should_open_in_new_window = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Defines if the action should open in a new window or current window in the browser"}];
+
+  optional google.protobuf.StringValue widget_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Reference to specific widget within a dashboard, can be null if the action is dashboard wide"}];
+
+  ActionDefinition definition = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definition of the action"}];
+
+  optional ActionDataSourceType data_source = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Defines the data source type of the action, if applicable"}];
 }
 
 message ActionDefinition {

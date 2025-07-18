@@ -1,0 +1,184 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.filters;
+
+import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message Filter {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Filter"
+      description: "This data structure represents the configuration for filtering data on the dashboard."
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
+      description: "Discover how to filter and query data in Custom Dashboards by exploring our documentation."
+    }
+  };
+
+  Source source = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The source of the filter, which can be logs, spans, or metrics."}];
+
+  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the filter is currently enabled or not."}];
+
+  google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the filter's UI representation should be collapsed or expanded."}];
+
+  message Source {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Source"
+        description: "Defines the type of data the filter applies to."
+      }
+    };
+
+    oneof value {
+      LogsFilter logs = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for logs."}];
+      SpansFilter spans = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for spans."}];
+      MetricsFilter metrics = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter configuration for metrics."}];
+    }
+  }
+
+  message LogsFilter {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "LogsFilter"
+        description: "This data structure represents the filter criteria for logs."
+      }
+    };
+
+    google.protobuf.StringValue field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The log field to which the filter is applied."}];
+
+    Operator operator = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the logs."}];
+
+    v1.common.ObservationField observation_field = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The observation log field to which the filter is applied."}];
+  }
+
+  message SpansFilter {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "SpansFilter"
+        description: "This data structure represents the filter criteria for spans."
+      }
+    };
+
+    common.SpanField field = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The span field to which the filter is applied."}];
+
+    Operator operator = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the spans."}];
+
+    v1.common.SpanObservationField observation_field = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)"}];
+  }
+
+  message MetricsFilter {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "MetricsFilter"
+        description: "This data structure represents the filter criteria for metrics."
+      }
+    };
+
+    google.protobuf.StringValue metric = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The name of the metric to which the filter is applied."}];
+
+    google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The label associated with the metric."}];
+
+    Operator operator = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "An operator used for filtering the metrics."}];
+  }
+
+  message Operator {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Operator"
+        description: "This data structure defines the comparison operation for the filter."
+      }
+    };
+
+    // Specifies the type of the comparison operation.
+    oneof value {
+      Equals equals = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Equality comparison."}];
+      NotEquals not_equals = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Non-equality comparison."}];
+    }
+  }
+
+  message Equals {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "Equals"
+        description: "This data structure represents an equality comparison operation."
+      }
+    };
+
+    Selection selection = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The selection criteria for the equality comparison."}];
+
+    message Selection {
+      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Selection"
+          description: "This data structure defines the values for the equality comparison."
+        }
+      };
+
+      // Specifies the type of selection for the equality comparison.
+      oneof value {
+        AllSelection all = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection of all values."}];
+        ListSelection list = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection from a list of values."}];
+      }
+
+      message AllSelection {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "AllSelection"
+            description: "This data structure indicates that all values are selected."
+          }
+        };
+      }
+
+      message ListSelection {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "ListSelection"
+            description: "This data structure represents a selection from a list of specific values."
+          }
+        };
+
+        repeated google.protobuf.StringValue values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of selected values."}];
+      }
+    }
+  }
+
+  message NotEquals {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      json_schema: {
+        title: "NotEquals"
+        description: "This data structure represents a non-equality comparison operation."
+      }
+    };
+
+    Selection selection = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The selection criteria for the non-equality comparison."}];
+
+    message Selection {
+      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Selection"
+          description: "This data structure defines the values for the non-equality comparison."
+        }
+      };
+
+      // Specifies the type of selection for the non-equality comparison.
+      oneof value {
+        ListSelection list = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Represents a selection from a list of values."}];
+      }
+
+      message ListSelection {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+          json_schema: {
+            title: "ListSelection"
+            description: "This data structure represents a selection from a list of specific values."
+          }
+        };
+
+        repeated google.protobuf.StringValue values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of values for the selection."}];
+      }
+    }
+  }
+}
