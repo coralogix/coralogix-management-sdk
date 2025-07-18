@@ -18,25 +18,27 @@ import (
 	"context"
 
 	dashboards "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
+	services "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/services"
 )
 
 // ListDashboardFolderRequest is a request to get a dashboard folders.
-type ListDashboardFolderRequest = dashboards.ListDashboardFoldersRequest
+type ListDashboardFolderRequest = services.ListDashboardFoldersRequest
 
 // CreateDashboardFolderRequest is a request to create a dashboards folder.
-type CreateDashboardFolderRequest = dashboards.CreateDashboardFolderRequest
+type CreateDashboardFolderRequest = services.CreateDashboardFolderRequest
 
 // DashboardFolder is a dashboard folder.
-type DashboardFolder = dashboards.DashboardFolder
+type DashboardFolder = common.DashboardFolder
 
 // GetDashboardFolderRequest is a request to get a dashboard folders.
-type GetDashboardFolderRequest = dashboards.GetDashboardFolderRequest
+type GetDashboardFolderRequest = services.GetDashboardFolderRequest
 
 // ReplaceDashboardFolderRequest is a request to replace a dashboard folder.
-type ReplaceDashboardFolderRequest = dashboards.ReplaceDashboardFolderRequest
+type ReplaceDashboardFolderRequest = services.ReplaceDashboardFolderRequest
 
 // DeleteDashboardFolderRequest is a request to delete a dashboard folder.
-type DeleteDashboardFolderRequest = dashboards.DeleteDashboardFolderRequest
+type DeleteDashboardFolderRequest = services.DeleteDashboardFolderRequest
 
 const dashboardFoldersFeatureGroupID = "dashboards"
 
