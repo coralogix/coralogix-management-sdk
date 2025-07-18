@@ -273,6 +273,8 @@
       }
     ]
   },
+  "actions": [],
+  "variables_v2": [],
   "variables": [
     {
       "name": "test_variable",
