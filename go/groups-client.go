@@ -34,6 +34,29 @@ type GroupsUser = groups.User
 // RoleID is a type for a role ID to use in a group.
 type RoleID = groups.RoleId
 
+// FilterType is a type for a filter type in a group.
+type FilterType = groups.FilterType
+
+const (
+	FilterTypeUnspecified = groups.FilterType_FILTER_TYPE_UNSPECIFIED
+	FilterTypeStartsWith  = groups.FilterType_FILTER_TYPE_STARTS_WITH
+	FilterTypeEndsWith    = groups.FilterType_FILTER_TYPE_ENDS_WITH
+	FilterTypeContains    = groups.FilterType_FILTER_TYPE_CONTAINS
+	FilterTypeExact       = groups.FilterType_FILTER_TYPE_EXACT
+)
+
+// ScopeFilters is a type for scope filters used in group operations.
+type ScopeFilters = groups.ScopeFilters
+
+// GroupScopeFilter is a filter for a group scope.
+type GroupScopeFilter = groups.ScopeFilter
+
+// ScopeID is a type for a scope ID to use in a group.
+type ScopeID = groups.ScopeId
+
+// Role is a type for a role in a group.
+type Role = groups.Role
+
 // UserID is a type for a user ID to use in a group.
 type UserID = groups.UserId
 
@@ -48,6 +71,9 @@ type UpdateTeamGroupRequestUserUpdates = groups.UpdateTeamGroupRequest_UserUpdat
 
 // GetTeamGroupRequest is a type for a request.
 type GetTeamGroupRequest = groups.GetTeamGroupRequest
+
+// GetTeamGroupResponse is a type for a response.
+type GetTeamGroupResponse = groups.GetTeamGroupResponse
 
 // GetTeamGroupByNameRequest is a type for a request.
 type GetTeamGroupByNameRequest = groups.GetTeamGroupByNameRequest
