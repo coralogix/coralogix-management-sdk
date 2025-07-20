@@ -7,6 +7,12 @@ revision = "v0.4.3"
 commit_hash = "5da4d4197ad0eaeac66f61d3b18bcb9769b4a552"
 
 [[dependencies]]
+name = "cx-api-ai-evaluation-configurations"
+url = "github.com/coralogix/cx-api-ai-evaluation-configurations"
+revision = "412bd8c858a6a9fb38706d56c115a4fe3a73c746"
+commit_hash = "412bd8c858a6a9fb38706d56c115a4fe3a73c746"
+
+[[dependencies]]
 name = "cx-api-alert-scheduler"
 url = "github.com/coralogix/alert-scheduler-rule-protobuf"
 revision = "v0.0.1"

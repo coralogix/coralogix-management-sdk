@@ -467,3 +467,13 @@ allow_policies = [
     "src/com/coralogixapis/events/v3/events_query_filter.proto",
     "src/com/coralogixapis/events/v3/events_service.proto",
 ]
+
+[cx-api-ai-evaluation-configurations]
+url = 'github.com/coralogix/cx-api-ai-evaluation-configurations'
+revision = '412bd8c858a6a9fb38706d56c115a4fe3a73c746'
+allow_policies = [
+    "com/coralogixapis/ai/v3/application.proto",
+    "com/coralogixapis/ai/v3/evaluation.proto",
+    "com/coralogixapis/ai/v3/evaluation_configs.proto",
+    "com/coralogixapis/ai/v3/service.proto",
+]

@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package com.coralogixapis.ai.v3;
+
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/ai/v3/evaluation_configs.proto";
+
+enum EvaluationTarget {
+  prompt = 0;
+  response = 1;
+}
+
+message AiEvaluation {
+  string id = 1;
+  string company_id = 2;
+  string application = 3;
+  string subsystem = 4;
+  EvaluationTarget target = 5;
+  EvaluationConfig config = 6;
+  bool is_enabled = 7;
+  string created_by = 8;
+  google.protobuf.Timestamp created_at = 9;
+  google.protobuf.Timestamp updated_at = 10;
+}
+
+// Request to create a new ai evaluation
+message CreateAiEvaluationRequest {
+  string application = 1;
+  string subsystem = 2;
+  EvaluationTarget target = 3;
+  EvaluationConfig config = 4;
+  bool is_enabled = 5;
+}
+
+// Request to get an ai evaluation
+message GetAiEvaluationRequest {
+  string id = 1;
+}
+
+// Request to update an ai evaluation
+message UpdateAiEvaluationRequest {
+  string id = 1;
+  optional string application = 2;
+  optional string subsystem = 3;
+  optional EvaluationTarget target = 4;
+  optional EvaluationConfig config = 5;
+  optional bool is_enabled = 6;
+}
+
+// Request to delete an ai evaluation
+message DeleteAiEvaluationRequest {
+  string id = 1;
+}
+
+// Request to list ai evaluations
+message ListAiEvaluationsRequest {
+  optional string application = 1;
+  optional string subsystem = 2;
+  optional EvaluationType evaluation_type = 3;
+  optional int32 page_size = 4;
+  optional int32 page_offset = 5;
+}
+
+// Response containing array of ai evaluations
+message ListAiEvaluationsResponse {
+  repeated AiEvaluation ai_evaluations = 1;
+}
+
+// Request to get evaluation counts by type
+message CountAiAppsPerEvalTypeRequest {
+}
+
+// Response containing evaluation counts by type
+message CountAiAppsPerEvalTypeResponse {
+  map<string, int32> counts = 1;
+}

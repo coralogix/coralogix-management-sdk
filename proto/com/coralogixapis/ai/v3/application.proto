@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package com.coralogixapis.ai.v3;
+
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/ai/v3/evaluation_configs.proto";
+
+// Represents a single ai application
+message AiApplication {
+  string id = 1;
+  string company_id = 2;
+  string application = 3;
+  string subsystem = 4;
+  google.protobuf.Timestamp created_at = 10;
+  google.protobuf.Timestamp updated_at = 11;
+}
+
+// Request to list ai applications
+message ListAiApplicationsRequest {
+  optional int32 page_size = 4;
+  optional int32 page_offset = 5;
+  repeated EvaluationType evaluation_types = 6;
+}
+
+// Response containing array of ai applications
+message ListAiApplicationsResponse {
+  repeated AiApplication ai_applications = 1;
+}
