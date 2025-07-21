@@ -9,8 +9,8 @@ commit_hash = "5da4d4197ad0eaeac66f61d3b18bcb9769b4a552"
 [[dependencies]]
 name = "cx-api-alert-scheduler"
 url = "github.com/coralogix/alert-scheduler-rule-protobuf"
-revision = "v0.0.1"
-commit_hash = "85c62965137513ec113a421a7fb46648540cd4d6"
+revision = "v0.0.2"
+commit_hash = "cad91dc60183847c4a70dc0960a9ee5fb00a2982"
 
 [[dependencies]]
 name = "cx-api-alerts"

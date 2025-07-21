@@ -1,16 +1,177 @@
 syntax = "proto3";
+
+package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
+
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto";
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto";
-package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
 
 
 
 service AlertSchedulerRuleService {
-  rpc GetAlertSchedulerRule(GetAlertSchedulerRuleRequest) returns (GetAlertSchedulerRuleResponse) {}
-  rpc CreateAlertSchedulerRule(CreateAlertSchedulerRuleRequest) returns (CreateAlertSchedulerRuleResponse) {}
-  rpc UpdateAlertSchedulerRule(UpdateAlertSchedulerRuleRequest) returns (UpdateAlertSchedulerRuleResponse) {}
-  rpc DeleteAlertSchedulerRule(DeleteAlertSchedulerRuleRequest) returns (DeleteAlertSchedulerRuleResponse) {}
-  rpc GetBulkAlertSchedulerRule(GetBulkAlertSchedulerRuleRequest) returns (GetBulkAlertSchedulerRuleResponse) {}
-  rpc CreateBulkAlertSchedulerRule(CreateBulkAlertSchedulerRuleRequest) returns (CreateBulkAlertSchedulerRuleResponse) {}
-  rpc UpdateBulkAlertSchedulerRule(UpdateBulkAlertSchedulerRuleRequest) returns (UpdateBulkAlertSchedulerRuleResponse) {}
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Alert Scheduler Rule service"
+    description: "Manage your alert scheduler rules."
+  };
+
+  rpc GetAlertSchedulerRule(GetAlertSchedulerRuleRequest) returns (GetAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      get: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Get an alert scheduler rule"
+    };
+  }
+  rpc CreateAlertSchedulerRule(CreateAlertSchedulerRuleRequest) returns (CreateAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/alert-scheduler-rules"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Create an alert scheduler rule"
+    };
+  }
+  rpc UpdateAlertSchedulerRule(UpdateAlertSchedulerRuleRequest) returns (UpdateAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      put: "/v1/alert-scheduler-rules"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Update an alert scheduler rule"
+    };
+  }
+  rpc DeleteAlertSchedulerRule(DeleteAlertSchedulerRuleRequest) returns (DeleteAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      delete: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Delete an alert scheduler rule"
+    };
+  }
+
+  rpc GetBulkAlertSchedulerRule(GetBulkAlertSchedulerRuleRequest) returns (GetBulkAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      get: "/v1/alert-scheduler-rules/bulk"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Get multiple alert scheduler rules"
+    };
+  }
+  rpc CreateBulkAlertSchedulerRule(CreateBulkAlertSchedulerRuleRequest) returns (CreateBulkAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      post: "/v1/alert-scheduler-rules/bulk"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Create multiple alert scheduler rules"
+    };
+  }
+  rpc UpdateBulkAlertSchedulerRule(UpdateBulkAlertSchedulerRuleRequest) returns (UpdateBulkAlertSchedulerRuleResponse) {
+    option (google.api.http) = {
+      put: "/v1/alert-scheduler-rules/bulk"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert Scheduler Rule service"]
+      summary: "Update multiple alert scheduler rules"
+    };
+  }
+
 }

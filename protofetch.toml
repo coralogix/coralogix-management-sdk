@@ -329,17 +329,17 @@ allow_policies = [
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
-revision = 'v0.0.1'
+revision = 'v0.0.2'
 allow_policies = [
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_timeframe.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/schedule.proto",
-    "com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_timeframe.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/schedule.proto",
+    "src/com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto",
 ]
 
 [cx-api-permissions]
