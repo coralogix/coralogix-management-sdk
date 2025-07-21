@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.ast.variables_v2;
+
+import "com/coralogixapis/dashboards/v1/ast/variables_v2/variable_display_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto";
+import "com/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto";
+import "google/protobuf/wrappers.proto";
+
+message VariableV2 {
+  google.protobuf.StringValue name = 1;
+  google.protobuf.StringValue display_name = 3;
+  google.protobuf.StringValue description = 4;
+  variables_v2.VariableDisplayTypeV2 display_type = 5;
+  variables_v2.VariableSourceV2 source = 6;
+  variables_v2.VariableValueV2 value = 7;
+  google.protobuf.BoolValue display_full_row = 8;
+}

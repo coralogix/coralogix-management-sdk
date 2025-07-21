@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
-import "com/coralogixapis/dashboards/v1/ast/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto";
@@ -84,7 +84,7 @@ message Hexagon {
       description: "PromQL query string for querying metrics"
       example: '{ "value": "up{job=\'abc\'}" }'
     }];
-    repeated Filter.MetricsFilter filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of metrics filters"}];
+    repeated v1.ast.filters.Filter.MetricsFilter filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of metrics filters"}];
     common.MetricsQueryEditorMode editor_mode = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "Type of the query editor used to generate the query, can be text or builder based"
       example: "1"
@@ -108,7 +108,7 @@ message Hexagon {
       example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
     }];
     v1.common.LogsAggregation logs_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Aggregation function"}];
-    repeated Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of filters that narrow down query results"}];
+    repeated v1.ast.filters.Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of filters that narrow down query results"}];
     repeated v1.common.ObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields by which to group the results"}];
     v1.common.TimeFrameSelect time_frame = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the result should be returned"}];
   }
@@ -124,7 +124,7 @@ message Hexagon {
 
     common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Lucene query string to search span records"}];
     v1.common.SpansAggregation spans_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
-    repeated Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
+    repeated v1.ast.filters.Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
     repeated v1.common.SpanField group_by = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names to group the span records"}];
     v1.common.TimeFrameSelect time_frame = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
     repeated v1.common.SpanObservationField group_bys = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields to group the records by"}];
@@ -140,7 +140,7 @@ message Hexagon {
     };
 
     v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Dataprime query text"}];
-    repeated Filter.Source filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of query filters"}];
+    repeated v1.ast.filters.Filter.Source filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of query filters"}];
     v1.common.TimeFrameSelect time_frame = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
   }
 }
