@@ -122,6 +122,7 @@ const (
 	DeleteTeamGroupRPC          = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
 	AddUsersToTeamGroupRPC      = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
 	RemoveUsersFromTeamGroupRPC = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
+	GetGroupUsersRPC            = groups.TeamPermissionsMgmtService_GetGroupUsers_FullMethodName
 )
 
 // GroupsClient is a client for the Groups API
@@ -251,6 +252,24 @@ func (c GroupsClient) RemoveUsers(ctx context.Context, req *RemoveUsersFromTeamG
 	response, err := client.RemoveUsersFromTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, RemoveUsersFromTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// GetUsers retrieves all users in a group
+func (c GroupsClient) GetUsers(ctx context.Context, req *GetGroupUsersRequest) (*groups.GetGroupUsersResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
+
+	response, err := client.GetGroupUsers(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetGroupUsersRPC, groupsFeatureGroupID)
 	}
 	return response, nil
 }
