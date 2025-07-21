@@ -1,0 +1,127 @@
+syntax = "proto3";
+
+package com.coralogixapis.ai.v3;
+
+// These names correspond to real strings in the database.
+enum EvaluationType {
+  allowed_topics = 0;
+  competition = 1;
+  hallucination_completeness = 2;
+  hallucination_context_adherence = 3;
+  hallucination_context_relevance = 4;
+  hallucination_correctness = 5;
+  pii = 6;
+  prompt_injection = 7;
+  restricted_topics = 8;
+  sexism = 9;
+  sql_allowed_tables = 10;
+  sql_hallucination = 11;
+  sql_read_only = 12;
+  sql_restricted_tables = 13;
+  toxicity = 14;
+  hallucination_task_adherence = 15;
+  sql_load = 16;
+  language_mismatch = 17;
+  custom_evaluation = 18;
+}
+
+enum PiiCategory {
+  PHONE_NUMBER = 0;
+  EMAIL_ADDRESS = 1;
+  CREDIT_CARD = 2;
+  IBAN_CODE = 3;
+  US_SSN = 4;
+}
+
+message EvaluationConfig {
+  oneof evaluation {
+    AllowedTopicsConfig allowed_topics = 100;
+    CompetitionConfig competition = 101;
+    HallucinationCompletenessConfig hallucination_completeness = 102;
+    HallucinationContextAdherenceConfig hallucination_context_adherence = 103;
+    HallucinationContextRelevanceConfig hallucination_context_relevance = 104;
+    HallucinationCorrectnessConfig hallucination_correctness = 105;
+    PiiConfig pii = 106;
+    PromptInjectionConfig prompt_injection = 107;
+    RestrictedTopicsConfig restricted_topics = 108;
+    SexismConfig sexism = 109;
+    SqlAllowedTablesConfig sql_allowed_tables = 110;
+    SqlHallucinationConfig sql_hallucination = 111;
+    SqlReadOnlyConfig sql_read_only = 112;
+    SqlRestrictedTablesConfig sql_restricted_tables = 113;
+    ToxicityConfig toxicity = 114;
+    HallucinationTaskAdherenceConfig hallucination_task_adherence = 115;
+    SqlLoadConfig sql_load = 116;
+    LanguageMismatchConfig language_mismatch = 117;
+    CustomEvaluationConfig custom_evaluation_config = 118;
+  }
+}
+
+message AllowedTopicsConfig {
+    repeated string topics = 1;
+}
+
+message CompetitionConfig {
+    repeated string competitors = 1;
+}
+
+message HallucinationCompletenessConfig {
+}
+
+message HallucinationContextAdherenceConfig {
+}
+
+message HallucinationContextRelevanceConfig {
+}
+
+message HallucinationCorrectnessConfig {
+}
+
+message HallucinationTaskAdherenceConfig {
+}
+
+message PiiConfig {
+  repeated PiiCategory categories = 1;
+}
+
+message PromptInjectionConfig {
+    string additional_context = 1;
+}
+
+message RestrictedTopicsConfig {
+    repeated string topics = 1;
+}
+
+message SexismConfig {
+}
+
+message SqlAllowedTablesConfig {
+    repeated string tables = 1;
+}
+
+message SqlHallucinationConfig {
+}
+
+message SqlLoadConfig {
+  uint64 join_limit = 1;
+  uint64 cte_limit = 2;
+  bool allow_recursive_cte = 3;
+}
+
+message LanguageMismatchConfig {
+}
+
+message SqlReadOnlyConfig {
+}
+
+message SqlRestrictedTablesConfig {
+    repeated string tables = 1;
+}
+
+message ToxicityConfig {
+}
+
+message CustomEvaluationConfig {
+  string prompt = 1;
+  bool is_allowed = 2;
+}
