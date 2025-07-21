@@ -7,6 +7,7 @@
 package v1
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -385,21 +386,33 @@ var File_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sched
 
 const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_scheduler_response_proto_rawDesc = "" +
 	"\n" +
-	"Zcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto\x12;com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1\x1aVcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto\x1aRcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto\"\xa3\x01\n" +
+	"Zcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto\x12;com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1\x1aVcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto\x1aRcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd1\x03\n" +
 	"\x1dGetAlertSchedulerRuleResponse\x12\x81\x01\n" +
-	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule\"\xa6\x01\n" +
+	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule:\xab\x02\x92A\xa7\x02\n" +
+	"\x81\x01*0Get alert scheduler rule response data structure26This is a response sent to get an alert scheduler rule\xd2\x01\x14alert_scheduler_rule*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\xdf\x03\n" +
 	" CreateAlertSchedulerRuleResponse\x12\x81\x01\n" +
-	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule\"\xa6\x01\n" +
+	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule:\xb6\x02\x92A\xb2\x02\n" +
+	"\x8c\x01*3Create alert scheduler rule response data structure2>This is a response sent after creating an alert scheduler rule\xd2\x01\x14alert_scheduler_rule*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\xdf\x03\n" +
 	" UpdateAlertSchedulerRuleResponse\x12\x81\x01\n" +
-	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule\"\"\n" +
-	" DeleteAlertSchedulerRuleResponse\"\xc8\x01\n" +
+	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule:\xb6\x02\x92A\xb2\x02\n" +
+	"\x8c\x01*3Create alert scheduler rule response data structure2>This is a response sent after creating an alert scheduler rule\xd2\x01\x14alert_scheduler_rule*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\"\n" +
+	" DeleteAlertSchedulerRuleResponse\"\x95\x04\n" +
 	"$CreateBulkAlertSchedulerRuleResponse\x12\x9f\x01\n" +
-	"\x1ccreate_suppression_responses\x18\x01 \x03(\v2].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleResponseR\x1acreateSuppressionResponses\"\xc8\x01\n" +
+	"\x1ccreate_suppression_responses\x18\x01 \x03(\v2].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleResponseR\x1acreateSuppressionResponses:\xca\x02\x92A\xc6\x02\n" +
+	"\xa0\x01*8Create bulk alert scheduler rule response data structure2EThis is a response sent after creating multiple alert scheduler rules\xd2\x01\x1ccreate_suppression_responses*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\x95\x04\n" +
 	"$UpdateBulkAlertSchedulerRuleResponse\x12\x9f\x01\n" +
-	"\x1cupdate_suppression_responses\x18\x01 \x03(\v2].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleResponseR\x1aupdateSuppressionResponses\"\xe4\x01\n" +
+	"\x1cupdate_suppression_responses\x18\x01 \x03(\v2].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleResponseR\x1aupdateSuppressionResponses:\xca\x02\x92A\xc6\x02\n" +
+	"\xa0\x01*8Update bulk alert scheduler rule response data structure2EThis is a response sent after updating multiple alert scheduler rules\xd2\x01\x1cupdate_suppression_responses*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\xa6\x04\n" +
 	"!GetBulkAlertSchedulerRuleResponse\x12\x96\x01\n" +
 	"\x15alert_scheduler_rules\x18\x01 \x03(\v2b.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleWithActiveTimeframeR\x13alertSchedulerRules\x12&\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken\"\xb0\x02\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\tR\rnextPageToken:\xbf\x02\x92A\xbb\x02\n" +
+	"\x95\x01*5Get bulk alert scheduler rule response data structure2DThis is a response sent after getting multiple alert scheduler rules\xd2\x01\x15alert_scheduler_rules*\xa0\x01\n" +
+	"?Find out more about alert scheduler rules in our documentation.\x12]https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/\"\xb0\x02\n" +
 	"%AlertSchedulerRuleWithActiveTimeframe\x12\x81\x01\n" +
 	"\x14alert_scheduler_rule\x18\x01 \x01(\v2O.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.AlertSchedulerRuleR\x12alertSchedulerRule\x12\x82\x01\n" +
 	"\x16next_active_timeframes\x18\x02 \x03(\v2L.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.ActiveTimeframeR\x14nextActiveTimeframesb\x06proto3"
