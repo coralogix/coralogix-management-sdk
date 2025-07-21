@@ -112,10 +112,10 @@ type SetTeamGroupScopeRequest = groups.SetTeamGroupScopeRequest
 type GetTeamGroupScopeRequest = groups.GetTeamGroupScopeRequest
 
 // GetGroupUsersResponseNoMorePages is a constant for the response when there are no more pages of users in a group.
-type GetGroupUsersResponseNoMorePages = groups.GetGroupUsersResponse_NoMorePages
+type GetGroupUsersResponseNoMorePages = groups.GetGroupUsersResponse_NoMorePages_
 
-// GetGroupUsersResponseNextPageToken is a type for the next page token in a group users response.
-type GetGroupUsersResponseNextPageToken = groups.GetGroupUsersResponse_NextPageToken
+// GetGroupUsersResponseToken is a type for the next page token in a group users response.
+type GetGroupUsersResponseToken = groups.GetGroupUsersResponse_Token
 
 const groupsFeatureGroupID = "aaa"
 
