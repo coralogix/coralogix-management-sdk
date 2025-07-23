@@ -70,3 +70,9 @@ For each resource type, the script runs:
 2. **Validation Phase**: Executes `terraform plan` to detect drift
 3. **Result Classification**: Categorizes the outcome as success, failure, or drift
 4. **Cleanup**: Removes temporary migration folders
+
+## GitHub Actions Pipeline
+
+The script runs in GitHub Actions workflow (test-tf-import)[../../../.github/workflows/test-tf-import.yml] on schedule, testing the latest patch version of each minor version declared in the workflow matrix.
+
+Full test logs with all output from Terraform are saved as an artifact and can be downloaded from the workflow's page by using the link from `Upload test logs` action. This can be particularly useful for troubleshooting import errors.
