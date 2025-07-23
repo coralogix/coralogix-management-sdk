@@ -31,5 +31,5 @@ jobs:
           cargo run --bin version_updater  -- -r ../.. -o ${{ github.repository }} -v ${{ github.event.inputs.sdk_version }}
         working-directory: tools/release-management
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_READER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           RUST_LOG: debug

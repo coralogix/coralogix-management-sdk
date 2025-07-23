@@ -190,7 +190,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.5.9"
+revision = "v2.6.5"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -246,6 +246,13 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/variables/variable_display_type.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variables/variable_source.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variables/variable_value.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/filters/filter.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables/variable.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_display_type.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto",
 ]
 
 [cx-api-logs2metrics]
@@ -260,7 +267,7 @@ revision = "v0.3.3"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.9"
+revision = "v0.3.10"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -322,17 +329,17 @@ allow_policies = [
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
-revision = 'v0.0.1'
+revision = 'v0.0.2'
 allow_policies = [
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_timeframe.proto",
-    "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/schedule.proto",
-    "com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_timeframe.proto",
+    "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/schedule.proto",
+    "src/com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto",
 ]
 
 [cx-api-permissions]
@@ -352,7 +359,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.124"
+revision = "v0.0.125"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
