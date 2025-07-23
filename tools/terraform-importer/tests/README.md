@@ -44,6 +44,8 @@ TF_PROVIDER_VERSION="2.1.0" ./import_test.sh
 TF_PROVIDER_VERSION="~>2.0.0" ./import_test.sh
 ```
 
+NOTE: please use double quotes when specifying the `TF_PROVIDER_VERSION`, otherwise you'll get errors from Bash.
+
 ## Environment Variables
 
 - `TF_PROVIDER_VERSION` - Override the default Terraform provider version (default: `2.1.0`)

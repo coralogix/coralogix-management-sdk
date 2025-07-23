@@ -134,6 +134,12 @@ run_complete_test_for_resource() {
     # Append output to log file
     cat "$temp_output" >> "$LOG_FILE"
     
+    # Extract and display the actual version being installed
+    local installed_version=$(grep -o "Installing coralogix/coralogix v[0-9]\+\.[0-9]\+\.[0-9]\+" "$temp_output" | sed 's/Installing coralogix\/coralogix v//')
+    if [ -n "$installed_version" ]; then
+        log "$INFO" "Terraform resolved version constraint '$DEFAULT_PROVIDER_VERSION' to: v$installed_version"
+    fi
+    
     # Check for terraform errors in the output
     local has_terraform_errors=false
     if grep -q "Error:" "$temp_output" || grep -q "│ Error:" "$temp_output"; then
@@ -315,7 +321,7 @@ main() {
     
     log "$INFO" "Starting comprehensive terraform provider resource import tests"
     log "$INFO" "Testing ${#RESOURCE_TYPES[@]} resource types: ${RESOURCE_TYPES[*]}"
-    log "$INFO" "Using Terraform provider version: $DEFAULT_PROVIDER_VERSION"
+    log "$INFO" "Using Terraform provider version constraint: $DEFAULT_PROVIDER_VERSION"
     log "$INFO" "All output will be logged to: $LOG_FILE"
     
     if [ ${#IGNORE_ERRORS_FOR[@]} -gt 0 ]; then
