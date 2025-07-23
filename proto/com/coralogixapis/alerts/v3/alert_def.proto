@@ -58,6 +58,10 @@ message AlertDef {
     example: "\"2023-10-01T12:00:00Z\""
     description: "The time when the alert definition was last updated"
   }];
+  google.protobuf.Timestamp last_triggered_time = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example: "\"2023-10-01T12:00:00Z\""
+    description: "The last time the alert definition was triggered"
+  }];
 }
 
 /**

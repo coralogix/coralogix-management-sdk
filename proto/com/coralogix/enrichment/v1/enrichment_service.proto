@@ -124,8 +124,14 @@ message RemoveEnrichmentsResponse {
 
 // Deletes all enrichments of the given type and replaces them with the new ones
 message AtomicOverwriteEnrichmentsRequest {
-  EnrichmentType enrichment_type = 1;
-  repeated EnrichmentFieldDefinition enrichment_fields = 2;
+  EnrichmentType enrichment_type = 1 [deprecated = true];
+  repeated EnrichmentFieldDefinition enrichment_fields = 2 [deprecated = true];
+  repeated EnrichmentRequest enrichment_requests = 3;
+
+  message EnrichmentRequest {
+    EnrichmentType enrichment_type = 1;
+    EnrichmentFieldDefinition enrichment_fields = 2;
+  }
 }
 
 message AtomicOverwriteEnrichmentsResponse {

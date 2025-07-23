@@ -9,7 +9,7 @@ import "google/protobuf/wrappers.proto";
 
 message VariableSourceV2 {
   oneof value {
-    ConstantListSource constant_list = 1;
+    StaticSource static = 1;
     QuerySource query = 2;
   }
   v1.common.OrderDirection values_order_direction = 3;
@@ -17,8 +17,13 @@ message VariableSourceV2 {
   ValueDisplayOptions value_display_options = 5;
   AllOption all_option = 6;
 
-  message ConstantListSource {
-    repeated google.protobuf.StringValue values = 1;
+  message StaticSource {
+    message ValueLabel {
+      google.protobuf.StringValue value = 1;
+      google.protobuf.StringValue label = 2;
+
+    }
+    repeated ValueLabel values = 1;
   }
 
   message QuerySource {
