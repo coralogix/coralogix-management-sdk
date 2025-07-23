@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tf_provider_version: ['2.1.0']
+        tf_provider_version: ["~>2.0.0", "~>2.1.0"]
     defaults:
       run:
         working-directory: tools/terraform-importer
@@ -44,7 +44,7 @@ jobs:
           echo "$HOME/go/bin" >> $GITHUB_PATH
 
       - name: Run Terraform Import Test Script
-        run: TF_PROVIDER_VERSION=${{ matrix.tf_provider_version }} ./tests/import_test.sh
+        run: TF_PROVIDER_VERSION="${{ matrix.tf_provider_version }}" ./tests/import_test.sh
 
       - name: Upload test logs
         uses: actions/upload-artifact@v4
