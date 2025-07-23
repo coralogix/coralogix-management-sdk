@@ -131,6 +131,59 @@ func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]inte
 	return resourceMap
 }
 
+// handleDataTableFilters ensures data_table filters have required metric attribute
+func handleDataTableFilters(resourceMap map[string]interface{}) map[string]interface{} {
+	// Navigate through the structure to find data_table widgets
+	if layout, ok := resourceMap["layout"].(map[string]interface{}); ok {
+		if sections, ok := layout["sections"].([]interface{}); ok {
+			for _, section := range sections {
+				if sectionMap, ok := section.(map[string]interface{}); ok {
+					if rows, ok := sectionMap["rows"].([]interface{}); ok {
+						for _, row := range rows {
+							if rowMap, ok := row.(map[string]interface{}); ok {
+								if widgets, ok := rowMap["widgets"].([]interface{}); ok {
+									for _, widget := range widgets {
+										if widgetMap, ok := widget.(map[string]interface{}); ok {
+											if definition, ok := widgetMap["definition"].(map[string]interface{}); ok {
+												if dataTable, ok := definition["data_table"].(map[string]interface{}); ok {
+													if query, ok := dataTable["query"].(map[string]interface{}); ok {
+														if metrics, ok := query["metrics"].(map[string]interface{}); ok {
+															if filters, ok := metrics["filters"].([]interface{}); ok {
+																// Process each filter to ensure metric attribute exists
+																for _, filter := range filters {
+																	if filterMap, ok := filter.(map[string]interface{}); ok {
+																		if _, hasMetric := filterMap["metric"]; !hasMetric {
+																			// Add missing metric attribute with a default value
+																			if label, hasLabel := filterMap["label"]; hasLabel {
+																				if labelStr, ok := label.(string); ok {
+																					filterMap["metric"] = labelStr
+																				} else {
+																					filterMap["metric"] = "vector"
+																				}
+																			} else {
+																				filterMap["metric"] = "vector"
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	return resourceMap
+}
+
 // generateTerraform converts parsed JSON into a Terraform HCL configuration.
 func generateTerraform(jsonData map[string]interface{}) string {
 	var terraformLines []string
@@ -142,9 +195,11 @@ func generateTerraform(jsonData map[string]interface{}) string {
 					if resourceArray, ok := resourceList.([]interface{}); ok {
 						for _, resource := range resourceArray {
 							if resourceMap, ok := resource.(map[string]interface{}); ok {
-								// Apply special handling for archive_retentions
 								if resourceType == "coralogix_archive_retentions" {
 									resourceMap = handleArchiveRetentions(resourceMap)
+								}
+								if resourceType == "coralogix_dashboard" {
+									resourceMap = handleDataTableFilters(resourceMap)
 								}
 
 								terraformLines = append(terraformLines, fmt.Sprintf(`resource "%s" "%s" {`, resourceType, resourceName))
