@@ -53,7 +53,7 @@ You will be prompted to choose the migration type:
 
 #### **Step 2: Specify Provider Version**
 After selecting the migration type, you will be prompted to specify the Terraform provider version:
-- Example: `~>1.19.0`.
+- Example: `~>1.18.0`.
 - The script will default to `>=2.0.0` if no input is provided.
 
 ---
@@ -102,7 +102,7 @@ Enter your choice (1 or 2): 2
 
 #### **Provider Version Prompt**
 ```plaintext
-Enter the Terraform provider version to migrate to (e.g., ~>1.19.0): >=2.0.0
+Enter the Terraform provider version to migrate to (e.g., ~>1.18.0): >=2.0.0
 ```
 
 #### **Logs During Execution**

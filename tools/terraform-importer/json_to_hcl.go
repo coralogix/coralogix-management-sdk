@@ -1,3 +1,5 @@
+//go:build jsonhcl
+
 // Copyright 2024 Coralogix Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +22,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/PaesslerAG/jsonpath"
 )
 
 // formatValue formats values for Terraform, handling multi-line strings with heredoc syntax.
@@ -50,7 +54,12 @@ func formatValue(value interface{}) string {
 	case map[string]interface{}:
 		var lines []string
 		for key, val := range v {
-			lines = append(lines, fmt.Sprintf(`  %s = %s`, key, formatValue(val)))
+			// Quote keys that contain dots to handle cases like "tags.http.method"
+			quotedKey := key
+			if strings.Contains(key, ".") {
+				quotedKey = fmt.Sprintf(`"%s"`, key)
+			}
+			lines = append(lines, fmt.Sprintf(`  %s = %s`, quotedKey, formatValue(val)))
 		}
 		return fmt.Sprintf("{\n%s\n}", strings.Join(lines, "\n"))
 	default:
@@ -90,6 +99,103 @@ func processBlock(key string, value interface{}) string {
 	}
 }
 
+// handleArchiveRetentions applies special logic for archive_retentions resource
+// The first retention is the default retention and can't have a name set
+func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]interface{} {
+	// Use JSONPath to find the first retention's name and remove it
+	nameResult, err := jsonpath.Get("$.retentions[0].name", resourceMap)
+	if err != nil || nameResult == nil {
+		return resourceMap // No first retention or no name field
+	}
+
+	// Clone the resource map to avoid modifying the original
+	result := make(map[string]interface{})
+	for k, v := range resourceMap {
+		result[k] = v
+	}
+
+	// Get the retentions array
+	retentions, err := jsonpath.Get("$.retentions", resourceMap)
+	if err != nil {
+		return resourceMap
+	}
+
+	if retentionSlice, ok := retentions.([]interface{}); ok && len(retentionSlice) > 0 {
+		// Clone the retentions array
+		newRetentions := make([]interface{}, len(retentionSlice))
+		copy(newRetentions, retentionSlice)
+
+		// Clone the first retention map and remove the name field
+		if firstRetention, ok := newRetentions[0].(map[string]interface{}); ok {
+			newFirstRetention := make(map[string]interface{})
+			for key, value := range firstRetention {
+				if key != "name" {
+					newFirstRetention[key] = value
+				}
+			}
+			newRetentions[0] = newFirstRetention
+		}
+
+		result["retentions"] = newRetentions
+	}
+
+	return result
+}
+
+// handleDataTableFilters ensures data_table filters have required metric attribute
+func handleDataTableFilters(resourceMap map[string]interface{}) map[string]interface{} {
+	// Use JSONPath to find all data_table filters
+	filtersResult, err := jsonpath.Get("$..data_table.query.metrics.filters", resourceMap)
+	if err != nil {
+		return resourceMap // No data_table filters found
+	}
+
+	// Convert to JSON and back to create a deep copy
+	jsonBytes, err := json.Marshal(resourceMap)
+	if err != nil {
+		return resourceMap
+	}
+
+	var result map[string]interface{}
+	if err := json.Unmarshal(jsonBytes, &result); err != nil {
+		return resourceMap
+	}
+
+	// Process all filter arrays found
+	switch filters := filtersResult.(type) {
+	case []interface{}:
+		// Single filter array found
+		processFilterArray(filters)
+	case [][]interface{}:
+		// Multiple filter arrays found
+		for _, filterArray := range filters {
+			processFilterArray(filterArray)
+		}
+	}
+
+	return result
+}
+
+// processFilterArray processes a single filter array to ensure metric attributes exist
+func processFilterArray(filters []interface{}) {
+	for _, filter := range filters {
+		if filterMap, ok := filter.(map[string]interface{}); ok {
+			if _, hasMetric := filterMap["metric"]; !hasMetric {
+				// Add missing metric attribute with a default value
+				if label, hasLabel := filterMap["label"]; hasLabel {
+					if labelStr, ok := label.(string); ok {
+						filterMap["metric"] = labelStr
+					} else {
+						filterMap["metric"] = "vector"
+					}
+				} else {
+					filterMap["metric"] = "vector"
+				}
+			}
+		}
+	}
+}
+
 // generateTerraform converts parsed JSON into a Terraform HCL configuration.
 func generateTerraform(jsonData map[string]interface{}) string {
 	var terraformLines []string
@@ -101,6 +207,13 @@ func generateTerraform(jsonData map[string]interface{}) string {
 					if resourceArray, ok := resourceList.([]interface{}); ok {
 						for _, resource := range resourceArray {
 							if resourceMap, ok := resource.(map[string]interface{}); ok {
+								if resourceType == "coralogix_archive_retentions" {
+									resourceMap = handleArchiveRetentions(resourceMap)
+								}
+								if resourceType == "coralogix_dashboard" {
+									resourceMap = handleDataTableFilters(resourceMap)
+								}
+
 								terraformLines = append(terraformLines, fmt.Sprintf(`resource "%s" "%s" {`, resourceType, resourceName))
 								for key, val := range resourceMap {
 									terraformLines = append(terraformLines, processBlock(key, val))

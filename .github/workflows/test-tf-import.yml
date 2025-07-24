@@ -1,0 +1,53 @@
+name: Terraform Provider Import Test
+
+on:
+  schedule:
+    - cron: '0 8 * * *'
+
+jobs:
+  test-tf-import:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tf_provider_version: ["~>2.0.0", "~>2.1.0"]
+    defaults:
+      run:
+        working-directory: tools/terraform-importer
+    env:
+      CORALOGIX_API_KEY: ${{ secrets.CORALOGIX_TEST_KEY }}
+      CORALOGIX_ENV: ${{ secrets.CORALOGIX_TEST_ENV }}
+      TERM: xterm
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.24'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.12.2
+
+      - name: Install hcl2json
+        run: |
+          go install github.com/tmccombs/hcl2json@latest
+          echo "$HOME/go/bin" >> $GITHUB_PATH
+
+      - name: Run Terraform Import Test Script
+        run: TF_PROVIDER_VERSION="${{ matrix.tf_provider_version }}" ./tests/import_test.sh
+
+      - name: Upload test logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: terraform-import-logs-${{ strategy.job-index }}
+          path: tools/terraform-importer/terraform_import_test_*.log
+          if-no-files-found: warn
