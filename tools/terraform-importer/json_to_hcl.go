@@ -1,3 +1,5 @@
+//go:build jsonhcl
+
 // Copyright 2024 Coralogix Ltd.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,6 +22,8 @@ import (
 	"log"
 	"os"
 	"strings"
+
+	"github.com/PaesslerAG/jsonpath"
 )
 
 // formatValue formats values for Terraform, handling multi-line strings with heredoc syntax.
@@ -98,90 +102,98 @@ func processBlock(key string, value interface{}) string {
 // handleArchiveRetentions applies special logic for archive_retentions resource
 // The first retention is the default retention and can't have a name set
 func handleArchiveRetentions(resourceMap map[string]interface{}) map[string]interface{} {
-	if retentions, ok := resourceMap["retentions"].([]interface{}); ok && len(retentions) > 0 {
-		// Check if the first retention has a name and remove it
-		if firstRetention, ok := retentions[0].(map[string]interface{}); ok {
-			if _, hasName := firstRetention["name"]; hasName {
-				// Create a copy of the first retention without the name field
-				newFirstRetention := make(map[string]interface{})
-				for key, value := range firstRetention {
-					if key != "name" {
-						newFirstRetention[key] = value
-					}
-				}
-
-				// Create a new retentions slice with the modified first retention
-				newRetentions := make([]interface{}, len(retentions))
-				newRetentions[0] = newFirstRetention
-				copy(newRetentions[1:], retentions[1:])
-
-				// Create a copy of the resource map with the new retentions
-				newResourceMap := make(map[string]interface{})
-				for key, value := range resourceMap {
-					if key == "retentions" {
-						newResourceMap[key] = newRetentions
-					} else {
-						newResourceMap[key] = value
-					}
-				}
-				return newResourceMap
-			}
-		}
+	// Use JSONPath to find the first retention's name and remove it
+	nameResult, err := jsonpath.Get("$.retentions[0].name", resourceMap)
+	if err != nil || nameResult == nil {
+		return resourceMap // No first retention or no name field
 	}
-	return resourceMap
+
+	// Clone the resource map to avoid modifying the original
+	result := make(map[string]interface{})
+	for k, v := range resourceMap {
+		result[k] = v
+	}
+
+	// Get the retentions array
+	retentions, err := jsonpath.Get("$.retentions", resourceMap)
+	if err != nil {
+		return resourceMap
+	}
+
+	if retentionSlice, ok := retentions.([]interface{}); ok && len(retentionSlice) > 0 {
+		// Clone the retentions array
+		newRetentions := make([]interface{}, len(retentionSlice))
+		copy(newRetentions, retentionSlice)
+
+		// Clone the first retention map and remove the name field
+		if firstRetention, ok := newRetentions[0].(map[string]interface{}); ok {
+			newFirstRetention := make(map[string]interface{})
+			for key, value := range firstRetention {
+				if key != "name" {
+					newFirstRetention[key] = value
+				}
+			}
+			newRetentions[0] = newFirstRetention
+		}
+
+		result["retentions"] = newRetentions
+	}
+
+	return result
 }
 
 // handleDataTableFilters ensures data_table filters have required metric attribute
 func handleDataTableFilters(resourceMap map[string]interface{}) map[string]interface{} {
-	// Navigate through the structure to find data_table widgets
-	if layout, ok := resourceMap["layout"].(map[string]interface{}); ok {
-		if sections, ok := layout["sections"].([]interface{}); ok {
-			for _, section := range sections {
-				if sectionMap, ok := section.(map[string]interface{}); ok {
-					if rows, ok := sectionMap["rows"].([]interface{}); ok {
-						for _, row := range rows {
-							if rowMap, ok := row.(map[string]interface{}); ok {
-								if widgets, ok := rowMap["widgets"].([]interface{}); ok {
-									for _, widget := range widgets {
-										if widgetMap, ok := widget.(map[string]interface{}); ok {
-											if definition, ok := widgetMap["definition"].(map[string]interface{}); ok {
-												if dataTable, ok := definition["data_table"].(map[string]interface{}); ok {
-													if query, ok := dataTable["query"].(map[string]interface{}); ok {
-														if metrics, ok := query["metrics"].(map[string]interface{}); ok {
-															if filters, ok := metrics["filters"].([]interface{}); ok {
-																// Process each filter to ensure metric attribute exists
-																for _, filter := range filters {
-																	if filterMap, ok := filter.(map[string]interface{}); ok {
-																		if _, hasMetric := filterMap["metric"]; !hasMetric {
-																			// Add missing metric attribute with a default value
-																			if label, hasLabel := filterMap["label"]; hasLabel {
-																				if labelStr, ok := label.(string); ok {
-																					filterMap["metric"] = labelStr
-																				} else {
-																					filterMap["metric"] = "vector"
-																				}
-																			} else {
-																				filterMap["metric"] = "vector"
-																			}
-																		}
-																	}
-																}
-															}
-														}
-													}
-												}
-											}
-										}
-									}
-								}
-							}
-						}
+	// Use JSONPath to find all data_table filters
+	filtersResult, err := jsonpath.Get("$..data_table.query.metrics.filters", resourceMap)
+	if err != nil {
+		return resourceMap // No data_table filters found
+	}
+
+	// Convert to JSON and back to create a deep copy
+	jsonBytes, err := json.Marshal(resourceMap)
+	if err != nil {
+		return resourceMap
+	}
+
+	var result map[string]interface{}
+	if err := json.Unmarshal(jsonBytes, &result); err != nil {
+		return resourceMap
+	}
+
+	// Process all filter arrays found
+	switch filters := filtersResult.(type) {
+	case []interface{}:
+		// Single filter array found
+		processFilterArray(filters)
+	case [][]interface{}:
+		// Multiple filter arrays found
+		for _, filterArray := range filters {
+			processFilterArray(filterArray)
+		}
+	}
+
+	return result
+}
+
+// processFilterArray processes a single filter array to ensure metric attributes exist
+func processFilterArray(filters []interface{}) {
+	for _, filter := range filters {
+		if filterMap, ok := filter.(map[string]interface{}); ok {
+			if _, hasMetric := filterMap["metric"]; !hasMetric {
+				// Add missing metric attribute with a default value
+				if label, hasLabel := filterMap["label"]; hasLabel {
+					if labelStr, ok := label.(string); ok {
+						filterMap["metric"] = labelStr
+					} else {
+						filterMap["metric"] = "vector"
 					}
+				} else {
+					filterMap["metric"] = "vector"
 				}
 			}
 		}
 	}
-	return resourceMap
 }
 
 // generateTerraform converts parsed JSON into a Terraform HCL configuration.
