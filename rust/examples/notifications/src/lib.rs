@@ -886,6 +886,7 @@ mod tests {
             }),
             id: None,
             alert_version_id: None,
+            last_triggered_time: None,
         }
     }
 
