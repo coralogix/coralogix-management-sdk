@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+import "google/protobuf/timestamp.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
+
+message TimeRange {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Time range"
+      description: "Represents a time range with start and end timestamps"
+      required: [
+        "start_time",
+        "end_time"
+      ]
+    }
+  };
+  google.protobuf.Timestamp start_time = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Start time of the range"}];
+  google.protobuf.Timestamp end_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "End time of the range"}];
+}

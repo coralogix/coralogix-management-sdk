@@ -233,7 +233,13 @@ impl AlertsClient {
 
     /// List all alert definitions.
     pub async fn list(&self) -> Result<ListAlertDefsResponse> {
-        let request = make_request_with_metadata(ListAlertDefsRequest {}, &self.metadata_map);
+        let request = make_request_with_metadata(
+            ListAlertDefsRequest {
+                pagination: None,
+                query_filter: None,
+            },
+            &self.metadata_map,
+        );
         {
             let mut client = self.service_client.lock().await.clone();
 

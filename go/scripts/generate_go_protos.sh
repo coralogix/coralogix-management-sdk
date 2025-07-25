@@ -34,10 +34,6 @@ do
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/archive/v2 "
                 args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/archive/v2 "
                 ;;
-            *service_catalog/v1* )
-                args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/catalog/v1 "
-                args+="--go-grpc_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogix/catalog/v1 "
-                ;;
             # The alerts v3 protos contain circular dependencies, so the files are going into the same namespace
             *alerts/v3* )
                 args+="--go_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/coralogixapis/alerts/v3 "

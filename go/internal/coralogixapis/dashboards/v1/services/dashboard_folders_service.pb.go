@@ -80,7 +80,8 @@ func (x *CreateDashboardFolderRequest) GetFolder() *common.DashboardFolder {
 }
 
 type CreateDashboardFolderResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	FolderId      *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -113,6 +114,13 @@ func (x *CreateDashboardFolderResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateDashboardFolderResponse.ProtoReflect.Descriptor instead.
 func (*CreateDashboardFolderResponse) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *CreateDashboardFolderResponse) GetFolderId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.FolderId
+	}
+	return nil
 }
 
 type ReplaceDashboardFolderRequest struct {
@@ -477,8 +485,9 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12O\n" +
 	"\x06folder\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb3\x01\x92A\xaf\x01\n" +
 	"0*.Create dashboard folder request data structure*{\n" +
-	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd6\x01\n" +
-	"\x1dCreateDashboardFolderResponse:\xb4\x01\x92A\xb0\x01\n" +
+	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x91\x02\n" +
+	"\x1dCreateDashboardFolderResponse\x129\n" +
+	"\tfolder_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb4\x01\x92A\xb0\x01\n" +
 	"1*/Create dashboard folder response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe4\x02\n" +
 	"\x1dReplaceDashboardFolderRequest\x12;\n" +
@@ -604,29 +613,30 @@ var file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_prot
 var file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_proto_depIdxs = []int32{
 	10, // 0: com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
 	11, // 1: com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
-	10, // 2: com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
-	11, // 3: com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
-	10, // 4: com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
-	10, // 5: com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest.folder_id:type_name -> google.protobuf.StringValue
-	11, // 6: com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
-	10, // 7: com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
-	10, // 8: com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest.folder_id:type_name -> google.protobuf.StringValue
-	11, // 9: com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
-	6,  // 10: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ListDashboardFolders:input_type -> com.coralogixapis.dashboards.v1.services.ListDashboardFoldersRequest
-	8,  // 11: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.GetDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest
-	0,  // 12: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.CreateDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest
-	2,  // 13: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ReplaceDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest
-	4,  // 14: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.DeleteDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest
-	7,  // 15: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ListDashboardFolders:output_type -> com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse
-	9,  // 16: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.GetDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse
-	1,  // 17: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.CreateDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse
-	3,  // 18: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ReplaceDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderResponse
-	5,  // 19: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.DeleteDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderResponse
-	15, // [15:20] is the sub-list for method output_type
-	10, // [10:15] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	10, // 2: com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse.folder_id:type_name -> google.protobuf.StringValue
+	10, // 3: com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
+	11, // 4: com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
+	10, // 5: com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
+	10, // 6: com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest.folder_id:type_name -> google.protobuf.StringValue
+	11, // 7: com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
+	10, // 8: com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest.request_id:type_name -> google.protobuf.StringValue
+	10, // 9: com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest.folder_id:type_name -> google.protobuf.StringValue
+	11, // 10: com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse.folder:type_name -> com.coralogixapis.dashboards.v1.common.DashboardFolder
+	6,  // 11: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ListDashboardFolders:input_type -> com.coralogixapis.dashboards.v1.services.ListDashboardFoldersRequest
+	8,  // 12: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.GetDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest
+	0,  // 13: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.CreateDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest
+	2,  // 14: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ReplaceDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest
+	4,  // 15: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.DeleteDashboardFolder:input_type -> com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest
+	7,  // 16: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ListDashboardFolders:output_type -> com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse
+	9,  // 17: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.GetDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse
+	1,  // 18: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.CreateDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse
+	3,  // 19: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.ReplaceDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderResponse
+	5,  // 20: com.coralogixapis.dashboards.v1.services.DashboardFoldersService.DeleteDashboardFolder:output_type -> com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderResponse
+	16, // [16:21] is the sub-list for method output_type
+	11, // [11:16] is the sub-list for method input_type
+	11, // [11:11] is the sub-list for extension type_name
+	11, // [11:11] is the sub-list for extension extendee
+	0,  // [0:11] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_proto_init() }

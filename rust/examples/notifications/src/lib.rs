@@ -886,6 +886,7 @@ mod tests {
             }),
             id: None,
             alert_version_id: None,
+            last_triggered_time: None,
         }
     }
 
@@ -893,6 +894,7 @@ mod tests {
         AlertDef {
             updated_time: None,
             created_time: None,
+            last_triggered_time: None,
             alert_def_properties: Some(AlertDefProperties {
                 name: Some("Standard alert example".to_string()),
                 description: Some("Example of standard alert from terraform".to_string()),

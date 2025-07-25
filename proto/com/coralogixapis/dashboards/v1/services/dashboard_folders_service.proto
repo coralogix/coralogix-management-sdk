@@ -190,6 +190,8 @@ message CreateDashboardFolderResponse {
       description: "Find out more Dashboards in our documentation."
     }
   };
+
+  google.protobuf.StringValue folder_id = 1;
 }
 
 message ReplaceDashboardFolderRequest {

@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.25"
+revision = "v0.5.28"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -23,6 +23,9 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_scheduling.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_severity.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type.proto",
+    "src/com/coralogixapis/alerts/v3/time_range.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_query_filter.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_query_filter_service.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto",
@@ -61,6 +64,8 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto",
     "src/com/coralogixapis/alerts/v3/alert_defs_service.proto",
     "src/com/coralogixapis/alerts/v3/commons.proto",
+    "src/com/coralogixapis/alerts/v3/time_range.proto",
+    "src/com/coralogixapis/alerts/v3/event/alert_event_service.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event_payload.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event_service.proto",
@@ -190,11 +195,12 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.6.5"
+revision = "v2.6.7"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
     "src/com/coralogixapis/dashboards/v1/ast/filter.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/filters/filter.proto",
     "src/com/coralogixapis/dashboards/v1/ast/folder_path.proto",
     "src/com/coralogixapis/dashboards/v1/ast/layout.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variable.proto",
@@ -267,7 +273,7 @@ revision = "v0.3.3"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.10"
+revision = "v0.3.11"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -329,7 +335,7 @@ allow_policies = [
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
-revision = 'v0.0.2'
+revision = "v0.0.2"
 allow_policies = [
     "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
     "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
@@ -344,7 +350,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.115"
+revision = "v0.1.117"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
