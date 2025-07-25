@@ -370,14 +370,11 @@ func (x *RemoveEnrichmentsResponse) GetRemainingEnrichments() []*Enrichment {
 
 // Deletes all enrichments of the given type and replaces them with the new ones
 type AtomicOverwriteEnrichmentsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Deprecated: Marked as deprecated in com/coralogix/enrichment/v1/enrichment_service.proto.
-	EnrichmentType *EnrichmentType `protobuf:"bytes,1,opt,name=enrichment_type,json=enrichmentType,proto3" json:"enrichment_type,omitempty"`
-	// Deprecated: Marked as deprecated in com/coralogix/enrichment/v1/enrichment_service.proto.
-	EnrichmentFields   []*EnrichmentFieldDefinition                           `protobuf:"bytes,2,rep,name=enrichment_fields,json=enrichmentFields,proto3" json:"enrichment_fields,omitempty"`
-	EnrichmentRequests []*AtomicOverwriteEnrichmentsRequest_EnrichmentRequest `protobuf:"bytes,3,rep,name=enrichment_requests,json=enrichmentRequests,proto3" json:"enrichment_requests,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state            protoimpl.MessageState       `protogen:"open.v1"`
+	EnrichmentType   *EnrichmentType              `protobuf:"bytes,1,opt,name=enrichment_type,json=enrichmentType,proto3" json:"enrichment_type,omitempty"`
+	EnrichmentFields []*EnrichmentFieldDefinition `protobuf:"bytes,2,rep,name=enrichment_fields,json=enrichmentFields,proto3" json:"enrichment_fields,omitempty"`
+	unknownFields    protoimpl.UnknownFields
+	sizeCache        protoimpl.SizeCache
 }
 
 func (x *AtomicOverwriteEnrichmentsRequest) Reset() {
@@ -410,7 +407,6 @@ func (*AtomicOverwriteEnrichmentsRequest) Descriptor() ([]byte, []int) {
 	return file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDescGZIP(), []int{8}
 }
 
-// Deprecated: Marked as deprecated in com/coralogix/enrichment/v1/enrichment_service.proto.
 func (x *AtomicOverwriteEnrichmentsRequest) GetEnrichmentType() *EnrichmentType {
 	if x != nil {
 		return x.EnrichmentType
@@ -418,17 +414,9 @@ func (x *AtomicOverwriteEnrichmentsRequest) GetEnrichmentType() *EnrichmentType 
 	return nil
 }
 
-// Deprecated: Marked as deprecated in com/coralogix/enrichment/v1/enrichment_service.proto.
 func (x *AtomicOverwriteEnrichmentsRequest) GetEnrichmentFields() []*EnrichmentFieldDefinition {
 	if x != nil {
 		return x.EnrichmentFields
-	}
-	return nil
-}
-
-func (x *AtomicOverwriteEnrichmentsRequest) GetEnrichmentRequests() []*AtomicOverwriteEnrichmentsRequest_EnrichmentRequest {
-	if x != nil {
-		return x.EnrichmentRequests
 	}
 	return nil
 }
@@ -557,58 +545,6 @@ func (x *GetCompanyEnrichmentSettingsResponse) GetEnrichmentSettings() *CompanyE
 	return nil
 }
 
-type AtomicOverwriteEnrichmentsRequest_EnrichmentRequest struct {
-	state            protoimpl.MessageState     `protogen:"open.v1"`
-	EnrichmentType   *EnrichmentType            `protobuf:"bytes,1,opt,name=enrichment_type,json=enrichmentType,proto3" json:"enrichment_type,omitempty"`
-	EnrichmentFields *EnrichmentFieldDefinition `protobuf:"bytes,2,opt,name=enrichment_fields,json=enrichmentFields,proto3" json:"enrichment_fields,omitempty"`
-	unknownFields    protoimpl.UnknownFields
-	sizeCache        protoimpl.SizeCache
-}
-
-func (x *AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) Reset() {
-	*x = AtomicOverwriteEnrichmentsRequest_EnrichmentRequest{}
-	mi := &file_com_coralogix_enrichment_v1_enrichment_service_proto_msgTypes[12]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) ProtoMessage() {}
-
-func (x *AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogix_enrichment_v1_enrichment_service_proto_msgTypes[12]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use AtomicOverwriteEnrichmentsRequest_EnrichmentRequest.ProtoReflect.Descriptor instead.
-func (*AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDescGZIP(), []int{8, 0}
-}
-
-func (x *AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) GetEnrichmentType() *EnrichmentType {
-	if x != nil {
-		return x.EnrichmentType
-	}
-	return nil
-}
-
-func (x *AtomicOverwriteEnrichmentsRequest_EnrichmentRequest) GetEnrichmentFields() *EnrichmentFieldDefinition {
-	if x != nil {
-		return x.EnrichmentFields
-	}
-	return nil
-}
-
 var File_com_coralogix_enrichment_v1_enrichment_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc = "" +
@@ -640,14 +576,10 @@ const file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc = "" +
 	"\x19RemoveEnrichmentsResponse\x12\\\n" +
 	"\x15remaining_enrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\x14remainingEnrichments:\xef\x01\x92A\xeb\x01\n" +
 	"k*\x1fEncrichments Delettion Response20Response data structure for enrichments deletion\xd2\x01\x15remaining_enrichments*|\n" +
-	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xbb\x04\n" +
-	"!AtomicOverwriteEnrichmentsRequest\x12X\n" +
-	"\x0fenrichment_type\x18\x01 \x01(\v2+.com.coralogix.enrichment.v1.EnrichmentTypeB\x02\x18\x01R\x0eenrichmentType\x12g\n" +
-	"\x11enrichment_fields\x18\x02 \x03(\v26.com.coralogix.enrichment.v1.EnrichmentFieldDefinitionB\x02\x18\x01R\x10enrichmentFields\x12\x81\x01\n" +
-	"\x13enrichment_requests\x18\x03 \x03(\v2P.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.EnrichmentRequestR\x12enrichmentRequests\x1a\xce\x01\n" +
-	"\x11EnrichmentRequest\x12T\n" +
+	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xde\x01\n" +
+	"!AtomicOverwriteEnrichmentsRequest\x12T\n" +
 	"\x0fenrichment_type\x18\x01 \x01(\v2+.com.coralogix.enrichment.v1.EnrichmentTypeR\x0eenrichmentType\x12c\n" +
-	"\x11enrichment_fields\x18\x02 \x01(\v26.com.coralogix.enrichment.v1.EnrichmentFieldDefinitionR\x10enrichmentFields\"o\n" +
+	"\x11enrichment_fields\x18\x02 \x03(\v26.com.coralogix.enrichment.v1.EnrichmentFieldDefinitionR\x10enrichmentFields\"o\n" +
 	"\"AtomicOverwriteEnrichmentsResponse\x12I\n" +
 	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments\"%\n" +
 	"#GetCompanyEnrichmentSettingsRequest\"\x8f\x01\n" +
@@ -681,58 +613,54 @@ func file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDescGZIP() []b
 	return file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDescData
 }
 
-var file_com_coralogix_enrichment_v1_enrichment_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_com_coralogix_enrichment_v1_enrichment_service_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_com_coralogix_enrichment_v1_enrichment_service_proto_goTypes = []any{
-	(*GetEnrichmentLimitRequest)(nil),                           // 0: com.coralogix.enrichment.v1.GetEnrichmentLimitRequest
-	(*GetEnrichmentLimitResponse)(nil),                          // 1: com.coralogix.enrichment.v1.GetEnrichmentLimitResponse
-	(*GetEnrichmentsRequest)(nil),                               // 2: com.coralogix.enrichment.v1.GetEnrichmentsRequest
-	(*GetEnrichmentsResponse)(nil),                              // 3: com.coralogix.enrichment.v1.GetEnrichmentsResponse
-	(*AddEnrichmentsRequest)(nil),                               // 4: com.coralogix.enrichment.v1.AddEnrichmentsRequest
-	(*AddEnrichmentsResponse)(nil),                              // 5: com.coralogix.enrichment.v1.AddEnrichmentsResponse
-	(*RemoveEnrichmentsRequest)(nil),                            // 6: com.coralogix.enrichment.v1.RemoveEnrichmentsRequest
-	(*RemoveEnrichmentsResponse)(nil),                           // 7: com.coralogix.enrichment.v1.RemoveEnrichmentsResponse
-	(*AtomicOverwriteEnrichmentsRequest)(nil),                   // 8: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest
-	(*AtomicOverwriteEnrichmentsResponse)(nil),                  // 9: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse
-	(*GetCompanyEnrichmentSettingsRequest)(nil),                 // 10: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest
-	(*GetCompanyEnrichmentSettingsResponse)(nil),                // 11: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse
-	(*AtomicOverwriteEnrichmentsRequest_EnrichmentRequest)(nil), // 12: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.EnrichmentRequest
-	(*Enrichment)(nil),                                          // 13: com.coralogix.enrichment.v1.Enrichment
-	(*EnrichmentRequestModel)(nil),                              // 14: com.coralogix.enrichment.v1.EnrichmentRequestModel
-	(*wrapperspb.UInt32Value)(nil),                              // 15: google.protobuf.UInt32Value
-	(*EnrichmentType)(nil),                                      // 16: com.coralogix.enrichment.v1.EnrichmentType
-	(*EnrichmentFieldDefinition)(nil),                           // 17: com.coralogix.enrichment.v1.EnrichmentFieldDefinition
-	(*CompanyEnrichmentSettings)(nil),                           // 18: com.coralogix.enrichment.v1.CompanyEnrichmentSettings
+	(*GetEnrichmentLimitRequest)(nil),            // 0: com.coralogix.enrichment.v1.GetEnrichmentLimitRequest
+	(*GetEnrichmentLimitResponse)(nil),           // 1: com.coralogix.enrichment.v1.GetEnrichmentLimitResponse
+	(*GetEnrichmentsRequest)(nil),                // 2: com.coralogix.enrichment.v1.GetEnrichmentsRequest
+	(*GetEnrichmentsResponse)(nil),               // 3: com.coralogix.enrichment.v1.GetEnrichmentsResponse
+	(*AddEnrichmentsRequest)(nil),                // 4: com.coralogix.enrichment.v1.AddEnrichmentsRequest
+	(*AddEnrichmentsResponse)(nil),               // 5: com.coralogix.enrichment.v1.AddEnrichmentsResponse
+	(*RemoveEnrichmentsRequest)(nil),             // 6: com.coralogix.enrichment.v1.RemoveEnrichmentsRequest
+	(*RemoveEnrichmentsResponse)(nil),            // 7: com.coralogix.enrichment.v1.RemoveEnrichmentsResponse
+	(*AtomicOverwriteEnrichmentsRequest)(nil),    // 8: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest
+	(*AtomicOverwriteEnrichmentsResponse)(nil),   // 9: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse
+	(*GetCompanyEnrichmentSettingsRequest)(nil),  // 10: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest
+	(*GetCompanyEnrichmentSettingsResponse)(nil), // 11: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse
+	(*Enrichment)(nil),                           // 12: com.coralogix.enrichment.v1.Enrichment
+	(*EnrichmentRequestModel)(nil),               // 13: com.coralogix.enrichment.v1.EnrichmentRequestModel
+	(*wrapperspb.UInt32Value)(nil),               // 14: google.protobuf.UInt32Value
+	(*EnrichmentType)(nil),                       // 15: com.coralogix.enrichment.v1.EnrichmentType
+	(*EnrichmentFieldDefinition)(nil),            // 16: com.coralogix.enrichment.v1.EnrichmentFieldDefinition
+	(*CompanyEnrichmentSettings)(nil),            // 17: com.coralogix.enrichment.v1.CompanyEnrichmentSettings
 }
 var file_com_coralogix_enrichment_v1_enrichment_service_proto_depIdxs = []int32{
-	13, // 0: com.coralogix.enrichment.v1.GetEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
-	14, // 1: com.coralogix.enrichment.v1.AddEnrichmentsRequest.request_enrichments:type_name -> com.coralogix.enrichment.v1.EnrichmentRequestModel
-	13, // 2: com.coralogix.enrichment.v1.AddEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
-	15, // 3: com.coralogix.enrichment.v1.RemoveEnrichmentsRequest.enrichment_ids:type_name -> google.protobuf.UInt32Value
-	13, // 4: com.coralogix.enrichment.v1.RemoveEnrichmentsResponse.remaining_enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
-	16, // 5: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.enrichment_type:type_name -> com.coralogix.enrichment.v1.EnrichmentType
-	17, // 6: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.enrichment_fields:type_name -> com.coralogix.enrichment.v1.EnrichmentFieldDefinition
-	12, // 7: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.enrichment_requests:type_name -> com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.EnrichmentRequest
-	13, // 8: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
-	18, // 9: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse.enrichment_settings:type_name -> com.coralogix.enrichment.v1.CompanyEnrichmentSettings
-	16, // 10: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.EnrichmentRequest.enrichment_type:type_name -> com.coralogix.enrichment.v1.EnrichmentType
-	17, // 11: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.EnrichmentRequest.enrichment_fields:type_name -> com.coralogix.enrichment.v1.EnrichmentFieldDefinition
-	2,  // 12: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichments:input_type -> com.coralogix.enrichment.v1.GetEnrichmentsRequest
-	4,  // 13: com.coralogix.enrichment.v1.EnrichmentService.AddEnrichments:input_type -> com.coralogix.enrichment.v1.AddEnrichmentsRequest
-	6,  // 14: com.coralogix.enrichment.v1.EnrichmentService.RemoveEnrichments:input_type -> com.coralogix.enrichment.v1.RemoveEnrichmentsRequest
-	0,  // 15: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichmentLimit:input_type -> com.coralogix.enrichment.v1.GetEnrichmentLimitRequest
-	8,  // 16: com.coralogix.enrichment.v1.EnrichmentService.AtomicOverwriteEnrichments:input_type -> com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest
-	10, // 17: com.coralogix.enrichment.v1.EnrichmentService.GetCompanyEnrichmentSettings:input_type -> com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest
-	3,  // 18: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichments:output_type -> com.coralogix.enrichment.v1.GetEnrichmentsResponse
-	5,  // 19: com.coralogix.enrichment.v1.EnrichmentService.AddEnrichments:output_type -> com.coralogix.enrichment.v1.AddEnrichmentsResponse
-	7,  // 20: com.coralogix.enrichment.v1.EnrichmentService.RemoveEnrichments:output_type -> com.coralogix.enrichment.v1.RemoveEnrichmentsResponse
-	1,  // 21: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichmentLimit:output_type -> com.coralogix.enrichment.v1.GetEnrichmentLimitResponse
-	9,  // 22: com.coralogix.enrichment.v1.EnrichmentService.AtomicOverwriteEnrichments:output_type -> com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse
-	11, // 23: com.coralogix.enrichment.v1.EnrichmentService.GetCompanyEnrichmentSettings:output_type -> com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse
-	18, // [18:24] is the sub-list for method output_type
-	12, // [12:18] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	12, // 0: com.coralogix.enrichment.v1.GetEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
+	13, // 1: com.coralogix.enrichment.v1.AddEnrichmentsRequest.request_enrichments:type_name -> com.coralogix.enrichment.v1.EnrichmentRequestModel
+	12, // 2: com.coralogix.enrichment.v1.AddEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
+	14, // 3: com.coralogix.enrichment.v1.RemoveEnrichmentsRequest.enrichment_ids:type_name -> google.protobuf.UInt32Value
+	12, // 4: com.coralogix.enrichment.v1.RemoveEnrichmentsResponse.remaining_enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
+	15, // 5: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.enrichment_type:type_name -> com.coralogix.enrichment.v1.EnrichmentType
+	16, // 6: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest.enrichment_fields:type_name -> com.coralogix.enrichment.v1.EnrichmentFieldDefinition
+	12, // 7: com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse.enrichments:type_name -> com.coralogix.enrichment.v1.Enrichment
+	17, // 8: com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse.enrichment_settings:type_name -> com.coralogix.enrichment.v1.CompanyEnrichmentSettings
+	2,  // 9: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichments:input_type -> com.coralogix.enrichment.v1.GetEnrichmentsRequest
+	4,  // 10: com.coralogix.enrichment.v1.EnrichmentService.AddEnrichments:input_type -> com.coralogix.enrichment.v1.AddEnrichmentsRequest
+	6,  // 11: com.coralogix.enrichment.v1.EnrichmentService.RemoveEnrichments:input_type -> com.coralogix.enrichment.v1.RemoveEnrichmentsRequest
+	0,  // 12: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichmentLimit:input_type -> com.coralogix.enrichment.v1.GetEnrichmentLimitRequest
+	8,  // 13: com.coralogix.enrichment.v1.EnrichmentService.AtomicOverwriteEnrichments:input_type -> com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest
+	10, // 14: com.coralogix.enrichment.v1.EnrichmentService.GetCompanyEnrichmentSettings:input_type -> com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest
+	3,  // 15: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichments:output_type -> com.coralogix.enrichment.v1.GetEnrichmentsResponse
+	5,  // 16: com.coralogix.enrichment.v1.EnrichmentService.AddEnrichments:output_type -> com.coralogix.enrichment.v1.AddEnrichmentsResponse
+	7,  // 17: com.coralogix.enrichment.v1.EnrichmentService.RemoveEnrichments:output_type -> com.coralogix.enrichment.v1.RemoveEnrichmentsResponse
+	1,  // 18: com.coralogix.enrichment.v1.EnrichmentService.GetEnrichmentLimit:output_type -> com.coralogix.enrichment.v1.GetEnrichmentLimitResponse
+	9,  // 19: com.coralogix.enrichment.v1.EnrichmentService.AtomicOverwriteEnrichments:output_type -> com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse
+	11, // 20: com.coralogix.enrichment.v1.EnrichmentService.GetCompanyEnrichmentSettings:output_type -> com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse
+	15, // [15:21] is the sub-list for method output_type
+	9,  // [9:15] is the sub-list for method input_type
+	9,  // [9:9] is the sub-list for extension type_name
+	9,  // [9:9] is the sub-list for extension extendee
+	0,  // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_enrichment_v1_enrichment_service_proto_init() }
@@ -750,7 +678,7 @@ func file_com_coralogix_enrichment_v1_enrichment_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc), len(file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   13,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

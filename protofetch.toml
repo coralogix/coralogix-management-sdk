@@ -64,6 +64,8 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto",
     "src/com/coralogixapis/alerts/v3/alert_defs_service.proto",
     "src/com/coralogixapis/alerts/v3/commons.proto",
+    "src/com/coralogixapis/alerts/v3/time_range.proto",
+    "src/com/coralogixapis/alerts/v3/event/alert_event_service.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event_payload.proto",
     "src/com/coralogixapis/alerts/v3/event/alert_event_service.proto",
@@ -198,6 +200,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
     "src/com/coralogixapis/dashboards/v1/ast/filter.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/filters/filter.proto",
     "src/com/coralogixapis/dashboards/v1/ast/folder_path.proto",
     "src/com/coralogixapis/dashboards/v1/ast/layout.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variable.proto",
@@ -279,7 +282,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.7"
+revision = "v0.6.6"
 content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
@@ -322,7 +325,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.28"
+revision = "v0.0.19"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
