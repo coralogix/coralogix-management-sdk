@@ -288,7 +288,7 @@ func (c *ClientSet) ViewFolders() *ViewFoldersClient {
 }
 
 // NewClientSet Creates a new ClientSet.
-func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
+func NewClientSet(apikeyCPC CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
 		ruleGroups:          NewRuleGroupsClient(apikeyCPC),
 		recordingRuleGroups: NewRecordingRuleGroupSetsClient(apikeyCPC),

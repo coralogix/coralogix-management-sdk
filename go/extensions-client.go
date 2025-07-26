@@ -90,7 +90,7 @@ const (
 
 // ExtensionsClient is a client for the Coralogix Extensions API.
 type ExtensionsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // GetAll returns all extensions.
@@ -202,7 +202,7 @@ func (e ExtensionsClient) Update(ctx context.Context, req *UpdateExtensionReques
 }
 
 // NewExtensionsClient creates a new ExtensionsClient.
-func NewExtensionsClient(callPropertiesCreator *CallPropertiesCreator) *ExtensionsClient {
+func NewExtensionsClient(callPropertiesCreator CallPropertiesCreator) *ExtensionsClient {
 	return &ExtensionsClient{
 		callPropertiesCreator: callPropertiesCreator,
 	}

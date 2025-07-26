@@ -169,7 +169,7 @@ const tcoFeatureGroupID = "tco"
 
 // TCOPoliciesClient is a client for the Coralogix TCO Policies API.
 type TCOPoliciesClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new TCO policy.
@@ -318,6 +318,6 @@ func (t TCOPoliciesClient) List(ctx context.Context, req *GetCompanyPoliciesRequ
 }
 
 // NewTCOPoliciesClient Creates a new TCO policies client.
-func NewTCOPoliciesClient(c *CallPropertiesCreator) *TCOPoliciesClient {
+func NewTCOPoliciesClient(c CallPropertiesCreator) *TCOPoliciesClient {
 	return &TCOPoliciesClient{callPropertiesCreator: c}
 }
