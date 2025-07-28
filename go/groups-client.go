@@ -37,6 +37,7 @@ type RoleID = groups.RoleId
 // FilterType is a type for a filter type in a group.
 type FilterType = groups.FilterType
 
+// FilterTypeUnspecified is the type for an unspecified filter type.
 const (
 	FilterTypeUnspecified = groups.FilterType_FILTER_TYPE_UNSPECIFIED
 	FilterTypeStartsWith  = groups.FilterType_FILTER_TYPE_STARTS_WITH
