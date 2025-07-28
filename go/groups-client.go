@@ -34,6 +34,30 @@ type GroupsUser = groups.User
 // RoleID is a type for a role ID to use in a group.
 type RoleID = groups.RoleId
 
+// FilterType is a type for a filter type in a group.
+type FilterType = groups.FilterType
+
+// FilterTypeUnspecified is the type for an unspecified filter type.
+const (
+	FilterTypeUnspecified = groups.FilterType_FILTER_TYPE_UNSPECIFIED
+	FilterTypeStartsWith  = groups.FilterType_FILTER_TYPE_STARTS_WITH
+	FilterTypeEndsWith    = groups.FilterType_FILTER_TYPE_ENDS_WITH
+	FilterTypeContains    = groups.FilterType_FILTER_TYPE_CONTAINS
+	FilterTypeExact       = groups.FilterType_FILTER_TYPE_EXACT
+)
+
+// ScopeFilters is a type for scope filters used in group operations.
+type ScopeFilters = groups.ScopeFilters
+
+// GroupScopeFilter is a filter for a group scope.
+type GroupScopeFilter = groups.ScopeFilter
+
+// ScopeID is a type for a scope ID to use in a group.
+type ScopeID = groups.ScopeId
+
+// Role is a type for a role in a group.
+type Role = groups.Role
+
 // UserID is a type for a user ID to use in a group.
 type UserID = groups.UserId
 
@@ -48,6 +72,9 @@ type UpdateTeamGroupRequestUserUpdates = groups.UpdateTeamGroupRequest_UserUpdat
 
 // GetTeamGroupRequest is a type for a request.
 type GetTeamGroupRequest = groups.GetTeamGroupRequest
+
+// GetTeamGroupResponse is a type for a response.
+type GetTeamGroupResponse = groups.GetTeamGroupResponse
 
 // GetTeamGroupByNameRequest is a type for a request.
 type GetTeamGroupByNameRequest = groups.GetTeamGroupByNameRequest
@@ -85,6 +112,12 @@ type SetTeamGroupScopeRequest = groups.SetTeamGroupScopeRequest
 // GetTeamGroupScopeRequest is a type for a request.
 type GetTeamGroupScopeRequest = groups.GetTeamGroupScopeRequest
 
+// GetGroupUsersResponseNoMorePages is a constant for the response when there are no more pages of users in a group.
+type GetGroupUsersResponseNoMorePages = groups.GetGroupUsersResponse_NoMorePages_
+
+// GetGroupUsersResponseToken is a type for the next page token in a group users response.
+type GetGroupUsersResponseToken = groups.GetGroupUsersResponse_Token
+
 const groupsFeatureGroupID = "aaa"
 
 // RPC Values
@@ -96,6 +129,7 @@ const (
 	DeleteTeamGroupRPC          = groups.TeamPermissionsMgmtService_DeleteTeamGroup_FullMethodName
 	AddUsersToTeamGroupRPC      = groups.TeamPermissionsMgmtService_AddUsersToTeamGroup_FullMethodName
 	RemoveUsersFromTeamGroupRPC = groups.TeamPermissionsMgmtService_RemoveUsersFromTeamGroup_FullMethodName
+	GetGroupUsersRPC            = groups.TeamPermissionsMgmtService_GetGroupUsers_FullMethodName
 )
 
 // GroupsClient is a client for the Groups API
@@ -225,6 +259,24 @@ func (c GroupsClient) RemoveUsers(ctx context.Context, req *RemoveUsersFromTeamG
 	response, err := client.RemoveUsersFromTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, RemoveUsersFromTeamGroupRPC, groupsFeatureGroupID)
+	}
+	return response, nil
+}
+
+// GetUsers retrieves all users in a group
+func (c GroupsClient) GetUsers(ctx context.Context, req *GetGroupUsersRequest) (*groups.GetGroupUsersResponse, error) {
+	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	conn := callProperties.Connection
+	defer conn.Close()
+	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
+
+	response, err := client.GetGroupUsers(callProperties.Ctx, req, callProperties.CallOptions...)
+	if err != nil {
+		return nil, NewSdkAPIError(err, GetGroupUsersRPC, groupsFeatureGroupID)
 	}
 	return response, nil
 }
