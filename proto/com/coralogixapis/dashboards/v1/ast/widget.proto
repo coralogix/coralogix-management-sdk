@@ -4,6 +4,7 @@ package com.coralogixapis.dashboards.v1.ast;
 
 import "com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto";
@@ -40,9 +41,7 @@ message Widget {
     description: "Short description of the widget"
     example: '{ "value": "Average delay of application" }'
   }];
-  Definition definition = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Definition of the widget type and details"
-  }];
+  Definition definition = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definition of the widget type and details"}];
   // Appearance was probably planned but is unused and deprecated
   Appearance appearance = 5 [deprecated = true];
   // these are existing in DB but not mapped in the API
@@ -51,30 +50,15 @@ message Widget {
 
   message Definition {
     oneof value {
-      widgets.LineChart line_chart = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Line chart widget definition"
-      }];
-      widgets.DataTable data_table = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Data table widget definition"
-      }];
-      widgets.Gauge gauge = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Gauge widget definition"
-      }];
-      widgets.PieChart pie_chart = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Pie chart widget definition"
-      }];
-      widgets.BarChart bar_chart = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Vertical bar chart widget definition"
-      }];
-      widgets.HorizontalBarChart horizontal_bar_chart = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Horizontal bar chart widget definition"
-      }];
-      widgets.Markdown markdown = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Markdown widget definition"
-      }];
-      widgets.Hexagon hexagon = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description: "Hexagon widget definition"
-      }];
+      widgets.LineChart line_chart = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Line chart widget definition"}];
+      widgets.DataTable data_table = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data table widget definition"}];
+      widgets.Gauge gauge = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Gauge widget definition"}];
+      widgets.PieChart pie_chart = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Pie chart widget definition"}];
+      widgets.BarChart bar_chart = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Vertical bar chart widget definition"}];
+      widgets.HorizontalBarChart horizontal_bar_chart = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Horizontal bar chart widget definition"}];
+      widgets.Markdown markdown = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Markdown widget definition"}];
+      widgets.Hexagon hexagon = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Hexagon widget definition"}];
+      widgets.Dynamic dynamic = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Dynamic widget definition"}];
     }
   }
 

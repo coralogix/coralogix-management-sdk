@@ -175,6 +175,8 @@ const (
 	Resource_RESOURCE_SYSTEM_DATASETS                 Resource = 145
 	Resource_RESOURCE_TEAM_QUOTA_RULES                Resource = 146
 	Resource_RESOURCE_SPLIT_INDEX                     Resource = 147
+	Resource_RESOURCE_ACCESS_POLICIES                 Resource = 148
+	Resource_RESOURCE_PIPELINE_ANALYZER               Resource = 149
 )
 
 // Enum value maps for Resource.
@@ -328,6 +330,8 @@ var (
 		145: "RESOURCE_SYSTEM_DATASETS",
 		146: "RESOURCE_TEAM_QUOTA_RULES",
 		147: "RESOURCE_SPLIT_INDEX",
+		148: "RESOURCE_ACCESS_POLICIES",
+		149: "RESOURCE_PIPELINE_ANALYZER",
 	}
 	Resource_value = map[string]int32{
 		"RESOURCE_UNSPECIFIED":                     0,
@@ -478,6 +482,8 @@ var (
 		"RESOURCE_SYSTEM_DATASETS":                 145,
 		"RESOURCE_TEAM_QUOTA_RULES":                146,
 		"RESOURCE_SPLIT_INDEX":                     147,
+		"RESOURCE_ACCESS_POLICIES":                 148,
+		"RESOURCE_PIPELINE_ANALYZER":               149,
 	}
 )
 
@@ -565,6 +571,8 @@ const (
 	Action_ACTION_UPDATE_ALL               Action = 51
 	Action_ACTION_READ_SUMMARY             Action = 52
 	Action_ACTION_UPLOAD                   Action = 53
+	Action_ACTION_READ_ACCESS_POLICY       Action = 54
+	Action_ACTION_UPDATE_ACCESS_POLICY     Action = 55
 )
 
 // Enum value maps for Action.
@@ -624,6 +632,8 @@ var (
 		51: "ACTION_UPDATE_ALL",
 		52: "ACTION_READ_SUMMARY",
 		53: "ACTION_UPLOAD",
+		54: "ACTION_READ_ACCESS_POLICY",
+		55: "ACTION_UPDATE_ACCESS_POLICY",
 	}
 	Action_value = map[string]int32{
 		"ACTION_UNSPECIFIED":              0,
@@ -680,6 +690,8 @@ var (
 		"ACTION_UPDATE_ALL":               51,
 		"ACTION_READ_SUMMARY":             52,
 		"ACTION_UPLOAD":                   53,
+		"ACTION_READ_ACCESS_POLICY":       54,
+		"ACTION_UPDATE_ACCESS_POLICY":     55,
 	}
 )
 
@@ -741,7 +753,7 @@ var File_com_coralogix_permissions_v1_actions_resources_proto protoreflect.FileD
 
 const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xc5=\n" +
+	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xb1>\n" +
 	"\bResource\x12\x18\n" +
 	"\x14RESOURCE_UNSPECIFIED\x10\x00\x12%\n" +
 	"\x12RESOURCE_CORALOGIX\x10\x01\x1a\r\x92\x82\x19\tcoralogix\x12\x1f\n" +
@@ -902,7 +914,9 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\fRESOURCE_SLO\x10\x90\x01\x1a\a\x92\x82\x19\x03slo\x122\n" +
 	"\x18RESOURCE_SYSTEM_DATASETS\x10\x91\x01\x1a\x13\x92\x82\x19\x0fsystem-datasets\x124\n" +
 	"\x19RESOURCE_TEAM_QUOTA_RULES\x10\x92\x01\x1a\x14\x92\x82\x19\x10team-quota-rules\x12*\n" +
-	"\x14RESOURCE_SPLIT_INDEX\x10\x93\x01\x1a\x0f\x92\x82\x19\vsplit-index*\xc5\x11\n" +
+	"\x14RESOURCE_SPLIT_INDEX\x10\x93\x01\x1a\x0f\x92\x82\x19\vsplit-index\x122\n" +
+	"\x18RESOURCE_ACCESS_POLICIES\x10\x94\x01\x1a\x13\x92\x82\x19\x0faccess-policies\x126\n" +
+	"\x1aRESOURCE_PIPELINE_ANALYZER\x10\x95\x01\x1a\x15\x92\x82\x19\x11pipeline-analyzer*\xb3\x12\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\fACTION_ADMIN\x10\x01\x1a\t\x92\x82\x19\x05admin\x12\x1f\n" +
@@ -969,7 +983,9 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\x11ACTION_UPDATE_ALL\x103\x1a\r\x92\x82\x19\tUpdateAll\x12(\n" +
 	"\x13ACTION_READ_SUMMARY\x104\x1a\x0f\x92\x82\x19\vReadSummary\x12\x1d\n" +
 	"\rACTION_UPLOAD\x105\x1a\n" +
-	"\x92\x82\x19\x06Upload::\n" +
+	"\x92\x82\x19\x06Upload\x123\n" +
+	"\x19ACTION_READ_ACCESS_POLICY\x106\x1a\x14\x92\x82\x19\x10ReadAccessPolicy\x127\n" +
+	"\x1bACTION_UPDATE_ACCESS_POLICY\x107\x1a\x16\x92\x82\x19\x12UpdateAccessPolicy::\n" +
 	"\x04name\x12!.google.protobuf.EnumValueOptions\x18\xa2\x90\x03 \x01(\tR\x04name\x88\x01\x01:L\n" +
 	"\x0fdeprecated_name\x12!.google.protobuf.EnumValueOptions\x18\xa3\x90\x03 \x03(\tR\x0edeprecatedNameb\x06proto3"
 

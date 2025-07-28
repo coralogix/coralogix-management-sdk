@@ -11,19 +11,30 @@ message VariableSourceV2 {
   oneof value {
     StaticSource static = 1;
     QuerySource query = 2;
+    TextBoxSource textbox = 3;
   }
-  v1.common.OrderDirection values_order_direction = 3;
-  RefreshStrategy refresh_strategy = 4;
-  ValueDisplayOptions value_display_options = 5;
-  AllOption all_option = 6;
+
+  message TextBoxSource {
+    optional TextBoxDefaultValue default_value = 1;
+
+    message TextBoxDefaultValue {
+      oneof value {
+        google.protobuf.StringValue single_string = 1;
+        google.protobuf.FloatValue single_numeric = 2;
+      }
+    }
+  }
 
   message StaticSource {
+    repeated ValueLabel values = 1;
+    v1.common.OrderDirection values_order_direction = 2;
+    AllOption all_option = 3;
+
     message ValueLabel {
       google.protobuf.StringValue value = 1;
       google.protobuf.StringValue label = 2;
-
+      optional google.protobuf.BoolValue is_default = 3;
     }
-    repeated ValueLabel values = 1;
   }
 
   message QuerySource {
@@ -32,6 +43,11 @@ message VariableSourceV2 {
       MetricsQuery metrics_query = 2;
       SpansQuery spans_query = 3;
     }
+
+    v1.common.OrderDirection values_order_direction = 4;
+    RefreshStrategy refresh_strategy = 5;
+    ValueDisplayOptions value_display_options = 6;
+    AllOption all_option = 7;
 
     message LogsQuery {
       Type type = 1;

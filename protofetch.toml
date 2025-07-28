@@ -195,7 +195,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.6.7"
+revision = "v2.7.1"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -282,7 +282,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.6"
+revision = "v0.6.7"
 content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
@@ -325,7 +325,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.19"
+revision = "v0.0.28"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -350,7 +350,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.117"
+revision = "v0.1.120"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
