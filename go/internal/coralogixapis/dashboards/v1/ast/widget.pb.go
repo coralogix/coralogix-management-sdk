@@ -136,6 +136,7 @@ type Widget_Definition struct {
 	//	*Widget_Definition_HorizontalBarChart
 	//	*Widget_Definition_Markdown
 	//	*Widget_Definition_Hexagon
+	//	*Widget_Definition_Dynamic
 	Value         isWidget_Definition_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -250,6 +251,15 @@ func (x *Widget_Definition) GetHexagon() *widgets.Hexagon {
 	return nil
 }
 
+func (x *Widget_Definition) GetDynamic() *widgets.Dynamic {
+	if x != nil {
+		if x, ok := x.Value.(*Widget_Definition_Dynamic); ok {
+			return x.Dynamic
+		}
+	}
+	return nil
+}
+
 type isWidget_Definition_Value interface {
 	isWidget_Definition_Value()
 }
@@ -286,6 +296,10 @@ type Widget_Definition_Hexagon struct {
 	Hexagon *widgets.Hexagon `protobuf:"bytes,8,opt,name=hexagon,proto3,oneof"`
 }
 
+type Widget_Definition_Dynamic struct {
+	Dynamic *widgets.Dynamic `protobuf:"bytes,9,opt,name=dynamic,proto3,oneof"`
+}
+
 func (*Widget_Definition_LineChart) isWidget_Definition_Value() {}
 
 func (*Widget_Definition_DataTable) isWidget_Definition_Value() {}
@@ -301,6 +315,8 @@ func (*Widget_Definition_HorizontalBarChart) isWidget_Definition_Value() {}
 func (*Widget_Definition_Markdown) isWidget_Definition_Value() {}
 
 func (*Widget_Definition_Hexagon) isWidget_Definition_Value() {}
+
+func (*Widget_Definition_Dynamic) isWidget_Definition_Value() {}
 
 type Widget_Appearance struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
@@ -350,7 +366,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widget_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_dashboards_v1_ast_widget_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/dashboards/v1/ast/widget.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a;com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x1a7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x1aFcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x1a:com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x1a;com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8e\x10\n" +
+	"0com/coralogixapis/dashboards/v1/ast/widget.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a;com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x1a7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x1aFcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x1a:com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x1a;com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x80\x11\n" +
 	"\x06Widget\x12\x89\x01\n" +
 	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBR\x92AO2\x18Widget unique identifierJ3{ \"value\": \"83aed974-510b-43be-bd19-c92daf56beff\" }R\x02id\x12a\n" +
 	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB-\x92A*2\x12Name of the widgetJ\x14{ \"value\": \"Gauge\" }R\x05title\x12\x91\x01\n" +
@@ -364,7 +380,7 @@ const file_com_coralogixapis_dashboards_v1_ast_widget_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xfb\a\n" +
+	"updated_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x1a\xed\b\n" +
 	"\n" +
 	"Definition\x12z\n" +
 	"\n" +
@@ -376,7 +392,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widget_proto_rawDesc = "" +
 	"\tbar_chart\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.BarChartB)\x92A&2$Vertical bar chart widget definitionH\x00R\bbarChart\x12\xa0\x01\n" +
 	"\x14horizontal_bar_chart\x18\x06 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChartB+\x92A(2&Horizontal bar chart widget definitionH\x00R\x12horizontalBarChart\x12t\n" +
 	"\bmarkdown\x18\a \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.MarkdownB\x1f\x92A\x1c2\x1aMarkdown widget definitionH\x00R\bmarkdown\x12p\n" +
-	"\ahexagon\x18\b \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.HexagonB\x1e\x92A\x1b2\x19Hexagon widget definitionH\x00R\ahexagonB\a\n" +
+	"\ahexagon\x18\b \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.HexagonB\x1e\x92A\x1b2\x19Hexagon widget definitionH\x00R\ahexagon\x12p\n" +
+	"\adynamic\x18\t \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.DynamicB\x1e\x92A\x1b2\x19Dynamic widget definitionH\x00R\adynamicB\a\n" +
 	"\x05value\x1a?\n" +
 	"\n" +
 	"Appearance\x121\n" +
@@ -412,7 +429,8 @@ var file_com_coralogixapis_dashboards_v1_ast_widget_proto_goTypes = []any{
 	(*widgets.HorizontalBarChart)(nil), // 11: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart
 	(*widgets.Markdown)(nil),           // 12: com.coralogixapis.dashboards.v1.ast.widgets.Markdown
 	(*widgets.Hexagon)(nil),            // 13: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon
-	(*wrapperspb.Int32Value)(nil),      // 14: google.protobuf.Int32Value
+	(*widgets.Dynamic)(nil),            // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic
+	(*wrapperspb.Int32Value)(nil),      // 15: google.protobuf.Int32Value
 }
 var file_com_coralogixapis_dashboards_v1_ast_widget_proto_depIdxs = []int32{
 	3,  // 0: com.coralogixapis.dashboards.v1.ast.Widget.id:type_name -> com.coralogixapis.dashboards.v1.UUID
@@ -430,12 +448,13 @@ var file_com_coralogixapis_dashboards_v1_ast_widget_proto_depIdxs = []int32{
 	11, // 12: com.coralogixapis.dashboards.v1.ast.Widget.Definition.horizontal_bar_chart:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart
 	12, // 13: com.coralogixapis.dashboards.v1.ast.Widget.Definition.markdown:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Markdown
 	13, // 14: com.coralogixapis.dashboards.v1.ast.Widget.Definition.hexagon:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon
-	14, // 15: com.coralogixapis.dashboards.v1.ast.Widget.Appearance.width:type_name -> google.protobuf.Int32Value
-	16, // [16:16] is the sub-list for method output_type
-	16, // [16:16] is the sub-list for method input_type
-	16, // [16:16] is the sub-list for extension type_name
-	16, // [16:16] is the sub-list for extension extendee
-	0,  // [0:16] is the sub-list for field type_name
+	14, // 15: com.coralogixapis.dashboards.v1.ast.Widget.Definition.dynamic:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic
+	15, // 16: com.coralogixapis.dashboards.v1.ast.Widget.Appearance.width:type_name -> google.protobuf.Int32Value
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widget_proto_init() }
@@ -452,6 +471,7 @@ func file_com_coralogixapis_dashboards_v1_ast_widget_proto_init() {
 		(*Widget_Definition_HorizontalBarChart)(nil),
 		(*Widget_Definition_Markdown)(nil),
 		(*Widget_Definition_Hexagon)(nil),
+		(*Widget_Definition_Dynamic)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -462,6 +462,11 @@ const (
 	Permission_PERMISSION_TEAM_QUOTA_RULES_MANAGE             Permission = 262
 	Permission_PERMISSION_TEAM_QUOTA_RULES_READ               Permission = 263
 	Permission_PERMISSION_SPLIT_INDEX_MANAGE                  Permission = 264
+	Permission_PERMISSION_ACCESS_POLICIES_READ_ALL            Permission = 265
+	Permission_PERMISSION_ACCESS_POLICIES_UPDATE_ALL          Permission = 266
+	Permission_PERMISSION_PIPELINE_ANALYZER_READ              Permission = 267
+	Permission_PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY    Permission = 268
+	Permission_PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY  Permission = 269
 )
 
 // Enum value maps for Permission.
@@ -727,6 +732,11 @@ var (
 		262: "PERMISSION_TEAM_QUOTA_RULES_MANAGE",
 		263: "PERMISSION_TEAM_QUOTA_RULES_READ",
 		264: "PERMISSION_SPLIT_INDEX_MANAGE",
+		265: "PERMISSION_ACCESS_POLICIES_READ_ALL",
+		266: "PERMISSION_ACCESS_POLICIES_UPDATE_ALL",
+		267: "PERMISSION_PIPELINE_ANALYZER_READ",
+		268: "PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY",
+		269: "PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -989,6 +999,11 @@ var (
 		"PERMISSION_TEAM_QUOTA_RULES_MANAGE":                          262,
 		"PERMISSION_TEAM_QUOTA_RULES_READ":                            263,
 		"PERMISSION_SPLIT_INDEX_MANAGE":                               264,
+		"PERMISSION_ACCESS_POLICIES_READ_ALL":                         265,
+		"PERMISSION_ACCESS_POLICIES_UPDATE_ALL":                       266,
+		"PERMISSION_PIPELINE_ANALYZER_READ":                           267,
+		"PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY":                 268,
+		"PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY":               269,
 	}
 )
 
@@ -1198,7 +1213,7 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1cPERMISSION_GROUP_QUOTA_RULES\x10'\x1a/\x92\x82\x19\vquota-rules҂\x19\vQuota Rules\xe2\x82\x19\rquota - rules\x12L\n" +
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
-	"Dataengine\xe2\x82\x19\vData Engine*\x9a\xca\x03\n" +
+	"Dataengine\xe2\x82\x19\vData Engine*\xeb\xd1\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1512,7 +1527,12 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"Ȃ\x19\x92\x01҂\x19>Manage team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19>Manage team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\x12\xd6\x01\n" +
 	" PERMISSION_TEAM_QUOTA_RULES_READ\x10\x87\x02\x1a\xae\x01\xba\x82\x19\x15team-quota-rules:Read\xc0\x82\x19\vȂ\x19\x92\x01҂\x19<View team quota rules. Allocate quota units per entity type.\u0602\x19'\xea\x82\x19\x00\xf2\x82\x19<View team quota rules. Allocate quota units per entity type.\x88\x83\x19\x01\x12\xd0\x01\n" +
 	"\x1dPERMISSION_SPLIT_INDEX_MANAGE\x10\x88\x02\x1a\xab\x01\xba\x82\x19\x12split-index:Manage\xc0\x82\x19\n" +
-	"Ȃ\x19\x93\x01҂\x19<Apply split index on demand to apply reserved field changes.\u0602\x19\x14\xea\x82\x19\x00\xf2\x82\x19<Apply split index on demand to apply reserved field changes.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"Ȃ\x19\x93\x01҂\x19<Apply split index on demand to apply reserved field changes.\u0602\x19\x14\xea\x82\x19\x00\xf2\x82\x19<Apply split index on demand to apply reserved field changes.\x88\x83\x19\x01\x12\x97\x01\n" +
+	"#PERMISSION_ACCESS_POLICIES_READ_ALL\x10\x89\x02\x1am\xba\x82\x19\x17access-policies:ReadAll\xc0\x82\x192Ȃ\x19\x94\x01҂\x19\x17View any access policy.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x16Vew any access policy.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xa0\x01\n" +
+	"%PERMISSION_ACCESS_POLICIES_UPDATE_ALL\x10\x8a\x02\x1at\xba\x82\x19\x19access-policies:UpdateAll\xc0\x82\x193Ȃ\x19\x94\x01҂\x19\x19Update any access policy.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x19Update any access policy.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xd1\x01\n" +
+	"!PERMISSION_PIPELINE_ANALYZER_READ\x10\x8b\x02\x1a\xa8\x01\xba\x82\x19\x16pipeline-analyzer:Read\xc0\x82\x19\vȂ\x19\x95\x01҂\x19=Follow logs through each stage of your pipeline in real time.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19,Inspect the exact rules applied to each log.\xf8\x82\x19\x00\x88\x83\x19\x01\x90\x83\x19\x01\x12\xd9\x01\n" +
+	"+PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY\x10\x8c\x02\x1a\xa6\x01\xba\x82\x19\x1eteam-api-keys:ReadAccessPolicy\xc0\x82\x196Ȃ\x19\x1a҂\x190View access policy for a specific resource type.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x190View access policy for a specific resource type.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xe1\x01\n" +
+	"-PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY\x10\x8d\x02\x1a\xac\x01\xba\x82\x19 team-api-keys:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x1a҂\x192Update access policy for a specific resource type.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x192Update access policy for a specific resource type.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

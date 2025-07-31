@@ -895,7 +895,7 @@ func CreateHttpsPreset(presetName string) *cxsdk.Preset {
 
 func CreateSlackPreset(presetName string) *cxsdk.Preset {
 	presetType := cxsdk.PresetTypeCustom
-	parentId := "preset_system_slack_alerts_empty"
+	parentId := "preset_system_slack_alerts_basic"
 	return &cxsdk.Preset{
 		Name:          presetName,
 		Description:   "This is the preset to use for Notification Center testing.",

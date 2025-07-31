@@ -158,6 +158,8 @@ enum Resource {
   RESOURCE_SYSTEM_DATASETS = 145 [(name) = "system-datasets"];
   RESOURCE_TEAM_QUOTA_RULES = 146 [(name) = "team-quota-rules"];
   RESOURCE_SPLIT_INDEX = 147 [(name) = "split-index"];
+  RESOURCE_ACCESS_POLICIES = 148 [(name) = "access-policies"];
+  RESOURCE_PIPELINE_ANALYZER = 149 [(name) = "pipeline-analyzer"];
 }
 
 
@@ -216,4 +218,6 @@ enum Action {
   ACTION_UPDATE_ALL = 51 [(name) = "UpdateAll"];
   ACTION_READ_SUMMARY = 52 [(name) = "ReadSummary"];
   ACTION_UPLOAD = 53 [(name) = "Upload"];
+  ACTION_READ_ACCESS_POLICY = 54 [(name) = "ReadAccessPolicy"];
+  ACTION_UPDATE_ACCESS_POLICY = 55 [(name) = "UpdateAccessPolicy"];
 }
