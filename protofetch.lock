@@ -51,8 +51,8 @@ commit_hash = "679978ef4c8c45e4e3f0ee3fb1347b078150e866"
 [[dependencies]]
 name = "cx-api-enrichment"
 url = "github.com/coralogix/cx-api-enrichment"
-revision = "v0.6.7"
-commit_hash = "f10b7b0b123ce67254f705d99bcdfe534cd4f58a"
+revision = "v0.6.6"
+commit_hash = "90449e277f58ec7d6983386a48e75f51cf193a4c"
 
 [[dependencies]]
 name = "cx-api-events"
@@ -135,8 +135,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.28"
-commit_hash = "dca944bf00fd9a3ffc8f7cd5aca33902a9fa1ed4"
+revision = "v0.0.19"
+commit_hash = "8c50ef36d269ba346641267ce433072f0ae61143"
 
 [[dependencies]]
 name = "cx-api-views"

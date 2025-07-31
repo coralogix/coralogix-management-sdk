@@ -1019,74 +1019,6 @@ func (x *UndetectedValuesManagement) GetAutoRetireTimeframe() AutoRetireTimefram
 	return AutoRetireTimeframe_AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED
 }
 
-type SloAlertValidityResult struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name           string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	ErrorMessage   *string                `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3,oneof" json:"error_message,omitempty"`
-	AlertVersionId string                 `protobuf:"bytes,4,opt,name=alert_version_id,json=alertVersionId,proto3" json:"alert_version_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
-}
-
-func (x *SloAlertValidityResult) Reset() {
-	*x = SloAlertValidityResult{}
-	mi := &file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes[16]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SloAlertValidityResult) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SloAlertValidityResult) ProtoMessage() {}
-
-func (x *SloAlertValidityResult) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes[16]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SloAlertValidityResult.ProtoReflect.Descriptor instead.
-func (*SloAlertValidityResult) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_alert_proto_rawDescGZIP(), []int{16}
-}
-
-func (x *SloAlertValidityResult) GetId() string {
-	if x != nil {
-		return x.Id
-	}
-	return ""
-}
-
-func (x *SloAlertValidityResult) GetName() string {
-	if x != nil {
-		return x.Name
-	}
-	return ""
-}
-
-func (x *SloAlertValidityResult) GetErrorMessage() string {
-	if x != nil && x.ErrorMessage != nil {
-		return *x.ErrorMessage
-	}
-	return ""
-}
-
-func (x *SloAlertValidityResult) GetAlertVersionId() string {
-	if x != nil {
-		return x.AlertVersionId
-	}
-	return ""
-}
-
 var File_com_coralogixapis_slo_v1_slo_alert_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_alert_proto_rawDesc = "" +
@@ -1137,13 +1069,7 @@ const file_com_coralogixapis_slo_v1_slo_alert_proto_rawDesc = "" +
 	"\x1aUndetectedValuesManagement\x12V\n" +
 	"\x19trigger_undetected_values\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x17triggerUndetectedValues\x12f\n" +
 	"\x15auto_retire_timeframe\x18\x02 \x01(\x0e2-.com.coralogixapis.slo.v1.AutoRetireTimeframeH\x00R\x13autoRetireTimeframe\x88\x01\x01B\x18\n" +
-	"\x16_auto_retire_timeframe\"\xa2\x01\n" +
-	"\x16SloAlertValidityResult\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
-	"\x04name\x18\x02 \x01(\tR\x04name\x12(\n" +
-	"\rerror_message\x18\x03 \x01(\tH\x00R\ferrorMessage\x88\x01\x01\x12(\n" +
-	"\x10alert_version_id\x18\x04 \x01(\tR\x0ealertVersionIdB\x10\n" +
-	"\x0e_error_message*\x98\x01\n" +
+	"\x16_auto_retire_timeframe*\x98\x01\n" +
 	"\x1fSloMetricThresholdConditionType\x12<\n" +
 	"8METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\x10\x00\x127\n" +
 	"3METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS\x10\x01*s\n" +
@@ -1173,7 +1099,7 @@ func file_com_coralogixapis_slo_v1_slo_alert_proto_rawDescGZIP() []byte {
 }
 
 var file_com_coralogixapis_slo_v1_slo_alert_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
-var file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 17)
+var file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_com_coralogixapis_slo_v1_slo_alert_proto_goTypes = []any{
 	(SloMetricThresholdConditionType)(0),      // 0: com.coralogixapis.slo.v1.SloMetricThresholdConditionType
 	(SloMetricTimeWindowValue)(0),             // 1: com.coralogixapis.slo.v1.SloMetricTimeWindowValue
@@ -1194,32 +1120,31 @@ var file_com_coralogixapis_slo_v1_slo_alert_proto_goTypes = []any{
 	(*LessThanConditionOperator)(nil),         // 16: com.coralogixapis.slo.v1.LessThanConditionOperator
 	(*LessThanOrEqualsConditionOperator)(nil), // 17: com.coralogixapis.slo.v1.LessThanOrEqualsConditionOperator
 	(*UndetectedValuesManagement)(nil),        // 18: com.coralogixapis.slo.v1.UndetectedValuesManagement
-	(*SloAlertValidityResult)(nil),            // 19: com.coralogixapis.slo.v1.SloAlertValidityResult
-	(*wrapperspb.StringValue)(nil),            // 20: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),              // 21: google.protobuf.BoolValue
-	(*wrapperspb.UInt32Value)(nil),            // 22: google.protobuf.UInt32Value
-	(*durationpb.Duration)(nil),               // 23: google.protobuf.Duration
-	(*wrapperspb.DoubleValue)(nil),            // 24: google.protobuf.DoubleValue
+	(*wrapperspb.StringValue)(nil),            // 19: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),              // 20: google.protobuf.BoolValue
+	(*wrapperspb.UInt32Value)(nil),            // 21: google.protobuf.UInt32Value
+	(*durationpb.Duration)(nil),               // 22: google.protobuf.Duration
+	(*wrapperspb.DoubleValue)(nil),            // 23: google.protobuf.DoubleValue
 }
 var file_com_coralogixapis_slo_v1_slo_alert_proto_depIdxs = []int32{
 	1,  // 0: com.coralogixapis.slo.v1.SloMetricTimeWindow.slo_metric_time_window_specific_value:type_name -> com.coralogixapis.slo.v1.SloMetricTimeWindowValue
-	20, // 1: com.coralogixapis.slo.v1.SloMetricFilter.promql:type_name -> google.protobuf.StringValue
-	21, // 2: com.coralogixapis.slo.v1.SloMetricMissingValues.replace_with_zero:type_name -> google.protobuf.BoolValue
-	22, // 3: com.coralogixapis.slo.v1.SloMetricMissingValues.min_non_null_values_pct:type_name -> google.protobuf.UInt32Value
+	19, // 1: com.coralogixapis.slo.v1.SloMetricFilter.promql:type_name -> google.protobuf.StringValue
+	20, // 2: com.coralogixapis.slo.v1.SloMetricMissingValues.replace_with_zero:type_name -> google.protobuf.BoolValue
+	21, // 3: com.coralogixapis.slo.v1.SloMetricMissingValues.min_non_null_values_pct:type_name -> google.protobuf.UInt32Value
 	4,  // 4: com.coralogixapis.slo.v1.BurnRateMetricTypeDual.long_metric_filter:type_name -> com.coralogixapis.slo.v1.SloMetricFilter
 	4,  // 5: com.coralogixapis.slo.v1.BurnRateMetricTypeDual.short_metric_filter:type_name -> com.coralogixapis.slo.v1.SloMetricFilter
 	4,  // 6: com.coralogixapis.slo.v1.BurnRateMetricTypeSingle.metric_filter:type_name -> com.coralogixapis.slo.v1.SloMetricFilter
 	4,  // 7: com.coralogixapis.slo.v1.ErrorBudgetMetricType.metric_filter:type_name -> com.coralogixapis.slo.v1.SloMetricFilter
-	23, // 8: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.long_window:type_name -> google.protobuf.Duration
-	23, // 9: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.short_window:type_name -> google.protobuf.Duration
-	24, // 10: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.thresholds:type_name -> google.protobuf.DoubleValue
-	23, // 11: com.coralogixapis.slo.v1.BurnRateAlertTypeSingle.window:type_name -> google.protobuf.Duration
-	24, // 12: com.coralogixapis.slo.v1.BurnRateAlertTypeSingle.thresholds:type_name -> google.protobuf.DoubleValue
+	22, // 8: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.long_window:type_name -> google.protobuf.Duration
+	22, // 9: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.short_window:type_name -> google.protobuf.Duration
+	23, // 10: com.coralogixapis.slo.v1.BurnRateAlertTypeDual.thresholds:type_name -> google.protobuf.DoubleValue
+	22, // 11: com.coralogixapis.slo.v1.BurnRateAlertTypeSingle.window:type_name -> google.protobuf.Duration
+	23, // 12: com.coralogixapis.slo.v1.BurnRateAlertTypeSingle.thresholds:type_name -> google.protobuf.DoubleValue
 	9,  // 13: com.coralogixapis.slo.v1.BurnRateAlertDefinition.dual:type_name -> com.coralogixapis.slo.v1.BurnRateAlertTypeDual
 	10, // 14: com.coralogixapis.slo.v1.BurnRateAlertDefinition.single:type_name -> com.coralogixapis.slo.v1.BurnRateAlertTypeSingle
 	18, // 15: com.coralogixapis.slo.v1.LessThanConditionOperator.undetected_values_management:type_name -> com.coralogixapis.slo.v1.UndetectedValuesManagement
 	18, // 16: com.coralogixapis.slo.v1.LessThanOrEqualsConditionOperator.undetected_values_management:type_name -> com.coralogixapis.slo.v1.UndetectedValuesManagement
-	21, // 17: com.coralogixapis.slo.v1.UndetectedValuesManagement.trigger_undetected_values:type_name -> google.protobuf.BoolValue
+	20, // 17: com.coralogixapis.slo.v1.UndetectedValuesManagement.trigger_undetected_values:type_name -> google.protobuf.BoolValue
 	2,  // 18: com.coralogixapis.slo.v1.UndetectedValuesManagement.auto_retire_timeframe:type_name -> com.coralogixapis.slo.v1.AutoRetireTimeframe
 	19, // [19:19] is the sub-list for method output_type
 	19, // [19:19] is the sub-list for method input_type
@@ -1248,14 +1173,13 @@ func file_com_coralogixapis_slo_v1_slo_alert_proto_init() {
 		(*BurnRateAlertDefinition_Single)(nil),
 	}
 	file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes[15].OneofWrappers = []any{}
-	file_com_coralogixapis_slo_v1_slo_alert_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_slo_v1_slo_alert_proto_rawDesc), len(file_com_coralogixapis_slo_v1_slo_alert_proto_rawDesc)),
 			NumEnums:      3,
-			NumMessages:   17,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

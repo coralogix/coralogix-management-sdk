@@ -79,55 +79,6 @@ func (SloStatus) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{0}
 }
 
-type ErrorType int32
-
-const (
-	ErrorType_ERROR_TYPE_UNSPECIFIED     ErrorType = 0
-	ErrorType_GENERAL                    ErrorType = 1
-	ErrorType_CARDINALITY_LIMIT_EXCEEDED ErrorType = 2
-)
-
-// Enum value maps for ErrorType.
-var (
-	ErrorType_name = map[int32]string{
-		0: "ERROR_TYPE_UNSPECIFIED",
-		1: "GENERAL",
-		2: "CARDINALITY_LIMIT_EXCEEDED",
-	}
-	ErrorType_value = map[string]int32{
-		"ERROR_TYPE_UNSPECIFIED":     0,
-		"GENERAL":                    1,
-		"CARDINALITY_LIMIT_EXCEEDED": 2,
-	}
-)
-
-func (x ErrorType) Enum() *ErrorType {
-	p := new(ErrorType)
-	*p = x
-	return p
-}
-
-func (x ErrorType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (ErrorType) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_enumTypes[1].Descriptor()
-}
-
-func (ErrorType) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_hub_proto_enumTypes[1]
-}
-
-func (x ErrorType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use ErrorType.Descriptor instead.
-func (ErrorType) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{1}
-}
-
 type SloStatusCount struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Status        SloStatus              `protobuf:"varint,1,opt,name=status,proto3,enum=com.coralogixapis.slo.v1.SloStatus" json:"status,omitempty"`
@@ -249,14 +200,9 @@ func (x *SloData) GetIncompleteData() bool {
 }
 
 type SloHubRow struct {
-	state   protoimpl.MessageState `protogen:"open.v1"`
-	Slo     *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
-	SloData *SloData               `protobuf:"bytes,2,opt,name=slo_data,json=sloData,proto3,oneof" json:"slo_data,omitempty"`
-	// Deprecated field for backward compatibility
-	//
-	// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_hub.proto.
-	ErrorMessage  *string   `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3,oneof" json:"error_message,omitempty"`
-	SloError      *SloError `protobuf:"bytes,4,opt,name=slo_error,json=sloError,proto3,oneof" json:"slo_error,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Slo           *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	SloData       *SloData               `protobuf:"bytes,2,opt,name=slo_data,json=sloData,proto3,oneof" json:"slo_data,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -305,125 +251,6 @@ func (x *SloHubRow) GetSloData() *SloData {
 	return nil
 }
 
-// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_hub.proto.
-func (x *SloHubRow) GetErrorMessage() string {
-	if x != nil && x.ErrorMessage != nil {
-		return *x.ErrorMessage
-	}
-	return ""
-}
-
-func (x *SloHubRow) GetSloError() *SloError {
-	if x != nil {
-		return x.SloError
-	}
-	return nil
-}
-
-type SloError struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ErrorType     ErrorType              `protobuf:"varint,1,opt,name=error_type,json=errorType,proto3,enum=com.coralogixapis.slo.v1.ErrorType" json:"error_type,omitempty"`
-	ErrorDetails  *ErrorDetails          `protobuf:"bytes,2,opt,name=error_details,json=errorDetails,proto3,oneof" json:"error_details,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *SloError) Reset() {
-	*x = SloError{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *SloError) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*SloError) ProtoMessage() {}
-
-func (x *SloError) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use SloError.ProtoReflect.Descriptor instead.
-func (*SloError) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *SloError) GetErrorType() ErrorType {
-	if x != nil {
-		return x.ErrorType
-	}
-	return ErrorType_ERROR_TYPE_UNSPECIFIED
-}
-
-func (x *SloError) GetErrorDetails() *ErrorDetails {
-	if x != nil {
-		return x.ErrorDetails
-	}
-	return nil
-}
-
-type ErrorDetails struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Cardinality   *uint32                `protobuf:"varint,1,opt,name=cardinality,proto3,oneof" json:"cardinality,omitempty"`
-	Limit         *uint32                `protobuf:"varint,2,opt,name=limit,proto3,oneof" json:"limit,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *ErrorDetails) Reset() {
-	*x = ErrorDetails{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[4]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *ErrorDetails) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ErrorDetails) ProtoMessage() {}
-
-func (x *ErrorDetails) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[4]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ErrorDetails.ProtoReflect.Descriptor instead.
-func (*ErrorDetails) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{4}
-}
-
-func (x *ErrorDetails) GetCardinality() uint32 {
-	if x != nil && x.Cardinality != nil {
-		return *x.Cardinality
-	}
-	return 0
-}
-
-func (x *ErrorDetails) GetLimit() uint32 {
-	if x != nil && x.Limit != nil {
-		return *x.Limit
-	}
-	return 0
-}
-
 type LabelValue struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Label         string                 `protobuf:"bytes,1,opt,name=label,proto3" json:"label,omitempty"`
@@ -434,7 +261,7 @@ type LabelValue struct {
 
 func (x *LabelValue) Reset() {
 	*x = LabelValue{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -446,7 +273,7 @@ func (x *LabelValue) String() string {
 func (*LabelValue) ProtoMessage() {}
 
 func (x *LabelValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -459,7 +286,7 @@ func (x *LabelValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use LabelValue.ProtoReflect.Descriptor instead.
 func (*LabelValue) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *LabelValue) GetLabel() string {
@@ -485,7 +312,7 @@ type GroupValue struct {
 
 func (x *GroupValue) Reset() {
 	*x = GroupValue{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -497,7 +324,7 @@ func (x *GroupValue) String() string {
 func (*GroupValue) ProtoMessage() {}
 
 func (x *GroupValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -510,7 +337,7 @@ func (x *GroupValue) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GroupValue.ProtoReflect.Descriptor instead.
 func (*GroupValue) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *GroupValue) GetLabels() []*LabelValue {
@@ -530,7 +357,7 @@ type RequestBasedPermutationData struct {
 
 func (x *RequestBasedPermutationData) Reset() {
 	*x = RequestBasedPermutationData{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -542,7 +369,7 @@ func (x *RequestBasedPermutationData) String() string {
 func (*RequestBasedPermutationData) ProtoMessage() {}
 
 func (x *RequestBasedPermutationData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -555,7 +382,7 @@ func (x *RequestBasedPermutationData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RequestBasedPermutationData.ProtoReflect.Descriptor instead.
 func (*RequestBasedPermutationData) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *RequestBasedPermutationData) GetGoodEvents() uint32 {
@@ -582,7 +409,7 @@ type WindowBasedPermutationData struct {
 
 func (x *WindowBasedPermutationData) Reset() {
 	*x = WindowBasedPermutationData{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -594,7 +421,7 @@ func (x *WindowBasedPermutationData) String() string {
 func (*WindowBasedPermutationData) ProtoMessage() {}
 
 func (x *WindowBasedPermutationData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -607,7 +434,7 @@ func (x *WindowBasedPermutationData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WindowBasedPermutationData.ProtoReflect.Descriptor instead.
 func (*WindowBasedPermutationData) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *WindowBasedPermutationData) GetGoodWindows() uint32 {
@@ -642,7 +469,7 @@ type SloPermutationData struct {
 
 func (x *SloPermutationData) Reset() {
 	*x = SloPermutationData{}
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +481,7 @@ func (x *SloPermutationData) String() string {
 func (*SloPermutationData) ProtoMessage() {}
 
 func (x *SloPermutationData) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +494,7 @@ func (x *SloPermutationData) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SloPermutationData.ProtoReflect.Descriptor instead.
 func (*SloPermutationData) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SloPermutationData) GetGroup() *GroupValue {
@@ -759,26 +586,11 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"\x1amin_remaining_error_budget\x18\x02 \x01(\x02R\x17minRemainingErrorBudget\x12%\n" +
 	"\x0emin_compliance\x18\x03 \x01(\x02R\rminCompliance\x12,\n" +
 	"\x0fincomplete_data\x18\x04 \x01(\bH\x00R\x0eincompleteData\x88\x01\x01B\x12\n" +
-	"\x10_incomplete_data\"\xa0\x02\n" +
+	"\x10_incomplete_data\"\x8c\x01\n" +
 	"\tSloHubRow\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12A\n" +
-	"\bslo_data\x18\x02 \x01(\v2!.com.coralogixapis.slo.v1.SloDataH\x00R\asloData\x88\x01\x01\x12,\n" +
-	"\rerror_message\x18\x03 \x01(\tB\x02\x18\x01H\x01R\ferrorMessage\x88\x01\x01\x12D\n" +
-	"\tslo_error\x18\x04 \x01(\v2\".com.coralogixapis.slo.v1.SloErrorH\x02R\bsloError\x88\x01\x01B\v\n" +
-	"\t_slo_dataB\x10\n" +
-	"\x0e_error_messageB\f\n" +
-	"\n" +
-	"_slo_error\"\xb2\x01\n" +
-	"\bSloError\x12B\n" +
-	"\n" +
-	"error_type\x18\x01 \x01(\x0e2#.com.coralogixapis.slo.v1.ErrorTypeR\terrorType\x12P\n" +
-	"\rerror_details\x18\x02 \x01(\v2&.com.coralogixapis.slo.v1.ErrorDetailsH\x00R\ferrorDetails\x88\x01\x01B\x10\n" +
-	"\x0e_error_details\"j\n" +
-	"\fErrorDetails\x12%\n" +
-	"\vcardinality\x18\x01 \x01(\rH\x00R\vcardinality\x88\x01\x01\x12\x19\n" +
-	"\x05limit\x18\x02 \x01(\rH\x01R\x05limit\x88\x01\x01B\x0e\n" +
-	"\f_cardinalityB\b\n" +
-	"\x06_limit\"8\n" +
+	"\bslo_data\x18\x02 \x01(\v2!.com.coralogixapis.slo.v1.SloDataH\x00R\asloData\x88\x01\x01B\v\n" +
+	"\t_slo_data\"8\n" +
 	"\n" +
 	"LabelValue\x12\x14\n" +
 	"\x05label\x18\x01 \x01(\tR\x05label\x12\x14\n" +
@@ -813,11 +625,7 @@ const file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc = "" +
 	"\x12SLO_STATUS_WARNING\x10\x02\x12\x17\n" +
 	"\x13SLO_STATUS_CRITICAL\x10\x03\x12\x17\n" +
 	"\x13SLO_STATUS_BREACHED\x10\x04\x12\x16\n" +
-	"\x12SLO_STATUS_PENDING\x10\x05*T\n" +
-	"\tErrorType\x12\x1a\n" +
-	"\x16ERROR_TYPE_UNSPECIFIED\x10\x00\x12\v\n" +
-	"\aGENERAL\x10\x01\x12\x1e\n" +
-	"\x1aCARDINALITY_LIMIT_EXCEEDED\x10\x02b\x06proto3"
+	"\x12SLO_STATUS_PENDING\x10\x05b\x06proto3"
 
 var (
 	file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescOnce sync.Once
@@ -831,41 +639,35 @@ func file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_slo_v1_slo_hub_proto_rawDescData
 }
 
-var file_com_coralogixapis_slo_v1_slo_hub_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
+var file_com_coralogixapis_slo_v1_slo_hub_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
+var file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_com_coralogixapis_slo_v1_slo_hub_proto_goTypes = []any{
 	(SloStatus)(0),                      // 0: com.coralogixapis.slo.v1.SloStatus
-	(ErrorType)(0),                      // 1: com.coralogixapis.slo.v1.ErrorType
-	(*SloStatusCount)(nil),              // 2: com.coralogixapis.slo.v1.SloStatusCount
-	(*SloData)(nil),                     // 3: com.coralogixapis.slo.v1.SloData
-	(*SloHubRow)(nil),                   // 4: com.coralogixapis.slo.v1.SloHubRow
-	(*SloError)(nil),                    // 5: com.coralogixapis.slo.v1.SloError
-	(*ErrorDetails)(nil),                // 6: com.coralogixapis.slo.v1.ErrorDetails
-	(*LabelValue)(nil),                  // 7: com.coralogixapis.slo.v1.LabelValue
-	(*GroupValue)(nil),                  // 8: com.coralogixapis.slo.v1.GroupValue
-	(*RequestBasedPermutationData)(nil), // 9: com.coralogixapis.slo.v1.RequestBasedPermutationData
-	(*WindowBasedPermutationData)(nil),  // 10: com.coralogixapis.slo.v1.WindowBasedPermutationData
-	(*SloPermutationData)(nil),          // 11: com.coralogixapis.slo.v1.SloPermutationData
-	(*Slo)(nil),                         // 12: com.coralogixapis.slo.v1.Slo
+	(*SloStatusCount)(nil),              // 1: com.coralogixapis.slo.v1.SloStatusCount
+	(*SloData)(nil),                     // 2: com.coralogixapis.slo.v1.SloData
+	(*SloHubRow)(nil),                   // 3: com.coralogixapis.slo.v1.SloHubRow
+	(*LabelValue)(nil),                  // 4: com.coralogixapis.slo.v1.LabelValue
+	(*GroupValue)(nil),                  // 5: com.coralogixapis.slo.v1.GroupValue
+	(*RequestBasedPermutationData)(nil), // 6: com.coralogixapis.slo.v1.RequestBasedPermutationData
+	(*WindowBasedPermutationData)(nil),  // 7: com.coralogixapis.slo.v1.WindowBasedPermutationData
+	(*SloPermutationData)(nil),          // 8: com.coralogixapis.slo.v1.SloPermutationData
+	(*Slo)(nil),                         // 9: com.coralogixapis.slo.v1.Slo
 }
 var file_com_coralogixapis_slo_v1_slo_hub_proto_depIdxs = []int32{
-	0,  // 0: com.coralogixapis.slo.v1.SloStatusCount.status:type_name -> com.coralogixapis.slo.v1.SloStatus
-	2,  // 1: com.coralogixapis.slo.v1.SloData.status_count:type_name -> com.coralogixapis.slo.v1.SloStatusCount
-	12, // 2: com.coralogixapis.slo.v1.SloHubRow.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	3,  // 3: com.coralogixapis.slo.v1.SloHubRow.slo_data:type_name -> com.coralogixapis.slo.v1.SloData
-	5,  // 4: com.coralogixapis.slo.v1.SloHubRow.slo_error:type_name -> com.coralogixapis.slo.v1.SloError
-	1,  // 5: com.coralogixapis.slo.v1.SloError.error_type:type_name -> com.coralogixapis.slo.v1.ErrorType
-	6,  // 6: com.coralogixapis.slo.v1.SloError.error_details:type_name -> com.coralogixapis.slo.v1.ErrorDetails
-	7,  // 7: com.coralogixapis.slo.v1.GroupValue.labels:type_name -> com.coralogixapis.slo.v1.LabelValue
-	8,  // 8: com.coralogixapis.slo.v1.SloPermutationData.group:type_name -> com.coralogixapis.slo.v1.GroupValue
-	0,  // 9: com.coralogixapis.slo.v1.SloPermutationData.status:type_name -> com.coralogixapis.slo.v1.SloStatus
-	9,  // 10: com.coralogixapis.slo.v1.SloPermutationData.request_based_permutation_data:type_name -> com.coralogixapis.slo.v1.RequestBasedPermutationData
-	10, // 11: com.coralogixapis.slo.v1.SloPermutationData.window_based_permutation_data:type_name -> com.coralogixapis.slo.v1.WindowBasedPermutationData
-	12, // [12:12] is the sub-list for method output_type
-	12, // [12:12] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	0, // 0: com.coralogixapis.slo.v1.SloStatusCount.status:type_name -> com.coralogixapis.slo.v1.SloStatus
+	1, // 1: com.coralogixapis.slo.v1.SloData.status_count:type_name -> com.coralogixapis.slo.v1.SloStatusCount
+	9, // 2: com.coralogixapis.slo.v1.SloHubRow.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	2, // 3: com.coralogixapis.slo.v1.SloHubRow.slo_data:type_name -> com.coralogixapis.slo.v1.SloData
+	4, // 4: com.coralogixapis.slo.v1.GroupValue.labels:type_name -> com.coralogixapis.slo.v1.LabelValue
+	5, // 5: com.coralogixapis.slo.v1.SloPermutationData.group:type_name -> com.coralogixapis.slo.v1.GroupValue
+	0, // 6: com.coralogixapis.slo.v1.SloPermutationData.status:type_name -> com.coralogixapis.slo.v1.SloStatus
+	6, // 7: com.coralogixapis.slo.v1.SloPermutationData.request_based_permutation_data:type_name -> com.coralogixapis.slo.v1.RequestBasedPermutationData
+	7, // 8: com.coralogixapis.slo.v1.SloPermutationData.window_based_permutation_data:type_name -> com.coralogixapis.slo.v1.WindowBasedPermutationData
+	9, // [9:9] is the sub-list for method output_type
+	9, // [9:9] is the sub-list for method input_type
+	9, // [9:9] is the sub-list for extension type_name
+	9, // [9:9] is the sub-list for extension extendee
+	0, // [0:9] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_slo_v1_slo_hub_proto_init() }
@@ -876,9 +678,7 @@ func file_com_coralogixapis_slo_v1_slo_hub_proto_init() {
 	file_com_coralogixapis_slo_v1_slo_proto_init()
 	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[1].OneofWrappers = []any{}
 	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[2].OneofWrappers = []any{}
-	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[3].OneofWrappers = []any{}
-	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[4].OneofWrappers = []any{}
-	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[9].OneofWrappers = []any{
+	file_com_coralogixapis_slo_v1_slo_hub_proto_msgTypes[7].OneofWrappers = []any{
 		(*SloPermutationData_RequestBasedPermutationData)(nil),
 		(*SloPermutationData_WindowBasedPermutationData)(nil),
 	}
@@ -887,8 +687,8 @@ func file_com_coralogixapis_slo_v1_slo_hub_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc), len(file_com_coralogixapis_slo_v1_slo_hub_proto_rawDesc)),
-			NumEnums:      2,
-			NumMessages:   10,
+			NumEnums:      1,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

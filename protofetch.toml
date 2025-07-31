@@ -259,6 +259,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_display_type.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto",
+    "src/com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto",
 ]
 
 [cx-api-logs2metrics]
@@ -282,7 +283,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.7"
+revision = "v0.6.6"
 content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
@@ -325,7 +326,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.28"
+revision = "v0.0.19"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",

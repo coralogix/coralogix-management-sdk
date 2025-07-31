@@ -19,15 +19,13 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SlosService_CreateSlo_FullMethodName                = "/com.coralogixapis.slo.v1.SlosService/CreateSlo"
-	SlosService_ReplaceSlo_FullMethodName               = "/com.coralogixapis.slo.v1.SlosService/ReplaceSlo"
-	SlosService_ValidateReplaceSloAlerts_FullMethodName = "/com.coralogixapis.slo.v1.SlosService/ValidateReplaceSloAlerts"
-	SlosService_DeleteSlo_FullMethodName                = "/com.coralogixapis.slo.v1.SlosService/DeleteSlo"
-	SlosService_GetSlo_FullMethodName                   = "/com.coralogixapis.slo.v1.SlosService/GetSlo"
-	SlosService_ListSlos_FullMethodName                 = "/com.coralogixapis.slo.v1.SlosService/ListSlos"
-	SlosService_GetZeroState_FullMethodName             = "/com.coralogixapis.slo.v1.SlosService/GetZeroState"
-	SlosService_BatchGetSlos_FullMethodName             = "/com.coralogixapis.slo.v1.SlosService/BatchGetSlos"
-	SlosService_BatchExecuteSlo_FullMethodName          = "/com.coralogixapis.slo.v1.SlosService/BatchExecuteSlo"
+	SlosService_CreateSlo_FullMethodName       = "/com.coralogixapis.slo.v1.SlosService/CreateSlo"
+	SlosService_ReplaceSlo_FullMethodName      = "/com.coralogixapis.slo.v1.SlosService/ReplaceSlo"
+	SlosService_DeleteSlo_FullMethodName       = "/com.coralogixapis.slo.v1.SlosService/DeleteSlo"
+	SlosService_GetSlo_FullMethodName          = "/com.coralogixapis.slo.v1.SlosService/GetSlo"
+	SlosService_ListSlos_FullMethodName        = "/com.coralogixapis.slo.v1.SlosService/ListSlos"
+	SlosService_BatchGetSlos_FullMethodName    = "/com.coralogixapis.slo.v1.SlosService/BatchGetSlos"
+	SlosService_BatchExecuteSlo_FullMethodName = "/com.coralogixapis.slo.v1.SlosService/BatchExecuteSlo"
 )
 
 // SlosServiceClient is the client API for SlosService service.
@@ -36,11 +34,9 @@ const (
 type SlosServiceClient interface {
 	CreateSlo(ctx context.Context, in *CreateSloRequest, opts ...grpc.CallOption) (*CreateSloResponse, error)
 	ReplaceSlo(ctx context.Context, in *ReplaceSloRequest, opts ...grpc.CallOption) (*ReplaceSloResponse, error)
-	ValidateReplaceSloAlerts(ctx context.Context, in *ReplaceSloAlertsValidationsRequest, opts ...grpc.CallOption) (*ReplaceSloAlertsValidationsResponse, error)
 	DeleteSlo(ctx context.Context, in *DeleteSloRequest, opts ...grpc.CallOption) (*DeleteSloResponse, error)
 	GetSlo(ctx context.Context, in *GetSloRequest, opts ...grpc.CallOption) (*GetSloResponse, error)
 	ListSlos(ctx context.Context, in *ListSlosRequest, opts ...grpc.CallOption) (*ListSlosResponse, error)
-	GetZeroState(ctx context.Context, in *GetZeroStateRequest, opts ...grpc.CallOption) (*GetZeroStateResponse, error)
 	BatchGetSlos(ctx context.Context, in *BatchGetSlosRequest, opts ...grpc.CallOption) (*BatchGetSlosResponse, error)
 	BatchExecuteSlo(ctx context.Context, in *BatchExecuteSloRequest, opts ...grpc.CallOption) (*BatchExecuteSloResponse, error)
 }
@@ -67,16 +63,6 @@ func (c *slosServiceClient) ReplaceSlo(ctx context.Context, in *ReplaceSloReques
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReplaceSloResponse)
 	err := c.cc.Invoke(ctx, SlosService_ReplaceSlo_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *slosServiceClient) ValidateReplaceSloAlerts(ctx context.Context, in *ReplaceSloAlertsValidationsRequest, opts ...grpc.CallOption) (*ReplaceSloAlertsValidationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ReplaceSloAlertsValidationsResponse)
-	err := c.cc.Invoke(ctx, SlosService_ValidateReplaceSloAlerts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -113,16 +99,6 @@ func (c *slosServiceClient) ListSlos(ctx context.Context, in *ListSlosRequest, o
 	return out, nil
 }
 
-func (c *slosServiceClient) GetZeroState(ctx context.Context, in *GetZeroStateRequest, opts ...grpc.CallOption) (*GetZeroStateResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetZeroStateResponse)
-	err := c.cc.Invoke(ctx, SlosService_GetZeroState_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *slosServiceClient) BatchGetSlos(ctx context.Context, in *BatchGetSlosRequest, opts ...grpc.CallOption) (*BatchGetSlosResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BatchGetSlosResponse)
@@ -149,11 +125,9 @@ func (c *slosServiceClient) BatchExecuteSlo(ctx context.Context, in *BatchExecut
 type SlosServiceServer interface {
 	CreateSlo(context.Context, *CreateSloRequest) (*CreateSloResponse, error)
 	ReplaceSlo(context.Context, *ReplaceSloRequest) (*ReplaceSloResponse, error)
-	ValidateReplaceSloAlerts(context.Context, *ReplaceSloAlertsValidationsRequest) (*ReplaceSloAlertsValidationsResponse, error)
 	DeleteSlo(context.Context, *DeleteSloRequest) (*DeleteSloResponse, error)
 	GetSlo(context.Context, *GetSloRequest) (*GetSloResponse, error)
 	ListSlos(context.Context, *ListSlosRequest) (*ListSlosResponse, error)
-	GetZeroState(context.Context, *GetZeroStateRequest) (*GetZeroStateResponse, error)
 	BatchGetSlos(context.Context, *BatchGetSlosRequest) (*BatchGetSlosResponse, error)
 	BatchExecuteSlo(context.Context, *BatchExecuteSloRequest) (*BatchExecuteSloResponse, error)
 	mustEmbedUnimplementedSlosServiceServer()
@@ -172,9 +146,6 @@ func (UnimplementedSlosServiceServer) CreateSlo(context.Context, *CreateSloReque
 func (UnimplementedSlosServiceServer) ReplaceSlo(context.Context, *ReplaceSloRequest) (*ReplaceSloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplaceSlo not implemented")
 }
-func (UnimplementedSlosServiceServer) ValidateReplaceSloAlerts(context.Context, *ReplaceSloAlertsValidationsRequest) (*ReplaceSloAlertsValidationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ValidateReplaceSloAlerts not implemented")
-}
 func (UnimplementedSlosServiceServer) DeleteSlo(context.Context, *DeleteSloRequest) (*DeleteSloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSlo not implemented")
 }
@@ -183,9 +154,6 @@ func (UnimplementedSlosServiceServer) GetSlo(context.Context, *GetSloRequest) (*
 }
 func (UnimplementedSlosServiceServer) ListSlos(context.Context, *ListSlosRequest) (*ListSlosResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSlos not implemented")
-}
-func (UnimplementedSlosServiceServer) GetZeroState(context.Context, *GetZeroStateRequest) (*GetZeroStateResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetZeroState not implemented")
 }
 func (UnimplementedSlosServiceServer) BatchGetSlos(context.Context, *BatchGetSlosRequest) (*BatchGetSlosResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchGetSlos not implemented")
@@ -250,24 +218,6 @@ func _SlosService_ReplaceSlo_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SlosService_ValidateReplaceSloAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReplaceSloAlertsValidationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SlosServiceServer).ValidateReplaceSloAlerts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SlosService_ValidateReplaceSloAlerts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SlosServiceServer).ValidateReplaceSloAlerts(ctx, req.(*ReplaceSloAlertsValidationsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _SlosService_DeleteSlo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteSloRequest)
 	if err := dec(in); err != nil {
@@ -318,24 +268,6 @@ func _SlosService_ListSlos_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(SlosServiceServer).ListSlos(ctx, req.(*ListSlosRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SlosService_GetZeroState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetZeroStateRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SlosServiceServer).GetZeroState(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SlosService_GetZeroState_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SlosServiceServer).GetZeroState(ctx, req.(*GetZeroStateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -392,10 +324,6 @@ var SlosService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _SlosService_ReplaceSlo_Handler,
 		},
 		{
-			MethodName: "ValidateReplaceSloAlerts",
-			Handler:    _SlosService_ValidateReplaceSloAlerts_Handler,
-		},
-		{
 			MethodName: "DeleteSlo",
 			Handler:    _SlosService_DeleteSlo_Handler,
 		},
@@ -406,10 +334,6 @@ var SlosService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSlos",
 			Handler:    _SlosService_ListSlos_Handler,
-		},
-		{
-			MethodName: "GetZeroState",
-			Handler:    _SlosService_GetZeroState_Handler,
 		},
 		{
 			MethodName: "BatchGetSlos",
