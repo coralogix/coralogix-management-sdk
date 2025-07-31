@@ -244,7 +244,7 @@ mod tests {
             entity_type: EntityType::Alerts.into(),
             id: None,
             update_time: None,
-            parent_id: Some("preset_system_slack_alerts_empty".into()),
+            parent_id: Some("preset_system_slack_alerts_basic".into()),
         }
     }
 
