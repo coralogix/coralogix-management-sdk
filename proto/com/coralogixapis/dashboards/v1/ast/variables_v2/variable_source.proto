@@ -11,13 +11,13 @@ message VariableSourceV2 {
   oneof value {
     StaticSource static = 1;
     QuerySource query = 2;
-    TextBoxSource textbox = 3;
+    TextboxSource textbox = 3;
   }
 
-  message TextBoxSource {
-    optional TextBoxDefaultValue default_value = 1;
+  message TextboxSource {
+    optional TextboxDefaultValue default_value = 1;
 
-    message TextBoxDefaultValue {
+    message TextboxDefaultValue {
       oneof value {
         google.protobuf.StringValue single_string = 1;
         google.protobuf.FloatValue single_numeric = 2;

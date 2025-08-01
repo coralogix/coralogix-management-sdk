@@ -37,10 +37,16 @@ revision = "v1.0.9"
 commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 
 [[dependencies]]
+name = "cx-api-common-2"
+url = "github.com/coralogix/cx-api-common"
+branch = "master"
+commit_hash = "3ae83769ebd3eb786d5ffa26720537fef4706e62"
+
+[[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.7.1"
-commit_hash = "1da50f200bde80883b52415601977ce311029c0f"
+revision = "v2.7.2"
+commit_hash = "faa7a85a0f36ca14ebc6379cb25fcce4a59d8dde"
 
 [[dependencies]]
 name = "cx-api-data-usage"

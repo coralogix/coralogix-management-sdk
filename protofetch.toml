@@ -195,7 +195,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.1"
+revision = "v2.7.2"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -306,6 +306,10 @@ revision = "v0.1.34"
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"
 revision = "v1.0.9"
+
+[cx-api-common-2]
+url = "github.com/coralogix/cx-api-common"
+branch = "master"
 
 [cx-api-scopes]
 url = 'github.com/coralogix/cx-api-scopes'
