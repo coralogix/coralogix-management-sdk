@@ -239,7 +239,7 @@ dependencies = [
 
 [[package]]
 name = "cx-api"
-version = "1.6.0"
+version = "1.7.2"
 dependencies = [
  "prost",
  "prost-types",
@@ -253,7 +253,7 @@ dependencies = [
 
 [[package]]
 name = "cx-sdk"
-version = "1.6.0"
+version = "1.7.2"
 dependencies = [
  "backoff",
  "bytes",
