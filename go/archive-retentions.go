@@ -86,10 +86,15 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentio
 	if err != nil {
 		return nil, NewSdkAPIError(err, ArchiveRetentionUpdateRetentionsRPC, archiveFeatureGroupID)
 	}
+	_, err = client.ActivateRetentions(callProperties.Ctx, &ActivateRetentionsRequest{})
+	if err != nil {
+		return nil, NewSdkAPIError(err, ArchiveRetentionActivateRetentionsRPC, archiveFeatureGroupID)
+	}
 	return response, nil
 }
 
 // Activate activates the archive retentions.
+// Depreciated. Use Update instead.
 func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRetentionsRequest) (*archiveRetention.ActivateRetentionsResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
