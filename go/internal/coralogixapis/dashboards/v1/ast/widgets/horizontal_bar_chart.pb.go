@@ -464,7 +464,7 @@ func (*HorizontalBarChart_YAxisViewBy_Value) isHorizontalBarChart_YAxisViewBy_YA
 
 type HorizontalBarChart_LogsQuery struct {
 	state                 protoimpl.MessageState       `protogen:"open.v1"`
-	LuceneQuery           *common.LuceneQuery          `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery           *common1.LuceneQuery         `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	Aggregation           *common1.LogsAggregation     `protobuf:"bytes,2,opt,name=aggregation,proto3" json:"aggregation,omitempty"`
 	Filters               []*filters.Filter_LogsFilter `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupNames            []*wrapperspb.StringValue    `protobuf:"bytes,4,rep,name=group_names,json=groupNames,proto3" json:"group_names,omitempty"`
@@ -506,7 +506,7 @@ func (*HorizontalBarChart_LogsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_rawDescGZIP(), []int{0, 3}
 }
 
-func (x *HorizontalBarChart_LogsQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *HorizontalBarChart_LogsQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -564,7 +564,7 @@ func (x *HorizontalBarChart_LogsQuery) GetTimeFrame() *common1.TimeFrameSelect {
 
 type HorizontalBarChart_SpansQuery struct {
 	state                 protoimpl.MessageState          `protogen:"open.v1"`
-	LuceneQuery           *common.LuceneQuery             `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery           *common1.LuceneQuery            `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	Aggregation           *common1.SpansAggregation       `protobuf:"bytes,2,opt,name=aggregation,proto3" json:"aggregation,omitempty"`
 	Filters               []*filters.Filter_SpansFilter   `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupNames            []*common1.SpanField            `protobuf:"bytes,4,rep,name=group_names,json=groupNames,proto3" json:"group_names,omitempty"`
@@ -606,7 +606,7 @@ func (*HorizontalBarChart_SpansQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_rawDescGZIP(), []int{0, 4}
 }
 
-func (x *HorizontalBarChart_SpansQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *HorizontalBarChart_SpansQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -664,7 +664,7 @@ func (x *HorizontalBarChart_SpansQuery) GetStackedGroupNameField() *common1.Span
 
 type HorizontalBarChart_MetricsQuery struct {
 	state            protoimpl.MessageState          `protogen:"open.v1"`
-	PromqlQuery      *common.PromQlQuery             `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
+	PromqlQuery      *common1.PromQlQuery            `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
 	Filters          []*filters.Filter_MetricsFilter `protobuf:"bytes,2,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupNames       []*wrapperspb.StringValue       `protobuf:"bytes,3,rep,name=group_names,json=groupNames,proto3" json:"group_names,omitempty"`
 	StackedGroupName *wrapperspb.StringValue         `protobuf:"bytes,4,opt,name=stacked_group_name,json=stackedGroupName,proto3" json:"stacked_group_name,omitempty"`
@@ -706,7 +706,7 @@ func (*HorizontalBarChart_MetricsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_rawDescGZIP(), []int{0, 5}
 }
 
-func (x *HorizontalBarChart_MetricsQuery) GetPromqlQuery() *common.PromQlQuery {
+func (x *HorizontalBarChart_MetricsQuery) GetPromqlQuery() *common1.PromQlQuery {
 	if x != nil {
 		return x.PromqlQuery
 	}
@@ -914,7 +914,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto 
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_rawDesc = "" +
 	"\n" +
-	"Fcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xceA\n" +
+	"Fcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aBcom/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xaaA\n" +
 	"\x12HorizontalBarChart\x12n\n" +
 	"\x05query\x18\x01 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.QueryB\x11\x92A\x0e2\fQuery objectR\x05query\x12t\n" +
 	"\x12max_bars_per_chart\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB*\x92A'2!Maximum number of bars on a chartJ\x0220R\x0fmaxBarsPerChart\x12\xb6\x01\n" +
@@ -955,10 +955,9 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_prot
 	"\x05value\x18\x02 \x01(\v2\\.com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.YAxisViewBy.YAxisViewByValueB,\x92A)2'Y axis scale divided into value bucketsH\x00R\x05value\x1a\x15\n" +
 	"\x13YAxisViewByCategory\x1a\x12\n" +
 	"\x10YAxisViewByValueB\r\n" +
-	"\vy_axis_view\x1a\x81\n" +
-	"\n" +
-	"\tLogsQuery\x12\xc6\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12z\n" +
+	"\vy_axis_view\x1a\xf5\t\n" +
+	"\tLogsQuery\x12\xba\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12z\n" +
 	"\vaggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x1f\x92A\x1c2\x1aQuery aggregation functionR\vaggregation\x12\x8d\x01\n" +
 	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12r\n" +
 	"\vgroup_names\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB3\x92A02.List of field names to group the query resultsR\n" +
@@ -968,11 +967,11 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_prot
 	"\x18stacked_group_name_field\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB8\x92A523Observation field by results are stacked in a groupR\x15stackedGroupNameField\x12\x9f\x01\n" +
 	"\n" +
 	"time_frame\x18\b \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame:-\x92A*\n" +
-	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\x9d\n" +
+	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\x91\n" +
 	"\n" +
 	"\n" +
-	"SpansQuery\x12\x95\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryB1\x92A.2,A Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
+	"SpansQuery\x12\x89\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB1\x92A.2,A Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
 	"\vaggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x92A!2\x1fSpan query aggregation functionR\vaggregation\x12z\n" +
 	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
 	"\vgroup_names\x18\x04 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\n" +
@@ -983,10 +982,9 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_prot
 	"\x12group_names_fields\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBE\x92AB2@A list of observation fields definitions to group the records byR\x10groupNamesFields\x12\xc3\x01\n" +
 	"\x18stacked_group_name_field\x18\b \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBL\x92AI2GObservation field definition by which groups are divided into subgroupsR\x15stackedGroupNameField:/\x92A,\n" +
 	"**\n" +
-	"SpansQuery2\x1cA spans variant of the query\x1a\x86\n" +
-	"\n" +
-	"\fMetricsQuery\x12\xaf\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
+	"SpansQuery2\x1cA spans variant of the query\x1a\xfa\t\n" +
+	"\fMetricsQuery\x12\xa3\x01\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
 	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12{\n" +
 	"\vgroup_names\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB<\x92A927List of field names by which metric results are groupedR\n" +
 	"groupNames\x12\x91\x01\n" +
@@ -1042,7 +1040,7 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_
 	(common.DataModeType)(0),                                   // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
 	(*common.Legend)(nil),                                      // 18: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
 	(*wrapperspb.FloatValue)(nil),                              // 19: google.protobuf.FloatValue
-	(*common.LuceneQuery)(nil),                                 // 20: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*common1.LuceneQuery)(nil),                                // 20: com.coralogixapis.dashboards.v1.common.LuceneQuery
 	(*common1.LogsAggregation)(nil),                            // 21: com.coralogixapis.dashboards.v1.common.LogsAggregation
 	(*filters.Filter_LogsFilter)(nil),                          // 22: com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	(*common1.ObservationField)(nil),                           // 23: com.coralogixapis.dashboards.v1.common.ObservationField
@@ -1051,7 +1049,7 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_
 	(*filters.Filter_SpansFilter)(nil),                         // 26: com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
 	(*common1.SpanField)(nil),                                  // 27: com.coralogixapis.dashboards.v1.common.SpanField
 	(*common1.SpanObservationField)(nil),                       // 28: com.coralogixapis.dashboards.v1.common.SpanObservationField
-	(*common.PromQlQuery)(nil),                                 // 29: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*common1.PromQlQuery)(nil),                                // 29: com.coralogixapis.dashboards.v1.common.PromQlQuery
 	(*filters.Filter_MetricsFilter)(nil),                       // 30: com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	(common.MetricsQueryEditorMode)(0),                         // 31: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
 	(common1.PromQLQueryType)(0),                               // 32: com.coralogixapis.dashboards.v1.common.PromQLQueryType
@@ -1087,7 +1085,7 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_
 	11, // 24: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.StackDefinition.stack_name_template:type_name -> google.protobuf.StringValue
 	8,  // 25: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.YAxisViewBy.category:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.YAxisViewBy.YAxisViewByCategory
 	9,  // 26: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.YAxisViewBy.value:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.YAxisViewBy.YAxisViewByValue
-	20, // 27: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	20, // 27: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	21, // 28: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
 	22, // 29: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	11, // 30: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.group_names:type_name -> google.protobuf.StringValue
@@ -1095,7 +1093,7 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_
 	23, // 32: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
 	23, // 33: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
 	24, // 34: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	20, // 35: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	20, // 35: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	25, // 36: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
 	26, // 37: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
 	27, // 38: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.group_names:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
@@ -1103,7 +1101,7 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_horizontal_bar_chart_proto_
 	24, // 40: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
 	28, // 41: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.group_names_fields:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
 	28, // 42: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.SpansQuery.stacked_group_name_field:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
-	29, // 43: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	29, // 43: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
 	30, // 44: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	11, // 45: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.MetricsQuery.group_names:type_name -> google.protobuf.StringValue
 	11, // 46: com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChart.MetricsQuery.stacked_group_name:type_name -> google.protobuf.StringValue

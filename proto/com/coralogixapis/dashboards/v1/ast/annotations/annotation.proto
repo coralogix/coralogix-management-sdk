@@ -23,7 +23,7 @@ message Annotation {
   }
 
   message MetricsSource {
-    common.PromQlQuery promql_query = 1;
+    v1.common.PromQlQuery promql_query = 1;
     Strategy strategy = 2;
     google.protobuf.StringValue message_template = 3;
     repeated google.protobuf.StringValue labels = 4;
@@ -40,7 +40,7 @@ message Annotation {
   }
 
   message LogsSource {
-    common.LuceneQuery lucene_query = 1;
+    v1.common.LuceneQuery lucene_query = 1;
     Strategy strategy = 2;
     google.protobuf.StringValue message_template = 3;
     repeated common.ObservationField label_fields = 4;
@@ -69,7 +69,7 @@ message Annotation {
   }
 
   message SpansSource {
-    common.LuceneQuery lucene_query = 1;
+    v1.common.LuceneQuery lucene_query = 1;
     Strategy strategy = 2;
     google.protobuf.StringValue message_template = 3;
     repeated common.ObservationField label_fields = 4;

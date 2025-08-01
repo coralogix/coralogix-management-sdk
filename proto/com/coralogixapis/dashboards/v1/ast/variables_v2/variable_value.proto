@@ -25,22 +25,28 @@ message VariableValueV2 {
   }
 
   message SingleStringValue {
-    google.protobuf.StringValue value = 1;
-    google.protobuf.StringValue label = 2;
+    StringValueLabel value = 1;
   }
 
   message SingleNumericValue {
-    google.protobuf.FloatValue value = 1;
-    google.protobuf.StringValue label = 2;
+    NumericValueLabel value = 1;
   }
 
   message RegexValue {
+    StringValueLabel value = 1;
+  }
+
+  message LuceneQueryValue {
+    StringValueLabel value = 1;
+  }
+
+  message StringValueLabel {
     google.protobuf.StringValue value = 1;
     google.protobuf.StringValue label = 2;
   }
 
-  message LuceneQueryValue {
-    google.protobuf.StringValue value = 1;
+  message NumericValueLabel {
+    google.protobuf.FloatValue value = 1;
     google.protobuf.StringValue label = 2;
   }
 }

@@ -699,10 +699,10 @@ type DashboardFilterNotEqualsSelectionListSelection = filters.Filter_NotEquals_S
 
 // DashboardPromQlQuery is a promQL query.
 // Deprecated: Use DashboardPromQLQuery (upper case 'L') instead.
-type DashboardPromQlQuery = widgetsCommon.PromQlQuery
+type DashboardPromQlQuery = common.PromQlQuery
 
 // DashboardPromQLQuery is a promQL query.
-type DashboardPromQLQuery = widgetsCommon.PromQlQuery
+type DashboardPromQLQuery = common.PromQlQuery
 
 // DashboardLuceneQuery is a lucene query.
 type DashboardLuceneQuery = common.LuceneQuery

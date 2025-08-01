@@ -14,15 +14,9 @@ message Threshold {
     }
   };
 
-  google.protobuf.DoubleValue from = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Minimum bound value of the threshold"
-  }];
-  google.protobuf.StringValue color = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Color of the threshold"
-  }];
-  google.protobuf.StringValue label = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Optional label of the threshold"
-  }];
+  google.protobuf.DoubleValue from = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Minimum bound value of the threshold"}];
+  google.protobuf.StringValue color = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Color of the threshold"}];
+  google.protobuf.StringValue label = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional label of the threshold"}];
 }
 
 enum ThresholdType {

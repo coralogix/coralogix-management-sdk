@@ -235,9 +235,8 @@ func (*VariableValueV2_MultiStringValue_All) isVariableValueV2_MultiStringValue_
 func (*VariableValueV2_MultiStringValue_List) isVariableValueV2_MultiStringValue_Value() {}
 
 type VariableValueV2_SingleStringValue struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Value         *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Value         *VariableValueV2_StringValueLabel `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -272,24 +271,16 @@ func (*VariableValueV2_SingleStringValue) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 1}
 }
 
-func (x *VariableValueV2_SingleStringValue) GetValue() *wrapperspb.StringValue {
+func (x *VariableValueV2_SingleStringValue) GetValue() *VariableValueV2_StringValueLabel {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *VariableValueV2_SingleStringValue) GetLabel() *wrapperspb.StringValue {
-	if x != nil {
-		return x.Label
-	}
-	return nil
-}
-
 type VariableValueV2_SingleNumericValue struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Value         *wrapperspb.FloatValue  `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	state         protoimpl.MessageState             `protogen:"open.v1"`
+	Value         *VariableValueV2_NumericValueLabel `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -324,24 +315,16 @@ func (*VariableValueV2_SingleNumericValue) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 2}
 }
 
-func (x *VariableValueV2_SingleNumericValue) GetValue() *wrapperspb.FloatValue {
+func (x *VariableValueV2_SingleNumericValue) GetValue() *VariableValueV2_NumericValueLabel {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *VariableValueV2_SingleNumericValue) GetLabel() *wrapperspb.StringValue {
-	if x != nil {
-		return x.Label
-	}
-	return nil
-}
-
 type VariableValueV2_RegexValue struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Value         *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Value         *VariableValueV2_StringValueLabel `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -376,24 +359,16 @@ func (*VariableValueV2_RegexValue) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 3}
 }
 
-func (x *VariableValueV2_RegexValue) GetValue() *wrapperspb.StringValue {
+func (x *VariableValueV2_RegexValue) GetValue() *VariableValueV2_StringValueLabel {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *VariableValueV2_RegexValue) GetLabel() *wrapperspb.StringValue {
-	if x != nil {
-		return x.Label
-	}
-	return nil
-}
-
 type VariableValueV2_LuceneQueryValue struct {
-	state         protoimpl.MessageState  `protogen:"open.v1"`
-	Value         *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	state         protoimpl.MessageState            `protogen:"open.v1"`
+	Value         *VariableValueV2_StringValueLabel `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -428,14 +403,111 @@ func (*VariableValueV2_LuceneQueryValue) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 4}
 }
 
-func (x *VariableValueV2_LuceneQueryValue) GetValue() *wrapperspb.StringValue {
+func (x *VariableValueV2_LuceneQueryValue) GetValue() *VariableValueV2_StringValueLabel {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *VariableValueV2_LuceneQueryValue) GetLabel() *wrapperspb.StringValue {
+type VariableValueV2_StringValueLabel struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Value         *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VariableValueV2_StringValueLabel) Reset() {
+	*x = VariableValueV2_StringValueLabel{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariableValueV2_StringValueLabel) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariableValueV2_StringValueLabel) ProtoMessage() {}
+
+func (x *VariableValueV2_StringValueLabel) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariableValueV2_StringValueLabel.ProtoReflect.Descriptor instead.
+func (*VariableValueV2_StringValueLabel) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 5}
+}
+
+func (x *VariableValueV2_StringValueLabel) GetValue() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *VariableValueV2_StringValueLabel) GetLabel() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Label
+	}
+	return nil
+}
+
+type VariableValueV2_NumericValueLabel struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Value         *wrapperspb.FloatValue  `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
+	Label         *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=label,proto3" json:"label,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VariableValueV2_NumericValueLabel) Reset() {
+	*x = VariableValueV2_NumericValueLabel{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariableValueV2_NumericValueLabel) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariableValueV2_NumericValueLabel) ProtoMessage() {}
+
+func (x *VariableValueV2_NumericValueLabel) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariableValueV2_NumericValueLabel.ProtoReflect.Descriptor instead.
+func (*VariableValueV2_NumericValueLabel) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescGZIP(), []int{0, 6}
+}
+
+func (x *VariableValueV2_NumericValueLabel) GetValue() *wrapperspb.FloatValue {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *VariableValueV2_NumericValueLabel) GetLabel() *wrapperspb.StringValue {
 	if x != nil {
 		return x.Label
 	}
@@ -450,7 +522,7 @@ type VariableValueV2_MultiStringValue_AllValue struct {
 
 func (x *VariableValueV2_MultiStringValue_AllValue) Reset() {
 	*x = VariableValueV2_MultiStringValue_AllValue{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -462,7 +534,7 @@ func (x *VariableValueV2_MultiStringValue_AllValue) String() string {
 func (*VariableValueV2_MultiStringValue_AllValue) ProtoMessage() {}
 
 func (x *VariableValueV2_MultiStringValue_AllValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -487,7 +559,7 @@ type VariableValueV2_MultiStringValue_ListValue struct {
 
 func (x *VariableValueV2_MultiStringValue_ListValue) Reset() {
 	*x = VariableValueV2_MultiStringValue_ListValue{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -499,7 +571,7 @@ func (x *VariableValueV2_MultiStringValue_ListValue) String() string {
 func (*VariableValueV2_MultiStringValue_ListValue) ProtoMessage() {}
 
 func (x *VariableValueV2_MultiStringValue_ListValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -526,7 +598,7 @@ var File_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto p
 
 const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDesc = "" +
 	"\n" +
-	"Ecom/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a\x1egoogle/protobuf/wrappers.proto\"\xd7\v\n" +
+	"Ecom/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a\x1egoogle/protobuf/wrappers.proto\"\xd9\r\n" +
 	"\x0fVariableValueV2\x12w\n" +
 	"\fmulti_string\x18\x01 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValueH\x00R\vmultiString\x12z\n" +
 	"\rsingle_string\x18\x02 \x01(\v2S.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValueH\x00R\fsingleString\x12}\n" +
@@ -540,19 +612,21 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto
 	"\bAllValue\x1ax\n" +
 	"\tListValue\x12k\n" +
 	"\x06values\x18\x01 \x03(\v2S.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValueR\x06valuesB\a\n" +
-	"\x05value\x1a{\n" +
-	"\x11SingleStringValue\x122\n" +
-	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x05value\x122\n" +
-	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x1a{\n" +
-	"\x12SingleNumericValue\x121\n" +
-	"\x05value\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueR\x05value\x122\n" +
-	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x1at\n" +
+	"\x05value\x1a}\n" +
+	"\x11SingleStringValue\x12h\n" +
+	"\x05value\x18\x01 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabelR\x05value\x1a\x7f\n" +
+	"\x12SingleNumericValue\x12i\n" +
+	"\x05value\x18\x01 \x01(\v2S.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.NumericValueLabelR\x05value\x1av\n" +
 	"\n" +
-	"RegexValue\x122\n" +
+	"RegexValue\x12h\n" +
+	"\x05value\x18\x01 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabelR\x05value\x1a|\n" +
+	"\x10LuceneQueryValue\x12h\n" +
+	"\x05value\x18\x01 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabelR\x05value\x1az\n" +
+	"\x10StringValueLabel\x122\n" +
 	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x05value\x122\n" +
 	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x1az\n" +
-	"\x10LuceneQueryValue\x122\n" +
-	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x05value\x122\n" +
+	"\x11NumericValueLabel\x121\n" +
+	"\x05value\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueR\x05value\x122\n" +
 	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05labelB\a\n" +
 	"\x05valueb\x06proto3"
 
@@ -568,7 +642,7 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDescData
 }
 
-var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_goTypes = []any{
 	(*VariableValueV2)(nil),                            // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2
 	(*VariableValueV2_MultiStringValue)(nil),           // 1: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue
@@ -576,10 +650,12 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_g
 	(*VariableValueV2_SingleNumericValue)(nil),         // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleNumericValue
 	(*VariableValueV2_RegexValue)(nil),                 // 4: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.RegexValue
 	(*VariableValueV2_LuceneQueryValue)(nil),           // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.LuceneQueryValue
-	(*VariableValueV2_MultiStringValue_AllValue)(nil),  // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.AllValue
-	(*VariableValueV2_MultiStringValue_ListValue)(nil), // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.ListValue
-	(*wrapperspb.StringValue)(nil),                     // 8: google.protobuf.StringValue
-	(*wrapperspb.FloatValue)(nil),                      // 9: google.protobuf.FloatValue
+	(*VariableValueV2_StringValueLabel)(nil),           // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel
+	(*VariableValueV2_NumericValueLabel)(nil),          // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.NumericValueLabel
+	(*VariableValueV2_MultiStringValue_AllValue)(nil),  // 8: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.AllValue
+	(*VariableValueV2_MultiStringValue_ListValue)(nil), // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.ListValue
+	(*wrapperspb.StringValue)(nil),                     // 10: google.protobuf.StringValue
+	(*wrapperspb.FloatValue)(nil),                      // 11: google.protobuf.FloatValue
 }
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_depIdxs = []int32{
 	1,  // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.multi_string:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue
@@ -587,16 +663,16 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_d
 	3,  // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.single_numeric:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleNumericValue
 	4,  // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.regex:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.RegexValue
 	5,  // 4: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.lucene:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.LuceneQueryValue
-	6,  // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.all:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.AllValue
-	7,  // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.list:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.ListValue
-	8,  // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValue.value:type_name -> google.protobuf.StringValue
-	8,  // 8: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValue.label:type_name -> google.protobuf.StringValue
-	9,  // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleNumericValue.value:type_name -> google.protobuf.FloatValue
-	8,  // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleNumericValue.label:type_name -> google.protobuf.StringValue
-	8,  // 11: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.RegexValue.value:type_name -> google.protobuf.StringValue
-	8,  // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.RegexValue.label:type_name -> google.protobuf.StringValue
-	8,  // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.LuceneQueryValue.value:type_name -> google.protobuf.StringValue
-	8,  // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.LuceneQueryValue.label:type_name -> google.protobuf.StringValue
+	8,  // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.all:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.AllValue
+	9,  // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.list:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.ListValue
+	6,  // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValue.value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel
+	7,  // 8: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleNumericValue.value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.NumericValueLabel
+	6,  // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.RegexValue.value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel
+	6,  // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.LuceneQueryValue.value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel
+	10, // 11: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel.value:type_name -> google.protobuf.StringValue
+	10, // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.StringValueLabel.label:type_name -> google.protobuf.StringValue
+	11, // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.NumericValueLabel.value:type_name -> google.protobuf.FloatValue
+	10, // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.NumericValueLabel.label:type_name -> google.protobuf.StringValue
 	2,  // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.MultiStringValue.ListValue.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableValueV2.SingleStringValue
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type
@@ -627,7 +703,7 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_value_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

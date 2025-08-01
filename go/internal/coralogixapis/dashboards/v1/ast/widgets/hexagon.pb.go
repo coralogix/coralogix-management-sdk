@@ -274,7 +274,7 @@ func (*Hexagon_Query_Dataprime) isHexagon_Query_Value() {}
 
 type Hexagon_MetricsQuery struct {
 	state           protoimpl.MessageState          `protogen:"open.v1"`
-	PromqlQuery     *common.PromQlQuery             `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
+	PromqlQuery     *common1.PromQlQuery            `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
 	Filters         []*filters.Filter_MetricsFilter `protobuf:"bytes,2,rep,name=filters,proto3" json:"filters,omitempty"`
 	EditorMode      common.MetricsQueryEditorMode   `protobuf:"varint,3,opt,name=editor_mode,json=editorMode,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode" json:"editor_mode,omitempty"`
 	TimeFrame       *common1.TimeFrameSelect        `protobuf:"bytes,4,opt,name=time_frame,json=timeFrame,proto3" json:"time_frame,omitempty"`
@@ -314,7 +314,7 @@ func (*Hexagon_MetricsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDescGZIP(), []int{0, 1}
 }
 
-func (x *Hexagon_MetricsQuery) GetPromqlQuery() *common.PromQlQuery {
+func (x *Hexagon_MetricsQuery) GetPromqlQuery() *common1.PromQlQuery {
 	if x != nil {
 		return x.PromqlQuery
 	}
@@ -358,7 +358,7 @@ func (x *Hexagon_MetricsQuery) GetPromqlQueryType() common1.PromQLQueryType {
 
 type Hexagon_LogsQuery struct {
 	state           protoimpl.MessageState       `protogen:"open.v1"`
-	LuceneQuery     *common.LuceneQuery          `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery     *common1.LuceneQuery         `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	LogsAggregation *common1.LogsAggregation     `protobuf:"bytes,2,opt,name=logs_aggregation,json=logsAggregation,proto3" json:"logs_aggregation,omitempty"`
 	Filters         []*filters.Filter_LogsFilter `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupBy         []*common1.ObservationField  `protobuf:"bytes,4,rep,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
@@ -397,7 +397,7 @@ func (*Hexagon_LogsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDescGZIP(), []int{0, 2}
 }
 
-func (x *Hexagon_LogsQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *Hexagon_LogsQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -434,7 +434,7 @@ func (x *Hexagon_LogsQuery) GetTimeFrame() *common1.TimeFrameSelect {
 
 type Hexagon_SpansQuery struct {
 	state            protoimpl.MessageState          `protogen:"open.v1"`
-	LuceneQuery      *common.LuceneQuery             `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery      *common1.LuceneQuery            `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	SpansAggregation *common1.SpansAggregation       `protobuf:"bytes,2,opt,name=spans_aggregation,json=spansAggregation,proto3" json:"spans_aggregation,omitempty"`
 	Filters          []*filters.Filter_SpansFilter   `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupBy          []*common1.SpanField            `protobuf:"bytes,4,rep,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
@@ -474,7 +474,7 @@ func (*Hexagon_SpansQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDescGZIP(), []int{0, 3}
 }
 
-func (x *Hexagon_SpansQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *Hexagon_SpansQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -580,7 +580,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xed*\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc9*\n" +
 	"\aHexagon\x12\x81\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.QueryB/\x92A,2*A query object containing query definitionR\x05query\x12\x94\x01\n" +
 	"\x03min\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueBd\x92Aa2\\A minimum value used in percentage threshold calculation and for visual value representationJ\x010R\x03min\x12\x99\x01\n" +
@@ -603,9 +603,9 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDesc = "
 	"\x04logs\x18\x02 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQueryH\x00R\x04logs\x12W\n" +
 	"\x05spans\x18\x03 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQueryH\x00R\x05spans\x12c\n" +
 	"\tdataprime\x18\x04 \x01(\v2C.com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQueryH\x00R\tdataprimeB\a\n" +
-	"\x05value\x1a\xf6\a\n" +
-	"\fMetricsQuery\x12\xaf\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
+	"\x05value\x1a\xea\a\n" +
+	"\fMetricsQuery\x12\xa3\x01\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
 	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
 	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x011R\n" +
 	"editorMode\x12\x9e\x01\n" +
@@ -613,18 +613,18 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_rawDesc = "
 	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12|\n" +
 	"\vaggregation\x18\x05 \x01(\x0e2?.com.coralogixapis.dashboards.v1.ast.widgets.common.AggregationB\x19\x92A\x162\x14Aggregation functionR\vaggregation\x12\x9b\x01\n" +
 	"\x11promql_query_type\x18\x06 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType:3\x92A0\n" +
-	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xca\x06\n" +
-	"\tLogsQuery\x12\xc6\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12}\n" +
+	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xbe\x06\n" +
+	"\tLogsQuery\x12\xba\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12}\n" +
 	"\x10logs_aggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x92A\x162\x14Aggregation functionR\x0flogsAggregation\x12\x8d\x01\n" +
 	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
 	"\bgroup_by\x18\x04 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x92A<2:A list of observation fields by which to group the resultsR\agroupBy\x12\x9e\x01\n" +
 	"\n" +
 	"time_frame\x18\x05 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame:-\x92A*\n" +
-	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\x99\a\n" +
+	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\x8d\a\n" +
 	"\n" +
-	"SpansQuery\x12\x93\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12\x8b\x01\n" +
+	"SpansQuery\x12\x87\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12\x8b\x01\n" +
 	"\x11spans_aggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x92A!2\x1fSpan query aggregation functionR\x10spansAggregation\x12z\n" +
 	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x80\x01\n" +
 	"\bgroup_by\x18\x04 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\agroupBy\x12\x9f\x01\n" +
@@ -670,13 +670,13 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_goTypes = []a
 	(*common.Legend)(nil),                // 13: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
 	(common.LegendBy)(0),                 // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.LegendBy
 	(*wrapperspb.BoolValue)(nil),         // 15: google.protobuf.BoolValue
-	(*common.PromQlQuery)(nil),           // 16: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*common1.PromQlQuery)(nil),          // 16: com.coralogixapis.dashboards.v1.common.PromQlQuery
 	(*filters.Filter_MetricsFilter)(nil), // 17: com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	(common.MetricsQueryEditorMode)(0),   // 18: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
 	(*common1.TimeFrameSelect)(nil),      // 19: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
 	(common.Aggregation)(0),              // 20: com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
 	(common1.PromQLQueryType)(0),         // 21: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(*common.LuceneQuery)(nil),           // 22: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*common1.LuceneQuery)(nil),          // 22: com.coralogixapis.dashboards.v1.common.LuceneQuery
 	(*common1.LogsAggregation)(nil),      // 23: com.coralogixapis.dashboards.v1.common.LogsAggregation
 	(*filters.Filter_LogsFilter)(nil),    // 24: com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	(*common1.ObservationField)(nil),     // 25: com.coralogixapis.dashboards.v1.common.ObservationField
@@ -704,18 +704,18 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_hexagon_proto_depIdxs = []i
 	3,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery
 	4,  // 14: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery
 	5,  // 15: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.DataprimeQuery
-	16, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	16, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
 	17, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	18, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
 	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
 	20, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.aggregation:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Aggregation
 	21, // 21: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.MetricsQuery.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	22, // 22: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	22, // 22: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	23, // 23: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.logs_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
 	24, // 24: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	25, // 25: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
 	19, // 26: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	22, // 27: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	22, // 27: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	26, // 28: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.spans_aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
 	27, // 29: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
 	28, // 30: com.coralogixapis.dashboards.v1.ast.widgets.Hexagon.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField

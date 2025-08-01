@@ -139,7 +139,7 @@ func (x *VariableSourceV2) GetQuery() *VariableSourceV2_QuerySource {
 	return nil
 }
 
-func (x *VariableSourceV2) GetTextbox() *VariableSourceV2_TextBoxSource {
+func (x *VariableSourceV2) GetTextbox() *VariableSourceV2_TextboxSource {
 	if x != nil {
 		if x, ok := x.Value.(*VariableSourceV2_Textbox); ok {
 			return x.Textbox
@@ -161,7 +161,7 @@ type VariableSourceV2_Query struct {
 }
 
 type VariableSourceV2_Textbox struct {
-	Textbox *VariableSourceV2_TextBoxSource `protobuf:"bytes,3,opt,name=textbox,proto3,oneof"`
+	Textbox *VariableSourceV2_TextboxSource `protobuf:"bytes,3,opt,name=textbox,proto3,oneof"`
 }
 
 func (*VariableSourceV2_Static) isVariableSourceV2_Value() {}
@@ -170,27 +170,27 @@ func (*VariableSourceV2_Query) isVariableSourceV2_Value() {}
 
 func (*VariableSourceV2_Textbox) isVariableSourceV2_Value() {}
 
-type VariableSourceV2_TextBoxSource struct {
+type VariableSourceV2_TextboxSource struct {
 	state         protoimpl.MessageState                              `protogen:"open.v1"`
-	DefaultValue  *VariableSourceV2_TextBoxSource_TextBoxDefaultValue `protobuf:"bytes,1,opt,name=default_value,json=defaultValue,proto3,oneof" json:"default_value,omitempty"`
+	DefaultValue  *VariableSourceV2_TextboxSource_TextboxDefaultValue `protobuf:"bytes,1,opt,name=default_value,json=defaultValue,proto3,oneof" json:"default_value,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VariableSourceV2_TextBoxSource) Reset() {
-	*x = VariableSourceV2_TextBoxSource{}
+func (x *VariableSourceV2_TextboxSource) Reset() {
+	*x = VariableSourceV2_TextboxSource{}
 	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VariableSourceV2_TextBoxSource) String() string {
+func (x *VariableSourceV2_TextboxSource) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VariableSourceV2_TextBoxSource) ProtoMessage() {}
+func (*VariableSourceV2_TextboxSource) ProtoMessage() {}
 
-func (x *VariableSourceV2_TextBoxSource) ProtoReflect() protoreflect.Message {
+func (x *VariableSourceV2_TextboxSource) ProtoReflect() protoreflect.Message {
 	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -202,12 +202,12 @@ func (x *VariableSourceV2_TextBoxSource) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VariableSourceV2_TextBoxSource.ProtoReflect.Descriptor instead.
-func (*VariableSourceV2_TextBoxSource) Descriptor() ([]byte, []int) {
+// Deprecated: Use VariableSourceV2_TextboxSource.ProtoReflect.Descriptor instead.
+func (*VariableSourceV2_TextboxSource) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDescGZIP(), []int{0, 0}
 }
 
-func (x *VariableSourceV2_TextBoxSource) GetDefaultValue() *VariableSourceV2_TextBoxSource_TextBoxDefaultValue {
+func (x *VariableSourceV2_TextboxSource) GetDefaultValue() *VariableSourceV2_TextboxSource_TextboxDefaultValue {
 	if x != nil {
 		return x.DefaultValue
 	}
@@ -508,31 +508,31 @@ func (x *VariableSourceV2_AllOption) GetLabel() *wrapperspb.StringValue {
 	return nil
 }
 
-type VariableSourceV2_TextBoxSource_TextBoxDefaultValue struct {
+type VariableSourceV2_TextboxSource_TextboxDefaultValue struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
 	//
-	//	*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleString
-	//	*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleNumeric
-	Value         isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value `protobuf_oneof:"value"`
+	//	*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString
+	//	*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric
+	Value         isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) Reset() {
-	*x = VariableSourceV2_TextBoxSource_TextBoxDefaultValue{}
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) Reset() {
+	*x = VariableSourceV2_TextboxSource_TextboxDefaultValue{}
 	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) String() string {
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*VariableSourceV2_TextBoxSource_TextBoxDefaultValue) ProtoMessage() {}
+func (*VariableSourceV2_TextboxSource_TextboxDefaultValue) ProtoMessage() {}
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) ProtoReflect() protoreflect.Message {
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) ProtoReflect() protoreflect.Message {
 	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -544,52 +544,52 @@ func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) ProtoReflect() prot
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use VariableSourceV2_TextBoxSource_TextBoxDefaultValue.ProtoReflect.Descriptor instead.
-func (*VariableSourceV2_TextBoxSource_TextBoxDefaultValue) Descriptor() ([]byte, []int) {
+// Deprecated: Use VariableSourceV2_TextboxSource_TextboxDefaultValue.ProtoReflect.Descriptor instead.
+func (*VariableSourceV2_TextboxSource_TextboxDefaultValue) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDescGZIP(), []int{0, 0, 0}
 }
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) GetValue() isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value {
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) GetValue() isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value {
 	if x != nil {
 		return x.Value
 	}
 	return nil
 }
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) GetSingleString() *wrapperspb.StringValue {
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) GetSingleString() *wrapperspb.StringValue {
 	if x != nil {
-		if x, ok := x.Value.(*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleString); ok {
+		if x, ok := x.Value.(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString); ok {
 			return x.SingleString
 		}
 	}
 	return nil
 }
 
-func (x *VariableSourceV2_TextBoxSource_TextBoxDefaultValue) GetSingleNumeric() *wrapperspb.FloatValue {
+func (x *VariableSourceV2_TextboxSource_TextboxDefaultValue) GetSingleNumeric() *wrapperspb.FloatValue {
 	if x != nil {
-		if x, ok := x.Value.(*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleNumeric); ok {
+		if x, ok := x.Value.(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric); ok {
 			return x.SingleNumeric
 		}
 	}
 	return nil
 }
 
-type isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value interface {
-	isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value()
+type isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value interface {
+	isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value()
 }
 
-type VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleString struct {
+type VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString struct {
 	SingleString *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=single_string,json=singleString,proto3,oneof"`
 }
 
-type VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleNumeric struct {
+type VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric struct {
 	SingleNumeric *wrapperspb.FloatValue `protobuf:"bytes,2,opt,name=single_numeric,json=singleNumeric,proto3,oneof"`
 }
 
-func (*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleString) isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value() {
+func (*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString) isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value() {
 }
 
-func (*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleNumeric) isVariableSourceV2_TextBoxSource_TextBoxDefaultValue_Value() {
+func (*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric) isVariableSourceV2_TextboxSource_TextboxDefaultValue_Value() {
 }
 
 type VariableSourceV2_StaticSource_ValueLabel struct {
@@ -1820,10 +1820,10 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_prot
 	"\x10VariableSourceV2\x12i\n" +
 	"\x06static\x18\x01 \x01(\v2O.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSourceH\x00R\x06static\x12f\n" +
 	"\x05query\x18\x02 \x01(\v2N.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySourceH\x00R\x05query\x12l\n" +
-	"\atextbox\x18\x03 \x01(\v2P.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSourceH\x00R\atextbox\x1a\xde\x02\n" +
-	"\rTextBoxSource\x12\x8e\x01\n" +
-	"\rdefault_value\x18\x01 \x01(\v2d.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.TextBoxDefaultValueH\x00R\fdefaultValue\x88\x01\x01\x1a\xa9\x01\n" +
-	"\x13TextBoxDefaultValue\x12C\n" +
+	"\atextbox\x18\x03 \x01(\v2P.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSourceH\x00R\atextbox\x1a\xde\x02\n" +
+	"\rTextboxSource\x12\x8e\x01\n" +
+	"\rdefault_value\x18\x01 \x01(\v2d.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValueH\x00R\fdefaultValue\x88\x01\x01\x1a\xa9\x01\n" +
+	"\x13TextboxDefaultValue\x12C\n" +
 	"\rsingle_string\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueH\x00R\fsingleString\x12D\n" +
 	"\x0esingle_numeric\x18\x02 \x01(\v2\x1b.google.protobuf.FloatValueH\x00R\rsingleNumericB\a\n" +
 	"\x05valueB\x10\n" +
@@ -1957,12 +1957,12 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_goTypes = []any{
 	(VariableSourceV2_RefreshStrategy)(0),                                     // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategy
 	(*VariableSourceV2)(nil),                                                  // 1: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2
-	(*VariableSourceV2_TextBoxSource)(nil),                                    // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource
+	(*VariableSourceV2_TextboxSource)(nil),                                    // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource
 	(*VariableSourceV2_StaticSource)(nil),                                     // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource
 	(*VariableSourceV2_QuerySource)(nil),                                      // 4: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource
 	(*VariableSourceV2_ValueDisplayOptions)(nil),                              // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions
 	(*VariableSourceV2_AllOption)(nil),                                        // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption
-	(*VariableSourceV2_TextBoxSource_TextBoxDefaultValue)(nil),                // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.TextBoxDefaultValue
+	(*VariableSourceV2_TextboxSource_TextboxDefaultValue)(nil),                // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue
 	(*VariableSourceV2_StaticSource_ValueLabel)(nil),                          // 8: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel
 	(*VariableSourceV2_QuerySource_LogsQuery)(nil),                            // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery
 	(*VariableSourceV2_QuerySource_SpansQuery)(nil),                           // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery
@@ -1994,8 +1994,8 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_depIdxs = []int32{
 	3,  // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.static:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource
 	4,  // 1: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.query:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource
-	2,  // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.textbox:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource
-	7,  // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.default_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.TextBoxDefaultValue
+	2,  // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.textbox:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource
+	7,  // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.default_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue
 	8,  // 4: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel
 	29, // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.values_order_direction:type_name -> com.coralogixapis.dashboards.v1.common.OrderDirection
 	6,  // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.all_option:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption
@@ -2010,8 +2010,8 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 	30, // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions.label_regex:type_name -> google.protobuf.StringValue
 	31, // 16: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.include_all:type_name -> google.protobuf.BoolValue
 	30, // 17: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.label:type_name -> google.protobuf.StringValue
-	30, // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.TextBoxDefaultValue.single_string:type_name -> google.protobuf.StringValue
-	32, // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextBoxSource.TextBoxDefaultValue.single_numeric:type_name -> google.protobuf.FloatValue
+	30, // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_string:type_name -> google.protobuf.StringValue
+	32, // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_numeric:type_name -> google.protobuf.FloatValue
 	30, // 20: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.value:type_name -> google.protobuf.StringValue
 	30, // 21: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.label:type_name -> google.protobuf.StringValue
 	31, // 22: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.is_default:type_name -> google.protobuf.BoolValue
@@ -2070,8 +2070,8 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto
 		(*VariableSourceV2_QuerySource_SpansQuery_)(nil),
 	}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[6].OneofWrappers = []any{
-		(*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleString)(nil),
-		(*VariableSourceV2_TextBoxSource_TextBoxDefaultValue_SingleNumeric)(nil),
+		(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString)(nil),
+		(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric)(nil),
 	}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[7].OneofWrappers = []any{}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11].OneofWrappers = []any{

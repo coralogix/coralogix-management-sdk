@@ -533,7 +533,7 @@ func (x *LineChart_Tooltip) GetType() LineChart_TooltipType {
 
 type LineChart_LogsQuery struct {
 	state         protoimpl.MessageState       `protogen:"open.v1"`
-	LuceneQuery   *common.LuceneQuery          `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery   *common1.LuceneQuery         `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	GroupBy       []*wrapperspb.StringValue    `protobuf:"bytes,2,rep,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
 	Aggregations  []*common1.LogsAggregation   `protobuf:"bytes,3,rep,name=aggregations,proto3" json:"aggregations,omitempty"`
 	Filters       []*filters.Filter_LogsFilter `protobuf:"bytes,4,rep,name=filters,proto3" json:"filters,omitempty"`
@@ -573,7 +573,7 @@ func (*LineChart_LogsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDescGZIP(), []int{0, 3}
 }
 
-func (x *LineChart_LogsQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *LineChart_LogsQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -617,7 +617,7 @@ func (x *LineChart_LogsQuery) GetTimeFrame() *common1.TimeFrameSelect {
 
 type LineChart_MetricsQuery struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	PromqlQuery   *common.PromQlQuery             `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
+	PromqlQuery   *common1.PromQlQuery            `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
 	Filters       []*filters.Filter_MetricsFilter `protobuf:"bytes,2,rep,name=filters,proto3" json:"filters,omitempty"`
 	EditorMode    common.MetricsQueryEditorMode   `protobuf:"varint,3,opt,name=editor_mode,json=editorMode,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode" json:"editor_mode,omitempty"`
 	TimeFrame     *common1.TimeFrameSelect        `protobuf:"bytes,4,opt,name=time_frame,json=timeFrame,proto3" json:"time_frame,omitempty"`
@@ -655,7 +655,7 @@ func (*LineChart_MetricsQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDescGZIP(), []int{0, 4}
 }
 
-func (x *LineChart_MetricsQuery) GetPromqlQuery() *common.PromQlQuery {
+func (x *LineChart_MetricsQuery) GetPromqlQuery() *common1.PromQlQuery {
 	if x != nil {
 		return x.PromqlQuery
 	}
@@ -685,7 +685,7 @@ func (x *LineChart_MetricsQuery) GetTimeFrame() *common1.TimeFrameSelect {
 
 type LineChart_SpansQuery struct {
 	state         protoimpl.MessageState          `protogen:"open.v1"`
-	LuceneQuery   *common.LuceneQuery             `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
+	LuceneQuery   *common1.LuceneQuery            `protobuf:"bytes,1,opt,name=lucene_query,json=luceneQuery,proto3" json:"lucene_query,omitempty"`
 	GroupBy       []*common1.SpanField            `protobuf:"bytes,2,rep,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
 	Aggregations  []*common1.SpansAggregation     `protobuf:"bytes,3,rep,name=aggregations,proto3" json:"aggregations,omitempty"`
 	Filters       []*filters.Filter_SpansFilter   `protobuf:"bytes,4,rep,name=filters,proto3" json:"filters,omitempty"`
@@ -725,7 +725,7 @@ func (*LineChart_SpansQuery) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDescGZIP(), []int{0, 5}
 }
 
-func (x *LineChart_SpansQuery) GetLuceneQuery() *common.LuceneQuery {
+func (x *LineChart_SpansQuery) GetLuceneQuery() *common1.LuceneQuery {
 	if x != nil {
 		return x.LuceneQuery
 	}
@@ -884,7 +884,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto protorefle
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a@com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc38\n" +
+	"<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x9f8\n" +
 	"\tLineChart\x12q\n" +
 	"\x06legend\x18\x02 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12o\n" +
 	"\atooltip\x18\x06 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipB\x15\x92A\x122\x10Tooltip settingsR\atooltip\x12\x97\x01\n" +
@@ -927,25 +927,25 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc 
 	"\aTooltip\x12F\n" +
 	"\vshow_labels\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueB\t\x92A\x06J\x04trueR\n" +
 	"showLabels\x12\xb9\x01\n" +
-	"\x04type\x18\x02 \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipTypeBa\x92A^2\\Type of the tooltip display, can be showing single series value or all series values at onceR\x04type\x1a\xb6\a\n" +
-	"\tLogsQuery\x12\xc6\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12l\n" +
+	"\x04type\x18\x02 \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipTypeBa\x92A^2\\Type of the tooltip display, can be showing single series value or all series values at onceR\x04type\x1a\xaa\a\n" +
+	"\tLogsQuery\x12\xba\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12l\n" +
 	"\bgroup_by\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB3\x92A02.List of field names to group the query resultsR\agroupBy\x12\xa9\x01\n" +
 	"\faggregations\x18\x03 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationBL\x92AI2GList of query aggregation functions, it should contain only one elementR\faggregations\x12\x8d\x01\n" +
 	"\afilters\x18\x04 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x93\x01\n" +
 	"\tgroup_bys\x18\x05 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB<\x92A927A list of observation fields to group the query resultsR\bgroupBys\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\xa6\x05\n" +
-	"\fMetricsQuery\x12\xaf\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
+	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\x9a\x05\n" +
+	"\fMetricsQuery\x12\xa3\x01\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
 	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
 	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x011R\n" +
 	"editorMode\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\x8c\a\n" +
+	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\x80\a\n" +
 	"\n" +
-	"SpansQuery\x12\x93\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
+	"SpansQuery\x12\x87\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
 	"\bgroup_by\x18\x02 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\agroupBy\x12\xaf\x01\n" +
 	"\faggregations\x18\x03 \x03(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationBQ\x92AN2LList of span query aggregation functions, it should contain only one elementR\faggregations\x12z\n" +
 	"\afilters\x18\x04 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x9f\x01\n" +
@@ -1006,12 +1006,12 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_goTypes = 
 	(common.DataModeType)(0),             // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
 	(*wrapperspb.Int32Value)(nil),        // 18: google.protobuf.Int32Value
 	(*wrapperspb.FloatValue)(nil),        // 19: google.protobuf.FloatValue
-	(*common.LuceneQuery)(nil),           // 20: com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	(*common1.LuceneQuery)(nil),          // 20: com.coralogixapis.dashboards.v1.common.LuceneQuery
 	(*common1.LogsAggregation)(nil),      // 21: com.coralogixapis.dashboards.v1.common.LogsAggregation
 	(*filters.Filter_LogsFilter)(nil),    // 22: com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	(*common1.ObservationField)(nil),     // 23: com.coralogixapis.dashboards.v1.common.ObservationField
 	(*common1.TimeFrameSelect)(nil),      // 24: com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	(*common.PromQlQuery)(nil),           // 25: com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	(*common1.PromQlQuery)(nil),          // 25: com.coralogixapis.dashboards.v1.common.PromQlQuery
 	(*filters.Filter_MetricsFilter)(nil), // 26: com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	(common.MetricsQueryEditorMode)(0),   // 27: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
 	(*common1.SpanField)(nil),            // 28: com.coralogixapis.dashboards.v1.common.SpanField
@@ -1050,17 +1050,17 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_depIdxs = 
 	9,  // 24: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery
 	16, // 25: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.show_labels:type_name -> google.protobuf.BoolValue
 	0,  // 26: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipType
-	20, // 27: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	20, // 27: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	12, // 28: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_by:type_name -> google.protobuf.StringValue
 	21, // 29: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
 	22, // 30: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	23, // 31: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
 	24, // 32: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	25, // 33: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.PromQlQuery
+	25, // 33: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
 	26, // 34: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilter
 	27, // 35: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
 	24, // 36: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery.time_frame:type_name -> com.coralogixapis.dashboards.v1.common.TimeFrameSelect
-	20, // 37: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.LuceneQuery
+	20, // 37: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
 	28, // 38: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
 	29, // 39: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
 	30, // 40: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
