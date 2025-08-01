@@ -8,9 +8,7 @@ import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message Layout {
-  repeated Section sections = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The list of sections in the dashboard"
-  }];
+  repeated Section sections = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The list of sections in the dashboard"}];
 }
 
 message Section {
@@ -19,12 +17,8 @@ message Section {
     example: '{ "value": "5995904f-7256-f096-9a16-37124e0f15cb"} '
     description: "Section unique identifier"
   }];
-  repeated Row rows = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Definition of a section's rows (one row represents a single row of visualizations)"
-  }];
-  SectionOptions options = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Section's options"
-  }];
+  repeated Row rows = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definition of a section's rows (one row represents a single row of visualizations)"}];
+  SectionOptions options = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Section's options"}];
 }
 
 message Row {
@@ -33,12 +27,8 @@ message Row {
     example: '{ "value": "83aed974-510b-43be-bd19-c92daf56beff" }'
     description: "Row unique identifier"
   }];
-  Appearance appearance = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "Row appearance configuration"
-  }];
-  repeated Widget widgets = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The list of widgets in the row"
-  }];
+  Appearance appearance = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Row appearance configuration"}];
+  repeated Widget widgets = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The list of widgets in the row"}];
 
   message Appearance {
     google.protobuf.Int32Value height = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
@@ -51,9 +41,7 @@ message Row {
 message SectionOptions {
   oneof value {
     InternalSectionOptions internal = 1;
-    CustomSectionOptions custom = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "Options for a custom section"
-    }];
+    CustomSectionOptions custom = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Options for a custom section"}];
   }
 }
 

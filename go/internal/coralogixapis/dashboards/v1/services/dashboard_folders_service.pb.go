@@ -7,7 +7,7 @@
 package services
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
@@ -479,7 +479,7 @@ var File_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_prot
 
 const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_proto_rawDesc = "" +
 	"\n" +
-	"Hcom/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a'com/coralogix/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe2\x02\n" +
+	"Hcom/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe2\x02\n" +
 	"\x1cCreateDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12O\n" +

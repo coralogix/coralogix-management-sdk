@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.services;
 
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogixapis/dashboards/v1/ast/dashboard.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
@@ -17,7 +17,7 @@ service DashboardsService {
   };
 
   rpc CreateDashboard(CreateDashboardRequest) returns (CreateDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Create dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Create dashboard";
     option (google.api.http) = {
       post: "/v1/dashboards/dashboards"
       body: "*"
@@ -49,7 +49,7 @@ service DashboardsService {
   }
 
   rpc ReplaceDashboard(ReplaceDashboardRequest) returns (ReplaceDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Replace dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Replace dashboard";
     option (google.api.http) = {
       put: "/v1/dashboards/dashboards"
       body: "*"
@@ -81,7 +81,7 @@ service DashboardsService {
   }
 
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete dashboard";
     option (google.api.http) = {delete: "/v1/dashboards/dashboards/{dashboard_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -110,7 +110,7 @@ service DashboardsService {
   }
 
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard";
     option (google.api.http) = {get: "/v1/dashboards/dashboards/{dashboard_id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -139,7 +139,7 @@ service DashboardsService {
   }
 
   rpc GetDashboardBySlug(GetDashboardBySlugRequest) returns (GetDashboardBySlugResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get dashboard by URL slug";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard by URL slug";
     option (google.api.http) = {get: "/v1/dashboards/by-slug/{slug}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -168,7 +168,7 @@ service DashboardsService {
   }
 
   rpc PinDashboard(PinDashboardRequest) returns (PinDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Pin dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Pin dashboard";
     option (google.api.http) = {
       patch: "/v1/dashboards/dashboards/{dashboard_id}:pin"
       body: "*"
@@ -200,7 +200,7 @@ service DashboardsService {
   }
 
   rpc UnpinDashboard(UnpinDashboardRequest) returns (UnpinDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Unpin dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Unpin dashboard";
     option (google.api.http) = {
       patch: "/v1/dashboards/dashboards/{dashboard_id}:unpin"
       body: "*"
@@ -232,7 +232,7 @@ service DashboardsService {
   }
 
   rpc ReplaceDefaultDashboard(ReplaceDefaultDashboardRequest) returns (ReplaceDefaultDashboardResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Replace default dashboard";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Replace default dashboard";
     option (google.api.http) = {
       put: "/v1/dashboards/dashboards/{dashboard_id}/default"
       body: "*"
@@ -264,7 +264,7 @@ service DashboardsService {
   }
 
   rpc AssignDashboardFolder(AssignDashboardFolderRequest) returns (AssignDashboardFolderResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Assign a dashboard to a folder";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Assign a dashboard to a folder";
     option (google.api.http) = {
       post: "/v1/dashboards/dashboards/{dashboard_id}/folder"
       body: "*"

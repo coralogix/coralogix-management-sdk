@@ -6,7 +6,6 @@ import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
-import "com/coralogixapis/dashboards/v1/ast/widgets/common/queries.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
@@ -77,7 +76,7 @@ message Gauge {
       }
     };
 
-    common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    v1.common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "PromQL query string for querying metrics"
       example: '{ "value": "up{job=\'abc\'}" }'
     }];
@@ -100,7 +99,7 @@ message Gauge {
       }
     };
 
-    common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "A Lucene query string to search logs"
       example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
     }];
@@ -120,7 +119,7 @@ message Gauge {
       }
     };
 
-    common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Lucene query string to search span records"}];
+    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Lucene query string to search span records"}];
     v1.common.SpansAggregation spans_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
     Aggregation aggregation = 3 [deprecated = true];
     repeated v1.ast.filters.Filter.SpansFilter filters = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];

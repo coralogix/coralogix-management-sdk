@@ -46,7 +46,7 @@ message VariableValueV2 {
   }
 
   message NumericValueLabel {
-    google.protobuf.StringValue value = 1;
+    google.protobuf.FloatValue value = 1;
     google.protobuf.StringValue label = 2;
   }
 }
