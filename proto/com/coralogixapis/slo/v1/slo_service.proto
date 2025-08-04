@@ -4,6 +4,7 @@ import "google/api/annotations.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogixapis/slo/v1/slo_alert.proto";
 
 
 message ResponseStatus {
@@ -19,6 +20,28 @@ message ResponseStatus {
   map<string,string> details = 3;
 }
 
+message ReplaceSloAlertsValidationsRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloAlertsValidationsRequest"
+      description: "Request to validate alerts before replacing an existing SLO."
+      required: ["slo"]
+    }
+  };
+  Slo slo = 1;
+}
+
+message ReplaceSloAlertsValidationsResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "ReplaceSloAlertsValidationsResponse"
+      description: "Response with validated alerts before replacing an existing SLO."
+      required: ["alerts_validation_result"]
+    }
+  };
+  repeated SloAlertValidityResult alerts_validation_result = 1;
+}
+
 message CreateSloRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -28,6 +51,7 @@ message CreateSloRequest {
     }
   };
   Slo slo = 1;
+  optional bool silence_data_validations = 2;
 }
 
 message CreateSloResponse {
@@ -50,6 +74,7 @@ message ReplaceSloRequest {
     }
   };
   Slo slo = 1;
+  optional bool silence_data_validations = 2;
 }
 
 message ReplaceSloResponse {
@@ -206,6 +231,55 @@ message BatchExecuteSloResponse {
   ResponseStatus status = 2;
 }
 
+message GetSloUsageReportRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetSloUsageReportRequest"
+      description: "Request to get SLO usage report."
+      required: []
+    }
+  };
+}
+
+message GetZeroStateRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetZeroStateRequest"
+      description: "Request to get zero state (boolean)."
+      required: []
+    }
+  };
+}
+
+message GetSloUsageReportResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetSloUsageReportResponse"
+      description: "Response containing SLO usage statistics and information."
+      required: ["company_id", "company_name", "cx_region", "slo_count", "slo_alert_count"]
+    }
+  };
+  int32 company_id = 1;
+  string company_name = 2;
+  string cx_region = 3;
+  int32 slo_count = 4;
+  int32 slo_alert_count = 5;
+  string slo_with_most_permutations = 6;
+  int32 max_permutations = 7;
+  string slo_id_with_multiple_permutations = 8;
+}
+
+message GetZeroStateResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "GetZeroStateResponse"
+      description: "Response with Zero State."
+      required: ["zero_state"]
+    }
+  };
+  bool zero_state = 1;
+}
+
 service SlosService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
     name: "Slos Service"
@@ -256,6 +330,30 @@ service SlosService {
 
     option (google.api.http) = {
       put: "/v1/slo/slos"
+      body: "slo"
+    };
+  }
+
+  rpc ValidateReplaceSloAlerts(ReplaceSloAlertsValidationsRequest) returns (ReplaceSloAlertsValidationsResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Replace Slo Pre-Validate Alerts"
+    };
+
+    option (google.api.http) = {
+      post: "/v1/slo/slos/validate"
       body: "slo"
     };
   }
@@ -329,6 +427,29 @@ service SlosService {
     };
   }
 
+  rpc GetZeroState(GetZeroStateRequest) returns (GetZeroStateResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Get Slo Zero State"
+    };
+
+    option (google.api.http) = {
+      get: "/v1/slo/slos/zeroState"
+    };
+  }
+
   rpc BatchGetSlos(BatchGetSlosRequest) returns (BatchGetSlosResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -373,6 +494,29 @@ service SlosService {
 
     option (google.api.http) = {
       post: "/v1/slo/slos:batchExecute"
+    };
+  }
+
+  rpc GetSloUsageReport(GetSloUsageReportRequest) returns (GetSloUsageReportResponse) {
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Slos Service"]
+      summary: "Get SLO Usage Report"
+    };
+
+    option (google.api.http) = {
+      get: "/v1/slo/slos/usage-report"
     };
   }
 }

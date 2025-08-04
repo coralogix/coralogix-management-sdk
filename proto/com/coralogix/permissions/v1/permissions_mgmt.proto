@@ -148,6 +148,8 @@ message TeamGroup {
   google.protobuf.Timestamp created_at = 9;
   google.protobuf.Timestamp updated_at = 10;
   optional string next_gen_scope_id = 11;
+  /// Group type defines the level of access to the group itself
+  GroupType group_type = 12;
 }
 
 message PermissionGroupMetadata {
@@ -169,4 +171,13 @@ message PermissionMetadata {
   bool is_send_data = 9;
 }
 
-
+/// Group type defines the level of access to the group itself
+enum GroupType {
+  GROUP_TYPE_UNSPECIFIED = 0;
+  /// Discoverable and joinable by any authorized user. Ideal for open collaboration (e.g., general teams).
+  GROUP_TYPE_OPEN = 1;
+  /// Not discoverable. Membership is by invitation or manual assignment only. Suitable for controlled collaboration (e.g., project teams).
+  GROUP_TYPE_CLOSED = 2;
+  /// A closed group applied to highly sensitive content.
+  GROUP_TYPE_RESTRICTED = 3;
+}

@@ -29,6 +29,26 @@ message SloData {
 message SloHubRow {
   Slo slo = 1;
   optional SloData slo_data = 2;
+
+  // Deprecated field for backward compatibility
+  optional string error_message = 3 [deprecated = true];
+  optional SloError slo_error = 4;
+}
+
+message SloError {
+  ErrorType error_type = 1;
+  optional ErrorDetails error_details = 2;
+}
+
+enum ErrorType {
+  ERROR_TYPE_UNSPECIFIED = 0; 
+  GENERAL = 1;
+  CARDINALITY_LIMIT_EXCEEDED = 2;
+}
+
+message ErrorDetails {
+  optional uint32 cardinality = 1;
+  optional uint32 limit = 2;
 }
 
 message LabelValue {

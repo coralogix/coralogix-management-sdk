@@ -84,16 +84,105 @@ func (x *ResponseStatus) GetDetails() map[string]string {
 	return nil
 }
 
-type CreateSloRequest struct {
+type ReplaceSloAlertsValidationsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Slo           *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
+func (x *ReplaceSloAlertsValidationsRequest) Reset() {
+	*x = ReplaceSloAlertsValidationsRequest{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[1]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReplaceSloAlertsValidationsRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReplaceSloAlertsValidationsRequest) ProtoMessage() {}
+
+func (x *ReplaceSloAlertsValidationsRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[1]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReplaceSloAlertsValidationsRequest.ProtoReflect.Descriptor instead.
+func (*ReplaceSloAlertsValidationsRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReplaceSloAlertsValidationsRequest) GetSlo() *Slo {
+	if x != nil {
+		return x.Slo
+	}
+	return nil
+}
+
+type ReplaceSloAlertsValidationsResponse struct {
+	state                  protoimpl.MessageState    `protogen:"open.v1"`
+	AlertsValidationResult []*SloAlertValidityResult `protobuf:"bytes,1,rep,name=alerts_validation_result,json=alertsValidationResult,proto3" json:"alerts_validation_result,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
+func (x *ReplaceSloAlertsValidationsResponse) Reset() {
+	*x = ReplaceSloAlertsValidationsResponse{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ReplaceSloAlertsValidationsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReplaceSloAlertsValidationsResponse) ProtoMessage() {}
+
+func (x *ReplaceSloAlertsValidationsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReplaceSloAlertsValidationsResponse.ProtoReflect.Descriptor instead.
+func (*ReplaceSloAlertsValidationsResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *ReplaceSloAlertsValidationsResponse) GetAlertsValidationResult() []*SloAlertValidityResult {
+	if x != nil {
+		return x.AlertsValidationResult
+	}
+	return nil
+}
+
+type CreateSloRequest struct {
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Slo                    *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	SilenceDataValidations *bool                  `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
+}
+
 func (x *CreateSloRequest) Reset() {
 	*x = CreateSloRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -105,7 +194,7 @@ func (x *CreateSloRequest) String() string {
 func (*CreateSloRequest) ProtoMessage() {}
 
 func (x *CreateSloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[1]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -118,7 +207,7 @@ func (x *CreateSloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSloRequest.ProtoReflect.Descriptor instead.
 func (*CreateSloRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CreateSloRequest) GetSlo() *Slo {
@@ -126,6 +215,13 @@ func (x *CreateSloRequest) GetSlo() *Slo {
 		return x.Slo
 	}
 	return nil
+}
+
+func (x *CreateSloRequest) GetSilenceDataValidations() bool {
+	if x != nil && x.SilenceDataValidations != nil {
+		return *x.SilenceDataValidations
+	}
+	return false
 }
 
 type CreateSloResponse struct {
@@ -137,7 +233,7 @@ type CreateSloResponse struct {
 
 func (x *CreateSloResponse) Reset() {
 	*x = CreateSloResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -149,7 +245,7 @@ func (x *CreateSloResponse) String() string {
 func (*CreateSloResponse) ProtoMessage() {}
 
 func (x *CreateSloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[2]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -162,7 +258,7 @@ func (x *CreateSloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateSloResponse.ProtoReflect.Descriptor instead.
 func (*CreateSloResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{2}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateSloResponse) GetSlo() *Slo {
@@ -173,15 +269,16 @@ func (x *CreateSloResponse) GetSlo() *Slo {
 }
 
 type ReplaceSloRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Slo           *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                  protoimpl.MessageState `protogen:"open.v1"`
+	Slo                    *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	SilenceDataValidations *bool                  `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ReplaceSloRequest) Reset() {
 	*x = ReplaceSloRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -193,7 +290,7 @@ func (x *ReplaceSloRequest) String() string {
 func (*ReplaceSloRequest) ProtoMessage() {}
 
 func (x *ReplaceSloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -206,7 +303,7 @@ func (x *ReplaceSloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplaceSloRequest.ProtoReflect.Descriptor instead.
 func (*ReplaceSloRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ReplaceSloRequest) GetSlo() *Slo {
@@ -214,6 +311,13 @@ func (x *ReplaceSloRequest) GetSlo() *Slo {
 		return x.Slo
 	}
 	return nil
+}
+
+func (x *ReplaceSloRequest) GetSilenceDataValidations() bool {
+	if x != nil && x.SilenceDataValidations != nil {
+		return *x.SilenceDataValidations
+	}
+	return false
 }
 
 type ReplaceSloResponse struct {
@@ -226,7 +330,7 @@ type ReplaceSloResponse struct {
 
 func (x *ReplaceSloResponse) Reset() {
 	*x = ReplaceSloResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -238,7 +342,7 @@ func (x *ReplaceSloResponse) String() string {
 func (*ReplaceSloResponse) ProtoMessage() {}
 
 func (x *ReplaceSloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -251,7 +355,7 @@ func (x *ReplaceSloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplaceSloResponse.ProtoReflect.Descriptor instead.
 func (*ReplaceSloResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ReplaceSloResponse) GetSlo() *Slo {
@@ -277,7 +381,7 @@ type DeleteSloRequest struct {
 
 func (x *DeleteSloRequest) Reset() {
 	*x = DeleteSloRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -289,7 +393,7 @@ func (x *DeleteSloRequest) String() string {
 func (*DeleteSloRequest) ProtoMessage() {}
 
 func (x *DeleteSloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -302,7 +406,7 @@ func (x *DeleteSloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSloRequest.ProtoReflect.Descriptor instead.
 func (*DeleteSloRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *DeleteSloRequest) GetId() string {
@@ -321,7 +425,7 @@ type DeleteSloResponse struct {
 
 func (x *DeleteSloResponse) Reset() {
 	*x = DeleteSloResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -333,7 +437,7 @@ func (x *DeleteSloResponse) String() string {
 func (*DeleteSloResponse) ProtoMessage() {}
 
 func (x *DeleteSloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -346,7 +450,7 @@ func (x *DeleteSloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteSloResponse.ProtoReflect.Descriptor instead.
 func (*DeleteSloResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteSloResponse) GetEffectedSloAlertIds() []string {
@@ -365,7 +469,7 @@ type GetSloRequest struct {
 
 func (x *GetSloRequest) Reset() {
 	*x = GetSloRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -377,7 +481,7 @@ func (x *GetSloRequest) String() string {
 func (*GetSloRequest) ProtoMessage() {}
 
 func (x *GetSloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -390,7 +494,7 @@ func (x *GetSloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSloRequest.ProtoReflect.Descriptor instead.
 func (*GetSloRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *GetSloRequest) GetId() string {
@@ -409,7 +513,7 @@ type GetSloResponse struct {
 
 func (x *GetSloResponse) Reset() {
 	*x = GetSloResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -421,7 +525,7 @@ func (x *GetSloResponse) String() string {
 func (*GetSloResponse) ProtoMessage() {}
 
 func (x *GetSloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -434,7 +538,7 @@ func (x *GetSloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetSloResponse.ProtoReflect.Descriptor instead.
 func (*GetSloResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *GetSloResponse) GetSlo() *Slo {
@@ -453,7 +557,7 @@ type ListSlosRequest struct {
 
 func (x *ListSlosRequest) Reset() {
 	*x = ListSlosRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -465,7 +569,7 @@ func (x *ListSlosRequest) String() string {
 func (*ListSlosRequest) ProtoMessage() {}
 
 func (x *ListSlosRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -478,7 +582,7 @@ func (x *ListSlosRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlosRequest.ProtoReflect.Descriptor instead.
 func (*ListSlosRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *ListSlosRequest) GetFilters() *SloFilters {
@@ -497,7 +601,7 @@ type ListSlosResponse struct {
 
 func (x *ListSlosResponse) Reset() {
 	*x = ListSlosResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -509,7 +613,7 @@ func (x *ListSlosResponse) String() string {
 func (*ListSlosResponse) ProtoMessage() {}
 
 func (x *ListSlosResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -522,7 +626,7 @@ func (x *ListSlosResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListSlosResponse.ProtoReflect.Descriptor instead.
 func (*ListSlosResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListSlosResponse) GetSlos() []*Slo {
@@ -541,7 +645,7 @@ type BatchGetSlosRequest struct {
 
 func (x *BatchGetSlosRequest) Reset() {
 	*x = BatchGetSlosRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -553,7 +657,7 @@ func (x *BatchGetSlosRequest) String() string {
 func (*BatchGetSlosRequest) ProtoMessage() {}
 
 func (x *BatchGetSlosRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -566,7 +670,7 @@ func (x *BatchGetSlosRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetSlosRequest.ProtoReflect.Descriptor instead.
 func (*BatchGetSlosRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{11}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *BatchGetSlosRequest) GetIds() []string {
@@ -586,7 +690,7 @@ type BatchGetSlosResponse struct {
 
 func (x *BatchGetSlosResponse) Reset() {
 	*x = BatchGetSlosResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -598,7 +702,7 @@ func (x *BatchGetSlosResponse) String() string {
 func (*BatchGetSlosResponse) ProtoMessage() {}
 
 func (x *BatchGetSlosResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -611,7 +715,7 @@ func (x *BatchGetSlosResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchGetSlosResponse.ProtoReflect.Descriptor instead.
 func (*BatchGetSlosResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{12}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *BatchGetSlosResponse) GetSlos() []*Slo {
@@ -642,7 +746,7 @@ type SloExecutionRequest struct {
 
 func (x *SloExecutionRequest) Reset() {
 	*x = SloExecutionRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -654,7 +758,7 @@ func (x *SloExecutionRequest) String() string {
 func (*SloExecutionRequest) ProtoMessage() {}
 
 func (x *SloExecutionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +771,7 @@ func (x *SloExecutionRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SloExecutionRequest.ProtoReflect.Descriptor instead.
 func (*SloExecutionRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{13}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *SloExecutionRequest) GetRequest() isSloExecutionRequest_Request {
@@ -740,7 +844,7 @@ type SloExecutionResponse struct {
 
 func (x *SloExecutionResponse) Reset() {
 	*x = SloExecutionResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -752,7 +856,7 @@ func (x *SloExecutionResponse) String() string {
 func (*SloExecutionResponse) ProtoMessage() {}
 
 func (x *SloExecutionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -765,7 +869,7 @@ func (x *SloExecutionResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SloExecutionResponse.ProtoReflect.Descriptor instead.
 func (*SloExecutionResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{14}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *SloExecutionResponse) GetResponse() isSloExecutionResponse_Response {
@@ -833,7 +937,7 @@ type BatchExecuteSloRequest struct {
 
 func (x *BatchExecuteSloRequest) Reset() {
 	*x = BatchExecuteSloRequest{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -845,7 +949,7 @@ func (x *BatchExecuteSloRequest) String() string {
 func (*BatchExecuteSloRequest) ProtoMessage() {}
 
 func (x *BatchExecuteSloRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -858,7 +962,7 @@ func (x *BatchExecuteSloRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchExecuteSloRequest.ProtoReflect.Descriptor instead.
 func (*BatchExecuteSloRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{15}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *BatchExecuteSloRequest) GetRequests() []*SloExecutionRequest {
@@ -878,7 +982,7 @@ type BatchExecuteSloResponse struct {
 
 func (x *BatchExecuteSloResponse) Reset() {
 	*x = BatchExecuteSloResponse{}
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -890,7 +994,7 @@ func (x *BatchExecuteSloResponse) String() string {
 func (*BatchExecuteSloResponse) ProtoMessage() {}
 
 func (x *BatchExecuteSloResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -903,7 +1007,7 @@ func (x *BatchExecuteSloResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BatchExecuteSloResponse.ProtoReflect.Descriptor instead.
 func (*BatchExecuteSloResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{16}
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *BatchExecuteSloResponse) GetMatchingResponses() []*SloExecutionResponse {
@@ -920,11 +1024,227 @@ func (x *BatchExecuteSloResponse) GetStatus() *ResponseStatus {
 	return nil
 }
 
+type GetSloUsageReportRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetSloUsageReportRequest) Reset() {
+	*x = GetSloUsageReportRequest{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSloUsageReportRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSloUsageReportRequest) ProtoMessage() {}
+
+func (x *GetSloUsageReportRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSloUsageReportRequest.ProtoReflect.Descriptor instead.
+func (*GetSloUsageReportRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{19}
+}
+
+type GetZeroStateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetZeroStateRequest) Reset() {
+	*x = GetZeroStateRequest{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[20]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetZeroStateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetZeroStateRequest) ProtoMessage() {}
+
+func (x *GetZeroStateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[20]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetZeroStateRequest.ProtoReflect.Descriptor instead.
+func (*GetZeroStateRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{20}
+}
+
+type GetSloUsageReportResponse struct {
+	state                         protoimpl.MessageState `protogen:"open.v1"`
+	CompanyId                     int32                  `protobuf:"varint,1,opt,name=company_id,json=companyId,proto3" json:"company_id,omitempty"`
+	CompanyName                   string                 `protobuf:"bytes,2,opt,name=company_name,json=companyName,proto3" json:"company_name,omitempty"`
+	CxRegion                      string                 `protobuf:"bytes,3,opt,name=cx_region,json=cxRegion,proto3" json:"cx_region,omitempty"`
+	SloCount                      int32                  `protobuf:"varint,4,opt,name=slo_count,json=sloCount,proto3" json:"slo_count,omitempty"`
+	SloAlertCount                 int32                  `protobuf:"varint,5,opt,name=slo_alert_count,json=sloAlertCount,proto3" json:"slo_alert_count,omitempty"`
+	SloWithMostPermutations       string                 `protobuf:"bytes,6,opt,name=slo_with_most_permutations,json=sloWithMostPermutations,proto3" json:"slo_with_most_permutations,omitempty"`
+	MaxPermutations               int32                  `protobuf:"varint,7,opt,name=max_permutations,json=maxPermutations,proto3" json:"max_permutations,omitempty"`
+	SloIdWithMultiplePermutations string                 `protobuf:"bytes,8,opt,name=slo_id_with_multiple_permutations,json=sloIdWithMultiplePermutations,proto3" json:"slo_id_with_multiple_permutations,omitempty"`
+	unknownFields                 protoimpl.UnknownFields
+	sizeCache                     protoimpl.SizeCache
+}
+
+func (x *GetSloUsageReportResponse) Reset() {
+	*x = GetSloUsageReportResponse{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[21]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetSloUsageReportResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetSloUsageReportResponse) ProtoMessage() {}
+
+func (x *GetSloUsageReportResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[21]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetSloUsageReportResponse.ProtoReflect.Descriptor instead.
+func (*GetSloUsageReportResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{21}
+}
+
+func (x *GetSloUsageReportResponse) GetCompanyId() int32 {
+	if x != nil {
+		return x.CompanyId
+	}
+	return 0
+}
+
+func (x *GetSloUsageReportResponse) GetCompanyName() string {
+	if x != nil {
+		return x.CompanyName
+	}
+	return ""
+}
+
+func (x *GetSloUsageReportResponse) GetCxRegion() string {
+	if x != nil {
+		return x.CxRegion
+	}
+	return ""
+}
+
+func (x *GetSloUsageReportResponse) GetSloCount() int32 {
+	if x != nil {
+		return x.SloCount
+	}
+	return 0
+}
+
+func (x *GetSloUsageReportResponse) GetSloAlertCount() int32 {
+	if x != nil {
+		return x.SloAlertCount
+	}
+	return 0
+}
+
+func (x *GetSloUsageReportResponse) GetSloWithMostPermutations() string {
+	if x != nil {
+		return x.SloWithMostPermutations
+	}
+	return ""
+}
+
+func (x *GetSloUsageReportResponse) GetMaxPermutations() int32 {
+	if x != nil {
+		return x.MaxPermutations
+	}
+	return 0
+}
+
+func (x *GetSloUsageReportResponse) GetSloIdWithMultiplePermutations() string {
+	if x != nil {
+		return x.SloIdWithMultiplePermutations
+	}
+	return ""
+}
+
+type GetZeroStateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	ZeroState     bool                   `protobuf:"varint,1,opt,name=zero_state,json=zeroState,proto3" json:"zero_state,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetZeroStateResponse) Reset() {
+	*x = GetZeroStateResponse{}
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[22]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetZeroStateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetZeroStateResponse) ProtoMessage() {}
+
+func (x *GetZeroStateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[22]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetZeroStateResponse.ProtoReflect.Descriptor instead.
+func (*GetZeroStateResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *GetZeroStateResponse) GetZeroState() bool {
+	if x != nil {
+		return x.ZeroState
+	}
+	return false
+}
+
 var File_com_coralogixapis_slo_v1_slo_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a\x15google/rpc/code.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdb\x02\n" +
+	"*com/coralogixapis/slo/v1/slo_service.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1cgoogle/api/annotations.proto\x1a\"com/coralogixapis/slo/v1/slo.proto\x1a\x15google/rpc/code.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a(com/coralogixapis/slo/v1/slo_alert.proto\"\xdb\x02\n" +
 	"\x0eResponseStatus\x121\n" +
 	"\vstatus_code\x18\x01 \x01(\x0e2\x10.google.rpc.CodeR\n" +
 	"statusCode\x12\x1d\n" +
@@ -935,16 +1255,26 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:^\x92A[\n" +
 	"Y*\x0eResponseStatus29Status of the response, including error code and message.\xd2\x01\vstatus_codeB\n" +
 	"\n" +
-	"\b_message\"\x80\x01\n" +
+	"\b_message\"\xc4\x01\n" +
+	"\"ReplaceSloAlertsValidationsRequest\x12/\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:m\x92Aj\n" +
+	"h*\"ReplaceSloAlertsValidationsRequest2<Request to validate alerts before replacing an existing SLO.\xd2\x01\x03slo\"\x9d\x02\n" +
+	"#ReplaceSloAlertsValidationsResponse\x12j\n" +
+	"\x18alerts_validation_result\x18\x01 \x03(\v20.com.coralogixapis.slo.v1.SloAlertValidityResultR\x16alertsValidationResult:\x89\x01\x92A\x85\x01\n" +
+	"\x82\x01*#ReplaceSloAlertsValidationsResponse2@Response with validated alerts before replacing an existing SLO.\xd2\x01\x18alerts_validation_result\"\xdc\x01\n" +
 	"\x10CreateSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:;\x92A8\n" +
-	"6*\x10CreateSloRequest2\x1cRequest to create a new SLO.\xd2\x01\x03slo\"\x88\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12=\n" +
+	"\x18silence_data_validations\x18\x02 \x01(\bH\x00R\x16silenceDataValidations\x88\x01\x01:;\x92A8\n" +
+	"6*\x10CreateSloRequest2\x1cRequest to create a new SLO.\xd2\x01\x03sloB\x1b\n" +
+	"\x19_silence_data_validations\"\x88\x01\n" +
 	"\x11CreateSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:B\x92A?\n" +
-	"=*\x11CreateSloResponse2\"Response after creating a new SLO.\xd2\x01\x03slo\"\x89\x01\n" +
+	"=*\x11CreateSloResponse2\"Response after creating a new SLO.\xd2\x01\x03slo\"\xe5\x01\n" +
 	"\x11ReplaceSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:C\x92A@\n" +
-	">*\x11ReplaceSloRequest2#Request to replace an existing SLO.\xd2\x01\x03slo\"\xc6\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12=\n" +
+	"\x18silence_data_validations\x18\x02 \x01(\bH\x00R\x16silenceDataValidations\x88\x01\x01:C\x92A@\n" +
+	">*\x11ReplaceSloRequest2#Request to replace an existing SLO.\xd2\x01\x03sloB\x1b\n" +
+	"\x19_silence_data_validations\"\xc6\x01\n" +
 	"\x12ReplaceSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x123\n" +
 	"\x16effected_slo_alert_ids\x18\x02 \x03(\tR\x13effectedSloAlertIds:J\x92AG\n" +
@@ -993,7 +1323,28 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x17BatchExecuteSloResponse\x12]\n" +
 	"\x12matching_responses\x18\x01 \x03(\v2..com.coralogixapis.slo.v1.SloExecutionResponseR\x11matchingResponses\x12@\n" +
 	"\x06status\x18\x02 \x01(\v2(.com.coralogixapis.slo.v1.ResponseStatusR\x06status:v\x92As\n" +
-	"q*\x17BatchExecuteSloResponse2AResponse containing the results of batch executed SLO operations.\xd2\x01\x12matching_responses2\xac\x0e\n" +
+	"q*\x17BatchExecuteSloResponse2AResponse containing the results of batch executed SLO operations.\xd2\x01\x12matching_responses\"]\n" +
+	"\x18GetSloUsageReportRequest:A\x92A>\n" +
+	"<*\x18GetSloUsageReportRequest2 Request to get SLO usage report.\"W\n" +
+	"\x13GetZeroStateRequest:@\x92A=\n" +
+	";*\x13GetZeroStateRequest2$Request to get zero state (boolean).\"\x97\x04\n" +
+	"\x19GetSloUsageReportResponse\x12\x1d\n" +
+	"\n" +
+	"company_id\x18\x01 \x01(\x05R\tcompanyId\x12!\n" +
+	"\fcompany_name\x18\x02 \x01(\tR\vcompanyName\x12\x1b\n" +
+	"\tcx_region\x18\x03 \x01(\tR\bcxRegion\x12\x1b\n" +
+	"\tslo_count\x18\x04 \x01(\x05R\bsloCount\x12&\n" +
+	"\x0fslo_alert_count\x18\x05 \x01(\x05R\rsloAlertCount\x12;\n" +
+	"\x1aslo_with_most_permutations\x18\x06 \x01(\tR\x17sloWithMostPermutations\x12)\n" +
+	"\x10max_permutations\x18\a \x01(\x05R\x0fmaxPermutations\x12H\n" +
+	"!slo_id_with_multiple_permutations\x18\b \x01(\tR\x1dsloIdWithMultiplePermutations:\xa3\x01\x92A\x9f\x01\n" +
+	"\x9c\x01*\x19GetSloUsageReportResponse29Response containing SLO usage statistics and information.\xd2\x01\n" +
+	"company_id\xd2\x01\fcompany_name\xd2\x01\tcx_region\xd2\x01\tslo_count\xd2\x01\x0fslo_alert_count\"z\n" +
+	"\x14GetZeroStateResponse\x12\x1d\n" +
+	"\n" +
+	"zero_state\x18\x01 \x01(\bR\tzeroState:C\x92A@\n" +
+	">*\x14GetZeroStateResponse2\x19Response with Zero State.\xd2\x01\n" +
+	"zero_state2\x9d\x15\n" +
 	"\vSlosService\x12\xf2\x01\n" +
 	"\tCreateSlo\x12*.com.coralogixapis.slo.v1.CreateSloRequest\x1a+.com.coralogixapis.slo.v1.CreateSloResponse\"\x8b\x01\x92Ao\n" +
 	"\fSlos Service\x12\n" +
@@ -1012,7 +1363,15 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\x1a\f/v1/slo/slos\x12\xf2\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x13:\x03slo\x1a\f/v1/slo/slos\x12\xc4\x02\n" +
+	"\x18ValidateReplaceSloAlerts\x12<.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest\x1a=.com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse\"\xaa\x01\x92A\x84\x01\n" +
+	"\fSlos Service\x12\x1fReplace Slo Pre-Validate AlertsJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c:\x03slo\"\x15/v1/slo/slos/validate\x12\xf2\x01\n" +
 	"\tDeleteSlo\x12*.com.coralogixapis.slo.v1.DeleteSloRequest\x1a+.com.coralogixapis.slo.v1.DeleteSloResponse\"\x8b\x01\x92Ao\n" +
 	"\fSlos Service\x12\n" +
 	"Delete SloJ\x14\n" +
@@ -1037,7 +1396,15 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/slo/slos\x12\x82\x02\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/slo/slos\x12\x88\x02\n" +
+	"\fGetZeroState\x12-.com.coralogixapis.slo.v1.GetZeroStateRequest\x1a..com.coralogixapis.slo.v1.GetZeroStateResponse\"\x98\x01\x92Aw\n" +
+	"\fSlos Service\x12\x12Get Slo Zero StateJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/slo/slos/zeroState\x12\x82\x02\n" +
 	"\fBatchGetSlos\x12-.com.coralogixapis.slo.v1.BatchGetSlosRequest\x1a..com.coralogixapis.slo.v1.BatchGetSlosResponse\"\x92\x01\x92Ar\n" +
 	"\fSlos Service\x12\rBatch Get SloJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -1053,7 +1420,15 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b\"\x19/v1/slo/slos:batchExecute\x1aJ\x92AG\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b\"\x19/v1/slo/slos:batchExecute\x12\x9c\x02\n" +
+	"\x11GetSloUsageReport\x122.com.coralogixapis.slo.v1.GetSloUsageReportRequest\x1a3.com.coralogixapis.slo.v1.GetSloUsageReportResponse\"\x9d\x01\x92Ay\n" +
+	"\fSlos Service\x12\x14Get SLO Usage ReportJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/slo/slos/usage-report\x1aJ\x92AG\n" +
 	"\fSlos Service\x127A service for managing Service Level Objectives (SLOs).b\x06proto3"
 
 var (
@@ -1068,69 +1443,84 @@ func file_com_coralogixapis_slo_v1_slo_service_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_slo_v1_slo_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes = make([]protoimpl.MessageInfo, 24)
 var file_com_coralogixapis_slo_v1_slo_service_proto_goTypes = []any{
-	(*ResponseStatus)(nil),          // 0: com.coralogixapis.slo.v1.ResponseStatus
-	(*CreateSloRequest)(nil),        // 1: com.coralogixapis.slo.v1.CreateSloRequest
-	(*CreateSloResponse)(nil),       // 2: com.coralogixapis.slo.v1.CreateSloResponse
-	(*ReplaceSloRequest)(nil),       // 3: com.coralogixapis.slo.v1.ReplaceSloRequest
-	(*ReplaceSloResponse)(nil),      // 4: com.coralogixapis.slo.v1.ReplaceSloResponse
-	(*DeleteSloRequest)(nil),        // 5: com.coralogixapis.slo.v1.DeleteSloRequest
-	(*DeleteSloResponse)(nil),       // 6: com.coralogixapis.slo.v1.DeleteSloResponse
-	(*GetSloRequest)(nil),           // 7: com.coralogixapis.slo.v1.GetSloRequest
-	(*GetSloResponse)(nil),          // 8: com.coralogixapis.slo.v1.GetSloResponse
-	(*ListSlosRequest)(nil),         // 9: com.coralogixapis.slo.v1.ListSlosRequest
-	(*ListSlosResponse)(nil),        // 10: com.coralogixapis.slo.v1.ListSlosResponse
-	(*BatchGetSlosRequest)(nil),     // 11: com.coralogixapis.slo.v1.BatchGetSlosRequest
-	(*BatchGetSlosResponse)(nil),    // 12: com.coralogixapis.slo.v1.BatchGetSlosResponse
-	(*SloExecutionRequest)(nil),     // 13: com.coralogixapis.slo.v1.SloExecutionRequest
-	(*SloExecutionResponse)(nil),    // 14: com.coralogixapis.slo.v1.SloExecutionResponse
-	(*BatchExecuteSloRequest)(nil),  // 15: com.coralogixapis.slo.v1.BatchExecuteSloRequest
-	(*BatchExecuteSloResponse)(nil), // 16: com.coralogixapis.slo.v1.BatchExecuteSloResponse
-	nil,                             // 17: com.coralogixapis.slo.v1.ResponseStatus.DetailsEntry
-	(code.Code)(0),                  // 18: google.rpc.Code
-	(*Slo)(nil),                     // 19: com.coralogixapis.slo.v1.Slo
-	(*SloFilters)(nil),              // 20: com.coralogixapis.slo.v1.SloFilters
+	(*ResponseStatus)(nil),                      // 0: com.coralogixapis.slo.v1.ResponseStatus
+	(*ReplaceSloAlertsValidationsRequest)(nil),  // 1: com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest
+	(*ReplaceSloAlertsValidationsResponse)(nil), // 2: com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse
+	(*CreateSloRequest)(nil),                    // 3: com.coralogixapis.slo.v1.CreateSloRequest
+	(*CreateSloResponse)(nil),                   // 4: com.coralogixapis.slo.v1.CreateSloResponse
+	(*ReplaceSloRequest)(nil),                   // 5: com.coralogixapis.slo.v1.ReplaceSloRequest
+	(*ReplaceSloResponse)(nil),                  // 6: com.coralogixapis.slo.v1.ReplaceSloResponse
+	(*DeleteSloRequest)(nil),                    // 7: com.coralogixapis.slo.v1.DeleteSloRequest
+	(*DeleteSloResponse)(nil),                   // 8: com.coralogixapis.slo.v1.DeleteSloResponse
+	(*GetSloRequest)(nil),                       // 9: com.coralogixapis.slo.v1.GetSloRequest
+	(*GetSloResponse)(nil),                      // 10: com.coralogixapis.slo.v1.GetSloResponse
+	(*ListSlosRequest)(nil),                     // 11: com.coralogixapis.slo.v1.ListSlosRequest
+	(*ListSlosResponse)(nil),                    // 12: com.coralogixapis.slo.v1.ListSlosResponse
+	(*BatchGetSlosRequest)(nil),                 // 13: com.coralogixapis.slo.v1.BatchGetSlosRequest
+	(*BatchGetSlosResponse)(nil),                // 14: com.coralogixapis.slo.v1.BatchGetSlosResponse
+	(*SloExecutionRequest)(nil),                 // 15: com.coralogixapis.slo.v1.SloExecutionRequest
+	(*SloExecutionResponse)(nil),                // 16: com.coralogixapis.slo.v1.SloExecutionResponse
+	(*BatchExecuteSloRequest)(nil),              // 17: com.coralogixapis.slo.v1.BatchExecuteSloRequest
+	(*BatchExecuteSloResponse)(nil),             // 18: com.coralogixapis.slo.v1.BatchExecuteSloResponse
+	(*GetSloUsageReportRequest)(nil),            // 19: com.coralogixapis.slo.v1.GetSloUsageReportRequest
+	(*GetZeroStateRequest)(nil),                 // 20: com.coralogixapis.slo.v1.GetZeroStateRequest
+	(*GetSloUsageReportResponse)(nil),           // 21: com.coralogixapis.slo.v1.GetSloUsageReportResponse
+	(*GetZeroStateResponse)(nil),                // 22: com.coralogixapis.slo.v1.GetZeroStateResponse
+	nil,                                         // 23: com.coralogixapis.slo.v1.ResponseStatus.DetailsEntry
+	(code.Code)(0),                              // 24: google.rpc.Code
+	(*Slo)(nil),                                 // 25: com.coralogixapis.slo.v1.Slo
+	(*SloAlertValidityResult)(nil),              // 26: com.coralogixapis.slo.v1.SloAlertValidityResult
+	(*SloFilters)(nil),                          // 27: com.coralogixapis.slo.v1.SloFilters
 }
 var file_com_coralogixapis_slo_v1_slo_service_proto_depIdxs = []int32{
-	18, // 0: com.coralogixapis.slo.v1.ResponseStatus.status_code:type_name -> google.rpc.Code
-	17, // 1: com.coralogixapis.slo.v1.ResponseStatus.details:type_name -> com.coralogixapis.slo.v1.ResponseStatus.DetailsEntry
-	19, // 2: com.coralogixapis.slo.v1.CreateSloRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	19, // 3: com.coralogixapis.slo.v1.CreateSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	19, // 4: com.coralogixapis.slo.v1.ReplaceSloRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	19, // 5: com.coralogixapis.slo.v1.ReplaceSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	19, // 6: com.coralogixapis.slo.v1.GetSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
-	20, // 7: com.coralogixapis.slo.v1.ListSlosRequest.filters:type_name -> com.coralogixapis.slo.v1.SloFilters
-	19, // 8: com.coralogixapis.slo.v1.ListSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
-	19, // 9: com.coralogixapis.slo.v1.BatchGetSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
-	1,  // 10: com.coralogixapis.slo.v1.SloExecutionRequest.create_slo_request:type_name -> com.coralogixapis.slo.v1.CreateSloRequest
-	3,  // 11: com.coralogixapis.slo.v1.SloExecutionRequest.replace_slo_request:type_name -> com.coralogixapis.slo.v1.ReplaceSloRequest
-	5,  // 12: com.coralogixapis.slo.v1.SloExecutionRequest.delete_slo_request:type_name -> com.coralogixapis.slo.v1.DeleteSloRequest
-	2,  // 13: com.coralogixapis.slo.v1.SloExecutionResponse.create_slo_response:type_name -> com.coralogixapis.slo.v1.CreateSloResponse
-	4,  // 14: com.coralogixapis.slo.v1.SloExecutionResponse.replace_slo_response:type_name -> com.coralogixapis.slo.v1.ReplaceSloResponse
-	6,  // 15: com.coralogixapis.slo.v1.SloExecutionResponse.delete_slo_response:type_name -> com.coralogixapis.slo.v1.DeleteSloResponse
-	13, // 16: com.coralogixapis.slo.v1.BatchExecuteSloRequest.requests:type_name -> com.coralogixapis.slo.v1.SloExecutionRequest
-	14, // 17: com.coralogixapis.slo.v1.BatchExecuteSloResponse.matching_responses:type_name -> com.coralogixapis.slo.v1.SloExecutionResponse
-	0,  // 18: com.coralogixapis.slo.v1.BatchExecuteSloResponse.status:type_name -> com.coralogixapis.slo.v1.ResponseStatus
-	1,  // 19: com.coralogixapis.slo.v1.SlosService.CreateSlo:input_type -> com.coralogixapis.slo.v1.CreateSloRequest
-	3,  // 20: com.coralogixapis.slo.v1.SlosService.ReplaceSlo:input_type -> com.coralogixapis.slo.v1.ReplaceSloRequest
-	5,  // 21: com.coralogixapis.slo.v1.SlosService.DeleteSlo:input_type -> com.coralogixapis.slo.v1.DeleteSloRequest
-	7,  // 22: com.coralogixapis.slo.v1.SlosService.GetSlo:input_type -> com.coralogixapis.slo.v1.GetSloRequest
-	9,  // 23: com.coralogixapis.slo.v1.SlosService.ListSlos:input_type -> com.coralogixapis.slo.v1.ListSlosRequest
-	11, // 24: com.coralogixapis.slo.v1.SlosService.BatchGetSlos:input_type -> com.coralogixapis.slo.v1.BatchGetSlosRequest
-	15, // 25: com.coralogixapis.slo.v1.SlosService.BatchExecuteSlo:input_type -> com.coralogixapis.slo.v1.BatchExecuteSloRequest
-	2,  // 26: com.coralogixapis.slo.v1.SlosService.CreateSlo:output_type -> com.coralogixapis.slo.v1.CreateSloResponse
-	4,  // 27: com.coralogixapis.slo.v1.SlosService.ReplaceSlo:output_type -> com.coralogixapis.slo.v1.ReplaceSloResponse
-	6,  // 28: com.coralogixapis.slo.v1.SlosService.DeleteSlo:output_type -> com.coralogixapis.slo.v1.DeleteSloResponse
-	8,  // 29: com.coralogixapis.slo.v1.SlosService.GetSlo:output_type -> com.coralogixapis.slo.v1.GetSloResponse
-	10, // 30: com.coralogixapis.slo.v1.SlosService.ListSlos:output_type -> com.coralogixapis.slo.v1.ListSlosResponse
-	12, // 31: com.coralogixapis.slo.v1.SlosService.BatchGetSlos:output_type -> com.coralogixapis.slo.v1.BatchGetSlosResponse
-	16, // 32: com.coralogixapis.slo.v1.SlosService.BatchExecuteSlo:output_type -> com.coralogixapis.slo.v1.BatchExecuteSloResponse
-	26, // [26:33] is the sub-list for method output_type
-	19, // [19:26] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	24, // 0: com.coralogixapis.slo.v1.ResponseStatus.status_code:type_name -> google.rpc.Code
+	23, // 1: com.coralogixapis.slo.v1.ResponseStatus.details:type_name -> com.coralogixapis.slo.v1.ResponseStatus.DetailsEntry
+	25, // 2: com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	26, // 3: com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse.alerts_validation_result:type_name -> com.coralogixapis.slo.v1.SloAlertValidityResult
+	25, // 4: com.coralogixapis.slo.v1.CreateSloRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	25, // 5: com.coralogixapis.slo.v1.CreateSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	25, // 6: com.coralogixapis.slo.v1.ReplaceSloRequest.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	25, // 7: com.coralogixapis.slo.v1.ReplaceSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	25, // 8: com.coralogixapis.slo.v1.GetSloResponse.slo:type_name -> com.coralogixapis.slo.v1.Slo
+	27, // 9: com.coralogixapis.slo.v1.ListSlosRequest.filters:type_name -> com.coralogixapis.slo.v1.SloFilters
+	25, // 10: com.coralogixapis.slo.v1.ListSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
+	25, // 11: com.coralogixapis.slo.v1.BatchGetSlosResponse.slos:type_name -> com.coralogixapis.slo.v1.Slo
+	3,  // 12: com.coralogixapis.slo.v1.SloExecutionRequest.create_slo_request:type_name -> com.coralogixapis.slo.v1.CreateSloRequest
+	5,  // 13: com.coralogixapis.slo.v1.SloExecutionRequest.replace_slo_request:type_name -> com.coralogixapis.slo.v1.ReplaceSloRequest
+	7,  // 14: com.coralogixapis.slo.v1.SloExecutionRequest.delete_slo_request:type_name -> com.coralogixapis.slo.v1.DeleteSloRequest
+	4,  // 15: com.coralogixapis.slo.v1.SloExecutionResponse.create_slo_response:type_name -> com.coralogixapis.slo.v1.CreateSloResponse
+	6,  // 16: com.coralogixapis.slo.v1.SloExecutionResponse.replace_slo_response:type_name -> com.coralogixapis.slo.v1.ReplaceSloResponse
+	8,  // 17: com.coralogixapis.slo.v1.SloExecutionResponse.delete_slo_response:type_name -> com.coralogixapis.slo.v1.DeleteSloResponse
+	15, // 18: com.coralogixapis.slo.v1.BatchExecuteSloRequest.requests:type_name -> com.coralogixapis.slo.v1.SloExecutionRequest
+	16, // 19: com.coralogixapis.slo.v1.BatchExecuteSloResponse.matching_responses:type_name -> com.coralogixapis.slo.v1.SloExecutionResponse
+	0,  // 20: com.coralogixapis.slo.v1.BatchExecuteSloResponse.status:type_name -> com.coralogixapis.slo.v1.ResponseStatus
+	3,  // 21: com.coralogixapis.slo.v1.SlosService.CreateSlo:input_type -> com.coralogixapis.slo.v1.CreateSloRequest
+	5,  // 22: com.coralogixapis.slo.v1.SlosService.ReplaceSlo:input_type -> com.coralogixapis.slo.v1.ReplaceSloRequest
+	1,  // 23: com.coralogixapis.slo.v1.SlosService.ValidateReplaceSloAlerts:input_type -> com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsRequest
+	7,  // 24: com.coralogixapis.slo.v1.SlosService.DeleteSlo:input_type -> com.coralogixapis.slo.v1.DeleteSloRequest
+	9,  // 25: com.coralogixapis.slo.v1.SlosService.GetSlo:input_type -> com.coralogixapis.slo.v1.GetSloRequest
+	11, // 26: com.coralogixapis.slo.v1.SlosService.ListSlos:input_type -> com.coralogixapis.slo.v1.ListSlosRequest
+	20, // 27: com.coralogixapis.slo.v1.SlosService.GetZeroState:input_type -> com.coralogixapis.slo.v1.GetZeroStateRequest
+	13, // 28: com.coralogixapis.slo.v1.SlosService.BatchGetSlos:input_type -> com.coralogixapis.slo.v1.BatchGetSlosRequest
+	17, // 29: com.coralogixapis.slo.v1.SlosService.BatchExecuteSlo:input_type -> com.coralogixapis.slo.v1.BatchExecuteSloRequest
+	19, // 30: com.coralogixapis.slo.v1.SlosService.GetSloUsageReport:input_type -> com.coralogixapis.slo.v1.GetSloUsageReportRequest
+	4,  // 31: com.coralogixapis.slo.v1.SlosService.CreateSlo:output_type -> com.coralogixapis.slo.v1.CreateSloResponse
+	6,  // 32: com.coralogixapis.slo.v1.SlosService.ReplaceSlo:output_type -> com.coralogixapis.slo.v1.ReplaceSloResponse
+	2,  // 33: com.coralogixapis.slo.v1.SlosService.ValidateReplaceSloAlerts:output_type -> com.coralogixapis.slo.v1.ReplaceSloAlertsValidationsResponse
+	8,  // 34: com.coralogixapis.slo.v1.SlosService.DeleteSlo:output_type -> com.coralogixapis.slo.v1.DeleteSloResponse
+	10, // 35: com.coralogixapis.slo.v1.SlosService.GetSlo:output_type -> com.coralogixapis.slo.v1.GetSloResponse
+	12, // 36: com.coralogixapis.slo.v1.SlosService.ListSlos:output_type -> com.coralogixapis.slo.v1.ListSlosResponse
+	22, // 37: com.coralogixapis.slo.v1.SlosService.GetZeroState:output_type -> com.coralogixapis.slo.v1.GetZeroStateResponse
+	14, // 38: com.coralogixapis.slo.v1.SlosService.BatchGetSlos:output_type -> com.coralogixapis.slo.v1.BatchGetSlosResponse
+	18, // 39: com.coralogixapis.slo.v1.SlosService.BatchExecuteSlo:output_type -> com.coralogixapis.slo.v1.BatchExecuteSloResponse
+	21, // 40: com.coralogixapis.slo.v1.SlosService.GetSloUsageReport:output_type -> com.coralogixapis.slo.v1.GetSloUsageReportResponse
+	31, // [31:41] is the sub-list for method output_type
+	21, // [21:31] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_slo_v1_slo_service_proto_init() }
@@ -1139,13 +1529,16 @@ func file_com_coralogixapis_slo_v1_slo_service_proto_init() {
 		return
 	}
 	file_com_coralogixapis_slo_v1_slo_proto_init()
+	file_com_coralogixapis_slo_v1_slo_alert_proto_init()
 	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[0].OneofWrappers = []any{}
-	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[13].OneofWrappers = []any{
+	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[3].OneofWrappers = []any{}
+	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[5].OneofWrappers = []any{}
+	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[15].OneofWrappers = []any{
 		(*SloExecutionRequest_CreateSloRequest)(nil),
 		(*SloExecutionRequest_ReplaceSloRequest)(nil),
 		(*SloExecutionRequest_DeleteSloRequest)(nil),
 	}
-	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[14].OneofWrappers = []any{
+	file_com_coralogixapis_slo_v1_slo_service_proto_msgTypes[16].OneofWrappers = []any{
 		(*SloExecutionResponse_CreateSloResponse)(nil),
 		(*SloExecutionResponse_ReplaceSloResponse)(nil),
 		(*SloExecutionResponse_DeleteSloResponse)(nil),
@@ -1156,7 +1549,7 @@ func file_com_coralogixapis_slo_v1_slo_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc), len(file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   24,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

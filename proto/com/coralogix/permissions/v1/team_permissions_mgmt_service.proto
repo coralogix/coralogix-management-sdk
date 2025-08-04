@@ -437,6 +437,8 @@ message CreateTeamGroupRequest  {
   /// Optionally set team group scope filters
   optional ScopeFilters scope_filters = 7;
   optional string next_gen_scope_id = 8;
+  /// Group Type, defines the access to the group itself, should default to OPEN
+  GroupType group_type = 9;
 }
 
 /// Create team group response
@@ -519,6 +521,8 @@ message UserUpdates  {
   optional ScopeFilters scope_filters = 7;
   /// If set, updates new team group next gen scope
   optional string next_gen_scope_id = 8;
+  /// If set, updates team group type
+  optional GroupType group_type = 9;
 }
 
 /// Update team group response

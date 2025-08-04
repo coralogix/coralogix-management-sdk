@@ -186,6 +186,62 @@ func (GroupOrigin) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDescGZIP(), []int{2}
 }
 
+// / Group type defines the level of access to the group itself
+type GroupType int32
+
+const (
+	GroupType_GROUP_TYPE_UNSPECIFIED GroupType = 0
+	// / Discoverable and joinable by any authorized user. Ideal for open collaboration (e.g., general teams).
+	GroupType_GROUP_TYPE_OPEN GroupType = 1
+	// / Not discoverable. Membership is by invitation or manual assignment only. Suitable for controlled collaboration (e.g., project teams).
+	GroupType_GROUP_TYPE_CLOSED GroupType = 2
+	// / A closed group applied to highly sensitive content.
+	GroupType_GROUP_TYPE_RESTRICTED GroupType = 3
+)
+
+// Enum value maps for GroupType.
+var (
+	GroupType_name = map[int32]string{
+		0: "GROUP_TYPE_UNSPECIFIED",
+		1: "GROUP_TYPE_OPEN",
+		2: "GROUP_TYPE_CLOSED",
+		3: "GROUP_TYPE_RESTRICTED",
+	}
+	GroupType_value = map[string]int32{
+		"GROUP_TYPE_UNSPECIFIED": 0,
+		"GROUP_TYPE_OPEN":        1,
+		"GROUP_TYPE_CLOSED":      2,
+		"GROUP_TYPE_RESTRICTED":  3,
+	}
+)
+
+func (x GroupType) Enum() *GroupType {
+	p := new(GroupType)
+	*p = x
+	return p
+}
+
+func (x GroupType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (GroupType) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogix_permissions_v1_permissions_mgmt_proto_enumTypes[3].Descriptor()
+}
+
+func (GroupType) Type() protoreflect.EnumType {
+	return &file_com_coralogix_permissions_v1_permissions_mgmt_proto_enumTypes[3]
+}
+
+func (x GroupType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use GroupType.Descriptor instead.
+func (GroupType) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDescGZIP(), []int{3}
+}
+
 // / A scope filter, given a filter term and a filter type is used to configure filter capabilities
 type ScopeFilter struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -893,8 +949,10 @@ type TeamGroup struct {
 	CreatedAt      *timestamppb.Timestamp `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt      *timestamppb.Timestamp `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	NextGenScopeId *string                `protobuf:"bytes,11,opt,name=next_gen_scope_id,json=nextGenScopeId,proto3,oneof" json:"next_gen_scope_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// / Group type defines the level of access to the group itself
+	GroupType     GroupType `protobuf:"varint,12,opt,name=group_type,json=groupType,proto3,enum=com.coralogix.permissions.v1.GroupType" json:"group_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *TeamGroup) Reset() {
@@ -1002,6 +1060,13 @@ func (x *TeamGroup) GetNextGenScopeId() string {
 		return *x.NextGenScopeId
 	}
 	return ""
+}
+
+func (x *TeamGroup) GetGroupType() GroupType {
+	if x != nil {
+		return x.GroupType
+	}
+	return GroupType_GROUP_TYPE_UNSPECIFIED
 }
 
 type PermissionGroupMetadata struct {
@@ -1240,7 +1305,7 @@ const file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc = "" +
 	"orgGroupId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12C\n" +
 	"\x06org_id\x18\x03 \x01(\v2,.com.coralogix.permissions.v1.OrganizationIdR\x05orgId\x128\n" +
-	"\x05roles\x18\x04 \x03(\v2\".com.coralogix.permissions.v1.RoleR\x05roles\"\x9f\x05\n" +
+	"\x05roles\x18\x04 \x03(\v2\".com.coralogix.permissions.v1.RoleR\x05roles\"\xe7\x05\n" +
 	"\tTeamGroup\x12D\n" +
 	"\bgroup_id\x18\x01 \x01(\v2).com.coralogix.permissions.v1.TeamGroupIdR\agroupId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12%\n" +
@@ -1256,7 +1321,9 @@ const file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc = "" +
 	"\n" +
 	"updated_at\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12.\n" +
-	"\x11next_gen_scope_id\x18\v \x01(\tH\x03R\x0enextGenScopeId\x88\x01\x01B\x0e\n" +
+	"\x11next_gen_scope_id\x18\v \x01(\tH\x03R\x0enextGenScopeId\x88\x01\x01\x12F\n" +
+	"\n" +
+	"group_type\x18\f \x01(\x0e2'.com.coralogix.permissions.v1.GroupTypeR\tgroupTypeB\x0e\n" +
 	"\f_descriptionB\x0e\n" +
 	"\f_external_idB\b\n" +
 	"\x06_scopeB\x14\n" +
@@ -1296,7 +1363,12 @@ const file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc = "" +
 	"\vGroupOrigin\x12\x1c\n" +
 	"\x18GROUP_ORIGIN_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15GROUP_ORIGIN_BUILT_IN\x10\x01\x12\x1d\n" +
-	"\x19GROUP_ORIGIN_USER_DEFINED\x10\x02b\x06proto3"
+	"\x19GROUP_ORIGIN_USER_DEFINED\x10\x02*n\n" +
+	"\tGroupType\x12\x1a\n" +
+	"\x16GROUP_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
+	"\x0fGROUP_TYPE_OPEN\x10\x01\x12\x15\n" +
+	"\x11GROUP_TYPE_CLOSED\x10\x02\x12\x19\n" +
+	"\x15GROUP_TYPE_RESTRICTED\x10\x03b\x06proto3"
 
 var (
 	file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDescOnce sync.Once
@@ -1310,77 +1382,79 @@ func file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDescGZIP() []by
 	return file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDescData
 }
 
-var file_com_coralogix_permissions_v1_permissions_mgmt_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
+var file_com_coralogix_permissions_v1_permissions_mgmt_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_com_coralogix_permissions_v1_permissions_mgmt_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_com_coralogix_permissions_v1_permissions_mgmt_proto_goTypes = []any{
 	(FilterType)(0),                 // 0: com.coralogix.permissions.v1.FilterType
 	(UserStatus)(0),                 // 1: com.coralogix.permissions.v1.UserStatus
 	(GroupOrigin)(0),                // 2: com.coralogix.permissions.v1.GroupOrigin
-	(*ScopeFilter)(nil),             // 3: com.coralogix.permissions.v1.ScopeFilter
-	(*ScopeFilters)(nil),            // 4: com.coralogix.permissions.v1.ScopeFilters
-	(*Scope)(nil),                   // 5: com.coralogix.permissions.v1.Scope
-	(*User)(nil),                    // 6: com.coralogix.permissions.v1.User
-	(*Role)(nil),                    // 7: com.coralogix.permissions.v1.Role
-	(*TeamGroupSummary)(nil),        // 8: com.coralogix.permissions.v1.TeamGroupSummary
-	(*SystemRole)(nil),              // 9: com.coralogix.permissions.v1.SystemRole
-	(*CustomRole)(nil),              // 10: com.coralogix.permissions.v1.CustomRole
-	(*RoleSummary)(nil),             // 11: com.coralogix.permissions.v1.RoleSummary
-	(*OrgGroup)(nil),                // 12: com.coralogix.permissions.v1.OrgGroup
-	(*TeamGroup)(nil),               // 13: com.coralogix.permissions.v1.TeamGroup
-	(*PermissionGroupMetadata)(nil), // 14: com.coralogix.permissions.v1.PermissionGroupMetadata
-	(*PermissionMetadata)(nil),      // 15: com.coralogix.permissions.v1.PermissionMetadata
-	(*ScopeId)(nil),                 // 16: com.coralogix.permissions.v1.ScopeId
-	(*UserId)(nil),                  // 17: com.coralogix.permissions.v1.UserId
-	(*UserAccountId)(nil),           // 18: com.coralogix.permissions.v1.UserAccountId
-	(*RoleId)(nil),                  // 19: com.coralogix.permissions.v1.RoleId
-	(*TeamGroupId)(nil),             // 20: com.coralogix.permissions.v1.TeamGroupId
-	(*OrgGroupId)(nil),              // 21: com.coralogix.permissions.v1.OrgGroupId
-	(*OrganizationId)(nil),          // 22: com.coralogix.permissions.v1.OrganizationId
-	(*TeamId)(nil),                  // 23: com.coralogix.permissions.v1.TeamId
-	(*timestamppb.Timestamp)(nil),   // 24: google.protobuf.Timestamp
-	(PermissionGroup)(0),            // 25: com.coralogix.permissions.models.v1.PermissionGroup
-	(Permission)(0),                 // 26: com.coralogix.permissions.models.v1.Permission
-	(Action)(0),                     // 27: com.coralogix.permissions.v1.Action
-	(Resource)(0),                   // 28: com.coralogix.permissions.v1.Resource
+	(GroupType)(0),                  // 3: com.coralogix.permissions.v1.GroupType
+	(*ScopeFilter)(nil),             // 4: com.coralogix.permissions.v1.ScopeFilter
+	(*ScopeFilters)(nil),            // 5: com.coralogix.permissions.v1.ScopeFilters
+	(*Scope)(nil),                   // 6: com.coralogix.permissions.v1.Scope
+	(*User)(nil),                    // 7: com.coralogix.permissions.v1.User
+	(*Role)(nil),                    // 8: com.coralogix.permissions.v1.Role
+	(*TeamGroupSummary)(nil),        // 9: com.coralogix.permissions.v1.TeamGroupSummary
+	(*SystemRole)(nil),              // 10: com.coralogix.permissions.v1.SystemRole
+	(*CustomRole)(nil),              // 11: com.coralogix.permissions.v1.CustomRole
+	(*RoleSummary)(nil),             // 12: com.coralogix.permissions.v1.RoleSummary
+	(*OrgGroup)(nil),                // 13: com.coralogix.permissions.v1.OrgGroup
+	(*TeamGroup)(nil),               // 14: com.coralogix.permissions.v1.TeamGroup
+	(*PermissionGroupMetadata)(nil), // 15: com.coralogix.permissions.v1.PermissionGroupMetadata
+	(*PermissionMetadata)(nil),      // 16: com.coralogix.permissions.v1.PermissionMetadata
+	(*ScopeId)(nil),                 // 17: com.coralogix.permissions.v1.ScopeId
+	(*UserId)(nil),                  // 18: com.coralogix.permissions.v1.UserId
+	(*UserAccountId)(nil),           // 19: com.coralogix.permissions.v1.UserAccountId
+	(*RoleId)(nil),                  // 20: com.coralogix.permissions.v1.RoleId
+	(*TeamGroupId)(nil),             // 21: com.coralogix.permissions.v1.TeamGroupId
+	(*OrgGroupId)(nil),              // 22: com.coralogix.permissions.v1.OrgGroupId
+	(*OrganizationId)(nil),          // 23: com.coralogix.permissions.v1.OrganizationId
+	(*TeamId)(nil),                  // 24: com.coralogix.permissions.v1.TeamId
+	(*timestamppb.Timestamp)(nil),   // 25: google.protobuf.Timestamp
+	(PermissionGroup)(0),            // 26: com.coralogix.permissions.models.v1.PermissionGroup
+	(Permission)(0),                 // 27: com.coralogix.permissions.models.v1.Permission
+	(Action)(0),                     // 28: com.coralogix.permissions.v1.Action
+	(Resource)(0),                   // 29: com.coralogix.permissions.v1.Resource
 }
 var file_com_coralogix_permissions_v1_permissions_mgmt_proto_depIdxs = []int32{
 	0,  // 0: com.coralogix.permissions.v1.ScopeFilter.filter_type:type_name -> com.coralogix.permissions.v1.FilterType
-	3,  // 1: com.coralogix.permissions.v1.ScopeFilters.subsystems:type_name -> com.coralogix.permissions.v1.ScopeFilter
-	3,  // 2: com.coralogix.permissions.v1.ScopeFilters.applications:type_name -> com.coralogix.permissions.v1.ScopeFilter
-	16, // 3: com.coralogix.permissions.v1.Scope.id:type_name -> com.coralogix.permissions.v1.ScopeId
-	4,  // 4: com.coralogix.permissions.v1.Scope.filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
-	17, // 5: com.coralogix.permissions.v1.User.user_id:type_name -> com.coralogix.permissions.v1.UserId
-	18, // 6: com.coralogix.permissions.v1.User.user_account_id:type_name -> com.coralogix.permissions.v1.UserAccountId
+	4,  // 1: com.coralogix.permissions.v1.ScopeFilters.subsystems:type_name -> com.coralogix.permissions.v1.ScopeFilter
+	4,  // 2: com.coralogix.permissions.v1.ScopeFilters.applications:type_name -> com.coralogix.permissions.v1.ScopeFilter
+	17, // 3: com.coralogix.permissions.v1.Scope.id:type_name -> com.coralogix.permissions.v1.ScopeId
+	5,  // 4: com.coralogix.permissions.v1.Scope.filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
+	18, // 5: com.coralogix.permissions.v1.User.user_id:type_name -> com.coralogix.permissions.v1.UserId
+	19, // 6: com.coralogix.permissions.v1.User.user_account_id:type_name -> com.coralogix.permissions.v1.UserAccountId
 	1,  // 7: com.coralogix.permissions.v1.User.status:type_name -> com.coralogix.permissions.v1.UserStatus
-	19, // 8: com.coralogix.permissions.v1.Role.role_id:type_name -> com.coralogix.permissions.v1.RoleId
-	20, // 9: com.coralogix.permissions.v1.TeamGroupSummary.id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	19, // 10: com.coralogix.permissions.v1.SystemRole.role_id:type_name -> com.coralogix.permissions.v1.RoleId
-	19, // 11: com.coralogix.permissions.v1.CustomRole.role_id:type_name -> com.coralogix.permissions.v1.RoleId
-	19, // 12: com.coralogix.permissions.v1.CustomRole.parent_role_id:type_name -> com.coralogix.permissions.v1.RoleId
-	9,  // 13: com.coralogix.permissions.v1.RoleSummary.system_role:type_name -> com.coralogix.permissions.v1.SystemRole
-	10, // 14: com.coralogix.permissions.v1.RoleSummary.custom_role:type_name -> com.coralogix.permissions.v1.CustomRole
-	8,  // 15: com.coralogix.permissions.v1.RoleSummary.groups:type_name -> com.coralogix.permissions.v1.TeamGroupSummary
-	15, // 16: com.coralogix.permissions.v1.RoleSummary.permissions:type_name -> com.coralogix.permissions.v1.PermissionMetadata
-	21, // 17: com.coralogix.permissions.v1.OrgGroup.org_group_id:type_name -> com.coralogix.permissions.v1.OrgGroupId
-	22, // 18: com.coralogix.permissions.v1.OrgGroup.org_id:type_name -> com.coralogix.permissions.v1.OrganizationId
-	7,  // 19: com.coralogix.permissions.v1.OrgGroup.roles:type_name -> com.coralogix.permissions.v1.Role
-	20, // 20: com.coralogix.permissions.v1.TeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	20, // 8: com.coralogix.permissions.v1.Role.role_id:type_name -> com.coralogix.permissions.v1.RoleId
+	21, // 9: com.coralogix.permissions.v1.TeamGroupSummary.id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	20, // 10: com.coralogix.permissions.v1.SystemRole.role_id:type_name -> com.coralogix.permissions.v1.RoleId
+	20, // 11: com.coralogix.permissions.v1.CustomRole.role_id:type_name -> com.coralogix.permissions.v1.RoleId
+	20, // 12: com.coralogix.permissions.v1.CustomRole.parent_role_id:type_name -> com.coralogix.permissions.v1.RoleId
+	10, // 13: com.coralogix.permissions.v1.RoleSummary.system_role:type_name -> com.coralogix.permissions.v1.SystemRole
+	11, // 14: com.coralogix.permissions.v1.RoleSummary.custom_role:type_name -> com.coralogix.permissions.v1.CustomRole
+	9,  // 15: com.coralogix.permissions.v1.RoleSummary.groups:type_name -> com.coralogix.permissions.v1.TeamGroupSummary
+	16, // 16: com.coralogix.permissions.v1.RoleSummary.permissions:type_name -> com.coralogix.permissions.v1.PermissionMetadata
+	22, // 17: com.coralogix.permissions.v1.OrgGroup.org_group_id:type_name -> com.coralogix.permissions.v1.OrgGroupId
+	23, // 18: com.coralogix.permissions.v1.OrgGroup.org_id:type_name -> com.coralogix.permissions.v1.OrganizationId
+	8,  // 19: com.coralogix.permissions.v1.OrgGroup.roles:type_name -> com.coralogix.permissions.v1.Role
+	21, // 20: com.coralogix.permissions.v1.TeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
 	2,  // 21: com.coralogix.permissions.v1.TeamGroup.group_origin:type_name -> com.coralogix.permissions.v1.GroupOrigin
-	23, // 22: com.coralogix.permissions.v1.TeamGroup.team_id:type_name -> com.coralogix.permissions.v1.TeamId
-	7,  // 23: com.coralogix.permissions.v1.TeamGroup.roles:type_name -> com.coralogix.permissions.v1.Role
-	5,  // 24: com.coralogix.permissions.v1.TeamGroup.scope:type_name -> com.coralogix.permissions.v1.Scope
-	24, // 25: com.coralogix.permissions.v1.TeamGroup.created_at:type_name -> google.protobuf.Timestamp
-	24, // 26: com.coralogix.permissions.v1.TeamGroup.updated_at:type_name -> google.protobuf.Timestamp
-	25, // 27: com.coralogix.permissions.v1.PermissionGroupMetadata.permission_group:type_name -> com.coralogix.permissions.models.v1.PermissionGroup
-	26, // 28: com.coralogix.permissions.v1.PermissionMetadata.permission:type_name -> com.coralogix.permissions.models.v1.Permission
-	14, // 29: com.coralogix.permissions.v1.PermissionMetadata.permission_group:type_name -> com.coralogix.permissions.v1.PermissionGroupMetadata
-	27, // 30: com.coralogix.permissions.v1.PermissionMetadata.action:type_name -> com.coralogix.permissions.v1.Action
-	28, // 31: com.coralogix.permissions.v1.PermissionMetadata.resource:type_name -> com.coralogix.permissions.v1.Resource
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	24, // 22: com.coralogix.permissions.v1.TeamGroup.team_id:type_name -> com.coralogix.permissions.v1.TeamId
+	8,  // 23: com.coralogix.permissions.v1.TeamGroup.roles:type_name -> com.coralogix.permissions.v1.Role
+	6,  // 24: com.coralogix.permissions.v1.TeamGroup.scope:type_name -> com.coralogix.permissions.v1.Scope
+	25, // 25: com.coralogix.permissions.v1.TeamGroup.created_at:type_name -> google.protobuf.Timestamp
+	25, // 26: com.coralogix.permissions.v1.TeamGroup.updated_at:type_name -> google.protobuf.Timestamp
+	3,  // 27: com.coralogix.permissions.v1.TeamGroup.group_type:type_name -> com.coralogix.permissions.v1.GroupType
+	26, // 28: com.coralogix.permissions.v1.PermissionGroupMetadata.permission_group:type_name -> com.coralogix.permissions.models.v1.PermissionGroup
+	27, // 29: com.coralogix.permissions.v1.PermissionMetadata.permission:type_name -> com.coralogix.permissions.models.v1.Permission
+	15, // 30: com.coralogix.permissions.v1.PermissionMetadata.permission_group:type_name -> com.coralogix.permissions.v1.PermissionGroupMetadata
+	28, // 31: com.coralogix.permissions.v1.PermissionMetadata.action:type_name -> com.coralogix.permissions.v1.Action
+	29, // 32: com.coralogix.permissions.v1.PermissionMetadata.resource:type_name -> com.coralogix.permissions.v1.Resource
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_permissions_v1_permissions_mgmt_proto_init() }
@@ -1401,7 +1475,7 @@ func file_com_coralogix_permissions_v1_permissions_mgmt_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc), len(file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc)),
-			NumEnums:      3,
+			NumEnums:      4,
 			NumMessages:   13,
 			NumExtensions: 0,
 			NumServices:   0,

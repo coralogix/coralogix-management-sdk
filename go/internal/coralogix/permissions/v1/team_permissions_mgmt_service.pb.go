@@ -317,8 +317,10 @@ type CreateTeamGroupRequest struct {
 	// / Optionally set team group scope filters
 	ScopeFilters   *ScopeFilters `protobuf:"bytes,7,opt,name=scope_filters,json=scopeFilters,proto3,oneof" json:"scope_filters,omitempty"`
 	NextGenScopeId *string       `protobuf:"bytes,8,opt,name=next_gen_scope_id,json=nextGenScopeId,proto3,oneof" json:"next_gen_scope_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// / Group Type, defines the access to the group itself, should default to OPEN
+	GroupType     GroupType `protobuf:"varint,9,opt,name=group_type,json=groupType,proto3,enum=com.coralogix.permissions.v1.GroupType" json:"group_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CreateTeamGroupRequest) Reset() {
@@ -407,6 +409,13 @@ func (x *CreateTeamGroupRequest) GetNextGenScopeId() string {
 	return ""
 }
 
+func (x *CreateTeamGroupRequest) GetGroupType() GroupType {
+	if x != nil {
+		return x.GroupType
+	}
+	return GroupType_GROUP_TYPE_UNSPECIFIED
+}
+
 // / Create team group response
 type CreateTeamGroupResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -472,8 +481,10 @@ type UpdateTeamGroupRequest struct {
 	ScopeFilters *ScopeFilters `protobuf:"bytes,7,opt,name=scope_filters,json=scopeFilters,proto3,oneof" json:"scope_filters,omitempty"`
 	// / If set, updates new team group next gen scope
 	NextGenScopeId *string `protobuf:"bytes,8,opt,name=next_gen_scope_id,json=nextGenScopeId,proto3,oneof" json:"next_gen_scope_id,omitempty"`
-	unknownFields  protoimpl.UnknownFields
-	sizeCache      protoimpl.SizeCache
+	// / If set, updates team group type
+	GroupType     *GroupType `protobuf:"varint,9,opt,name=group_type,json=groupType,proto3,enum=com.coralogix.permissions.v1.GroupType,oneof" json:"group_type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
 }
 
 func (x *UpdateTeamGroupRequest) Reset() {
@@ -560,6 +571,13 @@ func (x *UpdateTeamGroupRequest) GetNextGenScopeId() string {
 		return *x.NextGenScopeId
 	}
 	return ""
+}
+
+func (x *UpdateTeamGroupRequest) GetGroupType() GroupType {
+	if x != nil && x.GroupType != nil {
+		return *x.GroupType
+	}
+	return GroupType_GROUP_TYPE_UNSPECIFIED
 }
 
 // / Update team group response
@@ -1713,7 +1731,7 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\x15GetTeamGroupsResponse\x12?\n" +
 	"\x06groups\x18\x01 \x03(\v2'.com.coralogix.permissions.v1.TeamGroupR\x06groups:\xb0\x02\x92A\xac\x02\n" +
 	"\x96\x01*\x15GetTeamGroupsResponse2}Response containing a list of all team groups and their complete details, including members, roles, and scope configurations.*\x90\x01\n" +
-	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\x81\a\n" +
+	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\xc9\a\n" +
 	"\x16CreateTeamGroupRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12B\n" +
 	"\ateam_id\x18\x02 \x01(\v2$.com.coralogix.permissions.v1.TeamIdH\x00R\x06teamId\x88\x01\x01\x12%\n" +
@@ -1723,7 +1741,9 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\brole_ids\x18\x05 \x03(\v2$.com.coralogix.permissions.v1.RoleIdR\aroleIds\x12?\n" +
 	"\buser_ids\x18\x06 \x03(\v2$.com.coralogix.permissions.v1.UserIdR\auserIds\x12T\n" +
 	"\rscope_filters\x18\a \x01(\v2*.com.coralogix.permissions.v1.ScopeFiltersH\x03R\fscopeFilters\x88\x01\x01\x12.\n" +
-	"\x11next_gen_scope_id\x18\b \x01(\tH\x04R\x0enextGenScopeId\x88\x01\x01:\xe5\x02\x92A\xe1\x02\n" +
+	"\x11next_gen_scope_id\x18\b \x01(\tH\x04R\x0enextGenScopeId\x88\x01\x01\x12F\n" +
+	"\n" +
+	"group_type\x18\t \x01(\x0e2'.com.coralogix.permissions.v1.GroupTypeR\tgroupType:\xe5\x02\x92A\xe1\x02\n" +
 	"\xcb\x01*\x16CreateTeamGroupRequest2\xb0\x01Request to create a new team group with specified name, description, roles, users, and optional scope filters. Can be associated with a specific team or the authenticated team.*\x90\x01\n" +
 	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/B\n" +
 	"\n" +
@@ -1735,7 +1755,7 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\x17CreateTeamGroupResponse\x12D\n" +
 	"\bgroup_id\x18\x01 \x01(\v2).com.coralogix.permissions.v1.TeamGroupIdR\agroupId:\xfe\x01\x92A\xfa\x01\n" +
 	"e*\x17CreateTeamGroupResponse2JResponse containing the unique identifier of the newly created team group.*\x90\x01\n" +
-	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\xbc\f\n" +
+	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\x98\r\n" +
 	"\x16UpdateTeamGroupRequest\x12D\n" +
 	"\bgroup_id\x18\x01 \x01(\v2).com.coralogix.permissions.v1.TeamGroupIdR\agroupId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12%\n" +
@@ -1745,7 +1765,9 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\frole_updates\x18\x05 \x01(\v2@.com.coralogix.permissions.v1.UpdateTeamGroupRequest.RoleUpdatesH\x02R\vroleUpdates\x88\x01\x01\x12h\n" +
 	"\fuser_updates\x18\x06 \x01(\v2@.com.coralogix.permissions.v1.UpdateTeamGroupRequest.UserUpdatesH\x03R\vuserUpdates\x88\x01\x01\x12T\n" +
 	"\rscope_filters\x18\a \x01(\v2*.com.coralogix.permissions.v1.ScopeFiltersH\x04R\fscopeFilters\x88\x01\x01\x12.\n" +
-	"\x11next_gen_scope_id\x18\b \x01(\tH\x05R\x0enextGenScopeId\x88\x01\x01\x1a\xc3\x02\n" +
+	"\x11next_gen_scope_id\x18\b \x01(\tH\x05R\x0enextGenScopeId\x88\x01\x01\x12K\n" +
+	"\n" +
+	"group_type\x18\t \x01(\x0e2'.com.coralogix.permissions.v1.GroupTypeH\x06R\tgroupType\x88\x01\x01\x1a\xc3\x02\n" +
 	"\vRoleUpdates\x12?\n" +
 	"\brole_ids\x18\x01 \x03(\v2$.com.coralogix.permissions.v1.RoleIdR\aroleIds:\xf2\x01\x92A\xee\x01\n" +
 	"Y*\vRoleUpdates2JThis data structure represents the information associated with an API key.*\x90\x01\n" +
@@ -1761,7 +1783,8 @@ const file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_rawD
 	"\r_role_updatesB\x0f\n" +
 	"\r_user_updatesB\x10\n" +
 	"\x0e_scope_filtersB\x14\n" +
-	"\x12_next_gen_scope_id\"\x9a\x02\n" +
+	"\x12_next_gen_scope_idB\r\n" +
+	"\v_group_type\"\x9a\x02\n" +
 	"\x17UpdateTeamGroupResponse:\xfe\x01\x92A\xfa\x01\n" +
 	"e*\x17UpdateTeamGroupResponse2JResponse confirming the successful update of a team group's configuration.*\x90\x01\n" +
 	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\x81\x03\n" +
@@ -2016,9 +2039,10 @@ var file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_goType
 	(*RoleId)(nil),                                                    // 35: com.coralogix.permissions.v1.RoleId
 	(*UserId)(nil),                                                    // 36: com.coralogix.permissions.v1.UserId
 	(*ScopeFilters)(nil),                                              // 37: com.coralogix.permissions.v1.ScopeFilters
-	(*User)(nil),                                                      // 38: com.coralogix.permissions.v1.User
-	(*ScopeId)(nil),                                                   // 39: com.coralogix.permissions.v1.ScopeId
-	(*Scope)(nil),                                                     // 40: com.coralogix.permissions.v1.Scope
+	(GroupType)(0),                                                    // 38: com.coralogix.permissions.v1.GroupType
+	(*User)(nil),                                                      // 39: com.coralogix.permissions.v1.User
+	(*ScopeId)(nil),                                                   // 40: com.coralogix.permissions.v1.ScopeId
+	(*Scope)(nil),                                                     // 41: com.coralogix.permissions.v1.Scope
 }
 var file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_depIdxs = []int32{
 	32, // 0: com.coralogix.permissions.v1.GetTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
@@ -2030,67 +2054,69 @@ var file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_depIdx
 	35, // 6: com.coralogix.permissions.v1.CreateTeamGroupRequest.role_ids:type_name -> com.coralogix.permissions.v1.RoleId
 	36, // 7: com.coralogix.permissions.v1.CreateTeamGroupRequest.user_ids:type_name -> com.coralogix.permissions.v1.UserId
 	37, // 8: com.coralogix.permissions.v1.CreateTeamGroupRequest.scope_filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
-	32, // 9: com.coralogix.permissions.v1.CreateTeamGroupResponse.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	32, // 10: com.coralogix.permissions.v1.UpdateTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	26, // 11: com.coralogix.permissions.v1.UpdateTeamGroupRequest.role_updates:type_name -> com.coralogix.permissions.v1.UpdateTeamGroupRequest.RoleUpdates
-	27, // 12: com.coralogix.permissions.v1.UpdateTeamGroupRequest.user_updates:type_name -> com.coralogix.permissions.v1.UpdateTeamGroupRequest.UserUpdates
-	37, // 13: com.coralogix.permissions.v1.UpdateTeamGroupRequest.scope_filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
-	32, // 14: com.coralogix.permissions.v1.DeleteTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	32, // 15: com.coralogix.permissions.v1.GetGroupUsersRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	38, // 16: com.coralogix.permissions.v1.GetGroupUsersResponse.users:type_name -> com.coralogix.permissions.v1.User
-	28, // 17: com.coralogix.permissions.v1.GetGroupUsersResponse.no_more_pages:type_name -> com.coralogix.permissions.v1.GetGroupUsersResponse.NoMorePages
-	29, // 18: com.coralogix.permissions.v1.GetGroupUsersResponse.token:type_name -> com.coralogix.permissions.v1.GetGroupUsersResponse.NextPageToken
-	32, // 19: com.coralogix.permissions.v1.AddUsersToTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	36, // 20: com.coralogix.permissions.v1.AddUsersToTeamGroupRequest.user_ids:type_name -> com.coralogix.permissions.v1.UserId
-	34, // 21: com.coralogix.permissions.v1.AddUsersToTeamGroupResponse.team_id:type_name -> com.coralogix.permissions.v1.TeamId
-	34, // 22: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.team_id:type_name -> com.coralogix.permissions.v1.TeamId
-	30, // 23: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.add_users_to_group:type_name -> com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup
-	32, // 24: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	36, // 25: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest.user_ids:type_name -> com.coralogix.permissions.v1.UserId
-	34, // 26: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.team_id:type_name -> com.coralogix.permissions.v1.TeamId
-	31, // 27: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.remove_users_from_group:type_name -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup
-	32, // 28: com.coralogix.permissions.v1.SetTeamGroupScopeRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	37, // 29: com.coralogix.permissions.v1.SetTeamGroupScopeRequest.scope_filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
-	39, // 30: com.coralogix.permissions.v1.SetTeamGroupScopeResponse.scope_id:type_name -> com.coralogix.permissions.v1.ScopeId
-	32, // 31: com.coralogix.permissions.v1.GetTeamGroupScopeRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	40, // 32: com.coralogix.permissions.v1.GetTeamGroupScopeResponse.scope:type_name -> com.coralogix.permissions.v1.Scope
-	35, // 33: com.coralogix.permissions.v1.UpdateTeamGroupRequest.RoleUpdates.role_ids:type_name -> com.coralogix.permissions.v1.RoleId
-	36, // 34: com.coralogix.permissions.v1.UpdateTeamGroupRequest.UserUpdates.user_ids:type_name -> com.coralogix.permissions.v1.UserId
-	32, // 35: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	36, // 36: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup.user_ids:type_name -> com.coralogix.permissions.v1.UserId
-	32, // 37: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
-	36, // 38: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup.user_ids:type_name -> com.coralogix.permissions.v1.UserId
-	0,  // 39: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroup:input_type -> com.coralogix.permissions.v1.GetTeamGroupRequest
-	2,  // 40: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupByName:input_type -> com.coralogix.permissions.v1.GetTeamGroupByNameRequest
-	4,  // 41: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroups:input_type -> com.coralogix.permissions.v1.GetTeamGroupsRequest
-	6,  // 42: com.coralogix.permissions.v1.TeamPermissionsMgmtService.CreateTeamGroup:input_type -> com.coralogix.permissions.v1.CreateTeamGroupRequest
-	8,  // 43: com.coralogix.permissions.v1.TeamPermissionsMgmtService.UpdateTeamGroup:input_type -> com.coralogix.permissions.v1.UpdateTeamGroupRequest
-	10, // 44: com.coralogix.permissions.v1.TeamPermissionsMgmtService.DeleteTeamGroup:input_type -> com.coralogix.permissions.v1.DeleteTeamGroupRequest
-	12, // 45: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetGroupUsers:input_type -> com.coralogix.permissions.v1.GetGroupUsersRequest
-	14, // 46: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroup:input_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupRequest
-	16, // 47: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroups:input_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest
-	18, // 48: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroup:input_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest
-	20, // 49: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroups:input_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest
-	22, // 50: com.coralogix.permissions.v1.TeamPermissionsMgmtService.SetTeamGroupScope:input_type -> com.coralogix.permissions.v1.SetTeamGroupScopeRequest
-	24, // 51: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupScope:input_type -> com.coralogix.permissions.v1.GetTeamGroupScopeRequest
-	1,  // 52: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroup:output_type -> com.coralogix.permissions.v1.GetTeamGroupResponse
-	3,  // 53: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupByName:output_type -> com.coralogix.permissions.v1.GetTeamGroupByNameResponse
-	5,  // 54: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroups:output_type -> com.coralogix.permissions.v1.GetTeamGroupsResponse
-	7,  // 55: com.coralogix.permissions.v1.TeamPermissionsMgmtService.CreateTeamGroup:output_type -> com.coralogix.permissions.v1.CreateTeamGroupResponse
-	9,  // 56: com.coralogix.permissions.v1.TeamPermissionsMgmtService.UpdateTeamGroup:output_type -> com.coralogix.permissions.v1.UpdateTeamGroupResponse
-	11, // 57: com.coralogix.permissions.v1.TeamPermissionsMgmtService.DeleteTeamGroup:output_type -> com.coralogix.permissions.v1.DeleteTeamGroupResponse
-	13, // 58: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetGroupUsers:output_type -> com.coralogix.permissions.v1.GetGroupUsersResponse
-	15, // 59: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroup:output_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupResponse
-	17, // 60: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroups:output_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupsResponse
-	19, // 61: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroup:output_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupResponse
-	21, // 62: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroups:output_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsResponse
-	23, // 63: com.coralogix.permissions.v1.TeamPermissionsMgmtService.SetTeamGroupScope:output_type -> com.coralogix.permissions.v1.SetTeamGroupScopeResponse
-	25, // 64: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupScope:output_type -> com.coralogix.permissions.v1.GetTeamGroupScopeResponse
-	52, // [52:65] is the sub-list for method output_type
-	39, // [39:52] is the sub-list for method input_type
-	39, // [39:39] is the sub-list for extension type_name
-	39, // [39:39] is the sub-list for extension extendee
-	0,  // [0:39] is the sub-list for field type_name
+	38, // 9: com.coralogix.permissions.v1.CreateTeamGroupRequest.group_type:type_name -> com.coralogix.permissions.v1.GroupType
+	32, // 10: com.coralogix.permissions.v1.CreateTeamGroupResponse.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	32, // 11: com.coralogix.permissions.v1.UpdateTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	26, // 12: com.coralogix.permissions.v1.UpdateTeamGroupRequest.role_updates:type_name -> com.coralogix.permissions.v1.UpdateTeamGroupRequest.RoleUpdates
+	27, // 13: com.coralogix.permissions.v1.UpdateTeamGroupRequest.user_updates:type_name -> com.coralogix.permissions.v1.UpdateTeamGroupRequest.UserUpdates
+	37, // 14: com.coralogix.permissions.v1.UpdateTeamGroupRequest.scope_filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
+	38, // 15: com.coralogix.permissions.v1.UpdateTeamGroupRequest.group_type:type_name -> com.coralogix.permissions.v1.GroupType
+	32, // 16: com.coralogix.permissions.v1.DeleteTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	32, // 17: com.coralogix.permissions.v1.GetGroupUsersRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	39, // 18: com.coralogix.permissions.v1.GetGroupUsersResponse.users:type_name -> com.coralogix.permissions.v1.User
+	28, // 19: com.coralogix.permissions.v1.GetGroupUsersResponse.no_more_pages:type_name -> com.coralogix.permissions.v1.GetGroupUsersResponse.NoMorePages
+	29, // 20: com.coralogix.permissions.v1.GetGroupUsersResponse.token:type_name -> com.coralogix.permissions.v1.GetGroupUsersResponse.NextPageToken
+	32, // 21: com.coralogix.permissions.v1.AddUsersToTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	36, // 22: com.coralogix.permissions.v1.AddUsersToTeamGroupRequest.user_ids:type_name -> com.coralogix.permissions.v1.UserId
+	34, // 23: com.coralogix.permissions.v1.AddUsersToTeamGroupResponse.team_id:type_name -> com.coralogix.permissions.v1.TeamId
+	34, // 24: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.team_id:type_name -> com.coralogix.permissions.v1.TeamId
+	30, // 25: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.add_users_to_group:type_name -> com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup
+	32, // 26: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	36, // 27: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest.user_ids:type_name -> com.coralogix.permissions.v1.UserId
+	34, // 28: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.team_id:type_name -> com.coralogix.permissions.v1.TeamId
+	31, // 29: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.remove_users_from_group:type_name -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup
+	32, // 30: com.coralogix.permissions.v1.SetTeamGroupScopeRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	37, // 31: com.coralogix.permissions.v1.SetTeamGroupScopeRequest.scope_filters:type_name -> com.coralogix.permissions.v1.ScopeFilters
+	40, // 32: com.coralogix.permissions.v1.SetTeamGroupScopeResponse.scope_id:type_name -> com.coralogix.permissions.v1.ScopeId
+	32, // 33: com.coralogix.permissions.v1.GetTeamGroupScopeRequest.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	41, // 34: com.coralogix.permissions.v1.GetTeamGroupScopeResponse.scope:type_name -> com.coralogix.permissions.v1.Scope
+	35, // 35: com.coralogix.permissions.v1.UpdateTeamGroupRequest.RoleUpdates.role_ids:type_name -> com.coralogix.permissions.v1.RoleId
+	36, // 36: com.coralogix.permissions.v1.UpdateTeamGroupRequest.UserUpdates.user_ids:type_name -> com.coralogix.permissions.v1.UserId
+	32, // 37: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	36, // 38: com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest.AddUsersToTeamGroup.user_ids:type_name -> com.coralogix.permissions.v1.UserId
+	32, // 39: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup.group_id:type_name -> com.coralogix.permissions.v1.TeamGroupId
+	36, // 40: com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest.RemoveUsersFromTeamGroup.user_ids:type_name -> com.coralogix.permissions.v1.UserId
+	0,  // 41: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroup:input_type -> com.coralogix.permissions.v1.GetTeamGroupRequest
+	2,  // 42: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupByName:input_type -> com.coralogix.permissions.v1.GetTeamGroupByNameRequest
+	4,  // 43: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroups:input_type -> com.coralogix.permissions.v1.GetTeamGroupsRequest
+	6,  // 44: com.coralogix.permissions.v1.TeamPermissionsMgmtService.CreateTeamGroup:input_type -> com.coralogix.permissions.v1.CreateTeamGroupRequest
+	8,  // 45: com.coralogix.permissions.v1.TeamPermissionsMgmtService.UpdateTeamGroup:input_type -> com.coralogix.permissions.v1.UpdateTeamGroupRequest
+	10, // 46: com.coralogix.permissions.v1.TeamPermissionsMgmtService.DeleteTeamGroup:input_type -> com.coralogix.permissions.v1.DeleteTeamGroupRequest
+	12, // 47: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetGroupUsers:input_type -> com.coralogix.permissions.v1.GetGroupUsersRequest
+	14, // 48: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroup:input_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupRequest
+	16, // 49: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroups:input_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupsRequest
+	18, // 50: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroup:input_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupRequest
+	20, // 51: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroups:input_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsRequest
+	22, // 52: com.coralogix.permissions.v1.TeamPermissionsMgmtService.SetTeamGroupScope:input_type -> com.coralogix.permissions.v1.SetTeamGroupScopeRequest
+	24, // 53: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupScope:input_type -> com.coralogix.permissions.v1.GetTeamGroupScopeRequest
+	1,  // 54: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroup:output_type -> com.coralogix.permissions.v1.GetTeamGroupResponse
+	3,  // 55: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupByName:output_type -> com.coralogix.permissions.v1.GetTeamGroupByNameResponse
+	5,  // 56: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroups:output_type -> com.coralogix.permissions.v1.GetTeamGroupsResponse
+	7,  // 57: com.coralogix.permissions.v1.TeamPermissionsMgmtService.CreateTeamGroup:output_type -> com.coralogix.permissions.v1.CreateTeamGroupResponse
+	9,  // 58: com.coralogix.permissions.v1.TeamPermissionsMgmtService.UpdateTeamGroup:output_type -> com.coralogix.permissions.v1.UpdateTeamGroupResponse
+	11, // 59: com.coralogix.permissions.v1.TeamPermissionsMgmtService.DeleteTeamGroup:output_type -> com.coralogix.permissions.v1.DeleteTeamGroupResponse
+	13, // 60: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetGroupUsers:output_type -> com.coralogix.permissions.v1.GetGroupUsersResponse
+	15, // 61: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroup:output_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupResponse
+	17, // 62: com.coralogix.permissions.v1.TeamPermissionsMgmtService.AddUsersToTeamGroups:output_type -> com.coralogix.permissions.v1.AddUsersToTeamGroupsResponse
+	19, // 63: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroup:output_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupResponse
+	21, // 64: com.coralogix.permissions.v1.TeamPermissionsMgmtService.RemoveUsersFromTeamGroups:output_type -> com.coralogix.permissions.v1.RemoveUsersFromTeamGroupsResponse
+	23, // 65: com.coralogix.permissions.v1.TeamPermissionsMgmtService.SetTeamGroupScope:output_type -> com.coralogix.permissions.v1.SetTeamGroupScopeResponse
+	25, // 66: com.coralogix.permissions.v1.TeamPermissionsMgmtService.GetTeamGroupScope:output_type -> com.coralogix.permissions.v1.GetTeamGroupScopeResponse
+	54, // [54:67] is the sub-list for method output_type
+	41, // [41:54] is the sub-list for method input_type
+	41, // [41:41] is the sub-list for extension type_name
+	41, // [41:41] is the sub-list for extension extendee
+	0,  // [0:41] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_permissions_v1_team_permissions_mgmt_service_proto_init() }

@@ -88,6 +88,13 @@ message UndetectedValuesManagement {
   optional AutoRetireTimeframe auto_retire_timeframe = 2;
 }
 
+message SloAlertValidityResult {
+  string id = 1;
+  string name = 2;
+  optional string error_message = 3;
+  string alert_version_id = 4;
+}
+
 enum AutoRetireTimeframe {
   AUTO_RETIRE_TIMEFRAME_NEVER_OR_UNSPECIFIED = 0;
   AUTO_RETIRE_TIMEFRAME_MINUTES_5 = 1;
