@@ -35,8 +35,8 @@ func TestArchiveLogs(t *testing.T) {
 	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveLogsClient(creator)
 	_, setTargetError := c.Update(context.Background(), &cxsdk.SetTargetRequest{
-		TargetSpec: &cxsdk.SetTargetRequestS3{
-			S3: &cxsdk.S3TargetSpec{
+		TargetSpec: &cxsdk.SetS3TargetRequest{
+			S3: &cxsdk.Target{
 				Bucket: logsBucket,
 				Region: &awsRegion,
 			},

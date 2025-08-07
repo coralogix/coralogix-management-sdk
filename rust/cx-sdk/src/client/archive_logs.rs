@@ -12,14 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-pub use cx_api::proto::com::coralogix::archive::v2::set_target_request::TargetSpec;
-use cx_api::proto::com::coralogix::archive::v2::target_service_client::TargetServiceClient;
+use cx_api::proto::com::coralogix::archive::v2::s3_target_service_client::S3TargetServiceClient;
+pub use cx_api::proto::com::coralogix::archive::v2::s3_target_service_set_target_request::TargetSpec;
 use cx_api::proto::com::coralogix::archive::v2::{
-    GetTargetRequest,
-    GetTargetResponse,
-    SetTargetRequest,
-    SetTargetResponse,
-    ValidateTargetRequest,
+    S3TargetServiceGetTargetRequest,
+    S3TargetServiceGetTargetResponse,
+    S3TargetServiceSetTargetRequest,
+    S3TargetServiceSetTargetResponse,
 };
 use std::str::FromStr;
 use tokio::sync::Mutex;
@@ -53,7 +52,7 @@ const ARCHIVE_LOGS_FEATURE_GROUP_ID: &str = "logs";
 /// Read more at [https://coralogix.com/docs/archive-s3-bucket-forever/]()
 pub struct LogsArchiveClient {
     metadata_map: MetadataMap,
-    service_client: Mutex<TargetServiceClient<Channel>>,
+    service_client: Mutex<S3TargetServiceClient<Channel>>,
 }
 
 impl LogsArchiveClient {
@@ -69,13 +68,14 @@ impl LogsArchiveClient {
         let request_metadata: CallProperties = (&auth_context.team_level_api_key).into();
         Ok(Self {
             metadata_map: request_metadata.to_metadata_map(),
-            service_client: Mutex::new(TargetServiceClient::new(channel)),
+            service_client: Mutex::new(S3TargetServiceClient::new(channel)),
         })
     }
 
     /// Retrieves the current target configuration.
-    pub async fn get_target(&self) -> Result<GetTargetResponse> {
-        let request = make_request_with_metadata(GetTargetRequest {}, &self.metadata_map);
+    pub async fn get_target(&self) -> Result<S3TargetServiceGetTargetResponse> {
+        let request =
+            make_request_with_metadata(S3TargetServiceGetTargetRequest {}, &self.metadata_map);
         {
             let mut client = self.service_client.lock().await.clone();
 
@@ -102,9 +102,9 @@ impl LogsArchiveClient {
         &self,
         is_active: bool,
         target_spec: TargetSpec,
-    ) -> Result<SetTargetResponse> {
+    ) -> Result<S3TargetServiceSetTargetResponse> {
         let request = make_request_with_metadata(
-            SetTargetRequest {
+            S3TargetServiceSetTargetRequest {
                 is_active,
                 target_spec: Some(target_spec),
             },
@@ -121,40 +121,6 @@ impl LogsArchiveClient {
                     SdkError::ApiError(SdkApiError {
                         status,
                         endpoint: "/com.coralogix.archive.v2.TargetService/SetTarget".into(),
-                        feature_group: ARCHIVE_LOGS_FEATURE_GROUP_ID.into(),
-                    })
-                })
-        }
-    }
-
-    /// Validates a target configuration.
-    ///
-    /// # Arguments
-    /// * `is_active` - Whether the target should be active.
-    /// * `target_spec` - The target configuration to validate.
-    pub async fn validate_target(
-        &self,
-        is_active: bool,
-        target_spec: TargetSpecValidation,
-    ) -> Result<()> {
-        let request = make_request_with_metadata(
-            ValidateTargetRequest {
-                target_spec: Some(target_spec),
-                is_active,
-            },
-            &self.metadata_map,
-        );
-        {
-            let mut client = self.service_client.lock().await.clone();
-
-            client
-                .validate_target(request)
-                .await
-                .map(|_| ())
-                .map_err(|status| {
-                    SdkError::ApiError(SdkApiError {
-                        status,
-                        endpoint: "/com.coralogix.archive.v2.TargetService/ValidateTarget".into(),
                         feature_group: ARCHIVE_LOGS_FEATURE_GROUP_ID.into(),
                     })
                 })

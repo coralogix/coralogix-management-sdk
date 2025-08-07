@@ -43,10 +43,6 @@ mod tests {
             bucket: logs_bucket_name,
             region: Some(aws_region),
         };
-        service
-            .validate_target(true, TargetSpecValidation::S3(target_spec.clone()))
-            .await
-            .unwrap();
 
         service
             .set_target(true, TargetSpec::S3(target_spec))

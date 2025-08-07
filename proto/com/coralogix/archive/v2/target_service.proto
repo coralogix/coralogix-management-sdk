@@ -199,7 +199,7 @@ service TargetService {
       summary: "Get target"
     };
   }
-  
+
   rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Set target";
     option (google.api.http) = {
@@ -249,4 +249,121 @@ service TargetService {
       summary: "Validate target"
     };
   }
+}
+
+service S3TargetService {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    name: "Target Service"
+    description: "View and manage your storage targets for logs."
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  rpc GetTarget(S3TargetServiceGetTargetRequest) returns (S3TargetServiceGetTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get target";
+    option (google.api.http) = {
+      get: "/v2/target"
+    };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Target Service"]
+      summary: "Get target"
+    };
+  }
+
+  rpc SetTarget(S3TargetServiceSetTargetRequest) returns (S3TargetServiceSetTargetResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Set target";
+    option (google.api.http) = {
+      post: "/v2/target"
+      body: "*"
+    };
+
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Target Service"]
+      summary: "Set target"
+    };
+  }
+}
+
+message S3TargetServiceGetTargetRequest {}
+
+message S3TargetServiceGetTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Target Response"
+      description: "This data structure is used to retrieve a storage target for logs."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  Target target = 1;
+}
+
+message S3TargetServiceSetTargetRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is used to set a storage target for logs."
+      required: [
+        "is_active",
+        "target_spec"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  oneof target_spec {
+    S3TargetSpec s3 = 2;
+  }
+}
+
+message S3TargetServiceSetTargetResponse {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Set Target Response"
+      description: "This data structure is obtained after setting a storage target for logs."
+      required: [
+        "target"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+  Target target = 1;
 }

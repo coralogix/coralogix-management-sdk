@@ -21,25 +21,19 @@ import (
 )
 
 // SetTargetRequest is a request to set the archive logs target.
-type SetTargetRequest = archiveLogs.SetTargetRequest
+type SetTargetRequest = archiveLogs.S3TargetServiceSetTargetRequest
 
-// SetTargetRequestS3 is a request to set the archive logs target to S3.
-type SetTargetRequestS3 = archiveLogs.SetTargetRequest_S3
+// SetTargetResponse is a request to set the archive logs target to IBM COS.
+type SetTargetResponse = archiveLogs.S3TargetServiceSetTargetResponse
 
-// S3TargetSpec is an S3 target spec.
-type S3TargetSpec = archiveLogs.S3TargetSpec
+// GetTargetResponse is a response to get the archive logs target.
+type GetTargetResponse = archiveLogs.S3TargetServiceGetTargetResponse
 
-// IBMCosTargetSpec is an IBM COS target spec.
-type IBMCosTargetSpec = archiveLogs.IBMCosTargetSpec
-
-// IbmBucketType is a type for IBM COS buckets.
-type IbmBucketType = archiveLogs.IbmBucketType
-
-// SetTargetRequestIbmCos is a request to set the archive logs target to IBM COS.
-type SetTargetRequestIbmCos = archiveLogs.SetTargetRequest_IbmCos
+// SetS3TargetRequest is an S3 target spec.
+type SetS3TargetRequest = archiveLogs.S3TargetServiceSetTargetRequest_S3
 
 // Target is a target for storing archive logs.
-type Target = archiveLogs.Target
+type Target = archiveLogs.S3TargetSpec
 
 // TargetS3 is a S3 target for storing archive logs.
 type TargetS3 = archiveLogs.Target_S3
@@ -69,7 +63,7 @@ type ArchiveLogsClient struct {
 }
 
 // Update updates the archive logs target.
-func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTargetRequest) (*archiveLogs.SetTargetResponse, error) {
+func (c ArchiveLogsClient) Update(ctx context.Context, req *SetTargetRequest) (*SetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -77,7 +71,7 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTarge
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := archiveLogs.NewTargetServiceClient(conn)
+	client := archiveLogs.NewS3TargetServiceClient(conn)
 
 	response, err := client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -87,7 +81,7 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *archiveLogs.SetTarge
 }
 
 // Get gets the archive logs target.
-func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetResponse, error) {
+func (c ArchiveLogsClient) Get(ctx context.Context) (*GetTargetResponse, error) {
 	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
 	if err != nil {
 		return nil, err
@@ -95,29 +89,11 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*archiveLogs.GetTargetRespo
 
 	conn := callProperties.Connection
 	defer conn.Close()
-	client := archiveLogs.NewTargetServiceClient(conn)
+	client := archiveLogs.NewS3TargetServiceClient(conn)
 
-	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.GetTargetRequest{}, callProperties.CallOptions...)
+	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.S3TargetServiceGetTargetRequest{}, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, ArchiveLogsGetTargetRPC, archiveLogsFeatureGroupID)
-	}
-	return response, nil
-}
-
-// ValidateTarget validates the archive logs target.
-func (c ArchiveLogsClient) ValidateTarget(ctx context.Context, req *archiveLogs.ValidateTargetRequest) (*archiveLogs.ValidateTargetResponse, error) {
-	callProperties, err := c.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)
-	if err != nil {
-		return nil, err
-	}
-
-	conn := callProperties.Connection
-	defer conn.Close()
-	client := archiveLogs.NewTargetServiceClient(conn)
-
-	response, err := client.ValidateTarget(callProperties.Ctx, req, callProperties.CallOptions...)
-	if err != nil {
-		return nil, NewSdkAPIError(err, ArchiveLogsValidateTargetRPC, archiveLogsFeatureGroupID)
 	}
 	return response, nil
 }

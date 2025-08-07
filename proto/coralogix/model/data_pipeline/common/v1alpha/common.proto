@@ -49,6 +49,12 @@ enum EntityType {
   ENTITY_TYPE_BROWSER_EVENTS = 22;
   // JSON representation: "aiEvaluations"
   ENTITY_TYPE_AI_EVALUATIONS = 24;
+  // JSON representation: "engineQueries"
+  ENTITY_TYPE_ENGINE_QUERIES = 25;
+  // JSON representation: "engineSchemaFields"
+  ENTITY_TYPE_ENGINE_SCHEMA_FIELDS = 26;
+  // JSON representation: "notificationRequests"
+  ENTITY_TYPE_NOTIFICATION_REQUESTS = 27;
 
   // Pillar "metrics"
 
