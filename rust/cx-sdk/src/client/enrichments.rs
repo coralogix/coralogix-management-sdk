@@ -127,8 +127,7 @@ impl EnrichmentsClient {
     /// * `field_mappings` - The associated field mappings.
     pub async fn update(
         &self,
-        enrichment_type: EnrichmentType,
-        field_mappings: Vec<EnrichmentFieldDefinition>,
+        enrichment_mapping: Vec<EnrichmentMapping>,
     ) -> Result<AtomicOverwriteEnrichmentsResponse> {
         Ok(self
             .service_client
@@ -136,8 +135,8 @@ impl EnrichmentsClient {
             .await
             .atomic_overwrite_enrichments(make_request_with_metadata(
                 AtomicOverwriteEnrichmentsRequest {
-                    enrichment_type: Some(enrichment_type),
-                    enrichment_fields: field_mappings,
+                    request_enrichments: enrichment_mapping,
+                    ..Default::default()
                 },
                 &self.metadata_map,
             ))
