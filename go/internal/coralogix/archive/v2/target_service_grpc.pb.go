@@ -195,3 +195,143 @@ var TargetService_ServiceDesc = grpc.ServiceDesc{
 	Streams:  []grpc.StreamDesc{},
 	Metadata: "com/coralogix/archive/v2/target_service.proto",
 }
+
+const (
+	S3TargetService_GetTarget_FullMethodName = "/com.coralogix.archive.v2.S3TargetService/GetTarget"
+	S3TargetService_SetTarget_FullMethodName = "/com.coralogix.archive.v2.S3TargetService/SetTarget"
+)
+
+// S3TargetServiceClient is the client API for S3TargetService service.
+//
+// For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
+type S3TargetServiceClient interface {
+	GetTarget(ctx context.Context, in *S3TargetServiceGetTargetRequest, opts ...grpc.CallOption) (*S3TargetServiceGetTargetResponse, error)
+	SetTarget(ctx context.Context, in *S3TargetServiceSetTargetRequest, opts ...grpc.CallOption) (*S3TargetServiceSetTargetResponse, error)
+}
+
+type s3TargetServiceClient struct {
+	cc grpc.ClientConnInterface
+}
+
+func NewS3TargetServiceClient(cc grpc.ClientConnInterface) S3TargetServiceClient {
+	return &s3TargetServiceClient{cc}
+}
+
+func (c *s3TargetServiceClient) GetTarget(ctx context.Context, in *S3TargetServiceGetTargetRequest, opts ...grpc.CallOption) (*S3TargetServiceGetTargetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(S3TargetServiceGetTargetResponse)
+	err := c.cc.Invoke(ctx, S3TargetService_GetTarget_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *s3TargetServiceClient) SetTarget(ctx context.Context, in *S3TargetServiceSetTargetRequest, opts ...grpc.CallOption) (*S3TargetServiceSetTargetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(S3TargetServiceSetTargetResponse)
+	err := c.cc.Invoke(ctx, S3TargetService_SetTarget_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// S3TargetServiceServer is the server API for S3TargetService service.
+// All implementations must embed UnimplementedS3TargetServiceServer
+// for forward compatibility.
+type S3TargetServiceServer interface {
+	GetTarget(context.Context, *S3TargetServiceGetTargetRequest) (*S3TargetServiceGetTargetResponse, error)
+	SetTarget(context.Context, *S3TargetServiceSetTargetRequest) (*S3TargetServiceSetTargetResponse, error)
+	mustEmbedUnimplementedS3TargetServiceServer()
+}
+
+// UnimplementedS3TargetServiceServer must be embedded to have
+// forward compatible implementations.
+//
+// NOTE: this should be embedded by value instead of pointer to avoid a nil
+// pointer dereference when methods are called.
+type UnimplementedS3TargetServiceServer struct{}
+
+func (UnimplementedS3TargetServiceServer) GetTarget(context.Context, *S3TargetServiceGetTargetRequest) (*S3TargetServiceGetTargetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTarget not implemented")
+}
+func (UnimplementedS3TargetServiceServer) SetTarget(context.Context, *S3TargetServiceSetTargetRequest) (*S3TargetServiceSetTargetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetTarget not implemented")
+}
+func (UnimplementedS3TargetServiceServer) mustEmbedUnimplementedS3TargetServiceServer() {}
+func (UnimplementedS3TargetServiceServer) testEmbeddedByValue()                         {}
+
+// UnsafeS3TargetServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to S3TargetServiceServer will
+// result in compilation errors.
+type UnsafeS3TargetServiceServer interface {
+	mustEmbedUnimplementedS3TargetServiceServer()
+}
+
+func RegisterS3TargetServiceServer(s grpc.ServiceRegistrar, srv S3TargetServiceServer) {
+	// If the following call pancis, it indicates UnimplementedS3TargetServiceServer was
+	// embedded by pointer and is nil.  This will cause panics if an
+	// unimplemented method is ever invoked, so we test this at initialization
+	// time to prevent it from happening at runtime later due to I/O.
+	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
+		t.testEmbeddedByValue()
+	}
+	s.RegisterService(&S3TargetService_ServiceDesc, srv)
+}
+
+func _S3TargetService_GetTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(S3TargetServiceGetTargetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(S3TargetServiceServer).GetTarget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: S3TargetService_GetTarget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(S3TargetServiceServer).GetTarget(ctx, req.(*S3TargetServiceGetTargetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _S3TargetService_SetTarget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(S3TargetServiceSetTargetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(S3TargetServiceServer).SetTarget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: S3TargetService_SetTarget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(S3TargetServiceServer).SetTarget(ctx, req.(*S3TargetServiceSetTargetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+// S3TargetService_ServiceDesc is the grpc.ServiceDesc for S3TargetService service.
+// It's only intended for direct use with grpc.RegisterService,
+// and not to be introspected or modified (even as a copy)
+var S3TargetService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "com.coralogix.archive.v2.S3TargetService",
+	HandlerType: (*S3TargetServiceServer)(nil),
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetTarget",
+			Handler:    _S3TargetService_GetTarget_Handler,
+		},
+		{
+			MethodName: "SetTarget",
+			Handler:    _S3TargetService_SetTarget_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "com/coralogix/archive/v2/target_service.proto",
+}

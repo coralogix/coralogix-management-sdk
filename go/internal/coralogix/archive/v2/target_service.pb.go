@@ -566,6 +566,204 @@ func (x *ValidateTargetResponse) GetIsValid() bool {
 	return false
 }
 
+type S3TargetServiceGetTargetRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *S3TargetServiceGetTargetRequest) Reset() {
+	*x = S3TargetServiceGetTargetRequest{}
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *S3TargetServiceGetTargetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3TargetServiceGetTargetRequest) ProtoMessage() {}
+
+func (x *S3TargetServiceGetTargetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3TargetServiceGetTargetRequest.ProtoReflect.Descriptor instead.
+func (*S3TargetServiceGetTargetRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogix_archive_v2_target_service_proto_rawDescGZIP(), []int{9}
+}
+
+type S3TargetServiceGetTargetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Target        *Target                `protobuf:"bytes,1,opt,name=target,proto3" json:"target,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *S3TargetServiceGetTargetResponse) Reset() {
+	*x = S3TargetServiceGetTargetResponse{}
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *S3TargetServiceGetTargetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3TargetServiceGetTargetResponse) ProtoMessage() {}
+
+func (x *S3TargetServiceGetTargetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3TargetServiceGetTargetResponse.ProtoReflect.Descriptor instead.
+func (*S3TargetServiceGetTargetResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogix_archive_v2_target_service_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *S3TargetServiceGetTargetResponse) GetTarget() *Target {
+	if x != nil {
+		return x.Target
+	}
+	return nil
+}
+
+type S3TargetServiceSetTargetRequest struct {
+	state    protoimpl.MessageState `protogen:"open.v1"`
+	IsActive bool                   `protobuf:"varint,1,opt,name=is_active,json=isActive,proto3" json:"is_active,omitempty"`
+	// Types that are valid to be assigned to TargetSpec:
+	//
+	//	*S3TargetServiceSetTargetRequest_S3
+	TargetSpec    isS3TargetServiceSetTargetRequest_TargetSpec `protobuf_oneof:"target_spec"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *S3TargetServiceSetTargetRequest) Reset() {
+	*x = S3TargetServiceSetTargetRequest{}
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *S3TargetServiceSetTargetRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3TargetServiceSetTargetRequest) ProtoMessage() {}
+
+func (x *S3TargetServiceSetTargetRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3TargetServiceSetTargetRequest.ProtoReflect.Descriptor instead.
+func (*S3TargetServiceSetTargetRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogix_archive_v2_target_service_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *S3TargetServiceSetTargetRequest) GetIsActive() bool {
+	if x != nil {
+		return x.IsActive
+	}
+	return false
+}
+
+func (x *S3TargetServiceSetTargetRequest) GetTargetSpec() isS3TargetServiceSetTargetRequest_TargetSpec {
+	if x != nil {
+		return x.TargetSpec
+	}
+	return nil
+}
+
+func (x *S3TargetServiceSetTargetRequest) GetS3() *S3TargetSpec {
+	if x != nil {
+		if x, ok := x.TargetSpec.(*S3TargetServiceSetTargetRequest_S3); ok {
+			return x.S3
+		}
+	}
+	return nil
+}
+
+type isS3TargetServiceSetTargetRequest_TargetSpec interface {
+	isS3TargetServiceSetTargetRequest_TargetSpec()
+}
+
+type S3TargetServiceSetTargetRequest_S3 struct {
+	S3 *S3TargetSpec `protobuf:"bytes,2,opt,name=s3,proto3,oneof"`
+}
+
+func (*S3TargetServiceSetTargetRequest_S3) isS3TargetServiceSetTargetRequest_TargetSpec() {}
+
+type S3TargetServiceSetTargetResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Target        *Target                `protobuf:"bytes,1,opt,name=target,proto3" json:"target,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *S3TargetServiceSetTargetResponse) Reset() {
+	*x = S3TargetServiceSetTargetResponse{}
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[12]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *S3TargetServiceSetTargetResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*S3TargetServiceSetTargetResponse) ProtoMessage() {}
+
+func (x *S3TargetServiceSetTargetResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogix_archive_v2_target_service_proto_msgTypes[12]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use S3TargetServiceSetTargetResponse.ProtoReflect.Descriptor instead.
+func (*S3TargetServiceSetTargetResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogix_archive_v2_target_service_proto_rawDescGZIP(), []int{12}
+}
+
+func (x *S3TargetServiceSetTargetResponse) GetTarget() *Target {
+	if x != nil {
+		return x.Target
+	}
+	return nil
+}
+
 var File_com_coralogix_archive_v2_target_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
@@ -617,6 +815,21 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x16ValidateTargetResponse\x12$\n" +
 	"\bis_valid\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\aisValid:\xe9\x01\x92A\xe5\x01\n" +
 	"r*\x18Validate Target Response2KThis data structure is obtained after validating a storage target for logs.\xd2\x01\bis_valid*o\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"!\n" +
+	"\x1fS3TargetServiceGetTargetRequest\"\xb8\x02\n" +
+	" S3TargetServiceGetTargetResponse\x128\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x92A\xd5\x01\n" +
+	"b*\x13Get Target Response2BThis data structure is used to retrieve a storage target for logs.\xd2\x01\x06target*o\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xfa\x02\n" +
+	"\x1fS3TargetServiceSetTargetRequest\x12&\n" +
+	"\tis_active\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\bisActive\x128\n" +
+	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3:\xe5\x01\x92A\xe1\x01\n" +
+	"n*\x13Set Target Response2=This data structure is used to set a storage target for logs.\xd2\x01\tis_active\xd2\x01\vtarget_spec*o\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
+	"\vtarget_spec\"\xbe\x02\n" +
+	" S3TargetServiceSetTargetResponse\x128\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x92A\xdb\x01\n" +
+	"h*\x13Set Target Response2HThis data structure is obtained after setting a storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xef\a\n" +
 	"\rTargetService\x12\xfd\x01\n" +
 	"\tGetTarget\x12*.com.coralogix.archive.v2.GetTargetRequest\x1a+.com.coralogix.archive.v2.GetTargetResponse\"\x96\x01\x92Aq\n" +
@@ -653,6 +866,33 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x15Internal server error¸\x02\x11\n" +
 	"\x0fValidate target\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v2/target:validate\x1a\xb5\x01\x92A\xb1\x01\n" +
 	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\x88\x06\n" +
+	"\x0fS3TargetService\x12\x9b\x02\n" +
+	"\tGetTarget\x129.com.coralogix.archive.v2.S3TargetServiceGetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceGetTargetResponse\"\x96\x01\x92Aq\n" +
+	"\x0eTarget Service\x12\n" +
+	"Get targetJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\f\n" +
+	"\n" +
+	"Get target\x82\xd3\xe4\x93\x02\f\x12\n" +
+	"/v2/target\x12\x9e\x02\n" +
+	"\tSetTarget\x129.com.coralogix.archive.v2.S3TargetServiceSetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceSetTargetResponse\"\x99\x01\x92Aq\n" +
+	"\x0eTarget Service\x12\n" +
+	"Set targetJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error¸\x02\f\n" +
+	"\n" +
+	"Set target\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
+	"/v2/target\x1a\xb5\x01\x92A\xb1\x01\n" +
+	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/b\x06proto3"
 
 var (
@@ -667,42 +907,53 @@ func file_com_coralogix_archive_v2_target_service_proto_rawDescGZIP() []byte {
 	return file_com_coralogix_archive_v2_target_service_proto_rawDescData
 }
 
-var file_com_coralogix_archive_v2_target_service_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_com_coralogix_archive_v2_target_service_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
 var file_com_coralogix_archive_v2_target_service_proto_goTypes = []any{
-	(*GetTargetRequest)(nil),          // 0: com.coralogix.archive.v2.GetTargetRequest
-	(*GetTargetResponse)(nil),         // 1: com.coralogix.archive.v2.GetTargetResponse
-	(*SetTargetRequest)(nil),          // 2: com.coralogix.archive.v2.SetTargetRequest
-	(*SetTargetResponse)(nil),         // 3: com.coralogix.archive.v2.SetTargetResponse
-	(*SetExternalTargetRequest)(nil),  // 4: com.coralogix.archive.v2.SetExternalTargetRequest
-	(*SetExternalTargetResponse)(nil), // 5: com.coralogix.archive.v2.SetExternalTargetResponse
-	(*CompanyArchiveConfig)(nil),      // 6: com.coralogix.archive.v2.CompanyArchiveConfig
-	(*ValidateTargetRequest)(nil),     // 7: com.coralogix.archive.v2.ValidateTargetRequest
-	(*ValidateTargetResponse)(nil),    // 8: com.coralogix.archive.v2.ValidateTargetResponse
-	(*Target)(nil),                    // 9: com.coralogix.archive.v2.Target
-	(*S3TargetSpec)(nil),              // 10: com.coralogix.archive.v2.S3TargetSpec
-	(*IBMCosTargetSpec)(nil),          // 11: com.coralogix.archive.v2.IBMCosTargetSpec
+	(*GetTargetRequest)(nil),                 // 0: com.coralogix.archive.v2.GetTargetRequest
+	(*GetTargetResponse)(nil),                // 1: com.coralogix.archive.v2.GetTargetResponse
+	(*SetTargetRequest)(nil),                 // 2: com.coralogix.archive.v2.SetTargetRequest
+	(*SetTargetResponse)(nil),                // 3: com.coralogix.archive.v2.SetTargetResponse
+	(*SetExternalTargetRequest)(nil),         // 4: com.coralogix.archive.v2.SetExternalTargetRequest
+	(*SetExternalTargetResponse)(nil),        // 5: com.coralogix.archive.v2.SetExternalTargetResponse
+	(*CompanyArchiveConfig)(nil),             // 6: com.coralogix.archive.v2.CompanyArchiveConfig
+	(*ValidateTargetRequest)(nil),            // 7: com.coralogix.archive.v2.ValidateTargetRequest
+	(*ValidateTargetResponse)(nil),           // 8: com.coralogix.archive.v2.ValidateTargetResponse
+	(*S3TargetServiceGetTargetRequest)(nil),  // 9: com.coralogix.archive.v2.S3TargetServiceGetTargetRequest
+	(*S3TargetServiceGetTargetResponse)(nil), // 10: com.coralogix.archive.v2.S3TargetServiceGetTargetResponse
+	(*S3TargetServiceSetTargetRequest)(nil),  // 11: com.coralogix.archive.v2.S3TargetServiceSetTargetRequest
+	(*S3TargetServiceSetTargetResponse)(nil), // 12: com.coralogix.archive.v2.S3TargetServiceSetTargetResponse
+	(*Target)(nil),                           // 13: com.coralogix.archive.v2.Target
+	(*S3TargetSpec)(nil),                     // 14: com.coralogix.archive.v2.S3TargetSpec
+	(*IBMCosTargetSpec)(nil),                 // 15: com.coralogix.archive.v2.IBMCosTargetSpec
 }
 var file_com_coralogix_archive_v2_target_service_proto_depIdxs = []int32{
-	9,  // 0: com.coralogix.archive.v2.GetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
-	10, // 1: com.coralogix.archive.v2.SetTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
-	11, // 2: com.coralogix.archive.v2.SetTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
-	9,  // 3: com.coralogix.archive.v2.SetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
-	10, // 4: com.coralogix.archive.v2.SetExternalTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
-	11, // 5: com.coralogix.archive.v2.SetExternalTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
-	9,  // 6: com.coralogix.archive.v2.SetExternalTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
-	10, // 7: com.coralogix.archive.v2.ValidateTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
-	11, // 8: com.coralogix.archive.v2.ValidateTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
-	0,  // 9: com.coralogix.archive.v2.TargetService.GetTarget:input_type -> com.coralogix.archive.v2.GetTargetRequest
-	2,  // 10: com.coralogix.archive.v2.TargetService.SetTarget:input_type -> com.coralogix.archive.v2.SetTargetRequest
-	7,  // 11: com.coralogix.archive.v2.TargetService.ValidateTarget:input_type -> com.coralogix.archive.v2.ValidateTargetRequest
-	1,  // 12: com.coralogix.archive.v2.TargetService.GetTarget:output_type -> com.coralogix.archive.v2.GetTargetResponse
-	3,  // 13: com.coralogix.archive.v2.TargetService.SetTarget:output_type -> com.coralogix.archive.v2.SetTargetResponse
-	8,  // 14: com.coralogix.archive.v2.TargetService.ValidateTarget:output_type -> com.coralogix.archive.v2.ValidateTargetResponse
-	12, // [12:15] is the sub-list for method output_type
-	9,  // [9:12] is the sub-list for method input_type
-	9,  // [9:9] is the sub-list for extension type_name
-	9,  // [9:9] is the sub-list for extension extendee
-	0,  // [0:9] is the sub-list for field type_name
+	13, // 0: com.coralogix.archive.v2.GetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
+	14, // 1: com.coralogix.archive.v2.SetTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
+	15, // 2: com.coralogix.archive.v2.SetTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
+	13, // 3: com.coralogix.archive.v2.SetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
+	14, // 4: com.coralogix.archive.v2.SetExternalTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
+	15, // 5: com.coralogix.archive.v2.SetExternalTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
+	13, // 6: com.coralogix.archive.v2.SetExternalTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
+	14, // 7: com.coralogix.archive.v2.ValidateTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
+	15, // 8: com.coralogix.archive.v2.ValidateTargetRequest.ibm_cos:type_name -> com.coralogix.archive.v2.IBMCosTargetSpec
+	13, // 9: com.coralogix.archive.v2.S3TargetServiceGetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
+	14, // 10: com.coralogix.archive.v2.S3TargetServiceSetTargetRequest.s3:type_name -> com.coralogix.archive.v2.S3TargetSpec
+	13, // 11: com.coralogix.archive.v2.S3TargetServiceSetTargetResponse.target:type_name -> com.coralogix.archive.v2.Target
+	0,  // 12: com.coralogix.archive.v2.TargetService.GetTarget:input_type -> com.coralogix.archive.v2.GetTargetRequest
+	2,  // 13: com.coralogix.archive.v2.TargetService.SetTarget:input_type -> com.coralogix.archive.v2.SetTargetRequest
+	7,  // 14: com.coralogix.archive.v2.TargetService.ValidateTarget:input_type -> com.coralogix.archive.v2.ValidateTargetRequest
+	9,  // 15: com.coralogix.archive.v2.S3TargetService.GetTarget:input_type -> com.coralogix.archive.v2.S3TargetServiceGetTargetRequest
+	11, // 16: com.coralogix.archive.v2.S3TargetService.SetTarget:input_type -> com.coralogix.archive.v2.S3TargetServiceSetTargetRequest
+	1,  // 17: com.coralogix.archive.v2.TargetService.GetTarget:output_type -> com.coralogix.archive.v2.GetTargetResponse
+	3,  // 18: com.coralogix.archive.v2.TargetService.SetTarget:output_type -> com.coralogix.archive.v2.SetTargetResponse
+	8,  // 19: com.coralogix.archive.v2.TargetService.ValidateTarget:output_type -> com.coralogix.archive.v2.ValidateTargetResponse
+	10, // 20: com.coralogix.archive.v2.S3TargetService.GetTarget:output_type -> com.coralogix.archive.v2.S3TargetServiceGetTargetResponse
+	12, // 21: com.coralogix.archive.v2.S3TargetService.SetTarget:output_type -> com.coralogix.archive.v2.S3TargetServiceSetTargetResponse
+	17, // [17:22] is the sub-list for method output_type
+	12, // [12:17] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_archive_v2_target_service_proto_init() }
@@ -723,15 +974,18 @@ func file_com_coralogix_archive_v2_target_service_proto_init() {
 		(*ValidateTargetRequest_S3)(nil),
 		(*ValidateTargetRequest_IbmCos)(nil),
 	}
+	file_com_coralogix_archive_v2_target_service_proto_msgTypes[11].OneofWrappers = []any{
+		(*S3TargetServiceSetTargetRequest_S3)(nil),
+	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_archive_v2_target_service_proto_rawDesc), len(file_com_coralogix_archive_v2_target_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   13,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   2,
 		},
 		GoTypes:           file_com_coralogix_archive_v2_target_service_proto_goTypes,
 		DependencyIndexes: file_com_coralogix_archive_v2_target_service_proto_depIdxs,
