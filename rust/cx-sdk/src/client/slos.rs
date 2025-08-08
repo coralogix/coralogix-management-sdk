@@ -110,6 +110,7 @@ impl SloClient {
             },
             &self.metadata_map,
         );
+        println!(" request: {:?}", request);
         self.service_client
             .lock()
             .await

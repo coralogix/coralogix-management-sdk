@@ -113,6 +113,7 @@ mod tests {
                 vec![],
                 None,
                 None,
+                None,
             )
             .await
             .unwrap();
@@ -133,6 +134,7 @@ mod tests {
                     chrono::Utc::now().timestamp_millis()
                 ),
                 "A Test Group".to_string(),
+                None,
                 None,
                 None,
                 None,
