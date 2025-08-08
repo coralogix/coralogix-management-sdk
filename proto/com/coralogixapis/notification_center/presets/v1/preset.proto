@@ -38,7 +38,7 @@ message Preset {
   // Indicates whether the preset is system-provided or custom-created by the user
   optional PresetType preset_type = 11;
   EntityType entity_type = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
-  optional string parent_id = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"preset_system_slack_alerts_detailed\"" }];
+  optional string parent_id = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"preset_system_slack_alerts_basic\"" }];
 }
 
 message PresetSummary {

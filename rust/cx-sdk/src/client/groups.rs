@@ -50,6 +50,7 @@ use crate::{
 
 pub use cx_api::proto::com::coralogix::permissions::v1::{
     CreateTeamGroupResponse,
+    GroupType,
     RoleId,
     TeamGroupId,
     TeamId,
@@ -97,6 +98,7 @@ impl GroupsClient {
     /// * `user_ids` - The [`UserId`]s of the users in the group.
     /// * `scope_filters` - The [`ScopeFilters`] of the group.
     /// * `next_gen_scope_id` - The next-gen scope ID of the group.
+    /// * `group_type` - Type of group to create
     pub async fn create(
         &self,
         name: String,
@@ -107,6 +109,7 @@ impl GroupsClient {
         user_ids: Vec<UserId>,
         scope_filters: Option<ScopeFilters>,
         next_gen_scope_id: Option<String>,
+        group_type: GroupType,
     ) -> Result<CreateTeamGroupResponse> {
         let request = make_request_with_metadata(
             CreateTeamGroupRequest {
@@ -118,6 +121,7 @@ impl GroupsClient {
                 user_ids,
                 scope_filters,
                 next_gen_scope_id,
+                group_type: group_type.into(),
             },
             &self.metadata_map,
         );
@@ -228,6 +232,7 @@ impl GroupsClient {
     /// * `user_updates` - The [`UserUpdates`] to apply to the group.
     /// * `scope_filters` - The [`ScopeFilters`] of the group.
     /// * `next_gen_scope_id` - The next-gen scope ID of the group.
+    /// * `group_type` - Type of group to create
     pub async fn update(
         &self,
         group_id: TeamGroupId,
@@ -238,6 +243,7 @@ impl GroupsClient {
         user_updates: Option<UserUpdates>,
         scope_filters: Option<ScopeFilters>,
         next_gen_scope_id: Option<String>,
+        group_type: Option<GroupType>,
     ) -> Result<UpdateTeamGroupResponse> {
         let request = make_request_with_metadata(
             UpdateTeamGroupRequest {
@@ -249,6 +255,7 @@ impl GroupsClient {
                 user_updates,
                 scope_filters,
                 next_gen_scope_id,
+                group_type: group_type.map(|g| g.into()),
             },
             &self.metadata_map,
         );

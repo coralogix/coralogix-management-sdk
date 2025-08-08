@@ -103,8 +103,13 @@ impl SloClient {
     /// # Arguments
     /// * `slo` - The [`ServiceSlo`] to create.
     pub async fn create(&self, slo: Slo) -> Result<CreateSloResponse> {
-        let request =
-            make_request_with_metadata(CreateSloRequest { slo: Some(slo) }, &self.metadata_map);
+        let request = make_request_with_metadata(
+            CreateSloRequest {
+                slo: Some(slo),
+                silence_data_validations: Some(true),
+            },
+            &self.metadata_map,
+        );
         self.service_client
             .lock()
             .await
@@ -126,8 +131,13 @@ impl SloClient {
     /// # Arguments
     /// * `slo` - The [`ServiceSlo`] to update.    
     pub async fn update(&self, slo: Slo) -> Result<ReplaceSloResponse> {
-        let request =
-            make_request_with_metadata(ReplaceSloRequest { slo: Some(slo) }, &self.metadata_map);
+        let request = make_request_with_metadata(
+            ReplaceSloRequest {
+                slo: Some(slo),
+                silence_data_validations: Some(true),
+            },
+            &self.metadata_map,
+        );
         self.service_client
             .lock()
             .await
