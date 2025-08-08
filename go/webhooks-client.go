@@ -252,7 +252,7 @@ type AwsEventBridgeWebhook = webhooks.OutgoingWebhook_AwsEventBridge
 
 // WebhooksClient is a client for the Coralogix Webhooks API.
 type WebhooksClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 const webhooksFeatureGroupID = "webhooks"
@@ -403,6 +403,6 @@ func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookReques
 }
 
 // NewWebhooksClient creates a new webhooks client.
-func NewWebhooksClient(c *CallPropertiesCreator) *WebhooksClient {
+func NewWebhooksClient(c CallPropertiesCreator) *WebhooksClient {
 	return &WebhooksClient{callPropertiesCreator: c}
 }

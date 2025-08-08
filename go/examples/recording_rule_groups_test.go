@@ -29,7 +29,7 @@ func TestRecordingRuleGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewRecordingRuleGroupSetsClient(creator)
 	setName := "TestRecordingRuleGroupSet " + strconv.FormatInt(time.Now().UnixMilli(), 10)
 	interval := uint32(180)

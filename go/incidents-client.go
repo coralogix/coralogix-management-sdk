@@ -207,7 +207,7 @@ const (
 
 // IncidentsClient is a client for the Incidents service
 type IncidentsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // GetIncident gets an incident by its ID
@@ -481,7 +481,7 @@ func (c IncidentsClient) ListIncidentEventsFilterValues(ctx context.Context, req
 }
 
 // NewIncidentsClient creates a new IncidentsClient
-func NewIncidentsClient(creator *CallPropertiesCreator) *IncidentsClient {
+func NewIncidentsClient(creator CallPropertiesCreator) *IncidentsClient {
 	return &IncidentsClient{
 		callPropertiesCreator: creator,
 	}

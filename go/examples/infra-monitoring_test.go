@@ -30,7 +30,7 @@ func TestSlos(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSLOsClient(creator)
 	sloDescription := "description"
 	// sloId := "coralogix_slo_go_example"

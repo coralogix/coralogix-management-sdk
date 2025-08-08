@@ -107,7 +107,7 @@ const (
 
 // LegacySLOsClient is a client for the Coralogix SLOs API.
 type LegacySLOsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new SLO.
@@ -219,6 +219,6 @@ func (c LegacySLOsClient) List(ctx context.Context, req *legacySlos.ListServiceS
 }
 
 // NewLegacySLOsClient creates a new SLOs client.
-func NewLegacySLOsClient(c *CallPropertiesCreator) *LegacySLOsClient {
+func NewLegacySLOsClient(c CallPropertiesCreator) *LegacySLOsClient {
 	return &LegacySLOsClient{callPropertiesCreator: c}
 }

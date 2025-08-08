@@ -348,7 +348,7 @@ const (
 
 // NotificationsClient is a client for the Coralogix Notifications API.
 type NotificationsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // CreateConnector creates a new connector.
@@ -855,6 +855,6 @@ func (c NotificationsClient) TestRoutingConditionValid(ctx context.Context, req 
 }
 
 // NewNotificationsClient creates a new notifications' client.
-func NewNotificationsClient(c *CallPropertiesCreator) *NotificationsClient {
+func NewNotificationsClient(c CallPropertiesCreator) *NotificationsClient {
 	return &NotificationsClient{callPropertiesCreator: c}
 }

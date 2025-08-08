@@ -134,7 +134,7 @@ const (
 
 // GroupsClient is a client for the Groups API
 type GroupsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new group
@@ -282,6 +282,6 @@ func (c GroupsClient) GetUsers(ctx context.Context, req *GetGroupUsersRequest) (
 }
 
 // NewGroupsClient creates a new GroupsClient
-func NewGroupsClient(callPropertiesCreator *CallPropertiesCreator) *GroupsClient {
+func NewGroupsClient(callPropertiesCreator CallPropertiesCreator) *GroupsClient {
 	return &GroupsClient{callPropertiesCreator: callPropertiesCreator}
 }

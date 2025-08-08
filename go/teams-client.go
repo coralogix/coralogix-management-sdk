@@ -61,7 +61,7 @@ const (
 // TeamsClient is a client for the Coralogix Teams API.
 // Read more at https://coralogix.com/docs/user-team-management/ and https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
 type TeamsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new team.
@@ -191,6 +191,6 @@ func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*tea
 }
 
 // NewTeamsClient creates a new teams client.
-func NewTeamsClient(c *CallPropertiesCreator) *TeamsClient {
+func NewTeamsClient(c CallPropertiesCreator) *TeamsClient {
 	return &TeamsClient{callPropertiesCreator: c}
 }
