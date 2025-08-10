@@ -118,7 +118,7 @@ const (
 
 // EventsClient is a client for the Coralogix Events API
 type EventsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Get gets a single event by ID
@@ -212,6 +212,6 @@ func (e EventsClient) ListCount(ctx context.Context, req *ListEventsCountRequest
 }
 
 // NewEventsClient creates a new events client
-func NewEventsClient(c *CallPropertiesCreator) *EventsClient {
+func NewEventsClient(c CallPropertiesCreator) *EventsClient {
 	return &EventsClient{callPropertiesCreator: c}
 }

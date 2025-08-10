@@ -92,7 +92,7 @@ const (
 
 // ViewsClient is a client for the views service
 type ViewsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new view
@@ -186,6 +186,6 @@ func (c ViewsClient) Delete(ctx context.Context, req *DeleteViewRequest) (*Delet
 }
 
 // NewViewsClient creates a new ViewsClient
-func NewViewsClient(c *CallPropertiesCreator) *ViewsClient {
+func NewViewsClient(c CallPropertiesCreator) *ViewsClient {
 	return &ViewsClient{callPropertiesCreator: c}
 }
