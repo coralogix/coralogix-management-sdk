@@ -370,3 +370,71 @@ func TestSamlSetUpWithUrl(t *testing.T) {
 	})
 	assertNilAndPrintError(t, e)
 }
+
+func TestIpAccess(t *testing.T) {
+	region, err := cxsdk.CoralogixRegionFromEnv()
+	assertNilAndPrintError(t, err)
+	authContext, err := cxsdk.AuthContextFromEnv()
+	assertNilAndPrintError(t, err)
+	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	c := cxsdk.NewIPAccessClient(creator)
+
+	// replace without ID, so it will create a new settings in case it doesn't exist
+	// if it exists, it will replace the existing settings
+	createRes, err := c.Replace(context.Background(), &cxsdk.ReplaceCompanyIPAccessSettingsRequest{
+		IpAccess: []*cxsdk.IPAccess{
+			{
+				Name:    "Office Network",
+				IpRange: "31.154.215.114/32",
+				Enabled: false,
+			},
+			{
+				Name:    "VPN",
+				IpRange: "198.51.100.0/24",
+				Enabled: false,
+			},
+		},
+		EnableCoralogixCustomerSupportAccess: cxsdk.CoralogixCustomerSupportAccessDisabled,
+	})
+	assertNilAndPrintError(t, err)
+
+	_, err = c.Get(context.Background(), &cxsdk.GetCompanyIPAccessSettingsRequest{
+		Id: &createRes.Settings.Id,
+	})
+	assertNilAndPrintError(t, err)
+
+	replaceRes, err := c.Replace(context.Background(), &cxsdk.ReplaceCompanyIPAccessSettingsRequest{
+		Id: &createRes.Settings.Id,
+		IpAccess: []*cxsdk.IPAccess{
+			{
+				Name:    "Office Network",
+				IpRange: "31.154.215.114/32",
+				Enabled: false,
+			},
+			{
+				Name:    "VPN",
+				IpRange: "198.51.100.0/18",
+				Enabled: false,
+			},
+		},
+		EnableCoralogixCustomerSupportAccess: cxsdk.CoralogixCustomerSupportAccessDisabled,
+	})
+	assertNilAndPrintError(t, err)
+
+	found := false
+	for _, ipAccess := range replaceRes.Settings.IpAccess {
+		if ipAccess.Name == "VPN" {
+			assert.Equal(t, "198.51.100.0/18", ipAccess.IpRange)
+		}
+		found = true
+		break
+	}
+	if !found {
+		t.Error("Expected 'VPN' entry not found in IpAccess")
+	}
+
+	_, err = c.Delete(context.Background(), &cxsdk.DeleteCompanyIPAccessSettingsRequest{
+		Id: &replaceRes.Settings.Id,
+	})
+	assertNilAndPrintError(t, err)
+}

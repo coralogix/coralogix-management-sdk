@@ -355,7 +355,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.123"
+revision = "v0.1.124"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -366,6 +366,7 @@ allow_policies = [
     "src/com/coralogixapis/aaa/apikeys/v3/api_keys.proto",
     "src/com/coralogixapis/aaa/rbac/v2/roles.proto",
     "src/com/coralogixapis/aaa/sso/v2/saml.proto",
+    "src/com/coralogixapis/aaa/v1/ip_access.proto",
 ]
 
 [cx-api-archive]
