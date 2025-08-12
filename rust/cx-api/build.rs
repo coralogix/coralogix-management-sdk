@@ -83,6 +83,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         events_service(&root),
         #[cfg(feature = "extensions")]
         extensions_service(&root),
+        #[cfg(feature = "ip_access")]
+        ip_access_service(&root),
     ]
     .concat();
 
@@ -339,4 +341,8 @@ fn extensions_service(root: &str) -> Vec<String> {
             root
         ),
     ]
+}
+
+fn ip_access_service(root: &str) -> Vec<String> {
+    vec![format!("{}/com/coralogixapis/aaa/v1/ip_access.proto", root)]
 }

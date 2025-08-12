@@ -45,6 +45,7 @@ default = [
     "target",
     "team",
     "views",
+    "ip_access"
 ]
 alerts = []
 rules = []
@@ -74,6 +75,7 @@ notifications = []
 contextual_data_integrations = []
 incidents = []
 events = []
+ip_access = []
 
 [dependencies]
 prost = { workspace = true }

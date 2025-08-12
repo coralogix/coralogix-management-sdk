@@ -101,3 +101,6 @@ pub mod views_folders;
 
 /// This module contains the client for the Extensions API.
 pub mod extensions;
+
+/// This module contains the client for the IP Access API.
+pub mod ip_access;

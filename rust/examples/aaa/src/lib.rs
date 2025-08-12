@@ -26,6 +26,7 @@ mod tests {
                 GroupsClient,
                 RoleId,
                 TeamId,
+                GroupType,
             },
             saml::{
                 IdpParameters,
@@ -43,6 +44,11 @@ mod tests {
                 ScimUserGroup,
                 ScimUserName,
                 UsersClient,
+            },
+            ip_access::{
+                CoralogixCustomerSupportAccess,
+                IpAccess,
+                IpAccessClient,
             },
         },
     };
@@ -92,6 +98,93 @@ mod tests {
     }
 
     #[tokio::test]
+    async fn test_ip_access_client() {
+        let client = IpAccessClient::new(
+            AuthContext::from_env(),
+            CoralogixRegion::from_env().unwrap(),
+        )
+            .unwrap();
+
+        // replace without ID, so it will create a new settings in case it doesn't exist
+        // if it exists, it will replace the existing settings
+        let create_res = client
+            .replace(
+                None,
+                vec![
+                    IpAccess {
+                        name: "Office Network".to_string(),
+                        ip_range: "31.154.215.114/32".to_string(),
+                        enabled: false,
+                    },
+                    IpAccess {
+                        name: "VPN".to_string(),
+                        ip_range: "198.51.100.0/24".to_string(),
+                        enabled: false,
+                    },
+                ],
+                CoralogixCustomerSupportAccess::Disabled,
+            )
+            .await
+            .unwrap();
+
+        let settings_id = create_res
+            .settings
+            .as_ref()
+            .expect("create: settings should exist")
+            .id
+            .clone();
+
+        let _ = client.get(Some(settings_id.clone())).await.unwrap();
+
+        let replace_res = client
+            .replace(
+                Some(settings_id.clone()),
+                vec![
+                    IpAccess {
+                        name: "Office Network".to_string(),
+                        ip_range: "31.154.215.114/32".to_string(),
+                        enabled: false,
+                    },
+                    IpAccess {
+                        name: "VPN".to_string(),
+                        ip_range: "198.51.100.0/18".to_string(),
+                        enabled: false,
+                    },
+                ],
+                CoralogixCustomerSupportAccess::Disabled,
+            )
+            .await
+            .unwrap();
+
+        let settings = replace_res
+            .settings
+            .as_ref()
+            .expect("replace: settings should exist");
+
+        let mut found = false;
+        for ip in settings.ip_access.values() {
+            if ip.name == "VPN" {
+                assert_eq!(ip.ip_range, "198.51.100.0/18");
+                found = true;
+                break;
+            }
+        }
+        assert!(found, "Expected 'VPN' entry not found in IpAccess");
+
+        let _ = client
+            .delete(Some(
+                replace_res
+                    .settings
+                    .as_ref()
+                    .expect("replace: settings should exist")
+                    .id
+                    .clone(),
+            ))
+            .await
+            .unwrap();
+    }
+
+    #[tokio::test]
     async fn test_groups() {
         let team_id_value = std::env::var("TEAM_ID").unwrap().parse::<u32>().unwrap();
         let client = GroupsClient::new(
@@ -113,7 +206,7 @@ mod tests {
                 vec![],
                 None,
                 None,
-                None,
+                GroupType::Unspecified,
             )
             .await
             .unwrap();
