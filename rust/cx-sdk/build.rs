@@ -20,6 +20,10 @@ use std::process::{
 
 const DEFAULT_VERSION_STRING: &str = "unknown_version";
 
+#[deprecated(
+    since = "1.8.0",
+    note = "The SDK will receive a major update in Fall 2025. Use https://docs.coralogix.com/ for minimal changes.  "
+)]
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let rust_compiler_binary = std::env::var("RUSTC").unwrap_or_else(|_| "rustc".to_string());
     let rustc_version_command = Command::new(rust_compiler_binary)

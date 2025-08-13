@@ -294,6 +294,7 @@ func (c *ClientSet) IPAccess() *IPAccessClient {
 }
 
 // NewClientSet Creates a new ClientSet.
+// Deprecated: The SDK will receive a major update in Fall 2025. Use https://docs.coralogix.com/ for minimal changes.  
 func NewClientSet(apikeyCPC *CallPropertiesCreator) *ClientSet {
 	return &ClientSet{
 		ruleGroups:          NewRuleGroupsClient(apikeyCPC),
