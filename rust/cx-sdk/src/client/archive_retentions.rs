@@ -122,29 +122,47 @@ impl ArchiveRetentionClient {
         &self,
         retention_update_elements: Vec<RetentionUpdateElement>,
     ) -> Result<UpdateRetentionsResponse> {
-        Ok(self
-            .service_client
-            .lock()
-            .await
-            .update_retentions(make_request_with_metadata(
-                UpdateRetentionsRequest {
-                    retention_update_elements,
-                },
-                &self.metadata_map,
-            ))
-            .await
-            .map_err(|status| {
+        let response = {
+            let mut client = self.service_client.lock().await;
+            let update_response = client
+                .update_retentions(make_request_with_metadata(
+                    UpdateRetentionsRequest {
+                        retention_update_elements,
+                    },
+                    &self.metadata_map,
+                ))
+                .await;
+            match update_response.map_err(|status| {
                 SdkError::ApiError(SdkApiError {
                     status,
                     endpoint: "/com.coralogix.archive.v1.RetentionsService/UpdateRetentions"
                         .to_string(),
                     feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
                 })
-            })?
-            .into_inner())
+            }) {
+                Ok(output) => {
+                    let _ = client
+                        .activate_retentions(ActivateRetentionsRequest {})
+                        .await
+                        .map_err(|status| {
+                            SdkError::ApiError(SdkApiError {
+                                status,
+                                endpoint:
+                                    "/com.coralogix.archive.v1.RetentionsService/ActivateRetentions"
+                                        .to_string(),
+                                feature_group: ARCHIVE_FEATURE_GROUP_ID.to_string(),
+                            })
+                        })?;
+                    output.into_inner()
+                }
+                Err(error) => return Err(error),
+            }
+        };
+        Ok(response)
     }
 
-    /// Activates all archive retentions
+    /// Activates all archive retentions    
+    #[deprecated(since = "1.8.0", note = "Update activates automatically")]
     pub async fn activate(&self) -> Result<ActivateRetentionsResponse> {
         Ok(self
             .service_client
