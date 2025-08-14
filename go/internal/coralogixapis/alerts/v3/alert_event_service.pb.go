@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -657,7 +657,7 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_service_proto protoreflec
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
+	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
 	"\x19GetAlertEventStatsRequest\x12.\n" +
 	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x03ids\x12K\n" +
 	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys:)\x92A&\n" +

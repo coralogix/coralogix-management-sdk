@@ -127,6 +127,55 @@ func (WindowSloWindow) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{1}
 }
 
+type MissingDataStrategy int32
+
+const (
+	MissingDataStrategy_MISSING_DATA_STRATEGY_UNCOUNTED MissingDataStrategy = 0
+	MissingDataStrategy_MISSING_DATA_STRATEGY_GOOD      MissingDataStrategy = 1
+	MissingDataStrategy_MISSING_DATA_STRATEGY_BAD       MissingDataStrategy = 2
+)
+
+// Enum value maps for MissingDataStrategy.
+var (
+	MissingDataStrategy_name = map[int32]string{
+		0: "MISSING_DATA_STRATEGY_UNCOUNTED",
+		1: "MISSING_DATA_STRATEGY_GOOD",
+		2: "MISSING_DATA_STRATEGY_BAD",
+	}
+	MissingDataStrategy_value = map[string]int32{
+		"MISSING_DATA_STRATEGY_UNCOUNTED": 0,
+		"MISSING_DATA_STRATEGY_GOOD":      1,
+		"MISSING_DATA_STRATEGY_BAD":       2,
+	}
+)
+
+func (x MissingDataStrategy) Enum() *MissingDataStrategy {
+	p := new(MissingDataStrategy)
+	*p = x
+	return p
+}
+
+func (x MissingDataStrategy) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (MissingDataStrategy) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[2].Descriptor()
+}
+
+func (MissingDataStrategy) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[2]
+}
+
+func (x MissingDataStrategy) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use MissingDataStrategy.Descriptor instead.
+func (MissingDataStrategy) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{2}
+}
+
 type SloTimeFrame int32
 
 const (
@@ -166,11 +215,11 @@ func (x SloTimeFrame) String() string {
 }
 
 func (SloTimeFrame) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[2].Descriptor()
+	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3].Descriptor()
 }
 
 func (SloTimeFrame) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[2]
+	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3]
 }
 
 func (x SloTimeFrame) Number() protoreflect.EnumNumber {
@@ -179,7 +228,7 @@ func (x SloTimeFrame) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SloTimeFrame.Descriptor instead.
 func (SloTimeFrame) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{2}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{3}
 }
 
 type SloConstantFilterField int32
@@ -215,11 +264,11 @@ func (x SloConstantFilterField) String() string {
 }
 
 func (SloConstantFilterField) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3].Descriptor()
+	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4].Descriptor()
 }
 
 func (SloConstantFilterField) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3]
+	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4]
 }
 
 func (x SloConstantFilterField) Number() protoreflect.EnumNumber {
@@ -228,7 +277,7 @@ func (x SloConstantFilterField) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SloConstantFilterField.Descriptor instead.
 func (SloConstantFilterField) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{4}
 }
 
 type Metric struct {
@@ -328,13 +377,14 @@ func (x *RequestBasedMetricSli) GetTotalEvents() *Metric {
 }
 
 type WindowBasedMetricSli struct {
-	state              protoimpl.MessageState `protogen:"open.v1"`
-	Query              *Metric                `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
-	Window             WindowSloWindow        `protobuf:"varint,2,opt,name=window,proto3,enum=com.coralogixapis.slo.v1.WindowSloWindow" json:"window,omitempty"`
-	ComparisonOperator ComparisonOperator     `protobuf:"varint,3,opt,name=comparison_operator,json=comparisonOperator,proto3,enum=com.coralogixapis.slo.v1.ComparisonOperator" json:"comparison_operator,omitempty"`
-	Threshold          float32                `protobuf:"fixed32,4,opt,name=threshold,proto3" json:"threshold,omitempty"`
-	unknownFields      protoimpl.UnknownFields
-	sizeCache          protoimpl.SizeCache
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	Query               *Metric                `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	Window              WindowSloWindow        `protobuf:"varint,2,opt,name=window,proto3,enum=com.coralogixapis.slo.v1.WindowSloWindow" json:"window,omitempty"`
+	ComparisonOperator  ComparisonOperator     `protobuf:"varint,3,opt,name=comparison_operator,json=comparisonOperator,proto3,enum=com.coralogixapis.slo.v1.ComparisonOperator" json:"comparison_operator,omitempty"`
+	Threshold           float32                `protobuf:"fixed32,4,opt,name=threshold,proto3" json:"threshold,omitempty"`
+	MissingDataStrategy MissingDataStrategy    `protobuf:"varint,5,opt,name=missing_data_strategy,json=missingDataStrategy,proto3,enum=com.coralogixapis.slo.v1.MissingDataStrategy" json:"missing_data_strategy,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
 }
 
 func (x *WindowBasedMetricSli) Reset() {
@@ -393,6 +443,13 @@ func (x *WindowBasedMetricSli) GetThreshold() float32 {
 		return x.Threshold
 	}
 	return 0
+}
+
+func (x *WindowBasedMetricSli) GetMissingDataStrategy() MissingDataStrategy {
+	if x != nil {
+		return x.MissingDataStrategy
+	}
+	return MissingDataStrategy_MISSING_DATA_STRATEGY_UNCOUNTED
 }
 
 type Revision struct {
@@ -983,12 +1040,13 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\vgood_events\x18\x01 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\n" +
 	"goodEvents\x12C\n" +
 	"\ftotal_events\x18\x02 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\vtotalEvents:m\x92Aj\n" +
-	"h*\x15RequestBasedMetricSli22Definition of a request-based SLI based on metrics\xd2\x01\vgood_events\xd2\x01\ftotal_events\"\x9d\x03\n" +
+	"h*\x15RequestBasedMetricSli22Definition of a request-based SLI based on metrics\xd2\x01\vgood_events\xd2\x01\ftotal_events\"\x80\x04\n" +
 	"\x14WindowBasedMetricSli\x126\n" +
 	"\x05query\x18\x01 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\x05query\x12A\n" +
 	"\x06window\x18\x02 \x01(\x0e2).com.coralogixapis.slo.v1.WindowSloWindowR\x06window\x12]\n" +
 	"\x13comparison_operator\x18\x03 \x01(\x0e2,.com.coralogixapis.slo.v1.ComparisonOperatorR\x12comparisonOperator\x12'\n" +
-	"\tthreshold\x18\x04 \x01(\x02B\t\x92A\x06J\x040.95R\tthreshold:\x81\x01\x92A~\n" +
+	"\tthreshold\x18\x04 \x01(\x02B\t\x92A\x06J\x040.95R\tthreshold\x12a\n" +
+	"\x15missing_data_strategy\x18\x05 \x01(\x0e2-.com.coralogixapis.slo.v1.MissingDataStrategyR\x13missingDataStrategy:\x81\x01\x92A~\n" +
 	"|*\x14WindowBasedMetricSli21Definition of a window-based SLI based on metrics\xd2\x01\x05query\xd2\x01\x06window\xd2\x01\x13comparison_operator\xd2\x01\tthreshold\"\xd7\x01\n" +
 	"\bRevision\x12\"\n" +
 	"\brevision\x18\x01 \x01(\x05B\x06\x92A\x03J\x011R\brevision\x12;\n" +
@@ -1058,7 +1116,11 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\x0fWindowSloWindow\x12!\n" +
 	"\x1dWINDOW_SLO_WINDOW_UNSPECIFIED\x10\x00\x12\x1e\n" +
 	"\x1aWINDOW_SLO_WINDOW_1_MINUTE\x10\x01\x12\x1f\n" +
-	"\x1bWINDOW_SLO_WINDOW_5_MINUTES\x10\x02*\x9d\x01\n" +
+	"\x1bWINDOW_SLO_WINDOW_5_MINUTES\x10\x02*y\n" +
+	"\x13MissingDataStrategy\x12#\n" +
+	"\x1fMISSING_DATA_STRATEGY_UNCOUNTED\x10\x00\x12\x1e\n" +
+	"\x1aMISSING_DATA_STRATEGY_GOOD\x10\x01\x12\x1d\n" +
+	"\x19MISSING_DATA_STRATEGY_BAD\x10\x02*\x9d\x01\n" +
 	"\fSloTimeFrame\x12\x1e\n" +
 	"\x1aSLO_TIME_FRAME_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SLO_TIME_FRAME_7_DAYS\x10\x01\x12\x1a\n" +
@@ -1082,52 +1144,54 @@ func file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_slo_v1_slo_proto_rawDescData
 }
 
-var file_com_coralogixapis_slo_v1_slo_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_com_coralogixapis_slo_v1_slo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_com_coralogixapis_slo_v1_slo_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_com_coralogixapis_slo_v1_slo_proto_goTypes = []any{
 	(ComparisonOperator)(0),       // 0: com.coralogixapis.slo.v1.ComparisonOperator
 	(WindowSloWindow)(0),          // 1: com.coralogixapis.slo.v1.WindowSloWindow
-	(SloTimeFrame)(0),             // 2: com.coralogixapis.slo.v1.SloTimeFrame
-	(SloConstantFilterField)(0),   // 3: com.coralogixapis.slo.v1.SloConstantFilterField
-	(*Metric)(nil),                // 4: com.coralogixapis.slo.v1.Metric
-	(*RequestBasedMetricSli)(nil), // 5: com.coralogixapis.slo.v1.RequestBasedMetricSli
-	(*WindowBasedMetricSli)(nil),  // 6: com.coralogixapis.slo.v1.WindowBasedMetricSli
-	(*Revision)(nil),              // 7: com.coralogixapis.slo.v1.Revision
-	(*Grouping)(nil),              // 8: com.coralogixapis.slo.v1.Grouping
-	(*Slo)(nil),                   // 9: com.coralogixapis.slo.v1.Slo
-	(*SloFilterField)(nil),        // 10: com.coralogixapis.slo.v1.SloFilterField
-	(*IsFilterPredicate)(nil),     // 11: com.coralogixapis.slo.v1.IsFilterPredicate
-	(*SloFilterPredicate)(nil),    // 12: com.coralogixapis.slo.v1.SloFilterPredicate
-	(*SloFilter)(nil),             // 13: com.coralogixapis.slo.v1.SloFilter
-	(*SloFilters)(nil),            // 14: com.coralogixapis.slo.v1.SloFilters
-	nil,                           // 15: com.coralogixapis.slo.v1.Slo.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 16: google.protobuf.Timestamp
+	(MissingDataStrategy)(0),      // 2: com.coralogixapis.slo.v1.MissingDataStrategy
+	(SloTimeFrame)(0),             // 3: com.coralogixapis.slo.v1.SloTimeFrame
+	(SloConstantFilterField)(0),   // 4: com.coralogixapis.slo.v1.SloConstantFilterField
+	(*Metric)(nil),                // 5: com.coralogixapis.slo.v1.Metric
+	(*RequestBasedMetricSli)(nil), // 6: com.coralogixapis.slo.v1.RequestBasedMetricSli
+	(*WindowBasedMetricSli)(nil),  // 7: com.coralogixapis.slo.v1.WindowBasedMetricSli
+	(*Revision)(nil),              // 8: com.coralogixapis.slo.v1.Revision
+	(*Grouping)(nil),              // 9: com.coralogixapis.slo.v1.Grouping
+	(*Slo)(nil),                   // 10: com.coralogixapis.slo.v1.Slo
+	(*SloFilterField)(nil),        // 11: com.coralogixapis.slo.v1.SloFilterField
+	(*IsFilterPredicate)(nil),     // 12: com.coralogixapis.slo.v1.IsFilterPredicate
+	(*SloFilterPredicate)(nil),    // 13: com.coralogixapis.slo.v1.SloFilterPredicate
+	(*SloFilter)(nil),             // 14: com.coralogixapis.slo.v1.SloFilter
+	(*SloFilters)(nil),            // 15: com.coralogixapis.slo.v1.SloFilters
+	nil,                           // 16: com.coralogixapis.slo.v1.Slo.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 17: google.protobuf.Timestamp
 }
 var file_com_coralogixapis_slo_v1_slo_proto_depIdxs = []int32{
-	4,  // 0: com.coralogixapis.slo.v1.RequestBasedMetricSli.good_events:type_name -> com.coralogixapis.slo.v1.Metric
-	4,  // 1: com.coralogixapis.slo.v1.RequestBasedMetricSli.total_events:type_name -> com.coralogixapis.slo.v1.Metric
-	4,  // 2: com.coralogixapis.slo.v1.WindowBasedMetricSli.query:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 0: com.coralogixapis.slo.v1.RequestBasedMetricSli.good_events:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 1: com.coralogixapis.slo.v1.RequestBasedMetricSli.total_events:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 2: com.coralogixapis.slo.v1.WindowBasedMetricSli.query:type_name -> com.coralogixapis.slo.v1.Metric
 	1,  // 3: com.coralogixapis.slo.v1.WindowBasedMetricSli.window:type_name -> com.coralogixapis.slo.v1.WindowSloWindow
 	0,  // 4: com.coralogixapis.slo.v1.WindowBasedMetricSli.comparison_operator:type_name -> com.coralogixapis.slo.v1.ComparisonOperator
-	16, // 5: com.coralogixapis.slo.v1.Revision.update_time:type_name -> google.protobuf.Timestamp
-	15, // 6: com.coralogixapis.slo.v1.Slo.labels:type_name -> com.coralogixapis.slo.v1.Slo.LabelsEntry
-	7,  // 7: com.coralogixapis.slo.v1.Slo.revision:type_name -> com.coralogixapis.slo.v1.Revision
-	8,  // 8: com.coralogixapis.slo.v1.Slo.grouping:type_name -> com.coralogixapis.slo.v1.Grouping
-	16, // 9: com.coralogixapis.slo.v1.Slo.create_time:type_name -> google.protobuf.Timestamp
-	16, // 10: com.coralogixapis.slo.v1.Slo.update_time:type_name -> google.protobuf.Timestamp
-	2,  // 11: com.coralogixapis.slo.v1.Slo.slo_time_frame:type_name -> com.coralogixapis.slo.v1.SloTimeFrame
-	5,  // 12: com.coralogixapis.slo.v1.Slo.request_based_metric_sli:type_name -> com.coralogixapis.slo.v1.RequestBasedMetricSli
-	6,  // 13: com.coralogixapis.slo.v1.Slo.window_based_metric_sli:type_name -> com.coralogixapis.slo.v1.WindowBasedMetricSli
-	3,  // 14: com.coralogixapis.slo.v1.SloFilterField.const_filter:type_name -> com.coralogixapis.slo.v1.SloConstantFilterField
-	11, // 15: com.coralogixapis.slo.v1.SloFilterPredicate.is:type_name -> com.coralogixapis.slo.v1.IsFilterPredicate
-	10, // 16: com.coralogixapis.slo.v1.SloFilter.field:type_name -> com.coralogixapis.slo.v1.SloFilterField
-	12, // 17: com.coralogixapis.slo.v1.SloFilter.predicate:type_name -> com.coralogixapis.slo.v1.SloFilterPredicate
-	13, // 18: com.coralogixapis.slo.v1.SloFilters.filters:type_name -> com.coralogixapis.slo.v1.SloFilter
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	2,  // 5: com.coralogixapis.slo.v1.WindowBasedMetricSli.missing_data_strategy:type_name -> com.coralogixapis.slo.v1.MissingDataStrategy
+	17, // 6: com.coralogixapis.slo.v1.Revision.update_time:type_name -> google.protobuf.Timestamp
+	16, // 7: com.coralogixapis.slo.v1.Slo.labels:type_name -> com.coralogixapis.slo.v1.Slo.LabelsEntry
+	8,  // 8: com.coralogixapis.slo.v1.Slo.revision:type_name -> com.coralogixapis.slo.v1.Revision
+	9,  // 9: com.coralogixapis.slo.v1.Slo.grouping:type_name -> com.coralogixapis.slo.v1.Grouping
+	17, // 10: com.coralogixapis.slo.v1.Slo.create_time:type_name -> google.protobuf.Timestamp
+	17, // 11: com.coralogixapis.slo.v1.Slo.update_time:type_name -> google.protobuf.Timestamp
+	3,  // 12: com.coralogixapis.slo.v1.Slo.slo_time_frame:type_name -> com.coralogixapis.slo.v1.SloTimeFrame
+	6,  // 13: com.coralogixapis.slo.v1.Slo.request_based_metric_sli:type_name -> com.coralogixapis.slo.v1.RequestBasedMetricSli
+	7,  // 14: com.coralogixapis.slo.v1.Slo.window_based_metric_sli:type_name -> com.coralogixapis.slo.v1.WindowBasedMetricSli
+	4,  // 15: com.coralogixapis.slo.v1.SloFilterField.const_filter:type_name -> com.coralogixapis.slo.v1.SloConstantFilterField
+	12, // 16: com.coralogixapis.slo.v1.SloFilterPredicate.is:type_name -> com.coralogixapis.slo.v1.IsFilterPredicate
+	11, // 17: com.coralogixapis.slo.v1.SloFilter.field:type_name -> com.coralogixapis.slo.v1.SloFilterField
+	13, // 18: com.coralogixapis.slo.v1.SloFilter.predicate:type_name -> com.coralogixapis.slo.v1.SloFilterPredicate
+	14, // 19: com.coralogixapis.slo.v1.SloFilters.filters:type_name -> com.coralogixapis.slo.v1.SloFilter
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_slo_v1_slo_proto_init() }
@@ -1152,7 +1216,7 @@ func file_com_coralogixapis_slo_v1_slo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_slo_v1_slo_proto_rawDesc), len(file_com_coralogixapis_slo_v1_slo_proto_rawDesc)),
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,

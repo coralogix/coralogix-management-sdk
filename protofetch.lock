@@ -15,8 +15,8 @@ commit_hash = "cad91dc60183847c4a70dc0960a9ee5fb00a2982"
 [[dependencies]]
 name = "cx-api-alerts"
 url = "github.com/coralogix/cx-api-alerts"
-revision = "v0.5.28"
-commit_hash = "28d8141a3ed7ca39b5cf5089d16ab99730fc93cf"
+revision = "v0.5.30"
+commit_hash = "adacbf8f6b1cec8c40a84a20c5c34de336bd43b4"
 
 [[dependencies]]
 name = "cx-api-apm"
@@ -45,14 +45,14 @@ commit_hash = "3ae83769ebd3eb786d5ffa26720537fef4706e62"
 [[dependencies]]
 name = "cx-api-dashboards"
 url = "github.com/coralogix/cx-api-dashboards"
-revision = "v2.7.4"
-commit_hash = "09dd7ba49919d6fd83c5bb1eb5a889d68a47b7d7"
+revision = "v2.7.8"
+commit_hash = "869aedb474989dd69721689e04ed256de711339b"
 
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.3.12"
-commit_hash = "48f64a518f417d50a3cebaf63dda9810b6a113d5"
+revision = "v0.3.14"
+commit_hash = "3d706fa9342eb2e58caa71b1591759e336bf5960"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -117,8 +117,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.124"
-commit_hash = "020fe5289e093b67d3d488570353fe8a24b5f87a"
+revision = "v0.1.125"
+commit_hash = "a3ea5c46e6f644031e72d9fb05aee228da485498"
 
 [[dependencies]]
 name = "cx-api-quota"
@@ -135,8 +135,8 @@ commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
 [[dependencies]]
 name = "cx-api-slo"
 url = "github.com/coralogix/cx-api-slo"
-revision = "v0.0.30"
-commit_hash = "7d6392914e800d49b61f28ec0e455928d2839b93"
+revision = "v0.0.32"
+commit_hash = "cf6e15a00ce088ce6129b1ec02336a9770edffce"
 
 [[dependencies]]
 name = "cx-api-views"
@@ -159,5 +159,5 @@ commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 [[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
-revision = "v0.17.3"
-commit_hash = "0c8c3119f41074074234c210aae268461ccbb758"
+revision = "v0.18.0"
+commit_hash = "8cedca2a9902dc45a95e7295297eba30c1a25a69"

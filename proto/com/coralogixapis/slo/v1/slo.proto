@@ -30,6 +30,13 @@ enum WindowSloWindow {
   WINDOW_SLO_WINDOW_5_MINUTES = 2;
 }
 
+enum MissingDataStrategy {
+  MISSING_DATA_STRATEGY_UNCOUNTED = 0;
+  MISSING_DATA_STRATEGY_GOOD = 1;
+  MISSING_DATA_STRATEGY_BAD = 2;
+}
+
+
 message RequestBasedMetricSli {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -54,6 +61,8 @@ message WindowBasedMetricSli {
   WindowSloWindow window = 2;
   ComparisonOperator comparison_operator = 3;
   float threshold = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "0.95" }];
+  MissingDataStrategy missing_data_strategy = 5;
+
 }
 
 enum SloTimeFrame {
