@@ -55,6 +55,8 @@ enum EntityType {
   ENTITY_TYPE_ENGINE_SCHEMA_FIELDS = 26;
   // JSON representation: "notificationRequests"
   ENTITY_TYPE_NOTIFICATION_REQUESTS = 27;
+  // JSON representation: "infraMonitoringEvents"
+  ENTITY_TYPE_INFRA_MONITORING_EVENTS = 28;
 
   // Pillar "metrics"
 
