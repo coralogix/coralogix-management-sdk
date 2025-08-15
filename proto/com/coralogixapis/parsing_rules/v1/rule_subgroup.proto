@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogixapis.parsing_rules.v1;
+
+import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/parsing_rules/v1/rule.proto";
+
+message RuleSubgroup {
+  google.protobuf.StringValue id = 1;
+  repeated Rule rules = 2;
+  google.protobuf.BoolValue enabled = 3;
+  google.protobuf.UInt32Value order = 4;
+}
