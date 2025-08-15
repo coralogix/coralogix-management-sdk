@@ -5,11 +5,11 @@ proto_out_dir = './proto'
 url = 'github.com/coralogix/rules-api-protobuf'
 revision = "v0.18.0"
 allow_policies = [
-    "src/com/coralogix/rules/v1/rule.proto",
-    "src/com/coralogix/rules/v1/rule_group.proto",
-    "src/com/coralogix/rules/v1/rule_groups_service.proto",
-    "src/com/coralogix/rules/v1/rule_matcher.proto",
-    "src/com/coralogix/rules/v1/rule_subgroup.proto",
+    "src/com/coralogixapis/rules/v1/rule.proto",
+    "src/com/coralogixapis/rules/v1/rule_group.proto",
+    "src/com/coralogixapis/rules/v1/rule_groups_service.proto",
+    "src/com/coralogixapis/rules/v1/rule_matcher.proto",
+    "src/com/coralogixapis/rules/v1/rule_subgroup.proto",
 ]
 
 
@@ -118,6 +118,7 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto",
     "src/com/coralogixapis/alerts/v3/pagination.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_ordering.proto"
 ]
 
 
