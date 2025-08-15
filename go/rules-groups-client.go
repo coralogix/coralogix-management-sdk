@@ -17,7 +17,7 @@ package cxsdk
 import (
 	"context"
 
-	rulegroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/rules/v1"
+	rulegroups "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/parsing_rules/v1"
 )
 
 // CreateRuleGroupRequest represents a request to create a rule group.
