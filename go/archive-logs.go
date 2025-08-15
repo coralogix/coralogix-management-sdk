@@ -35,11 +35,6 @@ type SetS3TargetRequest = archiveLogs.S3TargetServiceSetTargetRequest_S3
 // Target is a target for storing archive logs.
 type Target = archiveLogs.S3TargetSpec
 
-// TargetS3 is a S3 target for storing archive logs.
-type TargetS3 = archiveLogs.Target_S3
-
-// TargetIbmCos is an IBM COS target for storing archive logs.
-type TargetIbmCos = archiveLogs.Target_IbmCos
 
 const archiveLogsFeatureGroupID = "logs"
 
