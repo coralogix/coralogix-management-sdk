@@ -86,7 +86,7 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*GetTargetResponse, error) 
 	defer conn.Close()
 	client := archiveLogs.NewS3TargetServiceClient(conn)
 
-	response, err := client.GetTarget(callProperties.Ctx, &S3TargetServiceGetTargetRequest{}, callProperties.CallOptions...)
+	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.S3TargetServiceGetTargetRequest{}, callProperties.CallOptions...)
 	if err != nil {
 		return nil, NewSdkAPIError(err, ArchiveLogsGetTargetRPC, archiveLogsFeatureGroupID)
 	}
