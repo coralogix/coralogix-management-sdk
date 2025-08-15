@@ -231,15 +231,7 @@ message BatchExecuteSloResponse {
   ResponseStatus status = 2;
 }
 
-message GetSloUsageReportRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "GetSloUsageReportRequest"
-      description: "Request to get SLO usage report."
-      required: []
-    }
-  };
-}
+
 
 message GetZeroStateRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -251,23 +243,7 @@ message GetZeroStateRequest {
   };
 }
 
-message GetSloUsageReportResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "GetSloUsageReportResponse"
-      description: "Response containing SLO usage statistics and information."
-      required: ["company_id", "company_name", "cx_region", "slo_count", "slo_alert_count"]
-    }
-  };
-  int32 company_id = 1;
-  string company_name = 2;
-  string cx_region = 3;
-  int32 slo_count = 4;
-  int32 slo_alert_count = 5;
-  string slo_with_most_permutations = 6;
-  int32 max_permutations = 7;
-  string slo_id_with_multiple_permutations = 8;
-}
+
 
 message GetZeroStateResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -497,26 +473,5 @@ service SlosService {
     };
   }
 
-  rpc GetSloUsageReport(GetSloUsageReportRequest) returns (GetSloUsageReportResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Slos Service"]
-      summary: "Get SLO Usage Report"
-    };
 
-    option (google.api.http) = {
-      get: "/v1/slo/slos/usage-report"
-    };
-  }
 }

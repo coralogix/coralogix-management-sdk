@@ -28,7 +28,6 @@ const (
 	SlosService_GetZeroState_FullMethodName             = "/com.coralogixapis.slo.v1.SlosService/GetZeroState"
 	SlosService_BatchGetSlos_FullMethodName             = "/com.coralogixapis.slo.v1.SlosService/BatchGetSlos"
 	SlosService_BatchExecuteSlo_FullMethodName          = "/com.coralogixapis.slo.v1.SlosService/BatchExecuteSlo"
-	SlosService_GetSloUsageReport_FullMethodName        = "/com.coralogixapis.slo.v1.SlosService/GetSloUsageReport"
 )
 
 // SlosServiceClient is the client API for SlosService service.
@@ -44,7 +43,6 @@ type SlosServiceClient interface {
 	GetZeroState(ctx context.Context, in *GetZeroStateRequest, opts ...grpc.CallOption) (*GetZeroStateResponse, error)
 	BatchGetSlos(ctx context.Context, in *BatchGetSlosRequest, opts ...grpc.CallOption) (*BatchGetSlosResponse, error)
 	BatchExecuteSlo(ctx context.Context, in *BatchExecuteSloRequest, opts ...grpc.CallOption) (*BatchExecuteSloResponse, error)
-	GetSloUsageReport(ctx context.Context, in *GetSloUsageReportRequest, opts ...grpc.CallOption) (*GetSloUsageReportResponse, error)
 }
 
 type slosServiceClient struct {
@@ -145,16 +143,6 @@ func (c *slosServiceClient) BatchExecuteSlo(ctx context.Context, in *BatchExecut
 	return out, nil
 }
 
-func (c *slosServiceClient) GetSloUsageReport(ctx context.Context, in *GetSloUsageReportRequest, opts ...grpc.CallOption) (*GetSloUsageReportResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSloUsageReportResponse)
-	err := c.cc.Invoke(ctx, SlosService_GetSloUsageReport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // SlosServiceServer is the server API for SlosService service.
 // All implementations must embed UnimplementedSlosServiceServer
 // for forward compatibility.
@@ -168,7 +156,6 @@ type SlosServiceServer interface {
 	GetZeroState(context.Context, *GetZeroStateRequest) (*GetZeroStateResponse, error)
 	BatchGetSlos(context.Context, *BatchGetSlosRequest) (*BatchGetSlosResponse, error)
 	BatchExecuteSlo(context.Context, *BatchExecuteSloRequest) (*BatchExecuteSloResponse, error)
-	GetSloUsageReport(context.Context, *GetSloUsageReportRequest) (*GetSloUsageReportResponse, error)
 	mustEmbedUnimplementedSlosServiceServer()
 }
 
@@ -205,9 +192,6 @@ func (UnimplementedSlosServiceServer) BatchGetSlos(context.Context, *BatchGetSlo
 }
 func (UnimplementedSlosServiceServer) BatchExecuteSlo(context.Context, *BatchExecuteSloRequest) (*BatchExecuteSloResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BatchExecuteSlo not implemented")
-}
-func (UnimplementedSlosServiceServer) GetSloUsageReport(context.Context, *GetSloUsageReportRequest) (*GetSloUsageReportResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSloUsageReport not implemented")
 }
 func (UnimplementedSlosServiceServer) mustEmbedUnimplementedSlosServiceServer() {}
 func (UnimplementedSlosServiceServer) testEmbeddedByValue()                     {}
@@ -392,24 +376,6 @@ func _SlosService_BatchExecuteSlo_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _SlosService_GetSloUsageReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSloUsageReportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SlosServiceServer).GetSloUsageReport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SlosService_GetSloUsageReport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SlosServiceServer).GetSloUsageReport(ctx, req.(*GetSloUsageReportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 // SlosService_ServiceDesc is the grpc.ServiceDesc for SlosService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -452,10 +418,6 @@ var SlosService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BatchExecuteSlo",
 			Handler:    _SlosService_BatchExecuteSlo_Handler,
-		},
-		{
-			MethodName: "GetSloUsageReport",
-			Handler:    _SlosService_GetSloUsageReport_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

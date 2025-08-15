@@ -237,6 +237,7 @@ impl AlertsClient {
             ListAlertDefsRequest {
                 pagination: None,
                 query_filter: None,
+                ..Default::default()
             },
             &self.metadata_map,
         );

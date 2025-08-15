@@ -122,7 +122,7 @@ fn alerts_scheduler_service(root: &str) -> Vec<String> {
 
 fn rules_service(root: &str) -> Vec<String> {
     vec![format!(
-        "{}/com/coralogix/rules/v1/rule_groups_service.proto",
+        "{}/com/coralogixapis/parsing_rules/v1/rule_groups_service.proto",
         root
     )]
 }

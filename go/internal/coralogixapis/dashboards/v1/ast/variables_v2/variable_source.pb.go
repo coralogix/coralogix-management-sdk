@@ -281,11 +281,12 @@ type VariableSourceV2_QuerySource struct {
 	//	*VariableSourceV2_QuerySource_LogsQuery_
 	//	*VariableSourceV2_QuerySource_MetricsQuery_
 	//	*VariableSourceV2_QuerySource_SpansQuery_
+	//	*VariableSourceV2_QuerySource_DataprimeQuery_
 	Value                isVariableSourceV2_QuerySource_Value  `protobuf_oneof:"value"`
-	ValuesOrderDirection common.OrderDirection                 `protobuf:"varint,4,opt,name=values_order_direction,json=valuesOrderDirection,proto3,enum=com.coralogixapis.dashboards.v1.common.OrderDirection" json:"values_order_direction,omitempty"`
-	RefreshStrategy      VariableSourceV2_RefreshStrategy      `protobuf:"varint,5,opt,name=refresh_strategy,json=refreshStrategy,proto3,enum=com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2_RefreshStrategy" json:"refresh_strategy,omitempty"`
-	ValueDisplayOptions  *VariableSourceV2_ValueDisplayOptions `protobuf:"bytes,6,opt,name=value_display_options,json=valueDisplayOptions,proto3" json:"value_display_options,omitempty"`
-	AllOption            *VariableSourceV2_AllOption           `protobuf:"bytes,7,opt,name=all_option,json=allOption,proto3" json:"all_option,omitempty"`
+	ValuesOrderDirection common.OrderDirection                 `protobuf:"varint,5,opt,name=values_order_direction,json=valuesOrderDirection,proto3,enum=com.coralogixapis.dashboards.v1.common.OrderDirection" json:"values_order_direction,omitempty"`
+	RefreshStrategy      VariableSourceV2_RefreshStrategy      `protobuf:"varint,6,opt,name=refresh_strategy,json=refreshStrategy,proto3,enum=com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2_RefreshStrategy" json:"refresh_strategy,omitempty"`
+	ValueDisplayOptions  *VariableSourceV2_ValueDisplayOptions `protobuf:"bytes,7,opt,name=value_display_options,json=valueDisplayOptions,proto3" json:"value_display_options,omitempty"`
+	AllOption            *VariableSourceV2_AllOption           `protobuf:"bytes,8,opt,name=all_option,json=allOption,proto3" json:"all_option,omitempty"`
 	unknownFields        protoimpl.UnknownFields
 	sizeCache            protoimpl.SizeCache
 }
@@ -354,6 +355,15 @@ func (x *VariableSourceV2_QuerySource) GetSpansQuery() *VariableSourceV2_QuerySo
 	return nil
 }
 
+func (x *VariableSourceV2_QuerySource) GetDataprimeQuery() *VariableSourceV2_QuerySource_DataprimeQuery {
+	if x != nil {
+		if x, ok := x.Value.(*VariableSourceV2_QuerySource_DataprimeQuery_); ok {
+			return x.DataprimeQuery
+		}
+	}
+	return nil
+}
+
 func (x *VariableSourceV2_QuerySource) GetValuesOrderDirection() common.OrderDirection {
 	if x != nil {
 		return x.ValuesOrderDirection
@@ -398,11 +408,17 @@ type VariableSourceV2_QuerySource_SpansQuery_ struct {
 	SpansQuery *VariableSourceV2_QuerySource_SpansQuery `protobuf:"bytes,3,opt,name=spans_query,json=spansQuery,proto3,oneof"`
 }
 
+type VariableSourceV2_QuerySource_DataprimeQuery_ struct {
+	DataprimeQuery *VariableSourceV2_QuerySource_DataprimeQuery `protobuf:"bytes,4,opt,name=dataprime_query,json=dataprimeQuery,proto3,oneof"`
+}
+
 func (*VariableSourceV2_QuerySource_LogsQuery_) isVariableSourceV2_QuerySource_Value() {}
 
 func (*VariableSourceV2_QuerySource_MetricsQuery_) isVariableSourceV2_QuerySource_Value() {}
 
 func (*VariableSourceV2_QuerySource_SpansQuery_) isVariableSourceV2_QuerySource_Value() {}
+
+func (*VariableSourceV2_QuerySource_DataprimeQuery_) isVariableSourceV2_QuerySource_Value() {}
 
 type VariableSourceV2_ValueDisplayOptions struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
@@ -784,6 +800,50 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery) GetType() *VariableSourceV2_
 	return nil
 }
 
+type VariableSourceV2_QuerySource_DataprimeQuery struct {
+	state         protoimpl.MessageState                            `protogen:"open.v1"`
+	Type          *VariableSourceV2_QuerySource_DataprimeQuery_Type `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery) Reset() {
+	*x = VariableSourceV2_QuerySource_DataprimeQuery{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariableSourceV2_QuerySource_DataprimeQuery) ProtoMessage() {}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariableSourceV2_QuerySource_DataprimeQuery.ProtoReflect.Descriptor instead.
+func (*VariableSourceV2_QuerySource_DataprimeQuery) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDescGZIP(), []int{0, 2, 3}
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery) GetType() *VariableSourceV2_QuerySource_DataprimeQuery_Type {
+	if x != nil {
+		return x.Type
+	}
+	return nil
+}
+
 type VariableSourceV2_QuerySource_LogsQuery_Type struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -797,7 +857,7 @@ type VariableSourceV2_QuerySource_LogsQuery_Type struct {
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type) Reset() {
 	*x = VariableSourceV2_QuerySource_LogsQuery_Type{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -809,7 +869,7 @@ func (x *VariableSourceV2_QuerySource_LogsQuery_Type) String() string {
 func (*VariableSourceV2_QuerySource_LogsQuery_Type) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,7 +937,7 @@ type VariableSourceV2_QuerySource_LogsQuery_Type_FieldName struct {
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldName) Reset() {
 	*x = VariableSourceV2_QuerySource_LogsQuery_Type_FieldName{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -889,7 +949,7 @@ func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldName) String() string 
 func (*VariableSourceV2_QuerySource_LogsQuery_Type_FieldName) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldName) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -921,7 +981,7 @@ type VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue struct {
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue) Reset() {
 	*x = VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -933,7 +993,7 @@ func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue) String() string
 func (*VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -969,7 +1029,7 @@ type VariableSourceV2_QuerySource_SpansQuery_Type struct {
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type) Reset() {
 	*x = VariableSourceV2_QuerySource_SpansQuery_Type{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -981,7 +1041,7 @@ func (x *VariableSourceV2_QuerySource_SpansQuery_Type) String() string {
 func (*VariableSourceV2_QuerySource_SpansQuery_Type) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1049,7 +1109,7 @@ type VariableSourceV2_QuerySource_SpansQuery_Type_FieldName struct {
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldName) Reset() {
 	*x = VariableSourceV2_QuerySource_SpansQuery_Type_FieldName{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1061,7 +1121,7 @@ func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldName) String() string
 func (*VariableSourceV2_QuerySource_SpansQuery_Type_FieldName) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldName) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1094,7 +1154,7 @@ type VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue struct {
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue) Reset() {
 	*x = VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1106,7 +1166,7 @@ func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue) String() strin
 func (*VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1150,7 +1210,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Type struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Type{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[17]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1162,7 +1222,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Type) String() string {
 func (*VariableSourceV2_QuerySource_MetricsQuery_Type) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[17]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1250,7 +1310,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1262,7 +1322,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable) String() st
 func (*VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1332,7 +1392,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[19]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1344,7 +1404,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter) String() 
 func (*VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[19]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1394,7 +1454,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Operator struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Operator) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Operator{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[20]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1406,7 +1466,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Operator) String() string {
 func (*VariableSourceV2_QuerySource_MetricsQuery_Operator) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Operator) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[20]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1474,7 +1534,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Equals struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Equals) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Equals{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1486,7 +1546,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Equals) String() string {
 func (*VariableSourceV2_QuerySource_MetricsQuery_Equals) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Equals) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[21]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1518,7 +1578,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_NotEquals struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_NotEquals) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_NotEquals{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1530,7 +1590,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_NotEquals) String() string {
 func (*VariableSourceV2_QuerySource_MetricsQuery_NotEquals) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_NotEquals) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[22]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1565,7 +1625,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Selection struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Selection{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1577,7 +1637,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection) String() string {
 func (*VariableSourceV2_QuerySource_MetricsQuery_Selection) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[23]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1629,7 +1689,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1641,7 +1701,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName) String() str
 func (*VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[24]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1673,7 +1733,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1685,7 +1745,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName) String() stri
 func (*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1719,7 +1779,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[27]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1731,7 +1791,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue) String() str
 func (*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[27]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1777,7 +1837,7 @@ type VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection struct {
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection) Reset() {
 	*x = VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[28]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1789,7 +1849,7 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection) Stri
 func (*VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection) ProtoMessage() {}
 
 func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[28]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1812,11 +1872,122 @@ func (x *VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection) GetV
 	return nil
 }
 
+type VariableSourceV2_QuerySource_DataprimeQuery_Type struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_
+	Value         isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) Reset() {
+	*x = VariableSourceV2_QuerySource_DataprimeQuery_Type{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariableSourceV2_QuerySource_DataprimeQuery_Type) ProtoMessage() {}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariableSourceV2_QuerySource_DataprimeQuery_Type.ProtoReflect.Descriptor instead.
+func (*VariableSourceV2_QuerySource_DataprimeQuery_Type) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDescGZIP(), []int{0, 2, 3, 0}
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) GetValue() isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) GetQueryText() *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText {
+	if x != nil {
+		if x, ok := x.Value.(*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_); ok {
+			return x.QueryText
+		}
+	}
+	return nil
+}
+
+type isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value interface {
+	isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value()
+}
+
+type VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_ struct {
+	QueryText *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText `protobuf:"bytes,1,opt,name=query_text,json=queryText,proto3,oneof"`
+}
+
+func (*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_) isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value() {
+}
+
+type VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Query         *common.DataprimeQuery `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) Reset() {
+	*x = VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) ProtoMessage() {}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText.ProtoReflect.Descriptor instead.
+func (*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDescGZIP(), []int{0, 2, 3, 0, 0}
+}
+
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) GetQuery() *common.DataprimeQuery {
+	if x != nil {
+		return x.Query
+	}
+	return nil
+}
+
 var File_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDesc = "" +
 	"\n" +
-	"Fcom/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x933\n" +
+	"Fcom/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa67\n" +
 	"\x10VariableSourceV2\x12i\n" +
 	"\x06static\x18\x01 \x01(\v2O.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSourceH\x00R\x06static\x12f\n" +
 	"\x05query\x18\x02 \x01(\v2N.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySourceH\x00R\x05query\x12l\n" +
@@ -1839,18 +2010,19 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_prot
 	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x12>\n" +
 	"\n" +
 	"is_default\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueH\x00R\tisDefault\x88\x01\x01B\r\n" +
-	"\v_is_default\x1a\x90&\n" +
+	"\v_is_default\x1a\xa3*\n" +
 	"\vQuerySource\x12y\n" +
 	"\n" +
 	"logs_query\x18\x01 \x01(\v2X.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQueryH\x00R\tlogsQuery\x12\x82\x01\n" +
 	"\rmetrics_query\x18\x02 \x01(\v2[.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQueryH\x00R\fmetricsQuery\x12|\n" +
 	"\vspans_query\x18\x03 \x01(\v2Y.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQueryH\x00R\n" +
-	"spansQuery\x12l\n" +
-	"\x16values_order_direction\x18\x04 \x01(\x0e26.com.coralogixapis.dashboards.v1.common.OrderDirectionR\x14valuesOrderDirection\x12}\n" +
-	"\x10refresh_strategy\x18\x05 \x01(\x0e2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategyR\x0frefreshStrategy\x12\x8a\x01\n" +
-	"\x15value_display_options\x18\x06 \x01(\v2V.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptionsR\x13valueDisplayOptions\x12k\n" +
+	"spansQuery\x12\x88\x01\n" +
+	"\x0fdataprime_query\x18\x04 \x01(\v2].com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQueryH\x00R\x0edataprimeQuery\x12l\n" +
+	"\x16values_order_direction\x18\x05 \x01(\x0e26.com.coralogixapis.dashboards.v1.common.OrderDirectionR\x14valuesOrderDirection\x12}\n" +
+	"\x10refresh_strategy\x18\x06 \x01(\x0e2R.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategyR\x0frefreshStrategy\x12\x8a\x01\n" +
+	"\x15value_display_options\x18\a \x01(\v2V.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptionsR\x13valueDisplayOptions\x12k\n" +
 	"\n" +
-	"all_option\x18\a \x01(\v2L.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOptionR\tallOption\x1a\xe6\x04\n" +
+	"all_option\x18\b \x01(\v2L.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOptionR\tallOption\x1a\xe6\x04\n" +
 	"\tLogsQuery\x12q\n" +
 	"\x04type\x18\x01 \x01(\v2].com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.TypeR\x04type\x1a\xe5\x03\n" +
 	"\x04Type\x12\x88\x01\n" +
@@ -1923,6 +2095,14 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_prot
 	"\x04list\x18\x01 \x01(\v2s.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelectionH\x00R\x04list\x1a\x96\x01\n" +
 	"\rListSelection\x12\x84\x01\n" +
 	"\x06values\x18\x01 \x03(\v2l.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariableR\x06valuesB\a\n" +
+	"\x05value\x1a\x85\x03\n" +
+	"\x0eDataprimeQuery\x12v\n" +
+	"\x04type\x18\x01 \x01(\v2b.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.TypeR\x04type\x1a\xfa\x01\n" +
+	"\x04Type\x12\x8d\x01\n" +
+	"\n" +
+	"query_text\x18\x01 \x01(\v2l.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryTextH\x00R\tqueryText\x1aY\n" +
+	"\tQueryText\x12L\n" +
+	"\x05query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryR\x05queryB\a\n" +
 	"\x05valueB\a\n" +
 	"\x05value\x1a\x93\x01\n" +
 	"\x13ValueDisplayOptions\x12=\n" +
@@ -1953,7 +2133,7 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto
 }
 
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes = make([]protoimpl.MessageInfo, 28)
+var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes = make([]protoimpl.MessageInfo, 31)
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_goTypes = []any{
 	(VariableSourceV2_RefreshStrategy)(0),                                     // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategy
 	(*VariableSourceV2)(nil),                                                  // 1: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2
@@ -1967,29 +2147,33 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 	(*VariableSourceV2_QuerySource_LogsQuery)(nil),                            // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery
 	(*VariableSourceV2_QuerySource_SpansQuery)(nil),                           // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery
 	(*VariableSourceV2_QuerySource_MetricsQuery)(nil),                         // 11: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery
-	(*VariableSourceV2_QuerySource_LogsQuery_Type)(nil),                       // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type
-	(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldName)(nil),             // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName
-	(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue)(nil),            // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue
-	(*VariableSourceV2_QuerySource_SpansQuery_Type)(nil),                      // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type
-	(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldName)(nil),            // 16: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName
-	(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue)(nil),           // 17: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue
-	(*VariableSourceV2_QuerySource_MetricsQuery_Type)(nil),                    // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type
-	(*VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable)(nil),        // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	(*VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter)(nil),      // 20: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter
-	(*VariableSourceV2_QuerySource_MetricsQuery_Operator)(nil),                // 21: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator
-	(*VariableSourceV2_QuerySource_MetricsQuery_Equals)(nil),                  // 22: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals
-	(*VariableSourceV2_QuerySource_MetricsQuery_NotEquals)(nil),               // 23: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals
-	(*VariableSourceV2_QuerySource_MetricsQuery_Selection)(nil),               // 24: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
-	(*VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName)(nil),         // 25: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName
-	(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName)(nil),          // 26: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName
-	(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue)(nil),         // 27: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue
-	(*VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection)(nil), // 28: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection
-	(common.OrderDirection)(0),                                                // 29: com.coralogixapis.dashboards.v1.common.OrderDirection
-	(*wrapperspb.StringValue)(nil),                                            // 30: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                                              // 31: google.protobuf.BoolValue
-	(*wrapperspb.FloatValue)(nil),                                             // 32: google.protobuf.FloatValue
-	(*common.ObservationField)(nil),                                           // 33: com.coralogixapis.dashboards.v1.common.ObservationField
-	(*common.SpanField)(nil),                                                  // 34: com.coralogixapis.dashboards.v1.common.SpanField
+	(*VariableSourceV2_QuerySource_DataprimeQuery)(nil),                       // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery
+	(*VariableSourceV2_QuerySource_LogsQuery_Type)(nil),                       // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type
+	(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldName)(nil),             // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName
+	(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue)(nil),            // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue
+	(*VariableSourceV2_QuerySource_SpansQuery_Type)(nil),                      // 16: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type
+	(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldName)(nil),            // 17: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName
+	(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue)(nil),           // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue
+	(*VariableSourceV2_QuerySource_MetricsQuery_Type)(nil),                    // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type
+	(*VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable)(nil),        // 20: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	(*VariableSourceV2_QuerySource_MetricsQuery_MetricsLabelFilter)(nil),      // 21: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter
+	(*VariableSourceV2_QuerySource_MetricsQuery_Operator)(nil),                // 22: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator
+	(*VariableSourceV2_QuerySource_MetricsQuery_Equals)(nil),                  // 23: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals
+	(*VariableSourceV2_QuerySource_MetricsQuery_NotEquals)(nil),               // 24: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals
+	(*VariableSourceV2_QuerySource_MetricsQuery_Selection)(nil),               // 25: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
+	(*VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName)(nil),         // 26: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName
+	(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName)(nil),          // 27: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName
+	(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue)(nil),         // 28: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue
+	(*VariableSourceV2_QuerySource_MetricsQuery_Selection_ListSelection)(nil), // 29: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection
+	(*VariableSourceV2_QuerySource_DataprimeQuery_Type)(nil),                  // 30: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type
+	(*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText)(nil),        // 31: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText
+	(common.OrderDirection)(0),                                                // 32: com.coralogixapis.dashboards.v1.common.OrderDirection
+	(*wrapperspb.StringValue)(nil),                                            // 33: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                                              // 34: google.protobuf.BoolValue
+	(*wrapperspb.FloatValue)(nil),                                             // 35: google.protobuf.FloatValue
+	(*common.ObservationField)(nil),                                           // 36: com.coralogixapis.dashboards.v1.common.ObservationField
+	(*common.SpanField)(nil),                                                  // 37: com.coralogixapis.dashboards.v1.common.SpanField
+	(*common.DataprimeQuery)(nil),                                             // 38: com.coralogixapis.dashboards.v1.common.DataprimeQuery
 }
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_depIdxs = []int32{
 	3,  // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.static:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource
@@ -1997,60 +2181,64 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 	2,  // 2: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.textbox:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource
 	7,  // 3: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.default_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue
 	8,  // 4: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel
-	29, // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.values_order_direction:type_name -> com.coralogixapis.dashboards.v1.common.OrderDirection
+	32, // 5: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.values_order_direction:type_name -> com.coralogixapis.dashboards.v1.common.OrderDirection
 	6,  // 6: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.all_option:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption
 	9,  // 7: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.logs_query:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery
 	11, // 8: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.metrics_query:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery
 	10, // 9: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.spans_query:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery
-	29, // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.values_order_direction:type_name -> com.coralogixapis.dashboards.v1.common.OrderDirection
-	0,  // 11: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.refresh_strategy:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategy
-	5,  // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.value_display_options:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions
-	6,  // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.all_option:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption
-	30, // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions.value_regex:type_name -> google.protobuf.StringValue
-	30, // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions.label_regex:type_name -> google.protobuf.StringValue
-	31, // 16: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.include_all:type_name -> google.protobuf.BoolValue
-	30, // 17: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.label:type_name -> google.protobuf.StringValue
-	30, // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_string:type_name -> google.protobuf.StringValue
-	32, // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_numeric:type_name -> google.protobuf.FloatValue
-	30, // 20: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.value:type_name -> google.protobuf.StringValue
-	30, // 21: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.label:type_name -> google.protobuf.StringValue
-	31, // 22: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.is_default:type_name -> google.protobuf.BoolValue
-	12, // 23: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type
-	15, // 24: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type
-	18, // 25: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type
-	13, // 26: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.field_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName
-	14, // 27: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.field_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue
-	30, // 28: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName.log_regex:type_name -> google.protobuf.StringValue
-	33, // 29: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	16, // 30: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.field_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName
-	17, // 31: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.field_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue
-	30, // 32: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName.span_regex:type_name -> google.protobuf.StringValue
-	34, // 33: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue.value:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
-	33, // 34: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	25, // 35: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.metric_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName
-	26, // 36: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.label_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName
-	27, // 37: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.label_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue
-	30, // 38: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable.string_value:type_name -> google.protobuf.StringValue
-	30, // 39: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable.variable_name:type_name -> google.protobuf.StringValue
-	19, // 40: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.metric:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	19, // 41: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.label:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	21, // 42: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.operator:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator
-	22, // 43: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator.equals:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals
-	23, // 44: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator.not_equals:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals
-	24, // 45: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals.selection:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
-	24, // 46: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals.selection:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
-	28, // 47: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.list:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection
-	30, // 48: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName.metric_regex:type_name -> google.protobuf.StringValue
-	30, // 49: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName.metric_regex:type_name -> google.protobuf.StringValue
-	19, // 50: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.metric_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	19, // 51: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.label_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	20, // 52: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.label_filters:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter
-	19, // 53: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
-	54, // [54:54] is the sub-list for method output_type
-	54, // [54:54] is the sub-list for method input_type
-	54, // [54:54] is the sub-list for extension type_name
-	54, // [54:54] is the sub-list for extension extendee
-	0,  // [0:54] is the sub-list for field type_name
+	12, // 10: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery
+	32, // 11: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.values_order_direction:type_name -> com.coralogixapis.dashboards.v1.common.OrderDirection
+	0,  // 12: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.refresh_strategy:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.RefreshStrategy
+	5,  // 13: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.value_display_options:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions
+	6,  // 14: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.all_option:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption
+	33, // 15: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions.value_regex:type_name -> google.protobuf.StringValue
+	33, // 16: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.ValueDisplayOptions.label_regex:type_name -> google.protobuf.StringValue
+	34, // 17: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.include_all:type_name -> google.protobuf.BoolValue
+	33, // 18: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.AllOption.label:type_name -> google.protobuf.StringValue
+	33, // 19: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_string:type_name -> google.protobuf.StringValue
+	35, // 20: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.TextboxSource.TextboxDefaultValue.single_numeric:type_name -> google.protobuf.FloatValue
+	33, // 21: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.value:type_name -> google.protobuf.StringValue
+	33, // 22: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.label:type_name -> google.protobuf.StringValue
+	34, // 23: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource.ValueLabel.is_default:type_name -> google.protobuf.BoolValue
+	13, // 24: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type
+	16, // 25: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type
+	19, // 26: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type
+	30, // 27: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.type:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type
+	14, // 28: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.field_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName
+	15, // 29: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.field_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue
+	33, // 30: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldName.log_regex:type_name -> google.protobuf.StringValue
+	36, // 31: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQuery.Type.FieldValue.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	17, // 32: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.field_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName
+	18, // 33: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.field_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue
+	33, // 34: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldName.span_regex:type_name -> google.protobuf.StringValue
+	37, // 35: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue.value:type_name -> com.coralogixapis.dashboards.v1.common.SpanField
+	36, // 36: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.SpansQuery.Type.FieldValue.observation_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	26, // 37: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.metric_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName
+	27, // 38: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.label_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName
+	28, // 39: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.label_value:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue
+	33, // 40: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable.string_value:type_name -> google.protobuf.StringValue
+	33, // 41: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable.variable_name:type_name -> google.protobuf.StringValue
+	20, // 42: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.metric:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	20, // 43: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.label:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	22, // 44: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter.operator:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator
+	23, // 45: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator.equals:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals
+	24, // 46: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Operator.not_equals:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals
+	25, // 47: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Equals.selection:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
+	25, // 48: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.NotEquals.selection:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection
+	29, // 49: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.list:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection
+	33, // 50: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.MetricName.metric_regex:type_name -> google.protobuf.StringValue
+	33, // 51: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelName.metric_regex:type_name -> google.protobuf.StringValue
+	20, // 52: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.metric_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	20, // 53: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.label_name:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	21, // 54: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.label_filters:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter
+	20, // 55: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
+	31, // 56: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.query_text:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText
+	38, // 57: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	58, // [58:58] is the sub-list for method output_type
+	58, // [58:58] is the sub-list for method input_type
+	58, // [58:58] is the sub-list for extension type_name
+	58, // [58:58] is the sub-list for extension extendee
+	0,  // [0:58] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_init() }
@@ -2068,35 +2256,39 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto
 		(*VariableSourceV2_QuerySource_LogsQuery_)(nil),
 		(*VariableSourceV2_QuerySource_MetricsQuery_)(nil),
 		(*VariableSourceV2_QuerySource_SpansQuery_)(nil),
+		(*VariableSourceV2_QuerySource_DataprimeQuery_)(nil),
 	}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[6].OneofWrappers = []any{
 		(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleString)(nil),
 		(*VariableSourceV2_TextboxSource_TextboxDefaultValue_SingleNumeric)(nil),
 	}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[7].OneofWrappers = []any{}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[11].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[12].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldName_)(nil),
 		(*VariableSourceV2_QuerySource_LogsQuery_Type_FieldValue_)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[14].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[15].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldName_)(nil),
 		(*VariableSourceV2_QuerySource_SpansQuery_Type_FieldValue_)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[17].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_MetricsQuery_Type_MetricName_)(nil),
 		(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelName_)(nil),
 		(*VariableSourceV2_QuerySource_MetricsQuery_Type_LabelValue_)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[18].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[19].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable_StringValue)(nil),
 		(*VariableSourceV2_QuerySource_MetricsQuery_StringOrVariable_VariableName)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[20].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[21].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_MetricsQuery_Operator_Equals)(nil),
 		(*VariableSourceV2_QuerySource_MetricsQuery_Operator_NotEquals)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[23].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[24].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_MetricsQuery_Selection_List)(nil),
+	}
+	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[29].OneofWrappers = []any{
+		(*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2104,7 +2296,7 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   28,
+			NumMessages:   31,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

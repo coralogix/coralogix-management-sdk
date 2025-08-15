@@ -3,19 +3,15 @@ proto_out_dir = './proto'
 
 [rules-api-protobuf]
 url = 'github.com/coralogix/rules-api-protobuf'
-revision = 'v0.17.3'
+revision = "v0.18.0"
 allow_policies = [
-    "src/com/coralogix/rules/v1/rule.proto",
-    "src/com/coralogix/rules/v1/rule_group.proto",
-    "src/com/coralogix/rules/v1/rule_groups_service.proto",
-    "src/com/coralogix/rules/v1/rule_matcher.proto",
-    "src/com/coralogix/rules/v1/rule_subgroup.proto",
+    "src/com/coralogixapis/*"
 ]
 
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.28"
+revision = "v0.5.30"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -118,6 +114,7 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto",
     "src/com/coralogixapis/alerts/v3/pagination.proto",
+    "src/com/coralogixapis/alerts/v3/alert_def_ordering.proto"
 ]
 
 
@@ -195,7 +192,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.4"
+revision = "v2.7.8"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -274,7 +271,7 @@ revision = "v0.3.3"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.12"
+revision = "v0.3.14"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -330,7 +327,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.30"
+revision = "v0.0.32"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -355,7 +352,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.124"
+revision = "v0.1.125"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",

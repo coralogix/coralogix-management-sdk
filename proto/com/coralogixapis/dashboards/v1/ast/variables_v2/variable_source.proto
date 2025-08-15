@@ -5,6 +5,7 @@ package com.coralogixapis.dashboards.v1.ast.variables_v2;
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
+import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "google/protobuf/wrappers.proto";
 
 message VariableSourceV2 {
@@ -42,12 +43,13 @@ message VariableSourceV2 {
       LogsQuery logs_query = 1;
       MetricsQuery metrics_query = 2;
       SpansQuery spans_query = 3;
+      DataprimeQuery dataprime_query = 4;
     }
 
-    v1.common.OrderDirection values_order_direction = 4;
-    RefreshStrategy refresh_strategy = 5;
-    ValueDisplayOptions value_display_options = 6;
-    AllOption all_option = 7;
+    v1.common.OrderDirection values_order_direction = 5;
+    RefreshStrategy refresh_strategy = 6;
+    ValueDisplayOptions value_display_options = 7;
+    AllOption all_option = 8;
 
     message LogsQuery {
       Type type = 1;
@@ -145,6 +147,20 @@ message VariableSourceV2 {
         }
         message ListSelection {
           repeated StringOrVariable values = 1;
+        }
+      }
+    }
+
+    message DataprimeQuery {
+      Type type = 1;
+
+      message Type {
+        oneof value {
+          QueryText query_text = 1;
+        }
+
+        message QueryText {
+          common.DataprimeQuery query = 1;        
         }
       }
     }
