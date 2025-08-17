@@ -230,8 +230,9 @@ mod tests {
             
             let batch_duration = batch_start_time.elapsed();
             batch_times.push(batch_duration.as_millis() as u64);
-            let _batch_successful = successful_slos.len() - (batch_start);
-            let _batch_failed = batch_count - _batch_successful.min(batch_count);
+            let current_successful = successful_slos.len();
+            let _batch_successful = if current_successful > batch_start { current_successful - batch_start } else { 0 };
+            let _batch_failed = batch_count.saturating_sub(_batch_successful);
             println!("✅ Batch {}/{} completed in {:.2?} - {} SLOs processed", 
                     batch_num, total_batches, batch_duration, batch_count);
         }
