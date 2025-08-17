@@ -4,13 +4,14 @@ A high-performance Rust application for creating and managing Service Level Obje
 
 ## ✨ Features
 
-- **⚡ Parallel Execution**: Create multiple SLOs simultaneously for maximum throughput
+- **⚡ Parallel Batch Execution**: Create SLOs in configurable parallel batches for controlled concurrency
 - **📊 Detailed Performance Metrics**: Complete timing statistics including averages and 99th percentiles
 - **🌐 HTTP Status Code Tracking**: Monitor all API responses with detailed status summaries
 - **🔍 List Operation Benchmarking**: Measure SLO listing performance with batch filtering
 - **🏷️ Smart Labeling**: Each SLO gets unique labels for easy identification and filtering
 - **📈 Comprehensive Reporting**: Beautiful table output with operation breakdowns
 - **🎯 Environment-Controlled**: Easily configure the number of parallel operations
+- **⏱️ Per-Request Timeouts**: Individual API request timeout controls with detailed timeout statistics
 
 ## 📋 Requirements
 
@@ -30,7 +31,11 @@ export CORALOGIX_USER_API_KEY="your-user-api-key"     # User-level API key
 export CORALOGIX_REGION="EU2"                         # Your Coralogix region (EU2, US2, AP1, etc.)
 
 # Optional: Control parallel execution (defaults to 1)
-export SLO_COUNT=20                                    # Number of SLOs to create in parallel
+export SLO_COUNT=20                                    # Total number of SLOs to create
+export BATCH_SIZE=5                                    # Number of SLOs to process in parallel per batch (defaults to 10)
+
+# Optional: Per-request timeout configuration  
+export OPERATION_TIMEOUT_SECS=10                      # Timeout for each individual API request (defaults to 10s)
 ```
 
 ### Getting API Keys
@@ -62,8 +67,43 @@ export SLO_COUNT=20                                    # Number of SLOs to creat
    export CORALOGIX_TEAM_API_KEY="your-actual-team-api-key"
    export CORALOGIX_USER_API_KEY="your-actual-user-api-key"
    export CORALOGIX_REGION="EU2"
-   export SLO_COUNT=10  # Optional: defaults to 1
+   export SLO_COUNT=20   # Optional: defaults to 1
+   export BATCH_SIZE=5   # Optional: defaults to 10 or SLO_COUNT if smaller
    ```
+
+## 🔄 Parallel Batch Processing
+
+Instead of creating all SLOs simultaneously (which can overwhelm APIs), this tool uses **parallel batches**:
+
+- **Total SLOs**: Controlled by `SLO_COUNT`
+- **Batch Size**: Controlled by `BATCH_SIZE` (parallel operations per batch)
+- **Processing**: Batches are processed sequentially, operations within each batch run in parallel
+
+### Examples:
+- `SLO_COUNT=100, BATCH_SIZE=10`: Creates 100 SLOs in 10 batches of 10 parallel operations each
+- `SLO_COUNT=50, BATCH_SIZE=5`: Creates 50 SLOs in 10 batches of 5 parallel operations each
+- `SLO_COUNT=20, BATCH_SIZE=20`: Creates 20 SLOs in 1 batch of 20 parallel operations
+
+### Benefits:
+- **🛡️ API Protection**: Prevents overwhelming the API with too many concurrent requests
+- **📊 Better Monitoring**: Track progress batch by batch
+- **🔧 Resource Control**: Limit memory and connection usage
+- **⚡ Optimal Performance**: Balance between speed and system stability
+
+## ⏱️ Per-Request Timeout Management
+
+Each individual API request (create, update, list) has its own timeout:
+
+- **🎯 Granular Control**: Set timeouts per API call, not per entire test
+- **📊 Detailed Statistics**: Track timeouts by operation type
+- **🚨 Early Detection**: Identify slow API calls immediately
+- **🔧 Configurable**: Adjust timeout based on API performance expectations
+
+### Benefits:
+- **Fast Failure Detection**: Know immediately when an API call is taking too long
+- **Accurate Performance Metrics**: Don't let one slow call skew batch timings
+- **Production Readiness**: Timeout behavior suitable for production workloads
+- **Debugging**: Easily identify which operation types are experiencing timeouts
 
 ## 🚀 Usage
 
@@ -83,14 +123,24 @@ cargo test test_slos -- --nocapture
 
 ### Performance Testing Scenarios
 
-**Load Testing:**
+**Conservative Load Testing (small batches):**
 ```bash
-export SLO_COUNT=20 && cargo test test_slos -- --nocapture
+export SLO_COUNT=20 && export BATCH_SIZE=5 && cargo test test_slos -- --nocapture
 ```
 
-**Stress Testing:**
+**Aggressive Load Testing (large batches):**
 ```bash
-export SLO_COUNT=100 && cargo test test_slos -- --nocapture
+export SLO_COUNT=20 && export BATCH_SIZE=20 && cargo test test_slos -- --nocapture
+```
+
+**High-Volume Testing:**
+```bash
+export SLO_COUNT=100 && export BATCH_SIZE=10 && cargo test test_slos -- --nocapture
+```
+
+**API Rate Limit Testing:**
+```bash
+export SLO_COUNT=50 && export BATCH_SIZE=2 && cargo test test_slos -- --nocapture
 ```
 
 **Quick Validation:**
@@ -223,17 +273,20 @@ Add new environment variables for:
 ## 🧪 Testing Different Scenarios
 
 ```bash
-# Quick validation (3 SLOs)
+# Quick validation (3 SLOs, single batch)
 export SLO_COUNT=3 && cargo test test_slos -- --nocapture
 
-# Medium load test (10 SLOs) 
-export SLO_COUNT=10 && cargo test test_slos -- --nocapture
+# Conservative approach (10 SLOs, small batches)
+export SLO_COUNT=10 && export BATCH_SIZE=2 && cargo test test_slos -- --nocapture
 
-# High load test (50 SLOs)
-export SLO_COUNT=50 && cargo test test_slos -- --nocapture
+# Balanced approach (50 SLOs, medium batches)
+export SLO_COUNT=50 && export BATCH_SIZE=10 && cargo test test_slos -- --nocapture
 
-# Stress test (100 SLOs)
-export SLO_COUNT=100 && cargo test test_slos -- --nocapture
+# High-volume test (100 SLOs, controlled batches)
+export SLO_COUNT=100 && export BATCH_SIZE=15 && cargo test test_slos -- --nocapture
+
+# Maximum concurrency test (20 SLOs, single large batch)
+export SLO_COUNT=20 && export BATCH_SIZE=20 && cargo test test_slos -- --nocapture
 ```
 
 ## 📝 Notes
