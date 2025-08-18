@@ -51,8 +51,8 @@ commit_hash = "869aedb474989dd69721689e04ed256de711339b"
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.3.14"
-commit_hash = "3d706fa9342eb2e58caa71b1591759e336bf5960"
+revision = "v0.3.15"
+commit_hash = "e11837ee7ac18039752e2981699e58b980272d93"
 
 [[dependencies]]
 name = "cx-api-enrichment"
