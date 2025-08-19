@@ -3,9 +3,13 @@ proto_out_dir = './proto'
 
 [rules-api-protobuf]
 url = 'github.com/coralogix/rules-api-protobuf'
-revision = "v0.18.0"
+revision = 'v0.17.3'
 allow_policies = [
-    "src/com/coralogixapis/*"
+    "src/com/coralogix/rules/v1/rule.proto",
+    "src/com/coralogix/rules/v1/rule_group.proto",
+    "src/com/coralogix/rules/v1/rule_groups_service.proto",
+    "src/com/coralogix/rules/v1/rule_matcher.proto",
+    "src/com/coralogix/rules/v1/rule_subgroup.proto",
 ]
 
 

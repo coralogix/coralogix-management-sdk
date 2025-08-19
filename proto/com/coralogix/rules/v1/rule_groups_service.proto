@@ -1,15 +1,15 @@
 syntax = "proto3";
 
-package com.coralogixapis.parsing_rules.v1;
+package com.coralogix.rules.v1;
 
 import "google/protobuf/struct.proto";
 import "google/protobuf/wrappers.proto";
-import "com/coralogixapis/parsing_rules/v1/rule.proto";
-import "com/coralogixapis/parsing_rules/v1/rule_group.proto";
-import "com/coralogixapis/parsing_rules/v1/rule_matcher.proto";
+import "com/coralogix/rules/v1/rule.proto";
+import "com/coralogix/rules/v1/rule_group.proto";
+import "com/coralogix/rules/v1/rule_matcher.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
-import "com/coralogixapis/common/v1/audit_log.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 service RuleGroupsService {
@@ -19,7 +19,7 @@ service RuleGroupsService {
   };
 
   rpc GetRuleGroup(GetRuleGroupRequest) returns (GetRuleGroupResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "get rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "get rule group";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -41,7 +41,7 @@ service RuleGroupsService {
     };
   }
   rpc ListRuleGroups(ListRuleGroupsRequest) returns (ListRuleGroupsResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "get all rule groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "get all rule groups";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -63,7 +63,7 @@ service RuleGroupsService {
     };
   }
   rpc CreateRuleGroup(CreateRuleGroupRequest) returns (CreateRuleGroupResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "create rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "create rule group";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -86,7 +86,7 @@ service RuleGroupsService {
     };
   }
   rpc UpdateRuleGroup(UpdateRuleGroupRequest) returns (UpdateRuleGroupResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "update rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "update rule group";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -109,7 +109,7 @@ service RuleGroupsService {
     };
   }
   rpc DeleteRuleGroup(DeleteRuleGroupRequest) returns (DeleteRuleGroupResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "delete rule group";
+    option (com.coralogix.common.v1.audit_log_description).description = "delete rule group";
     option (google.api.http) = {
       delete: "/api/v1/rulegroups/{group_id}"
     };
@@ -132,7 +132,7 @@ service RuleGroupsService {
   }
 
   rpc BulkDeleteRuleGroup(BulkDeleteRuleGroupRequest) returns (BulkDeleteRuleGroupResponse) {
-    option (com.coralogixapis.common.v1.audit_log_description).description = "bulk delete rule groups";
+    option (com.coralogix.common.v1.audit_log_description).description = "bulk delete rule groups";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -155,7 +155,7 @@ service RuleGroupsService {
   }
 
   rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse){
-    option (com.coralogixapis.common.v1.audit_log_description).description = "get rule mapping";
+    option (com.coralogix.common.v1.audit_log_description).description = "get rule mapping";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -179,7 +179,7 @@ service RuleGroupsService {
   }
 
   rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse){
-    option (com.coralogixapis.common.v1.audit_log_description).description = "get company usage with limits";
+    option (com.coralogix.common.v1.audit_log_description).description = "get company usage with limits";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"

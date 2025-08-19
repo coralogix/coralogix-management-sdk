@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: com/coralogixapis/parsing_rules/v1/rule.proto
+// source: com/coralogix/rules/v1/rule.proto
 
 package v1
 
@@ -64,11 +64,11 @@ func (x JsonExtractParameters_DestinationField) String() string {
 }
 
 func (JsonExtractParameters_DestinationField) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes[0].Descriptor()
+	return file_com_coralogix_rules_v1_rule_proto_enumTypes[0].Descriptor()
 }
 
 func (JsonExtractParameters_DestinationField) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes[0]
+	return &file_com_coralogix_rules_v1_rule_proto_enumTypes[0]
 }
 
 func (x JsonExtractParameters_DestinationField) Number() protoreflect.EnumNumber {
@@ -77,7 +77,7 @@ func (x JsonExtractParameters_DestinationField) Number() protoreflect.EnumNumber
 
 // Deprecated: Use JsonExtractParameters_DestinationField.Descriptor instead.
 func (JsonExtractParameters_DestinationField) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{3, 0}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{3, 0}
 }
 
 type ExtractTimestampParameters_FormatStandard int32
@@ -125,11 +125,11 @@ func (x ExtractTimestampParameters_FormatStandard) String() string {
 }
 
 func (ExtractTimestampParameters_FormatStandard) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes[1].Descriptor()
+	return file_com_coralogix_rules_v1_rule_proto_enumTypes[1].Descriptor()
 }
 
 func (ExtractTimestampParameters_FormatStandard) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes[1]
+	return &file_com_coralogix_rules_v1_rule_proto_enumTypes[1]
 }
 
 func (x ExtractTimestampParameters_FormatStandard) Number() protoreflect.EnumNumber {
@@ -138,7 +138,7 @@ func (x ExtractTimestampParameters_FormatStandard) Number() protoreflect.EnumNum
 
 // Deprecated: Use ExtractTimestampParameters_FormatStandard.Descriptor instead.
 func (ExtractTimestampParameters_FormatStandard) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{8, 0}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{8, 0}
 }
 
 type Rule struct {
@@ -156,7 +156,7 @@ type Rule struct {
 
 func (x *Rule) Reset() {
 	*x = Rule{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[0]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -168,7 +168,7 @@ func (x *Rule) String() string {
 func (*Rule) ProtoMessage() {}
 
 func (x *Rule) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[0]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -181,7 +181,7 @@ func (x *Rule) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Rule.ProtoReflect.Descriptor instead.
 func (*Rule) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{0}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Rule) GetId() *wrapperspb.StringValue {
@@ -254,7 +254,7 @@ type RuleParameters struct {
 
 func (x *RuleParameters) Reset() {
 	*x = RuleParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[1]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -266,7 +266,7 @@ func (x *RuleParameters) String() string {
 func (*RuleParameters) ProtoMessage() {}
 
 func (x *RuleParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[1]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -279,7 +279,7 @@ func (x *RuleParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RuleParameters.ProtoReflect.Descriptor instead.
 func (*RuleParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *RuleParameters) GetRuleParameters() isRuleParameters_RuleParameters {
@@ -452,7 +452,7 @@ type ExtractParameters struct {
 
 func (x *ExtractParameters) Reset() {
 	*x = ExtractParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[2]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +464,7 @@ func (x *ExtractParameters) String() string {
 func (*ExtractParameters) ProtoMessage() {}
 
 func (x *ExtractParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[2]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +477,7 @@ func (x *ExtractParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExtractParameters.ProtoReflect.Descriptor instead.
 func (*ExtractParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{2}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ExtractParameters) GetRule() *wrapperspb.StringValue {
@@ -489,7 +489,7 @@ func (x *ExtractParameters) GetRule() *wrapperspb.StringValue {
 
 type JsonExtractParameters struct {
 	state                protoimpl.MessageState                 `protogen:"open.v1"`
-	DestinationFieldType JsonExtractParameters_DestinationField `protobuf:"varint,1,opt,name=destination_field_type,json=destinationFieldType,proto3,enum=com.coralogixapis.parsing_rules.v1.JsonExtractParameters_DestinationField" json:"destination_field_type,omitempty"`
+	DestinationFieldType JsonExtractParameters_DestinationField `protobuf:"varint,1,opt,name=destination_field_type,json=destinationFieldType,proto3,enum=com.coralogix.rules.v1.JsonExtractParameters_DestinationField" json:"destination_field_type,omitempty"`
 	Rule                 *wrapperspb.StringValue                `protobuf:"bytes,2,opt,name=rule,proto3" json:"rule,omitempty"`
 	DestinationFieldText *wrapperspb.StringValue                `protobuf:"bytes,3,opt,name=destination_field_text,json=destinationFieldText,proto3" json:"destination_field_text,omitempty"`
 	unknownFields        protoimpl.UnknownFields
@@ -498,7 +498,7 @@ type JsonExtractParameters struct {
 
 func (x *JsonExtractParameters) Reset() {
 	*x = JsonExtractParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[3]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -510,7 +510,7 @@ func (x *JsonExtractParameters) String() string {
 func (*JsonExtractParameters) ProtoMessage() {}
 
 func (x *JsonExtractParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[3]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -523,7 +523,7 @@ func (x *JsonExtractParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JsonExtractParameters.ProtoReflect.Descriptor instead.
 func (*JsonExtractParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *JsonExtractParameters) GetDestinationFieldType() JsonExtractParameters_DestinationField {
@@ -558,7 +558,7 @@ type ReplaceParameters struct {
 
 func (x *ReplaceParameters) Reset() {
 	*x = ReplaceParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[4]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -570,7 +570,7 @@ func (x *ReplaceParameters) String() string {
 func (*ReplaceParameters) ProtoMessage() {}
 
 func (x *ReplaceParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[4]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -583,7 +583,7 @@ func (x *ReplaceParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReplaceParameters.ProtoReflect.Descriptor instead.
 func (*ReplaceParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *ReplaceParameters) GetDestinationField() *wrapperspb.StringValue {
@@ -617,7 +617,7 @@ type ParseParameters struct {
 
 func (x *ParseParameters) Reset() {
 	*x = ParseParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[5]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -629,7 +629,7 @@ func (x *ParseParameters) String() string {
 func (*ParseParameters) ProtoMessage() {}
 
 func (x *ParseParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[5]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -642,7 +642,7 @@ func (x *ParseParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ParseParameters.ProtoReflect.Descriptor instead.
 func (*ParseParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *ParseParameters) GetDestinationField() *wrapperspb.StringValue {
@@ -669,7 +669,7 @@ type AllowParameters struct {
 
 func (x *AllowParameters) Reset() {
 	*x = AllowParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[6]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -681,7 +681,7 @@ func (x *AllowParameters) String() string {
 func (*AllowParameters) ProtoMessage() {}
 
 func (x *AllowParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[6]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -694,7 +694,7 @@ func (x *AllowParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use AllowParameters.ProtoReflect.Descriptor instead.
 func (*AllowParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *AllowParameters) GetKeepBlockedLogs() *wrapperspb.BoolValue {
@@ -721,7 +721,7 @@ type BlockParameters struct {
 
 func (x *BlockParameters) Reset() {
 	*x = BlockParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[7]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -733,7 +733,7 @@ func (x *BlockParameters) String() string {
 func (*BlockParameters) ProtoMessage() {}
 
 func (x *BlockParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[7]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -746,7 +746,7 @@ func (x *BlockParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BlockParameters.ProtoReflect.Descriptor instead.
 func (*BlockParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *BlockParameters) GetKeepBlockedLogs() *wrapperspb.BoolValue {
@@ -765,7 +765,7 @@ func (x *BlockParameters) GetRule() *wrapperspb.StringValue {
 
 type ExtractTimestampParameters struct {
 	state         protoimpl.MessageState                    `protogen:"open.v1"`
-	Standard      ExtractTimestampParameters_FormatStandard `protobuf:"varint,1,opt,name=standard,proto3,enum=com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters_FormatStandard" json:"standard,omitempty"`
+	Standard      ExtractTimestampParameters_FormatStandard `protobuf:"varint,1,opt,name=standard,proto3,enum=com.coralogix.rules.v1.ExtractTimestampParameters_FormatStandard" json:"standard,omitempty"`
 	Format        *wrapperspb.StringValue                   `protobuf:"bytes,2,opt,name=format,proto3" json:"format,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -773,7 +773,7 @@ type ExtractTimestampParameters struct {
 
 func (x *ExtractTimestampParameters) Reset() {
 	*x = ExtractTimestampParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[8]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -785,7 +785,7 @@ func (x *ExtractTimestampParameters) String() string {
 func (*ExtractTimestampParameters) ProtoMessage() {}
 
 func (x *ExtractTimestampParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[8]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -798,7 +798,7 @@ func (x *ExtractTimestampParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ExtractTimestampParameters.ProtoReflect.Descriptor instead.
 func (*ExtractTimestampParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *ExtractTimestampParameters) GetStandard() ExtractTimestampParameters_FormatStandard {
@@ -824,7 +824,7 @@ type RemoveFieldsParameters struct {
 
 func (x *RemoveFieldsParameters) Reset() {
 	*x = RemoveFieldsParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[9]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -836,7 +836,7 @@ func (x *RemoveFieldsParameters) String() string {
 func (*RemoveFieldsParameters) ProtoMessage() {}
 
 func (x *RemoveFieldsParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[9]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -849,7 +849,7 @@ func (x *RemoveFieldsParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RemoveFieldsParameters.ProtoReflect.Descriptor instead.
 func (*RemoveFieldsParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *RemoveFieldsParameters) GetFields() []string {
@@ -869,7 +869,7 @@ type JsonStringifyParameters struct {
 
 func (x *JsonStringifyParameters) Reset() {
 	*x = JsonStringifyParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[10]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -881,7 +881,7 @@ func (x *JsonStringifyParameters) String() string {
 func (*JsonStringifyParameters) ProtoMessage() {}
 
 func (x *JsonStringifyParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[10]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -894,7 +894,7 @@ func (x *JsonStringifyParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JsonStringifyParameters.ProtoReflect.Descriptor instead.
 func (*JsonStringifyParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *JsonStringifyParameters) GetDestinationField() *wrapperspb.StringValue {
@@ -923,7 +923,7 @@ type JsonParseParameters struct {
 
 func (x *JsonParseParameters) Reset() {
 	*x = JsonParseParameters{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[11]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -935,7 +935,7 @@ func (x *JsonParseParameters) String() string {
 func (*JsonParseParameters) ProtoMessage() {}
 
 func (x *JsonParseParameters) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[11]
+	mi := &file_com_coralogix_rules_v1_rule_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -948,7 +948,7 @@ func (x *JsonParseParameters) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use JsonParseParameters.ProtoReflect.Descriptor instead.
 func (*JsonParseParameters) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP(), []int{11}
+	return file_com_coralogix_rules_v1_rule_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *JsonParseParameters) GetDestinationField() *wrapperspb.StringValue {
@@ -979,38 +979,38 @@ func (x *JsonParseParameters) GetOverrideDest() *wrapperspb.BoolValue {
 	return nil
 }
 
-var File_com_coralogixapis_parsing_rules_v1_rule_proto protoreflect.FileDescriptor
+var File_com_coralogix_rules_v1_rule_proto protoreflect.FileDescriptor
 
-const file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc = "" +
+const file_com_coralogix_rules_v1_rule_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogixapis/parsing_rules/v1/rule.proto\x12\"com.coralogixapis.parsing_rules.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\xb1\x03\n" +
+	"!com/coralogix/rules/v1/rule.proto\x12\x16com.coralogix.rules.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\xa5\x03\n" +
 	"\x04Rule\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x12?\n" +
-	"\fsource_field\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12R\n" +
+	"\fsource_field\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12F\n" +
 	"\n" +
-	"parameters\x18\x06 \x01(\v22.com.coralogixapis.parsing_rules.v1.RuleParametersR\n" +
+	"parameters\x18\x06 \x01(\v2&.com.coralogix.rules.v1.RuleParametersR\n" +
 	"parameters\x124\n" +
 	"\aenabled\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
-	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05orderJ\x04\b\x04\x10\x05R\x04rule\"\xf5\b\n" +
-	"\x0eRuleParameters\x12f\n" +
-	"\x12extract_parameters\x18\x01 \x01(\v25.com.coralogixapis.parsing_rules.v1.ExtractParametersH\x00R\x11extractParameters\x12s\n" +
-	"\x17json_extract_parameters\x18\x02 \x01(\v29.com.coralogixapis.parsing_rules.v1.JsonExtractParametersH\x00R\x15jsonExtractParameters\x12f\n" +
-	"\x12replace_parameters\x18\x03 \x01(\v25.com.coralogixapis.parsing_rules.v1.ReplaceParametersH\x00R\x11replaceParameters\x12`\n" +
-	"\x10parse_parameters\x18\x04 \x01(\v23.com.coralogixapis.parsing_rules.v1.ParseParametersH\x00R\x0fparseParameters\x12`\n" +
-	"\x10allow_parameters\x18\x05 \x01(\v23.com.coralogixapis.parsing_rules.v1.AllowParametersH\x00R\x0fallowParameters\x12`\n" +
-	"\x10block_parameters\x18\x06 \x01(\v23.com.coralogixapis.parsing_rules.v1.BlockParametersH\x00R\x0fblockParameters\x12\x82\x01\n" +
-	"\x1cextract_timestamp_parameters\x18\a \x01(\v2>.com.coralogixapis.parsing_rules.v1.ExtractTimestampParametersH\x00R\x1aextractTimestampParameters\x12v\n" +
-	"\x18remove_fields_parameters\x18\b \x01(\v2:.com.coralogixapis.parsing_rules.v1.RemoveFieldsParametersH\x00R\x16removeFieldsParameters\x12y\n" +
-	"\x19json_stringify_parameters\x18\t \x01(\v2;.com.coralogixapis.parsing_rules.v1.JsonStringifyParametersH\x00R\x17jsonStringifyParameters\x12m\n" +
+	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05orderJ\x04\b\x04\x10\x05R\x04rule\"\xfc\a\n" +
+	"\x0eRuleParameters\x12Z\n" +
+	"\x12extract_parameters\x18\x01 \x01(\v2).com.coralogix.rules.v1.ExtractParametersH\x00R\x11extractParameters\x12g\n" +
+	"\x17json_extract_parameters\x18\x02 \x01(\v2-.com.coralogix.rules.v1.JsonExtractParametersH\x00R\x15jsonExtractParameters\x12Z\n" +
+	"\x12replace_parameters\x18\x03 \x01(\v2).com.coralogix.rules.v1.ReplaceParametersH\x00R\x11replaceParameters\x12T\n" +
+	"\x10parse_parameters\x18\x04 \x01(\v2'.com.coralogix.rules.v1.ParseParametersH\x00R\x0fparseParameters\x12T\n" +
+	"\x10allow_parameters\x18\x05 \x01(\v2'.com.coralogix.rules.v1.AllowParametersH\x00R\x0fallowParameters\x12T\n" +
+	"\x10block_parameters\x18\x06 \x01(\v2'.com.coralogix.rules.v1.BlockParametersH\x00R\x0fblockParameters\x12v\n" +
+	"\x1cextract_timestamp_parameters\x18\a \x01(\v22.com.coralogix.rules.v1.ExtractTimestampParametersH\x00R\x1aextractTimestampParameters\x12j\n" +
+	"\x18remove_fields_parameters\x18\b \x01(\v2..com.coralogix.rules.v1.RemoveFieldsParametersH\x00R\x16removeFieldsParameters\x12m\n" +
+	"\x19json_stringify_parameters\x18\t \x01(\v2/.com.coralogix.rules.v1.JsonStringifyParametersH\x00R\x17jsonStringifyParameters\x12a\n" +
 	"\x15json_parse_parameters\x18\n" +
-	" \x01(\v27.com.coralogixapis.parsing_rules.v1.JsonParseParametersH\x00R\x13jsonParseParametersB\x11\n" +
+	" \x01(\v2+.com.coralogix.rules.v1.JsonParseParametersH\x00R\x13jsonParseParametersB\x11\n" +
 	"\x0frule_parameters\"]\n" +
 	"\x11ExtractParameters\x120\n" +
-	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04ruleJ\x04\b\x01\x10\x02R\x10destinationField\"\x83\x04\n" +
-	"\x15JsonExtractParameters\x12\x80\x01\n" +
-	"\x16destination_field_type\x18\x01 \x01(\x0e2J.com.coralogixapis.parsing_rules.v1.JsonExtractParameters.DestinationFieldR\x14destinationFieldType\x120\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04ruleJ\x04\b\x01\x10\x02R\x10destinationField\"\xf6\x03\n" +
+	"\x15JsonExtractParameters\x12t\n" +
+	"\x16destination_field_type\x18\x01 \x01(\x0e2>.com.coralogix.rules.v1.JsonExtractParameters.DestinationFieldR\x14destinationFieldType\x120\n" +
 	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04rule\x12R\n" +
 	"\x16destination_field_text\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x14destinationFieldText\"\xe0\x01\n" +
 	"\x10DestinationField\x12-\n" +
@@ -1032,9 +1032,9 @@ const file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc = "" +
 	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04rule\"\x8b\x01\n" +
 	"\x0fBlockParameters\x12F\n" +
 	"\x11keep_blocked_logs\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x0fkeepBlockedLogs\x120\n" +
-	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04rule\"\xab\x03\n" +
-	"\x1aExtractTimestampParameters\x12i\n" +
-	"\bstandard\x18\x01 \x01(\x0e2M.com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters.FormatStandardR\bstandard\x124\n" +
+	"\x04rule\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04rule\"\x9f\x03\n" +
+	"\x1aExtractTimestampParameters\x12]\n" +
+	"\bstandard\x18\x01 \x01(\x0e2A.com.coralogix.rules.v1.ExtractTimestampParameters.FormatStandardR\bstandard\x124\n" +
 	"\x06format\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x06format\"\xeb\x01\n" +
 	"\x0eFormatStandard\x12+\n" +
 	"'FORMAT_STANDARD_STRFTIME_OR_UNSPECIFIED\x10\x00\x12\x1b\n" +
@@ -1056,77 +1056,77 @@ const file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc = "" +
 	"\roverride_dest\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\foverrideDestb\x06proto3"
 
 var (
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescOnce sync.Once
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescData []byte
+	file_com_coralogix_rules_v1_rule_proto_rawDescOnce sync.Once
+	file_com_coralogix_rules_v1_rule_proto_rawDescData []byte
 )
 
-func file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescGZIP() []byte {
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescOnce.Do(func() {
-		file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc), len(file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc)))
+func file_com_coralogix_rules_v1_rule_proto_rawDescGZIP() []byte {
+	file_com_coralogix_rules_v1_rule_proto_rawDescOnce.Do(func() {
+		file_com_coralogix_rules_v1_rule_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_com_coralogix_rules_v1_rule_proto_rawDesc), len(file_com_coralogix_rules_v1_rule_proto_rawDesc)))
 	})
-	return file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDescData
+	return file_com_coralogix_rules_v1_rule_proto_rawDescData
 }
 
-var file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
-var file_com_coralogixapis_parsing_rules_v1_rule_proto_goTypes = []any{
-	(JsonExtractParameters_DestinationField)(0),    // 0: com.coralogixapis.parsing_rules.v1.JsonExtractParameters.DestinationField
-	(ExtractTimestampParameters_FormatStandard)(0), // 1: com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters.FormatStandard
-	(*Rule)(nil),                       // 2: com.coralogixapis.parsing_rules.v1.Rule
-	(*RuleParameters)(nil),             // 3: com.coralogixapis.parsing_rules.v1.RuleParameters
-	(*ExtractParameters)(nil),          // 4: com.coralogixapis.parsing_rules.v1.ExtractParameters
-	(*JsonExtractParameters)(nil),      // 5: com.coralogixapis.parsing_rules.v1.JsonExtractParameters
-	(*ReplaceParameters)(nil),          // 6: com.coralogixapis.parsing_rules.v1.ReplaceParameters
-	(*ParseParameters)(nil),            // 7: com.coralogixapis.parsing_rules.v1.ParseParameters
-	(*AllowParameters)(nil),            // 8: com.coralogixapis.parsing_rules.v1.AllowParameters
-	(*BlockParameters)(nil),            // 9: com.coralogixapis.parsing_rules.v1.BlockParameters
-	(*ExtractTimestampParameters)(nil), // 10: com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters
-	(*RemoveFieldsParameters)(nil),     // 11: com.coralogixapis.parsing_rules.v1.RemoveFieldsParameters
-	(*JsonStringifyParameters)(nil),    // 12: com.coralogixapis.parsing_rules.v1.JsonStringifyParameters
-	(*JsonParseParameters)(nil),        // 13: com.coralogixapis.parsing_rules.v1.JsonParseParameters
+var file_com_coralogix_rules_v1_rule_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
+var file_com_coralogix_rules_v1_rule_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
+var file_com_coralogix_rules_v1_rule_proto_goTypes = []any{
+	(JsonExtractParameters_DestinationField)(0),    // 0: com.coralogix.rules.v1.JsonExtractParameters.DestinationField
+	(ExtractTimestampParameters_FormatStandard)(0), // 1: com.coralogix.rules.v1.ExtractTimestampParameters.FormatStandard
+	(*Rule)(nil),                       // 2: com.coralogix.rules.v1.Rule
+	(*RuleParameters)(nil),             // 3: com.coralogix.rules.v1.RuleParameters
+	(*ExtractParameters)(nil),          // 4: com.coralogix.rules.v1.ExtractParameters
+	(*JsonExtractParameters)(nil),      // 5: com.coralogix.rules.v1.JsonExtractParameters
+	(*ReplaceParameters)(nil),          // 6: com.coralogix.rules.v1.ReplaceParameters
+	(*ParseParameters)(nil),            // 7: com.coralogix.rules.v1.ParseParameters
+	(*AllowParameters)(nil),            // 8: com.coralogix.rules.v1.AllowParameters
+	(*BlockParameters)(nil),            // 9: com.coralogix.rules.v1.BlockParameters
+	(*ExtractTimestampParameters)(nil), // 10: com.coralogix.rules.v1.ExtractTimestampParameters
+	(*RemoveFieldsParameters)(nil),     // 11: com.coralogix.rules.v1.RemoveFieldsParameters
+	(*JsonStringifyParameters)(nil),    // 12: com.coralogix.rules.v1.JsonStringifyParameters
+	(*JsonParseParameters)(nil),        // 13: com.coralogix.rules.v1.JsonParseParameters
 	(*wrapperspb.StringValue)(nil),     // 14: google.protobuf.StringValue
 	(*wrapperspb.BoolValue)(nil),       // 15: google.protobuf.BoolValue
 	(*wrapperspb.UInt32Value)(nil),     // 16: google.protobuf.UInt32Value
 }
-var file_com_coralogixapis_parsing_rules_v1_rule_proto_depIdxs = []int32{
-	14, // 0: com.coralogixapis.parsing_rules.v1.Rule.id:type_name -> google.protobuf.StringValue
-	14, // 1: com.coralogixapis.parsing_rules.v1.Rule.name:type_name -> google.protobuf.StringValue
-	14, // 2: com.coralogixapis.parsing_rules.v1.Rule.description:type_name -> google.protobuf.StringValue
-	14, // 3: com.coralogixapis.parsing_rules.v1.Rule.source_field:type_name -> google.protobuf.StringValue
-	3,  // 4: com.coralogixapis.parsing_rules.v1.Rule.parameters:type_name -> com.coralogixapis.parsing_rules.v1.RuleParameters
-	15, // 5: com.coralogixapis.parsing_rules.v1.Rule.enabled:type_name -> google.protobuf.BoolValue
-	16, // 6: com.coralogixapis.parsing_rules.v1.Rule.order:type_name -> google.protobuf.UInt32Value
-	4,  // 7: com.coralogixapis.parsing_rules.v1.RuleParameters.extract_parameters:type_name -> com.coralogixapis.parsing_rules.v1.ExtractParameters
-	5,  // 8: com.coralogixapis.parsing_rules.v1.RuleParameters.json_extract_parameters:type_name -> com.coralogixapis.parsing_rules.v1.JsonExtractParameters
-	6,  // 9: com.coralogixapis.parsing_rules.v1.RuleParameters.replace_parameters:type_name -> com.coralogixapis.parsing_rules.v1.ReplaceParameters
-	7,  // 10: com.coralogixapis.parsing_rules.v1.RuleParameters.parse_parameters:type_name -> com.coralogixapis.parsing_rules.v1.ParseParameters
-	8,  // 11: com.coralogixapis.parsing_rules.v1.RuleParameters.allow_parameters:type_name -> com.coralogixapis.parsing_rules.v1.AllowParameters
-	9,  // 12: com.coralogixapis.parsing_rules.v1.RuleParameters.block_parameters:type_name -> com.coralogixapis.parsing_rules.v1.BlockParameters
-	10, // 13: com.coralogixapis.parsing_rules.v1.RuleParameters.extract_timestamp_parameters:type_name -> com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters
-	11, // 14: com.coralogixapis.parsing_rules.v1.RuleParameters.remove_fields_parameters:type_name -> com.coralogixapis.parsing_rules.v1.RemoveFieldsParameters
-	12, // 15: com.coralogixapis.parsing_rules.v1.RuleParameters.json_stringify_parameters:type_name -> com.coralogixapis.parsing_rules.v1.JsonStringifyParameters
-	13, // 16: com.coralogixapis.parsing_rules.v1.RuleParameters.json_parse_parameters:type_name -> com.coralogixapis.parsing_rules.v1.JsonParseParameters
-	14, // 17: com.coralogixapis.parsing_rules.v1.ExtractParameters.rule:type_name -> google.protobuf.StringValue
-	0,  // 18: com.coralogixapis.parsing_rules.v1.JsonExtractParameters.destination_field_type:type_name -> com.coralogixapis.parsing_rules.v1.JsonExtractParameters.DestinationField
-	14, // 19: com.coralogixapis.parsing_rules.v1.JsonExtractParameters.rule:type_name -> google.protobuf.StringValue
-	14, // 20: com.coralogixapis.parsing_rules.v1.JsonExtractParameters.destination_field_text:type_name -> google.protobuf.StringValue
-	14, // 21: com.coralogixapis.parsing_rules.v1.ReplaceParameters.destination_field:type_name -> google.protobuf.StringValue
-	14, // 22: com.coralogixapis.parsing_rules.v1.ReplaceParameters.replace_new_val:type_name -> google.protobuf.StringValue
-	14, // 23: com.coralogixapis.parsing_rules.v1.ReplaceParameters.rule:type_name -> google.protobuf.StringValue
-	14, // 24: com.coralogixapis.parsing_rules.v1.ParseParameters.destination_field:type_name -> google.protobuf.StringValue
-	14, // 25: com.coralogixapis.parsing_rules.v1.ParseParameters.rule:type_name -> google.protobuf.StringValue
-	15, // 26: com.coralogixapis.parsing_rules.v1.AllowParameters.keep_blocked_logs:type_name -> google.protobuf.BoolValue
-	14, // 27: com.coralogixapis.parsing_rules.v1.AllowParameters.rule:type_name -> google.protobuf.StringValue
-	15, // 28: com.coralogixapis.parsing_rules.v1.BlockParameters.keep_blocked_logs:type_name -> google.protobuf.BoolValue
-	14, // 29: com.coralogixapis.parsing_rules.v1.BlockParameters.rule:type_name -> google.protobuf.StringValue
-	1,  // 30: com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters.standard:type_name -> com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters.FormatStandard
-	14, // 31: com.coralogixapis.parsing_rules.v1.ExtractTimestampParameters.format:type_name -> google.protobuf.StringValue
-	14, // 32: com.coralogixapis.parsing_rules.v1.JsonStringifyParameters.destination_field:type_name -> google.protobuf.StringValue
-	15, // 33: com.coralogixapis.parsing_rules.v1.JsonStringifyParameters.delete_source:type_name -> google.protobuf.BoolValue
-	14, // 34: com.coralogixapis.parsing_rules.v1.JsonParseParameters.destination_field:type_name -> google.protobuf.StringValue
-	15, // 35: com.coralogixapis.parsing_rules.v1.JsonParseParameters.delete_source:type_name -> google.protobuf.BoolValue
-	15, // 36: com.coralogixapis.parsing_rules.v1.JsonParseParameters.escaped_value:type_name -> google.protobuf.BoolValue
-	15, // 37: com.coralogixapis.parsing_rules.v1.JsonParseParameters.override_dest:type_name -> google.protobuf.BoolValue
+var file_com_coralogix_rules_v1_rule_proto_depIdxs = []int32{
+	14, // 0: com.coralogix.rules.v1.Rule.id:type_name -> google.protobuf.StringValue
+	14, // 1: com.coralogix.rules.v1.Rule.name:type_name -> google.protobuf.StringValue
+	14, // 2: com.coralogix.rules.v1.Rule.description:type_name -> google.protobuf.StringValue
+	14, // 3: com.coralogix.rules.v1.Rule.source_field:type_name -> google.protobuf.StringValue
+	3,  // 4: com.coralogix.rules.v1.Rule.parameters:type_name -> com.coralogix.rules.v1.RuleParameters
+	15, // 5: com.coralogix.rules.v1.Rule.enabled:type_name -> google.protobuf.BoolValue
+	16, // 6: com.coralogix.rules.v1.Rule.order:type_name -> google.protobuf.UInt32Value
+	4,  // 7: com.coralogix.rules.v1.RuleParameters.extract_parameters:type_name -> com.coralogix.rules.v1.ExtractParameters
+	5,  // 8: com.coralogix.rules.v1.RuleParameters.json_extract_parameters:type_name -> com.coralogix.rules.v1.JsonExtractParameters
+	6,  // 9: com.coralogix.rules.v1.RuleParameters.replace_parameters:type_name -> com.coralogix.rules.v1.ReplaceParameters
+	7,  // 10: com.coralogix.rules.v1.RuleParameters.parse_parameters:type_name -> com.coralogix.rules.v1.ParseParameters
+	8,  // 11: com.coralogix.rules.v1.RuleParameters.allow_parameters:type_name -> com.coralogix.rules.v1.AllowParameters
+	9,  // 12: com.coralogix.rules.v1.RuleParameters.block_parameters:type_name -> com.coralogix.rules.v1.BlockParameters
+	10, // 13: com.coralogix.rules.v1.RuleParameters.extract_timestamp_parameters:type_name -> com.coralogix.rules.v1.ExtractTimestampParameters
+	11, // 14: com.coralogix.rules.v1.RuleParameters.remove_fields_parameters:type_name -> com.coralogix.rules.v1.RemoveFieldsParameters
+	12, // 15: com.coralogix.rules.v1.RuleParameters.json_stringify_parameters:type_name -> com.coralogix.rules.v1.JsonStringifyParameters
+	13, // 16: com.coralogix.rules.v1.RuleParameters.json_parse_parameters:type_name -> com.coralogix.rules.v1.JsonParseParameters
+	14, // 17: com.coralogix.rules.v1.ExtractParameters.rule:type_name -> google.protobuf.StringValue
+	0,  // 18: com.coralogix.rules.v1.JsonExtractParameters.destination_field_type:type_name -> com.coralogix.rules.v1.JsonExtractParameters.DestinationField
+	14, // 19: com.coralogix.rules.v1.JsonExtractParameters.rule:type_name -> google.protobuf.StringValue
+	14, // 20: com.coralogix.rules.v1.JsonExtractParameters.destination_field_text:type_name -> google.protobuf.StringValue
+	14, // 21: com.coralogix.rules.v1.ReplaceParameters.destination_field:type_name -> google.protobuf.StringValue
+	14, // 22: com.coralogix.rules.v1.ReplaceParameters.replace_new_val:type_name -> google.protobuf.StringValue
+	14, // 23: com.coralogix.rules.v1.ReplaceParameters.rule:type_name -> google.protobuf.StringValue
+	14, // 24: com.coralogix.rules.v1.ParseParameters.destination_field:type_name -> google.protobuf.StringValue
+	14, // 25: com.coralogix.rules.v1.ParseParameters.rule:type_name -> google.protobuf.StringValue
+	15, // 26: com.coralogix.rules.v1.AllowParameters.keep_blocked_logs:type_name -> google.protobuf.BoolValue
+	14, // 27: com.coralogix.rules.v1.AllowParameters.rule:type_name -> google.protobuf.StringValue
+	15, // 28: com.coralogix.rules.v1.BlockParameters.keep_blocked_logs:type_name -> google.protobuf.BoolValue
+	14, // 29: com.coralogix.rules.v1.BlockParameters.rule:type_name -> google.protobuf.StringValue
+	1,  // 30: com.coralogix.rules.v1.ExtractTimestampParameters.standard:type_name -> com.coralogix.rules.v1.ExtractTimestampParameters.FormatStandard
+	14, // 31: com.coralogix.rules.v1.ExtractTimestampParameters.format:type_name -> google.protobuf.StringValue
+	14, // 32: com.coralogix.rules.v1.JsonStringifyParameters.destination_field:type_name -> google.protobuf.StringValue
+	15, // 33: com.coralogix.rules.v1.JsonStringifyParameters.delete_source:type_name -> google.protobuf.BoolValue
+	14, // 34: com.coralogix.rules.v1.JsonParseParameters.destination_field:type_name -> google.protobuf.StringValue
+	15, // 35: com.coralogix.rules.v1.JsonParseParameters.delete_source:type_name -> google.protobuf.BoolValue
+	15, // 36: com.coralogix.rules.v1.JsonParseParameters.escaped_value:type_name -> google.protobuf.BoolValue
+	15, // 37: com.coralogix.rules.v1.JsonParseParameters.override_dest:type_name -> google.protobuf.BoolValue
 	38, // [38:38] is the sub-list for method output_type
 	38, // [38:38] is the sub-list for method input_type
 	38, // [38:38] is the sub-list for extension type_name
@@ -1134,12 +1134,12 @@ var file_com_coralogixapis_parsing_rules_v1_rule_proto_depIdxs = []int32{
 	0,  // [0:38] is the sub-list for field type_name
 }
 
-func init() { file_com_coralogixapis_parsing_rules_v1_rule_proto_init() }
-func file_com_coralogixapis_parsing_rules_v1_rule_proto_init() {
-	if File_com_coralogixapis_parsing_rules_v1_rule_proto != nil {
+func init() { file_com_coralogix_rules_v1_rule_proto_init() }
+func file_com_coralogix_rules_v1_rule_proto_init() {
+	if File_com_coralogix_rules_v1_rule_proto != nil {
 		return
 	}
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes[1].OneofWrappers = []any{
+	file_com_coralogix_rules_v1_rule_proto_msgTypes[1].OneofWrappers = []any{
 		(*RuleParameters_ExtractParameters)(nil),
 		(*RuleParameters_JsonExtractParameters)(nil),
 		(*RuleParameters_ReplaceParameters)(nil),
@@ -1155,18 +1155,18 @@ func file_com_coralogixapis_parsing_rules_v1_rule_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc), len(file_com_coralogixapis_parsing_rules_v1_rule_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_rules_v1_rule_proto_rawDesc), len(file_com_coralogix_rules_v1_rule_proto_rawDesc)),
 			NumEnums:      2,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_com_coralogixapis_parsing_rules_v1_rule_proto_goTypes,
-		DependencyIndexes: file_com_coralogixapis_parsing_rules_v1_rule_proto_depIdxs,
-		EnumInfos:         file_com_coralogixapis_parsing_rules_v1_rule_proto_enumTypes,
-		MessageInfos:      file_com_coralogixapis_parsing_rules_v1_rule_proto_msgTypes,
+		GoTypes:           file_com_coralogix_rules_v1_rule_proto_goTypes,
+		DependencyIndexes: file_com_coralogix_rules_v1_rule_proto_depIdxs,
+		EnumInfos:         file_com_coralogix_rules_v1_rule_proto_enumTypes,
+		MessageInfos:      file_com_coralogix_rules_v1_rule_proto_msgTypes,
 	}.Build()
-	File_com_coralogixapis_parsing_rules_v1_rule_proto = out.File
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_goTypes = nil
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_depIdxs = nil
+	File_com_coralogix_rules_v1_rule_proto = out.File
+	file_com_coralogix_rules_v1_rule_proto_goTypes = nil
+	file_com_coralogix_rules_v1_rule_proto_depIdxs = nil
 }
