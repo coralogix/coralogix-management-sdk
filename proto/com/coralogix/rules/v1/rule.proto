@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package com.coralogixapis.parsing_rules.v1;
+package com.coralogix.rules.v1;
 
 import "google/protobuf/wrappers.proto";
 
