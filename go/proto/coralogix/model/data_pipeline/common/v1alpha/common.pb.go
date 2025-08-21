@@ -124,6 +124,8 @@ const (
 	EntityType_ENTITY_TYPE_NOTIFICATION_REQUESTS EntityType = 27
 	// JSON representation: "infraMonitoringEvents"
 	EntityType_ENTITY_TYPE_INFRA_MONITORING_EVENTS EntityType = 28
+	// JSON representation: "labsLimitViolations"
+	EntityType_ENTITY_TYPE_LABS_LIMIT_VIOLATIONS EntityType = 29
 	// JSON representation: "metrics"
 	EntityType_ENTITY_TYPE_METRICS EntityType = 2
 	// JSON representation: "spans"
@@ -168,6 +170,7 @@ var (
 		26: "ENTITY_TYPE_ENGINE_SCHEMA_FIELDS",
 		27: "ENTITY_TYPE_NOTIFICATION_REQUESTS",
 		28: "ENTITY_TYPE_INFRA_MONITORING_EVENTS",
+		29: "ENTITY_TYPE_LABS_LIMIT_VIOLATIONS",
 		2:  "ENTITY_TYPE_METRICS",
 		3:  "ENTITY_TYPE_SPANS",
 		15: "ENTITY_TYPE_SESSION_RECORDINGS",
@@ -199,6 +202,7 @@ var (
 		"ENTITY_TYPE_ENGINE_SCHEMA_FIELDS":    26,
 		"ENTITY_TYPE_NOTIFICATION_REQUESTS":   27,
 		"ENTITY_TYPE_INFRA_MONITORING_EVENTS": 28,
+		"ENTITY_TYPE_LABS_LIMIT_VIOLATIONS":   29,
 		"ENTITY_TYPE_METRICS":                 2,
 		"ENTITY_TYPE_SPANS":                   3,
 		"ENTITY_TYPE_SESSION_RECORDINGS":      15,
@@ -250,7 +254,7 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x0ePILLAR_METRICS\x10\x02\x12\x10\n" +
 	"\fPILLAR_SPANS\x10\x03\x12\x11\n" +
 	"\rPILLAR_BINARY\x10\x04\x12\x13\n" +
-	"\x0fPILLAR_PROFILES\x10\x05*\xf5\x06\n" +
+	"\x0fPILLAR_PROFILES\x10\x05*\x9c\a\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
@@ -272,7 +276,8 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x1aENTITY_TYPE_ENGINE_QUERIES\x10\x19\x12$\n" +
 	" ENTITY_TYPE_ENGINE_SCHEMA_FIELDS\x10\x1a\x12%\n" +
 	"!ENTITY_TYPE_NOTIFICATION_REQUESTS\x10\x1b\x12'\n" +
-	"#ENTITY_TYPE_INFRA_MONITORING_EVENTS\x10\x1c\x12\x17\n" +
+	"#ENTITY_TYPE_INFRA_MONITORING_EVENTS\x10\x1c\x12%\n" +
+	"!ENTITY_TYPE_LABS_LIMIT_VIOLATIONS\x10\x1d\x12\x17\n" +
 	"\x13ENTITY_TYPE_METRICS\x10\x02\x12\x15\n" +
 	"\x11ENTITY_TYPE_SPANS\x10\x03\x12\"\n" +
 	"\x1eENTITY_TYPE_SESSION_RECORDINGS\x10\x0f\x12\x14\n" +

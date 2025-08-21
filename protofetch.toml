@@ -196,7 +196,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.8"
+revision = "v2.7.9"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
