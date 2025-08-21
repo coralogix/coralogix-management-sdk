@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v5.29.3
-// source: com/coralogixapis/parsing_rules/v1/rule_groups_service.proto
+// source: com/coralogix/rules/v1/rule_groups_service.proto
 
 package v1
 
@@ -19,14 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	RuleGroupsService_GetRuleGroup_FullMethodName             = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/GetRuleGroup"
-	RuleGroupsService_ListRuleGroups_FullMethodName           = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/ListRuleGroups"
-	RuleGroupsService_CreateRuleGroup_FullMethodName          = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/CreateRuleGroup"
-	RuleGroupsService_UpdateRuleGroup_FullMethodName          = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/UpdateRuleGroup"
-	RuleGroupsService_DeleteRuleGroup_FullMethodName          = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/DeleteRuleGroup"
-	RuleGroupsService_BulkDeleteRuleGroup_FullMethodName      = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/BulkDeleteRuleGroup"
-	RuleGroupsService_GetRuleGroupModelMapping_FullMethodName = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/GetRuleGroupModelMapping"
-	RuleGroupsService_GetCompanyUsageLimits_FullMethodName    = "/com.coralogixapis.parsing_rules.v1.RuleGroupsService/GetCompanyUsageLimits"
+	RuleGroupsService_GetRuleGroup_FullMethodName             = "/com.coralogix.rules.v1.RuleGroupsService/GetRuleGroup"
+	RuleGroupsService_ListRuleGroups_FullMethodName           = "/com.coralogix.rules.v1.RuleGroupsService/ListRuleGroups"
+	RuleGroupsService_CreateRuleGroup_FullMethodName          = "/com.coralogix.rules.v1.RuleGroupsService/CreateRuleGroup"
+	RuleGroupsService_UpdateRuleGroup_FullMethodName          = "/com.coralogix.rules.v1.RuleGroupsService/UpdateRuleGroup"
+	RuleGroupsService_DeleteRuleGroup_FullMethodName          = "/com.coralogix.rules.v1.RuleGroupsService/DeleteRuleGroup"
+	RuleGroupsService_BulkDeleteRuleGroup_FullMethodName      = "/com.coralogix.rules.v1.RuleGroupsService/BulkDeleteRuleGroup"
+	RuleGroupsService_GetRuleGroupModelMapping_FullMethodName = "/com.coralogix.rules.v1.RuleGroupsService/GetRuleGroupModelMapping"
+	RuleGroupsService_GetCompanyUsageLimits_FullMethodName    = "/com.coralogix.rules.v1.RuleGroupsService/GetCompanyUsageLimits"
 )
 
 // RuleGroupsServiceClient is the client API for RuleGroupsService service.
@@ -346,7 +346,7 @@ func _RuleGroupsService_GetCompanyUsageLimits_Handler(srv interface{}, ctx conte
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var RuleGroupsService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "com.coralogixapis.parsing_rules.v1.RuleGroupsService",
+	ServiceName: "com.coralogix.rules.v1.RuleGroupsService",
 	HandlerType: (*RuleGroupsServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -383,5 +383,5 @@ var RuleGroupsService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "com/coralogixapis/parsing_rules/v1/rule_groups_service.proto",
+	Metadata: "com/coralogix/rules/v1/rule_groups_service.proto",
 }

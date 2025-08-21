@@ -51,8 +51,8 @@ commit_hash = "0d4d14238b79d1306a2f4b6a76c87ba53113836c"
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.3.14"
-commit_hash = "3d706fa9342eb2e58caa71b1591759e336bf5960"
+revision = "v0.3.15"
+commit_hash = "e11837ee7ac18039752e2981699e58b980272d93"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -159,5 +159,5 @@ commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 [[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
-revision = "v0.18.0"
-commit_hash = "8cedca2a9902dc45a95e7295297eba30c1a25a69"
+revision = "v0.17.3"
+commit_hash = "0c8c3119f41074074234c210aae268461ccbb758"

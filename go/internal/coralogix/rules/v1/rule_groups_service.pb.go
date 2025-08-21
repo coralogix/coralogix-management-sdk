@@ -2,12 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: com/coralogixapis/parsing_rules/v1/rule_groups_service.proto
+// source: com/coralogix/rules/v1/rule_groups_service.proto
 
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -36,7 +36,7 @@ type GetRuleGroupRequest struct {
 
 func (x *GetRuleGroupRequest) Reset() {
 	*x = GetRuleGroupRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[0]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -48,7 +48,7 @@ func (x *GetRuleGroupRequest) String() string {
 func (*GetRuleGroupRequest) ProtoMessage() {}
 
 func (x *GetRuleGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[0]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -61,7 +61,7 @@ func (x *GetRuleGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuleGroupRequest.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *GetRuleGroupRequest) GetGroupId() string {
@@ -79,7 +79,7 @@ type ListRuleGroupsRequest struct {
 
 func (x *ListRuleGroupsRequest) Reset() {
 	*x = ListRuleGroupsRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[1]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -91,7 +91,7 @@ func (x *ListRuleGroupsRequest) String() string {
 func (*ListRuleGroupsRequest) ProtoMessage() {}
 
 func (x *ListRuleGroupsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[1]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -104,7 +104,7 @@ func (x *ListRuleGroupsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRuleGroupsRequest.ProtoReflect.Descriptor instead.
 func (*ListRuleGroupsRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{1}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{1}
 }
 
 type ListRuleGroupsResponse struct {
@@ -116,7 +116,7 @@ type ListRuleGroupsResponse struct {
 
 func (x *ListRuleGroupsResponse) Reset() {
 	*x = ListRuleGroupsResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[2]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -128,7 +128,7 @@ func (x *ListRuleGroupsResponse) String() string {
 func (*ListRuleGroupsResponse) ProtoMessage() {}
 
 func (x *ListRuleGroupsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[2]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -141,7 +141,7 @@ func (x *ListRuleGroupsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListRuleGroupsResponse.ProtoReflect.Descriptor instead.
 func (*ListRuleGroupsResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{2}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ListRuleGroupsResponse) GetRuleGroups() []*RuleGroup {
@@ -160,7 +160,7 @@ type GetRuleGroupResponse struct {
 
 func (x *GetRuleGroupResponse) Reset() {
 	*x = GetRuleGroupResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[3]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -172,7 +172,7 @@ func (x *GetRuleGroupResponse) String() string {
 func (*GetRuleGroupResponse) ProtoMessage() {}
 
 func (x *GetRuleGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[3]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -185,7 +185,7 @@ func (x *GetRuleGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuleGroupResponse.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *GetRuleGroupResponse) GetRuleGroup() *RuleGroup {
@@ -212,7 +212,7 @@ type CreateRuleGroupRequest struct {
 
 func (x *CreateRuleGroupRequest) Reset() {
 	*x = CreateRuleGroupRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[4]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -224,7 +224,7 @@ func (x *CreateRuleGroupRequest) String() string {
 func (*CreateRuleGroupRequest) ProtoMessage() {}
 
 func (x *CreateRuleGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[4]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +237,7 @@ func (x *CreateRuleGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRuleGroupRequest.ProtoReflect.Descriptor instead.
 func (*CreateRuleGroupRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *CreateRuleGroupRequest) GetName() *wrapperspb.StringValue {
@@ -312,7 +312,7 @@ type CreateRuleGroupResponse struct {
 
 func (x *CreateRuleGroupResponse) Reset() {
 	*x = CreateRuleGroupResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[5]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -324,7 +324,7 @@ func (x *CreateRuleGroupResponse) String() string {
 func (*CreateRuleGroupResponse) ProtoMessage() {}
 
 func (x *CreateRuleGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[5]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -337,7 +337,7 @@ func (x *CreateRuleGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateRuleGroupResponse.ProtoReflect.Descriptor instead.
 func (*CreateRuleGroupResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateRuleGroupResponse) GetRuleGroup() *RuleGroup {
@@ -357,7 +357,7 @@ type UpdateRuleGroupRequest struct {
 
 func (x *UpdateRuleGroupRequest) Reset() {
 	*x = UpdateRuleGroupRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[6]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -369,7 +369,7 @@ func (x *UpdateRuleGroupRequest) String() string {
 func (*UpdateRuleGroupRequest) ProtoMessage() {}
 
 func (x *UpdateRuleGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[6]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -382,7 +382,7 @@ func (x *UpdateRuleGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRuleGroupRequest.ProtoReflect.Descriptor instead.
 func (*UpdateRuleGroupRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateRuleGroupRequest) GetGroupId() *wrapperspb.StringValue {
@@ -408,7 +408,7 @@ type UpdateRuleGroupResponse struct {
 
 func (x *UpdateRuleGroupResponse) Reset() {
 	*x = UpdateRuleGroupResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[7]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -420,7 +420,7 @@ func (x *UpdateRuleGroupResponse) String() string {
 func (*UpdateRuleGroupResponse) ProtoMessage() {}
 
 func (x *UpdateRuleGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[7]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -433,7 +433,7 @@ func (x *UpdateRuleGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateRuleGroupResponse.ProtoReflect.Descriptor instead.
 func (*UpdateRuleGroupResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{7}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdateRuleGroupResponse) GetRuleGroup() *RuleGroup {
@@ -452,7 +452,7 @@ type DeleteRuleGroupRequest struct {
 
 func (x *DeleteRuleGroupRequest) Reset() {
 	*x = DeleteRuleGroupRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[8]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +464,7 @@ func (x *DeleteRuleGroupRequest) String() string {
 func (*DeleteRuleGroupRequest) ProtoMessage() {}
 
 func (x *DeleteRuleGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[8]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +477,7 @@ func (x *DeleteRuleGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRuleGroupRequest.ProtoReflect.Descriptor instead.
 func (*DeleteRuleGroupRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{8}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteRuleGroupRequest) GetGroupId() string {
@@ -496,7 +496,7 @@ type BulkDeleteRuleGroupRequest struct {
 
 func (x *BulkDeleteRuleGroupRequest) Reset() {
 	*x = BulkDeleteRuleGroupRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[9]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -508,7 +508,7 @@ func (x *BulkDeleteRuleGroupRequest) String() string {
 func (*BulkDeleteRuleGroupRequest) ProtoMessage() {}
 
 func (x *BulkDeleteRuleGroupRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[9]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -521,7 +521,7 @@ func (x *BulkDeleteRuleGroupRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkDeleteRuleGroupRequest.ProtoReflect.Descriptor instead.
 func (*BulkDeleteRuleGroupRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{9}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *BulkDeleteRuleGroupRequest) GetGroupIds() []string {
@@ -539,7 +539,7 @@ type DeleteRuleGroupResponse struct {
 
 func (x *DeleteRuleGroupResponse) Reset() {
 	*x = DeleteRuleGroupResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[10]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -551,7 +551,7 @@ func (x *DeleteRuleGroupResponse) String() string {
 func (*DeleteRuleGroupResponse) ProtoMessage() {}
 
 func (x *DeleteRuleGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[10]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -564,7 +564,7 @@ func (x *DeleteRuleGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteRuleGroupResponse.ProtoReflect.Descriptor instead.
 func (*DeleteRuleGroupResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{10}
 }
 
 type BulkDeleteRuleGroupResponse struct {
@@ -575,7 +575,7 @@ type BulkDeleteRuleGroupResponse struct {
 
 func (x *BulkDeleteRuleGroupResponse) Reset() {
 	*x = BulkDeleteRuleGroupResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[11]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -587,7 +587,7 @@ func (x *BulkDeleteRuleGroupResponse) String() string {
 func (*BulkDeleteRuleGroupResponse) ProtoMessage() {}
 
 func (x *BulkDeleteRuleGroupResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[11]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -600,7 +600,7 @@ func (x *BulkDeleteRuleGroupResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BulkDeleteRuleGroupResponse.ProtoReflect.Descriptor instead.
 func (*BulkDeleteRuleGroupResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{11}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{11}
 }
 
 type GetRuleGroupModelMappingRequest struct {
@@ -619,7 +619,7 @@ type GetRuleGroupModelMappingRequest struct {
 
 func (x *GetRuleGroupModelMappingRequest) Reset() {
 	*x = GetRuleGroupModelMappingRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[12]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -631,7 +631,7 @@ func (x *GetRuleGroupModelMappingRequest) String() string {
 func (*GetRuleGroupModelMappingRequest) ProtoMessage() {}
 
 func (x *GetRuleGroupModelMappingRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[12]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -644,7 +644,7 @@ func (x *GetRuleGroupModelMappingRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuleGroupModelMappingRequest.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupModelMappingRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *GetRuleGroupModelMappingRequest) GetName() *wrapperspb.StringValue {
@@ -712,7 +712,7 @@ type GetRuleGroupModelMappingResponse struct {
 
 func (x *GetRuleGroupModelMappingResponse) Reset() {
 	*x = GetRuleGroupModelMappingResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[13]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -724,7 +724,7 @@ func (x *GetRuleGroupModelMappingResponse) String() string {
 func (*GetRuleGroupModelMappingResponse) ProtoMessage() {}
 
 func (x *GetRuleGroupModelMappingResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[13]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -737,7 +737,7 @@ func (x *GetRuleGroupModelMappingResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetRuleGroupModelMappingResponse.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupModelMappingResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{13}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *GetRuleGroupModelMappingResponse) GetRuleDefinition() *structpb.Struct {
@@ -755,7 +755,7 @@ type GetCompanyUsageLimitsRequest struct {
 
 func (x *GetCompanyUsageLimitsRequest) Reset() {
 	*x = GetCompanyUsageLimitsRequest{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[14]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -767,7 +767,7 @@ func (x *GetCompanyUsageLimitsRequest) String() string {
 func (*GetCompanyUsageLimitsRequest) ProtoMessage() {}
 
 func (x *GetCompanyUsageLimitsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[14]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -780,7 +780,7 @@ func (x *GetCompanyUsageLimitsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyUsageLimitsRequest.ProtoReflect.Descriptor instead.
 func (*GetCompanyUsageLimitsRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{14}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{14}
 }
 
 type GetCompanyUsageLimitsResponse struct {
@@ -794,7 +794,7 @@ type GetCompanyUsageLimitsResponse struct {
 
 func (x *GetCompanyUsageLimitsResponse) Reset() {
 	*x = GetCompanyUsageLimitsResponse{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[15]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -806,7 +806,7 @@ func (x *GetCompanyUsageLimitsResponse) String() string {
 func (*GetCompanyUsageLimitsResponse) ProtoMessage() {}
 
 func (x *GetCompanyUsageLimitsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[15]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -819,7 +819,7 @@ func (x *GetCompanyUsageLimitsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCompanyUsageLimitsResponse.ProtoReflect.Descriptor instead.
 func (*GetCompanyUsageLimitsResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{15}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *GetCompanyUsageLimitsResponse) GetCompanyId() *wrapperspb.StringValue {
@@ -854,7 +854,7 @@ type CreateRuleGroupRequest_CreateRuleSubgroup struct {
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup) Reset() {
 	*x = CreateRuleGroupRequest_CreateRuleSubgroup{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[16]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[16]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -866,7 +866,7 @@ func (x *CreateRuleGroupRequest_CreateRuleSubgroup) String() string {
 func (*CreateRuleGroupRequest_CreateRuleSubgroup) ProtoMessage() {}
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[16]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[16]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -879,7 +879,7 @@ func (x *CreateRuleGroupRequest_CreateRuleSubgroup) ProtoReflect() protoreflect.
 
 // Deprecated: Use CreateRuleGroupRequest_CreateRuleSubgroup.ProtoReflect.Descriptor instead.
 func (*CreateRuleGroupRequest_CreateRuleSubgroup) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4, 0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4, 0}
 }
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup) GetRules() []*CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule {
@@ -917,7 +917,7 @@ type CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule struct {
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) Reset() {
 	*x = CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[17]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[17]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -929,7 +929,7 @@ func (x *CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) String() string {
 func (*CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) ProtoMessage() {}
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[17]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[17]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -942,7 +942,7 @@ func (x *CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) ProtoReflect() pr
 
 // Deprecated: Use CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule.ProtoReflect.Descriptor instead.
 func (*CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4, 0, 0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{4, 0, 0}
 }
 
 func (x *CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule) GetName() *wrapperspb.StringValue {
@@ -998,7 +998,7 @@ type GetRuleGroupModelMappingRequest_CreateRuleSubgroup struct {
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup) Reset() {
 	*x = GetRuleGroupModelMappingRequest_CreateRuleSubgroup{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[18]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1010,7 +1010,7 @@ func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup) String() string {
 func (*GetRuleGroupModelMappingRequest_CreateRuleSubgroup) ProtoMessage() {}
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[18]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1023,7 +1023,7 @@ func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup) ProtoReflect() prot
 
 // Deprecated: Use GetRuleGroupModelMappingRequest_CreateRuleSubgroup.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupModelMappingRequest_CreateRuleSubgroup) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12, 0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12, 0}
 }
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup) GetRules() []*GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule {
@@ -1061,7 +1061,7 @@ type GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule struct {
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) Reset() {
 	*x = GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[19]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1073,7 +1073,7 @@ func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) String()
 func (*GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) ProtoMessage() {}
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[19]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1086,7 +1086,7 @@ func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) ProtoRef
 
 // Deprecated: Use GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule.ProtoReflect.Descriptor instead.
 func (*GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12, 0, 0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{12, 0, 0}
 }
 
 func (x *GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule) GetName() *wrapperspb.StringValue {
@@ -1142,7 +1142,7 @@ type GetCompanyUsageLimitsResponse_Counts struct {
 
 func (x *GetCompanyUsageLimitsResponse_Counts) Reset() {
 	*x = GetCompanyUsageLimitsResponse_Counts{}
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[20]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1154,7 +1154,7 @@ func (x *GetCompanyUsageLimitsResponse_Counts) String() string {
 func (*GetCompanyUsageLimitsResponse_Counts) ProtoMessage() {}
 
 func (x *GetCompanyUsageLimitsResponse_Counts) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes[20]
+	mi := &file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1167,7 +1167,7 @@ func (x *GetCompanyUsageLimitsResponse_Counts) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use GetCompanyUsageLimitsResponse_Counts.ProtoReflect.Descriptor instead.
 func (*GetCompanyUsageLimitsResponse_Counts) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{15, 0}
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP(), []int{15, 0}
 }
 
 func (x *GetCompanyUsageLimitsResponse_Counts) GetParsingThemes() *wrapperspb.Int32Value {
@@ -1191,97 +1191,97 @@ func (x *GetCompanyUsageLimitsResponse_Counts) GetRules() *wrapperspb.Int32Value
 	return nil
 }
 
-var File_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto protoreflect.FileDescriptor
+var File_com_coralogix_rules_v1_rule_groups_service_proto protoreflect.FileDescriptor
 
-const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc = "" +
+const file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogixapis/parsing_rules/v1/rule_groups_service.proto\x12\"com.coralogixapis.parsing_rules.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a-com/coralogixapis/parsing_rules/v1/rule.proto\x1a3com/coralogixapis/parsing_rules/v1/rule_group.proto\x1a5com/coralogixapis/parsing_rules/v1/rule_matcher.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"0\n" +
+	"0com/coralogix/rules/v1/rule_groups_service.proto\x12\x16com.coralogix.rules.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a!com/coralogix/rules/v1/rule.proto\x1a'com/coralogix/rules/v1/rule_group.proto\x1a)com/coralogix/rules/v1/rule_matcher.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"0\n" +
 	"\x13GetRuleGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"\x17\n" +
-	"\x15ListRuleGroupsRequest\"h\n" +
-	"\x16ListRuleGroupsResponse\x12N\n" +
-	"\vrule_groups\x18\x01 \x03(\v2-.com.coralogixapis.parsing_rules.v1.RuleGroupR\n" +
-	"ruleGroups\"d\n" +
-	"\x14GetRuleGroupResponse\x12L\n" +
+	"\x15ListRuleGroupsRequest\"\\\n" +
+	"\x16ListRuleGroupsResponse\x12B\n" +
+	"\vrule_groups\x18\x01 \x03(\v2!.com.coralogix.rules.v1.RuleGroupR\n" +
+	"ruleGroups\"X\n" +
+	"\x14GetRuleGroupResponse\x12@\n" +
 	"\n" +
-	"rule_group\x18\x01 \x01(\v2-.com.coralogixapis.parsing_rules.v1.RuleGroupR\truleGroup\"\xee\t\n" +
+	"rule_group\x18\x01 \x01(\v2!.com.coralogix.rules.v1.RuleGroupR\truleGroup\"\xb2\t\n" +
 	"\x16CreateRuleGroupRequest\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x124\n" +
 	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
 	"\x06hidden\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x06hidden\x126\n" +
-	"\acreator\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\acreator\x12T\n" +
-	"\rrule_matchers\x18\x06 \x03(\v2/.com.coralogixapis.parsing_rules.v1.RuleMatcherR\fruleMatchers\x12t\n" +
-	"\x0erule_subgroups\x18\a \x03(\v2M.com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroupR\rruleSubgroups\x122\n" +
-	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x12C\n" +
-	"\ateam_id\x18\t \x01(\v2*.com.coralogixapis.parsing_rules.v1.TeamIdR\x06teamId\x1a\xfa\x04\n" +
-	"\x12CreateRuleSubgroup\x12n\n" +
-	"\x05rules\x18\x01 \x03(\v2X.com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRuleR\x05rules\x124\n" +
+	"\acreator\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\acreator\x12H\n" +
+	"\rrule_matchers\x18\x06 \x03(\v2#.com.coralogix.rules.v1.RuleMatcherR\fruleMatchers\x12h\n" +
+	"\x0erule_subgroups\x18\a \x03(\v2A.com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroupR\rruleSubgroups\x122\n" +
+	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x127\n" +
+	"\ateam_id\x18\t \x01(\v2\x1e.com.coralogix.rules.v1.TeamIdR\x06teamId\x1a\xe2\x04\n" +
+	"\x12CreateRuleSubgroup\x12b\n" +
+	"\x05rules\x18\x01 \x03(\v2L.com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRuleR\x05rules\x124\n" +
 	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
-	"\x05order\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\x89\x03\n" +
+	"\x05order\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\xfd\x02\n" +
 	"\n" +
 	"CreateRule\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x12?\n" +
-	"\fsource_field\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12R\n" +
+	"\fsource_field\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12F\n" +
 	"\n" +
-	"parameters\x18\x05 \x01(\v22.com.coralogixapis.parsing_rules.v1.RuleParametersR\n" +
+	"parameters\x18\x05 \x01(\v2&.com.coralogix.rules.v1.RuleParametersR\n" +
 	"parameters\x124\n" +
 	"\aenabled\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
-	"\x05order\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05orderJ\x04\b\x02\x10\x03R\x04rule\"g\n" +
-	"\x17CreateRuleGroupResponse\x12L\n" +
+	"\x05order\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05orderJ\x04\b\x02\x10\x03R\x04rule\"[\n" +
+	"\x17CreateRuleGroupResponse\x12@\n" +
 	"\n" +
-	"rule_group\x18\x01 \x01(\v2-.com.coralogixapis.parsing_rules.v1.RuleGroupR\truleGroup\"\xac\x01\n" +
+	"rule_group\x18\x01 \x01(\v2!.com.coralogix.rules.v1.RuleGroupR\truleGroup\"\xa0\x01\n" +
 	"\x16UpdateRuleGroupRequest\x127\n" +
-	"\bgroup_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\agroupId\x12Y\n" +
+	"\bgroup_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\agroupId\x12M\n" +
 	"\n" +
-	"rule_group\x18\x02 \x01(\v2:.com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequestR\truleGroup\"g\n" +
-	"\x17UpdateRuleGroupResponse\x12L\n" +
+	"rule_group\x18\x02 \x01(\v2..com.coralogix.rules.v1.CreateRuleGroupRequestR\truleGroup\"[\n" +
+	"\x17UpdateRuleGroupResponse\x12@\n" +
 	"\n" +
-	"rule_group\x18\x01 \x01(\v2-.com.coralogixapis.parsing_rules.v1.RuleGroupR\truleGroup\"3\n" +
+	"rule_group\x18\x01 \x01(\v2!.com.coralogix.rules.v1.RuleGroupR\truleGroup\"3\n" +
 	"\x16DeleteRuleGroupRequest\x12\x19\n" +
 	"\bgroup_id\x18\x01 \x01(\tR\agroupId\"9\n" +
 	"\x1aBulkDeleteRuleGroupRequest\x12\x1b\n" +
 	"\tgroup_ids\x18\x01 \x03(\tR\bgroupIds\"\x19\n" +
 	"\x17DeleteRuleGroupResponse\"\x1d\n" +
-	"\x1bBulkDeleteRuleGroupResponse\"\xc4\t\n" +
+	"\x1bBulkDeleteRuleGroupResponse\"\x94\t\n" +
 	"\x1fGetRuleGroupModelMappingRequest\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x124\n" +
 	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
 	"\x06hidden\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x06hidden\x126\n" +
-	"\acreator\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\acreator\x12T\n" +
-	"\rrule_matchers\x18\x06 \x03(\v2/.com.coralogixapis.parsing_rules.v1.RuleMatcherR\fruleMatchers\x12}\n" +
-	"\x0erule_subgroups\x18\a \x03(\v2V.com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroupR\rruleSubgroups\x122\n" +
-	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\x83\x05\n" +
-	"\x12CreateRuleSubgroup\x12w\n" +
-	"\x05rules\x18\x01 \x03(\v2a.com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRuleR\x05rules\x124\n" +
+	"\acreator\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueR\acreator\x12H\n" +
+	"\rrule_matchers\x18\x06 \x03(\v2#.com.coralogix.rules.v1.RuleMatcherR\fruleMatchers\x12q\n" +
+	"\x0erule_subgroups\x18\a \x03(\v2J.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroupR\rruleSubgroups\x122\n" +
+	"\x05order\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\xeb\x04\n" +
+	"\x12CreateRuleSubgroup\x12k\n" +
+	"\x05rules\x18\x01 \x03(\v2U.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRuleR\x05rules\x124\n" +
 	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
-	"\x05order\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\x89\x03\n" +
+	"\x05order\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05order\x1a\xfd\x02\n" +
 	"\n" +
 	"CreateRule\x120\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x12?\n" +
-	"\fsource_field\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12R\n" +
+	"\fsource_field\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vsourceField\x12F\n" +
 	"\n" +
-	"parameters\x18\x05 \x01(\v22.com.coralogixapis.parsing_rules.v1.RuleParametersR\n" +
+	"parameters\x18\x05 \x01(\v2&.com.coralogix.rules.v1.RuleParametersR\n" +
 	"parameters\x124\n" +
 	"\aenabled\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x122\n" +
 	"\x05order\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueR\x05orderJ\x04\b\x02\x10\x03R\x04rule\"d\n" +
 	" GetRuleGroupModelMappingResponse\x12@\n" +
 	"\x0frule_definition\x18\x01 \x01(\v2\x17.google.protobuf.StructR\x0eruleDefinition\"\x1e\n" +
-	"\x1cGetCompanyUsageLimitsRequest\"\xd5\x03\n" +
+	"\x1cGetCompanyUsageLimitsRequest\"\xbd\x03\n" +
 	"\x1dGetCompanyUsageLimitsResponse\x12;\n" +
 	"\n" +
-	"company_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\tcompanyId\x12`\n" +
-	"\x06limits\x18\x02 \x01(\v2H.com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.CountsR\x06limits\x12^\n" +
-	"\x05usage\x18\x03 \x01(\v2H.com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.CountsR\x05usage\x1a\xb4\x01\n" +
+	"company_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\tcompanyId\x12T\n" +
+	"\x06limits\x18\x02 \x01(\v2<.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.CountsR\x06limits\x12R\n" +
+	"\x05usage\x18\x03 \x01(\v2<.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.CountsR\x05usage\x1a\xb4\x01\n" +
 	"\x06Counts\x12B\n" +
 	"\x0eparsing_themes\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\rparsingThemes\x123\n" +
 	"\x06groups\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x06groups\x121\n" +
-	"\x05rules\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05rules2\xf6\x15\n" +
-	"\x11RuleGroupsService\x12\xba\x02\n" +
-	"\fGetRuleGroup\x127.com.coralogixapis.parsing_rules.v1.GetRuleGroupRequest\x1a8.com.coralogixapis.parsing_rules.v1.GetRuleGroupResponse\"\xb6\x01\x92Az\n" +
+	"\x05rules\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05rules2\xb6\x14\n" +
+	"\x11RuleGroupsService\x12\xa2\x02\n" +
+	"\fGetRuleGroup\x12+.com.coralogix.rules.v1.GetRuleGroupRequest\x1a,.com.coralogix.rules.v1.GetRuleGroupResponse\"\xb6\x01\x92Az\n" +
 	"\x13Rule Groups Service\x12\x0eGet Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1289,8 +1289,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x10\n" +
-	"\x0eget rule group\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/rulegroups/{group_id}\x12\xbc\x02\n" +
-	"\x0eListRuleGroups\x129.com.coralogixapis.parsing_rules.v1.ListRuleGroupsRequest\x1a:.com.coralogixapis.parsing_rules.v1.ListRuleGroupsResponse\"\xb2\x01\x92A|\n" +
+	"\x0eget rule group\x82\xd3\xe4\x93\x02\x1f\x12\x1d/api/v1/rulegroups/{group_id}\x12\xa4\x02\n" +
+	"\x0eListRuleGroups\x12-.com.coralogix.rules.v1.ListRuleGroupsRequest\x1a..com.coralogix.rules.v1.ListRuleGroupsResponse\"\xb2\x01\x92A|\n" +
 	"\x13Rule Groups Service\x12\x10List Rule GroupsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1298,8 +1298,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x15\n" +
-	"\x13get all rule groups\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/rulegroups\x12\xc1\x02\n" +
-	"\x0fCreateRuleGroup\x12:.com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest\x1a;.com.coralogixapis.parsing_rules.v1.CreateRuleGroupResponse\"\xb4\x01\x92A}\n" +
+	"\x13get all rule groups\x82\xd3\xe4\x93\x02\x14\x12\x12/api/v1/rulegroups\x12\xa9\x02\n" +
+	"\x0fCreateRuleGroup\x12..com.coralogix.rules.v1.CreateRuleGroupRequest\x1a/.com.coralogix.rules.v1.CreateRuleGroupResponse\"\xb4\x01\x92A}\n" +
 	"\x13Rule Groups Service\x12\x11Create Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1307,8 +1307,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x13\n" +
-	"\x11create rule group\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/rulegroups\x12\xd5\x02\n" +
-	"\x0fUpdateRuleGroup\x12:.com.coralogixapis.parsing_rules.v1.UpdateRuleGroupRequest\x1a;.com.coralogixapis.parsing_rules.v1.UpdateRuleGroupResponse\"\xc8\x01\x92A}\n" +
+	"\x11create rule group\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/api/v1/rulegroups\x12\xbd\x02\n" +
+	"\x0fUpdateRuleGroup\x12..com.coralogix.rules.v1.UpdateRuleGroupRequest\x1a/.com.coralogix.rules.v1.UpdateRuleGroupResponse\"\xc8\x01\x92A}\n" +
 	"\x13Rule Groups Service\x12\x11Update Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1317,8 +1317,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x13\n" +
 	"\x11update rule group\x82\xd3\xe4\x93\x02+:\n" +
-	"rule_group\x1a\x1d/api/v1/rulegroups/{group_id}\x12\xc9\x02\n" +
-	"\x0fDeleteRuleGroup\x12:.com.coralogixapis.parsing_rules.v1.DeleteRuleGroupRequest\x1a;.com.coralogixapis.parsing_rules.v1.DeleteRuleGroupResponse\"\xbc\x01\x92A}\n" +
+	"rule_group\x1a\x1d/api/v1/rulegroups/{group_id}\x12\xb1\x02\n" +
+	"\x0fDeleteRuleGroup\x12..com.coralogix.rules.v1.DeleteRuleGroupRequest\x1a/.com.coralogix.rules.v1.DeleteRuleGroupResponse\"\xbc\x01\x92A}\n" +
 	"\x13Rule Groups Service\x12\x11Delete Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1326,8 +1326,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x13\n" +
-	"\x11delete rule group\x82\xd3\xe4\x93\x02\x1f*\x1d/api/v1/rulegroups/{group_id}\x12\xd6\x02\n" +
-	"\x13BulkDeleteRuleGroup\x12>.com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupRequest\x1a?.com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupResponse\"\xbd\x01\x92A\x82\x01\n" +
+	"\x11delete rule group\x82\xd3\xe4\x93\x02\x1f*\x1d/api/v1/rulegroups/{group_id}\x12\xbe\x02\n" +
+	"\x13BulkDeleteRuleGroup\x122.com.coralogix.rules.v1.BulkDeleteRuleGroupRequest\x1a3.com.coralogix.rules.v1.BulkDeleteRuleGroupResponse\"\xbd\x01\x92A\x82\x01\n" +
 	"\x13Rule Groups Service\x12\x16Bulk Delete Rule GroupJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1335,8 +1335,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x19\n" +
-	"\x17bulk delete rule groups\x82\xd3\xe4\x93\x02\x14*\x12/api/v1/rulegroups\x12\xee\x02\n" +
-	"\x18GetRuleGroupModelMapping\x12C.com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest\x1aD.com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingResponse\"\xc6\x01\x92A\x88\x01\n" +
+	"\x17bulk delete rule groups\x82\xd3\xe4\x93\x02\x14*\x12/api/v1/rulegroups\x12\xd6\x02\n" +
+	"\x18GetRuleGroupModelMapping\x127.com.coralogix.rules.v1.GetRuleGroupModelMappingRequest\x1a8.com.coralogix.rules.v1.GetRuleGroupModelMappingResponse\"\xc6\x01\x92A\x88\x01\n" +
 	"\x13Rule Groups Service\x12\x1cGet Rule Group Model MappingJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1344,8 +1344,8 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error¸\x02\x12\n" +
-	"\x10get rule mapping\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/rulegroup-mapping\x12\xf6\x02\n" +
-	"\x15GetCompanyUsageLimits\x12@.com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsRequest\x1aA.com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse\"\xd7\x01\x92A\x84\x01\n" +
+	"\x10get rule mapping\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/api/v1/rulegroup-mapping\x12\xde\x02\n" +
+	"\x15GetCompanyUsageLimits\x124.com.coralogix.rules.v1.GetCompanyUsageLimitsRequest\x1a5.com.coralogix.rules.v1.GetCompanyUsageLimitsResponse\"\xd7\x01\x92A\x84\x01\n" +
 	"\x13Rule Groups Service\x12\x18Get Company Usage LimitsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1357,115 +1357,115 @@ const file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc 
 	"\x13Rule Groups Service\x12 A service to manage rule groups.b\x06proto3"
 
 var (
-	file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescOnce sync.Once
-	file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescData []byte
+	file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescOnce sync.Once
+	file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescData []byte
 )
 
-func file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescGZIP() []byte {
-	file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescOnce.Do(func() {
-		file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc), len(file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc)))
+func file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescGZIP() []byte {
+	file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescOnce.Do(func() {
+		file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc), len(file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc)))
 	})
-	return file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDescData
+	return file_com_coralogix_rules_v1_rule_groups_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
-var file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_goTypes = []any{
-	(*GetRuleGroupRequest)(nil),                                           // 0: com.coralogixapis.parsing_rules.v1.GetRuleGroupRequest
-	(*ListRuleGroupsRequest)(nil),                                         // 1: com.coralogixapis.parsing_rules.v1.ListRuleGroupsRequest
-	(*ListRuleGroupsResponse)(nil),                                        // 2: com.coralogixapis.parsing_rules.v1.ListRuleGroupsResponse
-	(*GetRuleGroupResponse)(nil),                                          // 3: com.coralogixapis.parsing_rules.v1.GetRuleGroupResponse
-	(*CreateRuleGroupRequest)(nil),                                        // 4: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest
-	(*CreateRuleGroupResponse)(nil),                                       // 5: com.coralogixapis.parsing_rules.v1.CreateRuleGroupResponse
-	(*UpdateRuleGroupRequest)(nil),                                        // 6: com.coralogixapis.parsing_rules.v1.UpdateRuleGroupRequest
-	(*UpdateRuleGroupResponse)(nil),                                       // 7: com.coralogixapis.parsing_rules.v1.UpdateRuleGroupResponse
-	(*DeleteRuleGroupRequest)(nil),                                        // 8: com.coralogixapis.parsing_rules.v1.DeleteRuleGroupRequest
-	(*BulkDeleteRuleGroupRequest)(nil),                                    // 9: com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupRequest
-	(*DeleteRuleGroupResponse)(nil),                                       // 10: com.coralogixapis.parsing_rules.v1.DeleteRuleGroupResponse
-	(*BulkDeleteRuleGroupResponse)(nil),                                   // 11: com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupResponse
-	(*GetRuleGroupModelMappingRequest)(nil),                               // 12: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest
-	(*GetRuleGroupModelMappingResponse)(nil),                              // 13: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingResponse
-	(*GetCompanyUsageLimitsRequest)(nil),                                  // 14: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsRequest
-	(*GetCompanyUsageLimitsResponse)(nil),                                 // 15: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse
-	(*CreateRuleGroupRequest_CreateRuleSubgroup)(nil),                     // 16: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup
-	(*CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule)(nil),          // 17: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule
-	(*GetRuleGroupModelMappingRequest_CreateRuleSubgroup)(nil),            // 18: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup
-	(*GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule)(nil), // 19: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule
-	(*GetCompanyUsageLimitsResponse_Counts)(nil),                          // 20: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts
-	(*RuleGroup)(nil),                                                     // 21: com.coralogixapis.parsing_rules.v1.RuleGroup
+var file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes = make([]protoimpl.MessageInfo, 21)
+var file_com_coralogix_rules_v1_rule_groups_service_proto_goTypes = []any{
+	(*GetRuleGroupRequest)(nil),                                           // 0: com.coralogix.rules.v1.GetRuleGroupRequest
+	(*ListRuleGroupsRequest)(nil),                                         // 1: com.coralogix.rules.v1.ListRuleGroupsRequest
+	(*ListRuleGroupsResponse)(nil),                                        // 2: com.coralogix.rules.v1.ListRuleGroupsResponse
+	(*GetRuleGroupResponse)(nil),                                          // 3: com.coralogix.rules.v1.GetRuleGroupResponse
+	(*CreateRuleGroupRequest)(nil),                                        // 4: com.coralogix.rules.v1.CreateRuleGroupRequest
+	(*CreateRuleGroupResponse)(nil),                                       // 5: com.coralogix.rules.v1.CreateRuleGroupResponse
+	(*UpdateRuleGroupRequest)(nil),                                        // 6: com.coralogix.rules.v1.UpdateRuleGroupRequest
+	(*UpdateRuleGroupResponse)(nil),                                       // 7: com.coralogix.rules.v1.UpdateRuleGroupResponse
+	(*DeleteRuleGroupRequest)(nil),                                        // 8: com.coralogix.rules.v1.DeleteRuleGroupRequest
+	(*BulkDeleteRuleGroupRequest)(nil),                                    // 9: com.coralogix.rules.v1.BulkDeleteRuleGroupRequest
+	(*DeleteRuleGroupResponse)(nil),                                       // 10: com.coralogix.rules.v1.DeleteRuleGroupResponse
+	(*BulkDeleteRuleGroupResponse)(nil),                                   // 11: com.coralogix.rules.v1.BulkDeleteRuleGroupResponse
+	(*GetRuleGroupModelMappingRequest)(nil),                               // 12: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest
+	(*GetRuleGroupModelMappingResponse)(nil),                              // 13: com.coralogix.rules.v1.GetRuleGroupModelMappingResponse
+	(*GetCompanyUsageLimitsRequest)(nil),                                  // 14: com.coralogix.rules.v1.GetCompanyUsageLimitsRequest
+	(*GetCompanyUsageLimitsResponse)(nil),                                 // 15: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse
+	(*CreateRuleGroupRequest_CreateRuleSubgroup)(nil),                     // 16: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup
+	(*CreateRuleGroupRequest_CreateRuleSubgroup_CreateRule)(nil),          // 17: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule
+	(*GetRuleGroupModelMappingRequest_CreateRuleSubgroup)(nil),            // 18: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup
+	(*GetRuleGroupModelMappingRequest_CreateRuleSubgroup_CreateRule)(nil), // 19: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule
+	(*GetCompanyUsageLimitsResponse_Counts)(nil),                          // 20: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts
+	(*RuleGroup)(nil),                                                     // 21: com.coralogix.rules.v1.RuleGroup
 	(*wrapperspb.StringValue)(nil),                                        // 22: google.protobuf.StringValue
 	(*wrapperspb.BoolValue)(nil),                                          // 23: google.protobuf.BoolValue
-	(*RuleMatcher)(nil),                                                   // 24: com.coralogixapis.parsing_rules.v1.RuleMatcher
+	(*RuleMatcher)(nil),                                                   // 24: com.coralogix.rules.v1.RuleMatcher
 	(*wrapperspb.UInt32Value)(nil),                                        // 25: google.protobuf.UInt32Value
-	(*TeamId)(nil),                                                        // 26: com.coralogixapis.parsing_rules.v1.TeamId
+	(*TeamId)(nil),                                                        // 26: com.coralogix.rules.v1.TeamId
 	(*structpb.Struct)(nil),                                               // 27: google.protobuf.Struct
-	(*RuleParameters)(nil),                                                // 28: com.coralogixapis.parsing_rules.v1.RuleParameters
+	(*RuleParameters)(nil),                                                // 28: com.coralogix.rules.v1.RuleParameters
 	(*wrapperspb.Int32Value)(nil),                                         // 29: google.protobuf.Int32Value
 }
-var file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_depIdxs = []int32{
-	21, // 0: com.coralogixapis.parsing_rules.v1.ListRuleGroupsResponse.rule_groups:type_name -> com.coralogixapis.parsing_rules.v1.RuleGroup
-	21, // 1: com.coralogixapis.parsing_rules.v1.GetRuleGroupResponse.rule_group:type_name -> com.coralogixapis.parsing_rules.v1.RuleGroup
-	22, // 2: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.name:type_name -> google.protobuf.StringValue
-	22, // 3: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.description:type_name -> google.protobuf.StringValue
-	23, // 4: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.enabled:type_name -> google.protobuf.BoolValue
-	23, // 5: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.hidden:type_name -> google.protobuf.BoolValue
-	22, // 6: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.creator:type_name -> google.protobuf.StringValue
-	24, // 7: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.rule_matchers:type_name -> com.coralogixapis.parsing_rules.v1.RuleMatcher
-	16, // 8: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.rule_subgroups:type_name -> com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup
-	25, // 9: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.order:type_name -> google.protobuf.UInt32Value
-	26, // 10: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.team_id:type_name -> com.coralogixapis.parsing_rules.v1.TeamId
-	21, // 11: com.coralogixapis.parsing_rules.v1.CreateRuleGroupResponse.rule_group:type_name -> com.coralogixapis.parsing_rules.v1.RuleGroup
-	22, // 12: com.coralogixapis.parsing_rules.v1.UpdateRuleGroupRequest.group_id:type_name -> google.protobuf.StringValue
-	4,  // 13: com.coralogixapis.parsing_rules.v1.UpdateRuleGroupRequest.rule_group:type_name -> com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest
-	21, // 14: com.coralogixapis.parsing_rules.v1.UpdateRuleGroupResponse.rule_group:type_name -> com.coralogixapis.parsing_rules.v1.RuleGroup
-	22, // 15: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.name:type_name -> google.protobuf.StringValue
-	22, // 16: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.description:type_name -> google.protobuf.StringValue
-	23, // 17: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.enabled:type_name -> google.protobuf.BoolValue
-	23, // 18: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.hidden:type_name -> google.protobuf.BoolValue
-	22, // 19: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.creator:type_name -> google.protobuf.StringValue
-	24, // 20: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.rule_matchers:type_name -> com.coralogixapis.parsing_rules.v1.RuleMatcher
-	18, // 21: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.rule_subgroups:type_name -> com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup
-	25, // 22: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.order:type_name -> google.protobuf.UInt32Value
-	27, // 23: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingResponse.rule_definition:type_name -> google.protobuf.Struct
-	22, // 24: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.company_id:type_name -> google.protobuf.StringValue
-	20, // 25: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.limits:type_name -> com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts
-	20, // 26: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.usage:type_name -> com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts
-	17, // 27: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.rules:type_name -> com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule
-	23, // 28: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.enabled:type_name -> google.protobuf.BoolValue
-	25, // 29: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.order:type_name -> google.protobuf.UInt32Value
-	22, // 30: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.name:type_name -> google.protobuf.StringValue
-	22, // 31: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.description:type_name -> google.protobuf.StringValue
-	22, // 32: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.source_field:type_name -> google.protobuf.StringValue
-	28, // 33: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.parameters:type_name -> com.coralogixapis.parsing_rules.v1.RuleParameters
-	23, // 34: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.enabled:type_name -> google.protobuf.BoolValue
-	25, // 35: com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.order:type_name -> google.protobuf.UInt32Value
-	19, // 36: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.rules:type_name -> com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule
-	23, // 37: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.enabled:type_name -> google.protobuf.BoolValue
-	25, // 38: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.order:type_name -> google.protobuf.UInt32Value
-	22, // 39: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.name:type_name -> google.protobuf.StringValue
-	22, // 40: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.description:type_name -> google.protobuf.StringValue
-	22, // 41: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.source_field:type_name -> google.protobuf.StringValue
-	28, // 42: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.parameters:type_name -> com.coralogixapis.parsing_rules.v1.RuleParameters
-	23, // 43: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.enabled:type_name -> google.protobuf.BoolValue
-	25, // 44: com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.order:type_name -> google.protobuf.UInt32Value
-	29, // 45: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts.parsing_themes:type_name -> google.protobuf.Int32Value
-	29, // 46: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts.groups:type_name -> google.protobuf.Int32Value
-	29, // 47: com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse.Counts.rules:type_name -> google.protobuf.Int32Value
-	0,  // 48: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetRuleGroup:input_type -> com.coralogixapis.parsing_rules.v1.GetRuleGroupRequest
-	1,  // 49: com.coralogixapis.parsing_rules.v1.RuleGroupsService.ListRuleGroups:input_type -> com.coralogixapis.parsing_rules.v1.ListRuleGroupsRequest
-	4,  // 50: com.coralogixapis.parsing_rules.v1.RuleGroupsService.CreateRuleGroup:input_type -> com.coralogixapis.parsing_rules.v1.CreateRuleGroupRequest
-	6,  // 51: com.coralogixapis.parsing_rules.v1.RuleGroupsService.UpdateRuleGroup:input_type -> com.coralogixapis.parsing_rules.v1.UpdateRuleGroupRequest
-	8,  // 52: com.coralogixapis.parsing_rules.v1.RuleGroupsService.DeleteRuleGroup:input_type -> com.coralogixapis.parsing_rules.v1.DeleteRuleGroupRequest
-	9,  // 53: com.coralogixapis.parsing_rules.v1.RuleGroupsService.BulkDeleteRuleGroup:input_type -> com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupRequest
-	12, // 54: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetRuleGroupModelMapping:input_type -> com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingRequest
-	14, // 55: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetCompanyUsageLimits:input_type -> com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsRequest
-	3,  // 56: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetRuleGroup:output_type -> com.coralogixapis.parsing_rules.v1.GetRuleGroupResponse
-	2,  // 57: com.coralogixapis.parsing_rules.v1.RuleGroupsService.ListRuleGroups:output_type -> com.coralogixapis.parsing_rules.v1.ListRuleGroupsResponse
-	5,  // 58: com.coralogixapis.parsing_rules.v1.RuleGroupsService.CreateRuleGroup:output_type -> com.coralogixapis.parsing_rules.v1.CreateRuleGroupResponse
-	7,  // 59: com.coralogixapis.parsing_rules.v1.RuleGroupsService.UpdateRuleGroup:output_type -> com.coralogixapis.parsing_rules.v1.UpdateRuleGroupResponse
-	10, // 60: com.coralogixapis.parsing_rules.v1.RuleGroupsService.DeleteRuleGroup:output_type -> com.coralogixapis.parsing_rules.v1.DeleteRuleGroupResponse
-	11, // 61: com.coralogixapis.parsing_rules.v1.RuleGroupsService.BulkDeleteRuleGroup:output_type -> com.coralogixapis.parsing_rules.v1.BulkDeleteRuleGroupResponse
-	13, // 62: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetRuleGroupModelMapping:output_type -> com.coralogixapis.parsing_rules.v1.GetRuleGroupModelMappingResponse
-	15, // 63: com.coralogixapis.parsing_rules.v1.RuleGroupsService.GetCompanyUsageLimits:output_type -> com.coralogixapis.parsing_rules.v1.GetCompanyUsageLimitsResponse
+var file_com_coralogix_rules_v1_rule_groups_service_proto_depIdxs = []int32{
+	21, // 0: com.coralogix.rules.v1.ListRuleGroupsResponse.rule_groups:type_name -> com.coralogix.rules.v1.RuleGroup
+	21, // 1: com.coralogix.rules.v1.GetRuleGroupResponse.rule_group:type_name -> com.coralogix.rules.v1.RuleGroup
+	22, // 2: com.coralogix.rules.v1.CreateRuleGroupRequest.name:type_name -> google.protobuf.StringValue
+	22, // 3: com.coralogix.rules.v1.CreateRuleGroupRequest.description:type_name -> google.protobuf.StringValue
+	23, // 4: com.coralogix.rules.v1.CreateRuleGroupRequest.enabled:type_name -> google.protobuf.BoolValue
+	23, // 5: com.coralogix.rules.v1.CreateRuleGroupRequest.hidden:type_name -> google.protobuf.BoolValue
+	22, // 6: com.coralogix.rules.v1.CreateRuleGroupRequest.creator:type_name -> google.protobuf.StringValue
+	24, // 7: com.coralogix.rules.v1.CreateRuleGroupRequest.rule_matchers:type_name -> com.coralogix.rules.v1.RuleMatcher
+	16, // 8: com.coralogix.rules.v1.CreateRuleGroupRequest.rule_subgroups:type_name -> com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup
+	25, // 9: com.coralogix.rules.v1.CreateRuleGroupRequest.order:type_name -> google.protobuf.UInt32Value
+	26, // 10: com.coralogix.rules.v1.CreateRuleGroupRequest.team_id:type_name -> com.coralogix.rules.v1.TeamId
+	21, // 11: com.coralogix.rules.v1.CreateRuleGroupResponse.rule_group:type_name -> com.coralogix.rules.v1.RuleGroup
+	22, // 12: com.coralogix.rules.v1.UpdateRuleGroupRequest.group_id:type_name -> google.protobuf.StringValue
+	4,  // 13: com.coralogix.rules.v1.UpdateRuleGroupRequest.rule_group:type_name -> com.coralogix.rules.v1.CreateRuleGroupRequest
+	21, // 14: com.coralogix.rules.v1.UpdateRuleGroupResponse.rule_group:type_name -> com.coralogix.rules.v1.RuleGroup
+	22, // 15: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.name:type_name -> google.protobuf.StringValue
+	22, // 16: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.description:type_name -> google.protobuf.StringValue
+	23, // 17: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.enabled:type_name -> google.protobuf.BoolValue
+	23, // 18: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.hidden:type_name -> google.protobuf.BoolValue
+	22, // 19: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.creator:type_name -> google.protobuf.StringValue
+	24, // 20: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.rule_matchers:type_name -> com.coralogix.rules.v1.RuleMatcher
+	18, // 21: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.rule_subgroups:type_name -> com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup
+	25, // 22: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.order:type_name -> google.protobuf.UInt32Value
+	27, // 23: com.coralogix.rules.v1.GetRuleGroupModelMappingResponse.rule_definition:type_name -> google.protobuf.Struct
+	22, // 24: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.company_id:type_name -> google.protobuf.StringValue
+	20, // 25: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.limits:type_name -> com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts
+	20, // 26: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.usage:type_name -> com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts
+	17, // 27: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.rules:type_name -> com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule
+	23, // 28: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.enabled:type_name -> google.protobuf.BoolValue
+	25, // 29: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.order:type_name -> google.protobuf.UInt32Value
+	22, // 30: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.name:type_name -> google.protobuf.StringValue
+	22, // 31: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.description:type_name -> google.protobuf.StringValue
+	22, // 32: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.source_field:type_name -> google.protobuf.StringValue
+	28, // 33: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.parameters:type_name -> com.coralogix.rules.v1.RuleParameters
+	23, // 34: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.enabled:type_name -> google.protobuf.BoolValue
+	25, // 35: com.coralogix.rules.v1.CreateRuleGroupRequest.CreateRuleSubgroup.CreateRule.order:type_name -> google.protobuf.UInt32Value
+	19, // 36: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.rules:type_name -> com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule
+	23, // 37: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.enabled:type_name -> google.protobuf.BoolValue
+	25, // 38: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.order:type_name -> google.protobuf.UInt32Value
+	22, // 39: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.name:type_name -> google.protobuf.StringValue
+	22, // 40: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.description:type_name -> google.protobuf.StringValue
+	22, // 41: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.source_field:type_name -> google.protobuf.StringValue
+	28, // 42: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.parameters:type_name -> com.coralogix.rules.v1.RuleParameters
+	23, // 43: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.enabled:type_name -> google.protobuf.BoolValue
+	25, // 44: com.coralogix.rules.v1.GetRuleGroupModelMappingRequest.CreateRuleSubgroup.CreateRule.order:type_name -> google.protobuf.UInt32Value
+	29, // 45: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts.parsing_themes:type_name -> google.protobuf.Int32Value
+	29, // 46: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts.groups:type_name -> google.protobuf.Int32Value
+	29, // 47: com.coralogix.rules.v1.GetCompanyUsageLimitsResponse.Counts.rules:type_name -> google.protobuf.Int32Value
+	0,  // 48: com.coralogix.rules.v1.RuleGroupsService.GetRuleGroup:input_type -> com.coralogix.rules.v1.GetRuleGroupRequest
+	1,  // 49: com.coralogix.rules.v1.RuleGroupsService.ListRuleGroups:input_type -> com.coralogix.rules.v1.ListRuleGroupsRequest
+	4,  // 50: com.coralogix.rules.v1.RuleGroupsService.CreateRuleGroup:input_type -> com.coralogix.rules.v1.CreateRuleGroupRequest
+	6,  // 51: com.coralogix.rules.v1.RuleGroupsService.UpdateRuleGroup:input_type -> com.coralogix.rules.v1.UpdateRuleGroupRequest
+	8,  // 52: com.coralogix.rules.v1.RuleGroupsService.DeleteRuleGroup:input_type -> com.coralogix.rules.v1.DeleteRuleGroupRequest
+	9,  // 53: com.coralogix.rules.v1.RuleGroupsService.BulkDeleteRuleGroup:input_type -> com.coralogix.rules.v1.BulkDeleteRuleGroupRequest
+	12, // 54: com.coralogix.rules.v1.RuleGroupsService.GetRuleGroupModelMapping:input_type -> com.coralogix.rules.v1.GetRuleGroupModelMappingRequest
+	14, // 55: com.coralogix.rules.v1.RuleGroupsService.GetCompanyUsageLimits:input_type -> com.coralogix.rules.v1.GetCompanyUsageLimitsRequest
+	3,  // 56: com.coralogix.rules.v1.RuleGroupsService.GetRuleGroup:output_type -> com.coralogix.rules.v1.GetRuleGroupResponse
+	2,  // 57: com.coralogix.rules.v1.RuleGroupsService.ListRuleGroups:output_type -> com.coralogix.rules.v1.ListRuleGroupsResponse
+	5,  // 58: com.coralogix.rules.v1.RuleGroupsService.CreateRuleGroup:output_type -> com.coralogix.rules.v1.CreateRuleGroupResponse
+	7,  // 59: com.coralogix.rules.v1.RuleGroupsService.UpdateRuleGroup:output_type -> com.coralogix.rules.v1.UpdateRuleGroupResponse
+	10, // 60: com.coralogix.rules.v1.RuleGroupsService.DeleteRuleGroup:output_type -> com.coralogix.rules.v1.DeleteRuleGroupResponse
+	11, // 61: com.coralogix.rules.v1.RuleGroupsService.BulkDeleteRuleGroup:output_type -> com.coralogix.rules.v1.BulkDeleteRuleGroupResponse
+	13, // 62: com.coralogix.rules.v1.RuleGroupsService.GetRuleGroupModelMapping:output_type -> com.coralogix.rules.v1.GetRuleGroupModelMappingResponse
+	15, // 63: com.coralogix.rules.v1.RuleGroupsService.GetCompanyUsageLimits:output_type -> com.coralogix.rules.v1.GetCompanyUsageLimitsResponse
 	56, // [56:64] is the sub-list for method output_type
 	48, // [48:56] is the sub-list for method input_type
 	48, // [48:48] is the sub-list for extension type_name
@@ -1473,29 +1473,29 @@ var file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_depIdxs = 
 	0,  // [0:48] is the sub-list for field type_name
 }
 
-func init() { file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_init() }
-func file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_init() {
-	if File_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto != nil {
+func init() { file_com_coralogix_rules_v1_rule_groups_service_proto_init() }
+func file_com_coralogix_rules_v1_rule_groups_service_proto_init() {
+	if File_com_coralogix_rules_v1_rule_groups_service_proto != nil {
 		return
 	}
-	file_com_coralogixapis_parsing_rules_v1_rule_proto_init()
-	file_com_coralogixapis_parsing_rules_v1_rule_group_proto_init()
-	file_com_coralogixapis_parsing_rules_v1_rule_matcher_proto_init()
+	file_com_coralogix_rules_v1_rule_proto_init()
+	file_com_coralogix_rules_v1_rule_group_proto_init()
+	file_com_coralogix_rules_v1_rule_matcher_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc), len(file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc), len(file_com_coralogix_rules_v1_rule_groups_service_proto_rawDesc)),
 			NumEnums:      0,
 			NumMessages:   21,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_goTypes,
-		DependencyIndexes: file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_depIdxs,
-		MessageInfos:      file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_msgTypes,
+		GoTypes:           file_com_coralogix_rules_v1_rule_groups_service_proto_goTypes,
+		DependencyIndexes: file_com_coralogix_rules_v1_rule_groups_service_proto_depIdxs,
+		MessageInfos:      file_com_coralogix_rules_v1_rule_groups_service_proto_msgTypes,
 	}.Build()
-	File_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto = out.File
-	file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_goTypes = nil
-	file_com_coralogixapis_parsing_rules_v1_rule_groups_service_proto_depIdxs = nil
+	File_com_coralogix_rules_v1_rule_groups_service_proto = out.File
+	file_com_coralogix_rules_v1_rule_groups_service_proto_goTypes = nil
+	file_com_coralogix_rules_v1_rule_groups_service_proto_depIdxs = nil
 }
