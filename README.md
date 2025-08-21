@@ -8,7 +8,7 @@
 
 ## REST and OpenAPI
 
-Our APIs are also avaialable over REST through a variety of OpenAPI endpoints. Read more over at the [OpenAPI Docs](https://docs.coralogix.com)
+Our APIs are also available over REST through a variety of OpenAPI endpoints. Read more over at the [OpenAPI Docs](https://docs.coralogix.com)
 
 *These endpoints follow the same versioning schemes mentioned below.*
 
