@@ -254,6 +254,50 @@ func (x *Row) GetWidgets() []*Widget {
 	return nil
 }
 
+type RepetitiveVar struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	Name          *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RepetitiveVar) Reset() {
+	*x = RepetitiveVar{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RepetitiveVar) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RepetitiveVar) ProtoMessage() {}
+
+func (x *RepetitiveVar) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RepetitiveVar.ProtoReflect.Descriptor instead.
+func (*RepetitiveVar) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *RepetitiveVar) GetName() *wrapperspb.StringValue {
+	if x != nil {
+		return x.Name
+	}
+	return nil
+}
+
 type SectionOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -267,7 +311,7 @@ type SectionOptions struct {
 
 func (x *SectionOptions) Reset() {
 	*x = SectionOptions{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[4]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -279,7 +323,7 @@ func (x *SectionOptions) String() string {
 func (*SectionOptions) ProtoMessage() {}
 
 func (x *SectionOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[3]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[4]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +336,7 @@ func (x *SectionOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SectionOptions.ProtoReflect.Descriptor instead.
 func (*SectionOptions) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{3}
+	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *SectionOptions) GetValue() isSectionOptions_Value {
@@ -344,7 +388,7 @@ type InternalSectionOptions struct {
 
 func (x *InternalSectionOptions) Reset() {
 	*x = InternalSectionOptions{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[5]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -356,7 +400,7 @@ func (x *InternalSectionOptions) String() string {
 func (*InternalSectionOptions) ProtoMessage() {}
 
 func (x *InternalSectionOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[4]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[5]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -369,7 +413,7 @@ func (x *InternalSectionOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InternalSectionOptions.ProtoReflect.Descriptor instead.
 func (*InternalSectionOptions) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{5}
 }
 
 type CustomSectionOptions struct {
@@ -378,13 +422,14 @@ type CustomSectionOptions struct {
 	Description   *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	Collapsed     *wrapperspb.BoolValue   `protobuf:"bytes,3,opt,name=collapsed,proto3" json:"collapsed,omitempty"`
 	Color         *SectionColor           `protobuf:"bytes,4,opt,name=color,proto3" json:"color,omitempty"`
+	RepetitiveVar *RepetitiveVar          `protobuf:"bytes,5,opt,name=repetitive_var,json=repetitiveVar,proto3" json:"repetitive_var,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *CustomSectionOptions) Reset() {
 	*x = CustomSectionOptions{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -396,7 +441,7 @@ func (x *CustomSectionOptions) String() string {
 func (*CustomSectionOptions) ProtoMessage() {}
 
 func (x *CustomSectionOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -409,7 +454,7 @@ func (x *CustomSectionOptions) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomSectionOptions.ProtoReflect.Descriptor instead.
 func (*CustomSectionOptions) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CustomSectionOptions) GetName() *wrapperspb.StringValue {
@@ -440,6 +485,13 @@ func (x *CustomSectionOptions) GetColor() *SectionColor {
 	return nil
 }
 
+func (x *CustomSectionOptions) GetRepetitiveVar() *RepetitiveVar {
+	if x != nil {
+		return x.RepetitiveVar
+	}
+	return nil
+}
+
 type SectionColor struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Value:
@@ -452,7 +504,7 @@ type SectionColor struct {
 
 func (x *SectionColor) Reset() {
 	*x = SectionColor{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -464,7 +516,7 @@ func (x *SectionColor) String() string {
 func (*SectionColor) ProtoMessage() {}
 
 func (x *SectionColor) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -477,7 +529,7 @@ func (x *SectionColor) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SectionColor.ProtoReflect.Descriptor instead.
 func (*SectionColor) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{6}
+	return file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *SectionColor) GetValue() isSectionColor_Value {
@@ -515,7 +567,7 @@ type Row_Appearance struct {
 
 func (x *Row_Appearance) Reset() {
 	*x = Row_Appearance{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -527,7 +579,7 @@ func (x *Row_Appearance) String() string {
 func (*Row_Appearance) ProtoMessage() {}
 
 func (x *Row_Appearance) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -569,17 +621,20 @@ const file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDesc = "" +
 	"\awidgets\x18\x03 \x03(\v2+.com.coralogixapis.dashboards.v1.ast.WidgetB#\x92A 2\x1eThe list of widgets in the rowR\awidgets\x1a\xd2\x01\n" +
 	"\n" +
 	"Appearance\x12\xc3\x01\n" +
-	"\x06height\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x8d\x01\x92A\x89\x012vHeight of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etcJ\x0f{ \"value\": 16 }R\x06height\"\xec\x01\n" +
+	"\x06height\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x8d\x01\x92A\x89\x012vHeight of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etcJ\x0f{ \"value\": 16 }R\x06height\"\xa4\x01\n" +
+	"\rRepetitiveVar\x12\x92\x01\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB`\x92A]2IVariable name that can be applied on section making it repetitive sectionJ\x10SomeFancyVarNameR\x04name\"\xec\x01\n" +
 	"\x0eSectionOptions\x12Y\n" +
 	"\binternal\x18\x01 \x01(\v2;.com.coralogixapis.dashboards.v1.ast.InternalSectionOptionsH\x00R\binternal\x12v\n" +
 	"\x06custom\x18\x02 \x01(\v29.com.coralogixapis.dashboards.v1.ast.CustomSectionOptionsB!\x92A\x1e2\x1cOptions for a custom sectionH\x00R\x06customB\a\n" +
 	"\x05value\"\x18\n" +
-	"\x16InternalSectionOptions\"\x8a\x04\n" +
+	"\x16InternalSectionOptions\"\xe7\x05\n" +
 	"\x14CustomSectionOptions\x12m\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x92A82\x13Section custom nameJ!{ \"value\": \"Main stats section\" }R\x04name\x12\x95\x01\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBU\x92AR2\x1eShort description of a sectionJ0{ \"value\": \"Section with important statistics\" }R\vdescription\x12k\n" +
 	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB1\x92A.2%Indicator if the section is collapsedJ\x05falseR\tcollapsed\x12~\n" +
-	"\x05color\x18\x04 \x01(\v21.com.coralogixapis.dashboards.v1.ast.SectionColorB5\x92A22\x1bColor of the section headerJ\x13{ \"predefined\": 2 }R\x05color\"v\n" +
+	"\x05color\x18\x04 \x01(\v21.com.coralogixapis.dashboards.v1.ast.SectionColorB5\x92A22\x1bColor of the section headerJ\x13{ \"predefined\": 2 }R\x05color\x12\xda\x01\n" +
+	"\x0erepetitive_var\x18\x05 \x01(\v22.com.coralogixapis.dashboards.v1.ast.RepetitiveVarB\x7f\x92A|2\\Variable name that can be applied on section making it repetitive section and other metadataJ\x1c{\"name\": \"SomeFancyVarName\"}R\rrepetitiveVar\"v\n" +
 	"\fSectionColor\x12]\n" +
 	"\n" +
 	"predefined\x18\x01 \x01(\x0e2;.com.coralogixapis.dashboards.v1.ast.SectionPredefinedColorH\x00R\n" +
@@ -608,44 +663,47 @@ func file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDescGZIP() []byte 
 }
 
 var file_com_coralogixapis_dashboards_v1_ast_layout_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_com_coralogixapis_dashboards_v1_ast_layout_proto_goTypes = []any{
 	(SectionPredefinedColor)(0),    // 0: com.coralogixapis.dashboards.v1.ast.SectionPredefinedColor
 	(*Layout)(nil),                 // 1: com.coralogixapis.dashboards.v1.ast.Layout
 	(*Section)(nil),                // 2: com.coralogixapis.dashboards.v1.ast.Section
 	(*Row)(nil),                    // 3: com.coralogixapis.dashboards.v1.ast.Row
-	(*SectionOptions)(nil),         // 4: com.coralogixapis.dashboards.v1.ast.SectionOptions
-	(*InternalSectionOptions)(nil), // 5: com.coralogixapis.dashboards.v1.ast.InternalSectionOptions
-	(*CustomSectionOptions)(nil),   // 6: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions
-	(*SectionColor)(nil),           // 7: com.coralogixapis.dashboards.v1.ast.SectionColor
-	(*Row_Appearance)(nil),         // 8: com.coralogixapis.dashboards.v1.ast.Row.Appearance
-	(*v1.UUID)(nil),                // 9: com.coralogixapis.dashboards.v1.UUID
-	(*Widget)(nil),                 // 10: com.coralogixapis.dashboards.v1.ast.Widget
-	(*wrapperspb.StringValue)(nil), // 11: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),   // 12: google.protobuf.BoolValue
-	(*wrapperspb.Int32Value)(nil),  // 13: google.protobuf.Int32Value
+	(*RepetitiveVar)(nil),          // 4: com.coralogixapis.dashboards.v1.ast.RepetitiveVar
+	(*SectionOptions)(nil),         // 5: com.coralogixapis.dashboards.v1.ast.SectionOptions
+	(*InternalSectionOptions)(nil), // 6: com.coralogixapis.dashboards.v1.ast.InternalSectionOptions
+	(*CustomSectionOptions)(nil),   // 7: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions
+	(*SectionColor)(nil),           // 8: com.coralogixapis.dashboards.v1.ast.SectionColor
+	(*Row_Appearance)(nil),         // 9: com.coralogixapis.dashboards.v1.ast.Row.Appearance
+	(*v1.UUID)(nil),                // 10: com.coralogixapis.dashboards.v1.UUID
+	(*Widget)(nil),                 // 11: com.coralogixapis.dashboards.v1.ast.Widget
+	(*wrapperspb.StringValue)(nil), // 12: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),   // 13: google.protobuf.BoolValue
+	(*wrapperspb.Int32Value)(nil),  // 14: google.protobuf.Int32Value
 }
 var file_com_coralogixapis_dashboards_v1_ast_layout_proto_depIdxs = []int32{
 	2,  // 0: com.coralogixapis.dashboards.v1.ast.Layout.sections:type_name -> com.coralogixapis.dashboards.v1.ast.Section
-	9,  // 1: com.coralogixapis.dashboards.v1.ast.Section.id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	10, // 1: com.coralogixapis.dashboards.v1.ast.Section.id:type_name -> com.coralogixapis.dashboards.v1.UUID
 	3,  // 2: com.coralogixapis.dashboards.v1.ast.Section.rows:type_name -> com.coralogixapis.dashboards.v1.ast.Row
-	4,  // 3: com.coralogixapis.dashboards.v1.ast.Section.options:type_name -> com.coralogixapis.dashboards.v1.ast.SectionOptions
-	9,  // 4: com.coralogixapis.dashboards.v1.ast.Row.id:type_name -> com.coralogixapis.dashboards.v1.UUID
-	8,  // 5: com.coralogixapis.dashboards.v1.ast.Row.appearance:type_name -> com.coralogixapis.dashboards.v1.ast.Row.Appearance
-	10, // 6: com.coralogixapis.dashboards.v1.ast.Row.widgets:type_name -> com.coralogixapis.dashboards.v1.ast.Widget
-	5,  // 7: com.coralogixapis.dashboards.v1.ast.SectionOptions.internal:type_name -> com.coralogixapis.dashboards.v1.ast.InternalSectionOptions
-	6,  // 8: com.coralogixapis.dashboards.v1.ast.SectionOptions.custom:type_name -> com.coralogixapis.dashboards.v1.ast.CustomSectionOptions
-	11, // 9: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.name:type_name -> google.protobuf.StringValue
-	11, // 10: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.description:type_name -> google.protobuf.StringValue
-	12, // 11: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.collapsed:type_name -> google.protobuf.BoolValue
-	7,  // 12: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.color:type_name -> com.coralogixapis.dashboards.v1.ast.SectionColor
-	0,  // 13: com.coralogixapis.dashboards.v1.ast.SectionColor.predefined:type_name -> com.coralogixapis.dashboards.v1.ast.SectionPredefinedColor
-	13, // 14: com.coralogixapis.dashboards.v1.ast.Row.Appearance.height:type_name -> google.protobuf.Int32Value
-	15, // [15:15] is the sub-list for method output_type
-	15, // [15:15] is the sub-list for method input_type
-	15, // [15:15] is the sub-list for extension type_name
-	15, // [15:15] is the sub-list for extension extendee
-	0,  // [0:15] is the sub-list for field type_name
+	5,  // 3: com.coralogixapis.dashboards.v1.ast.Section.options:type_name -> com.coralogixapis.dashboards.v1.ast.SectionOptions
+	10, // 4: com.coralogixapis.dashboards.v1.ast.Row.id:type_name -> com.coralogixapis.dashboards.v1.UUID
+	9,  // 5: com.coralogixapis.dashboards.v1.ast.Row.appearance:type_name -> com.coralogixapis.dashboards.v1.ast.Row.Appearance
+	11, // 6: com.coralogixapis.dashboards.v1.ast.Row.widgets:type_name -> com.coralogixapis.dashboards.v1.ast.Widget
+	12, // 7: com.coralogixapis.dashboards.v1.ast.RepetitiveVar.name:type_name -> google.protobuf.StringValue
+	6,  // 8: com.coralogixapis.dashboards.v1.ast.SectionOptions.internal:type_name -> com.coralogixapis.dashboards.v1.ast.InternalSectionOptions
+	7,  // 9: com.coralogixapis.dashboards.v1.ast.SectionOptions.custom:type_name -> com.coralogixapis.dashboards.v1.ast.CustomSectionOptions
+	12, // 10: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.name:type_name -> google.protobuf.StringValue
+	12, // 11: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.description:type_name -> google.protobuf.StringValue
+	13, // 12: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.collapsed:type_name -> google.protobuf.BoolValue
+	8,  // 13: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.color:type_name -> com.coralogixapis.dashboards.v1.ast.SectionColor
+	4,  // 14: com.coralogixapis.dashboards.v1.ast.CustomSectionOptions.repetitive_var:type_name -> com.coralogixapis.dashboards.v1.ast.RepetitiveVar
+	0,  // 15: com.coralogixapis.dashboards.v1.ast.SectionColor.predefined:type_name -> com.coralogixapis.dashboards.v1.ast.SectionPredefinedColor
+	14, // 16: com.coralogixapis.dashboards.v1.ast.Row.Appearance.height:type_name -> google.protobuf.Int32Value
+	17, // [17:17] is the sub-list for method output_type
+	17, // [17:17] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_layout_proto_init() }
@@ -654,11 +712,11 @@ func file_com_coralogixapis_dashboards_v1_ast_layout_proto_init() {
 		return
 	}
 	file_com_coralogixapis_dashboards_v1_ast_widget_proto_init()
-	file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[3].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[4].OneofWrappers = []any{
 		(*SectionOptions_Internal)(nil),
 		(*SectionOptions_Custom)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[6].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_layout_proto_msgTypes[7].OneofWrappers = []any{
 		(*SectionColor_Predefined)(nil),
 	}
 	type x struct{}
@@ -667,7 +725,7 @@ func file_com_coralogixapis_dashboards_v1_ast_layout_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

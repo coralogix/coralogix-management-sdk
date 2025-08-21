@@ -57,6 +57,8 @@ enum EntityType {
   ENTITY_TYPE_NOTIFICATION_REQUESTS = 27;
   // JSON representation: "infraMonitoringEvents"
   ENTITY_TYPE_INFRA_MONITORING_EVENTS = 28;
+  // JSON representation: "labsLimitViolations"
+  ENTITY_TYPE_LABS_LIMIT_VIOLATIONS = 29;
 
   // Pillar "metrics"
 
