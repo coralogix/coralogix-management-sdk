@@ -173,9 +173,10 @@ func (x *ReplaceSloAlertsValidationsResponse) GetAlertsValidationResult() []*Slo
 }
 
 type CreateSloRequest struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	Slo                    *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
-	SilenceDataValidations *bool                  `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Slo   *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_service.proto.
+	SilenceDataValidations *bool `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -217,6 +218,7 @@ func (x *CreateSloRequest) GetSlo() *Slo {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_service.proto.
 func (x *CreateSloRequest) GetSilenceDataValidations() bool {
 	if x != nil && x.SilenceDataValidations != nil {
 		return *x.SilenceDataValidations
@@ -269,9 +271,10 @@ func (x *CreateSloResponse) GetSlo() *Slo {
 }
 
 type ReplaceSloRequest struct {
-	state                  protoimpl.MessageState `protogen:"open.v1"`
-	Slo                    *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
-	SilenceDataValidations *bool                  `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	Slo   *Slo                   `protobuf:"bytes,1,opt,name=slo,proto3" json:"slo,omitempty"`
+	// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_service.proto.
+	SilenceDataValidations *bool `protobuf:"varint,2,opt,name=silence_data_validations,json=silenceDataValidations,proto3,oneof" json:"silence_data_validations,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -313,6 +316,7 @@ func (x *ReplaceSloRequest) GetSlo() *Slo {
 	return nil
 }
 
+// Deprecated: Marked as deprecated in com/coralogixapis/slo/v1/slo_service.proto.
 func (x *ReplaceSloRequest) GetSilenceDataValidations() bool {
 	if x != nil && x.SilenceDataValidations != nil {
 		return *x.SilenceDataValidations
@@ -1125,18 +1129,18 @@ const file_com_coralogixapis_slo_v1_slo_service_proto_rawDesc = "" +
 	"h*\"ReplaceSloAlertsValidationsRequest2<Request to validate alerts before replacing an existing SLO.\xd2\x01\x03slo\"\x9d\x02\n" +
 	"#ReplaceSloAlertsValidationsResponse\x12j\n" +
 	"\x18alerts_validation_result\x18\x01 \x03(\v20.com.coralogixapis.slo.v1.SloAlertValidityResultR\x16alertsValidationResult:\x89\x01\x92A\x85\x01\n" +
-	"\x82\x01*#ReplaceSloAlertsValidationsResponse2@Response with validated alerts before replacing an existing SLO.\xd2\x01\x18alerts_validation_result\"\xdc\x01\n" +
+	"\x82\x01*#ReplaceSloAlertsValidationsResponse2@Response with validated alerts before replacing an existing SLO.\xd2\x01\x18alerts_validation_result\"\xe0\x01\n" +
 	"\x10CreateSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12=\n" +
-	"\x18silence_data_validations\x18\x02 \x01(\bH\x00R\x16silenceDataValidations\x88\x01\x01:;\x92A8\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12A\n" +
+	"\x18silence_data_validations\x18\x02 \x01(\bB\x02\x18\x01H\x00R\x16silenceDataValidations\x88\x01\x01:;\x92A8\n" +
 	"6*\x10CreateSloRequest2\x1cRequest to create a new SLO.\xd2\x01\x03sloB\x1b\n" +
 	"\x19_silence_data_validations\"\x88\x01\n" +
 	"\x11CreateSloResponse\x12/\n" +
 	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo:B\x92A?\n" +
-	"=*\x11CreateSloResponse2\"Response after creating a new SLO.\xd2\x01\x03slo\"\xe5\x01\n" +
+	"=*\x11CreateSloResponse2\"Response after creating a new SLO.\xd2\x01\x03slo\"\xe9\x01\n" +
 	"\x11ReplaceSloRequest\x12/\n" +
-	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12=\n" +
-	"\x18silence_data_validations\x18\x02 \x01(\bH\x00R\x16silenceDataValidations\x88\x01\x01:C\x92A@\n" +
+	"\x03slo\x18\x01 \x01(\v2\x1d.com.coralogixapis.slo.v1.SloR\x03slo\x12A\n" +
+	"\x18silence_data_validations\x18\x02 \x01(\bB\x02\x18\x01H\x00R\x16silenceDataValidations\x88\x01\x01:C\x92A@\n" +
 	">*\x11ReplaceSloRequest2#Request to replace an existing SLO.\xd2\x01\x03sloB\x1b\n" +
 	"\x19_silence_data_validations\"\xc6\x01\n" +
 	"\x12ReplaceSloResponse\x12/\n" +
