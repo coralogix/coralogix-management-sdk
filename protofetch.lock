@@ -117,8 +117,8 @@ commit_hash = "d7fa9884c93e0e0f337992ac3e8c0d69727e677e"
 [[dependencies]]
 name = "cx-api-permissions"
 url = "github.com/coralogix/cx-api-permissions"
-revision = "v0.1.125"
-commit_hash = "a3ea5c46e6f644031e72d9fb05aee228da485498"
+revision = "v0.1.127"
+commit_hash = "61703fcbb50c6cabe4b398de708bb1a892577e80"
 
 [[dependencies]]
 name = "cx-api-quota"
