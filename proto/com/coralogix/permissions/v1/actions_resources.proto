@@ -160,6 +160,8 @@ enum Resource {
   RESOURCE_SPLIT_INDEX = 147 [(name) = "split-index"];
   RESOURCE_ACCESS_POLICIES = 148 [(name) = "access-policies"];
   RESOURCE_PIPELINE_ANALYZER = 149 [(name) = "pipeline-analyzer"];
+  RESOURCE_TEAM_DATASETS = 150 [(name) = "team-datasets"];
+  RESOURCE_TEAM_SCHEMA_MANAGER = 151 [(name) = "team-schema-manager"];
 }
 
 
@@ -220,4 +222,7 @@ enum Action {
   ACTION_UPLOAD = 53 [(name) = "Upload"];
   ACTION_READ_ACCESS_POLICY = 54 [(name) = "ReadAccessPolicy"];
   ACTION_UPDATE_ACCESS_POLICY = 55 [(name) = "UpdateAccessPolicy"];
+  ACTION_APPEND_DATA = 56 [(name) = "AppendData"];
+  ACTION_OVERWRITE_DATA = 57 [(name) = "OverwriteData"];
+  ACTION_READ_TEAM_MEMBERS_SUMMARY = 58 [(name) = "ReadTeamMembersSummary"];
 }
