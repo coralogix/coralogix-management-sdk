@@ -440,33 +440,48 @@ const (
 	Permission_PERMISSION_NOTIFICATION_CENTER_ROUTERS_READ_SUMMARY     Permission = 241
 	Permission_PERMISSION_NOTIFICATION_CENTER_ROUTERS_UPDATE_CONFIG    Permission = 242
 	// Deprecated: Marked as deprecated in com/coralogix/permissions/models/v1/permission_definitions.proto.
-	Permission_PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA_OLD Permission = 243
-	Permission_PERMISSION_AI_APP_CATALOG_READ                 Permission = 244
-	Permission_PERMISSION_AI_APP_DISCOVERY_MANAGE             Permission = 245
-	Permission_PERMISSION_AI_APP_DISCOVERY_READ               Permission = 246
-	Permission_PERMISSION_AI_APP_EVALUATORS_MANAGE            Permission = 247
-	Permission_PERMISSION_AI_APP_EVALUATORS_READ              Permission = 248
-	Permission_PERMISSION_AI_OVERVIEW_READ                    Permission = 249
-	Permission_PERMISSION_AI_SPM_READ                         Permission = 250
-	Permission_PERMISSION_LOGS_RESERVED_FIELDS_MANAGE         Permission = 251
-	Permission_PERMISSION_LOGS_RESERVED_FIELDS_READ           Permission = 252
-	Permission_PERMISSION_PROFILES_CPU_PROFILES_READ          Permission = 253
-	Permission_PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA     Permission = 254
-	Permission_PERMISSION_PROFILES_DEBUG_SYMBOLS_UPLOAD       Permission = 255
-	Permission_PERMISSION_SLO_MGMT_ALERTS_READ_CONFIG         Permission = 256
-	Permission_PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG       Permission = 257
-	Permission_PERMISSION_SLO_READ_CONFIG                     Permission = 258
-	Permission_PERMISSION_SLO_UPDATE_CONFIG                   Permission = 259
-	Permission_PERMISSION_SYSTEM_DATASETS_MANAGE              Permission = 260
-	Permission_PERMISSION_SYSTEM_DATASETS_READ_CONFIG         Permission = 261
-	Permission_PERMISSION_TEAM_QUOTA_RULES_MANAGE             Permission = 262
-	Permission_PERMISSION_TEAM_QUOTA_RULES_READ               Permission = 263
-	Permission_PERMISSION_SPLIT_INDEX_MANAGE                  Permission = 264
-	Permission_PERMISSION_ACCESS_POLICIES_READ_ALL            Permission = 265
-	Permission_PERMISSION_ACCESS_POLICIES_UPDATE_ALL          Permission = 266
-	Permission_PERMISSION_PIPELINE_ANALYZER_READ              Permission = 267
-	Permission_PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY    Permission = 268
-	Permission_PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY  Permission = 269
+	Permission_PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA_OLD       Permission = 243
+	Permission_PERMISSION_AI_APP_CATALOG_READ                       Permission = 244
+	Permission_PERMISSION_AI_APP_DISCOVERY_MANAGE                   Permission = 245
+	Permission_PERMISSION_AI_APP_DISCOVERY_READ                     Permission = 246
+	Permission_PERMISSION_AI_APP_EVALUATORS_MANAGE                  Permission = 247
+	Permission_PERMISSION_AI_APP_EVALUATORS_READ                    Permission = 248
+	Permission_PERMISSION_AI_OVERVIEW_READ                          Permission = 249
+	Permission_PERMISSION_AI_SPM_READ                               Permission = 250
+	Permission_PERMISSION_LOGS_RESERVED_FIELDS_MANAGE               Permission = 251
+	Permission_PERMISSION_LOGS_RESERVED_FIELDS_READ                 Permission = 252
+	Permission_PERMISSION_PROFILES_CPU_PROFILES_READ                Permission = 253
+	Permission_PERMISSION_PROFILES_DATA_INGRESS_SEND_DATA           Permission = 254
+	Permission_PERMISSION_PROFILES_DEBUG_SYMBOLS_UPLOAD             Permission = 255
+	Permission_PERMISSION_SLO_MGMT_ALERTS_READ_CONFIG               Permission = 256
+	Permission_PERMISSION_SLO_MGMT_ALERTS_UPDATE_CONFIG             Permission = 257
+	Permission_PERMISSION_SLO_READ_CONFIG                           Permission = 258
+	Permission_PERMISSION_SLO_UPDATE_CONFIG                         Permission = 259
+	Permission_PERMISSION_SYSTEM_DATASETS_MANAGE                    Permission = 260
+	Permission_PERMISSION_SYSTEM_DATASETS_READ_CONFIG               Permission = 261
+	Permission_PERMISSION_TEAM_QUOTA_RULES_MANAGE                   Permission = 262
+	Permission_PERMISSION_TEAM_QUOTA_RULES_READ                     Permission = 263
+	Permission_PERMISSION_SPLIT_INDEX_MANAGE                        Permission = 264
+	Permission_PERMISSION_ACCESS_POLICIES_READ_ALL                  Permission = 265
+	Permission_PERMISSION_ACCESS_POLICIES_UPDATE_ALL                Permission = 266
+	Permission_PERMISSION_PIPELINE_ANALYZER_READ                    Permission = 267
+	Permission_PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY          Permission = 268
+	Permission_PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY        Permission = 269
+	Permission_PERMISSION_DATA_INGEST_API_KEYS_READ_ACCESS_POLICY   Permission = 270
+	Permission_PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY Permission = 271
+	Permission_PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY   Permission = 272
+	Permission_PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY Permission = 273
+	Permission_PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY        Permission = 274
+	Permission_PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY      Permission = 275
+	Permission_PERMISSION_TEAM_DATASETS_APPEND_DATA                 Permission = 276
+	Permission_PERMISSION_TEAM_DATASETS_OVERWRITE_DATA              Permission = 277
+	Permission_PERMISSION_TEAM_DATASETS_READ_ACCESS_POLICY          Permission = 278
+	Permission_PERMISSION_TEAM_DATASETS_READ_DATA                   Permission = 279
+	Permission_PERMISSION_TEAM_DATASETS_UPDATE_ACCESS_POLICY        Permission = 280
+	Permission_PERMISSION_TEAM_ROLES_READ_SUMMARY                   Permission = 281
+	Permission_PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY      Permission = 282
+	Permission_PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE                Permission = 283
+	Permission_PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG           Permission = 284
 )
 
 // Enum value maps for Permission.
@@ -737,6 +752,21 @@ var (
 		267: "PERMISSION_PIPELINE_ANALYZER_READ",
 		268: "PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY",
 		269: "PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY",
+		270: "PERMISSION_DATA_INGEST_API_KEYS_READ_ACCESS_POLICY",
+		271: "PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY",
+		272: "PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY",
+		273: "PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY",
+		274: "PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY",
+		275: "PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY",
+		276: "PERMISSION_TEAM_DATASETS_APPEND_DATA",
+		277: "PERMISSION_TEAM_DATASETS_OVERWRITE_DATA",
+		278: "PERMISSION_TEAM_DATASETS_READ_ACCESS_POLICY",
+		279: "PERMISSION_TEAM_DATASETS_READ_DATA",
+		280: "PERMISSION_TEAM_DATASETS_UPDATE_ACCESS_POLICY",
+		281: "PERMISSION_TEAM_ROLES_READ_SUMMARY",
+		282: "PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY",
+		283: "PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE",
+		284: "PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -1004,6 +1034,21 @@ var (
 		"PERMISSION_PIPELINE_ANALYZER_READ":                           267,
 		"PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY":                 268,
 		"PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY":               269,
+		"PERMISSION_DATA_INGEST_API_KEYS_READ_ACCESS_POLICY":          270,
+		"PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY":        271,
+		"PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY":          272,
+		"PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY":        273,
+		"PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY":               274,
+		"PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY":             275,
+		"PERMISSION_TEAM_DATASETS_APPEND_DATA":                        276,
+		"PERMISSION_TEAM_DATASETS_OVERWRITE_DATA":                     277,
+		"PERMISSION_TEAM_DATASETS_READ_ACCESS_POLICY":                 278,
+		"PERMISSION_TEAM_DATASETS_READ_DATA":                          279,
+		"PERMISSION_TEAM_DATASETS_UPDATE_ACCESS_POLICY":               280,
+		"PERMISSION_TEAM_ROLES_READ_SUMMARY":                          281,
+		"PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY":             282,
+		"PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE":                       283,
+		"PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG":                  284,
 	}
 )
 
@@ -1213,7 +1258,7 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1cPERMISSION_GROUP_QUOTA_RULES\x10'\x1a/\x92\x82\x19\vquota-rules҂\x19\vQuota Rules\xe2\x82\x19\rquota - rules\x12L\n" +
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
-	"Dataengine\xe2\x82\x19\vData Engine*\xeb\xd1\x03\n" +
+	"Dataengine\xe2\x82\x19\vData Engine*\x8a\xe6\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1532,7 +1577,23 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"%PERMISSION_ACCESS_POLICIES_UPDATE_ALL\x10\x8a\x02\x1at\xba\x82\x19\x19access-policies:UpdateAll\xc0\x82\x193Ȃ\x19\x94\x01҂\x19\x19Update any access policy.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x19Update any access policy.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xd1\x01\n" +
 	"!PERMISSION_PIPELINE_ANALYZER_READ\x10\x8b\x02\x1a\xa8\x01\xba\x82\x19\x16pipeline-analyzer:Read\xc0\x82\x19\vȂ\x19\x95\x01҂\x19=Follow logs through each stage of your pipeline in real time.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19,Inspect the exact rules applied to each log.\xf8\x82\x19\x00\x88\x83\x19\x01\x90\x83\x19\x01\x12\xd9\x01\n" +
 	"+PERMISSION_TEAM_API_KEYS_READ_ACCESS_POLICY\x10\x8c\x02\x1a\xa6\x01\xba\x82\x19\x1eteam-api-keys:ReadAccessPolicy\xc0\x82\x196Ȃ\x19\x1a҂\x190View access policy for a specific resource type.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x190View access policy for a specific resource type.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xe1\x01\n" +
-	"-PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY\x10\x8d\x02\x1a\xac\x01\xba\x82\x19 team-api-keys:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x1a҂\x192Update access policy for a specific resource type.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x192Update access policy for a specific resource type.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"-PERMISSION_TEAM_API_KEYS_UPDATE_ACCESS_POLICY\x10\x8d\x02\x1a\xac\x01\xba\x82\x19 team-api-keys:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x1a҂\x192Update access policy for a specific resource type.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x192Update access policy for a specific resource type.\xf8\x82\x19\x01\x88\x83\x19\x01\x90\x83\x19\x01\x12\xb1\x01\n" +
+	"2PERMISSION_DATA_INGEST_API_KEYS_READ_ACCESS_POLICY\x10\x8e\x02\x1ax\xba\x82\x19%data-ingest-api-keys:ReadAccessPolicy\xc0\x82\x196Ȃ\x19w҂\x19/Read access policy for send your data API keys.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xb7\x01\n" +
+	"4PERMISSION_DATA_INGEST_API_KEYS_UPDATE_ACCESS_POLICY\x10\x8f\x02\x1a|\xba\x82\x19'data-ingest-api-keys:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19w҂\x191Update access policy for send your data API keys.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xad\x01\n" +
+	"2PERMISSION_TEAM_CUSTOM_API_KEYS_READ_ACCESS_POLICY\x10\x90\x02\x1at\xba\x82\x19%team-custom-api-keys:ReadAccessPolicy\xc0\x82\x196Ȃ\x19y҂\x19+Read access policy for team level API keys.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xb3\x01\n" +
+	"4PERMISSION_TEAM_CUSTOM_API_KEYS_UPDATE_ACCESS_POLICY\x10\x91\x02\x1ax\xba\x82\x19'team-custom-api-keys:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19y҂\x19-Update access policy for team level API keys.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xa7\x01\n" +
+	"-PERMISSION_TEAM_DASHBOARDS_READ_ACCESS_POLICY\x10\x92\x02\x1as\xba\x82\x19 team-dashboards:ReadAccessPolicy\xc0\x82\x196Ȃ\x19\x1c҂\x19/Read access policy for send your data API keys.\u0602\x19\b\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xad\x01\n" +
+	"/PERMISSION_TEAM_DASHBOARDS_UPDATE_ACCESS_POLICY\x10\x93\x02\x1aw\xba\x82\x19\"team-dashboards:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x1c҂\x191Update access policy for send your data API keys.\u0602\x19\b\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x96\x01\n" +
+	"$PERMISSION_TEAM_DATASETS_APPEND_DATA\x10\x94\x02\x1ak\xba\x82\x19\x18team-datasets:AppendData\xc0\x82\x198Ȃ\x19\x96\x01҂\x19\x19Add new data to datasets.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x19Add new data to datasets.\x88\x83\x19\x01\x12\xac\x01\n" +
+	"'PERMISSION_TEAM_DATASETS_OVERWRITE_DATA\x10\x95\x02\x1a~\xba\x82\x19\x1bteam-datasets:OverwriteData\xc0\x82\x199Ȃ\x19\x96\x01҂\x19!Replace existing dataset content.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19!Replace existing dataset content.\x88\x83\x19\x01\x12\xa4\x01\n" +
+	"+PERMISSION_TEAM_DATASETS_READ_ACCESS_POLICY\x10\x96\x02\x1ar\xba\x82\x19\x1eteam-datasets:ReadAccessPolicy\xc0\x82\x196Ȃ\x19\x96\x01҂\x19/Read access policy for send your data API keys.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x90\x01\n" +
+	"\"PERMISSION_TEAM_DATASETS_READ_DATA\x10\x97\x02\x1ag\xba\x82\x19\x16team-datasets:ReadData\xc0\x82\x19\x10Ȃ\x19\x96\x01҂\x19\x18Read data from datasets.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x18Read data from datasets.\x88\x83\x19\x01\x12\xaa\x01\n" +
+	"-PERMISSION_TEAM_DATASETS_UPDATE_ACCESS_POLICY\x10\x98\x02\x1av\xba\x82\x19 team-datasets:UpdateAccessPolicy\xc0\x82\x197Ȃ\x19\x96\x01҂\x191Update access policy for send your data API keys.\u0602\x19(\xea\x82\x19\x00\xf2\x82\x19\x00\xf8\x82\x19\x01\x88\x83\x19\x01\x12s\n" +
+	"\"PERMISSION_TEAM_ROLES_READ_SUMMARY\x10\x99\x02\x1aJ\xba\x82\x19\x16team-roles:ReadSummary\xc0\x82\x194Ȃ\x19`҂\x19\x14Read groups summary.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\x88\x83\x19\x01\x12\x91\x01\n" +
+	"/PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY\x10\x9a\x02\x1a[\xba\x82\x19!team-roles:ReadTeamMembersSummary\xc0\x82\x19:Ȃ\x19`҂\x19\x1aRead Team Members Summary.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\x88\x83\x19\x01\x12\xbb\x01\n" +
+	"%PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE\x10\x9b\x02\x1a\x8e\x01\xba\x82\x19\x1ateam-schema-manager:Manage\xc0\x82\x19\n" +
+	"Ȃ\x19\x97\x01҂\x19\x15Manage schema fields.\u0602\x19\x1b\xea\x82\x19\x00\xf2\x82\x19>Allows users to edit, reserve, or map schema fields as needed.\x88\x83\x19\x01\x12\xf8\x01\n" +
+	"*PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG\x10\x9c\x02\x1a\xc6\x01\xba\x82\x19\x1eteam-schema-manager:ReadConfig\xc0\x82\x19\fȂ\x19\x97\x01҂\x19'View schema information and statistics.\u0602\x19\x1b\xea\x82\x19\x00\xf2\x82\x19`Allows users to see field names, types, cardinality, popularity, and other schema-level metrics.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

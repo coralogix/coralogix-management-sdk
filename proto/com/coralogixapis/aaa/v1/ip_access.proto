@@ -54,7 +54,7 @@ service IpAccessService {
   rpc ReplaceCompanyIpAccessSettings(ReplaceCompanyIpAccessSettingsRequest)
       returns (ReplaceCompanyIpAccessSettingsResponse) {
     option (google.api.http) = {
-      put : "/v1/company/settings/ip-access/{id}"
+      put : "/v1/company/settings/ip-access"
       body : "*"
     };
 
@@ -80,7 +80,7 @@ service IpAccessService {
   rpc GetCompanyIpAccessSettings(GetCompanyIpAccessSettingsRequest)
       returns (GetCompanyIpAccessSettingsResponse) {
     option (google.api.http) = {
-      get : "/v1/company/settings/ip-access/{id}"
+      get : "/v1/company/settings/ip-access"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -105,7 +105,7 @@ service IpAccessService {
   rpc DeleteCompanyIpAccessSettings(DeleteCompanyIpAccessSettingsRequest)
       returns (DeleteCompanyIpAccessSettingsResponse) {
     option (google.api.http) = {
-      delete : "/v1/company/settings/ip-access/{id}"
+      delete : "/v1/company/settings/ip-access"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {

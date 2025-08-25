@@ -177,6 +177,8 @@ const (
 	Resource_RESOURCE_SPLIT_INDEX                     Resource = 147
 	Resource_RESOURCE_ACCESS_POLICIES                 Resource = 148
 	Resource_RESOURCE_PIPELINE_ANALYZER               Resource = 149
+	Resource_RESOURCE_TEAM_DATASETS                   Resource = 150
+	Resource_RESOURCE_TEAM_SCHEMA_MANAGER             Resource = 151
 )
 
 // Enum value maps for Resource.
@@ -332,6 +334,8 @@ var (
 		147: "RESOURCE_SPLIT_INDEX",
 		148: "RESOURCE_ACCESS_POLICIES",
 		149: "RESOURCE_PIPELINE_ANALYZER",
+		150: "RESOURCE_TEAM_DATASETS",
+		151: "RESOURCE_TEAM_SCHEMA_MANAGER",
 	}
 	Resource_value = map[string]int32{
 		"RESOURCE_UNSPECIFIED":                     0,
@@ -484,6 +488,8 @@ var (
 		"RESOURCE_SPLIT_INDEX":                     147,
 		"RESOURCE_ACCESS_POLICIES":                 148,
 		"RESOURCE_PIPELINE_ANALYZER":               149,
+		"RESOURCE_TEAM_DATASETS":                   150,
+		"RESOURCE_TEAM_SCHEMA_MANAGER":             151,
 	}
 )
 
@@ -517,62 +523,65 @@ func (Resource) EnumDescriptor() ([]byte, []int) {
 type Action int32
 
 const (
-	Action_ACTION_UNSPECIFIED              Action = 0
-	Action_ACTION_ADMIN                    Action = 1
-	Action_ACTION_OPERATE                  Action = 2
-	Action_ACTION_VIEW_ONLY                Action = 3
-	Action_ACTION_EDIT                     Action = 4
-	Action_ACTION_DELETE                   Action = 5
-	Action_ACTION_CREATE                   Action = 6
-	Action_ACTION_CHANGE_QUOTA             Action = 7
-	Action_ACTION_GENERATE_KEY             Action = 8
-	Action_ACTION_WRITE                    Action = 9
-	Action_ACTION_MANAGE                   Action = 10
-	Action_ACTION_READ                     Action = 11
-	Action_ACTION_READ_CONFIG              Action = 12
-	Action_ACTION_DEPLOY                   Action = 13
-	Action_ACTION_CREATE_SECURITY_ALERT    Action = 14
-	Action_ACTION_UPDATE                   Action = 15
-	Action_ACTION_READDATA                 Action = 16
-	Action_ACTION_UPDATECONFIG             Action = 17
-	Action_ACTION_UPDATEDATA               Action = 18
-	Action_ACTION_VIEW                     Action = 19
-	Action_ACTION_EXECUTE                  Action = 20
-	Action_ACTION_ACKNOWLEDGE              Action = 21
-	Action_ACTION_ASSIGN                   Action = 22
-	Action_ACTION_CLOSE                    Action = 23
-	Action_ACTION_UPDATEUSERWIDGETS        Action = 24
-	Action_ACTION_READMAPS                 Action = 25
-	Action_ACTION_READPOLICIES             Action = 26
-	Action_ACTION_READTEAMWIDGETS          Action = 27
-	Action_ACTION_READUSERWIDGETS          Action = 28
-	Action_ACTION_REINDEX                  Action = 29
-	Action_ACTION_SENDDATA                 Action = 30
-	Action_ACTION_SNOOZE                   Action = 31
-	Action_ACTION_UPDATEMAPS               Action = 32
-	Action_ACTION_UPDATEPOLICIES           Action = 33
-	Action_ACTION_UPDATETEAMWIDGETS        Action = 34
-	Action_ACTION_READMAPPING              Action = 35
-	Action_ACTION_READSLICONFIG            Action = 36
-	Action_ACTION_UPDATEFILTERSCONFIG      Action = 37
-	Action_ACTION_UPDATESLICONFIG          Action = 38
-	Action_ACTION_UPLOADMAPPING            Action = 39
-	Action_ACTION_READ_DIMENSIONS_CONFIG   Action = 40
-	Action_ACTION_UPDATE_DIMENSIONS_CONFIG Action = 41
-	Action_ACTION_READ_APDEX_CONFIG        Action = 42
-	Action_ACTION_UPDATE_APDEX_CONFIG      Action = 43
-	Action_ACTION_MANAGE_CONNECTION_TO_ORG Action = 44
-	Action_ACTION_READ_GROUPS              Action = 45
-	Action_ACTION_GET_DAILY_EMAILS         Action = 46
-	Action_ACTION_GET_DATA_USAGE_WARNINGS  Action = 47
-	Action_ACTION_GET_FLOW_ANOMALIES       Action = 48
-	Action_ACTION_GET_SPIKE_ANOMALIES      Action = 49
-	Action_ACTION_READ_ALL                 Action = 50
-	Action_ACTION_UPDATE_ALL               Action = 51
-	Action_ACTION_READ_SUMMARY             Action = 52
-	Action_ACTION_UPLOAD                   Action = 53
-	Action_ACTION_READ_ACCESS_POLICY       Action = 54
-	Action_ACTION_UPDATE_ACCESS_POLICY     Action = 55
+	Action_ACTION_UNSPECIFIED               Action = 0
+	Action_ACTION_ADMIN                     Action = 1
+	Action_ACTION_OPERATE                   Action = 2
+	Action_ACTION_VIEW_ONLY                 Action = 3
+	Action_ACTION_EDIT                      Action = 4
+	Action_ACTION_DELETE                    Action = 5
+	Action_ACTION_CREATE                    Action = 6
+	Action_ACTION_CHANGE_QUOTA              Action = 7
+	Action_ACTION_GENERATE_KEY              Action = 8
+	Action_ACTION_WRITE                     Action = 9
+	Action_ACTION_MANAGE                    Action = 10
+	Action_ACTION_READ                      Action = 11
+	Action_ACTION_READ_CONFIG               Action = 12
+	Action_ACTION_DEPLOY                    Action = 13
+	Action_ACTION_CREATE_SECURITY_ALERT     Action = 14
+	Action_ACTION_UPDATE                    Action = 15
+	Action_ACTION_READDATA                  Action = 16
+	Action_ACTION_UPDATECONFIG              Action = 17
+	Action_ACTION_UPDATEDATA                Action = 18
+	Action_ACTION_VIEW                      Action = 19
+	Action_ACTION_EXECUTE                   Action = 20
+	Action_ACTION_ACKNOWLEDGE               Action = 21
+	Action_ACTION_ASSIGN                    Action = 22
+	Action_ACTION_CLOSE                     Action = 23
+	Action_ACTION_UPDATEUSERWIDGETS         Action = 24
+	Action_ACTION_READMAPS                  Action = 25
+	Action_ACTION_READPOLICIES              Action = 26
+	Action_ACTION_READTEAMWIDGETS           Action = 27
+	Action_ACTION_READUSERWIDGETS           Action = 28
+	Action_ACTION_REINDEX                   Action = 29
+	Action_ACTION_SENDDATA                  Action = 30
+	Action_ACTION_SNOOZE                    Action = 31
+	Action_ACTION_UPDATEMAPS                Action = 32
+	Action_ACTION_UPDATEPOLICIES            Action = 33
+	Action_ACTION_UPDATETEAMWIDGETS         Action = 34
+	Action_ACTION_READMAPPING               Action = 35
+	Action_ACTION_READSLICONFIG             Action = 36
+	Action_ACTION_UPDATEFILTERSCONFIG       Action = 37
+	Action_ACTION_UPDATESLICONFIG           Action = 38
+	Action_ACTION_UPLOADMAPPING             Action = 39
+	Action_ACTION_READ_DIMENSIONS_CONFIG    Action = 40
+	Action_ACTION_UPDATE_DIMENSIONS_CONFIG  Action = 41
+	Action_ACTION_READ_APDEX_CONFIG         Action = 42
+	Action_ACTION_UPDATE_APDEX_CONFIG       Action = 43
+	Action_ACTION_MANAGE_CONNECTION_TO_ORG  Action = 44
+	Action_ACTION_READ_GROUPS               Action = 45
+	Action_ACTION_GET_DAILY_EMAILS          Action = 46
+	Action_ACTION_GET_DATA_USAGE_WARNINGS   Action = 47
+	Action_ACTION_GET_FLOW_ANOMALIES        Action = 48
+	Action_ACTION_GET_SPIKE_ANOMALIES       Action = 49
+	Action_ACTION_READ_ALL                  Action = 50
+	Action_ACTION_UPDATE_ALL                Action = 51
+	Action_ACTION_READ_SUMMARY              Action = 52
+	Action_ACTION_UPLOAD                    Action = 53
+	Action_ACTION_READ_ACCESS_POLICY        Action = 54
+	Action_ACTION_UPDATE_ACCESS_POLICY      Action = 55
+	Action_ACTION_APPEND_DATA               Action = 56
+	Action_ACTION_OVERWRITE_DATA            Action = 57
+	Action_ACTION_READ_TEAM_MEMBERS_SUMMARY Action = 58
 )
 
 // Enum value maps for Action.
@@ -634,64 +643,70 @@ var (
 		53: "ACTION_UPLOAD",
 		54: "ACTION_READ_ACCESS_POLICY",
 		55: "ACTION_UPDATE_ACCESS_POLICY",
+		56: "ACTION_APPEND_DATA",
+		57: "ACTION_OVERWRITE_DATA",
+		58: "ACTION_READ_TEAM_MEMBERS_SUMMARY",
 	}
 	Action_value = map[string]int32{
-		"ACTION_UNSPECIFIED":              0,
-		"ACTION_ADMIN":                    1,
-		"ACTION_OPERATE":                  2,
-		"ACTION_VIEW_ONLY":                3,
-		"ACTION_EDIT":                     4,
-		"ACTION_DELETE":                   5,
-		"ACTION_CREATE":                   6,
-		"ACTION_CHANGE_QUOTA":             7,
-		"ACTION_GENERATE_KEY":             8,
-		"ACTION_WRITE":                    9,
-		"ACTION_MANAGE":                   10,
-		"ACTION_READ":                     11,
-		"ACTION_READ_CONFIG":              12,
-		"ACTION_DEPLOY":                   13,
-		"ACTION_CREATE_SECURITY_ALERT":    14,
-		"ACTION_UPDATE":                   15,
-		"ACTION_READDATA":                 16,
-		"ACTION_UPDATECONFIG":             17,
-		"ACTION_UPDATEDATA":               18,
-		"ACTION_VIEW":                     19,
-		"ACTION_EXECUTE":                  20,
-		"ACTION_ACKNOWLEDGE":              21,
-		"ACTION_ASSIGN":                   22,
-		"ACTION_CLOSE":                    23,
-		"ACTION_UPDATEUSERWIDGETS":        24,
-		"ACTION_READMAPS":                 25,
-		"ACTION_READPOLICIES":             26,
-		"ACTION_READTEAMWIDGETS":          27,
-		"ACTION_READUSERWIDGETS":          28,
-		"ACTION_REINDEX":                  29,
-		"ACTION_SENDDATA":                 30,
-		"ACTION_SNOOZE":                   31,
-		"ACTION_UPDATEMAPS":               32,
-		"ACTION_UPDATEPOLICIES":           33,
-		"ACTION_UPDATETEAMWIDGETS":        34,
-		"ACTION_READMAPPING":              35,
-		"ACTION_READSLICONFIG":            36,
-		"ACTION_UPDATEFILTERSCONFIG":      37,
-		"ACTION_UPDATESLICONFIG":          38,
-		"ACTION_UPLOADMAPPING":            39,
-		"ACTION_READ_DIMENSIONS_CONFIG":   40,
-		"ACTION_UPDATE_DIMENSIONS_CONFIG": 41,
-		"ACTION_READ_APDEX_CONFIG":        42,
-		"ACTION_UPDATE_APDEX_CONFIG":      43,
-		"ACTION_MANAGE_CONNECTION_TO_ORG": 44,
-		"ACTION_READ_GROUPS":              45,
-		"ACTION_GET_DAILY_EMAILS":         46,
-		"ACTION_GET_DATA_USAGE_WARNINGS":  47,
-		"ACTION_GET_FLOW_ANOMALIES":       48,
-		"ACTION_GET_SPIKE_ANOMALIES":      49,
-		"ACTION_READ_ALL":                 50,
-		"ACTION_UPDATE_ALL":               51,
-		"ACTION_READ_SUMMARY":             52,
-		"ACTION_UPLOAD":                   53,
-		"ACTION_READ_ACCESS_POLICY":       54,
-		"ACTION_UPDATE_ACCESS_POLICY":     55,
+		"ACTION_UNSPECIFIED":               0,
+		"ACTION_ADMIN":                     1,
+		"ACTION_OPERATE":                   2,
+		"ACTION_VIEW_ONLY":                 3,
+		"ACTION_EDIT":                      4,
+		"ACTION_DELETE":                    5,
+		"ACTION_CREATE":                    6,
+		"ACTION_CHANGE_QUOTA":              7,
+		"ACTION_GENERATE_KEY":              8,
+		"ACTION_WRITE":                     9,
+		"ACTION_MANAGE":                    10,
+		"ACTION_READ":                      11,
+		"ACTION_READ_CONFIG":               12,
+		"ACTION_DEPLOY":                    13,
+		"ACTION_CREATE_SECURITY_ALERT":     14,
+		"ACTION_UPDATE":                    15,
+		"ACTION_READDATA":                  16,
+		"ACTION_UPDATECONFIG":              17,
+		"ACTION_UPDATEDATA":                18,
+		"ACTION_VIEW":                      19,
+		"ACTION_EXECUTE":                   20,
+		"ACTION_ACKNOWLEDGE":               21,
+		"ACTION_ASSIGN":                    22,
+		"ACTION_CLOSE":                     23,
+		"ACTION_UPDATEUSERWIDGETS":         24,
+		"ACTION_READMAPS":                  25,
+		"ACTION_READPOLICIES":              26,
+		"ACTION_READTEAMWIDGETS":           27,
+		"ACTION_READUSERWIDGETS":           28,
+		"ACTION_REINDEX":                   29,
+		"ACTION_SENDDATA":                  30,
+		"ACTION_SNOOZE":                    31,
+		"ACTION_UPDATEMAPS":                32,
+		"ACTION_UPDATEPOLICIES":            33,
+		"ACTION_UPDATETEAMWIDGETS":         34,
+		"ACTION_READMAPPING":               35,
+		"ACTION_READSLICONFIG":             36,
+		"ACTION_UPDATEFILTERSCONFIG":       37,
+		"ACTION_UPDATESLICONFIG":           38,
+		"ACTION_UPLOADMAPPING":             39,
+		"ACTION_READ_DIMENSIONS_CONFIG":    40,
+		"ACTION_UPDATE_DIMENSIONS_CONFIG":  41,
+		"ACTION_READ_APDEX_CONFIG":         42,
+		"ACTION_UPDATE_APDEX_CONFIG":       43,
+		"ACTION_MANAGE_CONNECTION_TO_ORG":  44,
+		"ACTION_READ_GROUPS":               45,
+		"ACTION_GET_DAILY_EMAILS":          46,
+		"ACTION_GET_DATA_USAGE_WARNINGS":   47,
+		"ACTION_GET_FLOW_ANOMALIES":        48,
+		"ACTION_GET_SPIKE_ANOMALIES":       49,
+		"ACTION_READ_ALL":                  50,
+		"ACTION_UPDATE_ALL":                51,
+		"ACTION_READ_SUMMARY":              52,
+		"ACTION_UPLOAD":                    53,
+		"ACTION_READ_ACCESS_POLICY":        54,
+		"ACTION_UPDATE_ACCESS_POLICY":      55,
+		"ACTION_APPEND_DATA":               56,
+		"ACTION_OVERWRITE_DATA":            57,
+		"ACTION_READ_TEAM_MEMBERS_SUMMARY": 58,
 	}
 )
 
@@ -753,7 +768,7 @@ var File_com_coralogix_permissions_v1_actions_resources_proto protoreflect.FileD
 
 const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xb1>\n" +
+	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\x9d?\n" +
 	"\bResource\x12\x18\n" +
 	"\x14RESOURCE_UNSPECIFIED\x10\x00\x12%\n" +
 	"\x12RESOURCE_CORALOGIX\x10\x01\x1a\r\x92\x82\x19\tcoralogix\x12\x1f\n" +
@@ -916,7 +931,9 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\x19RESOURCE_TEAM_QUOTA_RULES\x10\x92\x01\x1a\x14\x92\x82\x19\x10team-quota-rules\x12*\n" +
 	"\x14RESOURCE_SPLIT_INDEX\x10\x93\x01\x1a\x0f\x92\x82\x19\vsplit-index\x122\n" +
 	"\x18RESOURCE_ACCESS_POLICIES\x10\x94\x01\x1a\x13\x92\x82\x19\x0faccess-policies\x126\n" +
-	"\x1aRESOURCE_PIPELINE_ANALYZER\x10\x95\x01\x1a\x15\x92\x82\x19\x11pipeline-analyzer*\xb3\x12\n" +
+	"\x1aRESOURCE_PIPELINE_ANALYZER\x10\x95\x01\x1a\x15\x92\x82\x19\x11pipeline-analyzer\x12.\n" +
+	"\x16RESOURCE_TEAM_DATASETS\x10\x96\x01\x1a\x11\x92\x82\x19\rteam-datasets\x12:\n" +
+	"\x1cRESOURCE_TEAM_SCHEMA_MANAGER\x10\x97\x01\x1a\x17\x92\x82\x19\x13team-schema-manager*\xcb\x13\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\fACTION_ADMIN\x10\x01\x1a\t\x92\x82\x19\x05admin\x12\x1f\n" +
@@ -985,7 +1002,11 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\rACTION_UPLOAD\x105\x1a\n" +
 	"\x92\x82\x19\x06Upload\x123\n" +
 	"\x19ACTION_READ_ACCESS_POLICY\x106\x1a\x14\x92\x82\x19\x10ReadAccessPolicy\x127\n" +
-	"\x1bACTION_UPDATE_ACCESS_POLICY\x107\x1a\x16\x92\x82\x19\x12UpdateAccessPolicy::\n" +
+	"\x1bACTION_UPDATE_ACCESS_POLICY\x107\x1a\x16\x92\x82\x19\x12UpdateAccessPolicy\x12&\n" +
+	"\x12ACTION_APPEND_DATA\x108\x1a\x0e\x92\x82\x19\n" +
+	"AppendData\x12,\n" +
+	"\x15ACTION_OVERWRITE_DATA\x109\x1a\x11\x92\x82\x19\rOverwriteData\x12@\n" +
+	" ACTION_READ_TEAM_MEMBERS_SUMMARY\x10:\x1a\x1a\x92\x82\x19\x16ReadTeamMembersSummary::\n" +
 	"\x04name\x12!.google.protobuf.EnumValueOptions\x18\xa2\x90\x03 \x01(\tR\x04name\x88\x01\x01:L\n" +
 	"\x0fdeprecated_name\x12!.google.protobuf.EnumValueOptions\x18\xa3\x90\x03 \x03(\tR\x0edeprecatedNameb\x06proto3"
 

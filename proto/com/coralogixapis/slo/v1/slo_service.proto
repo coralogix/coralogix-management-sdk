@@ -51,7 +51,7 @@ message CreateSloRequest {
     }
   };
   Slo slo = 1;
-  optional bool silence_data_validations = 2;
+  optional bool silence_data_validations = 2 [deprecated = true];
 }
 
 message CreateSloResponse {
@@ -74,7 +74,7 @@ message ReplaceSloRequest {
     }
   };
   Slo slo = 1;
-  optional bool silence_data_validations = 2;
+  optional bool silence_data_validations = 2 [deprecated = true];
 }
 
 message ReplaceSloResponse {
