@@ -35,6 +35,9 @@ jobs:
         run: | 
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest    
+          go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway@latest
+          go install github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2@latest
+          
           curl -sL https://github.com/coralogix/protofetch/releases/download/v0.1.11/protofetch_x86_64-unknown-linux-musl.tar.gz  | tar xz
           sudo mv bin/protofetch /usr/bin/protofetch
           sudo chmod +x /usr/bin/protofetch
@@ -60,3 +63,7 @@ jobs:
       - uses: bufbuild/buf-action@v1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Install dependencies
+        run: | 
+          bash tools/build_facade_files.sh
