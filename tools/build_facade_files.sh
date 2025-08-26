@@ -1,9 +1,6 @@
 # Directory containing the protobuf files
-mkdir -p proto
-cp -a src/** proto/
-cp -a deps/** proto/
 proto_dir="proto"
-go_out_dir="internal"
+go_out_dir=$RUNNER_TEMP
 mod_prefix="github.com/coralogix"
 mod_name="$mod_prefix/openapi-facade/go"
 proto_files=($(find "$proto_dir" -name "*.proto" -print))
@@ -13,12 +10,7 @@ openapi_args=""
 for proto_file in "${proto_files[@]}" 
 do
     out_module=$(dirname $proto_file)
-  
-    if [[ $out_module == *"coralogix"* ]]; then
-        mod_path="${out_module##*/com/}"
-	# For all other protos, the package path is the same as the directory path
 	openapi_args+="--openapiv2_opt=M${proto_file##*$proto_dir/}=${mod_name}/${go_out_dir}/${mod_path} "
-    fi
 done
 
 protofile_list=""
