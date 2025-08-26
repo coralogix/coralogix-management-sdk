@@ -173,8 +173,9 @@ async fn main() -> eyre::Result<()> {
         .unwrap_or_else(|_| panic!("Couldn't find git repository at {}", args.git_dir));
     let format = format_description::parse("[year]-[month]-[day]").expect("Failed to parse format");
     let branch_name = format!(
-        "update-{}",
-        time::OffsetDateTime::now_utc().format(&format)?
+        "update-{}-{}",
+        time::OffsetDateTime::now_utc().format(&format)?,
+        args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)
     );
     let changes = repo.changes(|_| true).expect("Failed to add changes");
     repo.checkout_new_branch(&branch_name)
