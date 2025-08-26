@@ -41,7 +41,7 @@ message Row {
 message RepetitiveVar {
   google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Variable name that can be applied on section making it repetitive section"
-    example: 'SomeFancyVarName'
+    example: '"pod_name"'
   }];
 }
 
@@ -73,7 +73,7 @@ message CustomSectionOptions {
   }];
   RepetitiveVar repetitive_var = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Variable name that can be applied on section making it repetitive section and other metadata"
-    example: '{"name": "SomeFancyVarName"}'
+    example: '{"name": "pod_name"}'
   }];
 }
 
