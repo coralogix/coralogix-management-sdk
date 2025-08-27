@@ -70,16 +70,16 @@ var file_com_coralogixapis_common_v1_audit_log_proto_extTypes = []protoimpl.Exte
 	{
 		ExtendedType:  (*descriptorpb.MethodOptions)(nil),
 		ExtensionType: (*AuditLogDescription)(nil),
-		Field:         5000,
+		Field:         5001,
 		Name:          "com.coralogixapis.common.v1.audit_log_description",
-		Tag:           "bytes,5000,opt,name=audit_log_description",
+		Tag:           "bytes,5001,opt,name=audit_log_description",
 		Filename:      "com/coralogixapis/common/v1/audit_log.proto",
 	},
 }
 
 // Extension fields to descriptorpb.MethodOptions.
 var (
-	// optional com.coralogixapis.common.v1.AuditLogDescription audit_log_description = 5000;
+	// optional com.coralogixapis.common.v1.AuditLogDescription audit_log_description = 5001;
 	E_AuditLogDescription = &file_com_coralogixapis_common_v1_audit_log_proto_extTypes[0]
 )
 
@@ -90,7 +90,7 @@ const file_com_coralogixapis_common_v1_audit_log_proto_rawDesc = "" +
 	"+com/coralogixapis/common/v1/audit_log.proto\x12\x1bcom.coralogixapis.common.v1\x1a google/protobuf/descriptor.proto\"7\n" +
 	"\x13AuditLogDescription\x12 \n" +
 	"\vdescription\x18\x01 \x01(\tR\vdescription:\x85\x01\n" +
-	"\x15audit_log_description\x12\x1e.google.protobuf.MethodOptions\x18\x88' \x01(\v20.com.coralogixapis.common.v1.AuditLogDescriptionR\x13auditLogDescriptionb\x06proto3"
+	"\x15audit_log_description\x12\x1e.google.protobuf.MethodOptions\x18\x89' \x01(\v20.com.coralogixapis.common.v1.AuditLogDescriptionR\x13auditLogDescriptionb\x06proto3"
 
 var (
 	file_com_coralogixapis_common_v1_audit_log_proto_rawDescOnce sync.Once
