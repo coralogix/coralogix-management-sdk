@@ -64,6 +64,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }} 
 
-      - name: Install dependencies
-        run: | 
-          bash tools/build_facade_files.sh
+      # - name: Run OpenAPI facade build
+      #   run: | 
+      #     bash tools/build_facade_files.sh
