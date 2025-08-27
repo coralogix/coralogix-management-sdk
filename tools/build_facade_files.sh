@@ -23,7 +23,7 @@ protofile_list=""
 
 for proto_file in "${proto_files[@]}" 
 do
-    protofile_list+="${proto_file} "
+    protofile_list+="${proto_file} " 
 done
 
-protoc --proto_path=$proto_dir --openapiv2_out=$go_out_dir --openapiv2_opt=allow_merge=true $openapi_args $protofile_list
+protoc $BUILD_ARGS --proto_path=$proto_dir --openapiv2_out=$go_out_dir --openapiv2_opt=allow_merge=true $openapi_args $protofile_list
