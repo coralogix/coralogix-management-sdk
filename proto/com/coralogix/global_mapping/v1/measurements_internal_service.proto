@@ -1,11 +1,11 @@
 syntax = "proto3";
 package com.coralogix.global_mapping.v1;
-import "google/protobuf/wrappers.proto";
-import "com/coralogix/global_mapping/v1/measurement.proto";
-import "com/coralogix/common/v1/audit_log.proto";
-import "com/coralogix/global_mapping/v1/data_source_type.proto";
-import "com/coralogix/global_mapping/v1/data_source.proto";
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/measurement.proto";
+import "google/protobuf/wrappers.proto";
 
 message UpsertGlobalMeasurementsInternalRequest {
   repeated Measurement measurements = 1;
@@ -40,12 +40,12 @@ message UpsertMeasurementsInternalRequest {
   repeated Measurement measurements = 1;
 }
 
-message UpsertCompanyProvidersInternalRequest{
-  repeated google.protobuf.StringValue providers = 1 [deprecated=true];
+message UpsertCompanyProvidersInternalRequest {
+  repeated google.protobuf.StringValue providers = 1 [deprecated = true];
   repeated DataSource data_sources = 2;
 }
-message UpsertCompanyProvidersInternalResponse{
-  repeated google.protobuf.StringValue providers = 1[deprecated=true];
+message UpsertCompanyProvidersInternalResponse {
+  repeated google.protobuf.StringValue providers = 1 [deprecated = true];
   repeated DataSource data_sources = 2;
 }
 

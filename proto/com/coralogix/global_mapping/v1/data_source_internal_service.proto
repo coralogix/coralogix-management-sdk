@@ -1,19 +1,18 @@
 syntax = "proto3";
-import "com/coralogix/global_mapping/v1/data_source.proto";
-import "com/coralogix/common/v1/audit_log.proto";
 
 package com.coralogix.global_mapping.v1;
 
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
 
-message GetCompanyDataSourcesInternalRequest { }
+message GetCompanyDataSourcesInternalRequest {}
 
 message GetCompanyDataSourcesInternalResponse {
-    repeated DataSource data_sources= 1;
+  repeated DataSource data_sources = 1;
 }
 
-
 service CompanyDataSourcesInternalService {
-    rpc GetCompanyDataSourcesInternal (GetCompanyDataSourcesInternalRequest) returns (GetCompanyDataSourcesInternalResponse){
-        option (com.coralogix.common.v1.audit_log_description).description = "Get Company Data Sources";
-    }
+  rpc GetCompanyDataSourcesInternal(GetCompanyDataSourcesInternalRequest) returns (GetCompanyDataSourcesInternalResponse) {
+    option (com.coralogix.common.v1.audit_log_description).description = "Get Company Data Sources";
+  }
 }

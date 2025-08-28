@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/timestamp.proto";
-import "com/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto";
 import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
+import "com/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
 
 message EventTimeRelativeMoreThan {
   google.protobuf.Int64Value numerator_hit_value = 1;

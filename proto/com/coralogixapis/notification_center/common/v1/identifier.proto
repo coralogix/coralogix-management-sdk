@@ -5,8 +5,8 @@ package com.coralogixapis.notification_center;
 option go_package = "com/coralogixapis/notification_center";
 
 /**
-* This file contains public models used across the notification sources APIs.
-* any updates should be made with caution to ensure backward compatibility.
+ * This file contains public models used across the notification sources APIs.
+ * any updates should be made with caution to ensure backward compatibility.
  */
 
 // Deprecated - use single id field instead

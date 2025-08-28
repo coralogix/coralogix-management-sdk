@@ -3,27 +3,26 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/common/v1/audit_log.proto";
-
-import "com/coralogix/quota/v1/get_policy_request.proto";
-import "com/coralogix/quota/v1/get_policy_response.proto";
-import "com/coralogix/quota/v1/create_policy_request.proto";
-import "com/coralogix/quota/v1/create_policy_response.proto";
-import "com/coralogix/quota/v1/update_policy_request.proto";
-import "com/coralogix/quota/v1/update_policy_response.proto";
-import "com/coralogix/quota/v1/get_company_policies_request.proto";
-import "com/coralogix/quota/v1/get_company_policies_response.proto";
-import "com/coralogix/quota/v1/delete_policy_request.proto";
-import "com/coralogix/quota/v1/delete_policy_response.proto";
-import "com/coralogix/quota/v1/reorder_policies_request.proto";
-import "com/coralogix/quota/v1/reorder_policies_response.proto";
-import "com/coralogix/quota/v1/bulk_test_log_policies_request.proto";
-import "com/coralogix/quota/v1/bulk_test_log_policies_response.proto";
-import "com/coralogix/quota/v1/toggle_policy_request.proto";
-import "com/coralogix/quota/v1/toggle_policy_response.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
 import "com/coralogix/quota/v1/bulk_create_policy_request.proto";
 import "com/coralogix/quota/v1/bulk_create_policy_response.proto";
-import "com/coralogix/quota/v1/atomic_overwrite_policies_response.proto";
-import "com/coralogix/quota/v1/atomic_overwrite_policies_request.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_request.proto";
+import "com/coralogix/quota/v1/bulk_test_log_policies_response.proto";
+import "com/coralogix/quota/v1/create_policy_request.proto";
+import "com/coralogix/quota/v1/create_policy_response.proto";
+import "com/coralogix/quota/v1/delete_policy_request.proto";
+import "com/coralogix/quota/v1/delete_policy_response.proto";
+import "com/coralogix/quota/v1/get_company_policies_request.proto";
+import "com/coralogix/quota/v1/get_company_policies_response.proto";
+import "com/coralogix/quota/v1/get_policy_request.proto";
+import "com/coralogix/quota/v1/get_policy_response.proto";
+import "com/coralogix/quota/v1/reorder_policies_request.proto";
+import "com/coralogix/quota/v1/reorder_policies_response.proto";
+import "com/coralogix/quota/v1/toggle_policy_request.proto";
+import "com/coralogix/quota/v1/toggle_policy_response.proto";
+import "com/coralogix/quota/v1/update_policy_request.proto";
+import "com/coralogix/quota/v1/update_policy_response.proto";
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -51,9 +50,7 @@ service PoliciesService {
       tags: ["Policies Service"]
       summary: "Get Policy by ID"
     };
-    option (google.api.http) = {
-      get: "/v1/policies/{id}"
-    };
+    option (google.api.http) = {get: "/v1/policies/{id}"};
   }
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
@@ -122,9 +119,7 @@ service PoliciesService {
       tags: ["Policies Service"]
       summary: "Get Company Policies"
     };
-    option (google.api.http) = {
-      get: "/v1/policies"
-    };
+    option (google.api.http) = {get: "/v1/policies"};
   }
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
@@ -145,9 +140,7 @@ service PoliciesService {
       tags: ["Policies Service"]
       summary: "Delete Policy"
     };
-    option (google.api.http) = {
-      delete: "/v1/policies/{id}"
-    };
+    option (google.api.http) = {delete: "/v1/policies/{id}"};
   }
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {

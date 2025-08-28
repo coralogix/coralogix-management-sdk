@@ -5,8 +5,7 @@ package com.coralogixapis.aaa.organisations.v2;
 import "com/coralogixapis/aaa/organisations/v2/types.proto";
 
 service TeamService {
-  rpc CreateTeamInOrg(CreateTeamInOrgRequest)
-      returns (CreateTeamInOrgResponse) {}
+  rpc CreateTeamInOrg(CreateTeamInOrgRequest) returns (CreateTeamInOrgResponse) {}
   rpc MoveQuota(MoveQuotaRequest) returns (MoveQuotaResponse) {}
   rpc GetTeamQuota(GetTeamQuotaRequest) returns (GetTeamQuotaResponse) {}
   rpc SetDailyQuota(SetDailyQuotaRequest) returns (SetDailyQuotaResponse) {}
@@ -28,14 +27,18 @@ message ListTeamsResponse {
   repeated TeamInfo teams = 2;
 }
 
-message GetTeamRequest { TeamId team_id = 1; }
+message GetTeamRequest {
+  TeamId team_id = 1;
+}
 message GetTeamResponse {
   TeamId team_id = 1;
   string team_name = 2;
   double daily_quota = 3;
   int32 retention = 4;
 }
-message DeleteTeamRequest { TeamId team_id = 1; }
+message DeleteTeamRequest {
+  TeamId team_id = 1;
+}
 message DeleteTeamResponse {}
 
 message UpdateTeamRequest {
@@ -70,7 +73,9 @@ message MoveQuotaResponse {
   double destination_team_quota = 2;
 }
 
-message GetTeamQuotaRequest { TeamId team_id = 1; }
+message GetTeamQuotaRequest {
+  TeamId team_id = 1;
+}
 
 message GetTeamQuotaResponse {
   TeamId team_id = 1;

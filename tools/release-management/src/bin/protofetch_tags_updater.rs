@@ -201,7 +201,7 @@ async fn main() -> eyre::Result<()> {
     tracing::info!(%owner, %repo_name, ?branch_name, ?pr_message);
     authed_github
         .pulls(owner, repo_name)
-        .create("Updating API descriptions", branch_name, "master")
+        .create(format!("chore: updating '{}' protobufs", args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)), branch_name, "master")
         .body(pr_message)
         .send()
         .await?;

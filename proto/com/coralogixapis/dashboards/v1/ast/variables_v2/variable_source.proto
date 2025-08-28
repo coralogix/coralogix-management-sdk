@@ -4,8 +4,8 @@ package com.coralogixapis.dashboards.v1.ast.variables_v2;
 
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
-import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "google/protobuf/wrappers.proto";
 
 message VariableSourceV2 {
@@ -160,7 +160,7 @@ message VariableSourceV2 {
         }
 
         message QueryText {
-          common.DataprimeQuery query = 1;        
+          common.DataprimeQuery query = 1;
         }
       }
     }

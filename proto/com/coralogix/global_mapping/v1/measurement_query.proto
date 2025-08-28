@@ -1,11 +1,12 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/struct.proto";
-import "com/coralogix/global_mapping/v1/label_values.proto";
 
 package com.coralogix.global_mapping.v1;
 
-message QueryResult{
+import "com/coralogix/global_mapping/v1/label_values.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
+
+message QueryResult {
   map<string, google.protobuf.StringValue> metric = 1;
   repeated google.protobuf.ListValue values = 2;
 }
@@ -47,7 +48,7 @@ message MeasurementMetadata {
   TopkAggregation topk_aggregation = 6;
 }
 
-message MeasurementQuery{
+message MeasurementQuery {
   google.protobuf.StringValue query = 1;
   google.protobuf.StringValue name = 2;
   google.protobuf.StringValue description = 3;

@@ -1,8 +1,8 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
 
 package com.coralogixapis.apm.common.v2;
 
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 enum OrderByDirection {
@@ -17,7 +17,7 @@ message OrderBy {
       title: "Order By"
       description: "This data structure represents an order by clause in Coralogix APM."
       required: [
-        "field_name", 
+        "field_name",
         "direction"
       ]
     }
@@ -26,6 +26,6 @@ message OrderBy {
       description: "Find out more about SLOs in Coralogix APM"
     }
   };
-  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"field_name\"" }];
+  google.protobuf.StringValue field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"field_name\""}];
   OrderByDirection direction = 2;
 }
