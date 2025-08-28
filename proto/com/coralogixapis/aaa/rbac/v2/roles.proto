@@ -20,12 +20,12 @@ message CustomRole {
 }
 
 service RoleManagementService {
-  rpc ListSystemRoles(ListSystemRolesRequest) returns(ListSystemRolesResponse);
-  rpc ListCustomRoles(ListCustomRolesRequest) returns(ListCustomRolesResponse);
-  rpc GetCustomRole(GetCustomRoleRequest) returns(GetCustomRoleResponse);
-  rpc CreateRole(CreateRoleRequest) returns(CreateRoleResponse);
-  rpc UpdateRole(UpdateRoleRequest) returns(UpdateRoleResponse);
-  rpc DeleteRole(DeleteRoleRequest) returns(DeleteRoleResponse);
+  rpc ListSystemRoles(ListSystemRolesRequest) returns (ListSystemRolesResponse);
+  rpc ListCustomRoles(ListCustomRolesRequest) returns (ListCustomRolesResponse);
+  rpc GetCustomRole(GetCustomRoleRequest) returns (GetCustomRoleResponse);
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse);
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse);
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse);
 }
 
 message GetCustomRoleRequest {
@@ -36,9 +36,7 @@ message GetCustomRoleResponse {
   optional CustomRole role = 1;
 }
 
-message ListSystemRolesRequest {
-
-}
+message ListSystemRolesRequest {}
 
 message ListSystemRolesResponse {
   repeated SystemRole roles = 1;
@@ -51,10 +49,10 @@ message CreateRoleRequest {
   string name = 2;
   string description = 3;
   repeated string permissions = 5;
-  oneof parent_role{
+  oneof parent_role {
     uint32 parent_role_id = 6;
     string parent_role_name = 7;
-  };
+  }
 }
 
 message CreateRoleResponse {
@@ -72,9 +70,7 @@ message Permissions {
   repeated string permissions = 1;
 }
 
-message UpdateRoleResponse {
-
-}
+message UpdateRoleResponse {}
 
 message ListCustomRolesRequest {
   // If not specified, team_id attached to your credential will be used.
@@ -89,6 +85,4 @@ message DeleteRoleRequest {
   uint32 role_id = 1;
 }
 
-message DeleteRoleResponse {
-
-}
+message DeleteRoleResponse {}

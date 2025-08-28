@@ -1,17 +1,17 @@
 syntax = "proto3";
-import "google/protobuf/wrappers.proto";
-
-import "com/coralogix/common/v1/audit_log.proto";
-import "com/coralogix/global_mapping/v1/label_mapping.proto";
-import "com/coralogix/global_mapping/v1/data_source_type.proto";
-import "com/coralogix/global_mapping/v1/context_data.proto";
-import "com/coralogix/global_mapping/v1/extracted_label.proto";
-import "com/coralogix/global_mapping/v1/label_values.proto";
-import "com/coralogix/global_mapping/v1/data_source.proto";
 
 package com.coralogix.global_mapping.v1;
 
-message GetLabelMappingsRequest{
+import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogix/global_mapping/v1/context_data.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/extracted_label.proto";
+import "com/coralogix/global_mapping/v1/label_mapping.proto";
+import "com/coralogix/global_mapping/v1/label_values.proto";
+import "google/protobuf/wrappers.proto";
+
+message GetLabelMappingsRequest {
   reserved "data_source_providers";
   reserved 4;
   repeated google.protobuf.StringValue labels = 1;
@@ -19,17 +19,17 @@ message GetLabelMappingsRequest{
   repeated DataSource data_sources = 5;
 }
 
-message GetCustomLabelMappingsRequest{
+message GetCustomLabelMappingsRequest {
   repeated google.protobuf.StringValue labels = 1;
   repeated DataSourceType data_source_types = 2;
   repeated DataSource data_sources = 3;
 }
 
-message GetLabelMappingsResponse{
+message GetLabelMappingsResponse {
   repeated LabelMapping mappings = 1;
 }
 
-message GetCustomLabelMappingsResponse{
+message GetCustomLabelMappingsResponse {
   repeated LabelMapping mappings = 1;
 }
 
@@ -80,7 +80,7 @@ message ExtractRequest {
     Log log = 3;
     Span span = 4;
   }
-  repeated DataSourceType destination_data_source_types = 5 [packed=false];
+  repeated DataSourceType destination_data_source_types = 5 [packed = false];
   repeated DataSource data_sources = 7;
 }
 
@@ -129,7 +129,7 @@ service LabelMappingsService {
     option (com.coralogix.common.v1.audit_log_description).description = "Get Labels";
   }
 
-  rpc Extract(ExtractRequest) returns(ExtractResponse) {
+  rpc Extract(ExtractRequest) returns (ExtractResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Extract labels from context";
   }
 
@@ -145,7 +145,7 @@ service LabelMappingsService {
     option (com.coralogix.common.v1.audit_log_description).description = "Upsert Custom Label Mappings";
   }
 
-  rpc RemoveCustomLabelMappings (RemoveCustomLabelMappingsRequest) returns (RemoveCustomLabelMappingsResponse) {
+  rpc RemoveCustomLabelMappings(RemoveCustomLabelMappingsRequest) returns (RemoveCustomLabelMappingsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Remove Custom Label Mappings";
   }
 

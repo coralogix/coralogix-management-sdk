@@ -2,6 +2,7 @@
 syntax = "proto3";
 
 package com.coralogix.permissions.v1;
+
 import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.EnumValueOptions {
@@ -17,11 +18,25 @@ enum Resource {
   RESOURCE_GRAFANA = 4 [(name) = "grafana"];
   RESOURCE_ACCOUNTMANAGER = 5 [(name) = "accountManager"];
   RESOURCE_GROUPS = 6 [(name) = "groups"];
-  RESOURCE_ALERTS = 7 [(name) = "alerts", (deprecated_name) = "Alert", (deprecated_name) = "alert"];
+  RESOURCE_ALERTS = 7 [
+    (name) = "alerts",
+    (deprecated_name) = "Alert",
+    (deprecated_name) = "alert"
+  ];
   RESOURCE_WEBHOOKS = 8 [(name) = "webhooks"];
-  RESOURCE_LOGS_DATAINGRESS = 9 [(name) = "logs.data-ingress", (deprecated_name) = "logs--dataingress"];
-  RESOURCE_SPANS_DATAINGRESS = 10 [(name) = "spans.data-ingress", (deprecated_name) = "traces--dataingress", (deprecated_name) = "traces.data-ingress"];
-  RESOURCE_METRICS_DATAINGRESS = 11 [(name) = "metrics.data-ingress", (deprecated_name) = "metrics--dataingress"];
+  RESOURCE_LOGS_DATAINGRESS = 9 [
+    (name) = "logs.data-ingress",
+    (deprecated_name) = "logs--dataingress"
+  ];
+  RESOURCE_SPANS_DATAINGRESS = 10 [
+    (name) = "spans.data-ingress",
+    (deprecated_name) = "traces--dataingress",
+    (deprecated_name) = "traces.data-ingress"
+  ];
+  RESOURCE_METRICS_DATAINGRESS = 11 [
+    (name) = "metrics.data-ingress",
+    (deprecated_name) = "metrics--dataingress"
+  ];
   RESOURCE_APIKEYS = 12 [(name) = "api-keys"];
   RESOURCE_TEAM = 13 [(name) = "team"];
   RESOURCE_TEAM_INVITES = 14 [(name) = "team-invites"];
@@ -164,7 +179,6 @@ enum Resource {
   RESOURCE_TEAM_SCHEMA_MANAGER = 151 [(name) = "team-schema-manager"];
 }
 
-
 enum Action {
   ACTION_UNSPECIFIED = 0;
   ACTION_ADMIN = 1 [(name) = "admin"];
@@ -172,7 +186,10 @@ enum Action {
   ACTION_VIEW_ONLY = 3 [(name) = "viewOnly"];
   ACTION_EDIT = 4 [(name) = "edit"];
   ACTION_DELETE = 5 [(name) = "delete"];
-  ACTION_CREATE = 6 [(name) = "Create", (deprecated_name) = "create"];
+  ACTION_CREATE = 6 [
+    (name) = "Create",
+    (deprecated_name) = "create"
+  ];
   ACTION_CHANGE_QUOTA = 7 [(name) = "change-quota"];
   ACTION_GENERATE_KEY = 8 [(name) = "generate-key"];
   ACTION_WRITE = 9 [(name) = "write"];

@@ -16,5 +16,3 @@ message TestResult {
     Failure failure = 2;
   }
 }
-
-

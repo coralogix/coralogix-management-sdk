@@ -2,57 +2,47 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "google/protobuf/descriptor.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
-import "com/coralogixapis/common/v1/audit_log.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
 import "com/coralogixapis/alerts/v3/pagination.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 service AlertEventService {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
     name: "Alert events service"
     description: "Get information regarding your alert events - instances of alerts being triggered."
-      external_docs: {
-        url: "https://coralogix.com/docs/user-guides/alerting/incidents/"
-        description: "Learn more about alert events and incidents in our documentation."
-      }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/alerting/incidents/"
+      description: "Learn more about alert events and incidents in our documentation."
+    }
   };
 
   rpc GetAlertEvent(GetAlertEventRequest) returns (GetAlertEventResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get alert event";
-    option (google.api.http) = {
-      get: "/v3/alert-event/{id}"
-    };
+    option (google.api.http) = {get: "/v3/alert-event/{id}"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Alert events service"]
       summary: "Get alert event by ID"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "alerts:ReadConfig"
-            }
+            values: {string_value: "alerts:ReadConfig"}
           }
         }
       }
@@ -61,37 +51,27 @@ service AlertEventService {
 
   rpc GetAlertEventsStats(GetAlertEventStatsRequest) returns (GetAlertEventStatsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get alert events stats";
-    option (google.api.http) = {
-      get: "/v3/alert-event-stats"
-    };
+    option (google.api.http) = {get: "/v3/alert-event-stats"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
-        value: {
-          description: "Bad Request"
-        }
-      },
+        value: {description: "Bad Request"}
+      }
       responses: {
         key: "401"
-        value: {
-          description: "Unauthorized request"
-        }
-      },
+        value: {description: "Unauthorized request"}
+      }
       responses: {
         key: "500"
-        value: {
-          description: "Internal server error"
-        }
-      },
+        value: {description: "Internal server error"}
+      }
       tags: ["Alert events service"]
       summary: "Get alert events statistics"
       extensions: {
         key: "x-coralogixPermissions"
         value: {
           list_value: {
-            values: {
-              string_value: "alerts:ReadConfig"
-            }
+            values: {string_value: "alerts:ReadConfig"}
           }
         }
       }
@@ -101,10 +81,7 @@ service AlertEventService {
 
 message GetAlertEventStatsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get alert event statistics request"
-
-    }
+    json_schema: {title: "Get alert event statistics request"}
   };
 
   repeated google.protobuf.StringValue ids = 1;
@@ -113,9 +90,7 @@ message GetAlertEventStatsRequest {
 
 message GetAlertEventStatsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get alert event statistics response"
-    }
+    json_schema: {title: "Get alert event statistics response"}
   };
 
   map<string, EventStats> events_stats = 1;
@@ -123,9 +98,7 @@ message GetAlertEventStatsResponse {
 
 message Permutation {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Permutation data structure"
-    }
+    json_schema: {title: "Permutation data structure"}
   };
 
   map<string, string> permutation_labels = 1;
@@ -133,9 +106,7 @@ message Permutation {
 
 message EventStats {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Alert event statistics data structure"
-    }
+    json_schema: {title: "Alert event statistics data structure"}
   };
 
   google.protobuf.UInt32Value count = 1;
@@ -148,9 +119,7 @@ message EventStats {
 
 message ActivityAnalysisStats {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Event activity analysis statistics"
-    }
+    json_schema: {title: "Event activity analysis statistics"}
   };
 
   google.protobuf.UInt32Value is_muted_count = 1;
@@ -159,9 +128,7 @@ message ActivityAnalysisStats {
 
 message GetAlertEventRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get alert event by ID request"
-    }
+    json_schema: {title: "Get alert event by ID request"}
   };
 
   // Alert event ID
@@ -172,9 +139,7 @@ message GetAlertEventRequest {
 
 message GetAlertEventResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get alert event response"
-    }
+    json_schema: {title: "Get alert event response"}
   };
 
   // Alert event ID
@@ -186,7 +151,7 @@ message GetAlertEventResponse {
   PaginationResponse pagination = 4;
 }
 
-message AlertEventMultiplePermutation{
+message AlertEventMultiplePermutation {
   repeated AlertEvent alert_event_multiple_permutation = 1;
 }
 

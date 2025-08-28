@@ -1,26 +1,22 @@
 syntax = "proto3";
 
-import "google/protobuf/descriptor.proto";
-import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-
 package com.coralogixapis.notification_center.entities.v1;
+
 import "com/coralogixapis/notification_center/common/common.proto";
+import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/entities/v1";
 
 // Public API to query information on registered entities in the Notification Center
 service EntitiesService {
   rpc ListEntityTypes(ListEntityTypesRequest) returns (ListEntityTypesResponse) {
-    option (google.api.http) = {
-      get: "/v1/notification-center/entity-types"
-    };
+    option (google.api.http) = {get: "/v1/notification-center/entity-types"};
   }
 
   rpc ListEntitySubTypes(ListEntitySubTypesRequest) returns (ListEntitySubTypesResponse) {
-    option (google.api.http) = {
-      get: "/v1/notification-center/entity-types/{entity_type}/entity-subtypes"
-    };
+    option (google.api.http) = {get: "/v1/notification-center/entity-types/{entity_type}/entity-subtypes"};
   }
 }
 

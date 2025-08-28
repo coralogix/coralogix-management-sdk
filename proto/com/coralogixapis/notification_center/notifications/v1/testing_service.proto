@@ -6,9 +6,8 @@ import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/config_overrides.proto";
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "com/coralogixapis/notification_center/notifications/v1/testing.proto";
-import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
-
+import "google/protobuf/descriptor.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/notifications/v1";
@@ -81,9 +80,9 @@ message TestConnectorConfigRequest {
     }
   };
   ConnectorType type = 1;
-  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"default\""}];
   repeated ConnectorConfigField fields = 3;
-  optional EntityType entity_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  optional EntityType entity_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
 }
 
 message TestConnectorConfigResponse {
@@ -94,7 +93,7 @@ message TestExistingConnectorRequest {
   reserved 1, 3;
   reserved "deprecated_connector_id", "connector_identifier";
 
-  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  string payload_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"default\""}];
   string connector_id = 4;
 }
 message TestExistingConnectorResponse {
@@ -105,9 +104,9 @@ message TestPresetConfigRequest {
   reserved 1, 3, 6, 8, 9;
   reserved "deprecated_entity_type", "deprecated_connector_id", "deprecated_preset_id", "connector_identifier", "preset_identifier";
 
-  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"metric\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"metric\""}];
   repeated ConfigOverrides config_overrides = 7;
-  EntityType entity_type = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
   string connector_id = 11;
   string parent_preset_id = 12;
 }
@@ -119,8 +118,8 @@ message TestExistingPresetRequest {
   reserved 1, 3, 4, 5, 6;
   reserved "deprecated_entity_type", "deprecated_preset_id", "deprecated_connector_id", "connector_identifier", "preset_identifier";
 
-  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
-  EntityType entity_type = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"logsImmediateResolved\""}];
+  EntityType entity_type = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
   string connector_id = 8;
   string preset_id = 9;
 }
@@ -132,10 +131,10 @@ message TestDestinationRequest {
   reserved 1, 3, 4, 6, 8, 9;
   reserved "deprecated_entity_type", "deprecated_connector_id", "deprecated_preset_id", "deprecated_connector_config_fields", "connector_identifier", "preset_identifier";
 
-  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
-  string payload_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"default\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"logsImmediateResolved\""}];
+  string payload_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"default\""}];
   repeated MessageConfigField message_config_fields = 7;
-  EntityType entity_type = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
   repeated TemplatedConnectorConfigField connector_config_fields = 11;
   string connector_id = 12;
   string preset_id = 13;
@@ -148,17 +147,17 @@ message TestTemplateRenderRequest {
   reserved 1;
   reserved "deprecated_entity_type";
 
-  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"logsImmediateResolved\"" }];
-  string template = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"{{ alertDef.name }}\"" }];
-  EntityType entity_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  optional string entity_sub_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"logsImmediateResolved\""}];
+  string template = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"{{ alertDef.name }}\""}];
+  EntityType entity_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
 }
 
 message TestTemplateRenderResult {
   message Success {
-    string rendered_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Rendered template result\"" }];
+    string rendered_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Rendered template result\""}];
   }
   message Failure {
-    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Template rendering failed\"" }];
+    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Template rendering failed\""}];
     FailureReason reason = 2;
   }
 
@@ -194,8 +193,8 @@ message TestRoutingConditionValidRequest {
       description: "Find out more about notification center"
     }
   };
-  string template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"alertDef.priority == 'P1'\"" }];
-  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  string template = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"alertDef.priority == 'P1'\""}];
+  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ALERTS\""}];
 }
 message TestRoutingConditionValidResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -216,10 +215,10 @@ message TestRoutingConditionValidResponse {
   }
 
   message Success {
-    bool result = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }]; 
+    bool result = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
   }
 
   message Failure {
-    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Invalid condition: condition should be rendered to a boolean value (true or false)\"" }]; 
+    string message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Invalid condition: condition should be rendered to a boolean value (true or false)\""}];
   }
 }

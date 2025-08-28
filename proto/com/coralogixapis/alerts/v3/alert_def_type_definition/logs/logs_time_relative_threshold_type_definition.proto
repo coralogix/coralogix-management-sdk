@@ -71,9 +71,7 @@ message LogsTimeRelativeCondition {
       ]
     }
   };
-  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-    description: "The threshold value for the alert condition."
-  }];
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The threshold value for the alert condition."}];
   LogsTimeRelativeComparedTo compared_to = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "The time frame to compare the current value against"
     example: "\"LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY\""

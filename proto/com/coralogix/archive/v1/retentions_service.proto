@@ -2,16 +2,14 @@ syntax = "proto3";
 
 package com.coralogix.archive.v1;
 
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/descriptor.proto";
-import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/archive/v1/retention.proto";
-
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
-message GetRetentionsRequest {
-}
+message GetRetentionsRequest {}
 
 message GetRetentionsResponse {
   repeated Retention retentions = 1;
@@ -26,7 +24,11 @@ extend google.protobuf.FieldOptions {
 
 message RetentionUpdateElement {
   google.protobuf.StringValue id = 1 [(validation_pattern) = "^([a-fA-F0-9]{8}[-][a-fA-F0-9]{4}[-][a-fA-F0-9]{4}[-][a-fA-F0-9]{4}[-][a-fA-F0-9]{12})$"];
-  google.protobuf.StringValue name = 2 [(validation_pattern) = "^[a-zA-Z0-9_-]+$", (validation_max_length) = 255, (validation_encoding) = "latin1"];
+  google.protobuf.StringValue name = 2 [
+    (validation_pattern) = "^[a-zA-Z0-9_-]+$",
+    (validation_max_length) = 255,
+    (validation_encoding) = "latin1"
+  ];
 }
 
 message UpdateRetentionsRequest {
@@ -34,9 +36,7 @@ message UpdateRetentionsRequest {
     json_schema: {
       title: "Update Retentions Request"
       description: "This data structure is used to update retentions"
-      required: [
-        "retention_update_elements"
-      ]
+      required: ["retention_update_elements"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -51,9 +51,7 @@ message UpdateRetentionsResponse {
     json_schema: {
       title: "Update Retentions Response"
       description: "This data structure is obtained after updating retentions"
-      required: [
-        "retentions"
-      ]
+      required: ["retentions"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -63,37 +61,31 @@ message UpdateRetentionsResponse {
   repeated Retention retentions = 1;
 }
 
-message ActivateRetentionsRequest {
-}
+message ActivateRetentionsRequest {}
 
 message ActivateRetentionsResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Activate Retentions Response"
       description: "This data structure is obtained after setting the active status of retentions"
-      required: [
-        "retentions"
-      ]
+      required: ["retentions"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
       description: "Find out more about archives"
     }
   };
-  google.protobuf.BoolValue activate_retentions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  google.protobuf.BoolValue activate_retentions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }
 
-message GetRetentionsEnabledRequest {
-}
+message GetRetentionsEnabledRequest {}
 
 message GetRetentionsEnabledResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Retentions Enabled Response"
       description: "This data structure is obtained when retrieving the active status of retentions"
-      required: [
-        "retentions"
-      ]
+      required: ["retentions"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
@@ -109,9 +101,7 @@ service RetentionsService {
     description: "View and manage retentions"
   };
   rpc GetRetentions(GetRetentionsRequest) returns (GetRetentionsResponse) {
-    option (google.api.http) = {
-      get: "/v1/retentions"
-    };
+    option (google.api.http) = {get: "/v1/retentions"};
     option (com.coralogix.common.v1.audit_log_description).description = "Get retentions";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -180,9 +170,7 @@ service RetentionsService {
   }
 
   rpc GetRetentionsEnabled(GetRetentionsEnabledRequest) returns (GetRetentionsEnabledResponse) {
-    option (google.api.http) = {
-      get: "/v1/retentions/enabled"
-    };
+    option (google.api.http) = {get: "/v1/retentions/enabled"};
     option (com.coralogix.common.v1.audit_log_description).description = "Get retention tags enabled status";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
