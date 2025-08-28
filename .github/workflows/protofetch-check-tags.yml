@@ -1,5 +1,10 @@
 name: "[Protofetch] Update Releases to Latest"
 
+# token for buf to annotate the PR
+# permissions:
+#   contents: read
+#   pull-requests: write
+
 env:
   PROTOC_VERSION: "29.3"
 
@@ -54,5 +59,10 @@ jobs:
           GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           RUST_LOG: debug
 
-      - run: buf format -w
-        working-directory: proto
+      - uses: bufbuild/buf-action@v1
+        with:
+          github_token: ${{ secrets.GH_TOKEN }} 
+
+      - name: Run OpenAPI facade build
+        run: | 
+          bash tools/build_facade_files.sh
