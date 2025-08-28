@@ -44,6 +44,7 @@ message GlobalRouter {
   // System-generated timestamp for when the router was last updated
   optional google.protobuf.Timestamp update_time = 9;
   map<string, string> entity_labels = 10;
-  EntityType entity_type = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
-  optional  RouterEvaluationMode evaluation_mode = 12;
+  optional EntityType entity_type = 11 [deprecated = true];
+  optional RouterEvaluationMode evaluation_mode = 12;
+  map<string, string> entity_label_matcher = 13;
 }

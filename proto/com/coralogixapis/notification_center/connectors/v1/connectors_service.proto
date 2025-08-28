@@ -198,7 +198,8 @@ message ListConnectorsRequest {
       description: "Find out more about notification center"
     }
   };
-  ConnectorType connector_type = 1;
+  optional ConnectorType connector_type = 1;
+  optional EntityType supported_by_entity_type = 4;
 }
 
 message ListConnectorsResponse {
@@ -283,20 +284,6 @@ message BatchGetConnectorSummariesResponse {
   repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-3\"]" }];
 }
 
-message GetConnectorTypeSummariesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Connector Type Summaries Request"
-      description: "Request to retrieve summaries of connector types"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-      description: "Find out more about notification center"
-    }
-  };
-}
-
 message ListConnectorSummariesRequest {
   reserved 2, 3;
   reserved "entity_type";
@@ -312,7 +299,8 @@ message ListConnectorSummariesRequest {
       description: "Find out more about notification center"
     }
   };
-  ConnectorType connector_type = 1;
+  optional ConnectorType connector_type = 1;
+  optional EntityType supported_by_entity_type = 4;
 }
 message ListConnectorSummariesResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -327,6 +315,22 @@ message ListConnectorSummariesResponse {
     }
   };
   repeated ConnectorSummary connectors = 1;
+}
+
+message GetConnectorTypeSummariesRequest {
+  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    json_schema: {
+      title: "Get Connector Type Summaries Request"
+      description: "Request to retrieve summaries of connector types"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
+  optional EntityType supported_by_entity_type = 1;
 }
 
 message GetConnectorTypeSummariesResponse {
