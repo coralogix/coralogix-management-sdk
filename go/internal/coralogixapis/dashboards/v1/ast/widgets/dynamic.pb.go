@@ -31,37 +31,43 @@ const (
 	Dynamic_INTERPRETATION_UNSPECIFIED                        Dynamic_Interpretation = 0
 	Dynamic_INTERPRETATION_RAW_DATA_TABLE                     Dynamic_Interpretation = 1
 	Dynamic_INTERPRETATION_TREND_OVER_TIME_LINE               Dynamic_Interpretation = 2
-	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_STAT              Dynamic_Interpretation = 3
-	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_GAUGE             Dynamic_Interpretation = 4
-	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_STAT               Dynamic_Interpretation = 5
-	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_GAUGE              Dynamic_Interpretation = 6
-	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS       Dynamic_Interpretation = 7
-	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS Dynamic_Interpretation = 8
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI                   Dynamic_Interpretation = 3
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI                    Dynamic_Interpretation = 4
+	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS Dynamic_Interpretation = 5
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_STAT              Dynamic_Interpretation = 6
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_GAUGE             Dynamic_Interpretation = 7
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_STAT               Dynamic_Interpretation = 8
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_GAUGE              Dynamic_Interpretation = 9
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS       Dynamic_Interpretation = 10
 )
 
 // Enum value maps for Dynamic_Interpretation.
 var (
 	Dynamic_Interpretation_name = map[int32]string{
-		0: "INTERPRETATION_UNSPECIFIED",
-		1: "INTERPRETATION_RAW_DATA_TABLE",
-		2: "INTERPRETATION_TREND_OVER_TIME_LINE",
-		3: "INTERPRETATION_SINGLE_VALUE_KPI_STAT",
-		4: "INTERPRETATION_SINGLE_VALUE_KPI_GAUGE",
-		5: "INTERPRETATION_MULTI_VALUE_KPI_STAT",
-		6: "INTERPRETATION_MULTI_VALUE_KPI_GAUGE",
-		7: "INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS",
-		8: "INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS",
+		0:  "INTERPRETATION_UNSPECIFIED",
+		1:  "INTERPRETATION_RAW_DATA_TABLE",
+		2:  "INTERPRETATION_TREND_OVER_TIME_LINE",
+		3:  "INTERPRETATION_SINGLE_VALUE_KPI",
+		4:  "INTERPRETATION_MULTI_VALUE_KPI",
+		5:  "INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS",
+		6:  "INTERPRETATION_SINGLE_VALUE_KPI_STAT",
+		7:  "INTERPRETATION_SINGLE_VALUE_KPI_GAUGE",
+		8:  "INTERPRETATION_MULTI_VALUE_KPI_STAT",
+		9:  "INTERPRETATION_MULTI_VALUE_KPI_GAUGE",
+		10: "INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS",
 	}
 	Dynamic_Interpretation_value = map[string]int32{
 		"INTERPRETATION_UNSPECIFIED":                        0,
 		"INTERPRETATION_RAW_DATA_TABLE":                     1,
 		"INTERPRETATION_TREND_OVER_TIME_LINE":               2,
-		"INTERPRETATION_SINGLE_VALUE_KPI_STAT":              3,
-		"INTERPRETATION_SINGLE_VALUE_KPI_GAUGE":             4,
-		"INTERPRETATION_MULTI_VALUE_KPI_STAT":               5,
-		"INTERPRETATION_MULTI_VALUE_KPI_GAUGE":              6,
-		"INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS":       7,
-		"INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS": 8,
+		"INTERPRETATION_SINGLE_VALUE_KPI":                   3,
+		"INTERPRETATION_MULTI_VALUE_KPI":                    4,
+		"INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS": 5,
+		"INTERPRETATION_SINGLE_VALUE_KPI_STAT":              6,
+		"INTERPRETATION_SINGLE_VALUE_KPI_GAUGE":             7,
+		"INTERPRETATION_MULTI_VALUE_KPI_STAT":               8,
+		"INTERPRETATION_MULTI_VALUE_KPI_GAUGE":              9,
+		"INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS":       10,
 	}
 )
 
@@ -534,7 +540,7 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbc\x1c\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x85\x1d\n" +
 	"\aDynamic\x12\x85\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x92A02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
@@ -570,17 +576,20 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
 	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType:7\x92A4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the queryB\a\n" +
-	"\x05value\"\x8c\x03\n" +
+	"\x05value\"\xd5\x03\n" +
 	"\x0eInterpretation\x12\x1e\n" +
 	"\x1aINTERPRETATION_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dINTERPRETATION_RAW_DATA_TABLE\x10\x01\x12'\n" +
-	"#INTERPRETATION_TREND_OVER_TIME_LINE\x10\x02\x12(\n" +
-	"$INTERPRETATION_SINGLE_VALUE_KPI_STAT\x10\x03\x12)\n" +
-	"%INTERPRETATION_SINGLE_VALUE_KPI_GAUGE\x10\x04\x12'\n" +
-	"#INTERPRETATION_MULTI_VALUE_KPI_STAT\x10\x05\x12(\n" +
-	"$INTERPRETATION_MULTI_VALUE_KPI_GAUGE\x10\x06\x12/\n" +
-	"+INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS\x10\a\x125\n" +
-	"1INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS\x10\bb\x06proto3"
+	"#INTERPRETATION_TREND_OVER_TIME_LINE\x10\x02\x12#\n" +
+	"\x1fINTERPRETATION_SINGLE_VALUE_KPI\x10\x03\x12\"\n" +
+	"\x1eINTERPRETATION_MULTI_VALUE_KPI\x10\x04\x125\n" +
+	"1INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS\x10\x05\x12(\n" +
+	"$INTERPRETATION_SINGLE_VALUE_KPI_STAT\x10\x06\x12)\n" +
+	"%INTERPRETATION_SINGLE_VALUE_KPI_GAUGE\x10\a\x12'\n" +
+	"#INTERPRETATION_MULTI_VALUE_KPI_STAT\x10\b\x12(\n" +
+	"$INTERPRETATION_MULTI_VALUE_KPI_GAUGE\x10\t\x12/\n" +
+	"+INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS\x10\n" +
+	"b\x06proto3"
 
 var (
 	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescOnce sync.Once
