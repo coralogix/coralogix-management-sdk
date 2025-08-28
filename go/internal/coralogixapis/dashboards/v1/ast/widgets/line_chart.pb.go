@@ -131,6 +131,7 @@ type LineChart struct {
 	Tooltip          *LineChart_Tooltip           `protobuf:"bytes,6,opt,name=tooltip,proto3" json:"tooltip,omitempty"`
 	QueryDefinitions []*LineChart_QueryDefinition `protobuf:"bytes,7,rep,name=query_definitions,json=queryDefinitions,proto3" json:"query_definitions,omitempty"`
 	StackedLine      LineChart_StackedLine        `protobuf:"varint,9,opt,name=stacked_line,json=stackedLine,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.LineChart_StackedLine" json:"stacked_line,omitempty"`
+	ConnectNulls     *wrapperspb.BoolValue        `protobuf:"bytes,10,opt,name=connect_nulls,json=connectNulls,proto3" json:"connect_nulls,omitempty"`
 	unknownFields    protoimpl.UnknownFields
 	sizeCache        protoimpl.SizeCache
 }
@@ -193,6 +194,13 @@ func (x *LineChart) GetStackedLine() LineChart_StackedLine {
 	return LineChart_STACKED_LINE_UNSPECIFIED
 }
 
+func (x *LineChart) GetConnectNulls() *wrapperspb.BoolValue {
+	if x != nil {
+		return x.ConnectNulls
+	}
+	return nil
+}
+
 type LineChart_QueryDefinition struct {
 	state              protoimpl.MessageState  `protogen:"open.v1"`
 	Id                 *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -212,7 +220,6 @@ type LineChart_QueryDefinition struct {
 	YAxisMin           *wrapperspb.FloatValue  `protobuf:"bytes,15,opt,name=y_axis_min,json=yAxisMin,proto3" json:"y_axis_min,omitempty"`
 	YAxisMax           *wrapperspb.FloatValue  `protobuf:"bytes,16,opt,name=y_axis_max,json=yAxisMax,proto3" json:"y_axis_max,omitempty"`
 	DecimalPrecision   *wrapperspb.BoolValue   `protobuf:"bytes,17,opt,name=decimal_precision,json=decimalPrecision,proto3" json:"decimal_precision,omitempty"`
-	ConnectNulls       *wrapperspb.BoolValue   `protobuf:"bytes,18,opt,name=connect_nulls,json=connectNulls,proto3" json:"connect_nulls,omitempty"`
 	unknownFields      protoimpl.UnknownFields
 	sizeCache          protoimpl.SizeCache
 }
@@ -362,13 +369,6 @@ func (x *LineChart_QueryDefinition) GetYAxisMax() *wrapperspb.FloatValue {
 func (x *LineChart_QueryDefinition) GetDecimalPrecision() *wrapperspb.BoolValue {
 	if x != nil {
 		return x.DecimalPrecision
-	}
-	return nil
-}
-
-func (x *LineChart_QueryDefinition) GetConnectNulls() *wrapperspb.BoolValue {
-	if x != nil {
-		return x.ConnectNulls
 	}
 	return nil
 }
@@ -897,7 +897,9 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc 
 	"\x06legend\x18\x02 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12o\n" +
 	"\atooltip\x18\x06 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipB\x15\x92A\x122\x10Tooltip settingsR\atooltip\x12\x97\x01\n" +
 	"\x11query_definitions\x18\a \x03(\v2F.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinitionB\"\x92A\x1f2\x1dDefinitions of widget queriesR\x10queryDefinitions\x12\xa8\x01\n" +
-	"\fstacked_line\x18\t \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.StackedLineBA\x92A>2<Type of stacked line, can be undefined, absolute or relativeR\vstackedLine\x1a\xb2\x14\n" +
+	"\fstacked_line\x18\t \x01(\x0e2B.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.StackedLineBA\x92A>2<Type of stacked line, can be undefined, absolute or relativeR\vstackedLine\x12\xc4\x01\n" +
+	"\rconnect_nulls\x18\n" +
+	" \x01(\v2\x1a.google.protobuf.BoolValueB\x82\x01\x92A\x7f2vWhether the line should remain connected instead of producing scattered points when null values are present in betweenJ\x05falseR\fconnectNulls\x1a\xeb\x12\n" +
 	"\x0fQueryDefinition\x12\x89\x01\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB[\x92AX2!Unique id of the query definitionJ3{ \"value\": \"73c65643-91d5-dba2-35cd-baa49dc65331\" }R\x02id\x12e\n" +
 	"\x05query\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryB\x11\x92A\x0e2\fQuery objectR\x05query\x12\xa3\x01\n" +
@@ -924,8 +926,7 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_rawDesc 
 	"y_axis_min\x18\x0f \x01(\v2\x1b.google.protobuf.FloatValueB7\x92A42+Number indicating the lower band for y axisJ\x05-1000R\byAxisMin\x12q\n" +
 	"\n" +
 	"y_axis_max\x18\x10 \x01(\v2\x1b.google.protobuf.FloatValueB6\x92A32+Number indicating the upper band for y axisJ\x041000R\byAxisMax\x12\x89\x01\n" +
-	"\x11decimal_precision\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x12\xc4\x01\n" +
-	"\rconnect_nulls\x18\x12 \x01(\v2\x1a.google.protobuf.BoolValueB\x82\x01\x92A\x7f2vWhether the line should remain connected instead of producing scattered points when null values are present in betweenJ\x05falseR\fconnectNulls:]\x92AZ\n" +
+	"\x11decimal_precision\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision:]\x92AZ\n" +
 	"X*\tLineChart2>LineChart represents the configuration of a line chart widget.\xd2\x01\x02id\xd2\x01\x05query\x1a\x8b\x03\n" +
 	"\x05Query\x12V\n" +
 	"\x04logs\x18\x01 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQueryH\x00R\x04logs\x12_\n" +
@@ -1007,11 +1008,11 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_goTypes = 
 	(*LineChart_DataprimeQuery)(nil),     // 9: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery
 	(*LineChart_Resolution)(nil),         // 10: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution
 	(*common.Legend)(nil),                // 11: com.coralogixapis.dashboards.v1.ast.widgets.common.Legend
-	(*wrapperspb.StringValue)(nil),       // 12: google.protobuf.StringValue
-	(*wrapperspb.Int64Value)(nil),        // 13: google.protobuf.Int64Value
-	(common.Unit)(0),                     // 14: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	(common.ScaleType)(0),                // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	(*wrapperspb.BoolValue)(nil),         // 16: google.protobuf.BoolValue
+	(*wrapperspb.BoolValue)(nil),         // 12: google.protobuf.BoolValue
+	(*wrapperspb.StringValue)(nil),       // 13: google.protobuf.StringValue
+	(*wrapperspb.Int64Value)(nil),        // 14: google.protobuf.Int64Value
+	(common.Unit)(0),                     // 15: com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	(common.ScaleType)(0),                // 16: com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
 	(common.DataModeType)(0),             // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
 	(*wrapperspb.Int32Value)(nil),        // 18: google.protobuf.Int32Value
 	(*wrapperspb.FloatValue)(nil),        // 19: google.protobuf.FloatValue
@@ -1036,32 +1037,32 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_line_chart_proto_depIdxs = 
 	5,  // 1: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.tooltip:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip
 	3,  // 2: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.query_definitions:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition
 	1,  // 3: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.stacked_line:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.StackedLine
-	12, // 4: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.id:type_name -> google.protobuf.StringValue
-	4,  // 5: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query
-	12, // 6: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.series_name_template:type_name -> google.protobuf.StringValue
-	13, // 7: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.series_count_limit:type_name -> google.protobuf.Int64Value
-	14, // 8: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
-	15, // 9: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
-	12, // 10: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.name:type_name -> google.protobuf.StringValue
-	16, // 11: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.is_visible:type_name -> google.protobuf.BoolValue
-	12, // 12: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.color_scheme:type_name -> google.protobuf.StringValue
-	10, // 13: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.resolution:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution
-	17, // 14: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	12, // 15: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.custom_unit:type_name -> google.protobuf.StringValue
-	18, // 16: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.decimal:type_name -> google.protobuf.Int32Value
-	16, // 17: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.hash_colors:type_name -> google.protobuf.BoolValue
-	19, // 18: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_min:type_name -> google.protobuf.FloatValue
-	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_max:type_name -> google.protobuf.FloatValue
-	16, // 20: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.decimal_precision:type_name -> google.protobuf.BoolValue
-	16, // 21: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.connect_nulls:type_name -> google.protobuf.BoolValue
+	12, // 4: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.connect_nulls:type_name -> google.protobuf.BoolValue
+	13, // 5: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.id:type_name -> google.protobuf.StringValue
+	4,  // 6: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query
+	13, // 7: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.series_name_template:type_name -> google.protobuf.StringValue
+	14, // 8: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.series_count_limit:type_name -> google.protobuf.Int64Value
+	15, // 9: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.unit:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.Unit
+	16, // 10: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.scale_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.ScaleType
+	13, // 11: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.name:type_name -> google.protobuf.StringValue
+	12, // 12: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.is_visible:type_name -> google.protobuf.BoolValue
+	13, // 13: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.color_scheme:type_name -> google.protobuf.StringValue
+	10, // 14: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.resolution:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Resolution
+	17, // 15: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	13, // 16: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.custom_unit:type_name -> google.protobuf.StringValue
+	18, // 17: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.decimal:type_name -> google.protobuf.Int32Value
+	12, // 18: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.hash_colors:type_name -> google.protobuf.BoolValue
+	19, // 19: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_min:type_name -> google.protobuf.FloatValue
+	19, // 20: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.y_axis_max:type_name -> google.protobuf.FloatValue
+	12, // 21: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.QueryDefinition.decimal_precision:type_name -> google.protobuf.BoolValue
 	6,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.logs:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery
 	7,  // 23: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.MetricsQuery
 	8,  // 24: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.spans:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.SpansQuery
 	9,  // 25: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Query.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.DataprimeQuery
-	16, // 26: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.show_labels:type_name -> google.protobuf.BoolValue
+	12, // 26: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.show_labels:type_name -> google.protobuf.BoolValue
 	0,  // 27: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.Tooltip.type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.LineChart.TooltipType
 	20, // 28: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	12, // 29: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_by:type_name -> google.protobuf.StringValue
+	13, // 29: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_by:type_name -> google.protobuf.StringValue
 	21, // 30: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.aggregations:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
 	22, // 31: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilter
 	23, // 32: com.coralogixapis.dashboards.v1.ast.widgets.LineChart.LogsQuery.group_bys:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField

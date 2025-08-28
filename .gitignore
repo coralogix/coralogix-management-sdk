@@ -3,3 +3,4 @@
 rust/cx-api/src/generated/**/*.rs
 .idea/
 tools/terraform-importer/*.log
+.aider*

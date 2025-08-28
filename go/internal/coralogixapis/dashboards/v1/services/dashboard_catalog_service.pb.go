@@ -277,7 +277,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x17\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x17\n" +
 	"\x15Get dashboard catalog\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/dashboards/catalog\x1aN\x92AK\n" +
 	"\x11Dashboard service\x126Get information about the Coralogix Dashboard catalog.b\x06proto3"
 

@@ -33,6 +33,10 @@ message LineChart {
   Tooltip tooltip = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Tooltip settings"}];
   repeated QueryDefinition query_definitions = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definitions of widget queries"}];
   StackedLine stacked_line = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Type of stacked line, can be undefined, absolute or relative"}];
+  google.protobuf.BoolValue connect_nulls = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    description: "Whether the line should remain connected instead of producing scattered points when null values are present in between"
+    example: "false"
+  }];
 
   message QueryDefinition {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -100,10 +104,6 @@ message LineChart {
     }];
     google.protobuf.BoolValue decimal_precision = 17 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
       description: "Whether to render numeric value without abbreviation"
-      example: "false"
-    }];
-    google.protobuf.BoolValue connect_nulls = 18 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-      description: "Whether the line should remain connected instead of producing scattered points when null values are present in between"
       example: "false"
     }];
   }

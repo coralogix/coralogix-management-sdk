@@ -535,7 +535,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x18\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x18\n" +
 	"\x16List dashboard folders\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/dashboards/folders\x12\xca\x03\n" +
 	"\x12GetDashboardFolder\x12C.com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest\x1aD.com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse\"\xa8\x02\x92A\xe0\x01\n" +
 	"\x19Dashboard folders service\x12\x16Get a dashboard folder\x1a Returns a dashboard folder data.J\x14\n" +
@@ -546,7 +546,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x16\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x16\n" +
 	"\x14Get dashboard folder\x82\xd3\xe4\x93\x02$\x12\"/v1/dashboards/folders/{folder_id}\x12\xb0\x03\n" +
 	"\x15CreateDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse\"\x85\x02\x92A\xc3\x01\n" +
 	"\x19Dashboard folders service\x12\x19Create a dashboard folderJ\x14\n" +
@@ -557,7 +557,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x19\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x19\n" +
 	"\x17Create dashboard folder\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/dashboards/folders\x12\xb5\x03\n" +
 	"\x16ReplaceDashboardFolder\x12G.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest\x1aH.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderResponse\"\x87\x02\x92A\xc4\x01\n" +
 	"\x19Dashboard folders service\x12\x1aReplace a dashboard folderJ\x14\n" +
@@ -568,7 +568,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x1a\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x1a\n" +
 	"\x18Replace dashboard folder\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/v1/dashboards/folders\x12\xb9\x03\n" +
 	"\x15DeleteDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderResponse\"\x8e\x02\x92A\xc3\x01\n" +
 	"\x19Dashboard folders service\x12\x19Delete a dashboard folderJ\x14\n" +
@@ -579,7 +579,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x19\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x19\n" +
 	"\x17Delete dashboard folder\x82\xd3\xe4\x93\x02$*\"/v1/dashboards/folders/{folder_id}\x1a>\x92A;\n" +
 	"\x19Dashboard folders service\x12\x1eManage your dashboard folders.b\x06proto3"
 

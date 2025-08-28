@@ -1218,7 +1218,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x12\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x12\n" +
 	"\x10Create dashboard\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/dashboards/dashboards\x12\x90\x03\n" +
 	"\x10ReplaceDashboard\x12A.com.coralogixapis.dashboards.v1.services.ReplaceDashboardRequest\x1aB.com.coralogixapis.dashboards.v1.services.ReplaceDashboardResponse\"\xf4\x01\x92A\xb5\x01\n" +
 	"\x11Dashboard service\x12\x13Replace a dashboardJ\x14\n" +
@@ -1229,7 +1229,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x13\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x13\n" +
 	"\x11Replace dashboard\x82\xd3\xe4\x93\x02\x1e:\x01*\x1a\x19/v1/dashboards/dashboards\x12\x97\x03\n" +
 	"\x0fDeleteDashboard\x12@.com.coralogixapis.dashboards.v1.services.DeleteDashboardRequest\x1aA.com.coralogixapis.dashboards.v1.services.DeleteDashboardResponse\"\xfe\x01\x92A\xb4\x01\n" +
 	"\x11Dashboard service\x12\x12Delete a dashboardJ\x14\n" +
@@ -1240,7 +1240,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x12\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x12\n" +
 	"\x10Delete dashboard\x82\xd3\xe4\x93\x02**(/v1/dashboards/dashboards/{dashboard_id}\x12\x86\x03\n" +
 	"\fGetDashboard\x12=.com.coralogixapis.dashboards.v1.services.GetDashboardRequest\x1a>.com.coralogixapis.dashboards.v1.services.GetDashboardResponse\"\xf6\x01\x92A\xaf\x01\n" +
 	"\x11Dashboard service\x12\x0fGet a dashboardJ\x14\n" +
@@ -1251,7 +1251,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x0f\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x0f\n" +
 	"\rGet dashboard\x82\xd3\xe4\x93\x02*\x12(/v1/dashboards/dashboards/{dashboard_id}\x12\xa5\x03\n" +
 	"\x12GetDashboardBySlug\x12C.com.coralogixapis.dashboards.v1.services.GetDashboardBySlugRequest\x1aD.com.coralogixapis.dashboards.v1.services.GetDashboardBySlugResponse\"\x83\x02\x92A\xbb\x01\n" +
 	"\x11Dashboard service\x12\x1bGet a dashboard by URL slugJ\x14\n" +
@@ -1262,7 +1262,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x1b\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x1b\n" +
 	"\x19Get dashboard by URL slug\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/dashboards/by-slug/{slug}\x12\x98\x03\n" +
 	"\fPinDashboard\x12=.com.coralogixapis.dashboards.v1.services.PinDashboardRequest\x1a>.com.coralogixapis.dashboards.v1.services.PinDashboardResponse\"\x88\x02\x92A\xba\x01\n" +
 	"\x11Dashboard service\x12\x1aAdd dashboard to favoritesJ\x14\n" +
@@ -1273,7 +1273,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x0f\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x0f\n" +
 	"\rPin dashboard\x82\xd3\xe4\x93\x021:\x01*2,/v1/dashboards/dashboards/{dashboard_id}:pin\x12\xa7\x03\n" +
 	"\x0eUnpinDashboard\x12?.com.coralogixapis.dashboards.v1.services.UnpinDashboardRequest\x1a@.com.coralogixapis.dashboards.v1.services.UnpinDashboardResponse\"\x91\x02\x92A\xbf\x01\n" +
 	"\x11Dashboard service\x12\x1fRemove dashboard from favoritesJ\x14\n" +
@@ -1284,7 +1284,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x11\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x11\n" +
 	"\x0fUnpin dashboard\x82\xd3\xe4\x93\x023:\x01*2./v1/dashboards/dashboards/{dashboard_id}:unpin\x12\xce\x03\n" +
 	"\x17ReplaceDefaultDashboard\x12H.com.coralogixapis.dashboards.v1.services.ReplaceDefaultDashboardRequest\x1aI.com.coralogixapis.dashboards.v1.services.ReplaceDefaultDashboardResponse\"\x9d\x02\x92A\xbf\x01\n" +
 	"\x11Dashboard service\x12\x1dReplace the default dashboardJ\x14\n" +
@@ -1295,7 +1295,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x1b\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x1b\n" +
 	"\x19Replace default dashboard\x82\xd3\xe4\x93\x025:\x01*\x1a0/v1/dashboards/dashboards/{dashboard_id}/default\x12\xcd\x03\n" +
 	"\x15AssignDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.AssignDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.AssignDashboardFolderResponse\"\xa2\x02\x92A\xc0\x01\n" +
 	"\x11Dashboard service\x12\x1eAssign a dashboard to a folderJ\x14\n" +
@@ -1306,7 +1306,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboards_service_proto_raw
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02 \n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02 \n" +
 	"\x1eAssign a dashboard to a folder\x82\xd3\xe4\x93\x024:\x01*\"//v1/dashboards/dashboards/{dashboard_id}/folder\x1a/\x92A,\n" +
 	"\x11Dashboard service\x12\x17Manage your dashboards.b\x06proto3"
 
