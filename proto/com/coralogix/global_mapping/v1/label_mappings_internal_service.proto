@@ -17,7 +17,7 @@ message UpsertLabelMappingsInternalResponse {
   repeated LabelMapping mappings = 1;
 }
 
-message GetLabelMappingsInternalRequest {
+message GetLabelMappingsInternalRequest{
   repeated google.protobuf.StringValue labels = 1;
   repeated DataSourceType data_source_types = 2;
   repeated DataSource data_sources = 3;
@@ -39,6 +39,7 @@ message GetLabelValuesInternalResponse {
   repeated LabelValues label_values = 1;
   DataSource data_source = 2;
 }
+
 
 service LabelMappingsInternalService {
   rpc UpsertLabelMappingsInternal(UpsertLabelMappingsInternalRequest) returns (UpsertLabelMappingsInternalResponse) {

@@ -1,9 +1,9 @@
 syntax = "proto3";
 package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
-
+import "com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto";
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto";
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/schedule.proto";
-import "com/coralogixapis/alerting/meta_labels_protobuf/v1/meta_labels.proto";
+
 
 message AlertSchedulerRule {
   optional string unique_identifier = 1; // Rule unique_identifier: The rule id.

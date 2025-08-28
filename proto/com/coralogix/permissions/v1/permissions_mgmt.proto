@@ -2,13 +2,13 @@ syntax = "proto3";
 
 package com.coralogix.permissions.v1;
 
-import "com/coralogix/permissions/models/v1/permission_definitions.proto";
-import "com/coralogix/permissions/v1/actions_resources.proto";
 import "com/coralogix/permissions/v1/common.proto";
+import "com/coralogix/permissions/v1/actions_resources.proto";
+import "com/coralogix/permissions/models/v1/permission_definitions.proto";
 import "google/protobuf/timestamp.proto";
 
 /// A filter type describes how to match a filter against an input string
-enum FilterType {
+enum FilterType{
   FILTER_TYPE_UNSPECIFIED = 0;
   /// Matches if string starts with filter
   FILTER_TYPE_STARTS_WITH = 1;

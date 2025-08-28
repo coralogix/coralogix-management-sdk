@@ -1,18 +1,20 @@
 syntax = "proto3";
 
-package com.coralogix.enrichment.v1;
-
-import "com/coralogix/enrichment/v1/company_enrichment_settings.proto";
+import "google/protobuf/wrappers.proto";
 import "com/coralogix/enrichment/v1/enrichment.proto";
 import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
 import "com/coralogix/enrichment/v1/enrichment_type.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/wrappers.proto";
+import "com/coralogix/enrichment/v1/company_enrichment_settings.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
+package com.coralogix.enrichment.v1;
 
 message GetEnrichmentLimitRequest {}
 
 message GetEnrichmentLimitResponse {
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Enrichment Limit"
@@ -28,18 +30,21 @@ message GetEnrichmentLimitResponse {
     }
   };
 
-  uint32 limit = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
-  uint32 used = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "5"}];
+  uint32 limit = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
+  uint32 used = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
 }
 
 message GetEnrichmentsRequest {}
 
 message GetEnrichmentsResponse {
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Enrichment Collection"
       description: "This response data structure represents a collection of enrichments"
-      required: ["enrichments"]
+      required: [
+        "enrichments"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -54,7 +59,9 @@ message AddEnrichmentsRequest {
     json_schema: {
       title: "Enrichments Creation Request"
       description: "This response data structure represents a collection of enrichments"
-      required: ["request_enrichments"]
+      required: [
+        "request_enrichments"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -69,7 +76,9 @@ message AddEnrichmentsResponse {
     json_schema: {
       title: "Encrichments Creation Response"
       description: "Response data structure for enrichments creation"
-      required: ["enrichments"]
+      required: [
+        "enrichments"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -84,14 +93,16 @@ message RemoveEnrichmentsRequest {
     json_schema: {
       title: "Encrichments Delettion Request"
       description: "Request data structure for enrichments deletion"
-      required: ["enrichment_ids"]
+      required: [
+        "enrichment_ids"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
       description: "Find out more about enrichments"
     }
   };
-  repeated google.protobuf.UInt32Value enrichment_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[1, 2, 3]"}];
+  repeated google.protobuf.UInt32Value enrichment_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[1, 2, 3]" }];
 }
 
 message RemoveEnrichmentsResponse {
@@ -99,7 +110,9 @@ message RemoveEnrichmentsResponse {
     json_schema: {
       title: "Encrichments Delettion Response"
       description: "Response data structure for enrichments deletion"
-      required: ["remaining_enrichments"]
+      required: [
+        "remaining_enrichments"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -120,7 +133,8 @@ message AtomicOverwriteEnrichmentsResponse {
   repeated Enrichment enrichments = 1;
 }
 
-message GetCompanyEnrichmentSettingsRequest {}
+message GetCompanyEnrichmentSettingsRequest {
+}
 
 message GetCompanyEnrichmentSettingsResponse {
   CompanyEnrichmentSettings enrichment_settings = 1;
@@ -132,12 +146,14 @@ service EnrichmentService {
     description: "Manage your enrichments."
   };
   rpc GetEnrichments(GetEnrichmentsRequest) returns (GetEnrichmentsResponse) {
-    option (google.api.http) = {get: "/enrichments"};
+    option (google.api.http) = {
+      get: "/enrichments"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Enrichments"
     };
-  }
+  };
   rpc AddEnrichments(AddEnrichmentsRequest) returns (AddEnrichmentsResponse) {
     option (google.api.http) = {
       post: "/enrichments"
@@ -147,22 +163,26 @@ service EnrichmentService {
       tags: ["Enrichments Service"]
       summary: "Add Enrichments"
     };
-  }
+  };
 
   rpc RemoveEnrichments(RemoveEnrichmentsRequest) returns (RemoveEnrichmentsResponse) {
-    option (google.api.http) = {delete: "/enrichments"};
+    option (google.api.http) = {
+      delete: "/enrichments"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Enrichments Service"]
       summary: "Delete Enrichments"
     };
-  }
+  };
   rpc GetEnrichmentLimit(GetEnrichmentLimitRequest) returns (GetEnrichmentLimitResponse) {
-    option (google.api.http) = {get: "/enrichments/limit"};
+    option (google.api.http) = {
+      get: "/enrichments/limit"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Enrichment Limit"
     };
-  }
+  };
 
   rpc AtomicOverwriteEnrichments(AtomicOverwriteEnrichmentsRequest) returns (AtomicOverwriteEnrichmentsResponse) {
     option (google.api.http) = {
@@ -173,12 +193,14 @@ service EnrichmentService {
       tags: ["Enrichments Service"]
       summary: "Atomic Overwrite Enrichments"
     };
-  }
+  };
   rpc GetCompanyEnrichmentSettings(GetCompanyEnrichmentSettingsRequest) returns (GetCompanyEnrichmentSettingsResponse) {
-    option (google.api.http) = {get: "/enrichments/settings"};
+    option (google.api.http) = {
+      get: "/enrichments/settings"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Company Enrichment Settings"
     };
-  }
+  };
 }

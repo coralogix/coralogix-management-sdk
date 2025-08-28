@@ -15,5 +15,8 @@ message SearchQuery {
   };
 
   // View search query
-  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {min_length: 1}];
+  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    min_length: 1
+  }];
+
 }

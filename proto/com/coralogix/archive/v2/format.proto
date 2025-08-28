@@ -2,13 +2,16 @@ syntax = "proto3";
 
 package com.coralogix.archive.v2;
 
-import "com/coralogix/archive/format/csv/v1/csv.proto";
 import "com/coralogix/archive/format/generic/v1/generic.proto";
 import "com/coralogix/archive/format/wide_parquet/v1/wide_parquet.proto";
+import "com/coralogix/archive/format/csv/v1/csv.proto";
 
-message LogsAvro {}
+message LogsAvro {
+}
 
-message SpansAvro {}
+message SpansAvro {
+}
+
 
 message Format {
   oneof format {

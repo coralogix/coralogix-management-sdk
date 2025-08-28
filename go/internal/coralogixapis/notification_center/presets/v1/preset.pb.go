@@ -302,88 +302,6 @@ func (x *PresetSummary) GetEntityType() common.EntityType {
 	return common.EntityType(0)
 }
 
-type PresetIdentifier struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Value:
-	//
-	//	*PresetIdentifier_Id
-	//	*PresetIdentifier_UserFacingId
-	Value         isPresetIdentifier_Value `protobuf_oneof:"value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *PresetIdentifier) Reset() {
-	*x = PresetIdentifier{}
-	mi := &file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes[2]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *PresetIdentifier) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*PresetIdentifier) ProtoMessage() {}
-
-func (x *PresetIdentifier) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes[2]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use PresetIdentifier.ProtoReflect.Descriptor instead.
-func (*PresetIdentifier) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *PresetIdentifier) GetValue() isPresetIdentifier_Value {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
-func (x *PresetIdentifier) GetId() string {
-	if x != nil {
-		if x, ok := x.Value.(*PresetIdentifier_Id); ok {
-			return x.Id
-		}
-	}
-	return ""
-}
-
-func (x *PresetIdentifier) GetUserFacingId() string {
-	if x != nil {
-		if x, ok := x.Value.(*PresetIdentifier_UserFacingId); ok {
-			return x.UserFacingId
-		}
-	}
-	return ""
-}
-
-type isPresetIdentifier_Value interface {
-	isPresetIdentifier_Value()
-}
-
-type PresetIdentifier_Id struct {
-	Id string `protobuf:"bytes,1,opt,name=id,proto3,oneof"`
-}
-
-type PresetIdentifier_UserFacingId struct {
-	UserFacingId string `protobuf:"bytes,2,opt,name=user_facing_id,json=userFacingId,proto3,oneof"`
-}
-
-func (*PresetIdentifier_Id) isPresetIdentifier_Value() {}
-
-func (*PresetIdentifier_UserFacingId) isPresetIdentifier_Value() {}
-
 var File_com_coralogixapis_notification_center_presets_v1_preset_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc = "" +
@@ -433,11 +351,7 @@ const file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc
 	"9*\x0ePreset Summary2'Provides a concise overview of a preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\f\n" +
 	"\n" +
-	"_parent_idJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x0fuser_defined_idR\x16deprecated_entity_type\"U\n" +
-	"\x10PresetIdentifier\x12\x10\n" +
-	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x12&\n" +
-	"\x0euser_facing_id\x18\x02 \x01(\tH\x00R\fuserFacingIdB\a\n" +
-	"\x05value*A\n" +
+	"_parent_idJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x0fuser_defined_idR\x16deprecated_entity_type*A\n" +
 	"\n" +
 	"PresetType\x12\x1b\n" +
 	"\x17PRESET_TYPE_UNSPECIFIED\x10\x00\x12\n" +
@@ -459,29 +373,28 @@ func file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDescG
 }
 
 var file_com_coralogixapis_notification_center_presets_v1_preset_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_com_coralogixapis_notification_center_presets_v1_preset_proto_goTypes = []any{
 	(PresetType)(0),                // 0: com.coralogixapis.notification_center.presets.v1.PresetType
 	(*Preset)(nil),                 // 1: com.coralogixapis.notification_center.presets.v1.Preset
 	(*PresetSummary)(nil),          // 2: com.coralogixapis.notification_center.presets.v1.PresetSummary
-	(*PresetIdentifier)(nil),       // 3: com.coralogixapis.notification_center.presets.v1.PresetIdentifier
-	(common.ConnectorType)(0),      // 4: com.coralogixapis.notification_center.ConnectorType
-	(*common.ConfigOverrides)(nil), // 5: com.coralogixapis.notification_center.ConfigOverrides
-	(*timestamppb.Timestamp)(nil),  // 6: google.protobuf.Timestamp
-	(common.EntityType)(0),         // 7: com.coralogixapis.notification_center.EntityType
+	(common.ConnectorType)(0),      // 3: com.coralogixapis.notification_center.ConnectorType
+	(*common.ConfigOverrides)(nil), // 4: com.coralogixapis.notification_center.ConfigOverrides
+	(*timestamppb.Timestamp)(nil),  // 5: google.protobuf.Timestamp
+	(common.EntityType)(0),         // 6: com.coralogixapis.notification_center.EntityType
 }
 var file_com_coralogixapis_notification_center_presets_v1_preset_proto_depIdxs = []int32{
-	4,  // 0: com.coralogixapis.notification_center.presets.v1.Preset.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	5,  // 1: com.coralogixapis.notification_center.presets.v1.Preset.config_overrides:type_name -> com.coralogixapis.notification_center.ConfigOverrides
-	6,  // 2: com.coralogixapis.notification_center.presets.v1.Preset.create_time:type_name -> google.protobuf.Timestamp
-	6,  // 3: com.coralogixapis.notification_center.presets.v1.Preset.update_time:type_name -> google.protobuf.Timestamp
+	3,  // 0: com.coralogixapis.notification_center.presets.v1.Preset.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	4,  // 1: com.coralogixapis.notification_center.presets.v1.Preset.config_overrides:type_name -> com.coralogixapis.notification_center.ConfigOverrides
+	5,  // 2: com.coralogixapis.notification_center.presets.v1.Preset.create_time:type_name -> google.protobuf.Timestamp
+	5,  // 3: com.coralogixapis.notification_center.presets.v1.Preset.update_time:type_name -> google.protobuf.Timestamp
 	0,  // 4: com.coralogixapis.notification_center.presets.v1.Preset.preset_type:type_name -> com.coralogixapis.notification_center.presets.v1.PresetType
-	7,  // 5: com.coralogixapis.notification_center.presets.v1.Preset.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
-	4,  // 6: com.coralogixapis.notification_center.presets.v1.PresetSummary.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	6,  // 7: com.coralogixapis.notification_center.presets.v1.PresetSummary.create_time:type_name -> google.protobuf.Timestamp
-	6,  // 8: com.coralogixapis.notification_center.presets.v1.PresetSummary.update_time:type_name -> google.protobuf.Timestamp
+	6,  // 5: com.coralogixapis.notification_center.presets.v1.Preset.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	3,  // 6: com.coralogixapis.notification_center.presets.v1.PresetSummary.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	5,  // 7: com.coralogixapis.notification_center.presets.v1.PresetSummary.create_time:type_name -> google.protobuf.Timestamp
+	5,  // 8: com.coralogixapis.notification_center.presets.v1.PresetSummary.update_time:type_name -> google.protobuf.Timestamp
 	0,  // 9: com.coralogixapis.notification_center.presets.v1.PresetSummary.preset_type:type_name -> com.coralogixapis.notification_center.presets.v1.PresetType
-	7,  // 10: com.coralogixapis.notification_center.presets.v1.PresetSummary.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	6,  // 10: com.coralogixapis.notification_center.presets.v1.PresetSummary.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
@@ -496,17 +409,13 @@ func file_com_coralogixapis_notification_center_presets_v1_preset_proto_init() {
 	}
 	file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes[0].OneofWrappers = []any{}
 	file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes[1].OneofWrappers = []any{}
-	file_com_coralogixapis_notification_center_presets_v1_preset_proto_msgTypes[2].OneofWrappers = []any{
-		(*PresetIdentifier_Id)(nil),
-		(*PresetIdentifier_UserFacingId)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc), len(file_com_coralogixapis_notification_center_presets_v1_preset_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   3,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

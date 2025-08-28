@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/log_meta_field_values.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message BulkTestLogPoliciesRequest {
@@ -10,7 +11,9 @@ message BulkTestLogPoliciesRequest {
     json_schema: {
       title: "Bulk Test Log Policies Request"
       description: "Request to test multiple log policies."
-      required: ["meta_fields_values_list"]
+      required: [
+        "meta_fields_values_list"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

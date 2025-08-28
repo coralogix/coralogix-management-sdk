@@ -2,17 +2,17 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v5;
 
-import "com/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_payload.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_payload.proto";
 
 message EventStandardUnusualPayload {
-  google.protobuf.Timestamp from_timestamp = 1;
-  google.protobuf.Timestamp to_timestamp = 2;
+  google.protobuf.Timestamp   from_timestamp     = 1;
+  google.protobuf.Timestamp   to_timestamp       = 2;
   google.protobuf.UInt64Value forecast_timestamp = 3;
-  TimeRangeWithInterval search_details = 4;
-  google.protobuf.DoubleValue distance = 5;
-  google.protobuf.Int64Value sum_hit_count = 6;
+  TimeRangeWithInterval       search_details     = 4;
+  google.protobuf.DoubleValue distance           = 5;
+  google.protobuf.Int64Value  sum_hit_count      = 6;
   // TODO: should we add this field?
   // google.protobuf.Int64Value  sum_hit_count_forecast = 7;
 }
