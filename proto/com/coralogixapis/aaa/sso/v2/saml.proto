@@ -1,18 +1,16 @@
 syntax = "proto3";
 
 package com.coralogixapis.aaa.sso.v2;
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "google/api/annotations.proto";
 
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message GetSPParametersRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get SP Parameters Request"
       description: "This data structure is used to retrieve the parameters of a SAML service provider"
-      required: [
-        "team_id"
-      ]
+      required: ["team_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -20,7 +18,7 @@ message GetSPParametersRequest {
     }
   };
 
-  uint32 team_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1234567" }];
+  uint32 team_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1234567"}];
 }
 
 message SPParameters {
@@ -41,11 +39,11 @@ message SPParameters {
       description: "Find out more about enrichments"
     }
   };
-  string metadata_url = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"" }];
-  string signing_cert_pem = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"certificate\"" }];
-  string name_id_format = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"name_id\"" }];
-  string assertion_consumer_service_url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"assertion\"" }];
-  string binding = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"binding\"" }];
+  string metadata_url = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"https://<...>.okta.com/app/<...>/sso/saml/metadata\""}];
+  string signing_cert_pem = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"certificate\""}];
+  string name_id_format = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"name_id\""}];
+  string assertion_consumer_service_url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"assertion\""}];
+  string binding = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"binding\""}];
 }
 
 message GetSPParametersResponse {
@@ -53,9 +51,7 @@ message GetSPParametersResponse {
     json_schema: {
       title: "Get SP Parameters Response"
       description: "This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider"
-      required: [
-        "params"
-      ]
+      required: ["params"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -82,13 +78,13 @@ message IDPParameters {
       description: "Find out more about enrichments"
     }
   };
-  bool active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
   oneof metadata {
-    string metadata_url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"" }];
-    string metadata_content = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"<?xml version= ...\"" }] ;
+    string metadata_url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"https://<...>.okta.com/app/<...>/sso/saml/metadata\""}];
+    string metadata_content = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"<?xml version= ...\""}];
   }
-  optional uint32 team_entity_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1234567" }];
-  repeated string group_names = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"group1\"]" }];
+  optional uint32 team_entity_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1234567"}];
+  repeated string group_names = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"group1\"]"}];
 }
 
 message SetIDPParametersRequest {
@@ -110,9 +106,7 @@ message SetIDPParametersRequest {
   IDPParameters params = 2;
 }
 
-message SetIDPParametersResponse {
-
-}
+message SetIDPParametersResponse {}
 
 message SetActiveRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -133,18 +127,14 @@ message SetActiveRequest {
   bool is_active = 2;
 }
 
-message SetActiveResponse {
-
-}
+message SetActiveResponse {}
 
 message GetConfigurationRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Configuration Request"
       description: "This data structure is used to retrieve the configuration of a SAML service provider and identity provider"
-      required: [
-        "team_id"
-      ]
+      required: ["team_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
@@ -185,10 +175,8 @@ service SamlConfigurationService {
     name: "SAML Configuration Service"
     description: "Manage your SAML configuration"
   };
-  rpc GetSPParameters(GetSPParametersRequest) returns(GetSPParametersResponse) {
-    option (google.api.http) = {
-      get: "/v1/sso/saml/sp_parameters"
-    };
+  rpc GetSPParameters(GetSPParametersRequest) returns (GetSPParametersResponse) {
+    option (google.api.http) = {get: "/v1/sso/saml/sp_parameters"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -205,7 +193,7 @@ service SamlConfigurationService {
       tags: ["SAML Configuration Service"]
       summary: "Get SP Parameters"
     };
-  };
+  }
   rpc SetIDPParameters(SetIDPParametersRequest) returns (SetIDPParametersResponse) {
     option (google.api.http) = {
       post: "/v1/sso/saml/idp_parameters"
@@ -227,7 +215,7 @@ service SamlConfigurationService {
       tags: ["SAML Configuration Service"]
       summary: "Set IDP Parameters"
     };
-  };
+  }
   rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {
     option (google.api.http) = {
       post: "/v1/sso/saml/active"
@@ -249,11 +237,9 @@ service SamlConfigurationService {
       tags: ["SAML Configuration Service"]
       summary: "Activate/Deactivate SAML"
     };
-  };
+  }
   rpc GetConfiguration(GetConfigurationRequest) returns (GetConfigurationResponse) {
-    option (google.api.http) = {
-      get: "/v1/sso/saml/configuration"
-    };
+    option (google.api.http) = {get: "/v1/sso/saml/configuration"};
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -270,5 +256,5 @@ service SamlConfigurationService {
       tags: ["SAML Configuration Service"]
       summary: "Get SAML Configuration"
     };
-  };
+  }
 }

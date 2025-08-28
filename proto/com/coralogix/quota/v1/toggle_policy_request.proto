@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "google/protobuf/wrappers.proto";
-
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message TogglePolicyRequest {
@@ -21,6 +20,6 @@ message TogglePolicyRequest {
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"id\"" }];
-  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"id\""}];
+  google.protobuf.BoolValue enabled = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }

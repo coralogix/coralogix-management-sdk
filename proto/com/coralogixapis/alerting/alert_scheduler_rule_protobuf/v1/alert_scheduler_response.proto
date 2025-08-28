@@ -1,18 +1,16 @@
 syntax = "proto3";
 package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
-import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto";
-import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
 
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto";
+import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule.proto";
+import "protoc-gen-openapiv2/options/annotations.proto";
 
 message GetAlertSchedulerRuleResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get alert scheduler rule response data structure"
       description: "This is a response sent to get an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -27,9 +25,7 @@ message CreateAlertSchedulerRuleResponse {
     json_schema: {
       title: "Create alert scheduler rule response data structure"
       description: "This is a response sent after creating an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -44,9 +40,7 @@ message UpdateAlertSchedulerRuleResponse {
     json_schema: {
       title: "Create alert scheduler rule response data structure"
       description: "This is a response sent after creating an alert scheduler rule"
-      required: [
-        "alert_scheduler_rule"
-      ]
+      required: ["alert_scheduler_rule"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -63,9 +57,7 @@ message CreateBulkAlertSchedulerRuleResponse {
     json_schema: {
       title: "Create bulk alert scheduler rule response data structure"
       description: "This is a response sent after creating multiple alert scheduler rules"
-      required: [
-        "create_suppression_responses"
-      ]
+      required: ["create_suppression_responses"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -80,9 +72,7 @@ message UpdateBulkAlertSchedulerRuleResponse {
     json_schema: {
       title: "Update bulk alert scheduler rule response data structure"
       description: "This is a response sent after updating multiple alert scheduler rules"
-      required: [
-        "update_suppression_responses"
-      ]
+      required: ["update_suppression_responses"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -97,9 +87,7 @@ message GetBulkAlertSchedulerRuleResponse {
     json_schema: {
       title: "Get bulk alert scheduler rule response data structure"
       description: "This is a response sent after getting multiple alert scheduler rules"
-      required: [
-        "alert_scheduler_rules"
-      ]
+      required: ["alert_scheduler_rules"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/"
@@ -111,6 +99,6 @@ message GetBulkAlertSchedulerRuleResponse {
 }
 
 message AlertSchedulerRuleWithActiveTimeframe {
-    AlertSchedulerRule alert_scheduler_rule = 1;
-    repeated ActiveTimeframe next_active_timeframes = 2;
+  AlertSchedulerRule alert_scheduler_rule = 1;
+  repeated ActiveTimeframe next_active_timeframes = 2;
 }

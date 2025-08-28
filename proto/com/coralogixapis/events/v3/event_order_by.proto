@@ -16,6 +16,6 @@ enum OrderByDirection {
 }
 
 message OrderBy {
-  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ORDER_BY_FIELDS_TIMESTAMP\"" }];
-  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ORDER_BY_DIRECTION_ASC\"" }];
+  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ORDER_BY_FIELDS_TIMESTAMP\""}];
+  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"ORDER_BY_DIRECTION_ASC\""}];
 }

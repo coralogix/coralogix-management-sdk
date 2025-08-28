@@ -5,10 +5,10 @@ package com.coralogixapis.alerts.v4;
 import "google/protobuf/wrappers.proto";
 
 message Prediction {
-    map<string, PredictionProperties> prediction_timestamp_map = 1;
+  map<string, PredictionProperties> prediction_timestamp_map = 1;
 }
 
 message PredictionProperties {
-    google.protobuf.DoubleValue lower_limit = 1;
-    google.protobuf.DoubleValue upper_limit = 2;
+  google.protobuf.DoubleValue lower_limit = 1;
+  google.protobuf.DoubleValue upper_limit = 2;
 }

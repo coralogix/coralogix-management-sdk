@@ -3,7 +3,6 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "google/protobuf/wrappers.proto";
-
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message DeletePolicyResponse {
@@ -11,14 +10,12 @@ message DeletePolicyResponse {
     json_schema: {
       title: "Delete Policy Response"
       description: "This data structue is obtained when deleting a policy by its ID."
-      required: [
-        "id"
-      ]
+      required: ["id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"id\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"id\""}];
 }

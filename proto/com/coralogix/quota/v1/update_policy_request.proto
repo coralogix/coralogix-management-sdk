@@ -2,13 +2,12 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "google/protobuf/wrappers.proto";
-import "com/coralogix/quota/v1/enums.proto";
-import "com/coralogix/quota/v1/rule.proto";
 import "com/coralogix/quota/v1/archive_retention.proto";
+import "com/coralogix/quota/v1/enums.proto";
 import "com/coralogix/quota/v1/log_rules.proto";
+import "com/coralogix/quota/v1/rule.proto";
 import "com/coralogix/quota/v1/span_rules.proto";
-
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message UpdatePolicyRequest {
@@ -16,18 +15,16 @@ message UpdatePolicyRequest {
     json_schema: {
       title: "Update Policy Request"
       description: "This data structue is used to update an existing policy."
-      required: [
-        "id"
-      ]
+      required: ["id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"policy_id\"" }];
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy\"" }];
-  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Policy Description\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"policy_id\""}];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"My Policy\""}];
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"My Policy Description\""}];
   Priority priority = 4;
   optional Rule application_rule = 5;
   optional Rule subsystem_rule = 6;
@@ -35,6 +32,6 @@ message UpdatePolicyRequest {
   oneof source_type_rules {
     LogRules log_rules = 8;
     SpanRules span_rules = 9;
-  };
-  google.protobuf.BoolValue enabled = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  }
+  google.protobuf.BoolValue enabled = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }

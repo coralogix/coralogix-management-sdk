@@ -1,10 +1,9 @@
 syntax = "proto3";
 
 package com.coralogixapis.aaa.apikeys.v3;
+
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
-
-
 
 service ApiKeysService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -12,7 +11,7 @@ service ApiKeysService {
     description: "Manage your API Keys."
   };
 
-  rpc CreateApiKey(CreateApiKeyRequest) returns(CreateApiKeyResponse) {
+  rpc CreateApiKey(CreateApiKeyRequest) returns (CreateApiKeyResponse) {
     option (google.api.http) = {
       post: "/v3/api_keys"
       body: "*"
@@ -33,7 +32,7 @@ service ApiKeysService {
       tags: ["API Keys Service"]
       summary: "Create API Key"
     };
-  };
+  }
   rpc GetApiKey(GetApiKeyRequest) returns (GetApiKeyResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -51,10 +50,8 @@ service ApiKeysService {
       tags: ["API Keys Service"]
       summary: "Get API Key"
     };
-    option (google.api.http) = {
-      get: "/v3/api_keys/{key_id}"
-    };
-  };
+    option (google.api.http) = {get: "/v3/api_keys/{key_id}"};
+  }
   rpc GetSendDataApiKeys(GetSendDataApiKeysRequest) returns (GetSendDataApiKeysResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -72,10 +69,8 @@ service ApiKeysService {
       tags: ["API Keys Service"]
       summary: "Get \"Send Data\" API Keys"
     };
-    option (google.api.http) = {
-      get: "/v3/api_keys/send_data"
-    };
-  };
+    option (google.api.http) = {get: "/v3/api_keys/send_data"};
+  }
   rpc DeleteApiKey(DeleteApiKeyRequest) returns (DeleteApiKeyResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -93,10 +88,8 @@ service ApiKeysService {
       tags: ["API Keys Service"]
       summary: "Delete API Key"
     };
-    option (google.api.http) = {
-      delete: "/v3/api_keys/{key_id}"
-    };
-  };
+    option (google.api.http) = {delete: "/v3/api_keys/{key_id}"};
+  }
   rpc UpdateApiKey(UpdateApiKeyRequest) returns (UpdateApiKeyResponse) {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -118,10 +111,10 @@ service ApiKeysService {
       put: "/v3/api_keys/{key_id}"
       body: "*"
     };
-  };
+  }
 }
 
-message Owner{
+message Owner {
   oneof owner {
     string user_id = 1;
     uint32 team_id = 2;
@@ -168,10 +161,10 @@ message KeyInfo {
     }
   };
 
-  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_api_key\"" }];
-  Owner owner = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a_user_id\"" }];
-  bool active = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
-  bool hashed = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_api_key\""}];
+  Owner owner = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"a_user_id\""}];
+  bool active = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
+  bool hashed = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
   KeyPermissions key_permissions = 5;
   optional string value = 6;
   string id = 7;
@@ -192,18 +185,16 @@ message PresetInfo {
       description: "Find out more about api keys"
     }
   };
-  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_preset\"" }];
-  repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"read_logs\"]" }];
+  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_preset\""}];
+  repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"read_logs\"]"}];
 }
 
-message UpdateApiKeyRequest{
+message UpdateApiKeyRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Update Api Key Request"
       description: "This data structure is used to update an API key."
-      required: [
-        "key_id"
-      ]
+      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -216,9 +207,7 @@ message UpdateApiKeyRequest{
       json_schema: {
         title: "Presets"
         description: "This data structure represents a set of permissions presets on an API key."
-        required: [
-          "presets"
-        ]
+        required: ["presets"]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -233,9 +222,7 @@ message UpdateApiKeyRequest{
       json_schema: {
         title: "Permissions"
         description: "This data structure represents a set of permissions on an API key."
-        required: [
-          "permissions"
-        ]
+        required: ["permissions"]
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -245,23 +232,21 @@ message UpdateApiKeyRequest{
     repeated string permissions = 1;
   }
 
-  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_key_id\"" }];
-  optional string new_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_new_name\"" }];
-  optional bool is_active = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_key_id\""}];
+  optional string new_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_new_name\""}];
+  optional bool is_active = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
   optional Presets presets = 4;
   optional Permissions permissions = 5;
 }
 
-message UpdateApiKeyResponse{}
+message UpdateApiKeyResponse {}
 
-message DeleteApiKeyRequest{
+message DeleteApiKeyRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Delete Api Key Request"
       description: "This data structure is used to delete an API key."
-      required: [
-        "key_id"
-      ]
+      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -271,7 +256,7 @@ message DeleteApiKeyRequest{
   string key_id = 1;
 }
 
-message DeleteApiKeyResponse{}
+message DeleteApiKeyResponse {}
 
 message CreateApiKeyRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -306,14 +291,14 @@ message CreateApiKeyRequest {
         description: "Find out more about api keys"
       }
     };
-    repeated string presets = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"my_preset\"]" }];
-    repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"read_logs\"]" }];
+    repeated string presets = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"my_preset\"]"}];
+    repeated string permissions = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"read_logs\"]"}];
   }
 
-  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_api_key\"" }];
+  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_api_key\""}];
   Owner owner = 2;
   KeyPermissions key_permissions = 3;
-  bool hashed = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool hashed = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }
 
 message CreateApiKeyResponse {
@@ -333,9 +318,9 @@ message CreateApiKeyResponse {
     }
   };
 
-  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_key_id\"" }];
-  string name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_api_key\"" }];
-  string value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_api_key_value\"" }];
+  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_key_id\""}];
+  string name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_api_key\""}];
+  string value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_api_key_value\""}];
 }
 
 message GetApiKeyRequest {
@@ -343,9 +328,7 @@ message GetApiKeyRequest {
     json_schema: {
       title: "Get Api Key Request"
       description: "This data structure is used to retrieve an API key."
-      required: [
-        "key_id"
-      ]
+      required: ["key_id"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -353,17 +336,15 @@ message GetApiKeyRequest {
     }
   };
 
-  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_key_id\"" }];
+  string key_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_key_id\""}];
 }
 
-message GetApiKeyResponse{
+message GetApiKeyResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Api Key Response"
       description: "This data structure is the response obtained when retrieving an API key."
-      required: [
-        "key_info"
-      ]
+      required: ["key_info"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
@@ -374,17 +355,14 @@ message GetApiKeyResponse{
   KeyInfo key_info = 1;
 }
 
-message GetSendDataApiKeysRequest {
-}
+message GetSendDataApiKeysRequest {}
 
 message GetSendDataApiKeysResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get Api Key Response"
       description: "This data structure is the response obtained when retrieving an API key."
-      required: [
-        "key_info"
-      ]
+      required: ["key_info"]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"

@@ -19,110 +19,103 @@ enum CoralogixCustomerSupportAccess {
 // IpAccessService is the service for managing IP access settings.
 service IpAccessService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
-    name : "IP Access Service"
-    description : "IpAccessService provides the API for managing company IP "
-                  "access settings."
+    name: "IP Access Service"
+    description:
+      "IpAccessService provides the API for managing company IP "
+      "access settings."
   };
 
   // RPC for creating company IP access settings.
-  rpc CreateCompanyIpAccessSettings(CreateCompanyIpAccessSettingsRequest)
-      returns (CreateCompanyIpAccessSettingsResponse) {
+  rpc CreateCompanyIpAccessSettings(CreateCompanyIpAccessSettingsRequest) returns (CreateCompanyIpAccessSettingsResponse) {
     option (google.api.http) = {
-      post : "/v1/company/settings/ip-access"
-      body : "*"
+      post: "/v1/company/settings/ip-access"
+      body: "*"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses : {
-        key : "400"
-        value : {description : "Bad Request"}
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
       }
-      responses : {
-        key : "401"
-        value : {description : "Unauthorized request"}
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
       }
-      responses : {
-        key : "500"
-        value : {description : "Internal server error"}
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
       }
-      tags : [ "IP Access Service" ]
-      summary : "Create Company IP Access Settings"
+      tags: ["IP Access Service"]
+      summary: "Create Company IP Access Settings"
     };
   }
 
   // RPC for replacing company IP access settings.
-  rpc ReplaceCompanyIpAccessSettings(ReplaceCompanyIpAccessSettingsRequest)
-      returns (ReplaceCompanyIpAccessSettingsResponse) {
+  rpc ReplaceCompanyIpAccessSettings(ReplaceCompanyIpAccessSettingsRequest) returns (ReplaceCompanyIpAccessSettingsResponse) {
     option (google.api.http) = {
-      put : "/v1/company/settings/ip-access"
-      body : "*"
+      put: "/v1/company/settings/ip-access"
+      body: "*"
     };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses : {
-        key : "400"
-        value : {description : "Bad Request"}
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
       }
-      responses : {
-        key : "401"
-        value : {description : "Unauthorized request"}
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
       }
-      responses : {
-        key : "500"
-        value : {description : "Internal server error"}
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
       }
-      tags : [ "IP Access Service" ]
-      summary : "Replace Company IP Access Settings"
+      tags: ["IP Access Service"]
+      summary: "Replace Company IP Access Settings"
     };
   }
 
   // RPC for getting company IP access settings.
-  rpc GetCompanyIpAccessSettings(GetCompanyIpAccessSettingsRequest)
-      returns (GetCompanyIpAccessSettingsResponse) {
-    option (google.api.http) = {
-      get : "/v1/company/settings/ip-access"
-    };
+  rpc GetCompanyIpAccessSettings(GetCompanyIpAccessSettingsRequest) returns (GetCompanyIpAccessSettingsResponse) {
+    option (google.api.http) = {get: "/v1/company/settings/ip-access"};
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses : {
-        key : "400"
-        value : {description : "Bad Request"}
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
       }
-      responses : {
-        key : "401"
-        value : {description : "Unauthorized request"}
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
       }
-      responses : {
-        key : "500"
-        value : {description : "Internal server error"}
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
       }
-      tags : [ "IP Access Service" ]
-      summary : "Get Company IP Access Settings"
+      tags: ["IP Access Service"]
+      summary: "Get Company IP Access Settings"
     };
   }
 
   // RPC for deleting company IP access settings.
-  rpc DeleteCompanyIpAccessSettings(DeleteCompanyIpAccessSettingsRequest)
-      returns (DeleteCompanyIpAccessSettingsResponse) {
-    option (google.api.http) = {
-      delete : "/v1/company/settings/ip-access"
-    };
+  rpc DeleteCompanyIpAccessSettings(DeleteCompanyIpAccessSettingsRequest) returns (DeleteCompanyIpAccessSettingsResponse) {
+    option (google.api.http) = {delete: "/v1/company/settings/ip-access"};
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses : {
-        key : "400"
-        value : {description : "Bad Request"}
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
       }
-      responses : {
-        key : "401"
-        value : {description : "Unauthorized request"}
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
       }
-      responses : {
-        key : "500"
-        value : {description : "Internal server error"}
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
       }
-      tags : [ "IP Access Service" ]
-      summary : "Delete Company IP Access Settings"
+      tags: ["IP Access Service"]
+      summary: "Delete Company IP Access Settings"
     };
   }
 }
@@ -130,43 +123,35 @@ service IpAccessService {
 // IpAccess represents a single IP access entry.
 message IpAccess {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema : {
-      title : "IP Access"
-      description : "Represents a single IP access entry."
-      required : [ "ip_range", "enabled" ]
+    json_schema: {
+      title: "IP Access"
+      description: "Represents a single IP access entry."
+      required: [
+        "ip_range",
+        "enabled"
+      ]
     }
-    external_docs : {
-      url : "https://coralogix.com/docs/user-guides/account-management/"
-            "account-settings/ip-access-control/"
-      description : "Find out more about IP Access"
+    external_docs: {
+      url:
+        "https://coralogix.com/docs/user-guides/account-management/"
+        "account-settings/ip-access-control/"
+      description: "Find out more about IP Access"
     }
   };
 
   // The name of the IP access entry.
-  string name = 1
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "\"Office Network\""
-      } ];
+  string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Office Network\""}];
   // The IP range in CIDR notation.
-  string ip_range = 2
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "\"192.168.0.1/24\""
-      } ];
+  string ip_range = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"192.168.0.1/24\""}];
   // Whether this IP access entry is enabled.
-  bool enabled = 3
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "true"
-      } ];
+  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "true"}];
 }
 
 // CompanyIpAccessSettings represents the IP access settings for a company.
 message CompanyIpAccessSettings {
   // The unique identifier for the company IP access settings.
   // This is typically a company id.
-  string id = 1
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "405"
-      } ];
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "405"}];
   // The list of IP access entries.
   map<string, IpAccess> ip_access = 2;
   // Coralogix customer support access setting.
@@ -176,10 +161,7 @@ message CompanyIpAccessSettings {
 // CreateCompanyIpAccessSettingsRequest is the request for the
 // CreateCompanyIpAccessSettings RPC.
 message CreateCompanyIpAccessSettingsRequest {
-  repeated IpAccess ip_access = 1
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description : "List of IP access entries to create."
-      } ];
+  repeated IpAccess ip_access = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of IP access entries to create."}];
   // Coralogix customer support access setting.
   // Defaults to DISABLED if not provided
   CoralogixCustomerSupportAccess enable_coralogix_customer_support_access = 2;
@@ -195,14 +177,8 @@ message CreateCompanyIpAccessSettingsResponse {
 // ReplaceCompanyIpAccessSettingsRequest is the request for the
 // ReplaceCompanyIpAccessSettings RPC.
 message ReplaceCompanyIpAccessSettingsRequest {
-  optional string id = 1
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "405"
-      } ];
-  repeated IpAccess ip_access = 2
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        description : "List of IP access entries to replace."
-      } ];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "405"}];
+  repeated IpAccess ip_access = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of IP access entries to replace."}];
   // Coralogix customer support access setting.
   // Defaults to DISABLED if not provided
   CoralogixCustomerSupportAccess enable_coralogix_customer_support_access = 3;
@@ -233,10 +209,7 @@ message GetCompanyIpAccessSettingsResponse {
 // DeleteCompanyIpAccessSettingsRequest is the request for the
 // DeleteCompanyIpAccessSettings RPC.
 message DeleteCompanyIpAccessSettingsRequest {
-  optional string id = 1
-      [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
-        example : "405"
-      } ];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "405"}];
 }
 
 // DeleteCompanyIpAccessSettingsResponse is the response for the

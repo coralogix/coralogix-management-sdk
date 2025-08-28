@@ -4,10 +4,9 @@ package com.coralogix.extensions.v1;
 
 import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
-
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 service ExtensionTestingService {
@@ -120,9 +119,7 @@ message InitializeTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Initialize testing revision request"
-      required: [
-        "extension_data"
-      ]
+      required: ["extension_data"]
     }
   };
   ExtensionData extension_data = 1;
@@ -141,9 +138,7 @@ message CleanupTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Cleanup testing revision request"
-      required: [
-        "id"
-      ]
+      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1;
@@ -162,13 +157,11 @@ message TestExtensionRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Test extension revision request"
-      required: [
-        "extension_data"
-      ]
+      required: ["extension_data"]
     }
   };
   ExtensionData extension_data = 1;
-  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "false"}];
 }
 
 message TestExtensionRevisionResponse {

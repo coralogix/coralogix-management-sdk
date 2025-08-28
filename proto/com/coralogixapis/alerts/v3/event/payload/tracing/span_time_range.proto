@@ -8,4 +8,3 @@ message SpanTimeRange {
   google.protobuf.Timestamp start = 1;
   google.protobuf.Timestamp end = 2;
 }
-
