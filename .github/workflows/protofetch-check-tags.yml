@@ -22,6 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
+      - uses: bufbuild/buf-setup-action@v1.50.0
       - uses: actions/setup-go@v5
       - uses: arduino/setup-protoc@v3
         with:
@@ -52,3 +53,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
           GH_READER_TOKEN: ${{ secrets.GH_READER_TOKEN }}
           RUST_LOG: debug
+
+      - run: buf format -w
+        working-directory: proto
