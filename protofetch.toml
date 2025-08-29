@@ -393,7 +393,7 @@ allow_policies = [
     "/com/coralogix/metrics/metrics-configurator.proto",
     "/com/coralogix/metrics/metrics-tco.proto",
 ]
-revision = 'v0.0.4'
+revision = 'v0.0.5'
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
