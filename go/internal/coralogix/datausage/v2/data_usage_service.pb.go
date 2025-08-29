@@ -34,6 +34,8 @@ const (
 	AggregateBy_AGGREGATE_BY_SUBSYSTEM   AggregateBy = 2
 	AggregateBy_AGGREGATE_BY_PILLAR      AggregateBy = 3
 	AggregateBy_AGGREGATE_BY_PRIORITY    AggregateBy = 4
+	AggregateBy_AGGREGATE_BY_POLICY_NAME AggregateBy = 5
+	AggregateBy_AGGREGATE_BY_SEVERITY    AggregateBy = 6
 )
 
 // Enum value maps for AggregateBy.
@@ -44,6 +46,8 @@ var (
 		2: "AGGREGATE_BY_SUBSYSTEM",
 		3: "AGGREGATE_BY_PILLAR",
 		4: "AGGREGATE_BY_PRIORITY",
+		5: "AGGREGATE_BY_POLICY_NAME",
+		6: "AGGREGATE_BY_SEVERITY",
 	}
 	AggregateBy_value = map[string]int32{
 		"AGGREGATE_BY_UNSPECIFIED": 0,
@@ -51,6 +55,8 @@ var (
 		"AGGREGATE_BY_SUBSYSTEM":   2,
 		"AGGREGATE_BY_PILLAR":      3,
 		"AGGREGATE_BY_PRIORITY":    4,
+		"AGGREGATE_BY_POLICY_NAME": 5,
+		"AGGREGATE_BY_SEVERITY":    6,
 	}
 )
 
@@ -1527,13 +1533,15 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"date_range\x18\x02 \x01(\v2%.com.coralogix.datausage.v2.DateRangeH\x00R\tdateRangeB\x0e\n" +
 	"\frequest_time\"z\n" +
 	"%GetDailyUsageEvaluationTokensResponse\x12Q\n" +
-	"\x06tokens\x18\x01 \x03(\v29.com.coralogix.datausage.v2.DetailedDailyEvaluationTokensR\x06tokens*\x99\x01\n" +
+	"\x06tokens\x18\x01 \x03(\v29.com.coralogix.datausage.v2.DetailedDailyEvaluationTokensR\x06tokens*\xd2\x01\n" +
 	"\vAggregateBy\x12\x1c\n" +
 	"\x18AGGREGATE_BY_UNSPECIFIED\x10\x00\x12\x1c\n" +
 	"\x18AGGREGATE_BY_APPLICATION\x10\x01\x12\x1a\n" +
 	"\x16AGGREGATE_BY_SUBSYSTEM\x10\x02\x12\x17\n" +
 	"\x13AGGREGATE_BY_PILLAR\x10\x03\x12\x19\n" +
-	"\x15AGGREGATE_BY_PRIORITY\x10\x042\xf4\x15\n" +
+	"\x15AGGREGATE_BY_PRIORITY\x10\x04\x12\x1c\n" +
+	"\x18AGGREGATE_BY_POLICY_NAME\x10\x05\x12\x19\n" +
+	"\x15AGGREGATE_BY_SEVERITY\x10\x062\xf4\x15\n" +
 	"\x10DataUsageService\x12\x9c\x01\n" +
 	"\x18GetTeamDetailedDataUsage\x12;.com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest\x1a<.com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse\"\x03\x88\x02\x010\x01\x12\x96\x02\n" +
 	"\rGetSpansCount\x120.com.coralogix.datausage.v2.GetSpansCountRequest\x1a1.com.coralogix.datausage.v2.GetSpansCountResponse\"\x9d\x01\x92Az\n" +
