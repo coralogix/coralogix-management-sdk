@@ -82,6 +82,7 @@ const (
 	EntityType_ENTITY_TYPE_UNSPECIFIED EntityType = 0
 	EntityType_ALERTS                  EntityType = 1
 	EntityType_TEST_NOTIFICATIONS      EntityType = 2
+	EntityType_CASES                   EntityType = 3
 )
 
 // Enum value maps for EntityType.
@@ -90,11 +91,13 @@ var (
 		0: "ENTITY_TYPE_UNSPECIFIED",
 		1: "ALERTS",
 		2: "TEST_NOTIFICATIONS",
+		3: "CASES",
 	}
 	EntityType_value = map[string]int32{
 		"ENTITY_TYPE_UNSPECIFIED": 0,
 		"ALERTS":                  1,
 		"TEST_NOTIFICATIONS":      2,
+		"CASES":                   3,
 	}
 )
 
@@ -135,13 +138,14 @@ const file_com_coralogixapis_notification_center_common_common_proto_rawDesc = "
 	"\x05SLACK\x10\x01\x12\x11\n" +
 	"\rGENERIC_HTTPS\x10\x02\x12\r\n" +
 	"\tPAGERDUTY\x10\x03\x12\x1b\n" +
-	"\x17IBM_EVENT_NOTIFICATIONS\x10\x05\"\x04\b\x04\x10\x04*\x03AWS*M\n" +
+	"\x17IBM_EVENT_NOTIFICATIONS\x10\x05\"\x04\b\x04\x10\x04*\x03AWS*X\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\n" +
 	"\n" +
 	"\x06ALERTS\x10\x01\x12\x16\n" +
-	"\x12TEST_NOTIFICATIONS\x10\x02B'Z%com/coralogixapis/notification_centerb\x06proto3"
+	"\x12TEST_NOTIFICATIONS\x10\x02\x12\t\n" +
+	"\x05CASES\x10\x03B'Z%com/coralogixapis/notification_centerb\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_common_common_proto_rawDescOnce sync.Once

@@ -370,10 +370,11 @@ func (x *GetConnectorResponse) GetConnector() *Connector {
 }
 
 type ListConnectorsRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectorType common.ConnectorType   `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"connector_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	ConnectorType         *common.ConnectorType  `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType,oneof" json:"connector_type,omitempty"`
+	SupportedByEntityType *common.EntityType     `protobuf:"varint,4,opt,name=supported_by_entity_type,json=supportedByEntityType,proto3,enum=com.coralogixapis.notification_center.EntityType,oneof" json:"supported_by_entity_type,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListConnectorsRequest) Reset() {
@@ -407,10 +408,17 @@ func (*ListConnectorsRequest) Descriptor() ([]byte, []int) {
 }
 
 func (x *ListConnectorsRequest) GetConnectorType() common.ConnectorType {
-	if x != nil {
-		return x.ConnectorType
+	if x != nil && x.ConnectorType != nil {
+		return *x.ConnectorType
 	}
 	return common.ConnectorType(0)
+}
+
+func (x *ListConnectorsRequest) GetSupportedByEntityType() common.EntityType {
+	if x != nil && x.SupportedByEntityType != nil {
+		return *x.SupportedByEntityType
+	}
+	return common.EntityType(0)
 }
 
 type ListConnectorsResponse struct {
@@ -649,52 +657,17 @@ func (x *BatchGetConnectorSummariesResponse) GetNotFoundIds() []string {
 	return nil
 }
 
-type GetConnectorTypeSummariesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GetConnectorTypeSummariesRequest) Reset() {
-	*x = GetConnectorTypeSummariesRequest{}
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[14]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GetConnectorTypeSummariesRequest) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GetConnectorTypeSummariesRequest) ProtoMessage() {}
-
-func (x *GetConnectorTypeSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[14]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GetConnectorTypeSummariesRequest.ProtoReflect.Descriptor instead.
-func (*GetConnectorTypeSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{14}
-}
-
 type ListConnectorSummariesRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	ConnectorType common.ConnectorType   `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType" json:"connector_type,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	ConnectorType         *common.ConnectorType  `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType,oneof" json:"connector_type,omitempty"`
+	SupportedByEntityType *common.EntityType     `protobuf:"varint,4,opt,name=supported_by_entity_type,json=supportedByEntityType,proto3,enum=com.coralogixapis.notification_center.EntityType,oneof" json:"supported_by_entity_type,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
 }
 
 func (x *ListConnectorSummariesRequest) Reset() {
 	*x = ListConnectorSummariesRequest{}
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -706,7 +679,7 @@ func (x *ListConnectorSummariesRequest) String() string {
 func (*ListConnectorSummariesRequest) ProtoMessage() {}
 
 func (x *ListConnectorSummariesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[15]
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -719,14 +692,21 @@ func (x *ListConnectorSummariesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConnectorSummariesRequest.ProtoReflect.Descriptor instead.
 func (*ListConnectorSummariesRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{15}
+	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListConnectorSummariesRequest) GetConnectorType() common.ConnectorType {
-	if x != nil {
-		return x.ConnectorType
+	if x != nil && x.ConnectorType != nil {
+		return *x.ConnectorType
 	}
 	return common.ConnectorType(0)
+}
+
+func (x *ListConnectorSummariesRequest) GetSupportedByEntityType() common.EntityType {
+	if x != nil && x.SupportedByEntityType != nil {
+		return *x.SupportedByEntityType
+	}
+	return common.EntityType(0)
 }
 
 type ListConnectorSummariesResponse struct {
@@ -738,7 +718,7 @@ type ListConnectorSummariesResponse struct {
 
 func (x *ListConnectorSummariesResponse) Reset() {
 	*x = ListConnectorSummariesResponse{}
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -750,7 +730,7 @@ func (x *ListConnectorSummariesResponse) String() string {
 func (*ListConnectorSummariesResponse) ProtoMessage() {}
 
 func (x *ListConnectorSummariesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[16]
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -763,7 +743,7 @@ func (x *ListConnectorSummariesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListConnectorSummariesResponse.ProtoReflect.Descriptor instead.
 func (*ListConnectorSummariesResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{16}
+	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListConnectorSummariesResponse) GetConnectors() []*ConnectorSummary {
@@ -771,6 +751,50 @@ func (x *ListConnectorSummariesResponse) GetConnectors() []*ConnectorSummary {
 		return x.Connectors
 	}
 	return nil
+}
+
+type GetConnectorTypeSummariesRequest struct {
+	state                 protoimpl.MessageState `protogen:"open.v1"`
+	SupportedByEntityType *common.EntityType     `protobuf:"varint,1,opt,name=supported_by_entity_type,json=supportedByEntityType,proto3,enum=com.coralogixapis.notification_center.EntityType,oneof" json:"supported_by_entity_type,omitempty"`
+	unknownFields         protoimpl.UnknownFields
+	sizeCache             protoimpl.SizeCache
+}
+
+func (x *GetConnectorTypeSummariesRequest) Reset() {
+	*x = GetConnectorTypeSummariesRequest{}
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetConnectorTypeSummariesRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetConnectorTypeSummariesRequest) ProtoMessage() {}
+
+func (x *GetConnectorTypeSummariesRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetConnectorTypeSummariesRequest.ProtoReflect.Descriptor instead.
+func (*GetConnectorTypeSummariesRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *GetConnectorTypeSummariesRequest) GetSupportedByEntityType() common.EntityType {
+	if x != nil && x.SupportedByEntityType != nil {
+		return *x.SupportedByEntityType
+	}
+	return common.EntityType(0)
 }
 
 type GetConnectorTypeSummariesResponse struct {
@@ -852,11 +876,14 @@ const file_com_coralogixapis_notification_center_connectors_v1_connectors_servic
 	"\x14GetConnectorResponse\x12\\\n" +
 	"\tconnector\x18\x01 \x01(\v2>.com.coralogixapis.notification_center.connectors.v1.ConnectorR\tconnector:\xc8\x01\x92A\xc4\x01\n" +
 	"E*\x16Get Connector Response2+Response containing the requested connector*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xe0\x02\n" +
-	"\x15ListConnectorsRequest\x12[\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType:\xd0\x01\x92A\xcc\x01\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x86\x04\n" +
+	"\x15ListConnectorsRequest\x12`\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeH\x00R\rconnectorType\x88\x01\x01\x12o\n" +
+	"\x18supported_by_entity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeH\x01R\x15supportedByEntityType\x88\x01\x01:\xd0\x01\x92A\xcc\x01\n" +
 	"M*\x17List Connectors Request22Request to list connectors with optional filtering*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\ventity_type\"\xc2\x02\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x11\n" +
+	"\x0f_connector_typeB\x1b\n" +
+	"\x19_supported_by_entity_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\ventity_type\"\xc2\x02\n" +
 	"\x16ListConnectorsResponse\x12^\n" +
 	"\n" +
 	"connectors\x18\x01 \x03(\v2>.com.coralogixapis.notification_center.connectors.v1.ConnectorR\n" +
@@ -888,20 +915,25 @@ const file_com_coralogixapis_notification_center_connectors_v1_connectors_servic
 	"\x03key\x18\x01 \x01(\tR\x03key\x12[\n" +
 	"\x05value\x18\x02 \x01(\v2E.com.coralogixapis.notification_center.connectors.v1.ConnectorSummaryR\x05value:\x028\x01:\xf8\x01\x92A\xf4\x01\n" +
 	"u*&Batch Get Connector Summaries Response2KResponse containing the requested connector summaries and any IDs not found*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x80\x02\n" +
-	" GetConnectorTypeSummariesRequest:\xdb\x01\x92A\xd7\x01\n" +
-	"X*$Get Connector Type Summaries Request20Request to retrieve summaries of connector types*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xfe\x02\n" +
-	"\x1dListConnectorSummariesRequest\x12[\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType:\xe6\x01\x92A\xe2\x01\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xa4\x04\n" +
+	"\x1dListConnectorSummariesRequest\x12`\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeH\x00R\rconnectorType\x88\x01\x01\x12o\n" +
+	"\x18supported_by_entity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeH\x01R\x15supportedByEntityType\x88\x01\x01:\xe6\x01\x92A\xe2\x01\n" +
 	"c* List Connector Summaries Request2?Request to list summaries of connectors with optional filtering*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\ventity_type\"\xdd\x02\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x11\n" +
+	"\x0f_connector_typeB\x1b\n" +
+	"\x19_supported_by_entity_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\ventity_type\"\xdd\x02\n" +
 	"\x1eListConnectorSummariesResponse\x12e\n" +
 	"\n" +
 	"connectors\x18\x01 \x03(\v2E.com.coralogixapis.notification_center.connectors.v1.ConnectorSummaryR\n" +
 	"connectors:\xd3\x01\x92A\xcf\x01\n" +
 	"P*!List Connector Summaries Response2+Response containing summaries of connectors*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x88\x03\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x8e\x03\n" +
+	" GetConnectorTypeSummariesRequest\x12o\n" +
+	"\x18supported_by_entity_type\x18\x01 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeH\x00R\x15supportedByEntityType\x88\x01\x01:\xdb\x01\x92A\xd7\x01\n" +
+	"X*$Get Connector Type Summaries Request20Request to retrieve summaries of connector types*{\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x1b\n" +
+	"\x19_supported_by_entity_type\"\x88\x03\n" +
 	"!GetConnectorTypeSummariesResponse\x12\x83\x01\n" +
 	"\x18connector_type_summaries\x18\x01 \x03(\v2I.com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummaryR\x16connectorTypeSummaries:\xdc\x01\x92A\xd8\x01\n" +
 	"Y*%Get Connector Type Summaries Response20Response containing summaries of connector types*{\n" +
@@ -945,16 +977,17 @@ var file_com_coralogixapis_notification_center_connectors_v1_connectors_service_
 	(*BatchGetConnectorsResponse)(nil),         // 11: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse
 	(*BatchGetConnectorSummariesRequest)(nil),  // 12: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesRequest
 	(*BatchGetConnectorSummariesResponse)(nil), // 13: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse
-	(*GetConnectorTypeSummariesRequest)(nil),   // 14: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest
-	(*ListConnectorSummariesRequest)(nil),      // 15: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest
-	(*ListConnectorSummariesResponse)(nil),     // 16: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse
+	(*ListConnectorSummariesRequest)(nil),      // 14: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest
+	(*ListConnectorSummariesResponse)(nil),     // 15: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse
+	(*GetConnectorTypeSummariesRequest)(nil),   // 16: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest
 	(*GetConnectorTypeSummariesResponse)(nil),  // 17: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse
 	nil,                          // 18: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.ConnectorsEntry
 	nil,                          // 19: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.ConnectorSummariesEntry
 	(*Connector)(nil),            // 20: com.coralogixapis.notification_center.connectors.v1.Connector
 	(common.ConnectorType)(0),    // 21: com.coralogixapis.notification_center.ConnectorType
-	(*ConnectorSummary)(nil),     // 22: com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
-	(*ConnectorTypeSummary)(nil), // 23: com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummary
+	(common.EntityType)(0),       // 22: com.coralogixapis.notification_center.EntityType
+	(*ConnectorSummary)(nil),     // 23: com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
+	(*ConnectorTypeSummary)(nil), // 24: com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummary
 }
 var file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_depIdxs = []int32{
 	20, // 0: com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest.connector:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
@@ -963,37 +996,40 @@ var file_com_coralogixapis_notification_center_connectors_v1_connectors_service_
 	20, // 3: com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse.connector:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
 	20, // 4: com.coralogixapis.notification_center.connectors.v1.GetConnectorResponse.connector:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
 	21, // 5: com.coralogixapis.notification_center.connectors.v1.ListConnectorsRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	20, // 6: com.coralogixapis.notification_center.connectors.v1.ListConnectorsResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
-	18, // 7: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.ConnectorsEntry
-	19, // 8: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.connector_summaries:type_name -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.ConnectorSummariesEntry
-	21, // 9: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
-	22, // 10: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
-	23, // 11: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse.connector_type_summaries:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummary
-	20, // 12: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.ConnectorsEntry.value:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
-	22, // 13: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.ConnectorSummariesEntry.value:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
-	0,  // 14: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.CreateConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest
-	2,  // 15: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ReplaceConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorRequest
-	4,  // 16: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.DeleteConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.DeleteConnectorRequest
-	6,  // 17: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorRequest
-	8,  // 18: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectors:input_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorsRequest
-	10, // 19: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectors:input_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsRequest
-	12, // 20: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectorSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesRequest
-	15, // 21: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectorSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest
-	14, // 22: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnectorTypeSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest
-	1,  // 23: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.CreateConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.CreateConnectorResponse
-	3,  // 24: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ReplaceConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse
-	5,  // 25: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.DeleteConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.DeleteConnectorResponse
-	7,  // 26: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorResponse
-	9,  // 27: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectors:output_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorsResponse
-	11, // 28: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectors:output_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse
-	13, // 29: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectorSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse
-	16, // 30: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectorSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse
-	17, // 31: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnectorTypeSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse
-	23, // [23:32] is the sub-list for method output_type
-	14, // [14:23] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	22, // 6: com.coralogixapis.notification_center.connectors.v1.ListConnectorsRequest.supported_by_entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	20, // 7: com.coralogixapis.notification_center.connectors.v1.ListConnectorsResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
+	18, // 8: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.ConnectorsEntry
+	19, // 9: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.connector_summaries:type_name -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.ConnectorSummariesEntry
+	21, // 10: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest.connector_type:type_name -> com.coralogixapis.notification_center.ConnectorType
+	22, // 11: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest.supported_by_entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	23, // 12: com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse.connectors:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
+	22, // 13: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest.supported_by_entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	24, // 14: com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse.connector_type_summaries:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorTypeSummary
+	20, // 15: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse.ConnectorsEntry.value:type_name -> com.coralogixapis.notification_center.connectors.v1.Connector
+	23, // 16: com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse.ConnectorSummariesEntry.value:type_name -> com.coralogixapis.notification_center.connectors.v1.ConnectorSummary
+	0,  // 17: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.CreateConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.CreateConnectorRequest
+	2,  // 18: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ReplaceConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorRequest
+	4,  // 19: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.DeleteConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.DeleteConnectorRequest
+	6,  // 20: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnector:input_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorRequest
+	8,  // 21: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectors:input_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorsRequest
+	10, // 22: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectors:input_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsRequest
+	12, // 23: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectorSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesRequest
+	14, // 24: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectorSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesRequest
+	16, // 25: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnectorTypeSummaries:input_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesRequest
+	1,  // 26: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.CreateConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.CreateConnectorResponse
+	3,  // 27: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ReplaceConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.ReplaceConnectorResponse
+	5,  // 28: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.DeleteConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.DeleteConnectorResponse
+	7,  // 29: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnector:output_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorResponse
+	9,  // 30: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectors:output_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorsResponse
+	11, // 31: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectors:output_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorsResponse
+	13, // 32: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.BatchGetConnectorSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.BatchGetConnectorSummariesResponse
+	15, // 33: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.ListConnectorSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.ListConnectorSummariesResponse
+	17, // 34: com.coralogixapis.notification_center.connectors.v1.ConnectorsService.GetConnectorTypeSummaries:output_type -> com.coralogixapis.notification_center.connectors.v1.GetConnectorTypeSummariesResponse
+	26, // [26:35] is the sub-list for method output_type
+	17, // [17:26] is the sub-list for method input_type
+	17, // [17:17] is the sub-list for extension type_name
+	17, // [17:17] is the sub-list for extension extendee
+	0,  // [0:17] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_init() }
@@ -1002,6 +1038,9 @@ func file_com_coralogixapis_notification_center_connectors_v1_connectors_service
 		return
 	}
 	file_com_coralogixapis_notification_center_connectors_v1_connector_proto_init()
+	file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[8].OneofWrappers = []any{}
+	file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[14].OneofWrappers = []any{}
+	file_com_coralogixapis_notification_center_connectors_v1_connectors_service_proto_msgTypes[16].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
