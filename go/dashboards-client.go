@@ -30,7 +30,7 @@ import (
 
 // DashboardsClient is a client for the Coralogix Dashboards API.
 type DashboardsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // CreateDashboardRequest is a request to create a dashboard.
@@ -1355,6 +1355,6 @@ func (d DashboardsClient) AssignToFolder(ctx context.Context, req *AssignDashboa
 }
 
 // NewDashboardsClient creates a new DashboardsClient.
-func NewDashboardsClient(c *CallPropertiesCreator) *DashboardsClient {
+func NewDashboardsClient(c CallPropertiesCreator) *DashboardsClient {
 	return &DashboardsClient{callPropertiesCreator: c}
 }

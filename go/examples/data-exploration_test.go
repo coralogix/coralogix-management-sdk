@@ -28,7 +28,7 @@ func TestViews(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewViewsClient(creator)
 
 	view, e := c.Create(context.Background(), &cxsdk.CreateViewRequest{
@@ -71,7 +71,7 @@ func TestViewFolders(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewViewFoldersClient(creator)
 
 	allFolders, e := c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})

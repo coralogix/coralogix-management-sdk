@@ -136,10 +136,10 @@ func (c IPAccessClient) Delete(ctx context.Context, req *DeleteCompanyIPAccessSe
 
 // IPAccessClient is a client for the Coralogix IP Access API.
 type IPAccessClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // NewIPAccessClient creates a new IP Access client.
-func NewIPAccessClient(c *CallPropertiesCreator) *IPAccessClient {
+func NewIPAccessClient(c CallPropertiesCreator) *IPAccessClient {
 	return &IPAccessClient{callPropertiesCreator: c}
 }

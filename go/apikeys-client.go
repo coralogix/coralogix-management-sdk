@@ -77,7 +77,7 @@ const (
 
 // ApikeysClient is a client for the Coralogix API keys API.
 type ApikeysClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new API key.
@@ -153,6 +153,6 @@ func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequ
 }
 
 // NewAPIKeysClient creates a new API keys client.
-func NewAPIKeysClient(c *CallPropertiesCreator) *ApikeysClient {
+func NewAPIKeysClient(c CallPropertiesCreator) *ApikeysClient {
 	return &ApikeysClient{callPropertiesCreator: c}
 }
