@@ -1,9 +1,8 @@
 syntax = "proto3";
 
 package com.coralogix.datausage.v1;
-
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
 
 message Team {
   google.protobuf.UInt64Value id = 2;
@@ -63,9 +62,9 @@ enum Range {
 
 enum Resolution {
   RESOLUTION_UNSPECIFIED = 0;
-  RESOLUTION_ONE_MINUTE = 1;
-  RESOLUTION_FIVE_MINUTES = 2;
-  RESOLUTION_FIFTEEN_MINUTES = 3;
+  RESOLUTION_ONE_MINUTE= 1;
+  RESOLUTION_FIVE_MINUTES= 2;
+  RESOLUTION_FIFTEEN_MINUTES= 3;
   RESOLUTION_ONE_HOUR = 4;
   RESOLUTION_SIX_HOURS = 5;
   RESOLUTION_ONE_DAY = 6;
