@@ -6,6 +6,6 @@ import "com/coralogixapis/alerts/v4/event/payload/metric/event_metric_less_than_
 import "com/coralogixapis/alerts/v4/event/payload/metric/event_metric_unusual_prediction.proto";
 
 message EventMetricLessThanUsualEnriched {
-  EventMetricLessThanUsual event_metric_less_than_usual = 1;
-  Prediction prediction = 2;
+    EventMetricLessThanUsual event_metric_less_than_usual = 1;
+    Prediction prediction = 2;
 }

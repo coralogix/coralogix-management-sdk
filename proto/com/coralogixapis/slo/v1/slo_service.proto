@@ -1,11 +1,11 @@
 syntax = "proto3";
 package com.coralogixapis.slo.v1;
-
-import "com/coralogixapis/slo/v1/slo.proto";
-import "com/coralogixapis/slo/v1/slo_alert.proto";
 import "google/api/annotations.proto";
+import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogixapis/slo/v1/slo_alert.proto";
+
 
 message ResponseStatus {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -17,7 +17,7 @@ message ResponseStatus {
   };
   google.rpc.Code status_code = 1;
   optional string message = 2;
-  map<string, string> details = 3;
+  map<string,string> details = 3;
 }
 
 message ReplaceSloAlertsValidationsRequest {
@@ -231,6 +231,8 @@ message BatchExecuteSloResponse {
   ResponseStatus status = 2;
 }
 
+
+
 message GetZeroStateRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
@@ -240,6 +242,8 @@ message GetZeroStateRequest {
     }
   };
 }
+
+
 
 message GetZeroStateResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -348,7 +352,9 @@ service SlosService {
       summary: "Delete Slo"
     };
 
-    option (google.api.http) = {delete: "/v1/slo/slos/{id}"};
+    option (google.api.http) = {
+      delete: "/v1/slo/slos/{id}"
+    };
   }
 
   rpc GetSlo(GetSloRequest) returns (GetSloResponse) {
@@ -369,7 +375,9 @@ service SlosService {
       summary: "Get Slo"
     };
 
-    option (google.api.http) = {get: "/v1/slo/slos/{id}"};
+    option (google.api.http) = {
+      get: "/v1/slo/slos/{id}"
+    };
   }
 
   rpc ListSlos(ListSlosRequest) returns (ListSlosResponse) {
@@ -390,7 +398,9 @@ service SlosService {
       summary: "List Slos"
     };
 
-    option (google.api.http) = {get: "/v1/slo/slos"};
+    option (google.api.http) = {
+      get: "/v1/slo/slos"
+    };
   }
 
   rpc GetZeroState(GetZeroStateRequest) returns (GetZeroStateResponse) {
@@ -411,7 +421,9 @@ service SlosService {
       summary: "Get Slo Zero State"
     };
 
-    option (google.api.http) = {get: "/v1/slo/slos/zeroState"};
+    option (google.api.http) = {
+      get: "/v1/slo/slos/zeroState"
+    };
   }
 
   rpc BatchGetSlos(BatchGetSlosRequest) returns (BatchGetSlosResponse) {
@@ -432,7 +444,9 @@ service SlosService {
       summary: "Batch Get Slo"
     };
 
-    option (google.api.http) = {get: "/v1/slo/slos:batchGet"};
+    option (google.api.http) = {
+      get: "/v1/slo/slos:batchGet"
+    };
   }
 
   rpc BatchExecuteSlo(BatchExecuteSloRequest) returns (BatchExecuteSloResponse) {
@@ -453,6 +467,11 @@ service SlosService {
       summary: "Batch Execute Slo"
     };
 
-    option (google.api.http) = {post: "/v1/slo/slos:batchExecute"};
+
+    option (google.api.http) = {
+      post: "/v1/slo/slos:batchExecute"
+    };
   }
+
+
 }

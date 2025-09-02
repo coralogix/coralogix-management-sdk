@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "google/protobuf/wrappers.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogMetaFieldsValues {
@@ -21,7 +22,7 @@ message LogMetaFieldsValues {
       description: "Find out more about quota management."
     }
   };
-  google.protobuf.StringValue application_name_values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"application_name\""}];
-  google.protobuf.StringValue severity_values = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"severity\""}];
-  google.protobuf.StringValue subsystem_name_values = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"subsystem_name\""}];
+  google.protobuf.StringValue application_name_values = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"application_name\"" }];
+  google.protobuf.StringValue severity_values = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"severity\"" }];
+  google.protobuf.StringValue subsystem_name_values = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"subsystem_name\"" }];
 }

@@ -2,15 +2,15 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
-import "com/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/event/payload/ratio_special_values.proto";
+import "com/coralogixapis/alerts/v3/alert_def_severity.proto";
 
 message EventRatioMoreThan {
   google.protobuf.Int64Value numerator_hit_value = 1;
   google.protobuf.Int64Value denominator_hit_value = 2;
-  oneof result_hit_value {
+  oneof result_hit_value{
     google.protobuf.FloatValue numeric = 100;
     SpecialRatioValues special = 101;
   }

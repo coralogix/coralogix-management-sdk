@@ -4,8 +4,8 @@ package com.coralogixapis.notification_center.connectors.v1;
 
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/connectors/v1/connector.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/connectors/v1";
@@ -27,31 +27,45 @@ service ConnectorsService {
   }
 
   rpc DeleteConnector(DeleteConnectorRequest) returns (DeleteConnectorResponse) {
-    option (google.api.http) = {delete: "/v1/notification-center/connectors/{id}"};
+    option (google.api.http) = {
+      delete: "/v1/notification-center/connectors/{id}"
+    };
   }
 
   rpc GetConnector(GetConnectorRequest) returns (GetConnectorResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors/{id}"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors/{id}"
+    };
   }
 
   rpc ListConnectors(ListConnectorsRequest) returns (ListConnectorsResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors"
+    };
   }
 
   rpc BatchGetConnectors(BatchGetConnectorsRequest) returns (BatchGetConnectorsResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors:batchGet"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors:batchGet"
+    };
   }
 
   rpc BatchGetConnectorSummaries(BatchGetConnectorSummariesRequest) returns (BatchGetConnectorSummariesResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors:batchGetSummaries"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors:batchGetSummaries"
+    };
   }
 
   rpc ListConnectorSummaries(ListConnectorSummariesRequest) returns (ListConnectorSummariesResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors:listSummaries"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors:listSummaries"
+    };
   }
 
   rpc GetConnectorTypeSummaries(GetConnectorTypeSummariesRequest) returns (GetConnectorTypeSummariesResponse) {
-    option (google.api.http) = {get: "/v1/notification-center/connectors:getTypeSummaries"};
+    option (google.api.http) = {
+      get: "/v1/notification-center/connectors:getTypeSummaries"
+    };
   }
 }
 
@@ -132,7 +146,8 @@ message DeleteConnectorRequest {
   string id = 3;
 }
 
-message DeleteConnectorResponse {}
+message DeleteConnectorResponse {
+}
 
 message GetConnectorRequest {
   reserved 1, 2;
@@ -171,7 +186,7 @@ message GetConnectorResponse {
 message ListConnectorsRequest {
   reserved 2, 3;
   reserved "entity_type";
-
+  
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List Connectors Request"
@@ -216,7 +231,7 @@ message BatchGetConnectorsRequest {
       description: "Find out more about notification center"
     }
   };
-  repeated string connector_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"connector-id-1\", \"connector-id-2\"]"}];
+  repeated string connector_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
 }
 
 message BatchGetConnectorsResponse {
@@ -232,7 +247,7 @@ message BatchGetConnectorsResponse {
     }
   };
   map<string, Connector> connectors = 1;
-  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"connector-id-3\"]"}];
+  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-3\"]" }];
 }
 
 message BatchGetConnectorSummariesRequest {
@@ -265,7 +280,7 @@ message BatchGetConnectorSummariesResponse {
     }
   };
   map<string, ConnectorSummary> connector_summaries = 1;
-  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"connector-id-3\"]"}];
+  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-3\"]" }];
 }
 
 message GetConnectorTypeSummariesRequest {
@@ -285,7 +300,7 @@ message GetConnectorTypeSummariesRequest {
 message ListConnectorSummariesRequest {
   reserved 2, 3;
   reserved "entity_type";
-
+  
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List Connector Summaries Request"

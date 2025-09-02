@@ -2,9 +2,9 @@ syntax = "proto3";
 
 package com.coralogix.rules.v1;
 
+import "google/protobuf/wrappers.proto";
 import "com/coralogix/rules/v1/rule_matcher.proto";
 import "com/coralogix/rules/v1/rule_subgroup.proto";
-import "google/protobuf/wrappers.proto";
 
 message RuleGroup {
   google.protobuf.StringValue id = 1;

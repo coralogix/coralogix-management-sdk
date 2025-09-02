@@ -4,10 +4,13 @@ package com.coralogix.extensions.v1;
 
 import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/descriptor.proto";
+
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
+import "google/api/annotations.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
+
 
 service ExtensionDeploymentService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -21,7 +24,9 @@ service ExtensionDeploymentService {
 
   rpc GetDeployedExtensions(GetDeployedExtensionsRequest) returns (GetDeployedExtensionsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get deployed extensions";
-    option (google.api.http) = {get: "/v1/extension-deployment/deployed"};
+    option (google.api.http) = {
+      get: "/v1/extension-deployment/deployed"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -183,14 +188,14 @@ message GetDeployedExtensionsResponse {
       }
     };
     google.protobuf.StringValue id = 1;
-    google.protobuf.StringValue version = 2;
-    repeated google.protobuf.StringValue applications = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-    repeated google.protobuf.StringValue subsystems = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-    repeated google.protobuf.StringValue item_ids = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+    google.protobuf.StringValue version = 2;  
+    repeated google.protobuf.StringValue applications = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    repeated google.protobuf.StringValue subsystems = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+    repeated google.protobuf.StringValue item_ids = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
     DeployedExtensionSummary summary = 6;
   }
 
-  repeated DeployedExtension deployed_extensions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated DeployedExtension deployed_extensions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
 }
 
 message ExtensionDeployment {
@@ -206,9 +211,9 @@ message ExtensionDeployment {
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
-  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
 }
 
 message DeployExtensionRequest {
@@ -224,9 +229,9 @@ message DeployExtensionRequest {
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
-  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
   optional ExtensionDeployment extension_deployment = 6;
 }
 
@@ -253,9 +258,9 @@ message UpdateExtensionRequest {
   };
   google.protobuf.StringValue id = 1;
   google.protobuf.StringValue version = 2;
-  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
-  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated google.protobuf.StringValue item_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue applications = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue subsystems = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
   optional ExtensionDeployment extension_deployment = 6;
 }
 
@@ -273,11 +278,13 @@ message UndeployExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Revert deployment of extension request"
-      required: ["id"]
+      required: [
+        "id"
+      ]
     }
   };
   google.protobuf.StringValue id = 1;
-  repeated google.protobuf.StringValue kept_extension_items = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated google.protobuf.StringValue kept_extension_items = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
 }
 
 message UndeployExtensionResponse {
@@ -302,6 +309,6 @@ message UndeployExtensionResponse {
     google.protobuf.StringValue remote_id = 2;
     google.protobuf.StringValue reason = 3;
   }
-  repeated FailedItem failed_items = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "[]"}];
+  repeated FailedItem failed_items = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
   optional ExtensionDeployment extension_deployment = 2;
 }

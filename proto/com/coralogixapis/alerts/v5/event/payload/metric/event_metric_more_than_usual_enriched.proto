@@ -7,5 +7,5 @@ import "com/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_pr
 
 message EventMetricMoreThanUsualEnriched {
   EventMetricMoreThanUsual event_metric_more_than_usual = 1;
-  Prediction prediction = 2;
+  Prediction               prediction                   = 2;
 }

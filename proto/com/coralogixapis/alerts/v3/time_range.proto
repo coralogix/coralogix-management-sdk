@@ -1,7 +1,6 @@
 syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
-
 import "google/protobuf/timestamp.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 

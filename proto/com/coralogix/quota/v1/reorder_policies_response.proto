@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/policy_order.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message ReorderPoliciesResponse {
@@ -10,7 +11,9 @@ message ReorderPoliciesResponse {
     json_schema: {
       title: "Reorder Policies Response"
       description: "This data structure is obtained when reordering policies."
-      required: ["orders"]
+      required: [
+        "orders"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

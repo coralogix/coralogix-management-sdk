@@ -2,9 +2,11 @@ syntax = "proto3";
 
 package com.coralogixapis.actions.v2;
 
-import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+
+
 
 option go_package = "com/coralogixapis/actions/v2";
 
@@ -167,7 +169,9 @@ service ActionsService {
       tags: ["Actions Service"]
       summary: "Delete Action"
     };
-    option (google.api.http) = {delete: "/v2/actions/{id}"};
+    option (google.api.http) = {
+      delete: "/v2/actions/{id}"
+    };
   }
 
   rpc GetAction(GetActionRequest) returns (GetActionResponse) {
@@ -187,7 +191,9 @@ service ActionsService {
       tags: ["Actions Service"]
       summary: "Get Action"
     };
-    option (google.api.http) = {get: "/v2/actions/{id}"};
+    option (google.api.http) = {
+      get: "/v2/actions/{id}"
+    };
   }
 
   rpc ListActions(ListActionsRequest) returns (ListActionsResponse) {
@@ -207,7 +213,9 @@ service ActionsService {
       tags: ["Actions Service"]
       summary: "List Actions"
     };
-    option (google.api.http) = {get: "/v2/actions"};
+    option (google.api.http) = {
+      get: "/v2/actions"
+    };
   }
 
   rpc OrderActions(OrderActionsRequest) returns (OrderActionsResponse) {

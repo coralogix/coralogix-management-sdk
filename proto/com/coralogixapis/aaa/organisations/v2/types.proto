@@ -22,6 +22,7 @@ message TeamInfo {
   TeamId id = 1;
   OrganisationId organisation_id = 2;
   string organisation_name = 3;
+
 }
 
 message TeamId {
