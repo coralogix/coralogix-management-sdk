@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/policy.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message GetPolicyResponse {
@@ -10,7 +11,9 @@ message GetPolicyResponse {
     json_schema: {
       title: "Get Policy Response"
       description: "This data structue is obtained when retrieving a policy by its ID."
-      required: ["id"]
+      required: [
+        "id"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

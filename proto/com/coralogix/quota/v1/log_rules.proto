@@ -3,6 +3,7 @@ syntax = "proto3";
 package com.coralogix.quota.v1;
 
 import "com/coralogix/quota/v1/enums.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message LogRules {
@@ -10,7 +11,9 @@ message LogRules {
     json_schema: {
       title: "Log Rules"
       description: "Log rules for a policy."
-      required: ["severities"]
+      required: [
+        "severities"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

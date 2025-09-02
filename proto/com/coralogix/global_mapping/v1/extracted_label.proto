@@ -1,17 +1,16 @@
 syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
 
 package com.coralogix.global_mapping.v1;
 
-import "com/coralogix/global_mapping/v1/data_source.proto";
-import "com/coralogix/global_mapping/v1/data_source_type.proto";
-import "google/protobuf/wrappers.proto";
-
-message DataSourceTypeValues {
+message DataSourceTypeValues{
   DataSourceType data_source_type = 1;
   repeated google.protobuf.StringValue destination_extraction_keys = 2;
 }
 
-message ExtractedLabel {
+message ExtractedLabel{
   reserved "data_source_provider";
   reserved 8;
   google.protobuf.StringValue label = 1;

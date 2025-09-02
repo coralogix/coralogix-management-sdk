@@ -2,8 +2,9 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogix/quota/v1/enums.proto";
 import "google/protobuf/wrappers.proto";
+import "com/coralogix/quota/v1/enums.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message TagRule {
@@ -22,7 +23,7 @@ message TagRule {
       description: "Find out more about quota management."
     }
   };
-  RuleTypeId rule_type_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"rule_type_id\""}];
-  google.protobuf.StringValue tag_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"tag_name\""}];
-  google.protobuf.StringValue tag_value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"tag_value\""}];
+  RuleTypeId rule_type_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"rule_type_id\"" }];
+  google.protobuf.StringValue tag_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_name\"" }];
+  google.protobuf.StringValue tag_value = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"tag_value\"" }];
 }

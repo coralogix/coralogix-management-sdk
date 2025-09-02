@@ -2,12 +2,13 @@ syntax = "proto3";
 
 package com.coralogix.integrations.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/integrations/v1/integration.proto";
-import "google/api/annotations.proto";
-import "google/protobuf/descriptor.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/descriptor.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
 
 service ContextualDataIntegrationService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -17,7 +18,9 @@ service ContextualDataIntegrationService {
 
   rpc GetContextualDataIntegrations(GetContextualDataIntegrationsRequest) returns (GetContextualDataIntegrationsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get all contextual data integrations";
-    option (google.api.http) = {get: "/v1/contextual-data/integrations"};
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -46,7 +49,9 @@ service ContextualDataIntegrationService {
 
   rpc GetContextualDataIntegrationDefinition(GetContextualDataIntegrationDefinitionRequest) returns (GetContextualDataIntegrationDefinitionResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration definition";
-    option (google.api.http) = {get: "/v1/contextual-data/integrations/definition/{id}"};
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations/definition/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -75,7 +80,9 @@ service ContextualDataIntegrationService {
 
   rpc GetContextualDataIntegrationDetails(GetContextualDataIntegrationDetailsRequest) returns (GetContextualDataIntegrationDetailsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration details";
-    option (google.api.http) = {get: "/v1/contextual-data/integrations/{id}"};
+    option (google.api.http) = {
+      get: "/v1/contextual-data/integrations/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -200,7 +207,9 @@ service ContextualDataIntegrationService {
 
   rpc DeleteContextualDataIntegration(DeleteContextualDataIntegrationRequest) returns (DeleteContextualDataIntegrationResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Delete contextual data integration";
-    option (google.api.http) = {delete: "/v1/contextual-data/integration/{integration_id}"};
+    option (google.api.http) = {
+      delete: "/v1/contextual-data/integration/{integration_id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -232,7 +241,8 @@ message GetContextualDataIntegrationsRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get contextual data integrations request"
-      required: []
+      required: [
+      ]
     }
   };
   google.protobuf.BoolValue include_testing_integrations = 1;
@@ -256,7 +266,7 @@ message GetContextualDataIntegrationsResponse {
         ]
       }
     };
-
+    
     Integration integration = 1;
     google.protobuf.UInt32Value amount_integrations = 2;
     repeated google.protobuf.StringValue errors = 3;
@@ -313,10 +323,7 @@ message UpdateContextualDataIntegrationRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Update contextual data integration request"
-      required: [
-        "integration_id",
-        "metadata"
-      ]
+      required: ["integration_id", "metadata"]
     }
   };
   google.protobuf.StringValue integration_id = 1;
@@ -391,3 +398,4 @@ message DeleteContextualDataIntegrationResponse {
     }
   };
 }
+

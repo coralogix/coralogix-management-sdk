@@ -1,9 +1,8 @@
 syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/measurement_query.proto";
 
 package com.coralogix.global_mapping.v1;
-
-import "com/coralogix/global_mapping/v1/measurement_query.proto";
-import "google/protobuf/wrappers.proto";
 
 enum SortOrder {
   SORT_ORDER_DESCENDING_OR_UNSPECIFIED = 0;

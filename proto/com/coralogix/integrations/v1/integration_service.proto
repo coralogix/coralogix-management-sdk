@@ -2,13 +2,17 @@ syntax = "proto3";
 
 package com.coralogix.integrations.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogix/integrations/v1/integration.proto";
-import "google/api/annotations.proto";
+import "com/coralogix/common/v1/audit_log.proto";
+
+import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
-import "google/protobuf/wrappers.proto";
+
+import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+
+
 
 service IntegrationService {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
@@ -20,9 +24,11 @@ service IntegrationService {
     }
   };
 
-  rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse) {
+  rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "List managed integration names";
-    option (google.api.http) = {get: "/v1/integrations/managed/list"};
+    option (google.api.http) = {
+      get: "/v1/integrations/managed/list"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -49,9 +55,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetDeployedIntegration(GetDeployedIntegrationRequest) returns (GetDeployedIntegrationResponse) {
+  rpc GetDeployedIntegration(GetDeployedIntegrationRequest) returns (GetDeployedIntegrationResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get deployed integration";
-    option (google.api.http) = {get: "/v1/integrations/deployed/{integration_id}"};
+    option (google.api.http) = {
+      get: "/v1/integrations/deployed/{integration_id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -78,9 +86,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse) {
+  rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get all integrations";
-    option (google.api.http) = {get: "/v1/integrations"};
+    option (google.api.http) = {
+      get: "/v1/integrations"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -107,9 +117,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetIntegrationDefinition(GetIntegrationDefinitionRequest) returns (GetIntegrationDefinitionResponse) {
+  rpc GetIntegrationDefinition(GetIntegrationDefinitionRequest) returns (GetIntegrationDefinitionResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get integration definition";
-    option (google.api.http) = {get: "/v1/integrations/definition/{id}"};
+    option (google.api.http) = {
+      get: "/v1/integrations/definition/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -136,9 +148,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetIntegrationDetails(GetIntegrationDetailsRequest) returns (GetIntegrationDetailsResponse) {
+  rpc GetIntegrationDetails(GetIntegrationDetailsRequest) returns (GetIntegrationDetailsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get integration details";
-    option (google.api.http) = {get: "/v1/integrations/{id}"};
+    option (google.api.http) = {
+      get: "/v1/integrations/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -167,7 +181,9 @@ service IntegrationService {
 
   rpc GetManagedIntegrationStatus(GetManagedIntegrationStatusRequest) returns (GetManagedIntegrationStatusResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get managed integration status";
-    option (google.api.http) = {get: "/v1/integrations/managed/status/{integration_id}"};
+    option (google.api.http) = {
+      get: "/v1/integrations/managed/status/{integration_id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -194,7 +210,7 @@ service IntegrationService {
     };
   }
 
-  rpc SaveIntegration(SaveIntegrationRequest) returns (SaveIntegrationResponse) {
+  rpc SaveIntegration(SaveIntegrationRequest) returns (SaveIntegrationResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Save integration registration metadata";
     option (google.api.http) = {
       post: "/v1/integrations/metadata"
@@ -226,7 +242,7 @@ service IntegrationService {
     };
   }
 
-  rpc UpdateIntegration(UpdateIntegrationRequest) returns (UpdateIntegrationResponse) {
+  rpc UpdateIntegration(UpdateIntegrationRequest) returns (UpdateIntegrationResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Update integration";
     option (google.api.http) = {
       put: "/v1/integrations/metadata"
@@ -258,9 +274,11 @@ service IntegrationService {
     };
   }
 
-  rpc DeleteIntegration(DeleteIntegrationRequest) returns (DeleteIntegrationResponse) {
+  rpc DeleteIntegration(DeleteIntegrationRequest) returns (DeleteIntegrationResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Delete integration";
-    option (google.api.http) = {delete: "/v1/integrations/instance/{integration_id}"};
+    option (google.api.http) = {
+      delete: "/v1/integrations/instance/{integration_id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -287,9 +305,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse) {
+  rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get integration template";
-    option (google.api.http) = {get: "/v1/integrations/template"};
+    option (google.api.http) = {
+      get: "/v1/integrations/template"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -316,9 +336,11 @@ service IntegrationService {
     };
   }
 
-  rpc GetRumApplicationVersionData(GetRumApplicationVersionDataRequest) returns (GetRumApplicationVersionDataResponse) {
+  rpc GetRumApplicationVersionData(GetRumApplicationVersionDataRequest) returns (GetRumApplicationVersionDataResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Get RUM integration versions data";
-    option (google.api.http) = {get: "/v1/integrations/rum/app-versions"};
+    option (google.api.http) = {
+      get: "/v1/integrations/rum/app-versions"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -345,7 +367,7 @@ service IntegrationService {
     };
   }
 
-  rpc SyncRumData(SyncRumDataRequest) returns (SyncRumDataResponse) {
+  rpc SyncRumData(SyncRumDataRequest) returns (SyncRumDataResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "Trigger sync of RUM integration data";
     option (google.api.http) = {
       post: "/v1/integrations/rum/sync"
@@ -416,41 +438,44 @@ message ListManagedIntegrationKeysResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List managed integration keys response"
-      required: ["integration_keys"]
+      required: [
+        "integration_keys"
+      ]
     }
   };
   repeated google.protobuf.StringValue integration_keys = 1;
 }
 
-message GetDeployedIntegrationRequest {
+message GetDeployedIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get deployed integration request"
-      required: ["integration_id"]
+      required: [
+        "integration_id"
+      ]
     }
   };
   google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"aws-sqs\""}];
 }
 
-message GetDeployedIntegrationResponse {
+message GetDeployedIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get deployed integration response"
-      required: ["integration"]
+      required: [
+        "integration"
+      ]
     }
   };
   DeployedIntegrationInformation integration = 1;
 }
 
-message UpdateIntegrationRequest {
+message UpdateIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Update integration request"
       description: "This data structure represents a list of outgoing webhook types."
-      required: [
-        "id",
-        "metadata"
-      ]
+      required: ["id", "metadata"]
     }
   };
   google.protobuf.StringValue id = 1; // This is the integration ID generated at creation time
@@ -459,7 +484,7 @@ message UpdateIntegrationRequest {
 
 message UpdateIntegrationResponse {}
 
-message GetIntegrationDefinitionRequest {
+message GetIntegrationDefinitionRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get integration definition request"
@@ -471,7 +496,7 @@ message GetIntegrationDefinitionRequest {
   google.protobuf.BoolValue include_testing_revision = 2;
 }
 
-message GetIntegrationDefinitionResponse {
+message GetIntegrationDefinitionResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get integration definition response"
@@ -492,12 +517,13 @@ message GetIntegrationsRequest {
   google.protobuf.BoolValue include_testing_revision = 1;
 }
 
-message GetIntegrationsResponse {
+message GetIntegrationsResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get integrations response"
       description: "This data structure represents a list of outgoing webhook types."
-      required: []
+      required: [
+      ]
     }
   };
   message IntegrationWithCounts {
@@ -538,17 +564,19 @@ message GetIntegrationDetailsResponse {
   IntegrationDetails integration_detail = 1;
 }
 
-message GetManagedIntegrationStatusRequest {
+message GetManagedIntegrationStatusRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get managed integration status request"
-      required: ["integration_id"]
+      required: [
+        "integration_id"
+      ]
     }
   };
   string integration_id = 1;
 }
 
-message GetManagedIntegrationStatusResponse {
+message GetManagedIntegrationStatusResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get managed integration status response"
@@ -562,47 +590,56 @@ message GetManagedIntegrationStatusResponse {
   IntegrationStatus status = 3;
 }
 
-message SaveIntegrationRequest {
+message SaveIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Save integration request"
-      required: ["metadata"]
+      required: [
+        "metadata"
+      ]
     }
   };
   IntegrationMetadata metadata = 1;
 }
 
-message SaveIntegrationResponse {
+message SaveIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Save integration response"
-      required: ["integration_id"]
+      required: [
+        "integration_id"
+      ]
     }
   };
   google.protobuf.StringValue integration_id = 1;
 }
 
-message DeleteIntegrationRequest {
+message DeleteIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Delete integration request"
-      required: ["integration_id"]
+      required: [
+        "integration_id"
+      ]
     }
   };
   google.protobuf.StringValue integration_id = 1;
 }
 
-message DeleteIntegrationResponse {}
+message DeleteIntegrationResponse  {}
 
-message GetTemplateRequest {
+message GetTemplateRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get template request"
-      required: ["integration_id"]
+      required: [
+        "integration_id"
+      ]
     }
   };
 
-  message CommonARMParams {
+  message CommonARMParams{
+
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
         title: "Common ARM integration parameters"
@@ -618,7 +655,7 @@ message GetTemplateRequest {
     google.protobuf.StringValue cgx_domain = 3;
   }
 
-  message Empty {}
+  message Empty{}
 
   google.protobuf.StringValue integration_id = 1;
   oneof extra_params {
@@ -627,52 +664,59 @@ message GetTemplateRequest {
   }
 }
 
-message GetTemplateResponse {
+message GetTemplateResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get template response"
-      required: []
+      required: [
+      ]
     }
   };
   google.protobuf.StringValue template_url = 1;
 }
 
-message GetRumApplicationVersionDataRequest {
+message GetRumApplicationVersionDataRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get RUM application version data request"
-      required: ["application_name"]
+      required: [
+        "application_name"
+      ]
     }
   };
   google.protobuf.StringValue application_name = 1;
 }
 
-message GetRumApplicationVersionDataResponse {
+message GetRumApplicationVersionDataResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get RUM application version data response"
-      required: ["version_data"]
+      required: [
+        "version_data"
+      ]
     }
   };
   RumVersionData version_data = 1;
 }
 
-message SyncRumDataRequest {
+message SyncRumDataRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Sync RUM data request"
       required: []
     }
-  }; // If false, sync may be skipped if performed recently.
+  };  // If false, sync may be skipped if performed recently.
   // The time between syncs is controlled by configuration.
   google.protobuf.BoolValue force = 1;
 }
 
-message SyncRumDataResponse {
+message SyncRumDataResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Sync RUM data response"
-      required: ["synced_at"]
+      required: [
+        "synced_at"
+      ]
     }
   };
   reserved 3;
@@ -682,22 +726,26 @@ message SyncRumDataResponse {
   google.protobuf.Timestamp synced_at = 2;
 }
 
-message TestIntegrationRequest {
+message TestIntegrationRequest  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Test integration request"
-      required: ["integration_data"]
+      required: [
+        "integration_data"
+      ]
     }
   };
   IntegrationMetadata integration_data = 1;
   google.protobuf.StringValue integration_id = 2;
 }
 
-message TestIntegrationResponse {
+message TestIntegrationResponse  {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Test integration response"
-      required: ["result"]
+      required: [
+        "result"
+      ]
     }
   };
   TestIntegrationResult result = 1;

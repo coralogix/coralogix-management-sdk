@@ -1,15 +1,14 @@
 syntax = "proto3";
+import "google/protobuf/wrappers.proto";
+import "com/coralogix/global_mapping/v1/data_source_type.proto";
+import "com/coralogix/global_mapping/v1/data_source.proto";
 
 package com.coralogix.global_mapping.v1;
-
-import "com/coralogix/global_mapping/v1/data_source.proto";
-import "com/coralogix/global_mapping/v1/data_source_type.proto";
-import "google/protobuf/wrappers.proto";
 
 message LabelMapping {
   google.protobuf.StringValue label = 1;
   DataSourceType data_source_type = 2;
-  google.protobuf.StringValue extraction_template = 3 [deprecated = true];
+  google.protobuf.StringValue extraction_template = 3 [deprecated=true];
   reserved "data_source_provider";
   reserved 4;
   google.protobuf.StringValue id = 5;

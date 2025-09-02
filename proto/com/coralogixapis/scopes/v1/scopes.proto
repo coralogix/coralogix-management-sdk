@@ -1,158 +1,165 @@
 syntax = "proto3";
+import "com/coralogixapis/scopes/v1/entity_type.proto";
 
 package com.coralogixapis.scopes.v1;
 
-import "com/coralogixapis/scopes/v1/entity_type.proto";
-import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "google/api/annotations.proto";
+
 
 service ScopesService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
-    name: "Scopes Service"
-    description: "A service to manage scopes"
-  };
-  rpc GetTeamScopesByIds(GetTeamScopesByIdsRequest) returns (GetScopesResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Scopes Service"]
-      summary: "Get Team Scopes By Ids"
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+      name: "Scopes Service"
+      description: "A service to manage scopes"
     };
-    option (google.api.http) = {get: "/v1/scopes"};
-  }
+    rpc GetTeamScopesByIds(GetTeamScopesByIdsRequest) returns (GetScopesResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Get Team Scopes By Ids"
+        };
+        option (google.api.http) = {
+            get: "/v1/scopes"
+        };
+    }
 
-  rpc GetTeamScopes(GetTeamScopesRequest) returns (GetScopesResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Scopes Service"]
-      summary: "Get Team Scopes"
-    };
-    option (google.api.http) = {get: "/v1/scopes/list"};
-  }
+    rpc GetTeamScopes(GetTeamScopesRequest) returns (GetScopesResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Get Team Scopes"
+        };
+        option (google.api.http) = {
+            get: "/v1/scopes/list"
+        };
+    }
 
-  rpc CreateScope(CreateScopeRequest) returns (CreateScopeResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Scopes Service"]
-      summary: "Create Scope"
-    };
-    option (google.api.http) = {
-      post: "/v1/scopes"
-      body: "*"
-    };
-  }
+    rpc CreateScope(CreateScopeRequest) returns (CreateScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Create Scope"
+        };
+        option (google.api.http) = {
+            post: "/v1/scopes"
+            body: "*"
+        };
+    }
 
-  rpc UpdateScope(UpdateScopeRequest) returns (UpdateScopeResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Scopes Service"]
-      summary: "Update Scope"
-    };
-    option (google.api.http) = {
-      put: "/v1/scopes"
-      body: "*"
-    };
-  }
+    rpc UpdateScope(UpdateScopeRequest) returns (UpdateScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Update Scope"
+        };
+        option (google.api.http) = {
+            put: "/v1/scopes"
+            body: "*"
+        };
+    }
 
-  rpc DeleteScope(DeleteScopeRequest) returns (DeleteScopeResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Scopes Service"]
-      summary: "Delete Scope"
-    };
-    option (google.api.http) = {delete: "/v1/scopes/{id}"};
-  }
+    rpc DeleteScope(DeleteScopeRequest) returns (DeleteScopeResponse) {
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+          responses: {
+            key: "400"
+            value: {description: "Bad Request"}
+          }
+          responses: {
+            key: "401"
+            value: {description: "Unauthorized request"}
+          }
+          responses: {
+            key: "500"
+            value: {description: "Internal server error"}
+          }
+          tags: ["Scopes Service"]
+          summary: "Delete Scope"
+        };
+        option (google.api.http) = {
+            delete: "/v1/scopes/{id}"
+        };
+    }
 }
 
 message Scope {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Scope"
-      description: "This data structure represents a scope"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Scope"
+          description: "This data structure represents a scope"
+          required: []
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
 
-  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_id\""}];
-  string display_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_name\""}];
-  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_description\""}];
-  int32 team_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1234"}];
-  repeated Filter filters = 5;
-  string default_expression = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"expression\""}];
+    string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_id\"" }];
+    string display_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_name\"" }];
+    optional string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_description\"" }];
+    int32 team_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1234" }];
+    repeated Filter filters = 5;
+    string default_expression = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"expression\"" }];
 }
 
 message Filter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Filter"
-      description: "This data structure represents a filter"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  EntityType entity_type = 1;
-  string expression = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"expression\""}];
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Filter"
+          description: "This data structure represents a filter"
+          required: []
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    EntityType entity_type = 1;
+    string expression = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"expression\"" }];
 }
 
 // We get user information from context
@@ -160,123 +167,134 @@ message Filter {
 message GetTeamScopesRequest {}
 
 message GetTeamScopesByIdsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Team Scopes By Ids Request"
-      description: "This data structure represents a request to get team scopes by ids"
-      required: ["ids"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  repeated string ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"scope_id\"]"}];
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Get Team Scopes By Ids Request"
+          description: "This data structure represents a request to get team scopes by ids"
+          required: [
+            "ids"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    repeated string ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"scope_id\"]" }];
 }
 
 message GetScopesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Scopes Response"
-      description: "This data structure represents a response to get scopes"
-      required: ["scopes"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  repeated Scope scopes = 1;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Get Scopes Response"
+          description: "This data structure represents a response to get scopes"
+          required: [
+            "scopes"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    repeated Scope scopes = 1;
 }
 
 message CreateScopeRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Create Scope Request"
-      description: "This data structure represents a request to create a scope"
-      required: [
-        "display_name",
-        "filters"
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  string display_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_name\""}];
-  optional string description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_description\""}];
-  repeated Filter filters = 3;
-  string default_expression = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"expression\""}];
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Create Scope Request"
+          description: "This data structure represents a request to create a scope"
+          required: [
+            "display_name",
+            "filters"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    string display_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_name\"" }];
+    optional string description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_description\"" }];
+    repeated Filter filters = 3;
+    string default_expression = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"expression\"" }];
 }
 
 message CreateScopeResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Create Scope Response"
-      description: "This data structure represents a response to create a scope"
-      required: ["scope"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  Scope scope = 1;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Create Scope Response"
+          description: "This data structure represents a response to create a scope"
+          required: [
+            "scope"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    Scope scope = 1;
 }
 
 message UpdateScopeRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Update Scope Request"
-      description: "This data structure represents a request to update a scope"
-      required: [
-        "id",
-        "display_name",
-        "filters",
-        "default_expression"
-      ]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_id\""}];
-  string display_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_name\""}];
-  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_description\""}];
-  repeated Filter filters = 4;
-  string default_expression = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"expression\""}];
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Update Scope Request"
+          description: "This data structure represents a request to update a scope"
+          required: [
+            "id",
+            "display_name",
+            "filters",
+            "default_expression"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_id\"" }];
+    string display_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_name\"" }];
+    optional string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_description\"" }];
+    repeated Filter filters = 4;
+    string default_expression = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"expression\"" }];
 }
 
 message UpdateScopeResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Update Scope Response"
-      description: "This data structure represents a response to update a scope"
-      required: ["scope"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  Scope scope = 1;
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Update Scope Response"
+          description: "This data structure represents a response to update a scope"
+          required: [
+            "scope"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    Scope scope = 1;
 }
 
 message DeleteScopeRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Delete Scope Request"
-      description: "This data structure represents a request to delete a scope"
-      required: ["id"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
-      description: "Find out more about scopes"
-    }
-  };
-  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"scope_id\""}];
+    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+        json_schema: {
+          title: "Delete Scope Request"
+          description: "This data structure represents a request to delete a scope"
+          required: [
+            "id"
+          ]
+        }
+        external_docs: {
+          url: "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+          description: "Find out more about scopes"
+       }
+    };
+    string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"scope_id\"" }];
 }
 
-message DeleteScopeResponse {}
+message DeleteScopeResponse {
+}

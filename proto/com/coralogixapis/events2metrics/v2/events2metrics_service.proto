@@ -2,12 +2,14 @@ syntax = "proto3";
 
 package com.coralogixapis.events2metrics.v2;
 
-import "com/coralogix/common/v1/audit_log.proto";
 import "com/coralogixapis/events2metrics/v2/events2metrics_definition.proto";
+import "com/coralogix/common/v1/audit_log.proto";;
 import "com/coralogixapis/logs2metrics/v2/logs_query.proto";
 import "com/coralogixapis/spans2metrics/v2/spans_query.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
+
+
+import "google/api/annotations.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 service Events2MetricService {
@@ -19,7 +21,7 @@ service Events2MetricService {
   rpc CreateE2M(CreateE2MRequest) returns (CreateE2MResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Create new E2M";
     option (google.api.http) = {
-      post: "/api/v2/events2metrics"
+      post: "/api/v2/events2metrics",
       body: "e2m"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -30,7 +32,9 @@ service Events2MetricService {
 
   rpc ListE2M(ListE2MRequest) returns (ListE2MResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "List all E2M";
-    option (google.api.http) = {get: "/api/v2/events2metrics"};
+    option (google.api.http) = {
+      get: "/api/v2/events2metrics"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "List E2Ms"
@@ -40,7 +44,7 @@ service Events2MetricService {
   rpc ReplaceE2M(ReplaceE2MRequest) returns (ReplaceE2MResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Replace E2M";
     option (google.api.http) = {
-      put: "/api/v2/events2metrics"
+      put: "/api/v2/events2metrics",
       body: "e2m"
     };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
@@ -51,7 +55,9 @@ service Events2MetricService {
 
   rpc GetE2M(GetE2MRequest) returns (GetE2MResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Get E2M";
-    option (google.api.http) = {get: "/api/v2/events2metrics/{id}"};
+    option (google.api.http) = {
+      get: "/api/v2/events2metrics/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Get an E2M"
@@ -60,7 +66,9 @@ service Events2MetricService {
 
   rpc DeleteE2M(DeleteE2MRequest) returns (DeleteE2MResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "Delete E2M";
-    option (google.api.http) = {delete: "/api/v2/events2metrics/{id}"};
+    option (google.api.http) = {
+      delete: "/api/v2/events2metrics/{id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Delete an E2M"
@@ -82,7 +90,9 @@ service Events2MetricService {
 
   rpc ListLabelsCardinality(ListLabelsCardinalityRequest) returns (ListLabelsCardinalityResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "List Labels Cardinality";
-    option (google.api.http) = {get: "/api/v2/events2metrics/labels_cardinality"};
+    option (google.api.http) = {
+      get: "/api/v2/events2metrics/labels_cardinality"
+    };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Events2Metrics Service"]
@@ -92,7 +102,9 @@ service Events2MetricService {
 
   rpc GetLimits(GetLimitsRequest) returns (GetLimitsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get limits";
-    option (google.api.http) = {get: "/api/v2/events2metrics/limits"};
+    option (google.api.http) = {
+      get: "/api/v2/events2metrics/limits"
+    };
 
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       tags: ["Events2Metrics Service"]
@@ -100,14 +112,15 @@ service Events2MetricService {
     };
   }
 }
-
 // represents e2m create request
 message CreateE2MRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Create E2M Request"
       description: "This is used to create a new event to metric definition"
-      required: ["e2m"]
+      required: [
+        "e2m"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -116,7 +129,6 @@ message CreateE2MRequest {
   };
   E2MCreateParams e2m = 1;
 }
-
 // represents e2m create response
 message CreateE2MResponse {
   E2M e2m = 1;
@@ -124,14 +136,15 @@ message CreateE2MResponse {
 
 // represents e2m get list request
 message ListE2MRequest {}
-
-// represents response of
+ // represents response of
 message ListE2MResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "List E2M Response"
       description: "This is the response obtained when listing all event to metric definitions"
-      required: ["e2m"]
+      required: [
+        "e2m"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -142,13 +155,15 @@ message ListE2MResponse {
   repeated E2M e2m = 1;
 }
 
-// represents e2m replace request
+ // represents e2m replace request
 message ReplaceE2MRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Replace E2M Request"
       description: "This data structure is used to replace an existing event to metric definition"
-      required: ["e2m"]
+      required: [
+        "e2m"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -158,13 +173,15 @@ message ReplaceE2MRequest {
   E2M e2m = 1;
 }
 
-// represents e2m replace response
+ // represents e2m replace response
 message ReplaceE2MResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Replace E2M Response"
       description: "This data structure is obtained when replacing an existing event to metric definition"
-      required: ["e2m"]
+      required: [
+        "e2m"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -173,30 +190,34 @@ message ReplaceE2MResponse {
   };
   E2M e2m = 1;
 }
-
-// represents get request for a single e2m by id
+ // represents get request for a single e2m by id
 message GetE2MRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get E2M Response"
       description: "This data structure is used to retrieve an existing event to metric definition"
-      required: ["id"]
+      required: [
+        "id"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
       description: "Find out more about events2metrics"
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""}];
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
+  } ];
 }
-
-// represents response for a single e2m by id
+ // represents response for a single e2m by id
 message GetE2MResponse {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Get E2M Response"
       description: "This data structure is obtained when retrieving an existing event to metric definition"
-      required: ["e2m"]
+      required: [
+        "e2m"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -205,14 +226,15 @@ message GetE2MResponse {
   };
   E2M e2m = 1;
 }
-
-// represents e2m delete request
+ // represents e2m delete request
 message DeleteE2MRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Delete E2M Request"
       description: "This data structure is used to delete an existing event to metric definition"
-      required: ["id"]
+      required: [
+        "id"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -220,16 +242,20 @@ message DeleteE2MRequest {
     }
   };
   // id of e2m to be deleted
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""}];
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
+  } ];
 }
-
 // represents e2m delete response
 message DeleteE2MResponse {
+
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Delete E2M Request"
       description: "This data structure is obtained when deleting an existing event to metric definition"
-      required: ["id"]
+      required: [
+        "id"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/"
@@ -248,7 +274,6 @@ message E2MExecutionRequest {
     DeleteE2MRequest delete = 3;
   }
 }
-
 // an atomic list of e2m action that are executed in the same request
 message AtomicBatchExecuteE2MRequest {
   repeated E2MExecutionRequest requests = 1;
@@ -262,12 +287,10 @@ message E2MExecutionResponse {
     DeleteE2MResponse deleted = 3;
   }
 }
-
 // represents a response to atomic list of e2m actions
 message AtomicBatchExecuteE2MResponse {
   repeated E2MExecutionResponse matching_responses = 1;
 }
-
 // represents a request of list label cardinality
 message ListLabelsCardinalityRequest {
   oneof query {
@@ -276,7 +299,6 @@ message ListLabelsCardinalityRequest {
   }
   repeated MetricLabel metric_labels = 3;
 }
-
 // represents labels permutation cardinality
 message LabelsPermutationsCardinalityDay {
   string day = 1;
@@ -290,7 +312,6 @@ message ListLabelsCardinalityResponse {
 
 // get e2m limits request
 message GetLimitsRequest {}
-
 // get e2m limits response
 message GetLimitsResponse {
   message LimitUsage {
@@ -299,11 +320,11 @@ message GetLimitsResponse {
     // how many e2m's were created
     google.protobuf.Int32Value used = 2;
   }
-  // company id
+   // company id
   google.protobuf.StringValue company_id = 1;
-  // labels limit
+   // labels limit
   int32 labels_limit = 2;
-  // permutation limit/used
+   // permutation limit/used
   LimitUsage permutations_limit = 3;
   // metrics limit/used5
   LimitUsage metrics_limit = 4;

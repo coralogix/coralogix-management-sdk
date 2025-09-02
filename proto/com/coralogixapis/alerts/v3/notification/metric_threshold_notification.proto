@@ -1,10 +1,9 @@
 syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
-
-import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_condition_type.proto";
 
 message MetricThresholdNotification {
   google.protobuf.DoubleValue pct_over_threshold = 1;

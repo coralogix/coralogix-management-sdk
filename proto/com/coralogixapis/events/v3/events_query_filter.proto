@@ -23,8 +23,8 @@ message EventsFilter {
     }
   };
   TimestampRange timestamp = 1;
-  repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"test_type\"]"}];
-  repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"test_key\"]"}];
+  repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_type\"]" }];
+  repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_key\"]" }];
   Filters cx_event_metadata_filters = 5;
 }
 
@@ -33,12 +33,15 @@ message Filters {
     json_schema: {
       title: "Filters"
       description: "This data structure represents a filter"
-      required: ["path_and_values"]
+      required: [
+        "path_and_values"
+      ]
     }
   };
-  FilterOperator operator = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"FILTER_OPERATOR_OR\""}];
+  FilterOperator operator = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"FILTER_OPERATOR_OR\"" }];
   repeated FilterPathAndValues path_and_values = 2;
 }
+
 
 message FilterPathAndValues {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -51,7 +54,7 @@ message FilterPathAndValues {
       ]
     }
   };
-  google.protobuf.StringValue path = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"test\""}];
+  google.protobuf.StringValue path = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
   oneof values {
     MultipleValues multiple_values = 100;
     Filters filters = 101;

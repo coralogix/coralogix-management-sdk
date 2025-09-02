@@ -302,7 +302,7 @@ allow_policies = [
     "com/coralogixapis/aaa/organisations/v2/team_service.proto",
     "com/coralogixapis/aaa/organisations/v2/types.proto",
 ]
-revision = "v0.1.34"
+revision = "v0.1.35"
 
 [cx-api-common]
 url = "github.com/coralogix/cx-api-common"

@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
+
 enum LogsTimeRelativeConditionType {
   LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED = 0;
   LOGS_TIME_RELATIVE_CONDITION_TYPE_LESS_THAN = 1;

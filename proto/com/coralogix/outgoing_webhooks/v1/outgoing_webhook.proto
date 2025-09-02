@@ -2,8 +2,9 @@ syntax = "proto3";
 
 package com.coralogix.outgoing_webhooks.v1;
 
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 enum WebhookType {
@@ -40,10 +41,10 @@ message GenericWebhookConfig {
     }
   };
 
-  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
-  MethodType method = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-  map<string, string> headers = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "{\"Content-Type\": \"application/json\"}"}];
-  google.protobuf.StringValue payload = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "{\"key\": \"value\"}"}];
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  MethodType method = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  map<string, string> headers = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"Content-Type\": \"application/json\"}" }];
+  google.protobuf.StringValue payload = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 
 message SlackConfig {
@@ -71,22 +72,26 @@ message SlackConfig {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
         title: "Slack digest configuration"
-        required: ["type"]
+        required: [
+          "type"
+        ]
       }
     };
-    DigestType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "false"}];
+    DigestType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
   }
 
   message Attachment {
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
       json_schema: {
         title: "Slack attachment configuration"
-        required: ["type"]
+        required: [
+          "type"
+        ]
       }
     };
-    AttachmentType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {default: "false"}];
+    AttachmentType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+    google.protobuf.BoolValue is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
   }
 
   repeated Digest digests = 1;
@@ -97,10 +102,12 @@ message PagerDutyConfig {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "PagerDuty configuration"
-      required: ["service_key"]
+      required: [
+        "service_key"
+      ]
     }
   };
-  google.protobuf.StringValue service_key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"pager_duty_service_key\""}];
+  google.protobuf.StringValue service_key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"pager_duty_service_key\"" }];
 }
 
 message SendLogConfig {
@@ -113,8 +120,8 @@ message SendLogConfig {
       ]
     }
   };
-  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
-  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "{\"key\": \"value\"}"}];
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 
 message EmailGroupConfig {
@@ -124,7 +131,7 @@ message EmailGroupConfig {
       required: []
     }
   };
-  repeated google.protobuf.StringValue email_addresses = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "[\"example@coralogix.com\"]"}];
+  repeated google.protobuf.StringValue email_addresses = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"example@coralogix.com\"]" }];
 }
 
 message MicrosoftTeamsConfig {
@@ -156,9 +163,9 @@ message JiraConfig {
       ]
     }
   };
-  google.protobuf.StringValue api_token = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"jira_api_token\""}];
-  google.protobuf.StringValue email = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"jira_email\""}];
-  google.protobuf.StringValue project_key = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"jira_project_key\""}];
+  google.protobuf.StringValue api_token = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_api_token\"" }];
+  google.protobuf.StringValue email = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_email\"" }];
+  google.protobuf.StringValue project_key = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"jira_project_key\"" }];
 }
 
 message OpsgenieConfig {
@@ -180,8 +187,8 @@ message DemistoConfig {
       ]
     }
   };
-  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\""}];
-  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "{\"key\": \"value\"}"}];
+  google.protobuf.StringValue uuid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"d838cd7b-087b-40c6-bc33-80997020f5d0\"" }];
+  google.protobuf.StringValue payload = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
 }
 
 message AwsEventBridgeConfig {
@@ -200,11 +207,11 @@ message AwsEventBridgeConfig {
   reserved 5;
   reserved "region"; // Region was deprecated, as it could be inferred from the event bus arn.
 
-  google.protobuf.StringValue event_bus_arn = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"arn:aws:events:us-east-1:123456789012:event-bus/default\""}];
-  google.protobuf.StringValue detail = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "{\"key\": \"value\"}"}];
-  google.protobuf.StringValue detail_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"detail_type\""}];
-  google.protobuf.StringValue source = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"source\""}];
-  google.protobuf.StringValue role_name = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"role_name\""}];
+  google.protobuf.StringValue event_bus_arn = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"arn:aws:events:us-east-1:123456789012:event-bus/default\"" }];
+  google.protobuf.StringValue detail = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "{\"key\": \"value\"}" }];
+  google.protobuf.StringValue detail_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"detail_type\"" }];
+  google.protobuf.StringValue source = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"source\"" }];
+  google.protobuf.StringValue role_name = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"role_name\"" }];
 }
 
 message IbmEventNotificationsConfig {
@@ -244,13 +251,13 @@ message OutgoingWebhook {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"webhook_id\""}];
-  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_webhook\""}];
-  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"external_id_example\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
   oneof config {
     GenericWebhookConfig generic_webhook = 100;
     SlackConfig slack = 101;
@@ -278,9 +285,9 @@ message OutgoingWebhookInputData {
       ]
     }
   };
-  WebhookType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_webhook\""}];
-  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"slack.webhook.com\""}];
+  WebhookType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
   oneof config {
     GenericWebhookConfig generic_webhook = 100;
     SlackConfig slack = 101;
@@ -309,12 +316,12 @@ message OutgoingWebhookSummary {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"webhook_id\""}];
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_webhook\""}];
-  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"external_id_example\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
 }
 
 message OutgoingWebhookExtendedSummary {
@@ -330,13 +337,13 @@ message OutgoingWebhookExtendedSummary {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"webhook_id\""}];
-  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "1"}];
-  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"my_webhook\""}];
-  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"external_id_example\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"webhook_id\"" }];
+  WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"my_webhook\"" }];
+  google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"slack.webhook.com\"" }];
+  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2024-10-20T00:00:00\"" }];
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"external_id_example\"" }];
 }
 
 message OutgoingWebhookDetails {
@@ -350,10 +357,10 @@ message OutgoingWebhookDetails {
     }
   };
   WebhookType type = 1;
-  google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"example_label\""}];
+  google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_label\"" }];
 }
 
-message OutboundWebhookSummary {
+message OutboundWebhookSummary{
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
     json_schema: {
       title: "Outbound webhook summary"

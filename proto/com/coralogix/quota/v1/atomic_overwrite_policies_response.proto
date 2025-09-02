@@ -1,23 +1,25 @@
 syntax = "proto3";
+import "com/coralogix/quota/v1/create_policy_response.proto";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogix/quota/v1/create_policy_response.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 message AtomicOverwriteLogPoliciesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Atomic Overwrite Log Policies Response"
-      description: "This data structue is obtained when overwriting log policies atomically."
-      required: ["create_responses"]
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
-      description: "Find out more about quota management."
-    }
-  };
-  repeated CreatePolicyResponse create_responses = 1;
+ option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+   json_schema: {
+     title: "Atomic Overwrite Log Policies Response"
+     description: "This data structue is obtained when overwriting log policies atomically."
+     required: [
+       "create_responses"
+     ]
+   }
+   external_docs: {
+     url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"
+     description: "Find out more about quota management."
+   }
+ };
+ repeated CreatePolicyResponse create_responses = 1;
 }
 
 message AtomicOverwriteSpanPoliciesResponse {
@@ -25,7 +27,9 @@ message AtomicOverwriteSpanPoliciesResponse {
     json_schema: {
       title: "Atomic Overwrite Span Policies Response"
       description: "This data structue is obtained when overwriting span policies atomically."
-      required: ["create_responses"]
+      required: [
+        "create_responses"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/"

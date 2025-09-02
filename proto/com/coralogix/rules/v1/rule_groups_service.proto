@@ -2,14 +2,14 @@ syntax = "proto3";
 
 package com.coralogix.rules.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/wrappers.proto";
 import "com/coralogix/rules/v1/rule.proto";
 import "com/coralogix/rules/v1/rule_group.proto";
 import "com/coralogix/rules/v1/rule_matcher.proto";
-import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
-import "google/protobuf/struct.proto";
-import "google/protobuf/wrappers.proto";
+import "google/api/annotations.proto";
+import "com/coralogix/common/v1/audit_log.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
 service RuleGroupsService {
@@ -36,7 +36,9 @@ service RuleGroupsService {
       tags: ["Rule Groups Service"]
       summary: "Get Rule Group"
     };
-    option (google.api.http) = {get: "/api/v1/rulegroups/{group_id}"};
+    option (google.api.http) = {
+      get: "/api/v1/rulegroups/{group_id}"
+    };
   }
   rpc ListRuleGroups(ListRuleGroupsRequest) returns (ListRuleGroupsResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "get all rule groups";
@@ -56,7 +58,9 @@ service RuleGroupsService {
       tags: ["Rule Groups Service"]
       summary: "List Rule Groups"
     };
-    option (google.api.http) = {get: "/api/v1/rulegroups"};
+    option (google.api.http) = {
+      get: "/api/v1/rulegroups"
+    };
   }
   rpc CreateRuleGroup(CreateRuleGroupRequest) returns (CreateRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "create rule group";
@@ -106,7 +110,9 @@ service RuleGroupsService {
   }
   rpc DeleteRuleGroup(DeleteRuleGroupRequest) returns (DeleteRuleGroupResponse) {
     option (com.coralogix.common.v1.audit_log_description).description = "delete rule group";
-    option (google.api.http) = {delete: "/api/v1/rulegroups/{group_id}"};
+    option (google.api.http) = {
+      delete: "/api/v1/rulegroups/{group_id}"
+    };
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -143,10 +149,12 @@ service RuleGroupsService {
       tags: ["Rule Groups Service"]
       summary: "Bulk Delete Rule Group"
     };
-    option (google.api.http) = {delete: "/api/v1/rulegroups"};
+    option (google.api.http) = {
+      delete: "/api/v1/rulegroups"
+    };
   }
 
-  rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse) {
+  rpc GetRuleGroupModelMapping(GetRuleGroupModelMappingRequest) returns (GetRuleGroupModelMappingResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get rule mapping";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
@@ -170,7 +178,7 @@ service RuleGroupsService {
     };
   }
 
-  rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse) {
+  rpc GetCompanyUsageLimits(GetCompanyUsageLimitsRequest) returns (GetCompanyUsageLimitsResponse){
     option (com.coralogix.common.v1.audit_log_description).description = "get company usage with limits";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
