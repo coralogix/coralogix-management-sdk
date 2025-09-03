@@ -598,9 +598,9 @@ mod tests {
 
         let global_router = GlobalRouter {
             id: Some("router_default".into()),
-            name: "TestGlobalRouter".to_string(),
+            name: "global router".to_string(),
             entity_type: EntityType::Alerts.into(),
-            description: "Global Router for Notification Center testing.".to_string(),
+            description: "global router example".to_string(),
             create_time: None,
             update_time: None,
             rules: vec![RoutingRule {
@@ -747,9 +747,9 @@ mod tests {
 
         let global_router = GlobalRouter {
             id: Some("router_default".into()),
-            name: "TestGlobalRouter".to_string(),
+            name: "global router".to_string(),
             entity_type: EntityType::Alerts.into(),
-            description: "Global Router for Notification Center testing.".to_string(),
+            description: "global router example".to_string(),
             create_time: None,
             update_time: None,
             rules: vec![RoutingRule {

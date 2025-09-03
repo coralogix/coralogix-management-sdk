@@ -12,7 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#[cfg(test)]
 mod tests {
     use cx_sdk::{
         CoralogixRegion,
@@ -57,6 +56,7 @@ mod tests {
             id: None,
             folder_id: None,
             is_compact_mode: None,
+            view_type: 0,
         };
 
         let create_response = views_client

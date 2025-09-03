@@ -478,9 +478,9 @@ func TestGlobalRouter(t *testing.T) {
 	createOrReplaceRes, err := notificationCenterClient.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
 		Router: &cxsdk.GlobalRouter{
 			Id:          &routerId,
-			Name:        "TestGlobalRouter",
+			Name:        "global router",
 			EntityType:  cxsdk.EntityTypeAlerts,
-			Description: "This is a test Global Router.",
+			Description: "global router example",
 			Rules: []*cxsdk.RoutingRule{
 				{
 					Name:      &routingRuleName,
@@ -553,7 +553,7 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, getRes.Router.Name, "TestGlobalRouter")
+	assert.Equal(t, getRes.Router.Name, "global router")
 }
 
 func TestCreateAlertWithDestination(t *testing.T) {
