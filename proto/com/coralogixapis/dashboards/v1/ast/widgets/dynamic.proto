@@ -8,7 +8,6 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
-import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 
@@ -58,7 +57,7 @@ message Dynamic {
       common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type"}];
       repeated v1.ast.filters.Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
       repeated v1.common.SpanObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of fields to group the records by"}];
-      repeated v1.common.SpansAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
+      repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
     }
 
     message Metrics {
@@ -106,5 +105,7 @@ message Dynamic {
     INTERPRETATION_MULTI_VALUE_KPI_STAT = 8;
     INTERPRETATION_MULTI_VALUE_KPI_GAUGE = 9;
     INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS = 10;
+    INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART = 11;
+    INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS = 12;
   }
 }
