@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.coralogixapis.views.v1;
+
+enum ViewType {
+  VIEW_TYPE_UNSPECIFIED = 0;
+  VIEW_TYPE_LOGS = 1;
+  VIEW_TYPE_TEMPLATES = 2;
+  VIEW_TYPE_ARCHIVE_LOGS = 3;
+  VIEW_TYPE_ARCHIVE_TEMPLATES = 4;
+}

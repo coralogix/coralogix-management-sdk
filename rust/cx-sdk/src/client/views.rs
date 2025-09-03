@@ -96,6 +96,7 @@ impl ViewsClient {
                 time_selection: view.time_selection,
                 filters: view.filters,
                 folder_id: view.folder_id,
+                view_type: view.view_type,
             },
             &self.teams_level_metadata_map,
         );

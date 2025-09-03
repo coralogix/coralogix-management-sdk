@@ -118,13 +118,13 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto",
     "src/com/coralogixapis/alerts/v3/pagination.proto",
-    "src/com/coralogixapis/alerts/v3/alert_def_ordering.proto"
+    "src/com/coralogixapis/alerts/v3/alert_def_ordering.proto",
 ]
 
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = 'v1.8'
+revision = "v1.9"
 allow_policies = [
     "src/com/coralogixapis/views/v1/audit_log.proto",
     "src/com/coralogixapis/views/v1/filters.proto",
@@ -133,6 +133,7 @@ allow_policies = [
     "src/com/coralogixapis/views/v1/services/views_service.proto",
     "src/com/coralogixapis/views/v1/time_selection.proto",
     "src/com/coralogixapis/views/v1/view_folder.proto",
+    "src/com/coralogixapis/views/v1/view_type.proto",
 ]
 
 [cx-api-actions]
