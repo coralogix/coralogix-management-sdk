@@ -31,8 +31,10 @@ func TestActions(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewActionsClient(creator)
+	defer creator.CloseConnection()
 
 	action, e := c.Create(context.Background(), &cxsdk.CreateActionRequest{
 		Name:             wrapperspb.String("google search action " + strconv.FormatInt(time.Now().UnixMilli(), 10)),

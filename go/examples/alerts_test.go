@@ -295,8 +295,10 @@ func TestAlerts(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewAlertsClient(creator)
+	defer creator.CloseConnection()
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlert(),
@@ -343,7 +345,8 @@ func TestBurnRateSloAlerts(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	alertsClient := cxsdk.NewAlertsClient(creator)
 	slosClient := cxsdk.NewSLOsClient(creator)
 	sloDescription := "description"
@@ -419,7 +422,8 @@ func TestAlertGetsDeletedOnSloDeletion(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	alertsClient := cxsdk.NewAlertsClient(creator)
 	slosClient := cxsdk.NewSLOsClient(creator)
 	sloDescription := "description"
@@ -495,9 +499,11 @@ func TestAlertScheduler(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	a := cxsdk.NewAlertSchedulerClient(creator)
 	c := cxsdk.NewAlertsClient(creator)
+	defer creator.CloseConnection()
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
 		AlertDefProperties: CreateAlert(),

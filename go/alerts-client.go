@@ -763,6 +763,10 @@ type AlertsClient struct {
 	defaultLabels         map[string]string
 }
 
+func (a *AlertsClient) CloseConnection() {
+	a.callPropertiesCreator.CloseConnection()
+}
+
 // Create creates an alert.
 func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*alerts.CreateAlertDefResponse, error) {
 	callProperties, err := a.callPropertiesCreator.GetTeamsLevelCallProperties(ctx)

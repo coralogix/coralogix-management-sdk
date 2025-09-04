@@ -30,8 +30,10 @@ func TestEvents(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewEventsClient(creator)
+	defer creator.CloseConnection()
 
 	filter := &cxsdk.EventsFilter{
 		Timestamp: &cxsdk.EventsQueryFilterTimestampRange{

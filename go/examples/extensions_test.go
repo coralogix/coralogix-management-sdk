@@ -29,7 +29,8 @@ func TestExtensions(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	client := cxsdk.NewExtensionsClient(creator)
 
 	getAllExtensionsResponse, err := client.GetAll(context.Background(), &cxsdk.GetAllExtensionsRequest{

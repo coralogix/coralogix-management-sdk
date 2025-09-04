@@ -28,7 +28,8 @@ func TestEnrichmentsGeo(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	client := cxsdk.NewEnrichmentClient(creator)
 
 	withAsn := true
@@ -90,7 +91,8 @@ func TestEnrichmentsAws(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	client := cxsdk.NewEnrichmentClient(creator)
 	assert.Panics(t, func() {
 		enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
@@ -154,7 +156,8 @@ func TestEnrichmentsCustom(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	client := cxsdk.NewEnrichmentClient(creator)
 	assert.Panics(t, func() {
 		enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
@@ -216,7 +219,8 @@ func TestEnrichmentsSusIp(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	client := cxsdk.NewEnrichmentClient(creator)
 
 	enrichments, err := client.Add(context.Background(), &cxsdk.AddEnrichmentsRequest{
