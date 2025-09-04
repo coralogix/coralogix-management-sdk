@@ -145,7 +145,7 @@ func (c GroupsClient) Create(ctx context.Context, req *CreateTeamGroupRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.CreateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -163,7 +163,7 @@ func (c GroupsClient) Get(ctx context.Context, req *GetTeamGroupRequest) (*group
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.GetTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -181,7 +181,7 @@ func (c GroupsClient) List(ctx context.Context, req *GetTeamGroupsRequest) (*gro
 	}
 
 	conn := callPoperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.GetTeamGroups(callPoperties.Ctx, req, callPoperties.CallOptions...)
@@ -199,7 +199,7 @@ func (c GroupsClient) Update(ctx context.Context, req *UpdateTeamGroupRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.UpdateTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -217,7 +217,7 @@ func (c GroupsClient) Delete(ctx context.Context, req *DeleteTeamGroupRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.DeleteTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -235,7 +235,7 @@ func (c GroupsClient) AddUsers(ctx context.Context, req *AddUsersToTeamGroupRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.AddUsersToTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -253,7 +253,7 @@ func (c GroupsClient) RemoveUsers(ctx context.Context, req *RemoveUsersFromTeamG
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.RemoveUsersFromTeamGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -271,7 +271,7 @@ func (c GroupsClient) GetUsers(ctx context.Context, req *GetGroupUsersRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := groups.NewTeamPermissionsMgmtServiceClient(conn)
 
 	response, err := client.GetGroupUsers(callProperties.Ctx, req, callProperties.CallOptions...)

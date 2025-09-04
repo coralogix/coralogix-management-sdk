@@ -79,7 +79,7 @@ func (c ViewFoldersClient) Create(ctx context.Context, req *CreateViewFolderRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsFoldersServiceClient(conn)
 
 	response, err := client.CreateViewFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -97,7 +97,7 @@ func (c ViewFoldersClient) Get(ctx context.Context, req *GetViewFolderRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsFoldersServiceClient(conn)
 
 	response, err := client.GetViewFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -115,7 +115,7 @@ func (c ViewFoldersClient) List(ctx context.Context, req *ListViewFoldersRequest
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsFoldersServiceClient(conn)
 
 	response, err := client.ListViewFolders(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -133,7 +133,7 @@ func (c ViewFoldersClient) Replace(ctx context.Context, req *ReplaceViewFolderRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsFoldersServiceClient(conn)
 
 	response, err := client.ReplaceViewFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -151,7 +151,7 @@ func (c ViewFoldersClient) Delete(ctx context.Context, req *DeleteViewFolderRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsFoldersServiceClient(conn)
 
 	response, err := client.DeleteViewFolder(callProperties.Ctx, req, callProperties.CallOptions...)

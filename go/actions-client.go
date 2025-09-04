@@ -74,7 +74,7 @@ func (a ActionsClient) Create(ctx context.Context, req *CreateActionRequest) (*a
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := actions.NewActionsServiceClient(conn)
 
 	response, err := client.CreateAction(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -92,7 +92,7 @@ func (a ActionsClient) Get(ctx context.Context, req *GetActionRequest) (*actions
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := actions.NewActionsServiceClient(conn)
 
 	response, err := client.GetAction(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -110,7 +110,7 @@ func (a ActionsClient) Replace(ctx context.Context, req *ReplaceActionRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := actions.NewActionsServiceClient(conn)
 
 	response, err := client.ReplaceAction(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -128,7 +128,7 @@ func (a ActionsClient) Delete(ctx context.Context, req *DeleteActionRequest) (*a
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := actions.NewActionsServiceClient(conn)
 
 	response, err := client.DeleteAction(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -146,7 +146,7 @@ func (a ActionsClient) Order(ctx context.Context, req *actions.OrderActionsReque
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := actions.NewActionsServiceClient(conn)
 
 	response, err := client.OrderActions(callProperties.Ctx, req, callProperties.CallOptions...)

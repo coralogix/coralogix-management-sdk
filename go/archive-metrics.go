@@ -95,7 +95,7 @@ func (c ArchiveMetricsClient) Update(ctx context.Context, req *archiveMetrics.Up
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -113,7 +113,7 @@ func (c ArchiveMetricsClient) Get(ctx context.Context) (*archiveMetrics.GetTenan
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.GetTenantConfig(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
@@ -131,7 +131,7 @@ func (c ArchiveMetricsClient) ConfigureTenant(ctx context.Context, req *archiveM
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.ConfigureTenant(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -149,7 +149,7 @@ func (c ArchiveMetricsClient) ValidateTarget(ctx context.Context, req *archiveMe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.ValidateBucket(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -167,7 +167,7 @@ func (c ArchiveMetricsClient) Enable(ctx context.Context) (*emptypb.Empty, error
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.EnableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
@@ -185,7 +185,7 @@ func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, erro
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveMetrics.NewMetricsConfiguratorPublicServiceClient(conn)
 
 	response, err := client.DisableArchive(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)

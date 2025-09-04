@@ -359,7 +359,7 @@ func (c NotificationsClient) CreateConnector(ctx context.Context, req *CreateCon
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.CreateConnector(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -377,7 +377,7 @@ func (c NotificationsClient) ReplaceConnector(ctx context.Context, req *ReplaceC
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.ReplaceConnector(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -395,7 +395,7 @@ func (c NotificationsClient) DeleteConnector(ctx context.Context, req *DeleteCon
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.DeleteConnector(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -413,7 +413,7 @@ func (c NotificationsClient) GetConnector(ctx context.Context, req *GetConnector
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.GetConnector(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -431,7 +431,7 @@ func (c NotificationsClient) ListConnectors(ctx context.Context, req *ListConnec
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.ListConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -448,7 +448,7 @@ func (c NotificationsClient) BatchGetConnectors(ctx context.Context, req *BatchG
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.BatchGetConnectors(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -465,7 +465,7 @@ func (c NotificationsClient) GetConnectorTypeSummaries(ctx context.Context, req 
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := connectors.NewConnectorsServiceClient(conn)
 
 	response, err := client.GetConnectorTypeSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -482,7 +482,7 @@ func (c NotificationsClient) CreateCustomPreset(ctx context.Context, req *Create
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.CreateCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -499,7 +499,7 @@ func (c NotificationsClient) ReplaceCustomPreset(ctx context.Context, req *Repla
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.ReplaceCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -516,7 +516,7 @@ func (c NotificationsClient) DeleteCustomPreset(ctx context.Context, req *Delete
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.DeleteCustomPreset(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -533,7 +533,7 @@ func (c NotificationsClient) SetCustomPresetAsDefault(ctx context.Context, req *
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.SetCustomPresetAsDefault(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -550,7 +550,7 @@ func (c NotificationsClient) GetPreset(ctx context.Context, req *GetPresetReques
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.GetPreset(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -567,7 +567,7 @@ func (c NotificationsClient) ListPresetSummaries(ctx context.Context, req *ListP
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.ListPresetSummaries(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -584,7 +584,7 @@ func (c NotificationsClient) BatchGetPresets(ctx context.Context, req *BatchGetP
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.BatchGetPresets(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -601,7 +601,7 @@ func (c NotificationsClient) GetDefaultPresetSummary(ctx context.Context, req *G
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 	response, err := client.GetDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -617,7 +617,7 @@ func (c NotificationsClient) SetPresetAsDefault(ctx context.Context, req *SetPre
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.SetPresetAsDefault(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -634,7 +634,7 @@ func (c NotificationsClient) GetSystemDefaultPresetSummary(ctx context.Context, 
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := presets.NewPresetsServiceClient(conn)
 
 	response, err := client.GetSystemDefaultPresetSummary(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -651,7 +651,7 @@ func (c NotificationsClient) CreateOrReplaceGlobalRouter(ctx context.Context, re
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := routers.NewGlobalRoutersServiceClient(conn)
 
 	response, err := client.CreateOrReplaceGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -668,7 +668,7 @@ func (c NotificationsClient) DeleteGlobalRouter(ctx context.Context, req *Delete
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := routers.NewGlobalRoutersServiceClient(conn)
 	response, err := client.DeleteGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -684,7 +684,7 @@ func (c NotificationsClient) GetGlobalRouter(ctx context.Context, req *GetGlobal
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := routers.NewGlobalRoutersServiceClient(conn)
 
 	response, err := client.GetGlobalRouter(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -701,7 +701,7 @@ func (c NotificationsClient) ListGlobalRouters(ctx context.Context, req *ListGlo
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := routers.NewGlobalRoutersServiceClient(conn)
 
 	response, err := client.ListGlobalRouters(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -718,7 +718,7 @@ func (c NotificationsClient) BatchGetGlobalRouters(ctx context.Context, req *Bat
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := routers.NewGlobalRoutersServiceClient(conn)
 
 	response, err := client.BatchGetGlobalRouters(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -736,7 +736,7 @@ func (c NotificationsClient) TestConnectorConfig(ctx context.Context, req *TestC
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestConnectorConfig(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -754,7 +754,7 @@ func (c NotificationsClient) TestExistingConnector(ctx context.Context, req *Tes
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestExistingConnector(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -772,7 +772,7 @@ func (c NotificationsClient) TestPresetConfig(ctx context.Context, req *TestPres
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestPresetConfig(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -790,7 +790,7 @@ func (c NotificationsClient) TestExistingPresetConfig(ctx context.Context, req *
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestExistingPreset(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -808,7 +808,7 @@ func (c NotificationsClient) TestTemplateRender(ctx context.Context, req *TestTe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestTemplateRender(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -826,7 +826,7 @@ func (c NotificationsClient) TestDestination(ctx context.Context, req *TestDesti
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestDestination(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -844,7 +844,7 @@ func (c NotificationsClient) TestRoutingConditionValid(ctx context.Context, req 
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := notifications.NewTestingServiceClient(conn)
 
 	response, err := client.TestRoutingConditionValid(callProperties.Ctx, req, callProperties.CallOptions...)

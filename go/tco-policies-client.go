@@ -180,7 +180,7 @@ func (t TCOPoliciesClient) Create(ctx context.Context, req *CreatePolicyRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.CreatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -198,7 +198,7 @@ func (t TCOPoliciesClient) Get(ctx context.Context, req *GetPolicyRequest) (*tco
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.GetPolicy(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -216,7 +216,7 @@ func (t TCOPoliciesClient) OverwriteTCOTracesPolicies(ctx context.Context, req *
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.AtomicOverwriteSpanPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -234,7 +234,7 @@ func (t TCOPoliciesClient) Update(ctx context.Context, req *UpdatePolicyRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.UpdatePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -252,7 +252,7 @@ func (t TCOPoliciesClient) OverwriteTCOLogsPolicies(ctx context.Context, req *tc
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.AtomicOverwriteLogPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -270,7 +270,7 @@ func (t TCOPoliciesClient) Delete(ctx context.Context, req *DeletePolicyRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.DeletePolicy(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -288,7 +288,7 @@ func (t TCOPoliciesClient) Reorder(ctx context.Context, req *ReorderPoliciesRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.ReorderPolicies(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -306,7 +306,7 @@ func (t TCOPoliciesClient) List(ctx context.Context, req *GetCompanyPoliciesRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := tcopolicies.NewPoliciesServiceClient(conn)
 
 	response, err := client.GetCompanyPolicies(callProperties.Ctx, req, callProperties.CallOptions...)

@@ -771,7 +771,7 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
 		if req.AlertDefProperties.EntityLabels == nil {
@@ -797,7 +797,7 @@ func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.GetAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -815,7 +815,7 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
 		if req.AlertDefProperties.EntityLabels == nil {
@@ -841,7 +841,7 @@ func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.DeleteAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -860,7 +860,7 @@ func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.S
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -878,7 +878,7 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.ListAlertDefs(callProperties.Ctx, req, callProperties.CallOptions...)

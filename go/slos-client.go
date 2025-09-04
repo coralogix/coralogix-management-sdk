@@ -165,7 +165,7 @@ func (c SLOsClient) Create(ctx context.Context, req *slos.CreateSloRequest) (*sl
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.CreateSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -183,7 +183,7 @@ func (c SLOsClient) Get(ctx context.Context, req *slos.GetSloRequest) (*slos.Get
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.GetSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -201,7 +201,7 @@ func (c SLOsClient) Update(ctx context.Context, req *slos.ReplaceSloRequest) (*s
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.ReplaceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -219,7 +219,7 @@ func (c SLOsClient) Delete(ctx context.Context, req *slos.DeleteSloRequest) (*sl
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.DeleteSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -237,7 +237,7 @@ func (c SLOsClient) GetBulk(ctx context.Context, req *slos.BatchGetSlosRequest) 
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.BatchGetSlos(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -255,7 +255,7 @@ func (c SLOsClient) List(ctx context.Context, req *slos.ListSlosRequest) (*slos.
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := slos.NewSlosServiceClient(conn)
 
 	response, err := client.ListSlos(callProperties.Ctx, req, callProperties.CallOptions...)

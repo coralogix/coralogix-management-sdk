@@ -64,7 +64,7 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *SetTargetRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveLogs.NewS3TargetServiceClient(conn)
 
 	response, err := client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -82,7 +82,7 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*GetTargetResponse, error) 
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveLogs.NewS3TargetServiceClient(conn)
 
 	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.S3TargetServiceGetTargetRequest{}, callProperties.CallOptions...)

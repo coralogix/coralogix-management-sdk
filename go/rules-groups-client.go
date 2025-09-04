@@ -210,7 +210,7 @@ func (r RuleGroupsClient) Create(ctx context.Context, req *CreateRuleGroupReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	response, err := client.CreateRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -228,7 +228,7 @@ func (r RuleGroupsClient) Get(ctx context.Context, req *GetRuleGroupRequest) (*r
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
 	response, err := client.GetRuleGroup(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -246,7 +246,6 @@ func (r RuleGroupsClient) Update(ctx context.Context, req *UpdateRuleGroupReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 
@@ -265,7 +264,6 @@ func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := rulegroups.NewRuleGroupsServiceClient(conn)
 

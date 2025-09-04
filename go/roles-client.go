@@ -71,7 +71,7 @@ func (r RolesClient) Create(ctx context.Context, req *CreateRoleRequest) (*roles
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := roles.NewRoleManagementServiceClient(conn)
 
 	response, err := client.CreateRole(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -88,7 +88,6 @@ func (r RolesClient) Update(ctx context.Context, req *UpdateRoleRequest) (*roles
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := roles.NewRoleManagementServiceClient(conn)
 
@@ -106,7 +105,6 @@ func (r RolesClient) Delete(ctx context.Context, req *DeleteRoleRequest) (*roles
 		return nil, err
 	}
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := roles.NewRoleManagementServiceClient(conn)
 
@@ -125,7 +123,7 @@ func (r RolesClient) Get(ctx context.Context, req *GetCustomRoleRequest) (*roles
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := roles.NewRoleManagementServiceClient(conn)
 
 	response, err := client.GetCustomRole(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -143,7 +141,7 @@ func (r RolesClient) List(ctx context.Context, req *ListCustomRolesRequest) (*ro
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := roles.NewRoleManagementServiceClient(conn)
 
 	response, err := client.ListCustomRoles(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -161,7 +159,7 @@ func (r RolesClient) ListSystemRoles(ctx context.Context, req *ListSystemRolesRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := roles.NewRoleManagementServiceClient(conn)
 
 	response, err := client.ListSystemRoles(callProperties.Ctx, req, callProperties.CallOptions...)

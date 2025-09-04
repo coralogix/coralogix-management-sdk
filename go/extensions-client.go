@@ -101,7 +101,7 @@ func (e ExtensionsClient) GetAll(ctx context.Context, req *GetAllExtensionsReque
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionServiceClient(conn)
 
 	response, err := client.GetAllExtensions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -119,7 +119,7 @@ func (e ExtensionsClient) Get(ctx context.Context, req *GetExtensionRequest) (*G
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionServiceClient(conn)
 
 	response, err := client.GetExtension(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -137,7 +137,7 @@ func (e ExtensionsClient) GetDeployed(ctx context.Context, req *GetDeployedExten
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionDeploymentServiceClient(conn)
 
 	response, err := client.GetDeployedExtensions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -155,7 +155,7 @@ func (e ExtensionsClient) Deploy(ctx context.Context, req *DeployExtensionReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionDeploymentServiceClient(conn)
 
 	response, err := client.DeployExtension(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -173,7 +173,7 @@ func (e ExtensionsClient) Undeploy(ctx context.Context, req *UndeployExtensionRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionDeploymentServiceClient(conn)
 
 	response, err := client.UndeployExtension(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -191,7 +191,7 @@ func (e ExtensionsClient) Update(ctx context.Context, req *UpdateExtensionReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := extensions.NewExtensionDeploymentServiceClient(conn)
 
 	response, err := client.UpdateExtension(callProperties.Ctx, req, callProperties.CallOptions...)

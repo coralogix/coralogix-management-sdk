@@ -118,7 +118,7 @@ func (c LegacySLOsClient) Create(ctx context.Context, req *legacySlos.CreateServ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.CreateServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -136,7 +136,7 @@ func (c LegacySLOsClient) Get(ctx context.Context, req *legacySlos.GetServiceSlo
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.GetServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -154,7 +154,7 @@ func (c LegacySLOsClient) Update(ctx context.Context, req *legacySlos.ReplaceSer
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.ReplaceServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -172,7 +172,7 @@ func (c LegacySLOsClient) Delete(ctx context.Context, req *legacySlos.DeleteServ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.DeleteServiceSlo(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -190,7 +190,7 @@ func (c LegacySLOsClient) GetBulk(ctx context.Context, req *legacySlos.BatchGetS
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.BatchGetServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -208,7 +208,7 @@ func (c LegacySLOsClient) List(ctx context.Context, req *legacySlos.ListServiceS
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := legacySlos.NewServiceSloServiceClient(conn)
 
 	response, err := client.ListServiceSlos(callProperties.Ctx, req, callProperties.CallOptions...)

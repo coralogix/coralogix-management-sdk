@@ -61,7 +61,7 @@ func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.GetRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -79,7 +79,7 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentio
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.UpdateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -102,7 +102,7 @@ func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRete
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.ActivateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -120,7 +120,7 @@ func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetenti
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.GetRetentionsEnabled(callProperties.Ctx, req, callProperties.CallOptions...)

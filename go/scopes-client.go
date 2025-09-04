@@ -81,7 +81,7 @@ func (c ScopesClient) Create(ctx context.Context, req *CreateScopeRequest) (*sco
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scopes.NewScopesServiceClient(conn)
 
 	response, err := client.CreateScope(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -99,7 +99,7 @@ func (c ScopesClient) Get(ctx context.Context, req *GetTeamScopesByIDsRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scopes.NewScopesServiceClient(conn)
 
 	response, err := client.GetTeamScopesByIds(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -117,7 +117,7 @@ func (c ScopesClient) List(ctx context.Context, req *GetTeamScopesRequest) (*sco
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scopes.NewScopesServiceClient(conn)
 
 	response, err := client.GetTeamScopes(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -135,7 +135,7 @@ func (c ScopesClient) Update(ctx context.Context, req *UpdateScopeRequest) (*sco
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scopes.NewScopesServiceClient(conn)
 
 	response, err := client.UpdateScope(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -153,7 +153,7 @@ func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*sco
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scopes.NewScopesServiceClient(conn)
 
 	response, err := client.DeleteScope(callProperties.Ctx, req, callProperties.CallOptions...)

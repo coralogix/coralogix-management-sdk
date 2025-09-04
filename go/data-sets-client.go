@@ -73,7 +73,6 @@ func (d DataSetClient) Create(ctx context.Context, req *CreateDataSetRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
@@ -92,7 +91,6 @@ func (d DataSetClient) Get(ctx context.Context, req *GetDataSetRequest) (*enrich
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
@@ -111,7 +109,6 @@ func (d DataSetClient) Update(ctx context.Context, req *UpdateDataSetRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
@@ -130,7 +127,6 @@ func (d DataSetClient) Delete(ctx context.Context, req *DeleteDataSetRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 
@@ -145,7 +141,6 @@ func (d DataSetClient) List(ctx context.Context, req *ListDataSetsRequest) (*enr
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewCustomEnrichmentServiceClient(conn)
 

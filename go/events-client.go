@@ -129,7 +129,7 @@ func (e EventsClient) Get(ctx context.Context, req *GetEventRequest) (*GetEventR
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := events.NewEventsServiceClient(conn)
 
 	response, err := client.GetEvent(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -147,7 +147,7 @@ func (e EventsClient) BatchGet(ctx context.Context, req *BatchGetEventRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := events.NewEventsServiceClient(conn)
 
 	response, err := client.BatchGetEvent(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -165,7 +165,7 @@ func (e EventsClient) GetStatistics(ctx context.Context, req *GetEventsStatistic
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := events.NewEventsServiceClient(conn)
 
 	response, err := client.GetEventsStatistics(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -183,7 +183,7 @@ func (e EventsClient) List(ctx context.Context, req *ListEventsRequest) (*ListEv
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := events.NewEventsServiceClient(conn)
 
 	response, err := client.ListEvents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -201,7 +201,7 @@ func (e EventsClient) ListCount(ctx context.Context, req *ListEventsCountRequest
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := events.NewEventsServiceClient(conn)
 
 	response, err := client.ListEventsCount(callProperties.Ctx, req, callProperties.CallOptions...)

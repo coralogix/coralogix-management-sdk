@@ -77,7 +77,7 @@ func (r RecordingRuleGroupSetsClient) Create(ctx context.Context, req *CreateRul
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
 	response, err := client.Create(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -95,7 +95,7 @@ func (r RecordingRuleGroupSetsClient) Update(ctx context.Context, req *UpdateRul
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
 	response, err := client.Update(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -113,7 +113,7 @@ func (r RecordingRuleGroupSetsClient) Delete(ctx context.Context, req *DeleteRul
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
 	response, err := client.Delete(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -131,7 +131,7 @@ func (r RecordingRuleGroupSetsClient) Get(ctx context.Context, req *GetRuleGroup
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
 	response, err := client.Fetch(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -149,7 +149,7 @@ func (r RecordingRuleGroupSetsClient) List(ctx context.Context) (*ListRuleGroupS
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := recordingRuleGroups.NewRuleGroupSetsClient(conn)
 
 	response, err := client.List(callProperties.Ctx, &emptypb.Empty{}, callProperties.CallOptions...)
