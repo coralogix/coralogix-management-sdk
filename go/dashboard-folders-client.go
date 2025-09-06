@@ -52,7 +52,7 @@ const (
 
 // DashboardsFoldersClient is a client for the Coralogix Dashboards Folders API.
 type DashboardsFoldersClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new dashboard folder.
@@ -63,7 +63,7 @@ func (c DashboardsFoldersClient) Create(ctx context.Context, req *CreateDashboar
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.CreateDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -81,7 +81,7 @@ func (c DashboardsFoldersClient) Get(ctx context.Context, req *GetDashboardFolde
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.GetDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -99,7 +99,7 @@ func (c DashboardsFoldersClient) List(ctx context.Context) (*services.ListDashbo
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.ListDashboardFolders(callProperties.Ctx, &services.ListDashboardFoldersRequest{}, callProperties.CallOptions...)
@@ -117,7 +117,7 @@ func (c DashboardsFoldersClient) Replace(ctx context.Context, req *ReplaceDashbo
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.ReplaceDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -135,7 +135,7 @@ func (c DashboardsFoldersClient) Delete(ctx context.Context, req *DeleteDashboar
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardFoldersServiceClient(conn)
 
 	response, err := client.DeleteDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -146,6 +146,6 @@ func (c DashboardsFoldersClient) Delete(ctx context.Context, req *DeleteDashboar
 }
 
 // NewDashboardsFoldersClient Creates a new DashboardsFoldersClient.
-func NewDashboardsFoldersClient(c *CallPropertiesCreator) *DashboardsFoldersClient {
+func NewDashboardsFoldersClient(c CallPropertiesCreator) *DashboardsFoldersClient {
 	return &DashboardsFoldersClient{callPropertiesCreator: c}
 }

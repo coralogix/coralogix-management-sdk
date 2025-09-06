@@ -33,8 +33,10 @@ func TestDashboards(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewDashboardsClient(creator)
+	defer creator.CloseConnection()
 	dat, err := os.ReadFile("dashboard.json")
 	assertNilAndPrintError(t, err)
 	var d cxsdk.Dashboard
@@ -80,8 +82,10 @@ func TestDashboardFolders(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewDashboardsFoldersClient(creator)
+	defer creator.CloseConnection()
 
 	id := uuid.New().String()
 

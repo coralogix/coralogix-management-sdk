@@ -70,7 +70,7 @@ func (c IPAccessClient) Create(ctx context.Context, req *CreateCompanyIPAccessSe
 	}
 
 	conn := callProps.Connection
-	defer conn.Close()
+
 	client := ipaccess.NewIpAccessServiceClient(conn)
 
 	res, err := client.CreateCompanyIpAccessSettings(callProps.Ctx, req, callProps.CallOptions...)
@@ -88,7 +88,7 @@ func (c IPAccessClient) Replace(ctx context.Context, req *ReplaceCompanyIPAccess
 	}
 
 	conn := callProps.Connection
-	defer conn.Close()
+
 	client := ipaccess.NewIpAccessServiceClient(conn)
 
 	res, err := client.ReplaceCompanyIpAccessSettings(callProps.Ctx, req, callProps.CallOptions...)
@@ -106,7 +106,7 @@ func (c IPAccessClient) Get(ctx context.Context, req *GetCompanyIPAccessSettings
 	}
 
 	conn := callProps.Connection
-	defer conn.Close()
+
 	client := ipaccess.NewIpAccessServiceClient(conn)
 
 	res, err := client.GetCompanyIpAccessSettings(callProps.Ctx, req, callProps.CallOptions...)
@@ -124,7 +124,7 @@ func (c IPAccessClient) Delete(ctx context.Context, req *DeleteCompanyIPAccessSe
 	}
 
 	conn := callProps.Connection
-	defer conn.Close()
+
 	client := ipaccess.NewIpAccessServiceClient(conn)
 
 	res, err := client.DeleteCompanyIpAccessSettings(callProps.Ctx, req, callProps.CallOptions...)
@@ -136,10 +136,10 @@ func (c IPAccessClient) Delete(ctx context.Context, req *DeleteCompanyIPAccessSe
 
 // IPAccessClient is a client for the Coralogix IP Access API.
 type IPAccessClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // NewIPAccessClient creates a new IP Access client.
-func NewIPAccessClient(c *CallPropertiesCreator) *IPAccessClient {
+func NewIPAccessClient(c CallPropertiesCreator) *IPAccessClient {
 	return &IPAccessClient{callPropertiesCreator: c}
 }

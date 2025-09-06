@@ -30,7 +30,8 @@ func TestHttpsConnector(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	name := fmt.Sprintf("TestConnector-%v", uuid.NewString())
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeGenericHTTPS,
@@ -54,6 +55,7 @@ func TestHttpsConnector(t *testing.T) {
 
 	entityType := cxsdk.EntityTypeAlerts
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
 		PayloadType: "generic_https_default",
 		Type:        connectorRaw.Type,
@@ -112,7 +114,8 @@ func TestSlackConnector(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypeSlack,
@@ -137,6 +140,7 @@ func TestSlackConnector(t *testing.T) {
 
 	entityType := cxsdk.EntityTypeAlerts
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 	success, err := c.TestConnectorConfig(context.Background(), &cxsdk.TestConnectorConfigRequest{
 		PayloadType: "slack_raw",
 		Type:        connectorRaw.Type,
@@ -195,7 +199,8 @@ func TestPagerdutyConnector(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	connectorRaw := cxsdk.Connector{
 		Type:        cxsdk.ConnectorTypePagerDuty,
@@ -217,6 +222,7 @@ func TestPagerdutyConnector(t *testing.T) {
 	}
 
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 
 	createRes, err := c.CreateConnector(context.Background(), &cxsdk.CreateConnectorRequest{
 		Connector: &connectorRaw,
@@ -255,9 +261,11 @@ func TestHttpsPreset(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 	newPreset := CreateHttpsPreset("TestGoHttpsPreset")
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: newPreset,
@@ -310,9 +318,11 @@ func TestSlackPreset(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 	newPreset := CreateSlackPreset("TestGoSlackPreset")
 
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
@@ -366,9 +376,11 @@ func TestPagerdutyPreset(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewNotificationsClient(creator)
+	defer creator.CloseConnection()
 	newPreset := CreatePagerDutyPreset("TestPagerDutyPreset")
 	createRes, err := c.CreateCustomPreset(context.Background(), &cxsdk.CreateCustomPresetRequest{
 		Preset: newPreset,
@@ -421,7 +433,8 @@ func TestGlobalRouter(t *testing.T) {
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assert.Nil(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	notificationCenterClient := cxsdk.NewNotificationsClient(creator)
 	alertsClient := cxsdk.NewAlertsClient(creator)
@@ -562,7 +575,8 @@ func TestCreateAlertWithDestination(t *testing.T) {
 	assert.Nil(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assert.Nil(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	alertsClient := cxsdk.NewAlertsClient(creator)
 

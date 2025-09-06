@@ -85,7 +85,7 @@ const (
 
 // EnrichmentsClient is a client for the Coralogix Enrichments API.
 type EnrichmentsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Add creates a new enrichment.
@@ -96,7 +96,7 @@ func (e EnrichmentsClient) Add(ctx context.Context, req *AddEnrichmentsRequest) 
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
 	response, err := client.AddEnrichments(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -114,7 +114,6 @@ func (e EnrichmentsClient) Delete(ctx context.Context, req *DeleteEnrichmentsReq
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
@@ -133,7 +132,6 @@ func (e EnrichmentsClient) List(ctx context.Context, req *GetEnrichmentsRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
@@ -152,7 +150,6 @@ func (e EnrichmentsClient) GetLimits(ctx context.Context) (*enrichment.GetEnrich
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
@@ -171,7 +168,6 @@ func (e EnrichmentsClient) GetCompanyEnrichmentSettings(ctx context.Context) (*e
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
@@ -190,7 +186,6 @@ func (e EnrichmentsClient) Update(ctx context.Context, request *AtomicOverwriteE
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
 
 	client := enrichment.NewEnrichmentServiceClient(conn)
 
@@ -202,6 +197,6 @@ func (e EnrichmentsClient) Update(ctx context.Context, request *AtomicOverwriteE
 }
 
 // NewEnrichmentClient creates a new enrichments client.
-func NewEnrichmentClient(c *CallPropertiesCreator) *EnrichmentsClient {
+func NewEnrichmentClient(c CallPropertiesCreator) *EnrichmentsClient {
 	return &EnrichmentsClient{callPropertiesCreator: c}
 }

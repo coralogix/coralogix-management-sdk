@@ -30,7 +30,7 @@ import (
 
 // DashboardsClient is a client for the Coralogix Dashboards API.
 type DashboardsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // CreateDashboardRequest is a request to create a dashboard.
@@ -1219,7 +1219,7 @@ func (d DashboardsClient) Create(ctx context.Context, req *CreateDashboardReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.CreateDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1237,7 +1237,7 @@ func (d DashboardsClient) Get(ctx context.Context, req *GetDashboardRequest) (*s
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.GetDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1255,7 +1255,7 @@ func (d DashboardsClient) List(ctx context.Context) (*services.GetDashboardCatal
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardCatalogServiceClient(conn)
 
 	response, err := client.GetDashboardCatalog(callProperties.Ctx, &services.GetDashboardCatalogRequest{}, callProperties.CallOptions...)
@@ -1273,7 +1273,7 @@ func (d DashboardsClient) Replace(ctx context.Context, req *ReplaceDashboardRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 	response, err := client.ReplaceDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -1290,7 +1290,7 @@ func (d DashboardsClient) Delete(ctx context.Context, req *DeleteDashboardReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.DeleteDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1308,7 +1308,7 @@ func (d DashboardsClient) Pin(ctx context.Context, req *PinDashboardRequest) (*s
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.PinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1326,7 +1326,7 @@ func (d DashboardsClient) Unpin(ctx context.Context, req *UnpinDashboardRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.UnpinDashboard(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1344,7 +1344,7 @@ func (d DashboardsClient) AssignToFolder(ctx context.Context, req *AssignDashboa
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := services.NewDashboardsServiceClient(conn)
 
 	response, err := client.AssignDashboardFolder(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -1355,6 +1355,6 @@ func (d DashboardsClient) AssignToFolder(ctx context.Context, req *AssignDashboa
 }
 
 // NewDashboardsClient creates a new DashboardsClient.
-func NewDashboardsClient(c *CallPropertiesCreator) *DashboardsClient {
+func NewDashboardsClient(c CallPropertiesCreator) *DashboardsClient {
 	return &DashboardsClient{callPropertiesCreator: c}
 }

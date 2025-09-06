@@ -207,7 +207,7 @@ const (
 
 // IncidentsClient is a client for the Incidents service
 type IncidentsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // GetIncident gets an incident by its ID
@@ -218,7 +218,7 @@ func (c IncidentsClient) GetIncident(ctx context.Context, req *GetIncidentReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.GetIncident(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -236,7 +236,7 @@ func (c IncidentsClient) BatchGetIncident(ctx context.Context, req *BatchGetInci
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.BatchGetIncident(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -254,7 +254,7 @@ func (c IncidentsClient) ListIncidents(ctx context.Context, req *ListIncidentsRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ListIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -272,7 +272,7 @@ func (c IncidentsClient) ListIncidentAggregations(ctx context.Context, req *List
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ListIncidentAggregations(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -290,7 +290,7 @@ func (c IncidentsClient) GetFilterValues(ctx context.Context, req *GetFilterValu
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.GetFilterValues(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -308,7 +308,7 @@ func (c IncidentsClient) AssignIncidents(ctx context.Context, req *AssignInciden
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.AssignIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -326,7 +326,7 @@ func (c IncidentsClient) UnassignIncidents(ctx context.Context, req *UnassignInc
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.UnassignIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -344,7 +344,7 @@ func (c IncidentsClient) AcknowledgeIncidents(ctx context.Context, req *Acknowle
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.AcknowledgeIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -362,7 +362,7 @@ func (c IncidentsClient) CloseIncidents(ctx context.Context, req *CloseIncidents
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.CloseIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -380,7 +380,7 @@ func (c IncidentsClient) GetIncidentEvents(ctx context.Context, req *GetIncident
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.GetIncidentEvents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -398,7 +398,7 @@ func (c IncidentsClient) ResolveIncidents(ctx context.Context, req *ResolveIncid
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ResolveIncidents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -416,7 +416,7 @@ func (c IncidentsClient) GetIncidentUsingCorrelationKey(ctx context.Context, req
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.GetIncidentUsingCorrelationKey(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -434,7 +434,7 @@ func (c IncidentsClient) ListIncidentEvents(ctx context.Context, req *ListIncide
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ListIncidentEvents(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -452,7 +452,7 @@ func (c IncidentsClient) ListIncidentEventsTotalCount(ctx context.Context, req *
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ListIncidentEventsTotalCount(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -470,7 +470,7 @@ func (c IncidentsClient) ListIncidentEventsFilterValues(ctx context.Context, req
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := incidents.NewIncidentsServiceClient(conn)
 
 	response, err := client.ListIncidentEventsFilterValues(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -481,7 +481,7 @@ func (c IncidentsClient) ListIncidentEventsFilterValues(ctx context.Context, req
 }
 
 // NewIncidentsClient creates a new IncidentsClient
-func NewIncidentsClient(creator *CallPropertiesCreator) *IncidentsClient {
+func NewIncidentsClient(creator CallPropertiesCreator) *IncidentsClient {
 	return &IncidentsClient{
 		callPropertiesCreator: creator,
 	}

@@ -54,7 +54,7 @@ const samlFeatureGroupID = "aaa"
 
 // SamlClient is a client for the Coralogix SAML API.
 type SamlClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // GetSPParameters returns the SAML service provider parameters for a given team.
@@ -65,7 +65,7 @@ func (s SamlClient) GetSPParameters(ctx context.Context, req *saml.GetSPParamete
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
 	response, err := client.GetSPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -83,7 +83,7 @@ func (s SamlClient) SetIDPParameters(cxt context.Context, req *saml.SetIDPParame
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
 	response, err := client.SetIDPParameters(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -101,7 +101,7 @@ func (s SamlClient) SetActive(ctx context.Context, req *saml.SetActiveRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
 	response, err := client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -119,7 +119,7 @@ func (s SamlClient) GetConfiguration(ctx context.Context, req *saml.GetConfigura
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := saml.NewSamlConfigurationServiceClient(conn)
 
 	response, err := client.GetConfiguration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -130,6 +130,6 @@ func (s SamlClient) GetConfiguration(ctx context.Context, req *saml.GetConfigura
 }
 
 // NewSamlClient creates a new SAML client.
-func NewSamlClient(callPropertiesCreator *CallPropertiesCreator) *SamlClient {
+func NewSamlClient(callPropertiesCreator CallPropertiesCreator) *SamlClient {
 	return &SamlClient{callPropertiesCreator: callPropertiesCreator}
 }

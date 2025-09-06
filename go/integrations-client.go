@@ -119,7 +119,7 @@ const (
 
 // IntegrationsClient is a client for the Coralogix Extensions API.
 type IntegrationsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new integration.
@@ -130,7 +130,7 @@ func (c IntegrationsClient) Create(ctx context.Context, req *SaveIntegrationRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.SaveIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -148,7 +148,7 @@ func (c IntegrationsClient) Update(ctx context.Context, req *UpdateIntegrationRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.UpdateIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -166,7 +166,7 @@ func (c IntegrationsClient) GetDetails(ctx context.Context, req *GetIntegrationD
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetIntegrationDetails(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -184,7 +184,7 @@ func (c IntegrationsClient) Get(ctx context.Context, req *ext.GetDeployedIntegra
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetDeployedIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -202,7 +202,7 @@ func (c IntegrationsClient) GetDefinition(ctx context.Context, req *GetIntegrati
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetIntegrationDefinition(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -220,7 +220,7 @@ func (c IntegrationsClient) GetIntegrationStatus(ctx context.Context, req *GetMa
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetManagedIntegrationStatus(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -238,7 +238,7 @@ func (c IntegrationsClient) Delete(ctx context.Context, req *DeleteIntegrationRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.DeleteIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -256,7 +256,7 @@ func (c IntegrationsClient) GetTemplate(ctx context.Context, req *GetTemplateReq
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetTemplate(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -274,7 +274,7 @@ func (c IntegrationsClient) GetRumApplicationVersionData(ctx context.Context, re
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.GetRumApplicationVersionData(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -292,7 +292,7 @@ func (c IntegrationsClient) SyncRumData(ctx context.Context, req *SyncRumDataReq
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.SyncRumData(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -310,7 +310,7 @@ func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := ext.NewIntegrationServiceClient(conn)
 
 	response, err := client.TestIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -321,6 +321,6 @@ func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationReques
 }
 
 // NewIntegrationsClient creates a new client.
-func NewIntegrationsClient(c *CallPropertiesCreator) *IntegrationsClient {
+func NewIntegrationsClient(c CallPropertiesCreator) *IntegrationsClient {
 	return &IntegrationsClient{callPropertiesCreator: c}
 }

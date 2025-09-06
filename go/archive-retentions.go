@@ -50,7 +50,7 @@ const (
 
 // ArchiveRetentionsClient is a client for the Coralogix Archive Retentions API.
 type ArchiveRetentionsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Get gets the archive retentions.
@@ -61,7 +61,7 @@ func (c ArchiveRetentionsClient) Get(ctx context.Context, req *archiveRetention.
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.GetRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -79,7 +79,7 @@ func (c ArchiveRetentionsClient) Update(ctx context.Context, req *UpdateRetentio
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.UpdateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -102,7 +102,7 @@ func (c ArchiveRetentionsClient) Activate(ctx context.Context, req *ActivateRete
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.ActivateRetentions(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -120,7 +120,7 @@ func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetenti
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveRetention.NewRetentionsServiceClient(conn)
 
 	response, err := client.GetRetentionsEnabled(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -132,6 +132,6 @@ func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetenti
 }
 
 // NewArchiveRetentionsClient Creates a new archive retentions client.
-func NewArchiveRetentionsClient(c *CallPropertiesCreator) *ArchiveRetentionsClient {
+func NewArchiveRetentionsClient(c CallPropertiesCreator) *ArchiveRetentionsClient {
 	return &ArchiveRetentionsClient{callPropertiesCreator: c}
 }

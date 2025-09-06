@@ -168,7 +168,7 @@ const (
 
 // AlertSchedulerClient is a client for the Coralogix Alerts API.
 type AlertSchedulerClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new alert scheduler.
@@ -179,7 +179,7 @@ func (c AlertSchedulerClient) Create(ctx context.Context, req *scheduler.CreateA
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.CreateAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -197,7 +197,7 @@ func (c AlertSchedulerClient) Get(ctx context.Context, req *scheduler.GetAlertSc
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.GetAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -215,7 +215,7 @@ func (c AlertSchedulerClient) Update(ctx context.Context, req *scheduler.UpdateA
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.UpdateAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -233,7 +233,7 @@ func (c AlertSchedulerClient) Delete(ctx context.Context, req *scheduler.DeleteA
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 	response, err := client.DeleteAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
 
@@ -251,7 +251,7 @@ func (c AlertSchedulerClient) CreateBulk(ctx context.Context, req *scheduler.Cre
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.CreateBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -269,7 +269,7 @@ func (c AlertSchedulerClient) UpdateBulk(ctx context.Context, req *scheduler.Upd
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.UpdateBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -287,7 +287,7 @@ func (c AlertSchedulerClient) GetBulk(ctx context.Context, req *scheduler.GetBul
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := scheduler.NewAlertSchedulerRuleServiceClient(conn)
 
 	response, err := client.GetBulkAlertSchedulerRule(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -298,6 +298,6 @@ func (c AlertSchedulerClient) GetBulk(ctx context.Context, req *scheduler.GetBul
 }
 
 // NewAlertSchedulerClient creates a new alerts scheduler client.
-func NewAlertSchedulerClient(c *CallPropertiesCreator) *AlertSchedulerClient {
+func NewAlertSchedulerClient(c CallPropertiesCreator) *AlertSchedulerClient {
 	return &AlertSchedulerClient{callPropertiesCreator: c}
 }

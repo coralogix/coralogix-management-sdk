@@ -77,7 +77,7 @@ const (
 
 // ApikeysClient is a client for the Coralogix API keys API.
 type ApikeysClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new API key.
@@ -88,7 +88,7 @@ func (t ApikeysClient) Create(ctx context.Context, req *apikeys.CreateApiKeyRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := apikeys.NewApiKeysServiceClient(conn)
 
 	response, err := client.CreateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -106,7 +106,7 @@ func (t ApikeysClient) Get(ctx context.Context, req *apikeys.GetApiKeyRequest) (
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := apikeys.NewApiKeysServiceClient(conn)
 
 	response, err := client.GetApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -124,7 +124,7 @@ func (t ApikeysClient) Update(ctx context.Context, req *apikeys.UpdateApiKeyRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := apikeys.NewApiKeysServiceClient(conn)
 
 	response, err := client.UpdateApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -142,7 +142,7 @@ func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequ
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := apikeys.NewApiKeysServiceClient(conn)
 
 	response, err := client.DeleteApiKey(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -153,6 +153,6 @@ func (t ApikeysClient) Delete(ctx context.Context, req *apikeys.DeleteApiKeyRequ
 }
 
 // NewAPIKeysClient creates a new API keys client.
-func NewAPIKeysClient(c *CallPropertiesCreator) *ApikeysClient {
+func NewAPIKeysClient(c CallPropertiesCreator) *ApikeysClient {
 	return &ApikeysClient{callPropertiesCreator: c}
 }

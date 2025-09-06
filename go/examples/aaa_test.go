@@ -31,7 +31,8 @@ func TestApiKeys(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	k := cxsdk.NewAPIKeysClient(creator)
 	teamId, e := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	assertNilAndPrintError(t, e)
@@ -72,7 +73,8 @@ func TestUsers(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewUsersClient(creator)
 
@@ -121,8 +123,10 @@ func TestScopes(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewScopesClient(creator)
+	defer creator.CloseConnection()
 	description := "Data Access Rule intended for testing"
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
 		DisplayName: "Test Data Access Rule",
@@ -165,10 +169,12 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	assertNilAndPrintError(t, err)
 	c := cxsdk.NewGroupsClient(creator)
+	defer creator.CloseConnection()
 
 	groups, err := c.List(context.Background(), &cxsdk.GetTeamGroupsRequest{
 		TeamId: &cxsdk.GroupsTeamID{
@@ -228,9 +234,11 @@ func TestTeams(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewTeamsClient(creator)
+	defer creator.CloseConnection()
 
 	team1, e := c.Create(context.Background(), &cxsdk.CreateTeamInOrgRequest{
 		TeamName: "team_1",
@@ -292,8 +300,10 @@ func TestSamlConfigurationRetrieval(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewSamlClient(creator)
+	defer creator.CloseConnection()
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	if err != nil {
@@ -316,8 +326,10 @@ func TestSamlSetUpWithContent(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewSamlClient(creator)
+	defer creator.CloseConnection()
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	if err != nil {
@@ -347,8 +359,10 @@ func TestSamlSetUpWithUrl(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewSamlClient(creator)
+	defer creator.CloseConnection()
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	if err != nil {
@@ -376,8 +390,10 @@ func TestIpAccess(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewIPAccessClient(creator)
+	defer creator.CloseConnection()
 
 	// replace without ID, so it will create a new settings in case it doesn't exist
 	// if it exists, it will replace the existing settings

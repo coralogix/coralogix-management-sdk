@@ -28,8 +28,10 @@ func TestViews(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewViewsClient(creator)
+	defer creator.CloseConnection()
 
 	view, e := c.Create(context.Background(), &cxsdk.CreateViewRequest{
 		Name: &wrapperspb.StringValue{Value: "GoTestView"},
@@ -71,8 +73,10 @@ func TestViewFolders(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewViewFoldersClient(creator)
+	defer creator.CloseConnection()
 
 	allFolders, e := c.List(context.Background(), &cxsdk.ListViewFoldersRequest{})
 	assertNilAndPrintError(t, e)

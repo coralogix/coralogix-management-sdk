@@ -67,9 +67,11 @@ func TestIntegration(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewIntegrationsClient(creator)
+	defer creator.CloseConnection()
 	role := os.Getenv("AWS_TEST_ROLE")
 
 	name := "aws-metrics-collector"
@@ -292,9 +294,11 @@ func TestWebhooks(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 
 	c := cxsdk.NewWebhooksClient(creator)
+	defer creator.CloseConnection()
 	testResult, err := c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
 		Data: &cxsdk.OutgoingWebhookInputData{
 			Name: wrapperspb.String("custom-webhook"),
@@ -323,8 +327,10 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewWebhooksClient(creator)
+	defer creator.CloseConnection()
 	result, e := c.Create(context.Background(), req)
 	if e != nil {
 		log.Fatal(e.Error())
@@ -358,8 +364,10 @@ func TestContextualDataIntegrations(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewContextualDataIntegrationsClient(creator)
+	defer creator.CloseConnection()
 
 	// Get all integrations first to check initial state
 	allIntegrations, err := c.List(context.Background(), &cxsdk.GetContextualDataIntegrationsRequest{})

@@ -252,7 +252,7 @@ type AwsEventBridgeWebhook = webhooks.OutgoingWebhook_AwsEventBridge
 
 // WebhooksClient is a client for the Coralogix Webhooks API.
 type WebhooksClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 const webhooksFeatureGroupID = "webhooks"
@@ -265,7 +265,7 @@ func (c WebhooksClient) Create(ctx context.Context, req *CreateOutgoingWebhookRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.CreateOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -284,7 +284,7 @@ func (c WebhooksClient) Get(ctx context.Context, req *GetOutgoingWebhookRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.GetOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -302,7 +302,7 @@ func (c WebhooksClient) Update(ctx context.Context, req *UpdateOutgoingWebhookRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.UpdateOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -320,7 +320,7 @@ func (c WebhooksClient) Delete(ctx context.Context, req *DeleteOutgoingWebhookRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.DeleteOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -338,7 +338,7 @@ func (c WebhooksClient) ListTypes(ctx context.Context, req *ListOutgoingWebhookT
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.ListOutgoingWebhookTypes(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -356,7 +356,7 @@ func (c WebhooksClient) List(ctx context.Context, req *ListAllOutgoingWebhooksRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.ListAllOutgoingWebhooks(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -374,7 +374,7 @@ func (c WebhooksClient) TestByID(ctx context.Context, req *TestExistingOutgoingW
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.TestExistingOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -392,7 +392,7 @@ func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := webhooks.NewOutgoingWebhooksServiceClient(conn)
 
 	response, err := client.TestOutgoingWebhook(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -403,6 +403,6 @@ func (c WebhooksClient) Test(ctx context.Context, req *TestOutgoingWebhookReques
 }
 
 // NewWebhooksClient creates a new webhooks client.
-func NewWebhooksClient(c *CallPropertiesCreator) *WebhooksClient {
+func NewWebhooksClient(c CallPropertiesCreator) *WebhooksClient {
 	return &WebhooksClient{callPropertiesCreator: c}
 }

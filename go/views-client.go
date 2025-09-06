@@ -92,7 +92,7 @@ const (
 
 // ViewsClient is a client for the views service
 type ViewsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new view
@@ -103,7 +103,7 @@ func (c ViewsClient) Create(ctx context.Context, req *CreateViewRequest) (*Creat
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsServiceClient(conn)
 
 	response, err := client.CreateView(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -121,7 +121,7 @@ func (c ViewsClient) Get(ctx context.Context, req *GetViewRequest) (*GetViewResp
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsServiceClient(conn)
 
 	response, err := client.GetView(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -139,7 +139,7 @@ func (c ViewsClient) List(ctx context.Context, req *ListViewsRequest) (*ListView
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsServiceClient(conn)
 
 	response, err := client.ListViews(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -157,7 +157,7 @@ func (c ViewsClient) Replace(ctx context.Context, req *ReplaceViewRequest) (*Rep
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsServiceClient(conn)
 
 	response, err := client.ReplaceView(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -175,7 +175,7 @@ func (c ViewsClient) Delete(ctx context.Context, req *DeleteViewRequest) (*Delet
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := vservices.NewViewsServiceClient(conn)
 
 	response, err := client.DeleteView(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -186,6 +186,6 @@ func (c ViewsClient) Delete(ctx context.Context, req *DeleteViewRequest) (*Delet
 }
 
 // NewViewsClient creates a new ViewsClient
-func NewViewsClient(c *CallPropertiesCreator) *ViewsClient {
+func NewViewsClient(c CallPropertiesCreator) *ViewsClient {
 	return &ViewsClient{callPropertiesCreator: c}
 }

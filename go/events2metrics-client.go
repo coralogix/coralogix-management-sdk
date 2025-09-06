@@ -148,7 +148,7 @@ const events2MetricsFeatureGroupID = "events2metrics"
 
 // Events2MetricsClient is a client for the Coralogix Events2Metrics API. Read more at https://coralogix.com/docs/events2metrics/
 type Events2MetricsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create Creates a new metric.
@@ -159,7 +159,7 @@ func (e Events2MetricsClient) Create(ctx context.Context, req *CreateE2MRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.CreateE2M(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -177,7 +177,7 @@ func (e Events2MetricsClient) Get(ctx context.Context, req *GetE2MRequest) (*e2m
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.GetE2M(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -195,7 +195,7 @@ func (e Events2MetricsClient) Replace(ctx context.Context, req *ReplaceE2MReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.ReplaceE2M(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -213,7 +213,7 @@ func (e Events2MetricsClient) Delete(ctx context.Context, req *DeleteE2MRequest)
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.DeleteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -231,7 +231,7 @@ func (e Events2MetricsClient) ListLabelsCardinality(ctx context.Context, req *Li
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.ListLabelsCardinality(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -249,7 +249,7 @@ func (e Events2MetricsClient) List(ctx context.Context) (*e2m.ListE2MResponse, e
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.ListE2M(callProperties.Ctx, &e2m.ListE2MRequest{}, callProperties.CallOptions...)
@@ -267,7 +267,7 @@ func (e Events2MetricsClient) AtomicBatchExecute(ctx context.Context, req *Atomi
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.AtomicBatchExecuteE2M(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -285,7 +285,7 @@ func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResp
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := e2m.NewEvents2MetricServiceClient(conn)
 
 	response, err := client.GetLimits(callProperties.Ctx, &e2m.GetLimitsRequest{}, callProperties.CallOptions...)
@@ -296,6 +296,6 @@ func (e Events2MetricsClient) GetLimits(ctx context.Context) (*e2m.GetLimitsResp
 }
 
 // NewEvents2MetricsClient creates a new Events2MetricsClient.
-func NewEvents2MetricsClient(c *CallPropertiesCreator) *Events2MetricsClient {
+func NewEvents2MetricsClient(c CallPropertiesCreator) *Events2MetricsClient {
 	return &Events2MetricsClient{callPropertiesCreator: c}
 }

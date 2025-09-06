@@ -84,7 +84,7 @@ const (
 
 // DataUsageClient is a client for the Coralogix Data Usage API.
 type DataUsageClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // GetSpansCount gets the spans count as a stream.
@@ -95,7 +95,7 @@ func (c DataUsageClient) GetSpansCount(ctx context.Context, req *dataUsage.GetSp
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := dataUsage.NewDataUsageServiceClient(conn)
 
 	response, err := client.GetSpansCount(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -113,7 +113,7 @@ func (c DataUsageClient) GetLogsCount(ctx context.Context, req *dataUsage.GetLog
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := dataUsage.NewDataUsageServiceClient(conn)
 	response, err := client.GetLogsCount(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -130,7 +130,7 @@ func (c DataUsageClient) GetDataUsageMetricsExportStatus(ctx context.Context, re
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := dataUsage.NewDataUsageServiceClient(conn)
 	response, err := client.GetDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -147,7 +147,7 @@ func (c DataUsageClient) UpdateDataUsageMetricsExportStatus(ctx context.Context,
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := dataUsage.NewDataUsageServiceClient(conn)
 	response, err := client.UpdateDataUsageMetricsExportStatus(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -164,7 +164,7 @@ func (c DataUsageClient) GetDataUsage(ctx context.Context, req *dataUsage.GetDat
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := dataUsage.NewDataUsageServiceClient(conn)
 	response, err := client.GetDataUsage(callProperties.Ctx, req, callProperties.CallOptions...)
 	if err != nil {
@@ -174,6 +174,6 @@ func (c DataUsageClient) GetDataUsage(ctx context.Context, req *dataUsage.GetDat
 }
 
 // NewDataUsageClient creates a new DataUsageClient.
-func NewDataUsageClient(c *CallPropertiesCreator) *DataUsageClient {
+func NewDataUsageClient(c CallPropertiesCreator) *DataUsageClient {
 	return &DataUsageClient{callPropertiesCreator: c}
 }

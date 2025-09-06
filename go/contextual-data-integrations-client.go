@@ -67,7 +67,7 @@ type (
 
 // ContextualDataIntegrationsClient is a client for managing contextual data integrations
 type ContextualDataIntegrationsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // List gets all contextual data integrations
@@ -78,7 +78,7 @@ func (c ContextualDataIntegrationsClient) List(ctx context.Context, req *GetCont
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.GetContextualDataIntegrations(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -96,7 +96,7 @@ func (c ContextualDataIntegrationsClient) GetDefinition(ctx context.Context, req
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.GetContextualDataIntegrationDefinition(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -114,7 +114,7 @@ func (c ContextualDataIntegrationsClient) GetDetails(ctx context.Context, req *G
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.GetContextualDataIntegrationDetails(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -132,7 +132,7 @@ func (c ContextualDataIntegrationsClient) Test(ctx context.Context, req *TestCon
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.TestContextualDataIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -150,7 +150,7 @@ func (c ContextualDataIntegrationsClient) Create(ctx context.Context, req *SaveC
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.SaveContextualDataIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -168,7 +168,7 @@ func (c ContextualDataIntegrationsClient) Update(ctx context.Context, req *Updat
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.UpdateContextualDataIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -186,7 +186,7 @@ func (c ContextualDataIntegrationsClient) Delete(ctx context.Context, req *Delet
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := v1.NewContextualDataIntegrationServiceClient(conn)
 
 	response, err := client.DeleteContextualDataIntegration(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -197,6 +197,6 @@ func (c ContextualDataIntegrationsClient) Delete(ctx context.Context, req *Delet
 }
 
 // NewContextualDataIntegrationsClient creates a new contextual data integrations client
-func NewContextualDataIntegrationsClient(c *CallPropertiesCreator) *ContextualDataIntegrationsClient {
+func NewContextualDataIntegrationsClient(c CallPropertiesCreator) *ContextualDataIntegrationsClient {
 	return &ContextualDataIntegrationsClient{callPropertiesCreator: c}
 }

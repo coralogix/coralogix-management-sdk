@@ -35,7 +35,6 @@ type SetS3TargetRequest = archiveLogs.S3TargetServiceSetTargetRequest_S3
 // Target is a target for storing archive logs.
 type Target = archiveLogs.S3TargetSpec
 
-
 const archiveLogsFeatureGroupID = "logs"
 
 // RPC names.
@@ -54,7 +53,7 @@ const (
 
 // ArchiveLogsClient is a client for the Coralogix Archive Logs API.
 type ArchiveLogsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Update updates the archive logs target.
@@ -65,7 +64,7 @@ func (c ArchiveLogsClient) Update(ctx context.Context, req *SetTargetRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveLogs.NewS3TargetServiceClient(conn)
 
 	response, err := client.SetTarget(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -83,7 +82,7 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*GetTargetResponse, error) 
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := archiveLogs.NewS3TargetServiceClient(conn)
 
 	response, err := client.GetTarget(callProperties.Ctx, &archiveLogs.S3TargetServiceGetTargetRequest{}, callProperties.CallOptions...)
@@ -94,6 +93,6 @@ func (c ArchiveLogsClient) Get(ctx context.Context) (*GetTargetResponse, error) 
 }
 
 // NewArchiveLogsClient creates a new archive logs client.
-func NewArchiveLogsClient(c *CallPropertiesCreator) *ArchiveLogsClient {
+func NewArchiveLogsClient(c CallPropertiesCreator) *ArchiveLogsClient {
 	return &ArchiveLogsClient{callPropertiesCreator: c}
 }

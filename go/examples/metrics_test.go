@@ -31,8 +31,10 @@ func TestArchiveMetrics(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator, err := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
+	assertNilAndPrintError(t, err)
 	c := cxsdk.NewArchiveMetricsClient(creator)
+	defer creator.CloseConnection()
 	s3Config := &cxsdk.ArchiveS3Config{
 		Bucket: metricsBucket,
 		Region: awsRegion,

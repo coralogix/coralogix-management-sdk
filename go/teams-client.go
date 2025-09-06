@@ -61,7 +61,7 @@ const (
 // TeamsClient is a client for the Coralogix Teams API.
 // Read more at https://coralogix.com/docs/user-team-management/ and https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/
 type TeamsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new team.
@@ -72,7 +72,7 @@ func (c TeamsClient) Create(ctx context.Context, req *CreateTeamInOrgRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.CreateTeamInOrg(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -90,7 +90,7 @@ func (c TeamsClient) Update(ctx context.Context, req *UpdateTeamRequest) (*teams
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.UpdateTeam(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -108,7 +108,7 @@ func (c TeamsClient) Get(ctx context.Context, req *GetTeamRequest) (*teams.GetTe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.GetTeam(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -126,7 +126,7 @@ func (c TeamsClient) Delete(ctx context.Context, req *DeleteTeamRequest) (*teams
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.DeleteTeam(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -144,7 +144,7 @@ func (c TeamsClient) SetDailyQuota(ctx context.Context, req *SetDailyQuotaReques
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.SetDailyQuota(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -162,7 +162,7 @@ func (c TeamsClient) GetQuota(ctx context.Context, req *GetTeamQuotaRequest) (*t
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.GetTeamQuota(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -180,7 +180,7 @@ func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*tea
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := teams.NewTeamServiceClient(conn)
 
 	response, err := client.MoveQuota(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -191,6 +191,6 @@ func (c TeamsClient) MoveQuota(ctx context.Context, req *MoveQuotaRequest) (*tea
 }
 
 // NewTeamsClient creates a new teams client.
-func NewTeamsClient(c *CallPropertiesCreator) *TeamsClient {
+func NewTeamsClient(c CallPropertiesCreator) *TeamsClient {
 	return &TeamsClient{callPropertiesCreator: c}
 }

@@ -759,8 +759,12 @@ const (
 
 // AlertsClient is a client for the Coralogix Alerts API.
 type AlertsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 	defaultLabels         map[string]string
+}
+
+func (a *AlertsClient) CloseConnection() {
+	a.callPropertiesCreator.CloseConnection()
 }
 
 // Create creates an alert.
@@ -771,7 +775,7 @@ func (a AlertsClient) Create(ctx context.Context, req *CreateAlertDefRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
 		if req.AlertDefProperties.EntityLabels == nil {
@@ -797,7 +801,7 @@ func (a AlertsClient) Get(ctx context.Context, req *GetAlertDefRequest) (*alerts
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.GetAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -815,7 +819,7 @@ func (a AlertsClient) Replace(ctx context.Context, req *alerts.ReplaceAlertDefRe
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 	if req.AlertDefProperties != nil && a.defaultLabels != nil {
 		if req.AlertDefProperties.EntityLabels == nil {
@@ -841,7 +845,7 @@ func (a AlertsClient) Delete(ctx context.Context, req *DeleteAlertDefRequest) (*
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.DeleteAlertDef(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -860,7 +864,7 @@ func (a AlertsClient) Set(ctx context.Context, req *SetActiveRequest) (*alerts.S
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.SetActive(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -878,7 +882,7 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 	}
 
 	conn := callProperties.Connection
-	defer conn.Close()
+
 	client := alerts.NewAlertDefsServiceClient(conn)
 
 	response, err := client.ListAlertDefs(callProperties.Ctx, req, callProperties.CallOptions...)
@@ -889,13 +893,21 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 }
 
 // NewAlertsClient creates a new alerts client with the SDK's version as a default label for each alert.
-func NewAlertsClient(c *CallPropertiesCreator) *AlertsClient {
-	return &AlertsClient{callPropertiesCreator: c, defaultLabels: map[string]string{
-		sdkVersionHeaderName: c.sdkVersion,
-	}}
+func NewAlertsClient(c CallPropertiesCreator) *AlertsClient {
+	client := &AlertsClient{
+		callPropertiesCreator: c,
+	}
+
+	if creator, ok := c.(*SDKCallPropertiesCreator); ok {
+		client.defaultLabels = map[string]string{
+			sdkVersionHeaderName: creator.sdkVersion,
+		}
+	}
+
+	return client
 }
 
 // NewAlertsClientWithCustomLabels creates a new alerts client with custom labels attached to each alert.
-func NewAlertsClientWithCustomLabels(c *CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
+func NewAlertsClientWithCustomLabels(c CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
 	return &AlertsClient{callPropertiesCreator: c, defaultLabels: defaultLabels}
 }
