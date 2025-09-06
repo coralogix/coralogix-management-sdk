@@ -9,6 +9,7 @@ import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
@@ -148,6 +149,10 @@ message LineChart {
       example: "1"
     }];
     v1.common.TimeFrameSelect time_frame = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the results should be returned"}];
+    v1.common.MetricsSeriesLimitType series_limit_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      description: "How to limit the result using series_count_limit parameter"
+      example: "1"
+    }];
   }
 
   message SpansQuery {

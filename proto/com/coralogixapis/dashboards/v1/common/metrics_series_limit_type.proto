@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+enum MetricsSeriesLimitType {
+  // No limit specified, will default to METRICS_SERIES_LIMIT_BY_SERIES_COUNT.
+  METRICS_SERIES_LIMIT_TYPE_UNSPECIFIED = 0;
+  // Limit the total number of series.
+  METRICS_SERIES_LIMIT_TYPE_BY_SERIES_COUNT = 1;
+  // Limit the number of points at each timestamp.
+  METRICS_SERIES_LIMIT_TYPE_BY_POINT_COUNT = 2;
+}
