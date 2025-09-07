@@ -759,7 +759,7 @@ const (
 
 // AlertsClient is a client for the Coralogix Alerts API.
 type AlertsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 	defaultLabels         map[string]string
 }
 
@@ -889,13 +889,21 @@ func (a AlertsClient) List(ctx context.Context, req *ListAlertDefsRequest) (*ale
 }
 
 // NewAlertsClient creates a new alerts client with the SDK's version as a default label for each alert.
-func NewAlertsClient(c *CallPropertiesCreator) *AlertsClient {
-	return &AlertsClient{callPropertiesCreator: c, defaultLabels: map[string]string{
-		sdkVersionHeaderName: c.sdkVersion,
-	}}
+func NewAlertsClient(c CallPropertiesCreator) *AlertsClient {
+	client := &AlertsClient{
+		callPropertiesCreator: c,
+	}
+
+	if creator, ok := c.(*SDKCallPropertiesCreator); ok {
+		client.defaultLabels = map[string]string{
+			sdkVersionHeaderName: creator.sdkVersion,
+		}
+	}
+
+	return client
 }
 
 // NewAlertsClientWithCustomLabels creates a new alerts client with custom labels attached to each alert.
-func NewAlertsClientWithCustomLabels(c *CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
+func NewAlertsClientWithCustomLabels(c CallPropertiesCreator, defaultLabels map[string]string) *AlertsClient {
 	return &AlertsClient{callPropertiesCreator: c, defaultLabels: defaultLabels}
 }

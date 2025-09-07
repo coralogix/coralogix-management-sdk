@@ -154,7 +154,7 @@ const infraMonitoringFeatureGroupID = "infra-monitoring"
 
 // SLOsClient is a client for the Coralogix SLOs API.
 type SLOsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new SLO.
@@ -266,6 +266,6 @@ func (c SLOsClient) List(ctx context.Context, req *slos.ListSlosRequest) (*slos.
 }
 
 // NewSLOsClient creates a new SLOs client.
-func NewSLOsClient(c *CallPropertiesCreator) *SLOsClient {
+func NewSLOsClient(c CallPropertiesCreator) *SLOsClient {
 	return &SLOsClient{callPropertiesCreator: c}
 }

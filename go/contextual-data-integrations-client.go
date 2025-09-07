@@ -67,7 +67,7 @@ type (
 
 // ContextualDataIntegrationsClient is a client for managing contextual data integrations
 type ContextualDataIntegrationsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // List gets all contextual data integrations
@@ -197,6 +197,6 @@ func (c ContextualDataIntegrationsClient) Delete(ctx context.Context, req *Delet
 }
 
 // NewContextualDataIntegrationsClient creates a new contextual data integrations client
-func NewContextualDataIntegrationsClient(c *CallPropertiesCreator) *ContextualDataIntegrationsClient {
+func NewContextualDataIntegrationsClient(c CallPropertiesCreator) *ContextualDataIntegrationsClient {
 	return &ContextualDataIntegrationsClient{callPropertiesCreator: c}
 }

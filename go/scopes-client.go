@@ -70,7 +70,7 @@ const (
 
 // ScopesClient is a client for the scopes service
 type ScopesClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new scope
@@ -164,6 +164,6 @@ func (c ScopesClient) Delete(ctx context.Context, req *DeleteScopeRequest) (*sco
 }
 
 // NewScopesClient creates a new ScopesClient
-func NewScopesClient(c *CallPropertiesCreator) *ScopesClient {
+func NewScopesClient(c CallPropertiesCreator) *ScopesClient {
 	return &ScopesClient{callPropertiesCreator: c}
 }
