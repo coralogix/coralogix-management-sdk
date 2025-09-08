@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+enum DataModeType {
+  DATA_MODE_TYPE_HIGH_UNSPECIFIED = 0;
+  DATA_MODE_TYPE_ARCHIVE = 1;
+}
