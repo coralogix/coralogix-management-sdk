@@ -10,7 +10,7 @@ import (
 	filters "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/filters"
 	common1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets/common"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -554,42 +554,42 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa0\x1f\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa0\x1f\n" +
 	"\aDynamic\x12\x85\x01\n" +
-	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x92A02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
+	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x9aA02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
-	"time_frame\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectB8\x92A523Time frame which overrides the dashboard time frameR\ttimeFrame\x12\x95\x01\n" +
-	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x92A%2#Interpretation of the query resultsR\x0einterpretation\x1a\x9d\x17\n" +
+	"time_frame\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectB8\x9aA523Time frame which overrides the dashboard time frameR\ttimeFrame\x12\x95\x01\n" +
+	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x9aA%2#Interpretation of the query resultsR\x0einterpretation\x1a\x9d\x17\n" +
 	"\x05Query\x12U\n" +
 	"\x04logs\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.LogsH\x00R\x04logs\x12X\n" +
 	"\x05spans\x18\x02 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.SpansH\x00R\x05spans\x12^\n" +
 	"\ametrics\x18\x03 \x01(\v2B.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.MetricsH\x00R\ametrics\x12d\n" +
 	"\tdataprime\x18\x04 \x01(\v2D.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.DataprimeH\x00R\tdataprime\x1a\x8c\x06\n" +
 	"\x04Logs\x12\xba\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType\x12\x8d\x01\n" +
-	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
-	"\bgroup_by\x18\x04 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x92A<2:A list of observation fields by which to group the resultsR\agroupBy\x12t\n" +
-	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x92A\x162\x14Aggregation functionR\vaggregation:-\x92A*\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x9aA_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType\x12\x8d\x01\n" +
+	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x9aA02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
+	"\bgroup_by\x18\x04 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x9aA<2:A list of observation fields by which to group the resultsR\agroupBy\x12t\n" +
+	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x9aA\x162\x14Aggregation functionR\vaggregation:-\x9aA*\n" +
 	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\xc5\x05\n" +
 	"\x05Spans\x12\x87\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType\x12z\n" +
-	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
-	"\bgroup_by\x18\x04 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB-\x92A*2(A list of fields to group the records byR\agroupBy\x12\x7f\n" +
-	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB$\x92A!2\x1fSpan query aggregation functionR\vaggregation:/\x92A,\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x9aA,2*Lucene query string to search span recordsR\vluceneQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType\x12z\n" +
+	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x9aA\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
+	"\bgroup_by\x18\x04 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB-\x9aA*2(A list of fields to group the records byR\agroupBy\x12\x7f\n" +
+	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB$\x9aA!2\x1fSpan query aggregation functionR\vaggregation:/\x9aA,\n" +
 	"**\n" +
 	"SpansQuery2\x1cA spans variant of the query\x1a\xfc\x05\n" +
 	"\aMetrics\x12\xa3\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12\x9b\x01\n" +
-	"\x11promql_query_type\x18\x02 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12\xc6\x01\n" +
-	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x9aAH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12\x9b\x01\n" +
+	"\x11promql_query_type\x18\x02 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x9aA321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12\xc6\x01\n" +
+	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x9aAV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
 	"editorMode\x12\xae\x01\n" +
-	"\x11series_limit_type\x18\x04 \x01(\x0e2>.com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitTypeBB\x92A?2:How to limit the result using series_count_limit parameterJ\x011R\x0fseriesLimitType:3\x92A0\n" +
+	"\x11series_limit_type\x18\x04 \x01(\x0e2>.com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitTypeBB\x9aA?2:How to limit the result using series_count_limit parameterJ\x011R\x0fseriesLimitType:3\x9aA0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xbd\x02\n" +
 	"\tDataprime\x12z\n" +
-	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType:7\x92A4\n" +
+	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the queryB\a\n" +
 	"\x05value\"\xc1\x04\n" +
 	"\x0eInterpretation\x12\x1e\n" +

@@ -8,7 +8,7 @@ package filters
 
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -814,63 +814,63 @@ var File_com_coralogixapis_dashboards_v1_ast_filters_filter_proto protoreflect.F
 
 const file_com_coralogixapis_dashboards_v1_ast_filters_filter_proto_rawDesc = "" +
 	"\n" +
-	"8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x12+com.coralogixapis.dashboards.v1.ast.filters\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe7%\n" +
+	"8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x12+com.coralogixapis.dashboards.v1.ast.filters\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe7%\n" +
 	"\x06Filter\x12\x98\x01\n" +
-	"\x06source\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceBD\x92AA2?The source of the filter, which can be logs, spans, or metrics.R\x06source\x12o\n" +
-	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB9\x92A624Indicates if the filter is currently enabled or not.R\aenabled\x12\x8b\x01\n" +
-	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBQ\x92AN2LIndicates if the filter's UI representation should be collapsed or expanded.R\tcollapsed\x1a\xd3\x03\n" +
+	"\x06source\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceBD\x9aAA2?The source of the filter, which can be logs, spans, or metrics.R\x06source\x12o\n" +
+	"\aenabled\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB9\x9aA624Indicates if the filter is currently enabled or not.R\aenabled\x12\x8b\x01\n" +
+	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBQ\x9aAN2LIndicates if the filter's UI representation should be collapsed or expanded.R\tcollapsed\x1a\xd3\x03\n" +
 	"\x06Source\x12y\n" +
-	"\x04logs\x18\x01 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB#\x92A 2\x1eFilter configuration for logs.H\x00R\x04logs\x12}\n" +
-	"\x05spans\x18\x02 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB$\x92A!2\x1fFilter configuration for spans.H\x00R\x05spans\x12\x85\x01\n" +
-	"\ametrics\x18\x03 \x01(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB&\x92A#2!Filter configuration for metrics.H\x00R\ametrics:>\x92A;\n" +
+	"\x04logs\x18\x01 \x01(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB#\x9aA 2\x1eFilter configuration for logs.H\x00R\x04logs\x12}\n" +
+	"\x05spans\x18\x02 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB$\x9aA!2\x1fFilter configuration for spans.H\x00R\x05spans\x12\x85\x01\n" +
+	"\ametrics\x18\x03 \x01(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB&\x9aA#2!Filter configuration for metrics.H\x00R\ametrics:>\x9aA;\n" +
 	"9*\x06Source2/Defines the type of data the filter applies to.B\a\n" +
 	"\x05value\x1a\xf7\x03\n" +
 	"\n" +
 	"LogsFilter\x12f\n" +
-	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x92A/2-The log field to which the filter is applied.R\x05field\x12\x87\x01\n" +
-	"\boperator\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB-\x92A*2(An operator used for filtering the logs.R\boperator\x12\xa5\x01\n" +
-	"\x11observation_field\x18\x03 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB>\x92A;29The observation log field to which the filter is applied.R\x10observationField:O\x92AL\n" +
+	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x9aA/2-The log field to which the filter is applied.R\x05field\x12\x87\x01\n" +
+	"\boperator\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB-\x9aA*2(An operator used for filtering the logs.R\boperator\x12\xa5\x01\n" +
+	"\x11observation_field\x18\x03 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB>\x9aA;29The observation log field to which the filter is applied.R\x10observationField:O\x9aAL\n" +
 	"J*\n" +
 	"LogsFilter2<This data structure represents the filter criteria for logs.\x1a\xfe\x04\n" +
 	"\vSpansFilter\x12|\n" +
-	"\x05field\x18\x01 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB3\x92A02.The span field to which the filter is applied.R\x05field\x12\x88\x01\n" +
-	"\boperator\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB.\x92A+2)An operator used for filtering the spans.R\boperator\x12\x92\x02\n" +
-	"\x11observation_field\x18\x03 \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB\xa6\x01\x92A\xa2\x012\x9f\x01The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)R\x10observationField:Q\x92AN\n" +
+	"\x05field\x18\x01 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB3\x9aA02.The span field to which the filter is applied.R\x05field\x12\x88\x01\n" +
+	"\boperator\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB.\x9aA+2)An operator used for filtering the spans.R\boperator\x12\x92\x02\n" +
+	"\x11observation_field\x18\x03 \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB\xa6\x01\x9aA\xa2\x012\x9f\x01The observation span field to which the filter is applied. Relation type is only supported in spans widget filters. (Not supported in global dashboard filters)R\x10observationField:Q\x9aAN\n" +
 	"L*\vSpansFilter2=This data structure represents the filter criteria for spans.\x1a\xc6\x03\n" +
 	"\rMetricsFilter\x12q\n" +
-	"\x06metric\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x92A826The name of the metric to which the filter is applied.R\x06metric\x12^\n" +
-	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB*\x92A'2%The label associated with the metric.R\x05label\x12\x8a\x01\n" +
-	"\boperator\x18\x03 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB0\x92A-2+An operator used for filtering the metrics.R\boperator:U\x92AR\n" +
+	"\x06metric\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x9aA826The name of the metric to which the filter is applied.R\x06metric\x12^\n" +
+	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB*\x9aA'2%The label associated with the metric.R\x05label\x12\x8a\x01\n" +
+	"\boperator\x18\x03 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.filters.Filter.OperatorB0\x9aA-2+An operator used for filtering the metrics.R\boperator:U\x9aAR\n" +
 	"P*\rMetricsFilter2?This data structure represents the filter criteria for metrics.\x1a\xda\x02\n" +
 	"\bOperator\x12o\n" +
-	"\x06equals\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.EqualsB\x19\x92A\x162\x14Equality comparison.H\x00R\x06equals\x12}\n" +
+	"\x06equals\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.EqualsB\x19\x9aA\x162\x14Equality comparison.H\x00R\x06equals\x12}\n" +
 	"\n" +
-	"not_equals\x18\x02 \x01(\v2=.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEqualsB\x1d\x92A\x1a2\x18Non-equality comparison.H\x00R\tnotEquals:U\x92AR\n" +
+	"not_equals\x18\x02 \x01(\v2=.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEqualsB\x1d\x9aA\x1a2\x18Non-equality comparison.H\x00R\tnotEquals:U\x9aAR\n" +
 	"P*\bOperator2DThis data structure defines the comparison operation for the filter.B\a\n" +
 	"\x05value\x1a\xc6\a\n" +
 	"\x06Equals\x12\x9c\x01\n" +
-	"\tselection\x18\x01 \x01(\v2D.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.SelectionB8\x92A523The selection criteria for the equality comparison.R\tselection\x1a\xcb\x05\n" +
+	"\tselection\x18\x01 \x01(\v2D.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.SelectionB8\x9aA523The selection criteria for the equality comparison.R\tselection\x1a\xcb\x05\n" +
 	"\tSelection\x12\x91\x01\n" +
-	"\x03all\x18\x01 \x01(\v2Q.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.Selection.AllSelectionB*\x92A'2%Represents a selection of all values.H\x00R\x03all\x12\x9c\x01\n" +
-	"\x04list\x18\x02 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.Selection.ListSelectionB2\x92A/2-Represents a selection from a list of values.H\x00R\x04list\x1a`\n" +
-	"\fAllSelection:P\x92AM\n" +
+	"\x03all\x18\x01 \x01(\v2Q.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.Selection.AllSelectionB*\x9aA'2%Represents a selection of all values.H\x00R\x03all\x12\x9c\x01\n" +
+	"\x04list\x18\x02 \x01(\v2R.com.coralogixapis.dashboards.v1.ast.filters.Filter.Equals.Selection.ListSelectionB2\x9aA/2-Represents a selection from a list of values.H\x00R\x04list\x1a`\n" +
+	"\fAllSelection:P\x9aAM\n" +
 	"K*\fAllSelection2;This data structure indicates that all values are selected.\x1a\xc8\x01\n" +
 	"\rListSelection\x12U\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1f\x92A\x1c2\x1aA list of selected values.R\x06values:`\x92A]\n" +
-	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:U\x92AR\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1f\x9aA\x1c2\x1aA list of selected values.R\x06values:`\x9aA]\n" +
+	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:U\x9aAR\n" +
 	"P*\tSelection2CThis data structure defines the values for the equality comparison.B\a\n" +
-	"\x05value:O\x92AL\n" +
+	"\x05value:O\x9aAL\n" +
 	"J*\x06Equals2@This data structure represents an equality comparison operation.\x1a\xf0\x05\n" +
 	"\tNotEquals\x12\xa3\x01\n" +
-	"\tselection\x18\x01 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEquals.SelectionB<\x92A927The selection criteria for the non-equality comparison.R\tselection\x1a\xe5\x03\n" +
+	"\tselection\x18\x01 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEquals.SelectionB<\x9aA927The selection criteria for the non-equality comparison.R\tselection\x1a\xe5\x03\n" +
 	"\tSelection\x12\x9f\x01\n" +
-	"\x04list\x18\x01 \x01(\v2U.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEquals.Selection.ListSelectionB2\x92A/2-Represents a selection from a list of values.H\x00R\x04list\x1a\xd1\x01\n" +
+	"\x04list\x18\x01 \x01(\v2U.com.coralogixapis.dashboards.v1.ast.filters.Filter.NotEquals.Selection.ListSelectionB2\x9aA/2-Represents a selection from a list of values.H\x00R\x04list\x1a\xd1\x01\n" +
 	"\rListSelection\x12^\n" +
-	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB(\x92A%2#A list of values for the selection.R\x06values:`\x92A]\n" +
-	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:Y\x92AV\n" +
+	"\x06values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB(\x9aA%2#A list of values for the selection.R\x06values:`\x9aA]\n" +
+	"[*\rListSelection2JThis data structure represents a selection from a list of specific values.:Y\x9aAV\n" +
 	"T*\tSelection2GThis data structure defines the values for the non-equality comparison.B\a\n" +
-	"\x05value:U\x92AR\n" +
-	"P*\tNotEquals2CThis data structure represents a non-equality comparison operation.:\x8f\x02\x92A\x8b\x02\n" +
+	"\x05value:U\x9aAR\n" +
+	"P*\tNotEquals2CThis data structure represents a non-equality comparison operation.:\x8f\x02\x9aA\x8b\x02\n" +
 	"_*\x06Filter2UThis data structure represents the configuration for filtering data on the dashboard.*\xa7\x01\n" +
 	"ZDiscover how to filter and query data in Custom Dashboards by exploring our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/b\x06proto3"
 

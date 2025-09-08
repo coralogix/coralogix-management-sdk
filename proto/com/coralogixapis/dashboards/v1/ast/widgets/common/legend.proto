@@ -3,16 +3,16 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets.common;
 
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Legend {
-  google.protobuf.BoolValue is_visible = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Is the legend visible in the widget"}];
-  repeated LegendColumn columns = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue is_visible = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Is the legend visible in the widget"}];
+  repeated LegendColumn columns = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "List of columns to display in legend"
     example: "[1, 2, 6]"
   }];
-  google.protobuf.BoolValue group_by_query = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "In case of multiple queries, whether legend items should be grouped by their respective queries"}];
-  LegendPlacement placement = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Location of the legend in the widget"}];
+  google.protobuf.BoolValue group_by_query = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "In case of multiple queries, whether legend items should be grouped by their respective queries"}];
+  LegendPlacement placement = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Location of the legend in the widget"}];
 
   enum LegendColumn {
     LEGEND_COLUMN_UNSPECIFIED = 0;

@@ -5,33 +5,33 @@ package com.coralogixapis.dashboards.v1.ast;
 import "com/coralogixapis/dashboards/v1/ast/widget.proto";
 import "com/coralogixapis/dashboards/v1/types.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Layout {
-  repeated Section sections = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The list of sections in the dashboard"}];
+  repeated Section sections = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The list of sections in the dashboard"}];
 }
 
 message Section {
   // Section unique identifier
-  UUID id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  UUID id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: '{ "value": "5995904f-7256-f096-9a16-37124e0f15cb"} '
     description: "Section unique identifier"
   }];
-  repeated Row rows = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Definition of a section's rows (one row represents a single row of visualizations)"}];
-  SectionOptions options = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Section's options"}];
+  repeated Row rows = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Definition of a section's rows (one row represents a single row of visualizations)"}];
+  SectionOptions options = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Section's options"}];
 }
 
 message Row {
   // Row unique identifier
-  UUID id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  UUID id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: '{ "value": "83aed974-510b-43be-bd19-c92daf56beff" }'
     description: "Row unique identifier"
   }];
-  Appearance appearance = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Row appearance configuration"}];
-  repeated Widget widgets = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The list of widgets in the row"}];
+  Appearance appearance = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Row appearance configuration"}];
+  repeated Widget widgets = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The list of widgets in the row"}];
 
   message Appearance {
-    google.protobuf.Int32Value height = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    google.protobuf.Int32Value height = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "Height of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etc"
       example: '{ "value": 16 }'
     }];
@@ -39,7 +39,7 @@ message Row {
 }
 
 message RepetitiveVar {
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Variable name that can be applied on section making it repetitive section"
     example: '"pod_name"'
   }];
@@ -48,30 +48,30 @@ message RepetitiveVar {
 message SectionOptions {
   oneof value {
     InternalSectionOptions internal = 1;
-    CustomSectionOptions custom = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Options for a custom section"}];
+    CustomSectionOptions custom = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Options for a custom section"}];
   }
 }
 
 message InternalSectionOptions {}
 
 message CustomSectionOptions {
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Section custom name"
     example: '{ "value": "Main stats section" }'
   }];
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Short description of a section"
     example: '{ "value": "Section with important statistics" }'
   }];
-  google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Indicator if the section is collapsed"
     example: "false"
   }];
-  SectionColor color = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  SectionColor color = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Color of the section header"
     example: '{ "predefined": 2 }'
   }];
-  RepetitiveVar repetitive_var = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  RepetitiveVar repetitive_var = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Variable name that can be applied on section making it repetitive section and other metadata"
     example: '{"name": "pod_name"}'
   }];

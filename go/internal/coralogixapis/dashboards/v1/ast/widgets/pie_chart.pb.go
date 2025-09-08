@@ -10,7 +10,7 @@ import (
 	filters "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/filters"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets/common"
 	common1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -854,27 +854,27 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto protoreflec
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc1?\n" +
+	";com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aQcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_aggregation_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a>com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc1?\n" +
 	"\bPieChart\x12d\n" +
-	"\x05query\x18\x01 \x01(\v2;.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.QueryB\x11\x92A\x0e2\fQuery objectR\x05query\x12z\n" +
-	"\x14max_slices_per_chart\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB,\x92A)2#Maximum number of slices on a chartJ\x0224R\x11maxSlicesPerChart\x12\x8e\x01\n" +
-	"\x14min_slice_percentage\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueB?\x92A<27Minimum percentage threshold for slices to be displayedJ\x015R\x12minSlicePercentage\x12\x96\x01\n" +
-	"\x10stack_definition\x18\x04 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinitionB$\x92A!2\x1fConfiguration of stacked slicesR\x0fstackDefinition\x12\x90\x01\n" +
-	"\x10label_definition\x18\x05 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinitionB\x1e\x92A\x1b2\x19Settings for slice labelsR\x0flabelDefinition\x12i\n" +
-	"\vshow_legend\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB,\x92A)2'Indicates whether to display the legendR\n" +
+	"\x05query\x18\x01 \x01(\v2;.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.QueryB\x11\x9aA\x0e2\fQuery objectR\x05query\x12z\n" +
+	"\x14max_slices_per_chart\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB,\x9aA)2#Maximum number of slices on a chartJ\x0224R\x11maxSlicesPerChart\x12\x8e\x01\n" +
+	"\x14min_slice_percentage\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueB?\x9aA<27Minimum percentage threshold for slices to be displayedJ\x015R\x12minSlicePercentage\x12\x96\x01\n" +
+	"\x10stack_definition\x18\x04 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.StackDefinitionB$\x9aA!2\x1fConfiguration of stacked slicesR\x0fstackDefinition\x12\x90\x01\n" +
+	"\x10label_definition\x18\x05 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelDefinitionB\x1e\x9aA\x1b2\x19Settings for slice labelsR\x0flabelDefinition\x12i\n" +
+	"\vshow_legend\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB,\x9aA)2'Indicates whether to display the legendR\n" +
 	"showLegend\x12\xb1\x01\n" +
-	"\x13group_name_template\x18\a \x01(\v2\x1c.google.protobuf.StringValueBc\x92A`27Custom template name for a group, can contain variablesJ%{ \"value\": \"Slice - {{ variable }}\" }R\x11groupNameTemplate\x12\x8f\x01\n" +
-	"\x04unit\x18\b \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitBA\x92A>29Unit of the value - one from a predefined list, or customJ\x010R\x04unit\x12\x90\x01\n" +
-	"\fcolor_scheme\x18\t \x01(\v2\x1c.google.protobuf.StringValueBO\x92AL22Applied color scheme, one of the predefined valuesJ\x16{ \"value\": \"classic\" }R\vcolorScheme\x12\x93\x01\n" +
+	"\x13group_name_template\x18\a \x01(\v2\x1c.google.protobuf.StringValueBc\x9aA`27Custom template name for a group, can contain variablesJ%{ \"value\": \"Slice - {{ variable }}\" }R\x11groupNameTemplate\x12\x8f\x01\n" +
+	"\x04unit\x18\b \x01(\x0e28.com.coralogixapis.dashboards.v1.ast.widgets.common.UnitBA\x9aA>29Unit of the value - one from a predefined list, or customJ\x010R\x04unit\x12\x90\x01\n" +
+	"\fcolor_scheme\x18\t \x01(\v2\x1c.google.protobuf.StringValueBO\x9aAL22Applied color scheme, one of the predefined valuesJ\x16{ \"value\": \"classic\" }R\vcolorScheme\x12\x93\x01\n" +
 	"\x0edata_mode_type\x18\n" +
-	" \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x92A(2&Data mode type, either high or archiveR\fdataModeType\x12\xa0\x01\n" +
-	"\vcustom_unit\x18\v \x01(\v2\x1c.google.protobuf.StringValueBa\x92A^2HCustom unit (requires the unit field to be set to custom to take effect)J\x12{ \"value\": \"mph\" }R\n" +
+	" \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x9aA(2&Data mode type, either high or archiveR\fdataModeType\x12\xa0\x01\n" +
+	"\vcustom_unit\x18\v \x01(\v2\x1c.google.protobuf.StringValueBa\x9aA^2HCustom unit (requires the unit field to be set to custom to take effect)J\x12{ \"value\": \"mph\" }R\n" +
 	"customUnit\x12\x8f\x01\n" +
-	"\adecimal\x18\f \x01(\v2\x1b.google.protobuf.Int32ValueBX\x92AU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x015R\adecimal\x12q\n" +
-	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12\x88\x01\n" +
-	"\vhash_colors\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueBK\x92AH2?Whether to ignore color scheme and derive colors from algorithmJ\x05falseR\n" +
+	"\adecimal\x18\f \x01(\v2\x1b.google.protobuf.Int32ValueBX\x9aAU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x015R\adecimal\x12q\n" +
+	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x9aA\x1a2\x18Widget's legend settingsR\x06legend\x12\x88\x01\n" +
+	"\vhash_colors\x18\x0e \x01(\v2\x1a.google.protobuf.BoolValueBK\x9aAH2?Whether to ignore color scheme and derive colors from algorithmJ\x05falseR\n" +
 	"hashColors\x12\x89\x01\n" +
-	"\x11decimal_precision\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x1a\x87\x03\n" +
+	"\x11decimal_precision\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueB@\x9aA=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x1a\x87\x03\n" +
 	"\x05Query\x12U\n" +
 	"\x04logs\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LogsQueryH\x00R\x04logs\x12X\n" +
 	"\x05spans\x18\x02 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.SpansQueryH\x00R\x05spans\x12^\n" +
@@ -882,64 +882,64 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_pie_chart_proto_rawDesc =
 	"\tdataprime\x18\x04 \x01(\v2D.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.DataprimeQueryH\x00R\tdataprimeB\a\n" +
 	"\x05value\x1a\xe0\x02\n" +
 	"\x0fStackDefinition\x12\x82\x01\n" +
-	"\x14max_slices_per_stack\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB4\x92A12/How many slices can fit in a single slice stackR\x11maxSlicesPerStack\x12\xc7\x01\n" +
-	"\x13stack_name_template\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBy\x92Av28Custom template name of an individual slice in the stackJ:{ \"value\": \"Slice {{ group }} - subslice {{ subgroup }}\" }R\x11stackNameTemplate\x1a\xc3\x04\n" +
+	"\x14max_slices_per_stack\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB4\x9aA12/How many slices can fit in a single slice stackR\x11maxSlicesPerStack\x12\xc7\x01\n" +
+	"\x13stack_name_template\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBy\x9aAv28Custom template name of an individual slice in the stackJ:{ \"value\": \"Slice {{ group }} - subslice {{ subgroup }}\" }R\x11stackNameTemplate\x1a\xc3\x04\n" +
 	"\x0fLabelDefinition\x12~\n" +
-	"\flabel_source\x18\x01 \x01(\x0e2A.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelSourceB\x18\x92A\x152\x13Source of the labelR\vlabelSource\x12R\n" +
+	"\flabel_source\x18\x01 \x01(\x0e2A.com.coralogixapis.dashboards.v1.ast.widgets.PieChart.LabelSourceB\x18\x9aA\x152\x13Source of the labelR\vlabelSource\x12R\n" +
 	"\n" +
-	"is_visible\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\x17\x92A\x142\x12Are labels visibleR\tisVisible\x12l\n" +
-	"\tshow_name\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB3\x92A02.Whether to show the name of slice in the labelR\bshowName\x12k\n" +
+	"is_visible\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\x17\x9aA\x142\x12Are labels visibleR\tisVisible\x12l\n" +
+	"\tshow_name\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB3\x9aA02.Whether to show the name of slice in the labelR\bshowName\x12k\n" +
 	"\n" +
-	"show_value\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueB0\x92A-2+Whether to show value of slice in the labelR\tshowValue\x12\x80\x01\n" +
-	"\x0fshow_percentage\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueB;\x92A826Whether to show percentage value of slice in the labelR\x0eshowPercentage\x1a\xf5\t\n" +
+	"show_value\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueB0\x9aA-2+Whether to show value of slice in the labelR\tshowValue\x12\x80\x01\n" +
+	"\x0fshow_percentage\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueB;\x9aA826Whether to show percentage value of slice in the labelR\x0eshowPercentage\x1a\xf5\t\n" +
 	"\tLogsQuery\x12\xba\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12z\n" +
-	"\vaggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x1f\x92A\x1c2\x1aQuery aggregation functionR\vaggregation\x12\x8d\x01\n" +
-	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12r\n" +
-	"\vgroup_names\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB3\x92A02.List of field names to group the query resultsR\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x9aA_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12z\n" +
+	"\vaggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x1f\x9aA\x1c2\x1aQuery aggregation functionR\vaggregation\x12\x8d\x01\n" +
+	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x9aA02.List of filters that narrow down query resultsR\afilters\x12r\n" +
+	"\vgroup_names\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB3\x9aA02.List of field names to group the query resultsR\n" +
 	"groupNames\x12\x8c\x01\n" +
-	"\x12stacked_group_name\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB@\x92A=2;Field name by which results are stacked in individual groupR\x10stackedGroupName\x12\x9c\x01\n" +
-	"\x12group_names_fields\x18\x06 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB4\x92A12/List of observation fields to group the resultsR\x10groupNamesFields\x12\xab\x01\n" +
-	"\x18stacked_group_name_field\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB8\x92A523Observation field by results are stacked in a groupR\x15stackedGroupNameField\x12\x9f\x01\n" +
+	"\x12stacked_group_name\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB@\x9aA=2;Field name by which results are stacked in individual groupR\x10stackedGroupName\x12\x9c\x01\n" +
+	"\x12group_names_fields\x18\x06 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB4\x9aA12/List of observation fields to group the resultsR\x10groupNamesFields\x12\xab\x01\n" +
+	"\x18stacked_group_name_field\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB8\x9aA523Observation field by results are stacked in a groupR\x15stackedGroupNameField\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\b \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame:-\x92A*\n" +
+	"time_frame\x18\b \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the results should be returnedR\ttimeFrame:-\x9aA*\n" +
 	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\x91\n" +
 	"\n" +
 	"\n" +
 	"SpansQuery\x12\x89\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB1\x92A.2,A Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
-	"\vaggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x92A!2\x1fSpan query aggregation functionR\vaggregation\x12z\n" +
-	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
-	"\vgroup_names\x18\x04 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB1\x9aA.2,A Lucene query string to search span recordsR\vluceneQuery\x12\x80\x01\n" +
+	"\vaggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x9aA!2\x1fSpan query aggregation functionR\vaggregation\x12z\n" +
+	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x9aA\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
+	"\vgroup_names\x18\x04 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x9aA/2-List of field names to group the span recordsR\n" +
 	"groupNames\x12\xa1\x01\n" +
-	"\x12stacked_group_name\x18\x05 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB@\x92A=2;Field name by which results are stacked in individual groupR\x10stackedGroupName\x12\x9f\x01\n" +
+	"\x12stacked_group_name\x18\x05 \x01(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB@\x9aA=2;Field name by which results are stacked in individual groupR\x10stackedGroupName\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x12\xb1\x01\n" +
-	"\x12group_names_fields\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBE\x92AB2@A list of observation fields definitions to group the records byR\x10groupNamesFields\x12\xc3\x01\n" +
-	"\x18stacked_group_name_field\x18\b \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBL\x92AI2GObservation field definition by which groups are divided into subgroupsR\x15stackedGroupNameField:/\x92A,\n" +
+	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x12\xb1\x01\n" +
+	"\x12group_names_fields\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBE\x9aAB2@A list of observation fields definitions to group the records byR\x10groupNamesFields\x12\xc3\x01\n" +
+	"\x18stacked_group_name_field\x18\b \x01(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBL\x9aAI2GObservation field definition by which groups are divided into subgroupsR\x15stackedGroupNameField:/\x9aA,\n" +
 	"**\n" +
 	"SpansQuery2\x1cA spans variant of the query\x1a\xfa\t\n" +
 	"\fMetricsQuery\x12\xa3\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
-	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12{\n" +
-	"\vgroup_names\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB<\x92A927List of field names by which metric results are groupedR\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x9aAH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
+	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x9aA\x192\x17List of metrics filtersR\afilters\x12{\n" +
+	"\vgroup_names\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB<\x9aA927List of field names by which metric results are groupedR\n" +
 	"groupNames\x12\x91\x01\n" +
-	"\x12stacked_group_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBE\x92AB2@Field name by which results in groups are divided into subgroupsR\x10stackedGroupName\x12\xc5\x01\n" +
-	"\veditor_mode\x18\x05 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBX\x92AU2PType of the query editor used to generate the query, can be text or builder modeJ\x011R\n" +
+	"\x12stacked_group_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBE\x9aAB2@Field name by which results in groups are divided into subgroupsR\x10stackedGroupName\x12\xc5\x01\n" +
+	"\veditor_mode\x18\x05 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBX\x9aAU2PType of the query editor used to generate the query, can be text or builder modeJ\x011R\n" +
 	"editorMode\x12\x9e\x01\n" +
 	"\n" +
-	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
-	"\x11promql_query_type\x18\a \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12|\n" +
-	"\vaggregation\x18\b \x01(\x0e2?.com.coralogixapis.dashboards.v1.ast.widgets.common.AggregationB\x19\x92A\x162\x14Aggregation functionR\vaggregation:3\x92A0\n" +
+	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x9aAC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
+	"\x11promql_query_type\x18\a \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x9aA321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12|\n" +
+	"\vaggregation\x18\b \x01(\x0e2?.com.coralogixapis.dashboards.v1.ast.widgets.common.AggregationB\x19\x9aA\x162\x14Aggregation functionR\vaggregation:3\x9aA0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xe3\x05\n" +
 	"\x0eDataprimeQuery\x12z\n" +
-	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
-	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x92A\x172\x15List of query filtersR\afilters\x12t\n" +
-	"\vgroup_names\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB5\x92A220List of field names by which results are groupedR\n" +
+	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
+	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x9aA\x172\x15List of query filtersR\afilters\x12t\n" +
+	"\vgroup_names\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB5\x9aA220List of field names by which results are groupedR\n" +
 	"groupNames\x12\x91\x01\n" +
-	"\x12stacked_group_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBE\x92AB2@Field name by which results in groups are divided into subgroupsR\x10stackedGroupName\x12\x9f\x01\n" +
+	"\x12stacked_group_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBE\x9aAB2@Field name by which results in groups are divided into subgroupsR\x10stackedGroupName\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x05 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x92A4\n" +
+	"time_frame\x18\x05 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the query\"[\n" +
 	"\vLabelSource\x12\x1c\n" +
 	"\x18LABEL_SOURCE_UNSPECIFIED\x10\x00\x12\x16\n" +
