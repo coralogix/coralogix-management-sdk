@@ -32,7 +32,7 @@ func TestArchiveLogs(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewArchiveLogsClient(creator)
 	_, setTargetError := c.Update(context.Background(), &cxsdk.SetTargetRequest{
 		TargetSpec: &cxsdk.SetS3TargetRequest{
@@ -54,7 +54,7 @@ func TestDataSets(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDataSetClient(creator)
 
 	raw, e := os.ReadFile("date-to-day-of-the-week.csv")

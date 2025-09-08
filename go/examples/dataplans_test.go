@@ -30,7 +30,7 @@ func TestDataUsage(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewDataUsageClient(creator)
 
 	dateRangeBegin, err := time.Parse(time.RFC3339, "2021-01-01T00:00:00Z")

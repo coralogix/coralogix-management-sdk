@@ -50,7 +50,7 @@ const (
 
 // ArchiveRetentionsClient is a client for the Coralogix Archive Retentions API.
 type ArchiveRetentionsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Get gets the archive retentions.
@@ -132,6 +132,6 @@ func (c ArchiveRetentionsClient) GetEnabled(ctx context.Context, req *GetRetenti
 }
 
 // NewArchiveRetentionsClient Creates a new archive retentions client.
-func NewArchiveRetentionsClient(c *CallPropertiesCreator) *ArchiveRetentionsClient {
+func NewArchiveRetentionsClient(c CallPropertiesCreator) *ArchiveRetentionsClient {
 	return &ArchiveRetentionsClient{callPropertiesCreator: c}
 }

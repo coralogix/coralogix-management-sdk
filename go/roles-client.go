@@ -61,7 +61,7 @@ const (
 
 // RolesClient is a client for roles.
 type RolesClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new role.
@@ -172,6 +172,6 @@ func (r RolesClient) ListSystemRoles(ctx context.Context, req *ListSystemRolesRe
 }
 
 // NewRolesClient creates a new RolesClient.
-func NewRolesClient(c *CallPropertiesCreator) *RolesClient {
+func NewRolesClient(c CallPropertiesCreator) *RolesClient {
 	return &RolesClient{callPropertiesCreator: c}
 }

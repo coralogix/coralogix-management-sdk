@@ -6,6 +6,7 @@ import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
@@ -77,6 +78,10 @@ message Dynamic {
       common.MetricsQueryEditorMode editor_mode = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
         description: "Type of the query editor used to generate the query, can be text or builder based"
         example: "2"
+      }];
+      v1.common.MetricsSeriesLimitType series_limit_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+        description: "How to limit the result using series_count_limit parameter"
+        example: "1"
       }];
     }
 

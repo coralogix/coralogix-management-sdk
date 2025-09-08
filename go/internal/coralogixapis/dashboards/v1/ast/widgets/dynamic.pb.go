@@ -435,6 +435,7 @@ type Dynamic_Query_Metrics struct {
 	PromqlQuery     *common.PromQlQuery            `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
 	PromqlQueryType common.PromQLQueryType         `protobuf:"varint,2,opt,name=promql_query_type,json=promqlQueryType,proto3,enum=com.coralogixapis.dashboards.v1.common.PromQLQueryType" json:"promql_query_type,omitempty"`
 	EditorMode      common1.MetricsQueryEditorMode `protobuf:"varint,3,opt,name=editor_mode,json=editorMode,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode" json:"editor_mode,omitempty"`
+	SeriesLimitType common.MetricsSeriesLimitType  `protobuf:"varint,4,opt,name=series_limit_type,json=seriesLimitType,proto3,enum=com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType" json:"series_limit_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -488,6 +489,13 @@ func (x *Dynamic_Query_Metrics) GetEditorMode() common1.MetricsQueryEditorMode {
 		return x.EditorMode
 	}
 	return common1.MetricsQueryEditorMode(0)
+}
+
+func (x *Dynamic_Query_Metrics) GetSeriesLimitType() common.MetricsSeriesLimitType {
+	if x != nil {
+		return x.SeriesLimitType
+	}
+	return common.MetricsSeriesLimitType(0)
 }
 
 type Dynamic_Query_Dataprime struct {
@@ -546,12 +554,12 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xef\x1d\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa0\x1f\n" +
 	"\aDynamic\x12\x85\x01\n" +
 	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x92A02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
 	"time_frame\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectB8\x92A523Time frame which overrides the dashboard time frameR\ttimeFrame\x12\x95\x01\n" +
-	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x92A%2#Interpretation of the query resultsR\x0einterpretation\x1a\xec\x15\n" +
+	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x92A%2#Interpretation of the query resultsR\x0einterpretation\x1a\x9d\x17\n" +
 	"\x05Query\x12U\n" +
 	"\x04logs\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.LogsH\x00R\x04logs\x12X\n" +
 	"\x05spans\x18\x02 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.SpansH\x00R\x05spans\x12^\n" +
@@ -571,12 +579,13 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "
 	"\bgroup_by\x18\x04 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB-\x92A*2(A list of fields to group the records byR\agroupBy\x12\x7f\n" +
 	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB$\x92A!2\x1fSpan query aggregation functionR\vaggregation:/\x92A,\n" +
 	"**\n" +
-	"SpansQuery2\x1cA spans variant of the query\x1a\xcb\x04\n" +
+	"SpansQuery2\x1cA spans variant of the query\x1a\xfc\x05\n" +
 	"\aMetrics\x12\xa3\x01\n" +
 	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12\x9b\x01\n" +
 	"\x11promql_query_type\x18\x02 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12\xc6\x01\n" +
 	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
-	"editorMode:3\x92A0\n" +
+	"editorMode\x12\xae\x01\n" +
+	"\x11series_limit_type\x18\x04 \x01(\x0e2>.com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitTypeBB\x92A?2:How to limit the result using series_count_limit parameterJ\x011R\x0fseriesLimitType:3\x92A0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xbd\x02\n" +
 	"\tDataprime\x12z\n" +
 	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
@@ -632,7 +641,8 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_goTypes = []a
 	(*common.PromQlQuery)(nil),          // 15: com.coralogixapis.dashboards.v1.common.PromQlQuery
 	(common.PromQLQueryType)(0),         // 16: com.coralogixapis.dashboards.v1.common.PromQLQueryType
 	(common1.MetricsQueryEditorMode)(0), // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	(*common.DataprimeQuery)(nil),       // 18: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(common.MetricsSeriesLimitType)(0),  // 18: com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
+	(*common.DataprimeQuery)(nil),       // 19: com.coralogixapis.dashboards.v1.common.DataprimeQuery
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []int32{
 	2,  // 0: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.query:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query
@@ -655,13 +665,14 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []i
 	15, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
 	16, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
 	17, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	18, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	9,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	18, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.series_limit_type:type_name -> com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
+	19, // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	9,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_init() }

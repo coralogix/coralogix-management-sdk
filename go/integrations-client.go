@@ -119,7 +119,7 @@ const (
 
 // IntegrationsClient is a client for the Coralogix Extensions API.
 type IntegrationsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new integration.
@@ -321,6 +321,6 @@ func (c IntegrationsClient) Test(ctx context.Context, req *TestIntegrationReques
 }
 
 // NewIntegrationsClient creates a new client.
-func NewIntegrationsClient(c *CallPropertiesCreator) *IntegrationsClient {
+func NewIntegrationsClient(c CallPropertiesCreator) *IntegrationsClient {
 	return &IntegrationsClient{callPropertiesCreator: c}
 }

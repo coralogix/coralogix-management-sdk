@@ -197,7 +197,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.15"
+revision = "v2.7.16"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -262,6 +262,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto",
     "src/com/coralogixapis/dashboards/v1/ast/variables_v2/variable_value.proto",
     "src/com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto",
+    "src/com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto",
 ]
 
 [cx-api-logs2metrics]
