@@ -111,8 +111,8 @@ commit_hash = "363ba35c96a27e1b34afac6a319d768af708f567"
 [[dependencies]]
 name = "cx-api-organisations"
 url = "github.com/coralogix/cx-api-organisations"
-revision = "v0.1.35"
-commit_hash = "86b3c31f1ec73b5bf7e9a8d0e7170751196c24c7"
+revision = "v0.1.36"
+commit_hash = "fdf323b639fb777bf27be26a7a04f161f2e2f134"
 
 [[dependencies]]
 name = "cx-api-permissions"
