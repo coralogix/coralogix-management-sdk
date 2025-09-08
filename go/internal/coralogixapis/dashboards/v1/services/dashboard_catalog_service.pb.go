@@ -9,7 +9,7 @@ package services
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -244,13 +244,13 @@ var File_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_prot
 
 const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_proto_rawDesc = "" +
 	"\n" +
-	"Hcom/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x1c\n" +
+	"Hcom/coralogixapis/dashboards/v1/services/dashboard_catalog_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x1c\n" +
 	"\x1aGetDashboardCatalogRequest\"\xaa\x01\n" +
 	"\x1bGetDashboardCatalogResponse\x12T\n" +
-	"\x05items\x18\x01 \x03(\v2>.com.coralogixapis.dashboards.v1.services.DashboardCatalogItemR\x05items:5\x92A2\n" +
+	"\x05items\x18\x01 \x03(\v2>.com.coralogixapis.dashboards.v1.services.DashboardCatalogItemR\x05items:5\x9aA2\n" +
 	"0*.Get dashboard catalog response data structure.\"\xb8\x06\n" +
 	"\x14DashboardCatalogItem\x12J\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"6U1Q8Hpa263Se8PkRKaiE\"R\x02id\x120\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"6U1Q8Hpa263Se8PkRKaiE\"R\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12>\n" +
 	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x129\n" +
 	"\n" +
@@ -265,10 +265,10 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_pr
 	"\tis_locked\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.BoolValueR\bisLocked\x12F\n" +
 	"\x10locker_author_id\x18\v \x01(\v2\x1c.google.protobuf.StringValueR\x0elockerAuthorId\x129\n" +
-	"\tslug_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\bslugName:,\x92A)\n" +
+	"\tslug_name\x18\f \x01(\v2\x1c.google.protobuf.StringValueR\bslugName:,\x9aA)\n" +
 	"'*%Dashboard catalog item data structure2\xad\x04\n" +
 	"\x17DashboardCatalogService\x12\xc1\x03\n" +
-	"\x13GetDashboardCatalog\x12D.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogRequest\x1aE.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogResponse\"\x9c\x02\x92A\xdf\x01\n" +
+	"\x13GetDashboardCatalog\x12D.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogRequest\x1aE.com.coralogixapis.dashboards.v1.services.GetDashboardCatalogResponse\"\x9c\x02\x9aA\xdf\x01\n" +
 	"\x11Dashboard service\x12\x15Get dashboard catalog\x1a(Get a list of all dashboards accessible.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -278,7 +278,7 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_catalog_service_pr
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
 	"\x16\x1a\x14team-dashboards:Readʸ\x02\x17\n" +
-	"\x15Get dashboard catalog\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/dashboards/catalog\x1aN\x92AK\n" +
+	"\x15Get dashboard catalog\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/dashboards/catalog\x1aN\x9aAK\n" +
 	"\x11Dashboard service\x126Get information about the Coralogix Dashboard catalog.b\x06proto3"
 
 var (

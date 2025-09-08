@@ -13,7 +13,7 @@ import (
 	variables "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/variables"
 	variables_v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/variables_v2"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -429,31 +429,31 @@ var File_com_coralogixapis_dashboards_v1_ast_dashboard_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_ast_dashboard_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a<com/coralogixapis/dashboards/v1/ast/variables/variable.proto\x1a?com/coralogixapis/dashboards/v1/ast/variables_v2/variable.proto\x1a3com/coralogixapis/dashboards/v1/common/action.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xee\x14\n" +
+	"3com/coralogixapis/dashboards/v1/ast/dashboard.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1a5com/coralogixapis/dashboards/v1/ast/folder_path.proto\x1a0com/coralogixapis/dashboards/v1/ast/layout.proto\x1a<com/coralogixapis/dashboards/v1/ast/variables/variable.proto\x1a?com/coralogixapis/dashboards/v1/ast/variables_v2/variable.proto\x1a3com/coralogixapis/dashboards/v1/common/action.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xee\x14\n" +
 	"\tDashboard\x12p\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBB\x92A?2$A unique identifier of the dashboardJ\x17\"GZLHSeqelCbD3I7HbIDtL\"R\x02id\x12h\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB6\x92A32!The display name of the dashboardJ\x0e\"Example Name\"R\x04name\x12\x9f\x01\n" +
-	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB_\x92A\\2DA brief description or summary of the dashboard's purpose or contentJ\x14\"Sample description\"R\vdescription\x12\x87\x01\n" +
-	"\x06layout\x18\x04 \x01(\v2+.com.coralogixapis.dashboards.v1.ast.LayoutBB\x92A?2=The layout configuration for the dashboard's visual elements.R\x06layout\x12\xab\x01\n" +
-	"\tvariables\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.ast.variables.VariableBT\x92AO2MA list of variables that can be used within the dashboard for dynamic content\x18\x01R\tvariables\x12\xb3\x01\n" +
-	"\fvariables_v2\x18\x10 \x03(\v2<.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableV2BR\x92AO2MA list of variables that can be used within the dashboard for dynamic contentR\vvariablesV2\x12\x91\x01\n" +
-	"\afilters\x18\x06 \x03(\v23.com.coralogixapis.dashboards.v1.ast.filters.FilterBB\x92A?2=A list of filters that can be applied to the dashboard's dataR\afilters\x12\xa3\x01\n" +
-	"\x13absolute_time_frame\x18\a \x01(\v21.com.coralogixapis.dashboards.v1.common.TimeFrameB>\x92A;29Absolute time frame specifying a fixed start and end timeH\x00R\x11absoluteTimeFrame\x12\x91\x01\n" +
-	"\x13relative_time_frame\x18\b \x01(\v2\x19.google.protobuf.DurationBD\x92AA2?Relative time frame specifying a duration from the current timeH\x00R\x11relativeTimeFrame\x12D\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBB\x9aA?2$A unique identifier of the dashboardJ\x17\"GZLHSeqelCbD3I7HbIDtL\"R\x02id\x12h\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB6\x9aA32!The display name of the dashboardJ\x0e\"Example Name\"R\x04name\x12\x9f\x01\n" +
+	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB_\x9aA\\2DA brief description or summary of the dashboard's purpose or contentJ\x14\"Sample description\"R\vdescription\x12\x87\x01\n" +
+	"\x06layout\x18\x04 \x01(\v2+.com.coralogixapis.dashboards.v1.ast.LayoutBB\x9aA?2=The layout configuration for the dashboard's visual elements.R\x06layout\x12\xab\x01\n" +
+	"\tvariables\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.ast.variables.VariableBT\x9aAO2MA list of variables that can be used within the dashboard for dynamic content\x18\x01R\tvariables\x12\xb3\x01\n" +
+	"\fvariables_v2\x18\x10 \x03(\v2<.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableV2BR\x9aAO2MA list of variables that can be used within the dashboard for dynamic contentR\vvariablesV2\x12\x91\x01\n" +
+	"\afilters\x18\x06 \x03(\v23.com.coralogixapis.dashboards.v1.ast.filters.FilterBB\x9aA?2=A list of filters that can be applied to the dashboard's dataR\afilters\x12\xa3\x01\n" +
+	"\x13absolute_time_frame\x18\a \x01(\v21.com.coralogixapis.dashboards.v1.common.TimeFrameB>\x9aA;29Absolute time frame specifying a fixed start and end timeH\x00R\x11absoluteTimeFrame\x12\x91\x01\n" +
+	"\x13relative_time_frame\x18\b \x01(\v2\x19.google.protobuf.DurationBD\x9aAA2?Relative time frame specifying a duration from the current timeH\x00R\x11relativeTimeFrame\x12D\n" +
 	"\tfolder_id\x18\t \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDH\x01R\bfolderId\x12R\n" +
 	"\vfolder_path\x18\n" +
 	" \x01(\v2/.com.coralogixapis.dashboards.v1.ast.FolderPathH\x01R\n" +
 	"folderPath\x12\xb0\x01\n" +
-	"\vannotations\x18\v \x03(\v2;.com.coralogixapis.dashboards.v1.ast.annotations.AnnotationBQ\x92AN2LA list of annotations that can be used within the dashboard's visualizationsR\vannotations\x12Q\n" +
+	"\vannotations\x18\v \x03(\v2;.com.coralogixapis.dashboards.v1.ast.annotations.AnnotationBQ\x9aAN2LA list of annotations that can be used within the dashboard's visualizationsR\vannotations\x12Q\n" +
 	"\x03off\x18\f \x01(\v2=.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshOffH\x02R\x03off\x12g\n" +
 	"\vtwo_minutes\x18\r \x01(\v2D.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshTwoMinutesH\x02R\n" +
 	"twoMinutes\x12j\n" +
 	"\ffive_minutes\x18\x0e \x01(\v2E.com.coralogixapis.dashboards.v1.ast.Dashboard.AutoRefreshFiveMinutesH\x02R\vfiveMinutes\x12\x9e\x01\n" +
-	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x92A`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x12\xa0\x01\n" +
-	"\aactions\x18\x11 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardActionBM\x92AJ2HA list of public actions that are available within the dashboard contextR\aactions\x1a\x10\n" +
+	"\tslug_name\x18\x0f \x01(\v2\x1c.google.protobuf.StringValueBc\x9aA`2BA unique slug name serving as an alias for accessing the dashboardJ\x1a\"system-health-monitoring\"R\bslugName\x12\xa0\x01\n" +
+	"\aactions\x18\x11 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardActionBM\x9aAJ2HA list of public actions that are available within the dashboard contextR\aactions\x1a\x10\n" +
 	"\x0eAutoRefreshOff\x1a\x17\n" +
 	"\x15AutoRefreshTwoMinutes\x1a\x18\n" +
-	"\x16AutoRefreshFiveMinutes:\x80\x02\x92A\xfc\x01\n" +
+	"\x16AutoRefreshFiveMinutes:\x80\x02\x9aA\xfc\x01\n" +
 	"r*\tDashboard2UDashboard represents the structure and configuration of a Coralogix Custom Dashboard.\xd2\x01\x04name\xd2\x01\x06layout*\x85\x01\n" +
 	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\f\n" +
 	"\n" +

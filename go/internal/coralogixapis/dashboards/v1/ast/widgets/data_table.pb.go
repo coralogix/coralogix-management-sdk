@@ -10,7 +10,7 @@ import (
 	filters "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/filters"
 	common1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets/common"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -866,14 +866,14 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto protorefle
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a;com/coralogixapis/dashboards/v1/common/ordering_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf7.\n" +
+	"<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a;com/coralogixapis/dashboards/v1/common/ordering_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf7.\n" +
 	"\tDataTable\x12\x83\x01\n" +
-	"\x05query\x18\x01 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.QueryB/\x92A,2*A query object containing query definitionR\x05query\x12}\n" +
-	"\x10results_per_page\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB6\x92A32-How many results are displayed per table pageJ\x0210R\x0eresultsPerPage\x12y\n" +
-	"\trow_style\x18\x03 \x01(\x0e25.com.coralogixapis.dashboards.v1.ast.widgets.RowStyleB%\x92A\"2 Specifies how rows are displayedR\browStyle\x12x\n" +
-	"\acolumns\x18\x04 \x03(\v2=.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.ColumnB\x1f\x92A\x1c2\x1aList of column definitionsR\acolumns\x12\x84\x01\n" +
-	"\border_by\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.common.OrderingFieldB2\x92A/2-Defines how to order the results in the tableR\aorderBy\x12\x93\x01\n" +
-	"\x0edata_mode_type\x18\v \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x92A(2&Data mode type, either high or archiveR\fdataModeType\x1a\x8b\x03\n" +
+	"\x05query\x18\x01 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.QueryB/\x9aA,2*A query object containing query definitionR\x05query\x12}\n" +
+	"\x10results_per_page\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB6\x9aA32-How many results are displayed per table pageJ\x0210R\x0eresultsPerPage\x12y\n" +
+	"\trow_style\x18\x03 \x01(\x0e25.com.coralogixapis.dashboards.v1.ast.widgets.RowStyleB%\x9aA\"2 Specifies how rows are displayedR\browStyle\x12x\n" +
+	"\acolumns\x18\x04 \x03(\v2=.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.ColumnB\x1f\x9aA\x1c2\x1aList of column definitionsR\acolumns\x12\x84\x01\n" +
+	"\border_by\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.common.OrderingFieldB2\x9aA/2-Defines how to order the results in the tableR\aorderBy\x12\x93\x01\n" +
+	"\x0edata_mode_type\x18\v \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x9aA(2&Data mode type, either high or archiveR\fdataModeType\x1a\x8b\x03\n" +
 	"\x05Query\x12V\n" +
 	"\x04logs\x18\x01 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQueryH\x00R\x04logs\x12Y\n" +
 	"\x05spans\x18\x02 \x01(\v2A.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQueryH\x00R\x05spans\x12_\n" +
@@ -881,59 +881,59 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_data_table_proto_rawDesc 
 	"\tdataprime\x18\x04 \x01(\v2E.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.DataprimeQueryH\x00R\tdataprimeB\a\n" +
 	"\x05value\x1a\xa6\f\n" +
 	"\tLogsQuery\x12\xba\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12\x8d\x01\n" +
-	"\afilters\x18\x02 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x93\x01\n" +
-	"\bgrouping\x18\x03 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.GroupingB,\x92A)2'Definition of grouping and aggregationsR\bgrouping\x12\x9f\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x9aA_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12\x8d\x01\n" +
+	"\afilters\x18\x02 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x9aA02.List of filters that narrow down query resultsR\afilters\x12\x93\x01\n" +
+	"\bgrouping\x18\x03 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.GroupingB,\x9aA)2'Definition of grouping and aggregationsR\bgrouping\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\x94\x03\n" +
+	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the results should be returnedR\ttimeFrame\x1a\x94\x03\n" +
 	"\bGrouping\x12l\n" +
-	"\bgroup_by\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB3\x92A02.List of field names to group the query resultsR\agroupBy\x12\x8b\x01\n" +
-	"\faggregations\x18\x02 \x03(\v2L.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.AggregationB\x19\x92A\x162\x14List of aggregationsR\faggregations\x12\x8b\x01\n" +
-	"\tgroup_bys\x18\x03 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB4\x92A12/List of observation fields to group the resultsR\bgroupBys\x1a\xcd\x03\n" +
+	"\bgroup_by\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB3\x9aA02.List of field names to group the query resultsR\agroupBy\x12\x8b\x01\n" +
+	"\faggregations\x18\x02 \x03(\v2L.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.LogsQuery.AggregationB\x19\x9aA\x162\x14List of aggregationsR\faggregations\x12\x8b\x01\n" +
+	"\tgroup_bys\x18\x03 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB4\x9aA12/List of observation fields to group the resultsR\bgroupBys\x1a\xcd\x03\n" +
 	"\vAggregation\x12\x85\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBW\x92AT2\x1dAggregation unique identifierJ3{ \"value\": \"52d192ac-a28f-4c51-97f5-5ba004249ba1\" }R\x02id\x12G\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x122\x10Aggregation nameR\x04name\x12o\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBW\x9aAT2\x1dAggregation unique identifierJ3{ \"value\": \"52d192ac-a28f-4c51-97f5-5ba004249ba1\" }R\x02id\x12G\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x122\x10Aggregation nameR\x04name\x12o\n" +
 	"\n" +
-	"is_visible\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB4\x92A12/Whether the aggregation is visible in the tableR\tisVisible\x12|\n" +
-	"\vaggregation\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB!\x92A\x1e2\x1cType of aggregation functionR\vaggregation:-\x92A*\n" +
+	"is_visible\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB4\x9aA12/Whether the aggregation is visible in the tableR\tisVisible\x12|\n" +
+	"\vaggregation\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB!\x9aA\x1e2\x1cType of aggregation functionR\vaggregation:-\x9aA*\n" +
 	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\xb0\f\n" +
 	"\n" +
 	"SpansQuery\x12\x89\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB1\x92A.2,A Lucene query string to search span recordsR\vluceneQuery\x12z\n" +
-	"\afilters\x18\x02 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x94\x01\n" +
-	"\bgrouping\x18\x03 \x01(\v2J.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.GroupingB,\x92A)2'Definition of grouping and aggregationsR\bgrouping\x12\x9f\x01\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB1\x9aA.2,A Lucene query string to search span recordsR\vluceneQuery\x12z\n" +
+	"\afilters\x18\x02 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x9aA\x1c2\x1aList of span query filtersR\afilters\x12\x94\x01\n" +
+	"\bgrouping\x18\x03 \x01(\v2J.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.GroupingB,\x9aA)2'Definition of grouping and aggregationsR\bgrouping\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x1a\xd7\x03\n" +
+	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x1a\xd7\x03\n" +
 	"\bGrouping\x12\x80\x01\n" +
-	"\bgroup_by\x18\x01 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\agroupBy\x12\xa4\x01\n" +
-	"\faggregations\x18\x02 \x03(\v2M.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.AggregationB1\x92A.2,List of aggregations applied to span recordsR\faggregations\x12\xa0\x01\n" +
-	"\tgroup_bys\x18\x03 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBE\x92AB2@A list of observation fields definitions to group the records byR\bgroupBys\x1a\xd5\x03\n" +
+	"\bgroup_by\x18\x01 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x9aA/2-List of field names to group the span recordsR\agroupBy\x12\xa4\x01\n" +
+	"\faggregations\x18\x02 \x03(\v2M.com.coralogixapis.dashboards.v1.ast.widgets.DataTable.SpansQuery.AggregationB1\x9aA.2,List of aggregations applied to span recordsR\faggregations\x12\xa0\x01\n" +
+	"\tgroup_bys\x18\x03 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldBE\x9aAB2@A list of observation fields definitions to group the records byR\bgroupBys\x1a\xd5\x03\n" +
 	"\vAggregation\x12\x85\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBW\x92AT2\x1dAggregation unique identifierJ3{ \"value\": \"52d192ac-a28f-4c51-97f5-5ba004249ba1\" }R\x02id\x12G\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x122\x10Aggregation nameR\x04name\x12o\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBW\x9aAT2\x1dAggregation unique identifierJ3{ \"value\": \"52d192ac-a28f-4c51-97f5-5ba004249ba1\" }R\x02id\x12G\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x122\x10Aggregation nameR\x04name\x12o\n" +
 	"\n" +
-	"is_visible\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB4\x92A12/Whether the aggregation is visible in the tableR\tisVisible\x12\x83\x01\n" +
-	"\vaggregation\x18\x04 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB'\x92A$2\"Type of spans aggregation functionR\vaggregation:/\x92A,\n" +
+	"is_visible\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB4\x9aA12/Whether the aggregation is visible in the tableR\tisVisible\x12\x83\x01\n" +
+	"\vaggregation\x18\x04 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB'\x9aA$2\"Type of spans aggregation functionR\vaggregation:/\x9aA,\n" +
 	"**\n" +
 	"SpansQuery2\x1cA spans variant of the query\x1a\xec\x06\n" +
 	"\fMetricsQuery\x12\xa3\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
-	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
-	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x9aAH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12y\n" +
+	"\afilters\x18\x02 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x9aA\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
+	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x9aAV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
 	"editorMode\x12\x9e\x01\n" +
 	"\n" +
-	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
-	"\x11promql_query_type\x18\x05 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType:3\x92A0\n" +
+	"time_frame\x18\x04 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x9aAC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
+	"\x11promql_query_type\x18\x05 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x9aA321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType:3\x9aA0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xd9\x03\n" +
 	"\x0eDataprimeQuery\x12z\n" +
-	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
-	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x92A\x172\x15List of query filtersR\afilters\x12\x9f\x01\n" +
+	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
+	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x9aA\x172\x15List of query filtersR\afilters\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x03 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x92A4\n" +
+	"time_frame\x18\x03 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the query\x1a\x9d\x02\n" +
 	"\x06Column\x12\x96\x01\n" +
-	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBb\x92A_2*Name of the field to display in the columnJ1{ \"value\": \"coralogix.metadata.applicationName\" }R\x05field\x12z\n" +
-	"\x05width\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueBG\x92AD2BCustom width of the column, by default it's automatically adjustedR\x05width*\x96\x01\n" +
+	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBb\x9aA_2*Name of the field to display in the columnJ1{ \"value\": \"coralogix.metadata.applicationName\" }R\x05field\x12z\n" +
+	"\x05width\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueBG\x9aAD2BCustom width of the column, by default it's automatically adjustedR\x05width*\x96\x01\n" +
 	"\bRowStyle\x12\x19\n" +
 	"\x15ROW_STYLE_UNSPECIFIED\x10\x00\x12\x16\n" +
 	"\x12ROW_STYLE_ONE_LINE\x10\x01\x12\x16\n" +

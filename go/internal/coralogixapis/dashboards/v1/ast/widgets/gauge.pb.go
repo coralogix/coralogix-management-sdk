@@ -10,7 +10,7 @@ import (
 	filters "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/filters"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets/common"
 	common1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -905,28 +905,28 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_gauge_proto protoreflect.Fi
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_gauge_proto_rawDesc = "" +
 	"\n" +
-	"7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdb9\n" +
+	"7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1a?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1aCcom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdb9\n" +
 	"\x05Gauge\x12\x7f\n" +
-	"\x05query\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.QueryB/\x92A,2*A query object containing query definitionR\x05query\x12\x9a\x01\n" +
-	"\x03min\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueBj\x92Ag2bA minimum gauge value used in percentage threshold calculation and for visual value representationJ\x010R\x03min\x12\x9f\x01\n" +
-	"\x03max\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueBo\x92Al2bA maximum gauge value used in percentage threshold calculation and for visual value representationJ\x06150000R\x03max\x12\x9b\x01\n" +
-	"\x0eshow_inner_arc\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueBY\x92AV2MWhether to show the inner arc of gauge which graphically represents the valueJ\x05falseR\fshowInnerArc\x12\xa2\x01\n" +
-	"\x0eshow_outer_arc\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueB`\x92A]2UWhether to show the outer arc of gauge which graphically represents the min/max rangeJ\x04trueR\fshowOuterArc\x12\x90\x01\n" +
-	"\x04unit\x18\x06 \x01(\x0e27.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.UnitBC\x92A@2;Unit of the value - one from a predefined list, or 'custom'J\x013R\x04unit\x12\xb1\x01\n" +
+	"\x05query\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.QueryB/\x9aA,2*A query object containing query definitionR\x05query\x12\x9a\x01\n" +
+	"\x03min\x18\x02 \x01(\v2\x1c.google.protobuf.DoubleValueBj\x9aAg2bA minimum gauge value used in percentage threshold calculation and for visual value representationJ\x010R\x03min\x12\x9f\x01\n" +
+	"\x03max\x18\x03 \x01(\v2\x1c.google.protobuf.DoubleValueBo\x9aAl2bA maximum gauge value used in percentage threshold calculation and for visual value representationJ\x06150000R\x03max\x12\x9b\x01\n" +
+	"\x0eshow_inner_arc\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueBY\x9aAV2MWhether to show the inner arc of gauge which graphically represents the valueJ\x05falseR\fshowInnerArc\x12\xa2\x01\n" +
+	"\x0eshow_outer_arc\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueB`\x9aA]2UWhether to show the outer arc of gauge which graphically represents the min/max rangeJ\x04trueR\fshowOuterArc\x12\x90\x01\n" +
+	"\x04unit\x18\x06 \x01(\x0e27.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.UnitBC\x9aA@2;Unit of the value - one from a predefined list, or 'custom'J\x013R\x04unit\x12\xb1\x01\n" +
 	"\n" +
-	"thresholds\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.ThresholdBS\x92AP2NList of value thresholds, each with a certain color and an optional name labelR\n" +
+	"thresholds\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.ThresholdBS\x9aAP2NList of value thresholds, each with a certain color and an optional name labelR\n" +
 	"thresholds\x12\x93\x01\n" +
-	"\x0edata_mode_type\x18\b \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x92A(2&Data mode type, either high or archiveR\fdataModeType\x12\xcf\x01\n" +
-	"\fthreshold_by\x18\t \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.ThresholdByBl\x92Ai2gIndicates which widget element should be colorized as the threshold, either the value or the backgroundR\vthresholdBy\x12\xa0\x01\n" +
+	"\x0edata_mode_type\x18\b \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB+\x9aA(2&Data mode type, either high or archiveR\fdataModeType\x12\xcf\x01\n" +
+	"\fthreshold_by\x18\t \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.ThresholdByBl\x9aAi2gIndicates which widget element should be colorized as the threshold, either the value or the backgroundR\vthresholdBy\x12\xa0\x01\n" +
 	"\vcustom_unit\x18\n" +
-	" \x01(\v2\x1c.google.protobuf.StringValueBa\x92A^2HCustom unit (requires to have unit field set as 'custom' to take effect)J\x12{ \"value\": \"kvs\" }R\n" +
+	" \x01(\v2\x1c.google.protobuf.StringValueBa\x9aA^2HCustom unit (requires to have unit field set as 'custom' to take effect)J\x12{ \"value\": \"kvs\" }R\n" +
 	"customUnit\x12\x8f\x01\n" +
-	"\adecimal\x18\v \x01(\v2\x1b.google.protobuf.Int32ValueBX\x92AU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x013R\adecimal\x12\x9a\x01\n" +
-	"\x0ethreshold_type\x18\f \x01(\x0e2A.com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdTypeB0\x92A-2+Type of the threshold, relative or absoluteR\rthresholdType\x12q\n" +
-	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x92A\x1a2\x18Widget's legend settingsR\x06legend\x12\xd0\x01\n" +
-	"\tlegend_by\x18\x0e \x01(\x0e2<.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendByBu\x92Ar2p(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groupsR\blegendBy\x12\x9b\x01\n" +
-	"\x13display_series_name\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueBO\x92AL2J(multigauge display only) Whether to show the series names above the valueR\x11displaySeriesName\x12\x89\x01\n" +
-	"\x11decimal_precision\x18\x10 \x01(\v2\x1a.google.protobuf.BoolValueB@\x92A=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x1a\xfb\x02\n" +
+	"\adecimal\x18\v \x01(\v2\x1b.google.protobuf.Int32ValueBX\x9aAU2PNumber indicating the decimal precision of the numeric values, within range 0-15J\x013R\adecimal\x12\x9a\x01\n" +
+	"\x0ethreshold_type\x18\f \x01(\x0e2A.com.coralogixapis.dashboards.v1.ast.widgets.common.ThresholdTypeB0\x9aA-2+Type of the threshold, relative or absoluteR\rthresholdType\x12q\n" +
+	"\x06legend\x18\r \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendB\x1d\x9aA\x1a2\x18Widget's legend settingsR\x06legend\x12\xd0\x01\n" +
+	"\tlegend_by\x18\x0e \x01(\x0e2<.com.coralogixapis.dashboards.v1.ast.widgets.common.LegendByBu\x9aAr2p(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groupsR\blegendBy\x12\x9b\x01\n" +
+	"\x13display_series_name\x18\x0f \x01(\v2\x1a.google.protobuf.BoolValueBO\x9aAL2J(multigauge display only) Whether to show the series names above the valueR\x11displaySeriesName\x12\x89\x01\n" +
+	"\x11decimal_precision\x18\x10 \x01(\v2\x1a.google.protobuf.BoolValueB@\x9aA=24Whether to render numeric value without abbreviationJ\x05falseR\x10decimalPrecision\x1a\xfb\x02\n" +
 	"\x05Query\x12[\n" +
 	"\ametrics\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.MetricsQueryH\x00R\ametrics\x12R\n" +
 	"\x04logs\x18\x02 \x01(\v2<.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.LogsQueryH\x00R\x04logs\x12U\n" +
@@ -934,46 +934,46 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_gauge_proto_rawDesc = "" 
 	"\tdataprime\x18\x04 \x01(\v2A.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.DataprimeQueryH\x00R\tdataprimeB\a\n" +
 	"\x05value\x1a\xe9\a\n" +
 	"\fMetricsQuery\x12\xa3\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12{\n" +
-	"\vaggregation\x18\x02 \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.AggregationB\x19\x92A\x162\x14Aggregation functionR\vaggregation\x12y\n" +
-	"\afilters\x18\x03 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x92A\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
-	"\veditor_mode\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x9aAH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12{\n" +
+	"\vaggregation\x18\x02 \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.AggregationB\x19\x9aA\x162\x14Aggregation functionR\vaggregation\x12y\n" +
+	"\afilters\x18\x03 \x03(\v2A.com.coralogixapis.dashboards.v1.ast.filters.Filter.MetricsFilterB\x1c\x9aA\x192\x17List of metrics filtersR\afilters\x12\xc6\x01\n" +
+	"\veditor_mode\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x9aAV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
 	"editorMode\x12\x9e\x01\n" +
 	"\n" +
-	"time_frame\x18\x05 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
-	"\x11promql_query_type\x18\x06 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType:3\x92A0\n" +
+	"time_frame\x18\x05 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x9aAC2ASpecifies the time period for which the result should be returnedR\ttimeFrame\x12\x9b\x01\n" +
+	"\x11promql_query_type\x18\x06 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x9aA321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType:3\x9aA0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xa4\a\n" +
 	"\tLogsQuery\x12\xba\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12}\n" +
-	"\x10logs_aggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x92A\x162\x14Aggregation functionR\x0flogsAggregation\x12d\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x9aA_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12}\n" +
+	"\x10logs_aggregation\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x9aA\x162\x14Aggregation functionR\x0flogsAggregation\x12d\n" +
 	"\vaggregation\x18\x03 \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.AggregationB\x02\x18\x01R\vaggregation\x12\x8d\x01\n" +
-	"\afilters\x18\x04 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
-	"\bgroup_by\x18\x05 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x92A<2:A list of observation fields by which to group the resultsR\agroupBy\x12\x9e\x01\n" +
+	"\afilters\x18\x04 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x9aA02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
+	"\bgroup_by\x18\x05 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x9aA<2:A list of observation fields by which to group the resultsR\agroupBy\x12\x9e\x01\n" +
 	"\n" +
-	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x92AC2ASpecifies the time period for which the result should be returnedR\ttimeFrame:-\x92A*\n" +
+	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBF\x9aAC2ASpecifies the time period for which the result should be returnedR\ttimeFrame:-\x9aA*\n" +
 	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\xf3\a\n" +
 	"\n" +
 	"SpansQuery\x12\x87\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12\x8b\x01\n" +
-	"\x11spans_aggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x92A!2\x1fSpan query aggregation functionR\x10spansAggregation\x12d\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x9aA,2*Lucene query string to search span recordsR\vluceneQuery\x12\x8b\x01\n" +
+	"\x11spans_aggregation\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x9aA!2\x1fSpan query aggregation functionR\x10spansAggregation\x12d\n" +
 	"\vaggregation\x18\x03 \x01(\x0e2>.com.coralogixapis.dashboards.v1.ast.widgets.Gauge.AggregationB\x02\x18\x01R\vaggregation\x12z\n" +
-	"\afilters\x18\x04 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x80\x01\n" +
-	"\bgroup_by\x18\x05 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x92A/2-List of field names to group the span recordsR\agroupBy\x12\x9f\x01\n" +
+	"\afilters\x18\x04 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x9aA\x1c2\x1aList of span query filtersR\afilters\x12\x80\x01\n" +
+	"\bgroup_by\x18\x05 \x03(\v21.com.coralogixapis.dashboards.v1.common.SpanFieldB2\x9aA/2-List of field names to group the span recordsR\agroupBy\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x12\x94\x01\n" +
-	"\tgroup_bys\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB9\x92A624A list of observation fields to group the records byR\bgroupBys:/\x92A,\n" +
+	"time_frame\x18\x06 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame\x12\x94\x01\n" +
+	"\tgroup_bys\x18\a \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB9\x9aA624A list of observation fields to group the records byR\bgroupBys:/\x9aA,\n" +
 	"**\n" +
 	"SpansQuery2\x1cA spans variant of the query\x1a\xd9\x03\n" +
 	"\x0eDataprimeQuery\x12z\n" +
-	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
-	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x92A\x172\x15List of query filtersR\afilters\x12\x9f\x01\n" +
+	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12p\n" +
+	"\afilters\x18\x02 \x03(\v2:.com.coralogixapis.dashboards.v1.ast.filters.Filter.SourceB\x1a\x9aA\x172\x15List of query filtersR\afilters\x12\x9f\x01\n" +
 	"\n" +
-	"time_frame\x18\x03 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x92AD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x92A4\n" +
+	"time_frame\x18\x03 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectBG\x9aAD2BSpecifies the time period for which the records should be returnedR\ttimeFrame:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the query\x1a\xcd\x02\n" +
 	"\tThreshold\x12[\n" +
-	"\x04from\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB)\x92A&2$Minimum bound value of the thresholdR\x04from\x12O\n" +
-	"\x05color\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x182\x16Color of the thresholdR\x05color\x12X\n" +
-	"\x05label\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x92A!2\x1fOptional label of the thresholdR\x05label:8\x92A5\n" +
+	"\x04from\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB)\x9aA&2$Minimum bound value of the thresholdR\x04from\x12O\n" +
+	"\x05color\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x182\x16Color of the thresholdR\x05color\x12X\n" +
+	"\x05label\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x9aA!2\x1fOptional label of the thresholdR\x05label:8\x9aA5\n" +
 	"3*\tThreshold2&Definition of a single gauge threshold\"\x94\x01\n" +
 	"\vAggregation\x12\x1b\n" +
 	"\x17AGGREGATION_UNSPECIFIED\x10\x00\x12\x14\n" +

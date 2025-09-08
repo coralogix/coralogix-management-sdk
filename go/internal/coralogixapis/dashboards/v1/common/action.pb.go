@@ -7,7 +7,7 @@
 package common
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -440,21 +440,21 @@ var File_com_coralogixapis_dashboards_v1_common_action_proto protoreflect.FileDe
 
 const file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/dashboards/v1/common/action.proto\x12&com.coralogixapis.dashboards.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfb\n" +
+	"3com/coralogixapis/dashboards/v1/common/action.proto\x12&com.coralogixapis.dashboards.v1.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xfb\n" +
 	"\n" +
 	"\x06Action\x12T\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2!A unique identifier of the actionR\x02id\x12U\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
-	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x92AT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\x84\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x9aA#2!A unique identifier of the actionR\x02id\x12U\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
+	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x9aAT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\x84\x01\n" +
 	"\n" +
-	"is_private\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueBI\x92AF2DDefines if the action is private to the user or shared with the teamR\tisPrivate\x12\x92\x01\n" +
-	"\fdashboard_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueBL\x92AI2GReference to specific dashboard, can be null if the action is team wideH\x00R\vdashboardId\x88\x01\x01\x12\xae\x01\n" +
-	"\twidget_id\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueBn\x92Ak2iReference to specific widget within a dashboard, can be null if the action is team wide or dashboard wideH\x01R\bwidgetId\x88\x01\x01\x12w\n" +
+	"is_private\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueBI\x9aAF2DDefines if the action is private to the user or shared with the teamR\tisPrivate\x12\x92\x01\n" +
+	"\fdashboard_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueBL\x9aAI2GReference to specific dashboard, can be null if the action is team wideH\x00R\vdashboardId\x88\x01\x01\x12\xae\x01\n" +
+	"\twidget_id\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueBn\x9aAk2iReference to specific widget within a dashboard, can be null if the action is team wide or dashboard wideH\x01R\bwidgetId\x88\x01\x01\x12w\n" +
 	"\n" +
-	"definition\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x92A\x1a2\x18Definition of the actionR\n" +
+	"definition\x18\a \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x9aA\x1a2\x18Definition of the actionR\n" +
 	"definition\x12\xa2\x01\n" +
-	"\vdata_source\x18\b \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x92A;29Defines the data source type of the action, if applicableH\x02R\n" +
-	"dataSource\x88\x01\x01:\xf9\x01\x92A\xf3\x01\n" +
+	"\vdata_source\x18\b \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x9aA;29Defines the data source type of the action, if applicableH\x02R\n" +
+	"dataSource\x88\x01\x01:\xf9\x01\x9aA\xf3\x01\n" +
 	"i*\x06Action2_Actions are user-defined actions that can be triggered from the dashboard over specific widget.*\x85\x01\n" +
 	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\x18\x01B\x0f\n" +
 	"\r_dashboard_idB\f\n" +
@@ -462,27 +462,27 @@ const file_com_coralogixapis_dashboards_v1_common_action_proto_rawDesc = "" +
 	"_widget_idB\x0e\n" +
 	"\f_data_source\"\xc0\b\n" +
 	"\x0fDashboardAction\x12T\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2!A unique identifier of the actionR\x02id\x12U\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
-	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x92AT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\xa1\x01\n" +
-	"\twidget_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBa\x92A^2\\Reference to specific widget within a dashboard, can be null if the action is dashboard wideH\x00R\bwidgetId\x88\x01\x01\x12w\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x9aA#2!A unique identifier of the actionR\x02id\x12U\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA 2\x1eThe display name of the actionR\x04name\x12\xad\x01\n" +
+	"\x19should_open_in_new_window\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBW\x9aAT2RDefines if the action should open in a new window or current window in the browserR\x15shouldOpenInNewWindow\x12\xa1\x01\n" +
+	"\twidget_id\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueBa\x9aA^2\\Reference to specific widget within a dashboard, can be null if the action is dashboard wideH\x00R\bwidgetId\x88\x01\x01\x12w\n" +
 	"\n" +
-	"definition\x18\x05 \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x92A\x1a2\x18Definition of the actionR\n" +
+	"definition\x18\x05 \x01(\v28.com.coralogixapis.dashboards.v1.common.ActionDefinitionB\x1d\x9aA\x1a2\x18Definition of the actionR\n" +
 	"definition\x12\xa2\x01\n" +
-	"\vdata_source\x18\x06 \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x92A;29Defines the data source type of the action, if applicableH\x01R\n" +
-	"dataSource\x88\x01\x01:\xef\x01\x92A\xeb\x01\n" +
+	"\vdata_source\x18\x06 \x01(\x0e2<.com.coralogixapis.dashboards.v1.common.ActionDataSourceTypeB>\x9aA;29Defines the data source type of the action, if applicableH\x01R\n" +
+	"dataSource\x88\x01\x01:\xef\x01\x9aA\xeb\x01\n" +
 	"a*\x10Dashboard Action2MPublic actions that are always available within specific dashboard's context.*\x85\x01\n" +
 	"8Learn more about Custom Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/B\f\n" +
 	"\n" +
 	"_widget_idB\x0e\n" +
 	"\f_data_source\"\xb4\x05\n" +
 	"\x10ActionDefinition\x12\x9d\x01\n" +
-	"\rcustom_action\x18\x01 \x01(\v2E.com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomActionB/\x92A,2*Object defining action defined by the userH\x00R\fcustomAction\x12\xe4\x01\n" +
-	"\x16go_to_dashboard_action\x18\x02 \x01(\v2T.com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateActionBW\x92AT2RObject defining one of the pre-defined template actions - go to specific dashboardH\x00R\x13goToDashboardAction\x1a\x89\x01\n" +
+	"\rcustom_action\x18\x01 \x01(\v2E.com.coralogixapis.dashboards.v1.common.ActionDefinition.CustomActionB/\x9aA,2*Object defining action defined by the userH\x00R\fcustomAction\x12\xe4\x01\n" +
+	"\x16go_to_dashboard_action\x18\x02 \x01(\v2T.com.coralogixapis.dashboards.v1.common.ActionDefinition.GoToDashboardTemplateActionBW\x9aAT2RObject defining one of the pre-defined template actions - go to specific dashboardH\x00R\x13goToDashboardAction\x1a\x89\x01\n" +
 	"\fCustomAction\x12y\n" +
-	"\x03url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x92AF2DStatic URL that may contain variables using {{variable_name}} syntaxR\x03url\x1a\x84\x01\n" +
+	"\x03url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x9aAF2DStatic URL that may contain variables using {{variable_name}} syntaxR\x03url\x1a\x84\x01\n" +
 	"\x1bGoToDashboardTemplateAction\x12e\n" +
-	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB$\x92A!2\x1fReference to specific dashboardR\vdashboardIdB\x06\n" +
+	"\fdashboard_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB$\x9aA!2\x1fReference to specific dashboardR\vdashboardIdB\x06\n" +
 	"\x04type*\xd5\x01\n" +
 	"\x14ActionDataSourceType\x12,\n" +
 	"(ACTION_DATA_SOURCE_TYPE_NONE_UNSPECIFIED\x10\x00\x12 \n" +
