@@ -9,6 +9,7 @@ jobs:
   notify-openapi-facade:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2
         with:
