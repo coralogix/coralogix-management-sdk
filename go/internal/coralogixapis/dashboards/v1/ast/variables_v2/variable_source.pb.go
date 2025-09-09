@@ -1877,7 +1877,6 @@ type VariableSourceV2_QuerySource_DataprimeQuery_Type struct {
 	// Types that are valid to be assigned to Value:
 	//
 	//	*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_
-	//	*VariableSourceV2_QuerySource_DataprimeQuery_Type_DataModeType
 	Value         isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1929,15 +1928,6 @@ func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) GetQueryText() *Varia
 	return nil
 }
 
-func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type) GetDataModeType() common.DataModeType {
-	if x != nil {
-		if x, ok := x.Value.(*VariableSourceV2_QuerySource_DataprimeQuery_Type_DataModeType); ok {
-			return x.DataModeType
-		}
-	}
-	return common.DataModeType(0)
-}
-
 type isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value interface {
 	isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value()
 }
@@ -1946,19 +1936,13 @@ type VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_ struct {
 	QueryText *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText `protobuf:"bytes,1,opt,name=query_text,json=queryText,proto3,oneof"`
 }
 
-type VariableSourceV2_QuerySource_DataprimeQuery_Type_DataModeType struct {
-	DataModeType common.DataModeType `protobuf:"varint,2,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.common.DataModeType,oneof"`
-}
-
 func (*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_) isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value() {
-}
-
-func (*VariableSourceV2_QuerySource_DataprimeQuery_Type_DataModeType) isVariableSourceV2_QuerySource_DataprimeQuery_Type_Value() {
 }
 
 type VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Query         *common.DataprimeQuery `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	DataModeType  common.DataModeType    `protobuf:"varint,2,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.common.DataModeType" json:"data_mode_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -2000,11 +1984,18 @@ func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) GetQuery() 
 	return nil
 }
 
+func (x *VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText) GetDataModeType() common.DataModeType {
+	if x != nil {
+		return x.DataModeType
+	}
+	return common.DataModeType(0)
+}
+
 var File_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_rawDesc = "" +
 	"\n" +
-	"Fcom/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x848\n" +
+	"Fcom/coralogixapis/dashboards/v1/ast/variables_v2/variable_source.proto\x120com.coralogixapis.dashboards.v1.ast.variables_v2\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a7com/coralogixapis/dashboards/v1/common/span_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x838\n" +
 	"\x10VariableSourceV2\x12i\n" +
 	"\x06static\x18\x01 \x01(\v2O.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSourceH\x00R\x06static\x12f\n" +
 	"\x05query\x18\x02 \x01(\v2N.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySourceH\x00R\x05query\x12l\n" +
@@ -2027,7 +2018,7 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_prot
 	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x05label\x12>\n" +
 	"\n" +
 	"is_default\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueH\x00R\tisDefault\x88\x01\x01B\r\n" +
-	"\v_is_default\x1a\x81+\n" +
+	"\v_is_default\x1a\x80+\n" +
 	"\vQuerySource\x12y\n" +
 	"\n" +
 	"logs_query\x18\x01 \x01(\v2X.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.LogsQueryH\x00R\tlogsQuery\x12\x82\x01\n" +
@@ -2112,15 +2103,15 @@ const file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_prot
 	"\x04list\x18\x01 \x01(\v2s.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelectionH\x00R\x04list\x1a\x96\x01\n" +
 	"\rListSelection\x12\x84\x01\n" +
 	"\x06values\x18\x01 \x03(\v2l.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariableR\x06valuesB\a\n" +
-	"\x05value\x1a\xe3\x03\n" +
+	"\x05value\x1a\xe2\x03\n" +
 	"\x0eDataprimeQuery\x12v\n" +
-	"\x04type\x18\x01 \x01(\v2b.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.TypeR\x04type\x1a\xd8\x02\n" +
+	"\x04type\x18\x01 \x01(\v2b.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.TypeR\x04type\x1a\xd7\x02\n" +
 	"\x04Type\x12\x8d\x01\n" +
 	"\n" +
-	"query_text\x18\x01 \x01(\v2l.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryTextH\x00R\tqueryText\x12\\\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DataModeTypeH\x00R\fdataModeType\x1aY\n" +
+	"query_text\x18\x01 \x01(\v2l.com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryTextH\x00R\tqueryText\x1a\xb5\x01\n" +
 	"\tQueryText\x12L\n" +
-	"\x05query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryR\x05queryB\a\n" +
+	"\x05query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryR\x05query\x12Z\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DataModeTypeR\fdataModeTypeB\a\n" +
 	"\x05valueB\a\n" +
 	"\x05value\x1a\x93\x01\n" +
 	"\x13ValueDisplayOptions\x12=\n" +
@@ -2191,8 +2182,8 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 	(*wrapperspb.FloatValue)(nil),                                             // 35: google.protobuf.FloatValue
 	(*common.ObservationField)(nil),                                           // 36: com.coralogixapis.dashboards.v1.common.ObservationField
 	(*common.SpanField)(nil),                                                  // 37: com.coralogixapis.dashboards.v1.common.SpanField
-	(common.DataModeType)(0),                                                  // 38: com.coralogixapis.dashboards.v1.common.DataModeType
-	(*common.DataprimeQuery)(nil),                                             // 39: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*common.DataprimeQuery)(nil),                                             // 38: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(common.DataModeType)(0),                                                  // 39: com.coralogixapis.dashboards.v1.common.DataModeType
 }
 var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_depIdxs = []int32{
 	3,  // 0: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.static:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.StaticSource
@@ -2252,8 +2243,8 @@ var file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_
 	21, // 54: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Type.LabelValue.label_filters:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.MetricsLabelFilter
 	20, // 55: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.Selection.ListSelection.values:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.MetricsQuery.StringOrVariable
 	31, // 56: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.query_text:type_name -> com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText
-	38, // 57: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	39, // 58: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	38, // 57: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	39, // 58: com.coralogixapis.dashboards.v1.ast.variables_v2.VariableSourceV2.QuerySource.DataprimeQuery.Type.QueryText.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
 	59, // [59:59] is the sub-list for method output_type
 	59, // [59:59] is the sub-list for method input_type
 	59, // [59:59] is the sub-list for extension type_name
@@ -2309,7 +2300,6 @@ func file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto
 	}
 	file_com_coralogixapis_dashboards_v1_ast_variables_v2_variable_source_proto_msgTypes[29].OneofWrappers = []any{
 		(*VariableSourceV2_QuerySource_DataprimeQuery_Type_QueryText_)(nil),
-		(*VariableSourceV2_QuerySource_DataprimeQuery_Type_DataModeType)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
