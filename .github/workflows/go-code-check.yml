@@ -22,13 +22,19 @@ jobs:
       - uses: arduino/setup-protoc@v3
         with:
           version: ${{env.PROTOC_VERSION}}
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+            ssh-private-key: ${{ secrets.GRPC_GATEWAY_DEPLOY_KEY }}
       - name: Check formatting and build
         run: | 
+          git config --global url."ssh://git@github.com/".insteadOf "https://github.com/"
           go mod tidy
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           gofmt -l .
           make build
+        env:
+          GOPRIVATE: ${{ secrets.GOPRIVATE }}
       - uses: golangci/golangci-lint-action@v2
         with:
           # Optional: golangci-lint command line arguments.
@@ -57,6 +63,10 @@ jobs:
       - uses: arduino/setup-protoc@v3
         with:
           version: ${{env.PROTOC_VERSION}}
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+            ssh-private-key: ${{ secrets.GRPC_GATEWAY_DEPLOY_KEY }}
+      - name: Check formatting and build
       - name: Run Examples
         env:
           AWS_TEST_ROLE: ${{ secrets.AWS_TEST_ROLE }}
@@ -67,7 +77,10 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           METRICS_BUCKET: ${{ secrets.METRICS_BUCKET }}
           LOGS_BUCKET: ${{ secrets.LOGS_BUCKET }}
+          GOPRIVATE: ${{ secrets.GOPRIVATE }}
         run: |
+          git config --global url."ssh://git@github.com/".insteadOf "https://github.com/"
+          go mod tidy
           go install google.golang.org/protobuf/cmd/protoc-gen-go
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
           make test

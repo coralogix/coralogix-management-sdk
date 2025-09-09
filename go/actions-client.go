@@ -20,7 +20,7 @@ import (
 	actions "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/actions/v2"
 )
 
-// CreateActionRequest is a request to create an action.
+// CreateActionRequest is a request to create an action .
 type CreateActionRequest = actions.CreateActionRequest
 
 // ReplaceActionRequest is a request to replace an action.
