@@ -158,11 +158,11 @@ message VariableSourceV2 {
       message Type {
         oneof value {
           QueryText query_text = 1;
-          common.DataModeType data_mode_type = 2;
         }
 
         message QueryText {
           common.DataprimeQuery query = 1;        
+          common.DataModeType data_mode_type = 2;
         }
       }
     }
