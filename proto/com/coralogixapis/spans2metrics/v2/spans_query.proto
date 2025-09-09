@@ -3,10 +3,10 @@ syntax = "proto3";
 package com.coralogixapis.spans2metrics.v2;
 import "google/protobuf/wrappers.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message SpansQuery {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SpansQuery"
       description: "This data structure represents a query for spans."
@@ -18,13 +18,13 @@ message SpansQuery {
     }
   };
   // lucene query
-  google.protobuf.StringValue lucene = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"applicationName:myApp\""}];	
+  google.protobuf.StringValue lucene = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"applicationName:myApp\""}];	
   // application name filters
-  repeated google.protobuf.StringValue applicationname_filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"myApp\""}];
+  repeated google.protobuf.StringValue applicationname_filters = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"myApp\""}];
   // subsystem name filters
-  repeated google.protobuf.StringValue subsystemname_filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"mySubsystem\""}];
+  repeated google.protobuf.StringValue subsystemname_filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"mySubsystem\""}];
   // action filters
-  repeated google.protobuf.StringValue action_filters = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"myAction\""}];
+  repeated google.protobuf.StringValue action_filters = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"myAction\""}];
   // service filters
-  repeated google.protobuf.StringValue service_filters = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"myService\""}];
+  repeated google.protobuf.StringValue service_filters = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"myService\""}];
 }

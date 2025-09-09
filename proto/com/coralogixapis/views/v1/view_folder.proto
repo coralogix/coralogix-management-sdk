@@ -3,12 +3,12 @@ syntax = "proto3";
 package com.coralogixapis.views.v1;
 
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 // View folder
 message ViewFolder {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "ViewFolder"
         description: "View folder."
@@ -16,7 +16,7 @@ message ViewFolder {
       }
     };
 
-  google.protobuf.StringValue id = 1  [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue id = 1  [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Unique identifier for folders"
     format: "uuid"
     min_length: 36,
@@ -25,7 +25,7 @@ message ViewFolder {
     pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   }];
 
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Folder name"
     min_length: 1
     example: "\"My Folder\""

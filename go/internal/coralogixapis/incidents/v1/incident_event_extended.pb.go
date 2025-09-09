@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -279,13 +279,13 @@ var File_com_coralogixapis_incidents_v1_incident_event_extended_incident_event_e
 
 const file_com_coralogixapis_incidents_v1_incident_event_extended_incident_event_extended_proto_rawDesc = "" +
 	"\n" +
-	"Tcom/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto\x12\x1ecom.coralogixapis.incidents.v1\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd5\x03\n" +
+	"Tcom/coralogixapis/incidents/v1/incident_event_extended/incident_event_extended.proto\x12\x1ecom.coralogixapis.incidents.v1\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd5\x03\n" +
 	"\x15IncidentEventExtended\x12>\n" +
 	"\fcx_event_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
 	"cxEventKey\x12T\n" +
 	"\x0eincident_event\x18\x02 \x01(\v2-.com.coralogixapis.incidents.v1.IncidentEventR\rincidentEvent\x12H\n" +
 	"\x12cx_event_timestamp\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\x10cxEventTimestamp\x12\x86\x01\n" +
-	" incident_event_extended_metadata\x18\x05 \x01(\v2=.com.coralogixapis.incidents.v1.IncidentEventExtendedMetadataR\x1dincidentEventExtendedMetadata:S\x92AP\n" +
+	" incident_event_extended_metadata\x18\x05 \x01(\v2=.com.coralogixapis.incidents.v1.IncidentEventExtendedMetadataR\x1dincidentEventExtendedMetadata:S\x9aAP\n" +
 	"N*\x17Extended incident event\xd2\x01\fcx_event_key\xd2\x01\x0eincident_event\xd2\x01\x12cx_event_timestamp\"\xa4\a\n" +
 	"\x1dIncidentEventExtendedMetadata\x12]\n" +
 	"\x11incident_severity\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\x10incidentSeverity\x127\n" +

@@ -9,7 +9,7 @@ package v2
 import (
 	v21 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/logs2metrics/v2"
 	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/spans2metrics/v2"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -892,19 +892,19 @@ var File_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto pro
 
 const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x12#com.coralogixapis.events2metrics.v2\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbb\n" +
+	"Ccom/coralogixapis/events2metrics/v2/events2metrics_definition.proto\x12#com.coralogixapis.events2metrics.v2\x1a2com/coralogixapis/logs2metrics/v2/logs_query.proto\x1a4com/coralogixapis/spans2metrics/v2/spans_query.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbb\n" +
 	"\n" +
 	"\x03E2M\x12\xa6\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBx\x92AuJ&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\x12P\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1bJ\x19\"Service_catalog_latency\"R\x04name\x12q\n" +
-	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB1\x92A.J,\"avg and max the latency of catalog service\"R\vdescription\x12[\n" +
-	"\vcreate_time\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBx\x9aAuJ&\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\x12P\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"Service_catalog_latency\"R\x04name\x12q\n" +
+	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.J,\"avg and max the latency of catalog service\"R\vdescription\x12[\n" +
+	"\vcreate_time\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
 	"createTime\x12[\n" +
-	"\vupdate_time\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
+	"\vupdate_time\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"2022-06-30T12:30:00Z'\"R\n" +
 	"updateTime\x12X\n" +
 	"\fpermutations\x18\x06 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MPermutationsR\fpermutations\x12U\n" +
 	"\rmetric_labels\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelR\fmetricLabels\x12]\n" +
-	"\rmetric_fields\x18\b \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldB\x06\x92A\x03\xa0\x01\n" +
+	"\rmetric_fields\x18\b \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldB\x06\x9aA\x03\xa0\x01\n" +
 	"R\fmetricFields\x12@\n" +
 	"\x04type\x18\t \x01(\x0e2,.com.coralogixapis.events2metrics.v2.E2MTypeR\x04type\x12Q\n" +
 	"\vspans_query\x18\n" +
@@ -913,48 +913,48 @@ const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_r
 	"\n" +
 	"logs_query\x18\v \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery\x12;\n" +
 	"\vis_internal\x18\f \x01(\v2\x1a.google.protobuf.BoolValueR\n" +
-	"isInternal:\xd1\x01\x92A\xcd\x01\n" +
+	"isInternal:\xd1\x01\x9aA\xcd\x01\n" +
 	"U*\x03E2M2@This data structure represents an Event to Metrics (E2M) object.\xd2\x01\x04name\xd2\x01\x04type*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\a\n" +
 	"\x05query\"\xaa\a\n" +
 	"\x0fE2MCreateParams\x12P\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1bJ\x19\"Service catalog latency\"R\x04name\x12q\n" +
-	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB1\x92A.J,\"avg and max the latency of catalog service\"R\vdescription\x12V\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"Service catalog latency\"R\x04name\x12q\n" +
+	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.J,\"avg and max the latency of catalog service\"R\vdescription\x12V\n" +
 	"\x12permutations_limit\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueB\n" +
-	"\x92A\aJ\x0530000R\x11permutationsLimit\x12U\n" +
+	"\x9aA\aJ\x0530000R\x11permutationsLimit\x12U\n" +
 	"\rmetric_labels\x18\x04 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricLabelR\fmetricLabels\x12U\n" +
 	"\rmetric_fields\x18\x05 \x03(\v20.com.coralogixapis.events2metrics.v2.MetricFieldR\fmetricFields\x12@\n" +
 	"\x04type\x18\x06 \x01(\x0e2,.com.coralogixapis.events2metrics.v2.E2MTypeR\x04type\x12Q\n" +
 	"\vspans_query\x18\a \x01(\v2..com.coralogixapis.spans2metrics.v2.SpansQueryH\x00R\n" +
 	"spansQuery\x12M\n" +
 	"\n" +
-	"logs_query\x18\b \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery:\xde\x01\x92A\xda\x01\n" +
+	"logs_query\x18\b \x01(\v2,.com.coralogixapis.logs2metrics.v2.LogsQueryH\x00R\tlogsQuery:\xde\x01\x9aA\xda\x01\n" +
 	"b*\x11E2M Create Params2FThis data structure is used to create a new event to metric definition\xd2\x01\x04name*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\a\n" +
 	"\x05query\"\xf7\x02\n" +
 	"\x0fE2MPermutations\x12 \n" +
 	"\x05limit\x18\x01 \x01(\x05B\n" +
-	"\x92A\aJ\x0530000R\x05limit\x12,\n" +
-	"\x12has_exceeded_limit\x18\x02 \x01(\bR\x10hasExceededLimit:\x93\x02\x92A\x8f\x02\n" +
+	"\x9aA\aJ\x0530000R\x05limit\x12,\n" +
+	"\x12has_exceeded_limit\x18\x02 \x01(\bR\x10hasExceededLimit:\x93\x02\x9aA\x8f\x02\n" +
 	"\x96\x01*\x10E2M Permutations2eThis data structure represents the limit of events2metrics permutations and if the limit was exceeded\xd2\x01\x05limit\xd2\x01\x12has_exceeded_limit*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xab\x03\n" +
 	"\vMetricLabel\x12d\n" +
-	"\ftarget_label\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A J\x12\"alias_label_name\"\x8a\x01\t^[\\w/-]+$R\vtargetLabel\x12\\\n" +
-	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x18J\x16\"log_obj.string_value\"R\vsourceField:\xd7\x01\x92A\xd3\x01\n" +
+	"\ftarget_label\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA J\x12\"alias_label_name\"\x8a\x01\t^[\\w/-]+$R\vtargetLabel\x12\\\n" +
+	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x18J\x16\"log_obj.string_value\"R\vsourceField:\xd7\x01\x9aA\xd3\x01\n" +
 	"[*\fMetric Label2-This data structure represents a metric label\xd2\x01\ftarget_label\xd2\x01\fsource_field*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\xb0\x04\n" +
 	"\vMetricField\x12x\n" +
-	"\x17target_base_metric_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x92A J\x12\"alias_field_name\"\x8a\x01\t^[\\w/-]+$R\x14targetBaseMetricName\x12]\n" +
-	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"log_obj.numeric_field\"R\vsourceField\x12T\n" +
-	"\faggregations\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.AggregationR\faggregations:\xf1\x01\x92A\xed\x01\n" +
+	"\x17target_base_metric_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB#\x9aA J\x12\"alias_field_name\"\x8a\x01\t^[\\w/-]+$R\x14targetBaseMetricName\x12]\n" +
+	"\fsource_field\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"log_obj.numeric_field\"R\vsourceField\x12T\n" +
+	"\faggregations\x18\a \x03(\v20.com.coralogixapis.events2metrics.v2.AggregationR\faggregations:\xf1\x01\x9aA\xed\x01\n" +
 	"u*\fMetric Field2-This data structure represents a metric field\xd2\x01\x17target_base_metric_name\xd2\x01\fsource_field\xd2\x01\faggregations*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x9d\x06\n" +
 	"\vAggregation\x12\x18\n" +
 	"\aenabled\x18\x01 \x01(\bR\aenabled\x12S\n" +
 	"\bagg_type\x18\x02 \x01(\x0e28.com.coralogixapis.events2metrics.v2.Aggregation.AggTypeR\aaggType\x12N\n" +
-	"\x12target_metric_name\x18\x03 \x01(\tB \x92A\x1dJ\x1b\"alias_field_name_agg_func\"R\x10targetMetricName\x12N\n" +
+	"\x12target_metric_name\x18\x03 \x01(\tB \x9aA\x1dJ\x1b\"alias_field_name_agg_func\"R\x10targetMetricName\x12N\n" +
 	"\asamples\x18\x04 \x01(\v22.com.coralogixapis.events2metrics.v2.E2MAggSamplesH\x00R\asamples\x12\x83\x01\n" +
-	"\thistogram\x18\x05 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MAggHistogramB-\x92A*2%e2m aggregate histogram type metadata\xa8\x01\x01H\x00R\thistogram\"\xad\x01\n" +
+	"\thistogram\x18\x05 \x01(\v24.com.coralogixapis.events2metrics.v2.E2MAggHistogramB-\x9aA*2%e2m aggregate histogram type metadata\xa8\x01\x01H\x00R\thistogram\"\xad\x01\n" +
 	"\aAggType\x12\x18\n" +
 	"\x14AGG_TYPE_UNSPECIFIED\x10\x00\x12\x10\n" +
 	"\fAGG_TYPE_MIN\x10\x01\x12\x10\n" +
@@ -963,7 +963,7 @@ const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_r
 	"\fAGG_TYPE_AVG\x10\x04\x12\x10\n" +
 	"\fAGG_TYPE_SUM\x10\x05\x12\x16\n" +
 	"\x12AGG_TYPE_HISTOGRAM\x10\x06\x12\x14\n" +
-	"\x10AGG_TYPE_SAMPLES\x10\a:\xb8\x01\x92A\xb4\x01\n" +
+	"\x10AGG_TYPE_SAMPLES\x10\a:\xb8\x01\x9aA\xb4\x01\n" +
 	"<*\vAggregation2-This data structure represents an aggregation*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/B\x0e\n" +
 	"\fagg_metadata\"\x94\x03\n" +
@@ -974,11 +974,11 @@ const file_com_coralogixapis_events2metrics_v2_events2metrics_definition_proto_r
 	"SampleType\x12\x1b\n" +
 	"\x17SAMPLE_TYPE_UNSPECIFIED\x10\x00\x12\x13\n" +
 	"\x0fSAMPLE_TYPE_MIN\x10\x01\x12\x13\n" +
-	"\x0fSAMPLE_TYPE_MAX\x10\x02:\xcd\x01\x92A\xc9\x01\n" +
+	"\x0fSAMPLE_TYPE_MAX\x10\x02:\xcd\x01\x9aA\xc9\x01\n" +
 	"Q*\x15E2M Aggregate Samples28This data structure represents the e2m aggregate samples*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/\"\x87\x02\n" +
 	"\x0fE2MAggHistogram\x12 \n" +
-	"\abuckets\x18\x01 \x03(\x02B\x06\x92A\x03J\x012R\abuckets:\xd1\x01\x92A\xcd\x01\n" +
+	"\abuckets\x18\x01 \x03(\x02B\x06\x9aA\x03J\x012R\abuckets:\xd1\x01\x9aA\xcd\x01\n" +
 	"U*\x17E2M Aggregate Histogram2:This data structure represents the e2m aggregate histogram*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/*Z\n" +
 	"\aE2MType\x12\x18\n" +

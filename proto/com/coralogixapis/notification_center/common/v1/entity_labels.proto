@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.notification_center;
+
+option go_package = "com/coralogixapis/notification_center";
+
+message EntityLabelValues {
+  repeated string values = 1;
+}

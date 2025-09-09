@@ -479,7 +479,7 @@ func TestGlobalRouter(t *testing.T) {
 		Router: &cxsdk.GlobalRouter{
 			Id:          &routerId,
 			Name:        "global router",
-			EntityType:  cxsdk.EntityTypeAlerts,
+			EntityType:  cxsdk.EntityTypeAlerts.Enum(),
 			Description: "global router example",
 			Rules: []*cxsdk.RoutingRule{
 				{

@@ -37,6 +37,7 @@ mod tests {
         let yesterday = now - chrono::Duration::days(1);
 
         let filter = EventsFilter {
+            cx_event_labels_filters: None,
             timestamp: Some(TimestampRange {
                 from: Some(String::from(yesterday.to_rfc3339()).parse().unwrap()),
                 to: Some(String::from(now.to_rfc3339()).parse().unwrap()),

@@ -10,39 +10,40 @@ import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message IncidentQueryFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident query filter"
       description: "Filter configuration for incidents"
     }
   };
-  repeated google.protobuf.StringValue assignee = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by assignee"}];
-  repeated IncidentStatus status = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by incident status"}];
-  repeated IncidentState state = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by incident state"}];
-  repeated IncidentSeverity severity = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by incident severity"}];
-  map<string, ContextualLabelValues> contextual_labels = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by contextual labels"}];
+  repeated google.protobuf.StringValue assignee = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by assignee"}];
+  repeated IncidentStatus status = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by incident status"}];
+  repeated IncidentState state = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by incident state"}];
+  repeated IncidentSeverity severity = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by incident severity"}];
+  map<string, ContextualLabelValues> contextual_labels = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by contextual labels"}];
   google.protobuf.Timestamp start_time = 6 [
     deprecated = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)"}
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)"}
   ];
   google.protobuf.Timestamp end_time = 7 [
     deprecated = true,
-    (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)"}
+    (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)"}
   ];
-  IncidentSearchQuery search_query = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Search query for incidents"}];
-  repeated google.protobuf.StringValue application_name = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by application names"}];
-  repeated google.protobuf.StringValue subsystem_name = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by subsystem names"}];
-  google.protobuf.BoolValue is_muted = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates if the incident is muted"}];
-  TimeRange created_at_range = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents created at the given time range"}];
-  TimeRange incident_duration_range = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all active) incidents with the given duration range"}];
-  repeated MetaLabel meta_labels = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all incidents with the given meta labels"}];
-  FilterOperator meta_labels_op = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The operator for the meta labels filter"}];
+  IncidentSearchQuery search_query = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Search query for incidents"}];
+  repeated google.protobuf.StringValue application_name = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by application names"}];
+  repeated google.protobuf.StringValue subsystem_name = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by subsystem names"}];
+  google.protobuf.BoolValue is_muted = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates if the incident is muted"}];
+  TimeRange created_at_range = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all incidents created at the given time range"}];
+  TimeRange incident_duration_range = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all active) incidents with the given duration range"}];
+  repeated MetaLabel meta_labels = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all incidents with the given meta labels"}];
+  FilterOperator meta_labels_op = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The operator for the meta labels filter"}];
+  map<string, DisplayLabelValues> display_labels = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by display labels"}];
 }
 message TimeRange {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Time range"
       description: "Represents a time range with start and end timestamps"
@@ -52,12 +53,12 @@ message TimeRange {
       ]
     }
   };
-  google.protobuf.Timestamp start_time = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Start time of the range"}];
-  google.protobuf.Timestamp end_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "End time of the range"}];
+  google.protobuf.Timestamp start_time = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Start time of the range"}];
+  google.protobuf.Timestamp end_time = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "End time of the range"}];
 }
 
 message ContextualLabelValues {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Contextual label values"
       description: "Represents contextual label values for filtering incidents"
@@ -65,4 +66,15 @@ message ContextualLabelValues {
     }
   };
   repeated google.protobuf.StringValue contextual_label_values = 1;
+}
+
+message DisplayLabelValues {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Display label values"
+      description: "Represents display label values for filtering incidents"
+      required: ["display_label_values"]
+    }
+  };
+  repeated google.protobuf.StringValue display_label_values = 1;
 }

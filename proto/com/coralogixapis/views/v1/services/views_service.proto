@@ -7,12 +7,12 @@ import "com/coralogixapis/views/v1/search_query.proto";
 import "com/coralogixapis/views/v1/time_selection.proto";
 import "com/coralogixapis/views/v1/view_type.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 
 service ViewsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
       name: "Views service"
       description: "Create and manage views."
     };
@@ -23,7 +23,7 @@ service ViewsService {
       body: "*"
       response_body: "view"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
       summary: "Create a view service"
       description: "Creates a new view"
@@ -45,7 +45,7 @@ service ViewsService {
       body: "view"
       response_body: "view"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
       summary: "Replace a view service"
       description: "Replaces an existing view"
@@ -66,7 +66,7 @@ service ViewsService {
       get: "/v1/views/{id}"
       response_body: "view"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
       summary: "Get view service"
       description: "Gets a view by ID"
@@ -86,7 +86,7 @@ service ViewsService {
     option (google.api.http) = {
       delete: "/v1/views/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
       summary: "Delete view service"
       description: "Deletes a view by ID"
@@ -97,7 +97,7 @@ service ViewsService {
     option (google.api.http) = {
       get: "/v1/views"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Views service"]
       summary: "List views service"
       description: "Lists all company public views"
@@ -115,7 +115,7 @@ service ViewsService {
 }
 
 message CreateViewRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "ViewFolder"
         description: "View folder."
@@ -123,7 +123,7 @@ message CreateViewRequest {
       }
     };
 
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "View name"
     min_length: 1
     example: "\"Logs view\""
@@ -138,7 +138,7 @@ message CreateViewRequest {
   // View selected filters
   SelectedFilters filters = 4;
 
-  google.protobuf.StringValue folder_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue folder_id = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Unique identifier for folders"
     format: "uuid"
     min_length: 36,
@@ -166,7 +166,7 @@ message ReplaceViewResponse {
 }
 
 message GetViewRequest {
-  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "id"
     example: "52"
   }]; 
@@ -178,7 +178,7 @@ message GetViewResponse {
 }
 
 message DeleteViewRequest {
- google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+ google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "id"
     example: "52"
   }]; 
@@ -196,7 +196,7 @@ message ListViewsResponse {
 
 // View
 message View {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "View"
         description: "Response for views."
@@ -205,13 +205,13 @@ message View {
   };
 
   // View id
-  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Int32Value id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "id"
     example: "52"
   }]; 
 
   // View name
-  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "View name"
     min_length: 1
     example: "\"Logs view\""
@@ -226,7 +226,7 @@ message View {
   // View selected filters
   SelectedFilters filters = 5;
 
-  google.protobuf.StringValue folder_id = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue folder_id = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Unique identifier for folders"
     format: "uuid"
     min_length: 36,

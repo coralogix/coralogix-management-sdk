@@ -3,25 +3,25 @@ syntax = "proto3";
 package com.coralogix.integrations.v1;
 
 import "com/coralogix/integrations/v1/integration.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 service ContextualDataIntegrationService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Contextual data integration service"
     description: "Query for contextual data integration information."
   };
 
   rpc GetContextualDataIntegrations(GetContextualDataIntegrationsRequest) returns (GetContextualDataIntegrationsResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get all contextual data integrations";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get all contextual data integrations";
     option (google.api.http) = {
       get: "/v1/contextual-data/integrations"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -48,11 +48,11 @@ service ContextualDataIntegrationService {
   }
 
   rpc GetContextualDataIntegrationDefinition(GetContextualDataIntegrationDefinitionRequest) returns (GetContextualDataIntegrationDefinitionResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration definition";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get contextual data integration definition";
     option (google.api.http) = {
       get: "/v1/contextual-data/integrations/definition/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -79,11 +79,11 @@ service ContextualDataIntegrationService {
   }
 
   rpc GetContextualDataIntegrationDetails(GetContextualDataIntegrationDetailsRequest) returns (GetContextualDataIntegrationDetailsResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get contextual data integration details";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get contextual data integration details";
     option (google.api.http) = {
       get: "/v1/contextual-data/integrations/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -110,12 +110,12 @@ service ContextualDataIntegrationService {
   }
 
   rpc TestContextualDataIntegration(TestContextualDataIntegrationRequest) returns (TestContextualDataIntegrationResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Test contextual data integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Test contextual data integration";
     option (google.api.http) = {
       post: "/v1/contextual-data/integration/test"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -142,12 +142,12 @@ service ContextualDataIntegrationService {
   }
 
   rpc SaveContextualDataIntegration(SaveContextualDataIntegrationRequest) returns (SaveContextualDataIntegrationResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Save contextual data integration registration metadata";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Save contextual data integration registration metadata";
     option (google.api.http) = {
       post: "/v1/contextual-data/integration"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -174,12 +174,12 @@ service ContextualDataIntegrationService {
   }
 
   rpc UpdateContextualDataIntegration(UpdateContextualDataIntegrationRequest) returns (UpdateContextualDataIntegrationResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Update contextual data integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update contextual data integration";
     option (google.api.http) = {
       put: "/v1/contextual-data/integration"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -206,11 +206,11 @@ service ContextualDataIntegrationService {
   }
 
   rpc DeleteContextualDataIntegration(DeleteContextualDataIntegrationRequest) returns (DeleteContextualDataIntegrationResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete contextual data integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete contextual data integration";
     option (google.api.http) = {
       delete: "/v1/contextual-data/integration/{integration_id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -238,7 +238,7 @@ service ContextualDataIntegrationService {
 }
 
 message GetContextualDataIntegrationsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integrations request"
       required: [
@@ -249,7 +249,7 @@ message GetContextualDataIntegrationsRequest {
 }
 
 message GetContextualDataIntegrationsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integrations response"
       required: []
@@ -257,7 +257,7 @@ message GetContextualDataIntegrationsResponse {
   };
 
   message IntegrationWithCounts {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Integration with counts"
         required: [
@@ -278,7 +278,7 @@ message GetContextualDataIntegrationsResponse {
 }
 
 message GetContextualDataIntegrationDefinitionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integration definition request"
       required: ["id"]
@@ -289,7 +289,7 @@ message GetContextualDataIntegrationDefinitionRequest {
 }
 
 message GetContextualDataIntegrationDefinitionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integration definition response"
       required: ["integration_definition"]
@@ -299,18 +299,18 @@ message GetContextualDataIntegrationDefinitionResponse {
 }
 
 message GetContextualDataIntegrationDetailsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integration details request"
       required: ["id"]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
   google.protobuf.BoolValue include_testing_revisions = 2;
 }
 
 message GetContextualDataIntegrationDetailsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get contextual data integration details response"
       required: ["integration_detail"]
@@ -320,7 +320,7 @@ message GetContextualDataIntegrationDetailsResponse {
 }
 
 message UpdateContextualDataIntegrationRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update contextual data integration request"
       required: ["integration_id", "metadata"]
@@ -331,7 +331,7 @@ message UpdateContextualDataIntegrationRequest {
 }
 
 message UpdateContextualDataIntegrationResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update contextual data integration response"
       required: []
@@ -340,7 +340,7 @@ message UpdateContextualDataIntegrationResponse {
 }
 
 message TestContextualDataIntegrationRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test contextual data integration request"
       required: ["integration_data"]
@@ -351,7 +351,7 @@ message TestContextualDataIntegrationRequest {
 }
 
 message TestContextualDataIntegrationResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test contextual data integration response"
       required: ["result"]
@@ -361,7 +361,7 @@ message TestContextualDataIntegrationResponse {
 }
 
 message SaveContextualDataIntegrationRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Save contextual data integration request"
       required: ["metadata"]
@@ -371,7 +371,7 @@ message SaveContextualDataIntegrationRequest {
 }
 
 message SaveContextualDataIntegrationResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Save contextual data integration response"
       required: ["integration_id"]
@@ -381,17 +381,17 @@ message SaveContextualDataIntegrationResponse {
 }
 
 message DeleteContextualDataIntegrationRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete contextual data integration request"
       required: ["integration_id"]
     }
   };
-  google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
 }
 
 message DeleteContextualDataIntegrationResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete contextual data integration response"
       required: []

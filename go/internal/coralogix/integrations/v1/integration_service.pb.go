@@ -7,8 +7,8 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1418,31 +1418,31 @@ var File_com_coralogix_integrations_v1_integration_service_proto protoreflect.Fi
 
 const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" +
 	"\n" +
-	"7com/coralogix/integrations/v1/integration_service.proto\x12\x1dcom.coralogix.integrations.v1\x1a/com/coralogix/integrations/v1/integration.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"#\n" +
+	"7com/coralogix/integrations/v1/integration_service.proto\x12\x1dcom.coralogix.integrations.v1\x1a/com/coralogix/integrations/v1/integration.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"#\n" +
 	"!ListManagedIntegrationKeysRequest\"\xaf\x01\n" +
 	"\"ListManagedIntegrationKeysResponse\x12G\n" +
-	"\x10integration_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x0fintegrationKeys:@\x92A=\n" +
+	"\x10integration_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x0fintegrationKeys:@\x9aA=\n" +
 	";*&List managed integration keys response\xd2\x01\x10integration_keys\"\xae\x01\n" +
 	"\x1dGetDeployedIntegrationRequest\x12S\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x92A\vJ\t\"aws-sqs\"R\rintegrationId:8\x92A5\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x9aA\vJ\t\"aws-sqs\"R\rintegrationId:8\x9aA5\n" +
 	"3* Get deployed integration request\xd2\x01\x0eintegration_id\"\xb9\x01\n" +
 	"\x1eGetDeployedIntegrationResponse\x12_\n" +
-	"\vintegration\x18\x01 \x01(\v2=.com.coralogix.integrations.v1.DeployedIntegrationInformationR\vintegration:6\x92A3\n" +
+	"\vintegration\x18\x01 \x01(\v2=.com.coralogix.integrations.v1.DeployedIntegrationInformationR\vintegration:6\x9aA3\n" +
 	"1*!Get deployed integration response\xd2\x01\vintegration\"\x8d\x02\n" +
 	"\x18UpdateIntegrationRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12N\n" +
-	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:s\x92Ap\n" +
+	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:s\x9aAp\n" +
 	"n*\x1aUpdate integration request2@This data structure represents a list of outgoing webhook types.\xd2\x01\x02id\xd2\x01\bmetadata\"\x1b\n" +
 	"\x19UpdateIntegrationResponse\"\xa7\x02\n" +
 	"\x1fGetIntegrationDefinitionRequest\x12<\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x92A\vJ\t\"aws-sqs\"R\x02id\x12T\n" +
-	"\x18include_testing_revision\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:p\x92Am\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x9aA\vJ\t\"aws-sqs\"R\x02id\x12T\n" +
+	"\x18include_testing_revision\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:p\x9aAm\n" +
 	"k*\"Get integration definition request2@This data structure represents a list of outgoing webhook types.\xd2\x01\x02id\"\x99\x02\n" +
 	" GetIntegrationDefinitionResponse\x12k\n" +
-	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition:\x87\x01\x92A\x83\x01\n" +
+	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition:\x87\x01\x9aA\x83\x01\n" +
 	"\x80\x01*#Get integration definition response2@This data structure represents a list of outgoing webhook types.\xd2\x01\x16integration_definition\"\x8f\x01\n" +
 	"\x16GetIntegrationsRequest\x12T\n" +
-	"\x18include_testing_revision\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:\x1f\x92A\x1c\n" +
+	"\x18include_testing_revision\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:\x1f\x9aA\x1c\n" +
 	"\x1a*\x18Get integrations request\"\x87\x05\n" +
 	"\x17GetIntegrationsResponse\x12p\n" +
 	"\fintegrations\x18\x01 \x03(\v2L.com.coralogix.integrations.v1.GetIntegrationsResponse.IntegrationWithCountsR\fintegrations\x1a\x95\x03\n" +
@@ -1451,31 +1451,31 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x13amount_integrations\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x12amountIntegrations\x124\n" +
 	"\x06errors\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueR\x06errors\x12G\n" +
 	"\x11upgrade_available\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x10upgradeAvailable\x121\n" +
-	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:-\x92A*\n" +
-	"(*\x17Integration with counts\xd2\x01\fintegrations:b\x92A_\n" +
+	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:-\x9aA*\n" +
+	"(*\x17Integration with counts\xd2\x01\fintegrations:b\x9aA_\n" +
 	"]*\x19Get integrations response2@This data structure represents a list of outgoing webhook types.\"\xcf\x01\n" +
 	"\x1cGetIntegrationDetailsRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12T\n" +
-	"\x18include_testing_revision\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:+\x92A(\n" +
+	"\x18include_testing_revision\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x16includeTestingRevision:+\x9aA(\n" +
 	"&*\x1fGet integration details request\xd2\x01\x02id\"\xbf\x01\n" +
 	"\x1dGetIntegrationDetailsResponse\x12`\n" +
-	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:<\x92A9\n" +
+	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:<\x9aA9\n" +
 	"7* Get integration details response\xd2\x01\x12integration_detail\"\x8b\x01\n" +
 	"\"GetManagedIntegrationStatusRequest\x12%\n" +
-	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId:>\x92A;\n" +
+	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId:>\x9aA;\n" +
 	"9*&Get managed integration status request\xd2\x01\x0eintegration_id\"\xe0\x01\n" +
 	"#GetManagedIntegrationStatusResponse\x12%\n" +
 	"\x0eintegration_id\x18\x01 \x01(\tR\rintegrationId\x12H\n" +
-	"\x06status\x18\x03 \x01(\v20.com.coralogix.integrations.v1.IntegrationStatusR\x06status:H\x92AE\n" +
+	"\x06status\x18\x03 \x01(\v20.com.coralogix.integrations.v1.IntegrationStatusR\x06status:H\x9aAE\n" +
 	"C*'Get managed integration status response\xd2\x01\x0eintegration_id\xd2\x01\x06status\"\x94\x01\n" +
 	"\x16SaveIntegrationRequest\x12N\n" +
-	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:*\x92A'\n" +
+	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:*\x9aA'\n" +
 	"%*\x18Save integration request\xd2\x01\bmetadata\"\x91\x01\n" +
 	"\x17SaveIntegrationResponse\x12C\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:1\x92A.\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:1\x9aA.\n" +
 	",*\x19Save integration response\xd2\x01\x0eintegration_id\"\x93\x01\n" +
 	"\x18DeleteIntegrationRequest\x12C\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:2\x92A/\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:2\x9aA/\n" +
 	"-*\x1aDelete integration request\xd2\x01\x0eintegration_id\"\x1b\n" +
 	"\x19DeleteIntegrationResponse\"\xef\x04\n" +
 	"\x12GetTemplateRequest\x12C\n" +
@@ -1486,37 +1486,37 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\blogs_url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\alogsUrl\x125\n" +
 	"\aapi_key\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x06apiKey\x12;\n" +
 	"\n" +
-	"cgx_domain\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\tcgxDomain:J\x92AG\n" +
+	"cgx_domain\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\tcgxDomain:J\x9aAG\n" +
 	"E*!Common ARM integration parameters\xd2\x01\blogs_url\xd2\x01\aapi_key\xd2\x01\n" +
 	"cgx_domain\x1a\a\n" +
-	"\x05Empty:,\x92A)\n" +
+	"\x05Empty:,\x9aA)\n" +
 	"'*\x14Get template request\xd2\x01\x0eintegration_idB\x0e\n" +
 	"\fextra_params\"t\n" +
 	"\x13GetTemplateResponse\x12?\n" +
-	"\ftemplate_url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vtemplateUrl:\x1c\x92A\x19\n" +
+	"\ftemplate_url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vtemplateUrl:\x1c\x9aA\x19\n" +
 	"\x17*\x15Get template response\"\xb2\x01\n" +
 	"#GetRumApplicationVersionDataRequest\x12G\n" +
-	"\x10application_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x0fapplicationName:B\x92A?\n" +
+	"\x10application_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x0fapplicationName:B\x9aA?\n" +
 	"=*(Get RUM application version data request\xd2\x01\x10application_name\"\xb9\x01\n" +
 	"$GetRumApplicationVersionDataResponse\x12P\n" +
-	"\fversion_data\x18\x01 \x01(\v2-.com.coralogix.integrations.v1.RumVersionDataR\vversionData:?\x92A<\n" +
+	"\fversion_data\x18\x01 \x01(\v2-.com.coralogix.integrations.v1.RumVersionDataR\vversionData:?\x9aA<\n" +
 	":*)Get RUM application version data response\xd2\x01\fversion_data\"d\n" +
 	"\x12SyncRumDataRequest\x120\n" +
-	"\x05force\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x05force:\x1c\x92A\x19\n" +
+	"\x05force\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x05force:\x1c\x9aA\x19\n" +
 	"\x17*\x15Sync RUM data request\"\xd4\x01\n" +
 	"\x13SyncRumDataResponse\x12?\n" +
 	"\rsync_executed\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\fsyncExecuted\x127\n" +
-	"\tsynced_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bsyncedAt:)\x92A&\n" +
+	"\tsynced_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\bsyncedAt:)\x9aA&\n" +
 	"$*\x16Sync RUM data response\xd2\x01\tsynced_atJ\x04\b\x03\x10\x04R\x12deployed_instances\"\xf0\x01\n" +
 	"\x16TestIntegrationRequest\x12]\n" +
 	"\x10integration_data\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\x0fintegrationData\x12C\n" +
-	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:2\x92A/\n" +
+	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:2\x9aA/\n" +
 	"-*\x18Test integration request\xd2\x01\x10integration_data\"\x92\x01\n" +
 	"\x17TestIntegrationResponse\x12L\n" +
-	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:)\x92A&\n" +
+	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:)\x9aA&\n" +
 	"$*\x19Test integration response\xd2\x01\x06result2\xc5+\n" +
 	"\x12IntegrationService\x12\xb3\x03\n" +
-	"\x1aListManagedIntegrationKeys\x12@.com.coralogix.integrations.v1.ListManagedIntegrationKeysRequest\x1aA.com.coralogix.integrations.v1.ListManagedIntegrationKeysResponse\"\x8f\x02\x92A\xc2\x01\n" +
+	"\x1aListManagedIntegrationKeys\x12@.com.coralogix.integrations.v1.ListManagedIntegrationKeysRequest\x1aA.com.coralogix.integrations.v1.ListManagedIntegrationKeysResponse\"\x8f\x02\x9aA\xc2\x01\n" +
 	"\x13Integration service\x12\x1dList managed integration keysJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1525,9 +1525,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02 \n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02 \n" +
 	"\x1eList managed integration names\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/integrations/managed/list\x12\xa9\x03\n" +
-	"\x16GetDeployedIntegration\x12<.com.coralogix.integrations.v1.GetDeployedIntegrationRequest\x1a=.com.coralogix.integrations.v1.GetDeployedIntegrationResponse\"\x91\x02\x92A\xbd\x01\n" +
+	"\x16GetDeployedIntegration\x12<.com.coralogix.integrations.v1.GetDeployedIntegrationRequest\x1a=.com.coralogix.integrations.v1.GetDeployedIntegrationResponse\"\x91\x02\x9aA\xbd\x01\n" +
 	"\x13Integration service\x12\x18Get deployed integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1536,9 +1536,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x1a\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x1a\n" +
 	"\x18Get deployed integration\x82\xd3\xe4\x93\x02,\x12*/v1/integrations/deployed/{integration_id}\x12\xf2\x02\n" +
-	"\x0fGetIntegrations\x125.com.coralogix.integrations.v1.GetIntegrationsRequest\x1a6.com.coralogix.integrations.v1.GetIntegrationsResponse\"\xef\x01\x92A\xb9\x01\n" +
+	"\x0fGetIntegrations\x125.com.coralogix.integrations.v1.GetIntegrationsRequest\x1a6.com.coralogix.integrations.v1.GetIntegrationsResponse\"\xef\x01\x9aA\xb9\x01\n" +
 	"\x13Integration service\x12\x14Get all integrationsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1547,9 +1547,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x16\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x16\n" +
 	"\x14Get all integrations\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/integrations\x12\xa9\x03\n" +
-	"\x18GetIntegrationDefinition\x12>.com.coralogix.integrations.v1.GetIntegrationDefinitionRequest\x1a?.com.coralogix.integrations.v1.GetIntegrationDefinitionResponse\"\x8b\x02\x92A\xbf\x01\n" +
+	"\x18GetIntegrationDefinition\x12>.com.coralogix.integrations.v1.GetIntegrationDefinitionRequest\x1a?.com.coralogix.integrations.v1.GetIntegrationDefinitionResponse\"\x8b\x02\x9aA\xbf\x01\n" +
 	"\x13Integration service\x12\x1aGet integration definitionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1558,9 +1558,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x1c\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x1c\n" +
 	"\x1aGet integration definition\x82\xd3\xe4\x93\x02\"\x12 /v1/integrations/definition/{id}\x12\x8f\x03\n" +
-	"\x15GetIntegrationDetails\x12;.com.coralogix.integrations.v1.GetIntegrationDetailsRequest\x1a<.com.coralogix.integrations.v1.GetIntegrationDetailsResponse\"\xfa\x01\x92A\xbc\x01\n" +
+	"\x15GetIntegrationDetails\x12;.com.coralogix.integrations.v1.GetIntegrationDetailsRequest\x1a<.com.coralogix.integrations.v1.GetIntegrationDetailsResponse\"\xfa\x01\x9aA\xbc\x01\n" +
 	"\x13Integration service\x12\x17Get integration detailsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1569,9 +1569,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x19\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x19\n" +
 	"\x17Get integration details\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/integrations/{id}\x12\xca\x03\n" +
-	"\x1bGetManagedIntegrationStatus\x12A.com.coralogix.integrations.v1.GetManagedIntegrationStatusRequest\x1aB.com.coralogix.integrations.v1.GetManagedIntegrationStatusResponse\"\xa3\x02\x92A\xc3\x01\n" +
+	"\x1bGetManagedIntegrationStatus\x12A.com.coralogix.integrations.v1.GetManagedIntegrationStatusRequest\x1aB.com.coralogix.integrations.v1.GetManagedIntegrationStatusResponse\"\xa3\x02\x9aA\xc3\x01\n" +
 	"\x13Integration service\x12\x1eGet managed integration statusJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1580,9 +1580,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02 \n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02 \n" +
 	"\x1eGet managed integration status\x82\xd3\xe4\x93\x022\x120/v1/integrations/managed/status/{integration_id}\x12\x9e\x03\n" +
-	"\x0fSaveIntegration\x125.com.coralogix.integrations.v1.SaveIntegrationRequest\x1a6.com.coralogix.integrations.v1.SaveIntegrationResponse\"\x9b\x02\x92A\xc7\x01\n" +
+	"\x0fSaveIntegration\x125.com.coralogix.integrations.v1.SaveIntegrationRequest\x1a6.com.coralogix.integrations.v1.SaveIntegrationResponse\"\x9b\x02\x9aA\xc7\x01\n" +
 	"\x13Integration service\x12&Save integration registration metadataJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1591,9 +1591,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13integrations:Deploy¸\x02(\n" +
+	"\x15\x1a\x13integrations:Deployʸ\x02(\n" +
 	"&Save integration registration metadata\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/integrations/metadata\x12\xfc\x02\n" +
-	"\x11UpdateIntegration\x127.com.coralogix.integrations.v1.UpdateIntegrationRequest\x1a8.com.coralogix.integrations.v1.UpdateIntegrationResponse\"\xf3\x01\x92A\xb3\x01\n" +
+	"\x11UpdateIntegration\x127.com.coralogix.integrations.v1.UpdateIntegrationRequest\x1a8.com.coralogix.integrations.v1.UpdateIntegrationResponse\"\xf3\x01\x9aA\xb3\x01\n" +
 	"\x13Integration service\x12\x12Update integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1602,9 +1602,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13integrations:Deploy¸\x02\x14\n" +
+	"\x15\x1a\x13integrations:Deployʸ\x02\x14\n" +
 	"\x12Update integration\x82\xd3\xe4\x93\x02\x1e:\x01*\x1a\x19/v1/integrations/metadata\x12\x8a\x03\n" +
-	"\x11DeleteIntegration\x127.com.coralogix.integrations.v1.DeleteIntegrationRequest\x1a8.com.coralogix.integrations.v1.DeleteIntegrationResponse\"\x81\x02\x92A\xb3\x01\n" +
+	"\x11DeleteIntegration\x127.com.coralogix.integrations.v1.DeleteIntegrationRequest\x1a8.com.coralogix.integrations.v1.DeleteIntegrationResponse\"\x81\x02\x9aA\xb3\x01\n" +
 	"\x13Integration service\x12\x12Delete integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1613,9 +1613,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13integrations:Deploy¸\x02\x14\n" +
+	"\x15\x1a\x13integrations:Deployʸ\x02\x14\n" +
 	"\x12Delete integration\x82\xd3\xe4\x93\x02,**/v1/integrations/instance/{integration_id}\x12\xf7\x02\n" +
-	"\vGetTemplate\x121.com.coralogix.integrations.v1.GetTemplateRequest\x1a2.com.coralogix.integrations.v1.GetTemplateResponse\"\x80\x02\x92A\xbd\x01\n" +
+	"\vGetTemplate\x121.com.coralogix.integrations.v1.GetTemplateRequest\x1a2.com.coralogix.integrations.v1.GetTemplateResponse\"\x80\x02\x9aA\xbd\x01\n" +
 	"\x13Integration service\x12\x18Get integration templateJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1624,9 +1624,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x1a\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x1a\n" +
 	"\x18Get integration template\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/integrations/template\x12\xc4\x03\n" +
-	"\x1cGetRumApplicationVersionData\x12B.com.coralogix.integrations.v1.GetRumApplicationVersionDataRequest\x1aC.com.coralogix.integrations.v1.GetRumApplicationVersionDataResponse\"\x9a\x02\x92A\xc6\x01\n" +
+	"\x1cGetRumApplicationVersionData\x12B.com.coralogix.integrations.v1.GetRumApplicationVersionDataRequest\x1aC.com.coralogix.integrations.v1.GetRumApplicationVersionDataResponse\"\x9a\x02\x9aA\xc6\x01\n" +
 	"\x13Integration service\x12!Get RUM integration versions dataJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1635,9 +1635,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02#\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02#\n" +
 	"!Get RUM integration versions data\x82\xd3\xe4\x93\x02#\x12!/v1/integrations/rum/app-versions\x12\x92\x03\n" +
-	"\vSyncRumData\x121.com.coralogix.integrations.v1.SyncRumDataRequest\x1a2.com.coralogix.integrations.v1.SyncRumDataResponse\"\x9b\x02\x92A\xc9\x01\n" +
+	"\vSyncRumData\x121.com.coralogix.integrations.v1.SyncRumDataRequest\x1a2.com.coralogix.integrations.v1.SyncRumDataResponse\"\x9b\x02\x9aA\xc9\x01\n" +
 	"\x13Integration service\x12$Trigger sync of RUM integration dataJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1646,9 +1646,9 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02&\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02&\n" +
 	"$Trigger sync of RUM integration data\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/integrations/rum/sync\x12\xfb\x02\n" +
-	"\x0fTestIntegration\x125.com.coralogix.integrations.v1.TestIntegrationRequest\x1a6.com.coralogix.integrations.v1.TestIntegrationResponse\"\xf8\x01\x92A\xb5\x01\n" +
+	"\x0fTestIntegration\x125.com.coralogix.integrations.v1.TestIntegrationRequest\x1a6.com.coralogix.integrations.v1.TestIntegrationResponse\"\xf8\x01\x9aA\xb5\x01\n" +
 	"\x13Integration service\x12\x10Test integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1657,8 +1657,8 @@ const file_com_coralogix_integrations_v1_integration_service_proto_rawDesc = "" 
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17integrations:ReadConfig¸\x02\x12\n" +
-	"\x10Test integration\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/integrations/metadata/test\x1a\xcb\x01\x92A\xc7\x01\n" +
+	"\x19\x1a\x17integrations:ReadConfigʸ\x02\x12\n" +
+	"\x10Test integration\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/integrations/metadata/test\x1a\xcb\x01\x9aA\xc7\x01\n" +
 	"\x13Integration service\x12<A service that enables querying for integration information.\x1ar\n" +
 	"6Find out more about integrations in our documentation.\x128https://coralogix.com/docs/integrations/getting-started/b\x06proto3"
 

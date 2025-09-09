@@ -7,8 +7,8 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -521,58 +521,58 @@ var File_com_coralogix_extensions_v1_extension_service_proto protoreflect.FileDe
 
 const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogix/extensions/v1/extension_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa7\x03\n" +
+	"3com/coralogix/extensions/v1/extension_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa7\x03\n" +
 	"\x17GetAllExtensionsRequest\x12b\n" +
 	"\x19include_hidden_extensions\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\x17includeHiddenExtensions\x12S\n" +
+	"\x9aA\a:\x05falseR\x17includeHiddenExtensions\x12S\n" +
 	"\x06filter\x18\x02 \x01(\v2;.com.coralogix.extensions.v1.GetAllExtensionsRequest.FilterR\x06filter\x1a\x8f\x01\n" +
 	"\x06Filter\x12+\n" +
-	"\fintegrations\x18\x01 \x03(\tB\a\x92A\x04:\x02[]R\fintegrations:X\x92AU\n" +
-	"S*6A filter structure for a request to get all extensions2\x19Filter by integration ids:A\x92A>\n" +
+	"\fintegrations\x18\x01 \x03(\tB\a\x9aA\x04:\x02[]R\fintegrations:X\x9aAU\n" +
+	"S*6A filter structure for a request to get all extensions2\x19Filter by integration ids:A\x9aA>\n" +
 	"<*\x1aGet all extensions request2\x1eRequest to list all extensions\"\xd1\v\n" +
 	"\x18GetAllExtensionsResponse\x12h\n" +
 	"\n" +
-	"extensions\x18\x01 \x03(\v2?.com.coralogix.extensions.v1.GetAllExtensionsResponse.ExtensionB\a\x92A\x04:\x02[]R\n" +
+	"extensions\x18\x01 \x03(\v2?.com.coralogix.extensions.v1.GetAllExtensionsResponse.ExtensionB\a\x9aA\x04:\x02[]R\n" +
 	"extensions\x1a\xc1\x01\n" +
 	"\x0fRevisionSummary\x12H\n" +
 	"\vitem_counts\x18\x01 \x01(\v2'.com.coralogix.extensions.v1.ItemCountsR\n" +
 	"itemCounts\x12=\n" +
 	"\x06is_new\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\x05isNew:%\x92A\"\n" +
+	"\x9aA\a:\x05falseR\x05isNew:%\x9aA\"\n" +
 	" *\x10Revision summary\xd2\x01\vitem_counts\x1a\xe9\x03\n" +
 	"\bRevision\x126\n" +
 	"\aversion\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\aversion\x12>\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\vdescription\x126\n" +
 	"\aexcerpt\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\aexcerpt\x12=\n" +
-	"\x06labels\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\a\x92A\x04:\x02[]R\x06labels\x12h\n" +
-	"\x13integration_details\x18\x05 \x03(\v2..com.coralogix.extensions.v1.IntegrationDetailB\a\x92A\x04:\x02[]R\x12integrationDetails\x12_\n" +
-	"\asummary\x18\x06 \x01(\v2E.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionSummaryR\asummary:#\x92A \n" +
+	"\x06labels\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\a\x9aA\x04:\x02[]R\x06labels\x12h\n" +
+	"\x13integration_details\x18\x05 \x03(\v2..com.coralogix.extensions.v1.IntegrationDetailB\a\x9aA\x04:\x02[]R\x12integrationDetails\x12_\n" +
+	"\asummary\x18\x06 \x01(\v2E.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionSummaryR\asummary:#\x9aA \n" +
 	"\x1e*\bRevision\xd2\x01\aversion\xd2\x01\asummary\x1a\xd5\x04\n" +
 	"\tExtension\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x122\n" +
 	"\x05image\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x05image\x12D\n" +
 	"\x0fdark_mode_image\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\rdarkModeImage\x12e\n" +
-	"\trevisions\x18\x05 \x03(\v2>.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionB\a\x92A\x04:\x02[]R\trevisions\x12C\n" +
+	"\trevisions\x18\x05 \x03(\v2>.com.coralogix.extensions.v1.GetAllExtensionsResponse.RevisionB\a\x9aA\x04:\x02[]R\trevisions\x12C\n" +
 	"\tis_hidden\x18\x06 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\bisHidden\x12+\n" +
-	"\fintegrations\x18\a \x03(\tB\a\x92A\x04:\x02[]R\fintegrations\x12#\n" +
-	"\bkeywords\x18\b \x03(\tB\a\x92A\x04:\x02[]R\bkeywords\x12J\n" +
-	"\vdeprecation\x18\t \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:$\x92A!\n" +
-	"\x1f*\tExtension\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image:C\x92A@\n" +
+	"\x9aA\a:\x05falseR\bisHidden\x12+\n" +
+	"\fintegrations\x18\a \x03(\tB\a\x9aA\x04:\x02[]R\fintegrations\x12#\n" +
+	"\bkeywords\x18\b \x03(\tB\a\x9aA\x04:\x02[]R\bkeywords\x12J\n" +
+	"\vdeprecation\x18\t \x01(\v2(.com.coralogix.extensions.v1.DeprecationR\vdeprecation:$\x9aA!\n" +
+	"\x1f*\tExtension\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05image:C\x9aA@\n" +
 	">*\x1bGet all extensions response2\x1fResponse to list all extensions\"\xae\x02\n" +
 	"\x13GetExtensionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12d\n" +
 	"\x1ainclude_dashboard_binaries\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\x18includeDashboardBinaries\x12`\n" +
+	"\x9aA\a:\x05falseR\x18includeDashboardBinaries\x12`\n" +
 	"\x18include_testing_revision\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\x16includeTestingRevision:!\x92A\x1e\n" +
+	"\x9aA\a:\x05falseR\x16includeTestingRevision:!\x9aA\x1e\n" +
 	"\x1c*\x15Get extension request\xd2\x01\x02id\"{\n" +
 	"\x14GetExtensionResponse\x12D\n" +
-	"\textension\x18\x01 \x01(\v2&.com.coralogix.extensions.v1.ExtensionR\textension:\x1d\x92A\x1a\n" +
+	"\textension\x18\x01 \x01(\v2&.com.coralogix.extensions.v1.ExtensionR\textension:\x1d\x9aA\x1a\n" +
 	"\x18*\x16Get extension response2\xb3\a\n" +
 	"\x10ExtensionService\x12\xee\x02\n" +
-	"\x10GetAllExtensions\x124.com.coralogix.extensions.v1.GetAllExtensionsRequest\x1a5.com.coralogix.extensions.v1.GetAllExtensionsResponse\"\xec\x01\x92A\xb3\x01\n" +
+	"\x10GetAllExtensions\x124.com.coralogix.extensions.v1.GetAllExtensionsRequest\x1a5.com.coralogix.extensions.v1.GetAllExtensionsResponse\"\xec\x01\x9aA\xb3\x01\n" +
 	"\x11Extension service\x12\x12Get all extensionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -581,9 +581,9 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
-	"\x17\x1a\x15extensions:ReadConfig¸\x02\x14\n" +
+	"\x17\x1a\x15extensions:ReadConfigʸ\x02\x14\n" +
 	"\x12Get all extensions\x82\xd3\xe4\x93\x02\x17:\x01*\"\x12/v1/extensions/all\x12\xed\x02\n" +
-	"\fGetExtension\x120.com.coralogix.extensions.v1.GetExtensionRequest\x1a1.com.coralogix.extensions.v1.GetExtensionResponse\"\xf7\x01\x92A\xb4\x01\n" +
+	"\fGetExtension\x120.com.coralogix.extensions.v1.GetExtensionRequest\x1a1.com.coralogix.extensions.v1.GetExtensionResponse\"\xf7\x01\x9aA\xb4\x01\n" +
 	"\x11Extension service\x12\x13Get extension by IDJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -592,8 +592,8 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
-	"\x17\x1a\x15extensions:ReadConfig¸\x02\x15\n" +
-	"\x13Get extension by id\x82\xd3\xe4\x93\x02 b\textension\x12\x13/v1/extensions/{id}\x1a\xbd\x01\x92A\xb9\x01\n" +
+	"\x17\x1a\x15extensions:ReadConfigʸ\x02\x15\n" +
+	"\x13Get extension by id\x82\xd3\xe4\x93\x02 b\textension\x12\x13/v1/extensions/{id}\x1a\xbd\x01\x9aA\xb9\x01\n" +
 	"\x11Extension service\x12:A service that enables querying for extension information.\x1ah\n" +
 	"1Learn more about extensions in our documentation.\x123https://coralogix.com/docs/integrations/extensions/b\x06proto3"
 

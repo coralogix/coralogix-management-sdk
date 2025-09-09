@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -158,13 +158,13 @@ var File_com_coralogix_enrichment_v1_enrichment_request_model_proto protoreflect
 
 const file_com_coralogix_enrichment_v1_enrichment_request_model_proto_rawDesc = "" +
 	"\n" +
-	":com/coralogix/enrichment/v1/enrichment_request_model.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xad\x04\n" +
+	":com/coralogix/enrichment/v1/enrichment_request_model.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xad\x04\n" +
 	"\x16EnrichmentRequestModel\x12M\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"sourceIPs\"R\tfieldName\x12T\n" +
+	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"sourceIPs\"R\tfieldName\x12T\n" +
 	"\x0fenrichment_type\x18\x02 \x01(\v2+.com.coralogix.enrichment.v1.EnrichmentTypeR\x0eenrichmentType\x12Q\n" +
 	"\x13enriched_field_name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueH\x00R\x11enrichedFieldName\x88\x01\x01\x12)\n" +
-	"\x10selected_columns\x18\x04 \x03(\tR\x0fselectedColumns:\xd7\x01\x92A\xd3\x01\n" +
+	"\x10selected_columns\x18\x04 \x03(\tR\x0fselectedColumns:\xd7\x01\x9aA\xd3\x01\n" +
 	"S*\x14Enrichment Prototype2\x1cThe enrichment request model\xd2\x01\n" +
 	"field_name\xd2\x01\x0fenrichment_type*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\x16\n" +

@@ -6,7 +6,7 @@ import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/connectors/v1/connector.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/connectors/v1";
 
@@ -70,7 +70,7 @@ service ConnectorsService {
 }
 
 message CreateConnectorRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create Connector Request"
       description: "Request to create a new connector"
@@ -84,7 +84,7 @@ message CreateConnectorRequest {
   Connector connector = 1;
 }
 message CreateConnectorResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create Connector Response"
       description: "Response containing the created connector"
@@ -99,7 +99,7 @@ message CreateConnectorResponse {
 }
 
 message ReplaceConnectorRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace Connector Request"
       description: "Request to replace an existing connector"
@@ -114,7 +114,7 @@ message ReplaceConnectorRequest {
 }
 
 message ReplaceConnectorResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace Connector Response"
       description: "Response containing the updated connector"
@@ -132,7 +132,7 @@ message DeleteConnectorRequest {
   reserved 1, 2;
   reserved "deprecated_id", "identifier";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete Connector Request"
       description: "Request to delete a connector"
@@ -153,7 +153,7 @@ message GetConnectorRequest {
   reserved 1, 2;
   reserved "deprecated_id", "identifier";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Connector Request"
       description: "Request to retrieve a connector"
@@ -169,7 +169,7 @@ message GetConnectorRequest {
 }
 
 message GetConnectorResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Connector Response"
       description: "Response containing the requested connector"
@@ -187,7 +187,7 @@ message ListConnectorsRequest {
   reserved 2, 3;
   reserved "entity_type";
   
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List Connectors Request"
       description: "Request to list connectors with optional filtering"
@@ -198,11 +198,12 @@ message ListConnectorsRequest {
       description: "Find out more about notification center"
     }
   };
-  ConnectorType connector_type = 1;
+  optional ConnectorType connector_type = 1;
+  optional EntityType supported_by_entity_type = 4;
 }
 
 message ListConnectorsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List Connectors Response"
       description: "Response containing a list of connectors"
@@ -220,7 +221,7 @@ message BatchGetConnectorsRequest {
   reserved 1, 2;
   reserved "deprecated_ids", "ids";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Batch Get Connectors Request"
       description: "Request to retrieve multiple connectors by their IDs"
@@ -231,11 +232,11 @@ message BatchGetConnectorsRequest {
       description: "Find out more about notification center"
     }
   };
-  repeated string connector_ids = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
+  repeated string connector_ids = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"connector-id-1\", \"connector-id-2\"]" }];
 }
 
 message BatchGetConnectorsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Batch Get Connectors Response"
       description: "Response containing the requested connectors and any IDs not found"
@@ -247,14 +248,14 @@ message BatchGetConnectorsResponse {
     }
   };
   map<string, Connector> connectors = 1;
-  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-3\"]" }];
+  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"connector-id-3\"]" }];
 }
 
 message BatchGetConnectorSummariesRequest {
   reserved 1, 2;
   reserved "deprecated_ids", "ids";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Batch Get Connector Summaries Request"
       description: "Request to retrieve multiple connector summaries by their IDs"
@@ -268,7 +269,7 @@ message BatchGetConnectorSummariesRequest {
   repeated string connector_ids = 3;
 }
 message BatchGetConnectorSummariesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Batch Get Connector Summaries Response"
       description: "Response containing the requested connector summaries and any IDs not found"
@@ -280,28 +281,14 @@ message BatchGetConnectorSummariesResponse {
     }
   };
   map<string, ConnectorSummary> connector_summaries = 1;
-  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"connector-id-3\"]" }];
-}
-
-message GetConnectorTypeSummariesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
-    json_schema: {
-      title: "Get Connector Type Summaries Request"
-      description: "Request to retrieve summaries of connector types"
-      required: []
-    }
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-      description: "Find out more about notification center"
-    }
-  };
+  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"connector-id-3\"]" }];
 }
 
 message ListConnectorSummariesRequest {
   reserved 2, 3;
   reserved "entity_type";
   
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List Connector Summaries Request"
       description: "Request to list summaries of connectors with optional filtering"
@@ -312,10 +299,11 @@ message ListConnectorSummariesRequest {
       description: "Find out more about notification center"
     }
   };
-  ConnectorType connector_type = 1;
+  optional ConnectorType connector_type = 1;
+  optional EntityType supported_by_entity_type = 4;
 }
 message ListConnectorSummariesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List Connector Summaries Response"
       description: "Response containing summaries of connectors"
@@ -329,8 +317,24 @@ message ListConnectorSummariesResponse {
   repeated ConnectorSummary connectors = 1;
 }
 
+message GetConnectorTypeSummariesRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get Connector Type Summaries Request"
+      description: "Request to retrieve summaries of connector types"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+
+  optional EntityType supported_by_entity_type = 1;
+}
+
 message GetConnectorTypeSummariesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Connector Type Summaries Response"
       description: "Response containing summaries of connector types"

@@ -8,7 +8,7 @@ package v1
 
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -531,7 +531,7 @@ func (x *GetPresetResponse) GetPreset() *Preset {
 type ListPresetSummariesRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	ConnectorType *common.ConnectorType  `protobuf:"varint,1,opt,name=connector_type,json=connectorType,proto3,enum=com.coralogixapis.notification_center.ConnectorType,oneof" json:"connector_type,omitempty"`
-	EntityType    common.EntityType      `protobuf:"varint,4,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType" json:"entity_type,omitempty"`
+	EntityType    *common.EntityType     `protobuf:"varint,4,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType,oneof" json:"entity_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -574,8 +574,8 @@ func (x *ListPresetSummariesRequest) GetConnectorType() common.ConnectorType {
 }
 
 func (x *ListPresetSummariesRequest) GetEntityType() common.EntityType {
-	if x != nil {
-		return x.EntityType
+	if x != nil && x.EntityType != nil {
+		return *x.EntityType
 	}
 	return common.EntityType(0)
 }
@@ -916,25 +916,25 @@ var File_com_coralogixapis_notification_center_presets_v1_presets_service_proto 
 
 const file_com_coralogixapis_notification_center_presets_v1_presets_service_proto_rawDesc = "" +
 	"\n" +
-	"Fcom/coralogixapis/notification_center/presets/v1/presets_service.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1a=com/coralogixapis/notification_center/presets/v1/preset.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb8\x02\n" +
+	"Fcom/coralogixapis/notification_center/presets/v1/presets_service.proto\x120com.coralogixapis.notification_center.presets.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1a=com/coralogixapis/notification_center/presets/v1/preset.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb8\x02\n" +
 	"\x19CreateCustomPresetRequest\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xc8\x01\x92A\xc4\x01\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xc8\x01\x9aA\xc4\x01\n" +
 	"E*\x1cCreate Custom Preset Request2%Request to create a new custom preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xc2\x02\n" +
 	"\x1aCreateCustomPresetResponse\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd1\x01\x92A\xcd\x01\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd1\x01\x9aA\xcd\x01\n" +
 	"N*\x1dCreate Custom Preset Response2-Response containing the created custom preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xc1\x02\n" +
 	"\x1aReplaceCustomPresetRequest\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd0\x01\x92A\xcc\x01\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd0\x01\x9aA\xcc\x01\n" +
 	"M*\x1dReplace Custom Preset Request2,Request to replace an existing custom preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xc4\x02\n" +
 	"\x1bReplaceCustomPresetResponse\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd2\x01\x92A\xce\x01\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset:\xd2\x01\x9aA\xce\x01\n" +
 	"O*\x1eReplace Custom Preset Response2-Response containing the updated custom preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xdd\x02\n" +
 	"\x19DeleteCustomPresetRequest\x12\x0e\n" +
-	"\x02id\x18\x04 \x01(\tR\x02id:\xc4\x01\x92A\xc0\x01\n" +
+	"\x02id\x18\x04 \x01(\tR\x02id:\xc4\x01\x9aA\xc0\x01\n" +
 	"A*\x1cDelete Custom Preset Request2!Request to delete a custom preset*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\be\x10fJ\x04\bf\x10gR\x15deprecated_identifierR\x17deprecated_identifier_2R\n" +
 	"identifierR\x0fuser_defined_id\"\x1c\n" +
@@ -944,7 +944,7 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"identifierR\x0fuser_defined_id\"\"\n" +
 	" SetCustomPresetAsDefaultResponse\"\xb2\x02\n" +
 	"\x19SetPresetAsDefaultRequest\x12\x0e\n" +
-	"\x02id\x18\x03 \x01(\tR\x02id:\xd5\x01\x92A\xd1\x01\n" +
+	"\x02id\x18\x03 \x01(\tR\x02id:\xd5\x01\x9aA\xd1\x01\n" +
 	"R*\x1dSet Preset As Default Request21Request to set custom or system preset as default*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x15deprecated_identifierR\n" +
 	"identifier\"\x1c\n" +
@@ -953,18 +953,19 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\x02id\x18\x04 \x01(\tR\x02idJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03J\x04\b\x03\x10\x04J\x04\be\x10fJ\x04\bf\x10gR\x15deprecated_identifierR\x17deprecated_identifier_2R\n" +
 	"identifierR\x0fuser_defined_id\"e\n" +
 	"\x11GetPresetResponse\x12P\n" +
-	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset\"\x98\x02\n" +
+	"\x06preset\x18\x01 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x06preset\"\xad\x02\n" +
 	"\x1aListPresetSummariesRequest\x12`\n" +
-	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeH\x00R\rconnectorType\x88\x01\x01\x12a\n" +
-	"\ventity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
-	"J\b\"ALERTS\"R\n" +
-	"entityTypeB\x11\n" +
-	"\x0f_connector_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x16deprecated_entity_type\"\x89\x01\n" +
+	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeH\x00R\rconnectorType\x88\x01\x01\x12f\n" +
+	"\ventity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
+	"J\b\"ALERTS\"H\x01R\n" +
+	"entityType\x88\x01\x01B\x11\n" +
+	"\x0f_connector_typeB\x0e\n" +
+	"\f_entity_typeJ\x04\b\x02\x10\x03J\x04\b\x03\x10\x04R\x16deprecated_entity_type\"\x89\x01\n" +
 	"\x1bListPresetSummariesResponse\x12j\n" +
 	"\x10preset_summaries\x18\x01 \x03(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\x0fpresetSummaries\"\xa7\x02\n" +
 	"\x16BatchGetPresetsRequest\x12\x1d\n" +
 	"\n" +
-	"preset_ids\x18\x03 \x03(\tR\tpresetIds:\xcc\x01\x92A\xc8\x01\n" +
+	"preset_ids\x18\x03 \x03(\tR\tpresetIds:\xcc\x01\x9aA\xc8\x01\n" +
 	"I*\x19Batch Get Presets Request2,Request to get multiple presets by their ids*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x0edeprecated_idsR\x03ids\"\x88\x04\n" +
 	"\x17BatchGetPresetsResponse\x12p\n" +
@@ -972,21 +973,21 @@ const file_com_coralogixapis_notification_center_presets_v1_presets_service_prot
 	"\rnot_found_ids\x18\x02 \x03(\tR\vnotFoundIds\x1at\n" +
 	"\fPresetsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12N\n" +
-	"\x05value\x18\x02 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x05value:\x028\x01:\xe0\x01\x92A\xdc\x01\n" +
+	"\x05value\x18\x02 \x01(\v28.com.coralogixapis.notification_center.presets.v1.PresetR\x05value:\x028\x01:\xe0\x01\x9aA\xdc\x01\n" +
 	"]*\x1aBatch Get Presets Response2?Response containing the requested presets and any IDs not found*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\xfe\x01\n" +
 	"\x1eGetDefaultPresetSummaryRequest\x12[\n" +
 	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12a\n" +
-	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityTypeJ\x04\b\x02\x10\x03R\x16deprecated_entity_type\"\x89\x01\n" +
 	"\x1fGetDefaultPresetSummaryResponse\x12f\n" +
 	"\x0epreset_summary\x18\x01 \x01(\v2?.com.coralogixapis.notification_center.presets.v1.PresetSummaryR\rpresetSummary\"\x94\x04\n" +
 	"$GetSystemDefaultPresetSummaryRequest\x12[\n" +
 	"\x0econnector_type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\rconnectorType\x12a\n" +
-	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
-	"entityType:\x8d\x02\x92A\x89\x02\n" +
+	"entityType:\x8d\x02\x9aA\x89\x02\n" +
 	"\x89\x01*)Get System Default Preset Summary Request2\\Returns the preset summary for the system default preset (i.e., not a user-selected default)*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x02\x10\x03R\x16deprecated_entity_type\"\x8f\x01\n" +
 	"%GetSystemDefaultPresetSummaryResponse\x12f\n" +

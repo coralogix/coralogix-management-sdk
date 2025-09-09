@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -223,19 +223,19 @@ var File_com_coralogixapis_views_v1_time_selection_proto protoreflect.FileDescri
 
 const file_com_coralogixapis_views_v1_time_selection_proto_rawDesc = "" +
 	"\n" +
-	"/com/coralogixapis/views/v1/time_selection.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xda\x01\n" +
+	"/com/coralogixapis/views/v1/time_selection.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xda\x01\n" +
 	"\rTimeSelection\x12Y\n" +
 	"\x0fquick_selection\x18\x01 \x01(\v2..com.coralogixapis.views.v1.QuickTimeSelectionH\x00R\x0equickSelection\x12\\\n" +
 	"\x10custom_selection\x18\x02 \x01(\v2/.com.coralogixapis.views.v1.CustomTimeSelectionH\x00R\x0fcustomSelectionB\x10\n" +
 	"\x0eselection_type\"\xb3\x01\n" +
 	"\x12QuickTimeSelection\x12Z\n" +
-	"\acaption\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\"\x92A\x1d2\vFolder nameJ\v\"Last Hour\"\x80\x01\x01\x18\x01R\acaption\x120\n" +
-	"\aseconds\x18\x03 \x01(\rB\x16\x92A\x132\vFolder nameJ\x043600R\aseconds:\x0f\x92A\f\n" +
+	"\acaption\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\"\x9aA\x1d2\vFolder nameJ\v\"Last Hour\"\x80\x01\x01\x18\x01R\acaption\x120\n" +
+	"\aseconds\x18\x03 \x01(\rB\x16\x9aA\x132\vFolder nameJ\x043600R\aseconds:\x0f\x9aA\f\n" +
 	"\n" +
 	"\xd2\x01\aseconds\"\xe8\x01\n" +
 	"\x13CustomTimeSelection\x12[\n" +
-	"\tfrom_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\"\x92A\x1fJ\x1a\"2024-01-25T11:31:43.152Z\"\x80\x01\x01R\bfromTime\x12W\n" +
-	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\"\x92A\x1fJ\x1a\"2024-01-25T11:35:43.152Z\"\x80\x01\x01R\x06toTime:\x1b\x92A\x18\n" +
+	"\tfrom_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\"\x9aA\x1fJ\x1a\"2024-01-25T11:31:43.152Z\"\x80\x01\x01R\bfromTime\x12W\n" +
+	"\ato_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\"\x9aA\x1fJ\x1a\"2024-01-25T11:35:43.152Z\"\x80\x01\x01R\x06toTime:\x1b\x9aA\x18\n" +
 	"\x16\xd2\x01\tfrom_time\xd2\x01\ato_timeb\x06proto3"
 
 var (

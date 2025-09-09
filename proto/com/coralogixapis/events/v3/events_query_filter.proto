@@ -26,6 +26,7 @@ message EventsFilter {
   repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_type\"]" }];
   repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_key\"]" }];
   Filters cx_event_metadata_filters = 5;
+  Filters cx_event_labels_filters = 6;
 }
 
 message Filters {

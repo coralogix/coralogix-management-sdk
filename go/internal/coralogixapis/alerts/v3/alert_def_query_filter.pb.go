@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -134,6 +134,7 @@ type AlertDefQueryFilter struct {
 	ModifiedTimeRangeFilter      *AlertDefModifiedTimeFilter      `protobuf:"bytes,7,opt,name=modified_time_range_filter,json=modifiedTimeRangeFilter,proto3" json:"modified_time_range_filter,omitempty"`
 	LastTriggeredTimeRangeFilter *AlertDefLastTriggeredTimeFilter `protobuf:"bytes,8,opt,name=last_triggered_time_range_filter,json=lastTriggeredTimeRangeFilter,proto3" json:"last_triggered_time_range_filter,omitempty"`
 	TypeSpecificFilter           *AlertDefTypeSpecificFilter      `protobuf:"bytes,9,opt,name=type_specific_filter,json=typeSpecificFilter,proto3" json:"type_specific_filter,omitempty"`
+	StatusFilter                 *AlertDefStatusFilter            `protobuf:"bytes,10,opt,name=status_filter,json=statusFilter,proto3" json:"status_filter,omitempty"`
 	unknownFields                protoimpl.UnknownFields
 	sizeCache                    protoimpl.SizeCache
 }
@@ -220,6 +221,13 @@ func (x *AlertDefQueryFilter) GetLastTriggeredTimeRangeFilter() *AlertDefLastTri
 func (x *AlertDefQueryFilter) GetTypeSpecificFilter() *AlertDefTypeSpecificFilter {
 	if x != nil {
 		return x.TypeSpecificFilter
+	}
+	return nil
+}
+
+func (x *AlertDefQueryFilter) GetStatusFilter() *AlertDefStatusFilter {
+	if x != nil {
+		return x.StatusFilter
 	}
 	return nil
 }
@@ -682,60 +690,119 @@ func (x *AlertDefSloSpecificFilter) GetMatcher() FilterMatcher {
 	return FilterMatcher_FILTER_MATCHER_UNSPECIFIED
 }
 
+type AlertDefStatusFilter struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Status        []AlertDefStatus       `protobuf:"varint,1,rep,packed,name=status,proto3,enum=com.coralogixapis.alerts.v3.AlertDefStatus" json:"status,omitempty"`
+	Matcher       FilterMatcher          `protobuf:"varint,2,opt,name=matcher,proto3,enum=com.coralogixapis.alerts.v3.FilterMatcher" json:"matcher,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AlertDefStatusFilter) Reset() {
+	*x = AlertDefStatusFilter{}
+	mi := &file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AlertDefStatusFilter) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AlertDefStatusFilter) ProtoMessage() {}
+
+func (x *AlertDefStatusFilter) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AlertDefStatusFilter.ProtoReflect.Descriptor instead.
+func (*AlertDefStatusFilter) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *AlertDefStatusFilter) GetStatus() []AlertDefStatus {
+	if x != nil {
+		return x.Status
+	}
+	return nil
+}
+
+func (x *AlertDefStatusFilter) GetMatcher() FilterMatcher {
+	if x != nil {
+		return x.Matcher
+	}
+	return FilterMatcher_FILTER_MATCHER_UNSPECIFIED
+}
+
 var File_com_coralogixapis_alerts_v3_alert_def_query_filter_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDesc = "" +
 	"\n" +
-	"8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a,com/coralogixapis/alerts/v3/time_range.proto\"\xf3\t\n" +
+	"8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a,com/coralogixapis/alerts/v3/time_range.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\"\xf3\n" +
+	"\n" +
 	"\x13AlertDefQueryFilter\x12e\n" +
-	"\vname_filter\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefNameFilterB\x13\x92A\x102\x0eFilter by nameR\n" +
+	"\vname_filter\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefNameFilterB\x13\x9aA\x102\x0eFilter by nameR\n" +
 	"nameFilter\x12n\n" +
-	"\vtype_filter\x18\x02 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefTypeFilterB\x1c\x92A\x192\x17Filter by AlertDef typeR\n" +
+	"\vtype_filter\x18\x02 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefTypeFilterB\x1c\x9aA\x192\x17Filter by AlertDef typeR\n" +
 	"typeFilter\x12\x90\x01\n" +
-	"\x14entity_labels_filter\x18\x03 \x01(\v27.com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilterB%\x92A\"2 Filter by AlertDef entity labelsR\x12entityLabelsFilter\x12~\n" +
-	"\x0fpriority_filter\x18\x04 \x01(\v23.com.coralogixapis.alerts.v3.AlertDefPriorityFilterB \x92A\x1d2\x1bFilter by AlertDef priorityR\x0epriorityFilter\x12\x81\x01\n" +
-	"\x0eenabled_filter\x18\x05 \x01(\v22.com.coralogixapis.alerts.v3.AlertDefEnabledFilterB&\x92A#2!Filter by AlertDef enabled statusR\renabledFilter\x12\xb8\x01\n" +
-	"\x1amodified_time_range_filter\x18\a \x01(\v27.com.coralogixapis.alerts.v3.AlertDefModifiedTimeFilterBB\x92A?2=Filters all alerts that were modified at the given time rangeR\x17modifiedTimeRangeFilter\x12\xc9\x01\n" +
-	" last_triggered_time_range_filter\x18\b \x01(\v2<.com.coralogixapis.alerts.v3.AlertDefLastTriggeredTimeFilterBC\x92A@2>Filters all alerts that were triggered at the given time rangeR\x1clastTriggeredTimeRangeFilter\x12\xa3\x01\n" +
-	"\x14type_specific_filter\x18\t \x01(\v27.com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilterB8\x92A523Filter by fields specific to alert type definitionsR\x12typeSpecificFilter:A\x92A>\n" +
+	"\x14entity_labels_filter\x18\x03 \x01(\v27.com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilterB%\x9aA\"2 Filter by AlertDef entity labelsR\x12entityLabelsFilter\x12~\n" +
+	"\x0fpriority_filter\x18\x04 \x01(\v23.com.coralogixapis.alerts.v3.AlertDefPriorityFilterB \x9aA\x1d2\x1bFilter by AlertDef priorityR\x0epriorityFilter\x12\x81\x01\n" +
+	"\x0eenabled_filter\x18\x05 \x01(\v22.com.coralogixapis.alerts.v3.AlertDefEnabledFilterB&\x9aA#2!Filter by AlertDef enabled statusR\renabledFilter\x12\xb8\x01\n" +
+	"\x1amodified_time_range_filter\x18\a \x01(\v27.com.coralogixapis.alerts.v3.AlertDefModifiedTimeFilterBB\x9aA?2=Filters all alerts that were modified at the given time rangeR\x17modifiedTimeRangeFilter\x12\xc9\x01\n" +
+	" last_triggered_time_range_filter\x18\b \x01(\v2<.com.coralogixapis.alerts.v3.AlertDefLastTriggeredTimeFilterBC\x9aA@2>Filters all alerts that were triggered at the given time rangeR\x1clastTriggeredTimeRangeFilter\x12\xa3\x01\n" +
+	"\x14type_specific_filter\x18\t \x01(\v27.com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilterB8\x9aA523Filter by fields specific to alert type definitionsR\x12typeSpecificFilter\x12~\n" +
+	"\rstatus_filter\x18\n" +
+	" \x01(\v21.com.coralogixapis.alerts.v3.AlertDefStatusFilterB&\x9aA#2!Filter by alert definition statusR\fstatusFilter:A\x9aA>\n" +
 	"<*\x15AlertDef query filter2#Filter configuration for alert defs\"\xe3\x02\n" +
 	"\x12AlertDefNameFilter\x12~\n" +
-	"\x04name\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBL\x92AI2GThe name(s) of the alert definition - multiple values are OR'd togetherR\x04name\x12}\n" +
-	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB7\x92A422The filter operator (EQUALS, NOT_EQUALS, CONTAINS)R\amatcher:N\x92AK\n" +
+	"\x04name\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBL\x9aAI2GThe name(s) of the alert definition - multiple values are OR'd togetherR\x04name\x12}\n" +
+	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB7\x9aA422The filter operator (EQUALS, NOT_EQUALS, CONTAINS)R\amatcher:N\x9aAK\n" +
 	"I*\x14AlertDef Name Filter2 Filter by alert definition names\xd2\x01\x04name\xd2\x01\amatcher\"\x8a\x03\n" +
 	"\x16AlertDefPriorityFilter\x12\x9d\x01\n" +
-	"\bpriority\x18\x01 \x03(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityBR\x92AO2MThe priority(ies) of the alert definition - multiple values are OR'd togetherR\bpriority\x12s\n" +
-	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x92A*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:[\x92AX\n" +
+	"\bpriority\x18\x01 \x03(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityBR\x9aAO2MThe priority(ies) of the alert definition - multiple values are OR'd togetherR\bpriority\x12s\n" +
+	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x9aA*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:[\x9aAX\n" +
 	"V*\x18AlertDef Priority Filter2%Filter by alert definition priorities\xd2\x01\bpriority\xd2\x01\amatcher\"\xc9\x04\n" +
 	"\x1aAlertDefEntityLabelsFilter\x12\xd4\x01\n" +
-	"\rentity_labels\x18\x01 \x03(\v2I.com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntryBd\x92Aa2-The entity label key-value pairs to filter byJ0{\"environment\": \"production\", \"team\": \"backend\"}R\fentityLabels\x12\xa0\x01\n" +
-	"\x0fvalues_operator\x18\x03 \x01(\x0e21.com.coralogixapis.alerts.v3.FilterValuesOperatorBD\x92AA2?Whether all labels must match (AND) or any label can match (OR)R\x0evaluesOperator\x1a?\n" +
+	"\rentity_labels\x18\x01 \x03(\v2I.com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntryBd\x9aAa2-The entity label key-value pairs to filter byJ0{\"environment\": \"production\", \"team\": \"backend\"}R\fentityLabels\x12\xa0\x01\n" +
+	"\x0fvalues_operator\x18\x03 \x01(\x0e21.com.coralogixapis.alerts.v3.FilterValuesOperatorBD\x9aAA2?Whether all labels must match (AND) or any label can match (OR)R\x0evaluesOperator\x1a?\n" +
 	"\x11EntityLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:p\x92Am\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:p\x9aAm\n" +
 	"k*\x1dAlertDef Entity Labels Filter2(Filter by alert definition entity labels\xd2\x01\rentity_labels\xd2\x01\x0fvalues_operator\"\xd9\x01\n" +
 	"\x1aAlertDefModifiedTimeFilter\x12R\n" +
-	"\x11modified_at_range\x18\x01 \x01(\v2&.com.coralogixapis.alerts.v3.TimeRangeR\x0fmodifiedAtRange:g\x92Ad\n" +
+	"\x11modified_at_range\x18\x01 \x01(\v2&.com.coralogixapis.alerts.v3.TimeRangeR\x0fmodifiedAtRange:g\x9aAd\n" +
 	"b*\x1dAlertDef Modified Time Filter2-Filter by alert definition modification times\xd2\x01\x11modified_at_range\"\xf7\x01\n" +
 	"\x1fAlertDefLastTriggeredTimeFilter\x12]\n" +
-	"\x17last_triggered_at_range\x18\x01 \x01(\v2&.com.coralogixapis.alerts.v3.TimeRangeR\x14lastTriggeredAtRange:u\x92Ar\n" +
+	"\x17last_triggered_at_range\x18\x01 \x01(\v2&.com.coralogixapis.alerts.v3.TimeRangeR\x14lastTriggeredAtRange:u\x9aAr\n" +
 	"p*#AlertDef Last Triggered Time Filter2/Filter by alert definition last triggered times\xd2\x01\x17last_triggered_at_range\"\xd4\x02\n" +
 	"\x12AlertDefTypeFilter\x12y\n" +
-	"\x04type\x18\x01 \x03(\x0e2).com.coralogixapis.alerts.v3.AlertDefTypeB:\x92A725The alert type(s) - multiple values are OR'd togetherR\x04type\x12s\n" +
-	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x92A*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:N\x92AK\n" +
+	"\x04type\x18\x01 \x03(\x0e2).com.coralogixapis.alerts.v3.AlertDefTypeB:\x9aA725The alert type(s) - multiple values are OR'd togetherR\x04type\x12s\n" +
+	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x9aA*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:N\x9aAK\n" +
 	"I*\x14AlertDef Type Filter2 Filter by alert definition types\xd2\x01\x04type\xd2\x01\amatcher\"\xe8\x01\n" +
 	"\x15AlertDefEnabledFilter\x12z\n" +
-	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBD\x92AA2?Whether to filter for enabled (true) or disabled (false) alertsR\aenabled:S\x92AP\n" +
+	"\aenabled\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBD\x9aAA2?Whether to filter for enabled (true) or disabled (false) alertsR\aenabled:S\x9aAP\n" +
 	"N*\x17AlertDef Enabled Filter2)Filter by alert definition enabled status\xd2\x01\aenabled\"\x9e\x02\n" +
 	"\x1aAlertDefTypeSpecificFilter\x12\x8c\x01\n" +
 	"\n" +
-	"slo_filter\x18\x01 \x01(\v26.com.coralogixapis.alerts.v3.AlertDefSloSpecificFilterB3\x92A02.Filter SLO-based alerts by SLO-specific fieldsH\x00R\tsloFilter:Y\x92AV\n" +
+	"slo_filter\x18\x01 \x01(\v26.com.coralogixapis.alerts.v3.AlertDefSloSpecificFilterB3\x9aA02.Filter SLO-based alerts by SLO-specific fieldsH\x00R\tsloFilter:Y\x9aAV\n" +
 	"T*\x1dAlertDef Type Specific Filter23Filter by fields specific to alert type definitionsB\x16\n" +
 	"\x14type_specific_filter\"\x9d\x03\n" +
 	"\x19AlertDefSloSpecificFilter\x12\xa2\x01\n" +
-	"\x06slo_id\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBm\x92Aj2>The SLO ID(s) to filter by - multiple values are OR'd togetherJ([\"123e4567-e89b-12d3-a456-426614174000\"]R\x05sloId\x12s\n" +
-	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x92A*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:f\x92Ac\n" +
-	"a*\x1cAlertDef SLO Specific Filter2.Filter SLO-based alerts by SLO-specific fields\xd2\x01\x06slo_id\xd2\x01\amatcher*\x86\x01\n" +
+	"\x06slo_id\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBm\x9aAj2>The SLO ID(s) to filter by - multiple values are OR'd togetherJ([\"123e4567-e89b-12d3-a456-426614174000\"]R\x05sloId\x12s\n" +
+	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x9aA*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:f\x9aAc\n" +
+	"a*\x1cAlertDef SLO Specific Filter2.Filter SLO-based alerts by SLO-specific fields\xd2\x01\x06slo_id\xd2\x01\amatcher\"\xf7\x02\n" +
+	"\x14AlertDefStatusFilter\x12\x94\x01\n" +
+	"\x06status\x18\x01 \x03(\x0e2+.com.coralogixapis.alerts.v3.AlertDefStatusBO\x9aAL2JThe status(es) of the alert definition - multiple values are OR'd togetherR\x06status\x12s\n" +
+	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.alerts.v3.FilterMatcherB-\x9aA*2(The filter operator (EQUALS, NOT_EQUALS)R\amatcher:S\x9aAP\n" +
+	"N*\x16AlertDef Status Filter2!Filter by alert definition status\xd2\x01\x06status\xd2\x01\amatcher*\x86\x01\n" +
 	"\rFilterMatcher\x12\x1e\n" +
 	"\x1aFILTER_MATCHER_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15FILTER_MATCHER_EQUALS\x10\x01\x12\x1d\n" +
@@ -759,7 +826,7 @@ func file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDescGZIP()
 }
 
 var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
+var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_goTypes = []any{
 	(FilterMatcher)(0),                      // 0: com.coralogixapis.alerts.v3.FilterMatcher
 	(FilterValuesOperator)(0),               // 1: com.coralogixapis.alerts.v3.FilterValuesOperator
@@ -773,12 +840,14 @@ var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_goTypes = []an
 	(*AlertDefEnabledFilter)(nil),           // 9: com.coralogixapis.alerts.v3.AlertDefEnabledFilter
 	(*AlertDefTypeSpecificFilter)(nil),      // 10: com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilter
 	(*AlertDefSloSpecificFilter)(nil),       // 11: com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter
-	nil,                                     // 12: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntry
-	(*wrapperspb.StringValue)(nil),          // 13: google.protobuf.StringValue
-	(AlertDefPriority)(0),                   // 14: com.coralogixapis.alerts.v3.AlertDefPriority
-	(*TimeRange)(nil),                       // 15: com.coralogixapis.alerts.v3.TimeRange
-	(AlertDefType)(0),                       // 16: com.coralogixapis.alerts.v3.AlertDefType
-	(*wrapperspb.BoolValue)(nil),            // 17: google.protobuf.BoolValue
+	(*AlertDefStatusFilter)(nil),            // 12: com.coralogixapis.alerts.v3.AlertDefStatusFilter
+	nil,                                     // 13: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntry
+	(*wrapperspb.StringValue)(nil),          // 14: google.protobuf.StringValue
+	(AlertDefPriority)(0),                   // 15: com.coralogixapis.alerts.v3.AlertDefPriority
+	(*TimeRange)(nil),                       // 16: com.coralogixapis.alerts.v3.TimeRange
+	(AlertDefType)(0),                       // 17: com.coralogixapis.alerts.v3.AlertDefType
+	(*wrapperspb.BoolValue)(nil),            // 18: google.protobuf.BoolValue
+	(AlertDefStatus)(0),                     // 19: com.coralogixapis.alerts.v3.AlertDefStatus
 }
 var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_depIdxs = []int32{
 	3,  // 0: com.coralogixapis.alerts.v3.AlertDefQueryFilter.name_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefNameFilter
@@ -789,25 +858,28 @@ var file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_depIdxs = []in
 	6,  // 5: com.coralogixapis.alerts.v3.AlertDefQueryFilter.modified_time_range_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefModifiedTimeFilter
 	7,  // 6: com.coralogixapis.alerts.v3.AlertDefQueryFilter.last_triggered_time_range_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefLastTriggeredTimeFilter
 	10, // 7: com.coralogixapis.alerts.v3.AlertDefQueryFilter.type_specific_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilter
-	13, // 8: com.coralogixapis.alerts.v3.AlertDefNameFilter.name:type_name -> google.protobuf.StringValue
-	0,  // 9: com.coralogixapis.alerts.v3.AlertDefNameFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
-	14, // 10: com.coralogixapis.alerts.v3.AlertDefPriorityFilter.priority:type_name -> com.coralogixapis.alerts.v3.AlertDefPriority
-	0,  // 11: com.coralogixapis.alerts.v3.AlertDefPriorityFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
-	12, // 12: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.entity_labels:type_name -> com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntry
-	1,  // 13: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.values_operator:type_name -> com.coralogixapis.alerts.v3.FilterValuesOperator
-	15, // 14: com.coralogixapis.alerts.v3.AlertDefModifiedTimeFilter.modified_at_range:type_name -> com.coralogixapis.alerts.v3.TimeRange
-	15, // 15: com.coralogixapis.alerts.v3.AlertDefLastTriggeredTimeFilter.last_triggered_at_range:type_name -> com.coralogixapis.alerts.v3.TimeRange
-	16, // 16: com.coralogixapis.alerts.v3.AlertDefTypeFilter.type:type_name -> com.coralogixapis.alerts.v3.AlertDefType
-	0,  // 17: com.coralogixapis.alerts.v3.AlertDefTypeFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
-	17, // 18: com.coralogixapis.alerts.v3.AlertDefEnabledFilter.enabled:type_name -> google.protobuf.BoolValue
-	11, // 19: com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilter.slo_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter
-	13, // 20: com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter.slo_id:type_name -> google.protobuf.StringValue
-	0,  // 21: com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	12, // 8: com.coralogixapis.alerts.v3.AlertDefQueryFilter.status_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefStatusFilter
+	14, // 9: com.coralogixapis.alerts.v3.AlertDefNameFilter.name:type_name -> google.protobuf.StringValue
+	0,  // 10: com.coralogixapis.alerts.v3.AlertDefNameFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
+	15, // 11: com.coralogixapis.alerts.v3.AlertDefPriorityFilter.priority:type_name -> com.coralogixapis.alerts.v3.AlertDefPriority
+	0,  // 12: com.coralogixapis.alerts.v3.AlertDefPriorityFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
+	13, // 13: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.entity_labels:type_name -> com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.EntityLabelsEntry
+	1,  // 14: com.coralogixapis.alerts.v3.AlertDefEntityLabelsFilter.values_operator:type_name -> com.coralogixapis.alerts.v3.FilterValuesOperator
+	16, // 15: com.coralogixapis.alerts.v3.AlertDefModifiedTimeFilter.modified_at_range:type_name -> com.coralogixapis.alerts.v3.TimeRange
+	16, // 16: com.coralogixapis.alerts.v3.AlertDefLastTriggeredTimeFilter.last_triggered_at_range:type_name -> com.coralogixapis.alerts.v3.TimeRange
+	17, // 17: com.coralogixapis.alerts.v3.AlertDefTypeFilter.type:type_name -> com.coralogixapis.alerts.v3.AlertDefType
+	0,  // 18: com.coralogixapis.alerts.v3.AlertDefTypeFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
+	18, // 19: com.coralogixapis.alerts.v3.AlertDefEnabledFilter.enabled:type_name -> google.protobuf.BoolValue
+	11, // 20: com.coralogixapis.alerts.v3.AlertDefTypeSpecificFilter.slo_filter:type_name -> com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter
+	14, // 21: com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter.slo_id:type_name -> google.protobuf.StringValue
+	0,  // 22: com.coralogixapis.alerts.v3.AlertDefSloSpecificFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
+	19, // 23: com.coralogixapis.alerts.v3.AlertDefStatusFilter.status:type_name -> com.coralogixapis.alerts.v3.AlertDefStatus
+	0,  // 24: com.coralogixapis.alerts.v3.AlertDefStatusFilter.matcher:type_name -> com.coralogixapis.alerts.v3.FilterMatcher
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init() }
@@ -818,6 +890,7 @@ func file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init() {
 	file_com_coralogixapis_alerts_v3_alert_def_type_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_priority_proto_init()
 	file_com_coralogixapis_alerts_v3_time_range_proto_init()
+	file_com_coralogixapis_alerts_v3_commons_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_msgTypes[8].OneofWrappers = []any{
 		(*AlertDefTypeSpecificFilter_SloFilter)(nil),
 	}
@@ -827,7 +900,7 @@ func file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   11,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

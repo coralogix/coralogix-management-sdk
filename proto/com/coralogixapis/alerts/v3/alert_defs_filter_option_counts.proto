@@ -1,0 +1,264 @@
+syntax = "proto3";
+
+package com.coralogixapis.alerts.v3;
+
+import "google/protobuf/wrappers.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+import "com/coralogixapis/alerts/v3/alert_def_type.proto";
+import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
+import "com/coralogixapis/alerts/v3/alert_def_query_filter.proto";
+
+message FilterOptionCountsRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts request"
+      description: "Request to get counts for filter options based on applied filters"
+    }
+  };
+  FilterOptionCountsFilter query_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The filter to apply when counting options"
+  }];
+}
+
+message FilterOptionCountsResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts response"
+      description: "Response containing counts for different filter options"
+    }
+  };
+  FilterOptionCounts counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The counts for different filter options"
+  }];
+}
+
+message FilterOptionCountsFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts filter"
+      description: "Filter configuration for counting filter options"
+    }
+  };
+  FilterOptionCountsNameFilter name_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition names"
+  }];
+  FilterOptionCountsTypeFilter type_filter = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition types"
+  }];
+  FilterOptionCountsPriorityFilter priority_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition priorities"
+  }];
+  FilterOptionCountsEntityLabelsFilter entity_labels_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition entity labels"
+  }];
+  FilterOptionCountsStatusFilter status_filter = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition status"
+  }];
+  FilterOptionCountsEnabledFilter enabled_filter = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Filter by alert definition enabled status"
+  }];
+}
+
+message FilterOptionCountsNameFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts name filter"
+      description: "Filter by alert definition names for counting options"
+    }
+  };
+  repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The name(s) of the alert definition - multiple values are OR'd together"
+    example: "[\"My Alert\", \"Another Alert\"]"
+  }];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)"
+    example: "\"FILTER_MATCHER_CONTAINS\""
+  }];
+}
+
+message FilterOptionCountsTypeFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts type filter"
+      description: "Filter by alert definition types for counting options"
+    }
+  };
+  repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert types"
+    example: "[\"ALERT_DEF_TYPE_LOGS_THRESHOLD\", \"ALERT_DEF_TYPE_LOGS_NEW_VALUE\", \"ALERT_DEF_TYPE_LOGS_UNIQUE_COUNT\", \"ALERT_DEF_TYPE_TRACING_THRESHOLD\"]"
+  }];
+}
+
+message FilterOptionCountsPriorityFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts priority filter"
+      description: "Filter by alert definition priorities"
+    }
+  };
+  repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert priorities to include in the count"
+    example: "[\"ALERT_DEF_PRIORITY_P1\", \"ALERT_DEF_PRIORITY_P2\", \"ALERT_DEF_PRIORITY_P3\"]"
+  }];
+}
+
+message FilterOptionCountsEntityLabelsFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts entity labels filter"
+      description: "Filter by alert definition entity labels with And/Or options"
+    }
+  };
+  map<string, string> entity_labels = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The entity label key-value pairs to filter by"
+    example: "{\"environment\": \"production\", \"team\": \"backend\"}"
+  }];
+  FilterValuesOperator values_operator = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Whether all labels must match (AND) or any label can match (OR)"
+    example: "\"FILTER_VALUES_OPERATOR_AND\""
+  }];
+}
+
+message FilterOptionCountsStatusFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts status filter"
+      description: "Filter by alert definition status for counting options"
+    }
+  };
+  repeated AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert statuses to include in the count"
+    example: "[\"ALERT_DEF_STATUS_ALERTING\", \"ALERT_DEF_STATUS_OK\", \"ALERT_DEF_STATUS_NO_DATA\"]"
+  }];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+      description: "The filter operator (EQUALS, NOT_EQUALS)"
+      example: "\"FILTER_MATCHER_EQUALS\""
+    }];
+}
+
+message FilterOptionCountsEnabledFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts enabled filter"
+      description: "Filter by alert definition enabled status for counting options"
+    }
+  };
+  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Whether to filter for enabled (true) or disabled (false) alerts"
+    example: "true"
+  }];
+}
+
+message FilterOptionCounts {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Filter option counts"
+      description: "Counts for different filter options"
+    }
+  };
+  repeated TypeCount type_counts = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Counts for different alert types"
+  }];
+  repeated PriorityCount priority_counts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Counts for different alert priorities"
+  }];
+  repeated EntityLabelCount entity_label_counts = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Counts for different entity label values"
+  }];
+  repeated StatusCount status_counts = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Counts for different alert statuses"
+  }];
+  repeated EnabledCount enabled_counts = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Counts for different alert enabled statuses"
+  }];
+}
+
+message TypeCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Type count"
+      description: "Count for a specific alert type"
+    }
+  };
+  AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert type"
+    example: "\"ALERT_DEF_TYPE_LOGS_THRESHOLD\""
+  }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The count for this alert type"
+    example: "42"
+  }];
+}
+
+message PriorityCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Priority count"
+      description: "Count for a specific alert priority"
+    }
+  };
+  AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert priority"
+    example: "\"ALERT_DEF_PRIORITY_P1\""
+  }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The count for this alert priority"
+    example: "15"
+  }];
+}
+
+message EntityLabelCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Entity label count"
+      description: "Count for a specific entity label value"
+    }
+  };
+  google.protobuf.StringValue label_key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The entity label key"
+    example: "\"environment\""
+  }];
+  google.protobuf.StringValue label_value = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The entity label value"
+    example: "\"production\""
+  }];
+  google.protobuf.UInt32Value count = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The count for this entity label value"
+    example: "28"
+  }];
+}
+
+message StatusCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Status count"
+      description: "Count for a specific alert status"
+    }
+  };
+  AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert status"
+    example: "\"ALERT_DEF_STATUS_ALERTING\""
+  }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The count for this alert status"
+    example: "15"
+  }];
+}
+
+message EnabledCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Enabled count"
+      description: "Count for a specific alert enabled status"
+    }
+  };
+  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Whether the alert is enabled (true) or disabled (false)"
+    example: "true"
+  }];
+  google.protobuf.UInt32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The count for this enabled status"
+    example: "25"
+  }];
+}

@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -79,11 +79,11 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_immedia
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_immediate_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xca\x04\n" +
+	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xca\x04\n" +
 	"\x11LogsImmediateType\x12\x84\x01\n" +
-	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB:\x92A725The filter to match log entries for immediate alerts.R\n" +
+	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB:\x9aA725The filter to match log entries for immediate alerts.R\n" +
 	"logsFilter\x12\x83\x01\n" +
-	"\x1bnotification_payload_filter\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB%\x92A\"J\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\xa7\x02\x92A\xa3\x02\n" +
+	"\x1bnotification_payload_filter\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB%\x9aA\"J\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\xa7\x02\x9aA\xa3\x02\n" +
 	"\x81\x01*\x19Logs immediate alert type2VConfiguration for immediate alerts triggered on log entries matching specific filters.\xd2\x01\vlogs_filter*\x9c\x01\n" +
 	";Learn more about logs immediate alerts in our documentation\x12]https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/immediate-notifications/b\x06proto3"
 

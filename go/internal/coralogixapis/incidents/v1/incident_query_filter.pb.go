@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -34,15 +34,16 @@ type IncidentQueryFilter struct {
 	// Deprecated: Marked as deprecated in com/coralogixapis/incidents/v1/incident_query_filter.proto.
 	StartTime *timestamppb.Timestamp `protobuf:"bytes,6,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
 	// Deprecated: Marked as deprecated in com/coralogixapis/incidents/v1/incident_query_filter.proto.
-	EndTime               *timestamppb.Timestamp    `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
-	SearchQuery           *IncidentSearchQuery      `protobuf:"bytes,8,opt,name=search_query,json=searchQuery,proto3" json:"search_query,omitempty"`
-	ApplicationName       []*wrapperspb.StringValue `protobuf:"bytes,9,rep,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
-	SubsystemName         []*wrapperspb.StringValue `protobuf:"bytes,10,rep,name=subsystem_name,json=subsystemName,proto3" json:"subsystem_name,omitempty"`
-	IsMuted               *wrapperspb.BoolValue     `protobuf:"bytes,11,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
-	CreatedAtRange        *TimeRange                `protobuf:"bytes,12,opt,name=created_at_range,json=createdAtRange,proto3" json:"created_at_range,omitempty"`
-	IncidentDurationRange *TimeRange                `protobuf:"bytes,13,opt,name=incident_duration_range,json=incidentDurationRange,proto3" json:"incident_duration_range,omitempty"`
-	MetaLabels            []*MetaLabel              `protobuf:"bytes,14,rep,name=meta_labels,json=metaLabels,proto3" json:"meta_labels,omitempty"`
-	MetaLabelsOp          FilterOperator            `protobuf:"varint,15,opt,name=meta_labels_op,json=metaLabelsOp,proto3,enum=com.coralogixapis.incidents.v1.FilterOperator" json:"meta_labels_op,omitempty"`
+	EndTime               *timestamppb.Timestamp         `protobuf:"bytes,7,opt,name=end_time,json=endTime,proto3" json:"end_time,omitempty"`
+	SearchQuery           *IncidentSearchQuery           `protobuf:"bytes,8,opt,name=search_query,json=searchQuery,proto3" json:"search_query,omitempty"`
+	ApplicationName       []*wrapperspb.StringValue      `protobuf:"bytes,9,rep,name=application_name,json=applicationName,proto3" json:"application_name,omitempty"`
+	SubsystemName         []*wrapperspb.StringValue      `protobuf:"bytes,10,rep,name=subsystem_name,json=subsystemName,proto3" json:"subsystem_name,omitempty"`
+	IsMuted               *wrapperspb.BoolValue          `protobuf:"bytes,11,opt,name=is_muted,json=isMuted,proto3" json:"is_muted,omitempty"`
+	CreatedAtRange        *TimeRange                     `protobuf:"bytes,12,opt,name=created_at_range,json=createdAtRange,proto3" json:"created_at_range,omitempty"`
+	IncidentDurationRange *TimeRange                     `protobuf:"bytes,13,opt,name=incident_duration_range,json=incidentDurationRange,proto3" json:"incident_duration_range,omitempty"`
+	MetaLabels            []*MetaLabel                   `protobuf:"bytes,14,rep,name=meta_labels,json=metaLabels,proto3" json:"meta_labels,omitempty"`
+	MetaLabelsOp          FilterOperator                 `protobuf:"varint,15,opt,name=meta_labels_op,json=metaLabelsOp,proto3,enum=com.coralogixapis.incidents.v1.FilterOperator" json:"meta_labels_op,omitempty"`
+	DisplayLabels         map[string]*DisplayLabelValues `protobuf:"bytes,16,rep,name=display_labels,json=displayLabels,proto3" json:"display_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -184,6 +185,13 @@ func (x *IncidentQueryFilter) GetMetaLabelsOp() FilterOperator {
 	return FilterOperator_FILTER_OPERATOR_OR_OR_UNSPECIFIED
 }
 
+func (x *IncidentQueryFilter) GetDisplayLabels() map[string]*DisplayLabelValues {
+	if x != nil {
+		return x.DisplayLabels
+	}
+	return nil
+}
+
 type TimeRange struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	StartTime     *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=start_time,json=startTime,proto3" json:"start_time,omitempty"`
@@ -280,44 +288,95 @@ func (x *ContextualLabelValues) GetContextualLabelValues() []*wrapperspb.StringV
 	return nil
 }
 
+type DisplayLabelValues struct {
+	state              protoimpl.MessageState    `protogen:"open.v1"`
+	DisplayLabelValues []*wrapperspb.StringValue `protobuf:"bytes,1,rep,name=display_label_values,json=displayLabelValues,proto3" json:"display_label_values,omitempty"`
+	unknownFields      protoimpl.UnknownFields
+	sizeCache          protoimpl.SizeCache
+}
+
+func (x *DisplayLabelValues) Reset() {
+	*x = DisplayLabelValues{}
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filter_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisplayLabelValues) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisplayLabelValues) ProtoMessage() {}
+
+func (x *DisplayLabelValues) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filter_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisplayLabelValues.ProtoReflect.Descriptor instead.
+func (*DisplayLabelValues) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DisplayLabelValues) GetDisplayLabelValues() []*wrapperspb.StringValue {
+	if x != nil {
+		return x.DisplayLabelValues
+	}
+	return nil
+}
+
 var File_com_coralogixapis_incidents_v1_incident_query_filter_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDesc = "" +
 	"\n" +
-	":com/coralogixapis/incidents/v1/incident_query_filter.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a3com/coralogixapis/incidents/v1/incident_query.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd3\x10\n" +
+	":com/coralogixapis/incidents/v1/incident_query_filter.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a3com/coralogixapis/incidents/v1/incident_query.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd8\x12\n" +
 	"\x13IncidentQueryFilter\x12Q\n" +
-	"\bassignee\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x17\x92A\x142\x12Filter by assigneeR\bassignee\x12f\n" +
-	"\x06status\x18\x02 \x03(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusB\x1e\x92A\x1b2\x19Filter by incident statusR\x06status\x12b\n" +
-	"\x05state\x18\x03 \x03(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateB\x1d\x92A\x1a2\x18Filter by incident stateR\x05state\x12n\n" +
-	"\bseverity\x18\x04 \x03(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityB \x92A\x1d2\x1bFilter by incident severityR\bseverity\x12\x98\x01\n" +
-	"\x11contextual_labels\x18\x05 \x03(\v2I.com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntryB \x92A\x1d2\x1bFilter by contextual labelsR\x10contextualLabels\x12\xb6\x01\n" +
+	"\bassignee\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x17\x9aA\x142\x12Filter by assigneeR\bassignee\x12f\n" +
+	"\x06status\x18\x02 \x03(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusB\x1e\x9aA\x1b2\x19Filter by incident statusR\x06status\x12b\n" +
+	"\x05state\x18\x03 \x03(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateB\x1d\x9aA\x1a2\x18Filter by incident stateR\x05state\x12n\n" +
+	"\bseverity\x18\x04 \x03(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityB \x9aA\x1d2\x1bFilter by incident severityR\bseverity\x12\x98\x01\n" +
+	"\x11contextual_labels\x18\x05 \x03(\v2I.com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntryB \x9aA\x1d2\x1bFilter by contextual labelsR\x10contextualLabels\x12\xb6\x01\n" +
 	"\n" +
-	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB{\x92Av2tFilters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)\x18\x01R\tstartTime\x12\xb0\x01\n" +
-	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampBy\x92At2rFilters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)\x18\x01R\aendTime\x12w\n" +
-	"\fsearch_query\x18\b \x01(\v23.com.coralogixapis.incidents.v1.IncidentSearchQueryB\x1f\x92A\x1c2\x1aSearch query for incidentsR\vsearchQuery\x12i\n" +
-	"\x10application_name\x18\t \x03(\v2\x1c.google.protobuf.StringValueB \x92A\x1d2\x1bFilter by application namesR\x0fapplicationName\x12c\n" +
+	"start_time\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB{\x9aAv2tFilters all incidents that were open in the given timeframe start time (deprecated, use incident_open_range instead)\x18\x01R\tstartTime\x12\xb0\x01\n" +
+	"\bend_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampBy\x9aAt2rFilters all incidents that were open in the given timeframe end time (deprecated, use incident_open_range instead)\x18\x01R\aendTime\x12w\n" +
+	"\fsearch_query\x18\b \x01(\v23.com.coralogixapis.incidents.v1.IncidentSearchQueryB\x1f\x9aA\x1c2\x1aSearch query for incidentsR\vsearchQuery\x12i\n" +
+	"\x10application_name\x18\t \x03(\v2\x1c.google.protobuf.StringValueB \x9aA\x1d2\x1bFilter by application namesR\x0fapplicationName\x12c\n" +
 	"\x0esubsystem_name\x18\n" +
-	" \x03(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\x19Filter by subsystem namesR\rsubsystemName\x12^\n" +
-	"\bis_muted\x18\v \x01(\v2\x1a.google.protobuf.BoolValueB'\x92A$2\"Indicates if the incident is mutedR\aisMuted\x12\x8f\x01\n" +
-	"\x10created_at_range\x18\f \x01(\v2).com.coralogixapis.incidents.v1.TimeRangeB:\x92A725Filters all incidents created at the given time rangeR\x0ecreatedAtRange\x12\xa3\x01\n" +
-	"\x17incident_duration_range\x18\r \x01(\v2).com.coralogixapis.incidents.v1.TimeRangeB@\x92A=2;Filters all active) incidents with the given duration rangeR\x15incidentDurationRange\x12\x81\x01\n" +
-	"\vmeta_labels\x18\x0e \x03(\v2).com.coralogixapis.incidents.v1.MetaLabelB5\x92A220Filters all incidents with the given meta labelsR\n" +
+	" \x03(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1b2\x19Filter by subsystem namesR\rsubsystemName\x12^\n" +
+	"\bis_muted\x18\v \x01(\v2\x1a.google.protobuf.BoolValueB'\x9aA$2\"Indicates if the incident is mutedR\aisMuted\x12\x8f\x01\n" +
+	"\x10created_at_range\x18\f \x01(\v2).com.coralogixapis.incidents.v1.TimeRangeB:\x9aA725Filters all incidents created at the given time rangeR\x0ecreatedAtRange\x12\xa3\x01\n" +
+	"\x17incident_duration_range\x18\r \x01(\v2).com.coralogixapis.incidents.v1.TimeRangeB@\x9aA=2;Filters all active) incidents with the given duration rangeR\x15incidentDurationRange\x12\x81\x01\n" +
+	"\vmeta_labels\x18\x0e \x03(\v2).com.coralogixapis.incidents.v1.MetaLabelB5\x9aA220Filters all incidents with the given meta labelsR\n" +
 	"metaLabels\x12\x82\x01\n" +
-	"\x0emeta_labels_op\x18\x0f \x01(\x0e2..com.coralogixapis.incidents.v1.FilterOperatorB,\x92A)2'The operator for the meta labels filterR\fmetaLabelsOp\x1az\n" +
+	"\x0emeta_labels_op\x18\x0f \x01(\x0e2..com.coralogixapis.incidents.v1.FilterOperatorB,\x9aA)2'The operator for the meta labels filterR\fmetaLabelsOp\x12\x8c\x01\n" +
+	"\x0edisplay_labels\x18\x10 \x03(\v2F.com.coralogixapis.incidents.v1.IncidentQueryFilter.DisplayLabelsEntryB\x1d\x9aA\x1a2\x18Filter by display labelsR\rdisplayLabels\x1az\n" +
 	"\x15ContextualLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12K\n" +
-	"\x05value\x18\x02 \x01(\v25.com.coralogixapis.incidents.v1.ContextualLabelValuesR\x05value:\x028\x01:@\x92A=\n" +
+	"\x05value\x18\x02 \x01(\v25.com.coralogixapis.incidents.v1.ContextualLabelValuesR\x05value:\x028\x01\x1at\n" +
+	"\x12DisplayLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12H\n" +
+	"\x05value\x18\x02 \x01(\v22.com.coralogixapis.incidents.v1.DisplayLabelValuesR\x05value:\x028\x01:@\x9aA=\n" +
 	";*\x15Incident query filter2\"Filter configuration for incidents\"\x99\x02\n" +
 	"\tTimeRange\x12W\n" +
 	"\n" +
-	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1c\x92A\x192\x17Start time of the rangeR\tstartTime\x12Q\n" +
-	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x172\x15End time of the rangeR\aendTime:`\x92A]\n" +
+	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1c\x9aA\x192\x17Start time of the rangeR\tstartTime\x12Q\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x172\x15End time of the rangeR\aendTime:`\x9aA]\n" +
 	"[*\n" +
 	"Time range25Represents a time range with start and end timestamps\xd2\x01\n" +
 	"start_time\xd2\x01\bend_time\"\xe3\x01\n" +
 	"\x15ContextualLabelValues\x12T\n" +
-	"\x17contextual_label_values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x15contextualLabelValues:t\x92Aq\n" +
-	"o*\x17Contextual label values2:Represents contextual label values for filtering incidents\xd2\x01\x17contextual_label_valuesb\x06proto3"
+	"\x17contextual_label_values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x15contextualLabelValues:t\x9aAq\n" +
+	"o*\x17Contextual label values2:Represents contextual label values for filtering incidents\xd2\x01\x17contextual_label_values\"\xd1\x01\n" +
+	"\x12DisplayLabelValues\x12N\n" +
+	"\x14display_label_values\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x12displayLabelValues:k\x9aAh\n" +
+	"f*\x14Display label values27Represents display label values for filtering incidents\xd2\x01\x14display_label_valuesb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDescOnce sync.Once
@@ -331,47 +390,52 @@ func file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDescGZIP
 	return file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDescData
 }
 
-var file_com_coralogixapis_incidents_v1_incident_query_filter_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_com_coralogixapis_incidents_v1_incident_query_filter_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_com_coralogixapis_incidents_v1_incident_query_filter_proto_goTypes = []any{
 	(*IncidentQueryFilter)(nil),    // 0: com.coralogixapis.incidents.v1.IncidentQueryFilter
 	(*TimeRange)(nil),              // 1: com.coralogixapis.incidents.v1.TimeRange
 	(*ContextualLabelValues)(nil),  // 2: com.coralogixapis.incidents.v1.ContextualLabelValues
-	nil,                            // 3: com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry
-	(*wrapperspb.StringValue)(nil), // 4: google.protobuf.StringValue
-	(IncidentStatus)(0),            // 5: com.coralogixapis.incidents.v1.IncidentStatus
-	(IncidentState)(0),             // 6: com.coralogixapis.incidents.v1.IncidentState
-	(IncidentSeverity)(0),          // 7: com.coralogixapis.incidents.v1.IncidentSeverity
-	(*timestamppb.Timestamp)(nil),  // 8: google.protobuf.Timestamp
-	(*IncidentSearchQuery)(nil),    // 9: com.coralogixapis.incidents.v1.IncidentSearchQuery
-	(*wrapperspb.BoolValue)(nil),   // 10: google.protobuf.BoolValue
-	(*MetaLabel)(nil),              // 11: com.coralogixapis.incidents.v1.MetaLabel
-	(FilterOperator)(0),            // 12: com.coralogixapis.incidents.v1.FilterOperator
+	(*DisplayLabelValues)(nil),     // 3: com.coralogixapis.incidents.v1.DisplayLabelValues
+	nil,                            // 4: com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry
+	nil,                            // 5: com.coralogixapis.incidents.v1.IncidentQueryFilter.DisplayLabelsEntry
+	(*wrapperspb.StringValue)(nil), // 6: google.protobuf.StringValue
+	(IncidentStatus)(0),            // 7: com.coralogixapis.incidents.v1.IncidentStatus
+	(IncidentState)(0),             // 8: com.coralogixapis.incidents.v1.IncidentState
+	(IncidentSeverity)(0),          // 9: com.coralogixapis.incidents.v1.IncidentSeverity
+	(*timestamppb.Timestamp)(nil),  // 10: google.protobuf.Timestamp
+	(*IncidentSearchQuery)(nil),    // 11: com.coralogixapis.incidents.v1.IncidentSearchQuery
+	(*wrapperspb.BoolValue)(nil),   // 12: google.protobuf.BoolValue
+	(*MetaLabel)(nil),              // 13: com.coralogixapis.incidents.v1.MetaLabel
+	(FilterOperator)(0),            // 14: com.coralogixapis.incidents.v1.FilterOperator
 }
 var file_com_coralogixapis_incidents_v1_incident_query_filter_proto_depIdxs = []int32{
-	4,  // 0: com.coralogixapis.incidents.v1.IncidentQueryFilter.assignee:type_name -> google.protobuf.StringValue
-	5,  // 1: com.coralogixapis.incidents.v1.IncidentQueryFilter.status:type_name -> com.coralogixapis.incidents.v1.IncidentStatus
-	6,  // 2: com.coralogixapis.incidents.v1.IncidentQueryFilter.state:type_name -> com.coralogixapis.incidents.v1.IncidentState
-	7,  // 3: com.coralogixapis.incidents.v1.IncidentQueryFilter.severity:type_name -> com.coralogixapis.incidents.v1.IncidentSeverity
-	3,  // 4: com.coralogixapis.incidents.v1.IncidentQueryFilter.contextual_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry
-	8,  // 5: com.coralogixapis.incidents.v1.IncidentQueryFilter.start_time:type_name -> google.protobuf.Timestamp
-	8,  // 6: com.coralogixapis.incidents.v1.IncidentQueryFilter.end_time:type_name -> google.protobuf.Timestamp
-	9,  // 7: com.coralogixapis.incidents.v1.IncidentQueryFilter.search_query:type_name -> com.coralogixapis.incidents.v1.IncidentSearchQuery
-	4,  // 8: com.coralogixapis.incidents.v1.IncidentQueryFilter.application_name:type_name -> google.protobuf.StringValue
-	4,  // 9: com.coralogixapis.incidents.v1.IncidentQueryFilter.subsystem_name:type_name -> google.protobuf.StringValue
-	10, // 10: com.coralogixapis.incidents.v1.IncidentQueryFilter.is_muted:type_name -> google.protobuf.BoolValue
+	6,  // 0: com.coralogixapis.incidents.v1.IncidentQueryFilter.assignee:type_name -> google.protobuf.StringValue
+	7,  // 1: com.coralogixapis.incidents.v1.IncidentQueryFilter.status:type_name -> com.coralogixapis.incidents.v1.IncidentStatus
+	8,  // 2: com.coralogixapis.incidents.v1.IncidentQueryFilter.state:type_name -> com.coralogixapis.incidents.v1.IncidentState
+	9,  // 3: com.coralogixapis.incidents.v1.IncidentQueryFilter.severity:type_name -> com.coralogixapis.incidents.v1.IncidentSeverity
+	4,  // 4: com.coralogixapis.incidents.v1.IncidentQueryFilter.contextual_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry
+	10, // 5: com.coralogixapis.incidents.v1.IncidentQueryFilter.start_time:type_name -> google.protobuf.Timestamp
+	10, // 6: com.coralogixapis.incidents.v1.IncidentQueryFilter.end_time:type_name -> google.protobuf.Timestamp
+	11, // 7: com.coralogixapis.incidents.v1.IncidentQueryFilter.search_query:type_name -> com.coralogixapis.incidents.v1.IncidentSearchQuery
+	6,  // 8: com.coralogixapis.incidents.v1.IncidentQueryFilter.application_name:type_name -> google.protobuf.StringValue
+	6,  // 9: com.coralogixapis.incidents.v1.IncidentQueryFilter.subsystem_name:type_name -> google.protobuf.StringValue
+	12, // 10: com.coralogixapis.incidents.v1.IncidentQueryFilter.is_muted:type_name -> google.protobuf.BoolValue
 	1,  // 11: com.coralogixapis.incidents.v1.IncidentQueryFilter.created_at_range:type_name -> com.coralogixapis.incidents.v1.TimeRange
 	1,  // 12: com.coralogixapis.incidents.v1.IncidentQueryFilter.incident_duration_range:type_name -> com.coralogixapis.incidents.v1.TimeRange
-	11, // 13: com.coralogixapis.incidents.v1.IncidentQueryFilter.meta_labels:type_name -> com.coralogixapis.incidents.v1.MetaLabel
-	12, // 14: com.coralogixapis.incidents.v1.IncidentQueryFilter.meta_labels_op:type_name -> com.coralogixapis.incidents.v1.FilterOperator
-	8,  // 15: com.coralogixapis.incidents.v1.TimeRange.start_time:type_name -> google.protobuf.Timestamp
-	8,  // 16: com.coralogixapis.incidents.v1.TimeRange.end_time:type_name -> google.protobuf.Timestamp
-	4,  // 17: com.coralogixapis.incidents.v1.ContextualLabelValues.contextual_label_values:type_name -> google.protobuf.StringValue
-	2,  // 18: com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValues
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	13, // 13: com.coralogixapis.incidents.v1.IncidentQueryFilter.meta_labels:type_name -> com.coralogixapis.incidents.v1.MetaLabel
+	14, // 14: com.coralogixapis.incidents.v1.IncidentQueryFilter.meta_labels_op:type_name -> com.coralogixapis.incidents.v1.FilterOperator
+	5,  // 15: com.coralogixapis.incidents.v1.IncidentQueryFilter.display_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter.DisplayLabelsEntry
+	10, // 16: com.coralogixapis.incidents.v1.TimeRange.start_time:type_name -> google.protobuf.Timestamp
+	10, // 17: com.coralogixapis.incidents.v1.TimeRange.end_time:type_name -> google.protobuf.Timestamp
+	6,  // 18: com.coralogixapis.incidents.v1.ContextualLabelValues.contextual_label_values:type_name -> google.protobuf.StringValue
+	6,  // 19: com.coralogixapis.incidents.v1.DisplayLabelValues.display_label_values:type_name -> google.protobuf.StringValue
+	2,  // 20: com.coralogixapis.incidents.v1.IncidentQueryFilter.ContextualLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValues
+	3,  // 21: com.coralogixapis.incidents.v1.IncidentQueryFilter.DisplayLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.DisplayLabelValues
+	22, // [22:22] is the sub-list for method output_type
+	22, // [22:22] is the sub-list for method input_type
+	22, // [22:22] is the sub-list for extension type_name
+	22, // [22:22] is the sub-list for extension extendee
+	0,  // [0:22] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_incidents_v1_incident_query_filter_proto_init() }
@@ -391,7 +455,7 @@ func file_com_coralogixapis_incidents_v1_incident_query_filter_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDesc), len(file_com_coralogixapis_incidents_v1_incident_query_filter_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

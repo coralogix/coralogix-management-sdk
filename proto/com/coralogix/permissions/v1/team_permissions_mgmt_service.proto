@@ -6,17 +6,17 @@ import "com/coralogix/permissions/v1/common.proto";
 import "com/coralogix/permissions/v1/permissions_mgmt.proto";
 
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 /// Service for creating and managing team groups, roles, users and scopes.
 service TeamPermissionsMgmtService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Team Permissions Management Service"
     description: "Manage Team Groups."
   };
   /// Fetch team group for given team id
   rpc GetTeamGroup(GetTeamGroupRequest) returns (GetTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -38,7 +38,7 @@ service TeamPermissionsMgmtService {
   }
   /// Fetch team group by name for authenticated team id
   rpc GetTeamGroupByName(GetTeamGroupByNameRequest) returns (GetTeamGroupByNameResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -60,7 +60,7 @@ service TeamPermissionsMgmtService {
   }
   /// Fetches all team groups linked with team
   rpc GetTeamGroups(GetTeamGroupsRequest) returns (GetTeamGroupsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -82,7 +82,7 @@ service TeamPermissionsMgmtService {
   }
   /// Creates a new team group and optionally associates roles, users and a scope to it
   rpc CreateTeamGroup(CreateTeamGroupRequest) returns (CreateTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -105,7 +105,7 @@ service TeamPermissionsMgmtService {
   }
   /// Updates an existing team group details
   rpc UpdateTeamGroup(UpdateTeamGroupRequest) returns (UpdateTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -128,7 +128,7 @@ service TeamPermissionsMgmtService {
   }
   /// Deletes an existing team group
   rpc DeleteTeamGroup(DeleteTeamGroupRequest) returns (DeleteTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -150,7 +150,7 @@ service TeamPermissionsMgmtService {
   }
   /// Fetches all users assigned to group
   rpc GetGroupUsers(GetGroupUsersRequest) returns (GetGroupUsersResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -172,7 +172,7 @@ service TeamPermissionsMgmtService {
   }
   /// Add users to team groups
   rpc AddUsersToTeamGroup(AddUsersToTeamGroupRequest) returns (AddUsersToTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -195,7 +195,7 @@ service TeamPermissionsMgmtService {
   }
   /// Bulk Add users to team groups
   rpc AddUsersToTeamGroups(AddUsersToTeamGroupsRequest) returns (AddUsersToTeamGroupsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -218,7 +218,7 @@ service TeamPermissionsMgmtService {
   }
   /// Remove user accounts to organisation group
   rpc RemoveUsersFromTeamGroup(RemoveUsersFromTeamGroupRequest) returns (RemoveUsersFromTeamGroupResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -240,7 +240,7 @@ service TeamPermissionsMgmtService {
   }
   /// Bulk Remove user accounts to organisation group
   rpc RemoveUsersFromTeamGroups(RemoveUsersFromTeamGroupsRequest) returns (RemoveUsersFromTeamGroupsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -262,7 +262,7 @@ service TeamPermissionsMgmtService {
   }
   /// Sets team group scope. Replaces it if it already exists.
   rpc SetTeamGroupScope(SetTeamGroupScopeRequest) returns (SetTeamGroupScopeResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -285,7 +285,7 @@ service TeamPermissionsMgmtService {
   }
   /// Fetches team group scope
   rpc GetTeamGroupScope(GetTeamGroupScopeRequest) returns (GetTeamGroupScopeResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -309,7 +309,7 @@ service TeamPermissionsMgmtService {
 
 /// Get team group request
 message GetTeamGroupRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupRequest"
       description: "Request to retrieve a specific team group by its unique identifier. Used to fetch details about group membership, roles, and scope settings."
@@ -326,7 +326,7 @@ message GetTeamGroupRequest  {
 
 /// Get team group response
 message GetTeamGroupResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupResponse"
       description: "Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration."
@@ -342,7 +342,7 @@ message GetTeamGroupResponse  {
 }
 
 message GetTeamGroupByNameRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupByNameRequest"
       description: "Request to retrieve a team group using its name within the authenticated team's context. Alternative to lookup by ID."
@@ -357,7 +357,7 @@ message GetTeamGroupByNameRequest  {
 }
 
 message GetTeamGroupByNameResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupByNameResponse"
       description: "Response containing the complete details of a team group that matches the requested name, including its members, roles, and scope settings."
@@ -373,7 +373,7 @@ message GetTeamGroupByNameResponse  {
 
 /// Get all team groups request
 message GetTeamGroupsRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupsRequest"
       description: "Request to retrieve all groups associated with a specific team. If team_id is not provided, fetches groups for the authenticated team."
@@ -392,7 +392,7 @@ message GetTeamGroupsRequest  {
 
 /// Get all team groups response
 message GetTeamGroupsResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupsResponse"
       description: "Response containing a list of all team groups and their complete details, including members, roles, and scope configurations."
@@ -409,7 +409,7 @@ message GetTeamGroupsResponse  {
 
 /// Create team group request
 message CreateTeamGroupRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateTeamGroupRequest"
       description: "Request to create a new team group with specified name, description, roles, users, and optional scope filters. Can be associated with a specific team or the authenticated team."
@@ -443,7 +443,7 @@ message CreateTeamGroupRequest  {
 
 /// Create team group response
 message CreateTeamGroupResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateTeamGroupResponse"
       description: "Response containing the unique identifier of the newly created team group."
@@ -460,7 +460,7 @@ message CreateTeamGroupResponse  {
 
 /// Update team group request
 message UpdateTeamGroupRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "UpdateTeamGroupRequest"
       description: "Request to modify an existing team group's details, including its name, description, roles, users, and scope settings."
@@ -473,7 +473,7 @@ message UpdateTeamGroupRequest {
   };
   /// Specifies new roles to assign to a group removing previous ones
 message RoleUpdates  {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "RoleUpdates"
         description: "This data structure represents the information associated with an API key."
@@ -490,7 +490,7 @@ message RoleUpdates  {
   }
   /// Specifies new users to assign to a group removing previous ones
 message UserUpdates  {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "UserUpdates"
         description: "This data structure represents the information associated with an API key."
@@ -527,7 +527,7 @@ message UserUpdates  {
 
 /// Update team group response
 message UpdateTeamGroupResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "UpdateTeamGroupResponse"
       description: "Response confirming the successful update of a team group's configuration."
@@ -541,7 +541,7 @@ message UpdateTeamGroupResponse {
 
 /// Delete team group request
 message DeleteTeamGroupRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteTeamGroupRequest"
       description: "Request to remove a team group and all its associated role and user assignments using its unique identifier."
@@ -558,7 +558,7 @@ message DeleteTeamGroupRequest  {
 
 /// Delete team group response
 message DeleteTeamGroupResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteTeamGroupResponse"
       description: "Response confirming the successful deletion of a team group and its associated configurations."
@@ -572,7 +572,7 @@ message DeleteTeamGroupResponse  {
 
 /// Fetches all users linked with given team group
 message GetGroupUsersRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetGroupUsersRequest"
       description: "Request to retrieve all users assigned to a specific team group identified by its unique ID."
@@ -593,7 +593,7 @@ message GetGroupUsersRequest  {
 }
 
 message GetGroupUsersResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetGroupUsersResponse"
       description: "Response containing the list of all users currently assigned to the requested team group."
@@ -605,7 +605,7 @@ message GetGroupUsersResponse  {
     }
   };
 message NoMorePages {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "NoMorePages"
         description: "This data structure represents the information associated with an API key."
@@ -618,7 +618,7 @@ message NoMorePages {
       }
     };}
 message NextPageToken  {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "NextPageToken"
         description: "This data structure represents the information associated with an API key."
@@ -641,7 +641,7 @@ message NextPageToken  {
 
 /// Add users to an existing team group
 message AddUsersToTeamGroupRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupRequest"
       description: "Request to assign additional users to an existing team group, granting them the group's roles and scope permissions."
@@ -660,7 +660,7 @@ message AddUsersToTeamGroupRequest  {
 
 /// Add users to an existing team group response
 message AddUsersToTeamGroupResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupResponse"
       description: "Response confirming the successful addition of users to the specified team group."
@@ -678,7 +678,7 @@ message AddUsersToTeamGroupResponse  {
 /// Associate new users with groups in a team
 /// Allows to associate any number of users with any number of groups belonging to a team
 message AddUsersToTeamGroupsRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupsRequest"
       description: "Bulk request to assign users to multiple team groups simultaneously, efficiently managing group memberships at scale."
@@ -690,7 +690,7 @@ message AddUsersToTeamGroupsRequest  {
     }
   };
 message AddUsersToTeamGroup  {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "AddUsersToTeamGroup"
         description: "This data structure represents the information associated with an API key."
@@ -712,7 +712,7 @@ message AddUsersToTeamGroup  {
 }
 
 message AddUsersToTeamGroupsResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupsResponse"
       description: "Response confirming the successful bulk addition of users to multiple team groups."
@@ -726,7 +726,7 @@ message AddUsersToTeamGroupsResponse  {
 
 /// Remove users from an existing team group
 message RemoveUsersFromTeamGroupRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupRequest"
       description: "Request to remove specified users from a team group, revoking their access to the group's roles and scope permissions."
@@ -744,7 +744,7 @@ message RemoveUsersFromTeamGroupRequest  {
 }
 
 message RemoveUsersFromTeamGroupResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupResponse"
       description: "Response confirming the successful removal of users from the specified team group."
@@ -759,7 +759,7 @@ message RemoveUsersFromTeamGroupResponse  {
 /// Remove users from groups in a team
 /// Allows the removal of any number of users and any number of groups belonging to a team
 message RemoveUsersFromTeamGroupsRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsRequest"
       description: "Bulk request to remove users from multiple team groups simultaneously, efficiently managing group membership revocations at scale."
@@ -771,7 +771,7 @@ message RemoveUsersFromTeamGroupsRequest  {
     }
   };
 message RemoveUsersFromTeamGroup  {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "RemoveUsersFromTeamGroup"
         description: "This data structure represents the information associated with an API key."
@@ -794,7 +794,7 @@ message RemoveUsersFromTeamGroup  {
 
 /// Remove users from existing groups
 message RemoveUsersFromTeamGroupsResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsResponse"
       description: "Response confirming the successful bulk removal of users from multiple team groups."
@@ -809,7 +809,7 @@ message RemoveUsersFromTeamGroupsResponse  {
 
 /// Set team group scope request
 message SetTeamGroupScopeRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SetTeamGroupScopeRequest"
       description: "Request message for setting scope filters (subsystems and applications) for a team group to control access permissions"
@@ -828,7 +828,7 @@ message SetTeamGroupScopeRequest  {
 
 /// Set team group scope response
 message SetTeamGroupScopeResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SetTeamGroupScopeResponse"
       description: "Response message containing the ID of the newly created or updated scope for a team group"
@@ -845,7 +845,7 @@ message SetTeamGroupScopeResponse  {
 
 /// Get team group scope request
 message GetTeamGroupScopeRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupScopeRequest"
       description: "Request message for retrieving the current scope configuration for a specific team group"
@@ -862,7 +862,7 @@ message GetTeamGroupScopeRequest  {
 
 /// Set team group scope response
 message GetTeamGroupScopeResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupScopeResponse"
       description: "Response message containing the optional scope configuration (filters for subsystems and applications) for a team group"

@@ -6,11 +6,11 @@ import "com/coralogix/datausage/v2/data_usage.proto";
 import "google/protobuf/duration.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 service DataUsageService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Data Usage Service"
     description: "A service to manage data usage metrics."
   };
@@ -19,7 +19,7 @@ service DataUsageService {
     option deprecated = true;
   }
   rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -40,7 +40,7 @@ service DataUsageService {
     };
   }
   rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -61,7 +61,7 @@ service DataUsageService {
     };
   }
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -82,7 +82,7 @@ service DataUsageService {
     };
   }
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -104,7 +104,7 @@ service DataUsageService {
     };
   }
   rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -128,7 +128,7 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in units
   rpc GetDailyUsageUnits(GetDailyUsageUnitsRequest) returns (GetDailyUsageUnitsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -152,7 +152,7 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in GBs
   rpc GetDailyUsageProcessedGbs(GetDailyUsageProcessedGbsRequest) returns (GetDailyUsageProcessedGbsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -176,7 +176,7 @@ service DataUsageService {
 
   ///Endpoint to fetch daily usage in evaluation tokens
   rpc GetDailyUsageEvaluationTokens(GetDailyUsageEvaluationTokensRequest) returns (GetDailyUsageEvaluationTokensResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -210,7 +210,7 @@ enum AggregateBy {
 }
 
 message GetTeamDetailedDataUsageRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Team Detailed Data Usage Request"
       description: "This data structure is used to request detailed data usage for a team."
@@ -238,21 +238,21 @@ message GetTeamDetailedDataUsageRequest {
 }
 
 message GetTeamDetailedDataUsageResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Team Detailed Data Usage Response"
       description: "This data structure is used to return detailed data usage for a team."
       required: []
     }
   };
-  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
-  google.protobuf.FloatValue size_gb = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "2.50" }];
-  google.protobuf.FloatValue units = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5.00" }];
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.FloatValue size_gb = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "2.50" }];
+  google.protobuf.FloatValue units = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "5.00" }];
   repeated Dimension dimensions = 4;
 }
 
 message GetSpansCountRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Spans Count Request"
       description: "This data structure is used to request spans count."
@@ -275,7 +275,7 @@ message GetSpansCountRequest {
 }
 
 message ScopesFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Scopes Filter"
       description: "This data structure represents a filter for scopes."
@@ -286,12 +286,12 @@ message ScopesFilter {
       description: "Find out more about data usage."
     }
   };
-  repeated string application = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"application1\"" }];
-  repeated string subsystem = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"subsystem1\"" }];
+  repeated string application = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"application1\"" }];
+  repeated string subsystem = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"subsystem1\"" }];
 }
 
 message SpansCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Spans Count"
       description: "This data structure represents a spans count."
@@ -302,18 +302,18 @@ message SpansCount {
       description: "Find out more about data usage."
     }
   };
-  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
-  google.protobuf.Int64Value success_span_count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
-  google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
-  google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "50" }];
-  google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
-  google.protobuf.Int64Value medium_success_span_count = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "200" }];
-  google.protobuf.Int64Value medium_error_span_count = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "20" }];
+  google.protobuf.Timestamp timestamp = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.Int64Value success_span_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
+  google.protobuf.Int64Value error_span_count = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
+  google.protobuf.Int64Value low_success_span_count = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "50" }];
+  google.protobuf.Int64Value low_error_span_count = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "5" }];
+  google.protobuf.Int64Value medium_success_span_count = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "200" }];
+  google.protobuf.Int64Value medium_error_span_count = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "20" }];
 }
 
 
 message GetSpansCountResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Spans Count Response"
       description: "This data structure is used to return spans count."
@@ -328,7 +328,7 @@ message GetSpansCountResponse {
 }
 
 message GetLogsCountRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Logs Count Request"
       description: "This data structure is used to request logs count."
@@ -351,7 +351,7 @@ message GetLogsCountRequest {
 }
 
 message LogsCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Logs Count"
       description: "This data structure represents a logs count."
@@ -363,13 +363,13 @@ message LogsCount {
     }
   };
   google.protobuf.Timestamp timestamp = 1;
-  uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "100" }];
+  uint64 logs_count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "100" }];
   Severity severity = 3;
   Priority priority = 4;
 }
 
 message GetLogsCountResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Logs Count Response"
       description: "This data structure is used to return logs count."
@@ -386,7 +386,7 @@ message GetLogsCountResponse {
 message GetDataUsageMetricsExportStatusRequest {}
 
 message GetDataUsageMetricsExportStatusResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Data Usage Metrics Export Status Response"
       description: "This data structure is used to return data usage metrics export status."
@@ -398,11 +398,11 @@ message GetDataUsageMetricsExportStatusResponse {
     }
   };
   reserved 2;
-  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message UpdateDataUsageMetricsExportStatusRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update Data Usage Metrics Export Status Request"
       description: "This data structure is used to update data usage metrics export status."
@@ -414,11 +414,11 @@ message UpdateDataUsageMetricsExportStatusRequest {
     }
   };
   reserved 1;
-  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool enabled = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message UpdateDataUsageMetricsExportStatusResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update Data Usage Metrics Export Status Response"
       description: "This data structure is used to return data usage metrics export status."
@@ -429,11 +429,11 @@ message UpdateDataUsageMetricsExportStatusResponse {
       description: "Find out more about data usage."
     }
   };
-  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message GetDataUsageRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Data Usage Request"
       description: "This data structure is used to request data usage."
@@ -467,7 +467,7 @@ message GetDataUsageRequest {
 
 
 message DataUsageEntry {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Data Usage Entry"
       description: "This data structure represents a data usage entry."
@@ -485,7 +485,7 @@ message DataUsageEntry {
 }
 
 message GetDataUsageResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Data Usage Response"
       description: "This data structure is used to return data usage."
