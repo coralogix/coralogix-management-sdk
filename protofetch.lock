@@ -40,7 +40,7 @@ commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
 name = "cx-api-common-2"
 url = "github.com/coralogix/cx-api-common"
 branch = "master"
-commit_hash = "6b8a058c5b4e46eeb126bd02935d08ee844680b8"
+commit_hash = "5b3ac4ca2376cc60f987bf14918a63b92a7f0b2f"
 
 [[dependencies]]
 name = "cx-api-dashboards"
@@ -129,8 +129,8 @@ commit_hash = "d401c8b33e587527a679d13c464b1e769b371cce"
 [[dependencies]]
 name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
-revision = "v0.0.3"
-commit_hash = "7e16a056e1f1488f9a6d146a9689d3ec2e102b29"
+revision = "v0.0.4"
+commit_hash = "ad41c78b7abe6688556a7f366b664f2e311323fc"
 
 [[dependencies]]
 name = "cx-api-slo"
