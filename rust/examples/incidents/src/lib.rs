@@ -29,7 +29,10 @@ mod tests {
             TimeRange,
         },
     };
-    use std::collections::HashMap;
+    use std::{
+        collections::HashMap,
+        hash::Hash,
+    };
 
     #[tokio::test]
     async fn test_incidents() -> Result<(), Box<dyn std::error::Error>> {
@@ -48,6 +51,7 @@ mod tests {
         let _ = client
             .list_incident_events(
                 Some(IncidentEventQueryFilter {
+                    display_labels: HashMap::new(),
                     name: Some("test".to_string()),
                     is_muted: Some(false),
                     labels: Some(LabelsFilter {
@@ -76,6 +80,7 @@ mod tests {
         // Get events count
         let _ = client
             .list_incident_events_total_count(Some(IncidentEventQueryFilter {
+                display_labels: HashMap::new(),
                 name: Some("test".to_string()),
                 is_muted: Some(false),
                 labels: Some(LabelsFilter {
@@ -95,6 +100,7 @@ mod tests {
         // Get filter values
         let _ = client
             .list_incident_events_filter_values(Some(IncidentEventQueryFilter {
+                display_labels: HashMap::new(),
                 name: Some("test".to_string()),
                 is_muted: Some(false),
                 labels: Some(LabelsFilter {

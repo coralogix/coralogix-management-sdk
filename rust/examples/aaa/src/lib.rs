@@ -344,6 +344,7 @@ mod tests {
         assert!(move_quota_result.is_ok());
     }
 
+    #[ignore = "A user is created every time, delete just disable it"]
     #[tokio::test]
     async fn test_users() {
         let client = UsersClient::new(

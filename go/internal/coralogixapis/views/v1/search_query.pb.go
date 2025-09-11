@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -73,9 +73,9 @@ var File_com_coralogixapis_views_v1_search_query_proto protoreflect.FileDescript
 
 const file_com_coralogixapis_views_v1_search_query_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogixapis/views/v1/search_query.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"e\n" +
+	"-com/coralogixapis/views/v1/search_query.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"e\n" +
 	"\vSearchQuery\x12:\n" +
-	"\x05query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x06\x92A\x03\x80\x01\x01R\x05query:\x1a\x92A\x17\n" +
+	"\x05query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x06\x9aA\x03\x80\x01\x01R\x05query:\x1a\x9aA\x17\n" +
 	"\x15*\vSearchQuery\xd2\x01\x05queryb\x06proto3"
 
 var (

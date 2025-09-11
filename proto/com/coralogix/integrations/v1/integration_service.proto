@@ -3,19 +3,19 @@ syntax = "proto3";
 package com.coralogix.integrations.v1;
 
 import "com/coralogix/integrations/v1/integration.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 
 service IntegrationService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Integration service"
     description: "A service that enables querying for integration information."
     external_docs: {
@@ -25,11 +25,11 @@ service IntegrationService {
   };
 
   rpc ListManagedIntegrationKeys(ListManagedIntegrationKeysRequest) returns (ListManagedIntegrationKeysResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "List managed integration names";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "List managed integration names";
     option (google.api.http) = {
       get: "/v1/integrations/managed/list"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -56,11 +56,11 @@ service IntegrationService {
   }
 
   rpc GetDeployedIntegration(GetDeployedIntegrationRequest) returns (GetDeployedIntegrationResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get deployed integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get deployed integration";
     option (google.api.http) = {
       get: "/v1/integrations/deployed/{integration_id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -87,11 +87,11 @@ service IntegrationService {
   }
 
   rpc GetIntegrations(GetIntegrationsRequest) returns (GetIntegrationsResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get all integrations";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get all integrations";
     option (google.api.http) = {
       get: "/v1/integrations"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -118,11 +118,11 @@ service IntegrationService {
   }
 
   rpc GetIntegrationDefinition(GetIntegrationDefinitionRequest) returns (GetIntegrationDefinitionResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get integration definition";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get integration definition";
     option (google.api.http) = {
       get: "/v1/integrations/definition/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -149,11 +149,11 @@ service IntegrationService {
   }
 
   rpc GetIntegrationDetails(GetIntegrationDetailsRequest) returns (GetIntegrationDetailsResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get integration details";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get integration details";
     option (google.api.http) = {
       get: "/v1/integrations/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -180,11 +180,11 @@ service IntegrationService {
   }
 
   rpc GetManagedIntegrationStatus(GetManagedIntegrationStatusRequest) returns (GetManagedIntegrationStatusResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get managed integration status";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get managed integration status";
     option (google.api.http) = {
       get: "/v1/integrations/managed/status/{integration_id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -211,12 +211,12 @@ service IntegrationService {
   }
 
   rpc SaveIntegration(SaveIntegrationRequest) returns (SaveIntegrationResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Save integration registration metadata";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Save integration registration metadata";
     option (google.api.http) = {
       post: "/v1/integrations/metadata"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -243,12 +243,12 @@ service IntegrationService {
   }
 
   rpc UpdateIntegration(UpdateIntegrationRequest) returns (UpdateIntegrationResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Update integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update integration";
     option (google.api.http) = {
       put: "/v1/integrations/metadata"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -275,11 +275,11 @@ service IntegrationService {
   }
 
   rpc DeleteIntegration(DeleteIntegrationRequest) returns (DeleteIntegrationResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete integration";
     option (google.api.http) = {
       delete: "/v1/integrations/instance/{integration_id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -306,11 +306,11 @@ service IntegrationService {
   }
 
   rpc GetTemplate(GetTemplateRequest) returns (GetTemplateResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get integration template";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get integration template";
     option (google.api.http) = {
       get: "/v1/integrations/template"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -337,11 +337,11 @@ service IntegrationService {
   }
 
   rpc GetRumApplicationVersionData(GetRumApplicationVersionDataRequest) returns (GetRumApplicationVersionDataResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Get RUM integration versions data";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get RUM integration versions data";
     option (google.api.http) = {
       get: "/v1/integrations/rum/app-versions"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -368,12 +368,12 @@ service IntegrationService {
   }
 
   rpc SyncRumData(SyncRumDataRequest) returns (SyncRumDataResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "Trigger sync of RUM integration data";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Trigger sync of RUM integration data";
     option (google.api.http) = {
       post: "/v1/integrations/rum/sync"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -400,12 +400,12 @@ service IntegrationService {
   }
 
   rpc TestIntegration(TestIntegrationRequest) returns (TestIntegrationResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Test integration";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Test integration";
     option (google.api.http) = {
       post: "/v1/integrations/metadata/test"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -435,7 +435,7 @@ service IntegrationService {
 message ListManagedIntegrationKeysRequest {}
 
 message ListManagedIntegrationKeysResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List managed integration keys response"
       required: [
@@ -447,7 +447,7 @@ message ListManagedIntegrationKeysResponse {
 }
 
 message GetDeployedIntegrationRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get deployed integration request"
       required: [
@@ -455,11 +455,11 @@ message GetDeployedIntegrationRequest  {
       ]
     }
   };
-  google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"aws-sqs\""}];
+  google.protobuf.StringValue integration_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"aws-sqs\""}];
 }
 
 message GetDeployedIntegrationResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get deployed integration response"
       required: [
@@ -471,7 +471,7 @@ message GetDeployedIntegrationResponse  {
 }
 
 message UpdateIntegrationRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update integration request"
       description: "This data structure represents a list of outgoing webhook types."
@@ -485,19 +485,19 @@ message UpdateIntegrationRequest  {
 message UpdateIntegrationResponse {}
 
 message GetIntegrationDefinitionRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integration definition request"
       description: "This data structure represents a list of outgoing webhook types."
       required: ["id"]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"aws-sqs\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"aws-sqs\""}];
   google.protobuf.BoolValue include_testing_revision = 2;
 }
 
 message GetIntegrationDefinitionResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integration definition response"
       description: "This data structure represents a list of outgoing webhook types."
@@ -508,7 +508,7 @@ message GetIntegrationDefinitionResponse  {
 }
 
 message GetIntegrationsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integrations request"
       required: []
@@ -518,7 +518,7 @@ message GetIntegrationsRequest {
 }
 
 message GetIntegrationsResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integrations response"
       description: "This data structure represents a list of outgoing webhook types."
@@ -527,7 +527,7 @@ message GetIntegrationsResponse  {
     }
   };
   message IntegrationWithCounts {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Integration with counts"
         required: ["integrations"]
@@ -544,7 +544,7 @@ message GetIntegrationsResponse  {
 }
 
 message GetIntegrationDetailsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integration details request"
       required: ["id"]
@@ -555,7 +555,7 @@ message GetIntegrationDetailsRequest {
 }
 
 message GetIntegrationDetailsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get integration details response"
       required: ["integration_detail"]
@@ -565,7 +565,7 @@ message GetIntegrationDetailsResponse {
 }
 
 message GetManagedIntegrationStatusRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get managed integration status request"
       required: [
@@ -577,7 +577,7 @@ message GetManagedIntegrationStatusRequest  {
 }
 
 message GetManagedIntegrationStatusResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get managed integration status response"
       required: [
@@ -591,7 +591,7 @@ message GetManagedIntegrationStatusResponse  {
 }
 
 message SaveIntegrationRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Save integration request"
       required: [
@@ -603,7 +603,7 @@ message SaveIntegrationRequest  {
 }
 
 message SaveIntegrationResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Save integration response"
       required: [
@@ -615,7 +615,7 @@ message SaveIntegrationResponse  {
 }
 
 message DeleteIntegrationRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete integration request"
       required: [
@@ -629,7 +629,7 @@ message DeleteIntegrationRequest  {
 message DeleteIntegrationResponse  {}
 
 message GetTemplateRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get template request"
       required: [
@@ -640,7 +640,7 @@ message GetTemplateRequest  {
 
   message CommonARMParams{
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Common ARM integration parameters"
         required: [
@@ -665,7 +665,7 @@ message GetTemplateRequest  {
 }
 
 message GetTemplateResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get template response"
       required: [
@@ -676,7 +676,7 @@ message GetTemplateResponse  {
 }
 
 message GetRumApplicationVersionDataRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get RUM application version data request"
       required: [
@@ -688,7 +688,7 @@ message GetRumApplicationVersionDataRequest  {
 }
 
 message GetRumApplicationVersionDataResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get RUM application version data response"
       required: [
@@ -700,7 +700,7 @@ message GetRumApplicationVersionDataResponse  {
 }
 
 message SyncRumDataRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Sync RUM data request"
       required: []
@@ -711,7 +711,7 @@ message SyncRumDataRequest  {
 }
 
 message SyncRumDataResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Sync RUM data response"
       required: [
@@ -727,7 +727,7 @@ message SyncRumDataResponse  {
 }
 
 message TestIntegrationRequest  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test integration request"
       required: [
@@ -740,7 +740,7 @@ message TestIntegrationRequest  {
 }
 
 message TestIntegrationResponse  {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test integration response"
       required: [

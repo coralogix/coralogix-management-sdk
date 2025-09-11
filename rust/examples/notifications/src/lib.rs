@@ -14,6 +14,8 @@
 
 #[cfg(test)]
 mod tests {
+    use std::collections::HashMap;
+
     use cx_sdk::client::alerts::{
         self,
         ActivitySchedule,
@@ -22,6 +24,7 @@ mod tests {
         AlertDefOverride,
         AlertDefPriority,
         AlertDefProperties,
+        AlertDefStatus,
         AlertDefType,
         AlertDefWebhooksSettings,
         AlertsClient,
@@ -598,12 +601,14 @@ mod tests {
 
         let global_router = GlobalRouter {
             id: Some("router_default".into()),
+            entity_label_matcher: HashMap::new(),
             name: "global router".to_string(),
-            entity_type: EntityType::Alerts.into(),
+            entity_type: Some(EntityType::Alerts.into()),
             description: "global router example".to_string(),
             create_time: None,
             update_time: None,
             rules: vec![RoutingRule {
+                entity_type: Some(EntityType::Alerts.into()),
                 condition: "alertDef.priority == \"P1\"".to_string(),
                 targets: vec![RoutingTarget {
                     connector_id: connector_id.clone(),
@@ -746,13 +751,15 @@ mod tests {
         let preset_id = create_preset_response.preset.unwrap().id.unwrap();
 
         let global_router = GlobalRouter {
+            entity_label_matcher: HashMap::new(),
             id: Some("router_default".into()),
             name: "global router".to_string(),
-            entity_type: EntityType::Alerts.into(),
+            entity_type: None,
             description: "global router example".to_string(),
             create_time: None,
             update_time: None,
             rules: vec![RoutingRule {
+                entity_type: Some(EntityType::Alerts.into()),
                 condition: "alertDef.priority == \"P1\"".to_string(),
                 targets: vec![RoutingTarget {
                     connector_id: connector_id.clone(),
@@ -781,6 +788,11 @@ mod tests {
             .unwrap();
 
         notifications_client
+            .delete_global_router("router_default".into())
+            .await
+            .unwrap();
+
+        notifications_client
             .delete_connector(connector_id)
             .await
             .unwrap();
@@ -789,15 +801,11 @@ mod tests {
             .delete_custom_preset(preset_id)
             .await
             .unwrap();
-
-        notifications_client
-            .delete_global_router("router_default".into())
-            .await
-            .unwrap();
     }
 
     fn create_alert_with_destinations(destinations: Vec<NotificationDestination>) -> AlertDef {
         AlertDef {
+            status: Some(AlertDefStatus::Unspecified.into()),
             updated_time: None,
             created_time: None,
             alert_def_properties: Some(AlertDefProperties {
@@ -892,6 +900,7 @@ mod tests {
 
     fn create_alert_with_router() -> AlertDef {
         AlertDef {
+            status: Some(AlertDefStatus::Unspecified.into()),
             updated_time: None,
             created_time: None,
             last_triggered_time: None,

@@ -15,7 +15,7 @@ allow_policies = [
 
 [cx-api-alerts]
 url = 'github.com/coralogix/cx-api-alerts'
-revision = "v0.5.30"
+revision = "v0.5.32"
 allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_notification_group.proto",
@@ -119,12 +119,13 @@ allow_policies = [
     "src/com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_definition.proto",
     "src/com/coralogixapis/alerts/v3/pagination.proto",
     "src/com/coralogixapis/alerts/v3/alert_def_ordering.proto",
+    "src/com/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto",
 ]
 
 
 [cx-api-views]
 url = 'github.com/coralogix/cx-api-views'
-revision = "v1.9"
+revision = "v1.10"
 allow_policies = [
     "src/com/coralogixapis/views/v1/audit_log.proto",
     "src/com/coralogixapis/views/v1/filters.proto",
@@ -138,12 +139,12 @@ allow_policies = [
 
 [cx-api-actions]
 url = 'github.com/coralogix/cx-api-actions'
-revision = "v0.4.3"
+revision = "v0.4.4"
 allow_policies = ["src/com/coralogixapis/actions/v2/actions_service.proto"]
 
 [cx-api-extensions]
 url = 'github.com/coralogix/cx-api-extensions'
-revision = "v1.0.9"
+revision = "v1.0.10"
 allow_policies = [
     "src/com/coralogix/extensions/v1/extension_service.proto",
     "src/com/coralogix/extensions/v1/extension.proto",
@@ -274,11 +275,11 @@ allow_policies = [
     "src/com/coralogixapis/logs2metrics/v2/logs_query.proto",
     "src/com/coralogixapis/spans2metrics/v2/spans_query.proto",
 ]
-revision = "v0.3.3"
+revision = "v0.3.4"
 
 [cx-api-data-usage]
 url = 'github.com/coralogix/cx-api-data-usage'
-revision = "v0.3.17"
+revision = "v0.3.19"
 allow_policies = [
     "src/com/coralogix/datausage/v1/common.proto",
     "src/com/coralogix/datausage/v2/data_usage.proto",
@@ -287,7 +288,7 @@ allow_policies = [
 
 [cx-api-enrichment]
 url = 'github.com/coralogix/cx-api-enrichment'
-revision = "v0.6.8"
+revision = "v0.6.9"
 content_roots = ['src']
 allow_policies = [
     "com/coralogix/enrichment/v1/company_enrichment_settings.proto",
@@ -308,8 +309,8 @@ allow_policies = [
 revision = "v0.1.36"
 
 [cx-api-common]
-url = "github.com/coralogix/cx-api-common"
 revision = "v1.0.9"
+url = "github.com/coralogix/cx-api-common"
 
 [cx-api-common-2]
 url = "github.com/coralogix/cx-api-common"
@@ -321,7 +322,7 @@ allow_policies = [
     "src/com/coralogixapis/scopes/v1/entity_type.proto",
     "src/com/coralogixapis/scopes/v1/scopes.proto",
 ]
-revision = 'v0.0.3'
+revision = "v0.0.4"
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
@@ -334,7 +335,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.33"
+revision = "v0.0.36"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -344,7 +345,7 @@ allow_policies = [
 
 [cx-api-alert-scheduler]
 url = 'github.com/coralogix/alert-scheduler-rule-protobuf'
-revision = "v0.0.2"
+revision = "v0.0.3"
 allow_policies = [
     "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/active_timeframe.proto",
     "src/com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_filter.proto",
@@ -359,7 +360,7 @@ allow_policies = [
 
 [cx-api-permissions]
 url = 'github.com/coralogix/cx-api-permissions'
-revision = "v0.1.127"
+revision = "v0.1.129"
 allow_policies = [
     "src/com/coralogix/permissions/models/v1/permission_definitions.proto",
     "src/com/coralogix/permissions/v1/actions_resources.proto",
@@ -375,7 +376,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.131"
+revision = "v0.0.137"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -405,7 +406,7 @@ allow_policies = ["src/com/coralogixapis/metrics_rule_manager/v1/groups.proto"]
 
 [cx-api-notification-center]
 url = 'github.com/coralogix/cx-api-notification-center'
-revision = "v1.1.2"
+revision = "v1.2.1"
 allow_policies = [
     "src/com/coralogixapis/notification_center/common/common.proto",
     "src/com/coralogixapis/notification_center/common/config_overrides.proto",
@@ -421,6 +422,7 @@ allow_policies = [
     "src/com/coralogixapis/notification_center/presets/v1/presets_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/global_routers_service.proto",
     "src/com/coralogixapis/notification_center/routers/v1/router.proto",
+    "src/com/coralogixapis/notification_center/common/v1/entity_labels.proto",
 ]
 
 [google-api]
@@ -439,7 +441,7 @@ allow_policies = [
 
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
-revision = "v1.0.3"
+revision = "v1.0.5"
 allow_policies = [
     "src/com/coralogixapis/incidents/v1/assignee.proto",
     "src/com/coralogixapis/incidents/v1/filter_operators.proto",
@@ -475,7 +477,7 @@ allow_policies = [
 
 [cx-api-events]
 url = 'github.com/coralogix/cx-api-events'
-revision = 'v0.1.4'
+revision = 'v0.1.5'
 allow_policies = [
     "src/com/coralogixapis/events/v3/cx_event.proto",
     "src/com/coralogixapis/events/v3/event_order_by.proto",

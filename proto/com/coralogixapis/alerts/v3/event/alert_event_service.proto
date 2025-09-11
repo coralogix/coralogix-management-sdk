@@ -7,11 +7,11 @@ import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/alerts/v3/event/alert_event.proto";
 import "com/coralogixapis/common/v1/audit_log.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "com/coralogixapis/alerts/v3/pagination.proto";
 
 service AlertEventService {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Alert events service"
     description: "Get information regarding your alert events - instances of alerts being triggered."
       external_docs: {
@@ -25,7 +25,7 @@ service AlertEventService {
     option (google.api.http) = {
       get: "/v3/alert-event/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {
@@ -64,7 +64,7 @@ service AlertEventService {
     option (google.api.http) = {
       get: "/v3/alert-event-stats"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {
@@ -100,7 +100,7 @@ service AlertEventService {
 }
 
 message GetAlertEventStatsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get alert event statistics request"
 
@@ -112,7 +112,7 @@ message GetAlertEventStatsRequest {
 }
 
 message GetAlertEventStatsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get alert event statistics response"
     }
@@ -122,7 +122,7 @@ message GetAlertEventStatsResponse {
 }
 
 message Permutation {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Permutation data structure"
     }
@@ -132,7 +132,7 @@ message Permutation {
 }
 
 message EventStats {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Alert event statistics data structure"
     }
@@ -147,7 +147,7 @@ message EventStats {
 }
 
 message ActivityAnalysisStats {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Event activity analysis statistics"
     }
@@ -158,7 +158,7 @@ message ActivityAnalysisStats {
 }
 
 message GetAlertEventRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get alert event by ID request"
     }
@@ -171,7 +171,7 @@ message GetAlertEventRequest {
 }
 
 message GetAlertEventResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get alert event response"
     }

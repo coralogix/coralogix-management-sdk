@@ -7,8 +7,8 @@
 package v2
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -768,71 +768,71 @@ var File_com_coralogix_archive_v2_target_service_proto protoreflect.FileDescript
 
 const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogix/archive/v2/target_service.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x12\n" +
+	"-com/coralogix/archive/v2/target_service.proto\x12\x18com.coralogix.archive.v2\x1a%com/coralogix/archive/v2/target.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x12\n" +
 	"\x10GetTargetRequest\"\xa9\x02\n" +
 	"\x11GetTargetResponse\x128\n" +
-	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x92A\xd5\x01\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x9aA\xd5\x01\n" +
 	"b*\x13Get Target Response2BThis data structure is used to retrieve a storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xb2\x03\n" +
 	"\x10SetTargetRequest\x12&\n" +
-	"\tis_active\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\bisActive\x128\n" +
+	"\tis_active\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\bisActive\x128\n" +
 	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
-	"\aibm_cos\x18\x03 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos:\xe5\x01\x92A\xe1\x01\n" +
+	"\aibm_cos\x18\x03 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos:\xe5\x01\x9aA\xe1\x01\n" +
 	"n*\x13Set Target Response2=This data structure is used to set a storage target for logs.\xd2\x01\tis_active\xd2\x01\vtarget_spec*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
 	"\vtarget_spec\"\xaf\x02\n" +
 	"\x11SetTargetResponse\x128\n" +
-	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x92A\xdb\x01\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x9aA\xdb\x01\n" +
 	"h*\x13Set Target Response2HThis data structure is obtained after setting a storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\x8f\x04\n" +
 	"\x18SetExternalTargetRequest\x12&\n" +
-	"\tis_active\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\bisActive\x128\n" +
+	"\tis_active\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\bisActive\x128\n" +
 	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
 	"\aibm_cos\x18\x03 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos\x12(\n" +
 	"\n" +
-	"company_id\x18\x04 \x01(\rB\t\x92A\x06J\x04trueR\tcompanyId:\x90\x02\x92A\x8c\x02\n" +
+	"company_id\x18\x04 \x01(\rB\t\x9aA\x06J\x04trueR\tcompanyId:\x90\x02\x9aA\x8c\x02\n" +
 	"\x98\x01*\x1bSet External Target Request2RThis data structure is obtained after setting an external storage target for logs.\xd2\x01\tis_active\xd2\x01\vtarget_spec\xd2\x01\n" +
 	"company_id*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
 	"\vtarget_spec\"\xc1\x02\n" +
 	"\x19SetExternalTargetResponse\x128\n" +
-	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xe9\x01\x92A\xe5\x01\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xe9\x01\x9aA\xe5\x01\n" +
 	"r*\x13Set Target Response2RThis data structure is obtained after setting an external storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xfe\x02\n" +
 	"\x14CompanyArchiveConfig\x12+\n" +
 	"\n" +
-	"company_id\x18\x01 \x01(\rB\f\x92A\tJ\a1234567R\tcompanyId\x128\n" +
-	"\x12archive_configured\x18\x02 \x01(\bB\t\x92A\x06J\x04trueR\x11archiveConfigured:\xfe\x01\x92A\xfa\x01\n" +
+	"company_id\x18\x01 \x01(\rB\f\x9aA\tJ\a1234567R\tcompanyId\x128\n" +
+	"\x12archive_configured\x18\x02 \x01(\bB\t\x9aA\x06J\x04trueR\x11archiveConfigured:\xfe\x01\x9aA\xfa\x01\n" +
 	"\x86\x01*\x15Common Archive Config2dThis data structure represents a common archive configuration for a company within the organization.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xb1\x03\n" +
 	"\x15ValidateTargetRequest\x12\x1b\n" +
 	"\tis_active\x18\x01 \x01(\bR\bisActive\x128\n" +
 	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
-	"\aibm_cos\x18\x03 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos:\xea\x01\x92A\xe6\x01\n" +
+	"\aibm_cos\x18\x03 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos:\xea\x01\x9aA\xe6\x01\n" +
 	"s*\x13Set Target Response2BThis data structure is used to validate a storage target for logs.\xd2\x01\tis_active\xd2\x01\vtarget_spec*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
 	"\vtarget_spec\"\xaa\x02\n" +
 	"\x16ValidateTargetResponse\x12$\n" +
-	"\bis_valid\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\aisValid:\xe9\x01\x92A\xe5\x01\n" +
+	"\bis_valid\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\aisValid:\xe9\x01\x9aA\xe5\x01\n" +
 	"r*\x18Validate Target Response2KThis data structure is obtained after validating a storage target for logs.\xd2\x01\bis_valid*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"!\n" +
 	"\x1fS3TargetServiceGetTargetRequest\"\xb8\x02\n" +
 	" S3TargetServiceGetTargetResponse\x128\n" +
-	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x92A\xd5\x01\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xd9\x01\x9aA\xd5\x01\n" +
 	"b*\x13Get Target Response2BThis data structure is used to retrieve a storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xfa\x02\n" +
 	"\x1fS3TargetServiceSetTargetRequest\x12&\n" +
-	"\tis_active\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\bisActive\x128\n" +
-	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3:\xe5\x01\x92A\xe1\x01\n" +
+	"\tis_active\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\bisActive\x128\n" +
+	"\x02s3\x18\x02 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3:\xe5\x01\x9aA\xe1\x01\n" +
 	"n*\x13Set Target Response2=This data structure is used to set a storage target for logs.\xd2\x01\tis_active\xd2\x01\vtarget_spec*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
 	"\vtarget_spec\"\xbe\x02\n" +
 	" S3TargetServiceSetTargetResponse\x128\n" +
-	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x92A\xdb\x01\n" +
+	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x9aA\xdb\x01\n" +
 	"h*\x13Set Target Response2HThis data structure is obtained after setting a storage target for logs.\xd2\x01\x06target*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xef\a\n" +
 	"\rTargetService\x12\xfd\x01\n" +
-	"\tGetTarget\x12*.com.coralogix.archive.v2.GetTargetRequest\x1a+.com.coralogix.archive.v2.GetTargetResponse\"\x96\x01\x92Aq\n" +
+	"\tGetTarget\x12*.com.coralogix.archive.v2.GetTargetRequest\x1a+.com.coralogix.archive.v2.GetTargetResponse\"\x96\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Get targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -840,11 +840,11 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\f\n" +
+	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
 	"Get target\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/v2/target\x12\x80\x02\n" +
-	"\tSetTarget\x12*.com.coralogix.archive.v2.SetTargetRequest\x1a+.com.coralogix.archive.v2.SetTargetResponse\"\x99\x01\x92Aq\n" +
+	"\tSetTarget\x12*.com.coralogix.archive.v2.SetTargetRequest\x1a+.com.coralogix.archive.v2.SetTargetResponse\"\x99\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Set targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -852,23 +852,23 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\f\n" +
+	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
 	"Set target\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
 	"/v2/target\x12\xa2\x02\n" +
-	"\x0eValidateTarget\x12/.com.coralogix.archive.v2.ValidateTargetRequest\x1a0.com.coralogix.archive.v2.ValidateTargetResponse\"\xac\x01\x92Av\n" +
+	"\x0eValidateTarget\x12/.com.coralogix.archive.v2.ValidateTargetRequest\x1a0.com.coralogix.archive.v2.ValidateTargetResponse\"\xac\x01\x9aAv\n" +
 	"\x0eTarget Service\x12\x0fValidate targetJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x11\n" +
-	"\x0fValidate target\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v2/target:validate\x1a\xb5\x01\x92A\xb1\x01\n" +
+	"\x15Internal server errorʸ\x02\x11\n" +
+	"\x0fValidate target\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v2/target:validate\x1a\xb5\x01\x9aA\xb1\x01\n" +
 	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\x88\x06\n" +
 	"\x0fS3TargetService\x12\x9b\x02\n" +
-	"\tGetTarget\x129.com.coralogix.archive.v2.S3TargetServiceGetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceGetTargetResponse\"\x96\x01\x92Aq\n" +
+	"\tGetTarget\x129.com.coralogix.archive.v2.S3TargetServiceGetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceGetTargetResponse\"\x96\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Get targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -876,11 +876,11 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\f\n" +
+	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
 	"Get target\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/v2/target\x12\x9e\x02\n" +
-	"\tSetTarget\x129.com.coralogix.archive.v2.S3TargetServiceSetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceSetTargetResponse\"\x99\x01\x92Aq\n" +
+	"\tSetTarget\x129.com.coralogix.archive.v2.S3TargetServiceSetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceSetTargetResponse\"\x99\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Set targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -888,10 +888,10 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\f\n" +
+	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
 	"Set target\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v2/target\x1a\xb5\x01\x92A\xb1\x01\n" +
+	"/v2/target\x1a\xb5\x01\x9aA\xb1\x01\n" +
 	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/b\x06proto3"
 

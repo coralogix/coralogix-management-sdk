@@ -4,11 +4,11 @@ package com.coralogixapis.logs2metrics.v2;
 
 import "google/protobuf/wrappers.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message LogsQuery {
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SpansQuery"
       description: "This data structure represents a query for logs."
@@ -20,19 +20,19 @@ message LogsQuery {
     }
   };
   // lucene query
-  google.protobuf.StringValue lucene = 1  [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue lucene = 1  [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"log_obj.numeric_field: [50 TO 100]\""
   } ];
   // alias
-  google.protobuf.StringValue alias = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue alias = 2 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"new_query\""
   } ];
   // application name filters
-  repeated google.protobuf.StringValue applicationname_filters = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated google.protobuf.StringValue applicationname_filters = 3 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"app_name\""
   } ];
   // subsystem names filters
-  repeated google.protobuf.StringValue subsystemname_filters = 4 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated google.protobuf.StringValue subsystemname_filters = 4 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"sub_name\""
   } ];
   // severity type filters

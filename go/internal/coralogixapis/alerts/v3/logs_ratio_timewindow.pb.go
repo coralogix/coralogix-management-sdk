@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -165,9 +165,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_r
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_ratio_logs_ratio_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"\\com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xfe\x03\n" +
+	"\\com/coralogixapis/alerts/v3/alert_def_type_definition/logs/ratio/logs_ratio_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xfe\x03\n" +
 	"\x13LogsRatioTimeWindow\x12\xf5\x01\n" +
-	"%logs_ratio_time_window_specific_value\x18\x01 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsRatioTimeWindowValueBk\x92Ah2-Specifies the time window for the ratio alertJ7\"LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\"H\x00R logsRatioTimeWindowSpecificValue:\xe6\x01\x92A\xe2\x01\n" +
+	"%logs_ratio_time_window_specific_value\x18\x01 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsRatioTimeWindowValueBk\x9aAh2-Specifies the time window for the ratio alertJ7\"LOGS_RATIO_TIME_WINDOW_VALUE_MINUTES_5_OR_UNSPECIFIED\"H\x00R logsRatioTimeWindowSpecificValue:\xe6\x01\x9aA\xe2\x01\n" +
 	"K*\x16Logs ratio time window2*Time window configuration for ratio alerts\xd2\x01\x04type*\x92\x01\n" +
 	"<Learn more about log-based ratio alerts in our documentation\x12Rhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/ratio-alerts/B\x06\n" +
 	"\x04type*\x84\x04\n" +

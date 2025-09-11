@@ -5,7 +5,7 @@ package com.coralogixapis.notification_center.connectors.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/v1/config_fields.proto";
 import "google/protobuf/timestamp.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/connectors/v1";
 
@@ -13,7 +13,7 @@ message Connector {
   reserved 2, 9, 10;
   reserved "user_defined_id", "connector_configs", "entity_type";
   
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Connector"
       description: "A connector configuration for sending notifications"
@@ -25,11 +25,11 @@ message Connector {
     }
   };
   // A unique identifier - automatically generated unless provided by the user
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
   ConnectorType type = 3;
-  optional uint32 team_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"12345\"" }];
-  string name = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Slack Connector\"", max_length: 200 }];
-  string description = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Connector for team notifications\"", max_length: 5000 }];
+  optional uint32 team_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"12345\"" }];
+  string name = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"My Slack Connector\"", max_length: 200 }];
+  string description = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Connector for team notifications\"", max_length: 5000 }];
   // System-generated timestamp for when the connector was last updated
   optional google.protobuf.Timestamp create_time = 7;
   // System-generated timestamp for when the connector was last updated
@@ -60,7 +60,7 @@ message EntityTypeConfigOverrides {
   reserved 1, 2;
   reserved "deprecated_entity_type", "connector_configs";
 
-  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
   repeated TemplatedConnectorConfigField fields = 4;
 }
 
@@ -82,7 +82,7 @@ message ConnectorConfig {
   reserved 1;
   reserved "output_schema_id";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Connector Config"
       description: "Configuration for a specific output schema of a connector"
@@ -97,7 +97,7 @@ message ConnectorConfig {
 }
 
 message ConnectorTypeSummary {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Connector Type Summary"
       description: "Summary information about a connector type"
@@ -109,5 +109,5 @@ message ConnectorTypeSummary {
     }
   };
   ConnectorType type = 1;
-  uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"5\"" }];
+  uint32 count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"5\"" }];
 }

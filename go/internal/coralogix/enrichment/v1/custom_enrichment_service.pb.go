@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -802,86 +802,86 @@ var File_com_coralogix_enrichment_v1_custom_enrichment_service_proto protoreflec
 
 const file_com_coralogix_enrichment_v1_custom_enrichment_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xaf\x04\n" +
+	";com/coralogix/enrichment/v1/custom_enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogix/enrichment/v1/custom_enrichment.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xaf\x04\n" +
 	"\x04File\x12B\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"file_name\"R\x04name\x12F\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"file_name\"R\x04name\x12F\n" +
 	"\textension\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
-	"\x92A\aJ\x05\"csv\"R\textension\x12:\n" +
-	"\x04size\x18\x05 \x01(\v2\x1c.google.protobuf.UInt32ValueB\b\x92A\x05J\x03100R\x04size\x12X\n" +
-	"\atextual\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1bJ\x19\"row1,row2 value1,value2\"H\x00R\atextual\x12F\n" +
-	"\x06binary\x18\x04 \x01(\v2\x1b.google.protobuf.BytesValueB\x0f\x92A\fJ\n" +
-	"\"0xFABB32\"H\x00R\x06binary:\xb1\x01\x92A\xad\x01\n" +
+	"\x9aA\aJ\x05\"csv\"R\textension\x12:\n" +
+	"\x04size\x18\x05 \x01(\v2\x1c.google.protobuf.UInt32ValueB\b\x9aA\x05J\x03100R\x04size\x12X\n" +
+	"\atextual\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19\"row1,row2 value1,value2\"H\x00R\atextual\x12F\n" +
+	"\x06binary\x18\x04 \x01(\v2\x1b.google.protobuf.BytesValueB\x0f\x9aA\fJ\n" +
+	"\"0xFABB32\"H\x00R\x06binary:\xb1\x01\x9aA\xad\x01\n" +
 	"-*\x04File2%This data structure represents a file*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\t\n" +
 	"\acontent\"\xac\x02\n" +
 	"\x1aGetCustomEnrichmentRequest\x124\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011R\x02id:\xd7\x01\x92A\xd3\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011R\x02id:\xd7\x01\x9aA\xd3\x01\n" +
 	"S*\x1dGet Custom Enrichment Request22This is used to retrieve a custom enrichment by id*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x85\x03\n" +
 	"\x1bGetCustomEnrichmentResponse\x12Z\n" +
-	"\x11custom_enrichment\x18\x01 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x89\x02\x92A\x85\x02\n" +
+	"\x11custom_enrichment\x18\x01 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x89\x02\x9aA\x85\x02\n" +
 	"\x84\x01*\x1eGet Custom Enrichment Response2NThis response data structure is obtained when a custom enrichment is retrieved\xd2\x01\x11custom_enrichment*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x1d\n" +
 	"\x1bGetCustomEnrichmentsRequest\"\x8e\x03\n" +
 	"\x1cGetCustomEnrichmentsResponse\x12\\\n" +
-	"\x12custom_enrichments\x18\x01 \x03(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x11customEnrichments:\x8f\x02\x92A\x8b\x02\n" +
+	"\x12custom_enrichments\x18\x01 \x03(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x11customEnrichments:\x8f\x02\x9aA\x8b\x02\n" +
 	"\x8a\x01*\x1fGet Custom Enrichments Response2RThis response data structure is obtained when all custom enrichments are retrieved\xd2\x01\x12custom_enrichments*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x96\x04\n" +
 	"\x1dCreateCustomEnrichmentRequest\x12O\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"custom_enrichment_name\"R\x04name\x12d\n" +
-	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB$\x92A!J\x1f\"custom_enrichment_description\"R\vdescription\x125\n" +
-	"\x04file\x18\x04 \x01(\v2!.com.coralogix.enrichment.v1.FileR\x04file:\x86\x02\x92A\x82\x02\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x9aA\x1aJ\x18\"custom_enrichment_name\"R\x04name\x12d\n" +
+	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB$\x9aA!J\x1f\"custom_enrichment_description\"R\vdescription\x125\n" +
+	"\x04file\x18\x04 \x01(\v2!.com.coralogix.enrichment.v1.FileR\x04file:\x86\x02\x9aA\x82\x02\n" +
 	"\x81\x01* Create Custom Enrichment Request2AThis request data structure is used to create a custom enrichment\xd2\x01\x04name\xd2\x01\vdescription\xd2\x01\x04file*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xd2\x03\n" +
 	"\x1eCreateCustomEnrichmentResponse\x12G\n" +
-	"\amessage\x18\x01 \x01(\tB-\x92A*J(\"Custom enrichment created successfully\"R\amessage\x12Z\n" +
-	"\x11custom_enrichment\x18\x02 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x8a\x02\x92A\x86\x02\n" +
+	"\amessage\x18\x01 \x01(\tB-\x9aA*J(\"Custom enrichment created successfully\"R\amessage\x12Z\n" +
+	"\x11custom_enrichment\x18\x02 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x8a\x02\x9aA\x86\x02\n" +
 	"\x85\x01*!Create Custom Enrichment Response2LThis response data structure is obtained when a custom enrichment is created\xd2\x01\x11custom_enrichment*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x85\x05\n" +
 	"\x1dUpdateCustomEnrichmentRequest\x12V\n" +
-	"\x14custom_enrichment_id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011R\x12customEnrichmentId\x12O\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"custom_enrichment_name\"R\x04name\x12d\n" +
-	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x92A!J\x1f\"custom_enrichment_description\"R\vdescription\x125\n" +
-	"\x04file\x18\x04 \x01(\v2!.com.coralogix.enrichment.v1.FileR\x04file:\x9d\x02\x92A\x99\x02\n" +
+	"\x14custom_enrichment_id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011R\x12customEnrichmentId\x12O\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x9aA\x1aJ\x18\"custom_enrichment_name\"R\x04name\x12d\n" +
+	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x9aA!J\x1f\"custom_enrichment_description\"R\vdescription\x125\n" +
+	"\x04file\x18\x04 \x01(\v2!.com.coralogix.enrichment.v1.FileR\x04file:\x9d\x02\x9aA\x99\x02\n" +
 	"\x98\x01* Update Custom Enrichment Request2AThis request data structure is used to update a custom enrichment\xd2\x01\x14custom_enrichment_id\xd2\x01\x04name\xd2\x01\vdescription\xd2\x01\x04file*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xd2\x03\n" +
 	"\x1eUpdateCustomEnrichmentResponse\x12G\n" +
-	"\amessage\x18\x01 \x01(\tB-\x92A*J(\"Custom enrichment updated successfully\"R\amessage\x12Z\n" +
-	"\x11custom_enrichment\x18\x02 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x8a\x02\x92A\x86\x02\n" +
+	"\amessage\x18\x01 \x01(\tB-\x9aA*J(\"Custom enrichment updated successfully\"R\amessage\x12Z\n" +
+	"\x11custom_enrichment\x18\x02 \x01(\v2-.com.coralogix.enrichment.v1.CustomEnrichmentR\x10customEnrichment:\x8a\x02\x9aA\x86\x02\n" +
 	"\x85\x01*!Update Custom Enrichment Response2LThis response data structure is obtained when a custom enrichment is updated\xd2\x01\x11custom_enrichment*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xfa\x02\n" +
 	"\x1dDeleteCustomEnrichmentRequest\x12V\n" +
-	"\x14custom_enrichment_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011R\x12customEnrichmentId:\x80\x02\x92A\xfc\x01\n" +
+	"\x14custom_enrichment_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011R\x12customEnrichmentId:\x80\x02\x9aA\xfc\x01\n" +
 	"|* Delete Custom Enrichment Request2AThis request data structure is used to delete a custom enrichment\xd2\x01\x14custom_enrichment_id*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xa3\x01\n" +
 	"\x1eDeleteCustomEnrichmentResponse\x12G\n" +
-	"\amessage\x18\x01 \x01(\tB-\x92A*J(\"Custom enrichment deleted successfully\"R\amessage\x128\n" +
-	"\x14custom_enrichment_id\x18\x02 \x01(\rB\x06\x92A\x03J\x011R\x12customEnrichmentId\"\x97\x06\n" +
+	"\amessage\x18\x01 \x01(\tB-\x9aA*J(\"Custom enrichment deleted successfully\"R\amessage\x128\n" +
+	"\x14custom_enrichment_id\x18\x02 \x01(\rB\x06\x9aA\x03J\x011R\x12customEnrichmentId\"\x97\x06\n" +
 	"!SearchCustomEnrichmentDataRequest\x12r\n" +
 	"\x0esearch_clauses\x18\x01 \x03(\v2K.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest.SearchClauseR\rsearchClauses\x1a\xf8\x02\n" +
 	"\fSearchClause\x126\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011H\x00R\x02id\x12Q\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"custom_enrichment_name\"H\x00R\x04name:\xcf\x01\x92A\xcb\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011H\x00R\x02id\x12Q\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x9aA\x1aJ\x18\"custom_enrichment_name\"H\x00R\x04name:\xcf\x01\x9aA\xcb\x01\n" +
 	"K*\rSearch Clause2.This data structure represents a search clause\xd2\x01\tsearch_by*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\v\n" +
-	"\tsearch_by:\x82\x02\x92A\xfe\x01\n" +
+	"\tsearch_by:\x82\x02\x9aA\xfe\x01\n" +
 	"~*%Search Custom Enrichment Data Request2DThis request data structure is used to search custom enrichment data\xd2\x01\x0esearch_clauses*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x8f\x01\n" +
 	"\"SearchCustomEnrichmentDataResponse\x12i\n" +
 	"\x17custom_enrichments_data\x18\x01 \x03(\v21.com.coralogix.enrichment.v1.CustomEnrichmentDataR\x15customEnrichmentsData2\x84\f\n" +
 	"\x17CustomEnrichmentService\x12\xe2\x01\n" +
-	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"X\x92A3\n" +
+	"\x13GetCustomEnrichment\x127.com.coralogix.enrichment.v1.GetCustomEnrichmentRequest\x1a8.com.coralogix.enrichment.v1.GetCustomEnrichmentResponse\"X\x9aA3\n" +
 	"\x1aCustom Enrichments Service\x12\x15Get Custom Enrichment\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/custom_enrichment/{id}\x12\xe1\x01\n" +
-	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"T\x92A4\n" +
+	"\x14GetCustomEnrichments\x128.com.coralogix.enrichment.v1.GetCustomEnrichmentsRequest\x1a9.com.coralogix.enrichment.v1.GetCustomEnrichmentsResponse\"T\x9aA4\n" +
 	"\x1aCustom Enrichments Service\x12\x16Get Custom Enrichments\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/custom_enrichment\x12\xed\x01\n" +
-	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\"Z\x92A7\n" +
+	"\x16CreateCustomEnrichment\x12:.com.coralogix.enrichment.v1.CreateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.CreateCustomEnrichmentResponse\"Z\x9aA7\n" +
 	"\x1aCustom Enrichments Service\x12\x19Create Custom Enrichments\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/custom_enrichment\x12\xec\x01\n" +
-	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\"Y\x92A6\n" +
+	"\x16UpdateCustomEnrichment\x12:.com.coralogix.enrichment.v1.UpdateCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.UpdateCustomEnrichmentResponse\"Y\x9aA6\n" +
 	"\x1aCustom Enrichments Service\x12\x18Update Custom Enrichment\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/custom_enrichment\x12\x81\x02\n" +
-	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"n\x92A7\n" +
+	"\x16DeleteCustomEnrichment\x12:.com.coralogix.enrichment.v1.DeleteCustomEnrichmentRequest\x1a;.com.coralogix.enrichment.v1.DeleteCustomEnrichmentResponse\"n\x9aA7\n" +
 	"\x1aCustom Enrichments Service\x12\x19Delete Custom Enrichments\x82\xd3\xe4\x93\x02.*,/v1/custom_enrichment/{custom_enrichment_id}\x12\x81\x02\n" +
-	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"b\x92A;\n" +
-	"\x1aCustom Enrichments Service\x12\x1dSearch Custom Enrichment Data\x82\xd3\xe4\x93\x02\x1e\"\x1c/v1/custom_enrichment/search\x1a9\x92A6\n" +
+	"\x1aSearchCustomEnrichmentData\x12>.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataRequest\x1a?.com.coralogix.enrichment.v1.SearchCustomEnrichmentDataResponse\"b\x9aA;\n" +
+	"\x1aCustom Enrichments Service\x12\x1dSearch Custom Enrichment Data\x82\xd3\xe4\x93\x02\x1e\"\x1c/v1/custom_enrichment/search\x1a9\x9aA6\n" +
 	"\x1aCustom Enrichments Service\x12\x18Manage your enrichments.b\x06proto3"
 
 var (

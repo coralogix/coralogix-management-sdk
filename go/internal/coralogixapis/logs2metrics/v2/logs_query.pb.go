@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -170,15 +170,15 @@ var File_com_coralogixapis_logs2metrics_v2_logs_query_proto protoreflect.FileDes
 
 const file_com_coralogixapis_logs2metrics_v2_logs_query_proto_rawDesc = "" +
 	"\n" +
-	"2com/coralogixapis/logs2metrics/v2/logs_query.proto\x12!com.coralogixapis.logs2metrics.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x93\x05\n" +
+	"2com/coralogixapis/logs2metrics/v2/logs_query.proto\x12!com.coralogixapis.logs2metrics.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x93\x05\n" +
 	"\tLogsQuery\x12_\n" +
-	"\x06lucene\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB)\x92A&J$\"log_obj.numeric_field: [50 TO 100]\"R\x06lucene\x12D\n" +
-	"\x05alias\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"new_query\"R\x05alias\x12f\n" +
-	"\x17applicationname_filters\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
+	"\x06lucene\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB)\x9aA&J$\"log_obj.numeric_field: [50 TO 100]\"R\x06lucene\x12D\n" +
+	"\x05alias\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"new_query\"R\x05alias\x12f\n" +
+	"\x17applicationname_filters\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x9aA\fJ\n" +
 	"\"app_name\"R\x16applicationnameFilters\x12b\n" +
-	"\x15subsystemname_filters\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
+	"\x15subsystemname_filters\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x9aA\fJ\n" +
 	"\"sub_name\"R\x14subsystemnameFilters\x12V\n" +
-	"\x10severity_filters\x18\x05 \x03(\x0e2+.com.coralogixapis.logs2metrics.v2.SeverityR\x0fseverityFilters:\xba\x01\x92A\xb6\x01\n" +
+	"\x10severity_filters\x18\x05 \x03(\x0e2+.com.coralogixapis.logs2metrics.v2.SeverityR\x0fseverityFilters:\xba\x01\x9aA\xb6\x01\n" +
 	">*\n" +
 	"SpansQuery20This data structure represents a query for logs.*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/*\xa2\x01\n" +

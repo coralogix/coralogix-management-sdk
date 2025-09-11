@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -378,7 +378,7 @@ var File_com_coralogix_permissions_v1_common_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_permissions_v1_common_proto_rawDesc = "" +
 	"\n" +
-	")com/coralogix/permissions/v1/common.proto\x12\x1ccom.coralogix.permissions.v1\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x18\n" +
+	")com/coralogix/permissions/v1/common.proto\x12\x1ccom.coralogix.permissions.v1\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x18\n" +
 	"\x06UserId\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x18\n" +
 	"\x06TeamId\x12\x0e\n" +
@@ -393,7 +393,7 @@ const file_com_coralogix_permissions_v1_common_proto_rawDesc = "" +
 	"OrgGroupId\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\"\x94\x02\n" +
 	"\vTeamGroupId\x12\x0e\n" +
-	"\x02id\x18\x01 \x01(\rR\x02id:\xf4\x01\x92A\xf0\x01\n" +
+	"\x02id\x18\x01 \x01(\rR\x02id:\xf4\x01\x9aA\xf0\x01\n" +
 	"[*\vTeamGroupId2LThis data structure represents the information associated with a team group.*\x90\x01\n" +
 	"\x1aFind out more about groups\x12rhttps://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/\"\x19\n" +
 	"\aScopeId\x12\x0e\n" +

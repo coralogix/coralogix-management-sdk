@@ -9,10 +9,10 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/m
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message MetricThresholdType {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric-based threshold alert type"
       description: "Configuration for alerts based on metric threshold violations"
@@ -27,22 +27,22 @@ message MetricThresholdType {
       description: "Learn more about metric-based threshold alerts in our documentation"
     }
   };
-  MetricFilter metric_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The filter to match metric entries for the alert."}];
-  repeated MetricThresholdRule rules = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  MetricFilter metric_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter to match metric entries for the alert."}];
+  repeated MetricThresholdRule rules = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The rules for the metric threshold alert"
     min_items: 1
     max_items: 5
   }];
-  UndetectedValuesManagement undetected_values_management = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling undetected values in the alert."}];
-  MetricMissingValues missing_values = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling missing values in the alert."}];
-  google.protobuf.Int32Value evaluation_delay_ms = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  UndetectedValuesManagement undetected_values_management = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Configuration for handling undetected values in the alert."}];
+  MetricMissingValues missing_values = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Configuration for handling missing values in the alert."}];
+  google.protobuf.Int32Value evaluation_delay_ms = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The delay in milliseconds before evaluating the alert condition"
     example: "60000"
   }];
 }
 
 message MetricThresholdRule {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric Threshold Rule"
       description: "Defines a rule for metric-based threshold alerts"
@@ -52,12 +52,12 @@ message MetricThresholdRule {
       ]
     }
   };
-  MetricThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for the metric threshold alert"}];
-  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Alert override settings"}];
+  MetricThresholdCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the metric threshold alert"}];
+  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Alert override settings"}];
 }
 
 message MetricThresholdCondition {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric Threshold Condition"
       description: "Defines conditions for metric threshold alerts"
@@ -69,18 +69,18 @@ message MetricThresholdCondition {
       ]
     }
   };
-  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "100.0"
     description: "The threshold value for the alert condition"
     pattern: "^\\d+(\\.\\d+)?$"
   }];
-  google.protobuf.UInt32Value for_over_pct = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.UInt32Value for_over_pct = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The percentage of values that must exceed the threshold to trigger the alert"
     example: "80"
     pattern: "^(100|[1-9]?\\d)$"
   }];
-  MetricTimeWindow of_the_last = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The time window for the alert condition"}];
-  MetricThresholdConditionType condition_type = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  MetricTimeWindow of_the_last = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The time window for the alert condition"}];
+  MetricThresholdConditionType condition_type = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The type of the alert condition"
     example: "\"METRIC_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_EQUALS\""
   }];

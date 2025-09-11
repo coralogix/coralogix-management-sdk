@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -109,10 +109,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_threshold_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_threshold_metric_threshold_missing_values_proto_rawDesc = "" +
 	"\n" +
-	"lcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_missing_values.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x98\x04\n" +
+	"lcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/threshold/metric_threshold_missing_values.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x98\x04\n" +
 	"\x13MetricMissingValues\x12\x8e\x01\n" +
-	"\x11replace_with_zero\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBD\x92AA29If set to true, missing values will be replaced with zeroJ\x04trueH\x00R\x0freplaceWithZero\x12\xd8\x01\n" +
-	"\x17min_non_null_values_pct\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x81\x01\x92A~2bIf set, specifies the minimum percentage of non-null values required for the alert to be triggeredJ\x0280\x8a\x01\x13^(100|[1-9][0-9]?)$H\x00R\x13minNonNullValuesPct:\x82\x01\x92A\x7f\n" +
+	"\x11replace_with_zero\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueBD\x9aAA29If set to true, missing values will be replaced with zeroJ\x04trueH\x00R\x0freplaceWithZero\x12\xd8\x01\n" +
+	"\x17min_non_null_values_pct\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x81\x01\x9aA~2bIf set, specifies the minimum percentage of non-null values required for the alert to be triggeredJ\x0280\x8a\x01\x13^(100|[1-9][0-9]?)$H\x00R\x13minNonNullValuesPct:\x82\x01\x9aA\x7f\n" +
 	"}*#Metric Missing Values Configuration2EConfiguration for handling missing values in metric threshold alerts.\xd2\x01\x0emissing_valuesB\x10\n" +
 	"\x0emissing_valuesb\x06proto3"
 

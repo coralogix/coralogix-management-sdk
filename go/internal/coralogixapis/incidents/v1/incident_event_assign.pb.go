@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -70,11 +70,11 @@ var File_com_coralogixapis_incidents_v1_incident_event_incident_event_assign_pro
 
 const file_com_coralogixapis_incidents_v1_incident_event_incident_event_assign_proto_rawDesc = "" +
 	"\n" +
-	"Icom/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x8b\x01\n" +
+	"Icom/coralogixapis/incidents/v1/incident_event/incident_event_assign.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x8b\x01\n" +
 	"\x13IncidentEventAssign\x12J\n" +
 	"\n" +
 	"assignment\x18\x01 \x01(\v2*.com.coralogixapis.incidents.v1.AssignmentR\n" +
-	"assignment:(\x92A%\n" +
+	"assignment:(\x9aA%\n" +
 	"#*!Incident event assignment detailsb\x06proto3"
 
 var (

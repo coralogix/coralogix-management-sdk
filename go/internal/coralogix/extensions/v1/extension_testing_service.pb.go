@@ -7,8 +7,8 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -278,26 +278,26 @@ var File_com_coralogix_extensions_v1_extension_testing_service_proto protoreflec
 
 const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogix/extensions/v1/extension_testing_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a'com/coralogix/common/v1/audit_log.proto\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb2\x01\n" +
+	";com/coralogix/extensions/v1/extension_testing_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb2\x01\n" +
 	" InitializeTestingRevisionRequest\x12Q\n" +
-	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData:;\x92A8\n" +
+	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData:;\x9aA8\n" +
 	"6*#Initialize testing revision request\xd2\x01\x0eextension_data\"P\n" +
-	"!InitializeTestingRevisionResponse:+\x92A(\n" +
+	"!InitializeTestingRevisionResponse:+\x9aA(\n" +
 	"&*$Initialize testing revision response\"{\n" +
 	"\x1dCleanupTestingRevisionRequest\x12,\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:,\x92A)\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id:,\x9aA)\n" +
 	"'* Cleanup testing revision request\xd2\x01\x02id\"J\n" +
-	"\x1eCleanupTestingRevisionResponse:(\x92A%\n" +
+	"\x1eCleanupTestingRevisionResponse:(\x9aA%\n" +
 	"#*!Cleanup testing revision response\"\x80\x02\n" +
 	"\x1cTestExtensionRevisionRequest\x12Q\n" +
 	"\x0eextension_data\x18\x01 \x01(\v2*.com.coralogix.extensions.v1.ExtensionDataR\rextensionData\x12T\n" +
 	"\x12cleanup_after_test\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\x10cleanupAfterTest:7\x92A4\n" +
+	"\x9aA\a:\x05falseR\x10cleanupAfterTest:7\x9aA4\n" +
 	"2*\x1fTest extension revision request\xd2\x01\x0eextension_data\"H\n" +
-	"\x1dTestExtensionRevisionResponse:'\x92A$\n" +
+	"\x1dTestExtensionRevisionResponse:'\x9aA$\n" +
 	"\"* Test extension revision response2\x9a\v\n" +
 	"\x17ExtensionTestingService\x12\xb4\x03\n" +
-	"\x19InitializeTestingRevision\x12=.com.coralogix.extensions.v1.InitializeTestingRevisionRequest\x1a>.com.coralogix.extensions.v1.InitializeTestingRevisionResponse\"\x97\x02\x92A\xc6\x01\n" +
+	"\x19InitializeTestingRevision\x12=.com.coralogix.extensions.v1.InitializeTestingRevisionRequest\x1a>.com.coralogix.extensions.v1.InitializeTestingRevisionResponse\"\x97\x02\x9aA\xc6\x01\n" +
 	"\x19Extension testing service\x12\x1bInitialize testing revisionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -306,9 +306,9 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17extensions:UpdateConfig¸\x02\x1d\n" +
+	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x1d\n" +
 	"\x1bInitialize testing revision\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/extensions-testing/initialize\x12\xa4\x03\n" +
-	"\x16CleanupTestingRevision\x12:.com.coralogix.extensions.v1.CleanupTestingRevisionRequest\x1a;.com.coralogix.extensions.v1.CleanupTestingRevisionResponse\"\x90\x02\x92A\xc4\x01\n" +
+	"\x16CleanupTestingRevision\x12:.com.coralogix.extensions.v1.CleanupTestingRevisionRequest\x1a;.com.coralogix.extensions.v1.CleanupTestingRevisionResponse\"\x90\x02\x9aA\xc4\x01\n" +
 	"\x19Extension testing service\x12\x19Cleanup testing extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -317,9 +317,9 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17extensions:UpdateConfig¸\x02\x1b\n" +
+	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x1b\n" +
 	"\x19Cleanup testing extension\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/extensions-testing/cleanup\x12\x91\x03\n" +
-	"\x15TestExtensionRevision\x129.com.coralogix.extensions.v1.TestExtensionRevisionRequest\x1a:.com.coralogix.extensions.v1.TestExtensionRevisionResponse\"\x80\x02\x92A\xc2\x01\n" +
+	"\x15TestExtensionRevision\x129.com.coralogix.extensions.v1.TestExtensionRevisionRequest\x1a:.com.coralogix.extensions.v1.TestExtensionRevisionResponse\"\x80\x02\x9aA\xc2\x01\n" +
 	"\x19Extension testing service\x12\x17Test extension revisionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -328,8 +328,8 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
-	"\x19\x1a\x17extensions:UpdateConfig¸\x02\x10\n" +
-	"\x0eTest extension\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/extensions-testing/test\x1a\x8c\x01\x92A\x88\x01\n" +
+	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x10\n" +
+	"\x0eTest extension\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/extensions-testing/test\x1a\x8c\x01\x9aA\x88\x01\n" +
 	"\x19Extension testing service\x1ak\n" +
 	"4Find out more about extensions in our documentation.\x123https://coralogix.com/docs/integrations/extensions/b\x06proto3"
 

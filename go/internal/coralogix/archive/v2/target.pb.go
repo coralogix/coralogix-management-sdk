@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -345,38 +345,38 @@ var File_com_coralogix_archive_v2_target_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_archive_v2_target_proto_rawDesc = "" +
 	"\n" +
-	"%com/coralogix/archive/v2/target.proto\x12\x18com.coralogix.archive.v2\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x91\x04\n" +
+	"%com/coralogix/archive/v2/target.proto\x12\x18com.coralogix.archive.v2\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x91\x04\n" +
 	"\x10IBMCosTargetSpec\x120\n" +
 	"\n" +
-	"bucket_crn\x18\x01 \x01(\tB\x11\x92A\x0eJ\f\"bucket_crn\"R\tbucketCrn\x12@\n" +
-	"\bendpoint\x18\x02 \x01(\tB$\x92A!J\x1f\"http://some.endpoint.com:8081\"R\bendpoint\x128\n" +
-	"\vservice_crn\x18\x03 \x01(\tB\x12\x92A\x0fJ\r\"service_crn\"H\x00R\n" +
+	"bucket_crn\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"bucket_crn\"R\tbucketCrn\x12@\n" +
+	"\bendpoint\x18\x02 \x01(\tB$\x9aA!J\x1f\"http://some.endpoint.com:8081\"R\bendpoint\x128\n" +
+	"\vservice_crn\x18\x03 \x01(\tB\x12\x9aA\x0fJ\r\"service_crn\"H\x00R\n" +
 	"serviceCrn\x88\x01\x01\x12U\n" +
-	"\vbucket_type\x18\x04 \x01(\x0e2'.com.coralogix.archive.v2.IbmBucketTypeB\x06\x92A\x03J\x010H\x01R\n" +
-	"bucketType\x88\x01\x01:\xd7\x01\x92A\xd3\x01\n" +
+	"\vbucket_type\x18\x04 \x01(\x0e2'.com.coralogix.archive.v2.IbmBucketTypeB\x06\x9aA\x03J\x010H\x01R\n" +
+	"bucketType\x88\x01\x01:\xd7\x01\x9aA\xd3\x01\n" +
 	"`*\x13IBM COS Target Spec21This data structure represents an IBM COS target.\xd2\x01\n" +
 	"bucket_crn\xd2\x01\bendpoint*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\x0e\n" +
 	"\f_service_crnB\x0e\n" +
 	"\f_bucket_type\"\xb0\x02\n" +
 	"\fS3TargetSpec\x12%\n" +
-	"\x06bucket\x18\x01 \x01(\tB\r\x92A\n" +
+	"\x06bucket\x18\x01 \x01(\tB\r\x9aA\n" +
 	"J\b\"bucket\"R\x06bucket\x12-\n" +
-	"\x06region\x18\x02 \x01(\tB\x10\x92A\rJ\v\"us-west-2\"H\x00R\x06region\x88\x01\x01:\xbe\x01\x92A\xba\x01\n" +
+	"\x06region\x18\x02 \x01(\tB\x10\x9aA\rJ\v\"us-west-2\"H\x00R\x06region\x88\x01\x01:\xbe\x01\x9aA\xba\x01\n" +
 	"G*\x0eS3 Target Spec2,This data structure represents an S3 target.\xd2\x01\x06bucket*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\t\n" +
 	"\a_region\"\xec\x02\n" +
 	"\vArchiveSpec\x12>\n" +
-	"\x13archiving_format_id\x18\x01 \x01(\tB\x0e\x92A\vJ\t\"json_id\"R\x11archivingFormatId\x12&\n" +
-	"\tis_active\x18\x02 \x01(\bB\t\x92A\x06J\x04trueR\bisActive\x12*\n" +
-	"\venable_tags\x18\x03 \x01(\bB\t\x92A\x06J\x04trueR\n" +
-	"enableTags:\xc8\x01\x92A\xc4\x01\n" +
+	"\x13archiving_format_id\x18\x01 \x01(\tB\x0e\x9aA\vJ\t\"json_id\"R\x11archivingFormatId\x12&\n" +
+	"\tis_active\x18\x02 \x01(\bB\t\x9aA\x06J\x04trueR\bisActive\x12*\n" +
+	"\venable_tags\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueR\n" +
+	"enableTags:\xc8\x01\x9aA\xc4\x01\n" +
 	"Q*\fArchive Spec28This data structure contains metadata about the archive.\xd2\x01\x06bucket*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/\"\xb8\x03\n" +
 	"\x06Target\x128\n" +
 	"\x02s3\x18\x01 \x01(\v2&.com.coralogix.archive.v2.S3TargetSpecH\x00R\x02s3\x12E\n" +
 	"\aibm_cos\x18\x02 \x01(\v2*.com.coralogix.archive.v2.IBMCosTargetSpecH\x00R\x06ibmCos\x12H\n" +
-	"\farchive_spec\x18\x03 \x01(\v2%.com.coralogix.archive.v2.ArchiveSpecR\varchiveSpec:\xd3\x01\x92A\xcf\x01\n" +
+	"\farchive_spec\x18\x03 \x01(\v2%.com.coralogix.archive.v2.ArchiveSpecR\varchiveSpec:\xd3\x01\x9aA\xcf\x01\n" +
 	"\\*\x06Target28This data structure represents a target to archive logs.\xd2\x01\x17target_specarchive_spec*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/B\r\n" +
 	"\vtarget_spec*l\n" +

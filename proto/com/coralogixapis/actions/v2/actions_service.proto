@@ -4,7 +4,7 @@ package com.coralogixapis.actions.v2;
 
 import "google/protobuf/wrappers.proto";
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 
@@ -101,13 +101,13 @@ message AtomicBatchExecuteActionsResponse {
 }
 
 service ActionsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Actions Service"
     description: "A service for managing actions."
   };
 
   rpc CreateAction(CreateActionRequest) returns (CreateActionResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -130,7 +130,7 @@ service ActionsService {
   }
 
   rpc ReplaceAction(ReplaceActionRequest) returns (ReplaceActionResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -153,7 +153,7 @@ service ActionsService {
   }
 
   rpc DeleteAction(DeleteActionRequest) returns (DeleteActionResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -175,7 +175,7 @@ service ActionsService {
   }
 
   rpc GetAction(GetActionRequest) returns (GetActionResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -197,7 +197,7 @@ service ActionsService {
   }
 
   rpc ListActions(ListActionsRequest) returns (ListActionsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -219,7 +219,7 @@ service ActionsService {
   }
 
   rpc OrderActions(OrderActionsRequest) returns (OrderActionsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -246,7 +246,7 @@ service ActionsService {
       post: "/v2/actions/actions:atomicBatchExecute"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}

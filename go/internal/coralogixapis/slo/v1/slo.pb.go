@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -569,6 +569,7 @@ type Slo struct {
 	//	*Slo_RequestBasedMetricSli
 	//	*Slo_WindowBasedMetricSli
 	Sli           isSlo_Sli `protobuf_oneof:"sli"`
+	Type          *string   `protobuf:"bytes,14,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -712,6 +713,13 @@ func (x *Slo) GetWindowBasedMetricSli() *WindowBasedMetricSli {
 		}
 	}
 	return nil
+}
+
+func (x *Slo) GetType() string {
+	if x != nil && x.Type != nil {
+		return *x.Type
+	}
+	return ""
 }
 
 type isSlo_Window interface {
@@ -1032,35 +1040,35 @@ var File_com_coralogixapis_slo_v1_slo_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\n" +
-	"\"com/coralogixapis/slo/v1/slo.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x95\x01\n" +
+	"\"com/coralogixapis/slo/v1/slo.proto\x12\x18com.coralogixapis.slo.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x95\x01\n" +
 	"\x06Metric\x12O\n" +
-	"\x05query\x18\x01 \x01(\tB9\x92A6J4\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"R\x05query::\x92A7\n" +
+	"\x05query\x18\x01 \x01(\tB9\x9aA6J4\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"R\x05query::\x9aA7\n" +
 	"5*\x06Metric2#Definition of a metric used in SLOs\xd2\x01\x05query\"\x8e\x02\n" +
 	"\x15RequestBasedMetricSli\x12A\n" +
 	"\vgood_events\x18\x01 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\n" +
 	"goodEvents\x12C\n" +
-	"\ftotal_events\x18\x02 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\vtotalEvents:m\x92Aj\n" +
+	"\ftotal_events\x18\x02 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\vtotalEvents:m\x9aAj\n" +
 	"h*\x15RequestBasedMetricSli22Definition of a request-based SLI based on metrics\xd2\x01\vgood_events\xd2\x01\ftotal_events\"\x80\x04\n" +
 	"\x14WindowBasedMetricSli\x126\n" +
 	"\x05query\x18\x01 \x01(\v2 .com.coralogixapis.slo.v1.MetricR\x05query\x12A\n" +
 	"\x06window\x18\x02 \x01(\x0e2).com.coralogixapis.slo.v1.WindowSloWindowR\x06window\x12]\n" +
 	"\x13comparison_operator\x18\x03 \x01(\x0e2,.com.coralogixapis.slo.v1.ComparisonOperatorR\x12comparisonOperator\x12'\n" +
-	"\tthreshold\x18\x04 \x01(\x02B\t\x92A\x06J\x040.95R\tthreshold\x12a\n" +
-	"\x15missing_data_strategy\x18\x05 \x01(\x0e2-.com.coralogixapis.slo.v1.MissingDataStrategyR\x13missingDataStrategy:\x81\x01\x92A~\n" +
+	"\tthreshold\x18\x04 \x01(\x02B\t\x9aA\x06J\x040.95R\tthreshold\x12a\n" +
+	"\x15missing_data_strategy\x18\x05 \x01(\x0e2-.com.coralogixapis.slo.v1.MissingDataStrategyR\x13missingDataStrategy:\x81\x01\x9aA~\n" +
 	"|*\x14WindowBasedMetricSli21Definition of a window-based SLI based on metrics\xd2\x01\x05query\xd2\x01\x06window\xd2\x01\x13comparison_operator\xd2\x01\tthreshold\"\xd7\x01\n" +
 	"\bRevision\x12\"\n" +
-	"\brevision\x18\x01 \x01(\x05B\x06\x92A\x03J\x011R\brevision\x12;\n" +
+	"\brevision\x18\x01 \x01(\x05B\x06\x9aA\x03J\x011R\brevision\x12;\n" +
 	"\vupdate_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\n" +
-	"updateTime:j\x92Ag\n" +
+	"updateTime:j\x9aAg\n" +
 	"e*\bRevision2YThe revision of the slo, used to differentiate between different versions of the same SLO\"Z\n" +
 	"\bGrouping\x12\x16\n" +
-	"\x06labels\x18\x01 \x03(\tR\x06labels:6\x92A3\n" +
-	"1*\bGrouping2%Definition of the SLO grouping fields\"\x90\t\n" +
+	"\x06labels\x18\x01 \x03(\tR\x06labels:6\x9aA3\n" +
+	"1*\bGrouping2%Definition of the SLO grouping fields\"\xc2\t\n" +
 	"\x03Slo\x12@\n" +
-	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"H\x02R\x02id\x88\x01\x01\x12+\n" +
-	"\x04name\x18\x02 \x01(\tB\x17\x92A\x14J\x12\"Example Slo Name\"R\x04name\x12K\n" +
-	"\vdescription\x18\x03 \x01(\tB$\x92A!J\x1f\"A brief description of my SLO\"H\x03R\vdescription\x88\x01\x01\x125\n" +
-	"\acreator\x18\x04 \x01(\tB\x16\x92A\x13J\x11\"test@domain.com\"H\x04R\acreator\x88\x01\x01\x12A\n" +
+	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"H\x02R\x02id\x88\x01\x01\x12+\n" +
+	"\x04name\x18\x02 \x01(\tB\x17\x9aA\x14J\x12\"Example Slo Name\"R\x04name\x12K\n" +
+	"\vdescription\x18\x03 \x01(\tB$\x9aA!J\x1f\"A brief description of my SLO\"H\x03R\vdescription\x88\x01\x01\x125\n" +
+	"\acreator\x18\x04 \x01(\tB\x16\x9aA\x13J\x11\"test@domain.com\"H\x04R\acreator\x88\x01\x01\x12A\n" +
 	"\x06labels\x18\x05 \x03(\v2).com.coralogixapis.slo.v1.Slo.LabelsEntryR\x06labels\x12C\n" +
 	"\brevision\x18\x06 \x01(\v2\".com.coralogixapis.slo.v1.RevisionH\x05R\brevision\x88\x01\x01\x12C\n" +
 	"\bgrouping\x18\a \x01(\v2\".com.coralogixapis.slo.v1.GroupingH\x06R\bgrouping\x88\x01\x01\x12;\n" +
@@ -1069,13 +1077,14 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\vupdate_time\x18\t \x01(\v2\x1a.google.protobuf.TimestampR\n" +
 	"updateTime\x12K\n" +
 	"\x1btarget_threshold_percentage\x18\n" +
-	" \x01(\x02B\v\x92A\bJ\x0699.999R\x19targetThresholdPercentage\x12N\n" +
+	" \x01(\x02B\v\x9aA\bJ\x0699.999R\x19targetThresholdPercentage\x12N\n" +
 	"\x0eslo_time_frame\x18\v \x01(\x0e2&.com.coralogixapis.slo.v1.SloTimeFrameH\x00R\fsloTimeFrame\x12j\n" +
 	"\x18request_based_metric_sli\x18\f \x01(\v2/.com.coralogixapis.slo.v1.RequestBasedMetricSliH\x01R\x15requestBasedMetricSli\x12g\n" +
-	"\x17window_based_metric_sli\x18\r \x01(\v2..com.coralogixapis.slo.v1.WindowBasedMetricSliH\x01R\x14windowBasedMetricSli\x1a9\n" +
+	"\x17window_based_metric_sli\x18\r \x01(\v2..com.coralogixapis.slo.v1.WindowBasedMetricSliH\x01R\x14windowBasedMetricSli\x12'\n" +
+	"\x04type\x18\x0e \x01(\tB\x0e\x9aA\vJ\t\"request\"H\aR\x04type\x88\x01\x01\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:T\x92AQ\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:T\x9aAQ\n" +
 	"O*\x03Slo2\x14Definition of an SLO\xd2\x01\x04name\xd2\x01\x1btarget_threshold_percentage\xd2\x01\x06window\xd2\x01\x03sliB\b\n" +
 	"\x06windowB\x05\n" +
 	"\x03sliB\x05\n" +
@@ -1084,27 +1093,28 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\n" +
 	"\b_creatorB\v\n" +
 	"\t_revisionB\v\n" +
-	"\t_grouping\"\xdb\x01\n" +
+	"\t_groupingB\a\n" +
+	"\x05_type\"\xdb\x01\n" +
 	"\x0eSloFilterField\x12U\n" +
 	"\fconst_filter\x18\x01 \x01(\x0e20.com.coralogixapis.slo.v1.SloConstantFilterFieldH\x00R\vconstFilter\x123\n" +
 	"\n" +
-	"label_name\x18\x02 \x01(\tB\x12\x92A\x0fJ\r\"environment\"H\x00R\tlabelName:4\x92A1\n" +
+	"label_name\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"environment\"H\x00R\tlabelName:4\x9aA1\n" +
 	"/*\x0eSloFilterField2\x1dField used for filtering SLOsB\a\n" +
 	"\x05field\"\x92\x01\n" +
 	"\x11IsFilterPredicate\x12\x0e\n" +
-	"\x02is\x18\x01 \x03(\tR\x02is:m\x92Aj\n" +
+	"\x02is\x18\x01 \x03(\tR\x02is:m\x9aAj\n" +
 	"h*\x11IsFilterPredicate2SPredicate for SLO filters that checks if a field is equal to one of multiple values\"\x9e\x01\n" +
 	"\x12SloFilterPredicate\x12=\n" +
-	"\x02is\x18\x01 \x01(\v2+.com.coralogixapis.slo.v1.IsFilterPredicateH\x00R\x02is:<\x92A9\n" +
+	"\x02is\x18\x01 \x01(\v2+.com.coralogixapis.slo.v1.IsFilterPredicateH\x00R\x02is:<\x9aA9\n" +
 	"7*\x12SloFilterPredicate2!Predicate used for filtering SLOsB\v\n" +
 	"\tpredicate\"\xf7\x01\n" +
 	"\tSloFilter\x12>\n" +
 	"\x05field\x18\x01 \x01(\v2(.com.coralogixapis.slo.v1.SloFilterFieldR\x05field\x12J\n" +
-	"\tpredicate\x18\x02 \x01(\v2,.com.coralogixapis.slo.v1.SloFilterPredicateR\tpredicate:^\x92A[\n" +
+	"\tpredicate\x18\x02 \x01(\v2,.com.coralogixapis.slo.v1.SloFilterPredicateR\tpredicate:^\x9aA[\n" +
 	"Y*\tSloFilter28A filter for SLOs, consisting of a field and a predicate\xd2\x01\x05field\xd2\x01\tpredicate\"\x80\x01\n" +
 	"\n" +
 	"SloFilters\x12=\n" +
-	"\afilters\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloFilterR\afilters:3\x92A0\n" +
+	"\afilters\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloFilterR\afilters:3\x9aA0\n" +
 	".*\n" +
 	"SloFilters2 A collection of filters for SLOs*\xdf\x01\n" +
 	"\x12ComparisonOperator\x12#\n" +

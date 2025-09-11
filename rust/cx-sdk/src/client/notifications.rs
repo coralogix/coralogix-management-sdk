@@ -12,9 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use std::str::FromStr;
+use std::{
+    collections::HashMap,
+    str::FromStr,
+};
 
 use cx_api::proto::com::coralogixapis::notification_center::{
+    EntityLabelValues,
     connectors::v1::{
         BatchGetConnectorsRequest,
         BatchGetConnectorsResponse,
@@ -198,10 +202,12 @@ impl NotificationsClient {
     pub async fn list_connectors(
         &self,
         connector_type: ConnectorType,
+        supported_by_entity_type: Option<EntityType>,
     ) -> Result<ListConnectorsResponse> {
         let request = make_request_with_metadata(
             ListConnectorsRequest {
-                connector_type: connector_type.into(),
+                connector_type: Some(connector_type.into()),
+                supported_by_entity_type: supported_by_entity_type.map(From::from),
             },
             &self.metadata_map,
         );
@@ -333,9 +339,16 @@ impl NotificationsClient {
     }
 
     /// Get summaries of connector types.
-    pub async fn get_connector_type_summaries(&self) -> Result<GetConnectorTypeSummariesResponse> {
-        let request =
-            make_request_with_metadata(GetConnectorTypeSummariesRequest {}, &self.metadata_map);
+    pub async fn get_connector_type_summaries(
+        &self,
+        supported_by_entity_type: Option<EntityType>,
+    ) -> Result<GetConnectorTypeSummariesResponse> {
+        let request = make_request_with_metadata(
+            GetConnectorTypeSummariesRequest {
+                supported_by_entity_type: supported_by_entity_type.map(From::from),
+            },
+            &self.metadata_map,
+        );
         {
             let mut client = self.connectors_client.lock().await.clone();
 
@@ -489,7 +502,7 @@ impl NotificationsClient {
         let request = make_request_with_metadata(
             ListPresetSummariesRequest {
                 connector_type: connector_type.map(From::from),
-                entity_type: entity_type.into(),
+                entity_type: Some(entity_type.into()),
             },
             &self.metadata_map,
         );
@@ -671,10 +684,12 @@ impl NotificationsClient {
     pub async fn list_global_routers(
         &self,
         entity_type: EntityType,
+        source_entity_labels: HashMap<String, EntityLabelValues>,
     ) -> Result<ListGlobalRoutersResponse> {
         let request = make_request_with_metadata(
             ListGlobalRoutersRequest {
                 entity_type: Some(entity_type.into()),
+                source_entity_labels,
             },
             &self.metadata_map,
         );

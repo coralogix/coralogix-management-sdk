@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -191,22 +191,22 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_t
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_threshold_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x1ancom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_condition_type.proto\x1ajcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdb\x05\n" +
+	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x1ancom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_condition_type.proto\x1ajcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/threshold/tracing_threshold_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdb\x05\n" +
 	"\x14TracingThresholdType\x12\x88\x01\n" +
-	"\x0etracing_filter\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.TracingFilterB5\x92A220The filter to match trace entries for the alert.R\rtracingFilter\x12|\n" +
-	"\x05rules\x18\x02 \x03(\v21.com.coralogixapis.alerts.v3.TracingThresholdRuleB3\x92A02(The rules for the trace threshold alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xa6\x01\n" +
-	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBH\x92AE2!Notification payload field filterJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\x90\x02\x92A\x8c\x02\n" +
+	"\x0etracing_filter\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.TracingFilterB5\x9aA220The filter to match trace entries for the alert.R\rtracingFilter\x12|\n" +
+	"\x05rules\x18\x02 \x03(\v21.com.coralogixapis.alerts.v3.TracingThresholdRuleB3\x9aA02(The rules for the trace threshold alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xa6\x01\n" +
+	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBH\x9aAE2!Notification payload field filterJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\x90\x02\x9aA\x8c\x02\n" +
 	"u* Trace-based threshold alert type28Configuration for alerts based on trace count thresholds\xd2\x01\x0etracing_filter\xd2\x01\x05rules*\x92\x01\n" +
 	"8Learn more about trace-based alerts in our documentation\x12Vhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/\"\xec\x01\n" +
 	"\x14TracingThresholdRule\x12\x81\x01\n" +
-	"\tcondition\x18\x01 \x01(\v26.com.coralogixapis.alerts.v3.TracingThresholdConditionB+\x92A(2&The condition for the threshold alert.R\tcondition:P\x92AM\n" +
+	"\tcondition\x18\x01 \x01(\v26.com.coralogixapis.alerts.v3.TracingThresholdConditionB+\x9aA(2&The condition for the threshold alert.R\tcondition:P\x9aAM\n" +
 	"K*\x14Trace Threshold Rule2'A rule for trace-based threshold alerts\xd2\x01\tcondition\"\xbf\x04\n" +
 	"\x19TracingThresholdCondition\x12}\n" +
-	"\vspan_amount\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB>\x92A;2+The threshold value for the alert conditionJ\x03100\x8a\x01\x06^\\d+?$R\n" +
+	"\vspan_amount\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB>\x9aA;2+The threshold value for the alert conditionJ\x03100\x8a\x01\x06^\\d+?$R\n" +
 	"spanAmount\x12}\n" +
-	"\vtime_window\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingTimeWindowB,\x92A)2'The time window for the alert conditionR\n" +
+	"\vtime_window\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.TracingTimeWindowB,\x9aA)2'The time window for the alert conditionR\n" +
 	"timeWindow\x12\xc8\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e2:.com.coralogixapis.alerts.v3.TracingThresholdConditionTypeBe\x92Ab2#The type of condition for the alertJ;\"TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:Y\x92AV\n" +
+	"\x0econdition_type\x18\x03 \x01(\x0e2:.com.coralogixapis.alerts.v3.TracingThresholdConditionTypeBe\x9aAb2#The type of condition for the alertJ;\"TRACING_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:Y\x9aAV\n" +
 	"T*%Trace-based alert threshold condition\xd2\x01\vspan_amount\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (

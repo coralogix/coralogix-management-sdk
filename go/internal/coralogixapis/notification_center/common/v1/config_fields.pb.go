@@ -7,7 +7,7 @@
 package notification_center
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -286,7 +286,7 @@ var File_com_coralogixapis_notification_center_common_v1_config_fields_proto pro
 
 const file_com_coralogixapis_notification_center_common_v1_config_fields_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/notification_center/common/v1/config_fields.proto\x12%com.coralogixapis.notification_center\x1a.protoc-gen-openapiv2/options/annotations.proto\"K\n" +
+	"Ccom/coralogixapis/notification_center/common/v1/config_fields.proto\x12%com.coralogixapis.notification_center\x1a.protoc-gen-openapiv3/options/annotations.proto\"K\n" +
 	"\x14ConnectorConfigField\x12\x1d\n" +
 	"\n" +
 	"field_name\x18\x01 \x01(\tR\tfieldName\x12\x14\n" +
@@ -297,8 +297,8 @@ const file_com_coralogixapis_notification_center_common_v1_config_fields_proto_r
 	"\btemplate\x18\x02 \x01(\tR\btemplate\"\xc3\x03\n" +
 	"\x12MessageConfigField\x12+\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\tB\f\x92A\tJ\a\"title\"R\tfieldName\x12]\n" +
-	"\btemplate\x18\x02 \x01(\tBA\x92A>J<\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"R\btemplate:\xa0\x02\x92A\x9c\x02\n" +
+	"field_name\x18\x01 \x01(\tB\f\x9aA\tJ\a\"title\"R\tfieldName\x12]\n" +
+	"\btemplate\x18\x02 \x01(\tBA\x9aA>J<\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"R\btemplate:\xa0\x02\x9aA\x9c\x02\n" +
 	"\x9c\x01*\x14Message Config Field2lMessage config field provides a way to define a template that can be used to render the notification content\xd2\x01\n" +
 	"field_name\xd2\x01\btemplate*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"S\n" +

@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -215,25 +215,25 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_thresho
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_threshold_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1aWcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe6\b\n" +
+	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1aWcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\x1aEcom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe6\b\n" +
 	"\x11LogsThresholdType\x12\x83\x01\n" +
-	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB9\x92A624The filter to match log entries for threshold alertsR\n" +
+	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB9\x9aA624The filter to match log entries for threshold alertsR\n" +
 	"logsFilter\x12\xbd\x01\n" +
-	"\x1cundetected_values_management\x18\x02 \x01(\v27.com.coralogixapis.alerts.v3.UndetectedValuesManagementBB\x92A?2=Configuration for handling the undetected values in the alertR\x1aundetectedValuesManagement\x12r\n" +
-	"\x05rules\x18\x03 \x03(\v2..com.coralogixapis.alerts.v3.LogsThresholdRuleB,\x92A)2!The rules for the threshold alert\xa0\x01\x05\xa8\x01\x01R\x05rules\x12\xce\x01\n" +
-	"\x1bnotification_payload_filter\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueBp\x92Am2IThe filter to specify which fields to include in the notification payloadJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\x98\x01\n" +
-	"\x13evaluation_delay_ms\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueBK\x92AH2?The delay in milliseconds before evaluating the alert conditionJ\x0560000R\x11evaluationDelayMs:\xaa\x02\x92A\xa6\x02\n" +
+	"\x1cundetected_values_management\x18\x02 \x01(\v27.com.coralogixapis.alerts.v3.UndetectedValuesManagementBB\x9aA?2=Configuration for handling the undetected values in the alertR\x1aundetectedValuesManagement\x12r\n" +
+	"\x05rules\x18\x03 \x03(\v2..com.coralogixapis.alerts.v3.LogsThresholdRuleB,\x9aA)2!The rules for the threshold alert\xa0\x01\x05\xa8\x01\x01R\x05rules\x12\xce\x01\n" +
+	"\x1bnotification_payload_filter\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueBp\x9aAm2IThe filter to specify which fields to include in the notification payloadJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\x98\x01\n" +
+	"\x13evaluation_delay_ms\x18\x05 \x01(\v2\x1b.google.protobuf.Int32ValueBK\x9aAH2?The delay in milliseconds before evaluating the alert conditionJ\x0560000R\x11evaluationDelayMs:\xaa\x02\x9aA\xa6\x02\n" +
 	"\x86\x01*\x1eLog-based threshold alert type2\\Configuration for alerts triggered when log counts exceed or fall below specified thresholds\xd2\x01\x05rules*\x9a\x01\n" +
 	"@Learn more about log-based threshold alerts in our documentation\x12Vhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/threshold-alerts/\"\x91\x03\n" +
 	"\x11LogsThresholdRule\x12}\n" +
-	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.LogsThresholdConditionB*\x92A'2%The condition for the threshold alertR\tcondition\x12s\n" +
-	"\boverride\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.AlertDefOverrideB(\x92A%2#The override settings for the alertR\boverride:\x87\x01\x92A\x83\x01\n" +
+	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.LogsThresholdConditionB*\x9aA'2%The condition for the threshold alertR\tcondition\x12s\n" +
+	"\boverride\x18\x02 \x01(\v2-.com.coralogixapis.alerts.v3.AlertDefOverrideB(\x9aA%2#The override settings for the alertR\boverride:\x87\x01\x9aA\x83\x01\n" +
 	"\x80\x01*\x13Logs Threshold Rule2RLogsThresholdRule is a message that defines a rule for log-based threshold alerts.\xd2\x01\tcondition\xd2\x01\boverride\"\x8e\x05\n" +
 	"\x16LogsThresholdCondition\x12\x83\x01\n" +
-	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueBG\x92AD2+The threshold value for the alert conditionJ\x05100.0\x8a\x01\r^\\d+(\\.\\d+)?$R\tthreshold\x12z\n" +
-	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x92A)2'The time window for the alert conditionR\n" +
+	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueBG\x9aAD2+The threshold value for the alert conditionJ\x05100.0\x8a\x01\r^\\d+(\\.\\d+)?$R\tthreshold\x12z\n" +
+	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x9aA)2'The time window for the alert conditionR\n" +
 	"timeWindow\x12\xc2\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e27.com.coralogixapis.alerts.v3.LogsThresholdConditionTypeBb\x92A_2#The type of condition for the alertJ8\"LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\xac\x01\x92A\xa8\x01\n" +
+	"\x0econdition_type\x18\x03 \x01(\x0e27.com.coralogixapis.alerts.v3.LogsThresholdConditionTypeBb\x9aA_2#The type of condition for the alertJ8\"LOGS_THRESHOLD_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\xac\x01\x9aA\xa8\x01\n" +
 	"\xa5\x01*\x18Logs Threshold Condition2^LogsThresholdCondition is a message that defines the condition for log-based threshold alerts.\xd2\x01\tthreshold\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (

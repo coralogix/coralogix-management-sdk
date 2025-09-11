@@ -3,12 +3,12 @@ syntax = "proto3";
 package com.coralogixapis.incidents.v1;
 
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message MetaLabel {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Incident meta label"}
   };
-  google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"key\""}];
-  google.protobuf.StringValue value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"value\""}];
+  google.protobuf.StringValue key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"key\""}];
+  google.protobuf.StringValue value = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"value\""}];
 }

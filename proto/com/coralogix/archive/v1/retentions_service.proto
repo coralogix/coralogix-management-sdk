@@ -4,10 +4,10 @@ package com.coralogix.archive.v1;
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/archive/v1/retention.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 message GetRetentionsRequest {
@@ -30,7 +30,7 @@ message RetentionUpdateElement {
 }
 
 message UpdateRetentionsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update Retentions Request"
       description: "This data structure is used to update retentions"
@@ -47,7 +47,7 @@ message UpdateRetentionsRequest {
 }
 
 message UpdateRetentionsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update Retentions Response"
       description: "This data structure is obtained after updating retentions"
@@ -67,7 +67,7 @@ message ActivateRetentionsRequest {
 }
 
 message ActivateRetentionsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Activate Retentions Response"
       description: "This data structure is obtained after setting the active status of retentions"
@@ -80,14 +80,14 @@ message ActivateRetentionsResponse {
       description: "Find out more about archives"
     }
   };
-  google.protobuf.BoolValue activate_retentions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  google.protobuf.BoolValue activate_retentions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message GetRetentionsEnabledRequest {
 }
 
 message GetRetentionsEnabledResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Retentions Enabled Response"
       description: "This data structure is obtained when retrieving the active status of retentions"
@@ -104,7 +104,7 @@ message GetRetentionsEnabledResponse {
 }
 
 service RetentionsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Retensions Service"
     description: "View and manage retentions"
   };
@@ -112,8 +112,8 @@ service RetentionsService {
     option (google.api.http) = {
       get: "/v1/retentions"
     };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get retentions";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get retentions";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -135,9 +135,9 @@ service RetentionsService {
       post: "/v1/retentions"
       body: "*"
     };
-    option (com.coralogix.common.v1.audit_log_description).description = "Update retention names";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update retention names";
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -160,8 +160,8 @@ service RetentionsService {
       post: "/v1/retentions:activate"
       body: "*"
     };
-    option (com.coralogix.common.v1.audit_log_description).description = "Activate retention tags";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Activate retention tags";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -183,8 +183,8 @@ service RetentionsService {
     option (google.api.http) = {
       get: "/v1/retentions/enabled"
     };
-    option (com.coralogix.common.v1.audit_log_description).description = "Get retention tags enabled status";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get retention tags enabled status";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
