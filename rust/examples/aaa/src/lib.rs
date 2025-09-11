@@ -23,10 +23,15 @@ mod tests {
                 Owner,
             },
             groups::{
+                GroupType,
                 GroupsClient,
                 RoleId,
                 TeamId,
-                GroupType,
+            },
+            ip_access::{
+                CoralogixCustomerSupportAccess,
+                IpAccess,
+                IpAccessClient,
             },
             saml::{
                 IdpParameters,
@@ -44,11 +49,6 @@ mod tests {
                 ScimUserGroup,
                 ScimUserName,
                 UsersClient,
-            },
-            ip_access::{
-                CoralogixCustomerSupportAccess,
-                IpAccess,
-                IpAccessClient,
             },
         },
     };
@@ -103,7 +103,7 @@ mod tests {
             AuthContext::from_env(),
             CoralogixRegion::from_env().unwrap(),
         )
-            .unwrap();
+        .unwrap();
 
         // replace without ID, so it will create a new settings in case it doesn't exist
         // if it exists, it will replace the existing settings

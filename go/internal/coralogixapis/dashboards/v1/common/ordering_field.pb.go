@@ -7,7 +7,7 @@
 package common
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -79,10 +79,10 @@ var File_com_coralogixapis_dashboards_v1_common_ordering_field_proto protoreflec
 
 const file_com_coralogixapis_dashboards_v1_common_ordering_field_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/dashboards/v1/common/ordering_field.proto\x12&com.coralogixapis.dashboards.v1.common\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa7\x02\n" +
+	";com/coralogixapis/dashboards/v1/common/ordering_field.proto\x12&com.coralogixapis.dashboards.v1.common\x1a<com/coralogixapis/dashboards/v1/common/order_direction.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa7\x02\n" +
 	"\rOrderingField\x12\x81\x01\n" +
-	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBM\x92AJ2\x16Field name to order byJ0{ \"value\":\"coralogix.metadata.applicationName\" }R\x05field\x12\x91\x01\n" +
-	"\x0forder_direction\x18\x02 \x01(\x0e26.com.coralogixapis.dashboards.v1.common.OrderDirectionB0\x92A-2(Order direction, ascending or descendingJ\x011R\x0eorderDirectionb\x06proto3"
+	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBM\x9aAJ2\x16Field name to order byJ0{ \"value\":\"coralogix.metadata.applicationName\" }R\x05field\x12\x91\x01\n" +
+	"\x0forder_direction\x18\x02 \x01(\x0e26.com.coralogixapis.dashboards.v1.common.OrderDirectionB0\x9aA-2(Order direction, ascending or descendingJ\x011R\x0eorderDirectionb\x06proto3"
 
 var (
 	file_com_coralogixapis_dashboards_v1_common_ordering_field_proto_rawDescOnce sync.Once

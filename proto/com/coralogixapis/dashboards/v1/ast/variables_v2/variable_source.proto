@@ -6,6 +6,7 @@ import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
 import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
+import "com/coralogixapis/dashboards/v1/common/data_mode_type.proto";
 import "google/protobuf/wrappers.proto";
 
 message VariableSourceV2 {
@@ -161,6 +162,7 @@ message VariableSourceV2 {
 
         message QueryText {
           common.DataprimeQuery query = 1;        
+          common.DataModeType data_mode_type = 2;
         }
       }
     }

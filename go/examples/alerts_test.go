@@ -295,7 +295,7 @@ func TestAlerts(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewAlertsClient(creator)
 
 	createdAlertDef, err := c.Create(context.Background(), &cxsdk.CreateAlertDefRequest{
@@ -343,7 +343,7 @@ func TestBurnRateSloAlerts(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	alertsClient := cxsdk.NewAlertsClient(creator)
 	slosClient := cxsdk.NewSLOsClient(creator)
 	sloDescription := "description"
@@ -419,7 +419,7 @@ func TestAlertGetsDeletedOnSloDeletion(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	alertsClient := cxsdk.NewAlertsClient(creator)
 	slosClient := cxsdk.NewSLOsClient(creator)
 	sloDescription := "description"
@@ -495,7 +495,7 @@ func TestAlertScheduler(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	a := cxsdk.NewAlertSchedulerClient(creator)
 	c := cxsdk.NewAlertsClient(creator)
 

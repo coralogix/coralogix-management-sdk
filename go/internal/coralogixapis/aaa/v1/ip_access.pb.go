@@ -641,7 +641,7 @@ const file_com_coralogixapis_aaa_v1_ip_access_proto_rawDesc = "" +
 	"\x1eCoralogixCustomerSupportAccess\x121\n" +
 	"-CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\x10\x00\x12.\n" +
 	"*CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED\x10\x01\x12-\n" +
-	")CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\x10\x022\xed\v\n" +
+	")CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\x10\x022\xde\v\n" +
 	"\x0fIpAccessService\x12\xdb\x02\n" +
 	"\x1dCreateCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsResponse\"\xb8\x01\x92A\x8b\x01\n" +
 	"\x11IP Access Service\x12!Create Company IP Access SettingsJ\x14\n" +
@@ -650,31 +650,31 @@ const file_com_coralogixapis_aaa_v1_ip_access_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/company/settings/ip-access\x12\xe4\x02\n" +
-	"\x1eReplaceCompanyIpAccessSettings\x12?.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsRequest\x1a@.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsResponse\"\xbe\x01\x92A\x8c\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/company/settings/ip-access\x12\xdf\x02\n" +
+	"\x1eReplaceCompanyIpAccessSettings\x12?.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsRequest\x1a@.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsResponse\"\xb9\x01\x92A\x8c\x01\n" +
 	"\x11IP Access Service\x12\"Replace Company IP Access SettingsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02(:\x01*\x1a#/v1/company/settings/ip-access/{id}\x12\xd1\x02\n" +
-	"\x1aGetCompanyIpAccessSettings\x12;.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsRequest\x1a<.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsResponse\"\xb7\x01\x92A\x88\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/v1/company/settings/ip-access\x12\xcc\x02\n" +
+	"\x1aGetCompanyIpAccessSettings\x12;.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsRequest\x1a<.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsResponse\"\xb2\x01\x92A\x88\x01\n" +
 	"\x11IP Access Service\x12\x1eGet Company IP Access SettingsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02%\x12#/v1/company/settings/ip-access/{id}\x12\xdd\x02\n" +
-	"\x1dDeleteCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsResponse\"\xba\x01\x92A\x8b\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02 \x12\x1e/v1/company/settings/ip-access\x12\xd8\x02\n" +
+	"\x1dDeleteCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsResponse\"\xb5\x01\x92A\x8b\x01\n" +
 	"\x11IP Access Service\x12!Delete Company IP Access SettingsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02%*#/v1/company/settings/ip-access/{id}\x1aa\x92A^\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02 *\x1e/v1/company/settings/ip-access\x1aa\x92A^\n" +
 	"\x11IP Access Service\x12IIpAccessService provides the API for managing company IP access settings.b\x06proto3"
 
 var (

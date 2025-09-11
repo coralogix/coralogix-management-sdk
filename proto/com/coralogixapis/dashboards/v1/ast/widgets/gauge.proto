@@ -14,46 +14,46 @@ import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Gauge {
-  Query query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A query object containing query definition"}];
-  google.protobuf.DoubleValue min = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  Query query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object containing query definition"}];
+  google.protobuf.DoubleValue min = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "A minimum gauge value used in percentage threshold calculation and for visual value representation"
     example: "0"
   }];
-  google.protobuf.DoubleValue max = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.DoubleValue max = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "A maximum gauge value used in percentage threshold calculation and for visual value representation"
     example: "150000"
   }];
-  google.protobuf.BoolValue show_inner_arc = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue show_inner_arc = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Whether to show the inner arc of gauge which graphically represents the value"
     example: "false"
   }];
-  google.protobuf.BoolValue show_outer_arc = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue show_outer_arc = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Whether to show the outer arc of gauge which graphically represents the min/max range"
     example: "true"
   }];
-  Unit unit = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  Unit unit = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Unit of the value - one from a predefined list, or 'custom'"
     example: "3"
   }];
-  repeated Threshold thresholds = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of value thresholds, each with a certain color and an optional name label"}];
-  common.DataModeType data_mode_type = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type, either high or archive"}];
-  ThresholdBy threshold_by = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Indicates which widget element should be colorized as the threshold, either the value or the background"}];
-  google.protobuf.StringValue custom_unit = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated Threshold thresholds = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of value thresholds, each with a certain color and an optional name label"}];
+  common.DataModeType data_mode_type = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type, either high or archive"}];
+  ThresholdBy threshold_by = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates which widget element should be colorized as the threshold, either the value or the background"}];
+  google.protobuf.StringValue custom_unit = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Custom unit (requires to have unit field set as 'custom' to take effect)"
     example: '{ "value": "kvs" }'
   }];
-  google.protobuf.Int32Value decimal = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Int32Value decimal = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Number indicating the decimal precision of the numeric values, within range 0-15"
     example: "3"
   }];
-  common.ThresholdType threshold_type = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Type of the threshold, relative or absolute"}];
-  common.Legend legend = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Widget's legend settings"}];
-  common.LegendBy legend_by = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups"}];
-  google.protobuf.BoolValue display_series_name = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "(multigauge display only) Whether to show the series names above the value"}];
-  google.protobuf.BoolValue decimal_precision = 16 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  common.ThresholdType threshold_type = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the threshold, relative or absolute"}];
+  common.Legend legend = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+  common.LegendBy legend_by = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "(multigauge display only) Indicates how to group the legend elements, either by thresholds or by standard groups"}];
+  google.protobuf.BoolValue display_series_name = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "(multigauge display only) Whether to show the series names above the value"}];
+  google.protobuf.BoolValue decimal_precision = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Whether to render numeric value without abbreviation"
     example: "false"
   }];
@@ -68,7 +68,7 @@ message Gauge {
   }
 
   message MetricsQuery {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "MetricsQuery"
         description: "A metrics variant of the query"
@@ -76,22 +76,22 @@ message Gauge {
       }
     };
 
-    v1.common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    v1.common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "PromQL query string for querying metrics"
       example: '{ "value": "up{job=\'abc\'}" }'
     }];
-    Aggregation aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Aggregation function"}];
-    repeated v1.ast.filters.Filter.MetricsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of metrics filters"}];
-    common.MetricsQueryEditorMode editor_mode = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    Aggregation aggregation = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Aggregation function"}];
+    repeated v1.ast.filters.Filter.MetricsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of metrics filters"}];
+    common.MetricsQueryEditorMode editor_mode = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "Type of the query editor used to generate the query, can be text or builder based"
       example: "2"
     }];
-    v1.common.TimeFrameSelect time_frame = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the result should be returned"}];
-    v1.common.PromQLQueryType promql_query_type = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
+    v1.common.TimeFrameSelect time_frame = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies the time period for which the result should be returned"}];
+    v1.common.PromQLQueryType promql_query_type = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
   }
 
   message LogsQuery {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "LogsQuery"
         description: "A logs variant of the query"
@@ -99,19 +99,19 @@ message Gauge {
       }
     };
 
-    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "A Lucene query string to search logs"
       example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
     }];
-    v1.common.LogsAggregation logs_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Aggregation function"}];
+    v1.common.LogsAggregation logs_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Aggregation function"}];
     Aggregation aggregation = 3 [deprecated = true];
-    repeated v1.ast.filters.Filter.LogsFilter filters = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of filters that narrow down query results"}];
-    repeated v1.common.ObservationField group_by = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields by which to group the results"}];
-    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the result should be returned"}];
+    repeated v1.ast.filters.Filter.LogsFilter filters = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of filters that narrow down query results"}];
+    repeated v1.common.ObservationField group_by = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of observation fields by which to group the results"}];
+    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies the time period for which the result should be returned"}];
   }
 
   message SpansQuery {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "SpansQuery"
         description: "A spans variant of the query"
@@ -119,39 +119,39 @@ message Gauge {
       }
     };
 
-    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Lucene query string to search span records"}];
-    v1.common.SpansAggregation spans_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
+    v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Lucene query string to search span records"}];
+    v1.common.SpansAggregation spans_aggregation = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Span query aggregation function"}];
     Aggregation aggregation = 3 [deprecated = true];
-    repeated v1.ast.filters.Filter.SpansFilter filters = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
-    repeated v1.common.SpanField group_by = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of field names to group the span records"}];
-    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
-    repeated v1.common.SpanObservationField group_bys = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields to group the records by"}];
+    repeated v1.ast.filters.Filter.SpansFilter filters = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of span query filters"}];
+    repeated v1.common.SpanField group_by = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of field names to group the span records"}];
+    v1.common.TimeFrameSelect time_frame = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies the time period for which the records should be returned"}];
+    repeated v1.common.SpanObservationField group_bys = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of observation fields to group the records by"}];
   }
 
   message DataprimeQuery {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "DataprimeQuery"
         description: "A Dataprime variant of the query"
         required: []
       }
     };
-    v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Dataprime query text"}];
-    repeated v1.ast.filters.Filter.Source filters = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of query filters"}];
-    v1.common.TimeFrameSelect time_frame = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Specifies the time period for which the records should be returned"}];
+    v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Dataprime query text"}];
+    repeated v1.ast.filters.Filter.Source filters = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of query filters"}];
+    v1.common.TimeFrameSelect time_frame = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies the time period for which the records should be returned"}];
   }
 
   message Threshold {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Threshold"
         description: "Definition of a single gauge threshold"
         required: []
       }
     };
-    google.protobuf.DoubleValue from = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Minimum bound value of the threshold"}];
-    google.protobuf.StringValue color = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Color of the threshold"}];
-    google.protobuf.StringValue label = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Optional label of the threshold"}];
+    google.protobuf.DoubleValue from = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Minimum bound value of the threshold"}];
+    google.protobuf.StringValue color = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Color of the threshold"}];
+    google.protobuf.StringValue label = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Optional label of the threshold"}];
   }
 
   enum Aggregation {

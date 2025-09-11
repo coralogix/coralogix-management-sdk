@@ -7,7 +7,7 @@
 package common
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -260,13 +260,13 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto protore
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto_rawDesc = "" +
 	"\n" +
-	"?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa8\a\n" +
+	"?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa8\a\n" +
 	"\x06Legend\x12c\n" +
 	"\n" +
-	"is_visible\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueB(\x92A%2#Is the legend visible in the widgetR\tisVisible\x12\x97\x01\n" +
-	"\acolumns\x18\x02 \x03(\x0e2G.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendColumnB4\x92A12$List of columns to display in legendJ\t[1, 2, 6]R\acolumns\x12\xa6\x01\n" +
-	"\x0egroup_by_query\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBd\x92Aa2_In case of multiple queries, whether legend items should be grouped by their respective queriesR\fgroupByQuery\x12\x93\x01\n" +
-	"\tplacement\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendPlacementB)\x92A&2$Location of the legend in the widgetR\tplacement\"\xb9\x01\n" +
+	"is_visible\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueB(\x9aA%2#Is the legend visible in the widgetR\tisVisible\x12\x97\x01\n" +
+	"\acolumns\x18\x02 \x03(\x0e2G.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendColumnB4\x9aA12$List of columns to display in legendJ\t[1, 2, 6]R\acolumns\x12\xa6\x01\n" +
+	"\x0egroup_by_query\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBd\x9aAa2_In case of multiple queries, whether legend items should be grouped by their respective queriesR\fgroupByQuery\x12\x93\x01\n" +
+	"\tplacement\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendPlacementB)\x9aA&2$Location of the legend in the widgetR\tplacement\"\xb9\x01\n" +
 	"\fLegendColumn\x12\x1d\n" +
 	"\x19LEGEND_COLUMN_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11LEGEND_COLUMN_MIN\x10\x01\x12\x15\n" +

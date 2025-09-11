@@ -8,10 +8,10 @@ import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service DashboardsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Dashboard service"
     description: "Manage your dashboards."
   };
@@ -22,7 +22,7 @@ service DashboardsService {
       post: "/v1/dashboards/dashboards"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -54,7 +54,7 @@ service DashboardsService {
       put: "/v1/dashboards/dashboards"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -83,7 +83,7 @@ service DashboardsService {
   rpc DeleteDashboard(DeleteDashboardRequest) returns (DeleteDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete dashboard";
     option (google.api.http) = {delete: "/v1/dashboards/dashboards/{dashboard_id}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -112,7 +112,7 @@ service DashboardsService {
   rpc GetDashboard(GetDashboardRequest) returns (GetDashboardResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard";
     option (google.api.http) = {get: "/v1/dashboards/dashboards/{dashboard_id}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -141,7 +141,7 @@ service DashboardsService {
   rpc GetDashboardBySlug(GetDashboardBySlugRequest) returns (GetDashboardBySlugResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard by URL slug";
     option (google.api.http) = {get: "/v1/dashboards/by-slug/{slug}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -173,7 +173,7 @@ service DashboardsService {
       patch: "/v1/dashboards/dashboards/{dashboard_id}:pin"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -205,7 +205,7 @@ service DashboardsService {
       patch: "/v1/dashboards/dashboards/{dashboard_id}:unpin"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -237,7 +237,7 @@ service DashboardsService {
       put: "/v1/dashboards/dashboards/{dashboard_id}/default"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -269,7 +269,7 @@ service DashboardsService {
       post: "/v1/dashboards/dashboards/{dashboard_id}/folder"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -297,7 +297,7 @@ service DashboardsService {
 }
 
 message CreateDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create dashboard request data structure"
       description: "This is a request used to create a new custom dashboard"
@@ -318,7 +318,7 @@ message CreateDashboardRequest {
 }
 
 message CreateDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create dashboard response data structure"
       description: "This is a response received when a custom dashboard is successfully created"
@@ -333,7 +333,7 @@ message CreateDashboardResponse {
 }
 
 message ReplaceDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace dashboard request data structure"
       description: "This is a request sent to update an existing dashboard with new information"
@@ -354,7 +354,7 @@ message ReplaceDashboardRequest {
 }
 
 message ReplaceDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace dashboard response data structure"
       description: "This is a response received when the dashboard is successfully updated"
@@ -367,7 +367,7 @@ message ReplaceDashboardResponse {
 }
 
 message DeleteDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete dashboard request data structure"
       description: "This is a request used to delete a custom dashboard"
@@ -387,7 +387,7 @@ message DeleteDashboardRequest {
 }
 
 message DeleteDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete dashboard response data structure"
       description: "This is a response received when the dashboard is successfully deleted"
@@ -400,7 +400,7 @@ message DeleteDashboardResponse {
 }
 
 message GetDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get dashboard request data structure"
       description: "This is a request to get a specific custom dashboard"
@@ -416,7 +416,7 @@ message GetDashboardRequest {
 }
 
 message GetDashboardBySlugRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get dashboard by URL slug request data structure"
       description: "This is a request to get a specific custom dashboard by its URL slug"
@@ -432,7 +432,7 @@ message GetDashboardBySlugRequest {
 }
 
 message GetDashboardBySlugResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get dashboard by URL slug response data structure"
       description: "This is a response containing the requested dashboard"
@@ -468,7 +468,7 @@ enum TokenOriginType {
 }
 
 message GetDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get dashboard response data structure"
       description: "This is a response containing the requested dashboard"
@@ -498,7 +498,7 @@ message GetDashboardResponse {
 }
 
 message PinDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Pin dashboard request data structure"
       description: "This is a request used to mark certain dashboard as pinned"
@@ -518,7 +518,7 @@ message PinDashboardRequest {
 }
 
 message PinDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Pin dashboard response data structure"
       description: "This is a response received on successful pinning of the dashboard"
@@ -531,7 +531,7 @@ message PinDashboardResponse {
 }
 
 message UnpinDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Unpin dashboard request data structure"
       description: "This is a request used to unpin a certain dashboard"
@@ -551,7 +551,7 @@ message UnpinDashboardRequest {
 }
 
 message UnpinDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Unpin dashboard response data structure"
       description: "This is a response received when dashboard has been unpinned"
@@ -564,7 +564,7 @@ message UnpinDashboardResponse {
 }
 
 message ReplaceDefaultDashboardRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace default dashboard request data structure"
       description: "This is a request to replace a default dashboard"
@@ -584,7 +584,7 @@ message ReplaceDefaultDashboardRequest {
 }
 
 message ReplaceDefaultDashboardResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace default dashboard response data structure"
       description: "This is a response received when default dashboard has been replaced"
@@ -597,7 +597,7 @@ message ReplaceDefaultDashboardResponse {
 }
 
 message AssignDashboardFolderRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Assign dashboard to folder request data structure"
       description: "This is a request for assigning a folder to a dashboard"
@@ -618,7 +618,7 @@ message AssignDashboardFolderRequest {
 }
 
 message AssignDashboardFolderResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Assign dashboard to folder response data structure"
       description: "This is a response confirming that folder has been successfully assigned to a dashboard"

@@ -31,7 +31,7 @@ func TestActions(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewActionsClient(creator)
 
 	action, e := c.Create(context.Background(), &cxsdk.CreateActionRequest{

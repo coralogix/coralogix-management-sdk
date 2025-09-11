@@ -726,7 +726,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02\x11\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x11\n" +
 	"\x0fget alert event\x82\xd3\xe4\x93\x02\x16\x12\x14/v3/alert-event/{id}\x12\x81\x03\n" +
 	"\x13GetAlertEventsStats\x126.com.coralogixapis.alerts.v3.GetAlertEventStatsRequest\x1a7.com.coralogixapis.alerts.v3.GetAlertEventStatsResponse\"\xf8\x01\x92A\xbb\x01\n" +
 	"\x14Alert events service\x12\x1bGet alert events statisticsJ\x14\n" +
@@ -737,7 +737,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02\x18\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x18\n" +
 	"\x16get alert events stats\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/alert-event-stats\x1a\xef\x01\x92A\xeb\x01\n" +
 	"\x14Alert events service\x12RGet information regarding your alert events - instances of alerts being triggered.\x1a\x7f\n" +
 	"ALearn more about alert events and incidents in our documentation.\x12:https://coralogix.com/docs/user-guides/alerting/incidents/b\x06proto3"

@@ -7,10 +7,10 @@ import "com/coralogixapis/dashboards/v1/common/folder.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service DashboardFoldersService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Dashboard folders service"
     description: "Manage your dashboard folders."
   };
@@ -18,7 +18,7 @@ service DashboardFoldersService {
   rpc ListDashboardFolders(ListDashboardFoldersRequest) returns (ListDashboardFoldersResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List dashboard folders";
     option (google.api.http) = {get: "/v1/dashboards/folders"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -48,7 +48,7 @@ service DashboardFoldersService {
   rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard folder";
     option (google.api.http) = {get: "/v1/dashboards/folders/{folder_id}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -81,7 +81,7 @@ service DashboardFoldersService {
       post: "/v1/dashboards/folders"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -113,7 +113,7 @@ service DashboardFoldersService {
       put: "/v1/dashboards/folders"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -142,7 +142,7 @@ service DashboardFoldersService {
   rpc DeleteDashboardFolder(DeleteDashboardFolderRequest) returns (DeleteDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete dashboard folder";
     option (google.api.http) = {delete: "/v1/dashboards/folders/{folder_id}"};
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -170,7 +170,7 @@ service DashboardFoldersService {
 }
 
 message CreateDashboardFolderRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Create dashboard folder request data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -183,7 +183,7 @@ message CreateDashboardFolderRequest {
 }
 
 message CreateDashboardFolderResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Create dashboard folder response data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -195,7 +195,7 @@ message CreateDashboardFolderResponse {
 }
 
 message ReplaceDashboardFolderRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Replace dashboard folder request data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -208,7 +208,7 @@ message ReplaceDashboardFolderRequest {
 }
 
 message ReplaceDashboardFolderResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Replace dashboard folder response data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -218,7 +218,7 @@ message ReplaceDashboardFolderResponse {
 }
 
 message DeleteDashboardFolderRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Delete dashboard folder request data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -231,7 +231,7 @@ message DeleteDashboardFolderRequest {
 }
 
 message DeleteDashboardFolderResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Delete dashboard folder response data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -241,7 +241,7 @@ message DeleteDashboardFolderResponse {
 }
 
 message ListDashboardFoldersRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "List dashboard folders request data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -251,7 +251,7 @@ message ListDashboardFoldersRequest {
 }
 
 message ListDashboardFoldersResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "List dashboard folders response data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -263,7 +263,7 @@ message ListDashboardFoldersResponse {
 }
 
 message GetDashboardFolderRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Get dashboard folder request data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"
@@ -276,7 +276,7 @@ message GetDashboardFolderRequest {
 }
 
 message GetDashboardFolderResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {title: "Get dashboard folder response data structure"}
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/"

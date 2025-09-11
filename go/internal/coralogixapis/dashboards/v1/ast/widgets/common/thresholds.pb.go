@@ -7,7 +7,7 @@
 package common
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -185,11 +185,11 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_common_thresholds_proto pro
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_common_thresholds_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd\x02\n" +
+	"Ccom/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcd\x02\n" +
 	"\tThreshold\x12[\n" +
-	"\x04from\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB)\x92A&2$Minimum bound value of the thresholdR\x04from\x12O\n" +
-	"\x05color\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x182\x16Color of the thresholdR\x05color\x12X\n" +
-	"\x05label\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x92A!2\x1fOptional label of the thresholdR\x05label:8\x92A5\n" +
+	"\x04from\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB)\x9aA&2$Minimum bound value of the thresholdR\x04from\x12O\n" +
+	"\x05color\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x182\x16Color of the thresholdR\x05color\x12X\n" +
+	"\x05label\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB$\x9aA!2\x1fOptional label of the thresholdR\x05label:8\x9aA5\n" +
 	"3*\tThreshold2&Definition of a single gauge threshold*i\n" +
 	"\rThresholdType\x12\x1e\n" +
 	"\x1aTHRESHOLD_TYPE_UNSPECIFIED\x10\x00\x12\x1b\n" +

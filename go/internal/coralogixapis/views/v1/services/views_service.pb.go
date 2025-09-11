@@ -35,6 +35,7 @@ type CreateViewRequest struct {
 	// View selected filters
 	Filters       *v1.SelectedFilters     `protobuf:"bytes,4,opt,name=filters,proto3" json:"filters,omitempty"`
 	FolderId      *wrapperspb.StringValue `protobuf:"bytes,5,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
+	ViewType      v1.ViewType             `protobuf:"varint,6,opt,name=view_type,json=viewType,proto3,enum=com.coralogixapis.views.v1.ViewType" json:"view_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -102,6 +103,13 @@ func (x *CreateViewRequest) GetFolderId() *wrapperspb.StringValue {
 		return x.FolderId
 	}
 	return nil
+}
+
+func (x *CreateViewRequest) GetViewType() v1.ViewType {
+	if x != nil {
+		return x.ViewType
+	}
+	return v1.ViewType(0)
 }
 
 type CreateViewResponse struct {
@@ -504,6 +512,7 @@ type View struct {
 	Filters       *v1.SelectedFilters     `protobuf:"bytes,5,opt,name=filters,proto3" json:"filters,omitempty"`
 	FolderId      *wrapperspb.StringValue `protobuf:"bytes,6,opt,name=folder_id,json=folderId,proto3" json:"folder_id,omitempty"`
 	IsCompactMode *wrapperspb.BoolValue   `protobuf:"bytes,7,opt,name=is_compact_mode,json=isCompactMode,proto3" json:"is_compact_mode,omitempty"`
+	ViewType      v1.ViewType             `protobuf:"varint,8,opt,name=view_type,json=viewType,proto3,enum=com.coralogixapis.views.v1.ViewType" json:"view_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -587,17 +596,25 @@ func (x *View) GetIsCompactMode() *wrapperspb.BoolValue {
 	return nil
 }
 
+func (x *View) GetViewType() v1.ViewType {
+	if x != nil {
+		return x.ViewType
+	}
+	return v1.ViewType(0)
+}
+
 var File_com_coralogixapis_views_v1_services_views_service_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_views_v1_services_views_service_proto_rawDesc = "" +
 	"\n" +
-	"7com/coralogixapis/views/v1/services/views_service.proto\x12#com.coralogixapis.views.v1.services\x1a(com/coralogixapis/views/v1/filters.proto\x1a-com/coralogixapis/views/v1/search_query.proto\x1a/com/coralogixapis/views/v1/time_selection.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xda\x04\n" +
+	"7com/coralogixapis/views/v1/services/views_service.proto\x12#com.coralogixapis.views.v1.services\x1a(com/coralogixapis/views/v1/filters.proto\x1a-com/coralogixapis/views/v1/search_query.proto\x1a/com/coralogixapis/views/v1/time_selection.proto\x1a*com/coralogixapis/views/v1/view_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x9d\x05\n" +
 	"\x11CreateViewRequest\x12P\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
 	"\fsearch_query\x18\x02 \x01(\v2'.com.coralogixapis.views.v1.SearchQueryR\vsearchQuery\x12P\n" +
 	"\x0etime_selection\x18\x03 \x01(\v2).com.coralogixapis.views.v1.TimeSelectionR\rtimeSelection\x12E\n" +
 	"\afilters\x18\x04 \x01(\v2+.com.coralogixapis.views.v1.SelectedFiltersR\afilters\x12\xd4\x01\n" +
-	"\tfolder_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId:7\x92A4\n" +
+	"\tfolder_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12A\n" +
+	"\tview_type\x18\x06 \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:7\x92A4\n" +
 	"2*\n" +
 	"ViewFolder2\fView folder.\xd2\x01\x04name\xd2\x01\x0etime_selection\"S\n" +
 	"\x12CreateViewResponse\x12=\n" +
@@ -615,7 +632,7 @@ const file_com_coralogixapis_views_v1_services_views_service_proto_rawDesc = "" 
 	"\x12DeleteViewResponse\"\x12\n" +
 	"\x10ListViewsRequest\"T\n" +
 	"\x11ListViewsResponse\x12?\n" +
-	"\x05views\x18\x01 \x03(\v2).com.coralogixapis.views.v1.services.ViewR\x05views\"\xd1\x05\n" +
+	"\x05views\x18\x01 \x03(\v2).com.coralogixapis.views.v1.services.ViewR\x05views\"\x94\x06\n" +
 	"\x04View\x128\n" +
 	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x92A\b2\x02idJ\x0252R\x02id\x12P\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
@@ -623,7 +640,8 @@ const file_com_coralogixapis_views_v1_services_views_service_proto_rawDesc = "" 
 	"\x0etime_selection\x18\x04 \x01(\v2).com.coralogixapis.views.v1.TimeSelectionR\rtimeSelection\x12E\n" +
 	"\afilters\x18\x05 \x01(\v2+.com.coralogixapis.views.v1.SelectedFiltersR\afilters\x12\xd4\x01\n" +
 	"\tfolder_id\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12B\n" +
-	"\x0fis_compact_mode\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\risCompactMode:=\x92A:\n" +
+	"\x0fis_compact_mode\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\risCompactMode\x12A\n" +
+	"\tview_type\x18\b \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:=\x92A:\n" +
 	"8*\x04View2\x13Response for views.\xd2\x01\x04name\xd2\x01\x02id\xd2\x01\x0etime_selection2\x91\x19\n" +
 	"\fViewsService\x12\xd3\x05\n" +
 	"\n" +
@@ -677,8 +695,9 @@ var file_com_coralogixapis_views_v1_services_views_service_proto_goTypes = []any
 	(*v1.SearchQuery)(nil),         // 12: com.coralogixapis.views.v1.SearchQuery
 	(*v1.TimeSelection)(nil),       // 13: com.coralogixapis.views.v1.TimeSelection
 	(*v1.SelectedFilters)(nil),     // 14: com.coralogixapis.views.v1.SelectedFilters
-	(*wrapperspb.Int32Value)(nil),  // 15: google.protobuf.Int32Value
-	(*wrapperspb.BoolValue)(nil),   // 16: google.protobuf.BoolValue
+	(v1.ViewType)(0),               // 15: com.coralogixapis.views.v1.ViewType
+	(*wrapperspb.Int32Value)(nil),  // 16: google.protobuf.Int32Value
+	(*wrapperspb.BoolValue)(nil),   // 17: google.protobuf.BoolValue
 }
 var file_com_coralogixapis_views_v1_services_views_service_proto_depIdxs = []int32{
 	11, // 0: com.coralogixapis.views.v1.services.CreateViewRequest.name:type_name -> google.protobuf.StringValue
@@ -686,35 +705,37 @@ var file_com_coralogixapis_views_v1_services_views_service_proto_depIdxs = []int
 	13, // 2: com.coralogixapis.views.v1.services.CreateViewRequest.time_selection:type_name -> com.coralogixapis.views.v1.TimeSelection
 	14, // 3: com.coralogixapis.views.v1.services.CreateViewRequest.filters:type_name -> com.coralogixapis.views.v1.SelectedFilters
 	11, // 4: com.coralogixapis.views.v1.services.CreateViewRequest.folder_id:type_name -> google.protobuf.StringValue
-	10, // 5: com.coralogixapis.views.v1.services.CreateViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
-	10, // 6: com.coralogixapis.views.v1.services.ReplaceViewRequest.view:type_name -> com.coralogixapis.views.v1.services.View
-	10, // 7: com.coralogixapis.views.v1.services.ReplaceViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
-	15, // 8: com.coralogixapis.views.v1.services.GetViewRequest.id:type_name -> google.protobuf.Int32Value
-	10, // 9: com.coralogixapis.views.v1.services.GetViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
-	15, // 10: com.coralogixapis.views.v1.services.DeleteViewRequest.id:type_name -> google.protobuf.Int32Value
-	10, // 11: com.coralogixapis.views.v1.services.ListViewsResponse.views:type_name -> com.coralogixapis.views.v1.services.View
-	15, // 12: com.coralogixapis.views.v1.services.View.id:type_name -> google.protobuf.Int32Value
-	11, // 13: com.coralogixapis.views.v1.services.View.name:type_name -> google.protobuf.StringValue
-	12, // 14: com.coralogixapis.views.v1.services.View.search_query:type_name -> com.coralogixapis.views.v1.SearchQuery
-	13, // 15: com.coralogixapis.views.v1.services.View.time_selection:type_name -> com.coralogixapis.views.v1.TimeSelection
-	14, // 16: com.coralogixapis.views.v1.services.View.filters:type_name -> com.coralogixapis.views.v1.SelectedFilters
-	11, // 17: com.coralogixapis.views.v1.services.View.folder_id:type_name -> google.protobuf.StringValue
-	16, // 18: com.coralogixapis.views.v1.services.View.is_compact_mode:type_name -> google.protobuf.BoolValue
-	0,  // 19: com.coralogixapis.views.v1.services.ViewsService.CreateView:input_type -> com.coralogixapis.views.v1.services.CreateViewRequest
-	2,  // 20: com.coralogixapis.views.v1.services.ViewsService.ReplaceView:input_type -> com.coralogixapis.views.v1.services.ReplaceViewRequest
-	4,  // 21: com.coralogixapis.views.v1.services.ViewsService.GetView:input_type -> com.coralogixapis.views.v1.services.GetViewRequest
-	6,  // 22: com.coralogixapis.views.v1.services.ViewsService.DeleteView:input_type -> com.coralogixapis.views.v1.services.DeleteViewRequest
-	8,  // 23: com.coralogixapis.views.v1.services.ViewsService.ListViews:input_type -> com.coralogixapis.views.v1.services.ListViewsRequest
-	1,  // 24: com.coralogixapis.views.v1.services.ViewsService.CreateView:output_type -> com.coralogixapis.views.v1.services.CreateViewResponse
-	3,  // 25: com.coralogixapis.views.v1.services.ViewsService.ReplaceView:output_type -> com.coralogixapis.views.v1.services.ReplaceViewResponse
-	5,  // 26: com.coralogixapis.views.v1.services.ViewsService.GetView:output_type -> com.coralogixapis.views.v1.services.GetViewResponse
-	7,  // 27: com.coralogixapis.views.v1.services.ViewsService.DeleteView:output_type -> com.coralogixapis.views.v1.services.DeleteViewResponse
-	9,  // 28: com.coralogixapis.views.v1.services.ViewsService.ListViews:output_type -> com.coralogixapis.views.v1.services.ListViewsResponse
-	24, // [24:29] is the sub-list for method output_type
-	19, // [19:24] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	15, // 5: com.coralogixapis.views.v1.services.CreateViewRequest.view_type:type_name -> com.coralogixapis.views.v1.ViewType
+	10, // 6: com.coralogixapis.views.v1.services.CreateViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
+	10, // 7: com.coralogixapis.views.v1.services.ReplaceViewRequest.view:type_name -> com.coralogixapis.views.v1.services.View
+	10, // 8: com.coralogixapis.views.v1.services.ReplaceViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
+	16, // 9: com.coralogixapis.views.v1.services.GetViewRequest.id:type_name -> google.protobuf.Int32Value
+	10, // 10: com.coralogixapis.views.v1.services.GetViewResponse.view:type_name -> com.coralogixapis.views.v1.services.View
+	16, // 11: com.coralogixapis.views.v1.services.DeleteViewRequest.id:type_name -> google.protobuf.Int32Value
+	10, // 12: com.coralogixapis.views.v1.services.ListViewsResponse.views:type_name -> com.coralogixapis.views.v1.services.View
+	16, // 13: com.coralogixapis.views.v1.services.View.id:type_name -> google.protobuf.Int32Value
+	11, // 14: com.coralogixapis.views.v1.services.View.name:type_name -> google.protobuf.StringValue
+	12, // 15: com.coralogixapis.views.v1.services.View.search_query:type_name -> com.coralogixapis.views.v1.SearchQuery
+	13, // 16: com.coralogixapis.views.v1.services.View.time_selection:type_name -> com.coralogixapis.views.v1.TimeSelection
+	14, // 17: com.coralogixapis.views.v1.services.View.filters:type_name -> com.coralogixapis.views.v1.SelectedFilters
+	11, // 18: com.coralogixapis.views.v1.services.View.folder_id:type_name -> google.protobuf.StringValue
+	17, // 19: com.coralogixapis.views.v1.services.View.is_compact_mode:type_name -> google.protobuf.BoolValue
+	15, // 20: com.coralogixapis.views.v1.services.View.view_type:type_name -> com.coralogixapis.views.v1.ViewType
+	0,  // 21: com.coralogixapis.views.v1.services.ViewsService.CreateView:input_type -> com.coralogixapis.views.v1.services.CreateViewRequest
+	2,  // 22: com.coralogixapis.views.v1.services.ViewsService.ReplaceView:input_type -> com.coralogixapis.views.v1.services.ReplaceViewRequest
+	4,  // 23: com.coralogixapis.views.v1.services.ViewsService.GetView:input_type -> com.coralogixapis.views.v1.services.GetViewRequest
+	6,  // 24: com.coralogixapis.views.v1.services.ViewsService.DeleteView:input_type -> com.coralogixapis.views.v1.services.DeleteViewRequest
+	8,  // 25: com.coralogixapis.views.v1.services.ViewsService.ListViews:input_type -> com.coralogixapis.views.v1.services.ListViewsRequest
+	1,  // 26: com.coralogixapis.views.v1.services.ViewsService.CreateView:output_type -> com.coralogixapis.views.v1.services.CreateViewResponse
+	3,  // 27: com.coralogixapis.views.v1.services.ViewsService.ReplaceView:output_type -> com.coralogixapis.views.v1.services.ReplaceViewResponse
+	5,  // 28: com.coralogixapis.views.v1.services.ViewsService.GetView:output_type -> com.coralogixapis.views.v1.services.GetViewResponse
+	7,  // 29: com.coralogixapis.views.v1.services.ViewsService.DeleteView:output_type -> com.coralogixapis.views.v1.services.DeleteViewResponse
+	9,  // 30: com.coralogixapis.views.v1.services.ViewsService.ListViews:output_type -> com.coralogixapis.views.v1.services.ListViewsResponse
+	26, // [26:31] is the sub-list for method output_type
+	21, // [21:26] is the sub-list for method input_type
+	21, // [21:21] is the sub-list for extension type_name
+	21, // [21:21] is the sub-list for extension extendee
+	0,  // [0:21] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_views_v1_services_views_service_proto_init() }

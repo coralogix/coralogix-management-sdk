@@ -9,7 +9,7 @@ package ast
 import (
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
 	widgets "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -366,13 +366,13 @@ var File_com_coralogixapis_dashboards_v1_ast_widget_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_dashboards_v1_ast_widget_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/dashboards/v1/ast/widget.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a;com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x1a7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x1aFcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x1a:com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x1a;com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x80\x11\n" +
+	"0com/coralogixapis/dashboards/v1/ast/widget.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a;com/coralogixapis/dashboards/v1/ast/widgets/bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/data_table.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x1a7com/coralogixapis/dashboards/v1/ast/widgets/gauge.proto\x1a9com/coralogixapis/dashboards/v1/ast/widgets/hexagon.proto\x1aFcom/coralogixapis/dashboards/v1/ast/widgets/horizontal_bar_chart.proto\x1a<com/coralogixapis/dashboards/v1/ast/widgets/line_chart.proto\x1a:com/coralogixapis/dashboards/v1/ast/widgets/markdown.proto\x1a;com/coralogixapis/dashboards/v1/ast/widgets/pie_chart.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x80\x11\n" +
 	"\x06Widget\x12\x89\x01\n" +
-	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBR\x92AO2\x18Widget unique identifierJ3{ \"value\": \"83aed974-510b-43be-bd19-c92daf56beff\" }R\x02id\x12a\n" +
-	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB-\x92A*2\x12Name of the widgetJ\x14{ \"value\": \"Gauge\" }R\x05title\x12\x91\x01\n" +
-	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueBQ\x92AN2\x1fShort description of the widgetJ+{ \"value\": \"Average delay of application\" }R\vdescription\x12\x86\x01\n" +
+	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBR\x9aAO2\x18Widget unique identifierJ3{ \"value\": \"83aed974-510b-43be-bd19-c92daf56beff\" }R\x02id\x12a\n" +
+	"\x05title\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB-\x9aA*2\x12Name of the widgetJ\x14{ \"value\": \"Gauge\" }R\x05title\x12\x91\x01\n" +
+	"\vdescription\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueBQ\x9aAN2\x1fShort description of the widgetJ+{ \"value\": \"Average delay of application\" }R\vdescription\x12\x86\x01\n" +
 	"\n" +
-	"definition\x18\x04 \x01(\v26.com.coralogixapis.dashboards.v1.ast.Widget.DefinitionB.\x92A+2)Definition of the widget type and detailsR\n" +
+	"definition\x18\x04 \x01(\v26.com.coralogixapis.dashboards.v1.ast.Widget.DefinitionB.\x9aA+2)Definition of the widget type and detailsR\n" +
 	"definition\x12Z\n" +
 	"\n" +
 	"appearance\x18\x05 \x01(\v26.com.coralogixapis.dashboards.v1.ast.Widget.AppearanceB\x02\x18\x01R\n" +
@@ -384,20 +384,20 @@ const file_com_coralogixapis_dashboards_v1_ast_widget_proto_rawDesc = "" +
 	"\n" +
 	"Definition\x12z\n" +
 	"\n" +
-	"line_chart\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.ast.widgets.LineChartB!\x92A\x1e2\x1cLine chart widget definitionH\x00R\tlineChart\x12z\n" +
+	"line_chart\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.ast.widgets.LineChartB!\x9aA\x1e2\x1cLine chart widget definitionH\x00R\tlineChart\x12z\n" +
 	"\n" +
-	"data_table\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.ast.widgets.DataTableB!\x92A\x1e2\x1cData table widget definitionH\x00R\tdataTable\x12h\n" +
-	"\x05gauge\x18\x03 \x01(\v22.com.coralogixapis.dashboards.v1.ast.widgets.GaugeB\x1c\x92A\x192\x17Gauge widget definitionH\x00R\x05gauge\x12v\n" +
-	"\tpie_chart\x18\x04 \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.PieChartB \x92A\x1d2\x1bPie chart widget definitionH\x00R\bpieChart\x12\x7f\n" +
-	"\tbar_chart\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.BarChartB)\x92A&2$Vertical bar chart widget definitionH\x00R\bbarChart\x12\xa0\x01\n" +
-	"\x14horizontal_bar_chart\x18\x06 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChartB+\x92A(2&Horizontal bar chart widget definitionH\x00R\x12horizontalBarChart\x12t\n" +
-	"\bmarkdown\x18\a \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.MarkdownB\x1f\x92A\x1c2\x1aMarkdown widget definitionH\x00R\bmarkdown\x12p\n" +
-	"\ahexagon\x18\b \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.HexagonB\x1e\x92A\x1b2\x19Hexagon widget definitionH\x00R\ahexagon\x12p\n" +
-	"\adynamic\x18\t \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.DynamicB\x1e\x92A\x1b2\x19Dynamic widget definitionH\x00R\adynamicB\a\n" +
+	"data_table\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.ast.widgets.DataTableB!\x9aA\x1e2\x1cData table widget definitionH\x00R\tdataTable\x12h\n" +
+	"\x05gauge\x18\x03 \x01(\v22.com.coralogixapis.dashboards.v1.ast.widgets.GaugeB\x1c\x9aA\x192\x17Gauge widget definitionH\x00R\x05gauge\x12v\n" +
+	"\tpie_chart\x18\x04 \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.PieChartB \x9aA\x1d2\x1bPie chart widget definitionH\x00R\bpieChart\x12\x7f\n" +
+	"\tbar_chart\x18\x05 \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.BarChartB)\x9aA&2$Vertical bar chart widget definitionH\x00R\bbarChart\x12\xa0\x01\n" +
+	"\x14horizontal_bar_chart\x18\x06 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.HorizontalBarChartB+\x9aA(2&Horizontal bar chart widget definitionH\x00R\x12horizontalBarChart\x12t\n" +
+	"\bmarkdown\x18\a \x01(\v25.com.coralogixapis.dashboards.v1.ast.widgets.MarkdownB\x1f\x9aA\x1c2\x1aMarkdown widget definitionH\x00R\bmarkdown\x12p\n" +
+	"\ahexagon\x18\b \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.HexagonB\x1e\x9aA\x1b2\x19Hexagon widget definitionH\x00R\ahexagon\x12p\n" +
+	"\adynamic\x18\t \x01(\v24.com.coralogixapis.dashboards.v1.ast.widgets.DynamicB\x1e\x9aA\x1b2\x19Dynamic widget definitionH\x00R\adynamicB\a\n" +
 	"\x05value\x1a?\n" +
 	"\n" +
 	"Appearance\x121\n" +
-	"\x05width\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05width:\xe6\x01\x92A\xe2\x01\n" +
+	"\x05width\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05width:\xe6\x01\x9aA\xe2\x01\n" +
 	"<*\x06Widget22This data structure represents a dashboard widget.*\xa1\x01\n" +
 	"DFind out more about creating dashboard widgets in our documentation.\x12Yhttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/#add-new-widgetsb\x06proto3"
 

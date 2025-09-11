@@ -8,7 +8,7 @@ package ast
 
 import (
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -606,35 +606,36 @@ var File_com_coralogixapis_dashboards_v1_ast_layout_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_dashboards_v1_ast_layout_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/dashboards/v1/ast/layout.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a0com/coralogixapis/dashboards/v1/ast/widget.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"~\n" +
+	"0com/coralogixapis/dashboards/v1/ast/layout.proto\x12#com.coralogixapis.dashboards.v1.ast\x1a0com/coralogixapis/dashboards/v1/ast/widget.proto\x1a+com/coralogixapis/dashboards/v1/types.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"~\n" +
 	"\x06Layout\x12t\n" +
-	"\bsections\x18\x01 \x03(\v2,.com.coralogixapis.dashboards.v1.ast.SectionB*\x92A'2%The list of sections in the dashboardR\bsections\"\x95\x03\n" +
+	"\bsections\x18\x01 \x03(\v2,.com.coralogixapis.dashboards.v1.ast.SectionB*\x9aA'2%The list of sections in the dashboardR\bsections\"\x95\x03\n" +
 	"\aSection\x12\x8a\x01\n" +
-	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBS\x92AP2\x19Section unique identifierJ3{ \"value\": \"5995904f-7256-f096-9a16-37124e0f15cb\"} R\x02id\x12\x95\x01\n" +
-	"\x04rows\x18\x02 \x03(\v2(.com.coralogixapis.dashboards.v1.ast.RowBW\x92AT2RDefinition of a section's rows (one row represents a single row of visualizations)R\x04rows\x12e\n" +
-	"\aoptions\x18\x03 \x01(\v23.com.coralogixapis.dashboards.v1.ast.SectionOptionsB\x16\x92A\x132\x11Section's optionsR\aoptions\"\xc7\x04\n" +
+	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBS\x9aAP2\x19Section unique identifierJ3{ \"value\": \"5995904f-7256-f096-9a16-37124e0f15cb\"} R\x02id\x12\x95\x01\n" +
+	"\x04rows\x18\x02 \x03(\v2(.com.coralogixapis.dashboards.v1.ast.RowBW\x9aAT2RDefinition of a section's rows (one row represents a single row of visualizations)R\x04rows\x12e\n" +
+	"\aoptions\x18\x03 \x01(\v23.com.coralogixapis.dashboards.v1.ast.SectionOptionsB\x16\x9aA\x132\x11Section's optionsR\aoptions\"\xc7\x04\n" +
 	"\x03Row\x12\x86\x01\n" +
-	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBO\x92AL2\x15Row unique identifierJ3{ \"value\": \"83aed974-510b-43be-bd19-c92daf56beff\" }R\x02id\x12v\n" +
+	"\x02id\x18\x01 \x01(\v2%.com.coralogixapis.dashboards.v1.UUIDBO\x9aAL2\x15Row unique identifierJ3{ \"value\": \"83aed974-510b-43be-bd19-c92daf56beff\" }R\x02id\x12v\n" +
 	"\n" +
-	"appearance\x18\x02 \x01(\v23.com.coralogixapis.dashboards.v1.ast.Row.AppearanceB!\x92A\x1e2\x1cRow appearance configurationR\n" +
+	"appearance\x18\x02 \x01(\v23.com.coralogixapis.dashboards.v1.ast.Row.AppearanceB!\x9aA\x1e2\x1cRow appearance configurationR\n" +
 	"appearance\x12j\n" +
-	"\awidgets\x18\x03 \x03(\v2+.com.coralogixapis.dashboards.v1.ast.WidgetB#\x92A 2\x1eThe list of widgets in the rowR\awidgets\x1a\xd2\x01\n" +
+	"\awidgets\x18\x03 \x03(\v2+.com.coralogixapis.dashboards.v1.ast.WidgetB#\x9aA 2\x1eThe list of widgets in the rowR\awidgets\x1a\xd2\x01\n" +
 	"\n" +
 	"Appearance\x12\xc3\x01\n" +
-	"\x06height\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x8d\x01\x92A\x89\x012vHeight of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etcJ\x0f{ \"value\": 16 }R\x06height\"\xa4\x01\n" +
-	"\rRepetitiveVar\x12\x92\x01\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB`\x92A]2IVariable name that can be applied on section making it repetitive sectionJ\x10SomeFancyVarNameR\x04name\"\xec\x01\n" +
+	"\x06height\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\x8d\x01\x9aA\x89\x012vHeight of a row, defined as a multiplier number of the base height, where 1 = 1 * base height, 2 = 2 * base height etcJ\x0f{ \"value\": 16 }R\x06height\"\x9e\x01\n" +
+	"\rRepetitiveVar\x12\x8c\x01\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBZ\x9aAW2IVariable name that can be applied on section making it repetitive sectionJ\n" +
+	"\"pod_name\"R\x04name\"\xec\x01\n" +
 	"\x0eSectionOptions\x12Y\n" +
 	"\binternal\x18\x01 \x01(\v2;.com.coralogixapis.dashboards.v1.ast.InternalSectionOptionsH\x00R\binternal\x12v\n" +
-	"\x06custom\x18\x02 \x01(\v29.com.coralogixapis.dashboards.v1.ast.CustomSectionOptionsB!\x92A\x1e2\x1cOptions for a custom sectionH\x00R\x06customB\a\n" +
+	"\x06custom\x18\x02 \x01(\v29.com.coralogixapis.dashboards.v1.ast.CustomSectionOptionsB!\x9aA\x1e2\x1cOptions for a custom sectionH\x00R\x06customB\a\n" +
 	"\x05value\"\x18\n" +
-	"\x16InternalSectionOptions\"\xe7\x05\n" +
+	"\x16InternalSectionOptions\"\xdf\x05\n" +
 	"\x14CustomSectionOptions\x12m\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x92A82\x13Section custom nameJ!{ \"value\": \"Main stats section\" }R\x04name\x12\x95\x01\n" +
-	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBU\x92AR2\x1eShort description of a sectionJ0{ \"value\": \"Section with important statistics\" }R\vdescription\x12k\n" +
-	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB1\x92A.2%Indicator if the section is collapsedJ\x05falseR\tcollapsed\x12~\n" +
-	"\x05color\x18\x04 \x01(\v21.com.coralogixapis.dashboards.v1.ast.SectionColorB5\x92A22\x1bColor of the section headerJ\x13{ \"predefined\": 2 }R\x05color\x12\xda\x01\n" +
-	"\x0erepetitive_var\x18\x05 \x01(\v22.com.coralogixapis.dashboards.v1.ast.RepetitiveVarB\x7f\x92A|2\\Variable name that can be applied on section making it repetitive section and other metadataJ\x1c{\"name\": \"SomeFancyVarName\"}R\rrepetitiveVar\"v\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB;\x9aA82\x13Section custom nameJ!{ \"value\": \"Main stats section\" }R\x04name\x12\x95\x01\n" +
+	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBU\x9aAR2\x1eShort description of a sectionJ0{ \"value\": \"Section with important statistics\" }R\vdescription\x12k\n" +
+	"\tcollapsed\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueB1\x9aA.2%Indicator if the section is collapsedJ\x05falseR\tcollapsed\x12~\n" +
+	"\x05color\x18\x04 \x01(\v21.com.coralogixapis.dashboards.v1.ast.SectionColorB5\x9aA22\x1bColor of the section headerJ\x13{ \"predefined\": 2 }R\x05color\x12\xd2\x01\n" +
+	"\x0erepetitive_var\x18\x05 \x01(\v22.com.coralogixapis.dashboards.v1.ast.RepetitiveVarBw\x9aAt2\\Variable name that can be applied on section making it repetitive section and other metadataJ\x14{\"name\": \"pod_name\"}R\rrepetitiveVar\"v\n" +
 	"\fSectionColor\x12]\n" +
 	"\n" +
 	"predefined\x18\x01 \x01(\x0e2;.com.coralogixapis.dashboards.v1.ast.SectionPredefinedColorH\x00R\n" +

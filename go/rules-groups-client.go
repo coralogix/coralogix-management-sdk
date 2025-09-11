@@ -199,7 +199,7 @@ const (
 
 // RuleGroupsClient is a client for the Coralogix Rules Groups API.
 type RuleGroupsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new rule group.
@@ -277,6 +277,6 @@ func (r RuleGroupsClient) Delete(ctx context.Context, req *DeleteRuleGroupReques
 }
 
 // NewRuleGroupsClient creates a new rule groups client.
-func NewRuleGroupsClient(c *CallPropertiesCreator) *RuleGroupsClient {
+func NewRuleGroupsClient(c CallPropertiesCreator) *RuleGroupsClient {
 	return &RuleGroupsClient{callPropertiesCreator: c}
 }

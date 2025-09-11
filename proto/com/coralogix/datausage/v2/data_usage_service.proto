@@ -205,6 +205,8 @@ enum AggregateBy {
   AGGREGATE_BY_SUBSYSTEM = 2;
   AGGREGATE_BY_PILLAR = 3;
   AGGREGATE_BY_PRIORITY = 4;
+  AGGREGATE_BY_POLICY_NAME = 5;
+  AGGREGATE_BY_SEVERITY = 6;
 }
 
 message GetTeamDetailedDataUsageRequest {

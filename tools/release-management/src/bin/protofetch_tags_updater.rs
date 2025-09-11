@@ -46,6 +46,9 @@ struct Args {
 
     #[arg(short, long, default_value = "true")]
     skip_hashes: bool,
+
+    #[arg(short = 'f', long)]
+    prefix_filter: Option<String>,
 }
 
 #[tokio::main]
@@ -100,6 +103,13 @@ async fn main() -> eyre::Result<()> {
 
         let url = val["url"].as_str().expect("URL must be a string");
         let (owner, repo) = owner_repo_from_url(url).expect("Invalid URL");
+        
+        // skip if repos if they don't match the provided filter 
+        if args.prefix_filter.is_some() && !repo.starts_with(args.prefix_filter.as_ref().unwrap()) {
+            tracing::info!(%url, "Skipping repo due to prefix filter");
+            continue; 
+        }
+
         if val.get("revision").is_none() {
             tracing::warn!(%url, %val, "no revision found, skipping");
             continue;
@@ -163,8 +173,9 @@ async fn main() -> eyre::Result<()> {
         .unwrap_or_else(|_| panic!("Couldn't find git repository at {}", args.git_dir));
     let format = format_description::parse("[year]-[month]-[day]").expect("Failed to parse format");
     let branch_name = format!(
-        "update-{}",
-        time::OffsetDateTime::now_utc().format(&format)?
+        "update-{}-{}",
+        time::OffsetDateTime::now_utc().format(&format)?,
+        args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)
     );
     let changes = repo.changes(|_| true).expect("Failed to add changes");
     repo.checkout_new_branch(&branch_name)
@@ -190,7 +201,7 @@ async fn main() -> eyre::Result<()> {
     tracing::info!(%owner, %repo_name, ?branch_name, ?pr_message);
     authed_github
         .pulls(owner, repo_name)
-        .create("Updating API descriptions", branch_name, "master")
+        .create(format!("chore: updating '{}' protobufs", args.prefix_filter.as_ref().map_or_else(|| "all", |p| p)), branch_name, "master")
         .body(pr_message)
         .send()
         .await?;

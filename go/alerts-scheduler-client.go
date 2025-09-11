@@ -168,7 +168,7 @@ const (
 
 // AlertSchedulerClient is a client for the Coralogix Alerts API.
 type AlertSchedulerClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Create creates a new alert scheduler.
@@ -298,6 +298,6 @@ func (c AlertSchedulerClient) GetBulk(ctx context.Context, req *scheduler.GetBul
 }
 
 // NewAlertSchedulerClient creates a new alerts scheduler client.
-func NewAlertSchedulerClient(c *CallPropertiesCreator) *AlertSchedulerClient {
+func NewAlertSchedulerClient(c CallPropertiesCreator) *AlertSchedulerClient {
 	return &AlertSchedulerClient{callPropertiesCreator: c}
 }

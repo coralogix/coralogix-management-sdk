@@ -962,7 +962,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02\x16\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x16\n" +
 	"\x14get alert definition\x82\xd3\xe4\x93\x02\x15\x12\x13/v3/alert-defs/{id}\x12\xcd\x03\n" +
 	"\x16GetAlertDefByVersionId\x12:.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest\x1a;.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse\"\xb9\x02\x92A\xcd\x01\n" +
 	"\x19Alert definitions service\x12(Get alert definition by alert version IDJ\x14\n" +
@@ -973,7 +973,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02*\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02*\n" +
 	"(get alert definition by alert version ID\x82\xd3\xe4\x93\x024\x122/v3/alert-defs/alert-version-id/{alert_version_id}\x12\xff\x02\n" +
 	"\x0eCreateAlertDef\x122.com.coralogixapis.alerts.v3.CreateAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.CreateAlertDefResponse\"\x83\x02\x92A\xb6\x01\n" +
 	"\x19Alert definitions service\x12\x0fCreate an alertJ\x14\n" +
@@ -984,7 +984,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13alerts:UpdateConfig¸\x02\x19\n" +
+	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x19\n" +
 	"\x17create alert definition\x82\xd3\xe4\x93\x02&:\x14alert_def_properties\"\x0e/v3/alert-defs\x12\xfc\x02\n" +
 	"\x0fReplaceAlertDef\x123.com.coralogixapis.alerts.v3.ReplaceAlertDefRequest\x1a4.com.coralogixapis.alerts.v3.ReplaceAlertDefResponse\"\xfd\x01\x92A\xc2\x01\n" +
 	"\x19Alert definitions service\x12\x1bReplace an alert definitionJ\x14\n" +
@@ -995,7 +995,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13alerts:UpdateConfig¸\x02\x1a\n" +
+	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x1a\n" +
 	"\x18replace alert definition\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/v3/alert-defs\x12\x86\x03\n" +
 	"\rListAlertDefs\x121.com.coralogixapis.alerts.v3.ListAlertDefsRequest\x1a2.com.coralogixapis.alerts.v3.ListAlertDefsResponse\"\x8d\x02\x92A\xd3\x01\n" +
 	"\x19Alert definitions service\x12.Get a list of all accessible alert definitionsJ\x14\n" +
@@ -1006,7 +1006,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02\x1c\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x1c\n" +
 	"\x1aget alert definitions list\x82\xd3\xe4\x93\x02\x10\x12\x0e/v3/alert-defs\x12\xba\x03\n" +
 	"\x0eDownloadAlerts\x122.com.coralogixapis.alerts.v3.DownloadAlertsRequest\x1a3.com.coralogixapis.alerts.v3.DownloadAlertsResponse\"\xbc\x02\x92A\x88\x02\n" +
 	"\x19Alert definitions service\x12\x0fDownload alerts\x1aRDownload a list of all accessible alert definitions in base64-encoded byte format.J\x14\n" +
@@ -1017,7 +1017,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
-	"\x13\x1a\x11alerts:ReadConfig¸\x02\x11\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x11\n" +
 	"\x0fdownload alerts\x82\xd3\xe4\x93\x02\x15\x12\x13/v3/alerts/download0\x01\x12\xde\x02\n" +
 	"\x0eDeleteAlertDef\x122.com.coralogixapis.alerts.v3.DeleteAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.DeleteAlertDefResponse\"\xe2\x01\x92A\xa5\x01\n" +
 	"\x19Alert definitions serviceJ\x14\n" +
@@ -1028,7 +1028,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13alerts:UpdateConfig¸\x02\x1a\n" +
+	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x1a\n" +
 	"\x18delete alert definitions\x82\xd3\xe4\x93\x02\x15*\x13/v3/alert-defs/{id}\x12\x84\x03\n" +
 	"\tSetActive\x12-.com.coralogixapis.alerts.v3.SetActiveRequest\x1a..com.coralogixapis.alerts.v3.SetActiveResponse\"\x97\x02\x92A\xc1\x01\n" +
 	"\x19Alert definitions service\x12\x1aDisable or enable an alertJ\x14\n" +
@@ -1039,7 +1039,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
-	"\x15\x1a\x13alerts:UpdateConfig¸\x02)\n" +
+	"\x15\x1a\x13alerts:UpdateConfigʸ\x02)\n" +
 	"'disable or enable the alert definitions\x82\xd3\xe4\x93\x02\x1f\"\x1d/v3/alert-defs/{id}:setActive\x1a\x9c\x02\x92A\x98\x02\n" +
 	"\x19Alert definitions service\x12\x81\x01View and manage your alerts using alert definitions - data structures that contain the configuration required to create an alert.\x1aw\n" +
 	",Learn more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/b\x06proto3"

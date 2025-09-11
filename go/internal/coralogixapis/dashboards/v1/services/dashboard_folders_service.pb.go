@@ -9,7 +9,7 @@ package services
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -479,54 +479,54 @@ var File_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_prot
 
 const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_proto_rawDesc = "" +
 	"\n" +
-	"Hcom/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe2\x02\n" +
+	"Hcom/coralogixapis/dashboards/v1/services/dashboard_folders_service.proto\x12(com.coralogixapis.dashboards.v1.services\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogixapis/dashboards/v1/common/folder.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe2\x02\n" +
 	"\x1cCreateDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12O\n" +
-	"\x06folder\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb3\x01\x92A\xaf\x01\n" +
+	"\x06folder\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb3\x01\x9aA\xaf\x01\n" +
 	"0*.Create dashboard folder request data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\x91\x02\n" +
 	"\x1dCreateDashboardFolderResponse\x129\n" +
-	"\tfolder_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb4\x01\x92A\xb0\x01\n" +
+	"\tfolder_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb4\x01\x9aA\xb0\x01\n" +
 	"1*/Create dashboard folder response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xe4\x02\n" +
 	"\x1dReplaceDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x12O\n" +
-	"\x06folder\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb4\x01\x92A\xb0\x01\n" +
+	"\x06folder\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb4\x01\x9aA\xb0\x01\n" +
 	"1*/Replace dashboard folder request data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd8\x01\n" +
-	"\x1eReplaceDashboardFolderResponse:\xb5\x01\x92A\xb1\x01\n" +
+	"\x1eReplaceDashboardFolderResponse:\xb5\x01\x9aA\xb1\x01\n" +
 	"2*0Replace dashboard folder response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xcc\x02\n" +
 	"\x1cDeleteDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x129\n" +
-	"\tfolder_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb3\x01\x92A\xaf\x01\n" +
+	"\tfolder_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb3\x01\x9aA\xaf\x01\n" +
 	"0*.Delete dashboard folder request data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd6\x01\n" +
-	"\x1dDeleteDashboardFolderResponse:\xb4\x01\x92A\xb0\x01\n" +
+	"\x1dDeleteDashboardFolderResponse:\xb4\x01\x9aA\xb0\x01\n" +
 	"1*/Delete dashboard folder response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xd2\x01\n" +
-	"\x1bListDashboardFoldersRequest:\xb2\x01\x92A\xae\x01\n" +
+	"\x1bListDashboardFoldersRequest:\xb2\x01\x9aA\xae\x01\n" +
 	"/*-List dashboard folders request data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xa5\x02\n" +
 	"\x1cListDashboardFoldersResponse\x12O\n" +
-	"\x06folder\x18\x01 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb3\x01\x92A\xaf\x01\n" +
+	"\x06folder\x18\x01 \x03(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb3\x01\x9aA\xaf\x01\n" +
 	"0*.List dashboard folders response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xc6\x02\n" +
 	"\x19GetDashboardFolderRequest\x12;\n" +
 	"\n" +
 	"request_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\trequestId\x129\n" +
-	"\tfolder_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb0\x01\x92A\xac\x01\n" +
+	"\tfolder_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\bfolderId:\xb0\x01\x9aA\xac\x01\n" +
 	"-*+Get dashboard folder request data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/\"\xa1\x02\n" +
 	"\x1aGetDashboardFolderResponse\x12O\n" +
-	"\x06folder\x18\x01 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb1\x01\x92A\xad\x01\n" +
+	"\x06folder\x18\x01 \x01(\v27.com.coralogixapis.dashboards.v1.common.DashboardFolderR\x06folder:\xb1\x01\x9aA\xad\x01\n" +
 	".*,Get dashboard folder response data structure*{\n" +
 	".Find out more Dashboards in our documentation.\x12Ihttps://coralogix.com/docs/user-guides/custom-dashboards/getting-started/2\x9c\x12\n" +
 	"\x17DashboardFoldersService\x12\xcc\x03\n" +
-	"\x14ListDashboardFolders\x12E.com.coralogixapis.dashboards.v1.services.ListDashboardFoldersRequest\x1aF.com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse\"\xa4\x02\x92A\xe6\x01\n" +
+	"\x14ListDashboardFolders\x12E.com.coralogixapis.dashboards.v1.services.ListDashboardFoldersRequest\x1aF.com.coralogixapis.dashboards.v1.services.ListDashboardFoldersResponse\"\xa4\x02\x9aA\xe6\x01\n" +
 	"\x19Dashboard folders service\x12\x16List dashboard folders\x1a&List all dashboard folders accessible.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -535,9 +535,9 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x18\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x18\n" +
 	"\x16List dashboard folders\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/dashboards/folders\x12\xca\x03\n" +
-	"\x12GetDashboardFolder\x12C.com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest\x1aD.com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse\"\xa8\x02\x92A\xe0\x01\n" +
+	"\x12GetDashboardFolder\x12C.com.coralogixapis.dashboards.v1.services.GetDashboardFolderRequest\x1aD.com.coralogixapis.dashboards.v1.services.GetDashboardFolderResponse\"\xa8\x02\x9aA\xe0\x01\n" +
 	"\x19Dashboard folders service\x12\x16Get a dashboard folder\x1a Returns a dashboard folder data.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -546,9 +546,9 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj4\n" +
 	"\x16x-coralogixPermissions\x12\x1a2\x18\n" +
-	"\x16\x1a\x14team-dashboards:Read¸\x02\x16\n" +
+	"\x16\x1a\x14team-dashboards:Readʸ\x02\x16\n" +
 	"\x14Get dashboard folder\x82\xd3\xe4\x93\x02$\x12\"/v1/dashboards/folders/{folder_id}\x12\xb0\x03\n" +
-	"\x15CreateDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse\"\x85\x02\x92A\xc3\x01\n" +
+	"\x15CreateDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.CreateDashboardFolderResponse\"\x85\x02\x9aA\xc3\x01\n" +
 	"\x19Dashboard folders service\x12\x19Create a dashboard folderJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -557,9 +557,9 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x19\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x19\n" +
 	"\x17Create dashboard folder\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/dashboards/folders\x12\xb5\x03\n" +
-	"\x16ReplaceDashboardFolder\x12G.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest\x1aH.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderResponse\"\x87\x02\x92A\xc4\x01\n" +
+	"\x16ReplaceDashboardFolder\x12G.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderRequest\x1aH.com.coralogixapis.dashboards.v1.services.ReplaceDashboardFolderResponse\"\x87\x02\x9aA\xc4\x01\n" +
 	"\x19Dashboard folders service\x12\x1aReplace a dashboard folderJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -568,9 +568,9 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x1a\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x1a\n" +
 	"\x18Replace dashboard folder\x82\xd3\xe4\x93\x02\x1b:\x01*\x1a\x16/v1/dashboards/folders\x12\xb9\x03\n" +
-	"\x15DeleteDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderResponse\"\x8e\x02\x92A\xc3\x01\n" +
+	"\x15DeleteDashboardFolder\x12F.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderRequest\x1aG.com.coralogixapis.dashboards.v1.services.DeleteDashboardFolderResponse\"\x8e\x02\x9aA\xc3\x01\n" +
 	"\x19Dashboard folders service\x12\x19Delete a dashboard folderJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -579,8 +579,8 @@ const file_com_coralogixapis_dashboards_v1_services_dashboard_folders_service_pr
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj6\n" +
 	"\x16x-coralogixPermissions\x12\x1c2\x1a\n" +
-	"\x18\x1a\x16team-dashboards:Update¸\x02\x19\n" +
-	"\x17Delete dashboard folder\x82\xd3\xe4\x93\x02$*\"/v1/dashboards/folders/{folder_id}\x1a>\x92A;\n" +
+	"\x18\x1a\x16team-dashboards:Updateʸ\x02\x19\n" +
+	"\x17Delete dashboard folder\x82\xd3\xe4\x93\x02$*\"/v1/dashboards/folders/{folder_id}\x1a>\x9aA;\n" +
 	"\x19Dashboard folders service\x12\x1eManage your dashboard folders.b\x06proto3"
 
 var (

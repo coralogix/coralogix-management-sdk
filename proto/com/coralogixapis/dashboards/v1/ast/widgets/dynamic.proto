@@ -6,17 +6,17 @@ import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
+import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
-import "com/coralogixapis/dashboards/v1/common/spans_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Dynamic {
-  Query query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A query object describing how to retrieve data"}];
-  v1.common.TimeFrameSelect time_frame = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Time frame which overrides the dashboard time frame"}];
+  Query query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object describing how to retrieve data"}];
+  v1.common.TimeFrameSelect time_frame = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Time frame which overrides the dashboard time frame"}];
 
-  Interpretation interpretation = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Interpretation of the query results"}];
+  Interpretation interpretation = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interpretation of the query results"}];
 
   message Query {
     oneof value {
@@ -27,7 +27,7 @@ message Dynamic {
     }
 
     message Logs {
-      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "LogsQuery"
           description: "A logs variant of the query"
@@ -35,18 +35,18 @@ message Dynamic {
         }
       };
 
-      v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
         description: "A Lucene query string to search logs"
         example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
       }];
-      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type"}];
-      repeated v1.ast.filters.Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of filters that narrow down query results"}];
-      repeated v1.common.ObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of observation fields by which to group the results"}];
-      repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Aggregation function"}];
+      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
+      repeated v1.ast.filters.Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of filters that narrow down query results"}];
+      repeated v1.common.ObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of observation fields by which to group the results"}];
+      repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Aggregation function"}];
     }
 
     message Spans {
-      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "SpansQuery"
           description: "A spans variant of the query"
@@ -54,15 +54,15 @@ message Dynamic {
         }
       };
 
-      v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Lucene query string to search span records"}];
-      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type"}];
-      repeated v1.ast.filters.Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "List of span query filters"}];
-      repeated v1.common.SpanObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "A list of fields to group the records by"}];
-      repeated v1.common.SpansAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Span query aggregation function"}];
+      v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Lucene query string to search span records"}];
+      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
+      repeated v1.ast.filters.Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of span query filters"}];
+      repeated v1.common.SpanObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of fields to group the records by"}];
+      repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Span query aggregation function"}];
     }
 
     message Metrics {
-      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "MetricsQuery"
           description: "A metrics variant of the query"
@@ -70,27 +70,31 @@ message Dynamic {
         }
       };
 
-      v1.common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      v1.common.PromQlQuery promql_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
         description: "PromQL query string for querying metrics"
         example: '{ "value": "up{job=\'abc\'}" }'
       }];
-      v1.common.PromQLQueryType promql_query_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
-      common.MetricsQueryEditorMode editor_mode = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+      v1.common.PromQLQueryType promql_query_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
+      common.MetricsQueryEditorMode editor_mode = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
         description: "Type of the query editor used to generate the query, can be text or builder based"
         example: "2"
+      }];
+      v1.common.MetricsSeriesLimitType series_limit_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "How to limit the result using series_count_limit parameter"
+        example: "1"
       }];
     }
 
     message Dataprime {
-      option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+      option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
         json_schema: {
           title: "DataprimeQuery"
           description: "A Dataprime variant of the query"
           required: []
         }
       };
-      v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Dataprime query text"}];
-      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Data mode type"}];
+      v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Dataprime query text"}];
+      common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
     }
   }
 
@@ -101,5 +105,12 @@ message Dynamic {
     INTERPRETATION_SINGLE_VALUE_KPI = 3;
     INTERPRETATION_MULTI_VALUE_KPI = 4;
     INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS = 5;
+    INTERPRETATION_SINGLE_VALUE_KPI_STAT = 6;
+    INTERPRETATION_SINGLE_VALUE_KPI_GAUGE = 7;
+    INTERPRETATION_MULTI_VALUE_KPI_STAT = 8;
+    INTERPRETATION_MULTI_VALUE_KPI_GAUGE = 9;
+    INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS = 10;
+    INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART = 11;
+    INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS = 12;
   }
 }

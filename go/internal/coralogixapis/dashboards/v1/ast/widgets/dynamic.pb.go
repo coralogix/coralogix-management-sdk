@@ -10,7 +10,7 @@ import (
 	filters "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/filters"
 	common1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/ast/widgets/common"
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/dashboards/v1/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -28,31 +28,52 @@ const (
 type Dynamic_Interpretation int32
 
 const (
-	Dynamic_INTERPRETATION_UNSPECIFIED                        Dynamic_Interpretation = 0
-	Dynamic_INTERPRETATION_RAW_DATA_TABLE                     Dynamic_Interpretation = 1
-	Dynamic_INTERPRETATION_TREND_OVER_TIME_LINE               Dynamic_Interpretation = 2
-	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI                   Dynamic_Interpretation = 3
-	Dynamic_INTERPRETATION_MULTI_VALUE_KPI                    Dynamic_Interpretation = 4
-	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS Dynamic_Interpretation = 5
+	Dynamic_INTERPRETATION_UNSPECIFIED                          Dynamic_Interpretation = 0
+	Dynamic_INTERPRETATION_RAW_DATA_TABLE                       Dynamic_Interpretation = 1
+	Dynamic_INTERPRETATION_TREND_OVER_TIME_LINE                 Dynamic_Interpretation = 2
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI                     Dynamic_Interpretation = 3
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI                      Dynamic_Interpretation = 4
+	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS   Dynamic_Interpretation = 5
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_STAT                Dynamic_Interpretation = 6
+	Dynamic_INTERPRETATION_SINGLE_VALUE_KPI_GAUGE               Dynamic_Interpretation = 7
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_STAT                 Dynamic_Interpretation = 8
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_GAUGE                Dynamic_Interpretation = 9
+	Dynamic_INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS         Dynamic_Interpretation = 10
+	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART       Dynamic_Interpretation = 11
+	Dynamic_INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS Dynamic_Interpretation = 12
 )
 
 // Enum value maps for Dynamic_Interpretation.
 var (
 	Dynamic_Interpretation_name = map[int32]string{
-		0: "INTERPRETATION_UNSPECIFIED",
-		1: "INTERPRETATION_RAW_DATA_TABLE",
-		2: "INTERPRETATION_TREND_OVER_TIME_LINE",
-		3: "INTERPRETATION_SINGLE_VALUE_KPI",
-		4: "INTERPRETATION_MULTI_VALUE_KPI",
-		5: "INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS",
+		0:  "INTERPRETATION_UNSPECIFIED",
+		1:  "INTERPRETATION_RAW_DATA_TABLE",
+		2:  "INTERPRETATION_TREND_OVER_TIME_LINE",
+		3:  "INTERPRETATION_SINGLE_VALUE_KPI",
+		4:  "INTERPRETATION_MULTI_VALUE_KPI",
+		5:  "INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS",
+		6:  "INTERPRETATION_SINGLE_VALUE_KPI_STAT",
+		7:  "INTERPRETATION_SINGLE_VALUE_KPI_GAUGE",
+		8:  "INTERPRETATION_MULTI_VALUE_KPI_STAT",
+		9:  "INTERPRETATION_MULTI_VALUE_KPI_GAUGE",
+		10: "INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS",
+		11: "INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART",
+		12: "INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS",
 	}
 	Dynamic_Interpretation_value = map[string]int32{
-		"INTERPRETATION_UNSPECIFIED":                        0,
-		"INTERPRETATION_RAW_DATA_TABLE":                     1,
-		"INTERPRETATION_TREND_OVER_TIME_LINE":               2,
-		"INTERPRETATION_SINGLE_VALUE_KPI":                   3,
-		"INTERPRETATION_MULTI_VALUE_KPI":                    4,
-		"INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS": 5,
+		"INTERPRETATION_UNSPECIFIED":                          0,
+		"INTERPRETATION_RAW_DATA_TABLE":                       1,
+		"INTERPRETATION_TREND_OVER_TIME_LINE":                 2,
+		"INTERPRETATION_SINGLE_VALUE_KPI":                     3,
+		"INTERPRETATION_MULTI_VALUE_KPI":                      4,
+		"INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS":   5,
+		"INTERPRETATION_SINGLE_VALUE_KPI_STAT":                6,
+		"INTERPRETATION_SINGLE_VALUE_KPI_GAUGE":               7,
+		"INTERPRETATION_MULTI_VALUE_KPI_STAT":                 8,
+		"INTERPRETATION_MULTI_VALUE_KPI_GAUGE":                9,
+		"INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS":         10,
+		"INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART":       11,
+		"INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS": 12,
 	}
 )
 
@@ -339,7 +360,7 @@ type Dynamic_Query_Spans struct {
 	DataModeType  common1.DataModeType           `protobuf:"varint,2,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType" json:"data_mode_type,omitempty"`
 	Filters       []*filters.Filter_SpansFilter  `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	GroupBy       []*common.SpanObservationField `protobuf:"bytes,4,rep,name=group_by,json=groupBy,proto3" json:"group_by,omitempty"`
-	Aggregation   []*common.SpansAggregation     `protobuf:"bytes,5,rep,name=aggregation,proto3" json:"aggregation,omitempty"`
+	Aggregation   []*common.LogsAggregation      `protobuf:"bytes,5,rep,name=aggregation,proto3" json:"aggregation,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -402,7 +423,7 @@ func (x *Dynamic_Query_Spans) GetGroupBy() []*common.SpanObservationField {
 	return nil
 }
 
-func (x *Dynamic_Query_Spans) GetAggregation() []*common.SpansAggregation {
+func (x *Dynamic_Query_Spans) GetAggregation() []*common.LogsAggregation {
 	if x != nil {
 		return x.Aggregation
 	}
@@ -414,6 +435,7 @@ type Dynamic_Query_Metrics struct {
 	PromqlQuery     *common.PromQlQuery            `protobuf:"bytes,1,opt,name=promql_query,json=promqlQuery,proto3" json:"promql_query,omitempty"`
 	PromqlQueryType common.PromQLQueryType         `protobuf:"varint,2,opt,name=promql_query_type,json=promqlQueryType,proto3,enum=com.coralogixapis.dashboards.v1.common.PromQLQueryType" json:"promql_query_type,omitempty"`
 	EditorMode      common1.MetricsQueryEditorMode `protobuf:"varint,3,opt,name=editor_mode,json=editorMode,proto3,enum=com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode" json:"editor_mode,omitempty"`
+	SeriesLimitType common.MetricsSeriesLimitType  `protobuf:"varint,4,opt,name=series_limit_type,json=seriesLimitType,proto3,enum=com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType" json:"series_limit_type,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -467,6 +489,13 @@ func (x *Dynamic_Query_Metrics) GetEditorMode() common1.MetricsQueryEditorMode {
 		return x.EditorMode
 	}
 	return common1.MetricsQueryEditorMode(0)
+}
+
+func (x *Dynamic_Query_Metrics) GetSeriesLimitType() common.MetricsSeriesLimitType {
+	if x != nil {
+		return x.SeriesLimitType
+	}
+	return common.MetricsSeriesLimitType(0)
 }
 
 type Dynamic_Query_Dataprime struct {
@@ -525,50 +554,59 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto protoreflect.
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a>com/coralogixapis/dashboards/v1/common/spans_aggregation.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xac\x1b\n" +
+	"9com/coralogixapis/dashboards/v1/ast/widgets/dynamic.proto\x12+com.coralogixapis.dashboards.v1.ast.widgets\x1a8com/coralogixapis/dashboards/v1/ast/filters/filter.proto\x1aGcom/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto\x1aRcom/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto\x1a=com/coralogixapis/dashboards/v1/common/logs_aggregation.proto\x1aFcom/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a7com/coralogixapis/dashboards/v1/common/time_frame.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa0\x1f\n" +
 	"\aDynamic\x12\x85\x01\n" +
-	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x92A02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
+	"\x05query\x18\x01 \x01(\v2:.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.QueryB3\x9aA02.A query object describing how to retrieve dataR\x05query\x12\x90\x01\n" +
 	"\n" +
-	"time_frame\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectB8\x92A523Time frame which overrides the dashboard time frameR\ttimeFrame\x12\x95\x01\n" +
-	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x92A%2#Interpretation of the query resultsR\x0einterpretation\x1a\xee\x15\n" +
+	"time_frame\x18\x02 \x01(\v27.com.coralogixapis.dashboards.v1.common.TimeFrameSelectB8\x9aA523Time frame which overrides the dashboard time frameR\ttimeFrame\x12\x95\x01\n" +
+	"\x0einterpretation\x18\x03 \x01(\x0e2C.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.InterpretationB(\x9aA%2#Interpretation of the query resultsR\x0einterpretation\x1a\x9d\x17\n" +
 	"\x05Query\x12U\n" +
 	"\x04logs\x18\x01 \x01(\v2?.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.LogsH\x00R\x04logs\x12X\n" +
 	"\x05spans\x18\x02 \x01(\v2@.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.SpansH\x00R\x05spans\x12^\n" +
 	"\ametrics\x18\x03 \x01(\v2B.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.MetricsH\x00R\ametrics\x12d\n" +
 	"\tdataprime\x18\x04 \x01(\v2D.com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.DataprimeH\x00R\tdataprime\x1a\x8c\x06\n" +
 	"\x04Logs\x12\xba\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x92A_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType\x12\x8d\x01\n" +
-	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x92A02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
-	"\bgroup_by\x18\x04 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x92A<2:A list of observation fields by which to group the resultsR\agroupBy\x12t\n" +
-	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x92A\x162\x14Aggregation functionR\vaggregation:-\x92A*\n" +
-	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\xc7\x05\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryBb\x9aA_2$A Lucene query string to search logsJ7{ \"value\": \"coralogix.metadata.subsystemName: cx_rum\" }R\vluceneQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType\x12\x8d\x01\n" +
+	"\afilters\x18\x03 \x03(\v2>.com.coralogixapis.dashboards.v1.ast.filters.Filter.LogsFilterB3\x9aA02.List of filters that narrow down query resultsR\afilters\x12\x94\x01\n" +
+	"\bgroup_by\x18\x04 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldB?\x9aA<2:A list of observation fields by which to group the resultsR\agroupBy\x12t\n" +
+	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB\x19\x9aA\x162\x14Aggregation functionR\vaggregation:-\x9aA*\n" +
+	"(*\tLogsQuery2\x1bA logs variant of the query\x1a\xc5\x05\n" +
 	"\x05Spans\x12\x87\x01\n" +
-	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x92A,2*Lucene query string to search span recordsR\vluceneQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType\x12z\n" +
-	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x92A\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
-	"\bgroup_by\x18\x04 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB-\x92A*2(A list of fields to group the records byR\agroupBy\x12\x80\x01\n" +
-	"\vaggregation\x18\x05 \x03(\v28.com.coralogixapis.dashboards.v1.common.SpansAggregationB$\x92A!2\x1fSpan query aggregation functionR\vaggregation:/\x92A,\n" +
+	"\flucene_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.LuceneQueryB/\x9aA,2*Lucene query string to search span recordsR\vluceneQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType\x12z\n" +
+	"\afilters\x18\x03 \x03(\v2?.com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilterB\x1f\x9aA\x1c2\x1aList of span query filtersR\afilters\x12\x86\x01\n" +
+	"\bgroup_by\x18\x04 \x03(\v2<.com.coralogixapis.dashboards.v1.common.SpanObservationFieldB-\x9aA*2(A list of fields to group the records byR\agroupBy\x12\x7f\n" +
+	"\vaggregation\x18\x05 \x03(\v27.com.coralogixapis.dashboards.v1.common.LogsAggregationB$\x9aA!2\x1fSpan query aggregation functionR\vaggregation:/\x9aA,\n" +
 	"**\n" +
-	"SpansQuery2\x1cA spans variant of the query\x1a\xcb\x04\n" +
+	"SpansQuery2\x1cA spans variant of the query\x1a\xfc\x05\n" +
 	"\aMetrics\x12\xa3\x01\n" +
-	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x92AH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12\x9b\x01\n" +
-	"\x11promql_query_type\x18\x02 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x92A321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12\xc6\x01\n" +
-	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x92AV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
-	"editorMode:3\x92A0\n" +
+	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryBK\x9aAH2(PromQL query string for querying metricsJ\x1c{ \"value\": \"up{job='abc'}\" }R\vpromqlQuery\x12\x9b\x01\n" +
+	"\x11promql_query_type\x18\x02 \x01(\x0e27.com.coralogixapis.dashboards.v1.common.PromQLQueryTypeB6\x9aA321Type of the PromQL query, can be Range or InstantR\x0fpromqlQueryType\x12\xc6\x01\n" +
+	"\veditor_mode\x18\x03 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorModeBY\x9aAV2QType of the query editor used to generate the query, can be text or builder basedJ\x012R\n" +
+	"editorMode\x12\xae\x01\n" +
+	"\x11series_limit_type\x18\x04 \x01(\x0e2>.com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitTypeBB\x9aA?2:How to limit the result using series_count_limit parameterJ\x011R\x0fseriesLimitType:3\x9aA0\n" +
 	".*\fMetricsQuery2\x1eA metrics variant of the query\x1a\xbd\x02\n" +
 	"\tDataprime\x12z\n" +
-	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x92A\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
-	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x92A\x102\x0eData mode typeR\fdataModeType:7\x92A4\n" +
+	"\x0fdataprime_query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryB\x19\x9aA\x162\x14Dataprime query textR\x0edataprimeQuery\x12{\n" +
+	"\x0edata_mode_type\x18\x02 \x01(\x0e2@.com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeTypeB\x13\x9aA\x102\x0eData mode typeR\fdataModeType:7\x9aA4\n" +
 	"2*\x0eDataprimeQuery2 A Dataprime variant of the queryB\a\n" +
-	"\x05value\"\xfc\x01\n" +
+	"\x05value\"\xc1\x04\n" +
 	"\x0eInterpretation\x12\x1e\n" +
 	"\x1aINTERPRETATION_UNSPECIFIED\x10\x00\x12!\n" +
 	"\x1dINTERPRETATION_RAW_DATA_TABLE\x10\x01\x12'\n" +
 	"#INTERPRETATION_TREND_OVER_TIME_LINE\x10\x02\x12#\n" +
 	"\x1fINTERPRETATION_SINGLE_VALUE_KPI\x10\x03\x12\"\n" +
 	"\x1eINTERPRETATION_MULTI_VALUE_KPI\x10\x04\x125\n" +
-	"1INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS\x10\x05b\x06proto3"
+	"1INTERPRETATION_CATEGORICAL_ANALYSIS_VERTICAL_BARS\x10\x05\x12(\n" +
+	"$INTERPRETATION_SINGLE_VALUE_KPI_STAT\x10\x06\x12)\n" +
+	"%INTERPRETATION_SINGLE_VALUE_KPI_GAUGE\x10\a\x12'\n" +
+	"#INTERPRETATION_MULTI_VALUE_KPI_STAT\x10\b\x12(\n" +
+	"$INTERPRETATION_MULTI_VALUE_KPI_GAUGE\x10\t\x12/\n" +
+	"+INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS\x10\n" +
+	"\x121\n" +
+	"-INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART\x10\v\x127\n" +
+	"3INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS\x10\fb\x06proto3"
 
 var (
 	file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_rawDescOnce sync.Once
@@ -600,10 +638,10 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_goTypes = []a
 	(*common.LogsAggregation)(nil),      // 12: com.coralogixapis.dashboards.v1.common.LogsAggregation
 	(*filters.Filter_SpansFilter)(nil),  // 13: com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
 	(*common.SpanObservationField)(nil), // 14: com.coralogixapis.dashboards.v1.common.SpanObservationField
-	(*common.SpansAggregation)(nil),     // 15: com.coralogixapis.dashboards.v1.common.SpansAggregation
-	(*common.PromQlQuery)(nil),          // 16: com.coralogixapis.dashboards.v1.common.PromQlQuery
-	(common.PromQLQueryType)(0),         // 17: com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	(common1.MetricsQueryEditorMode)(0), // 18: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(*common.PromQlQuery)(nil),          // 15: com.coralogixapis.dashboards.v1.common.PromQlQuery
+	(common.PromQLQueryType)(0),         // 16: com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	(common1.MetricsQueryEditorMode)(0), // 17: com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	(common.MetricsSeriesLimitType)(0),  // 18: com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
 	(*common.DataprimeQuery)(nil),       // 19: com.coralogixapis.dashboards.v1.common.DataprimeQuery
 }
 var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []int32{
@@ -623,17 +661,18 @@ var file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_depIdxs = []i
 	9,  // 13: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
 	13, // 14: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.filters:type_name -> com.coralogixapis.dashboards.v1.ast.filters.Filter.SpansFilter
 	14, // 15: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.group_by:type_name -> com.coralogixapis.dashboards.v1.common.SpanObservationField
-	15, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.SpansAggregation
-	16, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
-	17, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
-	18, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
-	19, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	9,  // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
-	22, // [22:22] is the sub-list for method output_type
-	22, // [22:22] is the sub-list for method input_type
-	22, // [22:22] is the sub-list for extension type_name
-	22, // [22:22] is the sub-list for extension extendee
-	0,  // [0:22] is the sub-list for field type_name
+	12, // 16: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Spans.aggregation:type_name -> com.coralogixapis.dashboards.v1.common.LogsAggregation
+	15, // 17: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
+	16, // 18: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.promql_query_type:type_name -> com.coralogixapis.dashboards.v1.common.PromQLQueryType
+	17, // 19: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.editor_mode:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.MetricsQueryEditorMode
+	18, // 20: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Metrics.series_limit_type:type_name -> com.coralogixapis.dashboards.v1.common.MetricsSeriesLimitType
+	19, // 21: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.dataprime_query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	9,  // 22: com.coralogixapis.dashboards.v1.ast.widgets.Dynamic.Query.Dataprime.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.ast.widgets.common.DataModeType
+	23, // [23:23] is the sub-list for method output_type
+	23, // [23:23] is the sub-list for method input_type
+	23, // [23:23] is the sub-list for extension type_name
+	23, // [23:23] is the sub-list for extension extendee
+	0,  // [0:23] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_widgets_dynamic_proto_init() }

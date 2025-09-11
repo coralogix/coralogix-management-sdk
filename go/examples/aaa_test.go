@@ -31,7 +31,7 @@ func TestApiKeys(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	k := cxsdk.NewAPIKeysClient(creator)
 	teamId, e := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	assertNilAndPrintError(t, e)
@@ -72,7 +72,7 @@ func TestUsers(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewUsersClient(creator)
 
@@ -121,7 +121,7 @@ func TestScopes(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewScopesClient(creator)
 	description := "Data Access Rule intended for testing"
 	result, e := c.Create(context.Background(), &cxsdk.CreateScopeRequest{
@@ -165,7 +165,7 @@ func TestGroups(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
 	assertNilAndPrintError(t, err)
 	c := cxsdk.NewGroupsClient(creator)
@@ -228,7 +228,7 @@ func TestTeams(t *testing.T) {
 	region, err := cxsdk.CoralogixRegionFromEnv()
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewTeamsClient(creator)
 
@@ -292,7 +292,7 @@ func TestSamlConfigurationRetrieval(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
@@ -316,7 +316,7 @@ func TestSamlSetUpWithContent(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
@@ -347,7 +347,7 @@ func TestSamlSetUpWithUrl(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewSamlClient(creator)
 
 	teamId, err := strconv.ParseUint(os.Getenv("TEAM_ID"), 10, 32)
@@ -376,7 +376,7 @@ func TestIpAccess(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewIPAccessClient(creator)
 
 	// replace without ID, so it will create a new settings in case it doesn't exist

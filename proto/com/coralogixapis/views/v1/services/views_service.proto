@@ -5,6 +5,7 @@ package com.coralogixapis.views.v1.services;
 import "com/coralogixapis/views/v1/filters.proto";
 import "com/coralogixapis/views/v1/search_query.proto";
 import "com/coralogixapis/views/v1/time_selection.proto";
+import "com/coralogixapis/views/v1/view_type.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
 import "google/api/annotations.proto";
@@ -137,7 +138,6 @@ message CreateViewRequest {
   // View selected filters
   SelectedFilters filters = 4;
 
-
   google.protobuf.StringValue folder_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
     description: "Unique identifier for folders"
     format: "uuid"
@@ -146,6 +146,8 @@ message CreateViewRequest {
     example: "\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"",
     pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
   }];
+
+  ViewType view_type = 6;
 }
 
 message CreateViewResponse {
@@ -234,4 +236,6 @@ message View {
   }];
 
   google.protobuf.BoolValue is_compact_mode = 7;
+
+  ViewType view_type = 8;
 }

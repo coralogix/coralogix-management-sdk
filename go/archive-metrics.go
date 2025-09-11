@@ -84,7 +84,7 @@ const (
 
 // ArchiveMetricsClient is a client for the Coralogix Archive Metrics API.
 type ArchiveMetricsClient struct {
-	callPropertiesCreator *CallPropertiesCreator
+	callPropertiesCreator CallPropertiesCreator
 }
 
 // Update updates the archive metrics configuration.
@@ -196,6 +196,6 @@ func (c ArchiveMetricsClient) Disable(ctx context.Context) (*emptypb.Empty, erro
 }
 
 // NewArchiveMetricsClient creates a new archive metrics client.
-func NewArchiveMetricsClient(c *CallPropertiesCreator) *ArchiveMetricsClient {
+func NewArchiveMetricsClient(c CallPropertiesCreator) *ArchiveMetricsClient {
 	return &ArchiveMetricsClient{callPropertiesCreator: c}
 }

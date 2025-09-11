@@ -143,10 +143,16 @@ func (c UsersClient) Delete(ctx context.Context, userID string) error {
 }
 
 // NewUsersClient creates a new UsersClient
-func NewUsersClient(c *CallPropertiesCreator) *UsersClient {
-	restEndpoint := CoralogixRestEndpointFromRegion(strings.ToLower(c.coraglogixRegion))
+func NewUsersClient(c CallPropertiesCreator) *UsersClient {
+	creator, ok := c.(*SDKCallPropertiesCreator)
+	if !ok {
+		return nil
+	}
+
+	restEndpoint := CoralogixRestEndpointFromRegion(strings.ToLower(creator.coraglogixRegion))
 	targetURL := restEndpoint + "/scim/Users"
-	client := NewRestClient(targetURL, c.teamsLevelAPIKey)
+	client := NewRestClient(targetURL, creator.teamsLevelAPIKey)
+
 	return &UsersClient{client: client}
 }
 

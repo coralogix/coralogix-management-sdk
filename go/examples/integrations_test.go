@@ -67,7 +67,7 @@ func TestIntegration(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewIntegrationsClient(creator)
 	role := os.Getenv("AWS_TEST_ROLE")
@@ -292,7 +292,7 @@ func TestWebhooks(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 
 	c := cxsdk.NewWebhooksClient(creator)
 	testResult, err := c.Test(context.Background(), &cxsdk.TestOutgoingWebhookRequest{
@@ -323,7 +323,7 @@ func crud(t *testing.T, req *cxsdk.CreateOutgoingWebhookRequest) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewWebhooksClient(creator)
 	result, e := c.Create(context.Background(), req)
 	if e != nil {
@@ -358,7 +358,7 @@ func TestContextualDataIntegrations(t *testing.T) {
 	assertNilAndPrintError(t, err)
 	authContext, err := cxsdk.AuthContextFromEnv()
 	assertNilAndPrintError(t, err)
-	creator := cxsdk.NewCallPropertiesCreator(region, authContext)
+	creator := cxsdk.NewSDKCallPropertiesCreator(region, authContext)
 	c := cxsdk.NewContextualDataIntegrationsClient(creator)
 
 	// Get all integrations first to check initial state
