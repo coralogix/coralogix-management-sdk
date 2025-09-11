@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/descriptorpb"
@@ -269,6 +269,58 @@ func (OrderByFields) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP(), []int{4}
 }
 
+type AlertDefStatus int32
+
+const (
+	AlertDefStatus_ALERT_DEF_STATUS_UNSPECIFIED AlertDefStatus = 0
+	AlertDefStatus_ALERT_DEF_STATUS_ALERTING    AlertDefStatus = 1
+	AlertDefStatus_ALERT_DEF_STATUS_OK          AlertDefStatus = 2
+	AlertDefStatus_ALERT_DEF_STATUS_NO_DATA     AlertDefStatus = 3
+)
+
+// Enum value maps for AlertDefStatus.
+var (
+	AlertDefStatus_name = map[int32]string{
+		0: "ALERT_DEF_STATUS_UNSPECIFIED",
+		1: "ALERT_DEF_STATUS_ALERTING",
+		2: "ALERT_DEF_STATUS_OK",
+		3: "ALERT_DEF_STATUS_NO_DATA",
+	}
+	AlertDefStatus_value = map[string]int32{
+		"ALERT_DEF_STATUS_UNSPECIFIED": 0,
+		"ALERT_DEF_STATUS_ALERTING":    1,
+		"ALERT_DEF_STATUS_OK":          2,
+		"ALERT_DEF_STATUS_NO_DATA":     3,
+	}
+)
+
+func (x AlertDefStatus) Enum() *AlertDefStatus {
+	p := new(AlertDefStatus)
+	*p = x
+	return p
+}
+
+func (x AlertDefStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (AlertDefStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_com_coralogixapis_alerts_v3_commons_proto_enumTypes[5].Descriptor()
+}
+
+func (AlertDefStatus) Type() protoreflect.EnumType {
+	return &file_com_coralogixapis_alerts_v3_commons_proto_enumTypes[5]
+}
+
+func (x AlertDefStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use AlertDefStatus.Descriptor instead.
+func (AlertDefStatus) EnumDescriptor() ([]byte, []int) {
+	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP(), []int{5}
+}
+
 type TimeDuration struct {
 	state         protoimpl.MessageState  `protogen:"open.v1"`
 	Duration      *wrapperspb.UInt64Value `protobuf:"bytes,1,opt,name=duration,proto3" json:"duration,omitempty"`
@@ -421,18 +473,18 @@ var File_com_coralogixapis_alerts_v3_commons_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_commons_proto_rawDesc = "" +
 	"\n" +
-	")com/coralogixapis/alerts/v3/commons.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa3\x02\n" +
+	")com/coralogixapis/alerts/v3/commons.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa3\x02\n" +
 	"\fTimeDuration\x12U\n" +
-	"\bduration\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\x1b\x92A\x182\x12The duration valueJ\x0260R\bduration\x12s\n" +
-	"\x04unit\x18\x02 \x01(\x0e2).com.coralogixapis.alerts.v3.DurationUnitB4\x92A12\x18The unit of the durationJ\x15\"DURATION_UNIT_HOURS\"R\x04unit:G\x92AD\n" +
+	"\bduration\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\x1b\x9aA\x182\x12The duration valueJ\x0260R\bduration\x12s\n" +
+	"\x04unit\x18\x02 \x01(\x0e2).com.coralogixapis.alerts.v3.DurationUnitB4\x9aA12\x18The unit of the durationJ\x15\"DURATION_UNIT_HOURS\"R\x04unit:G\x9aAD\n" +
 	"B*\rTime duration2\x1fConfiguration for time duration\xd2\x01\bduration\xd2\x01\x04unit\"\xa4\x01\n" +
 	"\vOrderByList\x12W\n" +
-	"\torder_bys\x18\x01 \x03(\v2$.com.coralogixapis.alerts.v3.OrderByB\x14\x92A\x112\x0fOrder by fieldsR\borderBys:<\x92A9\n" +
+	"\torder_bys\x18\x01 \x03(\v2$.com.coralogixapis.alerts.v3.OrderByB\x14\x9aA\x112\x0fOrder by fieldsR\borderBys:<\x9aA9\n" +
 	"7*\rOrder by list2\x1aList of fields to order by\xd2\x01\torder_bys\"\xa4\x03\n" +
 	"\aOrderBy\x12\x86\x01\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.alerts.v3.OrderByFieldsB;\x92A82\x16Field name to order byJ\x1e\"ORDER_BY_FIELDS_UPDATED_TIME\"R\tfieldName\x12\x91\x01\n" +
-	"\tdirection\x18\x02 \x01(\x0e2-.com.coralogixapis.alerts.v3.OrderByDirectionBD\x92AA2\x16Direction for orderingJ'\"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\"R\tdirection:|\x92Ay\n" +
+	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.alerts.v3.OrderByFieldsB;\x9aA82\x16Field name to order byJ\x1e\"ORDER_BY_FIELDS_UPDATED_TIME\"R\tfieldName\x12\x91\x01\n" +
+	"\tdirection\x18\x02 \x01(\x0e2-.com.coralogixapis.alerts.v3.OrderByDirectionBD\x9aAA2\x16Direction for orderingJ'\"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\"R\tdirection:|\x9aAy\n" +
 	"w*\bOrder by2RA data structure that specifies the field and direction for ordering query results\xd2\x01\n" +
 	"field_name\xd2\x01\tdirection*Z\n" +
 	"\bNotifyOn\x12(\n" +
@@ -454,7 +506,12 @@ const file_com_coralogixapis_alerts_v3_commons_proto_rawDesc = "" +
 	"\x18ORDER_BY_FIELDS_SEVERITY\x10\x03\x12 \n" +
 	"\x1cORDER_BY_FIELDS_CREATED_TIME\x10\x04\x12 \n" +
 	"\x1cORDER_BY_FIELDS_UPDATED_TIME\x10\x05\x12\"\n" +
-	"\x1eORDER_BY_FIELDS_LAST_TRIGGERED\x10\x06b\x06proto3"
+	"\x1eORDER_BY_FIELDS_LAST_TRIGGERED\x10\x06*\x88\x01\n" +
+	"\x0eAlertDefStatus\x12 \n" +
+	"\x1cALERT_DEF_STATUS_UNSPECIFIED\x10\x00\x12\x1d\n" +
+	"\x19ALERT_DEF_STATUS_ALERTING\x10\x01\x12\x17\n" +
+	"\x13ALERT_DEF_STATUS_OK\x10\x02\x12\x1c\n" +
+	"\x18ALERT_DEF_STATUS_NO_DATA\x10\x03b\x06proto3"
 
 var (
 	file_com_coralogixapis_alerts_v3_commons_proto_rawDescOnce sync.Once
@@ -468,7 +525,7 @@ func file_com_coralogixapis_alerts_v3_commons_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_alerts_v3_commons_proto_rawDescData
 }
 
-var file_com_coralogixapis_alerts_v3_commons_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_com_coralogixapis_alerts_v3_commons_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_com_coralogixapis_alerts_v3_commons_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_com_coralogixapis_alerts_v3_commons_proto_goTypes = []any{
 	(NotifyOn)(0),                  // 0: com.coralogixapis.alerts.v3.NotifyOn
@@ -476,15 +533,16 @@ var file_com_coralogixapis_alerts_v3_commons_proto_goTypes = []any{
 	(BooleanOperator)(0),           // 2: com.coralogixapis.alerts.v3.BooleanOperator
 	(OrderByDirection)(0),          // 3: com.coralogixapis.alerts.v3.OrderByDirection
 	(OrderByFields)(0),             // 4: com.coralogixapis.alerts.v3.OrderByFields
-	(*TimeDuration)(nil),           // 5: com.coralogixapis.alerts.v3.TimeDuration
-	(*OrderByList)(nil),            // 6: com.coralogixapis.alerts.v3.OrderByList
-	(*OrderBy)(nil),                // 7: com.coralogixapis.alerts.v3.OrderBy
-	(*wrapperspb.UInt64Value)(nil), // 8: google.protobuf.UInt64Value
+	(AlertDefStatus)(0),            // 5: com.coralogixapis.alerts.v3.AlertDefStatus
+	(*TimeDuration)(nil),           // 6: com.coralogixapis.alerts.v3.TimeDuration
+	(*OrderByList)(nil),            // 7: com.coralogixapis.alerts.v3.OrderByList
+	(*OrderBy)(nil),                // 8: com.coralogixapis.alerts.v3.OrderBy
+	(*wrapperspb.UInt64Value)(nil), // 9: google.protobuf.UInt64Value
 }
 var file_com_coralogixapis_alerts_v3_commons_proto_depIdxs = []int32{
-	8, // 0: com.coralogixapis.alerts.v3.TimeDuration.duration:type_name -> google.protobuf.UInt64Value
+	9, // 0: com.coralogixapis.alerts.v3.TimeDuration.duration:type_name -> google.protobuf.UInt64Value
 	1, // 1: com.coralogixapis.alerts.v3.TimeDuration.unit:type_name -> com.coralogixapis.alerts.v3.DurationUnit
-	7, // 2: com.coralogixapis.alerts.v3.OrderByList.order_bys:type_name -> com.coralogixapis.alerts.v3.OrderBy
+	8, // 2: com.coralogixapis.alerts.v3.OrderByList.order_bys:type_name -> com.coralogixapis.alerts.v3.OrderBy
 	4, // 3: com.coralogixapis.alerts.v3.OrderBy.field_name:type_name -> com.coralogixapis.alerts.v3.OrderByFields
 	3, // 4: com.coralogixapis.alerts.v3.OrderBy.direction:type_name -> com.coralogixapis.alerts.v3.OrderByDirection
 	5, // [5:5] is the sub-list for method output_type
@@ -504,7 +562,7 @@ func file_com_coralogixapis_alerts_v3_commons_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_alerts_v3_commons_proto_rawDesc), len(file_com_coralogixapis_alerts_v3_commons_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,

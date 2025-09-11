@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -327,7 +327,7 @@ var File_com_coralogixapis_alerts_v3_notification_notification_event_proto proto
 
 const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1aScom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x1aVcom/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcd\x05\n" +
+	"Acom/coralogixapis/alerts/v3/notification/notification_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_immediate_notification.proto\x1aJcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x1aLcom/coralogixapis/alerts/v3/notification/metric_threshold_notification.proto\x1aScom/coralogixapis/alerts/v3/notification/slo_burn_rate_threshold_notification.proto\x1aVcom/coralogixapis/alerts/v3/notification/slo_error_budget_threshold_notification.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcd\x05\n" +
 	"\x16AlertNotificationEvent\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12,\n" +
 	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12@\n" +
@@ -338,7 +338,7 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\x10highest_priority\x18\a \x01(\v2%.com.coralogixapis.alerts.v3.PriorityR\x0fhighestPriority\x1a]\n" +
 	"\vGroupsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.alerts.v3.GroupR\x05value:\x028\x01:r\x92Ao\n" +
+	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.alerts.v3.GroupR\x05value:\x028\x01:r\x9aAo\n" +
 	"m*\x18Alert notification event\xd2\x01\ttimestamp\xd2\x01\x02id\xd2\x01\x06status\xd2\x01\vattachments\xd2\x01\x06groups\xd2\x01\fgrouping_key\xd2\x01\x10highest_priority\"\x99\b\n" +
 	"\x05Group\x12@\n" +
 	"\x06status\x18\x01 \x01(\x0e2(.com.coralogixapis.alerts.v3.AlertStatusR\x06status\x12:\n" +
@@ -355,7 +355,7 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\x1aslo_error_budget_threshold\x18h \x01(\v2@.com.coralogixapis.alerts.v3.SloErrorBudgetThresholdNotificationH\x00R\x17sloErrorBudgetThreshold\x1a<\n" +
 	"\x0eKeyValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x89\x01\x92A\x85\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x89\x01\x9aA\x85\x01\n" +
 	"\x82\x01*\x18Alert notification group2.A group of related alerts with the same status\xd2\x01\x06status\xd2\x01\n" +
 	"suppressed\xd2\x01\bpriority\xd2\x01\n" +
 	"key_values\xd2\x01\adetailsB\t\n" +
@@ -363,7 +363,7 @@ const file_com_coralogixapis_alerts_v3_notification_notification_event_proto_raw
 	"\vAttachments\x12<\n" +
 	"\n" +
 	"logExample\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\n" +
-	"logExample:2\x92A/\n" +
+	"logExample:2\x9aA/\n" +
 	"-*\x1eAlert notification attachments\xd2\x01\n" +
 	"logExampleb\x06proto3"
 

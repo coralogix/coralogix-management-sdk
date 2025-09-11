@@ -267,10 +267,12 @@ message GetEventsStatisticsResponse {
       description: "This data structure represents a response to get events statistics"
       required: [
         "cx_event_metadata_field_statistics"
+        "cx_event_labels_field_statistics"
       ]
     }
   };
   map<string, FieldStatistics> cx_event_metadata_field_statistics = 1;
+  map<string, FieldStatistics> cx_event_labels_field_statistics = 2;
 }
 
 message FieldStatistics {

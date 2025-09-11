@@ -4,7 +4,7 @@ package com.coralogixapis.incidents.v1;
 
 import "com/coralogixapis/incidents/v1/incident.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 enum OrderByFields {
   ORDER_BY_FIELDS_UNSPECIFIED = 0;
@@ -16,7 +16,7 @@ enum OrderByFields {
 }
 
 message OrderBy {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident order by"
       required: [
@@ -39,27 +39,27 @@ enum OrderByDirection {
 }
 
 message GroupBy {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident group by"
       required: ["field"]
     }
   };
   oneof field {
-    IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "The field to group by"
       example: "\"INCIDENTS_FIELDS_ID\""
     }];
-    google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The contextual label to group by."}];
+    google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The contextual label to group by."}];
   }
-  OrderByDirection order_by_direction = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  OrderByDirection order_by_direction = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The order by direction."
     example: "\"ORDER_BY_DIRECTION_ASC\""
   }];
 }
 
 message IncidentSearchQuery {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident search query"
       required: [
@@ -68,15 +68,15 @@ message IncidentSearchQuery {
       ]
     }
   };
-  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The search query"
     example: "\"error\""
   }];
   oneof field {
-    IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    IncidentFields incident_field = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "The field to search in"
       example: "\"INCIDENTS_FIELDS_STATUS\""
     }];
-    google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The contextual label to search in."}];
+    google.protobuf.StringValue contextual_label = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The contextual label to search in."}];
   }
 }

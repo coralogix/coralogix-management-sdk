@@ -5,7 +5,7 @@ package com.coralogixapis.notification_center.presets.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/config_overrides.proto";
 import "google/protobuf/timestamp.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/presets/v1";
 
@@ -13,7 +13,7 @@ message Preset {
   reserved 2, 3, 6;
   reserved "user_defined_id", "deprecated_entity_type", "parent";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Preset"
       description: "Set of preconfigured templates for notification content rendering"
@@ -25,27 +25,27 @@ message Preset {
     }
   };
   // A unique identifier - automatically generated unless provided by the user
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
   ConnectorType connector_type = 4;
   // A list of of configuration override templates, each associated with a specific output schema and condition
   repeated ConfigOverrides config_overrides = 5;
-  string name = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Preset\"" }];
-  string description = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Custom preset for alerts\"" }];
+  string name = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"My Preset\"" }];
+  string description = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Custom preset for alerts\"" }];
   // System-generated timestamp for when the preset was created
   optional google.protobuf.Timestamp create_time = 9;
   // System-generated timestamp for when the preset was last updated
   optional google.protobuf.Timestamp update_time = 10;
   // Indicates whether the preset is system-provided or custom-created by the user
   optional PresetType preset_type = 11;
-  EntityType entity_type = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
-  optional string parent_id = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"preset_system_slack_alerts_basic\"" }];
+  EntityType entity_type = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
+  optional string parent_id = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"preset_system_slack_alerts_basic\"" }];
 }
 
 message PresetSummary {
   reserved 2, 3;
   reserved "user_defined_id", "deprecated_entity_type";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Preset Summary"
       description: "Provides a concise overview of a preset"
@@ -56,26 +56,19 @@ message PresetSummary {
       description: "Find out more about notification center"
     }
   };
-  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
   ConnectorType connector_type = 4;
-  optional string parent_id = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"c246e826-10c2-405e-8d3f-afcc24ad4d15\"" }];
-  string name = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Preset\"", max_length: 200 }];
-  string description = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Custom preset for alerts\"", max_length: 5000 }];
+  optional string parent_id = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"c246e826-10c2-405e-8d3f-afcc24ad4d15\"" }];
+  string name = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"My Preset\"", max_length: 200 }];
+  string description = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Custom preset for alerts\"", max_length: 5000 }];
   google.protobuf.Timestamp create_time = 8;
   google.protobuf.Timestamp update_time = 9;
   PresetType preset_type = 10;
-  EntityType entity_type = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
 }
 
 enum PresetType {
   PRESET_TYPE_UNSPECIFIED = 0;
   SYSTEM = 1;
   CUSTOM = 2;
-}
-
-message PresetIdentifier {
-  oneof value {
-    string id = 1;
-    string user_facing_id = 2;
-  }
 }

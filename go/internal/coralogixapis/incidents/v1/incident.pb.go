@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	durationpb "google.golang.org/protobuf/types/known/durationpb"
@@ -1024,26 +1024,26 @@ var File_com_coralogixapis_incidents_v1_incident_proto protoreflect.FileDescript
 
 const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogixapis/incidents/v1/incident.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xae\x0e\n" +
+	"-com/coralogixapis/incidents/v1/incident.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/assignee.proto\x1aBcom/coralogixapis/incidents/v1/incident_event/incident_event.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xae\x0e\n" +
 	"\bIncident\x12@\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"incident_id\"R\x02id\x12F\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x92A\x11J\x0f\"incident_name\"R\x04name\x12\xac\x01\n" +
-	"\x05state\x18\x03 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateBg\x92Ad2bThe incident's current internal state, usually derived from the operational events of the incidentR\x05state\x12F\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r\"incident_id\"R\x02id\x12F\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x9aA\x11J\x0f\"incident_name\"R\x04name\x12\xac\x01\n" +
+	"\x05state\x18\x03 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateBg\x9aAd2bThe incident's current internal state, usually derived from the operational events of the incidentR\x05state\x12F\n" +
 	"\x06status\x18\x04 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusR\x06status\x12L\n" +
 	"\vassignments\x18\x05 \x03(\v2*.com.coralogixapis.incidents.v1.AssignmentR\vassignments\x12[\n" +
-	"\vdescription\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x18J\x16\"incident_description\"R\vdescription\x12L\n" +
+	"\vdescription\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x18J\x16\"incident_description\"R\vdescription\x12L\n" +
 	"\bseverity\x18\a \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\bseverity\x12k\n" +
 	"\x11contextual_labels\x18\r \x03(\v2>.com.coralogixapis.incidents.v1.Incident.ContextualLabelsEntryR\x10contextualLabels\x12b\n" +
 	"\x0edisplay_labels\x18\x0e \x03(\v2;.com.coralogixapis.incidents.v1.Incident.DisplayLabelsEntryR\rdisplayLabels\x12E\n" +
 	"\x06events\x18\n" +
 	" \x03(\v2-.com.coralogixapis.incidents.v1.IncidentEventR\x06events\x12V\n" +
 	"\n" +
-	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2024-01-01T00:00:00Z\"R\tcreatedAt\x12T\n" +
-	"\tclosed_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2024-01-01T00:00:00Z\"R\bclosedAt\x12l\n" +
-	"\x16last_state_update_time\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2024-01-01T00:00:00Z\"R\x13lastStateUpdateTime\x12m\n" +
-	"\x15last_state_update_key\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"last_state_update_key\"R\x12lastStateUpdateKey\x12A\n" +
+	"created_at\x18\v \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2024-01-01T00:00:00Z\"R\tcreatedAt\x12T\n" +
+	"\tclosed_at\x18\f \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2024-01-01T00:00:00Z\"R\bclosedAt\x12l\n" +
+	"\x16last_state_update_time\x18\x0f \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2024-01-01T00:00:00Z\"R\x13lastStateUpdateTime\x12m\n" +
+	"\x15last_state_update_key\x18\x10 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"last_state_update_key\"R\x12lastStateUpdateKey\x12A\n" +
 	"\bis_muted\x18\x11 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\aJ\x05falseR\aisMuted\x12J\n" +
+	"\x9aA\aJ\x05falseR\aisMuted\x12J\n" +
 	"\vmeta_labels\x18\x12 \x03(\v2).com.coralogixapis.incidents.v1.MetaLabelR\n" +
 	"metaLabels\x125\n" +
 	"\bduration\x18\x13 \x01(\v2\x19.google.protobuf.DurationR\bduration\x1aC\n" +
@@ -1052,7 +1052,7 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a@\n" +
 	"\x12DisplayLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xb7\x01\x92A\xb3\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xb7\x01\x9aA\xb3\x01\n" +
 	"\xb0\x01*\bIncident\xd2\x01\x02id\xd2\x01\x05state\xd2\x01\x06status\xd2\x01\vassignments\xd2\x01\bseverity\xd2\x01\x11contextual_labels\xd2\x01\x0edisplay_labels\xd2\x01\x06events\xd2\x01\n" +
 	"created_at\xd2\x01\x16last_state_update_time\xd2\x01\x15last_state_update_key\xd2\x01\bduration\"\xf8\x05\n" +
 	"\x12IncidentFieldOneOf\x12.\n" +
@@ -1072,9 +1072,9 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x05field\"\xf3\x01\n" +
 	"\x10ContextualLabels\x12N\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"field_name\"R\tfieldName\x12Q\n" +
-	"\vfield_value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"field_value\"R\n" +
-	"fieldValue:<\x92A9\n" +
+	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"field_name\"R\tfieldName\x12Q\n" +
+	"\vfield_value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r\"field_value\"R\n" +
+	"fieldValue:<\x9aA9\n" +
 	"7*\x1aIncident contextual labels\xd2\x01\n" +
 	"field_name\xd2\x01\vfield_value\"\xd7\x01\n" +
 	"\rGroupByValues\x12[\n" +
@@ -1093,30 +1093,30 @@ const file_com_coralogixapis_incidents_v1_incident_proto_rawDesc = "" +
 	"\x11list_incidents_id\x18\t \x03(\v2\x1c.google.protobuf.StringValueR\x0flistIncidentsId\x12O\n" +
 	"\x16last_state_update_time\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\x13lastStateUpdateTime\x12j\n" +
-	"\x15agg_meta_labels_count\x18\v \x03(\v27.com.coralogixapis.incidents.v1.IncidentMetaLabelsCountR\x12aggMetaLabelsCount:\xfd\x01\x92A\xf9\x01\n" +
+	"\x15agg_meta_labels_count\x18\v \x03(\v27.com.coralogixapis.incidents.v1.IncidentMetaLabelsCountR\x12aggMetaLabelsCount:\xfd\x01\x9aA\xf9\x01\n" +
 	"\xf6\x01*\x14Incident aggregation\xd2\x01\x0fgroup_bys_value\xd2\x01\x0fagg_state_count\xd2\x01\x10agg_status_count\xd2\x01\x12agg_severity_count\xd2\x01\x15agg_assignments_count\xd2\x01\x10first_created_at\xd2\x01\x0elast_closed_at\xd2\x01\x10all_values_count\xd2\x01\x11list_incidents_id\xd2\x01\x16last_state_update_time\xd2\x01\x15agg_meta_labels_count\"\xd8\x01\n" +
 	"\x17IncidentMetaLabelsCount\x12H\n" +
 	"\n" +
 	"meta_label\x18\x01 \x01(\v2).com.coralogixapis.incidents.v1.MetaLabelR\tmetaLabel\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\x05count:6\x9aA3\n" +
 	"1*\x1aIncident meta labels count\xd2\x01\n" +
 	"meta_label\xd2\x01\x05count\"\xdc\x01\n" +
 	"\x17IncidentAssignmentCount\x12L\n" +
 	"\vassigned_to\x18\x01 \x01(\v2+.com.coralogixapis.incidents.v1.UserDetailsR\n" +
 	"assignedTo\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\x05count:6\x9aA3\n" +
 	"1*\x19Incident assignment count\xd2\x01\vassigned_to\xd2\x01\x05count\"\xd5\x01\n" +
 	"\x15IncidentSeverityCount\x12L\n" +
 	"\bseverity\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\bseverity\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:1\x92A.\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\x05count:1\x9aA.\n" +
 	",*\x17Incident severity count\xd2\x01\bseverity\xd2\x01\x05count\"\xc9\x01\n" +
 	"\x13IncidentStatusCount\x12F\n" +
 	"\x06status\x18\x01 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusR\x06status\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:-\x92A*\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\x05count:-\x9aA*\n" +
 	"(*\x15Incident status count\xd2\x01\x06status\xd2\x01\x05count\"\xc3\x01\n" +
 	"\x12IncidentStateCount\x12C\n" +
 	"\x05state\x18\x01 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateR\x05state\x12;\n" +
-	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\x05count:+\x92A(\n" +
+	"\x05count\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\x05count:+\x9aA(\n" +
 	"&*\x14Incident state count\xd2\x01\x05state\xd2\x01\x05count*\x9b\x03\n" +
 	"\x0eIncidentFields\x12 \n" +
 	"\x1cINCIDENTS_FIELDS_UNSPECIFIED\x10\x00\x12\x17\n" +

@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -93,9 +93,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_met
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_common_metrics_filter_proto_rawDesc = "" +
 	"\n" +
-	"Xcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd8\x01\n" +
+	"Xcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd8\x01\n" +
 	"\fMetricFilter\x12\x88\x01\n" +
-	"\x06promql\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBP\x92AM2\x1bA PromQL filter for metricsJ%\"avg_over_time(metric_name[5m]) > 10\"\xa2\x02\x06promqlH\x00R\x06promql:5\x92A2\n" +
+	"\x06promql\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBP\x9aAM2\x1bA PromQL filter for metricsJ%\"avg_over_time(metric_name[5m]) > 10\"\xa2\x02\x06promqlH\x00R\x06promql:5\x9aA2\n" +
 	"0*%Metric filter configuration in alerts\xd2\x01\x06promqlB\x06\n" +
 	"\x04typeb\x06proto3"
 

@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -26,9 +26,9 @@ var File_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sched
 
 const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_scheduler_rule_service_proto_rawDesc = "" +
 	"\n" +
-	"^com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto\x12;com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1\x1aYcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto\x1aZcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto2\xe5\x17\n" +
+	"^com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_rule_service.proto\x12;com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1\x1aYcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto\x1aZcom/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto2\xe5\x17\n" +
 	"\x19AlertSchedulerRuleService\x12\xa0\x03\n" +
-	"\x15GetAlertSchedulerRule\x12Y.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetAlertSchedulerRuleRequest\x1aZ.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetAlertSchedulerRuleResponse\"\xcf\x01\x92A\x90\x01\n" +
+	"\x15GetAlertSchedulerRule\x12Y.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetAlertSchedulerRuleRequest\x1aZ.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetAlertSchedulerRuleResponse\"\xcf\x01\x9aA\x90\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12\x1bGet an alert scheduler ruleJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -36,7 +36,7 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x025\x123/v1/alert-scheduler-rules/{alert_scheduler_rule_id}\x12\x95\x03\n" +
-	"\x18CreateAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleResponse\"\xbb\x01\x92A\x93\x01\n" +
+	"\x18CreateAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateAlertSchedulerRuleResponse\"\xbb\x01\x9aA\x93\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12\x1eCreate an alert scheduler ruleJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -44,7 +44,7 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/alert-scheduler-rules\x12\x95\x03\n" +
-	"\x18UpdateAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleResponse\"\xbb\x01\x92A\x93\x01\n" +
+	"\x18UpdateAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateAlertSchedulerRuleResponse\"\xbb\x01\x9aA\x93\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12\x1eUpdate an alert scheduler ruleJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -52,7 +52,7 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1e:\x01*\x1a\x19/v1/alert-scheduler-rules\x12\xac\x03\n" +
-	"\x18DeleteAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.DeleteAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.DeleteAlertSchedulerRuleResponse\"\xd2\x01\x92A\x93\x01\n" +
+	"\x18DeleteAlertSchedulerRule\x12\\.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.DeleteAlertSchedulerRuleRequest\x1a].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.DeleteAlertSchedulerRuleResponse\"\xd2\x01\x9aA\x93\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12\x1eDelete an alert scheduler ruleJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -60,7 +60,7 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x025*3/v1/alert-scheduler-rules/{alert_scheduler_rule_id}\x12\x9e\x03\n" +
-	"\x19GetBulkAlertSchedulerRule\x12].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetBulkAlertSchedulerRuleRequest\x1a^.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetBulkAlertSchedulerRuleResponse\"\xc1\x01\x92A\x97\x01\n" +
+	"\x19GetBulkAlertSchedulerRule\x12].com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetBulkAlertSchedulerRuleRequest\x1a^.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.GetBulkAlertSchedulerRuleResponse\"\xc1\x01\x9aA\x97\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12\"Get multiple alert scheduler rulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -68,7 +68,7 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02 \x12\x1e/v1/alert-scheduler-rules/bulk\x12\xad\x03\n" +
-	"\x1cCreateBulkAlertSchedulerRule\x12`.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateBulkAlertSchedulerRuleRequest\x1aa.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateBulkAlertSchedulerRuleResponse\"\xc7\x01\x92A\x9a\x01\n" +
+	"\x1cCreateBulkAlertSchedulerRule\x12`.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateBulkAlertSchedulerRuleRequest\x1aa.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.CreateBulkAlertSchedulerRuleResponse\"\xc7\x01\x9aA\x9a\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12%Create multiple alert scheduler rulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -76,14 +76,14 @@ const file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_sch
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/alert-scheduler-rules/bulk\x12\xad\x03\n" +
-	"\x1cUpdateBulkAlertSchedulerRule\x12`.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateBulkAlertSchedulerRuleRequest\x1aa.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateBulkAlertSchedulerRuleResponse\"\xc7\x01\x92A\x9a\x01\n" +
+	"\x1cUpdateBulkAlertSchedulerRule\x12`.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateBulkAlertSchedulerRuleRequest\x1aa.com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1.UpdateBulkAlertSchedulerRuleResponse\"\xc7\x01\x9aA\x9a\x01\n" +
 	"\x1cAlert Scheduler Rule service\x12%Update multiple alert scheduler rulesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/v1/alert-scheduler-rules/bulk\x1aE\x92AB\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/v1/alert-scheduler-rules/bulk\x1aE\x9aAB\n" +
 	"\x1cAlert Scheduler Rule service\x12\"Manage your alert scheduler rules.b\x06proto3"
 
 var file_com_coralogixapis_alerting_alert_scheduler_rule_protobuf_v1_alert_scheduler_rule_service_proto_goTypes = []any{

@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -108,15 +108,15 @@ var File_com_coralogixapis_spans2metrics_v2_spans_query_proto protoreflect.FileD
 
 const file_com_coralogixapis_spans2metrics_v2_spans_query_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/spans2metrics/v2/spans_query.proto\x12\"com.coralogixapis.spans2metrics.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x99\x05\n" +
+	"4com/coralogixapis/spans2metrics/v2/spans_query.proto\x12\"com.coralogixapis.spans2metrics.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x99\x05\n" +
 	"\n" +
 	"SpansQuery\x12R\n" +
-	"\x06lucene\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"applicationName:myApp\"R\x06lucene\x12c\n" +
-	"\x17applicationname_filters\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\f\x92A\tJ\a\"myApp\"R\x16applicationnameFilters\x12e\n" +
-	"\x15subsystemname_filters\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"mySubsystem\"R\x14subsystemnameFilters\x12T\n" +
-	"\x0eaction_filters\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
+	"\x06lucene\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x9aA\x19J\x17\"applicationName:myApp\"R\x06lucene\x12c\n" +
+	"\x17applicationname_filters\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\f\x9aA\tJ\a\"myApp\"R\x16applicationnameFilters\x12e\n" +
+	"\x15subsystemname_filters\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r\"mySubsystem\"R\x14subsystemnameFilters\x12T\n" +
+	"\x0eaction_filters\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x0f\x9aA\fJ\n" +
 	"\"myAction\"R\ractionFilters\x12W\n" +
-	"\x0fservice_filters\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"myService\"R\x0eserviceFilters:\xbb\x01\x92A\xb7\x01\n" +
+	"\x0fservice_filters\x18\x05 \x03(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"myService\"R\x0eserviceFilters:\xbb\x01\x9aA\xb7\x01\n" +
 	"?*\n" +
 	"SpansQuery21This data structure represents a query for spans.*t\n" +
 	"\"Find out more about events2metrics\x12Nhttps://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/b\x06proto3"

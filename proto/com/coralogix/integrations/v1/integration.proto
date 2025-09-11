@@ -6,10 +6,10 @@ import "com/coralogix/extensions/v1/extension.proto";
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/timestamp.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message CloudFormationStack {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CloudFormation stack"
       description: "This data structure represents a CloudFormation stack."
@@ -25,7 +25,7 @@ message CloudFormationStack {
 }
 
 message ARMStack {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ARM stack"
       description: "This data structure represents an Azure Resource Manager stack."
@@ -41,7 +41,7 @@ message ARMStack {
 }
 
 message NoDeployment {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "No deployment"
       description: "This data structure represents an integration that does not require deployment."
@@ -57,7 +57,7 @@ enum ConnectionStatus {
 }
 
 message IntegrationStatus {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration status"
       description: "This data structure represents an integration status."
@@ -72,7 +72,7 @@ message IntegrationStatus {
 }
 
 message IntegrationDoc {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration doc"
       description: "This data structure represents integration documentation."
@@ -84,7 +84,7 @@ message IntegrationDoc {
 }
 
 message IntegrationType {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration type"
       description: "This data structure represents an integration type."
@@ -92,7 +92,7 @@ message IntegrationType {
     }
   };
   message Managed {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Managed"
         description: "This data structure represents a managed integration."
@@ -109,7 +109,7 @@ message IntegrationType {
     Variant variant = 2;
   }
   message Untracked {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Untracked"
         description: "This data structure represents an untracked integration."
@@ -118,7 +118,7 @@ message IntegrationType {
     }
   ;}
   message Cloudformation {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "CloudFormation"
         description: "This data structure represents a CloudFormation integration."
@@ -127,7 +127,7 @@ message IntegrationType {
     }
   ;}
   message AzureArm {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Azure ARM"
         description: "This data structure represents an Azure ARM integration."
@@ -139,7 +139,7 @@ message IntegrationType {
   // At some point, as soon as it's moved to integrations-service,
   // it's expected to be merged under contextual data integrations.
   message PushBasedContextualData {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Push based contextual data"
         description: "This data structure represents a push based contextual data integration."
@@ -148,7 +148,7 @@ message IntegrationType {
     }
   ;}
   message ContextualData {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Contextual data"
         description: "This data structure represents a contextual data integration."
@@ -157,7 +157,7 @@ message IntegrationType {
     }
   ;}
   message GenericWebhook {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Generic webhook"
         description: "This data structure represents a generic webhook integration."
@@ -178,7 +178,7 @@ message IntegrationType {
 }
 
 message Integration {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration"
       description: "This data structure represents an integration"
@@ -197,7 +197,7 @@ message Integration {
 }
 
 message RevisionRef {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Revision reference"
       required: []
@@ -207,7 +207,7 @@ message RevisionRef {
   string description_md = 2;
 }
 message LocalChangelog {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Local changelog"
       required: []
@@ -217,7 +217,7 @@ message LocalChangelog {
 }
 
 message ExternalUrl {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "External URL"
       required: []
@@ -227,7 +227,7 @@ message ExternalUrl {
 }
 
 message IntegrationDetails {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration details"
       description: "This data structure represents a set of integration details."
@@ -238,14 +238,14 @@ message IntegrationDetails {
   reserved "registrations", "cloudtrail", "okta", "helm_chart", "gcp_metrics_collector", "cloudflare", "status_feed", "status_page_tracker", "gcp_traces_collector", "azure_metrics_collector", "rum", "azure_resource_manager", "gcp_logs_collector", "google_workspace_siem";
 
   message DefaultIntegrationDetails {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Default integration details"
         required: []
       }
     };
     message RegisteredInstance {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Registered instance"
         required: []
@@ -282,7 +282,7 @@ message IntegrationDetails {
 }
 
 message IntegrationDefinition {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration definition"
       description: "This data structure represents a definition of an integration."
@@ -296,7 +296,7 @@ message IntegrationDefinition {
 }
 
 message IntegrationRevision {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration revision"
       description: "This data structure represents an integration revision."
@@ -304,7 +304,7 @@ message IntegrationRevision {
     }
   };
   message CloudFormationTemplate {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "CloudFormation template"
         required: []
@@ -316,7 +316,7 @@ message IntegrationRevision {
   }
 
   message ManagedService {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Managed service"
         description: "This data structure represents a managed service."
@@ -325,7 +325,7 @@ message IntegrationRevision {
     };}
 
   message HelmChart {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Helm chart"
         description: "This data structure represents a Helm chart."
@@ -338,7 +338,7 @@ message IntegrationRevision {
   }
 
   message Terraform {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Terraform"
         description: "This data structure represents a Terraform integration."
@@ -349,7 +349,7 @@ message IntegrationRevision {
   }
 
   message Rum {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "RUM"
         description: "This data structure represents a RUM integration."
@@ -361,7 +361,7 @@ message IntegrationRevision {
   }
 
   message AzureArmTemplate {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Azure ARM template"
         description: "This data structure represents an azure ARM template."
@@ -385,7 +385,7 @@ message IntegrationRevision {
   }
 
   message ListTextValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "List text value"
         required: []
@@ -398,7 +398,7 @@ message IntegrationRevision {
   }
 
   message SingleValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Single value"
         required: []
@@ -408,7 +408,7 @@ message IntegrationRevision {
   }
 
   message SingleBooleanValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Single boolean value"
         required: []
@@ -418,7 +418,7 @@ message IntegrationRevision {
   }
 
   message SingleNumericValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Single numeric value"
         required: []
@@ -428,7 +428,7 @@ message IntegrationRevision {
   }
 
   message MultipleSelectionValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Multiple selection value"
         required: []
@@ -438,7 +438,7 @@ message IntegrationRevision {
   }
 
   message SelectionValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Selection value"
         required: []
@@ -449,7 +449,7 @@ message IntegrationRevision {
   }
 
   message FieldCondition {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Field condition"
         required: ["type"]
@@ -461,7 +461,7 @@ message IntegrationRevision {
       AND = 2;
     }
     message FieldValue {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Field value"        
         required: []
@@ -476,7 +476,7 @@ message IntegrationRevision {
   }
 
   message Group {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Group"        
         required: []
@@ -487,7 +487,7 @@ message IntegrationRevision {
   }
 
   message FieldInformation {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Field information"
         required: ["type"]
@@ -519,7 +519,7 @@ message IntegrationRevision {
   }
 
   message CommandInformation {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Command information"
         required: []
@@ -531,7 +531,7 @@ message IntegrationRevision {
       JAVASCRIPT = 2;
     }
     message Link {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Link"        
         required: []
@@ -550,7 +550,7 @@ message IntegrationRevision {
   }
 
   message ConfigurationBlock {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Configuration block"
         required: []
@@ -562,7 +562,7 @@ message IntegrationRevision {
   }
 
   message IntegrationGuide  {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Integration guide"      
         required: []
@@ -589,14 +589,14 @@ message IntegrationRevision {
 }
 
 message Parameter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Parameter"
       required: []
     }
   };
   message StringList {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "String list"        
         required: []
@@ -606,7 +606,7 @@ message Parameter {
   }
 
   message ApiKeyData {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "API key data"       
         required: []
@@ -617,7 +617,7 @@ message Parameter {
   }
 
   message SensitiveDataPlaceholder {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Sensitive data placeholder"        
         required: []
@@ -637,7 +637,7 @@ message Parameter {
 }
 
 message GenericIntegrationParameters {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Generic integration parameters"      
       required: []
@@ -647,7 +647,7 @@ message GenericIntegrationParameters {
 }
 
 message IntegrationMetadata {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration metadata"
       description: "This data structure represents the metadata of an integration."
@@ -666,14 +666,14 @@ message IntegrationMetadata {
 }
 
 message TestIntegrationResult {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test integration result"     
       required: []
     }
   };
   message Success {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Success"      
         required: []
@@ -681,7 +681,7 @@ message TestIntegrationResult {
     }
   ;}
   message Failure {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Failure"        
         required: []
@@ -697,14 +697,14 @@ message TestIntegrationResult {
 }
 
 message RumVersionData {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RUM version data"     
       required: []
     }
   };
   message SourceMapMetadata {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Source map metadata"        
         required: []
@@ -714,7 +714,7 @@ message RumVersionData {
     google.protobuf.BoolValue is_uploaded_successful = 2;
   }
   message LogMetadata {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Log metadata"        
         required: [
@@ -725,7 +725,7 @@ message RumVersionData {
     google.protobuf.Timestamp last_occurrence = 2;
   }
   message Version {
-     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Version"        
         required: [
@@ -742,7 +742,7 @@ message RumVersionData {
 }
 
 message DeployedIntegrationInformation {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Deployed integration information"      
       required: [

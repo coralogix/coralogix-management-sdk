@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -292,6 +292,7 @@ type IncidentQueryFiltersValues struct {
 	ContextualLabels    map[string]*ContextualLabelValuesWithCount `protobuf:"bytes,5,rep,name=contextual_labels,json=contextualLabels,proto3" json:"contextual_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	MetaLabelsWithCount []*IncidentMetaLabelsWithCount             `protobuf:"bytes,6,rep,name=meta_labels_with_count,json=metaLabelsWithCount,proto3" json:"meta_labels_with_count,omitempty"`
 	MetaLabelsOp        FilterOperator                             `protobuf:"varint,7,opt,name=meta_labels_op,json=metaLabelsOp,proto3,enum=com.coralogixapis.incidents.v1.FilterOperator" json:"meta_labels_op,omitempty"`
+	DisplayLabels       map[string]*DisplayLabelValuesWithCount    `protobuf:"bytes,8,rep,name=display_labels,json=displayLabels,proto3" json:"display_labels,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -373,6 +374,13 @@ func (x *IncidentQueryFiltersValues) GetMetaLabelsOp() FilterOperator {
 		return x.MetaLabelsOp
 	}
 	return FilterOperator_FILTER_OPERATOR_OR_OR_UNSPECIFIED
+}
+
+func (x *IncidentQueryFiltersValues) GetDisplayLabels() map[string]*DisplayLabelValuesWithCount {
+	if x != nil {
+		return x.DisplayLabels
+	}
+	return nil
 }
 
 type ContextualLabelValuesWithCount struct {
@@ -471,34 +479,131 @@ func (x *ContextualLabelValueWithCount) GetCount() *wrapperspb.Int32Value {
 	return nil
 }
 
+type DisplayLabelValuesWithCount struct {
+	state           protoimpl.MessageState        `protogen:"open.v1"`
+	ValuesWithCount []*DisplayLabelValueWithCount `protobuf:"bytes,1,rep,name=values_with_count,json=valuesWithCount,proto3" json:"values_with_count,omitempty"`
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *DisplayLabelValuesWithCount) Reset() {
+	*x = DisplayLabelValuesWithCount{}
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes[8]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisplayLabelValuesWithCount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisplayLabelValuesWithCount) ProtoMessage() {}
+
+func (x *DisplayLabelValuesWithCount) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes[8]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisplayLabelValuesWithCount.ProtoReflect.Descriptor instead.
+func (*DisplayLabelValuesWithCount) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *DisplayLabelValuesWithCount) GetValuesWithCount() []*DisplayLabelValueWithCount {
+	if x != nil {
+		return x.ValuesWithCount
+	}
+	return nil
+}
+
+type DisplayLabelValueWithCount struct {
+	state             protoimpl.MessageState  `protogen:"open.v1"`
+	DisplayLabelValue *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=display_label_value,json=displayLabelValue,proto3" json:"display_label_value,omitempty"`
+	Count             *wrapperspb.Int32Value  `protobuf:"bytes,2,opt,name=count,proto3" json:"count,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *DisplayLabelValueWithCount) Reset() {
+	*x = DisplayLabelValueWithCount{}
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes[9]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DisplayLabelValueWithCount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DisplayLabelValueWithCount) ProtoMessage() {}
+
+func (x *DisplayLabelValueWithCount) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes[9]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DisplayLabelValueWithCount.ProtoReflect.Descriptor instead.
+func (*DisplayLabelValueWithCount) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *DisplayLabelValueWithCount) GetDisplayLabelValue() *wrapperspb.StringValue {
+	if x != nil {
+		return x.DisplayLabelValue
+	}
+	return nil
+}
+
+func (x *DisplayLabelValueWithCount) GetCount() *wrapperspb.Int32Value {
+	if x != nil {
+		return x.Count
+	}
+	return nil
+}
+
 var File_com_coralogixapis_incidents_v1_incident_query_filters_values_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDesc = "" +
 	"\n" +
-	"Bcom/coralogixapis/incidents/v1/incident_query_filters_values.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc9\x01\n" +
+	"Bcom/coralogixapis/incidents/v1/incident_query_filters_values.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a5com/coralogixapis/incidents/v1/filter_operators.proto\x1a6com/coralogixapis/incidents/v1/incident_severity.proto\x1a3com/coralogixapis/incidents/v1/incident_state.proto\x1a4com/coralogixapis/incidents/v1/incident_status.proto\x1a/com/coralogixapis/incidents/v1/meta_label.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc9\x01\n" +
 	"\x11AssigneeWithCount\x12I\n" +
-	"\bassignee\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
+	"\bassignee\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0f\x9aA\fJ\n" +
 	"\"assignee\"R\bassignee\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:-\x92A*\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:-\x9aA*\n" +
 	"(*\x13Assignee with count\xd2\x01\bassignee\xd2\x01\x05count\"\xe9\x01\n" +
 	"\x17IncidentStatusWithCount\x12^\n" +
-	"\x06status\x18\x01 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusB\x16\x92A\x13J\x11\"incident_status\"R\x06status\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:2\x92A/\n" +
+	"\x06status\x18\x01 \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentStatusB\x16\x9aA\x13J\x11\"incident_status\"R\x06status\x12:\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:2\x9aA/\n" +
 	"-*\x1aIncident status with count\xd2\x01\x06status\xd2\x01\x05count\"\xcb\x01\n" +
 	"\x16IncidentStateWithCount\x12C\n" +
 	"\x05state\x18\x01 \x01(\x0e2-.com.coralogixapis.incidents.v1.IncidentStateR\x05state\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:0\x92A-\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:0\x9aA-\n" +
 	"+*\x19Incident state with count\xd2\x01\x05state\xd2\x01\x05count\"\xdd\x01\n" +
 	"\x19IncidentSeverityWithCount\x12L\n" +
 	"\bseverity\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.IncidentSeverityR\bseverity\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:6\x92A3\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:6\x9aA3\n" +
 	"1*\x1cIncident severity with count\xd2\x01\bseverity\xd2\x01\x05count\"\xe0\x01\n" +
 	"\x1bIncidentMetaLabelsWithCount\x12H\n" +
 	"\n" +
 	"meta_label\x18\x01 \x01(\v2).com.coralogixapis.incidents.v1.MetaLabelR\tmetaLabel\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:;\x92A8\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:;\x9aA8\n" +
 	"6*\x1fIncident meta labels with count\xd2\x01\n" +
-	"meta_label\xd2\x01\x05count\"\xb7\b\n" +
+	"meta_label\xd2\x01\x05count\"\xbd\n" +
+	"\n" +
 	"\x1aIncidentQueryFiltersValues\x12a\n" +
 	"\x13assignee_with_count\x18\x01 \x03(\v21.com.coralogixapis.incidents.v1.AssigneeWithCountR\x11assigneeWithCount\x12c\n" +
 	"\x11status_with_count\x18\x02 \x03(\v27.com.coralogixapis.incidents.v1.IncidentStatusWithCountR\x0fstatusWithCount\x12`\n" +
@@ -506,18 +611,29 @@ const file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_ra
 	"\x13severity_with_count\x18\x04 \x03(\v29.com.coralogixapis.incidents.v1.IncidentSeverityWithCountR\x11severityWithCount\x12}\n" +
 	"\x11contextual_labels\x18\x05 \x03(\v2P.com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntryR\x10contextualLabels\x12p\n" +
 	"\x16meta_labels_with_count\x18\x06 \x03(\v2;.com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCountR\x13metaLabelsWithCount\x12T\n" +
-	"\x0emeta_labels_op\x18\a \x01(\x0e2..com.coralogixapis.incidents.v1.FilterOperatorR\fmetaLabelsOp\x1a\x83\x01\n" +
+	"\x0emeta_labels_op\x18\a \x01(\x0e2..com.coralogixapis.incidents.v1.FilterOperatorR\fmetaLabelsOp\x12t\n" +
+	"\x0edisplay_labels\x18\b \x03(\v2M.com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.DisplayLabelsEntryR\rdisplayLabels\x1a\x83\x01\n" +
 	"\x15ContextualLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12T\n" +
-	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.incidents.v1.ContextualLabelValuesWithCountR\x05value:\x028\x01:\xb6\x01\x92A\xb2\x01\n" +
-	"\xaf\x01*\x1cIncident query filter values\xd2\x01\x13assignee_with_count\xd2\x01\x11status_with_count\xd2\x01\x10state_with_count\xd2\x01\x13severity_with_count\xd2\x01\x11contextual_labels\xd2\x01\x16meta_labels_with_count\xd2\x01\x0emeta_labels_op\"\xca\x01\n" +
+	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.incidents.v1.ContextualLabelValuesWithCountR\x05value:\x028\x01\x1a}\n" +
+	"\x12DisplayLabelsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12Q\n" +
+	"\x05value\x18\x02 \x01(\v2;.com.coralogixapis.incidents.v1.DisplayLabelValuesWithCountR\x05value:\x028\x01:\xc7\x01\x9aA\xc3\x01\n" +
+	"\xc0\x01*\x1cIncident query filter values\xd2\x01\x13assignee_with_count\xd2\x01\x11status_with_count\xd2\x01\x10state_with_count\xd2\x01\x13severity_with_count\xd2\x01\x11contextual_labels\xd2\x01\x0edisplay_labels\xd2\x01\x16meta_labels_with_count\xd2\x01\x0emeta_labels_op\"\xca\x01\n" +
 	"\x1eContextualLabelValuesWithCount\x12i\n" +
-	"\x11values_with_count\x18\x01 \x03(\v2=.com.coralogixapis.incidents.v1.ContextualLabelValueWithCountR\x0fvaluesWithCount:=\x92A:\n" +
+	"\x11values_with_count\x18\x01 \x03(\v2=.com.coralogixapis.incidents.v1.ContextualLabelValueWithCountR\x0fvaluesWithCount:=\x9aA:\n" +
 	"8*\"Contextual label values with count\xd2\x01\x11values_with_count\"\x99\x02\n" +
 	"\x1dContextualLabelValueWithCount\x12q\n" +
-	"\x16contextual_label_value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"contextual_label_value\"R\x14contextualLabelValue\x12:\n" +
-	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x92A\x04J\x0210R\x05count:I\x92AF\n" +
-	"D*!Contextual label value with count\xd2\x01\x16contextual_label_value\xd2\x01\x05countb\x06proto3"
+	"\x16contextual_label_value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x9aA\x1aJ\x18\"contextual_label_value\"R\x14contextualLabelValue\x12:\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:I\x9aAF\n" +
+	"D*!Contextual label value with count\xd2\x01\x16contextual_label_value\xd2\x01\x05count\"\xc1\x01\n" +
+	"\x1bDisplayLabelValuesWithCount\x12f\n" +
+	"\x11values_with_count\x18\x01 \x03(\v2:.com.coralogixapis.incidents.v1.DisplayLabelValueWithCountR\x0fvaluesWithCount::\x9aA7\n" +
+	"5*\x1fDisplay label values with count\xd2\x01\x11values_with_count\"\x87\x02\n" +
+	"\x1aDisplayLabelValueWithCount\x12h\n" +
+	"\x13display_label_value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1a\x9aA\x17J\x15\"display_label_value\"R\x11displayLabelValue\x12:\n" +
+	"\x05count\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueB\a\x9aA\x04J\x0210R\x05count:C\x9aA@\n" +
+	">*\x1eDisplay label value with count\xd2\x01\x13display_label_value\xd2\x01\x05countb\x06proto3"
 
 var (
 	file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDescOnce sync.Once
@@ -531,7 +647,7 @@ func file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_raw
 	return file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDescData
 }
 
-var file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_goTypes = []any{
 	(*AssigneeWithCount)(nil),              // 0: com.coralogixapis.incidents.v1.AssigneeWithCount
 	(*IncidentStatusWithCount)(nil),        // 1: com.coralogixapis.incidents.v1.IncidentStatusWithCount
@@ -541,42 +657,50 @@ var file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_goTy
 	(*IncidentQueryFiltersValues)(nil),     // 5: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
 	(*ContextualLabelValuesWithCount)(nil), // 6: com.coralogixapis.incidents.v1.ContextualLabelValuesWithCount
 	(*ContextualLabelValueWithCount)(nil),  // 7: com.coralogixapis.incidents.v1.ContextualLabelValueWithCount
-	nil,                                    // 8: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry
-	(*wrapperspb.StringValue)(nil),         // 9: google.protobuf.StringValue
-	(*wrapperspb.Int32Value)(nil),          // 10: google.protobuf.Int32Value
-	(IncidentStatus)(0),                    // 11: com.coralogixapis.incidents.v1.IncidentStatus
-	(IncidentState)(0),                     // 12: com.coralogixapis.incidents.v1.IncidentState
-	(IncidentSeverity)(0),                  // 13: com.coralogixapis.incidents.v1.IncidentSeverity
-	(*MetaLabel)(nil),                      // 14: com.coralogixapis.incidents.v1.MetaLabel
-	(FilterOperator)(0),                    // 15: com.coralogixapis.incidents.v1.FilterOperator
+	(*DisplayLabelValuesWithCount)(nil),    // 8: com.coralogixapis.incidents.v1.DisplayLabelValuesWithCount
+	(*DisplayLabelValueWithCount)(nil),     // 9: com.coralogixapis.incidents.v1.DisplayLabelValueWithCount
+	nil,                                    // 10: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry
+	nil,                                    // 11: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.DisplayLabelsEntry
+	(*wrapperspb.StringValue)(nil),         // 12: google.protobuf.StringValue
+	(*wrapperspb.Int32Value)(nil),          // 13: google.protobuf.Int32Value
+	(IncidentStatus)(0),                    // 14: com.coralogixapis.incidents.v1.IncidentStatus
+	(IncidentState)(0),                     // 15: com.coralogixapis.incidents.v1.IncidentState
+	(IncidentSeverity)(0),                  // 16: com.coralogixapis.incidents.v1.IncidentSeverity
+	(*MetaLabel)(nil),                      // 17: com.coralogixapis.incidents.v1.MetaLabel
+	(FilterOperator)(0),                    // 18: com.coralogixapis.incidents.v1.FilterOperator
 }
 var file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_depIdxs = []int32{
-	9,  // 0: com.coralogixapis.incidents.v1.AssigneeWithCount.assignee:type_name -> google.protobuf.StringValue
-	10, // 1: com.coralogixapis.incidents.v1.AssigneeWithCount.count:type_name -> google.protobuf.Int32Value
-	11, // 2: com.coralogixapis.incidents.v1.IncidentStatusWithCount.status:type_name -> com.coralogixapis.incidents.v1.IncidentStatus
-	10, // 3: com.coralogixapis.incidents.v1.IncidentStatusWithCount.count:type_name -> google.protobuf.Int32Value
-	12, // 4: com.coralogixapis.incidents.v1.IncidentStateWithCount.state:type_name -> com.coralogixapis.incidents.v1.IncidentState
-	10, // 5: com.coralogixapis.incidents.v1.IncidentStateWithCount.count:type_name -> google.protobuf.Int32Value
-	13, // 6: com.coralogixapis.incidents.v1.IncidentSeverityWithCount.severity:type_name -> com.coralogixapis.incidents.v1.IncidentSeverity
-	10, // 7: com.coralogixapis.incidents.v1.IncidentSeverityWithCount.count:type_name -> google.protobuf.Int32Value
-	14, // 8: com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCount.meta_label:type_name -> com.coralogixapis.incidents.v1.MetaLabel
-	10, // 9: com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCount.count:type_name -> google.protobuf.Int32Value
+	12, // 0: com.coralogixapis.incidents.v1.AssigneeWithCount.assignee:type_name -> google.protobuf.StringValue
+	13, // 1: com.coralogixapis.incidents.v1.AssigneeWithCount.count:type_name -> google.protobuf.Int32Value
+	14, // 2: com.coralogixapis.incidents.v1.IncidentStatusWithCount.status:type_name -> com.coralogixapis.incidents.v1.IncidentStatus
+	13, // 3: com.coralogixapis.incidents.v1.IncidentStatusWithCount.count:type_name -> google.protobuf.Int32Value
+	15, // 4: com.coralogixapis.incidents.v1.IncidentStateWithCount.state:type_name -> com.coralogixapis.incidents.v1.IncidentState
+	13, // 5: com.coralogixapis.incidents.v1.IncidentStateWithCount.count:type_name -> google.protobuf.Int32Value
+	16, // 6: com.coralogixapis.incidents.v1.IncidentSeverityWithCount.severity:type_name -> com.coralogixapis.incidents.v1.IncidentSeverity
+	13, // 7: com.coralogixapis.incidents.v1.IncidentSeverityWithCount.count:type_name -> google.protobuf.Int32Value
+	17, // 8: com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCount.meta_label:type_name -> com.coralogixapis.incidents.v1.MetaLabel
+	13, // 9: com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCount.count:type_name -> google.protobuf.Int32Value
 	0,  // 10: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.assignee_with_count:type_name -> com.coralogixapis.incidents.v1.AssigneeWithCount
 	1,  // 11: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.status_with_count:type_name -> com.coralogixapis.incidents.v1.IncidentStatusWithCount
 	2,  // 12: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.state_with_count:type_name -> com.coralogixapis.incidents.v1.IncidentStateWithCount
 	3,  // 13: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.severity_with_count:type_name -> com.coralogixapis.incidents.v1.IncidentSeverityWithCount
-	8,  // 14: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.contextual_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry
+	10, // 14: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.contextual_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry
 	4,  // 15: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.meta_labels_with_count:type_name -> com.coralogixapis.incidents.v1.IncidentMetaLabelsWithCount
-	15, // 16: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.meta_labels_op:type_name -> com.coralogixapis.incidents.v1.FilterOperator
-	7,  // 17: com.coralogixapis.incidents.v1.ContextualLabelValuesWithCount.values_with_count:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValueWithCount
-	9,  // 18: com.coralogixapis.incidents.v1.ContextualLabelValueWithCount.contextual_label_value:type_name -> google.protobuf.StringValue
-	10, // 19: com.coralogixapis.incidents.v1.ContextualLabelValueWithCount.count:type_name -> google.protobuf.Int32Value
-	6,  // 20: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValuesWithCount
-	21, // [21:21] is the sub-list for method output_type
-	21, // [21:21] is the sub-list for method input_type
-	21, // [21:21] is the sub-list for extension type_name
-	21, // [21:21] is the sub-list for extension extendee
-	0,  // [0:21] is the sub-list for field type_name
+	18, // 16: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.meta_labels_op:type_name -> com.coralogixapis.incidents.v1.FilterOperator
+	11, // 17: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.display_labels:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.DisplayLabelsEntry
+	7,  // 18: com.coralogixapis.incidents.v1.ContextualLabelValuesWithCount.values_with_count:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValueWithCount
+	12, // 19: com.coralogixapis.incidents.v1.ContextualLabelValueWithCount.contextual_label_value:type_name -> google.protobuf.StringValue
+	13, // 20: com.coralogixapis.incidents.v1.ContextualLabelValueWithCount.count:type_name -> google.protobuf.Int32Value
+	9,  // 21: com.coralogixapis.incidents.v1.DisplayLabelValuesWithCount.values_with_count:type_name -> com.coralogixapis.incidents.v1.DisplayLabelValueWithCount
+	12, // 22: com.coralogixapis.incidents.v1.DisplayLabelValueWithCount.display_label_value:type_name -> google.protobuf.StringValue
+	13, // 23: com.coralogixapis.incidents.v1.DisplayLabelValueWithCount.count:type_name -> google.protobuf.Int32Value
+	6,  // 24: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.ContextualLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.ContextualLabelValuesWithCount
+	8,  // 25: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues.DisplayLabelsEntry.value:type_name -> com.coralogixapis.incidents.v1.DisplayLabelValuesWithCount
+	26, // [26:26] is the sub-list for method output_type
+	26, // [26:26] is the sub-list for method input_type
+	26, // [26:26] is the sub-list for extension type_name
+	26, // [26:26] is the sub-list for extension extendee
+	0,  // [0:26] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_init() }
@@ -595,7 +719,7 @@ func file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_ini
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDesc), len(file_com_coralogixapis_incidents_v1_incident_query_filters_values_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

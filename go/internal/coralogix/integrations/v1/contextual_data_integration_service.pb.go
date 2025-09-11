@@ -7,8 +7,8 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -738,9 +738,9 @@ var File_com_coralogix_integrations_v1_contextual_data_integration_service_proto
 
 const file_com_coralogix_integrations_v1_contextual_data_integration_service_proto_rawDesc = "" +
 	"\n" +
-	"Gcom/coralogix/integrations/v1/contextual_data_integration_service.proto\x12\x1dcom.coralogix.integrations.v1\x1a/com/coralogix/integrations/v1/integration.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xb5\x01\n" +
+	"Gcom/coralogix/integrations/v1/contextual_data_integration_service.proto\x12\x1dcom.coralogix.integrations.v1\x1a/com/coralogix/integrations/v1/integration.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xb5\x01\n" +
 	"$GetContextualDataIntegrationsRequest\x12\\\n" +
-	"\x1cinclude_testing_integrations\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:/\x92A,\n" +
+	"\x1cinclude_testing_integrations\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:/\x9aA,\n" +
 	"**(Get contextual data integrations request\"\x86\x05\n" +
 	"%GetContextualDataIntegrationsResponse\x12~\n" +
 	"\fintegrations\x18\x01 \x03(\v2Z.com.coralogix.integrations.v1.GetContextualDataIntegrationsResponse.IntegrationWithCountsR\fintegrations\x1a\xaa\x03\n" +
@@ -749,49 +749,49 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x13amount_integrations\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x12amountIntegrations\x124\n" +
 	"\x06errors\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueR\x06errors\x12G\n" +
 	"\x11upgrade_available\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\x10upgradeAvailable\x121\n" +
-	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:B\x92A?\n" +
-	"=*\x17Integration with counts\xd2\x01\vintegration\xd2\x01\x13amount_integrations:0\x92A-\n" +
+	"\x06is_new\x18\x05 \x01(\v2\x1a.google.protobuf.BoolValueR\x05isNew:B\x9aA?\n" +
+	"=*\x17Integration with counts\xd2\x01\vintegration\xd2\x01\x13amount_integrations:0\x9aA-\n" +
 	"+*)Get contextual data integrations response\"\xfb\x01\n" +
 	"-GetContextualDataIntegrationDefinitionRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12\\\n" +
-	"\x1cinclude_testing_integrations\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:>\x92A;\n" +
+	"\x1cinclude_testing_integrations\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x1aincludeTestingIntegrations:>\x9aA;\n" +
 	"9*2Get contextual data integration definition request\xd2\x01\x02id\"\xf2\x01\n" +
 	".GetContextualDataIntegrationDefinitionResponse\x12k\n" +
-	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition:S\x92AP\n" +
+	"\x16integration_definition\x18\x01 \x01(\v24.com.coralogix.integrations.v1.IntegrationDefinitionR\x15integrationDefinition:S\x9aAP\n" +
 	"N*3Get contextual data integration definition response\xd2\x01\x16integration_definition\"\x9c\x02\n" +
 	"*GetContextualDataIntegrationDetailsRequest\x12Y\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x92A(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\x02id\x12V\n" +
-	"\x19include_testing_revisions\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x17includeTestingRevisions:;\x92A8\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\x02id\x12V\n" +
+	"\x19include_testing_revisions\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueR\x17includeTestingRevisions:;\x9aA8\n" +
 	"6*/Get contextual data integration details request\xd2\x01\x02id\"\xdd\x01\n" +
 	"+GetContextualDataIntegrationDetailsResponse\x12`\n" +
-	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:L\x92AI\n" +
+	"\x12integration_detail\x18\x01 \x01(\v21.com.coralogix.integrations.v1.IntegrationDetailsR\x11integrationDetail:L\x9aAI\n" +
 	"G*0Get contextual data integration details response\xd2\x01\x12integration_detail\"\x8c\x02\n" +
 	"&UpdateContextualDataIntegrationRequest\x12C\n" +
 	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId\x12N\n" +
-	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:M\x92AJ\n" +
+	"\bmetadata\x18\x02 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata:M\x9aAJ\n" +
 	"H**Update contextual data integration request\xd2\x01\x0eintegration_id\xd2\x01\bmetadata\"]\n" +
-	"'UpdateContextualDataIntegrationResponse:2\x92A/\n" +
+	"'UpdateContextualDataIntegrationResponse:2\x9aA/\n" +
 	"-*+Update contextual data integration response\"\x8e\x02\n" +
 	"$TestContextualDataIntegrationRequest\x12]\n" +
 	"\x10integration_data\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\x0fintegrationData\x12C\n" +
-	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:B\x92A?\n" +
+	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:B\x9aA?\n" +
 	"=*(Test contextual data integration request\xd2\x01\x10integration_data\"\xb0\x01\n" +
 	"%TestContextualDataIntegrationResponse\x12L\n" +
-	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:9\x92A6\n" +
+	"\x06result\x18\x01 \x01(\v24.com.coralogix.integrations.v1.TestIntegrationResultR\x06result:9\x9aA6\n" +
 	"4*)Test contextual data integration response\xd2\x01\x06result\"\xb2\x01\n" +
 	"$SaveContextualDataIntegrationRequest\x12N\n" +
-	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata::\x92A7\n" +
+	"\bmetadata\x18\x01 \x01(\v22.com.coralogix.integrations.v1.IntegrationMetadataR\bmetadata::\x9aA7\n" +
 	"5*(Save contextual data integration request\xd2\x01\bmetadata\"\xaf\x01\n" +
 	"%SaveContextualDataIntegrationResponse\x12C\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:A\x92A>\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\rintegrationId:A\x9aA>\n" +
 	"<*)Save contextual data integration response\xd2\x01\x0eintegration_id\"\xde\x01\n" +
 	"&DeleteContextualDataIntegrationRequest\x12p\n" +
-	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x92A(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\rintegrationId:B\x92A?\n" +
+	"\x0eintegration_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"076f4188-05e0-4ed3-afeb-653ad182ccb7\"R\rintegrationId:B\x9aA?\n" +
 	"=**Delete contextual data integration request\xd2\x01\x0eintegration_id\"]\n" +
-	"'DeleteContextualDataIntegrationResponse:2\x92A/\n" +
+	"'DeleteContextualDataIntegrationResponse:2\x9aA/\n" +
 	"-*+Delete contextual data integration response2\xba\x1c\n" +
 	" ContextualDataIntegrationService\x12\xea\x03\n" +
-	"\x1dGetContextualDataIntegrations\x12C.com.coralogix.integrations.v1.GetContextualDataIntegrationsRequest\x1aD.com.coralogix.integrations.v1.GetContextualDataIntegrationsResponse\"\xbd\x02\x92A\xe7\x01\n" +
+	"\x1dGetContextualDataIntegrations\x12C.com.coralogix.integrations.v1.GetContextualDataIntegrationsRequest\x1aD.com.coralogix.integrations.v1.GetContextualDataIntegrationsResponse\"\xbd\x02\x9aA\xe7\x01\n" +
 	"#Contextual data integration service\x12/Get all contextual data integrations accessibleJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -800,9 +800,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj:\n" +
 	"\x16x-coralogixPermissions\x12 2\x1e\n" +
-	"\x1c\x1a\x1acontextual-data:ReadConfig¸\x02&\n" +
+	"\x1c\x1a\x1acontextual-data:ReadConfigʸ\x02&\n" +
 	"$Get all contextual data integrations\x82\xd3\xe4\x93\x02\"\x12 /v1/contextual-data/integrations\x12\x96\x04\n" +
-	"&GetContextualDataIntegrationDefinition\x12L.com.coralogix.integrations.v1.GetContextualDataIntegrationDefinitionRequest\x1aM.com.coralogix.integrations.v1.GetContextualDataIntegrationDefinitionResponse\"\xce\x02\x92A\xe2\x01\n" +
+	"&GetContextualDataIntegrationDefinition\x12L.com.coralogix.integrations.v1.GetContextualDataIntegrationDefinitionRequest\x1aM.com.coralogix.integrations.v1.GetContextualDataIntegrationDefinitionResponse\"\xce\x02\x9aA\xe2\x01\n" +
 	"#Contextual data integration service\x12*Get contextual data integration definitionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -811,9 +811,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj:\n" +
 	"\x16x-coralogixPermissions\x12 2\x1e\n" +
-	"\x1c\x1a\x1acontextual-data:ReadConfig¸\x02,\n" +
+	"\x1c\x1a\x1acontextual-data:ReadConfigʸ\x02,\n" +
 	"*Get contextual data integration definition\x82\xd3\xe4\x93\x022\x120/v1/contextual-data/integrations/definition/{id}\x12\xfc\x03\n" +
-	"#GetContextualDataIntegrationDetails\x12I.com.coralogix.integrations.v1.GetContextualDataIntegrationDetailsRequest\x1aJ.com.coralogix.integrations.v1.GetContextualDataIntegrationDetailsResponse\"\xbd\x02\x92A\xdf\x01\n" +
+	"#GetContextualDataIntegrationDetails\x12I.com.coralogix.integrations.v1.GetContextualDataIntegrationDetailsRequest\x1aJ.com.coralogix.integrations.v1.GetContextualDataIntegrationDetailsResponse\"\xbd\x02\x9aA\xdf\x01\n" +
 	"#Contextual data integration service\x12'Get contextual data integration detailsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -822,9 +822,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj:\n" +
 	"\x16x-coralogixPermissions\x12 2\x1e\n" +
-	"\x1c\x1a\x1acontextual-data:ReadConfig¸\x02)\n" +
+	"\x1c\x1a\x1acontextual-data:ReadConfigʸ\x02)\n" +
 	"'Get contextual data integration details\x82\xd3\xe4\x93\x02'\x12%/v1/contextual-data/integrations/{id}\x12\xe0\x03\n" +
-	"\x1dTestContextualDataIntegration\x12C.com.coralogix.integrations.v1.TestContextualDataIntegrationRequest\x1aD.com.coralogix.integrations.v1.TestContextualDataIntegrationResponse\"\xb3\x02\x92A\xda\x01\n" +
+	"\x1dTestContextualDataIntegration\x12C.com.coralogix.integrations.v1.TestContextualDataIntegrationRequest\x1aD.com.coralogix.integrations.v1.TestContextualDataIntegrationResponse\"\xb3\x02\x9aA\xda\x01\n" +
 	"#Contextual data integration service\x12 Test contextual data integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -833,9 +833,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
-	"\x1e\x1a\x1ccontextual-data:UpdateConfig¸\x02\"\n" +
+	"\x1e\x1a\x1ccontextual-data:UpdateConfigʸ\x02\"\n" +
 	" Test contextual data integration\x82\xd3\xe4\x93\x02):\x01*\"$/v1/contextual-data/integration/test\x12\xf1\x03\n" +
-	"\x1dSaveContextualDataIntegration\x12C.com.coralogix.integrations.v1.SaveContextualDataIntegrationRequest\x1aD.com.coralogix.integrations.v1.SaveContextualDataIntegrationResponse\"\xc4\x02\x92A\xda\x01\n" +
+	"\x1dSaveContextualDataIntegration\x12C.com.coralogix.integrations.v1.SaveContextualDataIntegrationRequest\x1aD.com.coralogix.integrations.v1.SaveContextualDataIntegrationResponse\"\xc4\x02\x9aA\xda\x01\n" +
 	"#Contextual data integration service\x12 Save contextual data integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -844,9 +844,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
-	"\x1e\x1a\x1ccontextual-data:UpdateConfig¸\x028\n" +
+	"\x1e\x1a\x1ccontextual-data:UpdateConfigʸ\x028\n" +
 	"6Save contextual data integration registration metadata\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/contextual-data/integration\x12\xe5\x03\n" +
-	"\x1fUpdateContextualDataIntegration\x12E.com.coralogix.integrations.v1.UpdateContextualDataIntegrationRequest\x1aF.com.coralogix.integrations.v1.UpdateContextualDataIntegrationResponse\"\xb2\x02\x92A\xdc\x01\n" +
+	"\x1fUpdateContextualDataIntegration\x12E.com.coralogix.integrations.v1.UpdateContextualDataIntegrationRequest\x1aF.com.coralogix.integrations.v1.UpdateContextualDataIntegrationResponse\"\xb2\x02\x9aA\xdc\x01\n" +
 	"#Contextual data integration service\x12\"Update contextual data integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -855,9 +855,9 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
-	"\x1e\x1a\x1ccontextual-data:UpdateConfig¸\x02$\n" +
+	"\x1e\x1a\x1ccontextual-data:UpdateConfigʸ\x02$\n" +
 	"\"Update contextual data integration\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/v1/contextual-data/integration\x12\xf3\x03\n" +
-	"\x1fDeleteContextualDataIntegration\x12E.com.coralogix.integrations.v1.DeleteContextualDataIntegrationRequest\x1aF.com.coralogix.integrations.v1.DeleteContextualDataIntegrationResponse\"\xc0\x02\x92A\xdc\x01\n" +
+	"\x1fDeleteContextualDataIntegration\x12E.com.coralogix.integrations.v1.DeleteContextualDataIntegrationRequest\x1aF.com.coralogix.integrations.v1.DeleteContextualDataIntegrationResponse\"\xc0\x02\x9aA\xdc\x01\n" +
 	"#Contextual data integration service\x12\"Delete contextual data integrationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -866,8 +866,8 @@ const file_com_coralogix_integrations_v1_contextual_data_integration_service_pro
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
-	"\x1e\x1a\x1ccontextual-data:UpdateConfig¸\x02$\n" +
-	"\"Delete contextual data integration\x82\xd3\xe4\x93\x022*0/v1/contextual-data/integration/{integration_id}\x1a\\\x92AY\n" +
+	"\x1e\x1a\x1ccontextual-data:UpdateConfigʸ\x02$\n" +
+	"\"Delete contextual data integration\x82\xd3\xe4\x93\x022*0/v1/contextual-data/integration/{integration_id}\x1a\\\x9aAY\n" +
 	"#Contextual data integration service\x122Query for contextual data integration information.b\x06proto3"
 
 var (

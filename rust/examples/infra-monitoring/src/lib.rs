@@ -46,6 +46,7 @@ mod tests {
         .unwrap();
 
         let slo = Slo {
+            r#type: None,
             id: None,
             name: "coralogix_rust_slo_example".into(),
             description: Some("description".to_string()),

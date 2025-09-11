@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -124,10 +124,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_activity_analysis
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_activity_analysis_activity_analysis_proto_rawDesc = "" +
 	"\n" +
-	"_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xf9\x01\n" +
+	"_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xf9\x01\n" +
 	"\x10ActivityAnalysis\x12\x14\n" +
 	"\x05rules\x18\x01 \x03(\tR\x05rules\x12K\n" +
-	"\x06status\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.ActivityAnalysisStatusR\x06status:\x81\x01\x92A~\n" +
+	"\x06status\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.ActivityAnalysisStatusR\x06status:\x81\x01\x9aA~\n" +
 	"|* Activity analysis data structure2GConfiguration for alert activity analysis, containing rules and status.\xd2\x01\x05rules\xd2\x01\x06status*q\n" +
 	"\x16ActivityAnalysisStatus\x124\n" +
 	"0ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED\x10\x00\x12!\n" +

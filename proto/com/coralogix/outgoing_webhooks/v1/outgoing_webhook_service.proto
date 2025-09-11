@@ -2,17 +2,17 @@ syntax = "proto3";
 
 package com.coralogix.outgoing_webhooks.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 service OutgoingWebhooksService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Outgoing webhooks service"
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
@@ -21,11 +21,11 @@ service OutgoingWebhooksService {
   };
 
   rpc ListOutgoingWebhookTypes(ListOutgoingWebhookTypesRequest) returns (ListOutgoingWebhookTypesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook types";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhook types";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/types"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -52,11 +52,11 @@ service OutgoingWebhooksService {
   }
 
   rpc GetOutgoingWebhookTypeDetails(GetOutgoingWebhookTypeDetailsRequest) returns (GetOutgoingWebhookTypeDetailsResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook type";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhook type";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/types/{type}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -83,11 +83,11 @@ service OutgoingWebhooksService {
   }
 
   rpc ListOutgoingWebhooks(ListOutgoingWebhooksRequest) returns (ListOutgoingWebhooksResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhooks";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhooks";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -114,11 +114,11 @@ service OutgoingWebhooksService {
   }
 
   rpc ListOutboundWebhooksSummary(ListOutboundWebhooksSummaryRequest) returns (ListOutboundWebhooksSummaryResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook summaries";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhook summaries";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/summary"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -145,11 +145,11 @@ service OutgoingWebhooksService {
   }
 
   rpc ListAllOutgoingWebhooks(ListAllOutgoingWebhooksRequest) returns (ListAllOutgoingWebhooksResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get all outgoing webhooks";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get all outgoing webhooks";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/all"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -176,11 +176,11 @@ service OutgoingWebhooksService {
   }
 
   rpc GetOutgoingWebhook(GetOutgoingWebhookRequest) returns (GetOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get outgoing webhook";
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -207,12 +207,12 @@ service OutgoingWebhooksService {
   }
 
   rpc CreateOutgoingWebhook(CreateOutgoingWebhookRequest) returns (CreateOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Create an outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Create an outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing-webhooks"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -239,12 +239,12 @@ service OutgoingWebhooksService {
   }
 
   rpc UpdateOutgoingWebhook(UpdateOutgoingWebhookRequest) returns (UpdateOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Update an outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update an outgoing webhook";
     option (google.api.http) = {
       put: "/v1/outgoing-webhooks"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -271,11 +271,11 @@ service OutgoingWebhooksService {
   }
 
   rpc DeleteOutgoingWebhook(DeleteOutgoingWebhookRequest) returns (DeleteOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete an outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete an outgoing webhook";
     option (google.api.http) = {
       delete: "/v1/outgoing-webhooks/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -302,12 +302,12 @@ service OutgoingWebhooksService {
   }
 
   rpc TestOutgoingWebhook(TestOutgoingWebhookRequest) returns (TestOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Test an outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Test an outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing-webhooks/test"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -334,12 +334,12 @@ service OutgoingWebhooksService {
   }
 
   rpc TestExistingOutgoingWebhook(TestExistingOutgoingWebhookRequest) returns (TestOutgoingWebhookResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Test an existing outgoing webhook";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Test an existing outgoing webhook";
     option (google.api.http) = {
       post: "/v1/outgoing-webhooks/test-existing"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -369,7 +369,7 @@ service OutgoingWebhooksService {
     option (google.api.http) = {
       get: "/v1/outgoing-webhooks/ibm-event-notifications/instances"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -397,7 +397,7 @@ service OutgoingWebhooksService {
 }
 
 message ListOutgoingWebhookTypesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outgoing webhook types request"
       required: []
@@ -406,7 +406,7 @@ message ListOutgoingWebhookTypesRequest {
 }
 
 message ListOutgoingWebhookTypesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outgoing webhook types response"
       required: []
@@ -414,7 +414,7 @@ message ListOutgoingWebhookTypesResponse {
   };
 
   message OutgoingWebhookType {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Outgoing webhook type"
         required: [
@@ -425,15 +425,15 @@ message ListOutgoingWebhookTypesResponse {
       }
     };
     WebhookType type = 1;
-    google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_label\"" }];
-    google.protobuf.UInt32Value count = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "3" }];
+    google.protobuf.StringValue label = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_label\"" }];
+    google.protobuf.UInt32Value count = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "3" }];
   }
 
   repeated OutgoingWebhookType webhooks = 1;
 }
 
 message GetOutgoingWebhookTypeDetailsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get outgoing webhook type details request"
       required: [
@@ -445,7 +445,7 @@ message GetOutgoingWebhookTypeDetailsRequest {
 }
 
 message GetOutgoingWebhookTypeDetailsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get outgoing webhook type details response"
       required: ["details"]
@@ -455,7 +455,7 @@ message GetOutgoingWebhookTypeDetailsResponse {
 }
 
 message ListOutgoingWebhooksRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outgoing webhooks request"
       required: [
@@ -467,7 +467,7 @@ message ListOutgoingWebhooksRequest {
 }
 
 message ListOutgoingWebhooksResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outgoing webhooks response"
       required: []
@@ -477,7 +477,7 @@ message ListOutgoingWebhooksResponse {
 }
 
 message ListAllOutgoingWebhooksRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List all outgoing webhooks request"
       required: []
@@ -486,7 +486,7 @@ message ListAllOutgoingWebhooksRequest {
 }
 
 message ListAllOutgoingWebhooksResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List all outgoing webhooks response"
       required: []
@@ -496,7 +496,7 @@ message ListAllOutgoingWebhooksResponse {
 }
 
 message ListOutboundWebhooksSummaryRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outbound webhooks summary request"
       required: []
@@ -505,7 +505,7 @@ message ListOutboundWebhooksSummaryRequest {
 }
 
 message ListOutboundWebhooksSummaryResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List outbound webhooks summary response"
       required: []
@@ -515,7 +515,7 @@ message ListOutboundWebhooksSummaryResponse {
 }
 
 message GetOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get outgoing webhook request"
       required: [
@@ -527,7 +527,7 @@ message GetOutgoingWebhookRequest {
 }
 
 message GetOutgoingWebhookResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get outgoing webhook response"
       required: ["webhook"]
@@ -537,7 +537,7 @@ message GetOutgoingWebhookResponse {
 }
 
 message CreateOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create outgoing webhook request"
       required: [
@@ -549,17 +549,17 @@ message CreateOutgoingWebhookRequest {
 }
 
 message CreateOutgoingWebhookResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create outgoing webhook response"
       required: ["id"]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_id\"" }];
 }
 
 message UpdateOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update outgoing webhook request"
       required: [
@@ -568,12 +568,12 @@ message UpdateOutgoingWebhookRequest {
       ]
     }
   };
-  string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
+  string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_id\"" }];
   OutgoingWebhookInputData data = 2;
 }
 
 message UpdateOutgoingWebhookResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Update outgoing webhook response"
       required: []
@@ -582,7 +582,7 @@ message UpdateOutgoingWebhookResponse {
 }
 
 message DeleteOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete outgoing webhook request"
       required: [
@@ -590,11 +590,11 @@ message DeleteOutgoingWebhookRequest {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_id\"" }];
 }
 
 message DeleteOutgoingWebhookResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete outgoing webhook response"
       required: []
@@ -603,7 +603,7 @@ message DeleteOutgoingWebhookResponse {
 }
 
 message TestOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test outgoing webhook request"
       required: [
@@ -615,7 +615,7 @@ message TestOutgoingWebhookRequest {
 }
 
 message TestExistingOutgoingWebhookRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test existing outgoing webhook request"
       required: [
@@ -623,11 +623,11 @@ message TestExistingOutgoingWebhookRequest {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_id\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_id\"" }];
 }
 
 message TestOutgoingWebhookResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test outgoing webhook response"
       required: []
@@ -635,7 +635,7 @@ message TestOutgoingWebhookResponse {
   };
 
   message Success {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Test outgoing webhook success"
         required: []
@@ -644,7 +644,7 @@ message TestOutgoingWebhookResponse {
   }
   
   message Failure {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Test outgoing webhook failure"
         required: [
@@ -653,9 +653,9 @@ message TestOutgoingWebhookResponse {
         ]
       }
     };
-    google.protobuf.StringValue error_message = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_error_message\"" }];
-    google.protobuf.StringValue display_message = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example_display_message\"" }];
-    optional google.protobuf.UInt32Value status_code = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "400" }];
+    google.protobuf.StringValue error_message = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_error_message\"" }];
+    google.protobuf.StringValue display_message = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example_display_message\"" }];
+    optional google.protobuf.UInt32Value status_code = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "400" }];
   }
 
   oneof result {
@@ -665,7 +665,7 @@ message TestOutgoingWebhookResponse {
 }
 
 message ListIbmEventNotificationsInstancesRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List IBM event notification instances request"
       required: []
@@ -674,7 +674,7 @@ message ListIbmEventNotificationsInstancesRequest {
 }
 
 message ListIbmEventNotificationsInstancesResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List IBM event notification instances response"
       required: []
@@ -682,7 +682,7 @@ message ListIbmEventNotificationsInstancesResponse {
   };
   
   message EventNotificationsInstance {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Event notifications instance"
         required: [
@@ -693,11 +693,11 @@ message ListIbmEventNotificationsInstancesResponse {
         ]
       }
     };
-    string instance_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"5a8b249b-3915-49e7-ad43-030f585d84c5\"" }];
-    string region_id = 2[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"eu-gb\"" }];
-    string name = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"example-name\"" }];
-    string crn = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"" }]; // Cloud Resource Name
-    bool is_used = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+    string instance_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"5a8b249b-3915-49e7-ad43-030f585d84c5\"" }];
+    string region_id = 2[(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"eu-gb\"" }];
+    string name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"example-name\"" }];
+    string crn = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"" }]; // Cloud Resource Name
+    bool is_used = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
   }
   
   repeated EventNotificationsInstance instances = 1;

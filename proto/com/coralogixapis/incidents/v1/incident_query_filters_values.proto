@@ -8,10 +8,10 @@ import "com/coralogixapis/incidents/v1/incident_state.proto";
 import "com/coralogixapis/incidents/v1/incident_status.proto";
 import "com/coralogixapis/incidents/v1/meta_label.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message AssigneeWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Assignee with count"
       required: [
@@ -20,11 +20,11 @@ message AssigneeWithCount {
       ]
     }
   };
-  google.protobuf.StringValue assignee = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"assignee\""}];
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  google.protobuf.StringValue assignee = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"assignee\""}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }
 message IncidentStatusWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident status with count"
       required: [
@@ -33,11 +33,11 @@ message IncidentStatusWithCount {
       ]
     }
   };
-  IncidentStatus status = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"incident_status\""}];
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  IncidentStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"incident_status\""}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }
 message IncidentStateWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident state with count"
       required: [
@@ -47,10 +47,10 @@ message IncidentStateWithCount {
     }
   };
   IncidentState state = 1;
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }
 message IncidentSeverityWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident severity with count"
       required: [
@@ -60,10 +60,10 @@ message IncidentSeverityWithCount {
     }
   };
   IncidentSeverity severity = 1;
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }
 message IncidentMetaLabelsWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident meta labels with count"
       required: [
@@ -73,10 +73,10 @@ message IncidentMetaLabelsWithCount {
     }
   };
   MetaLabel meta_label = 1;
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }
 message IncidentQueryFiltersValues {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Incident query filter values"
       required: [
@@ -85,6 +85,7 @@ message IncidentQueryFiltersValues {
         "state_with_count",
         "severity_with_count",
         "contextual_labels",
+        "display_labels",
         "meta_labels_with_count",
         "meta_labels_op"
       ]
@@ -97,10 +98,11 @@ message IncidentQueryFiltersValues {
   map<string, ContextualLabelValuesWithCount> contextual_labels = 5;
   repeated IncidentMetaLabelsWithCount meta_labels_with_count = 6;
   FilterOperator meta_labels_op = 7;
+  map<string, DisplayLabelValuesWithCount> display_labels = 8;
 }
 
 message ContextualLabelValuesWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Contextual label values with count"
       required: ["values_with_count"]
@@ -110,7 +112,7 @@ message ContextualLabelValuesWithCount {
 }
 
 message ContextualLabelValueWithCount {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Contextual label value with count"
       required: [
@@ -119,6 +121,30 @@ message ContextualLabelValueWithCount {
       ]
     }
   };
-  google.protobuf.StringValue contextual_label_value = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"contextual_label_value\""}];
-  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "10"}];
+  google.protobuf.StringValue contextual_label_value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"contextual_label_value\""}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
+}
+
+message DisplayLabelValuesWithCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Display label values with count"
+      required: ["values_with_count"]
+    }
+  };
+  repeated DisplayLabelValueWithCount values_with_count = 1;
+}
+
+message DisplayLabelValueWithCount {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Display label value with count"
+      required: [
+        "display_label_value",
+        "count"
+      ]
+    }
+  };
+  google.protobuf.StringValue display_label_value = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"display_label_value\""}];
+  google.protobuf.Int32Value count = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "10"}];
 }

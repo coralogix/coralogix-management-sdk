@@ -8,7 +8,7 @@ package v1
 
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -197,15 +197,15 @@ var File_com_coralogixapis_notification_center_entities_v1_entities_service_prot
 
 const file_com_coralogixapis_notification_center_entities_v1_entities_service_proto_rawDesc = "" +
 	"\n" +
-	"Hcom/coralogixapis/notification_center/entities/v1/entities_service.proto\x121com.coralogixapis.notification_center.entities.v1\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a9com/coralogixapis/notification_center/common/common.proto\"\xf0\x01\n" +
-	"\x16ListEntityTypesRequest:\xd5\x01\x92A\xd1\x01\n" +
+	"Hcom/coralogixapis/notification_center/entities/v1/entities_service.proto\x121com.coralogixapis.notification_center.entities.v1\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a9com/coralogixapis/notification_center/common/common.proto\"\xf0\x01\n" +
+	"\x16ListEntityTypesRequest:\xd5\x01\x9aA\xd1\x01\n" +
 	"R*\x11List Entity Types2=Request to list entity types supported by Notification Center*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"\x8e\x01\n" +
 	"\x17ListEntityTypesResponse\x12T\n" +
 	"\fentity_types\x18\x02 \x03(\x0e21.com.coralogixapis.notification_center.EntityTypeR\ventityTypesJ\x04\b\x01\x10\x02R\x17deprecated_entity_types\"\xdd\x02\n" +
 	"\x19ListEntitySubTypesRequest\x12R\n" +
 	"\ventity_type\x18\x01 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeR\n" +
-	"entityType:\xeb\x01\x92A\xe7\x01\n" +
+	"entityType:\xeb\x01\x9aA\xe7\x01\n" +
 	"h*\x15List Entity Sub Types2ORequest to list entity subtypes by entity type supported by Notification Center*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/\"F\n" +
 	"\x1aListEntitySubTypesResponse\x12(\n" +

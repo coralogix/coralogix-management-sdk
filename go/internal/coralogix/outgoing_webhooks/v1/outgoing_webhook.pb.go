@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -1921,12 +1921,12 @@ var File_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto protoreflect.
 
 const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdf\x04\n" +
+	"9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdf\x04\n" +
 	"\x14GenericWebhookConfig\x12]\n" +
-	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x92A(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12c\n" +
-	"\x06method\x18\x02 \x01(\x0e2C.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfig.MethodTypeB\x06\x92A\x03J\x011R\x06method\x12\x8a\x01\n" +
-	"\aheaders\x18\x03 \x03(\v2E.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfig.HeadersEntryB)\x92A&J${\"Content-Type\": \"application/json\"}R\aheaders\x12M\n" +
-	"\apayload\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10{\"key\": \"value\"}R\apayload\x1a:\n" +
+	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12c\n" +
+	"\x06method\x18\x02 \x01(\x0e2C.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfig.MethodTypeB\x06\x9aA\x03J\x011R\x06method\x12\x8a\x01\n" +
+	"\aheaders\x18\x03 \x03(\v2E.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfig.HeadersEntryB)\x9aA&J${\"Content-Type\": \"application/json\"}R\aheaders\x12M\n" +
+	"\apayload\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10{\"key\": \"value\"}R\apayload\x1a:\n" +
 	"\fHeadersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\"5\n" +
@@ -1935,21 +1935,21 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\aUNKNOWN\x10\x00\x12\a\n" +
 	"\x03GET\x10\x01\x12\b\n" +
 	"\x04POST\x10\x02\x12\a\n" +
-	"\x03PUT\x10\x03:4\x92A1\n" +
+	"\x03PUT\x10\x03:4\x9aA1\n" +
 	"/*\x1dGeneric webhook configuration\xd2\x01\x04uuid\xd2\x01\x06method\"\xb6\x06\n" +
 	"\vSlackConfig\x12P\n" +
 	"\adigests\x18\x01 \x03(\v26.com.coralogix.outgoing_webhooks.v1.SlackConfig.DigestR\adigests\x12\\\n" +
 	"\vattachments\x18\x02 \x03(\v2:.com.coralogix.outgoing_webhooks.v1.SlackConfig.AttachmentR\vattachments\x1a\xcf\x01\n" +
 	"\x06Digest\x12V\n" +
-	"\x04type\x18\x01 \x01(\x0e2:.com.coralogix.outgoing_webhooks.v1.SlackConfig.DigestTypeB\x06\x92A\x03J\x011R\x04type\x12C\n" +
+	"\x04type\x18\x01 \x01(\x0e2:.com.coralogix.outgoing_webhooks.v1.SlackConfig.DigestTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
 	"\tis_active\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\bisActive:(\x92A%\n" +
+	"\x9aA\a:\x05falseR\bisActive:(\x9aA%\n" +
 	"#*\x1aSlack digest configuration\xd2\x01\x04type\x1a\xdb\x01\n" +
 	"\n" +
 	"Attachment\x12Z\n" +
-	"\x04type\x18\x01 \x01(\x0e2>.com.coralogix.outgoing_webhooks.v1.SlackConfig.AttachmentTypeB\x06\x92A\x03J\x011R\x04type\x12C\n" +
+	"\x04type\x18\x01 \x01(\x0e2>.com.coralogix.outgoing_webhooks.v1.SlackConfig.AttachmentTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
 	"\tis_active\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\a:\x05falseR\bisActive:,\x92A)\n" +
+	"\x9aA\a:\x05falseR\bisActive:,\x9aA)\n" +
 	"'*\x1eSlack attachment configuration\xd2\x01\x04type\"o\n" +
 	"\n" +
 	"DigestType\x12\v\n" +
@@ -1962,44 +1962,44 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\x0eAttachmentType\x12\t\n" +
 	"\x05EMPTY\x10\x00\x12\x13\n" +
 	"\x0fMETRIC_SNAPSHOT\x10\x01\x12\b\n" +
-	"\x04LOGS\x10\x02:\x1a\x92A\x17\n" +
+	"\x04LOGS\x10\x02:\x1a\x9aA\x17\n" +
 	"\x15*\x13Slack configuration\"\x9d\x01\n" +
 	"\x0fPagerDutyConfig\x12\\\n" +
-	"\vservice_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x92A\x1aJ\x18\"pager_duty_service_key\"R\n" +
-	"serviceKey:,\x92A)\n" +
+	"\vservice_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1d\x9aA\x1aJ\x18\"pager_duty_service_key\"R\n" +
+	"serviceKey:,\x9aA)\n" +
 	"'*\x17PagerDuty configuration\xd2\x01\vservice_key\"\xed\x01\n" +
 	"\rSendLogConfig\x12]\n" +
-	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x92A(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12M\n" +
-	"\apayload\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10{\"key\": \"value\"}R\apayload:.\x92A+\n" +
+	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12M\n" +
+	"\apayload\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10{\"key\": \"value\"}R\apayload:.\x9aA+\n" +
 	")*\x16Send log configuration\xd2\x01\x04uuid\xd2\x01\apayload\"\x9b\x01\n" +
 	"\x10EmailGroupConfig\x12e\n" +
-	"\x0femail_addresses\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1bJ\x19[\"example@coralogix.com\"]R\x0eemailAddresses: \x92A\x1d\n" +
+	"\x0femail_addresses\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1bJ\x19[\"example@coralogix.com\"]R\x0eemailAddresses: \x9aA\x1d\n" +
 	"\x1b*\x19Email group configuration\"<\n" +
-	"\x14MicrosoftTeamsConfig:$\x92A!\n" +
+	"\x14MicrosoftTeamsConfig:$\x9aA!\n" +
 	"\x1f*\x1dMicrosoft Teams configuration\"F\n" +
-	"\x15MSTeamsWorkflowConfig:-\x92A*\n" +
+	"\x15MSTeamsWorkflowConfig:-\x9aA*\n" +
 	"(*&Microsoft Teams workflow configuration\"\xba\x02\n" +
 	"\n" +
 	"JiraConfig\x12P\n" +
-	"\tapi_token\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10\"jira_api_token\"R\bapiToken\x12E\n" +
-	"\x05email\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"jira_email\"R\x05email\x12V\n" +
-	"\vproject_key\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x17\x92A\x14J\x12\"jira_project_key\"R\n" +
-	"projectKey:;\x92A8\n" +
+	"\tapi_token\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10\"jira_api_token\"R\bapiToken\x12E\n" +
+	"\x05email\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"jira_email\"R\x05email\x12V\n" +
+	"\vproject_key\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x17\x9aA\x14J\x12\"jira_project_key\"R\n" +
+	"projectKey:;\x9aA8\n" +
 	"6*\x12Jira configuration\xd2\x01\tapi_token\xd2\x01\x05email\xd2\x01\vproject_key\"/\n" +
-	"\x0eOpsgenieConfig:\x1d\x92A\x1a\n" +
+	"\x0eOpsgenieConfig:\x1d\x9aA\x1a\n" +
 	"\x18*\x16Opsgenie configuration\"\xec\x01\n" +
 	"\rDemistoConfig\x12]\n" +
-	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x92A(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12M\n" +
-	"\apayload\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10{\"key\": \"value\"}R\apayload:-\x92A*\n" +
+	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12M\n" +
+	"\apayload\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10{\"key\": \"value\"}R\apayload:-\x9aA*\n" +
 	"(*\x15Demisto configuration\xd2\x01\x04uuid\xd2\x01\apayload\"\xbb\x04\n" +
 	"\x14AwsEventBridgeConfig\x12\x80\x01\n" +
-	"\revent_bus_arn\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB>\x92A;J9\"arn:aws:events:us-east-1:123456789012:event-bus/default\"R\veventBusArn\x12K\n" +
-	"\x06detail\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10{\"key\": \"value\"}R\x06detail\x12Q\n" +
-	"\vdetail_type\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r\"detail_type\"R\n" +
+	"\revent_bus_arn\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB>\x9aA;J9\"arn:aws:events:us-east-1:123456789012:event-bus/default\"R\veventBusArn\x12K\n" +
+	"\x06detail\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10{\"key\": \"value\"}R\x06detail\x12Q\n" +
+	"\vdetail_type\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r\"detail_type\"R\n" +
 	"detailType\x12C\n" +
-	"\x06source\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\r\x92A\n" +
+	"\x06source\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\r\x9aA\n" +
 	"J\b\"source\"R\x06source\x12K\n" +
-	"\trole_name\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"role_name\"R\broleName:`\x92A]\n" +
+	"\trole_name\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"role_name\"R\broleName:`\x9aA]\n" +
 	"[*\x1dAWS EventBridge configuration\xd2\x01\revent_bus_arn\xd2\x01\x06detail\xd2\x01\vdetail_type\xd2\x01\x06source\xd2\x01\trole_nameJ\x04\b\x05\x10\x06R\x06region\"\xe5\x04\n" +
 	"\x1bIbmEventNotificationsConfig\x12c\n" +
 	"\x1fevent_notifications_instance_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x1ceventNotificationsInstanceId\x129\n" +
@@ -2010,18 +2010,18 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\rendpoint_type\x18\x05 \x01(\x0e2L.com.coralogix.outgoing_webhooks.v1.IbmEventNotificationsConfig.EndpointTypeR\fendpointType\"N\n" +
 	"\fEndpointType\x12#\n" +
 	"\x1fENDPOINT_TYPE_DEFAULT_OR_PUBLIC\x10\x00\x12\x19\n" +
-	"\x15ENDPOINT_TYPE_PRIVATE\x10\x01:i\x92Af\n" +
+	"\x15ENDPOINT_TYPE_PRIVATE\x10\x01:i\x9aAf\n" +
 	"d*$IBM event notification configuration\xd2\x01\x1fevent_notifications_instance_id\xd2\x01\tregion_id\xd2\x01\rendpoint_type\"\xcb\r\n" +
 	"\x0fOutgoingWebhook\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
-	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x92A\x03J\x011R\x04type\x12C\n" +
-	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
+	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
+	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
+	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x92A\x17J\x15\"external_id_example\"R\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
+	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
 	"externalId\x12c\n" +
 	"\x0fgeneric_webhook\x18d \x01(\v28.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfigH\x00R\x0egenericWebhook\x12G\n" +
 	"\x05slack\x18e \x01(\v2/.com.coralogix.outgoing_webhooks.v1.SlackConfigH\x00R\x05slack\x12T\n" +
@@ -2036,15 +2036,15 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\ademisto\x18l \x01(\v21.com.coralogix.outgoing_webhooks.v1.DemistoConfigH\x00R\ademisto\x12d\n" +
 	"\x10aws_event_bridge\x18m \x01(\v28.com.coralogix.outgoing_webhooks.v1.AwsEventBridgeConfigH\x00R\x0eawsEventBridge\x12y\n" +
 	"\x17ibm_event_notifications\x18n \x01(\v2?.com.coralogix.outgoing_webhooks.v1.IbmEventNotificationsConfigH\x00R\x15ibmEventNotifications\x12g\n" +
-	"\x11ms_teams_workflow\x18o \x01(\v29.com.coralogix.outgoing_webhooks.v1.MSTeamsWorkflowConfigH\x00R\x0fmsTeamsWorkflow:E\x92AB\n" +
+	"\x11ms_teams_workflow\x18o \x01(\v29.com.coralogix.outgoing_webhooks.v1.MSTeamsWorkflowConfigH\x00R\x0fmsTeamsWorkflow:E\x9aAB\n" +
 	"@*\x10Outgoing webhook\xd2\x01\x02id\xd2\x01\x04type\xd2\x01\x04name\xd2\x01\n" +
 	"created_at\xd2\x01\vexternal_idB\b\n" +
 	"\x06config\"\xfe\n" +
 	"\n" +
 	"\x18OutgoingWebhookInputData\x12K\n" +
-	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x92A\x03J\x011R\x04type\x12C\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"slack.webhook.com\"R\x03url\x12c\n" +
+	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
+	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12c\n" +
 	"\x0fgeneric_webhook\x18d \x01(\v28.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfigH\x00R\x0egenericWebhook\x12G\n" +
 	"\x05slack\x18e \x01(\v2/.com.coralogix.outgoing_webhooks.v1.SlackConfigH\x00R\x05slack\x12T\n" +
 	"\n" +
@@ -2058,37 +2058,37 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\ademisto\x18l \x01(\v21.com.coralogix.outgoing_webhooks.v1.DemistoConfigH\x00R\ademisto\x12d\n" +
 	"\x10aws_event_bridge\x18m \x01(\v28.com.coralogix.outgoing_webhooks.v1.AwsEventBridgeConfigH\x00R\x0eawsEventBridge\x12y\n" +
 	"\x17ibm_event_notifications\x18n \x01(\v2?.com.coralogix.outgoing_webhooks.v1.IbmEventNotificationsConfigH\x00R\x15ibmEventNotifications\x12g\n" +
-	"\x11ms_teams_workflow\x18o \x01(\v29.com.coralogix.outgoing_webhooks.v1.MSTeamsWorkflowConfigH\x00R\x0fmsTeamsWorkflow:9\x92A6\n" +
+	"\x11ms_teams_workflow\x18o \x01(\v29.com.coralogix.outgoing_webhooks.v1.MSTeamsWorkflowConfigH\x00R\x0fmsTeamsWorkflow:9\x9aA6\n" +
 	"4*\x1bOutgoing webhook input data\xd2\x01\x04name\xd2\x01\x06config\xd2\x01\x04typeB\b\n" +
 	"\x06config\"\xb9\x04\n" +
 	"\x16OutgoingWebhookSummary\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"webhook_id\"R\x02id\x12C\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12C\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
+	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x92A\x17J\x15\"external_id_example\"R\n" +
-	"externalId:F\x92AC\n" +
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
+	"\vexternal_id\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
+	"externalId:F\x9aAC\n" +
 	"A*\x18Outgoing webhook summary\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\n" +
 	"created_at\xd2\x01\vexternal_id\"\x9e\x05\n" +
 	"\x1eOutgoingWebhookExtendedSummary\x12?\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
-	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x92A\x03J\x011R\x04type\x12C\n" +
-	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
+	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
+	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
+	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x92A\x17J\x15\"external_id_example\"R\n" +
-	"externalId:V\x92AS\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
+	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
+	"externalId:V\x9aAS\n" +
 	"Q*!Outgoing webhook extended summary\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\n" +
 	"created_at\xd2\x01\vexternal_id\xd2\x01\x04type\"\xd7\x01\n" +
 	"\x16OutgoingWebhookDetails\x12C\n" +
 	"\x04type\x18\x01 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeR\x04type\x12H\n" +
-	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x92A\x11J\x0f\"example_label\"R\x05label:.\x92A+\n" +
+	"\x05label\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x14\x9aA\x11J\x0f\"example_label\"R\x05label:.\x9aA+\n" +
 	")*\x18Outgoing webhook details\xd2\x01\x05label\xd2\x01\x04type\"\xc1\x03\n" +
 	"\x16OutboundWebhookSummary\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12C\n" +
@@ -2099,7 +2099,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\n" +
 	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12=\n" +
 	"\vexternal_id\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueR\n" +
-	"externalId:M\x92AJ\n" +
+	"externalId:M\x9aAJ\n" +
 	"H*\x18Outbound webhook summary\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\n" +
 	"created_at\xd2\x01\vexternal_id\xd2\x01\x04type*\xe4\x01\n" +
 	"\vWebhookType\x12\v\n" +

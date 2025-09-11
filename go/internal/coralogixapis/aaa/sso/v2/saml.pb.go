@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -637,31 +637,31 @@ var File_com_coralogixapis_aaa_sso_v2_saml_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\n" +
-	"'com/coralogixapis/aaa/sso/v2/saml.proto\x12\x1ccom.coralogixapis.aaa.sso.v2\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xbe\x02\n" +
+	"'com/coralogixapis/aaa/sso/v2/saml.proto\x12\x1ccom.coralogixapis.aaa.sso.v2\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xbe\x02\n" +
 	"\x16GetSPParametersRequest\x12%\n" +
-	"\ateam_id\x18\x01 \x01(\rB\f\x92A\tJ\a1234567R\x06teamId:\xfc\x01\x92A\xf8\x01\n" +
+	"\ateam_id\x18\x01 \x01(\rB\f\x9aA\tJ\a1234567R\x06teamId:\xfc\x01\x9aA\xf8\x01\n" +
 	"x*\x19Get SP Parameters Request2QThis data structure is used to retrieve the parameters of a SAML service provider\xd2\x01\ateam_id*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xae\x05\n" +
 	"\fSPParameters\x12\\\n" +
-	"\fmetadata_url\x18\x01 \x01(\tB9\x92A6J4\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"R\vmetadataUrl\x12<\n" +
-	"\x10signing_cert_pem\x18\x02 \x01(\tB\x12\x92A\x0fJ\r\"certificate\"R\x0esigningCertPem\x124\n" +
-	"\x0ename_id_format\x18\x03 \x01(\tB\x0e\x92A\vJ\t\"name_id\"R\fnameIdFormat\x12U\n" +
-	"\x1eassertion_consumer_service_url\x18\x04 \x01(\tB\x10\x92A\rJ\v\"assertion\"R\x1bassertionConsumerServiceUrl\x12(\n" +
-	"\abinding\x18\x05 \x01(\tB\x0e\x92A\vJ\t\"binding\"R\abinding:\xca\x02\x92A\xc6\x02\n" +
+	"\fmetadata_url\x18\x01 \x01(\tB9\x9aA6J4\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"R\vmetadataUrl\x12<\n" +
+	"\x10signing_cert_pem\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"certificate\"R\x0esigningCertPem\x124\n" +
+	"\x0ename_id_format\x18\x03 \x01(\tB\x0e\x9aA\vJ\t\"name_id\"R\fnameIdFormat\x12U\n" +
+	"\x1eassertion_consumer_service_url\x18\x04 \x01(\tB\x10\x9aA\rJ\v\"assertion\"R\x1bassertionConsumerServiceUrl\x12(\n" +
+	"\abinding\x18\x05 \x01(\tB\x0e\x9aA\vJ\t\"binding\"R\abinding:\xca\x02\x9aA\xc6\x02\n" +
 	"\xc5\x01*\x1bService Provider Parameters2HThis data structure represents the parameters of a SAML service provider\xd2\x01\fmetadata_url\xd2\x01\x10signing_cert_pem\xd2\x01\x0ename_id_format\xd2\x01\x1eassertion_consumer_service_url\xd2\x01\abinding*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xfc\x02\n" +
 	"\x17GetSPParametersResponse\x12B\n" +
-	"\x06params\x18\x01 \x01(\v2*.com.coralogixapis.aaa.sso.v2.SPParametersR\x06params:\x9c\x02\x92A\x98\x02\n" +
+	"\x06params\x18\x01 \x01(\v2*.com.coralogixapis.aaa.sso.v2.SPParametersR\x06params:\x9c\x02\x9aA\x98\x02\n" +
 	"\x97\x01*\x1aGet SP Parameters Response2pThis data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider\xd2\x01\x06params*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xfa\x04\n" +
 	"\rIDPParameters\x12!\n" +
-	"\x06active\x18\x02 \x01(\bB\t\x92A\x06J\x04trueR\x06active\x12^\n" +
-	"\fmetadata_url\x18\x03 \x01(\tB9\x92A6J4\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"H\x00R\vmetadataUrl\x12F\n" +
-	"\x10metadata_content\x18\x04 \x01(\tB\x19\x92A\x16J\x14\"<?xml version= ...\"H\x00R\x0fmetadataContent\x127\n" +
-	"\x0eteam_entity_id\x18\x05 \x01(\rB\f\x92A\tJ\a1234567H\x01R\fteamEntityId\x88\x01\x01\x120\n" +
-	"\vgroup_names\x18\x06 \x03(\tB\x0f\x92A\fJ\n" +
+	"\x06active\x18\x02 \x01(\bB\t\x9aA\x06J\x04trueR\x06active\x12^\n" +
+	"\fmetadata_url\x18\x03 \x01(\tB9\x9aA6J4\"https://<...>.okta.com/app/<...>/sso/saml/metadata\"H\x00R\vmetadataUrl\x12F\n" +
+	"\x10metadata_content\x18\x04 \x01(\tB\x19\x9aA\x16J\x14\"<?xml version= ...\"H\x00R\x0fmetadataContent\x127\n" +
+	"\x0eteam_entity_id\x18\x05 \x01(\rB\f\x9aA\tJ\a1234567H\x01R\fteamEntityId\x88\x01\x01\x120\n" +
+	"\vgroup_names\x18\x06 \x03(\tB\x0f\x9aA\fJ\n" +
 	"[\"group1\"]R\n" +
-	"groupNames:\x93\x02\x92A\x8f\x02\n" +
+	"groupNames:\x93\x02\x9aA\x8f\x02\n" +
 	"\x8e\x01*\x0eIDP Parameters2IThis data structure represents a set of SAML identity provider parameters\xd2\x01\x06active\xd2\x01\bmetadata\xd2\x01\x0eteam_entity_id\xd2\x01\vgroup_names*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\n" +
 	"\n" +
@@ -669,18 +669,18 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\x0f_team_entity_id\"\xfc\x02\n" +
 	"\x17SetIDPParametersRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\rR\x06teamId\x12C\n" +
-	"\x06params\x18\x02 \x01(\v2+.com.coralogixapis.aaa.sso.v2.IDPParametersR\x06params:\x82\x02\x92A\xfe\x01\n" +
+	"\x06params\x18\x02 \x01(\v2+.com.coralogixapis.aaa.sso.v2.IDPParametersR\x06params:\x82\x02\x9aA\xfe\x01\n" +
 	"~*\x1aSet IDP Parameters Request2MThis data structure is used to set the parameters of a SAML identity provider\xd2\x01\ateam_id\xd2\x01\x06params*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x1a\n" +
 	"\x18SetIDPParametersResponse\"\xc9\x02\n" +
 	"\x10SetActiveRequest\x12\x17\n" +
 	"\ateam_id\x18\x01 \x01(\rR\x06teamId\x12\x1b\n" +
-	"\tis_active\x18\x02 \x01(\bR\bisActive:\xfe\x01\x92A\xfa\x01\n" +
+	"\tis_active\x18\x02 \x01(\bR\bisActive:\xfe\x01\x9aA\xfa\x01\n" +
 	"z*\x12Set Active Request2NThis data structure is used to activate or deactivate a SAML identity provider\xd2\x01\ateam_id\xd2\x01\tis_active*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x13\n" +
 	"\x11SetActiveResponse\"\xcb\x02\n" +
 	"\x17GetConfigurationRequest\x12\x17\n" +
-	"\ateam_id\x18\x01 \x01(\rR\x06teamId:\x96\x02\x92A\x92\x02\n" +
+	"\ateam_id\x18\x01 \x01(\rR\x06teamId:\x96\x02\x9aA\x92\x02\n" +
 	"\x91\x01*\x19Get Configuration Request2jThis data structure is used to retrieve the configuration of a SAML service provider and identity provider\xd2\x01\ateam_id*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xe2\x05\n" +
 	"\x18GetConfigurationResponse\x12\x17\n" +
@@ -692,13 +692,13 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\n" +
 	"IDPDetails\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\x12\x12\n" +
-	"\x04icon\x18\x02 \x01(\tR\x04icon:\xd8\x02\x92A\xd4\x02\n" +
+	"\x04icon\x18\x02 \x01(\tR\x04icon:\xd8\x02\x9aA\xd4\x02\n" +
 	"\xd3\x01*\x1aGet Configuration Response2\x89\x01This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider\xd2\x01\ateam_id\xd2\x01\rsp_parameters\xd2\x01\x0eidp_parameters*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/B\x0e\n" +
 	"\f_idp_details2\x94\n" +
 	"\n" +
 	"\x18SamlConfigurationService\x12\xab\x02\n" +
-	"\x0fGetSPParameters\x124.com.coralogixapis.aaa.sso.v2.GetSPParametersRequest\x1a5.com.coralogixapis.aaa.sso.v2.GetSPParametersResponse\"\xaa\x01\x92A\x84\x01\n" +
+	"\x0fGetSPParameters\x124.com.coralogixapis.aaa.sso.v2.GetSPParametersRequest\x1a5.com.coralogixapis.aaa.sso.v2.GetSPParametersResponse\"\xaa\x01\x9aA\x84\x01\n" +
 	"\x1aSAML Configuration Service\x12\x11Get SP ParametersJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -706,7 +706,7 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/sp_parameters\x12\xb3\x02\n" +
-	"\x10SetIDPParameters\x125.com.coralogixapis.aaa.sso.v2.SetIDPParametersRequest\x1a6.com.coralogixapis.aaa.sso.v2.SetIDPParametersResponse\"\xaf\x01\x92A\x85\x01\n" +
+	"\x10SetIDPParameters\x125.com.coralogixapis.aaa.sso.v2.SetIDPParametersRequest\x1a6.com.coralogixapis.aaa.sso.v2.SetIDPParametersResponse\"\xaf\x01\x9aA\x85\x01\n" +
 	"\x1aSAML Configuration Service\x12\x12Set IDP ParametersJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -714,7 +714,7 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02 :\x01*\"\x1b/v1/sso/saml/idp_parameters\x12\x9c\x02\n" +
-	"\tSetActive\x12..com.coralogixapis.aaa.sso.v2.SetActiveRequest\x1a/.com.coralogixapis.aaa.sso.v2.SetActiveResponse\"\xad\x01\x92A\x8b\x01\n" +
+	"\tSetActive\x12..com.coralogixapis.aaa.sso.v2.SetActiveRequest\x1a/.com.coralogixapis.aaa.sso.v2.SetActiveResponse\"\xad\x01\x9aA\x8b\x01\n" +
 	"\x1aSAML Configuration Service\x12\x18Activate/Deactivate SAMLJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -722,14 +722,14 @@ const file_com_coralogixapis_aaa_sso_v2_saml_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/sso/saml/active\x12\xb3\x02\n" +
-	"\x10GetConfiguration\x125.com.coralogixapis.aaa.sso.v2.GetConfigurationRequest\x1a6.com.coralogixapis.aaa.sso.v2.GetConfigurationResponse\"\xaf\x01\x92A\x89\x01\n" +
+	"\x10GetConfiguration\x125.com.coralogixapis.aaa.sso.v2.GetConfigurationRequest\x1a6.com.coralogixapis.aaa.sso.v2.GetConfigurationResponse\"\xaf\x01\x9aA\x89\x01\n" +
 	"\x1aSAML Configuration Service\x12\x16Get SAML ConfigurationJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/configuration\x1a?\x92A<\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/sso/saml/configuration\x1a?\x9aA<\n" +
 	"\x1aSAML Configuration Service\x12\x1eManage your SAML configurationb\x06proto3"
 
 var (

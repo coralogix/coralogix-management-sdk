@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -215,24 +215,24 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_metric_ano
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_metric_metric_anomaly_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"acom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/metric_anomaly_condition_type.proto\x1a[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x86\a\n" +
+	"acom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/anomaly/metric_anomaly_condition_type.proto\x1a[com/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metric_timewindow.proto\x1aXcom/coralogixapis/alerts/v3/alert_def_type_definition/metric/common/metrics_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x86\a\n" +
 	"\x11MetricAnomalyType\x12\x86\x01\n" +
-	"\rmetric_filter\x18\x01 \x01(\v2).com.coralogixapis.alerts.v3.MetricFilterB6\x92A321The filter to match metric entries for the alert.R\fmetricFilter\x12x\n" +
-	"\x05rules\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.MetricAnomalyRuleB2\x92A/2'The rules for the metric anomaly alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xa7\x01\n" +
-	"\x13evaluation_delay_ms\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueBZ\x92AW2?The delay in milliseconds before evaluating the alert conditionJ\x0560000\xa2\x02\fmillisecondsR\x11evaluationDelayMs\x12\x97\x01\n" +
-	"\x16anomaly_alert_settings\x18\x04 \x01(\v21.com.coralogixapis.alerts.v3.AnomalyAlertSettingsB.\x92A+2)Configuration for anomaly alert settings.R\x14anomalyAlertSettings:\xa9\x02\x92A\xa5\x02\n" +
+	"\rmetric_filter\x18\x01 \x01(\v2).com.coralogixapis.alerts.v3.MetricFilterB6\x9aA321The filter to match metric entries for the alert.R\fmetricFilter\x12x\n" +
+	"\x05rules\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.MetricAnomalyRuleB2\x9aA/2'The rules for the metric anomaly alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xa7\x01\n" +
+	"\x13evaluation_delay_ms\x18\x03 \x01(\v2\x1b.google.protobuf.Int32ValueBZ\x9aAW2?The delay in milliseconds before evaluating the alert conditionJ\x0560000\xa2\x02\fmillisecondsR\x11evaluationDelayMs\x12\x97\x01\n" +
+	"\x16anomaly_alert_settings\x18\x04 \x01(\v21.com.coralogixapis.alerts.v3.AnomalyAlertSettingsB.\x9aA+2)Configuration for anomaly alert settings.R\x14anomalyAlertSettings:\xa9\x02\x9aA\xa5\x02\n" +
 	"z*\x1fMetric-based anomaly alert type2?Configuration for alerts triggered by anomalous metric patterns\xd2\x01\rmetric_filter\xd2\x01\x05rules*\xa6\x01\n" +
 	"ALearn more about metric-based anomaly alerts in our documentation\x12ahttps://coralogix.com/docs/user-guides/alerting/create-an-alert/metrics/anomaly-detection-alerts/\"\xf9\x01\n" +
 	"\x11MetricAnomalyRule\x12\x83\x01\n" +
-	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.MetricAnomalyConditionB0\x92A-2+The condition for the metric anomaly alert.R\tcondition:^\x92A[\n" +
+	"\tcondition\x18\x01 \x01(\v23.com.coralogixapis.alerts.v3.MetricAnomalyConditionB0\x9aA-2+The condition for the metric anomaly alert.R\tcondition:^\x9aA[\n" +
 	"Y*\x19Metric-based anomaly rule20A rule for metric-based anomaly detection alerts\xd2\x01\tcondition\"\xee\x06\n" +
 	"\x16MetricAnomalyCondition\x12r\n" +
-	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x92A32+The threshold value for the alert conditionJ\x0410.0R\tthreshold\x12\x99\x01\n" +
-	"\ffor_over_pct\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueBY\x92AV2PThe percentage of the metric that must exceed the threshold to trigger the alertJ\x0220R\n" +
+	"\tthreshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x9aA32+The threshold value for the alert conditionJ\x0410.0R\tthreshold\x12\x99\x01\n" +
+	"\ffor_over_pct\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueBY\x9aAV2PThe percentage of the metric that must exceed the threshold to trigger the alertJ\x0220R\n" +
 	"forOverPct\x12|\n" +
-	"\vof_the_last\x18\x03 \x01(\v2-.com.coralogixapis.alerts.v3.MetricTimeWindowB-\x92A*2(The time window for the alert condition.R\tofTheLast\x12\x9c\x01\n" +
-	"\x17min_non_null_values_pct\x18\x04 \x01(\v2\x1c.google.protobuf.UInt32ValueBH\x92AE2?The percentage of non-null values required to trigger the alertJ\x0210R\x13minNonNullValuesPct\x12\xba\x01\n" +
-	"\x0econdition_type\x18\x05 \x01(\x0e27.com.coralogixapis.alerts.v3.MetricAnomalyConditionTypeBZ\x92AW2$The type of condition for the alert.J/\"METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL\"R\rconditionType:j\x92Ag\n" +
+	"\vof_the_last\x18\x03 \x01(\v2-.com.coralogixapis.alerts.v3.MetricTimeWindowB-\x9aA*2(The time window for the alert condition.R\tofTheLast\x12\x9c\x01\n" +
+	"\x17min_non_null_values_pct\x18\x04 \x01(\v2\x1c.google.protobuf.UInt32ValueBH\x9aAE2?The percentage of non-null values required to trigger the alertJ\x0210R\x13minNonNullValuesPct\x12\xba\x01\n" +
+	"\x0econdition_type\x18\x05 \x01(\x0e27.com.coralogixapis.alerts.v3.MetricAnomalyConditionTypeBZ\x9aAW2$The type of condition for the alert.J/\"METRIC_ANOMALY_CONDITION_TYPE_LESS_THAN_USUAL\"R\rconditionType:j\x9aAg\n" +
 	"e*\x1eMetric-based anomaly condition\xd2\x01\tthreshold\xd2\x01\x17min_non_null_values_pct\xd2\x01\vof_the_last\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (

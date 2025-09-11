@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -128,17 +128,17 @@ var File_com_coralogixapis_views_v1_filters_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_views_v1_filters_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogixapis/views/v1/filters.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x85\x03\n" +
+	"(com/coralogixapis/views/v1/filters.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x85\x03\n" +
 	"\x06Filter\x12X\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2\vFilter nameJ\x11\"applicationName\"\x80\x01\x01R\x04name\x12\xa3\x01\n" +
-	"\x0fselected_values\x18\x02 \x03(\v26.com.coralogixapis.views.v1.Filter.SelectedValuesEntryBB\x92A?2\x16Filter selected valuesJ%{\"demo\": true, \"cs-rest-test1\": true}R\x0eselectedValues\x1aA\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB&\x9aA#2\vFilter nameJ\x11\"applicationName\"\x80\x01\x01R\x04name\x12\xa3\x01\n" +
+	"\x0fselected_values\x18\x02 \x03(\v26.com.coralogixapis.views.v1.Filter.SelectedValuesEntryBB\x9aA?2\x16Filter selected valuesJ%{\"demo\": true, \"cs-rest-test1\": true}R\x0eselectedValues\x1aA\n" +
 	"\x13SelectedValuesEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01:8\x92A5\n" +
+	"\x05value\x18\x02 \x01(\bR\x05value:\x028\x01:8\x9aA5\n" +
 	"3*\n" +
 	"ViewFolder2\fView folder.\xd2\x01\x04name\xd2\x01\x0fselected_values\"W\n" +
 	"\x0fSelectedFilters\x12D\n" +
-	"\afilters\x18\x01 \x03(\v2\".com.coralogixapis.views.v1.FilterB\x06\x92A\x03\xa8\x01\x01R\afiltersb\x06proto3"
+	"\afilters\x18\x01 \x03(\v2\".com.coralogixapis.views.v1.FilterB\x06\x9aA\x03\xa8\x01\x01R\afiltersb\x06proto3"
 
 var (
 	file_com_coralogixapis_views_v1_filters_proto_rawDescOnce sync.Once

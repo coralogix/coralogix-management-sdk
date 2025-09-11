@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -123,17 +123,17 @@ var File_com_coralogixapis_incidents_v1_assignee_proto protoreflect.FileDescript
 
 const file_com_coralogixapis_incidents_v1_assignee_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogixapis/incidents/v1/assignee.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xac\x02\n" +
+	"-com/coralogixapis/incidents/v1/assignee.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xac\x02\n" +
 	"\n" +
 	"Assignment\x12L\n" +
 	"\vassigned_to\x18\x01 \x01(\v2+.com.coralogixapis.incidents.v1.UserDetailsR\n" +
 	"assignedTo\x12L\n" +
 	"\vassigned_by\x18\x02 \x01(\v2+.com.coralogixapis.incidents.v1.UserDetailsR\n" +
-	"assignedBy:\x81\x01\x92A~\n" +
+	"assignedBy:\x81\x01\x9aA~\n" +
 	"|*\n" +
 	"Assignment2RDetails of the user who assigned the incident and the user to whom it was assigned\xd2\x01\vassigned_to\xd2\x01\vassigned_by\"s\n" +
 	"\vUserDetails\x12E\n" +
-	"\auser_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x92A\vJ\t\"user_id\"R\x06userId:\x1d\x92A\x1a\n" +
+	"\auser_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x9aA\vJ\t\"user_id\"R\x06userId:\x1d\x9aA\x1a\n" +
 	"\x18*\fUser details\xd2\x01\auser_idb\x06proto3"
 
 var (

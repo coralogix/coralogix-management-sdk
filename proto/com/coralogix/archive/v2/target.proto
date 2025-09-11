@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package com.coralogix.archive.v2;
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message IBMCosTargetSpec {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "IBM COS Target Spec"
       description: "This data structure represents an IBM COS target."
@@ -20,10 +20,10 @@ message IBMCosTargetSpec {
     }
   };
 
-  string bucket_crn = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"bucket_crn\"" }];
-  string endpoint = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"http://some.endpoint.com:8081\"" }];
-  optional string service_crn = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"service_crn\"" }];
-  optional IbmBucketType bucket_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "0" }];
+  string bucket_crn = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"bucket_crn\"" }];
+  string endpoint = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"http://some.endpoint.com:8081\"" }];
+  optional string service_crn = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"service_crn\"" }];
+  optional IbmBucketType bucket_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "0" }];
 }
 
 enum IbmBucketType {
@@ -33,7 +33,7 @@ enum IbmBucketType {
 }
 
 message S3TargetSpec {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "S3 Target Spec"
       description: "This data structure represents an S3 target."
@@ -46,12 +46,12 @@ message S3TargetSpec {
       description: "Find out more about archives"
     }
   };
-  string bucket = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"bucket\"" }];
-  optional string region = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"us-west-2\"" }];
+  string bucket = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"bucket\"" }];
+  optional string region = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"us-west-2\"" }];
 }
 
 message ArchiveSpec {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Archive Spec"
       description: "This data structure contains metadata about the archive."
@@ -64,13 +64,13 @@ message ArchiveSpec {
       description: "Find out more about archives"
     }
   };
-  string archiving_format_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"json_id\"" }];
-  bool is_active = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
-  bool enable_tags = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  string archiving_format_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"json_id\"" }];
+  bool is_active = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
+  bool enable_tags = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message Target {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Target"
       description: "This data structure represents a target to archive logs."

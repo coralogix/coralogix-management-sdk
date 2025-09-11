@@ -8,10 +8,10 @@ import "com/coralogixapis/alerts/v3/alert_def_type_definition/logs/time_relative
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type_definition/undetected_values_management.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message LogsTimeRelativeThresholdType {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Log-based time-relative threshold alert type"
       description: "Configuration for alerts that are triggered when a fixed ratio reaches a set threshold compared to a past time frame."
@@ -22,30 +22,30 @@ message LogsTimeRelativeThresholdType {
       description: "Learn more about log-based, time-relative alerts in our documentation"
     }
   };
-  LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The filter to match log entries for the alert."}];
-  repeated LogsTimeRelativeRule rules = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  LogsFilter logs_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The filter to match log entries for the alert."}];
+  repeated LogsTimeRelativeRule rules = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The rules for the time-relative alert"
     min_items: 1
     max_items: 5
   }];
-  google.protobuf.BoolValue ignore_infinity = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue ignore_infinity = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "true"
     description: "Ignore infinity values in the alert"
   }];
-  repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated google.protobuf.StringValue notification_payload_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "[\"obj.field\"]"
     min_items: 0
     pattern: "^[a-zA-Z0-9_.]+$"
   }];
-  UndetectedValuesManagement undetected_values_management = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Configuration for handling the undetected values in the alert."}];
-  google.protobuf.Int32Value evaluation_delay_ms = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  UndetectedValuesManagement undetected_values_management = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Configuration for handling the undetected values in the alert."}];
+  google.protobuf.Int32Value evaluation_delay_ms = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "60000"
     description: "The delay in milliseconds before evaluating the alert condition"
   }];
 }
 
 message LogsTimeRelativeRule {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Logs Time Relative Rule"
       description: "LogsTimeRelativeRule is a message that defines a rule for log-based time-relative alerts"
@@ -55,12 +55,12 @@ message LogsTimeRelativeRule {
       ]
     }
   };
-  LogsTimeRelativeCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The condition for the time-relative alert."}];
-  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "The override settings for the alert."}];
+  LogsTimeRelativeCondition condition = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The condition for the time-relative alert."}];
+  AlertDefOverride override = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The override settings for the alert."}];
 }
 
 message LogsTimeRelativeCondition {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Log-based time-relative condition"
       description: "Defines conditions for time-relative comparison alerts"
@@ -71,14 +71,14 @@ message LogsTimeRelativeCondition {
       ]
     }
   };
-  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.DoubleValue threshold = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The threshold value for the alert condition."
   }];
-  LogsTimeRelativeComparedTo compared_to = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  LogsTimeRelativeComparedTo compared_to = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The time frame to compare the current value against"
     example: "\"LOGS_TIME_RELATIVE_COMPARED_TO_YESTERDAY\""
   }];
-  LogsTimeRelativeConditionType condition_type = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  LogsTimeRelativeConditionType condition_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The type of condition for the alert"
     example: "\"LOGS_TIME_RELATIVE_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\""
   }];

@@ -655,6 +655,7 @@ func (x *GetEventsStatisticsRequest) GetFilter() *EventsFilter {
 type GetEventsStatisticsResponse struct {
 	state                          protoimpl.MessageState      `protogen:"open.v1"`
 	CxEventMetadataFieldStatistics map[string]*FieldStatistics `protobuf:"bytes,1,rep,name=cx_event_metadata_field_statistics,json=cxEventMetadataFieldStatistics,proto3" json:"cx_event_metadata_field_statistics,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	CxEventLabelsFieldStatistics   map[string]*FieldStatistics `protobuf:"bytes,2,rep,name=cx_event_labels_field_statistics,json=cxEventLabelsFieldStatistics,proto3" json:"cx_event_labels_field_statistics,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields                  protoimpl.UnknownFields
 	sizeCache                      protoimpl.SizeCache
 }
@@ -692,6 +693,13 @@ func (*GetEventsStatisticsResponse) Descriptor() ([]byte, []int) {
 func (x *GetEventsStatisticsResponse) GetCxEventMetadataFieldStatistics() map[string]*FieldStatistics {
 	if x != nil {
 		return x.CxEventMetadataFieldStatistics
+	}
+	return nil
+}
+
+func (x *GetEventsStatisticsResponse) GetCxEventLabelsFieldStatistics() map[string]*FieldStatistics {
+	if x != nil {
+		return x.CxEventLabelsFieldStatistics
 	}
 	return nil
 }
@@ -902,13 +910,17 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"W*\x12ListEventsResponse28This data structure represents a response to list events\xd2\x01\x06events\"\xce\x01\n" +
 	"\x1aGetEventsStatisticsRequest\x12A\n" +
 	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:m\x92Aj\n" +
-	"h*\x1aGetEventsStatisticsRequest2AThis data structure represents a request to get events statistics\xd2\x01\x06filter\"\xd9\x03\n" +
+	"h*\x1aGetEventsStatisticsRequest2AThis data structure represents a request to get events statistics\xd2\x01\x06filter\"\x9d\x06\n" +
 	"\x1bGetEventsStatisticsResponse\x12\xa8\x01\n" +
-	"\"cx_event_metadata_field_statistics\x18\x01 \x03(\v2\\.com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntryR\x1ecxEventMetadataFieldStatistics\x1a\x7f\n" +
+	"\"cx_event_metadata_field_statistics\x18\x01 \x03(\v2\\.com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntryR\x1ecxEventMetadataFieldStatistics\x12\xa2\x01\n" +
+	" cx_event_labels_field_statistics\x18\x02 \x03(\v2Z.com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntryR\x1ccxEventLabelsFieldStatistics\x1a\x7f\n" +
 	"#CxEventMetadataFieldStatisticsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12B\n" +
-	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01:\x8d\x01\x92A\x89\x01\n" +
-	"\x86\x01*\x1bGetEventsStatisticsResponse2BThis data structure represents a response to get events statistics\xd2\x01\"cx_event_metadata_field_statistics\"\xe0\x01\n" +
+	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01\x1a}\n" +
+	"!CxEventLabelsFieldStatisticsEntry\x12\x10\n" +
+	"\x03key\x18\x01 \x01(\tR\x03key\x12B\n" +
+	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01:\xad\x01\x92A\xa9\x01\n" +
+	"\xa6\x01*\x1bGetEventsStatisticsResponse2BThis data structure represents a response to get events statistics\xd2\x01Bcx_event_metadata_field_statisticscx_event_labels_field_statistics\"\xe0\x01\n" +
 	"\x0fFieldStatistics\x12l\n" +
 	"\x10field_statistics\x18\x01 \x03(\v2A.com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntryR\x0ffieldStatistics\x1a_\n" +
 	"\x14FieldStatisticsEntry\x12\x10\n" +
@@ -985,7 +997,7 @@ func file_com_coralogixapis_events_v3_events_service_proto_rawDescGZIP() []byte 
 	return file_com_coralogixapis_events_v3_events_service_proto_rawDescData
 }
 
-var file_com_coralogixapis_events_v3_events_service_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
+var file_com_coralogixapis_events_v3_events_service_proto_msgTypes = make([]protoimpl.MessageInfo, 19)
 var file_com_coralogixapis_events_v3_events_service_proto_goTypes = []any{
 	(*CxEventArray)(nil),                // 0: com.coralogixapis.events.v3.CxEventArray
 	(*CxEventSingleOrMultiple)(nil),     // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple
@@ -1004,66 +1016,69 @@ var file_com_coralogixapis_events_v3_events_service_proto_goTypes = []any{
 	(*ListEventsCountResponse)(nil),     // 14: com.coralogixapis.events.v3.ListEventsCountResponse
 	nil,                                 // 15: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
 	nil,                                 // 16: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
-	nil,                                 // 17: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
-	(*CxEvent)(nil),                     // 18: com.coralogixapis.events.v3.CxEvent
-	(*wrapperspb.StringValue)(nil),      // 19: google.protobuf.StringValue
-	(*OrderBy)(nil),                     // 20: com.coralogixapis.events.v3.OrderBy
-	(*EventsQueryFilter)(nil),           // 21: com.coralogixapis.events.v3.EventsQueryFilter
-	(*wrapperspb.UInt32Value)(nil),      // 22: google.protobuf.UInt32Value
-	(*EventsFilter)(nil),                // 23: com.coralogixapis.events.v3.EventsFilter
-	(*wrapperspb.UInt64Value)(nil),      // 24: google.protobuf.UInt64Value
-	(*wrapperspb.BoolValue)(nil),        // 25: google.protobuf.BoolValue
-	(*wrapperspb.Int64Value)(nil),       // 26: google.protobuf.Int64Value
+	nil,                                 // 17: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
+	nil,                                 // 18: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
+	(*CxEvent)(nil),                     // 19: com.coralogixapis.events.v3.CxEvent
+	(*wrapperspb.StringValue)(nil),      // 20: google.protobuf.StringValue
+	(*OrderBy)(nil),                     // 21: com.coralogixapis.events.v3.OrderBy
+	(*EventsQueryFilter)(nil),           // 22: com.coralogixapis.events.v3.EventsQueryFilter
+	(*wrapperspb.UInt32Value)(nil),      // 23: google.protobuf.UInt32Value
+	(*EventsFilter)(nil),                // 24: com.coralogixapis.events.v3.EventsFilter
+	(*wrapperspb.UInt64Value)(nil),      // 25: google.protobuf.UInt64Value
+	(*wrapperspb.BoolValue)(nil),        // 26: google.protobuf.BoolValue
+	(*wrapperspb.Int64Value)(nil),       // 27: google.protobuf.Int64Value
 }
 var file_com_coralogixapis_events_v3_events_service_proto_depIdxs = []int32{
-	18, // 0: com.coralogixapis.events.v3.CxEventArray.events:type_name -> com.coralogixapis.events.v3.CxEvent
-	18, // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple.single_event:type_name -> com.coralogixapis.events.v3.CxEvent
+	19, // 0: com.coralogixapis.events.v3.CxEventArray.events:type_name -> com.coralogixapis.events.v3.CxEvent
+	19, // 1: com.coralogixapis.events.v3.CxEventSingleOrMultiple.single_event:type_name -> com.coralogixapis.events.v3.CxEvent
 	0,  // 2: com.coralogixapis.events.v3.CxEventSingleOrMultiple.multiple_events:type_name -> com.coralogixapis.events.v3.CxEventArray
-	19, // 3: com.coralogixapis.events.v3.GetEventRequest.id:type_name -> google.protobuf.StringValue
-	20, // 4: com.coralogixapis.events.v3.GetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	20, // 3: com.coralogixapis.events.v3.GetEventRequest.id:type_name -> google.protobuf.StringValue
+	21, // 4: com.coralogixapis.events.v3.GetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 5: com.coralogixapis.events.v3.GetEventRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
 	1,  // 6: com.coralogixapis.events.v3.GetEventResponse.event:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
 	7,  // 7: com.coralogixapis.events.v3.GetEventResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	19, // 8: com.coralogixapis.events.v3.BatchGetEventRequest.ids:type_name -> google.protobuf.StringValue
-	20, // 9: com.coralogixapis.events.v3.BatchGetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	20, // 8: com.coralogixapis.events.v3.BatchGetEventRequest.ids:type_name -> google.protobuf.StringValue
+	21, // 9: com.coralogixapis.events.v3.BatchGetEventRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 10: com.coralogixapis.events.v3.BatchGetEventRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
-	21, // 11: com.coralogixapis.events.v3.BatchGetEventRequest.filter:type_name -> com.coralogixapis.events.v3.EventsQueryFilter
+	22, // 11: com.coralogixapis.events.v3.BatchGetEventRequest.filter:type_name -> com.coralogixapis.events.v3.EventsQueryFilter
 	15, // 12: com.coralogixapis.events.v3.BatchGetEventResponse.events:type_name -> com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry
-	19, // 13: com.coralogixapis.events.v3.BatchGetEventResponse.not_found_ids:type_name -> google.protobuf.StringValue
+	20, // 13: com.coralogixapis.events.v3.BatchGetEventResponse.not_found_ids:type_name -> google.protobuf.StringValue
 	7,  // 14: com.coralogixapis.events.v3.BatchGetEventResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	22, // 15: com.coralogixapis.events.v3.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
-	19, // 16: com.coralogixapis.events.v3.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
-	22, // 17: com.coralogixapis.events.v3.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
-	19, // 18: com.coralogixapis.events.v3.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
-	23, // 19: com.coralogixapis.events.v3.ListEventsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
-	20, // 20: com.coralogixapis.events.v3.ListEventsRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
+	23, // 15: com.coralogixapis.events.v3.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
+	20, // 16: com.coralogixapis.events.v3.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
+	23, // 17: com.coralogixapis.events.v3.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
+	20, // 18: com.coralogixapis.events.v3.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
+	24, // 19: com.coralogixapis.events.v3.ListEventsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	21, // 20: com.coralogixapis.events.v3.ListEventsRequest.order_bys:type_name -> com.coralogixapis.events.v3.OrderBy
 	6,  // 21: com.coralogixapis.events.v3.ListEventsRequest.pagination:type_name -> com.coralogixapis.events.v3.PaginationRequest
-	18, // 22: com.coralogixapis.events.v3.ListEventsResponse.events:type_name -> com.coralogixapis.events.v3.CxEvent
+	19, // 22: com.coralogixapis.events.v3.ListEventsResponse.events:type_name -> com.coralogixapis.events.v3.CxEvent
 	7,  // 23: com.coralogixapis.events.v3.ListEventsResponse.pagination:type_name -> com.coralogixapis.events.v3.PaginationResponse
-	23, // 24: com.coralogixapis.events.v3.GetEventsStatisticsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	24, // 24: com.coralogixapis.events.v3.GetEventsStatisticsRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
 	16, // 25: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_metadata_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry
-	17, // 26: com.coralogixapis.events.v3.FieldStatistics.field_statistics:type_name -> com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
-	23, // 27: com.coralogixapis.events.v3.ListEventsCountRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
-	24, // 28: com.coralogixapis.events.v3.ListEventsCountResponse.count:type_name -> google.protobuf.UInt64Value
-	25, // 29: com.coralogixapis.events.v3.ListEventsCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
-	1,  // 30: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry.value:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
-	12, // 31: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
-	26, // 32: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry.value:type_name -> google.protobuf.Int64Value
-	2,  // 33: com.coralogixapis.events.v3.EventsService.GetEvent:input_type -> com.coralogixapis.events.v3.GetEventRequest
-	4,  // 34: com.coralogixapis.events.v3.EventsService.BatchGetEvent:input_type -> com.coralogixapis.events.v3.BatchGetEventRequest
-	8,  // 35: com.coralogixapis.events.v3.EventsService.ListEvents:input_type -> com.coralogixapis.events.v3.ListEventsRequest
-	13, // 36: com.coralogixapis.events.v3.EventsService.ListEventsCount:input_type -> com.coralogixapis.events.v3.ListEventsCountRequest
-	10, // 37: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:input_type -> com.coralogixapis.events.v3.GetEventsStatisticsRequest
-	3,  // 38: com.coralogixapis.events.v3.EventsService.GetEvent:output_type -> com.coralogixapis.events.v3.GetEventResponse
-	5,  // 39: com.coralogixapis.events.v3.EventsService.BatchGetEvent:output_type -> com.coralogixapis.events.v3.BatchGetEventResponse
-	9,  // 40: com.coralogixapis.events.v3.EventsService.ListEvents:output_type -> com.coralogixapis.events.v3.ListEventsResponse
-	14, // 41: com.coralogixapis.events.v3.EventsService.ListEventsCount:output_type -> com.coralogixapis.events.v3.ListEventsCountResponse
-	11, // 42: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:output_type -> com.coralogixapis.events.v3.GetEventsStatisticsResponse
-	38, // [38:43] is the sub-list for method output_type
-	33, // [33:38] is the sub-list for method input_type
-	33, // [33:33] is the sub-list for extension type_name
-	33, // [33:33] is the sub-list for extension extendee
-	0,  // [0:33] is the sub-list for field type_name
+	17, // 26: com.coralogixapis.events.v3.GetEventsStatisticsResponse.cx_event_labels_field_statistics:type_name -> com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry
+	18, // 27: com.coralogixapis.events.v3.FieldStatistics.field_statistics:type_name -> com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry
+	24, // 28: com.coralogixapis.events.v3.ListEventsCountRequest.filter:type_name -> com.coralogixapis.events.v3.EventsFilter
+	25, // 29: com.coralogixapis.events.v3.ListEventsCountResponse.count:type_name -> google.protobuf.UInt64Value
+	26, // 30: com.coralogixapis.events.v3.ListEventsCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
+	1,  // 31: com.coralogixapis.events.v3.BatchGetEventResponse.EventsEntry.value:type_name -> com.coralogixapis.events.v3.CxEventSingleOrMultiple
+	12, // 32: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
+	12, // 33: com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventLabelsFieldStatisticsEntry.value:type_name -> com.coralogixapis.events.v3.FieldStatistics
+	27, // 34: com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntry.value:type_name -> google.protobuf.Int64Value
+	2,  // 35: com.coralogixapis.events.v3.EventsService.GetEvent:input_type -> com.coralogixapis.events.v3.GetEventRequest
+	4,  // 36: com.coralogixapis.events.v3.EventsService.BatchGetEvent:input_type -> com.coralogixapis.events.v3.BatchGetEventRequest
+	8,  // 37: com.coralogixapis.events.v3.EventsService.ListEvents:input_type -> com.coralogixapis.events.v3.ListEventsRequest
+	13, // 38: com.coralogixapis.events.v3.EventsService.ListEventsCount:input_type -> com.coralogixapis.events.v3.ListEventsCountRequest
+	10, // 39: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:input_type -> com.coralogixapis.events.v3.GetEventsStatisticsRequest
+	3,  // 40: com.coralogixapis.events.v3.EventsService.GetEvent:output_type -> com.coralogixapis.events.v3.GetEventResponse
+	5,  // 41: com.coralogixapis.events.v3.EventsService.BatchGetEvent:output_type -> com.coralogixapis.events.v3.BatchGetEventResponse
+	9,  // 42: com.coralogixapis.events.v3.EventsService.ListEvents:output_type -> com.coralogixapis.events.v3.ListEventsResponse
+	14, // 43: com.coralogixapis.events.v3.EventsService.ListEventsCount:output_type -> com.coralogixapis.events.v3.ListEventsCountResponse
+	11, // 44: com.coralogixapis.events.v3.EventsService.GetEventsStatistics:output_type -> com.coralogixapis.events.v3.GetEventsStatisticsResponse
+	40, // [40:45] is the sub-list for method output_type
+	35, // [35:40] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_events_v3_events_service_proto_init() }
@@ -1084,7 +1099,7 @@ func file_com_coralogixapis_events_v3_events_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_events_v3_events_service_proto_rawDesc), len(file_com_coralogixapis_events_v3_events_service_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   18,
+			NumMessages:   19,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

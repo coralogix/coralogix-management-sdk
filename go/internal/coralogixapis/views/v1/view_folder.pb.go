@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -80,11 +80,11 @@ var File_com_coralogixapis_views_v1_view_folder_proto protoreflect.FileDescripto
 
 const file_com_coralogixapis_views_v1_view_folder_proto_rawDesc = "" +
 	"\n" +
-	",com/coralogixapis/views/v1/view_folder.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd2\x02\n" +
+	",com/coralogixapis/views/v1/view_folder.proto\x12\x1acom.coralogixapis.views.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd2\x02\n" +
 	"\n" +
 	"ViewFolder\x12\xc7\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\x12R\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB \x92A\x1d2\vFolder nameJ\v\"My Folder\"\x80\x01\x01R\x04name:&\x92A#\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x9aA\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\x12R\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB \x9aA\x1d2\vFolder nameJ\v\"My Folder\"\x80\x01\x01R\x04name:&\x9aA#\n" +
 	"!*\n" +
 	"ViewFolder2\fView folder.\xd2\x01\x04nameb\x06proto3"
 

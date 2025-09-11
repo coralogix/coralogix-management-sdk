@@ -8,7 +8,7 @@ package v3
 
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -881,79 +881,79 @@ var File_com_coralogixapis_alerts_v3_alert_defs_service_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\x1a4com/coralogixapis/alerts/v3/alert_def_ordering.proto\"\xe8\x01\n" +
+	"4com/coralogixapis/alerts/v3/alert_defs_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a+com/coralogixapis/alerts/v3/alert_def.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\x1a4com/coralogixapis/alerts/v3/alert_def_ordering.proto\x1aAcom/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto\"\xe8\x01\n" +
 	"\x12GetAlertDefRequest\x12w\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x92AF2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Y\x92AV\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBI\x9aAF2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Y\x9aAV\n" +
 	"T*\x1cGet alert definition request2/A request to retrieve an alert definition by ID\xd2\x01\x02id\"\xaf\x02\n" +
 	"\x1dGetAlertDefByVersionIdRequest\x12\x8e\x01\n" +
-	"\x10alert_version_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBF\x92AC2\x10Alert version IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x0ealertVersionId:}\x92Az\n" +
+	"\x10alert_version_id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBF\x9aAC2\x10Alert version IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x0ealertVersionId:}\x9aAz\n" +
 	"x**Get alert definition by version ID request27A request to retrieve an alert definition by version ID\xd2\x01\x10alert_version_id\"\xe6\x01\n" +
 	"\x13GetAlertDefResponse\x12g\n" +
-	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB#\x92A 2\x1eThe requested alert definitionR\balertDef:f\x92Ac\n" +
+	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB#\x9aA 2\x1eThe requested alert definitionR\balertDef:f\x9aAc\n" +
 	"a*\x1dGet alert definition response24A response containing the requested alert definition\xd2\x01\talert_def\"\x94\x02\n" +
 	"\x1eGetAlertDefByVersionIdResponse\x12g\n" +
-	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB#\x92A 2\x1eThe requested alert definitionR\balertDef:\x88\x01\x92A\x84\x01\n" +
+	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB#\x9aA 2\x1eThe requested alert definitionR\balertDef:\x88\x01\x9aA\x84\x01\n" +
 	"\x81\x01*+Get alert definition by version ID response2FA response that contains an alert definition for the requested version\xd2\x01\talert_def\"\x97\x03\n" +
 	"\x15ListAlertDefsResponse\x12d\n" +
 	"\n" +
-	"alert_defs\x18\x01 \x03(\v2%.com.coralogixapis.alerts.v3.AlertDefB\x1e\x92A\x1b2\x19List of alert definitionsR\talertDefs\x12\xac\x01\n" +
+	"alert_defs\x18\x01 \x03(\v2%.com.coralogixapis.alerts.v3.AlertDefB\x1e\x9aA\x1b2\x19List of alert definitionsR\talertDefs\x12\xac\x01\n" +
 	"\n" +
-	"pagination\x18\x02 \x01(\v2/.com.coralogixapis.alerts.v3.PaginationResponseB[\x92AX25Pagination settings for the list of alert definitionsJ\x1f{ \"next_page_token\": \"abc123\" }R\n" +
-	"pagination:i\x92Af\n" +
+	"pagination\x18\x02 \x01(\v2/.com.coralogixapis.alerts.v3.PaginationResponseB[\x9aAX25Pagination settings for the list of alert definitionsJ\x1f{ \"next_page_token\": \"abc123\" }R\n" +
+	"pagination:i\x9aAf\n" +
 	"d*\x1fList alert definitions response24A response that contains a list of alert definitions\xd2\x01\n" +
 	"alert_defs\"\xcd\x04\n" +
 	"\x14ListAlertDefsRequest\x12\x8a\x01\n" +
-	"\fquery_filter\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.AlertDefQueryFilterB5\x92A220Filter to apply to the list of alert definitionsR\vqueryFilter\x12\xb7\x01\n" +
+	"\fquery_filter\x18\x01 \x01(\v20.com.coralogixapis.alerts.v3.AlertDefQueryFilterB5\x9aA220Filter to apply to the list of alert definitionsR\vqueryFilter\x12\xb7\x01\n" +
 	"\n" +
-	"pagination\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.PaginationRequestBg\x92Ad25Pagination settings for the list of alert definitionsJ+{ \"page_size\": 10, \"page_token\": \"abc123\" }R\n" +
+	"pagination\x18\x02 \x01(\v2..com.coralogixapis.alerts.v3.PaginationRequestBg\x9aAd25Pagination settings for the list of alert definitionsJ+{ \"page_size\": 10, \"page_token\": \"abc123\" }R\n" +
 	"pagination\x12\x8c\x01\n" +
-	"\torder_bys\x18\x03 \x01(\v20.com.coralogixapis.alerts.v3.AlertDefOrderByListB8\x92A523Ordering settings for the list of alert definitionsH\x00R\borderBys\x88\x01\x01:Q\x92AN\n" +
+	"\torder_bys\x18\x03 \x01(\v20.com.coralogixapis.alerts.v3.AlertDefOrderByListB8\x9aA523Ordering settings for the list of alert definitionsH\x00R\borderBys\x88\x01\x01:Q\x9aAN\n" +
 	"L*\x1eList alert definitions request2*A request to get list of alert definitionsB\f\n" +
 	"\n" +
 	"_order_bys\"\x9c\x01\n" +
-	"\x15DownloadAlertsRequest:\x82\x01\x92A\x7f\n" +
+	"\x15DownloadAlertsRequest:\x82\x01\x9aA\x7f\n" +
 	"}*\"Download alert definitions request2WA request to download all accessible alert definitions in base-64 encoded binary format\"\xe5\x01\n" +
 	"\x16DownloadAlertsResponse\x12o\n" +
-	"\acontent\x18\x01 \x01(\fBU\x92AR23Base64-encoded binary data of the alert definitionsJ\x12\"SGVsbG8gV29ybGQ=\"\xa2\x02\x06base64R\acontent:Z\x92AW\n" +
+	"\acontent\x18\x01 \x01(\fBU\x9aAR23Base64-encoded binary data of the alert definitionsJ\x12\"SGVsbG8gV29ybGQ=\"\xa2\x02\x06base64R\acontent:Z\x9aAW\n" +
 	"U*\x18Download alerts response2/A response containing the downloaded alert data\xd2\x01\acontent\"\xf2\x01\n" +
 	"\x17BatchGetAlertDefRequest\x12f\n" +
-	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB6\x92A3J([\"123e4567-e89b-12d3-a456-426614174000\"]\xa2\x02\x06UUIDv4R\x03ids:o\x92Al\n" +
+	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB6\x9aA3J([\"123e4567-e89b-12d3-a456-426614174000\"]\xa2\x02\x06UUIDv4R\x03ids:o\x9aAl\n" +
 	"j*#Batch get alert definitions request2=A request to retrieve multiple alert definitions by their IDs\xd2\x01\x03ids\"\xbf\x04\n" +
 	"\x18BatchGetAlertDefResponse\x12\xc8\x01\n" +
 	"\n" +
-	"alert_defs\x18\x01 \x03(\v2D.com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntryBc\x92A`20Map of alert definition IDs to alert definitionsJ,{\"123e4567-e89b-12d3-a456-426614174000\": {}}R\talertDefs\x12T\n" +
-	"\rnot_found_ids\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r[\"alert-789\"]R\vnotFoundIds\x1ac\n" +
+	"alert_defs\x18\x01 \x03(\v2D.com.coralogixapis.alerts.v3.BatchGetAlertDefResponse.AlertDefsEntryBc\x9aA`20Map of alert definition IDs to alert definitionsJ,{\"123e4567-e89b-12d3-a456-426614174000\": {}}R\talertDefs\x12T\n" +
+	"\rnot_found_ids\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r[\"alert-789\"]R\vnotFoundIds\x1ac\n" +
 	"\x0eAlertDefsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12;\n" +
-	"\x05value\x18\x02 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefR\x05value:\x028\x01:\x9c\x01\x92A\x98\x01\n" +
+	"\x05value\x18\x02 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefR\x05value:\x028\x01:\x9c\x01\x9aA\x98\x01\n" +
 	"\x95\x01*$Batch get alert definitions response2PA response that contains the requested alert definitions and not-found alert IDs\xd2\x01\n" +
 	"alert_defs\xd2\x01\rnot_found_ids\"\xd7\x01\n" +
 	"\x15DeleteAlertDefRequest\x12b\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB4\x92A1J&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Z\x92AW\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB4\x9aA1J&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id:Z\x9aAW\n" +
 	"U*\x1fDelete alert definition request2-A request to delete an alert definition by ID\xd2\x01\x02id\"t\n" +
-	"\x16DeleteAlertDefResponse:Z\x92AW\n" +
+	"\x16DeleteAlertDefResponse:Z\x9aAW\n" +
 	"U* Delete alert definition response21A response to the deletion of an alert definition\"\x91\x03\n" +
 	"\x16ReplaceAlertDefRequest\x12\x8e\x01\n" +
-	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB+\x92A(2&The properties of the alert definitionR\x12alertDefProperties\x12n\n" +
-	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB@\x92A=2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"R\x02id:v\x92As\n" +
+	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB+\x9aA(2&The properties of the alert definitionR\x12alertDefProperties\x12n\n" +
+	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB@\x9aA=2\x13Alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"R\x02id:v\x9aAs\n" +
 	"q* Replace alert definition request21A request to replace an existing alert definition\xd2\x01\x14alert_def_properties\xd2\x01\x02id\"\xed\x01\n" +
 	"\x17ReplaceAlertDefResponse\x12e\n" +
-	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB!\x92A\x1e2\x1cThe updated alert definitionR\balertDef:k\x92Ah\n" +
+	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB!\x9aA\x1e2\x1cThe updated alert definitionR\balertDef:k\x9aAh\n" +
 	"f*!Replace alert definition response25A response that contains the updated alert definition\xd2\x01\talert_def\"\x93\x02\n" +
 	"\x15CreateAlertDefRequest\x12\x8e\x01\n" +
-	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB+\x92A(2&The properties of the alert definitionR\x12alertDefProperties:i\x92Af\n" +
+	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB+\x9aA(2&The properties of the alert definitionR\x12alertDefProperties:i\x9aAf\n" +
 	"d*\x1fCreate alert definition request2*A request to create a new alert definition\xd2\x01\x14alert_def_properties\"\xf7\x01\n" +
 	"\x16CreateAlertDefResponse\x12k\n" +
-	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB'\x92A$2\"The newly created alert definitionR\balertDef:p\x92Am\n" +
+	"\talert_def\x18\x01 \x01(\v2%.com.coralogixapis.alerts.v3.AlertDefB'\x9aA$2\"The newly created alert definitionR\balertDef:p\x9aAm\n" +
 	"k* Create alert definition response2;A response that contains the newly created alert definition\xd2\x01\talert_def\"\xdd\x02\n" +
 	"\x10SetActiveRequest\x12{\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBM\x92AJ2\x17The alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id\x12p\n" +
-	"\x06active\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB<\x92A921Whether to enable or disable the alert definitionJ\x04trueR\x06active:Z\x92AW\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBM\x9aAJ2\x17The alert definition IDJ&\"123e4567-e89b-12d3-a456-426614174000\"\xa2\x02\x06UUIDv4R\x02id\x12p\n" +
+	"\x06active\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB<\x9aA921Whether to enable or disable the alert definitionJ\x04trueR\x06active:Z\x9aAW\n" +
 	"U*\x1cEnable/disable alert request2'A request to enable or disable an alert\xd2\x01\x02id\xd2\x01\x06active\"i\n" +
-	"\x11SetActiveResponse:T\x92AQ\n" +
-	"O*\x13Set active response28Response after enabling or disabling an alert definition2\x9e\x1b\n" +
+	"\x11SetActiveResponse:T\x9aAQ\n" +
+	"O*\x13Set active response28Response after enabling or disabling an alert definition2\x83\x1f\n" +
 	"\x10AlertDefsService\x12\xeb\x02\n" +
-	"\vGetAlertDef\x12/.com.coralogixapis.alerts.v3.GetAlertDefRequest\x1a0.com.coralogixapis.alerts.v3.GetAlertDefResponse\"\xf8\x01\x92A\xbf\x01\n" +
+	"\vGetAlertDef\x12/.com.coralogixapis.alerts.v3.GetAlertDefRequest\x1a0.com.coralogixapis.alerts.v3.GetAlertDefResponse\"\xf8\x01\x9aA\xbf\x01\n" +
 	"\x19Alert definitions service\x12\x1aGet alert definition by IDJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -964,7 +964,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x16\n" +
 	"\x14get alert definition\x82\xd3\xe4\x93\x02\x15\x12\x13/v3/alert-defs/{id}\x12\xcd\x03\n" +
-	"\x16GetAlertDefByVersionId\x12:.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest\x1a;.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse\"\xb9\x02\x92A\xcd\x01\n" +
+	"\x16GetAlertDefByVersionId\x12:.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdRequest\x1a;.com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse\"\xb9\x02\x9aA\xcd\x01\n" +
 	"\x19Alert definitions service\x12(Get alert definition by alert version IDJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -975,7 +975,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02*\n" +
 	"(get alert definition by alert version ID\x82\xd3\xe4\x93\x024\x122/v3/alert-defs/alert-version-id/{alert_version_id}\x12\xff\x02\n" +
-	"\x0eCreateAlertDef\x122.com.coralogixapis.alerts.v3.CreateAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.CreateAlertDefResponse\"\x83\x02\x92A\xb6\x01\n" +
+	"\x0eCreateAlertDef\x122.com.coralogixapis.alerts.v3.CreateAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.CreateAlertDefResponse\"\x83\x02\x9aA\xb6\x01\n" +
 	"\x19Alert definitions service\x12\x0fCreate an alertJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -986,7 +986,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
 	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x19\n" +
 	"\x17create alert definition\x82\xd3\xe4\x93\x02&:\x14alert_def_properties\"\x0e/v3/alert-defs\x12\xfc\x02\n" +
-	"\x0fReplaceAlertDef\x123.com.coralogixapis.alerts.v3.ReplaceAlertDefRequest\x1a4.com.coralogixapis.alerts.v3.ReplaceAlertDefResponse\"\xfd\x01\x92A\xc2\x01\n" +
+	"\x0fReplaceAlertDef\x123.com.coralogixapis.alerts.v3.ReplaceAlertDefRequest\x1a4.com.coralogixapis.alerts.v3.ReplaceAlertDefResponse\"\xfd\x01\x9aA\xc2\x01\n" +
 	"\x19Alert definitions service\x12\x1bReplace an alert definitionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -997,7 +997,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
 	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x1a\n" +
 	"\x18replace alert definition\x82\xd3\xe4\x93\x02\x13:\x01*\x1a\x0e/v3/alert-defs\x12\x86\x03\n" +
-	"\rListAlertDefs\x121.com.coralogixapis.alerts.v3.ListAlertDefsRequest\x1a2.com.coralogixapis.alerts.v3.ListAlertDefsResponse\"\x8d\x02\x92A\xd3\x01\n" +
+	"\rListAlertDefs\x121.com.coralogixapis.alerts.v3.ListAlertDefsRequest\x1a2.com.coralogixapis.alerts.v3.ListAlertDefsResponse\"\x8d\x02\x9aA\xd3\x01\n" +
 	"\x19Alert definitions service\x12.Get a list of all accessible alert definitionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1008,7 +1008,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x1c\n" +
 	"\x1aget alert definitions list\x82\xd3\xe4\x93\x02\x10\x12\x0e/v3/alert-defs\x12\xba\x03\n" +
-	"\x0eDownloadAlerts\x122.com.coralogixapis.alerts.v3.DownloadAlertsRequest\x1a3.com.coralogixapis.alerts.v3.DownloadAlertsResponse\"\xbc\x02\x92A\x88\x02\n" +
+	"\x0eDownloadAlerts\x122.com.coralogixapis.alerts.v3.DownloadAlertsRequest\x1a3.com.coralogixapis.alerts.v3.DownloadAlertsResponse\"\xbc\x02\x9aA\x88\x02\n" +
 	"\x19Alert definitions service\x12\x0fDownload alerts\x1aRDownload a list of all accessible alert definitions in base64-encoded byte format.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1019,7 +1019,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x11\n" +
 	"\x0fdownload alerts\x82\xd3\xe4\x93\x02\x15\x12\x13/v3/alerts/download0\x01\x12\xde\x02\n" +
-	"\x0eDeleteAlertDef\x122.com.coralogixapis.alerts.v3.DeleteAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.DeleteAlertDefResponse\"\xe2\x01\x92A\xa5\x01\n" +
+	"\x0eDeleteAlertDef\x122.com.coralogixapis.alerts.v3.DeleteAlertDefRequest\x1a3.com.coralogixapis.alerts.v3.DeleteAlertDefResponse\"\xe2\x01\x9aA\xa5\x01\n" +
 	"\x19Alert definitions serviceJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1030,7 +1030,7 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
 	"\x15\x1a\x13alerts:UpdateConfigʸ\x02\x1a\n" +
 	"\x18delete alert definitions\x82\xd3\xe4\x93\x02\x15*\x13/v3/alert-defs/{id}\x12\x84\x03\n" +
-	"\tSetActive\x12-.com.coralogixapis.alerts.v3.SetActiveRequest\x1a..com.coralogixapis.alerts.v3.SetActiveResponse\"\x97\x02\x92A\xc1\x01\n" +
+	"\tSetActive\x12-.com.coralogixapis.alerts.v3.SetActiveRequest\x1a..com.coralogixapis.alerts.v3.SetActiveResponse\"\x97\x02\x9aA\xc1\x01\n" +
 	"\x19Alert definitions service\x12\x1aDisable or enable an alertJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1040,7 +1040,18 @@ const file_com_coralogixapis_alerts_v3_alert_defs_service_proto_rawDesc = "" +
 	"\x15Internal server errorj3\n" +
 	"\x16x-coralogixPermissions\x12\x192\x17\n" +
 	"\x15\x1a\x13alerts:UpdateConfigʸ\x02)\n" +
-	"'disable or enable the alert definitions\x82\xd3\xe4\x93\x02\x1f\"\x1d/v3/alert-defs/{id}:setActive\x1a\x9c\x02\x92A\x98\x02\n" +
+	"'disable or enable the alert definitions\x82\xd3\xe4\x93\x02\x1f\"\x1d/v3/alert-defs/{id}:setActive\x12\xe2\x03\n" +
+	"\x12FilterOptionCounts\x126.com.coralogixapis.alerts.v3.FilterOptionCountsRequest\x1a7.com.coralogixapis.alerts.v3.FilterOptionCountsResponse\"\xda\x02\x9aA\x8d\x02\n" +
+	"\x19Alert definitions service\x12\x1dGet counts for filter options\x1aIReturns counts for different filter options based on the provided filtersJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server errorj1\n" +
+	"\x16x-coralogixPermissions\x12\x172\x15\n" +
+	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x1a\n" +
+	"\x18get filter option counts\x82\xd3\xe4\x93\x02%\x12#/v3/alert-defs/filter-option-counts\x1a\x9c\x02\x9aA\x98\x02\n" +
 	"\x19Alert definitions service\x12\x81\x01View and manage your alerts using alert definitions - data structures that contain the configuration required to create an alert.\x1aw\n" +
 	",Learn more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/b\x06proto3"
 
@@ -1085,6 +1096,8 @@ var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_goTypes = []any{
 	(*AlertDefOrderByList)(nil),            // 24: com.coralogixapis.alerts.v3.AlertDefOrderByList
 	(*AlertDefProperties)(nil),             // 25: com.coralogixapis.alerts.v3.AlertDefProperties
 	(*wrapperspb.BoolValue)(nil),           // 26: google.protobuf.BoolValue
+	(*FilterOptionCountsRequest)(nil),      // 27: com.coralogixapis.alerts.v3.FilterOptionCountsRequest
+	(*FilterOptionCountsResponse)(nil),     // 28: com.coralogixapis.alerts.v3.FilterOptionCountsResponse
 }
 var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_depIdxs = []int32{
 	19, // 0: com.coralogixapis.alerts.v3.GetAlertDefRequest.id:type_name -> google.protobuf.StringValue
@@ -1116,16 +1129,18 @@ var file_com_coralogixapis_alerts_v3_alert_defs_service_proto_depIdxs = []int32{
 	6,  // 26: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:input_type -> com.coralogixapis.alerts.v3.DownloadAlertsRequest
 	10, // 27: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:input_type -> com.coralogixapis.alerts.v3.DeleteAlertDefRequest
 	16, // 28: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:input_type -> com.coralogixapis.alerts.v3.SetActiveRequest
-	2,  // 29: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:output_type -> com.coralogixapis.alerts.v3.GetAlertDefResponse
-	3,  // 30: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
-	15, // 31: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:output_type -> com.coralogixapis.alerts.v3.CreateAlertDefResponse
-	13, // 32: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:output_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
-	4,  // 33: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:output_type -> com.coralogixapis.alerts.v3.ListAlertDefsResponse
-	7,  // 34: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:output_type -> com.coralogixapis.alerts.v3.DownloadAlertsResponse
-	11, // 35: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:output_type -> com.coralogixapis.alerts.v3.DeleteAlertDefResponse
-	17, // 36: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:output_type -> com.coralogixapis.alerts.v3.SetActiveResponse
-	29, // [29:37] is the sub-list for method output_type
-	21, // [21:29] is the sub-list for method input_type
+	27, // 29: com.coralogixapis.alerts.v3.AlertDefsService.FilterOptionCounts:input_type -> com.coralogixapis.alerts.v3.FilterOptionCountsRequest
+	2,  // 30: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDef:output_type -> com.coralogixapis.alerts.v3.GetAlertDefResponse
+	3,  // 31: com.coralogixapis.alerts.v3.AlertDefsService.GetAlertDefByVersionId:output_type -> com.coralogixapis.alerts.v3.GetAlertDefByVersionIdResponse
+	15, // 32: com.coralogixapis.alerts.v3.AlertDefsService.CreateAlertDef:output_type -> com.coralogixapis.alerts.v3.CreateAlertDefResponse
+	13, // 33: com.coralogixapis.alerts.v3.AlertDefsService.ReplaceAlertDef:output_type -> com.coralogixapis.alerts.v3.ReplaceAlertDefResponse
+	4,  // 34: com.coralogixapis.alerts.v3.AlertDefsService.ListAlertDefs:output_type -> com.coralogixapis.alerts.v3.ListAlertDefsResponse
+	7,  // 35: com.coralogixapis.alerts.v3.AlertDefsService.DownloadAlerts:output_type -> com.coralogixapis.alerts.v3.DownloadAlertsResponse
+	11, // 36: com.coralogixapis.alerts.v3.AlertDefsService.DeleteAlertDef:output_type -> com.coralogixapis.alerts.v3.DeleteAlertDefResponse
+	17, // 37: com.coralogixapis.alerts.v3.AlertDefsService.SetActive:output_type -> com.coralogixapis.alerts.v3.SetActiveResponse
+	28, // 38: com.coralogixapis.alerts.v3.AlertDefsService.FilterOptionCounts:output_type -> com.coralogixapis.alerts.v3.FilterOptionCountsResponse
+	30, // [30:39] is the sub-list for method output_type
+	21, // [21:30] is the sub-list for method input_type
 	21, // [21:21] is the sub-list for extension type_name
 	21, // [21:21] is the sub-list for extension extendee
 	0,  // [0:21] is the sub-list for field type_name
@@ -1140,6 +1155,7 @@ func file_com_coralogixapis_alerts_v3_alert_defs_service_proto_init() {
 	file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init()
 	file_com_coralogixapis_alerts_v3_pagination_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_ordering_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_defs_filter_option_counts_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_defs_service_proto_msgTypes[5].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

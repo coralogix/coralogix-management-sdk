@@ -29,6 +29,7 @@ mod tests {
                 AlertDefOverride,
                 AlertDefPriority,
                 AlertDefProperties,
+                AlertDefStatus,
                 AlertDefType,
                 AlertDefWebhooksSettings,
                 AlertsClient,
@@ -93,6 +94,7 @@ mod tests {
 
     fn create_alert() -> AlertDef {
         AlertDef {
+            status: Some(AlertDefStatus::Unspecified.into()),
             updated_time: None,
             created_time: None,
             last_triggered_time: None,
@@ -187,6 +189,7 @@ mod tests {
 
     fn create_burn_rate_slo_alert(slo_id: String) -> AlertDef {
         AlertDef {
+            status: Some(AlertDefStatus::Unspecified.into()),
             updated_time: None,
             created_time: None,
             last_triggered_time: None,
@@ -263,6 +266,7 @@ mod tests {
 
     fn create_error_budget_slo_alert(slo_id: String) -> AlertDef {
         AlertDef {
+            status: Some(AlertDefStatus::Unspecified.into()),
             updated_time: None,
             created_time: None,
             last_triggered_time: None,
@@ -405,6 +409,7 @@ mod tests {
         )
         .unwrap();
         let slo = Slo {
+            r#type: None,
             id: None,
             name: "coralogix_rust_slo_example".into(),
             description: Some("description".to_string()),
@@ -497,6 +502,7 @@ mod tests {
         )
         .unwrap();
         let slo = Slo {
+            r#type: None,
             id: None,
             name: "coralogix_rust_slo_example".into(),
             description: Some("description".to_string()),
@@ -589,6 +595,7 @@ mod tests {
         )
         .unwrap();
         let slo = Slo {
+            r#type: None,
             id: None,
             name: "coralogix_rust_slo_example".into(),
             description: Some("description".to_string()),

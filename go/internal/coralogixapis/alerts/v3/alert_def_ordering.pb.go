@@ -7,11 +7,10 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 	unsafe "unsafe"
@@ -31,6 +30,7 @@ const (
 	AlertDefOrderByFields_ALERT_DEF_ORDER_BY_FIELDS_PRIORITY            AlertDefOrderByFields = 1
 	AlertDefOrderByFields_ALERT_DEF_ORDER_BY_FIELDS_LAST_TRIGGERED_TIME AlertDefOrderByFields = 2
 	AlertDefOrderByFields_ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME        AlertDefOrderByFields = 3
+	AlertDefOrderByFields_ALERT_DEF_ORDER_BY_FIELDS_ENABLED             AlertDefOrderByFields = 4
 )
 
 // Enum value maps for AlertDefOrderByFields.
@@ -40,12 +40,14 @@ var (
 		1: "ALERT_DEF_ORDER_BY_FIELDS_PRIORITY",
 		2: "ALERT_DEF_ORDER_BY_FIELDS_LAST_TRIGGERED_TIME",
 		3: "ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME",
+		4: "ALERT_DEF_ORDER_BY_FIELDS_ENABLED",
 	}
 	AlertDefOrderByFields_value = map[string]int32{
 		"ALERT_DEF_ORDER_BY_FIELDS_UNSPECIFIED":         0,
 		"ALERT_DEF_ORDER_BY_FIELDS_PRIORITY":            1,
 		"ALERT_DEF_ORDER_BY_FIELDS_LAST_TRIGGERED_TIME": 2,
 		"ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME":        3,
+		"ALERT_DEF_ORDER_BY_FIELDS_ENABLED":             4,
 	}
 )
 
@@ -222,21 +224,22 @@ var File_com_coralogixapis_alerts_v3_alert_def_ordering_proto protoreflect.FileD
 
 const file_com_coralogixapis_alerts_v3_alert_def_ordering_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogixapis/alerts/v3/alert_def_ordering.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xda\x03\n" +
+	"4com/coralogixapis/alerts/v3/alert_def_ordering.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xda\x03\n" +
 	"\x0fAlertDefOrderBy\x12\x98\x01\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\x0e22.com.coralogixapis.alerts.v3.AlertDefOrderByFieldsBE\x92AB2\x16Field name to order byJ(\"ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME\"R\tfieldName\x12\x95\x01\n" +
-	"\tdirection\x18\x02 \x01(\x0e25.com.coralogixapis.alerts.v3.AlertDefOrderByDirectionB@\x92A=2\x16Direction for orderingJ#\"ALERT_DEF_ORDER_BY_DIRECTION_DESC\"R\tdirection:\x93\x01\x92A\x8f\x01\n" +
+	"field_name\x18\x01 \x01(\x0e22.com.coralogixapis.alerts.v3.AlertDefOrderByFieldsBE\x9aAB2\x16Field name to order byJ(\"ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME\"R\tfieldName\x12\x95\x01\n" +
+	"\tdirection\x18\x02 \x01(\x0e25.com.coralogixapis.alerts.v3.AlertDefOrderByDirectionB@\x9aA=2\x16Direction for orderingJ#\"ALERT_DEF_ORDER_BY_DIRECTION_DESC\"R\tdirection:\x93\x01\x9aA\x8f\x01\n" +
 	"\x8c\x01*\x19Alert definition order by2VA data structure that specifies the field and direction for ordering alert definitions\xd2\x01\n" +
 	"field_name\xd2\x01\tdirection\"\xf0\x01\n" +
 	"\x13AlertDefOrderByList\x12x\n" +
-	"\torder_bys\x18\x01 \x03(\v2,.com.coralogixapis.alerts.v3.AlertDefOrderByB-\x92A*2%Order by fields for alert definitions\xa8\x01\x01R\borderBys:_\x92A\\\n" +
-	"Z*\x1eAlert definition order by list2,List of fields to order alert definitions by\xd2\x01\torder_bys*\xc9\x01\n" +
+	"\torder_bys\x18\x01 \x03(\v2,.com.coralogixapis.alerts.v3.AlertDefOrderByB-\x9aA*2%Order by fields for alert definitions\xa8\x01\x01R\borderBys:_\x9aA\\\n" +
+	"Z*\x1eAlert definition order by list2,List of fields to order alert definitions by\xd2\x01\torder_bys*\xf0\x01\n" +
 	"\x15AlertDefOrderByFields\x12)\n" +
 	"%ALERT_DEF_ORDER_BY_FIELDS_UNSPECIFIED\x10\x00\x12&\n" +
 	"\"ALERT_DEF_ORDER_BY_FIELDS_PRIORITY\x10\x01\x121\n" +
 	"-ALERT_DEF_ORDER_BY_FIELDS_LAST_TRIGGERED_TIME\x10\x02\x12*\n" +
-	"&ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME\x10\x03*v\n" +
+	"&ALERT_DEF_ORDER_BY_FIELDS_UPDATED_TIME\x10\x03\x12%\n" +
+	"!ALERT_DEF_ORDER_BY_FIELDS_ENABLED\x10\x04*v\n" +
 	"\x18AlertDefOrderByDirection\x123\n" +
 	"/ALERT_DEF_ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\x10\x00\x12%\n" +
 	"!ALERT_DEF_ORDER_BY_DIRECTION_DESC\x10\x01b\x06proto3"

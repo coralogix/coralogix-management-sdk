@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -1128,7 +1128,7 @@ var File_com_coralogix_datausage_v2_data_usage_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\n" +
-	"+com/coralogix/datausage/v2/data_usage.proto\x12\x1acom.coralogix.datausage.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"4\n" +
+	"+com/coralogix/datausage/v2/data_usage.proto\x12\x1acom.coralogix.datausage.v2\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"4\n" +
 	"\x04Team\x12,\n" +
 	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt64ValueR\x02id\"9\n" +
 	"\x04Unit\x121\n" +
@@ -1138,15 +1138,15 @@ const file_com_coralogix_datausage_v2_data_usage_proto_rawDesc = "" +
 	"\x05Token\x121\n" +
 	"\x05value\x18\x01 \x01(\v2\x1b.google.protobuf.FloatValueR\x05value\"\xf4\x02\n" +
 	"\tDateRange\x12T\n" +
-	"\tfrom_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\bfromDate\x12P\n" +
-	"\ato_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\x06toDate:\xbe\x01\x92A\xba\x01\n" +
+	"\tfrom_date\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2021-01-01T00:00:00Z\"R\bfromDate\x12P\n" +
+	"\ato_date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2021-01-01T00:00:00Z\"R\x06toDate:\xbe\x01\x9aA\xba\x01\n" +
 	":*\n" +
 	"Date Range2,This data structure represents a date range.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xa3\x02\n" +
 	"\x10GenericDimension\x12\x1c\n" +
 	"\x03key\x18\x01 \x01(\tB\n" +
-	"\x92A\aJ\x05\"key\"R\x03key\x12\"\n" +
-	"\x05value\x18\x02 \x01(\tB\f\x92A\tJ\a\"value\"R\x05value:\xcc\x01\x92A\xc8\x01\n" +
+	"\x9aA\aJ\x05\"key\"R\x03key\x12\"\n" +
+	"\x05value\x18\x02 \x01(\tB\f\x9aA\tJ\a\"value\"R\x05value:\xcc\x01\x9aA\xc8\x01\n" +
 	"H*\x11Generic Dimension23This data structure represents a generic dimension.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xfa\x02\n" +
 	"\tDimension\x12<\n" +

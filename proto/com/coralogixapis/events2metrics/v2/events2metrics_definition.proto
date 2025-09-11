@@ -6,7 +6,7 @@ import "com/coralogixapis/logs2metrics/v2/logs_query.proto";
 import "com/coralogixapis/spans2metrics/v2/spans_query.proto";
 import "google/protobuf/wrappers.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 // Enum defining e2m type
@@ -17,7 +17,7 @@ enum E2MType {
 }
 // E2M represents the Event to metrics base model.
 message E2M {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "E2M"
       description: "This data structure represents an Event to Metrics (E2M) object."
@@ -32,7 +32,7 @@ message E2M {
     }
   };
   //E2M unique ID, required on update requests
-  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
    format : "uuid",
    min_length : 36,
    max_length : 36,
@@ -40,19 +40,19 @@ message E2M {
    pattern : "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
   } ];
   // Name of the E2M
-  google.protobuf.StringValue name = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 2 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"Service_catalog_latency\"",
   } ];
   // Description of the E2M
-  google.protobuf.StringValue description = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue description = 3 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"avg and max the latency of catalog service\"",
   } ];
   // E2M create time
-  google.protobuf.StringValue create_time = 4 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue create_time = 4 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"2022-06-30T12:30:00Z'\""
   } ];
   // E2M update time
-  google.protobuf.StringValue update_time = 5 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue update_time = 5 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"2022-06-30T12:30:00Z'\""
   } ];
   // Represents the limit of the permutations and if the limit was exceeded
@@ -60,7 +60,7 @@ message E2M {
   // E2M metric labels
   repeated MetricLabel metric_labels = 7;
   // E2M metric fields
-  repeated MetricField metric_fields = 8 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated MetricField metric_fields = 8 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     max_items: 10
   } ];
   // E2M type logs2metrics/spans2metrics
@@ -77,7 +77,7 @@ message E2M {
 }
 // E2M Create message
 message E2MCreateParams {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "E2M Create Params"
       description: "This data structure is used to create a new event to metric definition"
@@ -92,15 +92,15 @@ message E2MCreateParams {
   };
 
   // Name of E2M to create
-  google.protobuf.StringValue name = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue name = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"Service catalog latency\""
   } ];
   // Description of E2M to create
-  google.protobuf.StringValue description = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue description = 2 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"avg and max the latency of catalog service\""
   } ];
   // The permutation limit of the E2M
-  google.protobuf.Int32Value permutations_limit = 3 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Int32Value permutations_limit = 3 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "30000"
   } ];
   // E2M metric labels
@@ -119,7 +119,7 @@ message E2MCreateParams {
 }
 // Represents e2m permutation limit
 message E2MPermutations {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "E2M Permutations"
       description: "This data structure represents the limit of events2metrics permutations and if the limit was exceeded"
@@ -134,7 +134,7 @@ message E2MPermutations {
     }
   };
   // E2M permutation limit
-  int32 limit = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  int32 limit = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "30000"
   } ];
   // Flag to indicate if limit was exceeded
@@ -142,7 +142,7 @@ message E2MPermutations {
 }
 // E2M metric label
 message MetricLabel {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric Label"
       description: "This data structure represents a metric label"
@@ -157,18 +157,18 @@ message MetricLabel {
     }
   };
   // Metric label target alias name
-  google.protobuf.StringValue target_label = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue target_label = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     pattern: "^[\\w/-]+$",
     example: "\"alias_label_name\""
   } ];
   // Metric label source field
-  google.protobuf.StringValue source_field = 2 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue source_field = 2 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"log_obj.string_value\""
   } ];
 }
 //E2M metric field
 message MetricField {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric Field"
       description: "This data structure represents a metric field"
@@ -184,12 +184,12 @@ message MetricField {
     }
   };
   // Target metric field alias name
-  google.protobuf.StringValue target_base_metric_name = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue target_base_metric_name = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     pattern: "^[\\w/-]+$",
     example: "\"alias_field_name\""
   } ];
   // Source field
-  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue source_field = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"log_obj.numeric_field\""
   }];
   // Represents Aggregation type list
@@ -197,7 +197,7 @@ message MetricField {
 }
 // E2M aggregation
 message Aggregation {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Aggregation"
       description: "This data structure represents an aggregation"
@@ -224,7 +224,7 @@ message Aggregation {
   // Aggregation type
   AggType agg_type = 2;
   // Target metric field alias name
-  string target_metric_name = 3  [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  string target_metric_name = 3  [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "\"alias_field_name_agg_func\""
   } ];
   // Aggregate metadata, samples or histogram type
@@ -232,7 +232,7 @@ message Aggregation {
     // E2M sample type metadata
     E2MAggSamples samples = 4;
     // E2M aggregate histogram type metadata
-    E2MAggHistogram histogram = 5 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+    E2MAggHistogram histogram = 5 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description : "e2m aggregate histogram type metadata",
       min_items: 1
     } ];
@@ -240,7 +240,7 @@ message Aggregation {
 }
 // E2M aggregate sample type
 message E2MAggSamples {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "E2M Aggregate Samples"
       description: "This data structure represents the e2m aggregate samples"
@@ -262,7 +262,7 @@ message E2MAggSamples {
 }
  // Represents the e2m aggregate histogram
 message E2MAggHistogram {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "E2M Aggregate Histogram"
       description: "This data structure represents the e2m aggregate histogram"
@@ -274,7 +274,7 @@ message E2MAggHistogram {
     }
   };
   // Buckets of the E2M
-  repeated float buckets = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated float buckets = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example: "2"
   } ];
 }

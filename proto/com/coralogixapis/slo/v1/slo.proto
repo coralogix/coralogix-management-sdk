@@ -2,17 +2,17 @@ syntax = "proto3";
 package com.coralogixapis.slo.v1;
 
 import "google/protobuf/timestamp.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Metric {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Metric"
       description: "Definition of a metric used in SLOs"
       required: ["query"]
     }
   };
-  string query = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"" }];
+  string query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"sum(rate(http_requests_total{status=\\\"200\\\"}[5m]))\"" }];
 
 }
 
@@ -38,7 +38,7 @@ enum MissingDataStrategy {
 
 
 message RequestBasedMetricSli {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RequestBasedMetricSli"
       description: "Definition of a request-based SLI based on metrics"
@@ -50,7 +50,7 @@ message RequestBasedMetricSli {
 }
 
 message WindowBasedMetricSli {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "WindowBasedMetricSli"
       description: "Definition of a window-based SLI based on metrics"
@@ -60,7 +60,7 @@ message WindowBasedMetricSli {
   Metric query = 1;
   WindowSloWindow window = 2;
   ComparisonOperator comparison_operator = 3;
-  float threshold = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "0.95" }];
+  float threshold = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "0.95" }];
   MissingDataStrategy missing_data_strategy = 5;
 
 }
@@ -74,19 +74,19 @@ enum SloTimeFrame {
 }
 
 message Revision {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Revision"
       description: "The revision of the slo, used to differentiate between different versions of the same SLO"
       required: []
     }
   };
-  int32 revision = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1" }];
+  int32 revision = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1" }];
   google.protobuf.Timestamp update_time = 2;
 }
 
 message Grouping {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Grouping"
       description: "Definition of the SLO grouping fields"
@@ -97,23 +97,23 @@ message Grouping {
 }
 
 message Slo{
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Slo"
       description: "Definition of an SLO"
       required: ["name", "target_threshold_percentage", "window", "sli"]
     }
   };
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"" }];
-  string name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"Example Slo Name\"" }];
-  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"A brief description of my SLO\"" }];
-  optional string creator = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test@domain.com\"" }];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"" }];
+  string name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"Example Slo Name\"" }];
+  optional string description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"A brief description of my SLO\"" }];
+  optional string creator = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test@domain.com\"" }];
   map<string, string> labels = 5;
   optional Revision revision = 6;
   optional Grouping grouping = 7;
   google.protobuf.Timestamp create_time = 8;
   google.protobuf.Timestamp update_time = 9;
-  float target_threshold_percentage = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "99.999" }];
+  float target_threshold_percentage = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "99.999" }];
   oneof window {
     SloTimeFrame slo_time_frame = 11;
   };
@@ -121,6 +121,8 @@ message Slo{
     RequestBasedMetricSli request_based_metric_sli = 12;
     WindowBasedMetricSli window_based_metric_sli = 13;
   };
+  optional string type = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"request\"" }];
+
 }
 
 enum SloConstantFilterField {
@@ -130,7 +132,7 @@ enum SloConstantFilterField {
 }
 
 message SloFilterField {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloFilterField"
       description: "Field used for filtering SLOs"
@@ -139,12 +141,12 @@ message SloFilterField {
   };
   oneof field {
     SloConstantFilterField const_filter = 1;
-    string label_name = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"environment\"" }];
+    string label_name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"environment\"" }];
   }
 }
 
 message IsFilterPredicate {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "IsFilterPredicate"
       description: "Predicate for SLO filters that checks if a field is equal to one of multiple values"
@@ -155,7 +157,7 @@ message IsFilterPredicate {
 }
 
 message SloFilterPredicate {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloFilterPredicate"
       description: "Predicate used for filtering SLOs"
@@ -168,7 +170,7 @@ message SloFilterPredicate {
 }
 
 message SloFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloFilter"
       description: "A filter for SLOs, consisting of a field and a predicate"
@@ -180,7 +182,7 @@ message SloFilter {
 }
 
 message SloFilters {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloFilters"
       description: "A collection of filters for SLOs"
