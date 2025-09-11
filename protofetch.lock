@@ -123,8 +123,8 @@ commit_hash = "c6bbbcaeb39e9492e7c2e1a6b04de0daef57d299"
 [[dependencies]]
 name = "cx-api-quota"
 url = "github.com/coralogix/cx-api-quota"
-revision = "v0.0.10"
-commit_hash = "d401c8b33e587527a679d13c464b1e769b371cce"
+revision = "v0.0.11"
+commit_hash = "1ec0114f2da8d2b9da734877e88ed963ed36c452"
 
 [[dependencies]]
 name = "cx-api-scopes"

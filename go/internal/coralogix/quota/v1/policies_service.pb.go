@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -27,7 +27,7 @@ var File_com_coralogix_quota_v1_policies_service_proto protoreflect.FileDescript
 
 const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\n" +
-	"-com/coralogix/quota/v1/policies_service.proto\x12\x16com.coralogix.quota.v1\x1a'com/coralogix/common/v1/audit_log.proto\x1a/com/coralogix/quota/v1/get_policy_request.proto\x1a0com/coralogix/quota/v1/get_policy_response.proto\x1a2com/coralogix/quota/v1/create_policy_request.proto\x1a3com/coralogix/quota/v1/create_policy_response.proto\x1a2com/coralogix/quota/v1/update_policy_request.proto\x1a3com/coralogix/quota/v1/update_policy_response.proto\x1a9com/coralogix/quota/v1/get_company_policies_request.proto\x1a:com/coralogix/quota/v1/get_company_policies_response.proto\x1a2com/coralogix/quota/v1/delete_policy_request.proto\x1a3com/coralogix/quota/v1/delete_policy_response.proto\x1a5com/coralogix/quota/v1/reorder_policies_request.proto\x1a6com/coralogix/quota/v1/reorder_policies_response.proto\x1a;com/coralogix/quota/v1/bulk_test_log_policies_request.proto\x1a<com/coralogix/quota/v1/bulk_test_log_policies_response.proto\x1a2com/coralogix/quota/v1/toggle_policy_request.proto\x1a3com/coralogix/quota/v1/toggle_policy_response.proto\x1a7com/coralogix/quota/v1/bulk_create_policy_request.proto\x1a8com/coralogix/quota/v1/bulk_create_policy_response.proto\x1a?com/coralogix/quota/v1/atomic_overwrite_policies_response.proto\x1a>com/coralogix/quota/v1/atomic_overwrite_policies_request.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto2\xf4\x1b\n" +
+	"-com/coralogix/quota/v1/policies_service.proto\x12\x16com.coralogix.quota.v1\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a/com/coralogix/quota/v1/get_policy_request.proto\x1a0com/coralogix/quota/v1/get_policy_response.proto\x1a2com/coralogix/quota/v1/create_policy_request.proto\x1a3com/coralogix/quota/v1/create_policy_response.proto\x1a2com/coralogix/quota/v1/update_policy_request.proto\x1a3com/coralogix/quota/v1/update_policy_response.proto\x1a9com/coralogix/quota/v1/get_company_policies_request.proto\x1a:com/coralogix/quota/v1/get_company_policies_response.proto\x1a2com/coralogix/quota/v1/delete_policy_request.proto\x1a3com/coralogix/quota/v1/delete_policy_response.proto\x1a5com/coralogix/quota/v1/reorder_policies_request.proto\x1a6com/coralogix/quota/v1/reorder_policies_response.proto\x1a;com/coralogix/quota/v1/bulk_test_log_policies_request.proto\x1a<com/coralogix/quota/v1/bulk_test_log_policies_response.proto\x1a2com/coralogix/quota/v1/toggle_policy_request.proto\x1a3com/coralogix/quota/v1/toggle_policy_response.proto\x1a7com/coralogix/quota/v1/bulk_create_policy_request.proto\x1a8com/coralogix/quota/v1/bulk_create_policy_response.proto\x1a?com/coralogix/quota/v1/atomic_overwrite_policies_response.proto\x1a>com/coralogix/quota/v1/atomic_overwrite_policies_request.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto2\xf4\x1b\n" +
 	"\x0fPoliciesService\x12\x88\x02\n" +
 	"\tGetPolicy\x12(.com.coralogix.quota.v1.GetPolicyRequest\x1a).com.coralogix.quota.v1.GetPolicyResponse\"\xa5\x01\x92Ay\n" +
 	"\x10Policies Service\x12\x10Get Policy by IDJ\x14\n" +
@@ -36,7 +36,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\f\n" +
+	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
 	"Get Policy\x82\xd3\xe4\x93\x02\x13\x12\x11/v1/policies/{id}\x12\x92\x02\n" +
 	"\fCreatePolicy\x12+.com.coralogix.quota.v1.CreatePolicyRequest\x1a,.com.coralogix.quota.v1.CreatePolicyResponse\"\xa6\x01\x92Ay\n" +
@@ -46,7 +46,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x0f\n" +
+	"\x15Internal server errorʸ\x02\x0f\n" +
 	"\rCreate Policy\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v1/policies\x12\x8f\x02\n" +
 	"\fUpdatePolicy\x12+.com.coralogix.quota.v1.UpdatePolicyRequest\x1a,.com.coralogix.quota.v1.UpdatePolicyResponse\"\xa3\x01\x92Av\n" +
 	"\x10Policies Service\x12\rUpdate PolicyJ\x14\n" +
@@ -55,7 +55,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x0f\n" +
+	"\x15Internal server errorʸ\x02\x0f\n" +
 	"\rUpdate Policy\x82\xd3\xe4\x93\x02\x11:\x01*\x1a\f/v1/policies\x12\xac\x02\n" +
 	"\x12GetCompanyPolicies\x121.com.coralogix.quota.v1.GetCompanyPoliciesRequest\x1a2.com.coralogix.quota.v1.GetCompanyPoliciesResponse\"\xae\x01\x92A}\n" +
 	"\x10Policies Service\x12\x14Get Company PoliciesJ\x14\n" +
@@ -64,7 +64,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x16\n" +
+	"\x15Internal server errorʸ\x02\x16\n" +
 	"\x14Get Company Policies\x82\xd3\xe4\x93\x02\x0e\x12\f/v1/policies\x12\x91\x02\n" +
 	"\fDeletePolicy\x12+.com.coralogix.quota.v1.DeletePolicyRequest\x1a,.com.coralogix.quota.v1.DeletePolicyResponse\"\xa5\x01\x92Av\n" +
 	"\x10Policies Service\x12\rDelete PolicyJ\x14\n" +
@@ -73,7 +73,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x0f\n" +
+	"\x15Internal server errorʸ\x02\x0f\n" +
 	"\rDelete Policy\x82\xd3\xe4\x93\x02\x13*\x11/v1/policies/{id}\x12\xa6\x02\n" +
 	"\x0fReorderPolicies\x12..com.coralogix.quota.v1.ReorderPoliciesRequest\x1a/.com.coralogix.quota.v1.ReorderPoliciesResponse\"\xb1\x01\x92Ay\n" +
 	"\x10Policies Service\x12\x10Reorder PoliciesJ\x14\n" +
@@ -82,7 +82,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x12\n" +
+	"\x15Internal server errorʸ\x02\x12\n" +
 	"\x10Reorder Policies\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/policies:reorder\x12\xc2\x02\n" +
 	"\x13BulkTestLogPolicies\x122.com.coralogix.quota.v1.BulkTestLogPoliciesRequest\x1a3.com.coralogix.quota.v1.BulkTestLogPoliciesResponse\"\xc1\x01\x92A\x7f\n" +
 	"\x10Policies Service\x12\x16Bulk Test Log PoliciesJ\x14\n" +
@@ -91,7 +91,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x18\n" +
+	"\x15Internal server errorʸ\x02\x18\n" +
 	"\x16Bulk Test Log Policies\x82\xd3\xe4\x93\x02\x1d:\x01*\"\x18/v1/policies:bulkTestLog\x12\x98\x02\n" +
 	"\fTogglePolicy\x12+.com.coralogix.quota.v1.TogglePolicyRequest\x1a,.com.coralogix.quota.v1.TogglePolicyResponse\"\xac\x01\x92Ax\n" +
 	"\x10Policies Service\x12\x0fToggle PoliciesJ\x14\n" +
@@ -100,7 +100,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x0f\n" +
+	"\x15Internal server errorʸ\x02\x0f\n" +
 	"\rToggle Policy\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/policies:toggle\x12\xce\x02\n" +
 	"\x17AtomicBatchCreatePolicy\x126.com.coralogix.quota.v1.AtomicBatchCreatePolicyRequest\x1a7.com.coralogix.quota.v1.AtomicBatchCreatePolicyResponse\"\xc1\x01\x92A\x83\x01\n" +
 	"\x10Policies Service\x12\x1aAtomic Batch Create PolicyJ\x14\n" +
@@ -109,7 +109,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x14\n" +
+	"\x15Internal server errorʸ\x02\x14\n" +
 	"\x12Bulk Create Policy\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/policies:bulkCreate\x12\xa7\x03\n" +
 	"\x1aAtomicOverwriteLogPolicies\x129.com.coralogix.quota.v1.AtomicOverwriteLogPoliciesRequest\x1a:.com.coralogix.quota.v1.AtomicOverwriteLogPoliciesResponse\"\x91\x02\x92A\x86\x01\n" +
 	"\x10Policies Service\x12\x1dAtomic Overwrite Log PoliciesJ\x14\n" +
@@ -118,7 +118,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02Q\n" +
+	"\x15Internal server errorʸ\x02Q\n" +
 	"ODeletes all existing log policies and creates the newly provided one atomically\x82\xd3\xe4\x93\x02,:\x01*\"'/v1/policies:atomicOverwriteLogPolicies\x12\xad\x03\n" +
 	"\x1bAtomicOverwriteSpanPolicies\x12:.com.coralogix.quota.v1.AtomicOverwriteSpanPoliciesRequest\x1a;.com.coralogix.quota.v1.AtomicOverwriteSpanPoliciesResponse\"\x94\x02\x92A\x87\x01\n" +
 	"\x10Policies Service\x12\x1eAtomic Overwrite Span PoliciesJ\x14\n" +
@@ -127,7 +127,7 @@ const file_com_coralogix_quota_v1_policies_service_proto_rawDesc = "" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02R\n" +
+	"\x15Internal server errorʸ\x02R\n" +
 	"PDeletes all existing span policies and creates the newly provided one atomically\x82\xd3\xe4\x93\x02-:\x01*\"(/v1/policies:atomicOverwriteSpanPolicies\x1a8\x92A5\n" +
 	"\x10Policies Service\x12!View and manage your TCO policiesb\x06proto3"
 

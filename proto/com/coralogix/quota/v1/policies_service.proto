@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogix.quota.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 import "com/coralogix/quota/v1/get_policy_request.proto";
 import "com/coralogix/quota/v1/get_policy_response.proto";
@@ -34,7 +34,7 @@ service PoliciesService {
   };
 
   rpc GetPolicy(GetPolicyRequest) returns (GetPolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -57,7 +57,7 @@ service PoliciesService {
   }
 
   rpc CreatePolicy(CreatePolicyRequest) returns (CreatePolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Create Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Create Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -81,7 +81,7 @@ service PoliciesService {
   }
 
   rpc UpdatePolicy(UpdatePolicyRequest) returns (UpdatePolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Update Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Update Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -105,7 +105,7 @@ service PoliciesService {
   }
 
   rpc GetCompanyPolicies(GetCompanyPoliciesRequest) returns (GetCompanyPoliciesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Company Policies";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get Company Policies";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -128,7 +128,7 @@ service PoliciesService {
   }
 
   rpc DeletePolicy(DeletePolicyRequest) returns (DeletePolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -151,7 +151,7 @@ service PoliciesService {
   }
 
   rpc ReorderPolicies(ReorderPoliciesRequest) returns (ReorderPoliciesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Reorder Policies";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Reorder Policies";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -175,7 +175,7 @@ service PoliciesService {
   }
 
   rpc BulkTestLogPolicies(BulkTestLogPoliciesRequest) returns (BulkTestLogPoliciesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Bulk Test Log Policies";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Bulk Test Log Policies";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -199,7 +199,7 @@ service PoliciesService {
   }
 
   rpc TogglePolicy(TogglePolicyRequest) returns (TogglePolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Toggle Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Toggle Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -223,7 +223,7 @@ service PoliciesService {
   }
 
   rpc AtomicBatchCreatePolicy(AtomicBatchCreatePolicyRequest) returns (AtomicBatchCreatePolicyResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Bulk Create Policy";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Bulk Create Policy";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -247,7 +247,7 @@ service PoliciesService {
   }
 
   rpc AtomicOverwriteLogPolicies(AtomicOverwriteLogPoliciesRequest) returns (AtomicOverwriteLogPoliciesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Deletes all existing log policies and creates the newly provided one atomically";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"
@@ -271,7 +271,7 @@ service PoliciesService {
   }
 
   rpc AtomicOverwriteSpanPolicies(AtomicOverwriteSpanPoliciesRequest) returns (AtomicOverwriteSpanPoliciesResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Deletes all existing span policies and creates the newly provided one atomically";
     option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
       responses: {
         key: "400"

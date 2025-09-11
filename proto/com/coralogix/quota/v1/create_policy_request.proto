@@ -34,5 +34,6 @@ message CreatePolicyRequest {
   oneof source_type_rules {
     LogRules log_rules = 7;
     SpanRules span_rules = 8;
-  };
+  }
+  optional bool enabled = 9; 
 }
