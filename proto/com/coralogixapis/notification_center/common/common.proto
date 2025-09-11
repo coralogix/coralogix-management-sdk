@@ -19,4 +19,5 @@ enum EntityType {
   ENTITY_TYPE_UNSPECIFIED = 0;
   ALERTS = 1;
   TEST_NOTIFICATIONS = 2;
+  CASES = 3;
 }

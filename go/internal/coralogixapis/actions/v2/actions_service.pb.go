@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1021,7 +1021,7 @@ var File_com_coralogixapis_actions_v2_actions_service_proto protoreflect.FileDes
 
 const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\n" +
-	"2com/coralogixapis/actions/v2/actions_service.proto\x12\x1ccom.coralogixapis.actions.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa6\x04\n" +
+	"2com/coralogixapis/actions/v2/actions_service.proto\x12\x1ccom.coralogixapis.actions.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa6\x04\n" +
 	"\x06Action\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x12.\n" +
@@ -1091,7 +1091,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x0fSOURCE_TYPE_LOG\x10\x01\x12\x18\n" +
 	"\x14SOURCE_TYPE_DATA_MAP\x10\x022\xdb\x0f\n" +
 	"\x0eActionsService\x12\x86\x02\n" +
-	"\fCreateAction\x121.com.coralogixapis.actions.v2.CreateActionRequest\x1a2.com.coralogixapis.actions.v2.CreateActionResponse\"\x8e\x01\x92Au\n" +
+	"\fCreateAction\x121.com.coralogixapis.actions.v2.CreateActionRequest\x1a2.com.coralogixapis.actions.v2.CreateActionResponse\"\x8e\x01\x9aAu\n" +
 	"\x0fActions Service\x12\rCreate ActionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1099,7 +1099,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x10:\x01*\"\v/v2/actions\x12\x8a\x02\n" +
-	"\rReplaceAction\x122.com.coralogixapis.actions.v2.ReplaceActionRequest\x1a3.com.coralogixapis.actions.v2.ReplaceActionResponse\"\x8f\x01\x92Av\n" +
+	"\rReplaceAction\x122.com.coralogixapis.actions.v2.ReplaceActionRequest\x1a3.com.coralogixapis.actions.v2.ReplaceActionResponse\"\x8f\x01\x9aAv\n" +
 	"\x0fActions Service\x12\x0eReplace ActionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1107,7 +1107,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x10:\x01*\x1a\v/v2/actions\x12\x88\x02\n" +
-	"\fDeleteAction\x121.com.coralogixapis.actions.v2.DeleteActionRequest\x1a2.com.coralogixapis.actions.v2.DeleteActionResponse\"\x90\x01\x92Au\n" +
+	"\fDeleteAction\x121.com.coralogixapis.actions.v2.DeleteActionRequest\x1a2.com.coralogixapis.actions.v2.DeleteActionResponse\"\x90\x01\x9aAu\n" +
 	"\x0fActions Service\x12\rDelete ActionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1115,7 +1115,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x12*\x10/v2/actions/{id}\x12\xfc\x01\n" +
-	"\tGetAction\x12..com.coralogixapis.actions.v2.GetActionRequest\x1a/.com.coralogixapis.actions.v2.GetActionResponse\"\x8d\x01\x92Ar\n" +
+	"\tGetAction\x12..com.coralogixapis.actions.v2.GetActionRequest\x1a/.com.coralogixapis.actions.v2.GetActionResponse\"\x8d\x01\x9aAr\n" +
 	"\x0fActions Service\x12\n" +
 	"Get ActionJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -1124,7 +1124,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x12\x12\x10/v2/actions/{id}\x12\xff\x01\n" +
-	"\vListActions\x120.com.coralogixapis.actions.v2.ListActionsRequest\x1a1.com.coralogixapis.actions.v2.ListActionsResponse\"\x8a\x01\x92At\n" +
+	"\vListActions\x120.com.coralogixapis.actions.v2.ListActionsRequest\x1a1.com.coralogixapis.actions.v2.ListActionsResponse\"\x8a\x01\x9aAt\n" +
 	"\x0fActions Service\x12\fList ActionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1132,7 +1132,7 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\r\x12\v/v2/actions\x12\x94\x02\n" +
-	"\fOrderActions\x121.com.coralogixapis.actions.v2.OrderActionsRequest\x1a2.com.coralogixapis.actions.v2.OrderActionsResponse\"\x9c\x01\x92Au\n" +
+	"\fOrderActions\x121.com.coralogixapis.actions.v2.OrderActionsRequest\x1a2.com.coralogixapis.actions.v2.OrderActionsResponse\"\x9c\x01\x9aAu\n" +
 	"\x0fActions Service\x12\rOrder ActionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1140,14 +1140,14 @@ const file_com_coralogixapis_actions_v2_actions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v2/actions/actions:order\x12\xd8\x02\n" +
-	"\x19AtomicBatchExecuteActions\x12>.com.coralogixapis.actions.v2.AtomicBatchExecuteActionsRequest\x1a?.com.coralogixapis.actions.v2.AtomicBatchExecuteActionsResponse\"\xb9\x01\x92A\x84\x01\n" +
+	"\x19AtomicBatchExecuteActions\x12>.com.coralogixapis.actions.v2.AtomicBatchExecuteActionsRequest\x1a?.com.coralogixapis.actions.v2.AtomicBatchExecuteActionsResponse\"\xb9\x01\x9aA\x84\x01\n" +
 	"\x0fActions Service\x12\x1cAtomic Batch Execute ActionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02+:\x01*\"&/v2/actions/actions:atomicBatchExecute\x1a5\x92A2\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02+:\x01*\"&/v2/actions/actions:atomicBatchExecute\x1a5\x9aA2\n" +
 	"\x0fActions Service\x12\x1fA service for managing actions.B\x1eZ\x1ccom/coralogixapis/actions/v2b\x06proto3"
 
 var (

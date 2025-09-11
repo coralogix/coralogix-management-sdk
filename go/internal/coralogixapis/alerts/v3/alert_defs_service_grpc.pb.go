@@ -27,6 +27,7 @@ const (
 	AlertDefsService_DownloadAlerts_FullMethodName         = "/com.coralogixapis.alerts.v3.AlertDefsService/DownloadAlerts"
 	AlertDefsService_DeleteAlertDef_FullMethodName         = "/com.coralogixapis.alerts.v3.AlertDefsService/DeleteAlertDef"
 	AlertDefsService_SetActive_FullMethodName              = "/com.coralogixapis.alerts.v3.AlertDefsService/SetActive"
+	AlertDefsService_FilterOptionCounts_FullMethodName     = "/com.coralogixapis.alerts.v3.AlertDefsService/FilterOptionCounts"
 )
 
 // AlertDefsServiceClient is the client API for AlertDefsService service.
@@ -42,6 +43,7 @@ type AlertDefsServiceClient interface {
 	DownloadAlerts(ctx context.Context, in *DownloadAlertsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadAlertsResponse], error)
 	DeleteAlertDef(ctx context.Context, in *DeleteAlertDefRequest, opts ...grpc.CallOption) (*DeleteAlertDefResponse, error)
 	SetActive(ctx context.Context, in *SetActiveRequest, opts ...grpc.CallOption) (*SetActiveResponse, error)
+	FilterOptionCounts(ctx context.Context, in *FilterOptionCountsRequest, opts ...grpc.CallOption) (*FilterOptionCountsResponse, error)
 }
 
 type alertDefsServiceClient struct {
@@ -141,6 +143,16 @@ func (c *alertDefsServiceClient) SetActive(ctx context.Context, in *SetActiveReq
 	return out, nil
 }
 
+func (c *alertDefsServiceClient) FilterOptionCounts(ctx context.Context, in *FilterOptionCountsRequest, opts ...grpc.CallOption) (*FilterOptionCountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(FilterOptionCountsResponse)
+	err := c.cc.Invoke(ctx, AlertDefsService_FilterOptionCounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AlertDefsServiceServer is the server API for AlertDefsService service.
 // All implementations must embed UnimplementedAlertDefsServiceServer
 // for forward compatibility.
@@ -154,6 +166,7 @@ type AlertDefsServiceServer interface {
 	DownloadAlerts(*DownloadAlertsRequest, grpc.ServerStreamingServer[DownloadAlertsResponse]) error
 	DeleteAlertDef(context.Context, *DeleteAlertDefRequest) (*DeleteAlertDefResponse, error)
 	SetActive(context.Context, *SetActiveRequest) (*SetActiveResponse, error)
+	FilterOptionCounts(context.Context, *FilterOptionCountsRequest) (*FilterOptionCountsResponse, error)
 	mustEmbedUnimplementedAlertDefsServiceServer()
 }
 
@@ -187,6 +200,9 @@ func (UnimplementedAlertDefsServiceServer) DeleteAlertDef(context.Context, *Dele
 }
 func (UnimplementedAlertDefsServiceServer) SetActive(context.Context, *SetActiveRequest) (*SetActiveResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetActive not implemented")
+}
+func (UnimplementedAlertDefsServiceServer) FilterOptionCounts(context.Context, *FilterOptionCountsRequest) (*FilterOptionCountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method FilterOptionCounts not implemented")
 }
 func (UnimplementedAlertDefsServiceServer) mustEmbedUnimplementedAlertDefsServiceServer() {}
 func (UnimplementedAlertDefsServiceServer) testEmbeddedByValue()                          {}
@@ -346,6 +362,24 @@ func _AlertDefsService_SetActive_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AlertDefsService_FilterOptionCounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(FilterOptionCountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlertDefsServiceServer).FilterOptionCounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlertDefsService_FilterOptionCounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlertDefsServiceServer).FilterOptionCounts(ctx, req.(*FilterOptionCountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // AlertDefsService_ServiceDesc is the grpc.ServiceDesc for AlertDefsService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -380,6 +414,10 @@ var AlertDefsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetActive",
 			Handler:    _AlertDefsService_SetActive_Handler,
+		},
+		{
+			MethodName: "FilterOptionCounts",
+			Handler:    _AlertDefsService_FilterOptionCounts_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

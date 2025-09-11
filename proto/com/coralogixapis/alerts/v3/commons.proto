@@ -4,7 +4,7 @@ package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 enum NotifyOn {
   NOTIFY_ON_TRIGGERED_ONLY_UNSPECIFIED = 0;
@@ -12,7 +12,7 @@ enum NotifyOn {
 }
 
 message TimeDuration {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Time duration"
       description: "Configuration for time duration"
@@ -22,11 +22,11 @@ message TimeDuration {
       ]
     }
   };
-  google.protobuf.UInt64Value duration = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.UInt64Value duration = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The duration value"
     example: "60"
   }];
-  DurationUnit unit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  DurationUnit unit = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The unit of the duration"
     example: "\"DURATION_UNIT_HOURS\""
   }];
@@ -58,21 +58,21 @@ enum OrderByFields {
 }
 
 message OrderByList {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Order by list"
       description: "List of fields to order by"
       required: ["order_bys"]
     }
   };
-  repeated OrderBy order_bys = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated OrderBy order_bys = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Order by fields"
     min_items: 0
   }];
 }
 
 message OrderBy {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Order by"
       description: "A data structure that specifies the field and direction for ordering query results"
@@ -82,12 +82,19 @@ message OrderBy {
       ]
     }
   };
-  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Field name to order by"
     example: "\"ORDER_BY_FIELDS_UPDATED_TIME\""
   }];
-  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Direction for ordering"
     example: "\"ORDER_BY_DIRECTION_ASC_OR_UNSPECIFIED\""
   }];
+}
+
+enum AlertDefStatus {
+  ALERT_DEF_STATUS_UNSPECIFIED = 0;
+  ALERT_DEF_STATUS_ALERTING = 1;
+  ALERT_DEF_STATUS_OK = 2;
+  ALERT_DEF_STATUS_NO_DATA = 3;
 }

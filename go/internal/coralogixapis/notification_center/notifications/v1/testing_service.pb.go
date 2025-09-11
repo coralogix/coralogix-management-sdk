@@ -9,7 +9,7 @@ package v1
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1165,30 +1165,30 @@ var File_com_coralogixapis_notification_center_notifications_v1_testing_service_
 
 const file_com_coralogixapis_notification_center_notifications_v1_testing_service_proto_rawDesc = "" +
 	"\n" +
-	"Lcom/coralogixapis/notification_center/notifications/v1/testing_service.proto\x126com.coralogixapis.notification_center.notifications.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/config_overrides.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1aDcom/coralogixapis/notification_center/notifications/v1/testing.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd4\x04\n" +
+	"Lcom/coralogixapis/notification_center/notifications/v1/testing_service.proto\x126com.coralogixapis.notification_center.notifications.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/config_overrides.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1aDcom/coralogixapis/notification_center/notifications/v1/testing.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xd4\x04\n" +
 	"\x1aTestConnectorConfigRequest\x12H\n" +
 	"\x04type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x121\n" +
-	"\fpayload_type\x18\x02 \x01(\tB\x0e\x92A\vJ\t\"default\"R\vpayloadType\x12S\n" +
+	"\fpayload_type\x18\x02 \x01(\tB\x0e\x9aA\vJ\t\"default\"R\vpayloadType\x12S\n" +
 	"\x06fields\x18\x03 \x03(\v2;.com.coralogixapis.notification_center.ConnectorConfigFieldR\x06fields\x12f\n" +
-	"\ventity_type\x18\x05 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\ventity_type\x18\x05 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"H\x00R\n" +
-	"entityType\x88\x01\x01:\xcd\x01\x92A\xc9\x01\n" +
+	"entityType\x88\x01\x01:\xcd\x01\x9aA\xc9\x01\n" +
 	"J*\x1dTest Connector Config Request2)Request to test a connector configuration*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x0e\n" +
 	"\f_entity_typeJ\x04\b\x04\x10\x05R\x16deprecated_entity_type\"y\n" +
 	"\x1bTestConnectorConfigResponse\x12Z\n" +
 	"\x06result\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.notifications.v1.TestResultR\x06result\"\xaf\x01\n" +
 	"\x1cTestExistingConnectorRequest\x121\n" +
-	"\fpayload_type\x18\x02 \x01(\tB\x0e\x92A\vJ\t\"default\"R\vpayloadType\x12!\n" +
+	"\fpayload_type\x18\x02 \x01(\tB\x0e\x9aA\vJ\t\"default\"R\vpayloadType\x12!\n" +
 	"\fconnector_id\x18\x04 \x01(\tR\vconnectorIdJ\x04\b\x01\x10\x02J\x04\b\x03\x10\x04R\x17deprecated_connector_idR\x14connector_identifier\"{\n" +
 	"\x1dTestExistingConnectorResponse\x12Z\n" +
 	"\x06result\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.notifications.v1.TestResultR\x06result\"\x8a\x04\n" +
 	"\x17TestPresetConfigRequest\x12:\n" +
-	"\x0fentity_sub_type\x18\x02 \x01(\tB\r\x92A\n" +
+	"\x0fentity_sub_type\x18\x02 \x01(\tB\r\x9aA\n" +
 	"J\b\"metric\"H\x00R\rentitySubType\x88\x01\x01\x12a\n" +
 	"\x10config_overrides\x18\a \x03(\v26.com.coralogixapis.notification_center.ConfigOverridesR\x0fconfigOverrides\x12a\n" +
 	"\ventity_type\x18\n" +
-	" \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	" \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12!\n" +
 	"\fconnector_id\x18\v \x01(\tR\vconnectorId\x12(\n" +
@@ -1198,8 +1198,8 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_servic
 	"\x18TestPresetConfigResponse\x12Z\n" +
 	"\x06result\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.notifications.v1.TestResultR\x06result\"\xab\x03\n" +
 	"\x19TestExistingPresetRequest\x12I\n" +
-	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x92A\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x12a\n" +
-	"\ventity_type\x18\a \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x9aA\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x12a\n" +
+	"\ventity_type\x18\a \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12!\n" +
 	"\fconnector_id\x18\b \x01(\tR\vconnectorId\x12\x1b\n" +
@@ -1208,11 +1208,11 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_servic
 	"\x1aTestExistingPresetResponse\x12Z\n" +
 	"\x06result\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.notifications.v1.TestResultR\x06result\"\xf2\x05\n" +
 	"\x16TestDestinationRequest\x12I\n" +
-	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x92A\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x121\n" +
-	"\fpayload_type\x18\x05 \x01(\tB\x0e\x92A\vJ\t\"default\"R\vpayloadType\x12m\n" +
+	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x9aA\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x121\n" +
+	"\fpayload_type\x18\x05 \x01(\tB\x0e\x9aA\vJ\t\"default\"R\vpayloadType\x12m\n" +
 	"\x15message_config_fields\x18\a \x03(\v29.com.coralogixapis.notification_center.MessageConfigFieldR\x13messageConfigFields\x12a\n" +
 	"\ventity_type\x18\n" +
-	" \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	" \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12|\n" +
 	"\x17connector_config_fields\x18\v \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x15connectorConfigFields\x12!\n" +
@@ -1223,9 +1223,9 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_servic
 	"\x17TestDestinationResponse\x12Z\n" +
 	"\x06result\x18\x01 \x01(\v2B.com.coralogixapis.notification_center.notifications.v1.TestResultR\x06result\"\xb3\x02\n" +
 	"\x19TestTemplateRenderRequest\x12I\n" +
-	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x92A\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x126\n" +
-	"\btemplate\x18\x03 \x01(\tB\x1a\x92A\x17J\x15\"{{ alertDef.name }}\"R\btemplate\x12a\n" +
-	"\ventity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\x0fentity_sub_type\x18\x02 \x01(\tB\x1c\x9aA\x19J\x17\"logsImmediateResolved\"H\x00R\rentitySubType\x88\x01\x01\x126\n" +
+	"\btemplate\x18\x03 \x01(\tB\x1a\x9aA\x17J\x15\"{{ alertDef.name }}\"R\btemplate\x12a\n" +
+	"\ventity_type\x18\x04 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityTypeB\x12\n" +
 	"\x10_entity_sub_typeJ\x04\b\x01\x10\x02R\x16deprecated_entity_type\"\xc8\x05\n" +
@@ -1233,9 +1233,9 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_servic
 	"\asuccess\x18\x01 \x01(\v2X.com.coralogixapis.notification_center.notifications.v1.TestTemplateRenderResult.SuccessH\x00R\asuccess\x12t\n" +
 	"\afailure\x18\x02 \x01(\v2X.com.coralogixapis.notification_center.notifications.v1.TestTemplateRenderResult.FailureH\x00R\afailure\x1aQ\n" +
 	"\aSuccess\x12F\n" +
-	"\x0erendered_value\x18\x01 \x01(\tB\x1f\x92A\x1cJ\x1a\"Rendered template result\"R\rrenderedValue\x1a\xbd\x01\n" +
+	"\x0erendered_value\x18\x01 \x01(\tB\x1f\x9aA\x1cJ\x1a\"Rendered template result\"R\rrenderedValue\x1a\xbd\x01\n" +
 	"\aFailure\x12:\n" +
-	"\amessage\x18\x01 \x01(\tB \x92A\x1dJ\x1b\"Template rendering failed\"R\amessage\x12v\n" +
+	"\amessage\x18\x01 \x01(\tB \x9aA\x1dJ\x1b\"Template rendering failed\"R\amessage\x12v\n" +
 	"\x06reason\x18\x02 \x01(\x0e2^.com.coralogixapis.notification_center.notifications.v1.TestTemplateRenderResult.FailureReasonR\x06reason\"\xa2\x01\n" +
 	"\rFailureReason\x12\x1e\n" +
 	"\x1aFAILURE_REASON_UNSPECIFIED\x10\x00\x12\x14\n" +
@@ -1247,19 +1247,19 @@ const file_com_coralogixapis_notification_center_notifications_v1_testing_servic
 	"\x1aTestTemplateRenderResponse\x12h\n" +
 	"\x06result\x18\x01 \x01(\v2P.com.coralogixapis.notification_center.notifications.v1.TestTemplateRenderResultR\x06result\"\xc8\x03\n" +
 	" TestRoutingConditionValidRequest\x12<\n" +
-	"\btemplate\x18\x02 \x01(\tB \x92A\x1dJ\x1b\"alertDef.priority == 'P1'\"R\btemplate\x12a\n" +
-	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\btemplate\x18\x02 \x01(\tB \x9aA\x1dJ\x1b\"alertDef.priority == 'P1'\"R\btemplate\x12a\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
-	"entityType:\xe4\x01\x92A\xe0\x01\n" +
+	"entityType:\xe4\x01\x9aA\xe0\x01\n" +
 	"a*$Test Routing Condition Valid Request29Request to check that provided routing condition is valid*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02R\x16deprecated_entity_type\"\xc5\x05\n" +
 	"!TestRoutingConditionValidResponse\x12}\n" +
 	"\asuccess\x18\x01 \x01(\v2a.com.coralogixapis.notification_center.notifications.v1.TestRoutingConditionValidResponse.SuccessH\x00R\asuccess\x12}\n" +
 	"\afailure\x18\x02 \x01(\v2a.com.coralogixapis.notification_center.notifications.v1.TestRoutingConditionValidResponse.FailureH\x00R\afailure\x1a,\n" +
 	"\aSuccess\x12!\n" +
-	"\x06result\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\x06result\x1a~\n" +
+	"\x06result\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\x06result\x1a~\n" +
 	"\aFailure\x12s\n" +
-	"\amessage\x18\x01 \x01(\tBY\x92AVJT\"Invalid condition: condition should be rendered to a boolean value (true or false)\"R\amessage:\xe9\x01\x92A\xe5\x01\n" +
+	"\amessage\x18\x01 \x01(\tBY\x9aAVJT\"Invalid condition: condition should be rendered to a boolean value (true or false)\"R\amessage:\xe9\x01\x9aA\xe5\x01\n" +
 	"f*%Test Routing Condition Valid Response2=Response which specifies condition evaluation result or error*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\b\n" +
 	"\x06result2\x83\x0f\n" +

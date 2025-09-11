@@ -8,7 +8,7 @@ package v3
 
 import (
 	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -657,22 +657,22 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_service_proto protoreflec
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
+	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
 	"\x19GetAlertEventStatsRequest\x12.\n" +
 	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x03ids\x12K\n" +
-	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys:)\x92A&\n" +
+	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys:)\x9aA&\n" +
 	"$*\"Get alert event statistics request\"\x9e\x02\n" +
 	"\x1aGetAlertEventStatsResponse\x12k\n" +
 	"\fevents_stats\x18\x01 \x03(\v2H.com.coralogixapis.alerts.v3.GetAlertEventStatsResponse.EventsStatsEntryR\veventsStats\x1ag\n" +
 	"\x10EventsStatsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12=\n" +
-	"\x05value\x18\x02 \x01(\v2'.com.coralogixapis.alerts.v3.EventStatsR\x05value:\x028\x01:*\x92A'\n" +
+	"\x05value\x18\x02 \x01(\v2'.com.coralogixapis.alerts.v3.EventStatsR\x05value:\x028\x01:*\x9aA'\n" +
 	"%*#Get alert event statistics response\"\xe6\x01\n" +
 	"\vPermutation\x12n\n" +
 	"\x12permutation_labels\x18\x01 \x03(\v2?.com.coralogixapis.alerts.v3.Permutation.PermutationLabelsEntryR\x11permutationLabels\x1aD\n" +
 	"\x16PermutationLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:!\x92A\x1e\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:!\x9aA\x1e\n" +
 	"\x1c*\x1aPermutation data structure\"\xc4\x04\n" +
 	"\n" +
 	"EventStats\x122\n" +
@@ -681,18 +681,18 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x0ftriggered_count\x18\x03 \x01(\v2\x1c.google.protobuf.UInt32ValueR\x0etriggeredCount\x12n\n" +
 	"\x1etriggered_permutations_samples\x18\x04 \x03(\v2(.com.coralogixapis.alerts.v3.PermutationR\x1ctriggeredPermutationsSamples\x12l\n" +
 	"\x1dresolved_permutations_samples\x18\x05 \x03(\v2(.com.coralogixapis.alerts.v3.PermutationR\x1bresolvedPermutationsSamples\x12j\n" +
-	"\x17activity_analysis_stats\x18\x06 \x01(\v22.com.coralogixapis.alerts.v3.ActivityAnalysisStatsR\x15activityAnalysisStats:,\x92A)\n" +
+	"\x17activity_analysis_stats\x18\x06 \x01(\v22.com.coralogixapis.alerts.v3.ActivityAnalysisStatsR\x15activityAnalysisStats:,\x9aA)\n" +
 	"'*%Alert event statistics data structure\"\xba\x01\n" +
 	"\x15ActivityAnalysisStats\x12B\n" +
 	"\x0eis_muted_count\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueR\fisMutedCount\x122\n" +
-	"\x05rules\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueR\x05rules:)\x92A&\n" +
+	"\x05rules\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueR\x05rules:)\x9aA&\n" +
 	"$*\"Event activity analysis statistics\"\x87\x02\n" +
 	"\x14GetAlertEventRequest\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12K\n" +
 	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys\x12N\n" +
 	"\n" +
 	"pagination\x18\x03 \x01(\v2..com.coralogixapis.alerts.v3.PaginationRequestR\n" +
-	"pagination:$\x92A!\n" +
+	"pagination:$\x9aA!\n" +
 	"\x1f*\x1dGet alert event by ID request\"\x91\x03\n" +
 	"\x15GetAlertEventResponse\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12X\n" +
@@ -700,7 +700,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x14multiple_permutation\x18\x03 \x01(\v2:.com.coralogixapis.alerts.v3.AlertEventMultiplePermutationH\x00R\x13multiplePermutation\x12O\n" +
 	"\n" +
 	"pagination\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.PaginationResponseR\n" +
-	"pagination:\x1f\x92A\x1c\n" +
+	"pagination:\x1f\x9aA\x1c\n" +
 	"\x1a*\x18Get alert event responseB\r\n" +
 	"\valert_event\"\x91\x01\n" +
 	"\x1dAlertEventMultiplePermutation\x12p\n" +
@@ -717,7 +717,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\"ORDER_BY_ALERT_EVENT_DIRECTION_ASC\x10\x01\x12'\n" +
 	"#ORDER_BY_ALERT_EVENT_DIRECTION_DESC\x10\x022\xef\a\n" +
 	"\x11AlertEventService\x12\xe3\x02\n" +
-	"\rGetAlertEvent\x121.com.coralogixapis.alerts.v3.GetAlertEventRequest\x1a2.com.coralogixapis.alerts.v3.GetAlertEventResponse\"\xea\x01\x92A\xb5\x01\n" +
+	"\rGetAlertEvent\x121.com.coralogixapis.alerts.v3.GetAlertEventRequest\x1a2.com.coralogixapis.alerts.v3.GetAlertEventResponse\"\xea\x01\x9aA\xb5\x01\n" +
 	"\x14Alert events service\x12\x15Get alert event by IDJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -728,7 +728,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x11\n" +
 	"\x0fget alert event\x82\xd3\xe4\x93\x02\x16\x12\x14/v3/alert-event/{id}\x12\x81\x03\n" +
-	"\x13GetAlertEventsStats\x126.com.coralogixapis.alerts.v3.GetAlertEventStatsRequest\x1a7.com.coralogixapis.alerts.v3.GetAlertEventStatsResponse\"\xf8\x01\x92A\xbb\x01\n" +
+	"\x13GetAlertEventsStats\x126.com.coralogixapis.alerts.v3.GetAlertEventStatsRequest\x1a7.com.coralogixapis.alerts.v3.GetAlertEventStatsResponse\"\xf8\x01\x9aA\xbb\x01\n" +
 	"\x14Alert events service\x12\x1bGet alert events statisticsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -738,7 +738,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc =
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11alerts:ReadConfigʸ\x02\x18\n" +
-	"\x16get alert events stats\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/alert-event-stats\x1a\xef\x01\x92A\xeb\x01\n" +
+	"\x16get alert events stats\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/alert-event-stats\x1a\xef\x01\x9aA\xeb\x01\n" +
 	"\x14Alert events service\x12RGet information regarding your alert events - instances of alerts being triggered.\x1a\x7f\n" +
 	"ALearn more about alert events and incidents in our documentation.\x12:https://coralogix.com/docs/user-guides/alerting/incidents/b\x06proto3"
 

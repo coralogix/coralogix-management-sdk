@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -199,7 +199,7 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_proto protoreflect.FileDe
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/alerts/v3/event/alert_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb8\t\n" +
+	"3com/coralogixapis/alerts/v3/event/alert_event.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/activity_analysis/activity_analysis.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb8\t\n" +
 	"\n" +
 	"AlertEvent\x12m\n" +
 	"\x12permutation_labels\x18\x01 \x03(\v2>.com.coralogixapis.alerts.v3.AlertEvent.PermutationLabelsEntryR\x11permutationLabels\x12[\n" +
@@ -219,7 +219,7 @@ const file_com_coralogixapis_alerts_v3_event_alert_event_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1a>\n" +
 	"\x10GroupLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xc9\x01\x92A\xc5\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xc9\x01\x9aA\xc5\x01\n" +
 	"\xc2\x01*\vAlert event\xd2\x01\x12permutation_labels\xd2\x01\fgroup_labels\xd2\x01\ttimestamp\xd2\x01\balert_id\xd2\x01\x06status\xd2\x01\x15pre_grouping_event_id\xd2\x01\apayload\xd2\x01\fpayload_type\xd2\x01\x0epermutation_id\xd2\x01\x18incident_correlation_key\xd2\x01\x11activity_analysisB\x14\n" +
 	"\x12_activity_analysis*S\n" +
 	"\vAlertStatus\x12(\n" +

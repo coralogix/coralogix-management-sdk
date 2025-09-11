@@ -5,7 +5,7 @@ package com.coralogix.datausage.v2;
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Team {
   google.protobuf.UInt64Value id = 2;
@@ -24,7 +24,7 @@ message Token {
 }
 
 message DateRange {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Date Range"
       description: "This data structure represents a date range."
@@ -35,8 +35,8 @@ message DateRange {
       description: "Find out more about data usage."
     }
   };
-  google.protobuf.Timestamp from_date = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
-  google.protobuf.Timestamp to_date = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.Timestamp from_date = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
+  google.protobuf.Timestamp to_date = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"2021-01-01T00:00:00Z\"" }];
 }
 
 enum Range {
@@ -84,7 +84,7 @@ enum Severity {
 }
 
 message GenericDimension{
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Generic Dimension"
       description: "This data structure represents a generic dimension."
@@ -95,8 +95,8 @@ message GenericDimension{
       description: "Find out more about data usage."
     }
   };
-  string key = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"key\"" }];
-  string value = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"value\"" }];
+  string key = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"key\"" }];
+  string value = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"value\"" }];
 }
 
 message Dimension{

@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -601,15 +601,15 @@ var File_com_coralogixapis_scopes_v1_scopes_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogixapis/scopes/v1/scopes.proto\x12\x1bcom.coralogixapis.scopes.v1\x1a-com/coralogixapis/scopes/v1/entity_type.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xfd\x03\n" +
+	"(com/coralogixapis/scopes/v1/scopes.proto\x12\x1bcom.coralogixapis.scopes.v1\x1a-com/coralogixapis/scopes/v1/entity_type.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xfd\x03\n" +
 	"\x05Scope\x12\x1f\n" +
-	"\x02id\x18\x01 \x01(\tB\x0f\x92A\fJ\n" +
+	"\x02id\x18\x01 \x01(\tB\x0f\x9aA\fJ\n" +
 	"\"scope_id\"R\x02id\x124\n" +
-	"\fdisplay_name\x18\x02 \x01(\tB\x11\x92A\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
-	"\vdescription\x18\x03 \x01(\tB\x18\x92A\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12\"\n" +
-	"\ateam_id\x18\x04 \x01(\x05B\t\x92A\x06J\x041234R\x06teamId\x12=\n" +
+	"\fdisplay_name\x18\x02 \x01(\tB\x11\x9aA\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
+	"\vdescription\x18\x03 \x01(\tB\x18\x9aA\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12\"\n" +
+	"\ateam_id\x18\x04 \x01(\x05B\t\x9aA\x06J\x041234R\x06teamId\x12=\n" +
 	"\afilters\x18\x05 \x03(\v2#.com.coralogixapis.scopes.v1.FilterR\afilters\x12@\n" +
-	"\x12default_expression\x18\x06 \x01(\tB\x11\x92A\x0eJ\f\"expression\"R\x11defaultExpression:\xa6\x01\x92A\xa2\x01\n" +
+	"\x12default_expression\x18\x06 \x01(\tB\x11\x9aA\x0eJ\f\"expression\"R\x11defaultExpression:\xa6\x01\x9aA\xa2\x01\n" +
 	"/*\x05Scope2&This data structure represents a scope*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/B\x0e\n" +
 	"\f_description\"\xb0\x02\n" +
@@ -617,54 +617,54 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\ventity_type\x18\x01 \x01(\x0e2'.com.coralogixapis.scopes.v1.EntityTypeR\n" +
 	"entityType\x121\n" +
 	"\n" +
-	"expression\x18\x02 \x01(\tB\x11\x92A\x0eJ\f\"expression\"R\n" +
-	"expression:\xa8\x01\x92A\xa4\x01\n" +
+	"expression\x18\x02 \x01(\tB\x11\x9aA\x0eJ\f\"expression\"R\n" +
+	"expression:\xa8\x01\x9aA\xa4\x01\n" +
 	"1*\x06Filter2'This data structure represents a filter*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\x16\n" +
 	"\x14GetTeamScopesRequest\"\xa4\x02\n" +
 	"\x19GetTeamScopesByIdsRequest\x12#\n" +
-	"\x03ids\x18\x01 \x03(\tB\x11\x92A\x0eJ\f[\"scope_id\"]R\x03ids:\xe1\x01\x92A\xdd\x01\n" +
+	"\x03ids\x18\x01 \x03(\tB\x11\x9aA\x0eJ\f[\"scope_id\"]R\x03ids:\xe1\x01\x9aA\xdd\x01\n" +
 	"j*\x1eGet Team Scopes By Ids Request2BThis data structure represents a request to get team scopes by ids\xd2\x01\x03ids*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\xa0\x02\n" +
 	"\x11GetScopesResponse\x12:\n" +
-	"\x06scopes\x18\x01 \x03(\v2\".com.coralogixapis.scopes.v1.ScopeR\x06scopes:\xce\x01\x92A\xca\x01\n" +
+	"\x06scopes\x18\x01 \x03(\v2\".com.coralogixapis.scopes.v1.ScopeR\x06scopes:\xce\x01\x9aA\xca\x01\n" +
 	"W*\x13Get Scopes Response27This data structure represents a response to get scopes\xd2\x01\x06scopes*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\x81\x04\n" +
 	"\x12CreateScopeRequest\x124\n" +
-	"\fdisplay_name\x18\x01 \x01(\tB\x11\x92A\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
-	"\vdescription\x18\x02 \x01(\tB\x18\x92A\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12=\n" +
+	"\fdisplay_name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
+	"\vdescription\x18\x02 \x01(\tB\x18\x9aA\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12=\n" +
 	"\afilters\x18\x03 \x03(\v2#.com.coralogixapis.scopes.v1.FilterR\afilters\x12@\n" +
-	"\x12default_expression\x18\x04 \x01(\tB\x11\x92A\x0eJ\f\"expression\"R\x11defaultExpression:\xe2\x01\x92A\xde\x01\n" +
+	"\x12default_expression\x18\x04 \x01(\tB\x11\x9aA\x0eJ\f\"expression\"R\x11defaultExpression:\xe2\x01\x9aA\xde\x01\n" +
 	"k*\x14Create Scope Request2:This data structure represents a request to create a scope\xd2\x01\fdisplay_name\xd2\x01\afilters*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/B\x0e\n" +
 	"\f_description\"\xa5\x02\n" +
 	"\x13CreateScopeResponse\x128\n" +
-	"\x05scope\x18\x01 \x01(\v2\".com.coralogixapis.scopes.v1.ScopeR\x05scope:\xd3\x01\x92A\xcf\x01\n" +
+	"\x05scope\x18\x01 \x01(\v2\".com.coralogixapis.scopes.v1.ScopeR\x05scope:\xd3\x01\x9aA\xcf\x01\n" +
 	"\\*\x15Create Scope Response2;This data structure represents a response to create a scope\xd2\x01\x05scope*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\xbd\x04\n" +
 	"\x12UpdateScopeRequest\x12\x1f\n" +
-	"\x02id\x18\x01 \x01(\tB\x0f\x92A\fJ\n" +
+	"\x02id\x18\x01 \x01(\tB\x0f\x9aA\fJ\n" +
 	"\"scope_id\"R\x02id\x124\n" +
-	"\fdisplay_name\x18\x02 \x01(\tB\x11\x92A\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
-	"\vdescription\x18\x03 \x01(\tB\x18\x92A\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12=\n" +
+	"\fdisplay_name\x18\x02 \x01(\tB\x11\x9aA\x0eJ\f\"scope_name\"R\vdisplayName\x12?\n" +
+	"\vdescription\x18\x03 \x01(\tB\x18\x9aA\x15J\x13\"scope_description\"H\x00R\vdescription\x88\x01\x01\x12=\n" +
 	"\afilters\x18\x04 \x03(\v2#.com.coralogixapis.scopes.v1.FilterR\afilters\x12@\n" +
-	"\x12default_expression\x18\x05 \x01(\tB\x11\x92A\x0eJ\f\"expression\"R\x11defaultExpression:\xfd\x01\x92A\xf9\x01\n" +
+	"\x12default_expression\x18\x05 \x01(\tB\x11\x9aA\x0eJ\f\"expression\"R\x11defaultExpression:\xfd\x01\x9aA\xf9\x01\n" +
 	"\x85\x01*\x14Update Scope Request2:This data structure represents a request to update a scope\xd2\x01\x02id\xd2\x01\fdisplay_name\xd2\x01\afilters\xd2\x01\x12default_expression*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/B\x0e\n" +
 	"\f_description\"\xa5\x02\n" +
 	"\x13UpdateScopeResponse\x128\n" +
-	"\x05scope\x18\x01 \x01(\v2\".com.coralogixapis.scopes.v1.ScopeR\x05scope:\xd3\x01\x92A\xcf\x01\n" +
+	"\x05scope\x18\x01 \x01(\v2\".com.coralogixapis.scopes.v1.ScopeR\x05scope:\xd3\x01\x9aA\xcf\x01\n" +
 	"\\*\x15Update Scope Response2;This data structure represents a response to update a scope\xd2\x01\x05scope*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\x86\x02\n" +
 	"\x12DeleteScopeRequest\x12\x1f\n" +
-	"\x02id\x18\x01 \x01(\tB\x0f\x92A\fJ\n" +
-	"\"scope_id\"R\x02id:\xce\x01\x92A\xca\x01\n" +
+	"\x02id\x18\x01 \x01(\tB\x0f\x9aA\fJ\n" +
+	"\"scope_id\"R\x02id:\xce\x01\x9aA\xca\x01\n" +
 	"W*\x14Delete Scope Request2:This data structure represents a request to delete a scope\xd2\x01\x02id*o\n" +
 	"\x1aFind out more about scopes\x12Qhttps://coralogix.com/docs/user-guides/account-management/user-management/scopes/\"\x15\n" +
 	"\x13DeleteScopeResponse2\xe1\n" +
 	"\n" +
 	"\rScopesService\x12\x91\x02\n" +
-	"\x12GetTeamScopesByIds\x126.com.coralogixapis.scopes.v1.GetTeamScopesByIdsRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x92\x01\x92A}\n" +
+	"\x12GetTeamScopesByIds\x126.com.coralogixapis.scopes.v1.GetTeamScopesByIdsRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x92\x01\x9aA}\n" +
 	"\x0eScopes Service\x12\x16Get Team Scopes By IdsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -673,7 +673,7 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/v1/scopes\x12\x85\x02\n" +
-	"\rGetTeamScopes\x121.com.coralogixapis.scopes.v1.GetTeamScopesRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x90\x01\x92Av\n" +
+	"\rGetTeamScopes\x121.com.coralogixapis.scopes.v1.GetTeamScopesRequest\x1a..com.coralogixapis.scopes.v1.GetScopesResponse\"\x90\x01\x9aAv\n" +
 	"\x0eScopes Service\x12\x0fGet Team ScopesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -681,7 +681,7 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11\x12\x0f/v1/scopes/list\x12\xfe\x01\n" +
-	"\vCreateScope\x12/.com.coralogixapis.scopes.v1.CreateScopeRequest\x1a0.com.coralogixapis.scopes.v1.CreateScopeResponse\"\x8b\x01\x92As\n" +
+	"\vCreateScope\x12/.com.coralogixapis.scopes.v1.CreateScopeRequest\x1a0.com.coralogixapis.scopes.v1.CreateScopeResponse\"\x8b\x01\x9aAs\n" +
 	"\x0eScopes Service\x12\fCreate ScopeJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -690,7 +690,7 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
 	"/v1/scopes\x12\xfe\x01\n" +
-	"\vUpdateScope\x12/.com.coralogixapis.scopes.v1.UpdateScopeRequest\x1a0.com.coralogixapis.scopes.v1.UpdateScopeResponse\"\x8b\x01\x92As\n" +
+	"\vUpdateScope\x12/.com.coralogixapis.scopes.v1.UpdateScopeRequest\x1a0.com.coralogixapis.scopes.v1.UpdateScopeResponse\"\x8b\x01\x9aAs\n" +
 	"\x0eScopes Service\x12\fUpdate ScopeJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -699,14 +699,14 @@ const file_com_coralogixapis_scopes_v1_scopes_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f:\x01*\x1a\n" +
 	"/v1/scopes\x12\x80\x02\n" +
-	"\vDeleteScope\x12/.com.coralogixapis.scopes.v1.DeleteScopeRequest\x1a0.com.coralogixapis.scopes.v1.DeleteScopeResponse\"\x8d\x01\x92As\n" +
+	"\vDeleteScope\x12/.com.coralogixapis.scopes.v1.DeleteScopeRequest\x1a0.com.coralogixapis.scopes.v1.DeleteScopeResponse\"\x8d\x01\x9aAs\n" +
 	"\x0eScopes Service\x12\fDelete ScopeJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11*\x0f/v1/scopes/{id}\x1a/\x92A,\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11*\x0f/v1/scopes/{id}\x1a/\x9aA,\n" +
 	"\x0eScopes Service\x12\x1aA service to manage scopesb\x06proto3"
 
 var (

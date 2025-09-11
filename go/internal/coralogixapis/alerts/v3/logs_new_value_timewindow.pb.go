@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -156,9 +156,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_new_value_lo
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_new_value_logs_new_value_timewindow_proto_rawDesc = "" +
 	"\n" +
-	"dcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x90\x03\n" +
+	"dcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x90\x03\n" +
 	"\x16LogsNewValueTimeWindow\x12\xfe\x01\n" +
-	")logs_new_value_time_window_specific_value\x18\x01 \x01(\x0e28.com.coralogixapis.alerts.v3.LogsNewValueTimeWindowValueBj\x92Ag2)A time window defined by a specific valueJ:\"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\"H\x00R#logsNewValueTimeWindowSpecificValue:m\x92Aj\n" +
+	")logs_new_value_time_window_specific_value\x18\x01 \x01(\x0e28.com.coralogixapis.alerts.v3.LogsNewValueTimeWindowValueBj\x9aAg2)A time window defined by a specific valueJ:\"LOGS_NEW_VALUE_TIME_WINDOW_VALUE_HOURS_12_OR_UNSPECIFIED\"H\x00R#logsNewValueTimeWindowSpecificValue:m\x9aAj\n" +
 	"h*%Log-based new value alert time window28Time window configuration for log-based new value alerts\xd2\x01\x04typeB\x06\n" +
 	"\x04type*\xa1\x03\n" +
 	"\x1bLogsNewValueTimeWindowValue\x12<\n" +

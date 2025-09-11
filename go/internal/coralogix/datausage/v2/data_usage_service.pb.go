@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -1402,23 +1402,23 @@ var File_com_coralogix_datausage_v2_data_usage_service_proto protoreflect.FileDe
 
 const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogix/datausage/v2/data_usage_service.proto\x12\x1acom.coralogix.datausage.v2\x1a+com/coralogix/datausage/v2/data_usage.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xe4\x03\n" +
+	"3com/coralogix/datausage/v2/data_usage_service.proto\x12\x1acom.coralogix.datausage.v2\x1a+com/coralogix/datausage/v2/data_usage.proto\x1a\x1egoogle/protobuf/duration.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xe4\x03\n" +
 	"\x1fGetTeamDetailedDataUsageRequest\x12D\n" +
 	"\n" +
 	"date_range\x18\x02 \x01(\v2%.com.coralogix.datausage.v2.DateRangeR\tdateRange\x129\n" +
 	"\n" +
 	"resolution\x18\x03 \x01(\v2\x19.google.protobuf.DurationR\n" +
 	"resolution\x12E\n" +
-	"\taggregate\x18\x04 \x03(\x0e2'.com.coralogix.datausage.v2.AggregateByR\taggregate:\xf2\x01\x92A\xee\x01\n" +
+	"\taggregate\x18\x04 \x03(\x0e2'.com.coralogix.datausage.v2.AggregateByR\taggregate:\xf2\x01\x9aA\xee\x01\n" +
 	"n*$Get Team Detailed Data Usage Request2FThis data structure is used to request detailed data usage for a team.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/J\x04\b\x01\x10\x02\"\xb4\x03\n" +
 	" GetTeamDetailedDataUsageResponse\x12U\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\ttimestamp\x12?\n" +
-	"\asize_gb\x18\x02 \x01(\v2\x1b.google.protobuf.FloatValueB\t\x92A\x06J\x042.50R\x06sizeGb\x12<\n" +
-	"\x05units\x18\x03 \x01(\v2\x1b.google.protobuf.FloatValueB\t\x92A\x06J\x045.00R\x05units\x12E\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2021-01-01T00:00:00Z\"R\ttimestamp\x12?\n" +
+	"\asize_gb\x18\x02 \x01(\v2\x1b.google.protobuf.FloatValueB\t\x9aA\x06J\x042.50R\x06sizeGb\x12<\n" +
+	"\x05units\x18\x03 \x01(\v2\x1b.google.protobuf.FloatValueB\t\x9aA\x06J\x045.00R\x05units\x12E\n" +
 	"\n" +
 	"dimensions\x18\x04 \x03(\v2%.com.coralogix.datausage.v2.DimensionR\n" +
-	"dimensions:s\x92Ap\n" +
+	"dimensions:s\x9aAp\n" +
 	"n*%Get Team Detailed Data Usage Response2EThis data structure is used to return detailed data usage for a team.\"\xc1\x03\n" +
 	"\x14GetSpansCountRequest\x12D\n" +
 	"\n" +
@@ -1426,30 +1426,30 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\n" +
 	"resolution\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\n" +
 	"resolution\x12G\n" +
-	"\afilters\x18\x03 \x01(\v2(.com.coralogix.datausage.v2.ScopesFilterH\x00R\afilters\x88\x01\x01:\xd2\x01\x92A\xce\x01\n" +
+	"\afilters\x18\x03 \x01(\v2(.com.coralogix.datausage.v2.ScopesFilterH\x00R\afilters\x88\x01\x01:\xd2\x01\x9aA\xce\x01\n" +
 	"N*\x17Get Spans Count Request23This data structure is used to request spans count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/B\n" +
 	"\n" +
 	"\b_filters\"\xc1\x02\n" +
 	"\fScopesFilter\x125\n" +
-	"\vapplication\x18\x01 \x03(\tB\x13\x92A\x10J\x0e\"application1\"R\vapplication\x12/\n" +
-	"\tsubsystem\x18\x02 \x03(\tB\x11\x92A\x0eJ\f\"subsystem1\"R\tsubsystem:\xc8\x01\x92A\xc4\x01\n" +
+	"\vapplication\x18\x01 \x03(\tB\x13\x9aA\x10J\x0e\"application1\"R\vapplication\x12/\n" +
+	"\tsubsystem\x18\x02 \x03(\tB\x11\x9aA\x0eJ\f\"subsystem1\"R\tsubsystem:\xc8\x01\x9aA\xc4\x01\n" +
 	"D*\rScopes Filter23This data structure represents a filter for scopes.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xbb\x06\n" +
 	"\n" +
 	"SpansCount\x12U\n" +
-	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\ttimestamp\x12S\n" +
-	"\x12success_span_count\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x92A\x05J\x03100R\x10successSpanCount\x12N\n" +
-	"\x10error_span_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0210R\x0eerrorSpanCount\x12Y\n" +
-	"\x16low_success_span_count\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0250R\x13lowSuccessSpanCount\x12T\n" +
-	"\x14low_error_span_count\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\x92A\x03J\x015R\x11lowErrorSpanCount\x12`\n" +
-	"\x19medium_success_span_count\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x92A\x05J\x03200R\x16mediumSuccessSpanCount\x12[\n" +
-	"\x17medium_error_span_count\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x92A\x04J\x0220R\x14mediumErrorSpanCount:\xc0\x01\x92A\xbc\x01\n" +
+	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2021-01-01T00:00:00Z\"R\ttimestamp\x12S\n" +
+	"\x12success_span_count\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x9aA\x05J\x03100R\x10successSpanCount\x12N\n" +
+	"\x10error_span_count\x18\x03 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x9aA\x04J\x0210R\x0eerrorSpanCount\x12Y\n" +
+	"\x16low_success_span_count\x18\x04 \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x9aA\x04J\x0250R\x13lowSuccessSpanCount\x12T\n" +
+	"\x14low_error_span_count\x18\x05 \x01(\v2\x1b.google.protobuf.Int64ValueB\x06\x9aA\x03J\x015R\x11lowErrorSpanCount\x12`\n" +
+	"\x19medium_success_span_count\x18\x06 \x01(\v2\x1b.google.protobuf.Int64ValueB\b\x9aA\x05J\x03200R\x16mediumSuccessSpanCount\x12[\n" +
+	"\x17medium_error_span_count\x18\a \x01(\v2\x1b.google.protobuf.Int64ValueB\a\x9aA\x04J\x0220R\x14mediumErrorSpanCount:\xc0\x01\x9aA\xbc\x01\n" +
 	"<*\vSpans Count2-This data structure represents a spans count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xb5\x02\n" +
 	"\x15GetSpansCountResponse\x12G\n" +
 	"\vspans_count\x18\x01 \x03(\v2&.com.coralogix.datausage.v2.SpansCountR\n" +
-	"spansCount:\xd2\x01\x92A\xce\x01\n" +
+	"spansCount:\xd2\x01\x9aA\xce\x01\n" +
 	"N*\x18Get Spans Count Response22This data structure is used to return spans count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xbe\x03\n" +
 	"\x13GetLogsCountRequest\x12D\n" +
@@ -1458,7 +1458,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\n" +
 	"resolution\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\n" +
 	"resolution\x12G\n" +
-	"\afilters\x18\x03 \x01(\v2(.com.coralogix.datausage.v2.ScopesFilterH\x00R\afilters\x88\x01\x01:\xd0\x01\x92A\xcc\x01\n" +
+	"\afilters\x18\x03 \x01(\v2(.com.coralogix.datausage.v2.ScopesFilterH\x00R\afilters\x88\x01\x01:\xd0\x01\x9aA\xcc\x01\n" +
 	"L*\x16Get Logs Count Request22This data structure is used to request logs count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/B\n" +
 	"\n" +
@@ -1466,28 +1466,28 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\tLogsCount\x128\n" +
 	"\ttimestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\ttimestamp\x12'\n" +
 	"\n" +
-	"logs_count\x18\x02 \x01(\x04B\b\x92A\x05J\x03100R\tlogsCount\x12@\n" +
+	"logs_count\x18\x02 \x01(\x04B\b\x9aA\x05J\x03100R\tlogsCount\x12@\n" +
 	"\bseverity\x18\x03 \x01(\x0e2$.com.coralogix.datausage.v2.SeverityR\bseverity\x12@\n" +
-	"\bpriority\x18\x04 \x01(\x0e2$.com.coralogix.datausage.v2.PriorityR\bpriority:\xbe\x01\x92A\xba\x01\n" +
+	"\bpriority\x18\x04 \x01(\x0e2$.com.coralogix.datausage.v2.PriorityR\bpriority:\xbe\x01\x9aA\xba\x01\n" +
 	":*\n" +
 	"Logs Count2,This data structure represents a logs count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xaf\x02\n" +
 	"\x14GetLogsCountResponse\x12D\n" +
 	"\n" +
-	"logs_count\x18\x01 \x03(\v2%.com.coralogix.datausage.v2.LogsCountR\tlogsCount:\xd0\x01\x92A\xcc\x01\n" +
+	"logs_count\x18\x01 \x03(\v2%.com.coralogix.datausage.v2.LogsCountR\tlogsCount:\xd0\x01\x9aA\xcc\x01\n" +
 	"L*\x17Get Logs Count Response21This data structure is used to return logs count.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"(\n" +
 	"&GetDataUsageMetricsExportStatusRequest\"\xd3\x02\n" +
 	"'GetDataUsageMetricsExportStatusResponse\x12#\n" +
-	"\aenabled\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\aenabled:\xfc\x01\x92A\xf8\x01\n" +
+	"\aenabled\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\aenabled:\xfc\x01\x9aA\xf8\x01\n" +
 	"x*-Get Data Usage Metrics Export Status Response2GThis data structure is used to return data usage metrics export status.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/J\x04\b\x02\x10\x03\"\xd7\x02\n" +
 	")UpdateDataUsageMetricsExportStatusRequest\x12#\n" +
-	"\aenabled\x18\x03 \x01(\bB\t\x92A\x06J\x04trueR\aenabled:\xfe\x01\x92A\xfa\x01\n" +
+	"\aenabled\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueR\aenabled:\xfe\x01\x9aA\xfa\x01\n" +
 	"z*/Update Data Usage Metrics Export Status Request2GThis data structure is used to update data usage metrics export status.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/J\x04\b\x01\x10\x02\"\xd3\x02\n" +
 	"*UpdateDataUsageMetricsExportStatusResponse\x12#\n" +
-	"\aenabled\x18\x01 \x01(\bB\t\x92A\x06J\x04trueR\aenabled:\xff\x01\x92A\xfb\x01\n" +
+	"\aenabled\x18\x01 \x01(\bB\t\x9aA\x06J\x04trueR\aenabled:\xff\x01\x9aA\xfb\x01\n" +
 	"{*0Update Data Usage Metrics Export Status Response2GThis data structure is used to return data usage metrics export status.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\x84\x04\n" +
 	"\x13GetDataUsageRequest\x12D\n" +
@@ -1497,7 +1497,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"resolution\x18\x02 \x01(\v2\x19.google.protobuf.DurationR\n" +
 	"resolution\x12E\n" +
 	"\taggregate\x18\x03 \x03(\x0e2'.com.coralogix.datausage.v2.AggregateByR\taggregate\x12R\n" +
-	"\x11dimension_filters\x18\x04 \x03(\v2%.com.coralogix.datausage.v2.DimensionR\x10dimensionFilters:\xd0\x01\x92A\xcc\x01\n" +
+	"\x11dimension_filters\x18\x04 \x03(\v2%.com.coralogix.datausage.v2.DimensionR\x10dimensionFilters:\xd0\x01\x9aA\xcc\x01\n" +
 	"L*\x16Get Data Usage Request22This data structure is used to request data usage.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\x8d\x03\n" +
 	"\x0eDataUsageEntry\x128\n" +
@@ -1506,11 +1506,11 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x05units\x18\x03 \x01(\x02R\x05units\x12E\n" +
 	"\n" +
 	"dimensions\x18\x04 \x03(\v2%.com.coralogix.datausage.v2.DimensionR\n" +
-	"dimensions:\xca\x01\x92A\xc6\x01\n" +
+	"dimensions:\xca\x01\x9aA\xc6\x01\n" +
 	"F*\x10Data Usage Entry22This data structure represents a data usage entry.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xaf\x02\n" +
 	"\x14GetDataUsageResponse\x12D\n" +
-	"\aentries\x18\x01 \x03(\v2*.com.coralogix.datausage.v2.DataUsageEntryR\aentries:\xd0\x01\x92A\xcc\x01\n" +
+	"\aentries\x18\x01 \x03(\v2*.com.coralogix.datausage.v2.DataUsageEntryR\aentries:\xd0\x01\x9aA\xcc\x01\n" +
 	"L*\x17Get Data Usage Response21This data structure is used to return data usage.*|\n" +
 	"\x1fFind out more about data usage.\x12Yhttps://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/\"\xae\x01\n" +
 	"\x19GetDailyUsageUnitsRequest\x129\n" +
@@ -1544,7 +1544,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x15AGGREGATE_BY_SEVERITY\x10\x062\xf4\x15\n" +
 	"\x10DataUsageService\x12\x9c\x01\n" +
 	"\x18GetTeamDetailedDataUsage\x12;.com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest\x1a<.com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse\"\x03\x88\x02\x010\x01\x12\x96\x02\n" +
-	"\rGetSpansCount\x120.com.coralogix.datausage.v2.GetSpansCountRequest\x1a1.com.coralogix.datausage.v2.GetSpansCountResponse\"\x9d\x01\x92Az\n" +
+	"\rGetSpansCount\x120.com.coralogix.datausage.v2.GetSpansCountRequest\x1a1.com.coralogix.datausage.v2.GetSpansCountResponse\"\x9d\x01\x9aAz\n" +
 	"\x12Data Usage Service\x12\x0fGet Spans CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1552,7 +1552,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a\x12\x18/v2/datausage/spanscount0\x01\x12\x91\x02\n" +
-	"\fGetLogsCount\x12/.com.coralogix.datausage.v2.GetLogsCountRequest\x1a0.com.coralogix.datausage.v2.GetLogsCountResponse\"\x9b\x01\x92Ay\n" +
+	"\fGetLogsCount\x12/.com.coralogix.datausage.v2.GetLogsCountRequest\x1a0.com.coralogix.datausage.v2.GetLogsCountResponse\"\x9b\x01\x9aAy\n" +
 	"\x12Data Usage Service\x12\x0eGet Logs CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1560,7 +1560,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x19\x12\x17/v2/datausage/logscount0\x01\x12\xe2\x02\n" +
-	"\x1fGetDataUsageMetricsExportStatus\x12B.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest\x1aC.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse\"\xb5\x01\x92A\x8f\x01\n" +
+	"\x1fGetDataUsageMetricsExportStatus\x12B.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest\x1aC.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse\"\xb5\x01\x9aA\x8f\x01\n" +
 	"\x12Data Usage Service\x12$Get Data Usage Metrics Export StatusJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1568,7 +1568,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v2/datausage/exportstatus\x12\xf1\x02\n" +
-	"\"UpdateDataUsageMetricsExportStatus\x12E.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest\x1aF.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse\"\xbb\x01\x92A\x92\x01\n" +
+	"\"UpdateDataUsageMetricsExportStatus\x12E.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest\x1aF.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse\"\xbb\x01\x9aA\x92\x01\n" +
 	"\x12Data Usage Service\x12'Update Data Usage Metrics Export StatusJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1576,7 +1576,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v2/datausage/exportstatus\x12\x87\x02\n" +
-	"\fGetDataUsage\x12/.com.coralogix.datausage.v2.GetDataUsageRequest\x1a0.com.coralogix.datausage.v2.GetDataUsageResponse\"\x91\x01\x92Ay\n" +
+	"\fGetDataUsage\x12/.com.coralogix.datausage.v2.GetDataUsageRequest\x1a0.com.coralogix.datausage.v2.GetDataUsageResponse\"\x91\x01\x9aAy\n" +
 	"\x12Data Usage Service\x12\x0eGet Data UsageJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1584,7 +1584,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f\x12\r/v2/datausage0\x01\x12\xae\x02\n" +
-	"\x12GetDailyUsageUnits\x125.com.coralogix.datausage.v2.GetDailyUsageUnitsRequest\x1a6.com.coralogix.datausage.v2.GetDailyUsageUnitsResponse\"\xa8\x01\x92A\x80\x01\n" +
+	"\x12GetDailyUsageUnits\x125.com.coralogix.datausage.v2.GetDailyUsageUnitsRequest\x1a6.com.coralogix.datausage.v2.GetDailyUsageUnitsResponse\"\xa8\x01\x9aA\x80\x01\n" +
 	"\x12Data Usage Service\x12\x15Get Daily Usage UnitsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1592,7 +1592,7 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v2/datausage/daily/units\x12\xd3\x02\n" +
-	"\x19GetDailyUsageProcessedGbs\x12<.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest\x1a=.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse\"\xb8\x01\x92A\x88\x01\n" +
+	"\x19GetDailyUsageProcessedGbs\x12<.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest\x1a=.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse\"\xb8\x01\x9aA\x88\x01\n" +
 	"\x12Data Usage Service\x12\x1dGet Daily Usage Processed GBsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1600,14 +1600,14 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02&:\x01*\"!/v2/datausage/daily/processed_gbs\x12\xe7\x02\n" +
-	"\x1dGetDailyUsageEvaluationTokens\x12@.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest\x1aA.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse\"\xc0\x01\x92A\x8c\x01\n" +
+	"\x1dGetDailyUsageEvaluationTokens\x12@.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest\x1aA.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse\"\xc0\x01\x9aA\x8c\x01\n" +
 	"\x12Data Usage Service\x12!Get Daily Usage Evaluation TokensJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02*:\x01*\"%/v2/datausage/daily/evaluation_tokens\x1a@\x92A=\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02*:\x01*\"%/v2/datausage/daily/evaluation_tokens\x1a@\x9aA=\n" +
 	"\x12Data Usage Service\x12'A service to manage data usage metrics.b\x06proto3"
 
 var (

@@ -83,15 +83,6 @@ type ConnectorConfigField = commonv1.ConnectorConfigField
 // ConnectorType is a connector type.
 type ConnectorType = common.ConnectorType
 
-// PresetIdentifier is a preset identifier.
-type PresetIdentifier = presets.PresetIdentifier
-
-// PresetIdentifierIDValue is a preset identifier id value.
-type PresetIdentifierIDValue = presets.PresetIdentifier_Id
-
-// PresetIdentifierUserFacingIDValue is a preset identifier user facing id value.
-type PresetIdentifierUserFacingIDValue = presets.PresetIdentifier_UserFacingId
-
 // SetPresetAsDefaultRequest is a request to set a preset as default.
 type SetPresetAsDefaultRequest = presets.SetPresetAsDefaultRequest
 
@@ -252,12 +243,6 @@ type BatchGetGlobalRoutersResponse = routers.BatchGetGlobalRoutersResponse
 
 // GlobalRouter represents a global router.
 type GlobalRouter = routers.GlobalRouter
-
-// GlobalRouterIdentifier is a global router identifier.
-type GlobalRouterIdentifier = commonv1.GlobalRouterIdentifier
-
-// GlobalRouterIdentifierIDValue is a global router identifier id value.
-type GlobalRouterIdentifierIDValue = commonv1.GlobalRouterIdentifier_Id
 
 // MessageConfig is a message configuration.
 type MessageConfig = common.MessageConfig

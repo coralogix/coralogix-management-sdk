@@ -2,16 +2,16 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
 
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service ExtensionTestingService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Extension testing service"
     external_docs: {
       url: "https://coralogix.com/docs/integrations/extensions/"
@@ -20,12 +20,12 @@ service ExtensionTestingService {
   };
 
   rpc InitializeTestingRevision(InitializeTestingRevisionRequest) returns (InitializeTestingRevisionResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Initialize testing revision";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Initialize testing revision";
     option (google.api.http) = {
       post: "/v1/extensions-testing/initialize"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -52,12 +52,12 @@ service ExtensionTestingService {
   }
 
   rpc CleanupTestingRevision(CleanupTestingRevisionRequest) returns (CleanupTestingRevisionResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Cleanup testing extension";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Cleanup testing extension";
     option (google.api.http) = {
       post: "/v1/extensions-testing/cleanup"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -84,12 +84,12 @@ service ExtensionTestingService {
   }
 
   rpc TestExtensionRevision(TestExtensionRevisionRequest) returns (TestExtensionRevisionResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Test extension";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Test extension";
     option (google.api.http) = {
       post: "/v1/extensions-testing/test"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -117,7 +117,7 @@ service ExtensionTestingService {
 }
 
 message InitializeTestingRevisionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Initialize testing revision request"
       required: [
@@ -129,7 +129,7 @@ message InitializeTestingRevisionRequest {
 }
 
 message InitializeTestingRevisionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Initialize testing revision response"
       required: []
@@ -138,7 +138,7 @@ message InitializeTestingRevisionResponse {
 }
 
 message CleanupTestingRevisionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Cleanup testing revision request"
       required: [
@@ -150,7 +150,7 @@ message CleanupTestingRevisionRequest {
 }
 
 message CleanupTestingRevisionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Cleanup testing revision response"
       required: []
@@ -159,7 +159,7 @@ message CleanupTestingRevisionResponse {
 }
 
 message TestExtensionRevisionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test extension revision request"
       required: [
@@ -168,11 +168,11 @@ message TestExtensionRevisionRequest {
     }
   };
   ExtensionData extension_data = 1;
-  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
 }
 
 message TestExtensionRevisionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test extension revision response"
       required: []

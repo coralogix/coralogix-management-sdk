@@ -166,6 +166,7 @@ type EventsFilter struct {
 	CxEventTypes           []*wrapperspb.StringValue `protobuf:"bytes,2,rep,name=cx_event_types,json=cxEventTypes,proto3" json:"cx_event_types,omitempty"`
 	CxEventKeys            []*wrapperspb.StringValue `protobuf:"bytes,4,rep,name=cx_event_keys,json=cxEventKeys,proto3" json:"cx_event_keys,omitempty"`
 	CxEventMetadataFilters *Filters                  `protobuf:"bytes,5,opt,name=cx_event_metadata_filters,json=cxEventMetadataFilters,proto3" json:"cx_event_metadata_filters,omitempty"`
+	CxEventLabelsFilters   *Filters                  `protobuf:"bytes,6,opt,name=cx_event_labels_filters,json=cxEventLabelsFilters,proto3" json:"cx_event_labels_filters,omitempty"`
 	unknownFields          protoimpl.UnknownFields
 	sizeCache              protoimpl.SizeCache
 }
@@ -224,6 +225,13 @@ func (x *EventsFilter) GetCxEventKeys() []*wrapperspb.StringValue {
 func (x *EventsFilter) GetCxEventMetadataFilters() *Filters {
 	if x != nil {
 		return x.CxEventMetadataFilters
+	}
+	return nil
+}
+
+func (x *EventsFilter) GetCxEventLabelsFilters() *Filters {
+	if x != nil {
+		return x.CxEventLabelsFilters
 	}
 	return nil
 }
@@ -480,12 +488,13 @@ const file_com_coralogixapis_events_v3_events_query_filter_proto_rawDesc = "" +
 	"\n" +
 	"5com/coralogixapis/events/v3/events_query_filter.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"^\n" +
 	"\x11EventsQueryFilter\x12I\n" +
-	"\ttimestamp\x18\x01 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeR\ttimestamp\"\xda\x03\n" +
+	"\ttimestamp\x18\x01 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeR\ttimestamp\"\xb7\x04\n" +
 	"\fEventsFilter\x12I\n" +
 	"\ttimestamp\x18\x01 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeR\ttimestamp\x12V\n" +
 	"\x0ecx_event_types\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r[\"test_type\"]R\fcxEventTypes\x12S\n" +
 	"\rcx_event_keys\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f[\"test_key\"]R\vcxEventKeys\x12_\n" +
-	"\x19cx_event_metadata_filters\x18\x05 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x16cxEventMetadataFilters:q\x92An\n" +
+	"\x19cx_event_metadata_filters\x18\x05 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x16cxEventMetadataFilters\x12[\n" +
+	"\x17cx_event_labels_filters\x18\x06 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x14cxEventLabelsFilters:q\x92An\n" +
 	"l*\fEventsFilter2/This data structure represents an events filter\xd2\x01\ttimestamp\xd2\x01\x0ecx_event_types\xd2\x01\rcx_event_keys\"\x92\x02\n" +
 	"\aFilters\x12b\n" +
 	"\boperator\x18\x01 \x01(\x0e2+.com.coralogixapis.events.v3.FilterOperatorB\x19\x92A\x16J\x14\"FILTER_OPERATOR_OR\"R\boperator\x12X\n" +
@@ -543,20 +552,21 @@ var file_com_coralogixapis_events_v3_events_query_filter_proto_depIdxs = []int32
 	8,  // 2: com.coralogixapis.events.v3.EventsFilter.cx_event_types:type_name -> google.protobuf.StringValue
 	8,  // 3: com.coralogixapis.events.v3.EventsFilter.cx_event_keys:type_name -> google.protobuf.StringValue
 	4,  // 4: com.coralogixapis.events.v3.EventsFilter.cx_event_metadata_filters:type_name -> com.coralogixapis.events.v3.Filters
-	0,  // 5: com.coralogixapis.events.v3.Filters.operator:type_name -> com.coralogixapis.events.v3.FilterOperator
-	5,  // 6: com.coralogixapis.events.v3.Filters.path_and_values:type_name -> com.coralogixapis.events.v3.FilterPathAndValues
-	8,  // 7: com.coralogixapis.events.v3.FilterPathAndValues.path:type_name -> google.protobuf.StringValue
-	6,  // 8: com.coralogixapis.events.v3.FilterPathAndValues.multiple_values:type_name -> com.coralogixapis.events.v3.MultipleValues
-	4,  // 9: com.coralogixapis.events.v3.FilterPathAndValues.filters:type_name -> com.coralogixapis.events.v3.Filters
-	8,  // 10: com.coralogixapis.events.v3.MultipleValues.values:type_name -> google.protobuf.StringValue
-	1,  // 11: com.coralogixapis.events.v3.MultipleValues.matcher:type_name -> com.coralogixapis.events.v3.FilterMatcher
-	9,  // 12: com.coralogixapis.events.v3.TimestampRange.from:type_name -> google.protobuf.Timestamp
-	9,  // 13: com.coralogixapis.events.v3.TimestampRange.to:type_name -> google.protobuf.Timestamp
-	14, // [14:14] is the sub-list for method output_type
-	14, // [14:14] is the sub-list for method input_type
-	14, // [14:14] is the sub-list for extension type_name
-	14, // [14:14] is the sub-list for extension extendee
-	0,  // [0:14] is the sub-list for field type_name
+	4,  // 5: com.coralogixapis.events.v3.EventsFilter.cx_event_labels_filters:type_name -> com.coralogixapis.events.v3.Filters
+	0,  // 6: com.coralogixapis.events.v3.Filters.operator:type_name -> com.coralogixapis.events.v3.FilterOperator
+	5,  // 7: com.coralogixapis.events.v3.Filters.path_and_values:type_name -> com.coralogixapis.events.v3.FilterPathAndValues
+	8,  // 8: com.coralogixapis.events.v3.FilterPathAndValues.path:type_name -> google.protobuf.StringValue
+	6,  // 9: com.coralogixapis.events.v3.FilterPathAndValues.multiple_values:type_name -> com.coralogixapis.events.v3.MultipleValues
+	4,  // 10: com.coralogixapis.events.v3.FilterPathAndValues.filters:type_name -> com.coralogixapis.events.v3.Filters
+	8,  // 11: com.coralogixapis.events.v3.MultipleValues.values:type_name -> google.protobuf.StringValue
+	1,  // 12: com.coralogixapis.events.v3.MultipleValues.matcher:type_name -> com.coralogixapis.events.v3.FilterMatcher
+	9,  // 13: com.coralogixapis.events.v3.TimestampRange.from:type_name -> google.protobuf.Timestamp
+	9,  // 14: com.coralogixapis.events.v3.TimestampRange.to:type_name -> google.protobuf.Timestamp
+	15, // [15:15] is the sub-list for method output_type
+	15, // [15:15] is the sub-list for method input_type
+	15, // [15:15] is the sub-list for extension type_name
+	15, // [15:15] is the sub-list for extension extendee
+	0,  // [0:15] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_events_v3_events_query_filter_proto_init() }

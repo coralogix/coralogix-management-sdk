@@ -7,8 +7,9 @@
 package routing
 
 import (
+	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -31,6 +32,11 @@ type RoutingRule struct {
 	Targets       []*RoutingTarget  `protobuf:"bytes,2,rep,name=targets,proto3" json:"targets,omitempty"`
 	CustomDetails map[string]string `protobuf:"bytes,3,rep,name=custom_details,json=customDetails,proto3" json:"custom_details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	Name          *string           `protobuf:"bytes,4,opt,name=name,proto3,oneof" json:"name,omitempty"`
+	// Entity type associated with the routing rule and its condition.
+	// This field is marked as optional as a temporary solution to ensure backward compatibility.
+	// If not provided, EntityType.Alerts will be assumed.
+	// This field will be made mandatory after all clients have migrated.
+	EntityType    *common.EntityType `protobuf:"varint,5,opt,name=entity_type,json=entityType,proto3,enum=com.coralogixapis.notification_center.EntityType,oneof" json:"entity_type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -93,6 +99,13 @@ func (x *RoutingRule) GetName() string {
 	return ""
 }
 
+func (x *RoutingRule) GetEntityType() common.EntityType {
+	if x != nil && x.EntityType != nil {
+		return *x.EntityType
+	}
+	return common.EntityType(0)
+}
+
 type RoutingTarget struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	CustomDetails map[string]string      `protobuf:"bytes,4,rep,name=custom_details,json=customDetails,proto3" json:"custom_details,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
@@ -153,10 +166,16 @@ func (x *RoutingTarget) GetPresetId() string {
 	return ""
 }
 
+// The ConnectorSchemaService can be used to retrieve the connector config and message config schemas
+// and the list of supported payload types for each connector.
 type SourceOverrides struct {
-	state                 protoimpl.MessageState              `protogen:"open.v1"`
-	PayloadType           string                              `protobuf:"bytes,1,opt,name=payload_type,json=payloadType,proto3" json:"payload_type,omitempty"`
-	MessageConfigFields   []*v1.MessageConfigField            `protobuf:"bytes,3,rep,name=message_config_fields,json=messageConfigFields,proto3" json:"message_config_fields,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Payload type for the notification.
+	PayloadType string `protobuf:"bytes,1,opt,name=payload_type,json=payloadType,proto3" json:"payload_type,omitempty"`
+	// Overrides for the message configuration that defines notification content.
+	MessageConfigFields []*v1.MessageConfigField `protobuf:"bytes,3,rep,name=message_config_fields,json=messageConfigFields,proto3" json:"message_config_fields,omitempty"`
+	// Overrides for the connector configuration that identify where the notification should be sent and auth details.
+	// Fields are customizable if they have requires_rendering = true in the connector configuration schema.
 	ConnectorConfigFields []*v1.TemplatedConnectorConfigField `protobuf:"bytes,5,rep,name=connector_config_fields,json=connectorConfigFields,proto3" json:"connector_config_fields,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
@@ -213,111 +232,33 @@ func (x *SourceOverrides) GetConnectorConfigFields() []*v1.TemplatedConnectorCon
 	return nil
 }
 
-type GlobalRouterIdentifier struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Value:
-	//
-	//	*GlobalRouterIdentifier_Id
-	//	*GlobalRouterIdentifier_UserFacingId
-	Value         isGlobalRouterIdentifier_Value `protobuf_oneof:"value"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *GlobalRouterIdentifier) Reset() {
-	*x = GlobalRouterIdentifier{}
-	mi := &file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *GlobalRouterIdentifier) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*GlobalRouterIdentifier) ProtoMessage() {}
-
-func (x *GlobalRouterIdentifier) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use GlobalRouterIdentifier.ProtoReflect.Descriptor instead.
-func (*GlobalRouterIdentifier) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *GlobalRouterIdentifier) GetValue() isGlobalRouterIdentifier_Value {
-	if x != nil {
-		return x.Value
-	}
-	return nil
-}
-
-func (x *GlobalRouterIdentifier) GetId() string {
-	if x != nil {
-		if x, ok := x.Value.(*GlobalRouterIdentifier_Id); ok {
-			return x.Id
-		}
-	}
-	return ""
-}
-
-func (x *GlobalRouterIdentifier) GetUserFacingId() string {
-	if x != nil {
-		if x, ok := x.Value.(*GlobalRouterIdentifier_UserFacingId); ok {
-			return x.UserFacingId
-		}
-	}
-	return ""
-}
-
-type isGlobalRouterIdentifier_Value interface {
-	isGlobalRouterIdentifier_Value()
-}
-
-type GlobalRouterIdentifier_Id struct {
-	Id string `protobuf:"bytes,1,opt,name=id,proto3,oneof"`
-}
-
-type GlobalRouterIdentifier_UserFacingId struct {
-	UserFacingId string `protobuf:"bytes,2,opt,name=user_facing_id,json=userFacingId,proto3,oneof"`
-}
-
-func (*GlobalRouterIdentifier_Id) isGlobalRouterIdentifier_Value() {}
-
-func (*GlobalRouterIdentifier_UserFacingId) isGlobalRouterIdentifier_Value() {}
-
 var File_com_coralogixapis_notification_center_common_v1_routing_routing_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDesc = "" +
 	"\n" +
-	"Ecom/coralogixapis/notification_center/common/v1/routing/routing.proto\x12-com.coralogixapis.notification_center.routing\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xd1\x04\n" +
+	"Ecom/coralogixapis/notification_center/common/v1/routing/routing.proto\x12-com.coralogixapis.notification_center.routing\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc9\x05\n" +
 	"\vRoutingRule\x12>\n" +
-	"\tcondition\x18\x01 \x01(\tB \x92A\x1dJ\x1b\"alertDef.priority == 'P3'\"R\tcondition\x12V\n" +
+	"\tcondition\x18\x01 \x01(\tB \x9aA\x1dJ\x1b\"alertDef.priority == 'P3'\"R\tcondition\x12V\n" +
 	"\atargets\x18\x02 \x03(\v2<.com.coralogixapis.notification_center.routing.RoutingTargetR\atargets\x12t\n" +
 	"\x0ecustom_details\x18\x03 \x03(\v2M.com.coralogixapis.notification_center.routing.RoutingRule.CustomDetailsEntryR\rcustomDetails\x12\x17\n" +
-	"\x04name\x18\x04 \x01(\tH\x00R\x04name\x88\x01\x01\x1a@\n" +
+	"\x04name\x18\x04 \x01(\tH\x00R\x04name\x88\x01\x01\x12f\n" +
+	"\ventity_type\x18\x05 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
+	"J\b\"ALERTS\"H\x01R\n" +
+	"entityType\x88\x01\x01\x1a@\n" +
 	"\x12CustomDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcf\x01\x92A\xcb\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcf\x01\x9aA\xcb\x01\n" +
 	"L*\fRouting Rule2&Defines routing rule for notifications\xd2\x01\tcondition\xd2\x01\atargets*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\a\n" +
-	"\x05_name\"\xf3\x04\n" +
+	"\x05_nameB\x0e\n" +
+	"\f_entity_type\"\xf3\x04\n" +
 	"\rRoutingTarget\x12v\n" +
 	"\x0ecustom_details\x18\x04 \x03(\v2O.com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntryR\rcustomDetails\x12!\n" +
 	"\fconnector_id\x18\a \x01(\tR\vconnectorId\x12 \n" +
 	"\tpreset_id\x18\b \x01(\tH\x00R\bpresetId\x88\x01\x01\x1a@\n" +
 	"\x12CustomDetailsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcc\x01\x92A\xc8\x01\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xcc\x01\x9aA\xc8\x01\n" +
 	"I*\x0eRouting Target2(Defines routing target for notifications\xd2\x01\fconnector_id*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\f\n" +
 	"\n" +
@@ -325,11 +266,7 @@ const file_com_coralogixapis_notification_center_common_v1_routing_routing_proto
 	"\x0fSourceOverrides\x12!\n" +
 	"\fpayload_type\x18\x01 \x01(\tR\vpayloadType\x12m\n" +
 	"\x15message_config_fields\x18\x03 \x03(\v29.com.coralogixapis.notification_center.MessageConfigFieldR\x13messageConfigFields\x12|\n" +
-	"\x17connector_config_fields\x18\x05 \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x15connectorConfigFieldsJ\x04\b\x04\x10\x05R\"deprecated_connector_config_fields\"[\n" +
-	"\x16GlobalRouterIdentifier\x12\x10\n" +
-	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x12&\n" +
-	"\x0euser_facing_id\x18\x02 \x01(\tH\x00R\fuserFacingIdB\a\n" +
-	"\x05valueB/Z-com/coralogixapis/notification_center/routingb\x06proto3"
+	"\x17connector_config_fields\x18\x05 \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x15connectorConfigFieldsJ\x04\b\x04\x10\x05R\"deprecated_connector_config_fieldsB/Z-com/coralogixapis/notification_center/routingb\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDescOnce sync.Once
@@ -343,28 +280,29 @@ func file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_
 	return file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDescData
 }
 
-var file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_goTypes = []any{
 	(*RoutingRule)(nil),                      // 0: com.coralogixapis.notification_center.routing.RoutingRule
 	(*RoutingTarget)(nil),                    // 1: com.coralogixapis.notification_center.routing.RoutingTarget
 	(*SourceOverrides)(nil),                  // 2: com.coralogixapis.notification_center.routing.SourceOverrides
-	(*GlobalRouterIdentifier)(nil),           // 3: com.coralogixapis.notification_center.routing.GlobalRouterIdentifier
-	nil,                                      // 4: com.coralogixapis.notification_center.routing.RoutingRule.CustomDetailsEntry
-	nil,                                      // 5: com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntry
+	nil,                                      // 3: com.coralogixapis.notification_center.routing.RoutingRule.CustomDetailsEntry
+	nil,                                      // 4: com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntry
+	(common.EntityType)(0),                   // 5: com.coralogixapis.notification_center.EntityType
 	(*v1.MessageConfigField)(nil),            // 6: com.coralogixapis.notification_center.MessageConfigField
 	(*v1.TemplatedConnectorConfigField)(nil), // 7: com.coralogixapis.notification_center.TemplatedConnectorConfigField
 }
 var file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_depIdxs = []int32{
 	1, // 0: com.coralogixapis.notification_center.routing.RoutingRule.targets:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget
-	4, // 1: com.coralogixapis.notification_center.routing.RoutingRule.custom_details:type_name -> com.coralogixapis.notification_center.routing.RoutingRule.CustomDetailsEntry
-	5, // 2: com.coralogixapis.notification_center.routing.RoutingTarget.custom_details:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntry
-	6, // 3: com.coralogixapis.notification_center.routing.SourceOverrides.message_config_fields:type_name -> com.coralogixapis.notification_center.MessageConfigField
-	7, // 4: com.coralogixapis.notification_center.routing.SourceOverrides.connector_config_fields:type_name -> com.coralogixapis.notification_center.TemplatedConnectorConfigField
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	3, // 1: com.coralogixapis.notification_center.routing.RoutingRule.custom_details:type_name -> com.coralogixapis.notification_center.routing.RoutingRule.CustomDetailsEntry
+	5, // 2: com.coralogixapis.notification_center.routing.RoutingRule.entity_type:type_name -> com.coralogixapis.notification_center.EntityType
+	4, // 3: com.coralogixapis.notification_center.routing.RoutingTarget.custom_details:type_name -> com.coralogixapis.notification_center.routing.RoutingTarget.CustomDetailsEntry
+	6, // 4: com.coralogixapis.notification_center.routing.SourceOverrides.message_config_fields:type_name -> com.coralogixapis.notification_center.MessageConfigField
+	7, // 5: com.coralogixapis.notification_center.routing.SourceOverrides.connector_config_fields:type_name -> com.coralogixapis.notification_center.TemplatedConnectorConfigField
+	6, // [6:6] is the sub-list for method output_type
+	6, // [6:6] is the sub-list for method input_type
+	6, // [6:6] is the sub-list for extension type_name
+	6, // [6:6] is the sub-list for extension extendee
+	0, // [0:6] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_init() }
@@ -374,17 +312,13 @@ func file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_
 	}
 	file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes[0].OneofWrappers = []any{}
 	file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes[1].OneofWrappers = []any{}
-	file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_msgTypes[3].OneofWrappers = []any{
-		(*GlobalRouterIdentifier_Id)(nil),
-		(*GlobalRouterIdentifier_UserFacingId)(nil),
-	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDesc), len(file_com_coralogixapis_notification_center_common_v1_routing_routing_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   5,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

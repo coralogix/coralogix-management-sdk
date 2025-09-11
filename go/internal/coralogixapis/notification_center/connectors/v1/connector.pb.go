@@ -9,7 +9,7 @@ package v1
 import (
 	common "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common"
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/notification_center/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -500,19 +500,19 @@ var File_com_coralogixapis_notification_center_connectors_v1_connector_proto pro
 
 const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x91\b\n" +
+	"Ccom/coralogixapis/notification_center/connectors/v1/connector.proto\x123com.coralogixapis.notification_center.connectors.v1\x1a9com/coralogixapis/notification_center/common/common.proto\x1aCcom/coralogixapis/notification_center/common/v1/config_fields.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x91\b\n" +
 	"\tConnector\x12@\n" +
-	"\x02id\x18\x01 \x01(\tB+\x92A(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12H\n" +
+	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"H\x00R\x02id\x88\x01\x01\x12H\n" +
 	"\x04type\x18\x03 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x12*\n" +
-	"\ateam_id\x18\x04 \x01(\rB\f\x92A\tJ\a\"12345\"H\x01R\x06teamId\x88\x01\x01\x120\n" +
-	"\x04name\x18\x05 \x01(\tB\x1c\x92A\x19J\x14\"My Slack Connector\"x\xc8\x01R\x04name\x12L\n" +
-	"\vdescription\x18\x06 \x01(\tB*\x92A'J\"\"Connector for team notifications\"x\x88'R\vdescription\x12@\n" +
+	"\ateam_id\x18\x04 \x01(\rB\f\x9aA\tJ\a\"12345\"H\x01R\x06teamId\x88\x01\x01\x120\n" +
+	"\x04name\x18\x05 \x01(\tB\x1c\x9aA\x19J\x14\"My Slack Connector\"x\xc8\x01R\x04name\x12L\n" +
+	"\vdescription\x18\x06 \x01(\tB*\x9aA'J\"\"Connector for team notifications\"x\x88'R\vdescription\x12@\n" +
 	"\vcreate_time\x18\a \x01(\v2\x1a.google.protobuf.TimestampH\x02R\n" +
 	"createTime\x88\x01\x01\x12@\n" +
 	"\vupdate_time\x18\b \x01(\v2\x1a.google.protobuf.TimestampH\x03R\n" +
 	"updateTime\x88\x01\x01\x12y\n" +
 	"\x10config_overrides\x18\v \x03(\v2N.com.coralogixapis.notification_center.connectors.v1.EntityTypeConfigOverridesR\x0fconfigOverrides\x12o\n" +
-	"\x10connector_config\x18\f \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfig:\xe5\x01\x92A\xe1\x01\n" +
+	"\x10connector_config\x18\f \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfig:\xe5\x01\x9aA\xe1\x01\n" +
 	"b*\tConnector23A connector configuration for sending notifications\xd2\x01\x04type\xd2\x01\x04name\xd2\x01\x11connector_configs*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B\x05\n" +
 	"\x03_idB\n" +
@@ -539,7 +539,7 @@ const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_r
 	" \x01(\v2D.com.coralogixapis.notification_center.connectors.v1.ConnectorConfigR\x0fconnectorConfigB\x0e\n" +
 	"\f_update_time\"\x93\x02\n" +
 	"\x19EntityTypeConfigOverrides\x12a\n" +
-	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x92A\n" +
+	"\ventity_type\x18\x03 \x01(\x0e21.com.coralogixapis.notification_center.EntityTypeB\r\x9aA\n" +
 	"J\b\"ALERTS\"R\n" +
 	"entityType\x12\\\n" +
 	"\x06fields\x18\x04 \x03(\v2D.com.coralogixapis.notification_center.TemplatedConnectorConfigFieldR\x06fieldsJ\x04\b\x01\x10\x02J\x04\b\x02\x10\x03R\x16deprecated_entity_typeR\x11connector_configs\"\xa6\x03\n" +
@@ -560,12 +560,12 @@ const file_com_coralogixapis_notification_center_connectors_v1_connector_proto_r
 	"\f_update_timeJ\x04\b\x02\x10\x03J\x04\b\t\x10\n" +
 	"R\x0fuser_defined_idR\ventity_type\"\xd1\x02\n" +
 	"\x0fConnectorConfig\x12S\n" +
-	"\x06fields\x18\x02 \x03(\v2;.com.coralogixapis.notification_center.ConnectorConfigFieldR\x06fields:\xd0\x01\x92A\xcc\x01\n" +
+	"\x06fields\x18\x02 \x03(\v2;.com.coralogixapis.notification_center.ConnectorConfigFieldR\x06fields:\xd0\x01\x9aA\xcc\x01\n" +
 	"M*\x10Connector Config29Configuration for a specific output schema of a connector*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/J\x04\b\x01\x10\x02R\x10output_schema_id\"\xca\x02\n" +
 	"\x14ConnectorTypeSummary\x12H\n" +
 	"\x04type\x18\x01 \x01(\x0e24.com.coralogixapis.notification_center.ConnectorTypeR\x04type\x12\x1e\n" +
-	"\x05count\x18\x02 \x01(\rB\b\x92A\x05J\x03\"5\"R\x05count:\xc7\x01\x92A\xc3\x01\n" +
+	"\x05count\x18\x02 \x01(\rB\b\x9aA\x05J\x03\"5\"R\x05count:\xc7\x01\x9aA\xc3\x01\n" +
 	"D*\x16Connector Type Summary2*Summary information about a connector type*{\n" +
 	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/B5Z3com/coralogixapis/notification_center/connectors/v1b\x06proto3"
 

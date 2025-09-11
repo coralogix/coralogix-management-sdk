@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -79,11 +79,11 @@ var File_com_coralogixapis_incidents_v1_meta_label_proto protoreflect.FileDescri
 
 const file_com_coralogixapis_incidents_v1_meta_label_proto_rawDesc = "" +
 	"\n" +
-	"/com/coralogixapis/incidents/v1/meta_label.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa5\x01\n" +
+	"/com/coralogixapis/incidents/v1/meta_label.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa5\x01\n" +
 	"\tMetaLabel\x12:\n" +
 	"\x03key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
-	"\x92A\aJ\x05\"key\"R\x03key\x12@\n" +
-	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\f\x92A\tJ\a\"value\"R\x05value:\x1a\x92A\x17\n" +
+	"\x9aA\aJ\x05\"key\"R\x03key\x12@\n" +
+	"\x05value\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\f\x9aA\tJ\a\"value\"R\x05value:\x1a\x9aA\x17\n" +
 	"\x15*\x13Incident meta labelb\x06proto3"
 
 var (

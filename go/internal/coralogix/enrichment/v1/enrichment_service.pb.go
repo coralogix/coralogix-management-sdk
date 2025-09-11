@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -561,32 +561,32 @@ var File_com_coralogix_enrichment_v1_enrichment_service_proto protoreflect.FileD
 
 const file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogix/enrichment/v1/enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a=com/coralogix/enrichment/v1/company_enrichment_settings.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x1b\n" +
+	"4com/coralogix/enrichment/v1/enrichment_service.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a,com/coralogix/enrichment/v1/enrichment.proto\x1a:com/coralogix/enrichment/v1/enrichment_request_model.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a=com/coralogix/enrichment/v1/company_enrichment_settings.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x1b\n" +
 	"\x19GetEnrichmentLimitRequest\"\xbe\x02\n" +
 	"\x1aGetEnrichmentLimitResponse\x12\x1d\n" +
-	"\x05limit\x18\x01 \x01(\rB\a\x92A\x04J\x0210R\x05limit\x12\x1a\n" +
-	"\x04used\x18\x02 \x01(\rB\x06\x92A\x03J\x015R\x04used:\xe4\x01\x92A\xe0\x01\n" +
+	"\x05limit\x18\x01 \x01(\rB\a\x9aA\x04J\x0210R\x05limit\x12\x1a\n" +
+	"\x04used\x18\x02 \x01(\rB\x06\x9aA\x03J\x015R\x04used:\xe4\x01\x9aA\xe0\x01\n" +
 	"`*\x10Enrichment Limit2=This response data structure represents the enrichments limit\xd2\x01\x05limit\xd2\x01\x04used*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\x17\n" +
 	"\x15GetEnrichmentsRequest\"\xd4\x02\n" +
 	"\x16GetEnrichmentsResponse\x12I\n" +
-	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments:\xee\x01\x92A\xea\x01\n" +
+	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments:\xee\x01\x9aA\xea\x01\n" +
 	"j*\x15Enrichment Collection2CThis response data structure represents a collection of enrichments\xd2\x01\venrichments*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xfd\x02\n" +
 	"\x15AddEnrichmentsRequest\x12d\n" +
-	"\x13request_enrichments\x18\x01 \x03(\v23.com.coralogix.enrichment.v1.EnrichmentRequestModelR\x12requestEnrichments:\xfd\x01\x92A\xf9\x01\n" +
+	"\x13request_enrichments\x18\x01 \x03(\v23.com.coralogix.enrichment.v1.EnrichmentRequestModelR\x12requestEnrichments:\xfd\x01\x9aA\xf9\x01\n" +
 	"y*\x1cEnrichments Creation Request2CThis response data structure represents a collection of enrichments\xd2\x01\x13request_enrichments*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xca\x02\n" +
 	"\x16AddEnrichmentsResponse\x12I\n" +
-	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments:\xe4\x01\x92A\xe0\x01\n" +
+	"\venrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\venrichments:\xe4\x01\x9aA\xe0\x01\n" +
 	"`*\x1eEncrichments Creation Response20Response data structure for enrichments creation\xd2\x01\venrichments*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xd8\x02\n" +
 	"\x18RemoveEnrichmentsRequest\x12S\n" +
-	"\x0eenrichment_ids\x18\x01 \x03(\v2\x1c.google.protobuf.UInt32ValueB\x0e\x92A\vJ\t[1, 2, 3]R\renrichmentIds:\xe6\x01\x92A\xe2\x01\n" +
+	"\x0eenrichment_ids\x18\x01 \x03(\v2\x1c.google.protobuf.UInt32ValueB\x0e\x9aA\vJ\t[1, 2, 3]R\renrichmentIds:\xe6\x01\x9aA\xe2\x01\n" +
 	"b*\x1eEncrichments Delettion Request2/Request data structure for enrichments deletion\xd2\x01\x0eenrichment_ids*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xeb\x02\n" +
 	"\x19RemoveEnrichmentsResponse\x12\\\n" +
-	"\x15remaining_enrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\x14remainingEnrichments:\xef\x01\x92A\xeb\x01\n" +
+	"\x15remaining_enrichments\x18\x01 \x03(\v2'.com.coralogix.enrichment.v1.EnrichmentR\x14remainingEnrichments:\xef\x01\x9aA\xeb\x01\n" +
 	"k*\x1fEncrichments Delettion Response20Response data structure for enrichments deletion\xd2\x01\x15remaining_enrichments*|\n" +
 	"\x1fFind out more about enrichments\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xcc\x02\n" +
 	"!AtomicOverwriteEnrichmentsRequest\x12X\n" +
@@ -600,18 +600,18 @@ const file_com_coralogix_enrichment_v1_enrichment_service_proto_rawDesc = "" +
 	"\x13enrichment_settings\x18\x01 \x01(\v26.com.coralogix.enrichment.v1.CompanyEnrichmentSettingsR\x12enrichmentSettings2\xd6\n" +
 	"\n" +
 	"\x11EnrichmentService\x12\xb8\x01\n" +
-	"\x0eGetEnrichments\x122.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"=\x92A&\n" +
+	"\x0eGetEnrichments\x122.com.coralogix.enrichment.v1.GetEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.GetEnrichmentsResponse\"=\x9aA&\n" +
 	"\x13Enrichments Service\x12\x0fGet Enrichments\x82\xd3\xe4\x93\x02\x0e\x12\f/enrichments\x12\xbb\x01\n" +
-	"\x0eAddEnrichments\x122.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"@\x92A&\n" +
+	"\x0eAddEnrichments\x122.com.coralogix.enrichment.v1.AddEnrichmentsRequest\x1a3.com.coralogix.enrichment.v1.AddEnrichmentsResponse\"@\x9aA&\n" +
 	"\x13Enrichments Service\x12\x0fAdd Enrichments\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/enrichments\x12\xc4\x01\n" +
-	"\x11RemoveEnrichments\x125.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a6.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"@\x92A)\n" +
+	"\x11RemoveEnrichments\x125.com.coralogix.enrichment.v1.RemoveEnrichmentsRequest\x1a6.com.coralogix.enrichment.v1.RemoveEnrichmentsResponse\"@\x9aA)\n" +
 	"\x13Enrichments Service\x12\x12Delete Enrichments\x82\xd3\xe4\x93\x02\x0e*\f/enrichments\x12\xcf\x01\n" +
-	"\x12GetEnrichmentLimit\x126.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a7.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"H\x92A+\n" +
+	"\x12GetEnrichmentLimit\x126.com.coralogix.enrichment.v1.GetEnrichmentLimitRequest\x1a7.com.coralogix.enrichment.v1.GetEnrichmentLimitResponse\"H\x9aA+\n" +
 	"\x13Enrichments Service\x12\x14Get Enrichment Limit\x82\xd3\xe4\x93\x02\x14\x12\x12/enrichments/limit\x12\xfc\x01\n" +
-	"\x1aAtomicOverwriteEnrichments\x12>.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest\x1a?.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse\"]\x92A3\n" +
+	"\x1aAtomicOverwriteEnrichments\x12>.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsRequest\x1a?.com.coralogix.enrichment.v1.AtomicOverwriteEnrichmentsResponse\"]\x9aA3\n" +
 	"\x13Enrichments Service\x12\x1cAtomic Overwrite Enrichments\x82\xd3\xe4\x93\x02!:\x01*2\x1c/enrichments:atomicOverwrite\x12\xfb\x01\n" +
-	"\x1cGetCompanyEnrichmentSettings\x12@.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest\x1aA.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse\"V\x92A6\n" +
-	"\x13Enrichments Service\x12\x1fGet Company Enrichment Settings\x82\xd3\xe4\x93\x02\x17\x12\x15/enrichments/settings\x1a2\x92A/\n" +
+	"\x1cGetCompanyEnrichmentSettings\x12@.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsRequest\x1aA.com.coralogix.enrichment.v1.GetCompanyEnrichmentSettingsResponse\"V\x9aA6\n" +
+	"\x13Enrichments Service\x12\x1fGet Company Enrichment Settings\x82\xd3\xe4\x93\x02\x17\x12\x15/enrichments/settings\x1a2\x9aA/\n" +
 	"\x13Enrichments Service\x12\x18Manage your enrichments.b\x06proto3"
 
 var (

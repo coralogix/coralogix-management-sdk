@@ -3,8 +3,8 @@ syntax = "proto3";
 package com.coralogix.archive.v2;
 
 import "com/coralogix/archive/v2/target.proto";
-import "com/coralogix/common/v1/audit_log.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 
@@ -13,7 +13,7 @@ import "google/api/annotations.proto";
 message GetTargetRequest {}
 
 message GetTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Target Response"
       description: "This data structure is used to retrieve a storage target for logs."
@@ -31,7 +31,7 @@ message GetTargetResponse {
 }
 
 message SetTargetRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is used to set a storage target for logs."
@@ -46,7 +46,7 @@ message SetTargetRequest {
     }
   };
 
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
   oneof target_spec {
     S3TargetSpec s3 = 2;
     IBMCosTargetSpec ibm_cos = 3;
@@ -54,7 +54,7 @@ message SetTargetRequest {
 }
 
 message SetTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting a storage target for logs."
@@ -71,7 +71,7 @@ message SetTargetResponse {
 }
 
 message SetExternalTargetRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set External Target Request"
       description: "This data structure is obtained after setting an external storage target for logs."
@@ -86,16 +86,16 @@ message SetExternalTargetRequest {
       description: "Find out more about archives"
     }
   };
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
   oneof target_spec {
     S3TargetSpec s3 = 2;
     IBMCosTargetSpec ibm_cos = 3;
   }
-  uint32 company_id = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  uint32 company_id = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message SetExternalTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting an external storage target for logs."
@@ -112,7 +112,7 @@ message SetExternalTargetResponse {
 }
 
 message CompanyArchiveConfig {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Common Archive Config"
       description: "This data structure represents a common archive configuration for a company within the organization."
@@ -125,12 +125,12 @@ message CompanyArchiveConfig {
       description: "Find out more about archives"
     }
   };
-  uint32 company_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "1234567" }];
-  bool archive_configured = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  uint32 company_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "1234567" }];
+  bool archive_configured = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 message ValidateTargetRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is used to validate a storage target for logs."
@@ -152,7 +152,7 @@ message ValidateTargetRequest {
 }
 
 message ValidateTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Validate Target Response"
       description: "This data structure is obtained after validating a storage target for logs."
@@ -165,11 +165,11 @@ message ValidateTargetResponse {
       description: "Find out more about archives"
     }
   };
-  bool is_valid = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool is_valid = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
 }
 
 service TargetService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Target Service"
     description: "View and manage your storage targets for logs."
     external_docs: {
@@ -178,11 +178,11 @@ service TargetService {
     }
   };
   rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get target";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get target";
     option (google.api.http) = {
       get: "/v2/target"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -201,13 +201,13 @@ service TargetService {
   }
 
   rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Set target";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Set target";
     option (google.api.http) = {
       post: "/v2/target"
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -226,13 +226,13 @@ service TargetService {
   }
 
   rpc ValidateTarget(ValidateTargetRequest) returns (ValidateTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Validate target";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Validate target";
     option (google.api.http) = {
       post: "/v2/target:validate"
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -252,7 +252,7 @@ service TargetService {
 }
 
 service S3TargetService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Target Service"
     description: "View and manage your storage targets for logs."
     external_docs: {
@@ -261,11 +261,11 @@ service S3TargetService {
     }
   };
   rpc GetTarget(S3TargetServiceGetTargetRequest) returns (S3TargetServiceGetTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get target";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get target";
     option (google.api.http) = {
       get: "/v2/target"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -284,13 +284,13 @@ service S3TargetService {
   }
 
   rpc SetTarget(S3TargetServiceSetTargetRequest) returns (S3TargetServiceSetTargetResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Set target";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Set target";
     option (google.api.http) = {
       post: "/v2/target"
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -312,7 +312,7 @@ service S3TargetService {
 message S3TargetServiceGetTargetRequest {}
 
 message S3TargetServiceGetTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get Target Response"
       description: "This data structure is used to retrieve a storage target for logs."
@@ -330,7 +330,7 @@ message S3TargetServiceGetTargetResponse {
 }
 
 message S3TargetServiceSetTargetRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is used to set a storage target for logs."
@@ -345,14 +345,14 @@ message S3TargetServiceSetTargetRequest {
     }
   };
 
-  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "true" }];
+  bool is_active = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "true" }];
   oneof target_spec {
     S3TargetSpec s3 = 2;
   }
 }
 
 message S3TargetServiceSetTargetResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Set Target Response"
       description: "This data structure is obtained after setting a storage target for logs."
