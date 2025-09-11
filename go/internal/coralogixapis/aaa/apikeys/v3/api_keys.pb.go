@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -949,48 +949,48 @@ var File_com_coralogixapis_aaa_apikeys_v3_api_keys_proto protoreflect.FileDescri
 
 const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\n" +
-	"/com/coralogixapis/aaa/apikeys/v3/api_keys.proto\x12 com.coralogixapis.aaa.apikeys.v3\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"q\n" +
+	"/com/coralogixapis/aaa/apikeys/v3/api_keys.proto\x12 com.coralogixapis.aaa.apikeys.v3\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"q\n" +
 	"\x05Owner\x12\x19\n" +
 	"\auser_id\x18\x01 \x01(\tH\x00R\x06userId\x12\x19\n" +
 	"\ateam_id\x18\x02 \x01(\rH\x00R\x06teamId\x12)\n" +
 	"\x0forganisation_id\x18\x03 \x01(\tH\x00R\x0eorganisationIdB\a\n" +
 	"\x05owner\"\xc1\a\n" +
 	"\aKeyInfo\x12%\n" +
-	"\x04name\x18\x01 \x01(\tB\x11\x92A\x0eJ\f\"my_api_key\"R\x04name\x12O\n" +
-	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerB\x10\x92A\rJ\v\"a_user_id\"R\x05owner\x12!\n" +
-	"\x06active\x18\x03 \x01(\bB\t\x92A\x06J\x04trueR\x06active\x12!\n" +
-	"\x06hashed\x18\x04 \x01(\bB\t\x92A\x06J\x04trueR\x06hashed\x12a\n" +
+	"\x04name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12O\n" +
+	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerB\x10\x9aA\rJ\v\"a_user_id\"R\x05owner\x12!\n" +
+	"\x06active\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueR\x06active\x12!\n" +
+	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x12a\n" +
 	"\x0fkey_permissions\x18\x05 \x01(\v28.com.coralogixapis.aaa.apikeys.v3.KeyInfo.KeyPermissionsR\x0ekeyPermissions\x12\x19\n" +
 	"\x05value\x18\x06 \x01(\tH\x00R\x05value\x88\x01\x01\x12\x0e\n" +
 	"\x02id\x18\a \x01(\tR\x02id\x1a\xd9\x02\n" +
 	"\x0eKeyPermissions\x12F\n" +
 	"\apresets\x18\x01 \x03(\v2,.com.coralogixapis.aaa.apikeys.v3.PresetInfoR\apresets\x12 \n" +
-	"\vpermissions\x18\x02 \x03(\tR\vpermissions:\xdc\x01\x92A\xd8\x01\n" +
+	"\vpermissions\x18\x02 \x03(\tR\vpermissions:\xdc\x01\x9aA\xd8\x01\n" +
 	"h*\x0fKey Permissions2=This data structure represents the permissions on an API key.\xd2\x01\apresets\xd2\x01\vpermissions*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\x83\x02\x92A\xff\x01\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\x83\x02\x9aA\xff\x01\n" +
 	"\x8e\x01*\bKey Info2JThis data structure represents the information associated with an API key.\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\x05owner\xd2\x01\x06active\xd2\x01\x06hashed\xd2\x01\x0fkey_permissions*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/B\b\n" +
 	"\x06_value\"\xcc\x02\n" +
 	"\n" +
 	"PresetInfo\x12$\n" +
-	"\x04name\x18\x01 \x01(\tB\x10\x92A\rJ\v\"my_preset\"R\x04name\x124\n" +
-	"\vpermissions\x18\x02 \x03(\tB\x12\x92A\x0fJ\r[\"read_logs\"]R\vpermissions:\xe1\x01\x92A\xdd\x01\n" +
+	"\x04name\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_preset\"R\x04name\x124\n" +
+	"\vpermissions\x18\x02 \x03(\tB\x12\x9aA\x0fJ\r[\"read_logs\"]R\vpermissions:\xe1\x01\x9aA\xdd\x01\n" +
 	"m*\vPreset Info2IThis data structure represents a preset set of permissions on an API key.\xd2\x01\x04name\xd2\x01\vpermissions*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xed\b\n" +
 	"\x13UpdateApiKeyRequest\x12'\n" +
-	"\x06key_id\x18\x01 \x01(\tB\x10\x92A\rJ\v\"my_key_id\"R\x05keyId\x122\n" +
-	"\bnew_name\x18\x02 \x01(\tB\x12\x92A\x0fJ\r\"my_new_name\"H\x00R\anewName\x88\x01\x01\x12+\n" +
-	"\tis_active\x18\x03 \x01(\bB\t\x92A\x06J\x04trueH\x01R\bisActive\x88\x01\x01\x12\\\n" +
+	"\x06key_id\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_key_id\"R\x05keyId\x122\n" +
+	"\bnew_name\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"my_new_name\"H\x00R\anewName\x88\x01\x01\x12+\n" +
+	"\tis_active\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueH\x01R\bisActive\x88\x01\x01\x12\\\n" +
 	"\apresets\x18\x04 \x01(\v2=.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest.PresetsH\x02R\apresets\x88\x01\x01\x12h\n" +
 	"\vpermissions\x18\x05 \x01(\v2A.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest.PermissionsH\x03R\vpermissions\x88\x01\x01\x1a\xf9\x01\n" +
 	"\aPresets\x12\x18\n" +
-	"\apresets\x18\x01 \x03(\tR\apresets:\xd3\x01\x92A\xcf\x01\n" +
+	"\apresets\x18\x01 \x03(\tR\apresets:\xd3\x01\x9aA\xcf\x01\n" +
 	"_*\aPresets2JThis data structure represents a set of permissions presets on an API key.\xd2\x01\apresets*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\x1a\x85\x02\n" +
 	"\vPermissions\x12 \n" +
-	"\vpermissions\x18\x01 \x03(\tR\vpermissions:\xd3\x01\x92A\xcf\x01\n" +
+	"\vpermissions\x18\x01 \x03(\tR\vpermissions:\xd3\x01\x9aA\xcf\x01\n" +
 	"_*\vPermissions2BThis data structure represents a set of permissions on an API key.\xd2\x01\vpermissions*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xc8\x01\x92A\xc4\x01\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xc8\x01\x9aA\xc4\x01\n" +
 	"T*\x16Update Api Key Request21This data structure is used to update an API key.\xd2\x01\x06key_id*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/B\v\n" +
 	"\t_new_nameB\f\n" +
@@ -1001,43 +1001,43 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\f_permissions\"\x16\n" +
 	"\x14UpdateApiKeyResponse\"\xf7\x01\n" +
 	"\x13DeleteApiKeyRequest\x12\x15\n" +
-	"\x06key_id\x18\x01 \x01(\tR\x05keyId:\xc8\x01\x92A\xc4\x01\n" +
+	"\x06key_id\x18\x01 \x01(\tR\x05keyId:\xc8\x01\x9aA\xc4\x01\n" +
 	"T*\x16Delete Api Key Request21This data structure is used to delete an API key.\xd2\x01\x06key_id*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x16\n" +
 	"\x14DeleteApiKeyResponse\"\xf1\x06\n" +
 	"\x13CreateApiKeyRequest\x12%\n" +
-	"\x04name\x18\x01 \x01(\tB\x11\x92A\x0eJ\f\"my_api_key\"R\x04name\x12=\n" +
+	"\x04name\x18\x01 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12=\n" +
 	"\x05owner\x18\x02 \x01(\v2'.com.coralogixapis.aaa.apikeys.v3.OwnerR\x05owner\x12m\n" +
 	"\x0fkey_permissions\x18\x03 \x01(\v2D.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest.KeyPermissionsR\x0ekeyPermissions\x12!\n" +
-	"\x06hashed\x18\x04 \x01(\bB\t\x92A\x06J\x04trueR\x06hashed\x1a\xf5\x02\n" +
+	"\x06hashed\x18\x04 \x01(\bB\t\x9aA\x06J\x04trueR\x06hashed\x1a\xf5\x02\n" +
 	"\x0eKeyPermissions\x12,\n" +
-	"\apresets\x18\x01 \x03(\tB\x12\x92A\x0fJ\r[\"my_preset\"]R\apresets\x124\n" +
-	"\vpermissions\x18\x02 \x03(\tB\x12\x92A\x0fJ\r[\"read_logs\"]R\vpermissions:\xfe\x01\x92A\xfa\x01\n" +
+	"\apresets\x18\x01 \x03(\tB\x12\x9aA\x0fJ\r[\"my_preset\"]R\apresets\x124\n" +
+	"\vpermissions\x18\x02 \x03(\tB\x12\x9aA\x0fJ\r[\"read_logs\"]R\vpermissions:\xfe\x01\x9aA\xfa\x01\n" +
 	"\x89\x01*\x0fKey Permissions2^This data structure allows to specify loose permissions and permission presets for an API key.\xd2\x01\apresets\xd2\x01\vpermissions*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xe9\x01\x92A\xe5\x01\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/:\xe9\x01\x9aA\xe5\x01\n" +
 	"u*\x16Create Api Key Request21This data structure is used to create an API key.\xd2\x01\x04name\xd2\x01\x05owner\xd2\x01\x0fkey_permissions\xd2\x01\x06hashed*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x85\x03\n" +
 	"\x14CreateApiKeyResponse\x12'\n" +
-	"\x06key_id\x18\x01 \x01(\tB\x10\x92A\rJ\v\"my_key_id\"R\x05keyId\x12%\n" +
-	"\x04name\x18\x02 \x01(\tB\x11\x92A\x0eJ\f\"my_api_key\"R\x04name\x12-\n" +
-	"\x05value\x18\x03 \x01(\tB\x17\x92A\x14J\x12\"my_api_key_value\"R\x05value:\xed\x01\x92A\xe9\x01\n" +
+	"\x06key_id\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_key_id\"R\x05keyId\x12%\n" +
+	"\x04name\x18\x02 \x01(\tB\x11\x9aA\x0eJ\f\"my_api_key\"R\x04name\x12-\n" +
+	"\x05value\x18\x03 \x01(\tB\x17\x9aA\x14J\x12\"my_api_key_value\"R\x05value:\xed\x01\x9aA\xe9\x01\n" +
 	"y*\x17Create Api Key Response2FThis data structure is the response obtained when creating an API key.\xd2\x01\x06key_id\xd2\x01\x04name\xd2\x01\x05value*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x85\x02\n" +
 	"\x10GetApiKeyRequest\x12'\n" +
-	"\x06key_id\x18\x01 \x01(\tB\x10\x92A\rJ\v\"my_key_id\"R\x05keyId:\xc7\x01\x92A\xc3\x01\n" +
+	"\x06key_id\x18\x01 \x01(\tB\x10\x9aA\rJ\v\"my_key_id\"R\x05keyId:\xc7\x01\x9aA\xc3\x01\n" +
 	"S*\x13Get Api Key Request23This data structure is used to retrieve an API key.\xd2\x01\x06key_id*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\xbb\x02\n" +
 	"\x11GetApiKeyResponse\x12D\n" +
-	"\bkey_info\x18\x01 \x01(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\akeyInfo:\xdf\x01\x92A\xdb\x01\n" +
+	"\bkey_info\x18\x01 \x01(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\akeyInfo:\xdf\x01\x9aA\xdb\x01\n" +
 	"k*\x14Get Api Key Response2HThis data structure is the response obtained when retrieving an API key.\xd2\x01\bkey_info*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/\"\x1b\n" +
 	"\x19GetSendDataApiKeysRequest\"\xbd\x02\n" +
 	"\x1aGetSendDataApiKeysResponse\x12=\n" +
-	"\x04keys\x18\x01 \x03(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\x04keys:\xdf\x01\x92A\xdb\x01\n" +
+	"\x04keys\x18\x01 \x03(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\x04keys:\xdf\x01\x9aA\xdb\x01\n" +
 	"k*\x14Get Api Key Response2HThis data structure is the response obtained when retrieving an API key.\xd2\x01\bkey_info*l\n" +
 	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xcf\v\n" +
 	"\x0eApiKeysService\x12\x91\x02\n" +
-	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x91\x01\x92Aw\n" +
+	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x91\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eCreate API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1045,7 +1045,7 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v3/api_keys\x12\x8b\x02\n" +
-	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\x94\x01\x92At\n" +
+	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\x94\x01\x9aAt\n" +
 	"\x10API Keys Service\x12\vGet API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1053,7 +1053,7 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/api_keys/{key_id}\x12\xb5\x02\n" +
-	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\xa3\x01\x92A\x81\x01\n" +
+	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\xa3\x01\x9aA\x81\x01\n" +
 	"\x10API Keys Service\x12\x18Get \"Send Data\" API KeysJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1061,7 +1061,7 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x97\x02\n" +
-	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x97\x01\x92Aw\n" +
+	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x97\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eDelete API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1069,14 +1069,14 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17*\x15/v3/api_keys/{key_id}\x12\x9a\x02\n" +
-	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\x9a\x01\x92Aw\n" +
+	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\x9a\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eUpdate API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v3/api_keys/{key_id}\x1a,\x92A)\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v3/api_keys/{key_id}\x1a,\x9aA)\n" +
 	"\x10API Keys Service\x12\x15Manage your API Keys.b\x06proto3"
 
 var (
