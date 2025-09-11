@@ -2,11 +2,11 @@ syntax = "proto3";
 
 package com.coralogixapis.dashboards.v1.ast.variables_v2;
 
+import "com/coralogixapis/dashboards/v1/common/data_mode_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/order_direction.proto";
-import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
-import "com/coralogixapis/dashboards/v1/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/common/span_field.proto";
 import "google/protobuf/wrappers.proto";
 
 message VariableSourceV2 {
@@ -21,8 +21,32 @@ message VariableSourceV2 {
 
     message TextboxDefaultValue {
       oneof value {
-        google.protobuf.StringValue single_string = 1;
-        google.protobuf.FloatValue single_numeric = 2;
+        google.protobuf.StringValue single_string = 1 [deprecated = true];
+        google.protobuf.FloatValue single_numeric = 2 [deprecated = true];
+        TextboxDefaultStringValue default_string_value = 3;
+        TextboxDefaultNumericValue default_numeric_value = 4;
+        TextboxDefaultLuceneValue default_lucene_value = 5;
+        TextboxDefaultRegexValue default_regex_value = 6;
+      }
+
+      message TextboxDefaultStringValue {
+        google.protobuf.StringValue value = 1;
+      }
+
+      message TextboxDefaultNumericValue {
+        google.protobuf.FloatValue value = 1;
+        google.protobuf.FloatValue min = 2;
+        google.protobuf.FloatValue max = 3;
+        google.protobuf.BoolValue is_integer = 4;
+      }
+
+      message TextboxDefaultLuceneValue {
+        google.protobuf.StringValue value = 1;
+        common.DataModeType data_mode_type = 2;
+      }
+
+      message TextboxDefaultRegexValue {
+        google.protobuf.StringValue value = 1;
       }
     }
   }
@@ -161,7 +185,7 @@ message VariableSourceV2 {
         }
 
         message QueryText {
-          common.DataprimeQuery query = 1;        
+          common.DataprimeQuery query = 1;
           common.DataModeType data_mode_type = 2;
         }
       }
