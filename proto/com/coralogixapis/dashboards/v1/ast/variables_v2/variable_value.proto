@@ -11,6 +11,7 @@ message VariableValueV2 {
     SingleNumericValue single_numeric = 3;
     RegexValue regex = 4;
     LuceneQueryValue lucene = 5;
+    IntervalValue interval = 6;
   }
 
   message MultiStringValue {
@@ -48,5 +49,9 @@ message VariableValueV2 {
   message NumericValueLabel {
     google.protobuf.FloatValue value = 1;
     google.protobuf.StringValue label = 2;
+  }
+
+  message IntervalValue {
+    StringValueLabel value = 1;
   }
 }
