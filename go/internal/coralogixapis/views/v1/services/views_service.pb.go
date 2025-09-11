@@ -8,7 +8,7 @@ package services
 
 import (
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/views/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -607,14 +607,14 @@ var File_com_coralogixapis_views_v1_services_views_service_proto protoreflect.Fi
 
 const file_com_coralogixapis_views_v1_services_views_service_proto_rawDesc = "" +
 	"\n" +
-	"7com/coralogixapis/views/v1/services/views_service.proto\x12#com.coralogixapis.views.v1.services\x1a(com/coralogixapis/views/v1/filters.proto\x1a-com/coralogixapis/views/v1/search_query.proto\x1a/com/coralogixapis/views/v1/time_selection.proto\x1a*com/coralogixapis/views/v1/view_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x9d\x05\n" +
+	"7com/coralogixapis/views/v1/services/views_service.proto\x12#com.coralogixapis.views.v1.services\x1a(com/coralogixapis/views/v1/filters.proto\x1a-com/coralogixapis/views/v1/search_query.proto\x1a/com/coralogixapis/views/v1/time_selection.proto\x1a*com/coralogixapis/views/v1/view_type.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\x9d\x05\n" +
 	"\x11CreateViewRequest\x12P\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
 	"\fsearch_query\x18\x02 \x01(\v2'.com.coralogixapis.views.v1.SearchQueryR\vsearchQuery\x12P\n" +
 	"\x0etime_selection\x18\x03 \x01(\v2).com.coralogixapis.views.v1.TimeSelectionR\rtimeSelection\x12E\n" +
 	"\afilters\x18\x04 \x01(\v2+.com.coralogixapis.views.v1.SelectedFiltersR\afilters\x12\xd4\x01\n" +
-	"\tfolder_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12A\n" +
-	"\tview_type\x18\x06 \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:7\x92A4\n" +
+	"\tfolder_id\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x9aA\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12A\n" +
+	"\tview_type\x18\x06 \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:7\x9aA4\n" +
 	"2*\n" +
 	"ViewFolder2\fView folder.\xd2\x01\x04name\xd2\x01\x0etime_selection\"S\n" +
 	"\x12CreateViewResponse\x12=\n" +
@@ -624,46 +624,46 @@ const file_com_coralogixapis_views_v1_services_views_service_proto_rawDesc = "" 
 	"\x13ReplaceViewResponse\x12=\n" +
 	"\x04view\x18\x01 \x01(\v2).com.coralogixapis.views.v1.services.ViewR\x04view\"J\n" +
 	"\x0eGetViewRequest\x128\n" +
-	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x92A\b2\x02idJ\x0252R\x02id\"P\n" +
+	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x9aA\b2\x02idJ\x0252R\x02id\"P\n" +
 	"\x0fGetViewResponse\x12=\n" +
 	"\x04view\x18\x01 \x01(\v2).com.coralogixapis.views.v1.services.ViewR\x04view\"M\n" +
 	"\x11DeleteViewRequest\x128\n" +
-	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x92A\b2\x02idJ\x0252R\x02id\"\x14\n" +
+	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x9aA\b2\x02idJ\x0252R\x02id\"\x14\n" +
 	"\x12DeleteViewResponse\"\x12\n" +
 	"\x10ListViewsRequest\"T\n" +
 	"\x11ListViewsResponse\x12?\n" +
 	"\x05views\x18\x01 \x03(\v2).com.coralogixapis.views.v1.services.ViewR\x05views\"\x94\x06\n" +
 	"\x04View\x128\n" +
-	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x92A\b2\x02idJ\x0252R\x02id\x12P\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
+	"\x02id\x18\x01 \x01(\v2\x1b.google.protobuf.Int32ValueB\v\x9aA\b2\x02idJ\x0252R\x02id\x12P\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1b2\tView nameJ\v\"Logs view\"\x80\x01\x01R\x04name\x12J\n" +
 	"\fsearch_query\x18\x03 \x01(\v2'.com.coralogixapis.views.v1.SearchQueryR\vsearchQuery\x12P\n" +
 	"\x0etime_selection\x18\x04 \x01(\v2).com.coralogixapis.views.v1.TimeSelectionR\rtimeSelection\x12E\n" +
 	"\afilters\x18\x05 \x01(\v2+.com.coralogixapis.views.v1.SelectedFiltersR\afilters\x12\xd4\x01\n" +
-	"\tfolder_id\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12B\n" +
+	"\tfolder_id\x18\x06 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x9aA\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\bfolderId\x12B\n" +
 	"\x0fis_compact_mode\x18\a \x01(\v2\x1a.google.protobuf.BoolValueR\risCompactMode\x12A\n" +
-	"\tview_type\x18\b \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:=\x92A:\n" +
+	"\tview_type\x18\b \x01(\x0e2$.com.coralogixapis.views.v1.ViewTypeR\bviewType:=\x9aA:\n" +
 	"8*\x04View2\x13Response for views.\xd2\x01\x04name\xd2\x01\x02id\xd2\x01\x0etime_selection2\x91\x19\n" +
 	"\fViewsService\x12\xd3\x05\n" +
 	"\n" +
-	"CreateView\x126.com.coralogixapis.views.v1.services.CreateViewRequest\x1a7.com.coralogixapis.views.v1.services.CreateViewResponse\"\xd3\x04\x92A\xb5\x04\n" +
+	"CreateView\x126.com.coralogixapis.views.v1.services.CreateViewRequest\x1a7.com.coralogixapis.views.v1.services.CreateViewResponse\"\xd3\x04\x9aA\xb5\x04\n" +
 	"\rViews service\x12\x15Create a view service\x1a\x12Creates a new viewJ\xf8\x03\n" +
 	"\x03200\x12\xf0\x03\"\xed\x03\n" +
 	"\x10application/json\x12\xd8\x03{\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}\x82\xd3\xe4\x93\x02\x14:\x01*b\x04view\"\t/v1/views\x12\xef\x05\n" +
-	"\vReplaceView\x127.com.coralogixapis.views.v1.services.ReplaceViewRequest\x1a8.com.coralogixapis.views.v1.services.ReplaceViewResponse\"\xec\x04\x92A\xc1\x04\n" +
+	"\vReplaceView\x127.com.coralogixapis.views.v1.services.ReplaceViewRequest\x1a8.com.coralogixapis.views.v1.services.ReplaceViewResponse\"\xec\x04\x9aA\xc1\x04\n" +
 	"\rViews service\x12\x16Replace a view service\x1a\x19Replaces an existing viewJ\xfc\x03\n" +
 	"\x03200\x12\xf4\x03\"\xf1\x03\n" +
 	"\x10application/json\x12\xdc\x03{\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs new\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}\x82\xd3\xe4\x93\x02!:\x04viewb\x04view\x1a\x13/v1/views/{view.id}\x12\xce\x05\n" +
-	"\aGetView\x123.com.coralogixapis.views.v1.services.GetViewRequest\x1a4.com.coralogixapis.views.v1.services.GetViewResponse\"\xd7\x04\x92A\xb7\x04\n" +
+	"\aGetView\x123.com.coralogixapis.views.v1.services.GetViewRequest\x1a4.com.coralogixapis.views.v1.services.GetViewResponse\"\xd7\x04\x9aA\xb7\x04\n" +
 	"\rViews service\x12\x10Get view service\x1a\x11Gets a view by IDJ\x80\x04\n" +
 	"\x03200\x12\xf8\x03\"\xf5\x03\n" +
 	"\x10application/json\x12\xe0\x03{\"id\":52,\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}\x82\xd3\xe4\x93\x02\x16b\x04view\x12\x0e/v1/views/{id}\x12\xd2\x01\n" +
 	"\n" +
-	"DeleteView\x126.com.coralogixapis.views.v1.services.DeleteViewRequest\x1a7.com.coralogixapis.views.v1.services.DeleteViewResponse\"S\x92A:\n" +
+	"DeleteView\x126.com.coralogixapis.views.v1.services.DeleteViewRequest\x1a7.com.coralogixapis.views.v1.services.DeleteViewResponse\"S\x9aA:\n" +
 	"\rViews service\x12\x13Delete view service\x1a\x14Deletes a view by ID\x82\xd3\xe4\x93\x02\x10*\x0e/v1/views/{id}\x12\xe4\x05\n" +
-	"\tListViews\x125.com.coralogixapis.views.v1.services.ListViewsRequest\x1a6.com.coralogixapis.views.v1.services.ListViewsResponse\"\xe7\x04\x92A\xd2\x04\n" +
+	"\tListViews\x125.com.coralogixapis.views.v1.services.ListViewsRequest\x1a6.com.coralogixapis.views.v1.services.ListViewsResponse\"\xe7\x04\x9aA\xd2\x04\n" +
 	"\rViews service\x12\x12List views service\x1a\x1eLists all company public viewsJ\x8c\x04\n" +
 	"\x03200\x12\x84\x04\"\x81\x04\n" +
-	"\x10application/json\x12\xec\x03{\"views\":[{\"id\":52,\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}]}\x82\xd3\xe4\x93\x02\v\x12\t/v1/views\x1a,\x92A)\n" +
+	"\x10application/json\x12\xec\x03{\"views\":[{\"id\":52,\"name\":\"Logs view\",\"search_query\":{\"query\":\"logs\"},\"time_selection\":{\"custom_selection\":{\"from_time\":\"2024-01-25T11:31:43.152Z\",\"to_time\":\"2024-01-25T11:37:13.238Z\"}},\"filters\":{\"filters\":[{\"name\":\"applicationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"subsystemName\",\"selected_values\":{\"demo\":true}},{\"name\":\"operationName\",\"selected_values\":{\"demo\":true}},{\"name\":\"serviceName\",\"selected_values\":{\"demo\":true}},{\"name\":\"severity\",\"selected_values\":{\"demo\":true}}]}}]}\x82\xd3\xe4\x93\x02\v\x12\t/v1/views\x1a,\x9aA)\n" +
 	"\rViews service\x12\x18Create and manage views.b\x06proto3"
 
 var (

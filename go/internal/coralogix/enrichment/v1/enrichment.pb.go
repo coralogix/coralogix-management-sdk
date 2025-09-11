@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -103,15 +103,15 @@ var File_com_coralogix_enrichment_v1_enrichment_proto protoreflect.FileDescripto
 
 const file_com_coralogix_enrichment_v1_enrichment_proto_rawDesc = "" +
 	"\n" +
-	",com/coralogix/enrichment/v1/enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xc1\x04\n" +
+	",com/coralogix/enrichment/v1/enrichment.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/enrichment/v1/enrichment_type.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc1\x04\n" +
 	"\n" +
 	"Enrichment\x12\x16\n" +
-	"\x02id\x18\x01 \x01(\rB\x06\x92A\x03J\x011R\x02id\x12%\n" +
+	"\x02id\x18\x01 \x01(\rB\x06\x9aA\x03J\x011R\x02id\x12%\n" +
 	"\n" +
-	"field_name\x18\x02 \x01(\tB\x06\x92A\x03J\x011R\tfieldName\x12T\n" +
+	"field_name\x18\x02 \x01(\tB\x06\x9aA\x03J\x011R\tfieldName\x12T\n" +
 	"\x0fenrichment_type\x18\x03 \x01(\v2+.com.coralogix.enrichment.v1.EnrichmentTypeR\x0eenrichmentType\x12Y\n" +
-	"\x13enriched_field_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x06\x92A\x03J\x011H\x00R\x11enrichedFieldName\x88\x01\x01\x12F\n" +
-	"\x10selected_columns\x18\x05 \x03(\tB\x1b\x92A\x18J\x16[\"city\", \"population\"]R\x0fselectedColumns:\xe2\x01\x92A\xde\x01\n" +
+	"\x13enriched_field_name\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x06\x9aA\x03J\x011H\x00R\x11enrichedFieldName\x88\x01\x01\x12F\n" +
+	"\x10selected_columns\x18\x05 \x03(\tB\x1b\x9aA\x18J\x16[\"city\", \"population\"]R\x0fselectedColumns:\xe2\x01\x9aA\xde\x01\n" +
 	"^*\n" +
 	"Enrichment2,This data structure represents an enrichment\xd2\x01\x02id\xd2\x01\n" +
 	"field_name\xd2\x01\x0fenrichment_type*|\n" +

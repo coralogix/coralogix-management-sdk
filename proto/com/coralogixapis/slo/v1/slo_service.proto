@@ -3,12 +3,12 @@ package com.coralogixapis.slo.v1;
 import "google/api/annotations.proto";
 import "com/coralogixapis/slo/v1/slo.proto";
 import "google/rpc/code.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "com/coralogixapis/slo/v1/slo_alert.proto";
 
 
 message ResponseStatus {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ResponseStatus"
       description: "Status of the response, including error code and message."
@@ -21,7 +21,7 @@ message ResponseStatus {
 }
 
 message ReplaceSloAlertsValidationsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ReplaceSloAlertsValidationsRequest"
       description: "Request to validate alerts before replacing an existing SLO."
@@ -32,7 +32,7 @@ message ReplaceSloAlertsValidationsRequest {
 }
 
 message ReplaceSloAlertsValidationsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ReplaceSloAlertsValidationsResponse"
       description: "Response with validated alerts before replacing an existing SLO."
@@ -43,7 +43,7 @@ message ReplaceSloAlertsValidationsResponse {
 }
 
 message CreateSloRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateSloRequest"
       description: "Request to create a new SLO."
@@ -55,7 +55,7 @@ message CreateSloRequest {
 }
 
 message CreateSloResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateSloResponse"
       description: "Response after creating a new SLO."
@@ -66,7 +66,7 @@ message CreateSloResponse {
 }
 
 message ReplaceSloRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ReplaceSloRequest"
       description: "Request to replace an existing SLO."
@@ -78,7 +78,7 @@ message ReplaceSloRequest {
 }
 
 message ReplaceSloResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ReplaceSloResponse"
       description: "Response after replacing an existing SLO."
@@ -90,7 +90,7 @@ message ReplaceSloResponse {
 }
 
 message DeleteSloRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteSloRequest"
       description: "Request to delete an existing SLO."
@@ -101,7 +101,7 @@ message DeleteSloRequest {
 }
 
 message DeleteSloResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteSloResponse"
       description: "Response after deleting an existing SLO."
@@ -112,7 +112,7 @@ message DeleteSloResponse {
 }
 
 message GetSloRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetSloRequest"
       description: "Request to retrieve a specific SLO by its ID."
@@ -123,7 +123,7 @@ message GetSloRequest {
 }
 
 message GetSloResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetSloResponse"
       description: "Response containing the details of a specific SLO."
@@ -134,7 +134,7 @@ message GetSloResponse {
 }
 
 message ListSlosRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListSlosRequest"
       description: "Request to list SLOs with optional filters."
@@ -145,7 +145,7 @@ message ListSlosRequest {
 }
 
 message ListSlosResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListSlosResponse"
       description: "Response containing a list of SLOs."
@@ -156,7 +156,7 @@ message ListSlosResponse {
 }
 
 message BatchGetSlosRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "BatchGetSlosRequest"
       description: "Request to retrieve multiple SLOs by their IDs."
@@ -167,7 +167,7 @@ message BatchGetSlosRequest {
 }
 
 message BatchGetSlosResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "BatchGetSlosResponse"
       description: "Response containing a batch of SLOs and any IDs not found."
@@ -179,7 +179,7 @@ message BatchGetSlosResponse {
 }
 
 message SloExecutionRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloExecutionRequest"
       description: "Request for executing an SLO operation."
@@ -194,7 +194,7 @@ message SloExecutionRequest {
 }
 
 message SloExecutionResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SloExecutionResponse"
       description: "Response for an executed SLO operation."
@@ -209,7 +209,7 @@ message SloExecutionResponse {
 }
 
 message BatchExecuteSloRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "BatchExecuteSloRequest"
       description: "Request to batch execute multiple SLO operations."
@@ -220,7 +220,7 @@ message BatchExecuteSloRequest {
 }
 
 message BatchExecuteSloResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "BatchExecuteSloResponse"
       description: "Response containing the results of batch executed SLO operations."
@@ -234,7 +234,7 @@ message BatchExecuteSloResponse {
 
 
 message GetZeroStateRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetZeroStateRequest"
       description: "Request to get zero state (boolean)."
@@ -246,7 +246,7 @@ message GetZeroStateRequest {
 
 
 message GetZeroStateResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetZeroStateResponse"
       description: "Response with Zero State."
@@ -257,13 +257,13 @@ message GetZeroStateResponse {
 }
 
 service SlosService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Slos Service"
     description: "A service for managing Service Level Objectives (SLOs)."
   };
 
   rpc CreateSlo(CreateSloRequest) returns (CreateSloResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -287,7 +287,7 @@ service SlosService {
   }
 
   rpc ReplaceSlo(ReplaceSloRequest) returns (ReplaceSloResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -311,7 +311,7 @@ service SlosService {
   }
 
   rpc ValidateReplaceSloAlerts(ReplaceSloAlertsValidationsRequest) returns (ReplaceSloAlertsValidationsResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -335,7 +335,7 @@ service SlosService {
   }
 
   rpc DeleteSlo(DeleteSloRequest) returns (DeleteSloResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -358,7 +358,7 @@ service SlosService {
   }
 
   rpc GetSlo(GetSloRequest) returns (GetSloResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -381,7 +381,7 @@ service SlosService {
   }
 
   rpc ListSlos(ListSlosRequest) returns (ListSlosResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -404,7 +404,7 @@ service SlosService {
   }
 
   rpc GetZeroState(GetZeroStateRequest) returns (GetZeroStateResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -427,7 +427,7 @@ service SlosService {
   }
 
   rpc BatchGetSlos(BatchGetSlosRequest) returns (BatchGetSlosResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -450,7 +450,7 @@ service SlosService {
   }
 
   rpc BatchExecuteSlo(BatchExecuteSloRequest) returns (BatchExecuteSloResponse) {
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}

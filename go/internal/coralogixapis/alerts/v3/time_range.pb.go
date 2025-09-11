@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -79,11 +79,11 @@ var File_com_coralogixapis_alerts_v3_time_range_proto protoreflect.FileDescripto
 
 const file_com_coralogixapis_alerts_v3_time_range_proto_rawDesc = "" +
 	"\n" +
-	",com/coralogixapis/alerts/v3/time_range.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x99\x02\n" +
+	",com/coralogixapis/alerts/v3/time_range.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x99\x02\n" +
 	"\tTimeRange\x12W\n" +
 	"\n" +
-	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1c\x92A\x192\x17Start time of the rangeR\tstartTime\x12Q\n" +
-	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x92A\x172\x15End time of the rangeR\aendTime:`\x92A]\n" +
+	"start_time\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampB\x1c\x9aA\x192\x17Start time of the rangeR\tstartTime\x12Q\n" +
+	"\bend_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x172\x15End time of the rangeR\aendTime:`\x9aA]\n" +
 	"[*\n" +
 	"Time range25Represents a time range with start and end timestamps\xd2\x01\n" +
 	"start_time\xd2\x01\bend_timeb\x06proto3"

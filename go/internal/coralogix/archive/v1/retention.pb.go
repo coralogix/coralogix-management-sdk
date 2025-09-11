@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -95,12 +95,12 @@ var File_com_coralogix_archive_v1_retention_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_archive_v1_retention_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogix/archive/v1/retention.proto\x12\x18com.coralogix.archive.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x87\x03\n" +
+	"(com/coralogix/archive/v1/retention.proto\x12\x18com.coralogix.archive.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x87\x03\n" +
 	"\tRetention\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x121\n" +
 	"\x05order\x18\x02 \x01(\v2\x1b.google.protobuf.Int32ValueR\x05order\x120\n" +
 	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x126\n" +
-	"\beditable\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\beditable:\xae\x01\x92A\xaa\x01\n" +
+	"\beditable\x18\x04 \x01(\v2\x1a.google.protobuf.BoolValueR\beditable:\xae\x01\x9aA\xaa\x01\n" +
 	"7*\tRetention2*This data structure represents a retention*o\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/b\x06proto3"
 

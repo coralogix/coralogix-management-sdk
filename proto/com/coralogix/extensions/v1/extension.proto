@@ -5,7 +5,7 @@ package com.coralogix.extensions.v1;
 import "google/protobuf/wrappers.proto";
 import "google/protobuf/struct.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 enum TargetDomain {
   reserved 5;
@@ -33,7 +33,7 @@ message ExtensionItemBinary {
     CX_CUSTOM_DASHBOARD_DEFINITION = 4;
   }
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension item binary"
       required: [
@@ -69,7 +69,7 @@ message ExtensionItem {
     LOGS_EVENTS_TO_METRICS = 14;
   }
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension item"
       required: [
@@ -86,8 +86,8 @@ message ExtensionItem {
   google.protobuf.StringValue description = 3;
   TargetDomain target_domain = 4;
   google.protobuf.Struct data = 5;
-  repeated ExtensionItemBinary binaries = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.BoolValue is_mandatory = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  repeated ExtensionItemBinary binaries = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.BoolValue is_mandatory = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
   PermissionResource permission_resource = 9;
   google.protobuf.StringValue extended_internal_id = 10;
   google.protobuf.StringValue unique_id = 11;
@@ -95,26 +95,26 @@ message ExtensionItem {
 }
 
 message ItemCounts {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Item counts"
       required: []
     }
   };
-  google.protobuf.UInt32Value actions = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value alerts = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value custom_dashboards = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value enrichments = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value events_to_metrics = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value grafana_dashboards = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value kibana_dashboards = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value metrics_rule_group = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value parsing_rules = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
-  google.protobuf.UInt32Value saved_views = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
+  google.protobuf.UInt32Value actions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value alerts = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value custom_dashboards = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value enrichments = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value events_to_metrics = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value grafana_dashboards = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value kibana_dashboards = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value metrics_rule_group = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value parsing_rules = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
+  google.protobuf.UInt32Value saved_views = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
 }
 
 message IntegrationDetail {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Integration detail"
       required: [
@@ -132,7 +132,7 @@ message ExtensionBinary {
     KIBANA_INDEX_PATTERN = 0;
   }
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension binary"
       required: [
@@ -146,7 +146,7 @@ message ExtensionBinary {
 }
 
 message ChangelogEntry {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Changelog entry"
       required: [
@@ -160,7 +160,7 @@ message ChangelogEntry {
 }
 
 message Deprecation {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Deprecation"
       required: [
@@ -169,11 +169,11 @@ message Deprecation {
     }
   };
   google.protobuf.StringValue reason = 1;
-  repeated google.protobuf.StringValue replacement_extensions = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue replacement_extensions = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
 }
 
 message ExtensionRevision {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension revision"
       required: [
@@ -184,16 +184,16 @@ message ExtensionRevision {
   google.protobuf.StringValue version = 1;
   google.protobuf.StringValue description = 2;
   google.protobuf.StringValue excerpt = 3;
-  repeated google.protobuf.StringValue labels = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated IntegrationDetail integration_details = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ExtensionItem items = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ExtensionBinary binaries = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ExtensionItem permission_denied_items = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.BoolValue is_testing = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
+  repeated google.protobuf.StringValue labels = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated IntegrationDetail integration_details = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ExtensionItem items = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ExtensionBinary binaries = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ExtensionItem permission_denied_items = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.BoolValue is_testing = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
 }
 
 message Extension {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension metadata"
       required: [
@@ -207,18 +207,18 @@ message Extension {
   google.protobuf.StringValue name = 2;
   google.protobuf.StringValue image = 3;
   google.protobuf.StringValue dark_mode_image = 4;
-  repeated ExtensionRevision revisions = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.BoolValue is_hidden = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
-  repeated string integrations = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated google.protobuf.StringValue keywords = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ExtensionRevision permission_denied_revisions = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ChangelogEntry changelog = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated ExtensionRevision revisions = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.BoolValue is_hidden = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  repeated string integrations = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue keywords = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ExtensionRevision permission_denied_revisions = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ChangelogEntry changelog = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
   Deprecation deprecation = 11;
 }
 
 // Extension details for ingestion
 message ExtensionData {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension data"
       description: "Extension details for ingestion"
@@ -230,26 +230,26 @@ message ExtensionData {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
-  google.protobuf.StringValue name = 2  [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"AWS CloudWatch Extension\""}];
-  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Integration with AWS CloudWatch for monitoring and logging\""}];
-  google.protobuf.StringValue excerpt = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Monitor AWS resources and analyze logs with CloudWatch integration\""}];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"076f4188-05e0-4ed3-afeb-653ad182ccb7\""}];
+  google.protobuf.StringValue name = 2  [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"AWS CloudWatch Extension\""}];
+  google.protobuf.StringValue description = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Integration with AWS CloudWatch for monitoring and logging\""}];
+  google.protobuf.StringValue excerpt = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Monitor AWS resources and analyze logs with CloudWatch integration\""}];
   google.protobuf.StringValue image = 5 ;
   google.protobuf.StringValue dark_mode_image = 6;
-  repeated google.protobuf.StringValue labels = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.StringValue version = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"v1.0.13\""}];
-  repeated ExtensionItemData items = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated IntegrationDetail integration_details = 10 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.BoolValue is_hidden = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
-  repeated ExtensionBinary binaries = 12 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated string integrations = 13 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated google.protobuf.StringValue keywords = 14 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  repeated ChangelogEntry changelog = 15 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue labels = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.StringValue version = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"v1.0.13\""}];
+  repeated ExtensionItemData items = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated IntegrationDetail integration_details = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.BoolValue is_hidden = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  repeated ExtensionBinary binaries = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated string integrations = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated google.protobuf.StringValue keywords = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated ChangelogEntry changelog = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
   Deprecation deprecation = 16;
 }
 
 message ExtensionItemData {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Extension item data"
       required: [
@@ -259,13 +259,13 @@ message ExtensionItemData {
       ]
     }
   };
-  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Low cocoa content\""}];
-  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {example: "\"Less than 60% cocoa\""}];
+  google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Low cocoa content\""}];
+  google.protobuf.StringValue description = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"Less than 60% cocoa\""}];
   TargetDomain target_domain = 3;
   google.protobuf.Struct data = 4;
-  repeated ExtensionItemBinary binaries = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "[]" }];
-  google.protobuf.BoolValue is_mandatory = 6 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "false" }];
-  google.protobuf.Int32Value internal_id = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { default: "0" }];
+  repeated ExtensionItemBinary binaries = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  google.protobuf.BoolValue is_mandatory = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  google.protobuf.Int32Value internal_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "0" }];
   google.protobuf.StringValue unique_id = 8;
   ExtensionItem.PermissionResource permission_resource = 9;
   google.protobuf.StringValue stable_id = 10;

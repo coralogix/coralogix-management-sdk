@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -367,27 +367,27 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_common_logs_filter_proto_rawDesc = "" +
 	"\n" +
-	"Scom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xff\x01\n" +
+	"Scom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xff\x01\n" +
 	"\n" +
 	"LogsFilter\x12\x95\x01\n" +
-	"\rsimple_filter\x18\x01 \x01(\v2-.com.coralogixapis.alerts.v3.LogsSimpleFilterB?\x92A<2:A simple filter that uses a Lucene query and label filtersH\x00R\fsimpleFilter:J\x92AG\n" +
+	"\rsimple_filter\x18\x01 \x01(\v2-.com.coralogixapis.alerts.v3.LogsSimpleFilterB?\x9aA<2:A simple filter that uses a Lucene query and label filtersH\x00R\fsimpleFilter:J\x9aAG\n" +
 	"E*\n" +
 	"Log filter2)Filter configuration for log-based alerts\xd2\x01\vfilter_typeB\r\n" +
 	"\vfilter_type\"\x80\x02\n" +
 	"\x10LogsSimpleFilter\x12?\n" +
 	"\flucene_query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vluceneQuery\x12N\n" +
-	"\rlabel_filters\x18\x02 \x01(\v2).com.coralogixapis.alerts.v3.LabelFiltersR\flabelFilters:[\x92AX\n" +
+	"\rlabel_filters\x18\x02 \x01(\v2).com.coralogixapis.alerts.v3.LabelFiltersR\flabelFilters:[\x9aAX\n" +
 	"V*\x11Simple log filter2ABasic filter configuration using a Lucene query and label filters\"\xde\x02\n" +
 	"\fLabelFilters\x12W\n" +
 	"\x10application_name\x18\x01 \x03(\v2,.com.coralogixapis.alerts.v3.LabelFilterTypeR\x0fapplicationName\x12S\n" +
 	"\x0esubsystem_name\x18\x02 \x03(\v2,.com.coralogixapis.alerts.v3.LabelFilterTypeR\rsubsystemName\x12H\n" +
 	"\n" +
 	"severities\x18\x03 \x03(\x0e2(.com.coralogixapis.alerts.v3.LogSeverityR\n" +
-	"severities:V\x92AS\n" +
+	"severities:V\x9aAS\n" +
 	"Q*\rLabel filters2@Filters for application name, subsystem name, and log severities\"\xf6\x02\n" +
 	"\x0fLabelFilterType\x12f\n" +
-	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x92A/2#The value of the label to filter byJ\b\"my-app\"R\x05value\x12\xa9\x01\n" +
-	"\toperation\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.LogFilterOperationTypeBV\x92AS2+The operation to perform on the label valueJ$\"LOG_FILTER_OPERATION_TYPE_INCLUDES\"R\toperation:O\x92AL\n" +
+	"\x05value\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB2\x9aA/2#The value of the label to filter byJ\b\"my-app\"R\x05value\x12\xa9\x01\n" +
+	"\toperation\x18\x02 \x01(\x0e23.com.coralogixapis.alerts.v3.LogFilterOperationTypeBV\x9aAS2+The operation to perform on the label valueJ$\"LOG_FILTER_OPERATION_TYPE_INCLUDES\"R\toperation:O\x9aAL\n" +
 	"J*\x11Label filter type2!Label filter type for log entries\xd2\x01\x05value\xd2\x01\toperation*\xc5\x01\n" +
 	"\x16LogFilterOperationType\x12/\n" +
 	"+LOG_FILTER_OPERATION_TYPE_IS_OR_UNSPECIFIED\x10\x00\x12&\n" +

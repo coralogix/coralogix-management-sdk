@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -35,6 +35,7 @@ type AlertDef struct {
 	CreatedTime       *timestamppb.Timestamp  `protobuf:"bytes,3,opt,name=created_time,json=createdTime,proto3" json:"created_time,omitempty"`
 	UpdatedTime       *timestamppb.Timestamp  `protobuf:"bytes,4,opt,name=updated_time,json=updatedTime,proto3" json:"updated_time,omitempty"`
 	LastTriggeredTime *timestamppb.Timestamp  `protobuf:"bytes,5,opt,name=last_triggered_time,json=lastTriggeredTime,proto3" json:"last_triggered_time,omitempty"`
+	Status            *AlertDefStatus         `protobuf:"varint,6,opt,name=status,proto3,enum=com.coralogixapis.alerts.v3.AlertDefStatus,oneof" json:"status,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
 }
@@ -109,6 +110,13 @@ func (x *AlertDef) GetLastTriggeredTime() *timestamppb.Timestamp {
 		return x.LastTriggeredTime
 	}
 	return nil
+}
+
+func (x *AlertDef) GetStatus() AlertDefStatus {
+	if x != nil && x.Status != nil {
+		return *x.Status
+	}
+	return AlertDefStatus_ALERT_DEF_STATUS_UNSPECIFIED
 }
 
 // *
@@ -503,49 +511,51 @@ var File_com_coralogixapis_alerts_v3_alert_def_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_alerts_v3_alert_def_proto_rawDesc = "" +
 	"\n" +
-	"+com/coralogixapis/alerts/v3/alert_def.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a>com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a6com/coralogixapis/alerts/v3/alert_def_scheduling.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1aUcom/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto\x1a]com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto\x1amcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto\x1abcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto\x1aacom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto\x1accom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto\x1a]com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xab\b\n" +
+	"+com/coralogixapis/alerts/v3/alert_def.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a>com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a6com/coralogixapis/alerts/v3/alert_def_scheduling.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1aUcom/coralogixapis/alerts/v3/alert_def_type_definition/flow/flow_type_definition.proto\x1a]com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_immediate_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_ratio_threshold_type_definition.proto\x1a_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_threshold_type_definition.proto\x1amcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_time_relative_threshold_type_definition.proto\x1abcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_unique_count_type_definition.proto\x1aacom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_anomaly_type_definition.proto\x1accom/coralogixapis/alerts/v3/alert_def_type_definition/metric/metric_threshold_type_definition.proto\x1a]com/coralogixapis/alerts/v3/alert_def_type_definition/slo/slo_threshold_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto\x1aecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_threshold_type_definition.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbe\t\n" +
 	"\bAlertDef\x12\x89\x01\n" +
-	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB&\x92A#2!The alert definition's propertiesR\x12alertDefProperties\x12\x7f\n" +
-	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBQ\x92AN2$The alert definition's persistent IDJ&\"123e4567-e89b-12d3-a456-426614174000\"R\x02id\x12]\n" +
-	"\x10alert_version_id\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x122\x10The old alert IDR\x0ealertVersionId\x12\x8a\x01\n" +
-	"\fcreated_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampBK\x92AH2.The time when the alert definition was createdJ\x16\"2023-10-01T12:00:00Z\"R\vcreatedTime\x12\x8f\x01\n" +
-	"\fupdated_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampBP\x92AM23The time when the alert definition was last updatedJ\x16\"2023-10-01T12:00:00Z\"R\vupdatedTime\x12\x99\x01\n" +
-	"\x13last_triggered_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampBM\x92AJ20The last time the alert definition was triggeredJ\x16\"2023-10-01T12:00:00Z\"R\x11lastTriggeredTime:\xf7\x01\x92A\xf3\x01\n" +
+	"\x14alert_def_properties\x18\x01 \x01(\v2/.com.coralogixapis.alerts.v3.AlertDefPropertiesB&\x9aA#2!The alert definition's propertiesR\x12alertDefProperties\x12\x7f\n" +
+	"\x02id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBQ\x9aAN2$The alert definition's persistent IDJ&\"123e4567-e89b-12d3-a456-426614174000\"R\x02id\x12]\n" +
+	"\x10alert_version_id\x18\x14 \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x122\x10The old alert IDR\x0ealertVersionId\x12\x8a\x01\n" +
+	"\fcreated_time\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampBK\x9aAH2.The time when the alert definition was createdJ\x16\"2023-10-01T12:00:00Z\"R\vcreatedTime\x12\x8f\x01\n" +
+	"\fupdated_time\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampBP\x9aAM23The time when the alert definition was last updatedJ\x16\"2023-10-01T12:00:00Z\"R\vupdatedTime\x12\x99\x01\n" +
+	"\x13last_triggered_time\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampBM\x9aAJ20The last time the alert definition was triggeredJ\x16\"2023-10-01T12:00:00Z\"R\x11lastTriggeredTime\x12\x85\x01\n" +
+	"\x06status\x18\x06 \x01(\x0e2+.com.coralogixapis.alerts.v3.AlertDefStatusB;\x9aA82\x1fThe current status of the alertJ\x15\"ALERT_DEF_STATUS_OK\"H\x00R\x06status\x88\x01\x01:\xf7\x01\x9aA\xf3\x01\n" +
 	"u*\x10Alert definition22This data structure represents an alert definition\xd2\x01\x14alert_def_properties\xd2\x01\x02id\xd2\x01\x10alert_version_id*z\n" +
-	"/Find out more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/\"\xbc\x1f\n" +
+	"/Find out more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/B\t\n" +
+	"\a_status\"\xbc\x1f\n" +
 	"\x12AlertDefProperties\x12c\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB1\x92A.2 The name of the alert definitionJ\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB1\x9aA.2 The name of the alert definitionJ\n" +
 	"\"My Alert\"R\x04name\x12\xa0\x01\n" +
-	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB`\x92A]2FA detailed description of what the alert monitors and when it triggersJ\x13\"Alert description\"R\vdescription\x12{\n" +
-	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBE\x92AB24Whether the alert is currently active and monitoring:\x04trueJ\x04trueR\aenabled\x12\x88\x01\n" +
-	"\bpriority\x18\x04 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityB=\x92A:2\x1fThe priority level of the alertJ\x17\"ALERT_DEF_PRIORITY_P4\"R\bpriority\x12\x88\x01\n" +
-	"\tactive_on\x18\x05 \x01(\v2-.com.coralogixapis.alerts.v3.ActivityScheduleB:\x92A725The schedule defining when the alert should be activeH\x00R\bactiveOn\x12q\n" +
-	"\x04type\x18\x06 \x01(\x0e2).com.coralogixapis.alerts.v3.AlertDefTypeB2\x92A/2\n" +
+	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB`\x9aA]2FA detailed description of what the alert monitors and when it triggersJ\x13\"Alert description\"R\vdescription\x12{\n" +
+	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBE\x9aAB24Whether the alert is currently active and monitoring:\x04trueJ\x04trueR\aenabled\x12\x88\x01\n" +
+	"\bpriority\x18\x04 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityB=\x9aA:2\x1fThe priority level of the alertJ\x17\"ALERT_DEF_PRIORITY_P4\"R\bpriority\x12\x88\x01\n" +
+	"\tactive_on\x18\x05 \x01(\v2-.com.coralogixapis.alerts.v3.ActivityScheduleB:\x9aA725The schedule defining when the alert should be activeH\x00R\bactiveOn\x12q\n" +
+	"\x04type\x18\x06 \x01(\x0e2).com.coralogixapis.alerts.v3.AlertDefTypeB2\x9aA/2\n" +
 	"Alert typeJ!\"ALERT_DEF_TYPE_METRIC_THRESHOLD\"R\x04type\x12\x8a\x01\n" +
-	"\x0elogs_immediate\x18e \x01(\v2..com.coralogixapis.alerts.v3.LogsImmediateTypeB1\x92A.2,Configuration for immediate log-based alertsH\x01R\rlogsImmediate\x12\x97\x01\n" +
-	"\x11tracing_immediate\x18f \x01(\v21.com.coralogixapis.alerts.v3.TracingImmediateTypeB5\x92A220Configuration for immediate tracing-based alertsH\x01R\x10tracingImmediate\x12\x8a\x01\n" +
-	"\x0elogs_threshold\x18g \x01(\v2..com.coralogixapis.alerts.v3.LogsThresholdTypeB1\x92A.2,Configuration for log-based threshold alertsH\x01R\rlogsThreshold\x12\xa0\x01\n" +
-	"\x14logs_ratio_threshold\x18h \x01(\v23.com.coralogixapis.alerts.v3.LogsRatioThresholdTypeB7\x92A422Configuration for log-based ratio threshold alertsH\x01R\x12logsRatioThreshold\x12\xb8\x01\n" +
-	"\x1clogs_time_relative_threshold\x18i \x01(\v2:.com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdTypeB9\x92A624Configuration for time-relative log threshold alertsH\x01R\x19logsTimeRelativeThreshold\x12\x93\x01\n" +
-	"\x10metric_threshold\x18j \x01(\v20.com.coralogixapis.alerts.v3.MetricThresholdTypeB4\x92A12/Configuration for metric-based threshold alertsH\x01R\x0fmetricThreshold\x12\x97\x01\n" +
-	"\x11tracing_threshold\x18k \x01(\v21.com.coralogixapis.alerts.v3.TracingThresholdTypeB5\x92A220Configuration for tracing-based threshold alertsH\x01R\x10tracingThreshold\x12e\n" +
-	"\x04flow\x18l \x01(\v2%.com.coralogixapis.alerts.v3.FlowTypeB(\x92A%2#Configuration for flow-based alertsH\x01R\x04flow\x12\x8c\x01\n" +
-	"\flogs_anomaly\x18m \x01(\v2,.com.coralogixapis.alerts.v3.LogsAnomalyTypeB9\x92A624Configuration for log-based anomaly detection alertsH\x01R\vlogsAnomaly\x12\x95\x01\n" +
-	"\x0emetric_anomaly\x18n \x01(\v2..com.coralogixapis.alerts.v3.MetricAnomalyTypeB<\x92A927Configuration for metric-based anomaly detection alertsH\x01R\rmetricAnomaly\x12\x90\x01\n" +
-	"\x0elogs_new_value\x18o \x01(\v2-.com.coralogixapis.alerts.v3.LogsNewValueTypeB9\x92A624Configuration for alerts triggered by new log valuesH\x01R\flogsNewValue\x12\x9e\x01\n" +
-	"\x11logs_unique_count\x18p \x01(\v20.com.coralogixapis.alerts.v3.LogsUniqueCountTypeB>\x92A;29Configuration for alerts based on unique log value countsH\x01R\x0flogsUniqueCount\x12}\n" +
-	"\rslo_threshold\x18q \x01(\v2-.com.coralogixapis.alerts.v3.SloThresholdTypeB'\x92A$2\"Configuration for SLO-based alertsH\x01R\fsloThreshold\x12\x84\x01\n" +
-	"\rgroup_by_keys\x18\a \x03(\v2\x1c.google.protobuf.StringValueBB\x92A?2+Keys used to group and aggregate alert dataJ\x10[\"key1\", \"key2\"]R\vgroupByKeys\x12\x94\x01\n" +
-	"\x12incidents_settings\x18\b \x01(\v25.com.coralogixapis.alerts.v3.AlertDefIncidentSettingsB.\x92A+2)Incident creation and management settingsR\x11incidentsSettings\x12\x97\x01\n" +
-	"\x12notification_group\x18\t \x01(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB0\x92A-2+Primary notification group for alert eventsR\x11notificationGroup\x12\xb2\x01\n" +
-	"\x19notification_group_excess\x18\xd2\x01 \x03(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB=\x92A826Additional notification groups for alerts (deprecated)\x18\x01R\x17notificationGroupExcess\x12\xb6\x01\n" +
+	"\x0elogs_immediate\x18e \x01(\v2..com.coralogixapis.alerts.v3.LogsImmediateTypeB1\x9aA.2,Configuration for immediate log-based alertsH\x01R\rlogsImmediate\x12\x97\x01\n" +
+	"\x11tracing_immediate\x18f \x01(\v21.com.coralogixapis.alerts.v3.TracingImmediateTypeB5\x9aA220Configuration for immediate tracing-based alertsH\x01R\x10tracingImmediate\x12\x8a\x01\n" +
+	"\x0elogs_threshold\x18g \x01(\v2..com.coralogixapis.alerts.v3.LogsThresholdTypeB1\x9aA.2,Configuration for log-based threshold alertsH\x01R\rlogsThreshold\x12\xa0\x01\n" +
+	"\x14logs_ratio_threshold\x18h \x01(\v23.com.coralogixapis.alerts.v3.LogsRatioThresholdTypeB7\x9aA422Configuration for log-based ratio threshold alertsH\x01R\x12logsRatioThreshold\x12\xb8\x01\n" +
+	"\x1clogs_time_relative_threshold\x18i \x01(\v2:.com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdTypeB9\x9aA624Configuration for time-relative log threshold alertsH\x01R\x19logsTimeRelativeThreshold\x12\x93\x01\n" +
+	"\x10metric_threshold\x18j \x01(\v20.com.coralogixapis.alerts.v3.MetricThresholdTypeB4\x9aA12/Configuration for metric-based threshold alertsH\x01R\x0fmetricThreshold\x12\x97\x01\n" +
+	"\x11tracing_threshold\x18k \x01(\v21.com.coralogixapis.alerts.v3.TracingThresholdTypeB5\x9aA220Configuration for tracing-based threshold alertsH\x01R\x10tracingThreshold\x12e\n" +
+	"\x04flow\x18l \x01(\v2%.com.coralogixapis.alerts.v3.FlowTypeB(\x9aA%2#Configuration for flow-based alertsH\x01R\x04flow\x12\x8c\x01\n" +
+	"\flogs_anomaly\x18m \x01(\v2,.com.coralogixapis.alerts.v3.LogsAnomalyTypeB9\x9aA624Configuration for log-based anomaly detection alertsH\x01R\vlogsAnomaly\x12\x95\x01\n" +
+	"\x0emetric_anomaly\x18n \x01(\v2..com.coralogixapis.alerts.v3.MetricAnomalyTypeB<\x9aA927Configuration for metric-based anomaly detection alertsH\x01R\rmetricAnomaly\x12\x90\x01\n" +
+	"\x0elogs_new_value\x18o \x01(\v2-.com.coralogixapis.alerts.v3.LogsNewValueTypeB9\x9aA624Configuration for alerts triggered by new log valuesH\x01R\flogsNewValue\x12\x9e\x01\n" +
+	"\x11logs_unique_count\x18p \x01(\v20.com.coralogixapis.alerts.v3.LogsUniqueCountTypeB>\x9aA;29Configuration for alerts based on unique log value countsH\x01R\x0flogsUniqueCount\x12}\n" +
+	"\rslo_threshold\x18q \x01(\v2-.com.coralogixapis.alerts.v3.SloThresholdTypeB'\x9aA$2\"Configuration for SLO-based alertsH\x01R\fsloThreshold\x12\x84\x01\n" +
+	"\rgroup_by_keys\x18\a \x03(\v2\x1c.google.protobuf.StringValueBB\x9aA?2+Keys used to group and aggregate alert dataJ\x10[\"key1\", \"key2\"]R\vgroupByKeys\x12\x94\x01\n" +
+	"\x12incidents_settings\x18\b \x01(\v25.com.coralogixapis.alerts.v3.AlertDefIncidentSettingsB.\x9aA+2)Incident creation and management settingsR\x11incidentsSettings\x12\x97\x01\n" +
+	"\x12notification_group\x18\t \x01(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB0\x9aA-2+Primary notification group for alert eventsR\x11notificationGroup\x12\xb2\x01\n" +
+	"\x19notification_group_excess\x18\xd2\x01 \x03(\v26.com.coralogixapis.alerts.v3.AlertDefNotificationGroupB=\x9aA826Additional notification groups for alerts (deprecated)\x18\x01R\x17notificationGroupExcess\x12\xb6\x01\n" +
 	"\rentity_labels\x18\n" +
-	" \x03(\v2A.com.coralogixapis.alerts.v3.AlertDefProperties.EntityLabelsEntryBN\x92AK27Labels used to identify and categorize the alert entityJ\x10{\"key\": \"value\"}R\fentityLabels\x12\x92\x01\n" +
-	"\fphantom_mode\x18\v \x01(\v2\x1a.google.protobuf.BoolValueBS\x92AP2@Whether the alert is in phantom mode (creating incidents or not):\x05falseJ\x05falseR\vphantomMode\x12u\n" +
-	"\adeleted\x18\f \x01(\v2\x1a.google.protobuf.BoolValueB?\x92A<2,Whether the alert has been marked as deleted:\x05falseJ\x05falseR\adeleted\x1a?\n" +
+	" \x03(\v2A.com.coralogixapis.alerts.v3.AlertDefProperties.EntityLabelsEntryBN\x9aAK27Labels used to identify and categorize the alert entityJ\x10{\"key\": \"value\"}R\fentityLabels\x12\x92\x01\n" +
+	"\fphantom_mode\x18\v \x01(\v2\x1a.google.protobuf.BoolValueBS\x9aAP2@Whether the alert is in phantom mode (creating incidents or not):\x05falseJ\x05falseR\vphantomMode\x12u\n" +
+	"\adeleted\x18\f \x01(\v2\x1a.google.protobuf.BoolValueB?\x9aA<2,Whether the alert has been marked as deleted:\x05falseJ\x05falseR\adeleted\x1a?\n" +
 	"\x11EntityLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x82\x01\x92A\x7f\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\x82\x01\x9aA\x7f\n" +
 	"}*\x1bAlert definition properties23User-configurable properties of an alert definition\xd2\x01\x04name\xd2\x01\bpriority\xd2\x01\x04type\xd2\x01\x0ftype_definitionB\n" +
 	"\n" +
 	"\bscheduleB\x11\n" +
@@ -570,25 +580,26 @@ var file_com_coralogixapis_alerts_v3_alert_def_proto_goTypes = []any{
 	nil,                                   // 2: com.coralogixapis.alerts.v3.AlertDefProperties.EntityLabelsEntry
 	(*wrapperspb.StringValue)(nil),        // 3: google.protobuf.StringValue
 	(*timestamppb.Timestamp)(nil),         // 4: google.protobuf.Timestamp
-	(*wrapperspb.BoolValue)(nil),          // 5: google.protobuf.BoolValue
-	(AlertDefPriority)(0),                 // 6: com.coralogixapis.alerts.v3.AlertDefPriority
-	(*ActivitySchedule)(nil),              // 7: com.coralogixapis.alerts.v3.ActivitySchedule
-	(AlertDefType)(0),                     // 8: com.coralogixapis.alerts.v3.AlertDefType
-	(*LogsImmediateType)(nil),             // 9: com.coralogixapis.alerts.v3.LogsImmediateType
-	(*TracingImmediateType)(nil),          // 10: com.coralogixapis.alerts.v3.TracingImmediateType
-	(*LogsThresholdType)(nil),             // 11: com.coralogixapis.alerts.v3.LogsThresholdType
-	(*LogsRatioThresholdType)(nil),        // 12: com.coralogixapis.alerts.v3.LogsRatioThresholdType
-	(*LogsTimeRelativeThresholdType)(nil), // 13: com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdType
-	(*MetricThresholdType)(nil),           // 14: com.coralogixapis.alerts.v3.MetricThresholdType
-	(*TracingThresholdType)(nil),          // 15: com.coralogixapis.alerts.v3.TracingThresholdType
-	(*FlowType)(nil),                      // 16: com.coralogixapis.alerts.v3.FlowType
-	(*LogsAnomalyType)(nil),               // 17: com.coralogixapis.alerts.v3.LogsAnomalyType
-	(*MetricAnomalyType)(nil),             // 18: com.coralogixapis.alerts.v3.MetricAnomalyType
-	(*LogsNewValueType)(nil),              // 19: com.coralogixapis.alerts.v3.LogsNewValueType
-	(*LogsUniqueCountType)(nil),           // 20: com.coralogixapis.alerts.v3.LogsUniqueCountType
-	(*SloThresholdType)(nil),              // 21: com.coralogixapis.alerts.v3.SloThresholdType
-	(*AlertDefIncidentSettings)(nil),      // 22: com.coralogixapis.alerts.v3.AlertDefIncidentSettings
-	(*AlertDefNotificationGroup)(nil),     // 23: com.coralogixapis.alerts.v3.AlertDefNotificationGroup
+	(AlertDefStatus)(0),                   // 5: com.coralogixapis.alerts.v3.AlertDefStatus
+	(*wrapperspb.BoolValue)(nil),          // 6: google.protobuf.BoolValue
+	(AlertDefPriority)(0),                 // 7: com.coralogixapis.alerts.v3.AlertDefPriority
+	(*ActivitySchedule)(nil),              // 8: com.coralogixapis.alerts.v3.ActivitySchedule
+	(AlertDefType)(0),                     // 9: com.coralogixapis.alerts.v3.AlertDefType
+	(*LogsImmediateType)(nil),             // 10: com.coralogixapis.alerts.v3.LogsImmediateType
+	(*TracingImmediateType)(nil),          // 11: com.coralogixapis.alerts.v3.TracingImmediateType
+	(*LogsThresholdType)(nil),             // 12: com.coralogixapis.alerts.v3.LogsThresholdType
+	(*LogsRatioThresholdType)(nil),        // 13: com.coralogixapis.alerts.v3.LogsRatioThresholdType
+	(*LogsTimeRelativeThresholdType)(nil), // 14: com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdType
+	(*MetricThresholdType)(nil),           // 15: com.coralogixapis.alerts.v3.MetricThresholdType
+	(*TracingThresholdType)(nil),          // 16: com.coralogixapis.alerts.v3.TracingThresholdType
+	(*FlowType)(nil),                      // 17: com.coralogixapis.alerts.v3.FlowType
+	(*LogsAnomalyType)(nil),               // 18: com.coralogixapis.alerts.v3.LogsAnomalyType
+	(*MetricAnomalyType)(nil),             // 19: com.coralogixapis.alerts.v3.MetricAnomalyType
+	(*LogsNewValueType)(nil),              // 20: com.coralogixapis.alerts.v3.LogsNewValueType
+	(*LogsUniqueCountType)(nil),           // 21: com.coralogixapis.alerts.v3.LogsUniqueCountType
+	(*SloThresholdType)(nil),              // 22: com.coralogixapis.alerts.v3.SloThresholdType
+	(*AlertDefIncidentSettings)(nil),      // 23: com.coralogixapis.alerts.v3.AlertDefIncidentSettings
+	(*AlertDefNotificationGroup)(nil),     // 24: com.coralogixapis.alerts.v3.AlertDefNotificationGroup
 }
 var file_com_coralogixapis_alerts_v3_alert_def_proto_depIdxs = []int32{
 	1,  // 0: com.coralogixapis.alerts.v3.AlertDef.alert_def_properties:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties
@@ -597,37 +608,38 @@ var file_com_coralogixapis_alerts_v3_alert_def_proto_depIdxs = []int32{
 	4,  // 3: com.coralogixapis.alerts.v3.AlertDef.created_time:type_name -> google.protobuf.Timestamp
 	4,  // 4: com.coralogixapis.alerts.v3.AlertDef.updated_time:type_name -> google.protobuf.Timestamp
 	4,  // 5: com.coralogixapis.alerts.v3.AlertDef.last_triggered_time:type_name -> google.protobuf.Timestamp
-	3,  // 6: com.coralogixapis.alerts.v3.AlertDefProperties.name:type_name -> google.protobuf.StringValue
-	3,  // 7: com.coralogixapis.alerts.v3.AlertDefProperties.description:type_name -> google.protobuf.StringValue
-	5,  // 8: com.coralogixapis.alerts.v3.AlertDefProperties.enabled:type_name -> google.protobuf.BoolValue
-	6,  // 9: com.coralogixapis.alerts.v3.AlertDefProperties.priority:type_name -> com.coralogixapis.alerts.v3.AlertDefPriority
-	7,  // 10: com.coralogixapis.alerts.v3.AlertDefProperties.active_on:type_name -> com.coralogixapis.alerts.v3.ActivitySchedule
-	8,  // 11: com.coralogixapis.alerts.v3.AlertDefProperties.type:type_name -> com.coralogixapis.alerts.v3.AlertDefType
-	9,  // 12: com.coralogixapis.alerts.v3.AlertDefProperties.logs_immediate:type_name -> com.coralogixapis.alerts.v3.LogsImmediateType
-	10, // 13: com.coralogixapis.alerts.v3.AlertDefProperties.tracing_immediate:type_name -> com.coralogixapis.alerts.v3.TracingImmediateType
-	11, // 14: com.coralogixapis.alerts.v3.AlertDefProperties.logs_threshold:type_name -> com.coralogixapis.alerts.v3.LogsThresholdType
-	12, // 15: com.coralogixapis.alerts.v3.AlertDefProperties.logs_ratio_threshold:type_name -> com.coralogixapis.alerts.v3.LogsRatioThresholdType
-	13, // 16: com.coralogixapis.alerts.v3.AlertDefProperties.logs_time_relative_threshold:type_name -> com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdType
-	14, // 17: com.coralogixapis.alerts.v3.AlertDefProperties.metric_threshold:type_name -> com.coralogixapis.alerts.v3.MetricThresholdType
-	15, // 18: com.coralogixapis.alerts.v3.AlertDefProperties.tracing_threshold:type_name -> com.coralogixapis.alerts.v3.TracingThresholdType
-	16, // 19: com.coralogixapis.alerts.v3.AlertDefProperties.flow:type_name -> com.coralogixapis.alerts.v3.FlowType
-	17, // 20: com.coralogixapis.alerts.v3.AlertDefProperties.logs_anomaly:type_name -> com.coralogixapis.alerts.v3.LogsAnomalyType
-	18, // 21: com.coralogixapis.alerts.v3.AlertDefProperties.metric_anomaly:type_name -> com.coralogixapis.alerts.v3.MetricAnomalyType
-	19, // 22: com.coralogixapis.alerts.v3.AlertDefProperties.logs_new_value:type_name -> com.coralogixapis.alerts.v3.LogsNewValueType
-	20, // 23: com.coralogixapis.alerts.v3.AlertDefProperties.logs_unique_count:type_name -> com.coralogixapis.alerts.v3.LogsUniqueCountType
-	21, // 24: com.coralogixapis.alerts.v3.AlertDefProperties.slo_threshold:type_name -> com.coralogixapis.alerts.v3.SloThresholdType
-	3,  // 25: com.coralogixapis.alerts.v3.AlertDefProperties.group_by_keys:type_name -> google.protobuf.StringValue
-	22, // 26: com.coralogixapis.alerts.v3.AlertDefProperties.incidents_settings:type_name -> com.coralogixapis.alerts.v3.AlertDefIncidentSettings
-	23, // 27: com.coralogixapis.alerts.v3.AlertDefProperties.notification_group:type_name -> com.coralogixapis.alerts.v3.AlertDefNotificationGroup
-	23, // 28: com.coralogixapis.alerts.v3.AlertDefProperties.notification_group_excess:type_name -> com.coralogixapis.alerts.v3.AlertDefNotificationGroup
-	2,  // 29: com.coralogixapis.alerts.v3.AlertDefProperties.entity_labels:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties.EntityLabelsEntry
-	5,  // 30: com.coralogixapis.alerts.v3.AlertDefProperties.phantom_mode:type_name -> google.protobuf.BoolValue
-	5,  // 31: com.coralogixapis.alerts.v3.AlertDefProperties.deleted:type_name -> google.protobuf.BoolValue
-	32, // [32:32] is the sub-list for method output_type
-	32, // [32:32] is the sub-list for method input_type
-	32, // [32:32] is the sub-list for extension type_name
-	32, // [32:32] is the sub-list for extension extendee
-	0,  // [0:32] is the sub-list for field type_name
+	5,  // 6: com.coralogixapis.alerts.v3.AlertDef.status:type_name -> com.coralogixapis.alerts.v3.AlertDefStatus
+	3,  // 7: com.coralogixapis.alerts.v3.AlertDefProperties.name:type_name -> google.protobuf.StringValue
+	3,  // 8: com.coralogixapis.alerts.v3.AlertDefProperties.description:type_name -> google.protobuf.StringValue
+	6,  // 9: com.coralogixapis.alerts.v3.AlertDefProperties.enabled:type_name -> google.protobuf.BoolValue
+	7,  // 10: com.coralogixapis.alerts.v3.AlertDefProperties.priority:type_name -> com.coralogixapis.alerts.v3.AlertDefPriority
+	8,  // 11: com.coralogixapis.alerts.v3.AlertDefProperties.active_on:type_name -> com.coralogixapis.alerts.v3.ActivitySchedule
+	9,  // 12: com.coralogixapis.alerts.v3.AlertDefProperties.type:type_name -> com.coralogixapis.alerts.v3.AlertDefType
+	10, // 13: com.coralogixapis.alerts.v3.AlertDefProperties.logs_immediate:type_name -> com.coralogixapis.alerts.v3.LogsImmediateType
+	11, // 14: com.coralogixapis.alerts.v3.AlertDefProperties.tracing_immediate:type_name -> com.coralogixapis.alerts.v3.TracingImmediateType
+	12, // 15: com.coralogixapis.alerts.v3.AlertDefProperties.logs_threshold:type_name -> com.coralogixapis.alerts.v3.LogsThresholdType
+	13, // 16: com.coralogixapis.alerts.v3.AlertDefProperties.logs_ratio_threshold:type_name -> com.coralogixapis.alerts.v3.LogsRatioThresholdType
+	14, // 17: com.coralogixapis.alerts.v3.AlertDefProperties.logs_time_relative_threshold:type_name -> com.coralogixapis.alerts.v3.LogsTimeRelativeThresholdType
+	15, // 18: com.coralogixapis.alerts.v3.AlertDefProperties.metric_threshold:type_name -> com.coralogixapis.alerts.v3.MetricThresholdType
+	16, // 19: com.coralogixapis.alerts.v3.AlertDefProperties.tracing_threshold:type_name -> com.coralogixapis.alerts.v3.TracingThresholdType
+	17, // 20: com.coralogixapis.alerts.v3.AlertDefProperties.flow:type_name -> com.coralogixapis.alerts.v3.FlowType
+	18, // 21: com.coralogixapis.alerts.v3.AlertDefProperties.logs_anomaly:type_name -> com.coralogixapis.alerts.v3.LogsAnomalyType
+	19, // 22: com.coralogixapis.alerts.v3.AlertDefProperties.metric_anomaly:type_name -> com.coralogixapis.alerts.v3.MetricAnomalyType
+	20, // 23: com.coralogixapis.alerts.v3.AlertDefProperties.logs_new_value:type_name -> com.coralogixapis.alerts.v3.LogsNewValueType
+	21, // 24: com.coralogixapis.alerts.v3.AlertDefProperties.logs_unique_count:type_name -> com.coralogixapis.alerts.v3.LogsUniqueCountType
+	22, // 25: com.coralogixapis.alerts.v3.AlertDefProperties.slo_threshold:type_name -> com.coralogixapis.alerts.v3.SloThresholdType
+	3,  // 26: com.coralogixapis.alerts.v3.AlertDefProperties.group_by_keys:type_name -> google.protobuf.StringValue
+	23, // 27: com.coralogixapis.alerts.v3.AlertDefProperties.incidents_settings:type_name -> com.coralogixapis.alerts.v3.AlertDefIncidentSettings
+	24, // 28: com.coralogixapis.alerts.v3.AlertDefProperties.notification_group:type_name -> com.coralogixapis.alerts.v3.AlertDefNotificationGroup
+	24, // 29: com.coralogixapis.alerts.v3.AlertDefProperties.notification_group_excess:type_name -> com.coralogixapis.alerts.v3.AlertDefNotificationGroup
+	2,  // 30: com.coralogixapis.alerts.v3.AlertDefProperties.entity_labels:type_name -> com.coralogixapis.alerts.v3.AlertDefProperties.EntityLabelsEntry
+	6,  // 31: com.coralogixapis.alerts.v3.AlertDefProperties.phantom_mode:type_name -> google.protobuf.BoolValue
+	6,  // 32: com.coralogixapis.alerts.v3.AlertDefProperties.deleted:type_name -> google.protobuf.BoolValue
+	33, // [33:33] is the sub-list for method output_type
+	33, // [33:33] is the sub-list for method input_type
+	33, // [33:33] is the sub-list for extension type_name
+	33, // [33:33] is the sub-list for extension extendee
+	0,  // [0:33] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_alerts_v3_alert_def_proto_init() }
@@ -652,6 +664,8 @@ func file_com_coralogixapis_alerts_v3_alert_def_proto_init() {
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_slo_slo_threshold_type_definition_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_immediate_type_definition_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_threshold_type_definition_proto_init()
+	file_com_coralogixapis_alerts_v3_commons_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_proto_msgTypes[0].OneofWrappers = []any{}
 	file_com_coralogixapis_alerts_v3_alert_def_proto_msgTypes[1].OneofWrappers = []any{
 		(*AlertDefProperties_ActiveOn)(nil),
 		(*AlertDefProperties_LogsImmediate)(nil),

@@ -5,13 +5,13 @@ package com.coralogixapis.alerting.alert_scheduler_rule_protobuf.v1;
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_request.proto";
 import "com/coralogixapis/alerting/alert_scheduler_rule_protobuf/v1/alert_scheduler_response.proto";
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 
 
 service AlertSchedulerRuleService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Alert Scheduler Rule service"
     description: "Manage your alert scheduler rules."
   };
@@ -20,7 +20,7 @@ service AlertSchedulerRuleService {
     option (google.api.http) = {
       get: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -43,7 +43,7 @@ service AlertSchedulerRuleService {
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -66,7 +66,7 @@ service AlertSchedulerRuleService {
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -88,7 +88,7 @@ service AlertSchedulerRuleService {
       delete: "/v1/alert-scheduler-rules/{alert_scheduler_rule_id}"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -110,7 +110,7 @@ service AlertSchedulerRuleService {
     option (google.api.http) = {
       get: "/v1/alert-scheduler-rules/bulk"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -133,7 +133,7 @@ service AlertSchedulerRuleService {
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -156,7 +156,7 @@ service AlertSchedulerRuleService {
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}

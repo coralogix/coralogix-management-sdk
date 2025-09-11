@@ -6,7 +6,7 @@ import "com/coralogix/enrichment/v1/enrichment_request_model.proto";
 import "com/coralogix/enrichment/v1/enrichment_type.proto";
 import "com/coralogix/enrichment/v1/company_enrichment_settings.proto";
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
 package com.coralogix.enrichment.v1;
@@ -15,7 +15,7 @@ message GetEnrichmentLimitRequest {}
 
 message GetEnrichmentLimitResponse {
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Enrichment Limit"
       description: "This response data structure represents the enrichments limit"
@@ -30,15 +30,15 @@ message GetEnrichmentLimitResponse {
     }
   };
 
-  uint32 limit = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
-  uint32 used = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "5" }];
+  uint32 limit = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
+  uint32 used = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "5" }];
 }
 
 message GetEnrichmentsRequest {}
 
 message GetEnrichmentsResponse {
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Enrichment Collection"
       description: "This response data structure represents a collection of enrichments"
@@ -55,7 +55,7 @@ message GetEnrichmentsResponse {
 }
 
 message AddEnrichmentsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Enrichments Creation Request"
       description: "This response data structure represents a collection of enrichments"
@@ -72,7 +72,7 @@ message AddEnrichmentsRequest {
 }
 
 message AddEnrichmentsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Encrichments Creation Response"
       description: "Response data structure for enrichments creation"
@@ -89,7 +89,7 @@ message AddEnrichmentsResponse {
 }
 
 message RemoveEnrichmentsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Encrichments Delettion Request"
       description: "Request data structure for enrichments deletion"
@@ -102,11 +102,11 @@ message RemoveEnrichmentsRequest {
       description: "Find out more about enrichments"
     }
   };
-  repeated google.protobuf.UInt32Value enrichment_ids = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[1, 2, 3]" }];
+  repeated google.protobuf.UInt32Value enrichment_ids = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[1, 2, 3]" }];
 }
 
 message RemoveEnrichmentsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Encrichments Delettion Response"
       description: "Response data structure for enrichments deletion"
@@ -141,7 +141,7 @@ message GetCompanyEnrichmentSettingsResponse {
 }
 
 service EnrichmentService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Enrichments Service"
     description: "Manage your enrichments."
   };
@@ -149,7 +149,7 @@ service EnrichmentService {
     option (google.api.http) = {
       get: "/enrichments"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Enrichments"
     };
@@ -159,7 +159,7 @@ service EnrichmentService {
       post: "/enrichments"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Add Enrichments"
     };
@@ -169,7 +169,7 @@ service EnrichmentService {
     option (google.api.http) = {
       delete: "/enrichments"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Delete Enrichments"
     };
@@ -178,7 +178,7 @@ service EnrichmentService {
     option (google.api.http) = {
       get: "/enrichments/limit"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Enrichment Limit"
     };
@@ -189,7 +189,7 @@ service EnrichmentService {
       patch: "/enrichments:atomicOverwrite"
       body: "*"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Atomic Overwrite Enrichments"
     };
@@ -198,7 +198,7 @@ service EnrichmentService {
     option (google.api.http) = {
       get: "/enrichments/settings"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Enrichments Service"]
       summary: "Get Company Enrichment Settings"
     };

@@ -4,7 +4,7 @@ package com.coralogixapis.notification_center.routers.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/v1/routing/routing.proto";
 import "google/protobuf/timestamp.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/routers/v1";
 
@@ -20,7 +20,7 @@ message GlobalRouter {
   reserved 2, 3;
   reserved "user_defined_id", "deprecated_entity_type";
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Global Router"
       description: "Defines a set of pre-configured routing rules for directing notifications"
@@ -32,8 +32,8 @@ message GlobalRouter {
     }
   };
   // A unique identifier - automatically generated unless provided by the user
-  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
-  string name = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"My Router\"" }];
+  optional string id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"a16e24c8-4db2-4abf-ba3c-c9e1fc35a3b9\"" }];
+  string name = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"My Router\"" }];
   string description = 5;
   // The routing rules to be applied in order to determine the destinations of the notification, teh first rule that matches will be used
   repeated routing.RoutingRule rules = 6;
@@ -44,6 +44,7 @@ message GlobalRouter {
   // System-generated timestamp for when the router was last updated
   optional google.protobuf.Timestamp update_time = 9;
   map<string, string> entity_labels = 10;
-  EntityType entity_type = 11 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ALERTS\"" }];
-  optional  RouterEvaluationMode evaluation_mode = 12;
+  optional EntityType entity_type = 11 [deprecated = true];
+  optional RouterEvaluationMode evaluation_mode = 12;
+  map<string, string> entity_label_matcher = 13;
 }

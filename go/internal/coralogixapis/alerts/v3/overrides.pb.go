@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -70,9 +70,9 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_overrides_proto p
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_overrides_proto_rawDesc = "" +
 	"\n" +
-	"Ecom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcb\x01\n" +
+	"Ecom/coralogixapis/alerts/v3/alert_def_type_definition/overrides.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcb\x01\n" +
 	"\x10AlertDefOverride\x12\x8d\x01\n" +
-	"\bpriority\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityBB\x92A?2$The priority of the alert definitionJ\x17\"ALERT_DEF_PRIORITY_P3\"R\bpriority:'\x92A$\n" +
+	"\bpriority\x18\x01 \x01(\x0e2-.com.coralogixapis.alerts.v3.AlertDefPriorityBB\x9aA?2$The priority of the alert definitionJ\x17\"ALERT_DEF_PRIORITY_P3\"R\bpriority:'\x9aA$\n" +
 	"\"* Alert definition priority updateb\x06proto3"
 
 var (

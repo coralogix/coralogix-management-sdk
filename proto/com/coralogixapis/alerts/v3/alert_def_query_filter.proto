@@ -3,79 +3,81 @@ syntax = "proto3";
 package com.coralogixapis.alerts.v3;
 
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 import "com/coralogixapis/alerts/v3/alert_def_type.proto";
 import "com/coralogixapis/alerts/v3/alert_def_priority.proto";
 import "com/coralogixapis/alerts/v3/time_range.proto";
+import "com/coralogixapis/alerts/v3/commons.proto";
 
 message AlertDefQueryFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef query filter"
       description: "Filter configuration for alert defs"
     }
   };
-  AlertDefNameFilter name_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by name"}];
-  AlertDefTypeFilter type_filter = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by AlertDef type"}];
-  AlertDefEntityLabelsFilter entity_labels_filter = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by AlertDef entity labels"}];
-  AlertDefPriorityFilter priority_filter = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by AlertDef priority"}];
-  AlertDefEnabledFilter enabled_filter = 5 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by AlertDef enabled status"}];
-  AlertDefModifiedTimeFilter modified_time_range_filter = 7 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all alerts that were modified at the given time range"}];
-  AlertDefLastTriggeredTimeFilter last_triggered_time_range_filter = 8 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filters all alerts that were triggered at the given time range"}];
-  AlertDefTypeSpecificFilter type_specific_filter = 9 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter by fields specific to alert type definitions"}];
+  AlertDefNameFilter name_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by name"}];
+  AlertDefTypeFilter type_filter = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by AlertDef type"}];
+  AlertDefEntityLabelsFilter entity_labels_filter = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by AlertDef entity labels"}];
+  AlertDefPriorityFilter priority_filter = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by AlertDef priority"}];
+  AlertDefEnabledFilter enabled_filter = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by AlertDef enabled status"}];
+  AlertDefModifiedTimeFilter modified_time_range_filter = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all alerts that were modified at the given time range"}];
+  AlertDefLastTriggeredTimeFilter last_triggered_time_range_filter = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filters all alerts that were triggered at the given time range"}];
+  AlertDefTypeSpecificFilter type_specific_filter = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by fields specific to alert type definitions"}];
+  AlertDefStatusFilter status_filter = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter by alert definition status"}];
 }
 
 message AlertDefNameFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Name Filter"
       description: "Filter by alert definition names"
       required: ["name", "matcher"]
     }
   };
-  repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated google.protobuf.StringValue name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The name(s) of the alert definition - multiple values are OR'd together"
   }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter operator (EQUALS, NOT_EQUALS, CONTAINS)"
   }];
 }
 
 message AlertDefPriorityFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Priority Filter"
       description: "Filter by alert definition priorities"
       required: ["priority", "matcher"]
     }
   };
-  repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated AlertDefPriority priority = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The priority(ies) of the alert definition - multiple values are OR'd together"
   }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter operator (EQUALS, NOT_EQUALS)"
   }];
 }
 
 message AlertDefEntityLabelsFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Entity Labels Filter"
       description: "Filter by alert definition entity labels"
       required: ["entity_labels", "values_operator"]
     }
   };
-  map<string, string> entity_labels = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  map<string, string> entity_labels = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The entity label key-value pairs to filter by"
     example: "{\"environment\": \"production\", \"team\": \"backend\"}"
   }];
-  FilterValuesOperator values_operator = 3 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  FilterValuesOperator values_operator = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Whether all labels must match (AND) or any label can match (OR)"
   }];
 }
 
 message AlertDefModifiedTimeFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Modified Time Filter"
       description: "Filter by alert definition modification times"
@@ -86,7 +88,7 @@ message AlertDefModifiedTimeFilter {
 }
 
 message AlertDefLastTriggeredTimeFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Last Triggered Time Filter"
       description: "Filter by alert definition last triggered times"
@@ -97,59 +99,59 @@ message AlertDefLastTriggeredTimeFilter {
 }
 
 message AlertDefTypeFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Type Filter"
       description: "Filter by alert definition types"
       required: ["type", "matcher"]
     }
   };
-  repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated AlertDefType type = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The alert type(s) - multiple values are OR'd together"
   }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter operator (EQUALS, NOT_EQUALS)"
   }];
 }
 
 message AlertDefEnabledFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Enabled Filter"
       description: "Filter by alert definition enabled status"
       required: ["enabled"]
     }
   };
-  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.BoolValue enabled = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Whether to filter for enabled (true) or disabled (false) alerts"
   }];
 }
 
 message AlertDefTypeSpecificFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef Type Specific Filter"
       description: "Filter by fields specific to alert type definitions"
     }
   };
   oneof type_specific_filter {
-    AlertDefSloSpecificFilter slo_filter = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {description: "Filter SLO-based alerts by SLO-specific fields"}];
+    AlertDefSloSpecificFilter slo_filter = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Filter SLO-based alerts by SLO-specific fields"}];
   }
 }
 
 message AlertDefSloSpecificFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AlertDef SLO Specific Filter"
       description: "Filter SLO-based alerts by SLO-specific fields"
       required: ["slo_id", "matcher"]
     }
   };
-  repeated google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  repeated google.protobuf.StringValue slo_id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The SLO ID(s) to filter by - multiple values are OR'd together"
     example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
   }];
-  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "The filter operator (EQUALS, NOT_EQUALS)"
   }];
 }
@@ -165,4 +167,20 @@ enum FilterValuesOperator {
   FILTER_VALUES_OPERATOR_UNSPECIFIED = 0;
   FILTER_VALUES_OPERATOR_OR = 1;
   FILTER_VALUES_OPERATOR_AND = 2;
+}
+
+message AlertDefStatusFilter {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "AlertDef Status Filter"
+      description: "Filter by alert definition status"
+      required: ["status", "matcher"]
+    }
+  };
+  repeated AlertDefStatus status = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The status(es) of the alert definition - multiple values are OR'd together"
+  }];
+  FilterMatcher matcher = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The filter operator (EQUALS, NOT_EQUALS)"
+  }];
 }

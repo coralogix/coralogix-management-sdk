@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -79,10 +79,10 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_i
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_tracing_tracing_immediate_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xdf\x04\n" +
+	"ecom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/tracing_immediate_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/tracing/common/tracing_filter.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdf\x04\n" +
 	"\x14TracingImmediateType\x12\x8c\x01\n" +
-	"\x0etracing_filter\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.TracingFilterB9\x92A624A filter to match trace entries for immediate alertsR\rtracingFilter\x12\xa6\x01\n" +
-	"\x1bnotification_payload_filter\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueBH\x92AE2!Notification payload field filterJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\x8e\x02\x92A\x8a\x02\n" +
+	"\x0etracing_filter\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.TracingFilterB9\x9aA624A filter to match trace entries for immediate alertsR\rtracingFilter\x12\xa6\x01\n" +
+	"\x1bnotification_payload_filter\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueBH\x9aAE2!Notification payload field filterJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:\x8e\x02\x9aA\x8a\x02\n" +
 	"r* Trace-based immediate alert type2=Configuration for immediate alerts triggered on trace entries\xd2\x01\x0etracing_filter*\x93\x01\n" +
 	"9Learn more about trace-based alerts in our documentation.\x12Vhttps://coralogix.com/docs/user-guides/alerting/create-an-alert/traces/tracing-alerts/b\x06proto3"
 

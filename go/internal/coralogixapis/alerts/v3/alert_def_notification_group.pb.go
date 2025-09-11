@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -377,37 +377,37 @@ var File_com_coralogixapis_alerts_v3_alert_def_notification_group_proto protoref
 
 const file_com_coralogixapis_alerts_v3_alert_def_notification_group_proto_rawDesc = "" +
 	"\n" +
-	">com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aTcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xef\x02\n" +
+	">com/coralogixapis/alerts/v3/alert_def_notification_group.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aTcom/coralogixapis/alerts/v3/alert_def_type_definition/notification_destination.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xef\x02\n" +
 	"\x18AlertDefIncidentSettings\x12z\n" +
-	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x92A=27The time in minutes before the alert can be retriggeredJ\x0230H\x00R\aminutes\x12\x94\x01\n" +
-	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBP\x92AM2'The condition to notify about the alertJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"R\bnotifyOn:)\x92A&\n" +
+	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x9aA=27The time in minutes before the alert can be retriggeredJ\x0230H\x00R\aminutes\x12\x94\x01\n" +
+	"\tnotify_on\x18\x02 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnBP\x9aAM2'The condition to notify about the alertJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"R\bnotifyOn:)\x9aA&\n" +
 	"$*\"Alert definition incident settingsB\x15\n" +
 	"\x13retriggering_period\"\xaf\x05\n" +
 	"\x19AlertDefNotificationGroup\x12\x8b\x01\n" +
-	"\rgroup_by_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBI\x92AF2\x1fThe keys to group the alerts byJ\x10[\"key1\", \"key2\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\vgroupByKeys\x12\x96\x01\n" +
-	"\bwebhooks\x18\x02 \x03(\v25.com.coralogixapis.alerts.v3.AlertDefWebhooksSettingsBC\x92A@2>The settings for webhooks associated with the alert definitionR\bwebhooks\x12\xa1\x01\n" +
-	"\fdestinations\x18\x03 \x03(\v24.com.coralogixapis.alerts.v3.NotificationDestinationBG\x92AD2BThe destinations for notifications.  (Notification Center feature)R\fdestinations\x12\x8f\x01\n" +
-	"\x06router\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.NotificationRouterBA\x92A>2<The router for notifications.  (Notification Center feature)H\x00R\x06router\x88\x01\x01:*\x92A'\n" +
+	"\rgroup_by_keys\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBI\x9aAF2\x1fThe keys to group the alerts byJ\x10[\"key1\", \"key2\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\vgroupByKeys\x12\x96\x01\n" +
+	"\bwebhooks\x18\x02 \x03(\v25.com.coralogixapis.alerts.v3.AlertDefWebhooksSettingsBC\x9aA@2>The settings for webhooks associated with the alert definitionR\bwebhooks\x12\xa1\x01\n" +
+	"\fdestinations\x18\x03 \x03(\v24.com.coralogixapis.alerts.v3.NotificationDestinationBG\x9aAD2BThe destinations for notifications.  (Notification Center feature)R\fdestinations\x12\x8f\x01\n" +
+	"\x06router\x18\x04 \x01(\v2/.com.coralogixapis.alerts.v3.NotificationRouterBA\x9aA>2<The router for notifications.  (Notification Center feature)H\x00R\x06router\x88\x01\x01:*\x9aA'\n" +
 	"%*#Alert definition notification groupB\t\n" +
 	"\a_router\"\xda\x04\n" +
 	"\x18AlertDefWebhooksSettings\x12z\n" +
-	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x92A=27The time in minutes before the alert can be retriggeredJ\x0215H\x00R\aminutes\x12\xa8\x01\n" +
-	"\tnotify_on\x18\x01 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnB_\x92A\\26The condition under which the alert should be notifiedJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"H\x01R\bnotifyOn\x88\x01\x01\x12\x83\x01\n" +
-	"\vintegration\x18\x02 \x01(\v2,.com.coralogixapis.alerts.v3.IntegrationTypeB3\x92A02.The integration type for webhook notificationsR\vintegration:l\x92Ai\n" +
+	"\aminutes\x18d \x01(\v2\x1c.google.protobuf.UInt32ValueB@\x9aA=27The time in minutes before the alert can be retriggeredJ\x0215H\x00R\aminutes\x12\xa8\x01\n" +
+	"\tnotify_on\x18\x01 \x01(\x0e2%.com.coralogixapis.alerts.v3.NotifyOnB_\x9aA\\26The condition under which the alert should be notifiedJ\"\"NOTIFY_ON_TRIGGERED_AND_RESOLVED\"H\x01R\bnotifyOn\x88\x01\x01\x12\x83\x01\n" +
+	"\vintegration\x18\x02 \x01(\v2,.com.coralogixapis.alerts.v3.IntegrationTypeB3\x9aA02.The integration type for webhook notificationsR\vintegration:l\x9aAi\n" +
 	"g*!Alert definition webhook settings24Configuration for webhook notifications for an alert\xd2\x01\vintegrationB\x15\n" +
 	"\x13retriggering_periodB\f\n" +
 	"\n" +
 	"_notify_on\"\xfb\x02\n" +
 	"\x0fIntegrationType\x12x\n" +
-	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB1\x92A.2'The integration ID for the notificationJ\x03123H\x00R\rintegrationId\x12t\n" +
+	"\x0eintegration_id\x18\x02 \x01(\v2\x1c.google.protobuf.UInt32ValueB1\x9aA.2'The integration ID for the notificationJ\x03123H\x00R\rintegrationId\x12t\n" +
 	"\n" +
-	"recipients\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.RecipientsB)\x92A&2$The recipients for the notification.H\x00R\n" +
-	"recipients:d\x92Aa\n" +
+	"recipients\x18\x03 \x01(\v2'.com.coralogixapis.alerts.v3.RecipientsB)\x9aA&2$The recipients for the notification.H\x00R\n" +
+	"recipients:d\x9aAa\n" +
 	"_*\x10Integration type28Defines the type of integration to use for notifications\xd2\x01\x10integration_typeB\x12\n" +
 	"\x10integration_type\"\xf4\x01\n" +
 	"\n" +
 	"Recipients\x12\x97\x01\n" +
-	"\x06emails\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBa\x92A^24The list of email recipients for alert notificationsJ\x12[\"mail@gmail.com\"]\xa8\x01\x01\xa2\x02\x0elist of emailsR\x06emails:L\x92AI\n" +
+	"\x06emails\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueBa\x9aA^24The list of email recipients for alert notificationsJ\x12[\"mail@gmail.com\"]\xa8\x01\x01\xa2\x02\x0elist of emailsR\x06emails:L\x9aAI\n" +
 	"G*\n" +
 	"Recipients20List of email recipients for alert notifications\xd2\x01\x06emailsb\x06proto3"
 

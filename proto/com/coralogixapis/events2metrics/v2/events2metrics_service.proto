@@ -3,110 +3,110 @@ syntax = "proto3";
 package com.coralogixapis.events2metrics.v2;
 
 import "com/coralogixapis/events2metrics/v2/events2metrics_definition.proto";
-import "com/coralogix/common/v1/audit_log.proto";;
+import "com/coralogixapis/common/v1/audit_log.proto";;
 import "com/coralogixapis/logs2metrics/v2/logs_query.proto";
 import "com/coralogixapis/spans2metrics/v2/spans_query.proto";
 import "google/protobuf/wrappers.proto";
 
 
 import "google/api/annotations.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 service Events2MetricService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Events2Metrics Service"
     description: "Manage your events2metrics."
   };
 
   rpc CreateE2M(CreateE2MRequest) returns (CreateE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Create new E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Create new E2M";
     option (google.api.http) = {
       post: "/api/v2/events2metrics",
       body: "e2m"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Create a new E2M"
     };
   }
 
   rpc ListE2M(ListE2MRequest) returns (ListE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "List all E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "List all E2M";
     option (google.api.http) = {
       get: "/api/v2/events2metrics"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "List E2Ms"
     };
   }
 
   rpc ReplaceE2M(ReplaceE2MRequest) returns (ReplaceE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Replace E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Replace E2M";
     option (google.api.http) = {
       put: "/api/v2/events2metrics",
       body: "e2m"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Replace an E2M"
     };
   }
 
   rpc GetE2M(GetE2MRequest) returns (GetE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get E2M";
     option (google.api.http) = {
       get: "/api/v2/events2metrics/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Get an E2M"
     };
   }
 
   rpc DeleteE2M(DeleteE2MRequest) returns (DeleteE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Delete E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Delete E2M";
     option (google.api.http) = {
       delete: "/api/v2/events2metrics/{id}"
     };
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Delete an E2M"
     };
   }
 
   rpc AtomicBatchExecuteE2M(AtomicBatchExecuteE2MRequest) returns (AtomicBatchExecuteE2MResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Atomic Batch Execute E2M";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Atomic Batch Execute E2M";
     option (google.api.http) = {
       post: "/api/v2/events2metrics/atomic_batch_execute"
       body: "*"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Atomic Batch Execute E2M"
     };
   }
 
   rpc ListLabelsCardinality(ListLabelsCardinalityRequest) returns (ListLabelsCardinalityResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "List Labels Cardinality";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "List Labels Cardinality";
     option (google.api.http) = {
       get: "/api/v2/events2metrics/labels_cardinality"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "List E2M Labels Cardinality"
     };
   }
 
   rpc GetLimits(GetLimitsRequest) returns (GetLimitsResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "get limits";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get limits";
     option (google.api.http) = {
       get: "/api/v2/events2metrics/limits"
     };
 
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       tags: ["Events2Metrics Service"]
       summary: "Get E2M Limits"
     };
@@ -114,7 +114,7 @@ service Events2MetricService {
 }
 // represents e2m create request
 message CreateE2MRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Create E2M Request"
       description: "This is used to create a new event to metric definition"
@@ -138,7 +138,7 @@ message CreateE2MResponse {
 message ListE2MRequest {}
  // represents response of
 message ListE2MResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "List E2M Response"
       description: "This is the response obtained when listing all event to metric definitions"
@@ -157,7 +157,7 @@ message ListE2MResponse {
 
  // represents e2m replace request
 message ReplaceE2MRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace E2M Request"
       description: "This data structure is used to replace an existing event to metric definition"
@@ -175,7 +175,7 @@ message ReplaceE2MRequest {
 
  // represents e2m replace response
 message ReplaceE2MResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Replace E2M Response"
       description: "This data structure is obtained when replacing an existing event to metric definition"
@@ -192,7 +192,7 @@ message ReplaceE2MResponse {
 }
  // represents get request for a single e2m by id
 message GetE2MRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get E2M Response"
       description: "This data structure is used to retrieve an existing event to metric definition"
@@ -205,13 +205,13 @@ message GetE2MRequest {
       description: "Find out more about events2metrics"
     }
   };
-  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
   } ];
 }
  // represents response for a single e2m by id
 message GetE2MResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get E2M Response"
       description: "This data structure is obtained when retrieving an existing event to metric definition"
@@ -228,7 +228,7 @@ message GetE2MResponse {
 }
  // represents e2m delete request
 message DeleteE2MRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete E2M Request"
       description: "This data structure is used to delete an existing event to metric definition"
@@ -242,14 +242,14 @@ message DeleteE2MRequest {
     }
   };
   // id of e2m to be deleted
-  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.StringValue id = 1 [ (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     example : "\"d6a3658e-78d2-47d0-9b81-b2c551f01b09\""
   } ];
 }
 // represents e2m delete response
 message DeleteE2MResponse {
 
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Delete E2M Request"
       description: "This data structure is obtained when deleting an existing event to metric definition"

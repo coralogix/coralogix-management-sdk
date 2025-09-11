@@ -62,6 +62,8 @@ pub use cx_api::proto::com::coralogixapis::alerts::v3::{
     AlertDefOverride,
     AlertDefPriority,
     AlertDefProperties,
+    AlertDefStatus,
+    AlertDefStatusFilter,
     AlertDefType,
     AlertDefWebhooksSettings,
     AlertsOp,

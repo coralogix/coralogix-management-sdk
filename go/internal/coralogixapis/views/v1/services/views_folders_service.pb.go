@@ -8,7 +8,7 @@ package services
 
 import (
 	v1 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/views/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -461,15 +461,15 @@ var File_com_coralogixapis_views_v1_services_views_folders_service_proto protore
 
 const file_com_coralogixapis_views_v1_services_views_folders_service_proto_rawDesc = "" +
 	"\n" +
-	"?com/coralogixapis/views/v1/services/views_folders_service.proto\x12#com.coralogixapis.views.v1.services\x1a,com/coralogixapis/views/v1/view_folder.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xa2\x01\n" +
+	"?com/coralogixapis/views/v1/services/views_folders_service.proto\x12#com.coralogixapis.views.v1.services\x1a,com/coralogixapis/views/v1/view_folder.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"\xa2\x01\n" +
 	"\x17CreateViewFolderRequest\x12R\n" +
-	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB \x92A\x1d2\vFolder nameJ\v\"My Folder\"\x80\x01\x01R\x04name:3\x92A0\n" +
+	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB \x9aA\x1d2\vFolder nameJ\v\"My Folder\"\x80\x01\x01R\x04name:3\x9aA0\n" +
 	".*\x17CreateViewFolderRequest2\x13Create view folder.\"\x9d\x01\n" +
 	"\x18CreateViewFolderResponse\x12>\n" +
-	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder:A\x92A>\n" +
+	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder:A\x9aA>\n" +
 	"<*\x17CreateViewFolderRequest2!Request for creating view folder.\"\x9f\x02\n" +
 	"\x14GetViewFolderRequest\x12\xc7\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id:=\x92A:\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x9aA\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id:=\x9aA:\n" +
 	"8*\x14GetViewFolderRequest2 Request for getting view folder.\"W\n" +
 	"\x15GetViewFolderResponse\x12>\n" +
 	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder\"\x18\n" +
@@ -477,31 +477,31 @@ const file_com_coralogixapis_views_v1_services_views_folders_service_proto_rawDe
 	"\x17ListViewFoldersResponse\x12@\n" +
 	"\afolders\x18\x01 \x03(\v2&.com.coralogixapis.views.v1.ViewFolderR\afolders\"\xe3\x01\n" +
 	"\x17DeleteViewFolderRequest\x12\xc7\x01\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x92A\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\"\x1a\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x98\x01\x9aA\x94\x012\x1dUnique identifier for foldersJ&\"3dc02998-0b50-4ea8-b68a-4779d716fa1f\"x$\x80\x01$\x8a\x01>^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$\xa2\x02\x04uuidR\x02id\"\x1a\n" +
 	"\x18DeleteViewFolderResponse\"Z\n" +
 	"\x18ReplaceViewFolderRequest\x12>\n" +
 	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder\"[\n" +
 	"\x19ReplaceViewFolderResponse\x12>\n" +
 	"\x06folder\x18\x01 \x01(\v2&.com.coralogixapis.views.v1.ViewFolderR\x06folder2\x94\x0e\n" +
 	"\x13ViewsFoldersService\x12\xe8\x02\n" +
-	"\x0fListViewFolders\x12;.com.coralogixapis.views.v1.services.ListViewFoldersRequest\x1a<.com.coralogixapis.views.v1.services.ListViewFoldersResponse\"\xd9\x01\x92A\xbd\x01\n" +
+	"\x0fListViewFolders\x12;.com.coralogixapis.views.v1.services.ListViewFoldersRequest\x1a<.com.coralogixapis.views.v1.services.ListViewFoldersResponse\"\xd9\x01\x9aA\xbd\x01\n" +
 	"\x19Folders for views service\x12\x19List view folders service\x1a\x13List view's foldersJp\n" +
 	"\x03200\x12i\"g\n" +
 	"\x10application/json\x12S{\"view_folders\":[{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}]}\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/view_folders\x12\xd9\x02\n" +
-	"\rGetViewFolder\x129.com.coralogixapis.views.v1.services.GetViewFolderRequest\x1a:.com.coralogixapis.views.v1.services.GetViewFolderResponse\"\xd0\x01\x92A\xa7\x01\n" +
+	"\rGetViewFolder\x129.com.coralogixapis.views.v1.services.GetViewFolderRequest\x1a:.com.coralogixapis.views.v1.services.GetViewFolderResponse\"\xd0\x01\x9aA\xa7\x01\n" +
 	"\x19Folders for views service\x12\x17Get View Folder service\x1a\x12Create view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
 	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02\x1fb\x06folder\x12\x15/v1/view_folders/{id}\x12\xe3\x02\n" +
-	"\x10CreateViewFolder\x12<.com.coralogixapis.views.v1.services.CreateViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.CreateViewFolderResponse\"\xd1\x01\x92A\xaa\x01\n" +
+	"\x10CreateViewFolder\x12<.com.coralogixapis.views.v1.services.CreateViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.CreateViewFolderResponse\"\xd1\x01\x9aA\xaa\x01\n" +
 	"\x19Folders for views service\x12\x1aCreate View Folder service\x1a\x12Create view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
 	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02\x1d:\x01*b\x06folder\"\x10/v1/view_folders\x12\x85\x02\n" +
-	"\x10DeleteViewFolder\x12<.com.coralogixapis.views.v1.services.DeleteViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.DeleteViewFolderResponse\"t\x92AT\n" +
+	"\x10DeleteViewFolder\x12<.com.coralogixapis.views.v1.services.DeleteViewFolderRequest\x1a=.com.coralogixapis.views.v1.services.DeleteViewFolderResponse\"t\x9aAT\n" +
 	"\x19Folders for views service\x12\x1aDelete View Folder service\x1a\x1bDeletes a view folder by ID\x82\xd3\xe4\x93\x02\x17*\x15/v1/view_folders/{id}\x12\x86\x03\n" +
-	"\x11ReplaceViewFolder\x12=.com.coralogixapis.views.v1.services.ReplaceViewFolderRequest\x1a>.com.coralogixapis.views.v1.services.ReplaceViewFolderResponse\"\xf1\x01\x92A\xb9\x01\n" +
+	"\x11ReplaceViewFolder\x12=.com.coralogixapis.views.v1.services.ReplaceViewFolderRequest\x1a>.com.coralogixapis.views.v1.services.ReplaceViewFolderResponse\"\xf1\x01\x9aA\xb9\x01\n" +
 	"\x19Folders for views service\x12\x1bReplace View Folder service\x1a Replaces an existing view folderJ]\n" +
 	"\x03200\x12V\"T\n" +
-	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02.:\x06folderb\x06folder\x1a\x1c/v1/view_folders/{folder.id}\x1a?\x92A<\n" +
+	"\x10application/json\x12@{\"id\":\"0cd4ed54-9b59-4eef-b329-151a167e2304\",\"name\":\"My Folder\"}\x82\xd3\xe4\x93\x02.:\x06folderb\x06folder\x1a\x1c/v1/view_folders/{folder.id}\x1a?\x9aA<\n" +
 	"\x19Folders for views service\x12\x1fCreate and manage view folders.b\x06proto3"
 
 var (

@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -183,20 +183,20 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_new_val
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_new_value_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1adcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xce\x04\n" +
+	"_com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_new_value_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1adcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/new_value/logs_new_value_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xce\x04\n" +
 	"\x10LogsNewValueType\x12}\n" +
-	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB3\x92A02.The filter to match log entries for the alert.R\n" +
+	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterB3\x9aA02.The filter to match log entries for the alert.R\n" +
 	"logsFilter\x12v\n" +
-	"\x05rules\x18\x02 \x03(\v2-.com.coralogixapis.alerts.v3.LogsNewValueRuleB1\x92A.2&The rules for the log new value alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xcf\x01\n" +
-	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBq\x92An2JThe filter to specify which fields to include in the notification payload.J\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:q\x92An\n" +
+	"\x05rules\x18\x02 \x03(\v2-.com.coralogixapis.alerts.v3.LogsNewValueRuleB1\x9aA.2&The rules for the log new value alert.\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xcf\x01\n" +
+	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBq\x9aAn2JThe filter to specify which fields to include in the notification payload.J\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter:q\x9aAn\n" +
 	"l*\x1eLog-based new value alert type2BConfiguration for alerts triggered by new values appearing in logs\xd2\x01\x05rules\"\x80\x02\n" +
 	"\x10LogsNewValueRule\x12\x86\x01\n" +
-	"\tcondition\x18\x01 \x01(\v22.com.coralogixapis.alerts.v3.LogsNewValueConditionB4\x92A12/The condition for detecting new values in logs.R\tcondition:c\x92A`\n" +
+	"\tcondition\x18\x01 \x01(\v22.com.coralogixapis.alerts.v3.LogsNewValueConditionB4\x9aA12/The condition for detecting new values in logs.R\tcondition:c\x9aA`\n" +
 	"^*\x18Log-based new value rule26Defines the condition for detecting new values in logs\xd2\x01\tcondition\"\x9e\x03\n" +
 	"\x15LogsNewValueCondition\x12\x82\x01\n" +
-	"\x10keypath_to_track\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB:\x92A72#The keypath to track for new valuesJ\x10\"metadata.field\"R\x0ekeypathToTrack\x12\x83\x01\n" +
-	"\vtime_window\x18\x02 \x01(\v23.com.coralogixapis.alerts.v3.LogsNewValueTimeWindowB-\x92A*2(The time window for detecting new valuesR\n" +
-	"timeWindow:z\x92Aw\n" +
+	"\x10keypath_to_track\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB:\x9aA72#The keypath to track for new valuesJ\x10\"metadata.field\"R\x0ekeypathToTrack\x12\x83\x01\n" +
+	"\vtime_window\x18\x02 \x01(\v23.com.coralogixapis.alerts.v3.LogsNewValueTimeWindowB-\x9aA*2(The time window for detecting new valuesR\n" +
+	"timeWindow:z\x9aAw\n" +
 	"u*\x1dLog-based new value condition23Defines conditions for detecting new values in logs\xd2\x01\x10keypath_to_track\xd2\x01\vtime_windowb\x06proto3"
 
 var (

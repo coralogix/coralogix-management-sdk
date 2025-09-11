@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -404,26 +404,26 @@ var File_com_coralogixapis_incidents_v1_incident_query_proto protoreflect.FileDe
 
 const file_com_coralogixapis_incidents_v1_incident_query_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/incidents/v1/incident_query.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/incident.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb4\x02\n" +
+	"3com/coralogixapis/incidents/v1/incident_query.proto\x12\x1ecom.coralogixapis.incidents.v1\x1a-com/coralogixapis/incidents/v1/incident.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xb4\x02\n" +
 	"\aOrderBy\x12W\n" +
 	"\x0eincident_field\x18\n" +
 	" \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentFieldsH\x00R\rincidentField\x12I\n" +
 	"\x10contextual_label\x18\v \x01(\v2\x1c.google.protobuf.StringValueH\x00R\x0fcontextualLabel\x12N\n" +
-	"\tdirection\x18\x02 \x01(\x0e20.com.coralogixapis.incidents.v1.OrderByDirectionR\tdirection:,\x92A)\n" +
+	"\tdirection\x18\x02 \x01(\x0e20.com.coralogixapis.incidents.v1.OrderByDirectionR\tdirection:,\x9aA)\n" +
 	"'*\x11Incident order by\xd2\x01\x05field\xd2\x01\tdirectionB\a\n" +
 	"\x05field\"\xcd\x03\n" +
 	"\aGroupBy\x12\x8a\x01\n" +
 	"\x0eincident_field\x18\n" +
-	" \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentFieldsB1\x92A.2\x15The field to group byJ\x15\"INCIDENTS_FIELDS_ID\"H\x00R\rincidentField\x12q\n" +
-	"\x10contextual_label\x18\v \x01(\v2\x1c.google.protobuf.StringValueB&\x92A#2!The contextual label to group by.H\x00R\x0fcontextualLabel\x12\x96\x01\n" +
-	"\x12order_by_direction\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.OrderByDirectionB6\x92A32\x17The order by direction.J\x18\"ORDER_BY_DIRECTION_ASC\"R\x10orderByDirection: \x92A\x1d\n" +
+	" \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentFieldsB1\x9aA.2\x15The field to group byJ\x15\"INCIDENTS_FIELDS_ID\"H\x00R\rincidentField\x12q\n" +
+	"\x10contextual_label\x18\v \x01(\v2\x1c.google.protobuf.StringValueB&\x9aA#2!The contextual label to group by.H\x00R\x0fcontextualLabel\x12\x96\x01\n" +
+	"\x12order_by_direction\x18\x01 \x01(\x0e20.com.coralogixapis.incidents.v1.OrderByDirectionB6\x9aA32\x17The order by direction.J\x18\"ORDER_BY_DIRECTION_ASC\"R\x10orderByDirection: \x9aA\x1d\n" +
 	"\x1b*\x11Incident group by\xd2\x01\x05fieldB\a\n" +
 	"\x05field\"\xa6\x03\n" +
 	"\x13IncidentSearchQuery\x12R\n" +
-	"\x05query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x92A\x1b2\x10The search queryJ\a\"error\"R\x05query\x12\x8f\x01\n" +
+	"\x05query\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x1e\x9aA\x1b2\x10The search queryJ\a\"error\"R\x05query\x12\x8f\x01\n" +
 	"\x0eincident_field\x18\n" +
-	" \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentFieldsB6\x92A32\x16The field to search inJ\x19\"INCIDENTS_FIELDS_STATUS\"H\x00R\rincidentField\x12r\n" +
-	"\x10contextual_label\x18\v \x01(\v2\x1c.google.protobuf.StringValueB'\x92A$2\"The contextual label to search in.H\x00R\x0fcontextualLabel:,\x92A)\n" +
+	" \x01(\x0e2..com.coralogixapis.incidents.v1.IncidentFieldsB6\x9aA32\x16The field to search inJ\x19\"INCIDENTS_FIELDS_STATUS\"H\x00R\rincidentField\x12r\n" +
+	"\x10contextual_label\x18\v \x01(\v2\x1c.google.protobuf.StringValueB'\x9aA$2\"The contextual label to search in.H\x00R\x0fcontextualLabel:,\x9aA)\n" +
 	"'*\x15Incident search query\xd2\x01\x05query\xd2\x01\x05fieldB\a\n" +
 	"\x05field*\xc3\x01\n" +
 	"\rOrderByFields\x12\x1f\n" +

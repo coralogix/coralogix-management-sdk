@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -309,7 +309,7 @@ var File_com_coralogix_enrichment_v1_enrichment_type_proto protoreflect.FileDesc
 
 const file_com_coralogix_enrichment_v1_enrichment_type_proto_rawDesc = "" +
 	"\n" +
-	"1com/coralogix/enrichment/v1/enrichment_type.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xcb\x02\n" +
+	"1com/coralogix/enrichment/v1/enrichment_type.proto\x12\x1bcom.coralogix.enrichment.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xcb\x02\n" +
 	"\x0eEnrichmentType\x12?\n" +
 	"\x06geo_ip\x18\x01 \x01(\v2&.com.coralogix.enrichment.v1.GeoIpTypeH\x00R\x05geoIp\x12T\n" +
 	"\rsuspicious_ip\x18\x02 \x01(\v2-.com.coralogix.enrichment.v1.SuspiciousIpTypeH\x00R\fsuspiciousIp\x128\n" +
@@ -322,9 +322,9 @@ const file_com_coralogix_enrichment_v1_enrichment_type_proto_rawDesc = "" +
 	"\x10SuspiciousIpType\"X\n" +
 	"\aAwsType\x12M\n" +
 	"\rresource_type\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\n" +
-	"\x92A\aJ\x05\"ec2\"R\fresourceType\"L\n" +
+	"\x9aA\aJ\x05\"ec2\"R\fresourceType\"L\n" +
 	"\x14CustomEnrichmentType\x124\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011R\x02idb\x06proto3"
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011R\x02idb\x06proto3"
 
 var (
 	file_com_coralogix_enrichment_v1_enrichment_type_proto_rawDescOnce sync.Once

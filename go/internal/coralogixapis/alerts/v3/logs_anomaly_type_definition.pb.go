@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -207,24 +207,24 @@ var File_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_anomaly
 
 const file_com_coralogixapis_alerts_v3_alert_def_type_definition_logs_logs_anomaly_type_definition_proto_rawDesc = "" +
 	"\n" +
-	"]com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x1adcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1aWcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xea\a\n" +
+	"]com/coralogixapis/alerts/v3/alert_def_type_definition/logs/logs_anomaly_type_definition.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aYcom/coralogixapis/alerts/v3/alert_def_type_definition/common/anomaly_alert_settings.proto\x1adcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/anomaly/logs_anomaly_condition_type.proto\x1aScom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_filter.proto\x1aWcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/common/logs_timewindow.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xea\a\n" +
 	"\x0fLogsAnomalyType\x12H\n" +
 	"\vlogs_filter\x18\x01 \x01(\v2'.com.coralogixapis.alerts.v3.LogsFilterR\n" +
 	"logsFilter\x12r\n" +
-	"\x05rules\x18\x02 \x03(\v2,.com.coralogixapis.alerts.v3.LogsAnomalyRuleB.\x92A+2#The rules for the log anomaly alert\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xce\x01\n" +
-	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBp\x92Am2IThe filter to specify which fields to include in the notification payloadJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\xa7\x01\n" +
-	"\x13evaluation_delay_ms\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueBZ\x92AW2?The delay in milliseconds before evaluating the alert conditionJ\x0560000\xa2\x02\fmillisecondsR\x11evaluationDelayMs\x12\x92\x01\n" +
-	"\x16anomaly_alert_settings\x18\x05 \x01(\v21.com.coralogixapis.alerts.v3.AnomalyAlertSettingsB)\x92A&2$Anomaly alert settings configurationR\x14anomalyAlertSettings:\x88\x02\x92A\x84\x02\n" +
+	"\x05rules\x18\x02 \x03(\v2,.com.coralogixapis.alerts.v3.LogsAnomalyRuleB.\x9aA+2#The rules for the log anomaly alert\xa0\x01\x01\xa8\x01\x01R\x05rules\x12\xce\x01\n" +
+	"\x1bnotification_payload_filter\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueBp\x9aAm2IThe filter to specify which fields to include in the notification payloadJ\r[\"obj.field\"]\x8a\x01\x10^[a-zA-Z0-9_.]+$R\x19notificationPayloadFilter\x12\xa7\x01\n" +
+	"\x13evaluation_delay_ms\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueBZ\x9aAW2?The delay in milliseconds before evaluating the alert conditionJ\x0560000\xa2\x02\fmillisecondsR\x11evaluationDelayMs\x12\x92\x01\n" +
+	"\x16anomaly_alert_settings\x18\x05 \x01(\v21.com.coralogixapis.alerts.v3.AnomalyAlertSettingsB)\x9aA&2$Anomaly alert settings configurationR\x14anomalyAlertSettings:\x88\x02\x9aA\x84\x02\n" +
 	"d*\x1cLog-based anomaly alert type2<Configuration for alerts triggered by anomalous log patterns\xd2\x01\x05rules*\x9b\x01\n" +
 	"9Learn more about logs anomaly alerts in our documentation\x12^https://coralogix.com/docs/user-guides/alerting/create-an-alert/logs/anomaly-detection-alerts/\"\xe5\x01\n" +
 	"\x0fLogsAnomalyRule\x12{\n" +
-	"\tcondition\x18\x01 \x01(\v21.com.coralogixapis.alerts.v3.LogsAnomalyConditionB*\x92A'2%The condition for the threshold alertR\tcondition:U\x92AR\n" +
+	"\tcondition\x18\x01 \x01(\v21.com.coralogixapis.alerts.v3.LogsAnomalyConditionB*\x9aA'2%The condition for the threshold alertR\tcondition:U\x9aAR\n" +
 	"P*\x16Log-based anomaly rule2*Defines a rule for detecting log anomalies\xd2\x01\tcondition\"\xe1\x04\n" +
 	"\x14LogsAnomalyCondition\x12\x81\x01\n" +
-	"\x11minimum_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x92A32+The threshold value for the alert conditionJ\x0410.0R\x10minimumThreshold\x12z\n" +
-	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x92A)2'The time window for the alert conditionR\n" +
+	"\x11minimum_threshold\x18\x01 \x01(\v2\x1c.google.protobuf.DoubleValueB6\x9aA32+The threshold value for the alert conditionJ\x0410.0R\x10minimumThreshold\x12z\n" +
+	"\vtime_window\x18\x02 \x01(\v2+.com.coralogixapis.alerts.v3.LogsTimeWindowB,\x9aA)2'The time window for the alert conditionR\n" +
 	"timeWindow\x12\xbe\x01\n" +
-	"\x0econdition_type\x18\x03 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsAnomalyConditionTypeB`\x92A]2#The type of condition for the alertJ6\"LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\x87\x01\x92A\x83\x01\n" +
+	"\x0econdition_type\x18\x03 \x01(\x0e25.com.coralogixapis.alerts.v3.LogsAnomalyConditionTypeB`\x9aA]2#The type of condition for the alertJ6\"LOGS_ANOMALY_CONDITION_TYPE_MORE_THAN_OR_UNSPECIFIED\"R\rconditionType:\x87\x01\x9aA\x83\x01\n" +
 	"\x80\x01*\x1bLog-based anomaly condition2.Defines conditions for detecting log anomalies\xd2\x01\x11minimum_threshold\xd2\x01\vtime_window\xd2\x01\x0econdition_typeb\x06proto3"
 
 var (

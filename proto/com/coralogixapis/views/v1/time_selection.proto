@@ -4,7 +4,7 @@ package com.coralogixapis.views.v1;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 
 // Time selection
@@ -19,19 +19,19 @@ message TimeSelection {
 
 // Quick time selection
 message QuickTimeSelection {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         required: ["seconds"]
       }
     };
 
   google.protobuf.StringValue caption = 2 [deprecated = true, 
-  (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Folder name"
     min_length: 1
     example: "\"Last Hour\""
   }];
-  uint32 seconds = 3[(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  uint32 seconds = 3[(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     description: "Folder name"
     example: "3600"
   }];
@@ -39,20 +39,20 @@ message QuickTimeSelection {
 
 // Custom time selection
 message CustomTimeSelection {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         required: ["from_time", "to_time"]
       }
     };
 
   // Custom time selection start timestamp
-  google.protobuf.Timestamp from_time = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Timestamp from_time = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     min_length: 1
     example: "\"2024-01-25T11:31:43.152Z\""
   }];
 
   // Custom time selection end timestamp
-  google.protobuf.Timestamp to_time = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {
+  google.protobuf.Timestamp to_time = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
     min_length: 1
     example: "\"2024-01-25T11:35:43.152Z\""
   }];
