@@ -27,6 +27,7 @@ message VariableSourceV2 {
         TextboxDefaultNumericValue default_numeric_value = 4;
         TextboxDefaultLuceneValue default_lucene_value = 5;
         TextboxDefaultRegexValue default_regex_value = 6;
+        TextboxDefaultIntervalValue default_interval_value = 7;
       }
 
       message TextboxDefaultStringValue {
@@ -46,6 +47,10 @@ message VariableSourceV2 {
       }
 
       message TextboxDefaultRegexValue {
+        google.protobuf.StringValue value = 1;
+      }
+
+      message TextboxDefaultIntervalValue {
         google.protobuf.StringValue value = 1;
       }
     }
