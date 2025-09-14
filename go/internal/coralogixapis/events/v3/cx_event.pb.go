@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	structpb "google.golang.org/protobuf/types/known/structpb"
@@ -137,27 +137,27 @@ var File_com_coralogixapis_events_v3_cx_event_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_events_v3_cx_event_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogixapis/events/v3/cx_event.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\x9d\n" +
+	"*com/coralogixapis/events/v3/cx_event.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x9d\n" +
 	"\n" +
 	"\aCxEvent\x12K\n" +
-	"\fcx_event_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"test\"R\n" +
+	"\fcx_event_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\n" +
 	"cxEventKey\x12R\n" +
-	"\rcx_event_type\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"test_type\"R\vcxEventType\x12v\n" +
-	"\x0fcx_event_labels\x18\x03 \x03(\v27.com.coralogixapis.events.v3.CxEvent.CxEventLabelsEntryB\x15\x92A\x12J\x10{\"test\": \"test\"}R\rcxEventLabels\x12B\n" +
+	"\rcx_event_type\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x9aA\rJ\v\"test_type\"R\vcxEventType\x12v\n" +
+	"\x0fcx_event_labels\x18\x03 \x03(\v27.com.coralogixapis.events.v3.CxEvent.CxEventLabelsEntryB\x15\x9aA\x12J\x10{\"test\": \"test\"}R\rcxEventLabels\x12B\n" +
 	"\n" +
-	"company_id\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueB\x06\x92A\x03J\x011R\tcompanyId\x12Y\n" +
-	"\x12cx_event_timestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x0f\x92A\fJ\n" +
+	"company_id\x18\x04 \x01(\v2\x1b.google.protobuf.Int32ValueB\x06\x9aA\x03J\x011R\tcompanyId\x12Y\n" +
+	"\x12cx_event_timestamp\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x0f\x9aA\fJ\n" +
 	"1714857600R\x10cxEventTimestamp\x12i\n" +
-	"\x15cx_event_payload_type\x18\t \x01(\v2\x1c.google.protobuf.StringValueB\x18\x92A\x15J\x13\"test_payload_type\"R\x12cxEventPayloadType\x12X\n" +
-	"\x10cx_event_payload\x18\x06 \x01(\v2\x17.google.protobuf.StructB\x15\x92A\x12J\x10{\"test\": \"test\"}R\x0ecxEventPayload\x12`\n" +
-	"\x12cx_event_dedup_key\x18\a \x01(\v2\x1c.google.protobuf.StringValueB\x15\x92A\x12J\x10\"test_dedup_key\"R\x0fcxEventDedupKey\x12|\n" +
-	"\x11cx_event_metadata\x18\b \x03(\v29.com.coralogixapis.events.v3.CxEvent.CxEventMetadataEntryB\x15\x92A\x12J\x10{\"test\": \"test\"}R\x0fcxEventMetadata\x1a@\n" +
+	"\x15cx_event_payload_type\x18\t \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"test_payload_type\"R\x12cxEventPayloadType\x12X\n" +
+	"\x10cx_event_payload\x18\x06 \x01(\v2\x17.google.protobuf.StructB\x15\x9aA\x12J\x10{\"test\": \"test\"}R\x0ecxEventPayload\x12`\n" +
+	"\x12cx_event_dedup_key\x18\a \x01(\v2\x1c.google.protobuf.StringValueB\x15\x9aA\x12J\x10\"test_dedup_key\"R\x0fcxEventDedupKey\x12|\n" +
+	"\x11cx_event_metadata\x18\b \x03(\v29.com.coralogixapis.events.v3.CxEvent.CxEventMetadataEntryB\x15\x9aA\x12J\x10{\"test\": \"test\"}R\x0fcxEventMetadata\x1a@\n" +
 	"\x12CxEventLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aB\n" +
 	"\x14CxEventMetadataEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
-	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xae\x02\x92A\xaa\x02\n" +
+	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:\xae\x02\x9aA\xaa\x02\n" +
 	"\xae\x01*\x05Event2'This data structure represents an event\xd2\x01\fcx_event_key\xd2\x01\rcx_event_type\xd2\x01\x0fcx_event_labels\xd2\x01\n" +
 	"company_id\xd2\x01\x12cx_event_timestamp\xd2\x01\x15cx_event_payload_type\xd2\x01\x10cx_event_payload*w\n" +
 	"\x1aFind out more about events\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/b\x06proto3"
