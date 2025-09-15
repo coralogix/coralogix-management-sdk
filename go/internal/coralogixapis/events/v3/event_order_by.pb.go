@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -173,11 +173,11 @@ var File_com_coralogixapis_events_v3_event_order_by_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_events_v3_event_order_by_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/events/v3/event_order_by.proto\x12\x1bcom.coralogixapis.events.v3\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xe2\x01\n" +
+	"0com/coralogixapis/events/v3/event_order_by.proto\x12\x1bcom.coralogixapis.events.v3\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe2\x01\n" +
 	"\aOrderBy\x12k\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.events.v3.OrderByFieldsB \x92A\x1dJ\x1b\"ORDER_BY_FIELDS_TIMESTAMP\"R\tfieldName\x12j\n" +
-	"\tdirection\x18\x02 \x01(\x0e2-.com.coralogixapis.events.v3.OrderByDirectionB\x1d\x92A\x1aJ\x18\"ORDER_BY_DIRECTION_ASC\"R\tdirection*O\n" +
+	"field_name\x18\x01 \x01(\x0e2*.com.coralogixapis.events.v3.OrderByFieldsB \x9aA\x1dJ\x1b\"ORDER_BY_FIELDS_TIMESTAMP\"R\tfieldName\x12j\n" +
+	"\tdirection\x18\x02 \x01(\x0e2-.com.coralogixapis.events.v3.OrderByDirectionB\x1d\x9aA\x1aJ\x18\"ORDER_BY_DIRECTION_ASC\"R\tdirection*O\n" +
 	"\rOrderByFields\x12\x1f\n" +
 	"\x1bORDER_BY_FIELDS_UNSPECIFIED\x10\x00\x12\x1d\n" +
 	"\x19ORDER_BY_FIELDS_TIMESTAMP\x10\x01*o\n" +

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package com.coralogixapis.events.v3;
 
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 enum OrderByFields {
   ORDER_BY_FIELDS_UNSPECIFIED = 0;
@@ -16,6 +16,6 @@ enum OrderByDirection {
 }
 
 message OrderBy {
-  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ORDER_BY_FIELDS_TIMESTAMP\"" }];
-  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"ORDER_BY_DIRECTION_ASC\"" }];
+  OrderByFields field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ORDER_BY_FIELDS_TIMESTAMP\"" }];
+  OrderByDirection direction = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ORDER_BY_DIRECTION_ASC\"" }];
 }

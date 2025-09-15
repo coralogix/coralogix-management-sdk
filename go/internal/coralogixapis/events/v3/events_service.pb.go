@@ -7,8 +7,8 @@
 package v3
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -848,22 +848,22 @@ var File_com_coralogixapis_events_v3_events_service_proto protoreflect.FileDescr
 
 const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\n" +
-	"0com/coralogixapis/events/v3/events_service.proto\x12\x1bcom.coralogixapis.events.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a*com/coralogixapis/events/v3/cx_event.proto\x1a0com/coralogixapis/events/v3/event_order_by.proto\x1a5com/coralogixapis/events/v3/events_query_filter.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\x1a'com/coralogix/common/v1/audit_log.proto\"\x98\x02\n" +
+	"0com/coralogixapis/events/v3/events_service.proto\x12\x1bcom.coralogixapis.events.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a*com/coralogixapis/events/v3/cx_event.proto\x1a0com/coralogixapis/events/v3/event_order_by.proto\x1a5com/coralogixapis/events/v3/events_query_filter.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\"\x98\x02\n" +
 	"\fCxEventArray\x12<\n" +
-	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events:\xc9\x01\x92A\xc5\x01\n" +
+	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events:\xc9\x01\x9aA\xc5\x01\n" +
 	"J*\fCxEventArray21This data structure represents an array of events\xd2\x01\x06events*w\n" +
 	"\x1aFind out more about events\x12Yhttps://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/\"\xa7\x02\n" +
 	"\x17CxEventSingleOrMultiple\x12I\n" +
 	"\fsingle_event\x18\x01 \x01(\v2$.com.coralogixapis.events.v3.CxEventH\x00R\vsingleEvent\x12T\n" +
-	"\x0fmultiple_events\x18\x02 \x01(\v2).com.coralogixapis.events.v3.CxEventArrayH\x00R\x0emultipleEvents:b\x92A_\n" +
+	"\x0fmultiple_events\x18\x02 \x01(\v2).com.coralogixapis.events.v3.CxEventArrayH\x00R\x0emultipleEvents:b\x9aA_\n" +
 	"]*\x17CxEventSingleOrMultiple2:This data structure represents a single or multiple events\xd2\x01\x05eventB\a\n" +
 	"\x05event\"\xb6\x02\n" +
 	"\x0fGetEventRequest\x129\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"test\"R\x02id\x12A\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\x02id\x12A\n" +
 	"\torder_bys\x18\x02 \x03(\v2$.com.coralogixapis.events.v3.OrderByR\borderBys\x12N\n" +
 	"\n" +
 	"pagination\x18\x03 \x01(\v2..com.coralogixapis.events.v3.PaginationRequestR\n" +
-	"pagination:U\x92AR\n" +
+	"pagination:U\x9aAR\n" +
 	"P*\x0fGetEventRequest28This data structure represents a request to get an event\xd2\x01\x02id\"\xaf\x01\n" +
 	"\x10GetEventResponse\x12J\n" +
 	"\x05event\x18\x01 \x01(\v24.com.coralogixapis.events.v3.CxEventSingleOrMultipleR\x05event\x12O\n" +
@@ -887,29 +887,29 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12J\n" +
 	"\x05value\x18\x02 \x01(\v24.com.coralogixapis.events.v3.CxEventSingleOrMultipleR\x05value:\x028\x01\"\xa1\x01\n" +
 	"\x11PaginationRequest\x12B\n" +
-	"\tpage_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\bpageSize\x12H\n" +
+	"\tpage_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\bpageSize\x12H\n" +
 	"\n" +
-	"page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"test\"R\tpageToken\"\xad\x01\n" +
+	"page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\tpageToken\"\xad\x01\n" +
 	"\x12PaginationResponse\x12D\n" +
 	"\n" +
-	"total_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0210R\ttotalSize\x12Q\n" +
-	"\x0fnext_page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"test\"R\rnextPageToken\"\xde\x02\n" +
+	"total_size\x18\x01 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0210R\ttotalSize\x12Q\n" +
+	"\x0fnext_page_token\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\rnextPageToken\"\xde\x02\n" +
 	"\x11ListEventsRequest\x12A\n" +
 	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter\x12A\n" +
 	"\torder_bys\x18\x02 \x03(\v2$.com.coralogixapis.events.v3.OrderByR\borderBys\x12N\n" +
 	"\n" +
 	"pagination\x18\x03 \x01(\v2..com.coralogixapis.events.v3.PaginationRequestR\n" +
-	"pagination:s\x92Ap\n" +
+	"pagination:s\x9aAp\n" +
 	"n*\x11ListEventsRequest27This data structure represents a request to list events\xd2\x01\x06filter\xd2\x01\torder_bys\xd2\x01\n" +
 	"pagination\"\x81\x02\n" +
 	"\x12ListEventsResponse\x12<\n" +
 	"\x06events\x18\x01 \x03(\v2$.com.coralogixapis.events.v3.CxEventR\x06events\x12O\n" +
 	"\n" +
 	"pagination\x18\x02 \x01(\v2/.com.coralogixapis.events.v3.PaginationResponseR\n" +
-	"pagination:\\\x92AY\n" +
+	"pagination:\\\x9aAY\n" +
 	"W*\x12ListEventsResponse28This data structure represents a response to list events\xd2\x01\x06events\"\xce\x01\n" +
 	"\x1aGetEventsStatisticsRequest\x12A\n" +
-	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:m\x92Aj\n" +
+	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:m\x9aAj\n" +
 	"h*\x1aGetEventsStatisticsRequest2AThis data structure represents a request to get events statistics\xd2\x01\x06filter\"\x9d\x06\n" +
 	"\x1bGetEventsStatisticsResponse\x12\xa8\x01\n" +
 	"\"cx_event_metadata_field_statistics\x18\x01 \x03(\v2\\.com.coralogixapis.events.v3.GetEventsStatisticsResponse.CxEventMetadataFieldStatisticsEntryR\x1ecxEventMetadataFieldStatistics\x12\xa2\x01\n" +
@@ -919,7 +919,7 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01\x1a}\n" +
 	"!CxEventLabelsFieldStatisticsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12B\n" +
-	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01:\xad\x01\x92A\xa9\x01\n" +
+	"\x05value\x18\x02 \x01(\v2,.com.coralogixapis.events.v3.FieldStatisticsR\x05value:\x028\x01:\xad\x01\x9aA\xa9\x01\n" +
 	"\xa6\x01*\x1bGetEventsStatisticsResponse2BThis data structure represents a response to get events statistics\xd2\x01Bcx_event_metadata_field_statisticscx_event_labels_field_statistics\"\xe0\x01\n" +
 	"\x0fFieldStatistics\x12l\n" +
 	"\x10field_statistics\x18\x01 \x03(\v2A.com.coralogixapis.events.v3.FieldStatistics.FieldStatisticsEntryR\x0ffieldStatistics\x1a_\n" +
@@ -927,61 +927,61 @@ const file_com_coralogixapis_events_v3_events_service_proto_rawDesc = "" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x121\n" +
 	"\x05value\x18\x02 \x01(\v2\x1b.google.protobuf.Int64ValueR\x05value:\x028\x01\"\xc2\x01\n" +
 	"\x16ListEventsCountRequest\x12A\n" +
-	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:e\x92Ab\n" +
+	"\x06filter\x18\x01 \x01(\v2).com.coralogixapis.events.v3.EventsFilterR\x06filter:e\x9aAb\n" +
 	"`*\x16ListEventsCountRequest2=This data structure represents a request to list events count\xd2\x01\x06filter\"\x9b\x02\n" +
 	"\x17ListEventsCountResponse\x12;\n" +
-	"\x05count\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\a\x92A\x04J\x0210R\x05count\x12K\n" +
+	"\x05count\x18\x01 \x01(\v2\x1c.google.protobuf.UInt64ValueB\a\x9aA\x04J\x0210R\x05count\x12K\n" +
 	"\rreached_limit\x18\x02 \x01(\v2\x1a.google.protobuf.BoolValueB\n" +
-	"\x92A\aJ\x05falseR\freachedLimit:v\x92As\n" +
+	"\x9aA\aJ\x05falseR\freachedLimit:v\x9aAs\n" +
 	"q*\x17ListEventsCountResponse2>This data structure represents a response to list events count\xd2\x01\x05count\xd2\x01\rreached_limit2\xf6\f\n" +
 	"\rEventsService\x12\x83\x02\n" +
-	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"\x99\x01\x92Ap\n" +
+	"\bGetEvent\x12,.com.coralogixapis.events.v3.GetEventRequest\x1a-.com.coralogixapis.events.v3.GetEventResponse\"\x99\x01\x9aAp\n" +
 	"\x0eEvents Service\x12\tGet EventJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\v\n" +
+	"\x15Internal server errorʸ\x02\v\n" +
 	"\tget event\x82\xd3\xe4\x93\x02\x11\x12\x0f/v3/events/{id}\x12\xaa\x02\n" +
-	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"\xb1\x01\x92Av\n" +
+	"\rBatchGetEvent\x121.com.coralogixapis.events.v3.BatchGetEventRequest\x1a2.com.coralogixapis.events.v3.BatchGetEventResponse\"\xb1\x01\x9aAv\n" +
 	"\x0eEvents Service\x12\x0fBatch Get EventJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x12\n" +
+	"\x15Internal server errorʸ\x02\x12\n" +
 	"\x10batch get events\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v3/events/events:batchGet\x12\x8c\x02\n" +
 	"\n" +
-	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\x9c\x01\x92Ar\n" +
+	"ListEvents\x12..com.coralogixapis.events.v3.ListEventsRequest\x1a/.com.coralogixapis.events.v3.ListEventsResponse\"\x9c\x01\x9aAr\n" +
 	"\x0eEvents Service\x12\vList EventsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x11\n" +
+	"\x15Internal server errorʸ\x02\x11\n" +
 	"\x0fget events list\x82\xd3\xe4\x93\x02\f\x12\n" +
 	"/v3/events\x12\xad\x02\n" +
-	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xae\x01\x92Ax\n" +
+	"\x0fListEventsCount\x123.com.coralogixapis.events.v3.ListEventsCountRequest\x1a4.com.coralogixapis.events.v3.ListEventsCountResponse\"\xae\x01\x9aAx\n" +
 	"\x0eEvents Service\x12\x11List Events CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x17\n" +
+	"\x15Internal server errorʸ\x02\x17\n" +
 	"\x15get events list count\x82\xd3\xe4\x93\x02\x12\x12\x10/v3/events:count\x12\xc2\x02\n" +
-	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xb7\x01\x92A|\n" +
+	"\x13GetEventsStatistics\x127.com.coralogixapis.events.v3.GetEventsStatisticsRequest\x1a8.com.coralogixapis.events.v3.GetEventsStatisticsResponse\"\xb7\x01\x9aA|\n" +
 	"\x0eEvents Service\x12\x15Get Events StatisticsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x17\n" +
-	"\x15get events statistics\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/events:statistics\x1a\xad\x01\x92A\xa9\x01\n" +
+	"\x15Internal server errorʸ\x02\x17\n" +
+	"\x15get events statistics\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/events:statistics\x1a\xad\x01\x9aA\xa9\x01\n" +
 	"\x0eEvents Service\x12\x1eA service for querying events.\x1aw\n" +
 	",Learn more about alerts in our documentation\x12Ghttps://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/b\x06proto3"
 

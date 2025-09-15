@@ -36,6 +36,7 @@ type CreatePolicyRequest struct {
 	//	*CreatePolicyRequest_LogRules
 	//	*CreatePolicyRequest_SpanRules
 	SourceTypeRules isCreatePolicyRequest_SourceTypeRules `protobuf_oneof:"source_type_rules"`
+	Disabled        bool                                  `protobuf:"varint,9,opt,name=disabled,proto3" json:"disabled,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -137,6 +138,13 @@ func (x *CreatePolicyRequest) GetSpanRules() *SpanRules {
 	return nil
 }
 
+func (x *CreatePolicyRequest) GetDisabled() bool {
+	if x != nil {
+		return x.Disabled
+	}
+	return false
+}
+
 type isCreatePolicyRequest_SourceTypeRules interface {
 	isCreatePolicyRequest_SourceTypeRules()
 }
@@ -157,7 +165,7 @@ var File_com_coralogix_quota_v1_create_policy_request_proto protoreflect.FileDes
 
 const file_com_coralogix_quota_v1_create_policy_request_proto_rawDesc = "" +
 	"\n" +
-	"2com/coralogix/quota/v1/create_policy_request.proto\x12\x16com.coralogix.quota.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\"com/coralogix/quota/v1/enums.proto\x1a!com/coralogix/quota/v1/rule.proto\x1a.com/coralogix/quota/v1/archive_retention.proto\x1a&com/coralogix/quota/v1/log_rules.proto\x1a'com/coralogix/quota/v1/span_rules.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xb2\a\n" +
+	"2com/coralogix/quota/v1/create_policy_request.proto\x12\x16com.coralogix.quota.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\"com/coralogix/quota/v1/enums.proto\x1a!com/coralogix/quota/v1/rule.proto\x1a.com/coralogix/quota/v1/archive_retention.proto\x1a&com/coralogix/quota/v1/log_rules.proto\x1a'com/coralogix/quota/v1/span_rules.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xce\a\n" +
 	"\x13CreatePolicyRequest\x12B\n" +
 	"\x04name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x10\x92A\rJ\v\"My Policy\"R\x04name\x12\\\n" +
 	"\vdescription\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x1c\x92A\x19J\x17\"My Policy Description\"R\vdescription\x12<\n" +
@@ -167,7 +175,8 @@ const file_com_coralogix_quota_v1_create_policy_request_proto_rawDesc = "" +
 	"\x11archive_retention\x18\x06 \x01(\v2(.com.coralogix.quota.v1.ArchiveRetentionH\x03R\x10archiveRetention\x88\x01\x01\x12?\n" +
 	"\tlog_rules\x18\a \x01(\v2 .com.coralogix.quota.v1.LogRulesH\x00R\blogRules\x12B\n" +
 	"\n" +
-	"span_rules\x18\b \x01(\v2!.com.coralogix.quota.v1.SpanRulesH\x00R\tspanRules:\xee\x01\x92A\xea\x01\n" +
+	"span_rules\x18\b \x01(\v2!.com.coralogix.quota.v1.SpanRulesH\x00R\tspanRules\x12\x1a\n" +
+	"\bdisabled\x18\t \x01(\bR\bdisabled:\xee\x01\x92A\xea\x01\n" +
 	"]*\x15Create Policy Request22This data structue is used to create a new policy.\xd2\x01\x04name\xd2\x01\bpriority*\x88\x01\n" +
 	"%Find out more about quota management.\x12_https://coralogix.com/docs/user-guides/account-management/payment-and-billing/quota-management/B\x13\n" +
 	"\x11source_type_rulesB\x13\n" +

@@ -4,14 +4,14 @@ package com.coralogixapis.events.v3;
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/wrappers.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
 
 message EventsQueryFilter {
   TimestampRange timestamp = 1;
 }
 
 message EventsFilter {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "EventsFilter"
       description: "This data structure represents an events filter"
@@ -23,14 +23,14 @@ message EventsFilter {
     }
   };
   TimestampRange timestamp = 1;
-  repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_type\"]" }];
-  repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "[\"test_key\"]" }];
+  repeated google.protobuf.StringValue cx_event_types = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"test_type\"]" }];
+  repeated google.protobuf.StringValue cx_event_keys = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"test_key\"]" }];
   Filters cx_event_metadata_filters = 5;
   Filters cx_event_labels_filters = 6;
 }
 
 message Filters {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Filters"
       description: "This data structure represents a filter"
@@ -39,13 +39,13 @@ message Filters {
       ]
     }
   };
-  FilterOperator operator = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"FILTER_OPERATOR_OR\"" }];
+  FilterOperator operator = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"FILTER_OPERATOR_OR\"" }];
   repeated FilterPathAndValues path_and_values = 2;
 }
 
 
 message FilterPathAndValues {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "FilterPathAndValues"
       description: "This data structure represents a filter path and values"
@@ -55,7 +55,7 @@ message FilterPathAndValues {
       ]
     }
   };
-  google.protobuf.StringValue path = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  google.protobuf.StringValue path = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test\"" }];
   oneof values {
     MultipleValues multiple_values = 100;
     Filters filters = 101;
@@ -78,7 +78,7 @@ enum FilterMatcher {
 }
 
 message TimestampRange {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "TimestampRange"
       description: "This data structure represents a timestamp range"

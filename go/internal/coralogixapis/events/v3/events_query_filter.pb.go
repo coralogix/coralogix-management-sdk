@@ -7,7 +7,7 @@
 package v3
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -486,24 +486,24 @@ var File_com_coralogixapis_events_v3_events_query_filter_proto protoreflect.File
 
 const file_com_coralogixapis_events_v3_events_query_filter_proto_rawDesc = "" +
 	"\n" +
-	"5com/coralogixapis/events/v3/events_query_filter.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"^\n" +
+	"5com/coralogixapis/events/v3/events_query_filter.proto\x12\x1bcom.coralogixapis.events.v3\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"^\n" +
 	"\x11EventsQueryFilter\x12I\n" +
 	"\ttimestamp\x18\x01 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeR\ttimestamp\"\xb7\x04\n" +
 	"\fEventsFilter\x12I\n" +
 	"\ttimestamp\x18\x01 \x01(\v2+.com.coralogixapis.events.v3.TimestampRangeR\ttimestamp\x12V\n" +
-	"\x0ecx_event_types\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x92A\x0fJ\r[\"test_type\"]R\fcxEventTypes\x12S\n" +
-	"\rcx_event_keys\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f[\"test_key\"]R\vcxEventKeys\x12_\n" +
+	"\x0ecx_event_types\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x12\x9aA\x0fJ\r[\"test_type\"]R\fcxEventTypes\x12S\n" +
+	"\rcx_event_keys\x18\x04 \x03(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f[\"test_key\"]R\vcxEventKeys\x12_\n" +
 	"\x19cx_event_metadata_filters\x18\x05 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x16cxEventMetadataFilters\x12[\n" +
-	"\x17cx_event_labels_filters\x18\x06 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x14cxEventLabelsFilters:q\x92An\n" +
+	"\x17cx_event_labels_filters\x18\x06 \x01(\v2$.com.coralogixapis.events.v3.FiltersR\x14cxEventLabelsFilters:q\x9aAn\n" +
 	"l*\fEventsFilter2/This data structure represents an events filter\xd2\x01\ttimestamp\xd2\x01\x0ecx_event_types\xd2\x01\rcx_event_keys\"\x92\x02\n" +
 	"\aFilters\x12b\n" +
-	"\boperator\x18\x01 \x01(\x0e2+.com.coralogixapis.events.v3.FilterOperatorB\x19\x92A\x16J\x14\"FILTER_OPERATOR_OR\"R\boperator\x12X\n" +
-	"\x0fpath_and_values\x18\x02 \x03(\v20.com.coralogixapis.events.v3.FilterPathAndValuesR\rpathAndValues:I\x92AF\n" +
+	"\boperator\x18\x01 \x01(\x0e2+.com.coralogixapis.events.v3.FilterOperatorB\x19\x9aA\x16J\x14\"FILTER_OPERATOR_OR\"R\boperator\x12X\n" +
+	"\x0fpath_and_values\x18\x02 \x03(\v20.com.coralogixapis.events.v3.FilterPathAndValuesR\rpathAndValues:I\x9aAF\n" +
 	"D*\aFilters2'This data structure represents a filter\xd2\x01\x0fpath_and_values\"\xdd\x02\n" +
 	"\x13FilterPathAndValues\x12=\n" +
-	"\x04path\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x92A\bJ\x06\"test\"R\x04path\x12V\n" +
+	"\x04path\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\v\x9aA\bJ\x06\"test\"R\x04path\x12V\n" +
 	"\x0fmultiple_values\x18d \x01(\v2+.com.coralogixapis.events.v3.MultipleValuesH\x00R\x0emultipleValues\x12@\n" +
-	"\afilters\x18e \x01(\v2$.com.coralogixapis.events.v3.FiltersH\x00R\afilters:c\x92A`\n" +
+	"\afilters\x18e \x01(\v2$.com.coralogixapis.events.v3.FiltersH\x00R\afilters:c\x9aA`\n" +
 	"^*\x13FilterPathAndValues27This data structure represents a filter path and values\xd2\x01\x04path\xd2\x01\x06valuesB\b\n" +
 	"\x06values\"\x8c\x01\n" +
 	"\x0eMultipleValues\x124\n" +
@@ -511,7 +511,7 @@ const file_com_coralogixapis_events_v3_events_query_filter_proto_rawDesc = "" +
 	"\amatcher\x18\x02 \x01(\x0e2*.com.coralogixapis.events.v3.FilterMatcherR\amatcher\"\xc1\x01\n" +
 	"\x0eTimestampRange\x12.\n" +
 	"\x04from\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x04from\x12*\n" +
-	"\x02to\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02to:S\x92AP\n" +
+	"\x02to\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x02to:S\x9aAP\n" +
 	"N*\x0eTimestampRange20This data structure represents a timestamp range\xd2\x01\x04from\xd2\x01\x02to*P\n" +
 	"\x0eFilterOperator\x12&\n" +
 	"\"FILTER_OPERATOR_AND_OR_UNSPECIFIED\x10\x00\x12\x16\n" +

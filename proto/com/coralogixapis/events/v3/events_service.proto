@@ -8,12 +8,12 @@ import "google/protobuf/wrappers.proto";
 import "com/coralogixapis/events/v3/cx_event.proto";
 import "com/coralogixapis/events/v3/event_order_by.proto";
 import "com/coralogixapis/events/v3/events_query_filter.proto";
-import "protoc-gen-openapiv2/options/annotations.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 
 service EventsService {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_tag) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
     name: "Events Service"
     description: "A service for querying events."
     external_docs: {
@@ -23,8 +23,8 @@ service EventsService {
   };
 
   rpc GetEvent(GetEventRequest) returns (GetEventResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "get event";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get event";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -46,8 +46,8 @@ service EventsService {
   }
 
   rpc BatchGetEvent(BatchGetEventRequest) returns (BatchGetEventResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "batch get events";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "batch get events";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -69,8 +69,8 @@ service EventsService {
   }
 
   rpc ListEvents(ListEventsRequest) returns (ListEventsResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "get events list";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get events list";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -92,8 +92,8 @@ service EventsService {
   }
 
   rpc ListEventsCount(ListEventsCountRequest) returns (ListEventsCountResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "get events list count";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get events list count";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -116,8 +116,8 @@ service EventsService {
   }
 
   rpc GetEventsStatistics(GetEventsStatisticsRequest) returns (GetEventsStatisticsResponse){
-    option (com.coralogix.common.v1.audit_log_description).description = "get events statistics";
-    option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "get events statistics";
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
         value: {description: "Bad Request"}
@@ -140,7 +140,7 @@ service EventsService {
 }
 
 message CxEventArray {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CxEventArray"
       description: "This data structure represents an array of events"
@@ -158,7 +158,7 @@ message CxEventArray {
 }
 
 message CxEventSingleOrMultiple {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CxEventSingleOrMultiple"
       description: "This data structure represents a single or multiple events"
@@ -174,7 +174,7 @@ message CxEventSingleOrMultiple {
 }
 
 message GetEventRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetEventRequest"
       description: "This data structure represents a request to get an event"
@@ -183,7 +183,7 @@ message GetEventRequest {
       ]
     }
   };
-  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test\"" }];
   repeated OrderBy order_bys = 2;
   PaginationRequest pagination = 3;
 }
@@ -207,17 +207,17 @@ message BatchGetEventResponse {
 }
 
 message PaginationRequest {
-  google.protobuf.UInt32Value page_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
-  google.protobuf.StringValue page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  google.protobuf.UInt32Value page_size = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
+  google.protobuf.StringValue page_token = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test\"" }];
 }
 
 message PaginationResponse {
-  google.protobuf.UInt32Value total_size = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
-  google.protobuf.StringValue next_page_token = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "\"test\"" }];
+  google.protobuf.UInt32Value total_size = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
+  google.protobuf.StringValue next_page_token = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"test\"" }];
 }
 
 message ListEventsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListEventsRequest"
       description: "This data structure represents a request to list events"
@@ -234,7 +234,7 @@ message ListEventsRequest {
 }
 
 message ListEventsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListEventsResponse"
       description: "This data structure represents a response to list events"
@@ -248,7 +248,7 @@ message ListEventsResponse {
 }
 
 message GetEventsStatisticsRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetEventsStatisticsRequest"
       description: "This data structure represents a request to get events statistics"
@@ -261,7 +261,7 @@ message GetEventsStatisticsRequest {
 }
 
 message GetEventsStatisticsResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetEventsStatisticsResponse"
       description: "This data structure represents a response to get events statistics"
@@ -280,7 +280,7 @@ message FieldStatistics {
 }
 
 message ListEventsCountRequest {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListEventsCountRequest"
       description: "This data structure represents a request to list events count"
@@ -293,7 +293,7 @@ message ListEventsCountRequest {
 }
 
 message ListEventsCountResponse {
-  option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "ListEventsCountResponse"
       description: "This data structure represents a response to list events count"
@@ -303,6 +303,6 @@ message ListEventsCountResponse {
       ]
     }
   };
-  google.protobuf.UInt64Value count = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "10" }];
-  google.protobuf.BoolValue reached_limit = 2 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = { example: "false" }];
+  google.protobuf.UInt64Value count = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "10" }];
+  google.protobuf.BoolValue reached_limit = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "false" }];
 }

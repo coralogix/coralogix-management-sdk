@@ -3,7 +3,7 @@ proto_out_dir = './proto'
 
 [rules-api-protobuf]
 url = 'github.com/coralogix/rules-api-protobuf'
-revision = "v0.17.3"
+revision = "v0.18.0"
 allow_policies = [
     "src/com/coralogix/rules/v1/rule.proto",
     "src/com/coralogix/rules/v1/rule_group.proto",
@@ -161,7 +161,7 @@ allow_policies = [
 
 [cx-api-quota]
 url = 'github.com/coralogix/cx-api-quota'
-revision = 'v0.0.10'
+revision = "v0.0.12"
 allow_policies = [
     "src/com/coralogix/quota/v1/archive_retention.proto",
     "src/com/coralogix/quota/v1/atomic_overwrite_policies_request.proto",
@@ -477,7 +477,7 @@ allow_policies = [
 
 [cx-api-events]
 url = 'github.com/coralogix/cx-api-events'
-revision = 'v0.1.5'
+revision = "v0.1.6"
 allow_policies = [
     "src/com/coralogixapis/events/v3/cx_event.proto",
     "src/com/coralogixapis/events/v3/event_order_by.proto",
