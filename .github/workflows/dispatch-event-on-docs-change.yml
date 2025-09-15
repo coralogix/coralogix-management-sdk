@@ -1,0 +1,26 @@
+name: [Docs] Event for Sync 
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'examples/coralogix-aws-shipper/README.md'
+      - 'modules/coralogix-aws-shipper/README.md'
+      - '/README.md'
+      - '/charts/coralogix-operator/README.md'
+      - '/docs/metrics.md'
+      - '/docs/prometheus-integration.md'
+      - '/docs/api.md'
+      - '/tools/cxo-observer/README.md'
+jobs:
+  trigger_action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
+        with:
+          token: ${{ secrets.GH_READER_TOKEN }}
+          repository: coralogix/documentation
+          event-type: trigger-deploy
