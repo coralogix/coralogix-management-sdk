@@ -46,7 +46,7 @@ jobs:
           git config --global user.email "github@coralogix.com"
           git config --global user.name "Github Actions"
 
-          cargo run --bin protofetch_tags_updater  -- -r ../.. -o ${{ github.repository }} -s -f ${{ inputs.prefix_filter }}
+          cargo run --bin protofetch_tags_updater  -- -r ../.. -o ${{ github.repository }} -s -f ${{ inputs.prefix_filter || '""'  }}
 
         working-directory: tools/release-management
         env:
