@@ -22,6 +22,7 @@ message Legend {
     LEGEND_COLUMN_AVG = 4;
     LEGEND_COLUMN_LAST = 5;
     LEGEND_COLUMN_NAME = 6;
+    LEGEND_COLUMN_SIMPLE_VALUE = 7;
   }
 
   enum LegendPlacement {
