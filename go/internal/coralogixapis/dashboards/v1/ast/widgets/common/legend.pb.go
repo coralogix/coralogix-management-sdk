@@ -75,13 +75,14 @@ func (LegendBy) EnumDescriptor() ([]byte, []int) {
 type Legend_LegendColumn int32
 
 const (
-	Legend_LEGEND_COLUMN_UNSPECIFIED Legend_LegendColumn = 0
-	Legend_LEGEND_COLUMN_MIN         Legend_LegendColumn = 1
-	Legend_LEGEND_COLUMN_MAX         Legend_LegendColumn = 2
-	Legend_LEGEND_COLUMN_SUM         Legend_LegendColumn = 3
-	Legend_LEGEND_COLUMN_AVG         Legend_LegendColumn = 4
-	Legend_LEGEND_COLUMN_LAST        Legend_LegendColumn = 5
-	Legend_LEGEND_COLUMN_NAME        Legend_LegendColumn = 6
+	Legend_LEGEND_COLUMN_UNSPECIFIED  Legend_LegendColumn = 0
+	Legend_LEGEND_COLUMN_MIN          Legend_LegendColumn = 1
+	Legend_LEGEND_COLUMN_MAX          Legend_LegendColumn = 2
+	Legend_LEGEND_COLUMN_SUM          Legend_LegendColumn = 3
+	Legend_LEGEND_COLUMN_AVG          Legend_LegendColumn = 4
+	Legend_LEGEND_COLUMN_LAST         Legend_LegendColumn = 5
+	Legend_LEGEND_COLUMN_NAME         Legend_LegendColumn = 6
+	Legend_LEGEND_COLUMN_SIMPLE_VALUE Legend_LegendColumn = 7
 )
 
 // Enum value maps for Legend_LegendColumn.
@@ -94,15 +95,17 @@ var (
 		4: "LEGEND_COLUMN_AVG",
 		5: "LEGEND_COLUMN_LAST",
 		6: "LEGEND_COLUMN_NAME",
+		7: "LEGEND_COLUMN_SIMPLE_VALUE",
 	}
 	Legend_LegendColumn_value = map[string]int32{
-		"LEGEND_COLUMN_UNSPECIFIED": 0,
-		"LEGEND_COLUMN_MIN":         1,
-		"LEGEND_COLUMN_MAX":         2,
-		"LEGEND_COLUMN_SUM":         3,
-		"LEGEND_COLUMN_AVG":         4,
-		"LEGEND_COLUMN_LAST":        5,
-		"LEGEND_COLUMN_NAME":        6,
+		"LEGEND_COLUMN_UNSPECIFIED":  0,
+		"LEGEND_COLUMN_MIN":          1,
+		"LEGEND_COLUMN_MAX":          2,
+		"LEGEND_COLUMN_SUM":          3,
+		"LEGEND_COLUMN_AVG":          4,
+		"LEGEND_COLUMN_LAST":         5,
+		"LEGEND_COLUMN_NAME":         6,
+		"LEGEND_COLUMN_SIMPLE_VALUE": 7,
 	}
 )
 
@@ -260,13 +263,13 @@ var File_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto protore
 
 const file_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto_rawDesc = "" +
 	"\n" +
-	"?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa8\a\n" +
+	"?com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto\x122com.coralogixapis.dashboards.v1.ast.widgets.common\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc8\a\n" +
 	"\x06Legend\x12c\n" +
 	"\n" +
 	"is_visible\x18\x01 \x01(\v2\x1a.google.protobuf.BoolValueB(\x9aA%2#Is the legend visible in the widgetR\tisVisible\x12\x97\x01\n" +
 	"\acolumns\x18\x02 \x03(\x0e2G.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendColumnB4\x9aA12$List of columns to display in legendJ\t[1, 2, 6]R\acolumns\x12\xa6\x01\n" +
 	"\x0egroup_by_query\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueBd\x9aAa2_In case of multiple queries, whether legend items should be grouped by their respective queriesR\fgroupByQuery\x12\x93\x01\n" +
-	"\tplacement\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendPlacementB)\x9aA&2$Location of the legend in the widgetR\tplacement\"\xb9\x01\n" +
+	"\tplacement\x18\x04 \x01(\x0e2J.com.coralogixapis.dashboards.v1.ast.widgets.common.Legend.LegendPlacementB)\x9aA&2$Location of the legend in the widgetR\tplacement\"\xd9\x01\n" +
 	"\fLegendColumn\x12\x1d\n" +
 	"\x19LEGEND_COLUMN_UNSPECIFIED\x10\x00\x12\x15\n" +
 	"\x11LEGEND_COLUMN_MIN\x10\x01\x12\x15\n" +
@@ -274,7 +277,8 @@ const file_com_coralogixapis_dashboards_v1_ast_widgets_common_legend_proto_rawDe
 	"\x11LEGEND_COLUMN_SUM\x10\x03\x12\x15\n" +
 	"\x11LEGEND_COLUMN_AVG\x10\x04\x12\x16\n" +
 	"\x12LEGEND_COLUMN_LAST\x10\x05\x12\x16\n" +
-	"\x12LEGEND_COLUMN_NAME\x10\x06\"\xa3\x01\n" +
+	"\x12LEGEND_COLUMN_NAME\x10\x06\x12\x1e\n" +
+	"\x1aLEGEND_COLUMN_SIMPLE_VALUE\x10\a\"\xa3\x01\n" +
 	"\x0fLegendPlacement\x12 \n" +
 	"\x1cLEGEND_PLACEMENT_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15LEGEND_PLACEMENT_AUTO\x10\x01\x12\x1b\n" +
