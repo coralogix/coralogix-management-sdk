@@ -104,7 +104,7 @@ impl TcoPoliciesClient {
     /// * `subsystem_rule` - The subsystem [`Rule`] of the policy.
     /// * `archive_retention` - The [`ArchiveRetention`] of the policy.
     /// * `source_type_rules` - The [`SourceTypeRules`] of the policy.
-    /// * `disabled` - whether the rule should be created in a disabled state.
+    /// * `disabled` - Whether the rule should be created in a disabled state.
     #[allow(clippy::too_many_arguments)]
     pub async fn create(
         &self,
@@ -115,7 +115,7 @@ impl TcoPoliciesClient {
         subsystem_rule: Option<Rule>,
         archive_retention: Option<ArchiveRetention>,
         source_type_rules: Option<SourceTypeRules>,
-        disabled: Option<bool>,
+        disabled: bool,
     ) -> Result<CreatePolicyResponse> {
         let request = make_request_with_metadata(
             CreatePolicyRequest {
