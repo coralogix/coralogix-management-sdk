@@ -1,0 +1,893 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: A service to manage data usage metrics.
+  externalDocs:
+    url: ""
+  name: Data Usage Service
+paths:
+  /v2/datausage:
+    get:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetDataUsage
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Data_Usage_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Data Usage
+      tags:
+      - Data Usage Service
+  /v2/datausage/daily/evaluation_tokens:
+    post:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetDailyUsageEvaluationTokens
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Daily Usage Evaluation Tokens
+      tags:
+      - Data Usage Service
+  /v2/datausage/daily/processed_gbs:
+    post:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetDailyUsageProcessedGbs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataUsageService_GetDailyUsageProcessedGbs_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Daily Usage Processed GBs
+      tags:
+      - Data Usage Service
+  /v2/datausage/daily/units:
+    post:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetDailyUsageUnits
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DataUsageService_GetDailyUsageUnits_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Daily Usage Units
+      tags:
+      - Data Usage Service
+  /v2/datausage/exportstatus:
+    get:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetDataUsageMetricsExportStatus
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Data_Usage_Metrics_Export_Status_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Data Usage Metrics Export Status
+      tags:
+      - Data Usage Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_UpdateDataUsageMetricsExportStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Data_Usage_Metrics_Export_Status_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Update_Data_Usage_Metrics_Export_Status_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Data Usage Metrics Export Status
+      tags:
+      - Data Usage Service
+  /v2/datausage/logscount:
+    get:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetLogsCount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Logs_Count_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Logs Count
+      tags:
+      - Data Usage Service
+  /v2/datausage/spanscount:
+    get:
+      externalDocs:
+        url: ""
+      operationId: DataUsageService_GetSpansCount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Spans_Count_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Spans Count
+      tags:
+      - Data Usage Service
+components:
+  schemas:
+    Data_Usage_Entry_dimensions_inner_oneOf:
+      example:
+        pillar: PILLAR_UNSPECIFIED
+      properties:
+        pillar:
+          enum:
+          - PILLAR_UNSPECIFIED
+          - PILLAR_METRICS
+          - PILLAR_LOGS
+          - PILLAR_SPANS
+          - PILLAR_BINARY
+          - PILLAR_PROFILES
+          type: string
+      type: object
+    DataUsageService_GetDailyUsageUnits_200_response_units_inner:
+      example:
+        statsDate: 2000-01-23T04:56:07.000+00:00
+        blockedUnits:
+          value: 0.8008282
+        highMetricsUnits:
+          value: 0.8008282
+        totalUnits:
+          value: 0.8008282
+        evaluationUnits:
+          value: 0.8008282
+        highLogsUnits:
+          value: 0.8008282
+        lowTracingUnits:
+          value: 0.8008282
+        mediumLogsUnits:
+          value: 0.8008282
+        blockedMetricsUnits:
+          value: 0.8008282
+        cpuProfilesUnits:
+          value: 0.8008282
+        highTracingUnits:
+          value: 0.8008282
+        lowLogsUnits:
+          value: 0.8008282
+        mediumTracingUnits:
+          value: 0.8008282
+        lowSessionRecordingUnits:
+          value: 0.8008282
+      properties:
+        blockedMetricsUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        blockedUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        cpuProfilesUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        evaluationUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highLogsUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highMetricsUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highTracingUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowLogsUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowSessionRecordingUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowTracingUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        mediumLogsUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        mediumTracingUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        statsDate:
+          format: date-time
+          type: string
+        totalUnits:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+      type: object
+    Data_Usage_Entry:
+      description: This data structure represents a data usage entry.
+      example:
+        sizeGb: 0.8008282
+        units: 6.0274563
+        dimensions:
+        - pillar: PILLAR_UNSPECIFIED
+        - pillar: PILLAR_UNSPECIFIED
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        dimensions:
+          items:
+            $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner"
+          type: array
+        sizeGb:
+          format: float
+          type: number
+        timestamp:
+          format: date-time
+          type: string
+        units:
+          format: float
+          type: number
+      title: Data Usage Entry
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_200_response:
+      example:
+        tokens:
+        - evaluations:
+          - evaluationTokens:
+              value: 0.8008282
+            evaluatorName: evaluatorName
+          - evaluationTokens:
+              value: 0.8008282
+            evaluatorName: evaluatorName
+          statsDate: 2000-01-23T04:56:07.000+00:00
+          totalTokens:
+            value: 0.8008282
+        - evaluations:
+          - evaluationTokens:
+              value: 0.8008282
+            evaluatorName: evaluatorName
+          - evaluationTokens:
+              value: 0.8008282
+            evaluatorName: evaluatorName
+          statsDate: 2000-01-23T04:56:07.000+00:00
+          totalTokens:
+            value: 0.8008282
+      properties:
+        tokens:
+          items:
+            $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner"
+          type: array
+      type: object
+    DataUsageService_GetDailyUsageProcessedGbs_200_response:
+      example:
+        gbs:
+        - blockedMetricsGbs:
+            value: 0.8008282
+          highMetricsGbs:
+            value: 0.8008282
+          totalGbs:
+            value: 0.8008282
+          statsDate: 2000-01-23T04:56:07.000+00:00
+          highLogsGbs:
+            value: 0.8008282
+          highTracingGbs:
+            value: 0.8008282
+          lowSessionRecordingGbs:
+            value: 0.8008282
+          lowLogsGbs:
+            value: 0.8008282
+          cpuProfilesGbs:
+            value: 0.8008282
+          mediumLogsGbs:
+            value: 0.8008282
+          blockedGbs:
+            value: 0.8008282
+          lowTracingGbs:
+            value: 0.8008282
+          mediumTracingGbs:
+            value: 0.8008282
+        - blockedMetricsGbs:
+            value: 0.8008282
+          highMetricsGbs:
+            value: 0.8008282
+          totalGbs:
+            value: 0.8008282
+          statsDate: 2000-01-23T04:56:07.000+00:00
+          highLogsGbs:
+            value: 0.8008282
+          highTracingGbs:
+            value: 0.8008282
+          lowSessionRecordingGbs:
+            value: 0.8008282
+          lowLogsGbs:
+            value: 0.8008282
+          cpuProfilesGbs:
+            value: 0.8008282
+          mediumLogsGbs:
+            value: 0.8008282
+          blockedGbs:
+            value: 0.8008282
+          lowTracingGbs:
+            value: 0.8008282
+          mediumTracingGbs:
+            value: 0.8008282
+      properties:
+        gbs:
+          items:
+            $ref: "#/components/schemas/DataUsageService_GetDailyUsageProcessedGbs_200_response_gbs_inner"
+          type: array
+      type: object
+    Get_Logs_Count_Response:
+      description: This data structure is used to return logs count.
+      example:
+        logsCount:
+        - severity: SEVERITY_UNSPECIFIED
+          logsCount: "100"
+          priority: PRIORITY_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - severity: SEVERITY_UNSPECIFIED
+          logsCount: "100"
+          priority: PRIORITY_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        logsCount:
+          items:
+            $ref: "#/components/schemas/Logs_Count"
+          type: array
+      title: Get Logs Count Response
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_request:
+      oneOf:
+      - $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf"
+      - $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf_1"
+      type: object
+    Update_Data_Usage_Metrics_Export_Status_Request:
+      description: This data structure is used to update data usage metrics export
+        status.
+      properties:
+        enabled:
+          example: true
+          type: boolean
+      title: Update Data Usage Metrics Export Status Request
+      type: object
+    Update_Data_Usage_Metrics_Export_Status_Response:
+      description: This data structure is used to return data usage metrics export
+        status.
+      example:
+        enabled: true
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        enabled:
+          example: true
+          type: boolean
+      title: Update Data Usage Metrics Export Status Response
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner:
+      example:
+        evaluationTokens:
+          value: 0.8008282
+        evaluatorName: evaluatorName
+      properties:
+        evaluationTokens:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        evaluatorName:
+          type: string
+      type: object
+    Data_Usage_Entry_dimensions_inner_oneOf_4:
+      properties:
+        priority:
+          enum:
+          - PRIORITY_UNSPECIFIED
+          - PRIORITY_LOW
+          - PRIORITY_MEDIUM
+          - PRIORITY_HIGH
+          - PRIORITY_BLOCKED
+          type: string
+      type: object
+    Data_Usage_Entry_dimensions_inner_oneOf_3:
+      properties:
+        severity:
+          enum:
+          - SEVERITY_UNSPECIFIED
+          - SEVERITY_DEBUG
+          - SEVERITY_VERBOSE
+          - SEVERITY_INFO
+          - SEVERITY_WARNING
+          - SEVERITY_ERROR
+          - SEVERITY_CRITICAL
+          type: string
+      type: object
+    Spans_Count:
+      description: This data structure represents a spans count.
+      example:
+        errorSpanCount: "10"
+        mediumErrorSpanCount: "20"
+        lowSuccessSpanCount: "50"
+        mediumSuccessSpanCount: "200"
+        successSpanCount: "100"
+        lowErrorSpanCount: "5"
+        timestamp: 2021-01-01T00:00:00Z
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        errorSpanCount:
+          example: "10"
+          format: int64
+          type: string
+        lowErrorSpanCount:
+          example: "5"
+          format: int64
+          type: string
+        lowSuccessSpanCount:
+          example: "50"
+          format: int64
+          type: string
+        mediumErrorSpanCount:
+          example: "20"
+          format: int64
+          type: string
+        mediumSuccessSpanCount:
+          example: "200"
+          format: int64
+          type: string
+        successSpanCount:
+          example: "100"
+          format: int64
+          type: string
+        timestamp:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+      title: Spans Count
+      type: object
+    Data_Usage_Entry_dimensions_inner_oneOf_2:
+      properties:
+        tier:
+          enum:
+          - TCO_TIER_UNSPECIFIED
+          - TCO_TIER_LOW
+          - TCO_TIER_MEDIUM
+          - TCO_TIER_HIGH
+          - TCO_TIER_BLOCKED
+          type: string
+      type: object
+    Data_Usage_Entry_dimensions_inner_oneOf_1:
+      properties:
+        genericDimension:
+          $ref: "#/components/schemas/Generic_Dimension"
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf_1:
+      properties:
+        dateRange:
+          $ref: "#/components/schemas/Date_Range"
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens:
+      example:
+        value: 0.8008282
+      properties:
+        value:
+          format: float
+          type: number
+      type: object
+    Get_Data_Usage_Metrics_Export_Status_Response:
+      description: This data structure is used to return data usage metrics export
+        status.
+      example:
+        enabled: true
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        enabled:
+          example: true
+          type: boolean
+      title: Get Data Usage Metrics Export Status Response
+      type: object
+    Data_Usage_Entry_dimensions_inner:
+      oneOf:
+      - $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner_oneOf"
+      - $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner_oneOf_1"
+      - $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner_oneOf_2"
+      - $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner_oneOf_3"
+      - $ref: "#/components/schemas/Data_Usage_Entry_dimensions_inner_oneOf_4"
+    DataUsageService_GetDailyUsageEvaluationTokens_request_oneOf:
+      properties:
+        range:
+          enum:
+          - RANGE_UNSPECIFIED
+          - RANGE_CURRENT_MONTH
+          - RANGE_LAST_30_DAYS
+          - RANGE_LAST_90_DAYS
+          - RANGE_LAST_WEEK
+          type: string
+      type: object
+    Get_Data_Usage_Response:
+      description: This data structure is used to return data usage.
+      example:
+        entries:
+        - sizeGb: 0.8008282
+          units: 6.0274563
+          dimensions:
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        - sizeGb: 0.8008282
+          units: 6.0274563
+          dimensions:
+          - pillar: PILLAR_UNSPECIFIED
+          - pillar: PILLAR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        entries:
+          items:
+            $ref: "#/components/schemas/Data_Usage_Entry"
+          type: array
+      title: Get Data Usage Response
+      type: object
+    Get_Spans_Count_Response:
+      description: This data structure is used to return spans count.
+      example:
+        spansCount:
+        - errorSpanCount: "10"
+          mediumErrorSpanCount: "20"
+          lowSuccessSpanCount: "50"
+          mediumSuccessSpanCount: "200"
+          successSpanCount: "100"
+          lowErrorSpanCount: "5"
+          timestamp: 2021-01-01T00:00:00Z
+        - errorSpanCount: "10"
+          mediumErrorSpanCount: "20"
+          lowSuccessSpanCount: "50"
+          mediumSuccessSpanCount: "200"
+          successSpanCount: "100"
+          lowErrorSpanCount: "5"
+          timestamp: 2021-01-01T00:00:00Z
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        spansCount:
+          items:
+            $ref: "#/components/schemas/Spans_Count"
+          type: array
+      title: Get Spans Count Response
+      type: object
+    DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner:
+      example:
+        evaluations:
+        - evaluationTokens:
+            value: 0.8008282
+          evaluatorName: evaluatorName
+        - evaluationTokens:
+            value: 0.8008282
+          evaluatorName: evaluatorName
+        statsDate: 2000-01-23T04:56:07.000+00:00
+        totalTokens:
+          value: 0.8008282
+      properties:
+        evaluations:
+          items:
+            $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner"
+          type: array
+        statsDate:
+          format: date-time
+          type: string
+        totalTokens:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+      type: object
+    Date_Range:
+      description: This data structure represents a date range.
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        fromDate:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+        toDate:
+          example: 2021-01-01T00:00:00Z
+          format: date-time
+          type: string
+      title: Date Range
+      type: object
+    Generic_Dimension:
+      description: This data structure represents a generic dimension.
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        key:
+          example: key
+          type: string
+        value:
+          example: value
+          type: string
+      title: Generic Dimension
+      type: object
+    DataUsageService_GetDailyUsageProcessedGbs_200_response_gbs_inner:
+      example:
+        blockedMetricsGbs:
+          value: 0.8008282
+        highMetricsGbs:
+          value: 0.8008282
+        totalGbs:
+          value: 0.8008282
+        statsDate: 2000-01-23T04:56:07.000+00:00
+        highLogsGbs:
+          value: 0.8008282
+        highTracingGbs:
+          value: 0.8008282
+        lowSessionRecordingGbs:
+          value: 0.8008282
+        lowLogsGbs:
+          value: 0.8008282
+        cpuProfilesGbs:
+          value: 0.8008282
+        mediumLogsGbs:
+          value: 0.8008282
+        blockedGbs:
+          value: 0.8008282
+        lowTracingGbs:
+          value: 0.8008282
+        mediumTracingGbs:
+          value: 0.8008282
+      properties:
+        blockedGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        blockedMetricsGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        cpuProfilesGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highLogsGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highMetricsGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        highTracingGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowLogsGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowSessionRecordingGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        lowTracingGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        mediumLogsGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        mediumTracingGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+        statsDate:
+          format: date-time
+          type: string
+        totalGbs:
+          $ref: "#/components/schemas/DataUsageService_GetDailyUsageEvaluationTokens_200_response_tokens_inner_evaluations_inner_evaluationTokens"
+      type: object
+    DataUsageService_GetDailyUsageUnits_200_response:
+      example:
+        units:
+        - statsDate: 2000-01-23T04:56:07.000+00:00
+          blockedUnits:
+            value: 0.8008282
+          highMetricsUnits:
+            value: 0.8008282
+          totalUnits:
+            value: 0.8008282
+          evaluationUnits:
+            value: 0.8008282
+          highLogsUnits:
+            value: 0.8008282
+          lowTracingUnits:
+            value: 0.8008282
+          mediumLogsUnits:
+            value: 0.8008282
+          blockedMetricsUnits:
+            value: 0.8008282
+          cpuProfilesUnits:
+            value: 0.8008282
+          highTracingUnits:
+            value: 0.8008282
+          lowLogsUnits:
+            value: 0.8008282
+          mediumTracingUnits:
+            value: 0.8008282
+          lowSessionRecordingUnits:
+            value: 0.8008282
+        - statsDate: 2000-01-23T04:56:07.000+00:00
+          blockedUnits:
+            value: 0.8008282
+          highMetricsUnits:
+            value: 0.8008282
+          totalUnits:
+            value: 0.8008282
+          evaluationUnits:
+            value: 0.8008282
+          highLogsUnits:
+            value: 0.8008282
+          lowTracingUnits:
+            value: 0.8008282
+          mediumLogsUnits:
+            value: 0.8008282
+          blockedMetricsUnits:
+            value: 0.8008282
+          cpuProfilesUnits:
+            value: 0.8008282
+          highTracingUnits:
+            value: 0.8008282
+          lowLogsUnits:
+            value: 0.8008282
+          mediumTracingUnits:
+            value: 0.8008282
+          lowSessionRecordingUnits:
+            value: 0.8008282
+      properties:
+        units:
+          items:
+            $ref: "#/components/schemas/DataUsageService_GetDailyUsageUnits_200_response_units_inner"
+          type: array
+      type: object
+    Logs_Count:
+      description: This data structure represents a logs count.
+      example:
+        severity: SEVERITY_UNSPECIFIED
+        logsCount: "100"
+        priority: PRIORITY_UNSPECIFIED
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about data usage.
+        url: https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/
+      properties:
+        logsCount:
+          example: "100"
+          format: int64
+          type: string
+        priority:
+          enum:
+          - PRIORITY_UNSPECIFIED
+          - PRIORITY_LOW
+          - PRIORITY_MEDIUM
+          - PRIORITY_HIGH
+          - PRIORITY_BLOCKED
+          type: string
+        severity:
+          enum:
+          - SEVERITY_UNSPECIFIED
+          - SEVERITY_DEBUG
+          - SEVERITY_VERBOSE
+          - SEVERITY_INFO
+          - SEVERITY_WARNING
+          - SEVERITY_ERROR
+          - SEVERITY_CRITICAL
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      title: Logs Count
+      type: object

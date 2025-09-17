@@ -1,0 +1,2173 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- externalDocs:
+    description: Find out more about outbound webhooks in our documentation.
+    url: https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/
+  name: Outgoing webhooks service
+paths:
+  /v1/outgoing-webhooks:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_outgoing_webhooks_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+    post:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_CreateOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_outgoing_webhook_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+    put:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_UpdateOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: ""
+                title: Update outgoing webhook response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+  /v1/outgoing-webhooks/all:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListAllOutgoingWebhooks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_all_outgoing_webhooks_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List all outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/ibm-event-notifications/instances:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListIbmEventNotificationsInstances
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_IBM_event_notification_instances_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List IBM event notification instances
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/summary:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutboundWebhooksSummary
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_outbound_webhooks_summary_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outbound webhooks summary
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadSummary
+  /v1/outgoing-webhooks/test:
+    post:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_TestOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutgoingWebhooksService_TestOutgoingWebhook_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/test-existing:
+    post:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_existing_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OutgoingWebhooksService_TestOutgoingWebhook_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test an existing outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/types:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhookTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_outgoing_webhook_types_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook types
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/types/{type}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_GetOutgoingWebhookTypeDetails
+      parameters:
+      - explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_outgoing_webhook_type_details_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook type details
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+  /v1/outgoing-webhooks/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: example_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: ""
+                title: Delete outgoing webhook response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+    get:
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_GetOutgoingWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_outgoing_webhook_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+components:
+  schemas:
+    IBM_event_notification_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        endpointType:
+          enum:
+          - ENDPOINT_TYPE_DEFAULT_OR_PUBLIC
+          - ENDPOINT_TYPE_PRIVATE
+          type: string
+        eventNotificationsInstanceId:
+          type: string
+        regionId:
+          type: string
+        sourceId:
+          type: string
+        sourceName:
+          type: string
+      required:
+      - endpointType
+      - eventNotificationsInstanceId
+      - regionId
+      title: IBM event notification configuration
+      type: object
+    Create_outgoing_webhook_response:
+      example:
+        id: example_id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          example: example_id
+          type: string
+      required:
+      - id
+      title: Create outgoing webhook response
+      type: object
+    Outgoing_webhook_input_data_1:
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/Slack_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_2:
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDuty_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_3:
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/Send_log_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_4:
+      externalDocs:
+        url: ""
+      properties:
+        emailGroup:
+          $ref: "#/components/schemas/Email_group_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Update_outgoing_webhook_request_data:
+      oneOf:
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_1"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_2"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_3"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_4"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_5"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_6"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_7"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_8"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_9"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_10"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_11"
+    List_outgoing_webhook_types_response:
+      example:
+        webhooks:
+        - count: 3
+          label: example_label
+          type: UNKNOWN
+        - count: 3
+          label: example_label
+          type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        webhooks:
+          items:
+            $ref: "#/components/schemas/Outgoing_webhook_type"
+          type: array
+      title: List outgoing webhook types response
+      type: object
+    Outgoing_webhook_details:
+      example:
+        label: example_label
+        type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        label:
+          example: example_label
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+      required:
+      - label
+      - type
+      title: Outgoing webhook details
+      type: object
+    Get_outgoing_webhook_type_details_response:
+      example:
+        details:
+          label: example_label
+          type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        details:
+          $ref: "#/components/schemas/Outgoing_webhook_details"
+      required:
+      - details
+      title: Get outgoing webhook type details response
+      type: object
+    Generic_webhook_configuration:
+      example:
+        headers:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        method: UNKNOWN
+        payload: "{\"key\":\"value\"}"
+        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+      externalDocs:
+        url: ""
+      properties:
+        headers:
+          items:
+            $ref: "#/components/schemas/Generic_webhook_configuration_headers_inner"
+          type: array
+        method:
+          enum:
+          - UNKNOWN
+          - GET
+          - POST
+          - PUT
+          type: string
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - method
+      - uuid
+      title: Generic webhook configuration
+      type: object
+    Outgoing_webhook_input_data:
+      externalDocs:
+        url: ""
+      properties:
+        genericWebhook:
+          $ref: "#/components/schemas/Generic_webhook_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_5:
+      externalDocs:
+        url: ""
+      properties:
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    AWS_EventBridge_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        detail:
+          example: "{\"key\":\"value\"}"
+          type: string
+        detailType:
+          example: detail_type
+          type: string
+        eventBusArn:
+          example: arn:aws:events:us-east-1:123456789012:event-bus/default
+          type: string
+        roleName:
+          example: role_name
+          type: string
+        source:
+          example: source
+          type: string
+      required:
+      - detail
+      - detailType
+      - eventBusArn
+      - roleName
+      - source
+      title: AWS EventBridge configuration
+      type: object
+    Outgoing_webhook_extended_summary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 0
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook extended summary
+      type: object
+    Outgoing_webhook_input_data_6:
+      externalDocs:
+        url: ""
+      properties:
+        jira:
+          $ref: "#/components/schemas/Jira_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_7:
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_8:
+      externalDocs:
+        url: ""
+      properties:
+        demisto:
+          $ref: "#/components/schemas/Demisto_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_9:
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AWS_EventBridge_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Test_outgoing_webhook_request:
+      properties:
+        data:
+          $ref: "#/components/schemas/Update_outgoing_webhook_request_data"
+      required:
+      - data
+      title: Test outgoing webhook request
+      type: object
+    Slack_digest_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        isActive:
+          type: boolean
+        type:
+          enum:
+          - UNKNOWN
+          - ERROR_AND_CRITICAL_LOGS
+          - FLOW_ANOMALIES
+          - SPIKE_ANOMALIES
+          - DATA_USAGE
+          type: string
+      required:
+      - type
+      title: Slack digest configuration
+      type: object
+    Slack_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        attachments:
+          items:
+            $ref: "#/components/schemas/Slack_attachment_configuration"
+          type: array
+        digests:
+          items:
+            $ref: "#/components/schemas/Slack_digest_configuration"
+          type: array
+      title: Slack configuration
+      type: object
+    Get_outgoing_webhook_response:
+      example:
+        webhook:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          genericWebhook:
+            headers:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            method: UNKNOWN
+            payload: "{\"key\":\"value\"}"
+            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+          name: my_webhook
+          externalId: 0
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        webhook:
+          $ref: "#/components/schemas/Get_outgoing_webhook_response_webhook"
+      required:
+      - webhook
+      title: Get outgoing webhook response
+      type: object
+    Test_outgoing_webhook_response:
+      example:
+        success: "{}"
+      externalDocs:
+        url: ""
+      properties:
+        success:
+          externalDocs:
+            url: ""
+          title: Test outgoing webhook success
+          type: object
+      title: Test outgoing webhook response
+      type: object
+    Update_outgoing_webhook_request:
+      properties:
+        data:
+          $ref: "#/components/schemas/Update_outgoing_webhook_request_data"
+        id:
+          example: example_id
+          type: string
+      required:
+      - data
+      - id
+      title: Update outgoing webhook request
+      type: object
+    Demisto_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - payload
+      - uuid
+      title: Demisto configuration
+      type: object
+    Test_outgoing_webhook_failure:
+      externalDocs:
+        url: ""
+      properties:
+        displayMessage:
+          example: example_display_message
+          type: string
+        errorMessage:
+          example: example_error_message
+          type: string
+        statusCode:
+          example: 400
+          format: int64
+          type: integer
+      required:
+      - displayMessage
+      - errorMessage
+      title: Test outgoing webhook failure
+      type: object
+    Outgoing_webhook_type:
+      example:
+        count: 3
+        label: example_label
+        type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 3
+          format: int64
+          type: integer
+        label:
+          example: example_label
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+      required:
+      - count
+      - label
+      - type
+      title: Outgoing webhook type
+      type: object
+    Outgoing_webhook_input_data_10:
+      externalDocs:
+        url: ""
+      properties:
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IBM_event_notification_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Test_outgoing_webhook_response_1:
+      externalDocs:
+        url: ""
+      properties:
+        failure:
+          $ref: "#/components/schemas/Test_outgoing_webhook_failure"
+      title: Test outgoing webhook response
+      type: object
+    Jira_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        apiToken:
+          example: jira_api_token
+          type: string
+        email:
+          example: jira_email
+          type: string
+        projectKey:
+          example: jira_project_key
+          type: string
+      required:
+      - apiToken
+      - email
+      - projectKey
+      title: Jira configuration
+      type: object
+    Outgoing_webhook_input_data_11:
+      externalDocs:
+        url: ""
+      properties:
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        genericWebhook:
+          headers:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          method: UNKNOWN
+          payload: "{\"key\":\"value\"}"
+          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+        name: my_webhook
+        externalId: 0
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        genericWebhook:
+          $ref: "#/components/schemas/Generic_webhook_configuration"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_11:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Send_log_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - payload
+      - uuid
+      title: Send log configuration
+      type: object
+    Outgoing_webhook_10:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IBM_event_notification_configuration"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    List_all_outgoing_webhooks_response:
+      example:
+        deployed:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 0
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 0
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        deployed:
+          items:
+            $ref: "#/components/schemas/Outgoing_webhook_extended_summary"
+          type: array
+      title: List all outgoing webhooks response
+      type: object
+    Email_group_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        emailAddresses:
+          items:
+            example: "[\"example@coralogix.com\"]"
+            type: string
+          type: array
+      title: Email group configuration
+      type: object
+    Generic_webhook_configuration_headers_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    List_IBM_event_notification_instances_response:
+      example:
+        instances:
+        - instanceId: 5a8b249b-3915-49e7-ad43-030f585d84c5
+          regionId: eu-gb
+          name: example-name
+          crn: "crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::"
+          isUsed: true
+        - instanceId: 5a8b249b-3915-49e7-ad43-030f585d84c5
+          regionId: eu-gb
+          name: example-name
+          crn: "crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::"
+          isUsed: true
+      externalDocs:
+        url: ""
+      properties:
+        instances:
+          items:
+            $ref: "#/components/schemas/Event_notifications_instance"
+          type: array
+      title: List IBM event notification instances response
+      type: object
+    Create_outgoing_webhook_request:
+      properties:
+        data:
+          $ref: "#/components/schemas/Update_outgoing_webhook_request_data"
+      required:
+      - data
+      title: Create outgoing webhook request
+      type: object
+    OutgoingWebhooksService_TestOutgoingWebhook_200_response:
+      oneOf:
+      - $ref: "#/components/schemas/Test_outgoing_webhook_response"
+      - $ref: "#/components/schemas/Test_outgoing_webhook_response_1"
+    Event_notifications_instance:
+      example:
+        instanceId: 5a8b249b-3915-49e7-ad43-030f585d84c5
+        regionId: eu-gb
+        name: example-name
+        crn: "crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::"
+        isUsed: true
+      externalDocs:
+        url: ""
+      properties:
+        crn:
+          example: "crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::"
+          type: string
+        instanceId:
+          example: 5a8b249b-3915-49e7-ad43-030f585d84c5
+          type: string
+        isUsed:
+          example: true
+          type: boolean
+        name:
+          example: example-name
+          type: string
+        regionId:
+          example: eu-gb
+          type: string
+      required:
+      - crn
+      - instanceId
+      - name
+      - regionId
+      title: Event notifications instance
+      type: object
+    Outgoing_webhook_5:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Slack_attachment_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        isActive:
+          type: boolean
+        type:
+          enum:
+          - EMPTY
+          - METRIC_SNAPSHOT
+          - LOGS
+          type: string
+      required:
+      - type
+      title: Slack attachment configuration
+      type: object
+    Outgoing_webhook_6:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        jira:
+          $ref: "#/components/schemas/Jira_configuration"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_3:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/Send_log_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_4:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        emailGroup:
+          $ref: "#/components/schemas/Email_group_configuration"
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_9:
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AWS_EventBridge_configuration"
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    List_outbound_webhooks_summary_response:
+      example:
+        outboundWebhookSummaries:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          externalId: 0
+          id: id
+          type: UNKNOWN
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          externalId: 0
+          id: id
+          type: UNKNOWN
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        outboundWebhookSummaries:
+          items:
+            $ref: "#/components/schemas/Outbound_webhook_summary"
+          type: array
+      title: List outbound webhooks summary response
+      type: object
+    Outgoing_webhook_7:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_8:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        demisto:
+          $ref: "#/components/schemas/Demisto_configuration"
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outbound_webhook_summary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        externalId: 0
+        id: id
+        type: UNKNOWN
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outbound webhook summary
+      type: object
+    Outgoing_webhook_1:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/Slack_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_2:
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDuty_configuration"
+        type:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_summary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 0
+        id: webhook_id
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      title: Outgoing webhook summary
+      type: object
+    PagerDuty_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        serviceKey:
+          example: pager_duty_service_key
+          type: string
+      required:
+      - serviceKey
+      title: PagerDuty configuration
+      type: object
+    List_outgoing_webhooks_response:
+      example:
+        deployed:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 0
+          id: webhook_id
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 0
+          id: webhook_id
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        deployed:
+          items:
+            $ref: "#/components/schemas/Outgoing_webhook_summary"
+          type: array
+      title: List outgoing webhooks response
+      type: object
+    Get_outgoing_webhook_response_webhook:
+      oneOf:
+      - $ref: "#/components/schemas/Outgoing_webhook"
+      - $ref: "#/components/schemas/Outgoing_webhook_1"
+      - $ref: "#/components/schemas/Outgoing_webhook_2"
+      - $ref: "#/components/schemas/Outgoing_webhook_3"
+      - $ref: "#/components/schemas/Outgoing_webhook_4"
+      - $ref: "#/components/schemas/Outgoing_webhook_5"
+      - $ref: "#/components/schemas/Outgoing_webhook_6"
+      - $ref: "#/components/schemas/Outgoing_webhook_7"
+      - $ref: "#/components/schemas/Outgoing_webhook_8"
+      - $ref: "#/components/schemas/Outgoing_webhook_9"
+      - $ref: "#/components/schemas/Outgoing_webhook_10"
+      - $ref: "#/components/schemas/Outgoing_webhook_11"
+    Test_existing_outgoing_webhook_request:
+      properties:
+        id:
+          example: example_id
+          type: string
+      required:
+      - id
+      title: Test existing outgoing webhook request
+      type: object

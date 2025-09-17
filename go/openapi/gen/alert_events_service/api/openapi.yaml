@@ -1,0 +1,470 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Get information regarding your alert events - instances of alerts being
+    triggered.
+  externalDocs:
+    description: Learn more about alert events and incidents in our documentation.
+    url: https://coralogix.com/docs/user-guides/alerting/incidents/
+  name: Alert events service
+paths:
+  /v3/alert-event-stats:
+    get:
+      externalDocs:
+        url: ""
+      operationId: AlertEventService_GetAlertEventsStats
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_alert_event_statistics_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get alert events statistics
+      tags:
+      - Alert events service
+      x-coralogixPermissions:
+      - alerts:ReadConfig
+  /v3/alert-event/{id}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: AlertEventService_GetAlertEvent
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AlertEventService_GetAlertEvent_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get alert event by ID
+      tags:
+      - Alert events service
+      x-coralogixPermissions:
+      - alerts:ReadConfig
+components:
+  schemas:
+    Alert_event_statistics_data_structure:
+      example:
+        resolvedPermutationsSamples:
+        - permutationLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - permutationLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        activityAnalysisStats:
+          isMutedCount: 0
+          rules:
+          - rules
+          - rules
+        triggeredCount: 5
+        count: 6
+        triggeredPermutationsSamples:
+        - permutationLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        - permutationLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        resolvedCount: 1
+      externalDocs:
+        url: ""
+      properties:
+        activityAnalysisStats:
+          $ref: "#/components/schemas/Event_activity_analysis_statistics"
+        count:
+          format: int64
+          type: integer
+        resolvedCount:
+          format: int64
+          type: integer
+        resolvedPermutationsSamples:
+          items:
+            $ref: "#/components/schemas/Permutation_data_structure"
+          type: array
+        triggeredCount:
+          format: int64
+          type: integer
+        triggeredPermutationsSamples:
+          items:
+            $ref: "#/components/schemas/Permutation_data_structure"
+          type: array
+      title: Alert event statistics data structure
+      type: object
+    AlertEventService_GetAlertEvent_200_response:
+      oneOf:
+      - $ref: "#/components/schemas/Get_alert_event_response"
+      - $ref: "#/components/schemas/Get_alert_event_response_1"
+    Activity_analysis_data_structure:
+      description: "Configuration for alert activity analysis, containing rules and\
+        \ status."
+      example:
+        rules:
+        - rules
+        - rules
+        status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        rules:
+          items:
+            type: string
+          type: array
+        status:
+          enum:
+          - ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          - ACTIVITY_ANALYSIS_STATUS_MUTE
+          type: string
+      required:
+      - rules
+      - status
+      title: Activity analysis data structure
+      type: object
+    Get_alert_event_response_pagination:
+      example:
+        totalSize: 0
+        nextPageToken: nextPageToken
+      properties:
+        nextPageToken:
+          type: string
+        totalSize:
+          format: int64
+          type: integer
+      type: object
+    Get_alert_event_statistics_response:
+      example:
+        eventsStats:
+        - value:
+            resolvedPermutationsSamples:
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            activityAnalysisStats:
+              isMutedCount: 0
+              rules:
+              - rules
+              - rules
+            triggeredCount: 5
+            count: 6
+            triggeredPermutationsSamples:
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            resolvedCount: 1
+          key: key
+        - value:
+            resolvedPermutationsSamples:
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            activityAnalysisStats:
+              isMutedCount: 0
+              rules:
+              - rules
+              - rules
+            triggeredCount: 5
+            count: 6
+            triggeredPermutationsSamples:
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            - permutationLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+            resolvedCount: 1
+          key: key
+      externalDocs:
+        url: ""
+      properties:
+        eventsStats:
+          items:
+            $ref: "#/components/schemas/Get_alert_event_statistics_response_eventsStats_inner"
+          type: array
+      title: Get alert event statistics response
+      type: object
+    Get_alert_event_response_1_multiplePermutation:
+      properties:
+        alertEventMultiplePermutation:
+          items:
+            $ref: "#/components/schemas/Alert_event"
+          type: array
+      type: object
+    Event_activity_analysis_statistics:
+      example:
+        isMutedCount: 0
+        rules:
+        - rules
+        - rules
+      externalDocs:
+        url: ""
+      properties:
+        isMutedCount:
+          format: int64
+          type: integer
+        rules:
+          items:
+            type: string
+          type: array
+      title: Event activity analysis statistics
+      type: object
+    Permutation_data_structure:
+      example:
+        permutationLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      externalDocs:
+        url: ""
+      properties:
+        permutationLabels:
+          items:
+            $ref: "#/components/schemas/Permutation_data_structure_permutationLabels_inner"
+          type: array
+      title: Permutation data structure
+      type: object
+    Get_alert_event_response:
+      example:
+        pagination:
+          totalSize: 0
+          nextPageToken: nextPageToken
+        singlePermutation:
+          preGroupingEventId: preGroupingEventId
+          incidentCorrelationKey: incidentCorrelationKey
+          groupLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          payloadType: payloadType
+          payload: "{}"
+          alertId: alertId
+          activityAnalysis:
+            rules:
+            - rules
+            - rules
+            status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+          permutationLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          permutationId: permutationId
+          status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          timestamp: 2000-01-23T04:56:07.000+00:00
+        id: id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+        pagination:
+          $ref: "#/components/schemas/Get_alert_event_response_pagination"
+        singlePermutation:
+          $ref: "#/components/schemas/Alert_event"
+      title: Get alert event response
+      type: object
+    Permutation_data_structure_permutationLabels_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    Get_alert_event_response_1:
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          type: string
+        multiplePermutation:
+          $ref: "#/components/schemas/Get_alert_event_response_1_multiplePermutation"
+        pagination:
+          $ref: "#/components/schemas/Get_alert_event_response_pagination"
+      title: Get alert event response
+      type: object
+    Get_alert_event_statistics_response_eventsStats_inner:
+      example:
+        value:
+          resolvedPermutationsSamples:
+          - permutationLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          - permutationLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          activityAnalysisStats:
+            isMutedCount: 0
+            rules:
+            - rules
+            - rules
+          triggeredCount: 5
+          count: 6
+          triggeredPermutationsSamples:
+          - permutationLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          - permutationLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          resolvedCount: 1
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Alert_event_statistics_data_structure"
+      type: object
+    Alert_event:
+      example:
+        preGroupingEventId: preGroupingEventId
+        incidentCorrelationKey: incidentCorrelationKey
+        groupLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        payloadType: payloadType
+        payload: "{}"
+        alertId: alertId
+        activityAnalysis:
+          rules:
+          - rules
+          - rules
+          status: ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED
+        permutationLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        permutationId: permutationId
+        status: ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+        timestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        activityAnalysis:
+          $ref: "#/components/schemas/Activity_analysis_data_structure"
+        alertId:
+          type: string
+        groupLabels:
+          items:
+            $ref: "#/components/schemas/Permutation_data_structure_permutationLabels_inner"
+          type: array
+        incidentCorrelationKey:
+          type: string
+        payload:
+          type: object
+        payloadType:
+          type: string
+        permutationId:
+          type: string
+        permutationLabels:
+          items:
+            $ref: "#/components/schemas/Permutation_data_structure_permutationLabels_inner"
+          type: array
+        preGroupingEventId:
+          type: string
+        status:
+          enum:
+          - ALERT_STATUS_RESOLVED_OR_UNSPECIFIED
+          - ALERT_STATUS_TRIGGERED
+          type: string
+        timestamp:
+          format: date-time
+          type: string
+      required:
+      - activityAnalysis
+      - alertId
+      - groupLabels
+      - incidentCorrelationKey
+      - payload
+      - payloadType
+      - permutationId
+      - permutationLabels
+      - preGroupingEventId
+      - status
+      - timestamp
+      title: Alert event
+      type: object

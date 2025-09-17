@@ -1,0 +1,902 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v3/events": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_ListEvents",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ListEventsResponse",
+                  "required": [
+                    "events"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "title": "Event",
+                        "required": [
+                          "cxEventKey",
+                          "cxEventType",
+                          "cxEventLabels",
+                          "companyId",
+                          "cxEventTimestamp",
+                          "cxEventPayloadType",
+                          "cxEventPayload"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "companyId": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "cxEventDedupKey": {
+                            "type": "string",
+                            "example": "test_dedup_key"
+                          },
+                          "cxEventKey": {
+                            "type": "string",
+                            "example": "test"
+                          },
+                          "cxEventLabels": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "cxEventMetadata": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "key": {
+                                  "type": "string"
+                                },
+                                "value": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "cxEventPayload": {
+                            "type": "object",
+                            "example": {
+                              "test": "test"
+                            }
+                          },
+                          "cxEventPayloadType": {
+                            "type": "string",
+                            "example": "test_payload_type"
+                          },
+                          "cxEventTimestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": 1714857600
+                          },
+                          "cxEventType": {
+                            "type": "string",
+                            "example": "test_type"
+                          }
+                        },
+                        "description": "This data structure represents an event",
+                        "externalDocs": {
+                          "description": "Find out more about events",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "nextPageToken": {
+                          "type": "string",
+                          "example": "test"
+                        },
+                        "totalSize": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 10
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to list events",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List Events",
+        "tags": [
+          "Events Service"
+        ]
+      }
+    },
+    "/v3/events/events:batchGet": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_BatchGetEvent",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "events": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "oneOf": [
+                              {
+                                "title": "CxEventSingleOrMultiple",
+                                "required": [
+                                  "event"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "singleEvent": {
+                                    "title": "Event",
+                                    "required": [
+                                      "cxEventKey",
+                                      "cxEventType",
+                                      "cxEventLabels",
+                                      "companyId",
+                                      "cxEventTimestamp",
+                                      "cxEventPayloadType",
+                                      "cxEventPayload"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "companyId": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": 1
+                                      },
+                                      "cxEventDedupKey": {
+                                        "type": "string",
+                                        "example": "test_dedup_key"
+                                      },
+                                      "cxEventKey": {
+                                        "type": "string",
+                                        "example": "test"
+                                      },
+                                      "cxEventLabels": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "cxEventMetadata": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "cxEventPayload": {
+                                        "type": "object",
+                                        "example": {
+                                          "test": "test"
+                                        }
+                                      },
+                                      "cxEventPayloadType": {
+                                        "type": "string",
+                                        "example": "test_payload_type"
+                                      },
+                                      "cxEventTimestamp": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": 1714857600
+                                      },
+                                      "cxEventType": {
+                                        "type": "string",
+                                        "example": "test_type"
+                                      }
+                                    },
+                                    "description": "This data structure represents an event",
+                                    "externalDocs": {
+                                      "description": "Find out more about events",
+                                      "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                                    }
+                                  }
+                                },
+                                "description": "This data structure represents a single or multiple events",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              {
+                                "title": "CxEventSingleOrMultiple",
+                                "required": [
+                                  "event"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "multipleEvents": {
+                                    "title": "CxEventArray",
+                                    "required": [
+                                      "events"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "events": {
+                                        "type": "array",
+                                        "items": {
+                                          "title": "Event",
+                                          "required": [
+                                            "cxEventKey",
+                                            "cxEventType",
+                                            "cxEventLabels",
+                                            "companyId",
+                                            "cxEventTimestamp",
+                                            "cxEventPayloadType",
+                                            "cxEventPayload"
+                                          ],
+                                          "type": "object",
+                                          "properties": {
+                                            "companyId": {
+                                              "type": "integer",
+                                              "format": "int32",
+                                              "example": 1
+                                            },
+                                            "cxEventDedupKey": {
+                                              "type": "string",
+                                              "example": "test_dedup_key"
+                                            },
+                                            "cxEventKey": {
+                                              "type": "string",
+                                              "example": "test"
+                                            },
+                                            "cxEventLabels": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "key": {
+                                                    "type": "string"
+                                                  },
+                                                  "value": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "cxEventMetadata": {
+                                              "type": "array",
+                                              "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                  "key": {
+                                                    "type": "string"
+                                                  },
+                                                  "value": {
+                                                    "type": "string"
+                                                  }
+                                                }
+                                              }
+                                            },
+                                            "cxEventPayload": {
+                                              "type": "object",
+                                              "example": {
+                                                "test": "test"
+                                              }
+                                            },
+                                            "cxEventPayloadType": {
+                                              "type": "string",
+                                              "example": "test_payload_type"
+                                            },
+                                            "cxEventTimestamp": {
+                                              "type": "string",
+                                              "format": "date-time",
+                                              "example": 1714857600
+                                            },
+                                            "cxEventType": {
+                                              "type": "string",
+                                              "example": "test_type"
+                                            }
+                                          },
+                                          "description": "This data structure represents an event",
+                                          "externalDocs": {
+                                            "description": "Find out more about events",
+                                            "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                                          }
+                                        }
+                                      }
+                                    },
+                                    "description": "This data structure represents an array of events",
+                                    "externalDocs": {
+                                      "description": "Find out more about events",
+                                      "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                                    }
+                                  }
+                                },
+                                "description": "This data structure represents a single or multiple events",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "notFoundIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "nextPageToken": {
+                          "type": "string",
+                          "example": "test"
+                        },
+                        "totalSize": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Batch Get Event",
+        "tags": [
+          "Events Service"
+        ]
+      }
+    },
+    "/v3/events/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_GetEvent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "test",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "event": {
+                      "oneOf": [
+                        {
+                          "title": "CxEventSingleOrMultiple",
+                          "required": [
+                            "event"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "singleEvent": {
+                              "title": "Event",
+                              "required": [
+                                "cxEventKey",
+                                "cxEventType",
+                                "cxEventLabels",
+                                "companyId",
+                                "cxEventTimestamp",
+                                "cxEventPayloadType",
+                                "cxEventPayload"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "companyId": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "cxEventDedupKey": {
+                                  "type": "string",
+                                  "example": "test_dedup_key"
+                                },
+                                "cxEventKey": {
+                                  "type": "string",
+                                  "example": "test"
+                                },
+                                "cxEventLabels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "cxEventMetadata": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "cxEventPayload": {
+                                  "type": "object",
+                                  "example": {
+                                    "test": "test"
+                                  }
+                                },
+                                "cxEventPayloadType": {
+                                  "type": "string",
+                                  "example": "test_payload_type"
+                                },
+                                "cxEventTimestamp": {
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": 1714857600
+                                },
+                                "cxEventType": {
+                                  "type": "string",
+                                  "example": "test_type"
+                                }
+                              },
+                              "description": "This data structure represents an event",
+                              "externalDocs": {
+                                "description": "Find out more about events",
+                                "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a single or multiple events",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "CxEventSingleOrMultiple",
+                          "required": [
+                            "event"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "multipleEvents": {
+                              "title": "CxEventArray",
+                              "required": [
+                                "events"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "events": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Event",
+                                    "required": [
+                                      "cxEventKey",
+                                      "cxEventType",
+                                      "cxEventLabels",
+                                      "companyId",
+                                      "cxEventTimestamp",
+                                      "cxEventPayloadType",
+                                      "cxEventPayload"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "companyId": {
+                                        "type": "integer",
+                                        "format": "int32",
+                                        "example": 1
+                                      },
+                                      "cxEventDedupKey": {
+                                        "type": "string",
+                                        "example": "test_dedup_key"
+                                      },
+                                      "cxEventKey": {
+                                        "type": "string",
+                                        "example": "test"
+                                      },
+                                      "cxEventLabels": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "cxEventMetadata": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "object",
+                                          "properties": {
+                                            "key": {
+                                              "type": "string"
+                                            },
+                                            "value": {
+                                              "type": "string"
+                                            }
+                                          }
+                                        }
+                                      },
+                                      "cxEventPayload": {
+                                        "type": "object",
+                                        "example": {
+                                          "test": "test"
+                                        }
+                                      },
+                                      "cxEventPayloadType": {
+                                        "type": "string",
+                                        "example": "test_payload_type"
+                                      },
+                                      "cxEventTimestamp": {
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": 1714857600
+                                      },
+                                      "cxEventType": {
+                                        "type": "string",
+                                        "example": "test_type"
+                                      }
+                                    },
+                                    "description": "This data structure represents an event",
+                                    "externalDocs": {
+                                      "description": "Find out more about events",
+                                      "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                                    }
+                                  }
+                                }
+                              },
+                              "description": "This data structure represents an array of events",
+                              "externalDocs": {
+                                "description": "Find out more about events",
+                                "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a single or multiple events",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      ]
+                    },
+                    "pagination": {
+                      "type": "object",
+                      "properties": {
+                        "nextPageToken": {
+                          "type": "string",
+                          "example": "test"
+                        },
+                        "totalSize": {
+                          "type": "integer",
+                          "format": "int64",
+                          "example": 10
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Event",
+        "tags": [
+          "Events Service"
+        ]
+      }
+    },
+    "/v3/events:count": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_ListEventsCount",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ListEventsCountResponse",
+                  "required": [
+                    "count",
+                    "reachedLimit"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "count": {
+                      "type": "string",
+                      "format": "uint64",
+                      "example": 10
+                    },
+                    "reachedLimit": {
+                      "type": "boolean",
+                      "example": false
+                    }
+                  },
+                  "description": "This data structure represents a response to list events count",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List Events Count",
+        "tags": [
+          "Events Service"
+        ]
+      }
+    },
+    "/v3/events:statistics": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EventsService_GetEventsStatistics",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetEventsStatisticsResponse",
+                  "required": [
+                    "cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "cxEventLabelsFieldStatistics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "fieldStatistics": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string",
+                                      "format": "int64"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "cxEventMetadataFieldStatistics": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "object",
+                            "properties": {
+                              "fieldStatistics": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string",
+                                      "format": "int64"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to get events statistics",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Events Statistics",
+        "tags": [
+          "Events Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Events Service",
+      "description": "A service for querying events.",
+      "externalDocs": {
+        "description": "Learn more about alerts in our documentation",
+        "url": "https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/"
+      }
+    }
+  ]
+}

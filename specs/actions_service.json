@@ -1,0 +1,890 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/actions": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ListActions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "actions": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "applicationNames": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "createdBy": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "isHidden": {
+                            "type": "boolean"
+                          },
+                          "isPrivate": {
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "sourceType": {
+                            "enum": [
+                              "SOURCE_TYPE_UNSPECIFIED",
+                              "SOURCE_TYPE_LOG",
+                              "SOURCE_TYPE_DATA_MAP"
+                            ],
+                            "type": "string"
+                          },
+                          "subsystemNames": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "url": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List Actions",
+        "tags": [
+          "Actions Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ReplaceAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "action": {
+                    "type": "object",
+                    "properties": {
+                      "applicationNames": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "createdBy": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "isHidden": {
+                        "type": "boolean"
+                      },
+                      "isPrivate": {
+                        "type": "boolean"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "sourceType": {
+                        "enum": [
+                          "SOURCE_TYPE_UNSPECIFIED",
+                          "SOURCE_TYPE_LOG",
+                          "SOURCE_TYPE_DATA_MAP"
+                        ],
+                        "type": "string"
+                      },
+                      "subsystemNames": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "url": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "object",
+                      "properties": {
+                        "applicationNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        },
+                        "isPrivate": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "sourceType": {
+                          "enum": [
+                            "SOURCE_TYPE_UNSPECIFIED",
+                            "SOURCE_TYPE_LOG",
+                            "SOURCE_TYPE_DATA_MAP"
+                          ],
+                          "type": "string"
+                        },
+                        "subsystemNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Replace Action",
+        "tags": [
+          "Actions Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_CreateAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "applicationNames": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "isPrivate": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "sourceType": {
+                    "enum": [
+                      "SOURCE_TYPE_UNSPECIFIED",
+                      "SOURCE_TYPE_LOG",
+                      "SOURCE_TYPE_DATA_MAP"
+                    ],
+                    "type": "string"
+                  },
+                  "subsystemNames": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "object",
+                      "properties": {
+                        "applicationNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        },
+                        "isPrivate": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "sourceType": {
+                          "enum": [
+                            "SOURCE_TYPE_UNSPECIFIED",
+                            "SOURCE_TYPE_LOG",
+                            "SOURCE_TYPE_DATA_MAP"
+                          ],
+                          "type": "string"
+                        },
+                        "subsystemNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create Action",
+        "tags": [
+          "Actions Service"
+        ]
+      }
+    },
+    "/v2/actions/actions:atomicBatchExecute": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_AtomicBatchExecuteActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "requests": {
+                    "items": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "create": {
+                              "type": "object",
+                              "properties": {
+                                "applicationNames": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "isPrivate": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "sourceType": {
+                                  "enum": [
+                                    "SOURCE_TYPE_UNSPECIFIED",
+                                    "SOURCE_TYPE_LOG",
+                                    "SOURCE_TYPE_DATA_MAP"
+                                  ],
+                                  "type": "string"
+                                },
+                                "subsystemNames": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "url": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "replace": {
+                              "type": "object",
+                              "properties": {
+                                "action": {
+                                  "type": "object",
+                                  "properties": {
+                                    "applicationNames": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "createdBy": {
+                                      "type": "string"
+                                    },
+                                    "id": {
+                                      "type": "string"
+                                    },
+                                    "isHidden": {
+                                      "type": "boolean"
+                                    },
+                                    "isPrivate": {
+                                      "type": "boolean"
+                                    },
+                                    "name": {
+                                      "type": "string"
+                                    },
+                                    "sourceType": {
+                                      "enum": [
+                                        "SOURCE_TYPE_UNSPECIFIED",
+                                        "SOURCE_TYPE_LOG",
+                                        "SOURCE_TYPE_DATA_MAP"
+                                      ],
+                                      "type": "string"
+                                    },
+                                    "subsystemNames": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "url": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "delete": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "matchingResponses": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "create": {
+                                "type": "object",
+                                "properties": {
+                                  "action": {
+                                    "type": "object",
+                                    "properties": {
+                                      "applicationNames": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "createdBy": {
+                                        "type": "string"
+                                      },
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "isHidden": {
+                                        "type": "boolean"
+                                      },
+                                      "isPrivate": {
+                                        "type": "boolean"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sourceType": {
+                                        "enum": [
+                                          "SOURCE_TYPE_UNSPECIFIED",
+                                          "SOURCE_TYPE_LOG",
+                                          "SOURCE_TYPE_DATA_MAP"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "subsystemNames": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "url": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "replace": {
+                                "type": "object",
+                                "properties": {
+                                  "action": {
+                                    "type": "object",
+                                    "properties": {
+                                      "applicationNames": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "createdBy": {
+                                        "type": "string"
+                                      },
+                                      "id": {
+                                        "type": "string"
+                                      },
+                                      "isHidden": {
+                                        "type": "boolean"
+                                      },
+                                      "isPrivate": {
+                                        "type": "boolean"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      },
+                                      "sourceType": {
+                                        "enum": [
+                                          "SOURCE_TYPE_UNSPECIFIED",
+                                          "SOURCE_TYPE_LOG",
+                                          "SOURCE_TYPE_DATA_MAP"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "subsystemNames": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "url": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "delete": {
+                                "type": "object"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Atomic Batch Execute Actions",
+        "tags": [
+          "Actions Service"
+        ]
+      }
+    },
+    "/v2/actions/actions:order": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_OrderActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "privateActionsOrder": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  },
+                  "sharedActionsOrder": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "key": {
+                          "type": "string"
+                        },
+                        "value": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Order Actions",
+        "tags": [
+          "Actions Service"
+        ]
+      }
+    },
+    "/v2/actions/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_GetAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "action": {
+                      "type": "object",
+                      "properties": {
+                        "applicationNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "createdBy": {
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "isHidden": {
+                          "type": "boolean"
+                        },
+                        "isPrivate": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "sourceType": {
+                          "enum": [
+                            "SOURCE_TYPE_UNSPECIFIED",
+                            "SOURCE_TYPE_LOG",
+                            "SOURCE_TYPE_DATA_MAP"
+                          ],
+                          "type": "string"
+                        },
+                        "subsystemNames": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "url": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Action",
+        "tags": [
+          "Actions Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_DeleteAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete Action",
+        "tags": [
+          "Actions Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Actions Service",
+      "description": "A service for managing actions.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

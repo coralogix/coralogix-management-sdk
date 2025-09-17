@@ -1,0 +1,335 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Manage your SAML configuration
+  externalDocs:
+    url: ""
+  name: SAML Configuration Service
+paths:
+  /aaa/team-saml/v1/active:
+    post:
+      externalDocs:
+        url: ""
+      operationId: SamlConfigurationService_SetActive
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Set_Active_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Activate/Deactivate SAML
+      tags:
+      - SAML Configuration Service
+  /aaa/team-saml/v1/configuration:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SamlConfigurationService_GetConfiguration
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Configuration_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get SAML Configuration
+      tags:
+      - SAML Configuration Service
+  /aaa/team-saml/v1/idp_parameters:
+    post:
+      externalDocs:
+        url: ""
+      operationId: SamlConfigurationService_SetIDPParameters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Set_IDP_Parameters_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Set IDP Parameters
+      tags:
+      - SAML Configuration Service
+  /aaa/team-saml/v1/sp_parameters:
+    get:
+      externalDocs:
+        url: ""
+      operationId: SamlConfigurationService_GetSPParameters
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_SP_Parameters_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get SP Parameters
+      tags:
+      - SAML Configuration Service
+components:
+  schemas:
+    Get_Configuration_Response:
+      description: This data structure is obtained as a response to a request to retrieve
+        the configuration of a SAML service provider and identity provider
+      example:
+        idpDetails:
+          icon: icon
+          name: name
+        spParameters:
+          assertionConsumerServiceUrl: assertion
+          metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          nameIdFormat: name_id
+          binding: binding
+          signingCertPem: certificate
+        idpParameters:
+          groupNames:
+          - "[\"group1\"]"
+          - "[\"group1\"]"
+          metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          teamEntityId: 1234567
+          active: true
+        teamId: 0
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        idpDetails:
+          $ref: "#/components/schemas/Get_Configuration_Response_idpDetails"
+        idpParameters:
+          $ref: "#/components/schemas/Get_Configuration_Response_idpParameters"
+        spParameters:
+          $ref: "#/components/schemas/Service_Provider_Parameters"
+        teamId:
+          format: int64
+          type: integer
+      required:
+      - idpParameters
+      - spParameters
+      - teamId
+      title: Get Configuration Response
+      type: object
+    Set_IDP_Parameters_Request:
+      description: This data structure is used to set the parameters of a SAML identity
+        provider
+      properties:
+        params:
+          $ref: "#/components/schemas/Get_Configuration_Response_idpParameters"
+        teamId:
+          format: int64
+          type: integer
+      required:
+      - params
+      - teamId
+      title: Set IDP Parameters Request
+      type: object
+    IDP_Parameters:
+      description: This data structure represents a set of SAML identity provider
+        parameters
+      example:
+        groupNames:
+        - "[\"group1\"]"
+        - "[\"group1\"]"
+        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+        teamEntityId: 1234567
+        active: true
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        active:
+          example: true
+          type: boolean
+        groupNames:
+          items:
+            example: "[\"group1\"]"
+            type: string
+          type: array
+        metadataUrl:
+          example: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          type: string
+        teamEntityId:
+          example: 1234567
+          format: int64
+          type: integer
+      required:
+      - active
+      - groupNames
+      - metadata
+      - teamEntityId
+      title: IDP Parameters
+      type: object
+    Service_Provider_Parameters:
+      description: This data structure represents the parameters of a SAML service
+        provider
+      example:
+        assertionConsumerServiceUrl: assertion
+        metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+        nameIdFormat: name_id
+        binding: binding
+        signingCertPem: certificate
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        assertionConsumerServiceUrl:
+          example: assertion
+          type: string
+        binding:
+          example: binding
+          type: string
+        metadataUrl:
+          example: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          type: string
+        nameIdFormat:
+          example: name_id
+          type: string
+        signingCertPem:
+          example: certificate
+          type: string
+      required:
+      - assertionConsumerServiceUrl
+      - binding
+      - metadataUrl
+      - nameIdFormat
+      - signingCertPem
+      title: Service Provider Parameters
+      type: object
+    Get_SP_Parameters_Response:
+      description: This data structure is obtained as a response to a request to retrieve
+        the parameters of a SAML service provider
+      example:
+        params:
+          assertionConsumerServiceUrl: assertion
+          metadataUrl: https://<...>.okta.com/app/<...>/sso/saml/metadata
+          nameIdFormat: name_id
+          binding: binding
+          signingCertPem: certificate
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        params:
+          $ref: "#/components/schemas/Service_Provider_Parameters"
+      required:
+      - params
+      title: Get SP Parameters Response
+      type: object
+    Get_Configuration_Response_idpParameters:
+      oneOf:
+      - $ref: "#/components/schemas/IDP_Parameters"
+      - $ref: "#/components/schemas/IDP_Parameters_1"
+    Get_Configuration_Response_idpDetails:
+      example:
+        icon: icon
+        name: name
+      properties:
+        icon:
+          type: string
+        name:
+          type: string
+      type: object
+    Set_Active_Request:
+      description: This data structure is used to activate or deactivate a SAML identity
+        provider
+      properties:
+        isActive:
+          type: boolean
+        teamId:
+          format: int64
+          type: integer
+      required:
+      - isActive
+      - teamId
+      title: Set Active Request
+      type: object
+    IDP_Parameters_1:
+      description: This data structure represents a set of SAML identity provider
+        parameters
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        active:
+          example: true
+          type: boolean
+        groupNames:
+          items:
+            example: "[\"group1\"]"
+            type: string
+          type: array
+        metadataContent:
+          example: <?xml version= ...
+          type: string
+        teamEntityId:
+          example: 1234567
+          format: int64
+          type: integer
+      required:
+      - active
+      - groupNames
+      - metadata
+      - teamEntityId
+      title: IDP Parameters
+      type: object

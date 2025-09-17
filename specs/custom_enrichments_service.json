@@ -1,0 +1,628 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/custom_enrichment": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_GetCustomEnrichments",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Custom Enrichments Response",
+                  "required": [
+                    "customEnrichments"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "customEnrichments": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "fileName": {
+                            "type": "string"
+                          },
+                          "fileSize": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "isQueryOnly": {
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "This response data structure is obtained when all custom enrichments are retrieved",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get Custom Enrichments",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_UpdateCustomEnrichment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This request data structure is used to update a custom enrichment",
+                "properties": {
+                  "customEnrichmentId": {
+                    "example": 1,
+                    "format": "int64",
+                    "type": "integer"
+                  },
+                  "description": {
+                    "example": "custom_enrichment_description",
+                    "type": "string"
+                  },
+                  "file": {
+                    "oneOf": [
+                      {
+                        "title": "File",
+                        "type": "object",
+                        "properties": {
+                          "extension": {
+                            "type": "string",
+                            "example": "csv"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "file_name"
+                          },
+                          "size": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 100
+                          },
+                          "textual": {
+                            "type": "string",
+                            "example": "row1,row2 value1,value2"
+                          }
+                        },
+                        "description": "This data structure represents a file",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      },
+                      {
+                        "title": "File",
+                        "type": "object",
+                        "properties": {
+                          "binary": {
+                            "type": "string",
+                            "format": "byte",
+                            "example": "0xFABB32"
+                          },
+                          "extension": {
+                            "type": "string",
+                            "example": "csv"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "file_name"
+                          },
+                          "size": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 100
+                          }
+                        },
+                        "description": "This data structure represents a file",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    ]
+                  },
+                  "name": {
+                    "example": "custom_enrichment_name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "customEnrichmentId",
+                  "name",
+                  "description",
+                  "file"
+                ],
+                "title": "Update Custom Enrichment Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Update Custom Enrichment Response",
+                  "required": [
+                    "customEnrichment"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "customEnrichment": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "isQueryOnly": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Custom enrichment updated successfully"
+                    }
+                  },
+                  "description": "This response data structure is obtained when a custom enrichment is updated",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Update Custom Enrichment",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_CreateCustomEnrichment",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This request data structure is used to create a custom enrichment",
+                "properties": {
+                  "description": {
+                    "example": "custom_enrichment_description",
+                    "type": "string"
+                  },
+                  "file": {
+                    "oneOf": [
+                      {
+                        "title": "File",
+                        "type": "object",
+                        "properties": {
+                          "extension": {
+                            "type": "string",
+                            "example": "csv"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "file_name"
+                          },
+                          "size": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 100
+                          },
+                          "textual": {
+                            "type": "string",
+                            "example": "row1,row2 value1,value2"
+                          }
+                        },
+                        "description": "This data structure represents a file",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      },
+                      {
+                        "title": "File",
+                        "type": "object",
+                        "properties": {
+                          "binary": {
+                            "type": "string",
+                            "format": "byte",
+                            "example": "0xFABB32"
+                          },
+                          "extension": {
+                            "type": "string",
+                            "example": "csv"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "file_name"
+                          },
+                          "size": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 100
+                          }
+                        },
+                        "description": "This data structure represents a file",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    ]
+                  },
+                  "name": {
+                    "example": "custom_enrichment_name",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "description",
+                  "file"
+                ],
+                "title": "Create Custom Enrichment Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Create Custom Enrichment Response",
+                  "required": [
+                    "customEnrichment"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "customEnrichment": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "isQueryOnly": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Custom enrichment created successfully"
+                    }
+                  },
+                  "description": "This response data structure is obtained when a custom enrichment is created",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Create Custom Enrichments",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      }
+    },
+    "/v1/custom_enrichment/search": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_SearchCustomEnrichmentData",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customEnrichmentsData": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "type": "object",
+                            "properties": {
+                              "definition": {
+                                "type": "object",
+                                "properties": {
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "fileName": {
+                                    "type": "string"
+                                  },
+                                  "fileSize": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "isQueryOnly": {
+                                    "type": "boolean"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "version": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              },
+                              "textual": {
+                                "type": "string"
+                              }
+                            }
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "binary": {
+                                "type": "string",
+                                "format": "byte"
+                              },
+                              "definition": {
+                                "type": "object",
+                                "properties": {
+                                  "description": {
+                                    "type": "string"
+                                  },
+                                  "fileName": {
+                                    "type": "string"
+                                  },
+                                  "fileSize": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "isQueryOnly": {
+                                    "type": "boolean"
+                                  },
+                                  "name": {
+                                    "type": "string"
+                                  },
+                                  "version": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Search Custom Enrichment Data",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      }
+    },
+    "/v1/custom_enrichment/{custom_enrichment_id}": {
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_DeleteCustomEnrichment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "custom_enrichment_id",
+            "required": true,
+            "schema": {
+              "example": 1,
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "customEnrichmentId": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 1
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Custom enrichment deleted successfully"
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Delete Custom Enrichments",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      }
+    },
+    "/v1/custom_enrichment/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "CustomEnrichmentService_GetCustomEnrichment",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": 1,
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Custom Enrichment Response",
+                  "required": [
+                    "customEnrichment"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "customEnrichment": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string"
+                        },
+                        "fileName": {
+                          "type": "string"
+                        },
+                        "fileSize": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "isQueryOnly": {
+                          "type": "boolean"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "version": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This response data structure is obtained when a custom enrichment is retrieved",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get Custom Enrichment",
+        "tags": [
+          "Custom Enrichments Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Custom Enrichments Service",
+      "description": "Manage your enrichments.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

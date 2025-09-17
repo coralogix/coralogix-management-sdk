@@ -1,0 +1,413 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Service for managing system and custom roles.
+  externalDocs:
+    url: ""
+  name: Role Management Service
+paths:
+  /aaa/team-roles/v1/custom-roles:
+    get:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_ListCustomRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleManagementService_ListCustomRoles_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Custom Roles
+      tags:
+      - Role Management Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_CreateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleManagementService_CreateRole_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleManagementService_CreateRole_200_response"
+          description: ""
+        "201":
+          content:
+            application/json: {}
+          description: Role created
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "409":
+          content:
+            application/json: {}
+          description: Role already exists
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Role
+      tags:
+      - Role Management Service
+  /aaa/team-roles/v1/custom-roles/{role_id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_DeleteRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "204":
+          content:
+            application/json: {}
+          description: Role deleted
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Role
+      tags:
+      - Role Management Service
+    get:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_GetCustomRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleManagementService_GetCustomRole_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Custom Role
+      tags:
+      - Role Management Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_UpdateRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleManagementService_UpdateRole_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Role
+      tags:
+      - Role Management Service
+  /aaa/team-roles/v1/system-roles:
+    get:
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_ListSystemRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RoleManagementService_ListSystemRoles_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List System Roles
+      tags:
+      - Role Management Service
+components:
+  schemas:
+    RoleManagementService_ListCustomRoles_200_response:
+      example:
+        roles:
+        - parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+        - parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+      properties:
+        roles:
+          items:
+            $ref: "#/components/schemas/RoleManagementService_ListCustomRoles_200_response_roles_inner"
+          type: array
+      type: object
+    RoleManagementService_GetCustomRole_200_response:
+      example:
+        role:
+          parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+      properties:
+        role:
+          $ref: "#/components/schemas/RoleManagementService_ListCustomRoles_200_response_roles_inner"
+      type: object
+    RoleManagementService_ListSystemRoles_200_response_roles_inner:
+      example:
+        permissions:
+        - permissions
+        - permissions
+        roleId: 0
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_CreateRole_request_oneOf_1:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_ListCustomRoles_200_response_roles_inner:
+      example:
+        parentRoleName: parentRoleName
+        permissions:
+        - permissions
+        - permissions
+        roleId: 6
+        teamId: 1
+        name: name
+        description: description
+        parentRoleId: 0
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_UpdateRole_request:
+      properties:
+        newDescription:
+          type: string
+        newName:
+          type: string
+        newPermissions:
+          $ref: "#/components/schemas/RoleManagementService_UpdateRole_request_newPermissions"
+      type: object
+    RoleManagementService_UpdateRole_request_newPermissions:
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    RoleManagementService_CreateRole_request:
+      oneOf:
+      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf"
+      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf_1"
+      type: object
+    RoleManagementService_CreateRole_200_response:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_CreateRole_request_oneOf:
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_ListSystemRoles_200_response:
+      example:
+        roles:
+        - permissions:
+          - permissions
+          - permissions
+          roleId: 0
+          name: name
+          description: description
+        - permissions:
+          - permissions
+          - permissions
+          roleId: 0
+          name: name
+          description: description
+      properties:
+        roles:
+          items:
+            $ref: "#/components/schemas/RoleManagementService_ListSystemRoles_200_response_roles_inner"
+          type: array
+      type: object

@@ -1,0 +1,4537 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/outgoing-webhooks": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhooks",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "List outgoing webhooks response",
+                  "type": "object",
+                  "properties": {
+                    "deployed": {
+                      "type": "array",
+                      "items": {
+                        "title": "Outgoing webhook summary",
+                        "required": [
+                          "id",
+                          "name",
+                          "createdAt",
+                          "externalId"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-10-20T00:00:00"
+                          },
+                          "externalId": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": "external_id_example"
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "webhook_id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-10-20T00:00:00"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List outgoing webhooks",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_UpdateOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "data": {
+                    "oneOf": [
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "genericWebhook": {
+                            "title": "Generic webhook configuration",
+                            "required": [
+                              "uuid",
+                              "method"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "headers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "method": {
+                                "enum": [
+                                  "UNKNOWN",
+                                  "GET",
+                                  "POST",
+                                  "PUT"
+                                ],
+                                "type": "string"
+                              },
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "slack": {
+                            "title": "Slack configuration",
+                            "type": "object",
+                            "properties": {
+                              "attachments": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack attachment configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "EMPTY",
+                                        "METRIC_SNAPSHOT",
+                                        "LOGS"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "digests": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack digest configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "UNKNOWN",
+                                        "ERROR_AND_CRITICAL_LOGS",
+                                        "FLOW_ANOMALIES",
+                                        "SPIKE_ANOMALIES",
+                                        "DATA_USAGE"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "pagerDuty": {
+                            "title": "PagerDuty configuration",
+                            "required": [
+                              "serviceKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "serviceKey": {
+                                "type": "string",
+                                "example": "pager_duty_service_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "sendLog": {
+                            "title": "Send log configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "emailGroup": {
+                            "title": "Email group configuration",
+                            "type": "object",
+                            "properties": {
+                              "emailAddresses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "example": [
+                                    "example@coralogix.com"
+                                  ]
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "microsoftTeams": {
+                            "title": "Microsoft Teams configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "jira": {
+                            "title": "Jira configuration",
+                            "required": [
+                              "apiToken",
+                              "email",
+                              "projectKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "apiToken": {
+                                "type": "string",
+                                "example": "jira_api_token"
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "jira_email"
+                              },
+                              "projectKey": {
+                                "type": "string",
+                                "example": "jira_project_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "opsgenie": {
+                            "title": "Opsgenie configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "demisto": {
+                            "title": "Demisto configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "awsEventBridge": {
+                            "title": "AWS EventBridge configuration",
+                            "required": [
+                              "eventBusArn",
+                              "detail",
+                              "detailType",
+                              "source",
+                              "roleName"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "detail": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "detailType": {
+                                "type": "string",
+                                "example": "detail_type"
+                              },
+                              "eventBusArn": {
+                                "type": "string",
+                                "example": "arn:aws:events:us-east-1:123456789012:event-bus/default"
+                              },
+                              "roleName": {
+                                "type": "string",
+                                "example": "role_name"
+                              },
+                              "source": {
+                                "type": "string",
+                                "example": "source"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "ibmEventNotifications": {
+                            "title": "IBM event notification configuration",
+                            "required": [
+                              "eventNotificationsInstanceId",
+                              "regionId",
+                              "endpointType"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "endpointType": {
+                                "enum": [
+                                  "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
+                                  "ENDPOINT_TYPE_PRIVATE"
+                                ],
+                                "type": "string"
+                              },
+                              "eventNotificationsInstanceId": {
+                                "type": "string"
+                              },
+                              "regionId": {
+                                "type": "string"
+                              },
+                              "sourceId": {
+                                "type": "string"
+                              },
+                              "sourceName": {
+                                "type": "string"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "msTeamsWorkflow": {
+                            "title": "Microsoft Teams workflow configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    ]
+                  },
+                  "id": {
+                    "example": "example_id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "data"
+                ],
+                "title": "Update outgoing webhook request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Update outgoing webhook response",
+                  "type": "object",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update an outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_CreateOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "data": {
+                    "oneOf": [
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "genericWebhook": {
+                            "title": "Generic webhook configuration",
+                            "required": [
+                              "uuid",
+                              "method"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "headers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "method": {
+                                "enum": [
+                                  "UNKNOWN",
+                                  "GET",
+                                  "POST",
+                                  "PUT"
+                                ],
+                                "type": "string"
+                              },
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "slack": {
+                            "title": "Slack configuration",
+                            "type": "object",
+                            "properties": {
+                              "attachments": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack attachment configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "EMPTY",
+                                        "METRIC_SNAPSHOT",
+                                        "LOGS"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "digests": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack digest configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "UNKNOWN",
+                                        "ERROR_AND_CRITICAL_LOGS",
+                                        "FLOW_ANOMALIES",
+                                        "SPIKE_ANOMALIES",
+                                        "DATA_USAGE"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "pagerDuty": {
+                            "title": "PagerDuty configuration",
+                            "required": [
+                              "serviceKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "serviceKey": {
+                                "type": "string",
+                                "example": "pager_duty_service_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "sendLog": {
+                            "title": "Send log configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "emailGroup": {
+                            "title": "Email group configuration",
+                            "type": "object",
+                            "properties": {
+                              "emailAddresses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "example": [
+                                    "example@coralogix.com"
+                                  ]
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "microsoftTeams": {
+                            "title": "Microsoft Teams configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "jira": {
+                            "title": "Jira configuration",
+                            "required": [
+                              "apiToken",
+                              "email",
+                              "projectKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "apiToken": {
+                                "type": "string",
+                                "example": "jira_api_token"
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "jira_email"
+                              },
+                              "projectKey": {
+                                "type": "string",
+                                "example": "jira_project_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "opsgenie": {
+                            "title": "Opsgenie configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "demisto": {
+                            "title": "Demisto configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "awsEventBridge": {
+                            "title": "AWS EventBridge configuration",
+                            "required": [
+                              "eventBusArn",
+                              "detail",
+                              "detailType",
+                              "source",
+                              "roleName"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "detail": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "detailType": {
+                                "type": "string",
+                                "example": "detail_type"
+                              },
+                              "eventBusArn": {
+                                "type": "string",
+                                "example": "arn:aws:events:us-east-1:123456789012:event-bus/default"
+                              },
+                              "roleName": {
+                                "type": "string",
+                                "example": "role_name"
+                              },
+                              "source": {
+                                "type": "string",
+                                "example": "source"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "ibmEventNotifications": {
+                            "title": "IBM event notification configuration",
+                            "required": [
+                              "eventNotificationsInstanceId",
+                              "regionId",
+                              "endpointType"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "endpointType": {
+                                "enum": [
+                                  "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
+                                  "ENDPOINT_TYPE_PRIVATE"
+                                ],
+                                "type": "string"
+                              },
+                              "eventNotificationsInstanceId": {
+                                "type": "string"
+                              },
+                              "regionId": {
+                                "type": "string"
+                              },
+                              "sourceId": {
+                                "type": "string"
+                              },
+                              "sourceName": {
+                                "type": "string"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "msTeamsWorkflow": {
+                            "title": "Microsoft Teams workflow configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "title": "Create outgoing webhook request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Create outgoing webhook response",
+                  "required": [
+                    "id"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "example": "example_id"
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create an outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/all": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListAllOutgoingWebhooks",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "List all outgoing webhooks response",
+                  "type": "object",
+                  "properties": {
+                    "deployed": {
+                      "type": "array",
+                      "items": {
+                        "title": "Outgoing webhook extended summary",
+                        "required": [
+                          "id",
+                          "name",
+                          "createdAt",
+                          "externalId",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-10-20T00:00:00"
+                          },
+                          "externalId": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": "external_id_example"
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "webhook_id"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2024-10-20T00:00:00"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List all outgoing webhooks",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/ibm-event-notifications/instances": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListIbmEventNotificationsInstances",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "List IBM event notification instances response",
+                  "type": "object",
+                  "properties": {
+                    "instances": {
+                      "type": "array",
+                      "items": {
+                        "title": "Event notifications instance",
+                        "required": [
+                          "instanceId",
+                          "regionId",
+                          "name",
+                          "crn"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "crn": {
+                            "type": "string",
+                            "example": "crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::"
+                          },
+                          "instanceId": {
+                            "type": "string",
+                            "example": "5a8b249b-3915-49e7-ad43-030f585d84c5"
+                          },
+                          "isUsed": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "example-name"
+                          },
+                          "regionId": {
+                            "type": "string",
+                            "example": "eu-gb"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List IBM event notification instances",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/summary": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutboundWebhooksSummary",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "List outbound webhooks summary response",
+                  "type": "object",
+                  "properties": {
+                    "outboundWebhookSummaries": {
+                      "type": "array",
+                      "items": {
+                        "title": "Outbound webhook summary",
+                        "required": [
+                          "id",
+                          "name",
+                          "createdAt",
+                          "externalId",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "externalId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List outbound webhooks summary",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadSummary"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/test": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_TestOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "data": {
+                    "oneOf": [
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "genericWebhook": {
+                            "title": "Generic webhook configuration",
+                            "required": [
+                              "uuid",
+                              "method"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "headers": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "method": {
+                                "enum": [
+                                  "UNKNOWN",
+                                  "GET",
+                                  "POST",
+                                  "PUT"
+                                ],
+                                "type": "string"
+                              },
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "slack": {
+                            "title": "Slack configuration",
+                            "type": "object",
+                            "properties": {
+                              "attachments": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack attachment configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "EMPTY",
+                                        "METRIC_SNAPSHOT",
+                                        "LOGS"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "digests": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Slack digest configuration",
+                                  "required": [
+                                    "type"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isActive": {
+                                      "type": "boolean"
+                                    },
+                                    "type": {
+                                      "enum": [
+                                        "UNKNOWN",
+                                        "ERROR_AND_CRITICAL_LOGS",
+                                        "FLOW_ANOMALIES",
+                                        "SPIKE_ANOMALIES",
+                                        "DATA_USAGE"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "pagerDuty": {
+                            "title": "PagerDuty configuration",
+                            "required": [
+                              "serviceKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "serviceKey": {
+                                "type": "string",
+                                "example": "pager_duty_service_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "sendLog": {
+                            "title": "Send log configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "emailGroup": {
+                            "title": "Email group configuration",
+                            "type": "object",
+                            "properties": {
+                              "emailAddresses": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string",
+                                  "example": [
+                                    "example@coralogix.com"
+                                  ]
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "microsoftTeams": {
+                            "title": "Microsoft Teams configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "jira": {
+                            "title": "Jira configuration",
+                            "required": [
+                              "apiToken",
+                              "email",
+                              "projectKey"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "apiToken": {
+                                "type": "string",
+                                "example": "jira_api_token"
+                              },
+                              "email": {
+                                "type": "string",
+                                "example": "jira_email"
+                              },
+                              "projectKey": {
+                                "type": "string",
+                                "example": "jira_project_key"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "opsgenie": {
+                            "title": "Opsgenie configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "demisto": {
+                            "title": "Demisto configuration",
+                            "required": [
+                              "uuid",
+                              "payload"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "payload": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "uuid": {
+                                "type": "string",
+                                "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "awsEventBridge": {
+                            "title": "AWS EventBridge configuration",
+                            "required": [
+                              "eventBusArn",
+                              "detail",
+                              "detailType",
+                              "source",
+                              "roleName"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "detail": {
+                                "type": "string",
+                                "example": {
+                                  "key": "value"
+                                }
+                              },
+                              "detailType": {
+                                "type": "string",
+                                "example": "detail_type"
+                              },
+                              "eventBusArn": {
+                                "type": "string",
+                                "example": "arn:aws:events:us-east-1:123456789012:event-bus/default"
+                              },
+                              "roleName": {
+                                "type": "string",
+                                "example": "role_name"
+                              },
+                              "source": {
+                                "type": "string",
+                                "example": "source"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "ibmEventNotifications": {
+                            "title": "IBM event notification configuration",
+                            "required": [
+                              "eventNotificationsInstanceId",
+                              "regionId",
+                              "endpointType"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "endpointType": {
+                                "enum": [
+                                  "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
+                                  "ENDPOINT_TYPE_PRIVATE"
+                                ],
+                                "type": "string"
+                              },
+                              "eventNotificationsInstanceId": {
+                                "type": "string"
+                              },
+                              "regionId": {
+                                "type": "string"
+                              },
+                              "sourceId": {
+                                "type": "string"
+                              },
+                              "sourceName": {
+                                "type": "string"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      {
+                        "title": "Outgoing webhook input data",
+                        "required": [
+                          "name",
+                          "config",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "msTeamsWorkflow": {
+                            "title": "Microsoft Teams workflow configuration",
+                            "type": "object",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_webhook"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          },
+                          "url": {
+                            "type": "string",
+                            "example": "slack.webhook.com"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "data"
+                ],
+                "title": "Test outgoing webhook request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Test outgoing webhook response",
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "title": "Test outgoing webhook success",
+                          "type": "object",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Test outgoing webhook response",
+                      "type": "object",
+                      "properties": {
+                        "failure": {
+                          "title": "Test outgoing webhook failure",
+                          "required": [
+                            "errorMessage",
+                            "displayMessage"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "displayMessage": {
+                              "type": "string",
+                              "example": "example_display_message"
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "example": "example_error_message"
+                            },
+                            "statusCode": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": 400
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Test an outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/test-existing": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_TestExistingOutgoingWebhook",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "example": "example_id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "title": "Test existing outgoing webhook request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Test outgoing webhook response",
+                      "type": "object",
+                      "properties": {
+                        "success": {
+                          "title": "Test outgoing webhook success",
+                          "type": "object",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Test outgoing webhook response",
+                      "type": "object",
+                      "properties": {
+                        "failure": {
+                          "title": "Test outgoing webhook failure",
+                          "required": [
+                            "errorMessage",
+                            "displayMessage"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "displayMessage": {
+                              "type": "string",
+                              "example": "example_display_message"
+                            },
+                            "errorMessage": {
+                              "type": "string",
+                              "example": "example_error_message"
+                            },
+                            "statusCode": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": 400
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Test an existing outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/types": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_ListOutgoingWebhookTypes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "List outgoing webhook types response",
+                  "type": "object",
+                  "properties": {
+                    "webhooks": {
+                      "type": "array",
+                      "items": {
+                        "title": "Outgoing webhook type",
+                        "required": [
+                          "label",
+                          "count",
+                          "type"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "count": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 3
+                          },
+                          "label": {
+                            "type": "string",
+                            "example": "example_label"
+                          },
+                          "type": {
+                            "enum": [
+                              "UNKNOWN",
+                              "GENERIC",
+                              "SLACK",
+                              "PAGERDUTY",
+                              "SEND_LOG",
+                              "EMAIL_GROUP",
+                              "MICROSOFT_TEAMS",
+                              "JIRA",
+                              "OPSGENIE",
+                              "DEMISTO",
+                              "AWS_EVENT_BRIDGE",
+                              "IBM_EVENT_NOTIFICATIONS",
+                              "MS_TEAMS_WORKFLOW"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get outgoing webhook types",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/types/{type}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_GetOutgoingWebhookTypeDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "enum": [
+                "UNKNOWN",
+                "GENERIC",
+                "SLACK",
+                "PAGERDUTY",
+                "SEND_LOG",
+                "EMAIL_GROUP",
+                "MICROSOFT_TEAMS",
+                "JIRA",
+                "OPSGENIE",
+                "DEMISTO",
+                "AWS_EVENT_BRIDGE",
+                "IBM_EVENT_NOTIFICATIONS",
+                "MS_TEAMS_WORKFLOW"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get outgoing webhook type details response",
+                  "required": [
+                    "details"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "details": {
+                      "title": "Outgoing webhook details",
+                      "required": [
+                        "label",
+                        "type"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "label": {
+                          "type": "string",
+                          "example": "example_label"
+                        },
+                        "type": {
+                          "enum": [
+                            "UNKNOWN",
+                            "GENERIC",
+                            "SLACK",
+                            "PAGERDUTY",
+                            "SEND_LOG",
+                            "EMAIL_GROUP",
+                            "MICROSOFT_TEAMS",
+                            "JIRA",
+                            "OPSGENIE",
+                            "DEMISTO",
+                            "AWS_EVENT_BRIDGE",
+                            "IBM_EVENT_NOTIFICATIONS",
+                            "MS_TEAMS_WORKFLOW"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get outgoing webhook type details",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      }
+    },
+    "/v1/outgoing-webhooks/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_GetOutgoingWebhook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get outgoing webhook response",
+                  "required": [
+                    "webhook"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "webhook": {
+                      "oneOf": [
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "genericWebhook": {
+                              "title": "Generic webhook configuration",
+                              "required": [
+                                "uuid",
+                                "method"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "headers": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "key": {
+                                        "type": "string"
+                                      },
+                                      "value": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "method": {
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "GET",
+                                    "POST",
+                                    "PUT"
+                                  ],
+                                  "type": "string"
+                                },
+                                "payload": {
+                                  "type": "string",
+                                  "example": {
+                                    "key": "value"
+                                  }
+                                },
+                                "uuid": {
+                                  "type": "string",
+                                  "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "slack": {
+                              "title": "Slack configuration",
+                              "type": "object",
+                              "properties": {
+                                "attachments": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Slack attachment configuration",
+                                    "required": [
+                                      "type"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "isActive": {
+                                        "type": "boolean"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "EMPTY",
+                                          "METRIC_SNAPSHOT",
+                                          "LOGS"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "digests": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Slack digest configuration",
+                                    "required": [
+                                      "type"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "isActive": {
+                                        "type": "boolean"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "UNKNOWN",
+                                          "ERROR_AND_CRITICAL_LOGS",
+                                          "FLOW_ANOMALIES",
+                                          "SPIKE_ANOMALIES",
+                                          "DATA_USAGE"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "pagerDuty": {
+                              "title": "PagerDuty configuration",
+                              "required": [
+                                "serviceKey"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "serviceKey": {
+                                  "type": "string",
+                                  "example": "pager_duty_service_key"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "sendLog": {
+                              "title": "Send log configuration",
+                              "required": [
+                                "uuid",
+                                "payload"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "payload": {
+                                  "type": "string",
+                                  "example": {
+                                    "key": "value"
+                                  }
+                                },
+                                "uuid": {
+                                  "type": "string",
+                                  "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "emailGroup": {
+                              "title": "Email group configuration",
+                              "type": "object",
+                              "properties": {
+                                "emailAddresses": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string",
+                                    "example": [
+                                      "example@coralogix.com"
+                                    ]
+                                  }
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "microsoftTeams": {
+                              "title": "Microsoft Teams configuration",
+                              "type": "object",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "jira": {
+                              "title": "Jira configuration",
+                              "required": [
+                                "apiToken",
+                                "email",
+                                "projectKey"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "apiToken": {
+                                  "type": "string",
+                                  "example": "jira_api_token"
+                                },
+                                "email": {
+                                  "type": "string",
+                                  "example": "jira_email"
+                                },
+                                "projectKey": {
+                                  "type": "string",
+                                  "example": "jira_project_key"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "opsgenie": {
+                              "title": "Opsgenie configuration",
+                              "type": "object",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "demisto": {
+                              "title": "Demisto configuration",
+                              "required": [
+                                "uuid",
+                                "payload"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "payload": {
+                                  "type": "string",
+                                  "example": {
+                                    "key": "value"
+                                  }
+                                },
+                                "uuid": {
+                                  "type": "string",
+                                  "example": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "awsEventBridge": {
+                              "title": "AWS EventBridge configuration",
+                              "required": [
+                                "eventBusArn",
+                                "detail",
+                                "detailType",
+                                "source",
+                                "roleName"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "detail": {
+                                  "type": "string",
+                                  "example": {
+                                    "key": "value"
+                                  }
+                                },
+                                "detailType": {
+                                  "type": "string",
+                                  "example": "detail_type"
+                                },
+                                "eventBusArn": {
+                                  "type": "string",
+                                  "example": "arn:aws:events:us-east-1:123456789012:event-bus/default"
+                                },
+                                "roleName": {
+                                  "type": "string",
+                                  "example": "role_name"
+                                },
+                                "source": {
+                                  "type": "string",
+                                  "example": "source"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "ibmEventNotifications": {
+                              "title": "IBM event notification configuration",
+                              "required": [
+                                "eventNotificationsInstanceId",
+                                "regionId",
+                                "endpointType"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "endpointType": {
+                                  "enum": [
+                                    "ENDPOINT_TYPE_DEFAULT_OR_PUBLIC",
+                                    "ENDPOINT_TYPE_PRIVATE"
+                                  ],
+                                  "type": "string"
+                                },
+                                "eventNotificationsInstanceId": {
+                                  "type": "string"
+                                },
+                                "regionId": {
+                                  "type": "string"
+                                },
+                                "sourceId": {
+                                  "type": "string"
+                                },
+                                "sourceName": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Outgoing webhook",
+                          "required": [
+                            "id",
+                            "type",
+                            "name",
+                            "createdAt",
+                            "externalId"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createdAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "externalId": {
+                              "type": "integer",
+                              "format": "int64",
+                              "example": "external_id_example"
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "webhook_id"
+                            },
+                            "msTeamsWorkflow": {
+                              "title": "Microsoft Teams workflow configuration",
+                              "type": "object",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "my_webhook"
+                            },
+                            "type": {
+                              "enum": [
+                                "UNKNOWN",
+                                "GENERIC",
+                                "SLACK",
+                                "PAGERDUTY",
+                                "SEND_LOG",
+                                "EMAIL_GROUP",
+                                "MICROSOFT_TEAMS",
+                                "JIRA",
+                                "OPSGENIE",
+                                "DEMISTO",
+                                "AWS_EVENT_BRIDGE",
+                                "IBM_EVENT_NOTIFICATIONS",
+                                "MS_TEAMS_WORKFLOW"
+                              ],
+                              "type": "string"
+                            },
+                            "updatedAt": {
+                              "type": "string",
+                              "format": "date-time",
+                              "example": "2024-10-20T00:00:00"
+                            },
+                            "url": {
+                              "type": "string",
+                              "example": "slack.webhook.com"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:ReadConfig"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "OutgoingWebhooksService_DeleteOutgoingWebhook",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "example_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Delete outgoing webhook response",
+                  "type": "object",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete an outgoing webhook",
+        "tags": [
+          "Outgoing webhooks service"
+        ],
+        "x-coralogixPermissions": [
+          "outbound-webhooks:UpdateConfig"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Outgoing webhooks service",
+      "externalDocs": {
+        "description": "Find out more about outbound webhooks in our documentation.",
+        "url": "https://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/"
+      }
+    }
+  ]
+}

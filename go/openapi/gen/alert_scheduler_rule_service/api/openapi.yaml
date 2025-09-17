@@ -1,0 +1,971 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Manage your alert scheduler rules.
+  externalDocs:
+    url: ""
+  name: Alert Scheduler Rule service
+paths:
+  /v1/alert-scheduler-rules:
+    post:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_CreateAlertSchedulerRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_alert_scheduler_rule_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create an alert scheduler rule
+      tags:
+      - Alert Scheduler Rule service
+    put:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_UpdateAlertSchedulerRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update an alert scheduler rule
+      tags:
+      - Alert Scheduler Rule service
+  /v1/alert-scheduler-rules/bulk:
+    get:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_GetBulkAlertSchedulerRule
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_bulk_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get multiple alert scheduler rules
+      tags:
+      - Alert Scheduler Rule service
+    post:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_CreateBulkAlertSchedulerRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_bulk_alert_scheduler_rule_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_bulk_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create multiple alert scheduler rules
+      tags:
+      - Alert Scheduler Rule service
+    put:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_UpdateBulkAlertSchedulerRule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_bulk_alert_scheduler_rule_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Update_bulk_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update multiple alert scheduler rules
+      tags:
+      - Alert Scheduler Rule service
+  /v1/alert-scheduler-rules/{alert_scheduler_rule_id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_DeleteAlertSchedulerRule
+      parameters:
+      - explode: false
+        in: path
+        name: alert_scheduler_rule_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete an alert scheduler rule
+      tags:
+      - Alert Scheduler Rule service
+    get:
+      externalDocs:
+        url: ""
+      operationId: AlertSchedulerRuleService_GetAlertSchedulerRule
+      parameters:
+      - explode: false
+        in: path
+        name: alert_scheduler_rule_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_alert_scheduler_rule_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get an alert scheduler rule
+      tags:
+      - Alert Scheduler Rule service
+components:
+  schemas:
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf:
+      example:
+        timezone: timezone
+        startTime: startTime
+        endTime: endTime
+      properties:
+        endTime:
+          type: string
+        startTime:
+          type: string
+        timezone:
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf:
+      properties:
+        always:
+          type: object
+      type: object
+    Create_bulk_alert_scheduler_rule_response_data_structure:
+      description: This is a response sent after creating multiple alert scheduler
+        rules
+      example:
+        createSuppressionResponses:
+        - alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+        - alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        createSuppressionResponses:
+          items:
+            $ref: "#/components/schemas/Create_alert_scheduler_rule_response_data_structure"
+          type: array
+      required:
+      - createSuppressionResponses
+      title: Create bulk alert scheduler rule response data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_1_weekly:
+      properties:
+        daysOfWeek:
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_1:
+      description: This is a request sent to update an alert scheduler rule
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Update alert scheduler rule request data structure
+      type: object
+    Update_bulk_alert_scheduler_rule_response_data_structure:
+      description: This is a response sent after updating multiple alert scheduler
+        rules
+      example:
+        updateSuppressionResponses:
+        - alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+        - alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        updateSuppressionResponses:
+          items:
+            $ref: "#/components/schemas/Create_alert_scheduler_rule_response_data_structure"
+          type: array
+      required:
+      - updateSuppressionResponses
+      title: Update bulk alert scheduler rule response data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_alertMetaLabels:
+      example:
+        value:
+        - id: id
+          value: value
+          key: key
+        - id: id
+          value: value
+          key: key
+      properties:
+        value:
+          items:
+            $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_alertMetaLabels_value_inner"
+          type: array
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe:
+      oneOf:
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf_1"
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime:
+      example:
+        timeframe:
+          timezone: timezone
+          startTime: startTime
+          endTime: endTime
+      properties:
+        timeframe:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe"
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule:
+      oneOf:
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1"
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_1:
+      properties:
+        alertUniqueIds:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_1_alertUniqueIds"
+        whatExpression:
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_alertMetaLabels_value_inner:
+      example:
+        id: id
+        value: value
+        key: key
+      properties:
+        id:
+          type: string
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    Get_bulk_alert_scheduler_rule_response_data_structure:
+      description: This is a response sent after getting multiple alert scheduler
+        rules
+      example:
+        nextPageToken: nextPageToken
+        alertSchedulerRules:
+        - nextActiveTimeframes:
+          - timezone: timezone
+            startTime: startTime
+            endTime: endTime
+          - timezone: timezone
+            startTime: startTime
+            endTime: endTime
+          alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+        - nextActiveTimeframes:
+          - timezone: timezone
+            startTime: startTime
+            endTime: endTime
+          - timezone: timezone
+            startTime: startTime
+            endTime: endTime
+          alertSchedulerRule:
+            filter:
+              alertMetaLabels:
+                value:
+                - id: id
+                  value: value
+                  key: key
+                - id: id
+                  value: value
+                  key: key
+              whatExpression: whatExpression
+            createdAt: createdAt
+            schedule:
+              oneTime:
+                timeframe:
+                  timezone: timezone
+                  startTime: startTime
+                  endTime: endTime
+              scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+            name: name
+            description: description
+            id: id
+            metaLabels:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+            enabled: true
+            uniqueIdentifier: uniqueIdentifier
+            updatedAt: updatedAt
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        alertSchedulerRules:
+          items:
+            $ref: "#/components/schemas/Get_bulk_alert_scheduler_rule_response_data_structure_alertSchedulerRules_inner"
+          type: array
+        nextPageToken:
+          type: string
+      required:
+      - alertSchedulerRules
+      title: Get bulk alert scheduler rule response data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_1_alertUniqueIds:
+      properties:
+        value:
+          items:
+            type: string
+          type: array
+      type: object
+    Create_alert_scheduler_rule_response_data_structure:
+      description: This is a response sent after creating an alert scheduler rule
+      example:
+        alertSchedulerRule:
+          filter:
+            alertMetaLabels:
+              value:
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
+            whatExpression: whatExpression
+          createdAt: createdAt
+          schedule:
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
+            scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+          name: name
+          description: description
+          id: id
+          metaLabels:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+          enabled: true
+          uniqueIdentifier: uniqueIdentifier
+          updatedAt: updatedAt
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Create alert scheduler rule response data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_1:
+      properties:
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe"
+        weekly:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_1_weekly"
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic:
+      oneOf:
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_1"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_2"
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_2:
+      properties:
+        monthly:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_2_monthly"
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe"
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf_1_duration:
+      properties:
+        forOver:
+          format: int32
+          type: integer
+        frequency:
+          enum:
+          - DURATION_FREQUENCY_UNSPECIFIED
+          - DURATION_FREQUENCY_MINUTE
+          - DURATION_FREQUENCY_HOUR
+          - DURATION_FREQUENCY_DAY
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure:
+      description: This is a request sent to update an alert scheduler rule
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Update alert scheduler rule request data structure
+      type: object
+    Create_alert_scheduler_rule_request_data_structure:
+      description: This is a request sent to create an alert scheduler rule
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Create alert scheduler rule request data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf:
+      example:
+        alertMetaLabels:
+          value:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+        whatExpression: whatExpression
+      properties:
+        alertMetaLabels:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_alertMetaLabels"
+        whatExpression:
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring:
+      oneOf:
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1"
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf:
+      example:
+        oneTime:
+          timeframe:
+            timezone: timezone
+            startTime: startTime
+            endTime: endTime
+        scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+      properties:
+        oneTime:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime"
+        scheduleOperation:
+          enum:
+          - SCHEDULE_OPERATION_UNSPECIFIED
+          - SCHEDULE_OPERATION_MUTE
+          - SCHEDULE_OPERATION_ACTIVATE
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule:
+      example:
+        filter:
+          alertMetaLabels:
+            value:
+            - id: id
+              value: value
+              key: key
+            - id: id
+              value: value
+              key: key
+          whatExpression: whatExpression
+        createdAt: createdAt
+        schedule:
+          oneTime:
+            timeframe:
+              timezone: timezone
+              startTime: startTime
+              endTime: endTime
+          scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+        name: name
+        description: description
+        id: id
+        metaLabels:
+        - id: id
+          value: value
+          key: key
+        - id: id
+          value: value
+          key: key
+        enabled: true
+        uniqueIdentifier: uniqueIdentifier
+        updatedAt: updatedAt
+      properties:
+        createdAt:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        filter:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter"
+        id:
+          type: string
+        metaLabels:
+          items:
+            $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_alertMetaLabels_value_inner"
+          type: array
+        name:
+          type: string
+        schedule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule"
+        uniqueIdentifier:
+          type: string
+        updatedAt:
+          type: string
+      type: object
+    Update_bulk_alert_scheduler_rule_request_data_structure:
+      description: This is a request sent to update multiple alert scheduler rules
+      properties:
+        updateAlertSchedulerRuleRequests:
+          items:
+            $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_1"
+          type: array
+      required:
+      - updateAlertSchedulerRuleRequests
+      title: Update bulk alert scheduler rule request data structure
+      type: object
+    Create_alert_scheduler_rule_request_data_structure_1:
+      description: This is a request sent to create an alert scheduler rule
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Create alert scheduler rule request data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1:
+      properties:
+        recurring:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring"
+        scheduleOperation:
+          enum:
+          - SCHEDULE_OPERATION_UNSPECIFIED
+          - SCHEDULE_OPERATION_MUTE
+          - SCHEDULE_OPERATION_ACTIVATE
+          type: string
+      type: object
+    ? Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf_2_monthly
+    : properties:
+        daysOfMonth:
+          items:
+            format: int32
+            type: integer
+          type: array
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf_1:
+      properties:
+        duration:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf_1_duration"
+        startTime:
+          type: string
+        timezone:
+          type: string
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter:
+      oneOf:
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf"
+      - $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_filter_oneOf_1"
+    Get_alert_scheduler_rule_response_data_structure:
+      description: This is a response sent to get an alert scheduler rule
+      example:
+        alertSchedulerRule:
+          filter:
+            alertMetaLabels:
+              value:
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
+            whatExpression: whatExpression
+          createdAt: createdAt
+          schedule:
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
+            scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+          name: name
+          description: description
+          id: id
+          metaLabels:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+          enabled: true
+          uniqueIdentifier: uniqueIdentifier
+          updatedAt: updatedAt
+      externalDocs:
+        description: Find out more about alert scheduler rules in our documentation.
+        url: https://coralogix.com/docs/developer-portal/apis/data-management/alert-suppression-rules-api/
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+      required:
+      - alertSchedulerRule
+      title: Get alert scheduler rule response data structure
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic_oneOf:
+      properties:
+        daily:
+          type: object
+        repeatEvery:
+          format: int32
+          type: integer
+        terminationDate:
+          type: string
+        timeframe:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe"
+      type: object
+    Get_bulk_alert_scheduler_rule_response_data_structure_alertSchedulerRules_inner:
+      example:
+        nextActiveTimeframes:
+        - timezone: timezone
+          startTime: startTime
+          endTime: endTime
+        - timezone: timezone
+          startTime: startTime
+          endTime: endTime
+        alertSchedulerRule:
+          filter:
+            alertMetaLabels:
+              value:
+              - id: id
+                value: value
+                key: key
+              - id: id
+                value: value
+                key: key
+            whatExpression: whatExpression
+          createdAt: createdAt
+          schedule:
+            oneTime:
+              timeframe:
+                timezone: timezone
+                startTime: startTime
+                endTime: endTime
+            scheduleOperation: SCHEDULE_OPERATION_UNSPECIFIED
+          name: name
+          description: description
+          id: id
+          metaLabels:
+          - id: id
+            value: value
+            key: key
+          - id: id
+            value: value
+            key: key
+          enabled: true
+          uniqueIdentifier: uniqueIdentifier
+          updatedAt: updatedAt
+      properties:
+        alertSchedulerRule:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule"
+        nextActiveTimeframes:
+          items:
+            $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_oneTime_timeframe_oneOf"
+          type: array
+      type: object
+    Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1:
+      properties:
+        dynamic:
+          $ref: "#/components/schemas/Update_alert_scheduler_rule_request_data_structure_alertSchedulerRule_schedule_oneOf_1_recurring_oneOf_1_dynamic"
+      type: object
+    Create_bulk_alert_scheduler_rule_request_data_structure:
+      description: This is a request sent to create multiple alert scheduler rules
+      properties:
+        createAlertSchedulerRuleRequests:
+          items:
+            $ref: "#/components/schemas/Create_alert_scheduler_rule_request_data_structure_1"
+          type: array
+      required:
+      - createAlertSchedulerRuleRequests
+      title: Create bulk alert scheduler rule request data structure
+      type: object

@@ -1,0 +1,4326 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: "Handle all operations related to incident management within Coralogix.\
+    \ Identify, manage, and resolve incidents efficiently through automated workflows\
+    \ and team collaboration."
+  externalDocs:
+    description: Find out more about incident management in our documentation
+    url: https://coralogix.com/docs/user-guides/alerting/incidents/
+  name: Incidents service
+paths:
+  /v1/by:event/incidents:acknowledge/{event_id}:
+    post:
+      description: Mark incident as acknowledged by event id.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_AcknowledgeIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to acknowledge
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledge_incident_by_event_id_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Acknowledge incident by event id
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:acknowledge
+  /v1/by:event/incidents:resolve/{event_id}:
+    post:
+      description: Mark incident as resolved by event id.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ResolveIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to resolve
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledge_incident_by_event_id_response_1"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Resolve incident by event id
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:close
+  /v1/incidents:
+    post:
+      description: Lists all available incidents based on specified filters and order.
+        The list is ordered in an unspecified direction and sorted by creation time.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List incidents with filters
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents/by:event/{event_id}:
+    get:
+      description: Retrieve detailed information about a single incident by its unique
+        identifier.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetIncidentByEventId
+      parameters:
+      - explode: false
+        in: path
+        name: event_id
+        required: true
+        schema:
+          description: Event ID associated to the Incident to acknowledge
+          example: event_id_1
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_incident_by_event_id_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get incident by ID
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents/{id}:
+    get:
+      description: Retrieve detailed information about a single incident by its unique
+        identifier.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetIncident
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: incident_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_incident_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get incident by ID
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents/{incident_id}/events:
+    get:
+      description: "Retrieve a chronological list of all events associated with a\
+        \ specific incident. Includes state changes, assignments, acknowledgments,\
+        \ and resolutions."
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetIncidentEvents
+      parameters:
+      - explode: false
+        in: path
+        name: incident_id
+        required: true
+        schema:
+          description: ID of the incident to retrieve events for
+          example: incident_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_incident_events_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get incident events
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:acknowledge:
+    post:
+      description: Mark one or more incidents as acknowledged.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_AcknowledgeIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Acknowledge_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Acknowledge_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Acknowledge incidents
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:acknowledge
+  /v1/incidents:assign:
+    post:
+      description: Assign one or more incidents to a specific user.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_AssignIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Assign_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Assign_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Assign incidents to a user
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:assign
+  /v1/incidents:batchGet:
+    post:
+      description: Retrieve multiple incidents by their IDs in a single request.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_BatchGetIncident
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Batch_get_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get multiple incidents by IDs
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:close:
+    post:
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_CloseIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Close_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Close_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Close incidents
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:close
+  /v1/incidents:get-filter-values:
+    post:
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_GetFilterValues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Get_filter_values_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_filter_values_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available filter values
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:list-incident-events:
+    post:
+      description: "List incident events with support for filtering, pagination, and\
+        \ ordering."
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEvents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_incident_events_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_incident_events_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List incident events with filters
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:list-incident-events-filter-values:
+    post:
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEventsFilterValues
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_incident_events_filter_values_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_incident_events_filter_values_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get available incident event filter values
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:list-incident-events-total-count:
+    post:
+      description: Retrieve the total count of incident events matching a filter.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentEventsTotalCount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_incident_events_total_count_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_incident_events_total_count_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get total count of incident events
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:listIncidentAggregations:
+    post:
+      description: Retrieve aggregated incident data with support for grouping and
+        filtering.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ListIncidentAggregations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/List_incident_aggregations_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_incident_aggregations_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get incident aggregations
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:read
+  /v1/incidents:resolve:
+    post:
+      description: Mark one or more incidents as resolved.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_ResolveIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Resolve_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Resolve_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Resolve incidents
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:close
+  /v1/incidents:unassign:
+    post:
+      description: Remove user assignments from one or more incidents.
+      externalDocs:
+        url: ""
+      operationId: IncidentsService_UnassignIncidents
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Unassign_incidents_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Unassign_incidents_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Remove incident user assignments
+      tags:
+      - Incidents service
+      x-coralogixPermissions:
+      - incidents:assign
+components:
+  schemas:
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_9:
+      properties:
+        subsystemName:
+          type: string
+      type: object
+    Assign_incidents_response:
+      description: Response containing the updated incidents after assignment
+      example:
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+      required:
+      - incidents
+      title: Assign incidents response
+      type: object
+    Acknowledge_incident_by_event_id_response_1:
+      description: Response containing the updated incident after resolution
+      example:
+        incident:
+          displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incident:
+          $ref: "#/components/schemas/Incident"
+      required:
+      - incident
+      title: Acknowledge incident by event id response
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_1:
+      properties:
+        contextualLabels:
+          $ref: "#/components/schemas/Incident_contextual_labels"
+      type: object
+    Batch_get_incidents_response:
+      description: Response containing the requested incidents and any IDs that weren't
+        found
+      example:
+        notFoundIds:
+        - "[\"not_found_id_1\",\"not_found_id_2\"]"
+        - "[\"not_found_id_1\",\"not_found_id_2\"]"
+        incidents:
+        - value:
+            displayLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            severity: INCIDENT_SEVERITY_UNSPECIFIED
+            assignments:
+            - assignedBy:
+                userId: user_id
+              assignedTo:
+                userId: user_id
+            - assignedBy:
+                userId: user_id
+              assignedTo:
+                userId: user_id
+            contextualLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            description: incident_description
+            lastStateUpdateKey: last_state_update_key
+            lastStateUpdateTime: 2024-01-01T00:00:00Z
+            duration: duration
+            createdAt: 2024-01-01T00:00:00Z
+            name: incident_name
+            id: incident_id
+            metaLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            state: INCIDENT_STATE_UNSPECIFIED
+            closedAt: 2024-01-01T00:00:00Z
+            events:
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              id: incident_event_id
+              administrativeEvent:
+                userId: userId
+              originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              id: incident_event_id
+              administrativeEvent:
+                userId: userId
+              originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            isMuted: false
+            status: INCIDENT_STATUS_UNSPECIFIED
+          key: key
+        - value:
+            displayLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            severity: INCIDENT_SEVERITY_UNSPECIFIED
+            assignments:
+            - assignedBy:
+                userId: user_id
+              assignedTo:
+                userId: user_id
+            - assignedBy:
+                userId: user_id
+              assignedTo:
+                userId: user_id
+            contextualLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            description: incident_description
+            lastStateUpdateKey: last_state_update_key
+            lastStateUpdateTime: 2024-01-01T00:00:00Z
+            duration: duration
+            createdAt: 2024-01-01T00:00:00Z
+            name: incident_name
+            id: incident_id
+            metaLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            state: INCIDENT_STATE_UNSPECIFIED
+            closedAt: 2024-01-01T00:00:00Z
+            events:
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              id: incident_event_id
+              administrativeEvent:
+                userId: userId
+              originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            - snoozeIndicator:
+                durationMinutes: 0
+                startTime: 2000-01-23T04:56:07.000+00:00
+                userId: userId
+              id: incident_event_id
+              administrativeEvent:
+                userId: userId
+              originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+              incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+            isMuted: false
+            status: INCIDENT_STATUS_UNSPECIFIED
+          key: key
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Batch_get_incidents_response_incidents_inner"
+          type: array
+        notFoundIds:
+          items:
+            description: List of IDs that were not found
+            example: "[\"not_found_id_1\",\"not_found_id_2\"]"
+            type: string
+          type: array
+      required:
+      - incidents
+      - notFoundIds
+      title: Batch get incidents response
+      type: object
+    Assignment:
+      description: Details of the user who assigned the incident and the user to whom
+        it was assigned
+      example:
+        assignedBy:
+          userId: user_id
+        assignedTo:
+          userId: user_id
+      externalDocs:
+        url: ""
+      properties:
+        assignedBy:
+          $ref: "#/components/schemas/User_details"
+        assignedTo:
+          $ref: "#/components/schemas/User_details"
+      required:
+      - assignedBy
+      - assignedTo
+      title: Assignment
+      type: object
+    Resolve_incidents_request:
+      description: Request to resolve one or more incidents
+      properties:
+        incidentIds:
+          items:
+            description: List of incident IDs to resolve
+            example: "[\"incident_id_1\",\"incident_id_2\"]"
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Resolve incidents request
+      type: object
+    List_incident_events_filter_values_request:
+      description: A request to get available filter values for incident events
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+      title: List incident events filter values request
+      type: object
+    Assignee_with_count:
+      example:
+        count: 10
+        assignee: assignee
+      externalDocs:
+        url: ""
+      properties:
+        assignee:
+          example: assignee
+          type: string
+        count:
+          example: 10
+          format: int32
+          type: integer
+      required:
+      - assignee
+      - count
+      title: Assignee with count
+      type: object
+    Incident_event_upsert_state_payload:
+      properties:
+        cxEventKey:
+          type: string
+      type: object
+    Time_range:
+      description: Represents a time range with start and end timestamps
+      externalDocs:
+        url: ""
+      properties:
+        endTime:
+          description: End time of the range
+          format: date-time
+          type: string
+        startTime:
+          description: Start time of the range
+          format: date-time
+          type: string
+      required:
+      - endTime
+      - startTime
+      title: Time range
+      type: object
+    Close_incidents_response:
+      description: Response containing the updated incidents after closing
+      example:
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+      required:
+      - incidents
+      title: Close incidents response
+      type: object
+    Get_filter_values_response:
+      description: Response containing available filter values for incidents
+      example:
+        filtersValues:
+          displayLabels:
+          - value:
+              valuesWithCount:
+              - displayLabelValue: display_label_value
+                count: 10
+              - displayLabelValue: display_label_value
+                count: 10
+            key: key
+          - value:
+              valuesWithCount:
+              - displayLabelValue: display_label_value
+                count: 10
+              - displayLabelValue: display_label_value
+                count: 10
+            key: key
+          assigneeWithCount:
+          - count: 10
+            assignee: assignee
+          - count: 10
+            assignee: assignee
+          metaLabelsOp: FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          statusWithCount:
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          severityWithCount:
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          contextualLabels:
+          - value:
+              valuesWithCount:
+              - contextualLabelValue: contextual_label_value
+                count: 10
+              - contextualLabelValue: contextual_label_value
+                count: 10
+            key: key
+          - value:
+              valuesWithCount:
+              - contextualLabelValue: contextual_label_value
+                count: 10
+              - contextualLabelValue: contextual_label_value
+                count: 10
+            key: key
+          metaLabelsWithCount:
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          stateWithCount:
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        filtersValues:
+          $ref: "#/components/schemas/Incident_query_filter_values"
+      required:
+      - filtersValues
+      title: Get filter values response
+      type: object
+    Acknowledge_incident_by_event_id_response:
+      description: Response containing the updated incident after acknowledgment
+      example:
+        incident:
+          displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incident:
+          $ref: "#/components/schemas/Incident"
+      required:
+      - incident
+      title: Acknowledge incident by event id response
+      type: object
+    List_incidents_request_orderBys_inner:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_order_by"
+      - $ref: "#/components/schemas/Incident_order_by_1"
+    Incident_order_by:
+      externalDocs:
+        url: ""
+      properties:
+        direction:
+          enum:
+          - ORDER_BY_DIRECTION_UNSPECIFIED
+          - ORDER_BY_DIRECTION_ASC
+          - ORDER_BY_DIRECTION_DESC
+          type: string
+        incidentField:
+          enum:
+          - INCIDENTS_FIELDS_UNSPECIFIED
+          - INCIDENTS_FIELDS_ID
+          - INCIDENTS_FIELDS_SEVERITY
+          - INCIDENTS_FIELDS_NAME
+          - INCIDENTS_FIELDS_CREATED_TIME
+          - INCIDENTS_FIELDS_CLOSED_TIME
+          - INCIDENTS_FIELDS_STATE
+          - INCIDENTS_FIELDS_STATUS
+          - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
+          - INCIDENTS_FIELDS_APPLICATION_NAME
+          - INCIDENTS_FIELDS_SUBSYSTEM_NAME
+          - INCIDENTS_FIELDS_DURATION
+          type: string
+      required:
+      - direction
+      - field
+      title: Incident order by
+      type: object
+    Incident_status_count:
+      example:
+        count: 10
+        status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int64
+          type: integer
+        status:
+          enum:
+          - INCIDENT_STATUS_UNSPECIFIED
+          - INCIDENT_STATUS_TRIGGERED
+          - INCIDENT_STATUS_ACKNOWLEDGED
+          - INCIDENT_STATUS_RESOLVED
+          type: string
+      required:
+      - count
+      - status
+      title: Incident status count
+      type: object
+    Contextual_label_values_with_count:
+      example:
+        valuesWithCount:
+        - contextualLabelValue: contextual_label_value
+          count: 10
+        - contextualLabelValue: contextual_label_value
+          count: 10
+      externalDocs:
+        url: ""
+      properties:
+        valuesWithCount:
+          items:
+            $ref: "#/components/schemas/Contextual_label_value_with_count"
+          type: array
+      required:
+      - valuesWithCount
+      title: Contextual label values with count
+      type: object
+    Incident_event_10:
+      externalDocs:
+        url: ""
+      properties:
+        acknowledge:
+          $ref: "#/components/schemas/Incident_event_4_acknowledge"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_event_5_close:
+      properties:
+        closedBy:
+          $ref: "#/components/schemas/User_details"
+      type: object
+    Incident_event_11:
+      externalDocs:
+        url: ""
+      properties:
+        close:
+          $ref: "#/components/schemas/Incident_event_5_close"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    List_incident_events_filter_values_response:
+      description: A response containing available filter values for incident events
+      example:
+        filtersValues:
+          displayLabels:
+          - value:
+              valuesWithCount:
+              - displayLabelValue: display_label_value
+                count: 10
+              - displayLabelValue: display_label_value
+                count: 10
+            key: key
+          - value:
+              valuesWithCount:
+              - displayLabelValue: display_label_value
+                count: 10
+              - displayLabelValue: display_label_value
+                count: 10
+            key: key
+          assigneeWithCount:
+          - count: 10
+            assignee: assignee
+          - count: 10
+            assignee: assignee
+          metaLabelsOp: FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          statusWithCount:
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          severityWithCount:
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          contextualLabels:
+          - value:
+              valuesWithCount:
+              - contextualLabelValue: contextual_label_value
+                count: 10
+              - contextualLabelValue: contextual_label_value
+                count: 10
+            key: key
+          - value:
+              valuesWithCount:
+              - contextualLabelValue: contextual_label_value
+                count: 10
+              - contextualLabelValue: contextual_label_value
+                count: 10
+            key: key
+          metaLabelsWithCount:
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          stateWithCount:
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        filtersValues:
+          $ref: "#/components/schemas/Incident_query_filter_values"
+      title: List incident events filter values response
+      type: object
+    Incident_search_query:
+      externalDocs:
+        url: ""
+      properties:
+        incidentField:
+          enum:
+          - INCIDENTS_FIELDS_UNSPECIFIED
+          - INCIDENTS_FIELDS_ID
+          - INCIDENTS_FIELDS_SEVERITY
+          - INCIDENTS_FIELDS_NAME
+          - INCIDENTS_FIELDS_CREATED_TIME
+          - INCIDENTS_FIELDS_CLOSED_TIME
+          - INCIDENTS_FIELDS_STATE
+          - INCIDENTS_FIELDS_STATUS
+          - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
+          - INCIDENTS_FIELDS_APPLICATION_NAME
+          - INCIDENTS_FIELDS_SUBSYSTEM_NAME
+          - INCIDENTS_FIELDS_DURATION
+          type: string
+        query:
+          description: The search query
+          example: error
+          type: string
+      required:
+      - field
+      - query
+      title: Incident search query
+      type: object
+    Pagination_response:
+      description: Pagination information for list responses
+      example:
+        totalSize: 100
+        nextPageToken: next_page_token
+      externalDocs:
+        url: ""
+      properties:
+        nextPageToken:
+          description: Token for the next page of results
+          example: next_page_token
+          type: string
+        totalSize:
+          description: Total number of items available
+          example: 100
+          format: int64
+          type: integer
+      required:
+      - totalSize
+      title: Pagination response
+      type: object
+    Incident_state_with_count:
+      example:
+        count: 10
+        state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int32
+          type: integer
+        state:
+          enum:
+          - INCIDENT_STATE_UNSPECIFIED
+          - INCIDENT_STATE_TRIGGERED
+          - INCIDENT_STATE_RESOLVED
+          type: string
+      required:
+      - count
+      - state
+      title: Incident state with count
+      type: object
+    Label_filter_configuration:
+      externalDocs:
+        url: ""
+      properties:
+        metaLabels:
+          items:
+            $ref: "#/components/schemas/Incident_meta_label"
+          type: array
+        operator:
+          enum:
+          - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          - FILTER_OPERATOR_AND
+          type: string
+      required:
+      - metaLabels
+      title: Label filter configuration
+      type: object
+    Incident_event_6_operationalEvent:
+      properties:
+        systemName:
+          type: string
+      type: object
+    Display_label_values_with_count:
+      example:
+        valuesWithCount:
+        - displayLabelValue: display_label_value
+          count: 10
+        - displayLabelValue: display_label_value
+          count: 10
+      externalDocs:
+        url: ""
+      properties:
+        valuesWithCount:
+          items:
+            $ref: "#/components/schemas/Display_label_value_with_count"
+          type: array
+      required:
+      - valuesWithCount
+      title: Display label values with count
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_1:
+      properties:
+        severity:
+          enum:
+          - INCIDENT_SEVERITY_UNSPECIFIED
+          - INCIDENT_SEVERITY_INFO
+          - INCIDENT_SEVERITY_WARNING
+          - INCIDENT_SEVERITY_ERROR
+          - INCIDENT_SEVERITY_CRITICAL
+          - INCIDENT_SEVERITY_LOW
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_2:
+      properties:
+        name:
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_3:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_4:
+      properties:
+        closedAt:
+          format: date-time
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_5:
+      properties:
+        state:
+          enum:
+          - INCIDENT_STATE_UNSPECIFIED
+          - INCIDENT_STATE_TRIGGERED
+          - INCIDENT_STATE_RESOLVED
+          type: string
+      type: object
+    Unassign_incidents_request:
+      description: Request to remove assignments from one or more incidents
+      properties:
+        incidentIds:
+          items:
+            description: List of incident IDs to unassign
+            example: "[\"incident_id_1\",\"incident_id_2\"]"
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Unassign incidents request
+      type: object
+    Incident_state_count:
+      example:
+        count: 10
+        state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int64
+          type: integer
+        state:
+          enum:
+          - INCIDENT_STATE_UNSPECIFIED
+          - INCIDENT_STATE_TRIGGERED
+          - INCIDENT_STATE_RESOLVED
+          type: string
+      required:
+      - count
+      - state
+      title: Incident state count
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_6:
+      properties:
+        status:
+          enum:
+          - INCIDENT_STATUS_UNSPECIFIED
+          - INCIDENT_STATUS_TRIGGERED
+          - INCIDENT_STATUS_ACKNOWLEDGED
+          - INCIDENT_STATUS_RESOLVED
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_7:
+      properties:
+        lastStateUpdateTime:
+          format: date-time
+          type: string
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_8:
+      properties:
+        applicationName:
+          type: string
+      type: object
+    Incident_events_inner:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_event"
+      - $ref: "#/components/schemas/Incident_event_1"
+      - $ref: "#/components/schemas/Incident_event_2"
+      - $ref: "#/components/schemas/Incident_event_3"
+      - $ref: "#/components/schemas/Incident_event_4"
+      - $ref: "#/components/schemas/Incident_event_5"
+      - $ref: "#/components/schemas/Incident_event_6"
+      - $ref: "#/components/schemas/Incident_event_7"
+      - $ref: "#/components/schemas/Incident_event_8"
+      - $ref: "#/components/schemas/Incident_event_9"
+      - $ref: "#/components/schemas/Incident_event_10"
+      - $ref: "#/components/schemas/Incident_event_11"
+    Incident_meta_labels_count:
+      example:
+        metaLabel:
+          value: value
+          key: key
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int64
+          type: integer
+        metaLabel:
+          $ref: "#/components/schemas/Incident_meta_label"
+      required:
+      - count
+      - metaLabel
+      title: Incident meta labels count
+      type: object
+    Incident_event_assignment_details:
+      externalDocs:
+        url: ""
+      properties:
+        assignment:
+          $ref: "#/components/schemas/Assignment"
+      title: Incident event assignment details
+      type: object
+    Extended_incident_event_incidentEventExtendedMetadata:
+      example:
+        alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+        incidentState: INCIDENT_STATE_UNSPECIFIED
+        alertName: alertName
+        alertLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        incidentSeverity: INCIDENT_SEVERITY_UNSPECIFIED
+        alertGroupByFields:
+        - alertGroupByFields
+        - alertGroupByFields
+        alertId: alertId
+        isMuted: true
+        incidentPermutation:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        incidentStatus: INCIDENT_STATUS_UNSPECIFIED
+      properties:
+        alertGroupByFields:
+          items:
+            type: string
+          type: array
+        alertId:
+          type: string
+        alertLabels:
+          items:
+            $ref: "#/components/schemas/Incident_meta_label"
+          type: array
+        alertName:
+          type: string
+        alertType:
+          enum:
+          - INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+          - INCIDENT_EVENT_ALERT_TYPE_METRIC
+          - INCIDENT_EVENT_ALERT_TYPE_NEW_VALUE
+          - INCIDENT_EVENT_ALERT_TYPE_RATIO
+          - INCIDENT_EVENT_ALERT_TYPE_TIME_RELATIVE
+          - INCIDENT_EVENT_ALERT_TYPE_UNIQUE_COUNT
+          - INCIDENT_EVENT_ALERT_TYPE_TRACING
+          - INCIDENT_EVENT_ALERT_TYPE_FLOW
+          - INCIDENT_EVENT_ALERT_TYPE_SLO
+          type: string
+        incidentPermutation:
+          items:
+            $ref: "#/components/schemas/Incident_contextualLabels_inner"
+          type: array
+        incidentSeverity:
+          enum:
+          - INCIDENT_SEVERITY_UNSPECIFIED
+          - INCIDENT_SEVERITY_INFO
+          - INCIDENT_SEVERITY_WARNING
+          - INCIDENT_SEVERITY_ERROR
+          - INCIDENT_SEVERITY_CRITICAL
+          - INCIDENT_SEVERITY_LOW
+          type: string
+        incidentState:
+          enum:
+          - INCIDENT_STATE_UNSPECIFIED
+          - INCIDENT_STATE_TRIGGERED
+          - INCIDENT_STATE_RESOLVED
+          type: string
+        incidentStatus:
+          enum:
+          - INCIDENT_STATUS_UNSPECIFIED
+          - INCIDENT_STATUS_TRIGGERED
+          - INCIDENT_STATUS_ACKNOWLEDGED
+          - INCIDENT_STATUS_RESOLVED
+          type: string
+        isMuted:
+          type: boolean
+      type: object
+    Resolve_incidents_response:
+      description: Response containing the updated incidents after resolution
+      example:
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+      required:
+      - incidents
+      title: Resolve incidents response
+      type: object
+    List_incident_events_order_by_request:
+      externalDocs:
+        url: ""
+      properties:
+        direction:
+          enum:
+          - ORDER_BY_DIRECTION_UNSPECIFIED
+          - ORDER_BY_DIRECTION_ASC
+          - ORDER_BY_DIRECTION_DESC
+          type: string
+        field:
+          enum:
+          - INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED
+          type: string
+      title: List incident events order by request
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_1"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_2"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_3"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_4"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_5"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_6"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_7"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_8"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_9"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_10"
+    List_incident_events_total_count_request:
+      description: A request to get the total count of incident events matching a
+        filter
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+      title: List incident events total count request
+      type: object
+    Incident_query_filter_values:
+      example:
+        displayLabels:
+        - value:
+            valuesWithCount:
+            - displayLabelValue: display_label_value
+              count: 10
+            - displayLabelValue: display_label_value
+              count: 10
+          key: key
+        - value:
+            valuesWithCount:
+            - displayLabelValue: display_label_value
+              count: 10
+            - displayLabelValue: display_label_value
+              count: 10
+          key: key
+        assigneeWithCount:
+        - count: 10
+          assignee: assignee
+        - count: 10
+          assignee: assignee
+        metaLabelsOp: FILTER_OPERATOR_OR_OR_UNSPECIFIED
+        statusWithCount:
+        - count: 10
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - count: 10
+          status: INCIDENT_STATUS_UNSPECIFIED
+        severityWithCount:
+        - severity: INCIDENT_SEVERITY_UNSPECIFIED
+          count: 10
+        - severity: INCIDENT_SEVERITY_UNSPECIFIED
+          count: 10
+        contextualLabels:
+        - value:
+            valuesWithCount:
+            - contextualLabelValue: contextual_label_value
+              count: 10
+            - contextualLabelValue: contextual_label_value
+              count: 10
+          key: key
+        - value:
+            valuesWithCount:
+            - contextualLabelValue: contextual_label_value
+              count: 10
+            - contextualLabelValue: contextual_label_value
+              count: 10
+          key: key
+        metaLabelsWithCount:
+        - metaLabel:
+            value: value
+            key: key
+          count: 10
+        - metaLabel:
+            value: value
+            key: key
+          count: 10
+        stateWithCount:
+        - count: 10
+          state: INCIDENT_STATE_UNSPECIFIED
+        - count: 10
+          state: INCIDENT_STATE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        assigneeWithCount:
+          items:
+            $ref: "#/components/schemas/Assignee_with_count"
+          type: array
+        contextualLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_values_contextualLabels_inner"
+          type: array
+        displayLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_values_displayLabels_inner"
+          type: array
+        metaLabelsOp:
+          enum:
+          - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          - FILTER_OPERATOR_AND
+          type: string
+        metaLabelsWithCount:
+          items:
+            $ref: "#/components/schemas/Incident_meta_labels_with_count"
+          type: array
+        severityWithCount:
+          items:
+            $ref: "#/components/schemas/Incident_severity_with_count"
+          type: array
+        stateWithCount:
+          items:
+            $ref: "#/components/schemas/Incident_state_with_count"
+          type: array
+        statusWithCount:
+          items:
+            $ref: "#/components/schemas/Incident_status_with_count"
+          type: array
+      required:
+      - assigneeWithCount
+      - contextualLabels
+      - displayLabels
+      - metaLabelsOp
+      - metaLabelsWithCount
+      - severityWithCount
+      - stateWithCount
+      - statusWithCount
+      title: Incident query filter values
+      type: object
+    Contextual_label_value_with_count:
+      example:
+        contextualLabelValue: contextual_label_value
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabelValue:
+          example: contextual_label_value
+          type: string
+        count:
+          example: 10
+          format: int32
+          type: integer
+      required:
+      - contextualLabelValue
+      - count
+      title: Contextual label value with count
+      type: object
+    Incident_group_by_1:
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          description: The contextual label to group by.
+          type: string
+        orderByDirection:
+          enum:
+          - ORDER_BY_DIRECTION_UNSPECIFIED
+          - ORDER_BY_DIRECTION_ASC
+          - ORDER_BY_DIRECTION_DESC
+          type: string
+      required:
+      - field
+      title: Incident group by
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf_10:
+      properties:
+        duration:
+          type: string
+      type: object
+    Incident_event_1:
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        assignment:
+          $ref: "#/components/schemas/Incident_event_assignment_details"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_aggregation_groupBysValue_inner:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf"
+      - $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_1"
+    List_incident_aggregations_response:
+      description: Response containing aggregated incident data and pagination information
+      example:
+        pagination:
+          totalSize: 100
+          nextPageToken: next_page_token
+        incidentAggs:
+        - groupBysValue:
+          - incidentField:
+              id: id
+          - incidentField:
+              id: id
+          aggAssignmentsCount:
+          - count: 10
+            assignedTo:
+              userId: user_id
+          - count: 10
+            assignedTo:
+              userId: user_id
+          lastClosedAt: 2000-01-23T04:56:07.000+00:00
+          aggStatusCount:
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          aggSeverityCount:
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          allValuesCount: 0
+          listIncidentsId:
+          - listIncidentsId
+          - listIncidentsId
+          aggMetaLabelsCount:
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          aggStateCount:
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          firstCreatedAt: 2000-01-23T04:56:07.000+00:00
+          lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
+        - groupBysValue:
+          - incidentField:
+              id: id
+          - incidentField:
+              id: id
+          aggAssignmentsCount:
+          - count: 10
+            assignedTo:
+              userId: user_id
+          - count: 10
+            assignedTo:
+              userId: user_id
+          lastClosedAt: 2000-01-23T04:56:07.000+00:00
+          aggStatusCount:
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          - count: 10
+            status: INCIDENT_STATUS_UNSPECIFIED
+          aggSeverityCount:
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          - severity: INCIDENT_SEVERITY_UNSPECIFIED
+            count: 10
+          allValuesCount: 0
+          listIncidentsId:
+          - listIncidentsId
+          - listIncidentsId
+          aggMetaLabelsCount:
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          - metaLabel:
+              value: value
+              key: key
+            count: 10
+          aggStateCount:
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          - count: 10
+            state: INCIDENT_STATE_UNSPECIFIED
+          firstCreatedAt: 2000-01-23T04:56:07.000+00:00
+          lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        incidentAggs:
+          items:
+            $ref: "#/components/schemas/Incident_aggregation"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Pagination_response"
+      required:
+      - incidentAggs
+      - pagination
+      title: List incident aggregations response
+      type: object
+    Get_filter_values_request:
+      description: Request to get available filter values for incidents
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_query_filter"
+      title: Get filter values request
+      type: object
+    Incident_event_4_acknowledge:
+      properties:
+        acknowledgedBy:
+          $ref: "#/components/schemas/User_details"
+      type: object
+    List_incidents_response:
+      description: Response containing a list of incidents and pagination information
+      example:
+        pagination:
+          totalSize: 100
+          nextPageToken: next_page_token
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Pagination_response"
+      required:
+      - incidents
+      - pagination
+      title: List incidents response
+      type: object
+    Contextual_label_values:
+      description: Represents contextual label values for filtering incidents
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabelValues:
+          items:
+            type: string
+          type: array
+      required:
+      - contextualLabelValues
+      title: Contextual label values
+      type: object
+    User_details:
+      example:
+        userId: user_id
+      externalDocs:
+        url: ""
+      properties:
+        userId:
+          example: user_id
+          type: string
+      required:
+      - userId
+      title: User details
+      type: object
+    Incident_meta_labels_with_count:
+      example:
+        metaLabel:
+          value: value
+          key: key
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int32
+          type: integer
+        metaLabel:
+          $ref: "#/components/schemas/Incident_meta_label"
+      required:
+      - count
+      - metaLabel
+      title: Incident meta labels with count
+      type: object
+    Incident_aggregation_groupBysValue_inner_oneOf:
+      example:
+        incidentField:
+          id: id
+      properties:
+        incidentField:
+          $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner_oneOf_incidentField"
+      type: object
+    Incident_query_filter:
+      description: Filter configuration for incidents
+      externalDocs:
+        url: ""
+      properties:
+        applicationName:
+          items:
+            description: Filter by application names
+            type: string
+          type: array
+        assignee:
+          items:
+            description: Filter by assignee
+            type: string
+          type: array
+        contextualLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_contextualLabels_inner"
+          type: array
+        createdAtRange:
+          $ref: "#/components/schemas/Time_range"
+        displayLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_displayLabels_inner"
+          type: array
+        endTime:
+          deprecated: true
+          description: "Filters all incidents that were open in the given timeframe\
+            \ end time (deprecated, use incident_open_range instead)"
+          format: date-time
+          type: string
+        incidentDurationRange:
+          $ref: "#/components/schemas/Time_range"
+        isMuted:
+          description: Indicates if the incident is muted
+          type: boolean
+        metaLabels:
+          items:
+            $ref: "#/components/schemas/Incident_meta_label"
+          type: array
+        metaLabelsOp:
+          enum:
+          - FILTER_OPERATOR_OR_OR_UNSPECIFIED
+          - FILTER_OPERATOR_AND
+          type: string
+        searchQuery:
+          $ref: "#/components/schemas/Incident_query_filter_searchQuery"
+        severity:
+          items:
+            enum:
+            - INCIDENT_SEVERITY_UNSPECIFIED
+            - INCIDENT_SEVERITY_INFO
+            - INCIDENT_SEVERITY_WARNING
+            - INCIDENT_SEVERITY_ERROR
+            - INCIDENT_SEVERITY_CRITICAL
+            - INCIDENT_SEVERITY_LOW
+            type: string
+          type: array
+        startTime:
+          deprecated: true
+          description: "Filters all incidents that were open in the given timeframe\
+            \ start time (deprecated, use incident_open_range instead)"
+          format: date-time
+          type: string
+        state:
+          items:
+            enum:
+            - INCIDENT_STATE_UNSPECIFIED
+            - INCIDENT_STATE_TRIGGERED
+            - INCIDENT_STATE_RESOLVED
+            type: string
+          type: array
+        status:
+          items:
+            enum:
+            - INCIDENT_STATUS_UNSPECIFIED
+            - INCIDENT_STATUS_TRIGGERED
+            - INCIDENT_STATUS_ACKNOWLEDGED
+            - INCIDENT_STATUS_RESOLVED
+            type: string
+          type: array
+        subsystemName:
+          items:
+            description: Filter by subsystem names
+            type: string
+          type: array
+      title: Incident query filter
+      type: object
+    Incident_event_snooze_indicator:
+      example:
+        durationMinutes: 0
+        startTime: 2000-01-23T04:56:07.000+00:00
+        userId: userId
+      externalDocs:
+        url: ""
+      properties:
+        durationMinutes:
+          format: int32
+          type: integer
+        startTime:
+          format: date-time
+          type: string
+        userId:
+          type: string
+      title: Incident event snooze indicator
+      type: object
+    List_incident_aggregations_request_groupBys_inner:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_group_by"
+      - $ref: "#/components/schemas/Incident_group_by_1"
+    Incident_aggregation_groupBysValue_inner_oneOf_incidentField_oneOf:
+      example:
+        id: id
+      properties:
+        id:
+          type: string
+      type: object
+    Assign_incidents_request:
+      description: Request to assign one or more incidents to a user
+      properties:
+        assignedTo:
+          $ref: "#/components/schemas/User_details"
+        incidentIds:
+          items:
+            description: List of incident IDs to assign
+            example: "[\"incident_id_1\",\"incident_id_2\"]"
+            type: string
+          type: array
+      required:
+      - assignedTo
+      - incidentIds
+      title: Assign incidents request
+      type: object
+    List_incident_events_request:
+      description: "Request to list incident events with filtering, pagination and\
+        \ ordering options"
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_event_query_filter"
+        orderBy:
+          $ref: "#/components/schemas/List_incident_events_order_by_request"
+        pagination:
+          $ref: "#/components/schemas/Pagination_request"
+      title: List incident events request
+      type: object
+    Incident_event_8:
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        unassign:
+          type: object
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_contextual_labels:
+      externalDocs:
+        url: ""
+      properties:
+        fieldName:
+          example: field_name
+          type: string
+        fieldValue:
+          example: field_value
+          type: string
+      required:
+      - fieldName
+      - fieldValue
+      title: Incident contextual labels
+      type: object
+    Incident_event_9:
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        upsertState:
+          $ref: "#/components/schemas/Incident_event_upsert_state"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_event_6:
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        snoozeIndicator:
+          $ref: "#/components/schemas/Incident_event_snooze_indicator"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_event_query_filter:
+      description: Filter configuration for incident events
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_contextualLabels_inner"
+          type: array
+        displayLabels:
+          items:
+            $ref: "#/components/schemas/Incident_query_filter_displayLabels_inner"
+          type: array
+        isMuted:
+          description: Indicates if the incident is muted
+          type: boolean
+        labels:
+          $ref: "#/components/schemas/Label_filter_configuration"
+        name:
+          description: The name of the incident
+          type: string
+        severity:
+          items:
+            enum:
+            - INCIDENT_SEVERITY_UNSPECIFIED
+            - INCIDENT_SEVERITY_INFO
+            - INCIDENT_SEVERITY_WARNING
+            - INCIDENT_SEVERITY_ERROR
+            - INCIDENT_SEVERITY_CRITICAL
+            - INCIDENT_SEVERITY_LOW
+            type: string
+          type: array
+        status:
+          items:
+            enum:
+            - INCIDENT_STATUS_UNSPECIFIED
+            - INCIDENT_STATUS_TRIGGERED
+            - INCIDENT_STATUS_ACKNOWLEDGED
+            - INCIDENT_STATUS_RESOLVED
+            type: string
+          type: array
+        timestamp:
+          $ref: "#/components/schemas/Time_range"
+      title: Incident event query filter
+      type: object
+    Incident_event_7:
+      externalDocs:
+        url: ""
+      properties:
+        assignment:
+          $ref: "#/components/schemas/Incident_event_assignment_details"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        operationalEvent:
+          $ref: "#/components/schemas/Incident_event_6_operationalEvent"
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_event_4:
+      externalDocs:
+        url: ""
+      properties:
+        acknowledge:
+          $ref: "#/components/schemas/Incident_event_4_acknowledge"
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Get_incident_by_event_id_response:
+      description: Response containing the requested incident
+      example:
+        incident:
+          displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incident:
+          $ref: "#/components/schemas/Incident"
+      required:
+      - incident
+      title: Get incident by event id response
+      type: object
+    Incident_event_5:
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        close:
+          $ref: "#/components/schemas/Incident_event_5_close"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_event_2:
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        unassign:
+          type: object
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Batch_get_incidents_response_incidents_inner:
+      example:
+        value:
+          displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Incident"
+      type: object
+    Incident_event_3:
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        upsertState:
+          $ref: "#/components/schemas/Incident_event_upsert_state"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_group_by:
+      externalDocs:
+        url: ""
+      properties:
+        incidentField:
+          enum:
+          - INCIDENTS_FIELDS_UNSPECIFIED
+          - INCIDENTS_FIELDS_ID
+          - INCIDENTS_FIELDS_SEVERITY
+          - INCIDENTS_FIELDS_NAME
+          - INCIDENTS_FIELDS_CREATED_TIME
+          - INCIDENTS_FIELDS_CLOSED_TIME
+          - INCIDENTS_FIELDS_STATE
+          - INCIDENTS_FIELDS_STATUS
+          - INCIDENTS_FIELDS_LAST_STATE_UPDATE_TIME
+          - INCIDENTS_FIELDS_APPLICATION_NAME
+          - INCIDENTS_FIELDS_SUBSYSTEM_NAME
+          - INCIDENTS_FIELDS_DURATION
+          type: string
+        orderByDirection:
+          enum:
+          - ORDER_BY_DIRECTION_UNSPECIFIED
+          - ORDER_BY_DIRECTION_ASC
+          - ORDER_BY_DIRECTION_DESC
+          type: string
+      required:
+      - field
+      title: Incident group by
+      type: object
+    Incident_query_filter_displayLabels_inner:
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Display_label_values"
+      type: object
+    Display_label_value_with_count:
+      example:
+        displayLabelValue: display_label_value
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int32
+          type: integer
+        displayLabelValue:
+          example: display_label_value
+          type: string
+      required:
+      - count
+      - displayLabelValue
+      title: Display label value with count
+      type: object
+    List_incident_events_total_count_response:
+      description: A response containing the total count of matching incident events
+        and whether the count limit was reached
+      example:
+        count: "100"
+        reachedLimit: false
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          description: Total number of incident events matching the filter
+          example: "100"
+          format: uint64
+          type: string
+        reachedLimit:
+          description: Indicates if the count reached the system limit
+          example: false
+          type: boolean
+      title: List incident events total count response
+      type: object
+    Acknowledge_incidents_request:
+      description: Request to acknowledge one or more incidents
+      properties:
+        incidentIds:
+          items:
+            description: List of incident IDs to acknowledge
+            example: "[\"incident_id_1\",\"incident_id_2\"]"
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Acknowledge incidents request
+      type: object
+    Get_incident_events_response:
+      description: Response containing all events associated with the requested incident
+      example:
+        incidentEvents:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          id: incident_event_id
+          administrativeEvent:
+            userId: userId
+          originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          id: incident_event_id
+          administrativeEvent:
+            userId: userId
+          originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidentEvents:
+          items:
+            $ref: "#/components/schemas/Incident_events_inner"
+          type: array
+      title: Get incident events response
+      type: object
+    Incident_query_filter_values_displayLabels_inner:
+      example:
+        value:
+          valuesWithCount:
+          - displayLabelValue: display_label_value
+            count: 10
+          - displayLabelValue: display_label_value
+            count: 10
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Display_label_values_with_count"
+      type: object
+    Incident_aggregation:
+      example:
+        groupBysValue:
+        - incidentField:
+            id: id
+        - incidentField:
+            id: id
+        aggAssignmentsCount:
+        - count: 10
+          assignedTo:
+            userId: user_id
+        - count: 10
+          assignedTo:
+            userId: user_id
+        lastClosedAt: 2000-01-23T04:56:07.000+00:00
+        aggStatusCount:
+        - count: 10
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - count: 10
+          status: INCIDENT_STATUS_UNSPECIFIED
+        aggSeverityCount:
+        - severity: INCIDENT_SEVERITY_UNSPECIFIED
+          count: 10
+        - severity: INCIDENT_SEVERITY_UNSPECIFIED
+          count: 10
+        allValuesCount: 0
+        listIncidentsId:
+        - listIncidentsId
+        - listIncidentsId
+        aggMetaLabelsCount:
+        - metaLabel:
+            value: value
+            key: key
+          count: 10
+        - metaLabel:
+            value: value
+            key: key
+          count: 10
+        aggStateCount:
+        - count: 10
+          state: INCIDENT_STATE_UNSPECIFIED
+        - count: 10
+          state: INCIDENT_STATE_UNSPECIFIED
+        firstCreatedAt: 2000-01-23T04:56:07.000+00:00
+        lastStateUpdateTime: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        aggAssignmentsCount:
+          items:
+            $ref: "#/components/schemas/Incident_assignment_count"
+          type: array
+        aggMetaLabelsCount:
+          items:
+            $ref: "#/components/schemas/Incident_meta_labels_count"
+          type: array
+        aggSeverityCount:
+          items:
+            $ref: "#/components/schemas/Incident_severity_count"
+          type: array
+        aggStateCount:
+          items:
+            $ref: "#/components/schemas/Incident_state_count"
+          type: array
+        aggStatusCount:
+          items:
+            $ref: "#/components/schemas/Incident_status_count"
+          type: array
+        allValuesCount:
+          format: int64
+          type: integer
+        firstCreatedAt:
+          format: date-time
+          type: string
+        groupBysValue:
+          items:
+            $ref: "#/components/schemas/Incident_aggregation_groupBysValue_inner"
+          type: array
+        lastClosedAt:
+          format: date-time
+          type: string
+        lastStateUpdateTime:
+          format: date-time
+          type: string
+        listIncidentsId:
+          items:
+            type: string
+          type: array
+      required:
+      - aggAssignmentsCount
+      - aggMetaLabelsCount
+      - aggSeverityCount
+      - aggStateCount
+      - aggStatusCount
+      - allValuesCount
+      - firstCreatedAt
+      - groupBysValue
+      - lastClosedAt
+      - lastStateUpdateTime
+      - listIncidentsId
+      title: Incident aggregation
+      type: object
+    Incident_severity_with_count:
+      example:
+        severity: INCIDENT_SEVERITY_UNSPECIFIED
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int32
+          type: integer
+        severity:
+          enum:
+          - INCIDENT_SEVERITY_UNSPECIFIED
+          - INCIDENT_SEVERITY_INFO
+          - INCIDENT_SEVERITY_WARNING
+          - INCIDENT_SEVERITY_ERROR
+          - INCIDENT_SEVERITY_CRITICAL
+          - INCIDENT_SEVERITY_LOW
+          type: string
+      required:
+      - count
+      - severity
+      title: Incident severity with count
+      type: object
+    Display_label_values:
+      description: Represents display label values for filtering incidents
+      externalDocs:
+        url: ""
+      properties:
+        displayLabelValues:
+          items:
+            type: string
+          type: array
+      required:
+      - displayLabelValues
+      title: Display label values
+      type: object
+    List_incident_aggregations_request:
+      description: Request to get aggregated incident data with filtering and grouping
+        options
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_query_filter"
+        groupBys:
+          items:
+            $ref: "#/components/schemas/List_incident_aggregations_request_groupBys_inner"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Pagination_request"
+      title: List incident aggregations request
+      type: object
+    Incident_query_filter_searchQuery:
+      oneOf:
+      - $ref: "#/components/schemas/Incident_search_query"
+      - $ref: "#/components/schemas/Incident_search_query_1"
+    Incident_severity_count:
+      example:
+        severity: INCIDENT_SEVERITY_UNSPECIFIED
+        count: 10
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int64
+          type: integer
+        severity:
+          enum:
+          - INCIDENT_SEVERITY_UNSPECIFIED
+          - INCIDENT_SEVERITY_INFO
+          - INCIDENT_SEVERITY_WARNING
+          - INCIDENT_SEVERITY_ERROR
+          - INCIDENT_SEVERITY_CRITICAL
+          - INCIDENT_SEVERITY_LOW
+          type: string
+      required:
+      - count
+      - severity
+      title: Incident severity count
+      type: object
+    Incident_order_by_1:
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          type: string
+        direction:
+          enum:
+          - ORDER_BY_DIRECTION_UNSPECIFIED
+          - ORDER_BY_DIRECTION_ASC
+          - ORDER_BY_DIRECTION_DESC
+          type: string
+      required:
+      - direction
+      - field
+      title: Incident order by
+      type: object
+    Incident_assignment_count:
+      example:
+        count: 10
+        assignedTo:
+          userId: user_id
+      externalDocs:
+        url: ""
+      properties:
+        assignedTo:
+          $ref: "#/components/schemas/User_details"
+        count:
+          example: 10
+          format: int64
+          type: integer
+      required:
+      - assignedTo
+      - count
+      title: Incident assignment count
+      type: object
+    Incident_event:
+      example:
+        snoozeIndicator:
+          durationMinutes: 0
+          startTime: 2000-01-23T04:56:07.000+00:00
+          userId: userId
+        id: incident_event_id
+        administrativeEvent:
+          userId: userId
+        originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+        incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        administrativeEvent:
+          $ref: "#/components/schemas/Incident_event_administrativeEvent"
+        id:
+          description: The ID of the incident event
+          example: incident_event_id
+          type: string
+        incidentEventType:
+          enum:
+          - INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - INCIDENT_EVENT_TYPE_UPSERT_STATE
+          - INCIDENT_EVENT_TYPE_OPEN
+          - INCIDENT_EVENT_TYPE_CLOSE
+          - INCIDENT_EVENT_TYPE_SNOOZE_INDICATOR
+          - INCIDENT_EVENT_TYPE_ASSIGN
+          - INCIDENT_EVENT_TYPE_UNASSIGN
+          - INCIDENT_EVENT_TYPE_ACKNOWLEDGE
+          type: string
+        originatorType:
+          enum:
+          - ORIGINATOR_TYPE_UNSPECIFIED
+          - ORIGINATOR_TYPE_OPERATIONAL
+          - ORIGINATOR_TYPE_ADMINISTRATIVE
+          type: string
+        snoozeIndicator:
+          $ref: "#/components/schemas/Incident_event_snooze_indicator"
+      required:
+      - id
+      - incidentEventPayload
+      - incidentEventType
+      - originator
+      - originatorType
+      title: Incident event
+      type: object
+    Incident_query_filter_contextualLabels_inner:
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Contextual_label_values"
+      type: object
+    Incident_meta_label:
+      example:
+        value: value
+        key: key
+      externalDocs:
+        url: ""
+      properties:
+        key:
+          example: key
+          type: string
+        value:
+          example: value
+          type: string
+      title: Incident meta label
+      type: object
+    Unassign_incidents_response:
+      description: Response containing the updated incidents after unassignment
+      example:
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+      required:
+      - incidents
+      title: Unassign incidents response
+      type: object
+    Incident_contextualLabels_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    Acknowledge_incidents_response:
+      description: Response containing the updated incidents after acknowledgment
+      example:
+        incidents:
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+        - displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incidents:
+          items:
+            $ref: "#/components/schemas/Incident"
+          type: array
+      required:
+      - incidents
+      title: Acknowledge incidents response
+      type: object
+    Extended_incident_event:
+      example:
+        incidentEvent:
+          snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          id: incident_event_id
+          administrativeEvent:
+            userId: userId
+          originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        cxEventKey: cxEventKey
+        incidentEventExtendedMetadata:
+          alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+          incidentState: INCIDENT_STATE_UNSPECIFIED
+          alertName: alertName
+          alertLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          incidentSeverity: INCIDENT_SEVERITY_UNSPECIFIED
+          alertGroupByFields:
+          - alertGroupByFields
+          - alertGroupByFields
+          alertId: alertId
+          isMuted: true
+          incidentPermutation:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          incidentStatus: INCIDENT_STATUS_UNSPECIFIED
+        cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        cxEventKey:
+          type: string
+        cxEventTimestamp:
+          format: date-time
+          type: string
+        incidentEvent:
+          $ref: "#/components/schemas/Incident_events_inner"
+        incidentEventExtendedMetadata:
+          $ref: "#/components/schemas/Extended_incident_event_incidentEventExtendedMetadata"
+      required:
+      - cxEventKey
+      - cxEventTimestamp
+      - incidentEvent
+      title: Extended incident event
+      type: object
+    Close_incidents_request:
+      description: Request to close one or more incidents
+      properties:
+        incidentIds:
+          items:
+            description: List of incident IDs to close
+            example: "[\"incident_id_1\",\"incident_id_2\"]"
+            type: string
+          type: array
+      required:
+      - incidentIds
+      title: Close incidents request
+      type: object
+    Incident_event_administrativeEvent:
+      example:
+        userId: userId
+      properties:
+        userId:
+          type: string
+      type: object
+    Incident_search_query_1:
+      externalDocs:
+        url: ""
+      properties:
+        contextualLabel:
+          description: The contextual label to search in.
+          type: string
+        query:
+          description: The search query
+          example: error
+          type: string
+      required:
+      - field
+      - query
+      title: Incident search query
+      type: object
+    Incident_query_filter_values_contextualLabels_inner:
+      example:
+        value:
+          valuesWithCount:
+          - contextualLabelValue: contextual_label_value
+            count: 10
+          - contextualLabelValue: contextual_label_value
+            count: 10
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/Contextual_label_values_with_count"
+      type: object
+    List_incidents_request:
+      description: "Request to list incidents with filtering, pagination and ordering\
+        \ options"
+      properties:
+        filter:
+          $ref: "#/components/schemas/Incident_query_filter"
+        orderBys:
+          items:
+            $ref: "#/components/schemas/List_incidents_request_orderBys_inner"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Pagination_request"
+      title: List incidents request
+      type: object
+    List_incident_events_response:
+      description: A response containing a list of incident events and pagination
+        information
+      example:
+        pagination:
+          totalSize: 100
+          nextPageToken: next_page_token
+        items:
+        - incidentEvent:
+            snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          cxEventKey: cxEventKey
+          incidentEventExtendedMetadata:
+            alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+            incidentState: INCIDENT_STATE_UNSPECIFIED
+            alertName: alertName
+            alertLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            incidentSeverity: INCIDENT_SEVERITY_UNSPECIFIED
+            alertGroupByFields:
+            - alertGroupByFields
+            - alertGroupByFields
+            alertId: alertId
+            isMuted: true
+            incidentPermutation:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            incidentStatus: INCIDENT_STATUS_UNSPECIFIED
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - incidentEvent:
+            snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          cxEventKey: cxEventKey
+          incidentEventExtendedMetadata:
+            alertType: INCIDENT_EVENT_ALERT_TYPE_STANDARD_OR_UNSPECIFIED
+            incidentState: INCIDENT_STATE_UNSPECIFIED
+            alertName: alertName
+            alertLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            incidentSeverity: INCIDENT_SEVERITY_UNSPECIFIED
+            alertGroupByFields:
+            - alertGroupByFields
+            - alertGroupByFields
+            alertId: alertId
+            isMuted: true
+            incidentPermutation:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            incidentStatus: INCIDENT_STATUS_UNSPECIFIED
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        items:
+          items:
+            $ref: "#/components/schemas/Extended_incident_event"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/Pagination_response"
+      required:
+      - items
+      title: List incident events response
+      type: object
+    Get_incident_response:
+      description: Response containing the requested incident
+      example:
+        incident:
+          displayLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          severity: INCIDENT_SEVERITY_UNSPECIFIED
+          assignments:
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          - assignedBy:
+              userId: user_id
+            assignedTo:
+              userId: user_id
+          contextualLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          description: incident_description
+          lastStateUpdateKey: last_state_update_key
+          lastStateUpdateTime: 2024-01-01T00:00:00Z
+          duration: duration
+          createdAt: 2024-01-01T00:00:00Z
+          name: incident_name
+          id: incident_id
+          metaLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          state: INCIDENT_STATE_UNSPECIFIED
+          closedAt: 2024-01-01T00:00:00Z
+          events:
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          - snoozeIndicator:
+              durationMinutes: 0
+              startTime: 2000-01-23T04:56:07.000+00:00
+              userId: userId
+            id: incident_event_id
+            administrativeEvent:
+              userId: userId
+            originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+            incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+          isMuted: false
+          status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        incident:
+          $ref: "#/components/schemas/Incident"
+      required:
+      - incident
+      title: Get incident response
+      type: object
+    Incident_event_upsert_state:
+      externalDocs:
+        url: ""
+      properties:
+        isMuted:
+          type: boolean
+        payload:
+          $ref: "#/components/schemas/Incident_event_upsert_state_payload"
+        stateType:
+          enum:
+          - UPSERT_INCIDENT_STATE_TYPE_UNSPECIFIED
+          - UPSERT_INCIDENT_STATE_TYPE_TRIGGERED
+          - UPSERT_INCIDENT_STATE_TYPE_RESOLVED
+          type: string
+      required:
+      - payload
+      - stateType
+      title: Incident event upsert state
+      type: object
+    Pagination_request:
+      description: Pagination parameters for list requests
+      externalDocs:
+        url: ""
+      properties:
+        pageSize:
+          description: Number of items to return per page
+          example: 10
+          format: int64
+          type: integer
+        pageToken:
+          description: Token for the next page of results
+          example: next_page_token
+          type: string
+      required:
+      - pageSize
+      title: Pagination request
+      type: object
+    Incident_status_with_count:
+      example:
+        count: 10
+        status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 10
+          format: int32
+          type: integer
+        status:
+          enum:
+          - INCIDENT_STATUS_UNSPECIFIED
+          - INCIDENT_STATUS_TRIGGERED
+          - INCIDENT_STATUS_ACKNOWLEDGED
+          - INCIDENT_STATUS_RESOLVED
+          type: string
+      required:
+      - count
+      - status
+      title: Incident status with count
+      type: object
+    Incident:
+      example:
+        displayLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        severity: INCIDENT_SEVERITY_UNSPECIFIED
+        assignments:
+        - assignedBy:
+            userId: user_id
+          assignedTo:
+            userId: user_id
+        - assignedBy:
+            userId: user_id
+          assignedTo:
+            userId: user_id
+        contextualLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        description: incident_description
+        lastStateUpdateKey: last_state_update_key
+        lastStateUpdateTime: 2024-01-01T00:00:00Z
+        duration: duration
+        createdAt: 2024-01-01T00:00:00Z
+        name: incident_name
+        id: incident_id
+        metaLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        state: INCIDENT_STATE_UNSPECIFIED
+        closedAt: 2024-01-01T00:00:00Z
+        events:
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          id: incident_event_id
+          administrativeEvent:
+            userId: userId
+          originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        - snoozeIndicator:
+            durationMinutes: 0
+            startTime: 2000-01-23T04:56:07.000+00:00
+            userId: userId
+          id: incident_event_id
+          administrativeEvent:
+            userId: userId
+          originatorType: ORIGINATOR_TYPE_UNSPECIFIED
+          incidentEventType: INCIDENT_EVENT_TYPE_UNSPECIFIED
+        isMuted: false
+        status: INCIDENT_STATUS_UNSPECIFIED
+      externalDocs:
+        url: ""
+      properties:
+        assignments:
+          items:
+            $ref: "#/components/schemas/Assignment"
+          type: array
+        closedAt:
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+        contextualLabels:
+          items:
+            $ref: "#/components/schemas/Incident_contextualLabels_inner"
+          type: array
+        createdAt:
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+        description:
+          example: incident_description
+          type: string
+        displayLabels:
+          items:
+            $ref: "#/components/schemas/Incident_contextualLabels_inner"
+          type: array
+        duration:
+          type: string
+        events:
+          items:
+            $ref: "#/components/schemas/Incident_events_inner"
+          type: array
+        id:
+          example: incident_id
+          type: string
+        isMuted:
+          example: false
+          type: boolean
+        lastStateUpdateKey:
+          example: last_state_update_key
+          type: string
+        lastStateUpdateTime:
+          example: 2024-01-01T00:00:00Z
+          format: date-time
+          type: string
+        metaLabels:
+          items:
+            $ref: "#/components/schemas/Incident_meta_label"
+          type: array
+        name:
+          example: incident_name
+          type: string
+        severity:
+          enum:
+          - INCIDENT_SEVERITY_UNSPECIFIED
+          - INCIDENT_SEVERITY_INFO
+          - INCIDENT_SEVERITY_WARNING
+          - INCIDENT_SEVERITY_ERROR
+          - INCIDENT_SEVERITY_CRITICAL
+          - INCIDENT_SEVERITY_LOW
+          type: string
+        state:
+          enum:
+          - INCIDENT_STATE_UNSPECIFIED
+          - INCIDENT_STATE_TRIGGERED
+          - INCIDENT_STATE_RESOLVED
+          type: string
+        status:
+          enum:
+          - INCIDENT_STATUS_UNSPECIFIED
+          - INCIDENT_STATUS_TRIGGERED
+          - INCIDENT_STATUS_ACKNOWLEDGED
+          - INCIDENT_STATUS_RESOLVED
+          type: string
+      required:
+      - assignments
+      - contextualLabels
+      - createdAt
+      - displayLabels
+      - duration
+      - events
+      - id
+      - lastStateUpdateKey
+      - lastStateUpdateTime
+      - severity
+      - state
+      - status
+      title: Incident
+      type: object

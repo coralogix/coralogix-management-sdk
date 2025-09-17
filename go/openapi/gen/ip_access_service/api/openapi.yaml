@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: IP access service provides the API for managing company IP access settings.
+  externalDocs:
+    url: ""
+  name: IP access service
+paths:
+  /aaa/team-sec-ip-access/v1:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: IpAccessService_DeleteCompanyIpAccessSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                description: This data structure represents the response to delete
+                  company IP access settings.
+                externalDocs:
+                  url: ""
+                title: Delete company IP access settings response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete company IP access settings
+      tags:
+      - IP access service
+    get:
+      externalDocs:
+        url: ""
+      operationId: IpAccessService_GetCompanyIpAccessSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_company_IP_access_settings_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get company IP access settings
+      tags:
+      - IP access service
+    post:
+      externalDocs:
+        url: ""
+      operationId: IpAccessService_CreateCompanyIpAccessSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_company_IP_access_settings_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_company_IP_access_settings_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create company IP access settings
+      tags:
+      - IP access service
+    put:
+      externalDocs:
+        url: ""
+      operationId: IpAccessService_ReplaceCompanyIpAccessSettings
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_company_IP_access_settings_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Replace_company_IP_access_settings_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace company IP access settings
+      tags:
+      - IP access service
+components:
+  schemas:
+    Company_IP_access_settings:
+      description: This data structure represents the IP access settings for a company.
+      example:
+        enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+        ipAccess:
+        - value:
+            ipRange: 192.168.0.1/24
+            name: Office Network
+            enabled: true
+          key: key
+        - value:
+            ipRange: 192.168.0.1/24
+            name: Office Network
+            enabled: true
+          key: key
+        id: "405"
+      externalDocs:
+        url: ""
+      properties:
+        enableCoralogixCustomerSupportAccess:
+          enum:
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED
+          type: string
+        id:
+          description: The unique identifier for the company IP access settings. This
+            is typically a company ID.
+          example: "405"
+          type: string
+        ipAccess:
+          items:
+            $ref: "#/components/schemas/Company_IP_access_settings_ipAccess_inner"
+          type: array
+      title: Company IP access settings
+      type: object
+    Create_company_IP_access_settings_response:
+      description: This data structure represents the response to create company IP
+        access settings.
+      example:
+        settings:
+          enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          ipAccess:
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          id: "405"
+      externalDocs:
+        url: ""
+      properties:
+        settings:
+          $ref: "#/components/schemas/Company_IP_access_settings"
+      title: Create company IP access settings response
+      type: object
+    IP_Access:
+      description: Represents a single IP access entry.
+      example:
+        ipRange: 192.168.0.1/24
+        name: Office Network
+        enabled: true
+      externalDocs:
+        description: Find out more about IP access control in our documentation
+        url: https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/
+      properties:
+        enabled:
+          description: Whether this IP access entry is enabled.
+          example: true
+          type: boolean
+        ipRange:
+          description: The IP range in CIDR notation.
+          example: 192.168.0.1/24
+          type: string
+        name:
+          description: The name of the IP access entry.
+          example: Office Network
+          type: string
+      required:
+      - enabled
+      - ipRange
+      title: IP Access
+      type: object
+    Replace_company_IP_access_settings_response:
+      description: This data structure represents the response to replace company
+        IP access settings.
+      example:
+        settings:
+          enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          ipAccess:
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          id: "405"
+      externalDocs:
+        url: ""
+      properties:
+        settings:
+          $ref: "#/components/schemas/Company_IP_access_settings"
+      title: Replace company IP access settings response
+      type: object
+    Create_company_IP_access_settings_request:
+      description: This data structure represents the request to create company IP
+        access settings.
+      properties:
+        enableCoralogixCustomerSupportAccess:
+          enum:
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED
+          type: string
+        ipAccess:
+          items:
+            $ref: "#/components/schemas/IP_Access"
+          type: array
+      title: Create company IP access settings request
+      type: object
+    Company_IP_access_settings_ipAccess_inner:
+      example:
+        value:
+          ipRange: 192.168.0.1/24
+          name: Office Network
+          enabled: true
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/IP_Access"
+      type: object
+    Get_company_IP_access_settings_response:
+      description: This data structure represents the response to get company IP access
+        settings.
+      example:
+        settings:
+          enableCoralogixCustomerSupportAccess: CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          ipAccess:
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          - value:
+              ipRange: 192.168.0.1/24
+              name: Office Network
+              enabled: true
+            key: key
+          id: "405"
+      externalDocs:
+        url: ""
+      properties:
+        settings:
+          $ref: "#/components/schemas/Company_IP_access_settings"
+      title: Get company IP access settings response
+      type: object
+    Replace_company_IP_access_settings_request:
+      description: This data structure represents the request to replace company IP
+        access settings.
+      properties:
+        enableCoralogixCustomerSupportAccess:
+          enum:
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED
+          - CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED
+          type: string
+        id:
+          example: "405"
+          type: string
+        ipAccess:
+          items:
+            $ref: "#/components/schemas/IP_Access"
+          type: array
+      title: Replace company IP access settings request
+      type: object

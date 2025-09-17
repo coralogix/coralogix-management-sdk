@@ -1,0 +1,478 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: A service for managing actions.
+  externalDocs:
+    url: ""
+  name: Actions Service
+paths:
+  /v2/actions:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_ListActions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionsService_ListActions_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Actions
+      tags:
+      - Actions Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_CreateAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_CreateAction_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Action
+      tags:
+      - Actions Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_ReplaceAction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace Action
+      tags:
+      - Actions Service
+  /v2/actions/actions:atomicBatchExecute:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_AtomicBatchExecuteActions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Atomic Batch Execute Actions
+      tags:
+      - Actions Service
+  /v2/actions/actions:order:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_OrderActions
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ActionsService_OrderActions_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Order Actions
+      tags:
+      - Actions Service
+  /v2/actions/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_DeleteAction
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Action
+      tags:
+      - Actions Service
+    get:
+      externalDocs:
+        url: ""
+      operationId: ActionsService_GetAction
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Action
+      tags:
+      - Actions Service
+components:
+  schemas:
+    ActionsService_AtomicBatchExecuteActions_request_requests_inner:
+      oneOf:
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf"
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_1"
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_2"
+    ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner_oneOf:
+      example:
+        create:
+          action:
+            createdBy: createdBy
+            sourceType: SOURCE_TYPE_UNSPECIFIED
+            subsystemNames:
+            - subsystemNames
+            - subsystemNames
+            name: name
+            applicationNames:
+            - applicationNames
+            - applicationNames
+            id: id
+            isPrivate: true
+            url: url
+            isHidden: true
+      properties:
+        create:
+          $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+      type: object
+    ActionsService_AtomicBatchExecuteActions_200_response:
+      example:
+        matchingResponses:
+        - create:
+            action:
+              createdBy: createdBy
+              sourceType: SOURCE_TYPE_UNSPECIFIED
+              subsystemNames:
+              - subsystemNames
+              - subsystemNames
+              name: name
+              applicationNames:
+              - applicationNames
+              - applicationNames
+              id: id
+              isPrivate: true
+              url: url
+              isHidden: true
+        - create:
+            action:
+              createdBy: createdBy
+              sourceType: SOURCE_TYPE_UNSPECIFIED
+              subsystemNames:
+              - subsystemNames
+              - subsystemNames
+              name: name
+              applicationNames:
+              - applicationNames
+              - applicationNames
+              id: id
+              isPrivate: true
+              url: url
+              isHidden: true
+      properties:
+        matchingResponses:
+          items:
+            $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner"
+          type: array
+      type: object
+    ActionsService_AtomicBatchExecuteActions_request:
+      properties:
+        requests:
+          items:
+            $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner"
+          type: array
+      type: object
+    ActionsService_ListActions_200_response:
+      example:
+        actions:
+        - createdBy: createdBy
+          sourceType: SOURCE_TYPE_UNSPECIFIED
+          subsystemNames:
+          - subsystemNames
+          - subsystemNames
+          name: name
+          applicationNames:
+          - applicationNames
+          - applicationNames
+          id: id
+          isPrivate: true
+          url: url
+          isHidden: true
+        - createdBy: createdBy
+          sourceType: SOURCE_TYPE_UNSPECIFIED
+          subsystemNames:
+          - subsystemNames
+          - subsystemNames
+          name: name
+          applicationNames:
+          - applicationNames
+          - applicationNames
+          id: id
+          isPrivate: true
+          url: url
+          isHidden: true
+      properties:
+        actions:
+          items:
+            $ref: "#/components/schemas/ActionsService_ListActions_200_response_actions_inner"
+          type: array
+      type: object
+    ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_2_delete:
+      properties:
+        id:
+          type: string
+      type: object
+    ActionsService_ListActions_200_response_actions_inner:
+      example:
+        createdBy: createdBy
+        sourceType: SOURCE_TYPE_UNSPECIFIED
+        subsystemNames:
+        - subsystemNames
+        - subsystemNames
+        name: name
+        applicationNames:
+        - applicationNames
+        - applicationNames
+        id: id
+        isPrivate: true
+        url: url
+        isHidden: true
+      properties:
+        applicationNames:
+          items:
+            type: string
+          type: array
+        createdBy:
+          type: string
+        id:
+          type: string
+        isHidden:
+          type: boolean
+        isPrivate:
+          type: boolean
+        name:
+          type: string
+        sourceType:
+          enum:
+          - SOURCE_TYPE_UNSPECIFIED
+          - SOURCE_TYPE_LOG
+          - SOURCE_TYPE_DATA_MAP
+          type: string
+        subsystemNames:
+          items:
+            type: string
+          type: array
+        url:
+          type: string
+      type: object
+    ActionsService_CreateAction_request:
+      properties:
+        applicationNames:
+          items:
+            type: string
+          type: array
+        isPrivate:
+          type: boolean
+        name:
+          type: string
+        sourceType:
+          enum:
+          - SOURCE_TYPE_UNSPECIFIED
+          - SOURCE_TYPE_LOG
+          - SOURCE_TYPE_DATA_MAP
+          type: string
+        subsystemNames:
+          items:
+            type: string
+          type: array
+        url:
+          type: string
+      type: object
+    ActionsService_OrderActions_request:
+      properties:
+        privateActionsOrder:
+          items:
+            $ref: "#/components/schemas/ActionsService_OrderActions_request_privateActionsOrder_inner"
+          type: array
+        sharedActionsOrder:
+          items:
+            $ref: "#/components/schemas/ActionsService_OrderActions_request_privateActionsOrder_inner"
+          type: array
+      type: object
+    ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf:
+      properties:
+        create:
+          $ref: "#/components/schemas/ActionsService_CreateAction_request"
+      type: object
+    ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_2:
+      properties:
+        delete:
+          $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_2_delete"
+      type: object
+    ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_1:
+      properties:
+        replace:
+          $ref: "#/components/schemas/ActionsService_ReplaceAction_request"
+      type: object
+    ActionsService_OrderActions_request_privateActionsOrder_inner:
+      properties:
+        key:
+          type: string
+        value:
+          format: int64
+          type: integer
+      type: object
+    ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner:
+      oneOf:
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner_oneOf"
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_request_requests_inner_oneOf_1"
+      - $ref: "#/components/schemas/ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner_oneOf_1"
+    ActionsService_ReplaceAction_request:
+      example:
+        action:
+          createdBy: createdBy
+          sourceType: SOURCE_TYPE_UNSPECIFIED
+          subsystemNames:
+          - subsystemNames
+          - subsystemNames
+          name: name
+          applicationNames:
+          - applicationNames
+          - applicationNames
+          id: id
+          isPrivate: true
+          url: url
+          isHidden: true
+      properties:
+        action:
+          $ref: "#/components/schemas/ActionsService_ListActions_200_response_actions_inner"
+      type: object
+    ActionsService_AtomicBatchExecuteActions_200_response_matchingResponses_inner_oneOf_1:
+      properties:
+        delete:
+          type: object
+      type: object

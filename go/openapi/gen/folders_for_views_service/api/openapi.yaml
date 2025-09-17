@@ -1,0 +1,202 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Create and manage view folders.
+  externalDocs:
+    url: ""
+  name: Folders for views service
+paths:
+  /v1/view_folders:
+    get:
+      description: List view's folders
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_ListViewFolders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewsFoldersService_ListViewFolders_200_response"
+          description: ""
+      summary: List view folders service
+      tags:
+      - Folders for views service
+    post:
+      description: Create view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_CreateViewFolder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateViewFolderRequest"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Create View Folder service
+      tags:
+      - Folders for views service
+  /v1/view_folders/{folder.id}:
+    put:
+      description: Replaces an existing view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_ReplaceViewFolder
+      parameters:
+      - explode: false
+        in: path
+        name: folder.id
+        required: true
+        schema:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ViewFolder_1"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Replace View Folder service
+      tags:
+      - Folders for views service
+  /v1/view_folders/{id}:
+    delete:
+      description: Deletes a view folder by ID
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_DeleteViewFolder
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+      summary: Delete View Folder service
+      tags:
+      - Folders for views service
+    get:
+      description: Create view folder
+      externalDocs:
+        url: ""
+      operationId: ViewsFoldersService_GetViewFolder
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ViewFolder"
+          description: ""
+      summary: Get View Folder service
+      tags:
+      - Folders for views service
+components:
+  schemas:
+    ViewFolder_1:
+      description: View folder.
+      properties:
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      required:
+      - name
+      title: ViewFolder
+      type: object
+    CreateViewFolderRequest:
+      description: Create view folder.
+      example:
+        name: My Folder
+      properties:
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      title: CreateViewFolderRequest
+      type: object
+    ViewFolder:
+      description: View folder.
+      example:
+        name: My Folder
+        id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          description: Unique identifier for folders
+          example: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        name:
+          description: Folder name
+          example: My Folder
+          minLength: 1
+          type: string
+      required:
+      - name
+      title: ViewFolder
+      type: object
+    ViewsFoldersService_ListViewFolders_200_response:
+      example:
+        folders:
+        - name: My Folder
+          id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+        - name: My Folder
+          id: 3dc02998-0b50-4ea8-b68a-4779d716fa1f
+      properties:
+        folders:
+          items:
+            $ref: "#/components/schemas/ViewFolder"
+          type: array
+      type: object

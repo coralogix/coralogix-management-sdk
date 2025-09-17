@@ -1,0 +1,526 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: A service that enables querying for extension deployment information.
+  externalDocs:
+    description: Find out more about extensions in our documentation.
+    url: https://coralogix.com/docs/integrations/extensions/
+  name: Extension deployment service
+paths:
+  /v1/extension-deployment/deploy:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionDeploymentService_DeployExtension
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Deploy_extension_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Deploy_extension_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Deploy extension
+      tags:
+      - Extension deployment service
+      x-coralogixPermissions:
+      - extensions:Deploy
+  /v1/extension-deployment/deployed:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ExtensionDeploymentService_GetDeployedExtensions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_deployed_extensions_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get deployed extensions
+      tags:
+      - Extension deployment service
+      x-coralogixPermissions:
+      - extensions:ReadConfig
+  /v1/extension-deployment/undeploy:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionDeploymentService_UndeployExtension
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Revert_deployment_of_extension_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Revert_deployment_of_extension_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Revert deployment of extension
+      tags:
+      - Extension deployment service
+      x-coralogixPermissions:
+      - extensions:Deploy
+  /v1/extension-deployment/update:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionDeploymentService_UpdateExtension
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_extension_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Update_extension_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update extension
+      tags:
+      - Extension deployment service
+      x-coralogixPermissions:
+      - extensions:Deploy
+components:
+  schemas:
+    Item_counts:
+      example:
+        alerts: 6
+        eventsToMetrics: 5
+        grafanaDashboards: 2
+        savedViews: 2
+        customDashboards: 1
+        kibanaDashboards: 7
+        actions: 0
+        metricsRuleGroup: 9
+        enrichments: 5
+        parsingRules: 3
+      externalDocs:
+        url: ""
+      properties:
+        actions:
+          format: int64
+          type: integer
+        alerts:
+          format: int64
+          type: integer
+        customDashboards:
+          format: int64
+          type: integer
+        enrichments:
+          format: int64
+          type: integer
+        eventsToMetrics:
+          format: int64
+          type: integer
+        grafanaDashboards:
+          format: int64
+          type: integer
+        kibanaDashboards:
+          format: int64
+          type: integer
+        metricsRuleGroup:
+          format: int64
+          type: integer
+        parsingRules:
+          format: int64
+          type: integer
+        savedViews:
+          format: int64
+          type: integer
+      title: Item counts
+      type: object
+    Revert_deployment_of_extension_request:
+      properties:
+        id:
+          type: string
+        keptExtensionItems:
+          items:
+            type: string
+          type: array
+      required:
+      - id
+      title: Revert deployment of extension request
+      type: object
+    Get_deployed_extensions_response:
+      example:
+        deployedExtensions:
+        - summary:
+            deployedItemCounts:
+              alerts: 6
+              eventsToMetrics: 5
+              grafanaDashboards: 2
+              savedViews: 2
+              customDashboards: 1
+              kibanaDashboards: 7
+              actions: 0
+              metricsRuleGroup: 9
+              enrichments: 5
+              parsingRules: 3
+          itemIds:
+          - itemIds
+          - itemIds
+          id: id
+          subsystems:
+          - subsystems
+          - subsystems
+          version: version
+          applications:
+          - applications
+          - applications
+        - summary:
+            deployedItemCounts:
+              alerts: 6
+              eventsToMetrics: 5
+              grafanaDashboards: 2
+              savedViews: 2
+              customDashboards: 1
+              kibanaDashboards: 7
+              actions: 0
+              metricsRuleGroup: 9
+              enrichments: 5
+              parsingRules: 3
+          itemIds:
+          - itemIds
+          - itemIds
+          id: id
+          subsystems:
+          - subsystems
+          - subsystems
+          version: version
+          applications:
+          - applications
+          - applications
+      externalDocs:
+        url: ""
+      properties:
+        deployedExtensions:
+          items:
+            $ref: "#/components/schemas/Deployed_extension"
+          type: array
+      title: Get deployed extensions response
+      type: object
+    Deploy_extension_request:
+      properties:
+        applications:
+          items:
+            type: string
+          type: array
+        extensionDeployment:
+          $ref: "#/components/schemas/Extension_deployment"
+        id:
+          type: string
+        itemIds:
+          items:
+            type: string
+          type: array
+        subsystems:
+          items:
+            type: string
+          type: array
+        version:
+          type: string
+      required:
+      - id
+      - itemIds
+      - version
+      title: Deploy extension request
+      type: object
+    Deploy_extension_response:
+      example:
+        extensionDeployment:
+          itemIds:
+          - itemIds
+          - itemIds
+          id: id
+          subsystems:
+          - subsystems
+          - subsystems
+          version: version
+          applications:
+          - applications
+          - applications
+      externalDocs:
+        url: ""
+      properties:
+        extensionDeployment:
+          $ref: "#/components/schemas/Extension_deployment"
+      required:
+      - extensionDeployment
+      title: Deploy extension response
+      type: object
+    Failed_item:
+      example:
+        itemId: itemId
+        reason: reason
+        remoteId: remoteId
+      externalDocs:
+        url: ""
+      properties:
+        itemId:
+          type: string
+        reason:
+          type: string
+        remoteId:
+          type: string
+      required:
+      - itemId
+      - reason
+      - remoteId
+      title: Failed item
+      type: object
+    Update_extension_request:
+      properties:
+        applications:
+          items:
+            type: string
+          type: array
+        extensionDeployment:
+          $ref: "#/components/schemas/Extension_deployment"
+        id:
+          type: string
+        itemIds:
+          items:
+            type: string
+          type: array
+        subsystems:
+          items:
+            type: string
+          type: array
+        version:
+          type: string
+      required:
+      - id
+      - itemIds
+      - version
+      title: Update extension request
+      type: object
+    Deployed_extension_summary:
+      example:
+        deployedItemCounts:
+          alerts: 6
+          eventsToMetrics: 5
+          grafanaDashboards: 2
+          savedViews: 2
+          customDashboards: 1
+          kibanaDashboards: 7
+          actions: 0
+          metricsRuleGroup: 9
+          enrichments: 5
+          parsingRules: 3
+      externalDocs:
+        url: ""
+      properties:
+        deployedItemCounts:
+          $ref: "#/components/schemas/Item_counts"
+      required:
+      - deployedItemCounts
+      title: Deployed extension summary
+      type: object
+    Extension_deployment:
+      example:
+        itemIds:
+        - itemIds
+        - itemIds
+        id: id
+        subsystems:
+        - subsystems
+        - subsystems
+        version: version
+        applications:
+        - applications
+        - applications
+      externalDocs:
+        url: ""
+      properties:
+        applications:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        itemIds:
+          items:
+            type: string
+          type: array
+        subsystems:
+          items:
+            type: string
+          type: array
+        version:
+          type: string
+      required:
+      - id
+      - itemIds
+      - version
+      title: Extension deployment
+      type: object
+    Revert_deployment_of_extension_response:
+      example:
+        extensionDeployment:
+          itemIds:
+          - itemIds
+          - itemIds
+          id: id
+          subsystems:
+          - subsystems
+          - subsystems
+          version: version
+          applications:
+          - applications
+          - applications
+        failedItems:
+        - itemId: itemId
+          reason: reason
+          remoteId: remoteId
+        - itemId: itemId
+          reason: reason
+          remoteId: remoteId
+      externalDocs:
+        url: ""
+      properties:
+        extensionDeployment:
+          $ref: "#/components/schemas/Extension_deployment"
+        failedItems:
+          items:
+            $ref: "#/components/schemas/Failed_item"
+          type: array
+      title: Revert deployment of extension response
+      type: object
+    Deployed_extension:
+      example:
+        summary:
+          deployedItemCounts:
+            alerts: 6
+            eventsToMetrics: 5
+            grafanaDashboards: 2
+            savedViews: 2
+            customDashboards: 1
+            kibanaDashboards: 7
+            actions: 0
+            metricsRuleGroup: 9
+            enrichments: 5
+            parsingRules: 3
+        itemIds:
+        - itemIds
+        - itemIds
+        id: id
+        subsystems:
+        - subsystems
+        - subsystems
+        version: version
+        applications:
+        - applications
+        - applications
+      externalDocs:
+        url: ""
+      properties:
+        applications:
+          items:
+            type: string
+          type: array
+        id:
+          type: string
+        itemIds:
+          items:
+            type: string
+          type: array
+        subsystems:
+          items:
+            type: string
+          type: array
+        summary:
+          $ref: "#/components/schemas/Deployed_extension_summary"
+        version:
+          type: string
+      required:
+      - id
+      - itemIds
+      - summary
+      - version
+      title: Deployed extension
+      type: object
+    Update_extension_response:
+      example:
+        extensionDeployment:
+          itemIds:
+          - itemIds
+          - itemIds
+          id: id
+          subsystems:
+          - subsystems
+          - subsystems
+          version: version
+          applications:
+          - applications
+          - applications
+      externalDocs:
+        url: ""
+      properties:
+        extensionDeployment:
+          $ref: "#/components/schemas/Extension_deployment"
+      required:
+      - extensionDeployment
+      title: Update extension response
+      type: object

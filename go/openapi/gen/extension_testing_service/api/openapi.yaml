@@ -1,0 +1,354 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- externalDocs:
+    description: Find out more about extensions in our documentation.
+    url: https://coralogix.com/docs/integrations/extensions/
+  name: Extension testing service
+paths:
+  /v1/extensions-testing/cleanup:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionTestingService_CleanupTestingRevision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Cleanup_testing_revision_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: ""
+                title: Cleanup testing revision response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Cleanup testing extension
+      tags:
+      - Extension testing service
+      x-coralogixPermissions:
+      - extensions:UpdateConfig
+  /v1/extensions-testing/initialize:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionTestingService_InitializeTestingRevision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Initialize_testing_revision_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: ""
+                title: Initialize testing revision response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Initialize testing revision
+      tags:
+      - Extension testing service
+      x-coralogixPermissions:
+      - extensions:UpdateConfig
+  /v1/extensions-testing/test:
+    post:
+      externalDocs:
+        url: ""
+      operationId: ExtensionTestingService_TestExtensionRevision
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_extension_revision_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  url: ""
+                title: Test extension revision response
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test extension revision
+      tags:
+      - Extension testing service
+      x-coralogixPermissions:
+      - extensions:UpdateConfig
+components:
+  schemas:
+    Integration_detail:
+      externalDocs:
+        url: ""
+      properties:
+        link:
+          type: string
+        name:
+          type: string
+      required:
+      - link
+      - name
+      title: Integration detail
+      type: object
+    Extension_item_binary:
+      externalDocs:
+        url: ""
+      properties:
+        data:
+          type: string
+        fileName:
+          type: string
+        type:
+          enum:
+          - PREVIEW_IMAGE
+          - KIBANA_DASHBOARD_DEFINITION
+          - GRAFANA_DASHBOARD_DEFINITION
+          - ENRICHMENT_CSV
+          - CX_CUSTOM_DASHBOARD_DEFINITION
+          type: string
+      required:
+      - data
+      - fileName
+      - type
+      title: Extension item binary
+      type: object
+    Changelog_entry:
+      externalDocs:
+        url: ""
+      properties:
+        descriptionMd:
+          type: string
+        version:
+          type: string
+      required:
+      - descriptionMd
+      - version
+      title: Changelog entry
+      type: object
+    Deprecation:
+      externalDocs:
+        url: ""
+      properties:
+        reason:
+          type: string
+        replacementExtensions:
+          items:
+            type: string
+          type: array
+      required:
+      - reason
+      title: Deprecation
+      type: object
+    Extension_item_data:
+      externalDocs:
+        url: ""
+      properties:
+        binaries:
+          items:
+            $ref: "#/components/schemas/Extension_item_binary"
+          type: array
+        data:
+          type: object
+        description:
+          example: Less than 60% cocoa
+          type: string
+        internalId:
+          format: int32
+          type: integer
+        isMandatory:
+          type: boolean
+        name:
+          example: Low cocoa content
+          type: string
+        permissionResource:
+          enum:
+          - UNKNOWN
+          - ACTION
+          - ALERT
+          - CUSTOM_ENRICHMENT
+          - GEO_ENRICHMENT
+          - SECURITY_ENRICHMENT
+          - RESOURCE_CLOUD_METADATA_ENRICHMENT
+          - GRAFANA_DASHBOARD
+          - KIBANA_DASHBOARD
+          - PARSING_RULE
+          - SAVED_VIEW
+          - CX_CUSTOM_DASHBOARD
+          - METRICS_RULE_GROUP
+          - SPAN_EVENTS_TO_METRICS
+          - LOGS_EVENTS_TO_METRICS
+          type: string
+        stableId:
+          type: string
+        targetDomain:
+          enum:
+          - ACTION
+          - ALERT
+          - ENRICHMENT
+          - GRAFANA_DASHBOARD
+          - KIBANA_DASHBOARD
+          - PARSING_RULE
+          - SAVED_VIEW
+          - CX_CUSTOM_DASHBOARD
+          - METRICS_RULE_GROUP
+          - EVENTS_TO_METRICS
+          - ALERT_V3
+          type: string
+        uniqueId:
+          type: string
+      required:
+      - data
+      - name
+      - targetDomain
+      title: Extension item data
+      type: object
+    Initialize_testing_revision_request:
+      properties:
+        extensionData:
+          $ref: "#/components/schemas/Extension_data"
+      required:
+      - extensionData
+      title: Initialize testing revision request
+      type: object
+    Extension_data:
+      description: Extension details for ingestion
+      externalDocs:
+        url: ""
+      properties:
+        binaries:
+          items:
+            $ref: "#/components/schemas/Extension_binary"
+          type: array
+        changelog:
+          items:
+            $ref: "#/components/schemas/Changelog_entry"
+          type: array
+        darkModeImage:
+          type: string
+        deprecation:
+          $ref: "#/components/schemas/Deprecation"
+        description:
+          example: Integration with AWS CloudWatch for monitoring and logging
+          type: string
+        excerpt:
+          example: Monitor AWS resources and analyze logs with CloudWatch integration
+          type: string
+        id:
+          example: 076f4188-05e0-4ed3-afeb-653ad182ccb7
+          type: string
+        image:
+          type: string
+        integrationDetails:
+          items:
+            $ref: "#/components/schemas/Integration_detail"
+          type: array
+        integrations:
+          items:
+            type: string
+          type: array
+        isHidden:
+          type: boolean
+        items:
+          items:
+            $ref: "#/components/schemas/Extension_item_data"
+          type: array
+        keywords:
+          items:
+            type: string
+          type: array
+        labels:
+          items:
+            type: string
+          type: array
+        name:
+          example: AWS CloudWatch Extension
+          type: string
+        version:
+          example: v1.0.13
+          type: string
+      required:
+      - id
+      - image
+      - name
+      - version
+      title: Extension data
+      type: object
+    Cleanup_testing_revision_request:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      title: Cleanup testing revision request
+      type: object
+    Extension_binary:
+      externalDocs:
+        url: ""
+      properties:
+        data:
+          type: string
+        type:
+          enum:
+          - KIBANA_INDEX_PATTERN
+          type: string
+      required:
+      - data
+      - type
+      title: Extension binary
+      type: object
+    Test_extension_revision_request:
+      properties:
+        cleanupAfterTest:
+          type: boolean
+        extensionData:
+          $ref: "#/components/schemas/Extension_data"
+      required:
+      - extensionData
+      title: Test extension revision request
+      type: object

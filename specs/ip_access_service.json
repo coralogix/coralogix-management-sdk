@@ -1,0 +1,510 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/team-sec-ip-access/v1": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IpAccessService_GetCompanyIpAccessSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get company IP access settings response",
+                  "type": "object",
+                  "properties": {
+                    "settings": {
+                      "title": "Company IP access settings",
+                      "type": "object",
+                      "properties": {
+                        "enableCoralogixCustomerSupportAccess": {
+                          "enum": [
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
+                          ],
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
+                          "example": 405
+                        },
+                        "ipAccess": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "title": "IP Access",
+                                "required": [
+                                  "ipRange",
+                                  "enabled"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "description": "Whether this IP access entry is enabled.",
+                                    "example": true
+                                  },
+                                  "ipRange": {
+                                    "type": "string",
+                                    "description": "The IP range in CIDR notation.",
+                                    "example": "192.168.0.1/24"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the IP access entry.",
+                                    "example": "Office Network"
+                                  }
+                                },
+                                "description": "Represents a single IP access entry.",
+                                "externalDocs": {
+                                  "description": "Find out more about IP access control in our documentation",
+                                  "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "This data structure represents the IP access settings for a company.",
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "description": "This data structure represents the response to get company IP access settings.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get company IP access settings",
+        "tags": [
+          "IP access service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IpAccessService_ReplaceCompanyIpAccessSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents the request to replace company IP access settings.",
+                "properties": {
+                  "enableCoralogixCustomerSupportAccess": {
+                    "enum": [
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
+                    ],
+                    "type": "string"
+                  },
+                  "id": {
+                    "example": 405,
+                    "type": "string"
+                  },
+                  "ipAccess": {
+                    "items": {
+                      "title": "IP Access",
+                      "required": [
+                        "ipRange",
+                        "enabled"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean",
+                          "description": "Whether this IP access entry is enabled.",
+                          "example": true
+                        },
+                        "ipRange": {
+                          "type": "string",
+                          "description": "The IP range in CIDR notation.",
+                          "example": "192.168.0.1/24"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the IP access entry.",
+                          "example": "Office Network"
+                        }
+                      },
+                      "description": "Represents a single IP access entry.",
+                      "externalDocs": {
+                        "description": "Find out more about IP access control in our documentation",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "title": "Replace company IP access settings request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Replace company IP access settings response",
+                  "type": "object",
+                  "properties": {
+                    "settings": {
+                      "title": "Company IP access settings",
+                      "type": "object",
+                      "properties": {
+                        "enableCoralogixCustomerSupportAccess": {
+                          "enum": [
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
+                          ],
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
+                          "example": 405
+                        },
+                        "ipAccess": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "title": "IP Access",
+                                "required": [
+                                  "ipRange",
+                                  "enabled"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "description": "Whether this IP access entry is enabled.",
+                                    "example": true
+                                  },
+                                  "ipRange": {
+                                    "type": "string",
+                                    "description": "The IP range in CIDR notation.",
+                                    "example": "192.168.0.1/24"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the IP access entry.",
+                                    "example": "Office Network"
+                                  }
+                                },
+                                "description": "Represents a single IP access entry.",
+                                "externalDocs": {
+                                  "description": "Find out more about IP access control in our documentation",
+                                  "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "This data structure represents the IP access settings for a company.",
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "description": "This data structure represents the response to replace company IP access settings.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Replace company IP access settings",
+        "tags": [
+          "IP access service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IpAccessService_CreateCompanyIpAccessSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents the request to create company IP access settings.",
+                "properties": {
+                  "enableCoralogixCustomerSupportAccess": {
+                    "enum": [
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
+                      "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
+                    ],
+                    "type": "string"
+                  },
+                  "ipAccess": {
+                    "items": {
+                      "title": "IP Access",
+                      "required": [
+                        "ipRange",
+                        "enabled"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "enabled": {
+                          "type": "boolean",
+                          "description": "Whether this IP access entry is enabled.",
+                          "example": true
+                        },
+                        "ipRange": {
+                          "type": "string",
+                          "description": "The IP range in CIDR notation.",
+                          "example": "192.168.0.1/24"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "The name of the IP access entry.",
+                          "example": "Office Network"
+                        }
+                      },
+                      "description": "Represents a single IP access entry.",
+                      "externalDocs": {
+                        "description": "Find out more about IP access control in our documentation",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "title": "Create company IP access settings request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Create company IP access settings response",
+                  "type": "object",
+                  "properties": {
+                    "settings": {
+                      "title": "Company IP access settings",
+                      "type": "object",
+                      "properties": {
+                        "enableCoralogixCustomerSupportAccess": {
+                          "enum": [
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED",
+                            "CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED"
+                          ],
+                          "type": "string"
+                        },
+                        "id": {
+                          "type": "string",
+                          "description": "The unique identifier for the company IP access settings. This is typically a company ID.",
+                          "example": 405
+                        },
+                        "ipAccess": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "title": "IP Access",
+                                "required": [
+                                  "ipRange",
+                                  "enabled"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "enabled": {
+                                    "type": "boolean",
+                                    "description": "Whether this IP access entry is enabled.",
+                                    "example": true
+                                  },
+                                  "ipRange": {
+                                    "type": "string",
+                                    "description": "The IP range in CIDR notation.",
+                                    "example": "192.168.0.1/24"
+                                  },
+                                  "name": {
+                                    "type": "string",
+                                    "description": "The name of the IP access entry.",
+                                    "example": "Office Network"
+                                  }
+                                },
+                                "description": "Represents a single IP access entry.",
+                                "externalDocs": {
+                                  "description": "Find out more about IP access control in our documentation",
+                                  "url": "https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "This data structure represents the IP access settings for a company.",
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "description": "This data structure represents the response to create company IP access settings.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create company IP access settings",
+        "tags": [
+          "IP access service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "IpAccessService_DeleteCompanyIpAccessSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Delete company IP access settings response",
+                  "type": "object",
+                  "description": "This data structure represents the response to delete company IP access settings.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete company IP access settings",
+        "tags": [
+          "IP access service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "IP access service",
+      "description": "IP access service provides the API for managing company IP access settings.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

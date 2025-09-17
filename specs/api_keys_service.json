@@ -1,0 +1,695 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/api-keys/v3": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_CreateApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure is used to create an API key.",
+                "properties": {
+                  "hashed": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "keyPermissions": {
+                    "title": "Key Permissions",
+                    "required": [
+                      "presets",
+                      "permissions"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "permissions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": [
+                            "read_logs"
+                          ]
+                        }
+                      },
+                      "presets": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "example": [
+                            "my_preset"
+                          ]
+                        }
+                      }
+                    },
+                    "description": "This data structure allows to specify loose permissions and permission presets for an API key.",
+                    "externalDocs": {
+                      "description": "Find out more about api keys",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                    }
+                  },
+                  "name": {
+                    "example": "my_api_key",
+                    "type": "string"
+                  },
+                  "owner": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "teamId": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "organisationId": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                "required": [
+                  "name",
+                  "owner",
+                  "keyPermissions",
+                  "hashed"
+                ],
+                "title": "Create Api Key Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Create Api Key Response",
+                  "required": [
+                    "keyId",
+                    "name",
+                    "value"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "keyId": {
+                      "type": "string",
+                      "example": "my_key_id"
+                    },
+                    "name": {
+                      "type": "string",
+                      "example": "my_api_key"
+                    },
+                    "value": {
+                      "type": "string",
+                      "example": "my_api_key_value"
+                    }
+                  },
+                  "description": "This data structure is the response obtained when creating an API key.",
+                  "externalDocs": {
+                    "description": "Find out more about api keys",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create API Key",
+        "tags": [
+          "API Keys Service"
+        ]
+      }
+    },
+    "/aaa/api-keys/v3/send_data": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetSendDataApiKeys",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Api Key Response",
+                  "required": [
+                    "keyInfo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "keys": {
+                      "type": "array",
+                      "items": {
+                        "title": "Key Info",
+                        "required": [
+                          "id",
+                          "name",
+                          "owner",
+                          "active",
+                          "hashed",
+                          "keyPermissions"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "active": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "hashed": {
+                            "type": "boolean",
+                            "example": true
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "keyPermissions": {
+                            "title": "Key Permissions",
+                            "required": [
+                              "presets",
+                              "permissions"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "permissions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              },
+                              "presets": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Preset Info",
+                                  "required": [
+                                    "name",
+                                    "permissions"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "type": "string",
+                                      "example": "my_preset"
+                                    },
+                                    "permissions": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "string",
+                                        "example": [
+                                          "read_logs"
+                                        ]
+                                      }
+                                    }
+                                  },
+                                  "description": "This data structure represents a preset set of permissions on an API key.",
+                                  "externalDocs": {
+                                    "description": "Find out more about api keys",
+                                    "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                                  }
+                                }
+                              }
+                            },
+                            "description": "This data structure represents the permissions on an API key.",
+                            "externalDocs": {
+                              "description": "Find out more about api keys",
+                              "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                            }
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "my_api_key"
+                          },
+                          "owner": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "userId": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "teamId": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "organisationId": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "description": "This data structure represents the information associated with an API key.",
+                        "externalDocs": {
+                          "description": "Find out more about api keys",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure is the response obtained when retrieving an API key.",
+                  "externalDocs": {
+                    "description": "Find out more about api keys",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get \"Send Data\" API Keys",
+        "tags": [
+          "API Keys Service"
+        ]
+      }
+    },
+    "/aaa/api-keys/v3/{key_id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "example": "my_key_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Api Key Response",
+                  "required": [
+                    "keyInfo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "keyInfo": {
+                      "title": "Key Info",
+                      "required": [
+                        "id",
+                        "name",
+                        "owner",
+                        "active",
+                        "hashed",
+                        "keyPermissions"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "active": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "hashed": {
+                          "type": "boolean",
+                          "example": true
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "keyPermissions": {
+                          "title": "Key Permissions",
+                          "required": [
+                            "presets",
+                            "permissions"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "permissions": {
+                              "type": "array",
+                              "items": {
+                                "type": "string"
+                              }
+                            },
+                            "presets": {
+                              "type": "array",
+                              "items": {
+                                "title": "Preset Info",
+                                "required": [
+                                  "name",
+                                  "permissions"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "name": {
+                                    "type": "string",
+                                    "example": "my_preset"
+                                  },
+                                  "permissions": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string",
+                                      "example": [
+                                        "read_logs"
+                                      ]
+                                    }
+                                  }
+                                },
+                                "description": "This data structure represents a preset set of permissions on an API key.",
+                                "externalDocs": {
+                                  "description": "Find out more about api keys",
+                                  "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                                }
+                              }
+                            }
+                          },
+                          "description": "This data structure represents the permissions on an API key.",
+                          "externalDocs": {
+                            "description": "Find out more about api keys",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                          }
+                        },
+                        "name": {
+                          "type": "string",
+                          "example": "my_api_key"
+                        },
+                        "owner": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "userId": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "teamId": {
+                                  "type": "integer",
+                                  "format": "int64"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "organisationId": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "value": {
+                          "type": "string"
+                        }
+                      },
+                      "description": "This data structure represents the information associated with an API key.",
+                      "externalDocs": {
+                        "description": "Find out more about api keys",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                      }
+                    }
+                  },
+                  "description": "This data structure is the response obtained when retrieving an API key.",
+                  "externalDocs": {
+                    "description": "Find out more about api keys",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get API Key",
+        "tags": [
+          "API Keys Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_UpdateApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "example": "my_key_id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure is used to update an API key.",
+                "properties": {
+                  "isActive": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "newName": {
+                    "example": "my_new_name",
+                    "type": "string"
+                  },
+                  "permissions": {
+                    "title": "Permissions",
+                    "required": [
+                      "permissions"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "permissions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "description": "This data structure represents a set of permissions on an API key.",
+                    "externalDocs": {
+                      "description": "Find out more about api keys",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                    }
+                  },
+                  "presets": {
+                    "title": "Presets",
+                    "required": [
+                      "presets"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "presets": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "description": "This data structure represents a set of permissions presets on an API key.",
+                    "externalDocs": {
+                      "description": "Find out more about api keys",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+                    }
+                  }
+                },
+                "required": [
+                  "keyId"
+                ],
+                "title": "Update Api Key Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update API Key",
+        "tags": [
+          "API Keys Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_DeleteApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete API Key",
+        "tags": [
+          "API Keys Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "API Keys Service",
+      "description": "Manage your API Keys.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

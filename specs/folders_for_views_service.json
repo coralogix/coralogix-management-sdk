@@ -1,0 +1,329 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/view_folders": {
+      "get": {
+        "description": "List view's folders",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsFoldersService_ListViewFolders",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "folders": {
+                      "type": "array",
+                      "items": {
+                        "title": "ViewFolder",
+                        "required": [
+                          "name"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                            "type": "string",
+                            "description": "Unique identifier for folders",
+                            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                          },
+                          "name": {
+                            "minLength": 1,
+                            "type": "string",
+                            "description": "Folder name",
+                            "example": "My Folder"
+                          }
+                        },
+                        "description": "View folder.",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "List view folders service",
+        "tags": [
+          "Folders for views service"
+        ]
+      },
+      "post": {
+        "description": "Create view folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsFoldersService_CreateViewFolder",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Create view folder.",
+                "properties": {
+                  "name": {
+                    "description": "Folder name",
+                    "example": "My Folder",
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "title": "CreateViewFolderRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ViewFolder",
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "Folder name",
+                      "example": "My Folder"
+                    }
+                  },
+                  "description": "View folder.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Create View Folder service",
+        "tags": [
+          "Folders for views service"
+        ]
+      }
+    },
+    "/v1/view_folders/{folder.id}": {
+      "put": {
+        "description": "Replaces an existing view folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsFoldersService_ReplaceViewFolder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "folder.id",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier for folders",
+              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+              "maxLength": 36,
+              "minLength": 36,
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "View folder.",
+                "properties": {
+                  "name": {
+                    "description": "Folder name",
+                    "example": "My Folder",
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "title": "ViewFolder",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ViewFolder",
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "Folder name",
+                      "example": "My Folder"
+                    }
+                  },
+                  "description": "View folder.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Replace View Folder service",
+        "tags": [
+          "Folders for views service"
+        ]
+      }
+    },
+    "/v1/view_folders/{id}": {
+      "get": {
+        "description": "Create view folder",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsFoldersService_GetViewFolder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier for folders",
+              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+              "maxLength": 36,
+              "minLength": 36,
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ViewFolder",
+                  "required": [
+                    "name"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "Folder name",
+                      "example": "My Folder"
+                    }
+                  },
+                  "description": "View folder.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get View Folder service",
+        "tags": [
+          "Folders for views service"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a view folder by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsFoldersService_DeleteViewFolder",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "Unique identifier for folders",
+              "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+              "maxLength": 36,
+              "minLength": 36,
+              "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Delete View Folder service",
+        "tags": [
+          "Folders for views service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Folders for views service",
+      "description": "Create and manage view folders.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,609 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/target": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "S3TargetService_GetTarget",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Target Response",
+                  "required": [
+                    "target"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "title": "Target",
+                          "required": [
+                            "targetSpecarchiveSpec"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "archiveSpec": {
+                              "title": "Archive Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "archivingFormatId": {
+                                  "type": "string",
+                                  "example": "json_id"
+                                },
+                                "enableTags": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "isActive": {
+                                  "type": "boolean",
+                                  "example": true
+                                }
+                              },
+                              "description": "This data structure contains metadata about the archive.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            },
+                            "s3": {
+                              "title": "S3 Target Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "bucket": {
+                                  "type": "string",
+                                  "example": "bucket"
+                                },
+                                "region": {
+                                  "type": "string",
+                                  "example": "us-west-2"
+                                }
+                              },
+                              "description": "This data structure represents an S3 target.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a target to archive logs.",
+                          "externalDocs": {
+                            "description": "Find out more about archives",
+                            "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                          }
+                        },
+                        {
+                          "title": "Target",
+                          "required": [
+                            "targetSpecarchiveSpec"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "archiveSpec": {
+                              "title": "Archive Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "archivingFormatId": {
+                                  "type": "string",
+                                  "example": "json_id"
+                                },
+                                "enableTags": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "isActive": {
+                                  "type": "boolean",
+                                  "example": true
+                                }
+                              },
+                              "description": "This data structure contains metadata about the archive.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            },
+                            "ibmCos": {
+                              "title": "IBM COS Target Spec",
+                              "required": [
+                                "bucketCrn",
+                                "endpoint"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "bucketCrn": {
+                                  "type": "string",
+                                  "example": "bucket_crn"
+                                },
+                                "bucketType": {
+                                  "enum": [
+                                    "IBM_BUCKET_TYPE_UNSPECIFIED",
+                                    "IBM_BUCKET_TYPE_EXTERNAL",
+                                    "IBM_BUCKET_TYPE_INTERNAL"
+                                  ],
+                                  "type": "string"
+                                },
+                                "endpoint": {
+                                  "type": "string",
+                                  "example": "http://some.endpoint.com:8081"
+                                },
+                                "serviceCrn": {
+                                  "type": "string",
+                                  "example": "service_crn"
+                                }
+                              },
+                              "description": "This data structure represents an IBM COS target.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a target to archive logs.",
+                          "externalDocs": {
+                            "description": "Find out more about archives",
+                            "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "description": "This data structure is used to retrieve a storage target for logs.",
+                  "externalDocs": {
+                    "description": "Find out more about archives",
+                    "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get target",
+        "tags": [
+          "Target Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "S3TargetService_SetTarget",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure is used to set a storage target for logs.",
+                "properties": {
+                  "isActive": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "s3": {
+                    "title": "S3 Target Spec",
+                    "required": [
+                      "bucket"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "bucket": {
+                        "type": "string",
+                        "example": "bucket"
+                      },
+                      "region": {
+                        "type": "string",
+                        "example": "us-west-2"
+                      }
+                    },
+                    "description": "This data structure represents an S3 target.",
+                    "externalDocs": {
+                      "description": "Find out more about archives",
+                      "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                    }
+                  }
+                },
+                "required": [
+                  "isActive",
+                  "targetSpec"
+                ],
+                "title": "Set Target Response",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Set Target Response",
+                  "required": [
+                    "target"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "target": {
+                      "oneOf": [
+                        {
+                          "title": "Target",
+                          "required": [
+                            "targetSpecarchiveSpec"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "archiveSpec": {
+                              "title": "Archive Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "archivingFormatId": {
+                                  "type": "string",
+                                  "example": "json_id"
+                                },
+                                "enableTags": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "isActive": {
+                                  "type": "boolean",
+                                  "example": true
+                                }
+                              },
+                              "description": "This data structure contains metadata about the archive.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            },
+                            "s3": {
+                              "title": "S3 Target Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "bucket": {
+                                  "type": "string",
+                                  "example": "bucket"
+                                },
+                                "region": {
+                                  "type": "string",
+                                  "example": "us-west-2"
+                                }
+                              },
+                              "description": "This data structure represents an S3 target.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a target to archive logs.",
+                          "externalDocs": {
+                            "description": "Find out more about archives",
+                            "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                          }
+                        },
+                        {
+                          "title": "Target",
+                          "required": [
+                            "targetSpecarchiveSpec"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "archiveSpec": {
+                              "title": "Archive Spec",
+                              "required": [
+                                "bucket"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "archivingFormatId": {
+                                  "type": "string",
+                                  "example": "json_id"
+                                },
+                                "enableTags": {
+                                  "type": "boolean",
+                                  "example": true
+                                },
+                                "isActive": {
+                                  "type": "boolean",
+                                  "example": true
+                                }
+                              },
+                              "description": "This data structure contains metadata about the archive.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            },
+                            "ibmCos": {
+                              "title": "IBM COS Target Spec",
+                              "required": [
+                                "bucketCrn",
+                                "endpoint"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "bucketCrn": {
+                                  "type": "string",
+                                  "example": "bucket_crn"
+                                },
+                                "bucketType": {
+                                  "enum": [
+                                    "IBM_BUCKET_TYPE_UNSPECIFIED",
+                                    "IBM_BUCKET_TYPE_EXTERNAL",
+                                    "IBM_BUCKET_TYPE_INTERNAL"
+                                  ],
+                                  "type": "string"
+                                },
+                                "endpoint": {
+                                  "type": "string",
+                                  "example": "http://some.endpoint.com:8081"
+                                },
+                                "serviceCrn": {
+                                  "type": "string",
+                                  "example": "service_crn"
+                                }
+                              },
+                              "description": "This data structure represents an IBM COS target.",
+                              "externalDocs": {
+                                "description": "Find out more about archives",
+                                "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                              }
+                            }
+                          },
+                          "description": "This data structure represents a target to archive logs.",
+                          "externalDocs": {
+                            "description": "Find out more about archives",
+                            "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "description": "This data structure is obtained after setting a storage target for logs.",
+                  "externalDocs": {
+                    "description": "Find out more about archives",
+                    "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Set target",
+        "tags": [
+          "Target Service"
+        ]
+      }
+    },
+    "/v2/target:validate": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TargetService_ValidateTarget",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "description": "This data structure is used to validate a storage target for logs.",
+                    "properties": {
+                      "isActive": {
+                        "type": "boolean"
+                      },
+                      "s3": {
+                        "title": "S3 Target Spec",
+                        "required": [
+                          "bucket"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "bucket": {
+                            "type": "string",
+                            "example": "bucket"
+                          },
+                          "region": {
+                            "type": "string",
+                            "example": "us-west-2"
+                          }
+                        },
+                        "description": "This data structure represents an S3 target.",
+                        "externalDocs": {
+                          "description": "Find out more about archives",
+                          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                        }
+                      }
+                    },
+                    "required": [
+                      "isActive",
+                      "targetSpec"
+                    ],
+                    "title": "Set Target Response",
+                    "type": "object"
+                  },
+                  {
+                    "description": "This data structure is used to validate a storage target for logs.",
+                    "properties": {
+                      "ibmCos": {
+                        "title": "IBM COS Target Spec",
+                        "required": [
+                          "bucketCrn",
+                          "endpoint"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "bucketCrn": {
+                            "type": "string",
+                            "example": "bucket_crn"
+                          },
+                          "bucketType": {
+                            "enum": [
+                              "IBM_BUCKET_TYPE_UNSPECIFIED",
+                              "IBM_BUCKET_TYPE_EXTERNAL",
+                              "IBM_BUCKET_TYPE_INTERNAL"
+                            ],
+                            "type": "string"
+                          },
+                          "endpoint": {
+                            "type": "string",
+                            "example": "http://some.endpoint.com:8081"
+                          },
+                          "serviceCrn": {
+                            "type": "string",
+                            "example": "service_crn"
+                          }
+                        },
+                        "description": "This data structure represents an IBM COS target.",
+                        "externalDocs": {
+                          "description": "Find out more about archives",
+                          "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                        }
+                      },
+                      "isActive": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "isActive",
+                      "targetSpec"
+                    ],
+                    "title": "Set Target Response",
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Validate Target Response",
+                  "required": [
+                    "isValid"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "isValid": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  },
+                  "description": "This data structure is obtained after validating a storage target for logs.",
+                  "externalDocs": {
+                    "description": "Find out more about archives",
+                    "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Validate target",
+        "tags": [
+          "Target Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Target Service",
+      "description": "View and manage your storage targets for logs.",
+      "externalDocs": {
+        "description": "Find out more about archives",
+        "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      }
+    },
+    {
+      "name": "Target Service",
+      "description": "View and manage your storage targets for logs.",
+      "externalDocs": {
+        "description": "Find out more about archives",
+        "url": "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      }
+    }
+  ]
+}

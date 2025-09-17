@@ -1,0 +1,1172 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/views": {
+      "get": {
+        "description": "Lists all company public views",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_ListViews",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "views": {
+                      "type": "array",
+                      "items": {
+                        "title": "View",
+                        "required": [
+                          "name",
+                          "id",
+                          "timeSelection"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "filters": {
+                            "type": "object",
+                            "properties": {
+                              "filters": {
+                                "type": "array",
+                                "items": {
+                                  "title": "ViewFolder",
+                                  "required": [
+                                    "name",
+                                    "selectedValues"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "name": {
+                                      "minLength": 1,
+                                      "type": "string",
+                                      "description": "Filter name",
+                                      "example": "applicationName"
+                                    },
+                                    "selectedValues": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "key": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "boolean"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "description": "View folder.",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "folderId": {
+                            "maxLength": 36,
+                            "minLength": 36,
+                            "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                            "type": "string",
+                            "description": "Unique identifier for folders",
+                            "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                          },
+                          "id": {
+                            "type": "integer",
+                            "description": "id",
+                            "format": "int32",
+                            "example": 52
+                          },
+                          "isCompactMode": {
+                            "type": "boolean"
+                          },
+                          "name": {
+                            "minLength": 1,
+                            "type": "string",
+                            "description": "View name",
+                            "example": "Logs view"
+                          },
+                          "searchQuery": {
+                            "title": "SearchQuery",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "minLength": 1,
+                                "type": "string"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "timeSelection": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "quickSelection": {
+                                    "required": [
+                                      "seconds"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "caption": {
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "description": "Folder name",
+                                        "example": "Last Hour",
+                                        "deprecated": true
+                                      },
+                                      "seconds": {
+                                        "type": "integer",
+                                        "description": "Folder name",
+                                        "format": "int64",
+                                        "example": 3600
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "customSelection": {
+                                    "required": [
+                                      "fromTime",
+                                      "toTime"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "fromTime": {
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-01-25T11:31:43.152Z"
+                                      },
+                                      "toTime": {
+                                        "minLength": 1,
+                                        "type": "string",
+                                        "format": "date-time",
+                                        "example": "2024-01-25T11:35:43.152Z"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "viewType": {
+                            "enum": [
+                              "VIEW_TYPE_UNSPECIFIED",
+                              "VIEW_TYPE_LOGS",
+                              "VIEW_TYPE_TEMPLATES",
+                              "VIEW_TYPE_ARCHIVE_LOGS",
+                              "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Response for views.",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "List views service",
+        "tags": [
+          "Views service"
+        ]
+      },
+      "post": {
+        "description": "Creates a new view",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_CreateView",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "View folder.",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "filters": {
+                        "type": "array",
+                        "items": {
+                          "title": "ViewFolder",
+                          "required": [
+                            "name",
+                            "selectedValues"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "minLength": 1,
+                              "type": "string",
+                              "description": "Filter name",
+                              "example": "applicationName"
+                            },
+                            "selectedValues": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "boolean"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "description": "View folder.",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "folderId": {
+                    "description": "Unique identifier for folders",
+                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "type": "string"
+                  },
+                  "name": {
+                    "description": "View name",
+                    "example": "Logs view",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "searchQuery": {
+                    "title": "SearchQuery",
+                    "required": [
+                      "query"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  },
+                  "timeSelection": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "quickSelection": {
+                            "required": [
+                              "seconds"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "caption": {
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Folder name",
+                                "example": "Last Hour",
+                                "deprecated": true
+                              },
+                              "seconds": {
+                                "type": "integer",
+                                "description": "Folder name",
+                                "format": "int64",
+                                "example": 3600
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "customSelection": {
+                            "required": [
+                              "fromTime",
+                              "toTime"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "fromTime": {
+                                "minLength": 1,
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-01-25T11:31:43.152Z"
+                              },
+                              "toTime": {
+                                "minLength": 1,
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-01-25T11:35:43.152Z"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "viewType": {
+                    "enum": [
+                      "VIEW_TYPE_UNSPECIFIED",
+                      "VIEW_TYPE_LOGS",
+                      "VIEW_TYPE_TEMPLATES",
+                      "VIEW_TYPE_ARCHIVE_LOGS",
+                      "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "timeSelection"
+                ],
+                "title": "ViewFolder",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "View",
+                  "required": [
+                    "name",
+                    "id",
+                    "timeSelection"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "filters": {
+                      "type": "object",
+                      "properties": {
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "title": "ViewFolder",
+                            "required": [
+                              "name",
+                              "selectedValues"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Filter name",
+                                "example": "applicationName"
+                              },
+                              "selectedValues": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "description": "View folder.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "folderId": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "id",
+                      "format": "int32",
+                      "example": 52
+                    },
+                    "isCompactMode": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "View name",
+                      "example": "Logs view"
+                    },
+                    "searchQuery": {
+                      "title": "SearchQuery",
+                      "required": [
+                        "query"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    "timeSelection": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "quickSelection": {
+                              "required": [
+                                "seconds"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "caption": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "description": "Folder name",
+                                  "example": "Last Hour",
+                                  "deprecated": true
+                                },
+                                "seconds": {
+                                  "type": "integer",
+                                  "description": "Folder name",
+                                  "format": "int64",
+                                  "example": 3600
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "customSelection": {
+                              "required": [
+                                "fromTime",
+                                "toTime"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "fromTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:31:43.152Z"
+                                },
+                                "toTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:35:43.152Z"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "viewType": {
+                      "enum": [
+                        "VIEW_TYPE_UNSPECIFIED",
+                        "VIEW_TYPE_LOGS",
+                        "VIEW_TYPE_TEMPLATES",
+                        "VIEW_TYPE_ARCHIVE_LOGS",
+                        "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for views.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Create a view service",
+        "tags": [
+          "Views service"
+        ]
+      }
+    },
+    "/v1/views/{id}": {
+      "get": {
+        "description": "Gets a view by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_GetView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "id",
+              "example": 52,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "View",
+                  "required": [
+                    "name",
+                    "id",
+                    "timeSelection"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "filters": {
+                      "type": "object",
+                      "properties": {
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "title": "ViewFolder",
+                            "required": [
+                              "name",
+                              "selectedValues"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Filter name",
+                                "example": "applicationName"
+                              },
+                              "selectedValues": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "description": "View folder.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "folderId": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "id",
+                      "format": "int32",
+                      "example": 52
+                    },
+                    "isCompactMode": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "View name",
+                      "example": "Logs view"
+                    },
+                    "searchQuery": {
+                      "title": "SearchQuery",
+                      "required": [
+                        "query"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    "timeSelection": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "quickSelection": {
+                              "required": [
+                                "seconds"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "caption": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "description": "Folder name",
+                                  "example": "Last Hour",
+                                  "deprecated": true
+                                },
+                                "seconds": {
+                                  "type": "integer",
+                                  "description": "Folder name",
+                                  "format": "int64",
+                                  "example": 3600
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "customSelection": {
+                              "required": [
+                                "fromTime",
+                                "toTime"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "fromTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:31:43.152Z"
+                                },
+                                "toTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:35:43.152Z"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "viewType": {
+                      "enum": [
+                        "VIEW_TYPE_UNSPECIFIED",
+                        "VIEW_TYPE_LOGS",
+                        "VIEW_TYPE_TEMPLATES",
+                        "VIEW_TYPE_ARCHIVE_LOGS",
+                        "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for views.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get view service",
+        "tags": [
+          "Views service"
+        ]
+      },
+      "delete": {
+        "description": "Deletes a view by ID",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_DeleteView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "description": "id",
+              "example": 52,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Delete view service",
+        "tags": [
+          "Views service"
+        ]
+      }
+    },
+    "/v1/views/{view.id}": {
+      "put": {
+        "description": "Replaces an existing view",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ViewsService_ReplaceView",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "view.id",
+            "required": true,
+            "schema": {
+              "description": "id",
+              "example": 52,
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Response for views.",
+                "properties": {
+                  "filters": {
+                    "type": "object",
+                    "properties": {
+                      "filters": {
+                        "type": "array",
+                        "items": {
+                          "title": "ViewFolder",
+                          "required": [
+                            "name",
+                            "selectedValues"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "name": {
+                              "minLength": 1,
+                              "type": "string",
+                              "description": "Filter name",
+                              "example": "applicationName"
+                            },
+                            "selectedValues": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "boolean"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "description": "View folder.",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "folderId": {
+                    "description": "Unique identifier for folders",
+                    "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f",
+                    "maxLength": 36,
+                    "minLength": 36,
+                    "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                    "type": "string"
+                  },
+                  "isCompactMode": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "description": "View name",
+                    "example": "Logs view",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "searchQuery": {
+                    "title": "SearchQuery",
+                    "required": [
+                      "query"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "query": {
+                        "minLength": 1,
+                        "type": "string"
+                      }
+                    },
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  },
+                  "timeSelection": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "quickSelection": {
+                            "required": [
+                              "seconds"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "caption": {
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Folder name",
+                                "example": "Last Hour",
+                                "deprecated": true
+                              },
+                              "seconds": {
+                                "type": "integer",
+                                "description": "Folder name",
+                                "format": "int64",
+                                "example": 3600
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "customSelection": {
+                            "required": [
+                              "fromTime",
+                              "toTime"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "fromTime": {
+                                "minLength": 1,
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-01-25T11:31:43.152Z"
+                              },
+                              "toTime": {
+                                "minLength": 1,
+                                "type": "string",
+                                "format": "date-time",
+                                "example": "2024-01-25T11:35:43.152Z"
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "viewType": {
+                    "enum": [
+                      "VIEW_TYPE_UNSPECIFIED",
+                      "VIEW_TYPE_LOGS",
+                      "VIEW_TYPE_TEMPLATES",
+                      "VIEW_TYPE_ARCHIVE_LOGS",
+                      "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "id",
+                  "timeSelection"
+                ],
+                "title": "View",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "View",
+                  "required": [
+                    "name",
+                    "id",
+                    "timeSelection"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "filters": {
+                      "type": "object",
+                      "properties": {
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "title": "ViewFolder",
+                            "required": [
+                              "name",
+                              "selectedValues"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "name": {
+                                "minLength": 1,
+                                "type": "string",
+                                "description": "Filter name",
+                                "example": "applicationName"
+                              },
+                              "selectedValues": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "description": "View folder.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "folderId": {
+                      "maxLength": 36,
+                      "minLength": 36,
+                      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+                      "type": "string",
+                      "description": "Unique identifier for folders",
+                      "example": "3dc02998-0b50-4ea8-b68a-4779d716fa1f"
+                    },
+                    "id": {
+                      "type": "integer",
+                      "description": "id",
+                      "format": "int32",
+                      "example": 52
+                    },
+                    "isCompactMode": {
+                      "type": "boolean"
+                    },
+                    "name": {
+                      "minLength": 1,
+                      "type": "string",
+                      "description": "View name",
+                      "example": "Logs view"
+                    },
+                    "searchQuery": {
+                      "title": "SearchQuery",
+                      "required": [
+                        "query"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "query": {
+                          "minLength": 1,
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    "timeSelection": {
+                      "oneOf": [
+                        {
+                          "type": "object",
+                          "properties": {
+                            "quickSelection": {
+                              "required": [
+                                "seconds"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "caption": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "description": "Folder name",
+                                  "example": "Last Hour",
+                                  "deprecated": true
+                                },
+                                "seconds": {
+                                  "type": "integer",
+                                  "description": "Folder name",
+                                  "format": "int64",
+                                  "example": 3600
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        },
+                        {
+                          "type": "object",
+                          "properties": {
+                            "customSelection": {
+                              "required": [
+                                "fromTime",
+                                "toTime"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "fromTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:31:43.152Z"
+                                },
+                                "toTime": {
+                                  "minLength": 1,
+                                  "type": "string",
+                                  "format": "date-time",
+                                  "example": "2024-01-25T11:35:43.152Z"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "viewType": {
+                      "enum": [
+                        "VIEW_TYPE_UNSPECIFIED",
+                        "VIEW_TYPE_LOGS",
+                        "VIEW_TYPE_TEMPLATES",
+                        "VIEW_TYPE_ARCHIVE_LOGS",
+                        "VIEW_TYPE_ARCHIVE_TEMPLATES"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "description": "Response for views.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Replace a view service",
+        "tags": [
+          "Views service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Views service",
+      "description": "Create and manage views.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

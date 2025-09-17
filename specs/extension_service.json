@@ -1,0 +1,1029 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/extensions/all": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionService_GetAllExtensions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to list all extensions",
+                "properties": {
+                  "filter": {
+                    "title": "A filter structure for a request to get all extensions",
+                    "type": "object",
+                    "properties": {
+                      "integrations": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "description": "Filter by integration ids",
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  },
+                  "includeHiddenExtensions": {
+                    "type": "boolean"
+                  }
+                },
+                "title": "Get all extensions request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get all extensions response",
+                  "type": "object",
+                  "properties": {
+                    "extensions": {
+                      "type": "array",
+                      "items": {
+                        "title": "Extension",
+                        "required": [
+                          "id",
+                          "name",
+                          "image"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "darkModeImage": {
+                            "type": "string"
+                          },
+                          "deprecation": {
+                            "title": "Deprecation",
+                            "required": [
+                              "reason"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "reason": {
+                                "type": "string"
+                              },
+                              "replacementExtensions": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "image": {
+                            "type": "string"
+                          },
+                          "integrations": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "isHidden": {
+                            "type": "boolean"
+                          },
+                          "keywords": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "revisions": {
+                            "type": "array",
+                            "items": {
+                              "title": "Revision",
+                              "required": [
+                                "version",
+                                "summary"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "description": {
+                                  "type": "string"
+                                },
+                                "excerpt": {
+                                  "type": "string"
+                                },
+                                "integrationDetails": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Integration detail",
+                                    "required": [
+                                      "name",
+                                      "link"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "link": {
+                                        "type": "string"
+                                      },
+                                      "name": {
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "summary": {
+                                  "title": "Revision summary",
+                                  "required": [
+                                    "itemCounts"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "isNew": {
+                                      "type": "boolean"
+                                    },
+                                    "itemCounts": {
+                                      "title": "Item counts",
+                                      "type": "object",
+                                      "properties": {
+                                        "actions": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "alerts": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "customDashboards": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "enrichments": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "eventsToMetrics": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "grafanaDashboards": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "kibanaDashboards": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "metricsRuleGroup": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "parsingRules": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        },
+                                        "savedViews": {
+                                          "type": "integer",
+                                          "format": "int64"
+                                        }
+                                      },
+                                      "externalDocs": {
+                                        "url": ""
+                                      }
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "version": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response to list all extensions",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get all extensions",
+        "tags": [
+          "Extension service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:ReadConfig"
+        ]
+      }
+    },
+    "/v1/extensions/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionService_GetExtension",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Extension metadata",
+                  "required": [
+                    "id",
+                    "name",
+                    "image"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "changelog": {
+                      "type": "array",
+                      "items": {
+                        "title": "Changelog entry",
+                        "required": [
+                          "version",
+                          "descriptionMd"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "descriptionMd": {
+                            "type": "string"
+                          },
+                          "version": {
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    },
+                    "darkModeImage": {
+                      "type": "string"
+                    },
+                    "deprecation": {
+                      "title": "Deprecation",
+                      "required": [
+                        "reason"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "reason": {
+                          "type": "string"
+                        },
+                        "replacementExtensions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "image": {
+                      "type": "string"
+                    },
+                    "integrations": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "isHidden": {
+                      "type": "boolean"
+                    },
+                    "keywords": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "name": {
+                      "type": "string"
+                    },
+                    "permissionDeniedRevisions": {
+                      "type": "array",
+                      "items": {
+                        "title": "Extension revision",
+                        "required": [
+                          "version"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "binaries": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension binary",
+                              "required": [
+                                "type",
+                                "data"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "KIBANA_INDEX_PATTERN"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "excerpt": {
+                            "type": "string"
+                          },
+                          "integrationDetails": {
+                            "type": "array",
+                            "items": {
+                              "title": "Integration detail",
+                              "required": [
+                                "name",
+                                "link"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "link": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "isTesting": {
+                            "type": "boolean"
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension item",
+                              "required": [
+                                "id",
+                                "name",
+                                "targetDomain",
+                                "data",
+                                "permissionResource"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "binaries": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extension item binary",
+                                    "required": [
+                                      "type",
+                                      "data",
+                                      "fileName"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "string"
+                                      },
+                                      "fileName": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "PREVIEW_IMAGE",
+                                          "KIBANA_DASHBOARD_DEFINITION",
+                                          "GRAFANA_DASHBOARD_DEFINITION",
+                                          "ENRICHMENT_CSV",
+                                          "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "data": {
+                                  "type": "object"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "extendedInternalId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                },
+                                "isMandatory": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "permissionResource": {
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "ACTION",
+                                    "ALERT",
+                                    "CUSTOM_ENRICHMENT",
+                                    "GEO_ENRICHMENT",
+                                    "SECURITY_ENRICHMENT",
+                                    "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "SPAN_EVENTS_TO_METRICS",
+                                    "LOGS_EVENTS_TO_METRICS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "stableId": {
+                                  "type": "string"
+                                },
+                                "targetDomain": {
+                                  "enum": [
+                                    "ACTION",
+                                    "ALERT",
+                                    "ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "EVENTS_TO_METRICS",
+                                    "ALERT_V3"
+                                  ],
+                                  "type": "string"
+                                },
+                                "uniqueId": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "permissionDeniedItems": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension item",
+                              "required": [
+                                "id",
+                                "name",
+                                "targetDomain",
+                                "data",
+                                "permissionResource"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "binaries": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extension item binary",
+                                    "required": [
+                                      "type",
+                                      "data",
+                                      "fileName"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "string"
+                                      },
+                                      "fileName": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "PREVIEW_IMAGE",
+                                          "KIBANA_DASHBOARD_DEFINITION",
+                                          "GRAFANA_DASHBOARD_DEFINITION",
+                                          "ENRICHMENT_CSV",
+                                          "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "data": {
+                                  "type": "object"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "extendedInternalId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                },
+                                "isMandatory": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "permissionResource": {
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "ACTION",
+                                    "ALERT",
+                                    "CUSTOM_ENRICHMENT",
+                                    "GEO_ENRICHMENT",
+                                    "SECURITY_ENRICHMENT",
+                                    "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "SPAN_EVENTS_TO_METRICS",
+                                    "LOGS_EVENTS_TO_METRICS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "stableId": {
+                                  "type": "string"
+                                },
+                                "targetDomain": {
+                                  "enum": [
+                                    "ACTION",
+                                    "ALERT",
+                                    "ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "EVENTS_TO_METRICS",
+                                    "ALERT_V3"
+                                  ],
+                                  "type": "string"
+                                },
+                                "uniqueId": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "version": {
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    },
+                    "revisions": {
+                      "type": "array",
+                      "items": {
+                        "title": "Extension revision",
+                        "required": [
+                          "version"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "binaries": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension binary",
+                              "required": [
+                                "type",
+                                "data"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "data": {
+                                  "type": "string"
+                                },
+                                "type": {
+                                  "enum": [
+                                    "KIBANA_INDEX_PATTERN"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "excerpt": {
+                            "type": "string"
+                          },
+                          "integrationDetails": {
+                            "type": "array",
+                            "items": {
+                              "title": "Integration detail",
+                              "required": [
+                                "name",
+                                "link"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "link": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "isTesting": {
+                            "type": "boolean"
+                          },
+                          "items": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension item",
+                              "required": [
+                                "id",
+                                "name",
+                                "targetDomain",
+                                "data",
+                                "permissionResource"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "binaries": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extension item binary",
+                                    "required": [
+                                      "type",
+                                      "data",
+                                      "fileName"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "string"
+                                      },
+                                      "fileName": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "PREVIEW_IMAGE",
+                                          "KIBANA_DASHBOARD_DEFINITION",
+                                          "GRAFANA_DASHBOARD_DEFINITION",
+                                          "ENRICHMENT_CSV",
+                                          "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "data": {
+                                  "type": "object"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "extendedInternalId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                },
+                                "isMandatory": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "permissionResource": {
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "ACTION",
+                                    "ALERT",
+                                    "CUSTOM_ENRICHMENT",
+                                    "GEO_ENRICHMENT",
+                                    "SECURITY_ENRICHMENT",
+                                    "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "SPAN_EVENTS_TO_METRICS",
+                                    "LOGS_EVENTS_TO_METRICS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "stableId": {
+                                  "type": "string"
+                                },
+                                "targetDomain": {
+                                  "enum": [
+                                    "ACTION",
+                                    "ALERT",
+                                    "ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "EVENTS_TO_METRICS",
+                                    "ALERT_V3"
+                                  ],
+                                  "type": "string"
+                                },
+                                "uniqueId": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "permissionDeniedItems": {
+                            "type": "array",
+                            "items": {
+                              "title": "Extension item",
+                              "required": [
+                                "id",
+                                "name",
+                                "targetDomain",
+                                "data",
+                                "permissionResource"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "binaries": {
+                                  "type": "array",
+                                  "items": {
+                                    "title": "Extension item binary",
+                                    "required": [
+                                      "type",
+                                      "data",
+                                      "fileName"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "data": {
+                                        "type": "string"
+                                      },
+                                      "fileName": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "enum": [
+                                          "PREVIEW_IMAGE",
+                                          "KIBANA_DASHBOARD_DEFINITION",
+                                          "GRAFANA_DASHBOARD_DEFINITION",
+                                          "ENRICHMENT_CSV",
+                                          "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "data": {
+                                  "type": "object"
+                                },
+                                "description": {
+                                  "type": "string"
+                                },
+                                "extendedInternalId": {
+                                  "type": "string"
+                                },
+                                "id": {
+                                  "type": "string"
+                                },
+                                "isMandatory": {
+                                  "type": "boolean"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "permissionResource": {
+                                  "enum": [
+                                    "UNKNOWN",
+                                    "ACTION",
+                                    "ALERT",
+                                    "CUSTOM_ENRICHMENT",
+                                    "GEO_ENRICHMENT",
+                                    "SECURITY_ENRICHMENT",
+                                    "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "SPAN_EVENTS_TO_METRICS",
+                                    "LOGS_EVENTS_TO_METRICS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "stableId": {
+                                  "type": "string"
+                                },
+                                "targetDomain": {
+                                  "enum": [
+                                    "ACTION",
+                                    "ALERT",
+                                    "ENRICHMENT",
+                                    "GRAFANA_DASHBOARD",
+                                    "KIBANA_DASHBOARD",
+                                    "PARSING_RULE",
+                                    "SAVED_VIEW",
+                                    "CX_CUSTOM_DASHBOARD",
+                                    "METRICS_RULE_GROUP",
+                                    "EVENTS_TO_METRICS",
+                                    "ALERT_V3"
+                                  ],
+                                  "type": "string"
+                                },
+                                "uniqueId": {
+                                  "type": "string"
+                                }
+                              },
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "version": {
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get extension by ID",
+        "tags": [
+          "Extension service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:ReadConfig"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Extension service",
+      "description": "A service that enables querying for extension information.",
+      "externalDocs": {
+        "description": "Learn more about extensions in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/extensions/"
+      }
+    }
+  ]
+}

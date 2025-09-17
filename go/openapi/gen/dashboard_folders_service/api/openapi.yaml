@@ -1,0 +1,265 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: Manage your dashboard folders.
+  externalDocs:
+    url: ""
+  name: Dashboard folders service
+paths:
+  /dashboards/dashboards/v1/folders:
+    get:
+      description: List all dashboard folders accessible.
+      externalDocs:
+        url: ""
+      operationId: DashboardFoldersService_ListDashboardFolders
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/List_dashboard_folders_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List dashboard folders
+      tags:
+      - Dashboard folders service
+      x-coralogixPermissions:
+      - team-dashboards:Read
+    post:
+      externalDocs:
+        url: ""
+      operationId: DashboardFoldersService_CreateDashboardFolder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_dashboard_folder_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_dashboard_folder_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create a dashboard folder
+      tags:
+      - Dashboard folders service
+      x-coralogixPermissions:
+      - team-dashboards:Update
+    put:
+      externalDocs:
+        url: ""
+      operationId: DashboardFoldersService_ReplaceDashboardFolder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Replace_dashboard_folder_request_data_structure"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  description: Find out more Dashboards in our documentation.
+                  url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+                title: Replace dashboard folder response data structure
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Replace a dashboard folder
+      tags:
+      - Dashboard folders service
+      x-coralogixPermissions:
+      - team-dashboards:Update
+  /dashboards/dashboards/v1/folders/{folder_id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: DashboardFoldersService_DeleteDashboardFolder
+      parameters:
+      - explode: false
+        in: path
+        name: folder_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                externalDocs:
+                  description: Find out more Dashboards in our documentation.
+                  url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+                title: Delete dashboard folder response data structure
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete a dashboard folder
+      tags:
+      - Dashboard folders service
+      x-coralogixPermissions:
+      - team-dashboards:Update
+    get:
+      description: Returns a dashboard folder data.
+      externalDocs:
+        url: ""
+      operationId: DashboardFoldersService_GetDashboardFolder
+      parameters:
+      - explode: false
+        in: path
+        name: folder_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_dashboard_folder_response_data_structure"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get a dashboard folder
+      tags:
+      - Dashboard folders service
+      x-coralogixPermissions:
+      - team-dashboards:Read
+components:
+  schemas:
+    Create_dashboard_folder_request_data_structure:
+      properties:
+        folder:
+          $ref: "#/components/schemas/List_dashboard_folders_response_data_structure_folder_inner"
+        requestId:
+          type: string
+      title: Create dashboard folder request data structure
+      type: object
+    Create_dashboard_folder_response_data_structure:
+      example:
+        folderId: folderId
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        folderId:
+          type: string
+      title: Create dashboard folder response data structure
+      type: object
+    Get_dashboard_folder_response_data_structure:
+      example:
+        folder:
+          name: name
+          id: id
+          parentId: parentId
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        folder:
+          $ref: "#/components/schemas/List_dashboard_folders_response_data_structure_folder_inner"
+      title: Get dashboard folder response data structure
+      type: object
+    Replace_dashboard_folder_request_data_structure:
+      properties:
+        folder:
+          $ref: "#/components/schemas/List_dashboard_folders_response_data_structure_folder_inner"
+        requestId:
+          type: string
+      title: Replace dashboard folder request data structure
+      type: object
+    List_dashboard_folders_response_data_structure_folder_inner:
+      example:
+        name: name
+        id: id
+        parentId: parentId
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        parentId:
+          type: string
+      type: object
+    List_dashboard_folders_response_data_structure:
+      example:
+        folder:
+        - name: name
+          id: id
+          parentId: parentId
+        - name: name
+          id: id
+          parentId: parentId
+      externalDocs:
+        description: Find out more Dashboards in our documentation.
+        url: https://coralogix.com/docs/user-guides/custom-dashboards/getting-started/
+      properties:
+        folder:
+          items:
+            $ref: "#/components/schemas/List_dashboard_folders_response_data_structure_folder_inner"
+          type: array
+      title: List dashboard folders response data structure
+      type: object

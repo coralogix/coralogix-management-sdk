@@ -1,0 +1,10 @@
+.gitignore
+.openapi-generator-ignore
+.travis.yml
+README.md
+api/openapi.yaml
+client.go
+configuration.go
+git_push.sh
+response.go
+utils.go

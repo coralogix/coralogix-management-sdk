@@ -1,0 +1,17 @@
+.gitignore
+.openapi-generator-ignore
+.travis.yml
+README.md
+api/openapi.yaml
+api_dashboard_folders_service.go
+client.go
+configuration.go
+git_push.sh
+model_create_dashboard_folder_request_data_structure.go
+model_create_dashboard_folder_response_data_structure.go
+model_get_dashboard_folder_response_data_structure.go
+model_list_dashboard_folders_response_data_structure.go
+model_list_dashboard_folders_response_data_structure_folder_inner.go
+model_replace_dashboard_folder_request_data_structure.go
+response.go
+utils.go

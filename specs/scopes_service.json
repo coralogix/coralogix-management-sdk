@@ -1,0 +1,633 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/scopes": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ScopesService_GetTeamScopesByIds",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Scopes Response",
+                  "required": [
+                    "scopes"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "scopes": {
+                      "type": "array",
+                      "items": {
+                        "title": "Scope",
+                        "type": "object",
+                        "properties": {
+                          "defaultExpression": {
+                            "type": "string",
+                            "example": "expression"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "scope_description"
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "example": "scope_name"
+                          },
+                          "filters": {
+                            "type": "array",
+                            "items": {
+                              "title": "Filter",
+                              "type": "object",
+                              "properties": {
+                                "entityType": {
+                                  "enum": [
+                                    "ENTITY_TYPE_UNSPECIFIED",
+                                    "ENTITY_TYPE_LOGS",
+                                    "ENTITY_TYPE_SPANS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "expression": {
+                                  "type": "string",
+                                  "example": "expression"
+                                }
+                              },
+                              "description": "This data structure represents a filter",
+                              "externalDocs": {
+                                "description": "Find out more about scopes",
+                                "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                              }
+                            }
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "scope_id"
+                          },
+                          "teamId": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1234
+                          }
+                        },
+                        "description": "This data structure represents a scope",
+                        "externalDocs": {
+                          "description": "Find out more about scopes",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to get scopes",
+                  "externalDocs": {
+                    "description": "Find out more about scopes",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Scopes By Ids",
+        "tags": [
+          "Scopes Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ScopesService_UpdateScope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents a request to update a scope",
+                "properties": {
+                  "defaultExpression": {
+                    "example": "expression",
+                    "type": "string"
+                  },
+                  "description": {
+                    "example": "scope_description",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "example": "scope_name",
+                    "type": "string"
+                  },
+                  "filters": {
+                    "items": {
+                      "title": "Filter",
+                      "type": "object",
+                      "properties": {
+                        "entityType": {
+                          "enum": [
+                            "ENTITY_TYPE_UNSPECIFIED",
+                            "ENTITY_TYPE_LOGS",
+                            "ENTITY_TYPE_SPANS"
+                          ],
+                          "type": "string"
+                        },
+                        "expression": {
+                          "type": "string",
+                          "example": "expression"
+                        }
+                      },
+                      "description": "This data structure represents a filter",
+                      "externalDocs": {
+                        "description": "Find out more about scopes",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                      }
+                    },
+                    "type": "array"
+                  },
+                  "id": {
+                    "example": "scope_id",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "displayName",
+                  "filters",
+                  "defaultExpression"
+                ],
+                "title": "Update Scope Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Update Scope Response",
+                  "required": [
+                    "scope"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "scope": {
+                      "title": "Scope",
+                      "type": "object",
+                      "properties": {
+                        "defaultExpression": {
+                          "type": "string",
+                          "example": "expression"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "scope_description"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "example": "scope_name"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "title": "Filter",
+                            "type": "object",
+                            "properties": {
+                              "entityType": {
+                                "enum": [
+                                  "ENTITY_TYPE_UNSPECIFIED",
+                                  "ENTITY_TYPE_LOGS",
+                                  "ENTITY_TYPE_SPANS"
+                                ],
+                                "type": "string"
+                              },
+                              "expression": {
+                                "type": "string",
+                                "example": "expression"
+                              }
+                            },
+                            "description": "This data structure represents a filter",
+                            "externalDocs": {
+                              "description": "Find out more about scopes",
+                              "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                            }
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "example": "scope_id"
+                        },
+                        "teamId": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1234
+                        }
+                      },
+                      "description": "This data structure represents a scope",
+                      "externalDocs": {
+                        "description": "Find out more about scopes",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to update a scope",
+                  "externalDocs": {
+                    "description": "Find out more about scopes",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update Scope",
+        "tags": [
+          "Scopes Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ScopesService_CreateScope",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure represents a request to create a scope",
+                "properties": {
+                  "defaultExpression": {
+                    "example": "expression",
+                    "type": "string"
+                  },
+                  "description": {
+                    "example": "scope_description",
+                    "type": "string"
+                  },
+                  "displayName": {
+                    "example": "scope_name",
+                    "type": "string"
+                  },
+                  "filters": {
+                    "items": {
+                      "title": "Filter",
+                      "type": "object",
+                      "properties": {
+                        "entityType": {
+                          "enum": [
+                            "ENTITY_TYPE_UNSPECIFIED",
+                            "ENTITY_TYPE_LOGS",
+                            "ENTITY_TYPE_SPANS"
+                          ],
+                          "type": "string"
+                        },
+                        "expression": {
+                          "type": "string",
+                          "example": "expression"
+                        }
+                      },
+                      "description": "This data structure represents a filter",
+                      "externalDocs": {
+                        "description": "Find out more about scopes",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "displayName",
+                  "filters"
+                ],
+                "title": "Create Scope Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Create Scope Response",
+                  "required": [
+                    "scope"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "scope": {
+                      "title": "Scope",
+                      "type": "object",
+                      "properties": {
+                        "defaultExpression": {
+                          "type": "string",
+                          "example": "expression"
+                        },
+                        "description": {
+                          "type": "string",
+                          "example": "scope_description"
+                        },
+                        "displayName": {
+                          "type": "string",
+                          "example": "scope_name"
+                        },
+                        "filters": {
+                          "type": "array",
+                          "items": {
+                            "title": "Filter",
+                            "type": "object",
+                            "properties": {
+                              "entityType": {
+                                "enum": [
+                                  "ENTITY_TYPE_UNSPECIFIED",
+                                  "ENTITY_TYPE_LOGS",
+                                  "ENTITY_TYPE_SPANS"
+                                ],
+                                "type": "string"
+                              },
+                              "expression": {
+                                "type": "string",
+                                "example": "expression"
+                              }
+                            },
+                            "description": "This data structure represents a filter",
+                            "externalDocs": {
+                              "description": "Find out more about scopes",
+                              "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                            }
+                          }
+                        },
+                        "id": {
+                          "type": "string",
+                          "example": "scope_id"
+                        },
+                        "teamId": {
+                          "type": "integer",
+                          "format": "int32",
+                          "example": 1234
+                        }
+                      },
+                      "description": "This data structure represents a scope",
+                      "externalDocs": {
+                        "description": "Find out more about scopes",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to create a scope",
+                  "externalDocs": {
+                    "description": "Find out more about scopes",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create Scope",
+        "tags": [
+          "Scopes Service"
+        ]
+      }
+    },
+    "/v1/scopes/list": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ScopesService_GetTeamScopes",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Scopes Response",
+                  "required": [
+                    "scopes"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "scopes": {
+                      "type": "array",
+                      "items": {
+                        "title": "Scope",
+                        "type": "object",
+                        "properties": {
+                          "defaultExpression": {
+                            "type": "string",
+                            "example": "expression"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "scope_description"
+                          },
+                          "displayName": {
+                            "type": "string",
+                            "example": "scope_name"
+                          },
+                          "filters": {
+                            "type": "array",
+                            "items": {
+                              "title": "Filter",
+                              "type": "object",
+                              "properties": {
+                                "entityType": {
+                                  "enum": [
+                                    "ENTITY_TYPE_UNSPECIFIED",
+                                    "ENTITY_TYPE_LOGS",
+                                    "ENTITY_TYPE_SPANS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "expression": {
+                                  "type": "string",
+                                  "example": "expression"
+                                }
+                              },
+                              "description": "This data structure represents a filter",
+                              "externalDocs": {
+                                "description": "Find out more about scopes",
+                                "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                              }
+                            }
+                          },
+                          "id": {
+                            "type": "string",
+                            "example": "scope_id"
+                          },
+                          "teamId": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1234
+                          }
+                        },
+                        "description": "This data structure represents a scope",
+                        "externalDocs": {
+                          "description": "Find out more about scopes",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure represents a response to get scopes",
+                  "externalDocs": {
+                    "description": "Find out more about scopes",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/scopes/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Scopes",
+        "tags": [
+          "Scopes Service"
+        ]
+      }
+    },
+    "/v1/scopes/{id}": {
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ScopesService_DeleteScope",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "scope_id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete Scope",
+        "tags": [
+          "Scopes Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Scopes Service",
+      "description": "A service to manage scopes",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

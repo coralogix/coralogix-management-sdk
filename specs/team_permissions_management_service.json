@@ -1,0 +1,1800 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/team-groups/v1": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroups",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetTeamGroupsResponse",
+                  "type": "object",
+                  "properties": {
+                    "groups": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "externalId": {
+                            "type": "string"
+                          },
+                          "groupId": {
+                            "title": "TeamGroupId",
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int64"
+                              }
+                            },
+                            "description": "This data structure represents the information associated with a team group.",
+                            "externalDocs": {
+                              "description": "Find out more about groups",
+                              "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                            }
+                          },
+                          "groupOrigin": {
+                            "enum": [
+                              "GROUP_ORIGIN_UNSPECIFIED",
+                              "GROUP_ORIGIN_BUILT_IN",
+                              "GROUP_ORIGIN_USER_DEFINED"
+                            ],
+                            "type": "string"
+                          },
+                          "groupType": {
+                            "enum": [
+                              "GROUP_TYPE_UNSPECIFIED",
+                              "GROUP_TYPE_OPEN",
+                              "GROUP_TYPE_CLOSED",
+                              "GROUP_TYPE_RESTRICTED"
+                            ],
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "nextGenScopeId": {
+                            "type": "string"
+                          },
+                          "roles": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "description": {
+                                  "type": "string"
+                                },
+                                "name": {
+                                  "type": "string"
+                                },
+                                "roleId": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "format": "int64"
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "scope": {
+                            "type": "object",
+                            "properties": {
+                              "filters": {
+                                "type": "object",
+                                "properties": {
+                                  "applications": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "filterType": {
+                                          "enum": [
+                                            "FILTER_TYPE_UNSPECIFIED",
+                                            "FILTER_TYPE_STARTS_WITH",
+                                            "FILTER_TYPE_ENDS_WITH",
+                                            "FILTER_TYPE_CONTAINS",
+                                            "FILTER_TYPE_EXACT"
+                                          ],
+                                          "type": "string"
+                                        },
+                                        "term": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "subsystems": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "filterType": {
+                                          "enum": [
+                                            "FILTER_TYPE_UNSPECIFIED",
+                                            "FILTER_TYPE_STARTS_WITH",
+                                            "FILTER_TYPE_ENDS_WITH",
+                                            "FILTER_TYPE_CONTAINS",
+                                            "FILTER_TYPE_EXACT"
+                                          ],
+                                          "type": "string"
+                                        },
+                                        "term": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              "id": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              }
+                            }
+                          },
+                          "teamId": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int64"
+                              }
+                            }
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response containing a list of all team groups and their complete details, including members, roles, and scope configurations.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Groups",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_UpdateTeamGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to modify an existing team group's details, including its name, description, roles, users, and scope settings.",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "type": "string"
+                  },
+                  "groupId": {
+                    "title": "TeamGroupId",
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    },
+                    "description": "This data structure represents the information associated with a team group.",
+                    "externalDocs": {
+                      "description": "Find out more about groups",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                    }
+                  },
+                  "groupType": {
+                    "enum": [
+                      "GROUP_TYPE_UNSPECIFIED",
+                      "GROUP_TYPE_OPEN",
+                      "GROUP_TYPE_CLOSED",
+                      "GROUP_TYPE_RESTRICTED"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "nextGenScopeId": {
+                    "type": "string"
+                  },
+                  "roleUpdates": {
+                    "title": "RoleUpdates",
+                    "type": "object",
+                    "properties": {
+                      "roleIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "description": "This data structure represents the information associated with an API key.",
+                    "externalDocs": {
+                      "description": "Find out more about groups",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                    }
+                  },
+                  "scopeFilters": {
+                    "type": "object",
+                    "properties": {
+                      "applications": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "subsystems": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "userUpdates": {
+                    "title": "UserUpdates",
+                    "type": "object",
+                    "properties": {
+                      "userIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "description": "This data structure represents the information associated with an API key.",
+                    "externalDocs": {
+                      "description": "Find out more about groups",
+                      "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                    }
+                  }
+                },
+                "title": "UpdateTeamGroupRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "UpdateTeamGroupResponse",
+                  "type": "object",
+                  "description": "Response confirming the successful update of a team group's configuration.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_CreateTeamGroup",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to create a new team group with specified name, description, roles, users, and optional scope filters. Can be associated with a specific team or the authenticated team.",
+                "properties": {
+                  "description": {
+                    "type": "string"
+                  },
+                  "externalId": {
+                    "type": "string"
+                  },
+                  "groupType": {
+                    "enum": [
+                      "GROUP_TYPE_UNSPECIFIED",
+                      "GROUP_TYPE_OPEN",
+                      "GROUP_TYPE_CLOSED",
+                      "GROUP_TYPE_RESTRICTED"
+                    ],
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "nextGenScopeId": {
+                    "type": "string"
+                  },
+                  "roleIds": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  },
+                  "scopeFilters": {
+                    "type": "object",
+                    "properties": {
+                      "applications": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "subsystems": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "teamId": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  },
+                  "userIds": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "title": "CreateTeamGroupRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "CreateTeamGroupResponse",
+                  "type": "object",
+                  "properties": {
+                    "groupId": {
+                      "title": "TeamGroupId",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      },
+                      "description": "This data structure represents the information associated with a team group.",
+                      "externalDocs": {
+                        "description": "Find out more about groups",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                      }
+                    }
+                  },
+                  "description": "Response containing the unique identifier of the newly created team group.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    },
+    "/aaa/team-groups/v1/users": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_AddUsersToTeamGroups",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Bulk request to assign users to multiple team groups simultaneously, efficiently managing group memberships at scale.",
+                "properties": {
+                  "addUsersToGroup": {
+                    "items": {
+                      "title": "AddUsersToTeamGroup",
+                      "type": "object",
+                      "properties": {
+                        "groupId": {
+                          "title": "TeamGroupId",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          },
+                          "description": "This data structure represents the information associated with a team group.",
+                          "externalDocs": {
+                            "description": "Find out more about groups",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                          }
+                        },
+                        "userIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "This data structure represents the information associated with an API key.",
+                      "externalDocs": {
+                        "description": "Find out more about groups",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                      }
+                    },
+                    "type": "array"
+                  },
+                  "teamId": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "format": "int64"
+                      }
+                    }
+                  }
+                },
+                "title": "AddUsersToTeamGroupsRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "AddUsersToTeamGroupsResponse",
+                  "type": "object",
+                  "description": "Response confirming the successful bulk addition of users to multiple team groups.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Add Users To Team Groups",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_RemoveUsersFromTeamGroups",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "RemoveUsersFromTeamGroupsResponse",
+                  "type": "object",
+                  "description": "Response confirming the successful bulk removal of users from multiple team groups.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Remove Users From Team Groups",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    },
+    "/aaa/team-groups/v1/{group_id.id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetTeamGroupResponse",
+                  "type": "object",
+                  "properties": {
+                    "group": {
+                      "type": "object",
+                      "properties": {
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "externalId": {
+                          "type": "string"
+                        },
+                        "groupId": {
+                          "title": "TeamGroupId",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          },
+                          "description": "This data structure represents the information associated with a team group.",
+                          "externalDocs": {
+                            "description": "Find out more about groups",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                          }
+                        },
+                        "groupOrigin": {
+                          "enum": [
+                            "GROUP_ORIGIN_UNSPECIFIED",
+                            "GROUP_ORIGIN_BUILT_IN",
+                            "GROUP_ORIGIN_USER_DEFINED"
+                          ],
+                          "type": "string"
+                        },
+                        "groupType": {
+                          "enum": [
+                            "GROUP_TYPE_UNSPECIFIED",
+                            "GROUP_TYPE_OPEN",
+                            "GROUP_TYPE_CLOSED",
+                            "GROUP_TYPE_RESTRICTED"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "nextGenScopeId": {
+                          "type": "string"
+                        },
+                        "roles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "roleId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "scope": {
+                          "type": "object",
+                          "properties": {
+                            "filters": {
+                              "type": "object",
+                              "properties": {
+                                "applications": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "filterType": {
+                                        "enum": [
+                                          "FILTER_TYPE_UNSPECIFIED",
+                                          "FILTER_TYPE_STARTS_WITH",
+                                          "FILTER_TYPE_ENDS_WITH",
+                                          "FILTER_TYPE_CONTAINS",
+                                          "FILTER_TYPE_EXACT"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "term": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "subsystems": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "filterType": {
+                                        "enum": [
+                                          "FILTER_TYPE_UNSPECIFIED",
+                                          "FILTER_TYPE_STARTS_WITH",
+                                          "FILTER_TYPE_ENDS_WITH",
+                                          "FILTER_TYPE_CONTAINS",
+                                          "FILTER_TYPE_EXACT"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "term": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "id": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int64"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "teamId": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response containing the complete details of a requested team group, including its members, assigned roles, and scope configuration.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_DeleteTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "DeleteTeamGroupResponse",
+                  "type": "object",
+                  "description": "Response confirming the successful deletion of a team group and its associated configurations.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    },
+    "/aaa/team-groups/v1/{group_id.id}/users": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetGroupUsers",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "GetGroupUsersResponse",
+                      "type": "object",
+                      "properties": {
+                        "noMorePages": {
+                          "title": "NoMorePages",
+                          "type": "object",
+                          "description": "This data structure represents the information associated with an API key.",
+                          "externalDocs": {
+                            "description": "Find out more about groups",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                          }
+                        },
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "enum": [
+                                  "USER_STATUS_UNSPECIFIED",
+                                  "USER_STATUS_ACTIVE",
+                                  "USER_STATUS_INACTIVE"
+                                ],
+                                "type": "string"
+                              },
+                              "userAccountId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              },
+                              "userId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "Response containing the list of all users currently assigned to the requested team group.",
+                      "externalDocs": {
+                        "description": "Find out more about groups",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                      }
+                    },
+                    {
+                      "title": "GetGroupUsersResponse",
+                      "type": "object",
+                      "properties": {
+                        "token": {
+                          "title": "NextPageToken",
+                          "type": "object",
+                          "properties": {
+                            "nextPageToken": {
+                              "type": "string"
+                            }
+                          },
+                          "description": "This data structure represents the information associated with an API key.",
+                          "externalDocs": {
+                            "description": "Find out more about groups",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                          }
+                        },
+                        "users": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "firstName": {
+                                "type": "string"
+                              },
+                              "lastName": {
+                                "type": "string"
+                              },
+                              "status": {
+                                "enum": [
+                                  "USER_STATUS_UNSPECIFIED",
+                                  "USER_STATUS_ACTIVE",
+                                  "USER_STATUS_INACTIVE"
+                                ],
+                                "type": "string"
+                              },
+                              "userAccountId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              },
+                              "userId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "username": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      "description": "Response containing the list of all users currently assigned to the requested team group.",
+                      "externalDocs": {
+                        "description": "Find out more about groups",
+                        "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Group Users",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_AddUsersToTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request to assign additional users to an existing team group, granting them the group's roles and scope permissions.",
+                "properties": {
+                  "userIds": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "title": "AddUsersToTeamGroupRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "AddUsersToTeamGroupResponse",
+                  "type": "object",
+                  "properties": {
+                    "teamId": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response confirming the successful addition of users to the specified team group.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Add Users To Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_RemoveUsersFromTeamGroup",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "RemoveUsersFromTeamGroupResponse",
+                  "type": "object",
+                  "description": "Response confirming the successful removal of users from the specified team group.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Remove Users From Team Group",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    },
+    "/aaa/team-groups/v1/{name}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroupByName",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetTeamGroupByNameResponse",
+                  "type": "object",
+                  "properties": {
+                    "group": {
+                      "type": "object",
+                      "properties": {
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "externalId": {
+                          "type": "string"
+                        },
+                        "groupId": {
+                          "title": "TeamGroupId",
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          },
+                          "description": "This data structure represents the information associated with a team group.",
+                          "externalDocs": {
+                            "description": "Find out more about groups",
+                            "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                          }
+                        },
+                        "groupOrigin": {
+                          "enum": [
+                            "GROUP_ORIGIN_UNSPECIFIED",
+                            "GROUP_ORIGIN_BUILT_IN",
+                            "GROUP_ORIGIN_USER_DEFINED"
+                          ],
+                          "type": "string"
+                        },
+                        "groupType": {
+                          "enum": [
+                            "GROUP_TYPE_UNSPECIFIED",
+                            "GROUP_TYPE_OPEN",
+                            "GROUP_TYPE_CLOSED",
+                            "GROUP_TYPE_RESTRICTED"
+                          ],
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "nextGenScopeId": {
+                          "type": "string"
+                        },
+                        "roles": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "description": {
+                                "type": "string"
+                              },
+                              "name": {
+                                "type": "string"
+                              },
+                              "roleId": {
+                                "type": "object",
+                                "properties": {
+                                  "id": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "scope": {
+                          "type": "object",
+                          "properties": {
+                            "filters": {
+                              "type": "object",
+                              "properties": {
+                                "applications": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "filterType": {
+                                        "enum": [
+                                          "FILTER_TYPE_UNSPECIFIED",
+                                          "FILTER_TYPE_STARTS_WITH",
+                                          "FILTER_TYPE_ENDS_WITH",
+                                          "FILTER_TYPE_CONTAINS",
+                                          "FILTER_TYPE_EXACT"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "term": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                },
+                                "subsystems": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "object",
+                                    "properties": {
+                                      "filterType": {
+                                        "enum": [
+                                          "FILTER_TYPE_UNSPECIFIED",
+                                          "FILTER_TYPE_STARTS_WITH",
+                                          "FILTER_TYPE_ENDS_WITH",
+                                          "FILTER_TYPE_CONTAINS",
+                                          "FILTER_TYPE_EXACT"
+                                        ],
+                                        "type": "string"
+                                      },
+                                      "term": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            "id": {
+                              "type": "object",
+                              "properties": {
+                                "id": {
+                                  "type": "integer",
+                                  "format": "int64"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "teamId": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response containing the complete details of a team group that matches the requested name, including its members, roles, and scope settings.",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Group By Name",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    },
+    "/v1/teams/groups/{group_id.id}/scope": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_GetTeamGroupScope",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetTeamGroupScopeResponse",
+                  "type": "object",
+                  "properties": {
+                    "scope": {
+                      "type": "object",
+                      "properties": {
+                        "filters": {
+                          "type": "object",
+                          "properties": {
+                            "applications": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "filterType": {
+                                    "enum": [
+                                      "FILTER_TYPE_UNSPECIFIED",
+                                      "FILTER_TYPE_STARTS_WITH",
+                                      "FILTER_TYPE_ENDS_WITH",
+                                      "FILTER_TYPE_CONTAINS",
+                                      "FILTER_TYPE_EXACT"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "term": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "subsystems": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "filterType": {
+                                    "enum": [
+                                      "FILTER_TYPE_UNSPECIFIED",
+                                      "FILTER_TYPE_STARTS_WITH",
+                                      "FILTER_TYPE_ENDS_WITH",
+                                      "FILTER_TYPE_CONTAINS",
+                                      "FILTER_TYPE_EXACT"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "term": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "id": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response message containing the optional scope configuration (filters for subsystems and applications) for a team group",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Team Group Scope",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "TeamPermissionsMgmtService_SetTeamGroupScope",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "group_id.id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "Request message for setting scope filters (subsystems and applications) for a team group to control access permissions",
+                "properties": {
+                  "scopeFilters": {
+                    "type": "object",
+                    "properties": {
+                      "applications": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      },
+                      "subsystems": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "filterType": {
+                              "enum": [
+                                "FILTER_TYPE_UNSPECIFIED",
+                                "FILTER_TYPE_STARTS_WITH",
+                                "FILTER_TYPE_ENDS_WITH",
+                                "FILTER_TYPE_CONTAINS",
+                                "FILTER_TYPE_EXACT"
+                              ],
+                              "type": "string"
+                            },
+                            "term": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "title": "SetTeamGroupScopeRequest",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "SetTeamGroupScopeResponse",
+                  "type": "object",
+                  "properties": {
+                    "scopeId": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response message containing the ID of the newly created or updated scope for a team group",
+                  "externalDocs": {
+                    "description": "Find out more about groups",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Set Team Group Scope",
+        "tags": [
+          "Team Permissions Management Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Team Permissions Management Service",
+      "description": "Manage Team Groups.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

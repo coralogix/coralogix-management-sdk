@@ -1,0 +1,654 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/extension-deployment/deploy": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_DeployExtension",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "applications": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "extensionDeployment": {
+                    "title": "Extension deployment",
+                    "required": [
+                      "id",
+                      "version",
+                      "itemIds"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "applications": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "itemIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "subsystems": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "version": {
+                        "type": "string"
+                      }
+                    },
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "itemIds": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "subsystems": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "version": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "version",
+                  "itemIds"
+                ],
+                "title": "Deploy extension request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Deploy extension response",
+                  "required": [
+                    "extensionDeployment"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "extensionDeployment": {
+                      "title": "Extension deployment",
+                      "required": [
+                        "id",
+                        "version",
+                        "itemIds"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "applications": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "itemIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "subsystems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "version": {
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Deploy extension",
+        "tags": [
+          "Extension deployment service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      }
+    },
+    "/v1/extension-deployment/deployed": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_GetDeployedExtensions",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get deployed extensions response",
+                  "type": "object",
+                  "properties": {
+                    "deployedExtensions": {
+                      "type": "array",
+                      "items": {
+                        "title": "Deployed extension",
+                        "required": [
+                          "id",
+                          "version",
+                          "summary",
+                          "itemIds"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "applications": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "itemIds": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "subsystems": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "summary": {
+                            "title": "Deployed extension summary",
+                            "required": [
+                              "deployedItemCounts"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "deployedItemCounts": {
+                                "title": "Item counts",
+                                "type": "object",
+                                "properties": {
+                                  "actions": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "alerts": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "customDashboards": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "enrichments": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "eventsToMetrics": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "grafanaDashboards": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "kibanaDashboards": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "metricsRuleGroup": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "parsingRules": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "savedViews": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  }
+                                },
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "version": {
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get deployed extensions",
+        "tags": [
+          "Extension deployment service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:ReadConfig"
+        ]
+      }
+    },
+    "/v1/extension-deployment/undeploy": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UndeployExtension",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "keptExtensionItems": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "title": "Revert deployment of extension request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Revert deployment of extension response",
+                  "type": "object",
+                  "properties": {
+                    "extensionDeployment": {
+                      "title": "Extension deployment",
+                      "required": [
+                        "id",
+                        "version",
+                        "itemIds"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "applications": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "itemIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "subsystems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "version": {
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    "failedItems": {
+                      "type": "array",
+                      "items": {
+                        "title": "Failed item",
+                        "required": [
+                          "itemId",
+                          "remoteId",
+                          "reason"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "itemId": {
+                            "type": "string"
+                          },
+                          "reason": {
+                            "type": "string"
+                          },
+                          "remoteId": {
+                            "type": "string"
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Revert deployment of extension",
+        "tags": [
+          "Extension deployment service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      }
+    },
+    "/v1/extension-deployment/update": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UpdateExtension",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "applications": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "extensionDeployment": {
+                    "title": "Extension deployment",
+                    "required": [
+                      "id",
+                      "version",
+                      "itemIds"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "applications": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "itemIds": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "subsystems": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "version": {
+                        "type": "string"
+                      }
+                    },
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  },
+                  "id": {
+                    "type": "string"
+                  },
+                  "itemIds": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "subsystems": {
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "version": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id",
+                  "version",
+                  "itemIds"
+                ],
+                "title": "Update extension request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Update extension response",
+                  "required": [
+                    "extensionDeployment"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "extensionDeployment": {
+                      "title": "Extension deployment",
+                      "required": [
+                        "id",
+                        "version",
+                        "itemIds"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "applications": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "id": {
+                          "type": "string"
+                        },
+                        "itemIds": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "subsystems": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "version": {
+                          "type": "string"
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update extension",
+        "tags": [
+          "Extension deployment service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Extension deployment service",
+      "description": "A service that enables querying for extension deployment information.",
+      "externalDocs": {
+        "description": "Find out more about extensions in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/extensions/"
+      }
+    }
+  ]
+}

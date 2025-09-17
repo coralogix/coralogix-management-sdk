@@ -1,0 +1,1083 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/datausage": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetDataUsage",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Data Usage Response",
+                  "type": "object",
+                  "properties": {
+                    "entries": {
+                      "type": "array",
+                      "items": {
+                        "title": "Data Usage Entry",
+                        "type": "object",
+                        "properties": {
+                          "dimensions": {
+                            "type": "array",
+                            "items": {
+                              "oneOf": [
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "pillar": {
+                                      "enum": [
+                                        "PILLAR_UNSPECIFIED",
+                                        "PILLAR_METRICS",
+                                        "PILLAR_LOGS",
+                                        "PILLAR_SPANS",
+                                        "PILLAR_BINARY",
+                                        "PILLAR_PROFILES"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "genericDimension": {
+                                      "title": "Generic Dimension",
+                                      "type": "object",
+                                      "properties": {
+                                        "key": {
+                                          "type": "string",
+                                          "example": "key"
+                                        },
+                                        "value": {
+                                          "type": "string",
+                                          "example": "value"
+                                        }
+                                      },
+                                      "description": "This data structure represents a generic dimension.",
+                                      "externalDocs": {
+                                        "description": "Find out more about data usage.",
+                                        "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "tier": {
+                                      "enum": [
+                                        "TCO_TIER_UNSPECIFIED",
+                                        "TCO_TIER_LOW",
+                                        "TCO_TIER_MEDIUM",
+                                        "TCO_TIER_HIGH",
+                                        "TCO_TIER_BLOCKED"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "severity": {
+                                      "enum": [
+                                        "SEVERITY_UNSPECIFIED",
+                                        "SEVERITY_DEBUG",
+                                        "SEVERITY_VERBOSE",
+                                        "SEVERITY_INFO",
+                                        "SEVERITY_WARNING",
+                                        "SEVERITY_ERROR",
+                                        "SEVERITY_CRITICAL"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                {
+                                  "type": "object",
+                                  "properties": {
+                                    "priority": {
+                                      "enum": [
+                                        "PRIORITY_UNSPECIFIED",
+                                        "PRIORITY_LOW",
+                                        "PRIORITY_MEDIUM",
+                                        "PRIORITY_HIGH",
+                                        "PRIORITY_BLOCKED"
+                                      ],
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              ]
+                            }
+                          },
+                          "sizeGb": {
+                            "type": "number",
+                            "format": "float"
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "units": {
+                            "type": "number",
+                            "format": "float"
+                          }
+                        },
+                        "description": "This data structure represents a data usage entry.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure is used to return data usage.",
+                  "externalDocs": {
+                    "description": "Find out more about data usage.",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Data Usage",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/daily/evaluation_tokens": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetDailyUsageEvaluationTokens",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "range": {
+                        "enum": [
+                          "RANGE_UNSPECIFIED",
+                          "RANGE_CURRENT_MONTH",
+                          "RANGE_LAST_30_DAYS",
+                          "RANGE_LAST_90_DAYS",
+                          "RANGE_LAST_WEEK"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "dateRange": {
+                        "title": "Date Range",
+                        "type": "object",
+                        "properties": {
+                          "fromDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          },
+                          "toDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          }
+                        },
+                        "description": "This data structure represents a date range.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "tokens": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "evaluations": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "evaluationTokens": {
+                                  "type": "object",
+                                  "properties": {
+                                    "value": {
+                                      "type": "number",
+                                      "format": "float"
+                                    }
+                                  }
+                                },
+                                "evaluatorName": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          },
+                          "statsDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "totalTokens": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Daily Usage Evaluation Tokens",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/daily/processed_gbs": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetDailyUsageProcessedGbs",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "range": {
+                        "enum": [
+                          "RANGE_UNSPECIFIED",
+                          "RANGE_CURRENT_MONTH",
+                          "RANGE_LAST_30_DAYS",
+                          "RANGE_LAST_90_DAYS",
+                          "RANGE_LAST_WEEK"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "dateRange": {
+                        "title": "Date Range",
+                        "type": "object",
+                        "properties": {
+                          "fromDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          },
+                          "toDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          }
+                        },
+                        "description": "This data structure represents a date range.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gbs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "blockedGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "blockedMetricsGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "cpuProfilesGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highLogsGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highMetricsGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highTracingGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowLogsGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowSessionRecordingGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowTracingGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "mediumLogsGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "mediumTracingGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "statsDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "totalGbs": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Daily Usage Processed GBs",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/daily/units": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetDailyUsageUnits",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "range": {
+                        "enum": [
+                          "RANGE_UNSPECIFIED",
+                          "RANGE_CURRENT_MONTH",
+                          "RANGE_LAST_30_DAYS",
+                          "RANGE_LAST_90_DAYS",
+                          "RANGE_LAST_WEEK"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "dateRange": {
+                        "title": "Date Range",
+                        "type": "object",
+                        "properties": {
+                          "fromDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          },
+                          "toDate": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          }
+                        },
+                        "description": "This data structure represents a date range.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "units": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "blockedMetricsUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "blockedUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "cpuProfilesUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "evaluationUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highLogsUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highMetricsUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "highTracingUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowLogsUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowSessionRecordingUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "lowTracingUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "mediumLogsUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "mediumTracingUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          },
+                          "statsDate": {
+                            "type": "string",
+                            "format": "date-time"
+                          },
+                          "totalUnits": {
+                            "type": "object",
+                            "properties": {
+                              "value": {
+                                "type": "number",
+                                "format": "float"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Daily Usage Units",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/exportstatus": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetDataUsageMetricsExportStatus",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Data Usage Metrics Export Status Response",
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  },
+                  "description": "This data structure is used to return data usage metrics export status.",
+                  "externalDocs": {
+                    "description": "Find out more about data usage.",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Data Usage Metrics Export Status",
+        "tags": [
+          "Data Usage Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_UpdateDataUsageMetricsExportStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This data structure is used to update data usage metrics export status.",
+                "properties": {
+                  "enabled": {
+                    "example": true,
+                    "type": "boolean"
+                  }
+                },
+                "title": "Update Data Usage Metrics Export Status Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Update Data Usage Metrics Export Status Response",
+                  "type": "object",
+                  "properties": {
+                    "enabled": {
+                      "type": "boolean",
+                      "example": true
+                    }
+                  },
+                  "description": "This data structure is used to return data usage metrics export status.",
+                  "externalDocs": {
+                    "description": "Find out more about data usage.",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update Data Usage Metrics Export Status",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/logscount": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetLogsCount",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Logs Count Response",
+                  "type": "object",
+                  "properties": {
+                    "logsCount": {
+                      "type": "array",
+                      "items": {
+                        "title": "Logs Count",
+                        "type": "object",
+                        "properties": {
+                          "logsCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 100
+                          },
+                          "priority": {
+                            "enum": [
+                              "PRIORITY_UNSPECIFIED",
+                              "PRIORITY_LOW",
+                              "PRIORITY_MEDIUM",
+                              "PRIORITY_HIGH",
+                              "PRIORITY_BLOCKED"
+                            ],
+                            "type": "string"
+                          },
+                          "severity": {
+                            "enum": [
+                              "SEVERITY_UNSPECIFIED",
+                              "SEVERITY_DEBUG",
+                              "SEVERITY_VERBOSE",
+                              "SEVERITY_INFO",
+                              "SEVERITY_WARNING",
+                              "SEVERITY_ERROR",
+                              "SEVERITY_CRITICAL"
+                            ],
+                            "type": "string"
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "This data structure represents a logs count.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure is used to return logs count.",
+                  "externalDocs": {
+                    "description": "Find out more about data usage.",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Logs Count",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    },
+    "/v2/datausage/spanscount": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "DataUsageService_GetSpansCount",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get Spans Count Response",
+                  "type": "object",
+                  "properties": {
+                    "spansCount": {
+                      "type": "array",
+                      "items": {
+                        "title": "Spans Count",
+                        "type": "object",
+                        "properties": {
+                          "errorSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 10
+                          },
+                          "lowErrorSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 5
+                          },
+                          "lowSuccessSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 50
+                          },
+                          "mediumErrorSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 20
+                          },
+                          "mediumSuccessSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 200
+                          },
+                          "successSpanCount": {
+                            "type": "string",
+                            "format": "int64",
+                            "example": 100
+                          },
+                          "timestamp": {
+                            "type": "string",
+                            "format": "date-time",
+                            "example": "2021-01-01T00:00:00Z"
+                          }
+                        },
+                        "description": "This data structure represents a spans count.",
+                        "externalDocs": {
+                          "description": "Find out more about data usage.",
+                          "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This data structure is used to return spans count.",
+                  "externalDocs": {
+                    "description": "Find out more about data usage.",
+                    "url": "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/data-usage/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Spans Count",
+        "tags": [
+          "Data Usage Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Data Usage Service",
+      "description": "A service to manage data usage metrics.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

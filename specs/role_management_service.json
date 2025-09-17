@@ -1,0 +1,524 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/team-roles/v1/custom-roles": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_ListCustomRoles",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "parentRoleId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "parentRoleName": {
+                            "type": "string"
+                          },
+                          "permissions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "roleId": {
+                            "type": "integer",
+                            "format": "int64"
+                          },
+                          "teamId": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List Custom Roles",
+        "tags": [
+          "Role Management Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_CreateRole",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parentRoleId": {
+                        "format": "int64",
+                        "type": "integer"
+                      },
+                      "permissions": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "teamId": {
+                        "format": "int64",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  {
+                    "properties": {
+                      "description": {
+                        "type": "string"
+                      },
+                      "name": {
+                        "type": "string"
+                      },
+                      "parentRoleName": {
+                        "type": "string"
+                      },
+                      "permissions": {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      "teamId": {
+                        "format": "int64",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "201": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role created"
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "409": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role already exists"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create Role",
+        "tags": [
+          "Role Management Service"
+        ]
+      }
+    },
+    "/aaa/team-roles/v1/custom-roles/{role_id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_GetCustomRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "role": {
+                      "type": "object",
+                      "properties": {
+                        "description": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "parentRoleId": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "parentRoleName": {
+                          "type": "string"
+                        },
+                        "permissions": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "roleId": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "teamId": {
+                          "type": "integer",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Custom Role",
+        "tags": [
+          "Role Management Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_UpdateRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "newDescription": {
+                    "type": "string"
+                  },
+                  "newName": {
+                    "type": "string"
+                  },
+                  "newPermissions": {
+                    "type": "object",
+                    "properties": {
+                      "permissions": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Update Role",
+        "tags": [
+          "Role Management Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_DeleteRole",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "role_id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            },
+            "description": ""
+          },
+          "204": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role deleted"
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "404": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Role not found"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete Role",
+        "tags": [
+          "Role Management Service"
+        ]
+      }
+    },
+    "/aaa/team-roles/v1/system-roles": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "RoleManagementService_ListSystemRoles",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "roles": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "permissions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          },
+                          "roleId": {
+                            "type": "integer",
+                            "format": "int64"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List System Roles",
+        "tags": [
+          "Role Management Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Role Management Service",
+      "description": "Service for managing system and custom roles.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

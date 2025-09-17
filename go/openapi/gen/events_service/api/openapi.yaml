@@ -1,0 +1,594 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: A service for querying events.
+  externalDocs:
+    description: Learn more about alerts in our documentation
+    url: https://coralogix.com/docs/user-guides/alerting/introduction-to-alerts/
+  name: Events Service
+paths:
+  /v3/events:
+    get:
+      externalDocs:
+        url: ""
+      operationId: EventsService_ListEvents
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEventsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Events
+      tags:
+      - Events Service
+  /v3/events/events:batchGet:
+    get:
+      externalDocs:
+        url: ""
+      operationId: EventsService_BatchGetEvent
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsService_BatchGetEvent_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Batch Get Event
+      tags:
+      - Events Service
+  /v3/events/{id}:
+    get:
+      externalDocs:
+        url: ""
+      operationId: EventsService_GetEvent
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: test
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/EventsService_GetEvent_200_response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Event
+      tags:
+      - Events Service
+  /v3/events:count:
+    get:
+      externalDocs:
+        url: ""
+      operationId: EventsService_ListEventsCount
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListEventsCountResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Events Count
+      tags:
+      - Events Service
+  /v3/events:statistics:
+    get:
+      externalDocs:
+        url: ""
+      operationId: EventsService_GetEventsStatistics
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEventsStatisticsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Events Statistics
+      tags:
+      - Events Service
+components:
+  schemas:
+    EventsService_BatchGetEvent_200_response_events_inner_value:
+      oneOf:
+      - $ref: "#/components/schemas/CxEventSingleOrMultiple"
+      - $ref: "#/components/schemas/CxEventSingleOrMultiple_1"
+    EventsService_BatchGetEvent_200_response:
+      example:
+        notFoundIds:
+        - notFoundIds
+        - notFoundIds
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        events:
+        - value:
+            singleEvent:
+              cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          key: key
+        - value:
+            singleEvent:
+              cxEventType: test_type
+              companyId: 1
+              cxEventKey: test
+              cxEventMetadata:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              cxEventPayload:
+                test: test
+              cxEventPayloadType: test_payload_type
+              cxEventDedupKey: test_dedup_key
+              cxEventLabels:
+              - value: value
+                key: key
+              - value: value
+                key: key
+              cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+          key: key
+      properties:
+        events:
+          items:
+            $ref: "#/components/schemas/EventsService_BatchGetEvent_200_response_events_inner"
+          type: array
+        notFoundIds:
+          items:
+            type: string
+          type: array
+        pagination:
+          $ref: "#/components/schemas/ListEventsResponse_pagination"
+      type: object
+    CxEventSingleOrMultiple:
+      description: This data structure represents a single or multiple events
+      example:
+        singleEvent:
+          cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        singleEvent:
+          $ref: "#/components/schemas/Event"
+      required:
+      - event
+      title: CxEventSingleOrMultiple
+      type: object
+    ListEventsResponse:
+      description: This data structure represents a response to list events
+      example:
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        events:
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        - cxEventType: test_type
+          companyId: 1
+          cxEventKey: test
+          cxEventMetadata:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventPayload:
+            test: test
+          cxEventPayloadType: test_payload_type
+          cxEventDedupKey: test_dedup_key
+          cxEventLabels:
+          - value: value
+            key: key
+          - value: value
+            key: key
+          cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        events:
+          items:
+            $ref: "#/components/schemas/Event"
+          type: array
+        pagination:
+          $ref: "#/components/schemas/ListEventsResponse_pagination"
+      required:
+      - events
+      title: ListEventsResponse
+      type: object
+    EventsService_GetEvent_200_response:
+      example:
+        pagination:
+          totalSize: 10
+          nextPageToken: test
+        event:
+          singleEvent:
+            cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      properties:
+        event:
+          $ref: "#/components/schemas/EventsService_BatchGetEvent_200_response_events_inner_value"
+        pagination:
+          $ref: "#/components/schemas/ListEventsResponse_pagination"
+      type: object
+    GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner_value_fieldStatistics_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          format: int64
+          type: string
+      type: object
+    EventsService_BatchGetEvent_200_response_events_inner:
+      example:
+        value:
+          singleEvent:
+            cxEventType: test_type
+            companyId: 1
+            cxEventKey: test
+            cxEventMetadata:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            cxEventPayload:
+              test: test
+            cxEventPayloadType: test_payload_type
+            cxEventDedupKey: test_dedup_key
+            cxEventLabels:
+            - value: value
+              key: key
+            - value: value
+              key: key
+            cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/EventsService_BatchGetEvent_200_response_events_inner_value"
+      type: object
+    Event_cxEventLabels_inner:
+      example:
+        value: value
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+      type: object
+    ListEventsResponse_pagination:
+      example:
+        totalSize: 10
+        nextPageToken: test
+      properties:
+        nextPageToken:
+          example: test
+          type: string
+        totalSize:
+          example: 10
+          format: int64
+          type: integer
+      type: object
+    GetEventsStatisticsResponse:
+      description: This data structure represents a response to get events statistics
+      example:
+        cxEventMetadataFieldStatistics:
+        - value:
+            fieldStatistics:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          key: key
+        - value:
+            fieldStatistics:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          key: key
+        cxEventLabelsFieldStatistics:
+        - value:
+            fieldStatistics:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          key: key
+        - value:
+            fieldStatistics:
+            - value: value
+              key: key
+            - value: value
+              key: key
+          key: key
+      externalDocs:
+        url: ""
+      properties:
+        cxEventLabelsFieldStatistics:
+          items:
+            $ref: "#/components/schemas/GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner"
+          type: array
+        cxEventMetadataFieldStatistics:
+          items:
+            $ref: "#/components/schemas/GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner"
+          type: array
+      required:
+      - cxEventMetadataFieldStatisticscxEventLabelsFieldStatistics
+      title: GetEventsStatisticsResponse
+      type: object
+    Event:
+      description: This data structure represents an event
+      example:
+        cxEventType: test_type
+        companyId: 1
+        cxEventKey: test
+        cxEventMetadata:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        cxEventPayload:
+          test: test
+        cxEventPayloadType: test_payload_type
+        cxEventDedupKey: test_dedup_key
+        cxEventLabels:
+        - value: value
+          key: key
+        - value: value
+          key: key
+        cxEventTimestamp: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        description: Find out more about events
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        companyId:
+          example: 1
+          format: int32
+          type: integer
+        cxEventDedupKey:
+          example: test_dedup_key
+          type: string
+        cxEventKey:
+          example: test
+          type: string
+        cxEventLabels:
+          items:
+            $ref: "#/components/schemas/Event_cxEventLabels_inner"
+          type: array
+        cxEventMetadata:
+          items:
+            $ref: "#/components/schemas/Event_cxEventLabels_inner"
+          type: array
+        cxEventPayload:
+          example:
+            test: test
+          type: object
+        cxEventPayloadType:
+          example: test_payload_type
+          type: string
+        cxEventTimestamp:
+          format: date-time
+          type: string
+        cxEventType:
+          example: test_type
+          type: string
+      required:
+      - companyId
+      - cxEventKey
+      - cxEventLabels
+      - cxEventPayload
+      - cxEventPayloadType
+      - cxEventTimestamp
+      - cxEventType
+      title: Event
+      type: object
+    CxEventSingleOrMultiple_1:
+      description: This data structure represents a single or multiple events
+      externalDocs:
+        url: ""
+      properties:
+        multipleEvents:
+          $ref: "#/components/schemas/CxEventArray"
+      required:
+      - event
+      title: CxEventSingleOrMultiple
+      type: object
+    GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner:
+      example:
+        value:
+          fieldStatistics:
+          - value: value
+            key: key
+          - value: value
+            key: key
+        key: key
+      properties:
+        key:
+          type: string
+        value:
+          $ref: "#/components/schemas/GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner_value"
+      type: object
+    ListEventsCountResponse:
+      description: This data structure represents a response to list events count
+      example:
+        count: "10"
+        reachedLimit: false
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: "10"
+          format: uint64
+          type: string
+        reachedLimit:
+          example: false
+          type: boolean
+      required:
+      - count
+      - reachedLimit
+      title: ListEventsCountResponse
+      type: object
+    CxEventArray:
+      description: This data structure represents an array of events
+      externalDocs:
+        description: Find out more about events
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        events:
+          items:
+            $ref: "#/components/schemas/Event"
+          type: array
+      required:
+      - events
+      title: CxEventArray
+      type: object
+    GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner_value:
+      example:
+        fieldStatistics:
+        - value: value
+          key: key
+        - value: value
+          key: key
+      properties:
+        fieldStatistics:
+          items:
+            $ref: "#/components/schemas/GetEventsStatisticsResponse_cxEventLabelsFieldStatistics_inner_value_fieldStatistics_inner"
+          type: array
+      type: object

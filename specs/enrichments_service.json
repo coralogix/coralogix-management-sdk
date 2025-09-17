@@ -1,0 +1,901 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/enrichments": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_GetEnrichments",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Enrichment Collection",
+                  "required": [
+                    "enrichments"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "enrichments": {
+                      "type": "array",
+                      "items": {
+                        "title": "Enrichment",
+                        "required": [
+                          "id",
+                          "fieldName",
+                          "enrichmentType"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "enrichedFieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "enrichmentType": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "geoIp": {
+                                    "type": "object",
+                                    "properties": {
+                                      "withAsn": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "suspiciousIp": {
+                                    "type": "object"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "aws": {
+                                    "type": "object",
+                                    "properties": {
+                                      "resourceType": {
+                                        "type": "string",
+                                        "example": "ec2"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "customEnrichment": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "fieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                          },
+                          "selectedColumns": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": [
+                                "city",
+                                "population"
+                              ]
+                            }
+                          }
+                        },
+                        "description": "This data structure represents an enrichment",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "This response data structure represents a collection of enrichments",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get Enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_AddEnrichments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "description": "This response data structure represents a collection of enrichments",
+                "properties": {
+                  "requestEnrichments": {
+                    "items": {
+                      "title": "Enrichment Prototype",
+                      "required": [
+                        "fieldName",
+                        "enrichmentType"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "enrichedFieldName": {
+                          "type": "string"
+                        },
+                        "enrichmentType": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "geoIp": {
+                                  "type": "object",
+                                  "properties": {
+                                    "withAsn": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "suspiciousIp": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "aws": {
+                                  "type": "object",
+                                  "properties": {
+                                    "resourceType": {
+                                      "type": "string",
+                                      "example": "ec2"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "customEnrichment": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "example": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "example": "sourceIPs"
+                        },
+                        "selectedColumns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "The enrichment request model",
+                      "externalDocs": {
+                        "description": "Find out more about enrichments",
+                        "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "requestEnrichments"
+                ],
+                "title": "Enrichments Creation Request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Encrichments Creation Response",
+                  "required": [
+                    "enrichments"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "enrichments": {
+                      "type": "array",
+                      "items": {
+                        "title": "Enrichment",
+                        "required": [
+                          "id",
+                          "fieldName",
+                          "enrichmentType"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "enrichedFieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "enrichmentType": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "geoIp": {
+                                    "type": "object",
+                                    "properties": {
+                                      "withAsn": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "suspiciousIp": {
+                                    "type": "object"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "aws": {
+                                    "type": "object",
+                                    "properties": {
+                                      "resourceType": {
+                                        "type": "string",
+                                        "example": "ec2"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "customEnrichment": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "fieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                          },
+                          "selectedColumns": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": [
+                                "city",
+                                "population"
+                              ]
+                            }
+                          }
+                        },
+                        "description": "This data structure represents an enrichment",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response data structure for enrichments creation",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Add Enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_RemoveEnrichments",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Encrichments Delettion Response",
+                  "required": [
+                    "remainingEnrichments"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "remainingEnrichments": {
+                      "type": "array",
+                      "items": {
+                        "title": "Enrichment",
+                        "required": [
+                          "id",
+                          "fieldName",
+                          "enrichmentType"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "enrichedFieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "enrichmentType": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "geoIp": {
+                                    "type": "object",
+                                    "properties": {
+                                      "withAsn": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "suspiciousIp": {
+                                    "type": "object"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "aws": {
+                                    "type": "object",
+                                    "properties": {
+                                      "resourceType": {
+                                        "type": "string",
+                                        "example": "ec2"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "customEnrichment": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "fieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                          },
+                          "selectedColumns": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": [
+                                "city",
+                                "population"
+                              ]
+                            }
+                          }
+                        },
+                        "description": "This data structure represents an enrichment",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response data structure for enrichments deletion",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Delete Enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
+      }
+    },
+    "/enrichments/limit": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_GetEnrichmentLimit",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Enrichment Limit",
+                  "required": [
+                    "limit",
+                    "used"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "limit": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 10
+                    },
+                    "used": {
+                      "type": "integer",
+                      "format": "int64",
+                      "example": 5
+                    }
+                  },
+                  "description": "This response data structure represents the enrichments limit",
+                  "externalDocs": {
+                    "description": "Find out more about enrichments",
+                    "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get Enrichment Limit",
+        "tags": [
+          "Enrichments Service"
+        ]
+      }
+    },
+    "/enrichments/settings": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_GetCompanyEnrichmentSettings",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "enrichmentSettings": {
+                      "type": "object",
+                      "properties": {
+                        "enrichmentAmountLimit": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "enrichmentsInUse": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "queryOnlyRowLimit": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "queryOnlySizeLimitBytes": {
+                          "type": "string",
+                          "format": "int64"
+                        },
+                        "rowLimit": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "sizeLimitBytes": {
+                          "type": "string",
+                          "format": "int64"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Get Company Enrichment Settings",
+        "tags": [
+          "Enrichments Service"
+        ]
+      }
+    },
+    "/enrichments:atomicOverwrite": {
+      "patch": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "EnrichmentService_AtomicOverwriteEnrichments",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "enrichmentFields": {
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "enrichedFieldName": {
+                          "type": "string"
+                        },
+                        "fieldName": {
+                          "type": "string"
+                        },
+                        "selectedColumns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "type": "array"
+                  },
+                  "enrichmentType": {
+                    "oneOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "geoIp": {
+                            "type": "object",
+                            "properties": {
+                              "withAsn": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "suspiciousIp": {
+                            "type": "object"
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "aws": {
+                            "type": "object",
+                            "properties": {
+                              "resourceType": {
+                                "type": "string",
+                                "example": "ec2"
+                              }
+                            }
+                          }
+                        }
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "customEnrichment": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer",
+                                "format": "int64",
+                                "example": 1
+                              }
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  },
+                  "requestEnrichments": {
+                    "items": {
+                      "title": "Enrichment Prototype",
+                      "required": [
+                        "fieldName",
+                        "enrichmentType"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "enrichedFieldName": {
+                          "type": "string"
+                        },
+                        "enrichmentType": {
+                          "oneOf": [
+                            {
+                              "type": "object",
+                              "properties": {
+                                "geoIp": {
+                                  "type": "object",
+                                  "properties": {
+                                    "withAsn": {
+                                      "type": "boolean"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "suspiciousIp": {
+                                  "type": "object"
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "aws": {
+                                  "type": "object",
+                                  "properties": {
+                                    "resourceType": {
+                                      "type": "string",
+                                      "example": "ec2"
+                                    }
+                                  }
+                                }
+                              }
+                            },
+                            {
+                              "type": "object",
+                              "properties": {
+                                "customEnrichment": {
+                                  "type": "object",
+                                  "properties": {
+                                    "id": {
+                                      "type": "integer",
+                                      "format": "int64",
+                                      "example": 1
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          ]
+                        },
+                        "fieldName": {
+                          "type": "string",
+                          "example": "sourceIPs"
+                        },
+                        "selectedColumns": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "description": "The enrichment request model",
+                      "externalDocs": {
+                        "description": "Find out more about enrichments",
+                        "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                      }
+                    },
+                    "type": "array"
+                  }
+                },
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "enrichments": {
+                      "type": "array",
+                      "items": {
+                        "title": "Enrichment",
+                        "required": [
+                          "id",
+                          "fieldName",
+                          "enrichmentType"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "enrichedFieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "enrichmentType": {
+                            "oneOf": [
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "geoIp": {
+                                    "type": "object",
+                                    "properties": {
+                                      "withAsn": {
+                                        "type": "boolean"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "suspiciousIp": {
+                                    "type": "object"
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "aws": {
+                                    "type": "object",
+                                    "properties": {
+                                      "resourceType": {
+                                        "type": "string",
+                                        "example": "ec2"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "type": "object",
+                                "properties": {
+                                  "customEnrichment": {
+                                    "type": "object",
+                                    "properties": {
+                                      "id": {
+                                        "type": "integer",
+                                        "format": "int64",
+                                        "example": 1
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            ]
+                          },
+                          "fieldName": {
+                            "type": "string",
+                            "example": 1
+                          },
+                          "id": {
+                            "type": "integer",
+                            "format": "int64",
+                            "example": 1
+                          },
+                          "selectedColumns": {
+                            "type": "array",
+                            "items": {
+                              "type": "string",
+                              "example": [
+                                "city",
+                                "population"
+                              ]
+                            }
+                          }
+                        },
+                        "description": "This data structure represents an enrichment",
+                        "externalDocs": {
+                          "description": "Find out more about enrichments",
+                          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "description": ""
+          }
+        },
+        "summary": "Atomic Overwrite Enrichments",
+        "tags": [
+          "Enrichments Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Enrichments Service",
+      "description": "Manage your enrichments.",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

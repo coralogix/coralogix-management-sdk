@@ -1,0 +1,4004 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/slo/slos": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_ListSlos",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ListSlosResponse",
+                  "required": [
+                    "slos"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "slos": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "title": "Slo",
+                            "required": [
+                              "name",
+                              "targetThresholdPercentage",
+                              "window",
+                              "sli"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "creator": {
+                                "type": "string",
+                                "example": "test@domain.com"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "A brief description of my SLO"
+                              },
+                              "grouping": {
+                                "title": "Grouping",
+                                "type": "object",
+                                "properties": {
+                                  "labels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "Definition of the SLO grouping fields",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "id": {
+                                "type": "string",
+                                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                              },
+                              "labels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Example Slo Name"
+                              },
+                              "requestBasedMetricSli": {
+                                "title": "RequestBasedMetricSli",
+                                "required": [
+                                  "goodEvents",
+                                  "totalEvents"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "goodEvents": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  },
+                                  "totalEvents": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "description": "Definition of a request-based SLI based on metrics",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "revision": {
+                                "title": "Revision",
+                                "type": "object",
+                                "properties": {
+                                  "revision": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 1
+                                  },
+                                  "updateTime": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "sloTimeFrame": {
+                                "enum": [
+                                  "SLO_TIME_FRAME_UNSPECIFIED",
+                                  "SLO_TIME_FRAME_7_DAYS",
+                                  "SLO_TIME_FRAME_14_DAYS",
+                                  "SLO_TIME_FRAME_21_DAYS",
+                                  "SLO_TIME_FRAME_28_DAYS"
+                                ],
+                                "type": "string"
+                              },
+                              "targetThresholdPercentage": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 99.999
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "request"
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "description": "Definition of an SLO",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          {
+                            "title": "Slo",
+                            "required": [
+                              "name",
+                              "targetThresholdPercentage",
+                              "window",
+                              "sli"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "creator": {
+                                "type": "string",
+                                "example": "test@domain.com"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "A brief description of my SLO"
+                              },
+                              "grouping": {
+                                "title": "Grouping",
+                                "type": "object",
+                                "properties": {
+                                  "labels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "Definition of the SLO grouping fields",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "id": {
+                                "type": "string",
+                                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                              },
+                              "labels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Example Slo Name"
+                              },
+                              "revision": {
+                                "title": "Revision",
+                                "type": "object",
+                                "properties": {
+                                  "revision": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 1
+                                  },
+                                  "updateTime": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "sloTimeFrame": {
+                                "enum": [
+                                  "SLO_TIME_FRAME_UNSPECIFIED",
+                                  "SLO_TIME_FRAME_7_DAYS",
+                                  "SLO_TIME_FRAME_14_DAYS",
+                                  "SLO_TIME_FRAME_21_DAYS",
+                                  "SLO_TIME_FRAME_28_DAYS"
+                                ],
+                                "type": "string"
+                              },
+                              "targetThresholdPercentage": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 99.999
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "request"
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "windowBasedMetricSli": {
+                                "title": "WindowBasedMetricSli",
+                                "required": [
+                                  "query",
+                                  "window",
+                                  "comparisonOperator",
+                                  "threshold"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "comparisonOperator": {
+                                    "enum": [
+                                      "COMPARISON_OPERATOR_UNSPECIFIED",
+                                      "COMPARISON_OPERATOR_GREATER_THAN",
+                                      "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                      "COMPARISON_OPERATOR_LESS_THAN",
+                                      "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "missingDataStrategy": {
+                                    "enum": [
+                                      "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                      "MISSING_DATA_STRATEGY_GOOD",
+                                      "MISSING_DATA_STRATEGY_BAD"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "query": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  },
+                                  "threshold": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 0.95
+                                  },
+                                  "window": {
+                                    "enum": [
+                                      "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                      "WINDOW_SLO_WINDOW_1_MINUTE",
+                                      "WINDOW_SLO_WINDOW_5_MINUTES"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "Definition of a window-based SLI based on metrics",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "description": "Definition of an SLO",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "description": "Response containing a list of SLOs.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "List Slos",
+        "tags": [
+          "Slos Service"
+        ]
+      },
+      "put": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_ReplaceSlo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "requestBasedMetricSli": {
+                        "title": "RequestBasedMetricSli",
+                        "required": [
+                          "goodEvents",
+                          "totalEvents"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "goodEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "totalEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        },
+                        "description": "Definition of a request-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  },
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "windowBasedMetricSli": {
+                        "title": "WindowBasedMetricSli",
+                        "required": [
+                          "query",
+                          "window",
+                          "comparisonOperator",
+                          "threshold"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "comparisonOperator": {
+                            "enum": [
+                              "COMPARISON_OPERATOR_UNSPECIFIED",
+                              "COMPARISON_OPERATOR_GREATER_THAN",
+                              "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                              "COMPARISON_OPERATOR_LESS_THAN",
+                              "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                            ],
+                            "type": "string"
+                          },
+                          "missingDataStrategy": {
+                            "enum": [
+                              "MISSING_DATA_STRATEGY_UNCOUNTED",
+                              "MISSING_DATA_STRATEGY_GOOD",
+                              "MISSING_DATA_STRATEGY_BAD"
+                            ],
+                            "type": "string"
+                          },
+                          "query": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "threshold": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 0.95
+                          },
+                          "window": {
+                            "enum": [
+                              "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                              "WINDOW_SLO_WINDOW_1_MINUTE",
+                              "WINDOW_SLO_WINDOW_5_MINUTES"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Definition of a window-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ReplaceSloResponse",
+                  "required": [
+                    "slo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "effectedSloAlertIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "slo": {
+                      "oneOf": [
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "requestBasedMetricSli": {
+                              "title": "RequestBasedMetricSli",
+                              "required": [
+                                "goodEvents",
+                                "totalEvents"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "goodEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "totalEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "description": "Definition of a request-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "windowBasedMetricSli": {
+                              "title": "WindowBasedMetricSli",
+                              "required": [
+                                "query",
+                                "window",
+                                "comparisonOperator",
+                                "threshold"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "comparisonOperator": {
+                                  "enum": [
+                                    "COMPARISON_OPERATOR_UNSPECIFIED",
+                                    "COMPARISON_OPERATOR_GREATER_THAN",
+                                    "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                    "COMPARISON_OPERATOR_LESS_THAN",
+                                    "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "missingDataStrategy": {
+                                  "enum": [
+                                    "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                    "MISSING_DATA_STRATEGY_GOOD",
+                                    "MISSING_DATA_STRATEGY_BAD"
+                                  ],
+                                  "type": "string"
+                                },
+                                "query": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "threshold": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 0.95
+                                },
+                                "window": {
+                                  "enum": [
+                                    "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                    "WINDOW_SLO_WINDOW_1_MINUTE",
+                                    "WINDOW_SLO_WINDOW_5_MINUTES"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Definition of a window-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "description": "Response after replacing an existing SLO.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Replace Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      },
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_CreateSlo",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "requestBasedMetricSli": {
+                        "title": "RequestBasedMetricSli",
+                        "required": [
+                          "goodEvents",
+                          "totalEvents"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "goodEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "totalEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        },
+                        "description": "Definition of a request-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  },
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "windowBasedMetricSli": {
+                        "title": "WindowBasedMetricSli",
+                        "required": [
+                          "query",
+                          "window",
+                          "comparisonOperator",
+                          "threshold"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "comparisonOperator": {
+                            "enum": [
+                              "COMPARISON_OPERATOR_UNSPECIFIED",
+                              "COMPARISON_OPERATOR_GREATER_THAN",
+                              "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                              "COMPARISON_OPERATOR_LESS_THAN",
+                              "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                            ],
+                            "type": "string"
+                          },
+                          "missingDataStrategy": {
+                            "enum": [
+                              "MISSING_DATA_STRATEGY_UNCOUNTED",
+                              "MISSING_DATA_STRATEGY_GOOD",
+                              "MISSING_DATA_STRATEGY_BAD"
+                            ],
+                            "type": "string"
+                          },
+                          "query": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "threshold": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 0.95
+                          },
+                          "window": {
+                            "enum": [
+                              "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                              "WINDOW_SLO_WINDOW_1_MINUTE",
+                              "WINDOW_SLO_WINDOW_5_MINUTES"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Definition of a window-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "CreateSloResponse",
+                  "required": [
+                    "slo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "slo": {
+                      "oneOf": [
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "requestBasedMetricSli": {
+                              "title": "RequestBasedMetricSli",
+                              "required": [
+                                "goodEvents",
+                                "totalEvents"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "goodEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "totalEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "description": "Definition of a request-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "windowBasedMetricSli": {
+                              "title": "WindowBasedMetricSli",
+                              "required": [
+                                "query",
+                                "window",
+                                "comparisonOperator",
+                                "threshold"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "comparisonOperator": {
+                                  "enum": [
+                                    "COMPARISON_OPERATOR_UNSPECIFIED",
+                                    "COMPARISON_OPERATOR_GREATER_THAN",
+                                    "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                    "COMPARISON_OPERATOR_LESS_THAN",
+                                    "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "missingDataStrategy": {
+                                  "enum": [
+                                    "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                    "MISSING_DATA_STRATEGY_GOOD",
+                                    "MISSING_DATA_STRATEGY_BAD"
+                                  ],
+                                  "type": "string"
+                                },
+                                "query": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "threshold": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 0.95
+                                },
+                                "window": {
+                                  "enum": [
+                                    "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                    "WINDOW_SLO_WINDOW_1_MINUTE",
+                                    "WINDOW_SLO_WINDOW_5_MINUTES"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Definition of a window-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "description": "Response after creating a new SLO.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Create Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    },
+    "/v1/slo/slos/validate": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_ValidateReplaceSloAlerts",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "oneOf": [
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "requestBasedMetricSli": {
+                        "title": "RequestBasedMetricSli",
+                        "required": [
+                          "goodEvents",
+                          "totalEvents"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "goodEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "totalEvents": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        },
+                        "description": "Definition of a request-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  },
+                  {
+                    "description": "Definition of an SLO",
+                    "properties": {
+                      "createTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "creator": {
+                        "example": "test@domain.com",
+                        "type": "string"
+                      },
+                      "description": {
+                        "example": "A brief description of my SLO",
+                        "type": "string"
+                      },
+                      "grouping": {
+                        "title": "Grouping",
+                        "type": "object",
+                        "properties": {
+                          "labels": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "description": "Definition of the SLO grouping fields",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "id": {
+                        "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9",
+                        "type": "string"
+                      },
+                      "labels": {
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "key": {
+                              "type": "string"
+                            },
+                            "value": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "type": "array"
+                      },
+                      "name": {
+                        "example": "Example Slo Name",
+                        "type": "string"
+                      },
+                      "revision": {
+                        "title": "Revision",
+                        "type": "object",
+                        "properties": {
+                          "revision": {
+                            "type": "integer",
+                            "format": "int32",
+                            "example": 1
+                          },
+                          "updateTime": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        },
+                        "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "sloTimeFrame": {
+                        "enum": [
+                          "SLO_TIME_FRAME_UNSPECIFIED",
+                          "SLO_TIME_FRAME_7_DAYS",
+                          "SLO_TIME_FRAME_14_DAYS",
+                          "SLO_TIME_FRAME_21_DAYS",
+                          "SLO_TIME_FRAME_28_DAYS"
+                        ],
+                        "type": "string"
+                      },
+                      "targetThresholdPercentage": {
+                        "example": 99.999,
+                        "format": "float",
+                        "type": "number"
+                      },
+                      "type": {
+                        "example": "request",
+                        "type": "string"
+                      },
+                      "updateTime": {
+                        "format": "date-time",
+                        "type": "string"
+                      },
+                      "windowBasedMetricSli": {
+                        "title": "WindowBasedMetricSli",
+                        "required": [
+                          "query",
+                          "window",
+                          "comparisonOperator",
+                          "threshold"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "comparisonOperator": {
+                            "enum": [
+                              "COMPARISON_OPERATOR_UNSPECIFIED",
+                              "COMPARISON_OPERATOR_GREATER_THAN",
+                              "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                              "COMPARISON_OPERATOR_LESS_THAN",
+                              "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                            ],
+                            "type": "string"
+                          },
+                          "missingDataStrategy": {
+                            "enum": [
+                              "MISSING_DATA_STRATEGY_UNCOUNTED",
+                              "MISSING_DATA_STRATEGY_GOOD",
+                              "MISSING_DATA_STRATEGY_BAD"
+                            ],
+                            "type": "string"
+                          },
+                          "query": {
+                            "title": "Metric",
+                            "required": [
+                              "query"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "query": {
+                                "type": "string",
+                                "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                              }
+                            },
+                            "description": "Definition of a metric used in SLOs",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          "threshold": {
+                            "type": "number",
+                            "format": "float",
+                            "example": 0.95
+                          },
+                          "window": {
+                            "enum": [
+                              "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                              "WINDOW_SLO_WINDOW_1_MINUTE",
+                              "WINDOW_SLO_WINDOW_5_MINUTES"
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        "description": "Definition of a window-based SLI based on metrics",
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "targetThresholdPercentage",
+                      "window",
+                      "sli"
+                    ],
+                    "title": "Slo",
+                    "type": "object"
+                  }
+                ],
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ReplaceSloAlertsValidationsResponse",
+                  "required": [
+                    "alertsValidationResult"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "alertsValidationResult": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "alertVersionId": {
+                            "type": "string"
+                          },
+                          "errorMessage": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "string"
+                          },
+                          "name": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "description": "Response with validated alerts before replacing an existing SLO.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Replace Slo Pre-Validate Alerts",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    },
+    "/v1/slo/slos/zeroState": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_GetZeroState",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetZeroStateResponse",
+                  "required": [
+                    "zeroState"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "zeroState": {
+                      "type": "boolean"
+                    }
+                  },
+                  "description": "Response with Zero State.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Slo Zero State",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    },
+    "/v1/slo/slos/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_GetSlo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "GetSloResponse",
+                  "required": [
+                    "slo"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "slo": {
+                      "oneOf": [
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "requestBasedMetricSli": {
+                              "title": "RequestBasedMetricSli",
+                              "required": [
+                                "goodEvents",
+                                "totalEvents"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "goodEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "totalEvents": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "description": "Definition of a request-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        },
+                        {
+                          "title": "Slo",
+                          "required": [
+                            "name",
+                            "targetThresholdPercentage",
+                            "window",
+                            "sli"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "createTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "creator": {
+                              "type": "string",
+                              "example": "test@domain.com"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "A brief description of my SLO"
+                            },
+                            "grouping": {
+                              "title": "Grouping",
+                              "type": "object",
+                              "properties": {
+                                "labels": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              "description": "Definition of the SLO grouping fields",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "id": {
+                              "type": "string",
+                              "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                            },
+                            "labels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Example Slo Name"
+                            },
+                            "revision": {
+                              "title": "Revision",
+                              "type": "object",
+                              "properties": {
+                                "revision": {
+                                  "type": "integer",
+                                  "format": "int32",
+                                  "example": 1
+                                },
+                                "updateTime": {
+                                  "type": "string",
+                                  "format": "date-time"
+                                }
+                              },
+                              "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "sloTimeFrame": {
+                              "enum": [
+                                "SLO_TIME_FRAME_UNSPECIFIED",
+                                "SLO_TIME_FRAME_7_DAYS",
+                                "SLO_TIME_FRAME_14_DAYS",
+                                "SLO_TIME_FRAME_21_DAYS",
+                                "SLO_TIME_FRAME_28_DAYS"
+                              ],
+                              "type": "string"
+                            },
+                            "targetThresholdPercentage": {
+                              "type": "number",
+                              "format": "float",
+                              "example": 99.999
+                            },
+                            "type": {
+                              "type": "string",
+                              "example": "request"
+                            },
+                            "updateTime": {
+                              "type": "string",
+                              "format": "date-time"
+                            },
+                            "windowBasedMetricSli": {
+                              "title": "WindowBasedMetricSli",
+                              "required": [
+                                "query",
+                                "window",
+                                "comparisonOperator",
+                                "threshold"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "comparisonOperator": {
+                                  "enum": [
+                                    "COMPARISON_OPERATOR_UNSPECIFIED",
+                                    "COMPARISON_OPERATOR_GREATER_THAN",
+                                    "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                    "COMPARISON_OPERATOR_LESS_THAN",
+                                    "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                  ],
+                                  "type": "string"
+                                },
+                                "missingDataStrategy": {
+                                  "enum": [
+                                    "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                    "MISSING_DATA_STRATEGY_GOOD",
+                                    "MISSING_DATA_STRATEGY_BAD"
+                                  ],
+                                  "type": "string"
+                                },
+                                "query": {
+                                  "title": "Metric",
+                                  "required": [
+                                    "query"
+                                  ],
+                                  "type": "object",
+                                  "properties": {
+                                    "query": {
+                                      "type": "string",
+                                      "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                    }
+                                  },
+                                  "description": "Definition of a metric used in SLOs",
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                },
+                                "threshold": {
+                                  "type": "number",
+                                  "format": "float",
+                                  "example": 0.95
+                                },
+                                "window": {
+                                  "enum": [
+                                    "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                    "WINDOW_SLO_WINDOW_1_MINUTE",
+                                    "WINDOW_SLO_WINDOW_5_MINUTES"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Definition of a window-based SLI based on metrics",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            }
+                          },
+                          "description": "Definition of an SLO",
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "description": "Response containing the details of a specific SLO.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      },
+      "delete": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_DeleteSlo",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "DeleteSloResponse",
+                  "type": "object",
+                  "properties": {
+                    "effectedSloAlertIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "description": "Response after deleting an existing SLO.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Delete Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    },
+    "/v1/slo/slos:batchExecute": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_BatchExecuteSlo",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "BatchExecuteSloResponse",
+                  "required": [
+                    "matchingResponses"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "matchingResponses": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "title": "SloExecutionResponse",
+                            "type": "object",
+                            "properties": {
+                              "createSloResponse": {
+                                "title": "CreateSloResponse",
+                                "required": [
+                                  "slo"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "slo": {
+                                    "oneOf": [
+                                      {
+                                        "title": "Slo",
+                                        "required": [
+                                          "name",
+                                          "targetThresholdPercentage",
+                                          "window",
+                                          "sli"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                          "createTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "creator": {
+                                            "type": "string",
+                                            "example": "test@domain.com"
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "example": "A brief description of my SLO"
+                                          },
+                                          "grouping": {
+                                            "title": "Grouping",
+                                            "type": "object",
+                                            "properties": {
+                                              "labels": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of the SLO grouping fields",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                                          },
+                                          "labels": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "key": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "example": "Example Slo Name"
+                                          },
+                                          "requestBasedMetricSli": {
+                                            "title": "RequestBasedMetricSli",
+                                            "required": [
+                                              "goodEvents",
+                                              "totalEvents"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                              "goodEvents": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              },
+                                              "totalEvents": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of a request-based SLI based on metrics",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "revision": {
+                                            "title": "Revision",
+                                            "type": "object",
+                                            "properties": {
+                                              "revision": {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "example": 1
+                                              },
+                                              "updateTime": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            },
+                                            "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "sloTimeFrame": {
+                                            "enum": [
+                                              "SLO_TIME_FRAME_UNSPECIFIED",
+                                              "SLO_TIME_FRAME_7_DAYS",
+                                              "SLO_TIME_FRAME_14_DAYS",
+                                              "SLO_TIME_FRAME_21_DAYS",
+                                              "SLO_TIME_FRAME_28_DAYS"
+                                            ],
+                                            "type": "string"
+                                          },
+                                          "targetThresholdPercentage": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 99.999
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "example": "request"
+                                          },
+                                          "updateTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        },
+                                        "description": "Definition of an SLO",
+                                        "externalDocs": {
+                                          "url": ""
+                                        }
+                                      },
+                                      {
+                                        "title": "Slo",
+                                        "required": [
+                                          "name",
+                                          "targetThresholdPercentage",
+                                          "window",
+                                          "sli"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                          "createTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "creator": {
+                                            "type": "string",
+                                            "example": "test@domain.com"
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "example": "A brief description of my SLO"
+                                          },
+                                          "grouping": {
+                                            "title": "Grouping",
+                                            "type": "object",
+                                            "properties": {
+                                              "labels": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of the SLO grouping fields",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                                          },
+                                          "labels": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "key": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "example": "Example Slo Name"
+                                          },
+                                          "revision": {
+                                            "title": "Revision",
+                                            "type": "object",
+                                            "properties": {
+                                              "revision": {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "example": 1
+                                              },
+                                              "updateTime": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            },
+                                            "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "sloTimeFrame": {
+                                            "enum": [
+                                              "SLO_TIME_FRAME_UNSPECIFIED",
+                                              "SLO_TIME_FRAME_7_DAYS",
+                                              "SLO_TIME_FRAME_14_DAYS",
+                                              "SLO_TIME_FRAME_21_DAYS",
+                                              "SLO_TIME_FRAME_28_DAYS"
+                                            ],
+                                            "type": "string"
+                                          },
+                                          "targetThresholdPercentage": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 99.999
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "example": "request"
+                                          },
+                                          "updateTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "windowBasedMetricSli": {
+                                            "title": "WindowBasedMetricSli",
+                                            "required": [
+                                              "query",
+                                              "window",
+                                              "comparisonOperator",
+                                              "threshold"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                              "comparisonOperator": {
+                                                "enum": [
+                                                  "COMPARISON_OPERATOR_UNSPECIFIED",
+                                                  "COMPARISON_OPERATOR_GREATER_THAN",
+                                                  "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                                  "COMPARISON_OPERATOR_LESS_THAN",
+                                                  "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                                ],
+                                                "type": "string"
+                                              },
+                                              "missingDataStrategy": {
+                                                "enum": [
+                                                  "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                                  "MISSING_DATA_STRATEGY_GOOD",
+                                                  "MISSING_DATA_STRATEGY_BAD"
+                                                ],
+                                                "type": "string"
+                                              },
+                                              "query": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              },
+                                              "threshold": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 0.95
+                                              },
+                                              "window": {
+                                                "enum": [
+                                                  "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                                  "WINDOW_SLO_WINDOW_1_MINUTE",
+                                                  "WINDOW_SLO_WINDOW_5_MINUTES"
+                                                ],
+                                                "type": "string"
+                                              }
+                                            },
+                                            "description": "Definition of a window-based SLI based on metrics",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          }
+                                        },
+                                        "description": "Definition of an SLO",
+                                        "externalDocs": {
+                                          "url": ""
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                "description": "Response after creating a new SLO.",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "description": "Response for an executed SLO operation.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          {
+                            "title": "SloExecutionResponse",
+                            "type": "object",
+                            "properties": {
+                              "replaceSloResponse": {
+                                "title": "ReplaceSloResponse",
+                                "required": [
+                                  "slo"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "effectedSloAlertIds": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  },
+                                  "slo": {
+                                    "oneOf": [
+                                      {
+                                        "title": "Slo",
+                                        "required": [
+                                          "name",
+                                          "targetThresholdPercentage",
+                                          "window",
+                                          "sli"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                          "createTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "creator": {
+                                            "type": "string",
+                                            "example": "test@domain.com"
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "example": "A brief description of my SLO"
+                                          },
+                                          "grouping": {
+                                            "title": "Grouping",
+                                            "type": "object",
+                                            "properties": {
+                                              "labels": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of the SLO grouping fields",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                                          },
+                                          "labels": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "key": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "example": "Example Slo Name"
+                                          },
+                                          "requestBasedMetricSli": {
+                                            "title": "RequestBasedMetricSli",
+                                            "required": [
+                                              "goodEvents",
+                                              "totalEvents"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                              "goodEvents": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              },
+                                              "totalEvents": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of a request-based SLI based on metrics",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "revision": {
+                                            "title": "Revision",
+                                            "type": "object",
+                                            "properties": {
+                                              "revision": {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "example": 1
+                                              },
+                                              "updateTime": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            },
+                                            "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "sloTimeFrame": {
+                                            "enum": [
+                                              "SLO_TIME_FRAME_UNSPECIFIED",
+                                              "SLO_TIME_FRAME_7_DAYS",
+                                              "SLO_TIME_FRAME_14_DAYS",
+                                              "SLO_TIME_FRAME_21_DAYS",
+                                              "SLO_TIME_FRAME_28_DAYS"
+                                            ],
+                                            "type": "string"
+                                          },
+                                          "targetThresholdPercentage": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 99.999
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "example": "request"
+                                          },
+                                          "updateTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          }
+                                        },
+                                        "description": "Definition of an SLO",
+                                        "externalDocs": {
+                                          "url": ""
+                                        }
+                                      },
+                                      {
+                                        "title": "Slo",
+                                        "required": [
+                                          "name",
+                                          "targetThresholdPercentage",
+                                          "window",
+                                          "sli"
+                                        ],
+                                        "type": "object",
+                                        "properties": {
+                                          "createTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "creator": {
+                                            "type": "string",
+                                            "example": "test@domain.com"
+                                          },
+                                          "description": {
+                                            "type": "string",
+                                            "example": "A brief description of my SLO"
+                                          },
+                                          "grouping": {
+                                            "title": "Grouping",
+                                            "type": "object",
+                                            "properties": {
+                                              "labels": {
+                                                "type": "array",
+                                                "items": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            },
+                                            "description": "Definition of the SLO grouping fields",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "id": {
+                                            "type": "string",
+                                            "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                                          },
+                                          "labels": {
+                                            "type": "array",
+                                            "items": {
+                                              "type": "object",
+                                              "properties": {
+                                                "key": {
+                                                  "type": "string"
+                                                },
+                                                "value": {
+                                                  "type": "string"
+                                                }
+                                              }
+                                            }
+                                          },
+                                          "name": {
+                                            "type": "string",
+                                            "example": "Example Slo Name"
+                                          },
+                                          "revision": {
+                                            "title": "Revision",
+                                            "type": "object",
+                                            "properties": {
+                                              "revision": {
+                                                "type": "integer",
+                                                "format": "int32",
+                                                "example": 1
+                                              },
+                                              "updateTime": {
+                                                "type": "string",
+                                                "format": "date-time"
+                                              }
+                                            },
+                                            "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          },
+                                          "sloTimeFrame": {
+                                            "enum": [
+                                              "SLO_TIME_FRAME_UNSPECIFIED",
+                                              "SLO_TIME_FRAME_7_DAYS",
+                                              "SLO_TIME_FRAME_14_DAYS",
+                                              "SLO_TIME_FRAME_21_DAYS",
+                                              "SLO_TIME_FRAME_28_DAYS"
+                                            ],
+                                            "type": "string"
+                                          },
+                                          "targetThresholdPercentage": {
+                                            "type": "number",
+                                            "format": "float",
+                                            "example": 99.999
+                                          },
+                                          "type": {
+                                            "type": "string",
+                                            "example": "request"
+                                          },
+                                          "updateTime": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                          },
+                                          "windowBasedMetricSli": {
+                                            "title": "WindowBasedMetricSli",
+                                            "required": [
+                                              "query",
+                                              "window",
+                                              "comparisonOperator",
+                                              "threshold"
+                                            ],
+                                            "type": "object",
+                                            "properties": {
+                                              "comparisonOperator": {
+                                                "enum": [
+                                                  "COMPARISON_OPERATOR_UNSPECIFIED",
+                                                  "COMPARISON_OPERATOR_GREATER_THAN",
+                                                  "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                                  "COMPARISON_OPERATOR_LESS_THAN",
+                                                  "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                                ],
+                                                "type": "string"
+                                              },
+                                              "missingDataStrategy": {
+                                                "enum": [
+                                                  "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                                  "MISSING_DATA_STRATEGY_GOOD",
+                                                  "MISSING_DATA_STRATEGY_BAD"
+                                                ],
+                                                "type": "string"
+                                              },
+                                              "query": {
+                                                "title": "Metric",
+                                                "required": [
+                                                  "query"
+                                                ],
+                                                "type": "object",
+                                                "properties": {
+                                                  "query": {
+                                                    "type": "string",
+                                                    "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                                  }
+                                                },
+                                                "description": "Definition of a metric used in SLOs",
+                                                "externalDocs": {
+                                                  "url": ""
+                                                }
+                                              },
+                                              "threshold": {
+                                                "type": "number",
+                                                "format": "float",
+                                                "example": 0.95
+                                              },
+                                              "window": {
+                                                "enum": [
+                                                  "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                                  "WINDOW_SLO_WINDOW_1_MINUTE",
+                                                  "WINDOW_SLO_WINDOW_5_MINUTES"
+                                                ],
+                                                "type": "string"
+                                              }
+                                            },
+                                            "description": "Definition of a window-based SLI based on metrics",
+                                            "externalDocs": {
+                                              "url": ""
+                                            }
+                                          }
+                                        },
+                                        "description": "Definition of an SLO",
+                                        "externalDocs": {
+                                          "url": ""
+                                        }
+                                      }
+                                    ]
+                                  }
+                                },
+                                "description": "Response after replacing an existing SLO.",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "description": "Response for an executed SLO operation.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          {
+                            "title": "SloExecutionResponse",
+                            "type": "object",
+                            "properties": {
+                              "deleteSloResponse": {
+                                "title": "DeleteSloResponse",
+                                "type": "object",
+                                "properties": {
+                                  "effectedSloAlertIds": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "Response after deleting an existing SLO.",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "description": "Response for an executed SLO operation.",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "status": {
+                      "title": "ResponseStatus",
+                      "required": [
+                        "statusCode"
+                      ],
+                      "type": "object",
+                      "properties": {
+                        "details": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "key": {
+                                "type": "string"
+                              },
+                              "value": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        },
+                        "message": {
+                          "type": "string"
+                        },
+                        "statusCode": {
+                          "enum": [
+                            "OK",
+                            "CANCELLED",
+                            "UNKNOWN",
+                            "INVALID_ARGUMENT",
+                            "DEADLINE_EXCEEDED",
+                            "NOT_FOUND",
+                            "ALREADY_EXISTS",
+                            "PERMISSION_DENIED",
+                            "UNAUTHENTICATED",
+                            "RESOURCE_EXHAUSTED",
+                            "FAILED_PRECONDITION",
+                            "ABORTED",
+                            "OUT_OF_RANGE",
+                            "UNIMPLEMENTED",
+                            "INTERNAL",
+                            "UNAVAILABLE",
+                            "DATA_LOSS"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "description": "Status of the response, including error code and message.",
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  },
+                  "description": "Response containing the results of batch executed SLO operations.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Batch Execute Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    },
+    "/v1/slo/slos:batchGet": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SlosService_BatchGetSlos",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "BatchGetSlosResponse",
+                  "required": [
+                    "slos"
+                  ],
+                  "type": "object",
+                  "properties": {
+                    "notFoundIds": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    },
+                    "slos": {
+                      "type": "array",
+                      "items": {
+                        "oneOf": [
+                          {
+                            "title": "Slo",
+                            "required": [
+                              "name",
+                              "targetThresholdPercentage",
+                              "window",
+                              "sli"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "creator": {
+                                "type": "string",
+                                "example": "test@domain.com"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "A brief description of my SLO"
+                              },
+                              "grouping": {
+                                "title": "Grouping",
+                                "type": "object",
+                                "properties": {
+                                  "labels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "Definition of the SLO grouping fields",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "id": {
+                                "type": "string",
+                                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                              },
+                              "labels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Example Slo Name"
+                              },
+                              "requestBasedMetricSli": {
+                                "title": "RequestBasedMetricSli",
+                                "required": [
+                                  "goodEvents",
+                                  "totalEvents"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "goodEvents": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  },
+                                  "totalEvents": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  }
+                                },
+                                "description": "Definition of a request-based SLI based on metrics",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "revision": {
+                                "title": "Revision",
+                                "type": "object",
+                                "properties": {
+                                  "revision": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 1
+                                  },
+                                  "updateTime": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "sloTimeFrame": {
+                                "enum": [
+                                  "SLO_TIME_FRAME_UNSPECIFIED",
+                                  "SLO_TIME_FRAME_7_DAYS",
+                                  "SLO_TIME_FRAME_14_DAYS",
+                                  "SLO_TIME_FRAME_21_DAYS",
+                                  "SLO_TIME_FRAME_28_DAYS"
+                                ],
+                                "type": "string"
+                              },
+                              "targetThresholdPercentage": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 99.999
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "request"
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              }
+                            },
+                            "description": "Definition of an SLO",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          },
+                          {
+                            "title": "Slo",
+                            "required": [
+                              "name",
+                              "targetThresholdPercentage",
+                              "window",
+                              "sli"
+                            ],
+                            "type": "object",
+                            "properties": {
+                              "createTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "creator": {
+                                "type": "string",
+                                "example": "test@domain.com"
+                              },
+                              "description": {
+                                "type": "string",
+                                "example": "A brief description of my SLO"
+                              },
+                              "grouping": {
+                                "title": "Grouping",
+                                "type": "object",
+                                "properties": {
+                                  "labels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "description": "Definition of the SLO grouping fields",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "id": {
+                                "type": "string",
+                                "example": "b11919d5-ef85-4bb1-8655-02640dbe94d9"
+                              },
+                              "labels": {
+                                "type": "array",
+                                "items": {
+                                  "type": "object",
+                                  "properties": {
+                                    "key": {
+                                      "type": "string"
+                                    },
+                                    "value": {
+                                      "type": "string"
+                                    }
+                                  }
+                                }
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Example Slo Name"
+                              },
+                              "revision": {
+                                "title": "Revision",
+                                "type": "object",
+                                "properties": {
+                                  "revision": {
+                                    "type": "integer",
+                                    "format": "int32",
+                                    "example": 1
+                                  },
+                                  "updateTime": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "description": "The revision of the slo, used to differentiate between different versions of the same SLO",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "sloTimeFrame": {
+                                "enum": [
+                                  "SLO_TIME_FRAME_UNSPECIFIED",
+                                  "SLO_TIME_FRAME_7_DAYS",
+                                  "SLO_TIME_FRAME_14_DAYS",
+                                  "SLO_TIME_FRAME_21_DAYS",
+                                  "SLO_TIME_FRAME_28_DAYS"
+                                ],
+                                "type": "string"
+                              },
+                              "targetThresholdPercentage": {
+                                "type": "number",
+                                "format": "float",
+                                "example": 99.999
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "request"
+                              },
+                              "updateTime": {
+                                "type": "string",
+                                "format": "date-time"
+                              },
+                              "windowBasedMetricSli": {
+                                "title": "WindowBasedMetricSli",
+                                "required": [
+                                  "query",
+                                  "window",
+                                  "comparisonOperator",
+                                  "threshold"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "comparisonOperator": {
+                                    "enum": [
+                                      "COMPARISON_OPERATOR_UNSPECIFIED",
+                                      "COMPARISON_OPERATOR_GREATER_THAN",
+                                      "COMPARISON_OPERATOR_GREATER_THAN_OR_EQUALS",
+                                      "COMPARISON_OPERATOR_LESS_THAN",
+                                      "COMPARISON_OPERATOR_LESS_THAN_OR_EQUALS"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "missingDataStrategy": {
+                                    "enum": [
+                                      "MISSING_DATA_STRATEGY_UNCOUNTED",
+                                      "MISSING_DATA_STRATEGY_GOOD",
+                                      "MISSING_DATA_STRATEGY_BAD"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "query": {
+                                    "title": "Metric",
+                                    "required": [
+                                      "query"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "query": {
+                                        "type": "string",
+                                        "example": "sum(rate(http_requests_total{status=\"200\"}[5m]))"
+                                      }
+                                    },
+                                    "description": "Definition of a metric used in SLOs",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  },
+                                  "threshold": {
+                                    "type": "number",
+                                    "format": "float",
+                                    "example": 0.95
+                                  },
+                                  "window": {
+                                    "enum": [
+                                      "WINDOW_SLO_WINDOW_UNSPECIFIED",
+                                      "WINDOW_SLO_WINDOW_1_MINUTE",
+                                      "WINDOW_SLO_WINDOW_5_MINUTES"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "description": "Definition of a window-based SLI based on metrics",
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "description": "Definition of an SLO",
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  },
+                  "description": "Response containing a batch of SLOs and any IDs not found.",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Batch Get Slo",
+        "tags": [
+          "Slos Service"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Slos Service",
+      "description": "A service for managing Service Level Objectives (SLOs).",
+      "externalDocs": {
+        "url": ""
+      }
+    }
+  ]
+}

@@ -1,0 +1,742 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v1/extensions-testing/cleanup": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionTestingService_CleanupTestingRevision",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "title": "Cleanup testing revision request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Cleanup testing revision response",
+                  "type": "object",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Cleanup testing extension",
+        "tags": [
+          "Extension testing service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:UpdateConfig"
+        ]
+      }
+    },
+    "/v1/extensions-testing/initialize": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionTestingService_InitializeTestingRevision",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "extensionData": {
+                    "title": "Extension data",
+                    "required": [
+                      "id",
+                      "name",
+                      "image",
+                      "version"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "binaries": {
+                        "type": "array",
+                        "items": {
+                          "title": "Extension binary",
+                          "required": [
+                            "type",
+                            "data"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "KIBANA_INDEX_PATTERN"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "changelog": {
+                        "type": "array",
+                        "items": {
+                          "title": "Changelog entry",
+                          "required": [
+                            "version",
+                            "descriptionMd"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "descriptionMd": {
+                              "type": "string"
+                            },
+                            "version": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "darkModeImage": {
+                        "type": "string"
+                      },
+                      "deprecation": {
+                        "title": "Deprecation",
+                        "required": [
+                          "reason"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "reason": {
+                            "type": "string"
+                          },
+                          "replacementExtensions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Integration with AWS CloudWatch for monitoring and logging"
+                      },
+                      "excerpt": {
+                        "type": "string",
+                        "example": "Monitor AWS resources and analyze logs with CloudWatch integration"
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "integrationDetails": {
+                        "type": "array",
+                        "items": {
+                          "title": "Integration detail",
+                          "required": [
+                            "name",
+                            "link"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "link": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "integrations": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "isHidden": {
+                        "type": "boolean"
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "title": "Extension item data",
+                          "required": [
+                            "name",
+                            "targetDomain",
+                            "data"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "binaries": {
+                              "type": "array",
+                              "items": {
+                                "title": "Extension item binary",
+                                "required": [
+                                  "type",
+                                  "data",
+                                  "fileName"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "string"
+                                  },
+                                  "fileName": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "PREVIEW_IMAGE",
+                                      "KIBANA_DASHBOARD_DEFINITION",
+                                      "GRAFANA_DASHBOARD_DEFINITION",
+                                      "ENRICHMENT_CSV",
+                                      "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "data": {
+                              "type": "object"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "Less than 60% cocoa"
+                            },
+                            "internalId": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "isMandatory": {
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Low cocoa content"
+                            },
+                            "permissionResource": {
+                              "enum": [
+                                "UNKNOWN",
+                                "ACTION",
+                                "ALERT",
+                                "CUSTOM_ENRICHMENT",
+                                "GEO_ENRICHMENT",
+                                "SECURITY_ENRICHMENT",
+                                "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                "GRAFANA_DASHBOARD",
+                                "KIBANA_DASHBOARD",
+                                "PARSING_RULE",
+                                "SAVED_VIEW",
+                                "CX_CUSTOM_DASHBOARD",
+                                "METRICS_RULE_GROUP",
+                                "SPAN_EVENTS_TO_METRICS",
+                                "LOGS_EVENTS_TO_METRICS"
+                              ],
+                              "type": "string"
+                            },
+                            "stableId": {
+                              "type": "string"
+                            },
+                            "targetDomain": {
+                              "enum": [
+                                "ACTION",
+                                "ALERT",
+                                "ENRICHMENT",
+                                "GRAFANA_DASHBOARD",
+                                "KIBANA_DASHBOARD",
+                                "PARSING_RULE",
+                                "SAVED_VIEW",
+                                "CX_CUSTOM_DASHBOARD",
+                                "METRICS_RULE_GROUP",
+                                "EVENTS_TO_METRICS",
+                                "ALERT_V3"
+                              ],
+                              "type": "string"
+                            },
+                            "uniqueId": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "keywords": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "labels": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "AWS CloudWatch Extension"
+                      },
+                      "version": {
+                        "type": "string",
+                        "example": "v1.0.13"
+                      }
+                    },
+                    "description": "Extension details for ingestion",
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  }
+                },
+                "required": [
+                  "extensionData"
+                ],
+                "title": "Initialize testing revision request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Initialize testing revision response",
+                  "type": "object",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Initialize testing revision",
+        "tags": [
+          "Extension testing service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:UpdateConfig"
+        ]
+      }
+    },
+    "/v1/extensions-testing/test": {
+      "post": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionTestingService_TestExtensionRevision",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "cleanupAfterTest": {
+                    "type": "boolean"
+                  },
+                  "extensionData": {
+                    "title": "Extension data",
+                    "required": [
+                      "id",
+                      "name",
+                      "image",
+                      "version"
+                    ],
+                    "type": "object",
+                    "properties": {
+                      "binaries": {
+                        "type": "array",
+                        "items": {
+                          "title": "Extension binary",
+                          "required": [
+                            "type",
+                            "data"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "data": {
+                              "type": "string"
+                            },
+                            "type": {
+                              "enum": [
+                                "KIBANA_INDEX_PATTERN"
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "changelog": {
+                        "type": "array",
+                        "items": {
+                          "title": "Changelog entry",
+                          "required": [
+                            "version",
+                            "descriptionMd"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "descriptionMd": {
+                              "type": "string"
+                            },
+                            "version": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "darkModeImage": {
+                        "type": "string"
+                      },
+                      "deprecation": {
+                        "title": "Deprecation",
+                        "required": [
+                          "reason"
+                        ],
+                        "type": "object",
+                        "properties": {
+                          "reason": {
+                            "type": "string"
+                          },
+                          "replacementExtensions": {
+                            "type": "array",
+                            "items": {
+                              "type": "string"
+                            }
+                          }
+                        },
+                        "externalDocs": {
+                          "url": ""
+                        }
+                      },
+                      "description": {
+                        "type": "string",
+                        "example": "Integration with AWS CloudWatch for monitoring and logging"
+                      },
+                      "excerpt": {
+                        "type": "string",
+                        "example": "Monitor AWS resources and analyze logs with CloudWatch integration"
+                      },
+                      "id": {
+                        "type": "string",
+                        "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7"
+                      },
+                      "image": {
+                        "type": "string"
+                      },
+                      "integrationDetails": {
+                        "type": "array",
+                        "items": {
+                          "title": "Integration detail",
+                          "required": [
+                            "name",
+                            "link"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "link": {
+                              "type": "string"
+                            },
+                            "name": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "integrations": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "isHidden": {
+                        "type": "boolean"
+                      },
+                      "items": {
+                        "type": "array",
+                        "items": {
+                          "title": "Extension item data",
+                          "required": [
+                            "name",
+                            "targetDomain",
+                            "data"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "binaries": {
+                              "type": "array",
+                              "items": {
+                                "title": "Extension item binary",
+                                "required": [
+                                  "type",
+                                  "data",
+                                  "fileName"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "data": {
+                                    "type": "string"
+                                  },
+                                  "fileName": {
+                                    "type": "string"
+                                  },
+                                  "type": {
+                                    "enum": [
+                                      "PREVIEW_IMAGE",
+                                      "KIBANA_DASHBOARD_DEFINITION",
+                                      "GRAFANA_DASHBOARD_DEFINITION",
+                                      "ENRICHMENT_CSV",
+                                      "CX_CUSTOM_DASHBOARD_DEFINITION"
+                                    ],
+                                    "type": "string"
+                                  }
+                                },
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            },
+                            "data": {
+                              "type": "object"
+                            },
+                            "description": {
+                              "type": "string",
+                              "example": "Less than 60% cocoa"
+                            },
+                            "internalId": {
+                              "type": "integer",
+                              "format": "int32"
+                            },
+                            "isMandatory": {
+                              "type": "boolean"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Low cocoa content"
+                            },
+                            "permissionResource": {
+                              "enum": [
+                                "UNKNOWN",
+                                "ACTION",
+                                "ALERT",
+                                "CUSTOM_ENRICHMENT",
+                                "GEO_ENRICHMENT",
+                                "SECURITY_ENRICHMENT",
+                                "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+                                "GRAFANA_DASHBOARD",
+                                "KIBANA_DASHBOARD",
+                                "PARSING_RULE",
+                                "SAVED_VIEW",
+                                "CX_CUSTOM_DASHBOARD",
+                                "METRICS_RULE_GROUP",
+                                "SPAN_EVENTS_TO_METRICS",
+                                "LOGS_EVENTS_TO_METRICS"
+                              ],
+                              "type": "string"
+                            },
+                            "stableId": {
+                              "type": "string"
+                            },
+                            "targetDomain": {
+                              "enum": [
+                                "ACTION",
+                                "ALERT",
+                                "ENRICHMENT",
+                                "GRAFANA_DASHBOARD",
+                                "KIBANA_DASHBOARD",
+                                "PARSING_RULE",
+                                "SAVED_VIEW",
+                                "CX_CUSTOM_DASHBOARD",
+                                "METRICS_RULE_GROUP",
+                                "EVENTS_TO_METRICS",
+                                "ALERT_V3"
+                              ],
+                              "type": "string"
+                            },
+                            "uniqueId": {
+                              "type": "string"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "keywords": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "labels": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "AWS CloudWatch Extension"
+                      },
+                      "version": {
+                        "type": "string",
+                        "example": "v1.0.13"
+                      }
+                    },
+                    "description": "Extension details for ingestion",
+                    "externalDocs": {
+                      "url": ""
+                    }
+                  }
+                },
+                "required": [
+                  "extensionData"
+                ],
+                "title": "Test extension revision request",
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Test extension revision response",
+                  "type": "object",
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Test extension revision",
+        "tags": [
+          "Extension testing service"
+        ],
+        "x-coralogixPermissions": [
+          "extensions:UpdateConfig"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Extension testing service",
+      "externalDocs": {
+        "description": "Find out more about extensions in our documentation.",
+        "url": "https://coralogix.com/docs/integrations/extensions/"
+      }
+    }
+  ]
+}

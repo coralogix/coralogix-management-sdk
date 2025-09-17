@@ -1,0 +1,356 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+tags:
+- description: A service to manage scopes
+  externalDocs:
+    url: ""
+  name: Scopes Service
+paths:
+  /v1/scopes:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ScopesService_GetTeamScopesByIds
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Scopes_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Scopes By Ids
+      tags:
+      - Scopes Service
+    post:
+      externalDocs:
+        url: ""
+      operationId: ScopesService_CreateScope
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Scope_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Create_Scope_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Scope
+      tags:
+      - Scopes Service
+    put:
+      externalDocs:
+        url: ""
+      operationId: ScopesService_UpdateScope
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Scope_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Update_Scope_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Scope
+      tags:
+      - Scopes Service
+  /v1/scopes/list:
+    get:
+      externalDocs:
+        url: ""
+      operationId: ScopesService_GetTeamScopes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Get_Scopes_Response"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Team Scopes
+      tags:
+      - Scopes Service
+  /v1/scopes/{id}:
+    delete:
+      externalDocs:
+        url: ""
+      operationId: ScopesService_DeleteScope
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: scope_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                type: object
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Scope
+      tags:
+      - Scopes Service
+components:
+  schemas:
+    Get_Scopes_Response:
+      description: This data structure represents a response to get scopes
+      example:
+        scopes:
+        - defaultExpression: expression
+          displayName: scope_name
+          teamId: 1234
+          description: scope_description
+          filters:
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          id: scope_id
+        - defaultExpression: expression
+          displayName: scope_name
+          teamId: 1234
+          description: scope_description
+          filters:
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          id: scope_id
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        scopes:
+          items:
+            $ref: "#/components/schemas/Scope"
+          type: array
+      required:
+      - scopes
+      title: Get Scopes Response
+      type: object
+    Scope:
+      description: This data structure represents a scope
+      example:
+        defaultExpression: expression
+        displayName: scope_name
+        teamId: 1234
+        description: scope_description
+        filters:
+        - expression: expression
+          entityType: ENTITY_TYPE_UNSPECIFIED
+        - expression: expression
+          entityType: ENTITY_TYPE_UNSPECIFIED
+        id: scope_id
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        defaultExpression:
+          example: expression
+          type: string
+        description:
+          example: scope_description
+          type: string
+        displayName:
+          example: scope_name
+          type: string
+        filters:
+          items:
+            $ref: "#/components/schemas/Filter"
+          type: array
+        id:
+          example: scope_id
+          type: string
+        teamId:
+          example: 1234
+          format: int32
+          type: integer
+      title: Scope
+      type: object
+    Update_Scope_Response:
+      description: This data structure represents a response to update a scope
+      example:
+        scope:
+          defaultExpression: expression
+          displayName: scope_name
+          teamId: 1234
+          description: scope_description
+          filters:
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          id: scope_id
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        scope:
+          $ref: "#/components/schemas/Scope"
+      required:
+      - scope
+      title: Update Scope Response
+      type: object
+    Filter:
+      description: This data structure represents a filter
+      example:
+        expression: expression
+        entityType: ENTITY_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        entityType:
+          enum:
+          - ENTITY_TYPE_UNSPECIFIED
+          - ENTITY_TYPE_LOGS
+          - ENTITY_TYPE_SPANS
+          type: string
+        expression:
+          example: expression
+          type: string
+      title: Filter
+      type: object
+    Update_Scope_Request:
+      description: This data structure represents a request to update a scope
+      properties:
+        defaultExpression:
+          example: expression
+          type: string
+        description:
+          example: scope_description
+          type: string
+        displayName:
+          example: scope_name
+          type: string
+        filters:
+          items:
+            $ref: "#/components/schemas/Filter"
+          type: array
+        id:
+          example: scope_id
+          type: string
+      required:
+      - defaultExpression
+      - displayName
+      - filters
+      - id
+      title: Update Scope Request
+      type: object
+    Create_Scope_Request:
+      description: This data structure represents a request to create a scope
+      properties:
+        defaultExpression:
+          example: expression
+          type: string
+        description:
+          example: scope_description
+          type: string
+        displayName:
+          example: scope_name
+          type: string
+        filters:
+          items:
+            $ref: "#/components/schemas/Filter"
+          type: array
+      required:
+      - displayName
+      - filters
+      title: Create Scope Request
+      type: object
+    Create_Scope_Response:
+      description: This data structure represents a response to create a scope
+      example:
+        scope:
+          defaultExpression: expression
+          displayName: scope_name
+          teamId: 1234
+          description: scope_description
+          filters:
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          - expression: expression
+            entityType: ENTITY_TYPE_UNSPECIFIED
+          id: scope_id
+      externalDocs:
+        description: Find out more about scopes
+        url: https://coralogix.com/docs/user-guides/account-management/user-management/scopes/
+      properties:
+        scope:
+          $ref: "#/components/schemas/Scope"
+      required:
+      - scope
+      title: Create Scope Response
+      type: object

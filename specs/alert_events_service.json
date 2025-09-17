@@ -1,0 +1,497 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v3/alert-event-stats": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertEventService_GetAlertEventsStats",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "Get alert event statistics response",
+                  "type": "object",
+                  "properties": {
+                    "eventsStats": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "key": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "title": "Alert event statistics data structure",
+                            "type": "object",
+                            "properties": {
+                              "activityAnalysisStats": {
+                                "title": "Event activity analysis statistics",
+                                "type": "object",
+                                "properties": {
+                                  "isMutedCount": {
+                                    "type": "integer",
+                                    "format": "int64"
+                                  },
+                                  "rules": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "string"
+                                    }
+                                  }
+                                },
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              },
+                              "count": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "resolvedCount": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "resolvedPermutationsSamples": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Permutation data structure",
+                                  "type": "object",
+                                  "properties": {
+                                    "permutationLabels": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "key": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              },
+                              "triggeredCount": {
+                                "type": "integer",
+                                "format": "int64"
+                              },
+                              "triggeredPermutationsSamples": {
+                                "type": "array",
+                                "items": {
+                                  "title": "Permutation data structure",
+                                  "type": "object",
+                                  "properties": {
+                                    "permutationLabels": {
+                                      "type": "array",
+                                      "items": {
+                                        "type": "object",
+                                        "properties": {
+                                          "key": {
+                                            "type": "string"
+                                          },
+                                          "value": {
+                                            "type": "string"
+                                          }
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "externalDocs": {
+                                    "url": ""
+                                  }
+                                }
+                              }
+                            },
+                            "externalDocs": {
+                              "url": ""
+                            }
+                          }
+                        }
+                      }
+                    }
+                  },
+                  "externalDocs": {
+                    "url": ""
+                  }
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get alert events statistics",
+        "tags": [
+          "Alert events service"
+        ],
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    },
+    "/v3/alert-event/{id}": {
+      "get": {
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "AlertEventService_GetAlertEvent",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "title": "Get alert event response",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "nextPageToken": {
+                              "type": "string"
+                            },
+                            "totalSize": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        },
+                        "singlePermutation": {
+                          "title": "Alert event",
+                          "required": [
+                            "permutationLabels",
+                            "groupLabels",
+                            "timestamp",
+                            "alertId",
+                            "status",
+                            "preGroupingEventId",
+                            "payload",
+                            "payloadType",
+                            "permutationId",
+                            "incidentCorrelationKey",
+                            "activityAnalysis"
+                          ],
+                          "type": "object",
+                          "properties": {
+                            "activityAnalysis": {
+                              "title": "Activity analysis data structure",
+                              "required": [
+                                "rules",
+                                "status"
+                              ],
+                              "type": "object",
+                              "properties": {
+                                "rules": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  }
+                                },
+                                "status": {
+                                  "enum": [
+                                    "ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED",
+                                    "ACTIVITY_ANALYSIS_STATUS_MUTE"
+                                  ],
+                                  "type": "string"
+                                }
+                              },
+                              "description": "Configuration for alert activity analysis, containing rules and status.",
+                              "externalDocs": {
+                                "url": ""
+                              }
+                            },
+                            "alertId": {
+                              "type": "string"
+                            },
+                            "groupLabels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "incidentCorrelationKey": {
+                              "type": "string"
+                            },
+                            "payload": {
+                              "type": "object"
+                            },
+                            "payloadType": {
+                              "type": "string"
+                            },
+                            "permutationId": {
+                              "type": "string"
+                            },
+                            "permutationLabels": {
+                              "type": "array",
+                              "items": {
+                                "type": "object",
+                                "properties": {
+                                  "key": {
+                                    "type": "string"
+                                  },
+                                  "value": {
+                                    "type": "string"
+                                  }
+                                }
+                              }
+                            },
+                            "preGroupingEventId": {
+                              "type": "string"
+                            },
+                            "status": {
+                              "enum": [
+                                "ALERT_STATUS_RESOLVED_OR_UNSPECIFIED",
+                                "ALERT_STATUS_TRIGGERED"
+                              ],
+                              "type": "string"
+                            },
+                            "timestamp": {
+                              "type": "string",
+                              "format": "date-time"
+                            }
+                          },
+                          "externalDocs": {
+                            "url": ""
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    },
+                    {
+                      "title": "Get alert event response",
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "multiplePermutation": {
+                          "type": "object",
+                          "properties": {
+                            "alertEventMultiplePermutation": {
+                              "type": "array",
+                              "items": {
+                                "title": "Alert event",
+                                "required": [
+                                  "permutationLabels",
+                                  "groupLabels",
+                                  "timestamp",
+                                  "alertId",
+                                  "status",
+                                  "preGroupingEventId",
+                                  "payload",
+                                  "payloadType",
+                                  "permutationId",
+                                  "incidentCorrelationKey",
+                                  "activityAnalysis"
+                                ],
+                                "type": "object",
+                                "properties": {
+                                  "activityAnalysis": {
+                                    "title": "Activity analysis data structure",
+                                    "required": [
+                                      "rules",
+                                      "status"
+                                    ],
+                                    "type": "object",
+                                    "properties": {
+                                      "rules": {
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
+                                      },
+                                      "status": {
+                                        "enum": [
+                                          "ACTIVITY_ANALYSIS_STATUS_ACTIVATE_OR_UNSPECIFIED",
+                                          "ACTIVITY_ANALYSIS_STATUS_MUTE"
+                                        ],
+                                        "type": "string"
+                                      }
+                                    },
+                                    "description": "Configuration for alert activity analysis, containing rules and status.",
+                                    "externalDocs": {
+                                      "url": ""
+                                    }
+                                  },
+                                  "alertId": {
+                                    "type": "string"
+                                  },
+                                  "groupLabels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "key": {
+                                          "type": "string"
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "incidentCorrelationKey": {
+                                    "type": "string"
+                                  },
+                                  "payload": {
+                                    "type": "object"
+                                  },
+                                  "payloadType": {
+                                    "type": "string"
+                                  },
+                                  "permutationId": {
+                                    "type": "string"
+                                  },
+                                  "permutationLabels": {
+                                    "type": "array",
+                                    "items": {
+                                      "type": "object",
+                                      "properties": {
+                                        "key": {
+                                          "type": "string"
+                                        },
+                                        "value": {
+                                          "type": "string"
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "preGroupingEventId": {
+                                    "type": "string"
+                                  },
+                                  "status": {
+                                    "enum": [
+                                      "ALERT_STATUS_RESOLVED_OR_UNSPECIFIED",
+                                      "ALERT_STATUS_TRIGGERED"
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "timestamp": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                  }
+                                },
+                                "externalDocs": {
+                                  "url": ""
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "pagination": {
+                          "type": "object",
+                          "properties": {
+                            "nextPageToken": {
+                              "type": "string"
+                            },
+                            "totalSize": {
+                              "type": "integer",
+                              "format": "int64"
+                            }
+                          }
+                        }
+                      },
+                      "externalDocs": {
+                        "url": ""
+                      }
+                    }
+                  ]
+                }
+              }
+            },
+            "description": ""
+          },
+          "400": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Bad Request"
+          },
+          "401": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Unauthorized request"
+          },
+          "500": {
+            "content": {
+              "application/json": {}
+            },
+            "description": "Internal server error"
+          }
+        },
+        "summary": "Get alert event by ID",
+        "tags": [
+          "Alert events service"
+        ],
+        "x-coralogixPermissions": [
+          "alerts:ReadConfig"
+        ]
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Alert events service",
+      "description": "Get information regarding your alert events - instances of alerts being triggered.",
+      "externalDocs": {
+        "description": "Learn more about alert events and incidents in our documentation.",
+        "url": "https://coralogix.com/docs/user-guides/alerting/incidents/"
+      }
+    }
+  ]
+}
