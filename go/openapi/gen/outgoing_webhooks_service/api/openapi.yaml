@@ -1,0 +1,2291 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /integrations/webhooks/v1:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhooks
+      parameters:
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutgoingWebhooksResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
+
+          querystring = {"type":"SOME_STRING_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1?type=SOME_STRING_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_CreateOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
+
+          payload = {"data": {
+                  "genericWebhook": {
+                      "headers": {"Content-Type": "application/json"},
+                      "method": "UNKNOWN",
+                      "payload": {"key": "value"},
+                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                  },
+                  "name": "my_webhook",
+                  "type": "UNKNOWN",
+                  "url": "slack.webhook.com"
+              }}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_UpdateOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1';
+
+          let options = {
+            method: 'PUT',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"},"id":"example_id"}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1"
+
+          payload = {
+              "data": {
+                  "genericWebhook": {
+                      "headers": {"Content-Type": "application/json"},
+                      "method": "UNKNOWN",
+                      "payload": {"key": "value"},
+                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                  },
+                  "name": "my_webhook",
+                  "type": "UNKNOWN",
+                  "url": "slack.webhook.com"
+              },
+              "id": "example_id"
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PUT", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"},"id":"example_id"}'
+  /integrations/webhooks/v1/all:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListAllOutgoingWebhooks
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListAllOutgoingWebhooksResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List all outgoing webhooks
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/all \
+            --header 'Authorization: Bearer <API_KEY>'
+  /integrations/webhooks/v1/summary:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutboundWebhooksSummary
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutboundWebhooksSummaryResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List outbound webhooks summary
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadSummary
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/summary \
+            --header 'Authorization: Bearer <API_KEY>'
+  /integrations/webhooks/v1/test:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_TestOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test"
+
+          payload = {"data": {
+                  "genericWebhook": {
+                      "headers": {"Content-Type": "application/json"},
+                      "method": "UNKNOWN",
+                      "payload": {"key": "value"},
+                      "uuid": "d838cd7b-087b-40c6-bc33-80997020f5d0"
+                  },
+                  "name": "my_webhook",
+                  "type": "UNKNOWN",
+                  "url": "slack.webhook.com"
+              }}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"data":{"genericWebhook":{"headers":{"Content-Type":"application/json"},"method":"UNKNOWN","payload":{"key":"value"},"uuid":"d838cd7b-087b-40c6-bc33-80997020f5d0"},"name":"my_webhook","type":"UNKNOWN","url":"slack.webhook.com"}}'
+  /integrations/webhooks/v1/test-existing:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_TestExistingOutgoingWebhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Test_existing_outgoing_webhook_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TestOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Test an existing outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"id":"example_id"}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing"
+
+          payload = {"id": "example_id"}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/test-existing \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"id":"example_id"}'
+  /integrations/webhooks/v1/types:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_ListOutgoingWebhookTypes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOutgoingWebhookTypesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook types
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types \
+            --header 'Authorization: Bearer <API_KEY>'
+  /integrations/webhooks/v1/types/{type}:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_GetOutgoingWebhookTypeDetails
+      parameters:
+      - explode: false
+        in: path
+        name: type
+        required: true
+        schema:
+          enum:
+          - UNKNOWN
+          - GENERIC
+          - SLACK
+          - PAGERDUTY
+          - SEND_LOG
+          - EMAIL_GROUP
+          - MICROSOFT_TEAMS
+          - JIRA
+          - OPSGENIE
+          - DEMISTO
+          - AWS_EVENT_BRIDGE
+          - IBM_EVENT_NOTIFICATIONS
+          - MS_TEAMS_WORKFLOW
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOutgoingWebhookTypeDetailsResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook type details
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/types/%7Btype%7D \
+            --header 'Authorization: Bearer <API_KEY>'
+  /integrations/webhooks/v1/{id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_DeleteOutgoingWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: example_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete an outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:UpdateConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/example_id \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: OutgoingWebhooksService_GetOutgoingWebhook
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOutgoingWebhookResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get outgoing webhook
+      tags:
+      - Outgoing webhooks service
+      x-coralogixPermissions:
+      - outbound-webhooks:ReadConfig
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/integrations/webhooks/v1/%7Bid%7D \
+            --header 'Authorization: Bearer <API_KEY>'
+components:
+  schemas:
+    Attachment:
+      externalDocs:
+        url: ""
+      properties:
+        isActive:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/AttachmentType"
+      required:
+      - type
+      title: Slack attachment configuration
+      type: object
+    AttachmentType:
+      enum:
+      - EMPTY
+      - METRIC_SNAPSHOT
+      - LOGS
+      type: string
+    AwsEventBridgeConfig:
+      externalDocs:
+        url: ""
+      properties:
+        detail:
+          example: "{\"key\":\"value\"}"
+          type: string
+        detailType:
+          example: detail_type
+          type: string
+        eventBusArn:
+          example: arn:aws:events:us-east-1:123456789012:event-bus/default
+          type: string
+        roleName:
+          example: role_name
+          type: string
+        source:
+          example: source
+          type: string
+      required:
+      - detail
+      - detailType
+      - eventBusArn
+      - roleName
+      - source
+      title: AWS EventBridge configuration
+      type: object
+    CreateOutgoingWebhookResponse:
+      example:
+        id: example_id
+      externalDocs:
+        url: ""
+      properties:
+        id:
+          example: example_id
+          type: string
+      required:
+      - id
+      title: Create outgoing webhook response
+      type: object
+    DeleteOutgoingWebhookResponse:
+      externalDocs:
+        url: ""
+      title: Delete outgoing webhook response
+      type: object
+    DemistoConfig:
+      externalDocs:
+        url: ""
+      properties:
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - payload
+      - uuid
+      title: Demisto configuration
+      type: object
+    Digest:
+      externalDocs:
+        url: ""
+      properties:
+        isActive:
+          type: boolean
+        type:
+          $ref: "#/components/schemas/DigestType"
+      required:
+      - type
+      title: Slack digest configuration
+      type: object
+    DigestType:
+      enum:
+      - UNKNOWN
+      - ERROR_AND_CRITICAL_LOGS
+      - FLOW_ANOMALIES
+      - SPIKE_ANOMALIES
+      - DATA_USAGE
+      type: string
+    EmailGroupConfig:
+      externalDocs:
+        url: ""
+      properties:
+        emailAddresses:
+          items:
+            example: "[\"example@coralogix.com\"]"
+            type: string
+          type: array
+      title: Email group configuration
+      type: object
+    EndpointType:
+      enum:
+      - ENDPOINT_TYPE_DEFAULT_OR_PUBLIC
+      - ENDPOINT_TYPE_PRIVATE
+      type: string
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GenericWebhookConfig:
+      example:
+        headers:
+          Content-Type: application/json
+        method: UNKNOWN
+        payload: "{\"key\":\"value\"}"
+        uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+      externalDocs:
+        url: ""
+      properties:
+        headers:
+          additionalProperties:
+            type: string
+          example:
+            Content-Type: application/json
+          type: object
+        method:
+          $ref: "#/components/schemas/MethodType"
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - method
+      - uuid
+      title: Generic webhook configuration
+      type: object
+    GetOutgoingWebhookResponse:
+      example:
+        webhook:
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          genericWebhook:
+            headers:
+              Content-Type: application/json
+            method: UNKNOWN
+            payload: "{\"key\":\"value\"}"
+            uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+          name: my_webhook
+          externalId: 123456
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        webhook:
+          $ref: "#/components/schemas/OutgoingWebhook"
+      required:
+      - webhook
+      title: Get outgoing webhook response
+      type: object
+    GetOutgoingWebhookTypeDetailsResponse:
+      example:
+        details:
+          label: example_label
+          type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        details:
+          $ref: "#/components/schemas/OutgoingWebhookDetails"
+      required:
+      - details
+      title: Get outgoing webhook type details response
+      type: object
+    IbmEventNotificationsConfig:
+      externalDocs:
+        url: ""
+      properties:
+        endpointType:
+          $ref: "#/components/schemas/EndpointType"
+        eventNotificationsInstanceId:
+          type: string
+        regionId:
+          type: string
+        sourceId:
+          type: string
+        sourceName:
+          type: string
+      required:
+      - endpointType
+      - eventNotificationsInstanceId
+      - regionId
+      title: IBM event notification configuration
+      type: object
+    JiraConfig:
+      externalDocs:
+        url: ""
+      properties:
+        apiToken:
+          example: jira_api_token
+          type: string
+        email:
+          example: jira_email
+          type: string
+        projectKey:
+          example: jira_project_key
+          type: string
+      required:
+      - apiToken
+      - email
+      - projectKey
+      title: Jira configuration
+      type: object
+    ListAllOutgoingWebhooksResponse:
+      example:
+        deployed:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 123456
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 123456
+          id: webhook_id
+          type: UNKNOWN
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        deployed:
+          items:
+            $ref: "#/components/schemas/OutgoingWebhookExtendedSummary"
+          type: array
+      title: List all outgoing webhooks response
+      type: object
+    ListOutboundWebhooksSummaryResponse:
+      example:
+        outboundWebhookSummaries:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          externalId: 0
+          id: id
+          type: UNKNOWN
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: name
+          externalId: 0
+          id: id
+          type: UNKNOWN
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        outboundWebhookSummaries:
+          items:
+            $ref: "#/components/schemas/OutboundWebhookSummary"
+          type: array
+      title: List outbound webhooks summary response
+      type: object
+    ListOutgoingWebhookTypesResponse:
+      example:
+        webhooks:
+        - count: 3
+          label: example_label
+          type: UNKNOWN
+        - count: 3
+          label: example_label
+          type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        webhooks:
+          items:
+            $ref: "#/components/schemas/OutgoingWebhookType"
+          type: array
+      title: List outgoing webhook types response
+      type: object
+    ListOutgoingWebhooksResponse:
+      example:
+        deployed:
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 123456
+          id: webhook_id
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - createdAt: 2000-01-23T04:56:07.000+00:00
+          name: my_webhook
+          externalId: 123456
+          id: webhook_id
+          url: slack.webhook.com
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        deployed:
+          items:
+            $ref: "#/components/schemas/OutgoingWebhookSummary"
+          type: array
+      title: List outgoing webhooks response
+      type: object
+    MSTeamsWorkflowConfig:
+      externalDocs:
+        url: ""
+      title: Microsoft Teams workflow configuration
+      type: object
+    MethodType:
+      enum:
+      - UNKNOWN
+      - GET
+      - POST
+      - PUT
+      type: string
+    MicrosoftTeamsConfig:
+      externalDocs:
+        url: ""
+      title: Microsoft Teams configuration
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    OpsgenieConfig:
+      externalDocs:
+        url: ""
+      title: Opsgenie configuration
+      type: object
+    OutboundWebhookSummary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: name
+        externalId: 0
+        id: id
+        type: UNKNOWN
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          format: int64
+          type: integer
+        id:
+          type: string
+        name:
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outbound webhook summary
+      type: object
+    OutgoingWebhook:
+      oneOf:
+      - $ref: "#/components/schemas/Outgoing_webhook"
+      - $ref: "#/components/schemas/Outgoing_webhook_1"
+      - $ref: "#/components/schemas/Outgoing_webhook_2"
+      - $ref: "#/components/schemas/Outgoing_webhook_3"
+      - $ref: "#/components/schemas/Outgoing_webhook_4"
+      - $ref: "#/components/schemas/Outgoing_webhook_5"
+      - $ref: "#/components/schemas/Outgoing_webhook_6"
+      - $ref: "#/components/schemas/Outgoing_webhook_7"
+      - $ref: "#/components/schemas/Outgoing_webhook_8"
+      - $ref: "#/components/schemas/Outgoing_webhook_9"
+      - $ref: "#/components/schemas/Outgoing_webhook_10"
+      - $ref: "#/components/schemas/Outgoing_webhook_11"
+    OutgoingWebhookDetails:
+      example:
+        label: example_label
+        type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        label:
+          example: example_label
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+      required:
+      - label
+      - type
+      title: Outgoing webhook details
+      type: object
+    OutgoingWebhookExtendedSummary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook extended summary
+      type: object
+    OutgoingWebhookInputData:
+      oneOf:
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_1"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_2"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_3"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_4"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_5"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_6"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_7"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_8"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_9"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_10"
+      - $ref: "#/components/schemas/Outgoing_webhook_input_data_11"
+    OutgoingWebhookSummary:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      title: Outgoing webhook summary
+      type: object
+    OutgoingWebhookType:
+      example:
+        count: 3
+        label: example_label
+        type: UNKNOWN
+      externalDocs:
+        url: ""
+      properties:
+        count:
+          example: 3
+          format: int64
+          type: integer
+        label:
+          example: example_label
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+      required:
+      - count
+      - label
+      - type
+      title: Outgoing webhook type
+      type: object
+    PagerDutyConfig:
+      externalDocs:
+        url: ""
+      properties:
+        serviceKey:
+          example: pager_duty_service_key
+          type: string
+      required:
+      - serviceKey
+      title: PagerDuty configuration
+      type: object
+    SendLogConfig:
+      externalDocs:
+        url: ""
+      properties:
+        payload:
+          example: "{\"key\":\"value\"}"
+          type: string
+        uuid:
+          example: d838cd7b-087b-40c6-bc33-80997020f5d0
+          type: string
+      required:
+      - payload
+      - uuid
+      title: Send log configuration
+      type: object
+    SlackConfig:
+      externalDocs:
+        url: ""
+      properties:
+        attachments:
+          items:
+            $ref: "#/components/schemas/Attachment"
+          type: array
+        digests:
+          items:
+            $ref: "#/components/schemas/Digest"
+          type: array
+      title: Slack configuration
+      type: object
+    TestOutgoingWebhookResponse:
+      oneOf:
+      - $ref: "#/components/schemas/Test_outgoing_webhook_response"
+      - $ref: "#/components/schemas/Test_outgoing_webhook_response_1"
+    TestOutgoingWebhookResponse.Failure:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        displayMessage:
+          example: example_display_message
+          type: string
+        errorMessage:
+          example: example_error_message
+          type: string
+        statusCode:
+          example: 400
+          format: int64
+          type: integer
+      required:
+      - displayMessage
+      - errorMessage
+      title: Test outgoing webhook failure
+      type: object
+    TestOutgoingWebhookResponse.Success:
+      externalDocs:
+        url: ""
+      title: Test outgoing webhook success
+      type: object
+    UpdateOutgoingWebhookResponse:
+      externalDocs:
+        url: ""
+      title: Update outgoing webhook response
+      type: object
+    WebhookType:
+      enum:
+      - UNKNOWN
+      - GENERIC
+      - SLACK
+      - PAGERDUTY
+      - SEND_LOG
+      - EMAIL_GROUP
+      - MICROSOFT_TEAMS
+      - JIRA
+      - OPSGENIE
+      - DEMISTO
+      - AWS_EVENT_BRIDGE
+      - IBM_EVENT_NOTIFICATIONS
+      - MS_TEAMS_WORKFLOW
+      type: string
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Update_outgoing_webhook_request:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/OutgoingWebhookInputData"
+        id:
+          example: example_id
+          type: string
+      required:
+      - data
+      - id
+      title: Update outgoing webhook request
+      type: object
+    Create_outgoing_webhook_request:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/OutgoingWebhookInputData"
+      required:
+      - data
+      title: Create outgoing webhook request
+      type: object
+    Test_outgoing_webhook_request:
+      additionalProperties: false
+      properties:
+        data:
+          $ref: "#/components/schemas/OutgoingWebhookInputData"
+      required:
+      - data
+      title: Test outgoing webhook request
+      type: object
+    Test_existing_outgoing_webhook_request:
+      additionalProperties: false
+      properties:
+        id:
+          example: example_id
+          type: string
+      required:
+      - id
+      title: Test existing outgoing webhook request
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Outgoing_webhook:
+      additionalProperties: false
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        genericWebhook:
+          headers:
+            Content-Type: application/json
+          method: UNKNOWN
+          payload: "{\"key\":\"value\"}"
+          uuid: d838cd7b-087b-40c6-bc33-80997020f5d0
+        name: my_webhook
+        externalId: 123456
+        id: webhook_id
+        type: UNKNOWN
+        url: slack.webhook.com
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        genericWebhook:
+          $ref: "#/components/schemas/GenericWebhookConfig"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_1:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/SlackConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_2:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDutyConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_3:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/SendLogConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_4:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        emailGroup:
+          $ref: "#/components/schemas/EmailGroupConfig"
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_5:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_6:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        jira:
+          $ref: "#/components/schemas/JiraConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_7:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_8:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        demisto:
+          $ref: "#/components/schemas/DemistoConfig"
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_9:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AwsEventBridgeConfig"
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_10:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IbmEventNotificationsConfig"
+        id:
+          example: webhook_id
+          type: string
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_11:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        externalId:
+          example: 123456
+          format: int64
+          type: integer
+        id:
+          example: webhook_id
+          type: string
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        updatedAt:
+          format: date-time
+          type: string
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - createdAt
+      - externalId
+      - id
+      - name
+      - type
+      title: Outgoing webhook
+      type: object
+    Outgoing_webhook_input_data:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        genericWebhook:
+          $ref: "#/components/schemas/GenericWebhookConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_1:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        slack:
+          $ref: "#/components/schemas/SlackConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_2:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        pagerDuty:
+          $ref: "#/components/schemas/PagerDutyConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_3:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        sendLog:
+          $ref: "#/components/schemas/SendLogConfig"
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_4:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        emailGroup:
+          $ref: "#/components/schemas/EmailGroupConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_5:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        microsoftTeams:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_6:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        jira:
+          $ref: "#/components/schemas/JiraConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_7:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        name:
+          example: my_webhook
+          type: string
+        opsgenie:
+          externalDocs:
+            url: ""
+          title: Opsgenie configuration
+          type: object
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_8:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        demisto:
+          $ref: "#/components/schemas/DemistoConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_9:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        awsEventBridge:
+          $ref: "#/components/schemas/AwsEventBridgeConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_10:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        ibmEventNotifications:
+          $ref: "#/components/schemas/IbmEventNotificationsConfig"
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Outgoing_webhook_input_data_11:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        msTeamsWorkflow:
+          externalDocs:
+            url: ""
+          title: Microsoft Teams workflow configuration
+          type: object
+        name:
+          example: my_webhook
+          type: string
+        type:
+          $ref: "#/components/schemas/WebhookType"
+        url:
+          example: slack.webhook.com
+          type: string
+      required:
+      - config
+      - name
+      - type
+      title: Outgoing webhook input data
+      type: object
+    Test_outgoing_webhook_response:
+      additionalProperties: false
+      example:
+        success: "{}"
+      externalDocs:
+        url: ""
+      properties:
+        success:
+          externalDocs:
+            url: ""
+          title: Test outgoing webhook success
+          type: object
+      title: Test outgoing webhook response
+      type: object
+    Test_outgoing_webhook_response_1:
+      additionalProperties: false
+      externalDocs:
+        url: ""
+      properties:
+        failure:
+          $ref: "#/components/schemas/TestOutgoingWebhookResponse.Failure"
+      title: Test outgoing webhook response
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

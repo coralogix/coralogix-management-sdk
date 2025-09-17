@@ -1,0 +1,409 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /logs/data-setup/v2:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: S3TargetService_GetTarget
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/S3TargetServiceGetTargetResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get target
+      tags:
+      - Target Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2 \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: S3TargetService_SetTarget
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Set_Target_Response"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/S3TargetServiceSetTargetResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Set target
+      tags:
+      - Target Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2"
+
+          payload = {
+              "isActive": True,
+              "s3": {
+                  "bucket": "bucket",
+                  "region": "us-west-2"
+              }
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/logs/data-setup/v2 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"isActive":true,"s3":{"bucket":"bucket","region":"us-west-2"}}'
+components:
+  schemas:
+    ArchiveSpec:
+      description: This data structure contains metadata about the archive.
+      example:
+        enableTags: true
+        archivingFormatId: json_id
+        isActive: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        archivingFormatId:
+          example: json_id
+          type: string
+        enableTags:
+          example: true
+          type: boolean
+        isActive:
+          example: true
+          type: boolean
+      required:
+      - bucket
+      title: Archive Spec
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    IBMCosTargetSpec:
+      additionalProperties: false
+      description: This data structure represents an IBM COS target.
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        bucketCrn:
+          example: bucket_crn
+          type: string
+        bucketType:
+          $ref: "#/components/schemas/IbmBucketType"
+        endpoint:
+          example: http://some.endpoint.com:8081
+          type: string
+        serviceCrn:
+          example: service_crn
+          type: string
+      required:
+      - bucketCrn
+      - endpoint
+      title: IBM COS Target Spec
+      type: object
+    IbmBucketType:
+      enum:
+      - IBM_BUCKET_TYPE_UNSPECIFIED
+      - IBM_BUCKET_TYPE_EXTERNAL
+      - IBM_BUCKET_TYPE_INTERNAL
+      type: string
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    S3TargetServiceGetTargetResponse:
+      description: This data structure is used to retrieve a storage target for logs.
+      example:
+        target:
+          s3:
+            bucket: bucket
+            region: us-west-2
+          archiveSpec:
+            enableTags: true
+            archivingFormatId: json_id
+            isActive: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        target:
+          $ref: "#/components/schemas/Target"
+      required:
+      - target
+      title: Get Target Response
+      type: object
+    S3TargetServiceSetTargetResponse:
+      description: This data structure is obtained after setting a storage target
+        for logs.
+      example:
+        target:
+          s3:
+            bucket: bucket
+            region: us-west-2
+          archiveSpec:
+            enableTags: true
+            archivingFormatId: json_id
+            isActive: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        target:
+          $ref: "#/components/schemas/Target"
+      required:
+      - target
+      title: Set Target Response
+      type: object
+    S3TargetSpec:
+      additionalProperties: false
+      description: This data structure represents an S3 target.
+      example:
+        bucket: bucket
+        region: us-west-2
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        bucket:
+          example: bucket
+          type: string
+        region:
+          example: us-west-2
+          type: string
+      required:
+      - bucket
+      title: S3 Target Spec
+      type: object
+    Target:
+      oneOf:
+      - $ref: "#/components/schemas/Target_1"
+      - $ref: "#/components/schemas/Target_2"
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Set_Target_Response:
+      additionalProperties: false
+      description: This data structure is used to set a storage target for logs.
+      properties:
+        isActive:
+          example: true
+          type: boolean
+        s3:
+          $ref: "#/components/schemas/S3TargetSpec"
+      required:
+      - isActive
+      - targetSpec
+      title: Set Target Response
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Target_1:
+      additionalProperties: false
+      description: This data structure represents a target to archive logs.
+      example:
+        s3:
+          bucket: bucket
+          region: us-west-2
+        archiveSpec:
+          enableTags: true
+          archivingFormatId: json_id
+          isActive: true
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        archiveSpec:
+          $ref: "#/components/schemas/ArchiveSpec"
+        s3:
+          $ref: "#/components/schemas/S3TargetSpec"
+      required:
+      - targetSpecarchiveSpec
+      title: Target
+      type: object
+    Target_2:
+      additionalProperties: false
+      description: This data structure represents a target to archive logs.
+      externalDocs:
+        description: Find out more about archives
+        url: https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/
+      properties:
+        archiveSpec:
+          $ref: "#/components/schemas/ArchiveSpec"
+        ibmCos:
+          $ref: "#/components/schemas/IBMCosTargetSpec"
+      required:
+      - targetSpecarchiveSpec
+      title: Target
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

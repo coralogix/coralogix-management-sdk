@@ -1,0 +1,806 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /aaa/api-keys/v3:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_CreateApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Create_Api_Key_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create API Key
+      tags:
+      - API Keys Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"hashed":true,"keyPermissions":{"permissions":[["read_logs"]],"presets":[["my_preset"]]},"name":"my_api_key","owner":{"userId":"string"}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3"
+
+          payload = {
+              "hashed": True,
+              "keyPermissions": {
+                  "permissions": [["read_logs"]],
+                  "presets": [["my_preset"]]
+              },
+              "name": "my_api_key",
+              "owner": {"userId": "string"}
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"hashed":true,"keyPermissions":{"permissions":[["read_logs"]],"presets":[["my_preset"]]},"name":"my_api_key","owner":{"userId":"string"}}'
+  /aaa/api-keys/v3/send_data:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_GetSendDataApiKeys
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSendDataApiKeysResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get "Send Data" API Keys
+      tags:
+      - API Keys Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data \
+            --header 'Authorization: Bearer <API_KEY>'
+  /aaa/api-keys/v3/{key_id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_DeleteApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete API Key
+      tags:
+      - API Keys Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_GetApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          example: my_key_id
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get API Key
+      tags:
+      - API Keys Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \
+            --header 'Authorization: Bearer <API_KEY>'
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: ApiKeysService_UpdateApiKey
+      parameters:
+      - explode: false
+        in: path
+        name: key_id
+        required: true
+        schema:
+          example: my_key_id
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Update_Api_Key_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateApiKeyResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update API Key
+      tags:
+      - API Keys Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';
+
+          let options = {
+            method: 'PUT',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"isActive":true,"newName":"my_new_name","permissions":{"permissions":["string"]},"presets":{"presets":["string"]}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id"
+
+          payload = {
+              "isActive": True,
+              "newName": "my_new_name",
+              "permissions": {"permissions": ["string"]},
+              "presets": {"presets": ["string"]}
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PUT", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"isActive":true,"newName":"my_new_name","permissions":{"permissions":["string"]},"presets":{"presets":["string"]}}'
+components:
+  schemas:
+    CreateApiKeyRequest.KeyPermissions:
+      description: This data structure allows to specify loose permissions and permission
+        presets for an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            example: "[\"read_logs\"]"
+            type: string
+          type: array
+        presets:
+          items:
+            example: "[\"my_preset\"]"
+            type: string
+          type: array
+      required:
+      - permissions
+      - presets
+      title: Key Permissions
+      type: object
+    CreateApiKeyResponse:
+      description: This data structure is the response obtained when creating an API
+        key.
+      example:
+        name: my_api_key
+        keyId: my_key_id
+        value: my_api_key_value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keyId:
+          example: my_key_id
+          type: string
+        name:
+          example: my_api_key
+          type: string
+        value:
+          example: my_api_key_value
+          type: string
+      required:
+      - keyId
+      - name
+      - value
+      title: Create Api Key Response
+      type: object
+    DeleteApiKeyResponse:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetApiKeyResponse:
+      description: This data structure is the response obtained when retrieving an
+        API key.
+      example:
+        keyInfo:
+          owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keyInfo:
+          $ref: "#/components/schemas/KeyInfo"
+      required:
+      - keyInfo
+      title: Get Api Key Response
+      type: object
+    GetSendDataApiKeysResponse:
+      description: This data structure is the response obtained when retrieving an
+        API key.
+      example:
+        keys:
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+        - owner:
+            userId: userId
+          name: my_api_key
+          active: true
+          hashed: true
+          id: id
+          keyPermissions:
+            presets:
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            - permissions:
+              - "[\"read_logs\"]"
+              - "[\"read_logs\"]"
+              name: my_preset
+            permissions:
+            - permissions
+            - permissions
+          value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        keys:
+          items:
+            $ref: "#/components/schemas/KeyInfo"
+          type: array
+      required:
+      - keyInfo
+      title: Get Api Key Response
+      type: object
+    KeyInfo:
+      additionalProperties: false
+      description: This data structure represents the information associated with
+        an API key.
+      example:
+        owner:
+          userId: userId
+        name: my_api_key
+        active: true
+        hashed: true
+        id: id
+        keyPermissions:
+          presets:
+          - permissions:
+            - "[\"read_logs\"]"
+            - "[\"read_logs\"]"
+            name: my_preset
+          - permissions:
+            - "[\"read_logs\"]"
+            - "[\"read_logs\"]"
+            name: my_preset
+          permissions:
+          - permissions
+          - permissions
+        value: value
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        active:
+          example: true
+          type: boolean
+        hashed:
+          example: true
+          type: boolean
+        id:
+          type: string
+        keyPermissions:
+          $ref: "#/components/schemas/KeyInfo.KeyPermissions"
+        name:
+          example: my_api_key
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+        value:
+          type: string
+      required:
+      - active
+      - hashed
+      - id
+      - keyPermissions
+      - name
+      - owner
+      title: Key Info
+      type: object
+    KeyInfo.KeyPermissions:
+      description: This data structure represents the permissions on an API key.
+      example:
+        presets:
+        - permissions:
+          - "[\"read_logs\"]"
+          - "[\"read_logs\"]"
+          name: my_preset
+        - permissions:
+          - "[\"read_logs\"]"
+          - "[\"read_logs\"]"
+          name: my_preset
+        permissions:
+        - permissions
+        - permissions
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+        presets:
+          items:
+            $ref: "#/components/schemas/PresetInfo"
+          type: array
+      required:
+      - permissions
+      - presets
+      title: Key Permissions
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    Owner:
+      oneOf:
+      - $ref: "#/components/schemas/Owner_oneOf"
+      - $ref: "#/components/schemas/Owner_oneOf_1"
+      - $ref: "#/components/schemas/Owner_oneOf_2"
+    PresetInfo:
+      description: This data structure represents a preset set of permissions on an
+        API key.
+      example:
+        permissions:
+        - "[\"read_logs\"]"
+        - "[\"read_logs\"]"
+        name: my_preset
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        name:
+          example: my_preset
+          type: string
+        permissions:
+          items:
+            example: "[\"read_logs\"]"
+            type: string
+          type: array
+      required:
+      - name
+      - permissions
+      title: Preset Info
+      type: object
+    Presets:
+      description: This data structure represents a set of permissions presets on
+        an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        presets:
+          items:
+            type: string
+          type: array
+      required:
+      - presets
+      title: Presets
+      type: object
+    UpdateApiKeyRequest.Permissions:
+      description: This data structure represents a set of permissions on an API key.
+      externalDocs:
+        description: Find out more about api keys
+        url: https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+      required:
+      - permissions
+      title: Permissions
+      type: object
+    UpdateApiKeyResponse:
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Create_Api_Key_Request:
+      additionalProperties: false
+      description: This data structure is used to create an API key.
+      properties:
+        hashed:
+          example: true
+          type: boolean
+        keyPermissions:
+          $ref: "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
+        name:
+          example: my_api_key
+          type: string
+        owner:
+          $ref: "#/components/schemas/Owner"
+      required:
+      - hashed
+      - keyPermissions
+      - name
+      - owner
+      title: Create Api Key Request
+      type: object
+    Update_Api_Key_Request:
+      additionalProperties: false
+      description: This data structure is used to update an API key.
+      properties:
+        isActive:
+          example: true
+          type: boolean
+        newName:
+          example: my_new_name
+          type: string
+        permissions:
+          $ref: "#/components/schemas/UpdateApiKeyRequest.Permissions"
+        presets:
+          $ref: "#/components/schemas/Presets"
+      required:
+      - keyId
+      title: Update Api Key Request
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Owner_oneOf:
+      additionalProperties: false
+      example:
+        userId: userId
+      properties:
+        userId:
+          type: string
+      type: object
+    Owner_oneOf_1:
+      additionalProperties: false
+      properties:
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    Owner_oneOf_2:
+      additionalProperties: false
+      properties:
+        organisationId:
+          type: string
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

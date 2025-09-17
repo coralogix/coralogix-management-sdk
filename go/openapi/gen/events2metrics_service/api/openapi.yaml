@@ -1,0 +1,2057 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /events2metrics/events2metrics/v2:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_ListE2M
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListE2MResponse"
+          description: ""
+      summary: List E2Ms
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2 \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_CreateE2M
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Events2MetricService_CreateE2M_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateE2MResponse"
+          description: ""
+      summary: Create a new E2M
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"description":"avg and max the latency of catalog service","metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service catalog latency","permutationsLimit":30000,"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED"}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2"
+
+          payload = {
+              "description": "avg and max the latency of catalog service",
+              "metricFields": [
+                  {
+                      "aggregations": [
+                          {
+                              "aggType": "AGG_TYPE_UNSPECIFIED",
+                              "enabled": True,
+                              "samples": {"sampleType": "SAMPLE_TYPE_UNSPECIFIED"},
+                              "targetMetricName": "alias_field_name_agg_func"
+                          }
+                      ],
+                      "sourceField": "log_obj.numeric_field",
+                      "targetBaseMetricName": "alias_field_name"
+                  }
+              ],
+              "metricLabels": [
+                  {
+                      "sourceField": "log_obj.string_value",
+                      "targetLabel": "alias_label_name"
+                  }
+              ],
+              "name": "Service catalog latency",
+              "permutationsLimit": 30000,
+              "spansQuery": {
+                  "actionFilters": ["myAction"],
+                  "applicationnameFilters": ["myApp"],
+                  "lucene": "applicationName:myApp",
+                  "serviceFilters": ["myService"],
+                  "subsystemnameFilters": ["mySubsystem"]
+              },
+              "type": "E2M_TYPE_UNSPECIFIED"
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"description":"avg and max the latency of catalog service","metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service catalog latency","permutationsLimit":30000,"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED"}'
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_ReplaceE2M
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Events2MetricService_ReplaceE2M_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ReplaceE2MResponse"
+          description: ""
+      summary: Replace an E2M
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2';
+
+          let options = {
+            method: 'PUT',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"createTime":"2022-06-30T12:30:00Z\'","description":"avg and max the latency of catalog service","id":"d6a3658e-78d2-47d0-9b81-b2c551f01b09","isInternal":true,"metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service_catalog_latency","permutations":{"hasExceededLimit":true,"limit":30000},"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED","updateTime":"2022-06-30T12:30:00Z\'"}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2"
+
+          payload = {
+              "createTime": "2022-06-30T12:30:00Z'",
+              "description": "avg and max the latency of catalog service",
+              "id": "d6a3658e-78d2-47d0-9b81-b2c551f01b09",
+              "isInternal": True,
+              "metricFields": [
+                  {
+                      "aggregations": [
+                          {
+                              "aggType": "AGG_TYPE_UNSPECIFIED",
+                              "enabled": True,
+                              "samples": {"sampleType": "SAMPLE_TYPE_UNSPECIFIED"},
+                              "targetMetricName": "alias_field_name_agg_func"
+                          }
+                      ],
+                      "sourceField": "log_obj.numeric_field",
+                      "targetBaseMetricName": "alias_field_name"
+                  }
+              ],
+              "metricLabels": [
+                  {
+                      "sourceField": "log_obj.string_value",
+                      "targetLabel": "alias_label_name"
+                  }
+              ],
+              "name": "Service_catalog_latency",
+              "permutations": {
+                  "hasExceededLimit": True,
+                  "limit": 30000
+              },
+              "spansQuery": {
+                  "actionFilters": ["myAction"],
+                  "applicationnameFilters": ["myApp"],
+                  "lucene": "applicationName:myApp",
+                  "serviceFilters": ["myService"],
+                  "subsystemnameFilters": ["mySubsystem"]
+              },
+              "type": "E2M_TYPE_UNSPECIFIED",
+              "updateTime": "2022-06-30T12:30:00Z'"
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PUT", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2 \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"createTime":"2022-06-30T12:30:00Z'\''","description":"avg and max the latency of catalog service","id":"d6a3658e-78d2-47d0-9b81-b2c551f01b09","isInternal":true,"metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service_catalog_latency","permutations":{"hasExceededLimit":true,"limit":30000},"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED","updateTime":"2022-06-30T12:30:00Z'\''"}'
+  /events2metrics/events2metrics/v2/batch:
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_AtomicBatchExecuteE2M
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Events2MetricService_AtomicBatchExecuteE2M_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AtomicBatchExecuteE2MResponse"
+          description: ""
+      summary: Atomic Batch Execute E2M
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/batch';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"requests":[{"create":{"e2m":{"description":"avg and max the latency of catalog service","metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service catalog latency","permutationsLimit":30000,"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED"}}}]}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/batch"
+
+          payload = {"requests": [{"create": {"e2m": {
+                              "description": "avg and max the latency of catalog service",
+                              "metricFields": [
+                                  {
+                                      "aggregations": [
+                                          {
+                                              "aggType": "AGG_TYPE_UNSPECIFIED",
+                                              "enabled": True,
+                                              "samples": {"sampleType": "SAMPLE_TYPE_UNSPECIFIED"},
+                                              "targetMetricName": "alias_field_name_agg_func"
+                                          }
+                                      ],
+                                      "sourceField": "log_obj.numeric_field",
+                                      "targetBaseMetricName": "alias_field_name"
+                                  }
+                              ],
+                              "metricLabels": [
+                                  {
+                                      "sourceField": "log_obj.string_value",
+                                      "targetLabel": "alias_label_name"
+                                  }
+                              ],
+                              "name": "Service catalog latency",
+                              "permutationsLimit": 30000,
+                              "spansQuery": {
+                                  "actionFilters": ["myAction"],
+                                  "applicationnameFilters": ["myApp"],
+                                  "lucene": "applicationName:myApp",
+                                  "serviceFilters": ["myService"],
+                                  "subsystemnameFilters": ["mySubsystem"]
+                              },
+                              "type": "E2M_TYPE_UNSPECIFIED"
+                          }}}]}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/batch \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"requests":[{"create":{"e2m":{"description":"avg and max the latency of catalog service","metricFields":[{"aggregations":[{"aggType":"AGG_TYPE_UNSPECIFIED","enabled":true,"samples":{"sampleType":"SAMPLE_TYPE_UNSPECIFIED"},"targetMetricName":"alias_field_name_agg_func"}],"sourceField":"log_obj.numeric_field","targetBaseMetricName":"alias_field_name"}],"metricLabels":[{"sourceField":"log_obj.string_value","targetLabel":"alias_label_name"}],"name":"Service catalog latency","permutationsLimit":30000,"spansQuery":{"actionFilters":["myAction"],"applicationnameFilters":["myApp"],"lucene":"applicationName:myApp","serviceFilters":["myService"],"subsystemnameFilters":["mySubsystem"]},"type":"E2M_TYPE_UNSPECIFIED"}}}]}'
+  /events2metrics/events2metrics/v2/labels:cardinality:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_ListLabelsCardinality
+      parameters:
+      - explode: true
+        in: query
+        name: spans_query
+        required: false
+        schema:
+          $ref: "#/components/schemas/SpansQuery"
+        style: form
+      - explode: true
+        in: query
+        name: logs_query
+        required: false
+        schema:
+          $ref: "#/components/schemas/SpansQuery_1"
+        style: form
+      - explode: true
+        in: query
+        name: metric_labels
+        required: false
+        schema:
+          items:
+            $ref: "#/components/schemas/Metric_Label"
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListLabelsCardinalityResponse"
+          description: ""
+      summary: List E2M Labels Cardinality
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/labels:cardinality?spans_query=SOME_OBJECT_VALUE&logs_query=SOME_OBJECT_VALUE&metric_labels=SOME_ARRAY_VALUE';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/labels:cardinality"
+
+          querystring = {"spans_query":"SOME_OBJECT_VALUE","logs_query":"SOME_OBJECT_VALUE","metric_labels":"SOME_ARRAY_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/labels:cardinality?spans_query=SOME_OBJECT_VALUE&logs_query=SOME_OBJECT_VALUE&metric_labels=SOME_ARRAY_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+  /events2metrics/events2metrics/v2/limits:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_GetLimits
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetLimitsResponse"
+          description: ""
+      summary: Get E2M Limits
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/limits';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/limits"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/limits \
+            --header 'Authorization: Bearer <API_KEY>'
+  /events2metrics/events2metrics/v2/{id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_DeleteE2M
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteE2MResponse"
+          description: ""
+      summary: Delete an E2M
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09 \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: Events2MetricService_GetE2M
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetE2MResponse"
+          description: ""
+      summary: Get an E2M
+      tags:
+      - Events2Metrics Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/events2metrics/events2metrics/v2/d6a3658e-78d2-47d0-9b81-b2c551f01b09 \
+            --header 'Authorization: Bearer <API_KEY>'
+components:
+  schemas:
+    AggType:
+      enum:
+      - AGG_TYPE_UNSPECIFIED
+      - AGG_TYPE_MIN
+      - AGG_TYPE_MAX
+      - AGG_TYPE_COUNT
+      - AGG_TYPE_AVG
+      - AGG_TYPE_SUM
+      - AGG_TYPE_HISTOGRAM
+      - AGG_TYPE_SAMPLES
+      type: string
+    AtomicBatchExecuteE2MResponse:
+      example:
+        matchingResponses:
+        - created:
+            e2m:
+              isInternal: true
+              metricFields:
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              createTime: 2022-06-30T12:30:00Z'
+              metricLabels:
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              name: Service_catalog_latency
+              spansQuery:
+                applicationnameFilters:
+                - myApp
+                - myApp
+                lucene: applicationName:myApp
+                serviceFilters:
+                - myService
+                - myService
+                actionFilters:
+                - myAction
+                - myAction
+                subsystemnameFilters:
+                - mySubsystem
+                - mySubsystem
+              description: avg and max the latency of catalog service
+              updateTime: 2022-06-30T12:30:00Z'
+              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+              permutations:
+                limit: 30000
+                hasExceededLimit: true
+              type: E2M_TYPE_UNSPECIFIED
+        - created:
+            e2m:
+              isInternal: true
+              metricFields:
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - sourceField: log_obj.numeric_field
+                targetBaseMetricName: alias_field_name
+                aggregations:
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+                - targetMetricName: alias_field_name_agg_func
+                  aggType: AGG_TYPE_UNSPECIFIED
+                  enabled: true
+                  samples:
+                    sampleType: SAMPLE_TYPE_UNSPECIFIED
+              createTime: 2022-06-30T12:30:00Z'
+              metricLabels:
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              - sourceField: log_obj.string_value
+                targetLabel: alias_label_name
+              name: Service_catalog_latency
+              spansQuery:
+                applicationnameFilters:
+                - myApp
+                - myApp
+                lucene: applicationName:myApp
+                serviceFilters:
+                - myService
+                - myService
+                actionFilters:
+                - myAction
+                - myAction
+                subsystemnameFilters:
+                - mySubsystem
+                - mySubsystem
+              description: avg and max the latency of catalog service
+              updateTime: 2022-06-30T12:30:00Z'
+              id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+              permutations:
+                limit: 30000
+                hasExceededLimit: true
+              type: E2M_TYPE_UNSPECIFIED
+      properties:
+        matchingResponses:
+          items:
+            $ref: "#/components/schemas/E2MExecutionResponse"
+          type: array
+      type: object
+    CreateE2MRequest:
+      description: This is used to create a new event to metric definition
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        e2m:
+          $ref: "#/components/schemas/E2MCreateParams"
+      required:
+      - e2m
+      title: Create E2M Request
+      type: object
+    CreateE2MResponse:
+      example:
+        e2m:
+          isInternal: true
+          metricFields:
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          createTime: 2022-06-30T12:30:00Z'
+          metricLabels:
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
+          description: avg and max the latency of catalog service
+          updateTime: 2022-06-30T12:30:00Z'
+          id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          permutations:
+            limit: 30000
+            hasExceededLimit: true
+          type: E2M_TYPE_UNSPECIFIED
+      properties:
+        e2m:
+          $ref: "#/components/schemas/E2M"
+      type: object
+    DeleteE2MRequest:
+      description: This data structure is used to delete an existing event to metric
+        definition
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        id:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          type: string
+      required:
+      - id
+      title: Delete E2M Request
+      type: object
+    DeleteE2MResponse:
+      description: This data structure is obtained when deleting an existing event
+        to metric definition
+      example:
+        id: id
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      title: Delete E2M Request
+      type: object
+    E2M:
+      oneOf:
+      - $ref: "#/components/schemas/E2M_3"
+      - $ref: "#/components/schemas/E2M_4"
+    E2MAggHistogram:
+      description: This data structure represents the e2m aggregate histogram
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        buckets:
+          items:
+            example: 2
+            format: float
+            type: number
+          type: array
+      title: E2M Aggregate Histogram
+      type: object
+    E2MAggSamples:
+      description: This data structure represents the e2m aggregate samples
+      example:
+        sampleType: SAMPLE_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        sampleType:
+          $ref: "#/components/schemas/SampleType"
+      title: E2M Aggregate Samples
+      type: object
+    E2MCreateParams:
+      oneOf:
+      - $ref: "#/components/schemas/E2M_Create_Params_2"
+      - $ref: "#/components/schemas/E2M_Create_Params_3"
+    E2MExecutionRequest:
+      oneOf:
+      - $ref: "#/components/schemas/E2MExecutionRequest_oneOf"
+      - $ref: "#/components/schemas/E2MExecutionRequest_oneOf_1"
+      - $ref: "#/components/schemas/E2MExecutionRequest_oneOf_2"
+    E2MExecutionResponse:
+      oneOf:
+      - $ref: "#/components/schemas/E2MExecutionResponse_oneOf"
+      - $ref: "#/components/schemas/E2MExecutionResponse_oneOf_1"
+      - $ref: "#/components/schemas/E2MExecutionResponse_oneOf_2"
+    E2MPermutations:
+      description: This data structure represents the limit of events2metrics permutations
+        and if the limit was exceeded
+      example:
+        limit: 30000
+        hasExceededLimit: true
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        hasExceededLimit:
+          type: boolean
+        limit:
+          example: 30000
+          format: int32
+          type: integer
+      required:
+      - hasExceededLimit
+      - limit
+      title: E2M Permutations
+      type: object
+    E2MType:
+      enum:
+      - E2M_TYPE_UNSPECIFIED
+      - E2M_TYPE_LOGS2METRICS
+      - E2M_TYPE_SPANS2METRICS
+      type: string
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetE2MResponse:
+      description: This data structure is obtained when retrieving an existing event
+        to metric definition
+      example:
+        e2m:
+          isInternal: true
+          metricFields:
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          createTime: 2022-06-30T12:30:00Z'
+          metricLabels:
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
+          description: avg and max the latency of catalog service
+          updateTime: 2022-06-30T12:30:00Z'
+          id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          permutations:
+            limit: 30000
+            hasExceededLimit: true
+          type: E2M_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        e2m:
+          $ref: "#/components/schemas/E2M"
+      required:
+      - e2m
+      title: Get E2M Response
+      type: object
+    GetLimitsResponse:
+      example:
+        companyId: companyId
+        metricsLimit:
+          limit: 6
+          used: 1
+        labelsLimit: 0
+        permutationsLimit:
+          limit: 6
+          used: 1
+      properties:
+        companyId:
+          type: string
+        labelsLimit:
+          format: int32
+          type: integer
+        metricsLimit:
+          $ref: "#/components/schemas/LimitUsage"
+        permutationsLimit:
+          $ref: "#/components/schemas/LimitUsage"
+      type: object
+    LabelsPermutationsCardinalityDay:
+      example:
+        permutations: 0
+        day: day
+      properties:
+        day:
+          type: string
+        permutations:
+          format: int32
+          type: integer
+      type: object
+    LimitUsage:
+      example:
+        limit: 6
+        used: 1
+      properties:
+        limit:
+          format: int32
+          type: integer
+        used:
+          format: int32
+          type: integer
+      type: object
+    ListE2MResponse:
+      description: This is the response obtained when listing all event to metric
+        definitions
+      example:
+        e2m:
+        - isInternal: true
+          metricFields:
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          createTime: 2022-06-30T12:30:00Z'
+          metricLabels:
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
+          description: avg and max the latency of catalog service
+          updateTime: 2022-06-30T12:30:00Z'
+          id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          permutations:
+            limit: 30000
+            hasExceededLimit: true
+          type: E2M_TYPE_UNSPECIFIED
+        - isInternal: true
+          metricFields:
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          createTime: 2022-06-30T12:30:00Z'
+          metricLabels:
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
+          description: avg and max the latency of catalog service
+          updateTime: 2022-06-30T12:30:00Z'
+          id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          permutations:
+            limit: 30000
+            hasExceededLimit: true
+          type: E2M_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        e2m:
+          items:
+            $ref: "#/components/schemas/E2M"
+          type: array
+      required:
+      - e2m
+      title: List E2M Response
+      type: object
+    ListLabelsCardinalityResponse:
+      example:
+        permutations:
+        - permutations: 0
+          day: day
+        - permutations: 0
+          day: day
+      properties:
+        permutations:
+          items:
+            $ref: "#/components/schemas/LabelsPermutationsCardinalityDay"
+          type: array
+      type: object
+    MetricLabel:
+      description: This data structure represents a metric label
+      example:
+        sourceField: log_obj.string_value
+        targetLabel: alias_label_name
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        sourceField:
+          example: log_obj.string_value
+          type: string
+        targetLabel:
+          example: alias_label_name
+          pattern: "^[\\w/-]+$"
+          type: string
+      required:
+      - sourceField
+      - targetLabel
+      title: Metric Label
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    ReplaceE2MRequest:
+      description: This data structure is used to replace an existing event to metric
+        definition
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        e2m:
+          $ref: "#/components/schemas/E2M"
+      required:
+      - e2m
+      title: Replace E2M Request
+      type: object
+    ReplaceE2MResponse:
+      description: This data structure is obtained when replacing an existing event
+        to metric definition
+      example:
+        e2m:
+          isInternal: true
+          metricFields:
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - sourceField: log_obj.numeric_field
+            targetBaseMetricName: alias_field_name
+            aggregations:
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - targetMetricName: alias_field_name_agg_func
+              aggType: AGG_TYPE_UNSPECIFIED
+              enabled: true
+              samples:
+                sampleType: SAMPLE_TYPE_UNSPECIFIED
+          createTime: 2022-06-30T12:30:00Z'
+          metricLabels:
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          - sourceField: log_obj.string_value
+            targetLabel: alias_label_name
+          name: Service_catalog_latency
+          spansQuery:
+            applicationnameFilters:
+            - myApp
+            - myApp
+            lucene: applicationName:myApp
+            serviceFilters:
+            - myService
+            - myService
+            actionFilters:
+            - myAction
+            - myAction
+            subsystemnameFilters:
+            - mySubsystem
+            - mySubsystem
+          description: avg and max the latency of catalog service
+          updateTime: 2022-06-30T12:30:00Z'
+          id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          permutations:
+            limit: 30000
+            hasExceededLimit: true
+          type: E2M_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        e2m:
+          $ref: "#/components/schemas/E2M"
+      required:
+      - e2m
+      title: Replace E2M Response
+      type: object
+    SampleType:
+      enum:
+      - SAMPLE_TYPE_UNSPECIFIED
+      - SAMPLE_TYPE_MIN
+      - SAMPLE_TYPE_MAX
+      type: string
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    logs2metrics.v2.Severity:
+      enum:
+      - SEVERITY_UNSPECIFIED
+      - SEVERITY_DEBUG
+      - SEVERITY_VERBOSE
+      - SEVERITY_INFO
+      - SEVERITY_WARNING
+      - SEVERITY_ERROR
+      - SEVERITY_CRITICAL
+      type: string
+    v2.Aggregation:
+      oneOf:
+      - $ref: "#/components/schemas/Aggregation"
+      - $ref: "#/components/schemas/Aggregation_1"
+    v2.LogsQuery:
+      description: This data structure represents a query for logs.
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        alias:
+          example: new_query
+          type: string
+        applicationnameFilters:
+          items:
+            example: app_name
+            type: string
+          type: array
+        lucene:
+          example: "log_obj.numeric_field: [50 TO 100]"
+          type: string
+        severityFilters:
+          items:
+            $ref: "#/components/schemas/logs2metrics.v2.Severity"
+          type: array
+        subsystemnameFilters:
+          items:
+            example: sub_name
+            type: string
+          type: array
+      title: SpansQuery
+      type: object
+    v2.MetricField:
+      description: This data structure represents a metric field
+      example:
+        sourceField: log_obj.numeric_field
+        targetBaseMetricName: alias_field_name
+        aggregations:
+        - targetMetricName: alias_field_name_agg_func
+          aggType: AGG_TYPE_UNSPECIFIED
+          enabled: true
+          samples:
+            sampleType: SAMPLE_TYPE_UNSPECIFIED
+        - targetMetricName: alias_field_name_agg_func
+          aggType: AGG_TYPE_UNSPECIFIED
+          enabled: true
+          samples:
+            sampleType: SAMPLE_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        aggregations:
+          items:
+            $ref: "#/components/schemas/v2.Aggregation"
+          type: array
+        sourceField:
+          example: log_obj.numeric_field
+          type: string
+        targetBaseMetricName:
+          example: alias_field_name
+          pattern: "^[\\w/-]+$"
+          type: string
+      required:
+      - aggregations
+      - sourceField
+      - targetBaseMetricName
+      title: Metric Field
+      type: object
+    v2.SpansQuery:
+      description: This data structure represents a query for spans.
+      example:
+        applicationnameFilters:
+        - myApp
+        - myApp
+        lucene: applicationName:myApp
+        serviceFilters:
+        - myService
+        - myService
+        actionFilters:
+        - myAction
+        - myAction
+        subsystemnameFilters:
+        - mySubsystem
+        - mySubsystem
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        actionFilters:
+          items:
+            example: myAction
+            type: string
+          type: array
+        applicationnameFilters:
+          items:
+            example: myApp
+            type: string
+          type: array
+        lucene:
+          example: applicationName:myApp
+          type: string
+        serviceFilters:
+          items:
+            example: myService
+            type: string
+          type: array
+        subsystemnameFilters:
+          items:
+            example: mySubsystem
+            type: string
+          type: array
+      title: SpansQuery
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    E2M_1:
+      additionalProperties: false
+      description: This data structure represents an Event to Metrics (E2M) object.
+      properties:
+        createTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        id:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        isInternal:
+          type: boolean
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service_catalog_latency
+          type: string
+        permutations:
+          $ref: "#/components/schemas/E2MPermutations"
+        spansQuery:
+          $ref: "#/components/schemas/v2.SpansQuery"
+        type:
+          $ref: "#/components/schemas/E2MType"
+        updateTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+      required:
+      - name
+      - type
+      title: E2M
+      type: object
+    E2M_2:
+      additionalProperties: false
+      description: This data structure represents an Event to Metrics (E2M) object.
+      properties:
+        createTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        id:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        isInternal:
+          type: boolean
+        logsQuery:
+          $ref: "#/components/schemas/v2.LogsQuery"
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service_catalog_latency
+          type: string
+        permutations:
+          $ref: "#/components/schemas/E2MPermutations"
+        type:
+          $ref: "#/components/schemas/E2MType"
+        updateTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+      required:
+      - name
+      - type
+      title: E2M
+      type: object
+    Events2MetricService_ReplaceE2M_request:
+      oneOf:
+      - $ref: "#/components/schemas/E2M_1"
+      - $ref: "#/components/schemas/E2M_2"
+      type: object
+    E2M_Create_Params:
+      additionalProperties: false
+      description: This data structure is used to create a new event to metric definition
+      properties:
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service catalog latency
+          type: string
+        permutationsLimit:
+          example: 30000
+          format: int32
+          type: integer
+        spansQuery:
+          $ref: "#/components/schemas/v2.SpansQuery"
+        type:
+          $ref: "#/components/schemas/E2MType"
+      required:
+      - name
+      title: E2M Create Params
+      type: object
+    E2M_Create_Params_1:
+      additionalProperties: false
+      description: This data structure is used to create a new event to metric definition
+      properties:
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        logsQuery:
+          $ref: "#/components/schemas/v2.LogsQuery"
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service catalog latency
+          type: string
+        permutationsLimit:
+          example: 30000
+          format: int32
+          type: integer
+        type:
+          $ref: "#/components/schemas/E2MType"
+      required:
+      - name
+      title: E2M Create Params
+      type: object
+    Events2MetricService_CreateE2M_request:
+      oneOf:
+      - $ref: "#/components/schemas/E2M_Create_Params"
+      - $ref: "#/components/schemas/E2M_Create_Params_1"
+      type: object
+    Events2MetricService_AtomicBatchExecuteE2M_request:
+      additionalProperties: false
+      properties:
+        requests:
+          items:
+            $ref: "#/components/schemas/E2MExecutionRequest"
+          type: array
+      type: object
+    SpansQuery:
+      description: This data structure represents a query for spans.
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        actionFilters:
+          items:
+            example: myAction
+            type: string
+          type: array
+        applicationnameFilters:
+          items:
+            example: myApp
+            type: string
+          type: array
+        lucene:
+          example: applicationName:myApp
+          type: string
+        serviceFilters:
+          items:
+            example: myService
+            type: string
+          type: array
+        subsystemnameFilters:
+          items:
+            example: mySubsystem
+            type: string
+          type: array
+      title: SpansQuery
+      type: object
+    SpansQuery_1:
+      description: This data structure represents a query for logs.
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        alias:
+          example: new_query
+          type: string
+        applicationnameFilters:
+          items:
+            example: app_name
+            type: string
+          type: array
+        lucene:
+          example: "log_obj.numeric_field: [50 TO 100]"
+          type: string
+        severityFilters:
+          items:
+            enum:
+            - SEVERITY_UNSPECIFIED
+            - SEVERITY_DEBUG
+            - SEVERITY_VERBOSE
+            - SEVERITY_INFO
+            - SEVERITY_WARNING
+            - SEVERITY_ERROR
+            - SEVERITY_CRITICAL
+            type: string
+          type: array
+        subsystemnameFilters:
+          items:
+            example: sub_name
+            type: string
+          type: array
+      title: SpansQuery
+      type: object
+    Metric_Label:
+      description: This data structure represents a metric label
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        sourceField:
+          example: log_obj.string_value
+          type: string
+        targetLabel:
+          example: alias_label_name
+          pattern: "^[\\w/-]+$"
+          type: string
+      required:
+      - sourceField
+      - targetLabel
+      title: Metric Label
+      type: object
+    E2M_3:
+      additionalProperties: false
+      description: This data structure represents an Event to Metrics (E2M) object.
+      example:
+        isInternal: true
+        metricFields:
+        - sourceField: log_obj.numeric_field
+          targetBaseMetricName: alias_field_name
+          aggregations:
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+        - sourceField: log_obj.numeric_field
+          targetBaseMetricName: alias_field_name
+          aggregations:
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+          - targetMetricName: alias_field_name_agg_func
+            aggType: AGG_TYPE_UNSPECIFIED
+            enabled: true
+            samples:
+              sampleType: SAMPLE_TYPE_UNSPECIFIED
+        createTime: 2022-06-30T12:30:00Z'
+        metricLabels:
+        - sourceField: log_obj.string_value
+          targetLabel: alias_label_name
+        - sourceField: log_obj.string_value
+          targetLabel: alias_label_name
+        name: Service_catalog_latency
+        spansQuery:
+          applicationnameFilters:
+          - myApp
+          - myApp
+          lucene: applicationName:myApp
+          serviceFilters:
+          - myService
+          - myService
+          actionFilters:
+          - myAction
+          - myAction
+          subsystemnameFilters:
+          - mySubsystem
+          - mySubsystem
+        description: avg and max the latency of catalog service
+        updateTime: 2022-06-30T12:30:00Z'
+        id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+        permutations:
+          limit: 30000
+          hasExceededLimit: true
+        type: E2M_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        createTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        id:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        isInternal:
+          type: boolean
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service_catalog_latency
+          type: string
+        permutations:
+          $ref: "#/components/schemas/E2MPermutations"
+        spansQuery:
+          $ref: "#/components/schemas/v2.SpansQuery"
+        type:
+          $ref: "#/components/schemas/E2MType"
+        updateTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+      required:
+      - name
+      - type
+      title: E2M
+      type: object
+    E2M_4:
+      additionalProperties: false
+      description: This data structure represents an Event to Metrics (E2M) object.
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        createTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        id:
+          example: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+          maxLength: 36
+          minLength: 36
+          pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
+          type: string
+        isInternal:
+          type: boolean
+        logsQuery:
+          $ref: "#/components/schemas/v2.LogsQuery"
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service_catalog_latency
+          type: string
+        permutations:
+          $ref: "#/components/schemas/E2MPermutations"
+        type:
+          $ref: "#/components/schemas/E2MType"
+        updateTime:
+          example: 2022-06-30T12:30:00Z'
+          type: string
+      required:
+      - name
+      - type
+      title: E2M
+      type: object
+    E2M_Create_Params_2:
+      additionalProperties: false
+      description: This data structure is used to create a new event to metric definition
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service catalog latency
+          type: string
+        permutationsLimit:
+          example: 30000
+          format: int32
+          type: integer
+        spansQuery:
+          $ref: "#/components/schemas/v2.SpansQuery"
+        type:
+          $ref: "#/components/schemas/E2MType"
+      required:
+      - name
+      title: E2M Create Params
+      type: object
+    E2M_Create_Params_3:
+      additionalProperties: false
+      description: This data structure is used to create a new event to metric definition
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        description:
+          example: avg and max the latency of catalog service
+          type: string
+        logsQuery:
+          $ref: "#/components/schemas/v2.LogsQuery"
+        metricFields:
+          items:
+            $ref: "#/components/schemas/v2.MetricField"
+          type: array
+        metricLabels:
+          items:
+            $ref: "#/components/schemas/MetricLabel"
+          type: array
+        name:
+          example: Service catalog latency
+          type: string
+        permutationsLimit:
+          example: 30000
+          format: int32
+          type: integer
+        type:
+          $ref: "#/components/schemas/E2MType"
+      required:
+      - name
+      title: E2M Create Params
+      type: object
+    E2MExecutionRequest_oneOf:
+      additionalProperties: false
+      properties:
+        create:
+          $ref: "#/components/schemas/CreateE2MRequest"
+      type: object
+    E2MExecutionRequest_oneOf_1:
+      additionalProperties: false
+      properties:
+        replace:
+          $ref: "#/components/schemas/ReplaceE2MRequest"
+      type: object
+    E2MExecutionRequest_oneOf_2:
+      additionalProperties: false
+      properties:
+        delete:
+          $ref: "#/components/schemas/DeleteE2MRequest"
+      type: object
+    E2MExecutionResponse_oneOf:
+      additionalProperties: false
+      example:
+        created:
+          e2m:
+            isInternal: true
+            metricFields:
+            - sourceField: log_obj.numeric_field
+              targetBaseMetricName: alias_field_name
+              aggregations:
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+            - sourceField: log_obj.numeric_field
+              targetBaseMetricName: alias_field_name
+              aggregations:
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+              - targetMetricName: alias_field_name_agg_func
+                aggType: AGG_TYPE_UNSPECIFIED
+                enabled: true
+                samples:
+                  sampleType: SAMPLE_TYPE_UNSPECIFIED
+            createTime: 2022-06-30T12:30:00Z'
+            metricLabels:
+            - sourceField: log_obj.string_value
+              targetLabel: alias_label_name
+            - sourceField: log_obj.string_value
+              targetLabel: alias_label_name
+            name: Service_catalog_latency
+            spansQuery:
+              applicationnameFilters:
+              - myApp
+              - myApp
+              lucene: applicationName:myApp
+              serviceFilters:
+              - myService
+              - myService
+              actionFilters:
+              - myAction
+              - myAction
+              subsystemnameFilters:
+              - mySubsystem
+              - mySubsystem
+            description: avg and max the latency of catalog service
+            updateTime: 2022-06-30T12:30:00Z'
+            id: d6a3658e-78d2-47d0-9b81-b2c551f01b09
+            permutations:
+              limit: 30000
+              hasExceededLimit: true
+            type: E2M_TYPE_UNSPECIFIED
+      properties:
+        created:
+          $ref: "#/components/schemas/CreateE2MResponse"
+      type: object
+    E2MExecutionResponse_oneOf_1:
+      additionalProperties: false
+      properties:
+        replaced:
+          $ref: "#/components/schemas/ReplaceE2MResponse"
+      type: object
+    E2MExecutionResponse_oneOf_2:
+      additionalProperties: false
+      properties:
+        deleted:
+          $ref: "#/components/schemas/DeleteE2MResponse"
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    Aggregation:
+      additionalProperties: false
+      description: This data structure represents an aggregation
+      example:
+        targetMetricName: alias_field_name_agg_func
+        aggType: AGG_TYPE_UNSPECIFIED
+        enabled: true
+        samples:
+          sampleType: SAMPLE_TYPE_UNSPECIFIED
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        aggType:
+          $ref: "#/components/schemas/AggType"
+        enabled:
+          type: boolean
+        samples:
+          $ref: "#/components/schemas/E2MAggSamples"
+        targetMetricName:
+          example: alias_field_name_agg_func
+          type: string
+      title: Aggregation
+      type: object
+    Aggregation_1:
+      additionalProperties: false
+      description: This data structure represents an aggregation
+      externalDocs:
+        description: Find out more about events2metrics
+        url: https://coralogix.com/docs/user-guides/monitoring-and-insights/events2metrics/
+      properties:
+        aggType:
+          $ref: "#/components/schemas/AggType"
+        enabled:
+          type: boolean
+        histogram:
+          $ref: "#/components/schemas/E2MAggHistogram"
+        targetMetricName:
+          example: alias_field_name_agg_func
+          type: string
+      title: Aggregation
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

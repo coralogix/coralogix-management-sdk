@@ -1,0 +1,732 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /aaa/team-roles/v1/custom-roles:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_ListCustomRoles
+      parameters:
+      - explode: true
+        in: query
+        name: team_id
+        required: false
+        schema:
+          format: int64
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCustomRolesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List Custom Roles
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles?team_id=SOME_INTEGER_VALUE';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles"
+
+          querystring = {"team_id":"SOME_INTEGER_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles?team_id=SOME_INTEGER_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+    put:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_CreateRole
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleManagementService_CreateRole_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CreateRoleResponse"
+          description: ""
+        "201":
+          content:
+            application/json: {}
+          description: Role created
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "409":
+          content:
+            application/json: {}
+          description: Role already exists
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Create Role
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles';
+
+          let options = {
+            method: 'PUT',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"description":"string","name":"string","parentRoleId":0,"permissions":["string"],"teamId":0}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles"
+
+          payload = {
+              "description": "string",
+              "name": "string",
+              "parentRoleId": 0,
+              "permissions": ["string"],
+              "teamId": 0
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PUT", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PUT \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"description":"string","name":"string","parentRoleId":0,"permissions":["string"],"teamId":0}'
+  /aaa/team-roles/v1/custom-roles/{role_id}:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_DeleteRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteRoleResponse"
+          description: ""
+        "204":
+          content:
+            application/json: {}
+          description: Role deleted
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Delete Role
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_GetCustomRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCustomRoleResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Get Custom Role
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_UpdateRole
+      parameters:
+      - explode: false
+        in: path
+        name: role_id
+        required: true
+        schema:
+          format: int64
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RoleManagementService_UpdateRole_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdateRoleResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "404":
+          content:
+            application/json: {}
+          description: Role not found
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: Update Role
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"newDescription":"string","newName":"string","newPermissions":{"permissions":["string"]}}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D"
+
+          payload = {
+              "newDescription": "string",
+              "newName": "string",
+              "newPermissions": {"permissions": ["string"]}
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/custom-roles/%7Brole_id%7D \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"newDescription":"string","newName":"string","newPermissions":{"permissions":["string"]}}'
+  /aaa/team-roles/v1/system-roles:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: RoleManagementService_ListSystemRoles
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListSystemRolesResponse"
+          description: ""
+        "400":
+          content:
+            application/json: {}
+          description: Bad Request
+        "401":
+          content:
+            application/json: {}
+          description: Unauthorized request
+        "500":
+          content:
+            application/json: {}
+          description: Internal server error
+      summary: List System Roles
+      tags:
+      - Role Management Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/aaa/team-roles/v1/system-roles \
+            --header 'Authorization: Bearer <API_KEY>'
+components:
+  schemas:
+    CreateRoleResponse:
+      example:
+        id: 0
+      properties:
+        id:
+          format: int64
+          type: integer
+      type: object
+    DeleteRoleResponse:
+      type: object
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GetCustomRoleResponse:
+      additionalProperties: false
+      example:
+        role:
+          parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+      properties:
+        role:
+          $ref: "#/components/schemas/v2.CustomRole"
+      type: object
+    ListCustomRolesResponse:
+      example:
+        roles:
+        - parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+        - parentRoleName: parentRoleName
+          permissions:
+          - permissions
+          - permissions
+          roleId: 6
+          teamId: 1
+          name: name
+          description: description
+          parentRoleId: 0
+      properties:
+        roles:
+          items:
+            $ref: "#/components/schemas/v2.CustomRole"
+          type: array
+      type: object
+    ListSystemRolesResponse:
+      example:
+        roles:
+        - permissions:
+          - permissions
+          - permissions
+          roleId: 0
+          name: name
+          description: description
+        - permissions:
+          - permissions
+          - permissions
+          roleId: 0
+          name: name
+          description: description
+      properties:
+        roles:
+          items:
+            $ref: "#/components/schemas/v2.SystemRole"
+          type: array
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    UpdateRoleResponse:
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v2.CustomRole:
+      example:
+        parentRoleName: parentRoleName
+        permissions:
+        - permissions
+        - permissions
+        roleId: 6
+        teamId: 1
+        name: name
+        description: description
+        parentRoleId: 0
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    v2.Permissions:
+      properties:
+        permissions:
+          items:
+            type: string
+          type: array
+      type: object
+    v2.SystemRole:
+      example:
+        permissions:
+        - permissions
+        - permissions
+        roleId: 0
+        name: name
+        description: description
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        roleId:
+          format: int64
+          type: integer
+      type: object
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    RoleManagementService_CreateRole_request_oneOf:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleId:
+          format: int64
+          type: integer
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_CreateRole_request_oneOf_1:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        parentRoleName:
+          type: string
+        permissions:
+          items:
+            type: string
+          type: array
+        teamId:
+          format: int64
+          type: integer
+      type: object
+    RoleManagementService_CreateRole_request:
+      oneOf:
+      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf"
+      - $ref: "#/components/schemas/RoleManagementService_CreateRole_request_oneOf_1"
+      type: object
+    RoleManagementService_UpdateRole_request:
+      additionalProperties: false
+      properties:
+        newDescription:
+          type: string
+        newName:
+          type: string
+        newPermissions:
+          $ref: "#/components/schemas/v2.Permissions"
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey

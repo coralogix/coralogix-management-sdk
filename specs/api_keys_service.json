@@ -1,0 +1,804 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/api-keys/v3": {
+      "post": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Create API Key",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_CreateApiKey",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Create Api Key Request",
+                "description": "This data structure is used to create an API key.",
+                "type": "object",
+                "properties": {
+                  "hashed": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "keyPermissions": {
+                    "$ref": "#/components/schemas/CreateApiKeyRequest.KeyPermissions"
+                  },
+                  "name": {
+                    "example": "my_api_key",
+                    "type": "string"
+                  },
+                  "owner": {
+                    "$ref": "#/components/schemas/Owner"
+                  }
+                },
+                "required": [
+                  "name",
+                  "owner",
+                  "keyPermissions",
+                  "hashed"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"hashed\":true,\"keyPermissions\":{\"permissions\":[[\"read_logs\"]],\"presets\":[[\"my_preset\"]]},\"name\":\"my_api_key\",\"owner\":{\"userId\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3\"\n\npayload = {\n    \"hashed\": True,\n    \"keyPermissions\": {\n        \"permissions\": [[\"read_logs\"]],\n        \"presets\": [[\"my_preset\"]]\n    },\n    \"name\": \"my_api_key\",\n    \"owner\": {\"userId\": \"string\"}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"hashed\":true,\"keyPermissions\":{\"permissions\":[[\"read_logs\"]],\"presets\":[[\"my_preset\"]]},\"name\":\"my_api_key\",\"owner\":{\"userId\":\"string\"}}'"
+          }
+        ]
+      }
+    },
+    "/aaa/api-keys/v3/send_data": {
+      "get": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Get \"Send Data\" API Keys",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetSendDataApiKeys",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSendDataApiKeysResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/send_data \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    },
+    "/aaa/api-keys/v3/{key_id}": {
+      "get": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Get API Key",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_GetApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "example": "my_key_id",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Update API Key",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_UpdateApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "example": "my_key_id",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update Api Key Request",
+                "description": "This data structure is used to update an API key.",
+                "type": "object",
+                "properties": {
+                  "isActive": {
+                    "example": true,
+                    "type": "boolean"
+                  },
+                  "newName": {
+                    "example": "my_new_name",
+                    "type": "string"
+                  },
+                  "permissions": {
+                    "$ref": "#/components/schemas/UpdateApiKeyRequest.Permissions"
+                  },
+                  "presets": {
+                    "$ref": "#/components/schemas/Presets"
+                  }
+                },
+                "required": [
+                  "keyId"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"isActive\":true,\"newName\":\"my_new_name\",\"permissions\":{\"permissions\":[\"string\"]},\"presets\":{\"presets\":[\"string\"]}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id\"\n\npayload = {\n    \"isActive\": True,\n    \"newName\": \"my_new_name\",\n    \"permissions\": {\"permissions\": [\"string\"]},\n    \"presets\": {\"presets\": [\"string\"]}\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/my_key_id \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"isActive\":true,\"newName\":\"my_new_name\",\"permissions\":{\"permissions\":[\"string\"]},\"presets\":{\"presets\":[\"string\"]}}'"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "API Keys Service"
+        ],
+        "summary": "Delete API Key",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ApiKeysService_DeleteApiKey",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "key_id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteApiKeyResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/api-keys/v3/%7Bkey_id%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateApiKeyRequest.KeyPermissions": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Key Permissions",
+        "description": "This data structure allows to specify loose permissions and permission presets for an API key.",
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": [
+                "read_logs"
+              ],
+              "type": "string"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "example": [
+                "my_preset"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "presets",
+          "permissions"
+        ]
+      },
+      "CreateApiKeyResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Create Api Key Response",
+        "description": "This data structure is the response obtained when creating an API key.",
+        "type": "object",
+        "properties": {
+          "keyId": {
+            "example": "my_key_id",
+            "type": "string"
+          },
+          "name": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "value": {
+            "example": "my_api_key_value",
+            "type": "string"
+          }
+        },
+        "required": [
+          "keyId",
+          "name",
+          "value"
+        ]
+      },
+      "DeleteApiKeyResponse": {
+        "type": "object"
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "multipleValues": {
+                "$ref": "#/components/schemas/MultipleValues"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetApiKeyResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Get Api Key Response",
+        "description": "This data structure is the response obtained when retrieving an API key.",
+        "type": "object",
+        "properties": {
+          "keyInfo": {
+            "$ref": "#/components/schemas/KeyInfo"
+          }
+        },
+        "required": [
+          "keyInfo"
+        ]
+      },
+      "GetSendDataApiKeysResponse": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Get Api Key Response",
+        "description": "This data structure is the response obtained when retrieving an API key.",
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/KeyInfo"
+            }
+          }
+        },
+        "required": [
+          "keyInfo"
+        ]
+      },
+      "KeyInfo": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Key Info",
+        "description": "This data structure represents the information associated with an API key.",
+        "type": "object",
+        "properties": {
+          "active": {
+            "example": true,
+            "type": "boolean"
+          },
+          "hashed": {
+            "example": true,
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "keyPermissions": {
+            "$ref": "#/components/schemas/KeyInfo.KeyPermissions"
+          },
+          "name": {
+            "example": "my_api_key",
+            "type": "string"
+          },
+          "owner": {
+            "$ref": "#/components/schemas/Owner"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "owner",
+          "active",
+          "hashed",
+          "keyPermissions"
+        ],
+        "additionalProperties": false
+      },
+      "KeyInfo.KeyPermissions": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Key Permissions",
+        "description": "This data structure represents the permissions on an API key.",
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "presets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PresetInfo"
+            }
+          }
+        },
+        "required": [
+          "presets",
+          "permissions"
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Owner": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "userId": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "teamId": {
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "organisationId": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PresetInfo": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Preset Info",
+        "description": "This data structure represents a preset set of permissions on an API key.",
+        "type": "object",
+        "properties": {
+          "name": {
+            "example": "my_preset",
+            "type": "string"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "example": [
+                "read_logs"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "name",
+          "permissions"
+        ]
+      },
+      "Presets": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Presets",
+        "description": "This data structure represents a set of permissions presets on an API key.",
+        "type": "object",
+        "properties": {
+          "presets": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "presets"
+        ]
+      },
+      "UpdateApiKeyRequest.Permissions": {
+        "externalDocs": {
+          "description": "Find out more about api keys",
+          "url": "https://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/"
+        },
+        "title": "Permissions",
+        "description": "This data structure represents a set of permissions on an API key.",
+        "type": "object",
+        "properties": {
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "permissions"
+        ]
+      },
+      "UpdateApiKeyResponse": {
+        "type": "object"
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}
