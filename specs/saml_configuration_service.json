@@ -1,0 +1,635 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/aaa/team-saml/v1/active": {
+      "post": {
+        "tags": [
+          "SAML Configuration Service"
+        ],
+        "summary": "Activate/Deactivate SAML",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SamlConfigurationService_SetActive",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Set Active Request",
+                "description": "This data structure is used to activate or deactivate a SAML identity provider",
+                "type": "object",
+                "properties": {
+                  "isActive": {
+                    "type": "boolean"
+                  },
+                  "teamId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "required": [
+                  "teamId",
+                  "isActive"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/v2.SetActiveResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/active';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"isActive\":true,\"teamId\":0}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/active\"\n\npayload = {\n    \"isActive\": True,\n    \"teamId\": 0\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/active \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"isActive\":true,\"teamId\":0}'"
+          }
+        ]
+      }
+    },
+    "/aaa/team-saml/v1/configuration": {
+      "get": {
+        "tags": [
+          "SAML Configuration Service"
+        ],
+        "summary": "Get SAML Configuration",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SamlConfigurationService_GetConfiguration",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "team_id",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetConfigurationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/configuration?team_id=SOME_INTEGER_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/configuration\"\n\nquerystring = {\"team_id\":\"SOME_INTEGER_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/configuration?team_id=SOME_INTEGER_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    },
+    "/aaa/team-saml/v1/idp_parameters": {
+      "post": {
+        "tags": [
+          "SAML Configuration Service"
+        ],
+        "summary": "Set IDP Parameters",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SamlConfigurationService_SetIDPParameters",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Set IDP Parameters Request",
+                "description": "This data structure is used to set the parameters of a SAML identity provider",
+                "type": "object",
+                "properties": {
+                  "params": {
+                    "$ref": "#/components/schemas/IDPParameters"
+                  },
+                  "teamId": {
+                    "type": "integer",
+                    "format": "int64"
+                  }
+                },
+                "required": [
+                  "teamId",
+                  "params"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SetIDPParametersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/idp_parameters';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"params\":{\"active\":true,\"groupNames\":[[\"group1\"]],\"metadataUrl\":\"https://<...>.okta.com/app/<...>/sso/saml/metadata\",\"teamEntityId\":1234567},\"teamId\":0}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/idp_parameters\"\n\npayload = {\n    \"params\": {\n        \"active\": True,\n        \"groupNames\": [[\"group1\"]],\n        \"metadataUrl\": \"https://<...>.okta.com/app/<...>/sso/saml/metadata\",\n        \"teamEntityId\": 1234567\n    },\n    \"teamId\": 0\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/idp_parameters \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"params\":{\"active\":true,\"groupNames\":[[\"group1\"]],\"metadataUrl\":\"https://<...>.okta.com/app/<...>/sso/saml/metadata\",\"teamEntityId\":1234567},\"teamId\":0}'"
+          }
+        ]
+      }
+    },
+    "/aaa/team-saml/v1/sp_parameters": {
+      "get": {
+        "tags": [
+          "SAML Configuration Service"
+        ],
+        "summary": "Get SP Parameters",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "SamlConfigurationService_GetSPParameters",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "team_id",
+            "schema": {
+              "example": 1234567,
+              "type": "integer",
+              "format": "int64"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSPParametersResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/sp_parameters?team_id=1234567';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/sp_parameters\"\n\nquerystring = {\"team_id\":\"1234567\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/aaa/team-saml/v1/sp_parameters?team_id=1234567' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "multipleValues": {
+                "$ref": "#/components/schemas/MultipleValues"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetConfigurationResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Get Configuration Response",
+        "description": "This data structure is obtained as a response to a request to retrieve the configuration of a SAML service provider and identity provider",
+        "type": "object",
+        "properties": {
+          "idpDetails": {
+            "$ref": "#/components/schemas/IDPDetails"
+          },
+          "idpParameters": {
+            "$ref": "#/components/schemas/IDPParameters"
+          },
+          "spParameters": {
+            "$ref": "#/components/schemas/SPParameters"
+          },
+          "teamId": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "required": [
+          "teamId",
+          "spParameters",
+          "idpParameters"
+        ],
+        "additionalProperties": false
+      },
+      "GetSPParametersResponse": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Get SP Parameters Response",
+        "description": "This data structure is obtained as a response to a request to retrieve the parameters of a SAML service provider",
+        "type": "object",
+        "properties": {
+          "params": {
+            "$ref": "#/components/schemas/SPParameters"
+          }
+        },
+        "required": [
+          "params"
+        ]
+      },
+      "IDPDetails": {
+        "type": "object",
+        "properties": {
+          "icon": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "IDPParameters": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "description": "Find out more about enrichments",
+              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+            },
+            "title": "IDP Parameters",
+            "description": "This data structure represents a set of SAML identity provider parameters",
+            "type": "object",
+            "properties": {
+              "active": {
+                "example": true,
+                "type": "boolean"
+              },
+              "groupNames": {
+                "type": "array",
+                "items": {
+                  "example": [
+                    "group1"
+                  ],
+                  "type": "string"
+                }
+              },
+              "metadataUrl": {
+                "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+                "type": "string"
+              },
+              "teamEntityId": {
+                "example": 1234567,
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "required": [
+              "active",
+              "metadata",
+              "teamEntityId",
+              "groupNames"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "description": "Find out more about enrichments",
+              "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+            },
+            "title": "IDP Parameters",
+            "description": "This data structure represents a set of SAML identity provider parameters",
+            "type": "object",
+            "properties": {
+              "active": {
+                "example": true,
+                "type": "boolean"
+              },
+              "groupNames": {
+                "type": "array",
+                "items": {
+                  "example": [
+                    "group1"
+                  ],
+                  "type": "string"
+                }
+              },
+              "metadataContent": {
+                "example": "<?xml version= ...",
+                "type": "string"
+              },
+              "teamEntityId": {
+                "example": 1234567,
+                "type": "integer",
+                "format": "int64"
+              }
+            },
+            "required": [
+              "active",
+              "metadata",
+              "teamEntityId",
+              "groupNames"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SPParameters": {
+        "externalDocs": {
+          "description": "Find out more about enrichments",
+          "url": "https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/"
+        },
+        "title": "Service Provider Parameters",
+        "description": "This data structure represents the parameters of a SAML service provider",
+        "type": "object",
+        "properties": {
+          "assertionConsumerServiceUrl": {
+            "example": "assertion",
+            "type": "string"
+          },
+          "binding": {
+            "example": "binding",
+            "type": "string"
+          },
+          "metadataUrl": {
+            "example": "https://<...>.okta.com/app/<...>/sso/saml/metadata",
+            "type": "string"
+          },
+          "nameIdFormat": {
+            "example": "name_id",
+            "type": "string"
+          },
+          "signingCertPem": {
+            "example": "certificate",
+            "type": "string"
+          }
+        },
+        "required": [
+          "metadataUrl",
+          "signingCertPem",
+          "nameIdFormat",
+          "assertionConsumerServiceUrl",
+          "binding"
+        ]
+      },
+      "SetIDPParametersResponse": {
+        "type": "object"
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v2.SetActiveResponse": {
+        "type": "object"
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}

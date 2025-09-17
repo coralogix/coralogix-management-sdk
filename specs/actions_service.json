@@ -1,0 +1,863 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/v2/actions": {
+      "get": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "List Actions",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ListActions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ListActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Replace Action",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_ReplaceAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "action": {
+                    "$ref": "#/components/schemas/v2.Action"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReplaceActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"action\":{\"applicationNames\":[\"string\"],\"createdBy\":\"string\",\"id\":\"string\",\"isHidden\":true,\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\npayload = {\"action\": {\n        \"applicationNames\": [\"string\"],\n        \"createdBy\": \"string\",\n        \"id\": \"string\",\n        \"isHidden\": True,\n        \"isPrivate\": True,\n        \"name\": \"string\",\n        \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n        \"subsystemNames\": [\"string\"],\n        \"url\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"action\":{\"applicationNames\":[\"string\"],\"createdBy\":\"string\",\"id\":\"string\",\"isHidden\":true,\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}'"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Create Action",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_CreateAction",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "applicationNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "isPrivate": {
+                    "type": "boolean"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "sourceType": {
+                    "$ref": "#/components/schemas/v2.SourceType"
+                  },
+                  "subsystemNames": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "url": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions\"\n\npayload = {\n    \"applicationNames\": [\"string\"],\n    \"isPrivate\": True,\n    \"name\": \"string\",\n    \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n    \"subsystemNames\": [\"string\"],\n    \"url\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}'"
+          }
+        ]
+      }
+    },
+    "/v2/actions/actions:atomicBatchExecute": {
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Atomic Batch Execute Actions",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_AtomicBatchExecuteActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "requests": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/ActionExecutionRequest"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AtomicBatchExecuteActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"requests\":[{\"create\":{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute\"\n\npayload = {\"requests\": [{\"create\": {\n                \"applicationNames\": [\"string\"],\n                \"isPrivate\": True,\n                \"name\": \"string\",\n                \"sourceType\": \"SOURCE_TYPE_UNSPECIFIED\",\n                \"subsystemNames\": [\"string\"],\n                \"url\": \"string\"\n            }}]}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:atomicBatchExecute \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"requests\":[{\"create\":{\"applicationNames\":[\"string\"],\"isPrivate\":true,\"name\":\"string\",\"sourceType\":\"SOURCE_TYPE_UNSPECIFIED\",\"subsystemNames\":[\"string\"],\"url\":\"string\"}}]}'"
+          }
+        ]
+      }
+    },
+    "/v2/actions/actions:order": {
+      "post": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Order Actions",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_OrderActions",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "privateActionsOrder": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  },
+                  "sharedActionsOrder": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "integer",
+                      "format": "int64"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OrderActionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"privateActionsOrder\":{\"property1\":0,\"property2\":0},\"sharedActionsOrder\":{\"property1\":0,\"property2\":0}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order\"\n\npayload = {\n    \"privateActionsOrder\": {\n        \"property1\": 0,\n        \"property2\": 0\n    },\n    \"sharedActionsOrder\": {\n        \"property1\": 0,\n        \"property2\": 0\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/actions:order \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"privateActionsOrder\":{\"property1\":0,\"property2\":0},\"sharedActionsOrder\":{\"property1\":0,\"property2\":0}}'"
+          }
+        ]
+      }
+    },
+    "/v2/actions/{id}": {
+      "get": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Get Action",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_GetAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Actions Service"
+        ],
+        "summary": "Delete Action",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ActionsService_DeleteAction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteActionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/v2/actions/%7Bid%7D \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ActionExecutionRequest": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "create": {
+                "$ref": "#/components/schemas/CreateActionRequest"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "replace": {
+                "$ref": "#/components/schemas/ReplaceActionRequest"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "delete": {
+                "$ref": "#/components/schemas/DeleteActionRequest"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "ActionExecutionResponse": {
+        "oneOf": [
+          {
+            "type": "object",
+            "properties": {
+              "create": {
+                "$ref": "#/components/schemas/CreateActionResponse"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "replace": {
+                "$ref": "#/components/schemas/ReplaceActionResponse"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "delete": {
+                "$ref": "#/components/schemas/DeleteActionResponse"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "AtomicBatchExecuteActionsResponse": {
+        "type": "object",
+        "properties": {
+          "matchingResponses": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActionExecutionResponse"
+            }
+          }
+        }
+      },
+      "CreateActionRequest": {
+        "type": "object",
+        "properties": {
+          "applicationNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sourceType": {
+            "$ref": "#/components/schemas/v2.SourceType"
+          },
+          "subsystemNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "CreateActionResponse": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "DeleteActionRequest": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteActionResponse": {
+        "type": "object"
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "multipleValues": {
+                "$ref": "#/components/schemas/MultipleValues"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetActionResponse": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "ListActionsResponse": {
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/v2.Action"
+            }
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OrderActionsResponse": {
+        "type": "object"
+      },
+      "ReplaceActionRequest": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "ReplaceActionResponse": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "$ref": "#/components/schemas/v2.Action"
+          }
+        }
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v2.Action": {
+        "type": "object",
+        "properties": {
+          "applicationNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdBy": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "isPrivate": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "sourceType": {
+            "$ref": "#/components/schemas/v2.SourceType"
+          },
+          "subsystemNames": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "v2.SourceType": {
+        "type": "string",
+        "enum": [
+          "SOURCE_TYPE_UNSPECIFIED",
+          "SOURCE_TYPE_LOG",
+          "SOURCE_TYPE_DATA_MAP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}

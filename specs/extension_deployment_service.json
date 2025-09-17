@@ -1,0 +1,826 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/integrations/extensions/v1/deployed": {
+      "get": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Get deployed extensions",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_GetDeployedExtensions",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetDeployedExtensionsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:ReadConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Deploy extension",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_DeployExtension",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "item_ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "applications",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystems",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "extension_deployment",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Extension deployment",
+              "type": "object",
+              "properties": {
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "id": {
+                  "type": "string"
+                },
+                "itemIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "subsystems": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "itemIds"
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeployExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed?id=SOME_STRING_VALUE&version=SOME_STRING_VALUE&item_ids=SOME_ARRAY_VALUE&applications=SOME_ARRAY_VALUE&subsystems=SOME_ARRAY_VALUE&extension_deployment=SOME_OBJECT_VALUE';\n\nlet options = {method: 'PUT', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed\"\n\nquerystring = {\"id\":\"SOME_STRING_VALUE\",\"version\":\"SOME_STRING_VALUE\",\"item_ids\":\"SOME_ARRAY_VALUE\",\"applications\":\"SOME_ARRAY_VALUE\",\"subsystems\":\"SOME_ARRAY_VALUE\",\"extension_deployment\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"PUT\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request PUT \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed?id=SOME_STRING_VALUE&version=SOME_STRING_VALUE&item_ids=SOME_ARRAY_VALUE&applications=SOME_ARRAY_VALUE&subsystems=SOME_ARRAY_VALUE&extension_deployment=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Update extension",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UpdateExtension",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "version",
+            "schema": {
+              "type": "string"
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "item_ids",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "applications",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "subsystems",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "style": "form"
+          },
+          {
+            "in": "query",
+            "name": "extension_deployment",
+            "schema": {
+              "externalDocs": {
+                "url": ""
+              },
+              "title": "Extension deployment",
+              "type": "object",
+              "properties": {
+                "applications": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "id": {
+                  "type": "string"
+                },
+                "itemIds": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "subsystems": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "version": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "version",
+                "itemIds"
+              ]
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed?id=SOME_STRING_VALUE&version=SOME_STRING_VALUE&item_ids=SOME_ARRAY_VALUE&applications=SOME_ARRAY_VALUE&subsystems=SOME_ARRAY_VALUE&extension_deployment=SOME_OBJECT_VALUE';\n\nlet options = {method: 'POST', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed\"\n\nquerystring = {\"id\":\"SOME_STRING_VALUE\",\"version\":\"SOME_STRING_VALUE\",\"item_ids\":\"SOME_ARRAY_VALUE\",\"applications\":\"SOME_ARRAY_VALUE\",\"subsystems\":\"SOME_ARRAY_VALUE\",\"extension_deployment\":\"SOME_OBJECT_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"POST\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed?id=SOME_STRING_VALUE&version=SOME_STRING_VALUE&item_ids=SOME_ARRAY_VALUE&applications=SOME_ARRAY_VALUE&subsystems=SOME_ARRAY_VALUE&extension_deployment=SOME_OBJECT_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Extension deployment service"
+        ],
+        "summary": "Revert deployment of extension",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ExtensionDeploymentService_UndeployExtension",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Revert deployment of extension request",
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "keptExtensionItems": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UndeployExtensionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "extensions:Deploy"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed';\n\nlet options = {\n  method: 'DELETE',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"id\":\"string\",\"keptExtensionItems\":[\"string\"]}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed\"\n\npayload = {\n    \"id\": \"string\",\n    \"keptExtensionItems\": [\"string\"]\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"DELETE\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/extensions/v1/deployed \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"id\":\"string\",\"keptExtensionItems\":[\"string\"]}'"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DeployExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deploy extension response",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          }
+        },
+        "required": [
+          "extensionDeployment"
+        ]
+      },
+      "DeployedExtension": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deployed extension",
+        "type": "object",
+        "properties": {
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subsystems": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "summary": {
+            "$ref": "#/components/schemas/DeployedExtensionSummary"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "summary",
+          "itemIds"
+        ]
+      },
+      "DeployedExtensionSummary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deployed extension summary",
+        "type": "object",
+        "properties": {
+          "deployedItemCounts": {
+            "$ref": "#/components/schemas/ItemCounts"
+          }
+        },
+        "required": [
+          "deployedItemCounts"
+        ]
+      },
+      "ExtensionDeployment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension deployment",
+        "type": "object",
+        "properties": {
+          "applications": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "itemIds": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subsystems": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "version",
+          "itemIds"
+        ]
+      },
+      "FailedItem": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failed item",
+        "type": "object",
+        "properties": {
+          "itemId": {
+            "type": "string"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "remoteId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "itemId",
+          "remoteId",
+          "reason"
+        ]
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "multipleValues": {
+                "$ref": "#/components/schemas/MultipleValues"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GetDeployedExtensionsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get deployed extensions response",
+        "type": "object",
+        "properties": {
+          "deployedExtensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DeployedExtension"
+            }
+          }
+        }
+      },
+      "ItemCounts": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Item counts",
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "alerts": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "customDashboards": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "enrichments": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "eventsToMetrics": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "grafanaDashboards": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "kibanaDashboards": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "metricsRuleGroup": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "parsingRules": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "savedViews": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "UndeployExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Revert deployment of extension response",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          },
+          "failedItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FailedItem"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateExtensionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Update extension response",
+        "type": "object",
+        "properties": {
+          "extensionDeployment": {
+            "$ref": "#/components/schemas/ExtensionDeployment"
+          }
+        },
+        "required": [
+          "extensionDeployment"
+        ]
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}
