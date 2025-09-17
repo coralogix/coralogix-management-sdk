@@ -1,0 +1,15 @@
+generatorName: go
+inputSpec: openapi.yaml
+outputDir: go/openapi/
+
+additionalProperties:
+  withGoMod: false
+  packageName: cxsdk
+  packageVersion: 1.0.0
+  generateInterfaces: true
+
+globalProperties:
+  apiTests: false
+  modelTests: false
+  apiDocs: false
+  modelDocs: false
