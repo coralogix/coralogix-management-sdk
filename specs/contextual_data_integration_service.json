@@ -1,0 +1,2882 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/integrations/contextual-data/v1": {
+      "get": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Get all contextual data integrations accessible",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_GetContextualDataIntegrations",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "include_testing_integrations",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetContextualDataIntegrationsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:ReadConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1?include_testing_integrations=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\nquerystring = {\"include_testing_integrations\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1?include_testing_integrations=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Update contextual data integration",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_UpdateContextualDataIntegration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Update contextual data integration request",
+                "type": "object",
+                "properties": {
+                  "integrationId": {
+                    "type": "string"
+                  },
+                  "metadata": {
+                    "$ref": "#/components/schemas/IntegrationMetadata"
+                  }
+                },
+                "required": [
+                  "integrationId",
+                  "metadata"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateContextualDataIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:UpdateConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1';\n\nlet options = {\n  method: 'PUT',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationId\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\npayload = {\n    \"integrationId\": \"string\",\n    \"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request PUT \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationId\":\"string\",\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'"
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Save contextual data integration",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_SaveContextualDataIntegration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Save contextual data integration request",
+                "type": "object",
+                "properties": {
+                  "metadata": {
+                    "$ref": "#/components/schemas/IntegrationMetadata"
+                  }
+                },
+                "required": [
+                  "metadata"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SaveContextualDataIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:UpdateConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1\"\n\npayload = {\"metadata\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    }}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1 \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"metadata\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"}}'"
+          }
+        ]
+      }
+    },
+    "/integrations/contextual-data/v1/definition/{id}": {
+      "get": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Get contextual data integration definition",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_GetContextualDataIntegrationDefinition",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "include_testing_integrations",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetContextualDataIntegrationDefinitionResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:ReadConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D?include_testing_integrations=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D\"\n\nquerystring = {\"include_testing_integrations\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/definition/%7Bid%7D?include_testing_integrations=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    },
+    "/integrations/contextual-data/v1/test": {
+      "post": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Test contextual data integration",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_TestContextualDataIntegration",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Test contextual data integration request",
+                "type": "object",
+                "properties": {
+                  "integrationData": {
+                    "$ref": "#/components/schemas/IntegrationMetadata"
+                  },
+                  "integrationId": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "integrationData"
+                ],
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TestContextualDataIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:UpdateConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test';\n\nlet options = {\n  method: 'POST',\n  headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},\n  body: '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'\n};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test\"\n\npayload = {\n    \"integrationData\": {\n        \"integrationKey\": \"string\",\n        \"integrationParameters\": {\"parameters\": [\n                {\n                    \"key\": \"string\",\n                    \"stringValue\": \"string\"\n                }\n            ]},\n        \"version\": \"string\"\n    },\n    \"integrationId\": \"string\"\n}\nheaders = {\n    \"Authorization\": \"Bearer <API_KEY>\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/test \\\n  --header 'Authorization: Bearer <API_KEY>' \\\n  --header 'content-type: application/json' \\\n  --data '{\"integrationData\":{\"integrationKey\":\"string\",\"integrationParameters\":{\"parameters\":[{\"key\":\"string\",\"stringValue\":\"string\"}]},\"version\":\"string\"},\"integrationId\":\"string\"}'"
+          }
+        ]
+      }
+    },
+    "/integrations/contextual-data/v1/{id}": {
+      "get": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Get contextual data integration details",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_GetContextualDataIntegrationDetails",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7",
+              "type": "string"
+            },
+            "style": "simple"
+          },
+          {
+            "in": "query",
+            "name": "include_testing_revisions",
+            "schema": {
+              "type": "boolean"
+            },
+            "style": "form"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetContextualDataIntegrationDetailsResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:ReadConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7?include_testing_revisions=SOME_BOOLEAN_VALUE';\n\nlet options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7\"\n\nquerystring = {\"include_testing_revisions\":\"SOME_BOOLEAN_VALUE\"}\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7?include_testing_revisions=SOME_BOOLEAN_VALUE' \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    },
+    "/integrations/contextual-data/v1/{integration_id}": {
+      "delete": {
+        "tags": [
+          "Contextual data integration service"
+        ],
+        "summary": "Delete contextual data integration",
+        "description": "No description available",
+        "externalDocs": {
+          "url": ""
+        },
+        "operationId": "ContextualDataIntegrationService_DeleteContextualDataIntegration",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "integration_id",
+            "required": true,
+            "schema": {
+              "example": "076f4188-05e0-4ed3-afeb-653ad182ccb7",
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteContextualDataIntegrationResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "401": {
+            "description": "Unauthorized request",
+            "content": {
+              "application/json": {}
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {}
+            }
+          }
+        },
+        "x-coralogixPermissions": [
+          "contextual-data:UpdateConfig"
+        ],
+        "x-codeSamples": [
+          {
+            "lang": "Node",
+            "source": "const fetch = require('node-fetch');\n\nlet url = 'https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7';\n\nlet options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};\n\nfetch(url, options)\n  .then(res => res.json())\n  .then(json => console.log(json))\n  .catch(err => console.error('error:' + err));"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7\"\n\nheaders = {\"Authorization\": \"Bearer <API_KEY>\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Shell",
+            "source": "curl --request DELETE \\\n  --url https://api.coralogix.com/mgmt/openapi/integrations/contextual-data/v1/076f4188-05e0-4ed3-afeb-653ad182ccb7 \\\n  --header 'Authorization: Bearer <API_KEY>'"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ARMStack": {
+        "externalDocs": {
+          "description": "Find out more about the Azure Resource Manager (ARM) integration in our documentation",
+          "url": "https://coralogix.com/docs/integrations/azure/azure-resource-manager-integration-packages/"
+        },
+        "title": "ARM stack",
+        "description": "This data structure represents an Azure Resource Manager stack.",
+        "type": "object",
+        "properties": {
+          "resourceGroupName": {
+            "type": "string"
+          },
+          "subscriptionId": {
+            "type": "string"
+          }
+        }
+      },
+      "ApiKeyData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "API key data",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "AzureArm": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Azure ARM",
+        "description": "This data structure represents an Azure ARM integration.",
+        "type": "object"
+      },
+      "AzureArmTemplate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Azure ARM template",
+        "description": "This data structure represents an azure ARM template.",
+        "type": "object",
+        "properties": {
+          "templateUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "ChangelogEntry": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Changelog entry",
+        "type": "object",
+        "properties": {
+          "descriptionMd": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version",
+          "descriptionMd"
+        ]
+      },
+      "CloudFormationStack": {
+        "externalDocs": {
+          "description": "Find out more about the AWS CloudFormation integration in our documentation",
+          "url": "https://coralogix.com/docs/integrations/aws/aws-cloudformation-logs/"
+        },
+        "title": "CloudFormation stack",
+        "description": "This data structure represents a CloudFormation stack.",
+        "type": "object",
+        "properties": {
+          "arn": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          }
+        }
+      },
+      "CloudFormationTemplate": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CloudFormation template",
+        "type": "object",
+        "properties": {
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommandInformation"
+            }
+          },
+          "parameters": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "postInstallationSteps": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "templateUrl": {
+            "type": "string"
+          }
+        }
+      },
+      "Cloudformation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "CloudFormation",
+        "description": "This data structure represents a CloudFormation integration.",
+        "type": "object"
+      },
+      "CommandInformation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Command information",
+        "type": "object",
+        "properties": {
+          "command": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "language": {
+            "$ref": "#/components/schemas/Language"
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Link"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "tooltipText": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "ConfigurationBlock": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Configuration block",
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "ConnectionStatus": {
+        "type": "string",
+        "enum": [
+          "PENDING",
+          "ACTIVE",
+          "FAILING",
+          "STATUS_UNKNOWN"
+        ]
+      },
+      "ContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Contextual data",
+        "description": "This data structure represents a contextual data integration.",
+        "type": "object"
+      },
+      "DefaultIntegrationDetails": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Default integration details",
+        "type": "object",
+        "properties": {
+          "registered": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegisteredInstance"
+            }
+          }
+        }
+      },
+      "DeleteContextualDataIntegrationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Delete contextual data integration response",
+        "type": "object"
+      },
+      "Deprecation": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Deprecation",
+        "type": "object",
+        "properties": {
+          "reason": {
+            "type": "string"
+          },
+          "replacementExtensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "reason"
+        ]
+      },
+      "ExtensionBinary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension binary",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExtensionBinary.BinaryType"
+          }
+        },
+        "required": [
+          "type",
+          "data"
+        ]
+      },
+      "ExtensionBinary.BinaryType": {
+        "type": "string",
+        "enum": [
+          "KIBANA_INDEX_PATTERN"
+        ]
+      },
+      "ExtensionItem": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension item",
+        "type": "object",
+        "properties": {
+          "binaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionItemBinary"
+            }
+          },
+          "data": {
+            "type": "object"
+          },
+          "description": {
+            "type": "string"
+          },
+          "extendedInternalId": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "isMandatory": {
+            "type": "boolean"
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissionResource": {
+            "$ref": "#/components/schemas/PermissionResource"
+          },
+          "stableId": {
+            "type": "string"
+          },
+          "targetDomain": {
+            "$ref": "#/components/schemas/TargetDomain"
+          },
+          "uniqueId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "targetDomain",
+          "data",
+          "permissionResource"
+        ]
+      },
+      "ExtensionItemBinary": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension item binary",
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string"
+          },
+          "fileName": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/ExtensionItemBinary.BinaryType"
+          }
+        },
+        "required": [
+          "type",
+          "data",
+          "fileName"
+        ]
+      },
+      "ExtensionItemBinary.BinaryType": {
+        "type": "string",
+        "enum": [
+          "PREVIEW_IMAGE",
+          "KIBANA_DASHBOARD_DEFINITION",
+          "GRAFANA_DASHBOARD_DEFINITION",
+          "ENRICHMENT_CSV",
+          "CX_CUSTOM_DASHBOARD_DEFINITION"
+        ]
+      },
+      "ExtensionRevision": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension revision",
+        "type": "object",
+        "properties": {
+          "binaries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionBinary"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "excerpt": {
+            "type": "string"
+          },
+          "integrationDetails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationDetail"
+            }
+          },
+          "isTesting": {
+            "type": "boolean"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionItem"
+            }
+          },
+          "labels": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "permissionDeniedItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionItem"
+            }
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "version"
+        ]
+      },
+      "ExternalUrl": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "External URL",
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "FieldCondition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field condition",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/FieldCondition.ConditionType"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FieldCondition.FieldValue"
+            }
+          }
+        },
+        "required": [
+          "type"
+        ]
+      },
+      "FieldCondition.ConditionType": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "OR",
+          "AND"
+        ]
+      },
+      "FieldCondition.FieldValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Field value",
+        "type": "object",
+        "properties": {
+          "fieldName": {
+            "type": "string"
+          },
+          "valuePattern": {
+            "type": "string"
+          }
+        }
+      },
+      "FieldGroup": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          }
+        }
+      },
+      "FieldInformation": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "single": {
+                "$ref": "#/components/schemas/SingleValue"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "multiText": {
+                "$ref": "#/components/schemas/ListTextValue"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "multipleSelection": {
+                "$ref": "#/components/schemas/MultipleSelectionValue"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "singleBoolean": {
+                "$ref": "#/components/schemas/SingleBooleanValue"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "selection": {
+                "$ref": "#/components/schemas/SelectionValue"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Field information",
+            "type": "object",
+            "properties": {
+              "allowedPattern": {
+                "type": "string"
+              },
+              "applicableIf": {
+                "$ref": "#/components/schemas/FieldCondition"
+              },
+              "documentationReference": {
+                "type": "string"
+              },
+              "groupId": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "placeholder": {
+                "type": "string"
+              },
+              "predefined": {
+                "type": "boolean"
+              },
+              "readonly": {
+                "type": "boolean"
+              },
+              "required": {
+                "type": "boolean"
+              },
+              "singleNumber": {
+                "$ref": "#/components/schemas/IntegrationRevision.SingleNumericValue"
+              },
+              "templateParamName": {
+                "type": "string"
+              },
+              "tooltip": {
+                "type": "string"
+              },
+              "type": {
+                "$ref": "#/components/schemas/InputType"
+              },
+              "upgradeNotice": {
+                "type": "string"
+              },
+              "visible": {
+                "type": "boolean"
+              }
+            },
+            "required": [
+              "type"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "FilterPathAndValues": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "multipleValues": {
+                "$ref": "#/components/schemas/MultipleValues"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "FilterPathAndValues",
+            "description": "This data structure represents a filter path and values",
+            "type": "object",
+            "properties": {
+              "filters": {
+                "$ref": "#/components/schemas/Filters"
+              },
+              "path": {
+                "example": "test",
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "values"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "Filters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Filters",
+        "description": "This data structure represents a filter",
+        "type": "object",
+        "properties": {
+          "operator": {
+            "$ref": "#/components/schemas/v3.FilterOperator"
+          },
+          "pathAndValues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilterPathAndValues"
+            }
+          }
+        },
+        "required": [
+          "pathAndValues"
+        ]
+      },
+      "GenericIntegrationParameters": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Generic integration parameters",
+        "type": "object",
+        "properties": {
+          "parameters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Parameter"
+            }
+          }
+        }
+      },
+      "GenericWebhook": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Generic webhook",
+        "description": "This data structure represents a generic webhook integration.",
+        "type": "object"
+      },
+      "GetContextualDataIntegrationDefinitionResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get contextual data integration definition response",
+        "type": "object",
+        "properties": {
+          "integrationDefinition": {
+            "$ref": "#/components/schemas/IntegrationDefinition"
+          }
+        },
+        "required": [
+          "integrationDefinition"
+        ]
+      },
+      "GetContextualDataIntegrationDetailsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get contextual data integration details response",
+        "type": "object",
+        "properties": {
+          "integrationDetail": {
+            "$ref": "#/components/schemas/IntegrationDetails"
+          }
+        },
+        "required": [
+          "integrationDetail"
+        ]
+      },
+      "GetContextualDataIntegrationsResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Get contextual data integrations response",
+        "type": "object",
+        "properties": {
+          "integrations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetContextualDataIntegrationsResponse.IntegrationWithCounts"
+            }
+          }
+        }
+      },
+      "GetContextualDataIntegrationsResponse.IntegrationWithCounts": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration with counts",
+        "type": "object",
+        "properties": {
+          "amountIntegrations": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "integration": {
+            "$ref": "#/components/schemas/Integration"
+          },
+          "isNew": {
+            "type": "boolean"
+          },
+          "upgradeAvailable": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "integration",
+          "amountIntegrations"
+        ]
+      },
+      "HelmChart": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Helm chart",
+        "description": "This data structure represents a Helm chart.",
+        "type": "object",
+        "properties": {
+          "commands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommandInformation"
+            }
+          },
+          "guide": {
+            "$ref": "#/components/schemas/IntegrationGuide"
+          },
+          "template": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "InputType": {
+        "type": "string",
+        "enum": [
+          "API_KEY",
+          "TEXT",
+          "LIST_TEXT",
+          "MULTIPLE_SELECTION",
+          "BOOLEAN",
+          "SELECT",
+          "JSON",
+          "NUMBER",
+          "SENSITIVE_DATA",
+          "JSON_OBJECT_ARRAY"
+        ]
+      },
+      "Integration": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration",
+        "description": "This data structure represents an integration",
+        "type": "object",
+        "properties": {
+          "darkIcon": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "featureFlag": {
+            "type": "string"
+          },
+          "icon": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "integrationType": {
+            "$ref": "#/components/schemas/v1.IntegrationType"
+          },
+          "name": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "IntegrationDefinition": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration definition",
+        "description": "This data structure represents a definition of an integration.",
+        "type": "object",
+        "properties": {
+          "featureFlag": {
+            "type": "string"
+          },
+          "integrationType": {
+            "$ref": "#/components/schemas/v1.IntegrationType"
+          },
+          "key": {
+            "type": "string"
+          },
+          "revisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IntegrationRevision"
+            }
+          }
+        }
+      },
+      "IntegrationDetail": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration detail",
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "link"
+        ]
+      },
+      "IntegrationDetails": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration details",
+            "description": "This data structure represents a set of integration details.",
+            "type": "object",
+            "properties": {
+              "default": {
+                "$ref": "#/components/schemas/DefaultIntegrationDetails"
+              },
+              "docs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationDoc"
+                }
+              },
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/v1.Extension"
+                }
+              },
+              "integration": {
+                "$ref": "#/components/schemas/Integration"
+              },
+              "local": {
+                "$ref": "#/components/schemas/LocalChangelog"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration details",
+            "description": "This data structure represents a set of integration details.",
+            "type": "object",
+            "properties": {
+              "default": {
+                "$ref": "#/components/schemas/DefaultIntegrationDetails"
+              },
+              "docs": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationDoc"
+                }
+              },
+              "extensions": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/v1.Extension"
+                }
+              },
+              "external": {
+                "$ref": "#/components/schemas/ExternalUrl"
+              },
+              "integration": {
+                "$ref": "#/components/schemas/Integration"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IntegrationDoc": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration doc",
+        "description": "This data structure represents integration documentation.",
+        "type": "object",
+        "properties": {
+          "link": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationGuide": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration guide",
+        "type": "object",
+        "properties": {
+          "installationRequirements": {
+            "type": "string"
+          },
+          "introduction": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationMetadata": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration metadata",
+        "description": "This data structure represents the metadata of an integration.",
+        "type": "object",
+        "properties": {
+          "integrationKey": {
+            "type": "string"
+          },
+          "integrationParameters": {
+            "$ref": "#/components/schemas/GenericIntegrationParameters"
+          },
+          "version": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationRevision": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "cloudFormation": {
+                "$ref": "#/components/schemas/CloudFormationTemplate"
+              },
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "managedService": {
+                "$ref": "#/components/schemas/ManagedService"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "helmChart": {
+                "$ref": "#/components/schemas/HelmChart"
+              },
+              "id": {
+                "type": "string"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "azureArmTemplate": {
+                "$ref": "#/components/schemas/AzureArmTemplate"
+              },
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "rum": {
+                "$ref": "#/components/schemas/Rum"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration revision",
+            "description": "This data structure represents an integration revision.",
+            "type": "object",
+            "properties": {
+              "featureFlag": {
+                "type": "string"
+              },
+              "fields": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/FieldInformation"
+                }
+              },
+              "groups": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/IntegrationRevision.Group"
+                }
+              },
+              "id": {
+                "type": "string"
+              },
+              "revisionDeploymentSupported": {
+                "type": "boolean"
+              },
+              "terraform": {
+                "$ref": "#/components/schemas/Terraform"
+              },
+              "upgradeInstructionsMd": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "IntegrationRevision.Group": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Group",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "IntegrationRevision.SingleNumericValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Single numeric value",
+        "type": "object",
+        "properties": {
+          "defaultValue": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "additionalProperties": false
+      },
+      "IntegrationStatus": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Integration status",
+        "description": "This data structure represents an integration status.",
+        "type": "object",
+        "properties": {
+          "connectionStatus": {
+            "$ref": "#/components/schemas/ConnectionStatus"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "connectionStatus"
+        ]
+      },
+      "Language": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "BASH",
+          "JAVASCRIPT"
+        ]
+      },
+      "Link": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Link",
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "url": {
+            "type": "string"
+          }
+        }
+      },
+      "ListTextValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "List text value",
+        "type": "object",
+        "properties": {
+          "defaultValues": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "LocalChangelog": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Local changelog",
+        "type": "object",
+        "properties": {
+          "changes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RevisionRef"
+            }
+          }
+        }
+      },
+      "Managed": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Managed",
+        "description": "This data structure represents a managed integration.",
+        "type": "object",
+        "properties": {
+          "variant": {
+            "$ref": "#/components/schemas/Variant"
+          }
+        },
+        "required": [
+          "variant"
+        ]
+      },
+      "ManagedService": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Managed service",
+        "description": "This data structure represents a managed service.",
+        "type": "object"
+      },
+      "MultipleSelectionValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Multiple selection value",
+        "type": "object",
+        "properties": {
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "MultipleValues": {
+        "type": "object",
+        "properties": {
+          "matcher": {
+            "$ref": "#/components/schemas/events.v3.FilterMatcher"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "NoDeployment": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "No deployment",
+        "description": "This data structure represents an integration that does not require deployment.",
+        "type": "object"
+      },
+      "Parameter": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "stringValue": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "booleanValue": {
+                "type": "boolean"
+              },
+              "key": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "stringList": {
+                "$ref": "#/components/schemas/StringList"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "apiKey": {
+                "$ref": "#/components/schemas/ApiKeyData"
+              },
+              "key": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "numericValue": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Parameter",
+            "type": "object",
+            "properties": {
+              "key": {
+                "type": "string"
+              },
+              "sensitiveData": {
+                "$ref": "#/components/schemas/SensitiveDataPlaceholder"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "PermissionResource": {
+        "type": "string",
+        "enum": [
+          "UNKNOWN",
+          "ACTION",
+          "ALERT",
+          "CUSTOM_ENRICHMENT",
+          "GEO_ENRICHMENT",
+          "SECURITY_ENRICHMENT",
+          "RESOURCE_CLOUD_METADATA_ENRICHMENT",
+          "GRAFANA_DASHBOARD",
+          "KIBANA_DASHBOARD",
+          "PARSING_RULE",
+          "SAVED_VIEW",
+          "CX_CUSTOM_DASHBOARD",
+          "METRICS_RULE_GROUP",
+          "SPAN_EVENTS_TO_METRICS",
+          "LOGS_EVENTS_TO_METRICS"
+        ]
+      },
+      "PushBasedContextualData": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Push based contextual data",
+        "description": "This data structure represents a push based contextual data integration.",
+        "type": "object"
+      },
+      "RegisteredInstance": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Registered instance",
+            "type": "object",
+            "properties": {
+              "definitionVersion": {
+                "type": "string"
+              },
+              "empty": {
+                "$ref": "#/components/schemas/NoDeployment"
+              },
+              "id": {
+                "type": "string"
+              },
+              "integrationStatus": {
+                "$ref": "#/components/schemas/IntegrationStatus"
+              },
+              "isTesting": {
+                "type": "boolean"
+              },
+              "lastUpdated": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Registered instance",
+            "type": "object",
+            "properties": {
+              "cloudformation": {
+                "$ref": "#/components/schemas/CloudFormationStack"
+              },
+              "definitionVersion": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "integrationStatus": {
+                "$ref": "#/components/schemas/IntegrationStatus"
+              },
+              "isTesting": {
+                "type": "boolean"
+              },
+              "lastUpdated": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Registered instance",
+            "type": "object",
+            "properties": {
+              "arm": {
+                "$ref": "#/components/schemas/ARMStack"
+              },
+              "definitionVersion": {
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "integrationStatus": {
+                "$ref": "#/components/schemas/IntegrationStatus"
+              },
+              "isTesting": {
+                "type": "boolean"
+              },
+              "lastUpdated": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Parameter"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "RevisionRef": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Revision reference",
+        "type": "object",
+        "properties": {
+          "descriptionMd": {
+            "type": "string"
+          },
+          "version": {
+            "type": "string"
+          }
+        }
+      },
+      "Rum": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "RUM",
+        "description": "This data structure represents a RUM integration.",
+        "type": "object",
+        "properties": {
+          "browserSdkCommands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommandInformation"
+            }
+          },
+          "sourceMapCommands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CommandInformation"
+            }
+          }
+        }
+      },
+      "SaveContextualDataIntegrationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Save contextual data integration response",
+        "type": "object",
+        "properties": {
+          "integrationId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "integrationId"
+        ]
+      },
+      "SelectionValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Selection value",
+        "type": "object",
+        "properties": {
+          "defaultValue": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SensitiveDataPlaceholder": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Sensitive data placeholder",
+        "type": "object"
+      },
+      "SingleBooleanValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Single boolean value",
+        "type": "object",
+        "properties": {
+          "defaultValue": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SingleValue": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Single value",
+        "type": "object",
+        "properties": {
+          "defaultValue": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "StringList": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "String list",
+        "type": "object",
+        "properties": {
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "TargetDomain": {
+        "type": "string",
+        "enum": [
+          "ACTION",
+          "ALERT",
+          "ENRICHMENT",
+          "GRAFANA_DASHBOARD",
+          "KIBANA_DASHBOARD",
+          "PARSING_RULE",
+          "SAVED_VIEW",
+          "CX_CUSTOM_DASHBOARD",
+          "METRICS_RULE_GROUP",
+          "EVENTS_TO_METRICS",
+          "ALERT_V3"
+        ]
+      },
+      "Terraform": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Terraform",
+        "description": "This data structure represents a Terraform integration.",
+        "type": "object",
+        "properties": {
+          "configurationBlocks": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConfigurationBlock"
+            }
+          }
+        }
+      },
+      "TestContextualDataIntegrationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Test contextual data integration response",
+        "type": "object",
+        "properties": {
+          "result": {
+            "$ref": "#/components/schemas/TestIntegrationResult"
+          }
+        },
+        "required": [
+          "result"
+        ]
+      },
+      "TestIntegrationResult": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Test integration result",
+            "type": "object",
+            "properties": {
+              "success": {
+                "$ref": "#/components/schemas/TestIntegrationResult.Success"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Test integration result",
+            "type": "object",
+            "properties": {
+              "failure": {
+                "$ref": "#/components/schemas/TestIntegrationResult.Failure"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "TestIntegrationResult.Failure": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Failure",
+        "type": "object",
+        "properties": {
+          "errorMessage": {
+            "type": "string"
+          }
+        }
+      },
+      "TestIntegrationResult.Success": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Success",
+        "type": "object"
+      },
+      "Untracked": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Untracked",
+        "description": "This data structure represents an untracked integration.",
+        "type": "object"
+      },
+      "UpdateContextualDataIntegrationResponse": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Update contextual data integration response",
+        "type": "object"
+      },
+      "Variant": {
+        "type": "string",
+        "enum": [
+          "DEFAULT",
+          "GCP",
+          "OAUTH",
+          "CUSTOM"
+        ]
+      },
+      "common.Group": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "$ref": "#/components/schemas/FieldGroup"
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/common.Group"
+            }
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "events.v3.FilterMatcher": {
+        "type": "string",
+        "enum": [
+          "FILTER_MATCHER_TEXT_OR_UNSPECIFIED",
+          "FILTER_MATCHER_REGEXP"
+        ]
+      },
+      "v1.Extension": {
+        "externalDocs": {
+          "url": ""
+        },
+        "title": "Extension metadata",
+        "type": "object",
+        "properties": {
+          "changelog": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ChangelogEntry"
+            }
+          },
+          "darkModeImage": {
+            "type": "string"
+          },
+          "deprecation": {
+            "$ref": "#/components/schemas/Deprecation"
+          },
+          "id": {
+            "type": "string"
+          },
+          "image": {
+            "type": "string"
+          },
+          "integrations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "isHidden": {
+            "type": "boolean"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string"
+          },
+          "permissionDeniedRevisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionRevision"
+            }
+          },
+          "revisions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtensionRevision"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "image"
+        ]
+      },
+      "v1.IntegrationType": {
+        "oneOf": [
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "managed": {
+                "$ref": "#/components/schemas/Managed"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "untracked": {
+                "$ref": "#/components/schemas/Untracked"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "cloudformation": {
+                "$ref": "#/components/schemas/Cloudformation"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "arm": {
+                "$ref": "#/components/schemas/AzureArm"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "pushBasedContextualData": {
+                "$ref": "#/components/schemas/PushBasedContextualData"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "contextualData": {
+                "$ref": "#/components/schemas/ContextualData"
+              }
+            },
+            "additionalProperties": false
+          },
+          {
+            "externalDocs": {
+              "url": ""
+            },
+            "title": "Integration type",
+            "description": "This data structure represents an integration type.",
+            "type": "object",
+            "properties": {
+              "genericWebhook": {
+                "$ref": "#/components/schemas/GenericWebhook"
+              }
+            },
+            "additionalProperties": false
+          }
+        ]
+      },
+      "v3.FilterOperator": {
+        "type": "string",
+        "enum": [
+          "FILTER_OPERATOR_AND_OR_UNSPECIFIED",
+          "FILTER_OPERATOR_OR"
+        ]
+      }
+    },
+    "securitySchemes": {
+      "apiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "Authorization",
+        "description": "API key authentication"
+      }
+    }
+  }
+}

@@ -1,0 +1,788 @@
+openapi: 3.0.0
+info:
+  title: ""
+  version: 1.0.0
+servers:
+- url: /
+paths:
+  /enrichments:
+    delete:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_RemoveEnrichments
+      parameters:
+      - explode: true
+        in: query
+        name: enrichment_ids
+        required: false
+        schema:
+          items:
+            format: int64
+            type: integer
+          type: array
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RemoveEnrichmentsResponse"
+          description: ""
+      summary: Delete Enrichments
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments?enrichment_ids=SOME_ARRAY_VALUE';
+
+          let options = {method: 'DELETE', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments"
+
+          querystring = {"enrichment_ids":"SOME_ARRAY_VALUE"}
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("DELETE", url, headers=headers, params=querystring)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request DELETE \
+            --url 'https://api.coralogix.com/mgmt/openapi/enrichments?enrichment_ids=SOME_ARRAY_VALUE' \
+            --header 'Authorization: Bearer <API_KEY>'
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_GetEnrichments
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEnrichmentsResponse"
+          description: ""
+      summary: Get Enrichments
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/enrichments \
+            --header 'Authorization: Bearer <API_KEY>'
+    post:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_AddEnrichments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Enrichments_Creation_Request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddEnrichmentsResponse"
+          description: ""
+      summary: Add Enrichments
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments';
+
+          let options = {
+            method: 'POST',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments"
+
+          payload = {"requestEnrichments": [
+                  {
+                      "enrichedFieldName": "string",
+                      "enrichmentType": {"geoIp": {"withAsn": True}},
+                      "fieldName": "sourceIPs",
+                      "selectedColumns": ["string"]
+                  }
+              ]}
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("POST", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request POST \
+            --url https://api.coralogix.com/mgmt/openapi/enrichments \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+  /enrichments/limit:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_GetEnrichmentLimit
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetEnrichmentLimitResponse"
+          description: ""
+      summary: Get Enrichment Limit
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments/limit';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments/limit"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/enrichments/limit \
+            --header 'Authorization: Bearer <API_KEY>'
+  /enrichments/settings:
+    get:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_GetCompanyEnrichmentSettings
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCompanyEnrichmentSettingsResponse"
+          description: ""
+      summary: Get Company Enrichment Settings
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments/settings';
+
+          let options = {method: 'GET', headers: {Authorization: 'Bearer <API_KEY>'}};
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments/settings"
+
+          headers = {"Authorization": "Bearer <API_KEY>"}
+
+          response = requests.request("GET", url, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request GET \
+            --url https://api.coralogix.com/mgmt/openapi/enrichments/settings \
+            --header 'Authorization: Bearer <API_KEY>'
+  /enrichments:atomicOverwrite:
+    patch:
+      description: No description available
+      externalDocs:
+        url: ""
+      operationId: EnrichmentService_AtomicOverwriteEnrichments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EnrichmentService_AtomicOverwriteEnrichments_request"
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AtomicOverwriteEnrichmentsResponse"
+          description: ""
+      summary: Atomic Overwrite Enrichments
+      tags:
+      - Enrichments Service
+      x-codeSamples:
+      - lang: Node
+        source: |-
+          const fetch = require('node-fetch');
+
+          let url = 'https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite';
+
+          let options = {
+            method: 'PATCH',
+            headers: {Authorization: 'Bearer <API_KEY>', 'content-type': 'application/json'},
+            body: '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"geoIp":{"withAsn":true}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+          };
+
+          fetch(url, options)
+            .then(res => res.json())
+            .then(json => console.log(json))
+            .catch(err => console.error('error:' + err));
+      - lang: Python
+        source: |-
+          import requests
+
+          url = "https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite"
+
+          payload = {
+              "enrichmentFields": [
+                  {
+                      "enrichedFieldName": "string",
+                      "fieldName": "string",
+                      "selectedColumns": ["string"]
+                  }
+              ],
+              "enrichmentType": {"geoIp": {"withAsn": True}},
+              "requestEnrichments": [
+                  {
+                      "enrichedFieldName": "string",
+                      "enrichmentType": {"geoIp": {"withAsn": True}},
+                      "fieldName": "sourceIPs",
+                      "selectedColumns": ["string"]
+                  }
+              ]
+          }
+          headers = {
+              "Authorization": "Bearer <API_KEY>",
+              "content-type": "application/json"
+          }
+
+          response = requests.request("PATCH", url, json=payload, headers=headers)
+
+          print(response.text)
+      - lang: Shell
+        source: |-
+          curl --request PATCH \
+            --url https://api.coralogix.com/mgmt/openapi/enrichments:atomicOverwrite \
+            --header 'Authorization: Bearer <API_KEY>' \
+            --header 'content-type: application/json' \
+            --data '{"enrichmentFields":[{"enrichedFieldName":"string","fieldName":"string","selectedColumns":["string"]}],"enrichmentType":{"geoIp":{"withAsn":true}},"requestEnrichments":[{"enrichedFieldName":"string","enrichmentType":{"geoIp":{"withAsn":true}},"fieldName":"sourceIPs","selectedColumns":["string"]}]}'
+components:
+  schemas:
+    AddEnrichmentsResponse:
+      description: Response data structure for enrichments creation
+      example:
+        enrichments:
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        enrichments:
+          items:
+            $ref: "#/components/schemas/Enrichment"
+          type: array
+      required:
+      - enrichments
+      title: Encrichments Creation Response
+      type: object
+    AtomicOverwriteEnrichmentsResponse:
+      example:
+        enrichments:
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+      properties:
+        enrichments:
+          items:
+            $ref: "#/components/schemas/Enrichment"
+          type: array
+      type: object
+    AwsType:
+      properties:
+        resourceType:
+          example: ec2
+          type: string
+      type: object
+    CompanyEnrichmentSettings:
+      example:
+        rowLimit: 5
+        sizeLimitBytes: sizeLimitBytes
+        enrichmentsInUse: 6
+        queryOnlyRowLimit: 1
+        enrichmentAmountLimit: 0
+        queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
+      properties:
+        enrichmentAmountLimit:
+          format: int64
+          type: integer
+        enrichmentsInUse:
+          format: int64
+          type: integer
+        queryOnlyRowLimit:
+          format: int64
+          type: integer
+        queryOnlySizeLimitBytes:
+          format: int64
+          type: string
+        rowLimit:
+          format: int64
+          type: integer
+        sizeLimitBytes:
+          format: int64
+          type: string
+      type: object
+    CustomEnrichmentType:
+      properties:
+        id:
+          example: 1
+          format: int64
+          type: integer
+      type: object
+    Enrichment:
+      additionalProperties: false
+      description: This data structure represents an enrichment
+      example:
+        enrichmentType:
+          geoIp:
+            withAsn: true
+        selectedColumns:
+        - "[\"city\",\"population\"]"
+        - "[\"city\",\"population\"]"
+        fieldName: "1"
+        enrichedFieldName: "1"
+        id: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        enrichedFieldName:
+          example: "1"
+          type: string
+        enrichmentType:
+          $ref: "#/components/schemas/EnrichmentType"
+        fieldName:
+          example: "1"
+          type: string
+        id:
+          example: 1
+          format: int64
+          type: integer
+        selectedColumns:
+          items:
+            example: "[\"city\",\"population\"]"
+            type: string
+          type: array
+      required:
+      - enrichmentType
+      - fieldName
+      - id
+      title: Enrichment
+      type: object
+    EnrichmentFieldDefinition:
+      additionalProperties: false
+      properties:
+        enrichedFieldName:
+          type: string
+        fieldName:
+          type: string
+        selectedColumns:
+          items:
+            type: string
+          type: array
+      type: object
+    EnrichmentRequestModel:
+      additionalProperties: false
+      description: The enrichment request model
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        enrichedFieldName:
+          type: string
+        enrichmentType:
+          $ref: "#/components/schemas/EnrichmentType"
+        fieldName:
+          example: sourceIPs
+          type: string
+        selectedColumns:
+          items:
+            type: string
+          type: array
+      required:
+      - enrichmentType
+      - fieldName
+      title: Enrichment Prototype
+      type: object
+    EnrichmentType:
+      oneOf:
+      - $ref: "#/components/schemas/EnrichmentType_oneOf"
+      - $ref: "#/components/schemas/EnrichmentType_oneOf_1"
+      - $ref: "#/components/schemas/EnrichmentType_oneOf_2"
+      - $ref: "#/components/schemas/EnrichmentType_oneOf_3"
+    FieldGroup:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    FilterPathAndValues:
+      oneOf:
+      - $ref: "#/components/schemas/FilterPathAndValues_1"
+      - $ref: "#/components/schemas/FilterPathAndValues_2"
+    Filters:
+      description: This data structure represents a filter
+      externalDocs:
+        url: ""
+      properties:
+        operator:
+          $ref: "#/components/schemas/v3.FilterOperator"
+        pathAndValues:
+          items:
+            $ref: "#/components/schemas/FilterPathAndValues"
+          type: array
+      required:
+      - pathAndValues
+      title: Filters
+      type: object
+    GeoIpType:
+      additionalProperties: false
+      example:
+        withAsn: true
+      properties:
+        withAsn:
+          type: boolean
+      type: object
+    GetCompanyEnrichmentSettingsResponse:
+      example:
+        enrichmentSettings:
+          rowLimit: 5
+          sizeLimitBytes: sizeLimitBytes
+          enrichmentsInUse: 6
+          queryOnlyRowLimit: 1
+          enrichmentAmountLimit: 0
+          queryOnlySizeLimitBytes: queryOnlySizeLimitBytes
+      properties:
+        enrichmentSettings:
+          $ref: "#/components/schemas/CompanyEnrichmentSettings"
+      type: object
+    GetEnrichmentLimitResponse:
+      description: This response data structure represents the enrichments limit
+      example:
+        limit: 10
+        used: 5
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        limit:
+          example: 10
+          format: int64
+          type: integer
+        used:
+          example: 5
+          format: int64
+          type: integer
+      required:
+      - limit
+      - used
+      title: Enrichment Limit
+      type: object
+    GetEnrichmentsResponse:
+      description: This response data structure represents a collection of enrichments
+      example:
+        enrichments:
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        enrichments:
+          items:
+            $ref: "#/components/schemas/Enrichment"
+          type: array
+      required:
+      - enrichments
+      title: Enrichment Collection
+      type: object
+    MultipleValues:
+      properties:
+        matcher:
+          $ref: "#/components/schemas/events.v3.FilterMatcher"
+        values:
+          items:
+            type: string
+          type: array
+      type: object
+    RemoveEnrichmentsResponse:
+      description: Response data structure for enrichments deletion
+      example:
+        remainingEnrichments:
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+        - enrichmentType:
+            geoIp:
+              withAsn: true
+          selectedColumns:
+          - "[\"city\",\"population\"]"
+          - "[\"city\",\"population\"]"
+          fieldName: "1"
+          enrichedFieldName: "1"
+          id: 1
+      externalDocs:
+        description: Find out more about enrichments
+        url: https://coralogix.com/docs/user-guides/data-transformation/enrichments/custom-enrichment/
+      properties:
+        remainingEnrichments:
+          items:
+            $ref: "#/components/schemas/Enrichment"
+          type: array
+      required:
+      - remainingEnrichments
+      title: Encrichments Delettion Response
+      type: object
+    SuspiciousIpType:
+      type: object
+    common.Group:
+      properties:
+        field:
+          $ref: "#/components/schemas/FieldGroup"
+        groups:
+          items:
+            $ref: "#/components/schemas/common.Group"
+          type: array
+        value:
+          format: double
+          type: number
+      type: object
+    events.v3.FilterMatcher:
+      enum:
+      - FILTER_MATCHER_TEXT_OR_UNSPECIFIED
+      - FILTER_MATCHER_REGEXP
+      type: string
+    v3.FilterOperator:
+      enum:
+      - FILTER_OPERATOR_AND_OR_UNSPECIFIED
+      - FILTER_OPERATOR_OR
+      type: string
+    Enrichments_Creation_Request:
+      additionalProperties: false
+      description: This response data structure represents a collection of enrichments
+      properties:
+        requestEnrichments:
+          items:
+            $ref: "#/components/schemas/EnrichmentRequestModel"
+          type: array
+      required:
+      - requestEnrichments
+      title: Enrichments Creation Request
+      type: object
+    EnrichmentService_AtomicOverwriteEnrichments_request:
+      additionalProperties: false
+      properties:
+        enrichmentFields:
+          items:
+            $ref: "#/components/schemas/EnrichmentFieldDefinition"
+          type: array
+        enrichmentType:
+          $ref: "#/components/schemas/EnrichmentType"
+        requestEnrichments:
+          items:
+            $ref: "#/components/schemas/EnrichmentRequestModel"
+          type: array
+      type: object
+    EnrichmentType_oneOf:
+      additionalProperties: false
+      example:
+        geoIp:
+          withAsn: true
+      properties:
+        geoIp:
+          $ref: "#/components/schemas/GeoIpType"
+      type: object
+    EnrichmentType_oneOf_1:
+      additionalProperties: false
+      properties:
+        suspiciousIp:
+          type: object
+      type: object
+    EnrichmentType_oneOf_2:
+      additionalProperties: false
+      properties:
+        aws:
+          $ref: "#/components/schemas/AwsType"
+      type: object
+    EnrichmentType_oneOf_3:
+      additionalProperties: false
+      properties:
+        customEnrichment:
+          $ref: "#/components/schemas/CustomEnrichmentType"
+      type: object
+    FilterPathAndValues_1:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        multipleValues:
+          $ref: "#/components/schemas/MultipleValues"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+    FilterPathAndValues_2:
+      additionalProperties: false
+      description: This data structure represents a filter path and values
+      externalDocs:
+        url: ""
+      properties:
+        filters:
+          $ref: "#/components/schemas/Filters"
+        path:
+          example: test
+          type: string
+      required:
+      - path
+      - values
+      title: FilterPathAndValues
+      type: object
+  securitySchemes:
+    apiKeyAuth:
+      description: API key authentication
+      in: header
+      name: Authorization
+      type: apiKey
