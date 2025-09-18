@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package com.coralogix.quota.v1;
+
+message Placement {
+  oneof kind {
+    First first = 1;
+    Last last = 2;
+  }
+}
+
+message First {}
+message Last {}
