@@ -9,6 +9,7 @@ import "com/coralogix/quota/v1/archive_retention.proto";
 import "com/coralogix/quota/v1/log_rules.proto";
 import "com/coralogix/quota/v1/span_rules.proto";
 import "protoc-gen-openapiv2/options/annotations.proto";
+import "com/coralogix/quota/v1/placement.proto";
 
 message CreatePolicyRequest {
   option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_schema) = {
@@ -36,4 +37,5 @@ message CreatePolicyRequest {
     SpanRules span_rules = 8;
   }
   bool disabled = 9;
+  Placement placement = 10;
 }
