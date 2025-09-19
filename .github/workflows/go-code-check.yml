@@ -1,7 +1,7 @@
 name: "[Go SDK] Code Check"
 
 env:
-  PROTOC_VERSION: "29.3"
+  PROTOC_VERSION: "32.1"
 
 on:
   workflow_dispatch:  

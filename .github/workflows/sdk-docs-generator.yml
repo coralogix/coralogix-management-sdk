@@ -59,10 +59,7 @@ jobs:
       - name: Generate Go Docs
         run: |
           doc2go -out $RUNNER_TEMP/docs/go ./...
-          
-      - name: Generate OpenAPI Spec
-        run: |
-          npx @redocly/cli build-docs openapi.yaml -o $RUNNER_TEMP/docs/openapi.html
+      
       
       - name: Generate index.html
         run: | 
@@ -83,7 +80,7 @@ jobs:
               <ul>
                   <li><a href="rust/cx_sdk/index.html">Rust SDK Documentation</a></li>
                   <li><a href="go/github.com/coralogix/coralogix-management-sdk/go/index.html">Go SDK Documentation</a></li>
-                  <li><a href="openapi.html">OpenAPI Spec</a></li>
+                  <li><a href="https://docs.coralogix.com">OpenAPI Spec</a></li>
               </ul>
           </body>
 
