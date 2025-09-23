@@ -199,6 +199,12 @@ const (
 	NotificationsEntityTypeAlerts      = common.EntityType_ALERTS
 )
 
+const (
+	RouterEvaluationModeUnspecified      = routers.RouterEvaluationMode_ROUTER_EVALUATION_MODE_UNSPECIFIED
+	RouterEvaluationModeEvaluateAll      = routers.RouterEvaluationMode_EVALUATE_ALL
+	RouterEvaluationModeStopOnFirstMatch = routers.RouterEvaluationMode_STOP_ON_FIRST_MATCH
+)
+
 // CreateGlobalRouterRequest is a request to create a global router.
 type CreateGlobalRouterRequest = routers.CreateGlobalRouterRequest
 
