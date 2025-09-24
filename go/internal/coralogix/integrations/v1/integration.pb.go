@@ -2304,10 +2304,11 @@ func (*IntegrationDetails_DefaultIntegrationDetails_RegisteredInstance_Arm) isIn
 }
 
 type IntegrationRevision_CloudFormationTemplate struct {
-	state                 protoimpl.MessageState  `protogen:"open.v1"`
-	TemplateUrl           *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=template_url,json=templateUrl,proto3" json:"template_url,omitempty"`
-	Parameters            map[string]string       `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	PostInstallationSteps map[string]string       `protobuf:"bytes,3,rep,name=post_installation_steps,json=postInstallationSteps,proto3" json:"post_installation_steps,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	state                 protoimpl.MessageState                    `protogen:"open.v1"`
+	TemplateUrl           *wrapperspb.StringValue                   `protobuf:"bytes,1,opt,name=template_url,json=templateUrl,proto3" json:"template_url,omitempty"`
+	Parameters            map[string]string                         `protobuf:"bytes,2,rep,name=parameters,proto3" json:"parameters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	PostInstallationSteps map[string]string                         `protobuf:"bytes,3,rep,name=post_installation_steps,json=postInstallationSteps,proto3" json:"post_installation_steps,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	Commands              []*IntegrationRevision_CommandInformation `protobuf:"bytes,4,rep,name=commands,proto3" json:"commands,omitempty"`
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -2359,6 +2360,13 @@ func (x *IntegrationRevision_CloudFormationTemplate) GetParameters() map[string]
 func (x *IntegrationRevision_CloudFormationTemplate) GetPostInstallationSteps() map[string]string {
 	if x != nil {
 		return x.PostInstallationSteps
+	}
+	return nil
+}
+
+func (x *IntegrationRevision_CloudFormationTemplate) GetCommands() []*IntegrationRevision_CommandInformation {
+	if x != nil {
+		return x.Commands
 	}
 	return nil
 }
@@ -4053,7 +4061,7 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\x10integration_type\x18\x02 \x01(\v2..com.coralogix.integrations.v1.IntegrationTypeR\x0fintegrationType\x12P\n" +
 	"\trevisions\x18\x03 \x03(\v22.com.coralogix.integrations.v1.IntegrationRevisionR\trevisions\x12?\n" +
 	"\ffeature_flag\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueR\vfeatureFlag:]\x9aAZ\n" +
-	"X*\x16Integration definition2>This data structure represents a definition of an integration.\"\xdc9\n" +
+	"X*\x16Integration definition2>This data structure represents a definition of an integration.\"\xbf:\n" +
 	"\x13IntegrationRevision\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x12[\n" +
 	"\x06fields\x18\x03 \x03(\v2C.com.coralogix.integrations.v1.IntegrationRevision.FieldInformationR\x06fields\x12P\n" +
@@ -4067,13 +4075,14 @@ const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\tterraform\x18j \x01(\v2<.com.coralogix.integrations.v1.IntegrationRevision.TerraformH\x00R\tterraform\x12;\n" +
 	"\x17upgrade_instructions_md\x18\x05 \x01(\tH\x01R\x15upgradeInstructionsMd\x88\x01\x01\x12B\n" +
 	"\x1drevision_deployment_supported\x18\x06 \x01(\bR\x1brevisionDeploymentSupported\x12?\n" +
-	"\ffeature_flag\x18\a \x01(\v2\x1c.google.protobuf.StringValueR\vfeatureFlag\x1a\x9c\x04\n" +
+	"\ffeature_flag\x18\a \x01(\v2\x1c.google.protobuf.StringValueR\vfeatureFlag\x1a\xff\x04\n" +
 	"\x16CloudFormationTemplate\x12?\n" +
 	"\ftemplate_url\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\vtemplateUrl\x12y\n" +
 	"\n" +
 	"parameters\x18\x02 \x03(\v2Y.com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntryR\n" +
 	"parameters\x12\x9c\x01\n" +
-	"\x17post_installation_steps\x18\x03 \x03(\v2d.com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntryR\x15postInstallationSteps\x1a=\n" +
+	"\x17post_installation_steps\x18\x03 \x03(\v2d.com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntryR\x15postInstallationSteps\x12a\n" +
+	"\bcommands\x18\x04 \x03(\v2E.com.coralogix.integrations.v1.IntegrationRevision.CommandInformationR\bcommands\x1a=\n" +
 	"\x0fParametersEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01\x1aH\n" +
@@ -4471,72 +4480,73 @@ var file_com_coralogix_integrations_v1_integration_proto_depIdxs = []int32{
 	64,  // 76: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.template_url:type_name -> google.protobuf.StringValue
 	52,  // 77: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.parameters:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.ParametersEntry
 	53,  // 78: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.post_installation_steps:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.PostInstallationStepsEntry
-	64,  // 79: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.template:type_name -> google.protobuf.StringValue
-	49,  // 80: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	51,  // 81: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.guide:type_name -> com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
-	50,  // 82: com.coralogix.integrations.v1.IntegrationRevision.Terraform.configuration_blocks:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
-	49,  // 83: com.coralogix.integrations.v1.IntegrationRevision.Rum.browser_sdk_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	49,  // 84: com.coralogix.integrations.v1.IntegrationRevision.Rum.source_map_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
-	64,  // 85: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate.template_url:type_name -> google.protobuf.StringValue
-	64,  // 86: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.options:type_name -> google.protobuf.StringValue
-	64,  // 87: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.default_values:type_name -> google.protobuf.StringValue
-	64,  // 88: com.coralogix.integrations.v1.IntegrationRevision.SingleValue.default_value:type_name -> google.protobuf.StringValue
-	66,  // 89: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue.default_value:type_name -> google.protobuf.BoolValue
-	67,  // 90: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue.default_value:type_name -> google.protobuf.DoubleValue
-	64,  // 91: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue.options:type_name -> google.protobuf.StringValue
-	64,  // 92: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.options:type_name -> google.protobuf.StringValue
-	64,  // 93: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.default_value:type_name -> google.protobuf.StringValue
-	3,   // 94: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.ConditionType
-	54,  // 95: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.values:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
-	64,  // 96: com.coralogix.integrations.v1.IntegrationRevision.Group.id:type_name -> google.protobuf.StringValue
-	64,  // 97: com.coralogix.integrations.v1.IntegrationRevision.Group.name:type_name -> google.protobuf.StringValue
-	41,  // 98: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleValue
-	40,  // 99: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multi_text:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
-	44,  // 100: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multiple_selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
-	42,  // 101: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_boolean:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
-	45,  // 102: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
-	43,  // 103: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_number:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
-	2,   // 104: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.InputType
-	64,  // 105: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.name:type_name -> google.protobuf.StringValue
-	64,  // 106: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.tooltip:type_name -> google.protobuf.StringValue
-	64,  // 107: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.template_param_name:type_name -> google.protobuf.StringValue
-	64,  // 108: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.placeholder:type_name -> google.protobuf.StringValue
-	66,  // 109: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.required:type_name -> google.protobuf.BoolValue
-	66,  // 110: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.predefined:type_name -> google.protobuf.BoolValue
-	66,  // 111: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.visible:type_name -> google.protobuf.BoolValue
-	66,  // 112: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.readonly:type_name -> google.protobuf.BoolValue
-	46,  // 113: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.applicable_if:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
-	64,  // 114: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.group_id:type_name -> google.protobuf.StringValue
-	64,  // 115: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.upgrade_notice:type_name -> google.protobuf.StringValue
-	64,  // 116: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.allowed_pattern:type_name -> google.protobuf.StringValue
-	64,  // 117: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.documentation_reference:type_name -> google.protobuf.StringValue
-	64,  // 118: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.name:type_name -> google.protobuf.StringValue
-	64,  // 119: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.command:type_name -> google.protobuf.StringValue
-	64,  // 120: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.description:type_name -> google.protobuf.StringValue
-	64,  // 121: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.tooltip_text:type_name -> google.protobuf.StringValue
-	4,   // 122: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.language:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Language
-	55,  // 123: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.links:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
-	64,  // 124: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.name:type_name -> google.protobuf.StringValue
-	64,  // 125: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.value:type_name -> google.protobuf.StringValue
-	64,  // 126: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.description:type_name -> google.protobuf.StringValue
-	64,  // 127: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.introduction:type_name -> google.protobuf.StringValue
-	64,  // 128: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.installation_requirements:type_name -> google.protobuf.StringValue
-	64,  // 129: com.coralogix.integrations.v1.Parameter.StringList.values:type_name -> google.protobuf.StringValue
-	64,  // 130: com.coralogix.integrations.v1.Parameter.ApiKeyData.id:type_name -> google.protobuf.StringValue
-	64,  // 131: com.coralogix.integrations.v1.Parameter.ApiKeyData.value:type_name -> google.protobuf.StringValue
-	64,  // 132: com.coralogix.integrations.v1.TestIntegrationResult.Failure.error_message:type_name -> google.protobuf.StringValue
-	68,  // 133: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.created_at:type_name -> google.protobuf.Timestamp
-	66,  // 134: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.is_uploaded_successful:type_name -> google.protobuf.BoolValue
-	68,  // 135: com.coralogix.integrations.v1.RumVersionData.LogMetadata.first_occurrence:type_name -> google.protobuf.Timestamp
-	68,  // 136: com.coralogix.integrations.v1.RumVersionData.LogMetadata.last_occurrence:type_name -> google.protobuf.Timestamp
-	64,  // 137: com.coralogix.integrations.v1.RumVersionData.Version.version:type_name -> google.protobuf.StringValue
-	62,  // 138: com.coralogix.integrations.v1.RumVersionData.Version.log_metadata:type_name -> com.coralogix.integrations.v1.RumVersionData.LogMetadata
-	61,  // 139: com.coralogix.integrations.v1.RumVersionData.Version.source_map_metadata:type_name -> com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata
-	140, // [140:140] is the sub-list for method output_type
-	140, // [140:140] is the sub-list for method input_type
-	140, // [140:140] is the sub-list for extension type_name
-	140, // [140:140] is the sub-list for extension extendee
-	0,   // [0:140] is the sub-list for field type_name
+	49,  // 79: com.coralogix.integrations.v1.IntegrationRevision.CloudFormationTemplate.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	64,  // 80: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.template:type_name -> google.protobuf.StringValue
+	49,  // 81: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	51,  // 82: com.coralogix.integrations.v1.IntegrationRevision.HelmChart.guide:type_name -> com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide
+	50,  // 83: com.coralogix.integrations.v1.IntegrationRevision.Terraform.configuration_blocks:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock
+	49,  // 84: com.coralogix.integrations.v1.IntegrationRevision.Rum.browser_sdk_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	49,  // 85: com.coralogix.integrations.v1.IntegrationRevision.Rum.source_map_commands:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation
+	64,  // 86: com.coralogix.integrations.v1.IntegrationRevision.AzureArmTemplate.template_url:type_name -> google.protobuf.StringValue
+	64,  // 87: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.options:type_name -> google.protobuf.StringValue
+	64,  // 88: com.coralogix.integrations.v1.IntegrationRevision.ListTextValue.default_values:type_name -> google.protobuf.StringValue
+	64,  // 89: com.coralogix.integrations.v1.IntegrationRevision.SingleValue.default_value:type_name -> google.protobuf.StringValue
+	66,  // 90: com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue.default_value:type_name -> google.protobuf.BoolValue
+	67,  // 91: com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue.default_value:type_name -> google.protobuf.DoubleValue
+	64,  // 92: com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue.options:type_name -> google.protobuf.StringValue
+	64,  // 93: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.options:type_name -> google.protobuf.StringValue
+	64,  // 94: com.coralogix.integrations.v1.IntegrationRevision.SelectionValue.default_value:type_name -> google.protobuf.StringValue
+	3,   // 95: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.ConditionType
+	54,  // 96: com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.values:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition.FieldValue
+	64,  // 97: com.coralogix.integrations.v1.IntegrationRevision.Group.id:type_name -> google.protobuf.StringValue
+	64,  // 98: com.coralogix.integrations.v1.IntegrationRevision.Group.name:type_name -> google.protobuf.StringValue
+	41,  // 99: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleValue
+	40,  // 100: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multi_text:type_name -> com.coralogix.integrations.v1.IntegrationRevision.ListTextValue
+	44,  // 101: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.multiple_selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.MultipleSelectionValue
+	42,  // 102: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_boolean:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleBooleanValue
+	45,  // 103: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.selection:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SelectionValue
+	43,  // 104: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.single_number:type_name -> com.coralogix.integrations.v1.IntegrationRevision.SingleNumericValue
+	2,   // 105: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.type:type_name -> com.coralogix.integrations.v1.IntegrationRevision.InputType
+	64,  // 106: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.name:type_name -> google.protobuf.StringValue
+	64,  // 107: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.tooltip:type_name -> google.protobuf.StringValue
+	64,  // 108: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.template_param_name:type_name -> google.protobuf.StringValue
+	64,  // 109: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.placeholder:type_name -> google.protobuf.StringValue
+	66,  // 110: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.required:type_name -> google.protobuf.BoolValue
+	66,  // 111: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.predefined:type_name -> google.protobuf.BoolValue
+	66,  // 112: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.visible:type_name -> google.protobuf.BoolValue
+	66,  // 113: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.readonly:type_name -> google.protobuf.BoolValue
+	46,  // 114: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.applicable_if:type_name -> com.coralogix.integrations.v1.IntegrationRevision.FieldCondition
+	64,  // 115: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.group_id:type_name -> google.protobuf.StringValue
+	64,  // 116: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.upgrade_notice:type_name -> google.protobuf.StringValue
+	64,  // 117: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.allowed_pattern:type_name -> google.protobuf.StringValue
+	64,  // 118: com.coralogix.integrations.v1.IntegrationRevision.FieldInformation.documentation_reference:type_name -> google.protobuf.StringValue
+	64,  // 119: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.name:type_name -> google.protobuf.StringValue
+	64,  // 120: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.command:type_name -> google.protobuf.StringValue
+	64,  // 121: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.description:type_name -> google.protobuf.StringValue
+	64,  // 122: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.tooltip_text:type_name -> google.protobuf.StringValue
+	4,   // 123: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.language:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Language
+	55,  // 124: com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.links:type_name -> com.coralogix.integrations.v1.IntegrationRevision.CommandInformation.Link
+	64,  // 125: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.name:type_name -> google.protobuf.StringValue
+	64,  // 126: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.value:type_name -> google.protobuf.StringValue
+	64,  // 127: com.coralogix.integrations.v1.IntegrationRevision.ConfigurationBlock.description:type_name -> google.protobuf.StringValue
+	64,  // 128: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.introduction:type_name -> google.protobuf.StringValue
+	64,  // 129: com.coralogix.integrations.v1.IntegrationRevision.IntegrationGuide.installation_requirements:type_name -> google.protobuf.StringValue
+	64,  // 130: com.coralogix.integrations.v1.Parameter.StringList.values:type_name -> google.protobuf.StringValue
+	64,  // 131: com.coralogix.integrations.v1.Parameter.ApiKeyData.id:type_name -> google.protobuf.StringValue
+	64,  // 132: com.coralogix.integrations.v1.Parameter.ApiKeyData.value:type_name -> google.protobuf.StringValue
+	64,  // 133: com.coralogix.integrations.v1.TestIntegrationResult.Failure.error_message:type_name -> google.protobuf.StringValue
+	68,  // 134: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.created_at:type_name -> google.protobuf.Timestamp
+	66,  // 135: com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata.is_uploaded_successful:type_name -> google.protobuf.BoolValue
+	68,  // 136: com.coralogix.integrations.v1.RumVersionData.LogMetadata.first_occurrence:type_name -> google.protobuf.Timestamp
+	68,  // 137: com.coralogix.integrations.v1.RumVersionData.LogMetadata.last_occurrence:type_name -> google.protobuf.Timestamp
+	64,  // 138: com.coralogix.integrations.v1.RumVersionData.Version.version:type_name -> google.protobuf.StringValue
+	62,  // 139: com.coralogix.integrations.v1.RumVersionData.Version.log_metadata:type_name -> com.coralogix.integrations.v1.RumVersionData.LogMetadata
+	61,  // 140: com.coralogix.integrations.v1.RumVersionData.Version.source_map_metadata:type_name -> com.coralogix.integrations.v1.RumVersionData.SourceMapMetadata
+	141, // [141:141] is the sub-list for method output_type
+	141, // [141:141] is the sub-list for method input_type
+	141, // [141:141] is the sub-list for extension type_name
+	141, // [141:141] is the sub-list for extension extendee
+	0,   // [0:141] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogix_integrations_v1_integration_proto_init() }

@@ -620,7 +620,6 @@ mod tests {
             }],
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
-            evaluation_mode: None,
         };
 
         let create_or_replace_response = notifications_client
@@ -769,7 +768,6 @@ mod tests {
                 name: Some("TestRoutingRule".to_string()),
                 custom_details: std::collections::HashMap::new(),
             }],
-            evaluation_mode: None,
             fallback: vec![],
             entity_labels: std::collections::HashMap::new(),
         };
