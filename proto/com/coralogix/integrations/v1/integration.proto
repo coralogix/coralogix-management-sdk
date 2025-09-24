@@ -313,6 +313,7 @@ message IntegrationRevision {
     google.protobuf.StringValue template_url = 1;
     map<string, string> parameters = 2;
     map<string, string> post_installation_steps = 3;
+    repeated CommandInformation commands = 4;
   }
 
   message ManagedService {
