@@ -17,7 +17,10 @@ service DashboardFoldersService {
 
   rpc ListDashboardFolders(ListDashboardFoldersRequest) returns (ListDashboardFoldersResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List dashboard folders";
-    option (google.api.http) = {get: "/v1/dashboards/folders"};
+    option (google.api.http) = {
+      get: "/dashboards/dashboards/v1/folders"
+      additional_bindings: {get: "/v1/dashboards/folders"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -47,7 +50,10 @@ service DashboardFoldersService {
 
   rpc GetDashboardFolder(GetDashboardFolderRequest) returns (GetDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard folder";
-    option (google.api.http) = {get: "/v1/dashboards/folders/{folder_id}"};
+    option (google.api.http) = {
+      get: "/dashboards/dashboards/v1/folders/{folder_id}"
+      additional_bindings: {get: "/v1/dashboards/folders/{folder_id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -78,7 +84,8 @@ service DashboardFoldersService {
   rpc CreateDashboardFolder(CreateDashboardFolderRequest) returns (CreateDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Create dashboard folder";
     option (google.api.http) = {
-      post: "/v1/dashboards/folders"
+      post: "/dashboards/dashboards/v1/folders"
+      additional_bindings: {post: "/v1/dashboards/folders"}
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -110,7 +117,8 @@ service DashboardFoldersService {
   rpc ReplaceDashboardFolder(ReplaceDashboardFolderRequest) returns (ReplaceDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Replace dashboard folder";
     option (google.api.http) = {
-      put: "/v1/dashboards/folders"
+      put: "/dashboards/dashboards/v1/folders"
+      additional_bindings: {put: "/v1/dashboards/folders"}
       body: "*"
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -141,7 +149,10 @@ service DashboardFoldersService {
 
   rpc DeleteDashboardFolder(DeleteDashboardFolderRequest) returns (DeleteDashboardFolderResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Delete dashboard folder";
-    option (google.api.http) = {delete: "/v1/dashboards/folders/{folder_id}"};
+    option (google.api.http) = {
+      delete: "/dashboards/dashboards/v1/folders/{folder_id}"
+      additional_bindings: {delete: "/v1/dashboards/folders/{folder_id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
