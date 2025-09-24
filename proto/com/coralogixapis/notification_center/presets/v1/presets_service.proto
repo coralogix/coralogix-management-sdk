@@ -11,67 +11,76 @@ option go_package = "com/coralogixapis/notification_center/presets/v1";
 
 // Public API that allows retrieving available presets and managing custom presets.
 service PresetsService {
-
   rpc CreateCustomPreset(CreateCustomPresetRequest) returns (CreateCustomPresetResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/custom"
+      post: "/notifications/notification-center/v1/presets/custom"
       body: "preset"
+      additional_bindings: {post: "/v1/notification-center/presets/custom"}
     };
   }
 
   rpc ReplaceCustomPreset(ReplaceCustomPresetRequest) returns (ReplaceCustomPresetResponse) {
     option (google.api.http) = {
-      put: "/v1/notification-center/presets/custom"
+      put: "/notifications/notification-center/v1/presets/custom"
       body: "preset"
+      additional_bindings: {put: "/v1/notification-center/presets/custom"}
     };
   }
 
   rpc DeleteCustomPreset(DeleteCustomPresetRequest) returns (DeleteCustomPresetResponse) {
     option (google.api.http) = {
-      delete: "/v1/notification-center/presets/custom/{id}"
+      delete: "/notifications/notification-center/v1/presets/custom/{id}"
+      additional_bindings: {delete: "/v1/notification-center/presets/custom/{id}"}
     };
   }
 
   rpc SetCustomPresetAsDefault(SetCustomPresetAsDefaultRequest) returns (SetCustomPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/custom/{id}:defaultSet"
+      post: "/notifications/notification-center/v1/presets/custom/{id}:defaultSet"
+      additional_bindings: {post: "/v1/notification-center/presets/custom/{id}:defaultSet"}
     };
     option deprecated = true;
   }
 
   rpc SetPresetAsDefault(SetPresetAsDefaultRequest) returns (SetPresetAsDefaultResponse) {
     option (google.api.http) = {
-      post: "/v1/notification-center/presets/{id}:defaultSet"
+      post: "/notifications/notification-center/v1/presets/{id}:defaultSet"
+      additional_bindings: {post: "/v1/notification-center/presets/{id}:defaultSet"}
     };
   }
 
   rpc GetPreset(GetPresetRequest) returns (GetPresetResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets/{id}"
+      get: "/notifications/notification-center/v1/presets/{id}"
+      additional_bindings: {get: "/v1/notification-center/presets/{id}"}
     };
   }
 
   rpc ListPresetSummaries(ListPresetSummariesRequest) returns (ListPresetSummariesResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets:summariesList"
+      get: "/notifications/notification-center/v1/presets:summariesList"
+      additional_bindings: {get: "/v1/notification-center/presets:summariesList"}
     };
   }
 
   rpc BatchGetPresets(BatchGetPresetsRequest) returns (BatchGetPresetsResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets:batchGet"
+      get: "/notifications/notification-center/v1/presets:batchGet"
+      additional_bindings: {get: "/v1/notification-center/presets:batchGet"}
     };
   }
 
   rpc GetDefaultPresetSummary(GetDefaultPresetSummaryRequest) returns (GetDefaultPresetSummaryResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets:defaultSummaryGet"
+      get: "/notifications/notification-center/v1/presets:defaultSummaryGet"
+      additional_bindings: {get: "/v1/notification-center/presets:defaultSummaryGet"}
     };
   }
 
   rpc GetSystemDefaultPresetSummary(GetSystemDefaultPresetSummaryRequest) returns (GetSystemDefaultPresetSummaryResponse) {
     option (google.api.http) = {
-      get: "/v1/notification-center/presets:systemDefaultSummaryGet"
+      get: "/notifications/notification-center/v1/presets:systemDefaultSummaryGet"
+      additional_bindings: {get: "/v1/notification-center/presets:systemDefaultSummaryGet"}
     };
   }
 }
@@ -155,8 +164,7 @@ message DeleteCustomPresetRequest {
   string id = 4;
 }
 
-message DeleteCustomPresetResponse {
-}
+message DeleteCustomPresetResponse {}
 
 message SetCustomPresetAsDefaultRequest {
   reserved 1, 2, 3, 101, 102;
@@ -165,8 +173,7 @@ message SetCustomPresetAsDefaultRequest {
   string id = 4;
 }
 
-message SetCustomPresetAsDefaultResponse {
-}
+message SetCustomPresetAsDefaultResponse {}
 
 message SetPresetAsDefaultRequest {
   reserved 1, 2;
@@ -187,8 +194,7 @@ message SetPresetAsDefaultRequest {
   string id = 3;
 }
 
-message SetPresetAsDefaultResponse {
-}
+message SetPresetAsDefaultResponse {}
 
 message GetPresetRequest {
   reserved 1, 2, 3, 101, 102;
@@ -206,7 +212,7 @@ message ListPresetSummariesRequest {
   reserved "deprecated_entity_type";
 
   optional ConnectorType connector_type = 1;
-  optional EntityType entity_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
+  optional EntityType entity_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"ALERTS\""}];
 }
 
 message ListPresetSummariesResponse {
@@ -252,7 +258,7 @@ message GetDefaultPresetSummaryRequest {
   reserved "deprecated_entity_type";
 
   ConnectorType connector_type = 1;
-  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"ALERTS\""}];
 }
 
 message GetDefaultPresetSummaryResponse {
@@ -275,7 +281,7 @@ message GetSystemDefaultPresetSummaryRequest {
     }
   };
   ConnectorType connector_type = 1;
-  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"ALERTS\"" }];
+  EntityType entity_type = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"ALERTS\""}];
 }
 
 message GetSystemDefaultPresetSummaryResponse {
