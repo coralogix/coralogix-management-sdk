@@ -36,11 +36,6 @@ enum MissingDataStrategy {
   MISSING_DATA_STRATEGY_BAD = 2;
 }
 
-enum SloType {
-  SLO_TYPE_REQUEST = 0;
-  SLO_TYPE_WINDOW = 1;
-}
-
 
 message RequestBasedMetricSli {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
@@ -126,7 +121,7 @@ message Slo{
     RequestBasedMetricSli request_based_metric_sli = 12;
     WindowBasedMetricSli window_based_metric_sli = 13;
   };
-  optional SloType type = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "SLO_TYPE_REQUEST" }];
+  optional string type = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"request\"" }];
 
 }
 
@@ -147,7 +142,6 @@ message SloFilterField {
   oneof field {
     SloConstantFilterField const_filter = 1;
     string label_name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"environment\"" }];
-    bool slo_type = 3;
   }
 }
 
@@ -159,18 +153,7 @@ message IsFilterPredicate {
       required: []
     }
   };
-  oneof values {
-    StringValues string_values = 1;
-    TypeValues type_values = 2;
-  }
-}
-
-message StringValues {
-  repeated string values = 1;
-}
-
-message TypeValues {
-  repeated SloType values = 1;
+  repeated string is = 1;
 }
 
 message SloFilterPredicate {
@@ -196,4 +179,15 @@ message SloFilter {
   };
   SloFilterField field = 1;
   SloFilterPredicate predicate = 2;
+}
+
+message SloFilters {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "SloFilters"
+      description: "A collection of filters for SLOs"
+      required: []
+    }
+  };
+  repeated SloFilter filters = 1;
 }
