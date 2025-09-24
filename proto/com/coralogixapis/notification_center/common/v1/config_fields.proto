@@ -1,13 +1,14 @@
 syntax = "proto3";
 
 package com.coralogixapis.notification_center;
+
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center";
 
 /**
-* This file contains public models used across the notification sources APIs.
-* any updates should be made with caution to ensure backward compatibility.
+ * This file contains public models used across the notification sources APIs.
+ * any updates should be made with caution to ensure backward compatibility.
  */
 
 message ConnectorConfigField {
@@ -25,15 +26,18 @@ message MessageConfigField {
     json_schema: {
       title: "Message Config Field"
       description: "Message config field provides a way to define a template that can be used to render the notification content"
-      required: ["field_name", "template"]
+      required: [
+        "field_name",
+        "template"
+      ]
     }
     external_docs: {
       url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
       description: "Find out more about notification center"
     }
   };
-  string field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"title\"" }];
-  string template = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\"" }];
+  string field_name = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"title\""}];
+  string template = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"{{alert.status}} {{alertDef.priority}} - {{alertDef.name}}\""}];
 }
 
 message RenderedConnectorConfigField {

@@ -5,8 +5,8 @@ package com.coralogixapis.notification_center.routers.v1;
 import "com/coralogixapis/notification_center/common/common.proto";
 import "com/coralogixapis/notification_center/common/v1/entity_labels.proto";
 import "com/coralogixapis/notification_center/routers/v1/router.proto";
-import "google/protobuf/descriptor.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 option go_package = "com/coralogixapis/notification_center/routers/v1";
@@ -14,248 +14,253 @@ option go_package = "com/coralogixapis/notification_center/routers/v1";
 // Public API that allows managing global routers
 service GlobalRoutersService {
   rpc CreateGlobalRouter(CreateGlobalRouterRequest) returns (CreateGlobalRouterResponse) {
-      option (google.api.http) = {
-          post: "/v1/notification-center/routers"
-          body: "router"
-      };
+    option (google.api.http) = {
+      post: "/notifications/notification-center/v1/routers"
+      body: "router"
+      additional_bindings: {post: "/v1/notification-center/routers"}
+    };
   }
 
   rpc ReplaceGlobalRouter(ReplaceGlobalRouterRequest) returns (ReplaceGlobalRouterResponse) {
-      option (google.api.http) = {
-          put: "/v1/notification-center/routers"
-          body: "router"
-      };
+    option (google.api.http) = {
+      put: "/notifications/notification-center/v1/routers"
+      body: "router"
+      additional_bindings: {put: "/v1/notification-center/routers"}
+    };
   }
 
   rpc CreateOrReplaceGlobalRouter(CreateOrReplaceGlobalRouterRequest) returns (CreateOrReplaceGlobalRouterResponse) {}
 
   rpc DeleteGlobalRouter(DeleteGlobalRouterRequest) returns (DeleteGlobalRouterResponse) {
-      option (google.api.http) = {
-          delete: "/v1/notification-center/routers/{id}"
-      };
+    option (google.api.http) = {
+      delete: "/notifications/notification-center/v1/routers/{id}"
+      additional_bindings: {delete: "/v1/notification-center/routers/{id}"}
+    };
   }
 
   rpc GetGlobalRouter(GetGlobalRouterRequest) returns (GetGlobalRouterResponse) {
-      option (google.api.http) = {
-          get: "/v1/notification-center/routers/{id}"
-      };
+    option (google.api.http) = {
+      get: "/notifications/notification-center/v1/routers/{id}"
+      additional_bindings: {get: "/v1/notification-center/routers/{id}"}
+    };
   }
 
   rpc ListGlobalRouters(ListGlobalRoutersRequest) returns (ListGlobalRoutersResponse) {
-      option (google.api.http) = {
-          get: "/v1/notification-center/routers"
-      };
+    option (google.api.http) = {
+      get: "/notifications/notification-center/v1/routers"
+      additional_bindings: {get: "/v1/notification-center/routers"}
+    };
   }
 
   rpc BatchGetGlobalRouters(BatchGetGlobalRoutersRequest) returns (BatchGetGlobalRoutersResponse) {
-      option (google.api.http) = {
-          get: "/v1/notification-center/routers:batchGetSummaries"
-      };
+    option (google.api.http) = {
+      get: "/notifications/notification-center/v1/routers:batchGetSummaries"
+      additional_bindings: {get: "/v1/notification-center/routers:batchGetSummaries"}
+    };
   }
 }
 
 message CreateGlobalRouterRequest {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Create Global Router Request"
-            description: "Request to create a global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Global Router Request"
+      description: "Request to create a global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 message CreateGlobalRouterResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Create Global Router Response"
-            description: "Response which contains a created global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Global Router Response"
+      description: "Response which contains a created global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 
 message ReplaceGlobalRouterRequest {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Replace Global Router Request"
-            description: "Request which updates an existing global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Replace Global Router Request"
+      description: "Request which updates an existing global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 message ReplaceGlobalRouterResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Replace Global Router Response"
-            description: "Response which contains an updated global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Replace Global Router Response"
+      description: "Response which contains an updated global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 
 message CreateOrReplaceGlobalRouterRequest {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Create Or Replace Global Router Request"
-            description: "Creates or Updates already existing global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Or Replace Global Router Request"
+      description: "Creates or Updates already existing global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 message CreateOrReplaceGlobalRouterResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Create Or Replace Global Router Response"
-            description: "Response which contains a created or updated router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Create Or Replace Global Router Response"
+      description: "Response which contains a created or updated router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 
 message DeleteGlobalRouterRequest {
-    reserved 1, 2;
-    reserved "deprecated_identifier", "identifier";
+  reserved 1, 2;
+  reserved "deprecated_identifier", "identifier";
 
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Delete Global Router Request"
-            description: "Deletes a global router with the passed identifier"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    string id = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Delete Global Router Request"
+      description: "Deletes a global router with the passed identifier"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  string id = 3;
 }
-message DeleteGlobalRouterResponse {
-}
+message DeleteGlobalRouterResponse {}
 
 message GetGlobalRouterRequest {
-    reserved 1, 2;
-    reserved "deprecated_identifier", "identifier";
+  reserved 1, 2;
+  reserved "deprecated_identifier", "identifier";
 
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Get Global Router Request"
-            description: "Request to retrieve a global router with the passed identifier"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    string id = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get Global Router Request"
+      description: "Request to retrieve a global router with the passed identifier"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  string id = 3;
 }
 message GetGlobalRouterResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Get Global Router Response"
-            description: "Response containing a requested global router"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    GlobalRouter router = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get Global Router Response"
+      description: "Response containing a requested global router"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  GlobalRouter router = 1;
 }
 
 message ListGlobalRoutersRequest {
-    reserved 1;
-    reserved "deprecated_entity_type";
+  reserved 1;
+  reserved "deprecated_entity_type";
 
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "List Global Routers Request"
-            description: "Request to retrieve global routers by entity type or all"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    optional EntityType entity_type = 2 [deprecated = true];
-    // If empty, all routers are returned.
-    map<string, EntityLabelValues> source_entity_labels = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List Global Routers Request"
+      description: "Request to retrieve global routers by entity type or all"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  optional EntityType entity_type = 2 [deprecated = true];
+  // If empty, all routers are returned.
+  map<string, EntityLabelValues> source_entity_labels = 3;
 }
 message ListGlobalRoutersResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "List Global Routers Response"
-            description: "Response containing requested global routers"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    repeated GlobalRouter routers = 1;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "List Global Routers Response"
+      description: "Response containing requested global routers"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  repeated GlobalRouter routers = 1;
 }
 
 message BatchGetGlobalRoutersRequest {
-    reserved 1, 2;
-    reserved "deprecated_ids", "ids";
+  reserved 1, 2;
+  reserved "deprecated_ids", "ids";
 
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Batch Get Global Routers Request"
-            description: "Get global routers by provided identifiers"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    repeated string global_router_ids = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Batch Get Global Routers Request"
+      description: "Get global routers by provided identifiers"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  repeated string global_router_ids = 3;
 }
 message BatchGetGlobalRoutersResponse {
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
-        json_schema: {
-            title: "Batch Get Global Routers Response"
-            description: "Response containing requested global routers and missing global routers ids"
-            required: []
-        }
-        external_docs: {
-            url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
-            description: "Find out more about notification center"
-        }
-    };
-    map<string, GlobalRouter> routers = 1;
-    repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { example: "[\"global-router-id-3\"]" }];
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Batch Get Global Routers Response"
+      description: "Response containing requested global routers and missing global routers ids"
+      required: []
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/introduction/welcome/"
+      description: "Find out more about notification center"
+    }
+  };
+  map<string, GlobalRouter> routers = 1;
+  repeated string not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "[\"global-router-id-3\"]"}];
 }
