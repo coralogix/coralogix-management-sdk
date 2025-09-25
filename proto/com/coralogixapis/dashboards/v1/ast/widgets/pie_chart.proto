@@ -61,6 +61,10 @@ message PieChart {
     description: "Whether to render numeric value without abbreviation"
     example: "false"
   }];
+  google.protobuf.BoolValue show_total = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Whether to show the total amount as a title"
+    example: "false"
+  }];
 
   message Query {
     oneof value {
