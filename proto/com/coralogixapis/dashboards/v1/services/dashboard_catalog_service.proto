@@ -17,7 +17,10 @@ service DashboardCatalogService {
 
   rpc GetDashboardCatalog(GetDashboardCatalogRequest) returns (GetDashboardCatalogResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get dashboard catalog";
-    option (google.api.http) = {get: "/v1/dashboards/catalog"};
+    option (google.api.http) = {
+      get: "/dashboards/dashboards/v1/catalog"
+      additional_bindings: {get: "/v1/dashboards/catalog"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
