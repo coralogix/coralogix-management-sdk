@@ -30,6 +30,9 @@ const (
 	IncidentsService_CloseIncidents_FullMethodName                 = "/com.coralogixapis.incidents.v1.IncidentsService/CloseIncidents"
 	IncidentsService_GetIncidentEvents_FullMethodName              = "/com.coralogixapis.incidents.v1.IncidentsService/GetIncidentEvents"
 	IncidentsService_ResolveIncidents_FullMethodName               = "/com.coralogixapis.incidents.v1.IncidentsService/ResolveIncidents"
+	IncidentsService_GetIncidentByEventId_FullMethodName           = "/com.coralogixapis.incidents.v1.IncidentsService/GetIncidentByEventId"
+	IncidentsService_AcknowledgeIncidentByEventId_FullMethodName   = "/com.coralogixapis.incidents.v1.IncidentsService/AcknowledgeIncidentByEventId"
+	IncidentsService_ResolveIncidentByEventId_FullMethodName       = "/com.coralogixapis.incidents.v1.IncidentsService/ResolveIncidentByEventId"
 	IncidentsService_GetIncidentUsingCorrelationKey_FullMethodName = "/com.coralogixapis.incidents.v1.IncidentsService/GetIncidentUsingCorrelationKey"
 	IncidentsService_ListIncidentEvents_FullMethodName             = "/com.coralogixapis.incidents.v1.IncidentsService/ListIncidentEvents"
 	IncidentsService_ListIncidentEventsTotalCount_FullMethodName   = "/com.coralogixapis.incidents.v1.IncidentsService/ListIncidentEventsTotalCount"
@@ -51,6 +54,9 @@ type IncidentsServiceClient interface {
 	CloseIncidents(ctx context.Context, in *CloseIncidentsRequest, opts ...grpc.CallOption) (*CloseIncidentsResponse, error)
 	GetIncidentEvents(ctx context.Context, in *GetIncidentEventsRequest, opts ...grpc.CallOption) (*GetIncidentEventsResponse, error)
 	ResolveIncidents(ctx context.Context, in *ResolveIncidentsRequest, opts ...grpc.CallOption) (*ResolveIncidentsResponse, error)
+	GetIncidentByEventId(ctx context.Context, in *GetIncidentByEventIdRequest, opts ...grpc.CallOption) (*GetIncidentByEventIdResponse, error)
+	AcknowledgeIncidentByEventId(ctx context.Context, in *AcknowledgeIncidentByEventIdRequest, opts ...grpc.CallOption) (*AcknowledgeIncidentByEventIdResponse, error)
+	ResolveIncidentByEventId(ctx context.Context, in *ResolveIncidentByEventIdRequest, opts ...grpc.CallOption) (*ResolveIncidentByEventIdResponse, error)
 	// This shouldn't be exposed in the docs, it has no external usecase
 	GetIncidentUsingCorrelationKey(ctx context.Context, in *GetIncidentUsingCorrelationKeyRequest, opts ...grpc.CallOption) (*GetIncidentUsingCorrelationKeyResponse, error)
 	ListIncidentEvents(ctx context.Context, in *ListIncidentEventsRequest, opts ...grpc.CallOption) (*ListIncidentEventsResponse, error)
@@ -176,6 +182,36 @@ func (c *incidentsServiceClient) ResolveIncidents(ctx context.Context, in *Resol
 	return out, nil
 }
 
+func (c *incidentsServiceClient) GetIncidentByEventId(ctx context.Context, in *GetIncidentByEventIdRequest, opts ...grpc.CallOption) (*GetIncidentByEventIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetIncidentByEventIdResponse)
+	err := c.cc.Invoke(ctx, IncidentsService_GetIncidentByEventId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *incidentsServiceClient) AcknowledgeIncidentByEventId(ctx context.Context, in *AcknowledgeIncidentByEventIdRequest, opts ...grpc.CallOption) (*AcknowledgeIncidentByEventIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcknowledgeIncidentByEventIdResponse)
+	err := c.cc.Invoke(ctx, IncidentsService_AcknowledgeIncidentByEventId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *incidentsServiceClient) ResolveIncidentByEventId(ctx context.Context, in *ResolveIncidentByEventIdRequest, opts ...grpc.CallOption) (*ResolveIncidentByEventIdResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResolveIncidentByEventIdResponse)
+	err := c.cc.Invoke(ctx, IncidentsService_ResolveIncidentByEventId_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *incidentsServiceClient) GetIncidentUsingCorrelationKey(ctx context.Context, in *GetIncidentUsingCorrelationKeyRequest, opts ...grpc.CallOption) (*GetIncidentUsingCorrelationKeyResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetIncidentUsingCorrelationKeyResponse)
@@ -231,6 +267,9 @@ type IncidentsServiceServer interface {
 	CloseIncidents(context.Context, *CloseIncidentsRequest) (*CloseIncidentsResponse, error)
 	GetIncidentEvents(context.Context, *GetIncidentEventsRequest) (*GetIncidentEventsResponse, error)
 	ResolveIncidents(context.Context, *ResolveIncidentsRequest) (*ResolveIncidentsResponse, error)
+	GetIncidentByEventId(context.Context, *GetIncidentByEventIdRequest) (*GetIncidentByEventIdResponse, error)
+	AcknowledgeIncidentByEventId(context.Context, *AcknowledgeIncidentByEventIdRequest) (*AcknowledgeIncidentByEventIdResponse, error)
+	ResolveIncidentByEventId(context.Context, *ResolveIncidentByEventIdRequest) (*ResolveIncidentByEventIdResponse, error)
 	// This shouldn't be exposed in the docs, it has no external usecase
 	GetIncidentUsingCorrelationKey(context.Context, *GetIncidentUsingCorrelationKeyRequest) (*GetIncidentUsingCorrelationKeyResponse, error)
 	ListIncidentEvents(context.Context, *ListIncidentEventsRequest) (*ListIncidentEventsResponse, error)
@@ -278,6 +317,15 @@ func (UnimplementedIncidentsServiceServer) GetIncidentEvents(context.Context, *G
 }
 func (UnimplementedIncidentsServiceServer) ResolveIncidents(context.Context, *ResolveIncidentsRequest) (*ResolveIncidentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResolveIncidents not implemented")
+}
+func (UnimplementedIncidentsServiceServer) GetIncidentByEventId(context.Context, *GetIncidentByEventIdRequest) (*GetIncidentByEventIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetIncidentByEventId not implemented")
+}
+func (UnimplementedIncidentsServiceServer) AcknowledgeIncidentByEventId(context.Context, *AcknowledgeIncidentByEventIdRequest) (*AcknowledgeIncidentByEventIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcknowledgeIncidentByEventId not implemented")
+}
+func (UnimplementedIncidentsServiceServer) ResolveIncidentByEventId(context.Context, *ResolveIncidentByEventIdRequest) (*ResolveIncidentByEventIdResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResolveIncidentByEventId not implemented")
 }
 func (UnimplementedIncidentsServiceServer) GetIncidentUsingCorrelationKey(context.Context, *GetIncidentUsingCorrelationKeyRequest) (*GetIncidentUsingCorrelationKeyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIncidentUsingCorrelationKey not implemented")
@@ -510,6 +558,60 @@ func _IncidentsService_ResolveIncidents_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _IncidentsService_GetIncidentByEventId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetIncidentByEventIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IncidentsServiceServer).GetIncidentByEventId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IncidentsService_GetIncidentByEventId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IncidentsServiceServer).GetIncidentByEventId(ctx, req.(*GetIncidentByEventIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IncidentsService_AcknowledgeIncidentByEventId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcknowledgeIncidentByEventIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IncidentsServiceServer).AcknowledgeIncidentByEventId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IncidentsService_AcknowledgeIncidentByEventId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IncidentsServiceServer).AcknowledgeIncidentByEventId(ctx, req.(*AcknowledgeIncidentByEventIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _IncidentsService_ResolveIncidentByEventId_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveIncidentByEventIdRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IncidentsServiceServer).ResolveIncidentByEventId(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: IncidentsService_ResolveIncidentByEventId_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IncidentsServiceServer).ResolveIncidentByEventId(ctx, req.(*ResolveIncidentByEventIdRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _IncidentsService_GetIncidentUsingCorrelationKey_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetIncidentUsingCorrelationKeyRequest)
 	if err := dec(in); err != nil {
@@ -632,6 +734,18 @@ var IncidentsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveIncidents",
 			Handler:    _IncidentsService_ResolveIncidents_Handler,
+		},
+		{
+			MethodName: "GetIncidentByEventId",
+			Handler:    _IncidentsService_GetIncidentByEventId_Handler,
+		},
+		{
+			MethodName: "AcknowledgeIncidentByEventId",
+			Handler:    _IncidentsService_AcknowledgeIncidentByEventId_Handler,
+		},
+		{
+			MethodName: "ResolveIncidentByEventId",
+			Handler:    _IncidentsService_ResolveIncidentByEventId_Handler,
 		},
 		{
 			MethodName: "GetIncidentUsingCorrelationKey",

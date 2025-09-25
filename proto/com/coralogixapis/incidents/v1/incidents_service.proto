@@ -375,6 +375,100 @@ service IncidentsService {
     };
   }
 
+  rpc GetIncidentByEventId(GetIncidentByEventIdRequest) returns (GetIncidentByEventIdResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get incident by event id";
+    option (google.api.http) = {get: "/v1/incidents/by:event/{event_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Incidents service"]
+      summary: "Get incident by ID"
+      description: "Retrieve detailed information about a single incident by its unique identifier."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "incidents:read"}
+          }
+        }
+      }
+    };
+  }
+  rpc AcknowledgeIncidentByEventId(AcknowledgeIncidentByEventIdRequest) returns (AcknowledgeIncidentByEventIdResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Acknowledge incident by event id";
+    option (google.api.http) = {
+      post: "/v1/by:event/incidents:acknowledge/{event_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Incidents service"]
+      summary: "Acknowledge incident by event id"
+      description: "Mark incident as acknowledged by event id."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "incidents:acknowledge"}
+          }
+        }
+      }
+    };
+  }
+  rpc ResolveIncidentByEventId(ResolveIncidentByEventIdRequest) returns (ResolveIncidentByEventIdResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Resolve incident by event id";
+    option (google.api.http) = {
+      post: "/v1/by:event/incidents:resolve/{event_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Incidents service"]
+      summary: "Resolve incident by event id"
+      description: "Mark incident as resolved by event id."
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "incidents:close"}
+          }
+        }
+      }
+    };
+  }
+
   /*
      This shouldn't be exposed in the docs, it has no external usecase
   */
@@ -803,6 +897,80 @@ message ResolveIncidentsResponse {
     }
   };
   repeated Incident incidents = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of incidents after resolution"}];
+}
+
+message GetIncidentByEventIdRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get incident by event id request"
+      required: ["event_id"]
+    }
+  };
+  google.protobuf.StringValue event_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Event ID associated to the Incident to acknowledge"
+    example: "\"event_id_1\""
+  }];
+}
+
+message GetIncidentByEventIdResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Get incident by event id response"
+      description: "Response containing the requested incident"
+      required: ["incident"]
+    }
+  };
+  Incident incident = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The requested incident"}];
+}
+
+message AcknowledgeIncidentByEventIdRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Acknowledge incident by event id request"
+      description: "Request to acknowledge incident"
+      required: ["event_id"]
+    }
+  };
+  google.protobuf.StringValue event_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Event ID associated to the Incident to acknowledge"
+    example: "\"event_id_1\""
+  }];
+}
+
+message AcknowledgeIncidentByEventIdResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Acknowledge incident by event id response"
+      description: "Response containing the updated incident after acknowledgment"
+      required: ["incident"]
+    }
+  };
+  Incident incident = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Incident after acknowledgment"}];
+}
+
+message ResolveIncidentByEventIdRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Resolve incidents request"
+      description: "Request to resolve one or more incidents"
+      required: ["event_id"]
+    }
+  };
+  google.protobuf.StringValue event_id = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "Event ID associated to the Incident to resolve"
+    example: "\"event_id_1\""
+  }];
+}
+
+message ResolveIncidentByEventIdResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Acknowledge incident by event id response"
+      description: "Response containing the updated incident after resolution"
+      required: ["incident"]
+    }
+  };
+  Incident incident = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Incident after resolution"}];
 }
 
 message GetIncidentUsingCorrelationKeyRequest {
