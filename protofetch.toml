@@ -3,7 +3,7 @@ proto_out_dir = './proto'
 
 [rules-api-protobuf]
 url = 'github.com/coralogix/rules-api-protobuf'
-revision = "v0.17.3"
+revision = "v0.19.0"
 allow_policies = [
     "src/com/coralogix/rules/v1/rule.proto",
     "src/com/coralogix/rules/v1/rule_group.proto",
@@ -336,7 +336,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.36"
+revision = "v0.0.38"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -377,7 +377,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.140"
+revision = "v0.0.141"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
