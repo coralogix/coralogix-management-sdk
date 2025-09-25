@@ -1250,6 +1250,270 @@ func (x *ResolveIncidentsResponse) GetIncidents() []*Incident {
 	return nil
 }
 
+type GetIncidentByEventIdRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	EventId       *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIncidentByEventIdRequest) Reset() {
+	*x = GetIncidentByEventIdRequest{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[25]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIncidentByEventIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIncidentByEventIdRequest) ProtoMessage() {}
+
+func (x *GetIncidentByEventIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[25]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIncidentByEventIdRequest.ProtoReflect.Descriptor instead.
+func (*GetIncidentByEventIdRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetIncidentByEventIdRequest) GetEventId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.EventId
+	}
+	return nil
+}
+
+type GetIncidentByEventIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Incident      *Incident              `protobuf:"bytes,1,opt,name=incident,proto3" json:"incident,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *GetIncidentByEventIdResponse) Reset() {
+	*x = GetIncidentByEventIdResponse{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[26]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *GetIncidentByEventIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetIncidentByEventIdResponse) ProtoMessage() {}
+
+func (x *GetIncidentByEventIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[26]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetIncidentByEventIdResponse.ProtoReflect.Descriptor instead.
+func (*GetIncidentByEventIdResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *GetIncidentByEventIdResponse) GetIncident() *Incident {
+	if x != nil {
+		return x.Incident
+	}
+	return nil
+}
+
+type AcknowledgeIncidentByEventIdRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	EventId       *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcknowledgeIncidentByEventIdRequest) Reset() {
+	*x = AcknowledgeIncidentByEventIdRequest{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[27]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcknowledgeIncidentByEventIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcknowledgeIncidentByEventIdRequest) ProtoMessage() {}
+
+func (x *AcknowledgeIncidentByEventIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[27]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcknowledgeIncidentByEventIdRequest.ProtoReflect.Descriptor instead.
+func (*AcknowledgeIncidentByEventIdRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *AcknowledgeIncidentByEventIdRequest) GetEventId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.EventId
+	}
+	return nil
+}
+
+type AcknowledgeIncidentByEventIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Incident      *Incident              `protobuf:"bytes,2,opt,name=incident,proto3" json:"incident,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AcknowledgeIncidentByEventIdResponse) Reset() {
+	*x = AcknowledgeIncidentByEventIdResponse{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[28]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AcknowledgeIncidentByEventIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AcknowledgeIncidentByEventIdResponse) ProtoMessage() {}
+
+func (x *AcknowledgeIncidentByEventIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[28]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AcknowledgeIncidentByEventIdResponse.ProtoReflect.Descriptor instead.
+func (*AcknowledgeIncidentByEventIdResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *AcknowledgeIncidentByEventIdResponse) GetIncident() *Incident {
+	if x != nil {
+		return x.Incident
+	}
+	return nil
+}
+
+type ResolveIncidentByEventIdRequest struct {
+	state         protoimpl.MessageState  `protogen:"open.v1"`
+	EventId       *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=event_id,json=eventId,proto3" json:"event_id,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveIncidentByEventIdRequest) Reset() {
+	*x = ResolveIncidentByEventIdRequest{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[29]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveIncidentByEventIdRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveIncidentByEventIdRequest) ProtoMessage() {}
+
+func (x *ResolveIncidentByEventIdRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[29]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveIncidentByEventIdRequest.ProtoReflect.Descriptor instead.
+func (*ResolveIncidentByEventIdRequest) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *ResolveIncidentByEventIdRequest) GetEventId() *wrapperspb.StringValue {
+	if x != nil {
+		return x.EventId
+	}
+	return nil
+}
+
+type ResolveIncidentByEventIdResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Incident      *Incident              `protobuf:"bytes,2,opt,name=incident,proto3" json:"incident,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ResolveIncidentByEventIdResponse) Reset() {
+	*x = ResolveIncidentByEventIdResponse{}
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[30]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ResolveIncidentByEventIdResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ResolveIncidentByEventIdResponse) ProtoMessage() {}
+
+func (x *ResolveIncidentByEventIdResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[30]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ResolveIncidentByEventIdResponse.ProtoReflect.Descriptor instead.
+func (*ResolveIncidentByEventIdResponse) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *ResolveIncidentByEventIdResponse) GetIncident() *Incident {
+	if x != nil {
+		return x.Incident
+	}
+	return nil
+}
+
 type GetIncidentUsingCorrelationKeyRequest struct {
 	state               protoimpl.MessageState  `protogen:"open.v1"`
 	CorrelationKey      *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=correlation_key,json=correlationKey,proto3" json:"correlation_key,omitempty"`
@@ -1260,7 +1524,7 @@ type GetIncidentUsingCorrelationKeyRequest struct {
 
 func (x *GetIncidentUsingCorrelationKeyRequest) Reset() {
 	*x = GetIncidentUsingCorrelationKeyRequest{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[31]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1272,7 +1536,7 @@ func (x *GetIncidentUsingCorrelationKeyRequest) String() string {
 func (*GetIncidentUsingCorrelationKeyRequest) ProtoMessage() {}
 
 func (x *GetIncidentUsingCorrelationKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[25]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[31]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1285,7 +1549,7 @@ func (x *GetIncidentUsingCorrelationKeyRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use GetIncidentUsingCorrelationKeyRequest.ProtoReflect.Descriptor instead.
 func (*GetIncidentUsingCorrelationKeyRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{25}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *GetIncidentUsingCorrelationKeyRequest) GetCorrelationKey() *wrapperspb.StringValue {
@@ -1311,7 +1575,7 @@ type GetIncidentUsingCorrelationKeyResponse struct {
 
 func (x *GetIncidentUsingCorrelationKeyResponse) Reset() {
 	*x = GetIncidentUsingCorrelationKeyResponse{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[32]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1323,7 +1587,7 @@ func (x *GetIncidentUsingCorrelationKeyResponse) String() string {
 func (*GetIncidentUsingCorrelationKeyResponse) ProtoMessage() {}
 
 func (x *GetIncidentUsingCorrelationKeyResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[26]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[32]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1336,7 +1600,7 @@ func (x *GetIncidentUsingCorrelationKeyResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use GetIncidentUsingCorrelationKeyResponse.ProtoReflect.Descriptor instead.
 func (*GetIncidentUsingCorrelationKeyResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{26}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *GetIncidentUsingCorrelationKeyResponse) GetIncident() *Incident {
@@ -1357,7 +1621,7 @@ type ListIncidentEventsRequest struct {
 
 func (x *ListIncidentEventsRequest) Reset() {
 	*x = ListIncidentEventsRequest{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[33]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1369,7 +1633,7 @@ func (x *ListIncidentEventsRequest) String() string {
 func (*ListIncidentEventsRequest) ProtoMessage() {}
 
 func (x *ListIncidentEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[27]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[33]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1382,7 +1646,7 @@ func (x *ListIncidentEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIncidentEventsRequest.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{27}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ListIncidentEventsRequest) GetFilter() *IncidentEventQueryFilter {
@@ -1416,7 +1680,7 @@ type ListIncidentEventRequestOrderBy struct {
 
 func (x *ListIncidentEventRequestOrderBy) Reset() {
 	*x = ListIncidentEventRequestOrderBy{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[28]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[34]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1428,7 +1692,7 @@ func (x *ListIncidentEventRequestOrderBy) String() string {
 func (*ListIncidentEventRequestOrderBy) ProtoMessage() {}
 
 func (x *ListIncidentEventRequestOrderBy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[28]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[34]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1441,7 +1705,7 @@ func (x *ListIncidentEventRequestOrderBy) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIncidentEventRequestOrderBy.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventRequestOrderBy) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{28}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *ListIncidentEventRequestOrderBy) GetField() IncidentEventOrderByFieldType {
@@ -1468,7 +1732,7 @@ type ListIncidentEventsResponse struct {
 
 func (x *ListIncidentEventsResponse) Reset() {
 	*x = ListIncidentEventsResponse{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[29]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[35]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1480,7 +1744,7 @@ func (x *ListIncidentEventsResponse) String() string {
 func (*ListIncidentEventsResponse) ProtoMessage() {}
 
 func (x *ListIncidentEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[29]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[35]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1493,7 +1757,7 @@ func (x *ListIncidentEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListIncidentEventsResponse.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{29}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{35}
 }
 
 func (x *ListIncidentEventsResponse) GetItems() []*IncidentEventExtended {
@@ -1519,7 +1783,7 @@ type ListIncidentEventsTotalCountRequest struct {
 
 func (x *ListIncidentEventsTotalCountRequest) Reset() {
 	*x = ListIncidentEventsTotalCountRequest{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[30]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[36]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1531,7 +1795,7 @@ func (x *ListIncidentEventsTotalCountRequest) String() string {
 func (*ListIncidentEventsTotalCountRequest) ProtoMessage() {}
 
 func (x *ListIncidentEventsTotalCountRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[30]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[36]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1544,7 +1808,7 @@ func (x *ListIncidentEventsTotalCountRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use ListIncidentEventsTotalCountRequest.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsTotalCountRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{30}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{36}
 }
 
 func (x *ListIncidentEventsTotalCountRequest) GetFilter() *IncidentEventQueryFilter {
@@ -1564,7 +1828,7 @@ type ListIncidentEventsTotalCountResponse struct {
 
 func (x *ListIncidentEventsTotalCountResponse) Reset() {
 	*x = ListIncidentEventsTotalCountResponse{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[31]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[37]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1576,7 +1840,7 @@ func (x *ListIncidentEventsTotalCountResponse) String() string {
 func (*ListIncidentEventsTotalCountResponse) ProtoMessage() {}
 
 func (x *ListIncidentEventsTotalCountResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[31]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[37]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1589,7 +1853,7 @@ func (x *ListIncidentEventsTotalCountResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use ListIncidentEventsTotalCountResponse.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsTotalCountResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{31}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{37}
 }
 
 func (x *ListIncidentEventsTotalCountResponse) GetCount() *wrapperspb.UInt64Value {
@@ -1615,7 +1879,7 @@ type ListIncidentEventsFilterValuesRequest struct {
 
 func (x *ListIncidentEventsFilterValuesRequest) Reset() {
 	*x = ListIncidentEventsFilterValuesRequest{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[32]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1627,7 +1891,7 @@ func (x *ListIncidentEventsFilterValuesRequest) String() string {
 func (*ListIncidentEventsFilterValuesRequest) ProtoMessage() {}
 
 func (x *ListIncidentEventsFilterValuesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[32]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1640,7 +1904,7 @@ func (x *ListIncidentEventsFilterValuesRequest) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use ListIncidentEventsFilterValuesRequest.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsFilterValuesRequest) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{32}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *ListIncidentEventsFilterValuesRequest) GetFilter() *IncidentEventQueryFilter {
@@ -1659,7 +1923,7 @@ type ListIncidentEventsFilterValuesResponse struct {
 
 func (x *ListIncidentEventsFilterValuesResponse) Reset() {
 	*x = ListIncidentEventsFilterValuesResponse{}
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[33]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1671,7 +1935,7 @@ func (x *ListIncidentEventsFilterValuesResponse) String() string {
 func (*ListIncidentEventsFilterValuesResponse) ProtoMessage() {}
 
 func (x *ListIncidentEventsFilterValuesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[33]
+	mi := &file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1684,7 +1948,7 @@ func (x *ListIncidentEventsFilterValuesResponse) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use ListIncidentEventsFilterValuesResponse.ProtoReflect.Descriptor instead.
 func (*ListIncidentEventsFilterValuesResponse) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{33}
+	return file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *ListIncidentEventsFilterValuesResponse) GetFiltersValues() *IncidentQueryFiltersValues {
@@ -1801,7 +2065,25 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"T*\x19Resolve incidents request2(Request to resolve one or more incidents\xd2\x01\fincident_ids\"\xf6\x01\n" +
 	"\x18ResolveIncidentsResponse\x12o\n" +
 	"\tincidents\x18\x01 \x03(\v2(.com.coralogixapis.incidents.v1.IncidentB'\x9aA$2\"List of incidents after resolutionR\tincidents:i\x9aAf\n" +
-	"d*\x1aResolve incidents response2:Response containing the updated incidents after resolution\xd2\x01\tincidents\"\x8a\x04\n" +
+	"d*\x1aResolve incidents response2:Response containing the updated incidents after resolution\xd2\x01\tincidents\"\xd1\x01\n" +
+	"\x1bGetIncidentByEventIdRequest\x12~\n" +
+	"\bevent_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBE\x9aAB22Event ID associated to the Incident to acknowledgeJ\f\"event_id_1\"R\aeventId:2\x9aA/\n" +
+	"-* Get incident by event id request\xd2\x01\bevent_id\"\xe2\x01\n" +
+	"\x1cGetIncidentByEventIdResponse\x12a\n" +
+	"\bincident\x18\x01 \x01(\v2(.com.coralogixapis.incidents.v1.IncidentB\x1b\x9aA\x182\x16The requested incidentR\bincident:_\x9aA\\\n" +
+	"Z*!Get incident by event id response2*Response containing the requested incident\xd2\x01\bincident\"\x82\x02\n" +
+	"#AcknowledgeIncidentByEventIdRequest\x12~\n" +
+	"\bevent_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBE\x9aAB22Event ID associated to the Incident to acknowledgeJ\f\"event_id_1\"R\aeventId:[\x9aAX\n" +
+	"V*(Acknowledge incident by event id request2\x1fRequest to acknowledge incident\xd2\x01\bevent_id\"\x8c\x02\n" +
+	"$AcknowledgeIncidentByEventIdResponse\x12h\n" +
+	"\bincident\x18\x02 \x01(\v2(.com.coralogixapis.incidents.v1.IncidentB\"\x9aA\x1f2\x1dIncident after acknowledgmentR\bincident:z\x9aAw\n" +
+	"u*)Acknowledge incident by event id response2=Response containing the updated incident after acknowledgment\xd2\x01\bincident\"\xf4\x01\n" +
+	"\x1fResolveIncidentByEventIdRequest\x12z\n" +
+	"\bevent_id\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueBA\x9aA>2.Event ID associated to the Incident to resolveJ\f\"event_id_1\"R\aeventId:U\x9aAR\n" +
+	"P*\x19Resolve incidents request2(Request to resolve one or more incidents\xd2\x01\bevent_id\"\x80\x02\n" +
+	" ResolveIncidentByEventIdResponse\x12d\n" +
+	"\bincident\x18\x02 \x01(\v2(.com.coralogixapis.incidents.v1.IncidentB\x1e\x9aA\x1b2\x19Incident after resolutionR\bincident:v\x9aAs\n" +
+	"q*)Acknowledge incident by event id response29Response containing the updated incident after resolution\xd2\x01\bincident\"\x8a\x04\n" +
 	"%GetIncidentUsingCorrelationKeyRequest\x12\x8b\x01\n" +
 	"\x0fcorrelation_key\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueBD\x9aAA2(Correlation key to identify the incidentJ\x15\"correlation_key_123\"R\x0ecorrelationKey\x12\xaf\x01\n" +
 	"\x16incident_point_in_time\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampB^\x9aA[2ATimestamp to identify the specific point in time for the incidentJ\x16\"2024-01-01T00:00:00Z\"R\x13incidentPointInTime:\xa0\x01\x9aA\x9c\x01\n" +
@@ -1840,7 +2122,7 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x0efilters_values\x18\x01 \x01(\v2:.com.coralogixapis.incidents.v1.IncidentQueryFiltersValuesB0\x9aA-2+Available filter values for incident eventsR\rfiltersValues:u\x9aAr\n" +
 	"p*+List incident events filter values response2AA response containing available filter values for incident events*`\n" +
 	"\x1dIncidentEventOrderByFieldType\x12?\n" +
-	";INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED\x10\x002\xcd6\n" +
+	";INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED\x10\x002\x86B\n" +
 	"\x10IncidentsService\x12\xa6\x03\n" +
 	"\vGetIncident\x122.com.coralogixapis.incidents.v1.GetIncidentRequest\x1a3.com.coralogixapis.incidents.v1.GetIncidentResponse\"\xad\x02\x9aA\xfd\x01\n" +
 	"\x11Incidents service\x12\x12Get incident by ID\x1aORetrieve detailed information about a single incident by its unique identifier.J\x14\n" +
@@ -1962,7 +2244,40 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj/\n" +
 	"\x16x-coralogixPermissions\x12\x152\x13\n" +
 	"\x11\x1a\x0fincidents:closeʸ\x02\x13\n" +
-	"\x11Resolve incidents\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/incidents:resolve\x12\xf1\x01\n" +
+	"\x11Resolve incidents\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/incidents:resolve\x12\xdc\x03\n" +
+	"\x14GetIncidentByEventId\x12;.com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest\x1a<.com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse\"\xc8\x02\x9aA\xfd\x01\n" +
+	"\x11Incidents service\x12\x12Get incident by ID\x1aORetrieve detailed information about a single incident by its unique identifier.J\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server errorj.\n" +
+	"\x16x-coralogixPermissions\x12\x142\x12\n" +
+	"\x10\x1a\x0eincidents:readʸ\x02\x1a\n" +
+	"\x18Get incident by event id\x82\xd3\xe4\x93\x02#\x12!/v1/incidents/by:event/{event_id}\x12\xfb\x03\n" +
+	"\x1cAcknowledgeIncidentByEventId\x12C.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest\x1aD.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse\"\xcf\x02\x9aA\xed\x01\n" +
+	"\x11Incidents service\x12 Acknowledge incident by event id\x1a*Mark incident as acknowledged by event id.J\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server errorj5\n" +
+	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
+	"\x17\x1a\x15incidents:acknowledgeʸ\x02\"\n" +
+	" Acknowledge incident by event id\x82\xd3\xe4\x93\x022:\x01*\"-/v1/by:event/incidents:acknowledge/{event_id}\x12\xd9\x03\n" +
+	"\x18ResolveIncidentByEventId\x12?.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest\x1a@.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse\"\xb9\x02\x9aA\xdf\x01\n" +
+	"\x11Incidents service\x12\x1cResolve incident by event id\x1a&Mark incident as resolved by event id.J\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server errorj/\n" +
+	"\x16x-coralogixPermissions\x12\x152\x13\n" +
+	"\x11\x1a\x0fincidents:closeʸ\x02\x1e\n" +
+	"\x1cResolve incident by event id\x82\xd3\xe4\x93\x02.:\x01*\")/v1/by:event/incidents:resolve/{event_id}\x12\xf1\x01\n" +
 	"\x1eGetIncidentUsingCorrelationKey\x12E.com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest\x1aF.com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse\"@ʸ\x02<\n" +
 	":Get incident by correlation key and specific point in time\x12\xe0\x03\n" +
 	"\x12ListIncidentEvents\x129.com.coralogixapis.incidents.v1.ListIncidentEventsRequest\x1a:.com.coralogixapis.incidents.v1.ListIncidentEventsResponse\"\xd2\x02\x9aA\x87\x02\n" +
@@ -2014,7 +2329,7 @@ func file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDescGZIP() [
 }
 
 var file_com_coralogixapis_incidents_v1_incidents_service_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes = make([]protoimpl.MessageInfo, 35)
+var file_com_coralogixapis_incidents_v1_incidents_service_proto_msgTypes = make([]protoimpl.MessageInfo, 41)
 var file_com_coralogixapis_incidents_v1_incidents_service_proto_goTypes = []any{
 	(IncidentEventOrderByFieldType)(0),             // 0: com.coralogixapis.incidents.v1.IncidentEventOrderByFieldType
 	(*GetIncidentRequest)(nil),                     // 1: com.coralogixapis.incidents.v1.GetIncidentRequest
@@ -2042,120 +2357,138 @@ var file_com_coralogixapis_incidents_v1_incidents_service_proto_goTypes = []any{
 	(*CloseIncidentsResponse)(nil),                 // 23: com.coralogixapis.incidents.v1.CloseIncidentsResponse
 	(*ResolveIncidentsRequest)(nil),                // 24: com.coralogixapis.incidents.v1.ResolveIncidentsRequest
 	(*ResolveIncidentsResponse)(nil),               // 25: com.coralogixapis.incidents.v1.ResolveIncidentsResponse
-	(*GetIncidentUsingCorrelationKeyRequest)(nil),  // 26: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest
-	(*GetIncidentUsingCorrelationKeyResponse)(nil), // 27: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse
-	(*ListIncidentEventsRequest)(nil),              // 28: com.coralogixapis.incidents.v1.ListIncidentEventsRequest
-	(*ListIncidentEventRequestOrderBy)(nil),        // 29: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy
-	(*ListIncidentEventsResponse)(nil),             // 30: com.coralogixapis.incidents.v1.ListIncidentEventsResponse
-	(*ListIncidentEventsTotalCountRequest)(nil),    // 31: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest
-	(*ListIncidentEventsTotalCountResponse)(nil),   // 32: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse
-	(*ListIncidentEventsFilterValuesRequest)(nil),  // 33: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest
-	(*ListIncidentEventsFilterValuesResponse)(nil), // 34: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse
-	nil,                                // 35: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry
-	(*wrapperspb.StringValue)(nil),     // 36: google.protobuf.StringValue
-	(*Incident)(nil),                   // 37: com.coralogixapis.incidents.v1.Incident
-	(*IncidentQueryFilter)(nil),        // 38: com.coralogixapis.incidents.v1.IncidentQueryFilter
-	(*OrderBy)(nil),                    // 39: com.coralogixapis.incidents.v1.OrderBy
-	(*wrapperspb.UInt32Value)(nil),     // 40: google.protobuf.UInt32Value
-	(*GroupBy)(nil),                    // 41: com.coralogixapis.incidents.v1.GroupBy
-	(*IncidentAggregation)(nil),        // 42: com.coralogixapis.incidents.v1.IncidentAggregation
-	(*IncidentQueryFiltersValues)(nil), // 43: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
-	(*IncidentEvent)(nil),              // 44: com.coralogixapis.incidents.v1.IncidentEvent
-	(*UserDetails)(nil),                // 45: com.coralogixapis.incidents.v1.UserDetails
-	(*timestamppb.Timestamp)(nil),      // 46: google.protobuf.Timestamp
-	(*IncidentEventQueryFilter)(nil),   // 47: com.coralogixapis.incidents.v1.IncidentEventQueryFilter
-	(OrderByDirection)(0),              // 48: com.coralogixapis.incidents.v1.OrderByDirection
-	(*IncidentEventExtended)(nil),      // 49: com.coralogixapis.incidents.v1.IncidentEventExtended
-	(*wrapperspb.UInt64Value)(nil),     // 50: google.protobuf.UInt64Value
-	(*wrapperspb.BoolValue)(nil),       // 51: google.protobuf.BoolValue
+	(*GetIncidentByEventIdRequest)(nil),            // 26: com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest
+	(*GetIncidentByEventIdResponse)(nil),           // 27: com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse
+	(*AcknowledgeIncidentByEventIdRequest)(nil),    // 28: com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest
+	(*AcknowledgeIncidentByEventIdResponse)(nil),   // 29: com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse
+	(*ResolveIncidentByEventIdRequest)(nil),        // 30: com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest
+	(*ResolveIncidentByEventIdResponse)(nil),       // 31: com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse
+	(*GetIncidentUsingCorrelationKeyRequest)(nil),  // 32: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest
+	(*GetIncidentUsingCorrelationKeyResponse)(nil), // 33: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse
+	(*ListIncidentEventsRequest)(nil),              // 34: com.coralogixapis.incidents.v1.ListIncidentEventsRequest
+	(*ListIncidentEventRequestOrderBy)(nil),        // 35: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy
+	(*ListIncidentEventsResponse)(nil),             // 36: com.coralogixapis.incidents.v1.ListIncidentEventsResponse
+	(*ListIncidentEventsTotalCountRequest)(nil),    // 37: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest
+	(*ListIncidentEventsTotalCountResponse)(nil),   // 38: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse
+	(*ListIncidentEventsFilterValuesRequest)(nil),  // 39: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest
+	(*ListIncidentEventsFilterValuesResponse)(nil), // 40: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse
+	nil,                                // 41: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry
+	(*wrapperspb.StringValue)(nil),     // 42: google.protobuf.StringValue
+	(*Incident)(nil),                   // 43: com.coralogixapis.incidents.v1.Incident
+	(*IncidentQueryFilter)(nil),        // 44: com.coralogixapis.incidents.v1.IncidentQueryFilter
+	(*OrderBy)(nil),                    // 45: com.coralogixapis.incidents.v1.OrderBy
+	(*wrapperspb.UInt32Value)(nil),     // 46: google.protobuf.UInt32Value
+	(*GroupBy)(nil),                    // 47: com.coralogixapis.incidents.v1.GroupBy
+	(*IncidentAggregation)(nil),        // 48: com.coralogixapis.incidents.v1.IncidentAggregation
+	(*IncidentQueryFiltersValues)(nil), // 49: com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
+	(*IncidentEvent)(nil),              // 50: com.coralogixapis.incidents.v1.IncidentEvent
+	(*UserDetails)(nil),                // 51: com.coralogixapis.incidents.v1.UserDetails
+	(*timestamppb.Timestamp)(nil),      // 52: google.protobuf.Timestamp
+	(*IncidentEventQueryFilter)(nil),   // 53: com.coralogixapis.incidents.v1.IncidentEventQueryFilter
+	(OrderByDirection)(0),              // 54: com.coralogixapis.incidents.v1.OrderByDirection
+	(*IncidentEventExtended)(nil),      // 55: com.coralogixapis.incidents.v1.IncidentEventExtended
+	(*wrapperspb.UInt64Value)(nil),     // 56: google.protobuf.UInt64Value
+	(*wrapperspb.BoolValue)(nil),       // 57: google.protobuf.BoolValue
 }
 var file_com_coralogixapis_incidents_v1_incidents_service_proto_depIdxs = []int32{
-	36, // 0: com.coralogixapis.incidents.v1.GetIncidentRequest.id:type_name -> google.protobuf.StringValue
-	37, // 1: com.coralogixapis.incidents.v1.GetIncidentResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
-	37, // 2: com.coralogixapis.incidents.v1.ListIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 0: com.coralogixapis.incidents.v1.GetIncidentRequest.id:type_name -> google.protobuf.StringValue
+	43, // 1: com.coralogixapis.incidents.v1.GetIncidentResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
+	43, // 2: com.coralogixapis.incidents.v1.ListIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
 	9,  // 3: com.coralogixapis.incidents.v1.ListIncidentsResponse.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationResponse
-	38, // 4: com.coralogixapis.incidents.v1.ListIncidentsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
+	44, // 4: com.coralogixapis.incidents.v1.ListIncidentsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
 	8,  // 5: com.coralogixapis.incidents.v1.ListIncidentsRequest.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationRequest
-	39, // 6: com.coralogixapis.incidents.v1.ListIncidentsRequest.order_bys:type_name -> com.coralogixapis.incidents.v1.OrderBy
-	36, // 7: com.coralogixapis.incidents.v1.BatchGetIncidentRequest.ids:type_name -> google.protobuf.StringValue
-	35, // 8: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.incidents:type_name -> com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry
-	36, // 9: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.not_found_ids:type_name -> google.protobuf.StringValue
-	36, // 10: com.coralogixapis.incidents.v1.DeleteIncidentRequest.id:type_name -> google.protobuf.StringValue
-	40, // 11: com.coralogixapis.incidents.v1.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
-	36, // 12: com.coralogixapis.incidents.v1.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
-	40, // 13: com.coralogixapis.incidents.v1.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
-	36, // 14: com.coralogixapis.incidents.v1.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
-	38, // 15: com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
-	41, // 16: com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest.group_bys:type_name -> com.coralogixapis.incidents.v1.GroupBy
+	45, // 6: com.coralogixapis.incidents.v1.ListIncidentsRequest.order_bys:type_name -> com.coralogixapis.incidents.v1.OrderBy
+	42, // 7: com.coralogixapis.incidents.v1.BatchGetIncidentRequest.ids:type_name -> google.protobuf.StringValue
+	41, // 8: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.incidents:type_name -> com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry
+	42, // 9: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.not_found_ids:type_name -> google.protobuf.StringValue
+	42, // 10: com.coralogixapis.incidents.v1.DeleteIncidentRequest.id:type_name -> google.protobuf.StringValue
+	46, // 11: com.coralogixapis.incidents.v1.PaginationRequest.page_size:type_name -> google.protobuf.UInt32Value
+	42, // 12: com.coralogixapis.incidents.v1.PaginationRequest.page_token:type_name -> google.protobuf.StringValue
+	46, // 13: com.coralogixapis.incidents.v1.PaginationResponse.total_size:type_name -> google.protobuf.UInt32Value
+	42, // 14: com.coralogixapis.incidents.v1.PaginationResponse.next_page_token:type_name -> google.protobuf.StringValue
+	44, // 15: com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
+	47, // 16: com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest.group_bys:type_name -> com.coralogixapis.incidents.v1.GroupBy
 	8,  // 17: com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationRequest
-	42, // 18: com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse.incident_aggs:type_name -> com.coralogixapis.incidents.v1.IncidentAggregation
+	48, // 18: com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse.incident_aggs:type_name -> com.coralogixapis.incidents.v1.IncidentAggregation
 	9,  // 19: com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationResponse
-	38, // 20: com.coralogixapis.incidents.v1.GetFilterValuesRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
-	43, // 21: com.coralogixapis.incidents.v1.GetFilterValuesResponse.filters_values:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
-	36, // 22: com.coralogixapis.incidents.v1.GetIncidentEventsRequest.incident_id:type_name -> google.protobuf.StringValue
-	44, // 23: com.coralogixapis.incidents.v1.GetIncidentEventsResponse.incident_events:type_name -> com.coralogixapis.incidents.v1.IncidentEvent
-	36, // 24: com.coralogixapis.incidents.v1.AssignIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
-	45, // 25: com.coralogixapis.incidents.v1.AssignIncidentsRequest.assigned_to:type_name -> com.coralogixapis.incidents.v1.UserDetails
-	36, // 26: com.coralogixapis.incidents.v1.UnassignIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
-	37, // 27: com.coralogixapis.incidents.v1.UnassignIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
-	37, // 28: com.coralogixapis.incidents.v1.AssignIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
-	36, // 29: com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
-	37, // 30: com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
-	36, // 31: com.coralogixapis.incidents.v1.CloseIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
-	37, // 32: com.coralogixapis.incidents.v1.CloseIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
-	36, // 33: com.coralogixapis.incidents.v1.ResolveIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
-	37, // 34: com.coralogixapis.incidents.v1.ResolveIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
-	36, // 35: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest.correlation_key:type_name -> google.protobuf.StringValue
-	46, // 36: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest.incident_point_in_time:type_name -> google.protobuf.Timestamp
-	37, // 37: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
-	47, // 38: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
-	8,  // 39: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationRequest
-	29, // 40: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.order_by:type_name -> com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy
-	0,  // 41: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy.field:type_name -> com.coralogixapis.incidents.v1.IncidentEventOrderByFieldType
-	48, // 42: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy.direction:type_name -> com.coralogixapis.incidents.v1.OrderByDirection
-	49, // 43: com.coralogixapis.incidents.v1.ListIncidentEventsResponse.items:type_name -> com.coralogixapis.incidents.v1.IncidentEventExtended
-	9,  // 44: com.coralogixapis.incidents.v1.ListIncidentEventsResponse.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationResponse
-	47, // 45: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
-	50, // 46: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse.count:type_name -> google.protobuf.UInt64Value
-	51, // 47: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
-	47, // 48: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
-	43, // 49: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse.filters_values:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
-	37, // 50: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry.value:type_name -> com.coralogixapis.incidents.v1.Incident
-	1,  // 51: com.coralogixapis.incidents.v1.IncidentsService.GetIncident:input_type -> com.coralogixapis.incidents.v1.GetIncidentRequest
-	5,  // 52: com.coralogixapis.incidents.v1.IncidentsService.BatchGetIncident:input_type -> com.coralogixapis.incidents.v1.BatchGetIncidentRequest
-	4,  // 53: com.coralogixapis.incidents.v1.IncidentsService.ListIncidents:input_type -> com.coralogixapis.incidents.v1.ListIncidentsRequest
-	10, // 54: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentAggregations:input_type -> com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest
-	12, // 55: com.coralogixapis.incidents.v1.IncidentsService.GetFilterValues:input_type -> com.coralogixapis.incidents.v1.GetFilterValuesRequest
-	16, // 56: com.coralogixapis.incidents.v1.IncidentsService.AssignIncidents:input_type -> com.coralogixapis.incidents.v1.AssignIncidentsRequest
-	17, // 57: com.coralogixapis.incidents.v1.IncidentsService.UnassignIncidents:input_type -> com.coralogixapis.incidents.v1.UnassignIncidentsRequest
-	20, // 58: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidents:input_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest
-	22, // 59: com.coralogixapis.incidents.v1.IncidentsService.CloseIncidents:input_type -> com.coralogixapis.incidents.v1.CloseIncidentsRequest
-	14, // 60: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentEvents:input_type -> com.coralogixapis.incidents.v1.GetIncidentEventsRequest
-	24, // 61: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidents:input_type -> com.coralogixapis.incidents.v1.ResolveIncidentsRequest
-	26, // 62: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentUsingCorrelationKey:input_type -> com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest
-	28, // 63: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEvents:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsRequest
-	31, // 64: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsTotalCount:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest
-	33, // 65: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsFilterValues:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest
-	2,  // 66: com.coralogixapis.incidents.v1.IncidentsService.GetIncident:output_type -> com.coralogixapis.incidents.v1.GetIncidentResponse
-	6,  // 67: com.coralogixapis.incidents.v1.IncidentsService.BatchGetIncident:output_type -> com.coralogixapis.incidents.v1.BatchGetIncidentResponse
-	3,  // 68: com.coralogixapis.incidents.v1.IncidentsService.ListIncidents:output_type -> com.coralogixapis.incidents.v1.ListIncidentsResponse
-	11, // 69: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentAggregations:output_type -> com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse
-	13, // 70: com.coralogixapis.incidents.v1.IncidentsService.GetFilterValues:output_type -> com.coralogixapis.incidents.v1.GetFilterValuesResponse
-	19, // 71: com.coralogixapis.incidents.v1.IncidentsService.AssignIncidents:output_type -> com.coralogixapis.incidents.v1.AssignIncidentsResponse
-	18, // 72: com.coralogixapis.incidents.v1.IncidentsService.UnassignIncidents:output_type -> com.coralogixapis.incidents.v1.UnassignIncidentsResponse
-	21, // 73: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidents:output_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse
-	23, // 74: com.coralogixapis.incidents.v1.IncidentsService.CloseIncidents:output_type -> com.coralogixapis.incidents.v1.CloseIncidentsResponse
-	15, // 75: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentEvents:output_type -> com.coralogixapis.incidents.v1.GetIncidentEventsResponse
-	25, // 76: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidents:output_type -> com.coralogixapis.incidents.v1.ResolveIncidentsResponse
-	27, // 77: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentUsingCorrelationKey:output_type -> com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse
-	30, // 78: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEvents:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsResponse
-	32, // 79: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsTotalCount:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse
-	34, // 80: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsFilterValues:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse
-	66, // [66:81] is the sub-list for method output_type
-	51, // [51:66] is the sub-list for method input_type
-	51, // [51:51] is the sub-list for extension type_name
-	51, // [51:51] is the sub-list for extension extendee
-	0,  // [0:51] is the sub-list for field type_name
+	44, // 20: com.coralogixapis.incidents.v1.GetFilterValuesRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFilter
+	49, // 21: com.coralogixapis.incidents.v1.GetFilterValuesResponse.filters_values:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
+	42, // 22: com.coralogixapis.incidents.v1.GetIncidentEventsRequest.incident_id:type_name -> google.protobuf.StringValue
+	50, // 23: com.coralogixapis.incidents.v1.GetIncidentEventsResponse.incident_events:type_name -> com.coralogixapis.incidents.v1.IncidentEvent
+	42, // 24: com.coralogixapis.incidents.v1.AssignIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
+	51, // 25: com.coralogixapis.incidents.v1.AssignIncidentsRequest.assigned_to:type_name -> com.coralogixapis.incidents.v1.UserDetails
+	42, // 26: com.coralogixapis.incidents.v1.UnassignIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
+	43, // 27: com.coralogixapis.incidents.v1.UnassignIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	43, // 28: com.coralogixapis.incidents.v1.AssignIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 29: com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
+	43, // 30: com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 31: com.coralogixapis.incidents.v1.CloseIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
+	43, // 32: com.coralogixapis.incidents.v1.CloseIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 33: com.coralogixapis.incidents.v1.ResolveIncidentsRequest.incident_ids:type_name -> google.protobuf.StringValue
+	43, // 34: com.coralogixapis.incidents.v1.ResolveIncidentsResponse.incidents:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 35: com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest.event_id:type_name -> google.protobuf.StringValue
+	43, // 36: com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 37: com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest.event_id:type_name -> google.protobuf.StringValue
+	43, // 38: com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 39: com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest.event_id:type_name -> google.protobuf.StringValue
+	43, // 40: com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
+	42, // 41: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest.correlation_key:type_name -> google.protobuf.StringValue
+	52, // 42: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest.incident_point_in_time:type_name -> google.protobuf.Timestamp
+	43, // 43: com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse.incident:type_name -> com.coralogixapis.incidents.v1.Incident
+	53, // 44: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
+	8,  // 45: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationRequest
+	35, // 46: com.coralogixapis.incidents.v1.ListIncidentEventsRequest.order_by:type_name -> com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy
+	0,  // 47: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy.field:type_name -> com.coralogixapis.incidents.v1.IncidentEventOrderByFieldType
+	54, // 48: com.coralogixapis.incidents.v1.ListIncidentEventRequestOrderBy.direction:type_name -> com.coralogixapis.incidents.v1.OrderByDirection
+	55, // 49: com.coralogixapis.incidents.v1.ListIncidentEventsResponse.items:type_name -> com.coralogixapis.incidents.v1.IncidentEventExtended
+	9,  // 50: com.coralogixapis.incidents.v1.ListIncidentEventsResponse.pagination:type_name -> com.coralogixapis.incidents.v1.PaginationResponse
+	53, // 51: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
+	56, // 52: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse.count:type_name -> google.protobuf.UInt64Value
+	57, // 53: com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse.reached_limit:type_name -> google.protobuf.BoolValue
+	53, // 54: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest.filter:type_name -> com.coralogixapis.incidents.v1.IncidentEventQueryFilter
+	49, // 55: com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse.filters_values:type_name -> com.coralogixapis.incidents.v1.IncidentQueryFiltersValues
+	43, // 56: com.coralogixapis.incidents.v1.BatchGetIncidentResponse.IncidentsEntry.value:type_name -> com.coralogixapis.incidents.v1.Incident
+	1,  // 57: com.coralogixapis.incidents.v1.IncidentsService.GetIncident:input_type -> com.coralogixapis.incidents.v1.GetIncidentRequest
+	5,  // 58: com.coralogixapis.incidents.v1.IncidentsService.BatchGetIncident:input_type -> com.coralogixapis.incidents.v1.BatchGetIncidentRequest
+	4,  // 59: com.coralogixapis.incidents.v1.IncidentsService.ListIncidents:input_type -> com.coralogixapis.incidents.v1.ListIncidentsRequest
+	10, // 60: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentAggregations:input_type -> com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest
+	12, // 61: com.coralogixapis.incidents.v1.IncidentsService.GetFilterValues:input_type -> com.coralogixapis.incidents.v1.GetFilterValuesRequest
+	16, // 62: com.coralogixapis.incidents.v1.IncidentsService.AssignIncidents:input_type -> com.coralogixapis.incidents.v1.AssignIncidentsRequest
+	17, // 63: com.coralogixapis.incidents.v1.IncidentsService.UnassignIncidents:input_type -> com.coralogixapis.incidents.v1.UnassignIncidentsRequest
+	20, // 64: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidents:input_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest
+	22, // 65: com.coralogixapis.incidents.v1.IncidentsService.CloseIncidents:input_type -> com.coralogixapis.incidents.v1.CloseIncidentsRequest
+	14, // 66: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentEvents:input_type -> com.coralogixapis.incidents.v1.GetIncidentEventsRequest
+	24, // 67: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidents:input_type -> com.coralogixapis.incidents.v1.ResolveIncidentsRequest
+	26, // 68: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentByEventId:input_type -> com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest
+	28, // 69: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidentByEventId:input_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest
+	30, // 70: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidentByEventId:input_type -> com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest
+	32, // 71: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentUsingCorrelationKey:input_type -> com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest
+	34, // 72: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEvents:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsRequest
+	37, // 73: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsTotalCount:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest
+	39, // 74: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsFilterValues:input_type -> com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest
+	2,  // 75: com.coralogixapis.incidents.v1.IncidentsService.GetIncident:output_type -> com.coralogixapis.incidents.v1.GetIncidentResponse
+	6,  // 76: com.coralogixapis.incidents.v1.IncidentsService.BatchGetIncident:output_type -> com.coralogixapis.incidents.v1.BatchGetIncidentResponse
+	3,  // 77: com.coralogixapis.incidents.v1.IncidentsService.ListIncidents:output_type -> com.coralogixapis.incidents.v1.ListIncidentsResponse
+	11, // 78: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentAggregations:output_type -> com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse
+	13, // 79: com.coralogixapis.incidents.v1.IncidentsService.GetFilterValues:output_type -> com.coralogixapis.incidents.v1.GetFilterValuesResponse
+	19, // 80: com.coralogixapis.incidents.v1.IncidentsService.AssignIncidents:output_type -> com.coralogixapis.incidents.v1.AssignIncidentsResponse
+	18, // 81: com.coralogixapis.incidents.v1.IncidentsService.UnassignIncidents:output_type -> com.coralogixapis.incidents.v1.UnassignIncidentsResponse
+	21, // 82: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidents:output_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse
+	23, // 83: com.coralogixapis.incidents.v1.IncidentsService.CloseIncidents:output_type -> com.coralogixapis.incidents.v1.CloseIncidentsResponse
+	15, // 84: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentEvents:output_type -> com.coralogixapis.incidents.v1.GetIncidentEventsResponse
+	25, // 85: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidents:output_type -> com.coralogixapis.incidents.v1.ResolveIncidentsResponse
+	27, // 86: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentByEventId:output_type -> com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse
+	29, // 87: com.coralogixapis.incidents.v1.IncidentsService.AcknowledgeIncidentByEventId:output_type -> com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse
+	31, // 88: com.coralogixapis.incidents.v1.IncidentsService.ResolveIncidentByEventId:output_type -> com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse
+	33, // 89: com.coralogixapis.incidents.v1.IncidentsService.GetIncidentUsingCorrelationKey:output_type -> com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse
+	36, // 90: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEvents:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsResponse
+	38, // 91: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsTotalCount:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse
+	40, // 92: com.coralogixapis.incidents.v1.IncidentsService.ListIncidentEventsFilterValues:output_type -> com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse
+	75, // [75:93] is the sub-list for method output_type
+	57, // [57:75] is the sub-list for method input_type
+	57, // [57:57] is the sub-list for extension type_name
+	57, // [57:57] is the sub-list for extension extendee
+	0,  // [0:57] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_incidents_v1_incidents_service_proto_init() }
@@ -2177,7 +2510,7 @@ func file_com_coralogixapis_incidents_v1_incidents_service_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc), len(file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   35,
+			NumMessages:   41,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

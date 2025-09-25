@@ -442,7 +442,7 @@ allow_policies = [
 
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
-revision = "v1.0.5"
+revision = "v1.0.6"
 allow_policies = [
     "src/com/coralogixapis/incidents/v1/assignee.proto",
     "src/com/coralogixapis/incidents/v1/filter_operators.proto",
