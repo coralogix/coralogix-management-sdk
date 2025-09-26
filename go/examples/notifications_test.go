@@ -484,7 +484,7 @@ func TestGlobalRouter(t *testing.T) {
 		routerDescription = "router-description"
 	} else {
 		routerName = getRes.Router.Name
-		routerName = getRes.Router.Description
+		routerDescription = getRes.Router.Description
 	}
 
 	createOrReplaceRes, err := notificationCenterClient.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
