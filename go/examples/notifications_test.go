@@ -474,13 +474,25 @@ func TestGlobalRouter(t *testing.T) {
 
 	routingRuleName := "TestRoutingRule"
 	connectorId := createConnectorResponse.Connector.Id
+	getRes, err := notificationCenterClient.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
+		Id: routerId,
+	})
+	var routerName string
+	var routerDescription string
+	if err != nil {
+		routerName = "router-name"
+		routerDescription = "router-description"
+	} else {
+		routerName = getRes.Router.Name
+		routerName = getRes.Router.Description
+	}
 
 	createOrReplaceRes, err := notificationCenterClient.CreateOrReplaceGlobalRouter(context.Background(), &cxsdk.CreateOrReplaceGlobalRouterRequest{
 		Router: &cxsdk.GlobalRouter{
 			Id:          &routerId,
-			Name:        "global router",
+			Name:        routerName,
 			EntityType:  cxsdk.EntityTypeAlerts.Enum(),
-			Description: "global router example",
+			Description: routerDescription,
 			Rules: []*cxsdk.RoutingRule{
 				{
 					Name:      &routingRuleName,
@@ -499,7 +511,7 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	getRes, err := notificationCenterClient.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
+	getRes, err = notificationCenterClient.GetGlobalRouter(context.Background(), &cxsdk.GetGlobalRouterRequest{
 		Id: *createOrReplaceRes.Router.Id,
 	})
 	if err != nil {
@@ -553,7 +565,7 @@ func TestGlobalRouter(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	assert.Equal(t, getRes.Router.Name, "global router")
+	assert.Equal(t, getRes.Router.Name, routerName)
 }
 
 func TestCreateAlertWithDestination(t *testing.T) {
