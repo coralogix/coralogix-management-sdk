@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package com.coralogixapis.dashboards.v1.common;
+
+import "google/protobuf/wrappers.proto";
+
+message DataShapeField {
+  repeated google.protobuf.StringValue keypath = 1;
+}

@@ -99,6 +99,7 @@ type Annotation_Source struct {
 	//	*Annotation_Source_Metrics
 	//	*Annotation_Source_Logs
 	//	*Annotation_Source_Spans
+	//	*Annotation_Source_Dataprime
 	Value         isAnnotation_Source_Value `protobuf_oneof:"value"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -168,6 +169,15 @@ func (x *Annotation_Source) GetSpans() *Annotation_SpansSource {
 	return nil
 }
 
+func (x *Annotation_Source) GetDataprime() *Annotation_DataprimeSource {
+	if x != nil {
+		if x, ok := x.Value.(*Annotation_Source_Dataprime); ok {
+			return x.Dataprime
+		}
+	}
+	return nil
+}
+
 type isAnnotation_Source_Value interface {
 	isAnnotation_Source_Value()
 }
@@ -184,11 +194,17 @@ type Annotation_Source_Spans struct {
 	Spans *Annotation_SpansSource `protobuf:"bytes,3,opt,name=spans,proto3,oneof"`
 }
 
+type Annotation_Source_Dataprime struct {
+	Dataprime *Annotation_DataprimeSource `protobuf:"bytes,4,opt,name=dataprime,proto3,oneof"`
+}
+
 func (*Annotation_Source_Metrics) isAnnotation_Source_Value() {}
 
 func (*Annotation_Source_Logs) isAnnotation_Source_Value() {}
 
 func (*Annotation_Source_Spans) isAnnotation_Source_Value() {}
+
+func (*Annotation_Source_Dataprime) isAnnotation_Source_Value() {}
 
 type Annotation_MetricsSource struct {
 	state           protoimpl.MessageState             `protogen:"open.v1"`
@@ -410,6 +426,74 @@ func (x *Annotation_SpansSource) GetDataModeType() common.DataModeType {
 	return common.DataModeType(0)
 }
 
+type Annotation_DataprimeSource struct {
+	state           protoimpl.MessageState               `protogen:"open.v1"`
+	Query           *common.DataprimeQuery               `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
+	Strategy        *Annotation_DataprimeSource_Strategy `protobuf:"bytes,2,opt,name=strategy,proto3" json:"strategy,omitempty"`
+	MessageTemplate *wrapperspb.StringValue              `protobuf:"bytes,3,opt,name=message_template,json=messageTemplate,proto3" json:"message_template,omitempty"`
+	DataModeType    common.DataModeType                  `protobuf:"varint,4,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.common.DataModeType" json:"data_mode_type,omitempty"` // TODO: Add labels later
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
+}
+
+func (x *Annotation_DataprimeSource) Reset() {
+	*x = Annotation_DataprimeSource{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Annotation_DataprimeSource) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Annotation_DataprimeSource) ProtoMessage() {}
+
+func (x *Annotation_DataprimeSource) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Annotation_DataprimeSource.ProtoReflect.Descriptor instead.
+func (*Annotation_DataprimeSource) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4}
+}
+
+func (x *Annotation_DataprimeSource) GetQuery() *common.DataprimeQuery {
+	if x != nil {
+		return x.Query
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource) GetStrategy() *Annotation_DataprimeSource_Strategy {
+	if x != nil {
+		return x.Strategy
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource) GetMessageTemplate() *wrapperspb.StringValue {
+	if x != nil {
+		return x.MessageTemplate
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource) GetDataModeType() common.DataModeType {
+	if x != nil {
+		return x.DataModeType
+	}
+	return common.DataModeType(0)
+}
+
 // A strategy for turning metrics data into annotations
 type Annotation_MetricsSource_Strategy struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -423,7 +507,7 @@ type Annotation_MetricsSource_Strategy struct {
 
 func (x *Annotation_MetricsSource_Strategy) Reset() {
 	*x = Annotation_MetricsSource_Strategy{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[6]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -435,7 +519,7 @@ func (x *Annotation_MetricsSource_Strategy) String() string {
 func (*Annotation_MetricsSource_Strategy) ProtoMessage() {}
 
 func (x *Annotation_MetricsSource_Strategy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[5]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[6]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -487,7 +571,7 @@ type Annotation_MetricsSource_StartTimeMetric struct {
 
 func (x *Annotation_MetricsSource_StartTimeMetric) Reset() {
 	*x = Annotation_MetricsSource_StartTimeMetric{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -499,7 +583,7 @@ func (x *Annotation_MetricsSource_StartTimeMetric) String() string {
 func (*Annotation_MetricsSource_StartTimeMetric) ProtoMessage() {}
 
 func (x *Annotation_MetricsSource_StartTimeMetric) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[6]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -529,7 +613,7 @@ type Annotation_LogsSource_Strategy struct {
 
 func (x *Annotation_LogsSource_Strategy) Reset() {
 	*x = Annotation_LogsSource_Strategy{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -541,7 +625,7 @@ func (x *Annotation_LogsSource_Strategy) String() string {
 func (*Annotation_LogsSource_Strategy) ProtoMessage() {}
 
 func (x *Annotation_LogsSource_Strategy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[7]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -622,7 +706,7 @@ type Annotation_LogsSource_Strategy_Instant struct {
 
 func (x *Annotation_LogsSource_Strategy_Instant) Reset() {
 	*x = Annotation_LogsSource_Strategy_Instant{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -634,7 +718,7 @@ func (x *Annotation_LogsSource_Strategy_Instant) String() string {
 func (*Annotation_LogsSource_Strategy_Instant) ProtoMessage() {}
 
 func (x *Annotation_LogsSource_Strategy_Instant) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[8]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -667,7 +751,7 @@ type Annotation_LogsSource_Strategy_Range struct {
 
 func (x *Annotation_LogsSource_Strategy_Range) Reset() {
 	*x = Annotation_LogsSource_Strategy_Range{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[10]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -679,7 +763,7 @@ func (x *Annotation_LogsSource_Strategy_Range) String() string {
 func (*Annotation_LogsSource_Strategy_Range) ProtoMessage() {}
 
 func (x *Annotation_LogsSource_Strategy_Range) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[9]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[10]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -719,7 +803,7 @@ type Annotation_LogsSource_Strategy_Duration struct {
 
 func (x *Annotation_LogsSource_Strategy_Duration) Reset() {
 	*x = Annotation_LogsSource_Strategy_Duration{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[11]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -731,7 +815,7 @@ func (x *Annotation_LogsSource_Strategy_Duration) String() string {
 func (*Annotation_LogsSource_Strategy_Duration) ProtoMessage() {}
 
 func (x *Annotation_LogsSource_Strategy_Duration) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[11]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -775,7 +859,7 @@ type Annotation_SpansSource_Strategy struct {
 
 func (x *Annotation_SpansSource_Strategy) Reset() {
 	*x = Annotation_SpansSource_Strategy{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[12]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -787,7 +871,7 @@ func (x *Annotation_SpansSource_Strategy) String() string {
 func (*Annotation_SpansSource_Strategy) ProtoMessage() {}
 
 func (x *Annotation_SpansSource_Strategy) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[12]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -868,7 +952,7 @@ type Annotation_SpansSource_Strategy_Instant struct {
 
 func (x *Annotation_SpansSource_Strategy_Instant) Reset() {
 	*x = Annotation_SpansSource_Strategy_Instant{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[13]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -880,7 +964,7 @@ func (x *Annotation_SpansSource_Strategy_Instant) String() string {
 func (*Annotation_SpansSource_Strategy_Instant) ProtoMessage() {}
 
 func (x *Annotation_SpansSource_Strategy_Instant) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[12]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[13]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -913,7 +997,7 @@ type Annotation_SpansSource_Strategy_Range struct {
 
 func (x *Annotation_SpansSource_Strategy_Range) Reset() {
 	*x = Annotation_SpansSource_Strategy_Range{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[14]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -925,7 +1009,7 @@ func (x *Annotation_SpansSource_Strategy_Range) String() string {
 func (*Annotation_SpansSource_Strategy_Range) ProtoMessage() {}
 
 func (x *Annotation_SpansSource_Strategy_Range) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[13]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[14]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -965,7 +1049,7 @@ type Annotation_SpansSource_Strategy_Duration struct {
 
 func (x *Annotation_SpansSource_Strategy_Duration) Reset() {
 	*x = Annotation_SpansSource_Strategy_Duration{}
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[15]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -977,7 +1061,7 @@ func (x *Annotation_SpansSource_Strategy_Duration) String() string {
 func (*Annotation_SpansSource_Strategy_Duration) ProtoMessage() {}
 
 func (x *Annotation_SpansSource_Strategy_Duration) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[14]
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[15]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1007,21 +1091,268 @@ func (x *Annotation_SpansSource_Strategy_Duration) GetDurationField() *common.Ob
 	return nil
 }
 
+type Annotation_DataprimeSource_Strategy struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to Value:
+	//
+	//	*Annotation_DataprimeSource_Strategy_Instant_
+	//	*Annotation_DataprimeSource_Strategy_Range_
+	//	*Annotation_DataprimeSource_Strategy_Duration_
+	Value         isAnnotation_DataprimeSource_Strategy_Value `protobuf_oneof:"value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Annotation_DataprimeSource_Strategy) Reset() {
+	*x = Annotation_DataprimeSource_Strategy{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Annotation_DataprimeSource_Strategy) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Annotation_DataprimeSource_Strategy) ProtoMessage() {}
+
+func (x *Annotation_DataprimeSource_Strategy) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Annotation_DataprimeSource_Strategy.ProtoReflect.Descriptor instead.
+func (*Annotation_DataprimeSource_Strategy) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0}
+}
+
+func (x *Annotation_DataprimeSource_Strategy) GetValue() isAnnotation_DataprimeSource_Strategy_Value {
+	if x != nil {
+		return x.Value
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource_Strategy) GetInstant() *Annotation_DataprimeSource_Strategy_Instant {
+	if x != nil {
+		if x, ok := x.Value.(*Annotation_DataprimeSource_Strategy_Instant_); ok {
+			return x.Instant
+		}
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource_Strategy) GetRange() *Annotation_DataprimeSource_Strategy_Range {
+	if x != nil {
+		if x, ok := x.Value.(*Annotation_DataprimeSource_Strategy_Range_); ok {
+			return x.Range
+		}
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource_Strategy) GetDuration() *Annotation_DataprimeSource_Strategy_Duration {
+	if x != nil {
+		if x, ok := x.Value.(*Annotation_DataprimeSource_Strategy_Duration_); ok {
+			return x.Duration
+		}
+	}
+	return nil
+}
+
+type isAnnotation_DataprimeSource_Strategy_Value interface {
+	isAnnotation_DataprimeSource_Strategy_Value()
+}
+
+type Annotation_DataprimeSource_Strategy_Instant_ struct {
+	Instant *Annotation_DataprimeSource_Strategy_Instant `protobuf:"bytes,1,opt,name=instant,proto3,oneof"`
+}
+
+type Annotation_DataprimeSource_Strategy_Range_ struct {
+	Range *Annotation_DataprimeSource_Strategy_Range `protobuf:"bytes,2,opt,name=range,proto3,oneof"`
+}
+
+type Annotation_DataprimeSource_Strategy_Duration_ struct {
+	Duration *Annotation_DataprimeSource_Strategy_Duration `protobuf:"bytes,3,opt,name=duration,proto3,oneof"`
+}
+
+func (*Annotation_DataprimeSource_Strategy_Instant_) isAnnotation_DataprimeSource_Strategy_Value() {}
+
+func (*Annotation_DataprimeSource_Strategy_Range_) isAnnotation_DataprimeSource_Strategy_Value() {}
+
+func (*Annotation_DataprimeSource_Strategy_Duration_) isAnnotation_DataprimeSource_Strategy_Value() {}
+
+type Annotation_DataprimeSource_Strategy_Instant struct {
+	state          protoimpl.MessageState `protogen:"open.v1"`
+	TimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=timestamp_field,json=timestampField,proto3" json:"timestamp_field,omitempty"`
+	unknownFields  protoimpl.UnknownFields
+	sizeCache      protoimpl.SizeCache
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Instant) Reset() {
+	*x = Annotation_DataprimeSource_Strategy_Instant{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Instant) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Annotation_DataprimeSource_Strategy_Instant) ProtoMessage() {}
+
+func (x *Annotation_DataprimeSource_Strategy_Instant) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Annotation_DataprimeSource_Strategy_Instant.ProtoReflect.Descriptor instead.
+func (*Annotation_DataprimeSource_Strategy_Instant) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 0}
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Instant) GetTimestampField() *common.DataShapeField {
+	if x != nil {
+		return x.TimestampField
+	}
+	return nil
+}
+
+type Annotation_DataprimeSource_Strategy_Range struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	StartTimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
+	EndTimestampField   *common.DataShapeField `protobuf:"bytes,2,opt,name=end_timestamp_field,json=endTimestampField,proto3" json:"end_timestamp_field,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Range) Reset() {
+	*x = Annotation_DataprimeSource_Strategy_Range{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[18]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Range) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Annotation_DataprimeSource_Strategy_Range) ProtoMessage() {}
+
+func (x *Annotation_DataprimeSource_Strategy_Range) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[18]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Annotation_DataprimeSource_Strategy_Range.ProtoReflect.Descriptor instead.
+func (*Annotation_DataprimeSource_Strategy_Range) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 1}
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Range) GetStartTimestampField() *common.DataShapeField {
+	if x != nil {
+		return x.StartTimestampField
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Range) GetEndTimestampField() *common.DataShapeField {
+	if x != nil {
+		return x.EndTimestampField
+	}
+	return nil
+}
+
+type Annotation_DataprimeSource_Strategy_Duration struct {
+	state               protoimpl.MessageState `protogen:"open.v1"`
+	StartTimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
+	DurationField       *common.DataShapeField `protobuf:"bytes,2,opt,name=duration_field,json=durationField,proto3" json:"duration_field,omitempty"`
+	unknownFields       protoimpl.UnknownFields
+	sizeCache           protoimpl.SizeCache
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Duration) Reset() {
+	*x = Annotation_DataprimeSource_Strategy_Duration{}
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[19]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Duration) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Annotation_DataprimeSource_Strategy_Duration) ProtoMessage() {}
+
+func (x *Annotation_DataprimeSource_Strategy_Duration) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[19]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Annotation_DataprimeSource_Strategy_Duration.ProtoReflect.Descriptor instead.
+func (*Annotation_DataprimeSource_Strategy_Duration) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 2}
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Duration) GetStartTimestampField() *common.DataShapeField {
+	if x != nil {
+		return x.StartTimestampField
+	}
+	return nil
+}
+
+func (x *Annotation_DataprimeSource_Strategy_Duration) GetDurationField() *common.DataShapeField {
+	if x != nil {
+		return x.DurationField
+	}
+	return nil
+}
+
 var File_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xb1\x1e\n" +
+	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a=com/coralogixapis/dashboards/v1/common/data_shape_field.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xba)\n" +
 	"\n" +
 	"Annotation\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04name\x124\n" +
 	"\aenabled\x18\x03 \x01(\v2\x1a.google.protobuf.BoolValueR\aenabled\x12Z\n" +
-	"\x06source\x18\x04 \x01(\v2B.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SourceR\x06source\x1a\xb7\x02\n" +
+	"\x06source\x18\x04 \x01(\v2B.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SourceR\x06source\x1a\xa4\x03\n" +
 	"\x06Source\x12e\n" +
 	"\ametrics\x18\x01 \x01(\v2I.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSourceH\x00R\ametrics\x12\\\n" +
 	"\x04logs\x18\x02 \x01(\v2F.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSourceH\x00R\x04logs\x12_\n" +
-	"\x05spans\x18\x03 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSourceH\x00R\x05spansB\a\n" +
+	"\x05spans\x18\x03 \x01(\v2G.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSourceH\x00R\x05spans\x12k\n" +
+	"\tdataprime\x18\x04 \x01(\v2K.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSourceH\x00R\tdataprimeB\a\n" +
 	"\x05value\x1a\x89\x04\n" +
 	"\rMetricsSource\x12V\n" +
 	"\fpromql_query\x18\x01 \x01(\v23.com.coralogixapis.dashboards.v1.common.PromQlQueryR\vpromqlQuery\x12n\n" +
@@ -1072,6 +1403,25 @@ const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawD
 	"\bDuration\x12l\n" +
 	"\x15start_timestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x13startTimestampField\x12_\n" +
 	"\x0eduration_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\rdurationFieldB\a\n" +
+	"\x05value\x1a\x99\n" +
+	"\n" +
+	"\x0fDataprimeSource\x12L\n" +
+	"\x05query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryR\x05query\x12p\n" +
+	"\bstrategy\x18\x02 \x01(\v2T.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.StrategyR\bstrategy\x12G\n" +
+	"\x10message_template\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x0fmessageTemplate\x12Z\n" +
+	"\x0edata_mode_type\x18\x04 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DataModeTypeR\fdataModeType\x1a\xa0\a\n" +
+	"\bStrategy\x12x\n" +
+	"\ainstant\x18\x01 \x01(\v2\\.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.InstantH\x00R\ainstant\x12r\n" +
+	"\x05range\x18\x02 \x01(\v2Z.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.RangeH\x00R\x05range\x12{\n" +
+	"\bduration\x18\x03 \x01(\v2].com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.DurationH\x00R\bduration\x1aj\n" +
+	"\aInstant\x12_\n" +
+	"\x0ftimestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x0etimestampField\x1a\xdb\x01\n" +
+	"\x05Range\x12j\n" +
+	"\x15start_timestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x13startTimestampField\x12f\n" +
+	"\x13end_timestamp_field\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x11endTimestampField\x1a\xd5\x01\n" +
+	"\bDuration\x12j\n" +
+	"\x15start_timestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x13startTimestampField\x12]\n" +
+	"\x0eduration_field\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\rdurationFieldB\a\n" +
 	"\x05valueb\x06proto3"
 
 var (
@@ -1086,74 +1436,94 @@ func file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDe
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescData
 }
 
-var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_goTypes = []any{
-	(*Annotation)(nil),                               // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation
-	(*Annotation_Source)(nil),                        // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
-	(*Annotation_MetricsSource)(nil),                 // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
-	(*Annotation_LogsSource)(nil),                    // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
-	(*Annotation_SpansSource)(nil),                   // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
-	(*Annotation_MetricsSource_Strategy)(nil),        // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
-	(*Annotation_MetricsSource_StartTimeMetric)(nil), // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
-	(*Annotation_LogsSource_Strategy)(nil),           // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
-	(*Annotation_LogsSource_Strategy_Instant)(nil),   // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
-	(*Annotation_LogsSource_Strategy_Range)(nil),     // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
-	(*Annotation_LogsSource_Strategy_Duration)(nil),  // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
-	(*Annotation_SpansSource_Strategy)(nil),          // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
-	(*Annotation_SpansSource_Strategy_Instant)(nil),  // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
-	(*Annotation_SpansSource_Strategy_Range)(nil),    // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
-	(*Annotation_SpansSource_Strategy_Duration)(nil), // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
-	(*wrapperspb.StringValue)(nil),                   // 15: google.protobuf.StringValue
-	(*wrapperspb.BoolValue)(nil),                     // 16: google.protobuf.BoolValue
-	(*common.PromQlQuery)(nil),                       // 17: com.coralogixapis.dashboards.v1.common.PromQlQuery
-	(*common.LuceneQuery)(nil),                       // 18: com.coralogixapis.dashboards.v1.common.LuceneQuery
-	(*common.ObservationField)(nil),                  // 19: com.coralogixapis.dashboards.v1.common.ObservationField
-	(common.DataModeType)(0),                         // 20: com.coralogixapis.dashboards.v1.common.DataModeType
+	(*Annotation)(nil),                                   // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation
+	(*Annotation_Source)(nil),                            // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
+	(*Annotation_MetricsSource)(nil),                     // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
+	(*Annotation_LogsSource)(nil),                        // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
+	(*Annotation_SpansSource)(nil),                       // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
+	(*Annotation_DataprimeSource)(nil),                   // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
+	(*Annotation_MetricsSource_Strategy)(nil),            // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
+	(*Annotation_MetricsSource_StartTimeMetric)(nil),     // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
+	(*Annotation_LogsSource_Strategy)(nil),               // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
+	(*Annotation_LogsSource_Strategy_Instant)(nil),       // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
+	(*Annotation_LogsSource_Strategy_Range)(nil),         // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
+	(*Annotation_LogsSource_Strategy_Duration)(nil),      // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
+	(*Annotation_SpansSource_Strategy)(nil),              // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
+	(*Annotation_SpansSource_Strategy_Instant)(nil),      // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
+	(*Annotation_SpansSource_Strategy_Range)(nil),        // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
+	(*Annotation_SpansSource_Strategy_Duration)(nil),     // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
+	(*Annotation_DataprimeSource_Strategy)(nil),          // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
+	(*Annotation_DataprimeSource_Strategy_Instant)(nil),  // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
+	(*Annotation_DataprimeSource_Strategy_Range)(nil),    // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
+	(*Annotation_DataprimeSource_Strategy_Duration)(nil), // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
+	(*wrapperspb.StringValue)(nil),                       // 20: google.protobuf.StringValue
+	(*wrapperspb.BoolValue)(nil),                         // 21: google.protobuf.BoolValue
+	(*common.PromQlQuery)(nil),                           // 22: com.coralogixapis.dashboards.v1.common.PromQlQuery
+	(*common.LuceneQuery)(nil),                           // 23: com.coralogixapis.dashboards.v1.common.LuceneQuery
+	(*common.ObservationField)(nil),                      // 24: com.coralogixapis.dashboards.v1.common.ObservationField
+	(common.DataModeType)(0),                             // 25: com.coralogixapis.dashboards.v1.common.DataModeType
+	(*common.DataprimeQuery)(nil),                        // 26: com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	(*common.DataShapeField)(nil),                        // 27: com.coralogixapis.dashboards.v1.common.DataShapeField
 }
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_depIdxs = []int32{
-	15, // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.id:type_name -> google.protobuf.StringValue
-	15, // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.name:type_name -> google.protobuf.StringValue
-	16, // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.enabled:type_name -> google.protobuf.BoolValue
+	20, // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.id:type_name -> google.protobuf.StringValue
+	20, // 1: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.name:type_name -> google.protobuf.StringValue
+	21, // 2: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.enabled:type_name -> google.protobuf.BoolValue
 	1,  // 3: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.source:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source
 	2,  // 4: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.metrics:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource
 	3,  // 5: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.logs:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource
 	4,  // 6: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.spans:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource
-	17, // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
-	5,  // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
-	15, // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.message_template:type_name -> google.protobuf.StringValue
-	15, // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.labels:type_name -> google.protobuf.StringValue
-	18, // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	7,  // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
-	15, // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.message_template:type_name -> google.protobuf.StringValue
-	19, // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	20, // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	18, // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
-	11, // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
-	15, // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.message_template:type_name -> google.protobuf.StringValue
-	19, // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	20, // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	6,  // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
-	8,  // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
-	9,  // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
-	10, // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
-	19, // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	12, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
-	13, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
-	14, // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
-	19, // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	19, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	38, // [38:38] is the sub-list for method output_type
-	38, // [38:38] is the sub-list for method input_type
-	38, // [38:38] is the sub-list for extension type_name
-	38, // [38:38] is the sub-list for extension extendee
-	0,  // [0:38] is the sub-list for field type_name
+	5,  // 7: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.Source.dataprime:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource
+	22, // 8: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.promql_query:type_name -> com.coralogixapis.dashboards.v1.common.PromQlQuery
+	6,  // 9: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy
+	20, // 10: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.message_template:type_name -> google.protobuf.StringValue
+	20, // 11: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.labels:type_name -> google.protobuf.StringValue
+	23, // 12: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	8,  // 13: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy
+	20, // 14: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.message_template:type_name -> google.protobuf.StringValue
+	24, // 15: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	25, // 16: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	23, // 17: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.lucene_query:type_name -> com.coralogixapis.dashboards.v1.common.LuceneQuery
+	12, // 18: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy
+	20, // 19: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.message_template:type_name -> google.protobuf.StringValue
+	24, // 20: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	25, // 21: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	26, // 22: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.query:type_name -> com.coralogixapis.dashboards.v1.common.DataprimeQuery
+	16, // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
+	20, // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.message_template:type_name -> google.protobuf.StringValue
+	25, // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
+	7,  // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
+	9,  // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
+	10, // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
+	11, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
+	24, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	13, // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
+	14, // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
+	15, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
+	24, // 38: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 39: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 40: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 41: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 42: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	17, // 43: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
+	18, // 44: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
+	19, // 45: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
+	27, // 46: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
+	27, // 47: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
+	27, // 48: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
+	27, // 49: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
+	27, // 50: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
+	51, // [51:51] is the sub-list for method output_type
+	51, // [51:51] is the sub-list for method input_type
+	51, // [51:51] is the sub-list for extension type_name
+	51, // [51:51] is the sub-list for extension extendee
+	0,  // [0:51] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init() }
@@ -1165,19 +1535,25 @@ func file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init(
 		(*Annotation_Source_Metrics)(nil),
 		(*Annotation_Source_Logs)(nil),
 		(*Annotation_Source_Spans)(nil),
+		(*Annotation_Source_Dataprime)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[5].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[6].OneofWrappers = []any{
 		(*Annotation_MetricsSource_Strategy_StartTimeMetric)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[7].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[8].OneofWrappers = []any{
 		(*Annotation_LogsSource_Strategy_Instant_)(nil),
 		(*Annotation_LogsSource_Strategy_Range_)(nil),
 		(*Annotation_LogsSource_Strategy_Duration_)(nil),
 	}
-	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[11].OneofWrappers = []any{
+	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[12].OneofWrappers = []any{
 		(*Annotation_SpansSource_Strategy_Instant_)(nil),
 		(*Annotation_SpansSource_Strategy_Range_)(nil),
 		(*Annotation_SpansSource_Strategy_Duration_)(nil),
+	}
+	file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_msgTypes[16].OneofWrappers = []any{
+		(*Annotation_DataprimeSource_Strategy_Instant_)(nil),
+		(*Annotation_DataprimeSource_Strategy_Range_)(nil),
+		(*Annotation_DataprimeSource_Strategy_Duration_)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1185,7 +1561,7 @@ func file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init(
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc), len(file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   15,
+			NumMessages:   20,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

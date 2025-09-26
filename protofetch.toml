@@ -199,7 +199,7 @@ allow_policies = [
 
 [cx-api-dashboards]
 url = 'github.com/coralogix/cx-api-dashboards'
-revision = "v2.7.25"
+revision = "v2.7.27"
 allow_policies = [
     "src/com/coralogixapis/dashboards/v1/ast/annotation.proto",
     "src/com/coralogixapis/dashboards/v1/ast/dashboard.proto",
@@ -231,6 +231,7 @@ allow_policies = [
     "src/com/coralogixapis/dashboards/v1/common/annotation_event.proto",
     "src/com/coralogixapis/dashboards/v1/common/dataprime_query_schema.proto",
     "src/com/coralogixapis/dashboards/v1/common/dataprime_result.proto",
+    "src/com/coralogixapis/dashboards/v1/common/data_shape_field.proto",
     "src/com/coralogixapis/dashboards/v1/common/folder.proto",
     "src/com/coralogixapis/dashboards/v1/common/group.proto",
     "src/com/coralogixapis/dashboards/v1/common/group_limit.proto",

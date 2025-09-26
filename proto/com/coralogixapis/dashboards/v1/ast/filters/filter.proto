@@ -25,6 +25,8 @@ message Filter {
 
   google.protobuf.BoolValue collapsed = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates if the filter's UI representation should be collapsed or expanded."}];
 
+  google.protobuf.StringValue display_name = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A display name for the filter"}];
+
   message Source {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
