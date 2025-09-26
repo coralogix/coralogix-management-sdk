@@ -598,13 +598,21 @@ mod tests {
             .await
             .unwrap();
         let preset_id = create_preset_response.preset.unwrap().id.unwrap();
+        let existing_router = notifications_client
+            .get_global_router("router_default".into())
+            .await;
+        let (existing_or_updated_name, existing_or_updated_description) = if let Ok(Some(router)) = existing_router.map(|r| r.router) {
+            (router.name, router.description)
+        } else {
+            ("TestGlobalRouter".into(), "Global Router for Notification Center testing.".to_string())
+        };
 
         let global_router = GlobalRouter {
             id: Some("router_default".into()),
             entity_label_matcher: HashMap::new(),
-            name: "global router".to_string(),
+            name: existing_or_updated_name,
             entity_type: Some(EntityType::Alerts.into()),
-            description: "global router example".to_string(),
+            description: existing_or_updated_description,
             create_time: None,
             update_time: None,
             rules: vec![RoutingRule {
