@@ -23,8 +23,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// CoralogixCustomerSupportAccess represents the state of Coralogix customer
-// support access.
+// CoralogixCustomerSupportAccess represents the state of Coralogix customer support access.
 type CoralogixCustomerSupportAccess int32
 
 const (
@@ -77,15 +76,11 @@ func (CoralogixCustomerSupportAccess) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_aaa_v1_ip_access_proto_rawDescGZIP(), []int{0}
 }
 
-// IpAccess represents a single IP access entry.
 type IpAccess struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The name of the IP access entry.
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// The IP range in CIDR notation.
-	IpRange string `protobuf:"bytes,2,opt,name=ip_range,json=ipRange,proto3" json:"ip_range,omitempty"`
-	// Whether this IP access entry is enabled.
-	Enabled       bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	IpRange       string                 `protobuf:"bytes,2,opt,name=ip_range,json=ipRange,proto3" json:"ip_range,omitempty"`
+	Enabled       bool                   `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -141,15 +136,10 @@ func (x *IpAccess) GetEnabled() bool {
 	return false
 }
 
-// CompanyIpAccessSettings represents the IP access settings for a company.
 type CompanyIpAccessSettings struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The unique identifier for the company IP access settings.
-	// This is typically a company id.
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The list of IP access entries.
-	IpAccess map[string]*IpAccess `protobuf:"bytes,2,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
-	// Coralogix customer support access setting.
+	state                                protoimpl.MessageState         `protogen:"open.v1"`
+	Id                                   string                         `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	IpAccess                             map[string]*IpAccess           `protobuf:"bytes,2,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	EnableCoralogixCustomerSupportAccess CoralogixCustomerSupportAccess `protobuf:"varint,3,opt,name=enable_coralogix_customer_support_access,json=enableCoralogixCustomerSupportAccess,proto3,enum=com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccess" json:"enable_coralogix_customer_support_access,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
@@ -206,13 +196,9 @@ func (x *CompanyIpAccessSettings) GetEnableCoralogixCustomerSupportAccess() Cora
 	return CoralogixCustomerSupportAccess_CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
 }
 
-// CreateCompanyIpAccessSettingsRequest is the request for the
-// CreateCompanyIpAccessSettings RPC.
 type CreateCompanyIpAccessSettingsRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	IpAccess []*IpAccess            `protobuf:"bytes,1,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty"`
-	// Coralogix customer support access setting.
-	// Defaults to DISABLED if not provided
+	state                                protoimpl.MessageState         `protogen:"open.v1"`
+	IpAccess                             []*IpAccess                    `protobuf:"bytes,1,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty"`
 	EnableCoralogixCustomerSupportAccess CoralogixCustomerSupportAccess `protobuf:"varint,2,opt,name=enable_coralogix_customer_support_access,json=enableCoralogixCustomerSupportAccess,proto3,enum=com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccess" json:"enable_coralogix_customer_support_access,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
@@ -262,11 +248,8 @@ func (x *CreateCompanyIpAccessSettingsRequest) GetEnableCoralogixCustomerSupport
 	return CoralogixCustomerSupportAccess_CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
 }
 
-// CreateCompanyIpAccessSettingsResponse is the response for the
-// CreateCompanyIpAccessSettings RPC.
 type CreateCompanyIpAccessSettingsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The created company IP access settings.
+	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Settings      *CompanyIpAccessSettings `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -309,14 +292,10 @@ func (x *CreateCompanyIpAccessSettingsResponse) GetSettings() *CompanyIpAccessSe
 	return nil
 }
 
-// ReplaceCompanyIpAccessSettingsRequest is the request for the
-// ReplaceCompanyIpAccessSettings RPC.
 type ReplaceCompanyIpAccessSettingsRequest struct {
-	state    protoimpl.MessageState `protogen:"open.v1"`
-	Id       *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
-	IpAccess []*IpAccess            `protobuf:"bytes,2,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty"`
-	// Coralogix customer support access setting.
-	// Defaults to DISABLED if not provided
+	state                                protoimpl.MessageState         `protogen:"open.v1"`
+	Id                                   *string                        `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	IpAccess                             []*IpAccess                    `protobuf:"bytes,2,rep,name=ip_access,json=ipAccess,proto3" json:"ip_access,omitempty"`
 	EnableCoralogixCustomerSupportAccess CoralogixCustomerSupportAccess `protobuf:"varint,3,opt,name=enable_coralogix_customer_support_access,json=enableCoralogixCustomerSupportAccess,proto3,enum=com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccess" json:"enable_coralogix_customer_support_access,omitempty"`
 	unknownFields                        protoimpl.UnknownFields
 	sizeCache                            protoimpl.SizeCache
@@ -373,11 +352,8 @@ func (x *ReplaceCompanyIpAccessSettingsRequest) GetEnableCoralogixCustomerSuppor
 	return CoralogixCustomerSupportAccess_CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED
 }
 
-// ReplaceCompanyIpAccessSettingsResponse is the response for the
-// ReplaceCompanyIpAccessSettings RPC.
 type ReplaceCompanyIpAccessSettingsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The replaced company IP access settings.
+	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Settings      *CompanyIpAccessSettings `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -420,13 +396,9 @@ func (x *ReplaceCompanyIpAccessSettingsResponse) GetSettings() *CompanyIpAccessS
 	return nil
 }
 
-// GetCompanyIpAccessSettingsRequest is the request for the
-// GetCompanyIpAccessSettings RPC.
 type GetCompanyIpAccessSettingsRequest struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The id of the company IP access settings to get.
-	// If it's not provided, the id will be derived from the authorization header
-	Id            *string `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -468,11 +440,8 @@ func (x *GetCompanyIpAccessSettingsRequest) GetId() string {
 	return ""
 }
 
-// GetCompanyIpAccessSettingsResponse is the response for the
-// GetCompanyIpAccessSettings RPC.
 type GetCompanyIpAccessSettingsResponse struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// The company IP access settings.
+	state         protoimpl.MessageState   `protogen:"open.v1"`
 	Settings      *CompanyIpAccessSettings `protobuf:"bytes,1,opt,name=settings,proto3" json:"settings,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -515,8 +484,6 @@ func (x *GetCompanyIpAccessSettingsResponse) GetSettings() *CompanyIpAccessSetti
 	return nil
 }
 
-// DeleteCompanyIpAccessSettingsRequest is the request for the
-// DeleteCompanyIpAccessSettings RPC.
 type DeleteCompanyIpAccessSettingsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            *string                `protobuf:"bytes,1,opt,name=id,proto3,oneof" json:"id,omitempty"`
@@ -561,8 +528,6 @@ func (x *DeleteCompanyIpAccessSettingsRequest) GetId() string {
 	return ""
 }
 
-// DeleteCompanyIpAccessSettingsResponse is the response for the
-// DeleteCompanyIpAccessSettings RPC.
 type DeleteCompanyIpAccessSettingsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	unknownFields protoimpl.UnknownFields
@@ -603,79 +568,88 @@ var File_com_coralogixapis_aaa_v1_ip_access_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_aaa_v1_ip_access_proto_rawDesc = "" +
 	"\n" +
-	"(com/coralogixapis/aaa/v1/ip_access.proto\x12\x18com.coralogixapis.aaa.v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdb\x02\n" +
-	"\bIpAccess\x12)\n" +
-	"\x04name\x18\x01 \x01(\tB\x15\x9aA\x12J\x10\"Office Network\"R\x04name\x120\n" +
-	"\bip_range\x18\x02 \x01(\tB\x15\x9aA\x12J\x10\"192.168.0.1/24\"R\aipRange\x12#\n" +
-	"\aenabled\x18\x03 \x01(\bB\t\x9aA\x06J\x04trueR\aenabled:\xcc\x01\x9aA\xc8\x01\n" +
-	"F*\tIP Access2$Represents a single IP access entry.\xd2\x01\bip_range\xd2\x01\aenabled*~\n" +
-	"\x1dFind out more about IP Access\x12]https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/\"\x85\x03\n" +
-	"\x17CompanyIpAccessSettings\x12\x18\n" +
-	"\x02id\x18\x01 \x01(\tB\b\x9aA\x05J\x03405R\x02id\x12\\\n" +
-	"\tip_access\x18\x02 \x03(\v2?.com.coralogixapis.aaa.v1.CompanyIpAccessSettings.IpAccessEntryR\bipAccess\x12\x90\x01\n" +
-	"(enable_coralogix_customer_support_access\x18\x03 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessR$enableCoralogixCustomerSupportAccess\x1a_\n" +
+	"(com/coralogixapis/aaa/v1/ip_access.proto\x12\x18com.coralogixapis.aaa.v1\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe5\x03\n" +
+	"\bIpAccess\x12K\n" +
+	"\x04name\x18\x01 \x01(\tB7\x9aA42 The name of the IP access entry.J\x10\"Office Network\"R\x04name\x12P\n" +
+	"\bip_range\x18\x02 \x01(\tB5\x9aA22\x1eThe IP range in CIDR notation.J\x10\"192.168.0.1/24\"R\aipRange\x12M\n" +
+	"\aenabled\x18\x03 \x01(\bB3\x9aA02(Whether this IP access entry is enabled.J\x04trueR\aenabled:\xea\x01\x9aA\xe6\x01\n" +
+	"F*\tIP Access2$Represents a single IP access entry.\xd2\x01\bip_range\xd2\x01\aenabled*\x9b\x01\n" +
+	":Find out more about IP access control in our documentation\x12]https://coralogix.com/docs/user-guides/account-management/account-settings/ip-access-control/\"\xd6\x05\n" +
+	"\x17CompanyIpAccessSettings\x12s\n" +
+	"\x02id\x18\x01 \x01(\tBc\x9aA`2YThe unique identifier for the company IP access settings. This is typically a company ID.J\x03405R\x02id\x12\x86\x01\n" +
+	"\tip_access\x18\x02 \x03(\v2?.com.coralogixapis.aaa.v1.CompanyIpAccessSettings.IpAccessEntryB(\x9aA%2\x1eThe list of IP access entries.J\x03405R\bipAccess\x12\xf2\x01\n" +
+	"(enable_coralogix_customer_support_access\x18\x03 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessB`\x9aA]2.The Coralogix customer support access setting.J+\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\"R$enableCoralogixCustomerSupportAccess\x1a_\n" +
 	"\rIpAccessEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x128\n" +
-	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.aaa.v1.IpAccessR\x05value:\x028\x01\"\xa5\x02\n" +
+	"\x05value\x18\x02 \x01(\v2\".com.coralogixapis.aaa.v1.IpAccessR\x05value:\x028\x01:g\x9aAd\n" +
+	"b*\x1aCompany IP access settings2DThis data structure represents the IP access settings for a company.\"\x8c\x04\n" +
 	"$CreateCompanyIpAccessSettingsRequest\x12j\n" +
-	"\tip_access\x18\x01 \x03(\v2\".com.coralogixapis.aaa.v1.IpAccessB)\x9aA&2$List of IP access entries to create.R\bipAccess\x12\x90\x01\n" +
-	"(enable_coralogix_customer_support_access\x18\x02 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessR$enableCoralogixCustomerSupportAccess\"v\n" +
-	"%CreateCompanyIpAccessSettingsResponse\x12M\n" +
-	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsR\bsettings\"\xcd\x02\n" +
+	"\tip_access\x18\x01 \x03(\v2\".com.coralogixapis.aaa.v1.IpAccessB)\x9aA&2$List of IP access entries to create.R\bipAccess\x12\xf2\x01\n" +
+	"(enable_coralogix_customer_support_access\x18\x02 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessB`\x9aA]2.The Coralogix customer support access setting.J+\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\"R$enableCoralogixCustomerSupportAccess:\x82\x01\x9aA\x7f\n" +
+	"}*)Create company IP access settings request2PThis data structure represents the request to create company IP access settings.\"\xac\x02\n" +
+	"%CreateCompanyIpAccessSettingsResponse\x12{\n" +
+	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsB,\x9aA)2'The created company IP access settings.R\bsettings:\x85\x01\x9aA\x81\x01\n" +
+	"\x7f**Create company IP access settings response2QThis data structure represents the response to create company IP access settings.\"\xdf\x04\n" +
 	"%ReplaceCompanyIpAccessSettingsRequest\x12\x1d\n" +
 	"\x02id\x18\x01 \x01(\tB\b\x9aA\x05J\x03405H\x00R\x02id\x88\x01\x01\x12k\n" +
-	"\tip_access\x18\x02 \x03(\v2\".com.coralogixapis.aaa.v1.IpAccessB*\x9aA'2%List of IP access entries to replace.R\bipAccess\x12\x90\x01\n" +
-	"(enable_coralogix_customer_support_access\x18\x03 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessR$enableCoralogixCustomerSupportAccessB\x05\n" +
-	"\x03_id\"w\n" +
-	"&ReplaceCompanyIpAccessSettingsResponse\x12M\n" +
-	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsR\bsettings\"?\n" +
-	"!GetCompanyIpAccessSettingsRequest\x12\x13\n" +
-	"\x02id\x18\x01 \x01(\tH\x00R\x02id\x88\x01\x01B\x05\n" +
-	"\x03_id\"s\n" +
-	"\"GetCompanyIpAccessSettingsResponse\x12M\n" +
-	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsR\bsettings\"L\n" +
+	"\tip_access\x18\x02 \x03(\v2\".com.coralogixapis.aaa.v1.IpAccessB*\x9aA'2%List of IP access entries to replace.R\bipAccess\x12\x9a\x02\n" +
+	"(enable_coralogix_customer_support_access\x18\x03 \x01(\x0e28.com.coralogixapis.aaa.v1.CoralogixCustomerSupportAccessB\x87\x01\x9aA\x83\x012TThe Coralogix customer support access setting. Defaults to DISABLED if not provided.J+\"CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\"R$enableCoralogixCustomerSupportAccess:\x85\x01\x9aA\x81\x01\n" +
+	"\x7f**Replace company IP access settings request2QThis data structure represents the request to replace company IP access settings.B\x05\n" +
+	"\x03_id\"\xb1\x02\n" +
+	"&ReplaceCompanyIpAccessSettingsResponse\x12|\n" +
+	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsB-\x9aA*2(The replaced company IP access settings.R\bsettings:\x88\x01\x9aA\x84\x01\n" +
+	"\x81\x01*+Replace company IP access settings response2RThis data structure represents the response to replace company IP access settings.\"\xc2\x02\n" +
+	"!GetCompanyIpAccessSettingsRequest\x12\x97\x01\n" +
+	"\x02id\x18\x01 \x01(\tB\x81\x01\x9aA~2|The ID of the company IP access settings to get. If it's not provided, the id will be derived from the authorization header.H\x00R\x02id\x88\x01\x01:|\x9aAy\n" +
+	"w*&Get company IP access settings request2MThis data structure represents the request to get company IP access settings.B\x05\n" +
+	"\x03_id\"\x99\x02\n" +
+	"\"GetCompanyIpAccessSettingsResponse\x12s\n" +
+	"\bsettings\x18\x01 \x01(\v21.com.coralogixapis.aaa.v1.CompanyIpAccessSettingsB$\x9aA!2\x1fThe company IP access settings.R\bsettings:~\x9aA{\n" +
+	"y*'Get company IP access settings response2NThis data structure represents the response to get company IP access settings.\"\xd1\x01\n" +
 	"$DeleteCompanyIpAccessSettingsRequest\x12\x1d\n" +
-	"\x02id\x18\x01 \x01(\tB\b\x9aA\x05J\x03405H\x00R\x02id\x88\x01\x01B\x05\n" +
-	"\x03_id\"'\n" +
-	"%DeleteCompanyIpAccessSettingsResponse*\xb2\x01\n" +
+	"\x02id\x18\x01 \x01(\tB\b\x9aA\x05J\x03405H\x00R\x02id\x88\x01\x01:\x82\x01\x9aA\x7f\n" +
+	"}*)Delete company IP access settings request2PThis data structure represents the request to delete company IP access settings.B\x05\n" +
+	"\x03_id\"\xaf\x01\n" +
+	"%DeleteCompanyIpAccessSettingsResponse:\x85\x01\x9aA\x81\x01\n" +
+	"\x7f**Delete company IP access settings response2QThis data structure represents the response to delete company IP access settings.*\xb2\x01\n" +
 	"\x1eCoralogixCustomerSupportAccess\x121\n" +
 	"-CORALOGIX_CUSTOMER_SUPPORT_ACCESS_UNSPECIFIED\x10\x00\x12.\n" +
 	"*CORALOGIX_CUSTOMER_SUPPORT_ACCESS_DISABLED\x10\x01\x12-\n" +
-	")CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\x10\x022\xde\v\n" +
-	"\x0fIpAccessService\x12\xdb\x02\n" +
-	"\x1dCreateCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsResponse\"\xb8\x01\x9aA\x8b\x01\n" +
-	"\x11IP Access Service\x12!Create Company IP Access SettingsJ\x14\n" +
+	")CORALOGIX_CUSTOMER_SUPPORT_ACCESS_ENABLED\x10\x022\xd8\f\n" +
+	"\x0fIpAccessService\x12\xf9\x02\n" +
+	"\x1dCreateCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.CreateCompanyIpAccessSettingsResponse\"\xd6\x01\x9aA\x8b\x01\n" +
+	"\x11IP access service\x12!Create company IP access settingsJ\x14\n" +
 	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
+	"\vBad requestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\"\x1e/v1/company/settings/ip-access\x12\xdf\x02\n" +
-	"\x1eReplaceCompanyIpAccessSettings\x12?.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsRequest\x1a@.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsResponse\"\xb9\x01\x9aA\x8c\x01\n" +
-	"\x11IP Access Service\x12\"Replace Company IP Access SettingsJ\x14\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02A:\x01*Z \"\x1e/v1/company/settings/ip-access\"\x1a/aaa/team-sec-ip-access/v1\x12\xfd\x02\n" +
+	"\x1eReplaceCompanyIpAccessSettings\x12?.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsRequest\x1a@.com.coralogixapis.aaa.v1.ReplaceCompanyIpAccessSettingsResponse\"\xd7\x01\x9aA\x8c\x01\n" +
+	"\x11IP access service\x12\"Replace company IP access settingsJ\x14\n" +
 	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
+	"\vBad requestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02#:\x01*\x1a\x1e/v1/company/settings/ip-access\x12\xcc\x02\n" +
-	"\x1aGetCompanyIpAccessSettings\x12;.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsRequest\x1a<.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsResponse\"\xb2\x01\x9aA\x88\x01\n" +
-	"\x11IP Access Service\x12\x1eGet Company IP Access SettingsJ\x14\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02A:\x01*Z \x1a\x1e/v1/company/settings/ip-access\x1a\x1a/aaa/team-sec-ip-access/v1\x12\xea\x02\n" +
+	"\x1aGetCompanyIpAccessSettings\x12;.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsRequest\x1a<.com.coralogixapis.aaa.v1.GetCompanyIpAccessSettingsResponse\"\xd0\x01\x9aA\x88\x01\n" +
+	"\x11IP access service\x12\x1eGet company IP access settingsJ\x14\n" +
 	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
+	"\vBad requestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02 \x12\x1e/v1/company/settings/ip-access\x12\xd8\x02\n" +
-	"\x1dDeleteCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsResponse\"\xb5\x01\x9aA\x8b\x01\n" +
-	"\x11IP Access Service\x12!Delete Company IP Access SettingsJ\x14\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02>Z \x12\x1e/v1/company/settings/ip-access\x12\x1a/aaa/team-sec-ip-access/v1\x12\xf6\x02\n" +
+	"\x1dDeleteCompanyIpAccessSettings\x12>.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsRequest\x1a?.com.coralogixapis.aaa.v1.DeleteCompanyIpAccessSettingsResponse\"\xd3\x01\x9aA\x8b\x01\n" +
+	"\x11IP access service\x12!Delete company IP access settingsJ\x14\n" +
 	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
+	"\vBad requestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02 *\x1e/v1/company/settings/ip-access\x1aa\x9aA^\n" +
-	"\x11IP Access Service\x12IIpAccessService provides the API for managing company IP access settings.b\x06proto3"
+	"\x15Internal server error\x82\xd3\xe4\x93\x02>Z *\x1e/v1/company/settings/ip-access*\x1a/aaa/team-sec-ip-access/v1\x1ac\x9aA`\n" +
+	"\x11IP access service\x12KIP access service provides the API for managing company IP access settings.b\x06proto3"
 
 var (
 	file_com_coralogixapis_aaa_v1_ip_access_proto_rawDescOnce sync.Once

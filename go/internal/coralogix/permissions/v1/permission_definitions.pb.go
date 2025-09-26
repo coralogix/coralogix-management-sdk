@@ -66,6 +66,7 @@ const (
 	PermissionGroup_PERMISSION_GROUP_SLO_MGMT                  PermissionGroup = 38
 	PermissionGroup_PERMISSION_GROUP_QUOTA_RULES               PermissionGroup = 39
 	PermissionGroup_PERMISSION_GROUP_DATAENGINE                PermissionGroup = 40
+	PermissionGroup_PERMISSION_GROUP_CASE                      PermissionGroup = 41
 )
 
 // Enum value maps for PermissionGroup.
@@ -112,6 +113,7 @@ var (
 		38: "PERMISSION_GROUP_SLO_MGMT",
 		39: "PERMISSION_GROUP_QUOTA_RULES",
 		40: "PERMISSION_GROUP_DATAENGINE",
+		41: "PERMISSION_GROUP_CASE",
 	}
 	PermissionGroup_value = map[string]int32{
 		"PERMISSION_GROUP_UNSPECIFIED":               0,
@@ -155,6 +157,7 @@ var (
 		"PERMISSION_GROUP_SLO_MGMT":                  38,
 		"PERMISSION_GROUP_QUOTA_RULES":               39,
 		"PERMISSION_GROUP_DATAENGINE":                40,
+		"PERMISSION_GROUP_CASE":                      41,
 	}
 )
 
@@ -482,6 +485,14 @@ const (
 	Permission_PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY      Permission = 282
 	Permission_PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE                Permission = 283
 	Permission_PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG           Permission = 284
+	Permission_PERMISSION_CASE_CONFIG_READ                          Permission = 285
+	Permission_PERMISSION_CASE_CONFIG_UPDATE                        Permission = 286
+	Permission_PERMISSION_CASE_ACKNOWLEDGE                          Permission = 287
+	Permission_PERMISSION_CASE_ASSIGN                               Permission = 288
+	Permission_PERMISSION_CASE_CLOSE                                Permission = 289
+	Permission_PERMISSION_CASE_COMMENT                              Permission = 290
+	Permission_PERMISSION_CASE_READ                                 Permission = 291
+	Permission_PERMISSION_CASE_UPDATE                               Permission = 292
 )
 
 // Enum value maps for Permission.
@@ -767,6 +778,14 @@ var (
 		282: "PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY",
 		283: "PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE",
 		284: "PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG",
+		285: "PERMISSION_CASE_CONFIG_READ",
+		286: "PERMISSION_CASE_CONFIG_UPDATE",
+		287: "PERMISSION_CASE_ACKNOWLEDGE",
+		288: "PERMISSION_CASE_ASSIGN",
+		289: "PERMISSION_CASE_CLOSE",
+		290: "PERMISSION_CASE_COMMENT",
+		291: "PERMISSION_CASE_READ",
+		292: "PERMISSION_CASE_UPDATE",
 	}
 	Permission_value = map[string]int32{
 		"PERMISSION_UNSPECIFIED":                                      0,
@@ -1049,6 +1068,14 @@ var (
 		"PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY":             282,
 		"PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE":                       283,
 		"PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG":                  284,
+		"PERMISSION_CASE_CONFIG_READ":                                 285,
+		"PERMISSION_CASE_CONFIG_UPDATE":                               286,
+		"PERMISSION_CASE_ACKNOWLEDGE":                                 287,
+		"PERMISSION_CASE_ASSIGN":                                      288,
+		"PERMISSION_CASE_CLOSE":                                       289,
+		"PERMISSION_CASE_COMMENT":                                     290,
+		"PERMISSION_CASE_READ":                                        291,
+		"PERMISSION_CASE_UPDATE":                                      292,
 	}
 )
 
@@ -1210,7 +1237,7 @@ var File_com_coralogix_permissions_models_v1_permission_definitions_proto protor
 
 const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a google/protobuf/descriptor.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto*\xd0\x18\n" +
+	"@com/coralogix/permissions/models/v1/permission_definitions.proto\x12#com.coralogix.permissions.models.v1\x1a4com/coralogix/permissions/v1/actions_resources.proto\x1a google/protobuf/descriptor.proto*\x85\x19\n" +
 	"\x0fPermissionGroup\x12 \n" +
 	"\x1cPERMISSION_GROUP_UNSPECIFIED\x10\x00\x12:\n" +
 	"\x14PERMISSION_GROUP_AAA\x10\x01\x1a \x92\x82\x19\x03aaa҂\x19\x03Aaa\xe2\x82\x19\x0eAdministration\x12?\n" +
@@ -1258,7 +1285,8 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"\x1cPERMISSION_GROUP_QUOTA_RULES\x10'\x1a/\x92\x82\x19\vquota-rules҂\x19\vQuota Rules\xe2\x82\x19\rquota - rules\x12L\n" +
 	"\x1bPERMISSION_GROUP_DATAENGINE\x10(\x1a+\x92\x82\x19\n" +
 	"dataengine҂\x19\n" +
-	"Dataengine\xe2\x82\x19\vData Engine*\x8a\xe6\x03\n" +
+	"Dataengine\xe2\x82\x19\vData Engine\x123\n" +
+	"\x15PERMISSION_GROUP_CASE\x10)\x1a\x18\x92\x82\x19\x04case҂\x19\x04Case\xe2\x82\x19\x04Case*\xd2\xf0\x03\n" +
 	"\n" +
 	"Permission\x12\x1a\n" +
 	"\x16PERMISSION_UNSPECIFIED\x10\x00\x12\xaa\x01\n" +
@@ -1593,7 +1621,16 @@ const file_com_coralogix_permissions_models_v1_permission_definitions_proto_rawD
 	"/PERMISSION_TEAM_ROLES_READ_TEAM_MEMBERS_SUMMARY\x10\x9a\x02\x1a[\xba\x82\x19!team-roles:ReadTeamMembersSummary\xc0\x82\x19:Ȃ\x19`҂\x19\x1aRead Team Members Summary.\u0602\x19\x01\xea\x82\x19\x00\xf2\x82\x19\x00\x88\x83\x19\x01\x12\xbb\x01\n" +
 	"%PERMISSION_TEAM_SCHEMA_MANAGER_MANAGE\x10\x9b\x02\x1a\x8e\x01\xba\x82\x19\x1ateam-schema-manager:Manage\xc0\x82\x19\n" +
 	"Ȃ\x19\x97\x01҂\x19\x15Manage schema fields.\u0602\x19\x1b\xea\x82\x19\x00\xf2\x82\x19>Allows users to edit, reserve, or map schema fields as needed.\x88\x83\x19\x01\x12\xf8\x01\n" +
-	"*PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG\x10\x9c\x02\x1a\xc6\x01\xba\x82\x19\x1eteam-schema-manager:ReadConfig\xc0\x82\x19\fȂ\x19\x97\x01҂\x19'View schema information and statistics.\u0602\x19\x1b\xea\x82\x19\x00\xf2\x82\x19`Allows users to see field names, types, cardinality, popularity, and other schema-level metrics.\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
+	"*PERMISSION_TEAM_SCHEMA_MANAGER_READ_CONFIG\x10\x9c\x02\x1a\xc6\x01\xba\x82\x19\x1eteam-schema-manager:ReadConfig\xc0\x82\x19\fȂ\x19\x97\x01҂\x19'View schema information and statistics.\u0602\x19\x1b\xea\x82\x19\x00\xf2\x82\x19`Allows users to see field names, types, cardinality, popularity, and other schema-level metrics.\x88\x83\x19\x01\x12\xbe\x01\n" +
+	"\x1bPERMISSION_CASE_CONFIG_READ\x10\x9d\x02\x1a\x9b\x01\xba\x82\x19\x10case-config:Read\xc0\x82\x19\vȂ\x19\x98\x01҂\x193Allow user to see company level case configuration.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x193Allow user to see company level case configuration.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xc8\x01\n" +
+	"\x1dPERMISSION_CASE_CONFIG_UPDATE\x10\x9e\x02\x1a\xa3\x01\xba\x82\x19\x12case-config:Update\xc0\x82\x19\x0fȂ\x19\x98\x01҂\x196Allow user to modify company level case configuration.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x196Allow user to modify company level case configuration.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x99\x01\n" +
+	"\x1bPERMISSION_CASE_ACKNOWLEDGE\x10\x9f\x02\x1aw\xba\x82\x19\x10case:Acknowledge\xc0\x82\x19\x15Ȃ\x19\x99\x01҂\x19!Allow user to acknowledge a case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19!Allow user to acknowledge a case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xc4\x01\n" +
+	"\x16PERMISSION_CASE_ASSIGN\x10\xa0\x02\x1a\xa6\x01\xba\x82\x19\vcase:Assign\xc0\x82\x19\x16Ȃ\x19\x99\x01҂\x19;Allow user to assign a case to themself or to someone else.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19;Allow user to assign a case to themself or to someone else.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x81\x01\n" +
+	"\x15PERMISSION_CASE_CLOSE\x10\xa1\x02\x1ae\xba\x82\x19\n" +
+	"case:Close\xc0\x82\x19\x17Ȃ\x19\x99\x01҂\x19\x1bAllow user to close a case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19\x1bAllow user to close a case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x8f\x01\n" +
+	"\x17PERMISSION_CASE_COMMENT\x10\xa2\x02\x1aq\xba\x82\x19\fcase:Comment\xc0\x82\x19;Ȃ\x19\x99\x01҂\x19 Allow user to comment on a case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19 Allow user to comment on a case.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\xbc\x01\n" +
+	"\x14PERMISSION_CASE_READ\x10\xa3\x02\x1a\xa0\x01\xba\x82\x19\tcase:Read\xc0\x82\x19\vȂ\x19\x99\x01҂\x199Allow user to see the list of cases and individual cases.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x199Allow user to see the list of cases and individual cases.\xf8\x82\x19\x01\x88\x83\x19\x01\x12\x81\x01\n" +
+	"\x16PERMISSION_CASE_UPDATE\x10\xa4\x02\x1ad\xba\x82\x19\vcase:Update\xc0\x82\x19\x0fȂ\x19\x99\x01҂\x19\x1aAllow user to update case.\u0602\x19)\xea\x82\x19\x00\xf2\x82\x19\x1aAllow user to update case.\xf8\x82\x19\x01\x88\x83\x19\x01\"\x04\b%\x10%\"\x04\b&\x10&\"\x04\b'\x10'\"\x04\b*\x10*\"\x06\b\xa9\x01\x10\xa9\x01:F\n" +
 	"\n" +
 	"expression\x12!.google.protobuf.EnumValueOptions\x18\xa7\x90\x03 \x01(\tR\n" +
 	"expression\x88\x01\x01:d\n" +

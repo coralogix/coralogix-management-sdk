@@ -1249,7 +1249,7 @@ var File_com_coralogix_permissions_v1_permissions_mgmt_proto protoreflect.FileDe
 
 const file_com_coralogix_permissions_v1_permissions_mgmt_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogix/permissions/v1/permissions_mgmt.proto\x12\x1ccom.coralogix.permissions.v1\x1a)com/coralogix/permissions/v1/common.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto\x1a@com/coralogix/permissions/models/v1/permission_definitions.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"l\n" +
+	"3com/coralogix/permissions/v1/permissions_mgmt.proto\x12\x1ccom.coralogix.permissions.v1\x1a@com/coralogix/permissions/models/v1/permission_definitions.proto\x1a4com/coralogix/permissions/v1/actions_resources.proto\x1a)com/coralogix/permissions/v1/common.proto\x1a\x1fgoogle/protobuf/timestamp.proto\"l\n" +
 	"\vScopeFilter\x12\x12\n" +
 	"\x04term\x18\x01 \x01(\tR\x04term\x12I\n" +
 	"\vfilter_type\x18\x02 \x01(\x0e2(.com.coralogix.permissions.v1.FilterTypeR\n" +
@@ -1462,9 +1462,9 @@ func file_com_coralogix_permissions_v1_permissions_mgmt_proto_init() {
 	if File_com_coralogix_permissions_v1_permissions_mgmt_proto != nil {
 		return
 	}
-	file_com_coralogix_permissions_v1_common_proto_init()
-	file_com_coralogix_permissions_v1_actions_resources_proto_init()
 	file_com_coralogix_permissions_models_v1_permission_definitions_proto_init()
+	file_com_coralogix_permissions_v1_actions_resources_proto_init()
+	file_com_coralogix_permissions_v1_common_proto_init()
 	file_com_coralogix_permissions_v1_permissions_mgmt_proto_msgTypes[8].OneofWrappers = []any{
 		(*RoleSummary_SystemRole)(nil),
 		(*RoleSummary_CustomRole)(nil),

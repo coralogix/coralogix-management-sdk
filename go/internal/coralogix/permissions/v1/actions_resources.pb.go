@@ -179,6 +179,8 @@ const (
 	Resource_RESOURCE_PIPELINE_ANALYZER               Resource = 149
 	Resource_RESOURCE_TEAM_DATASETS                   Resource = 150
 	Resource_RESOURCE_TEAM_SCHEMA_MANAGER             Resource = 151
+	Resource_RESOURCE_CASE_CONFIG                     Resource = 152
+	Resource_RESOURCE_CASE                            Resource = 153
 )
 
 // Enum value maps for Resource.
@@ -336,6 +338,8 @@ var (
 		149: "RESOURCE_PIPELINE_ANALYZER",
 		150: "RESOURCE_TEAM_DATASETS",
 		151: "RESOURCE_TEAM_SCHEMA_MANAGER",
+		152: "RESOURCE_CASE_CONFIG",
+		153: "RESOURCE_CASE",
 	}
 	Resource_value = map[string]int32{
 		"RESOURCE_UNSPECIFIED":                     0,
@@ -490,6 +494,8 @@ var (
 		"RESOURCE_PIPELINE_ANALYZER":               149,
 		"RESOURCE_TEAM_DATASETS":                   150,
 		"RESOURCE_TEAM_SCHEMA_MANAGER":             151,
+		"RESOURCE_CASE_CONFIG":                     152,
+		"RESOURCE_CASE":                            153,
 	}
 )
 
@@ -582,6 +588,7 @@ const (
 	Action_ACTION_APPEND_DATA               Action = 56
 	Action_ACTION_OVERWRITE_DATA            Action = 57
 	Action_ACTION_READ_TEAM_MEMBERS_SUMMARY Action = 58
+	Action_ACTION_COMMENT                   Action = 59
 )
 
 // Enum value maps for Action.
@@ -646,6 +653,7 @@ var (
 		56: "ACTION_APPEND_DATA",
 		57: "ACTION_OVERWRITE_DATA",
 		58: "ACTION_READ_TEAM_MEMBERS_SUMMARY",
+		59: "ACTION_COMMENT",
 	}
 	Action_value = map[string]int32{
 		"ACTION_UNSPECIFIED":               0,
@@ -707,6 +715,7 @@ var (
 		"ACTION_APPEND_DATA":               56,
 		"ACTION_OVERWRITE_DATA":            57,
 		"ACTION_READ_TEAM_MEMBERS_SUMMARY": 58,
+		"ACTION_COMMENT":                   59,
 	}
 )
 
@@ -768,7 +777,7 @@ var File_com_coralogix_permissions_v1_actions_resources_proto protoreflect.FileD
 
 const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\n" +
-	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\x9d?\n" +
+	"4com/coralogix/permissions/v1/actions_resources.proto\x12\x1ccom.coralogix.permissions.v1\x1a google/protobuf/descriptor.proto*\xe7?\n" +
 	"\bResource\x12\x18\n" +
 	"\x14RESOURCE_UNSPECIFIED\x10\x00\x12%\n" +
 	"\x12RESOURCE_CORALOGIX\x10\x01\x1a\r\x92\x82\x19\tcoralogix\x12\x1f\n" +
@@ -933,7 +942,9 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\x18RESOURCE_ACCESS_POLICIES\x10\x94\x01\x1a\x13\x92\x82\x19\x0faccess-policies\x126\n" +
 	"\x1aRESOURCE_PIPELINE_ANALYZER\x10\x95\x01\x1a\x15\x92\x82\x19\x11pipeline-analyzer\x12.\n" +
 	"\x16RESOURCE_TEAM_DATASETS\x10\x96\x01\x1a\x11\x92\x82\x19\rteam-datasets\x12:\n" +
-	"\x1cRESOURCE_TEAM_SCHEMA_MANAGER\x10\x97\x01\x1a\x17\x92\x82\x19\x13team-schema-manager*\xcb\x13\n" +
+	"\x1cRESOURCE_TEAM_SCHEMA_MANAGER\x10\x97\x01\x1a\x17\x92\x82\x19\x13team-schema-manager\x12*\n" +
+	"\x14RESOURCE_CASE_CONFIG\x10\x98\x01\x1a\x0f\x92\x82\x19\vcase-config\x12\x1c\n" +
+	"\rRESOURCE_CASE\x10\x99\x01\x1a\b\x92\x82\x19\x04case*\xec\x13\n" +
 	"\x06Action\x12\x16\n" +
 	"\x12ACTION_UNSPECIFIED\x10\x00\x12\x1b\n" +
 	"\fACTION_ADMIN\x10\x01\x1a\t\x92\x82\x19\x05admin\x12\x1f\n" +
@@ -1006,7 +1017,8 @@ const file_com_coralogix_permissions_v1_actions_resources_proto_rawDesc = "" +
 	"\x12ACTION_APPEND_DATA\x108\x1a\x0e\x92\x82\x19\n" +
 	"AppendData\x12,\n" +
 	"\x15ACTION_OVERWRITE_DATA\x109\x1a\x11\x92\x82\x19\rOverwriteData\x12@\n" +
-	" ACTION_READ_TEAM_MEMBERS_SUMMARY\x10:\x1a\x1a\x92\x82\x19\x16ReadTeamMembersSummary::\n" +
+	" ACTION_READ_TEAM_MEMBERS_SUMMARY\x10:\x1a\x1a\x92\x82\x19\x16ReadTeamMembersSummary\x12\x1f\n" +
+	"\x0eACTION_COMMENT\x10;\x1a\v\x92\x82\x19\aComment::\n" +
 	"\x04name\x12!.google.protobuf.EnumValueOptions\x18\xa2\x90\x03 \x01(\tR\x04name\x88\x01\x01:L\n" +
 	"\x0fdeprecated_name\x12!.google.protobuf.EnumValueOptions\x18\xa3\x90\x03 \x03(\tR\x0edeprecatedNameb\x06proto3"
 

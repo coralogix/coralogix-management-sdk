@@ -2,6 +2,9 @@ syntax = "proto3";
 
 package com.coralogixapis.aaa.rbac.v2;
 
+import "google/api/annotations.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+
 message SystemRole {
   uint32 role_id = 1;
   string name = 2;
@@ -20,12 +23,164 @@ message CustomRole {
 }
 
 service RoleManagementService {
-  rpc ListSystemRoles(ListSystemRolesRequest) returns(ListSystemRolesResponse);
-  rpc ListCustomRoles(ListCustomRolesRequest) returns(ListCustomRolesResponse);
-  rpc GetCustomRole(GetCustomRoleRequest) returns(GetCustomRoleResponse);
-  rpc CreateRole(CreateRoleRequest) returns(CreateRoleResponse);
-  rpc UpdateRole(UpdateRoleRequest) returns(UpdateRoleResponse);
-  rpc DeleteRole(DeleteRoleRequest) returns(DeleteRoleResponse);
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Role Management Service"
+    description: "Service for managing system and custom roles."
+  };
+
+  rpc ListSystemRoles(ListSystemRolesRequest) returns (ListSystemRolesResponse) {
+    option (google.api.http) = {get: "/aaa/team-roles/v1/system-roles"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "List System Roles"
+    };
+  }
+
+  rpc ListCustomRoles(ListCustomRolesRequest) returns (ListCustomRolesResponse) {
+    option (google.api.http) = {get: "/aaa/team-roles/v1/custom-roles"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "List Custom Roles"
+    };
+  }
+
+  rpc GetCustomRole(GetCustomRoleRequest) returns (GetCustomRoleResponse) {
+    option (google.api.http) = {get: "/aaa/team-roles/v1/custom-roles/{role_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Role not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "Get Custom Role"
+    };
+  }
+
+  rpc CreateRole(CreateRoleRequest) returns (CreateRoleResponse) {
+    option (google.api.http) = {
+      put: "/aaa/team-roles/v1/custom-roles"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "201"
+        value: {description: "Role created"}
+      }
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "409"
+        value: {description: "Role already exists"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "Create Role"
+    };
+  }
+
+  rpc UpdateRole(UpdateRoleRequest) returns (UpdateRoleResponse) {
+    option (google.api.http) = {
+      post: "/aaa/team-roles/v1/custom-roles/{role_id}"
+      body: "*"
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "200"
+        value: {description: "Role updated"}
+      }
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Role not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "Update Role"
+    };
+  }
+
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteRoleResponse) {
+    option (google.api.http) = {delete: "/aaa/team-roles/v1/custom-roles/{role_id}"};
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "204"
+        value: {description: "Role deleted"}
+      }
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "404"
+        value: {description: "Role not found"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Role Management Service"]
+      summary: "Delete Role"
+    };
+  }
 }
 
 message GetCustomRoleRequest {
@@ -36,9 +191,7 @@ message GetCustomRoleResponse {
   optional CustomRole role = 1;
 }
 
-message ListSystemRolesRequest {
-
-}
+message ListSystemRolesRequest {}
 
 message ListSystemRolesResponse {
   repeated SystemRole roles = 1;
@@ -51,10 +204,10 @@ message CreateRoleRequest {
   string name = 2;
   string description = 3;
   repeated string permissions = 5;
-  oneof parent_role{
+  oneof parent_role {
     uint32 parent_role_id = 6;
     string parent_role_name = 7;
-  };
+  }
 }
 
 message CreateRoleResponse {
@@ -72,9 +225,7 @@ message Permissions {
   repeated string permissions = 1;
 }
 
-message UpdateRoleResponse {
-
-}
+message UpdateRoleResponse {}
 
 message ListCustomRolesRequest {
   // If not specified, team_id attached to your credential will be used.
@@ -89,6 +240,4 @@ message DeleteRoleRequest {
   uint32 role_id = 1;
 }
 
-message DeleteRoleResponse {
-
-}
+message DeleteRoleResponse {}
