@@ -28,16 +28,10 @@ const (
 // IpAccessServiceClient is the client API for IpAccessService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-//
-// IpAccessService is the service for managing IP access settings.
 type IpAccessServiceClient interface {
-	// RPC for creating company IP access settings.
 	CreateCompanyIpAccessSettings(ctx context.Context, in *CreateCompanyIpAccessSettingsRequest, opts ...grpc.CallOption) (*CreateCompanyIpAccessSettingsResponse, error)
-	// RPC for replacing company IP access settings.
 	ReplaceCompanyIpAccessSettings(ctx context.Context, in *ReplaceCompanyIpAccessSettingsRequest, opts ...grpc.CallOption) (*ReplaceCompanyIpAccessSettingsResponse, error)
-	// RPC for getting company IP access settings.
 	GetCompanyIpAccessSettings(ctx context.Context, in *GetCompanyIpAccessSettingsRequest, opts ...grpc.CallOption) (*GetCompanyIpAccessSettingsResponse, error)
-	// RPC for deleting company IP access settings.
 	DeleteCompanyIpAccessSettings(ctx context.Context, in *DeleteCompanyIpAccessSettingsRequest, opts ...grpc.CallOption) (*DeleteCompanyIpAccessSettingsResponse, error)
 }
 
@@ -92,16 +86,10 @@ func (c *ipAccessServiceClient) DeleteCompanyIpAccessSettings(ctx context.Contex
 // IpAccessServiceServer is the server API for IpAccessService service.
 // All implementations must embed UnimplementedIpAccessServiceServer
 // for forward compatibility.
-//
-// IpAccessService is the service for managing IP access settings.
 type IpAccessServiceServer interface {
-	// RPC for creating company IP access settings.
 	CreateCompanyIpAccessSettings(context.Context, *CreateCompanyIpAccessSettingsRequest) (*CreateCompanyIpAccessSettingsResponse, error)
-	// RPC for replacing company IP access settings.
 	ReplaceCompanyIpAccessSettings(context.Context, *ReplaceCompanyIpAccessSettingsRequest) (*ReplaceCompanyIpAccessSettingsResponse, error)
-	// RPC for getting company IP access settings.
 	GetCompanyIpAccessSettings(context.Context, *GetCompanyIpAccessSettingsRequest) (*GetCompanyIpAccessSettingsResponse, error)
-	// RPC for deleting company IP access settings.
 	DeleteCompanyIpAccessSettings(context.Context, *DeleteCompanyIpAccessSettingsRequest) (*DeleteCompanyIpAccessSettingsResponse, error)
 	mustEmbedUnimplementedIpAccessServiceServer()
 }

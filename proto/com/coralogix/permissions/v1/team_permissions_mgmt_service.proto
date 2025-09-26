@@ -4,7 +4,6 @@ package com.coralogix.permissions.v1;
 
 import "com/coralogix/permissions/v1/common.proto";
 import "com/coralogix/permissions/v1/permissions_mgmt.proto";
-
 import "google/api/annotations.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
@@ -14,6 +13,7 @@ service TeamPermissionsMgmtService {
     name: "Team Permissions Management Service"
     description: "Manage Team Groups."
   };
+
   /// Fetch team group for given team id
   rpc GetTeamGroup(GetTeamGroupRequest) returns (GetTeamGroupResponse) {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -33,9 +33,11 @@ service TeamPermissionsMgmtService {
       summary: "Get Team Group"
     };
     option (google.api.http) = {
-      get: "/v1/teams/groups/{group_id.id}"
+      get: "/aaa/team-groups/v1/{group_id.id}"
+      additional_bindings: {get: "/v1/teams/groups/{group_id.id}"}
     };
   }
+
   /// Fetch team group by name for authenticated team id
   rpc GetTeamGroupByName(GetTeamGroupByNameRequest) returns (GetTeamGroupByNameResponse) {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -55,7 +57,8 @@ service TeamPermissionsMgmtService {
       summary: "Get Team Group By Name"
     };
     option (google.api.http) = {
-      get: "/v1/teams/groups"
+      get: "/aaa/team-groups/v1/{name}"
+      additional_bindings: {get: "/v1/teams/groups"}
     };
   }
   /// Fetches all team groups linked with team
@@ -77,7 +80,8 @@ service TeamPermissionsMgmtService {
       summary: "Get Team Groups"
     };
     option (google.api.http) = {
-      get: "/v1/teams/groups/list"
+      get: "/aaa/team-groups/v1"
+      additional_bindings: {get: "/v1/teams/groups/list"}
     };
   }
   /// Creates a new team group and optionally associates roles, users and a scope to it
@@ -99,8 +103,9 @@ service TeamPermissionsMgmtService {
       summary: "Create Team Group"
     };
     option (google.api.http) = {
-      post: "/v1/teams/groups"
+      post: "/aaa/team-groups/v1"
       body: "*"
+      additional_bindings: {post: "/v1/teams/groups"}
     };
   }
   /// Updates an existing team group details
@@ -122,8 +127,9 @@ service TeamPermissionsMgmtService {
       summary: "Update Team Group"
     };
     option (google.api.http) = {
-      put: "/v1/teams/groups"
+      put: "/aaa/team-groups/v1"
       body: "*"
+      additional_bindings: {put: "/v1/teams/groups"}
     };
   }
   /// Deletes an existing team group
@@ -145,7 +151,8 @@ service TeamPermissionsMgmtService {
       summary: "Delete Team Group"
     };
     option (google.api.http) = {
-      delete: "/v1/teams/groups/{group_id.id}"
+      delete: "/aaa/team-groups/v1/{group_id.id}"
+      additional_bindings: {delete: "/v1/teams/groups/{group_id.id}"}
     };
   }
   /// Fetches all users assigned to group
@@ -167,7 +174,8 @@ service TeamPermissionsMgmtService {
       summary: "Get Group Users"
     };
     option (google.api.http) = {
-      get: "/v1/teams/groups/{group_id.id}/users"
+      get: "/aaa/team-groups/v1/{group_id.id}/users"
+      additional_bindings: {get: "/v1/teams/groups/{group_id.id}/users"}
     };
   }
   /// Add users to team groups
@@ -189,10 +197,12 @@ service TeamPermissionsMgmtService {
       summary: "Add Users To Team Group"
     };
     option (google.api.http) = {
-      post: "/v1/teams/groups/{group_id.id}/users"
+      post: "/aaa/team-groups/v1/{group_id.id}/users"
       body: "*"
+      additional_bindings: {post: "/v1/teams/groups/{group_id.id}/users"}
     };
   }
+
   /// Bulk Add users to team groups
   rpc AddUsersToTeamGroups(AddUsersToTeamGroupsRequest) returns (AddUsersToTeamGroupsResponse) {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -212,8 +222,9 @@ service TeamPermissionsMgmtService {
       summary: "Add Users To Team Groups"
     };
     option (google.api.http) = {
-      post: "/v1/teams/groups/users"
+      post: "/aaa/team-groups/v1/users"
       body: "*"
+      additional_bindings: {post: "/v1/teams/groups/users"}
     };
   }
   /// Remove user accounts to organisation group
@@ -235,10 +246,11 @@ service TeamPermissionsMgmtService {
       summary: "Remove Users From Team Group"
     };
     option (google.api.http) = {
-      delete: "/v1/teams/groups/{group_id.id}/users"
+      delete: "/aaa/team-groups/v1/{group_id.id}/users"
+      additional_bindings: {delete: "/v1/teams/groups/{group_id.id}/users"}
     };
   }
-  /// Bulk Remove user accounts to organisation group
+  /// Bulk Remove user accounts from organisation group
   rpc RemoveUsersFromTeamGroups(RemoveUsersFromTeamGroupsRequest) returns (RemoveUsersFromTeamGroupsResponse) {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -257,7 +269,8 @@ service TeamPermissionsMgmtService {
       summary: "Remove Users From Team Groups"
     };
     option (google.api.http) = {
-      delete: "/v1/teams/groups/users"
+      delete: "/aaa/team-groups/v1/users"
+      additional_bindings: {delete: "/v1/teams/groups/users"}
     };
   }
   /// Sets team group scope. Replaces it if it already exists.
@@ -301,14 +314,12 @@ service TeamPermissionsMgmtService {
       tags: ["Team Permissions Management Service"]
       summary: "Get Team Group Scope"
     };
-    option (google.api.http) = {
-      get: "/v1/teams/groups/{group_id.id}/scope"
-    };
+    option (google.api.http) = {get: "/v1/teams/groups/{group_id.id}/scope"};
   }
 }
 
 /// Get team group request
-message GetTeamGroupRequest  {
+message GetTeamGroupRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupRequest"
@@ -320,12 +331,12 @@ message GetTeamGroupRequest  {
       description: "Find out more about groups"
     }
   };
-/// Team group id
+  /// Team group id
   TeamGroupId group_id = 1;
 }
 
 /// Get team group response
-message GetTeamGroupResponse  {
+message GetTeamGroupResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupResponse"
@@ -341,7 +352,7 @@ message GetTeamGroupResponse  {
   TeamGroup group = 1;
 }
 
-message GetTeamGroupByNameRequest  {
+message GetTeamGroupByNameRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupByNameRequest"
@@ -356,7 +367,7 @@ message GetTeamGroupByNameRequest  {
   string name = 1;
 }
 
-message GetTeamGroupByNameResponse  {
+message GetTeamGroupByNameResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupByNameResponse"
@@ -372,7 +383,7 @@ message GetTeamGroupByNameResponse  {
 }
 
 /// Get all team groups request
-message GetTeamGroupsRequest  {
+message GetTeamGroupsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupsRequest"
@@ -391,7 +402,7 @@ message GetTeamGroupsRequest  {
 }
 
 /// Get all team groups response
-message GetTeamGroupsResponse  {
+message GetTeamGroupsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupsResponse"
@@ -408,7 +419,7 @@ message GetTeamGroupsResponse  {
 }
 
 /// Create team group request
-message CreateTeamGroupRequest  {
+message CreateTeamGroupRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateTeamGroupRequest"
@@ -442,7 +453,7 @@ message CreateTeamGroupRequest  {
 }
 
 /// Create team group response
-message CreateTeamGroupResponse  {
+message CreateTeamGroupResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "CreateTeamGroupResponse"
@@ -472,13 +483,12 @@ message UpdateTeamGroupRequest {
     }
   };
   /// Specifies new roles to assign to a group removing previous ones
-message RoleUpdates  {
+  message RoleUpdates {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "RoleUpdates"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -489,13 +499,12 @@ message RoleUpdates  {
     repeated RoleId role_ids = 1;
   }
   /// Specifies new users to assign to a group removing previous ones
-message UserUpdates  {
+  message UserUpdates {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "UserUpdates"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -537,10 +546,11 @@ message UpdateTeamGroupResponse {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
       description: "Find out more about groups"
     }
-  };}
+  };
+}
 
 /// Delete team group request
-message DeleteTeamGroupRequest  {
+message DeleteTeamGroupRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteTeamGroupRequest"
@@ -557,7 +567,7 @@ message DeleteTeamGroupRequest  {
 }
 
 /// Delete team group response
-message DeleteTeamGroupResponse  {
+message DeleteTeamGroupResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "DeleteTeamGroupResponse"
@@ -568,10 +578,11 @@ message DeleteTeamGroupResponse  {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
       description: "Find out more about groups"
     }
-  };}
+  };
+}
 
 /// Fetches all users linked with given team group
-message GetGroupUsersRequest  {
+message GetGroupUsersRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetGroupUsersRequest"
@@ -592,7 +603,7 @@ message GetGroupUsersRequest  {
   optional string page_token = 3;
 }
 
-message GetGroupUsersResponse  {
+message GetGroupUsersResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetGroupUsersResponse"
@@ -604,26 +615,25 @@ message GetGroupUsersResponse  {
       description: "Find out more about groups"
     }
   };
-message NoMorePages {
+  message NoMorePages {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "NoMorePages"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
         description: "Find out more about groups"
       }
-    };}
-message NextPageToken  {
+    };
+  }
+  message NextPageToken {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "NextPageToken"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -640,7 +650,7 @@ message NextPageToken  {
 }
 
 /// Add users to an existing team group
-message AddUsersToTeamGroupRequest  {
+message AddUsersToTeamGroupRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupRequest"
@@ -659,7 +669,7 @@ message AddUsersToTeamGroupRequest  {
 }
 
 /// Add users to an existing team group response
-message AddUsersToTeamGroupResponse  {
+message AddUsersToTeamGroupResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupResponse"
@@ -677,7 +687,7 @@ message AddUsersToTeamGroupResponse  {
 
 /// Associate new users with groups in a team
 /// Allows to associate any number of users with any number of groups belonging to a team
-message AddUsersToTeamGroupsRequest  {
+message AddUsersToTeamGroupsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupsRequest"
@@ -689,13 +699,12 @@ message AddUsersToTeamGroupsRequest  {
       description: "Find out more about groups"
     }
   };
-message AddUsersToTeamGroup  {
+  message AddUsersToTeamGroup {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "AddUsersToTeamGroup"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -711,7 +720,7 @@ message AddUsersToTeamGroup  {
   repeated AddUsersToTeamGroup add_users_to_group = 2;
 }
 
-message AddUsersToTeamGroupsResponse  {
+message AddUsersToTeamGroupsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "AddUsersToTeamGroupsResponse"
@@ -722,10 +731,11 @@ message AddUsersToTeamGroupsResponse  {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
       description: "Find out more about groups"
     }
-  };}
+  };
+}
 
 /// Remove users from an existing team group
-message RemoveUsersFromTeamGroupRequest  {
+message RemoveUsersFromTeamGroupRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupRequest"
@@ -743,7 +753,7 @@ message RemoveUsersFromTeamGroupRequest  {
   repeated UserId user_ids = 2;
 }
 
-message RemoveUsersFromTeamGroupResponse  {
+message RemoveUsersFromTeamGroupResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupResponse"
@@ -754,11 +764,12 @@ message RemoveUsersFromTeamGroupResponse  {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
       description: "Find out more about groups"
     }
-  };}
+  };
+}
 
 /// Remove users from groups in a team
 /// Allows the removal of any number of users and any number of groups belonging to a team
-message RemoveUsersFromTeamGroupsRequest  {
+message RemoveUsersFromTeamGroupsRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsRequest"
@@ -770,13 +781,13 @@ message RemoveUsersFromTeamGroupsRequest  {
       description: "Find out more about groups"
     }
   };
-message RemoveUsersFromTeamGroup  {
+
+  message RemoveUsersFromTeamGroup {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "RemoveUsersFromTeamGroup"
         description: "This data structure represents the information associated with an API key."
-        required: [
-        ]
+        required: []
       }
       external_docs: {
         url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
@@ -793,7 +804,7 @@ message RemoveUsersFromTeamGroup  {
 }
 
 /// Remove users from existing groups
-message RemoveUsersFromTeamGroupsResponse  {
+message RemoveUsersFromTeamGroupsResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "RemoveUsersFromTeamGroupsResponse"
@@ -804,11 +815,11 @@ message RemoveUsersFromTeamGroupsResponse  {
       url: "https://coralogix.com/docs/user-guides/account-management/user-management/assign-user-roles-and-scopes-via-groups/"
       description: "Find out more about groups"
     }
-  };}
-
+  };
+}
 
 /// Set team group scope request
-message SetTeamGroupScopeRequest  {
+message SetTeamGroupScopeRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SetTeamGroupScopeRequest"
@@ -827,7 +838,7 @@ message SetTeamGroupScopeRequest  {
 }
 
 /// Set team group scope response
-message SetTeamGroupScopeResponse  {
+message SetTeamGroupScopeResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "SetTeamGroupScopeResponse"
@@ -844,7 +855,7 @@ message SetTeamGroupScopeResponse  {
 }
 
 /// Get team group scope request
-message GetTeamGroupScopeRequest  {
+message GetTeamGroupScopeRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupScopeRequest"
@@ -861,7 +872,7 @@ message GetTeamGroupScopeRequest  {
 }
 
 /// Set team group scope response
-message GetTeamGroupScopeResponse  {
+message GetTeamGroupScopeResponse {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "GetTeamGroupScopeResponse"

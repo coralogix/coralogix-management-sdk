@@ -1035,48 +1035,48 @@ const file_com_coralogixapis_aaa_apikeys_v3_api_keys_proto_rawDesc = "" +
 	"\x1aGetSendDataApiKeysResponse\x12=\n" +
 	"\x04keys\x18\x01 \x03(\v2).com.coralogixapis.aaa.apikeys.v3.KeyInfoR\x04keys:\xdf\x01\x9aA\xdb\x01\n" +
 	"k*\x14Get Api Key Response2HThis data structure is the response obtained when retrieving an API key.\xd2\x01\bkey_info*l\n" +
-	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xcf\v\n" +
-	"\x0eApiKeysService\x12\x91\x02\n" +
-	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\x91\x01\x9aAw\n" +
+	"\x1cFind out more about api keys\x12Lhttps://coralogix.com/docs/user-guides/account-management/api-keys/api-keys/2\xd8\f\n" +
+	"\x0eApiKeysService\x12\xa5\x02\n" +
+	"\fCreateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.CreateApiKeyResponse\"\xa5\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eCreate API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x11:\x01*\"\f/v3/api_keys\x12\x8b\x02\n" +
-	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\x94\x01\x9aAt\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02%:\x01*Z\x0e\"\f/v3/api_keys\"\x10/aaa/api-keys/v3\x12\xa8\x02\n" +
+	"\tGetApiKey\x122.com.coralogixapis.aaa.apikeys.v3.GetApiKeyRequest\x1a3.com.coralogixapis.aaa.apikeys.v3.GetApiKeyResponse\"\xb1\x01\x9aAt\n" +
 	"\x10API Keys Service\x12\vGet API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17\x12\x15/v3/api_keys/{key_id}\x12\xb5\x02\n" +
-	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\xa3\x01\x9aA\x81\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x024Z\x17\x12\x15/v3/api_keys/{key_id}\x12\x19/aaa/api-keys/v3/{key_id}\x12\xd3\x02\n" +
+	"\x12GetSendDataApiKeys\x12;.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysRequest\x1a<.com.coralogixapis.aaa.apikeys.v3.GetSendDataApiKeysResponse\"\xc1\x01\x9aA\x81\x01\n" +
 	"\x10API Keys Service\x12\x18Get \"Send Data\" API KeysJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x18\x12\x16/v3/api_keys/send_data\x12\x97\x02\n" +
-	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\x97\x01\x9aAw\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x026Z\x18\x12\x16/v3/api_keys/send_data\x12\x1a/aaa/api-keys/v3/send_data\x12\xb4\x02\n" +
+	"\fDeleteApiKey\x125.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.DeleteApiKeyResponse\"\xb4\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eDelete API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x17*\x15/v3/api_keys/{key_id}\x12\x9a\x02\n" +
-	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\x9a\x01\x9aAw\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x024Z\x17*\x15/v3/api_keys/{key_id}*\x19/aaa/api-keys/v3/{key_id}\x12\xb7\x02\n" +
+	"\fUpdateApiKey\x125.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyRequest\x1a6.com.coralogixapis.aaa.apikeys.v3.UpdateApiKeyResponse\"\xb7\x01\x9aAw\n" +
 	"\x10API Keys Service\x12\x0eUpdate API KeyJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v3/api_keys/{key_id}\x1a,\x9aA)\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x027:\x01*Z\x17\x1a\x15/v3/api_keys/{key_id}\x1a\x19/aaa/api-keys/v3/{key_id}\x1a,\x9aA)\n" +
 	"\x10API Keys Service\x12\x15Manage your API Keys.b\x06proto3"
 
 var (

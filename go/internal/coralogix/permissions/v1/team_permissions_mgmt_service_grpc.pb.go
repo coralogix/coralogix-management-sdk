@@ -60,7 +60,7 @@ type TeamPermissionsMgmtServiceClient interface {
 	AddUsersToTeamGroups(ctx context.Context, in *AddUsersToTeamGroupsRequest, opts ...grpc.CallOption) (*AddUsersToTeamGroupsResponse, error)
 	// / Remove user accounts to organisation group
 	RemoveUsersFromTeamGroup(ctx context.Context, in *RemoveUsersFromTeamGroupRequest, opts ...grpc.CallOption) (*RemoveUsersFromTeamGroupResponse, error)
-	// / Bulk Remove user accounts to organisation group
+	// / Bulk Remove user accounts from organisation group
 	RemoveUsersFromTeamGroups(ctx context.Context, in *RemoveUsersFromTeamGroupsRequest, opts ...grpc.CallOption) (*RemoveUsersFromTeamGroupsResponse, error)
 	// / Sets team group scope. Replaces it if it already exists.
 	SetTeamGroupScope(ctx context.Context, in *SetTeamGroupScopeRequest, opts ...grpc.CallOption) (*SetTeamGroupScopeResponse, error)
@@ -232,7 +232,7 @@ type TeamPermissionsMgmtServiceServer interface {
 	AddUsersToTeamGroups(context.Context, *AddUsersToTeamGroupsRequest) (*AddUsersToTeamGroupsResponse, error)
 	// / Remove user accounts to organisation group
 	RemoveUsersFromTeamGroup(context.Context, *RemoveUsersFromTeamGroupRequest) (*RemoveUsersFromTeamGroupResponse, error)
-	// / Bulk Remove user accounts to organisation group
+	// / Bulk Remove user accounts from organisation group
 	RemoveUsersFromTeamGroups(context.Context, *RemoveUsersFromTeamGroupsRequest) (*RemoveUsersFromTeamGroupsResponse, error)
 	// / Sets team group scope. Replaces it if it already exists.
 	SetTeamGroupScope(context.Context, *SetTeamGroupScopeRequest) (*SetTeamGroupScopeResponse, error)

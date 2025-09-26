@@ -7,6 +7,8 @@
 package v2
 
 import (
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -829,7 +831,7 @@ var File_com_coralogixapis_aaa_rbac_v2_roles_proto protoreflect.FileDescriptor
 
 const file_com_coralogixapis_aaa_rbac_v2_roles_proto_rawDesc = "" +
 	"\n" +
-	")com/coralogixapis/aaa/rbac/v2/roles.proto\x12\x1dcom.coralogixapis.aaa.rbac.v2\"}\n" +
+	")com/coralogixapis/aaa/rbac/v2/roles.proto\x12\x1dcom.coralogixapis.aaa.rbac.v2\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"}\n" +
 	"\n" +
 	"SystemRole\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\rR\x06roleId\x12\x12\n" +
@@ -884,17 +886,74 @@ const file_com_coralogixapis_aaa_rbac_v2_roles_proto_rawDesc = "" +
 	"\x05roles\x18\x01 \x03(\v2).com.coralogixapis.aaa.rbac.v2.CustomRoleR\x05roles\",\n" +
 	"\x11DeleteRoleRequest\x12\x17\n" +
 	"\arole_id\x18\x01 \x01(\rR\x06roleId\"\x14\n" +
-	"\x12DeleteRoleResponse2\xf2\x05\n" +
-	"\x15RoleManagementService\x12\x80\x01\n" +
-	"\x0fListSystemRoles\x125.com.coralogixapis.aaa.rbac.v2.ListSystemRolesRequest\x1a6.com.coralogixapis.aaa.rbac.v2.ListSystemRolesResponse\x12\x80\x01\n" +
-	"\x0fListCustomRoles\x125.com.coralogixapis.aaa.rbac.v2.ListCustomRolesRequest\x1a6.com.coralogixapis.aaa.rbac.v2.ListCustomRolesResponse\x12z\n" +
-	"\rGetCustomRole\x123.com.coralogixapis.aaa.rbac.v2.GetCustomRoleRequest\x1a4.com.coralogixapis.aaa.rbac.v2.GetCustomRoleResponse\x12q\n" +
+	"\x12DeleteRoleResponse2\x9b\x10\n" +
+	"\x15RoleManagementService\x12\xaf\x02\n" +
+	"\x0fListSystemRoles\x125.com.coralogixapis.aaa.rbac.v2.ListSystemRolesRequest\x1a6.com.coralogixapis.aaa.rbac.v2.ListSystemRolesResponse\"\xac\x01\x9aA\x81\x01\n" +
+	"\x17Role Management Service\x12\x11List System RolesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02!\x12\x1f/aaa/team-roles/v1/system-roles\x12\xaf\x02\n" +
+	"\x0fListCustomRoles\x125.com.coralogixapis.aaa.rbac.v2.ListCustomRolesRequest\x1a6.com.coralogixapis.aaa.rbac.v2.ListCustomRolesResponse\"\xac\x01\x9aA\x81\x01\n" +
+	"\x17Role Management Service\x12\x11List Custom RolesJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02!\x12\x1f/aaa/team-roles/v1/custom-roles\x12\xca\x02\n" +
+	"\rGetCustomRole\x123.com.coralogixapis.aaa.rbac.v2.GetCustomRoleRequest\x1a4.com.coralogixapis.aaa.rbac.v2.GetCustomRoleResponse\"\xcd\x01\x9aA\x98\x01\n" +
+	"\x17Role Management Service\x12\x0fGet Custom RoleJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x17\n" +
+	"\x03404\x12\x10\n" +
+	"\x0eRole not foundJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02+\x12)/aaa/team-roles/v1/custom-roles/{role_id}\x12\xd2\x02\n" +
 	"\n" +
-	"CreateRole\x120.com.coralogixapis.aaa.rbac.v2.CreateRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.CreateRoleResponse\x12q\n" +
+	"CreateRole\x120.com.coralogixapis.aaa.rbac.v2.CreateRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.CreateRoleResponse\"\xde\x01\x9aA\xb0\x01\n" +
+	"\x17Role Management Service\x12\vCreate RoleJ\x15\n" +
+	"\x03201\x12\x0e\n" +
+	"\fRole createdJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x1c\n" +
+	"\x03409\x12\x15\n" +
+	"\x13Role already existsJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02$:\x01*\x1a\x1f/aaa/team-roles/v1/custom-roles\x12\xd7\x02\n" +
 	"\n" +
-	"UpdateRole\x120.com.coralogixapis.aaa.rbac.v2.UpdateRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.UpdateRoleResponse\x12q\n" +
+	"UpdateRole\x120.com.coralogixapis.aaa.rbac.v2.UpdateRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.UpdateRoleResponse\"\xe3\x01\x9aA\xab\x01\n" +
+	"\x17Role Management Service\x12\vUpdate RoleJ\x15\n" +
+	"\x03200\x12\x0e\n" +
+	"\fRole updatedJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x17\n" +
+	"\x03404\x12\x10\n" +
+	"\x0eRole not foundJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02.:\x01*\")/aaa/team-roles/v1/custom-roles/{role_id}\x12\xd4\x02\n" +
 	"\n" +
-	"DeleteRole\x120.com.coralogixapis.aaa.rbac.v2.DeleteRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.DeleteRoleResponseb\x06proto3"
+	"DeleteRole\x120.com.coralogixapis.aaa.rbac.v2.DeleteRoleRequest\x1a1.com.coralogixapis.aaa.rbac.v2.DeleteRoleResponse\"\xe0\x01\x9aA\xab\x01\n" +
+	"\x17Role Management Service\x12\vDelete RoleJ\x15\n" +
+	"\x03204\x12\x0e\n" +
+	"\fRole deletedJ\x14\n" +
+	"\x03400\x12\r\n" +
+	"\vBad RequestJ\x1d\n" +
+	"\x03401\x12\x16\n" +
+	"\x14Unauthorized requestJ\x17\n" +
+	"\x03404\x12\x10\n" +
+	"\x0eRole not foundJ\x1e\n" +
+	"\x03500\x12\x17\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02+*)/aaa/team-roles/v1/custom-roles/{role_id}\x1aK\x9aAH\n" +
+	"\x17Role Management Service\x12-Service for managing system and custom roles.b\x06proto3"
 
 var (
 	file_com_coralogixapis_aaa_rbac_v2_roles_proto_rawDescOnce sync.Once
