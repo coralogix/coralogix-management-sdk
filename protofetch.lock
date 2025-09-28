@@ -27,8 +27,8 @@ commit_hash = "995f2fa4245ab060a96963566fabdfa7dc5b88c5"
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.141"
-commit_hash = "935486b8512198cc426dbbabf2cb38a0504c08bf"
+revision = "v0.0.142"
+commit_hash = "6b6da662a051801ddc57ed657dca40ef2a3568ad"
 
 [[dependencies]]
 name = "cx-api-common"
