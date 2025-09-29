@@ -176,52 +176,6 @@ func (MissingDataStrategy) EnumDescriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{2}
 }
 
-type SloType int32
-
-const (
-	SloType_SLO_TYPE_REQUEST SloType = 0
-	SloType_SLO_TYPE_WINDOW  SloType = 1
-)
-
-// Enum value maps for SloType.
-var (
-	SloType_name = map[int32]string{
-		0: "SLO_TYPE_REQUEST",
-		1: "SLO_TYPE_WINDOW",
-	}
-	SloType_value = map[string]int32{
-		"SLO_TYPE_REQUEST": 0,
-		"SLO_TYPE_WINDOW":  1,
-	}
-)
-
-func (x SloType) Enum() *SloType {
-	p := new(SloType)
-	*p = x
-	return p
-}
-
-func (x SloType) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (SloType) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3].Descriptor()
-}
-
-func (SloType) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3]
-}
-
-func (x SloType) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use SloType.Descriptor instead.
-func (SloType) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{3}
-}
-
 type SloTimeFrame int32
 
 const (
@@ -261,11 +215,11 @@ func (x SloTimeFrame) String() string {
 }
 
 func (SloTimeFrame) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4].Descriptor()
+	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3].Descriptor()
 }
 
 func (SloTimeFrame) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4]
+	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[3]
 }
 
 func (x SloTimeFrame) Number() protoreflect.EnumNumber {
@@ -274,7 +228,7 @@ func (x SloTimeFrame) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SloTimeFrame.Descriptor instead.
 func (SloTimeFrame) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{4}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{3}
 }
 
 type SloConstantFilterField int32
@@ -310,11 +264,11 @@ func (x SloConstantFilterField) String() string {
 }
 
 func (SloConstantFilterField) Descriptor() protoreflect.EnumDescriptor {
-	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[5].Descriptor()
+	return file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4].Descriptor()
 }
 
 func (SloConstantFilterField) Type() protoreflect.EnumType {
-	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[5]
+	return &file_com_coralogixapis_slo_v1_slo_proto_enumTypes[4]
 }
 
 func (x SloConstantFilterField) Number() protoreflect.EnumNumber {
@@ -323,7 +277,7 @@ func (x SloConstantFilterField) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use SloConstantFilterField.Descriptor instead.
 func (SloConstantFilterField) EnumDescriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{5}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{4}
 }
 
 type Metric struct {
@@ -615,7 +569,7 @@ type Slo struct {
 	//	*Slo_RequestBasedMetricSli
 	//	*Slo_WindowBasedMetricSli
 	Sli           isSlo_Sli `protobuf_oneof:"sli"`
-	Type          *SloType  `protobuf:"varint,14,opt,name=type,proto3,enum=com.coralogixapis.slo.v1.SloType,oneof" json:"type,omitempty"`
+	Type          *string   `protobuf:"bytes,14,opt,name=type,proto3,oneof" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -761,11 +715,11 @@ func (x *Slo) GetWindowBasedMetricSli() *WindowBasedMetricSli {
 	return nil
 }
 
-func (x *Slo) GetType() SloType {
+func (x *Slo) GetType() string {
 	if x != nil && x.Type != nil {
 		return *x.Type
 	}
-	return SloType_SLO_TYPE_REQUEST
+	return ""
 }
 
 type isSlo_Window interface {
@@ -800,7 +754,6 @@ type SloFilterField struct {
 	//
 	//	*SloFilterField_ConstFilter
 	//	*SloFilterField_LabelName
-	//	*SloFilterField_SloType
 	Field         isSloFilterField_Field `protobuf_oneof:"field"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -861,15 +814,6 @@ func (x *SloFilterField) GetLabelName() string {
 	return ""
 }
 
-func (x *SloFilterField) GetSloType() bool {
-	if x != nil {
-		if x, ok := x.Field.(*SloFilterField_SloType); ok {
-			return x.SloType
-		}
-	}
-	return false
-}
-
 type isSloFilterField_Field interface {
 	isSloFilterField_Field()
 }
@@ -882,23 +826,13 @@ type SloFilterField_LabelName struct {
 	LabelName string `protobuf:"bytes,2,opt,name=label_name,json=labelName,proto3,oneof"`
 }
 
-type SloFilterField_SloType struct {
-	SloType bool `protobuf:"varint,3,opt,name=slo_type,json=sloType,proto3,oneof"`
-}
-
 func (*SloFilterField_ConstFilter) isSloFilterField_Field() {}
 
 func (*SloFilterField_LabelName) isSloFilterField_Field() {}
 
-func (*SloFilterField_SloType) isSloFilterField_Field() {}
-
 type IsFilterPredicate struct {
-	state protoimpl.MessageState `protogen:"open.v1"`
-	// Types that are valid to be assigned to Values:
-	//
-	//	*IsFilterPredicate_StringValues
-	//	*IsFilterPredicate_TypeValues
-	Values        isIsFilterPredicate_Values `protobuf_oneof:"values"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Is            []string               `protobuf:"bytes,1,rep,name=is,proto3" json:"is,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -933,131 +867,9 @@ func (*IsFilterPredicate) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{7}
 }
 
-func (x *IsFilterPredicate) GetValues() isIsFilterPredicate_Values {
+func (x *IsFilterPredicate) GetIs() []string {
 	if x != nil {
-		return x.Values
-	}
-	return nil
-}
-
-func (x *IsFilterPredicate) GetStringValues() *StringValues {
-	if x != nil {
-		if x, ok := x.Values.(*IsFilterPredicate_StringValues); ok {
-			return x.StringValues
-		}
-	}
-	return nil
-}
-
-func (x *IsFilterPredicate) GetTypeValues() *TypeValues {
-	if x != nil {
-		if x, ok := x.Values.(*IsFilterPredicate_TypeValues); ok {
-			return x.TypeValues
-		}
-	}
-	return nil
-}
-
-type isIsFilterPredicate_Values interface {
-	isIsFilterPredicate_Values()
-}
-
-type IsFilterPredicate_StringValues struct {
-	StringValues *StringValues `protobuf:"bytes,1,opt,name=string_values,json=stringValues,proto3,oneof"`
-}
-
-type IsFilterPredicate_TypeValues struct {
-	TypeValues *TypeValues `protobuf:"bytes,2,opt,name=type_values,json=typeValues,proto3,oneof"`
-}
-
-func (*IsFilterPredicate_StringValues) isIsFilterPredicate_Values() {}
-
-func (*IsFilterPredicate_TypeValues) isIsFilterPredicate_Values() {}
-
-type StringValues struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Values        []string               `protobuf:"bytes,1,rep,name=values,proto3" json:"values,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *StringValues) Reset() {
-	*x = StringValues{}
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[8]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *StringValues) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*StringValues) ProtoMessage() {}
-
-func (x *StringValues) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[8]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use StringValues.ProtoReflect.Descriptor instead.
-func (*StringValues) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *StringValues) GetValues() []string {
-	if x != nil {
-		return x.Values
-	}
-	return nil
-}
-
-type TypeValues struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Values        []SloType              `protobuf:"varint,1,rep,packed,name=values,proto3,enum=com.coralogixapis.slo.v1.SloType" json:"values,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
-
-func (x *TypeValues) Reset() {
-	*x = TypeValues{}
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[9]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *TypeValues) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*TypeValues) ProtoMessage() {}
-
-func (x *TypeValues) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[9]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use TypeValues.ProtoReflect.Descriptor instead.
-func (*TypeValues) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{9}
-}
-
-func (x *TypeValues) GetValues() []SloType {
-	if x != nil {
-		return x.Values
+		return x.Is
 	}
 	return nil
 }
@@ -1074,7 +886,7 @@ type SloFilterPredicate struct {
 
 func (x *SloFilterPredicate) Reset() {
 	*x = SloFilterPredicate{}
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[8]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1086,7 +898,7 @@ func (x *SloFilterPredicate) String() string {
 func (*SloFilterPredicate) ProtoMessage() {}
 
 func (x *SloFilterPredicate) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[10]
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[8]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1099,7 +911,7 @@ func (x *SloFilterPredicate) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SloFilterPredicate.ProtoReflect.Descriptor instead.
 func (*SloFilterPredicate) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{10}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *SloFilterPredicate) GetPredicate() isSloFilterPredicate_Predicate {
@@ -1138,7 +950,7 @@ type SloFilter struct {
 
 func (x *SloFilter) Reset() {
 	*x = SloFilter{}
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[9]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1150,7 +962,7 @@ func (x *SloFilter) String() string {
 func (*SloFilter) ProtoMessage() {}
 
 func (x *SloFilter) ProtoReflect() protoreflect.Message {
-	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[11]
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[9]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1163,7 +975,7 @@ func (x *SloFilter) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SloFilter.ProtoReflect.Descriptor instead.
 func (*SloFilter) Descriptor() ([]byte, []int) {
-	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{11}
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *SloFilter) GetField() *SloFilterField {
@@ -1176,6 +988,50 @@ func (x *SloFilter) GetField() *SloFilterField {
 func (x *SloFilter) GetPredicate() *SloFilterPredicate {
 	if x != nil {
 		return x.Predicate
+	}
+	return nil
+}
+
+type SloFilters struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Filters       []*SloFilter           `protobuf:"bytes,1,rep,name=filters,proto3" json:"filters,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SloFilters) Reset() {
+	*x = SloFilters{}
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[10]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SloFilters) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SloFilters) ProtoMessage() {}
+
+func (x *SloFilters) ProtoReflect() protoreflect.Message {
+	mi := &file_com_coralogixapis_slo_v1_slo_proto_msgTypes[10]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SloFilters.ProtoReflect.Descriptor instead.
+func (*SloFilters) Descriptor() ([]byte, []int) {
+	return file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *SloFilters) GetFilters() []*SloFilter {
+	if x != nil {
+		return x.Filters
 	}
 	return nil
 }
@@ -1207,7 +1063,7 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"e*\bRevision2YThe revision of the slo, used to differentiate between different versions of the same SLO\"Z\n" +
 	"\bGrouping\x12\x16\n" +
 	"\x06labels\x18\x01 \x03(\tR\x06labels:6\x9aA3\n" +
-	"1*\bGrouping2%Definition of the SLO grouping fields\"\xec\t\n" +
+	"1*\bGrouping2%Definition of the SLO grouping fields\"\xc2\t\n" +
 	"\x03Slo\x12@\n" +
 	"\x02id\x18\x01 \x01(\tB+\x9aA(J&\"b11919d5-ef85-4bb1-8655-02640dbe94d9\"H\x02R\x02id\x88\x01\x01\x12+\n" +
 	"\x04name\x18\x02 \x01(\tB\x17\x9aA\x14J\x12\"Example Slo Name\"R\x04name\x12K\n" +
@@ -1224,8 +1080,8 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	" \x01(\x02B\v\x9aA\bJ\x0699.999R\x19targetThresholdPercentage\x12N\n" +
 	"\x0eslo_time_frame\x18\v \x01(\x0e2&.com.coralogixapis.slo.v1.SloTimeFrameH\x00R\fsloTimeFrame\x12j\n" +
 	"\x18request_based_metric_sli\x18\f \x01(\v2/.com.coralogixapis.slo.v1.RequestBasedMetricSliH\x01R\x15requestBasedMetricSli\x12g\n" +
-	"\x17window_based_metric_sli\x18\r \x01(\v2..com.coralogixapis.slo.v1.WindowBasedMetricSliH\x01R\x14windowBasedMetricSli\x12Q\n" +
-	"\x04type\x18\x0e \x01(\x0e2!.com.coralogixapis.slo.v1.SloTypeB\x15\x9aA\x12J\x10SLO_TYPE_REQUESTH\aR\x04type\x88\x01\x01\x1a9\n" +
+	"\x17window_based_metric_sli\x18\r \x01(\v2..com.coralogixapis.slo.v1.WindowBasedMetricSliH\x01R\x14windowBasedMetricSli\x12'\n" +
+	"\x04type\x18\x0e \x01(\tB\x0e\x9aA\vJ\t\"request\"H\aR\x04type\x88\x01\x01\x1a9\n" +
 	"\vLabelsEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12\x14\n" +
 	"\x05value\x18\x02 \x01(\tR\x05value:\x028\x01:T\x9aAQ\n" +
@@ -1238,25 +1094,16 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\b_creatorB\v\n" +
 	"\t_revisionB\v\n" +
 	"\t_groupingB\a\n" +
-	"\x05_type\"\xf8\x01\n" +
+	"\x05_type\"\xdb\x01\n" +
 	"\x0eSloFilterField\x12U\n" +
 	"\fconst_filter\x18\x01 \x01(\x0e20.com.coralogixapis.slo.v1.SloConstantFilterFieldH\x00R\vconstFilter\x123\n" +
 	"\n" +
-	"label_name\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"environment\"H\x00R\tlabelName\x12\x1b\n" +
-	"\bslo_type\x18\x03 \x01(\bH\x00R\asloType:4\x9aA1\n" +
+	"label_name\x18\x02 \x01(\tB\x12\x9aA\x0fJ\r\"environment\"H\x00R\tlabelName:4\x9aA1\n" +
 	"/*\x0eSloFilterField2\x1dField used for filtering SLOsB\a\n" +
-	"\x05field\"\xa4\x02\n" +
-	"\x11IsFilterPredicate\x12M\n" +
-	"\rstring_values\x18\x01 \x01(\v2&.com.coralogixapis.slo.v1.StringValuesH\x00R\fstringValues\x12G\n" +
-	"\vtype_values\x18\x02 \x01(\v2$.com.coralogixapis.slo.v1.TypeValuesH\x00R\n" +
-	"typeValues:m\x9aAj\n" +
-	"h*\x11IsFilterPredicate2SPredicate for SLO filters that checks if a field is equal to one of multiple valuesB\b\n" +
-	"\x06values\"&\n" +
-	"\fStringValues\x12\x16\n" +
-	"\x06values\x18\x01 \x03(\tR\x06values\"G\n" +
-	"\n" +
-	"TypeValues\x129\n" +
-	"\x06values\x18\x01 \x03(\x0e2!.com.coralogixapis.slo.v1.SloTypeR\x06values\"\x9e\x01\n" +
+	"\x05field\"\x92\x01\n" +
+	"\x11IsFilterPredicate\x12\x0e\n" +
+	"\x02is\x18\x01 \x03(\tR\x02is:m\x9aAj\n" +
+	"h*\x11IsFilterPredicate2SPredicate for SLO filters that checks if a field is equal to one of multiple values\"\x9e\x01\n" +
 	"\x12SloFilterPredicate\x12=\n" +
 	"\x02is\x18\x01 \x01(\v2+.com.coralogixapis.slo.v1.IsFilterPredicateH\x00R\x02is:<\x9aA9\n" +
 	"7*\x12SloFilterPredicate2!Predicate used for filtering SLOsB\v\n" +
@@ -1264,7 +1111,12 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\tSloFilter\x12>\n" +
 	"\x05field\x18\x01 \x01(\v2(.com.coralogixapis.slo.v1.SloFilterFieldR\x05field\x12J\n" +
 	"\tpredicate\x18\x02 \x01(\v2,.com.coralogixapis.slo.v1.SloFilterPredicateR\tpredicate:^\x9aA[\n" +
-	"Y*\tSloFilter28A filter for SLOs, consisting of a field and a predicate\xd2\x01\x05field\xd2\x01\tpredicate*\xdf\x01\n" +
+	"Y*\tSloFilter28A filter for SLOs, consisting of a field and a predicate\xd2\x01\x05field\xd2\x01\tpredicate\"\x80\x01\n" +
+	"\n" +
+	"SloFilters\x12=\n" +
+	"\afilters\x18\x01 \x03(\v2#.com.coralogixapis.slo.v1.SloFilterR\afilters:3\x9aA0\n" +
+	".*\n" +
+	"SloFilters2 A collection of filters for SLOs*\xdf\x01\n" +
 	"\x12ComparisonOperator\x12#\n" +
 	"\x1fCOMPARISON_OPERATOR_UNSPECIFIED\x10\x00\x12$\n" +
 	" COMPARISON_OPERATOR_GREATER_THAN\x10\x01\x12.\n" +
@@ -1278,10 +1130,7 @@ const file_com_coralogixapis_slo_v1_slo_proto_rawDesc = "" +
 	"\x13MissingDataStrategy\x12#\n" +
 	"\x1fMISSING_DATA_STRATEGY_UNCOUNTED\x10\x00\x12\x1e\n" +
 	"\x1aMISSING_DATA_STRATEGY_GOOD\x10\x01\x12\x1d\n" +
-	"\x19MISSING_DATA_STRATEGY_BAD\x10\x02*4\n" +
-	"\aSloType\x12\x14\n" +
-	"\x10SLO_TYPE_REQUEST\x10\x00\x12\x13\n" +
-	"\x0fSLO_TYPE_WINDOW\x10\x01*\x9d\x01\n" +
+	"\x19MISSING_DATA_STRATEGY_BAD\x10\x02*\x9d\x01\n" +
 	"\fSloTimeFrame\x12\x1e\n" +
 	"\x1aSLO_TIME_FRAME_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15SLO_TIME_FRAME_7_DAYS\x10\x01\x12\x1a\n" +
@@ -1305,59 +1154,54 @@ func file_com_coralogixapis_slo_v1_slo_proto_rawDescGZIP() []byte {
 	return file_com_coralogixapis_slo_v1_slo_proto_rawDescData
 }
 
-var file_com_coralogixapis_slo_v1_slo_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
-var file_com_coralogixapis_slo_v1_slo_proto_msgTypes = make([]protoimpl.MessageInfo, 13)
+var file_com_coralogixapis_slo_v1_slo_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_com_coralogixapis_slo_v1_slo_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_com_coralogixapis_slo_v1_slo_proto_goTypes = []any{
 	(ComparisonOperator)(0),       // 0: com.coralogixapis.slo.v1.ComparisonOperator
 	(WindowSloWindow)(0),          // 1: com.coralogixapis.slo.v1.WindowSloWindow
 	(MissingDataStrategy)(0),      // 2: com.coralogixapis.slo.v1.MissingDataStrategy
-	(SloType)(0),                  // 3: com.coralogixapis.slo.v1.SloType
-	(SloTimeFrame)(0),             // 4: com.coralogixapis.slo.v1.SloTimeFrame
-	(SloConstantFilterField)(0),   // 5: com.coralogixapis.slo.v1.SloConstantFilterField
-	(*Metric)(nil),                // 6: com.coralogixapis.slo.v1.Metric
-	(*RequestBasedMetricSli)(nil), // 7: com.coralogixapis.slo.v1.RequestBasedMetricSli
-	(*WindowBasedMetricSli)(nil),  // 8: com.coralogixapis.slo.v1.WindowBasedMetricSli
-	(*Revision)(nil),              // 9: com.coralogixapis.slo.v1.Revision
-	(*Grouping)(nil),              // 10: com.coralogixapis.slo.v1.Grouping
-	(*Slo)(nil),                   // 11: com.coralogixapis.slo.v1.Slo
-	(*SloFilterField)(nil),        // 12: com.coralogixapis.slo.v1.SloFilterField
-	(*IsFilterPredicate)(nil),     // 13: com.coralogixapis.slo.v1.IsFilterPredicate
-	(*StringValues)(nil),          // 14: com.coralogixapis.slo.v1.StringValues
-	(*TypeValues)(nil),            // 15: com.coralogixapis.slo.v1.TypeValues
-	(*SloFilterPredicate)(nil),    // 16: com.coralogixapis.slo.v1.SloFilterPredicate
-	(*SloFilter)(nil),             // 17: com.coralogixapis.slo.v1.SloFilter
-	nil,                           // 18: com.coralogixapis.slo.v1.Slo.LabelsEntry
-	(*timestamppb.Timestamp)(nil), // 19: google.protobuf.Timestamp
+	(SloTimeFrame)(0),             // 3: com.coralogixapis.slo.v1.SloTimeFrame
+	(SloConstantFilterField)(0),   // 4: com.coralogixapis.slo.v1.SloConstantFilterField
+	(*Metric)(nil),                // 5: com.coralogixapis.slo.v1.Metric
+	(*RequestBasedMetricSli)(nil), // 6: com.coralogixapis.slo.v1.RequestBasedMetricSli
+	(*WindowBasedMetricSli)(nil),  // 7: com.coralogixapis.slo.v1.WindowBasedMetricSli
+	(*Revision)(nil),              // 8: com.coralogixapis.slo.v1.Revision
+	(*Grouping)(nil),              // 9: com.coralogixapis.slo.v1.Grouping
+	(*Slo)(nil),                   // 10: com.coralogixapis.slo.v1.Slo
+	(*SloFilterField)(nil),        // 11: com.coralogixapis.slo.v1.SloFilterField
+	(*IsFilterPredicate)(nil),     // 12: com.coralogixapis.slo.v1.IsFilterPredicate
+	(*SloFilterPredicate)(nil),    // 13: com.coralogixapis.slo.v1.SloFilterPredicate
+	(*SloFilter)(nil),             // 14: com.coralogixapis.slo.v1.SloFilter
+	(*SloFilters)(nil),            // 15: com.coralogixapis.slo.v1.SloFilters
+	nil,                           // 16: com.coralogixapis.slo.v1.Slo.LabelsEntry
+	(*timestamppb.Timestamp)(nil), // 17: google.protobuf.Timestamp
 }
 var file_com_coralogixapis_slo_v1_slo_proto_depIdxs = []int32{
-	6,  // 0: com.coralogixapis.slo.v1.RequestBasedMetricSli.good_events:type_name -> com.coralogixapis.slo.v1.Metric
-	6,  // 1: com.coralogixapis.slo.v1.RequestBasedMetricSli.total_events:type_name -> com.coralogixapis.slo.v1.Metric
-	6,  // 2: com.coralogixapis.slo.v1.WindowBasedMetricSli.query:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 0: com.coralogixapis.slo.v1.RequestBasedMetricSli.good_events:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 1: com.coralogixapis.slo.v1.RequestBasedMetricSli.total_events:type_name -> com.coralogixapis.slo.v1.Metric
+	5,  // 2: com.coralogixapis.slo.v1.WindowBasedMetricSli.query:type_name -> com.coralogixapis.slo.v1.Metric
 	1,  // 3: com.coralogixapis.slo.v1.WindowBasedMetricSli.window:type_name -> com.coralogixapis.slo.v1.WindowSloWindow
 	0,  // 4: com.coralogixapis.slo.v1.WindowBasedMetricSli.comparison_operator:type_name -> com.coralogixapis.slo.v1.ComparisonOperator
 	2,  // 5: com.coralogixapis.slo.v1.WindowBasedMetricSli.missing_data_strategy:type_name -> com.coralogixapis.slo.v1.MissingDataStrategy
-	19, // 6: com.coralogixapis.slo.v1.Revision.update_time:type_name -> google.protobuf.Timestamp
-	18, // 7: com.coralogixapis.slo.v1.Slo.labels:type_name -> com.coralogixapis.slo.v1.Slo.LabelsEntry
-	9,  // 8: com.coralogixapis.slo.v1.Slo.revision:type_name -> com.coralogixapis.slo.v1.Revision
-	10, // 9: com.coralogixapis.slo.v1.Slo.grouping:type_name -> com.coralogixapis.slo.v1.Grouping
-	19, // 10: com.coralogixapis.slo.v1.Slo.create_time:type_name -> google.protobuf.Timestamp
-	19, // 11: com.coralogixapis.slo.v1.Slo.update_time:type_name -> google.protobuf.Timestamp
-	4,  // 12: com.coralogixapis.slo.v1.Slo.slo_time_frame:type_name -> com.coralogixapis.slo.v1.SloTimeFrame
-	7,  // 13: com.coralogixapis.slo.v1.Slo.request_based_metric_sli:type_name -> com.coralogixapis.slo.v1.RequestBasedMetricSli
-	8,  // 14: com.coralogixapis.slo.v1.Slo.window_based_metric_sli:type_name -> com.coralogixapis.slo.v1.WindowBasedMetricSli
-	3,  // 15: com.coralogixapis.slo.v1.Slo.type:type_name -> com.coralogixapis.slo.v1.SloType
-	5,  // 16: com.coralogixapis.slo.v1.SloFilterField.const_filter:type_name -> com.coralogixapis.slo.v1.SloConstantFilterField
-	14, // 17: com.coralogixapis.slo.v1.IsFilterPredicate.string_values:type_name -> com.coralogixapis.slo.v1.StringValues
-	15, // 18: com.coralogixapis.slo.v1.IsFilterPredicate.type_values:type_name -> com.coralogixapis.slo.v1.TypeValues
-	3,  // 19: com.coralogixapis.slo.v1.TypeValues.values:type_name -> com.coralogixapis.slo.v1.SloType
-	13, // 20: com.coralogixapis.slo.v1.SloFilterPredicate.is:type_name -> com.coralogixapis.slo.v1.IsFilterPredicate
-	12, // 21: com.coralogixapis.slo.v1.SloFilter.field:type_name -> com.coralogixapis.slo.v1.SloFilterField
-	16, // 22: com.coralogixapis.slo.v1.SloFilter.predicate:type_name -> com.coralogixapis.slo.v1.SloFilterPredicate
-	23, // [23:23] is the sub-list for method output_type
-	23, // [23:23] is the sub-list for method input_type
-	23, // [23:23] is the sub-list for extension type_name
-	23, // [23:23] is the sub-list for extension extendee
-	0,  // [0:23] is the sub-list for field type_name
+	17, // 6: com.coralogixapis.slo.v1.Revision.update_time:type_name -> google.protobuf.Timestamp
+	16, // 7: com.coralogixapis.slo.v1.Slo.labels:type_name -> com.coralogixapis.slo.v1.Slo.LabelsEntry
+	8,  // 8: com.coralogixapis.slo.v1.Slo.revision:type_name -> com.coralogixapis.slo.v1.Revision
+	9,  // 9: com.coralogixapis.slo.v1.Slo.grouping:type_name -> com.coralogixapis.slo.v1.Grouping
+	17, // 10: com.coralogixapis.slo.v1.Slo.create_time:type_name -> google.protobuf.Timestamp
+	17, // 11: com.coralogixapis.slo.v1.Slo.update_time:type_name -> google.protobuf.Timestamp
+	3,  // 12: com.coralogixapis.slo.v1.Slo.slo_time_frame:type_name -> com.coralogixapis.slo.v1.SloTimeFrame
+	6,  // 13: com.coralogixapis.slo.v1.Slo.request_based_metric_sli:type_name -> com.coralogixapis.slo.v1.RequestBasedMetricSli
+	7,  // 14: com.coralogixapis.slo.v1.Slo.window_based_metric_sli:type_name -> com.coralogixapis.slo.v1.WindowBasedMetricSli
+	4,  // 15: com.coralogixapis.slo.v1.SloFilterField.const_filter:type_name -> com.coralogixapis.slo.v1.SloConstantFilterField
+	12, // 16: com.coralogixapis.slo.v1.SloFilterPredicate.is:type_name -> com.coralogixapis.slo.v1.IsFilterPredicate
+	11, // 17: com.coralogixapis.slo.v1.SloFilter.field:type_name -> com.coralogixapis.slo.v1.SloFilterField
+	13, // 18: com.coralogixapis.slo.v1.SloFilter.predicate:type_name -> com.coralogixapis.slo.v1.SloFilterPredicate
+	14, // 19: com.coralogixapis.slo.v1.SloFilters.filters:type_name -> com.coralogixapis.slo.v1.SloFilter
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_slo_v1_slo_proto_init() }
@@ -1373,13 +1217,8 @@ func file_com_coralogixapis_slo_v1_slo_proto_init() {
 	file_com_coralogixapis_slo_v1_slo_proto_msgTypes[6].OneofWrappers = []any{
 		(*SloFilterField_ConstFilter)(nil),
 		(*SloFilterField_LabelName)(nil),
-		(*SloFilterField_SloType)(nil),
 	}
-	file_com_coralogixapis_slo_v1_slo_proto_msgTypes[7].OneofWrappers = []any{
-		(*IsFilterPredicate_StringValues)(nil),
-		(*IsFilterPredicate_TypeValues)(nil),
-	}
-	file_com_coralogixapis_slo_v1_slo_proto_msgTypes[10].OneofWrappers = []any{
+	file_com_coralogixapis_slo_v1_slo_proto_msgTypes[8].OneofWrappers = []any{
 		(*SloFilterPredicate_Is)(nil),
 	}
 	type x struct{}
@@ -1387,8 +1226,8 @@ func file_com_coralogixapis_slo_v1_slo_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_com_coralogixapis_slo_v1_slo_proto_rawDesc), len(file_com_coralogixapis_slo_v1_slo_proto_rawDesc)),
-			NumEnums:      6,
-			NumMessages:   13,
+			NumEnums:      5,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
