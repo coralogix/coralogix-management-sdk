@@ -95,7 +95,7 @@ type GetTeamDetailedDataUsageRequest struct {
 	//
 	// Do note that to avoid overloading the service we enforce resolution limits
 	// that depend on the server configuration. This is configured by the server.
-	// This means that, for instance, requests with 1 min resolution for an interval of 30 days will be rejected.
+	// This means that, for instance, requests with 1 min resolution for a interval of 30 days will be rejected.
 	//
 	// Resolution must be between 1 min and date_range interval
 	Resolution *durationpb.Duration `protobuf:"bytes,3,opt,name=resolution,proto3" json:"resolution,omitempty"`
@@ -1541,73 +1541,73 @@ const file_com_coralogix_datausage_v2_data_usage_service_proto_rawDesc = "" +
 	"\x13AGGREGATE_BY_PILLAR\x10\x03\x12\x19\n" +
 	"\x15AGGREGATE_BY_PRIORITY\x10\x04\x12\x1c\n" +
 	"\x18AGGREGATE_BY_POLICY_NAME\x10\x05\x12\x19\n" +
-	"\x15AGGREGATE_BY_SEVERITY\x10\x062\xf4\x15\n" +
+	"\x15AGGREGATE_BY_SEVERITY\x10\x062\xbf\x18\n" +
 	"\x10DataUsageService\x12\x9c\x01\n" +
-	"\x18GetTeamDetailedDataUsage\x12;.com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest\x1a<.com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse\"\x03\x88\x02\x010\x01\x12\x96\x02\n" +
-	"\rGetSpansCount\x120.com.coralogix.datausage.v2.GetSpansCountRequest\x1a1.com.coralogix.datausage.v2.GetSpansCountResponse\"\x9d\x01\x9aAz\n" +
+	"\x18GetTeamDetailedDataUsage\x12;.com.coralogix.datausage.v2.GetTeamDetailedDataUsageRequest\x1a<.com.coralogix.datausage.v2.GetTeamDetailedDataUsageResponse\"\x03\x88\x02\x010\x01\x12\xbe\x02\n" +
+	"\rGetSpansCount\x120.com.coralogix.datausage.v2.GetSpansCountRequest\x1a1.com.coralogix.datausage.v2.GetSpansCountResponse\"\xc5\x01\x9aAz\n" +
 	"\x12Data Usage Service\x12\x0fGet Spans CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1a\x12\x18/v2/datausage/spanscount0\x01\x12\x91\x02\n" +
-	"\fGetLogsCount\x12/.com.coralogix.datausage.v2.GetLogsCountRequest\x1a0.com.coralogix.datausage.v2.GetLogsCountResponse\"\x9b\x01\x9aAy\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02BZ\x1a\x12\x18/v2/datausage/spanscount\x12$/dataplans/data-usage/v2/spans:count0\x01\x12\xb8\x02\n" +
+	"\fGetLogsCount\x12/.com.coralogix.datausage.v2.GetLogsCountRequest\x1a0.com.coralogix.datausage.v2.GetLogsCountResponse\"\xc2\x01\x9aAy\n" +
 	"\x12Data Usage Service\x12\x0eGet Logs CountJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x19\x12\x17/v2/datausage/logscount0\x01\x12\xe2\x02\n" +
-	"\x1fGetDataUsageMetricsExportStatus\x12B.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest\x1aC.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse\"\xb5\x01\x9aA\x8f\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02@Z\x19\x12\x17/v2/datausage/logscount\x12#/dataplans/data-usage/v2/logs:count0\x01\x12\x8c\x03\n" +
+	"\x1fGetDataUsageMetricsExportStatus\x12B.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusRequest\x1aC.com.coralogix.datausage.v2.GetDataUsageMetricsExportStatusResponse\"\xdf\x01\x9aA\x8f\x01\n" +
 	"\x12Data Usage Service\x12$Get Data Usage Metrics Export StatusJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v2/datausage/exportstatus\x12\xf1\x02\n" +
-	"\"UpdateDataUsageMetricsExportStatus\x12E.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest\x1aF.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse\"\xbb\x01\x9aA\x92\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02FZ\x1c\x12\x1a/v2/datausage/exportstatus\x12&/dataplans/data-usage/v2/export-status\x12\x9b\x03\n" +
+	"\"UpdateDataUsageMetricsExportStatus\x12E.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusRequest\x1aF.com.coralogix.datausage.v2.UpdateDataUsageMetricsExportStatusResponse\"\xe5\x01\x9aA\x92\x01\n" +
 	"\x12Data Usage Service\x12'Update Data Usage Metrics Export StatusJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v2/datausage/exportstatus\x12\x87\x02\n" +
-	"\fGetDataUsage\x12/.com.coralogix.datausage.v2.GetDataUsageRequest\x1a0.com.coralogix.datausage.v2.GetDataUsageResponse\"\x91\x01\x9aAy\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02I:\x01*Z\x1c\"\x1a/v2/datausage/exportstatus\"&/dataplans/data-usage/v2/export-status\x12\xa3\x02\n" +
+	"\fGetDataUsage\x12/.com.coralogix.datausage.v2.GetDataUsageRequest\x1a0.com.coralogix.datausage.v2.GetDataUsageResponse\"\xad\x01\x9aAy\n" +
 	"\x12Data Usage Service\x12\x0eGet Data UsageJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x0f\x12\r/v2/datausage0\x01\x12\xae\x02\n" +
-	"\x12GetDailyUsageUnits\x125.com.coralogix.datausage.v2.GetDailyUsageUnitsRequest\x1a6.com.coralogix.datausage.v2.GetDailyUsageUnitsResponse\"\xa8\x01\x9aA\x80\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02+Z\x0f\x12\r/v2/datausage\x12\x18/dataplans/data-usage/v20\x01\x12\xd6\x02\n" +
+	"\x12GetDailyUsageUnits\x125.com.coralogix.datausage.v2.GetDailyUsageUnitsRequest\x1a6.com.coralogix.datausage.v2.GetDailyUsageUnitsResponse\"\xd0\x01\x9aA\x80\x01\n" +
 	"\x12Data Usage Service\x12\x15Get Daily Usage UnitsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v2/datausage/daily/units\x12\xd3\x02\n" +
-	"\x19GetDailyUsageProcessedGbs\x12<.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest\x1a=.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse\"\xb8\x01\x9aA\x88\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02F:\x01*Z\x1b\"\x19/v2/datausage/daily/units\"$/dataplans/data-usage/v2/daily:units\x12\x83\x03\n" +
+	"\x19GetDailyUsageProcessedGbs\x12<.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsRequest\x1a=.com.coralogix.datausage.v2.GetDailyUsageProcessedGbsResponse\"\xe8\x01\x9aA\x88\x01\n" +
 	"\x12Data Usage Service\x12\x1dGet Daily Usage Processed GBsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02&:\x01*\"!/v2/datausage/daily/processed_gbs\x12\xe7\x02\n" +
-	"\x1dGetDailyUsageEvaluationTokens\x12@.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest\x1aA.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse\"\xc0\x01\x9aA\x8c\x01\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02V:\x01*Z#\"!/v2/datausage/daily/processed_gbs\",/dataplans/data-usage/v2/daily:processed-gbs\x12\x9b\x03\n" +
+	"\x1dGetDailyUsageEvaluationTokens\x12@.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensRequest\x1aA.com.coralogix.datausage.v2.GetDailyUsageEvaluationTokensResponse\"\xf4\x01\x9aA\x8c\x01\n" +
 	"\x12Data Usage Service\x12!Get Daily Usage Evaluation TokensJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error\x82\xd3\xe4\x93\x02*:\x01*\"%/v2/datausage/daily/evaluation_tokens\x1a@\x9aA=\n" +
+	"\x15Internal server error\x82\xd3\xe4\x93\x02^:\x01*Z'\"%/v2/datausage/daily/evaluation_tokens\"0/dataplans/data-usage/v2/daily:evaluation-tokens\x1a@\x9aA=\n" +
 	"\x12Data Usage Service\x12'A service to manage data usage metrics.b\x06proto3"
 
 var (

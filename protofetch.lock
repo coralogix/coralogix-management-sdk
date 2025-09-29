@@ -51,8 +51,8 @@ commit_hash = "b2a7515b36c30a688a669e47a501dc52939eea3a"
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.3.20"
-commit_hash = "2f07ffb152ffd71a34a9739ea1edadb03c5029c3"
+revision = "v0.3.21"
+commit_hash = "2865c125b5480d0f757e5ad5c45486d0d263ee73"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -81,14 +81,14 @@ commit_hash = "feccb6973b6bfe22caa5f26daf7b65ec6d2e670c"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-branch = "master"
-commit_hash = "a80be3832586c521913a04dd7b31c2c33f624d21"
+revision = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
+commit_hash = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
 url = "github.com/coralogix/cx-api-logs2metrics"
-revision = "v0.3.4"
-commit_hash = "5d791c65339211b5c7bb22f2803431361c5a0aac"
+revision = "v0.3.5"
+commit_hash = "5921c0e9bea453e15a75845dcfffc29cd5a1950b"
 
 [[dependencies]]
 name = "cx-api-metrics-configurator"
@@ -159,5 +159,5 @@ commit_hash = "54d659d0ae74f39e92755948b821a1495b3cb3c8"
 [[dependencies]]
 name = "rules-api-protobuf"
 url = "github.com/coralogix/rules-api-protobuf"
-revision = "v0.17.3"
-commit_hash = "0c8c3119f41074074234c210aae268461ccbb758"
+revision = "v0.19.0"
+commit_hash = "dfe079f8fe7ad4e3076cb5efc02829717876f964"

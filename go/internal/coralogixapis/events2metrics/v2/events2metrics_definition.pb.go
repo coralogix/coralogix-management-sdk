@@ -193,7 +193,7 @@ func (E2MAggSamples_SampleType) EnumDescriptor() ([]byte, []int) {
 // E2M represents the Event to metrics base model.
 type E2M struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	//E2M unique ID, required on update requests
+	// E2M unique ID, required on update requests
 	Id *wrapperspb.StringValue `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Name of the E2M
 	Name *wrapperspb.StringValue `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -359,7 +359,7 @@ type E2M_SpansQuery struct {
 }
 
 type E2M_LogsQuery struct {
-	//  E2M logs query
+	// E2M logs query
 	LogsQuery *v21.LogsQuery `protobuf:"bytes,11,opt,name=logs_query,json=logsQuery,proto3,oneof"`
 }
 
@@ -618,7 +618,7 @@ func (x *MetricLabel) GetSourceField() *wrapperspb.StringValue {
 	return nil
 }
 
-//E2M metric field
+// E2M metric field
 type MetricField struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Target metric field alias name
