@@ -96,7 +96,7 @@ service IncidentsService {
   rpc ListIncidents(ListIncidentsRequest) returns (ListIncidentsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get incidents list";
     option (google.api.http) = {
-      get: "/incidents/incidents/v1"
+      post: "/incidents/incidents/v1"
       body: "*"
       additional_bindings: {post: "/v1/incidents"}
     };
