@@ -2156,7 +2156,7 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x14\n" +
-	"\x12Get incidents list\x82\xd3\xe4\x93\x02-:\x01*Z\x0f\"\r/v1/incidents\x12\x17/incidents/incidents/v1\x12\x9c\x04\n" +
+	"\x12Get incidents list\x82\xd3\xe4\x93\x02-:\x01*Z\x0f\"\r/v1/incidents\"\x17/incidents/incidents/v1\x12\x9c\x04\n" +
 	"\x18ListIncidentAggregations\x12?.com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest\x1a@.com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse\"\xfc\x02\x9aA\xff\x01\n" +
 	"\x11Incidents service\x12\x19Get incident aggregations\x1aJRetrieve aggregated incident data with support for grouping and filtering.J\x14\n" +
 	"\x03400\x12\r\n" +
