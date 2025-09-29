@@ -81,8 +81,8 @@ commit_hash = "feccb6973b6bfe22caa5f26daf7b65ec6d2e670c"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-revision = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
-commit_hash = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
+branch = "master"
+commit_hash = "a80be3832586c521913a04dd7b31c2c33f624d21"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"
