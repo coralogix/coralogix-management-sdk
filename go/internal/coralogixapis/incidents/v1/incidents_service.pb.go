@@ -2122,9 +2122,9 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x0efilters_values\x18\x01 \x01(\v2:.com.coralogixapis.incidents.v1.IncidentQueryFiltersValuesB0\x9aA-2+Available filter values for incident eventsR\rfiltersValues:u\x9aAr\n" +
 	"p*+List incident events filter values response2AA response containing available filter values for incident events*`\n" +
 	"\x1dIncidentEventOrderByFieldType\x12?\n" +
-	";INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED\x10\x002\x86B\n" +
-	"\x10IncidentsService\x12\xa6\x03\n" +
-	"\vGetIncident\x122.com.coralogixapis.incidents.v1.GetIncidentRequest\x1a3.com.coralogixapis.incidents.v1.GetIncidentResponse\"\xad\x02\x9aA\xfd\x01\n" +
+	";INCIDENT_EVENT_ORDER_BY_FIELD_TYPE_TIMESTAMP_OR_UNSPECIFIED\x10\x002\xb0G\n" +
+	"\x10IncidentsService\x12\xc6\x03\n" +
+	"\vGetIncident\x122.com.coralogixapis.incidents.v1.GetIncidentRequest\x1a3.com.coralogixapis.incidents.v1.GetIncidentResponse\"\xcd\x02\x9aA\xfd\x01\n" +
 	"\x11Incidents service\x12\x12Get incident by ID\x1aORetrieve detailed information about a single incident by its unique identifier.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2134,8 +2134,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x0e\n" +
-	"\fGet incident\x82\xd3\xe4\x93\x02\x14\x12\x12/v1/incidents/{id}\x12\xb9\x03\n" +
-	"\x10BatchGetIncident\x127.com.coralogixapis.incidents.v1.BatchGetIncidentRequest\x1a8.com.coralogixapis.incidents.v1.BatchGetIncidentResponse\"\xb1\x02\x9aA\xf6\x01\n" +
+	"\fGet incident\x82\xd3\xe4\x93\x024Z\x14\x12\x12/v1/incidents/{id}\x12\x1c/incidents/incidents/v1/{id}\x12\xda\x03\n" +
+	"\x10BatchGetIncident\x127.com.coralogixapis.incidents.v1.BatchGetIncidentRequest\x1a8.com.coralogixapis.incidents.v1.BatchGetIncidentResponse\"\xd2\x02\x9aA\xf6\x01\n" +
 	"\x11Incidents service\x12\x1dGet multiple incidents by IDs\x1a=Retrieve multiple incidents by their IDs in a single request.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2145,8 +2145,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x15\n" +
-	"\x13Batch get incidents\x82\xd3\xe4\x93\x02\x18\"\x16/v1/incidents:batchGet\x12\xfb\x03\n" +
-	"\rListIncidents\x124.com.coralogixapis.incidents.v1.ListIncidentsRequest\x1a5.com.coralogixapis.incidents.v1.ListIncidentsResponse\"\xfc\x02\x9aA\xc8\x02\n" +
+	"\x13Batch get incidents\x82\xd3\xe4\x93\x029Z\x18\"\x16/v1/incidents:batchGet\x12\x1d/incidents/incidents/v1/batch\x12\x96\x04\n" +
+	"\rListIncidents\x124.com.coralogixapis.incidents.v1.ListIncidentsRequest\x1a5.com.coralogixapis.incidents.v1.ListIncidentsResponse\"\x97\x03\x9aA\xc8\x02\n" +
 	"\x11Incidents service\x12\x1bList incidents with filters\x1a\x90\x01Lists all available incidents based on specified filters and order. The list is ordered in an unspecified direction and sorted by creation time.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2156,8 +2156,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x14\n" +
-	"\x12Get incidents list\x82\xd3\xe4\x93\x02\x12:\x01*\"\r/v1/incidents\x12\xf4\x03\n" +
-	"\x18ListIncidentAggregations\x12?.com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest\x1a@.com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse\"\xd4\x02\x9aA\xff\x01\n" +
+	"\x12Get incidents list\x82\xd3\xe4\x93\x02-:\x01*Z\x0f\"\r/v1/incidents\x12\x17/incidents/incidents/v1\x12\x9c\x04\n" +
+	"\x18ListIncidentAggregations\x12?.com.coralogixapis.incidents.v1.ListIncidentAggregationsRequest\x1a@.com.coralogixapis.incidents.v1.ListIncidentAggregationsResponse\"\xfc\x02\x9aA\xff\x01\n" +
 	"\x11Incidents service\x12\x19Get incident aggregations\x1aJRetrieve aggregated incident data with support for grouping and filtering.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2167,8 +2167,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x1c\n" +
-	"\x1aList incident aggregations\x82\xd3\xe4\x93\x02+:\x01*\"&/v1/incidents:listIncidentAggregations\x12\xff\x02\n" +
-	"\x0fGetFilterValues\x126.com.coralogixapis.incidents.v1.GetFilterValuesRequest\x1a7.com.coralogixapis.incidents.v1.GetFilterValuesResponse\"\xfa\x01\x9aA\xb5\x01\n" +
+	"\x1aList incident aggregations\x82\xd3\xe4\x93\x02S:\x01*Z(\"&/v1/incidents:listIncidentAggregations\"$/incidents/incidents/v1/aggregations\x12\xa8\x03\n" +
+	"\x0fGetFilterValues\x126.com.coralogixapis.incidents.v1.GetFilterValuesRequest\x1a7.com.coralogixapis.incidents.v1.GetFilterValuesResponse\"\xa3\x02\x9aA\xb5\x01\n" +
 	"\x11Incidents service\x12\x1bGet available filter valuesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2178,8 +2178,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x13\n" +
-	"\x11Get filter values\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/incidents:get-filter-values\x12\xa6\x03\n" +
-	"\x0fAssignIncidents\x126.com.coralogixapis.incidents.v1.AssignIncidentsRequest\x1a7.com.coralogixapis.incidents.v1.AssignIncidentsResponse\"\xa1\x02\x9aA\xe8\x01\n" +
+	"\x11Get filter values\x82\xd3\xe4\x93\x02M:\x01*Z!\"\x1f/v1/incidents:get-filter-values\x12%/incidents/incidents/v1/filter-values\x12\xc9\x03\n" +
+	"\x0fAssignIncidents\x126.com.coralogixapis.incidents.v1.AssignIncidentsRequest\x1a7.com.coralogixapis.incidents.v1.AssignIncidentsResponse\"\xc4\x02\x9aA\xe8\x01\n" +
 	"\x11Incidents service\x12\x1aAssign incidents to a user\x1a0Assign one or more incidents to a specific user.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2189,8 +2189,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj0\n" +
 	"\x16x-coralogixPermissions\x12\x162\x14\n" +
 	"\x12\x1a\x10incidents:assignʸ\x02\x12\n" +
-	"\x10Assign incidents\x82\xd3\xe4\x93\x02\x19:\x01*\"\x14/v1/incidents:assign\x12\xb9\x03\n" +
-	"\x11UnassignIncidents\x128.com.coralogixapis.incidents.v1.UnassignIncidentsRequest\x1a9.com.coralogixapis.incidents.v1.UnassignIncidentsResponse\"\xae\x02\x9aA\xf1\x01\n" +
+	"\x10Assign incidents\x82\xd3\xe4\x93\x02<:\x01*Z\x16\"\x14/v1/incidents:assign\"\x1f/incidents/incidents/v1/by-user\x12\xdc\x03\n" +
+	"\x11UnassignIncidents\x128.com.coralogixapis.incidents.v1.UnassignIncidentsRequest\x1a9.com.coralogixapis.incidents.v1.UnassignIncidentsResponse\"\xd1\x02\x9aA\xf1\x01\n" +
 	"\x11Incidents service\x12 Remove incident user assignments\x1a3Remove user assignments from one or more incidents.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2200,8 +2200,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj0\n" +
 	"\x16x-coralogixPermissions\x12\x162\x14\n" +
 	"\x12\x1a\x10incidents:assignʸ\x02\x14\n" +
-	"\x12Unassign incidents\x82\xd3\xe4\x93\x02\x1b:\x01*\"\x16/v1/incidents:unassign\x12\xba\x03\n" +
-	"\x14AcknowledgeIncidents\x12;.com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest\x1a<.com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse\"\xa6\x02\x9aA\xe3\x01\n" +
+	"\x12Unassign incidents\x82\xd3\xe4\x93\x02>:\x01*Z\x18\"\x16/v1/incidents:unassign*\x1f/incidents/incidents/v1/by-user\x12\xe1\x03\n" +
+	"\x14AcknowledgeIncidents\x12;.com.coralogixapis.incidents.v1.AcknowledgeIncidentsRequest\x1a<.com.coralogixapis.incidents.v1.AcknowledgeIncidentsResponse\"\xcd\x02\x9aA\xe3\x01\n" +
 	"\x11Incidents service\x12\x15Acknowledge incidents\x1a+Mark one or more incidents as acknowledged.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2211,8 +2211,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
 	"\x17\x1a\x15incidents:acknowledgeʸ\x02\x17\n" +
-	"\x15Acknowledge incidents\x82\xd3\xe4\x93\x02\x1e:\x01*\"\x19/v1/incidents:acknowledge\x12\xe3\x02\n" +
-	"\x0eCloseIncidents\x125.com.coralogixapis.incidents.v1.CloseIncidentsRequest\x1a6.com.coralogixapis.incidents.v1.CloseIncidentsResponse\"\xe1\x01\x9aA\xaa\x01\n" +
+	"\x15Acknowledge incidents\x82\xd3\xe4\x93\x02E:\x01*Z\x1b\"\x19/v1/incidents:acknowledge\"#/incidents/incidents/v1/acknowledge\x12\x84\x03\n" +
+	"\x0eCloseIncidents\x125.com.coralogixapis.incidents.v1.CloseIncidentsRequest\x1a6.com.coralogixapis.incidents.v1.CloseIncidentsResponse\"\x82\x02\x9aA\xaa\x01\n" +
 	"\x11Incidents service\x12\x0fClose incidentsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2222,8 +2222,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj/\n" +
 	"\x16x-coralogixPermissions\x12\x152\x13\n" +
 	"\x11\x1a\x0fincidents:closeʸ\x02\x11\n" +
-	"\x0fClose incidents\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v1/incidents:close\x12\xad\x04\n" +
-	"\x11GetIncidentEvents\x128.com.coralogixapis.incidents.v1.GetIncidentEventsRequest\x1a9.com.coralogixapis.incidents.v1.GetIncidentEventsResponse\"\xa2\x03\x9aA\xc7\x02\n" +
+	"\x0fClose incidents\x82\xd3\xe4\x93\x029:\x01*Z\x15\"\x13/v1/incidents:close\"\x1d/incidents/incidents/v1/close\x12\xdd\x04\n" +
+	"\x11GetIncidentEvents\x128.com.coralogixapis.incidents.v1.GetIncidentEventsRequest\x1a9.com.coralogixapis.incidents.v1.GetIncidentEventsResponse\"\xd2\x03\x9aA\xc7\x02\n" +
 	"\x11Incidents service\x12\x13Get incident events\x1a\x97\x01Retrieve a chronological list of all events associated with a specific incident. Includes state changes, assignments, acknowledgments, and resolutions.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2233,8 +2233,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02)\n" +
-	"'Get all incident events of the incident\x82\xd3\xe4\x93\x02$\x12\"/v1/incidents/{incident_id}/events\x12\x98\x03\n" +
-	"\x10ResolveIncidents\x127.com.coralogixapis.incidents.v1.ResolveIncidentsRequest\x1a8.com.coralogixapis.incidents.v1.ResolveIncidentsResponse\"\x90\x02\x9aA\xd5\x01\n" +
+	"'Get all incident events of the incident\x82\xd3\xe4\x93\x02TZ$\x12\"/v1/incidents/{incident_id}/events\x12,/incidents/incidents/v1/{incident_id}/events\x12\xbb\x03\n" +
+	"\x10ResolveIncidents\x127.com.coralogixapis.incidents.v1.ResolveIncidentsRequest\x1a8.com.coralogixapis.incidents.v1.ResolveIncidentsResponse\"\xb3\x02\x9aA\xd5\x01\n" +
 	"\x11Incidents service\x12\x11Resolve incidents\x1a'Mark one or more incidents as resolved.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2244,9 +2244,9 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj/\n" +
 	"\x16x-coralogixPermissions\x12\x152\x13\n" +
 	"\x11\x1a\x0fincidents:closeʸ\x02\x13\n" +
-	"\x11Resolve incidents\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/incidents:resolve\x12\xdc\x03\n" +
-	"\x14GetIncidentByEventId\x12;.com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest\x1a<.com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse\"\xc8\x02\x9aA\xfd\x01\n" +
-	"\x11Incidents service\x12\x12Get incident by ID\x1aORetrieve detailed information about a single incident by its unique identifier.J\x14\n" +
+	"\x11Resolve incidents\x82\xd3\xe4\x93\x02=:\x01*Z\x17\"\x15/v1/incidents:resolve\"\x1f/incidents/incidents/v1/resolve\x12\x90\x04\n" +
+	"\x14GetIncidentByEventId\x12;.com.coralogixapis.incidents.v1.GetIncidentByEventIdRequest\x1a<.com.coralogixapis.incidents.v1.GetIncidentByEventIdResponse\"\xfc\x02\x9aA\x84\x02\n" +
+	"\x11Incidents service\x12\x18Get incident by event ID\x1aPRetrieve detailed information about a single incident by related alert event id.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
@@ -2255,8 +2255,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x1a\n" +
-	"\x18Get incident by event id\x82\xd3\xe4\x93\x02#\x12!/v1/incidents/by:event/{event_id}\x12\xfb\x03\n" +
-	"\x1cAcknowledgeIncidentByEventId\x12C.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest\x1aD.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse\"\xcf\x02\x9aA\xed\x01\n" +
+	"\x18Get incident by event id\x82\xd3\xe4\x93\x02PZ#\x12!/v1/incidents/by:event/{event_id}\x12)/incidents/incidents/v1/events/{event_id}\x12\xb4\x04\n" +
+	"\x1cAcknowledgeIncidentByEventId\x12C.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdRequest\x1aD.com.coralogixapis.incidents.v1.AcknowledgeIncidentByEventIdResponse\"\x88\x03\x9aA\xed\x01\n" +
 	"\x11Incidents service\x12 Acknowledge incident by event id\x1a*Mark incident as acknowledged by event id.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2266,8 +2266,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
 	"\x17\x1a\x15incidents:acknowledgeʸ\x02\"\n" +
-	" Acknowledge incident by event id\x82\xd3\xe4\x93\x022:\x01*\"-/v1/by:event/incidents:acknowledge/{event_id}\x12\xd9\x03\n" +
-	"\x18ResolveIncidentByEventId\x12?.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest\x1a@.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse\"\xb9\x02\x9aA\xdf\x01\n" +
+	" Acknowledge incident by event id\x82\xd3\xe4\x93\x02k:\x01*Z/\"-/v1/by:event/incidents:acknowledge/{event_id}\"5/incidents/incidents/v1/events/{event_id}/acknowledge\x12\x8e\x04\n" +
+	"\x18ResolveIncidentByEventId\x12?.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdRequest\x1a@.com.coralogixapis.incidents.v1.ResolveIncidentByEventIdResponse\"\xee\x02\x9aA\xdf\x01\n" +
 	"\x11Incidents service\x12\x1cResolve incident by event id\x1a&Mark incident as resolved by event id.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2277,10 +2277,10 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj/\n" +
 	"\x16x-coralogixPermissions\x12\x152\x13\n" +
 	"\x11\x1a\x0fincidents:closeʸ\x02\x1e\n" +
-	"\x1cResolve incident by event id\x82\xd3\xe4\x93\x02.:\x01*\")/v1/by:event/incidents:resolve/{event_id}\x12\xf1\x01\n" +
+	"\x1cResolve incident by event id\x82\xd3\xe4\x93\x02c:\x01*Z+\")/v1/by:event/incidents:resolve/{event_id}\"1/incidents/incidents/v1/events/{event_id}/resolve\x12\xf1\x01\n" +
 	"\x1eGetIncidentUsingCorrelationKey\x12E.com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyRequest\x1aF.com.coralogixapis.incidents.v1.GetIncidentUsingCorrelationKeyResponse\"@ʸ\x02<\n" +
-	":Get incident by correlation key and specific point in time\x12\xe0\x03\n" +
-	"\x12ListIncidentEvents\x129.com.coralogixapis.incidents.v1.ListIncidentEventsRequest\x1a:.com.coralogixapis.incidents.v1.ListIncidentEventsResponse\"\xd2\x02\x9aA\x87\x02\n" +
+	":Get incident by correlation key and specific point in time\x12\x82\x04\n" +
+	"\x12ListIncidentEvents\x129.com.coralogixapis.incidents.v1.ListIncidentEventsRequest\x1a:.com.coralogixapis.incidents.v1.ListIncidentEventsResponse\"\xf4\x02\x9aA\x87\x02\n" +
 	"\x11Incidents service\x12!List incident events with filters\x1aJList incident events with support for filtering, pagination, and ordering.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2290,8 +2290,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\x16\n" +
-	"\x14List incident events\x82\xd3\xe4\x93\x02':\x01*\"\"/v1/incidents:list-incident-events\x12\x8b\x04\n" +
-	"\x1cListIncidentEventsTotalCount\x12C.com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest\x1aD.com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse\"\xdf\x02\x9aA\xfc\x01\n" +
+	"\x14List incident events\x82\xd3\xe4\x93\x02I:\x01*Z$\"\"/v1/incidents:list-incident-events\x12\x1e/incidents/incidents/v1/events\x12\xb3\x04\n" +
+	"\x1cListIncidentEventsTotalCount\x12C.com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountRequest\x1aD.com.coralogixapis.incidents.v1.ListIncidentEventsTotalCountResponse\"\x87\x03\x9aA\xfc\x01\n" +
 	"\x11Incidents service\x12\"Get total count of incident events\x1a>Retrieve the total count of incident events matching a filter.J\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2301,8 +2301,8 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02\"\n" +
-	" List incident events total count\x82\xd3\xe4\x93\x023:\x01*\"./v1/incidents:list-incident-events-total-count\x12\xdd\x03\n" +
-	"\x1eListIncidentEventsFilterValues\x12E.com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest\x1aF.com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse\"\xab\x02\x9aA\xc4\x01\n" +
+	" List incident events total count\x82\xd3\xe4\x93\x02[:\x01*Z0\"./v1/incidents:list-incident-events-total-count\x12$/incidents/incidents/v1/events/count\x12\x8d\x04\n" +
+	"\x1eListIncidentEventsFilterValues\x12E.com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesRequest\x1aF.com.coralogixapis.incidents.v1.ListIncidentEventsFilterValuesResponse\"\xdb\x02\x9aA\xc4\x01\n" +
 	"\x11Incidents service\x12*Get available incident event filter valuesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -2312,7 +2312,7 @@ const file_com_coralogixapis_incidents_v1_incidents_service_proto_rawDesc = "" +
 	"\x15Internal server errorj.\n" +
 	"\x16x-coralogixPermissions\x12\x142\x12\n" +
 	"\x10\x1a\x0eincidents:readʸ\x02$\n" +
-	"\"List incident events filter values\x82\xd3\xe4\x93\x025:\x01*\"0/v1/incidents:list-incident-events-filter-values\x1a\xc4\x02\x9aA\xc0\x02\n" +
+	"\"List incident events filter values\x82\xd3\xe4\x93\x02e:\x01*Z2\"0/v1/incidents:list-incident-events-filter-values\x12,/incidents/incidents/v1/events/filter-values\x1a\xc4\x02\x9aA\xc0\x02\n" +
 	"\x11Incidents service\x12\xae\x01Handle all operations related to incident management within Coralogix. Identify, manage, and resolve incidents efficiently through automated workflows and team collaboration.\x1az\n" +
 	"<Find out more about incident management in our documentation\x12:https://coralogix.com/docs/user-guides/alerting/incidents/b\x06proto3"
 

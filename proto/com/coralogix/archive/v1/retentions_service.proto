@@ -110,7 +110,10 @@ service RetentionsService {
   };
   rpc GetRetentions(GetRetentionsRequest) returns (GetRetentionsResponse) {
     option (google.api.http) = {
-      get: "/v1/retentions"
+      get: "/dataengine/retention-tags/v1"
+      additional_bindings: {
+        get: "/v1/retentions"
+      }
     };
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get retentions";
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -132,8 +135,11 @@ service RetentionsService {
   }
   rpc UpdateRetentions(UpdateRetentionsRequest) returns (UpdateRetentionsResponse) {
     option (google.api.http) = {
-      post: "/v1/retentions"
+      post: "/dataengine/retention-tags/v1"
       body: "*"
+      additional_bindings: {
+        post: "/v1/retentions"
+      }
     };
     option (com.coralogixapis.common.v1.audit_log_description).description = "Update retention names";
 
@@ -157,8 +163,11 @@ service RetentionsService {
 
   rpc ActivateRetentions(ActivateRetentionsRequest) returns (ActivateRetentionsResponse) {
     option (google.api.http) = {
-      post: "/v1/retentions:activate"
+      post: "/dataengine/retention-tags/v1/activate"
       body: "*"
+      additional_bindings: {
+        post: "/v1/retentions:activate"
+      }
     };
     option (com.coralogixapis.common.v1.audit_log_description).description = "Activate retention tags";
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -181,7 +190,10 @@ service RetentionsService {
 
   rpc GetRetentionsEnabled(GetRetentionsEnabledRequest) returns (GetRetentionsEnabledResponse) {
     option (google.api.http) = {
-      get: "/v1/retentions/enabled"
+      get: "/dataengine/retention-tags/v1/enabled"
+      additional_bindings: {
+        get: "/v1/retentions/enabled"
+      }
     };
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get retention tags enabled status";
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
