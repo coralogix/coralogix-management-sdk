@@ -2,12 +2,11 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
-
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/descriptor.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 service ExtensionTestingService {
@@ -22,8 +21,9 @@ service ExtensionTestingService {
   rpc InitializeTestingRevision(InitializeTestingRevisionRequest) returns (InitializeTestingRevisionResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Initialize testing revision";
     option (google.api.http) = {
-      post: "/v1/extensions-testing/initialize"
+      post: "/integrations/extensions/v1/testing/initialize"
       body: "*"
+      additional_bindings: {post: "/v1/extensions-testing/initialize"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -54,8 +54,9 @@ service ExtensionTestingService {
   rpc CleanupTestingRevision(CleanupTestingRevisionRequest) returns (CleanupTestingRevisionResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Cleanup testing extension";
     option (google.api.http) = {
-      post: "/v1/extensions-testing/cleanup"
+      delete: "/integrations/extensions/v1/testing"
       body: "*"
+      additional_bindings: {post: "/v1/extensions-testing/cleanup"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -86,8 +87,9 @@ service ExtensionTestingService {
   rpc TestExtensionRevision(TestExtensionRevisionRequest) returns (TestExtensionRevisionResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Test extension";
     option (google.api.http) = {
-      post: "/v1/extensions-testing/test"
+      post: "/integrations/extensions/v1/testing"
       body: "*"
+      additional_bindings: {post: "/v1/extensions-testing/test"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -120,9 +122,7 @@ message InitializeTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Initialize testing revision request"
-      required: [
-        "extension_data"
-      ]
+      required: ["extension_data"]
     }
   };
   ExtensionData extension_data = 1;
@@ -141,9 +141,7 @@ message CleanupTestingRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Cleanup testing revision request"
-      required: [
-        "id"
-      ]
+      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1;
@@ -162,13 +160,11 @@ message TestExtensionRevisionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Test extension revision request"
-      required: [
-        "extension_data"
-      ]
+      required: ["extension_data"]
     }
   };
   ExtensionData extension_data = 1;
-  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  google.protobuf.BoolValue cleanup_after_test = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
 }
 
 message TestExtensionRevisionResponse {

@@ -734,7 +734,7 @@ var File_com_coralogix_extensions_v1_extension_deployment_service_proto protoref
 
 const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDesc = "" +
 	"\n" +
-	">com/coralogix/extensions/v1/extension_deployment_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"F\n" +
+	">com/coralogix/extensions/v1/extension_deployment_service.proto\x12\x1bcom.coralogix.extensions.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"F\n" +
 	"\x1cGetDeployedExtensionsRequest:&\x9aA#\n" +
 	"!*\x1fGet deployed extensions request\"\x81\a\n" +
 	"\x1dGetDeployedExtensionsResponse\x12\x86\x01\n" +
@@ -804,9 +804,9 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x06reason\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06reason:1\x9aA.\n" +
 	",*\vFailed item\xd2\x01\aitem_id\xd2\x01\tremote_id\xd2\x01\x06reason:.\x9aA+\n" +
 	")*'Revert deployment of extension responseB\x17\n" +
-	"\x15_extension_deployment2\xa8\x0e\n" +
-	"\x1aExtensionDeploymentService\x12\x9e\x03\n" +
-	"\x15GetDeployedExtensions\x129.com.coralogix.extensions.v1.GetDeployedExtensionsRequest\x1a:.com.coralogix.extensions.v1.GetDeployedExtensionsResponse\"\x8d\x02\x9aA\xc3\x01\n" +
+	"\x15_extension_deployment2\xc8\x0f\n" +
+	"\x1aExtensionDeploymentService\x12\xc6\x03\n" +
+	"\x15GetDeployedExtensions\x129.com.coralogix.extensions.v1.GetDeployedExtensionsRequest\x1a:.com.coralogix.extensions.v1.GetDeployedExtensionsResponse\"\xb5\x02\x9aA\xc3\x01\n" +
 	"\x1cExtension deployment service\x12\x17Get deployed extensionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -816,8 +816,8 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
 	"\x17\x1a\x15extensions:ReadConfigʸ\x02\x19\n" +
-	"\x17Get deployed extensions\x82\xd3\xe4\x93\x02#\x12!/v1/extension-deployment/deployed\x12\xfb\x02\n" +
-	"\x0fDeployExtension\x123.com.coralogix.extensions.v1.DeployExtensionRequest\x1a4.com.coralogix.extensions.v1.DeployExtensionResponse\"\xfc\x01\x9aA\xb8\x01\n" +
+	"\x17Get deployed extensions\x82\xd3\xe4\x93\x02KZ#\x12!/v1/extension-deployment/deployed\x12$/integrations/extensions/v1/deployed\x12\xa3\x03\n" +
+	"\x0fDeployExtension\x123.com.coralogix.extensions.v1.DeployExtensionRequest\x1a4.com.coralogix.extensions.v1.DeployExtensionResponse\"\xa4\x02\x9aA\xb8\x01\n" +
 	"\x1cExtension deployment service\x12\x10Deploy extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -827,8 +827,8 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11extensions:Deployʸ\x02\x12\n" +
-	"\x10Deploy extension\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/extension-deployment/deploy\x12\xfb\x02\n" +
-	"\x0fUpdateExtension\x123.com.coralogix.extensions.v1.UpdateExtensionRequest\x1a4.com.coralogix.extensions.v1.UpdateExtensionResponse\"\xfc\x01\x9aA\xb8\x01\n" +
+	"\x10Deploy extension\x82\xd3\xe4\x93\x02L:\x01*Z!\"\x1f/v1/extension-deployment/deploy\"$/integrations/extensions/v1/deployed\x12\xa3\x03\n" +
+	"\x0fUpdateExtension\x123.com.coralogix.extensions.v1.UpdateExtensionRequest\x1a4.com.coralogix.extensions.v1.UpdateExtensionResponse\"\xa4\x02\x9aA\xb8\x01\n" +
 	"\x1cExtension deployment service\x12\x10Update extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -838,8 +838,8 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11extensions:Deployʸ\x02\x12\n" +
-	"\x10Update extension\x82\xd3\xe4\x93\x02$:\x01*\"\x1f/v1/extension-deployment/update\x12\x93\x03\n" +
-	"\x11UndeployExtension\x125.com.coralogix.extensions.v1.UndeployExtensionRequest\x1a6.com.coralogix.extensions.v1.UndeployExtensionResponse\"\x8e\x02\x9aA\xc6\x01\n" +
+	"\x10Update extension\x82\xd3\xe4\x93\x02L:\x01*Z!\"\x1f/v1/extension-deployment/update\"$/integrations/extensions/v1/deployed\x12\xbb\x03\n" +
+	"\x11UndeployExtension\x125.com.coralogix.extensions.v1.UndeployExtensionRequest\x1a6.com.coralogix.extensions.v1.UndeployExtensionResponse\"\xb6\x02\x9aA\xc6\x01\n" +
 	"\x1cExtension deployment service\x12\x1eRevert deployment of extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -849,7 +849,7 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11extensions:Deployʸ\x02\x14\n" +
-	"\x12Undeploy extension\x82\xd3\xe4\x93\x02&:\x01*\"!/v1/extension-deployment/undeploy\x1a\xd6\x01\x9aA\xd2\x01\n" +
+	"\x12Undeploy extension\x82\xd3\xe4\x93\x02N:\x01*Z#\"!/v1/extension-deployment/undeploy*$/integrations/extensions/v1/deployed\x1a\xd6\x01\x9aA\xd2\x01\n" +
 	"\x1cExtension deployment service\x12EA service that enables querying for extension deployment information.\x1ak\n" +
 	"4Find out more about extensions in our documentation.\x123https://coralogix.com/docs/integrations/extensions/b\x06proto3"
 

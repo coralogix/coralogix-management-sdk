@@ -69,8 +69,8 @@ commit_hash = "a4300cbd86d05f2dddec00fc88c38f230eaf295a"
 [[dependencies]]
 name = "cx-api-extensions"
 url = "github.com/coralogix/cx-api-extensions"
-revision = "v1.0.11"
-commit_hash = "0ac5f2f4d178f5bdb824cc74a058e6cde13551e4"
+revision = "v1.0.12"
+commit_hash = "3155267a44c2d11c6b4e2db25c18e244cfc07b2f"
 
 [[dependencies]]
 name = "cx-api-incidents"
@@ -81,8 +81,8 @@ commit_hash = "feccb6973b6bfe22caa5f26daf7b65ec6d2e670c"
 [[dependencies]]
 name = "cx-api-lmd-model"
 url = "github.com/coralogix/cx-api-lmd-model"
-revision = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
-commit_hash = "32eef82a2a4cd2ccdf2c57362baf1bc57b176b48"
+branch = "master"
+commit_hash = "c3519ef689aca1a640f985e7b339394028c261f4"
 
 [[dependencies]]
 name = "cx-api-logs2metrics"

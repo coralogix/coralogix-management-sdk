@@ -2,13 +2,11 @@ syntax = "proto3";
 
 package com.coralogix.extensions.v1;
 
-import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/extensions/v1/extension.proto";
-
-import "google/protobuf/wrappers.proto";
-import "google/protobuf/descriptor.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
-
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 service ExtensionService {
@@ -24,8 +22,9 @@ service ExtensionService {
   rpc GetAllExtensions(GetAllExtensionsRequest) returns (GetAllExtensionsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get all extensions";
     option (google.api.http) = {
-      post: "/v1/extensions/all"
+      post: "/integrations/extensions/v1/all"
       body: "*"
+      additional_bindings: {post: "/v1/extensions/all"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -56,8 +55,9 @@ service ExtensionService {
   rpc GetExtension(GetExtensionRequest) returns (GetExtensionResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get extension by id";
     option (google.api.http) = {
-      get: "/v1/extensions/{id}"
+      get: "/integrations/extensions/v1/{id}"
       response_body: "extension"
+      additional_bindings: {get: "/v1/extensions/{id}"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -84,7 +84,6 @@ service ExtensionService {
       }
     };
   }
-
 }
 
 message GetAllExtensionsRequest {
@@ -95,7 +94,7 @@ message GetAllExtensionsRequest {
       required: []
     }
   };
-  
+
   message Filter {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
@@ -104,9 +103,9 @@ message GetAllExtensionsRequest {
         required: []
       }
     };
-    repeated string integrations = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+    repeated string integrations = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
   }
-  google.protobuf.BoolValue include_hidden_extensions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  google.protobuf.BoolValue include_hidden_extensions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
   Filter filter = 2;
 }
 
@@ -118,18 +117,16 @@ message GetAllExtensionsResponse {
       required: []
     }
   };
-  
+
   message RevisionSummary {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
       json_schema: {
         title: "Revision summary"
-        required: [
-          "item_counts"
-        ]
+        required: ["item_counts"]
       }
     };
     ItemCounts item_counts = 1;
-    google.protobuf.BoolValue is_new = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+    google.protobuf.BoolValue is_new = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
   }
 
   message Revision {
@@ -145,8 +142,8 @@ message GetAllExtensionsResponse {
     google.protobuf.StringValue version = 1;
     google.protobuf.StringValue description = 2;
     google.protobuf.StringValue excerpt = 3;
-    repeated google.protobuf.StringValue labels = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
-    repeated IntegrationDetail integration_details = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+    repeated google.protobuf.StringValue labels = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
+    repeated IntegrationDetail integration_details = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
     RevisionSummary summary = 6;
   }
 
@@ -165,31 +162,29 @@ message GetAllExtensionsResponse {
     google.protobuf.StringValue name = 2;
     google.protobuf.StringValue image = 3;
     google.protobuf.StringValue dark_mode_image = 4;
-    repeated Revision revisions = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
-    google.protobuf.BoolValue is_hidden = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
-    repeated string integrations = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
-    repeated string keywords = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+    repeated Revision revisions = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
+    google.protobuf.BoolValue is_hidden = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
+    repeated string integrations = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
+    repeated string keywords = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
     Deprecation deprecation = 9;
   }
 
-  repeated Extension extensions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "[]" }];
+  repeated Extension extensions = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "[]"}];
 }
 
 message GetExtensionRequest {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
     json_schema: {
       title: "Get extension request"
-      required: [
-        "id"
-      ]
+      required: ["id"]
     }
   };
   google.protobuf.StringValue id = 1;
   // On the frontend, we don't need the dashboard binaries.
   // But we need them for deployment in the extensions-service - so it's kind of a temporary argument,
   // As soon all the deployment logic is moved to the extensions-api, it can be removed.
-  google.protobuf.BoolValue include_dashboard_binaries = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
-  google.protobuf.BoolValue include_testing_revision = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = { default: "false" }];
+  google.protobuf.BoolValue include_dashboard_binaries = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
+  google.protobuf.BoolValue include_testing_revision = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {default: "false"}];
 }
 
 message GetExtensionResponse {

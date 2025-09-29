@@ -35,6 +35,8 @@ const (
 	Pillar_PILLAR_BINARY Pillar = 4
 	// JSON representation: "profiles"
 	Pillar_PILLAR_PROFILES Pillar = 5
+	// JSON representation: "events"
+	Pillar_PILLAR_EVENTS Pillar = 6
 )
 
 // Enum value maps for Pillar.
@@ -46,6 +48,7 @@ var (
 		3: "PILLAR_SPANS",
 		4: "PILLAR_BINARY",
 		5: "PILLAR_PROFILES",
+		6: "PILLAR_EVENTS",
 	}
 	Pillar_value = map[string]int32{
 		"PILLAR_UNSPECIFIED": 0,
@@ -54,6 +57,7 @@ var (
 		"PILLAR_SPANS":       3,
 		"PILLAR_BINARY":      4,
 		"PILLAR_PROFILES":    5,
+		"PILLAR_EVENTS":      6,
 	}
 )
 
@@ -126,6 +130,8 @@ const (
 	EntityType_ENTITY_TYPE_INFRA_MONITORING_EVENTS EntityType = 28
 	// JSON representation: "labsLimitViolations"
 	EntityType_ENTITY_TYPE_LABS_LIMIT_VIOLATIONS EntityType = 29
+	// JSON representation: "quotaEvents"
+	EntityType_ENTITY_TYPE_QUOTA_EVENTS EntityType = 30
 	// JSON representation: "metrics"
 	EntityType_ENTITY_TYPE_METRICS EntityType = 2
 	// JSON representation: "spans"
@@ -146,6 +152,8 @@ const (
 	EntityType_ENTITY_TYPE_SESSION_SNAPSHOTS EntityType = 23
 	// JSON representation: "cpuProfiles"
 	EntityType_ENTITY_TYPE_CPU_PROFILES EntityType = 21
+	// JSON representation: "events"
+	EntityType_ENTITY_TYPE_EVENTS EntityType = 31
 )
 
 // Enum value maps for EntityType.
@@ -171,6 +179,7 @@ var (
 		27: "ENTITY_TYPE_NOTIFICATION_REQUESTS",
 		28: "ENTITY_TYPE_INFRA_MONITORING_EVENTS",
 		29: "ENTITY_TYPE_LABS_LIMIT_VIOLATIONS",
+		30: "ENTITY_TYPE_QUOTA_EVENTS",
 		2:  "ENTITY_TYPE_METRICS",
 		3:  "ENTITY_TYPE_SPANS",
 		15: "ENTITY_TYPE_SESSION_RECORDINGS",
@@ -181,6 +190,7 @@ var (
 		20: "ENTITY_TYPE_SOURCE_MAPS",
 		23: "ENTITY_TYPE_SESSION_SNAPSHOTS",
 		21: "ENTITY_TYPE_CPU_PROFILES",
+		31: "ENTITY_TYPE_EVENTS",
 	}
 	EntityType_value = map[string]int32{
 		"ENTITY_TYPE_UNSPECIFIED":             0,
@@ -203,6 +213,7 @@ var (
 		"ENTITY_TYPE_NOTIFICATION_REQUESTS":   27,
 		"ENTITY_TYPE_INFRA_MONITORING_EVENTS": 28,
 		"ENTITY_TYPE_LABS_LIMIT_VIOLATIONS":   29,
+		"ENTITY_TYPE_QUOTA_EVENTS":            30,
 		"ENTITY_TYPE_METRICS":                 2,
 		"ENTITY_TYPE_SPANS":                   3,
 		"ENTITY_TYPE_SESSION_RECORDINGS":      15,
@@ -213,6 +224,7 @@ var (
 		"ENTITY_TYPE_SOURCE_MAPS":             20,
 		"ENTITY_TYPE_SESSION_SNAPSHOTS":       23,
 		"ENTITY_TYPE_CPU_PROFILES":            21,
+		"ENTITY_TYPE_EVENTS":                  31,
 	}
 )
 
@@ -247,14 +259,15 @@ var File_coralogix_model_data_pipeline_common_v1alpha_common_proto protoreflect.
 
 const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "" +
 	"\n" +
-	"9coralogix/model/data_pipeline/common/v1alpha/common.proto\x12,coralogix.model.data_pipeline.common.v1alpha*\x7f\n" +
+	"9coralogix/model/data_pipeline/common/v1alpha/common.proto\x12,coralogix.model.data_pipeline.common.v1alpha*\x92\x01\n" +
 	"\x06Pillar\x12\x16\n" +
 	"\x12PILLAR_UNSPECIFIED\x10\x00\x12\x0f\n" +
 	"\vPILLAR_LOGS\x10\x01\x12\x12\n" +
 	"\x0ePILLAR_METRICS\x10\x02\x12\x10\n" +
 	"\fPILLAR_SPANS\x10\x03\x12\x11\n" +
 	"\rPILLAR_BINARY\x10\x04\x12\x13\n" +
-	"\x0fPILLAR_PROFILES\x10\x05*\x9c\a\n" +
+	"\x0fPILLAR_PROFILES\x10\x05\x12\x11\n" +
+	"\rPILLAR_EVENTS\x10\x06*\xd2\a\n" +
 	"\n" +
 	"EntityType\x12\x1b\n" +
 	"\x17ENTITY_TYPE_UNSPECIFIED\x10\x00\x12\x14\n" +
@@ -277,7 +290,8 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	" ENTITY_TYPE_ENGINE_SCHEMA_FIELDS\x10\x1a\x12%\n" +
 	"!ENTITY_TYPE_NOTIFICATION_REQUESTS\x10\x1b\x12'\n" +
 	"#ENTITY_TYPE_INFRA_MONITORING_EVENTS\x10\x1c\x12%\n" +
-	"!ENTITY_TYPE_LABS_LIMIT_VIOLATIONS\x10\x1d\x12\x17\n" +
+	"!ENTITY_TYPE_LABS_LIMIT_VIOLATIONS\x10\x1d\x12\x1c\n" +
+	"\x18ENTITY_TYPE_QUOTA_EVENTS\x10\x1e\x12\x17\n" +
 	"\x13ENTITY_TYPE_METRICS\x10\x02\x12\x15\n" +
 	"\x11ENTITY_TYPE_SPANS\x10\x03\x12\"\n" +
 	"\x1eENTITY_TYPE_SESSION_RECORDINGS\x10\x0f\x12\x14\n" +
@@ -287,7 +301,8 @@ const file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDesc = "
 	"\x14ENTITY_TYPE_PROGUARD\x10\x13\x12\x1b\n" +
 	"\x17ENTITY_TYPE_SOURCE_MAPS\x10\x14\x12!\n" +
 	"\x1dENTITY_TYPE_SESSION_SNAPSHOTS\x10\x17\x12\x1c\n" +
-	"\x18ENTITY_TYPE_CPU_PROFILES\x10\x15b\x06proto3"
+	"\x18ENTITY_TYPE_CPU_PROFILES\x10\x15\x12\x16\n" +
+	"\x12ENTITY_TYPE_EVENTS\x10\x1fb\x06proto3"
 
 var (
 	file_coralogix_model_data_pipeline_common_v1alpha_common_proto_rawDescOnce sync.Once
