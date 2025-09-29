@@ -94,7 +94,7 @@ var File_com_coralogix_rules_v1_rule_subgroup_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_rules_v1_rule_subgroup_proto_rawDesc = "" +
 	"\n" +
-	"*com/coralogix/rules/v1/rule_subgroup.proto\x12\x16com.coralogix.rules.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a!com/coralogix/rules/v1/rule.proto\"\xda\x01\n" +
+	"*com/coralogix/rules/v1/rule_subgroup.proto\x12\x16com.coralogix.rules.v1\x1a!com/coralogix/rules/v1/rule.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xda\x01\n" +
 	"\fRuleSubgroup\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x122\n" +
 	"\x05rules\x18\x02 \x03(\v2\x1c.com.coralogix.rules.v1.RuleR\x05rules\x124\n" +

@@ -14,10 +14,12 @@ service DataUsageService {
     name: "Data Usage Service"
     description: "A service to manage data usage metrics."
   };
+
   // Deprecated. Please use GetDataUsage instead.
   rpc GetTeamDetailedDataUsage(GetTeamDetailedDataUsageRequest) returns (stream GetTeamDetailedDataUsageResponse) {
     option deprecated = true;
   }
+
   rpc GetSpansCount(GetSpansCountRequest) returns (stream GetSpansCountResponse) {
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -36,7 +38,10 @@ service DataUsageService {
       summary: "Get Spans Count"
     };
     option (google.api.http) = {
-      get: "/v2/datausage/spanscount"
+      get: "/dataplans/data-usage/v2/spans:count"
+      additional_bindings: {
+        get: "/v2/datausage/spanscount"
+      }
     };
   }
   rpc GetLogsCount(GetLogsCountRequest) returns (stream GetLogsCountResponse) {
@@ -57,7 +62,10 @@ service DataUsageService {
       summary: "Get Logs Count"
     };
     option (google.api.http) = {
-      get: "/v2/datausage/logscount"
+      get: "/dataplans/data-usage/v2/logs:count"
+      additional_bindings: {
+        get: "/v2/datausage/logscount"
+      }
     };
   }
   rpc GetDataUsageMetricsExportStatus(GetDataUsageMetricsExportStatusRequest) returns (GetDataUsageMetricsExportStatusResponse) {
@@ -78,7 +86,10 @@ service DataUsageService {
       summary: "Get Data Usage Metrics Export Status"
     };
     option (google.api.http) = {
-      get: "/v2/datausage/exportstatus"
+      get: "/dataplans/data-usage/v2/export-status"
+      additional_bindings: {
+        get: "/v2/datausage/exportstatus"
+      }
     };
   }
   rpc UpdateDataUsageMetricsExportStatus(UpdateDataUsageMetricsExportStatusRequest) returns (UpdateDataUsageMetricsExportStatusResponse) {
@@ -99,8 +110,11 @@ service DataUsageService {
       summary: "Update Data Usage Metrics Export Status"
     };
     option (google.api.http) = {
-      post: "/v2/datausage/exportstatus"
+      post: "/dataplans/data-usage/v2/export-status"
       body: "*"
+      additional_bindings: {
+        post: "/v2/datausage/exportstatus"
+      }
     };
   }
   rpc GetDataUsage(GetDataUsageRequest) returns (stream GetDataUsageResponse) {
@@ -122,7 +136,10 @@ service DataUsageService {
     };
 
     option (google.api.http) = {
-      get: "/v2/datausage"
+      get: "/dataplans/data-usage/v2"
+      additional_bindings: {
+        get: "/v2/datausage"
+      }
     };
   }
 
@@ -145,8 +162,11 @@ service DataUsageService {
       summary: "Get Daily Usage Units"
     };
     option (google.api.http) = {
-      post: "/v2/datausage/daily/units"
+      post: "/dataplans/data-usage/v2/daily:units"
       body: "*"
+      additional_bindings: {
+        post: "/v2/datausage/daily/units"
+      }
     };
   }
 
@@ -169,8 +189,11 @@ service DataUsageService {
       summary: "Get Daily Usage Processed GBs"
     };
     option (google.api.http) = {
-      post: "/v2/datausage/daily/processed_gbs"
+      post: "/dataplans/data-usage/v2/daily:processed-gbs"
       body: "*"
+      additional_bindings: {
+        post: "/v2/datausage/daily/processed_gbs"
+      }
     };
   }
 
@@ -193,8 +216,11 @@ service DataUsageService {
       summary: "Get Daily Usage Evaluation Tokens"
     };
     option (google.api.http) = {
-      post: "/v2/datausage/daily/evaluation_tokens"
+      post: "/dataplans/data-usage/v2/daily:evaluation-tokens"
       body: "*"
+      additional_bindings: {
+        post: "/v2/datausage/daily/evaluation_tokens"
+      }
     };
   }
 }
@@ -228,7 +254,7 @@ message GetTeamDetailedDataUsageRequest {
   //
   // Do note that to avoid overloading the service we enforce resolution limits
   // that depend on the server configuration. This is configured by the server.
-  // This means that, for instance, requests with 1 min resolution for an interval of 30 days will be rejected.
+  // This means that, for instance, requests with 1 min resolution for a interval of 30 days will be rejected.
   //
   // Resolution must be between 1 min and date_range interval
   google.protobuf.Duration resolution = 3;
