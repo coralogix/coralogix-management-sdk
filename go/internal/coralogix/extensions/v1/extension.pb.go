@@ -1305,7 +1305,7 @@ var File_com_coralogix_extensions_v1_extension_proto protoreflect.FileDescriptor
 
 const file_com_coralogix_extensions_v1_extension_proto_rawDesc = "" +
 	"\n" +
-	"+com/coralogix/extensions/v1/extension.proto\x12\x1bcom.coralogix.extensions.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa8\x03\n" +
+	"+com/coralogix/extensions/v1/extension.proto\x12\x1bcom.coralogix.extensions.v1\x1a\x1cgoogle/protobuf/struct.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa8\x03\n" +
 	"\x13ExtensionItemBinary\x12O\n" +
 	"\x04type\x18\x01 \x01(\x0e2;.com.coralogix.extensions.v1.ExtensionItemBinary.BinaryTypeR\x04type\x120\n" +
 	"\x04data\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x04data\x129\n" +

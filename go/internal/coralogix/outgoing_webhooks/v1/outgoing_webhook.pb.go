@@ -1921,7 +1921,7 @@ var File_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto protoreflect.
 
 const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdf\x04\n" +
+	"9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xdf\x04\n" +
 	"\x14GenericWebhookConfig\x12]\n" +
 	"\x04uuid\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB+\x9aA(J&\"d838cd7b-087b-40c6-bc33-80997020f5d0\"R\x04uuid\x12c\n" +
 	"\x06method\x18\x02 \x01(\x0e2C.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfig.MethodTypeB\x06\x9aA\x03J\x011R\x06method\x12\x8a\x01\n" +

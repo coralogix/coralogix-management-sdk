@@ -14,6 +14,8 @@ enum Pillar {
   PILLAR_BINARY = 4;
   // JSON representation: "profiles"
   PILLAR_PROFILES = 5;
+  // JSON representation: "events"
+  PILLAR_EVENTS = 6;
 }
 
 enum EntityType {
@@ -59,6 +61,8 @@ enum EntityType {
   ENTITY_TYPE_INFRA_MONITORING_EVENTS = 28;
   // JSON representation: "labsLimitViolations"
   ENTITY_TYPE_LABS_LIMIT_VIOLATIONS = 29;
+  // JSON representation: "quotaEvents"
+  ENTITY_TYPE_QUOTA_EVENTS = 30;
 
   // Pillar "metrics"
 
@@ -91,4 +95,9 @@ enum EntityType {
 
   // JSON representation: "cpuProfiles"
   ENTITY_TYPE_CPU_PROFILES = 21;
+
+  // Pillar "events"
+
+  // JSON representation: "events"
+  ENTITY_TYPE_EVENTS = 31;
 }

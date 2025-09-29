@@ -1272,7 +1272,7 @@ var File_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto proto
 
 const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogix/outgoing_webhooks/v1/outgoing_webhook_service.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a google/protobuf/descriptor.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a\x1cgoogle/api/annotations.proto\"M\n" +
+	"Acom/coralogix/outgoing_webhooks/v1/outgoing_webhook_service.proto\x12\"com.coralogix.outgoing_webhooks.v1\x1a9com/coralogix/outgoing_webhooks/v1/outgoing_webhook.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"M\n" +
 	"\x1fListOutgoingWebhookTypesRequest:*\x9aA'\n" +
 	"%*#List outgoing webhook types request\"\xdd\x03\n" +
 	" ListOutgoingWebhookTypesResponse\x12t\n" +
@@ -1347,22 +1347,19 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"A*\x1dTest outgoing webhook failure\xd2\x01\rerror_message\xd2\x01\x0fdisplay_messageB\x0e\n" +
 	"\f_status_code:%\x9aA\"\n" +
 	" *\x1eTest outgoing webhook responseB\b\n" +
-	"\x06result\"a\n" +
-	")ListIbmEventNotificationsInstancesRequest:4\x9aA1\n" +
-	"/*-List IBM event notification instances request\"\xa4\x05\n" +
+	"\x06result\"+\n" +
+	")ListIbmEventNotificationsInstancesRequest\"\xa1\x04\n" +
 	"*ListIbmEventNotificationsInstancesResponse\x12\x87\x01\n" +
-	"\tinstances\x18\x01 \x03(\v2i.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesResponse.EventNotificationsInstanceR\tinstances\x1a\xb4\x03\n" +
+	"\tinstances\x18\x01 \x03(\v2i.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesResponse.EventNotificationsInstanceR\tinstances\x1a\xe8\x02\n" +
 	"\x1aEventNotificationsInstance\x12L\n" +
 	"\vinstance_id\x18\x01 \x01(\tB+\x9aA(J&\"5a8b249b-3915-49e7-ad43-030f585d84c5\"R\n" +
 	"instanceId\x12)\n" +
 	"\tregion_id\x18\x02 \x01(\tB\f\x9aA\tJ\a\"eu-gb\"R\bregionId\x12'\n" +
 	"\x04name\x18\x03 \x01(\tB\x13\x9aA\x10J\x0e\"example-name\"R\x04name\x12\x83\x01\n" +
 	"\x03crn\x18\x04 \x01(\tBq\x9aAnJl\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"R\x03crn\x12\"\n" +
-	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed:J\x9aAG\n" +
-	"E*\x1cEvent notifications instance\xd2\x01\vinstance_id\xd2\x01\tregion_id\xd2\x01\x04name\xd2\x01\x03crn:5\x9aA2\n" +
-	"0*.List IBM event notification instances response2\xba+\n" +
-	"\x17OutgoingWebhooksService\x12\xb9\x03\n" +
-	"\x18ListOutgoingWebhookTypes\x12C.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesRequest\x1aD.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse\"\x91\x02\x9aA\xca\x01\n" +
+	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed2\xa3,\n" +
+	"\x17OutgoingWebhooksService\x12\xdc\x03\n" +
+	"\x18ListOutgoingWebhookTypes\x12C.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesRequest\x1aD.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse\"\xb4\x02\x9aA\xca\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aGet outgoing webhook typesJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1372,8 +1369,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1c\n" +
-	"\x1aGet outgoing webhook types\x82\xd3\xe4\x93\x02\x1d\x12\x1b/v1/outgoing-webhooks/types\x12\xd5\x03\n" +
-	"\x1dGetOutgoingWebhookTypeDetails\x12H.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsRequest\x1aI.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsResponse\"\x9e\x02\x9aA\xd1\x01\n" +
+	"\x1aGet outgoing webhook types\x82\xd3\xe4\x93\x02@Z\x1d\x12\x1b/v1/outgoing-webhooks/types\x12\x1f/integrations/webhooks/v1/types\x12\xff\x03\n" +
+	"\x1dGetOutgoingWebhookTypeDetails\x12H.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsRequest\x1aI.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookTypeDetailsResponse\"\xc8\x02\x9aA\xd1\x01\n" +
 	"\x19Outgoing webhooks service\x12!Get outgoing webhook type detailsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1383,8 +1380,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1b\n" +
-	"\x19Get outgoing webhook type\x82\xd3\xe4\x93\x02$\x12\"/v1/outgoing-webhooks/types/{type}\x12\x9e\x03\n" +
-	"\x14ListOutgoingWebhooks\x12?.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksRequest\x1a@.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksResponse\"\x82\x02\x9aA\xc6\x01\n" +
+	"\x19Get outgoing webhook type\x82\xd3\xe4\x93\x02NZ$\x12\"/v1/outgoing-webhooks/types/{type}\x12&/integrations/webhooks/v1/types/{type}\x12\xbb\x03\n" +
+	"\x14ListOutgoingWebhooks\x12?.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksRequest\x1a@.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhooksResponse\"\x9f\x02\x9aA\xc6\x01\n" +
 	"\x19Outgoing webhooks service\x12\x16List outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1394,8 +1391,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x17\n" +
-	"\x15Get outgoing webhooks\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/outgoing-webhooks\x12\xcd\x03\n" +
-	"\x1bListOutboundWebhooksSummary\x12F.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryRequest\x1aG.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryResponse\"\x9c\x02\x9aA\xcf\x01\n" +
+	"\x15Get outgoing webhooks\x82\xd3\xe4\x93\x024Z\x17\x12\x15/v1/outgoing-webhooks\x12\x19/integrations/webhooks/v1\x12\xf2\x03\n" +
+	"\x1bListOutboundWebhooksSummary\x12F.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryRequest\x1aG.com.coralogix.outgoing_webhooks.v1.ListOutboundWebhooksSummaryResponse\"\xc1\x02\x9aA\xcf\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1eList outbound webhooks summaryJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1405,8 +1402,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj=\n" +
 	"\x16x-coralogixPermissions\x12#2!\n" +
 	"\x1f\x1a\x1doutbound-webhooks:ReadSummaryʸ\x02 \n" +
-	"\x1eGet outgoing webhook summaries\x82\xd3\xe4\x93\x02\x1f\x12\x1d/v1/outgoing-webhooks/summary\x12\xb3\x03\n" +
-	"\x17ListAllOutgoingWebhooks\x12B.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksRequest\x1aC.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksResponse\"\x8e\x02\x9aA\xca\x01\n" +
+	"\x1eGet outgoing webhook summaries\x82\xd3\xe4\x93\x02DZ\x1f\x12\x1d/v1/outgoing-webhooks/summary\x12!/integrations/webhooks/v1/summary\x12\xd4\x03\n" +
+	"\x17ListAllOutgoingWebhooks\x12B.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksRequest\x1aC.com.coralogix.outgoing_webhooks.v1.ListAllOutgoingWebhooksResponse\"\xaf\x02\x9aA\xca\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aList all outgoing webhooksJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1416,8 +1413,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1b\n" +
-	"\x19Get all outgoing webhooks\x82\xd3\xe4\x93\x02\x1b\x12\x19/v1/outgoing-webhooks/all\x12\x9a\x03\n" +
-	"\x12GetOutgoingWebhook\x12=.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookRequest\x1a>.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookResponse\"\x84\x02\x9aA\xc4\x01\n" +
+	"\x19Get all outgoing webhooks\x82\xd3\xe4\x93\x02<Z\x1b\x12\x19/v1/outgoing-webhooks/all\x12\x1d/integrations/webhooks/v1/all\x12\xbc\x03\n" +
+	"\x12GetOutgoingWebhook\x12=.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookRequest\x1a>.com.coralogix.outgoing_webhooks.v1.GetOutgoingWebhookResponse\"\xa6\x02\x9aA\xc4\x01\n" +
 	"\x19Outgoing webhooks service\x12\x14Get outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1427,8 +1424,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x16\n" +
-	"\x14Get outgoing webhook\x82\xd3\xe4\x93\x02\x1c\x12\x1a/v1/outgoing-webhooks/{id}\x12\xaf\x03\n" +
-	"\x15CreateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookResponse\"\x90\x02\x9aA\xcc\x01\n" +
+	"\x14Get outgoing webhook\x82\xd3\xe4\x93\x02>Z\x1c\x12\x1a/v1/outgoing-webhooks/{id}\x12\x1e/integrations/webhooks/v1/{id}\x12\xcf\x03\n" +
+	"\x15CreateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.CreateOutgoingWebhookResponse\"\xb0\x02\x9aA\xcc\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aCreate an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1438,8 +1435,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj>\n" +
 	"\x16x-coralogixPermissions\x12$2\"\n" +
 	" \x1a\x1eoutbound-webhooks:UpdateConfigʸ\x02\x1c\n" +
-	"\x1aCreate an outgoing webhook\x82\xd3\xe4\x93\x02\x1a:\x01*\"\x15/v1/outgoing-webhooks\x12\xaf\x03\n" +
-	"\x15UpdateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookResponse\"\x90\x02\x9aA\xcc\x01\n" +
+	"\x1aCreate an outgoing webhook\x82\xd3\xe4\x93\x02::\x01*Z\x1a:\x01*\"\x15/v1/outgoing-webhooks\"\x19/integrations/webhooks/v1\x12\xcc\x03\n" +
+	"\x15UpdateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookResponse\"\xad\x02\x9aA\xcc\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aUpdate an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1449,8 +1446,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj>\n" +
 	"\x16x-coralogixPermissions\x12$2\"\n" +
 	" \x1a\x1eoutbound-webhooks:UpdateConfigʸ\x02\x1c\n" +
-	"\x1aUpdate an outgoing webhook\x82\xd3\xe4\x93\x02\x1a:\x01*\x1a\x15/v1/outgoing-webhooks\x12\xb1\x03\n" +
-	"\x15DeleteOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookResponse\"\x92\x02\x9aA\xcc\x01\n" +
+	"\x1aUpdate an outgoing webhook\x82\xd3\xe4\x93\x027:\x01*Z\x17\x1a\x15/v1/outgoing-webhooks\x1a\x19/integrations/webhooks/v1\x12\xd3\x03\n" +
+	"\x15DeleteOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookResponse\"\xb4\x02\x9aA\xcc\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aDelete an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1460,8 +1457,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj>\n" +
 	"\x16x-coralogixPermissions\x12$2\"\n" +
 	" \x1a\x1eoutbound-webhooks:UpdateConfigʸ\x02\x1c\n" +
-	"\x1aDelete an outgoing webhook\x82\xd3\xe4\x93\x02\x1c*\x1a/v1/outgoing-webhooks/{id}\x12\xa8\x03\n" +
-	"\x13TestOutgoingWebhook\x12>.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\x8f\x02\x9aA\xc8\x01\n" +
+	"\x1aDelete an outgoing webhook\x82\xd3\xe4\x93\x02>Z\x1c*\x1a/v1/outgoing-webhooks/{id}*\x1e/integrations/webhooks/v1/{id}\x12\xcd\x03\n" +
+	"\x13TestOutgoingWebhook\x12>.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\xb4\x02\x9aA\xc8\x01\n" +
 	"\x19Outgoing webhooks service\x12\x18Test an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1471,8 +1468,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02\x1a\n" +
-	"\x18Test an outgoing webhook\x82\xd3\xe4\x93\x02\x1f:\x01*\"\x1a/v1/outgoing-webhooks/test\x12\xd3\x03\n" +
-	"\x1bTestExistingOutgoingWebhook\x12F.com.coralogix.outgoing_webhooks.v1.TestExistingOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\xaa\x02\x9aA\xd1\x01\n" +
+	"\x18Test an outgoing webhook\x82\xd3\xe4\x93\x02D:\x01*Z\x1f:\x01*\"\x1a/v1/outgoing-webhooks/test\"\x1e/integrations/webhooks/v1/test\x12\x81\x04\n" +
+	"\x1bTestExistingOutgoingWebhook\x12F.com.coralogix.outgoing_webhooks.v1.TestExistingOutgoingWebhookRequest\x1a?.com.coralogix.outgoing_webhooks.v1.TestOutgoingWebhookResponse\"\xd8\x02\x9aA\xd1\x01\n" +
 	"\x19Outgoing webhooks service\x12!Test an existing outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1482,17 +1479,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj<\n" +
 	"\x16x-coralogixPermissions\x12\"2 \n" +
 	"\x1e\x1a\x1coutbound-webhooks:ReadConfigʸ\x02#\n" +
-	"!Test an existing outgoing webhook\x82\xd3\xe4\x93\x02(:\x01*\"#/v1/outgoing-webhooks/test-existing\x12\xde\x03\n" +
-	"\"ListIbmEventNotificationsInstances\x12M.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesRequest\x1aN.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesResponse\"\x98\x02\x9aA\xd5\x01\n" +
-	"\x19Outgoing webhooks service\x12%List IBM event notification instancesJ\x14\n" +
-	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
-	"\x03401\x12\x16\n" +
-	"\x14Unauthorized requestJ\x1e\n" +
-	"\x03500\x12\x17\n" +
-	"\x15Internal server errorj<\n" +
-	"\x16x-coralogixPermissions\x12\"2 \n" +
-	"\x1e\x1a\x1coutbound-webhooks:ReadConfig\x82\xd3\xe4\x93\x029\x127/v1/outgoing-webhooks/ibm-event-notifications/instances\x1a\xcc\x01\x9aA\xc8\x01\n" +
+	"!Test an existing outgoing webhook\x82\xd3\xe4\x93\x02V:\x01*Z(:\x01*\"#/v1/outgoing-webhooks/test-existing\"'/integrations/webhooks/v1/test-existing\x12\xc3\x01\n" +
+	"\"ListIbmEventNotificationsInstances\x12M.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesRequest\x1aN.com.coralogix.outgoing_webhooks.v1.ListIbmEventNotificationsInstancesResponse\x1a\xcc\x01\x9aA\xc8\x01\n" +
 	"\x19Outgoing webhooks service\x1a\xaa\x01\n" +
 	";Find out more about outbound webhooks in our documentation.\x12khttps://coralogix.com/docs/user-guides/alerting/outbound-webhooks/generic-outbound-webhooks-alert-webhooks/b\x06proto3"
 

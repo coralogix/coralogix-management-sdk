@@ -3942,7 +3942,7 @@ var File_com_coralogix_integrations_v1_integration_proto protoreflect.FileDescri
 
 const file_com_coralogix_integrations_v1_integration_proto_rawDesc = "" +
 	"\n" +
-	"/com/coralogix/integrations/v1/integration.proto\x12\x1dcom.coralogix.integrations.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe8\x02\n" +
+	"/com/coralogix/integrations/v1/integration.proto\x12\x1dcom.coralogix.integrations.v1\x1a+com/coralogix/extensions/v1/extension.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xe8\x02\n" +
 	"\x13CloudFormationStack\x12.\n" +
 	"\x03arn\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x03arn\x124\n" +
 	"\x06region\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueR\x06region:\xea\x01\x9aA\xe6\x01\n" +
