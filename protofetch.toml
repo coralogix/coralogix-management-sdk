@@ -337,7 +337,7 @@ allow_policies = [
 
 [cx-api-slo]
 url = 'github.com/coralogix/cx-api-slo'
-revision = "v0.0.36"
+revision = "v0.0.39"
 allow_policies = [
     "src/com/coralogixapis/slo/v1/slo_alert.proto",
     "src/com/coralogixapis/slo/v1/slo.proto",
@@ -378,7 +378,7 @@ allow_policies = [
 
 [cx-api-archive]
 url = 'github.com/coralogix/cx-api-archive'
-revision = "v0.0.142"
+revision = "v0.0.145"
 allow_policies = [
     "src/com/coralogix/archive/format/csv/v1/csv.proto",
     "src/com/coralogix/archive/format/generic/v1/generic.proto",
@@ -443,7 +443,7 @@ allow_policies = [
 
 [cx-api-incidents]
 url = 'github.com/coralogix/cx-api-incidents'
-revision = "v1.0.6"
+revision = "v1.0.7"
 allow_policies = [
     "src/com/coralogixapis/incidents/v1/assignee.proto",
     "src/com/coralogixapis/incidents/v1/filter_operators.proto",

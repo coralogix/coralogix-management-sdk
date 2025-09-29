@@ -489,10 +489,9 @@ const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"enableTags:\xf6\x01\x9aA\xf2\x01\n" +
 	"\x7f*\x1fGet Retentions Enabled Response2OThis data structure is obtained when retrieving the active status of retentions\xd2\x01\n" +
 	"retentions*o\n" +
-	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xb1\n" +
-	"\n" +
-	"\x11RetentionsService\x12\x99\x02\n" +
-	"\rGetRetentions\x12..com.coralogix.archive.v1.GetRetentionsRequest\x1a/.com.coralogix.archive.v1.GetRetentionsResponse\"\xa6\x01\x9aAy\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xc6\v\n" +
+	"\x11RetentionsService\x12\xba\x02\n" +
+	"\rGetRetentions\x12..com.coralogix.archive.v1.GetRetentionsRequest\x1a/.com.coralogix.archive.v1.GetRetentionsResponse\"\xc7\x01\x9aAy\n" +
 	"\x12Retentions Service\x12\x0eGet RetentionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -500,8 +499,8 @@ const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x10\n" +
-	"\x0eGet retentions\x82\xd3\xe4\x93\x02\x10\x12\x0e/v1/retentions\x12\xb0\x02\n" +
-	"\x10UpdateRetentions\x121.com.coralogix.archive.v1.UpdateRetentionsRequest\x1a2.com.coralogix.archive.v1.UpdateRetentionsResponse\"\xb4\x01\x9aA|\n" +
+	"\x0eGet retentions\x82\xd3\xe4\x93\x021Z\x10\x12\x0e/v1/retentions\x12\x1d/dataengine/retention-tags/v1\x12\xd1\x02\n" +
+	"\x10UpdateRetentions\x121.com.coralogix.archive.v1.UpdateRetentionsRequest\x1a2.com.coralogix.archive.v1.UpdateRetentionsResponse\"\xd5\x01\x9aA|\n" +
 	"\x12Retentions Service\x12\x11Update RetentionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -509,8 +508,8 @@ const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x18\n" +
-	"\x16Update retention names\x82\xd3\xe4\x93\x02\x13:\x01*\"\x0e/v1/retentions\x12\xc2\x02\n" +
-	"\x12ActivateRetentions\x123.com.coralogix.archive.v1.ActivateRetentionsRequest\x1a4.com.coralogix.archive.v1.ActivateRetentionsResponse\"\xc0\x01\x9aA~\n" +
+	"\x16Update retention names\x82\xd3\xe4\x93\x024:\x01*Z\x10\"\x0e/v1/retentions\"\x1d/dataengine/retention-tags/v1\x12\xec\x02\n" +
+	"\x12ActivateRetentions\x123.com.coralogix.archive.v1.ActivateRetentionsRequest\x1a4.com.coralogix.archive.v1.ActivateRetentionsResponse\"\xea\x01\x9aA~\n" +
 	"\x12Retentions Service\x12\x13Activate RetentionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -518,8 +517,8 @@ const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\x19\n" +
-	"\x17Activate retention tags\x82\xd3\xe4\x93\x02\x1c:\x01*\"\x17/v1/retentions:activate\x12\xd2\x02\n" +
-	"\x14GetRetentionsEnabled\x125.com.coralogix.archive.v1.GetRetentionsEnabledRequest\x1a6.com.coralogix.archive.v1.GetRetentionsEnabledResponse\"\xca\x01\x9aA\x81\x01\n" +
+	"\x17Activate retention tags\x82\xd3\xe4\x93\x02F:\x01*Z\x19\"\x17/v1/retentions:activate\"&/dataengine/retention-tags/v1/activate\x12\xfb\x02\n" +
+	"\x14GetRetentionsEnabled\x125.com.coralogix.archive.v1.GetRetentionsEnabledRequest\x1a6.com.coralogix.archive.v1.GetRetentionsEnabledResponse\"\xf3\x01\x9aA\x81\x01\n" +
 	"\x12Retentions Service\x12\x16Get Retentions EnabledJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -527,7 +526,7 @@ const file_com_coralogix_archive_v1_retentions_service_proto_rawDesc = "" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02#\n" +
-	"!Get retention tags enabled status\x82\xd3\xe4\x93\x02\x18\x12\x16/v1/retentions/enabled\x1a3\x9aA0\n" +
+	"!Get retention tags enabled status\x82\xd3\xe4\x93\x02AZ\x18\x12\x16/v1/retentions/enabled\x12%/dataengine/retention-tags/v1/enabled\x1a3\x9aA0\n" +
 	"\x12Retensions Service\x12\x1aView and manage retentions:N\n" +
 	"\x12validation_pattern\x12\x1d.google.protobuf.FieldOptions\x18\xe9\xfb\x03 \x01(\tR\x11validationPattern:S\n" +
 	"\x15validation_max_length\x12\x1d.google.protobuf.FieldOptions\x18\xea\xfb\x03 \x01(\x05R\x13validationMaxLength:P\n" +

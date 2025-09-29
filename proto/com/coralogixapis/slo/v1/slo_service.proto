@@ -141,7 +141,7 @@ message ListSlosRequest {
       required: []
     }
   };
-  SloFilters filters = 1;
+  repeated SloFilter filters = 1;
 }
 
 message ListSlosResponse {
