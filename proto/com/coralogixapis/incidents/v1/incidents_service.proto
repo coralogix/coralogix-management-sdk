@@ -97,7 +97,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get incidents list";
     option (google.api.http) = {
       post: "/incidents/incidents/v1"
-      body: "*"
       additional_bindings: {post: "/v1/incidents"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -129,8 +128,7 @@ service IncidentsService {
   rpc ListIncidentAggregations(ListIncidentAggregationsRequest) returns (ListIncidentAggregationsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident aggregations";
     option (google.api.http) = {
-      post: "/incidents/incidents/v1/aggregations"
-      body: "*"
+      get: "/incidents/incidents/v1/aggregations"
       additional_bindings: {post: "/v1/incidents:listIncidentAggregations"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -163,8 +161,7 @@ service IncidentsService {
   rpc GetFilterValues(GetFilterValuesRequest) returns (GetFilterValuesResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get filter values";
     option (google.api.http) = {
-      get: "/incidents/incidents/v1/filter-values"
-      body: "*"
+      post: "/incidents/incidents/v1/filter-values"
       additional_bindings: {post: "/v1/incidents:get-filter-values"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -197,7 +194,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Assign incidents";
     option (google.api.http) = {
       post: "/incidents/incidents/v1/by-user"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:assign"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -231,7 +227,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Unassign incidents";
     option (google.api.http) = {
       delete: "/incidents/incidents/v1/by-user"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:unassign"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -264,7 +259,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Acknowledge incidents";
     option (google.api.http) = {
       post: "/incidents/incidents/v1/acknowledge"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:acknowledge"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -297,7 +291,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Close incidents";
     option (google.api.http) = {
       post: "/incidents/incidents/v1/close"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:close"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -362,7 +355,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Resolve incidents";
     option (google.api.http) = {
       post: "/incidents/incidents/v1/resolve"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:resolve"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -502,7 +494,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident events";
     option (google.api.http) = {
       get: "/incidents/incidents/v1/events"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:list-incident-events"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -536,7 +527,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident events total count";
     option (google.api.http) = {
       get: "/incidents/incidents/v1/events/count"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:list-incident-events-total-count"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
@@ -570,7 +560,6 @@ service IncidentsService {
     option (com.coralogixapis.common.v1.audit_log_description).description = "List incident events filter values";
     option (google.api.http) = {
       get: "/incidents/incidents/v1/events/filter-values"
-      body: "*"
       additional_bindings: {post: "/v1/incidents:list-incident-events-filter-values"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
