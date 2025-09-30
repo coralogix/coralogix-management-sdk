@@ -75,8 +75,8 @@ commit_hash = "3155267a44c2d11c6b4e2db25c18e244cfc07b2f"
 [[dependencies]]
 name = "cx-api-incidents"
 url = "github.com/coralogix/cx-api-incidents"
-revision = "v1.0.8"
-commit_hash = "6761e7abd0be81d92e7cf26bbb58f0e2740436e4"
+revision = "v1.0.9"
+commit_hash = "b960466df912ba67e7157e2f016af02eb6c9f669"
 
 [[dependencies]]
 name = "cx-api-lmd-model"
