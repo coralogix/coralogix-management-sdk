@@ -431,7 +431,8 @@ type Annotation_DataprimeSource struct {
 	Query           *common.DataprimeQuery               `protobuf:"bytes,1,opt,name=query,proto3" json:"query,omitempty"`
 	Strategy        *Annotation_DataprimeSource_Strategy `protobuf:"bytes,2,opt,name=strategy,proto3" json:"strategy,omitempty"`
 	MessageTemplate *wrapperspb.StringValue              `protobuf:"bytes,3,opt,name=message_template,json=messageTemplate,proto3" json:"message_template,omitempty"`
-	DataModeType    common.DataModeType                  `protobuf:"varint,4,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.common.DataModeType" json:"data_mode_type,omitempty"` // TODO: Add labels later
+	DataModeType    common.DataModeType                  `protobuf:"varint,4,opt,name=data_mode_type,json=dataModeType,proto3,enum=com.coralogixapis.dashboards.v1.common.DataModeType" json:"data_mode_type,omitempty"`
+	LabelFields     []*common.ObservationField           `protobuf:"bytes,5,rep,name=label_fields,json=labelFields,proto3" json:"label_fields,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
 }
@@ -492,6 +493,13 @@ func (x *Annotation_DataprimeSource) GetDataModeType() common.DataModeType {
 		return x.DataModeType
 	}
 	return common.DataModeType(0)
+}
+
+func (x *Annotation_DataprimeSource) GetLabelFields() []*common.ObservationField {
+	if x != nil {
+		return x.LabelFields
+	}
+	return nil
 }
 
 // A strategy for turning metrics data into annotations
@@ -1190,8 +1198,8 @@ func (*Annotation_DataprimeSource_Strategy_Range_) isAnnotation_DataprimeSource_
 func (*Annotation_DataprimeSource_Strategy_Duration_) isAnnotation_DataprimeSource_Strategy_Value() {}
 
 type Annotation_DataprimeSource_Strategy_Instant struct {
-	state          protoimpl.MessageState `protogen:"open.v1"`
-	TimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=timestamp_field,json=timestampField,proto3" json:"timestamp_field,omitempty"`
+	state          protoimpl.MessageState   `protogen:"open.v1"`
+	TimestampField *common.ObservationField `protobuf:"bytes,1,opt,name=timestamp_field,json=timestampField,proto3" json:"timestamp_field,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -1226,7 +1234,7 @@ func (*Annotation_DataprimeSource_Strategy_Instant) Descriptor() ([]byte, []int)
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 0}
 }
 
-func (x *Annotation_DataprimeSource_Strategy_Instant) GetTimestampField() *common.DataShapeField {
+func (x *Annotation_DataprimeSource_Strategy_Instant) GetTimestampField() *common.ObservationField {
 	if x != nil {
 		return x.TimestampField
 	}
@@ -1234,9 +1242,9 @@ func (x *Annotation_DataprimeSource_Strategy_Instant) GetTimestampField() *commo
 }
 
 type Annotation_DataprimeSource_Strategy_Range struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	StartTimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
-	EndTimestampField   *common.DataShapeField `protobuf:"bytes,2,opt,name=end_timestamp_field,json=endTimestampField,proto3" json:"end_timestamp_field,omitempty"`
+	state               protoimpl.MessageState   `protogen:"open.v1"`
+	StartTimestampField *common.ObservationField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
+	EndTimestampField   *common.ObservationField `protobuf:"bytes,2,opt,name=end_timestamp_field,json=endTimestampField,proto3" json:"end_timestamp_field,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1271,14 +1279,14 @@ func (*Annotation_DataprimeSource_Strategy_Range) Descriptor() ([]byte, []int) {
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 1}
 }
 
-func (x *Annotation_DataprimeSource_Strategy_Range) GetStartTimestampField() *common.DataShapeField {
+func (x *Annotation_DataprimeSource_Strategy_Range) GetStartTimestampField() *common.ObservationField {
 	if x != nil {
 		return x.StartTimestampField
 	}
 	return nil
 }
 
-func (x *Annotation_DataprimeSource_Strategy_Range) GetEndTimestampField() *common.DataShapeField {
+func (x *Annotation_DataprimeSource_Strategy_Range) GetEndTimestampField() *common.ObservationField {
 	if x != nil {
 		return x.EndTimestampField
 	}
@@ -1286,9 +1294,9 @@ func (x *Annotation_DataprimeSource_Strategy_Range) GetEndTimestampField() *comm
 }
 
 type Annotation_DataprimeSource_Strategy_Duration struct {
-	state               protoimpl.MessageState `protogen:"open.v1"`
-	StartTimestampField *common.DataShapeField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
-	DurationField       *common.DataShapeField `protobuf:"bytes,2,opt,name=duration_field,json=durationField,proto3" json:"duration_field,omitempty"`
+	state               protoimpl.MessageState   `protogen:"open.v1"`
+	StartTimestampField *common.ObservationField `protobuf:"bytes,1,opt,name=start_timestamp_field,json=startTimestampField,proto3" json:"start_timestamp_field,omitempty"`
+	DurationField       *common.ObservationField `protobuf:"bytes,2,opt,name=duration_field,json=durationField,proto3" json:"duration_field,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
@@ -1323,14 +1331,14 @@ func (*Annotation_DataprimeSource_Strategy_Duration) Descriptor() ([]byte, []int
 	return file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDescGZIP(), []int{0, 4, 0, 2}
 }
 
-func (x *Annotation_DataprimeSource_Strategy_Duration) GetStartTimestampField() *common.DataShapeField {
+func (x *Annotation_DataprimeSource_Strategy_Duration) GetStartTimestampField() *common.ObservationField {
 	if x != nil {
 		return x.StartTimestampField
 	}
 	return nil
 }
 
-func (x *Annotation_DataprimeSource_Strategy_Duration) GetDurationField() *common.DataShapeField {
+func (x *Annotation_DataprimeSource_Strategy_Duration) GetDurationField() *common.ObservationField {
 	if x != nil {
 		return x.DurationField
 	}
@@ -1341,7 +1349,7 @@ var File_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto protor
 
 const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawDesc = "" +
 	"\n" +
-	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a=com/coralogixapis/dashboards/v1/common/data_shape_field.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xba)\n" +
+	"@com/coralogixapis/dashboards/v1/ast/annotations/annotation.proto\x12/com.coralogixapis.dashboards.v1.ast.annotations\x1a;com/coralogixapis/dashboards/v1/common/data_mode_type.proto\x1a>com/coralogixapis/dashboards/v1/common/observation_field.proto\x1a2com/coralogixapis/dashboards/v1/common/query.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xa1*\n" +
 	"\n" +
 	"Annotation\x12,\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueR\x02id\x120\n" +
@@ -1403,25 +1411,25 @@ const file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_rawD
 	"\bDuration\x12l\n" +
 	"\x15start_timestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x13startTimestampField\x12_\n" +
 	"\x0eduration_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\rdurationFieldB\a\n" +
-	"\x05value\x1a\x99\n" +
-	"\n" +
+	"\x05value\x1a\x80\v\n" +
 	"\x0fDataprimeSource\x12L\n" +
 	"\x05query\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataprimeQueryR\x05query\x12p\n" +
 	"\bstrategy\x18\x02 \x01(\v2T.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.StrategyR\bstrategy\x12G\n" +
 	"\x10message_template\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x0fmessageTemplate\x12Z\n" +
-	"\x0edata_mode_type\x18\x04 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DataModeTypeR\fdataModeType\x1a\xa0\a\n" +
+	"\x0edata_mode_type\x18\x04 \x01(\x0e24.com.coralogixapis.dashboards.v1.common.DataModeTypeR\fdataModeType\x12[\n" +
+	"\flabel_fields\x18\x05 \x03(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\vlabelFields\x1a\xaa\a\n" +
 	"\bStrategy\x12x\n" +
 	"\ainstant\x18\x01 \x01(\v2\\.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.InstantH\x00R\ainstant\x12r\n" +
 	"\x05range\x18\x02 \x01(\v2Z.com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.RangeH\x00R\x05range\x12{\n" +
-	"\bduration\x18\x03 \x01(\v2].com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.DurationH\x00R\bduration\x1aj\n" +
-	"\aInstant\x12_\n" +
-	"\x0ftimestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x0etimestampField\x1a\xdb\x01\n" +
-	"\x05Range\x12j\n" +
-	"\x15start_timestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x13startTimestampField\x12f\n" +
-	"\x13end_timestamp_field\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x11endTimestampField\x1a\xd5\x01\n" +
-	"\bDuration\x12j\n" +
-	"\x15start_timestamp_field\x18\x01 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\x13startTimestampField\x12]\n" +
-	"\x0eduration_field\x18\x02 \x01(\v26.com.coralogixapis.dashboards.v1.common.DataShapeFieldR\rdurationFieldB\a\n" +
+	"\bduration\x18\x03 \x01(\v2].com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.DurationH\x00R\bduration\x1al\n" +
+	"\aInstant\x12a\n" +
+	"\x0ftimestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x0etimestampField\x1a\xdf\x01\n" +
+	"\x05Range\x12l\n" +
+	"\x15start_timestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x13startTimestampField\x12h\n" +
+	"\x13end_timestamp_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x11endTimestampField\x1a\xd9\x01\n" +
+	"\bDuration\x12l\n" +
+	"\x15start_timestamp_field\x18\x01 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\x13startTimestampField\x12_\n" +
+	"\x0eduration_field\x18\x02 \x01(\v28.com.coralogixapis.dashboards.v1.common.ObservationFieldR\rdurationFieldB\a\n" +
 	"\x05valueb\x06proto3"
 
 var (
@@ -1465,7 +1473,6 @@ var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_goType
 	(*common.ObservationField)(nil),                      // 24: com.coralogixapis.dashboards.v1.common.ObservationField
 	(common.DataModeType)(0),                             // 25: com.coralogixapis.dashboards.v1.common.DataModeType
 	(*common.DataprimeQuery)(nil),                        // 26: com.coralogixapis.dashboards.v1.common.DataprimeQuery
-	(*common.DataShapeField)(nil),                        // 27: com.coralogixapis.dashboards.v1.common.DataShapeField
 }
 var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_depIdxs = []int32{
 	20, // 0: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.id:type_name -> google.protobuf.StringValue
@@ -1494,36 +1501,37 @@ var file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_depIdx
 	16, // 23: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.strategy:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy
 	20, // 24: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.message_template:type_name -> google.protobuf.StringValue
 	25, // 25: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.data_mode_type:type_name -> com.coralogixapis.dashboards.v1.common.DataModeType
-	7,  // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
-	9,  // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
-	10, // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
-	11, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
-	24, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	13, // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
-	14, // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
-	15, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
-	24, // 38: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 39: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 40: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 41: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	24, // 42: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
-	17, // 43: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
-	18, // 44: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
-	19, // 45: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
-	27, // 46: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
-	27, // 47: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
-	27, // 48: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
-	27, // 49: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
-	27, // 50: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.DataShapeField
-	51, // [51:51] is the sub-list for method output_type
-	51, // [51:51] is the sub-list for method input_type
-	51, // [51:51] is the sub-list for extension type_name
-	51, // [51:51] is the sub-list for extension extendee
-	0,  // [0:51] is the sub-list for field type_name
+	24, // 26: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.label_fields:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	7,  // 27: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.Strategy.start_time_metric:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.MetricsSource.StartTimeMetric
+	9,  // 28: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant
+	10, // 29: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range
+	11, // 30: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration
+	24, // 31: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 32: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 33: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 34: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 35: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.LogsSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	13, // 36: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant
+	14, // 37: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range
+	15, // 38: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration
+	24, // 39: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 40: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 41: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 42: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 43: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.SpansSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	17, // 44: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.instant:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant
+	18, // 45: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.range:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range
+	19, // 46: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.duration:type_name -> com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration
+	24, // 47: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Instant.timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 48: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 49: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Range.end_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 50: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.start_timestamp_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	24, // 51: com.coralogixapis.dashboards.v1.ast.annotations.Annotation.DataprimeSource.Strategy.Duration.duration_field:type_name -> com.coralogixapis.dashboards.v1.common.ObservationField
+	52, // [52:52] is the sub-list for method output_type
+	52, // [52:52] is the sub-list for method input_type
+	52, // [52:52] is the sub-list for extension type_name
+	52, // [52:52] is the sub-list for extension extendee
+	0,  // [0:52] is the sub-list for field type_name
 }
 
 func init() { file_com_coralogixapis_dashboards_v1_ast_annotations_annotation_proto_init() }
