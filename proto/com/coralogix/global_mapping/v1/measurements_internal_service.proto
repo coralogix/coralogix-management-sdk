@@ -2,7 +2,7 @@ syntax = "proto3";
 package com.coralogix.global_mapping.v1;
 import "google/protobuf/wrappers.proto";
 import "com/coralogix/global_mapping/v1/measurement.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogix/global_mapping/v1/data_source_type.proto";
 import "com/coralogix/global_mapping/v1/data_source.proto";
 
@@ -51,15 +51,15 @@ message UpsertCompanyProvidersInternalResponse{
 
 service MeasurementsInternalService {
   rpc UpsertGlobalMeasurementsInternal(UpsertGlobalMeasurementsInternalRequest) returns (UpsertGlobalMeasurementsInternalResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Global Measurements Internal";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Upsert Global Measurements Internal";
   }
   rpc RemoveGlobalMeasurementsInternal(RemoveGlobalMeasurementsInternalRequest) returns (RemoveGlobalMeasurementsInternalResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Remove Global Measurements Internal";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Remove Global Measurements Internal";
   }
   rpc UpsertCompanyProvidersInternal(UpsertCompanyProvidersInternalRequest) returns (UpsertCompanyProvidersInternalResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Upsert Company Providers Internal";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Upsert Company Providers Internal";
   }
   rpc GetMeasurementsInternal(GetMeasurementsInternalRequest) returns (GetMeasurementsInternalResponse) {
-    option (com.coralogix.common.v1.audit_log_description).description = "Get Measurements";
+    option (com.coralogixapis.common.v1.audit_log_description).description = "Get Measurements";
   }
 }

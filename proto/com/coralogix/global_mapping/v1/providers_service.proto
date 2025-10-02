@@ -1,6 +1,6 @@
 syntax = "proto3";
 import "google/protobuf/wrappers.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 package com.coralogix.global_mapping.v1;
 
@@ -13,6 +13,6 @@ message GetCompanyProvidersResponse {
 
 service CompanyProvidersService {
     rpc GetCompanyProviders(GetCompanyProvidersRequest)returns(GetCompanyProvidersResponse){
-        option (com.coralogix.common.v1.audit_log_description).description = "Get Company Providers";
+        option (com.coralogixapis.common.v1.audit_log_description).description = "Get Company Providers";
     }
 }

@@ -29,6 +29,7 @@ const (
 	DataSourceType_DATA_SOURCE_TYPE_SPAN        DataSourceType = 2
 	DataSourceType_DATA_SOURCE_TYPE_METRICS     DataSourceType = 3
 	DataSourceType_DATA_SOURCE_TYPE_EVENTS      DataSourceType = 4
+	DataSourceType_DATA_SOURCE_TYPE_PROFILES    DataSourceType = 5
 )
 
 // Enum value maps for DataSourceType.
@@ -39,6 +40,7 @@ var (
 		2: "DATA_SOURCE_TYPE_SPAN",
 		3: "DATA_SOURCE_TYPE_METRICS",
 		4: "DATA_SOURCE_TYPE_EVENTS",
+		5: "DATA_SOURCE_TYPE_PROFILES",
 	}
 	DataSourceType_value = map[string]int32{
 		"DATA_SOURCE_TYPE_UNSPECIFIED": 0,
@@ -46,6 +48,7 @@ var (
 		"DATA_SOURCE_TYPE_SPAN":        2,
 		"DATA_SOURCE_TYPE_METRICS":     3,
 		"DATA_SOURCE_TYPE_EVENTS":      4,
+		"DATA_SOURCE_TYPE_PROFILES":    5,
 	}
 )
 
@@ -80,13 +83,14 @@ var File_com_coralogix_global_mapping_v1_data_source_type_proto protoreflect.Fil
 
 const file_com_coralogix_global_mapping_v1_data_source_type_proto_rawDesc = "" +
 	"\n" +
-	"6com/coralogix/global_mapping/v1/data_source_type.proto\x12\x1fcom.coralogix.global_mapping.v1*\xa3\x01\n" +
+	"6com/coralogix/global_mapping/v1/data_source_type.proto\x12\x1fcom.coralogix.global_mapping.v1*\xc2\x01\n" +
 	"\x0eDataSourceType\x12 \n" +
 	"\x1cDATA_SOURCE_TYPE_UNSPECIFIED\x10\x00\x12\x19\n" +
 	"\x15DATA_SOURCE_TYPE_LOGS\x10\x01\x12\x19\n" +
 	"\x15DATA_SOURCE_TYPE_SPAN\x10\x02\x12\x1c\n" +
 	"\x18DATA_SOURCE_TYPE_METRICS\x10\x03\x12\x1b\n" +
-	"\x17DATA_SOURCE_TYPE_EVENTS\x10\x04b\x06proto3"
+	"\x17DATA_SOURCE_TYPE_EVENTS\x10\x04\x12\x1d\n" +
+	"\x19DATA_SOURCE_TYPE_PROFILES\x10\x05b\x06proto3"
 
 var (
 	file_com_coralogix_global_mapping_v1_data_source_type_proto_rawDescOnce sync.Once

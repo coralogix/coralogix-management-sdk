@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -106,12 +106,12 @@ var File_com_coralogix_global_mapping_v1_data_source_service_proto protoreflect.
 
 const file_com_coralogix_global_mapping_v1_data_source_service_proto_rawDesc = "" +
 	"\n" +
-	"9com/coralogix/global_mapping/v1/data_source_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a1com/coralogix/global_mapping/v1/data_source.proto\x1a'com/coralogix/common/v1/audit_log.proto\"\x1e\n" +
+	"9com/coralogix/global_mapping/v1/data_source_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a1com/coralogix/global_mapping/v1/data_source.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\"\x1e\n" +
 	"\x1cGetCompanyDataSourcesRequest\"o\n" +
 	"\x1dGetCompanyDataSourcesResponse\x12N\n" +
 	"\fdata_sources\x18\x01 \x03(\v2+.com.coralogix.global_mapping.v1.DataSourceR\vdataSources2\xd4\x01\n" +
 	"\x19CompanyDataSourcesService\x12\xb6\x01\n" +
-	"\x15GetCompanyDataSources\x12=.com.coralogix.global_mapping.v1.GetCompanyDataSourcesRequest\x1a>.com.coralogix.global_mapping.v1.GetCompanyDataSourcesResponse\"\x1e¸\x02\x1a\n" +
+	"\x15GetCompanyDataSources\x12=.com.coralogix.global_mapping.v1.GetCompanyDataSourcesRequest\x1a>.com.coralogix.global_mapping.v1.GetCompanyDataSourcesResponse\"\x1eʸ\x02\x1a\n" +
 	"\x18Get Company Data Sourcesb\x06proto3"
 
 var (

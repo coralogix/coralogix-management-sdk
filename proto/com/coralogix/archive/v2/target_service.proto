@@ -7,9 +7,6 @@ import "com/coralogixapis/common/v1/audit_log.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 import "google/api/annotations.proto";
 
-
-
-
 message GetTargetRequest {}
 
 message GetTargetResponse {
@@ -169,85 +166,16 @@ message ValidateTargetResponse {
 }
 
 service TargetService {
-  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
-    name: "Target Service"
-    description: "View and manage your storage targets for logs."
-    external_docs: {
-      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
-      description: "Find out more about archives"
-    }
-  };
   rpc GetTarget(GetTargetRequest) returns (GetTargetResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get target";
-    option (google.api.http) = {
-      get: "/v2/target"
-    };
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Target Service"]
-      summary: "Get target"
-    };
   }
 
   rpc SetTarget(SetTargetRequest) returns (SetTargetResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Set target";
-    option (google.api.http) = {
-      post: "/v2/target"
-      body: "*"
-    };
-
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Target Service"]
-      summary: "Set target"
-    };
   }
 
   rpc ValidateTarget(ValidateTargetRequest) returns (ValidateTargetResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Validate target";
-    option (google.api.http) = {
-      post: "/v2/target:validate"
-      body: "*"
-    };
-
-    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
-      responses: {
-        key: "400"
-        value: {description: "Bad Request"}
-      }
-      responses: {
-        key: "401"
-        value: {description: "Unauthorized request"}
-      }
-      responses: {
-        key: "500"
-        value: {description: "Internal server error"}
-      }
-      tags: ["Target Service"]
-      summary: "Validate target"
-    };
   }
 }
 
@@ -263,7 +191,10 @@ service S3TargetService {
   rpc GetTarget(S3TargetServiceGetTargetRequest) returns (S3TargetServiceGetTargetResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Get target";
     option (google.api.http) = {
-      get: "/v2/target"
+      get: "/logs/data-setup/v2"
+      additional_bindings: {
+        get: "/v2/target"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -286,8 +217,11 @@ service S3TargetService {
   rpc SetTarget(S3TargetServiceSetTargetRequest) returns (S3TargetServiceSetTargetResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "Set target";
     option (google.api.http) = {
-      post: "/v2/target"
+      post: "/logs/data-setup/v2"
       body: "*"
+      additional_bindings: {
+        post: "/v2/target"
+      }
     };
 
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {

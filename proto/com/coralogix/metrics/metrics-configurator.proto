@@ -3,13 +3,44 @@ syntax = "proto3";
 package com.coralogix.metrics.metrics_configurator;
 
 import "google/protobuf/empty.proto";
+import "protoc-gen-openapiv3/options/annotations.proto";
+import "google/api/annotations.proto";
+
 
 message RetentionPolicy {
-  int32 resolution = 1;
-  int32 retention_days = 2;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Retenion Policy"
+      description: "This data structure represents the retention policy for a tenant."
+      required: [
+        "resolution",
+        "retention_days"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
+  int32 resolution = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "12"}];
+  int32 retention_days = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "30"}];
 }
 
 message S3Config {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "S3 Configuration"
+      description: "This data structure represents the S3 configuration for a tenant."
+      required: [
+        "bucket",
+        "region"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
   string bucket = 1;
   string region = 2;
 }
@@ -22,13 +53,28 @@ message IbmConfig {
 }
 
 message IbmConfigV2 {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "IBM Bucket Configuration"
+      description: "This data structure is used to configure an IBM bucket."
+      required: [
+        "endpoint",
+        "crn",
+        "service_crn"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
   // Endpoint to use to access the bucket
-  string endpoint = 3;
+  string endpoint = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"s3.us-south.cloud-object-storage.appdomain.cloud\""}];
   // Cloud Object Storage bucket CRN
-  string crn = 4;
+  string crn = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::\""}];
   // A CRN of a service instance which will be storing data in the bucket.
   // Team ID is comming in AuthContext
-  string service_crn = 5;
+  string service_crn = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"crn:v1:bluemix:public:cloud-object-storage:global:a/1234567890abcdef1234567890abcdef:12345678-1234-1234-1234-1234567890ab::\""}];
 }
 
 message TenantConfigV2 {
@@ -43,6 +89,21 @@ message TenantConfigV2 {
 }
 
 message ConfigureTenantRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Configure Tenant Request"
+      description: "This data structure is used to configure a tenant."
+      required: [
+        "retention_policy",
+        "storage_config"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
+
   RetentionPolicyRequest retention_policy = 1;
   oneof storage_config {
     IbmConfigV2 ibm = 2;
@@ -51,6 +112,20 @@ message ConfigureTenantRequest {
 }
 
 message UpdateRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Update Tenant Request"
+      description: "This data structure is used to update the configuration of a tenant."
+      required: [
+        "retention_days",
+        "storage_config"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
   optional uint32 retention_days = 1;
   oneof storage_config {
     IbmConfigV2 ibm = 2;
@@ -68,6 +143,17 @@ message InternalUpdateRequest {
 }
 
 message ValidateBucketRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Bucket Validation Request"
+      description: "This data structure is used to validate a bucket."
+      required: ["storage_config"]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
   oneof storage_config {
     IbmConfigV2 ibm = 1;
     S3Config s3 = 2;
@@ -75,9 +161,24 @@ message ValidateBucketRequest {
 }
 
 message RetentionPolicyRequest {
-  uint32 raw_resolution = 1;
-  uint32 five_minutes_resolution = 2;
-  uint32 one_hour_resolution = 3;
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Retenion Policy Request"
+      description: "This data structure is used to set the retention policy for a tenant."
+      required: [
+        "raw_resolution",
+        "five_minutes_resolution",
+        "one_hour_resolution"
+      ]
+    }
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/account-management/payment-and-billing/metrics-optimization/"
+      description: "Find out more about metrics cost optimization"
+    }
+  };
+  uint32 raw_resolution = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
+  uint32 five_minutes_resolution = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "2"}];
+  uint32 one_hour_resolution = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "3"}];
 }
 
 message TenantConfig {
@@ -127,12 +228,54 @@ message ListHotStoreConfigsResponse {
 }
 
 service MetricsConfiguratorPublicService {
-  rpc ConfigureTenant(ConfigureTenantRequest) returns (google.protobuf.Empty) {}
-  rpc Update(UpdateRequest) returns (google.protobuf.Empty) {}
-  rpc ValidateBucket(ValidateBucketRequest) returns (google.protobuf.Empty) {}
-  rpc GetTenantConfig(google.protobuf.Empty) returns (GetTenantConfigResponseV2) {}
-  rpc EnableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {}
-  rpc DisableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Metrics Data Archive Service"
+    description: "View and manage your storage targets for metrics."
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/"
+      description: "Find out more about archives"
+    }
+  };
+
+  rpc ConfigureTenant(ConfigureTenantRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/metrics/data-setup/v1"
+      body: "*"
+      additional_bindings: {post: "/v1/metrics-archive"}
+    };
+  }
+  rpc Update(UpdateRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      put: "/metrics/data-setup/v1"
+      body: "*"
+      additional_bindings: {put: "/v1/metrics-archive"}
+    };
+  }
+  rpc ValidateBucket(ValidateBucketRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/metrics/data-setup/v1/validate"
+      body: "*"
+      additional_bindings: {post: "/v1/metrics-archive:validate"}
+    };
+  }
+  rpc GetTenantConfig(google.protobuf.Empty) returns (GetTenantConfigResponseV2) {
+    option (google.api.http) = {
+      get: "/metrics/data-setup/v1"
+      additional_bindings: {get: "/v1/metrics-archive"}
+    };
+  }
+  rpc EnableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/metrics/data-setup/v1/enable"
+      additional_bindings: {post: "/v1/metrics-archive:enable"}
+    };
+  }
+  rpc DisableArchive(google.protobuf.Empty) returns (google.protobuf.Empty) {
+    option (google.api.http) = {
+      post: "/metrics/data-setup/v1/disable"
+      additional_bindings: {post: "/v1/metrics-archive:disable"}
+    };
+  }
 }
 
 service MetricsConfiguratorService {
