@@ -55,8 +55,6 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         api_keys_service(&root),
         #[cfg(feature = "target")]
         target_service(&root),
-        #[cfg(feature = "metrics_configurator")]
-        metrics_configurator_service(&root),
         #[cfg(feature = "retentions")]
         retention_service(&root),
         #[cfg(feature = "team")]
@@ -222,13 +220,6 @@ fn api_keys_service(root: &str) -> Vec<String> {
 fn target_service(root: &str) -> Vec<String> {
     vec![format!(
         "{}/com/coralogix/archive/v2/target_service.proto",
-        root
-    )]
-}
-
-fn metrics_configurator_service(root: &str) -> Vec<String> {
-    vec![format!(
-        "{}/com/coralogix/metrics/metrics-configurator.proto",
         root
     )]
 }
