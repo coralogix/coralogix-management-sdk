@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -1049,7 +1049,7 @@ var File_com_coralogix_global_mapping_v1_label_mappings_service_proto protorefle
 
 const file_com_coralogix_global_mapping_v1_label_mappings_service_proto_rawDesc = "" +
 	"\n" +
-	"<com/coralogix/global_mapping/v1/label_mappings_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a3com/coralogix/global_mapping/v1/label_mapping.proto\x1a6com/coralogix/global_mapping/v1/data_source_type.proto\x1a2com/coralogix/global_mapping/v1/context_data.proto\x1a5com/coralogix/global_mapping/v1/extracted_label.proto\x1a2com/coralogix/global_mapping/v1/label_values.proto\x1a1com/coralogix/global_mapping/v1/data_source.proto\"\x99\x02\n" +
+	"<com/coralogix/global_mapping/v1/label_mappings_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a3com/coralogix/global_mapping/v1/label_mapping.proto\x1a6com/coralogix/global_mapping/v1/data_source_type.proto\x1a2com/coralogix/global_mapping/v1/context_data.proto\x1a5com/coralogix/global_mapping/v1/extracted_label.proto\x1a2com/coralogix/global_mapping/v1/label_values.proto\x1a1com/coralogix/global_mapping/v1/data_source.proto\"\x99\x02\n" +
 	"\x17GetLabelMappingsRequest\x124\n" +
 	"\x06labels\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x06labels\x12[\n" +
 	"\x11data_source_types\x18\x02 \x03(\x0e2/.com.coralogix.global_mapping.v1.DataSourceTypeR\x0fdataSourceTypes\x12N\n" +
@@ -1109,26 +1109,26 @@ const file_com_coralogix_global_mapping_v1_label_mappings_service_proto_rawDesc 
 	"\vdata_source\x18\x02 \x01(\v2+.com.coralogix.global_mapping.v1.DataSourceR\n" +
 	"dataSource2\xfa\r\n" +
 	"\x14LabelMappingsService\x12\xa1\x01\n" +
-	"\x10GetLabelMappings\x128.com.coralogix.global_mapping.v1.GetLabelMappingsRequest\x1a9.com.coralogix.global_mapping.v1.GetLabelMappingsResponse\"\x18¸\x02\x14\n" +
+	"\x10GetLabelMappings\x128.com.coralogix.global_mapping.v1.GetLabelMappingsRequest\x1a9.com.coralogix.global_mapping.v1.GetLabelMappingsResponse\"\x18ʸ\x02\x14\n" +
 	"\x12Get Label Mappings\x12\xad\x01\n" +
-	"\x13RemoveLabelMappings\x12;.com.coralogix.global_mapping.v1.RemoveLabelMappingsRequest\x1a<.com.coralogix.global_mapping.v1.RemoveLabelMappingsResponse\"\x1b¸\x02\x17\n" +
+	"\x13RemoveLabelMappings\x12;.com.coralogix.global_mapping.v1.RemoveLabelMappingsRequest\x1a<.com.coralogix.global_mapping.v1.RemoveLabelMappingsResponse\"\x1bʸ\x02\x17\n" +
 	"\x15Remove Label Mappings\x12\xad\x01\n" +
-	"\x13UpsertLabelMappings\x12;.com.coralogix.global_mapping.v1.UpsertLabelMappingsRequest\x1a<.com.coralogix.global_mapping.v1.UpsertLabelMappingsResponse\"\x1b¸\x02\x17\n" +
+	"\x13UpsertLabelMappings\x12;.com.coralogix.global_mapping.v1.UpsertLabelMappingsRequest\x1a<.com.coralogix.global_mapping.v1.UpsertLabelMappingsResponse\"\x1bʸ\x02\x17\n" +
 	"\x15Upsert Label Mappings\x12\x84\x01\n" +
-	"\tGetLabels\x121.com.coralogix.global_mapping.v1.GetLabelsRequest\x1a2.com.coralogix.global_mapping.v1.GetLabelsResponse\"\x10¸\x02\f\n" +
+	"\tGetLabels\x121.com.coralogix.global_mapping.v1.GetLabelsRequest\x1a2.com.coralogix.global_mapping.v1.GetLabelsResponse\"\x10ʸ\x02\f\n" +
 	"\n" +
 	"Get Labels\x12\x8f\x01\n" +
-	"\aExtract\x12/.com.coralogix.global_mapping.v1.ExtractRequest\x1a0.com.coralogix.global_mapping.v1.ExtractResponse\"!¸\x02\x1d\n" +
+	"\aExtract\x12/.com.coralogix.global_mapping.v1.ExtractRequest\x1a0.com.coralogix.global_mapping.v1.ExtractResponse\"!ʸ\x02\x1d\n" +
 	"\x1bExtract labels from context\x12\xbd\x01\n" +
-	"\x0eGetLabelValues\x126.com.coralogix.global_mapping.v1.GetLabelValuesRequest\x1a7.com.coralogix.global_mapping.v1.GetLabelValuesResponse\":¸\x026\n" +
+	"\x0eGetLabelValues\x126.com.coralogix.global_mapping.v1.GetLabelValuesRequest\x1a7.com.coralogix.global_mapping.v1.GetLabelValuesResponse\":ʸ\x026\n" +
 	"4Returns possible label values from prometheus labels\x12\xba\x01\n" +
-	"\x16GetCustomLabelMappings\x12>.com.coralogix.global_mapping.v1.GetCustomLabelMappingsRequest\x1a?.com.coralogix.global_mapping.v1.GetCustomLabelMappingsResponse\"\x1f¸\x02\x1b\n" +
+	"\x16GetCustomLabelMappings\x12>.com.coralogix.global_mapping.v1.GetCustomLabelMappingsRequest\x1a?.com.coralogix.global_mapping.v1.GetCustomLabelMappingsResponse\"\x1fʸ\x02\x1b\n" +
 	"\x19Get Custom Label Mappings\x12\xc6\x01\n" +
-	"\x19UpsertCustomLabelMappings\x12A.com.coralogix.global_mapping.v1.UpsertCustomLabelMappingsRequest\x1aB.com.coralogix.global_mapping.v1.UpsertCustomLabelMappingsResponse\"\"¸\x02\x1e\n" +
+	"\x19UpsertCustomLabelMappings\x12A.com.coralogix.global_mapping.v1.UpsertCustomLabelMappingsRequest\x1aB.com.coralogix.global_mapping.v1.UpsertCustomLabelMappingsResponse\"\"ʸ\x02\x1e\n" +
 	"\x1cUpsert Custom Label Mappings\x12\xc6\x01\n" +
-	"\x19RemoveCustomLabelMappings\x12A.com.coralogix.global_mapping.v1.RemoveCustomLabelMappingsRequest\x1aB.com.coralogix.global_mapping.v1.RemoveCustomLabelMappingsResponse\"\"¸\x02\x1e\n" +
+	"\x19RemoveCustomLabelMappings\x12A.com.coralogix.global_mapping.v1.RemoveCustomLabelMappingsRequest\x1aB.com.coralogix.global_mapping.v1.RemoveCustomLabelMappingsResponse\"\"ʸ\x02\x1e\n" +
 	"\x1cRemove Custom Label Mappings\x12\xb5\x01\n" +
-	"\fGetLabelKeys\x124.com.coralogix.global_mapping.v1.GetLabelKeysRequest\x1a5.com.coralogix.global_mapping.v1.GetLabelKeysResponse\"8¸\x024\n" +
+	"\fGetLabelKeys\x124.com.coralogix.global_mapping.v1.GetLabelKeysRequest\x1a5.com.coralogix.global_mapping.v1.GetLabelKeysResponse\"8ʸ\x024\n" +
 	"2Returns possible label keys from prometheus labelsb\x06proto3"
 
 var (

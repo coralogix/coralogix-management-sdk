@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -467,7 +467,7 @@ var File_com_coralogix_global_mapping_v1_measurements_internal_service_proto pro
 
 const file_com_coralogix_global_mapping_v1_measurements_internal_service_proto_rawDesc = "" +
 	"\n" +
-	"Ccom/coralogix/global_mapping/v1/measurements_internal_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/global_mapping/v1/measurement.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a6com/coralogix/global_mapping/v1/data_source_type.proto\x1a1com/coralogix/global_mapping/v1/data_source.proto\"{\n" +
+	"Ccom/coralogix/global_mapping/v1/measurements_internal_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a1com/coralogix/global_mapping/v1/measurement.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a6com/coralogix/global_mapping/v1/data_source_type.proto\x1a1com/coralogix/global_mapping/v1/data_source.proto\"{\n" +
 	"'UpsertGlobalMeasurementsInternalRequest\x12P\n" +
 	"\fmeasurements\x18\x01 \x03(\v2,.com.coralogix.global_mapping.v1.MeasurementR\fmeasurements\"|\n" +
 	"(UpsertGlobalMeasurementsInternalResponse\x12P\n" +
@@ -492,13 +492,13 @@ const file_com_coralogix_global_mapping_v1_measurements_internal_service_proto_r
 	"\tproviders\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x02\x18\x01R\tproviders\x12N\n" +
 	"\fdata_sources\x18\x02 \x03(\v2+.com.coralogix.global_mapping.v1.DataSourceR\vdataSources2\xfb\x06\n" +
 	"\x1bMeasurementsInternalService\x12\xe2\x01\n" +
-	" UpsertGlobalMeasurementsInternal\x12H.com.coralogix.global_mapping.v1.UpsertGlobalMeasurementsInternalRequest\x1aI.com.coralogix.global_mapping.v1.UpsertGlobalMeasurementsInternalResponse\")¸\x02%\n" +
+	" UpsertGlobalMeasurementsInternal\x12H.com.coralogix.global_mapping.v1.UpsertGlobalMeasurementsInternalRequest\x1aI.com.coralogix.global_mapping.v1.UpsertGlobalMeasurementsInternalResponse\")ʸ\x02%\n" +
 	"#Upsert Global Measurements Internal\x12\xe2\x01\n" +
-	" RemoveGlobalMeasurementsInternal\x12H.com.coralogix.global_mapping.v1.RemoveGlobalMeasurementsInternalRequest\x1aI.com.coralogix.global_mapping.v1.RemoveGlobalMeasurementsInternalResponse\")¸\x02%\n" +
+	" RemoveGlobalMeasurementsInternal\x12H.com.coralogix.global_mapping.v1.RemoveGlobalMeasurementsInternalRequest\x1aI.com.coralogix.global_mapping.v1.RemoveGlobalMeasurementsInternalResponse\")ʸ\x02%\n" +
 	"#Remove Global Measurements Internal\x12\xda\x01\n" +
-	"\x1eUpsertCompanyProvidersInternal\x12F.com.coralogix.global_mapping.v1.UpsertCompanyProvidersInternalRequest\x1aG.com.coralogix.global_mapping.v1.UpsertCompanyProvidersInternalResponse\"'¸\x02#\n" +
+	"\x1eUpsertCompanyProvidersInternal\x12F.com.coralogix.global_mapping.v1.UpsertCompanyProvidersInternalRequest\x1aG.com.coralogix.global_mapping.v1.UpsertCompanyProvidersInternalResponse\"'ʸ\x02#\n" +
 	"!Upsert Company Providers Internal\x12\xb4\x01\n" +
-	"\x17GetMeasurementsInternal\x12?.com.coralogix.global_mapping.v1.GetMeasurementsInternalRequest\x1a@.com.coralogix.global_mapping.v1.GetMeasurementsInternalResponse\"\x16¸\x02\x12\n" +
+	"\x17GetMeasurementsInternal\x12?.com.coralogix.global_mapping.v1.GetMeasurementsInternalRequest\x1a@.com.coralogix.global_mapping.v1.GetMeasurementsInternalResponse\"\x16ʸ\x02\x12\n" +
 	"\x10Get Measurementsb\x06proto3"
 
 var (

@@ -7,9 +7,9 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
 	v2 "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/apm/common/v2"
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
@@ -566,114 +566,114 @@ var File_com_coralogixapis_apm_services_v1_service_slo_service_proto protoreflec
 
 const file_com_coralogixapis_apm_services_v1_service_slo_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/apm/services/v1/service_slo_service.proto\x12!com.coralogixapis.apm.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/apm/services/v1/service_slo.proto\x1a'com/coralogix/common/v1/audit_log.proto\x1a.com/coralogixapis/apm/common/v2/order_by.proto\x1a\x1cgoogle/api/annotations.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xbd\x02\n" +
+	";com/coralogixapis/apm/services/v1/service_slo_service.proto\x12!com.coralogixapis.apm.services.v1\x1a.com/coralogixapis/apm/common/v2/order_by.proto\x1a3com/coralogixapis/apm/services/v1/service_slo.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xbd\x02\n" +
 	"\x14GetServiceSloRequest\x12;\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x92A\n" +
-	"J\b\"slo_id\"R\x02id:\xe7\x01\x92A\xe3\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x9aA\n" +
+	"J\b\"slo_id\"R\x02id:\xe7\x01\x9aA\xe3\x01\n" +
 	"Y*\x17Get Service SLO Request2>This data structure represents a request to get a Service SLO.*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xca\x02\n" +
 	"\x15GetServiceSloResponse\x12?\n" +
-	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xef\x01\x92A\xeb\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xef\x01\x9aA\xeb\x01\n" +
 	"a*\x18Get Service SLO Response2?This data structure represents a response to get a Service SLO.\xd2\x01\x03slo*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xd0\x02\n" +
 	"\x17CreateServiceSloRequest\x12?\n" +
-	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf3\x01\x92A\xef\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf3\x01\x9aA\xef\x01\n" +
 	"e*\x1aCreate Service SLO Request2AThis data structure represents a request to create a Service SLO.\xd2\x01\x03slo*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xd3\x02\n" +
 	"\x18CreateServiceSloResponse\x12?\n" +
-	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf5\x01\x92A\xf1\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf5\x01\x9aA\xf1\x01\n" +
 	"g*\x1bCreate Service SLO Response2BThis data structure represents a response to create a Service SLO.\xd2\x01\x03slo*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xd2\x02\n" +
 	"\x18ReplaceServiceSloRequest\x12?\n" +
-	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf4\x01\x92A\xf0\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf4\x01\x9aA\xf0\x01\n" +
 	"f*\x1bReplace Service SLO Request2AThis data structure represents a request to update a Service SLO.\xd2\x01\x03slo*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xd5\x02\n" +
 	"\x19ReplaceServiceSloResponse\x12?\n" +
-	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf6\x01\x92A\xf2\x01\n" +
+	"\x03slo\x18\x01 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x03slo:\xf6\x01\x9aA\xf2\x01\n" +
 	"h*\x1cReplace Service SLO Response2BThis data structure represents a response to update a Service SLO.\xd2\x01\x03slo*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xcb\x02\n" +
 	"\x17DeleteServiceSloRequest\x12;\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x92A\n" +
-	"J\b\"slo_id\"R\x02id:\xf2\x01\x92A\xee\x01\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x9aA\n" +
+	"J\b\"slo_id\"R\x02id:\xf2\x01\x9aA\xee\x01\n" +
 	"d*\x1aDelete Service SLO Request2AThis data structure represents a request to delete a Service SLO.\xd2\x01\x02id*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\x1a\n" +
 	"\x18DeleteServiceSloResponse\"\xa7\x03\n" +
 	"\x16ListServiceSlosRequest\x12C\n" +
 	"\border_by\x18\x01 \x01(\v2(.com.coralogixapis.apm.common.v2.OrderByR\aorderBy\x12A\n" +
-	"\rservice_names\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueR\fserviceNames:\x84\x02\x92A\x80\x02\n" +
+	"\rservice_names\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueR\fserviceNames:\x84\x02\x9aA\x80\x02\n" +
 	"v*\x19List Service SLOs Request2>This data structure represents a request to list Service SLOs.\xd2\x01\border_by\xd2\x01\rservice_names*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xd1\x02\n" +
 	"\x17ListServiceSlosResponse\x12A\n" +
-	"\x04slos\x18\x01 \x03(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x04slos:\xf2\x01\x92A\xee\x01\n" +
+	"\x04slos\x18\x01 \x03(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x04slos:\xf2\x01\x9aA\xee\x01\n" +
 	"d*\x1aList Service SLOs Response2?This data structure represents a response to list Service SLOs.\xd2\x01\x04slos*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xe5\x02\n" +
 	"\x1aBatchGetServiceSlosRequest\x12K\n" +
-	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x18J\x16[\"slo_id1\", \"slo_id2\"]R\x03ids:\xf9\x01\x92A\xf5\x01\n" +
+	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x18J\x16[\"slo_id1\", \"slo_id2\"]R\x03ids:\xf9\x01\x9aA\xf5\x01\n" +
 	"k*\x1eBatch Get Service SLOs Request2CThis data structure represents a request to batch get Service SLOs.\xd2\x01\x03ids*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xc1\x04\n" +
 	"\x1bBatchGetServiceSlosResponse\x12\\\n" +
 	"\x04slos\x18\x01 \x03(\v2H.com.coralogixapis.apm.services.v1.BatchGetServiceSlosResponse.SlosEntryR\x04slos\x12]\n" +
-	"\rnot_found_ids\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x1b\x92A\x18J\x16[\"slo_id1\", \"slo_id2\"]R\vnotFoundIds\x1af\n" +
+	"\rnot_found_ids\x18\x02 \x03(\v2\x1c.google.protobuf.StringValueB\x1b\x9aA\x18J\x16[\"slo_id1\", \"slo_id2\"]R\vnotFoundIds\x1af\n" +
 	"\tSlosEntry\x12\x10\n" +
 	"\x03key\x18\x01 \x01(\tR\x03key\x12C\n" +
-	"\x05value\x18\x02 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x05value:\x028\x01:\xfc\x01\x92A\xf8\x01\n" +
+	"\x05value\x18\x02 \x01(\v2-.com.coralogixapis.apm.services.v1.ServiceSloR\x05value:\x028\x01:\xfc\x01\x9aA\xf8\x01\n" +
 	"n*\x1fBatch Get Service SLOs Response2DThis data structure represents a response to batch get Service SLOs.\xd2\x01\x04slos*\x85\x01\n" +
-	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/2\xa9\x0f\n" +
-	"\x11ServiceSloService\x12\xad\x02\n" +
-	"\rGetServiceSlo\x127.com.coralogixapis.apm.services.v1.GetServiceSloRequest\x1a8.com.coralogixapis.apm.services.v1.GetServiceSloResponse\"\xa8\x01\x92As\n" +
+	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/2\xab\x10\n" +
+	"\x11ServiceSloService\x12\xc5\x02\n" +
+	"\rGetServiceSlo\x127.com.coralogixapis.apm.services.v1.GetServiceSloRequest\x1a8.com.coralogixapis.apm.services.v1.GetServiceSloResponse\"\xc0\x01\x9aAs\n" +
 	"\vSLO Service\x12\x0fGet Service SLOJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x11\n" +
-	"\x0fGet Service SLO\x82\xd3\xe4\x93\x02\x17\x12\x15/v1/service_slos/{id}\x12\xba\x02\n" +
-	"\x10CreateServiceSlo\x12:.com.coralogixapis.apm.services.v1.CreateServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.CreateServiceSloResponse\"\xac\x01\x92Av\n" +
+	"\x15Internal server errorʸ\x02\x11\n" +
+	"\x0fGet Service SLO\x82\xd3\xe4\x93\x02/Z\x17\x12\x15/v1/service_slos/{id}\x12\x14/apm/apm-slo/v1/{id}\x12\xcd\x02\n" +
+	"\x10CreateServiceSlo\x12:.com.coralogixapis.apm.services.v1.CreateServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.CreateServiceSloResponse\"\xbf\x01\x9aAv\n" +
 	"\vSLO Service\x12\x12Create Service SLOJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x14\n" +
-	"\x12Create Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\"\x10/v1/service_slos\x12\xbe\x02\n" +
-	"\x11ReplaceServiceSlo\x12;.com.coralogixapis.apm.services.v1.ReplaceServiceSloRequest\x1a<.com.coralogixapis.apm.services.v1.ReplaceServiceSloResponse\"\xad\x01\x92Aw\n" +
+	"\x15Internal server errorʸ\x02\x14\n" +
+	"\x12Create Service SLO\x82\xd3\xe4\x93\x02(:\x01*Z\x12\"\x10/v1/service_slos\"\x0f/apm/apm-slo/v1\x12\xd1\x02\n" +
+	"\x11ReplaceServiceSlo\x12;.com.coralogixapis.apm.services.v1.ReplaceServiceSloRequest\x1a<.com.coralogixapis.apm.services.v1.ReplaceServiceSloResponse\"\xc0\x01\x9aAw\n" +
 	"\vSLO Service\x12\x13Replace Service SLOJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x14\n" +
-	"\x12Update Service SLO\x82\xd3\xe4\x93\x02\x15:\x01*\x1a\x10/v1/service_slos\x12\xbc\x02\n" +
-	"\x10DeleteServiceSlo\x12:.com.coralogixapis.apm.services.v1.DeleteServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.DeleteServiceSloResponse\"\xae\x01\x92Av\n" +
+	"\x15Internal server errorʸ\x02\x14\n" +
+	"\x12Update Service SLO\x82\xd3\xe4\x93\x02(:\x01*Z\x12\x1a\x10/v1/service_slos\x1a\x0f/apm/apm-slo/v1\x12\xd4\x02\n" +
+	"\x10DeleteServiceSlo\x12:.com.coralogixapis.apm.services.v1.DeleteServiceSloRequest\x1a;.com.coralogixapis.apm.services.v1.DeleteServiceSloResponse\"\xc6\x01\x9aAv\n" +
 	"\vSLO Service\x12\x12Delete Service SLOJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x14\n" +
-	"\x12Delete Service SLO\x82\xd3\xe4\x93\x02\x17*\x15/v1/service_slos/{id}\x12\xb6\x02\n" +
-	"\x0fListServiceSlos\x129.com.coralogixapis.apm.services.v1.ListServiceSlosRequest\x1a:.com.coralogixapis.apm.services.v1.ListServiceSlosResponse\"\xab\x01\x92Au\n" +
+	"\x15Internal server errorʸ\x02\x14\n" +
+	"\x12Delete Service SLO\x82\xd3\xe4\x93\x02/Z\x17*\x15/v1/service_slos/{id}*\x14/apm/apm-slo/v1/{id}\x12\xc9\x02\n" +
+	"\x0fListServiceSlos\x129.com.coralogixapis.apm.services.v1.ListServiceSlosRequest\x1a:.com.coralogixapis.apm.services.v1.ListServiceSlosResponse\"\xbe\x01\x9aAu\n" +
 	"\vSLO Service\x12\x11List Service SLOsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x13\n" +
-	"\x11List Service SLOs\x82\xd3\xe4\x93\x02\x16\x12\x14/v1/service_slos/all\x12\xc8\x02\n" +
-	"\x13BatchGetServiceSlos\x12=.com.coralogixapis.apm.services.v1.BatchGetServiceSlosRequest\x1a>.com.coralogixapis.apm.services.v1.BatchGetServiceSlosResponse\"\xb1\x01\x92Az\n" +
+	"\x15Internal server errorʸ\x02\x13\n" +
+	"\x11List Service SLOs\x82\xd3\xe4\x93\x02)Z\x16\x12\x14/v1/service_slos/all\x12\x0f/apm/apm-slo/v1\x12\xe1\x02\n" +
+	"\x13BatchGetServiceSlos\x12=.com.coralogixapis.apm.services.v1.BatchGetServiceSlosRequest\x1a>.com.coralogixapis.apm.services.v1.BatchGetServiceSlosResponse\"\xca\x01\x9aAz\n" +
 	"\vSLO Service\x12\x16Batch Get Service SLOsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
 	"\x03401\x12\x16\n" +
 	"\x14Unauthorized requestJ\x1e\n" +
 	"\x03500\x12\x17\n" +
-	"\x15Internal server error¸\x02\x18\n" +
-	"\x16Batch get Service SLOs\x82\xd3\xe4\x93\x02\x12\x12\x10/v1/service_slos\x1a#\x92A \n" +
+	"\x15Internal server errorʸ\x02\x18\n" +
+	"\x16Batch get Service SLOs\x82\xd3\xe4\x93\x02+Z\x12\x12\x10/v1/service_slos\x12\x15/apm/apm-slo/v1/batch\x1a#\x9aA \n" +
 	"\vSLO Service\x12\x11Manage your SLOs.b\x06proto3"
 
 var (

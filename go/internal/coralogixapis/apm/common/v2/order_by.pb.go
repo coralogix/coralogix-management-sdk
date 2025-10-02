@@ -7,7 +7,7 @@
 package v2
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -128,11 +128,11 @@ var File_com_coralogixapis_apm_common_v2_order_by_proto protoreflect.FileDescrip
 
 const file_com_coralogixapis_apm_common_v2_order_by_proto_rawDesc = "" +
 	"\n" +
-	".com/coralogixapis/apm/common/v2/order_by.proto\x12\x1fcom.coralogixapis.apm.common.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa3\x03\n" +
+	".com/coralogixapis/apm/common/v2/order_by.proto\x12\x1fcom.coralogixapis.apm.common.v2\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa3\x03\n" +
 	"\aOrderBy\x12N\n" +
 	"\n" +
-	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"field_name\"R\tfieldName\x12O\n" +
-	"\tdirection\x18\x02 \x01(\x0e21.com.coralogixapis.apm.common.v2.OrderByDirectionR\tdirection:\xf6\x01\x92A\xf2\x01\n" +
+	"field_name\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"field_name\"R\tfieldName\x12O\n" +
+	"\tdirection\x18\x02 \x01(\x0e21.com.coralogixapis.apm.common.v2.OrderByDirectionR\tdirection:\xf6\x01\x9aA\xf2\x01\n" +
 	"h*\bOrder By2CThis data structure represents an order by clause in Coralogix APM.\xd2\x01\n" +
 	"field_name\xd2\x01\tdirection*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/*o\n" +

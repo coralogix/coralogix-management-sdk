@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogix/common/v1"
+	_ "github.com/coralogix/coralogix-management-sdk/go/internal/coralogixapis/common/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	wrapperspb "google.golang.org/protobuf/types/known/wrapperspb"
@@ -107,12 +107,12 @@ var File_com_coralogix_global_mapping_v1_providers_service_proto protoreflect.Fi
 
 const file_com_coralogix_global_mapping_v1_providers_service_proto_rawDesc = "" +
 	"\n" +
-	"7com/coralogix/global_mapping/v1/providers_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a'com/coralogix/common/v1/audit_log.proto\"\x1c\n" +
+	"7com/coralogix/global_mapping/v1/providers_service.proto\x12\x1fcom.coralogix.global_mapping.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\"\x1c\n" +
 	"\x1aGetCompanyProvidersRequest\"h\n" +
 	"\x1bGetCompanyProvidersResponse\x12I\n" +
 	"\x11company_providers\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x10companyProviders2\xc9\x01\n" +
 	"\x17CompanyProvidersService\x12\xad\x01\n" +
-	"\x13GetCompanyProviders\x12;.com.coralogix.global_mapping.v1.GetCompanyProvidersRequest\x1a<.com.coralogix.global_mapping.v1.GetCompanyProvidersResponse\"\x1b¸\x02\x17\n" +
+	"\x13GetCompanyProviders\x12;.com.coralogix.global_mapping.v1.GetCompanyProvidersRequest\x1a<.com.coralogix.global_mapping.v1.GetCompanyProvidersResponse\"\x1bʸ\x02\x17\n" +
 	"\x15Get Company Providersb\x06proto3"
 
 var (

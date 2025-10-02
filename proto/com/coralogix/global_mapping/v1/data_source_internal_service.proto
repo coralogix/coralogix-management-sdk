@@ -1,6 +1,6 @@
 syntax = "proto3";
 import "com/coralogix/global_mapping/v1/data_source.proto";
-import "com/coralogix/common/v1/audit_log.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 
 package com.coralogix.global_mapping.v1;
 
@@ -14,6 +14,6 @@ message GetCompanyDataSourcesInternalResponse {
 
 service CompanyDataSourcesInternalService {
     rpc GetCompanyDataSourcesInternal (GetCompanyDataSourcesInternalRequest) returns (GetCompanyDataSourcesInternalResponse){
-        option (com.coralogix.common.v1.audit_log_description).description = "Get Company Data Sources";
+        option (com.coralogixapis.common.v1.audit_log_description).description = "Get Company Data Sources";
     }
 }

@@ -830,9 +830,18 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	" S3TargetServiceSetTargetResponse\x128\n" +
 	"\x06target\x18\x01 \x01(\v2 .com.coralogix.archive.v2.TargetR\x06target:\xdf\x01\x9aA\xdb\x01\n" +
 	"h*\x13Set Target Response2HThis data structure is obtained after setting a storage target for logs.\xd2\x01\x06target*o\n" +
-	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\xef\a\n" +
-	"\rTargetService\x12\xfd\x01\n" +
-	"\tGetTarget\x12*.com.coralogix.archive.v2.GetTargetRequest\x1a+.com.coralogix.archive.v2.GetTargetResponse\"\x96\x01\x9aAq\n" +
+	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\x8c\x03\n" +
+	"\rTargetService\x12v\n" +
+	"\tGetTarget\x12*.com.coralogix.archive.v2.GetTargetRequest\x1a+.com.coralogix.archive.v2.GetTargetResponse\"\x10ʸ\x02\f\n" +
+	"\n" +
+	"Get target\x12v\n" +
+	"\tSetTarget\x12*.com.coralogix.archive.v2.SetTargetRequest\x1a+.com.coralogix.archive.v2.SetTargetResponse\"\x10ʸ\x02\f\n" +
+	"\n" +
+	"Set target\x12\x8a\x01\n" +
+	"\x0eValidateTarget\x12/.com.coralogix.archive.v2.ValidateTargetRequest\x1a0.com.coralogix.archive.v2.ValidateTargetResponse\"\x15ʸ\x02\x11\n" +
+	"\x0fValidate target2\xb6\x06\n" +
+	"\x0fS3TargetService\x12\xb2\x02\n" +
+	"\tGetTarget\x129.com.coralogix.archive.v2.S3TargetServiceGetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceGetTargetResponse\"\xad\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Get targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -842,9 +851,9 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
-	"Get target\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v2/target\x12\x80\x02\n" +
-	"\tSetTarget\x12*.com.coralogix.archive.v2.SetTargetRequest\x1a+.com.coralogix.archive.v2.SetTargetResponse\"\x99\x01\x9aAq\n" +
+	"Get target\x82\xd3\xe4\x93\x02#Z\f\x12\n" +
+	"/v2/target\x12\x13/logs/data-setup/v2\x12\xb5\x02\n" +
+	"\tSetTarget\x129.com.coralogix.archive.v2.S3TargetServiceSetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceSetTargetResponse\"\xb0\x01\x9aAq\n" +
 	"\x0eTarget Service\x12\n" +
 	"Set targetJ\x14\n" +
 	"\x03400\x12\r\n" +
@@ -854,44 +863,8 @@ const file_com_coralogix_archive_v2_target_service_proto_rawDesc = "" +
 	"\x03500\x12\x17\n" +
 	"\x15Internal server errorʸ\x02\f\n" +
 	"\n" +
-	"Set target\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v2/target\x12\xa2\x02\n" +
-	"\x0eValidateTarget\x12/.com.coralogix.archive.v2.ValidateTargetRequest\x1a0.com.coralogix.archive.v2.ValidateTargetResponse\"\xac\x01\x9aAv\n" +
-	"\x0eTarget Service\x12\x0fValidate targetJ\x14\n" +
-	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
-	"\x03401\x12\x16\n" +
-	"\x14Unauthorized requestJ\x1e\n" +
-	"\x03500\x12\x17\n" +
-	"\x15Internal server errorʸ\x02\x11\n" +
-	"\x0fValidate target\x82\xd3\xe4\x93\x02\x18:\x01*\"\x13/v2/target:validate\x1a\xb5\x01\x9aA\xb1\x01\n" +
-	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
-	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/2\x88\x06\n" +
-	"\x0fS3TargetService\x12\x9b\x02\n" +
-	"\tGetTarget\x129.com.coralogix.archive.v2.S3TargetServiceGetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceGetTargetResponse\"\x96\x01\x9aAq\n" +
-	"\x0eTarget Service\x12\n" +
-	"Get targetJ\x14\n" +
-	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
-	"\x03401\x12\x16\n" +
-	"\x14Unauthorized requestJ\x1e\n" +
-	"\x03500\x12\x17\n" +
-	"\x15Internal server errorʸ\x02\f\n" +
-	"\n" +
-	"Get target\x82\xd3\xe4\x93\x02\f\x12\n" +
-	"/v2/target\x12\x9e\x02\n" +
-	"\tSetTarget\x129.com.coralogix.archive.v2.S3TargetServiceSetTargetRequest\x1a:.com.coralogix.archive.v2.S3TargetServiceSetTargetResponse\"\x99\x01\x9aAq\n" +
-	"\x0eTarget Service\x12\n" +
-	"Set targetJ\x14\n" +
-	"\x03400\x12\r\n" +
-	"\vBad RequestJ\x1d\n" +
-	"\x03401\x12\x16\n" +
-	"\x14Unauthorized requestJ\x1e\n" +
-	"\x03500\x12\x17\n" +
-	"\x15Internal server errorʸ\x02\f\n" +
-	"\n" +
-	"Set target\x82\xd3\xe4\x93\x02\x0f:\x01*\"\n" +
-	"/v2/target\x1a\xb5\x01\x9aA\xb1\x01\n" +
+	"Set target\x82\xd3\xe4\x93\x02&:\x01*Z\f\"\n" +
+	"/v2/target\"\x13/logs/data-setup/v2\x1a\xb5\x01\x9aA\xb1\x01\n" +
 	"\x0eTarget Service\x12.View and manage your storage targets for logs.\x1ao\n" +
 	"\x1cFind out more about archives\x12Ohttps://coralogix.com/docs/user-guides/data-flow/s3-archive/connect-s3-archive/b\x06proto3"
 

@@ -7,7 +7,7 @@
 package v1
 
 import (
-	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
+	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv3/options"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
@@ -607,18 +607,18 @@ var File_com_coralogixapis_apm_services_v1_service_slo_proto protoreflect.FileDe
 
 const file_com_coralogixapis_apm_services_v1_service_slo_proto_rawDesc = "" +
 	"\n" +
-	"3com/coralogixapis/apm/services/v1/service_slo.proto\x12!com.coralogixapis.apm.services.v1\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a.protoc-gen-openapiv2/options/annotations.proto\"\xa4\x04\n" +
+	"3com/coralogixapis/apm/services/v1/service_slo.proto\x12!com.coralogixapis.apm.services.v1\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xa4\x04\n" +
 	"\tSliFilter\x12E\n" +
-	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x92A\x0eJ\f\"field_name\"R\x05field\x12Q\n" +
+	"\x05field\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"field_name\"R\x05field\x12Q\n" +
 	"\fcompare_type\x18\x02 \x01(\x0e2..com.coralogixapis.apm.services.v1.CompareTypeR\vcompareType\x12Z\n" +
-	"\ffield_values\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x19\x92A\x16J\x14[\"value1\", \"value2\"]R\vfieldValues:\xa0\x02\x92A\x9c\x02\n" +
+	"\ffield_values\x18\x03 \x03(\v2\x1c.google.protobuf.StringValueB\x19\x9aA\x16J\x14[\"value1\", \"value2\"]R\vfieldValues:\xa0\x02\x9aA\x9c\x02\n" +
 	"\x91\x01*\n" +
 	"SLI Filter2]This data structure represents a filter for a Service Level Indicator (SLI) in Coralogix APM.\xd2\x01\x05field\xd2\x01\fcompare_type\xd2\x01\ffield_values*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\xf5\x03\n" +
 	"\n" +
 	"LatencySli\x12c\n" +
-	"\x16threshold_microseconds\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x92A\vJ\t\"1000000\"R\x15thresholdMicroseconds\x12]\n" +
-	"\x10threshold_symbol\x18\x02 \x01(\x0e22.com.coralogixapis.apm.services.v1.ThresholdSymbolR\x0fthresholdSymbol:\xa2\x02\x92A\x9e\x02\n" +
+	"\x16threshold_microseconds\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x0e\x9aA\vJ\t\"1000000\"R\x15thresholdMicroseconds\x12]\n" +
+	"\x10threshold_symbol\x18\x02 \x01(\x0e22.com.coralogixapis.apm.services.v1.ThresholdSymbolR\x0fthresholdSymbol:\xa2\x02\x9aA\x9e\x02\n" +
 	"\x93\x01*\vLatency SLO2XThis data structure represents a Latency Service Level Indicator (SLO) in Coralogix APM.\xd2\x01\x16threshold_microseconds\xd2\x01\x10threshold_symbol*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/\"\n" +
 	"\n" +
@@ -626,23 +626,23 @@ const file_com_coralogixapis_apm_services_v1_service_slo_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
 	"ServiceSlo\x12;\n" +
-	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x92A\n" +
+	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\r\x9aA\n" +
 	"J\b\"slo_id\"R\x02id\x12A\n" +
-	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x0f\x92A\fJ\n" +
+	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x0f\x9aA\fJ\n" +
 	"\"slo_name\"R\x04name\x12T\n" +
-	"\fservice_name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x13\x92A\x10J\x0e\"service_name\"R\vserviceName\x12D\n" +
+	"\fservice_name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x13\x9aA\x10J\x0e\"service_name\"R\vserviceName\x12D\n" +
 	"\x06status\x18\x04 \x01(\x0e2,.com.coralogixapis.apm.services.v1.SloStatusR\x06status\x12V\n" +
-	"\vdescription\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x16\x92A\x13J\x11\"slo_description\"R\vdescription\x12R\n" +
-	"\x11target_percentage\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x92A\x04J\x0299R\x10targetPercentage\x12V\n" +
+	"\vdescription\x18\x05 \x01(\v2\x1c.google.protobuf.StringValueB\x16\x9aA\x13J\x11\"slo_description\"R\vdescription\x12R\n" +
+	"\x11target_percentage\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\a\x9aA\x04J\x0299R\x10targetPercentage\x12V\n" +
 	"\n" +
-	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x92A\x18J\x16\"2021-01-01T00:00:00Z\"R\tcreatedAt\x12o\n" +
-	"!remaining_error_budget_percentage\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x92A\x03J\x011R\x1eremainingErrorBudgetPercentage\x12P\n" +
+	"created_at\x18\a \x01(\v2\x1a.google.protobuf.TimestampB\x1b\x9aA\x18J\x16\"2021-01-01T00:00:00Z\"R\tcreatedAt\x12o\n" +
+	"!remaining_error_budget_percentage\x18\b \x01(\v2\x1c.google.protobuf.UInt32ValueB\x06\x9aA\x03J\x011R\x1eremainingErrorBudgetPercentage\x12P\n" +
 	"\vlatency_sli\x18\t \x01(\v2-.com.coralogixapis.apm.services.v1.LatencySliH\x00R\n" +
 	"latencySli\x12J\n" +
 	"\terror_sli\x18\n" +
 	" \x01(\v2+.com.coralogixapis.apm.services.v1.ErrorSliH\x00R\berrorSli\x12F\n" +
 	"\afilters\x18\v \x03(\v2,.com.coralogixapis.apm.services.v1.SliFilterR\afilters\x12D\n" +
-	"\x06period\x18\f \x01(\x0e2,.com.coralogixapis.apm.services.v1.SloPeriodR\x06period:\xcd\x02\x92A\xc9\x02\n" +
+	"\x06period\x18\f \x01(\x0e2,.com.coralogixapis.apm.services.v1.SloPeriodR\x06period:\xcd\x02\x9aA\xc9\x02\n" +
 	"\xbe\x01*\vService SLO2PThis data structure represents a Service Level Objective (SLO) in Coralogix APM.\xd2\x01\x04name\xd2\x01\fservice_name\xd2\x01\x06status\xd2\x01\vdescription\xd2\x01\x11target_percentage\xd2\x01\bsli_type\xd2\x01\afilters\xd2\x01\x06period*\x85\x01\n" +
 	")Find out more about SLOs in Coralogix APM\x12Xhttps://coralogix.com/academy/get-to-know-coralogix/slo-sli-management-in-coralogix-apm/B\n" +
 	"\n" +

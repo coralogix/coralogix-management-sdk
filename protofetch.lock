@@ -21,23 +21,17 @@ commit_hash = "2c49d8a9b34de6d81fd601d45a859ca64055703c"
 [[dependencies]]
 name = "cx-api-apm"
 url = "github.com/coralogix/cx-api-apm"
-revision = "v2.0.9"
-commit_hash = "995f2fa4245ab060a96963566fabdfa7dc5b88c5"
+branch = "IAC-944"
+commit_hash = "2ebc5c5d67fe3bb1ca0eb22b400f08c4ef9785f3"
 
 [[dependencies]]
 name = "cx-api-archive"
 url = "github.com/coralogix/cx-api-archive"
-revision = "v0.0.145"
-commit_hash = "f46145d5f07e86047625d30fbf1aa54ae1d73a9e"
+revision = "v0.0.147"
+commit_hash = "e9276c4f4ebf5904cda328440640f640e21e998b"
 
 [[dependencies]]
 name = "cx-api-common"
-url = "github.com/coralogix/cx-api-common"
-revision = "v1.0.9"
-commit_hash = "b1925afa0446c94df1f3dedcf6d36e41ab709af5"
-
-[[dependencies]]
-name = "cx-api-common-2"
 url = "github.com/coralogix/cx-api-common"
 branch = "master"
 commit_hash = "5b3ac4ca2376cc60f987bf14918a63b92a7f0b2f"
@@ -51,8 +45,8 @@ commit_hash = "f4b7beb4c52bb14aee47299bc9a7ce71177815f3"
 [[dependencies]]
 name = "cx-api-data-usage"
 url = "github.com/coralogix/cx-api-data-usage"
-revision = "v0.3.21"
-commit_hash = "2865c125b5480d0f757e5ad5c45486d0d263ee73"
+revision = "v0.3.22"
+commit_hash = "3b5aa33ff2716ff51eeffc0b973a5b9307d8cbe3"
 
 [[dependencies]]
 name = "cx-api-enrichment"
@@ -93,8 +87,8 @@ commit_hash = "5921c0e9bea453e15a75845dcfffc29cd5a1950b"
 [[dependencies]]
 name = "cx-api-metrics-configurator"
 url = "github.com/coralogix/cx-api-metrics-configurator"
-revision = "v0.0.5"
-commit_hash = "205a9d8d2e91fd205a213b3dedc75484418f4b01"
+branch = "IAC-944"
+commit_hash = "0074418b6982500a3d397d40072230dd3f1254b3"
 
 [[dependencies]]
 name = "cx-api-metrics-rule-manager"
@@ -129,8 +123,8 @@ commit_hash = "a5e121c5227cb69b49c70259639b01166841a4a0"
 [[dependencies]]
 name = "cx-api-scopes"
 url = "github.com/coralogix/cx-api-scopes"
-revision = "v0.0.4"
-commit_hash = "ad41c78b7abe6688556a7f366b664f2e311323fc"
+revision = "v0.0.5"
+commit_hash = "df7dcc92af138b1abc032b32d7f6fa703e2b17db"
 
 [[dependencies]]
 name = "cx-api-slo"
@@ -147,8 +141,8 @@ commit_hash = "e9af7901f9d7abd795d79a62535c655bb6e5a31a"
 [[dependencies]]
 name = "global-mapping"
 url = "github.com/coralogix/cx-api-global-mapping"
-revision = "v1.26.2"
-commit_hash = "e9ba4cca81ce61c8ce4d70709a42e342349a3ba4"
+branch = "master"
+commit_hash = "f97f36f7b9c82bb9fc36abd511717147261d8db4"
 
 [[dependencies]]
 name = "google-api"
