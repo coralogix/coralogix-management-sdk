@@ -324,7 +324,7 @@ revision = "v0.0.5"
 
 [cx-api-apm]
 url = 'github.com/coralogix/cx-api-apm'
-branch = 'IAC-944'
+revision = 'v2.0.10'
 allow_policies = [
     "src/com/coralogixapis/apm/common/v2/order_by.proto",
     "src/com/coralogixapis/apm/services/v1/service_slo.proto",
@@ -394,7 +394,7 @@ url = 'github.com/coralogix/cx-api-metrics-configurator'
 allow_policies = [
     "/src/com/coralogix/metrics/metrics-configurator.proto",
 ]
-branch = 'IAC-944'
+revision = 'v.0.0.6'
 
 [cx-api-metrics-rule-manager]
 url = "github.com/coralogix/cx-api-metrics-rule-manager"
