@@ -831,7 +831,7 @@ var File_com_coralogixapis_alerts_v3_alert_defs_filter_option_counts_proto proto
 
 const file_com_coralogixapis_alerts_v3_alert_defs_filter_option_counts_proto_rawDesc = "" +
 	"\n" +
-	"Acom/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\"\x8e\x02\n" +
+	"Acom/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_priority.proto\x1a8com/coralogixapis/alerts/v3/alert_def_query_filter.proto\x1a0com/coralogixapis/alerts/v3/alert_def_type.proto\x1a)com/coralogixapis/alerts/v3/commons.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\x8e\x02\n" +
 	"\x19FilterOptionCountsRequest\x12\x88\x01\n" +
 	"\fquery_filter\x18\x01 \x01(\v25.com.coralogixapis.alerts.v3.FilterOptionCountsFilterB.\x9aA+2)The filter to apply when counting optionsR\vqueryFilter:f\x9aAc\n" +
 	"a*\x1cFilter option counts request2ARequest to get counts for filter options based on applied filters\"\xf2\x01\n" +
@@ -989,10 +989,10 @@ func file_com_coralogixapis_alerts_v3_alert_defs_filter_option_counts_proto_init
 	if File_com_coralogixapis_alerts_v3_alert_defs_filter_option_counts_proto != nil {
 		return
 	}
-	file_com_coralogixapis_alerts_v3_alert_def_type_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_priority_proto_init()
-	file_com_coralogixapis_alerts_v3_commons_proto_init()
 	file_com_coralogixapis_alerts_v3_alert_def_query_filter_proto_init()
+	file_com_coralogixapis_alerts_v3_alert_def_type_proto_init()
+	file_com_coralogixapis_alerts_v3_commons_proto_init()
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{

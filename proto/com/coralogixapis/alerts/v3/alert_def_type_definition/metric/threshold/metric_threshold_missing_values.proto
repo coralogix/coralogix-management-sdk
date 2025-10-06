@@ -19,7 +19,7 @@ message MetricMissingValues {
     }];
     google.protobuf.UInt32Value min_non_null_values_pct = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
       description: "If set, specifies the minimum percentage of non-null values required for the alert to be triggered"
-      example: "80",
+      example: "80"
       pattern: "^(100|[1-9][0-9]?)$"
     }];
   }

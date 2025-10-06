@@ -722,7 +722,7 @@ const file_com_coralogixapis_notification_center_routers_v1_global_routers_servi
 	"\x03key\x18\x01 \x01(\tR\x03key\x12T\n" +
 	"\x05value\x18\x02 \x01(\v2>.com.coralogixapis.notification_center.routers.v1.GlobalRouterR\x05value:\x028\x01:\xf3\x01\x9aA\xef\x01\n" +
 	"p*!Batch Get Global Routers Response2KResponse containing requested global routers and missing global routers ids*{\n" +
-	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\xf5\x0e\n" +
+	"'Find out more about notification center\x12Phttps://coralogix.com/docs/user-guides/notification-center/introduction/welcome/2\x97\x11\n" +
 	"\x14GlobalRoutersService\x12\x91\x02\n" +
 	"\x12CreateGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.CreateGlobalRouterResponse\"`\x82\xd3\xe4\x93\x02Z:\x06routerZ!\"\x1f/v1/notification-center/routers\"-/notifications/notification-center/v1/routers\x12\x94\x02\n" +
 	"\x13ReplaceGlobalRouter\x12L.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterRequest\x1aM.com.coralogixapis.notification_center.routers.v1.ReplaceGlobalRouterResponse\"`\x82\xd3\xe4\x93\x02Z:\x06routerZ!\x1a\x1f/v1/notification-center/routers\x1a-/notifications/notification-center/v1/routers\x12\xcc\x01\n" +
@@ -730,7 +730,9 @@ const file_com_coralogixapis_notification_center_routers_v1_global_routers_servi
 	"\x12DeleteGlobalRouter\x12K.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterRequest\x1aL.com.coralogixapis.notification_center.routers.v1.DeleteGlobalRouterResponse\"b\x82\xd3\xe4\x93\x02\\Z&*$/v1/notification-center/routers/{id}*2/notifications/notification-center/v1/routers/{id}\x12\x8a\x02\n" +
 	"\x0fGetGlobalRouter\x12H.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterRequest\x1aI.com.coralogixapis.notification_center.routers.v1.GetGlobalRouterResponse\"b\x82\xd3\xe4\x93\x02\\Z&\x12$/v1/notification-center/routers/{id}\x122/notifications/notification-center/v1/routers/{id}\x12\x86\x02\n" +
 	"\x11ListGlobalRouters\x12J.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersRequest\x1aK.com.coralogixapis.notification_center.routers.v1.ListGlobalRoutersResponse\"X\x82\xd3\xe4\x93\x02RZ!\x12\x1f/v1/notification-center/routers\x12-/notifications/notification-center/v1/routers\x12\xb6\x02\n" +
-	"\x15BatchGetGlobalRouters\x12N.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest\x1aO.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse\"|\x82\xd3\xe4\x93\x02vZ3\x121/v1/notification-center/routers:batchGetSummaries\x12?/notifications/notification-center/v1/routers:batchGetSummariesB2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
+	"\x15BatchGetGlobalRouters\x12N.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersRequest\x1aO.com.coralogixapis.notification_center.routers.v1.BatchGetGlobalRoutersResponse\"|\x82\xd3\xe4\x93\x02vZ3\x121/v1/notification-center/routers:batchGetSummaries\x12?/notifications/notification-center/v1/routers:batchGetSummaries\x1a\x9f\x02\x9aA\x9b\x02\n" +
+	"\x16Global routers service\x12wView and manage your global routers - entities that direct notifications to configured destinations based on conditions\x1a\x87\x01\n" +
+	"3Lean more about global routers in our documentation\x12Phttps://coralogix.com/docs/user-guides/notification-center/routing/introduction/B2Z0com/coralogixapis/notification_center/routers/v1b\x06proto3"
 
 var (
 	file_com_coralogixapis_notification_center_routers_v1_global_routers_service_proto_rawDescOnce sync.Once

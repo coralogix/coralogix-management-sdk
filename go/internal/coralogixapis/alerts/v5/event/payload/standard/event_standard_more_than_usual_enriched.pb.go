@@ -78,7 +78,7 @@ var File_com_coralogixapis_alerts_v5_event_payload_standard_event_standard_more_
 
 const file_com_coralogixapis_alerts_v5_event_payload_standard_event_standard_more_than_usual_enriched_proto_rawDesc = "" +
 	"\n" +
-	"`com/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual_enriched.proto\x12\x1bcom.coralogixapis.alerts.v5\x1aWcom/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual.proto\x1aVcom/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_prediction.proto\"\xea\x01\n" +
+	"`com/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual_enriched.proto\x12\x1bcom.coralogixapis.alerts.v5\x1aVcom/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_prediction.proto\x1aWcom/coralogixapis/alerts/v5/event/payload/standard/event_standard_more_than_usual.proto\"\xea\x01\n" +
 	"\"EventStandardMoreThanUsualEnriched\x12{\n" +
 	"\x1eevent_standard_more_than_usual\x18\x01 \x01(\v27.com.coralogixapis.alerts.v5.EventStandardMoreThanUsualR\x1aeventStandardMoreThanUsual\x12G\n" +
 	"\n" +

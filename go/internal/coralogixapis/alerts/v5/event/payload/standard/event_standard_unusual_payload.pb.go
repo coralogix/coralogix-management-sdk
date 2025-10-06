@@ -112,7 +112,7 @@ var File_com_coralogixapis_alerts_v5_event_payload_standard_event_standard_unusu
 
 const file_com_coralogixapis_alerts_v5_event_payload_standard_event_standard_unusual_payload_proto_rawDesc = "" +
 	"\n" +
-	"Wcom/coralogixapis/alerts/v5/event/payload/standard/event_standard_unusual_payload.proto\x12\x1bcom.coralogixapis.alerts.v5\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1aScom/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_payload.proto\"\xc2\x03\n" +
+	"Wcom/coralogixapis/alerts/v5/event/payload/standard/event_standard_unusual_payload.proto\x12\x1bcom.coralogixapis.alerts.v5\x1aScom/coralogixapis/alerts/v5/event/payload/metric/event_metric_unusual_payload.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xc2\x03\n" +
 	"\x1bEventStandardUnusualPayload\x12A\n" +
 	"\x0efrom_timestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\rfromTimestamp\x12=\n" +
 	"\fto_timestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vtoTimestamp\x12K\n" +
