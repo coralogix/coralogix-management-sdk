@@ -248,9 +248,9 @@ message OutgoingWebhook {
   WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
   google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_webhook\""}];
   google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"external_id_example\""}];
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "123456"}];
   oneof config {
     GenericWebhookConfig generic_webhook = 100;
     SlackConfig slack = 101;
@@ -312,9 +312,9 @@ message OutgoingWebhookSummary {
   google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"webhook_id\""}];
   google.protobuf.StringValue name = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_webhook\""}];
   google.protobuf.StringValue url = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"external_id_example\""}];
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+  google.protobuf.UInt32Value external_id = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "123456"}];
 }
 
 message OutgoingWebhookExtendedSummary {
@@ -334,9 +334,9 @@ message OutgoingWebhookExtendedSummary {
   WebhookType type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "1"}];
   google.protobuf.StringValue name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"my_webhook\""}];
   google.protobuf.StringValue url = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"slack.webhook.com\""}];
-  google.protobuf.Timestamp created_at = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.Timestamp updated_at = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"2024-10-20T00:00:00\""}];
-  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "\"external_id_example\""}];
+  google.protobuf.Timestamp created_at = 5;
+  google.protobuf.Timestamp updated_at = 6;
+  google.protobuf.UInt32Value external_id = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "123456"}];
 }
 
 message OutgoingWebhookDetails {

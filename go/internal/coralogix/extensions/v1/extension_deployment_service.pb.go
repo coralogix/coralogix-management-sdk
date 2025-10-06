@@ -804,7 +804,7 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x06reason\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueR\x06reason:1\x9aA.\n" +
 	",*\vFailed item\xd2\x01\aitem_id\xd2\x01\tremote_id\xd2\x01\x06reason:.\x9aA+\n" +
 	")*'Revert deployment of extension responseB\x17\n" +
-	"\x15_extension_deployment2\xc2\x0f\n" +
+	"\x15_extension_deployment2\xc5\x0f\n" +
 	"\x1aExtensionDeploymentService\x12\xc6\x03\n" +
 	"\x15GetDeployedExtensions\x129.com.coralogix.extensions.v1.GetDeployedExtensionsRequest\x1a:.com.coralogix.extensions.v1.GetDeployedExtensionsResponse\"\xb5\x02\x9aA\xc3\x01\n" +
 	"\x1cExtension deployment service\x12\x17Get deployed extensionsJ\x14\n" +
@@ -838,8 +838,8 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11extensions:Deployʸ\x02\x12\n" +
-	"\x10Update extension\x82\xd3\xe4\x93\x02IZ!\"\x1f/v1/extension-deployment/update\"$/integrations/extensions/v1/deployed\x12\xbb\x03\n" +
-	"\x11UndeployExtension\x125.com.coralogix.extensions.v1.UndeployExtensionRequest\x1a6.com.coralogix.extensions.v1.UndeployExtensionResponse\"\xb6\x02\x9aA\xc6\x01\n" +
+	"\x10Update extension\x82\xd3\xe4\x93\x02IZ!\"\x1f/v1/extension-deployment/update\"$/integrations/extensions/v1/deployed\x12\xbe\x03\n" +
+	"\x11UndeployExtension\x125.com.coralogix.extensions.v1.UndeployExtensionRequest\x1a6.com.coralogix.extensions.v1.UndeployExtensionResponse\"\xb9\x02\x9aA\xc6\x01\n" +
 	"\x1cExtension deployment service\x12\x1eRevert deployment of extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -849,7 +849,7 @@ const file_com_coralogix_extensions_v1_extension_deployment_service_proto_rawDes
 	"\x15Internal server errorj1\n" +
 	"\x16x-coralogixPermissions\x12\x172\x15\n" +
 	"\x13\x1a\x11extensions:Deployʸ\x02\x14\n" +
-	"\x12Undeploy extension\x82\xd3\xe4\x93\x02N:\x01*Z#\"!/v1/extension-deployment/undeploy*$/integrations/extensions/v1/deployed\x1a\xd6\x01\x9aA\xd2\x01\n" +
+	"\x12Undeploy extension\x82\xd3\xe4\x93\x02Q:\x01*Z&:\x01*\"!/v1/extension-deployment/undeploy*$/integrations/extensions/v1/deployed\x1a\xd6\x01\x9aA\xd2\x01\n" +
 	"\x1cExtension deployment service\x12EA service that enables querying for extension deployment information.\x1ak\n" +
 	"4Find out more about extensions in our documentation.\x123https://coralogix.com/docs/integrations/extensions/b\x06proto3"
 

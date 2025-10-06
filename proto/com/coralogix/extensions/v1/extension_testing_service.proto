@@ -23,7 +23,10 @@ service ExtensionTestingService {
     option (google.api.http) = {
       post: "/integrations/extensions/v1/testing/initialize"
       body: "*"
-      additional_bindings: {post: "/v1/extensions-testing/initialize"}
+      additional_bindings: {
+        post: "/v1/extensions-testing/initialize"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -56,7 +59,10 @@ service ExtensionTestingService {
     option (google.api.http) = {
       delete: "/integrations/extensions/v1/testing"
       body: "*"
-      additional_bindings: {post: "/v1/extensions-testing/cleanup"}
+      additional_bindings: {
+        post: "/v1/extensions-testing/cleanup"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -89,7 +95,10 @@ service ExtensionTestingService {
     option (google.api.http) = {
       post: "/integrations/extensions/v1/testing"
       body: "*"
-      additional_bindings: {post: "/v1/extensions-testing/test"}
+      additional_bindings: {
+        post: "/v1/extensions-testing/test"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

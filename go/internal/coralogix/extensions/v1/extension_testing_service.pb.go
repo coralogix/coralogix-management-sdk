@@ -295,9 +295,9 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x9aA\a:\x05falseR\x10cleanupAfterTest:7\x9aA4\n" +
 	"2*\x1fTest extension revision request\xd2\x01\x0eextension_data\"H\n" +
 	"\x1dTestExtensionRevisionResponse:'\x9aA$\n" +
-	"\"* Test extension revision response2\x9a\f\n" +
-	"\x17ExtensionTestingService\x12\xe6\x03\n" +
-	"\x19InitializeTestingRevision\x12=.com.coralogix.extensions.v1.InitializeTestingRevisionRequest\x1a>.com.coralogix.extensions.v1.InitializeTestingRevisionResponse\"\xc9\x02\x9aA\xc6\x01\n" +
+	"\"* Test extension revision response2\xa3\f\n" +
+	"\x17ExtensionTestingService\x12\xe9\x03\n" +
+	"\x19InitializeTestingRevision\x12=.com.coralogix.extensions.v1.InitializeTestingRevisionRequest\x1a>.com.coralogix.extensions.v1.InitializeTestingRevisionResponse\"\xcc\x02\x9aA\xc6\x01\n" +
 	"\x19Extension testing service\x12\x1bInitialize testing revisionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -307,8 +307,8 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
 	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x1d\n" +
-	"\x1bInitialize testing revision\x82\xd3\xe4\x93\x02X:\x01*Z#\"!/v1/extensions-testing/initialize\"./integrations/extensions/v1/testing/initialize\x12\xcb\x03\n" +
-	"\x16CleanupTestingRevision\x12:.com.coralogix.extensions.v1.CleanupTestingRevisionRequest\x1a;.com.coralogix.extensions.v1.CleanupTestingRevisionResponse\"\xb7\x02\x9aA\xc4\x01\n" +
+	"\x1bInitialize testing revision\x82\xd3\xe4\x93\x02[:\x01*Z&:\x01*\"!/v1/extensions-testing/initialize\"./integrations/extensions/v1/testing/initialize\x12\xce\x03\n" +
+	"\x16CleanupTestingRevision\x12:.com.coralogix.extensions.v1.CleanupTestingRevisionRequest\x1a;.com.coralogix.extensions.v1.CleanupTestingRevisionResponse\"\xba\x02\x9aA\xc4\x01\n" +
 	"\x19Extension testing service\x12\x19Cleanup testing extensionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -318,8 +318,8 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
 	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x1b\n" +
-	"\x19Cleanup testing extension\x82\xd3\xe4\x93\x02J:\x01*Z \"\x1e/v1/extensions-testing/cleanup*#/integrations/extensions/v1/testing\x12\xb8\x03\n" +
-	"\x15TestExtensionRevision\x129.com.coralogix.extensions.v1.TestExtensionRevisionRequest\x1a:.com.coralogix.extensions.v1.TestExtensionRevisionResponse\"\xa7\x02\x9aA\xc2\x01\n" +
+	"\x19Cleanup testing extension\x82\xd3\xe4\x93\x02M:\x01*Z#:\x01*\"\x1e/v1/extensions-testing/cleanup*#/integrations/extensions/v1/testing\x12\xbb\x03\n" +
+	"\x15TestExtensionRevision\x129.com.coralogix.extensions.v1.TestExtensionRevisionRequest\x1a:.com.coralogix.extensions.v1.TestExtensionRevisionResponse\"\xaa\x02\x9aA\xc2\x01\n" +
 	"\x19Extension testing service\x12\x17Test extension revisionJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -329,7 +329,7 @@ const file_com_coralogix_extensions_v1_extension_testing_service_proto_rawDesc =
 	"\x15Internal server errorj7\n" +
 	"\x16x-coralogixPermissions\x12\x1d2\x1b\n" +
 	"\x19\x1a\x17extensions:UpdateConfigʸ\x02\x10\n" +
-	"\x0eTest extension\x82\xd3\xe4\x93\x02G:\x01*Z\x1d\"\x1b/v1/extensions-testing/test\"#/integrations/extensions/v1/testing\x1a\x8c\x01\x9aA\x88\x01\n" +
+	"\x0eTest extension\x82\xd3\xe4\x93\x02J:\x01*Z :\x01*\"\x1b/v1/extensions-testing/test\"#/integrations/extensions/v1/testing\x1a\x8c\x01\x9aA\x88\x01\n" +
 	"\x19Extension testing service\x1ak\n" +
 	"4Find out more about extensions in our documentation.\x123https://coralogix.com/docs/integrations/extensions/b\x06proto3"
 

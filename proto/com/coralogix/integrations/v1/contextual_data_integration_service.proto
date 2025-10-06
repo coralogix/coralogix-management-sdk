@@ -116,7 +116,10 @@ service ContextualDataIntegrationService {
     option (google.api.http) = {
       post: "/integrations/contextual-data/v1/test"
       body: "*"
-      additional_bindings: {post: "/v1/contextual-data/integration/test"}
+      additional_bindings: {
+        post: "/v1/contextual-data/integration/test"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -149,7 +152,10 @@ service ContextualDataIntegrationService {
     option (google.api.http) = {
       post: "/integrations/contextual-data/v1"
       body: "*"
-      additional_bindings: {post: "/v1/contextual-data/integration"}
+      additional_bindings: {
+        post: "/v1/contextual-data/integration"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -182,7 +188,10 @@ service ContextualDataIntegrationService {
     option (google.api.http) = {
       put: "/integrations/contextual-data/v1"
       body: "*"
-      additional_bindings: {put: "/v1/contextual-data/integration"}
+      additional_bindings: {
+        put: "/v1/contextual-data/integration"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

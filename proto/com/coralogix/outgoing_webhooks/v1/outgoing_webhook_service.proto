@@ -251,7 +251,10 @@ service OutgoingWebhooksService {
     option (google.api.http) = {
       put: "/integrations/webhooks/v1"
       body: "*"
-      additional_bindings: {put: "/v1/outgoing-webhooks"}
+      additional_bindings: {
+        put: "/v1/outgoing-webhooks"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

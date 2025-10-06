@@ -120,7 +120,10 @@ service ExtensionDeploymentService {
     option (google.api.http) = {
       delete: "/integrations/extensions/v1/deployed"
       body: "*"
-      additional_bindings: {post: "/v1/extension-deployment/undeploy"}
+      additional_bindings: {
+        post: "/v1/extension-deployment/undeploy"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

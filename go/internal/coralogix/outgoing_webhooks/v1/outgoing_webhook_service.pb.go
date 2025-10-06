@@ -1357,7 +1357,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\tregion_id\x18\x02 \x01(\tB\f\x9aA\tJ\a\"eu-gb\"R\bregionId\x12'\n" +
 	"\x04name\x18\x03 \x01(\tB\x13\x9aA\x10J\x0e\"example-name\"R\x04name\x12\x83\x01\n" +
 	"\x03crn\x18\x04 \x01(\tBq\x9aAnJl\"crn:v1:staging:public:logs:eu-gb:a/436fa6f7760f46eba99e22f099c33cb8:5a8b249b-3915-49e7-ad43-030f585d84c5::\"R\x03crn\x12\"\n" +
-	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed2\xa3,\n" +
+	"\ais_used\x18\x05 \x01(\bB\t\x9aA\x06J\x04trueR\x06isUsed2\xa6,\n" +
 	"\x17OutgoingWebhooksService\x12\xdc\x03\n" +
 	"\x18ListOutgoingWebhookTypes\x12C.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesRequest\x1aD.com.coralogix.outgoing_webhooks.v1.ListOutgoingWebhookTypesResponse\"\xb4\x02\x9aA\xca\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aGet outgoing webhook typesJ\x14\n" +
@@ -1435,8 +1435,8 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj>\n" +
 	"\x16x-coralogixPermissions\x12$2\"\n" +
 	" \x1a\x1eoutbound-webhooks:UpdateConfigʸ\x02\x1c\n" +
-	"\x1aCreate an outgoing webhook\x82\xd3\xe4\x93\x02::\x01*Z\x1a:\x01*\"\x15/v1/outgoing-webhooks\"\x19/integrations/webhooks/v1\x12\xcc\x03\n" +
-	"\x15UpdateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookResponse\"\xad\x02\x9aA\xcc\x01\n" +
+	"\x1aCreate an outgoing webhook\x82\xd3\xe4\x93\x02::\x01*Z\x1a:\x01*\"\x15/v1/outgoing-webhooks\"\x19/integrations/webhooks/v1\x12\xcf\x03\n" +
+	"\x15UpdateOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.UpdateOutgoingWebhookResponse\"\xb0\x02\x9aA\xcc\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aUpdate an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -1446,7 +1446,7 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_service_proto_raw
 	"\x15Internal server errorj>\n" +
 	"\x16x-coralogixPermissions\x12$2\"\n" +
 	" \x1a\x1eoutbound-webhooks:UpdateConfigʸ\x02\x1c\n" +
-	"\x1aUpdate an outgoing webhook\x82\xd3\xe4\x93\x027:\x01*Z\x17\x1a\x15/v1/outgoing-webhooks\x1a\x19/integrations/webhooks/v1\x12\xd3\x03\n" +
+	"\x1aUpdate an outgoing webhook\x82\xd3\xe4\x93\x02::\x01*Z\x1a:\x01*\x1a\x15/v1/outgoing-webhooks\x1a\x19/integrations/webhooks/v1\x12\xd3\x03\n" +
 	"\x15DeleteOutgoingWebhook\x12@.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookRequest\x1aA.com.coralogix.outgoing_webhooks.v1.DeleteOutgoingWebhookResponse\"\xb4\x02\x9aA\xcc\x01\n" +
 	"\x19Outgoing webhooks service\x12\x1aDelete an outgoing webhookJ\x14\n" +
 	"\x03400\x12\r\n" +
