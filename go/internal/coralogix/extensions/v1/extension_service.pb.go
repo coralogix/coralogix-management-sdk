@@ -570,9 +570,9 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x1c*\x15Get extension request\xd2\x01\x02id\"{\n" +
 	"\x14GetExtensionResponse\x12D\n" +
 	"\textension\x18\x01 \x01(\v2&.com.coralogix.extensions.v1.ExtensionR\textension:\x1d\x9aA\x1a\n" +
-	"\x18*\x16Get extension response2\xfa\a\n" +
-	"\x10ExtensionService\x12\x91\x03\n" +
-	"\x10GetAllExtensions\x124.com.coralogix.extensions.v1.GetAllExtensionsRequest\x1a5.com.coralogix.extensions.v1.GetAllExtensionsResponse\"\x8f\x02\x9aA\xb3\x01\n" +
+	"\x18*\x16Get extension response2\xfd\a\n" +
+	"\x10ExtensionService\x12\x94\x03\n" +
+	"\x10GetAllExtensions\x124.com.coralogix.extensions.v1.GetAllExtensionsRequest\x1a5.com.coralogix.extensions.v1.GetAllExtensionsResponse\"\x92\x02\x9aA\xb3\x01\n" +
 	"\x11Extension service\x12\x12Get all extensionsJ\x14\n" +
 	"\x03400\x12\r\n" +
 	"\vBad RequestJ\x1d\n" +
@@ -582,7 +582,7 @@ const file_com_coralogix_extensions_v1_extension_service_proto_rawDesc = "" +
 	"\x15Internal server errorj5\n" +
 	"\x16x-coralogixPermissions\x12\x1b2\x19\n" +
 	"\x17\x1a\x15extensions:ReadConfigʸ\x02\x14\n" +
-	"\x12Get all extensions\x82\xd3\xe4\x93\x02::\x01*Z\x14\"\x12/v1/extensions/all\"\x1f/integrations/extensions/v1/all\x12\x91\x03\n" +
+	"\x12Get all extensions\x82\xd3\xe4\x93\x02=:\x01*Z\x17:\x01*\"\x12/v1/extensions/all\"\x1f/integrations/extensions/v1/all\x12\x91\x03\n" +
 	"\fGetExtension\x120.com.coralogix.extensions.v1.GetExtensionRequest\x1a1.com.coralogix.extensions.v1.GetExtensionResponse\"\x9b\x02\x9aA\xb4\x01\n" +
 	"\x11Extension service\x12\x13Get extension by IDJ\x14\n" +
 	"\x03400\x12\r\n" +

@@ -2011,17 +2011,17 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\fEndpointType\x12#\n" +
 	"\x1fENDPOINT_TYPE_DEFAULT_OR_PUBLIC\x10\x00\x12\x19\n" +
 	"\x15ENDPOINT_TYPE_PRIVATE\x10\x01:i\x9aAf\n" +
-	"d*$IBM event notification configuration\xd2\x01\x1fevent_notifications_instance_id\xd2\x01\tregion_id\xd2\x01\rendpoint_type\"\xcb\r\n" +
+	"d*$IBM event notification configuration\xd2\x01\x1fevent_notifications_instance_id\xd2\x01\tregion_id\xd2\x01\rendpoint_type\"\x84\r\n" +
 	"\x0fOutgoingWebhook\x12?\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
 	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
 	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12J\n" +
+	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\v\x9aA\bJ\x06123456R\n" +
 	"externalId\x12c\n" +
 	"\x0fgeneric_webhook\x18d \x01(\v28.com.coralogix.outgoing_webhooks.v1.GenericWebhookConfigH\x00R\x0egenericWebhook\x12G\n" +
 	"\x05slack\x18e \x01(\v2/.com.coralogix.outgoing_webhooks.v1.SlackConfigH\x00R\x05slack\x12T\n" +
@@ -2060,29 +2060,29 @@ const file_com_coralogix_outgoing_webhooks_v1_outgoing_webhook_proto_rawDesc = "
 	"\x17ibm_event_notifications\x18n \x01(\v2?.com.coralogix.outgoing_webhooks.v1.IbmEventNotificationsConfigH\x00R\x15ibmEventNotifications\x12g\n" +
 	"\x11ms_teams_workflow\x18o \x01(\v29.com.coralogix.outgoing_webhooks.v1.MSTeamsWorkflowConfigH\x00R\x0fmsTeamsWorkflow:9\x9aA6\n" +
 	"4*\x1bOutgoing webhook input data\xd2\x01\x04name\xd2\x01\x06config\xd2\x01\x04typeB\b\n" +
-	"\x06config\"\xb9\x04\n" +
+	"\x06config\"\xf2\x03\n" +
 	"\x16OutgoingWebhookSummary\x12?\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12C\n" +
 	"\x04name\x18\x02 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x03url\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x129\n" +
 	"\n" +
-	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x04 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
+	"updated_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12J\n" +
+	"\vexternal_id\x18\x06 \x01(\v2\x1c.google.protobuf.UInt32ValueB\v\x9aA\bJ\x06123456R\n" +
 	"externalId:F\x9aAC\n" +
 	"A*\x18Outgoing webhook summary\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\n" +
-	"created_at\xd2\x01\vexternal_id\"\x9e\x05\n" +
+	"created_at\xd2\x01\vexternal_id\"\xd7\x04\n" +
 	"\x1eOutgoingWebhookExtendedSummary\x12?\n" +
 	"\x02id\x18\x01 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"webhook_id\"R\x02id\x12K\n" +
 	"\x04type\x18\x02 \x01(\x0e2/.com.coralogix.outgoing_webhooks.v1.WebhookTypeB\x06\x9aA\x03J\x011R\x04type\x12C\n" +
 	"\x04name\x18\x03 \x01(\v2\x1c.google.protobuf.StringValueB\x11\x9aA\x0eJ\f\"my_webhook\"R\x04name\x12H\n" +
-	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x12U\n" +
+	"\x03url\x18\x04 \x01(\v2\x1c.google.protobuf.StringValueB\x18\x9aA\x15J\x13\"slack.webhook.com\"R\x03url\x129\n" +
 	"\n" +
-	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tcreatedAt\x12U\n" +
+	"created_at\x18\x05 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x129\n" +
 	"\n" +
-	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampB\x1a\x9aA\x17J\x15\"2024-10-20T00:00:00\"R\tupdatedAt\x12Y\n" +
-	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\x1a\x9aA\x17J\x15\"external_id_example\"R\n" +
+	"updated_at\x18\x06 \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\x12J\n" +
+	"\vexternal_id\x18\a \x01(\v2\x1c.google.protobuf.UInt32ValueB\v\x9aA\bJ\x06123456R\n" +
 	"externalId:V\x9aAS\n" +
 	"Q*!Outgoing webhook extended summary\xd2\x01\x02id\xd2\x01\x04name\xd2\x01\n" +
 	"created_at\xd2\x01\vexternal_id\xd2\x01\x04type\"\xd7\x01\n" +

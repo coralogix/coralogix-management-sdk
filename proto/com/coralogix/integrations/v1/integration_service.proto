@@ -217,7 +217,10 @@ service IntegrationService {
     option (google.api.http) = {
       post: "/integrations/integrations/v1/metadata"
       body: "*"
-      additional_bindings: {post: "/v1/integrations/metadata"}
+      additional_bindings: {
+        post: "/v1/integrations/metadata"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -250,7 +253,10 @@ service IntegrationService {
     option (google.api.http) = {
       put: "/integrations/integrations/v1/metadata"
       body: "*"
-      additional_bindings: {put: "/v1/integrations/metadata"}
+      additional_bindings: {
+        put: "/v1/integrations/metadata"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -379,7 +385,10 @@ service IntegrationService {
     option (google.api.http) = {
       post: "/integrations/integrations/v1/rum/sync"
       body: "*"
-      additional_bindings: {post: "/v1/integrations/rum/sync"}
+      additional_bindings: {
+        post: "/v1/integrations/rum/sync"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -412,7 +421,10 @@ service IntegrationService {
     option (google.api.http) = {
       post: "/integrations/integrations/v1/metadata/test"
       body: "*"
-      additional_bindings: {post: "/v1/integrations/metadata/test"}
+      additional_bindings: {
+        post: "/v1/integrations/metadata/test"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {

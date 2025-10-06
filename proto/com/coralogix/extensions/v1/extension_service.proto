@@ -24,7 +24,10 @@ service ExtensionService {
     option (google.api.http) = {
       post: "/integrations/extensions/v1/all"
       body: "*"
-      additional_bindings: {post: "/v1/extensions/all"}
+      additional_bindings: {
+        post: "/v1/extensions/all"
+        body: "*"
+      }
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
