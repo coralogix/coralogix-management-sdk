@@ -16,6 +16,10 @@ path = "src/bin/version_updater.rs"
 name = "create_release_branch"
 path = "src/bin/create_release_branch.rs"
 
+[[bin]]
+name = "cleanup"
+path = "src/bin/cleanup.rs"
+
 [dependencies]
 octocrab = "0.42"
 serde = { version = "1", features = ["derive"] }
@@ -29,3 +33,4 @@ clap = "4.5"
 tracing = "0.1"
 tracing-subscriber = "0.3"
 lazy_static = "1.5.0"
+cx-sdk = "*"
