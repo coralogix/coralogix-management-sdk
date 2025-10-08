@@ -313,6 +313,7 @@ async fn main() -> eyre::Result<()> {
                 .await
                 .unwrap_or_default()
                 .into_iter()
+                .filter(|f| f.active)
                 .map(|v| v.id.unwrap())
             {
                 info!("{:?}", users_client.delete(&id).await);

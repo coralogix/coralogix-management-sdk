@@ -26,8 +26,13 @@ ENV RUST_BACKTRACE=1
 
 WORKDIR /app
 ADD . /app
-WORKDIR /app/rust/examples
+
 ADD $PB_REL/download/v25.1/protoc-25.1-linux-${ARCH}.zip /tmp
+
+WORKDIR /app/tools/release-management
+RUN cargo build --bin cleanup
+
+WORKDIR /app/rust/examples
 RUN apt update && \
     apt install -y unzip pkg-config libssl-dev curl && \
     unzip /tmp/protoc-25.1-linux-${ARCH}.zip -d /usr && \
