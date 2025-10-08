@@ -30,7 +30,7 @@ ADD . /app
 ADD $PB_REL/download/v25.1/protoc-25.1-linux-${ARCH}.zip /tmp
 
 WORKDIR /app/tools/release-management
-RUN cargo build --bin cleanup
+RUN cargo build --bin cleanup && mv target/debug/cleanup /app
 
 WORKDIR /app/rust/examples
 RUN apt update && \
