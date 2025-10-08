@@ -3,20 +3,30 @@ syntax = "proto3";
 package com.coralogixapis.dashboards.v1.ast.widgets;
 
 import "com/coralogixapis/dashboards/v1/ast/filters/filter.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/colors_by.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/data_mode_type.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/legend.proto";
 import "com/coralogixapis/dashboards/v1/ast/widgets/common/metrics_query_editor_mode.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/scale.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/sort_by.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/thresholds.proto";
+import "com/coralogixapis/dashboards/v1/ast/widgets/common/units.proto";
 import "com/coralogixapis/dashboards/v1/common/logs_aggregation.proto";
 import "com/coralogixapis/dashboards/v1/common/metrics_series_limit_type.proto";
 import "com/coralogixapis/dashboards/v1/common/observation_field.proto";
 import "com/coralogixapis/dashboards/v1/common/query.proto";
 import "com/coralogixapis/dashboards/v1/common/time_frame.proto";
+import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
 
 message Dynamic {
   Query query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A query object describing how to retrieve data"}];
+
   v1.common.TimeFrameSelect time_frame = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Time frame which overrides the dashboard time frame"}];
 
   Interpretation interpretation = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Interpretation of the query results"}];
+
+  Visualization visualization = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies how the query results should be visualized"}];
 
   message Query {
     oneof value {
@@ -39,9 +49,13 @@ message Dynamic {
         description: "A Lucene query string to search logs"
         example: '{ "value": "coralogix.metadata.subsystemName: cx_rum" }'
       }];
+
       common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
+
       repeated v1.ast.filters.Filter.LogsFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of filters that narrow down query results"}];
+
       repeated v1.common.ObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of observation fields by which to group the results"}];
+
       repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Aggregation function"}];
     }
 
@@ -55,9 +69,13 @@ message Dynamic {
       };
 
       v1.common.LuceneQuery lucene_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Lucene query string to search span records"}];
+
       common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
+
       repeated v1.ast.filters.Filter.SpansFilter filters = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of span query filters"}];
+
       repeated v1.common.SpanObservationField group_by = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "A list of fields to group the records by"}];
+
       repeated v1.common.LogsAggregation aggregation = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Span query aggregation function"}];
     }
 
@@ -74,11 +92,14 @@ message Dynamic {
         description: "PromQL query string for querying metrics"
         example: '{ "value": "up{job=\'abc\'}" }'
       }];
+
       v1.common.PromQLQueryType promql_query_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the PromQL query, can be Range or Instant"}];
+
       common.MetricsQueryEditorMode editor_mode = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
         description: "Type of the query editor used to generate the query, can be text or builder based"
         example: "2"
       }];
+
       v1.common.MetricsSeriesLimitType series_limit_type = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
         description: "How to limit the result using series_count_limit parameter"
         example: "1"
@@ -93,7 +114,9 @@ message Dynamic {
           required: []
         }
       };
+
       v1.common.DataprimeQuery dataprime_query = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Dataprime query text"}];
+
       common.DataModeType data_mode_type = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Data mode type"}];
     }
   }
@@ -112,5 +135,556 @@ message Dynamic {
     INTERPRETATION_MULTI_VALUE_KPI_HEXAGON_BINS = 10;
     INTERPRETATION_CATEGORICAL_ANALYSIS_PIE_CHART = 11;
     INTERPRETATION_CATEGORICAL_ANALYSIS_HORIZONTAL_BARS = 12;
+  }
+
+  message Visualization {
+    oneof value {
+      Table table = 1;
+      TimeSeriesLines time_series_lines = 2;
+      TimeSeriesBars time_series_bars = 3;
+      Stat stat = 4;
+      Gauge gauge = 5;
+      HexagonBins hexagon_bins = 6;
+      PieChart pie_chart = 7;
+      HorizontalBars horizontal_bars = 8;
+      VerticalBars vertical_bars = 9;
+    }
+
+    message Table {
+      repeated Column columns = 1;
+
+      message Column {
+        v1.common.ObservationField field = 1;
+      }
+    }
+
+    message TimeSeriesLines {
+      v1.common.ObservationField temporal_field = 1;
+
+      repeated v1.common.ObservationField value_fields = 2;
+
+      repeated v1.common.ObservationField category_fields = 3;
+
+      common.Legend legend = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      TimeSeriesTooltip tooltip = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
+
+      StackedLine stacked_line = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of stacked line, can be undefined, absolute or relative"}];
+
+      google.protobuf.BoolValue connect_nulls = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether the line should remain connected instead of producing scattered points when null values are present in between"
+        example: "false"
+      }];
+
+      google.protobuf.StringValue series_name_template = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template for the series name"
+        example: '{ "value": "Trace of {{ application }}" }'
+      }];
+
+      google.protobuf.Int64Value series_count_limit = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Max count of the series per query"
+        example: '{ "value": 50 }'
+      }];
+
+      common.Unit unit = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field as 'custom' to take effect)"
+        example: '{ "value": "rpm" }'
+      }];
+
+      common.ScaleType scale_type = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      google.protobuf.StringValue color_scheme = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme for this query, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      google.protobuf.Int32Value decimal_precision = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+      google.protobuf.FloatValue y_axis_max = 19 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      enum StackedLine {
+        STACKED_LINE_UNSPECIFIED = 0;
+        STACKED_LINE_ABSOLUTE = 1;
+        STACKED_LINE_RELATIVE = 2;
+      }
+    }
+
+    message TimeSeriesBars {
+      v1.common.ObservationField temporal_field = 1;
+
+      repeated v1.common.ObservationField value_fields = 2;
+
+      repeated v1.common.ObservationField category_fields = 3;
+
+      common.Legend legend = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      TimeSeriesTooltip tooltip = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Tooltip settings for the widget"}];
+
+      google.protobuf.StringValue series_name_template = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template for the series name"
+        example: '{ "value": "Trace of {{ application }}" }'
+      }];
+
+      google.protobuf.Int32Value max_slices_per_bar = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "How many slices can fit in a single bar"
+        example: '{ "value": 8 }'
+      }];
+
+      common.Unit unit = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field as 'custom' to take effect)"
+        example: '{ "value": "rpm" }'
+      }];
+
+      common.ScaleType scale_type = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      google.protobuf.StringValue color_scheme = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme for this query, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      google.protobuf.Int32Value decimal_precision = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+      google.protobuf.FloatValue y_axis_max = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      BarValueDisplay bar_value_display = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Specifies where to display the bar value"
+        example: "1"
+      }];
+
+      common.SortByType sort_by = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Sort type, by name or by value"
+        example: "1"
+      }];
+    }
+
+    message Stat {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      google.protobuf.DoubleValue min = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A minimum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "0"
+      }];
+
+      google.protobuf.DoubleValue max = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A maximum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "150000"
+      }];
+
+      common.Unit unit = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the value - one from a predefined list, or 'custom'"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+        example: '{ "value" : "rpm" }'
+      }];
+
+      common.ThresholdType threshold_type = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the threshold, relative or absolute"}];
+
+      repeated common.Threshold thresholds = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of value thresholds, each with a certain color and an optional name label"}];
+
+      common.Legend legend = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      common.LegendBy legend_by = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates how to group the legend elements, either by thresholds or by query groups"}];
+
+      google.protobuf.Int32Value decimal_precision = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "2"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.BoolValue display_series_name = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "(multi-stat display only) Whether to show the series names above the value"}];
+    }
+
+    message Gauge {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      google.protobuf.DoubleValue min = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A minimum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "0"
+      }];
+
+      google.protobuf.DoubleValue max = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A maximum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "150000"
+      }];
+
+      common.Unit unit = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the value - one from a predefined list, or 'custom'"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+        example: '{ "value" : "rpm" }'
+      }];
+
+      common.ThresholdType threshold_type = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the threshold, relative or absolute"}];
+
+      repeated common.Threshold thresholds = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of value thresholds, each with a certain color and an optional name label"}];
+
+      common.Legend legend = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      common.LegendBy legend_by = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates how to group the legend elements, either by thresholds or by query groups"}];
+
+      google.protobuf.Int32Value decimal_precision = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "2"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.BoolValue show_inner_arc = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to show the inner arc of gauge which graphically represents the value"
+        example: "false"
+      }];
+
+      google.protobuf.BoolValue show_outer_arc = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to show the outer arc of gauge which graphically represents the min/max range"
+        example: "true"
+      }];
+
+      google.protobuf.BoolValue display_series_name = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "(multigauge display only) Whether to show the series names above the value"}];
+    }
+
+    message HexagonBins {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      google.protobuf.DoubleValue min = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A minimum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "0"
+      }];
+
+      google.protobuf.DoubleValue max = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "A maximum gauge value used in percentage threshold calculation and for visual value representation"
+        example: "150000"
+      }];
+
+      common.Unit unit = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the value - one from a predefined list, or 'custom'"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set as UNIT_CUSTOM to take effect)"
+        example: '{ "value" : "rpm" }'
+      }];
+
+      common.ThresholdType threshold_type = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Type of the threshold, relative or absolute"}];
+
+      repeated common.Threshold thresholds = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of value thresholds, each with a certain color and an optional name label"}];
+
+      common.Legend legend = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      common.LegendBy legend_by = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Indicates how to group the legend elements, either by thresholds or by query groups"}];
+
+      google.protobuf.Int32Value decimal_precision = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "2"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+    }
+
+    message PieChart {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      repeated v1.common.ObservationField sub_category_fields = 3;
+
+      google.protobuf.Int32Value max_slices_per_chart = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Maximum number of slices on a chart"
+        example: "24"
+      }];
+
+      google.protobuf.Int32Value min_slice_percentage = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Minimum percentage threshold for slices to be displayed"
+        example: "5"
+      }];
+
+      google.protobuf.Int32Value max_slices_per_stack = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How many slices can fit in a single slice stack"}];
+
+      google.protobuf.StringValue stack_name_template = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name of an individual slice in the stack"
+        example: '{ "value": "Slice {{ group }} - subslice {{ subgroup }}" }'
+      }];
+
+      LabelDefinition label_definition = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Settings for slice labels"}];
+
+      google.protobuf.StringValue group_name_template = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom template name for a group, can contain variables"
+        example: '{ "value": "Slice - {{ variable }}" }'
+      }];
+
+      common.Unit unit = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the value - one from a predefined list, or custom"
+        example: "0"
+      }];
+
+      google.protobuf.StringValue custom_unit = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires the unit field to be set to custom to take effect)"
+        example: '{ "value": "mph" }'
+      }];
+
+      google.protobuf.StringValue color_scheme = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      google.protobuf.Int32Value decimal_precision = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "5"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      common.Legend legend = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      message LabelDefinition {
+        LabelSource label_source = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Source of the label"}];
+        google.protobuf.BoolValue is_visible = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Are labels visible"}];
+        google.protobuf.BoolValue show_name = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to show the name of slice in the label"}];
+        google.protobuf.BoolValue show_value = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to show value of slice in the label"}];
+        google.protobuf.BoolValue show_percentage = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Whether to show percentage value of slice in the label"}];
+      }
+
+      enum LabelSource {
+        LABEL_SOURCE_UNSPECIFIED = 0;
+        LABEL_SOURCE_INNER = 1;
+        LABEL_SOURCE_STACK = 2;
+      }
+    }
+
+    message HorizontalBars {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      repeated v1.common.ObservationField sub_category_fields = 3;
+
+      google.protobuf.Int32Value max_bars_per_chart = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Maximum number of bars on a chart"
+        example: "20"
+      }];
+
+      google.protobuf.Int32Value max_slices_per_bar = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How many slices can fit in a single bar"}];
+
+      google.protobuf.StringValue stack_name_template = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Custom template name of an individual stack"}];
+
+      common.ScaleType scale_type = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      common.ColorsBy colors_by = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How the bar colors should be organized"}];
+
+      google.protobuf.StringValue color_scheme = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      common.Unit unit = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set to custom to take effect)"
+        example: '{ "value": "mph" }'
+      }];
+
+      google.protobuf.BoolValue display_on_bar = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies where to display the bar value"}];
+
+      google.protobuf.Int32Value decimal_precision = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+
+      google.protobuf.FloatValue y_axis_max = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      common.Legend legend = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      common.SortByType sort_by = 19 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Sort type, by name or by value"
+        example: "1"
+      }];
+    }
+
+    message VerticalBars {
+      v1.common.ObservationField value_field = 1;
+
+      repeated v1.common.ObservationField category_fields = 2;
+
+      repeated v1.common.ObservationField sub_category_fields = 3;
+
+      google.protobuf.Int32Value max_bars_per_chart = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Maximum number of bars on a chart"
+        example: "20"
+      }];
+
+      google.protobuf.Int32Value max_slices_per_bar = 5 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How many slices can fit in a single bar"}];
+
+      google.protobuf.StringValue stack_name_template = 6 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Custom template name of an individual stack"}];
+
+      common.ScaleType scale_type = 7 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Scale type - linear/logarithmic"}];
+
+      common.ColorsBy colors_by = 8 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "How the bar colors should be organized"}];
+
+      google.protobuf.StringValue color_scheme = 9 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Applied color scheme, one of the predefined values"
+        example: '{ "value": "classic" }'
+      }];
+
+      google.protobuf.BoolValue hash_colors = 10 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to ignore color scheme and derive colors from algorithm"
+        example: "false"
+      }];
+
+      common.Unit unit = 11 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Unit of the query results - one from a predefined list, or custom"
+        example: "3"
+      }];
+
+      google.protobuf.StringValue custom_unit = 12 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Custom unit (requires to have unit field set to custom to take effect)"
+        example: '{ "value": "mph" }'
+      }];
+
+      BarValueDisplay bar_value_display = 13 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Specifies where to display the bar value"}];
+
+      google.protobuf.Int32Value decimal_precision = 14 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the decimal precision of the numeric values, within range 0-15"
+        example: "4"
+      }];
+
+      google.protobuf.BoolValue allow_abbreviation = 15 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Whether to render numeric value without abbreviation"
+        example: "false"
+      }];
+
+      google.protobuf.FloatValue y_axis_min = 16 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the lower band for y axis"
+        example: "-1000"
+      }];
+
+      google.protobuf.FloatValue y_axis_max = 17 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Number indicating the upper band for y axis"
+        example: "1000"
+      }];
+
+      common.Legend legend = 18 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Widget's legend settings"}];
+
+      common.SortByType sort_by = 19 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Sort type, by name or by value"
+        example: "1"
+      }];
+    }
+
+    message TimeSeriesTooltip {
+      google.protobuf.BoolValue show_all_series = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+        description: "Type of the tooltip display, can be showing single series value or all series values at once"
+        example: "true"
+      }];
+
+      google.protobuf.BoolValue show_labels = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {example: "true"}];
+    }
+
+    enum BarValueDisplay {
+      BAR_VALUE_DISPLAY_UNSPECIFIED = 0;
+      BAR_VALUE_DISPLAY_TOP = 1;
+      BAR_VALUE_DISPLAY_INSIDE = 2;
+      BAR_VALUE_DISPLAY_BOTH = 3;
+    }
   }
 }
