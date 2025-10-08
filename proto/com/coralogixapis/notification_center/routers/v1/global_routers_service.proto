@@ -13,6 +13,15 @@ option go_package = "com/coralogixapis/notification_center/routers/v1";
 
 // Public API that allows managing global routers
 service GlobalRoutersService {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
+    name: "Global routers service"
+    description: "View and manage your global routers - entities that direct notifications to configured destinations based on conditions"
+    external_docs: {
+      url: "https://coralogix.com/docs/user-guides/notification-center/routing/introduction/"
+      description: "Lean more about global routers in our documentation"
+    }
+  };
+
   rpc CreateGlobalRouter(CreateGlobalRouterRequest) returns (CreateGlobalRouterResponse) {
     option (google.api.http) = {
       post: "/notifications/notification-center/v1/routers"

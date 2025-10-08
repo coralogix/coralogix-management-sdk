@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Public API to query information on registered entities in the Notification Center
+// Public API to query information about registered entities in the Notification Center
 type EntitiesServiceClient interface {
 	ListEntityTypes(ctx context.Context, in *ListEntityTypesRequest, opts ...grpc.CallOption) (*ListEntityTypesResponse, error)
 	ListEntitySubTypes(ctx context.Context, in *ListEntitySubTypesRequest, opts ...grpc.CallOption) (*ListEntitySubTypesResponse, error)
@@ -65,7 +65,7 @@ func (c *entitiesServiceClient) ListEntitySubTypes(ctx context.Context, in *List
 // All implementations must embed UnimplementedEntitiesServiceServer
 // for forward compatibility.
 //
-// Public API to query information on registered entities in the Notification Center
+// Public API to query information about registered entities in the Notification Center
 type EntitiesServiceServer interface {
 	ListEntityTypes(context.Context, *ListEntityTypesRequest) (*ListEntityTypesResponse, error)
 	ListEntitySubTypes(context.Context, *ListEntitySubTypesRequest) (*ListEntitySubTypesResponse, error)
