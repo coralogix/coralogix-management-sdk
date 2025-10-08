@@ -38,12 +38,13 @@ use cx_sdk::{
         webhooks::WebhooksClient,
     },
 };
+use tracing::{Level, info};
 
 #[tokio::main]
 async fn main() -> eyre::Result<()> {
     // Setup
-    tracing_subscriber::fmt::init();
-
+    let subscriber = tracing_subscriber::FmtSubscriber::new();
+    tracing::subscriber::set_global_default(subscriber)?;
     // Actions
     delete_all(
         "Actions".into(),
@@ -61,7 +62,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = actions_client.delete(id).await;
+                info!("{:?}", actions_client.delete(id).await);
             }
         }),
     )
@@ -86,7 +87,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = alerts_client.delete(id).await;
+                info!("{:?}", alerts_client.delete(id).await);
             }
         }),
     )
@@ -110,7 +111,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id)
             {
-                let _ = datasets_client.delete(id).await;
+                info!("{:?}", datasets_client.delete(id).await);
             }
         }),
     )
@@ -136,7 +137,7 @@ async fn main() -> eyre::Result<()> {
                 .map(|v| v.id)
                 .collect();
 
-            let _ = enrichments_client.delete(all_enrichments).await;
+            info!("{:?}", enrichments_client.delete(all_enrichments).await);
         }),
     )
     .await;
@@ -159,7 +160,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = events2metrics_client.delete(id).await;
+                info!("{:?}", events2metrics_client.delete(id).await);
             }
         }),
     )
@@ -183,7 +184,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = slos_client.delete(id).await;
+                info!("{:?}", slos_client.delete(id).await);
             }
         }),
     )
@@ -207,7 +208,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = tco_policies_client.delete(id).await;
+                info!("{:?}", tco_policies_client.delete(id).await);
             }
         }),
     )
@@ -231,7 +232,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = webhooks_client.delete(id).await;
+                info!("{:?}", webhooks_client.delete(id).await);
             }
         }),
     )
@@ -255,7 +256,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = notifications_client.delete_connector(id).await;
+                info!("{:?}", notifications_client.delete_connector(id).await);
             }
 
             for id in notifications_client
@@ -269,7 +270,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id)
             {
-                let _ = notifications_client.delete_custom_preset(id).await;
+                info!("{:?}", notifications_client.delete_custom_preset(id).await);
             }
         }),
     )
@@ -293,32 +294,32 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id)
             {
-                let _ = scopes_client.delete(id).await;
+                info!("{:?}", scopes_client.delete(id).await);
             }
         }),
     )
     .await;
-    // // Users
-    // delete_all(
-    //     "Users".into(),
-    //     Box::new(|| async {
-    //         let users_client = UsersClient::new(
-    //             CoralogixRegion::from_env().unwrap(),
-    //             AuthContext::from_env(),
-    //         );
+    // Users
+    delete_all(
+        "Users".into(),
+        Box::new(|| async {
+            let users_client = UsersClient::new(
+                CoralogixRegion::from_env().unwrap(),
+                AuthContext::from_env(),
+            );
 
-    //         for id in users_client
-    //             .list()
-    //             .await
-    //             .unwrap_or_default()
-    //             .into_iter()
-    //             .map(|v| v.id.unwrap())
-    //         {
-    //             let _ = users_client.delete(&id).await;
-    //         }
-    //     }),
-    // )
-    // .await;
+            for id in users_client
+                .list()
+                .await
+                .unwrap_or_default()
+                .into_iter()
+                .map(|v| v.id.unwrap())
+            {
+                info!("{:?}", users_client.delete(&id).await);
+            }
+        }),
+    )
+    .await;
 
     // Dashboards
     delete_all(
@@ -338,7 +339,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = dashboards_client.delete(id).await;
+                info!("{:?}", dashboards_client.delete(id).await);
             }
         }),
     )
@@ -361,7 +362,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = dashboard_folders_client.delete(id).await;
+                info!("{:?}", dashboard_folders_client.delete(id).await);
             }
         }),
     )
@@ -385,7 +386,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id)
             {
-                let _ = recording_rule_group_sets_client.delete(id).await;
+                info!("{:?}", recording_rule_group_sets_client.delete(id).await);
             }
         }),
     )
@@ -410,7 +411,30 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.integration.unwrap().id.unwrap())
             {
-                let _ = contextual_data_integrations_client.delete(id).await;
+                if let Ok(all_instances) = contextual_data_integrations_client
+                    .get_details(id, true)
+                    .await
+                {
+                    match all_instances
+                        .integration_detail
+                        .unwrap()
+                        .integration_type_details
+                    {
+                        Some(cx_sdk::client::integrations::IntegrationTypeDetails::Default(
+                            details,
+                        )) => {
+                            for d in details.registered {
+                                info!(
+                                    "{:?}",
+                                    contextual_data_integrations_client
+                                        .delete(d.id.unwrap())
+                                        .await
+                                );
+                            }
+                        }
+                        _ => {}
+                    }
+                }
             }
         }),
     )
@@ -433,7 +457,20 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|e| e.integration.unwrap().id.unwrap())
             {
-                let _ = integrations_client.delete(id).await;
+                if let Ok(all_instances) = integrations_client.get_details(id, true).await {
+                    match all_instances
+                        .integration_detail
+                        .unwrap()
+                        .integration_type_details
+                        .unwrap()
+                    {
+                        cx_sdk::client::integrations::IntegrationTypeDetails::Default(details) => {
+                            for d in details.registered {
+                                info!("{:?}", integrations_client.delete(d.id.unwrap()).await);
+                            }
+                        }
+                    }
+                }
             }
         }),
     )
@@ -449,14 +486,17 @@ async fn main() -> eyre::Result<()> {
             )
             .unwrap();
             for id in extensions_client
-                .get_all(None, true)
+                .get_deployed()
                 .await
                 .unwrap_or_default()
-                .extensions
+                .deployed_extensions
                 .into_iter()
                 .map(|e| e.id)
             {
-                let _ = extensions_client.undeploy(id.unwrap(), vec![]).await;
+                info!(
+                    "{:?}",
+                    extensions_client.undeploy(id.unwrap(), vec![]).await
+                );
             }
         }),
     )
@@ -479,7 +519,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = views_client.delete(id).await;
+                info!("{:?}", views_client.delete(id).await);
             }
         }),
     )
@@ -501,7 +541,7 @@ async fn main() -> eyre::Result<()> {
                 .into_iter()
                 .map(|v| v.id.unwrap())
             {
-                let _ = view_folders_client.delete(id).await;
+                info!("{:?}", view_folders_client.delete(id).await);
             }
         }),
     )
@@ -517,14 +557,15 @@ async fn main() -> eyre::Result<()> {
             )
             .unwrap();
 
-            let _ = ip_access_client.delete(None);
+            info!("{:?}", ip_access_client.delete(None).await);
         }),
     )
     .await;
     Ok(())
 }
 
-#[tracing::instrument(skip_all, fields(entity=%name))]
+#[tracing::instrument(level=Level::INFO, skip_all, fields(entity=%name))]
 async fn delete_all<F: Future<Output = ()> + Sized>(name: String, f: Box<fn() -> F>) {
     f().await;
+    info!("done");
 }
