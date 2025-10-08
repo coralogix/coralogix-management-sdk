@@ -103,7 +103,7 @@ var File_com_coralogixapis_alerts_v3_notification_logs_threshold_notification_pr
 
 const file_com_coralogixapis_alerts_v3_notification_logs_threshold_notification_proto_rawDesc = "" +
 	"\n" +
-	"Jcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\"\x89\x03\n" +
+	"Jcom/coralogixapis/alerts/v3/notification/logs_threshold_notification.proto\x12\x1bcom.coralogixapis.alerts.v3\x1ahcom/coralogixapis/alerts/v3/alert_def_type_definition/logs/threshold/logs_threshold_condition_type.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x89\x03\n" +
 	"\x19LogsThresholdNotification\x12A\n" +
 	"\x0efrom_timestamp\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\rfromTimestamp\x12=\n" +
 	"\fto_timestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\vtoTimestamp\x12>\n" +

@@ -657,7 +657,7 @@ var File_com_coralogixapis_alerts_v3_event_alert_event_service_proto protoreflec
 
 const file_com_coralogixapis_alerts_v3_event_alert_event_service_proto_rawDesc = "" +
 	"\n" +
-	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a google/protobuf/descriptor.proto\x1a\x1cgoogle/api/annotations.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\"\xc3\x01\n" +
+	";com/coralogixapis/alerts/v3/event/alert_event_service.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a3com/coralogixapis/alerts/v3/event/alert_event.proto\x1a,com/coralogixapis/alerts/v3/pagination.proto\x1a+com/coralogixapis/common/v1/audit_log.proto\x1a\x1cgoogle/api/annotations.proto\x1a google/protobuf/descriptor.proto\x1a\x1egoogle/protobuf/wrappers.proto\x1a.protoc-gen-openapiv3/options/annotations.proto\"\xc3\x01\n" +
 	"\x19GetAlertEventStatsRequest\x12.\n" +
 	"\x03ids\x18\x01 \x03(\v2\x1c.google.protobuf.StringValueR\x03ids\x12K\n" +
 	"\torder_bys\x18\x02 \x03(\v2..com.coralogixapis.alerts.v3.AlertEventOrderByR\borderBys:)\x9aA&\n" +

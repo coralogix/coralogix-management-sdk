@@ -139,7 +139,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_tracing_event_tracing_immedia
 
 const file_com_coralogixapis_alerts_v3_event_payload_tracing_event_tracing_immediate_proto_rawDesc = "" +
 	"\n" +
-	"Ocom/coralogixapis/alerts/v3/event/payload/tracing/event_tracing_immediate.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1aGcom/coralogixapis/alerts/v3/event/payload/tracing/span_time_range.proto\"\xd4\x01\n" +
+	"Ocom/coralogixapis/alerts/v3/event/payload/tracing/event_tracing_immediate.proto\x12\x1bcom.coralogixapis.alerts.v3\x1aGcom/coralogixapis/alerts/v3/event/payload/tracing/span_time_range.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\xd4\x01\n" +
 	"\x15EventTracingImmediate\x12I\n" +
 	"\n" +
 	"time_range\x18\x01 \x01(\v2*.com.coralogixapis.alerts.v3.SpanTimeRangeR\ttimeRange\x129\n" +

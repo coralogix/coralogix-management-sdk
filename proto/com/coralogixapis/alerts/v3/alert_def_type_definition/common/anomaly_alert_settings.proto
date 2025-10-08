@@ -12,7 +12,5 @@ message AnomalyAlertSettings {
       description: "Common settings for anomaly-based alerts."
     }
   };
-  google.protobuf.FloatValue percentage_of_deviation = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "The percentage of deviation from the baseline for triggering the alert."
-  }];
+  google.protobuf.FloatValue percentage_of_deviation = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The percentage of deviation from the baseline for triggering the alert."}];
 }

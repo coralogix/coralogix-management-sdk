@@ -95,7 +95,7 @@ var File_com_coralogixapis_alerts_v3_event_payload_standard_event_standard_more_
 
 const file_com_coralogixapis_alerts_v3_event_payload_standard_event_standard_more_than_proto_rawDesc = "" +
 	"\n" +
-	"Qcom/coralogixapis/alerts/v3/event/payload/standard/event_standard_more_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a\x1egoogle/protobuf/wrappers.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\"\x9e\x02\n" +
+	"Qcom/coralogixapis/alerts/v3/event/payload/standard/event_standard_more_than.proto\x12\x1bcom.coralogixapis.alerts.v3\x1a4com/coralogixapis/alerts/v3/alert_def_severity.proto\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1egoogle/protobuf/wrappers.proto\"\x9e\x02\n" +
 	"\x15EventStandardMoreThan\x128\n" +
 	"\thit_value\x18\x01 \x01(\v2\x1b.google.protobuf.Int64ValueR\bhitValue\x12A\n" +
 	"\x0efrom_timestamp\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\rfromTimestamp\x12=\n" +

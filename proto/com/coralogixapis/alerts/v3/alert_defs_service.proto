@@ -2,16 +2,16 @@ syntax = "proto3";
 
 package com.coralogixapis.alerts.v3;
 
-import "com/coralogixapis/common/v1/audit_log.proto";
 import "com/coralogixapis/alerts/v3/alert_def.proto";
+import "com/coralogixapis/alerts/v3/alert_def_ordering.proto";
+import "com/coralogixapis/alerts/v3/alert_def_query_filter.proto";
+import "com/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto";
+import "com/coralogixapis/alerts/v3/pagination.proto";
+import "com/coralogixapis/common/v1/audit_log.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/descriptor.proto";
 import "google/protobuf/wrappers.proto";
 import "protoc-gen-openapiv3/options/annotations.proto";
-import "com/coralogixapis/alerts/v3/alert_def_query_filter.proto";
-import "com/coralogixapis/alerts/v3/pagination.proto";
-import "com/coralogixapis/alerts/v3/alert_def_ordering.proto";
-import "com/coralogixapis/alerts/v3/alert_defs_filter_option_counts.proto";
 
 service AlertDefsService {
   option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_tag) = {
@@ -26,7 +26,10 @@ service AlertDefsService {
   // Get Alert Def by non changing ID AKA UniqueIdentifier
   rpc GetAlertDef(GetAlertDefRequest) returns (GetAlertDefResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get alert definition";
-    option (google.api.http) = {get: "/v3/alert-defs/{id}"};
+    option (google.api.http) = {
+      get: "/alerts/alerts-general/v3/{id}"
+      additional_bindings: {get: "/v3/alert-defs/{id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -55,7 +58,10 @@ service AlertDefsService {
 
   rpc GetAlertDefByVersionId(GetAlertDefByVersionIdRequest) returns (GetAlertDefByVersionIdResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get alert definition by alert version ID";
-    option (google.api.http) = {get: "/v3/alert-defs/alert-version-id/{alert_version_id}"};
+    option (google.api.http) = {
+      get: "/alerts/alerts-general/v3/alert-version-id/{alert_version_id}"
+      additional_bindings: {get: "/v3/alert-defs/alert-version-id/{alert_version_id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -85,8 +91,9 @@ service AlertDefsService {
   rpc CreateAlertDef(CreateAlertDefRequest) returns (CreateAlertDefResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "create alert definition";
     option (google.api.http) = {
-      post: "/v3/alert-defs"
+      post: "/alerts/alerts-general/v3"
       body: "alert_def_properties"
+      additional_bindings: {post: "/v3/alert-defs"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -117,8 +124,9 @@ service AlertDefsService {
   rpc ReplaceAlertDef(ReplaceAlertDefRequest) returns (ReplaceAlertDefResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "replace alert definition";
     option (google.api.http) = {
-      put: "/v3/alert-defs"
+      put: "/alerts/alerts-general/v3"
       body: "*"
+      additional_bindings: {put: "/v3/alert-defs"}
     };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
@@ -146,6 +154,39 @@ service AlertDefsService {
     };
   }
 
+  rpc BulkReplaceAlertDefs(BulkReplaceAlertDefsRequest) returns (BulkReplaceAlertDefsResponse) {
+    option (com.coralogixapis.common.v1.audit_log_description).description = "bulk replace alert definition";
+    option (google.api.http) = {
+      put: "/alerts/alerts-general/v3/bulk"
+      body: "*"
+      additional_bindings: {put: "/v3/alert-defs/bulk"}
+    };
+    option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
+      responses: {
+        key: "400"
+        value: {description: "Bad Request"}
+      }
+      responses: {
+        key: "401"
+        value: {description: "Unauthorized request"}
+      }
+      responses: {
+        key: "500"
+        value: {description: "Internal server error"}
+      }
+      tags: ["Alert definitions service"]
+      summary: "Bulk replace alert definitions"
+      extensions: {
+        key: "x-coralogixPermissions"
+        value: {
+          list_value: {
+            values: {string_value: "alerts:UpdateConfig"}
+          }
+        }
+      }
+    };
+  }
+
   //  rpc BatchGetAlertDef(BatchGetAlertDefRequest) returns (BatchGetAlertDefResponse){
   //    option (com.coralogixapis.common.v1.audit_log_description).description = "batch get alert definitions";
   //    option (google.api.http) = {
@@ -155,7 +196,10 @@ service AlertDefsService {
 
   rpc ListAlertDefs(ListAlertDefsRequest) returns (ListAlertDefsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get alert definitions list";
-    option (google.api.http) = {get: "/v3/alert-defs"};
+    option (google.api.http) = {
+      get: "/alerts/alerts-general/v3"
+      additional_bindings: {get: "/v3/alert-defs"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -184,7 +228,10 @@ service AlertDefsService {
 
   rpc DownloadAlerts(DownloadAlertsRequest) returns (stream DownloadAlertsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "download alerts";
-    option (google.api.http) = {get: "/v3/alerts/download"};
+    option (google.api.http) = {
+      get: "/alerts/alerts-general/v3/download"
+      additional_bindings: {get: "/v3/alerts/download"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -214,7 +261,10 @@ service AlertDefsService {
 
   rpc DeleteAlertDef(DeleteAlertDefRequest) returns (DeleteAlertDefResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "delete alert definitions";
-    option (google.api.http) = {delete: "/v3/alert-defs/{id}"};
+    option (google.api.http) = {
+      delete: "/alerts/alerts-general/v3/{id}"
+      additional_bindings: {delete: "/v3/alert-defs/{id}"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -266,7 +316,10 @@ service AlertDefsService {
 
   rpc SetActive(SetActiveRequest) returns (SetActiveResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "disable or enable the alert definitions";
-    option (google.api.http) = {post: "/v3/alert-defs/{id}:setActive"};
+    option (google.api.http) = {
+      post: "/alerts/alerts-general/v3/{id}:setActive"
+      additional_bindings: {post: "/v3/alert-defs/{id}:setActive"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -295,7 +348,10 @@ service AlertDefsService {
 
   rpc FilterOptionCounts(FilterOptionCountsRequest) returns (FilterOptionCountsResponse) {
     option (com.coralogixapis.common.v1.audit_log_description).description = "get filter option counts";
-    option (google.api.http) = {get: "/v3/alert-defs/filter-option-counts"};
+    option (google.api.http) = {
+      get: "/alerts/alerts-general/v3/filter-option-counts"
+      additional_bindings: {get: "/v3/alert-defs/filter-option-counts"}
+    };
     option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_operation) = {
       responses: {
         key: "400"
@@ -407,9 +463,7 @@ message ListAlertDefsRequest {
     description: "Pagination settings for the list of alert definitions"
     example: "{ \"page_size\": 10, \"page_token\": \"abc123\" }"
   }];
-  optional AlertDefOrderByList order_bys = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
-    description: "Ordering settings for the list of alert definitions"
-  }];
+  optional AlertDefOrderByList order_bys = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "Ordering settings for the list of alert definitions"}];
 }
 
 message DownloadAlertsRequest {
@@ -610,4 +664,74 @@ message SetActiveResponse {
       description: "Response after enabling or disabling an alert definition"
     }
   };
+}
+
+message AlertDefToReplace {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Alert definition to replace"
+      description: "An alert definition along with its ID for replacement"
+      required: [
+        "id",
+        "alert_def_properties"
+      ]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert definition ID"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
+    format: "UUIDv4"
+  }];
+  AlertDefProperties alert_def_properties = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "The properties of the alert definition"}];
+}
+
+message BulkReplaceAlertDefsRequest {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Bulk replace alert definitions request"
+      description: "A request to bulk replace multiple alert definitions"
+      required: ["alert_defs_to_replace"]
+    }
+  };
+  repeated AlertDefToReplace alert_defs_to_replace = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of alert definitions to replace"}];
+}
+
+message BulkReplaceAlertDefsResponse {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Bulk replace alert definitions response"
+      description: "A response that contains the results of the bulk replace operation"
+      required: [
+        "alert_defs",
+        "not_found_ids",
+        "failed_to_replace_alert_defs",
+        "skipped_ids"
+      ]
+    }
+  };
+  repeated AlertDef alert_defs = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of successfully replaced alert definitions"}];
+  repeated google.protobuf.StringValue not_found_ids = 2 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of alert definition IDs that were not found"
+    example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
+  }];
+  repeated FailedToReplaceAlertDef failed_to_replace_alert_defs = 3 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {description: "List of alert definitions that failed to be replaced"}];
+  repeated google.protobuf.StringValue skipped_ids = 4 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "List of alert definition IDs that were skipped (no changes detected)"
+    example: "[\"123e4567-e89b-12d3-a456-426614174000\"]"
+  }];
+}
+
+message FailedToReplaceAlertDef {
+  option (grpc.gateway.protoc_gen_openapiv3.options.openapiv3_schema) = {
+    json_schema: {
+      title: "Failed to replace alert definition"
+      description: "An alert definition id that failed to be replaced"
+      required: ["id"]
+    }
+  };
+  google.protobuf.StringValue id = 1 [(grpc.gateway.protoc_gen_openapiv3.options.openapiv3_field) = {
+    description: "The alert definition ID"
+    example: "\"123e4567-e89b-12d3-a456-426614174000\""
+    format: "UUIDv4"
+  }];
 }

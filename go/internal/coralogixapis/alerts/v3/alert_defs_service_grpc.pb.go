@@ -23,6 +23,7 @@ const (
 	AlertDefsService_GetAlertDefByVersionId_FullMethodName = "/com.coralogixapis.alerts.v3.AlertDefsService/GetAlertDefByVersionId"
 	AlertDefsService_CreateAlertDef_FullMethodName         = "/com.coralogixapis.alerts.v3.AlertDefsService/CreateAlertDef"
 	AlertDefsService_ReplaceAlertDef_FullMethodName        = "/com.coralogixapis.alerts.v3.AlertDefsService/ReplaceAlertDef"
+	AlertDefsService_BulkReplaceAlertDefs_FullMethodName   = "/com.coralogixapis.alerts.v3.AlertDefsService/BulkReplaceAlertDefs"
 	AlertDefsService_ListAlertDefs_FullMethodName          = "/com.coralogixapis.alerts.v3.AlertDefsService/ListAlertDefs"
 	AlertDefsService_DownloadAlerts_FullMethodName         = "/com.coralogixapis.alerts.v3.AlertDefsService/DownloadAlerts"
 	AlertDefsService_DeleteAlertDef_FullMethodName         = "/com.coralogixapis.alerts.v3.AlertDefsService/DeleteAlertDef"
@@ -39,6 +40,7 @@ type AlertDefsServiceClient interface {
 	GetAlertDefByVersionId(ctx context.Context, in *GetAlertDefByVersionIdRequest, opts ...grpc.CallOption) (*GetAlertDefByVersionIdResponse, error)
 	CreateAlertDef(ctx context.Context, in *CreateAlertDefRequest, opts ...grpc.CallOption) (*CreateAlertDefResponse, error)
 	ReplaceAlertDef(ctx context.Context, in *ReplaceAlertDefRequest, opts ...grpc.CallOption) (*ReplaceAlertDefResponse, error)
+	BulkReplaceAlertDefs(ctx context.Context, in *BulkReplaceAlertDefsRequest, opts ...grpc.CallOption) (*BulkReplaceAlertDefsResponse, error)
 	ListAlertDefs(ctx context.Context, in *ListAlertDefsRequest, opts ...grpc.CallOption) (*ListAlertDefsResponse, error)
 	DownloadAlerts(ctx context.Context, in *DownloadAlertsRequest, opts ...grpc.CallOption) (grpc.ServerStreamingClient[DownloadAlertsResponse], error)
 	DeleteAlertDef(ctx context.Context, in *DeleteAlertDefRequest, opts ...grpc.CallOption) (*DeleteAlertDefResponse, error)
@@ -88,6 +90,16 @@ func (c *alertDefsServiceClient) ReplaceAlertDef(ctx context.Context, in *Replac
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReplaceAlertDefResponse)
 	err := c.cc.Invoke(ctx, AlertDefsService_ReplaceAlertDef_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *alertDefsServiceClient) BulkReplaceAlertDefs(ctx context.Context, in *BulkReplaceAlertDefsRequest, opts ...grpc.CallOption) (*BulkReplaceAlertDefsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BulkReplaceAlertDefsResponse)
+	err := c.cc.Invoke(ctx, AlertDefsService_BulkReplaceAlertDefs_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,6 +174,7 @@ type AlertDefsServiceServer interface {
 	GetAlertDefByVersionId(context.Context, *GetAlertDefByVersionIdRequest) (*GetAlertDefByVersionIdResponse, error)
 	CreateAlertDef(context.Context, *CreateAlertDefRequest) (*CreateAlertDefResponse, error)
 	ReplaceAlertDef(context.Context, *ReplaceAlertDefRequest) (*ReplaceAlertDefResponse, error)
+	BulkReplaceAlertDefs(context.Context, *BulkReplaceAlertDefsRequest) (*BulkReplaceAlertDefsResponse, error)
 	ListAlertDefs(context.Context, *ListAlertDefsRequest) (*ListAlertDefsResponse, error)
 	DownloadAlerts(*DownloadAlertsRequest, grpc.ServerStreamingServer[DownloadAlertsResponse]) error
 	DeleteAlertDef(context.Context, *DeleteAlertDefRequest) (*DeleteAlertDefResponse, error)
@@ -188,6 +201,9 @@ func (UnimplementedAlertDefsServiceServer) CreateAlertDef(context.Context, *Crea
 }
 func (UnimplementedAlertDefsServiceServer) ReplaceAlertDef(context.Context, *ReplaceAlertDefRequest) (*ReplaceAlertDefResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReplaceAlertDef not implemented")
+}
+func (UnimplementedAlertDefsServiceServer) BulkReplaceAlertDefs(context.Context, *BulkReplaceAlertDefsRequest) (*BulkReplaceAlertDefsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BulkReplaceAlertDefs not implemented")
 }
 func (UnimplementedAlertDefsServiceServer) ListAlertDefs(context.Context, *ListAlertDefsRequest) (*ListAlertDefsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAlertDefs not implemented")
@@ -297,6 +313,24 @@ func _AlertDefsService_ReplaceAlertDef_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AlertDefsService_BulkReplaceAlertDefs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BulkReplaceAlertDefsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AlertDefsServiceServer).BulkReplaceAlertDefs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AlertDefsService_BulkReplaceAlertDefs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AlertDefsServiceServer).BulkReplaceAlertDefs(ctx, req.(*BulkReplaceAlertDefsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AlertDefsService_ListAlertDefs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListAlertDefsRequest)
 	if err := dec(in); err != nil {
@@ -402,6 +436,10 @@ var AlertDefsService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ReplaceAlertDef",
 			Handler:    _AlertDefsService_ReplaceAlertDef_Handler,
+		},
+		{
+			MethodName: "BulkReplaceAlertDefs",
+			Handler:    _AlertDefsService_BulkReplaceAlertDefs_Handler,
 		},
 		{
 			MethodName: "ListAlertDefs",
